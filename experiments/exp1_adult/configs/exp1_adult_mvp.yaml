@@ -1,0 +1,24 @@
+experiment_name: "exp1_adult_mvp"
+dataset:
+  name: "adult"
+  source: "uci"
+  random_seed: 42
+
+models:
+  - name: "random_forest"
+    type: "sklearn"
+  - name: "xgboost"
+    type: "xgboost"
+
+xai_methods:
+  - name: "lime"
+  - name: "shap"
+
+metrics:
+  - "fidelity"
+  - "stability"
+  - "sparsity"
+  - "cost"
+
+random_seed: 42
+n_instances: 200
