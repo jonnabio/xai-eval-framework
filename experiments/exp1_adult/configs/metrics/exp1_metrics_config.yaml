@@ -1,0 +1,99 @@
+# Experiment 1 Metrics Configuration
+# User Story: EXP1-02
+# Defines comprehensive metric definitions for XAI evaluation on Adult dataset
+
+# 1. FIDELITY METRICS
+local_fidelity:
+  description: "Measures how well local surrogate approximates black-box model"
+  metrics:
+    r2_score:
+      formula: "R² between surrogate and model predictions in local neighborhood"
+      implementation: "sklearn.metrics.r2_score"
+      range: [-inf, 1.0]
+      higher_is_better: true
+    mse:
+      formula: "Mean squared error between surrogate and model predictions"
+      implementation: "sklearn.metrics.mean_squared_error"
+      range: [0, inf]
+      higher_is_better: false
+    neighborhood_size: 5000  # for LIME
+
+# 2. STABILITY METRICS
+explanation_stability:
+  description: "Consistency of explanations under input perturbations"
+  perturbation_params:
+    n_perturbations: 5
+    noise_level: 0.01  # 1% of feature std
+    method: "gaussian"  # or "bootstrap"
+  similarity_metrics:
+    cosine_similarity:
+      formula: "cosine_sim(explanation_i, explanation_j)"
+      implementation: "sklearn.metrics.pairwise.cosine_similarity"
+      range: [-1, 1]
+      higher_is_better: true
+    kendall_tau:
+      formula: "Kendall's rank correlation of feature importance rankings"
+      implementation: "scipy.stats.kendalltau"
+      range: [-1, 1]
+      higher_is_better: true
+    spearman_rho:
+      formula: "Spearman's rank correlation"
+      implementation: "scipy.stats.spearmanr"
+      range: [-1, 1]
+      higher_is_better: true
+
+# 3. SPARSITY METRICS
+explanation_sparsity:
+  description: "Conciseness and interpretability of explanations"
+  metrics:
+    non_zero_ratio:
+      formula: "count(|importance| > threshold) / total_features"
+      threshold: 0.01
+      range: [0, 1]
+      higher_is_better: false  # sparser is better
+    top_k_mass:
+      formula: "sum(top_k_importances) / sum(all_importances)"
+      k_values: [5, 10]
+      range: [0, 1]
+      higher_is_better: true  # concentration is better
+    gini_coefficient:
+      formula: "Gini coefficient of feature importance distribution"
+      range: [0, 1]
+      higher_is_better: true  # more concentrated
+
+# 4. COMPUTATIONAL COST METRICS
+resource_metrics:
+  description: "Computational resources required"
+  metrics:
+    wall_time_ms:
+      unit: "milliseconds"
+      measure: "per explanation"
+    cpu_time_ms:
+      unit: "milliseconds"
+      measure: "per explanation"
+    memory_mb:
+      unit: "megabytes"
+      measure: "peak during explanation"
+    model_calls:
+      unit: "count"
+      measure: "black-box evaluations per explanation"
+
+explanation_energy_units:
+  description: "Normalized cost metric (EEU)"
+  formula: "normalized(α*time + β*memory + γ*model_calls)"
+  weights:
+    alpha: 0.4  # time weight
+    beta: 0.2   # memory weight
+    gamma: 0.4  # model calls weight
+  normalization: "min-max across methods"
+
+# 5. AGGREGATION STRATEGIES
+aggregation:
+  instance_level:
+    - mean
+    - std
+    - median
+    - iqr
+  method_level:
+    primary: "mean"
+    secondary: ["std", "median", "p25", "p75"]

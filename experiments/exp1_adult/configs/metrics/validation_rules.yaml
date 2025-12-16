@@ -1,0 +1,52 @@
+# Validation Rules Configuration
+# User Story: EXP1-02
+# Defines validation rules and acceptable ranges to ensure metric quality and reliability.
+
+# 1. METRIC VALIDITY CHECKS
+# Ensures each metric falls within physically allowed or expected ranges.
+validity_checks:
+  fidelity_checks:
+    r2_score:
+      valid_range: [-10.0, 1.0]
+      warning_threshold: 0.3
+      error_threshold: -1.0
+      description: "R2 can be negative for arbitrarily poor fits. Values < -1 indicate the surrogate is worse than a horizontal line, likely broken."
+
+  stability_checks:
+    cosine_similarity:
+      valid_range: [-1.0, 1.0]
+      warning_threshold: 0.5
+      expected_range: [0.7, 1.0]
+      description: "Stability should generally be high (>0.7) for deterministic local methods. <0.5 indicates extremely unstable explanations."
+
+# 2. CROSS-METRIC CONSISTENCY
+# Logic checks to find contradictory or suspicious combinations of metric results.
+consistency_rules:
+  - name: "fidelity_stability_tradeoff"
+    check: "if fidelity > 0.9 then stability > 0.6"
+    severity: "warning"
+    description: "High fidelity usually implies capturing the underlying stable model function. High fidelity but low stability suggests overfitting to noise."
+
+  - name: "sparsity_fidelity_balance"
+    check: "if sparsity < 0.2 then fidelity > 0.7"
+    severity: "info"
+    description: "If an explanation uses many features (low sparsity), it should achieve high fidelity. Low sparsity with low fidelity implies the explainer is failing to capture relationships even with all features."
+
+# 3. OUTLIER DETECTION
+# Statistical rules to flag anomalous measurements in performance metrics.
+outlier_rules:
+  method: "IQR"
+  multiplier: 3.0
+  action: "flag_not_remove"
+  metrics_to_check: 
+    - "wall_time_ms"
+    - "memory_mb"
+  description: "Detects operational anomalies (e.g., GC pauses, system spikes) using robust IQR method to avoid skewing averages."
+
+# 4. MINIMUM SAMPLE REQUIREMENTS
+# Data sufficiency checks to ensure statistical significance.
+sample_requirements:
+  min_instances_for_metrics: 30
+  min_instances_for_stability: 50
+  min_perturbations: 3
+  description: "Ensures enough data points are collected to report valid aggregate metrics, avoiding small sample size artifacts."

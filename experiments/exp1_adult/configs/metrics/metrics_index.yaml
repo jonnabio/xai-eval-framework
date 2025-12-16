@@ -1,0 +1,49 @@
+# Master metrics configuration index for Experiment 1
+# User Story: EXP1-02
+version: "1.0"
+experiment: "exp1_adult_mvp"
+
+configurations:
+  metrics:
+    path: "config/metrics/exp1_metrics_config.yaml"
+    description: "Core quantitative metrics"
+    
+  semantic:
+    path: "config/metrics/semantic_eval_config.yaml"
+    description: "LLM-based evaluation"
+    
+  perturbation:
+    path: "config/metrics/perturbation_config.yaml"
+    description: "Stability testing parameters"
+    
+  templates:
+    path: "config/metrics/calculation_templates.yaml"
+    description: "Implementation pseudocode"
+    
+  validation:
+    path: "config/metrics/validation_rules.yaml"
+    description: "Quality checks and ranges"
+
+# Metric groups for reporting
+reporting_groups:
+  primary_metrics:
+    - local_fidelity_r2
+    - stability_cosine
+    - sparsity_top10_mass
+    - eeu_score
+    
+  detailed_metrics:
+    - all_fidelity
+    - all_stability
+    - all_sparsity
+    - all_computational
+    
+  semantic_metrics:
+    - causal_alignment_score
+    - counterfactual_sensitivity_score
+
+# Export formats
+export_config:
+  formats: ["json", "csv", "parquet"]
+  include_metadata: true
+  include_timestamps: true

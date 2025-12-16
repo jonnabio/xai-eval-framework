@@ -1,0 +1,38 @@
+# Perturbation Configuration for Stability Testing
+# User Story: EXP1-02
+# Defines parameters for generating perturbed instances to measure explanation stability.
+
+perturbation_strategies:
+  gaussian_noise:
+    description: "Add Gaussian noise to continuous features"
+    params:
+      mean: 0.0
+      std_dev_ratios: [0.01, 0.05, 0.10] # Percent of feature standard deviation
+      clip_range: true # Clip to min/max of feature
+      
+  unit_perturbation:
+    description: "Change single feature value"
+    params:
+      continuous_step: "std_dev"
+      categorical_strategy: "random_other"
+
+  bootstrap:
+    description: "Resampling from training distribution"
+    params:
+      sample_size_ratio: 1.0
+      replace: true
+
+feature_handling:
+  continuous:
+    methods: ["gaussian_noise", "quantiles"]
+  categorical:
+    methods: ["random_swap", "mode_replacement"]
+    prob_swap: 0.1
+
+experiment_settings:
+  default_method: "gaussian_noise"
+  n_perturbations: 10
+  random_seed: 42
+  
+validation:
+  max_distance: 0.5 # Max allowed normalized distance from original instance

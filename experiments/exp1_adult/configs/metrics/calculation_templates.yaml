@@ -1,0 +1,54 @@
+# Metric Calculation Templates
+# User Story: EXP1-02
+# Provides exact pseudocode implementation details for complex metrics to ensure consistency.
+
+calculation_templates:
+
+  # 1. FIDELITY CALCULATION
+  fidelity:
+    description: "Measure fidelity using local neighborhood approximation"
+    pseudocode: |
+      for instance in test_instances:
+         # Get local neighborhood (LIME/SHAP samples)
+         neighborhood = generate_neighborhood(instance, n=5000)
+         
+         # Get black-box predictions
+         y_blackbox = model.predict(neighborhood)
+         
+         # Get surrogate predictions
+         y_surrogate = explanation.predict(neighborhood)
+         
+         # Calculate fidelity
+         r2 = r2_score(y_blackbox, y_surrogate)
+         mse = mean_squared_error(y_blackbox, y_surrogate)
+
+  # 2. STABILITY CALCULATION
+  stability:
+    description: "Measure stability via perturbation consistency"
+    pseudocode: |
+      for instance in test_instances:
+         explanations = []
+         for p in range(n_perturbations):
+             perturbed = apply_perturbation(instance, method, seed+p)
+             exp = generate_explanation(model, perturbed)
+             explanations.append(exp)
+         
+         # Pairwise similarities
+         similarities = []
+         for i in range(len(explanations)):
+             for j in range(i+1, len(explanations)):
+                 sim = cosine_similarity(explanations[i], explanations[j])
+                 similarities.append(sim)
+         
+         stability = mean(similarities)
+
+  # 3. EEU CALCULATION
+  explanation_energy_units:
+    description: "Calculate Normalized Explanation Energy Units (EEU)"
+    pseudocode: |
+      # Normalize across methods
+      time_norm = (time - time_min) / (time_max - time_min)
+      memory_norm = (memory - memory_min) / (memory_max - memory_min)
+      calls_norm = (calls - calls_min) / (calls_max - calls_min)
+      
+      EEU = α*time_norm + β*memory_norm + γ*calls_norm

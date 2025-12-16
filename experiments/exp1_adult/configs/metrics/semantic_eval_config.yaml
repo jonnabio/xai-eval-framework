@@ -1,0 +1,60 @@
+# Experiment 1 Semantic Evaluation Configuration
+# User Story: EXP1-02
+# Defines configuration for LLM-based semantic evaluation of XAI explanations.
+
+# 1. EVALUATION DIMENSIONS
+causal_alignment:
+  description: "How well explanation aligns with causal understanding"
+  score_range: [1, 5]
+  rubric:
+    1: "No causal coherence, contradicts domain knowledge"
+    2: "Weak causal story, some questionable relationships"
+    3: "Moderate alignment, plausible but incomplete"
+    4: "Good causal alignment, minor gaps"
+    5: "Excellent causal coherence, matches expert intuition"
+  prompt_template_key: "causal_alignment_prompt"
+
+counterfactual_sensitivity:
+  description: "Explanation's response to realistic input changes"
+  score_range: [1, 5]
+  rubric:
+    1: "Insensitive to meaningful changes"
+    2: "Limited sensitivity, misses important variations"
+    3: "Moderate sensitivity, captures some changes"
+    4: "Good sensitivity, responds to most variations"
+    5: "Excellent sensitivity, precise counterfactual behavior"
+  prompt_template_key: "counterfactual_prompt"
+
+# 2. LLM CONFIGURATION
+llm_settings:
+  model: "gpt-4-turbo-preview"  # or "claude-3-opus"
+  temperature: 0.3  # Lower for consistency
+  max_tokens: 500
+  seed: 42  # For reproducibility if supported
+
+# 3. SAMPLING STRATEGY
+evaluation_sampling:
+  pilot_size: 100  # For MVP
+  full_size: 500   # For complete experiment
+  stratification: "by_prediction_confidence"
+  confidence_bins: [0.5-0.6, 0.6-0.7, 0.7-0.8, 0.8-0.9, 0.9-1.0]
+
+# 4. QUALITY CONTROL
+quality_checks:
+  require_justification: true
+  min_justification_words: 20
+  flag_inconsistent_scores: true  # If score doesn't match justification
+
+# EXAMPLES & EDGE CASES
+examples:
+  causal_alignment:
+    level_5:
+      explanation: "Higher education leads to higher capital gain due to increased investment opportunities."
+      justification: "Matches economic theory regarding human capital and investment."
+      edge_case: "Correlation implies causation fallacy in prompt."
+  counterfactual_sensitivity:
+    level_1:
+      explanation: "Age is the most important feature."
+      perturbation: "Change Age from 30 to 70."
+      result: "Explanation remains identical."
+      edge_case: "Feature is irrelevant to the model decision boundary."
