@@ -1,0 +1,91 @@
+# User Story: EXP1-08
+# Experiment 1: Adult Dataset - Random Forest Configuration
+# =========================================================
+
+# -----------------------------------------------------------------------------
+# 1. Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  type: "RandomForest"
+  
+  # Hyperparameters
+  # Recommended ranges based on extensive sklearn documentation and common practices for tabular data.
+  params:
+    # Number of trees in the forest.
+    # Impact: Higher = more stable, better performance, but slower training/inference.
+    # Range: 100-1000. 200 is a solid baseline trade-off.
+    n_estimators: 200
+    
+    # Maximum depth of the tree.
+    # Impact: Controls overfitting. None = nodes expanded until leaf is pure.
+    # Choice: None allows full growth; we rely on min_samples_leaf and ensemble to control variance.
+    max_depth: null
+    
+    # Minimum samples required to split an internal node.
+    # Impact: Higher values prevent creating specific nodes for noise (regularization).
+    # Default: 2 is standard.
+    min_samples_split: 2
+    
+    # Minimum samples required to be at a leaf node.
+    # Impact: Smooths the model.
+    # Default: 1. Set higher (e.g., 5-10) if overfitting is observed.
+    min_samples_leaf: 1
+    
+    # Number of features to consider when looking for the best split.
+    # Choice: "sqrt" (square root of n_features) is standard best practice for classification.
+    max_features: "sqrt"
+    
+    # Whether bootstrap samples are used when building trees.
+    # Impact: True enables bagging (lower variance), essential for RF.
+    bootstrap: true
+    
+    # Number of jobs to run in parallel. -1 usages all processors.
+    # Optimization: Reduces training time linearly with cores.
+    n_jobs: -1
+    
+    # Random see for reproducibility.
+    # CRITICAL: Must be fixed to ensure experiments are comparable.
+    random_state: 42
+    
+    # Class weights.
+    # Choice: "balanced_subsample" computes weights based on bootstrap sample for each tree.
+    # Reason: Adult dataset is imbalanced (~25% positive class). This helps recall.
+    class_weight: "balanced_subsample"
+    
+    # Verbosity of the sklearn model. 0 = silent.
+    verbose: 0
+
+# -----------------------------------------------------------------------------
+# 2. Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  # Proportion of dataset to include in the test split.
+  # Standard: 0.2 (80/20 split) is common for this dataset size (~45k rows).
+  test_size: 0.2
+  
+  # Seed for the train/test split.
+  # CRITICAL: Ensures we test on the same rows every time.
+  random_state: 42
+
+# -----------------------------------------------------------------------------
+# 3. Output Configuration
+# -----------------------------------------------------------------------------
+output:
+  # Directory where trained .pkl models will be saved.
+  model_dir: "experiments/exp1_adult/models"
+  
+  # Directory where metrics and feature importance csvs will be saved.
+  results_dir: "experiments/exp1_adult/results"
+  
+  # Filenames for artifacts.
+  model_filename: "rf_model.pkl"
+  metrics_filename: "rf_metrics.json"
+
+# -----------------------------------------------------------------------------
+# 4. Validation Configuration
+# -----------------------------------------------------------------------------
+validation:
+  # Performance thresholds. Model performance below these triggers warnings.
+  # Baselines derived from literature for Adult dataset (usually ~85% acc).
+  min_accuracy: 0.80
+  min_roc_auc: 0.85

@@ -35,17 +35,17 @@ def setup_logging(verbose: bool):
 
 def main():
     """Main execution function."""
-    parser = argparse.ArgumentParser(description="Train Random Forest for EXP1 Adult Dataset")
+    parser = argparse.ArgumentParser(description="Train Random Forest for Experiment 1")
     parser.add_argument(
         "--config", 
         type=str, 
-        default="experiments/exp1_adult/configs/models/rf_adult_config.json",
-        help="Path to configuration JSON"
+        default="experiments/exp1_adult/configs/models/rf_adult_config.yaml",
+        help="Path to config file"
     )
     parser.add_argument(
-        "--force-retrain", 
+        "--force", 
         action="store_true", 
-        help="Force retraining even if model exists"
+        help="Force retraining"
     )
     parser.add_argument(
         "--verbose", 

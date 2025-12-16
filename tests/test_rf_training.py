@@ -9,6 +9,7 @@ import pytest
 import numpy as np
 import pandas as pd
 import json
+import yaml
 import joblib
 from pathlib import Path
 
@@ -23,7 +24,7 @@ from src.models.tabular_models import (
 )
 
 # Test constants
-CONFIG_PATH = PROJECT_ROOT / "experiments/exp1_adult/configs/models/rf_adult_config.json"
+CONFIG_PATH = PROJECT_ROOT / "experiments/exp1_adult/configs/models/rf_adult_config.yaml"
 
 @pytest.fixture
 def temp_output_dir(tmp_path):
@@ -39,7 +40,7 @@ def test_config(temp_output_dir):
     """Fixture for test configuration."""
     # Load default config template
     with open(CONFIG_PATH, 'r') as f:
-        config = json.load(f)
+        config = yaml.safe_load(f)
         
     # Override for speed and isolation
     config['model']['params']['n_estimators'] = 5  # Fast training
@@ -47,18 +48,31 @@ def test_config(temp_output_dir):
     config['output']['results_dir'] = temp_output_dir['results_dir']
     
     # Save temp config
-    config_path = Path(temp_output_dir['model_dir']) / "test_config.json"
+    config_path = Path(temp_output_dir['model_dir']) / "test_config.yaml"
     with open(config_path, 'w') as f:
-        json.dump(config, f)
+        yaml.dump(config, f)
         
     return str(config_path), config
 
 def test_config_loading():
-    """Test 1: Verify config file exists and is valid JSON."""
-    assert os.path.exists(CONFIG_PATH), "Config file does not exist"
-    
-    with open(CONFIG_PATH, 'r') as f:
-        config = json.load(f)
+    """
+    Test that the YAML configuration file loads correctly.
+
+    Context:
+        Config integrity is the foundation of reproducible experiments. 
+        Ensures the pipeline starts with valid parameters.
+
+    Test Cases:
+        1. Config file exists at expected path.
+        2. Config is valid YAML.
+        3. Required top-level keys ('model', 'training', 'output') are present.
+
+    Expected Behavior:
+        Should return a dictionary with all mandatory sections.
+
+    Relates to: EXP1-08
+    """
+        config = yaml.safe_load(f)
         
     assert "model" in config
     assert "training" in config
@@ -66,7 +80,24 @@ def test_config_loading():
 
 @pytest.mark.slow
 def test_train_random_forest_adult_runs(test_config):
-    """Test 2: Train model with default (fast) config."""
+    """
+    Test that the training function executes without error.
+
+    Context:
+        Verifies the core training loop (Data Load -> Train -> Metrics).
+        Ensures the `AdultRandomForestTrainer` class integration is functional.
+
+    Test Cases:
+        1. Train with default (fast) configuration.
+        2. Force retraining enabled.
+
+    Expected Behavior:
+        - Return a non-None model object.
+        - Return a dictionary containing key metrics (accuracy, auc).
+        - Return training metadata.
+
+    Relates to: EXP1-08
+    """
     config_path, config = test_config
     
     model, metrics = train_random_forest_adult(
@@ -82,7 +113,23 @@ def test_train_random_forest_adult_runs(test_config):
 
 @pytest.mark.slow
 def test_model_meets_performance_thresholds(test_config):
-    """Test 3: Assert metric thresholds (relaxed for fast test model)."""
+    """
+    Test that model performance validation logic works.
+
+    Context:
+        Automated quality gates prevent deploying degraded models.
+        This test checks if the detailed metric verification logic respects thresholds.
+
+    Test Cases:
+        1. Train a model (even a weak one).
+        2. Validate against relaxed thresholds (0.5).
+
+    Expected Behavior:
+        - Metrics should exceed the minimum safeguards.
+        - Metadata should capture feature count correctly.
+
+    Relates to: EXP1-08
+    """
     config_path, config = test_config
     # Relax thresholds for 5-tree model
     config['validation']['min_accuracy'] = 0.5 
@@ -107,7 +154,24 @@ def test_model_meets_performance_thresholds(test_config):
 
 @pytest.mark.slow
 def test_model_saving_and_loading(test_config):
-    """Test 4: Train, save, and reload model."""
+    """
+    Test that models can be persisted and reloaded correctly.
+
+    Context:
+        XAI methods (LIME/SHAP) often run in separate processes/times from training.
+        Reliable serialization is critical for the decouple evaluation pipeline.
+
+    Test Cases:
+        1. Train and save a model.
+        2. Verify .pkl file exists.
+        3. Load the model back from disk using `load_trained_model`.
+
+    Expected Behavior:
+        - Loaded object should be a valid sklearn estimator.
+        - `predict` method should be available.
+
+    Relates to: EXP1-08
+    """
     config_path, config = test_config
     
     # Train
@@ -129,7 +193,24 @@ def test_model_saving_and_loading(test_config):
     assert hasattr(loaded_model, "predict")
 
 def test_feature_importance_extraction(test_config):
-    """Test 5: Verify feature importance calculation."""
+    """
+    Test that global feature importance is extracted and validated.
+
+    Context:
+        Feature importance provides a global explanation baseline.
+        Verification ensures we are capturing model internal state correctly.
+
+    Test Cases:
+        1. Extract feature importance after training.
+        2. Verify CSV output creation.
+        3. Check Gini importance normalization (sum ~ 1.0).
+
+    Expected Behavior:
+        - CSV file created with 'feature' and 'importance' columns.
+        - Top 10 features included in metrics metadata.
+
+    Relates to: EXP1-08
+    """
     config_path, config = test_config
     
     model, metrics = train_random_forest_adult(

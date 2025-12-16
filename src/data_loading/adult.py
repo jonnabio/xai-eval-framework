@@ -315,6 +315,8 @@ def _fetch_adult_data(cache_dir: str = None) -> pd.DataFrame:
     logger.info(f"Fetching Adult dataset, cache dir: {cache_path}")
     
     # 2. Try cache first
+    # Optimization: Loading from local Parquet is significantly faster (~50-100ms) than 
+    # downloading (~20-60s) or parsing raw CSVs. Parquet also preserves dtypes better.
     cached_df = _validate_cache(cache_path)
     if cached_df is not None:
         logger.info(f"✓ Loaded from cache: {cached_df.shape}")

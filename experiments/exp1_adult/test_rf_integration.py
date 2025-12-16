@@ -8,6 +8,7 @@ Verifies end-to-end functionality: Data Load -> Train -> Save -> Load -> Predict
 import sys
 import os
 import json
+import yaml
 import shutil
 import logging
 from pathlib import Path
@@ -35,15 +36,15 @@ def run_integration_test():
     model_dir = temp_dir / "models"
     results_dir = temp_dir / "results"
     
-    config_path = temp_dir / "test_config.json"
+    config_path = temp_dir / "test_config.yaml"
     
     try:
         # 1. Create Test Config
         logger.info("1. Creating temporary configuration...")
-        default_config_path = PROJECT_ROOT / "experiments/exp1_adult/configs/models/rf_adult_config.json"
+        default_config_path = PROJECT_ROOT / "experiments/exp1_adult/configs/models/rf_adult_config.yaml"
         
         with open(default_config_path, 'r') as f:
-            config = json.load(f)
+            config = yaml.safe_load(f)
             
         # Update paths
         config['output']['model_dir'] = str(model_dir)
@@ -52,7 +53,7 @@ def run_integration_test():
         config['model']['params']['n_estimators'] = 5
         
         with open(config_path, 'w') as f:
-            json.dump(config, f)
+            yaml.dump(config, f)
             
         # 2. Run Training
         logger.info("2. Running training pipeline...")
