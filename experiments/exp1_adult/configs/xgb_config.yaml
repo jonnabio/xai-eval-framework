@@ -1,0 +1,79 @@
+# XGBoost Hyperparameters for Adult Dataset (EXP1-09)
+# ------------------------------------------------------------------
+# This configuration defines the baseline Gradient Boosting model for Experiment 1.
+# Key decisions are documented in docs/decisions/0004-xgboost-hyperparameters.md.
+#
+# Goal: Provide a robust, non-linear baseline for XAI method evaluation.
+# ------------------------------------------------------------------
+
+model:
+  # Purpose: Core model hyperparameters defining architecture and training behavior.
+  
+  # n_estimators: Number of boosting rounds (trees).
+  # Justification: Matches Random Forest baseline (100) for fair comparison.
+  # Impact: Higher = more complex model, risk of overfitting if not stopped early.
+  # Range: [50, 500] typical for this dataset capability.
+  n_estimators: 100
+
+  # max_depth: Maximum tree depth for base learners.
+  # Justification: Generic default. 6 is usually sufficient for interaction capture
+  # without high variance. Shallower than RF (usually unlimited or 10+) because boosting reduces bias.
+  # Impact: Higher = more complex interactions, higher risk of overfitting.
+  # Range: [3, 10]
+  max_depth: 6
+
+  # learning_rate (eta): Step size shrinkage used in update to prevent overfitting.
+  # Justification: 0.1 is a conservative, robust start.
+  # Impact: Lower = requires more estimators/time but better generalization.
+  # Range: [0.01, 0.3]
+  learning_rate: 0.1
+
+  # objective: Learning task objective function.
+  # Justification: 'binary:logistic' is standard for binary classification outputting probabilities.
+  # Impact: Determines loss function optimized.
+  objective: "binary:logistic"
+
+  # eval_metric: Metric used for validation set monitoring.
+  # Justification: 'logloss' aligns with probability optimization.
+  # Impact: Affects early stopping decision.
+  eval_metric: "logloss"
+
+  # random_state: Seed for random number generator.
+  # Justification: REPRODUCIBILITY CRITICAL. Fixed to 42.
+  # Impact: Ensures identical split and initialization every run.
+  random_state: 42
+
+  # n_jobs: Number of parallel threads.
+  # Justification: -1 uses all available cores for speed.
+  # Impact: Reduces training wall-clock time; does not affect model result.
+  n_jobs: -1
+
+  # verbosity: Control logging output.
+  # Justification: 0 (silent) keeps stdout clean for our custom logging.
+  verbosity: 0
+
+  # use_label_encoder: Sklearn interface compatibility.
+  # Justification: False avoids warnings in modern XGBoost (expects labels pre-encoded).
+  use_label_encoder: False
+
+training:
+  # Purpose: runtime settings for the fit() process.
+
+  # early_stopping_rounds: Stop if validation metric doesn't improve for N rounds.
+  # Justification: Prevents overfitting, allows n_estimators to be set high safely.
+  # Impact: Can drastically shorten training time.
+  early_stopping_rounds: 10
+
+  # validation_fraction: Portion of data to use for early stopping validation.
+  # Note: Currently implicit in the training script (uses test set or split).
+  validation_fraction: 0.1
+
+output:
+  # Purpose: Artifact persistence settings.
+  
+  save_model: true
+  save_metrics: true
+  save_feature_importance: true
+  
+  # model_dir: Relative path for saving artifacts.
+  model_dir: "models"
