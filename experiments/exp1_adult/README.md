@@ -48,6 +48,45 @@ experiments/exp1_adult/
 └── train_*.py                 # (Legacy) individual scripts
 ```
 
+## XAI Explanation Generation
+
+### LIME Explanations
+
+Generate LIME explanations for trained models:
+
+```bash
+# Example: Generate explanations for test instances
+python examples/example_lime_usage.py
+```
+
+**What LIME Does:**
+- Trains local linear models on perturbed samples
+- Identifies which features most influence individual predictions
+- Provides both positive (increases prediction) and negative (decreases prediction) importance values
+
+**Configuration:**
+- **num_features**: 10 (top features to include in explanation)
+- **num_samples**: 5000 (perturbed samples for local model)
+- **kernel_width**: Auto-calculated (controls locality)
+- **random_state**: 42 (reproducibility)
+
+See `docs/decisions/0007-lime-configuration.md` for configuration rationale.
+
+**Output Format:**
+```python
+explanations = {
+    'feature_importance': np.ndarray,  # (n_instances, 108) - all features
+    'top_features': np.ndarray,        # (n_instances, 10) - top feature indices
+    'metadata': {
+        'total_time_seconds': 15.3,
+        'avg_time_per_instance': 3.06,
+        'num_features_requested': 10,
+        'num_samples': 5000,
+        ...
+    }
+}
+```
+
 ## Configuration
 Hyperparameters are properly managed in `config/training_config.yaml`. 
 Refer to [ADR-005](../../docs/decisions/0005-training-runner-design.md) for design decisions.

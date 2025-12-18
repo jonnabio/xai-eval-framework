@@ -14,6 +14,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added (EXP1-12)
+- **LIME Tabular Wrapper** (`src/xai/lime_tabular.py`)
+  - `LIMETabularWrapper` class with standardized explanation interface
+  - `generate_explanations()` method for batch explanation generation
+  - `explain_instance()` method for single instance explanations
+  - `generate_lime_explanations()` convenience function
+  - Comprehensive docstrings following Google style guide
+  - Type hints for all public methods
+  - Configuration tracking via `get_config()` method
+  - Timing metadata for performance analysis
+
+- **Documentation**
+  - `docs/decisions/0007-lime-configuration.md`: ADR for LIME configuration.
+  - `src/xai/README.md`: Documentation for XAI module.
+  - `experiments/exp1_adult/examples/example_lime_usage.py`: Usage example script.
+
 ### Added
 - **EXP1-11: Model Testing & Sanity Checks**
     - Created `tests/unit/test_model_sanity.py`: Comprehensive test suite for trained models.
