@@ -415,23 +415,33 @@ class AdultRandomForestTrainer:
         - Caches models to `output_config['model_dir']` unless `force_retrain` is True.
         - Implements logic for EXP1-08.
     """
-    def __init__(self, config_path: str, verbose: bool = True):
-        self.config_path = config_path
+    def __init__(self, config_or_path: Any, verbose: bool = True):
+        self.config_path = config_or_path if isinstance(config_or_path, (str, Path)) else None
         self.verbose = verbose
         self.model = None
         self.metrics = {}
         self.feature_names = []
         self.config = {}
         self.model_params = {}
-        self._load_config()
+        
+        if isinstance(config_or_path, dict):
+            self.config = config_or_path
+            if 'model' in self.config and 'params' in self.config['model']:
+                self.model_params = self.config['model']['params']
+        else:
+            self._load_config()
         
     def _load_config(self):
         """Load configuration from JSON or YAML file."""
+        if not self.config_path:
+             # Should not happen if logic in init is correct
+             return
+
         if self.verbose:
             logger.info(f"Loading configuration from {self.config_path}")
             
         with open(self.config_path, 'r') as f:
-            if self.config_path.endswith('.yaml') or self.config_path.endswith('.yml'):
+            if str(self.config_path).endswith('.yaml') or str(self.config_path).endswith('.yml'):
                 self.config = yaml.safe_load(f)
             else:
                 self.config = json.load(f)
@@ -582,6 +592,46 @@ class AdultRandomForestTrainer:
         if self.verbose:
             logger.info(f"Model and metadata saved to {save_path}")
         return save_path
+
+    def predict(self, X: np.ndarray) -> np.ndarray:
+        """
+        Generate class predictions.
+        
+        Args:
+            X: Input features.
+            
+        Returns:
+            np.ndarray: Predicted class labels.
+        """
+        if self.model is None:
+            raise RuntimeError("Model not trained yet.")
+        return self.model.predict(X)
+
+    def predict_proba(self, X: np.ndarray) -> np.ndarray:
+        """
+        Generate class probabilities.
+        
+        Args:
+            X: Input features.
+            
+        Returns:
+            np.ndarray: Probability estimates.
+        """
+        if self.model is None:
+            raise RuntimeError("Model not trained yet.")
+        return self.model.predict_proba(X)
+
+    def get_feature_importance(self) -> pd.DataFrame:
+        """
+        Extract feature importance.
+        
+        Returns:
+            pd.DataFrame: DataFrame with feature importance.
+        """
+        if self.model is None:
+            raise RuntimeError("Model not trained yet.")
+        
+        return get_feature_importance(self.model, self.feature_names)
 
 def train_random_forest_adult(
     config_path: str = "experiments/exp1_adult/configs/models/rf_adult_config.yaml",

@@ -15,6 +15,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **EXP1-11: Model Testing & Sanity Checks**
+    - Created `tests/unit/test_model_sanity.py`: Comprehensive test suite for trained models.
+    - Implemented `ADR-006` defining the model testing strategy.
+    - Added tests for:
+        - **Integrity**: Save/load round-trip validation.
+        - **Sanity**: Prediction shapes `(N,)` and probability ranges `[0,1]`.
+        - **Performance**: Baseline checks (Accuracy > 0.80, ROC-AUC > 0.85).
+        - **Reproducibility**: Deterministic behavior with fixed seeds.
+    - Introduced `TestBothModels` parametrized tests for interface compliance.
+
+### Added
 - **EXP1-10: Master Training Runner**
     - Created `experiments/exp1_adult/run_train_models.py` orchestration script.
     - Implemented `training_config.yaml` for centralized hyperparameter management.
