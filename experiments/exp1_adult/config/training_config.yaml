@@ -1,0 +1,97 @@
+# ============================================================
+# Training Configuration for Experiment 1 - Adult MVP
+# ============================================================
+# Purpose: Define hyperparameters, paths, and metadata for the master training runner.
+# Usage: python run_train_models.py --config config/training_config.yaml
+# Version: 1.0.0
+# ============================================================
+
+# -----------------------------------------------------------------------------
+# Data Configuration
+# -----------------------------------------------------------------------------
+data:
+  # Proportion of the dataset to include in the test split (0.0 to 1.0).
+  # Default: 0.2 (20%) which provides ~9k test samples for robust evaluation.
+  test_size: 0.2
+
+  # Seed for random number generator to ensure reproducibility of the split.
+  # Fixed to 42 for consistency across all experiments.
+  random_state: 42
+
+  # Directory where the Adult dataset is cached (downloaded/processed).
+  # Should match the location used by src.data_loading.adult.
+  cache_dir: "data"
+
+  # Path where the fitted preprocessor (sklearn Pipeline) should be saved.
+  # This allows transforming new inference data identically to training data.
+  preprocessor_output: "experiments/exp1_adult/models/preprocessor.pkl"
+
+# -----------------------------------------------------------------------------
+# Model Hyperparameters
+# -----------------------------------------------------------------------------
+models:
+  # Random Forest Baseline (Interpretable Bagging)
+  rf:
+    # Number of trees in the forest.
+    # 100 is a standard baseline trade-off between performance and speed.
+    n_estimators: 100
+
+    # Maximum depth of the tree.
+    # null (None) means nodes are expanded until execution or min_samples_split.
+    # Keeping it unconsrained for RF is standard as bagging reduces variance.
+    max_depth: null
+
+    # Random seed for model training (bootstrapping).
+    random_state: 42
+
+    # Number of jobs to run in parallel. -1 means using all processors.
+    n_jobs: -1
+
+  # XGBoost Baseline (High-Performance Boosting)
+  xgboost:
+    # Number of gradient boosted trees.
+    # 100 matches RF for fair comparison of ensemble size.
+    n_estimators: 100
+
+    # Maximum tree depth for base learners.
+    # 6 is the default for XGBoost; significantly shallower than RF trees to prevent overfitting in boosting.
+    max_depth: 6
+
+    # Learning rate (eta). Step size shrinkage used in update to prevent overfitting.
+    # 0.1 is a robust default.
+    learning_rate: 0.1
+
+    # Random seed for reproducibility.
+    random_state: 42
+    
+    # Number of parallel threads. -1 uses all cores.
+    # Note: Set to 1 in config if experiencing instability in specific environments.
+    n_jobs: -1
+
+# -----------------------------------------------------------------------------
+# Output Paths
+# -----------------------------------------------------------------------------
+output:
+  # Directory where trained model artifacts (.pkl) will be saved.
+  models_dir: "experiments/exp1_adult/models/"
+
+  # Directory where evaluation metrics (CSV/Parquet) will be saved.
+  metrics_dir: "experiments/exp1_adult/results/"
+
+  # Directory where execution logs will be stored.
+  log_dir: "experiments/exp1_adult/logs/"
+
+# -----------------------------------------------------------------------------
+# Experiment Metadata
+# -----------------------------------------------------------------------------
+experiment:
+  # Identifier for this experiment phase.
+  name: "exp1_adult_mvp"
+  
+  # Configuration version for tracking changes over time.
+  version: "1.0.0"
+
+# -----------------------------------------------------------------------------
+# Configuration Change Log
+# -----------------------------------------------------------------------------
+# v1.0.0 (2025-12-17): Initial schema creation for EXP1-10.

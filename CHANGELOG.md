@@ -15,6 +15,18 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **EXP1-10: Master Training Runner**
+    - Created `experiments/exp1_adult/run_train_models.py` orchestration script.
+    - Implemented `training_config.yaml` for centralized hyperparameter management.
+    - Added CLI support for filtering models (`--models rf,xgboost`) and dry-runs.
+    - Implemented dual-format metric persistence (CSV + Parquet).
+- **ADR-005**: Training Runner Design.
+- **Integration Tests**: Added `tests/integration/test_training_runner.py` covering the full pipeline.
+
+### Changed
+- `xgboost_trainer.py`: Refined `load` method to better handle path objects.
+
+### Added
 - XGBoostTrainer class in src/models/xgboost_trainer.py
 - Training script: experiments/exp1_adult/train_xgb.py
 - Config: experiments/exp1_adult/configs/xgb_config.yaml
