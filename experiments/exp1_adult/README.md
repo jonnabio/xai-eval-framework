@@ -115,3 +115,24 @@ pytest tests/unit/test_model_sanity.py -v
 | **F1 Score** | > 0.60 | Balance recall/precision on imbalanced data. |
 
 If validation fails, check [ADR-006](../../docs/decisions/0006-model-testing-strategy.md) for debugging tips.
+
+### SHAP Explanations
+
+Generate SHAP values using `TreeExplainer` (exact for trees) or `KernelExplainer`:
+
+```bash
+# Example: Generate SHAP explanations
+python examples/example_shap_usage.py
+```
+
+**Configuration:**
+- **model_type**: "tree" (default) or "kernel".
+- **n_background_samples**: 100 (summary size).
+- **random_state**: 42.
+
+See `docs/decisions/0008-shap-configuration.md`.
+
+**Output Format:**
+Same as LIME (`feature_importance` dense array, `top_features`, `metadata`).
+
+## Contributing

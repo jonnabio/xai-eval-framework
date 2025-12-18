@@ -99,3 +99,37 @@ All methods return dense feature importance arrays (shape: n_instances × n_feat
 
 ### 4. Comprehensive Metadata
 Each explanation includes timing information, configuration parameters, and method-specific details for reproducibility and analysis.
+
+### SHAP (Shapley Additive exPlanations)
+
+**File:** `shap_tabular.py`
+
+**Description:** Generates feature attributions based on game theory, prioritizing `TreeExplainer` for exact values on tree-based models.
+
+**Key Features:**
+- **Exact Values:** Uses `TreeExplainer` for RF/XGBoost to avoid sampling variance.
+- **Additivity:** Predictions ≈ Expected Value + Sum(SHAP Values).
+- **Global Consistency:** Values are comparable across instances.
+
+**Usage:**
+```python
+from xai.shap_tabular import SHAPTabularWrapper
+
+wrapper = SHAPTabularWrapper(
+    model=model,
+    training_data=X_train,
+    feature_names=feature_names,
+    model_type="tree",
+    n_background_samples=100
+)
+
+explanations = wrapper.generate_explanations(model, X_test[:5])
+```
+
+**Configuration:**
+- `model_type`: "tree" (default) or "kernel".
+- `n_background_samples`: Size of background summary (default: 100).
+- `random_state`: Seed for sampling (default: 42).
+
+**Output Format:**
+Identical to LIME wrapper for consistency: `feature_importance` (dense array), `top_features`, and `metadata`.

@@ -14,6 +14,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added (EXP1-13)
+- **SHAP Tabular Wrapper** (`src/xai/shap_tabular.py`)
+  - `SHAPTabularWrapper` class prioritizing `TreeExplainer`
+  - Utility functions: `sample_background_data`, `validate_shap_additivity`
+  - Standardized dense output format consistent with LIME
+  - Comprehensive unit tests covering initialization, additivity, and consistency
+- **Documentation**
+  - `docs/decisions/0008-shap-configuration.md`: ADR for SHAP usage
+  - `src/xai/README.md`: Updated with SHAP details
+  - `experiments/exp1_adult/examples/example_shap_usage.py`: Usage example
+
 ### Added (EXP1-12)
 - **LIME Tabular Wrapper** (`src/xai/lime_tabular.py`)
   - `LIMETabularWrapper` class with standardized explanation interface
