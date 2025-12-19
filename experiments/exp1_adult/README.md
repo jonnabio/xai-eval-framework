@@ -59,6 +59,19 @@ python scripts/run_experiment.py --config configs/experiments/exp1_adult_xgb_lim
 ```
 
 Results (JSON and CSV) will be saved to the `output_dir` specified in the config file (default: `experiments/exp1_adult/results/`).
+
+### Running LLM Evaluation
+
+After running an experiment, you can evaluate the explanations using an LLM:
+
+```bash
+python scripts/run_llm_eval.py \
+    --input_dir experiments/exp1_adult/results/rf_shap \
+    --provider openai \
+    --model gpt-4
+```
+
+This will produce `llm_eval.json` in the input directory.
 ├── logs/                      # Execution logs
 ├── run_train_models.py        # Orchestration script
 └── train_*.py                 # (Legacy) individual scripts

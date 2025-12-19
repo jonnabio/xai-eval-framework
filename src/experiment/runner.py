@@ -159,6 +159,9 @@ class ExperimentRunner:
         # Extract features as numpy array
         instance_data = instance_row.drop(labels=meta_cols).values.astype(float)
         
+        # Get feature names for explanation context
+        feature_names = self.dataset['feature_names']
+        
         # 1. Generate Explanation & Measure Cost
         # Wrapper .explain_instance returns (weights, metadata)
         # We need raw weights for metrics
@@ -220,8 +223,27 @@ class ExperimentRunner:
             "prediction": int(instance_row['prediction']),
             "prediction_correct": int(instance_row['target']) == int(instance_row['prediction']),
             "metrics": metrics_results,
-            # Optional: store explanation weights? Might be large.
-            # "explanation": weights.tolist() 
+            "metrics": metrics_results,
+            "explanation": self._format_explanation(weights, feature_names)
+        }
+        
+    def _format_explanation(self, weights: np.ndarray, feature_names: List[str], top_k: int = 10) -> Dict[str, Any]:
+        """Format explanation for storage/LLM context."""
+        # Pair weights with names
+        exp_list = []
+        for i, w in enumerate(weights):
+            if i < len(feature_names):
+                exp_list.append((feature_names[i], float(w)))
+        
+        # Sort by absolute magnitude
+        exp_list.sort(key=lambda x: abs(x[1]), reverse=True)
+        
+        # Take top k
+        top_features = exp_list[:top_k]
+        
+        return {
+            "top_features": [f"{name}: {val:.4f}" for name, val in top_features],
+            "raw_top": {name: val for name, val in top_features}
         }
         
     def run(self) -> Dict[str, Any]:
