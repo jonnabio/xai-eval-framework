@@ -26,6 +26,10 @@ All notable changes to this project will be documented in this file.
     - `scripts/generate_eval_instances.py`: Dataset generation.
     - `ADR-009`: Evaluation Strategy.
     - Comprehensive Unit and Integration Tests.
+- **EXP1-21**: Implemented Jinja2 prompt template system.
+    - Created `src/prompts/` module.
+    - Implemented `PromptEngine` for safe template rendering.
+    - Added `eval_instruction.j2` base template for LLM evaluation.
 
 ### Added (EXP1-13)
 - **SHAP Tabular Wrapper** (`src/xai/shap_tabular.py`)
