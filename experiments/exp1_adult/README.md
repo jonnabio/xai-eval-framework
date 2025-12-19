@@ -40,42 +40,43 @@ python experiments/exp1_adult/run_train_models.py --config my_custom_config.yaml
 ```
 experiments/exp1_adult/
 ├── config/
-│   └── training_config.yaml   # Source of truth for hyperparameters
-├── models/                    # Saved model artifacts (.pkl)
-├── results/                   # Metric logs (.csv, .parquet)
-- `src/metrics/`: Metric implementations (Fidelity, Stability, etc.)
-- `src/experiment/`: Experiment orchestration logic.
-
-### Running Experiments
-
-Use the `run_experiment.py` script with a YAML configuration file to execute a full evaluation pipeline.
-
-```bash
-# Run Random Forest + SHAP
-python scripts/run_experiment.py --config configs/experiments/exp1_adult_rf_shap.yaml
-
-# Run XGBoost + LIME (Verbose)
-python scripts/run_experiment.py --config configs/experiments/exp1_adult_xgb_lime.yaml --verbose
+│   └── training_config.yaml   # Source of truth for training hyperparameters
+├── models/                    # Saved model artifacts (.pkl, .joblib)
+├── results/                   # Metric logs (.csv, .parquet, .json)
+├── logs/                      # Execution logs
+├── run_train_models.py        # Model training orchestration script
+└── train_*.py                 # (Legacy) individual scripts
 ```
 
-Results (JSON and CSV) will be saved to the `output_dir` specified in the config file (default: `experiments/exp1_adult/results/`).
+## 🚀 Usage Guide
 
-### Running LLM Evaluation
+### 1. Training Models
+Train Random Forest and XGBoost base models:
+```bash
+python experiments/exp1_adult/run_train_models.py
+```
+This requires `config/training_config.yaml`.
 
-After running an experiment, you can evaluate the explanations using an LLM:
+### 2. Running XAI Experiments
+Run a full evaluation pipeline (data load -> generate explanations -> compute metrics):
+```bash
+# Example: Random Forest + SHAP
+python scripts/run_experiment.py --config configs/experiments/exp1_adult_rf_shap.yaml
 
+# Example: XGBoost + LIME
+python scripts/run_experiment.py --config configs/experiments/exp1_adult_xgb_lime.yaml
+```
+Output: `results.json` and `metrics.csv` in the specified output directory.
+
+### 3. Running LLM Evaluation
+Evaluate the quality of generated explanations using GPT-4 or Gemini:
 ```bash
 python scripts/run_llm_eval.py \
     --input_dir experiments/exp1_adult/results/rf_shap \
     --provider openai \
     --model gpt-4
 ```
-
-This will produce `llm_eval.json` in the input directory.
-├── logs/                      # Execution logs
-├── run_train_models.py        # Orchestration script
-└── train_*.py                 # (Legacy) individual scripts
-```
+Output: `llm_eval.json` in the input directory.
 
 ## XAI Explanation Generation
 
