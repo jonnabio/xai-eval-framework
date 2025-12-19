@@ -1,0 +1,30 @@
+name: "exp1_adult_rf_shap"
+description: "Experiment 1: Adult dataset with Random Forest and SHAP explanations"
+dataset: "adult"
+version: "1.0.0"
+random_seed: 42
+
+model:
+  name: "random_forest"
+  path: "experiments/exp1_adult/models/rf/random_forest_model.joblib"
+
+explainer:
+  method: "shap"
+  explainer_type: "tree"
+  params:
+    feature_perturbation: "interventional" 
+
+sampling:
+  strategy: "stratified"
+  samples_per_class: 25  # 100 total
+  random_seed: 42
+
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  stability_perturbations: 10
+  stability_noise_level: 0.1
+
+output_dir: "experiments/exp1_adult/results/rf_shap"

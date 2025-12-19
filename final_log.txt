@@ -1,0 +1,143 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\jonna\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework
+plugins: anyio-4.8.0, langsmith-0.3.8
+collecting ... collected 1 item
+
+tests/integration/test_evaluation_pipeline.py::test_full_pipeline FAILED [100%]
+
+================================== FAILURES ===================================
+_____________________________ test_full_pipeline ______________________________
+
+pipeline_data = (MockProbaModel(), array([[0.61014513, 0.92487422, 0.55444387, 0.96609752],
+       [0.66830124, 0.37155699, 0.59320689...68654581, 0.05343645]]), array([1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1]), ['f0', 'f1', 'f2', 'f3'])
+
+    def test_full_pipeline(pipeline_data):
+        """Run full flow: Sampler -> SHAP -> Metrics."""
+        model, X, y, feature_names = pipeline_data
+    
+        # 1. Sampler
+        # Create evaluation set (small)
+        sampler = EvaluationSampler(model, X, y, random_state=42)
+        eval_df = sampler.sample_stratified_by_error(n_per_group=2)
+        assert len(eval_df) > 0
+    
+        # 2. XAI Generation (SHAP)
+        # Use real SHAP wrapper on mock data/model
+        # Note: SHAP TreeExplainer needs Tree model. Use specific model_type='kernel' for mock.
+        shap_wrapper = SHAPTabularWrapper(
+            model=model,
+            training_data=X[:10],
+            feature_names=feature_names,
+            model_type="kernel",
+            n_background_samples=5
+        )
+    
+        # Pick one instance to evaluate
+        instance_row = eval_df.iloc[0]
+        # Extract features (drop metadata)
+        metadata_cols = ['original_index', 'target', 'prediction', 'quadrant']
+        instance_data = instance_row.drop(labels=metadata_cols).values.astype(float)
+    
+        # Generate Explanation
+        with CostMetric() as cost_tracker:
+            explanation = shap_wrapper.explain_instance(model, instance_data, return_full=True)
+            # explain_instance returns (weights, result_dict)
+            weights, result_dict = explanation
+    
+        # 3. Metrics Calculation
+        metrics_report = {}
+    
+        # A. Cost (from tracker)
+        # Check if context manager worked?
+        # Actually CostMetric stores start_time. We need to calculate manually or use .measure
+        # Let's use the explicit check from metadata
+        cost_m = CostMetric()
+        metrics_report['cost'] = cost_m.compute(result_dict)
+    
+        # B. Sparsity
+        sparsity_m = SparsityMetric(threshold=0.01)
+        metrics_report['sparsity'] = sparsity_m.compute(weights)
+    
+        # C. Fidelity
+        fidelity_m = FidelityMetric(n_samples=50)
+        metrics_report['fidelity'] = fidelity_m.compute(weights, model=model, data=instance_data)
+    
+        # D. Stability
+        # Needs a function to re-generate explanation
+        def explainer_func(m, d):
+            w, res = shap_wrapper.explain_instance(m, d[0], return_full=True)
+            return {'feature_importance': list(w)} # Stability expects dict with feature_importance
+    
+        stability_m = StabilityMetric(n_iterations=2)
+>       metrics_report['stability'] = stability_m.compute(
+            None, model=model, data=instance_data, explainer_func=explainer_func
+        )
+
+tests\integration\test_evaluation_pipeline.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <src.metrics.stability.StabilityMetric object at 0x000001D6F58D2270>
+explanation = None, model = MockProbaModel()
+data = array([0.36382689, 0.73713062, 0.63647779, 0.02592079])
+explainer_func = <function test_full_pipeline.<locals>.explainer_func at 0x000001D6F5932A20>
+kwargs = {}, instance = array([0.36382689, 0.73713062, 0.63647779, 0.02592079])
+explanations = [], i = 0
+noise = array([ 0.00015829,  0.00635502, -0.01062155,  0.01467795])
+perturbed_instance = array([0.36398518, 0.74348563, 0.62585624, 0.04059875])
+res = {'feature_importance': [np.float64(-0.05094941296753014), np.float64(0.030442396829045093), np.float64(0.0), np.float64(0.0)]}
+vec = [np.float64(-0.05094941296753014), np.float64(0.030442396829045093), np.float64(0.0), np.float64(0.0)]
+
+    def compute(
+        self,
+        explanation: Any, # The baseline explanation
+        model: Any = None,
+        data: Optional[Union[np.ndarray, dict]] = None, # Original data
+        explainer_func: Optional[Callable] = None, # Function to generate explanation
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Compute Stability metrics.
+    
+        Args:
+            explanation: Initial result (ignored, we regenerate).
+            model: The black-box model.
+            data: The original instance.
+            explainer_func: Callable(model, data) -> result dict.
+    
+        Returns:
+            Dict with 'cosine_similarity_mean', 'cosine_similarity_std'.
+        """
+        if explainer_func is None or model is None or data is None:
+            raise ValueError("Stability metric requires 'explainer_func', 'model', and 'data'.")
+    
+        instance = np.array(data)
+        if instance.ndim > 1: instance = instance[0]
+    
+        # Generate K explanations for perturbed inputs
+        explanations = []
+    
+        for i in range(self.n_iterations):
+            # Perturb input
+            noise = np.random.normal(0, self.perturbation_std, size=instance.shape)
+            perturbed_instance = instance + noise
+    
+            # Generate explanation
+            # Assume func returns dict with 'feature_importance'
+            res = explainer_func(model, perturbed_instance.reshape(1, -1))
+    
+            vec = res['feature_importance']
+>           if vec.ndim > 1: vec = vec[0]
+               ^^^^^^^^
+E           AttributeError: 'list' object has no attribute 'ndim'
+
+src\metrics\stability.py:61: AttributeError
+---------------------------- Captured stderr call -----------------------------
+\r  0%|          | 0/1 [00:00<?, ?it/s]\r100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 1/1 [00:00<00:00, 394.05it/s]\n\r  0%|          | 0/1 [00:00<?, ?it/s]\r100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 1/1 [00:00<00:00, 563.60it/s]
+------------------------------ Captured log call ------------------------------
+WARNING  src.evaluation.sampler:sampler.py:97 No samples found for quadrant FP
+WARNING  src.evaluation.sampler:sampler.py:97 No samples found for quadrant FN
+=========================== short test summary info ===========================
+FAILED tests/integration/test_evaluation_pipeline.py::test_full_pipeline - At...
+============================== 1 failed in 2.45s ==============================

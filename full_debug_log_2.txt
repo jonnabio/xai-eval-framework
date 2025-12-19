@@ -1,0 +1,158 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\jonna\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework
+plugins: anyio-4.8.0, langsmith-0.3.8
+collecting ... collected 9 items
+
+tests/unit/experiment/test_config.py::test_model_config_valid PASSED     [ 11%]
+tests/unit/experiment/test_config.py::test_explainer_config_shap PASSED  [ 22%]
+tests/unit/experiment/test_config.py::test_explainer_config_lime PASSED  [ 33%]
+tests/unit/experiment/test_config.py::test_sampling_config_defaults PASSED [ 44%]
+tests/unit/experiment/test_config.py::test_metrics_config_all_enabled PASSED [ 55%]
+tests/unit/experiment/test_config.py::test_experiment_config_full PASSED [ 66%]
+tests/unit/experiment/test_config.py::test_experiment_config_validation_error PASSED [ 77%]
+tests/unit/experiment/test_config.py::test_load_config_file_not_found PASSED [ 88%]
+tests/integration/test_experiment_runner.py::test_experiment_runner_full_pipeline FAILED [100%]
+
+================================== FAILURES ===================================
+____________________ test_experiment_runner_full_pipeline _____________________
+
+self = <src.experiment.runner.ExperimentRunner object at 0x000001C0DE4C5E80>
+
+    def run(self) -> Dict[str, Any]:
+        """
+        Execute complete experiment workflow.
+        """
+        start_time = datetime.now()
+        logger.info(f"Starting experiment: {self.config.name}")
+    
+        try:
+>           self.setup()
+
+src\experiment\runner.py:224: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <src.experiment.runner.ExperimentRunner object at 0x000001C0DE4C5E80>
+
+    def setup(self) -> None:
+        """
+        Load dataset, model, and initialize explainer.
+        """
+        logger.info("Setting up experiment environment...")
+    
+        # 1. Load Dataset
+        logger.info(f"Loading dataset: {self.config.dataset}")
+        if self.config.dataset == "adult":
+            # Using existing loader
+            # Point to 'data' dir relative to where this usually runs?
+            # Ideally config should specify data root or we infer.
+            # Assuming project root structure.
+            # Using defaults for now, assuming standard project layout.
+            data_dir = str(Path("data").resolve())
+            # If path mismatch, user needs to ensure data is there.
+    
+>           self.dataset = load_adult(data_dir=data_dir, random_state=self.config.random_seed)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: load_adult() got an unexpected keyword argument 'data_dir'
+
+src\experiment\runner.py:68: TypeError
+
+The above exception was the direct cause of the following exception:
+
+temp_config_file = WindowsPath('C:/Users/jonna/AppData/Local/Temp/pytest-of-jonna/pytest-14/test_experiment_runner_full_pi0/test_config.yaml')
+
+    def test_experiment_runner_full_pipeline(temp_config_file):
+        """Test complete experiment execution pipeline."""
+        # Load config
+        config = load_config(temp_config_file)
+        assert config.name == 'test_experiment'
+    
+        # Initialize runner
+        runner = ExperimentRunner(config)
+    
+        # Run experiment
+>       results = runner.run()
+                  ^^^^^^^^^^^^
+
+tests\integration\test_experiment_runner.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <src.experiment.runner.ExperimentRunner object at 0x000001C0DE4C5E80>
+
+    def run(self) -> Dict[str, Any]:
+        """
+        Execute complete experiment workflow.
+        """
+        start_time = datetime.now()
+        logger.info(f"Starting experiment: {self.config.name}")
+    
+        try:
+            self.setup()
+    
+            instances = self.generate_instances()
+    
+            # Metadata
+            self.results["experiment_metadata"] = {
+                "name": self.config.name,
+                "dataset": self.config.dataset,
+                "timestamp": start_time.isoformat(),
+                "config_version": self.config.version,
+                "random_seed": self.config.random_seed
+            }
+    
+            self.results["model_info"] = {
+                "name": self.config.model.name,
+                "path": str(self.config.model.path),
+                "explainer_method": self.config.explainer.method
+            }
+    
+            # Loop
+            total = len(instances)
+            for idx, (_, row) in enumerate(instances.iterrows()):
+                try:
+                    res = self.evaluate_instance(row, idx, total)
+                    self.results["instance_evaluations"].append(res)
+                except Exception as e:
+                    logger.error(f"Error evaluating instance {idx}: {e}")
+                    # Continue loop
+    
+            # Aggregate
+            self.results["aggregated_metrics"] = self._compute_aggregates()
+    
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+            self.results["experiment_metadata"]["duration_seconds"] = duration
+            self.results["experiment_metadata"]["completed_at"] = end_time.isoformat()
+    
+            logger.info(f"Experiment completed in {duration:.2f}s")
+    
+            self.save_results()
+    
+            return self.results
+    
+        except Exception as e:
+            logger.error(f"Experiment failed: {e}", exc_info=True)
+>           raise RuntimeError(f"Experiment execution failed: {e}") from e
+E           RuntimeError: Experiment execution failed: load_adult() got an unexpected keyword argument 'data_dir'
+
+src\experiment\runner.py:269: RuntimeError
+------------------------------ Captured log call ------------------------------
+ERROR    src.experiment.runner:runner.py:268 Experiment failed: load_adult() got an unexpected keyword argument 'data_dir'
+Traceback (most recent call last):
+  File "C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework\src\experiment\runner.py", line 224, in run
+    self.setup()
+    ~~~~~~~~~~^^
+  File "C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework\src\experiment\runner.py", line 68, in setup
+    self.dataset = load_adult(data_dir=data_dir, random_state=self.config.random_seed)
+                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: load_adult() got an unexpected keyword argument 'data_dir'
+============================== warnings summary ===============================
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pydantic\_internal\_config.py:323
+  C:\Users\jonna\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pydantic\_internal\_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_experiment_runner.py::test_experiment_runner_full_pipeline
+=================== 1 failed, 8 passed, 1 warning in 2.25s ====================

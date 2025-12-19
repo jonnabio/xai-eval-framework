@@ -14,6 +14,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added (EXP1-14)
+- **Evaluation Framework**
+    - `src/evaluation/sampler.py`: Stratified sampling (TP/TN/FP/FN).
+    - `src/metrics/`: Full metrics suite (Fidelity, Stability, Sparsity, Cost).
+- **EXP1-20**: Implemented robust experiment orchestration system.
+    - Added `ExperimentRunner` with Pydantic configuration.
+    - Added CLI script `scripts/run_experiment.py`.
+    - Added YAML configs for RF+SHAP and XGB+LIME.
+    - Documented architecture in ADR-010.
+    - `scripts/generate_eval_instances.py`: Dataset generation.
+    - `ADR-009`: Evaluation Strategy.
+    - Comprehensive Unit and Integration Tests.
+
 ### Added (EXP1-13)
 - **SHAP Tabular Wrapper** (`src/xai/shap_tabular.py`)
   - `SHAPTabularWrapper` class prioritizing `TreeExplainer`

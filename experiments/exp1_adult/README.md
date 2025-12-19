@@ -43,6 +43,22 @@ experiments/exp1_adult/
 │   └── training_config.yaml   # Source of truth for hyperparameters
 ├── models/                    # Saved model artifacts (.pkl)
 ├── results/                   # Metric logs (.csv, .parquet)
+- `src/metrics/`: Metric implementations (Fidelity, Stability, etc.)
+- `src/experiment/`: Experiment orchestration logic.
+
+### Running Experiments
+
+Use the `run_experiment.py` script with a YAML configuration file to execute a full evaluation pipeline.
+
+```bash
+# Run Random Forest + SHAP
+python scripts/run_experiment.py --config configs/experiments/exp1_adult_rf_shap.yaml
+
+# Run XGBoost + LIME (Verbose)
+python scripts/run_experiment.py --config configs/experiments/exp1_adult_xgb_lime.yaml --verbose
+```
+
+Results (JSON and CSV) will be saved to the `output_dir` specified in the config file (default: `experiments/exp1_adult/results/`).
 ├── logs/                      # Execution logs
 ├── run_train_models.py        # Orchestration script
 └── train_*.py                 # (Legacy) individual scripts
@@ -134,5 +150,18 @@ See `docs/decisions/0008-shap-configuration.md`.
 
 **Output Format:**
 Same as LIME (`feature_importance` dense array, `top_features`, `metadata`).
+
+## Evaluation Framework
+
+We use a standardized framework to evaluate XAI equality:
+
+1.  **Instances**: 200 stratified samples (TP, TN, FP, FN) generated via `scripts/generate_eval_instances.py`.
+2.  **Metrics**:
+    - **Fidelity**: $R^2$ of explanation vs black-box.
+    - **Stability**: Cosine similarity under perturbation.
+    - **Sparsity**: \% Non-zero features.
+    - **Cost**: Computation time.
+
+See `docs/decisions/0009-evaluation-strategy.md` for details.
 
 ## Contributing
