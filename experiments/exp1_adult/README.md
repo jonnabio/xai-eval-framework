@@ -104,6 +104,17 @@ explanations = {
 ```
 
 ## Configuration
+
+### Environment Variables
+To use LLM evaluation features, set the following environment variables (e.g., in a `.env` file):
+
+```bash
+OPENAI_API_KEY=your_openai_key
+GOOGLE_API_KEY=your_google_key
+```
+
+### Dataset
+The Adult dataset will be automatically downloaded and cached in `data/`.
 Hyperparameters are properly managed in `config/training_config.yaml`. 
 Refer to [ADR-005](../../docs/decisions/0005-training-runner-design.md) for design decisions.
 

@@ -52,6 +52,13 @@ class MetricsConfig(BaseModel):
     stability_perturbations: int = Field(10, ge=1)
     stability_noise_level: float = Field(0.1, ge=0.0)
 
+class LLMConfig(BaseModel):
+    """LLM provider configuration."""
+    provider: Literal["openai", "gemini"] = Field("openai", description="LLM provider")
+    model_name: str = Field(..., description="Model name (e.g. gpt-4, gemini-pro)")
+    temperature: float = Field(0.0, ge=0.0, le=2.0)
+    max_tokens: int = Field(1000, ge=1)
+
 class ExperimentConfig(BaseModel):
     """Root experiment configuration."""
     name: str = Field(..., description="Experiment identifier")
@@ -62,6 +69,7 @@ class ExperimentConfig(BaseModel):
     explainer: ExplainerConfig
     sampling: SamplingConfig
     metrics: MetricsConfig
+    llm: Optional[LLMConfig] = None
     
     # Output
     output_dir: Path = Field(Path("outputs/experiments"), description="Results directory")
