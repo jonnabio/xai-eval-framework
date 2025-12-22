@@ -1,0 +1,30 @@
+2025-12-19 22:15:33,151 - exp1_adult_mvp - DEBUG - Logging initialized. Log file: experiments\exp1_adult\logs\exp1_adult_mvp_20251219_221533.log
+2025-12-19 22:15:33,152 - exp1_adult_mvp - INFO - Starting Experiment: exp1_adult_mvp
+2025-12-19 22:15:33,152 - exp1_adult_mvp - DEBUG - Configuration loaded: {'data': {'test_size': 0.2, 'random_state': 42, 'cache_dir': 'data', 'preprocessor_output': 'experiments/exp1_adult/models/preprocessor.pkl'}, 'models': {'rf': {'n_estimators': 100, 'max_depth': None, 'random_state': 42, 'n_jobs': -1}, 'xgboost': {'n_estimators': 100, 'max_depth': 6, 'learning_rate': 0.1, 'random_state': 42, 'n_jobs': -1}}, 'output': {'models_dir': 'experiments/exp1_adult/models/', 'metrics_dir': 'experiments/exp1_adult/results/', 'model_filename': 'rf_model.pkl', 'metrics_filename': 'rf_metrics.json', 'log_dir': 'experiments/exp1_adult/logs/'}, 'experiment': {'name': 'exp1_adult_mvp', 'version': '1.0.0'}}
+2025-12-19 22:15:33,154 - exp1_adult_mvp - INFO - Loading Adult dataset...
+2025-12-19 22:15:33,392 - exp1_adult_mvp - INFO - Loaded Data: Train shape=(39032, 108), Test shape=(9758, 108)
+2025-12-19 22:15:33,400 - exp1_adult_mvp - INFO - Initializing Random Forest...
+2025-12-19 22:15:33,401 - exp1_adult_mvp - INFO - Initializing XGBoost...
+2025-12-19 22:15:33,403 - exp1_adult_mvp - INFO - Starting training for model: exp1_adult_mvp_rf
+2025-12-19 22:15:33,403 - exp1_adult_mvp - ERROR - Failed to train exp1_adult_mvp_rf: 'model_dir'
+Traceback (most recent call last):
+  File "C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework\experiments\exp1_adult\run_train_models.py", line 196, in train_and_evaluate_model
+    trainer.train(X_train, y_train)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework\src\models\tabular_models.py", line 463, in train
+    model_dir = Path(output_config['model_dir'])
+                     ~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'model_dir'
+2025-12-19 22:15:33,405 - exp1_adult_mvp - ERROR - Skipping rf due to error: 'model_dir'
+2025-12-19 22:15:33,406 - exp1_adult_mvp - INFO - Starting training for model: exp1_adult_mvp_xgboost
+2025-12-19 22:15:34,173 - exp1_adult_mvp - INFO - Completed exp1_adult_mvp_xgboost in 0.77s
+2025-12-19 22:15:34,173 - exp1_adult_mvp - INFO - exp1_adult_mvp_xgboost Metrics: Accuracy=0.8699, ROC-AUC=0.9264
+2025-12-19 22:15:34,189 - exp1_adult_mvp - INFO - Saved xgboost artifacts to experiments\exp1_adult\models\xgboost
+2025-12-19 22:15:34,189 - exp1_adult_mvp - INFO - Saving aggregated metrics...
+2025-12-19 22:15:34,192 - exp1_adult_mvp - INFO - Saved metrics CSV to: experiments\exp1_adult\results\training_metrics_20251219_221534.csv
+2025-12-19 22:15:34,199 - exp1_adult_mvp - INFO - Saved metrics Parquet to: experiments\exp1_adult\results\training_metrics_20251219_221534.parquet
+2025-12-19 22:15:34,199 - exp1_adult_mvp - INFO - ----------------------------------------
+2025-12-19 22:15:34,199 - exp1_adult_mvp - INFO - Experiment Completed Successfully.
+2025-12-19 22:15:34,200 - exp1_adult_mvp - INFO - Models Trained: 1
+2025-12-19 22:15:34,200 - exp1_adult_mvp - INFO - Best Model (ROC-AUC): exp1_adult_mvp_xgboost (0.9264)
+2025-12-19 22:15:34,200 - exp1_adult_mvp - INFO - ----------------------------------------

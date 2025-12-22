@@ -1,0 +1,27 @@
+2025-12-19 22:10:11,201 - exp1_adult_mvp - DEBUG - Logging initialized. Log file: experiments\exp1_adult\logs\exp1_adult_mvp_20251219_221011.log
+2025-12-19 22:10:11,202 - exp1_adult_mvp - INFO - Starting Experiment: exp1_adult_mvp
+2025-12-19 22:10:11,202 - exp1_adult_mvp - DEBUG - Configuration loaded: {'data': {'test_size': 0.2, 'random_state': 42, 'cache_dir': 'data', 'preprocessor_output': 'experiments/exp1_adult/models/preprocessor.pkl'}, 'models': {'rf': {'n_estimators': 100, 'max_depth': None, 'random_state': 42, 'n_jobs': -1}, 'xgboost': {'n_estimators': 100, 'max_depth': 6, 'learning_rate': 0.1, 'random_state': 42, 'n_jobs': -1}}, 'output': {'models_dir': 'experiments/exp1_adult/models/', 'metrics_dir': 'experiments/exp1_adult/results/', 'model_filename': 'rf_model.pkl', 'metrics_filename': 'rf_metrics.json', 'log_dir': 'experiments/exp1_adult/logs/'}, 'experiment': {'name': 'exp1_adult_mvp', 'version': '1.0.0'}}
+2025-12-19 22:10:11,204 - exp1_adult_mvp - INFO - Loading Adult dataset...
+2025-12-19 22:10:11,392 - exp1_adult_mvp - INFO - Loaded Data: Train shape=(39032, 108), Test shape=(9758, 108)
+2025-12-19 22:10:11,393 - exp1_adult_mvp - INFO - Initializing Random Forest...
+2025-12-19 22:10:11,394 - exp1_adult_mvp - INFO - Initializing XGBoost...
+2025-12-19 22:10:11,394 - exp1_adult_mvp - INFO - Starting training for model: exp1_adult_mvp_rf
+2025-12-19 22:10:11,394 - exp1_adult_mvp - ERROR - Failed to train exp1_adult_mvp_rf: AdultRandomForestTrainer.train() takes from 1 to 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "C:\Users\jonna\OneDrive\Documentos\Code__Projects_Local\xai-eval-framework\experiments\exp1_adult\run_train_models.py", line 196, in train_and_evaluate_model
+    trainer.train(X_train, y_train)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+TypeError: AdultRandomForestTrainer.train() takes from 1 to 2 positional arguments but 3 were given
+2025-12-19 22:10:11,395 - exp1_adult_mvp - ERROR - Skipping rf due to error: AdultRandomForestTrainer.train() takes from 1 to 2 positional arguments but 3 were given
+2025-12-19 22:10:11,396 - exp1_adult_mvp - INFO - Starting training for model: exp1_adult_mvp_xgboost
+2025-12-19 22:10:11,914 - exp1_adult_mvp - INFO - Completed exp1_adult_mvp_xgboost in 0.52s
+2025-12-19 22:10:11,914 - exp1_adult_mvp - INFO - exp1_adult_mvp_xgboost Metrics: Accuracy=0.8699, ROC-AUC=0.9264
+2025-12-19 22:10:11,926 - exp1_adult_mvp - INFO - Saved xgboost artifacts to experiments\exp1_adult\models\xgboost
+2025-12-19 22:10:11,926 - exp1_adult_mvp - INFO - Saving aggregated metrics...
+2025-12-19 22:10:11,930 - exp1_adult_mvp - INFO - Saved metrics CSV to: experiments\exp1_adult\results\training_metrics_20251219_221011.csv
+2025-12-19 22:10:11,937 - exp1_adult_mvp - INFO - Saved metrics Parquet to: experiments\exp1_adult\results\training_metrics_20251219_221011.parquet
+2025-12-19 22:10:11,938 - exp1_adult_mvp - INFO - ----------------------------------------
+2025-12-19 22:10:11,938 - exp1_adult_mvp - INFO - Experiment Completed Successfully.
+2025-12-19 22:10:11,938 - exp1_adult_mvp - INFO - Models Trained: 1
+2025-12-19 22:10:11,938 - exp1_adult_mvp - INFO - Best Model (ROC-AUC): exp1_adult_mvp_xgboost (0.9264)
+2025-12-19 22:10:11,939 - exp1_adult_mvp - INFO - ----------------------------------------

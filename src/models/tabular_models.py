@@ -447,11 +447,13 @@ class AdultRandomForestTrainer:
                 self.config = json.load(f)
         self.model_params = self.config['model']['params']
 
-    def train(self, force_retrain: bool = False) -> Tuple[RandomForestClassifier, Dict[str, Any]]:
+    def train(self, X_train=None, y_train=None, X_test=None, y_test=None, force_retrain: bool = False) -> Tuple[RandomForestClassifier, Dict[str, Any]]:
         """
         Execute the full training pipeline.
         
         Args:
+            X_train, y_train: Training data (optional).
+            X_test, y_test: Testing data (optional).
             force_retrain (bool): Ignore existing models and force retraining.
             
         Returns:
@@ -474,17 +476,24 @@ class AdultRandomForestTrainer:
             # The original function returned empty dict, so we maintain behavior
             return self.model, {}
             
-        # Load Data
-        if self.verbose:
-            logger.info("Loading Adult dataset...")
-        data = load_adult(verbose=self.verbose)
-        X_train, X_test, y_train, y_test = data[0], data[1], data[2], data[3]
-        
-        # Extract feature names
-        f_names = data[4] if len(data) > 4 else []
-        if isinstance(f_names, np.ndarray):
-            f_names = f_names.tolist()
-        self.feature_names = f_names
+        # Load Data if not provided
+        if X_train is None or y_train is None:
+            if self.verbose:
+                logger.info("Loading Adult dataset...")
+            data = load_adult(verbose=self.verbose)
+            X_train, X_test, y_train, y_test = data[0], data[1], data[2], data[3]
+            
+            # Extract feature names
+            f_names = data[4] if len(data) > 4 else []
+            if isinstance(f_names, np.ndarray):
+                f_names = f_names.tolist()
+            self.feature_names = f_names
+        elif self.feature_names == [] and isinstance(X_train, pd.DataFrame):
+            # Try to capture feature names from dataframe if provided
+            self.feature_names = X_train.columns.tolist()
+        elif self.feature_names == []:
+             # Fallback generic names
+             self.feature_names = [f"feature_{i}" for i in range(X_train.shape[1])]
         
         # Initialize
         if self.verbose:
@@ -501,8 +510,9 @@ class AdultRandomForestTrainer:
         if self.verbose:
             logger.info(f"Training completed in {training_time:.2f} seconds")
             
-        # Evaluate
-        self._evaluate_internal(X_test, y_test, X_train.shape, training_time, results_dir)
+        # Evaluate (Internal) - only if test data provided
+        if X_test is not None and y_test is not None:
+             self._evaluate_internal(X_test, y_test, X_train.shape, training_time, results_dir)
         
         # Save
         self.save()
@@ -576,7 +586,9 @@ class AdultRandomForestTrainer:
         if self.model is None:
             raise RuntimeError("Model not trained yet.")
         y_pred = self.model.predict(X_test)
-        return calculate_classification_metrics(y_test, y_pred)
+        # Update metrics state so it can be saved in metadata
+        self.metrics = calculate_classification_metrics(y_test, y_pred)
+        return self.metrics
         
     def save(self) -> str:
         """Persist model and metadata."""

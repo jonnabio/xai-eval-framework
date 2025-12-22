@@ -309,10 +309,17 @@ def main(config_path: Optional[str] = None, models_filter: str = "rf,xgboost", d
         allowed_models = [m.strip().lower() for m in models_filter.split(',')]
         
         # Random Forest
+            # Random Forest
         if 'rf' in allowed_models:
-            rf_config = config['models']['rf']
+            rf_params = config['models']['rf']
             logger.info("Initializing Random Forest...")
-            trainers['rf'] = AdultRandomForestTrainer(rf_config)
+            # Synthesize config to match AdultRandomForestTrainer expectations
+            rf_adapter_config = {
+                'model': {'params': rf_params},
+                'output': config['output'],
+                'validation': config.get('validation', {})
+            }
+            trainers['rf'] = AdultRandomForestTrainer(rf_adapter_config)
 
         # XGBoost
         if 'xgboost' in allowed_models:
@@ -348,8 +355,15 @@ def main(config_path: Optional[str] = None, models_filter: str = "rf,xgboost", d
                      # Let's create a specific subdir for each model to store full artifacts (json, feature importance etc)
                      model_subdir = models_dir / model_key
                      model_subdir.mkdir(exist_ok=True)
-                     trainer.save(model_subdir)
-                     logger.info(f"Saved {model_key} artifacts to {model_subdir}")
+                     
+                     try:
+                         trainer.save(model_subdir)
+                         logger.info(f"Saved {model_key} artifacts to {model_subdir}")
+                     except TypeError:
+                         # Fallback for RF trainer which uses internal config path and takes no args
+                         logger.debug(f"{model_key} save() does not accept path. Calling without args.")
+                         trainer.save()
+                         logger.info(f"Saved {model_key} artifacts (default path)")
                 else:
                      logger.warning(f"Trainer for {model_key} does not have a save() method.")
 
