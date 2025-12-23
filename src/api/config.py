@@ -2,7 +2,7 @@
 Configuration settings for the XAI Evaluation API.
 Centralizes environment variables, file paths, and server settings.
 """
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from pathlib import Path
 from typing import List
 
