@@ -1,0 +1,37 @@
+{
+    "model_name": "decision_tree",
+    "model_type": "classical",
+    "dataset": "AdultIncome",
+    "xai_method": "LIME",
+    "accuracy": 72.34,
+    "timestamp": "2024-01-15T17:30:00",
+    "processing_time": 85.2,
+    "metrics": {
+        "fidelity": 0.65,
+        "stability": 0.58,
+        "sparsity": 0.82,
+        "causal_alignment": 0.62,
+        "counterfactual_sensitivity": 0.55,
+        "efficiency_ms": 85.2
+    },
+    "llm_evaluation": {
+        "likert_scores": {
+            "clarity": 3,
+            "usefulness": 3,
+            "completeness": 2,
+            "trustworthiness": 3,
+            "overall": 3
+        },
+        "justification": "The decision tree's simple structure makes LIME explanations somewhat redundant. While the explanations are fast to compute, they don't add much value beyond the tree's inherent interpretability. Stability issues arise from the tree's sensitivity to data perturbations."
+    },
+    "config": {
+        "max_depth": 5,
+        "min_samples_split": 10,
+        "random_state": 42
+    },
+    "metadata": {
+        "experiment_id": "sample_exp_005",
+        "run_date": "2024-01-15",
+        "framework_version": "0.2.0"
+    }
+}

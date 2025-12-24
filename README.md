@@ -54,7 +54,8 @@ xai-eval-framework/
 ├── docs/                 # Documentation & Design Docs
 ├── tests/                # Global unit & integration tests
 ├── environment.yml       # Conda environment definition
-└── README.md             # This file
+├── README.md             # This file
+└── experiments/sample_data/ # Added for development/testing
 ```
 
 ## 🔬 Experiments

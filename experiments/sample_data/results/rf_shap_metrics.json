@@ -1,0 +1,38 @@
+{
+    "model_name": "random_forest",
+    "model_type": "classical",
+    "dataset": "AdultIncome",
+    "xai_method": "SHAP",
+    "accuracy": 85.67,
+    "timestamp": "2024-01-15T14:20:00",
+    "processing_time": 198.3,
+    "metrics": {
+        "fidelity": 0.93,
+        "stability": 0.89,
+        "sparsity": 0.71,
+        "causal_alignment": 0.86,
+        "counterfactual_sensitivity": 0.80,
+        "efficiency_ms": 198.3
+    },
+    "llm_evaluation": {
+        "likert_scores": {
+            "clarity": 4,
+            "usefulness": 5,
+            "completeness": 4,
+            "trustworthiness": 5,
+            "overall": 4
+        },
+        "justification": "SHAP explanations for Random Forest provide solid global and local interpretability. The force plots effectively show feature contributions with good visual clarity. While computation time is higher than LIME, the theoretical guarantees and consistency make it worthwhile for important decisions."
+    },
+    "config": {
+        "n_estimators": 200,
+        "max_depth": 10,
+        "min_samples_split": 5,
+        "random_state": 42
+    },
+    "metadata": {
+        "experiment_id": "sample_exp_003",
+        "run_date": "2024-01-15",
+        "framework_version": "0.2.0"
+    }
+}
