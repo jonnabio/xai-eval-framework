@@ -16,7 +16,7 @@ from datetime import datetime
 import logging
 
 from src.api.config import settings
-from src.api.routes import health
+from src.api.routes import health, runs
 from src.api.middleware.exceptions import (
     validation_exception_handler,
     general_exception_handler
@@ -54,6 +54,7 @@ app.add_exception_handler(Exception, general_exception_handler)
 
 # Include routers
 app.include_router(health.router, prefix="/api")
+app.include_router(runs.router, prefix="/api")
 
 # Startup event
 @app.on_event("startup")
