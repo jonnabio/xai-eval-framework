@@ -4,6 +4,9 @@ from src.api.models.schemas import (
     MetricSet, LikertScores, LlmEval, Run,
     ModelType, Dataset, XaiMethod, RunStatus
 )
+from src.api.main import app
+from fastapi.testclient import TestClient
+from pathlib import Path
 
 @pytest.fixture
 def valid_metric_set():
@@ -56,3 +59,45 @@ def valid_run_data(valid_metric_set, valid_llm_eval):
         "errorMessage": None,
         "metadata": {"version": "1.0.0"}
     }
+
+@pytest.fixture(scope="session")
+def test_client():
+    """
+    FastAPI test client for integration tests.
+    
+    Scope: session - created once for all tests
+    """
+    return TestClient(app)
+
+@pytest.fixture(scope="session")
+def sample_data_path():
+    """
+    Path to sample experiment data.
+    
+    Returns path to experiments/sample_data directory.
+    """
+    return Path("experiments/sample_data")
+
+@pytest.fixture(scope="session")
+def ensure_sample_data_exists(sample_data_path):
+    """
+    Verify sample data exists before running integration tests.
+    
+    Raises error if sample data directory doesn't exist.
+    """
+    results_dir = sample_data_path / "results"
+    
+    if not results_dir.exists():
+        pytest.fail(
+            f"Sample data not found at {results_dir}. "
+            f"Run INT-10 to create sample data."
+        )
+    
+    json_files = list(results_dir.glob("*.json"))
+    if len(json_files) == 0:
+        pytest.fail(
+            f"No JSON files found in {results_dir}. "
+            f"Run INT-10 to create sample data."
+        )
+    
+    return results_dir
