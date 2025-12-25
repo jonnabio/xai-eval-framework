@@ -13,6 +13,15 @@ All notable changes to this project will be documented in this file.
 - **Changed**: Refactored `train_random_forest_adult` to use the new class-based approach while maintaining backward compatibility.
 
 ## [Unreleased]
+### Added
+- REST API with FastAPI (INT-01 to INT-18)
+- Experiment execution endpoint
+- Results retrieval endpoints
+- Comprehensive error handling and logging
+- Docker support for deployment
+- Production configuration management
+
+See PR #[NUMBER] for complete details.
 
 ### Added (EXP1-14)
 - **Evaluation Framework**

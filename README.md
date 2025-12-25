@@ -65,6 +65,12 @@ xai-eval-framework/
 | **[EXP1: Adult Baseline](experiments/exp1_adult/README.md)** | Establishes a robust Random Forest baseline on census data to serve as a target for LIME/SHAP benchmarking. | ✅ Complete |
 | **EXP2: Semantic Eval** | (Planned) Evaluating natural language explanations using LLMs. | 📅 Pending |
 
+## 🔗 Integration Status
+Phase 1 integration is complete and under review:
+- **Backend PR**: [Link to PR] (FastAPI REST API)
+- **Frontend PR**: [Link to PR] (Next.js Dashboard)
+- **Review Guide**: [PR_REVIEW_GUIDE.md](pr_evidence/PR_REVIEW_GUIDE.md)
+
 ## ♻️ Reproducibility
 
 To ensure scientific rigor, this framework mandates:
