@@ -139,6 +139,7 @@ class SHAPTabularWrapper:
         # Initialize Explainer
         if self.model_type == "tree":
             logger.info("Initializing shap.TreeExplainer")
+            
             # TreeExplainer handles background data for 'interventional' feature perturbation
             # If model is XGBoost, it might need model.predict_proba depending on version, 
             # but usually passed directly.

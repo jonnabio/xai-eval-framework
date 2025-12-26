@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Experiment 1 - In Progress]
 
+### 2025-12-26 - EXP1-26 & EXP1-27 (Metrics & Experiments)
+- **Implemented**: `FaithfulnessMetric` in `src/metrics/faithfulness.py` using prediction gap and correlation (masking-based).
+- **Updated**: `ExperimentRunner` to use `FaithfulnessMetric` instead of R²-based Fidelity.
+- **Added**: Unit tests for Faithfulness metric.
+- **Executed**: Missing experimental combinations:
+    - **RF + LIME**: Success.
+    - **XGB + SHAP**: Partially completed (Blocked by `base_score` serialization bug in `xgboost`/`shap`).
+- **Refined**: Documentation compliance check.
+- **Added**: `docs/decisions/0013-faithfulness-metric.md` (ADR).
+
 ### 2025-12-16 - EXP1-08 Complete
 - **Added**: `AdultRandomForestTrainer` class in `src/models/tabular_models.py` for robust model lifecycle management.
 - **Added**: Comprehensive documentation suite (`docs/config_schema.md`, `docs/decisions/`, repository READMEs).

@@ -2,6 +2,7 @@ from .base import BaseMetric
 from .cost import CostMetric
 from .sparsity import SparsityMetric
 from .fidelity import FidelityMetric
+from .faithfulness import FaithfulnessMetric
 from .stability import StabilityMetric
 
 __all__ = [
@@ -9,5 +10,6 @@ __all__ = [
     "CostMetric",
     "SparsityMetric",
     "FidelityMetric",
+    "FaithfulnessMetric",
     "StabilityMetric"
 ]

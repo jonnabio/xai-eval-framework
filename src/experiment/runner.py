@@ -19,7 +19,7 @@ from src.data_loading.adult import load_adult
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 from src.evaluation.sampler import EvaluationSampler
-from src.metrics import FidelityMetric, StabilityMetric, SparsityMetric, CostMetric
+from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,7 @@ class ExperimentRunner:
         self.dataset = None
         self.model = None
         self.explainer = None
+        self.baseline_values = None
         self.results = {
             "experiment_metadata": {},
             "model_info": {},
@@ -78,6 +79,9 @@ class ExperimentRunner:
                 'y_test': y_test,
                 'feature_names': feature_names
             }
+            
+            # Compute baseline for Faithfulness metric (mean of training data)
+            self.baseline_values = np.mean(X_train, axis=0)
         else:
             raise ValueError(f"Unsupported dataset: {self.config.dataset}")
         
@@ -189,11 +193,19 @@ class ExperimentRunner:
             res = sparsity_m.compute(weights)
             metrics_results['sparsity'] = res['nonzero_percentage']
             
-        # FIDELITY
+        # FIDELITY (Refined to Faithfulness)
         if self.config.metrics.fidelity:
-            fidelity_m = FidelityMetric() # Default params
-            res = fidelity_m.compute(weights, model=self.model, data=instance_data)
-            metrics_results['fidelity'] = res['r2_score']
+            # Use new Faithfulness metric (prediction gap)
+            faithfulness_m = FaithfulnessMetric(top_k=5) # Default top_k
+            # Pass precomputed baseline
+            faithfulness_m.baseline_values = self.baseline_values
+            
+            res = faithfulness_m.compute(weights, model=self.model, data=instance_data)
+            
+            # Use correlation score as primary 'fidelity' metric for backward compatibility
+            metrics_results['fidelity'] = res['faithfulness_score']
+            # Store detail
+            metrics_results['faithfulness_gap'] = res['faithfulness_gap']
             
         # STABILITY
         if self.config.metrics.stability:
