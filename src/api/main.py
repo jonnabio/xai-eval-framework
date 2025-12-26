@@ -52,8 +52,14 @@ app.add_middleware(
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
 # Include routers
-app.include_router(health.router, prefix="/api")
+# Mount runs at root AND /api to support both conventions and fix frontend 404s
+app.include_router(runs.router)
 app.include_router(runs.router, prefix="/api")
+
+# Mount health at root AND /api
+app.include_router(health.router)
+app.include_router(health.router, prefix="/api")
+
 app.include_router(debug.router, prefix="/db")
 
 # Startup event
