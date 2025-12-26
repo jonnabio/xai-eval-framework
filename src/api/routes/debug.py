@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 from src.api.config import settings
 
-router = APIRouter(prefix="/debug", tags=["Debug"])
+router = APIRouter(tags=["Debug"])
 
 @router.get("/files")
 async def list_files():
