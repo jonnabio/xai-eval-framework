@@ -16,45 +16,12 @@ from datetime import datetime
 import logging
 
 from src.api.config import settings
-from src.api.routes import health, runs
-from src.api.middleware.exceptions import (
-    validation_exception_handler,
-    general_exception_handler
-)
-
-# Configure logging
-logging.basicConfig(
-    level=settings.LOG_LEVEL,
-    format=settings.LOG_FORMAT
-)
-logger = logging.getLogger(__name__)
-
-# Create FastAPI application
-app = FastAPI(
-    title=settings.API_TITLE,
-    description=settings.API_DESCRIPTION,
-    version=settings.API_VERSION,
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json"
-)
-
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
-    allow_credentials=settings.CORS_ALLOW_CREDENTIALS,
-    allow_methods=settings.CORS_ALLOW_METHODS,
-    allow_headers=settings.CORS_ALLOW_HEADERS,
-)
-
-# Register exception handlers
-app.add_exception_handler(RequestValidationError, validation_exception_handler)
-app.add_exception_handler(Exception, general_exception_handler)
-
+from src.api.routes import health, runs, debug
+# ...
 # Include routers
 app.include_router(health.router, prefix="/api")
 app.include_router(runs.router, prefix="/api")
+app.include_router(debug.router, prefix="/db")
 
 # Startup event
 @app.on_event("startup")
