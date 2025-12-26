@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: xai-eval-framework
+    env: docker
+    plan: free
+    region: ohio
+    envVars:
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: API_PORT
+        value: 8000
+      - key: PORT
+        value: 8000
+    healthCheckPath: /api/health
+    autoDeploy: true
