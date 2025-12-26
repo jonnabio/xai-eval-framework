@@ -52,7 +52,8 @@ def map_model_type(model_type_str: str) -> ModelType:
             "xgboost": ModelType.CLASSICAL,
             "resnet": ModelType.CNN,
             "bert": ModelType.TRANSFORMER,
-            "lstm": ModelType.RNN
+            "lstm": ModelType.RNN,
+            "classical": ModelType.CLASSICAL
         }
         if model_type_str.lower() in mapping:
             return mapping[model_type_str.lower()]
@@ -196,7 +197,11 @@ def transform_experiment_to_run(exp_data: Dict[str, Any]) -> Run:
     # method might be 'xai_method' or inside 'model_info.explainer_method'
     method = exp_data.get("xai_method") or exp_data.get("model_info", {}).get("explainer_method") or "unknown_method"
     dataset = exp_data.get("dataset") or meta.get("dataset") or "unknown_dataset"
-    timestamp_str = exp_data.get("timestamp") or meta.get("timestamp") or datetime.now().isoformat()
+    timestamp_val = exp_data.get("timestamp") or meta.get("timestamp") or datetime.now().isoformat()
+    if isinstance(timestamp_val, (int, float)):
+        timestamp_str = datetime.fromtimestamp(timestamp_val).isoformat()
+    else:
+        timestamp_str = str(timestamp_val)
     
     # 2. Map Enums
     # Default to classical if missing (as per common real data 'random_forest')
