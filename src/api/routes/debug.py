@@ -27,3 +27,32 @@ async def list_files():
         }
     except Exception as e:
         return {"error": str(e)}
+
+@router.get("/loader")
+async def debug_loader():
+    """Debug the data loader logic."""
+    try:
+        from src.api.services import data_loader
+        
+        exp_dirs = data_loader.discover_experiment_directories()
+        
+        details = []
+        for d in exp_dirs:
+            files = data_loader.find_result_files(d)
+            details.append({
+                "dir": str(d),
+                "has_results_dir": (d / "results").exists(),
+                "found_files": [str(f) for f in files]
+            })
+            
+        raw_experiments = data_loader.load_all_experiments()
+        
+        return {
+            "experiments_dir": str(data_loader.get_experiments_dir()),
+            "discovered_dirs": [str(d) for d in exp_dirs],
+            "details": details,
+            "loaded_experiments_count": len(raw_experiments),
+            "sample_experiment": raw_experiments[0] if raw_experiments else None
+        }
+    except Exception as e:
+        return {"error": str(e)}
