@@ -165,7 +165,7 @@ def _extract_metrics(exp_data: Dict[str, Any]) -> MetricSet:
             if not lst: return 0.0
             val = statistics.mean(lst)
             # Simple clamping for compliance
-            return max(0.0, min(1.0, float(val))) 
+            return float(val) 
 
         return MetricSet(
             Fidelity=safe_mean(fidelities),
