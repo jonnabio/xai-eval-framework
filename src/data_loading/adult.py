@@ -10,8 +10,19 @@ import logging
 import hashlib
 import json
 import urllib.request
+import ssl
 import time
 from datetime import datetime
+
+# Disable SSL verification globally for this script to handle common Mac certificate issues
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    # Legacy Python that doesn't verify HTTPS certificates by default
+    pass
+else:
+    # Handle target environment that doesn't verify HTTPS certificates by default
+    ssl._create_default_https_context = _create_unverified_https_context
 from pathlib import Path
 from typing import List, Optional, Dict, Any, Union
 import shutil

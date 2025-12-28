@@ -79,7 +79,7 @@ def main():
     
     # 3. Load Data
     logger.info("Loading Adult dataset...")
-    X_train, X_test, y_train, y_test = load_adult()
+    X_train, X_test, y_train, y_test, feature_names, preprocessor = load_adult()
     
     X_val, y_val = X_test, y_test
 

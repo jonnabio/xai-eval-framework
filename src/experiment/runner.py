@@ -18,7 +18,7 @@ from src.experiment.config import ExperimentConfig
 from src.data_loading.adult import load_adult
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
-from src.xai.dice_wrapper import DiCETabularWrapper
+# from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
 from src.evaluation.sampler import EvaluationSampler
 from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric, DomainAlignmentMetric, CounterfactualSensivtyMetric
 
@@ -121,6 +121,9 @@ class ExperimentRunner:
             cont_feats = feature_names
             cat_feats = []
             
+            cat_feats = []
+            
+            from src.xai.dice_wrapper import DiCETabularWrapper
             self.dice_explainer = DiCETabularWrapper(
                 model=self.model,
                 training_data=train_df,
@@ -150,14 +153,17 @@ class ExperimentRunner:
                 **params
             )
         elif self.config.explainer.method == "lime":
+            # Extract LIME specific params
+            params = self.config.explainer.params or {}
+            
             self.explainer = LIMETabularWrapper(
                 training_data=self.dataset['X_train'],
                 feature_names=self.dataset['feature_names'],
                 class_names=self.dataset.get('class_names', ['<=50K', '>50K']),
                 num_features=self.config.explainer.num_features or 10,
                 num_samples=self.config.explainer.num_samples or 1000,
-                random_state=self.config.random_seed
-                # mode='classification' is default for wrapper
+                random_state=self.config.random_seed,
+                **params
             )
         else:
             raise ValueError(f"Unsupported explainer: {self.config.explainer.method}")

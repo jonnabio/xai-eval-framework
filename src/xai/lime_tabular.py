@@ -33,7 +33,9 @@ class LIMETabularWrapper:
         num_samples: int = 5000,
         kernel_width: Optional[float] = None,
         discretize_continuous: bool = False,
-        random_state: int = 42
+        feature_selection: str = 'auto',
+        random_state: int = 42,
+        **kwargs
     ):
         """
         Initialize LIME wrapper with configuration.
@@ -46,7 +48,9 @@ class LIMETabularWrapper:
             num_samples: Number of perturbed samples for local surrogate training.
             kernel_width: Kernel width for the exponential kernel. None = auto.
             discretize_continuous: Whether to discretize continuous features.
+            feature_selection: Feature selection method (auto, none, forward_selection, etc).
             random_state: Random seed for reproducibility.
+            **kwargs: Additional LIME arguments.
         """
         # Validate inputs
         if training_data.shape[1] != len(feature_names):
@@ -63,7 +67,9 @@ class LIMETabularWrapper:
         self.num_samples = num_samples
         self.kernel_width = kernel_width
         self.discretize_continuous = discretize_continuous
+        self.feature_selection = feature_selection
         self.random_state = random_state
+        self.kwargs = kwargs
 
         # Initialize LIME Explainer
         # Note: categorical_features are not explicitly handled here yet as per prompts,
@@ -74,8 +80,10 @@ class LIMETabularWrapper:
             class_names=self.class_names,
             mode='classification',
             discretize_continuous=self.discretize_continuous,
+            feature_selection=self.feature_selection,
             kernel_width=self.kernel_width,
-            random_state=self.random_state
+            random_state=self.random_state,
+            **self.kwargs
         )
 
     def generate_explanations(
@@ -268,6 +276,7 @@ class LIMETabularWrapper:
             'num_samples': self.num_samples,
             'kernel_width': self.kernel_width,
             'discretize_continuous': self.discretize_continuous,
+            'feature_selection': self.feature_selection,
             'random_state': self.random_state,
             'feature_names': self.feature_names,
             'class_names': self.class_names,
