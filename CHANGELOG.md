@@ -23,6 +23,21 @@ All notable changes to this project will be documented in this file.
 - **Updated**: `ExperimentRunner` to integrate new metrics with configuration toggles.
 - **Verified**: Unit tests and integration tests for new metrics.
 
+### 2025-12-27 - EXP1-30 (Batch Experiment Runner)
+- **Implemented**: `BatchExperimentRunner` class in `src/experiment/batch_runner.py` with:
+    - Parallel execution using `ProcessPoolExecutor` (spawn context).
+    - Checkpointing to skip completed experiments.
+    - Result aggregation and manifest generation.
+- **Added**: CLI script `scripts/run_batch_experiments.py` for orchestration.
+- **Added**: `ADR-0016` documenting batch execution architecture.
+- **Added**: `tests/experiment/test_batch_runner.py` with full coverage.
+- **Dependencies**: Added `gitpython` for provenance tracking.
+
+### 2025-12-27 - Bug Fixes
+- **Fixed**: XGBoost + SHAP compatibility issue (`ValueError: [5E-1]`).
+    - Updated `SHAPTabularWrapper` to catch `TreeExplainer` parsing errors.
+    - Implemented automatic fallback to `KernelExplainer` for newer XGBoost models.
+
 ### 2025-12-16 - EXP1-08 Complete
 - **Added**: `AdultRandomForestTrainer` class in `src/models/tabular_models.py` for robust model lifecycle management.
 - **Added**: Comprehensive documentation suite (`docs/config_schema.md`, `docs/decisions/`, repository READMEs).

@@ -11,7 +11,7 @@ This experiment establishes the baseline for the XAI Evaluation Framework using 
 
 ## 🚀 Quick Start: Training Models
 
-We provide a **Master Training Runner** to train all models with consistent data splits.
+We provide a **Master Training Runner** to train models and a **Batch Experiment Runner** for parallel evaluation.
 
 ### 1. Default Run (Train Everything)
 Trains both Random Forest and XGBoost using default hyperparameters.
@@ -77,6 +77,14 @@ python scripts/run_llm_eval.py \
     --model gpt-4
 ```
 Output: `llm_eval.json` in the input directory.
+
+### 4. Running Batch Verification (Parallel)
+Run the full XAI evaluation suite across all models and explainers in parallel:
+```bash
+python scripts/run_batch_experiments.py --config-dir configs/experiments --output outputs/final_results.csv --parallel
+```
+This enables large-scale metric collection (Fidelity, Stability, Domain Alignment).
+**See Full Report**: [EVALUATION_REPORT.md](EVALUATION_REPORT.md)
 
 ## XAI Explanation Generation
 

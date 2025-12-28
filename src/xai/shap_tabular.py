@@ -143,22 +143,26 @@ class SHAPTabularWrapper:
             # TreeExplainer handles background data for 'interventional' feature perturbation
             # If model is XGBoost, it might need model.predict_proba depending on version, 
             # but usually passed directly.
-            self.explainer = shap.TreeExplainer(
-                model, 
-                data=self.background_data,
-                feature_perturbation="interventional",
-                model_output="probability" # Critical for getting proba units, not log-odds
-            )
+            try:
+                self.explainer = shap.TreeExplainer(
+                    model, 
+                    data=self.background_data,
+                    feature_perturbation="interventional",
+                    model_output="probability" # Critical for getting proba units, not log-odds
+                )
+            except ValueError as e:
+                # Handle specific known issue with SHAP parsing new XGBoost JSON formats
+                if "could not convert string to float" in str(e):
+                    logger.warning(
+                        f"shap.TreeExplainer failed to parse format: {e}. "
+                        "Falling back to shap.KernelExplainer (slower)."
+                    )
+                    self.model_type = "kernel" # Switch type
+                    self._init_kernel_explainer(model)
+                else:
+                    raise e
         else:
-            logger.info("Initializing shap.KernelExplainer")
-            if not hasattr(model, 'predict_proba'):
-                raise ValueError("Model must have predict_proba for KernelExplainer fallback.")
-            
-            # KernelExplainer needs a callable
-            self.explainer = shap.KernelExplainer(
-                model.predict_proba, 
-                self.background_data
-            )
+            self._init_kernel_explainer(model)
 
         # Check expected value (can be list or scalar)
         # For 'probability' output, it matches class probabilities
@@ -170,6 +174,18 @@ class SHAPTabularWrapper:
                  self.expected_value = float(self.explainer.expected_value[0])
         else:
             self.expected_value = float(self.explainer.expected_value)
+            
+    def _init_kernel_explainer(self, model: Any):
+        """Helper to initialize KernelExplainer safely."""
+        logger.info("Initializing shap.KernelExplainer")
+        if not hasattr(model, 'predict_proba'):
+            raise ValueError("Model must have predict_proba for KernelExplainer fallback.")
+            
+        # KernelExplainer needs a callable
+        self.explainer = shap.KernelExplainer(
+            model.predict_proba, 
+            self.background_data
+        )
 
     def generate_explanations(
         self,
