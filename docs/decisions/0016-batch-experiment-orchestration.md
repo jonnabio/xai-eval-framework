@@ -1,10 +1,10 @@
 # 16. Batch Experiment Orchestration
 
-Date: 2025-12-27
+Date: 2025-12-28
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
@@ -18,31 +18,29 @@ Key requirements:
 
 ## Decision
 
-We will implement a `BatchExperimentRunner` class and a corresponding CLI `run_batch_experiments.py`.
+We implemented a `BatchExperimentRunner` class and a corresponding CLI `run_batch_experiments.py`.
 
 ### 1. Parallelism Strategy
-We will use `concurrent.futures.ProcessPoolExecutor` for parallelism.
+We utilize `concurrent.futures.ProcessPoolExecutor` for parallelism.
 -   **Why**: XAI computations (SHAP/LIME) are CPU-intensive. Threading is limited by the GIL.
--   **Windows Consideration**: Windows does not support `fork()`. We must use the `spawn` start method. This requires that the worker function be picklable (top-level function) and that we guard the entry point with `if __name__ == '__main__':`.
--   **Fallback**: We will include a sequential mode for debugging and environments where multiprocessing fails.
+-   **Windows Consideration**: Windows does not support `fork()`. We use the `spawn` start method. This requires that the worker function be picklable (top-level) and guarded by `if __name__ == '__main__':`.
+-   **Fallback**: A sequential mode is included for debugging.
 
 ### 2. Checkpointing
-We will use file-based checkpointing.
+We use file-based checkpointing.
 -   Before running a config, strict check for `results.json` in the target config's `output_dir`.
--   If it exists, the experiment is skipped, but its results are loaded and included in the final aggregation report.
+-   If it exists, the experiment is skipped, but its results are included in the final aggregation report.
 
 ### 3. Error Handling
 -   **Strategy**: "Continue on Error".
--   Exceptions within an individual experiment will be caught, logged to a separate `batch_failures.log`, and the batch will continue.
--   The final exit code of the CLI will be non-zero if *any* experiment failed, alerting the user to inspect the logs.
+-   Exceptions within experiments are caught and logged; the batch continues.
+-   The final exit code is non-zero if *any* experiment failed.
 
 ### 4. Metadata & Provenance
-A `batch_manifest.json` will be generated at the end of the run containing:
+A `batch_manifest.json` is generated containing:
 -   Timestamp
 -   Git Commit Hash
--   List of executed config IDs
--   List of skipped config IDs
--   List of failed config IDs
+-   List of executed, skipped, and failed config IDs
 -   Global execution time
 
 ## Consequences
@@ -50,12 +48,12 @@ A `batch_manifest.json` will be generated at the end of the run containing:
 **Positive**:
 -   Significant reduction in total wall-clock time for large evaluation suites.
 -   Improved reproducibility via batch manifests.
--   Easier management of long-running jobs (set and forget).
+-   Easier management of long-running jobs.
 
 **Negative**:
--   Added complexity in debugging parallel processes (logs can be interleaved, though we will configure logging to mitigate this).
--   Memory usage spikes if `max_workers` is set too high for memory-intensive datasets. User must tune `--workers`.
+-   Added complexity in debugging parallel processes.
+-   Memory usage spikes if `max_workers` is set too high.
 
 ## Compliance
 
--   Must be updated if we move to a distributed backend (e.g., Celery/Ray) in the future, though `ProcessPoolExecutor` abstraction makes this transition easier.
+-   Must be updated if we move to a distributed backend (e.g., Celery/Ray).
