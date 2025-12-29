@@ -76,7 +76,7 @@ def main():
         logger.info(f"Using config: {args.config}")
         model, metrics = train_random_forest_adult(
             config_path=args.config,
-            force_retrain=args.force_retrain,
+            force_retrain=args.force,
             verbose=args.verbose
         )
         

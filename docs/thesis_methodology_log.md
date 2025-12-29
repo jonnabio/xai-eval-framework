@@ -22,7 +22,7 @@ This document tracks the evolution of the experimental methodology for the PhD t
 ### 3. XAI Generation
 - **Methods**:
     - **SHAP**: `TreeExplainer` for efficiency and path-dependent feature perturbation.
-    - **LIME**: `LimeTabularExplainer` with discretized continuous features.
+    - **LIME**: `LimeTabularExplainer` without discretization (continuous features preserved) and tuned hyperparameters (5000 samples, auto kernel width).
 - **Wrapper Abstraction**: Unifying interface returning normalized feature importance weights and textual top-k features.
 
 ### 4. Evaluation Framework

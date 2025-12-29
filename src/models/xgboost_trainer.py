@@ -172,18 +172,17 @@ class XGBoostTrainer:
         # but for now we rely on the config passed in init.
         
         # 3. Create Classifier
-        self.model = xgb.XGBClassifier(**self.config)
+        # Prepare config with early checking (XGBoost >= 1.6 requires it in init)
+        train_config = self.config.copy()
+        if X_val is not None and y_val is not None:
+            train_config['early_stopping_rounds'] = 10
+            
+        self.model = xgb.XGBClassifier(**train_config)
         
         # 4. Prepare fit arguments
         fit_params = {}
         if X_val is not None and y_val is not None:
             fit_params['eval_set'] = [(X_val, y_val)]
-            fit_params['eval_set'] = [(X_val, y_val)]
-            # Note: early_stopping_rounds is passed to fit() to prevent overfitting.
-            # This is a key difference from RF, which generally handles noise via bagging.
-            # rounds=10 is a conservative setting for this dataset size.
-            # Performance: Early stopping can significantly reduce training time if conversion is fast.
-            fit_params['early_stopping_rounds'] = 10
             fit_params['verbose'] = False # Keep logs clean unless requested
             
         # 5. Train

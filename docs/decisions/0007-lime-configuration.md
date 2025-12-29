@@ -12,9 +12,11 @@ We will use the following LIME configuration for the `LimeTabularExplainer`:
 *   **num_features**: `10`
     *   Top features to include in the generic explanation output. Matches common XAI usage patterns.
 *   **num_samples**: `5000`
-    *   Number of perturbed samples used to train the local surrogate linear model.
+    *   Number of perturbed samples used to train the local surrogate linear model. Tuned in EXP1-31 to maximize stability (Stability: 0.99).
 *   **kernel_width**: `None`
-    *   We let LIME auto-calculate this (defaults to `sqrt(num_features) * 0.75`).
+    *   We let LIME auto-calculate this (defaults to `sqrt(num_features) * 0.75`). Tuned in EXP1-31, finding that fixed widths (0.25-2.0) yielded poor fidelity (<0.3) for this dataset, while auto-width achieved R2 > 0.6.
+*   **feature_selection**: `"auto"`
+    *   [NEW] Explicitly enabled. Tuned in EXP1-31, showing slightly better Fidelity and Stability than "none".
 *   **discretize_continuous**: `False`
     *   We choose NOT to discretize. The Adult dataset has continuous features like `age`, `capital-gain`. Discretization introduces binning artifacts that can obscure the true decision boundary of the complex model (RF/XGB). We prefer the local linear approximation on the continuous values.
 *   **mode**: `"classification"`

@@ -1,0 +1,27 @@
+name: exp1_lime_k0.5_n1000_fsauto
+description: LIME Hyperparameter Tuning (EXP1-31)
+dataset: adult
+version: 1.0.0
+random_seed: 42
+model:
+  name: xgboost
+  path: experiments/exp1_adult/models/xgboost/xgb_model.pkl
+explainer:
+  method: lime
+  num_features: 10
+  params:
+    kernel_width: 0.5
+    feature_selection: auto
+  num_samples: 1000
+sampling:
+  strategy: stratified
+  samples_per_class: 10
+  random_seed: 42
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: false
+  cost: true
+  stability_perturbations: 5
+  stability_noise_level: 0.01
+output_dir: experiments/exp1_adult/results/tuning/exp1_lime_k0.5_n1000_fsauto
