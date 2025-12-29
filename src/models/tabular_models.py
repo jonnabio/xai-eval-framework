@@ -239,7 +239,7 @@ def save_model_with_metadata(
     """
     try:
         output_config = config['output']
-        model_dir = Path(output_config['model_dir'])
+        model_dir = Path(output_config['models_dir'])
         
         # 1. Create directory
         model_dir.mkdir(parents=True, exist_ok=True)
@@ -460,9 +460,9 @@ class AdultRandomForestTrainer:
             Tuple[RandomForestClassifier, Dict[str, Any]]: Trained model and metrics.
         """
         output_config = self.config['output']
-        model_dir = Path(output_config['model_dir'])
+        model_dir = Path(output_config['models_dir'])
         model_dir.mkdir(parents=True, exist_ok=True)
-        results_dir = Path(output_config['results_dir'])
+        results_dir = Path(output_config['metrics_dir'])
         results_dir.mkdir(parents=True, exist_ok=True)
         
         model_path = model_dir / output_config['model_filename']
