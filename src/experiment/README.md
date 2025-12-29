@@ -35,6 +35,17 @@ results = runner.run()
 
 ## Configuration Schema
 
+### Batch Execution (`batch_runner.py`)
+Orchestrator for executing multiple experiments in parallel.
+- **Features**: Parallel execution (ProcessPoolExecutor), Checkpointing (skips existing results), Result Aggregation.
+- **Class**: `BatchExperimentRunner`.
+- **Usage**:
+    ```python
+    from src.experiment.batch_runner import BatchExperimentRunner
+    runner = BatchExperimentRunner(config_paths)
+    df, manifest = runner.run(parallel=True)
+    ```
+
 See `src/experiment/config.py` for the full schema. Key sections:
 - `model`: Path to saved joblib model.
 - `explainer`: 'shap' or 'lime' with parameters.

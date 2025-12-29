@@ -18,8 +18,9 @@ from src.experiment.config import ExperimentConfig
 from src.data_loading.adult import load_adult
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
+from src.xai.dice_wrapper import DiCETabularWrapper
 from src.evaluation.sampler import EvaluationSampler
-from src.metrics import FidelityMetric, StabilityMetric, SparsityMetric, CostMetric
+from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric, DomainAlignmentMetric, CounterfactualSensivtyMetric
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +37,8 @@ class ExperimentRunner:
         self.dataset = None
         self.model = None
         self.explainer = None
+        self.dice_explainer = None # DiCE wrapper
+        self.baseline_values = None
         self.results = {
             "experiment_metadata": {},
             "model_info": {},
@@ -78,6 +81,11 @@ class ExperimentRunner:
                 'y_test': y_test,
                 'feature_names': feature_names
             }
+            
+            # Compute baseline for Faithfulness metric (mean of training data)
+            self.baseline_values = np.mean(X_train, axis=0)
+            
+
         else:
             raise ValueError(f"Unsupported dataset: {self.config.dataset}")
         
@@ -87,7 +95,40 @@ class ExperimentRunner:
              raise FileNotFoundError(f"Model not found at {self.config.model.path}")
         
         # Assuming joblib load works for both RF and XGB as implemented in EXP1-10
+        # Assuming joblib load works for both RF and XGB as implemented in EXP1-10
         self.model = joblib.load(self.config.model.path)
+        
+        # Setup DiCE if needed (AFTER MODEL LOAD)
+        if hasattr(self.config.metrics, 'counterfactual') and self.config.metrics.counterfactual:
+            logger.info("Initializing DiCE explainer...")
+            # DiCE needs a dataframe with target
+            # Reconstruct frame from dataset dict
+            X_train = self.dataset['X_train']
+            y_train = self.dataset['y_train']
+            feature_names = self.dataset['feature_names']
+            
+            train_df = pd.DataFrame(X_train, columns=feature_names)
+            
+            if self.config.dataset == 'adult':
+                target_col = 'income' # Known for adult
+            else:
+                target_col = 'target' 
+                
+            train_df[target_col] = y_train
+            
+            # Identify features
+            # For processed data (OHE), everything is theoretically continuous or 0/1.
+            cont_feats = feature_names
+            cat_feats = []
+            
+            self.dice_explainer = DiCETabularWrapper(
+                model=self.model,
+                training_data=train_df,
+                target_column=target_col,
+                continuous_features=cont_feats,
+                categorical_features=cat_feats
+            )
+
         
         # 3. Initialize Explainer
         logger.info(f"Initializing {self.config.explainer.method.upper()} explainer")
@@ -96,13 +137,17 @@ class ExperimentRunner:
             # Map 'tree'/'kernel' to wrapper 'model_type'
             model_type = self.config.explainer.explainer_type or "tree"
             
+            # Extract n_background_samples if present, default to 100
+            params = self.config.explainer.params.copy()
+            n_bg = params.pop('n_background_samples', 100)
+            
             self.explainer = SHAPTabularWrapper(
                 model=self.model,
                 training_data=self.dataset['X_train'],
                 feature_names=self.dataset['feature_names'],
                 model_type=model_type,
-                n_background_samples=100, # Default or from params?
-                **self.config.explainer.params
+                n_background_samples=n_bg,
+                **params
             )
         elif self.config.explainer.method == "lime":
             self.explainer = LIMETabularWrapper(
@@ -189,12 +234,59 @@ class ExperimentRunner:
             res = sparsity_m.compute(weights)
             metrics_results['sparsity'] = res['nonzero_percentage']
             
-        # FIDELITY
+        # FIDELITY (Refined to Faithfulness)
         if self.config.metrics.fidelity:
-            fidelity_m = FidelityMetric() # Default params
-            res = fidelity_m.compute(weights, model=self.model, data=instance_data)
-            metrics_results['fidelity'] = res['r2_score']
+            # Use new Faithfulness metric (prediction gap)
+            faithfulness_m = FaithfulnessMetric(top_k=5) # Default top_k
+            # Pass precomputed baseline
+            faithfulness_m.baseline_values = self.baseline_values
             
+            res = faithfulness_m.compute(weights, model=self.model, data=instance_data)
+            
+            # Use correlation score as primary 'fidelity' metric for backward compatibility
+            metrics_results['fidelity'] = res['faithfulness_score']
+            # Store detail
+            metrics_results['faithfulness_gap'] = res['faithfulness_gap']
+            
+        # DOMAIN ALIGNMENT (Expert Priors)
+        if hasattr(self.config.metrics, 'domain') and self.config.metrics.domain:
+            domain_m = DomainAlignmentMetric()
+            # features are in self.dataset['feature_names']
+            ft_names = self.dataset['feature_names']
+            
+            # weights is numpy array (n_features,)
+            res = domain_m.compute(weights, ft_names, k=5)
+            metrics_results.update(res)
+            
+        # COUNTERFACTUAL SENSITIVITY
+        if hasattr(self.config.metrics, 'counterfactual') and self.config.metrics.counterfactual and self.dice_explainer:
+            try:
+                # Generate CF
+                # Instance is a Series, need DataFrame
+                query_df = instance_data.to_frame().T
+                # Feature names should match training data
+                 
+                cfs_list = self.dice_explainer.generate_counterfactuals(query_df, total_CFs=1)
+                
+                if cfs_list and not cfs_list[0].empty:
+                    cf_df = cfs_list[0]
+                    # Compute metric
+                    cf_metric = CounterfactualSensivtyMetric()
+                    # Need original instance as DF
+                    res = cf_metric.compute(
+                        feature_importance=weights,
+                        feature_names=feature_names,
+                        original_instance=query_df,
+                        cf_files=cf_df,
+                        k=5
+                    )
+                    metrics_results.update(res)
+                else:
+                     metrics_results['cf_sensitivity'] = 0.0
+            except Exception as e:
+                logger.error(f"Error computing CF sensitivity: {e}")
+                metrics_results['cf_sensitivity'] = 0.0
+
         # STABILITY
         if self.config.metrics.stability:
              # Define helper for regeneration

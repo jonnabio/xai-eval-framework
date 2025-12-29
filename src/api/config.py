@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     # Paths
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     EXPERIMENTS_DIR: Path = BASE_DIR / "experiments"
+    CONFIGS_DIR: Path = BASE_DIR / "configs/experiments"
     
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")

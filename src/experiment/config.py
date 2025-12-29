@@ -46,7 +46,10 @@ class MetricsConfig(BaseModel):
     fidelity: bool = True
     stability: bool = True
     sparsity: bool = True
+    sparsity: bool = True
     cost: bool = True
+    domain: bool = True # Domain Alignment (Expert Priors)
+    counterfactual: bool = False # Counterfactual Sensitivity (Experimental)
     
     # Metric-specific
     stability_perturbations: int = Field(10, ge=1)
