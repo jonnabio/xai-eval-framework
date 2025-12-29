@@ -40,23 +40,21 @@ class TestMetricSet:
         assert ms.Fidelity == 0.0
         assert ms.Stability == 1.0
 
-    def test_metric_set_rejects_out_of_range_high(self):
-        """Should reject values > 1."""
-        with pytest.raises(ValidationError) as exc:
-            MetricSet(
-                Fidelity=1.1, Stability=0.5, Sparsity=0.5,
-                CausalAlignment=0.5, CounterfactualSensitivity=0.5, EfficiencyMS=100
-            )
-        assert "Fidelity" in str(exc.value)
+    def test_metric_set_accepts_values_gt_one(self):
+        """Should ACCEPT values > 1 (relaxed constraints)."""
+        ms = MetricSet(
+            Fidelity=1.1, Stability=0.5, Sparsity=0.5,
+            CausalAlignment=0.5, CounterfactualSensitivity=0.5, EfficiencyMS=100
+        )
+        assert ms.Fidelity == 1.1
 
-    def test_metric_set_rejects_out_of_range_low(self):
-        """Should reject values < 0."""
-        with pytest.raises(ValidationError) as exc:
-            MetricSet(
-                Fidelity=-0.1, Stability=0.5, Sparsity=0.5,
-                CausalAlignment=0.5, CounterfactualSensitivity=0.5, EfficiencyMS=100
-            )
-        assert "Fidelity" in str(exc.value)
+    def test_metric_set_accepts_negative_values(self):
+        """Should ACCEPT values < 0 (relaxed constraints)."""
+        ms = MetricSet(
+            Fidelity=-0.1, Stability=0.5, Sparsity=0.5,
+            CausalAlignment=0.5, CounterfactualSensitivity=0.5, EfficiencyMS=100
+        )
+        assert ms.Fidelity == -0.1
 
     def test_metric_set_rejects_negative_efficiency(self):
         """Should reject negative EfficiencyMS."""

@@ -4,6 +4,40 @@ All notable changes to this project will be documented in this file.
 
 ## [Experiment 1 - In Progress]
 
+### 2025-12-26 - EXP1-26 & EXP1-27 (Metrics & Experiments)
+- **Implemented**: `FaithfulnessMetric` in `src/metrics/faithfulness.py` using prediction gap and correlation (masking-based).
+- **Updated**: `ExperimentRunner` to use `FaithfulnessMetric` instead of R²-based Fidelity.
+- **Added**: Unit tests for Faithfulness metric.
+- **Executed**: Missing experimental combinations:
+    - **RF + LIME**: Success.
+    - **XGB + SHAP**: Partially completed (Blocked by `base_score` serialization bug in `xgboost`/`shap`).
+- **Refined**: Documentation compliance check.
+- **Added**: `docs/decisions/0013-faithfulness-metric.md` (ADR).
+
+### 2025-12-27 - EXP1-28 & EXP1-29 (Advanced Metrics)
+- **Implemented**: `DomainAlignmentMetric` for validating explanations against labor economics priors.
+    - Added `ADR-0014` documenting the "Ground Truth" feature sets (Tier 1/Tier 2).
+- **Implemented**: `CounterfactualSensitivityMetric` using `dice-ml`.
+    - Created `DiCETabularWrapper` for counterfactual generation.
+    - Added `ADR-0015` documenting the sensitivity logic.
+- **Updated**: `ExperimentRunner` to integrate new metrics with configuration toggles.
+- **Verified**: Unit tests and integration tests for new metrics.
+
+### 2025-12-27 - EXP1-30 (Batch Experiment Runner)
+- **Implemented**: `BatchExperimentRunner` class in `src/experiment/batch_runner.py` with:
+    - Parallel execution using `ProcessPoolExecutor` (spawn context).
+    - Checkpointing to skip completed experiments.
+    - Result aggregation and manifest generation.
+- **Added**: CLI script `scripts/run_batch_experiments.py` for orchestration.
+- **Added**: `ADR-0016` documenting batch execution architecture.
+- **Added**: `tests/experiment/test_batch_runner.py` with full coverage.
+- **Dependencies**: Added `gitpython` for provenance tracking.
+
+### 2025-12-27 - Bug Fixes
+- **Fixed**: XGBoost + SHAP compatibility issue (`ValueError: [5E-1]`).
+    - Updated `SHAPTabularWrapper` to catch `TreeExplainer` parsing errors.
+    - Implemented automatic fallback to `KernelExplainer` for newer XGBoost models.
+
 ### 2025-12-16 - EXP1-08 Complete
 - **Added**: `AdultRandomForestTrainer` class in `src/models/tabular_models.py` for robust model lifecycle management.
 - **Added**: Comprehensive documentation suite (`docs/config_schema.md`, `docs/decisions/`, repository READMEs).

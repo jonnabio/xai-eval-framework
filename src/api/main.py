@@ -16,7 +16,7 @@ from datetime import datetime
 import logging
 
 from src.api.config import settings
-from src.api.routes import health, runs
+from src.api.routes import health, runs, debug, batch
 from src.api.middleware.exceptions import (
     validation_exception_handler,
     general_exception_handler
@@ -51,10 +51,17 @@ app.add_middleware(
 # Register exception handlers
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
-
 # Include routers
-app.include_router(health.router, prefix="/api")
+# Mount runs at root AND /api to support both conventions and fix frontend 404s
+app.include_router(runs.router)
 app.include_router(runs.router, prefix="/api")
+
+# Mount health at root AND /api
+app.include_router(health.router)
+app.include_router(health.router, prefix="/api")
+
+app.include_router(debug.router, prefix="/db")
+app.include_router(batch.router, prefix="/api")
 
 # Startup event
 @app.on_event("startup")

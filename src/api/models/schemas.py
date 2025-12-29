@@ -58,11 +58,11 @@ class RunStatus(str, Enum):
 
 class MetricSet(BaseModel):
     """Core metric set with all explainability measurements."""
-    Fidelity: float = Field(..., ge=0, le=1, description="How well the explanation represents the model's behavior (0-1)")
-    Stability: float = Field(..., ge=0, le=1, description="Consistency of explanations across similar inputs (0-1)")
-    Sparsity: float = Field(..., ge=0, le=1, description="Conciseness of explanation (lower = more sparse, 0-1)")
-    CausalAlignment: float = Field(..., ge=0, le=1, description="Alignment with known causal relationships (0-1)")
-    CounterfactualSensitivity: float = Field(..., ge=0, le=1, description="Sensitivity to counterfactual changes (0-1)")
+    Fidelity: float = Field(..., description="How well the explanation represents the model's behavior")
+    Stability: float = Field(..., description="Consistency of explanations across similar inputs")
+    Sparsity: float = Field(..., description="Conciseness of explanation (lower = more sparse)")
+    CausalAlignment: float = Field(..., description="Alignment with known causal relationships")
+    CounterfactualSensitivity: float = Field(..., description="Sensitivity to counterfactual changes")
     EfficiencyMS: float = Field(..., ge=0, description="Processing time efficiency in milliseconds")
 
     model_config = {

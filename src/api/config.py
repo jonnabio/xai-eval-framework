@@ -36,6 +36,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
         "http://localhost:3001",
         "http://127.0.0.1:3001",
+        "https://xai-benchmark.onrender.com",
     ]
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ["*"]
@@ -44,6 +45,7 @@ class Settings(BaseSettings):
     # Paths
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     EXPERIMENTS_DIR: Path = BASE_DIR / "experiments"
+    CONFIGS_DIR: Path = BASE_DIR / "configs/experiments"
     
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
