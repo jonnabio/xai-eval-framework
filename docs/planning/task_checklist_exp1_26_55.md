@@ -60,7 +60,7 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Implement `BatchExperimentRunner` class
     - [x] Add CLI interface
     - [x] Implement checkpointing & parallelization
-    - [ ] Validate aggregation logic
+    - [x] Validate aggregation logic
 
 ## PHASE B: LLM-BASED SEMANTIC EVALUATION
 **Duration**: Weeks 3-5
@@ -93,9 +93,9 @@ To maximize efficiency, tasks are split between two workstations based on resour
 **Duration**: Weeks 5-7
 **Objective**: Scientific rigor (variance, cross-validation, significance)
 
-- [ ] **EXP1-36**: Multi-Run Reproducibility Study 🔥 P0
-    - [ ] Run 4 combinations × 10 seeds
-    - [ ] Compute CV, CI, and variance analysis
+- [x] **EXP1-36**: Multi-Run Reproducibility Study 🔥 P0
+    - [x] Run 4 combinations × 10 seeds
+    - [x] Compute CV, CI, and variance analysis
 - [ ] **EXP1-37**: Cross-Validation Framework ⚡ P1
     - [ ] Implement 5-fold StratifiedKFold
     - [ ] Train/Explain/Eval per fold
@@ -132,11 +132,11 @@ To maximize efficiency, tasks are split between two workstations based on resour
 **Duration**: Week 1 (Deployment Phase)
 **Objective**: Integrate all EXP1 results into Next.js dashboard
 
-- [ ] **EXP1-46**: Integrate Advanced Metrics into Dashboard Backend 🔥 P0
-    - [ ] Add Pydantic models for Advanced/LLM metrics
-    - [ ] Implement `ExperimentDataLoader`
-    - [ ] Add new API endpoints
-    - [ ] Update Swagger docs
+- [x] **EXP1-46**: Integrate Advanced Metrics into Dashboard Backend 🔥 P0
+    - [x] Add Pydantic models for Advanced/LLM metrics
+    - [x] Implement `ExperimentDataLoader`
+    - [x] Add new API endpoints
+    - [x] Update Swagger docs
 - [ ] **EXP1-47**: Build Dashboard Frontend Components for All Metrics ⚡ P1
     - [ ] Build `EnhancedMetricsDashboard`
     - [ ] Build `RadarComparison`

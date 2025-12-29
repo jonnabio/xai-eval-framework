@@ -57,6 +57,12 @@ All notable changes to this project will be documented in this file.
 
 See PR #[NUMBER] for complete details.
 
+### Added (EXP1-46 - Dashboard Integration)
+- **Detailed Results Endpoint**: `GET /runs/{run_id}/details` for full experiment data.
+- **Instance Pagination**: `GET /runs/{run_id}/instances` for granular explanation data.
+- **Service Layer**: Updated `data_loader.py` with caching and `transformer.py` with detailed Pydantic models.
+- **Testing**: Added `tests/api/test_detailed_routes.py` covering new endpoints.
+
 ### Added (EXP1-14)
 - **Evaluation Framework**
     - `src/evaluation/sampler.py`: Stratified sampling (TP/TN/FP/FN).

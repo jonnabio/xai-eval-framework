@@ -13,7 +13,9 @@ import statistics
 
 from src.api.models.schemas import (
     Run, MetricSet, LlmEval, LikertScores,
-    ModelType, Dataset, XaiMethod, RunStatus
+    ModelType, Dataset, XaiMethod, RunStatus,
+    ExperimentResult, ExperimentMetadata, ModelInfo,
+    InstanceEvaluation, MetricStatistics
 )
 
 def generate_run_id(
@@ -272,3 +274,89 @@ def transform_experiment_to_run(exp_data: Dict[str, Any]) -> Run:
     )
     
     return run
+
+
+def _compute_metric_stats(values: List[float]) -> MetricStatistics:
+    """Compute statistics for a list of metric values."""
+    if not values:
+        return MetricStatistics(mean=0.0, std=0.0, min=0.0, max=0.0, median=0.0)
+    
+    return MetricStatistics(
+        mean=float(statistics.mean(values)),
+        std=float(statistics.stdev(values)) if len(values) > 1 else 0.0,
+        min=float(min(values)),
+        max=float(max(values)),
+        median=float(statistics.median(values))
+    )
+
+def transform_experiment_to_result(exp_data: Dict[str, Any]) -> ExperimentResult:
+    """
+    Transform raw experiment data into detailed ExperimentResult model.
+    """
+    # 1. Metadata
+    meta = exp_data.get("experiment_metadata", {})
+    metadata = ExperimentMetadata(
+        name=meta.get("name") or exp_data.get("model_name", "unknown"),
+        dataset=meta.get("dataset") or exp_data.get("dataset", "unknown"),
+        timestamp=meta.get("timestamp") or datetime.now().isoformat(),
+        config_version=meta.get("config_version"),
+        random_seed=meta.get("random_seed"),
+        duration_seconds=meta.get("duration_seconds")
+    )
+
+    # 2. Model Info
+    model_info_raw = exp_data.get("model_info", {})
+    model_info = ModelInfo(
+        name=model_info_raw.get("name") or exp_data.get("model_name", "unknown"),
+        path=model_info_raw.get("path"),
+        explainer_method=model_info_raw.get("explainer_method") or exp_data.get("xai_method")
+    )
+
+    # 3. Instance Evaluations & Aggregations
+    instances = exp_data.get("instance_evaluations", [])
+    instance_models = []
+    
+    # Track metrics for aggregation
+    metric_collections: Dict[str, List[float]] = {}
+
+    for inst in instances:
+        # Convert dictionary metrics
+        m_dict = inst.get("metrics", {})
+        
+        # Collect for aggregation
+        for k, v in m_dict.items():
+            if k not in metric_collections:
+                metric_collections[k] = []
+            if isinstance(v, (int, float)):
+                metric_collections[k].append(float(v))
+        
+        # Create InstanceEvaluation model
+        ie = InstanceEvaluation(
+            instance_id=inst.get("instance_id"),
+            true_label=inst.get("true_label"),
+            prediction=inst.get("prediction"),
+            prediction_correct=inst.get("prediction_correct"),
+            quadrant=inst.get("quadrant"),
+            metrics={k: float(v) for k, v in m_dict.items() if isinstance(v, (int, float))},
+            explanation=inst.get("explanation")
+        )
+        instance_models.append(ie)
+
+    # 4. Computed Aggregated Metrics
+    # If "aggregated_metrics" exists in JSON (from batch runner), use it?
+    # Actually, batch runner aggregates across seeds, not instances.
+    # The individual result file might not have 'aggregated_metrics' block with stats.
+    # So we compute fresh from instances.
+    
+    aggregated_metrics = {}
+    for metric_name, values in metric_collections.items():
+        stats = _compute_metric_stats(values)
+        aggregated_metrics[metric_name] = stats
+
+    # 5. Construct Result
+    return ExperimentResult(
+        metadata=metadata,
+        model_info=model_info,
+        aggregated_metrics=aggregated_metrics,
+        instance_evaluations=instance_models
+    )

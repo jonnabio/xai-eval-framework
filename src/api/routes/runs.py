@@ -11,8 +11,14 @@ from typing import Optional, List
 from datetime import datetime
 import logging
 
-from src.api.models.schemas import Run, RunsResponse, RunResponse
-from src.api.services.data_loader import load_experiments_with_filters, load_all_experiments
+from src.api.models.schemas import (
+    Run, RunsResponse, RunResponse,
+    ExperimentResultResponse, InstancesResponse
+)
+from src.api.services.data_loader import (
+    load_experiments_with_filters, load_all_experiments,
+    get_experiment_result, get_instances_paginated
+)
 from src.api.services.transformer import transform_experiment_to_run
 from src.api.config import settings
 
@@ -225,4 +231,111 @@ async def get_run(run_id: str):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error loading run: {str(e)}"
+        )
+
+
+@router.get(
+    "/runs/{run_id}/details",
+    response_model=ExperimentResultResponse,
+    summary="Get Detailed Results",
+    description="Get complete experiment results including aggregated metrics and metadata",
+    tags=["Runs"]
+)
+async def get_run_details(run_id: str):
+    """
+    Get detailed breakdown of experiment results.
+    """
+    try:
+        result = get_experiment_result(run_id)
+        if not result:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Run not found: {run_id}"
+            )
+            
+        return ExperimentResultResponse(
+            data=result,
+            metadata={
+                "version": settings.API_VERSION,
+                "timestamp": datetime.now().isoformat()
+            }
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting detailed results for {run_id}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error loading details: {str(e)}"
+        )
+
+
+@router.get(
+    "/runs/{run_id}/instances",
+    response_model=InstancesResponse,
+    summary="Get Instance Evaluations",
+    description="Get paginated list of instance-level evaluations",
+    tags=["Runs"]
+)
+async def get_run_instances(
+    run_id: str,
+    limit: int = Query(
+        settings.RESULTS_DEFAULT_PAGE_SIZE,
+        ge=1,
+        le=settings.RESULTS_MAX_INSTANCES_PER_REQUEST,
+        description=f"Number of instances (max: {settings.RESULTS_MAX_INSTANCES_PER_REQUEST})"
+    ),
+    offset: int = Query(
+        0,
+        ge=0,
+        description="Number of instances to skip"
+    )
+):
+    """
+    Get paginated instance evaluations.
+    """
+    try:
+        # Verify run exists first (optional, but good for 404)
+        # get_instances_paginated returns empty list if run not found, 
+        # but we might want explicit 404.
+        # But for efficiency, we just call the service. 
+        # Service returns tuple (List, total). If total is 0, it might mean empty or not found.
+        # To be strict, check existence.
+        
+        # Check existence efficiently?
+        # get_experiment_result is cached.
+        result = get_experiment_result(run_id)
+        if not result:
+             raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Run not found: {run_id}"
+            )
+        
+        instances, total = get_instances_paginated(run_id, offset, limit)
+        
+        pagination = {
+            "total": total,
+            "limit": limit,
+            "offset": offset,
+            "returned": len(instances),
+            "hasNext": (offset + limit) < total,
+            "hasPrev": offset > 0
+        }
+        
+        return InstancesResponse(
+            data=instances,
+            pagination=pagination,
+            metadata={
+                "version": settings.API_VERSION,
+                "timestamp": datetime.now().isoformat()
+            }
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting instances for {run_id}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error loading instances: {str(e)}"
         )

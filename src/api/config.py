@@ -55,4 +55,9 @@ class Settings(BaseSettings):
     DEFAULT_PAGE_SIZE: int = 20
     MAX_PAGE_SIZE: int = 100
 
+    # Results API Configuration
+    RESULTS_CACHE_TTL_SECONDS: int = 300  # 5 minutes
+    RESULTS_DEFAULT_PAGE_SIZE: int = 50
+    RESULTS_MAX_INSTANCES_PER_REQUEST: int = 100
+
 settings = Settings()

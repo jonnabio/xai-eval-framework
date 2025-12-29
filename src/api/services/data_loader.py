@@ -7,9 +7,12 @@ Handles discovery and loading of experiment results from filesystem.
 import json
 import logging
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from functools import lru_cache
+from typing import List, Dict, Any, Optional, Tuple
 
 from src.api.config import settings
+from src.api.models.schemas import ExperimentResult, InstanceEvaluation
+from src.api.services.transformer import transform_experiment_to_run, transform_experiment_to_result
 
 logger = logging.getLogger(__name__)
 
@@ -187,3 +190,57 @@ def load_experiments_with_filters(**filters) -> List[Dict[str, Any]]:
     """
     all_experiments = load_all_experiments()
     return filter_experiments(all_experiments, **filters)
+
+
+@lru_cache(maxsize=32)
+def get_experiment_result(run_id: str) -> Optional[ExperimentResult]:
+    """
+    Locate and load complete experiment result by run ID.
+    Cached to improve performance on repeated access.
+    """
+    # 1. Load all raw experiments (this could be optimized to metadata only scan if needed)
+    all_experiments = load_all_experiments()
+    
+    # 2. Iterate and match ID
+    for exp_data in all_experiments:
+        try:
+            # We generate the ID to check for match
+            # This relies on transformer logic being deterministic
+            run = transform_experiment_to_run(exp_data)
+            
+            if run.id == run_id:
+                # 3. Found match, transform to detailed result
+                return transform_experiment_to_result(exp_data)
+                
+        except Exception as e:
+            logger.warning(f"Error checking experiment for ID match: {e}")
+            continue
+            
+    return None
+
+
+def get_instances_paginated(
+    run_id: str,
+    offset: int = 0,
+    limit: int = 50
+) -> Tuple[List[InstanceEvaluation], int]:
+    """
+    Get paginated instance evaluations for a run.
+    
+    Returns:
+        Tuple[List[InstanceEvaluation], int]: (page_items, total_count)
+    """
+    result = get_experiment_result(run_id)
+    if not result:
+        return [], 0
+        
+    total = len(result.instance_evaluations)
+    
+    # Slice
+    start = offset
+    end = min(offset + limit, total)
+    
+    if start >= total:
+        return [], total
+        
+    return result.instance_evaluations[start:end], total

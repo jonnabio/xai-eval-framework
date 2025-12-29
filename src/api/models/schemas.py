@@ -168,3 +168,90 @@ class HealthResponse(BaseModel):
     status: str
     version: str
     timestamp: datetime
+
+
+# =============================================================================
+# DETAILED RESULT MODELS
+# =============================================================================
+
+class ModelInfo(BaseModel):
+    """Model information."""
+    name: str
+    path: Optional[str] = None
+    explainer_method: Optional[str] = None
+
+class MetricStatistics(BaseModel):
+    """Aggregated statistics for a metric."""
+    mean: float
+    std: float
+    min: float
+    max: float
+    median: Optional[float] = None
+
+class ComputedMetrics(BaseModel):
+    """Container for aggregated metrics (mapping metric name to stats)."""
+    # Using Dict for flexibility as metric names might evolve
+    metrics: Dict[str, MetricStatistics]
+
+class InstanceEvaluation(BaseModel):
+    """Detailed evaluation for a single instance."""
+    instance_id: int
+    true_label: Optional[int] = None
+    prediction: Optional[int] = None
+    prediction_correct: Optional[bool] = None
+    quadrant: Optional[str] = None  # TP, TN, FP, FN
+    metrics: Dict[str, float]       # Per-instance scores
+    explanation: Optional[Dict[str, Any]] = None # Explanation details
+
+class ExperimentMetadata(BaseModel):
+    """Metadata from the experiment runner."""
+    name: str
+    dataset: str
+    timestamp: datetime
+    config_version: Optional[str] = None
+    random_seed: Optional[int] = None
+    duration_seconds: Optional[float] = None
+
+class ExperimentResult(BaseModel):
+    """Complete experiment result data structure."""
+    metadata: ExperimentMetadata
+    model_info: ModelInfo
+    aggregated_metrics: Dict[str, Any] # Can be simple dict or ComputedMetrics
+    instance_evaluations: List[InstanceEvaluation] = []
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "metadata": {
+                    "name": "exp1_adult_rf_lime",
+                    "dataset": "adult",
+                    "timestamp": "2023-10-27T10:00:00"
+                },
+                "model_info": {
+                    "name": "random_forest",
+                    "explainer_method": "lime"
+                },
+                "aggregated_metrics": {
+                    "fidelity": {"mean": 0.85, "std": 0.05, "min": 0.8, "max": 0.9}
+                },
+                "instance_evaluations": [
+                    {
+                        "instance_id": 1,
+                        "metrics": {"fidelity": 0.88},
+                        "explanation": {"top_features": ["age", "income"]}
+                    }
+                ]
+            }
+        }
+    }
+
+class ExperimentResultResponse(BaseModel):
+    """Response wrapper for detailed experiment results."""
+    data: ExperimentResult
+    metadata: Optional[Dict[str, Any]] = None
+
+class InstancesResponse(BaseModel):
+    """Response wrapper for paginated instances."""
+    data: List[InstanceEvaluation]
+    pagination: Dict[str, Any]
+    metadata: Optional[Dict[str, Any]] = None
