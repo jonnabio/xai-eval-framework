@@ -5,6 +5,32 @@
 
 ---
 
+## PARALLEL EXECUTION PLAN (Workstations 1 & 2)
+
+To maximize efficiency, tasks are split between two workstations based on resource focus (Analysis vs. Engineering).
+
+### 🖥️ Workstation 1: Evaluation & Analysis Track
+**Focus**: Running LLM evaluations, conducting human validation, and performing deep statistical analysis.
+- **Immediate Task**: [EXP1-33] Run LLM Evaluation (Needs `experiments/exp1_adult/results`).
+- **Next**: [EXP1-35] Metric Correlation Analysis.
+- **Next**: [EXP1-34] Human Validation.
+- **Later**: [EXP1-42/43] Writing Methodology & Results Chapters.
+
+### 💻 Workstation 2: Engineering & Infrastructure Track
+**Focus**: Pipeline robustification, dashboard integration, and deployment.
+- **Immediate Task**: [EXP1-36] Reproducibility Study (Heavy compute, independent run).
+- **Next**: [EXP1-30] Validation of Batch Runner.
+- **Next**: [Phase E] Dashboard Integration (Start with mock data if needed).
+- **Next**: [Phase F] Production Deployment.
+
+### 🔗 Dependency Management
+- **Critical Shared Asset**: `experiments/exp1_adult/results/results.json` (Output of EXP1-27).
+    - *Action*: Ensure this file is synced to WS1 for LLM Eval.
+- **Handover Point**: WS1 produces `llm_eval_results.json` -> Required by WS2 for dashboard visualization (EXP1-46).
+    - *Mitigation*: WS2 can use dummy LLM scores to build UI while WS1 runs evaluation.
+
+---
+
 ## PHASE A: COMPLETE CLASSICAL METRICS BASELINE
 **Duration**: Weeks 1-2
 **Objective**: Fix metric issues, implement missing metrics, complete experimental matrix
@@ -30,27 +56,27 @@
     - [x] Create `counterfactual_generator.py` (Wrapper)
     - [x] Implement `compute_counterfactual_sensitivity()` (Metric)
     - [x] Integrate into pipeline
-- [ ] **EXP1-30**: Implement Batch Experiment Runner ⚡ P1
-    - [ ] Implement `BatchExperimentRunner` class
-    - [ ] Add CLI interface
-    - [ ] Implement checkpointing & parallelization
+- [x] **EXP1-30**: Implement Batch Experiment Runner ⚡ P1
+    - [x] Implement `BatchExperimentRunner` class
+    - [x] Add CLI interface
+    - [x] Implement checkpointing & parallelization
     - [ ] Validate aggregation logic
 
 ## PHASE B: LLM-BASED SEMANTIC EVALUATION
 **Duration**: Weeks 3-5
 **Objective**: Implement Phase 3 (LLM prompts for qualitative assessment)
 
-- [ ] **EXP1-31**: Design LLM Evaluation Prompt Templates 🔥 P0
-    - [ ] Draft 5 templates (Fidelity, Stability, Sparsity, Causal, CF)
-    - [ ] Manual testing with GPT-4
-    - [ ] Refine prompts
-- [ ] **EXP1-32**: Implement LLM Orchestration Module 🔥 P0
-    - [ ] Create `LLMEvaluator` class
-    - [ ] Implement providers (OpenAI, Anthropic, Google)
-    - [ ] Add retry logic, rate limiting, cost tracking
-- [ ] **EXP1-33**: Run LLM Evaluation on All Experimental Results ⚡ P1
-    - [ ] Create `run_llm_evaluation.py`
-    - [ ] Implement stratified sampling
+- [x] **EXP1-31**: Design LLM Evaluation Prompt Templates 🔥 P0
+    - [x] Draft 5 templates (Fidelity, Stability, Sparsity, Causal, CF)
+    - [x] Manual testing with GPT-4
+    - [x] Refine prompts
+- [x] **EXP1-32**: Implement LLM Orchestration Module 🔥 P0
+    - [x] Create `LLMEvaluator` class (Implemented as `LLMClientFactory`)
+    - [x] Implement providers (OpenAI, Anthropic, Google)
+    - [x] Add retry logic, rate limiting, cost tracking
+- [/] **EXP1-33**: Run LLM Evaluation on All Experimental Results ⚡ P1
+    - [x] Create `run_llm_evaluation.py`
+    - [x] Implement stratified sampling
     - [ ] Execute 1,000 evaluations
     - [ ] Aggregation & Cost reporting
 - [ ] **EXP1-34**: Implement Human Validation Sample 📋 P2

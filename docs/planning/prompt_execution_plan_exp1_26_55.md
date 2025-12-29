@@ -100,11 +100,11 @@ You are designing Jinja2 templates for LLM-based evaluation.
 You are building the LLM evaluator engine.
 **Objective**: Abstract API calls to OpenAI/Anthropic/Google with cost tracking.
 **Steps**:
-1.  Create `src/evaluation/llm_evaluator.py`.
-2.  Implement `LLMEvaluator` class.
-3.  Implement provider logic (focus on OpenAI first if keys available, or abstract info).
-4.  Add cost tracking and rate limiting placeholders.
-**Files**: `src/evaluation/llm_evaluator.py`.
+1.  Create `src/llm/client.py` (formerly `evaluator.py`).
+2.  Implement `LLMClientFactory` class.
+3.  Implement provider logic (OpenAI and Gemini).
+4.  Add cost tracking and rate limiting.
+**Files**: `src/llm/client.py`.
 
 ### Task: EXP1-33 Run LLM Evaluation
 **Priority**: ⚡ P1
