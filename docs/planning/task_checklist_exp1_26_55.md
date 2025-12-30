@@ -84,10 +84,10 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [ ] Create annotation interface/form
     - [ ] Collect human ratings
     - [ ] Compute Cohen's kappa
-- [ ] **EXP1-35**: Comprehensive Metric Correlation Analysis 📋 P2
-    - [ ] Compute correlations (Classical vs LLM)
-    - [ ] Generate radar plots, heatmaps, pareto frontiers
-    - [ ] Perform statistical tests (Wilcoxon, etc.)
+- [x] **EXP1-35**: Comprehensive Metric Correlation Analysis 📋 P2
+    - [x] Compute correlations (Classical vs LLM)
+    - [x] Generate radar plots, heatmaps, pareto frontiers (via Notebook)
+    - [x] Perform statistical tests (Wilcoxon, etc.)
 
 ## PHASE C: STATISTICAL VALIDATION & REPRODUCIBILITY
 **Duration**: Weeks 5-7

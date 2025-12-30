@@ -54,6 +54,27 @@ npm run dev
 
 Dashboard will be at `http://localhost:3000`
 
+## Data Pipeline & Workflow
+
+### 1. Run Experiments
+Execute the standard experiment batch:
+```bash
+python src/experiment/batch_runner.py --config experiments/exp1_adult/config.yaml
+```
+
+### 2. Run LLM Evaluation
+Generate LLM scores for the explanations:
+```bash
+python src/llm_eval/evaluate.py ...
+```
+
+### 3. [NEW] Merge Data for Dashboard
+**Crucial Step:** You must run the merger script to aggregate metrics and LLM scores into the API-compatible format.
+```bash
+python experiments/exp1_adult/scripts/merge_dashboard_data.py
+```
+*Effect:* Updates `experiments/exp1_adult/results/*/results.json` with `aggregated_metrics` and `llm_evaluation` blocks.
+
 ## Data Contract
 
 The dashboard expects data in this format:
