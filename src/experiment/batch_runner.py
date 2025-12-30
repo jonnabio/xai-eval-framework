@@ -15,7 +15,10 @@ from typing import List, Dict, Any, Optional
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 import pandas as pd
-import git
+try:
+    import git
+except ImportError:
+    git = None
 
 from src.experiment.config import load_config, ExperimentConfig
 from src.experiment.runner import ExperimentRunner
@@ -255,6 +258,8 @@ class BatchExperimentRunner:
 
     def _get_git_hash(self) -> str:
         """Get current git commit hash for provenance."""
+        if git is None:
+            return "unknown (git not available)"
         try:
             repo = git.Repo(search_parent_directories=True)
             return repo.head.object.hexsha
