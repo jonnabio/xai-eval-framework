@@ -137,11 +137,26 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Implement `ExperimentDataLoader`
     - [x] Add new API endpoints
     - [x] Update Swagger docs
-- [ ] **EXP1-47**: Build Dashboard Frontend Components for All Metrics ⚡ P1
-    - [ ] Build `EnhancedMetricsDashboard`
-    - [ ] Build `RadarComparison`
-    - [ ] Build `LLMInstanceViewer`
-    - [ ] Build `SignificanceMatrix` and `ReproducibilityDashboard`
+- [x] **EXP1-47**: Build Dashboard Frontend Components for All Metrics ⚡ P1
+    - [x] **EXP1-47a**: API Contract Verification & Design System Audit
+        - [x] Verify API endpoints (`/details`, `/instances`)
+        - [x] Create `src/types/api.ts`
+        - [x] Audit reusable UI patterns & Create ADR-047a/b
+    - [x] **EXP1-47b**: Build `EnhancedMetricsDashboard` Component
+        - [x] Implement metric cards (Fidelity, Stability, etc.)
+        - [x] Add LIME vs SHAP comparison view
+    - [x] **EXP1-47c**: Build `RadarComparison` Component
+        - [x] Implement Recharts/Nivo radar chart
+        - [x] Add config options (toggle metrics/models)
+    - [x] **EXP1-47d**: Build `LLMInstanceViewer` Component
+        - [x] Create paginated table with sort/filter
+        - [x] Implement detail modal with feature importance
+    - [x] **EXP1-47e**: Main Page Integration & API Client
+        - [x] Update `api-client.ts` with new hooks
+        - [x] Integrate components into `[id]/page.tsx`
+    - [x] **EXP1-47f**: Comprehensive Documentation & Test Coverage
+        - [x] Storybook stories & >80% test coverage
+        - [x] Accessibility audit & CHANGELOG update
 - [ ] **EXP1-48**: End-to-End Testing of Dashboard Integration ⚡ P1
     - [ ] Create Playwright tests
     - [ ] Cover all new visual components

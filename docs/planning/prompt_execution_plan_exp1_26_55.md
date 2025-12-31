@@ -282,18 +282,78 @@ You are updating the FastAPI backend to serve advanced and LLM metrics.
 3.  Implement `ExperimentDataLoader` to read the new JSON/CSV files created in EXP1.
 **Files**: `src/api/routes.py`, `src/api/data_loader.py`.
 
-### Task: EXP1-47 Build Dashboard Frontend Components
+### Task: EXP1-47a API Contract Verification & Design System Audit
 **Priority**: ⚡ P1
-**Trigger**: "Execute EXP1-47"
+**Trigger**: "Execute EXP1-47a"
 **Prompt Context**:
-You are building the React components to visualize the new metrics.
-**Objective**: Create `EnhancedMetricsDashboard`, `RadarComparison`, `LLMInstanceViewer`.
+You are establishing the frontend foundation.
+**Objective**: Validate API contracts and choose visualization tools.
 **Steps**:
-1.  Install `recharts` or `nivo` if needed.
-2.  Create components in `xai-benchmark/src/components/`.
-3.  Implement data fetching hooks in `xai-benchmark/src/lib/api-client.ts`.
-4.  Integrate into the main experiment page.
-**Files**: `xai-benchmark/src/components/*.tsx`, `xai-benchmark/src/app/experiments/[id]/page.tsx`.
+1.  Document API responses and create `src/types/api.ts`.
+2.  Audit `src/app/experiments/[id]/page.tsx` for UI patterns.
+3.  Create ADR-047a (Viz Library) and ADR-047b (State Management).
+**Files**: `src/types/api.ts`, `docs/adrs/ADR-047a*.md`, `docs/adrs/ADR-047b*.md`.
+
+### Task: EXP1-47b Build EnhancedMetricsDashboard Component
+**Priority**: ⚡ P1
+**Trigger**: "Execute EXP1-47b"
+**Prompt Context**:
+You are building the metrics summary view.
+**Objective**: Display aggregated stats with comparisons.
+**Steps**:
+1.  Create `EnhancedMetricsDashboard.tsx`.
+2.  Implement `MetricCard` with confidence intervals and indicators.
+3.  Add error/loading states and comparison view.
+**Files**: `src/components/experiments/EnhancedMetricsDashboard.tsx`.
+
+### Task: EXP1-47c Build RadarComparison Component
+**Priority**: ⚡ P1
+**Trigger**: "Execute EXP1-47c"
+**Prompt Context**:
+You are visualizing multi-dimensional performance.
+**Objective**: Interactive radar chart for model comparison.
+**Steps**:
+1.  Implement radar chart using chosen library.
+2.  Add toggles for metrics and models.
+3.  Ensure accessibility (ARIA) and responsive design.
+**Files**: `src/components/experiments/RadarComparison.tsx`.
+
+### Task: EXP1-47d Build LLMInstanceViewer Component
+**Priority**: ⚡ P1
+**Trigger**: "Execute EXP1-47d"
+**Prompt Context**:
+You are building the granular data viewer.
+**Objective**: Paginated table for instance explanations.
+**Steps**:
+1.  Create `LLMInstanceViewer.tsx` with server-side pagination.
+2.  Implement sort/filter and detail modal.
+3.  Optimize with virtual scrolling/caching.
+**Files**: `src/components/experiments/LLMInstanceViewer.tsx`.
+
+### Task: EXP1-47e Main Page Integration
+**Priority**: ⚡ P1
+**Trigger**: "Execute EXP1-47e"
+**Prompt Context**:
+You are wiring everything together.
+**Objective**: Integrate components into the main page.
+**Steps**:
+1.  Update `src/lib/api-client.ts` with new hooks.
+2.  Update `src/app/experiments/[id]/page.tsx` with tab navigation.
+3.  Add global error boundaries and loading states.
+**Files**: `src/lib/api-client.ts`, `src/app/experiments/[id]/page.tsx`.
+
+### Task: EXP1-47f Documentation & Testing
+**Priority**: ⚡ P1
+**Trigger**: "Execute EXP1-47f"
+**Prompt Context**:
+You are polishing the release.
+**Objective**: 80% coverage and full docs.
+**Steps**:
+1.  Add Storybook stories.
+2.  Run coverage report and fill gaps.
+3.  Update CHANGELOG and finalize ADRs.
+4.  Run accessibility audit.
+**Files**: `CHANGELOG.md`, `.storybook/stories/*`.
 
 ### Task: EXP1-48 End-to-End Testing of Dashboard Integration
 **Priority**: ⚡ P1

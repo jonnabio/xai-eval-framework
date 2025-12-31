@@ -57,6 +57,24 @@ All notable changes to this project will be documented in this file.
 
 See PR #[NUMBER] for complete details.
 
+### Added (EXP1-47 - Dashboard Frontend)
+- **Enhanced Metrics Dashboard**: Visualizing aggregated metrics (Fidelity, Stability) with confidence intervals.
+- **Radar Comparison**: Interactive Recharts-based radar chart for multi-model comparison.
+- **Instance Viewer**: Paginated table (`LLMInstanceViewer`) with detailed explanations modal.
+- **Frontend Architecture**:
+    - New API Client (`src/lib/api-client.ts`).
+    - React Query Hooks (`useExperimentData.ts`) for caching and pagination.
+    - Page Integration at `/experiments/[id]`.
+
+### Added (EXP1-47 - Dashboard Frontend)
+- **Enhanced Metrics Dashboard**: Visualizing aggregated metrics (Fidelity, Stability) with confidence intervals.
+- **Radar Comparison**: Interactive Recharts-based radar chart for multi-model comparison.
+- **Instance Viewer**: Paginated table (`LLMInstanceViewer`) with detailed explanations modal.
+- **Frontend Architecture**:
+    - New API Client (`src/lib/api-client.ts`).
+    - React Query Hooks (`useExperimentData.ts`) for caching and pagination.
+    - Page Integration at `/experiments/[id]`.
+
 ### Added (EXP1-46 - Dashboard Integration)
 - **Detailed Results Endpoint**: `GET /runs/{run_id}/details` for full experiment data.
 - **Instance Pagination**: `GET /runs/{run_id}/instances` for granular explanation data.
