@@ -126,10 +126,17 @@ You are executing the massive LLM evaluation batch.
 You are setting up human validation.
 **Objective**: Create interface/form for human annotation.
 **Steps**:
-1.  Select 20 instances.
-2.  Generate `experiments/exp1_adult/human_validation/annotation_form.html` (self-contained HTML).
-3.  Create analysis script for Cohen's Kappa.
-**Files**: `experiments/exp1_adult/human_validation/*`.
+1.  Create `scripts/select_human_eval_samples.py`.
+    -   Load `results.json`.
+    -   Implement stratified logic: Outcome (TP/TN/FP/FN) x Confidence (High/Low) x Fidelity (High/Low).
+    -   Select 20 diverse instances.
+    -   Export to `experiments/exp1_adult/human_eval/samples.json`.
+2.  Create `tools/human_annotation_viewer.html`.
+    -   Single-file HTML/JS viewer loading `samples.json`.
+    -   Display Instance, Prediction, Explanation (plot), and blind LLM scores.
+    -   Form inputs for Faithfulness (1-5) and Utility (1-5).
+3.  Create key for unblinding (optional).
+**Files**: `scripts/select_human_eval_samples.py`, `tools/human_annotation_viewer.html`, `experiments/exp1_adult/human_eval/samples.json`.
 
 ### Task: EXP1-35 Metric Correlation Analysis
 **Priority**: 📋 P2
