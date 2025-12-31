@@ -80,8 +80,8 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Execute evaluation batch (80 stratified samples)
     - [x] Aggregation & Cost reporting
 - [ ] **EXP1-34**: Implement Human Validation Sample 📋 P2
-    - [ ] Select 20 stratified instances
-    - [ ] Create annotation interface/form
+    - [x] Select 20 stratified instances (Script created + Samples generated)
+    - [x] Create annotation interface/form (Viewer + Guidelines created)
     - [ ] Collect human ratings
     - [ ] Compute Cohen's kappa
 - [x] **EXP1-35**: Comprehensive Metric Correlation Analysis 📋 P2
