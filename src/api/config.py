@@ -60,4 +60,12 @@ class Settings(BaseSettings):
     RESULTS_DEFAULT_PAGE_SIZE: int = 50
     RESULTS_MAX_INSTANCES_PER_REQUEST: int = 100
 
+    # Human Evaluation Configuration
+    HUMAN_EVAL_DIR: Path = EXPERIMENTS_DIR / "exp1_adult" / "human_eval"
+    HUMAN_EVAL_SAMPLES_FILE: str = "samples.json"
+    HUMAN_EVAL_ANNOTATIONS_DIR: str = "annotations"
+    HUMAN_EVAL_METADATA_FILE: str = "metadata.json"
+    HUMAN_EVAL_MAX_ANNOTATORS: int = 10
+    HUMAN_EVAL_REQUIRE_AUTH: bool = False  # Set True for production
+
 settings = Settings()
