@@ -108,7 +108,8 @@ class SHAPTabularWrapper:
         model_type: str = "tree",
         n_background_samples: int = 100,
         random_state: int = 42,
-        training_labels: Optional[np.ndarray] = None
+        training_labels: Optional[np.ndarray] = None,
+        **kwargs
     ):
         """
         Initialize SHAP wrapper.
@@ -121,11 +122,13 @@ class SHAPTabularWrapper:
             n_background_samples: Number of samples for background summary.
             random_state: Seed for sampling.
             training_labels: Optional labels for stratified background sampling.
+            **kwargs: Additional parameters for shap_values() call (e.g. check_additivity).
         """
         self.feature_names = feature_names
         self.model_type = model_type.lower()
         self.n_background_samples = n_background_samples
         self.random_state = random_state
+        self.shap_kwargs = kwargs
 
         # Sample background data
         self.background_data = sample_background_data(
@@ -204,7 +207,12 @@ class SHAPTabularWrapper:
         # 1. Calculate SHAP values
         # Returns [ n_samples, n_features, n_classes ] usually for proba/binary
         # check_additivity=False to avoid strict errors on float precision, we validate manually.
-        raw_shap_values = self.explainer.shap_values(X_samples, check_additivity=False)
+        # Use kwargs from init (config)
+        kwargs = self.shap_kwargs.copy()
+        if 'check_additivity' not in kwargs:
+             kwargs['check_additivity'] = False
+             
+        raw_shap_values = self.explainer.shap_values(X_samples, **kwargs)
         
         # 2. Extract Positive Class (Index 1)
         # TreeExplainer with model_output='probability' returns list of arrays [ (N, M), (N, M) ]

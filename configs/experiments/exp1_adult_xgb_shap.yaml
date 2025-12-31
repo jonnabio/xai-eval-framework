@@ -1,8 +1,8 @@
-name: "exp1_adult_xgb_shap"
-description: "Experiment 1: Adult dataset with XGBoost and SHAP explanations"
+name: "exp1_xgb_shap"
 dataset: "adult"
-version: "1.0.0"
+description: "XGBoost with SHAP explanation"
 random_seed: 42
+version: "1.0.0"
 
 model:
   name: "xgboost"
@@ -11,10 +11,13 @@ model:
 explainer:
   method: "shap"
   explainer_type: "tree"
+  params:
+    check_additivity: false
+    approximate: true
 
 sampling:
   strategy: "stratified"
-  samples_per_class: 25  # 50 total
+  samples_per_class: 50
   random_seed: 42
 
 metrics:

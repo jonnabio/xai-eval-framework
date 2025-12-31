@@ -57,7 +57,7 @@ class MetricsConfig(BaseModel):
 
 class LLMConfig(BaseModel):
     """LLM provider configuration."""
-    provider: Literal["openai", "gemini"] = Field("openai", description="LLM provider")
+    provider: Literal["openai", "gemini", "dummy", "openrouter"] = Field("openai", description="LLM provider")
     model_name: str = Field(..., description="Model name (e.g. gpt-4, gemini-pro)")
     temperature: float = Field(0.0, ge=0.0, le=2.0)
     max_tokens: int = Field(1000, ge=1)

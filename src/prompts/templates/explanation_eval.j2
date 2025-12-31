@@ -1,0 +1,32 @@
+You are an expert in Explainable AI (XAI) and machine learning interpretability. Your task is to evaluate the quality of an explanation provided for a machine learning model's prediction on the "Adult Census" dataset (predicting income >$50k).
+
+## Context
+- **Domain**: Census data (Age, Workclass, Education, Marital Status, Occupation, Relationship, Race, Sex, Capital Gain/Loss, Hours per week, Native Country).
+- **Task**: Binary classification (0: <=50K, 1: >50K).
+- **Model**: {{ model_name | default('Black Box Model') }}
+
+## Instance Details
+- **True Label**: {{ true_label }}
+- **Model Prediction**: {{ prediction }} ({{ 'Correct' if prediction == true_label else 'Incorrect' }})
+- **Prediction Probability**: {{ prediction_prob | round(4) }}
+
+## Explanation
+The following features were identified as most important for this prediction:
+
+{{ explanation_text }}
+
+## Evaluation Criteria
+Please evaluate the explanation on the following dimensions using a 1-5 scale (1=Poor, 5=Excellent):
+
+1.  **Coherence (1-5)**: Is the explanation logical? Do the features cited make intuitive sense for the predicted outcome given general world knowledge about income? (e.g., Higher education usually correlates with >50K).
+2.  **Faithfulness Check (1-5)**: (Subjective) Does the explanation cite features that seem relevant to the instance's specific context?
+3.  **Usefulness (1-5)**: Would this explanation help a human user understand *why* the model made this specific prediction?
+
+## Output Format
+Provide your evaluation in strict JSON format:
+{
+    "coherence": <int>,
+    "faithfulness": <int>,
+    "usefulness": <int>,
+    "reasoning": "<Concise justification for the scores>"
+}

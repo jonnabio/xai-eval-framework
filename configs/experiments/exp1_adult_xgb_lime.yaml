@@ -1,8 +1,8 @@
-name: "exp1_adult_xgb_lime"
-description: "Experiment 1: Adult dataset with XGBoost and LIME explanations"
+name: "exp1_xgb_lime"
 dataset: "adult"
-version: "1.0.0"
+description: "XGBoost with LIME explanation"
 random_seed: 42
+version: "1.0.0"
 
 model:
   name: "xgboost"
@@ -10,12 +10,14 @@ model:
 
 explainer:
   method: "lime"
+  params:
+    discretize_continuous: true
   num_samples: 1000
   num_features: 10
 
 sampling:
   strategy: "stratified"
-  samples_per_class: 25  # 100 total
+  samples_per_class: 50
   random_seed: 42
 
 metrics:

@@ -1,21 +1,23 @@
-name: "exp1_adult_rf_lime"
-description: "Experiment 1: Adult dataset with Random Forest and LIME explanations"
+name: "exp1_rf_lime"
 dataset: "adult"
-version: "1.0.0"
+description: "Random Forest with LIME explanation"
 random_seed: 42
+version: "1.0.0"
 
 model:
-  name: "random_forest"
+  name: "rf"
   path: "experiments/exp1_adult/models/rf_model.pkl"
 
 explainer:
   method: "lime"
-  num_features: 10
+  params:
+    discretize_continuous: true
   num_samples: 1000
+  num_features: 10
 
 sampling:
   strategy: "stratified"
-  samples_per_class: 25  # 50 total
+  samples_per_class: 50
   random_seed: 42
 
 metrics:
