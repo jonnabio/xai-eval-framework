@@ -302,10 +302,11 @@ You are building the React components to visualize the new metrics.
 You are Writing Playwright tests for the dashboard.
 **Objective**: Validate visual components and data flow.
 **Steps**:
-1.  Check `e2e/` folder setup.
-2.  Create `e2e/experiment-dashboard.spec.ts`.
+1.  Check `tests/` folder setup (Playwright default).
+2.  Create `tests/dashboard.spec.ts`, `tests/human-validation.spec.ts`, `tests/admin-dashboard.spec.ts`.
 3.  Implement tests for verifying metric display, radar charts, and interaction.
-**Files**: `e2e/experiment-dashboard.spec.ts`.
+4.  Implement proper API mocking.
+**Files**: `tests/*.spec.ts`.
 
 ---
 
