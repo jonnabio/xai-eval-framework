@@ -173,6 +173,7 @@ You are implementing k-Fold CV.
 
 ### Task: EXP1-38 Statistical Significance Testing
 **Priority**: ⚡ P1
+**Status**: ✅ Completed
 **Trigger**: "Execute EXP1-38"
 **Prompt Context**:
 You are calculating statistical significance.

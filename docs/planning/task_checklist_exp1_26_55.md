@@ -101,10 +101,10 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Implement stratified k-fold logic
     - [x] Integrate with `ExperimentRunner` fold
     - [x] Analyze stability
-- [ ] **EXP1-38**: Statistical Significance Testing ⚡ P1
-    - [ ] Implement hypothesis tests (Friedman, Wilcoxon)
-    - [ ] Apply Bonferroni correction
-    - [ ] Compute Effect Sizes (Cohen's d)
+- [x] **EXP1-38**: Statistical Significance Testing ⚡ P1
+    - [x] Implement hypothesis tests (Friedman, Wilcoxon)
+    - [x] Apply Bonferroni correction
+    - [x] Compute Effect Sizes (Cohen's d)
 - [ ] **EXP1-39**: Bootstrap Confidence Intervals 📋 P2
     - [ ] Implement bootstrap module
     - [ ] Compute 95% CIs for all metrics
