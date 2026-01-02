@@ -96,10 +96,11 @@ To maximize efficiency, tasks are split between two workstations based on resour
 - [x] **EXP1-36**: Multi-Run Reproducibility Study 🔥 P0
     - [x] Run 4 combinations × 10 seeds
     - [x] Compute CV, CI, and variance analysis
-- [ ] **EXP1-37**: Cross-Validation Framework ⚡ P1
-    - [ ] Implement 5-fold StratifiedKFold
-    - [ ] Train/Explain/Eval per fold
-    - [ ] Analyze stability
+- [x] **EXP1-37**: Cross-Validation Framework ⚡ P1
+    - [x] Create `src/experiment/cv_runner.py`
+    - [x] Implement stratified k-fold logic
+    - [x] Integrate with `ExperimentRunner` fold
+    - [x] Analyze stability
 - [ ] **EXP1-38**: Statistical Significance Testing ⚡ P1
     - [ ] Implement hypothesis tests (Friedman, Wilcoxon)
     - [ ] Apply Bonferroni correction

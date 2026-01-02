@@ -352,7 +352,11 @@ class ExperimentRunner:
         logger.info(f"Starting experiment: {self.config.name}")
         
         try:
-            self.setup()
+            # Check if setup is already done (e.g. injected data)
+            if self.dataset is None:
+                self.setup()
+            else:
+                logger.info("Dataset already loaded, skipping setup()")
             
             instances = self.generate_instances()
             
