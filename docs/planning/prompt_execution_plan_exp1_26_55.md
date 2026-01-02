@@ -186,6 +186,7 @@ You are calculating statistical significance.
 
 ### Task: EXP1-39 Bootstrap Confidence Intervals
 **Priority**: 📋 P2
+**Status**: ✅ Completed
 **Trigger**: "Execute EXP1-39"
 **Prompt Context**:
 You are computing CIs code.
