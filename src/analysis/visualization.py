@@ -70,3 +70,41 @@ def plot_metric_boxplots(df: pd.DataFrame, metric_name: str, save_path: str = No
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=300)
         plt.close()
+
+def plot_metric_comparison_with_cis(data_dict: dict, metric_name: str, save_path: str = None):
+    """
+    Plot bar chart of means with error bars (CIs).
+    
+    Args:
+        data_dict: Dict of structure {method: {'mean': X, 'ci_t': {'lower': L, 'upper': U}, ...}}
+    """
+    means = []
+    lowers = []
+    uppers = []
+    methods = list(data_dict.keys())
+    
+    for m in methods:
+        stats = data_dict[m]
+        means.append(stats['mean'])
+        lowers.append(stats['ci_t']['lower'])
+        uppers.append(stats['ci_t']['upper'])
+        
+    yerr = [
+        np.array(means) - np.array(lowers),
+        np.array(uppers) - np.array(means)
+    ]
+    
+    plt.figure(figsize=(10, 6))
+    bars = plt.bar(methods, means, yerr=yerr, capsize=10, alpha=0.7, color='skyblue', edgecolor='black')
+    
+    plt.title(f"Mean {metric_name} with 95% t-Distribution CIs")
+    plt.ylabel(metric_name)
+    plt.xticks(rotation=45)
+    plt.grid(axis='y', linestyle='--', alpha=0.5)
+    
+    plt.tight_layout()
+    
+    if save_path:
+        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(save_path, dpi=300)
+        plt.close()

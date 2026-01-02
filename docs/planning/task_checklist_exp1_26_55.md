@@ -105,9 +105,10 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Implement hypothesis tests (Friedman, Wilcoxon)
     - [x] Apply Bonferroni correction
     - [x] Compute Effect Sizes (Cohen's d)
-- [ ] **EXP1-39**: Bootstrap Confidence Intervals 📋 P2
-    - [ ] Implement bootstrap module
-    - [ ] Compute 95% CIs for all metrics
+- [x] **EXP1-39**: Confidence Intervals (Small Sample Robustness) 📋 P2
+    - [x] Implement t-distribution CIs (Primary)
+    - [x] Implement Bootstrap CIs with warnings (Secondary)
+    - [x] Visualize with error bars
 - [ ] **EXP1-40**: Sensitivity Analysis (Hyperparameters) 📋 P2
     - [ ] Vary attributes (LIME samples, SHAP background)
     - [ ] Compute sensitivity scores

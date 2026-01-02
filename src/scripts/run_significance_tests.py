@@ -11,8 +11,13 @@ import scikit_posthocs as sp
 # Add project root to path
 sys.path.append(str(Path.cwd()))
 
+from scipy import stats
+import scikit_posthocs as sp
+from src.analysis.confidence import compute_cis
 from src.analysis.stats import perform_friedman_test, perform_nemenyi_test, compute_cohens_dz
-from src.analysis.visualization import plot_critical_difference_diagram, plot_metric_boxplots
+from src.analysis.visualization import plot_critical_difference_diagram, plot_metric_boxplots, plot_metric_comparison_with_cis
+
+# Add project root to path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -203,6 +208,23 @@ def run_analysis():
                 effect_sizes[f"{c1}_vs_{c2}"] = dz
         
         metric_res["effect_sizes"] = effect_sizes
+        
+        # 5. Confidence Intervals
+        cis = {}
+        for method in df_display.columns:
+            # Drop NaNs if any
+            data = df_display[method].dropna().values
+            method_cis = compute_cis(data, confidence=0.95)
+            cis[method] = {
+                "mean": np.mean(data),
+                "ci_t": {"lower": method_cis['t_dist'][0], "upper": method_cis['t_dist'][1]},
+                "ci_boot": {"lower": method_cis['bootstrap'][0], "upper": method_cis['bootstrap'][1]}
+            }
+        metric_res["confidence_intervals"] = cis
+        
+        # Plot Means with CIs
+        plot_metric_comparison_with_cis(cis, metric, str(figures_dir / f"bar_ci_{metric}.png"))
+        
         results["metrics"][metric] = metric_res
 
     # Save Results
