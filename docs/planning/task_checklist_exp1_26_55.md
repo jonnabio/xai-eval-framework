@@ -109,10 +109,10 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Implement t-distribution CIs (Primary)
     - [x] Implement Bootstrap CIs with warnings (Secondary)
     - [x] Visualize with error bars
-- [ ] **EXP1-40**: Sensitivity Analysis (Hyperparameters) 📋 P2
-    - [ ] Vary attributes (LIME samples, SHAP background)
-    - [ ] Compute sensitivity scores
-    - [ ] Identify critical parameters
+- [x] **EXP1-40**: Sensitivity Analysis (Hyperparameters) 📋 P2
+    - [x] Vary attributes (LIME samples, SHAP background)
+    - [x] Compute sensitivity scores
+    - [x] Identify critical parameters
 
 ## PHASE D: PUBLICATION-READY DOCUMENTATION
 **Duration**: Weeks 7-9

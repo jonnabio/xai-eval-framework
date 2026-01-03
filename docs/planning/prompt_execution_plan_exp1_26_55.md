@@ -197,6 +197,7 @@ You are computing CIs code.
 **Files**: `src/analysis/bootstrap.py`.
 
 ### Task: EXP1-40 Sensitivity Analysis
+**Status**: Completed
 **Priority**: 📋 P2
 **Trigger**: "Execute EXP1-40"
 **Prompt Context**:
