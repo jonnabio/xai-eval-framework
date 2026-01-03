@@ -90,6 +90,17 @@ Committing changes with traceability.
 - **Feature Branches**: `feat/description` or `fix/issue-id`.
 - **Main**: Protected branch, PR required.
 
+### 5.4 Push Rules
+- **Pre-Push Checks**:
+    - **Linting**: Ensure code adheres to style (ruff/flake8).
+    - **Tests**: Run `pytest` locally to ensure no regressions.
+    - **Build**: Verify project builds successfully.
+- **Rules**:
+    - **No Force Push**: Never force push to shared branches (`main`, `develop`).
+    - **Pull Rebase**: Use `git pull --rebase` to maintain a clean history.
+    - **Atomic Pushes**: Push logically grouped commits.
+    - **Clean State**: Do not push temporary files or unchecked artifacts.
+
 ## 6. Thesis & Publication Flow
 
 Specific workflow for thesis-bound content.
