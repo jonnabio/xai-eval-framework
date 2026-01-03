@@ -255,3 +255,139 @@ class InstancesResponse(BaseModel):
     data: List[InstanceEvaluation]
     pagination: Dict[str, Any]
     metadata: Optional[Dict[str, Any]] = None
+
+# =============================================================================
+# HUMAN EVALUATION MODELS
+# =============================================================================
+
+class AnnotationStatus(str, Enum):
+    """Status of a human annotation sample."""
+    PENDING = "pending"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    SKIPPED = "skipped"
+
+class HumanAnnotationRatings(BaseModel):
+    """
+    Likert scale ratings for explanation quality (1-5).
+    Matches LLM evaluation dimensions for comparison.
+    """
+    coherence: int = Field(..., ge=1, le=5, description="How understandable and logically consistent (1=Poor, 5=Excellent)")
+    faithfulness: int = Field(..., ge=1, le=5, description="How well it reflects model's actual reasoning (1=Poor, 5=Excellent)")
+    usefulness: int = Field(..., ge=1, le=5, description="How helpful for understanding prediction (1=Poor, 5=Excellent)")
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "coherence": 4,
+                "faithfulness": 3,
+                "usefulness": 4
+            }
+        }
+    }
+
+class HumanAnnotationSubmission(BaseModel):
+    """Request model for submitting a human annotation."""
+    sample_id: str = Field(..., min_length=1, description="Unique sample identifier (e.g., 'rf_lime_7834')")
+    annotator_id: str = Field(..., min_length=1, max_length=50, description="Annotator identifier")
+    ratings: HumanAnnotationRatings
+    comments: Optional[str] = Field(None, max_length=2000, description="Optional comments about the explanation")
+    time_spent_seconds: Optional[int] = Field(None, ge=0, description="Time spent annotating (seconds)")
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "sample_id": "rf_lime_7834",
+                "annotator_id": "annotator1",
+                "ratings": {
+                    "coherence": 4,
+                    "faithfulness": 3,
+                    "usefulness": 4
+                },
+                "comments": "Clear explanation but lacks some context",
+                "time_spent_seconds": 180
+            }
+        }
+    }
+
+class HumanEvalSample(BaseModel):
+    """A sample for human annotation (excludes LLM scores to maintain blindness)."""
+    sample_id: str
+    experiment: str = Field(..., description="Experiment name (e.g., 'rf_lime')")
+    instance_id: int
+    quadrant: Optional[str] = Field(None, description="Confusion matrix quadrant (TP/TN/FP/FN)")
+    prediction: Optional[int] = None
+    true_label: Optional[int] = None
+    prediction_correct: Optional[bool] = None
+    explanation: Dict[str, Any] = Field(..., description="Explanation data (top features, etc.)")
+    classical_metrics: Dict[str, float] = Field(..., description="Classical XAI metrics (fidelity, stability, etc.)")
+    assigned_to: Optional[str] = Field(None, description="Annotator this sample is assigned to")
+    status: AnnotationStatus = Field(default=AnnotationStatus.PENDING)
+
+    # NOT included: llm_scores (must remain blind during annotation)
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "sample_id": "rf_lime_7834",
+                "experiment": "rf_lime",
+                "instance_id": 7834,
+                "quadrant": "TP",
+                "prediction": 1,
+                "true_label": 1,
+                "prediction_correct": True,
+                "explanation": {
+                    "top_features": [
+                        "capital-gain: 0.4535",
+                        "education-num: 0.0981",
+                        "marital-status_Married-civ-spouse: 0.0881"
+                    ],
+                    "method": "LIME"
+                },
+                "classical_metrics": {
+                    "fidelity": 0.95,
+                    "stability": 0.86,
+                    "sparsity": 0.09
+                },
+                "assigned_to": "annotator1",
+                "status": "pending"
+            }
+        }
+    }
+
+class AnnotationProgress(BaseModel):
+    """Progress tracking for an annotator."""
+    annotator_id: str
+    total_assigned: int
+    completed: int
+    in_progress: int
+    pending: int
+    completion_rate: float = Field(..., ge=0, le=1)
+    avg_time_per_annotation: Optional[float] = None
+
+class AnnotationSubmissionResponse(BaseModel):
+    """Response after submitting an annotation."""
+    status: str = Field(default="success")
+    annotation_id: str = Field(..., description="Unique ID for this annotation")
+    message: str
+    progress: Dict[str, int] = Field(..., description="Updated progress (completed, remaining)")
+
+class HumanEvalSamplesResponse(BaseModel):
+    """Response containing samples for annotation."""
+    data: List[HumanEvalSample]
+    metadata: Dict[str, Any]
+
+class ProgressResponse(BaseModel):
+    """Response containing progress information."""
+    data: AnnotationProgress
+    metadata: Dict[str, Any]
+
+class AdminStatsResponse(BaseModel):
+    """Admin dashboard statistics."""
+    data: Dict[str, Any]
+    metadata: Dict[str, Any]
+
+class AdminAnnotationsResponse(BaseModel):
+    """Admin export of all annotations."""
+    data: List[Dict[str, Any]]
+    metadata: Dict[str, Any]

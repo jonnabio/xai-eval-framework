@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAI Human Validation Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">XAI Semantic Validation</h1>
+            <div class="space-x-4">
+                <input type="file" id="fileInput" accept=".json" class="hidden">
+                <button onclick="document.getElementById('fileInput').click()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
+                    📂 Load Samples.json
+                </button>
+                <button onclick="exportAnnotations()" 
+                    id="exportBtn" disabled
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    💾 Export Annotations
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area (Hidden until loaded) -->
+        <div id="mainInterface" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Left Column: Instance & Explanation -->
+            <div class="space-y-6">
+                <!-- Navigation -->
+                <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow">
+                    <button onclick="navigate(-1)" id="prevBtn" class="text-blue-600 font-semibold hover:underline">← Previous</button>
+                    <span class="text-gray-600 font-medium">Sample <span id="currentIndex">0</span> / <span id="totalSamples">0</span></span>
+                    <button onclick="navigate(1)" id="nextBtn" class="text-blue-600 font-semibold hover:underline">Next →</button>
+                </div>
+
+                <!-- Instance Card -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span id="experimentBadge" class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Exp</span>
+                            <span id="quadrantBadge" class="ml-2 bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">TP</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-sm text-gray-500">ID: <span id="sampleId" class="font-mono"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-4 rounded border">
+                            <p class="text-sm text-gray-500 mb-1">True Label</p>
+                            <p id="trueLabel" class="font-bold text-lg text-gray-800">Income > 50K</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded border">
+                            <p class="text-sm text-gray-500 mb-1">Model Prediction</p>
+                            <p id="prediction" class="font-bold text-lg text-gray-800">Income > 50K</p>
+                            <p id="predictionCorrect" class="text-xs mt-1 text-green-600 font-semibold">Correct</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800">Explanation (Top Features)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="featureChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Annotation Form -->
+            <div class="bg-white p-6 rounded-lg shadow flex flex-col h-full">
+                <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-4">Rate this Explanation</h2>
+                
+                <form id="annotationForm" class="flex-grow space-y-8">
+                    
+                    <!-- Dimension 1: Coherence -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-lg font-medium text-gray-700">1. Coherence</label>
+                            <span class="text-xs text-gray-400 cursor-help" title="Low: Contradictory/Confusing. High: Logical/Clear.">ℹ️</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">How understandable and logically consistent is this explanation?</p>
+                        <div class="grid grid-cols-5 gap-2" id="coherenceRating">
+                            <!-- JS Generates 1-5 Scale -->
+                        </div>
+                    </div>
+
+                    <!-- Dimension 2: Faithfulness -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-lg font-medium text-gray-700">2. Faithfulness</label>
+                            <span class="text-xs text-gray-400 cursor-help" title="Low: Suspicious features. High: Reflects true model behavior.">ℹ️</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">How well does this explanation seem to reflect the model's actual reasoning?</p>
+                        <div class="grid grid-cols-5 gap-2" id="faithfulnessRating">
+                            <!-- JS Generates 1-5 Scale -->
+                        </div>
+                    </div>
+
+                    <!-- Dimension 3: Usefulness -->
+                    <div>
+                         <div class="flex justify-between items-center mb-2">
+                            <label class="text-lg font-medium text-gray-700">3. Usefulness</label>
+                            <span class="text-xs text-gray-400 cursor-help" title="Low: No insight. High: Actionable/Insightful.">ℹ️</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">How helpful is this explanation for understanding the prediction?</p>
+                        <div class="grid grid-cols-5 gap-2" id="usefulnessRating">
+                            <!-- JS Generates 1-5 Scale -->
+                        </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Comments (Optional)</label>
+                        <textarea id="comments" rows="3" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Any specific observations?"></textarea>
+                    </div>
+
+                </form>
+
+                <div class="mt-8 p-4 bg-yellow-50 text-yellow-800 rounded-md text-sm">
+                    <span class="font-bold">Progress:</span> <span id="annotatedCount">0</span> / <span id="totalCountDisplay">0</span> completed.
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-20">
+            <div class="text-6xl mb-4">📂</div>
+            <h2 class="text-2xl font-bold text-gray-700">No Samples Loaded</h2>
+            <p class="text-gray-500 mb-6">Please load the <code class="bg-gray-100 px-2 py-1 rounded">samples.json</code> file to begin validation.</p>
+            <button onclick="document.getElementById('fileInput').click()" 
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition">
+                Load JSON File
+            </button>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // State
+        let samples = [];
+        let currentIndex = 0;
+        let annotations = {}; // Map sample_id -> annotation obj
+        let chartInstance = null;
+
+        const CONFIG = {
+            annotatorId: 'annotator_' + Math.random().toString(36).substr(2, 9),
+            storageKey: 'xai_validation_annotations_v1'
+        };
+
+        // DOM Elements
+        const els = {
+            fileInput: document.getElementById('fileInput'),
+            mainInterface: document.getElementById('mainInterface'),
+            emptyState: document.getElementById('emptyState'),
+            currentIndex: document.getElementById('currentIndex'),
+            totalSamples: document.getElementById('totalSamples'),
+            exportBtn: document.getElementById('exportBtn'),
+            
+            // Instance
+            sampleId: document.getElementById('sampleId'),
+            experimentBadge: document.getElementById('experimentBadge'),
+            quadrantBadge: document.getElementById('quadrantBadge'),
+            trueLabel: document.getElementById('trueLabel'),
+            prediction: document.getElementById('prediction'),
+            predictionCorrect: document.getElementById('predictionCorrect'),
+            
+            // Stats
+            annotatedCount: document.getElementById('annotatedCount'),
+            totalCountDisplay: document.getElementById('totalCountDisplay'),
+            
+            // Inputs
+            comments: document.getElementById('comments')
+        };
+
+        // Init
+        window.addEventListener('load', () => {
+            // Restore from local storage if exists
+            const saved = localStorage.getItem(CONFIG.storageKey);
+            if (saved) {
+                annotations = JSON.parse(saved);
+                updateStats();
+            }
+            createRatingScales();
+        });
+
+        // File Loading
+        els.fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    samples = JSON.parse(event.target.result);
+                    if (!Array.isArray(samples)) throw new Error("Format invalid");
+                    
+                    currentIndex = 0;
+                    els.totalSamples.innerText = samples.length;
+                    els.totalCountDisplay.innerText = samples.length;
+                    
+                    els.emptyState.classList.add('hidden');
+                    els.mainInterface.classList.remove('hidden');
+                    els.exportBtn.disabled = false;
+                    
+                    renderCurrentSample();
+                    updateStats();
+                } catch (err) {
+                    alert("Error loading JSON: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Navigation
+        window.navigate = (dir) => {
+            // Save current before moving?
+            // Form inputs automatically update state on change, so no explicit save needed.
+            
+            const newIndex = currentIndex + dir;
+            if (newIndex >= 0 && newIndex < samples.length) {
+                currentIndex = newIndex;
+                renderCurrentSample();
+            }
+        };
+
+        // Renderer
+        function renderCurrentSample() {
+            const sample = samples[currentIndex];
+            els.currentIndex.innerText = currentIndex + 1;
+            
+            // Header
+            els.sampleId.innerText = sample.sample_id;
+            els.experimentBadge.innerText = sample.experiment;
+            els.quadrantBadge.innerText = sample.quadrant;
+            if (sample.quadrant.startsWith('T')) {
+                els.quadrantBadge.className = 'ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded';
+            } else {
+                els.quadrantBadge.className = 'ml-2 bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded';
+            }
+
+            // Predictions
+            const targetName = ">50K"; // Adult dataset specific
+            els.trueLabel.innerText = sample.true_label === 1 ? targetName : "<=50K";
+            els.prediction.innerText = sample.prediction === 1 ? targetName : "<=50K";
+            
+            if (sample.prediction_correct) {
+                els.predictionCorrect.innerText = "Correct Prediction";
+                els.predictionCorrect.className = "text-xs mt-1 text-green-600 font-semibold";
+            } else {
+                els.predictionCorrect.innerText = "Incorrect Prediction";
+                els.predictionCorrect.className = "text-xs mt-1 text-red-600 font-semibold";
+            }
+
+            // Chart
+            renderChart(sample.explanation);
+
+            // Restore Annotation State
+            const existing = annotations[sample.sample_id] || {};
+            setRating('coherence', existing.coherence || null);
+            setRating('faithfulness', existing.faithfulness || null);
+            setRating('usefulness', existing.usefulness || null);
+            els.comments.value = existing.comments || '';
+
+            // Update nav buttons
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === samples.length - 1;
+        }
+
+        function renderChart(expl) {
+            const ctx = document.getElementById('featureChart').getContext('2d');
+            
+            // Parse explanation (Depends on format from samples.json)
+            // Example format: { raw_top: { "age": 0.5, "workclass": -0.2 } }
+            // Or list: top_features: ["age: 0.5", ...]
+            
+            let labels = [];
+            let data = [];
+            let colors = [];
+            
+            if (expl.raw_top) {
+                // Sort by absolute value
+                const entries = Object.entries(expl.raw_top).sort((a,b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 10);
+                labels = entries.map(e => e[0]);
+                data = entries.map(e => e[1]);
+                colors = data.map(v => v >= 0 ? 'rgba(75, 192, 192, 0.7)' : 'rgba(255, 99, 132, 0.7)');
+            } else if (expl.top_features) {
+                // Fallback parsing string list "feature: value"
+                expl.top_features.forEach(s => {
+                   const parts = s.split(": ");
+                   if (parts.length === 2) {
+                       labels.push(parts[0]);
+                       const val = parseFloat(parts[1]);
+                       data.push(val);
+                       colors.push(val >= 0 ? 'rgba(75, 192, 192, 0.7)' : 'rgba(255, 99, 132, 0.7)');
+                   }
+                });
+            }
+
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Feature Contribution',
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: colors.map(c => c.replace('0.7', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Horizontal
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: { grid: { color: '#f3f4f6' } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Rating UI logic
+        function createRatingScales() {
+            const types = ['coherence', 'faithfulness', 'usefulness'];
+            types.forEach(type => {
+                const container = document.getElementById(type + 'Rating');
+                for (let i = 1; i <= 5; i++) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `p-3 rounded border text-center transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500`;
+                    btn.innerHTML = `<span class="block text-lg font-bold">${i}</span>`;
+                    btn.onclick = () => saveRating(type, i);
+                    btn.dataset.value = i;
+                    container.appendChild(btn);
+                }
+            });
+            
+            // Comment listener
+            els.comments.addEventListener('input', (e) => {
+                const sid = samples[currentIndex].sample_id;
+                if (!annotations[sid]) annotations[sid] = {};
+                annotations[sid].comments = e.target.value;
+                saveToStorage();
+            });
+        }
+
+        function setRating(type, value) {
+            const container = document.getElementById(type + 'Rating');
+            Array.from(container.children).forEach(btn => {
+                if (parseInt(btn.dataset.value) === value) {
+                    btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                    btn.classList.remove('hover:bg-blue-50');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                    btn.classList.add('hover:bg-blue-50');
+                }
+            });
+        }
+
+        function saveRating(type, value) {
+            const sid = samples[currentIndex].sample_id;
+            if (!annotations[sid]) annotations[sid] = {};
+            annotations[sid][type] = value;
+            annotations[sid].timestamp = new Date().toISOString();
+            
+            setRating(type, value);
+            saveToStorage();
+            updateStats();
+        }
+
+        function saveToStorage() {
+            localStorage.setItem(CONFIG.storageKey, JSON.stringify(annotations));
+        }
+
+        function updateStats() {
+            if (samples.length === 0) return;
+            // Count completely annotated (all 3 dimensions set)
+            let complete = 0;
+            // We only care about samples in the current set?
+            // Actually annotations might contain old data if ID not unique.
+            // Let's filter by current samples IDs.
+            const currentIds = new Set(samples.map(s => s.sample_id));
+            
+            Object.keys(annotations).forEach(k => {
+                if (currentIds.has(k)) {
+                    const a = annotations[k];
+                    if (a.coherence && a.faithfulness && a.usefulness) complete++;
+                }
+            });
+            els.annotatedCount.innerText = complete;
+        }
+
+        window.exportAnnotations = () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(annotations, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            const fileName = `annotations_${CONFIG.annotatorId}_${new Date().toISOString().slice(0,10)}.json`;
+            downloadAnchorNode.setAttribute("download", fileName);
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        };
+    </script>
+</body>
+</html>

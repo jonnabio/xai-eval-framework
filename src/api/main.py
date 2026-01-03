@@ -16,7 +16,7 @@ from datetime import datetime
 import logging
 
 from src.api.config import settings
-from src.api.routes import health, runs, debug, batch
+from src.api.routes import health, runs, debug, batch, human_eval
 from src.api.middleware.exceptions import (
     validation_exception_handler,
     general_exception_handler
@@ -62,6 +62,8 @@ app.include_router(health.router, prefix="/api")
 
 app.include_router(debug.router, prefix="/db")
 app.include_router(batch.router, prefix="/api")
+app.include_router(human_eval.router, prefix="/human-eval", tags=["Human Evaluation"])
+app.include_router(human_eval.router, prefix="/api/human-eval", tags=["Human Evaluation"])
 
 # Startup event
 @app.on_event("startup")
