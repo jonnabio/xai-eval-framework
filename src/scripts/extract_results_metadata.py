@@ -167,10 +167,57 @@ def merge_results(quant, qual):
         }
     return merged
 
+def extract_cv_results(cv_dir):
+    """
+    Extracts cross-validation summary statistics.
+    Returns a dictionary keyed by experiment name (e.g. 'exp1_cv_rf_lime').
+    """
+    cv_data = {}
+    cv_path = Path(cv_dir)
+    
+    if not cv_path.exists():
+        print(f"Warning: CV directory {cv_dir} does not exist.")
+        return {}
+
+    for exp_dir in cv_path.iterdir():
+        if not exp_dir.is_dir():
+            continue
+
+        summary_file = exp_dir / "cv_summary.json"
+        if summary_file.exists():
+            try:
+                cv_summary = load_json(summary_file)
+                exp_name = exp_dir.name
+                
+                # Simplified structure for metadata
+                cv_data[exp_name] = {
+                    'n_folds': len(cv_summary.get('fold_results', [])), # Fallback if n_folds not top-level
+                    'aggregated_metrics': cv_summary.get('aggregated_metrics', {}),
+                    # We might want validation scores too if available
+                }
+            except Exception as e:
+                print(f"Error reading CV summary {summary_file}: {e}")
+
+    return cv_data
+
+def load_significance_results(stats_file):
+    """Loads statistical significance test results."""
+    if not Path(stats_file).exists():
+        print(f"Warning: Significance results file {stats_file} not found.")
+        return {}
+    
+    try:
+        return load_json(stats_file)
+    except Exception as e:
+        print(f"Error reading significance results: {e}")
+        return {}
+
 def main():
     parser = argparse.ArgumentParser(description="Extract results metadata for LaTeX generation.")
     parser.add_argument("--results-dir", default="experiments/exp1_adult/results", help="Directory containing XAI results")
     parser.add_argument("--llm-file", default="experiments/exp1_adult/llm_eval/results_full.json", help="Path to LLM results JSON")
+    parser.add_argument("--cv-dir", default="outputs/cv", help="Directory containing CV results")
+    parser.add_argument("--stats-file", default="outputs/analysis/significance_results.json", help="Path to significance results JSON")
     parser.add_argument("--output", default="docs/thesis/results_metadata.json", help="Output JSON path")
     args = parser.parse_args()
     
@@ -180,8 +227,18 @@ def main():
     print("Extracting qualitative LLM results...")
     qual_data = extract_qualitative_results(args.llm_file)
     
+    print("Extracting cross-validation results...")
+    cv_data = extract_cv_results(args.cv_dir)
+    
+    print("Loading statistical significance results...")
+    stats_data = load_significance_results(args.stats_file)
+    
     print("Merging data...")
     final_metadata = merge_results(quant_data, qual_data)
+    
+    # Add new sections to metadata
+    final_metadata['cross_validation'] = cv_data
+    final_metadata['statistical_tests'] = stats_data
     
     # Save
     out_path = Path(args.output)

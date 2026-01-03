@@ -12,7 +12,9 @@ def validate_results(tex_file):
     content = Path(tex_file).read_text()
     
     # Check for table inclusions
-    expected_tables = ["model_performance", "xai_metrics_comparison", "llm_evaluation"]
+    expected_tables = ["model_performance", "xai_metrics_comparison", "llm_evaluation", "cv_comparison"]
+    expected_sections = ["figures_section", "interpretation"]
+    
     for tbl in expected_tables:
         if f"\\input{{tables/{tbl}}}" not in content:
             print(f"❌ Error: Missing table input for {tbl}")
@@ -30,6 +32,17 @@ def validate_results(tex_file):
                     print(f"  ⚠️ Warning: Table {tbl} seems to contain no data (check for '-' everywhere).")
             else:
                  print(f"❌ Error: Table file {tbl}.tex not found.")
+                 
+    for sec in expected_sections:
+        if f"\\input{{{sec}}}" not in content:
+            print(f"❌ Error: Missing input for section {sec}")
+        else:
+            print(f"✅ Found section reference: {sec}")
+            sec_path = Path(tex_file).parent / f"{sec}.tex"
+            if sec_path.exists():
+                 print(f"  ✅ File {sec}.tex exists.")
+            else:
+                 print(f"❌ Error: File {sec}.tex not found.")
 
     print("Validation complete.")
 

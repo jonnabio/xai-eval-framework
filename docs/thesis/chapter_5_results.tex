@@ -11,22 +11,20 @@ We assess SHAP and LIME using three key metrics: Fidelity, Stability, and Sparsi
 
 \input{tables/xai_metrics_comparison}
 
+\input{interpretation}
+
 \textbf{Fidelity}: SHAP generally exhibits higher fidelity across tree-based models...
 \textbf{Stability}: LIME shows higher variance in stability due to its random sampling nature...
+
+\section{Cross-Validation \& Robustness}
+To validate the consistency of our findings, we performed a 5-fold cross-validation. Table~\ref{tab:cv_comparison} compares the single-run results with the cross-validation averages.
+
+\input{tables/cv_comparison}
 
 \section{Qualitative Assessment via LLMs}
 Using GPT-4 as a proxy for human evaluation, we assessed the generated explanations on dimensions of Faithfulness, Intuitiveness (Usefulness), and Coherence.
 
 \input{tables/llm_evaluation}
 
-\section{Visual Analysis}
-Figure~\ref{fig:radar_comparison} illustrates the trade-offs between different explainers.
-
-\begin{figure}[htbp]
-    \centering
-    % Placeholder for where the actual file would be
-    %\includegraphics[width=0.8\textwidth]{figures/radar_comparison.pdf} 
-    \caption{Radar chart comparing SHAP and LIME across five metric dimensions.}
-    \label{fig:radar_comparison}
-\end{figure}
+\input{figures_section}
 
