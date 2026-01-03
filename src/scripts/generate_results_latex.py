@@ -61,7 +61,8 @@ def generate_xai_metrics_table(metadata):
         
         def get_fmt(m_name):
             m = metrics.get(m_name, {})
-            if not m: return "-"
+            # Fix: Check if 'mean' is actually in m, not just if m is truthy
+            if not m or 'mean' not in m: return "-"
             return f"{m['mean']:.3f} $\\pm$ {m['std']:.3f}"
             
         fid = get_fmt('fidelity')

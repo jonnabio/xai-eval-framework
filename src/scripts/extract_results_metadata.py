@@ -20,6 +20,10 @@ def extract_quantitative_results(results_dir):
     results_path = Path(results_dir)
     # Recursively find all results.json files
     for result_file in results_path.glob("**/results.json"):
+        # Exclude tuning directory
+        if "tuning" in str(result_file):
+            continue
+            
         try:
             data = load_json(result_file)
             
@@ -32,7 +36,18 @@ def extract_quantitative_results(results_dir):
             instances = data.get('instance_evaluations', [])
             metrics_list = defaultdict(list)
             
+            # Compute Accuracy from instances if available
+            correct_count = 0
+            total_count = 0
+            
             for inst in instances:
+                # Performance tracking
+                if 'prediction_correct' in inst:
+                    total_count += 1
+                    if inst['prediction_correct']:
+                        correct_count += 1
+                
+                # Metric tracking
                 metrics = inst.get('metrics', {})
                 for m_name, m_val in metrics.items():
                     if isinstance(m_val, (int, float)):
@@ -48,47 +63,40 @@ def extract_quantitative_results(results_dir):
                 }
                 
             # Extract Global Performance
-            # Look for training_metrics_*.csv in the root results dir
+            # Priority 1: From global CSV (training_metrics_*.csv)
+            # Priority 2: Compute from instance evaluations
             performance = {}
-            # Assume results_dir is passed to function
+            row = None
+            
+            # Try CSV first
             root_results_path = Path(results_dir)
             csv_files = list(root_results_path.glob("training_metrics_*.csv"))
-            
             if csv_files:
-                # Take the most recent one
                 csv_files.sort()
                 try:
                     df = pd.read_csv(csv_files[-1])
-                    # Filter by model name if possible, or assume file structure
-                    # The CSV likely has columns: model_name, accuracy, roc_auc
-                    
-                    # Normalize model name from JSON to match CSV (e.g. 'rf' vs 'random_forest')
-                    # We check if our current 'model' is in any of the rows
-                    row = None
-                    if 'model' in df.columns: # CSV header says 'model', not 'model_name'
-                         # Fuzzy match: is 'rf' in 'exp1_adult_mvp_rf'?
+                    if 'model' in df.columns:
                          matches = df[df['model'].str.contains(model, case=False, na=False)]
                          if not matches.empty:
                              row = matches.iloc[0]
                          else:
-                             # Try known aliases
                              aliases = {'xgboost': 'xgb', 'rf': 'random_forest'}
                              if model in aliases:
                                  matches = df[df['model'].str.contains(aliases[model], case=False, na=False)]
                                  if not matches.empty:
                                      row = matches.iloc[0]
-                    elif len(df) > 0:
-                        # Fallback: if there's no model_name column, maybe it's just a single row or we can't map
-                        # But wait, we have multiple models (rf, xgb). The CSV must distinguish.
-                        # Let's check CSV content later. For now, try simple matching
-                        pass
                     
                     if row is not None:
                         if 'accuracy' in row: performance['accuracy'] = float(row['accuracy'])
                         if 'roc_auc' in row: performance['roc_auc'] = float(row['roc_auc'])
                         
                 except Exception as e:
-                    print(f"Warning: Could not read training metrics: {e}")
+                    print(f"Warning: Could not read training metrics from CSV: {e}")
+
+            # Fallback to instance computation if CSV failed or missing
+            if 'accuracy' not in performance and total_count > 0:
+                performance['accuracy'] = correct_count / total_count
+                performance['source'] = 'computed_from_instances'
 
             aggregated_data[key] = {
                 'model': model,
