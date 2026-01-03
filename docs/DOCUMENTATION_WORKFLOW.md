@@ -49,18 +49,48 @@ Documenting the work as it happens and proving it works.
     - `outputs/paper_figures/`: Publication-ready vector figures (`.pdf`).
 - **LaTeX Integration**: `outputs/paper_figures/figures_include.tex` is auto-generated to easily include new figures in the thesis.
 
-## 4. Git Operations
+## 4. Code Documentation Requirements
+
+High-quality inline documentation is essential for maintainability.
+
+### 4.1 Docstrings
+- **Style**: Google Style Docstrings.
+- **Where**: Every module, class, and public function.
+- **Content**:
+    - **Summary**: One-line description.
+    - **Args**: detailed description of arguments.
+    - **Returns**: description of return values.
+    - **Raises**: explicit listing of exceptions.
+
+### 4.2 Type Hinting
+- **Requirement**: 100% type coverage for function signatures.
+- **Tools**: Use `typing.List`, `typing.Dict`, `typing.Optional`, etc.
+
+### 4.3 Comments
+- **Inline Comments**: specific, non-obvious logic explanations.
+- **TODOs**: formatting `TODO(user): description`.
+
+## 5. Git Operations
 
 Committing changes with traceability.
 
-- **Commit Messages**: Conventional Commits format.
-    - `feat(scope): Description`
-    - `fix(scope): Description`
-    - `docs(scope): Description`
+### 5.1 Commit Messages
+- **Format**: Conventional Commits.
+    - `feat(scope): Description` (New feature)
+    - `fix(scope): Description` (Bug fix)
+    - `docs(scope): Description` (Documentation)
     - `style`, `refactor`, `test`, `chore`.
-- **Scope**: e.g., `analysis`, `vis`, `exp1`.
+- **Scope Examples**: `analysis`, `vis`, `exp1`.
 
-## 5. Thesis & Publication Flow
+### 5.2 Commit Body Guidelines
+- **Body**: Detailed explanation of *what* and *why* (optional but recommended for complex changes).
+- **Footer**: Reference issues or tasks (e.g., `Closes #123`).
+
+### 5.3 Branching Strategy
+- **Feature Branches**: `feat/description` or `fix/issue-id`.
+- **Main**: Protected branch, PR required.
+
+## 6. Thesis & Publication Flow
 
 Specific workflow for thesis-bound content.
 
