@@ -1,15 +1,19 @@
 services:
   - type: web
-    name: xai-eval-framework
-    env: docker
+    name: xai-eval-api
+    env: python
+    region: oregon
     plan: free
-    region: ohio
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT --workers 4
     envVars:
-      - key: API_HOST
-        value: 0.0.0.0
-      - key: API_PORT
-        value: 8000
-      - key: PORT
-        value: 8000
-    healthCheckPath: /api/health
-    autoDeploy: true
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CORS_ORIGINS
+        sync: false # Set in dashboard
+      - key: SENTRY_DSN
+        sync: false # Set in dashboard

@@ -14,6 +14,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from datetime import datetime
 import logging
+import sentry_sdk
+from sentry_sdk.integrations.fastapi import FastApiIntegration
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from src.api.config import settings
 from src.api.routes import health, runs, debug, batch, human_eval
@@ -60,6 +63,15 @@ app.include_router(runs.router, prefix="/api")
 app.include_router(health.router)
 app.include_router(health.router, prefix="/api")
 
+@app.get("/health", tags=["system"])
+async def health_check():
+    """Health check endpoint for Render monitoring."""
+    return {
+        "status": "healthy",
+        "environment": settings.ENVIRONMENT,
+        "version": settings.API_VERSION
+    }
+
 app.include_router(debug.router, prefix="/db")
 app.include_router(batch.router, prefix="/api")
 app.include_router(human_eval.router, prefix="/human-eval", tags=["Human Evaluation"])
@@ -71,8 +83,29 @@ async def startup_event():
     """Log startup message and verify configuration."""
     logger.info("=" * 70)
     logger.info(f"🚀 {settings.API_TITLE} v{settings.API_VERSION}")
+    logger.info(f"🌍 Environment: {settings.ENVIRONMENT}")
     logger.info("=" * 70)
+    
+    # Initialize Sentry
+    if settings.SENTRY_DSN:
+        sentry_sdk.init(
+            dsn=settings.SENTRY_DSN,
+            environment=settings.SENTRY_ENVIRONMENT,
+            traces_sample_rate=settings.SENTRY_TRACES_SAMPLE_RATE,
+            integrations=[FastApiIntegration()],
+        )
+        logger.info("✅ Sentry initialized")
+    else:
+        logger.info("⚠️ Sentry DSN not set, skipping initialization")
+
+    # Metrics exposed at /metrics by Instrumentator (initialized below)
+    logger.info("✅ Prometheus metrics exposed at /metrics")
+
     logger.info(f"📍 Server: http://{settings.HOST}:{settings.PORT}")
+    logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
+
+# Initialize Prometheus Instrumentator (Must be done before app startup for middleware)
+Instrumentator().instrument(app).expose(app)
     logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
     logger.info(f"📂 Experiments: {settings.EXPERIMENTS_DIR}")
     logger.info(f"🔧 Debug mode: {settings.DEBUG}")

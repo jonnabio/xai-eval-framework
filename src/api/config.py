@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     """API configuration settings."""
     
     # API Information
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     API_VERSION: str = "0.2.0"
     API_TITLE: str = "XAI Evaluation API"
     API_DESCRIPTION: str = """
@@ -27,8 +28,13 @@ class Settings(BaseSettings):
     
     # Server Configuration
     HOST: str = os.getenv("API_HOST", "0.0.0.0")
-    PORT: int = int(os.getenv("API_PORT", "8000"))
+    PORT: int = int(os.getenv("PORT", "8000"))  # Render provides PORT
     DEBUG: bool = os.getenv("API_DEBUG", "true").lower() == "true"
+    
+    # Monitoring
+    SENTRY_DSN: str | None = os.getenv("SENTRY_DSN")
+    SENTRY_ENVIRONMENT: str = os.getenv("SENTRY_ENVIRONMENT", "production")
+    SENTRY_TRACES_SAMPLE_RATE: float = float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1"))
     
     # CORS Configuration
     CORS_ORIGINS: List[str] = [
@@ -38,6 +44,10 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3001",
         "https://xai-benchmark.onrender.com",
     ]
+    
+    # Allow overriding/appending CORS via environment variable
+    if os.getenv("CORS_ORIGINS"):
+        CORS_ORIGINS.extend(os.getenv("CORS_ORIGINS").split(","))
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ["*"]
     CORS_ALLOW_HEADERS: List[str] = ["*"]

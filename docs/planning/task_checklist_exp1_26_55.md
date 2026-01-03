@@ -168,10 +168,24 @@ To maximize efficiency, tasks are split between two workstations based on resour
 **Duration**: Week 2 (Deployment Phase)
 **Objective**: Deploy to Railway/Vercel with monitoring
 
-- [ ] **EXP1-49**: Deploy Backend to Railway (Production) 🔥 P0
-    - [ ] Configure `railway.toml`
-    - [ ] Setup Sentry & Monitoring
-    - [ ] Deploy and verify health check
+- [x] **EXP1-49**: Deploy Backend to Render (Production) 🔥 P0
+    - [x] **EXP1-49a**: Pre-Implementation & Documentation
+        - [x] Write ADR (Render Strategy)
+        - [x] Define Environment Variables
+        - [x] Create Rollback Plan
+    - [x] **EXP1-49b**: Implementation
+        - [x] Update `config.py` (Env, Logging, Sentry, CORS)
+        - [x] Update `main.py` (Health Check, Startup/Shutdown, Prometheus)
+        - [x] Create `render.yaml` (IaC with $PORT)
+        - [x] Update dependencies (`requirements.txt`)
+    - [x] **EXP1-49c**: Verification & Testing
+        - [x] Local Smoke Test (Health, CORS, Metrics)
+        - [x] Create Integration Tests (`tests/integration/test_render.py`)
+        - [x] Deploy to Render & Verify
+    - [x] **EXP1-49d**: Post-Deployment Documentation
+        - [x] Update CHANGELOG
+        - [x] Update README
+        - [x] Create Runbook
 - [ ] **EXP1-50**: Deploy Frontend to Vercel (Production) 🔥 P0
     - [ ] Configure `vercel.json`
     - [ ] Set environment variables

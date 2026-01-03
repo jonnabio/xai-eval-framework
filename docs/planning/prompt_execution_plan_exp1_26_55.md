@@ -315,17 +315,20 @@ You are Writing Playwright tests for the dashboard.
 
 ## PHASE F: PRODUCTION DEPLOYMENT
 
-### Task: EXP1-49 Deploy Backend to Railway
+### Task: EXP1-49 Deploy Backend to Render
 **Priority**: 🔥 P0
 **Trigger**: "Execute EXP1-49"
 **Prompt Context**:
-You are preparing the backend for Railway deployment.
-**Objective**: Production config and monitoring.
+You are executing the comprehensive Render deployment plan.
+**Objective**: Production-ready deployment with monitoring and documentation.
 **Steps**:
-1.  Create `railway.toml`.
-2.  Create `src/api/config.py` for production settings (CORS, Sentry).
-3.  Setup Sentry integration in `src/api/main.py`.
-**Files**: `railway.toml`, `src/api/config.py`, `src/api/main.py`.
+1.  **Documentation**: Create `docs/decisions/000X-render-deployment.md` (ADR).
+2.  **Config**: Update `src/api/config.py` with Production settings (Sentry, Prometheus, CORS).
+3.  **Code**: Update `src/api/main.py` with `/health` endpoint and lifecycle hooks.
+4.  **Infra**: Create `render.yaml` using `$PORT` and defining env vars.
+5.  **Tests**: Create `tests/integration/test_production.py`.
+6.  **Verify**: Run local checks and commit for auto-deploy.
+**Files**: `docs/decisions/*.md`, `render.yaml`, `src/api/*`.
 
 ### Task: EXP1-50 Deploy Frontend to Vercel
 **Priority**: 🔥 P0

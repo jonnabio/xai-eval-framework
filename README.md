@@ -78,6 +78,15 @@ To ensure scientific rigor, this framework mandates:
 - **Random Seed**: Global seed `42` used for all splits and initializations.
 - **Config-Driven**: All hyperparameters are defined in YAML files (e.g., [`rf_adult_config.yaml`](experiments/exp1_adult/configs/models/rf_adult_config.yaml)).
 
+## 🚀 Deployment
+
+The backend is configured for deployment on **Render.com** (Free Tier).
+
+- **Infrastructure**: Defined in [`render.yaml`](render.yaml) (Infrastructure-as-Code).
+- **Strategy**: [ADR-0020 Render Deployment Strategy](docs/decisions/0020-render-deployment-strategy.md).
+- **Health Check**: `GET /health`.
+- **Environment**: Requires `SENTRY_DSN` and `ENVIRONMENT=production` set in the Render Dashboard.
+
 ## 📚 Documentation
 
 - [**Config Schema**](docs/config_schema.md): Detailed reference for configuration parameters.

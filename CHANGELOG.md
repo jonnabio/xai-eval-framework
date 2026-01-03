@@ -57,6 +57,15 @@ All notable changes to this project will be documented in this file.
 
 See PR #[NUMBER] for complete details.
 
+### Added (EXP1-49 - Render Deployment)
+- **Deployment Strategy**: Migrated from Railway to Render.com (Free Tier) (ADR-0020).
+- **Configuration**:
+    - Infrastructure-as-Code via `render.yaml`.
+    - Production readiness in `config.py` (Sentry, Prometheus, Dynamic CORS).
+    - Health check endpoint `/health`.
+- **Observability**: Integrated `sentry-sdk` and `prometheus-fastapi-instrumentator`.
+- **Verification**: Added `tests/integration/test_render_deployment.py`.
+
 ### Added (EXP1-47 - Dashboard Frontend)
 - **Enhanced Metrics Dashboard**: Visualizing aggregated metrics (Fidelity, Stability) with confidence intervals.
 - **Radar Comparison**: Interactive Recharts-based radar chart for multi-model comparison.
