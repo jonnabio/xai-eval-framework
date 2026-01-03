@@ -114,6 +114,7 @@ Specific workflow for thesis-bound content.
 
 1.  [ ] Code implemented and tested.
 2.  [ ] ADR created (if architectural change).
-3.  [ ] `task_checklist_*.md` updated.
+3.  [ ] `task_checklist_*.md` updated (mark task as `[x]`).
+4.  [ ] `prompt_execution_plan_*.md` updated (set status to "Completed").
 4.  [ ] `walkthrough.md` updated with findings.
 5.  [ ] Git commit with Conventional Commit message.
