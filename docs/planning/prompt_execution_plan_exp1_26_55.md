@@ -339,10 +339,22 @@ You are executing the comprehensive Render deployment plan.
 You are configuring the frontend for Vercel.
 **Objective**: Production build and environment variables.
 **Steps**:
-1.  Update `vercel.json` (if needed) or Next.js config.
-2.  Configure `NEXT_PUBLIC_API_URL` handling.
-3.  Ensure build scripts are correct.
-**Files**: `vercel.json`, `next.config.mjs`.
+**Steps**:
+1.  **Pre-Deployment**:
+    -   Create `docs/decisions/0005-vercel-frontend-deployment.md` (ADR).
+    -   Create `docs/ops/rollback_plan_frontend.md`.
+    -   Update `vercel.json` and `next.config.mjs` for production (headers, regions, output).
+2.  **Implementation**:
+    -   Update `.env.example` with strict typing/validation comments.
+    -   Run local build/lint verification.
+3.  **Deployment**:
+    -   Push to `main`.
+    -   Configure Vercel Project (Env Vars: `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_DEBUG`).
+4.  **Verification**:
+    -   Run post-deployment checklist (Integration, Performance, Security).
+5.  **Documentation**:
+    -   Update `README.md` (Deployment section) and `CHANGELOG.md`.
+**Files**: `vercel.json`, `next.config.mjs`, `README.md`.
 
 ### Task: EXP1-51 Production Smoke Testing & Monitoring Setup
 **Priority**: 📋 P2

@@ -188,9 +188,24 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Update README
         - [x] Create Runbook
 - [ ] **EXP1-50**: Deploy Frontend to Vercel (Production) 🔥 P0
-    - [ ] Configure `vercel.json`
-    - [ ] Set environment variables
-    - [ ] Deploy and verify connection
+    - [ ] **EXP1-50a**: Pre-Deployment & Config
+        - [ ] Write ADR-0005 (Vercel Frontend Strategy)
+        - [ ] Update `next.config.mjs` (headers, output, env)
+        - [ ] Update `vercel.json` (headers, redirects, regions)
+        - [ ] Create `rollback_plan.md`
+    - [ ] **EXP1-50b**: Implementation
+        - [ ] Configure Environment Variables (`.env.example`)
+        - [ ] Verify Build & Lint (`npm run build && npm run lint`)
+        - [ ] Add Sentry/Analytics (Optional/Future)
+    - [ ] **EXP1-50c**: Deployment & Verification
+        - [ ] Deploy to Vercel
+        - [ ] Verify Integration (Frontend -> Render Backend)
+        - [ ] Performance Audit (Lighthouse/Vercel Analytics)
+        - [ ] Cross-browser Check (Chrome/Edge/Firefox)
+    - [ ] **EXP1-50d**: Post-Deployment Documentation
+        - [ ] Update README with Deployment Badge & Instructions
+        - [ ] Update CHANGELOG
+        - [ ] Notify Team / Update Dashboard URL
 - [ ] **EXP1-51**: Production Smoke Testing & Monitoring Setup 📋 P2
     - [ ] Create smoke test suite
     - [ ] Setup Uptime monitoring (GitHub Actions)
