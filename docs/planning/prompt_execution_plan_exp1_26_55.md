@@ -214,6 +214,7 @@ You are checking hyperparameter sensitivity.
 ## PHASE D: PUBLICATION
 
 ### Task: EXP1-41 Publication Visualization Suite
+**Status**: Completed
 **Priority**: 🔥 P0
 **Trigger**: "Execute EXP1-41"
 **Prompt Context**:
@@ -225,15 +226,16 @@ You are generating paper figures.
 **Files**: `scripts/generate_publication_figures.py`.
 
 ### Task: EXP1-42 Write Methodology Chapter
+**Status**: Completed
 **Priority**: 🔥 P0
 **Trigger**: "Execute EXP1-42"
 **Prompt Context**:
 You are drafting the methodology chapter.
 **Objective**: Write Chapter 3 sections.
 **Steps**:
-1.  Create `docs/thesis_material/chapter_3_methodology_exp1.md`.
-2.  Write content following the detailed structure defined in the plan.
-**Files**: `docs/thesis_material/chapter_3_methodology_exp1.md`.
+1.  Implemented `src/scripts/extract_methodology_metadata.py` and `src/scripts/generate_methodology_latex.py`.
+2.  Generated content in `docs/thesis/`.
+**Files**: `docs/thesis/chapter_3_methodology.tex`.
 
 ### Task: EXP1-43 Write Results Chapter
 **Priority**: 🔥 P0
