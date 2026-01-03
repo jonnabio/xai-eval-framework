@@ -17,22 +17,3 @@ services:
         sync: false # Set in dashboard
       - key: SENTRY_DSN
         sync: false # Set in dashboard
-
-  - type: web
-    name: xai-benchmark-frontend
-    env: node
-    region: oregon
-    plan: starter
-    buildCommand: cd xai-benchmark && npm ci && npm run build
-    startCommand: cd xai-benchmark && node .next/standalone/server.js
-    healthCheckPath: /api/health
-    autoDeploy: true
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: NEXT_PUBLIC_API_URL
-        value: http://xai-eval-api:10000 # Internal networking
-      - key: NEXT_TELEMETRY_DISABLED
-        value: 1
-      - key: NODE_VERSION
-        value: 20.9.0
