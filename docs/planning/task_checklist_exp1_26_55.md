@@ -118,10 +118,11 @@ To maximize efficiency, tasks are split between two workstations based on resour
 **Duration**: Weeks 7-9
 **Objective**: Thesis chapters and reproducible artifact
 
-- [ ] **EXP1-41**: Publication-Quality Visualization Suite 🔥 P0
-    - [ ] Generate 10+ vector figures (Heatmaps, Radar, Boxplots)
-- [ ] **EXP1-42**: Write Methodology Chapter Section 🔥 P0
-    - [ ] Draft 8-10 pages (Design, Models, Metrics, Validation)
+- [x] **EXP1-41**: Publication-Quality Visualization Suite 🔥 P0
+    - [x] Generate 10+ vector figures (Heatmaps, Radar, Boxplots)
+- [x] **EXP1-42**: Write Methodology Chapter Section 🔥 P0
+    - [x] Implemented automation pipeline (`extract_methodology_metadata.py`, `generate_methodology_latex.py`)
+    - [x] Generated LaTeX templates and tables from experimental data
 - [ ] **EXP1-43**: Write Results Chapter Section 🔥 P0
     - [ ] Draft 12-15 pages (Performance, Metrics, LLM, Comparisons)
 - [ ] **EXP1-44**: Create Reproducibility Package ⚡ P1
