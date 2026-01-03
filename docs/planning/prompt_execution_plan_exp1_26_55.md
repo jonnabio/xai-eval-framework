@@ -238,15 +238,16 @@ You are drafting the methodology chapter.
 **Files**: `docs/thesis/chapter_3_methodology.tex`.
 
 ### Task: EXP1-43 Write Results Chapter
+**Status**: Completed
 **Priority**: 🔥 P0
 **Trigger**: "Execute EXP1-43"
 **Prompt Context**:
 You are drafting the results chapter.
 **Objective**: Write Chapter 5 sections.
 **Steps**:
-1.  Create `docs/thesis_material/chapter_5_results_exp1.md`.
-2.  Write interpretations of the figures/tables.
-**Files**: `docs/thesis_material/chapter_5_results_exp1.md`.
+1.  Implemented `src/scripts/extract_results_metadata.py`.
+2.  Generated `docs/thesis/chapter_5_results.tex` and tables.
+**Files**: `docs/thesis/chapter_5_results.tex`.
 
 ### Task: EXP1-44 Create Reproducibility Package
 **Priority**: ⚡ P1
