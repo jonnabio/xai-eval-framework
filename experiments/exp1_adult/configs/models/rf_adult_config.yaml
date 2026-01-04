@@ -14,12 +14,13 @@ model:
     # Number of trees in the forest.
     # Impact: Higher = more stable, better performance, but slower training/inference.
     # Range: 100-1000. 200 is a solid baseline trade-off.
-    n_estimators: 200
+    # Range: 100-1000. 200 is a solid baseline trade-off.
+    n_estimators: 50
     
     # Maximum depth of the tree.
     # Impact: Controls overfitting. None = nodes expanded until leaf is pure.
     # Choice: None allows full growth; we rely on min_samples_leaf and ensemble to control variance.
-    max_depth: null
+    max_depth: 15
     
     # Minimum samples required to split an internal node.
     # Impact: Higher values prevent creating specific nodes for noise (regularization).
