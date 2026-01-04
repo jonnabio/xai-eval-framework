@@ -126,9 +126,9 @@ To maximize efficiency, tasks are split between two workstations based on resour
 - [x] **EXP1-43**: Write Results Chapter Section 🔥 P0
     - [x] Implemented Results Automation Pipeline (`extract_results_metadata.py`)
     - [x] Generated LaTeX chapter and tables for Performance, XAI Metrics, and LLM Scores
-- [ ] **EXP1-44**: Create Reproducibility Package ⚡ P1
-    - [ ] Create Guide, Environment, Checksums, Validation Script
-    - [ ] Prepare Zenodo archive
+- [x] **EXP1-44**: Create Reproducibility Package ⚡ P1
+    - [x] Create Guide, Environment, Checksums, Validation Script
+    - [x] Prepare Zenodo archive
 - [ ] **EXP1-45**: Write Discussion & Future Work Section 📋 P2
     - [ ] Draft 6-8 pages (Interpretation, Limitations, Future)
 
