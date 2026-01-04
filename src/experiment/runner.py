@@ -7,6 +7,8 @@ and result persistence for XAI evaluation experiments.
 
 import json
 import logging
+import sys
+import argparse
 from pathlib import Path
 from typing import Dict, List, Any
 from datetime import datetime
@@ -469,3 +471,33 @@ class ExperimentRunner:
         csv_path = self.config.output_dir / "metrics.csv"
         df.to_csv(csv_path, index=False)
         logger.info(f"Saved CSV metrics to: {csv_path}")
+
+if __name__ == "__main__":
+    # Setup logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    parser = argparse.ArgumentParser(description="Run single XAI experiment")
+    parser.add_argument(
+        "--config",
+        type=str,
+        required=True,
+        help="Path to experiment configuration YAML"
+    )
+    
+    args = parser.parse_args()
+    
+    try:
+        from src.experiment.config import load_config
+        
+        config_path = Path(args.config)
+        config = load_config(config_path)
+        
+        runner = ExperimentRunner(config)
+        runner.run()
+        
+    except Exception as e:
+        logger.error(f"Failed to run experiment: {e}")
+        sys.exit(1)
