@@ -357,6 +357,14 @@ class ExperimentRunner:
                 self.setup()
             else:
                 logger.info("Dataset already loaded, skipping setup()")
+
+            # Check for existing results
+            json_path = self.config.output_dir / "results.json"
+            if json_path.exists():
+                logger.info(f"Results already exist at {json_path}. Skipping experiment execution.")
+                with open(json_path, 'r') as f:
+                    self.results = json.load(f)
+                return self.results
             
             instances = self.generate_instances()
             
