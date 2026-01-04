@@ -431,3 +431,112 @@ class XGBoostTrainer:
         logger.debug(f"Generated {len(probs)} probability estimates.")
         return probs
 
+
+def train_xgboost_adult(
+    config_path: str = "experiments/exp1_adult/configs/models/xgb_adult_config.yaml",
+    force_retrain: bool = False,
+    verbose: bool = True
+):
+    """
+    Train XGBoost model on Adult dataset (wrapper function).
+    
+    This is a convenience wrapper around XGBoostTrainer that mirrors the
+    train_random_forest_adult function pattern for consistency.
+    
+    Args:
+        config_path (str): Path to configuration file.
+        force_retrain (bool): If True, force retraining even if model exists.
+        verbose (bool): If True, enable verbose logging.
+        
+    Returns:
+        Tuple[xgb.XGBClassifier, dict]: Trained model and metrics dictionary.
+        
+    Example:
+        >>> from src.models.xgboost_trainer import train_xgboost_adult
+        >>> model, metrics = train_xgboost_adult(
+        ...     config_path="experiments/exp1_adult/configs/models/xgb_adult_config.yaml",
+        ...     force_retrain=True
+        ... )
+        >>> print(metrics['accuracy'])
+    """
+    try:
+        # Import data loader
+        from src.data_loading.adult import load_adult
+        
+        # Load configuration
+        config_path = Path(config_path)
+        if not config_path.exists():
+            raise FileNotFoundError(f"Config file not found: {config_path}")
+            
+        with open(config_path, 'r') as f:
+            if str(config_path).endswith('.yaml') or str(config_path).endswith('.yml'):
+                import yaml
+                config = yaml.safe_load(f)
+            else:
+                config = json.load(f)
+        
+        # Extract model params and output paths
+        model_params = config.get('model', {}).get('params', {})
+        output_config = config.get('output', {})
+        
+        model_dir = Path(output_config.get('models_dir', 'experiments/exp1_adult/models/xgboost'))
+        model_dir.mkdir(parents=True, exist_ok=True)
+        
+        model_path = model_dir / output_config.get('model_filename', 'xgb_model.pkl')
+        
+        # Check if model exists and skip if not force_retrain
+        if model_path.exists() and not force_retrain:
+            if verbose:
+                logger.info(f"Model already exists at {model_path}. Loading...")
+            trainer = XGBoostTrainer.load(model_dir)
+            return trainer.model, trainer.metrics
+        
+        # Load data
+        if verbose:
+            logger.info("Loading Adult dataset...")
+        data = load_adult(verbose=verbose)
+        X_train, X_test, y_train, y_test = data[0], data[1], data[2], data[3]
+        
+        # Initialize trainer
+        if verbose:
+            logger.info(f"Initializing XGBoost with params: {model_params}")
+        trainer = XGBoostTrainer(config=model_params)
+        
+        # Train
+        if verbose:
+            logger.info("Starting XGBoost training...")
+        start_time = time.time()
+        trainer.train(X_train, y_train, X_val=X_test, y_val=y_test)
+        training_time = time.time() - start_time
+        
+        if verbose:
+            logger.info(f"Training completed in {training_time:.2f} seconds")
+        
+        # Evaluate
+        if verbose:
+            logger.info("Evaluating model on test set...")
+        metrics = trainer.evaluate(X_test, y_test)
+        
+        # Add training metadata
+        metrics["training_metadata"] = {
+            "training_time_seconds": round(training_time, 4),
+            "model_params": model_params,
+            "dataset_shape": X_train.shape,
+            "n_features": X_train.shape[1],
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        # Save
+        trainer.save(path=model_dir)
+        
+        if verbose:
+            logger.info(f"Model saved to {model_dir}")
+            logger.info(f"Test Accuracy: {metrics.get('accuracy')}")
+            logger.info(f"Test ROC AUC: {metrics.get('roc_auc')}")
+        
+        return trainer.model, metrics
+        
+    except Exception as e:
+        logger.error(f"Error in train_xgboost_adult: {str(e)}")
+        raise
+
