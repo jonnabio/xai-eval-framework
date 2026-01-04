@@ -1,21 +1,29 @@
+# Dockerfile for XAI Evaluation Framework Reproduction
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /workspace
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+# git: for potential pip git installs
+# wget: for data download if needed
+# gcc/g++: for building python extensions (shap, xgboost)
+RUN apt-get update && apt-get install -y \
     git \
+    wget \
+    gcc \
+    g++ \
+    make \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy requirements first to leverage caching
+COPY requirements-frozen.txt .
+RUN pip install --no-cache-dir -r requirements-frozen.txt
 
 # Copy the rest of the application
 COPY . .
 
-# Expose port
-EXPOSE 8000
+# Ensure scripts are executable
+RUN chmod +x experiments/exp1_adult/reproducibility_package/run_full_pipeline.sh
 
-# Command to run the application
-CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default command: Run the minimal reproduction pipeline
+CMD ["bash", "experiments/exp1_adult/reproducibility_package/run_full_pipeline.sh", "--mode", "minimal"]
