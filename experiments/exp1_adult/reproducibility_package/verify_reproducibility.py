@@ -32,9 +32,9 @@ class ReproducibilityChecker:
             self.warnings.append(f"Python version mismatch: expected 3.11, got {v.major}.{v.minor}")
 
         required = {
-            'sklearn': '1.3.0',
-            'xgboost': '2.0.0',
-            'shap': '0.42.1',
+            'sklearn': '1.8.0',
+            'xgboost': '3.1.2',
+            'shap': '0.50.0',
             'lime': '0.2.0.1' 
         }
         
