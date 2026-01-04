@@ -189,16 +189,16 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Update README
         - [x] Create Runbook
 - [ ] **EXP1-50**: Deploy Frontend to Render (Production) 🔥 P0
-    - [ ] **EXP1-50a**: Pre-Deployment & Config
-        - [ ] Write ADR-0005 (Render Frontend Strategy)
-        - [ ] Update `next.config.mjs` (headers, standalone)
-        - [ ] Update `render.yaml` (NODE_ENV, limits, healthCheckPath)
-        - [ ] Create `rollback_plan.md`
-    - [ ] **EXP1-50b**: Implementation
-        - [ ] Implement Health Check API (`/api/health`)
-        - [ ] Setup Sentry (Error Tracking)
-        - [ ] Verify Local Build (`npm run build`)
-        - [ ] Commit & Push
+    - [x] **EXP1-50a**: Pre-Deployment & Config
+        - [x] Write ADR-0005 (Render Frontend Strategy)
+        - [x] Update `next.config.mjs` (headers, standalone)
+        - [x] Update `render.yaml` (NODE_ENV, limits, healthCheckPath)
+        - [x] Create `rollback_plan.md`
+    - [x] **EXP1-50b**: Implementation
+        - [x] Implement Health Check API (`/api/health`)
+        - [x] Setup Sentry (Error Tracking)
+        - [x] Verify Local Build (`npm run build`)
+        - [x] Commit & Push
     - [ ] **EXP1-50c**: Deployment & Verification
         - [ ] Auto-Deploy to Render
         - [ ] Phase 1: Deployment Validation (Logs, Standalone)
