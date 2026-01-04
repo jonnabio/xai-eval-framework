@@ -333,29 +333,26 @@ You are executing the comprehensive Render deployment plan.
 6.  **Verify**: Run local checks and commit for auto-deploy.
 **Files**: `docs/decisions/*.md`, `render.yaml`, `src/api/*`.
 
-### Task: EXP1-50 Deploy Frontend to Vercel
+### Task: EXP1-50 Deploy Frontend to Render
 **Priority**: 🔥 P0
 **Trigger**: "Execute EXP1-50"
 **Prompt Context**:
-You are configuring the frontend for Vercel.
-**Objective**: Production build and environment variables.
-**Steps**:
+You are deploying the frontend to Render.
+**Objective**: Update `render.yaml` and configure Next.js for standalone mode.
 **Steps**:
 1.  **Pre-Deployment**:
-    -   Create `docs/decisions/0005-vercel-frontend-deployment.md` (ADR).
-    -   Create `docs/ops/rollback_plan_frontend.md`.
-    -   Update `vercel.json` and `next.config.mjs` for production (headers, regions, output).
-2.  **Implementation**:
-    -   Update `.env.example` with strict typing/validation comments.
-    -   Run local build/lint verification.
+    -   Create `docs/decisions/0005-render-frontend-deployment.md`.
+    -   Configure `next.config.mjs` (CSP, standalone, no source maps).
+    -   Create `rollback_plan.md`.
+2.  **Infrastructure**:
+    -   Update `render.yaml` (Node service, Health Check path, Env Vars).
+    -   Implement `/api/health`.
+    -   Setup Sentry.
 3.  **Deployment**:
-    -   Push to `main`.
-    -   Configure Vercel Project (Env Vars: `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_DEBUG`).
+    -   Push to `main`. Render auto-deploys.
 4.  **Verification**:
-    -   Run post-deployment checklist (Integration, Performance, Security).
-5.  **Documentation**:
-    -   Update `README.md` (Deployment section) and `CHANGELOG.md`.
-**Files**: `vercel.json`, `next.config.mjs`, `README.md`.
+    -   Phase 1-4 Checks (Logs, Functional, Security, Performance).
+**Files**: `render.yaml`, `next.config.mjs`, `src/app/api/health/route.ts`.
 
 ### Task: EXP1-51 Production Smoke Testing & Monitoring Setup
 **Priority**: 📋 P2

@@ -188,21 +188,23 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Update CHANGELOG
         - [x] Update README
         - [x] Create Runbook
-- [ ] **EXP1-50**: Deploy Frontend to Vercel (Production) 🔥 P0
+- [ ] **EXP1-50**: Deploy Frontend to Render (Production) 🔥 P0
     - [ ] **EXP1-50a**: Pre-Deployment & Config
-        - [ ] Write ADR-0005 (Vercel Frontend Strategy)
-        - [ ] Update `next.config.mjs` (headers, output, env)
-        - [ ] Update `vercel.json` (headers, redirects, regions)
+        - [ ] Write ADR-0005 (Render Frontend Strategy)
+        - [ ] Update `next.config.mjs` (headers, standalone)
+        - [ ] Update `render.yaml` (NODE_ENV, limits, healthCheckPath)
         - [ ] Create `rollback_plan.md`
     - [ ] **EXP1-50b**: Implementation
-        - [ ] Configure Environment Variables (`.env.example`)
-        - [ ] Verify Build & Lint (`npm run build && npm run lint`)
-        - [ ] Add Sentry/Analytics (Optional/Future)
+        - [ ] Implement Health Check API (`/api/health`)
+        - [ ] Setup Sentry (Error Tracking)
+        - [ ] Verify Local Build (`npm run build`)
+        - [ ] Commit & Push
     - [ ] **EXP1-50c**: Deployment & Verification
-        - [ ] Deploy to Vercel
-        - [ ] Verify Integration (Frontend -> Render Backend)
-        - [ ] Performance Audit (Lighthouse/Vercel Analytics)
-        - [ ] Cross-browser Check (Chrome/Edge/Firefox)
+        - [ ] Auto-Deploy to Render
+        - [ ] Phase 1: Deployment Validation (Logs, Standalone)
+        - [ ] Phase 2: Functional Testing (Charts, Nav)
+        - [ ] Phase 3: Integration & Security (CORS, HTTPS)
+        - [ ] Phase 4: Performance Audit (Lighthouse)
     - [ ] **EXP1-50d**: Post-Deployment Documentation
         - [ ] Update README with Deployment Badge & Instructions
         - [ ] Update CHANGELOG
