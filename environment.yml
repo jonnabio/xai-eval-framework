@@ -1,80 +1,14 @@
-# User Story: EXP1-04
 name: xai-eval
-
 channels:
   - conda-forge
   - defaults
-
 dependencies:
-  # -------------------------------------------------------------------------
-  # Core Language
-  # -------------------------------------------------------------------------
   - python=3.11
-
-  # -------------------------------------------------------------------------
-  # Data Manipulation & Storage
-  # -------------------------------------------------------------------------
-  - numpy<2.3      # Scientific computing (Pinned for Numba compatibility)
-  - pandas         # Data manipulation
-  - pyarrow        # Efficient data storage (Parquet integration)
-
-  # -------------------------------------------------------------------------
-  # Machine Learning
-  # -------------------------------------------------------------------------
-  - scikit-learn   # Core ML models and metrics
-  - xgboost        # Gradient boosted trees
-  - joblib         # Object serialization
-
-  # -------------------------------------------------------------------------
-  # Explainable AI (XAI)
-  # -------------------------------------------------------------------------
-  - shap           # SHAP (SHapley Additive exPlanations)
-  - lime           # LIME (Local Interpretable Model-agnostic Explanations)
-
-  # -------------------------------------------------------------------------
-  # Visualization
-  # -------------------------------------------------------------------------
-  - matplotlib     # Basic plotting
-  - seaborn        # Statistical data visualization
-
-  # -------------------------------------------------------------------------
-  # Development & Testing Tools
-  # -------------------------------------------------------------------------
-  - pytest         # Testing framework
-  - black          # Code formatting
-  - ruff           # Fast linting
-  - tqdm           # Progress bars
-  - mlflow         # Experiment tracking
-
-  # -------------------------------------------------------------------------
-  # Notebook Environment
-  # -------------------------------------------------------------------------
-  - jupyter        # Jupyter notebook interface
-  - ipykernel      # Python kernel for Jupyter
-
-  # -------------------------------------------------------------------------
-  # Utilities
-  # -------------------------------------------------------------------------
-  - pyyaml         # YAML configuration parsing
-  - jinja2         # Templating engine (e.g. for prompts)
-  - python-dotenv  # Loading environment variables from .env
-  - sphinx         # Documentation generator
-  - sphinx_rtd_theme # ReadTheDocs theme
-
-  # -------------------------------------------------------------------------
-  # API & Web
-  # -------------------------------------------------------------------------
-  - fastapi        # Web framework
-  - uvicorn        # ASGI server
-  - pydantic       # Data validation
-  - pydantic-settings # Configuration management
-
-  # -------------------------------------------------------------------------
-  # Pip Dependencies (Packages not in conda or preferred via pip)
-  # -------------------------------------------------------------------------
   - pip
-  - pyyaml
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
   - pip:
-
-      - openai              # OpenAI API client
-      - google-generativeai # Gemini/Palm API client
+    - -r requirements-frozen.txt

@@ -20,6 +20,10 @@ def extract_quantitative_results(results_dir):
     results_path = Path(results_dir)
     # Recursively find all results.json files
     for result_file in results_path.glob("**/results.json"):
+        # Exclude tuning directory
+        if "tuning" in str(result_file):
+            continue
+            
         try:
             data = load_json(result_file)
             
@@ -32,7 +36,18 @@ def extract_quantitative_results(results_dir):
             instances = data.get('instance_evaluations', [])
             metrics_list = defaultdict(list)
             
+            # Compute Accuracy from instances if available
+            correct_count = 0
+            total_count = 0
+            
             for inst in instances:
+                # Performance tracking
+                if 'prediction_correct' in inst:
+                    total_count += 1
+                    if inst['prediction_correct']:
+                        correct_count += 1
+                
+                # Metric tracking
                 metrics = inst.get('metrics', {})
                 for m_name, m_val in metrics.items():
                     if isinstance(m_val, (int, float)):
@@ -48,47 +63,40 @@ def extract_quantitative_results(results_dir):
                 }
                 
             # Extract Global Performance
-            # Look for training_metrics_*.csv in the root results dir
+            # Priority 1: From global CSV (training_metrics_*.csv)
+            # Priority 2: Compute from instance evaluations
             performance = {}
-            # Assume results_dir is passed to function
+            row = None
+            
+            # Try CSV first
             root_results_path = Path(results_dir)
             csv_files = list(root_results_path.glob("training_metrics_*.csv"))
-            
             if csv_files:
-                # Take the most recent one
                 csv_files.sort()
                 try:
                     df = pd.read_csv(csv_files[-1])
-                    # Filter by model name if possible, or assume file structure
-                    # The CSV likely has columns: model_name, accuracy, roc_auc
-                    
-                    # Normalize model name from JSON to match CSV (e.g. 'rf' vs 'random_forest')
-                    # We check if our current 'model' is in any of the rows
-                    row = None
-                    if 'model' in df.columns: # CSV header says 'model', not 'model_name'
-                         # Fuzzy match: is 'rf' in 'exp1_adult_mvp_rf'?
+                    if 'model' in df.columns:
                          matches = df[df['model'].str.contains(model, case=False, na=False)]
                          if not matches.empty:
                              row = matches.iloc[0]
                          else:
-                             # Try known aliases
                              aliases = {'xgboost': 'xgb', 'rf': 'random_forest'}
                              if model in aliases:
                                  matches = df[df['model'].str.contains(aliases[model], case=False, na=False)]
                                  if not matches.empty:
                                      row = matches.iloc[0]
-                    elif len(df) > 0:
-                        # Fallback: if there's no model_name column, maybe it's just a single row or we can't map
-                        # But wait, we have multiple models (rf, xgb). The CSV must distinguish.
-                        # Let's check CSV content later. For now, try simple matching
-                        pass
                     
                     if row is not None:
                         if 'accuracy' in row: performance['accuracy'] = float(row['accuracy'])
                         if 'roc_auc' in row: performance['roc_auc'] = float(row['roc_auc'])
                         
                 except Exception as e:
-                    print(f"Warning: Could not read training metrics: {e}")
+                    print(f"Warning: Could not read training metrics from CSV: {e}")
+
+            # Fallback to instance computation if CSV failed or missing
+            if 'accuracy' not in performance and total_count > 0:
+                performance['accuracy'] = correct_count / total_count
+                performance['source'] = 'computed_from_instances'
 
             aggregated_data[key] = {
                 'model': model,
@@ -159,10 +167,57 @@ def merge_results(quant, qual):
         }
     return merged
 
+def extract_cv_results(cv_dir):
+    """
+    Extracts cross-validation summary statistics.
+    Returns a dictionary keyed by experiment name (e.g. 'exp1_cv_rf_lime').
+    """
+    cv_data = {}
+    cv_path = Path(cv_dir)
+    
+    if not cv_path.exists():
+        print(f"Warning: CV directory {cv_dir} does not exist.")
+        return {}
+
+    for exp_dir in cv_path.iterdir():
+        if not exp_dir.is_dir():
+            continue
+
+        summary_file = exp_dir / "cv_summary.json"
+        if summary_file.exists():
+            try:
+                cv_summary = load_json(summary_file)
+                exp_name = exp_dir.name
+                
+                # Simplified structure for metadata
+                cv_data[exp_name] = {
+                    'n_folds': len(cv_summary.get('fold_results', [])), # Fallback if n_folds not top-level
+                    'aggregated_metrics': cv_summary.get('aggregated_metrics', {}),
+                    # We might want validation scores too if available
+                }
+            except Exception as e:
+                print(f"Error reading CV summary {summary_file}: {e}")
+
+    return cv_data
+
+def load_significance_results(stats_file):
+    """Loads statistical significance test results."""
+    if not Path(stats_file).exists():
+        print(f"Warning: Significance results file {stats_file} not found.")
+        return {}
+    
+    try:
+        return load_json(stats_file)
+    except Exception as e:
+        print(f"Error reading significance results: {e}")
+        return {}
+
 def main():
     parser = argparse.ArgumentParser(description="Extract results metadata for LaTeX generation.")
     parser.add_argument("--results-dir", default="experiments/exp1_adult/results", help="Directory containing XAI results")
     parser.add_argument("--llm-file", default="experiments/exp1_adult/llm_eval/results_full.json", help="Path to LLM results JSON")
+    parser.add_argument("--cv-dir", default="outputs/cv", help="Directory containing CV results")
+    parser.add_argument("--stats-file", default="outputs/analysis/significance_results.json", help="Path to significance results JSON")
     parser.add_argument("--output", default="docs/thesis/results_metadata.json", help="Output JSON path")
     args = parser.parse_args()
     
@@ -172,8 +227,18 @@ def main():
     print("Extracting qualitative LLM results...")
     qual_data = extract_qualitative_results(args.llm_file)
     
+    print("Extracting cross-validation results...")
+    cv_data = extract_cv_results(args.cv_dir)
+    
+    print("Loading statistical significance results...")
+    stats_data = load_significance_results(args.stats_file)
+    
     print("Merging data...")
     final_metadata = merge_results(quant_data, qual_data)
+    
+    # Add new sections to metadata
+    final_metadata['cross_validation'] = cv_data
+    final_metadata['statistical_tests'] = stats_data
     
     # Save
     out_path = Path(args.output)
