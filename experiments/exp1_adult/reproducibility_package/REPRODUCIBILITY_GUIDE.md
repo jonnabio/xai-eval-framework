@@ -81,7 +81,7 @@ bash experiments/exp1_adult/reproducibility_package/run_full_pipeline.sh --mode 
 ```
 
 ### Manual Steps (If not using script)
-1.  **Train Models**: `python -m src.models.train_adult_models --model all`
+1.  **Train Models**: `python scripts/run_train_models.py --model all`
 2.  **Run Experiments**: `python -m src.experiment.runner --config configs/experiments/exp1_adult_rf_lime.yaml` (repeat for all 4 configs)
 3.  **Extract Results**: `python src/scripts/extract_results_metadata.py ...`
 4.  **Generate LaTeX**: `python src/scripts/generate_results_latex.py ...`

@@ -49,11 +49,13 @@ log ""
 log "Step 2: Training models..."
 # Ensure models directory exists
 mkdir -p experiments/exp1_adult/models
-log "  - Training Random Forest..."
-python -m src.models.train_adult_models --model rf | tee -a "$LOG_FILE"
+# Train Random Forest
+echo "  - Training Random Forest..." | tee -a "$LOG_FILE"
+python scripts/run_train_models.py --model rf | tee -a "$LOG_FILE"
 
-log "  - Training XGBoost..."
-python -m src.models.train_adult_models --model xgb | tee -a "$LOG_FILE"
+# Train XGBoost
+echo "  - Training XGBoost..." | tee -a "$LOG_FILE"
+python scripts/run_train_models.py --model xgb | tee -a "$LOG_FILE"
 
 # Step 3: Run experiments
 log ""
