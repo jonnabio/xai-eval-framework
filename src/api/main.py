@@ -109,6 +109,14 @@ async def startup_event():
     logger.info("=" * 70)
     logger.info(f"🚀 {settings.API_TITLE} v{settings.API_VERSION}")
     logger.info(f"🌍 Environment: {settings.ENVIRONMENT}")
+    
+    # Log versions for debugging
+    import sys
+    import pandas as pd
+    import numpy as np
+    logger.info(f"🐍 Python: {sys.version.split()[0]}")
+    logger.info(f"📦 Pandas: {pd.__version__} | NumPy: {np.__version__}")
+    
     logger.info("=" * 70)
     
     # Ensure data directories exist
