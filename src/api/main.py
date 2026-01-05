@@ -14,8 +14,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from datetime import datetime
 import logging
-import sentry_sdk
-from sentry_sdk.integrations.fastapi import FastApiIntegration
+
+try:
+    import sentry_sdk
+    from sentry_sdk.integrations.fastapi import FastApiIntegration
+except ImportError:
+    sentry_sdk = None
+
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from src.api.config import settings
@@ -87,7 +92,7 @@ async def startup_event():
     logger.info("=" * 70)
     
     # Initialize Sentry
-    if settings.SENTRY_DSN:
+    if settings.SENTRY_DSN and sentry_sdk:
         sentry_sdk.init(
             dsn=settings.SENTRY_DSN,
             environment=settings.SENTRY_ENVIRONMENT,
@@ -96,7 +101,10 @@ async def startup_event():
         )
         logger.info("✅ Sentry initialized")
     else:
-        logger.info("⚠️ Sentry DSN not set, skipping initialization")
+        if not sentry_sdk:
+            logger.warning("⚠️ Sentry SDK not installed, skipping monitoring")
+        else:
+            logger.info("⚠️ Sentry DSN not set, skipping initialization")
 
     # Metrics exposed at /metrics by Instrumentator (initialized below)
     logger.info("✅ Prometheus metrics exposed at /metrics")
