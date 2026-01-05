@@ -60,6 +60,13 @@ app = FastAPI(
     openapi_url="/openapi.json"
 )
 
+# Root redirect to docs
+from fastapi.responses import RedirectResponse
+@app.get("/", include_in_schema=False)
+async def root():
+    return RedirectResponse(url="/docs")
+
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
