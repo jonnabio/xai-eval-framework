@@ -1,7 +1,10 @@
 from pathlib import Path
 
+import os
 # Directory structure
-DATA_ROOT = Path("./data")
+# Use env var or default to /workspace/data if it exists (for container), else local ./data
+default_data_dir = "/workspace/data" if Path("/workspace").exists() else "./data"
+DATA_ROOT = Path(os.environ.get("DATA_DIR", default_data_dir))
 RAW_DATA_DIR = DATA_ROOT / "raw"
 
 # Adult dataset configuration
