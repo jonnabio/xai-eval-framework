@@ -102,9 +102,8 @@ async def startup_event():
     logger.info(f"🌍 Environment: {settings.ENVIRONMENT}")
     logger.info("=" * 70)
     
-    # Initialize Sentry
-    # Initialize Sentry
-    if settings.SENTRY_DSN and SENTRY_AVAILABLE:
+    # Initialize Sentry only if available and configured
+    if SENTRY_AVAILABLE and settings.SENTRY_DSN:
         sentry_sdk.init(
             dsn=settings.SENTRY_DSN,
             environment=settings.SENTRY_ENVIRONMENT,
@@ -112,11 +111,10 @@ async def startup_event():
             integrations=[FastApiIntegration()],
         )
         logger.info("✅ Sentry initialized")
+    elif settings.SENTRY_DSN and not SENTRY_AVAILABLE:
+        logger.warning("⚠️  Sentry DSN set but sentry-sdk not installed")
     else:
-        if not SENTRY_AVAILABLE:
-            logger.warning("⚠️ Sentry SDK not installed, skipping monitoring")
-        else:
-            logger.info("⚠️ Sentry DSN not set, skipping initialization")
+        logger.info("ℹ️  Sentry monitoring disabled")
 
     # Metrics exposed at /metrics by Instrumentator (initialized below)
     if PROMETHEUS_AVAILABLE:
