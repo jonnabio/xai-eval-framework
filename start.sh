@@ -15,6 +15,12 @@ echo "⚠️  Skipping pipeline execution on startup"
 echo "   API will start immediately for health checks"
 echo ""
 
+# Run startup diagnostics
+echo "Running diagnostics..."
+python debug_startup.py
+echo "Diagnostics complete."
+echo ""
+
 # Start FastAPI server immediately
 echo "Starting FastAPI server..."
 echo "=================================================="
