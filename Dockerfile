@@ -26,4 +26,4 @@ COPY . .
 RUN chmod +x experiments/exp1_adult/reproducibility_package/run_full_pipeline.sh
 
 # Default command: Run the minimal reproduction pipeline
-CMD ["bash", "experiments/exp1_adult/reproducibility_package/run_full_pipeline.sh", "--mode", "minimal"]
+CMD exec python -m uvicorn src.api.main:app --host 0.0.0.0 --port ${PORT:-10000} --log-level info
