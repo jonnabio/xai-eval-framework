@@ -117,10 +117,6 @@ async def startup_event():
         logger.info("ℹ️  Sentry monitoring disabled")
 
     # Metrics exposed at /metrics by Instrumentator (initialized below)
-    if PROMETHEUS_AVAILABLE:
-        logger.info("✅ Prometheus metrics exposed at /metrics")
-    else:
-        logger.warning("⚠️ Prometheus metrics disabled (dependency missing)")
 
     logger.info(f"📍 Server: http://{settings.HOST}:{settings.PORT}")
     logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
@@ -128,9 +124,15 @@ async def startup_event():
     logger.info(f"🔧 Debug mode: {settings.DEBUG}")
 
 
-# Initialize Prometheus Instrumentator (Must be done before app startup for middleware)
+# Initialize Prometheus metrics only if available
 if PROMETHEUS_AVAILABLE:
-    Instrumentator().instrument(app).expose(app)
+    try:
+        Instrumentator().instrument(app).expose(app)
+        logger.info("✅ Prometheus metrics enabled at /metrics")
+    except Exception as e:
+        logger.warning(f"⚠️  Failed to initialize Prometheus: {e}")
+else:
+    logger.info("ℹ️  Prometheus metrics disabled (instrumentator not available)")
 
 # Shutdown event
 @app.on_event("shutdown")
