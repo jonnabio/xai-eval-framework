@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e  # Exit on any error
+# set -e  # Exit on any error (Removed to allow pipeline failures)
 
 echo "=================================================="
 echo "🚀 Starting XAI Evaluation Backend"

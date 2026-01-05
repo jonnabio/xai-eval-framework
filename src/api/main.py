@@ -103,13 +103,12 @@ async def startup_event():
 
     logger.info(f"📍 Server: http://{settings.HOST}:{settings.PORT}")
     logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
+    logger.info(f"📂 Experiments: {settings.EXPERIMENTS_DIR}")
+    logger.info(f"🔧 Debug mode: {settings.DEBUG}")
+
 
 # Initialize Prometheus Instrumentator (Must be done before app startup for middleware)
 Instrumentator().instrument(app).expose(app)
-    logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
-    logger.info(f"📂 Experiments: {settings.EXPERIMENTS_DIR}")
-    logger.info(f"🔧 Debug mode: {settings.DEBUG}")
-    logger.info("=" * 70)
 
 # Shutdown event
 @app.on_event("shutdown")
