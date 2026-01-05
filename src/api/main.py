@@ -34,6 +34,8 @@ except ImportError:
     PROMETHEUS_AVAILABLE = False
     print("⚠️  prometheus-fastapi-instrumentator not available, metrics disabled")
 
+from src.data_loading.adult import ensure_adult_data_dirs
+
 from src.api.config import settings
 from src.api.routes import health, runs, debug, batch, human_eval
 from src.api.middleware.exceptions import (
@@ -101,6 +103,10 @@ async def startup_event():
     logger.info(f"🚀 {settings.API_TITLE} v{settings.API_VERSION}")
     logger.info(f"🌍 Environment: {settings.ENVIRONMENT}")
     logger.info("=" * 70)
+    
+    # Ensure data directories exist
+    ensure_adult_data_dirs()
+
     
     # Initialize Sentry only if available and configured
     if SENTRY_AVAILABLE and settings.SENTRY_DSN:

@@ -39,7 +39,7 @@ from sklearn.pipeline import Pipeline
 from src.data_loading.data_config import ADULT_CONFIG
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Dataset Constants (kept for backward compatibility/direct access)
@@ -642,4 +642,5 @@ def get_original_feature_names() -> tuple[List[str], List[str]]:
 
 
 # Call on module import to ensure structure
-ensure_adult_data_dirs()
+# logging.basicConfig removed to avoid side effects on import
+# ensure_adult_data_dirs() removed to avoid side effects on import - call explicitly in app startup
