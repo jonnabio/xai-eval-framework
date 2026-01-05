@@ -15,11 +15,15 @@ from fastapi.exceptions import RequestValidationError
 from datetime import datetime
 import logging
 
+# Optional monitoring dependencies - fail gracefully if not installed
 try:
     import sentry_sdk
     from sentry_sdk.integrations.fastapi import FastApiIntegration
+    SENTRY_AVAILABLE = True
 except ImportError:
     sentry_sdk = None
+    SENTRY_AVAILABLE = False
+    print("⚠️  sentry-sdk not available, Sentry monitoring disabled")
 
 from prometheus_fastapi_instrumentator import Instrumentator
 
@@ -92,7 +96,8 @@ async def startup_event():
     logger.info("=" * 70)
     
     # Initialize Sentry
-    if settings.SENTRY_DSN and sentry_sdk:
+    # Initialize Sentry
+    if settings.SENTRY_DSN and SENTRY_AVAILABLE:
         sentry_sdk.init(
             dsn=settings.SENTRY_DSN,
             environment=settings.SENTRY_ENVIRONMENT,
@@ -101,7 +106,7 @@ async def startup_event():
         )
         logger.info("✅ Sentry initialized")
     else:
-        if not sentry_sdk:
+        if not SENTRY_AVAILABLE:
             logger.warning("⚠️ Sentry SDK not installed, skipping monitoring")
         else:
             logger.info("⚠️ Sentry DSN not set, skipping initialization")
