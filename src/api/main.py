@@ -25,7 +25,14 @@ except ImportError:
     SENTRY_AVAILABLE = False
     print("⚠️  sentry-sdk not available, Sentry monitoring disabled")
 
-from prometheus_fastapi_instrumentator import Instrumentator
+
+try:
+    from prometheus_fastapi_instrumentator import Instrumentator
+    PROMETHEUS_AVAILABLE = True
+except ImportError:
+    Instrumentator = None
+    PROMETHEUS_AVAILABLE = False
+    print("⚠️  prometheus-fastapi-instrumentator not available, metrics disabled")
 
 from src.api.config import settings
 from src.api.routes import health, runs, debug, batch, human_eval
@@ -112,7 +119,10 @@ async def startup_event():
             logger.info("⚠️ Sentry DSN not set, skipping initialization")
 
     # Metrics exposed at /metrics by Instrumentator (initialized below)
-    logger.info("✅ Prometheus metrics exposed at /metrics")
+    if PROMETHEUS_AVAILABLE:
+        logger.info("✅ Prometheus metrics exposed at /metrics")
+    else:
+        logger.warning("⚠️ Prometheus metrics disabled (dependency missing)")
 
     logger.info(f"📍 Server: http://{settings.HOST}:{settings.PORT}")
     logger.info(f"📚 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
@@ -121,7 +131,8 @@ async def startup_event():
 
 
 # Initialize Prometheus Instrumentator (Must be done before app startup for middleware)
-Instrumentator().instrument(app).expose(app)
+if PROMETHEUS_AVAILABLE:
+    Instrumentator().instrument(app).expose(app)
 
 # Shutdown event
 @app.on_event("shutdown")
