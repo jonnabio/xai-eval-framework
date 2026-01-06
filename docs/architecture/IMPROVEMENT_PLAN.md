@@ -119,35 +119,65 @@ The initial architecture document omitted 9 critical components that exist in pr
 
 ### Phase 1: Security & Stability (Weeks 1-2)
 **Priority**: Critical security vulnerabilities
--   Implement JWT authentication.
--   Add rate limiting.
--   Fix path traversal and CORS.
--   Input validation with Pydantic.
+-   **Authentication (JWT)**:
+    -   Install `python-jose[cryptography]` and `passlib`.
+    -   Create `src/api/auth.py` for token generation and verification.
+    -   Add `get_current_user` dependency to sensitive routes (`/human-eval`, `/admin`).
+-   **Rate Limiting**:
+    -   Install `slowapi`.
+    -   Initialize limiter in `main.py` using `get_remote_address`.
+    -   Apply `@limiter.limit("5/minute")` to computationally expensive endpoints like `/runs`.
+-   **Path Traversal & CORS**:
+    -   Update `data_loader.py` to use `pathlib.Path.resolve()` and check `path.is_relative_to(SAFE_ROOT)`.
+    -   Restrict CORS origins to the specific Frontend URL (from env var) in production.
+-   **Input Validation**:
+    -   Enforce strict Pydantic v2 usage.
+    -   Add regex validators for all ID string fields to prevent injection.
 
 ### Phase 2: Scalability (Weeks 3-4)
 **Priority**: Performance & Workflow Preservation
 -   **Migrate to PostgreSQL with Hybrid Sync**:
-    -   *Constraint*: Must preserve Git-based deployment workflow ("Offline Pipeline").
-    -   *Solution*: Implement `sync_db.py` to run on API startup. It hydrates the database from the deployed JSON files.
-    -   *Benefit*: Enables SQL-based filtering/pagination while keeping `git push` as the release mechanism.
--   Implement pagination and server-side filtering.
--   Parallel explanation generation.
--   Redis caching.
+    -   *Schema Design*: Create tables `experiments` (metadata), `runs` (metrics), and `explanations` (JSONB).
+    -   *Sync Script (`sync_db.py`)*:
+        1.  Scan `experiments/` directory recursively.
+        2.  Compute checksum of each `results.json`.
+        3.  Upsert record in DB only if checksum changed (Idempotent Sync).
+        4.  Run this script automatically in `startup_event`.
+-   **Server-Side Filtering**:
+    -   Update `/api/runs` to accept query params: `?model=rf&metric_accuracy_gt=0.8&page=1`.
+    -   Rewrite `src/api/services/runs.py` to build SQL queries using `SQLAlchemy` or `SQLModel`.
+-   **Parallel Processing**:
+    -   Replace sequential loops in `BatchExperimentRunner` with `concurrent.futures.ProcessPoolExecutor`.
+-   **Caching**:
+    -   Use `functools.lru_cache` for configuration loading.
+    -   (Optional) simple Redis cache for expensive aggregation queries.
 
 ### Phase 3: Code Quality (Weeks 5-6)
 **Priority**: Maintainability
--   Refactoring: ExplainerWrapper ABC, Repository Pattern.
--   Split ExperimentRunner.
+-   **Refactoring Wrappers**:
+    -   Create `src/xai/base.py` defining `ExplainerWrapper(ABC)` with abstract method `explain(instance) -> Explanation`.
+    -   Subclass `SHAPWrapper` and `LIMEWrapper` enforcing this interface.
+-   **Repository Pattern**:
+    -   Define `ExperimentRepository` interface (Protocol).
+    -   Implement `FileSystemRepository` (current logic) and `SqlRepository` (new DB logic).
+    -   Inject repository dependency into API routes to decouple storage details.
 
 ### Phase 4: Observability (Week 7)
 **Priority**: Monitoring
--   OpenTelemetry integration.
--   Logging and Alerting setup.
+-   **OpenTelemetry**:
+    -   Install `opentelemetry-distro` and `opentelemetry-exporter-otlp`.
+    -   Auto-instrument FastAPI and SQLAlchemy.
+    -   Configure exporter to send traces to a collector (e.g., Jaeger or Honeycomb).
 
 ### Phase 5: Testing & CI/CD (Week 8)
 **Priority**: Automation
--   Comprehensive CI/CD pipelines.
--   Load testing.
+-   **CI Pipeline (`.github/workflows/ci.yml`)**:
+    -   Job 1: Linting (`ruff`, `mypy`).
+    -   Job 2: Backend Tests (`pytest --cov`).
+    -   Job 3: Frontend Tests (`vitest`).
+-   **Load Testing**:
+    -   Create `locustfile.py` to simulate 50 concurrent users fetching experiment results.
+    -   Verify API latency remains < 200ms under load.
 
 ---
 
