@@ -125,8 +125,11 @@ The initial architecture document omitted 9 critical components that exist in pr
 -   Input validation with Pydantic.
 
 ### Phase 2: Scalability (Weeks 3-4)
-**Priority**: Performance
--   Migrate to PostgreSQL.
+**Priority**: Performance & Workflow Preservation
+-   **Migrate to PostgreSQL with Hybrid Sync**:
+    -   *Constraint*: Must preserve Git-based deployment workflow ("Offline Pipeline").
+    -   *Solution*: Implement `sync_db.py` to run on API startup. It hydrates the database from the deployed JSON files.
+    -   *Benefit*: Enables SQL-based filtering/pagination while keeping `git push` as the release mechanism.
 -   Implement pagination and server-side filtering.
 -   Parallel explanation generation.
 -   Redis caching.
@@ -150,9 +153,11 @@ The initial architecture document omitted 9 critical components that exist in pr
 
 ## 7. Architectural Decision Records (ADRs)
 
-### ADR-001: Replace File Storage with PostgreSQL
-**Decision**: Migrate from JSON files to PostgreSQL for experiments metadata and results.
-**Rationale**: Enables efficient querying, filtering, and scalability beyond file system limits.
+### ADR-001: Hybrid Database Strategy
+**Decision**: Adopt PostgreSQL for query capabilities while retaining JSON files for deployment.
+**Rationale**: 
+-   **Scalability**: SQL enables `O(1)` lookups and efficient filtering for the dashboard.
+-   **Workflow Preservation**: Retaining file-based deployment ensures the existing CI/CD and "Offline Pipeline" remain valid. The DB is a read-only cache of the file system state.
 
 ### ADR-002: Adopt OpenTelemetry
 **Decision**: Standardize observability using OpenTelemetry.
