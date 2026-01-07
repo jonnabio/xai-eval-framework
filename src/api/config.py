@@ -77,6 +77,11 @@ class Settings(BaseSettings):
     HUMAN_EVAL_ANNOTATIONS_DIR: str = "annotations"
     HUMAN_EVAL_METADATA_FILE: str = "metadata.json"
     HUMAN_EVAL_MAX_ANNOTATORS: int = 10
-    HUMAN_EVAL_REQUIRE_AUTH: bool = False  # Set True for production
+    HUMAN_EVAL_REQUIRE_AUTH: bool = os.getenv("HUMAN_EVAL_REQUIRE_AUTH", "True").lower() == "true"
+
+    # Authentication Configuration
+    JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY", "insecure-debug-key-change-me")
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_HOURS: int = 24
 
 settings = Settings()

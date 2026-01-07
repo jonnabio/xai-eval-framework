@@ -14,15 +14,12 @@ import ssl
 import time
 from datetime import datetime
 
-# Disable SSL verification globally for this script to handle common Mac certificate issues
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    # Legacy Python that doesn't verify HTTPS certificates by default
-    pass
-else:
-    # Handle target environment that doesn't verify HTTPS certificates by default
-    ssl._create_default_https_context = _create_unverified_https_context
+# Handle SSL verification using certifi to avoid Mac certificate issues securely
+import certifi
+import ssl
+# We do NOT disable SSL verification anymore.
+# Instead, we will use ssl.create_default_context(cafile=certifi.where())
+# where necessary (e.g., in urllib calls).
 from pathlib import Path
 from typing import List, Optional, Dict, Any, Union
 import shutil
@@ -250,8 +247,19 @@ def _download_from_openml(cache_dir: Path) -> Optional[pd.DataFrame]:
         return None
 
 
+def _download_url_securely(url: str, target_path: Path) -> None:
+    """Download a file with secure SSL verification using certifi."""
+    logger.info(f"Downloading from {url} to {target_path}...")
+    
+    # Create secure SSL context with certifi's CA bundle
+    context = ssl.create_default_context(cafile=certifi.where())
+    
+    with urllib.request.urlopen(url, context=context, timeout=30) as response, open(target_path, 'wb') as out_file:
+        shutil.copyfileobj(response, out_file)
+
+
 def _download_from_uci(cache_dir: Path) -> Optional[pd.DataFrame]:
-    """Download dataset directly from UCI repository."""
+    """Download dataset directly from UCI repository securely."""
     logger.info("Downloading from uci_direct...")
     
     urls = {
@@ -261,47 +269,66 @@ def _download_from_uci(cache_dir: Path) -> Optional[pd.DataFrame]:
     
     dataframes = []
     
-    for split, url in urls.items():
-        try:
-            logger.info(f"Fetching {split} set from {url}...")
-            
-            # 3 retries
-            for attempt in range(3):
-                try:
-                    df_part = pd.read_csv(
-                        url, 
-                        header=None, 
-                        names=ADULT_CONFIG["column_names"],
-                        na_values=["?", " ?"],
-                        skipinitialspace=True,
-                        engine='python' # More robust separator handling
-                    )
-                    
-                    # UCI test file has a weird first line sometimes or dot at end of class
-                    if split == "test":
-                        # First line often "1x3 Cross validator" noise or just data
-                        # We'll filter based on expected bad lines if needed, but usually read_csv is okay
-                        # Adult test set target has a dot '.' at the end, e.g. '<=50K.'
-                        if df_part[TARGET_COLUMN].dtype == 'object':
-                            df_part[TARGET_COLUMN] = df_part[TARGET_COLUMN].str.rstrip('.')
-                            
-                    dataframes.append(df_part)
-                    break # Success
-                except Exception as e:
-                    if attempt == 2:
-                        raise e
-                    time.sleep(1)
-                    
-        except Exception as e:
-            logger.warning(f"Failed to download {split} from UCI: {e}")
+    # Create temp dir for raw downloads
+    temp_dir = cache_dir / "temp_uci_downloads"
+    temp_dir.mkdir(exist_ok=True)
+    
+    try:
+        for split, url in urls.items():
+            try:
+                # Determine temp filename
+                filename = url.split('/')[-1]
+                local_path = temp_dir / filename
+                
+                # Check if we need to download (reuse temp if exists to save bandwidth/time during retries)
+                # But here we assume fresh download to be safe or explicit cache check
+                
+                # 3 retries for download
+                for attempt in range(3):
+                    try:
+                        _download_url_securely(url, local_path)
+                        break 
+                    except Exception as e:
+                        if attempt == 2:
+                            raise e
+                        logger.warning(f"Download attempt {attempt+1} failed: {e}. Retrying...")
+                        time.sleep(1)
+                
+                logger.info(f"Reading {split} csv from {local_path}...")
+                
+                # Read from local file
+                df_part = pd.read_csv(
+                    local_path, 
+                    header=None, 
+                    names=ADULT_CONFIG["column_names"],
+                    na_values=["?", " ?"],
+                    skipinitialspace=True,
+                    engine='python' # More robust separator handling
+                )
+                
+                # Post-processing for test set eccentricities
+                if split == "test":
+                    # Adult test set target has a dot '.' at the end, e.g. '<=50K.'
+                    if TARGET_COLUMN in df_part.columns and df_part[TARGET_COLUMN].dtype == 'object':
+                        df_part[TARGET_COLUMN] = df_part[TARGET_COLUMN].astype(str).str.rstrip('.')
+                        
+                dataframes.append(df_part)
+                
+            except Exception as e:
+                logger.warning(f"Failed to download/process {split} from UCI: {e}")
+                return None
+                
+        if len(dataframes) != 2:
             return None
             
-    if len(dataframes) != 2:
-        return None
+        # Combine train and test
+        full_df = pd.concat(dataframes, ignore_index=True)
+        return full_df
         
-    # Combine train and test
-    full_df = pd.concat(dataframes, ignore_index=True)
-    return full_df
+    finally:
+        # Cleanup temp dir
+        if temp_dir.exists():
+            shutil.rmtree(temp_dir)
 
 
 def _fetch_adult_data(cache_dir: str = None) -> pd.DataFrame:

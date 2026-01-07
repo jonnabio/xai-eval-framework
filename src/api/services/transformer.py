@@ -226,13 +226,20 @@ def transform_experiment_to_run(exp_data: Dict[str, Any]) -> Run:
     llm_raw = exp_data.get("llm_evaluation", {})
     likert_raw = llm_raw.get("likert_scores", {})
     
+    # Helper to safely convert to int (rounding floats)
+    def safe_int(val):
+        try:
+            return int(round(float(val)))
+        except (ValueError, TypeError):
+            return 3
+
     # Default Likert if missing
     r_likert = LikertScores(
-        clarity=likert_raw.get("clarity", 3),
-        usefulness=likert_raw.get("usefulness", 3),
-        completeness=likert_raw.get("completeness", 3),
-        trustworthiness=likert_raw.get("trustworthiness", 3),
-        overall=likert_raw.get("overall", 3)
+        clarity=safe_int(likert_raw.get("clarity", 3)),
+        usefulness=safe_int(likert_raw.get("usefulness", 3)),
+        completeness=safe_int(likert_raw.get("completeness", 3)),
+        trustworthiness=safe_int(likert_raw.get("trustworthiness", 3)),
+        overall=safe_int(likert_raw.get("overall", 3))
     )
     
     r_llm_eval = LlmEval(

@@ -1,11 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pathlib import Path
 import os
 from src.api.config import settings
+from src.api.dependencies import get_current_admin
 
 router = APIRouter(tags=["Debug"])
 
-@router.get("/files")
+@router.get("/files", dependencies=[Depends(get_current_admin)])
 async def list_files():
     """List files in experiments directory."""
     try:
@@ -28,7 +29,7 @@ async def list_files():
     except Exception as e:
         return {"error": str(e)}
 
-@router.get("/loader")
+@router.get("/loader", dependencies=[Depends(get_current_admin)])
 async def debug_loader():
     """Debug the data loader logic."""
     try:

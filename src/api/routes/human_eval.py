@@ -8,10 +8,12 @@ Provides:
 - Admin statistics and export
 """
 
-from fastapi import APIRouter, HTTPException, Query, status, Response
+from fastapi import APIRouter, HTTPException, Query, status, Response, Request, Depends
 from typing import Optional
 from datetime import datetime
 import logging
+from src.api.limiter import limiter
+from src.api.dependencies import get_current_admin
 
 from src.api.models.schemas import (
     HumanEvalSamplesResponse,
@@ -39,7 +41,9 @@ router = APIRouter()
     description="Retrieve samples assigned to an annotator for human evaluation",
     tags=["Human Evaluation"]
 )
+@limiter.limit("20/minute")
 async def get_samples(
+    request: Request,
     annotator_id: Optional[str] = Query(
         None,
         description="Filter by annotator ID. If not provided, returns all samples."
@@ -108,7 +112,8 @@ async def get_samples(
     description="Submit a human annotation for a sample",
     tags=["Human Evaluation"]
 )
-async def submit_annotation(submission: HumanAnnotationSubmission):
+@limiter.limit("10/minute")
+async def submit_annotation(request: Request, submission: HumanAnnotationSubmission):
     """
     Submit an annotation.
 
@@ -157,7 +162,9 @@ async def submit_annotation(submission: HumanAnnotationSubmission):
     description="Get annotation progress for an annotator",
     tags=["Human Evaluation"]
 )
+@limiter.limit("60/minute")
 async def get_progress(
+    request: Request,
     annotator_id: str = Query(..., description="Annotator ID")
 ):
     """
@@ -199,9 +206,11 @@ async def get_progress(
     response_model=AdminStatsResponse,
     summary="Get Admin Statistics",
     description="Get overall annotation statistics (admin only)",
-    tags=["Human Evaluation - Admin"]
+    tags=["Human Evaluation - Admin"],
+    dependencies=[Depends(get_current_admin)]
 )
-async def get_admin_stats():
+@limiter.limit("20/minute")
+async def get_admin_stats(request: Request):
     """
     Get system-wide statistics.
 
@@ -210,8 +219,6 @@ async def get_admin_stats():
     - Overall completion rate
     - Per-annotator breakdown
     - Per-experiment breakdown
-
-    TODO: Add authentication check
     """
     logger.info("GET /human-eval/admin/stats")
 
@@ -237,9 +244,12 @@ async def get_admin_stats():
     "/admin/annotations",
     summary="Export All Annotations",
     description="Export all annotations with LLM scores for analysis (admin only)",
-    tags=["Human Evaluation - Admin"]
+    tags=["Human Evaluation - Admin"],
+    dependencies=[Depends(get_current_admin)]
 )
+@limiter.limit("10/minute")
 async def get_all_annotations(
+    request: Request,
     format: str = Query("json", description="Export format: 'json' or 'csv'")
 ):
     """
@@ -249,8 +259,6 @@ async def get_all_annotations(
     - format=csv: Returns CSV file for Excel/analysis
 
     Used for Cohen's kappa analysis.
-
-    TODO: Add authentication check
     """
     logger.info(f"GET /human-eval/admin/annotations - format={format}")
 

@@ -37,7 +37,7 @@ except ImportError:
 from src.data_loading.adult import ensure_adult_data_dirs
 
 from src.api.config import settings
-from src.api.routes import health, runs, debug, batch, human_eval
+from src.api.routes import health, runs, debug, batch, human_eval, auth
 from src.api.middleware.exceptions import (
     validation_exception_handler,
     general_exception_handler
@@ -61,10 +61,15 @@ app = FastAPI(
 )
 
 # Root redirect to docs
-from fastapi.responses import RedirectResponse
-@app.get("/", include_in_schema=False)
-async def root():
-    return RedirectResponse(url="/docs")
+# Root redirect removed to favor the informational JSON endpoint defined later
+
+# Rate Limiting
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from src.api.limiter import limiter
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 # Configure CORS
@@ -76,10 +81,17 @@ app.add_middleware(
     allow_headers=settings.CORS_ALLOW_HEADERS,
 )
 
+# Logging Middleware
+from src.api.middleware.logging import RequestLoggingMiddleware
+app.add_middleware(RequestLoggingMiddleware)
+
 # Register exception handlers
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
+
 # Include routers
+app.include_router(auth.router) # /token
+
 # Mount runs at root AND /api to support both conventions and fix frontend 404s
 app.include_router(runs.router)
 app.include_router(runs.router, prefix="/api")

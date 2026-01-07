@@ -53,6 +53,30 @@ class RunStatus(str, Enum):
     PENDING = "pending"
 
 # =============================================================================
+# AUTH MODELS
+# =============================================================================
+
+class Token(BaseModel):
+    """JWT Token response."""
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    """Data embedded in JWT token."""
+    username: Optional[str] = None
+    role: Optional[str] = None
+
+class User(BaseModel):
+    """User profile."""
+    username: str
+    disabled: Optional[bool] = None
+    role: str = "user"  # 'admin', 'annotator', 'viewer'
+
+class UserInDB(User):
+    """User with hashed password for DB storage."""
+    hashed_password: str
+
+# =============================================================================
 # MODELS
 # =============================================================================
 
@@ -93,8 +117,8 @@ class LlmEval(BaseModel):
 
 class Run(BaseModel):
     """Complete benchmark run with all metadata and results."""
-    id: str = Field(..., min_length=1)
-    modelName: str = Field(..., min_length=1)
+    id: str = Field(..., min_length=1, pattern=r'^[a-zA-Z0-9_.-]+$', description="Alphanumeric ID with underscores, dots, or dashes")
+    modelName: str = Field(..., min_length=1, pattern=r'^[a-zA-Z0-9_.-]+$', description="Model name")
     modelType: ModelType
     dataset: Dataset
     method: XaiMethod
@@ -288,8 +312,8 @@ class HumanAnnotationRatings(BaseModel):
 
 class HumanAnnotationSubmission(BaseModel):
     """Request model for submitting a human annotation."""
-    sample_id: str = Field(..., min_length=1, description="Unique sample identifier (e.g., 'rf_lime_7834')")
-    annotator_id: str = Field(..., min_length=1, max_length=50, description="Annotator identifier")
+    sample_id: str = Field(..., min_length=1, pattern=r'^[a-zA-Z0-9_.-]+$', description="Unique sample identifier (e.g., 'rf_lime_7834')")
+    annotator_id: str = Field(..., min_length=1, max_length=50, pattern=r'^[a-zA-Z0-9_.-]+$', description="Annotator identifier")
     ratings: HumanAnnotationRatings
     comments: Optional[str] = Field(None, max_length=2000, description="Optional comments about the explanation")
     time_spent_seconds: Optional[int] = Field(None, ge=0, description="Time spent annotating (seconds)")

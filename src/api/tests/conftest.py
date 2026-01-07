@@ -76,7 +76,7 @@ def sample_data_path():
     
     Returns path to experiments/sample_data directory.
     """
-    return Path("experiments/sample_data")
+    return Path("experiments/exp1_adult")
 
 @pytest.fixture(scope="session")
 def ensure_sample_data_exists(sample_data_path):

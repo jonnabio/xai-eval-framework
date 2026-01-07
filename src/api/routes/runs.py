@@ -6,10 +6,11 @@ Provides access to experiment results:
 - Get single run by ID
 """
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query, status, Request
 from typing import Optional, List
 from datetime import datetime
 import logging
+from src.api.limiter import limiter
 
 from src.api.models.schemas import (
     Run, RunsResponse, RunResponse,
@@ -33,7 +34,9 @@ router = APIRouter()
     description="Get all experiment runs with optional filtering and pagination",
     tags=["Runs"]
 )
+@limiter.limit("100/minute")
 async def get_runs(
+    request: Request,
     dataset: Optional[str] = Query(
         None,
         description="Filter by dataset (e.g., 'AdultIncome', 'CIFAR-10')"
@@ -180,7 +183,8 @@ async def get_runs(
         }
     }
 )
-async def get_run(run_id: str):
+@limiter.limit("50/minute")
+async def get_run(request: Request, run_id: str):
     """
     Get detailed information about a specific run.
     
