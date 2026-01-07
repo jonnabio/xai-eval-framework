@@ -360,451 +360,37 @@ dataset: str = Field(..., pattern=r'^[a-zA-Z0-9_]+$')
 - **Testing**: Add validation tests with malicious inputs
 
 ---
-### Phase 2: Performance Quick Wins
+## Phase 2: Scalability Improvements (File-Based Optimization)
 
-**Priority**: High-impact, low-effort improvements
+**Goal**: Solve performance bottlenecks (N+1 queries, linear scans) using efficient in-memory indexing and caching, avoiding the complexity of a database.
 
-#### Task 2.1: Increase Cache Size
+**Rationale**: Current scale (<1000 experiments) does not justify a database. In-memory indexing provides O(1) performance with zero operational cost.
 
-- **Location**: `src/api/services/data_loader.py:195`
-- **Change**:
-```python
-# Before
-@lru_cache(maxsize=32)
+### Proposed Changes
 
-# After
-@lru_cache(maxsize=256)  # 8x increase, ~10MB memory for typical experiments
-```
-- **Impact**: Significantly better cache hit rate
-- **Testing**: Monitor cache hit rate via Prometheus metrics
+#### Task 2.1: In-Memory Indexing
+- **Component**: `src/api/services/data_loader.py`
+- **Action**: Build `_RUN_ID_INDEX: Dict[str, Path]` on startup.
+- **Benefit**: Replaces O(n) filesystem scan with O(1) dict lookup.
 
-#### Task 2.2: Fix N+1 Query Problem
+#### Task 2.2: Caching Strategy
+- **Component**: `src/api/services/data_loader.py`
+- **Action**: Increase `@lru_cache(maxsize=32)` to `maxsize=256`.
+- **Benefit**: Caches ~2.5MB of data, covering active working set.
 
-- **Location**: `src/api/routes/runs.py:199-217`
-- **Implementation**:
-```python
-# New function in data_loader.py
-@lru_cache(maxsize=256)
-def get_experiment_by_run_id(run_id: str) -> Optional[Dict]:
-    # Build run_id -> file_path index on first call
-    # Load only the specific file
-    pass
+#### Task 2.3: Fix N+1 Query Problem
+- **Component**: `src/api/routes/runs.py`
+- **Action**: Use `get_experiment_by_run_id` (cached/indexed) instead of `load_all_experiments()`.
+- **Benefit**: Reduces latency from ~500ms to <50ms.
 
-# Update endpoint
-async def get_run(run_id: str):
-    exp_data = get_experiment_by_run_id(run_id)
-    if not exp_data:
-        raise HTTPException(404, "Run not found")
-    return transform_experiment_to_run(exp_data)
-```
-- **Strategy**: Build in-memory index of run_id -> file_path on first access
-- **Testing**: Benchmark before/after with pytest-benchmark
-- **Expected**: <50ms for cached requests vs. 500ms+ currently
+#### Task 2.4: Optimize Configuration
+- **Component**: `src/api/config.py`
+- **Action**: Set `max_workers` dynamically based on `cpu_count()`.
 
-#### Task 2.3: Parameterize max_workers
-
-- **Location**: `src/api/services/batch_service.py:93`
-- **Configuration**: Add to `config.py`:
-```python
-BATCH_MAX_WORKERS: int = Field(
-    default_factory=lambda: max(1, cpu_count() - 1),
-    env="BATCH_MAX_WORKERS"
-)
-```
-- **Update**:
-```python
-runner.run(parallel=True, max_workers=settings.BATCH_MAX_WORKERS)
-```
-- **Testing**: Verify worker count scales with CPU cores
-
-#### Task 2.4: Extract Pagination Utility
-
-- **File**: Create `src/api/utils/pagination.py`
-```python
-from typing import List, Tuple, TypeVar
-
-T = TypeVar('T')
-
-def paginate_list(items: List[T], offset: int, limit: int) -> Tuple[List[T], int]:
-    """Reusable pagination for in-memory lists"""
-    total = len(items)
-    start = offset
-    end = min(offset + limit, total)
-    return items[start:end], total
-```
-- **Update**: Replace duplicate code in `runs.py` and `data_loader.py`
-- **Testing**: Add unit tests for edge cases (empty list, offset > total, etc.)
-
----
-### Phase 3: Database Migration (Hybrid Approach)
-
-**Priority**: Scalability foundation
-
-#### Task 3.1: Database Schema Design
-
-**Schema**:
-```sql
--- experiments table (metadata for fast filtering)
-CREATE TABLE experiments (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    run_id VARCHAR(64) UNIQUE NOT NULL,
-    dataset VARCHAR(50) NOT NULL,
-    model_name VARCHAR(50) NOT NULL,
-    model_type VARCHAR(50) NOT NULL,
-    xai_method VARCHAR(50) NOT NULL,
-    timestamp TIMESTAMP NOT NULL,
-    file_path TEXT NOT NULL,  -- Path to full JSON file
-    file_checksum VARCHAR(64) NOT NULL,  -- MD5 for sync idempotency
-    metrics JSONB,  -- Aggregate metrics for quick access
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE INDEX idx_experiments_dataset ON experiments(dataset);
-CREATE INDEX idx_experiments_model ON experiments(model_name, model_type);
-CREATE INDEX idx_experiments_method ON experiments(xai_method);
-CREATE INDEX idx_experiments_timestamp ON experiments(timestamp DESC);
-CREATE INDEX idx_experiments_run_id ON experiments(run_id);
-
--- instance_evaluations table (for detailed pagination)
-CREATE TABLE instance_evaluations (
-    id SERIAL PRIMARY KEY,
-    experiment_id UUID REFERENCES experiments(id) ON DELETE CASCADE,
-    instance_id INT NOT NULL,
-    quadrant VARCHAR(2) NOT NULL,
-    true_label INT,
-    prediction INT,
-    prediction_correct BOOLEAN,
-    metrics JSONB NOT NULL,
-    explanation JSONB,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE INDEX idx_instances_experiment ON instance_evaluations(experiment_id);
-CREATE INDEX idx_instances_quadrant ON instance_evaluations(quadrant);
-```
-
-**SQLAlchemy Models (`src/api/models/db_models.py`)**:
-```python
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey, Text
-from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy.ext.declarative import declarative_base
-import uuid
-
-Base = declarative_base()
-
-class Experiment(Base):
-    __tablename__ = "experiments"
-
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    run_id = Column(String(64), unique=True, nullable=False, index=True)
-    dataset = Column(String(50), nullable=False, index=True)
-    model_name = Column(String(50), nullable=False, index=True)
-    model_type = Column(String(50), nullable=False)
-    xai_method = Column(String(50), nullable=False, index=True)
-    timestamp = Column(DateTime, nullable=False, index=True)
-    file_path = Column(Text, nullable=False)
-    file_checksum = Column(String(64), nullable=False)
-    metrics = Column(JSONB)
-    created_at = Column(DateTime, server_default='now()')
-    updated_at = Column(DateTime, server_default='now()', onupdate='now()')
-
-class InstanceEvaluation(Base):
-    __tablename__ = "instance_evaluations"
-
-    id = Column(Integer, primary_key=True)
-    experiment_id = Column(UUID(as_uuid=True), ForeignKey('experiments.id', ondelete='CASCADE'))
-    instance_id = Column(Integer, nullable=False)
-    quadrant = Column(String(2), nullable=False, index=True)
-    true_label = Column(Integer)
-    prediction = Column(Integer)
-    prediction_correct = Column(Boolean)
-    metrics = Column(JSONB, nullable=False)
-    explanation = Column(JSONB)
-    created_at = Column(DateTime, server_default='now()')
-```
-
-**Migration (using Alembic)**:
-```bash
-alembic init alembic
-alembic revision --autogenerate -m "Create experiments and instance_evaluations tables"
-alembic upgrade head
-```
-
-#### Task 3.2: Sync Script Implementation
-
-**File**: `scripts/sync_db.py`
-```python
-import hashlib
-import json
-from pathlib import Path
-from sqlalchemy.orm import Session
-from src.api.models.db_models import Experiment, InstanceEvaluation, Base
-from src.api.database import engine, SessionLocal
-from src.api.services.data_loader import discover_experiment_directories, find_result_files
-
-def compute_file_checksum(file_path: Path) -> str:
-    """Compute MD5 checksum of file for change detection"""
-    md5 = hashlib.md5()
-    with open(file_path, 'rb') as f:
-        for chunk in iter(lambda: f.read(4096), b''):
-            md5.update(chunk)
-    return md5.hexdigest()
-
-def sync_experiment_to_db(session: Session, file_path: Path):
-    """Sync single experiment file to database (idempotent)"""
-    checksum = compute_file_checksum(file_path)
-
-    # Load JSON data
-    with open(file_path) as f:
-        data = json.load(f)
-
-    # Extract metadata
-    meta = data.get("experiment_metadata", {})
-    model_info = data.get("model_info", {})
-    run_id = generate_run_id(data)  # Use existing transformer logic
-
-    # Check if experiment exists and is unchanged
-    existing = session.query(Experiment).filter_by(run_id=run_id).first()
-    if existing and existing.file_checksum == checksum:
-        return  # No changes, skip
-
-    # Upsert experiment metadata
-    experiment = Experiment(
-        run_id=run_id,
-        dataset=meta.get("dataset"),
-        model_name=model_info.get("name"),
-        model_type=determine_model_type(model_info),
-        xai_method=model_info.get("explainer_method"),
-        timestamp=meta.get("timestamp"),
-        file_path=str(file_path),
-        file_checksum=checksum,
-        metrics=extract_aggregate_metrics(data)
-    )
-
-    if existing:
-        # Update existing
-        session.merge(experiment)
-        # Delete old instance evaluations
-        session.query(InstanceEvaluation).filter_by(experiment_id=existing.id).delete()
-    else:
-        session.add(experiment)
-
-    session.flush()  # Get experiment.id
-
-    # Insert instance evaluations
-    for instance in data.get("instance_evaluations", []):
-        ie = InstanceEvaluation(
-            experiment_id=experiment.id,
-            instance_id=instance["instance_id"],
-            quadrant=instance["quadrant"],
-            true_label=instance.get("true_label"),
-            prediction=instance.get("prediction"),
-            prediction_correct=instance.get("prediction_correct"),
-            metrics=instance.get("metrics"),
-            explanation=instance.get("explanation")
-        )
-        session.add(ie)
-
-    session.commit()
-
-def sync_all_experiments():
-    """Scan filesystem and sync all experiments to database"""
-    Base.metadata.create_all(engine)
-    session = SessionLocal()
-
-    try:
-        exp_dirs = discover_experiment_directories()
-        for exp_dir in exp_dirs:
-            result_files = find_result_files(exp_dir)
-            for file_path in result_files:
-                try:
-                    sync_experiment_to_db(session, file_path)
-                    print(f"✓ Synced: {file_path}")
-                except Exception as e:
-                    print(f"✗ Error syncing {file_path}: {e}")
-                    session.rollback()
-    finally:
-        session.close()
-
-if __name__ == "__main__":
-    sync_all_experiments()
-```
-
-**Integration**: Run sync on API startup
-```python
-# src/api/main.py
-@app.on_event("startup")
-async def startup_event():
-    # ... existing startup code ...
-
-    # Sync filesystem to database
-    if settings.ENABLE_DATABASE_SYNC:
-        from scripts.sync_db import sync_all_experiments
-        logger.info("Syncing experiments to database...")
-        sync_all_experiments()
-        logger.info("Database sync complete")
-```
-
-#### Task 3.3: Repository Pattern Implementation
-
-**File**: `src/api/repositories/experiment_repository.py`
-```python
-from abc import ABC, abstractmethod
-from typing import List, Optional, Dict
-from sqlalchemy.orm import Session
-from src.api.models.schemas import ExperimentResult, Run
-from src.api.models.db_models import Experiment, InstanceEvaluation
-
-class ExperimentRepository(ABC):
-    """Abstract repository interface"""
-
-    @abstractmethod
-    def list_experiments(self, filters: Dict, offset: int, limit: int) -> tuple[List[Run], int]:
-        """List experiments with filtering and pagination"""
-        pass
-
-    @abstractmethod
-    def get_experiment_by_run_id(self, run_id: str) -> Optional[ExperimentResult]:
-        """Get single experiment by run_id"""
-        pass
-
-    @abstractmethod
-    def get_instances(self, run_id: str, offset: int, limit: int) -> tuple[List[dict], int]:
-        """Get paginated instances for an experiment"""
-        pass
-
-class DatabaseRepository(ExperimentRepository):
-    """Database-backed repository (fast queries)"""
-
-    def __init__(self, session: Session):
-        self.session = session
-
-    def list_experiments(self, filters: Dict, offset: int, limit: int) -> tuple[List[Run], int]:
-        """SQL-based filtering with indexes"""
-        query = self.session.query(Experiment)
-
-        # Apply filters
-        if filters.get("dataset"):
-            query = query.filter(Experiment.dataset == filters["dataset"])
-        if filters.get("model_name"):
-            query = query.filter(Experiment.model_name == filters["model_name"])
-        if filters.get("method"):
-            query = query.filter(Experiment.xai_method == filters["method"])
-
-        # Get total count
-        total = query.count()
-
-        # Apply pagination and sorting
-        experiments = query.order_by(Experiment.timestamp.desc()) \
-                          .offset(offset) \
-                          .limit(limit) \
-                          .all()
-
-        # Convert to Run models
-        runs = [self._db_model_to_run(exp) for exp in experiments]
-        return runs, total
-
-    def get_experiment_by_run_id(self, run_id: str) -> Optional[ExperimentResult]:
-        """Fast lookup by indexed run_id, but load full data from file"""
-        exp = self.session.query(Experiment).filter_by(run_id=run_id).first()
-        if not exp:
-            return None
-
-        # Load full JSON from filesystem (still needed for complete data)
-        from src.api.services.data_loader import load_json_file
-        data = load_json_file(Path(exp.file_path))
-
-        # Transform using existing logic
-        from src.api.services.transformer import transform_experiment_to_result
-        return transform_experiment_to_result(data)
-
-    def get_instances(self, run_id: str, offset: int, limit: int) -> tuple[List[dict], int]:
-        """Paginated instance query using DB"""
-        exp = self.session.query(Experiment).filter_by(run_id=run_id).first()
-        if not exp:
-            return [], 0
-
-        total = self.session.query(InstanceEvaluation) \
-                           .filter_by(experiment_id=exp.id) \
-                           .count()
-
-        instances = self.session.query(InstanceEvaluation) \
-                               .filter_by(experiment_id=exp.id) \
-                               .offset(offset) \
-                               .limit(limit) \
-                               .all()
-
-        return [self._db_instance_to_dict(i) for i in instances], total
-
-class FileSystemRepository(ExperimentRepository):
-    """Fallback filesystem repository (current implementation)"""
-
-    def list_experiments(self, filters: Dict, offset: int, limit: int) -> tuple[List[Run], int]:
-        # Use existing data_loader logic
-        from src.api.services.data_loader import load_experiments_with_filters
-        experiments = load_experiments_with_filters(**filters)
-
-        total = len(experiments)
-        paginated = experiments[offset:offset+limit]
-
-        from src.api.services.transformer import transform_experiment_to_run
-        runs = [transform_experiment_to_run(exp) for exp in paginated]
-        return runs, total
-
-    # ... other methods use existing data_loader functions
-```
-
-**Dependency Injection**:
-```python
-# src/api/dependencies.py
-from fastapi import Depends
-from sqlalchemy.orm import Session
-from src.api.database import get_db
-from src.api.repositories.experiment_repository import ExperimentRepository, DatabaseRepository, FileSystemRepository
-from src.api.config import settings
-
-def get_repository(db: Session = Depends(get_db)) -> ExperimentRepository:
-    """Return appropriate repository based on configuration"""
-    if settings.USE_DATABASE:
-        return DatabaseRepository(db)
-    else:
-        return FileSystemRepository()
-```
-
-**Update Routes**:
-```python
-# src/api/routes/runs.py
-@router.get("/runs")
-async def get_runs(
-    dataset: Optional[str] = None,
-    model: Optional[str] = None,
-    method: Optional[str] = None,
-    offset: int = 0,
-    limit: int = 20,
-    repo: ExperimentRepository = Depends(get_repository)
-):
-    filters = {k: v for k, v in {"dataset": dataset, "model": model, "method": method}.items() if v}
-    runs, total = repo.list_experiments(filters, offset, limit)
-
-    return RunsResponse(
-        data=runs,
-        pagination={"total": total, "offset": offset, "limit": limit, ...},
-        metadata={...}
-    )
-```
-
-#### Task 3.4: Server-Side Filtering Implementation
-
-- **Update**: `/api/runs` endpoint to use database queries
-- **Add**: Advanced filter operators (`metric_accuracy_gt=0.8`, `timestamp_after=2024-01-01`)
-- **Testing**: Verify filter combinations work correctly
-- **Performance**: Benchmark query performance with indexes
-
----
-### Phase 4: Code Quality Refactoring
-
-**Priority**: Maintainability and extensibility
+### Verification Plan
+- **Benchmark**: Measure response time of `/runs/{id}` before and after.
+- **Memory**: Ensure index doesn't consume excessive RAM (expected <1MB).
+- **Correctness**: Verify all experiments are discoverable.
 
 #### Task 4.1: Extract ExplainerWrapper Base Class
 
@@ -1487,32 +1073,30 @@ locust -f tests/load/locustfile.py --host=https://xai-eval-framework.onrender.co
 ---
 ## 7. Architectural Decision Records (ADRs)
 
-### ADR-001: Hybrid Database Strategy
-
-**Decision**: Adopt PostgreSQL for query capabilities while retaining JSON files for deployment.
-
-**Context**:
-- Current system uses JSON files for all storage
-- Filesystem scans are O(n) for every query
-- Filtering and pagination happen in-memory
-- But deployment workflow relies on `git push` of JSON files
-
-**Rationale**:
-- **Scalability**: SQL enables `O(1)` indexed lookups and efficient filtering
-- **Workflow Preservation**: JSON files remain source of truth for deployment
-- **Idempotent Sync**: Database is read-only cache, rebuilt from files on startup
-- **Best of Both**: Fast queries + simple deployment
-
-**Consequences**:
-- Database must be synced on every deployment
-- Sync script must be idempotent (checksum-based)
-- Two sources of truth require coordination
-- Database can be rebuilt anytime from JSON files
-
-**Alternatives Considered**:
-1. **Database Only**: Would break git-based deployment workflow
-2. **Files Only**: Cannot scale to 1000+ experiments
-3. **Chosen: Hybrid**: Balances scalability and workflow preservation
+### ADR-001: Optimized File-Based Architecture
+ 
+ **Decision**: Retain file-based architecture but optimize with in-memory indexing and caching.
+ 
+ **Context**:
+ - Original plan proposed database migration for scalability.
+ - Analysis showed current scale (<1000 experiments) fits easily in memory.
+ - Database adds significant operational complexity (Render Addon costs, migrations, sync logic).
+ 
+ **Rationale**:
+ - **Performance**: In-memory dict lookup is O(1), faster than database network round-trip.
+ - **Simplicity**: No external dependencies (`postgres`), no `alembic`, no `sync_db`.
+ - **Cost**: Zero additional cost on Render.
+ - **Maintenance**: Codebase remains simple and purely Python-based.
+ 
+ **Consequences**:
+ - Must implement `_RUN_ID_INDEX` in `data_loader.py`.
+ - Application startup time increases slightly (scanning files once).
+ - Filtering happens in Python (fast enough for <10k items).
+ 
+ **Alternatives Considered**:
+ 1. **Database Migration**: Rejected as over-engineering for current scale.
+ 2. **Current State**: Rejected due to O(n) scan performance issues.
+ 3. **Chosen: Optimized File-Based**: Best balance of performance and simplicity.
 
 ---
 ### ADR-002: Adopt OpenTelemetry (Optional)

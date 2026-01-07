@@ -134,6 +134,14 @@ async def startup_event():
     # Ensure data directories exist
     ensure_adult_data_dirs()
 
+    # Build experiment index for performance
+    try:
+        from src.api.services.data_loader import build_run_id_index
+        logger.info("⚡ Building experiment index...")
+        build_run_id_index()
+    except Exception as e:
+        logger.error(f"Failed to build experiment index: {e}")
+
     
     # Initialize Sentry only if available and configured
     if SENTRY_AVAILABLE and settings.SENTRY_DSN:

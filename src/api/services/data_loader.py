@@ -192,28 +192,65 @@ def load_experiments_with_filters(**filters) -> List[Dict[str, Any]]:
     return filter_experiments(all_experiments, **filters)
 
 
-@lru_cache(maxsize=32)
+# Global in-memory index mapping run_id to file_path
+_RUN_ID_INDEX: Dict[str, Path] = {}
+
+def build_run_id_index():
+    """
+    Build index of run_id -> file_path on startup.
+    This enables O(1) lookups instead of O(n) scanning.
+    """
+    global _RUN_ID_INDEX
+    
+    exp_dirs = discover_experiment_directories()
+    count = 0
+    
+    for exp_dir in exp_dirs:
+        result_files = find_result_files(exp_dir)
+        for file_path in result_files:
+            try:
+                # We need to peek at the file to generate the ID
+                # This happens once on startup
+                data = load_json_file(file_path)
+                if data:
+                    run = transform_experiment_to_run(data)
+                    _RUN_ID_INDEX[run.id] = file_path
+                    count += 1
+            except Exception as e:
+                logger.warning(f"Failed to index {file_path}: {e}")
+                
+    logger.info(f"Built in-memory index with {count} experiments")
+
+
+@lru_cache(maxsize=256)
 def get_experiment_result(run_id: str) -> Optional[ExperimentResult]:
     """
     Locate and load complete experiment result by run ID.
+    Uses in-memory index for O(1) lookup.
     Cached to improve performance on repeated access.
     """
-    # 1. Load all raw experiments (this could be optimized to metadata only scan if needed)
+    # 1. Try improved O(1) lookup via index
+    file_path = _RUN_ID_INDEX.get(run_id)
+    
+    if file_path:
+        data = load_json_file(file_path)
+        if data:
+            return transform_experiment_to_result(data)
+    
+    # 2. Fallback to slow scan (in case index is out of sync or empty)
+    # This ensures robustness if new files are added without restart
+    logger.debug(f"Index miss for {run_id}, falling back to scan")
+    
     all_experiments = load_all_experiments()
     
-    # 2. Iterate and match ID
     for exp_data in all_experiments:
         try:
-            # We generate the ID to check for match
-            # This relies on transformer logic being deterministic
             run = transform_experiment_to_run(exp_data)
-            
             if run.id == run_id:
-                # 3. Found match, transform to detailed result
+                # Update index with found item for next time
+                # (Note: we can't easily get filepath here without refactoring load_all_experiments)
                 return transform_experiment_to_result(exp_data)
-                
         except Exception as e:
-            logger.warning(f"Error checking experiment for ID match: {e}")
             continue
             
     return None
