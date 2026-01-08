@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime
 import pandas as pd
 
-from src.experiment.batch_runner import BatchExperimentRunner
+# from src.experiment.batch_runner import BatchExperimentRunner (Moved to lazy import)
 
 logger = logging.getLogger(__name__)
 
@@ -85,6 +85,7 @@ class BatchJobManager:
             if not config_paths:
                 raise ValueError("No valid configuration files provided.")
                 
+            from src.experiment.batch_runner import BatchExperimentRunner
             runner = BatchExperimentRunner(config_paths)
             
             # Run (blocking call, hence why we are in a thread)
