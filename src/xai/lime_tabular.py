@@ -5,7 +5,7 @@ This module provides a standardized interface for generating LIME explanations
 for binary classification models on tabular datasets.
 """
 # Standard library imports
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 import warnings
 import time
 
@@ -13,7 +13,9 @@ import time
 import numpy as np
 from lime.lime_tabular import LimeTabularExplainer
 
-class LIMETabularWrapper:
+from .base import ExplainerWrapper
+
+class LIMETabularWrapper(ExplainerWrapper):
     """
     Wrapper for LIME tabular explanations with standardized output format.
 
@@ -52,6 +54,8 @@ class LIMETabularWrapper:
             random_state: Random seed for reproducibility.
             **kwargs: Additional LIME arguments.
         """
+        super().__init__(training_data, feature_names, **kwargs)
+        
         # Validate inputs
         if training_data.shape[1] != len(feature_names):
             raise ValueError(
@@ -60,8 +64,6 @@ class LIMETabularWrapper:
             )
 
         # Store configuration
-        self.training_data = training_data
-        self.feature_names = feature_names
         self.class_names = class_names if class_names else ['0', '1']
         self.num_features = num_features
         self.num_samples = num_samples
@@ -69,11 +71,8 @@ class LIMETabularWrapper:
         self.discretize_continuous = discretize_continuous
         self.feature_selection = feature_selection
         self.random_state = random_state
-        self.kwargs = kwargs
 
         # Initialize LIME Explainer
-        # Note: categorical_features are not explicitly handled here yet as per prompts,
-        # assuming input data is already encoded or continuous.
         self.explainer = LimeTabularExplainer(
             training_data=self.training_data,
             feature_names=self.feature_names,
@@ -88,7 +87,7 @@ class LIMETabularWrapper:
 
     def generate_explanations(
         self,
-        model,
+        model: Any,
         X_samples: np.ndarray,
         predict_fn: Optional[callable] = None
     ) -> Dict[str, np.ndarray]:
@@ -138,12 +137,6 @@ class LIMETabularWrapper:
         for i, instance in enumerate(X_samples):
             instance_start = time.time()
 
-            # Delegate to explain_instance (internal logic reuse)
-            # We use explain_instance to get the sparse map, then fill dense array
-            # But explain_instance returns dense vector by default.
-            # To avoid double conversion, we call explainer directly or use explain_instance optimally.
-            # Let's call explain_instance since it encapsulates the core logic.
-            
             imp_vector, _ = self.explain_instance(
                 model=model,
                 instance=instance,
@@ -184,23 +177,13 @@ class LIMETabularWrapper:
 
     def explain_instance(
         self,
-        model,
+        model: Any,
         instance: np.ndarray,
         predict_fn: Optional[callable] = None,
         return_full: bool = False
     ) -> Union[np.ndarray, Tuple[np.ndarray, object]]:
         """
         Generate LIME explanation for a single instance.
-
-        Args:
-            model: Trained model.
-            instance: Single sample to explain (n_features,).
-            predict_fn: Optional custom prediction function.
-            return_full: If True, return (importance_vector, lime_explanation_object).
-
-        Returns:
-            If return_full=False: Array (n_features,) with importance values.
-            If return_full=True: Tuple (importance_vector, lime_explanation_object).
         """
         # Validate input
         if instance.ndim != 1:
@@ -230,29 +213,13 @@ class LIMETabularWrapper:
         importance_vector = np.zeros(len(self.feature_names))
 
         # Get explanation as map (feature_idx -> importance)
-        # exp.as_map() returns {label: [(idx, weight), ...]}
-        # We always want the explanations for the POSITIVE class (1) for binary tasks
-        # Assuming binary classification with labels [0, 1]
-        
         # Check available labels in map
         available_labels = exp.as_map().keys()
         target_label = 1
         
-        # Fallback if label 1 not present (e.g. only 0 predicted/available?)
-        # Standard LIME usually gives map for predicted class or asked class. 
-        # By default explain_instance explains the top predicted class if 'labels' arg not specified.
-        # But for 'classification' mode with predict_proba, we usually want specific class. 
-        # Wait, explain_instance default behavior: `labels=(1,)` for binary usually works?
-        # Let's inspect map keys.
-        
         if target_label in exp.as_map():
             exp_map = exp.as_map()[target_label]
         else:
-            # Fallback: take the first available label? 
-            # Or perhaps the map key matches the class index. 
-            # Ideally we want the explanation for "Income > 50K" which is index 1.
-            # If for some reason LIME gives something else, we might default to list(available_labels)[0]
-            # But let's stick to 1 as per typical binary behavior.
             exp_map = exp.as_map().get(1, [])
 
         for feat_idx, importance in exp_map:
@@ -267,9 +234,6 @@ class LIMETabularWrapper:
     def get_config(self) -> Dict:
         """
         Get current LIME configuration.
-
-        Returns:
-            Dictionary with LIME hyperparameters.
         """
         return {
             'num_features': self.num_features,
@@ -296,19 +260,6 @@ def generate_lime_explanations(
 ) -> Dict[str, np.ndarray]:
     """
     Convenience function for generating LIME explanations without explicit wrapper instantiation.
-
-    Args:
-        model: Trained model with predict_proba method.
-        X_samples: Samples to explain.
-        training_data: Training data for LIME initialization.
-        feature_names: List of feature names.
-        num_features: Top k features.
-        num_samples: Perturbation count.
-        random_state: Seed.
-        **lime_kwargs: Additional args for LIMETabularWrapper.
-
-    Returns:
-        Dictionary with 'feature_importance', 'top_features', and 'metadata'.
     """
     # Create wrapper instance
     wrapper = LIMETabularWrapper(

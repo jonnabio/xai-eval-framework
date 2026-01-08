@@ -89,7 +89,9 @@ def validate_shap_additivity(
     is_valid = max_error <= tolerance
     return is_valid, float(max_error)
 
-class SHAPTabularWrapper:
+from .base import ExplainerWrapper
+
+class SHAPTabularWrapper(ExplainerWrapper):
     """
     Wrapper for SHAP tabular explanations with standardized output format.
 
@@ -124,7 +126,8 @@ class SHAPTabularWrapper:
             training_labels: Optional labels for stratified background sampling.
             **kwargs: Additional parameters for shap_values() call (e.g. check_additivity).
         """
-        self.feature_names = feature_names
+        super().__init__(training_data, feature_names, **kwargs)
+        
         self.model_type = model_type.lower()
         self.n_background_samples = n_background_samples
         self.random_state = random_state
@@ -144,14 +147,12 @@ class SHAPTabularWrapper:
             logger.info("Initializing shap.TreeExplainer")
             
             # TreeExplainer handles background data for 'interventional' feature perturbation
-            # If model is XGBoost, it might need model.predict_proba depending on version, 
-            # but usually passed directly.
             try:
                 self.explainer = shap.TreeExplainer(
                     model, 
                     data=self.background_data,
                     feature_perturbation="interventional",
-                    model_output="probability" # Critical for getting proba units, not log-odds
+                    model_output="probability" # Critical for getting proba units
                 )
             except ValueError as e:
                 # Handle specific known issue with SHAP parsing new XGBoost JSON formats
@@ -168,7 +169,6 @@ class SHAPTabularWrapper:
             self._init_kernel_explainer(model)
 
         # Check expected value (can be list or scalar)
-        # For 'probability' output, it matches class probabilities
         if isinstance(self.explainer.expected_value, (list, np.ndarray)):
             # Usually index 1 for positive class in binary
             if len(self.explainer.expected_value) > 1:
@@ -192,9 +192,9 @@ class SHAPTabularWrapper:
 
     def generate_explanations(
         self,
-        model: Any, # Kept for interface consistency, but self.explainer has implicit model ref
+        model: Any, # Kept for interface consistency
         X_samples: np.ndarray,
-        predict_fn: Optional[callable] = None # Unused for SHAP usually, implies model checks
+        predict_fn: Optional[Any] = None # Unused for SHAP usually
     ) -> Dict[str, np.ndarray]:
         """
         Generate SHAP explanations for multiple instances.
@@ -205,9 +205,6 @@ class SHAPTabularWrapper:
         start_time = time.time()
         
         # 1. Calculate SHAP values
-        # Returns [ n_samples, n_features, n_classes ] usually for proba/binary
-        # check_additivity=False to avoid strict errors on float precision, we validate manually.
-        # Use kwargs from init (config)
         kwargs = self.shap_kwargs.copy()
         if 'check_additivity' not in kwargs:
              kwargs['check_additivity'] = False
@@ -215,7 +212,6 @@ class SHAPTabularWrapper:
         raw_shap_values = self.explainer.shap_values(X_samples, **kwargs)
         
         # 2. Extract Positive Class (Index 1)
-        # TreeExplainer with model_output='probability' returns list of arrays [ (N, M), (N, M) ]
         feature_importance = None
         
         if isinstance(raw_shap_values, list):
@@ -255,28 +251,6 @@ class SHAPTabularWrapper:
             'top_features': top_features,
             'metadata': metadata
         }
-
-    def explain_instance(
-        self,
-        model: Any,
-        instance: np.ndarray,
-        return_full: bool = False
-    ) -> Union[np.ndarray, Tuple[np.ndarray, Any]]:
-        """
-        Explain single instance.
-        """
-        # Reshape to (1, n_features)
-        if instance.ndim == 1:
-            X_batch = instance.reshape(1, -1)
-        else:
-            X_batch = instance
-            
-        result = self.generate_explanations(model, X_batch)
-        imp_vector = result['feature_importance'][0]
-        
-        if return_full:
-            return imp_vector, result
-        return imp_vector
         
     def get_expected_value(self) -> float:
         return self.expected_value
@@ -308,7 +282,8 @@ def generate_shap_explanations(
         feature_names=feature_names,
         model_type=model_type,
         n_background_samples=n_background_samples,
-        random_state=random_state
+        random_state=random_state,
+        **shap_kwargs
     )
     
     return wrapper.generate_explanations(model, X_samples)
