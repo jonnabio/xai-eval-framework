@@ -13,6 +13,7 @@ from typing import List, Dict, Any, Optional, Tuple
 from src.api.config import settings
 from src.api.models.schemas import ExperimentResult, InstanceEvaluation
 from src.api.services.transformer import transform_experiment_to_run, transform_experiment_to_result
+from src.api.utils.pagination import paginate_list
 
 logger = logging.getLogger(__name__)
 
@@ -260,24 +261,17 @@ def get_instances_paginated(
     run_id: str,
     offset: int = 0,
     limit: int = 50
-) -> Tuple[List[InstanceEvaluation], int]:
+) -> Tuple[List[InstanceEvaluation], Dict[str, Any]]:
     """
     Get paginated instance evaluations for a run.
     
     Returns:
-        Tuple[List[InstanceEvaluation], int]: (page_items, total_count)
+        Tuple[List[InstanceEvaluation], Dict[str, Any]]: (page_items, pagination_metadata)
     """
     result = get_experiment_result(run_id)
     if not result:
-        return [], 0
+        # Return empty list and basic zero-metadata if not found (or handle as error generally)
+        # Re-using paginate_list on empty list to get consistent struct
+        return paginate_list([], offset, limit)
         
-    total = len(result.instance_evaluations)
-    
-    # Slice
-    start = offset
-    end = min(offset + limit, total)
-    
-    if start >= total:
-        return [], total
-        
-    return result.instance_evaluations[start:end], total
+    return paginate_list(result.instance_evaluations, offset, limit)

@@ -22,6 +22,7 @@ from src.api.services.data_loader import (
 )
 from src.api.services.transformer import transform_experiment_to_run
 from src.api.config import settings
+from src.api.utils.pagination import paginate_list
 
 logger = logging.getLogger(__name__)
 
@@ -118,23 +119,8 @@ async def get_runs(
         if failed_count > 0:
             logger.warning(f"Failed to transform {failed_count} experiments")
         
-        # Calculate pagination
-        total = len(runs)
-        start = offset
-        end = min(offset + limit, total)
-        
         # Apply pagination
-        paginated_runs = runs[start:end]
-        
-        # Build pagination metadata
-        pagination = {
-            "total": total,
-            "limit": limit,
-            "offset": offset,
-            "returned": len(paginated_runs),
-            "hasNext": end < total,
-            "hasPrev": offset > 0
-        }
+        paginated_runs, pagination = paginate_list(runs, offset, limit)
         
         # Build response
         response = RunsResponse(
@@ -148,7 +134,7 @@ async def get_runs(
         )
         
         logger.info(f"Returning {len(paginated_runs)} runs "
-                   f"(total: {total}, offset: {offset})")
+                   f"(total: {pagination['total']}, offset: {offset})")
         
         return response
     
@@ -315,16 +301,7 @@ async def get_run_instances(
                 detail=f"Run not found: {run_id}"
             )
         
-        instances, total = get_instances_paginated(run_id, offset, limit)
-        
-        pagination = {
-            "total": total,
-            "limit": limit,
-            "offset": offset,
-            "returned": len(instances),
-            "hasNext": (offset + limit) < total,
-            "hasPrev": offset > 0
-        }
+        instances, pagination = get_instances_paginated(run_id, offset, limit)
         
         return InstancesResponse(
             data=instances,
