@@ -22,7 +22,7 @@ from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 # from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
 from src.evaluation.sampler import EvaluationSampler
-from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric, DomainAlignmentMetric, CounterfactualSensivtyMetric
+from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric, DomainAlignmentMetric, CounterfactualSensitivityMetric
 
 logger = logging.getLogger(__name__)
 
@@ -279,7 +279,7 @@ class ExperimentRunner:
                 if cfs_list and not cfs_list[0].empty:
                     cf_df = cfs_list[0]
                     # Compute metric
-                    cf_metric = CounterfactualSensivtyMetric()
+                    cf_metric = CounterfactualSensitivityMetric()
                     # Need original instance as DF
                     res = cf_metric.compute(
                         feature_importance=weights,
