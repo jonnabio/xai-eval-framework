@@ -22,7 +22,8 @@ from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 # from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
 from src.evaluation.sampler import EvaluationSampler
-from src.metrics import FidelityMetric, FaithfulnessMetric, StabilityMetric, SparsityMetric, CostMetric, DomainAlignmentMetric, CounterfactualSensitivityMetric
+from src.metrics import CostMetric
+from src.experiment.metrics_engine import MetricsEngine
 
 logger = logging.getLogger(__name__)
 
@@ -170,6 +171,14 @@ class ExperimentRunner:
         else:
             raise ValueError(f"Unsupported explainer: {self.config.explainer.method}")
         
+        # 4. Initialize Metrics Engine
+        self.metrics_engine = MetricsEngine(
+            config=self.config,
+            model=self.model,
+            dataset=self.dataset,
+            baseline_values=self.baseline_values
+        )
+
         logger.info("Setup complete")
         
     def generate_instances(self) -> pd.DataFrame:
@@ -228,92 +237,14 @@ class ExperimentRunner:
             return_full=True
         )
         
-        metrics_results = {}
-        
-        # 2. Compute Metrics
-        
-        # COST
-        if self.config.metrics.cost:
-            metrics_results['cost'] = time_metrics['time_ms'] # ms
-            
-        # SPARSITY
-        if self.config.metrics.sparsity:
-            sparsity_m = SparsityMetric() # Default threshold
-            res = sparsity_m.compute(weights)
-            metrics_results['sparsity'] = res['nonzero_percentage']
-            
-        # FIDELITY (Refined to Faithfulness)
-        if self.config.metrics.fidelity:
-            # Use new Faithfulness metric (prediction gap)
-            faithfulness_m = FaithfulnessMetric(top_k=5) # Default top_k
-            # Pass precomputed baseline
-            faithfulness_m.baseline_values = self.baseline_values
-            
-            res = faithfulness_m.compute(weights, model=self.model, data=instance_data)
-            
-            # Use correlation score as primary 'fidelity' metric for backward compatibility
-            metrics_results['fidelity'] = res['faithfulness_score']
-            # Store detail
-            metrics_results['faithfulness_gap'] = res['faithfulness_gap']
-            
-        # DOMAIN ALIGNMENT (Expert Priors)
-        if hasattr(self.config.metrics, 'domain') and self.config.metrics.domain:
-            domain_m = DomainAlignmentMetric()
-            # features are in self.dataset['feature_names']
-            ft_names = self.dataset['feature_names']
-            
-            # weights is numpy array (n_features,)
-            res = domain_m.compute(weights, ft_names, k=5)
-            metrics_results.update(res)
-            
-        # COUNTERFACTUAL SENSITIVITY
-        if hasattr(self.config.metrics, 'counterfactual') and self.config.metrics.counterfactual and self.dice_explainer:
-            try:
-                # Generate CF
-                # Instance is a Series, need DataFrame
-                query_df = instance_data.to_frame().T
-                # Feature names should match training data
-                 
-                cfs_list = self.dice_explainer.generate_counterfactuals(query_df, total_CFs=1)
-                
-                if cfs_list and not cfs_list[0].empty:
-                    cf_df = cfs_list[0]
-                    # Compute metric
-                    cf_metric = CounterfactualSensitivityMetric()
-                    # Need original instance as DF
-                    res = cf_metric.compute(
-                        feature_importance=weights,
-                        feature_names=feature_names,
-                        original_instance=query_df,
-                        cf_files=cf_df,
-                        k=5
-                    )
-                    metrics_results.update(res)
-                else:
-                     metrics_results['cf_sensitivity'] = 0.0
-            except Exception as e:
-                logger.error(f"Error computing CF sensitivity: {e}")
-                metrics_results['cf_sensitivity'] = 0.0
-
-        # STABILITY
-        if self.config.metrics.stability:
-             # Define helper for regeneration
-             def explainer_func(m, d):
-                 w_full = self.explainer.explain_instance(m, d[0], return_full=False)
-                 return {'feature_importance': w_full}
-             
-             stability_m = StabilityMetric(
-                 n_iterations=self.config.metrics.stability_perturbations,
-                 perturbation_std=self.config.metrics.stability_noise_level
-             )
-             
-             res = stability_m.compute(
-                 None, 
-                 model=self.model, 
-                 data=instance_data,
-                 explainer_func=explainer_func
-             )
-             metrics_results['stability'] = res['cosine_similarity_mean']
+        # 2. Compute Metrics via Engine
+        metrics_results = self.metrics_engine.compute_metrics(
+            instance_data=instance_data,
+            weights=weights,
+            explainer_func=self.explainer.explain_instance,
+            dice_explainer=self.dice_explainer,
+            time_metrics=time_metrics
+        )
         
         # Construct Result
         return {
