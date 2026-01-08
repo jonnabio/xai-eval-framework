@@ -5,7 +5,7 @@ from .fidelity import FidelityMetric
 from .faithfulness import FaithfulnessMetric
 from .stability import StabilityMetric
 from .domain import DomainAlignmentMetric
-from .sensitivity import CounterfactualSensivtyMetric
+from .sensitivity import CounterfactualSensitivityMetric
 
 __all__ = [
     "BaseMetric",

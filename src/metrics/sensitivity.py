@@ -7,9 +7,11 @@ and counterfactual explanations (DiCE).
 
 import numpy as np
 import pandas as pd
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any, Union
 
-class CounterfactualSensivtyMetric:
+from .base import BaseMetric
+
+class CounterfactualSensitivityMetric(BaseMetric):
     """
     Computes sensitivity of explanation to counterfactual changes.
     
@@ -18,31 +20,64 @@ class CounterfactualSensivtyMetric:
     modified in the generated counterfactuals.
     """
     
-    def __init__(self):
-        pass
+    def __init__(self, k: int = 5):
+        """
+        Args:
+            k: Top-K features to check for overlap.
+        """
+        super().__init__(name="Sensitivity")
+        self.k = k
         
     def compute(
         self, 
-        feature_importance: np.ndarray, 
-        feature_names: List[str], 
-        original_instance: pd.DataFrame,
-        cf_files: pd.DataFrame,
-        k: int = 5
-    ) -> Dict[str, float]:
+        explanation: Any, 
+        model: Any = None,
+        data: Optional[Union[pd.DataFrame, np.ndarray, dict]] = None,
+        **kwargs
+    ) -> Dict[str, Any]:
         """
         Compute agreement between importance and CF changes.
         
         Args:
-            feature_importance: Explanation weights.
-            feature_names: List of feature names.
-            original_instance: The original instance (as 1-row DataFrame).
-            cf_files: The generated counterfactuals (DataFrame).
-            k: Top-K features to check.
+            explanation: Feature importance weights (np.ndarray).
+            model: (Unused here, kept for interface).
+            data: The original instance (pd.DataFrame).
+            **kwargs: Must contain 'cf_files' (DataFrame) and 'feature_names' (List[str]).
             
         Returns:
-            Dictionary with 'cf_sensitivity_recall' and 'cf_sensitivity_precision'.
+            Dictionary with 'cf_sensitivity', 'cf_sensitivity_recall', etc.
         """
-        if cf_files is None or cf_files.empty:
+        # Extract required args
+        feature_names = kwargs.get('feature_names')
+        cf_files = kwargs.get('cf_files')
+        
+        if feature_names is None:
+            raise ValueError("CounterfactualSensitivityMetric requiring 'feature_names' in kwargs.")
+        if cf_files is None:
+            # If no CFs provided, return 0 (or could raise, but safe default preferred)
+             return {
+                'cf_sensitivity': 0.0,
+                'cf_sensitivity_recall': 0.0, 
+                'cf_sensitivity_precision': 0.0
+            }
+            
+        original_instance = data
+        if not isinstance(original_instance, pd.DataFrame):
+             # Try to wrap if dict? But this specific metric relies heavily on pandas structure for CF comparison
+             # If passed as numpy, we might fail unless we reconstruct DF with feature_names
+             if isinstance(original_instance, (dict, list, np.ndarray)):
+                 original_instance = pd.DataFrame([original_instance], columns=feature_names)
+             else:
+                 raise ValueError("Sensitivity metric requires 'data' as DataFrame or convertible to DF.")
+
+        feature_importance = explanation
+        if isinstance(feature_importance, dict):
+            feature_importance = feature_importance['feature_importance']
+        
+        if feature_importance.ndim > 1:
+            feature_importance = feature_importance[0]
+
+        if cf_files.empty:
             return {
                 'cf_sensitivity': 0.0,
                 'cf_sensitivity_recall': 0.0, 
@@ -55,7 +90,6 @@ class CounterfactualSensivtyMetric:
         
         # Common cols
         common_cols = [c for c in original_instance.columns if c in cf_files.columns]
-        # Ignore target if present? usually last col or 'income'
         
         modified_features = set()
         
@@ -66,13 +100,7 @@ class CounterfactualSensivtyMetric:
         for _, cf_row in cf_files.iterrows():
             cf_vals = cf_row[common_cols].values
             
-            # Where do they differ?
-            # Handle float comparison carefully, and categorical
-            # For simplicity, string comparison for cats, isclose for floats
-            
             # Simple inequality mask
-            # If data is mixed types, element-wise comparison in numpy can be tricky if not cast
-            # Let's iterate
             for i, col in enumerate(common_cols):
                 v1 = orig_vals[i]
                 v2 = cf_vals[i]
@@ -94,7 +122,6 @@ class CounterfactualSensivtyMetric:
                     modified_features.add(col)
                     
         if not modified_features:
-            # CF is identical to original? (Did not flip?)
             return {
                 'cf_sensitivity': 0.0,
                 'cf_sensitivity_recall': 0.0, 
@@ -103,19 +130,10 @@ class CounterfactualSensivtyMetric:
 
         # 2. Identify Top-K Explanation Features
         abs_weights = np.abs(feature_importance)
-        top_k_indices = np.argsort(abs_weights)[-k:][::-1]
+        top_k_indices = np.argsort(abs_weights)[-self.k:][::-1]
         top_k_features = [feature_names[i] for i in top_k_indices]
         
         # 3. Compute Overlap
-        # Need to handle One-Hot-Encoding mapping if feature_names are OHE
-        # but DiCE usually works on raw data (pre-transform).
-        # THIS IS A TRICKY PART.
-        # If 'feature_names' are from the MODEL input (OHE), and 'original_instance' is passed to DiCE (Raw),
-        # we have a mismatch.
-        # Assumption: EXP1 uses a pipeline where model input is OHE, but we likely have access to RAW data for DiCE.
-        # BUT, the explainer explains the OHE features.
-        # So we need to map OHE features -> Base features.
-        
         def get_base_feature(f):
             if '_' in f: return f.split('_')[0]
             return f
