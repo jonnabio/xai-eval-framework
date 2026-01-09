@@ -21,6 +21,7 @@ from src.data_loading.adult import load_adult
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 # from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
+from src.utils.model_loader import load_model
 from src.evaluation.sampler import EvaluationSampler
 from src.metrics import CostMetric
 from src.experiment.metrics_engine import MetricsEngine
@@ -98,8 +99,8 @@ class ExperimentRunner:
              raise FileNotFoundError(f"Model not found at {self.config.model.path}")
         
         # Assuming joblib load works for both RF and XGB as implemented in EXP1-10
-        # Assuming joblib load works for both RF and XGB as implemented in EXP1-10
-        self.model = joblib.load(self.config.model.path)
+        # self.model = joblib.load(self.config.model.path)
+        self.model = load_model(str(self.config.model.path))
         
         # Setup DiCE if needed (AFTER MODEL LOAD)
         if hasattr(self.config.metrics, 'counterfactual') and self.config.metrics.counterfactual:

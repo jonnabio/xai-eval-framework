@@ -12,6 +12,7 @@ import json
 import urllib.request
 import ssl
 import time
+from functools import lru_cache
 from datetime import datetime
 
 # Handle SSL verification using certifi to avoid Mac certificate issues securely
@@ -548,6 +549,7 @@ def _get_feature_names(preprocessor: ColumnTransformer, input_features: List[str
     return output_features
 
 
+@lru_cache(maxsize=1)
 def load_adult(test_size: float = 0.2, random_state: int = 42, cache_dir: str = "./data", 
                preprocessor_path: str = None, verbose: bool = True) -> tuple:
     """
