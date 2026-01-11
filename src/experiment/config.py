@@ -74,6 +74,9 @@ class ExperimentConfig(BaseModel):
     metrics: MetricsConfig
     llm: Optional[LLMConfig] = None
     
+    # Execution
+    max_workers: Optional[int] = Field(None, description="Max parallel workers for evaluation (None=auto)")
+
     # Output
     output_dir: Path = Field(Path("outputs/experiments"), description="Results directory")
     

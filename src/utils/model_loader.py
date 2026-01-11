@@ -7,7 +7,7 @@ from typing import Any
 
 logger = logging.getLogger(__name__)
 
-@lru_cache(maxsize=4)
+@lru_cache(maxsize=8)
 def load_model(model_path: str) -> Any:
     """
     Load a model from disk with caching.
@@ -29,3 +29,11 @@ def load_model(model_path: str) -> Any:
     except Exception as e:
         logger.error(f"Failed to load model {model_path}: {e}")
         raise e
+
+def get_cache_stats():
+    """Return current cache statistics."""
+    return load_model.cache_info()
+
+def clear_model_cache():
+    """Clear the model cache (useful for testing)."""
+    load_model.cache_clear()

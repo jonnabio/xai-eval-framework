@@ -16,5 +16,5 @@ __all__ = [
     "FaithfulnessMetric",
     "StabilityMetric",
     "DomainAlignmentMetric",
-    "CounterfactualSensivtyMetric"
+    "CounterfactualSensitivityMetric"
 ]

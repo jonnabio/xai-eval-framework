@@ -15,13 +15,23 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import joblib
+import concurrent.futures
+import threading
+import joblib
+import concurrent.futures
+import threading
+import multiprocessing
+import os
+import pickle
+from typing import Dict, List, Any, Optional
+
 
 from src.experiment.config import ExperimentConfig
 from src.data_loading.adult import load_adult
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 # from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
-from src.utils.model_loader import load_model
+from src.utils.model_loader import load_model, get_cache_stats
 from src.evaluation.sampler import EvaluationSampler
 from src.metrics import CostMetric
 from src.experiment.metrics_engine import MetricsEngine
@@ -54,6 +64,20 @@ class ExperimentRunner:
         
         # Ensure output directory exists
         self.config.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Concurrency
+        self.max_workers = config.max_workers
+        if self.max_workers is None:
+            # Default to CPU count + 4 for I/O bound, or just CPU count for CPU bound
+            # SHAP/LIME are CPU bound.
+            
+            # CRITICAL SAFETY: Check if we are already in a worker process to prevent explosion
+            # (e.g. running inside BatchRunner)
+            if multiprocessing.current_process().daemon:
+                logger.info("Detected execution inside worker process. Forcing max_workers=1 to avoid process explosion.")
+                self.max_workers = 1
+            else:
+                self.max_workers = os.cpu_count() or 4
         
     def setup(self) -> None:
         """
@@ -158,7 +182,11 @@ class ExperimentRunner:
             )
         elif self.config.explainer.method == "lime":
             # Extract LIME specific params
-            params = self.config.explainer.params or {}
+            params = self.config.explainer.params.copy() if self.config.explainer.params else {}
+            
+            # Prevent duplicate argument error if these are in params
+            params.pop('num_features', None)
+            params.pop('num_samples', None)
             
             self.explainer = LIMETabularWrapper(
                 training_data=self.dataset['X_train'],
@@ -317,16 +345,55 @@ class ExperimentRunner:
                 "explainer_method": self.config.explainer.method
             }
             
-            # Loop
+            # Parallel Loop
             total = len(instances)
-            for idx, (_, row) in enumerate(instances.iterrows()):
-                try:
-                    res = self.evaluate_instance(row, idx, total)
-                    self.results["instance_evaluations"].append(res)
-                except Exception as e:
-                    logger.error(f"Error evaluating instance {idx}: {e}")
-                    # Continue loop
+            logger.info(f"Starting evaluation of {total} instances with {self.max_workers} workers.")
+            
+            # Use ProcessPoolExecutor for CPU-bound tasks (SHAP/LIME), 
+            # but ensure everything is picklable.
+            
+            executor_class = concurrent.futures.ProcessPoolExecutor
+            
+            # Check picklability
+            try:
+                pickle.dumps(self.explainer)
+                pickle.dumps(self.model)
+            except (pickle.PicklingError, AttributeError, TypeError) as e:
+                logger.warning(f"Explainer or Model not picklable ({e}). Fallback to ThreadPoolExecutor.")
+                executor_class = concurrent.futures.ThreadPoolExecutor
+            
+            if self.max_workers <= 1:
+                # Sequential
+                for idx, (_, row) in enumerate(instances.iterrows()):
+                    try:
+                        res = self.evaluate_instance(row, idx, total)
+                        self.results["instance_evaluations"].append(res)
+                    except Exception as e:
+                        logger.error(f"Error evaluating instance {idx}: {e}")
+            else:
+                with executor_class(max_workers=self.max_workers) as executor:
+                    # Submit all
+                    futures = {
+                        executor.submit(self.evaluate_instance, row, idx, total): idx 
+                        for idx, (_, row) in enumerate(instances.iterrows())
+                    }
                     
+                    completed_count = 0
+                    for future in concurrent.futures.as_completed(futures):
+                        idx = futures[future]
+                        try:
+                            res = future.result()
+                            self.results["instance_evaluations"].append(res)
+                        except Exception as e:
+                            logger.error(f"Error evaluating instance {idx}: {e}")
+                        
+                        completed_count += 1
+                        if completed_count % 10 == 0:
+                            logger.info(f"Progress: {completed_count}/{total}")
+                    
+            # Sort results by instance_id to maintain deterministic order
+            self.results["instance_evaluations"].sort(key=lambda x: x['instance_id'])
+            
             # Aggregate
             self.results["aggregated_metrics"] = self._compute_aggregates()
             
@@ -338,6 +405,16 @@ class ExperimentRunner:
             logger.info(f"Experiment completed in {duration:.2f}s")
             
             self.save_results()
+            
+            # Log cache stats
+            cache_stats = get_cache_stats()
+            self.results["experiment_metadata"]["cache_stats"] = {
+                "hits": cache_stats.hits,
+                "misses": cache_stats.misses,
+                "currsize": cache_stats.currsize,
+                "maxsize": cache_stats.maxsize
+            }
+            logger.info(f"Model Cache Stats: {cache_stats}")
             
             return self.results
             
