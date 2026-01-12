@@ -1,0 +1,2699 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "XAI Evaluation API",
+    "description": "\n    API for accessing XAI benchmark experiment results.\n    \n    This API provides access to:\n    - Experiment runs with XAI methods (LIME, SHAP, etc.)\n    - Model performance metrics\n    - Explainability scores and evaluations\n    - Filtering and searching capabilities\n    \n    Built for the XAI Evaluation Framework PhD research project.\n    ",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/token": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login For Access Token",
+        "description": "Get access token (Login).\n\nFor Phase 1, we use environment variables ADMIN_USERNAME and ADMIN_PASSWORD\nto validate the admin user.",
+        "operationId": "login_for_access_token_token_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_for_access_token_token_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "List Experiment Runs",
+        "description": "Get all experiment runs with optional filtering and pagination",
+        "operationId": "get_runs_runs_get",
+        "parameters": [
+          {
+            "name": "dataset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by dataset (e.g., 'AdultIncome', 'CIFAR-10')",
+              "title": "Dataset"
+            },
+            "description": "Filter by dataset (e.g., 'AdultIncome', 'CIFAR-10')"
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by XAI method (e.g., 'LIME', 'SHAP')",
+              "title": "Method"
+            },
+            "description": "Filter by XAI method (e.g., 'LIME', 'SHAP')"
+          },
+          {
+            "name": "model_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by model type (e.g., 'classical', 'cnn')",
+              "title": "Model Type"
+            },
+            "description": "Filter by model type (e.g., 'classical', 'cnn')"
+          },
+          {
+            "name": "model_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by model name (e.g., 'random_forest')",
+              "title": "Model Name"
+            },
+            "description": "Filter by model name (e.g., 'random_forest')"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Number of results to return (max: 100)",
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "Number of results to return (max: 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of results to skip for pagination",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Number of results to skip for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Single Run",
+        "description": "Get detailed information about a specific run",
+        "operationId": "get_run_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Run found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Run not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": "Run not found: adult_rf_lime_a3b2c1",
+                  "timestamp": "2024-01-15T10:30:00"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}/details": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Detailed Results",
+        "description": "Get complete experiment results including aggregated metrics and metadata",
+        "operationId": "get_run_details_runs__run_id__details_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}/instances": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Instance Evaluations",
+        "description": "Get paginated list of instance-level evaluations",
+        "operationId": "get_run_instances_runs__run_id__instances_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Number of instances (max: 100)",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "Number of instances (max: 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of instances to skip",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Number of instances to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstancesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "List Experiment Runs",
+        "description": "Get all experiment runs with optional filtering and pagination",
+        "operationId": "get_runs_api_runs_get",
+        "parameters": [
+          {
+            "name": "dataset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by dataset (e.g., 'AdultIncome', 'CIFAR-10')",
+              "title": "Dataset"
+            },
+            "description": "Filter by dataset (e.g., 'AdultIncome', 'CIFAR-10')"
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by XAI method (e.g., 'LIME', 'SHAP')",
+              "title": "Method"
+            },
+            "description": "Filter by XAI method (e.g., 'LIME', 'SHAP')"
+          },
+          {
+            "name": "model_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by model type (e.g., 'classical', 'cnn')",
+              "title": "Model Type"
+            },
+            "description": "Filter by model type (e.g., 'classical', 'cnn')"
+          },
+          {
+            "name": "model_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by model name (e.g., 'random_forest')",
+              "title": "Model Name"
+            },
+            "description": "Filter by model name (e.g., 'random_forest')"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Number of results to return (max: 100)",
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "Number of results to return (max: 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of results to skip for pagination",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Number of results to skip for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Single Run",
+        "description": "Get detailed information about a specific run",
+        "operationId": "get_run_api_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Run found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Run not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": "Run not found: adult_rf_lime_a3b2c1",
+                  "timestamp": "2024-01-15T10:30:00"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/details": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Detailed Results",
+        "description": "Get complete experiment results including aggregated metrics and metadata",
+        "operationId": "get_run_details_api_runs__run_id__details_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/instances": {
+      "get": {
+        "tags": [
+          "Runs"
+        ],
+        "summary": "Get Instance Evaluations",
+        "description": "Get paginated list of instance-level evaluations",
+        "operationId": "get_run_instances_api_runs__run_id__instances_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Number of instances (max: 100)",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "Number of instances (max: 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of instances to skip",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Number of instances to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstancesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "summary": "Health Check",
+        "description": "Health check endpoint for Render monitoring.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/detailed": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Detailed Health Check",
+        "description": "Detailed health information including system stats",
+        "operationId": "detailed_health_check_health_detailed_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "description": "Check if the API is running and responsive",
+        "operationId": "health_check_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health/detailed": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Detailed Health Check",
+        "description": "Detailed health information including system stats",
+        "operationId": "detailed_health_check_api_health_detailed_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/db/files": {
+      "get": {
+        "tags": [
+          "Debug"
+        ],
+        "summary": "List Files",
+        "description": "List files in experiments directory.",
+        "operationId": "list_files_db_files_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/db/loader": {
+      "get": {
+        "tags": [
+          "Debug"
+        ],
+        "summary": "Debug Loader",
+        "description": "Debug the data loader logic.",
+        "operationId": "debug_loader_db_loader_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/experiments/batch/": {
+      "get": {
+        "tags": [
+          "Batch Experiments"
+        ],
+        "summary": "List Batch Jobs",
+        "description": "List all batch jobs in current session.",
+        "operationId": "list_batch_jobs_api_experiments_batch__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Batch Experiments"
+        ],
+        "summary": "Submit Batch",
+        "description": "Trigger a new batch execution.\n\nArgs:\n    configs: List of configuration filenames (e.g. [\"exp1.yaml\"])",
+        "operationId": "submit_batch_api_experiments_batch__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchSubmitRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/experiments/batch/{job_id}": {
+      "get": {
+        "tags": [
+          "Batch Experiments"
+        ],
+        "summary": "Get Batch Status",
+        "description": "Get status of a specific batch job.",
+        "operationId": "get_batch_status_api_experiments_batch__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/experiments/batch/{job_id}/results": {
+      "get": {
+        "tags": [
+          "Batch Experiments"
+        ],
+        "summary": "Get Batch Results",
+        "description": "Get results validation/manifest for a completed job.",
+        "operationId": "get_batch_results_api_experiments_batch__job_id__results_get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-eval/samples": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Get Samples for Annotation",
+        "description": "Retrieve samples assigned to an annotator for human evaluation",
+        "operationId": "get_samples_human_eval_samples_get",
+        "parameters": [
+          {
+            "name": "annotator_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by annotator ID. If not provided, returns all samples.",
+              "title": "Annotator Id"
+            },
+            "description": "Filter by annotator ID. If not provided, returns all samples."
+          },
+          {
+            "name": "include_completed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include already-annotated samples",
+              "default": false,
+              "title": "Include Completed"
+            },
+            "description": "Include already-annotated samples"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanEvalSamplesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-eval/annotations": {
+      "post": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Submit Annotation",
+        "description": "Submit a human annotation for a sample",
+        "operationId": "submit_annotation_human_eval_annotations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HumanAnnotationSubmission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationSubmissionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-eval/progress": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Get Progress",
+        "description": "Get annotation progress for an annotator",
+        "operationId": "get_progress_human_eval_progress_get",
+        "parameters": [
+          {
+            "name": "annotator_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Annotator ID",
+              "title": "Annotator Id"
+            },
+            "description": "Annotator ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-eval/admin/stats": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation - Admin"
+        ],
+        "summary": "Get Admin Statistics",
+        "description": "Get overall annotation statistics (admin only)",
+        "operationId": "get_admin_stats_human_eval_admin_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/human-eval/admin/annotations": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation - Admin"
+        ],
+        "summary": "Export All Annotations",
+        "description": "Export all annotations with LLM scores for analysis (admin only)",
+        "operationId": "get_all_annotations_human_eval_admin_annotations_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Export format: 'json' or 'csv'",
+              "default": "json",
+              "title": "Format"
+            },
+            "description": "Export format: 'json' or 'csv'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/human-eval/samples": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Get Samples for Annotation",
+        "description": "Retrieve samples assigned to an annotator for human evaluation",
+        "operationId": "get_samples_api_human_eval_samples_get",
+        "parameters": [
+          {
+            "name": "annotator_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by annotator ID. If not provided, returns all samples.",
+              "title": "Annotator Id"
+            },
+            "description": "Filter by annotator ID. If not provided, returns all samples."
+          },
+          {
+            "name": "include_completed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include already-annotated samples",
+              "default": false,
+              "title": "Include Completed"
+            },
+            "description": "Include already-annotated samples"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanEvalSamplesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/human-eval/annotations": {
+      "post": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Submit Annotation",
+        "description": "Submit a human annotation for a sample",
+        "operationId": "submit_annotation_api_human_eval_annotations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HumanAnnotationSubmission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationSubmissionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/human-eval/progress": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation"
+        ],
+        "summary": "Get Progress",
+        "description": "Get annotation progress for an annotator",
+        "operationId": "get_progress_api_human_eval_progress_get",
+        "parameters": [
+          {
+            "name": "annotator_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Annotator ID",
+              "title": "Annotator Id"
+            },
+            "description": "Annotator ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/human-eval/admin/stats": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation - Admin"
+        ],
+        "summary": "Get Admin Statistics",
+        "description": "Get overall annotation statistics (admin only)",
+        "operationId": "get_admin_stats_api_human_eval_admin_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/human-eval/admin/annotations": {
+      "get": {
+        "tags": [
+          "Human Evaluation",
+          "Human Evaluation - Admin"
+        ],
+        "summary": "Export All Annotations",
+        "description": "Export all annotations with LLM scores for analysis (admin only)",
+        "operationId": "get_all_annotations_api_human_eval_admin_annotations_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Export format: 'json' or 'csv'",
+              "default": "json",
+              "title": "Format"
+            },
+            "description": "Export format: 'json' or 'csv'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Metrics",
+        "description": "Endpoint that serves Prometheus metrics.",
+        "operationId": "metrics_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "summary": "Root",
+        "description": "Root endpoint with API information.\n\nReturns basic API info and useful links.",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdminStatsResponse": {
+        "properties": {
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "AdminStatsResponse",
+        "description": "Admin dashboard statistics."
+      },
+      "AnnotationProgress": {
+        "properties": {
+          "annotator_id": {
+            "type": "string",
+            "title": "Annotator Id"
+          },
+          "total_assigned": {
+            "type": "integer",
+            "title": "Total Assigned"
+          },
+          "completed": {
+            "type": "integer",
+            "title": "Completed"
+          },
+          "in_progress": {
+            "type": "integer",
+            "title": "In Progress"
+          },
+          "pending": {
+            "type": "integer",
+            "title": "Pending"
+          },
+          "completion_rate": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Completion Rate"
+          },
+          "avg_time_per_annotation": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Time Per Annotation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "annotator_id",
+          "total_assigned",
+          "completed",
+          "in_progress",
+          "pending",
+          "completion_rate"
+        ],
+        "title": "AnnotationProgress",
+        "description": "Progress tracking for an annotator."
+      },
+      "AnnotationStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "in_progress",
+          "completed",
+          "skipped"
+        ],
+        "title": "AnnotationStatus",
+        "description": "Status of a human annotation sample."
+      },
+      "AnnotationSubmissionResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "success"
+          },
+          "annotation_id": {
+            "type": "string",
+            "title": "Annotation Id",
+            "description": "Unique ID for this annotation"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "progress": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Progress",
+            "description": "Updated progress (completed, remaining)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "annotation_id",
+          "message",
+          "progress"
+        ],
+        "title": "AnnotationSubmissionResponse",
+        "description": "Response after submitting an annotation."
+      },
+      "BatchJobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "submitted_at": {
+            "type": "string",
+            "title": "Submitted At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "status",
+          "submitted_at"
+        ],
+        "title": "BatchJobResponse"
+      },
+      "BatchSubmitRequest": {
+        "properties": {
+          "configs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Configs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "configs"
+        ],
+        "title": "BatchSubmitRequest"
+      },
+      "Body_login_for_access_token_token_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^password$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "title": "Password"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_for_access_token_token_post"
+      },
+      "Dataset": {
+        "type": "string",
+        "enum": [
+          "ImageNet",
+          "CIFAR-10",
+          "CIFAR-100",
+          "MNIST",
+          "FashionMNIST",
+          "CelebA",
+          "IMDB",
+          "Reuters",
+          "AG-News",
+          "SST-2",
+          "CoLA",
+          "TabularSynthetic",
+          "AdultIncome",
+          "WineQuality",
+          "BreastCancer",
+          "Diabetes"
+        ],
+        "title": "Dataset",
+        "description": "Available datasets for benchmarking."
+      },
+      "ExperimentMetadata": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "dataset": {
+            "type": "string",
+            "title": "Dataset"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "config_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config Version"
+          },
+          "random_seed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Random Seed"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "dataset",
+          "timestamp"
+        ],
+        "title": "ExperimentMetadata",
+        "description": "Metadata from the experiment runner."
+      },
+      "ExperimentResult": {
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/ExperimentMetadata"
+          },
+          "model_info": {
+            "$ref": "#/components/schemas/ModelInfo"
+          },
+          "aggregated_metrics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Aggregated Metrics"
+          },
+          "instance_evaluations": {
+            "items": {
+              "$ref": "#/components/schemas/InstanceEvaluation"
+            },
+            "type": "array",
+            "title": "Instance Evaluations",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "model_info",
+          "aggregated_metrics"
+        ],
+        "title": "ExperimentResult",
+        "description": "Complete experiment result data structure.",
+        "example": {
+          "aggregated_metrics": {
+            "fidelity": {
+              "max": 0.9,
+              "mean": 0.85,
+              "min": 0.8,
+              "std": 0.05
+            }
+          },
+          "instance_evaluations": [
+            {
+              "explanation": {
+                "top_features": [
+                  "age",
+                  "income"
+                ]
+              },
+              "instance_id": 1,
+              "metrics": {
+                "fidelity": 0.88
+              }
+            }
+          ],
+          "metadata": {
+            "dataset": "adult",
+            "name": "exp1_adult_rf_lime",
+            "timestamp": "2023-10-27T10:00:00"
+          },
+          "model_info": {
+            "explainer_method": "lime",
+            "name": "random_forest"
+          }
+        }
+      },
+      "ExperimentResultResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ExperimentResult"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ExperimentResultResponse",
+        "description": "Response wrapper for detailed experiment results."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "timestamp"
+        ],
+        "title": "HealthResponse"
+      },
+      "HumanAnnotationRatings": {
+        "properties": {
+          "coherence": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Coherence",
+            "description": "How understandable and logically consistent (1=Poor, 5=Excellent)"
+          },
+          "faithfulness": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Faithfulness",
+            "description": "How well it reflects model's actual reasoning (1=Poor, 5=Excellent)"
+          },
+          "usefulness": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Usefulness",
+            "description": "How helpful for understanding prediction (1=Poor, 5=Excellent)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "coherence",
+          "faithfulness",
+          "usefulness"
+        ],
+        "title": "HumanAnnotationRatings",
+        "description": "Likert scale ratings for explanation quality (1-5).\nMatches LLM evaluation dimensions for comparison.",
+        "example": {
+          "coherence": 4,
+          "faithfulness": 3,
+          "usefulness": 4
+        }
+      },
+      "HumanAnnotationSubmission": {
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "title": "Sample Id",
+            "description": "Unique sample identifier (e.g., 'rf_lime_7834')"
+          },
+          "annotator_id": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "title": "Annotator Id",
+            "description": "Annotator identifier"
+          },
+          "ratings": {
+            "$ref": "#/components/schemas/HumanAnnotationRatings"
+          },
+          "comments": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comments",
+            "description": "Optional comments about the explanation"
+          },
+          "time_spent_seconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Spent Seconds",
+            "description": "Time spent annotating (seconds)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sample_id",
+          "annotator_id",
+          "ratings"
+        ],
+        "title": "HumanAnnotationSubmission",
+        "description": "Request model for submitting a human annotation.",
+        "example": {
+          "annotator_id": "annotator1",
+          "comments": "Clear explanation but lacks some context",
+          "ratings": {
+            "coherence": 4,
+            "faithfulness": 3,
+            "usefulness": 4
+          },
+          "sample_id": "rf_lime_7834",
+          "time_spent_seconds": 180
+        }
+      },
+      "HumanEvalSample": {
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "title": "Sample Id"
+          },
+          "experiment": {
+            "type": "string",
+            "title": "Experiment",
+            "description": "Experiment name (e.g., 'rf_lime')"
+          },
+          "instance_id": {
+            "type": "integer",
+            "title": "Instance Id"
+          },
+          "quadrant": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quadrant",
+            "description": "Confusion matrix quadrant (TP/TN/FP/FN)"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "true_label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "True Label"
+          },
+          "prediction_correct": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction Correct"
+          },
+          "explanation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Explanation",
+            "description": "Explanation data (top features, etc.)"
+          },
+          "classical_metrics": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Classical Metrics",
+            "description": "Classical XAI metrics (fidelity, stability, etc.)"
+          },
+          "assigned_to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned To",
+            "description": "Annotator this sample is assigned to"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AnnotationStatus",
+            "default": "pending"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sample_id",
+          "experiment",
+          "instance_id",
+          "explanation",
+          "classical_metrics"
+        ],
+        "title": "HumanEvalSample",
+        "description": "A sample for human annotation (excludes LLM scores to maintain blindness).",
+        "example": {
+          "assigned_to": "annotator1",
+          "classical_metrics": {
+            "fidelity": 0.95,
+            "sparsity": 0.09,
+            "stability": 0.86
+          },
+          "experiment": "rf_lime",
+          "explanation": {
+            "method": "LIME",
+            "top_features": [
+              "capital-gain: 0.4535",
+              "education-num: 0.0981",
+              "marital-status_Married-civ-spouse: 0.0881"
+            ]
+          },
+          "instance_id": 7834,
+          "prediction": 1,
+          "prediction_correct": true,
+          "quadrant": "TP",
+          "sample_id": "rf_lime_7834",
+          "status": "pending",
+          "true_label": 1
+        }
+      },
+      "HumanEvalSamplesResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/HumanEvalSample"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "HumanEvalSamplesResponse",
+        "description": "Response containing samples for annotation."
+      },
+      "InstanceEvaluation": {
+        "properties": {
+          "instance_id": {
+            "type": "integer",
+            "title": "Instance Id"
+          },
+          "true_label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "True Label"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "prediction_correct": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction Correct"
+          },
+          "quadrant": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quadrant"
+          },
+          "metrics": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Metrics"
+          },
+          "explanation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "instance_id",
+          "metrics"
+        ],
+        "title": "InstanceEvaluation",
+        "description": "Detailed evaluation for a single instance."
+      },
+      "InstancesResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/InstanceEvaluation"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "pagination": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pagination"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "pagination"
+        ],
+        "title": "InstancesResponse",
+        "description": "Response wrapper for paginated instances."
+      },
+      "LikertScores": {
+        "properties": {
+          "clarity": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Clarity"
+          },
+          "usefulness": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Usefulness"
+          },
+          "completeness": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Completeness"
+          },
+          "trustworthiness": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Trustworthiness"
+          },
+          "overall": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Overall"
+          }
+        },
+        "type": "object",
+        "required": [
+          "clarity",
+          "usefulness",
+          "completeness",
+          "trustworthiness",
+          "overall"
+        ],
+        "title": "LikertScores",
+        "description": "Likert scale ratings for different evaluation dimensions (1-5)."
+      },
+      "LlmEval": {
+        "properties": {
+          "Likert": {
+            "$ref": "#/components/schemas/LikertScores"
+          },
+          "Justification": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Justification",
+            "description": "Textual justification for the ratings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "Likert",
+          "Justification"
+        ],
+        "title": "LlmEval",
+        "description": "LLM-based evaluation with Likert scales and justifications."
+      },
+      "MetricSet": {
+        "properties": {
+          "Fidelity": {
+            "type": "number",
+            "title": "Fidelity",
+            "description": "How well the explanation represents the model's behavior"
+          },
+          "Stability": {
+            "type": "number",
+            "title": "Stability",
+            "description": "Consistency of explanations across similar inputs"
+          },
+          "Sparsity": {
+            "type": "number",
+            "title": "Sparsity",
+            "description": "Conciseness of explanation (lower = more sparse)"
+          },
+          "CausalAlignment": {
+            "type": "number",
+            "title": "Causalalignment",
+            "description": "Alignment with known causal relationships"
+          },
+          "CounterfactualSensitivity": {
+            "type": "number",
+            "title": "Counterfactualsensitivity",
+            "description": "Sensitivity to counterfactual changes"
+          },
+          "EfficiencyMS": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Efficiencyms",
+            "description": "Processing time efficiency in milliseconds"
+          }
+        },
+        "type": "object",
+        "required": [
+          "Fidelity",
+          "Stability",
+          "Sparsity",
+          "CausalAlignment",
+          "CounterfactualSensitivity",
+          "EfficiencyMS"
+        ],
+        "title": "MetricSet",
+        "description": "Core metric set with all explainability measurements.",
+        "example": {
+          "CausalAlignment": 0.6,
+          "CounterfactualSensitivity": 0.5,
+          "EfficiencyMS": 150.5,
+          "Fidelity": 0.85,
+          "Sparsity": 0.7,
+          "Stability": 0.92
+        }
+      },
+      "ModelInfo": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "explainer_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Explainer Method"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "ModelInfo",
+        "description": "Model information."
+      },
+      "ModelType": {
+        "type": "string",
+        "enum": [
+          "classical",
+          "cnn",
+          "transformer",
+          "rnn"
+        ],
+        "title": "ModelType",
+        "description": "Model architecture types."
+      },
+      "ProgressResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AnnotationProgress"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "ProgressResponse",
+        "description": "Response containing progress information."
+      },
+      "Run": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "title": "Id",
+            "description": "Alphanumeric ID with underscores, dots, or dashes"
+          },
+          "modelName": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "title": "Modelname",
+            "description": "Model name"
+          },
+          "modelType": {
+            "$ref": "#/components/schemas/ModelType"
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/Dataset"
+          },
+          "method": {
+            "$ref": "#/components/schemas/XaiMethod"
+          },
+          "accuracy": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Accuracy",
+            "description": "Model accuracy on the dataset (0-100)"
+          },
+          "explainabilityScore": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Explainabilityscore",
+            "description": "Overall explainability score (0-1)"
+          },
+          "processingTime": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Processingtime",
+            "description": "Total processing time in milliseconds"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RunStatus"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/MetricSet"
+          },
+          "llmEval": {
+            "$ref": "#/components/schemas/LlmEval"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          },
+          "errorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errormessage"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "modelName",
+          "modelType",
+          "dataset",
+          "method",
+          "accuracy",
+          "explainabilityScore",
+          "processingTime",
+          "status",
+          "timestamp",
+          "metrics",
+          "llmEval"
+        ],
+        "title": "Run",
+        "description": "Complete benchmark run with all metadata and results.",
+        "example": {
+          "accuracy": 88.5,
+          "dataset": "AdultIncome",
+          "explainabilityScore": 0.75,
+          "id": "run_123",
+          "llmEval": {
+            "Justification": "Good explanation but slightly complex.",
+            "Likert": {
+              "clarity": 4,
+              "completeness": 3,
+              "overall": 4,
+              "trustworthiness": 4,
+              "usefulness": 4
+            }
+          },
+          "method": "SHAP",
+          "metrics": {
+            "CausalAlignment": 0.6,
+            "CounterfactualSensitivity": 0.5,
+            "EfficiencyMS": 100,
+            "Fidelity": 0.9,
+            "Sparsity": 0.7,
+            "Stability": 0.8
+          },
+          "modelName": "RandomForest_v1",
+          "modelType": "classical",
+          "processingTime": 1250.0,
+          "status": "completed",
+          "timestamp": "2023-10-27T10:00:00Z"
+        }
+      },
+      "RunResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Run"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "RunResponse"
+      },
+      "RunStatus": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "running",
+          "failed",
+          "pending"
+        ],
+        "title": "RunStatus",
+        "description": "Run execution status."
+      },
+      "RunsResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Run"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "pagination": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pagination"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "RunsResponse"
+      },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "title": "Token",
+        "description": "JWT Token response."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "XaiMethod": {
+        "type": "string",
+        "enum": [
+          "LIME",
+          "SHAP",
+          "GradCAM",
+          "RISE",
+          "Integrated Gradients"
+        ],
+        "title": "XaiMethod",
+        "description": "XAI explanation methods."
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "token"
+          }
+        }
+      }
+    }
+  }
+}
