@@ -200,7 +200,7 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Update CHANGELOG
         - [x] Update README
         - [x] Create Runbook
-- [ ] **EXP1-50**: Deploy Frontend to Render (Production) 🔥 P0
+- [x] **EXP1-50**: Deploy Frontend to Render (Production) 🔥 P0
     - [x] **EXP1-50a**: Pre-Deployment & Config
         - [x] Write ADR-0005 (Render Frontend Strategy)
         - [x] Update `next.config.mjs` (headers, standalone)
@@ -216,7 +216,7 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Phase 1: Deployment Validation (Logs, Standalone) (Smoke Test Created)
         - [x] Phase 2: Functional Testing (Charts, Nav) (Verified via Screenshots)
         - [x] Phase 3: Integration & Security (CORS, HTTPS)
-        - [ ] Phase 4: Performance Audit (Lighthouse)
+        - [ ] Phase 4: Performance Audit (Lighthouse) (Deferred to Optimization Phase)
     - [x] **EXP1-50d**: Post-Deployment Documentation
         - [x] Update README with Deployment Badge & Instructions
         - [x] Update CHANGELOG
