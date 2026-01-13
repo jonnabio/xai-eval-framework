@@ -386,12 +386,12 @@ You are finalizing API docs.
 **Priority**: 📋 P2
 **Trigger**: "Execute EXP1-53"
 **Prompt Context**:
-You are creating media assets.
-**Objective**: Script and visual assets.
+You are creating media assets using the Browser Subagent.
+**Objective**: Automated video recording and high-res screenshots.
 **Steps**:
-1.  Write `docs/media/DEMO_SCRIPT.md`.
-2.  (User Action) Record video.
-3.  Place assets in `docs/media/`.
+1.  Write `docs/media/DEMO_SCRIPT.md` (Agent Plan).
+2.  **AGENT ACTION**: Run `browser_subagent` to navigate the live dashboard and record the session.
+3.  **AGENT ACTION**: Capture screenshots of critical views (Radar, Feature Importance).
 **Files**: `docs/media/DEMO_SCRIPT.md`.
 
 ### Task: EXP1-54 Create Presentation Slides Coverage

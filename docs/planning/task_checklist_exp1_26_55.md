@@ -222,7 +222,7 @@ To maximize efficiency, tasks are split between two workstations based on resour
         - [x] Update CHANGELOG
 - [x] **EXP1-51**: Production Smoke Testing & Monitoring Setup 📋 P2
     - [x] Create smoke test suite (`scripts/smoke_test.py`)
-    - [ ] Setup Uptime monitoring (GitHub Actions)
+    - [x] Setup Uptime monitoring (GitHub Actions)
 
 ## PHASE G: DEMO & PRESENTATION MATERIALS
 **Duration**: Week 3 (Deployment Phase)
@@ -234,7 +234,7 @@ To maximize efficiency, tasks are split between two workstations based on resour
     - [x] Generate `openapi.json`
 - [x] **EXP1-53**: Create Demo Video and Screenshots 📋 P2
     - [ ] Write script
-    - [ ] Record 3-5 min video
+    - [x] Record 3-5 min video (Automated via Browser Subagent)
     - [x] Capture high-res screenshots (`docs/media/`)
 - [x] **EXP1-54**: Create Presentation Slides for Thesis Defense 📋 P2
     - [x] Create slide deck (15-20 slides) (`docs/presentation/defense_slides.md`)
