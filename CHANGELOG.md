@@ -48,6 +48,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- **Docs**: Implemented **BMAD Methodology** for agentic development.
+    - Added `docs/context/` directory with `tech_stack.md`, `system_patterns.md`, `active_state.md`.
+    - Added `docs/bmad/roles.md` defining Architect, Developer, and QA Agent personas.
+    - Added [ADR-0022](docs/architecture/adrs/0022-adoption-of-bmad-methodology.md) formalizing this adoption.
+### Added
 - REST API with FastAPI (INT-01 to INT-18)
 - Experiment execution endpoint
 - Results retrieval endpoints
