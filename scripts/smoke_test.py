@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 def check_endpoint(url, description, expected_status=200):
     try:
         logger.info(f"Checking {description} at {url}...")
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=90)
         if response.status_code == expected_status:
             logger.info(f"✅ {description} is UP ({response.status_code})")
             return True
@@ -25,7 +25,7 @@ def check_endpoint(url, description, expected_status=200):
         return False
 
 def check_health(base_url):
-    health_url = f"{base_url.rstrip('/')}/api/health"
+    health_url = f"{base_url.rstrip('/')}/health"
     return check_endpoint(health_url, "API Health Check")
 
 def check_frontend(base_url):
@@ -33,8 +33,8 @@ def check_frontend(base_url):
 
 def main():
     parser = argparse.ArgumentParser(description="Smoke Test for XAI Benchmark Deployment")
-    parser.add_argument("--api-url", default=os.getenv("API_URL", "https://xai-eval-api.onrender.com"), help="Backend API URL")
-    parser.add_argument("--frontend-url", default=os.getenv("FRONTEND_URL", "https://xai-benchmark-frontend.onrender.com"), help="Frontend URL")
+    parser.add_argument("--api-url", default=os.getenv("API_URL", "https://xai-eval-framework.onrender.com"), help="Backend API URL")
+    parser.add_argument("--frontend-url", default=os.getenv("FRONTEND_URL", "https://xai-benchmark.onrender.com"), help="Frontend URL")
     args = parser.parse_args()
     
     logger.info("Starting Smoke Tests...")
