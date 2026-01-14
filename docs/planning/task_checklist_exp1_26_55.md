@@ -118,17 +118,6 @@ To maximize efficiency, tasks are split between two workstations based on resour
 **Duration**: Weeks 7-9
 **Objective**: Thesis chapters and reproducible artifact
 
-<<<<<<< HEAD
-- [ ] **EXP1-41**: Publication-Quality Visualization Suite 🔥 P0
-    - [ ] Generate 10+ vector figures (Heatmaps, Radar, Boxplots)
-- [ ] **EXP1-42**: Write Methodology Chapter Section 🔥 P0
-    - [ ] Draft 8-10 pages (Design, Models, Metrics, Validation)
-- [ ] **EXP1-43**: Write Results Chapter Section 🔥 P0
-    - [ ] Draft 12-15 pages (Performance, Metrics, LLM, Comparisons)
-- [ ] **EXP1-44**: Create Reproducibility Package ⚡ P1
-    - [ ] Create Guide, Environment, Checksums, Validation Script
-    - [ ] Prepare Zenodo archive
-=======
 - [x] **EXP1-41**: Publication-Quality Visualization Suite 🔥 P0
     - [x] Generate 10+ vector figures (Heatmaps, Radar, Boxplots)
 - [x] **EXP1-42**: Write Methodology Chapter Section 🔥 P0
@@ -140,7 +129,6 @@ To maximize efficiency, tasks are split between two workstations based on resour
 - [x] **EXP1-44**: Create Reproducibility Package ⚡ P1
     - [x] Create Guide, Environment, Checksums, Validation Script
     - [x] Prepare Zenodo archive
->>>>>>> b5786add3c157fd9b34e8d7bae5b034eeb77ccd0
 - [ ] **EXP1-45**: Write Discussion & Future Work Section 📋 P2
     - [ ] Draft 6-8 pages (Interpretation, Limitations, Future)
 
