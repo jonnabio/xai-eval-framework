@@ -5,7 +5,7 @@ This module defines the abstract base class for all XAI explainers (SHAP, LIME, 
 enforcing a consistent interface for the evaluation framework.
 """
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, Tuple
 import numpy as np
 
 class ExplainerWrapper(ABC):
@@ -66,13 +66,20 @@ class ExplainerWrapper(ABC):
         self, 
         model: Any, 
         instance: np.ndarray,
-        predict_fn: Optional[Any] = None
-    ) -> np.ndarray:
+        predict_fn: Optional[Any] = None,
+        **kwargs
+    ) -> Union[np.ndarray, Tuple[np.ndarray, Dict[str, Any]]]:
         """
         Explain a single instance.
         
-        Default implementation delegates to generate_explanations with batch size 1.
-        Override if the specific explainer facilitates single-instance optimization.
+        Args:
+            model: The black-box model.
+            instance: Input instance (feature vector).
+            predict_fn: Optional prediction function.
+            **kwargs: Additional args (e.g. return_full=True).
+            
+        Returns:
+            Importance array, or (Importance, Metadata) tuple if return_full=True.
         """
         # Ensure 2D (1, F)
         if instance.ndim == 1:
@@ -81,4 +88,11 @@ class ExplainerWrapper(ABC):
             X_batch = instance
             
         result = self.generate_explanations(model, X_batch, predict_fn=predict_fn)
-        return result['feature_importance'][0]
+        weights = result['feature_importance'][0]
+        
+        if kwargs.get('return_full', False):
+            # Return tuple (weights, metadata)
+            # Metadata might be batch-level, we can pass it through or extract
+            return weights, result.get('metadata', {})
+            
+        return weights

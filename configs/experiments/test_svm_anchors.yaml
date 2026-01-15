@@ -1,0 +1,26 @@
+name: test_svm_anchors
+version: "1.0"
+dataset: adult
+random_seed: 42
+
+model:
+  name: svm_test
+  path: experiments/exp1_adult/models/test_svm.joblib
+  type: svm # Generic Factory type
+
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+
+sampling:
+  strategy: stratified
+  samples_per_class: 2 # Small number for fast verification
+  random_seed: 42
+
+metrics:
+  faithfulness: true
+  monotonicity: false
+  counterfactual: false
+
+output_dir: experiments/exp1_adult/results/test_svm_anchors

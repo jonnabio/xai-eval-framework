@@ -13,6 +13,7 @@ class ModelConfig(BaseModel):
     """Model selection and loading configuration."""
     name: str = Field(..., description="Model identifier (rf, xgboost)")
     path: Path = Field(..., description="Path to saved model file")
+    type: str = Field("rf", description="Model type for Factory (rf, xgb, svm, mlp, logreg)")
     
     @field_validator('path')
     @classmethod
@@ -25,7 +26,7 @@ class ModelConfig(BaseModel):
 
 class ExplainerConfig(BaseModel):
     """XAI method configuration."""
-    method: Literal["shap", "lime"] = Field(..., description="XAI method")
+    method: Literal["shap", "lime", "anchors", "dice"] = Field(..., description="XAI method")
     params: Dict = Field(default_factory=dict, description="Method-specific parameters")
     
     # SHAP-specific details

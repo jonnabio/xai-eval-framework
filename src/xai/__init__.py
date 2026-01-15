@@ -5,6 +5,8 @@ from .shap_tabular import (
     sample_background_data,
     validate_shap_additivity
 )
+from .anchors_wrapper import AnchorsTabularWrapper
+from .dice_wrapper import DiCETabularWrapper
 
 __all__ = [
     "LIMETabularWrapper", 
@@ -12,5 +14,7 @@ __all__ = [
     "SHAPTabularWrapper",
     "generate_shap_explanations",
     "sample_background_data",
-    "validate_shap_additivity"
+    "validate_shap_additivity",
+    "AnchorsTabularWrapper",
+    "DiCETabularWrapper"
 ]

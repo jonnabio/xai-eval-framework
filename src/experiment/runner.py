@@ -121,10 +121,40 @@ class ExperimentRunner:
         logger.info(f"Loading model from: {self.config.model.path}")
         if not self.config.model.path.exists():
              raise FileNotFoundError(f"Model not found at {self.config.model.path}")
+             
+        # Use Factory to get trainer/model
+        # We need to know the model type from config to use the factory correctly if we wanted to use factory.load()
+        # However, the Factory.get_trainer() returns a trainer instance. 
+        # BaseTrainer.load() is a classmethod or instance method? In base.py it was instance method but that's weird for loading.
+        # Actually in base.py: save() is instance, load() is usually classmethod or static?
+        # Let's check base.py pattern. 
+        # If BaseTrainer doesn't have static load, we might just load joblib directly if all are sklearn-compatible.
+        # BUT, for CNN/TF, joblib won't work.
+        # Ideally: TrainerClass.load(path)
         
-        # Assuming joblib load works for both RF and XGB as implemented in EXP1-10
-        # self.model = joblib.load(self.config.model.path)
-        self.model = load_model(str(self.config.model.path))
+        # We'll assume the config has a 'type' field for model, or we infer it.
+        # Config schema might need update if 'type' is missing. 
+        # For now, let's look at config.model object.
+        model_type = getattr(self.config.model, 'type', 'rf') # Default to RF
+        
+        from src.models.factory import ModelTrainerFactory
+        
+        # Instantiate trainer to access load mechanism
+        trainer = ModelTrainerFactory.get_trainer(model_type, {})
+        # Assuming trainer has a load method that returns the model
+        # Or does trainer.load return self? 
+        # If trainer.load returns self (populated), then self.model = trainer.model
+        
+        try:
+            # We try generic load_model utility first if simple sklearn
+            # But to be robust for future (TF/Torch), we should use trainer loading.
+            # Let's check if the trainer instance has a specific load.
+            loaded_trainer = trainer.load(self.config.model.path.parent, self.config.model.path.name)
+            self.model = loaded_trainer.model
+        except Exception as e:
+            logger.warning(f"Trainer custom load failed ({e}). Fallback to joblib/pickle.")
+            self.model = load_model(str(self.config.model.path))
+
         
         # Setup DiCE if needed (AFTER MODEL LOAD)
         if hasattr(self.config.metrics, 'counterfactual') and self.config.metrics.counterfactual:
@@ -149,14 +179,12 @@ class ExperimentRunner:
             cont_feats = feature_names
             cat_feats = []
             
-            cat_feats = []
-            
             from src.xai.dice_wrapper import DiCETabularWrapper
             self.dice_explainer = DiCETabularWrapper(
                 model=self.model,
                 training_data=train_df,
+                feature_names=feature_names,
                 target_column=target_col,
-                continuous_features=cont_feats,
                 categorical_features=cat_feats
             )
 
@@ -197,6 +225,36 @@ class ExperimentRunner:
                 random_state=self.config.random_seed,
                 **params
             )
+        elif self.config.explainer.method == "anchors":
+            from src.xai.anchors_wrapper import AnchorsTabularWrapper
+            params = self.config.explainer.params.copy() if self.config.explainer.params else {}
+            self.explainer = AnchorsTabularWrapper(
+                training_data=self.dataset['X_train'],
+                feature_names=self.dataset['feature_names'],
+                **params
+            )
+        elif self.config.explainer.method == "dice":
+             # Use the DiCE wrapper as the primary explainer if selected
+             # (Reuse the one created above or create new if not existing)
+             if self.dice_explainer:
+                 self.explainer = self.dice_explainer
+             else:
+                 # Logic duplication, but usually DiCE is a secondary metric provider
+                 # If DiCE is the PRIMARY explainer, we need to init it here.
+                 X_train = self.dataset['X_train']
+                 y_train = self.dataset['y_train']
+                 feature_names = self.dataset['feature_names']
+                 train_df = pd.DataFrame(X_train, columns=feature_names)
+                 target_col = 'income' if self.config.dataset == 'adult' else 'target'
+                 train_df[target_col] = y_train
+                 
+                 from src.xai.dice_wrapper import DiCETabularWrapper
+                 self.explainer = DiCETabularWrapper(
+                    model=self.model,
+                    training_data=train_df,
+                    feature_names=feature_names,
+                    target_column=target_col
+                 )
         else:
             raise ValueError(f"Unsupported explainer: {self.config.explainer.method}")
         

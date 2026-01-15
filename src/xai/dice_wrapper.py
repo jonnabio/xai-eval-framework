@@ -1,113 +1,147 @@
 """
-DiCE Wrapper for Counterfactual Explanation Generation.
+DiCE Wrapper (Counterfactuals) for Tabular Data.
 
 This module provides a standardized interface for generating counterfactual explanations
-using the DiCE (Diverse Counterfactual Explanations) library.
+using the DiCE library, adapted to the ExplainerWrapper interface.
 """
 import logging
 import pandas as pd
 import numpy as np
-import dice_ml
+import time
 from typing import List, Dict, Any, Optional, Union
+
+from .base import ExplainerWrapper
 
 logger = logging.getLogger(__name__)
 
-class DiCETabularWrapper:
+class DiCETabularWrapper(ExplainerWrapper):
     """
-    Wrapper for DiCE tabular counterfactuals.
+    Wrapper for DiCE (Diverse Counterfactual Explanations).
+    
+    Adapts counterfactual generation to 'feature importance' by calculating
+    the difference between the original instance and the generated counterfactual.
+    Features that changed are considered 'important'.
     """
+
     def __init__(
-        self,
-        model: Any,
-        training_data: pd.DataFrame,
-        target_column: str,
-        continuous_features: List[str],
-        categorical_features: List[str],
-        backend: str = "sklearn",
-        model_type: str = "classifier"
+        self, 
+        training_data: np.ndarray, 
+        feature_names: List[str], 
+        categorical_features: List[str] = None,
+        target_column: str = "target",
+        **kwargs
     ):
-        """
-        Initialize DiCE wrapper.
-
-        Args:
-            model: Trained model (sklearn-compatible).
-            training_data: Training data including target column.
-            target_column: Name of the target variable.
-            continuous_features: List of continuous feature names.
-            categorical_features: List of categorical feature names.
-            backend: 'sklearn', 'TF1', 'TF2', 'PYT'. Defaults to 'sklearn'.
-            model_type: 'classifier' or 'regressor'.
-        """
+        super().__init__(training_data, feature_names, **kwargs)
+        self.categorical_features = categorical_features or []
         self.target_column = target_column
+        self.dice_exp = None
+        self.dice_m = None
+        self.dice_d = None
         
-        # DiCE Data Object
-        self.d = dice_ml.Data(
-            dataframe=training_data,
-            continuous_features=continuous_features,
-            outcome_name=target_column
+    def _lazy_init(self, model):
+        """Initialize DiCE lazily."""
+        if self.dice_exp is not None:
+            return
+
+        try:
+            import dice_ml
+        except ImportError:
+            raise ImportError("dice-ml is required. Install with `pip install dice-ml`.")
+            
+        logger.info("Initializing DiCE explainer...")
+        
+        # 1. Prepare Data
+        # DiCE requires a dataframe with feature names + target
+        # We need to reconstruct it from numpy training_data
+        df_train = pd.DataFrame(self.training_data, columns=self.feature_names)
+        # Add dummy target if not present (BaseTrainer usually splits X/y)
+        # Here we assume training_data passed to init is just X.
+        # DiCE needs knowledge of outcome range or class.
+        # Workaround: Use model predictions on training data to verify?
+        # Or Just assume binary classification 0/1 for now as per Adult/Thesis.
+        df_train[self.target_column] = 0 # Dummy, DiCE just needs column existence for some operations
+        
+        self.dice_d = dice_ml.Data(
+            dataframe=df_train,
+            continuous_features=[f for f in self.feature_names if f not in self.categorical_features],
+            outcome_name=self.target_column
         )
         
-        # DiCE Model Object
-        self.m = dice_ml.Model(
+        # 2. Prepare Model
+        self.dice_m = dice_ml.Model(
             model=model,
-            backend=backend,
-            model_type=model_type
+            backend="sklearn", # We forced sklearn backend for generic trainers
+            model_type="classifier"
         )
         
-        # DiCE Explainer
-        # For sklearn backend, method typically needs to be 'random' or 'genetic' or 'kdtree'
-        # 'random' is fastest for simple checks.
-        self.exp = dice_ml.Dice(self.d, self.m, method="random")
-        
-    def generate_counterfactuals(
-        self,
-        query_instances: pd.DataFrame,
-        total_CFs: int = 1,
-        desired_class: Union[int, str] = "opposite"
-    ) -> List[pd.DataFrame]:
-        """
-        Generate counterfactuals for query instances.
+        # 3. Explainer
+        self.dice_exp = dice_ml.Dice(self.dice_d, self.dice_m, method="random") # 'random' is fast
+        logger.info("DiCE initialized.")
 
-        Args:
-            query_instances: DataFrame containing instances to explain (no target col).
-            total_CFs: Number of counterfactuals to generate per instance.
-            desired_class: Target class (or "opposite").
-
-        Returns:
-            List of DataFrames, each containing the CFs for the corresponding query instance.
+    def generate_explanations(
+        self, 
+        model: Any, 
+        X_samples: np.ndarray, 
+        predict_fn: Optional[Any] = None
+    ) -> Dict[str, np.ndarray]:
         """
-        # DiCE expects query_instances to be a DataFrame/dict
-        # It handles one instance at a time or batch depending on backend.
-        # Sklearn backend usually robust with single instances loop.
+        Generate Counterfactual-based importance.
+        """
+        self._lazy_init(model)
         
-        cfs_list = []
+        n_samples = X_samples.shape[0]
+        n_features = X_samples.shape[1]
+        feature_importance = np.zeros((n_samples, n_features))
         
-        for idx, row in query_instances.iterrows():
+        start_time = time.time()
+        
+        # Convert to DF for DiCE
+        query_df = pd.DataFrame(X_samples, columns=self.feature_names)
+        
+        for i in range(n_samples):
             try:
-                # Need to convert row to DF
-                # DiCE expects the input to have feature names
-                query_df = query_instances.loc[[idx]]
-                
-                # Generate
-                dice_exp = self.exp.generate_counterfactuals(
-                    query_df, 
-                    total_CFs=total_CFs, 
-                    desired_class=desired_class
+                # Generate CF
+                # total_CFs=1, desired_class="opposite"
+                dice_exp = self.dice_exp.generate_counterfactuals(
+                    query_df.iloc[[i]], 
+                    total_CFs=1, 
+                    desired_class="opposite"
                 )
                 
-                # Get CFs as dataframe
-                # visualize_as_dataframe returns None but prints, 
-                # cf_examples.final_cfs_df is what we want.
                 if dice_exp.cf_examples_list:
-                    # Usually list of CFExample objects
+                    # Get CF DataFrame
                     cf_df = dice_exp.cf_examples_list[0].final_cfs_df
-                    cfs_list.append(cf_df)
-                else:
-                    logger.warning(f"No CFs generated for instance {idx}")
-                    cfs_list.append(pd.DataFrame())
-                    
+                    if not cf_df.empty:
+                        # Extract CF vector (drop target)
+                        # Ensure columns match order
+                        cf_vector = cf_df[self.feature_names].iloc[0].values
+                        original_vector = X_samples[i]
+                        
+                        # Importance = Absolute Difference between Original and CF
+                        # (Normalized to [0,1] effectively if features are scaled, otherwise raw diff)
+                        diff = np.abs(original_vector - cf_vector)
+                        feature_importance[i] = diff
+                        
             except Exception as e:
-                logger.error(f"Error generating CF for instance {idx}: {e}")
-                cfs_list.append(pd.DataFrame())
+                logger.warning(f"DiCE failed for sample {i}: {e}")
                 
-        return cfs_list
+        duration = time.time() - start_time
+        
+        # Top features are just argsort of differences
+        top_features = np.argsort(-feature_importance, axis=1)[:, :5] # Top 5 changes
+
+        return {
+            'feature_importance': feature_importance,
+            'top_features': top_features,
+            'metadata': {
+                'method': 'DiCE',
+                'duration': duration,
+                'count': n_samples
+            }
+        }
+
+    def get_config(self) -> Dict[str, Any]:
+        return {
+            "method": "DiCE",
+            "kwargs": self.kwargs
+        }

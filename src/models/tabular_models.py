@@ -387,263 +387,76 @@ def verify_model_performance(
 
 class AdultRandomForestTrainer:
     """
-    Manages the training, evaluation, and persistence of the Random Forest model for the Adult dataset.
+    DEPRECATED: Use src.models.rf_trainer.RandomForestTrainer instead.
     
-    This class encapsulates the end-to-end pipeline for Experiment 1 model training. It includes
-    data loading (handled internally via `load_adult`), model initialization, training execution,
-    comprehensive metric calculation, feature importance extraction, and artifact persistence.
-    
-    Attributes:
-        config (Dict[str, Any]): The full configuration dictionary.
-        model_params (Dict[str, Any]): Model hyperparameters extracted from config.
-        model (Optional[RandomForestClassifier]): The trained model instance.
-        metrics (Dict[str, Any]): Dictionary of evaluation metrics.
-        feature_names (List[str]): List of feature names matching the training data.
-        
-    Methods:
-        train(force_retrain=False): Executes the training pipeline.
-        evaluate(X_test, y_test): Performs model evaluation on new data.
-        save(): Persists the trained model and metadata to disk.
-        
-    Example:
-        >>> trainer = AdultRandomForestTrainer(config_path="config.json")
-        >>> model, metrics = trainer.train()
-        >>> trainer.save()
-        
-    Notes:
-        - Relies on `src.data_loading.adult.load_adult` for data provision.
-        - Caches models to `output_config['model_dir']` unless `force_retrain` is True.
-        - Implements logic for EXP1-08.
+    This class is a backward-compatibility wrapper around the new generic trainer.
+    It maintains the exact same API signatures for train, evaluate, and save.
     """
     def __init__(self, config_or_path: Any, verbose: bool = True):
         self.config_path = config_or_path if isinstance(config_or_path, (str, Path)) else None
         self.verbose = verbose
-        self.model = None
         self.metrics = {}
         self.feature_names = []
-        self.config = {}
-        self.model_params = {}
         
+        # Load config logic (same as before)
         if isinstance(config_or_path, dict):
             self.config = config_or_path
-            if 'model' in self.config and 'params' in self.config['model']:
-                self.model_params = self.config['model']['params']
         else:
-            self._load_config()
-        
-    def _load_config(self):
-        """Load configuration from JSON or YAML file."""
-        if not self.config_path:
-             # Should not happen if logic in init is correct
-             return
-
-        if self.verbose:
-            logger.info(f"Loading configuration from {self.config_path}")
+            self.config = self._load_config(config_or_path)
             
-        with open(self.config_path, 'r') as f:
-            if str(self.config_path).endswith('.yaml') or str(self.config_path).endswith('.yml'):
-                self.config = yaml.safe_load(f)
+        self.model_params = self.config.get('model', {}).get('params', {})
+        
+        # Initialize the new Generic Trainer
+        from src.models.rf_trainer import RandomForestTrainer as NewRFTrainer
+        self.new_trainer = NewRFTrainer(self.model_params)
+        
+    def _load_config(self, path):
+        with open(path, 'r') as f:
+            if str(path).endswith('.yaml') or str(path).endswith('.yml'):
+                return yaml.safe_load(f)
             else:
-                self.config = json.load(f)
-        self.model_params = self.config['model']['params']
+                return json.load(f)
 
-    def train(self, X_train=None, y_train=None, X_test=None, y_test=None, force_retrain: bool = False) -> Tuple[RandomForestClassifier, Dict[str, Any]]:
-        """
-        Execute the full training pipeline.
-        
-        Args:
-            X_train, y_train: Training data (optional).
-            X_test, y_test: Testing data (optional).
-            force_retrain (bool): Ignore existing models and force retraining.
+    def train(self, X_train=None, y_train=None, X_test=None, y_test=None, force_retrain: bool = False):
+        if self.verbose:
+            logger.info("[DeprecationWarning] Using generic RandomForestTrainer under the hood.")
             
-        Returns:
-            Tuple[RandomForestClassifier, Dict[str, Any]]: Trained model and metrics.
-        """
-        output_config = self.config['output']
-        model_dir = Path(output_config['models_dir'])
-        model_dir.mkdir(parents=True, exist_ok=True)
-        results_dir = Path(output_config['metrics_dir'])
-        results_dir.mkdir(parents=True, exist_ok=True)
-        
-        model_path = model_dir / output_config['model_filename']
-        
-        # Check for existing model
-        if model_path.exists() and not force_retrain:
-            if self.verbose:
-                logger.info(f"Model already exists at {model_path}. Loading...")
-            self.model = joblib.load(model_path)
-            # Try to load existing metrics/feature names if possible, but simplest is empty dict return
-            # The original function returned empty dict, so we maintain behavior
-            return self.model, {}
-            
-        # Load Data if not provided
-        if X_train is None or y_train is None:
-            if self.verbose:
-                logger.info("Loading Adult dataset...")
+        # Data loading fallback
+        if X_train is None:
             data = load_adult(verbose=self.verbose)
             X_train, X_test, y_train, y_test = data[0], data[1], data[2], data[3]
+            self.new_trainer.feature_names = data[4]
             
-            # Extract feature names
-            f_names = data[4] if len(data) > 4 else []
-            if isinstance(f_names, np.ndarray):
-                f_names = f_names.tolist()
-            self.feature_names = f_names
-        elif self.feature_names == [] and isinstance(X_train, pd.DataFrame):
-            # Try to capture feature names from dataframe if provided
-            self.feature_names = X_train.columns.tolist()
-        elif self.feature_names == []:
-             # Fallback generic names
-             self.feature_names = [f"feature_{i}" for i in range(X_train.shape[1])]
+        self.new_trainer.train(X_train, y_train)
         
-        # Initialize
-        if self.verbose:
-            logger.info(f"Initializing Random Forest with params: {self.model_params}")
-        self.model = RandomForestClassifier(**self.model_params)
+        # Evaluate
+        if X_test is not None:
+             self.metrics = self.new_trainer.evaluate(X_test, y_test)
         
-        # Train
-        if self.verbose:
-            logger.info("Starting training...")
-        start_time = time.time()
-        self.model.fit(X_train, y_train)
-        training_time = time.time() - start_time
-        
-        if self.verbose:
-            logger.info(f"Training completed in {training_time:.2f} seconds")
-            
-        # Evaluate (Internal) - only if test data provided
-        if X_test is not None and y_test is not None:
-             self._evaluate_internal(X_test, y_test, X_train.shape, training_time, results_dir)
-        
-        # Save
-        self.save()
+        # Save mechanism - map new trainer save to old expectation if needed, or just call save
+        # The new trainer save() returns a path.
+        # We need to ensure we return (model, metrics) to match old signature
+        return self.new_trainer.model, self.metrics
 
-        # Save Metrics to Results Dir
-        metrics_filename = output_config.get('metrics_filename', 'rf_metrics.json')
-        metrics_path = results_dir / metrics_filename
-        with open(metrics_path, 'w') as f:
-            json.dump(self.metrics, f, indent=2)
-        if self.verbose:
-            logger.info(f"Metrics saved to {metrics_path}")
+    def evaluate(self, X_test, y_test):
+        return self.new_trainer.evaluate(X_test, y_test)
         
-        return self.model, self.metrics
+    def save(self):
+        # We need to adapter the save path logic if it differs, but BaseTrainer saves to 'path'
+        # The old trainer read specific keys from config['output']
+        out_conf = self.config.get('output', {})
+        save_dir = out_conf.get('models_dir', 'experiments/exp1_adult/models')
+        filename = out_conf.get('model_filename', 'rf_model.pkl')
         
-    def _evaluate_internal(self, X_test, y_test, train_shape, training_time, results_dir):
-        """Internal evaluation helper."""
-        if self.verbose:
-            logger.info("Evaluating model on test set...")
-            
-        y_pred = self.model.predict(X_test)
-        
-        if hasattr(self.model, "predict_proba"):
-            y_proba_full = self.model.predict_proba(X_test)
-        else:
-            y_proba_full = None
-            
-        self.metrics = calculate_classification_metrics(y_test, y_pred, y_proba_full, prefix="test")
-        
-        # Feature Importance
-        if hasattr(self.model, "feature_importances_"):
-            # Validation of feature names length
-            if len(self.feature_names) != train_shape[1]:
-                logger.warning(f"Feature names count ({len(self.feature_names)}) != Input features ({train_shape[1]}). Generating generic names.")
-                self.feature_names = [f"feature_{i}" for i in range(train_shape[1])]
-            
-            fi_df = get_feature_importance(
-                self.model, 
-                self.feature_names, 
-                save_path=str(results_dir / "rf_feature_importance.csv")
-            )
-            self.metrics["top_10_features"] = fi_df.head(10)[['feature', 'importance']].to_dict('records')
-            
-        # Metadata
-        self.metrics["training_metadata"] = {
-            "training_time_seconds": round(training_time, 4),
-            "model_params": self.model_params,
-            "dataset_shape": train_shape,
-            "n_features": train_shape[1],
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        
-        # Threshold Validation
-        validation_config = self.config.get("validation", {})
-        min_acc = validation_config.get("min_accuracy", 0.0)
-        min_auc = validation_config.get("min_roc_auc", 0.0)
-        
-        current_acc = self.metrics.get("test_accuracy", 0.0)
-        current_auc = self.metrics.get("test_roc_auc", 0.0)
-        
-        if current_acc < min_acc:
-            logger.warning(f"Model accuracy {current_acc} below threshold {min_acc}")
-        if current_auc is not None and current_auc < min_auc:
-            logger.warning(f"Model ROC AUC {current_auc} below threshold {min_auc}")
-            
-        if self.verbose:
-            logger.info(f"Test Accuracy: {current_acc}")
-            logger.info(f"Test ROC AUC: {current_auc}")
-    
-    def evaluate(self, X_test: np.ndarray, y_test: np.ndarray) -> Dict[str, Any]:
-        """External evaluation wrapper."""
-        if self.model is None:
-            raise RuntimeError("Model not trained yet.")
-        y_pred = self.model.predict(X_test)
-        # Update metrics state so it can be saved in metadata
-        self.metrics = calculate_classification_metrics(y_test, y_pred)
-        return self.metrics
-        
-    def save(self) -> str:
-        """Persist model and metadata."""
-        if self.model is None:
-            raise RuntimeError("Nothing to save, model is None.")
-            
-        save_path = save_model_with_metadata(
-            model=self.model,
-            metrics=self.metrics,
-            config=self.config,
-            feature_names=self.feature_names
-        )
-        if self.verbose:
-            logger.info(f"Model and metadata saved to {save_path}")
-        return save_path
+        return self.new_trainer.save(save_dir, filename)
 
-    def predict(self, X: np.ndarray) -> np.ndarray:
-        """
-        Generate class predictions.
+    @property
+    def model(self):
+        return self.new_trainer.model
         
-        Args:
-            X: Input features.
-            
-        Returns:
-            np.ndarray: Predicted class labels.
-        """
-        if self.model is None:
-            raise RuntimeError("Model not trained yet.")
-        return self.model.predict(X)
-
-    def predict_proba(self, X: np.ndarray) -> np.ndarray:
-        """
-        Generate class probabilities.
-        
-        Args:
-            X: Input features.
-            
-        Returns:
-            np.ndarray: Probability estimates.
-        """
-        if self.model is None:
-            raise RuntimeError("Model not trained yet.")
-        return self.model.predict_proba(X)
-
-    def get_feature_importance(self) -> pd.DataFrame:
-        """
-        Extract feature importance.
-        
-        Returns:
-            pd.DataFrame: DataFrame with feature importance.
-        """
-        if self.model is None:
-            raise RuntimeError("Model not trained yet.")
-        
-        return get_feature_importance(self.model, self.feature_names)
+    @model.setter
+    def model(self, val):
+        self.new_trainer.model = val
 
 def train_random_forest_adult(
     config_path: str = "experiments/exp1_adult/configs/models/rf_adult_config.yaml",

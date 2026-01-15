@@ -1,542 +1,81 @@
 """
-XGBoost classifier training for XAI evaluation experiments.
+XGBoost Trainer.
 
-This module provides the `XGBoostTrainer` class, designed to facilitate the training,
-evaluation, and persistence of XGBoost models for Experiment 1 (Adult Dataset).
-It serves as a high-performance, non-linear baseline to compare against Random Forest
-interpretability.
-
-The framework ensures reproducibility through fixed seeds and standardized metrics,
-making it suitable for rigorous academic evaluation of XAI methods (LIME, SHAP).
-
-Key Classes:
-    XGBoostTrainer: Wrapper for XGBClassifier managing the full experiment lifecycle.
-
-Examples:
-    >>> from src.models.xgboost_trainer import XGBoostTrainer
-    >>> from src.data_loading.adult import load_adult
-    >>> 
-    >>> # 1. Load Data
-    >>> X_train, X_test, y_train, y_test = load_adult()
-    >>>
-    >>> # 2. Initialize Trainer
-    >>> trainer = XGBoostTrainer(config={'n_estimators': 100, 'max_depth': 6})
-    >>>
-    >>> # 3. Train
-    >>> trainer.train(X_train, y_train, X_val=X_test, y_val=y_test)
-    >>>
-    >>> # 4. Evaluate
-    >>> metrics = trainer.evaluate(X_test, y_test)
-    >>> print(metrics['accuracy'])
-    >>>
-    >>> # 5. Save
-    >>> trainer.save(path="experiments/exp1_adult/models")
-
-References:
-    Experiment Documentation: experiments/exp1_adult/README.md
+Refactored to inherit from BaseTrainer.
 """
-from pathlib import Path
-from typing import Dict, Any, Optional
-
-import xgboost as xgb
-import sklearn.metrics as metrics
-import numpy as np
-import pandas as pd
-import json
 import logging
-import joblib
+import pandas as pd
+import numpy as np
+import xgboost as xgb
+from typing import Dict, Any
 
-import time
+from .base import BaseTrainer
+from .factory import ModelTrainerFactory
 
 logger = logging.getLogger(__name__)
 
-class XGBoostTrainer:
+class XGBoostTrainer(BaseTrainer):
     """
-    XGBoost classifier trainer for UCI Adult dataset.
-
-    This class serves as the Gradient Boosting baseline for Experiment 1, contrasting with
-    the Random Forest model (`AdultRandomForestTrainer`). It is designed to evaluate
-    the fidelity of XAI methods (LIME, SHAP) on non-linear, high-performance models.
-
-    The trainer handles hyperparameter management, training mechanics (including
-    early stopping), comprehensive metric tracking, and artifact persistence.
-
-    Attributes:
-        model (xgb.XGBClassifier): The underlying XGBoost model instance.
-        config (dict): Configuration dictionary including hyperparameters.
-        metrics (dict): Performance metrics after evaluation (accuracy, AUC, etc.).
-        feature_names (list): List of feature names corresponding to input columns.
-
-    Methods:
-        train: Fits the model with optional early stopping validation.
-        evaluate: Computes classification metrics on a test set.
-        get_feature_importance: Extracts feature importance (e.g., gain, weight).
-        save: Persists model, metrics, and metadata to disk.
-        load: Class method to restore a trained model from disk.
-        predict: Generates class labels.
-        predict_proba: Generates class probabilities.
-
-    Examples:
-        >>> trainer = XGBoostTrainer(config={'n_estimators': 100})
-        >>> trainer.train(X_train, y_train, X_val=X_val, y_val=y_val)
-        >>> metrics = trainer.evaluate(X_test, y_test)
-
-    Notes:
-        Early Stopping: If `X_val` and `y_val` are provided to `train()`, early stopping
-        is enabled with rounds=10 to prevent overfitting, which is more critical for 
-        boosting models than for bagging models like Random Forest.
-
-    Related:
-        src.models.tabular_models.AdultRandomForestTrainer
+    XGBoost Trainer (Refactored).
     """
-    def __init__(self, config: dict = None):
-        """
-        Initialize the XGBoostTrainer with configuration.
-
-        Args:
-            config (dict, optional): Dictionary of hyperparameters to override defaults.
-                Defaults merged with:
-                - n_estimators: 100
-                - max_depth: 6
-                - learning_rate: 0.1
-                - objective: 'binary:logistic'
-
-        Example:
-            >>> trainer = XGBoostTrainer({'n_estimators': 200, 'learning_rate': 0.05})
-
-        Notes:
-            Implements config merging strategy defined in EXP1-09.
-        """
-        # Default configuration (Baseline for Adult dataset)
-        # See ADR-004 for hyperparameter justification
-        self.defaults = {
-            'n_estimators': 100,            # Match RF baseline
-            'max_depth': 6,                 # XGB default (shallower than RF to avoid overfitting)
-            'learning_rate': 0.1,           # Standard robust default
-            'objective': 'binary:logistic', # Standard for binary classification
-            'eval_metric': 'logloss',       # Optimal for probability calibration
-            'random_state': 42,             # Reproducibility
-            # Performance: Use all available cores. XGBoost parallelization is very efficient.
-            # Expect ~2x faster training than sklearn RF for same n_estimators due to optimizations.
-            'n_jobs': -1,                   # Use all cores
-            'verbosity': 0,                 # Silence XGBoost internal logs
-            'use_label_encoder': False      # Deprecated in newer XGBoost versions
-        }
-        
-        # Merge defaults with user config
-        if config is None:
-            self.config = self.defaults.copy()
-        else:
-            self.config = {**self.defaults, **config}
-            
-        # Initialize attributes
-        self.model = None
-        self.metrics = {}
-        self.feature_names = None
-        
-        logger.debug(f"Initialized XGBoostTrainer with config: {self.config}")
-
-    def train(self, X_train, y_train, X_val=None, y_val=None) -> 'XGBoostTrainer':
-        """
-        Train the XGBoost model.
-
-        Args:
-            X_train (pd.DataFrame or np.ndarray): Training features.
-            y_train (pd.Series or np.ndarray): Training labels.
-            X_val (pd.DataFrame or np.ndarray, optional): Validation features for early stopping.
-            y_val (pd.Series or np.ndarray, optional): Validation labels.
-
-        Returns:
-            XGBoostTrainer: Self instance for method chaining.
-
-        Raises:
-            Exception: If training fails (e.g., data mismatch).
-
-        Example:
-            >>> trainer.train(X_train, y_train, X_val=X_test, y_val=y_test)
-
-        Notes:
-            Enables early stopping (rounds=10) if validation data is provided.
-            Captures feature names from DataFrame columns if available.
-        """
+    def train(self, X_train, y_train, X_val=None, y_val=None):
         logger.info("Initializing XGBoost training...")
         
-        # 1. Capture feature names
-        if isinstance(X_train, pd.DataFrame):
-            self.feature_names = X_train.columns.tolist()
-        else:
-            # Fallback for numpy arrays
-            self.feature_names = [f"feature_{i}" for i in range(X_train.shape[1])]
-            
-        # 2. Update config 'scale_pos_weight' if not explicit, could do it here,
-        # but for now we rely on the config passed in init.
+        # Defaults
+        defaults = {
+            'n_estimators': 100,
+            'max_depth': 6,
+            'learning_rate': 0.1,
+            'objective': 'binary:logistic',
+            'eval_metric': 'logloss',
+            'random_state': 42,
+            'n_jobs': -1,
+            'use_label_encoder': False,
+            'verbosity': 0
+        }
+        # Merge config
+        train_config = {**defaults, **self.config}
         
-        # 3. Create Classifier
-        # Prepare config with early checking (XGBoost >= 1.6 requires it in init)
-        train_config = self.config.copy()
-        if X_val is not None and y_val is not None:
-            train_config['early_stopping_rounds'] = 10
-            
-        self.model = xgb.XGBClassifier(**train_config)
-        
-        # 4. Prepare fit arguments
+        # Early stopping logic
         fit_params = {}
         if X_val is not None and y_val is not None:
-            fit_params['eval_set'] = [(X_val, y_val)]
-            fit_params['verbose'] = False # Keep logs clean unless requested
-            
-        # 5. Train
-        try:
-            # Memory: XGBoost uses a compressed histogram-based algorithm (DMatrix) internally.
-            # For 48k rows (Adult), this is very memory efficient (<100MB RAM typically).
-            self.model.fit(X_train, y_train, **fit_params)
-            logger.info("XGBoost training completed successfully.")
-        except Exception as e:
-            logger.error(f"Training failed: {e}")
-            raise e
-            
+             # XGBoost >= 1.6 puts early_stopping_rounds in constructor
+             train_config['early_stopping_rounds'] = 10
+             fit_params['eval_set'] = [(X_val, y_val)]
+             fit_params['verbose'] = False
+             
+        self.model = xgb.XGBClassifier(**train_config)
+        self.model.fit(X_train, y_train, **fit_params)
+        
+        if hasattr(X_train, 'columns'):
+            self.feature_names = X_train.columns.tolist()
+        elif self.feature_names is None:
+             self.feature_names = [f"feature_{i}" for i in range(X_train.shape[1])]
+             
+        logger.info("XGBoost training completed.")
         return self
 
-    def evaluate(self, X_test, y_test) -> dict:
-        """
-        Evaluate model performance on test dataset.
+    def predict(self, X):
+        return self.model.predict(X)
 
-        Args:
-            X_test (pd.DataFrame or np.ndarray): Test features.
-            y_test (pd.Series or np.ndarray): True test labels.
-
-        Returns:
-            dict: Dictionary containing:
-                - accuracy (float)
-                - precision (float, weighted)
-                - recall (float, weighted)
-                - f1 (float, weighted)
-                - roc_auc (float)
-                - confusion_matrix (list[list])
-
-        Raises:
-            ValueError: If model is not trained.
-
-        Example:
-            >>> metrics = trainer.evaluate(X_test, y_test)
-        """
+    def predict_proba(self, X):
+        return self.model.predict_proba(X)
+        
+    def get_feature_importance(self) -> pd.DataFrame:
         if self.model is None:
-            raise ValueError("Model has not been trained yet.")
-            
-        logger.info("Evaluating model performance...")
+            raise ValueError("Model not trained.")
         
-        # Predictions
-        y_pred = self.model.predict(X_test)
-        y_prob = self.model.predict_proba(X_test)[:, 1]
+        # Use weight/gain depending on config or default to gain
+        imp_type = self.config.get('importance_type', 'gain')
+        importance_map = self.model.get_booster().get_score(importance_type=imp_type)
         
-        # Calculate Metrics
-        self.metrics = {
-            "accuracy": float(metrics.accuracy_score(y_test, y_pred)),
-            # Weighted average used due to potential imbalance, though 'binary' is standard.
-            # Keeping consistent with RF trainer metrics.
-            "precision": float(metrics.precision_score(y_test, y_pred, average='weighted', zero_division=0)),
-            "recall": float(metrics.recall_score(y_test, y_pred, average='weighted', zero_division=0)),
-            "f1": float(metrics.f1_score(y_test, y_pred, average='weighted', zero_division=0)),
-            "roc_auc": float(metrics.roc_auc_score(y_test, y_prob)) if y_prob is not None else None,
-            "confusion_matrix": metrics.confusion_matrix(y_test, y_pred).tolist()
-        }
-        
-        logger.info(f"Evaluation Metrics: {json.dumps(self.metrics, indent=2)}")
-        return self.metrics
-
-    def get_feature_importance(self, importance_type='gain') -> pd.DataFrame:
-        """
-        Extract and rank feature importance.
-
-        Args:
-            importance_type (str): XGBoost importance type ('gain', 'weight', 'cover'). 
-                Default 'gain'.
-
-        Returns:
-            pd.DataFrame: DataFrame with columns ['feature', 'importance', 'rank'],
-                sorted by importance descending.
-
-        Raises:
-            ValueError: If model is not trained.
-
-        Example:
-            >>> df_imp = trainer.get_feature_importance('weight')
-        """
-        if self.model is None:
-            raise ValueError("Model has not been trained yet.")
-            
-        # Extract importance from booster
-        # importance_type options: 'weight', 'gain', 'cover', 'total_gain', 'total_cover'
-        importance_map = self.model.get_booster().get_score(importance_type=importance_type)
-        
-        # Map to all features (ensure 0 for unused features)
-        # We iterate over self.feature_names to ensure we include all features, 
-        # even those with 0 importance (which XGBoost omits from the dict).
         data = []
         for feat in self.feature_names:
             score = importance_map.get(feat, 0.0)
             data.append({'feature': feat, 'importance': float(score)})
             
-        df = pd.DataFrame(data)
-        
-        # Sort by importance descending
-        df = df.sort_values(by='importance', ascending=False).reset_index(drop=True)
-        
-        # Add rank
-        df['rank'] = df.index + 1
-        
-        return df
+        return pd.DataFrame(data).sort_values('importance', ascending=False)
 
-    def save(self, path: Path) -> None:
-        """
-        Persist model and artifacts to disk.
-
-        Args:
-            path (Path): Directory path to save artifacts.
-
-        Artifacts:
-            - xgb_model.pkl: Pickled model (joblib)
-            - xgb_metrics.json: Metrics dictionary
-            - xgb_feature_importance.csv: Importance data
-            - xgb_model_metadata.json: Config and environment details
-
-        Raises:
-            ValueError: If model is not trained.
-            Exception: If file I/O fails.
-
-        Example:
-            >>> trainer.save(Path("experiments/exp1/models"))
-        """
-        if self.model is None:
-            raise ValueError("Model has not been trained yet.")
-            
-        save_dir = Path(path)
-        save_dir.mkdir(parents=True, exist_ok=True)
-        
-        try:
-            # 1. Save Model
-            model_path = save_dir / "xgb_model.pkl"
-            joblib.dump(self.model, model_path)
-            
-            # 2. Save Metrics
-            metrics_path = save_dir / "xgb_metrics.json"
-            with open(metrics_path, 'w') as f:
-                json.dump(self.metrics, f, indent=2)
-                
-            # 3. Save Feature Importance
-            importance_path = save_dir / "xgb_feature_importance.csv"
-            imp_df = self.get_feature_importance()
-            imp_df.to_csv(importance_path, index=False)
-            
-            # 4. Save Metadata
-            metadata = {
-                "model_type": "XGBClassifier",
-                "training_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                "config": self.config,
-                "feature_names": self.feature_names,
-                "xgb_version": xgb.__version__,
-                "metrics": self.metrics
-            }
-            metadata_path = save_dir / "xgb_model_metadata.json"
-            with open(metadata_path, 'w') as f:
-                json.dump(metadata, f, indent=2)
-                
-            logger.info(f"Model artifacts saved to {save_dir}")
-            logger.debug(f"Saved: {model_path.name}, {metrics_path.name}, {importance_path.name}, {metadata_path.name}")
-            
-        except Exception as e:
-            logger.error(f"Failed to save model artifacts: {e}")
-            raise e
-
-    @classmethod
-    def load(cls, path: Path) -> 'XGBoostTrainer':
-        """
-        Load a trained trainer from disk.
-
-        Args:
-            path (Path): Directory containing saved artifacts.
-
-        Returns:
-            XGBoostTrainer: Initialized trainer with loaded model and config.
-
-        Raises:
-            FileNotFoundError: If xgb_model.pkl is missing.
-
-        Example:
-            >>> trainer = XGBoostTrainer.load(Path("experiments/exp1/models"))
-        """
-        path = Path(path)
-        model_path = path / "xgb_model.pkl"
-        metadata_path = path / "xgb_model_metadata.json"
-        
-        if not model_path.exists():
-            raise FileNotFoundError(f"Model file not found at {model_path}")
-            
-        # Load metadata for config
-        config = {}
-        feature_names = None
-        metrics = {}
-        
-        if metadata_path.exists():
-            with open(metadata_path, 'r') as f:
-                metadata = json.load(f)
-                config = metadata.get('config', {})
-                feature_names = metadata.get('feature_names')
-                metrics = metadata.get('metrics', {})
-                
-        # Initialize
-        trainer = cls(config)
-        trainer.model = joblib.load(model_path)
-        trainer.feature_names = feature_names
-        trainer.metrics = metrics
-        
-        logger.info(f"Loaded XGBoostTrainer from {path}")
-        return trainer
-
-    def predict(self, X) -> np.ndarray:
-        """
-        Generate class predictions.
-
-        Args:
-            X: Input features.
-
-        Returns:
-            np.ndarray: Predicted class labels (0/1).
-            
-        Raises:
-            ValueError: If model is not trained.
-        """
-        if self.model is None:
-            raise ValueError("Model has not been trained yet.")
-        preds = self.model.predict(X)
-        logger.debug(f"Generated {len(preds)} predictions.")
-        return preds
-
-    def predict_proba(self, X) -> np.ndarray:
-        """
-        Generate class probabilities.
-
-        Args:
-            X: Input features.
-
-        Returns:
-            np.ndarray: Probability estimates. Columns correspond to classes.
-            
-        Raises:
-            ValueError: If model is not trained.
-        """
-        if self.model is None:
-            raise ValueError("Model has not been trained yet.")
-        probs = self.model.predict_proba(X)
-        logger.debug(f"Generated {len(probs)} probability estimates.")
-        return probs
-
-
-def train_xgboost_adult(
-    config_path: str = "experiments/exp1_adult/configs/models/xgb_adult_config.yaml",
-    force_retrain: bool = False,
-    verbose: bool = True
-):
-    """
-    Train XGBoost model on Adult dataset (wrapper function).
-    
-    This is a convenience wrapper around XGBoostTrainer that mirrors the
-    train_random_forest_adult function pattern for consistency.
-    
-    Args:
-        config_path (str): Path to configuration file.
-        force_retrain (bool): If True, force retraining even if model exists.
-        verbose (bool): If True, enable verbose logging.
-        
-    Returns:
-        Tuple[xgb.XGBClassifier, dict]: Trained model and metrics dictionary.
-        
-    Example:
-        >>> from src.models.xgboost_trainer import train_xgboost_adult
-        >>> model, metrics = train_xgboost_adult(
-        ...     config_path="experiments/exp1_adult/configs/models/xgb_adult_config.yaml",
-        ...     force_retrain=True
-        ... )
-        >>> print(metrics['accuracy'])
-    """
-    try:
-        # Import data loader
-        from src.data_loading.adult import load_adult
-        
-        # Load configuration
-        config_path = Path(config_path)
-        if not config_path.exists():
-            raise FileNotFoundError(f"Config file not found: {config_path}")
-            
-        with open(config_path, 'r') as f:
-            if str(config_path).endswith('.yaml') or str(config_path).endswith('.yml'):
-                import yaml
-                config = yaml.safe_load(f)
-            else:
-                config = json.load(f)
-        
-        # Extract model params and output paths
-        model_params = config.get('model', {}).get('params', {})
-        output_config = config.get('output', {})
-        
-        model_dir = Path(output_config.get('models_dir', 'experiments/exp1_adult/models/xgboost'))
-        model_dir.mkdir(parents=True, exist_ok=True)
-        
-        model_path = model_dir / output_config.get('model_filename', 'xgb_model.pkl')
-        
-        # Check if model exists and skip if not force_retrain
-        if model_path.exists() and not force_retrain:
-            if verbose:
-                logger.info(f"Model already exists at {model_path}. Loading...")
-            trainer = XGBoostTrainer.load(model_dir)
-            return trainer.model, trainer.metrics
-        
-        # Load data
-        if verbose:
-            logger.info("Loading Adult dataset...")
-        data = load_adult(verbose=verbose)
-        X_train, X_test, y_train, y_test = data[0], data[1], data[2], data[3]
-        
-        # Initialize trainer
-        if verbose:
-            logger.info(f"Initializing XGBoost with params: {model_params}")
-        trainer = XGBoostTrainer(config=model_params)
-        
-        # Train
-        if verbose:
-            logger.info("Starting XGBoost training...")
-        start_time = time.time()
-        trainer.train(X_train, y_train, X_val=X_test, y_val=y_test)
-        training_time = time.time() - start_time
-        
-        if verbose:
-            logger.info(f"Training completed in {training_time:.2f} seconds")
-        
-        # Evaluate
-        if verbose:
-            logger.info("Evaluating model on test set...")
-        metrics = trainer.evaluate(X_test, y_test)
-        
-        # Add training metadata
-        metrics["training_metadata"] = {
-            "training_time_seconds": round(training_time, 4),
-            "model_params": model_params,
-            "dataset_shape": X_train.shape,
-            "n_features": X_train.shape[1],
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        
-        # Save
-        trainer.save(path=model_dir)
-        
-        if verbose:
-            logger.info(f"Model saved to {model_dir}")
-            logger.info(f"Test Accuracy: {metrics.get('accuracy')}")
-            logger.info(f"Test ROC AUC: {metrics.get('roc_auc')}")
-        
-        return trainer.model, metrics
-        
-    except Exception as e:
-        logger.error(f"Error in train_xgboost_adult: {str(e)}")
-        raise
-
+# Register
+ModelTrainerFactory.register('xgb', XGBoostTrainer)
+ModelTrainerFactory.register('xgboost', XGBoostTrainer)
