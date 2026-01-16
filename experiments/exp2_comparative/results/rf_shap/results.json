@@ -1,0 +1,1636 @@
+{
+  "experiment_metadata": {
+    "name": "exp2_rf_shap",
+    "dataset": "adult",
+    "timestamp": "2026-01-15T11:49:07.097121",
+    "config_version": "1.0",
+    "random_seed": 42,
+    "duration_seconds": 27.771447,
+    "completed_at": "2026-01-15T11:49:34.868568"
+  },
+  "model_info": {
+    "name": "adult_rf",
+    "path": "experiments/exp1_adult/models/rf.joblib",
+    "explainer_method": "shap"
+  },
+  "instance_evaluations": [
+    {
+      "instance_id": 86,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 127.43079097708687,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.45411149223863356,
+        "faithfulness_gap": 0.06,
+        "stability": 0.8992261240695267
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0533",
+          "age: 0.0467",
+          "occupation_Exec-managerial: 0.0457",
+          "education-num: -0.0417",
+          "capital-gain: -0.0302",
+          "hours-per-week: -0.0185",
+          "education_HS-grad: -0.0176",
+          "relationship_Husband: 0.0149",
+          "workclass_Private: -0.0142",
+          "marital-status_Never-married: 0.0127"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.05334674415022164,
+          "age": 0.04671312823408584,
+          "occupation_Exec-managerial": 0.04567096095101647,
+          "education-num": -0.041714450742946385,
+          "capital-gain": -0.030225078502626276,
+          "hours-per-week": -0.01849065596891876,
+          "education_HS-grad": -0.01760950978678693,
+          "relationship_Husband": 0.01486897875325326,
+          "workclass_Private": -0.014200336979590134,
+          "marital-status_Never-married": 0.01269982692044323
+        }
+      }
+    },
+    {
+      "instance_id": 312,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 87.31733297463506,
+        "sparsity": 0.4074074074074074,
+        "fidelity": 0.5064729788479516,
+        "faithfulness_gap": 0.03,
+        "stability": 0.9966492359054162
+      },
+      "explanation": {
+        "top_features": [
+          "age: -0.0433",
+          "marital-status_Married-civ-spouse: -0.0404",
+          "capital-gain: -0.0275",
+          "occupation_Other-service: -0.0197",
+          "marital-status_Never-married: -0.0159",
+          "relationship_Husband: -0.0149",
+          "relationship_Not-in-family: -0.0113",
+          "education-num: -0.0092",
+          "education_Some-college: 0.0062",
+          "fnlwgt: 0.0053"
+        ],
+        "raw_top": {
+          "age": -0.043317488649067856,
+          "marital-status_Married-civ-spouse": -0.040438871683113574,
+          "capital-gain": -0.0274781734770238,
+          "occupation_Other-service": -0.019679414882034507,
+          "marital-status_Never-married": -0.01585776337300217,
+          "relationship_Husband": -0.014858282363417175,
+          "relationship_Not-in-family": -0.011312331108406397,
+          "education-num": -0.00920097913637278,
+          "education_Some-college": 0.006178083713075466,
+          "fnlwgt": 0.005300601706528596
+        }
+      }
+    },
+    {
+      "instance_id": 798,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 101.52941604610533,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.9966076162663117,
+        "faithfulness_gap": 0.5,
+        "stability": 0.9997649770679489
+      },
+      "explanation": {
+        "top_features": [
+          "capital-gain: 0.5486",
+          "education-num: -0.0390",
+          "hours-per-week: -0.0375",
+          "age: -0.0268",
+          "relationship_Other-relative: -0.0265",
+          "occupation_Farming-fishing: -0.0239",
+          "native-country_Mexico: -0.0213",
+          "marital-status_Married-civ-spouse: 0.0167",
+          "relationship_Husband: -0.0152",
+          "education_HS-grad: 0.0094"
+        ],
+        "raw_top": {
+          "capital-gain": 0.5486243418713593,
+          "education-num": -0.03895008414429128,
+          "hours-per-week": -0.03753820107627291,
+          "age": -0.02681502571233068,
+          "relationship_Other-relative": -0.026511447767174446,
+          "occupation_Farming-fishing": -0.02390474686807181,
+          "native-country_Mexico": -0.021260056797372043,
+          "marital-status_Married-civ-spouse": 0.016661868180733563,
+          "relationship_Husband": -0.01523141715534166,
+          "education_HS-grad": 0.009416241662436278
+        }
+      }
+    },
+    {
+      "instance_id": 1560,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 106.5762919606641,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.6277290705439023,
+        "faithfulness_gap": 0.07,
+        "stability": 0.8806169257789686
+      },
+      "explanation": {
+        "top_features": [
+          "age: -0.0545",
+          "relationship_Husband: 0.0372",
+          "capital-gain: -0.0325",
+          "fnlwgt: 0.0316",
+          "marital-status_Married-civ-spouse: 0.0257",
+          "workclass_Private: -0.0205",
+          "education-num: -0.0158",
+          "workclass_Local-gov: -0.0109",
+          "marital-status_Never-married: 0.0099",
+          "hours-per-week: -0.0076"
+        ],
+        "raw_top": {
+          "age": -0.05446537445012609,
+          "relationship_Husband": 0.03719154307267672,
+          "capital-gain": -0.032539670999794906,
+          "fnlwgt": 0.031647883338797554,
+          "marital-status_Married-civ-spouse": 0.025659510523883,
+          "workclass_Private": -0.020541214495522125,
+          "education-num": -0.015817678039843484,
+          "workclass_Local-gov": -0.010867811668611012,
+          "marital-status_Never-married": 0.009879141447527218,
+          "hours-per-week": -0.007607450529894777
+        }
+      }
+    },
+    {
+      "instance_id": 1624,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 145.1693340204656,
+        "sparsity": 0.48148148148148145,
+        "fidelity": 0.9384305056951044,
+        "faithfulness_gap": 0.6000000000000001,
+        "stability": 0.9827651646234769
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1151",
+          "marital-status_Married-civ-spouse: 0.0846",
+          "education_Bachelors: 0.0846",
+          "age: 0.0696",
+          "relationship_Husband: 0.0495",
+          "fnlwgt: -0.0360",
+          "occupation_Adm-clerical: 0.0325",
+          "occupation_Machine-op-inspct: 0.0235",
+          "capital-gain: -0.0199",
+          "marital-status_Never-married: 0.0191"
+        ],
+        "raw_top": {
+          "education-num": 0.11507210307991045,
+          "marital-status_Married-civ-spouse": 0.08464612439672237,
+          "education_Bachelors": 0.08463704994408544,
+          "age": 0.06962224189524704,
+          "relationship_Husband": 0.04951865881964409,
+          "fnlwgt": -0.036047964281107736,
+          "occupation_Adm-clerical": 0.03249744336297795,
+          "occupation_Machine-op-inspct": 0.023545589664354338,
+          "capital-gain": -0.01994538040693442,
+          "marital-status_Never-married": 0.019094331017925584
+        }
+      }
+    },
+    {
+      "instance_id": 1935,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 175.1411670120433,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.9894128073263065,
+        "faithfulness_gap": 0.8500000000000001,
+        "stability": 0.99858078236563
+      },
+      "explanation": {
+        "top_features": [
+          "capital-gain: 0.5681",
+          "education-num: 0.0436",
+          "occupation_Prof-specialty: 0.0410",
+          "marital-status_Married-civ-spouse: -0.0351",
+          "relationship_Husband: -0.0237",
+          "education_Bachelors: 0.0175",
+          "marital-status_Never-married: -0.0173",
+          "age: 0.0163",
+          "fnlwgt: 0.0149",
+          "relationship_Not-in-family: 0.0116"
+        ],
+        "raw_top": {
+          "capital-gain": 0.5681422910106813,
+          "education-num": 0.04361822201253631,
+          "occupation_Prof-specialty": 0.040968984293256766,
+          "marital-status_Married-civ-spouse": -0.03509017706525242,
+          "relationship_Husband": -0.023660480517116868,
+          "education_Bachelors": 0.01751013274334582,
+          "marital-status_Never-married": -0.01729211598069128,
+          "age": 0.01625824922413585,
+          "fnlwgt": 0.014856545400429013,
+          "relationship_Not-in-family": 0.011581195796279644
+        }
+      }
+    },
+    {
+      "instance_id": 1940,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 114.16916700545698,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.8614210542491559,
+        "faithfulness_gap": 0.0,
+        "stability": 0.9889583558580948
+      },
+      "explanation": {
+        "top_features": [
+          "hours-per-week: -0.0957",
+          "marital-status_Married-civ-spouse: 0.0465",
+          "age: 0.0433",
+          "capital-gain: -0.0319",
+          "workclass_nan: -0.0201",
+          "occupation_nan: -0.0180",
+          "relationship_Husband: 0.0161",
+          "education_Some-college: 0.0148",
+          "workclass_Private: -0.0131",
+          "occupation_Exec-managerial: -0.0099"
+        ],
+        "raw_top": {
+          "hours-per-week": -0.09570213804222022,
+          "marital-status_Married-civ-spouse": 0.04651267833267411,
+          "age": 0.04333026323089825,
+          "capital-gain": -0.031899205477493524,
+          "workclass_nan": -0.02008299029121872,
+          "occupation_nan": -0.01801689798494067,
+          "relationship_Husband": 0.01605306973970528,
+          "education_Some-college": 0.014832182847081868,
+          "workclass_Private": -0.013068842553652758,
+          "occupation_Exec-managerial": -0.00988817451929208
+        }
+      }
+    },
+    {
+      "instance_id": 1949,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 146.09245804604143,
+        "sparsity": 0.4537037037037037,
+        "fidelity": 0.8722333811184881,
+        "faithfulness_gap": 0.8899999999999999,
+        "stability": 0.9637941834314703
+      },
+      "explanation": {
+        "top_features": [
+          "capital-loss: 0.2553",
+          "marital-status_Married-civ-spouse: 0.1191",
+          "age: 0.0716",
+          "relationship_Husband: 0.0654",
+          "occupation_Exec-managerial: 0.0653",
+          "education_Some-college: 0.0291",
+          "marital-status_Never-married: 0.0260",
+          "relationship_Not-in-family: 0.0246",
+          "fnlwgt: 0.0239",
+          "sex_Female: 0.0133"
+        ],
+        "raw_top": {
+          "capital-loss": 0.2553068638428783,
+          "marital-status_Married-civ-spouse": 0.11913810261606159,
+          "age": 0.07159224552510522,
+          "relationship_Husband": 0.06543025207911342,
+          "occupation_Exec-managerial": 0.06534198329376352,
+          "education_Some-college": 0.029098691469488926,
+          "marital-status_Never-married": 0.025956173706887853,
+          "relationship_Not-in-family": 0.024620807527628016,
+          "fnlwgt": 0.023879991514871222,
+          "sex_Female": 0.013264695653002718
+        }
+      }
+    },
+    {
+      "instance_id": 2216,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 166.82525002397597,
+        "sparsity": 0.4444444444444444,
+        "fidelity": 0.9228541901947658,
+        "faithfulness_gap": 0.8899999999999999,
+        "stability": 0.9939671073819927
+      },
+      "explanation": {
+        "top_features": [
+          "capital-gain: 0.3653",
+          "education-num: 0.0715",
+          "marital-status_Married-civ-spouse: 0.0687",
+          "occupation_Exec-managerial: 0.0613",
+          "relationship_Husband: 0.0449",
+          "age: 0.0324",
+          "marital-status_Never-married: 0.0231",
+          "education_Bachelors: 0.0188",
+          "native-country_United-States: -0.0177",
+          "hours-per-week: -0.0156"
+        ],
+        "raw_top": {
+          "capital-gain": 0.36528541282375326,
+          "education-num": 0.07146036504727477,
+          "marital-status_Married-civ-spouse": 0.06869659799715691,
+          "occupation_Exec-managerial": 0.06132022898308946,
+          "relationship_Husband": 0.044945297819787414,
+          "age": 0.03235972091273481,
+          "marital-status_Never-married": 0.02310882131269409,
+          "education_Bachelors": 0.018772687228262724,
+          "native-country_United-States": -0.01769716781585885,
+          "hours-per-week": -0.015626925731618824
+        }
+      }
+    },
+    {
+      "instance_id": 2525,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 172.33583400957286,
+        "sparsity": 0.4537037037037037,
+        "fidelity": 0.9657920752886978,
+        "faithfulness_gap": 0.58,
+        "stability": 0.9977353662016314
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.2469",
+          "occupation_Prof-specialty: 0.0912",
+          "age: 0.0827",
+          "education_Doctorate: 0.0601",
+          "relationship_Husband: 0.0495",
+          "marital-status_Married-civ-spouse: 0.0419",
+          "marital-status_Never-married: 0.0191",
+          "workclass_Self-emp-not-inc: -0.0160",
+          "hours-per-week: 0.0139",
+          "education_HS-grad: 0.0132"
+        ],
+        "raw_top": {
+          "education-num": 0.2468931586447343,
+          "occupation_Prof-specialty": 0.09118656102800628,
+          "age": 0.08270106506709596,
+          "education_Doctorate": 0.06005092408952123,
+          "relationship_Husband": 0.04945425439507574,
+          "marital-status_Married-civ-spouse": 0.04187516449046655,
+          "marital-status_Never-married": 0.019105737041551264,
+          "workclass_Self-emp-not-inc": -0.016040616844825592,
+          "hours-per-week": 0.013937342336256507,
+          "education_HS-grad": 0.013207194837334839
+        }
+      }
+    },
+    {
+      "instance_id": 3101,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 247.76408297475427,
+        "sparsity": 0.4444444444444444,
+        "fidelity": 0.42172341812593694,
+        "faithfulness_gap": 0.42000000000000004,
+        "stability": 0.9685387501200342
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0726",
+          "age: 0.0712",
+          "occupation_Exec-managerial: 0.0708",
+          "hours-per-week: 0.0540",
+          "relationship_Husband: 0.0275",
+          "capital-gain: -0.0263",
+          "marital-status_Never-married: 0.0157",
+          "relationship_Not-in-family: 0.0133",
+          "education_Some-college: -0.0131",
+          "education-num: -0.0118"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.07260235583174107,
+          "age": 0.07123143565205795,
+          "occupation_Exec-managerial": 0.07084489725674757,
+          "hours-per-week": 0.054007995054212186,
+          "relationship_Husband": 0.027490132183127115,
+          "capital-gain": -0.026300357107393212,
+          "marital-status_Never-married": 0.01572524463056766,
+          "relationship_Not-in-family": 0.013337253418096679,
+          "education_Some-college": -0.013113063403177989,
+          "education-num": -0.011834217454509143
+        }
+      }
+    },
+    {
+      "instance_id": 3567,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 213.35033304058015,
+        "sparsity": 0.48148148148148145,
+        "fidelity": 0.9085021366206547,
+        "faithfulness_gap": 0.8,
+        "stability": 0.9866976456694131
+      },
+      "explanation": {
+        "top_features": [
+          "occupation_Exec-managerial: 0.1302",
+          "education-num: 0.1240",
+          "age: 0.1019",
+          "marital-status_Married-civ-spouse: 0.0824",
+          "relationship_Husband: 0.0618",
+          "education_Bachelors: 0.0315",
+          "fnlwgt: 0.0263",
+          "marital-status_Never-married: 0.0231",
+          "sex_Female: 0.0161",
+          "relationship_Not-in-family: 0.0145"
+        ],
+        "raw_top": {
+          "occupation_Exec-managerial": 0.1301927431705417,
+          "education-num": 0.12403384398751427,
+          "age": 0.1018847382442459,
+          "marital-status_Married-civ-spouse": 0.08239136568248341,
+          "relationship_Husband": 0.06181473002098756,
+          "education_Bachelors": 0.031511949922996794,
+          "fnlwgt": 0.026256142553735914,
+          "marital-status_Never-married": 0.023097587840081816,
+          "sex_Female": 0.01608763744544376,
+          "relationship_Not-in-family": 0.014535110300774362
+        }
+      }
+    },
+    {
+      "instance_id": 3937,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 129.79054200695828,
+        "sparsity": 0.42592592592592593,
+        "fidelity": 0.45030190612476106,
+        "faithfulness_gap": 0.009999999999999998,
+        "stability": 0.9923904631184305
+      },
+      "explanation": {
+        "top_features": [
+          "age: -0.0597",
+          "marital-status_Married-civ-spouse: -0.0517",
+          "hours-per-week: -0.0356",
+          "marital-status_Never-married: -0.0309",
+          "education-num: 0.0287",
+          "occupation_Prof-specialty: 0.0254",
+          "capital-gain: -0.0254",
+          "relationship_Husband: -0.0240",
+          "relationship_Own-child: -0.0143",
+          "education_Bachelors: 0.0064"
+        ],
+        "raw_top": {
+          "age": -0.05971969038226575,
+          "marital-status_Married-civ-spouse": -0.05168596511870135,
+          "hours-per-week": -0.03556756506874478,
+          "marital-status_Never-married": -0.030868580752323283,
+          "education-num": 0.028749573692672926,
+          "occupation_Prof-specialty": 0.025423250045220128,
+          "capital-gain": -0.02535844220429908,
+          "relationship_Husband": -0.023999328782010707,
+          "relationship_Own-child": -0.014294617158665233,
+          "education_Bachelors": 0.006438514394155277
+        }
+      }
+    },
+    {
+      "instance_id": 4036,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 115.02441600896418,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.8271573783022356,
+        "faithfulness_gap": 0.24,
+        "stability": 0.711514522859191
+      },
+      "explanation": {
+        "top_features": [
+          "age: 0.0666",
+          "marital-status_Married-civ-spouse: 0.0444",
+          "relationship_Husband: 0.0371",
+          "capital-gain: -0.0317",
+          "education-num: -0.0275",
+          "occupation_Tech-support: -0.0089",
+          "occupation_Machine-op-inspct: 0.0089",
+          "marital-status_Never-married: 0.0088",
+          "occupation_Exec-managerial: -0.0085",
+          "relationship_Not-in-family: 0.0074"
+        ],
+        "raw_top": {
+          "age": 0.0666408810905591,
+          "marital-status_Married-civ-spouse": 0.04441966719041375,
+          "relationship_Husband": 0.037108949067912816,
+          "capital-gain": -0.03167526888901193,
+          "education-num": -0.0274512111166041,
+          "occupation_Tech-support": -0.008902546708777664,
+          "occupation_Machine-op-inspct": 0.00888030168311161,
+          "marital-status_Never-married": 0.008772544131545601,
+          "occupation_Exec-managerial": -0.008490873112823465,
+          "relationship_Not-in-family": 0.007412603455245517
+        }
+      }
+    },
+    {
+      "instance_id": 4254,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 130.9599169762805,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.8419912873260793,
+        "faithfulness_gap": 0.6,
+        "stability": 0.9877828807052522
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0968",
+          "relationship_Wife: 0.0944",
+          "occupation_Exec-managerial: 0.0921",
+          "age: 0.0628",
+          "hours-per-week: 0.0281",
+          "capital-gain: -0.0212",
+          "education_HS-grad: 0.0189",
+          "marital-status_Never-married: 0.0178",
+          "workclass_Self-emp-inc: -0.0175",
+          "education-num: 0.0156"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.09678532578605768,
+          "relationship_Wife": 0.09438308449205238,
+          "occupation_Exec-managerial": 0.09209405669867238,
+          "age": 0.06276145202055432,
+          "hours-per-week": 0.02805551085368734,
+          "capital-gain": -0.02121150543953263,
+          "education_HS-grad": 0.018934594883139654,
+          "marital-status_Never-married": 0.017767121947289296,
+          "workclass_Self-emp-inc": -0.017460970023405478,
+          "education-num": 0.01560187767249431
+        }
+      }
+    },
+    {
+      "instance_id": 4930,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 97.93395799351856,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.7042364995919876,
+        "faithfulness_gap": 0.12,
+        "stability": 0.9963607371880515
+      },
+      "explanation": {
+        "top_features": [
+          "hours-per-week: -0.0756",
+          "education-num: -0.0488",
+          "capital-gain: -0.0356",
+          "marital-status_Married-civ-spouse: 0.0224",
+          "education_11th: -0.0189",
+          "relationship_Husband: 0.0149",
+          "age: 0.0098",
+          "occupation_Handlers-cleaners: -0.0080",
+          "occupation_Exec-managerial: -0.0067",
+          "occupation_Tech-support: -0.0056"
+        ],
+        "raw_top": {
+          "hours-per-week": -0.07559468222349779,
+          "education-num": -0.0488096726988897,
+          "capital-gain": -0.035634739608558445,
+          "marital-status_Married-civ-spouse": 0.02243759588151079,
+          "education_11th": -0.01890373973358237,
+          "relationship_Husband": 0.014853228523786583,
+          "age": 0.00981165999808809,
+          "occupation_Handlers-cleaners": -0.008014164466497959,
+          "occupation_Exec-managerial": -0.006727936495462927,
+          "occupation_Tech-support": -0.005630396932920121
+        }
+      }
+    },
+    {
+      "instance_id": 5543,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 130.14937500702217,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.37828503665039626,
+        "faithfulness_gap": 0.06,
+        "stability": 0.9907530492199974
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: -0.0761",
+          "education-num: 0.0616",
+          "occupation_Exec-managerial: 0.0511",
+          "relationship_Husband: -0.0347",
+          "age: 0.0340",
+          "sex_Male: -0.0279",
+          "relationship_Not-in-family: -0.0262",
+          "capital-gain: -0.0258",
+          "fnlwgt: -0.0256",
+          "hours-per-week: -0.0191"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": -0.07607126500176492,
+          "education-num": 0.061636620539122756,
+          "occupation_Exec-managerial": 0.051066011650635804,
+          "relationship_Husband": -0.034734799420687065,
+          "age": 0.03403555235196962,
+          "sex_Male": -0.027893580940603898,
+          "relationship_Not-in-family": -0.02622693158218567,
+          "capital-gain": -0.025760003519105793,
+          "fnlwgt": -0.025638040195209443,
+          "hours-per-week": -0.01909717858174588
+        }
+      }
+    },
+    {
+      "instance_id": 5736,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 207.51229202141985,
+        "sparsity": 0.4537037037037037,
+        "fidelity": 0.8121008837383228,
+        "faithfulness_gap": 0.71,
+        "stability": 0.7987651193111825
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1176",
+          "marital-status_Married-civ-spouse: 0.0667",
+          "relationship_Husband: 0.0590",
+          "occupation_Prof-specialty: 0.0551",
+          "hours-per-week: 0.0517",
+          "capital-gain: 0.0399",
+          "education_Bachelors: 0.0369",
+          "marital-status_Never-married: 0.0218",
+          "relationship_Not-in-family: 0.0148",
+          "occupation_Machine-op-inspct: 0.0119"
+        ],
+        "raw_top": {
+          "education-num": 0.11760733324506191,
+          "marital-status_Married-civ-spouse": 0.06667833622711442,
+          "relationship_Husband": 0.05895793406871348,
+          "occupation_Prof-specialty": 0.055120029269623956,
+          "hours-per-week": 0.05172936991244683,
+          "capital-gain": 0.03992419213731523,
+          "education_Bachelors": 0.036945810646842575,
+          "marital-status_Never-married": 0.021843454827851473,
+          "relationship_Not-in-family": 0.014816772894428142,
+          "occupation_Machine-op-inspct": 0.011930479432581933
+        }
+      }
+    },
+    {
+      "instance_id": 5895,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 151.12220798619092,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.8259042835427072,
+        "faithfulness_gap": 0.49000000000000005,
+        "stability": 0.933971534147713
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0713",
+          "age: 0.0709",
+          "hours-per-week: 0.0627",
+          "relationship_Husband: 0.0551",
+          "occupation_Machine-op-inspct: 0.0234",
+          "education-num: -0.0175",
+          "fnlwgt: 0.0155",
+          "relationship_Not-in-family: 0.0138",
+          "marital-status_Never-married: 0.0125",
+          "education_HS-grad: 0.0107"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.07134794961752959,
+          "age": 0.07090449711915198,
+          "hours-per-week": 0.06272860504448317,
+          "relationship_Husband": 0.05505715775313547,
+          "occupation_Machine-op-inspct": 0.023425845818194374,
+          "education-num": -0.017503064663437727,
+          "fnlwgt": 0.0154891625768704,
+          "relationship_Not-in-family": 0.013839604343997962,
+          "marital-status_Never-married": 0.012483354991720716,
+          "education_HS-grad": 0.010743126022925936
+        }
+      }
+    },
+    {
+      "instance_id": 5953,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 86.82104101171717,
+        "sparsity": 0.4537037037037037,
+        "fidelity": 0.7920142383408092,
+        "faithfulness_gap": 0.08000000000000002,
+        "stability": 0.9601483453287355
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: -0.0623",
+          "capital-gain: -0.0335",
+          "education_7th-8th: -0.0268",
+          "marital-status_Married-civ-spouse: 0.0267",
+          "age: -0.0155",
+          "relationship_Husband: 0.0150",
+          "native-country_nan: 0.0138",
+          "hours-per-week: -0.0123",
+          "occupation_Exec-managerial: -0.0102",
+          "occupation_Machine-op-inspct: -0.0081"
+        ],
+        "raw_top": {
+          "education-num": -0.06226583696461716,
+          "capital-gain": -0.03345642069276437,
+          "education_7th-8th": -0.026775659416445025,
+          "marital-status_Married-civ-spouse": 0.02672433754049166,
+          "age": -0.01552506802891628,
+          "relationship_Husband": 0.014950949598069202,
+          "native-country_nan": 0.013759588653381344,
+          "hours-per-week": -0.012325620982669533,
+          "occupation_Exec-managerial": -0.010246659500808164,
+          "occupation_Machine-op-inspct": -0.00808198203773486
+        }
+      }
+    },
+    {
+      "instance_id": 6081,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 169.5932080037892,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.7067526980738982,
+        "faithfulness_gap": 0.44000000000000006,
+        "stability": 0.9744500728968587
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1108",
+          "occupation_Sales: 0.0724",
+          "age: 0.0659",
+          "marital-status_Married-civ-spouse: 0.0641",
+          "relationship_Husband: 0.0568",
+          "education_Bachelors: 0.0417",
+          "fnlwgt: -0.0237",
+          "capital-gain: -0.0200",
+          "marital-status_Never-married: 0.0200",
+          "hours-per-week: 0.0135"
+        ],
+        "raw_top": {
+          "education-num": 0.11075380540778326,
+          "occupation_Sales": 0.07239184626802171,
+          "age": 0.06586620939757495,
+          "marital-status_Married-civ-spouse": 0.06407086436803638,
+          "relationship_Husband": 0.056771477235217846,
+          "education_Bachelors": 0.04174074798939387,
+          "fnlwgt": -0.023741754968928035,
+          "capital-gain": -0.020041572317004465,
+          "marital-status_Never-married": 0.019978913071861372,
+          "hours-per-week": 0.01347762816534157
+        }
+      }
+    },
+    {
+      "instance_id": 6133,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 239.55391702475026,
+        "sparsity": 0.48148148148148145,
+        "fidelity": 0.8233926842919266,
+        "faithfulness_gap": 0.69,
+        "stability": 0.9638517078897471
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1084",
+          "age: 0.0936",
+          "marital-status_Married-civ-spouse: 0.0797",
+          "occupation_Prof-specialty: 0.0684",
+          "relationship_Husband: 0.0545",
+          "hours-per-week: 0.0278",
+          "capital-gain: -0.0189",
+          "marital-status_Never-married: 0.0177",
+          "relationship_Not-in-family: 0.0170",
+          "sex_Female: 0.0142"
+        ],
+        "raw_top": {
+          "education-num": 0.10835424510000849,
+          "age": 0.093648605813936,
+          "marital-status_Married-civ-spouse": 0.07968213295177065,
+          "occupation_Prof-specialty": 0.06843401078292345,
+          "relationship_Husband": 0.054536591430955926,
+          "hours-per-week": 0.027752733783415806,
+          "capital-gain": -0.018904205923026895,
+          "marital-status_Never-married": 0.017725469530247437,
+          "relationship_Not-in-family": 0.01701131992448893,
+          "sex_Female": 0.014194465572586523
+        }
+      }
+    },
+    {
+      "instance_id": 6250,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 114.04058302287012,
+        "sparsity": 0.4444444444444444,
+        "fidelity": 0.8266415766089308,
+        "faithfulness_gap": 0.24,
+        "stability": 0.9163970631501035
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0518",
+          "relationship_Husband: 0.0391",
+          "hours-per-week: 0.0284",
+          "capital-gain: -0.0280",
+          "workclass_Self-emp-not-inc: -0.0225",
+          "age: 0.0187",
+          "education-num: -0.0139",
+          "marital-status_Never-married: 0.0127",
+          "fnlwgt: 0.0095",
+          "occupation_Machine-op-inspct: 0.0074"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.05183126663850771,
+          "relationship_Husband": 0.03912282065746467,
+          "hours-per-week": 0.028377803368315996,
+          "capital-gain": -0.027981586383575632,
+          "workclass_Self-emp-not-inc": -0.02246452099306282,
+          "age": 0.01866422608397954,
+          "education-num": -0.013946063177528459,
+          "marital-status_Never-married": 0.012652593059633545,
+          "fnlwgt": 0.009531086735699433,
+          "occupation_Machine-op-inspct": 0.007407041757547858
+        }
+      }
+    },
+    {
+      "instance_id": 6291,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 148.25533400289714,
+        "sparsity": 0.4444444444444444,
+        "fidelity": 0.912555524849225,
+        "faithfulness_gap": 0.5599999999999999,
+        "stability": 0.9960487663823032
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1902",
+          "occupation_Prof-specialty: 0.0960",
+          "education_Prof-school: 0.0926",
+          "marital-status_Married-civ-spouse: -0.0662",
+          "hours-per-week: 0.0426",
+          "relationship_Husband: -0.0318",
+          "marital-status_Separated: -0.0210",
+          "marital-status_Never-married: 0.0197",
+          "age: 0.0185",
+          "sex_Female: 0.0180"
+        ],
+        "raw_top": {
+          "education-num": 0.19018216859088852,
+          "occupation_Prof-specialty": 0.09604257053390797,
+          "education_Prof-school": 0.09258040082956086,
+          "marital-status_Married-civ-spouse": -0.06619457167157976,
+          "hours-per-week": 0.042566343721416613,
+          "relationship_Husband": -0.031775300825834164,
+          "marital-status_Separated": -0.021010843032330515,
+          "marital-status_Never-married": 0.01973792500057357,
+          "age": 0.0184530205079534,
+          "sex_Female": 0.017967029669927966
+        }
+      }
+    },
+    {
+      "instance_id": 6879,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 123.3646659529768,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.24626773587349166,
+        "faithfulness_gap": 0.01,
+        "stability": 0.9839305185351086
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: -0.0630",
+          "capital-gain: -0.0264",
+          "relationship_Husband: -0.0211",
+          "education-num: -0.0186",
+          "age: -0.0140",
+          "relationship_Own-child: -0.0112",
+          "marital-status_Divorced: -0.0090",
+          "relationship_Wife: -0.0084",
+          "hours-per-week: -0.0072",
+          "sex_Female: -0.0054"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": -0.06303702624517428,
+          "capital-gain": -0.026405593651670643,
+          "relationship_Husband": -0.021072272589731256,
+          "education-num": -0.018550697235114058,
+          "age": -0.013992944589772379,
+          "relationship_Own-child": -0.011231126327520541,
+          "marital-status_Divorced": -0.009004554962634756,
+          "relationship_Wife": -0.008369603234132227,
+          "hours-per-week": -0.007193886140381665,
+          "sex_Female": -0.005408405469197532
+        }
+      }
+    },
+    {
+      "instance_id": 7051,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 127.97712499741465,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.8111232603596907,
+        "faithfulness_gap": 0.010000000000000009,
+        "stability": 0.9973731510419981
+      },
+      "explanation": {
+        "top_features": [
+          "hours-per-week: -0.1145",
+          "occupation_Prof-specialty: 0.0563",
+          "workclass_Federal-gov: 0.0520",
+          "marital-status_Married-civ-spouse: 0.0456",
+          "education-num: -0.0309",
+          "capital-gain: -0.0240",
+          "relationship_Husband: 0.0176",
+          "workclass_Private: 0.0163",
+          "education_HS-grad: -0.0160",
+          "marital-status_Never-married: 0.0063"
+        ],
+        "raw_top": {
+          "hours-per-week": -0.11452406480506397,
+          "occupation_Prof-specialty": 0.05629157781324807,
+          "workclass_Federal-gov": 0.05198761325547366,
+          "marital-status_Married-civ-spouse": 0.04556716067617685,
+          "education-num": -0.030874668635492528,
+          "capital-gain": -0.024007301042365724,
+          "relationship_Husband": 0.017569273896966706,
+          "workclass_Private": 0.016313857531370105,
+          "education_HS-grad": -0.01600625378038785,
+          "marital-status_Never-married": 0.006274714177216083
+        }
+      }
+    },
+    {
+      "instance_id": 7102,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 148.74024997698143,
+        "sparsity": 0.48148148148148145,
+        "fidelity": 0.9234614466448913,
+        "faithfulness_gap": 0.6,
+        "stability": 0.9938120510641434
+      },
+      "explanation": {
+        "top_features": [
+          "capital-loss: 0.2382",
+          "marital-status_Married-civ-spouse: 0.0916",
+          "age: 0.0534",
+          "relationship_Husband: 0.0508",
+          "marital-status_Never-married: 0.0204",
+          "occupation_Prof-specialty: 0.0181",
+          "relationship_Not-in-family: 0.0177",
+          "capital-gain: -0.0169",
+          "hours-per-week: 0.0128",
+          "sex_Male: 0.0090"
+        ],
+        "raw_top": {
+          "capital-loss": 0.23818781690569155,
+          "marital-status_Married-civ-spouse": 0.09164537991377074,
+          "age": 0.053448809503806274,
+          "relationship_Husband": 0.050783505268417455,
+          "marital-status_Never-married": 0.02037171897263761,
+          "occupation_Prof-specialty": 0.018103179951068568,
+          "relationship_Not-in-family": 0.017712975570678965,
+          "capital-gain": -0.016938635710585005,
+          "hours-per-week": 0.01280949609825143,
+          "sex_Male": 0.00902195330897257
+        }
+      }
+    },
+    {
+      "instance_id": 7125,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 142.91829097783193,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.7532696448410721,
+        "faithfulness_gap": 0.61,
+        "stability": 0.906593146952249
+      },
+      "explanation": {
+        "top_features": [
+          "age: 0.0957",
+          "fnlwgt: 0.0730",
+          "marital-status_Married-civ-spouse: 0.0687",
+          "education_10th: 0.0617",
+          "relationship_Husband: 0.0561",
+          "education-num: -0.0478",
+          "occupation_Machine-op-inspct: 0.0367",
+          "capital-gain: -0.0254",
+          "hours-per-week: 0.0150",
+          "marital-status_Never-married: 0.0131"
+        ],
+        "raw_top": {
+          "age": 0.0956933634975178,
+          "fnlwgt": 0.07296198949268387,
+          "marital-status_Married-civ-spouse": 0.06870404218727799,
+          "education_10th": 0.061712384801890036,
+          "relationship_Husband": 0.05609998563557952,
+          "education-num": -0.0477633077881444,
+          "occupation_Machine-op-inspct": 0.03670893771766487,
+          "capital-gain": -0.025374363977225586,
+          "hours-per-week": 0.014979363430758213,
+          "marital-status_Never-married": 0.013095152193856166
+        }
+      }
+    },
+    {
+      "instance_id": 7630,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 127.66025000018999,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.6579551161447641,
+        "faithfulness_gap": 0.33999999999999997,
+        "stability": 0.9730494000724401
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.0996",
+          "relationship_Wife: 0.0785",
+          "marital-status_Married-civ-spouse: 0.0617",
+          "fnlwgt: -0.0382",
+          "occupation_Craft-repair: -0.0294",
+          "capital-gain: -0.0232",
+          "marital-status_Never-married: 0.0186",
+          "hours-per-week: -0.0141",
+          "occupation_Machine-op-inspct: 0.0123",
+          "relationship_Not-in-family: 0.0121"
+        ],
+        "raw_top": {
+          "education-num": 0.09959915430633373,
+          "relationship_Wife": 0.07845076581405465,
+          "marital-status_Married-civ-spouse": 0.06173666669657905,
+          "fnlwgt": -0.0382406961515278,
+          "occupation_Craft-repair": -0.029362447782591516,
+          "capital-gain": -0.023204751658558963,
+          "marital-status_Never-married": 0.01861020378498779,
+          "hours-per-week": -0.014111914267386965,
+          "occupation_Machine-op-inspct": 0.012281565720240906,
+          "relationship_Not-in-family": 0.012100665953448697
+        }
+      }
+    },
+    {
+      "instance_id": 8092,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 132.98783299978822,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.9311458693639498,
+        "faithfulness_gap": 0.7,
+        "stability": 0.9923172787958072
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1629",
+          "occupation_Exec-managerial: 0.1195",
+          "education_Masters: 0.0904",
+          "marital-status_Married-civ-spouse: 0.0728",
+          "age: 0.0616",
+          "relationship_Husband: 0.0482",
+          "marital-status_Never-married: 0.0238",
+          "occupation_Machine-op-inspct: 0.0161",
+          "occupation_Other-service: 0.0137",
+          "relationship_Not-in-family: 0.0134"
+        ],
+        "raw_top": {
+          "education-num": 0.16290231575153824,
+          "occupation_Exec-managerial": 0.11950187934795962,
+          "education_Masters": 0.0904082546006066,
+          "marital-status_Married-civ-spouse": 0.07284311259102651,
+          "age": 0.06158676547205573,
+          "relationship_Husband": 0.048191241699755666,
+          "marital-status_Never-married": 0.02376137654122431,
+          "occupation_Machine-op-inspct": 0.016070162002979487,
+          "occupation_Other-service": 0.01372332670842752,
+          "relationship_Not-in-family": 0.013380837779549211
+        }
+      }
+    },
+    {
+      "instance_id": 8178,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 107.57354198722169,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.5207619542735895,
+        "faithfulness_gap": 0.04,
+        "stability": 0.9801412221674525
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: -0.0625",
+          "marital-status_Never-married: -0.0402",
+          "age: -0.0324",
+          "hours-per-week: 0.0269",
+          "capital-gain: -0.0264",
+          "relationship_Husband: -0.0245",
+          "relationship_Own-child: -0.0203",
+          "education-num: -0.0084",
+          "education_Some-college: 0.0076",
+          "fnlwgt: 0.0056"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": -0.062497676125269665,
+          "marital-status_Never-married": -0.04021050644946058,
+          "age": -0.032350087486718734,
+          "hours-per-week": 0.026901012971043768,
+          "capital-gain": -0.02638186972055337,
+          "relationship_Husband": -0.024496702219561257,
+          "relationship_Own-child": -0.020279865819380804,
+          "education-num": -0.008369435791792057,
+          "education_Some-college": 0.007621022934256416,
+          "fnlwgt": 0.005606603487657935
+        }
+      }
+    },
+    {
+      "instance_id": 8589,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 187.33991699991748,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.9036891361965751,
+        "faithfulness_gap": 0.5,
+        "stability": 0.898131704063677
+      },
+      "explanation": {
+        "top_features": [
+          "age: 0.0823",
+          "hours-per-week: 0.0716",
+          "marital-status_Married-civ-spouse: 0.0683",
+          "relationship_Husband: 0.0615",
+          "capital-gain: -0.0245",
+          "occupation_Transport-moving: -0.0219",
+          "fnlwgt: 0.0186",
+          "education_HS-grad: 0.0182",
+          "marital-status_Never-married: 0.0145",
+          "relationship_Not-in-family: 0.0134"
+        ],
+        "raw_top": {
+          "age": 0.08228623091671125,
+          "hours-per-week": 0.071577766900661,
+          "marital-status_Married-civ-spouse": 0.06834608169805051,
+          "relationship_Husband": 0.061513252599672795,
+          "capital-gain": -0.024517617837700525,
+          "occupation_Transport-moving": -0.02186256890652203,
+          "fnlwgt": 0.01858628299988652,
+          "education_HS-grad": 0.01822083814899088,
+          "marital-status_Never-married": 0.01446561716205906,
+          "relationship_Not-in-family": 0.013423681492722607
+        }
+      }
+    },
+    {
+      "instance_id": 8717,
+      "quadrant": "TP",
+      "true_label": 1,
+      "prediction": 1,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 150.9632910019718,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.9784806703338792,
+        "faithfulness_gap": 0.69,
+        "stability": 0.9996439251795904
+      },
+      "explanation": {
+        "top_features": [
+          "capital-gain: 0.5547",
+          "education-num: 0.0573",
+          "marital-status_Married-civ-spouse: -0.0389",
+          "age: 0.0322",
+          "hours-per-week: 0.0265",
+          "marital-status_Never-married: -0.0252",
+          "relationship_Husband: -0.0234",
+          "relationship_Not-in-family: 0.0226",
+          "fnlwgt: -0.0200",
+          "occupation_Sales: 0.0129"
+        ],
+        "raw_top": {
+          "capital-gain": 0.5546938069303928,
+          "education-num": 0.057292878362598006,
+          "marital-status_Married-civ-spouse": -0.038901174784203935,
+          "age": 0.03221532392933511,
+          "hours-per-week": 0.026466076599410825,
+          "marital-status_Never-married": -0.025204047420296548,
+          "relationship_Husband": -0.023400121067288636,
+          "relationship_Not-in-family": 0.02259609278008952,
+          "fnlwgt": -0.019995510526103145,
+          "occupation_Sales": 0.012861183641398953
+        }
+      }
+    },
+    {
+      "instance_id": 8743,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 136.47545903222635,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.9583851131526544,
+        "faithfulness_gap": 0.009999999999999998,
+        "stability": 0.9735395370788475
+      },
+      "explanation": {
+        "top_features": [
+          "occupation_Other-service: -0.1816",
+          "age: 0.0410",
+          "marital-status_Married-civ-spouse: 0.0339",
+          "capital-gain: -0.0303",
+          "relationship_Husband: 0.0262",
+          "education-num: -0.0227",
+          "fnlwgt: 0.0115",
+          "occupation_Exec-managerial: -0.0106",
+          "occupation_Tech-support: -0.0100",
+          "occupation_Prof-specialty: -0.0097"
+        ],
+        "raw_top": {
+          "occupation_Other-service": -0.1816286629478327,
+          "age": 0.04103416827371575,
+          "marital-status_Married-civ-spouse": 0.03386874060970513,
+          "capital-gain": -0.03028333252033917,
+          "relationship_Husband": 0.026187302875809452,
+          "education-num": -0.02271879133912762,
+          "fnlwgt": 0.011467698705521343,
+          "occupation_Exec-managerial": -0.010552698416358908,
+          "occupation_Tech-support": -0.010032460139664181,
+          "occupation_Prof-specialty": -0.009682145589522975
+        }
+      }
+    },
+    {
+      "instance_id": 8963,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 95.16120800981298,
+        "sparsity": 0.4537037037037037,
+        "fidelity": 0.5773420165020962,
+        "faithfulness_gap": 0.13,
+        "stability": 0.9556725398413178
+      },
+      "explanation": {
+        "top_features": [
+          "age: -0.0848",
+          "occupation_Tech-support: 0.0775",
+          "marital-status_Married-civ-spouse: 0.0611",
+          "relationship_Husband: 0.0380",
+          "fnlwgt: 0.0333",
+          "capital-gain: -0.0283",
+          "marital-status_Never-married: 0.0167",
+          "education-num: -0.0153",
+          "relationship_Not-in-family: 0.0138",
+          "hours-per-week: 0.0106"
+        ],
+        "raw_top": {
+          "age": -0.08484578389272429,
+          "occupation_Tech-support": 0.07754449127831094,
+          "marital-status_Married-civ-spouse": 0.061115616308879905,
+          "relationship_Husband": 0.038013521519133064,
+          "fnlwgt": 0.0333014749953918,
+          "capital-gain": -0.028344927006110084,
+          "marital-status_Never-married": 0.01670250153149709,
+          "education-num": -0.01525608184870407,
+          "relationship_Not-in-family": 0.013787047010869174,
+          "hours-per-week": 0.010606325606231622
+        }
+      }
+    },
+    {
+      "instance_id": 8983,
+      "quadrant": "FP",
+      "true_label": 0,
+      "prediction": 1,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 127.81045801239088,
+        "sparsity": 0.46296296296296297,
+        "fidelity": 0.7495784675596677,
+        "faithfulness_gap": 0.75,
+        "stability": 0.9956522143628321
+      },
+      "explanation": {
+        "top_features": [
+          "education-num: 0.1448",
+          "marital-status_Married-civ-spouse: 0.0990",
+          "relationship_Wife: 0.0939",
+          "education_Masters: 0.0783",
+          "occupation_Exec-managerial: 0.0633",
+          "age: 0.0505",
+          "marital-status_Never-married: 0.0265",
+          "workclass_State-gov: -0.0249",
+          "capital-gain: -0.0165",
+          "relationship_Not-in-family: 0.0150"
+        ],
+        "raw_top": {
+          "education-num": 0.14479400382914265,
+          "marital-status_Married-civ-spouse": 0.0990010506790486,
+          "relationship_Wife": 0.09387368469159468,
+          "education_Masters": 0.07828777618464527,
+          "occupation_Exec-managerial": 0.06332982115552,
+          "age": 0.050457156090018884,
+          "marital-status_Never-married": 0.026495660432470914,
+          "workclass_State-gov": -0.024891871030578158,
+          "capital-gain": -0.01654143841660243,
+          "relationship_Not-in-family": 0.015007833884599791
+        }
+      }
+    },
+    {
+      "instance_id": 9065,
+      "quadrant": "FN",
+      "true_label": 1,
+      "prediction": 0,
+      "prediction_correct": false,
+      "metrics": {
+        "cost": 148.56374997179955,
+        "sparsity": 0.4444444444444444,
+        "fidelity": 0.8230740768508721,
+        "faithfulness_gap": 0.38,
+        "stability": 0.9518318339148387
+      },
+      "explanation": {
+        "top_features": [
+          "age: 0.0916",
+          "education-num: -0.0713",
+          "marital-status_Married-civ-spouse: 0.0557",
+          "relationship_Husband: 0.0504",
+          "education_10th: 0.0338",
+          "occupation_Transport-moving: 0.0318",
+          "capital-gain: -0.0304",
+          "capital-loss: 0.0293",
+          "occupation_Machine-op-inspct: 0.0113",
+          "marital-status_Never-married: 0.0104"
+        ],
+        "raw_top": {
+          "age": 0.09158658492402935,
+          "education-num": -0.07130119083929685,
+          "marital-status_Married-civ-spouse": 0.05567537255188995,
+          "relationship_Husband": 0.05035733407370117,
+          "education_10th": 0.03384386302913356,
+          "occupation_Transport-moving": 0.03176239381648202,
+          "capital-gain": -0.03036772634821318,
+          "capital-loss": 0.02925593166138583,
+          "occupation_Machine-op-inspct": 0.011331821683990028,
+          "marital-status_Never-married": 0.010412927060399965
+        }
+      }
+    },
+    {
+      "instance_id": 9207,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 75.94483299180865,
+        "sparsity": 0.37962962962962965,
+        "fidelity": 0.0,
+        "faithfulness_gap": 0.0,
+        "stability": 0.9972488228233399
+      },
+      "explanation": {
+        "top_features": [
+          "age: -0.0323",
+          "marital-status_Married-civ-spouse: -0.0305",
+          "capital-gain: -0.0258",
+          "education-num: -0.0235",
+          "hours-per-week: -0.0190",
+          "occupation_Other-service: -0.0173",
+          "marital-status_Never-married: -0.0144",
+          "relationship_Husband: -0.0138",
+          "education_11th: -0.0063",
+          "relationship_Own-child: -0.0048"
+        ],
+        "raw_top": {
+          "age": -0.032260590678608876,
+          "marital-status_Married-civ-spouse": -0.03053088758353624,
+          "capital-gain": -0.025798214599574293,
+          "education-num": -0.023540270994883487,
+          "hours-per-week": -0.019026831527352215,
+          "occupation_Other-service": -0.01726311793275272,
+          "marital-status_Never-married": -0.01437549682068493,
+          "relationship_Husband": -0.013770953498054723,
+          "education_11th": -0.006267172840040303,
+          "relationship_Own-child": -0.004791083834356868
+        }
+      }
+    },
+    {
+      "instance_id": 9614,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 117.2518749954179,
+        "sparsity": 0.4351851851851852,
+        "fidelity": 0.7021118934879245,
+        "faithfulness_gap": 0.04000000000000001,
+        "stability": 0.8040944770705375
+      },
+      "explanation": {
+        "top_features": [
+          "age: 0.0388",
+          "marital-status_Married-civ-spouse: -0.0377",
+          "capital-gain: -0.0285",
+          "relationship_Husband: -0.0250",
+          "education-num: -0.0245",
+          "capital-loss: -0.0182",
+          "marital-status_Divorced: -0.0146",
+          "relationship_Not-in-family: -0.0118",
+          "hours-per-week: -0.0082",
+          "occupation_Craft-repair: 0.0067"
+        ],
+        "raw_top": {
+          "age": 0.038808437536387144,
+          "marital-status_Married-civ-spouse": -0.03772111391058388,
+          "capital-gain": -0.02853980619626782,
+          "relationship_Husband": -0.02503851626423966,
+          "education-num": -0.02445353901319663,
+          "capital-loss": -0.018220166698388312,
+          "marital-status_Divorced": -0.014639058721368201,
+          "relationship_Not-in-family": -0.01178408922005474,
+          "hours-per-week": -0.008217601923932989,
+          "occupation_Craft-repair": 0.00671958277965814
+        }
+      }
+    },
+    {
+      "instance_id": 9750,
+      "quadrant": "TN",
+      "true_label": 0,
+      "prediction": 0,
+      "prediction_correct": true,
+      "metrics": {
+        "cost": 139.12574999267235,
+        "sparsity": 0.4722222222222222,
+        "fidelity": 0.4123221868038498,
+        "faithfulness_gap": 0.19,
+        "stability": 0.6351912972658232
+      },
+      "explanation": {
+        "top_features": [
+          "marital-status_Married-civ-spouse: 0.0489",
+          "age: 0.0442",
+          "relationship_Husband: 0.0382",
+          "capital-gain: -0.0293",
+          "fnlwgt: -0.0213",
+          "education-num: -0.0184",
+          "hours-per-week: 0.0133",
+          "marital-status_Never-married: 0.0113",
+          "education_Some-college: 0.0089",
+          "occupation_Exec-managerial: -0.0084"
+        ],
+        "raw_top": {
+          "marital-status_Married-civ-spouse": 0.0489256637391054,
+          "age": 0.04415228870638885,
+          "relationship_Husband": 0.03824604768121162,
+          "capital-gain": -0.029279911603443908,
+          "fnlwgt": -0.02134536870641682,
+          "education-num": -0.01843563615217249,
+          "hours-per-week": 0.013262808483046342,
+          "marital-status_Never-married": 0.011259727008307437,
+          "education_Some-college": 0.008897294518701528,
+          "occupation_Exec-managerial": -0.008375483304807857
+        }
+      }
+    }
+  ],
+  "aggregated_metrics": {
+    "Fidelity": 0.7329,
+    "Stability": 0.9479,
+    "Sparsity": 0.4523,
+    "CausalAlignment": 0.0,
+    "CounterfactualSensitivity": 0.0,
+    "EfficiencyMS": 140.3579
+  },
+  "llm_evaluation": {
+    "likert_scores": {
+      "clarity": 3.0,
+      "usefulness": 3.0,
+      "completeness": 3.0,
+      "trustworthiness": 3.0,
+      "overall": 3.0
+    },
+    "justification": "Pending LLM Evaluation (Phase J)"
+  }
+}
