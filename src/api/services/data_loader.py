@@ -26,45 +26,43 @@ def discover_experiment_directories() -> List[Path]:
     Discover all experiment directories.
     
     Returns:
-        List of Path objects for experiment directories
+        List containing the root experiments directory.
+        We return a list to maintain compatibility with the calling signature,
+        but we now treat the experiment root as the base, allowing recursive
+        search for result files across all subdirectories and depth levels.
     """
     base_dir = get_experiments_dir()
     if not base_dir.exists():
         logger.warning(f"Experiments directory not found: {base_dir}")
         return []
         
-    # Valid experiment directory has a 'results' folder
-    exp_dirs = []
-    for p in base_dir.iterdir():
-        if p.is_dir() and (p / "results").exists():
-            exp_dirs.append(p)
-            
-    return sorted(exp_dirs)
+    return [base_dir]
 
 def find_result_files(experiment_dir: Path) -> List[Path]:
     """
-    Find all JSON result files in experiment directory.
+    Recursively find all result JSON files in directory.
     
     Args:
-        experiment_dir: Path to experiment directory
+        experiment_dir: Path to directory to search (usually experiments root)
         
     Returns:
         Sorted list of Path objects for JSON files
     """
-    results_dir = experiment_dir / "results"
-    if not results_dir.exists():
-        return []
-    
     # Policy: 
-    # 1. Look for *.json in results/ (files like rf_metrics.json)
-    # 2. Look for results.json in immediate subdirectories of results/ (files like rf_shap/results.json)
+    # Recursively find 'results.json' files to support deeply nested structures
+    # (e.g., experiments/exp1/reproducibility/seed_X/results.json).
+    # We also include *_metrics.json for backward compatibility with older runs.
     
-    json_files = list(results_dir.glob("*.json"))
+    if not experiment_dir.exists():
+        return []
+
+    json_files = list(experiment_dir.rglob("results.json"))
+    json_files.extend(experiment_dir.rglob("*_metrics.json"))
     
-    # Also include nested results.json if specific subdirs structure is used
-    json_files.extend(results_dir.glob("*/results.json"))
+    # Filter out potential non-result files if needed, but the naming convention
+    # is usually specific enough.
     
-    return sorted(json_files, key=lambda p: p.name)
+    return sorted(json_files, key=lambda p: str(p))
 
 def load_json_file(file_path: Path) -> Optional[Dict[str, Any]]:
     """

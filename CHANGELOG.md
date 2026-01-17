@@ -60,6 +60,10 @@ All notable changes to this project will be documented in this file.
 - Docker support for deployment
 - Production configuration management
 
+### Bug Fixes
+- **Data Loader**: Fixed experiment discovery to recursively search for `results.json`, enabling access to experiments in nested directories (e.g., reproducibility/seed_X).
+
+
 See PR #[NUMBER] for complete details.
 
 ### Added (EXP1-49 - Render Deployment)
