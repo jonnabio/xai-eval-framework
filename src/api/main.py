@@ -109,6 +109,23 @@ async def health_check():
         "version": settings.API_VERSION
     }
 
+@app.get("/debug/files", tags=["system"])
+async def list_files():
+    """List all experiment files visible to the server."""
+    from src.api.services.data_loader import discover_experiment_directories, find_result_files
+    
+    files = []
+    exp_dirs = discover_experiment_directories()
+    for d in exp_dirs:
+        for f in find_result_files(d):
+            files.append(str(f))
+            
+    return {
+        "count": len(files),
+        "files": sorted(files),
+        "dirs": [str(d) for d in exp_dirs]
+    }
+
 app.include_router(debug.router, prefix="/db")
 app.include_router(batch.router, prefix="/api")
 app.include_router(human_eval.router, prefix="/human-eval", tags=["Human Evaluation"])

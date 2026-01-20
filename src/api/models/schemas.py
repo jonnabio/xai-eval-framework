@@ -44,6 +44,8 @@ class XaiMethod(str, Enum):
     GRAD_CAM = "GradCAM"
     RISE = "RISE"
     INTEGRATED_GRADIENTS = "Integrated Gradients"
+    ANCHORS = "Anchors"
+    DICE = "DiCE"
 
 class RunStatus(str, Enum):
     """Run execution status."""
