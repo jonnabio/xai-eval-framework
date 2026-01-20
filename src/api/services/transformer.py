@@ -284,7 +284,10 @@ def transform_experiment_to_run(exp_data: Dict[str, Any]) -> Run:
         metrics=r_metrics,
         llmEval=r_llm_eval,
         config=exp_data.get("config") or meta,
-        metadata=exp_data.get("metadata"),
+        metadata={
+            **(exp_data.get("metadata") or {}),
+            "instance_count": len(instances)
+        },
         errorMessage=None
     )
     

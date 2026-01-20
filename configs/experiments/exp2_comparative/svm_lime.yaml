@@ -1,0 +1,24 @@
+name: exp2_svm_lime
+version: '1.0'
+dataset: adult
+random_seed: 42
+model:
+  name: adult_svm
+  path: experiments/exp1_adult/models/svm.joblib
+  type: svm
+explainer:
+  method: lime
+  params:
+    kernel_width: 3.0
+sampling:
+  strategy: stratified
+  samples_per_class: 10
+  random_seed: 42
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+output_dir: experiments/exp2_comparative/results/svm_lime

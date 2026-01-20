@@ -1,0 +1,23 @@
+name: exp2_svm_dice
+version: '1.0'
+dataset: adult
+random_seed: 42
+model:
+  name: adult_svm
+  path: experiments/exp1_adult/models/svm.joblib
+  type: svm
+explainer:
+  method: dice
+  params: {}
+sampling:
+  strategy: stratified
+  samples_per_class: 10
+  random_seed: 42
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: true
+output_dir: experiments/exp2_comparative/results/svm_dice
