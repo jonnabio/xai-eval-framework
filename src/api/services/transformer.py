@@ -7,9 +7,12 @@ Handles aggregration of instance-level metrics and field mapping.
 
 import hashlib
 import json
+import logging
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 import statistics
+
+logger = logging.getLogger(__name__)
 
 from src.api.models.schemas import (
     Run, MetricSet, LlmEval, LikertScores,
@@ -79,7 +82,8 @@ def map_dataset(dataset_str: str) -> Dataset:
         "adult": Dataset.ADULT_INCOME,
         "adult_income": Dataset.ADULT_INCOME,
         "cifar10": Dataset.CIFAR_10,
-        "fashion": Dataset.FASHION_MNIST
+        "fashion": Dataset.FASHION_MNIST,
+        "tabular_synthetic": Dataset.TABULAR_SYNTHETIC
     }
     
     if dataset_str.lower() in mapping:
@@ -103,7 +107,11 @@ def map_xai_method(method_str: str) -> XaiMethod:
     if method_str.lower() in mapping:
         return mapping[method_str.lower()]
 
-    raise ValueError(f"Unknown XAI method: {method_str}")
+    # Fallback to feature importance if metrics implies it, or just SHAP/LIME as default?
+    # Better to return a valid enum if possible to avoid dropping data.
+    logger.warning(f"Unknown XAI method: {method_str}, defaulting to SHAP")
+    return XaiMethod.SHAP
+    # raise ValueError(f"Unknown XAI method: {method_str}")
 
 def calculate_explainability_score(metrics: MetricSet) -> float:
     """
