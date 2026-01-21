@@ -234,6 +234,9 @@ def transform_experiment_to_run(exp_data: Dict[str, Any]) -> Run:
     llm_raw = exp_data.get("llm_evaluation", {})
     likert_raw = llm_raw.get("likert_scores", {})
     
+    # Extract instances for metadata count
+    instances = exp_data.get("instance_evaluations", [])
+    
     # Helper to safely convert to int (rounding floats)
     def safe_int(val):
         try:
