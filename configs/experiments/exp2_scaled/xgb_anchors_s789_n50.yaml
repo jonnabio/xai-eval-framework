@@ -1,0 +1,25 @@
+name: exp2_xgb_anchors_s789_n50
+version: '2.0'
+dataset: adult
+random_seed: 789
+model:
+  name: adult_xgb
+  path: experiments/exp1_adult/models/xgb.joblib
+  type: xgb
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+sampling:
+  strategy: stratified
+  samples_per_class: 50
+  random_seed: 789
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/xgb_anchors/seed_789/n_50

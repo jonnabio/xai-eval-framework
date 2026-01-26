@@ -1,0 +1,26 @@
+name: exp2_xgb_shap_s789_n200
+version: '2.0'
+dataset: adult
+random_seed: 789
+model:
+  name: adult_xgb
+  path: experiments/exp1_adult/models/xgb.joblib
+  type: xgb
+explainer:
+  method: shap
+  params:
+    n_background_samples: 50
+  explainer_type: tree
+sampling:
+  strategy: stratified
+  samples_per_class: 200
+  random_seed: 789
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/xgb_shap/seed_789/n_200

@@ -1,0 +1,25 @@
+name: exp2_mlp_anchors_s42_n200
+version: '2.0'
+dataset: adult
+random_seed: 42
+model:
+  name: adult_mlp
+  path: experiments/exp1_adult/models/mlp.joblib
+  type: mlp
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+sampling:
+  strategy: stratified
+  samples_per_class: 200
+  random_seed: 42
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/mlp_anchors/seed_42/n_200

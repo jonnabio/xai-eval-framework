@@ -1,0 +1,26 @@
+name: exp2_svm_lime_s123_n50
+version: '2.0'
+dataset: adult
+random_seed: 123
+model:
+  name: adult_svm
+  path: experiments/exp1_adult/models/svm.joblib
+  type: svm
+explainer:
+  method: lime
+  params:
+    kernel_width: 3.0
+    num_samples: 1000
+sampling:
+  strategy: stratified
+  samples_per_class: 50
+  random_seed: 123
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/svm_lime/seed_123/n_50

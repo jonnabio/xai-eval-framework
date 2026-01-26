@@ -1,0 +1,25 @@
+name: exp2_rf_anchors_s123_n50
+version: '2.0'
+dataset: adult
+random_seed: 123
+model:
+  name: adult_rf
+  path: experiments/exp1_adult/models/rf.joblib
+  type: rf
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+sampling:
+  strategy: stratified
+  samples_per_class: 50
+  random_seed: 123
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/rf_anchors/seed_123/n_50

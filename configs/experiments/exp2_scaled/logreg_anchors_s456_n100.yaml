@@ -1,0 +1,25 @@
+name: exp2_logreg_anchors_s456_n100
+version: '2.0'
+dataset: adult
+random_seed: 456
+model:
+  name: adult_logreg
+  path: experiments/exp1_adult/models/logreg.joblib
+  type: logreg
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+sampling:
+  strategy: stratified
+  samples_per_class: 100
+  random_seed: 456
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/exp2_scaled/results/logreg_anchors/seed_456/n_100
