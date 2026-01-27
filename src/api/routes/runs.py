@@ -124,6 +124,9 @@ async def get_runs(
             
         logger.info(f"Filtered {len(filtered_runs)} runs from {len(all_runs)} total")
         
+        # Sort by timestamp descending (newest first)
+        filtered_runs.sort(key=lambda x: x.timestamp, reverse=True)
+        
         # Apply pagination
         paginated_runs, pagination = paginate_list(filtered_runs, offset, limit)
         
