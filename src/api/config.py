@@ -63,8 +63,8 @@ class Settings(BaseSettings):
     LOG_FORMAT: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     
     # Pagination
-    DEFAULT_PAGE_SIZE: int = 20
-    MAX_PAGE_SIZE: int = 100
+    DEFAULT_PAGE_SIZE: int = 100
+    MAX_PAGE_SIZE: int = 5000
 
     # Results API Configuration
     RESULTS_CACHE_TTL_SECONDS: int = 300  # 5 minutes
