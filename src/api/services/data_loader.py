@@ -52,8 +52,8 @@ def find_result_files(experiment_dir: Path) -> List[Path]:
     if not experiment_dir.exists():
         return []
 
+    # Only look for results.json to avoid loading aux metrics files
     json_files = list(experiment_dir.rglob("results.json"))
-    json_files.extend(experiment_dir.rglob("*_metrics.json"))
     
     return sorted(json_files, key=lambda p: str(p))
 
@@ -207,19 +207,35 @@ def build_run_id_index():
     exp_dirs = discover_experiment_directories()
     count = 0
     
+    # Collect all files first
+    all_files = []
     for exp_dir in exp_dirs:
         result_files = find_result_files(exp_dir)
-        for file_path in result_files:
-            try:
-                # We need to peek at the file to generate the ID
-                # This happens once on startup
-                data = load_json_file(file_path)
-                if data:
-                    run = transform_experiment_to_run(data)
-                    _RUN_ID_INDEX[run.id] = file_path
-                    count += 1
-            except Exception as e:
-                logger.warning(f"Failed to index {file_path}: {e}")
+        all_files.extend(result_files)
+        
+    logger.info(f"Indexing {len(all_files)} files in parallel...")
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    def index_file(file_path: Path):
+        try:
+            # We need to peek at the file to generate the ID
+            data = load_json_file(file_path)
+            if data:
+                run = transform_experiment_to_run(data)
+                return (run.id, file_path)
+        except Exception as e:
+            # logger.warning(f"Failed to index {file_path}: {e}")
+            pass
+        return None
+
+    # Parallel index build
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_file = {executor.submit(index_file, f): f for f in all_files}
+        for future in as_completed(future_to_file):
+            res = future.result()
+            if res:
+                _RUN_ID_INDEX[res[0]] = res[1]
+                count += 1
                 
     logger.info(f"Built in-memory index with {count} experiments")
 
