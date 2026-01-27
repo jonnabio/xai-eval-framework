@@ -8,130 +8,52 @@ import json
 import logging
 from pathlib import Path
 from functools import lru_cache
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Iterator, Iterable
 
-from src.api.config import settings
-from src.api.models.schemas import ExperimentResult, InstanceEvaluation
-from src.api.services.transformer import transform_experiment_to_run, transform_experiment_to_result
-from src.api.utils.pagination import paginate_list
-
-logger = logging.getLogger(__name__)
-
-def get_experiments_dir() -> Path:
-    """Get path to experiments directory."""
-    return settings.EXPERIMENTS_DIR
-
-def discover_experiment_directories() -> List[Path]:
+def iter_all_experiments() -> Iterator[Dict[str, Any]]:
     """
-    Discover all experiment directories.
+    Yield all experiment results from filesystem one by one.
+    This prevents loading all files into memory at once.
     
-    Returns:
-        List containing the root experiments directory.
-        We return a list to maintain compatibility with the calling signature,
-        but we now treat the experiment root as the base, allowing recursive
-        search for result files across all subdirectories and depth levels.
+    Yields:
+        Experiment data dictionary
     """
-    base_dir = get_experiments_dir()
-    if not base_dir.exists():
-        logger.warning(f"Experiments directory not found: {base_dir}")
-        return []
-        
-    return [base_dir]
-
-def find_result_files(experiment_dir: Path) -> List[Path]:
-    """
-    Recursively find all result JSON files in directory.
-    
-    Args:
-        experiment_dir: Path to directory to search (usually experiments root)
-        
-    Returns:
-        Sorted list of Path objects for JSON files
-    """
-    # Policy: 
-    # Recursively find 'results.json' files to support deeply nested structures
-    # (e.g., experiments/exp1/reproducibility/seed_X/results.json).
-    # We also include *_metrics.json for backward compatibility with older runs.
-    
-    if not experiment_dir.exists():
-        return []
-
-    json_files = list(experiment_dir.rglob("results.json"))
-    json_files.extend(experiment_dir.rglob("*_metrics.json"))
-    
-    # Filter out potential non-result files if needed, but the naming convention
-    # is usually specific enough.
-    
-    return sorted(json_files, key=lambda p: str(p))
-
-def load_json_file(file_path: Path) -> Optional[Dict[str, Any]]:
-    """
-    Load and parse JSON file.
-    
-    Args:
-        file_path: Path to JSON file
-        
-    Returns:
-        Parsed JSON data or None if error
-    """
-    try:
-        with open(file_path, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        logger.warning(f"File not found: {file_path}")
-        return None
-    except json.JSONDecodeError as e:
-        logger.warning(f"Invalid JSON in {file_path}: {e}")
-        return None
-    except Exception as e:
-        logger.error(f"Unexpected error loading {file_path}: {e}")
-        return None
-
-def load_all_experiments() -> List[Dict[str, Any]]:
-    """
-    Load all experiment results from filesystem.
-    
-    Returns:
-        List of experiment data dictionaries
-    """
-    experiments = []
-    
     exp_dirs = discover_experiment_directories()
-    logger.info(f"Found {len(exp_dirs)} experiment directories")
+    logger.info(f"Scanning {len(exp_dirs)} experiment directories")
     
+    count = 0
     for exp_dir in exp_dirs:
         result_files = find_result_files(exp_dir)
         for file_path in result_files:
             data = load_json_file(file_path)
             if data:
                 # Augment with useful metadata if not present
-                # This helps if JSON is missing context
                 if isinstance(data, dict):
                     if "experiment_dir_name" not in data:
                         data["_meta_experiment_dir"] = exp_dir.name
-                    experiments.append(data)
+                    yield data
+                    count += 1
     
-    logger.info(f"Loaded {len(experiments)} experiment result files")
-    return experiments
+    logger.info(f"Finished scanning {count} experiment result files")
 
 def filter_experiments(
-    experiments: List[Dict[str, Any]],
+    experiments: Iterable[Dict[str, Any]],
     **filters
-) -> List[Dict[str, Any]]:
+) -> Iterator[Dict[str, Any]]:
     """
-    Filter experiments by criteria.
+    Filter experiments by criteria using lazy evaluation.
     
     Args:
-        experiments: List of experiment data
+        experiments: Iterable of experiment data
         **filters: Filtering criteria (dataset, method, model_type, model_name)
         
-    Returns:
-        Filtered list of experiments
+    Yields:
+        Filtered experiment data
     """
     if not filters:
-        return experiments
-        
-    filtered = []
+        yield from experiments
+        return
+
     for exp in experiments:
         match = True
         for key, value in filters.items():
@@ -139,8 +61,6 @@ def filter_experiments(
                 continue
                 
             # Mapping filter keys to potential json keys
-            # exp data keys might be snake_case or whatever the file has
-            
             exp_val = None
             
             # Helper to find values case-insensitively or by common keys
@@ -173,22 +93,35 @@ def filter_experiments(
                     break
         
         if match:
-            filtered.append(exp)
-            
-    return filtered
+            yield exp
 
-def load_experiments_with_filters(**filters) -> List[Dict[str, Any]]:
+def iter_experiments_with_filters(**filters) -> Iterator[Dict[str, Any]]:
     """
-    Load and filter experiments in one call.
+    Load and filter experiments lazily.
     
     Args:
         **filters: Same as filter_experiments
         
     Returns:
-        Filtered list of experiment data
+        Iterator of filtered experiment data
     """
-    all_experiments = load_all_experiments()
+    all_experiments = iter_all_experiments()
     return filter_experiments(all_experiments, **filters)
+
+# Legacy support alias (deprecated, use iter_ version)
+def load_experiments_with_filters(**filters) -> List[Dict[str, Any]]:
+    """
+    Legacy list-based loader. 
+    WARNING: May cause OOM with large datasets. Use iter_experiments_with_filters instead.
+    """
+    return list(iter_experiments_with_filters(**filters))
+
+def load_all_experiments() -> List[Dict[str, Any]]:
+    """
+    Legacy list-based loader.
+    WARNING: May cause OOM. Use iter_all_experiments instead.
+    """
+    return list(iter_all_experiments())
 
 
 # Global in-memory index mapping run_id to file_path

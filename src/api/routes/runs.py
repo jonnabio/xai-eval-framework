@@ -100,24 +100,27 @@ async def get_runs(
         if model_name:
             filters["model_name"] = model_name
         
-        # Load experiments with filters
-        experiments = load_experiments_with_filters(**filters)
-        logger.info(f"Found {len(experiments)} experiments matching filters")
+        # Load experiments with filters (using generator)
+        from src.api.services.data_loader import iter_experiments_with_filters
+        experiments_iter = iter_experiments_with_filters(**filters)
+        logger.info(f"Scanning experiments matching filters...")
         
-        # Transform to Run models
+        # Transform to Run models on the fly
         runs: List[Run] = []
         failed_count = 0
+        total_scanned = 0
         
-        for exp_data in experiments:
+        for exp_data in experiments_iter:
+            total_scanned += 1
             try:
                 run = transform_experiment_to_run(exp_data)
                 runs.append(run)
             except Exception as e:
-                logger.warning(f"Failed to transform experiment: {e}")
+                # logger.warning(f"Failed to transform experiment: {e}")
                 failed_count += 1
         
         if failed_count > 0:
-            logger.warning(f"Failed to transform {failed_count} experiments")
+            logger.warning(f"Failed to transform {failed_count} experiments out of {total_scanned}")
         
         # Apply pagination
         paginated_runs, pagination = paginate_list(runs, offset, limit)
