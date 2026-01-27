@@ -152,10 +152,18 @@ async def startup_event():
     ensure_adult_data_dirs()
 
     # Build experiment index for performance
+    # Build experiment index for performance
     try:
-        from src.api.services.data_loader import build_run_id_index
+        from src.api.services.data_loader import build_run_id_index, get_all_run_models
         logger.info("⚡ Building experiment index...")
         build_run_id_index()
+        
+        # Warm up the cache in background
+        import asyncio
+        loop = asyncio.get_event_loop()
+        loop.run_in_executor(None, get_all_run_models, True)
+        logger.info("🔥 Cache warming triggered in background")
+        
     except Exception as e:
         logger.error(f"Failed to build experiment index: {e}")
 

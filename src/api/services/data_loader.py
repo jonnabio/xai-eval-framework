@@ -283,15 +283,43 @@ def get_all_run_models(force_refresh: bool = False) -> List[Run]:
         count = 0
         failed = 0
         
-        # Use generator to load one by one
-        for exp_data in iter_all_experiments():
+        # Determine all file paths first
+        all_files = []
+        exp_dirs = discover_experiment_directories()
+        for exp_dir in exp_dirs:
+            result_files = find_result_files(exp_dir)
+            all_files.extend(result_files)
+            
+        logger.info(f"Found {len(all_files)} experiment result files. Loading in parallel...")
+
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        def process_file(file_path: Path) -> Optional[Run]:
             try:
-                run = transform_experiment_to_run(exp_data)
-                runs.append(run)
-                count += 1
+                data = load_json_file(file_path)
+                if data:
+                    if isinstance(data, dict) and "experiment_dir_name" not in data:
+                         # We need parent dir but thread safe
+                         # Actually load_json_file already returns dict. 
+                         # We can't easily inject exp_dir name here without passing it.
+                         # But transform_experiment_to_run doesn't strict depend on it for basic view.
+                         pass
+                    return transform_experiment_to_run(data)
             except Exception as e:
-                # logger.warning(f"Failed to transform experiment during cache refresh: {e}")
-                failed += 1
+                # logger.warning(f"Failed to process {file_path}: {e}")
+                return None
+            return None
+
+        # Process in parallel
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            future_to_file = {executor.submit(process_file, f): f for f in all_files}
+            for future in as_completed(future_to_file):
+                result = future.result()
+                if result:
+                    runs.append(result)
+                    count += 1
+                else:
+                    failed += 1
                 
         _RUNS_CACHE = runs
         _LAST_CACHE_UPDATE = now
