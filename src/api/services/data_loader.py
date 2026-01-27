@@ -9,6 +9,76 @@ import logging
 from pathlib import Path
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Tuple, Iterator, Iterable
+from datetime import datetime, timedelta
+
+from src.api.config import settings
+from src.api.models.schemas import ExperimentResult, InstanceEvaluation, Run
+from src.api.services.transformer import transform_experiment_to_run, transform_experiment_to_result
+from src.api.utils.pagination import paginate_list
+
+logger = logging.getLogger(__name__)
+
+def get_experiments_dir() -> Path:
+    """Get path to experiments directory."""
+    return settings.EXPERIMENTS_DIR
+
+def discover_experiment_directories() -> List[Path]:
+    """
+    Discover all experiment directories.
+    
+    Returns:
+        List containing the root experiments directory.
+        We return a list to maintain compatibility with the calling signature,
+        but we now treat the experiment root as the base, allowing recursive
+        search for result files across all subdirectories and depth levels.
+    """
+    base_dir = get_experiments_dir()
+    if not base_dir.exists():
+        logger.warning(f"Experiments directory not found: {base_dir}")
+        return []
+        
+    return [base_dir]
+
+def find_result_files(experiment_dir: Path) -> List[Path]:
+    """
+    Recursively find all result JSON files in directory.
+    
+    Args:
+        experiment_dir: Path to directory to search (usually experiments root)
+        
+    Returns:
+        Sorted list of Path objects for JSON files
+    """
+    if not experiment_dir.exists():
+        return []
+
+    json_files = list(experiment_dir.rglob("results.json"))
+    json_files.extend(experiment_dir.rglob("*_metrics.json"))
+    
+    return sorted(json_files, key=lambda p: str(p))
+
+def load_json_file(file_path: Path) -> Optional[Dict[str, Any]]:
+    """
+    Load and parse JSON file.
+    
+    Args:
+        file_path: Path to JSON file
+        
+    Returns:
+        Parsed JSON data or None if error
+    """
+    try:
+        with open(file_path, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        logger.warning(f"File not found: {file_path}")
+        return None
+    except json.JSONDecodeError as e:
+        logger.warning(f"Invalid JSON in {file_path}: {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Unexpected error loading {file_path}: {e}")
+        return None
 
 def iter_all_experiments() -> Iterator[Dict[str, Any]]:
     """
@@ -187,6 +257,47 @@ def get_experiment_result(run_id: str) -> Optional[ExperimentResult]:
             
     return None
 
+
+# Global In-Memory Cache for Run Objects
+# This avoids re-parsing 100+ MB of JSON on every request
+_RUNS_CACHE: List[Run] = []
+_LAST_CACHE_UPDATE: Optional[datetime] = None
+CACHE_TTL_SECONDS = 300  # 5 minutes
+
+def get_all_run_models(force_refresh: bool = False) -> List[Run]:
+    """
+    Get all runs as validated objects, using in-memory cache.
+    Refreshes cache if empty, expired, or forced.
+    """
+    global _RUNS_CACHE, _LAST_CACHE_UPDATE
+    
+    now = datetime.now()
+    is_expired = (
+        _LAST_CACHE_UPDATE is None or 
+        (now - _LAST_CACHE_UPDATE).total_seconds() > CACHE_TTL_SECONDS
+    )
+    
+    if is_expired or force_refresh or not _RUNS_CACHE:
+        logger.info("Refreshing runs cache...")
+        runs = []
+        count = 0
+        failed = 0
+        
+        # Use generator to load one by one
+        for exp_data in iter_all_experiments():
+            try:
+                run = transform_experiment_to_run(exp_data)
+                runs.append(run)
+                count += 1
+            except Exception as e:
+                # logger.warning(f"Failed to transform experiment during cache refresh: {e}")
+                failed += 1
+                
+        _RUNS_CACHE = runs
+        _LAST_CACHE_UPDATE = now
+        logger.info(f"Cache refreshed. Loaded {count} runs ({failed} failed).")
+        
+    return _RUNS_CACHE
 
 def get_instances_paginated(
     run_id: str,

@@ -100,30 +100,32 @@ async def get_runs(
         if model_name:
             filters["model_name"] = model_name
         
-        # Load experiments with filters (using generator)
-        from src.api.services.data_loader import iter_experiments_with_filters
-        experiments_iter = iter_experiments_with_filters(**filters)
-        logger.info(f"Scanning experiments matching filters...")
+        # Load cached runs
+        from src.api.services.data_loader import get_all_run_models
+        all_runs = get_all_run_models()
         
-        # Transform to Run models on the fly
-        runs: List[Run] = []
-        failed_count = 0
-        total_scanned = 0
-        
-        for exp_data in experiments_iter:
-            total_scanned += 1
-            try:
-                run = transform_experiment_to_run(exp_data)
-                runs.append(run)
-            except Exception as e:
-                # logger.warning(f"Failed to transform experiment: {e}")
-                failed_count += 1
-        
-        if failed_count > 0:
-            logger.warning(f"Failed to transform {failed_count} experiments out of {total_scanned}")
+        # Apply filters in memory
+        filtered_runs = []
+        for run in all_runs:
+            # Case-insensitive filtering
+            if dataset and dataset.lower() != run.dataset.value.lower():
+                continue
+            if method and method.lower() != run.method.value.lower():
+                continue
+            if model_type:
+                # Handle enum or string match
+                if model_type.lower() != run.modelType.value.lower():
+                    continue
+            if model_name:
+                if model_name.lower() not in run.modelName.lower():
+                    continue
+            
+            filtered_runs.append(run)
+            
+        logger.info(f"Filtered {len(filtered_runs)} runs from {len(all_runs)} total")
         
         # Apply pagination
-        paginated_runs, pagination = paginate_list(runs, offset, limit)
+        paginated_runs, pagination = paginate_list(filtered_runs, offset, limit)
         
         # Build response
         response = RunsResponse(
