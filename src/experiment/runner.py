@@ -97,9 +97,30 @@ class ExperimentRunner:
             # If path mismatch, user needs to ensure data is there.
             
             # Unpack tuple from load_adult
+            
+            # ATTEMPT TO LOAD PREPROCESSOR
+            preprocessor = None
+            model_dir = self.config.model.path.parent
+            potential_paths = [
+                model_dir / "preprocessor.pkl",
+                model_dir / "preprocessor.joblib"
+            ]
+            for p_path in potential_paths:
+                if p_path.exists():
+                     logger.info(f"Loading existing preprocessor from {p_path}")
+                     try:
+                         preprocessor = joblib.load(p_path)
+                         break
+                     except Exception as e:
+                         logger.warning(f"Failed to load preprocessor {p_path}: {e}")
+
+            if preprocessor is not None:
+                logger.info("Using pre-fitted preprocessor due to existing artifact.")
+
             X_train, X_test, y_train, y_test, feature_names, _ = load_adult(
                 cache_dir=data_dir, 
-                random_state=self.config.random_seed
+                random_state=self.config.random_seed,
+                preprocessor=preprocessor
             )
             
             self.dataset = {

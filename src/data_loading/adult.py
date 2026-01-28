@@ -549,9 +549,9 @@ def _get_feature_names(preprocessor: ColumnTransformer, input_features: List[str
     return output_features
 
 
-@lru_cache(maxsize=1)
+
 def load_adult(test_size: float = 0.2, random_state: int = 42, cache_dir: str = "./data", 
-               preprocessor_path: str = None, verbose: bool = True) -> tuple:
+               preprocessor_path: str = None, verbose: bool = True, preprocessor=None) -> tuple:
     """
     Load, clean, and split the Adult dataset.
     
@@ -561,6 +561,7 @@ def load_adult(test_size: float = 0.2, random_state: int = 42, cache_dir: str = 
         cache_dir: Directory to cache downloaded data.
         preprocessor_path: Path to save/load the preprocessor (not implemented yet).
         verbose: Whether to print logs.
+        preprocessor: Optional, pre-fitted ColumnTransformer to use.
         
     Returns:
         tuple: (X_train, X_test, y_train, y_test) as pandas objects.
@@ -593,11 +594,15 @@ def load_adult(test_size: float = 0.2, random_state: int = 42, cache_dir: str = 
     
     # 5. Preprocessing
     logger.info("Preprocessing data...")
-    preprocessor = _create_preprocessor()
     
-    # Fit on training data
-    logger.info("Fitting preprocessor on training data...")
-    X_train_processed = preprocessor.fit_transform(X_train)
+    if preprocessor is None:
+        preprocessor = _create_preprocessor()
+        # Fit on training data
+        logger.info("Fitting preprocessor on training data...")
+        X_train_processed = preprocessor.fit_transform(X_train)
+    else:
+        logger.info("Using provided preprocessor...")
+        X_train_processed = preprocessor.transform(X_train)
     
     # Transform test data
     logger.info("Transforming test data...")
@@ -607,7 +612,7 @@ def load_adult(test_size: float = 0.2, random_state: int = 42, cache_dir: str = 
     feature_names = _get_feature_names(preprocessor, X.columns.tolist())
     
     # 6. Save preprocessor if requested
-    if preprocessor_path:
+    if preprocessor_path and preprocessor is None: # Only save if we created it
         path = Path(preprocessor_path)
         path.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(preprocessor, path)

@@ -46,6 +46,10 @@ def _run_single_experiment(config_path: Path) -> Dict[str, Any]:
             }
 
         runner = ExperimentRunner(config)
+        # CRITICAL FIX: Force sequential execution within the worker to prevent
+        # nested parallelism explosion (Process Bomb) on MacOS/Spawn.
+        # This ensures 4 batch workers = 4 total processes.
+        runner.max_workers = 1 
         results = runner.run()
         
         return {
