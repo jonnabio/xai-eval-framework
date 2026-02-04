@@ -117,6 +117,8 @@ def main():
         return 1
         
     config_files = list(args.config_dir.glob(args.pattern))
+    # EXPLICIT SKIP of known broken/slow experiments (Anchors, DiCE, SVM SHAP)
+    config_files = [f for f in config_files if "anchors" not in f.name and "dice" not in f.name and "svm_shap" not in f.name and "mlp_shap" not in f.name]
     if not config_files:
         logger.error(f"No config files found in {args.config_dir} matching {args.pattern}")
         return 1
