@@ -1,0 +1,53 @@
+# User Story: EXP1-08 (Recovery)
+# Experiment 1: Adult Dataset - SVM Configuration
+# =========================================================
+
+# -----------------------------------------------------------------------------
+# 1. Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  type: "SVM"
+
+  # Hyperparameters
+  params:
+    # Kernel type
+    # Choice: 'rbf' is standard for non-linear problems.
+    kernel: "rbf"
+
+    # Enable probability estimates.
+    # CRITICAL: Required for XAI methods (LIME/SHAP) that need predict_proba.
+    probability: true
+
+    # Regularization parameter.
+    # Impact: Strength of regularization is inversely proportional to C.
+    C: 1.0
+
+    # Random see for reproducibility.
+    random_state: 42
+
+    # Verbosity
+    verbose: false
+
+# -----------------------------------------------------------------------------
+# 2. Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  test_size: 0.2
+  random_state: 42
+
+# -----------------------------------------------------------------------------
+# 3. Output Configuration
+# -----------------------------------------------------------------------------
+output:
+  models_dir: "experiments/exp1_adult/models"
+  metrics_dir: "experiments/exp1_adult/results/svm"
+
+  model_filename: "svm.joblib"
+  metrics_filename: "svm_metrics.json"
+
+# -----------------------------------------------------------------------------
+# 4. Validation Configuration
+# -----------------------------------------------------------------------------
+validation:
+  min_accuracy: 0.80
+  min_roc_auc: 0.80

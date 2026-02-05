@@ -1,0 +1,47 @@
+# User Story: EXP1-08 (Recovery)
+# Experiment 1: Adult Dataset - Logistic Regression Configuration
+# =========================================================
+
+# -----------------------------------------------------------------------------
+# 1. Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  type: "LogisticRegression"
+  
+  # Hyperparameters
+  params:
+    # Solver
+    solver: 'lbfgs'
+    
+    # Maximum number of iterations
+    max_iter: 1000
+    
+    # Random see for reproducibility.
+    random_state: 42
+    
+    # Verbosity
+    verbose: 0
+
+# -----------------------------------------------------------------------------
+# 2. Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  test_size: 0.2
+  random_state: 42
+
+# -----------------------------------------------------------------------------
+# 3. Output Configuration
+# -----------------------------------------------------------------------------
+output:
+  models_dir: "experiments/exp1_adult/models"
+  metrics_dir: "experiments/exp1_adult/results/logreg"
+  
+  model_filename: "logreg.joblib"
+  metrics_filename: "logreg_metrics.json"
+
+# -----------------------------------------------------------------------------
+# 4. Validation Configuration
+# -----------------------------------------------------------------------------
+validation:
+  min_accuracy: 0.80
+  min_roc_auc: 0.80

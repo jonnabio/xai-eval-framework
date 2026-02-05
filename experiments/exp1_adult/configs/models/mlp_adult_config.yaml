@@ -1,0 +1,53 @@
+# User Story: EXP1-08 (Recovery)
+# Experiment 1: Adult Dataset - MLP Configuration
+# =========================================================
+
+# -----------------------------------------------------------------------------
+# 1. Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  type: "MLP"
+  
+  # Hyperparameters
+  params:
+    # Hidden layer configuration
+    hidden_layer_sizes: [100]
+    
+    # Activation function
+    activation: 'relu'
+    
+    # Solver for weight optimization
+    solver: 'adam'
+    
+    # Maximum number of iterations
+    max_iter: 500
+    
+    # Random see for reproducibility.
+    random_state: 42
+    
+    # Verbosity
+    verbose: false
+
+# -----------------------------------------------------------------------------
+# 2. Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  test_size: 0.2
+  random_state: 42
+
+# -----------------------------------------------------------------------------
+# 3. Output Configuration
+# -----------------------------------------------------------------------------
+output:
+  models_dir: "experiments/exp1_adult/models"
+  metrics_dir: "experiments/exp1_adult/results/mlp"
+  
+  model_filename: "mlp.joblib"
+  metrics_filename: "mlp_metrics.json"
+
+# -----------------------------------------------------------------------------
+# 4. Validation Configuration
+# -----------------------------------------------------------------------------
+validation:
+  min_accuracy: 0.80
+  min_roc_auc: 0.80
