@@ -1,0 +1,27 @@
+name: recovery_phase1_mlp_shap
+version: "2.1"
+dataset: adult
+random_seed: 42
+model:
+  name: adult_mlp
+  path: experiments/exp1_adult/models/mlp.joblib
+  type: mlp
+explainer:
+  method: shap
+  explainer_type: kernel
+  params:
+    n_background_samples: 10 # K-Means Centroids
+    use_kmeans: true
+sampling:
+  strategy: stratified
+  samples_per_class: 10 # Reduced for recovery validation
+  random_seed: 42
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+output_dir: experiments/recovery/phase1_mlp_shap

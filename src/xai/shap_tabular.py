@@ -134,13 +134,20 @@ class SHAPTabularWrapper(ExplainerWrapper):
         self.shap_kwargs = kwargs
 
         # Sample background data
-        self.background_data = sample_background_data(
-            training_data, 
-            n_samples=n_background_samples, 
-            y=training_labels, 
-            stratify=(training_labels is not None),
-            random_state=random_state
-        )
+        self.use_kmeans = kwargs.get('use_kmeans', False)
+        
+        if self.use_kmeans:
+            logger.info(f"Using K-Means summarization with k={n_background_samples}")
+            # shap.kmeans returns a dense data object with weighted centroids
+            self.background_data = shap.kmeans(training_data, n_background_samples)
+        else:
+            self.background_data = sample_background_data(
+                training_data, 
+                n_samples=n_background_samples, 
+                y=training_labels, 
+                stratify=(training_labels is not None),
+                random_state=random_state
+            )
 
         # Initialize Explainer
         if self.model_type == "tree":

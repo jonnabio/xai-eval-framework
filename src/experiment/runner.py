@@ -83,6 +83,11 @@ class ExperimentRunner:
         """
         Load dataset, model, and initialize explainer.
         """
+        # Silence chatty loggers
+        logging.getLogger('shap').setLevel(logging.WARNING)
+        logging.getLogger('matplotlib').setLevel(logging.WARNING)
+        logging.getLogger('numexpr').setLevel(logging.WARNING)
+        
         logger.info("Setting up experiment environment...")
         
         # 1. Load Dataset
@@ -320,8 +325,8 @@ class ExperimentRunner:
         """
         Evaluate a single instance.
         """
-        if (idx + 1) % 10 == 0:
-            logger.info(f"Processing instance {idx+1}/{total}...")
+        # Log progress for every instance
+        logger.info(f"Processing instance {idx+1}/{total}...")
         
         # Prepare Data
         # Metadata cols from sampler output

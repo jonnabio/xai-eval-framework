@@ -13,7 +13,7 @@ try:
     from monitor_experiments import get_experiment_status
     
     # Run status check
-    config_dir = "configs/experiments/exp2_scaled"
+    config_dir = "configs/recovery/phase1"
     print(f"Checking status for config dir: {config_dir}")
     stats, results = get_experiment_status(config_dir)
     

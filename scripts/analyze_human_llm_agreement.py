@@ -31,16 +31,33 @@ logger = logging.getLogger(__name__)
 
 def load_annotations_with_llm(annotations_dir: Path) -> pd.DataFrame:
     """
-    Load all annotations and merge with LLM scores.
-
-    Returns DataFrame with columns:
-    - sample_id, annotator_id
-    - human_coherence, human_faithfulness, human_usefulness
-    - llm_coherence, llm_faithfulness, llm_usefulness
+    Load all annotations and merge with LLM scores from samples.json.
     """
-    # TODO: Implement after Phase 1 backend is deployed
-    # Will use: GET /api/human-eval/admin/annotations
-    pass
+    from src.api.services import human_eval_service as service
+    
+    # Use the service to get merged data
+    data = service.get_all_annotations_with_llm_scores()
+    
+    if not data:
+        return pd.DataFrame()
+        
+    rows = []
+    for item in data:
+        llm = item.get('llm_scores', {})
+        ratings = item.get('ratings', {})
+        
+        rows.append({
+            'sample_id': item.get('sample_id'),
+            'annotator_id': item.get('annotator_id'),
+            'human_coherence': ratings.get('coherence'),
+            'human_faithfulness': ratings.get('faithfulness'),
+            'human_usefulness': ratings.get('usefulness'),
+            'llm_coherence': llm.get('coherence'),
+            'llm_faithfulness': llm.get('faithfulness'),
+            'llm_usefulness': llm.get('usefulness')
+        })
+        
+    return pd.DataFrame(rows)
 
 def compute_cohens_kappa(df: pd.DataFrame, dimension: str) -> float:
     """Compute Cohen's kappa for a dimension."""

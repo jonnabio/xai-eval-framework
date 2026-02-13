@@ -10,6 +10,7 @@ from src.xai.shap_tabular import (
     sample_background_data,
     validate_shap_additivity
 )
+import shap
 
 # --- Fixtures ---
 
@@ -132,3 +133,36 @@ class TestSHAPTabularWrapper:
         )
         
         assert result["feature_importance"].shape == (2, len(features))
+
+    def test_kmeans_initialization(self, sample_data, trained_tree_model):
+        """Test wrapper initializes with K-Means summarization when requested."""
+        X, _, features = sample_data
+        
+        # Test with KernelExplainer (usually where K-Means is used)
+        if not hasattr(trained_tree_model, 'predict_proba'):
+             pytest.skip("Model needs predict_proba for KernelExplainer test")
+
+        n_centroids = 5
+        wrapper = SHAPTabularWrapper(
+            model=trained_tree_model,
+            training_data=X,
+            feature_names=features,
+            model_type="kernel",
+            n_background_samples=n_centroids,
+            use_kmeans=True
+        )
+        
+        assert wrapper.use_kmeans is True
+        # shap.kmeans returns a custom object (usually DenseData)
+        # We verify it has a .data attribute and correct shape
+        assert not isinstance(wrapper.background_data, np.ndarray)
+        assert hasattr(wrapper.background_data, 'data')
+        assert wrapper.background_data.data.shape[0] == n_centroids
+        
+        # Verify it runs
+        try:
+            instance = X[0]
+            imp_vector = wrapper.explain_instance(trained_tree_model, instance)
+            assert imp_vector.shape == (len(features),)
+        except Exception as e:
+            pytest.fail(f"Explainer failed with K-Means data: {e}")

@@ -34,6 +34,10 @@ def setup_logging(verbose: bool = False) -> None:
             logging.FileHandler(log_dir / 'batch_runner.log', mode='a')
         ]
     )
+    # Silence chatty loggers
+    logging.getLogger('shap').setLevel(logging.WARNING)
+    logging.getLogger('matplotlib').setLevel(logging.WARNING)
+    logging.getLogger('numexpr').setLevel(logging.WARNING)
 
 def check_git_status(require_clean: bool = True) -> str:
     """Check if git repo is clean."""
@@ -117,8 +121,6 @@ def main():
         return 1
         
     config_files = list(args.config_dir.glob(args.pattern))
-    # EXPLICIT SKIP of known broken/slow experiments (Anchors, DiCE, SVM SHAP)
-    config_files = [f for f in config_files if "anchors" not in f.name and "dice" not in f.name and "svm_shap" not in f.name and "mlp_shap" not in f.name]
     if not config_files:
         logger.error(f"No config files found in {args.config_dir} matching {args.pattern}")
         return 1
@@ -148,7 +150,7 @@ def main():
         failed = total - passed - skipped
         
         print("\n" + "="*80)
-        print(f"BATCH COMPLETE")
+        print("BATCH COMPLETE")
         print(f"Total: {total} | Passed: {passed} | Skipped: {skipped} | Failed: {failed}")
         print(f"Results: {args.output}")
         print("="*80 + "\n")
