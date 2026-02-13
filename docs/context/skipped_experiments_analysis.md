@@ -33,7 +33,7 @@ The failures fall into three distinct categories:
 ---
 
 ## 3. Remediation Strategy
-We will adopt a phased approach to recover these results. The priority is **Step 2 (Optimization)** to unblock the `SHAP` comparisons.
+We will adopt a phased approach to recover these results. The priority is **Step 2 (Optimization)** to unblock the `SHAP` comparisons. 
 
 ### Phase 1: SHAP Optimization (Kernel Explainer)
 *   **Objective:** Recover `MLP` and `SVM` SHAP results.
