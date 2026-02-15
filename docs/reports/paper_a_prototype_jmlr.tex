@@ -1,0 +1,266 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{A Framework for Rigorous Evaluation of Model-Agnostic Explainability Methods:\\
+Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility}
+
+\author{Paper A Draft}
+\date{February 13, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3\% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use. LLM-based semantic scoring is deferred to a dedicated follow-up study.
+\end{abstract}
+
+\section{Introduction}
+XAI evaluation remains fragmented across incompatible metrics and ad hoc setups. Most comparisons over-index on fidelity and omit stability, sparsity, and semantic interpretability. This work operationalizes a benchmark-first approach:
+\begin{enumerate}[leftmargin=*]
+    \item A generic trainer/explainer architecture for model-agnostic evaluation.
+    \item A prescriptive operation method that defines how the framework is run, audited, and reported.
+    \item Multi-metric quantitative scoring with explicit trade-off analysis.
+    \item Reproducibility and statistical rigor suitable for benchmark publication.
+\end{enumerate}
+
+\section{Related Work and Framework Design}
+
+\subsection{Literature-Grounded Design Rationale (Paper A Scope)}
+The literature motivating this design supports five requirements:
+\begin{enumerate}[leftmargin=*]
+    \item Multi-metric evaluation is necessary.
+    \item Faithfulness is multi-faceted.
+    \item Computational tractability must be reported explicitly.
+    \item Benchmark transparency and artifact accounting are first-order requirements.
+    \item LLM-judge scoring should be treated as a separate calibrated track.
+\end{enumerate}
+
+\subsection{Architecture}
+The framework decouples model training, explanation generation, and evaluation through a registry/factory design. Current model coverage includes \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, and \texttt{mlp}, with \texttt{lime}, \texttt{shap}, \texttt{anchors}, and \texttt{dice} explainers.
+
+\subsection{Metric Suite (Primary)}
+Primary quantitative metrics are:
+\begin{itemize}[leftmargin=*]
+    \item Fidelity
+    \item Stability
+    \item Sparsity
+    \item Cost
+    \item Faithfulness gap
+\end{itemize}
+
+\subsection{Paper A Operational Outcome: Framework Operation Method (FOM-7)}
+Paper A contributes not only benchmark findings, but also a reusable operating method for end-to-end benchmark execution, auditing, and claim formation.
+
+\section{Methodology}
+
+\subsection{Experimental Cohorts and Scope (EXP1 vs EXP2)}
+We separate evidence into four cohorts:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{EXP1 pilot/calibration} (\texttt{experiments/exp1\_adult/results})
+    \item \textbf{EXP1 reproducibility cohort} (\texttt{experiments/exp1\_adult/reproducibility})
+    \item \textbf{EXP2 comparative cohort} (\texttt{experiments/exp2\_comparative/results})
+    \item \textbf{EXP2 robustness cohort} (\texttt{experiments/exp2\_scaled/results})
+\end{itemize}
+Paper A inferential claims are driven by EXP2; EXP1 is retained for calibration and reproducibility reporting.
+
+\subsection{Research Questions and Hypotheses}
+\textbf{RQ1}: Do explanation methods differ significantly across complementary technical metrics?\\
+\textbf{RQ2}: Are metric trade-offs stable across model families and sample sizes?
+
+For each metric $m \in \{$fidelity, stability, sparsity, faithfulness gap, cost$\}$:
+\begin{align}
+H_{0,m}&:\text{ all methods have equal median rank across blocks},\\
+H_{1,m}&:\text{ at least one method differs.}
+\end{align}
+
+\subsection{Dataset, Preprocessing, and Leakage Controls}
+The benchmark uses UCI Adult via \texttt{src/data\_loading/adult.py} with:
+\begin{itemize}[leftmargin=*]
+    \item Stratified train/test split (\texttt{test\_size=0.2}, \texttt{stratify=y})
+    \item Seed-controlled deterministic splitting
+    \item Numerical pipeline: \texttt{StandardScaler}
+    \item Categorical pipeline: \texttt{OneHotEncoder(handle\_unknown='ignore', sparse\_output=False)}
+    \item Preprocessor fit only on training split
+\end{itemize}
+
+\subsection{Experimental Design and Analysis Units}
+\subsubsection{Factorial Grid}
+\begin{itemize}[leftmargin=*]
+    \item Models: \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, \texttt{mlp}
+    \item Explainers: \texttt{lime}, \texttt{shap}, \texttt{anchors}, \texttt{dice}
+    \item Sample sizes: $N \in \{50,100,200\}$
+    \item Seeds: $\{42,123,456,789,999\}$
+    \item Planned grid: $5 \times 4 \times 5 \times 3 = 300$ runs
+\end{itemize}
+
+\subsubsection{Units for Inference}
+\begin{itemize}[leftmargin=*]
+    \item Primary unit: run-level metric mean
+    \item Block for Friedman: $(\text{model}, N)$
+    \item Paired unit for SHAP vs LIME: matched $(\text{model},\text{seed},N)$
+\end{itemize}
+
+\subsection{Explainer and Metric Operationalization}
+Metrics are computed in \texttt{MetricsEngine} and stored per instance.
+\begin{align}
+\Delta_k &= \left|f(x)-f\left(x_{\text{mask-top-}k}\right)\right|,\\
+\rho &= \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right),\\
+S &= \frac{2}{T(T-1)}\sum_{a<b}\cos(e^{(a)},e^{(b)}).
+\end{align}
+Current implementation maps \texttt{fidelity} to $\rho$ and reports \texttt{faithfulness\_gap} as $\Delta_k$.
+
+\subsection{Artifact Integrity and Coverage Protocol}
+Current repository inventory:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{experiments/exp1\_adult/results}: 29 files (4 core, 24 tuning, 1 diagnostic)
+    \item \texttt{experiments/exp1\_adult/reproducibility}: 36 core repeated runs (+1 excluded test run)
+    \item \texttt{experiments/exp2\_comparative/results}: 20 files (complete $5\times4$ matrix)
+    \item \texttt{experiments/exp2\_scaled/results}: 250 files (of 300 planned)
+    \item One malformed JSON: \texttt{experiments/exp2\_scaled/results/svm\_shap/seed\_999/n\_200/results.json}
+\end{itemize}
+
+\subsection{Statistical Analysis Pipeline}
+\begin{itemize}[leftmargin=*]
+    \item Global method comparison: Friedman test over $(\text{model},N)$ blocks
+    \item Post-hoc localization: Nemenyi test
+    \item Focused pairwise contrasts: Wilcoxon signed-rank for SHAP vs LIME
+    \item Uncertainty reporting: mean, standard deviation, CV, and confidence intervals
+\end{itemize}
+
+\subsection{Reproducibility Protocol}
+Reproducibility is controlled via fixed seeds, declared configs, structured artifacts, and repeated-run CV reporting.
+
+\subsection{Validity Threats and Mitigations}
+\begin{enumerate}[leftmargin=*]
+    \item Incomplete factorial coverage
+    \item Runtime heterogeneity across explainers
+    \item Metric-definition ambiguity
+\end{enumerate}
+
+\subsection{Framework Operation Method (FOM-7): Executable Protocol}
+\begin{algorithm}[t]
+\caption{FOM-7: Framework Operation Method}
+\label{alg:fom7}
+\begin{algorithmic}[1]
+\Require Protocol configuration set $\mathcal{C}$, metric set $\mathcal{M}$, reproducibility seed policy $\mathcal{S}$
+\Ensure Claim-ready benchmark report $\mathcal{R}$ with caveat ledger
+\State \textbf{Stage S1:} Freeze protocol design and enumerate planned run grid from $\mathcal{C}$
+\State \textbf{Gate G1:} Planned run count and all factors are explicit
+\State \textbf{Stage S2:} Execute batch runs and persist per-run artifacts and execution manifest
+\State \textbf{Gate G2:} Every planned run has terminal state (\texttt{success}/\texttt{failed}/\texttt{skipped})
+\State \textbf{Stage S3:} Run integrity audit for missing and malformed artifacts
+\State \textbf{Gate G3:} Missing/malformed inventory is explicit and versioned
+\State \textbf{Stage S4:} Harmonize outputs and aggregate analysis-ready metric tables
+\State \textbf{Gate G4:} All retained runs contain required metrics in $\mathcal{M}$
+\State \textbf{Stage S5:} Run inferential pipeline (Friedman, Nemenyi, Wilcoxon as applicable)
+\State \textbf{Gate G5:} Inferential outputs are complete for all primary metrics
+\State \textbf{Stage S6:} Compute reproducibility statistics on repeated runs
+\State \textbf{Gate G6:} Dispersion/CV are reported for each core metric
+\State \textbf{Stage S7:} Build claim-ready report with traceability links to artifacts and caveat ledger
+\State \textbf{Gate G7:} Every quantitative claim maps to a versioned artifact
+\State \Return $\mathcal{R}$
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Reference implementation command sequence.}
+\begin{enumerate}[leftmargin=*]
+    \item \texttt{python3 scripts/run\_batch\_experiments.py --config-dir configs/experiments/exp2\_scaled --output outputs/batch\_results.csv --parallel}
+    \item \texttt{python3 scripts/check\_missing\_results.py}
+    \item \texttt{python3 scripts/quick\_summary.py}
+    \item \texttt{python3 scripts/full\_summary.py}
+    \item \texttt{python3 scripts/run\_reproducibility\_study.py --config-dir configs/experiments --pattern "exp1\_adult\_*.yaml" --output-dir experiments/exp1\_adult/reproducibility}
+\end{enumerate}
+
+\section{Results}
+
+\subsection{Global Trade-offs (EXP2 robustness; 15 complete model-size blocks)}
+\begin{table}[h]
+\centering
+\caption{Method-level means over complete model-size blocks.}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
+\midrule
+SHAP    & 0.8176 & 0.7377 & 0.2264 & 0.4474 & 685220.23 \\
+LIME    & 0.5602 & 0.0144 & 0.0846 & 0.3342 & 3660.68 \\
+Anchors & 0.3853 & 0.0006 & 0.0928 & 0.2382 & 25326.92 \\
+DiCE    & 0.1716 & 0.3602 & 0.0164 & 0.0988 & 16306.50 \\
+\bottomrule
+\end{tabular}
+\label{tab:global-tradeoffs}
+\end{table}
+
+\subsection{Statistical Significance}
+\begin{table}[h]
+\centering
+\caption{Friedman tests across methods.}
+\begin{tabular}{lrrl}
+\toprule
+Metric & Statistic & p-value & Significant \\
+\midrule
+Fidelity         & 42.12 & 3.78e-09 & Yes \\
+Stability        & 43.88 & 1.60e-09 & Yes \\
+Sparsity         & 35.64 & 8.92e-08 & Yes \\
+Faithfulness Gap & 45.00 & 9.25e-10 & Yes \\
+Cost             & 27.72 & 4.16e-06 & Yes \\
+\bottomrule
+\end{tabular}
+\label{tab:friedman}
+\end{table}
+
+\subsection{Focused SHAP vs LIME Comparison}
+\begin{table}[h]
+\centering
+\caption{Paired Wilcoxon comparison on 45 matched configurations (\texttt{logreg/rf/xgb}).}
+\begin{tabular}{lrrr}
+\toprule
+Metric & SHAP Mean & LIME Mean & Wilcoxon p-value \\
+\midrule
+Fidelity         & 0.8112 & 0.5556 & 5.68e-14 \\
+Stability        & 0.8013 & 0.0154 & 5.68e-14 \\
+Sparsity         & 0.3156 & 0.0845 & 5.68e-14 \\
+Faithfulness Gap & 0.3924 & 0.3408 & 5.68e-14 \\
+Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 \\
+\bottomrule
+\end{tabular}
+\label{tab:shap-lime}
+\end{table}
+
+\subsection{Reproducibility Snapshot (EXP1 repeated runs)}
+Fidelity CV $\leq 0.0634$, stability CV $\leq 0.0826$, sparsity CV $\leq 0.0441$, and faithfulness-gap CV $\leq 0.0358$ across baseline configurations. Cost CV reaches 0.225 for SHAP variants.
+
+\section{Validity and Reporting Caveats}
+\begin{enumerate}[leftmargin=*]
+    \item EXP2 robustness is incomplete (50 missing runs) with one malformed result file.
+    \item Runtime comparisons are sensitive to implementation details and hardware.
+    \item Semantic evaluation is out of scope for Paper A.
+\end{enumerate}
+
+\section{JMLR Track Positioning}
+\begin{enumerate}[leftmargin=*]
+    \item Reproducible benchmark framework with artifact lineage and failure accounting.
+    \item Multi-metric protocol with non-parametric inferential testing.
+    \item Reusable operation method (FOM-7) for benchmark execution and audit standardization.
+    \item Clearly scoped quantitative benchmark; semantic track deferred.
+\end{enumerate}
+
+\section{Conclusion}
+The evidence supports a clear trade-off frontier: SHAP leads fidelity/stability, LIME leads runtime practicality, and DiCE leads sparsity. In addition to empirical findings, Paper A contributes FOM-7 as a concrete operating protocol for running, auditing, and reporting XAI benchmark studies.
+
+% Replace with your bibliography when integrating into the final paper package.
+% \bibliographystyle{plain}
+% \bibliography{references}
+
+\end{document}
+
