@@ -1,31 +1,39 @@
-\documentclass{article}
+\documentclass[twoside,11pt]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{amsmath, amssymb}
+\usepackage{jmlr2e}
+\usepackage{amsmath}
 \usepackage{microtype}
-\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{array}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
 \usepackage{enumitem}
-\usepackage{hyperref}
+\usepackage{lastpage}
+
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 2/2026}{Under Review}{PAPER-A-0001}{Carlos Jonnabio}
+\ShortHeadings{XAI Benchmarking Framework and Operation Protocol}{XAI Benchmarking Framework}
+\firstpageno{1}
+
+\begin{document}
 
 \title{A Framework for Rigorous Evaluation of Model-Agnostic Explainability Methods:\\
 Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility}
 
-\author{Paper A Draft}
-\date{February 13, 2026}
+\author{
+\name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
+\addr UNADE
+}
 
-\begin{document}
+\editor{TBD}
+
 \maketitle
 
 \begin{abstract}
 Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3\% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use. LLM-based semantic scoring is deferred to a dedicated follow-up study.
 \end{abstract}
+
+\begin{keywords}
+Explainable AI, benchmark methodology, reproducibility, statistical evaluation, model-agnostic explanations
+\end{keywords}
 
 \section{Introduction}
 XAI evaluation remains fragmented across incompatible metrics and ad hoc setups. Most comparisons over-index on fidelity and omit stability, sparsity, and semantic interpretability. This work operationalizes a benchmark-first approach:
@@ -67,6 +75,8 @@ Paper A contributes not only benchmark findings, but also a reusable operating m
 \section{Methodology}
 
 \subsection{Experimental Cohorts and Scope}
+We intentionally organize evidence into staged cohorts so that development, reliability qualification, and confirmatory inference are not conflated. This design reduces circularity (tuning and claiming on the same artifacts) and makes the evidence path for each claim auditable.
+
 We separate evidence into four cohorts:
 \begin{itemize}[leftmargin=*]
     \item \textbf{EXP1 pilot/calibration} (\texttt{exp1\_adult/results})
@@ -74,66 +84,616 @@ We separate evidence into four cohorts:
     \item \textbf{EXP2 comparative} (\texttt{exp2\_comparative/results})
     \item \textbf{EXP2 robustness cohort} (\texttt{exp2\_scaled/results})
 \end{itemize}
-Paper A inferential claims are driven by EXP2; EXP1 is retained for calibration and reproducibility reporting.
+
+\begin{table}[t]
+\centering
+\caption{Role of each evidence cohort in Paper A.}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Cohort} & \textbf{Primary objective} & \textbf{Role in manuscript claims} \\
+\midrule
+EXP1 pilot/calibration & Verify metric behavior and tune explainer/evaluation settings before large-scale execution. & Used for implementation sanity and calibration only; not used for primary significance claims. \\
+EXP1 reproducibility & Measure run-to-run variance under repeated seeds on core configurations. & Used for reproducibility evidence (CV and dispersion profiles). \\
+EXP2 comparative & Provide complete method/model breadth under fixed-seed constraints. & Used as balanced comparative layer and coverage check. \\
+EXP2 robustness & Provide multi-seed and multi-sample-size evidence for inferential testing under controlled heterogeneity. & Primary inferential cohort for Friedman/Nemenyi/Wilcoxon analyses and cross-method conclusions. \\
+\bottomrule
+\end{tabularx}
+\label{tab:cohorts}
+\end{table}
+
+This EXP1/EXP2 separation is methodologically necessary for four reasons: (i) it preserves tuning-evaluation separation, (ii) it isolates implementation validity from comparative validity, (iii) it keeps artifact failures explicit instead of hidden in pooled aggregates, and (iv) it constrains claims to cohorts that are fit for each claim type.
+
+Operationally, the structure is analogous to train/dev/test discipline, adapted to XAI system evaluation: EXP1 functions as development and reliability qualification, while EXP2 functions as comparative and inferential qualification.
+
+Accordingly, Paper A inferential claims are driven by EXP2, while EXP1 is retained for calibration and reproducibility reporting.
 
 \subsection{Research Questions and Hypotheses}
-\textbf{RQ1}: Do explanation methods differ significantly across complementary technical metrics?\\
-\textbf{RQ2}: Are metric trade-offs stable across model families and sample sizes?
+This section specifies the inferential targets and separates confirmatory
+discrimination questions from robustness/stability questions.
 
-For each metric $m \in \{$fidelity, stability, sparsity, faithfulness gap, cost$\}$:
+Let $\mathcal{K}$ denote explanation methods, let $\mathcal{B}$ denote
+evaluation blocks with $b=(\text{model},N)$, and let $y_{k,b,m}$ denote the
+run-level aggregated score for method $k$ in block $b$ on metric $m$.
+We evaluate
+$m \in \{\text{fidelity}, \text{stability}, \text{sparsity},
+\text{faithfulness gap}, \text{cost}\}$.
+These metrics represent distinct quality dimensions; therefore,
+single-metric dominance is not interpreted as global superiority.
+
+\paragraph{RQ1 (method separation).}
+Do explanation methods differ significantly on each metric when compared over
+repeated blocks?
+For each metric $m$:
 \begin{align}
-H_{0,m}&:\text{ all methods have equal median rank across blocks},\\
-H_{1,m}&:\text{ at least one method differs.}
+H_{0,m}^{(1)} &: \text{all methods have equal median rank across blocks},\\
+H_{1,m}^{(1)} &: \text{at least one method differs in median rank.}
 \end{align}
+Rejection of $H_{0,m}^{(1)}$ indicates that the benchmark discriminates methods
+on metric $m$ under observed variance and coverage.
+
+\paragraph{RQ2 (trade-off stability).}
+Are method trade-offs stable across model families and sample sizes, or
+context-dependent?
+We formalize this through two complementary hypotheses:
+\begin{align}
+H_{0,m}^{(2a)} &: \text{method ordering for metric } m \text{ is stable across blocks},\\
+H_{1,m}^{(2a)} &: \text{method ordering for metric } m \text{ shifts across blocks},\\
+H_{0,m}^{(2b)} &: \text{pairwise method differences on } m \text{ do not vary systematically}\\
+              &\quad \text{with model family or sample size},\\
+H_{1,m}^{(2b)} &: \text{pairwise method differences on } m \text{ vary systematically}\\
+              &\quad \text{with model family and/or sample size.}
+\end{align}
+
+RQ2 is interpreted as a portability question: we treat context-dependent rank
+reversals or large cross-stratum effect shifts as evidence that trade-off
+guidance is not stable.
+
+Methodological scoping in this manuscript is explicit: RQ1 is the primary
+confirmatory layer; RQ2 is the robustness layer connecting inferential outcomes
+to external validity and deployment relevance.
 
 \subsection{Dataset, Preprocessing, and Leakage Controls}
-The benchmark uses UCI Adult via \path{src/data_loading/adult.py} with:
+The Adult Income benchmark is loaded through a dedicated pipeline
+(\path{src/data_loading/adult.py}) with explicit source fallback,
+schema control, and transformation traceability.
+
+\paragraph{Data provenance and schema control.}
+The loader uses OpenML Adult v2 (\texttt{data\_id=1590}) as primary source.
+If unavailable, it falls back to direct UCI files
+(\texttt{adult.data}, \texttt{adult.test}).
+Cached artifacts are checksum-validated and stored with source and schema
+metadata (shape, columns, timestamp, and package versions).
+The enforced schema has 15 columns: one binary target (\texttt{income}),
+6 numeric predictors, and 8 categorical predictors.
+
+\begin{table}[t]
+\centering
+\caption{Adult dataset feature groups used in preprocessing.}
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Group} & \textbf{Variables} \\
+\midrule
+Numeric (6) & \texttt{age, fnlwgt, education-num, capital-gain, capital-loss, hours-per-week} \\
+Categorical (8) & \texttt{workclass, education, marital-status, occupation, relationship, race, sex, native-country} \\
+Target & \texttt{income} mapped to \{0,1\} \\
+\bottomrule
+\end{tabularx}
+\label{tab:adult-schema}
+\end{table}
+
+Cleaning includes whitespace normalization, conversion of ``?'' markers to
+\texttt{NaN}, target canonicalization
+(\texttt{<=50K}/\texttt{<=50K.}$\rightarrow 0$,
+\texttt{>50K}/\texttt{>50K.}$\rightarrow 1$), duplicate removal, and numeric
+type coercion. In the current artifact state, the cleaned corpus contains
+48{,}790 instances.
+
+\paragraph{Split discipline and deterministic execution.}
+Data are split using a stratified holdout protocol:
+\texttt{train\_test\_split(test\_size=0.2, stratify=y, random\_state=seed)}.
+This preserves class prevalence across partitions while enabling exact
+reproducibility for each seed and controlled seed variation across cohorts.
+
+\paragraph{Preprocessing design.}
+Transformations are implemented with a \texttt{ColumnTransformer}:
 \begin{itemize}[leftmargin=*]
-    \item Stratified train/test split (\texttt{test\_size=0.2}, \texttt{stratify=y})
-    \item Seed-controlled deterministic splitting
-    \item Numerical pipeline: \texttt{StandardScaler}
-    \item Categorical pipeline: \texttt{OneHotEncoder} with \texttt{handle\_unknown='ignore'} and \texttt{sparse\_output=False}
-    \item Preprocessor fit only on training split
+    \item Numeric branch: \texttt{StandardScaler} on six numeric variables.
+    \item Categorical branch: \texttt{OneHotEncoder} on eight categorical variables.
+    \item Encoder settings: \texttt{handle\_unknown='ignore'} and \texttt{sparse\_output=False}.
 \end{itemize}
+The encoder is fitted on training data only. Unseen categories in test
+instances are safely ignored, preventing transform-time failures. In the
+current training vocabulary, one-hot expansion yields 102 categorical columns;
+with 6 scaled numeric columns, the processed design matrix has 108 features.
+
+\paragraph{Leakage controls and feature-space alignment.}
+Leakage prevention is enforced by fitting transformations on training data only
+and reusing the fitted transformer for test and explanation pipelines.
+Feature names are extracted from the fitted transformer and propagated to
+explainers and metric engines to avoid attribution-index mismatch. In
+\texttt{ExperimentRunner}, when a persisted preprocessor artifact exists
+(\texttt{preprocessor.pkl} or \texttt{preprocessor.joblib}), it is loaded and
+reused so that explanation-time transformations exactly match model-training
+transformations.
+
+\paragraph{Construct caveat.}
+Adult is suitable for tabular XAI benchmarking, but contains socio-demographic
+attributes and proxies (e.g., \texttt{sex}, \texttt{race},
+\texttt{native-country}). The protocol here addresses preprocessing and leakage
+rigor; it does not remove fairness-related construct limitations of the data.
 
 \subsection{Experimental Design and Analysis Units}
-\subsubsection{Factorial Grid}
-\begin{itemize}[leftmargin=*]
-    \item Models: \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, \texttt{mlp}
-    \item Explainers: \texttt{lime}, \texttt{shap}, \texttt{anchors}, \texttt{dice}
-    \item Sample sizes: $N \in \{50,100,200\}$
-    \item Seeds: $\{42,123,456,789,999\}$
-    \item Planned grid: $5 \times 4 \times 5 \times 3 = 300$ runs
-\end{itemize}
+\subsubsection{Design Type and Inferential Target}
+The EXP2 comparative study is a crossed, repeated-seed factorial design with
+model family $g \in \mathcal{G}$, explainer $k \in \mathcal{K}$, seed
+$s \in \mathcal{S}$, and sampling intensity $n \in \mathcal{N}$, where
+\[
+\mathcal{G}=\{\texttt{logreg},\texttt{rf},\texttt{xgb},\texttt{svm},\texttt{mlp}\},
+\]
+\[
+\mathcal{K}=\{\texttt{lime},\texttt{shap},\texttt{anchors},\texttt{dice}\},
+\]
+\[
+\mathcal{S}=\{42,123,456,789,999\}, \qquad
+\mathcal{N}=\{50,100,200\}.
+\]
+Each executed configuration yields a run-level value $y_{g,k,s,n,m}$ for metric
+$m$. Because seed coverage is partially unbalanced in realized artifacts,
+confirmatory inference is defined on block-level summaries over
+$b=(g,n)$:
+\[
+\bar{y}_{k,b,m}=\frac{1}{|S_{k,b}|}\sum_{s \in S_{k,b}} y_{g,k,s,n,m},
+\]
+where $S_{k,b}\subseteq\mathcal{S}$ denotes analyzable seeds for method $k$ in
+block $b$. This prevents methods with more successful seed executions from
+receiving disproportionate influence in omnibus tests.
 
-\subsubsection{Units for Inference}
-\begin{itemize}[leftmargin=*]
-    \item Primary unit: run-level metric mean
-    \item Block for Friedman: $(\text{model}, N)$
-    \item Paired unit for SHAP vs LIME: matched $(\text{model},\text{seed},N)$
-\end{itemize}
+\subsubsection{Planned Matrix and Realized Coverage}
+The planned robustness matrix contains
+\[
+|\mathcal{G}|\times|\mathcal{K}|\times|\mathcal{S}|\times|\mathcal{N}|
+=5\times4\times5\times3=300
+\]
+run configurations (see
+\path{configs/experiments/exp2_scaled/manifest.yaml}). In the current artifact
+snapshot, 250 files are present in
+\path{experiments/exp2_scaled/results}, of which 233 are analyzable,
+16 are empty, and 1 is malformed JSON.
 
-\subsection{Explainer and Metric Operationalization}
-Metrics are computed in \texttt{MetricsEngine} and stored per instance.
+For global method comparisons, we retain only block-complete model-size
+contexts with at least one analyzable run per method. This yields $15/15$
+complete blocks ($5$ models $\times$ $3$ sample sizes). Within those blocks,
+seed availability is heterogeneous:
+\begin{itemize}[leftmargin=*]
+    \item SHAP: 2--5 seeds per block (mean $\approx 4.33$)
+    \item LIME: 5 seeds per block (mean $=5.00$)
+    \item Anchors: 1--5 seeds per block (mean $\approx 2.87$)
+    \item DiCE: 2--5 seeds per block (mean $\approx 3.33$)
+\end{itemize}
+No imputation is applied for missing runs.
+
+\subsubsection{Within-Run Sampling Protocol}
+Each run uses stratified error-quadrant sampling
+(\path{src/evaluation/sampler.py}) over $\{\mathrm{TP},\mathrm{TN},\mathrm{FP},\mathrm{FN}\}$.
+The configuration parameter \texttt{samples\_per\_class} is interpreted as
+target samples per quadrant, so nominal run size is $4N$.
+
+Realized run size is lower when (i) one or more quadrants has fewer than $N$
+available test instances for a given model/seed or (ii) sampled instances fail
+during explainer evaluation and are dropped. Across analyzable EXP2 runs,
+realized run size ranges from 27 to 800 instances (median 400). Across all
+retained instance evaluations (103,577 total), quadrant composition remains
+near-balanced: TP 26,523 (25.6\%), TN 26,050 (25.2\%), FP 25,200 (24.3\%), and
+FN 25,804 (24.9\%).
+
+\subsubsection{Analysis Units and Anti-Pseudoreplication Strategy}
+The design separates instance-level logging from inferential units:
+\begin{enumerate}[leftmargin=*]
+    \item Instance level: raw per-case metric outputs.
+    \item Run level: per-configuration aggregate $y_{g,k,s,n,m}$.
+    \item Block level: per-method summaries $\bar{y}_{k,b,m}$ for $b=(g,n)$.
+    \item Matched-pair level: SHAP--LIME contrasts on shared $(g,s,n)$ cells.
+\end{enumerate}
+
+Global Friedman/Nemenyi tests are run on a $15\times4$ block-method matrix
+(15 model-size blocks, 4 methods), avoiding pseudo-replication from
+instance-level values and preventing seed replicates from being treated as
+independent blocks. For SHAP--LIME contrasts, matched analyzable sets are:
+\[
+\left|\mathcal{P}_{\text{all models}}\right|=65,\qquad
+\left|\mathcal{P}_{\texttt{logreg/rf/xgb}}\right|=45.
+\]
+
+\subsubsection{Retention and Exclusion Rules}
+Inferential datasets are constructed under fixed artifact-qualification rules:
+\begin{enumerate}[leftmargin=*]
+    \item Parseable JSON artifact required (malformed files excluded).
+    \item Non-empty \texttt{instance\_evaluations} required for run-level analysis.
+    \item No synthetic completion of missing runs or seeds.
+    \item Omnibus tests restricted to block-complete contexts.
+    \item Paired tests restricted to explicitly matched SHAP--LIME cells.
+\end{enumerate}
+This makes the distinction explicit between design intent (300-run full
+factorial) and inferential realization (artifact-qualified subsets).
+
+\subsection{Experimental Design Protocol (Replication Specification)}
+This subsection specifies the executable protocol used for Paper A. The goal is
+to make the EXP2 pipeline reproducible without undocumented assumptions.
+
+\subsubsection{Purpose and Hypotheses Linkage}
+The protocol instantiates Section~3.2 questions in operational form:
+\begin{enumerate}[leftmargin=*]
+    \item RQ1: method separation across primary quantitative metrics.
+    \item RQ2: stability of method trade-offs across model family and sampling intensity.
+\end{enumerate}
+Reliability and faithfulness are evaluated as properties of the full
+$(\text{model},\text{explainer},\text{data},\text{metric})$ system.
+
+\subsubsection{Experimental Factors and Conditions}
+Independent variables are defined by
+\path{configs/experiments/exp2_comparative} and
+\path{configs/experiments/exp2_scaled}:
+\begin{enumerate}[leftmargin=*]
+    \item Dataset (fixed): Adult Income (\texttt{dataset: adult}).
+    \item Model family: \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, \texttt{mlp}.
+    \item Explainer method: \texttt{lime}, \texttt{shap}, \texttt{anchors}, \texttt{dice}.
+    \item Seeds (robustness cohort): $\{42,123,456,789,999\}$.
+    \item Sampling intensity: \texttt{samples\_per\_class} $= N$, $N\in\{50,100,200\}$.
+    \item Stability perturbation regime: Gaussian noise with
+    \texttt{stability\_perturbations}=15 and default
+    \texttt{stability\_noise\_level}=0.1.
+    \item Method-specific secondary flag: \texttt{counterfactual=true} for DiCE.
+\end{enumerate}
+Planned robustness design size is $5\times4\times5\times3=300$ configurations
+(see Table X).
+
+Ablation scope is explicitly fixed for Paper A:
+\begin{enumerate}[leftmargin=*]
+    \item Paper A is a comparative benchmark, not a component-ablation study.
+    \item No component-removal or hyperparameter-factor ablation enters confirmatory inference.
+    \item EXP1 tuning artifacts are calibration records only and are excluded from inferential sets.
+    \item Ablation-driven causal attribution is deferred to a separate extension study (Paper B).
+\end{enumerate}
+
+\subsubsection{Controls and Baselines}
+Within each matched cell $(\text{model},\text{seed},N)$, the following are held constant:
+\begin{enumerate}[leftmargin=*]
+    \item Black-box model artifact path.
+    \item Preprocessor artifact and transformed feature space.
+    \item Split and sampling seeds.
+    \item Evaluation sampler and metric engine code path.
+    \item Primary metric set and run-level aggregation rules.
+\end{enumerate}
+Comparator set is \texttt{lime/shap/anchors/dice}. Sanity-control baselines
+(random attribution, label randomization, parameter randomization) are not yet
+included.
+Therefore, Paper A claims are restricted to relative method performance under
+trained-model conditions; no claim is made about explanation validity under
+label/model randomization perturbations.
+
+\subsubsection{Data Protocol}
+Data handling follows Section~3.3 and \path{src/data_loading/adult.py}:
+\begin{enumerate}[leftmargin=*]
+    \item Adult cleaning: whitespace normalization, missing-value canonicalization,
+    target canonicalization, duplicate removal.
+    \item Stratified split:
+    \texttt{train\_test\_split(test\_size=0.2, stratify=y, random\_state=seed)}.
+    \item Preprocessor fit on training split only (unless persisted preprocessor is provided).
+    \item Shared train/test transformation and feature-name propagation.
+    \item TP/TN/FP/FN stratified evaluation sampling with target $N$ per quadrant.
+\end{enumerate}
+For seed 42, split sizes are train 39,032 and test 9,758
+($y=0$: 29,687/7,422; $y=1$: 9,345/2,336). Nominal run size is $4N$, with
+lower realized size when quadrant availability is below $N$.
+
+\subsubsection{Model Training Protocol}
+EXP2 loads frozen EXP1 model artifacts; models are not retrained during EXP2.
+Binary target objective is income classification.
+
+Persisted model configurations:
+\begin{enumerate}[leftmargin=*]
+    \item LogReg: \texttt{solver=lbfgs}, \texttt{max\_iter=1000}, \texttt{random\_state=42}.
+    \item RF: \texttt{n\_estimators=50}, \texttt{max\_depth=15},
+    \texttt{min\_samples\_leaf=1}, \texttt{class\_weight=balanced\_subsample},
+    \texttt{random\_state=42}.
+    \item XGB: \texttt{n\_estimators=100}, \texttt{max\_depth=6},
+    \texttt{learning\_rate=0.1}, \texttt{objective=binary:logistic},
+    \texttt{eval\_metric=logloss}, \texttt{random\_state=42}.
+    \item SVM: \texttt{kernel=rbf}, \texttt{C=1.0}, \texttt{gamma=scale},
+    \texttt{probability=true}, \texttt{random\_state=42}.
+    \item MLP: \texttt{hidden\_layer\_sizes=[100]}, \texttt{activation=relu},
+    \texttt{solver=adam}, \texttt{max\_iter=500}, \texttt{random\_state=42}.
+\end{enumerate}
+Early stopping is implemented only in \texttt{XGBoostTrainer} when validation
+data are passed; it is not active in the released EXP2 model artifacts.
+No post-hoc probability calibration is applied.
+Calibration interpretation policy:
+\begin{enumerate}[leftmargin=*]
+    \item All methods are evaluated on identical uncalibrated model outputs per matched cell.
+    \item Inferential statements are comparative (ranking/trade-off), not calibration claims.
+    \item No calibration-dependent claim is made in Paper A.
+\end{enumerate}
+
+\subsubsection{Explanation Generation Protocol}
+All explainers are called through \texttt{ExplainerWrapper.explain\_instance}
+and timed per instance.
+
+\paragraph{SHAP.}
+\texttt{tree} mode for RF/XGB and \texttt{kernel} mode for SVM/MLP/LogReg,
+\texttt{n\_background\_samples=50}. Tree mode uses interventional perturbation and
+probability output; class-1 attributions are retained.
+
+\paragraph{LIME.}
+\texttt{num\_samples=1000}, \texttt{num\_features=10},
+\texttt{kernel\_width=3.0}, \texttt{discretize\_continuous=False};
+class-1 explanation map is converted to dense vector.
+
+\paragraph{Anchors.}
+\texttt{AnchorTabular} fitted on transformed training data; rule threshold 0.95;
+anchor membership mapped to binary feature-importance vector.
+
+\paragraph{DiCE.}
+Backend method \texttt{random}; \texttt{desired\_class="opposite"};
+importance proxy is absolute original--counterfactual feature difference.
+
+Implementation caveats:
+\begin{enumerate}[leftmargin=*]
+    \item Anchors threshold is hardcoded at 0.95 in wrapper call.
+    \item DiCE YAML \texttt{num\_counterfactuals} is not propagated; runtime uses
+    \texttt{total\_CFs=1}.
+\end{enumerate}
+Parameter-binding policy for reported runs:
+\begin{enumerate}[leftmargin=*]
+    \item SHAP: \texttt{explainer\_type} and \texttt{n\_background\_samples} from YAML are applied.
+    \item LIME: \texttt{kernel\_width} from YAML params is applied; \texttt{num\_samples} and \texttt{num\_features} are bound through schema fields (defaults 1000/10), with duplicate \texttt{params} entries dropped.
+    \item Anchors: YAML \texttt{threshold} is not consumed; effective threshold is fixed at 0.95.
+    \item DiCE: YAML \texttt{num\_counterfactuals} is not consumed; effective setting is \texttt{total\_CFs=1} with \texttt{method=random}.
+\end{enumerate}
+These bindings define the effective treatment conditions for EXP2 claims.
+
+Runtime constraints: explanation cost is measured with \texttt{perf\_counter};
+no explicit timeout/memory cap in YAML; batch runner enforces one evaluation
+worker per experiment process to prevent nested parallelism explosion.
+Run-level cost profile over analyzable EXP2 runs
+(\path{outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv}):
+\begin{center}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Runs & Mean (ms) & Median (ms) & P95 (ms) & Max (ms) \\
+\midrule
+SHAP    & 65 & 503870.23 & 1098.11 & 1603727.03 & 9393990.21 \\
+LIME    & 75 & 3660.68   & 65.73   & 13192.05   & 85825.65 \\
+Anchors & 43 & 28762.43  & 34063.36 & 64568.75  & 67997.67 \\
+DiCE    & 50 & 15337.17  & 9759.79 & 34172.81   & 37164.19 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Evaluation Metrics and Measurement Procedure}
+Metrics are computed per instance in \texttt{MetricsEngine}:
+\begin{enumerate}[leftmargin=*]
+    \item Cost: explanation time in milliseconds.
+    \item Sparsity: active-feature ratio ($|w_i|>\tau$, $\tau=10^{-4}$).
+    \item Fidelity proxy: faithfulness correlation score.
+    \item Faithfulness gap: prediction shift after masking top-$k$ features ($k=5$).
+    \item Stability: mean pairwise cosine similarity under Gaussian perturbations.
+\end{enumerate}
+
+Faithfulness implementation (\path{src/metrics/faithfulness.py}):
 \begin{align}
 \Delta_k &= \left|f(x)-f\left(x_{\text{mask-top-}k}\right)\right|,\\
-\rho &= \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right),\\
-S &= \frac{2}{T(T-1)}\sum_{a<b}\cos(e^{(a)},e^{(b)}).
+\rho &= \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right).
 \end{align}
-Current implementation maps \texttt{fidelity} to $\rho$ and reports \texttt{faithfulness\_gap} as $\Delta_k$.
+Pipeline mapping is \texttt{fidelity} $\leftarrow \rho$ and
+\texttt{faithfulness\_gap} $\leftarrow \Delta_k$.
 
-\subsection{Artifact Integrity and Coverage Protocol}
-Current repository inventory:
-\begin{itemize}[leftmargin=*]
-    \item \path{experiments/exp1_adult/results}: 29 files (4 core, 24 tuning, 1 diagnostic)
-    \item \path{experiments/exp1_adult/reproducibility}: 36 core repeated runs (+1 excluded test run)
-    \item \path{experiments/exp2_comparative/results}: 20 files (complete $5\times4$ matrix)
-    \item \path{experiments/exp2_scaled/results}: 250 files (of 300 planned)
-    \item One malformed JSON: \path{experiments/exp2_scaled/results/}\\
-    \path{svm_shap/seed_999/n_200/results.json}
-\end{itemize}
-Within the 250 robustness files, 233 are analyzable for metric inference, 16 are empty artifacts (no instance evaluations), and 1 is malformed JSON.
-Figure~\ref{fig:coverage} makes the completion imbalance explicit at model--explainer granularity.
+Stability implementation (\path{src/metrics/stability.py}):
+\begin{align}
+x^{(t)} &= x + \epsilon^{(t)},\qquad \epsilon^{(t)}\sim\mathcal{N}(0,\sigma^2),\\
+S &= \frac{2}{T(T-1)}\sum_{a<b}\cos\left(e^{(a)},e^{(b)}\right).
+\end{align}
+
+Secondary track: \texttt{cf\_sensitivity} is computed when
+\texttt{counterfactual=true}; domain-alignment metric exists but is disabled in
+EXP2 configs (\texttt{domain=false}).
+
+Aggregation is instance $\rightarrow$ run (\texttt{mean/std/min/max/count})
+$\rightarrow$ block summary over $(\text{model},N)$.
+
+EEU note: Explanation Energy Units are specified in metric-design artifacts but
+not computed in current EXP2 runtime.
+EEU is therefore excluded from confirmatory inference, and Paper A cost claims
+are defined strictly on wall-clock milliseconds.
+
+\subsubsection{Statistical Analysis Plan}
+Confirmatory dataset construction follows artifact qualification rules (Sections
+3.4.5 and 3.6). Planned robustness grid is 300 runs; current snapshot has 250
+present and 233 analyzable runs.
+
+Inferential procedures:
+\begin{enumerate}[leftmargin=*]
+    \item Friedman test per metric over methods with $(\text{model},N)$ blocks.
+    \item Nemenyi post-hoc pairwise test when Friedman is significant.
+    \item Paired Wilcoxon SHAP-vs-LIME on matched $(\text{model},\text{seed},N)$ cells.
+\end{enumerate}
+Nemenyi provides family-wise control for pairwise localization. Across-metric
+multiplicity is controlled with Holm-Bonferroni adjustment over the five
+primary metrics, applied separately to the Friedman family and to each Wilcoxon
+family (45-pair and 65-pair matched sets). Uncertainty is reported with
+mean/std/CV and, where generated, $t$-based and bootstrap CIs.
+
+Effect-size reporting is exported with inference artifacts:
+\begin{enumerate}[leftmargin=*]
+    \item Friedman layer: Kendall's $W$ for each metric.
+    \item Paired SHAP--LIME layer: Cohen's $d_z$ and median paired differences.
+\end{enumerate}
+
+\subsubsection{Robustness and Sensitivity Analyses}
+Implemented robustness axes:
+\begin{enumerate}[leftmargin=*]
+    \item Seed heterogeneity (5 seeds).
+    \item Sample-size heterogeneity ($N\in\{50,100,200\}$ per quadrant).
+    \item Perturbation stability under Gaussian noise ($T=15$, $\sigma=0.1$ default).
+\end{enumerate}
+Additional reproducibility sensitivity is reported from the EXP1 repeated-seed
+cohort (\path{reproducibility_report.csv}).
+
+Not included in Paper A core protocol: adversarial perturbation campaigns and
+causal-intervention benchmarks beyond proxy counterfactual sensitivity.
+Robustness interpretation in Paper A is limited to seed, sample-size, and
+Gaussian-noise perturbation dimensions.
+Reporting rule for robustness consistency:
+\begin{enumerate}[leftmargin=*]
+    \item SHAP--LIME median-difference sign must match between 45-cell and 65-cell matched analyses.
+    \item Holm-adjusted significance decision must not flip between these analyses.
+\end{enumerate}
+Metrics violating either condition are reported as sensitivity-unstable.
+
+\subsubsection{Reproducibility Package and Rerun Instructions}
+Release package currently includes source code, experiment YAMLs, model and
+preprocessor artifacts, per-run JSON/CSV outputs, batch manifest, and figure
+generation scripts.
+
+Minimal rerun sequence:
+\begin{enumerate}[leftmargin=*]
+    \item Install dependencies from \texttt{requirements-frozen.txt}.
+    \item Verify or regenerate \path{experiments/exp1_adult/models} artifacts.
+    \item Run EXP2 robustness batch:
+    \texttt{python3 scripts/run\_batch\_experiments.py --config-dir configs/experiments/exp2\_scaled --output outputs/batch\_results.csv --parallel}.
+    \item Run coverage audit: \texttt{python3 scripts/check\_missing\_results.py}.
+    \item Generate summaries and figures.
+\end{enumerate}
+
+Execution provenance anchor for this manuscript snapshot:
+\begin{enumerate}[leftmargin=*]
+    \item Reference regeneration host: Apple M3 Pro, macOS 26.3 (arm64), 11 logical CPUs, 18 GB RAM, Python 3.13.2.
+    \item Dependency lock hash: \texttt{sha256(requirements-frozen.txt)} =\\
+    \texttt{b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc}.
+    \item Immutable DOI is not yet minted in this repository state; current provenance key is \path{outputs/batch_manifest.json} with git hash \texttt{9fc70eb1e218a11f2fdd4bdb3aab3ea10a799a6f}.
+\end{enumerate}
+
+\subsection{Statistical Analysis Pipeline (Replication-Grade Specification)}
+This subsection defines the executable protocol used to produce all Paper A
+inferential artifacts from repository-tracked inputs (see Table~X and Appendix~X).
+
+\subsubsection{Experimental Factors and Conditions}
+Independent variables are instantiated from
+\path{configs/experiments/exp2_comparative},
+\path{configs/experiments/exp2_scaled}, and
+\path{configs/experiments/exp2_scaled/manifest.yaml}:
+\begin{enumerate}[leftmargin=*]
+    \item Dataset (fixed): \texttt{adult}.
+    \item Model family: \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, \texttt{mlp}.
+    \item Explainer method: \texttt{shap}, \texttt{lime}, \texttt{anchors}, \texttt{dice}.
+    \item Seeds: $\{42,123,456,789,999\}$.
+    \item Sampling intensity: \texttt{samples\_per\_class}=N, $N\in\{50,100,200\}$ (robustness cohort).
+    \item Stability perturbation regime: \texttt{stability\_perturbations}=15 and default \texttt{stability\_noise\_level}=0.1.
+    \item Counterfactual metric activation: \texttt{counterfactual=true} only for DiCE runs.
+\end{enumerate}
+Planned robustness grid size is $5\times4\times5\times3=300$. No
+component-removal ablation is included in Paper A confirmatory inference.
+
+\subsubsection{Controls and Baselines}
+Within each matched $(\text{model},\text{seed},N)$ cell, the following are held
+constant:
+\begin{enumerate}[leftmargin=*]
+    \item Model artifact path.
+    \item Preprocessor artifact and transformed feature space.
+    \item Split/sampling random-state values.
+    \item Evaluation sampler and metric-engine implementation.
+    \item Metric set and aggregation logic.
+\end{enumerate}
+Baselines are cross-method (\texttt{shap/lime/anchors/dice}) under shared
+conditions. Random-attribution, label-randomization, and
+model-randomization sanity controls are not part of Paper A runs; therefore
+claims are bounded to trained-model comparative performance.
+
+\subsubsection{Data Protocol}
+Data handling is implemented in \path{src/data_loading/adult.py} and
+\path{src/evaluation/sampler.py}:
+\begin{enumerate}[leftmargin=*]
+    \item Adult cleaning (whitespace normalization, missing-value canonicalization, duplicate removal, target normalization).
+    \item Stratified split with \texttt{test\_size=0.2}, \texttt{stratify=y}, \texttt{random\_state=seed}.
+    \item Preprocessor fit on train only.
+    \item Shared train/test transformation and feature-name propagation.
+    \item TP/TN/FP/FN stratified sampling with target size $N$ per stratum.
+\end{enumerate}
+For seed 42, split sizes are train 39,032 and test 9,758
+($y=0$: 29,687/7,422; $y=1$: 9,345/2,336). Nominal run size is $4N$; realized
+size may be lower under stratum-capacity constraints.
+
+\subsubsection{Model Training Protocol}
+EXP2 evaluates frozen EXP1 model artifacts; no retraining occurs in EXP2.
+Persisted model settings are:
+\begin{enumerate}[leftmargin=*]
+    \item LogReg: \texttt{solver=lbfgs}, \texttt{max\_iter=1000}, \texttt{random\_state=42}.
+    \item RF: \texttt{n\_estimators=50}, \texttt{max\_depth=15}, \texttt{min\_samples\_leaf=1}, \texttt{class\_weight=balanced\_subsample}, \texttt{random\_state=42}.
+    \item XGB: \texttt{n\_estimators=100}, \texttt{max\_depth=6}, \texttt{learning\_rate=0.1}, \texttt{objective=binary:logistic}, \texttt{eval\_metric=logloss}, \texttt{random\_state=42}.
+    \item SVM: \texttt{kernel=rbf}, \texttt{C=1.0}, \texttt{gamma=scale}, \texttt{probability=true}, \texttt{random\_state=42}.
+    \item MLP: \texttt{hidden\_layer\_sizes=[100]}, \texttt{activation=relu}, \texttt{solver=adam}, \texttt{max\_iter=500}, \texttt{random\_state=42}.
+\end{enumerate}
+Early stopping is implemented only for XGBoost when validation data are passed;
+it is inactive in persisted EXP2 artifacts. No post-hoc probability calibration
+is applied.
+
+\subsubsection{Explanation Generation Protocol}
+Explanations are generated via \texttt{ExplainerWrapper.explain\_instance} on the
+dense transformed feature vector (108 dimensions in current Adult vocabulary).
+Per-instance runtime is recorded via wall-clock timing.
+\begin{enumerate}[leftmargin=*]
+    \item SHAP: \texttt{tree} mode for RF/XGB, \texttt{kernel} for LogReg/SVM/MLP; \texttt{n\_background\_samples=50}; class-1 attributions retained.
+    \item LIME: \texttt{num\_samples=1000}, \texttt{num\_features=10}, \texttt{kernel\_width=3.0}, \texttt{discretize\_continuous=False}.
+    \item Anchors: \texttt{AnchorTabular} on transformed train matrix; effective precision threshold fixed at 0.95.
+    \item DiCE: backend \texttt{method=random}, \texttt{desired\_class=opposite}, absolute original--counterfactual deltas as importance proxy.
+\end{enumerate}
+Effective parameter binding caveats:
+\begin{enumerate}[leftmargin=*]
+    \item Anchors YAML \texttt{threshold} is not consumed; runtime threshold is fixed at 0.95.
+    \item DiCE YAML \texttt{num\_counterfactuals} is not consumed; runtime uses \texttt{total\_CFs=1}.
+\end{enumerate}
+No explicit timeout/memory cap is set in EXP2 YAML; batch execution enforces one
+evaluation worker per experiment process.
+
+\subsubsection{Evaluation Metrics and Measurement Procedure}
+Primary metrics are computed per instance in
+\path{src/experiment/metrics_engine.py}:
+\begin{enumerate}[leftmargin=*]
+    \item \texttt{cost} (milliseconds),
+    \item \texttt{sparsity} (active-feature ratio, threshold $\tau=10^{-4}$),
+    \item \texttt{fidelity} (faithfulness correlation score),
+    \item \texttt{faithfulness\_gap} (top-$k$ masking gap, $k=5$),
+    \item \texttt{stability} (mean pairwise cosine similarity under perturbations).
+\end{enumerate}
+Faithfulness implementation (\path{src/metrics/faithfulness.py}):
+\begin{align}
+\Delta_k &= \left|f(x)-f\left(x_{\text{mask-top-}k}\right)\right|,\\
+\rho &= \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right).
+\end{align}
+Mapping in pipeline: \texttt{fidelity}$\leftarrow \rho$ and
+\texttt{faithfulness\_gap}$\leftarrow \Delta_k$.
+
+Stability implementation (\path{src/metrics/stability.py}):
+\begin{align}
+x^{(t)} &= x + \epsilon^{(t)},\qquad \epsilon^{(t)}\sim\mathcal{N}(0,\sigma^2),\\
+S &= \frac{2}{T(T-1)}\sum_{a<b}\cos\left(e^{(a)},e^{(b)}\right).
+\end{align}
+Secondary metrics: \texttt{cf\_sensitivity} only when
+\texttt{counterfactual=true}; domain alignment implemented but disabled in EXP2.
+Aggregation hierarchy is instance $\rightarrow$ run $\rightarrow$ block.
+
+EEU is specified in EXP1 metric-design configs but not computable in current
+EXP2 runtime due missing memory/model-call telemetry.
+\texttt{[TO FILL: implement EEU instrumentation or keep EEU out of Paper A claims]}.
+
+\subsubsection{Statistical Analysis Plan}
+Artifact-qualified run inventory is:
+\begin{enumerate}[leftmargin=*]
+    \item planned runs: 300,
+    \item present \texttt{results.json}: 250,
+    \item analyzable runs: 233,
+    \item excluded artifacts: 16 empty and 1 malformed JSON.
+\end{enumerate}
+Coverage imbalance is shown in Figure~\ref{fig:coverage}.
 
 \begin{figure}[t]
 \centering
@@ -142,48 +702,294 @@ Figure~\ref{fig:coverage} makes the completion imbalance explicit at model--expl
 \label{fig:coverage}
 \end{figure}
 
-\subsection{Statistical Analysis Pipeline}
-\begin{itemize}[leftmargin=*]
-    \item Global method comparison: Friedman test over $(\text{model},N)$ blocks
-    \item Post-hoc localization: Nemenyi test
-    \item Focused pairwise contrasts: Wilcoxon signed-rank for SHAP vs LIME
-    \item Uncertainty reporting: mean, standard deviation, CV, and confidence intervals
-\end{itemize}
-
-\subsection{Reproducibility Protocol}
-Reproducibility is controlled via fixed seeds, declared configs, structured artifacts, and repeated-run CV reporting.
-
-\subsection{Validity Threats and Mitigations}
+Global inference is restricted to 15 complete $(\text{model},N)$ blocks. SHAP--LIME
+matched sets are 45 cells (\texttt{logreg/rf/xgb}) and 65 cells (all models).
+Inferential stack (\path{scripts/run_exp2_statistical_analysis.py}):
 \begin{enumerate}[leftmargin=*]
-    \item Incomplete factorial coverage
-    \item Runtime heterogeneity across explainers
-    \item Metric-definition ambiguity
+    \item Friedman omnibus test per metric.
+    \item Nemenyi post-hoc localization per metric.
+    \item Two-sided Wilcoxon signed-rank SHAP--LIME tests on matched cells.
+\end{enumerate}
+Multiplicity control: Nemenyi within metric; Holm-Bonferroni across the five
+primary metrics for each inferential family (Friedman, Wilcoxon-45, Wilcoxon-65).
+Uncertainty/effect reporting: mean, std, CV, $t$ and BCa bootstrap CIs, Kendall's
+$W$, Cohen's $d_z$, and median paired differences.
+
+\subsubsection{Robustness and Sensitivity Analyses}
+Implemented robustness axes are seed heterogeneity (5 seeds), sampling-intensity
+heterogeneity ($N=50/100/200$), and Gaussian perturbation stability.
+Sensitivity controls:
+\begin{enumerate}[leftmargin=*]
+    \item Re-estimate SHAP--LIME contrasts on both 45-cell and 65-cell matched sets.
+    \item Restrict global inference to block-complete contexts.
+    \item Exclude malformed/empty artifacts without reconstruction.
+\end{enumerate}
+Robustness claim rule:
+\begin{enumerate}[leftmargin=*]
+    \item SHAP--LIME median-difference sign must match between 45-cell and 65-cell analyses.
+    \item Holm-adjusted significance decision must not flip between the two analyses.
+\end{enumerate}
+Adversarial stress testing is not part of Paper A.
+\texttt{[TO FILL: adversarial stress protocol with pre-registered deviation thresholds]}.
+
+\subsubsection{Reproducibility Package}
+Released package includes code, experiment YAMLs, frozen model/preprocessor
+artifacts, run outputs, aggregate outputs, inferential exports, and figure
+generation scripts.
+Reference provenance anchors:
+\begin{enumerate}[leftmargin=*]
+    \item Host used for manuscript regeneration: Apple M3 Pro, macOS 26.3 (arm64), 11 logical CPUs, 18 GB RAM, Python 3.13.2.
+    \item \texttt{sha256(requirements-frozen.txt)} = \texttt{b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc}.
+    \item \path{outputs/batch_manifest.json} git hash \texttt{9fc70eb1e218a11f2fdd4bdb3aab3ea10a799a6f}.
+\end{enumerate}
+Minimal rerun sequence:
+\begin{enumerate}[leftmargin=*]
+    \item \texttt{python3 scripts/run\_batch\_experiments.py --config-dir configs/experiments/exp2\_scaled --output outputs/batch\_results.csv --parallel}
+    \item \texttt{python3 scripts/check\_missing\_results.py}
+    \item \texttt{python3 scripts/quick\_summary.py}
+    \item \texttt{python3 scripts/full\_summary.py}
+    \item \texttt{python3 scripts/generate\_paper\_a\_figures.py}
+    \item \texttt{python3 scripts/run\_exp2\_statistical\_analysis.py}
+\end{enumerate}
+Archival status:
+\texttt{[TO FILL: immutable DOI bundle for camera-ready reproducibility package]}.
+
+\subsection{Inferential Implementation Details}
+This subsection defines the inferential workflow for EXP2 and its reproducibility
+support cohorts.
+
+\subsubsection{Inferential Objective and RQ Linkage}
+The statistical design implements Section~3.2:
+\begin{enumerate}[leftmargin=*]
+    \item RQ1 (method separation): test whether methods differ for each metric.
+    \item RQ2 (trade-off stability): test whether method contrasts remain stable
+    across model families and sampling intensities.
+\end{enumerate}
+All tests are executed on run/block-level units (Section~3.4), not on pooled
+instance rows.
+
+\subsubsection{Analysis Populations and Eligibility}
+Inferential inputs are artifact-qualified EXP2 outputs:
+\begin{enumerate}[leftmargin=*]
+    \item Planned robustness grid: 300 runs.
+    \item Present artifacts: 250 files.
+    \item Analyzable artifacts: 233 (non-empty \texttt{instance\_evaluations}).
+    \item Invalid artifacts: 1 malformed JSON and 16 empty files.
+\end{enumerate}
+Eligibility rules follow Section~3.4.5: parseable JSON, non-empty run metrics,
+no imputation, and block-complete filtering for omnibus tests.
+
+Resulting inferential sets are:
+\begin{enumerate}[leftmargin=*]
+    \item Global omnibus set: 15 complete $(\text{model},N)$ blocks $\times$ 4 methods.
+    \item Primary SHAP--LIME paired set: 45 matched cells (\texttt{logreg/rf/xgb}).
+    \item Sensitivity SHAP--LIME paired set: 65 matched cells (all model families).
+    \item EXP1 reproducibility cohort: 9-seed repeated runs per core configuration.
 \end{enumerate}
 
+\subsubsection{Estimands, Aggregation, and Metric Directionality}
+For metric $m$, run-level estimands are $y_{g,k,s,n,m}$ and block summaries are:
+\[
+\bar{y}_{k,b,m}=\frac{1}{|S_{k,b}|}\sum_{s\in S_{k,b}}y_{g,k,s,n,m},\quad b=(g,n).
+\]
+Primary metrics are fidelity, stability, sparsity, faithfulness gap, and cost.
+Directionality is fixed pre-analysis:
+\begin{enumerate}[leftmargin=*]
+    \item Higher is better: fidelity, stability, faithfulness gap.
+    \item Lower is better: sparsity, cost.
+\end{enumerate}
+Directionality is used for interpretation and normalized visual summaries (see
+Figure X), while inferential tests operate on observed values per block.
+
+\subsubsection{Global Omnibus Test (Friedman)}
+For each metric:
+\begin{enumerate}[leftmargin=*]
+    \item Build block-by-method matrix (rows: complete $(\text{model},N)$ blocks;
+    columns: methods).
+    \item Apply Friedman test with methods as treatments and blocks as matched contexts.
+    \item Evaluate significance at $\alpha=0.05$ (Table X).
+\end{enumerate}
+Friedman is used because the design is repeated-measures and metric
+distributions are not assumed Gaussian.
+
+\subsubsection{Post-hoc Localization (Nemenyi)}
+If Friedman rejects the null for metric $m$:
+\begin{enumerate}[leftmargin=*]
+    \item Run Nemenyi pairwise post-hoc comparisons on the same block matrix.
+    \item Report pairwise adjusted p-values for all method pairs.
+    \item Use $\alpha=0.05$ for within-metric family-wise control.
+\end{enumerate}
+Across-metric multiplicity is controlled via Holm-Bonferroni adjustment over the
+five primary metrics, applied separately to each inferential family.
+
+\subsubsection{Focused SHAP--LIME Paired Test (Wilcoxon)}
+For each primary metric:
+\begin{enumerate}[leftmargin=*]
+    \item Construct matched SHAP/LIME pairs on identical $(\text{model},\text{seed},N)$ cells.
+    \item Apply two-sided Wilcoxon signed-rank test.
+    \item Report paired descriptive summaries and p-values.
+\end{enumerate}
+Primary analysis uses the 45-cell restricted set; 65-cell all-model analysis is
+used as sensitivity support.
+
+\subsubsection{Uncertainty Quantification}
+Reported uncertainty statistics include mean, standard deviation, and CV. Where
+configured, confidence intervals are computed via
+\path{src/analysis/confidence.py}:
+\begin{enumerate}[leftmargin=*]
+    \item $t$-distribution CIs (\texttt{compute\_t\_ci}).
+    \item Bootstrap CIs (\texttt{compute\_bootstrap\_ci}), BCa method with
+    10,000 resamples and seed 42; percentile fallback on failure.
+\end{enumerate}
+
+\subsubsection{Effect Size and Practical Significance}
+Effect-size outputs are generated alongside p-values:
+\begin{enumerate}[leftmargin=*]
+    \item Kendall's $W$ for Friedman tests.
+    \item Cohen's $d_z$ for paired Wilcoxon SHAP--LIME contrasts.
+    \item Median paired differences for location-scale interpretation.
+\end{enumerate}
+These are exported by the EXP2 statistical driver for direct appendix use.
+
+\subsubsection{Sensitivity and Missingness Controls}
+Sensitivity controls in the analysis layer:
+\begin{enumerate}[leftmargin=*]
+    \item Re-estimate SHAP--LIME contrasts on restricted (45) and all-model (65) matched sets.
+    \item Restrict global inference to block-complete contexts.
+    \item Exclude malformed/empty artifacts without synthetic reconstruction.
+\end{enumerate}
+Dispersion is quantified via std/CV/CI. No threshold-based practical-equivalence
+rule is enforced in the current protocol; robustness interpretation therefore
+relies on direction consistency, effect-size magnitude, and uncertainty bounds.
+
+\subsubsection{Reproducible Analysis Execution}
+Current reproducible analysis stack:
+\begin{enumerate}[leftmargin=*]
+    \item Batch execution and artifact generation.
+    \item Missing/malformed audit (\texttt{scripts/check\_missing\_results.py}).
+    \item Summary tables (\texttt{scripts/quick\_summary.py}, \texttt{scripts/full\_summary.py}).
+    \item Figure regeneration (\texttt{scripts/generate\_paper\_a\_figures.py}).
+    \item Deterministic EXP2 inference export:
+    \texttt{python3 scripts/run\_exp2\_statistical\_analysis.py}.
+\end{enumerate}
+The EXP2 driver materializes Friedman, Nemenyi, Wilcoxon, multiplicity-adjusted
+p-values, effect-size tables, and matched-cell inventories in
+\path{outputs/analysis/paper_a_exp2_stats/}.
+
+\subsection{Reproducibility Protocol}
+\subsubsection{Scope and Methodological Role}
+This protocol defines how Section~4 quantitative claims are regenerated from
+repository artifacts. It links Sections~3.6--3.7 to a deterministic execution
+contract for RQ1/RQ2 (see Table~X).
+
+\subsubsection{Definitions, Notation, and Assumptions}
+Run key is $r=(g,k,s,n)$ with model family $g$, explainer $k$, seed $s$, and
+sampling intensity $n$.
+Reproducibility state is decomposed into:
+\begin{enumerate}[leftmargin=*]
+    \item $\mathcal{C}$: configuration state (YAMLs, seed grid, CLI invocations),
+    \item $\mathcal{A}$: artifact state (\texttt{results.json}, \texttt{metrics.csv}, aggregate exports),
+    \item $\mathcal{I}$: inferential state (\path{outputs/analysis/paper_a_exp2_stats/}),
+    \item $\mathcal{V}$: variance state (\texttt{reproducibility\_report.csv}).
+\end{enumerate}
+Assumptions: EXP1 model artifacts are frozen during EXP2; config files are
+immutable during one run; only artifact-qualified runs enter inference.
+
+\subsubsection{Executable Reproducibility Procedure}
+\begin{enumerate}[leftmargin=*]
+    \item Freeze protocol anchors:
+    \begin{enumerate}[leftmargin=*]
+        \item config roots (\path{configs/experiments/exp2_scaled}, \path{configs/experiments/exp2_comparative}),
+        \item dependency hash: \texttt{sha256(requirements-frozen.txt)}=
+        \texttt{b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc},
+        \item provenance hash in \path{outputs/batch_manifest.json}.
+    \end{enumerate}
+    \item Execute EXP2 batch generation.
+    \item Audit missing/malformed/empty artifacts.
+    \item Regenerate deterministic inference exports via
+    \texttt{scripts/run\_exp2\_statistical\_analysis.py}.
+    \item Regenerate summaries/figures and repeated-run reproducibility outputs.
+\end{enumerate}
+
+\subsubsection{Quality Checks and Acceptance Criteria}
+A reproduction pass is claim-eligible only if:
+\begin{enumerate}[leftmargin=*]
+    \item seed/model/explainer grids match declared manifests;
+    \item malformed and empty artifacts are explicitly enumerated;
+    \item omnibus inference uses only complete $(\text{model},N)$ blocks;
+    \item Section~4 claims map to versioned files under analysis/figure outputs;
+    \item repeated-run variance diagnostics are present.
+\end{enumerate}
+
+\subsubsection{Environment and Compute Disclosure}
+Reference regeneration host: Apple M3 Pro, macOS 26.3 (arm64), 11 logical CPUs,
+18 GB RAM, Python 3.13.2. This is a provenance anchor, not an execution
+requirement. \texttt{[TO FILL: multi-hardware normalization protocol if runtime claims are generalized across platforms]}.
+
+\subsection{Validity Threats and Mitigations}
+\subsubsection{Scope}
+Threat analysis is organized by validity class to separate implemented controls
+from residual uncertainties.
+
+\subsubsection{Internal Validity}
+\begin{enumerate}[leftmargin=*]
+    \item Threat: incomplete EXP2 execution coverage (300 planned, 250 present, 233 analyzable).
+    \item Mitigation: explicit artifact audit, block-complete filtering, matched-cell filtering.
+    \item Residual risk: potential non-random missingness by method--model cell.
+\end{enumerate}
+
+\subsubsection{Construct Validity}
+\begin{enumerate}[leftmargin=*]
+    \item Threat: ambiguity in metric naming/interpretation.
+    \item Mitigation: code-level operationalization and explicit mapping
+    (\texttt{fidelity}$\leftarrow$faithfulness correlation,
+    \texttt{faithfulness\_gap}$\leftarrow$top-$k$ masking shift).
+    \item Residual risk: EEU not computed in current EXP2 runtime; cost is wall-clock only.
+\end{enumerate}
+
+\subsubsection{Statistical Conclusion Validity}
+\begin{enumerate}[leftmargin=*]
+    \item Threat: inflated Type-I error and pseudo-replication.
+    \item Mitigation: run/block analysis units, Friedman+Nemenyi+Wilcoxon stack, Holm adjustments.
+    \item Residual risk: no pre-registered practical-equivalence threshold.
+\end{enumerate}
+
+\subsubsection{External Validity}
+\begin{enumerate}[leftmargin=*]
+    \item Threat: single benchmark dataset/task family.
+    \item Mitigation: diversity across five model families, four explainers, five seeds, and three sample sizes.
+    \item Residual risk: generalization to text/vision/time-series is not established in Paper A.
+\end{enumerate}
+
+\subsubsection{Implementation Validity}
+\begin{enumerate}[leftmargin=*]
+    \item Threat: YAML-exposed parameters not fully bound at runtime (Anchors threshold, DiCE CF count).
+    \item Mitigation: explicit disclosure of effective runtime settings.
+    \item Residual risk: harmonization could shift absolute method levels.
+\end{enumerate}
+\texttt{[TO FILL: camera-ready harmonization diff report between YAML-exposed and runtime-bound parameters]}.
+
 \subsection{Framework Operation Method (FOM-7): Executable Protocol}
-\begin{algorithm}[t]
-\caption{FOM-7: Framework Operation Method}
-\label{alg:fom7}
-\begin{algorithmic}[1]
-\Require Protocol configuration set $\mathcal{C}$, metric set $\mathcal{M}$, reproducibility seed policy $\mathcal{S}$
-\Ensure Claim-ready benchmark report $\mathcal{R}$ with caveat ledger
-\State \textbf{Stage S1:} Freeze protocol design and enumerate planned run grid from $\mathcal{C}$
-\State \textbf{Gate G1:} Planned run count and all factors are explicit
-\State \textbf{Stage S2:} Execute batch runs and persist per-run artifacts and execution manifest
-\State \textbf{Gate G2:} Every planned run has terminal state (\texttt{success}/\texttt{failed}/\texttt{skipped})
-\State \textbf{Stage S3:} Run integrity audit for missing and malformed artifacts
-\State \textbf{Gate G3:} Missing/malformed inventory is explicit and versioned
-\State \textbf{Stage S4:} Harmonize outputs and aggregate analysis-ready metric tables
-\State \textbf{Gate G4:} All retained runs contain required metrics in $\mathcal{M}$
-\State \textbf{Stage S5:} Run inferential pipeline (Friedman, Nemenyi, Wilcoxon as applicable)
-\State \textbf{Gate G5:} Inferential outputs are complete for all primary metrics
-\State \textbf{Stage S6:} Compute reproducibility statistics on repeated runs
-\State \textbf{Gate G6:} Dispersion/CV are reported for each core metric
-\State \textbf{Stage S7:} Build claim-ready report with traceability links to artifacts and caveat ledger
-\State \textbf{Gate G7:} Every quantitative claim maps to a versioned artifact
-\State \Return $\mathcal{R}$
-\end{algorithmic}
-\end{algorithm}
+\subsubsection{Formal Definition and Role}
+FOM-7 is the operational method contribution of Paper A. It is defined as:
+\[
+\mathcal{M}_{\mathrm{FOM7}}=\{(S_i,A_i,G_i)\}_{i=1}^{7},
+\]
+with stage $S_i$, required artifacts $A_i$, and gate condition $G_i$.
+Progression is allowed only if $G_i=\mathrm{pass}$.
+
+\subsubsection{Stage Protocol and Gate Logic}
+Algorithm 1 (FOM-7) maps protocol execution to stage-gated evidence production:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{S1 Protocol specification}: freeze study design and enumerate the run grid.
+    \item \textbf{S2 Controlled execution}: run batch jobs and persist per-run artifacts plus execution manifest.
+    \item \textbf{S3 Integrity audit}: enumerate missing, empty, and malformed artifacts.
+    \item \textbf{S4 Harmonization}: aggregate retained outputs into analysis-ready metric tables.
+    \item \textbf{S5 Statistical inference}: run Friedman, Nemenyi, and paired Wilcoxon tests.
+    \item \textbf{S6 Reproducibility characterization}: estimate cross-seed dispersion and CV.
+    \item \textbf{S7 Claim-ready reporting}: map manuscript claims to versioned artifacts and caveat ledger.
+\end{enumerate}
+Progression from stage $S_i$ to stage $S_{i+1}$ is allowed only when the corresponding gate $G_i$ is satisfied.
 
 \begin{figure}[t]
 \centering
@@ -191,9 +997,9 @@ Reproducibility is controlled via fixed seeds, declared configs, structured arti
 \caption{Operational view of FOM-7. The workflow is stage-gated: each stage must produce auditable artifacts before progression to the next stage.}
 \label{fig:fom7-flow}
 \end{figure}
-Algorithm~\ref{alg:fom7} defines the formal protocol, and Figure~\ref{fig:fom7-flow} provides its operational view.
+Figure~\ref{fig:fom7-flow} provides the operational view of FOM-7.
 
-\paragraph{Reference implementation command sequence.}
+\subsubsection{Reference Implementation Procedure}
 \begin{enumerate}[leftmargin=*]
     \item \texttt{python3 scripts/run\_batch\_experiments.py}\\
     \texttt{--config-dir configs/experiments/exp2\_scaled}\\
@@ -205,7 +1011,10 @@ Algorithm~\ref{alg:fom7} defines the formal protocol, and Figure~\ref{fig:fom7-f
     \texttt{--config-dir configs/experiments --pattern "exp1\_adult\_*.yaml"}\\
     \texttt{--output-dir experiments/exp1\_adult/reproducibility}
     \item \texttt{python3 scripts/generate\_paper\_a\_figures.py}
+    \item \texttt{python3 scripts/run\_exp2\_statistical\_analysis.py}
 \end{enumerate}
+If any gate fails, downstream inferential outputs are not claim-eligible and the
+affected comparison is downgraded to descriptive-only reporting.
 
 \section{Results}
 
@@ -307,8 +1116,6 @@ Figure~\ref{fig:repro-cv} highlights that cost variance dominates quality-metric
 \section{Conclusion}
 The evidence supports a clear trade-off frontier: SHAP leads fidelity/stability, LIME leads runtime practicality, and DiCE leads sparsity. In addition to empirical findings, Paper A contributes FOM-7 as a concrete operating protocol for running, auditing, and reporting XAI benchmark studies.
 
-% Replace with your bibliography when integrating into the final paper package.
-% \bibliographystyle{plain}
-% \bibliography{references}
+\acks{Funding and competing-interest disclosures are to be finalized in the submission package. This draft was prepared from repository artifacts dated February 2026.}
 
 \end{document}
