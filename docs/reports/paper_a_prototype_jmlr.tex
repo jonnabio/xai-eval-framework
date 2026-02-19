@@ -1018,18 +1018,20 @@ affected comparison is downgraded to descriptive-only reporting.
 
 \section{Results}
 
-\subsection{Global Trade-offs (EXP2 robustness)}
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.90\linewidth]{../../outputs/paper_a_figures/figures/fig_a3_method_radar.pdf}
-\caption{Normalized method profile across core metrics (higher is better after direction-aware normalization). SHAP dominates fidelity/stability, while LIME and DiCE dominate efficiency/sparsity dimensions, respectively.}
-\label{fig:method-radar}
-\end{figure}
-Figure~\ref{fig:method-radar} provides a direction-normalized profile view. Table~\ref{tab:global-tradeoffs} reports absolute means over 15 complete model-size blocks.
+\subsection{Overview of Evaluation Setup (Minimum Necessary Context)}
+This section reports results from two evidence streams: EXP2 robustness (global
+and paired method comparisons) and EXP1 reproducibility (variance profiling).
+Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are
+Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms).
+\texttt{[TO FILL: metric definitions or explicit cross-reference to Section 3.6.6]}.
+``15 complete model-size blocks'' denotes the block-level EXP2 units used for
+global inference, and ``45 matched configs'' denotes the SHAP--LIME subset with
+shared $(\text{model},\text{seed},N)$ cells on \texttt{logreg/rf/xgb}.
 
+\subsection{Global Trade-offs Across Methods (Quality vs Cost)}
 \begin{table}[h]
 \centering
-\caption{Method-level means over complete model-size blocks.}
+\caption{Global method means (EXP2 robustness: 15 complete model-size blocks).}
 \begin{tabular}{lrrrrr}
 \toprule
 Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
@@ -1043,15 +1045,18 @@ DiCE    & 0.1716 & 0.3602 & 0.0164 & 0.0988 & 16306.50 \\
 \label{tab:global-tradeoffs}
 \end{table}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.88\linewidth]{../../outputs/paper_a_figures/figures/fig_a4_fidelity_cost_tradeoff.pdf}
-\caption{Fidelity--cost trade-off frontier using method means over complete blocks (error bars: block-level standard deviation). The x-axis is logarithmic due strong runtime heterogeneity across methods.}
-\label{fig:fidelity-cost}
-\end{figure}
-Figure~\ref{fig:fidelity-cost} isolates the fidelity--cost frontier and its dispersion across complete blocks.
+SHAP has the highest Fidelity (0.8176), highest Stability (0.7377), and highest
+Faithfulness Gap (0.4474). DiCE has the lowest Sparsity value (0.0164), while
+LIME has the lowest Cost (3660.68 ms). Anchors shows very low Stability (0.0006)
+with Cost (25326.92 ms) above LIME and DiCE.
 
-\subsection{Statistical Significance}
+The reported means show an explicit quality--cost frontier: SHAP occupies the
+strongest quality region on Fidelity/Stability/Faithfulness Gap with the highest
+runtime (685220.23 ms), whereas LIME occupies the lowest-cost region with lower
+Fidelity and Stability. DiCE provides the lowest Sparsity value with lower
+Fidelity and Faithfulness Gap.
+
+\subsection{Global Statistical Evidence Across Methods}
 \begin{table}[h]
 \centering
 \caption{Friedman tests across methods.}
@@ -1069,7 +1074,12 @@ Cost             & 27.72 & 4.16e-06 & Yes \\
 \label{tab:friedman}
 \end{table}
 
-\subsection{Focused SHAP vs LIME Comparison}
+For every metric, the Friedman test rejects the null of equal performance across
+methods. This establishes global between-method differences, but does not
+identify pairwise direction without post-hoc localization.
+\texttt{[TO FILL: post-hoc method and correction]}.
+
+\subsection{Targeted Pairwise Comparison (SHAP vs LIME on Shared Families)}
 \begin{table}[h]
 \centering
 \caption{Paired Wilcoxon comparison on 45 matched configurations (\texttt{logreg/rf/xgb}).}
@@ -1087,34 +1097,174 @@ Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 \\
 \label{tab:shap-lime}
 \end{table}
 
-\subsection{Reproducibility Snapshot (EXP1 repeated runs)}
-Fidelity CV $\leq 0.0634$, stability CV $\leq 0.0826$, sparsity CV $\leq 0.0441$, and faithfulness-gap CV $\leq 0.0358$ across baseline configurations. Cost CV reaches 0.225 for SHAP variants.
+Within this matched subset, SHAP is higher on Fidelity, Stability, and
+Faithfulness Gap, while LIME has lower Cost and lower Sparsity value. The
+reported p-values indicate non-zero paired differences for all listed metrics.
+Practically, the quality gains for SHAP are accompanied by a runtime penalty
+relative to LIME under shared cells.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.92\linewidth]{../../outputs/paper_a_figures/figures/fig_a5_reproducibility_cv.pdf}
-\caption{Reproducibility heatmap for EXP1 repeated runs (9 seeds per core configuration). Lower CV indicates stronger run-to-run stability.}
-\label{fig:repro-cv}
-\end{figure}
-Figure~\ref{fig:repro-cv} highlights that cost variance dominates quality-metric variance in repeated runs.
+This comparison is restricted to \texttt{logreg/rf/xgb} matched configurations
+and is not directly generalizable to non-matched families or to methods outside
+the SHAP--LIME pair.
+
+\subsection{Reproducibility and Variance Profile}
+EXP1 repeated-run evidence indicates lower dispersion for quality-oriented
+metrics and higher dispersion for runtime behavior. Quality metrics remain
+relatively stable across repeated seeds, while Cost varies more strongly for
+SHAP variants.
+\begin{itemize}[leftmargin=*]
+    \item Metric stability (quality): Fidelity CV $\leq 0.0634$, Stability CV $\leq 0.0826$, Sparsity CV $\leq 0.0441$, Faithfulness-gap CV $\leq 0.0358$.
+    \item Runtime instability (cost): Cost CV reaches 0.225 for SHAP variants.
+    \item Decision implication: quality rankings are more repeatable than runtime behavior under the reported repeated-run protocol.
+\end{itemize}
+
+\subsection{Synthesis and Implications for Practice}
+\begin{itemize}[leftmargin=*]
+    \item When the objective is maximizing Fidelity/Stability/Faithfulness Gap and compute budget is permissive, SHAP is the supported choice in this benchmark.
+    \item When compute or latency is constrained, LIME is the supported low-cost option, with lower Fidelity and Stability than SHAP.
+    \item When conciseness (Sparsity) is the primary objective, DiCE provides the lowest reported Sparsity value, with lower Fidelity and Faithfulness Gap.
+    \item Methods are not statistically interchangeable: Friedman tests reject the null of equal performance across methods for all five primary metrics.
+    \item On the shared SHAP--LIME subset, quality improvements for SHAP are paired with higher runtime cost.
+\end{itemize}
+Interpretation limits:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{[TO FILL: parameterization details / failure analysis for Anchors stability near zero]}.
+    \item \texttt{[TO FILL: external validation on additional datasets/tasks before generalizing method rankings]}.
+\end{itemize}
 
 \section{Validity and Reporting Caveats}
-\begin{enumerate}[leftmargin=*]
-    \item EXP2 robustness is incomplete (50 missing runs) with one malformed result file.
-    \item Runtime comparisons are sensitive to implementation details and hardware.
-    \item Semantic evaluation is out of scope for Paper A.
-\end{enumerate}
+\subsection{Statistical Conclusion Validity}
+\textbf{Issue.} EXP2 robustness coverage is incomplete: 50 runs are missing from
+the planned 300-run cohort, and one artifact is malformed.
 
-\section{JMLR Track Positioning}
-\begin{enumerate}[leftmargin=*]
-    \item Reproducible benchmark framework with artifact lineage and failure accounting.
-    \item Multi-metric protocol with non-parametric inferential testing.
-    \item Reusable operation method (FOM-7) for benchmark execution and audit standardization.
-    \item Clearly scoped quantitative benchmark; semantic track deferred.
-\end{enumerate}
+\textbf{Why it matters.} Reduced and potentially selective coverage can affect
+confidence in method rankings and the reported quality--cost frontier.
+
+\textbf{Mitigation already done.} Analyses use explicit artifact qualification,
+exclude malformed/empty artifacts, enforce block-complete omnibus inference, and
+enforce matched-cell constraints for paired tests.
+
+\textbf{Residual risk.}
+\texttt{[TO FILL: missingness diagnosis by method/model/seed/sample-size cell and impact analysis]}.
+
+\subsection{Construct Validity}
+\textbf{Issue.} Metric labels are implementation-bound; Cost is currently
+wall-clock time rather than an energy-normalized measure.
+
+\textbf{Why it matters.} Cross-study comparability depends on exact operational
+definitions.
+
+\textbf{Mitigation already done.} Metric computation is code-level and
+consistent within the benchmark pipeline.
+
+\textbf{Residual risk.}
+\texttt{[TO FILL: metric definitions location/cross-reference for reviewer traceability]}.
+EEU is not computed in current EXP2 runtime.
+
+\subsection{Internal Validity (Runtime Comparability and Configuration Fidelity)}
+\textbf{Issue.} Runtime and quality comparisons depend on implementation pathway
+choices (e.g., TreeSHAP vs KernelSHAP and runtime parameter bindings).
+
+\textbf{Why it matters.} Method differences may partially reflect implementation
+choices rather than only conceptual algorithmic differences.
+
+\textbf{Mitigation already done.} Matched-cell controls keep model artifact,
+feature space, split/sampling seeds, and metric engine fixed; effective runtime
+bindings are disclosed.
+
+\textbf{Residual risk.}
+\texttt{[TO FILL: environment spec for publication artifact, including CPU policy and dependency lock granularity]}.
+Runtime should be reported under standardized constraints.
+\texttt{[TO FILL: standardized runtime constraint protocol (cores, memory cap, timeout policy)]}.
+
+\subsection{External Validity}
+\textbf{Issue.} Evidence is benchmark-specific and pairwise contrasts are
+restricted to shared-family subsets.
+
+\textbf{Why it matters.} Reported rankings may change across datasets,
+modalities, and tasks.
+
+\textbf{Mitigation already done.} The current benchmark includes multiple model
+families, explainers, seeds, and sampling intensities.
+
+\textbf{Residual risk.} Generalization beyond the present benchmark setting is
+not established.
+
+\subsection{Reproducibility and Operational Validity}
+\textbf{Issue.} Strong reproducibility claims require both deterministic
+execution and durable archival packaging.
+
+\textbf{Why it matters.} Independent verification depends on traceable lineage
+and re-executable artifacts.
+
+\textbf{Mitigation already done.} FOM-7 stage gates, audit outputs, and
+deterministic inference exports are provided.
+
+\textbf{Residual risk.}
+\texttt{[TO FILL: DOI-backed artifact bundle with versioned lineage map]}.
+
+\subsection{Reporting Scope Boundary: Semantic Evaluation}
+\textbf{Issue.} Semantic/user-centric evaluation is outside Paper A scope.
+
+\textbf{Why it matters.} Technical metric superiority does not directly imply
+user-perceived usefulness or decision quality.
+
+\textbf{Mitigation already done.} Paper A restricts claims to quantitative
+benchmark evidence and does not claim user-centric validity.
+
+\textbf{Residual risk.} A complete semantic layer requires calibrated rubric,
+task definitions, and human-study protocol.
+\texttt{[TO FILL: future study design pointer for semantic evaluation integration]}.
+
+\section{JMLR-Track Positioning}
+This work is positioned for the \textbf{Datasets and Benchmarks} track.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Claim:} reusable XAI benchmark artifact stack.
+    \textbf{Evidence/artifact:} code, experiment configs, run artifacts, summary exports, and inferential outputs under versioned paths.
+    \textbf{Why it matters:} benchmark-track value depends on reusable resources, not only narrative findings.
+    \item \textbf{Claim:} auditable failure accounting is integral to the benchmark.
+    \textbf{Evidence/artifact:} explicit missing/malformed artifact reporting, integrity audits, and stage-gated FOM-7 progression.
+    \textbf{Why it matters:} transparent failure accounting improves trust in benchmark conclusions.
+    \item \textbf{Claim:} protocol supports multi-objective method comparison.
+    \textbf{Evidence/artifact:} joint reporting of Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost with omnibus and paired non-parametric tests.
+    \textbf{Why it matters:} benchmark utility increases when quality, robustness, and compute trade-offs are jointly measurable.
+    \item \textbf{Claim:} operational novelty is provided by FOM-7.
+    \textbf{Evidence/artifact:} explicit stage/gate model linking protocol definition, integrity checks, inference export, and claim-ready reporting.
+    \textbf{Why it matters:} contributes an auditable benchmarking method beyond score aggregation.
+    \item \textbf{Claim:} novelty relative to prior XAI benchmarks/toolkits is explicit but requires finalized comparative framing.
+    \textbf{Evidence/artifact:} current manuscript contains methodological structure and artifact lineage; comparative novelty matrix is pending.
+    \textbf{Why it matters:} benchmark-track review requires clear differentiation from prior resources.
+    \texttt{[TO FILL: comparison citations and novelty delta statement]}.
+\end{itemize}
+Artifact package statement for submission:
+\begin{itemize}[leftmargin=*]
+    \item code/configs/analysis outputs/failure reports are present,
+    \item logs and lineage graph require indexed packaging metadata.
+    \texttt{[TO FILL: artifact index with paths for logs/lineage graph]}.
+\end{itemize}
 
 \section{Conclusion}
-The evidence supports a clear trade-off frontier: SHAP leads fidelity/stability, LIME leads runtime practicality, and DiCE leads sparsity. In addition to empirical findings, Paper A contributes FOM-7 as a concrete operating protocol for running, auditing, and reporting XAI benchmark studies.
+The reported metrics indicate a multi-objective frontier rather than a single
+best method: SHAP is strongest on the reported quality-oriented metrics, LIME is
+strongest on runtime efficiency, and DiCE is strongest on the reported sparsity
+criterion. Global tests reject the null of equal method performance across the
+primary metrics, and paired SHAP--LIME analysis indicates a quality--cost
+trade-off on shared model families.
+
+Methodologically, Paper A contributes FOM-7 as an auditable benchmark operation
+protocol that connects protocol freezing, controlled execution, integrity audit,
+deterministic inference export, and claim-traceable reporting. This contribution
+is operational and reproducibility-focused rather than algorithmic.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
+    \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
+    \item \textbf{Limitation:} incomplete EXP2 coverage and malformed artifacts qualify confidence in full-grid frontier stability.
+    \item \textbf{Next steps:} finalize missingness diagnostics and archival package.
+    \texttt{[TO FILL: missingness diagnosis + DOI package plan]}.
+    \item \textbf{Next steps:} integrate deferred semantic evaluation via calibrated rubric and task-grounded human study.
+    \texttt{[TO FILL: future semantic study protocol]}.
+\end{itemize}
 
 \acks{Funding and competing-interest disclosures are to be finalized in the submission package. This draft was prepared from repository artifacts dated February 2026.}
 
