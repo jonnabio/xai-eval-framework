@@ -2,16 +2,14 @@
 
 - **Current Objective:** Run and maintain the XAI experiment pipeline and serve results to the dashboard.
 - **Current State:** 
-    - **API:** Running on port 8000 (local) and deployed on Render.
-    - **Experiments:** Recovery runner (`scripts/run_recovery.py`) is executing missing experiments (Anchors, DiCE, SVM/MLP SHAP).
-    - **Data:** Verified `exp2_scaled` results (334 total runs confirmed visible in API).
-    - **Dashboard Data:** Merged `aggregated_metrics` and `llm_evaluation` into `results.json` files for dashboard consumption.
-    - **Dashboard:** Connected and visualizing results.
-    - **Known Issues:** Feature mismatch (107 vs 108) in `MLPClassifier` resolved by loading correct preprocessor. Missing dependencies (`alibi`, `dice-ml`) installed. JSON corruption in `exp2_scaled` fixed.
+    - **API:** Running on Render (Oregon) and synchronized with the latest recovery data.
+    - **Experiments:** Phase 1 Recovery is **82.4% complete**. All MLP experiments are finalized. Currently running the high-latency **SVM + Kernel SHAP** batch (6 workers optimized).
+    - **Data:** 344 healthy runs confirmed live in production dashboard.
+    - **Dashboard Assets:** Updated Radar plots, Trade-off scatter plots, and Pearson Heatmaps generated with the 82% dataset and pushed to `outputs/`.
 - **Next Steps:**
-    1. Monitor recovery experiments and verify dashboard integration.
-    2. Expand test coverage for API endpoints.
-    3. Finalize data aggregation for thesis report.
+    1. Complete the final 17.6% of recovery (SVM-only).
+    2. Finalize Paper A/B drafts with full statistical significance.
+    3. Monitor background workers for potential SVM budget timeouts.
 - **Active Constraints:**
     - Python 3.10+ required.
     - `alibi` and `dice-ml` are required.
