@@ -7,7 +7,15 @@
 Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12, p=3.78\times10^{-9}$), stability ($\chi^2=43.88, p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64, p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00, p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72, p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use. LLM-based semantic scoring is deferred to a dedicated follow-up study.
 
 ## 1. Introduction
-XAI evaluation remains fragmented across incompatible metrics and ad hoc setups. Most comparisons over-index on fidelity and omit stability, sparsity, and semantic interpretability. This project operationalizes a benchmark-first approach:
+Evaluation of post-hoc explainability methods remains methodologically fragmented. Recent review evidence shows heterogeneous metric choices and inconsistent evaluation objectives, which weakens cross-paper comparability and cumulative evidence synthesis (Kadir et al., 2023; Pawlicki et al., 2024). In practice, fidelity-centric reporting is still common even when stability, complexity, and computational burden materially affect whether explanations are actionable in deployment.
+
+Open-source toolkits have improved implementation reproducibility (e.g., InterpretDL and Quantus), but toolkit availability does not by itself establish inferential comparability across methods and settings (Li et al., 2022; Hedström et al., 2023). Benchmark claims still require explicit split discipline, artifact qualification rules, aggregation-unit definitions, and multiplicity-aware statistical testing.
+
+Domain-specific benchmark initiatives in graph explainability further reinforce this point. GraphXAI/ShapeGGen and B-XAIC show that benchmark conclusions depend on transparent assumptions about dataset construction, ground-truth rationale design, and reporting constraints (Agarwal et al., 2023; Proszewska et al., 2025). In parallel, attribution-consensus analyses in Rashomon sets show that explanation disagreement can persist even when predictive performance remains similar (Laberge et al., 2023), and robustness-focused faithfulness studies show sensitivity to perturbation protocol design (Zheng et al., 2025).
+
+This paper targets model-agnostic tabular post-hoc explanation benchmarking. It does not address representation-level interpretability (e.g., neuron-level probing in NLP), which involves different constructs and validation procedures (Durrani et al., 2023).
+
+Given these gaps, this project operationalizes a benchmark-first approach:
 1. A generic trainer/explainer architecture for model-agnostic evaluation.
 2. A prescriptive operation method that defines how the framework is run, audited, and reported.
 3. Multi-metric quantitative scoring with explicit trade-off analysis.
@@ -1035,92 +1043,7 @@ Interpretation limits:
 - [TO FILL: parameterization details / failure analysis for Anchors stability near zero].
 - [TO FILL: external validation on additional datasets/tasks before generalizing these method rankings].
 
-## 5. Validity and Reporting Caveats
-### 5.1 Statistical Conclusion Validity
-**Issue.** The EXP2 robustness cohort is incomplete: 50 runs are missing from the planned 300-run grid, and one result artifact is malformed.
-
-**Why it matters.** Missing and invalid runs reduce inferential coverage and can affect confidence in estimated method rankings and the reported quality-cost frontier if missingness is systematic.
-
-**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests.
-
-**Residual risk.** The mechanism of missingness is not yet characterized as random vs systematic. `[TO FILL: missingness diagnosis by method/model/seed/sample-size cell and impact analysis]`
-
-### 5.2 Construct Validity
-**Issue.** Reported metric names are operationalized by implementation-specific definitions, and cost is currently wall-clock time rather than an energy-normalized measure.
-
-**Why it matters.** Interpretation depends on exact metric semantics; cross-paper comparability is weakened when metric labels are shared but implementations differ.
-
-**Mitigation already done.** Metric computation is code-bound and consistently applied within the benchmark pipeline; global and paired comparisons use the same metric engine and aggregation logic.
-
-**Residual risk.** Some metric definitions still need explicit manuscript anchoring for reviewer-level traceability. `[TO FILL: metric definitions location/cross-reference]`  
-EEU remains uncomputed in EXP2 runtime and therefore cannot support energy-based claims.
-
-### 5.3 Internal Validity (Runtime Comparability and Configuration Fidelity)
-**Issue.** Runtime and accuracy-like comparisons depend on explainer variants and runtime bindings (e.g., TreeSHAP vs KernelSHAP, Anchors threshold binding, DiCE counterfactual count binding).
-
-**Why it matters.** Apparent method differences can partially reflect implementation pathway choices rather than only conceptual method differences.
-
-**Mitigation already done.** Within each matched cell, model artifact, transformed feature space, split/sampling seeds, and metric engine are held constant; effective runtime parameter bindings are disclosed.
-
-**Residual risk.** Runtime comparability remains sensitive to software stack and hardware profile. `[TO FILL: environment spec for publication artifact, including CPU policy and dependency lock granularity]`  
-For cross-study comparability, runtime should be reported under standardized constraints. `[TO FILL: standardized runtime constraint protocol (cores, memory cap, timeout policy)]`
-
-### 5.4 External Validity
-**Issue.** Evidence is benchmarked on a single task setting and reported pairwise contrasts are restricted to shared model-family subsets.
-
-**Why it matters.** Method rankings and trade-offs may shift across datasets, modalities, and task definitions.
-
-**Mitigation already done.** The benchmark includes multiple model families, multiple explainers, and seed/sample-size heterogeneity within the evaluated setting.
-
-**Residual risk.** Generalization beyond the current benchmark context is not established and should be treated as an open empirical question.
-
-### 5.5 Reproducibility and Operational Validity
-**Issue.** Strong reproducibility claims require both deterministic pipelines and durable artifact packaging.
-
-**Why it matters.** Without auditable lineage and re-execution hooks, reported benchmark conclusions are difficult to verify independently.
-
-**Mitigation already done.** FOM-7 defines stage-gated execution with required artifacts; run inventories, inference exports, and reproducibility scripts are provided.
-
-**Residual risk.** Immutable archival packaging is not finalized. `[TO FILL: DOI-backed artifact bundle with versioned lineage map]`
-
-### 5.6 Reporting Scope Boundary: Semantic Evaluation
-**Issue.** Semantic/user-centric evaluation is out of scope for Paper A.
-
-**Why it matters.** Technical metric superiority does not directly establish user-perceived usefulness, trust calibration, or task-level decision quality.
-
-**Mitigation already done.** Paper A explicitly scopes claims to quantitative benchmark evidence; no user-centric claims are made.
-
-**Residual risk.** A complete semantic layer requires a calibrated rubric, task definitions, and human-study protocol (potentially with LLM-judge calibration), which are deferred. `[TO FILL: future study design pointer for semantic evaluation integration]`
-
-## 6. JMLR-Track Positioning
-This work is positioned for the **Datasets and Benchmarks** track.
-
-- **Claim:** The submission provides a reusable XAI benchmark artifact stack.  
-  **Evidence/artifact:** code (`src/`, `scripts/`), experiment configs (`configs/experiments/`), run artifacts (`experiments/exp2_scaled/results/**/results.json`), summary exports, and inferential outputs (`outputs/analysis/paper_a_exp2_stats/`).  
-  **Why it matters to the track:** benchmark-track contributions require reusable resources, not only narrative findings.
-
-- **Claim:** The benchmark is auditable with explicit failure accounting.  
-  **Evidence/artifact:** coverage/missingness diagnostics, malformed-artifact reporting, and stage-gated FOM-7 execution with artifact gates.  
-  **Why it matters to the track:** transparent handling of incomplete runs improves trustworthiness of benchmark evidence.
-
-- **Claim:** The evaluation protocol supports multi-objective comparison rather than single-metric ranking.  
-  **Evidence/artifact:** joint reporting of Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost with omnibus and paired non-parametric tests.  
-  **Why it matters to the track:** benchmark utility increases when trade-offs are measurable across quality, robustness, and compute axes.
-
-- **Claim:** The framework is designed for extension and repeat execution.  
-  **Evidence/artifact:** config-driven experiment matrix, deterministic analysis driver, reproducibility scripts, and FOM-7 operational protocol.  
-  **Why it matters to the track:** reusable benchmark infrastructure supports follow-on comparisons and ablations by other groups.
-
-- **Claim:** The methodological novelty is the combination of benchmark evidence with auditable execution governance (FOM-7).  
-  **Evidence/artifact:** explicit stage/gate model linking protocol specification, integrity audit, inference export, and claim-ready reporting.  
-  **Why it matters to the track:** this contributes a replicable benchmark operation model, not only method-level score tables.  
-  `[TO FILL: comparison citations to existing XAI benchmark/toolkit papers and novelty delta statement]`
-
-Artifact packaging expected for submission:
-- released code/configs/analysis outputs and failure reports are present;
-- logs and lineage graph should be explicitly indexed in submission metadata. `[TO FILL: artifact index with paths for logs/lineage graph]`
-
-## 7. Conclusion
+## 5. Conclusion
 The reported results indicate a multi-objective frontier rather than a single best method: SHAP is strongest on the reported quality-oriented metrics, LIME is strongest on runtime efficiency, and DiCE is strongest on the reported sparsity criterion. Global non-parametric tests reject the null of equal performance across methods on all primary metrics, while the SHAP-LIME paired subset confirms a quality-cost trade-off on shared model families.
 
 Methodologically, Paper A contributes FOM-7 as an auditable operation protocol for benchmark studies: protocol freezing, controlled execution, integrity auditing, harmonized inference, reproducibility profiling, and claim-traceable reporting. This contribution is operational rather than algorithmic; it specifies how benchmark evidence is generated and qualified under incomplete execution.
@@ -1131,15 +1054,13 @@ Methodologically, Paper A contributes FOM-7 as an auditable operation protocol f
 - **Next steps:** complete missingness diagnostics and publish archival artifact bundle with explicit lineage. `[TO FILL: missingness diagnosis + DOI package plan]`
 - **Next steps:** integrate deferred semantic evaluation with calibrated rubric and task-grounded human-study protocol. `[TO FILL: future semantic study protocol]`
 
-## 8. Methodology-Driving References (from attached set)
-- `14708_XAI_Evaluation_Metrics__Taxonomies__Concepts_and_Applications__INES_2023_-7.pdf`
-- `Evaluating the necessity of the multiple metrics for assessing explainable AI A critical examination.pdf`
-- `Evaluation of Neural Network Explanations and Beyond.pdf`
-- `Quantus- An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond.pdf`
-- `OpenXAI- Towards a Transparent Evaluation of Post hoc Model Explanations.pdf`
-- `Attribution-based Explanations that Provide Recourse.pdf`
-- `Consensus on Feature Attributions in the Rashomon Set.pdf`
-- `On the Complexity of SHAP-Score-Based Explanations.pdf`
-- `Sampling Permutations for Shapley Value Estimation.pdf`
-- `The Faithful Shapley Interaction Index.pdf`
-- `On the Faithfulness of Vision Transformer Explanations.pdf`
+## 6. Methodology-Driving References (from attached set)
+- Kadir, M. A., Mosavi, A., and Sonntag, D. (2023). *Evaluation Metrics for XAI: A Review, Taxonomy, and Practical Applications*. In *Proceedings of the 2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)*, pp. 111-124.
+- Pawlicki, M., Pawlicka, A., Uccello, F., Szelest, S., D'Antonio, S., Kozik, R., and Choraś, M. (2024). *Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination*. Neurocomputing, 602:128282.
+- Li, X., Xiong, H., Li, X., Wu, X., Chen, Z., and Dou, D. (2022). *InterpretDL: Explaining Deep Models in PaddlePaddle*. Journal of Machine Learning Research, 23:1-6.
+- Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., and Höhne, M. M.-C. (2023). *Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond*. Journal of Machine Learning Research, 24:1-11.
+- Agarwal, C., Queen, O., Lakkaraju, H., and Zitnik, M. (2023). *Evaluating explainability for graph neural networks*. Scientific Data, 10:144.
+- Proszewska, M., Danel, T., and Rymarczyk, D. (2025). *B-XAIC Dataset: Benchmarking Explainable AI for Graph Neural Networks Using Chemical Data*. arXiv:2505.22252.
+- Laberge, G., Pequignot, Y., Mathieu, A., Khomh, F., and Marchand, M. (2023). *Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set*. Journal of Machine Learning Research, 24:1-50.
+- Durrani, N., Dalvi, F., and Sajjad, H. (2023). *Discovering Salient Neurons in deep NLP models*. Journal of Machine Learning Research, 24:1-40.
+- Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., and Luo, D. (2025). *F-FIDELITY: A Robust Framework for Faithfulness Evaluation of Explainable AI*. ICLR 2025.
