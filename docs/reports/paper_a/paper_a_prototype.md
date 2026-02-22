@@ -1,1066 +1,401 @@
 # A Framework for Rigorous Evaluation of Model-Agnostic Explainability Methods: Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 
-**Target Venue**: Journal of Machine Learning Research (JMLR), Datasets and Benchmarks Track  
-**Draft Status**: Updated from repository artifacts on February 13, 2026 (latest experiment artifacts dated February 4, 2026)
-
 ## Abstract
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12, p=3.78\times10^{-9}$), stability ($\chi^2=43.88, p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64, p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00, p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72, p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use. LLM-based semantic scoring is deferred to a dedicated follow-up study.
-
-## 1. Introduction
-Evaluation of post-hoc explainability methods remains methodologically fragmented. Recent review evidence shows heterogeneous metric choices and inconsistent evaluation objectives, which weakens cross-paper comparability and cumulative evidence synthesis (Kadir et al., 2023; Pawlicki et al., 2024). In practice, fidelity-centric reporting is still common even when stability, complexity, and computational burden materially affect whether explanations are actionable in deployment.
-
-Open-source toolkits have improved implementation reproducibility (e.g., InterpretDL and Quantus), but toolkit availability does not by itself establish inferential comparability across methods and settings (Li et al., 2022; Hedström et al., 2023). Benchmark claims still require explicit split discipline, artifact qualification rules, aggregation-unit definitions, and multiplicity-aware statistical testing.
-
-Domain-specific benchmark initiatives in graph explainability further reinforce this point. GraphXAI/ShapeGGen and B-XAIC show that benchmark conclusions depend on transparent assumptions about dataset construction, ground-truth rationale design, and reporting constraints (Agarwal et al., 2023; Proszewska et al., 2025). In parallel, attribution-consensus analyses in Rashomon sets show that explanation disagreement can persist even when predictive performance remains similar (Laberge et al., 2023), and robustness-focused faithfulness studies show sensitivity to perturbation protocol design (Zheng et al., 2025).
-
-This paper targets model-agnostic tabular post-hoc explanation benchmarking. It does not address representation-level interpretability (e.g., neuron-level probing in NLP), which involves different constructs and validation procedures (Durrani et al., 2023).
-
-Given these gaps, this project operationalizes a benchmark-first approach:
-1. A generic trainer/explainer architecture for model-agnostic evaluation.
-2. A prescriptive operation method that defines how the framework is run, audited, and reported.
-3. Multi-metric quantitative scoring with explicit trade-off analysis.
-4. Reproducibility and statistical rigor suitable for benchmark publication.
-
-This revision aligns claims to the current repository state and removes unsupported statements.
-
-## 2. Related Work and Framework Design
-
-### 2.1 Literature-Grounded Design Rationale (Paper A Scope)
-The attached literature supports five methodological requirements:
-1. **Multi-metric evaluation is necessary**: taxonomic and critical reviews show that fidelity-only evaluation is incomplete and often misleading.
-2. **Faithfulness is multi-faceted**: recent work on faithfulness metrics and Shapley theory shows that no single faithfulness proxy is sufficient.
-3. **Computational tractability matters**: SHAP approximation complexity and sampling papers motivate explicit runtime and variance reporting.
-4. **Benchmark transparency matters**: OpenXAI/Quantus-style toolkits emphasize reproducibility, standardized APIs, and clear artifact accounting.
-5. **LLM-judge scores need calibration**: current evidence supports treating LLM judging as a separate, follow-up evaluation track.
-
-### 2.2 Architecture
-The framework decouples model training, explanation generation, and evaluation through a registry/factory-based design. Current benchmark coverage includes `logreg`, `rf`, `xgb`, `svm`, and `mlp` backends with `lime`, `shap`, `anchors`, and `dice` explainers.
-
-### 2.3 Metric Suite (Primary)
-The quantitative metrics implemented in current artifacts are:
-- **Fidelity**: Local agreement between explainer output and model behavior.
-- **Stability**: Perturbation consistency of explanations.
-- **Sparsity**: Fraction/number of active explanatory features.
-- **Cost**: Runtime per explained instance.
-- **Faithfulness Gap**: Agreement between explanation importance and model response shifts.
-
-### 2.4 Paper A Operational Outcome: Framework Operation Method (FOM-7)
-Paper A contributes not only benchmark findings, but also a reusable operating method for the framework. We formalize this as **FOM-7**, a seven-stage protocol with explicit stage inputs, outputs, and quality gates:
-1. Protocol specification.
-2. Controlled batch execution.
-3. Artifact integrity audit.
-4. Metric harmonization and aggregation.
-5. Statistical inference and post-hoc localization.
-6. Reproducibility characterization.
-7. Claim-ready reporting with caveat ledger.
-
-The methodological contribution of Paper A is therefore dual:
-- a software framework architecture;
-- and an operation method that makes benchmark studies reproducible and reviewable across runs and teams.
-
-## 3. Methodology
-
-### 3.1 Experimental Cohorts and Scope (EXP1 vs EXP2)
-We intentionally organize evidence into staged cohorts to separate *development*, *verification*, and *confirmatory inference*. This prevents circular analysis (tuning and claiming on the same evidence) and makes claim provenance auditable.
-
-| Cohort | Objective | Design characteristics | Role in Paper A |
-| :--- | :--- | :--- | :--- |
-| **EXP1 pilot/calibration** (`experiments/exp1_adult/results`) | Debug and calibrate the evaluation stack before large-scale inference | Small core run set plus targeted tuning artifacts | Used for implementation sanity, metric behavior checks, and explainer parameter calibration; **not used as primary inferential evidence** |
-| **EXP1 reproducibility** (`experiments/exp1_adult/reproducibility`) | Quantify run-to-run variance under repeated seeds | 9 repeated runs per core configuration | Used to report coefficient of variation (CV) and reproducibility stability profiles |
-| **EXP2 comparative** (`experiments/exp2_comparative/results`) | Establish full method/model coverage under controlled budget | Complete $5 \times 4$ model-explainer matrix at fixed seed | Used as balanced breadth check and baseline comparative layer |
-| **EXP2 robustness** (`experiments/exp2_scaled/results`) | Support cross-method inference under controlled heterogeneity | Multi-seed ($5$) and multi-sample-size ($N \in \{50,100,200\}$) design | **Primary inferential cohort** for Friedman/Nemenyi/Wilcoxon analyses |
-
-Methodological rationale for EXP1/EXP2 separation:
-1. **Tuning-evaluation separation**: EXP1 absorbs calibration work so EXP2 can function as confirmatory evidence.
-2. **Validity layering**: EXP1 addresses implementation validity and reproducibility; EXP2 addresses comparative and inferential validity.
-3. **Failure transparency**: explicit cohort boundaries make missing/invalid artifacts visible instead of silently mixed into pooled summaries.
-4. **Claim discipline**: claims are scoped to cohorts that are actually fit-for-purpose (e.g., significance claims from EXP2 robustness only).
-
-Operationally, this mirrors the train/dev/test principle in predictive modeling, but adapted for XAI evaluation systems: **EXP1 = development and reliability qualification**, **EXP2 = comparative and inferential qualification**.
-
-Accordingly, Paper A inferential claims are driven by EXP2 (especially block-complete analyses in `exp2_scaled`), while EXP1 is used for calibration and reproducibility characterization.
-
-### 3.2 Research Questions and Hypotheses
-This section defines the inferential target of the study and makes explicit what is treated as confirmatory versus robustness-oriented evidence.
-
-Let:
-- $\mathcal{K}$ be the set of explanation methods;
-- $\mathcal{B}$ be the set of evaluation blocks, where each block is a `(model, N)` context;
-- $y_{k,b,m}$ be the run-level aggregated score for method $k$, block $b$, and metric $m$.
-
-We study the metric set
-$m \in \{$fidelity, stability, sparsity, faithfulness gap, cost$\}$.
-These metrics intentionally span distinct constructs (faithfulness, consistency, cognitive compactness, and computational burden), so no single metric is interpreted as sufficient for global method superiority.
-
-We evaluate two research questions:
-1. **RQ1 (Method separation)**: Do explanation methods differ significantly on each technical metric when compared over repeated evaluation blocks?
-2. **RQ2 (Trade-off stability)**: Are method trade-offs stable across context modifiers (model family and sample size), or do they shift materially by context?
-
-For **RQ1**, the confirmatory metric-wise hypotheses are:
-- $H_{0,m}^{(1)}$: all methods have equal median rank for metric $m$ across blocks.
-- $H_{1,m}^{(1)}$: at least one method differs in median rank for metric $m$.
-
-Interpretation of RQ1:
-- rejection of $H_{0,m}^{(1)}$ implies the benchmark can discriminate methods on metric $m$;
-- non-rejection implies that observed differences are not strong enough, given current variance and coverage, to support method-level separation for $m$.
-
-For **RQ2**, we formalize stability as *context-invariance of relative method behavior*, using two complementary hypotheses:
-- $H_{0,m}^{(2a)}$: the relative ordering of methods for metric $m$ is stable across blocks (no systematic context-driven rank shifts).
-- $H_{1,m}^{(2a)}$: method ordering for metric $m$ changes across blocks (context-dependent rank shifts exist).
-- $H_{0,m}^{(2b)}$: pairwise method differences on metric $m$ do not vary systematically with model family or sample size.
-- $H_{1,m}^{(2b)}$: pairwise method differences on metric $m$ vary systematically with model family and/or sample size.
-
-Interpretation of RQ2:
-- this is not a question of whether trade-offs exist (they generally do), but whether they are **stable enough to support portable guidance**;
-- practical instability is flagged by context-dependent rank reversals and/or large shifts in pairwise effect magnitude across block strata.
-
-Methodological scoping:
-- RQ1 is the primary confirmatory layer for statistical discrimination.
-- RQ2 is the robustness layer linking statistical outcomes to external validity and deployment relevance.
-
-### 3.3 Dataset, Preprocessing, and Leakage Controls
-The benchmark uses the Adult Income dataset (UCI Census Income) through a dedicated data pipeline (`src/data_loading/adult.py`) with explicit provenance, cleaning, and transformation controls.
-
-#### 3.3.1 Data provenance and schema control
-The loader implements a source hierarchy and cache validation protocol:
-1. primary source: OpenML Adult v2 (`data_id=1590`);
-2. fallback source: direct UCI files (`adult.data`, `adult.test`);
-3. cache integrity: checksum-validated parquet cache with metadata (`shape`, `columns`, `source`, `download_date`, package versions).
-
-Schema is fixed to 15 columns:
-- **Target**: `income`;
-- **Numeric predictors** (6): `age`, `fnlwgt`, `education-num`, `capital-gain`, `capital-loss`, `hours-per-week`;
-- **Categorical predictors** (8): `workclass`, `education`, `marital-status`, `occupation`, `relationship`, `race`, `sex`, `native-country`.
-
-The cleaning stage performs:
-- whitespace normalization for string fields;
-- normalization of missing markers (`?`) to `NaN`;
-- target canonicalization and binary encoding (`<=50K`/`<=50K.` -> `0`, `>50K`/`>50K.` -> `1`);
-- duplicate-row removal;
-- numeric type coercion for all six continuous/count features.
-
-In the current artifact state, the cleaned dataset contains 48,790 rows (after duplicate/invalid-target filtering).
-
-#### 3.3.2 Split protocol and deterministic execution
-Data are split with a stratified holdout protocol:
-- `train_test_split(test_size=0.2, stratify=y, random_state=seed)`.
-
-This guarantees:
-- class-prior preservation between train/test;
-- exact split reproducibility for a given seed;
-- controlled seed variation across robustness cohorts without changing the split algorithm itself.
-
-For the default seed configuration, this corresponds to 39,032 training rows and 9,758 test rows, with nearly identical class prevalence across splits.
-
-#### 3.3.3 Preprocessing design and feature-space construction
-Preprocessing is implemented as a `ColumnTransformer` with two branches:
-1. numeric branch: `StandardScaler` applied to the six numeric features;
-2. categorical branch: `OneHotEncoder(handle_unknown='ignore', sparse_output=False)` applied to the eight categorical features.
-
-Important implementation details:
-- one-hot encoding is learned on the training partition only;
-- unseen test categories are ignored (no transformation failure);
-- categorical missing values are represented as explicit categories by the encoder (rather than row deletion);
-- output is dense to simplify downstream model/explainer interoperability.
-
-With the current training vocabulary, the categorical branch yields 102 encoded columns; combined with six scaled numeric columns, the processed design matrix has 108 features.
-
-#### 3.3.4 Leakage controls and cross-stage alignment
-Leakage prevention is enforced at multiple levels:
-1. the preprocessor is fitted on training data only and then frozen for test transformation;
-2. feature names are extracted from the fitted transformer and propagated to explainers/metrics to avoid attribution-index drift;
-3. when available, `ExperimentRunner` loads the persisted training preprocessor artifact (`preprocessor.pkl` / `preprocessor.joblib`) from the model directory and reuses it for experiment execution.
-
-The third control is critical: it ensures that explanation generation and metric evaluation operate in exactly the same transformed feature space used by the trained black-box model.
-
-#### 3.3.5 Construct caveats relevant to Adult
-Adult is appropriate for tabular XAI benchmarking but carries known socio-demographic imbalance and proxy-feature concerns (e.g., `sex`, `race`, `native-country`). Therefore, this section establishes preprocessing and leakage rigor, but does not claim that preprocessing removes fairness-related construct risks; those remain part of validity considerations.
-
-### 3.4 Experimental Design and Analysis Units
-#### 3.4.1 Design type and inferential target
-The EXP2 comparative study is structured as a crossed, repeated-seed factorial design with:
-- model family $g \in \mathcal{G}=\{$`logreg`, `rf`, `xgb`, `svm`, `mlp`$\}$;
-- explainer $k \in \mathcal{K}=\{$`lime`, `shap`, `anchors`, `dice`$\}$;
-- seed $s \in \mathcal{S}=\{42,123,456,789,999\}$;
-- sampling intensity $n \in \mathcal{N}=\{50,100,200\}$.
-
-Each executed configuration defines one run-level observation for each metric $m$:
-$y_{g,k,s,n,m}$.
-
-Because seed coverage is partially unbalanced in the realized artifact set, confirmatory inference is built on block-level summaries. For block $b=(g,n)$:
-$$
-\bar{y}_{k,b,m}=\frac{1}{|S_{k,b}|}\sum_{s \in S_{k,b}} y_{g,k,s,n,m},
-$$
-where $S_{k,b}\subseteq\mathcal{S}$ is the set of analyzable seeds for method $k$ in block $b$. This construction ensures that each block contributes one value per method, preventing methods with more successful seed executions from being over-weighted in omnibus tests.
-
-#### 3.4.2 Planned matrix versus realized execution
-The planned robustness matrix contains:
-$$
-|\mathcal{G}|\times|\mathcal{K}|\times|\mathcal{S}|\times|\mathcal{N}|=5\times4\times5\times3=300
-$$
-run configurations (`configs/experiments/exp2_scaled/manifest.yaml`).
-
-In the current repository snapshot:
-- 250 result files are present under `experiments/exp2_scaled/results`;
-- 233 are analyzable (non-empty `instance_evaluations`);
-- 16 are structurally empty;
-- 1 file is malformed JSON.
-
-For global method comparisons, we retain only model-size blocks with at least one analyzable run for each of the four methods. This yields 15/15 complete blocks (`5` models x `3` sample sizes), preserving full model-size coverage at the block level despite missing seed-level replications.
-
-Within those complete blocks, per-method seed availability is heterogeneous:
-- SHAP: 2-5 seeds per block (mean $\approx 4.33$),
-- LIME: 5 seeds per block (mean $=5.00$),
-- Anchors: 1-5 seeds per block (mean $\approx 2.87$),
-- DiCE: 2-5 seeds per block (mean $\approx 3.33$).
-
-No imputation is applied for missing runs; all inference is conditional on observed analyzable artifacts.
-
-#### 3.4.3 Within-run sampling protocol and realized exposure
-Each run uses stratified error-quadrant sampling (`src/evaluation/sampler.py`):
-- `TP` (true positive),
-- `TN` (true negative),
-- `FP` (false positive),
-- `FN` (false negative).
-
-The configuration parameter `samples_per_class = N` is interpreted as **target samples per quadrant**, so the nominal run size is $4N$ instances.
-
-Realized run size can be lower when:
-1. a quadrant has fewer than $N$ available test instances for a given model/seed; or
-2. some sampled instances fail during explainer execution and are dropped at evaluation time.
-
-Empirically (EXP2 analyzable runs), realized run sizes range from 27 to 800 instances (median 400). Across all retained instance evaluations (103,577 total), quadrant proportions remain close to balanced:
-- TP: 26,523 (25.6%),
-- TN: 26,050 (25.2%),
-- FP: 25,200 (24.3%),
-- FN: 25,804 (24.9%).
-
-This near-balance is important because it limits confounding of metric summaries by error-type composition.
-
-#### 3.4.4 Analysis units and anti-pseudoreplication strategy
-The design distinguishes four analytical levels:
-1. **Instance level**: raw metric outputs for each explained case.
-2. **Run level**: per-configuration aggregation of instance metrics ($y_{g,k,s,n,m}$).
-3. **Block level**: per-method averages within `(model, N)` blocks ($\bar{y}_{k,b,m}$), used for omnibus non-parametric comparisons.
-4. **Matched-pair level**: explicit SHAP-LIME pairs on shared `(model, seed, N)` cells.
-
-Global Friedman/Nemenyi analyses are performed on a $15 \times 4$ block-method matrix (15 model-size blocks, 4 methods), which avoids pseudo-replication from instance-level observations and avoids double-counting seed replicates as independent blocks.
-
-For focused SHAP-vs-LIME contrasts, matched analyzable cells are:
-- 65 pairs when all five models are allowed;
-- 45 pairs for the restricted `logreg`/`rf`/`xgb` subset used in the primary paired analysis.
-
-#### 3.4.5 Retention and exclusion rules
-To make the inferential dataset reproducible and auditable, runs are handled under fixed inclusion logic:
-1. parseable JSON artifact required (malformed files excluded);
-2. non-empty per-instance evaluations required for run-level analysis;
-3. no synthetic completion of missing runs or seeds;
-4. omnibus method tests restricted to block-complete contexts;
-5. paired tests restricted to explicitly matched SHAP-LIME configurations.
-
-These rules separate **experimental design intent** (300-run full factorial) from **inferential design realization** (artifact-qualified subsets), which is critical for defensible claims under incomplete execution.
-
-### 3.5 Experimental Design Protocol (Replication Specification)
-This section provides the executable design specification used for Paper A and is intended to be sufficient for independent replication without implementation guesswork.
-
-#### 3.5.1 Purpose and hypotheses linkage
-Section 3.5 operationalizes the confirmatory and robustness questions defined in Section 3.2:
-1. **RQ1** (method separation): test whether explainer methods differ on each primary quantitative metric.
-2. **RQ2** (trade-off stability): test whether method trade-offs are stable across model family and sampling intensity.
-
-Accordingly, the protocol is built to isolate method effects while controlling data representation, sampling logic, and metric computation paths. Reliability and faithfulness are treated as system properties of the full `(model, explainer, data, metric)` pipeline rather than of explainers in isolation.
-
-#### 3.5.2 Experimental factors and conditions
-Independent variables are defined in the EXP2 configuration artifacts (`configs/experiments/exp2_comparative`, `configs/experiments/exp2_scaled`, `configs/experiments/exp2_scaled/manifest.yaml`):
-
-1. **Dataset** (fixed): Adult Income (`dataset: adult`).
-2. **Model family**: `logreg`, `rf`, `xgb`, `svm`, `mlp`.
-3. **Explainer method**: `lime`, `shap`, `anchors`, `dice`.
-4. **Seed**: $\{42,123,456,789,999\}$ (EXP2 robustness).
-5. **Sampling intensity**: `samples_per_class = N`, with $N \in \{50,100,200\}$ (EXP2 robustness); `N=10` (EXP2 comparative).
-6. **Perturbation regime for stability**: Gaussian input noise with `stability_perturbations=15` (EXP2 robustness) and `stability_noise_level=0.1` (default from `src/experiment/config.py`, because not overridden in EXP2 YAML).
-7. **Method-specific secondary flag**: `counterfactual=true` when explainer is `dice`; otherwise `false`.
-
-Planned EXP2 robustness design size is $5\times4\times5\times3=300$ configurations (see Table X: Design Matrix).
-
-**Ablation status (explicit scope boundary)**:
-1. Paper A is a comparative benchmark, not a component-ablation study.
-2. No component-removal or hyperparameter-factor ablation enters any confirmatory table or hypothesis test.
-3. EXP1 tuning artifacts are treated as calibration records only and are excluded from inferential analysis sets.
-4. Ablation-based causal attribution of performance differences is reserved for a separate extension study (Paper B).
-
-#### 3.5.3 Controls and baselines
-Within each matched cell `(model, seed, N)`, fairness controls are:
-1. same black-box model artifact path (`experiments/exp1_adult/models/*.joblib`);
-2. same transformed feature space via reused preprocessor artifact (`preprocessor.pkl`/`preprocessor.joblib`);
-3. same split/sampling seeds for data partition and TP/TN/FP/FN sampling;
-4. same sampled evaluation protocol and metric engine (`src/experiment/metrics_engine.py`);
-5. same primary metric set and aggregation logic.
-
-Comparator set in Paper A is `lime`, `shap`, `anchors`, `dice` (no method is treated as “oracle”). Practical baselines are therefore cross-method.
-
-Controls currently **not included**:
-- random-attribution sanity baseline;
-- model-parameter randomization sanity check;
-- label-randomization sanity check.
-
-Because these sanity controls are absent, Paper A claims are restricted to **relative method performance under trained-model conditions**. The manuscript does not claim explanation validity under label/model randomization perturbations.
-
-#### 3.5.4 Data protocol
-Data provenance, preprocessing, and leakage controls are defined in Section 3.3 and implemented in `src/data_loading/adult.py`.
-
-Replicable protocol:
-1. Clean Adult dataset (whitespace normalization, `?` to `NaN`, canonical binary target mapping, duplicate removal).
-2. Stratified split: `train_test_split(test_size=0.2, stratify=y, random_state=seed)`.
-3. Fit preprocessor on training split only (if no persisted preprocessor supplied).
-4. Transform train/test with the same fitted transformer.
-5. Extract transformed feature names and propagate to explainers/metrics.
-6. Build evaluation subset via TP/TN/FP/FN stratified sampling (`src/evaluation/sampler.py`) with target size $N$ per quadrant.
-
-For seed `42`, the split is:
-- train: 39,032 rows (`y=0`: 29,687; `y=1`: 9,345);
-- test: 9,758 rows (`y=0`: 7,422; `y=1`: 2,336).
-
-Nominal per-run sample size is $4N$; realized size may be lower when some quadrants have fewer than $N$ available instances.
-
-#### 3.5.5 Model training protocol
-Paper A EXP2 runs load **frozen pre-trained models** from EXP1 artifacts; models are not retrained inside EXP2.
-
-Model objective (all families): binary classification of income class (`<=50K` vs `>50K`).
-
-Loaded model families and persisted hyperparameters (from model artifacts/configs):
-1. `logreg`: `solver=lbfgs`, `max_iter=1000`, `random_state=42`.
-2. `rf`: `n_estimators=50`, `max_depth=15`, `min_samples_leaf=1`, `class_weight=balanced_subsample`, `random_state=42`.
-3. `xgb`: `n_estimators=100`, `max_depth=6`, `learning_rate=0.1`, `objective=binary:logistic`, `eval_metric=logloss`, `random_state=42`.
-4. `svm`: `kernel=rbf`, `C=1.0`, `gamma=scale`, `probability=true`, `random_state=42`.
-5. `mlp`: `hidden_layer_sizes=[100]`, `activation=relu`, `solver=adam`, `max_iter=500`, `random_state=42`.
-
-Early stopping:
-- supported by `XGBoostTrainer` only when validation data are explicitly passed;
-- not active in the saved EXP2 model artifacts (no validation set passed in the model-generation scripts used for persisted artifacts).
-
-Calibration:
-- no explicit probability calibration stage (`Platt`, `isotonic`, or post-hoc calibration wrapper) is applied.
-
-Calibration interpretation policy:
-1. all methods are evaluated on the same fixed uncalibrated model outputs within each matched cell;
-2. inferential claims are comparative (method ordering/trade-offs), not claims about calibrated probability quality;
-3. no calibration-dependent claim is made in Paper A.
-
-Randomness handling:
-- training-time model randomness is fixed at seed `42` in saved model artifacts;
-- EXP2 seed variation changes split/sampling and explainer stochasticity, but does not retrain models.
-
-#### 3.5.6 Explanation generation protocol
-All explainers are called through `ExplainerWrapper.explain_instance` (single-instance interface) and timed per call.
-
-Common input representation:
-1. dense transformed feature vector (108-dimensional in current Adult vocabulary);
-2. model prediction interface requiring `predict_proba` for probability-based methods/metrics.
-
-Method-specific protocol:
-1. **SHAP** (`src/xai/shap_tabular.py`)
-- `explainer_type=tree` for `rf/xgb`; `kernel` for `svm/mlp/logreg` (from EXP2 configs);
-- background sample size `n_background_samples=50`;
-- tree mode uses `feature_perturbation="interventional"` and `model_output="probability"`;
-- class-1 attribution is retained for binary tasks;
-- if TreeExplainer fails for model-serialization reasons, fallback is KernelExplainer.
-
-2. **LIME** (`src/xai/lime_tabular.py`)
-- `num_samples=1000` and `num_features=10` via config schema/EXP2 configs;
-- `kernel_width=3.0` in EXP2 configs;
-- `discretize_continuous=False` (wrapper default);
-- class-1 local explanation map is converted to dense feature vector.
-
-3. **Anchors** (`src/xai/anchors_wrapper.py`)
-- fit `AnchorTabular` on transformed training data;
-- per-instance rule extraction at precision threshold `0.95`;
-- anchor membership converted to binary feature-importance vector.
-
-4. **DiCE** (`src/xai/dice_wrapper.py`)
-- DiCE backend `method="random"` (wrapper default);
-- counterfactual target class `desired_class="opposite"`;
-- feature-importance proxy is absolute difference between original instance and generated counterfactual.
-
-Implementation caveats requiring explicit disclosure:
-1. `anchors` threshold is hardcoded at `0.95` inside wrapper call and currently not read from YAML parameter.
-2. `dice` YAML parameter `num_counterfactuals` is not propagated; implementation currently uses `total_CFs=1`.
-
-Parameter-binding policy used for all reported runs:
-1. SHAP: `explainer_type` and `n_background_samples` are read from YAML and applied.
-2. LIME: `kernel_width` from `explainer.params` is applied; `num_samples` and `num_features` are bound via schema fields (`explainer.num_samples`, `explainer.num_features`) with defaults `1000/10`; duplicate entries under `params` are dropped in runner preprocessing.
-3. Anchors: YAML `threshold` is currently not consumed by runtime; effective threshold is fixed at `0.95`.
-4. DiCE: YAML `num_counterfactuals` is currently not consumed by runtime; effective setting is `total_CFs=1` with backend `method="random"`.
-
-These bindings define the effective treatment settings and therefore the exact conditions under which EXP2 claims are valid.
-
-Runtime constraints:
-- per-instance cost is measured with `perf_counter` around explanation generation;
-- no explicit per-run timeout or memory cap is encoded in experiment YAML;
-- batch execution uses process-level parallelism (`scripts/run_batch_experiments.py`) and forces one evaluation worker per experiment process to avoid nested process explosion (`src/experiment/batch_runner.py`).
-
-Runtime budget profile over analyzable EXP2 runs (`outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv`):
-
-| Method | Runs | Mean Cost (ms) | Median (ms) | P95 (ms) | Max (ms) |
-| :--- | ---: | ---: | ---: | ---: | ---: |
-| SHAP | 65 | 503870.23 | 1098.11 | 1603727.03 | 9393990.21 |
-| LIME | 75 | 3660.68 | 65.73 | 13192.05 | 85825.65 |
-| Anchors | 43 | 28762.43 | 34063.36 | 64568.75 | 67997.67 |
-| DiCE | 50 | 15337.17 | 9759.79 | 34172.81 | 37164.19 |
-
-#### 3.5.7 Evaluation metrics and measurement procedure
-Metrics are computed per instance in `MetricsEngine`, then aggregated.
-
-Primary metrics used for confirmatory claims:
-1. **Cost** (`cost`): wall-clock explanation time in milliseconds.
-2. **Sparsity** (`sparsity`): proportion of active features, threshold $\tau=10^{-4}$.
-3. **Fidelity proxy** (`fidelity`): operationalized as faithfulness correlation score.
-4. **Faithfulness gap** (`faithfulness_gap`): absolute prediction change after masking top-$k$ features ($k=5$).
-5. **Stability** (`stability`): mean pairwise cosine similarity under Gaussian perturbations.
-
-Faithfulness computation (`src/metrics/faithfulness.py`), with model score function $f$, instance $x$, baseline $\tilde{x}$, and attribution weights $w$:
-$$
-\Delta_k = \left| f(x)-f(x_{\text{mask-top-}k}) \right|,
-\qquad
-\rho = \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right).
-$$
-Pipeline mapping is:
-- `fidelity := rho`;
-- `faithfulness_gap := \Delta_k`.
-
-Stability computation (`src/metrics/stability.py`):
-$$
-x^{(t)} = x + \epsilon^{(t)}, \ \epsilon^{(t)} \sim \mathcal{N}(0,\sigma^2),
-\qquad
-S=\frac{2}{T(T-1)}\sum_{a<b}\cos\left(e^{(a)},e^{(b)}\right),
-$$
-with $T=\texttt{stability\_perturbations}$ and $\sigma=\texttt{stability\_noise\_level}$.
-
-Secondary metric track:
-- `cf_sensitivity` (counterfactual sensitivity recall-style metric) is computed when `counterfactual=true` and DiCE counterfactuals are available;
-- domain-alignment metric is implemented but disabled in EXP2 configs (`domain=false`).
-
-Aggregation levels:
-1. instance-level metric vectors;
-2. run-level aggregates (`mean`, `std`, `min`, `max`, `count`) in `results.json`;
-3. block-level method summaries over `(model, N)` for omnibus tests.
-
-**Cost/EEU note**: EEU is specified in design artifacts (`experiments/exp1_adult/configs/metrics/exp1_metrics_config.yaml`) but is not computed in EXP2 runtime because memory/model-call instrumentation is not emitted in run artifacts. Therefore:
-1. confirmatory cost inference uses wall-clock milliseconds only;
-2. EEU is excluded from hypothesis tests, tables, and figures in Paper A.
-
-#### 3.5.8 Statistical analysis plan
-Confirmatory inference uses the retained inferential dataset defined by artifact qualification rules (Section 3.4.5, Section 3.6).
-
-Planned and realized run structure:
-1. planned EXP2 robustness grid: 300 runs;
-2. present artifacts: 250;
-3. analyzable runs: 233;
-4. global omnibus analysis set: 15 complete `(model, N)` blocks.
-
-Hypothesis tests:
-1. **Global multi-method test (RQ1)**: Friedman test per metric across methods with blocks `(model, N)`.
-2. **Post-hoc localization**: Nemenyi pairwise comparisons when Friedman rejects the null.
-3. **Focused paired comparison**: Wilcoxon signed-rank test for SHAP vs LIME on matched `(model, seed, N)` cells.
-
-Multiple-comparison control:
-- Nemenyi procedure controls family-wise error for all method pairs under Friedman framework.
-
-Uncertainty reporting:
-- mean, standard deviation, and coefficient of variation (CV);
-- confidence intervals via both $t$-distribution and bootstrap (`src/analysis/confidence.py`) where generated.
-
-Effect sizes:
-- Friedman-level effect size is reported as Kendall’s $W$ in the EXP2 inference export;
-- paired SHAP-LIME effect size is reported as Cohen’s $d_z$ in the EXP2 Wilcoxon exports.
-
-#### 3.5.9 Robustness and sensitivity analyses
-Robustness is assessed along three implemented axes:
-1. **Seed heterogeneity**: five seeds in EXP2 robustness.
-2. **Sample-size heterogeneity**: $N \in \{50,100,200\}$ per error quadrant.
-3. **Perturbation robustness**: Gaussian-noise stability metric (`T=15`, $\sigma=0.1$ by default).
-
-Additional implemented sensitivity view:
-- reproducibility CV study in EXP1 repeated-seed cohort (`experiments/exp1_adult/reproducibility/reproducibility_report.csv`).
-
-Not included in current Paper A core protocol:
-- adversarial perturbation attacks;
-- causal-intervention benchmarks beyond proxy counterfactual sensitivity.
-
-Adversarial scope boundary:
-- no adversarial stress campaign is part of Paper A; robustness claims are limited to seed, sample-size, and Gaussian-noise perturbation dimensions.
-
-Quantitative robustness interpretation rule used in reporting:
-1. directional consistency: sign of SHAP-LIME median difference must match between the 45-cell primary set and 65-cell all-model sensitivity set;
-2. inferential consistency: Holm-adjusted significance decision must not change between these two matched-set analyses.
-
-If either condition fails for a metric, that metric is reported as sensitivity-unstable rather than robust.
-
-#### 3.5.10 Reproducibility package and rerun instructions
-Reproducibility artifacts currently available in repository:
-1. source code (`src/`, `scripts/`);
-2. experiment configs (`configs/experiments/`);
-3. model and preprocessor artifacts (`experiments/exp1_adult/models/`);
-4. per-run outputs (`experiments/exp2_scaled/results/**/results.json`, `metrics.csv`);
-5. batch manifest and aggregate exports (`outputs/batch_manifest.json`, `outputs/batch_results.csv`);
-6. figure-generation script and outputs (`scripts/generate_paper_a_figures.py`, `outputs/paper_a_figures/`).
-
-Execution-environment assumptions:
-- Python environment defined by `requirements.txt` / `requirements-frozen.txt`;
-- package/runtime versions partially captured in saved model metadata and explicit analysis outputs;
-- reference host used for current manuscript regeneration: Apple M3 Pro, macOS 26.3 (arm64), 11 logical CPUs, 18 GB RAM, Python 3.13.2;
-- lockfile anchor: `sha256(requirements-frozen.txt)=b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc`.
-
-Minimal rerun sequence:
-1. install dependencies from `requirements-frozen.txt` (or controlled equivalent);
-2. verify/create model + preprocessor artifacts in `experiments/exp1_adult/models/`;
-3. run EXP2 robustness batch:
-   `python3 scripts/run_batch_experiments.py --config-dir configs/experiments/exp2_scaled --output outputs/batch_results.csv --parallel`;
-4. audit coverage:
-   `python3 scripts/check_missing_results.py`;
-5. generate summaries/figures:
-   `python3 scripts/quick_summary.py`, `python3 scripts/full_summary.py`, `python3 scripts/generate_paper_a_figures.py`;
-6. compile manuscript outputs.
-
-Archival status:
-- immutable DOI has not yet been minted in this repository state;
-- provenance anchor currently used for this draft: `outputs/batch_manifest.json` (`git_hash=9fc70eb1e218a11f2fdd4bdb3aab3ea10a799a6f`) plus deterministic analysis exports under `outputs/analysis/paper_a_exp2_stats/`.
-
-### 3.6 Statistical Analysis Pipeline (Replication-Grade Specification)
-This section defines the executable protocol that produces all inferential artifacts for Paper A from repository-tracked inputs. It is written as a direct replication contract for independent teams (see Table X and Appendix X).
-
-#### 3.6.1 Experimental factors and conditions
-Independent variables are instantiated from `configs/experiments/exp2_comparative/`, `configs/experiments/exp2_scaled/`, and `configs/experiments/exp2_scaled/manifest.yaml`:
-1. **Dataset** (fixed): `adult` (UCI Adult Income; tabular binary classification).
-2. **Model family**: `logreg`, `rf`, `xgb`, `svm`, `mlp`.
-3. **Explainer method**: `shap`, `lime`, `anchors`, `dice`.
-4. **Random seed** (robustness cohort): $\{42,123,456,789,999\}$.
-5. **Sampling intensity**: `samples_per_class=N`, $N\in\{50,100,200\}$ for EXP2 robustness; `N=10` for EXP2 comparative.
-6. **Stability perturbation regime**: `stability_perturbations=15` and default `stability_noise_level=0.1`.
-7. **Counterfactual metric activation**: `counterfactual=true` only for DiCE runs; `false` otherwise.
-
-Planned EXP2 robustness grid size is $5\times4\times5\times3=300$ configurations. Paper A includes no component-removal ablation as a confirmatory factor; claims are strictly comparative across the defined method-family grid.
-
-#### 3.6.2 Controls and baselines
-For every matched `(model, seed, N)` cell, the following are held constant:
-1. model artifact path (`experiments/exp1_adult/models/*.joblib`);
-2. transformed feature space and preprocessor artifact reuse;
-3. split and sampling random-state values;
-4. evaluation sampler and metric engine implementation;
-5. metric set and aggregation logic.
-
-Baselines are cross-method (`shap`, `lime`, `anchors`, `dice`) under shared conditions; no method is treated as an oracle. Sanity-control baselines (random attribution, model randomization, label randomization) are not part of Paper A runs, so claims are bounded to trained-model comparative performance.
-
-#### 3.6.3 Data protocol
-Data handling is implemented in `src/data_loading/adult.py` and `src/evaluation/sampler.py`:
-1. clean Adult records (whitespace normalization, missing-value canonicalization, duplicate removal, binary target normalization);
-2. split with `train_test_split(test_size=0.2, stratify=y, random_state=seed)`;
-3. fit preprocessor on train only (`StandardScaler` for numeric, `OneHotEncoder(handle_unknown='ignore', sparse_output=False)` for categorical);
-4. transform train/test with the same fitted transformer;
-5. propagate transformed feature names to explainers and metric engine;
-6. sample TP/TN/FP/FN strata with target size `N` per stratum.
-
-For seed `42`, split sizes are train `39,032` (`y=0`: `29,687`, `y=1`: `9,345`) and test `9,758` (`y=0`: `7,422`, `y=1`: `2,336`). Nominal run size is `4N`; realized run size can be lower if a stratum is capacity-limited.
-
-#### 3.6.4 Model training protocol
-EXP2 does not retrain models; it evaluates frozen EXP1 models:
-1. `logreg`: `solver=lbfgs`, `max_iter=1000`, `random_state=42`.
-2. `rf`: `n_estimators=50`, `max_depth=15`, `min_samples_leaf=1`, `class_weight=balanced_subsample`, `random_state=42`.
-3. `xgb`: `n_estimators=100`, `max_depth=6`, `learning_rate=0.1`, `objective=binary:logistic`, `eval_metric=logloss`, `random_state=42`.
-4. `svm`: `kernel=rbf`, `C=1.0`, `gamma=scale`, `probability=true`, `random_state=42`.
-5. `mlp`: `hidden_layer_sizes=[100]`, `activation=relu`, `solver=adam`, `max_iter=500`, `random_state=42`.
-
-Early stopping is implemented only for XGBoost when validation data are explicitly provided; it is not active in the persisted EXP2 artifacts. No probability calibration wrapper (Platt/isotonic) is applied. EXP2 seed variation therefore affects split/sampling/explainer randomness, not model retraining randomness.
-
-#### 3.6.5 Explanation generation protocol
-Per-instance explanations are generated through `ExplainerWrapper.explain_instance` on a dense transformed vector (108 features in current Adult vocabulary), with per-call wall-clock timing.
-
-Method-specific execution:
-1. **SHAP** (`src/xai/shap_tabular.py`): `tree` mode for `rf/xgb`, `kernel` for `logreg/svm/mlp`; `n_background_samples=50`; class-1 attribution retained.
-2. **LIME** (`src/xai/lime_tabular.py`): `num_samples=1000`, `num_features=10`, `kernel_width=3.0`, `discretize_continuous=False`; class-1 local map converted to dense vector.
-3. **Anchors** (`src/xai/anchors_wrapper.py`): `AnchorTabular` fit on transformed train matrix; runtime precision threshold fixed at `0.95`.
-4. **DiCE** (`src/xai/dice_wrapper.py`): backend `method="random"`, `desired_class="opposite"`, importance proxy from absolute original-counterfactual feature delta.
-
-Parameter binding caveats that define effective treatment settings:
-1. SHAP YAML parameters are consumed as configured.
-2. LIME `kernel_width` is consumed from params; `num_samples`/`num_features` are bound via schema fields.
-3. Anchors YAML `threshold` is not consumed; effective runtime threshold is fixed at `0.95`.
-4. DiCE YAML `num_counterfactuals` is not consumed; runtime uses `total_CFs=1`.
-
-Execution constraints: no explicit timeout/memory cap in EXP2 YAML; batch orchestration forces one evaluation worker per experiment process to prevent nested process amplification.
-
-#### 3.6.6 Evaluation metrics and measurement procedure
-Metrics are computed per instance in `src/experiment/metrics_engine.py`, then aggregated.
-
-Primary confirmatory metrics:
-1. `cost`: explanation time (ms).
-2. `sparsity`: active-feature ratio with threshold $\tau=10^{-4}$.
-3. `fidelity`: mapped to faithfulness correlation score $\rho$.
-4. `faithfulness_gap`: top-$k$ masking prediction shift $\Delta_k$ with $k=5$.
-5. `stability`: mean pairwise cosine similarity under Gaussian perturbations.
-
-Faithfulness implementation (`src/metrics/faithfulness.py`):
-$$
-\Delta_k=\left|f(x)-f(x_{\text{mask-top-}k})\right|,\qquad
-\rho=\mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right).
-$$
-Pipeline mapping is `fidelity := rho` and `faithfulness_gap := Δ_k`.
-
-Stability implementation (`src/metrics/stability.py`):
-$$
-x^{(t)}=x+\epsilon^{(t)},\ \epsilon^{(t)}\sim\mathcal{N}(0,\sigma^2),\qquad
-S=\frac{2}{T(T-1)}\sum_{a<b}\cos\left(e^{(a)},e^{(b)}\right),
-$$
-with `T=stability_perturbations` and `σ=stability_noise_level`.
-
-Secondary metrics:
-1. `cf_sensitivity` is computed only when `counterfactual=true` and DiCE CF artifacts are available.
-2. Domain alignment is implemented but disabled in EXP2 (`domain=false`).
-
-Aggregation hierarchy:
-1. instance-level values;
-2. run-level summaries in each `results.json` (`mean`, `std`, `min`, `max`, `count`);
-3. block-level summaries over `(model, N)` for global inference.
-
-EEU status: EEU design exists in `experiments/exp1_adult/configs/metrics/exp1_metrics_config.yaml`, but EXP2 runtime does not emit memory/model-call telemetry required for EEU computation. Confirmatory cost inference therefore uses milliseconds only. `[TO FILL: implement EEU instrumentation (memory + model_calls) or keep EEU formally out of Paper A claims]`
-
-#### 3.6.7 Statistical analysis plan
-Analysis units and eligibility are deterministic and artifact-gated:
-1. planned runs: `300`;
-2. present `results.json`: `250`;
-3. analyzable runs: `233`;
-4. excluded artifacts: `16` empty, `1` malformed JSON.
-
-Global inference is restricted to complete `(model, N)` blocks; this yields `15` blocks for four-way method comparison. Pairwise SHAP-LIME sets are:
-1. primary: `45` matched cells (`logreg/rf/xgb`);
-2. sensitivity: `65` matched cells (all model families).
-
-Hypothesis testing stack (`scripts/run_exp2_statistical_analysis.py`):
-1. Friedman omnibus test per metric over methods on complete blocks;
-2. Nemenyi post-hoc localization for method pairs per metric;
-3. two-sided Wilcoxon signed-rank for SHAP vs LIME on matched cells.
-
-Multiplicity control:
-1. within-metric pairwise control via Nemenyi;
-2. across-metric Holm-Bonferroni over the five primary metrics for each inferential family (Friedman, Wilcoxon-45, Wilcoxon-65).
-
-Uncertainty and effect-size reporting:
-1. `mean`, `std`, `CV`;
-2. confidence intervals from `src/analysis/confidence.py` (`t` and BCa bootstrap, 10,000 resamples, seed `42`);
-3. Kendall’s $W$ (Friedman), Cohen’s $d_z$ and median paired difference (Wilcoxon).
-
-All generated inferential artifacts are exported to `outputs/analysis/paper_a_exp2_stats/` (see Appendix X for file map).
-
-#### 3.6.8 Robustness and sensitivity analyses
-Implemented robustness axes:
-1. seed heterogeneity (5 seeds);
-2. sample-size heterogeneity (`N=50/100/200`);
-3. perturbation robustness through Gaussian-noise stability metric.
-
-Sensitivity controls:
-1. replicate SHAP-LIME inference on both 45-cell and 65-cell matched sets;
-2. enforce block-complete filtering for global tests;
-3. exclude malformed/empty artifacts without synthetic reconstruction.
-
-Deviation interpretation rule:
-1. robust directional claim requires identical SHAP-LIME median-difference sign across 45-cell and 65-cell analyses;
-2. robust inferential claim requires no Holm-adjusted significance flip across these analyses.
-
-Adversarial stress testing is not part of Paper A. `[TO FILL: adversarial stress protocol with pre-registered deviation thresholds for extension experiments]`
-
-#### 3.6.9 Reproducibility package
-Release package for Paper A contains:
-1. code (`src/`, `scripts/`);
-2. experiment YAMLs (`configs/experiments/`);
-3. frozen model/preprocessor artifacts (`experiments/exp1_adult/models/`);
-4. run artifacts (`experiments/exp2_scaled/results/**/results.json`, `metrics.csv`);
-5. aggregate outputs (`outputs/batch_manifest.json`, `outputs/batch_results.csv`);
-6. inferential outputs (`outputs/analysis/paper_a_exp2_stats/`);
-7. figure scripts and figure files (`scripts/generate_paper_a_figures.py`, `outputs/paper_a_figures/`).
-
-Reference environment/provenance anchors:
-1. host used for manuscript regeneration: Apple M3 Pro, macOS 26.3 (arm64), 11 logical CPUs, 18 GB RAM, Python 3.13.2;
-2. dependency lock hash: `sha256(requirements-frozen.txt)=b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc`;
-3. batch provenance hash: `outputs/batch_manifest.json` with `git_hash=9fc70eb1e218a11f2fdd4bdb3aab3ea10a799a6f`.
-
-Minimal rerun sequence:
-1. `python3 scripts/run_batch_experiments.py --config-dir configs/experiments/exp2_scaled --output outputs/batch_results.csv --parallel`
-2. `python3 scripts/check_missing_results.py`
-3. `python3 scripts/quick_summary.py`
-4. `python3 scripts/full_summary.py`
-5. `python3 scripts/generate_paper_a_figures.py`
-6. `python3 scripts/run_exp2_statistical_analysis.py`
-
-Archival status: `[TO FILL: immutable DOI bundle for camera-ready reproducibility package]`.
-
-### 3.7 Inferential Implementation Details
-This section specifies the inferential workflow applied to EXP2 and the supporting reproducibility cohort. It is designed to be executable from repository artifacts without undocumented analytical choices.
-
-#### 3.7.1 Inferential objective and RQ linkage
-The statistical pipeline operationalizes Section 3.2 as follows:
-1. **RQ1 (method separation)**: test whether explainer methods differ on each primary metric.
-2. **RQ2 (trade-off stability)**: test whether observed method differences remain consistent across model families and sampling intensities.
-
-All tests are metric-specific and are performed on pre-defined analysis units (Section 3.4), not on pooled instance rows, to avoid pseudo-replication.
-
-#### 3.7.2 Analysis populations and eligibility sets
-Statistical inputs are drawn from artifact-qualified EXP2 outputs:
-1. planned robustness grid: 300 configurations;
-2. present artifacts: 250 `results.json` files;
-3. analyzable artifacts: 233 (non-empty `instance_evaluations`);
-4. malformed artifacts: 1; structurally empty artifacts: 16.
-
-Eligibility follows Section 3.4.5:
-1. JSON must parse;
-2. run must contain analyzable instance-level metrics;
-3. no imputation for missing runs;
-4. global multi-method tests restricted to complete `(model, N)` blocks.
-
-Resulting inferential sets:
-1. **Global omnibus set**: 15 complete `(model, N)` blocks x 4 methods.
-2. **Primary paired SHAP-LIME set**: 45 matched cells on `logreg/rf/xgb`.
-3. **Sensitivity paired SHAP-LIME set**: 65 matched cells on all 5 model families.
-4. **Reproducibility cohort**: EXP1 repeated-run set (`9` seeds per core configuration).
-
-#### 3.7.3 Estimands, aggregation, and metric directionality
-For metric $m$, run-level estimand is $y_{g,k,s,n,m}$ (Section 3.4). Global method inference uses block-level summaries:
-$$
-\bar{y}_{k,b,m}=\frac{1}{|S_{k,b}|}\sum_{s\in S_{k,b}}y_{g,k,s,n,m}, \quad b=(g,n).
-$$
-
-Primary inferential metrics are:
-1. fidelity,
-2. stability,
-3. sparsity,
-4. faithfulness gap,
-5. cost.
-
-Directionality is fixed before analysis:
-1. higher is better: fidelity, stability, faithfulness gap;
-2. lower is better: sparsity, cost.
-
-Directionality is used for interpretive ranking and visualization normalization (e.g., method radar; see Figure X), while non-parametric significance tests operate on observed metric values per design block.
-
-#### 3.7.4 Global omnibus test (Friedman)
-For each metric $m$:
-1. build a block-by-method matrix with rows = complete `(model, N)` blocks and columns = methods;
-2. apply Friedman’s test with methods as repeated treatments and blocks as matched contexts;
-3. evaluate against $\alpha=0.05$ (see Table X).
-
-Rationale for Friedman:
-1. repeated-measures design across common blocks;
-2. no Gaussian assumption required;
-3. robust under heterogeneous metric scales.
-
-#### 3.7.5 Post-hoc localization (Nemenyi)
-When Friedman rejects $H_{0,m}^{(1)}$:
-1. run Nemenyi pairwise post-hoc comparisons over the same block-structured matrix;
-2. report pairwise adjusted p-values for all method pairs within metric $m$;
-3. declare significance at $\alpha=0.05$ (see Appendix X).
-
-This controls family-wise error for pairwise method comparisons **within** each metric.  
-Across-metric multiplicity is controlled using Holm-Bonferroni adjustment over the five primary metrics, applied separately to:
-1. the Friedman family (five omnibus p-values),
-2. the 45-pair Wilcoxon family,
-3. the 65-pair Wilcoxon family.
-
-#### 3.7.6 Focused paired SHAP-vs-LIME analysis (Wilcoxon)
-To isolate the main attribution-method contrast under strict matching:
-1. construct paired observations on identical `(model, seed, N)` cells;
-2. run two-sided Wilcoxon signed-rank tests for each primary metric;
-3. report paired method means (and/or medians) plus p-values.
-
-Primary paired analysis uses the 45-cell `logreg/rf/xgb` subset; all-model 65-cell analysis is used as sensitivity support.
-
-#### 3.7.7 Uncertainty quantification and interval estimation
-For each reported metric summary, we provide:
-1. mean and standard deviation;
-2. coefficient of variation (CV);
-3. confidence intervals where available.
-
-CI procedures are implemented in `src/analysis/confidence.py`:
-1. $t$-distribution CI for the mean (`compute_t_ci`);
-2. bootstrap CI (`compute_bootstrap_ci`) with BCa method, `n_resamples=10000`, `random_seed=42`, percentile fallback on failure.
-
-#### 3.7.8 Effect sizes and practical significance
-Effect-size reporting is produced alongside p-values:
-1. **Friedman layer**: Kendall’s $W$ is reported for each metric ($W=\chi^2/[B\,(K-1)]$, with $B$ blocks and $K$ methods).
-2. **Paired Wilcoxon layer**: Cohen’s $d_z$ is reported on paired SHAP-LIME differences.
-3. **Location effect support**: paired median differences are reported per metric.
-
-These values are exported by the EXP2 statistical driver for direct manuscript/appendix ingestion.
-
-#### 3.7.9 Sensitivity, missingness handling, and deviation controls
-Sensitivity safeguards in the statistical layer:
-1. re-run key paired contrast on both restricted (45) and all-model (65) matched sets;
-2. restrict global multi-method inference to block-complete contexts only;
-3. exclude malformed/empty artifacts rather than partially reconstructing runs.
-
-Deviation-control status:
-1. dispersion is reported via std/CV/CI;
-2. no threshold-based practical-equivalence rule is enforced in the current protocol; robustness claims are therefore based on direction consistency, effect size magnitude, and uncertainty intervals rather than binary pass/fail cutoffs.
-
-#### 3.7.10 Reproducible execution of the analysis stack
-The analysis workflow is reproducible from committed scripts and outputs:
-1. generate/refresh run artifacts via batch execution;
-2. audit missing and malformed artifacts (`scripts/check_missing_results.py`);
-3. aggregate and summarize (`scripts/quick_summary.py`, `scripts/full_summary.py`);
-4. regenerate manuscript figures (`scripts/generate_paper_a_figures.py`);
-5. execute deterministic EXP2 inference export:
-   `python3 scripts/run_exp2_statistical_analysis.py`.
-
-The EXP2 driver writes all inferential artifacts (Friedman, Nemenyi, Wilcoxon, multiplicity-adjusted p-values, effect sizes, matched-cell inventories) to:
-`outputs/analysis/paper_a_exp2_stats/`.
-
-### 3.8 Reproducibility Protocol
-#### 3.8.1 Scope and methodological role
-This section specifies the reproducibility contract for the methodological pipeline defined in Sections 3.6 and 3.7. Its role is to guarantee that reported answers to RQ1/RQ2 can be regenerated from versioned inputs without undocumented analyst choices (see Table X).
-
-#### 3.8.2 Definitions, notation, and assumptions
-We define a run key as:
-$$
-r=(g,k,s,n),
-$$
-where $g$ is model family, $k$ is explainer, $s$ is random seed, and $n$ is per-quadrant sampling intensity.
-
-For reproducibility, we use four state objects:
-1. **Configuration state** $\mathcal{C}$: YAML specifications, seed grid, metric switches, and command-line invocation.
-2. **Artifact state** $\mathcal{A}$: per-run outputs (`results.json`, `metrics.csv`) and aggregate exports.
-3. **Inference state** $\mathcal{I}$: statistical tables and summaries under `outputs/analysis/paper_a_exp2_stats/`.
-4. **Variance state** $\mathcal{V}$: repeated-run dispersion outputs (`reproducibility_report.csv`).
-
-Assumptions:
-1. model artifacts in `experiments/exp1_adult/models/` are frozen during EXP2;
-2. configuration files under `configs/experiments/` are immutable during one execution pass;
-3. reported claims are computed only from artifact-qualified runs.
-
-#### 3.8.3 Reproducibility procedure (executable)
-1. Freeze protocol inputs:
-   - config directories (`configs/experiments/exp2_scaled`, `configs/experiments/exp2_comparative`);
-   - dependency anchor `sha256(requirements-frozen.txt)=b52d5a1f2e2edd5ada372ca66d18ef1447712fdd2c21f004d7e1f46a5ef9c6dc`;
-   - provenance anchor `outputs/batch_manifest.json` (`git_hash=9fc70eb1e218a11f2fdd4bdb3aab3ea10a799a6f`).
-2. Execute batch generation of EXP2 artifacts:
-   - `python3 scripts/run_batch_experiments.py --config-dir configs/experiments/exp2_scaled --output outputs/batch_results.csv --parallel`
-3. Audit artifact integrity:
-   - `python3 scripts/check_missing_results.py`
-   - classify runs as `ok_instance`, `empty`, or `json_error` through the statistical inventory.
-4. Regenerate deterministic inference exports:
-   - `python3 scripts/run_exp2_statistical_analysis.py`
-   - verify population counts in `analysis_summary.json` (planned `300`, present `250`, analyzable `233`, complete blocks `15`, paired sets `45/65`).
-5. Regenerate descriptive summaries/figures:
-   - `python3 scripts/quick_summary.py`
-   - `python3 scripts/full_summary.py`
-   - `python3 scripts/generate_paper_a_figures.py`
-6. Regenerate repeated-run variance characterization:
-   - `python3 scripts/run_reproducibility_study.py --config-dir configs/experiments --pattern "exp1_adult_*.yaml" --output-dir experiments/exp1_adult/reproducibility`
-
-#### 3.8.4 Quality checks and acceptance criteria
-A reproduction attempt is considered methodologically valid only if all conditions below hold:
-1. **Config determinism**: execution uses the declared seed grid and model/explainer matrix from EXP2 manifests.
-2. **Artifact integrity**: malformed and empty artifacts are explicitly enumerated; no implicit imputation is applied.
-3. **Inferential eligibility**: omnibus tests are computed only on complete `(model, N)` blocks.
-4. **Claim traceability**: each quantitative claim in Section 4 maps to a versioned file in `outputs/analysis/paper_a_exp2_stats/` or figure source under `outputs/paper_a_figures/`.
-5. **Variance reporting**: reproducibility dispersion (CV/CI) is present for repeated-run cohorts.
-
-#### 3.8.5 Environment and compute disclosure
-Reference host used for manuscript regeneration:
-1. Apple M3 Pro, macOS 26.3 (arm64);
-2. 11 logical CPUs, 18 GB RAM;
-3. Python 3.13.2.
-
-This host profile is reported as provenance metadata, not as a required execution platform. Hardware-normalized runtime scaling is not currently modeled. `[TO FILL: provide multi-hardware runtime normalization protocol if cross-machine runtime claims are elevated]`
-
-### 3.9 Validity Threats and Mitigations
-#### 3.9.1 Scope and role
-This section formalizes validity threats for the methodological core and specifies mitigations, diagnostics, and residual risk boundaries for interpretation of Section 4 results.
-
-#### 3.9.2 Internal validity
-1. **Threat**: incomplete EXP2 execution coverage (planned `300`, present `250`, analyzable `233`), with one malformed file and empty artifacts.
-2. **Mitigation**:
-   - explicit missingness/parse auditing;
-   - block-complete filtering for omnibus inference;
-   - matched-cell filtering for paired inference.
-3. **Residual risk**: missingness may be non-random across method-model cells; effect estimates can be coverage-sensitive.
-
-#### 3.9.3 Construct validity
-1. **Threat**: metric naming may be conflated with alternative definitions in literature.
-2. **Mitigation**:
-   - code-bound operational definitions (`src/metrics/faithfulness.py`, `src/metrics/stability.py`, `src/metrics/sparsity.py`);
-   - explicit mapping `fidelity := faithfulness correlation`, `faithfulness_gap := top-k masking shift`.
-3. **Residual risk**:
-   - EEU is specified in design artifacts but not computed in EXP2 runtime;
-   - cost claims are therefore wall-clock specific and not energy-normalized.
-
-#### 3.9.4 Statistical conclusion validity
-1. **Threat**: inflated error rates under multiple tests and pseudo-replication from instance-level pooling.
-2. **Mitigation**:
-   - run/block-level inference units;
-   - Friedman omnibus + Nemenyi localization;
-   - Wilcoxon for matched SHAP-LIME contrasts;
-   - Holm-Bonferroni across primary metrics per inferential family.
-3. **Residual risk**: practical equivalence thresholds are not pre-registered; significance is complemented by effect sizes and interval dispersion.
-
-#### 3.9.5 External validity
-1. **Threat**: evidence is from one dataset family (tabular Adult) and one benchmark task.
-2. **Mitigation**:
-   - model diversity (`logreg/rf/xgb/svm/mlp`);
-   - explainer diversity (`shap/lime/anchors/dice`);
-   - heterogeneity across seeds and sample sizes.
-3. **Residual risk**: transfer to text/vision/time-series domains is not established in Paper A.
-
-#### 3.9.6 Implementation validity
-1. **Threat**: config-runtime parameter divergence (Anchors threshold, DiCE CF count).
-2. **Mitigation**: explicit disclosure of effective runtime settings in Section 3.6.5 and interpretation limits on those settings.
-3. **Residual risk**: parameter harmonization is pending and may alter absolute performance levels. `[TO FILL: camera-ready harmonization diff report between YAML-exposed and runtime-bound parameters]`
-
-#### 3.9.7 Diagnostic policy
-Before any inferential reporting:
-1. run inventory diagnostics must be regenerated;
-2. malformed and empty artifacts must be listed in the manuscript;
-3. robustness statements must pass directional/significance consistency checks between 45-cell and 65-cell SHAP-LIME analyses.
-
-### 3.10 Framework Operation Method (FOM-7): Executable Protocol
-#### 3.10.1 Scope and formal definition
-FOM-7 is the operational methodology contribution of Paper A. It transforms a benchmark specification into auditable, claim-ready evidence with stage-gated progression.
-
-We define:
-$$
-\mathcal{M}_{\text{FOM7}} = \{(S_i, A_i, G_i)\}_{i=1}^{7},
-$$
-where $S_i$ is stage $i$, $A_i$ are required artifacts for stage $i$, and $G_i$ is the gate condition to enter $S_{i+1}$.
-
-Progression rule:
-$$
-S_i \rightarrow S_{i+1}\ \text{iff}\ G_i=\text{pass}.
-$$
-
-#### 3.10.2 Stage protocol, controls, and gate logic
-
-| Stage | Objective | Required Artifacts | Gate (must pass before next stage) |
-| :--- | :--- | :--- | :--- |
-| S1: Protocol specification | Freeze study design before execution | Config files under `configs/experiments/`, explicit model/explainer/seed/sample grid | Planned run count and factors are fully enumerated |
-| S2: Controlled execution | Produce run artifacts under fixed configs | Per-run `results.json`, logs, `outputs/batch_manifest.json` | Each planned config has terminal status (`success`, `failed`, or `skipped`) |
-| S3: Integrity audit | Detect silent data-quality failures | Missing-run report (`scripts/check_missing_results.py`), JSON parse audit | Missing and malformed artifacts are explicitly listed |
-| S4: Harmonization and aggregation | Convert heterogeneous results into analysis-ready tables | Aggregated CSV/JSON summaries (e.g., `outputs/batch_results.csv`) | All retained runs contain required primary metrics |
-| S5: Statistical inference | Quantify significance and pairwise differences | Friedman, Nemenyi, and Wilcoxon outputs with metric-level p-values | Inferential outputs are complete for all primary metrics |
-| S6: Reproducibility characterization | Quantify variance under repeated runs | `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | CV and dispersion are reported for each core metric |
-| S7: Claim-ready reporting | Bind manuscript claims to verifiable artifacts | Manuscript tables/figures + caveat list + artifact inventory | Every quantitative claim is traceable to a versioned artifact |
-
-Comparability controls embedded in FOM-7:
-1. shared transformed feature space across methods;
-2. shared split/sampling seeds within matched cells;
-3. shared metric engine and aggregation stack;
-4. explicit exclusion rather than reconstruction of malformed/empty runs.
-
-#### 3.10.3 Reference implementation procedure
-Reference command sequence used by this repository implementation:
-1. `python3 scripts/run_batch_experiments.py --config-dir configs/experiments/exp2_scaled --output outputs/batch_results.csv --parallel`
-2. `python3 scripts/check_missing_results.py`
-3. `python3 scripts/quick_summary.py`
-4. `python3 scripts/full_summary.py`
-5. `python3 scripts/run_reproducibility_study.py --config-dir configs/experiments --pattern "exp1_adult_*.yaml" --output-dir experiments/exp1_adult/reproducibility`
-6. `python3 scripts/run_exp2_statistical_analysis.py`
-
-#### 3.10.4 Failure handling and reporting policy
-If any gate fails:
-1. downstream inferential steps are not claim-eligible;
-2. failure status and missing artifacts are reported explicitly;
-3. manuscript claims must be downgraded to descriptive-only status for affected comparisons.
-
-These commands are implementation-specific realizations of FOM-7. The method remains platform-agnostic if equivalent stage artifacts and gate checks are satisfied (see Figure X and Table X).
-
-## 4. Results
-
-### 4.1 Overview of evaluation setup (minimum necessary context)
-Section 4 reports two evidence streams: EXP2 robustness (global and paired method comparisons) and EXP1 reproducibility (variance profiling across repeated runs). Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms). [TO FILL: metric definitions or explicit cross-reference to Section 3.6.6]. In this section, “15 complete model-size blocks” denotes the block-level EXP2 units used for global multi-method inference, and “45 matched configs” denotes the SHAP-LIME subset with shared `(model, seed, N)` cells on `logreg/rf/xgb`.
-
-### 4.2 Global trade-offs across methods (quality vs cost)
-Table 4.1 reports method means over the EXP2 complete-block set.
-
-Table 4.1. Global method means (EXP2 robustness: 15 complete model-size blocks)
-
-| Method | Fidelity | Stability | Sparsity | Faithfulness Gap | Time (ms) |
-| :--- | ---: | ---: | ---: | ---: | ---: |
-| SHAP | 0.8176 | 0.7377 | 0.2264 | 0.4474 | 685220.23 |
-| LIME | 0.5602 | 0.0144 | 0.0846 | 0.3342 | 3660.68 |
-| Anchors | 0.3853 | 0.0006 | 0.0928 | 0.2382 | 25326.92 |
-| DiCE | 0.1716 | 0.3602 | 0.0164 | 0.0988 | 16306.50 |
-
-SHAP has the highest Fidelity (`0.8176`), highest Stability (`0.7377`), and highest Faithfulness Gap (`0.4474`) among the four methods. DiCE has the lowest Sparsity value (`0.0164`), while LIME has the lowest Cost (`3660.68` ms). Anchors shows very low Stability (`0.0006`) with Cost (`25326.92` ms) above LIME and DiCE.
-
-The quality-cost frontier is therefore explicit in the reported means: SHAP occupies the strongest quality region on Fidelity/Stability/Faithfulness Gap but at the highest runtime (`685220.23` ms), whereas LIME occupies the lowest-cost region with reduced quality on Fidelity and Stability. DiCE improves conciseness (Sparsity) relative to SHAP/LIME/Anchors but with lower Fidelity and Faithfulness Gap.
-
-### 4.3 Global statistical evidence across methods
-Table 4.2 reports Friedman omnibus tests over methods for each primary metric.
-
-Table 4.2. Friedman tests across methods
-
-| Metric | Statistic | p-value | Significant |
-| :--- | ---: | ---: | :--- |
-| Fidelity | 42.12 | 3.78e-09 | Yes |
-| Stability | 43.88 | 1.60e-09 | Yes |
-| Sparsity | 35.64 | 8.92e-08 | Yes |
-| Faithfulness Gap | 45.00 | 9.25e-10 | Yes |
-| Cost | 27.72 | 4.16e-06 | Yes |
-
-For every metric, the Friedman test rejects the null of equal performance across methods. This establishes that method-level differences are statistically detectable at the global level. It does not, by itself, determine which specific method pairs differ or the direction of those differences.
-
-[TO FILL: post-hoc method and correction].
-
-### 4.4 Targeted pairwise comparison (SHAP vs LIME on shared families)
-Table 4.3 reports SHAP-LIME paired inference on the shared `logreg/rf/xgb` subset.
-
-Table 4.3. Paired SHAP vs LIME (45 matched configs on `logreg/rf/xgb`)
-
-| Metric | SHAP Mean | LIME Mean | Wilcoxon p-value |
-| :--- | ---: | ---: | ---: |
-| Fidelity | 0.8112 | 0.5556 | 5.68e-14 |
-| Stability | 0.8013 | 0.0154 | 5.68e-14 |
-| Sparsity | 0.3156 | 0.0845 | 5.68e-14 |
-| Faithfulness Gap | 0.3924 | 0.3408 | 5.68e-14 |
-| Cost (ms) | 1258.72 | 210.45 | 2.29e-06 |
-
-Within this matched set, SHAP is higher on Fidelity, Stability, and Faithfulness Gap, whereas LIME has lower Cost and lower Sparsity value. Statistically, all listed Wilcoxon p-values indicate a non-zero paired difference. Practically, the SHAP quality gains on the reported quality metrics are accompanied by a runtime penalty relative to LIME in the same matched cells.
-
-This pairwise result is constrained to shared `logreg/rf/xgb` configurations and cannot be generalized to methods not in the pair (Anchors/DiCE) or to model families outside the matched set.
-
-### 4.5 Reproducibility and variance profile
-EXP1 repeated-run evidence indicates low dispersion for quality-oriented metrics and higher dispersion for runtime. The quality metrics remain relatively stable across repeated seeds, while computational cost varies more substantially for SHAP variants.
-
-Decision-relevant variability findings:
-- Metric stability (quality): Fidelity CV `<= 0.0634`, Stability CV `<= 0.0826`, Sparsity CV `<= 0.0441`, Faithfulness Gap CV `<= 0.0358`.
-- Runtime instability (cost): Cost CV reaches `0.225` for SHAP variants.
-- Interpretation boundary: quality rankings are more repeatable than runtime behavior under the reported repeated-run protocol.
-
-### 4.6 Synthesis and implications for practice
-- When the decision objective is maximum Fidelity/Stability/Faithfulness Gap and runtime budget is permissive, SHAP is the supported choice in this benchmark.
-- When compute or latency is constrained, LIME is the supported low-cost option, with lower reported Fidelity and Stability than SHAP.
-- When explanation conciseness (Sparsity) is prioritized, DiCE provides the lowest reported Sparsity value, with lower reported Fidelity and Faithfulness Gap.
-- Methods are not statistically interchangeable on the primary metrics: omnibus Friedman tests reject the null of equal method performance for all five metrics.
-- SHAP-vs-LIME trade-off is robust on the shared matched set: higher quality metrics for SHAP are paired with higher runtime cost.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
+
+## Keywords
+Explainable AI, benchmark methodology, reproducibility, statistical evaluation, model-agnostic explanations
+
+## Introduction
+
+### Problem Setting and Gap
+
+Evaluation of post-hoc explainability methods remains methodologically fragmented. Recent reviews show heterogeneous metric choices and inconsistent evaluation objectives across domains, which weakens comparability and cumulative progress \citep{kadir2023metrics,pawlicki2024multiple,adadi2018xai,arrieta2020xai}. Fidelity-centric reporting is still common even when stability, complexity, and computational burden materially affect practical usefulness, especially in high-stakes settings \citep{rudin2019stop}.
+
+Tooling has improved implementation-level reproducibility, including interfaces for broad explainer and metric coverage \citep{li2022interpretdl,hedstrom2023quantus}. However, tool availability does not establish inferential comparability by itself. Benchmark claims still require explicit controls for split discipline, artifact qualification, analysis units, and multiplicity-aware statistical inference. Canonical model-agnostic explanation families (local surrogates, additive attributions, rule-based anchors, and counterfactual recourse) also rely on different assumptions, which complicates fair cross-method comparison \citep{ribeiro2016lime,lundberg2017shap,ribeiro2018anchors,mothilal2020dice}.
+
+### Related Work and Novelty Delta
+
+Recent benchmark efforts in graph explainability show that value depends on explicit dataset assumptions, ground-truth design, and transparent reporting constraints \citep{agarwal2023gnn_eval,proszewska2025bxaic}. Related findings on attribution consensus in Rashomon sets further indicate that explanation behavior can vary even under comparable predictive performance \citep{laberge2023rashomon}. Faithfulness-oriented work also shows sensitivity to perturbation and protocol choices \citep{zheng2025ffidelity}.
+
+The present study addresses a gap left by existing tools and benchmarks: a single, auditable protocol that links benchmark execution governance, artifact quality control, and inferential reporting. The methodological contribution is not a new explainer algorithm; it is a reproducible benchmark operation model that connects design decisions to claim eligibility.
+
+### Contributions and Scope
+
+This paper contributes:
+
+1. a model-agnostic benchmark framework spanning five model families and four explainer families under shared execution controls;
+2. a staged evaluation protocol (EXP1/EXP2) with explicit artifact qualification and claim-role separation;
+3. a multi-metric inferential stack combining Friedman omnibus tests, Nemenyi localization, and paired Wilcoxon contrasts with multiplicity control;
+4. an auditable **F**ramework **O**peration **M**ethod with seven gates (FOM-7) for protocol freeze, controlled execution, integrity audit, inferential export, and claim-traceable reporting.
+
+FOM-7 emerged while consolidating early pilot/calibration cycles (EXP1), where protocol drift, malformed artifacts, and ad-hoc analysis-table harmonization repeatedly threatened claim comparability. The method was therefore formalized as a seven-gate operation protocol that makes claim eligibility auditable.
+
+Scope is intentionally bounded to model-agnostic tabular post-hoc explanation benchmarking on Adult Income with quantitative metrics (fidelity, stability, sparsity, faithfulness gap, and cost). Representation-level interpretability settings and semantic/user-centric evaluation are outside this paper's confirmatory claim scope \citep{durrani2023salient}. The remainder of this paper presents the methodology (Section \ref{sec:methodology}), reports comparative and reproducibility evidence (Section \ref{sec:results}), and concludes with implications, limitations, and next steps (Section \ref{sec:conclusion}).
+
+## Methodology
+
+### Study Scope and Evidence Cohorts
+
+Benchmarking literature identifies two recurring barriers to reliable XAI comparison: non-standardized evaluation constructs and weak traceability between execution artifacts and reported claims. Recent frameworks and toolkits emphasize explicit property definitions, transparent benchmarking pipelines, and artifact-level reproducibility \citep{canha2025functionally,agarwal2022openxai,sithakoul2024beexai,hedstrom2023quantus,adadi2018xai,arrieta2020xai}.
+
+Following this guidance, this study separates evidence generation into staged cohorts with explicit claim roles. The separation is analogous to train/validation/test discipline, but applied to benchmark evidence rather than predictive model fitting. This design reduces leakage between calibration activities and confirmatory inference, a risk discussed in recent faithfulness evaluation work \citep{zheng2025ffidelity}, and it makes missingness/exclusion decisions auditable before inferential claims are finalized.
+
+```latex
+\begin{table}[t]
+\centering
+\caption{Evidence cohorts and their role in this study's claims.}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Cohort} & \textbf{Primary objective} & \textbf{Role in claims} \\
+\midrule
+EXP1 pilot/calibration & Implementation sanity checks before scaled runs. & Not used for confirmatory significance claims. \\
+EXP1 reproducibility & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
+EXP2 comparative & Broad method-model coverage under fixed seeds. & Descriptive comparative context. \\
+EXP2 robustness & Multi-seed, multi-sample-size benchmark runs. & Primary inferential cohort for global and paired tests. \\
+\bottomrule
+\end{tabularx}
+\label{tab:cohorts}
+\end{table}
+```
+
+### Research Questions, Factors, and Analysis Units
+
+The confirmatory questions are:
+
+1. **RQ1 (global separation):** do explainer methods differ on the primary metrics under matched contexts?
+2. **RQ2 (targeted pairwise contrast):** on matched cells, does SHAP differ from LIME on quality-cost trade-offs?
+3. **RQ3 (reproducibility profile):** how much metric dispersion appears under repeated runs?
+
+EXP2 is a crossed design with model family $g$, explainer method $k$, seed $s$, and per-quadrant sampling intensity $n$:
+
+```math
+\[
+g\in\{\text{logreg},\text{rf},\text{xgb},\text{svm},\text{mlp}\},\quad
+k\in\{\text{shap},\text{lime},\text{anchors},\text{dice}\},
+\]
+```
+
+```math
+\[
+s\in\{42,123,456,789,999\},\quad
+n\in\{50,100,200\}.
+\]
+```
+
+Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the current snapshot, 250 artifacts are present and 233 are analyzable (16 empty, 1 malformed).
+
+```latex
+\begin{table}[t]
+\centering
+\caption{EXP2 evidence accounting for inferential qualification.}
+\begin{tabularx}{\linewidth}{l r X}
+\toprule
+\textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
+\midrule
+Planned robustness grid ($5\times4\times5\times3$) & 300 & 100.0\% \\
+Present artifacts & 250 & 83.3\% \\
+Analyzable artifacts & 233 & 77.7\% \\
+Excluded artifacts (16 empty + 1 malformed) & 17 & 5.7\% \\
+Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completion \\
+\bottomrule
+\end{tabularx}
+\label{tab:evidence-accounting}
+\end{table}
+```
+
+```latex
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.94\linewidth}
+\centering
+\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 250 $\rightarrow$
+\textbf{Analyzable} 233 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
+\vspace{2pt}
+\footnotesize Exclusions before inference: 16 empty artifacts + 1 malformed artifact.
+\end{minipage}}
+\caption{Evidence qualification waterfall for EXP2 robustness inference.}
+\label{fig:evidence-waterfall}
+\end{figure}
+```
+
+The inferential unit is not the instance row. For metric $m$, the run-level estimand is $y_{g,k,s,n,m}$ and the matched block is $b=(g,n)$. Tests are performed on run/block aggregates to avoid pseudo-replication.
+
+### Data Protocol and Leakage Controls
+
+The benchmark uses Adult Income loaded through `src/data_loading/adult.py` with OpenML as primary source and UCI fallback. Cleaning applies whitespace normalization, missing-value canonicalization, target normalization, duplicate removal, and deterministic feature ordering. Deterministic preprocessing and artifact traceability follow reproducibility recommendations in open benchmarking toolkits \citep{agarwal2022openxai,hedstrom2023quantus}.
+
+Leakage controls are fixed across all explainers:
+
+1. stratified split before any preprocessing fit,
+2. train-only preprocessor fitting,
+3. shared persisted preprocessor across methods in each run,
+4. explanation on the same transformed feature space used by the model.
+
+Data split is
+
+```math
+\[
+\texttt{train\_test\_split(test\_size=0.2,\ stratify=y,\ random\_state=seed)}.
+\]
+```
+
+For seed 42, the split is 39,032 train and 9,758 test rows. Each run samples TP/TN/FP/FN strata with target $N$ per stratum (nominal run size $4N$, subject to stratum capacity).
+
+### Model and Explanation Protocol
+
+EXP2 evaluates frozen EXP1 model artifacts; models are not retrained during EXP2. Model families are `logreg`, `rf`, `xgb`, `svm`, and `mlp`, with fixed repository-tracked settings.
+
+All methods are executed through `ExplainerWrapper.explain_instance` and timed per instance. Effective explainer conditions are:
+
+1. SHAP: tree mode for RF and XGB; kernel mode for LogReg, SVM, and MLP; background sample count set to 50 \citep{lundberg2017shap}.
+2. LIME: `num_samples=1000`, `num_features=10`, `kernel_width=3.0` \citep{ribeiro2016lime}.
+3. Anchors: `AnchorTabular` on transformed training data with effective threshold fixed at 0.95 \citep{ribeiro2018anchors}.
+4. DiCE: random backend, opposite-class counterfactual target, importance from absolute original--counterfactual deltas \citep{mothilal2020dice}.
+
+Two implementation-bound caveats are explicit in claim interpretation: Anchors YAML threshold is not consumed at runtime (fixed 0.95), and DiCE YAML counterfactual count is not consumed (effective `total_CFs=1`).
+
+### Metrics and Statistical Inference
+
+Primary metrics are fidelity, stability, sparsity, faithfulness gap, and cost (milliseconds). Aggregation is instance $\rightarrow$ run $\rightarrow$ block. EEU is not used for confirmatory inference in this draft. The multi-metric framing follows recommendations from recent XAI evaluation surveys and critical reviews \citep{kadir2023metrics,pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
+
+```latex
+\begin{table}[t]
+\centering
+\caption{Primary metric orientation for objective-consistent interpretation.}
+\begin{tabularx}{\linewidth}{l c c X}
+\toprule
+\textbf{Metric} & \textbf{Unit} & \textbf{Direction} & \textbf{Operational interpretation} \\
+\midrule
+Fidelity & score & $\uparrow$ & Larger perturbation agreement indicates stronger local faithfulness under top-$k$ masking. \\
+Stability & cosine sim. & $\uparrow$ & Higher perturbation consistency indicates less explanation volatility. \\
+Sparsity & score & $\downarrow$ & Lower value indicates more concise explanations under this implementation. \\
+Faithfulness Gap & score & $\uparrow$ & Larger sensitivity gap indicates stronger alignment between importance ranking and predictive effect. \\
+Cost & ms & $\downarrow$ & Lower runtime indicates higher practical deployability. \\
+\bottomrule
+\end{tabularx}
+\label{tab:metric-orientation}
+\end{table}
+```
+
+Faithfulness and stability are computed as:
+
+```math
+\begin{align}
+\Delta_k &= \left|f(x)-f\left(x_{\text{mask-top-}k}\right)\right|,\quad
+\rho = \mathrm{corr}\left(|w_i|,\left|f(x)-f(x_{-i})\right|\right),\\
+x^{(t)} &= x + \epsilon^{(t)},\ \epsilon^{(t)}\sim\mathcal{N}(0,\sigma^2),\quad
+S = \frac{2}{T(T-1)}\sum_{a<b}\cos\left(e^{(a)},e^{(b)}\right).
+\end{align}
+```
+
+Inferential workflow:
+
+1. Friedman omnibus test per metric on complete $(g,n)$ blocks.
+2. Nemenyi post-hoc localization when Friedman is significant.
+3. Two-sided paired Wilcoxon SHAP--LIME tests on matched $(g,s,n)$ cells (45-cell primary set; 65-cell sensitivity set).
+
+Multiplicity handling uses Nemenyi within each metric and Holm-Bonferroni across the five primary metrics for each inferential family (Friedman, Wilcoxon-45, Wilcoxon-65). Reported uncertainty/effect summaries include mean, standard deviation, CV, confidence intervals (where generated), Kendall's $W$, Cohen's $d_z$, and median paired differences.
+
+Artifact qualification is deterministic: malformed or empty runs are excluded, no synthetic reconstruction is used, and omnibus tests are restricted to block-complete contexts.
+
+### FOM-7 Origin, Operational Definition, and Validity Boundaries
+
+FOM-7 denotes the **F**ramework **O**peration **M**ethod with seven sequential quality gates. It was derived from two inputs: (i) literature-grounded benchmark requirements for transparent, reproducible evaluation \citep{canha2025functionally,agarwal2022openxai,hedstrom2023quantus}, and (ii) failure modes observed in the EXP1 pilot/calibration stream (Table \ref{tab:cohorts}), especially protocol drift, artifact integrity failures, and non-equivalent analysis exports. To convert these risks into explicit controls, the benchmark workflow was restructured as the following stage-gated protocol:
+
+1. **Protocol freeze:** lock code/configuration versions, factors, and inferential plan before confirmatory runs.
+2. **Controlled batch execution:** execute runs from declared manifests with fixed seeds and logged runtime context.
+3. **Artifact integrity audit:** detect and exclude malformed, empty, or schema-incompatible outputs.
+4. **Harmonization to analysis-ready tables:** standardize keys and metric fields into deterministic, merge-safe inferential tables.
+5. **Inferential export:** generate deterministic omnibus and paired-test artifacts from qualified inputs only.
+6. **Reproducibility profiling:** quantify run-to-run dispersion and coefficient-of-variation behavior on replicated settings.
+7. **Claim-ready reporting:** permit inferential claims only when all prior gates are satisfied and traceable to source artifacts.
+
+Progression requires gate satisfaction at each stage; failed gates downgrade affected outputs to descriptive-only status.
+
+```latex
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.94\linewidth}
+\small
+\textbf{FOM-7 flow:}
+Freeze $\rightarrow$ Execute $\rightarrow$ Audit $\rightarrow$ Harmonize
+$\rightarrow$ Export $\rightarrow$ Profile $\rightarrow$ Report
+\end{minipage}}
+\caption{Compact operational flow of FOM-7 from protocol lock to claim-ready reporting.}
+\label{fig:fom7-flow}
+\end{figure}
+```
+
+The reproducibility package includes code, experiment configurations, model and preprocessor artifacts, per-run outputs, analysis exports, and figure scripts. Primary repository anchors used in this paper are:
+
+1. `configs/experiments/exp2_scaled/manifest.yaml` (declared EXP2 run grid),
+2. `experiments/exp2_scaled/results/` (qualified per-run outputs),
+3. `outputs/paper_analysis/paper_comparison.csv` (aggregated comparison export),
+4. `scripts/generate_paper_a_figures.py` (figure-generation entry point).
+
+Validity controls and residual risks are summarized as follows:
+
+1. **Internal validity:** explicit missingness audit and block-complete inference; residual risk from non-random coverage gaps.
+2. **Construct validity:** metric definitions tied to code-level implementations; residual risk from omitted secondary metrics in claims.
+3. **Statistical conclusion validity:** matched-design non-parametric tests with multiplicity control; residual risk from absent equivalence bands.
+4. **External validity:** diversity across model families and seeds, but single tabular dataset scope.
+5. **Implementation validity:** effective runtime parameter bindings are disclosed; harmonization changes may shift absolute levels.
+
+Scope of claims: conclusions in Section \ref{sec:results} are comparative and bounded to this benchmark setting (Adult tabular task, declared models/explainers, and artifact-qualified EXP2 subsets).
+
+## Results
+
+### Overview of Evaluation Setup
+
+This section reports results from two evidence streams: EXP2 robustness (global and paired method comparisons) and EXP1 reproducibility (variance profiling). Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms). This multi-metric framing treats explanation quality as a vector of properties rather than a single scalar score \citep{kadir2023metrics,pawlicki2024multiple,arrieta2020xai}. Metric definitions and the inferential workflow are specified in Section \ref{sec:methods-inference}. ``15 complete model-size blocks'' denotes the block-level EXP2 units used for global inference, and ``45 matched configs'' denotes the SHAP--LIME subset with shared $(\text{model},\text{seed},N)$ cells on `logreg/rf/xgb`. Metric direction is defined in Table \ref{tab:metric-orientation}, and cohort qualification counts are reported in Table \ref{tab:evidence-accounting}.
+
+### Global Trade-offs Across Methods (Quality vs Cost)
+
+```latex
+\begin{table}[h]
+\centering
+\caption{Global method means (EXP2 robustness: 15 complete model-size blocks).}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
+\midrule
+SHAP    & 0.8176 & 0.7377 & 0.2264 & 0.4474 & 685220.23 \\
+LIME    & 0.5602 & 0.0144 & 0.0846 & 0.3342 & 3660.68 \\
+Anchors & 0.3853 & 0.0006 & 0.0928 & 0.2382 & 25326.92 \\
+DiCE    & 0.1716 & 0.3602 & 0.0164 & 0.0988 & 16306.50 \\
+\bottomrule
+\end{tabular}
+\label{tab:global-tradeoffs}
+\end{table}
+```
+
+SHAP has the highest Fidelity (0.8176), highest Stability (0.7377), and highest Faithfulness Gap (0.4474). DiCE has the lowest Sparsity value (0.0164), while LIME has the lowest Cost (3660.68 ms). Anchors shows very low Stability (0.0006) with Cost (25326.92 ms) above LIME and DiCE.
+
+The reported means show an explicit quality--cost frontier: SHAP occupies the strongest quality region on Fidelity/Stability/Faithfulness Gap with the highest runtime (685220.23 ms), whereas LIME occupies the lowest-cost region with lower Fidelity and Stability. DiCE provides the lowest Sparsity value with lower Fidelity and Faithfulness Gap. This trade-off pattern is consistent with mechanistic differences between local surrogate and additive-attribution families \citep{ribeiro2016lime,lundberg2017shap}.
+
+### Global Statistical Evidence Across Methods
+
+```latex
+\begin{table}[h]
+\centering
+\caption{Friedman tests across methods.}
+\begin{tabular}{lrrl}
+\toprule
+Metric & Statistic & p-value & Significant \\
+\midrule
+Fidelity         & 42.12 & 3.78e-09 & Yes \\
+Stability        & 43.88 & 1.60e-09 & Yes \\
+Sparsity         & 35.64 & 8.92e-08 & Yes \\
+Faithfulness Gap & 45.00 & 9.25e-10 & Yes \\
+Cost             & 27.72 & 4.16e-06 & Yes \\
+\bottomrule
+\end{tabular}
+\label{tab:friedman}
+\end{table}
+```
+
+For every metric, the Friedman test rejects the null of equal performance across methods. This establishes global between-method differences, but does not identify pairwise direction without post-hoc localization. Post-hoc localization uses Nemenyi pairwise comparisons within each metric, with Holm-Bonferroni adjustment across the five primary metrics.
+
+```latex
+\begin{table}[h]
+\centering
+\caption{Friedman effect sizes (Kendall's $W=\chi^2/[N(k-1)]$; $N=15$, $k=4$).}
+\begin{tabular}{lrr}
+\toprule
+Metric & $\chi^2$ & Kendall's $W$ \\
+\midrule
+Fidelity         & 42.12 & 0.936 \\
+Stability        & 43.88 & 0.975 \\
+Sparsity         & 35.64 & 0.792 \\
+Faithfulness Gap & 45.00 & 1.000 \\
+Cost             & 27.72 & 0.616 \\
+\bottomrule
+\end{tabular}
+\label{tab:friedman-effect-size}
+\end{table}
+```
+
+The corresponding effect sizes indicate medium-to-very-large between-method separation across all five metrics.
+
+### Targeted Pairwise Comparison (SHAP vs LIME on Shared Families)
+
+```latex
+\begin{table}[h]
+\centering
+\caption{Paired Wilcoxon comparison on 45 matched configurations (\texttt{logreg/rf/xgb}).}
+\begin{tabular}{lrrr}
+\toprule
+Metric & SHAP Mean & LIME Mean & Wilcoxon p-value \\
+\midrule
+Fidelity         & 0.8112 & 0.5556 & 5.68e-14 \\
+Stability        & 0.8013 & 0.0154 & 5.68e-14 \\
+Sparsity         & 0.3156 & 0.0845 & 5.68e-14 \\
+Faithfulness Gap & 0.3924 & 0.3408 & 5.68e-14 \\
+Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 \\
+\bottomrule
+\end{tabular}
+\label{tab:shap-lime}
+\end{table}
+```
+
+Within this matched subset, SHAP is higher on Fidelity, Stability, and Faithfulness Gap, while LIME has lower Cost and lower Sparsity value. The reported p-values indicate non-zero paired differences for all listed metrics. Practically, the quality gains for SHAP are accompanied by a runtime penalty relative to LIME under shared cells.
+
+This comparison is restricted to `logreg/rf/xgb` matched configurations and is not directly generalizable to non-matched families or to methods outside the SHAP--LIME pair, including rule-based and counterfactual families \citep{ribeiro2018anchors,mothilal2020dice}.
+
+### Reproducibility and Variance Profile
+
+EXP1 repeated-run evidence indicates lower dispersion for quality-oriented metrics and higher dispersion for runtime behavior. Quality metrics remain relatively stable across repeated seeds, while Cost varies more strongly for SHAP variants, consistent with recent calls for variance-aware benchmark reporting \citep{agarwal2022openxai,hedstrom2023quantus}.
+
+- Metric stability (quality): Fidelity CV $\leq 0.0634$, Stability CV $\leq 0.0826$, Sparsity CV $\leq 0.0441$, Faithfulness-gap CV $\leq 0.0358$.
+- Runtime instability (cost): Cost CV reaches 0.225 for SHAP variants.
+- Decision implication: quality rankings are more repeatable than runtime behavior under the reported repeated-run protocol.
+
+### Synthesis and Implications for Practice
+
+- When the objective is maximizing Fidelity/Stability/Faithfulness Gap and compute budget is permissive, SHAP is the supported choice in this benchmark.
+- When compute or latency is constrained, LIME is the supported low-cost option, with lower Fidelity and Stability than SHAP.
+- When conciseness (Sparsity) is the primary objective, DiCE provides the lowest reported Sparsity value, with lower Fidelity and Faithfulness Gap.
+- Methods are not statistically interchangeable: Friedman tests reject the null of equal performance across methods for all five primary metrics.
+- On the shared SHAP--LIME subset, quality improvements for SHAP are paired with higher runtime cost.
 
 Interpretation limits:
-- [TO FILL: parameterization details / failure analysis for Anchors stability near zero].
-- [TO FILL: external validation on additional datasets/tasks before generalizing these method rankings].
 
-## 5. Conclusion
-The reported results indicate a multi-objective frontier rather than a single best method: SHAP is strongest on the reported quality-oriented metrics, LIME is strongest on runtime efficiency, and DiCE is strongest on the reported sparsity criterion. Global non-parametric tests reject the null of equal performance across methods on all primary metrics, while the SHAP-LIME paired subset confirms a quality-cost trade-off on shared model families.
+- Anchors stability values near zero should be interpreted with implementation caveats: effective runtime behavior uses fixed precision threshold 0.95 and binary rule-membership importance vectors, which can reduce perturbation-based similarity under this protocol.
+- Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
 
-Methodologically, Paper A contributes FOM-7 as an auditable operation protocol for benchmark studies: protocol freezing, controlled execution, integrity auditing, harmonized inference, reproducibility profiling, and claim-traceable reporting. This contribution is operational rather than algorithmic; it specifies how benchmark evidence is generated and qualified under incomplete execution.
+## Conclusion
 
-- **Takeaway:** Method selection should be objective-driven (quality, sparsity, or runtime), not based on a single aggregate score.
-- **Takeaway:** Statistical evidence supports method differentiation at the omnibus level; pairwise direction should be interpreted within matched design constraints.
-- **Limitation:** Incomplete EXP2 coverage (missing and malformed artifacts) qualifies confidence in frontier stability across the full planned grid.
-- **Next steps:** complete missingness diagnostics and publish archival artifact bundle with explicit lineage. `[TO FILL: missingness diagnosis + DOI package plan]`
-- **Next steps:** integrate deferred semantic evaluation with calibrated rubric and task-grounded human-study protocol. `[TO FILL: future semantic study protocol]`
+The reported metrics indicate a multi-objective frontier rather than a single best method: SHAP is strongest on the reported quality-oriented metrics, LIME is strongest on runtime efficiency, and DiCE is strongest on the reported sparsity criterion. Global tests reject the null of equal method performance across the primary metrics, and paired SHAP--LIME analysis indicates a quality--cost trade-off on shared model families. This reinforces multi-objective interpretation guidance in current XAI evaluation literature \citep{pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
 
-## 6. Methodology-Driving References (from attached set)
-- Kadir, M. A., Mosavi, A., and Sonntag, D. (2023). *Evaluation Metrics for XAI: A Review, Taxonomy, and Practical Applications*. In *Proceedings of the 2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)*, pp. 111-124.
-- Pawlicki, M., Pawlicka, A., Uccello, F., Szelest, S., D'Antonio, S., Kozik, R., and Choraś, M. (2024). *Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination*. Neurocomputing, 602:128282.
-- Li, X., Xiong, H., Li, X., Wu, X., Chen, Z., and Dou, D. (2022). *InterpretDL: Explaining Deep Models in PaddlePaddle*. Journal of Machine Learning Research, 23:1-6.
-- Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., and Höhne, M. M.-C. (2023). *Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond*. Journal of Machine Learning Research, 24:1-11.
-- Agarwal, C., Queen, O., Lakkaraju, H., and Zitnik, M. (2023). *Evaluating explainability for graph neural networks*. Scientific Data, 10:144.
-- Proszewska, M., Danel, T., and Rymarczyk, D. (2025). *B-XAIC Dataset: Benchmarking Explainable AI for Graph Neural Networks Using Chemical Data*. arXiv:2505.22252.
-- Laberge, G., Pequignot, Y., Mathieu, A., Khomh, F., and Marchand, M. (2023). *Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set*. Journal of Machine Learning Research, 24:1-50.
-- Durrani, N., Dalvi, F., and Sajjad, H. (2023). *Discovering Salient Neurons in deep NLP models*. Journal of Machine Learning Research, 24:1-40.
-- Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., and Luo, D. (2025). *F-FIDELITY: A Robust Framework for Faithfulness Evaluation of Explainable AI*. ICLR 2025.
+Methodologically, the current paper contributes FOM-7 (Framework Operation Method, seven-stage gating) as an auditable benchmark operation protocol that connects protocol freezing, controlled execution, integrity audit, deterministic inference export, and claim-traceable reporting. This contribution is operational and reproducibility-focused rather than algorithmic.
+
+- **Takeaway:** method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
+- **Takeaway:** statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
+- **Limitation:** incomplete EXP2 coverage and malformed artifacts qualify confidence in full-grid frontier stability.
+- **Next steps:** publish a missingness diagnostic by model/explainer/seed/sample-size and release a versioned reproducibility bundle with immutable DOI (code, configs, run outputs, inferential exports, and figure scripts).
+- **Next steps:** replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
+
+\acks{Funding and competing-interest disclosures are to be finalized in the submission package. This draft was prepared from repository artifacts dated February 2026.}
+
+## References
+
+1. [adadi2018xai] Amina Adadi and Mohammed Berrada. 2018. Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI). *IEEE Access*, 6:52138--52160.
+2. [agarwal2022openxai] Chirag Agarwal, Dan Ley, Satyapriya Krishna, Eshika Saxena, Martin Pawelczyk, Nari Johnson, Isha Puri, Marinka Zitnik, and Himabindu Lakkaraju. 2022. OpenXAI: Towards a Transparent Evaluation of Post hoc Model Explanations. *arXiv preprint arXiv:2206.11104*.
+3. [agarwal2023gnn_eval] Chirag Agarwal, Owen Queen, Himabindu Lakkaraju, and Marinka Zitnik. 2023. Evaluating explainability for graph neural networks. *Scientific Data*, 10:144.
+4. [arrieta2020xai] Alejandro Barredo Arrieta, Natalia D\'iaz-Rodr\'iguez, Javier Del Ser, Adrien Bennetot, Siham Tabik, Alberto Barbado, Salvador Garc\'ia, Sergio Gil-L\'opez, Daniel Molina, Richard Benjamins, Raja Chatila, and Francisco Herrera. 2020. Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information Fusion*, 58:82--115.
+5. [canha2025functionally] Dulce Canha, Sylvain Kubler, Kary Fr\"amling, and Guy Fagherazzi. 2025. A Functionally-Grounded Benchmark Framework for XAI Methods: Insights and Foundations from a Systematic Literature Review. *ACM Computing Surveys*, 57(12):1--40.
+6. [durrani2023salient] Nadir Durrani, Fahim Dalvi, and Hassan Sajjad. 2023. Discovering Salient Neurons in deep NLP models. *Journal of Machine Learning Research*, 24:1--40.
+7. [hedstrom2023quantus] Anna Hedstr\"om, Leander Weber, Dilyara Bareeva, Daniel Krakowczyk, Franz Motzkus, Wojciech Samek, Sebastian Lapuschkin, and Marina M.-C. H\"ohne. 2023. Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond. *Journal of Machine Learning Research*, 24:1--11.
+8. [kadir2023metrics] Md Abdul Kadir, Amir Mosavi, and Daniel Sonntag. 2023. Evaluation Metrics for XAI: A Review, Taxonomy, and Practical Applications. In *Proceedings of the 2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)*, pages 111--124, Nairobi, Kenya.
+9. [laberge2023rashomon] Gabriel Laberge, Yann Pequignot, Alexandre Mathieu, Foutse Khomh, and Mario Marchand. 2023. Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set. *Journal of Machine Learning Research*, 24:1--50.
+10. [lundberg2017shap] Scott M. Lundberg and Su-In Lee. 2017. A Unified Approach to Interpreting Model Predictions. In *Advances in Neural Information Processing Systems*, volume 30, pages 4765--4774.
+11. [li2022interpretdl] Xuhong Li, Haoyi Xiong, Xingjian Li, Xuanyu Wu, Zeyu Chen, and Dejing Dou. 2022. InterpretDL: Explaining Deep Models in PaddlePaddle. *Journal of Machine Learning Research*, 23:1--6.
+12. [mothilal2020dice] Ramaravind K. Mothilal, Amit Sharma, and Chenhao Tan. 2020. Explaining machine learning classifiers through diverse counterfactual explanations. In *Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency (FAccT)*, pages 607--617.
+13. [pawlicki2024multiple] Marek Pawlicki, Aleksandra Pawlicka, Federica Uccello, Sebastian Szelest, Salvatore D'Antonio, Rafa{\l} Kozik, and Micha{\l} Chora\'s. 2024. Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination. *Neurocomputing*, 602:128282.
+14. [sithakoul2024beexai] Samuel Sithakoul, Sara Meftah, and Cl\'ement Feutry. 2024. BEExAI: Benchmark to Evaluate Explainable AI. *arXiv preprint arXiv:2406.00596*.
+15. [proszewska2025bxaic] Magdalena Proszewska, Tomasz Danel, and Dawid Rymarczyk. 2025. B-XAIC Dataset: Benchmarking Explainable AI for Graph Neural Networks Using Chemical Data. *arXiv preprint arXiv:2505.22252*.
+16. [ribeiro2016lime] Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. 2016. ``Why Should I Trust You?'' Explaining the Predictions of Any Classifier. In *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*, pages 1135--1144.
+17. [ribeiro2018anchors] Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. 2018. Anchors: High-Precision Model-Agnostic Explanations. In *Proceedings of the AAAI Conference on Artificial Intelligence*, 32(1).
+18. [rudin2019stop] Cynthia Rudin. 2019. Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. *Nature Machine Intelligence*, 1(5):206--215.
+19. [zheng2025ffidelity] Xu Zheng, Farhad Shirani, Zhuomin Chen, Chaohao Lin, Wei Cheng, Wenbo Guo, and Dongsheng Luo. 2025. F-FIDELITY: A Robust Framework for Faithfulness Evaluation of Explainable AI. In *International Conference on Learning Representations (ICLR)*.

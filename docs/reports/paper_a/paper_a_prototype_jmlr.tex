@@ -9,7 +9,7 @@
 \usepackage{enumitem}
 \usepackage{lastpage}
 
-\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 2/2026}{Under Review}{PAPER-A-0001}{Jonathan Herrera-Vasquez}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 2/2026}{Preprint}{PAPER-A-0001}{Jonathan Herrera-Vasquez}
 \ShortHeadings{XAI Benchmarking Framework and Operation Protocol}{XAI Benchmarking Framework}
 \firstpageno{1}
 
@@ -23,12 +23,12 @@ Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 \addr UNADE
 }
 
-\editor{TBD}
+\editor{}
 
 \maketitle
 
 \begin{abstract}
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3\% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use. LLM-based semantic scoring is deferred to a dedicated follow-up study.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3\% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
 \end{abstract}
 
 \begin{keywords}
@@ -36,82 +36,95 @@ Explainable AI, benchmark methodology, reproducibility, statistical evaluation, 
 \end{keywords}
 
 \section{Introduction}
+
+\subsection{Problem Setting and Gap}
 Evaluation of post-hoc explainability methods remains methodologically fragmented.
-Recent review evidence shows that XAI studies use heterogeneous metrics and
-often report inconsistent evaluation objectives across domains, which limits
-comparability and cumulative progress \citep{kadir2023metrics,pawlicki2024multiple}.
-In practice, fidelity-centric reporting is still common, even when stability,
-complexity, and computational burden materially affect whether explanations are
-usable in decision pipelines.
+Recent reviews show heterogeneous metric choices and inconsistent evaluation
+objectives across domains, which weakens comparability and cumulative progress
+\citep{kadir2023metrics,pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
+Fidelity-centric reporting is still common even when stability, complexity, and
+computational burden materially affect practical usefulness, especially in
+high-stakes settings \citep{rudin2019stop}.
 
-Open-source tooling has improved reproducibility at the implementation layer,
-including interfaces for large sets of explainers and metrics
-\citep{li2022interpretdl,hedstrom2023quantus}. However, tool-level coverage
-does not by itself establish inferential comparability: benchmark claims still
-require explicit controls for split discipline, artifact qualification,
-aggregation units, and multiplicity-aware statistical testing.
+Tooling has improved implementation-level reproducibility, including interfaces
+for broad explainer and metric coverage \citep{li2022interpretdl,hedstrom2023quantus}.
+However, tool availability does not establish inferential comparability by
+itself. Benchmark claims still require explicit controls for split discipline,
+artifact qualification, analysis units, and multiplicity-aware statistical
+inference.
+Canonical model-agnostic explanation families (local surrogates, additive
+attributions, rule-based anchors, and counterfactual recourse) also rely on
+different assumptions, which complicates fair cross-method comparison
+\citep{ribeiro2016lime,lundberg2017shap,ribeiro2018anchors,mothilal2020dice}.
 
-Parallel work in graph explainability benchmarking reinforces this point.
-GraphXAI, ShapeGGen, and B-XAIC show that benchmark value depends on explicit
-dataset assumptions, ground-truth design choices, and transparent reporting of
-evaluation constraints \citep{agarwal2023gnn_eval,proszewska2025bxaic}. At the
-same time, recent findings on attribution consensus in Rashomon sets indicate
-that explanation variability can persist even under similar predictive
-performance \citep{laberge2023rashomon}. Faithfulness-oriented studies also
-show that metric behavior is sensitive to perturbation design and protocol
-choices, requiring robustness-aware interpretation \citep{zheng2025ffidelity}.
+\subsection{Related Work and Novelty Delta}
+Recent benchmark efforts in graph explainability show that value depends on
+explicit dataset assumptions, ground-truth design, and transparent reporting
+constraints \citep{agarwal2023gnn_eval,proszewska2025bxaic}. Related findings
+on attribution consensus in Rashomon sets further indicate that explanation
+behavior can vary even under comparable predictive performance
+\citep{laberge2023rashomon}. Faithfulness-oriented work also shows sensitivity
+to perturbation and protocol choices \citep{zheng2025ffidelity}.
 
-This paper focuses on model-agnostic, tabular post-hoc explanation benchmarking.
-It does not target representation-level interpretability (e.g., neuron-level
-analysis in NLP models), which has distinct constructs and evaluation
-methodologies \citep{durrani2023salient}.
+The present study addresses a gap left by existing tools and benchmarks: a
+single, auditable protocol that links benchmark execution governance, artifact
+quality control, and inferential reporting. The methodological contribution is
+not a new explainer algorithm; it is a reproducible benchmark operation model
+that connects design decisions to claim eligibility.
 
-Given these gaps, we operationalize a benchmark-first framework that combines
-multi-metric scoring with an auditable operation protocol:
+\subsection{Contributions and Scope}
+This paper contributes:
 \begin{enumerate}[leftmargin=*]
-    \item A generic trainer/explainer architecture for model-agnostic evaluation.
-    \item A prescriptive operation method that defines how the framework is run, audited, and reported.
-    \item Multi-metric quantitative scoring with explicit trade-off analysis.
-    \item Reproducibility and statistical rigor suitable for benchmark publication.
+    \item a model-agnostic benchmark framework spanning five model families
+    and four explainer families under shared execution controls;
+    \item a staged evaluation protocol (EXP1/EXP2) with explicit artifact
+    qualification and claim-role separation;
+    \item a multi-metric inferential stack combining Friedman omnibus tests,
+    Nemenyi localization, and paired Wilcoxon contrasts with multiplicity
+    control;
+    \item an auditable \textbf{F}ramework \textbf{O}peration \textbf{M}ethod
+    with seven gates (FOM-7) for protocol freeze,
+    controlled execution, integrity audit, inferential export, and
+    claim-traceable reporting.
 \end{enumerate}
 
-\section{Related Work and Framework Design}
+FOM-7 emerged while consolidating early pilot/calibration cycles (EXP1), where
+protocol drift, malformed artifacts, and ad-hoc analysis-table harmonization
+repeatedly threatened claim comparability. The method was therefore formalized
+as a seven-gate operation protocol that makes claim eligibility auditable.
 
-\subsection{Literature-Grounded Rationale}
-The literature motivating this design supports five requirements:
-\begin{enumerate}[leftmargin=*]
-    \item Multi-metric evaluation is necessary.
-    \item Faithfulness is multi-faceted.
-    \item Computational tractability must be reported explicitly.
-    \item Benchmark transparency and artifact accounting are first-order requirements.
-    \item LLM-judge scoring should be treated as a separate calibrated track.
-\end{enumerate}
-
-\subsection{Architecture}
-The framework decouples model training, explanation generation, and evaluation through a registry/factory design. Current model coverage includes \texttt{logreg}, \texttt{rf}, \texttt{xgb}, \texttt{svm}, and \texttt{mlp}, with \texttt{lime}, \texttt{shap}, \texttt{anchors}, and \texttt{dice} explainers.
-
-\subsection{Metric Suite (Primary)}
-Primary quantitative metrics are:
-\begin{itemize}[leftmargin=*]
-    \item Fidelity
-    \item Stability
-    \item Sparsity
-    \item Cost
-    \item Faithfulness gap
-\end{itemize}
-
-\subsection{Paper A Operational Outcome: Framework Operation Method (FOM-7)}
-Paper A contributes not only benchmark findings, but also a reusable operating method for end-to-end benchmark execution, auditing, and claim formation.
+Scope is intentionally bounded to model-agnostic tabular post-hoc explanation
+benchmarking on Adult Income with quantitative metrics (fidelity, stability,
+sparsity, faithfulness gap, and cost). Representation-level interpretability
+settings and semantic/user-centric evaluation are outside this paper's
+confirmatory claim scope \citep{durrani2023salient}. The remainder of this
+paper presents the methodology (Section~\ref{sec:methodology}), reports
+comparative and reproducibility evidence (Section~\ref{sec:results}), and
+concludes with implications, limitations, and next steps
+(Section~\ref{sec:conclusion}).
 
 \section{Methodology}
+\label{sec:methodology}
 
 \subsection{Study Scope and Evidence Cohorts}
 \label{sec:methods-scope}
-To separate development from confirmation, Paper A uses staged evidence cohorts
-with explicit claim roles.
+Benchmarking literature identifies two recurring barriers to reliable XAI
+comparison: non-standardized evaluation constructs and weak traceability between
+execution artifacts and reported claims. Recent frameworks and toolkits
+emphasize explicit property definitions, transparent benchmarking pipelines, and
+artifact-level reproducibility
+\citep{canha2025functionally,agarwal2022openxai,sithakoul2024beexai,hedstrom2023quantus,adadi2018xai,arrieta2020xai}.
+
+Following this guidance, this study separates evidence generation into staged
+cohorts with explicit claim roles. The separation is analogous to
+train/validation/test discipline, but applied to benchmark evidence rather than
+predictive model fitting. This design reduces leakage between calibration
+activities and confirmatory inference, a risk discussed in recent faithfulness
+evaluation work \citep{zheng2025ffidelity}, and it makes missingness/exclusion
+decisions auditable before inferential claims are finalized.
 \begin{table}[t]
 \centering
-\caption{Evidence cohorts and their role in Paper A claims.}
+\caption{Evidence cohorts and their role in this study's claims.}
 \begin{tabularx}{\linewidth}{l X X}
 \toprule
 \textbf{Cohort} & \textbf{Primary objective} & \textbf{Role in claims} \\
@@ -147,6 +160,35 @@ n\in\{50,100,200\}.
 Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the
 current snapshot, 250 artifacts are present and 233 are analyzable (16 empty,
 1 malformed).
+\begin{table}[t]
+\centering
+\caption{EXP2 evidence accounting for inferential qualification.}
+\begin{tabularx}{\linewidth}{l r X}
+\toprule
+\textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
+\midrule
+Planned robustness grid ($5\times4\times5\times3$) & 300 & 100.0\% \\
+Present artifacts & 250 & 83.3\% \\
+Analyzable artifacts & 233 & 77.7\% \\
+Excluded artifacts (16 empty + 1 malformed) & 17 & 5.7\% \\
+Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completion \\
+\bottomrule
+\end{tabularx}
+\label{tab:evidence-accounting}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.94\linewidth}
+\centering
+\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 250 $\rightarrow$
+\textbf{Analyzable} 233 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
+\vspace{2pt}
+\footnotesize Exclusions before inference: 16 empty artifacts + 1 malformed artifact.
+\end{minipage}}
+\caption{Evidence qualification waterfall for EXP2 robustness inference.}
+\label{fig:evidence-waterfall}
+\end{figure}
 
 The inferential unit is not the instance row. For metric $m$, the run-level
 estimand is $y_{g,k,s,n,m}$ and the matched block is $b=(g,n)$. Tests are
@@ -158,6 +200,9 @@ The benchmark uses Adult Income loaded through
 \path{src/data_loading/adult.py} with OpenML as primary source and UCI fallback.
 Cleaning applies whitespace normalization, missing-value canonicalization,
 target normalization, duplicate removal, and deterministic feature ordering.
+Deterministic preprocessing and artifact traceability follow reproducibility
+recommendations in open benchmarking toolkits
+\citep{agarwal2022openxai,hedstrom2023quantus}.
 
 Leakage controls are fixed across all explainers:
 \begin{enumerate}[leftmargin=*]
@@ -186,13 +231,13 @@ All methods are executed through
 Effective explainer conditions are:
 \begin{enumerate}[leftmargin=*]
     \item SHAP: tree mode for RF and XGB; kernel mode for LogReg, SVM, and MLP;
-    background sample count set to 50.
+    background sample count set to 50 \citep{lundberg2017shap}.
     \item LIME: \texttt{num\_samples=1000}, \texttt{num\_features=10},
-    \texttt{kernel\_width=3.0}.
+    \texttt{kernel\_width=3.0} \citep{ribeiro2016lime}.
     \item Anchors: \texttt{AnchorTabular} on transformed training data with
-    effective threshold fixed at 0.95.
+    effective threshold fixed at 0.95 \citep{ribeiro2018anchors}.
     \item DiCE: random backend, opposite-class counterfactual target, importance
-    from absolute original--counterfactual deltas.
+    from absolute original--counterfactual deltas \citep{mothilal2020dice}.
 \end{enumerate}
 
 Two implementation-bound caveats are explicit in claim interpretation:
@@ -203,7 +248,25 @@ counterfactual count is not consumed (effective \texttt{total\_CFs=1}).
 \label{sec:methods-inference}
 Primary metrics are fidelity, stability, sparsity, faithfulness gap, and cost
 (milliseconds). Aggregation is instance $\rightarrow$ run $\rightarrow$ block.
-EEU is not used for confirmatory inference in this draft.
+EEU is not used for confirmatory inference in this draft. The multi-metric
+framing follows recommendations from recent XAI evaluation surveys and critical
+reviews \citep{kadir2023metrics,pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
+\begin{table}[t]
+\centering
+\caption{Primary metric orientation for objective-consistent interpretation.}
+\begin{tabularx}{\linewidth}{l c c X}
+\toprule
+\textbf{Metric} & \textbf{Unit} & \textbf{Direction} & \textbf{Operational interpretation} \\
+\midrule
+Fidelity & score & $\uparrow$ & Larger perturbation agreement indicates stronger local faithfulness under top-$k$ masking. \\
+Stability & cosine sim. & $\uparrow$ & Higher perturbation consistency indicates less explanation volatility. \\
+Sparsity & score & $\downarrow$ & Lower value indicates more concise explanations under this implementation. \\
+Faithfulness Gap & score & $\uparrow$ & Larger sensitivity gap indicates stronger alignment between importance ranking and predictive effect. \\
+Cost & ms & $\downarrow$ & Lower runtime indicates higher practical deployability. \\
+\bottomrule
+\end{tabularx}
+\label{tab:metric-orientation}
+\end{table}
 
 Faithfulness and stability are computed as:
 \begin{align}
@@ -231,26 +294,56 @@ Artifact qualification is deterministic: malformed or empty runs are excluded,
 no synthetic reconstruction is used, and omnibus tests are restricted to
 block-complete contexts.
 
-\subsection{Reproducibility, FOM-7, and Validity Boundaries}
+\subsection{FOM-7 Origin, Operational Definition, and Validity Boundaries}
 \label{sec:methods-repro}
-Paper A operationalizes the benchmark using FOM-7, a stage-gated protocol:
+FOM-7 denotes the \textbf{F}ramework \textbf{O}peration \textbf{M}ethod with
+seven sequential quality gates. It was derived from two inputs: (i)
+literature-grounded benchmark requirements for transparent, reproducible
+evaluation \citep{canha2025functionally,agarwal2022openxai,hedstrom2023quantus},
+and (ii) failure modes observed in the EXP1 pilot/calibration stream
+(Table~\ref{tab:cohorts}), especially protocol drift, artifact integrity
+failures, and non-equivalent analysis exports. To convert these risks into
+explicit controls, the benchmark workflow was restructured as the following
+stage-gated protocol:
 \begin{enumerate}[leftmargin=*]
-    \item protocol freeze,
-    \item controlled batch execution,
-    \item artifact integrity audit,
-    \item harmonization to analysis-ready tables,
-    \item inferential export,
-    \item reproducibility profiling,
-    \item claim-ready reporting.
+    \item \textbf{Protocol freeze:} lock code/configuration versions, factors,
+    and inferential plan before confirmatory runs.
+    \item \textbf{Controlled batch execution:} execute runs from declared
+    manifests with fixed seeds and logged runtime context.
+    \item \textbf{Artifact integrity audit:} detect and exclude malformed,
+    empty, or schema-incompatible outputs.
+    \item \textbf{Harmonization to analysis-ready tables:} standardize keys and
+    metric fields into deterministic, merge-safe inferential tables.
+    \item \textbf{Inferential export:} generate deterministic omnibus and
+    paired-test artifacts from qualified inputs only.
+    \item \textbf{Reproducibility profiling:} quantify run-to-run dispersion and
+    coefficient-of-variation behavior on replicated settings.
+    \item \textbf{Claim-ready reporting:} permit inferential claims only when
+    all prior gates are satisfied and traceable to source artifacts.
 \end{enumerate}
 Progression requires gate satisfaction at each stage; failed gates downgrade
 affected outputs to descriptive-only status.
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.94\linewidth}
+\small
+\textbf{FOM-7 flow:}
+Freeze $\rightarrow$ Execute $\rightarrow$ Audit $\rightarrow$ Harmonize
+$\rightarrow$ Export $\rightarrow$ Profile $\rightarrow$ Report
+\end{minipage}}
+\caption{Compact operational flow of FOM-7 from protocol lock to claim-ready reporting.}
+\label{fig:fom7-flow}
+\end{figure}
 
 The reproducibility package includes code, experiment configurations, model and
 preprocessor artifacts, per-run outputs, analysis exports, and figure scripts.
-For concision, command-level rerun instructions, provenance hashes, and
-environment anchors are maintained in repository manifests and scripts rather
-than duplicated in the main text.
+Primary repository anchors used in this paper are:
+\begin{itemize}[leftmargin=*]
+    \item \path{configs/experiments/exp2_scaled/manifest.yaml} (declared EXP2 run grid),
+    \item \path{experiments/exp2_scaled/results/} (qualified per-run outputs),
+    \item \path{outputs/paper_analysis/paper_comparison.csv} (aggregated comparison export),
+    \item \path{scripts/generate_paper_a_figures.py} (figure-generation entry point).
+\end{itemize}
 
 Validity controls and residual risks are summarized as follows:
 \begin{enumerate}[leftmargin=*]
@@ -266,22 +359,28 @@ Validity controls and residual risks are summarized as follows:
     are disclosed; harmonization changes may shift absolute levels.
 \end{enumerate}
 
-Scope of claims: conclusions in Section 4 are comparative and bounded to this
+Scope of claims: conclusions in Section~\ref{sec:results} are comparative and bounded to this
 benchmark setting (Adult tabular task, declared models/explainers, and
 artifact-qualified EXP2 subsets).
 
 \section{Results}
+\label{sec:results}
 
 \subsection{Overview of Evaluation Setup}
 This section reports results from two evidence streams: EXP2 robustness (global
 and paired method comparisons) and EXP1 reproducibility (variance profiling).
 Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are
 Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms).
+This multi-metric framing treats explanation quality as a vector of properties
+rather than a single scalar score
+\citep{kadir2023metrics,pawlicki2024multiple,arrieta2020xai}.
 Metric definitions and the inferential workflow are specified in
 Section~\ref{sec:methods-inference}.
 ``15 complete model-size blocks'' denotes the block-level EXP2 units used for
 global inference, and ``45 matched configs'' denotes the SHAP--LIME subset with
 shared $(\text{model},\text{seed},N)$ cells on \texttt{logreg/rf/xgb}.
+Metric direction is defined in Table~\ref{tab:metric-orientation}, and cohort
+qualification counts are reported in Table~\ref{tab:evidence-accounting}.
 
 \subsection{Global Trade-offs Across Methods (Quality vs Cost)}
 \begin{table}[h]
@@ -309,7 +408,9 @@ The reported means show an explicit quality--cost frontier: SHAP occupies the
 strongest quality region on Fidelity/Stability/Faithfulness Gap with the highest
 runtime (685220.23 ms), whereas LIME occupies the lowest-cost region with lower
 Fidelity and Stability. DiCE provides the lowest Sparsity value with lower
-Fidelity and Faithfulness Gap.
+Fidelity and Faithfulness Gap. This trade-off pattern is consistent with
+mechanistic differences between local surrogate and additive-attribution
+families \citep{ribeiro2016lime,lundberg2017shap}.
 
 \subsection{Global Statistical Evidence Across Methods}
 \begin{table}[h]
@@ -332,8 +433,26 @@ Cost             & 27.72 & 4.16e-06 & Yes \\
 For every metric, the Friedman test rejects the null of equal performance across
 methods. This establishes global between-method differences, but does not
 identify pairwise direction without post-hoc localization.
+\begin{table}[h]
+\centering
+\caption{Friedman effect sizes (Kendall's $W=\chi^2/[N(k-1)]$; $N=15$, $k=4$).}
+\begin{tabular}{lrr}
+\toprule
+Metric & $\chi^2$ & Kendall's $W$ \\
+\midrule
+Fidelity         & 42.12 & 0.936 \\
+Stability        & 43.88 & 0.975 \\
+Sparsity         & 35.64 & 0.792 \\
+Faithfulness Gap & 45.00 & 1.000 \\
+Cost             & 27.72 & 0.616 \\
+\bottomrule
+\end{tabular}
+\label{tab:friedman-effect-size}
+\end{table}
 Post-hoc localization uses Nemenyi pairwise comparisons within each metric,
 with Holm-Bonferroni adjustment across the five primary metrics.
+The corresponding effect sizes indicate medium-to-very-large between-method
+separation across all five metrics.
 
 \subsection{Targeted Pairwise Comparison (SHAP vs LIME on Shared Families)}
 \begin{table}[h]
@@ -361,13 +480,15 @@ relative to LIME under shared cells.
 
 This comparison is restricted to \texttt{logreg/rf/xgb} matched configurations
 and is not directly generalizable to non-matched families or to methods outside
-the SHAP--LIME pair.
+the SHAP--LIME pair, including rule-based and counterfactual families
+\citep{ribeiro2018anchors,mothilal2020dice}.
 
 \subsection{Reproducibility and Variance Profile}
 EXP1 repeated-run evidence indicates lower dispersion for quality-oriented
 metrics and higher dispersion for runtime behavior. Quality metrics remain
 relatively stable across repeated seeds, while Cost varies more strongly for
-SHAP variants.
+SHAP variants, consistent with recent calls for variance-aware benchmark
+reporting \citep{agarwal2022openxai,hedstrom2023quantus}.
 \begin{itemize}[leftmargin=*]
     \item Metric stability (quality): Fidelity CV $\leq 0.0634$, Stability CV $\leq 0.0826$, Sparsity CV $\leq 0.0441$, Faithfulness-gap CV $\leq 0.0358$.
     \item Runtime instability (cost): Cost CV reaches 0.225 for SHAP variants.
@@ -389,14 +510,17 @@ Interpretation limits:
 \end{itemize}
 
 \section{Conclusion}
+\label{sec:conclusion}
 The reported metrics indicate a multi-objective frontier rather than a single
 best method: SHAP is strongest on the reported quality-oriented metrics, LIME is
 strongest on runtime efficiency, and DiCE is strongest on the reported sparsity
 criterion. Global tests reject the null of equal method performance across the
 primary metrics, and paired SHAP--LIME analysis indicates a quality--cost
-trade-off on shared model families.
+trade-off on shared model families. This reinforces multi-objective
+interpretation guidance in current XAI evaluation literature
+\citep{pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
 
-Methodologically, Paper A contributes FOM-7 as an auditable benchmark operation
+Methodologically, the current paper contributes FOM-7 (Framework Operation Method, seven-stage gating) as an auditable benchmark operation
 protocol that connects protocol freezing, controlled execution, integrity audit,
 deterministic inference export, and claim-traceable reporting. This contribution
 is operational and reproducibility-focused rather than algorithmic.
@@ -406,7 +530,7 @@ is operational and reproducibility-focused rather than algorithmic.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
     \item \textbf{Limitation:} incomplete EXP2 coverage and malformed artifacts qualify confidence in full-grid frontier stability.
     \item \textbf{Next steps:} publish a missingness diagnostic by model/explainer/seed/sample-size and release a versioned reproducibility bundle with immutable DOI (code, configs, run outputs, inferential exports, and figure scripts).
-    \item \textbf{Next steps:} integrate deferred semantic evaluation via a preregistered rubric, blinded human rating, inter-rater reliability reporting, and agreement analysis against the quantitative metrics.
+    \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
 \end{itemize}
 
 \acks{Funding and competing-interest disclosures are to be finalized in the submission package. This draft was prepared from repository artifacts dated February 2026.}
@@ -414,13 +538,42 @@ is operational and reproducibility-focused rather than algorithmic.
 \clearpage
 \phantomsection
 \pdfbookmark[1]{References}{references}
-\begin{thebibliography}{10}
+\begin{thebibliography}{20}
+
+\bibitem[Adadi and Berrada(2018)]{adadi2018xai}
+Amina Adadi and Mohammed Berrada.
+2018.
+Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI).
+\emph{IEEE Access}, 6:52138--52160.
+
+\bibitem[Agarwal et~al.(2022)Agarwal, Ley, Krishna, Saxena, Pawelczyk, Johnson, Puri, Zitnik, and Lakkaraju]{agarwal2022openxai}
+Chirag Agarwal, Dan Ley, Satyapriya Krishna, Eshika Saxena, Martin Pawelczyk,
+Nari Johnson, Isha Puri, Marinka Zitnik, and Himabindu Lakkaraju.
+2022.
+OpenXAI: Towards a Transparent Evaluation of Post hoc Model Explanations.
+\emph{arXiv preprint arXiv:2206.11104}.
 
 \bibitem[Agarwal et~al.(2023)Agarwal, Queen, Lakkaraju, and Zitnik]{agarwal2023gnn_eval}
 Chirag Agarwal, Owen Queen, Himabindu Lakkaraju, and Marinka Zitnik.
 2023.
 Evaluating explainability for graph neural networks.
 \emph{Scientific Data}, 10:144.
+
+\bibitem[Arrieta et~al.(2020)]{arrieta2020xai}
+Alejandro Barredo Arrieta, Natalia D\'iaz-Rodr\'iguez, Javier Del Ser,
+Adrien Bennetot, Siham Tabik, Alberto Barbado, Salvador Garc\'ia,
+Sergio Gil-L\'opez, Daniel Molina, Richard Benjamins, Raja Chatila,
+and Francisco Herrera.
+2020.
+Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI.
+\emph{Information Fusion}, 58:82--115.
+
+\bibitem[Canha et~al.(2025)Canha, Kubler, Fr\"amling, and Fagherazzi]{canha2025functionally}
+Dulce Canha, Sylvain Kubler, Kary Fr\"amling, and Guy Fagherazzi.
+2025.
+A Functionally-Grounded Benchmark Framework for XAI Methods: Insights and
+Foundations from a Systematic Literature Review.
+\emph{ACM Computing Surveys}, 57(12):1--40.
 
 \bibitem[Durrani et~al.(2023)Durrani, Dalvi, and Sajjad]{durrani2023salient}
 Nadir Durrani, Fahim Dalvi, and Hassan Sajjad.
@@ -448,11 +601,25 @@ Gabriel Laberge, Yann Pequignot, Alexandre Mathieu, Foutse Khomh, and Mario Marc
 Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set.
 \emph{Journal of Machine Learning Research}, 24:1--50.
 
+\bibitem[Lundberg and Lee(2017)]{lundberg2017shap}
+Scott M. Lundberg and Su-In Lee.
+2017.
+A Unified Approach to Interpreting Model Predictions.
+In \emph{Advances in Neural Information Processing Systems}, volume 30,
+pages 4765--4774.
+
 \bibitem[Li et~al.(2022)Li, Xiong, Li, Wu, Chen, and Dou]{li2022interpretdl}
 Xuhong Li, Haoyi Xiong, Xingjian Li, Xuanyu Wu, Zeyu Chen, and Dejing Dou.
 2022.
 InterpretDL: Explaining Deep Models in PaddlePaddle.
 \emph{Journal of Machine Learning Research}, 23:1--6.
+
+\bibitem[Mothilal et~al.(2020)Mothilal, Sharma, and Tan]{mothilal2020dice}
+Ramaravind K. Mothilal, Amit Sharma, and Chenhao Tan.
+2020.
+Explaining machine learning classifiers through diverse counterfactual explanations.
+In \emph{Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency (FAccT)},
+pages 607--617.
 
 \bibitem[Pawlicki et~al.(2024)Pawlicki, Pawlicka, Uccello, Szelest, D'Antonio, Kozik, and Chora\'s]{pawlicki2024multiple}
 Marek Pawlicki, Aleksandra Pawlicka, Federica Uccello, Sebastian Szelest,
@@ -461,11 +628,36 @@ Salvatore D'Antonio, Rafa{\l} Kozik, and Micha{\l} Chora\'s.
 Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination.
 \emph{Neurocomputing}, 602:128282.
 
+\bibitem[Sithakoul et~al.(2024)Sithakoul, Meftah, and Feutry]{sithakoul2024beexai}
+Samuel Sithakoul, Sara Meftah, and Cl\'ement Feutry.
+2024.
+BEExAI: Benchmark to Evaluate Explainable AI.
+\emph{arXiv preprint arXiv:2406.00596}.
+
 \bibitem[Proszewska et~al.(2025)Proszewska, Danel, and Rymarczyk]{proszewska2025bxaic}
 Magdalena Proszewska, Tomasz Danel, and Dawid Rymarczyk.
 2025.
 B-XAIC Dataset: Benchmarking Explainable AI for Graph Neural Networks Using Chemical Data.
 \emph{arXiv preprint arXiv:2505.22252}.
+
+\bibitem[Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin]{ribeiro2016lime}
+Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+2016.
+``Why Should I Trust You?'' Explaining the Predictions of Any Classifier.
+In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages 1135--1144.
+
+\bibitem[Ribeiro et~al.(2018)Ribeiro, Singh, and Guestrin]{ribeiro2018anchors}
+Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+2018.
+Anchors: High-Precision Model-Agnostic Explanations.
+In \emph{Proceedings of the AAAI Conference on Artificial Intelligence}, 32(1).
+
+\bibitem[Rudin(2019)]{rudin2019stop}
+Cynthia Rudin.
+2019.
+Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead.
+\emph{Nature Machine Intelligence}, 1(5):206--215.
 
 \bibitem[Zheng et~al.(2025)Zheng, Shirani, Chen, Lin, Cheng, Guo, and Luo]{zheng2025ffidelity}
 Xu Zheng, Farhad Shirani, Zhuomin Chen, Chaohao Lin, Wei Cheng, Wenbo Guo, and Dongsheng Luo.
