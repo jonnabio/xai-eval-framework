@@ -31,14 +31,15 @@
 LIME and SHAP are widely used explainability methods, yet guidance on
 when to use each remains limited and often anecdotal. We present the
 first comprehensive empirical comparison evaluating both methods across
-six complementary metrics, using a rigorous benchmarking framework. Our
+five primary technical metrics with a secondary semantic analysis
+layer, using a rigorous benchmarking framework. Our
 study on tabular data reveals strong, statistically robust directional
 separation: SHAP dominates on stability and faithfulness-oriented
 quality metrics, while LIME yields substantially sparser explanations
 and lower latency in most matched contexts. The cost gap is large but
 heterogeneous across model families, with a heavy-tailed SHAP runtime
-distribution (matched-cell medians: 65.6 ms for SHAP versus 3.9 ms for
-LIME; means: 18,104.5 ms versus 191.1 ms). Based on these findings, we
+distribution (matched-cell medians: 1,098.1 ms for SHAP versus 64.4 ms
+for LIME; means: 503,870.2 ms versus 3,083.1 ms). Based on these findings, we
 provide deployment-oriented guidance: SHAP for high-assurance auditing
 and LIME for strict latency-oriented interfaces.
 \end{abstract}
@@ -49,41 +50,82 @@ explainable ai, lime, shap, interpretability, robustness benchmarking
 
 \section{Introduction}
 
-The ``LIME vs SHAP'' dilemma is a recurring theme in the deployment of
-Explainable AI (XAI). Practitioners must often choose between the local
-surrogate approach of LIME \citep{ribeiro2016why} and the game-theoretic
-approach of SHAP \citep{lundberg2017unified}. While theoretical distinctions
-are well-documented---LIME optimizes for local fidelity via sparse
-linear models, while SHAP optimizes for Shapley value
-properties---evaluation remains methodologically fragmented in practice.
-Recent synthesis work reports that XAI still lacks a gold-standard
-evaluation protocol and that evidence is often scattered across methods,
-domains, and evaluation criteria \citep{longo2024manifesto}. The same
-analysis also highlights robustness sensitivity in attribution methods
-such as LIME and SHAP under perturbation settings, which makes
-single-metric comparisons insufficient \citep{longo2024manifesto}.
+Selecting an explanation method in production can be posed as a
+constrained decision problem: given a fixed predictor \(f\) and instance
+\(x\), choose \(E \in \{\mathrm{LIME}, \mathrm{SHAP}\}\) to maximize
+explanation quality while satisfying operational constraints.
+Concretely, we consider
+\[
+E^\star=\arg\max_{E \in \{\mathrm{LIME},\mathrm{SHAP}\}}
+U(S_E,F_E,\Delta_{k,E},P_E)\quad\text{s.t.}\quad C_E \le \tau,
+\]
+where \(S\) is stability, \(F\) fidelity, \(\Delta_k\) faithfulness
+gap, \(P\) sparsity/parsimony, \(C\) cost, and \(\tau\) a latency
+budget.
 
-This paper addresses the gap by providing a rigorous, multi-metric
-comparison. We leverage the \textbf{XAI Evaluation Framework}
-as an audited, configuration-driven benchmarking protocol to compare
-these methods on tabular data across five key dimensions: Fidelity,
-Stability, Sparsity, Computational Cost, and Faithfulness Gap.
+LIME and SHAP optimize different principles. LIME explains locally by
+fitting a sparse surrogate around \(x\),
+\[
+\xi(x)=\arg\min_{g\in G}\mathcal{L}(f,g,\pi_x)+\Omega(g),
+\]
+favoring local fidelity and explicit sparsity controls
+\citep{ribeiro2016why}. SHAP explains predictions through additive
+feature attributions \(f(x)=\phi_0+\sum_i \phi_i\), where \(\phi_i\)
+are Shapley-based contributions with game-theoretic guarantees
+\citep{lundberg2017unified}. These theoretical differences are well
+known; however, they do not by themselves resolve deployment choices
+across model families, sampling regimes, and runtime constraints
+\citep{retzlaff2024posthoc,ali2023trustworthy}.
+
+Recent synthesis and systematic studies show that XAI evaluation
+remains fragmented, with no single accepted protocol and strong
+dependence on which evaluation dimensions are prioritized
+\citep{longo2024manifesto,ali2023trustworthy,pawlicki2024metrics,canha2025benchmark}.
+This makes single-metric comparisons insufficient for claim-ready
+method selection.
+
+Open benchmarking toolchains and robustness-aware faithfulness
+protocols further show that method rankings can change under different
+metric families and perturbation settings
+\citep{agarwal2022openxai,sithakoul2024beexai,zheng2025ffidelity}.
+
+This paper provides a paired, multi-objective benchmark using an
+audited, configuration-driven protocol on tabular data (UCI Adult). We
+evaluate five technical endpoints with explicit directionality:
+Stability (\(S\), higher is better), Fidelity (\(F\), higher is
+better), Faithfulness Gap (\(\Delta_k\), higher is better under
+top-\(k\) masking), Sparsity (active-feature ratio \(P\), lower is
+better for parsimony), and Computational Cost (\(C\), lower is better).
+Inference is performed on matched SHAP-LIME cells with identical
+\((\mathrm{model},\mathrm{seed},N)\), using paired Wilcoxon tests
+\citep{wilcoxon1945individual}, paired effect sizes (\(d_z\))
+\citep{lakens2013calculating}, and Holm correction
+\citep{holm1979simple}.
+
+Our paired analysis indicates a consistent trade-off: SHAP tends to
+provide stronger stability and fidelity signals, while LIME offers
+substantially lower runtime cost. This supports objective-driven method
+selection rather than universal method supremacy
+\citep{agrawal2025xaieval}.
 
 Our contributions are:
 \begin{enumerate}[leftmargin=*]
-\item \textbf{Quantified Stability Gap}: We demonstrate a large stability
-advantage for SHAP, quantifying the risk of LIME's nondeterminism.
-\item \textbf{Cost-Fidelity Trade-off Analysis}: We map the Pareto frontier
-of explanation quality versus latency.
-\item \textbf{Semantic Evaluation}: We apply LLM-based judges to assess the
-human interpretability of generated explanations.
-\item \textbf{Practical Guidelines}: We synthesize these metrics into a
-decision framework for practitioners.
+\item \textbf{Formalized deployment trade-off}: we frame LIME-vs-SHAP as a
+constrained multi-objective selection problem over quality, parsimony, and
+cost.
+\item \textbf{Paired inferential evidence}: we quantify method differences on
+matched cells with corrected significance testing and effect sizes for each
+endpoint.
+\item \textbf{Operational heterogeneity analysis}: we characterize when cost
+dominance changes by model family, including heavy-tail latency behavior.
+\item \textbf{Decision guidance}: we derive deployment recommendations that map
+system constraints to explainer choice.
 \end{enumerate}
 
 \section{Background}
 This section summarizes the two explainability methods compared in our
-benchmark and the properties most relevant to practitioners.
+benchmark and highlights the technical properties that directly motivate
+the evaluation metrics and hypotheses used in this paper.
 
 \subsection{LIME (Local Interpretable Model-Agnostic Explanations)}
 
@@ -94,27 +136,57 @@ solves:
 \[
 \xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g).
 \]
-where \(\Omega(g)\) penalizes complexity (sparsity). LIME is favored for
-its speed and explicit sparsity controls.
+where \(\Omega(g)\) penalizes complexity (sparsity)
+\citep{ribeiro2016why}. In practice, LIME behavior is strongly shaped by
+its neighborhood construction and surrogate-design hyperparameters
+(e.g., kernel width, number of perturbation samples, and feature budget).
+These controls often yield compact explanations and low latency, but
+they also introduce stochastic variation because local neighborhoods are
+sampled rather than exhaustively enumerated.
 
 \subsection{SHAP (Shapley Additive Explanations)}
 
 SHAP attributes prediction output to features based on their marginal
 contribution across all possible coalitions, satisfying axioms of
-efficiency, symmetry, and dummy properties. KernelSHAP is a
-model-agnostic approximation of these values. SHAP is favored for its
-theoretical grounding and consistency guarantees.
+efficiency, symmetry, and dummy properties
+\citep{lundberg2017unified}. KernelSHAP estimates these quantities with
+a weighted regression scheme over coalitions for model-agnostic usage,
+whereas tree-specific implementations can exploit model structure.
+Relative to local-surrogate methods, SHAP is typically denser and
+computationally heavier in non-tree settings because many coalition
+evaluations are required to estimate stable attributions.
+
+\subsection{Implications for This Benchmark}
+For a fair LIME-versus-SHAP comparison, the benchmark must control
+confounders unrelated to explainer design. This motivates the protocol
+choices implemented in Section~3: identical transformed feature space,
+shared model artifacts, fixed class target, and matched paired cells by
+\((\mathrm{model}, \mathrm{seed}, N)\). Under these controls, expected
+methodological trade-offs become testable: LIME should favor sparsity
+and cost, while SHAP should favor stability and faithfulness-oriented
+quality. This framing also aligns with recent calls for multi-metric,
+functionally grounded XAI evaluation rather than single-endpoint
+reporting \citep{pawlicki2024metrics,canha2025benchmark}.
 
 \section{Methodology}
-This paper uses the same audited experimental stack developed for the
-thesis framework and narrows it to a focused LIME-versus-SHAP
-comparison. The goal is to produce claim-ready evidence on quality-cost
-trade-offs under controlled, reproducible conditions.
+This study uses a configuration-driven experimental pipeline for
+reproducible XAI benchmarking. The pipeline fixes (i) preprocessing and
+model artifacts before explanation, (ii) explainer hyperparameters via
+versioned YAML configurations with deterministic seeds, (iii)
+artifact-level logging per run (including \texttt{results.json}), and
+(iv) explicit validity filters plus matched SHAP-LIME pairing for
+inferential analysis. This structure follows recent recommendations for
+functionally grounded, multi-metric XAI evaluation and transparent
+benchmarking
+\citep{canha2025benchmark,pawlicki2024metrics,agarwal2022openxai}. We
+instantiate this pipeline for a focused LIME-versus-SHAP comparison to
+produce claim-ready evidence on quality-cost trade-offs under controlled
+conditions.
 
 \subsection{Research Questions and Hypotheses}
-The methodology is aligned with the thesis objective of building a
-model-agnostic, reproducible XAI evaluation protocol and validating it
-with both quantitative and semantic criteria.
+The methodology is model-agnostic and reproducibility-oriented,
+integrating quantitative endpoints with a secondary semantic assessment
+layer.
 
 We address the following questions:
 \begin{enumerate}[leftmargin=*]
@@ -150,6 +222,9 @@ This defines \(5 \times 2 \times 5 \times 3 = 150\) planned LIME/SHAP
 runs. In the current artifact state, we retain 140 analyzable LIME/SHAP
 runs (75 LIME, 65 SHAP) and 65 matched SHAP-LIME cells on identical
 \((g,s,N)\) coordinates for paired inference.
+Accordingly, this manuscript reports the EXP2 robustness cohort rather
+than the earlier EXP1 calibration subset, because paired multi-model
+coverage is required for inferential claims.
 
 To avoid pseudoreplication, we use a hierarchical analysis structure:
 \begin{enumerate}[leftmargin=*]
@@ -228,11 +303,31 @@ All inferential claims are restricted to artifact-qualified runs:
 parseable, non-empty results with explicit matched pairing.
 
 \subsection{Secondary Semantic Evaluation}
-Consistent with thesis objectives, the framework includes an LLM-based
-semantic layer (clarity/intuitiveness-style scoring). In this paper,
-semantic evaluation is treated as secondary evidence and does not replace
-technical-metric inference. Its role is to contextualize technical
-trade-offs, not to act as the primary statistical endpoint.
+Aligned with this paper's objective of producing claim-ready comparative
+evidence on LIME-versus-SHAP quality-cost trade-offs, the framework
+includes an LLM-based semantic layer (clarity/intuitiveness-style
+scoring). This layer is auxiliary to the primary functionally grounded
+endpoints and is not used to test \(H_1\)-\(H_4\), compute adjusted
+\(p\)-values, or determine method superiority
+\citep{pawlicki2024metrics,canha2025benchmark}.
+
+Methodologically, we position semantic scoring within the current
+LLM-as-a-judge evidence base: rubric-guided judging can be scalable and
+informative, but requires explicit reliability framing because outputs
+are sensitive to judge bias and prompt design
+\citep{zheng2023judging,gu2024llmjudge}. Domain-specific evidence also
+shows that rationale-aware LLM judging can correlate strongly with
+expert assessment when the rubric is structured
+\citep{zhou2025medthink}.
+
+At the same time, proxy LLM judges may diverge from end-user
+perceptions, so semantic scores are interpreted as contextual evidence
+rather than human-ground-truth utility estimates
+\citep{wu2025userperceptions}. Therefore, inferential conclusions in this
+paper remain anchored in technical metrics, with semantic outputs used to
+support interpretation of practical deployment trade-offs.
+In this artifact freeze, no human-agreement coefficient (e.g., \(\kappa\))
+is claimed for the semantic layer in this paper.
 
 \subsection{Reproducibility Contract}
 The protocol is fully configuration-driven (YAML + seeded execution),
@@ -254,6 +349,9 @@ N)\). Matched coverage spans all five model families
 Table~\ref{tab:paired_main} summarizes paired run-level outcomes on the
 65 matched cells. All five primary endpoints remain significant under
 Holm-adjusted testing.
+All numeric entries in Table~\ref{tab:paired_main} are source-locked to
+the analysis export \texttt{wilcoxon\_shap\_lime\_all\_models.csv} under
+\texttt{outputs/analysis/paper\_a\_exp2\_stats/}.
 
 \begin{table}[t]
 \centering
@@ -268,7 +366,7 @@ Stability & 0.014 & 0.742 & +0.728 & \(2.4\times10^{-12}\) & 3.07 \\
 Sparsity (active ratio) & 0.085 & 0.247 & +0.162 & \(2.4\times10^{-12}\) & 0.94 \\
 Fidelity & 0.558 & 0.812 & +0.254 & \(2.4\times10^{-12}\) & 3.97 \\
 Faithfulness Gap & 0.336 & 0.429 & +0.093 & \(2.4\times10^{-12}\) & 0.94 \\
-Cost (ms) & 191.1 & 18104.5 & +17913.4 & \(3.4\times10^{-9}\) & 0.36 \\
+Cost (ms) & 3083.1 & 503870.2 & +500787.1 & \(6.5\times10^{-10}\) & 0.29 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -288,15 +386,28 @@ Fidelity and faithfulness gap both favor SHAP in all matched cells. The
 fidelity margin (\(+0.254\) mean paired difference) and very large
 paired effect size (\(d_z=3.97\)) indicate not only statistical
 separation but practically meaningful quality gains under this protocol.
+Figure~\ref{fig:quality_endpoints} visualizes these paired mean
+separations for the four quality-oriented endpoints.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig_b1_quality_endpoints.pdf}
+\caption{Paired mean comparison across quality-oriented primary endpoints
+(\(n=65\) matched SHAP-LIME cells). Active ratio is reported directly;
+lower values imply sparser explanations.}
+\label{fig:quality_endpoints}
+\end{figure}
 
 \subsection{Runtime Distribution and Heterogeneity}
 The cost signal is significant but strongly heterogeneous. SHAP is slower
-in 49 of 65 matched cells, with a median cost ratio of approximately
-\(9.9\times\) (SHAP/LIME). However, the distribution is heavy-tailed:
+in 50 of 65 matched cells, with a median cost ratio of approximately
+\(11.5\times\) (SHAP/LIME). However, the distribution is heavy-tailed:
 for SHAP, the 90th and 95th percentile latencies are approximately
-89,261 ms and 95,781 ms, respectively, compared with 798 ms and
-817 ms for LIME. This tail behavior is concentrated in kernel-SHAP
+1,539,671 ms and 1,603,727 ms, respectively, compared with 12,825 ms and
+13,138 ms for LIME. This tail behavior is concentrated in kernel-SHAP
 contexts (notably SVM), which inflates mean cost beyond median behavior.
+Figure~\ref{fig:runtime_heterogeneity} shows both the overall log-scale
+runtime distribution and model-level median heterogeneity.
 
 Heterogeneity analysis by model family shows that quality ordering
 (stability, sparsity-direction, fidelity, faithfulness gap) is robust,
@@ -305,6 +416,16 @@ matched cells show SHAP faster than LIME, whereas RF, SVM, MLP, and
 LogReg are predominantly or uniformly SHAP-slower. Therefore, ``LIME is
 faster'' is valid as a majority statement in this cohort, but it is not
 universally true across model classes.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig_b2_runtime_heterogeneity.pdf}
+\caption{Runtime behavior under matched-cell pairing (\(n=65\)). Left:
+overall cost distribution by method (log scale). Right: model-level
+median cost (log scale), showing the XGBoost exception where SHAP is
+faster while other families are SHAP-slower.}
+\label{fig:runtime_heterogeneity}
+\end{figure}
 
 \subsection{Synthesis of Trade-offs}
 The empirical frontier is clear: SHAP delivers higher reliability and
@@ -372,10 +493,43 @@ competing interests.}
 \pdfbookmark[1]{References}{references}
 \begin{thebibliography}{99}
 
+\bibitem[Agrawal et~al.(2025)Agrawal, El Shawi, and Ahmed]{agrawal2025xaieval}
+Agrawal, K., El Shawi, R., and Ahmed, N. (2025).
+XAI-Eval: A framework for comparative evaluation of explanation methods
+in healthcare.
+\emph{DIGITAL HEALTH}, 11:20552076251368045.
+\url{https://doi.org/10.1177/20552076251368045}.
+
+\bibitem[Agarwal et~al.(2022)Agarwal, Ley, Krishna, Saxena, Pawelczyk, Johnson,
+Puri, Zitnik, and Lakkaraju]{agarwal2022openxai}
+Agarwal, C., Ley, D., Krishna, S., Saxena, E., Pawelczyk, M., Johnson, N.,
+Puri, I., Zitnik, M., and Lakkaraju, H. (2022).
+OpenXAI: Towards a transparent evaluation of model explanations.
+In \emph{Thirty-Sixth Conference on Neural Information Processing Systems
+Datasets and Benchmarks Track}.
+\url{https://openreview.net/forum?id=MU2495w47rz}.
+
+\bibitem[Ali et~al.(2023)Ali, Abuhmed, El-Sappagh, Muhammad, Alonso-Moral,
+Confalonieri, Guidotti, Del Ser, D\'{i}az-Rodr\'{i}guez, and Herrera]{ali2023trustworthy}
+Ali, S., Abuhmed, T., El-Sappagh, S., Muhammad, K., Alonso-Moral, J. M.,
+Confalonieri, R., Guidotti, R., Del Ser, J., D\'{i}az-Rodr\'{i}guez, N.,
+and Herrera, F. (2023).
+Explainable Artificial Intelligence (XAI): What we know and what is left
+to attain Trustworthy Artificial Intelligence.
+\emph{Information Fusion}, 99:101805.
+\url{https://doi.org/10.1016/j.inffus.2023.101805}.
+
 \bibitem[Breiman(2001)]{breiman2001random}
 Breiman, L. (2001).
 Random forests.
 \emph{Machine Learning}, 45(1):5--32.
+
+\bibitem[Canha et~al.(2025)Canha, Kubler, Fr\"{a}mling, and Fagherazzi]{canha2025benchmark}
+Canha, D., Kubler, S., Fr\"{a}mling, K., and Fagherazzi, G. (2025).
+A Functionally-Grounded Benchmark Framework for XAI Methods: Insights
+and Foundations from a Systematic Literature Review.
+\emph{ACM Computing Surveys}, 57(12):1--40.
+\url{https://doi.org/10.1145/3737445}.
 
 \bibitem[Chen and Guestrin(2016)]{chen2016xgboost}
 Chen, T. and Guestrin, C. (2016).
@@ -387,6 +541,15 @@ Knowledge Discovery and Data Mining}, 785--794.
 Dems\v{s}ar, J. (2006).
 Statistical comparisons of classifiers over multiple data sets.
 \emph{Journal of Machine Learning Research}, 7:1--30.
+
+\bibitem[Gu et~al.(2024)Gu, Jiang, Shi, Tan, Zhai, Xu, Li, Shen, Ma, Liu,
+Wang, Zhang, Wang, Gao, Ni, and Guo]{gu2024llmjudge}
+Gu, J., Jiang, X., Shi, Z., Tan, H., Zhai, X., Xu, C., Li, W., Shen, Y.,
+Ma, S., Liu, H., Wang, S., Zhang, K., Wang, Y., Gao, W., Ni, L., and Guo, J.
+(2024).
+A survey on LLM-as-a-Judge.
+\emph{arXiv preprint arXiv:2411.15594}.
+\url{https://doi.org/10.48550/arXiv.2411.15594}.
 
 \bibitem[Holm(1979)]{holm1979simple}
 Holm, S. (1979).
@@ -423,16 +586,75 @@ Lundberg, S. M. and Lee, S.-I. (2017).
 A unified approach to interpreting model predictions.
 In \emph{Advances in Neural Information Processing Systems}, 4765--4774.
 
+\bibitem[Pawlicki et~al.(2024)Pawlicki, Pawlicka, Uccello, Szelest,
+D'Antonio, Kozik, and Chora\'{s}]{pawlicki2024metrics}
+Pawlicki, M., Pawlicka, A., Uccello, F., Szelest, S., D'Antonio, S.,
+Kozik, R., and Chora\'{s}, M. (2024).
+Evaluating the necessity of the multiple metrics for assessing
+explainable AI: A critical examination.
+\emph{Neurocomputing}, 602:128282.
+\url{https://doi.org/10.1016/j.neucom.2024.128282}.
+
+\bibitem[Retzlaff et~al.(2024)Retzlaff, Angerschmid, Saranti, Schneeberger,
+R\"{o}ttger, M\"{u}ller, and Holzinger]{retzlaff2024posthoc}
+Retzlaff, C. O., Angerschmid, A., Saranti, A., Schneeberger, D.,
+R\"{o}ttger, R., M\"{u}ller, H., and Holzinger, A. (2024).
+Post-hoc vs ante-hoc explanations: xAI design guidelines for data
+scientists.
+\emph{Cognitive Systems Research}, 86:101243.
+\url{https://doi.org/10.1016/j.cogsys.2024.101243}.
+
 \bibitem[Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin]{ribeiro2016why}
 Ribeiro, M. T., Singh, S., and Guestrin, C. (2016).
 Why should I trust you?: Explaining the predictions of any classifier.
 In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
 Knowledge Discovery and Data Mining}, 1135--1144.
 
+\bibitem[Sithakoul et~al.(2024)Sithakoul, Meftah, and Feutry]{sithakoul2024beexai}
+Sithakoul, S., Meftah, S., and Feutry, C. (2024).
+BEExAI: Benchmark to evaluate explainable AI.
+In \emph{Explainable Artificial Intelligence}, 445--468.
+Springer Nature Switzerland.
+\url{https://doi.org/10.1007/978-3-031-63787-2_23}.
+
 \bibitem[Wilcoxon(1945)]{wilcoxon1945individual}
 Wilcoxon, F. (1945).
 Individual comparisons by ranking methods.
 \emph{Biometrics Bulletin}, 1(6):80--83.
+
+\bibitem[Wu et~al.(2025)Wu, Kaushik, Li, Bauer, and Onoue]{wu2025userperceptions}
+Wu, X., Kaushik, R., Li, W., Bauer, L., and Onoue, K. (2025).
+User perceptions vs. proxy LLM judges: Privacy and helpfulness in LLM
+responses to privacy-sensitive scenarios.
+\emph{arXiv preprint arXiv:2510.20721}.
+\url{https://doi.org/10.48550/arXiv.2510.20721}.
+
+\bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li,
+Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
+Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y.,
+Lin, Z., Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E.,
+and Stoica, I. (2023).
+Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.
+In \emph{Advances in Neural Information Processing Systems 36:
+Datasets and Benchmarks Track}.
+\url{https://doi.org/10.48550/arXiv.2306.05685}.
+
+\bibitem[Zheng et~al.(2025)Zheng, Shirani, Chen, Lin, Cheng, Guo, and Luo]{zheng2025ffidelity}
+Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., and Luo, D.
+(2025).
+F-Fidelity: A robust framework for faithfulness evaluation of explainable AI.
+In \emph{The Thirteenth International Conference on Learning
+Representations (ICLR)}.
+\url{https://openreview.net/forum?id=X0r4BN50Dv}.
+
+\bibitem[Zhou et~al.(2025)Zhou, Xie, Li, Zhan, Song, Yang, Espinoza, Welton,
+Mai, Jin, Xu, Chung, Xing, Tsai, Schaffer, Shi, Liu, Liu, and Zhang]{zhou2025medthink}
+Zhou, S., Xie, W., Li, J., Zhan, Z., Song, M., Yang, H., Espinoza, C.,
+Welton, L., Mai, X., Jin, Y., Xu, Z., Chung, Y.-H., Xing, Y., Tsai, M.-H.,
+Schaffer, E., Shi, Y., Liu, N., Liu, Z., and Zhang, R. (2025).
+Automating expert-level medical reasoning evaluation of large language models.
+\emph{npj Digital Medicine}, 9(1):34.
+\url{https://doi.org/10.1038/s41746-025-02208-7}.
 
 \end{thebibliography}
 
