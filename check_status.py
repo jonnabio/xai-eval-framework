@@ -25,8 +25,8 @@ try:
     
     if stats['in_progress']:
         print(f"\nCurrently Running: {len(stats['in_progress'])} (Details hidden for brevity)")
-        # for exp in stats['in_progress']:
-        #     print(f"- {exp['name']} (Started: {exp['start_time']}, Duration: {exp['duration']})")
+        for exp in stats['in_progress']:
+            print(f"- {exp['name']} (Started: {exp['start_time']}, Duration: {exp['duration'].total_seconds() // 60:.0f} mins)")
             
 except Exception as e:
     print(f"Error checking status: {e}")
