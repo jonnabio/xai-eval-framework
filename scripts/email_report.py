@@ -167,11 +167,14 @@ def send_email(subject, body, to_email):
     gmail_user = os.environ.get("GMAIL_USER", "jonnabio@gmail.com")
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD")
 
+    from email.utils import make_msgid, formatdate
     msg = EmailMessage()
     msg.set_content(body)
-    msg['Subject'] = subject
+    msg['Subject'] = f"{subject} [{datetime.now().strftime('%H:%M:%S')}]"
     msg['From'] = gmail_user
     msg['To'] = to_email
+    msg['Date'] = formatdate(localtime=True)
+    msg['Message-ID'] = make_msgid()
 
     if not gmail_password:
         print("WARNING: GMAIL_APP_PASSWORD environment variable not set.")

@@ -25,6 +25,27 @@ from src.experiment.runner import ExperimentRunner
 
 logger = logging.getLogger(__name__)
 
+import threading
+import subprocess
+
+def _auto_commit_worker(interval_seconds: int):
+    """Background worker that commits the experiments directory periodically."""
+    while True:
+        time.sleep(interval_seconds)
+        try:
+            logger.info("Running automatic git commit for experiment progress...")
+            subprocess.run(["git", "add", "experiments/"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            res = subprocess.run(
+                ["git", "commit", "-m", f"Auto-commit: Checkpointing experiment progress"],
+                check=False,
+                capture_output=True,
+                text=True
+            )
+            if res.returncode == 0:
+                logger.info("Auto-commit successful.")
+        except Exception as e:
+            logger.error(f"Auto-commit thread encountered an error: {e}")
+
 def _run_single_experiment(config_path: Path) -> Dict[str, Any]:
     """
     Worker function for parallel execution.
@@ -94,17 +115,27 @@ class BatchExperimentRunner:
             valid.append(p)
         self.config_paths = valid
         
-    def run(self, parallel: bool = True, max_workers: int = 2) -> pd.DataFrame:
+    def run(self, parallel: bool = True, max_workers: int = 2, auto_commit_interval: int = 1800) -> pd.DataFrame:
         """
         Execute experiments in batch.
         
         Args:
             parallel: Whether to run in parallel
             max_workers: Number of worker processes
+            auto_commit_interval: Seconds between automatic git commits (0 to disable)
             
         Returns:
             DataFrame containing aggregated results
         """
+        if auto_commit_interval > 0:
+            logger.info(f"Starting auto-commit thread (interval: {auto_commit_interval}s)")
+            commit_thread = threading.Thread(
+                target=_auto_commit_worker, 
+                args=(auto_commit_interval,), 
+                daemon=True
+            )
+            commit_thread.start()
+            
         start_time = time.time()
         results_list = []
         

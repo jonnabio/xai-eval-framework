@@ -72,3 +72,4 @@ The `SHAPTabularWrapper` in `src/xai/shap_tabular.py` was modified to support a 
 1.  **Launch Batch:** `python src/experiment/run_batch.py --config-dir configs/recovery/phase1 --parallel 4`
 2.  **Monitor:** `python scripts/monitor_experiments.py --watch`
 3.  **Validate:** `python scripts/compare_results.py --baseline experiments/exp2_scaled/results --recovery experiments/recovery/phase1/results`
+

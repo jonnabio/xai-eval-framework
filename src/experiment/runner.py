@@ -325,6 +325,22 @@ class ExperimentRunner:
         """
         Evaluate a single instance.
         """
+        instance_id = int(instance_row['original_index'])
+        
+        # Setup checkpoint directory
+        instances_dir = self.config.output_dir / "instances"
+        instances_dir.mkdir(parents=True, exist_ok=True)
+        checkpoint_path = instances_dir / f"{instance_id}.json"
+        
+        # Check for checkpoint
+        if checkpoint_path.exists():
+            logger.info(f"Processing instance {idx+1}/{total}... (loaded instance_id {instance_id} from checkpoint)")
+            try:
+                with open(checkpoint_path, 'r') as f:
+                    return json.load(f)
+            except json.JSONDecodeError:
+                logger.warning(f"Corrupted checkpoint found for instance {instance_id}, recompiling.")
+                
         # Log progress for every instance
         logger.info(f"Processing instance {idx+1}/{total}...")
         
@@ -360,16 +376,30 @@ class ExperimentRunner:
         )
         
         # Construct Result
-        return {
+        res = {
             "instance_id": int(instance_row['original_index']),
             "quadrant": instance_row['quadrant'],
             "true_label": int(instance_row['target']),
             "prediction": int(instance_row['prediction']),
             "prediction_correct": int(instance_row['target']) == int(instance_row['prediction']),
             "metrics": metrics_results,
-            "metrics": metrics_results,
             "explanation": self._format_explanation(weights, feature_names)
         }
+        
+        # Save checkpoint atomically
+        class NpEncoder(json.JSONEncoder):
+            def default(self, obj):
+                if isinstance(obj, np.integer): return int(obj)
+                if isinstance(obj, np.floating): return float(obj)
+                if isinstance(obj, np.ndarray): return obj.tolist()
+                return super(NpEncoder, self).default(obj)
+                
+        temp_path = checkpoint_path.with_suffix('.tmp')
+        with open(temp_path, 'w') as f:
+            json.dump(res, f, cls=NpEncoder)
+        temp_path.replace(checkpoint_path)
+            
+        return res
         
     def _format_explanation(self, weights: np.ndarray, feature_names: List[str], top_k: int = 10) -> Dict[str, Any]:
         """Format explanation for storage/LLM context."""
