@@ -42,7 +42,12 @@ def _auto_commit_worker(interval_seconds: int):
                 text=True
             )
             if res.returncode == 0:
-                logger.info("Auto-commit successful.")
+                logger.info("Auto-commit successful. Pushing to remote...")
+                push_res = subprocess.run(["git", "push"], check=False, capture_output=True, text=True)
+                if push_res.returncode == 0:
+                    logger.info("Push successful.")
+                else:
+                    logger.warning(f"Push failed: {push_res.stderr}")
         except Exception as e:
             logger.error(f"Auto-commit thread encountered an error: {e}")
 
