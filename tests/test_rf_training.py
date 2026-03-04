@@ -72,6 +72,7 @@ def test_config_loading():
 
     Relates to: EXP1-08
     """
+    with open(CONFIG_PATH, 'r') as f:
         config = yaml.safe_load(f)
         
     assert "model" in config

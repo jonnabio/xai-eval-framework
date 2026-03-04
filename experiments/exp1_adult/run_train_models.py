@@ -379,7 +379,7 @@ def main(config_path: Optional[str] = None, models_filter: str = "rf,xgboost", d
         if metrics_list:
              best_model = max(metrics_list, key=lambda x: x.get('roc_auc', 0))
              logger.info("-" * 40)
-             logger.info(f"Experiment Completed Successfully.")
+             logger.info("Experiment Completed Successfully.")
              logger.info(f"Models Trained: {len(metrics_list)}")
              logger.info(f"Best Model (ROC-AUC): {best_model['model']} ({best_model.get('roc_auc', 0):.4f})")
              logger.info("-" * 40)

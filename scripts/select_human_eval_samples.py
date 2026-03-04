@@ -203,7 +203,7 @@ def main():
             all_samples.append(sample)
 
     # Summary
-    logger.info(f"\n=== Summary ===")
+    logger.info("\n=== Summary ===")
     logger.info(f"Total samples selected: {len(all_samples)}")
 
     # Breakdown by quadrant
@@ -225,10 +225,10 @@ def main():
         json.dump(all_samples, f, indent=2)
 
     logger.info(f"\n✓ Saved {len(all_samples)} samples to: {args.output}")
-    logger.info(f"\nNext steps:")
+    logger.info("\nNext steps:")
     logger.info(f"  1. Review samples: cat {args.output} | jq '.[] | .sample_id'")
-    logger.info(f"  2. Start API server: python -m src.api.main")
-    logger.info(f"  3. Test endpoint: curl http://localhost:8000/api/human-eval/samples")
+    logger.info("  2. Start API server: python -m src.api.main")
+    logger.info("  3. Test endpoint: curl http://localhost:8000/api/human-eval/samples")
 
 if __name__ == "__main__":
     main()

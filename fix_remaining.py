@@ -4,12 +4,12 @@ import os
 fp = "src/scripts/extract_results_metadata.py"
 with open(fp, "r") as f:
     lines = f.readlines()
-for i, l in enumerate(lines):
-    if "def extract_quantitative_results(results_dir):" in l:
+for i, line in enumerate(lines):
+    if "def extract_quantitative_results(results_dir):" in line:
         lines.insert(i+5, "    aggregated_data = {}\n")
         break
-for i, l in enumerate(lines):
-    if "def extract_cv_results(cv_dir):" in l:
+for i, line in enumerate(lines):
+    if "def extract_cv_results(cv_dir):" in line:
         lines.insert(i+5, "    cv_data = {}\n")
         break
 with open(fp, "w") as f:
@@ -19,12 +19,12 @@ with open(fp, "w") as f:
 fp = "src/scripts/generate_paper_figures.py"
 with open(fp, "r") as f:
     lines = f.readlines()
-for i, l in enumerate(lines):
-    if "def load_cv_data():" in l:
+for i, line in enumerate(lines):
+    if "def load_cv_data():" in line:
         lines.insert(i+2, "    data = {}\n")
         break
-for i, l in enumerate(lines):
-    if "def prepare_radar_data(cv_data):" in l:
+for i, line in enumerate(lines):
+    if "def prepare_radar_data(cv_data):" in line:
         lines.insert(i+2, "    radar_data = {}\n")
         break
 with open(fp, "w") as f:
@@ -39,13 +39,13 @@ with open(fp, "r") as f:
 # Using `# noqa: E402` or `# ruff: noqa: E402`
 # A better way is to add `--ignore E402` to ruff config if possible, but let's just insert # noqa: E402.
 new_lines = []
-for l in content.split("\n"):
-    if "import logging" in l or "import time" in l or "from typing" in l or "import numpy" in l or "import shap" in l or "from sklearn.utils" in l:
-        new_lines.append(l + "  # noqa: E402")
-    elif l.startswith("from .base import ExplainerWrapper"):
-        new_lines.append(l + "  # noqa: E402")
+for line in content.split("\n"):
+    if "import logging" in line or "import time" in line or "from typing" in line or "import numpy" in line or "import shap" in line or "from sklearn.utils" in line:
+        new_lines.append(line + "  # noqa: E402")
+    elif line.startswith("from .base import ExplainerWrapper"):
+        new_lines.append(line + "  # noqa: E402")
     else:
-        new_lines.append(l)
+        new_lines.append(line)
 with open(fp, "w") as f:
     f.write("\n".join(new_lines))
 

@@ -69,7 +69,7 @@ def verify_and_fix():
                 print(f"  !! FAILED TO FIX: {fix_e}")
                 
     print("-" * 30)
-    print(f"Scan complete.")
+    print("Scan complete.")
     print(f"Healthy files: {len(json_files) - corrupt_count + fixed_count}")
     print(f"Fixed: {fixed_count}")
     print(f"Still Corrupt: {corrupt_count - fixed_count}")

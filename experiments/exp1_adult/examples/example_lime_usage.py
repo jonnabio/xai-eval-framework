@@ -80,7 +80,7 @@ def main():
     
     print(f"   Found model at: {model_path}")
     model = joblib.load(model_path)
-    print(f"   Model loaded successfully")
+    print("   Model loaded successfully")
     
     # 3. Initialize LIME wrapper
     print("\n3. Initializing LIME wrapper...")
@@ -92,7 +92,7 @@ def main():
         num_samples=5000,
         random_state=42
     )
-    print(f"   LIME wrapper initialized")
+    print("   LIME wrapper initialized")
     print(f"   Config: {lime_wrapper.get_config()}")
     
     # 4. Generate explanations for a few test instances
@@ -105,7 +105,7 @@ def main():
         X_samples=X_explain
     )
     
-    print(f"   Explanations generated!")
+    print("   Explanations generated!")
     print(f"   Feature importance shape: {explanations['feature_importance'].shape}")
     print(f"   Top features shape: {explanations['top_features'].shape}")
     print(f"   Total time: {explanations['metadata']['total_time_seconds']:.2f}s")
