@@ -8,7 +8,7 @@ import logging
 import pandas as pd
 import numpy as np
 import time
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Any, Optional
 
 from .base import ExplainerWrapper
 

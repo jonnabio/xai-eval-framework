@@ -4,9 +4,7 @@ Stability (Robustness) Metric.
 from typing import Any, Dict, Optional, Union, Callable
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from scipy.spatial.distance import jaccard
 from .base import BaseMetric
-import copy
 
 class StabilityMetric(BaseMetric):
     """

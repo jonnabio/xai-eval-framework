@@ -7,17 +7,17 @@ Provides access to experiment results:
 """
 
 from fastapi import APIRouter, HTTPException, Query, status, Request
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime
 import logging
 from src.api.limiter import limiter
 
 from src.api.models.schemas import (
-    Run, RunsResponse, RunResponse,
+    RunsResponse, RunResponse,
     ExperimentResultResponse, InstancesResponse
 )
 from src.api.services.data_loader import (
-    load_experiments_with_filters, load_all_experiments,
+    load_all_experiments,
     get_experiment_result, get_instances_paginated
 )
 from src.api.services.transformer import transform_experiment_to_run

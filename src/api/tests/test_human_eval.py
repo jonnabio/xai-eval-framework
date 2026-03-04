@@ -4,7 +4,6 @@ Unit tests for human evaluation system.
 
 import pytest
 import json
-from pathlib import Path
 from src.api.services import human_eval_service as service
 from src.api.models.schemas import HumanAnnotationSubmission, HumanAnnotationRatings
 

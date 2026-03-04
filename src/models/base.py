@@ -13,7 +13,6 @@ import joblib
 import time
 import logging
 import numpy as np
-import pandas as pd
 import sklearn.metrics as metrics
 
 logger = logging.getLogger(__name__)
@@ -190,7 +189,6 @@ class BaseTrainer(ABC):
         # Load metadata
         config = {}
         feature_names = None
-        metrics_data = {}
         
         if metadata_path.exists():
             with open(metadata_path, 'r') as f:

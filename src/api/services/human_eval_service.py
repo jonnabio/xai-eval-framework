@@ -18,8 +18,7 @@ from functools import lru_cache
 
 from src.api.config import settings
 from src.api.models.schemas import (
-    HumanEvalSample, HumanAnnotationSubmission, AnnotationProgress,
-    AnnotationStatus
+    HumanEvalSample, HumanAnnotationSubmission, AnnotationProgress
 )
 
 logger = logging.getLogger(__name__)
@@ -77,8 +76,8 @@ def load_samples_from_file() -> List[Dict[str, Any]]:
     if not samples_file.exists():
         logger.error(f"Samples file not found: {samples_file}")
         raise FileNotFoundError(
-            f"Samples file not found. Please run: "
-            f"python scripts/select_human_eval_samples.py"
+            "Samples file not found. Please run: "
+            "python scripts/select_human_eval_samples.py"
         )
 
     try:

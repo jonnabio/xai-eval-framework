@@ -1,3 +1,4 @@
+from .base import ExplainerWrapper  # noqa: E402
 """
 SHAP Tabular Wrapper for XAI Evaluation Framework.
 
@@ -5,13 +6,13 @@ This module provides a standardized interface for generating SHAP explanations
 for tabular classification models, specifically optimized for tree-based models
 (Random Forest, XGBoost) used in Experiment 1.
 """
-import logging
-import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+import logging  # noqa: E402
+import time  # noqa: E402
+from typing import Any, Dict, List, Optional, Tuple  # noqa: E402
 
-import numpy as np
-import shap
-from sklearn.utils import resample
+import numpy as np  # noqa: E402
+import shap  # noqa: E402
+from sklearn.utils import resample  # noqa: E402
 
 # Configure module-level logger
 logger = logging.getLogger(__name__)
@@ -89,7 +90,6 @@ def validate_shap_additivity(
     is_valid = max_error <= tolerance
     return is_valid, float(max_error)
 
-from .base import ExplainerWrapper
 
 class SHAPTabularWrapper(ExplainerWrapper):
     """

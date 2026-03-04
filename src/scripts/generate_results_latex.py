@@ -65,7 +65,8 @@ def generate_cv_comparison_table(metadata):
     # Or iterate through main metadata and find matching CV entry
     
     for key, data in metadata.items():
-        if key in ['cross_validation', 'statistical_tests']: continue
+        if key in ['cross_validation', 'statistical_tests']:
+            continue
         
         model = data.get('model', 'Unknown')
         explainer = data.get('explainer', 'Unknown')
@@ -157,7 +158,8 @@ def generate_xai_metrics_table(metadata):
     stats = metadata.get('statistical_tests', {})
     
     for key, data in metadata.items():
-        if key in ['cross_validation', 'statistical_tests']: continue
+        if key in ['cross_validation', 'statistical_tests']:
+            continue
         
         model = data.get('model', 'Unknown')
         explainer = data.get('explainer', 'Unknown')
@@ -165,7 +167,8 @@ def generate_xai_metrics_table(metadata):
         
         def get_fmt(m_name):
             m = metrics.get(m_name, {})
-            if not m or 'mean' not in m: return "-"
+            if not m or 'mean' not in m:
+                return "-"
             
             val_str = f"{m['mean']:.3f} $\\pm$ {m['std']:.3f}"
             
@@ -208,7 +211,8 @@ def generate_llm_eval_table(metadata):
     latex.append(r"\midrule")
     
     for key, data in metadata.items():
-        if key in ['cross_validation', 'statistical_tests']: continue
+        if key in ['cross_validation', 'statistical_tests']:
+            continue
 
         model = data.get('model', 'Unknown')
         explainer = data.get('explainer', 'Unknown')
@@ -216,7 +220,8 @@ def generate_llm_eval_table(metadata):
         
         def get_fmt(m_name):
             m = llm_metrics.get(m_name, {})
-            if not m: return "-"
+            if not m:
+                return "-"
             return f"{m['mean']:.2f}"
             
         faith = get_fmt('faithfulness')

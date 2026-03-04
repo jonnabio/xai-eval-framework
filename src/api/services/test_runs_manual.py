@@ -1,6 +1,5 @@
 """Manual test of runs endpoints with real data."""
 import requests
-import json
 
 BASE_URL = "http://localhost:8000"
 
@@ -80,7 +79,7 @@ try:
     print(f"   Status: {response.status_code}")
     
     if response.status_code == 404:
-        print(f"   ✓ Correctly returns 404")
+        print("   ✓ Correctly returns 404")
 except Exception as e:
     print(f"   ✗ Connection failed: {e}")
 

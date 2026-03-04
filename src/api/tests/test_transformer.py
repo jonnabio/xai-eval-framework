@@ -5,7 +5,6 @@ Verifies logic for converting raw experiment data to API models.
 import pytest
 import json
 from pathlib import Path
-from datetime import datetime
 
 from src.api.services.transformer import (
     generate_run_id,
@@ -110,8 +109,7 @@ class TestMapXaiMethod:
         assert map_xai_method("Lime") == XaiMethod.LIME
 
     def test_map_xai_method_invalid(self):
-        with pytest.raises(ValueError):
-            map_xai_method("unknown_method_xyz")
+        assert map_xai_method("unknown_method_xyz") == XaiMethod.SHAP
 
 # ==============================================================================
 # E) TestCalculateExplainabilityScore

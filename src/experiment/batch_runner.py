@@ -20,7 +20,7 @@ try:
 except ImportError:
     git = None
 
-from src.experiment.config import load_config, ExperimentConfig
+from src.experiment.config import load_config
 from src.experiment.runner import ExperimentRunner
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ def _auto_commit_worker(interval_seconds: int):
             logger.info("Running automatic git commit for experiment progress...")
             subprocess.run(["git", "add", "experiments/"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             res = subprocess.run(
-                ["git", "commit", "-m", f"Auto-commit: Checkpointing experiment progress"],
+                ["git", "commit", "-m", "Auto-commit: Checkpointing experiment progress"],
                 check=False,
                 capture_output=True,
                 text=True

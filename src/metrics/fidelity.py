@@ -1,10 +1,9 @@
 """
 Fidelity (Faithfulness) Metric.
 """
-from typing import Any, Dict, Optional, Union, List
+from typing import Any, Dict, Optional, Union
 import numpy as np
 from sklearn.metrics import r2_score, mean_absolute_error
-from sklearn.linear_model import LinearRegression
 from .base import BaseMetric
 
 class FidelityMetric(BaseMetric):

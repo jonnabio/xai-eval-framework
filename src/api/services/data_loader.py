@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Tuple, Iterator, Iterable
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from src.api.config import settings
 from src.api.models.schemas import ExperimentResult, InstanceEvaluation, Run
@@ -223,7 +223,7 @@ def build_run_id_index():
             if data:
                 run = transform_experiment_to_run(data)
                 return (run.id, file_path)
-        except Exception as e:
+        except Exception:
             # logger.warning(f"Failed to index {file_path}: {e}")
             pass
         return None
@@ -268,7 +268,7 @@ def get_experiment_result(run_id: str) -> Optional[ExperimentResult]:
                 # Update index with found item for next time
                 # (Note: we can't easily get filepath here without refactoring load_all_experiments)
                 return transform_experiment_to_result(exp_data)
-        except Exception as e:
+        except Exception:
             continue
             
     return None
@@ -321,7 +321,7 @@ def get_all_run_models(force_refresh: bool = False) -> List[Run]:
                          # But transform_experiment_to_run doesn't strict depend on it for basic view.
                          pass
                     return transform_experiment_to_run(data)
-            except Exception as e:
+            except Exception:
                 # logger.warning(f"Failed to process {file_path}: {e}")
                 return None
             return None

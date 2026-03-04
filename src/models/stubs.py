@@ -5,7 +5,7 @@ This module contains stub definitions for Vision and NLP models required by the 
 They serve to validate that the BaseTrainer architecture is robust enough to handle
 non-tabular data (Images, Text) and Deep Learning frameworks (Torch/TF) in future phases.
 """
-from typing import Any, Dict
+from typing import Any
 import numpy as np
 from .base import BaseTrainer
 

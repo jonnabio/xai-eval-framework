@@ -2,7 +2,6 @@
 from fastapi.testclient import TestClient
 from src.api.main import app
 from src.api.auth import create_access_token
-from src.api.config import settings
 
 client = TestClient(app)
 

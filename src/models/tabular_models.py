@@ -45,7 +45,6 @@ import logging
 import json
 import yaml
 import time
-import os
 import platform
 import sys
 from pathlib import Path
@@ -59,8 +58,7 @@ from sklearn.metrics import (
     accuracy_score,
     roc_auc_score,
     precision_recall_fscore_support,
-    confusion_matrix,
-    classification_report
+    confusion_matrix
 )
 import joblib
 

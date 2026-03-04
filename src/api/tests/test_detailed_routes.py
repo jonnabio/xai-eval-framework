@@ -1,7 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock
-from datetime import datetime
+from unittest.mock import patch
 from src.api.main import app
 from src.api.services.data_loader import get_experiment_result
 

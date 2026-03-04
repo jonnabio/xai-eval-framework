@@ -1,8 +1,5 @@
 
-import pytest
 from fastapi.testclient import TestClient
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 from src.api.main import app
 
 # We need a dedicated client and potentially a clean limiter

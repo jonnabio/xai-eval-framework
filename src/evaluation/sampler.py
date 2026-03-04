@@ -6,7 +6,7 @@ evaluation instances (TP, TN, FP, FN) from test data.
 """
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Union
 
 import numpy as np
 import pandas as pd

@@ -4,10 +4,8 @@ import logging
 import json
 import copy
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 import numpy as np
-import pandas as pd
-import shutil
 
 # Add project root to path
 sys.path.append(str(Path.cwd()))
@@ -150,7 +148,6 @@ def main():
     for explainer_type, settings in SENSITIVITY_GRID.items():
         param_name = settings['params'][0] # Only 1 param per explainer for now
         param_values = settings['ranges'][param_name]
-        default_config_file = settings['default_config']
         
         # We need to run this for both RF and XGB. 
         # The default config file likely specifies one model (e.g. rf).

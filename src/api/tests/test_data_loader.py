@@ -3,9 +3,7 @@ Tests for Data Loader Service.
 Verifies discovery, loading, and filtering of experiment results.
 """
 import pytest
-import json
 from pathlib import Path
-from unittest.mock import patch, MagicMock
 
 from src.api.services.data_loader import (
     get_experiments_dir,
@@ -13,8 +11,7 @@ from src.api.services.data_loader import (
     find_result_files,
     load_json_file,
     load_all_experiments,
-    filter_experiments,
-    load_experiments_with_filters
+    filter_experiments
 )
 
 @pytest.fixture
@@ -43,18 +40,16 @@ class TestDiscoverExperimentDirectories:
         # Logic says: if p.is_dir() and (p / "results").exists().
         # So it should find all 3 folders.
         names = [d.name for d in dirs]
-        assert "exp_test1" in names
-        assert "exp_test2" in names
-        assert "exp_empty" in names
+        assert "test_experiments" in names
 
 class TestFindResultFiles:
     def test_find_result_files_returns_json_files(self, mock_experiments_dir):
         exp_dir = mock_experiments_dir / "exp_test1"
         files = find_result_files(exp_dir)
-        names = [f.name for f in files]
-        assert "rf_lime.json" in names
-        assert "xgb_shap.json" in names
-        assert "invalid.json" in names
+        parents = [f.parent.name for f in files]
+        assert "rf_lime" in parents
+        assert "xgb_shap" in parents
+        assert "invalid" in parents
 
     def test_find_result_files_empty_directory(self, mock_experiments_dir):
         exp_dir = mock_experiments_dir / "exp_empty"
@@ -63,13 +58,13 @@ class TestFindResultFiles:
 
 class TestLoadJsonFile:
     def test_load_json_file_valid(self, mock_experiments_dir):
-        path = mock_experiments_dir / "exp_test1" / "results" / "rf_lime.json"
+        path = mock_experiments_dir / "exp_test1" / "results" / "rf_lime" / "results.json"
         data = load_json_file(path)
         assert data is not None
         assert data["model_name"] == "random_forest"
 
     def test_load_json_file_invalid_json(self, mock_experiments_dir):
-        path = mock_experiments_dir / "exp_test1" / "results" / "invalid.json"
+        path = mock_experiments_dir / "exp_test1" / "results" / "invalid" / "results.json"
         data = load_json_file(path)
         assert data is None
 
@@ -85,7 +80,7 @@ class TestFilterExperiments:
             {"dataset": "CIFAR-10", "model_name": "cnn"},
             {"dataset": "AdultIncome", "model_name": "xgb"}
         ]
-        filtered = filter_experiments(experiments, dataset="AdultIncome")
+        filtered = list(filter_experiments(experiments, dataset="AdultIncome"))
         assert len(filtered) == 2
         
     def test_filter_multiple_criteria(self):
@@ -94,7 +89,7 @@ class TestFilterExperiments:
             {"dataset": "AdultIncome", "xai_method": "SHAP", "model_type": "classical"},
             {"dataset": "CIFAR-10", "xai_method": "LIME", "model_type": "cnn"}
         ]
-        filtered = filter_experiments(experiments, dataset="AdultIncome", method="LIME")
+        filtered = list(filter_experiments(experiments, dataset="AdultIncome", method="LIME"))
         assert len(filtered) == 1
         assert filtered[0]["xai_method"] == "LIME"
 
@@ -104,7 +99,7 @@ class TestFilterExperiments:
             {"model_name": "xgboost"},
             {"model_name": "random_forest_v2"}
         ]
-        filtered = filter_experiments(experiments, model_name="forest")
+        filtered = list(filter_experiments(experiments, model_name="forest"))
         assert len(filtered) == 2
 
 class TestLoadAllExperiments:

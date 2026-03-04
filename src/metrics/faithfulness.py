@@ -3,7 +3,7 @@ Faithfulness Metric (Feature Masking).
 """
 import numpy as np
 from scipy.stats import pearsonr
-from typing import Any, Dict, Optional, Union, List
+from typing import Any, Dict, Optional, Union
 from .base import BaseMetric
 
 class FaithfulnessMetric(BaseMetric):

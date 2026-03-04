@@ -7,7 +7,6 @@ Provides consistent error responses across the application.
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from pydantic import ValidationError
 import logging
 from datetime import datetime
 

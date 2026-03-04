@@ -9,7 +9,7 @@ importance rather than causal graphs.
 """
 
 import numpy as np
-from typing import List, Dict, Union, Set
+from typing import List, Dict
 
 class DomainAlignmentMetric:
     """
