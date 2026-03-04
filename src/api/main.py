@@ -160,6 +160,9 @@ async def startup_event():
         import asyncio
         
         def run_background_tasks():
+            import time
+            logger.info("⏳ Waiting 15s before starting background cache warming to allow health checks to pass...")
+            time.sleep(15)
             try:
                 build_run_id_index()
                 get_all_run_models(True)
