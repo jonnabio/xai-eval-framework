@@ -152,20 +152,27 @@ async def startup_event():
     ensure_adult_data_dirs()
 
     # Build experiment index for performance
-    # Build experiment index for performance
     try:
         from src.api.services.data_loader import build_run_id_index, get_all_run_models
-        logger.info("⚡ Building experiment index...")
-        build_run_id_index()
+        logger.info("⚡ Triggering background index building and cache warming...")
         
         # Warm up the cache in background
         import asyncio
+        
+        def run_background_tasks():
+            try:
+                build_run_id_index()
+                get_all_run_models(True)
+                logger.info("✅ Background index building and cache warming completed.")
+            except Exception as e:
+                logger.error(f"Background task failed: {e}")
+                
         loop = asyncio.get_event_loop()
-        loop.run_in_executor(None, get_all_run_models, True)
+        loop.run_in_executor(None, run_background_tasks)
         logger.info("🔥 Cache warming triggered in background")
         
     except Exception as e:
-        logger.error(f"Failed to build experiment index: {e}")
+        logger.error(f"Failed to trigger background tasks: {e}")
 
     
     # Initialize Sentry only if available and configured
