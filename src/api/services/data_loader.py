@@ -228,15 +228,16 @@ def build_run_id_index():
             pass
         return None
 
-    # Parallel index build
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        future_to_file = {executor.submit(index_file, f): f for f in all_files}
-        for future in as_completed(future_to_file):
-            res = future.result()
-            if res:
-                _RUN_ID_INDEX[res[0]] = res[1]
-                count += 1
-                
+    # Sequential index build with GIL yielding
+    import time
+    for i, f in enumerate(all_files):
+        res = index_file(f)
+        if res:
+            _RUN_ID_INDEX[res[0]] = res[1]
+            count += 1
+        if i % 10 == 0:
+            time.sleep(0.05)
+            
     logger.info(f"Built in-memory index with {count} experiments")
 
 
@@ -326,16 +327,17 @@ def get_all_run_models(force_refresh: bool = False) -> List[Run]:
                 return None
             return None
 
-        # Process in parallel
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_file = {executor.submit(process_file, f): f for f in all_files}
-            for future in as_completed(future_to_file):
-                result = future.result()
-                if result:
-                    runs.append(result)
-                    count += 1
-                else:
-                    failed += 1
+        # Process sequentially with GIL yielding
+        import time
+        for i, f in enumerate(all_files):
+            result = process_file(f)
+            if result:
+                runs.append(result)
+                count += 1
+            else:
+                failed += 1
+            if i % 10 == 0:
+                time.sleep(0.05)
                 
         _RUNS_CACHE = runs
         _LAST_CACHE_UPDATE = now
