@@ -10,19 +10,26 @@ import argparse
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def check_endpoint(url, description, expected_status=200):
-    try:
-        logger.info(f"Checking {description} at {url}...")
-        response = requests.get(url, timeout=90)
-        if response.status_code == expected_status:
-            logger.info(f"✅ {description} is UP ({response.status_code})")
-            return True
+def check_endpoint(url, description, expected_status=200, retries=5, delay=10):
+    for attempt in range(1, retries + 1):
+        try:
+            logger.info(f"Checking {description} at {url} (Attempt {attempt}/{retries})...")
+            response = requests.get(url, timeout=60)
+            if response.status_code == expected_status:
+                logger.info(f"✅ {description} is UP ({response.status_code})")
+                return True
+            else:
+                logger.warning(f"⚠️ {description} returned {response.status_code}")
+        except requests.RequestException as e:
+            logger.warning(f"⚠️ {description} failed: {e}")
+            
+        if attempt < retries:
+            logger.info(f"Retrying in {delay} seconds...")
+            import time
+            time.sleep(delay)
         else:
-            logger.error(f"❌ {description} returned {response.status_code}")
+            logger.error(f"❌ {description} failed after {retries} attempts.")
             return False
-    except requests.RequestException as e:
-        logger.error(f"❌ {description} failed: {e}")
-        return False
 
 def check_health(base_url):
     health_url = f"{base_url.rstrip('/')}/health"
