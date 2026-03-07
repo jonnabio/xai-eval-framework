@@ -29,7 +29,7 @@ def generate_report():
         name = os.path.basename(cfg).replace(".yaml", "")
         # Find if it has results
         # A bit hacky but fast:
-        res = glob.glob(f"experiments/recovery/phase1/results/*/*/*/*/results.json")
+        res = glob.glob("experiments/recovery/phase1/results/*/*/*/*/results.json")
         # Let's count properly
         pass
         

@@ -3,7 +3,6 @@ from src.api.models.schemas import (
     Run, MetricSet, LlmEval, LikertScores, 
     ModelType, Dataset, XaiMethod, RunStatus
 )
-import json
 
 def test_schemas():
     print("Testing Pydantic Schemas...")
@@ -88,7 +87,7 @@ def test_schemas():
             llmEval=llm_eval
         )
         print("FAIL: Validation did not catch invalid accuracy")
-    except ValueError as e:
+    except ValueError:
         print("PASS: Validation correctly caught invalid accuracy")
     except Exception as e:
         print(f"FAIL: Unexpected error during validation test - {e}")

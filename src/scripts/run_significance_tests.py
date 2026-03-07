@@ -5,17 +5,14 @@ import pandas as pd
 import numpy as np
 import sys
 from pathlib import Path
-from scipy import stats
 import scikit_posthocs as sp
 
 # Add project root to path
 sys.path.append(str(Path.cwd()))
 
-from scipy import stats
-import scikit_posthocs as sp
 from src.analysis.confidence import compute_cis
 from src.analysis.stats import perform_friedman_test, perform_nemenyi_test, compute_cohens_dz
-from src.analysis.visualization import plot_critical_difference_diagram, plot_metric_boxplots, plot_metric_comparison_with_cis
+from src.analysis.visualization import plot_metric_boxplots, plot_metric_comparison_with_cis
 
 # Add project root to path
 
@@ -24,10 +21,14 @@ logger = logging.getLogger(__name__)
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, np.integer): return int(obj)
-        if isinstance(obj, np.floating): return float(obj)
-        if isinstance(obj, np.ndarray): return obj.tolist()
-        if isinstance(obj, np.bool_): return bool(obj)
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, np.bool_):
+            return bool(obj)
         return super(NpEncoder, self).default(obj)
 
 def load_cv_data(experiments, base_dir="outputs/cv"):
@@ -35,7 +36,6 @@ def load_cv_data(experiments, base_dir="outputs/cv"):
     Load fold-level metrics for all experiments.
     Returns a dict: metric -> DataFrame(folds x methods)
     """
-    data = {}
     metrics_of_interest = ["faithfulness_gap", "stability", "sparsity", "cost", "fidelity"]
     
     # Initialize data structure
@@ -82,7 +82,8 @@ def load_cv_data(experiments, base_dir="outputs/cv"):
     # Convert to DataFrames
     dfs = {}
     for m, d in metric_data.items():
-        if not d: continue
+        if not d:
+            continue
         df = pd.DataFrame(d)
         # Check for NaNs
         if df.isnull().values.any():

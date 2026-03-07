@@ -4,7 +4,6 @@ import threading
 from typing import List, Dict, Optional, Any
 from pathlib import Path
 from datetime import datetime
-import pandas as pd
 
 # from src.experiment.batch_runner import BatchExperimentRunner (Moved to lazy import)
 

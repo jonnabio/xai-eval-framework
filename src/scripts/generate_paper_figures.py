@@ -4,9 +4,7 @@ import json
 import logging
 from pathlib import Path
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Add project root to path
 sys.path.append(str(Path.cwd()))
@@ -16,8 +14,6 @@ from src.analysis.visualization import (
     plot_radar_chart,
     plot_metric_heatmap,
     plot_multipanel_summary,
-    plot_metric_boxplots,
-    plot_critical_difference_diagram,
     PUBLICATION_STYLE,
     METHOD_COLORS
 )
@@ -74,8 +70,8 @@ def load_cv_data():
 
 def prepare_radar_data(cv_data):
     """Extract mean metrics for radar chart."""
-    # Structure needed: {method: {metric: value}}
     radar_data = {}
+    # Structure needed: {method: {metric: value}}
     for method, content in cv_data.items():
         # content has 'aggregated_metrics'
         agg = content.get('aggregated_metrics', {})
@@ -183,7 +179,8 @@ def main():
         # Plot Logic for Sensitivity
         # We process 'lime' and 'shap' keys
         for method_type, content in sens_data.items():
-            if method_type == 'summary': continue
+            if method_type == 'summary':
+                continue
             
             for config_name, details in content.items():
                 param = details['parameter']

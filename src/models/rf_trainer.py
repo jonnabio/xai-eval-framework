@@ -6,9 +6,7 @@ It mirrors the logic of the legacy AdultRandomForestTrainer but fits the new arc
 """
 import logging
 import pandas as pd
-import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from typing import Dict, Any
 
 from .base import BaseTrainer
 from .factory import ModelTrainerFactory

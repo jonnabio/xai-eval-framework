@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from pathlib import Path
 import os
 from src.api.config import settings
 from src.api.dependencies import get_current_admin

@@ -12,17 +12,15 @@ import json
 import urllib.request
 import ssl
 import time
-from functools import lru_cache
 from datetime import datetime
 
 # Handle SSL verification using certifi to avoid Mac certificate issues securely
 import certifi
-import ssl
 # We do NOT disable SSL verification anymore.
 # Instead, we will use ssl.create_default_context(cafile=certifi.where())
 # where necessary (e.g., in urllib calls).
 from pathlib import Path
-from typing import List, Optional, Dict, Any, Union
+from typing import List, Optional
 import shutil
 
 import numpy as np
@@ -102,7 +100,7 @@ def _validate_cache(cache_dir: Path) -> Optional[pd.DataFrame]:
             logger.warning(f"Cache validation: CHECKSUM MISMATCH (stored: {metadata.get('checksum')}, calculated: {current_checksum})")
             return None
             
-        logger.info(f"Cache validation: VALID (checksum: match)")
+        logger.info("Cache validation: VALID (checksum: match)")
         
         # Load data
         df = pd.read_parquet(parquet_path)

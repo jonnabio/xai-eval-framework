@@ -6,7 +6,6 @@ for binary classification models on tabular datasets.
 """
 # Standard library imports
 from typing import Any, Dict, List, Optional, Tuple, Union
-import warnings
 import time
 
 # Third-party imports
@@ -214,7 +213,6 @@ class LIMETabularWrapper(ExplainerWrapper):
 
         # Get explanation as map (feature_idx -> importance)
         # Check available labels in map
-        available_labels = exp.as_map().keys()
         target_label = 1
         
         if target_label in exp.as_map():

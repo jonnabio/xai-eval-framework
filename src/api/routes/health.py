@@ -46,7 +46,6 @@ async def detailed_health_check():
         Detailed health status including experiments availability
     """
     from src.api.services.data_loader import get_experiments_dir
-    import os
     
     experiments_dir = get_experiments_dir()
     experiments_exists = experiments_dir.exists()

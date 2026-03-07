@@ -5,11 +5,9 @@ import numpy as np
 from typing import Dict, Any, List, Optional
 
 from src.metrics import (
-    FidelityMetric, 
     FaithfulnessMetric, 
     StabilityMetric, 
     SparsityMetric, 
-    CostMetric, 
     DomainAlignmentMetric, 
     CounterfactualSensitivityMetric
 )

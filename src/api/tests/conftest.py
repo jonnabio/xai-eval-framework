@@ -1,8 +1,7 @@
 import pytest
 from datetime import datetime
 from src.api.models.schemas import (
-    MetricSet, LikertScores, LlmEval, Run,
-    ModelType, Dataset, XaiMethod, RunStatus
+    MetricSet, LikertScores, LlmEval, ModelType, Dataset, XaiMethod, RunStatus
 )
 from src.api.main import app
 from fastapi.testclient import TestClient

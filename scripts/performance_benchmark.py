@@ -40,13 +40,13 @@ def benchmark_endpoint(name: str, url: str):
         
         # Performance assessment
         if avg < 0.1:
-            print(f"  Rating:     ✅ Excellent")
+            print("  Rating:     ✅ Excellent")
         elif avg < 0.5:
-            print(f"  Rating:     ✅ Good")
+            print("  Rating:     ✅ Good")
         elif avg < 1.0:
-            print(f"  Rating:     ⚠ Acceptable")
+            print("  Rating:     ⚠ Acceptable")
         else:
-            print(f"  Rating:     ❌ Slow")
+            print("  Rating:     ❌ Slow")
 
 print("="*70)
 print("API Performance Benchmark")

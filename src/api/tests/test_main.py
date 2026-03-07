@@ -2,7 +2,6 @@
 Tests for main FastAPI application configuration.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 
 from src.api.main import app

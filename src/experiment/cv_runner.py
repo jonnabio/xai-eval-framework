@@ -6,17 +6,15 @@ Implements 5-fold Stratified Cross-Validation to assess stability of XAI metrics
 
 import json
 import logging
-import time
-import shutil
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List
 from sklearn.model_selection import StratifiedKFold
 import joblib
 
 # Internal imports
-from src.experiment.config import ExperimentConfig, load_config
+from src.experiment.config import ExperimentConfig
 from src.experiment.runner import ExperimentRunner
 from src.data_loading.adult import load_adult
 from src.models.xgboost_trainer import XGBoostTrainer
@@ -186,9 +184,12 @@ class CrossValidationRunner:
         # Helper for numpy encoding
         class NpEncoder(json.JSONEncoder):
             def default(self, obj):
-                if isinstance(obj, np.integer): return int(obj)
-                if isinstance(obj, np.floating): return float(obj)
-                if isinstance(obj, np.ndarray): return obj.tolist()
+                if isinstance(obj, np.integer):
+                    return int(obj)
+                if isinstance(obj, np.floating):
+                    return float(obj)
+                if isinstance(obj, np.ndarray):
+                    return obj.tolist()
                 return super(NpEncoder, self).default(obj)
 
         with open(output_path, 'w') as f:
@@ -362,7 +363,8 @@ class CrossValidationRunner:
         
         # CRITERIA 2: Metric consistency
         for metric in ['fidelity', 'stability', 'sparsity', 'cost']:
-            if metric not in self.results["aggregated_metrics"]: continue
+            if metric not in self.results["aggregated_metrics"]:
+                continue
             
             stats = self.results["aggregated_metrics"][metric]
             cv_mean = stats['mean']

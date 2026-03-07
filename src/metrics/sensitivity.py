@@ -7,7 +7,7 @@ and counterfactual explanations (DiCE).
 
 import numpy as np
 import pandas as pd
-from typing import List, Dict, Optional, Any, Union
+from typing import Dict, Optional, Any, Union
 
 from .base import BaseMetric
 
@@ -135,7 +135,8 @@ class CounterfactualSensitivityMetric(BaseMetric):
         
         # 3. Compute Overlap
         def get_base_feature(f):
-            if '_' in f: return f.split('_')[0]
+            if '_' in f:
+                return f.split('_')[0]
             return f
             
         top_k_base = set(get_base_feature(f) for f in top_k_features)

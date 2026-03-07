@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Tuple, Iterator, Iterable
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from src.api.config import settings
 from src.api.models.schemas import ExperimentResult, InstanceEvaluation, Run
@@ -223,20 +223,21 @@ def build_run_id_index():
             if data:
                 run = transform_experiment_to_run(data)
                 return (run.id, file_path)
-        except Exception as e:
+        except Exception:
             # logger.warning(f"Failed to index {file_path}: {e}")
             pass
         return None
 
-    # Parallel index build
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        future_to_file = {executor.submit(index_file, f): f for f in all_files}
-        for future in as_completed(future_to_file):
-            res = future.result()
-            if res:
-                _RUN_ID_INDEX[res[0]] = res[1]
-                count += 1
-                
+    # Sequential index build with GIL yielding
+    import time
+    for i, f in enumerate(all_files):
+        res = index_file(f)
+        if res:
+            _RUN_ID_INDEX[res[0]] = res[1]
+            count += 1
+        if i % 10 == 0:
+            time.sleep(0.05)
+            
     logger.info(f"Built in-memory index with {count} experiments")
 
 
@@ -268,7 +269,7 @@ def get_experiment_result(run_id: str) -> Optional[ExperimentResult]:
                 # Update index with found item for next time
                 # (Note: we can't easily get filepath here without refactoring load_all_experiments)
                 return transform_experiment_to_result(exp_data)
-        except Exception as e:
+        except Exception:
             continue
             
     return None
@@ -321,21 +322,22 @@ def get_all_run_models(force_refresh: bool = False) -> List[Run]:
                          # But transform_experiment_to_run doesn't strict depend on it for basic view.
                          pass
                     return transform_experiment_to_run(data)
-            except Exception as e:
+            except Exception:
                 # logger.warning(f"Failed to process {file_path}: {e}")
                 return None
             return None
 
-        # Process in parallel
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_file = {executor.submit(process_file, f): f for f in all_files}
-            for future in as_completed(future_to_file):
-                result = future.result()
-                if result:
-                    runs.append(result)
-                    count += 1
-                else:
-                    failed += 1
+        # Process sequentially with GIL yielding
+        import time
+        for i, f in enumerate(all_files):
+            result = process_file(f)
+            if result:
+                runs.append(result)
+                count += 1
+            else:
+                failed += 1
+            if i % 10 == 0:
+                time.sleep(0.05)
                 
         _RUNS_CACHE = runs
         _LAST_CACHE_UPDATE = now

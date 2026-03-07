@@ -16,14 +16,9 @@ import numpy as np
 import pandas as pd
 import joblib
 import concurrent.futures
-import threading
-import joblib
-import concurrent.futures
-import threading
 import multiprocessing
 import os
 import pickle
-from typing import Dict, List, Any, Optional
 
 
 from src.experiment.config import ExperimentConfig
@@ -389,9 +384,12 @@ class ExperimentRunner:
         # Save checkpoint atomically
         class NpEncoder(json.JSONEncoder):
             def default(self, obj):
-                if isinstance(obj, np.integer): return int(obj)
-                if isinstance(obj, np.floating): return float(obj)
-                if isinstance(obj, np.ndarray): return obj.tolist()
+                if isinstance(obj, np.integer):
+                    return int(obj)
+                if isinstance(obj, np.floating):
+                    return float(obj)
+                if isinstance(obj, np.ndarray):
+                    return obj.tolist()
                 return super(NpEncoder, self).default(obj)
                 
         temp_path = checkpoint_path.with_suffix('.tmp')
@@ -568,9 +566,12 @@ class ExperimentRunner:
         # Custom encoder just in case
         class NpEncoder(json.JSONEncoder):
             def default(self, obj):
-                if isinstance(obj, np.integer): return int(obj)
-                if isinstance(obj, np.floating): return float(obj)
-                if isinstance(obj, np.ndarray): return obj.tolist()
+                if isinstance(obj, np.integer):
+                    return int(obj)
+                if isinstance(obj, np.floating):
+                    return float(obj)
+                if isinstance(obj, np.ndarray):
+                    return obj.tolist()
                 return super(NpEncoder, self).default(obj)
                 
         with open(json_path, 'w') as f:

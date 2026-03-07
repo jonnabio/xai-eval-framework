@@ -59,7 +59,7 @@ def test_preprocessor_persistence(small_data_params, tmp_path):
     loaded_prep = load_preprocessor(path)
     
     # Verify it's a Pipeline/ColumnTransformer and matches type
-    assert type(loaded_prep) == type(original_prep)
+    assert isinstance(loaded_prep, type(original_prep))
 
 def test_stratified_split(small_data_params):
     """Verify class balance is maintained."""

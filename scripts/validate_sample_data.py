@@ -63,7 +63,7 @@ for json_file in json_files:
         data["_meta_experiment_dir"] = str(json_file.parent.parent)
         
         run = transform_experiment_to_run(data)
-        print(f"  ✓ Transformation successful")
+        print("  ✓ Transformation successful")
         print(f"    - Run ID: {run.id}")
         print(f"    - Model: {run.modelName}")
         print(f"    - Method: {run.method}")

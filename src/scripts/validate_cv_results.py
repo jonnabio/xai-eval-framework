@@ -10,9 +10,12 @@ logger = logging.getLogger(__name__)
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, np.integer): return int(obj)
-        if isinstance(obj, np.floating): return float(obj)
-        if isinstance(obj, np.ndarray): return obj.tolist()
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
         return super(NpEncoder, self).default(obj)
 
 def validate_results():
@@ -62,7 +65,8 @@ def validate_results():
         all_passed = True
         
         for metric in ['fidelity', 'stability', 'sparsity', 'cost']:
-            if metric not in cv_data["aggregated_metrics"]: continue
+            if metric not in cv_data["aggregated_metrics"]:
+                continue
             
             stats = cv_data["aggregated_metrics"][metric]
             cv_mean = stats['mean']
@@ -98,7 +102,8 @@ def validate_results():
                 }
                 
                 status_icon = "✅" if is_within else "❌"
-                if not is_within: all_passed = False
+                if not is_within:
+                    all_passed = False
                 
                 row = f"| {metric} | {cv_mean:.4f} | {cv_std:.4f} | {orig_mean:.4f} | [{ci_lower:.4f}, {ci_upper:.4f}] | {status_icon} | {delta_pct:.2f}% |"
                 table_rows.append(row)

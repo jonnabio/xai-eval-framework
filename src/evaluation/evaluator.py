@@ -7,7 +7,7 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import Any, Dict, Optional, List
+from typing import Any, Dict
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -52,7 +52,7 @@ class LLMEvaluator:
         
         try:
             return json.loads(clean_response)
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError:
             logger.error(f"Failed to parse JSON response: {response}")
             # Return partial failure structure
             return {

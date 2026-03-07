@@ -46,22 +46,22 @@ def main():
         print("="*50)
         
         # 1. Dataset Sizes
-        print(f"\n[Sizes]")
+        print("\n[Sizes]")
         print(f"Train samples: {X_train.shape[0]}")
         print(f"Test samples:  {X_test.shape[0]}")
         print(f"Total samples: {X_train.shape[0] + X_test.shape[0]}")
         
         # 2. Features
-        print(f"\n[Features]")
+        print("\n[Features]")
         print(f"Total features: {len(feature_names)}")
         print(f"Feature matrix shape (Train): {X_train.shape}")
         
-        print(f"Sample feature names (first 10):")
+        print("Sample feature names (first 10):")
         for i, name in enumerate(feature_names[:10]):
             print(f"  {i}: {name}")
             
         # 3. Class Distribution
-        print(f"\n[Class Distribution]")
+        print("\n[Class Distribution]")
         train_dist = pd.Series(y_train).value_counts(normalize=True)
         test_dist = pd.Series(y_test).value_counts(normalize=True)
         
@@ -71,7 +71,7 @@ def main():
         print(test_dist)
         
         # 4. Preprocessing Confirmation
-        print(f"\n[Preprocessing]")
+        print("\n[Preprocessing]")
         print(f"Preprocessor object: {type(preprocessor).__name__}")
         print(f"Saved to: {preprocessor_path}")
         print(f"File exists: {preprocessor_path.exists()}")

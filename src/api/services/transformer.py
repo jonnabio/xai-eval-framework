@@ -6,10 +6,9 @@ Handles aggregration of instance-level metrics and field mapping.
 """
 
 import hashlib
-import json
 import logging
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 import statistics
 
 logger = logging.getLogger(__name__)
@@ -172,7 +171,8 @@ def _extract_metrics(exp_data: Dict[str, Any]) -> MetricSet:
         # For this exercise we assume input is normalized or we clamp.
         
         def safe_mean(lst):
-            if not lst: return 0.0
+            if not lst:
+                return 0.0
             val = statistics.mean(lst)
             # Simple clamping for compliance
             return float(val) 

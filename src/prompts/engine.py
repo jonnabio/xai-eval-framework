@@ -3,7 +3,7 @@ Prompt engineering engine using Jinja2 templates.
 """
 
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Optional
 import jinja2
 
 class PromptEngine:

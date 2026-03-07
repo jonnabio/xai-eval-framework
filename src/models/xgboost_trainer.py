@@ -5,9 +5,7 @@ Refactored to inherit from BaseTrainer.
 """
 import logging
 import pandas as pd
-import numpy as np
 import xgboost as xgb
-from typing import Dict, Any
 
 from .base import BaseTrainer
 from .factory import ModelTrainerFactory

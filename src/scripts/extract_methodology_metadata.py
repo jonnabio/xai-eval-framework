@@ -1,10 +1,7 @@
 import json
 import argparse
 import sys
-import os
 import yaml
-import inspect
-import importlib
 from pathlib import Path
 
 # Add project root to sys.path
@@ -140,7 +137,7 @@ def extract_env_info():
         try:
              from importlib.metadata import version
              lime_version = version('lime')
-        except:
+        except Exception:
              pass
 
     return {
