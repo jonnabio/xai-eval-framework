@@ -55,83 +55,45 @@ def generate_report():
         except:
             pass
             
-    # 3. Running instances progress
-    lines = []
-    if os.path.exists("logs/batch_runner.log"):
-        with open("logs/batch_runner.log", "r") as f:
-            lines = f.readlines()[-3000:]
-            
-    running_stats = {}
-    current_exp = None
-    
-    exp_re = re.compile(r"experiment: (rec_p1_exp2_svm_shap_[^\s]+)")
-    proc_re = re.compile(r"Processing instance (\d+)/(\d+)")
-    time_re = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})")
-    
-    exp_times = {} 
-    
-    for line in lines:
-        m_exp = exp_re.search(line)
-        if m_exp:
-            current_exp = m_exp.group(1)
-            if current_exp not in exp_times:
-                exp_times[current_exp] = {'total_instances': 0, 'history': []}
-                
-        if current_exp:
-            m_proc = proc_re.search(line)
-            m_time = time_re.search(line)
-            if m_proc and m_time:
-                inst = int(m_proc.group(1))
-                tot = int(m_proc.group(2))
-                t_str = m_time.group(1)
-                t = datetime.strptime(t_str, "%Y-%m-%d %H:%M:%S")
-                
-                exp_times[current_exp]['total_instances'] = tot
-                exp_times[current_exp]['history'].append((inst, t))
-                
+    # 3. Running instances progress — count instance JSON files directly from filesystem.
+    # Log-parsing is unreliable for parallel workers since all workers share one log file
+    # and "Processing instance" lines get attributed to the wrong experiment.
     active_instances_completed = 0
     overall_remaining_seconds = 0
     active_count = 0
-    
     eta_details = []
-    
-    for exp, data in exp_times.items():
-        hist = data['history']
-        if not hist:
-            continue
-            
-        hist.sort(key=lambda x: x[1])
-        unique_hist = {}
-        for inst, t in hist:
-            if inst not in unique_hist:
-                 unique_hist[inst] = t
-                 
-        sorted_unique = sorted(list(unique_hist.items()), key=lambda x: x[0])
-        
-        last_inst = sorted_unique[-1][0]
-        active_instances_completed += last_inst
-        
-        if len(sorted_unique) >= 2:
-            first_inst, first_time = sorted_unique[0]
-            _, last_time = sorted_unique[-1]
-            diff_inst = last_inst - first_inst
-            diff_sec = (last_time - first_time).total_seconds()
-            
-            if diff_inst > 0 and diff_sec > 0:
-                sec_per_inst = diff_sec / diff_inst
-                remaining_inst = data['total_instances'] - last_inst
-                eta_sec = remaining_inst * sec_per_inst
-                
-                if eta_sec > overall_remaining_seconds:
-                    overall_remaining_seconds = eta_sec
-                active_count += 1
-                
-                eta_hrs = eta_sec / 3600
-                eta_details.append(f" - {exp}: {last_inst}/{data['total_instances']} (ETA: {eta_hrs:.1f} hrs)")
-            else:
-                eta_details.append(f" - {exp}: {last_inst}/{data['total_instances']} (ETA: Calculating...)")
+
+    instance_dirs = glob.glob("experiments/recovery/phase1/results/*/*/*/instances")
+    for inst_dir in sorted(instance_dirs):
+        parent = os.path.dirname(inst_dir)
+        if os.path.exists(os.path.join(parent, "results.json")):
+            continue  # already counted in completed_instances_overall
+
+        count = len(glob.glob(os.path.join(inst_dir, "*.json")))
+        active_instances_completed += count
+
+        # Derive config name from path: .../results/<method>/seed_<s>/n_<n>/instances
+        parts = parent.replace(os.sep, "/").split("/")
+        method, seed_part, n_part = parts[-3], parts[-2], parts[-1]
+        seed = seed_part.replace("seed_", "")
+        n = n_part.replace("n_", "")
+        exp_name = f"rec_p1_exp2_{method}_s{seed}_n{n}"
+
+        total = 0
+        cfg_path = f"configs/recovery/phase1/{method}_s{seed}_n{n}.yaml"
+        if os.path.exists(cfg_path):
+            with open(cfg_path) as f:
+                c = yaml.safe_load(f)
+                spc = c.get("sampling", {}).get("samples_per_class", 0)
+                total = spc * 4
+
+        if total > 0:
+            pct = count / total * 100
+            remaining = total - count
+            eta_details.append(f" - {exp_name}: {count}/{total} ({pct:.1f}% done, {remaining} remaining)")
+            active_count += 1
         else:
-            eta_details.append(f" - {exp}: {last_inst}/{data['total_instances']} (ETA: Calculating...)")
+            eta_details.append(f" - {exp_name}: {count}/? (config not found)")
 
     total_current_progress = completed_instances_overall + active_instances_completed
     progress_percentage = (total_current_progress / total_instances_overall) * 100 if total_instances_overall > 0 else 0
@@ -155,8 +117,9 @@ def generate_report():
         report_lines.append("No active experiments found in recent logs.")
         
     report_lines.append("")
+    total_remaining = total_instances_overall - total_current_progress
     if active_count > 0:
-        report_lines.append(f"**Overall Max ETA for running batch:** {overall_remaining_seconds / 3600 / 24:.1f} days ({overall_remaining_seconds / 3600:.1f} hours)")
+        report_lines.append(f"**Remaining instances across all active runs:** {total_remaining}")
     else:
         report_lines.append("**Overall Max ETA:** N/A")
 
