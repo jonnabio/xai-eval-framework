@@ -31,7 +31,7 @@ This paper contributes:
 
 FOM-7 emerged while consolidating early pilot/calibration cycles (EXP1), where protocol drift, malformed artifacts, and ad-hoc analysis-table harmonization repeatedly threatened claim comparability. The method was therefore formalized as a seven-gate operation protocol that makes claim eligibility auditable.
 
-Scope is intentionally bounded to model-agnostic tabular post-hoc explanation benchmarking on Adult Income with quantitative metrics (fidelity, stability, sparsity, faithfulness gap, and cost). Representation-level interpretability settings and semantic/user-centric evaluation are outside this paper's confirmatory claim scope \citep{durrani2023salient}. The remainder of this paper presents the methodology (Section \ref{sec:methodology}), reports comparative and reproducibility evidence (Section \ref{sec:results}), and concludes with implications, limitations, and next steps (Section \ref{sec:conclusion}).
+Scope is intentionally bounded to model-agnostic tabular post-hoc explanation benchmarking on Adult Income with quantitative metrics (fidelity, stability, sparsity, faithfulness gap, and cost). Representation-level interpretability settings and semantic/user-centric evaluation are outside this paper's confirmatory claim scope \citep{durrani2023salient}. Overall, the EXP2 robustness cohort currently contains 258 of 300 planned configurations (86.0% coverage). The remainder of this paper presents the methodology (Section \ref{sec:methodology}), reports comparative and reproducibility evidence (Section \ref{sec:results}), and concludes with implications, limitations, and next steps (Section \ref{sec:conclusion}).
 
 ## Methodology
 
@@ -88,21 +88,19 @@ Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the curren
 ```latex
 \begin{table}[t]
 \centering
-\caption{EXP2 evidence accounting for inferential qualification.}
-\begin{tabularx}{\linewidth}{l r X}
+\caption{Artifact eligibility summary.}
+\begin{tabular}{l l l l l}
 \toprule
-\textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
+\textbf{Cohort} & \textbf{Planned} & \textbf{Present} & \textbf{Analyzable (\%)} & \textbf{Excluded} \\
 \midrule
-Planned robustness grid ($5\times4\times5\times3$) & 300 & 100.0\% \\
-Present artifacts & 300 & 100.0\% \\
-Analyzable artifacts & 283 & 94.3\% \\
-Excluded artifacts (16 empty + 1 malformed) & 17 & 5.7\% \\
-Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completion \\
+EXP1 pilot  & 75      & 75      & 66 (88.0\%)     & 9        \\
+EXP2 grid   & 300     & 258     & 233 (77.7\%)    & 25*      \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \label{tab:evidence-accounting}
 \end{table}
 ```
+Table 2: Artifact eligibility summary. *Excluded EXP2 artifacts were either missing folders (42) or empty/malformed results.json files (25).
 
 ```latex
 \begin{figure}[t]
