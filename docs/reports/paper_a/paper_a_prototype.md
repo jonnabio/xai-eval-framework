@@ -1,7 +1,7 @@
 # A Framework for Rigorous Evaluation of Model-Agnostic Explainability Methods: Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 
 ## Abstract
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 250 of 300 planned configurations (83.3% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 300 of 300 planned configurations (100.0% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
 
 ## Keywords
 Explainable AI, benchmark methodology, reproducibility, statistical evaluation, model-agnostic explanations
@@ -83,7 +83,7 @@ n\in\{50,100,200\}.
 \]
 ```
 
-Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the current snapshot, 250 artifacts are present and 233 are analyzable (16 empty, 1 malformed).
+Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the current snapshot, 300 artifacts are present and 283 are analyzable (16 empty, 1 malformed).
 
 ```latex
 \begin{table}[t]
@@ -94,8 +94,8 @@ Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the curren
 \textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
 \midrule
 Planned robustness grid ($5\times4\times5\times3$) & 300 & 100.0\% \\
-Present artifacts & 250 & 83.3\% \\
-Analyzable artifacts & 233 & 77.7\% \\
+Present artifacts & 300 & 100.0\% \\
+Analyzable artifacts & 283 & 94.3\% \\
 Excluded artifacts (16 empty + 1 malformed) & 17 & 5.7\% \\
 Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completion \\
 \bottomrule
@@ -109,8 +109,8 @@ Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completio
 \centering
 \fbox{\begin{minipage}{0.94\linewidth}
 \centering
-\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 250 $\rightarrow$
-\textbf{Analyzable} 233 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
+\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 300 $\rightarrow$
+\textbf{Analyzable} 283 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
 \vspace{2pt}
 \footnotesize Exclusions before inference: 16 empty artifacts + 1 malformed artifact.
 \end{minipage}}

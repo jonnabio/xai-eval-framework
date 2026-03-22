@@ -219,8 +219,8 @@ EXP2-scaled matrix with factors:
 \end{itemize}
 
 This defines \(5 \times 2 \times 5 \times 3 = 150\) planned LIME/SHAP
-runs. In the current artifact state, we retain 140 analyzable LIME/SHAP
-runs (75 LIME, 65 SHAP) and 65 matched SHAP-LIME cells on identical
+runs. In the current artifact state, we retain 150 analyzable LIME/SHAP
+runs (75 LIME, 75 SHAP) and 75 matched SHAP-LIME cells on identical
 \((g,s,N)\) coordinates for paired inference.
 Accordingly, this manuscript reports the EXP2 robustness cohort rather
 than the earlier EXP1 calibration subset, because paired multi-model
@@ -337,12 +337,12 @@ audit trail from configuration to manuscript-level claim.
 
 \section{Results}
 Results are reported from the artifact-qualified EXP2 robustness cohort.
-Of 250 run files, 233 are analyzable; for this paper's paired
-LIME-versus-SHAP inference we retain 140 analyzable runs (75 LIME, 65
-SHAP) and 65 matched cells with identical \((\mathrm{model}, \mathrm{seed},
+Of 300 run files, 283 are analyzable; for this paper's paired
+LIME-versus-SHAP inference we retain 150 analyzable runs (75 LIME, 75
+SHAP) and 75 matched cells with identical \((\mathrm{model}, \mathrm{seed},
 N)\). Matched coverage spans all five model families
 (\(\mathrm{xgb}=15\), \(\mathrm{logreg}=15\), \(\mathrm{rf}=15\),
-\(\mathrm{mlp}=11\), \(\mathrm{svm}=9\)) and all sampling intensities
+\(\mathrm{mlp}=15\), \(\mathrm{svm}=15\)) and all sampling intensities
 \(N\in\{50,100,200\}\) with near-balanced counts.
 
 \subsection{Primary Paired Inference}
@@ -355,7 +355,7 @@ the analysis export \texttt{wilcoxon\_shap\_lime\_all\_models.csv} under
 
 \begin{table}[t]
 \centering
-\caption{Matched SHAP-versus-LIME paired results (\(n=65\) cells). For all metrics,
+\caption{Matched SHAP-versus-LIME paired results (\(n=75\) cells). For all metrics,
 \(\Delta=\) SHAP - LIME. Sparsity is measured as active-feature ratio, so larger values indicate denser explanations.}
 \label{tab:paired_main}
 \begin{tabular}{lrrrrr}
@@ -377,7 +377,7 @@ the direction is consistent in all 65 matched cells. This indicates that
 LIME's local surrogate sampling introduces substantial run-to-run
 volatility under perturbation, whereas SHAP is comparatively invariant.
 
-For sparsity, the sign is also consistent in all 65 matched cells, but
+For sparsity, the sign is also consistent in all 75 matched cells, but
 interpretation requires care: the metric here is active-feature ratio.
 SHAP's larger value means denser explanations; thus LIME is systematically
 sparser and therefore easier to compress for user-facing narratives.
@@ -393,14 +393,14 @@ separations for the four quality-oriented endpoints.
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig_b1_quality_endpoints.pdf}
 \caption{Paired mean comparison across quality-oriented primary endpoints
-(\(n=65\) matched SHAP-LIME cells). Active ratio is reported directly;
+(\(n=75\) matched SHAP-LIME cells). Active ratio is reported directly;
 lower values imply sparser explanations.}
 \label{fig:quality_endpoints}
 \end{figure}
 
 \subsection{Runtime Distribution and Heterogeneity}
 The cost signal is significant but strongly heterogeneous. SHAP is slower
-in 50 of 65 matched cells, with a median cost ratio of approximately
+in 60 of 75 matched cells, with a median cost ratio of approximately
 \(11.5\times\) (SHAP/LIME). However, the distribution is heavy-tailed:
 for SHAP, the 90th and 95th percentile latencies are approximately
 1,539,671 ms and 1,603,727 ms, respectively, compared with 12,825 ms and
@@ -420,7 +420,7 @@ universally true across model classes.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/fig_b2_runtime_heterogeneity.pdf}
-\caption{Runtime behavior under matched-cell pairing (\(n=65\)). Left:
+\caption{Runtime behavior under matched-cell pairing (\(n=75\)). Left:
 overall cost distribution by method (log scale). Right: model-level
 median cost (log scale), showing the XGBoost exception where SHAP is
 faster while other families are SHAP-slower.}
@@ -478,7 +478,7 @@ The choice between LIME and SHAP is not a matter of ``better,'' but of
 ``fit for purpose.'' SHAP is the scientifically rigorous choice for
 understanding \emph{what the model actually does}, while LIME is the
 pragmatic choice for \emph{explaining it quickly}. Our paired analysis
-across 65 matched robustness cells shows consistent SHAP advantages in
+across 75 matched robustness cells shows consistent SHAP advantages in
 stability and faithfulness-oriented quality, alongside strong LIME
 advantages in sparsity and latency for most (but not all) model
 contexts. This evidence supports architecture-level deployment patterns
