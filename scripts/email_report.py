@@ -7,6 +7,7 @@ import re
 import glob
 import yaml
 import json
+import subprocess
 from datetime import datetime
 
 # Change working directory to the project root to ensure relative paths work
@@ -116,6 +117,33 @@ def generate_report():
         report_lines.append(f"**Remaining instances across all active runs:** {total_remaining}")
     else:
         report_lines.append("**Overall Max ETA:** N/A")
+
+    # Git status
+    report_lines.append("")
+    report_lines.append("### Recent Git Activity (Last 8 Commits)")
+    try:
+        git_log = subprocess.check_output(
+            ["git", "log", "-n", "8", "--pretty=format:%h %ai %s"],
+            text=True
+        )
+        report_lines.append(git_log)
+        
+        # Check sync status
+        try:
+            subprocess.run(["git", "fetch", "origin"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            local_hash = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+            remote_hash = subprocess.check_output(["git", "rev-parse", "origin/main"], text=True).strip()
+            
+            if local_hash == remote_hash:
+                report_lines.append("\nStatus: Synchronized with GitHub (All changes pushed)")
+            else:
+                unpushed_count = subprocess.check_output(["git", "rev-list", "--count", "origin/main..HEAD"], text=True).strip()
+                report_lines.append(f"\nStatus: {unpushed_count} commits pending push (Pushes occur every 6h)")
+        except:
+            pass
+            
+    except Exception as e:
+        report_lines.append(f"Error fetching git log: {e}")
 
     return "\n".join(report_lines)
 
