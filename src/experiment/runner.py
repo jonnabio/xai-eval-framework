@@ -34,6 +34,7 @@ from src.utils.model_loader import load_model, get_cache_stats
 from src.evaluation.sampler import EvaluationSampler
 from src.metrics import CostMetric
 from src.experiment.metrics_engine import MetricsEngine
+from src.utils.resource_control import ResourceGuard
 
 logger = logging.getLogger(__name__)
 
@@ -202,7 +203,6 @@ class ExperimentRunner:
             
             # Identify features
             # For processed data (OHE), everything is theoretically continuous or 0/1.
-            cont_feats = feature_names
             cat_feats = []
             
             from src.xai.dice_wrapper import DiCETabularWrapper
@@ -355,18 +355,35 @@ class ExperimentRunner:
         # Get feature names for explanation context
         feature_names = self.dataset['feature_names']
         
-        # 1. Generate Explanation & Measure Cost
+        # 1. Generate Explanation & Measure Cost with Resource Guard
         # Wrapper .explain_instance returns (weights, metadata)
         # We need raw weights for metrics
         
-        cost_metric = CostMetric()
-        # Measure generation
-        (weights, meta), time_metrics = cost_metric.measure(
-            self.explainer.explain_instance,
-            self.model,
-            instance_data,
-            return_full=True
+        guard = ResourceGuard(
+            max_cores=self.config.resources.max_cores,
+            memory_limit_gb=self.config.resources.memory_limit_gb,
+            timeout_seconds=self.config.resources.timeout_seconds,
+            enforce_affinity=self.config.resources.enforce_affinity
         )
+        
+        cost_metric = CostMetric()
+        # Measure generation with Guard
+        try:
+            (weights, _), time_metrics = cost_metric.measure(
+                guard.run_guarded,
+                self.explainer.explain_instance,
+                self.model,
+                instance_data,
+                return_full=True
+            )
+        except Exception as e:
+            logger.error(f"Failed to generate explanation for instance {instance_id} under resource guard: {e}")
+            # Return partial failure structure to avoid crashing the whole batch
+            return {
+                "instance_id": instance_id,
+                "error": str(e),
+                "metrics": {"time_ms": -1, "error": 1}
+            }
         
         # 2. Compute Metrics via Engine
         metrics_results = self.metrics_engine.compute_metrics(

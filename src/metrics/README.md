@@ -6,10 +6,11 @@ This module (`src/metrics`) implements standardized metrics to evaluate the qual
 
 We evaluate explanations across four dimensions defined in **ADR-009**:
 
-1.  **Fidelity** (Faithfulness): How well the explanation mimics the model?
-2.  **Stability** (Robustness): Does the explanation hold up to noise?
-3.  **Sparsity** (Complexity): How concise is the explanation?
-4.  **Cost** (Efficiency): How fast is it?
+1. **Fidelity** (Local Faithfulness): $R^2$ agreement in a Gaussian neighborhood.
+2. **Stability** (Robustness): Pairwise Cosine Similarity under input perturbations.
+3. **Sparsity** (Complexity): Number and percentage of non-zero features.
+4. **Faithfulness Gap**: Difference in prediction drop when masking top-$k$ features.
+5. **Cost** (Efficiency): Wall-clock time (ms).
 
 ## usage
 
@@ -44,21 +45,35 @@ res = stability.compute(
     explainer_func=my_explainer_wrapper
 )
 print(f"Stability: {res['cosine_similarity_mean']}")
+
+# 5. Faithfulness Gap
+faith = FaithfulnessMetric(top_k=5)
+res = faith.compute(weights, model=model, data=instance)
+print(f"Gap: {res['faithfulness_gap']}")
 ```
 
 ## Metrics Details
 
 ### Fidelity
+
 - **Metric**: $R^2$ score of the explanation weights applied to a local neighborhood vs black-box predictions.
 - **Goal**: > 0.9.
 
 ### Stability
+
 - **Metric**: Average Cosine Similarity between explanations of perturbed inputs.
 - **Goal**: > 0.9.
 
 ### Sparsity
+
 - **Metric**: Percentage of non-zero weights (above threshold).
 - **Goal**: Minimized (while maintaining Fidelity).
 
+### Faithfulness Gap
+
+- **Metric**: $|pred(x) - pred(x_{\text{mask-top-}k})|$
+- **Goal**: Maximized (stronger alignment between importance and effect).
+
 ### Cost
+
 - **Metric**: Wall-clock time (ms).
