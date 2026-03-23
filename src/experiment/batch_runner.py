@@ -30,24 +30,39 @@ import subprocess
 
 def _auto_commit_worker(interval_seconds: int):
     """Background worker that commits the experiments directory periodically."""
+    last_push_time = time.time()
+    # 6 hours = 21600 seconds
+    push_interval = 21600
+    
     while True:
         time.sleep(interval_seconds)
         try:
             logger.info("Running automatic git commit for experiment progress...")
-            subprocess.run(["git", "add", "experiments/"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            # We add everything in experiments/ and configs/ (just in case)
+            subprocess.run(["git", "add", "experiments/", "configs/"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             res = subprocess.run(
                 ["git", "commit", "-m", "Auto-commit: Checkpointing experiment progress"],
                 check=False,
                 capture_output=True,
                 text=True
             )
-            if res.returncode == 0:
-                logger.info("Auto-commit successful. Pushing to remote...")
+            
+            commit_made = res.returncode == 0
+            if commit_made:
+                logger.info("Auto-commit successful.")
+            
+            # Check if it's time to push (regardless of whether we JUST committed, 
+            # to capture any pending commits from previous iterations)
+            current_time = time.time()
+            if current_time - last_push_time >= push_interval:
+                logger.info(f"Pushing to remote (6-hour interval reached)...")
                 push_res = subprocess.run(["git", "push"], check=False, capture_output=True, text=True)
                 if push_res.returncode == 0:
                     logger.info("Push successful.")
+                    last_push_time = current_time
                 else:
                     logger.warning(f"Push failed: {push_res.stderr}")
+                    
         except Exception as e:
             logger.error(f"Auto-commit thread encountered an error: {e}")
 
