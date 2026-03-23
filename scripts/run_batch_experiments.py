@@ -12,11 +12,11 @@ import sys
 import json
 import git
 from pathlib import Path
-
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
+from src.experiment.utils import get_default_workers
 from src.experiment.batch_runner import BatchExperimentRunner
 
 def setup_logging(verbose: bool = False) -> None:
@@ -92,8 +92,8 @@ def main():
     parser.add_argument(
         '--workers',
         type=int,
-        default=2,
-        help="Number of worker processes (default: 2)"
+        default=None,
+        help='Number of worker processes (default: based on RESERVED_CORES)'
     )
     
     parser.add_argument(
@@ -103,6 +103,9 @@ def main():
     )
     
     args = parser.parse_args()
+    
+    # Determine number of workers
+    workers = args.workers if args.workers is not None else get_default_workers()
     
     setup_logging(args.verbose)
     logger = logging.getLogger(__name__)
@@ -130,7 +133,7 @@ def main():
     
     # Run
     try:
-        df, manifest = runner.run(parallel=args.parallel, max_workers=args.workers)
+        df, manifest = runner.run(parallel=args.parallel, max_workers=workers)
         
         # Save Results
         args.output.parent.mkdir(parents=True, exist_ok=True)

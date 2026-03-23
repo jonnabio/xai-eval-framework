@@ -19,6 +19,10 @@ import concurrent.futures
 import multiprocessing
 import os
 import pickle
+import warnings
+
+# Suppress noisy discretization warnings from alibi/anchors
+warnings.filterwarnings("ignore", message=".*no training data record had discretized values in bins.*")
 
 
 from src.experiment.config import ExperimentConfig
@@ -82,6 +86,7 @@ class ExperimentRunner:
         logging.getLogger('shap').setLevel(logging.WARNING)
         logging.getLogger('matplotlib').setLevel(logging.WARNING)
         logging.getLogger('numexpr').setLevel(logging.WARNING)
+        logging.getLogger('alibi').setLevel(logging.ERROR)
         
         logger.info("Setting up experiment environment...")
         
@@ -329,7 +334,8 @@ class ExperimentRunner:
         
         # Check for checkpoint
         if checkpoint_path.exists():
-            logger.info(f"Processing instance {idx+1}/{total}... (loaded instance_id {instance_id} from checkpoint)")
+            if (idx + 1) % 20 == 0 or idx == 0:
+                logger.info(f"[{self.config.name}] Instance {idx+1}/{total} (ID: {instance_id}) loaded from checkpoint")
             try:
                 with open(checkpoint_path, 'r') as f:
                     return json.load(f)
@@ -337,7 +343,8 @@ class ExperimentRunner:
                 logger.warning(f"Corrupted checkpoint found for instance {instance_id}, recompiling.")
                 
         # Log progress for every instance
-        logger.info(f"Processing instance {idx+1}/{total}...")
+        if (idx + 1) % 5 == 0 or idx == 0:
+            logger.info(f"[{self.config.name}] Evaluating instance {idx+1}/{total} (ID: {instance_id})")
         
         # Prepare Data
         # Metadata cols from sampler output

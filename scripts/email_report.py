@@ -18,22 +18,15 @@ def generate_report():
     report_lines.append("="*60)
     
     # Check status
-    config_dir = "configs/recovery/phase1"
-    configs = glob.glob(os.path.join(config_dir, "*.yaml"))
+    config_dir = "configs/experiments/exp2_scaled"
+    configs = glob.glob(os.path.join(config_dir, "**/*.yaml"), recursive=True)
+    configs = [c for c in configs if "manifest" not in c]
     
     total_experiments = len(configs)
     finished = 0
-    in_progress = 0
     
-    for cfg in configs:
-        name = os.path.basename(cfg).replace(".yaml", "")
-        # Find if it has results
-        # A bit hacky but fast:
-        res = glob.glob("experiments/recovery/phase1/results/*/*/*/*/results.json")
-        # Let's count properly
-        pass
-        
-    outputs = glob.glob("experiments/recovery/phase1/results/*/*/*/results.json")
+    # Count finished experiments by checking for results.json in output dirs
+    outputs = glob.glob("experiments/exp2_scaled/results/**/results.json", recursive=True)
     finished = len(outputs)
     
     # 1. Total instances in all configs
@@ -52,18 +45,17 @@ def generate_report():
             with open(out, 'r') as f:
                 d = json.load(f)
                 completed_instances_overall += len(d.get("instance_evaluations", []))
-        except:
+        except (json.JSONDecodeError, IOError):
             pass
             
     # 3. Running instances progress — count instance JSON files directly from filesystem.
     # Log-parsing is unreliable for parallel workers since all workers share one log file
     # and "Processing instance" lines get attributed to the wrong experiment.
     active_instances_completed = 0
-    overall_remaining_seconds = 0
     active_count = 0
     eta_details = []
 
-    instance_dirs = glob.glob("experiments/recovery/phase1/results/*/*/*/instances")
+    instance_dirs = glob.glob("experiments/exp2_scaled/results/**/instances", recursive=True)
     for inst_dir in sorted(instance_dirs):
         parent = os.path.dirname(inst_dir)
         if os.path.exists(os.path.join(parent, "results.json")):
@@ -77,15 +69,17 @@ def generate_report():
         method, seed_part, n_part = parts[-3], parts[-2], parts[-1]
         seed = seed_part.replace("seed_", "")
         n = n_part.replace("n_", "")
-        exp_name = f"rec_p1_exp2_{method}_s{seed}_n{n}"
+        exp_name = f"{method}_s{seed}_n{n}"
 
         total = 0
-        cfg_path = f"configs/recovery/phase1/{method}_s{seed}_n{n}.yaml"
-        if os.path.exists(cfg_path):
-            with open(cfg_path) as f:
-                c = yaml.safe_load(f)
-                spc = c.get("sampling", {}).get("samples_per_class", 0)
-                total = spc * 4
+        # Config search by experiment name
+        for cfg_file in configs:
+            if exp_name in cfg_file:
+                with open(cfg_file) as f:
+                    c = yaml.safe_load(f)
+                    spc = c.get("sampling", {}).get("samples_per_class", 0)
+                    total = spc * 4
+                break
 
         if total > 0:
             pct = count / total * 100
@@ -99,13 +93,13 @@ def generate_report():
     progress_percentage = (total_current_progress / total_instances_overall) * 100 if total_instances_overall > 0 else 0
     
     
-    report_lines.append("### Phase 1 Recovery Batch Status")
+    report_lines.append("### EXP2 Scaled Batch Status")
     report_lines.append(f"Total Configs: {total_experiments}")
     report_lines.append(f"Finished: {finished} / {total_experiments}")
     report_lines.append("")
     report_lines.append("### Instance-Level Progress")
     report_lines.append(f"Total Target Instances:           {total_instances_overall}")
-    report_lines.append(f"Instances from Finished (16 exp): {completed_instances_overall}")
+    report_lines.append(f"Instances from Finished ({finished} experiments): {completed_instances_overall}")
     report_lines.append(f"Instances built by Running:       {active_instances_completed}")
     report_lines.append(f"Total Inst Computations Done:     {total_current_progress} / {total_instances_overall}")
     report_lines.append(f"Overall Completion Percentage:    {progress_percentage:.2f}%")
@@ -160,4 +154,4 @@ def send_email(subject, body, to_email):
 
 if __name__ == "__main__":
     report_body = generate_report()
-    send_email("XAI Framework Phase 1 Recovery - Progress Report", report_body, "jonnabio@gmail.com")
+    send_email("XAI Framework EXP2 Scaled - Progress Report", report_body, "jonnabio@gmail.com")

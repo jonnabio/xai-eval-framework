@@ -22,6 +22,8 @@ import pandas as pd
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
+from src.experiment.utils import get_default_workers
+
 from src.experiment.batch_runner import BatchExperimentRunner
 
 def setup_logging(verbose: bool = False) -> None:
@@ -40,7 +42,7 @@ def setup_logging(verbose: bool = False) -> None:
         ]
     )
 
-def main():
+def main():  # noqa: C901
     parser = argparse.ArgumentParser(description="Run recovery experiments")
     
     parser.add_argument(
@@ -68,11 +70,14 @@ def main():
     parser.add_argument(
         '--workers',
         type=int,
-        default=1,
-        help="Number of worker processes (default: 1 for safety)"
+        default=None,
+        help='Number of worker processes (default: based on RESERVED_CORES)'
     )
     
     args = parser.parse_args()
+    
+    # Determine number of workers
+    workers = args.workers if args.workers is not None else get_default_workers()
     
     setup_logging()
     logger = logging.getLogger(__name__)
@@ -116,7 +121,7 @@ def main():
     
     # Run
     try:
-        df, manifest = runner.run(parallel=(args.workers > 1), max_workers=args.workers)
+        df, _ = runner.run(parallel=(workers > 1), max_workers=workers)
         
         # Save Results 
         output_dir = project_root / "outputs"

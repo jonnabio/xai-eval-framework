@@ -13,6 +13,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 import curses
 import collections
+import re
 
 # Ensure src is in path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -44,7 +45,36 @@ def load_config_safe(path):
     except Exception as e:
         return None
 
-def get_experiment_status(config_dir="configs/experiments"):
+def parse_progress_from_log(log_file, active_experiments):
+    """
+    Parses the log file to find the latest progress for each active experiment.
+    """
+    progress_map = {}
+    if not os.path.exists(log_file):
+        return progress_map
+        
+    try:
+        # Read the last 50KB of the log
+        with open(log_file, 'r') as f:
+            f.seek(0, 2)
+            fsize = f.tell()
+            f.seek(max(fsize - 50000, 0), 0)
+            lines = f.readlines()
+            
+        # Pattern: [experiment_name] Evaluating instance X/Y
+        # or [experiment_name] Instance X/Y loaded from checkpoint
+        pattern = re.compile(r"\[([^\]]+)\] (?:Evaluating instance|Instance) (\d+)/(\d+)")
+        
+        for line in lines:
+            match = pattern.search(line)
+            if match:
+                exp_name, current, total = match.groups()
+                progress_map[exp_name] = f"{current}/{total}"
+    except Exception:
+        pass
+    return progress_map
+
+def get_experiment_status(config_dir="configs/experiments", log_file=None):
     """
     Scans configs and determines status based on output files.
     """
@@ -101,22 +131,48 @@ def get_experiment_status(config_dir="configs/experiments"):
                 pass
         elif out_dir.exists():
             # Directory exists but no result -> In Progress (or crashed)
-            entry["status"] = "running"
-            try:
-                entry["start_time"] = datetime.fromtimestamp(out_dir.stat().st_ctime)
-                start_times.append(entry["start_time"])
-                entry["duration"] = datetime.now() - entry["start_time"]
-            except:
-                 entry["start_time"] = datetime.now()
-            stats["in_progress"].append(entry)
+            # Find the most recently modified file in this directory to check activity
+            files = glob.glob(str(out_dir / "**/*"), recursive=True)
+            if not files:
+                 # Empty dir is new
+                 last_activity = datetime.fromtimestamp(out_dir.stat().st_mtime)
+            else:
+                 last_activity = max(datetime.fromtimestamp(Path(f).stat().st_mtime) for f in files)
+            
+            # If no activity for 2 hours, it's NOT running, it's "crashed" or "stale"
+            if (datetime.now() - last_activity).total_seconds() > 7200:
+                stats["failed"] += 1 # Or just count as stale
+                entry["status"] = "stale"
+                entry["last_activity"] = last_activity
+            else:
+                entry["status"] = "running"
+                try:
+                    entry["start_time"] = datetime.fromtimestamp(out_dir.stat().st_ctime)
+                    # For ETA, only use experiments started in the last 24h
+                    if (datetime.now() - entry["start_time"]).total_seconds() < 86400:
+                        start_times.append(entry["start_time"])
+                    entry["duration"] = datetime.now() - entry["start_time"]
+                except:
+                    entry["start_time"] = datetime.now()
+                stats["in_progress"].append(entry)
         else:
             stats["pending"] += 1
+
             
         results.append(entry)
         
     if start_times:
         stats["batch_start_time"] = min(start_times)
         
+    # Update progress from log if provided
+    if log_file:
+        progress_data = parse_progress_from_log(log_file, [e["name"] for e in stats["in_progress"]])
+        for exp in results:
+            if exp["name"] in progress_data:
+                exp["progress"] = progress_data[exp["name"]]
+            else:
+                exp["progress"] = "-"
+
     return stats, results
 
 def tail_log(filename, n=10):
@@ -204,7 +260,7 @@ def draw_dashboard(stdscr, config_dir, log_file):
         now = time.time()
         if now - last_refresh > 2 or stats is None: # Refresh stats every 2s
             try:
-                stats, details = get_experiment_status(config_dir)
+                stats, details = get_experiment_status(config_dir, log_file)
                 last_refresh = now
             except Exception as e:
                 safe_addstr(dash_win, 2, 0, f"Error loading stats: {e}", curses.color_pair(3))
@@ -269,7 +325,7 @@ def draw_dashboard(stdscr, config_dir, log_file):
             safe_addstr(dash_win, row, 1, "Active Experiments:", curses.A_UNDERLINE)
             row += 1
             
-            header_str = "{:<40} {:<10} {:<15}".format("Experiment", "Start", "Duration")
+            header_str = "{:<40} {:<10} {:<10} {:<15}".format("Experiment", "Start", "Progress", "Duration")
             safe_addstr(dash_win, row, 1, header_str, curses.A_BOLD)
             row += 1
             
@@ -278,11 +334,12 @@ def draw_dashboard(stdscr, config_dir, log_file):
                 if row >= dashboard_height - 1: break
                 
                 name = exp['name']
-                if len(name) > 38: name = name[:35] + "..."
+                if len(name) > 38: name = name[:38]
                 start = exp['start_time'].strftime("%H:%M:%S") if isinstance(exp['start_time'], datetime) else "?"
                 dur = str(exp['duration']).split('.')[0]
+                prog = exp.get('progress', '-')
                 
-                line = "{:<40} {:<10} {:<15}".format(name, start, dur)
+                line = "{:<40} {:<10} {:<10} {:<15}".format(name, start, prog, dur)
                 safe_addstr(dash_win, row, 1, line, curses.color_pair(2))
                 row += 1
 
