@@ -6,13 +6,18 @@ This companion note describes the validity boundaries and technical constraints 
 
 ### 5.1 Statistical Conclusion Validity
 
-**Issue.** The EXP2 robustness cohort is incomplete: some runs are missing from the planned 300-run grid, and one result artifact is malformed.
+**Issue.** The EXP2 robustness cohort contains 17 excluded artifacts from the planned 300-run grid: 16 are effectively "empty" (missing results) and one result artifact is malformed.
 
 **Why it matters.** Missing and invalid runs reduce inferential coverage and can affect confidence in estimated method rankings and the reported quality-cost frontier if missingness is systematic.
 
-**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests.
+**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests. A "recovery" phase successfully restored 13 previously missing Anchors and SHAP artifacts, bringing the analyzable dataset to 283 of 300 planned runs (94.3%).
 
-**Residual risk.** The mechanism of missingness is systematic: primarily for the **SVM** model family and **DiCE** or **Anchors** explainers. This concentration suggests that the missingness is driven by execution-time timeouts and search-space failures on high-dimensional model boundaries. Omnibus results remain valid as the filtering protocol only admits model-size blocks with 100% explainer coverage (15/15 blocks), but the effective dataset is reduced to 233 of 300 planned runs.
+**Residual risk / Systematic Diagnosis.** The mechanism of missingness is indeed systematic and follows two primary failure modes:
+
+1. **Search-Space/Runtime Timeouts (16 artifacts):** Primarily affecting the **DiCE** explainer across MLP, RF, SVM, and XGB model families. DiCE (Diverse Counterfactual Explanations) solves a multi-objective optimization problem to find counterfactuals. Under the standardized 300s timeout constraint, these runs consistently failed to converge or find valid counterfactuals within the high-dimensional Adult dataset features. These are technically MNAR (Missing Not At Random) as they occur specifically in high-complexity configurations.
+2. **Serialization Corruption (1 artifact):** Specifically `svm_shap_s999_n200`. This artifact is malformed due to an invalid control character (illegal byte sequence) in the JSON stream, likely caused by a race condition or an unhandled exception during the `json.dump` process onto the network-mapped drive.
+
+Omnibus results remain valid as the filtering protocol only admits model-size blocks with 100% explainer coverage (15/15 blocks), but the effective dataset is reduced to the analyzed 283 runs. The concentration of failures in DiCE implies that DiCE's average cost and quality metrics are likely optimistic (underestimating cost for failed cases), which is explicitly noted in the final trade-off discussion.
 
 ### 5.2 Construct Validity
 
