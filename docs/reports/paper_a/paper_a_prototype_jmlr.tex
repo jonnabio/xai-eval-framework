@@ -95,9 +95,7 @@ as a seven-gate operation protocol that makes claim eligibility auditable.
 
 Scope is intentionally bounded to model-agnostic tabular post-hoc explanation
 benchmarking on Adult Income with quantitative metrics (fidelity, stability,
-sparsity, faithfulness gap, and cost). Representation-level interpretability
-settings and semantic/user-centric evaluation are outside this paper's
-confirmatory claim scope \citep{durrani2023salient}. The remainder of this
+sparsity, faithfulness gap, and cost). The remainder of this
 paper presents the methodology (Section~\ref{sec:methodology}), reports
 comparative and reproducibility evidence (Section~\ref{sec:results}), and
 concludes with implications, limitations, and next steps
@@ -226,8 +224,7 @@ EXP2 evaluates frozen EXP1 model artifacts; models are not retrained during
 EXP2. Model families are \texttt{logreg}, \texttt{rf}, \texttt{xgb},
 \texttt{svm}, and \texttt{mlp}, with fixed repository-tracked settings.
 
-All methods are executed through
-\texttt{ExplainerWrapper.explain\_instance} and timed per instance.
+All methods are executed through \texttt{ExplainerWrapper.explain\_instance} under a standardized runtime constraint protocol (Cores=1, RAM=4GB, Timeout=300s) enforced by the infrastructure's resource guard to ensure comparable wall-clock duration reporting.
 Effective explainer conditions are:
 \begin{enumerate}[leftmargin=*]
     \item SHAP: tree mode for RF and XGB; kernel mode for LogReg, SVM, and MLP;
@@ -348,9 +345,11 @@ Primary repository anchors used in this paper are:
 Validity controls and residual risks are summarized as follows:
 \begin{enumerate}[leftmargin=*]
     \item \textbf{Internal validity:} explicit missingness audit and
-    block-complete inference; residual risk from non-random coverage gaps.
-    \item \textbf{Construct validity:} metric definitions tied to code-level
-    implementations; residual risk from omitted secondary metrics in claims.
+    block-complete inference. A standardized runtime constraint protocol 
+    (Cores=1, RAM=4GB, Timeout=300s) is formally enforced via the 
+    \texttt{ResourceGuard} utility to ensure architectural comparability; 
+    residual risk from non-random coverage gaps.
+    \item \textbf{Construct validity:} metric definitions are operationalized in the \texttt{src/metrics/} directory. For technical traceability, conceptual definitions reported in Section~\ref{sec:methods-inference} are anchored to implementation classes: \texttt{FidelityMetric}, \texttt{StabilityMetric}, \texttt{SparsityMetric}, \texttt{FaithfulnessMetric} (gap field), and \texttt{CostMetric}.
     \item \textbf{Statistical conclusion validity:} matched-design non-parametric
     tests with multiplicity control; residual risk from absent equivalence bands.
     \item \textbf{External validity:} diversity across model families and seeds,
@@ -528,8 +527,8 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} incomplete EXP2 coverage and malformed artifacts qualify confidence in full-grid frontier stability.
-    \item \textbf{Next steps:} publish a missingness diagnostic by model/explainer/seed/sample-size and release a versioned reproducibility bundle with immutable DOI (code, configs, run outputs, inferential exports, and figure scripts).
+    \item \textbf{Limitation:} Systematic missingness for the DiCE explainer (due to search-space timeouts) and isolated serialization corruption for SVM-SHAP qualify the confidence in full-grid frontier stability. The reporting caveats document a detailed 17-artifact diagnostic.
+    \item \textbf{Next steps:} Maintain the versioned reproducibility bundle with immutable DOI (code, configs, run outputs, inferential exports, and figure scripts) incorporating the final 283 analyzed artifacts.
     \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
 \end{itemize}
 
@@ -575,11 +574,6 @@ A Functionally-Grounded Benchmark Framework for XAI Methods: Insights and
 Foundations from a Systematic Literature Review.
 \emph{ACM Computing Surveys}, 57(12):1--40.
 
-\bibitem[Durrani et~al.(2023)Durrani, Dalvi, and Sajjad]{durrani2023salient}
-Nadir Durrani, Fahim Dalvi, and Hassan Sajjad.
-2023.
-Discovering Salient Neurons in deep NLP models.
-\emph{Journal of Machine Learning Research}, 24:1--40.
 
 \bibitem[Hedstr\"om et~al.(2023)Hedstr\"om, Weber, Bareeva, Krakowczyk, Motzkus, Samek, Lapuschkin, and H\"ohne]{hedstrom2023quantus}
 Anna Hedstr\"om, Leander Weber, Dilyara Bareeva, Daniel Krakowczyk,

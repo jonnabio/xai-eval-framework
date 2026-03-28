@@ -63,6 +63,13 @@ class LLMConfig(BaseModel):
     temperature: float = Field(0.0, ge=0.0, le=2.0)
     max_tokens: int = Field(1000, ge=1)
 
+class ResourceConfig(BaseModel):
+    """Resource constraints for standardized benchmarking (Paper A 5.3)."""
+    max_cores: int = Field(1, ge=1, description="Max CPU cores per explainer instance")
+    memory_limit_gb: float = Field(4.0, ge=0.5, description="Memory limit in GB per instance")
+    timeout_seconds: int = Field(300, ge=10, description="Timeout per explanation request")
+    enforce_affinity: bool = Field(True, description="Whether to enforce single-core affinity")
+
 class ExperimentConfig(BaseModel):
     """Root experiment configuration."""
     name: str = Field(..., description="Experiment identifier")
@@ -74,6 +81,7 @@ class ExperimentConfig(BaseModel):
     sampling: SamplingConfig
     metrics: MetricsConfig
     llm: Optional[LLMConfig] = None
+    resources: ResourceConfig = Field(default_factory=ResourceConfig)
     
     # Execution
     max_workers: Optional[int] = Field(None, description="Max parallel workers for evaluation (None=auto)")
