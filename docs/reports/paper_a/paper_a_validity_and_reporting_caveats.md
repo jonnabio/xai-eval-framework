@@ -66,4 +66,4 @@ EEU remains uncomputed in EXP2 runtime and therefore cannot support energy-based
 
 **Mitigation already done.** FOM-7 defines stage-gated execution with required artifacts; run inventories, inference exports, and reproducibility scripts are provided.
 
-**Residual risk.** Current reproducibility materials are available in the public repository at `https://github.com/jonnabio/xai-eval-framework` for the submission snapshot being archived as release tag `paper-a-submission-2026-03-28`. Long-term archival persistence remains a residual risk until Zenodo completes deposition and assigns the version-specific DOI for this tagged snapshot.
+**Residual risk.** Archival persistence for the submission snapshot is now mitigated: the materials are available in the public repository at `https://github.com/jonnabio/xai-eval-framework` and archived in Zenodo for release tag `paper-a-submission-2026-03-28` under DOI [`10.5281/zenodo.19297724`](https://doi.org/10.5281/zenodo.19297724). Remaining residual risks concern result availability gaps and external-validity limits, not archive discoverability.

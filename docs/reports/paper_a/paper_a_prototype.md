@@ -364,7 +364,7 @@ Interpretation limits:
 
 ### Code and Artifact Availability
 
-The current submission snapshot is publicly available at `https://github.com/jonnabio/xai-eval-framework` and is being archived as release tag `paper-a-submission-2026-03-28`. Materials required to reproduce the Paper A analyses include `experiments/exp2_scaled/results/`, `outputs/analysis/paper_a_exp2_stats/`, `scripts/run_exp2_statistical_analysis.py`, `scripts/generate_paper_a_figures.py`, and the manuscript sources under `docs/reports/paper_a/`. The repository is released under the MIT License. The version-specific Zenodo DOI for this exact tagged snapshot should be cited once Zenodo ingestion completes.
+The current submission snapshot is publicly available at `https://github.com/jonnabio/xai-eval-framework` and archived in Zenodo as release tag `paper-a-submission-2026-03-28` with version-specific DOI [`10.5281/zenodo.19297724`](https://doi.org/10.5281/zenodo.19297724). Materials required to reproduce the Paper A analyses include `experiments/exp2_scaled/results/`, `outputs/analysis/paper_a_exp2_stats/`, `scripts/run_exp2_statistical_analysis.py`, `scripts/generate_paper_a_figures.py`, and the manuscript sources under `docs/reports/paper_a/`. The repository is released under the MIT License.
 
 ## Conclusion
 

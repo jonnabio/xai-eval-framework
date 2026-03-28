@@ -105,15 +105,15 @@ This script checks:
 The current public repository is:
 *   **Repository**: [https://github.com/jonnabio/xai-eval-framework](https://github.com/jonnabio/xai-eval-framework)
 *   **Paper A snapshot release tag**: `paper-a-submission-2026-03-28`
+*   **Version-specific Zenodo DOI**: [10.5281/zenodo.19297724](https://doi.org/10.5281/zenodo.19297724)
 
-The version-specific Zenodo DOI for this exact reproducibility package should be recorded here once Zenodo ingests the tagged GitHub release.
-
-Interim citation:
+Archive citation:
 ```bibtex
 @software{herrera_vasquez_2026_xai_eval_framework,
   author = {Jonathan Herrera-Vasquez},
   title = {XAI Evaluation Framework},
   version = {0.2.0},
+  doi = {10.5281/zenodo.19297724},
   url = {https://github.com/jonnabio/xai-eval-framework},
   note = {Repository snapshot for reproducibility materials; release tag paper-a-submission-2026-03-28}
 }
