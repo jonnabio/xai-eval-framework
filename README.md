@@ -9,7 +9,7 @@ A modular, extensible framework for benchmarking Explainable AI (XAI) methods. T
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Startouf/xai-eval-framework.git
+   git clone https://github.com/jonnabio/xai-eval-framework.git
    cd xai-eval-framework
    ```
 
@@ -95,19 +95,12 @@ The backend is configured for deployment on **Render.com** (Free Tier).
 
 ## 📝 Citation
 
-*(Placeholder for Thesis/Paper Citation)*
+Software citation metadata is maintained in [`CITATION.cff`](CITATION.cff).
 
-```bibtex
-@phdthesis{MyThesis2025,
-  author = {Your Name},
-  title = {Arquitectura Agnóstica para la Interpretabilidad de Modelos de IA},
-  school = {University Name},
-  year = {2025}
-}
-```
+For archival DOI minting instructions, see [`docs/DOI_MINTING_GUIDE.md`](docs/DOI_MINTING_GUIDE.md).
 
 ## 📧 Contact
 
-**Author**: [Your Name]  
-**Email**: [your.email@example.com]  
-**Institution**: [University Name]
+**Author**: Jonathan Herrera-Vasquez  
+**Email**: jonnabio@gmail.com  
+**Institution**: Universidad Americada de Europa

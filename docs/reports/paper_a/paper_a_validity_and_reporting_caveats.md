@@ -6,18 +6,19 @@ This companion note describes the validity boundaries and technical constraints 
 
 ### 5.1 Statistical Conclusion Validity
 
-**Issue.** The EXP2 robustness cohort contains 17 excluded artifacts from the planned 300-run grid: 16 are effectively "empty" (missing results) and one result artifact is malformed.
+**Issue.** The current live EXP2 robustness cohort contains 52 unavailable cells from the planned 300-run grid: 26 are missing folders, 25 are present-but-empty result artifacts, and one result artifact is malformed.
 
 **Why it matters.** Missing and invalid runs reduce inferential coverage and can affect confidence in estimated method rankings and the reported quality-cost frontier if missingness is systematic.
 
-**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests. A "recovery" phase successfully restored 13 previously missing Anchors and SHAP artifacts, bringing the analyzable dataset to 283 of 300 planned runs (94.3%).
+**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests. In the current live repo snapshot, this yields 274 present result artifacts and 248 analyzable runs out of the planned 300 (82.7% analyzable coverage).
 
-**Residual risk / Systematic Diagnosis.** The mechanism of missingness is indeed systematic and follows two primary failure modes:
+**Residual risk / Systematic Diagnosis.** Availability loss is systematic and now spans both missing cells and invalid present artifacts:
 
-1. **Search-Space/Runtime Timeouts (16 artifacts):** Primarily affecting the **DiCE** explainer across MLP, RF, SVM, and XGB model families. DiCE (Diverse Counterfactual Explanations) solves a multi-objective optimization problem to find counterfactuals. Under the standardized 300s timeout constraint, these runs consistently failed to converge or find valid counterfactuals within the high-dimensional Adult dataset features. These are technically MNAR (Missing Not At Random) as they occur specifically in high-complexity configurations.
-2. **Serialization Corruption (1 artifact):** Specifically `svm_shap_s999_n200`. This artifact is malformed due to an invalid control character (illegal byte sequence) in the JSON stream, likely caused by a race condition or an unhandled exception during the `json.dump` process onto the network-mapped drive.
+1. **Missing result cells (26 cells):** These are concentrated in **Anchors (11)**, **DiCE (11)**, and **SHAP (4)**, with the heaviest model-level gaps in MLP, RF, and SVM configurations. This means the live grid no longer supports claims of near-complete factor coverage.
+2. **Empty result artifacts (25 cells):** These are concentrated in **Anchors (18)** and **DiCE (7)**. Anchors empties are especially pronounced in `logreg` and `mlp`, while DiCE empties remain distributed across several higher-cost model families. These should be treated as MNAR-style operational failures rather than ignorable random omissions.
+3. **Serialization corruption (1 artifact):** Specifically `svm_shap_s999_n200`. This artifact remains malformed due to an invalid control character in the JSON stream.
 
-Omnibus results remain valid as the filtering protocol only admits model-size blocks with 100% explainer coverage (15/15 blocks), but the effective dataset is reduced to the analyzed 283 runs. The concentration of failures in DiCE implies that DiCE's average cost and quality metrics are likely optimistic (underestimating cost for failed cases), which is explicitly noted in the final trade-off discussion.
+Omnibus results remain valid as the filtering protocol still admits model-size blocks with 100% explainer family coverage (15/15 blocks), but the effective dataset is reduced to 248 analyzed runs. Because unavailable cells are concentrated in Anchors and DiCE, their global quality/cost summaries should be interpreted cautiously; LIME is the only method with full 75/75 availability in the current live snapshot.
 
 ### 5.2 Construct Validity
 
@@ -45,7 +46,7 @@ EEU remains uncomputed in EXP2 runtime and therefore cannot support energy-based
 
 **Why it matters.** Apparent method differences can partially reflect implementation pathway choices rather than only conceptual method differences.
 
-**Mitigation already done.** Within each matched cell, model artifact, transformed feature space, split/sampling seeds, and metric engine are held constant; effective runtime parameter bindings are disclosed. A standardized runtime constraint protocol (Cores=1, RAM=4GB, Timeout=300s) is enforced via the `ResourceGuard` utility in `src/utils/resource_control.py` to ensure architectural comparability.
+**Mitigation already done.** Within each matched cell, model artifact, transformed feature space, split/sampling seeds, and metric engine are held constant; effective runtime parameter bindings are disclosed. A standardized runtime constraint protocol (Cores=1, RAM=4GB, Timeout=300s) is configured in the experiment layer via the `ResourceGuard` utility in `src/utils/resource_control.py` to improve architectural comparability.
 
 ### 5.4 External Validity
 
@@ -65,4 +66,4 @@ EEU remains uncomputed in EXP2 runtime and therefore cannot support energy-based
 
 **Mitigation already done.** FOM-7 defines stage-gated execution with required artifacts; run inventories, inference exports, and reproducibility scripts are provided.
 
-**Residual risk.** Immutable archival packaging is in progress. The permanent artifact bundle and versioned lineage map will be accessible via **DOI: 10.5281/zenodo.10685794**.
+**Residual risk.** Current reproducibility materials are available in the public repository at `https://github.com/jonnabio/xai-eval-framework` for the submission snapshot being archived as release tag `paper-a-submission-2026-03-28`. Long-term archival persistence remains a residual risk until Zenodo completes deposition and assigns the version-specific DOI for this tagged snapshot.
