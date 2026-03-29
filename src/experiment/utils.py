@@ -16,7 +16,7 @@ def get_default_workers() -> int:
         total_cpus = multiprocessing.cpu_count()
     except NotImplementedError:
         total_cpus = 1
-    reserved = int(os.getenv("RESERVED_CORES", "6"))
+    reserved = int(os.getenv("RESERVED_CORES", "2"))
     if reserved < 0:
         reserved = 0
     if reserved >= total_cpus:

@@ -42,5 +42,5 @@ find "$RESULTS_ROOT" -name "results.json" -printf "%T@ %p\n" | sort -nr | head -
     done
 
 echo "=========================================================="
-echo "Run 'tail -f logs/managed_runner.log' for live output"
+echo "Run 'tail -f logs/latest_batch.log' for live output"
 echo "=========================================================="

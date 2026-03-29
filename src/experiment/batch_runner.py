@@ -51,11 +51,11 @@ def _auto_commit_worker(interval_seconds: int):
             if commit_made:
                 logger.info("Auto-commit successful.")
             
+            current_time = time.time()
             # Check if it's time to push (regardless of whether we JUST committed, 
             # to capture any pending commits from previous iterations)
-            current_time = time.time()
             if current_time - last_push_time >= push_interval:
-                logger.info(f"Pushing to remote (6-hour interval reached)...")
+                logger.info("Pushing to remote (6-hour interval reached)...")
                 push_res = subprocess.run(["git", "push"], check=False, capture_output=True, text=True)
                 if push_res.returncode == 0:
                     logger.info("Push successful.")
@@ -72,6 +72,13 @@ def _run_single_experiment(config_path: Path) -> Dict[str, Any]:
     Must be top-level for pickling on Windows.
     """
     try:
+        # Increase niceness (lower priority) to ensure system responsiveness
+        try:
+            os.nice(15)
+        except AttributeError:
+            # os.nice not available on Windows
+            pass
+            
         # Re-load config in worker process to ensure clean state
         # (Pass path instead of object to avoid pickling complex config objects if possible,
         # though Pydantic models usually pickle fine. Path is safer.)
@@ -156,7 +163,6 @@ class BatchExperimentRunner:
             )
             commit_thread.start()
             
-        start_time = time.time()
         results_list = []
         
         # Metadata for manifest

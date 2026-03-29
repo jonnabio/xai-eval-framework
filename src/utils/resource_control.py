@@ -60,10 +60,11 @@ class ResourceGuard:
         # 1. Enforce Affinity
         if self.enforce_affinity:
             try:
-                self._original_affinity = self._process.cpu_affinity()
-                # Pin to first core
-                self._process.cpu_affinity([0])
-                logger.debug("CPU affinity set to single-core (index 0).")
+                # If we're requesting a single core, we don't necessarily need to pin to Core 0.
+                # In fact, pinning everything to Core 0 causes a massive bottleneck in parallel runs.
+                # We'll allow the OS to schedule across all available cores instead of pinning.
+                # If specialized pinning is needed in the future, we can implement a core-stepping logic.
+                logger.debug("Bypassing explicit Core 0 pinning to avoid parallel bottleneck. OS will manage single-core scheduling.")
             except Exception as e:
                 logger.warning(f"Failed to set CPU affinity: {e}")
 
