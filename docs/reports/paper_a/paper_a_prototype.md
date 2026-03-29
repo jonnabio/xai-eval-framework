@@ -1,7 +1,7 @@
 # A Framework for Rigorous Evaluation of Model-Agnostic Explainability Methods: Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 
 ## Abstract
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the robustness cohort currently contains 300 of 300 planned configurations (100.0% coverage). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=43.88$, $p=1.60\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=27.72$, $p=4.16\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the current live robustness cohort contains 274 of 300 planned result artifacts (91.3% coverage), of which 248 are analyzable after qualification (82.7%). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=42.12$, $p=3.78\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=26.60$, $p=7.14\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME is generally fastest and most practical outside SVM-KernelSHAP bottlenecks. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
 
 ## Keywords
 Explainable AI, benchmark methodology, reproducibility, statistical evaluation, model-agnostic explanations
@@ -31,7 +31,7 @@ This paper contributes:
 
 FOM-7 emerged while consolidating early pilot/calibration cycles (EXP1), where protocol drift, malformed artifacts, and ad-hoc analysis-table harmonization repeatedly threatened claim comparability. The method was therefore formalized as a seven-gate operation protocol that makes claim eligibility auditable.
 
-Scope is intentionally bounded to model-agnostic tabular post-hoc explanation benchmarking on Adult Income with quantitative metrics (fidelity, stability, sparsity, faithfulness gap, and cost). Representation-level interpretability settings and semantic/user-centric evaluation are outside this paper's confirmatory claim scope \citep{durrani2023salient}. Overall, the EXP2 robustness cohort currently contains 258 of 300 planned configurations (86.0% coverage). The remainder of this paper presents the methodology (Section \ref{sec:methodology}), reports comparative and reproducibility evidence (Section \ref{sec:results}), and concludes with implications, limitations, and next steps (Section \ref{sec:conclusion}).
+Scope is intentionally bounded to model-agnostic tabular post-hoc explanation benchmarking on Adult Income with quantitative metrics (fidelity, stability, sparsity, faithfulness gap, and cost). Representation-level interpretability settings and semantic/user-centric evaluation are outside this paper's confirmatory claim scope \citep{durrani2023salient}. Overall, the current live EXP2 robustness cohort contains 274 of 300 planned result artifacts (91.3% coverage), of which 248 are analyzable after qualification (82.7%). The remainder of this paper presents the methodology (Section \ref{sec:methodology}), reports comparative and reproducibility evidence (Section \ref{sec:results}), and concludes with implications, limitations, and next steps (Section \ref{sec:conclusion}).
 
 ## Methodology
 
@@ -83,7 +83,7 @@ n\in\{50,100,200\}.
 \]
 ```
 
-Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the current snapshot, 300 artifacts are present and 283 are analyzable (16 empty, 1 malformed).
+Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the current live snapshot, 274 artifacts are present and 248 are analyzable (26 missing, 25 empty, 1 malformed).
 
 ```latex
 \begin{table}[t]
@@ -91,26 +91,26 @@ Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the curren
 \caption{Artifact eligibility summary.}
 \begin{tabular}{l l l l l}
 \toprule
-\textbf{Cohort} & \textbf{Planned} & \textbf{Present} & \textbf{Analyzable (\%)} & \textbf{Excluded} \\
+\textbf{Cohort} & \textbf{Planned} & \textbf{Present} & \textbf{Analyzable (\%)} & \textbf{Unavailable} \\
 \midrule
 EXP1 pilot  & 75      & 75      & 66 (88.0\%)     & 9        \\
-EXP2 grid   & 300     & 258     & 233 (77.7\%)    & 25*      \\
+EXP2 grid   & 300     & 274     & 248 (82.7\%)    & 52*      \\
 \bottomrule
 \end{tabular}
 \label{tab:evidence-accounting}
 \end{table}
 ```
-Table 2: Artifact eligibility summary. *Excluded EXP2 artifacts were either missing folders (42) or empty/malformed results.json files (25).
+Table 2: Artifact eligibility summary. *Unavailable EXP2 cells comprise 26 missing folders, 25 empty `results.json` files, and 1 malformed `results.json` file.
 
 ```latex
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{0.94\linewidth}
 \centering
-\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 300 $\rightarrow$
-\textbf{Analyzable} 283 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
+\textbf{Planned} 300 $\rightarrow$ \textbf{Present} 274 $\rightarrow$
+\textbf{Analyzable} 248 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
 \vspace{2pt}
-\footnotesize Exclusions before inference: 16 empty artifacts + 1 malformed artifact.
+\footnotesize Unavailable before inference: 26 missing artifacts + 25 empty artifacts + 1 malformed artifact.
 \end{minipage}}
 \caption{Evidence qualification waterfall for EXP2 robustness inference.}
 \label{fig:evidence-waterfall}
@@ -191,9 +191,9 @@ Inferential workflow:
 
 1. Friedman omnibus test per metric on complete $(g,n)$ blocks.
 2. Nemenyi post-hoc localization when Friedman is significant.
-3. Two-sided paired Wilcoxon SHAP--LIME tests on matched $(g,s,n)$ cells (45-cell primary set; 65-cell sensitivity set).
+3. Two-sided paired Wilcoxon SHAP--LIME tests on matched $(g,s,n)$ cells (45-cell primary set; 70-cell sensitivity set).
 
-Multiplicity handling uses Nemenyi within each metric and Holm-Bonferroni across the five primary metrics for each inferential family (Friedman, Wilcoxon-45, Wilcoxon-65). Reported uncertainty/effect summaries include mean, standard deviation, CV, confidence intervals (where generated), Kendall's $W$, Cohen's $d_z$, and median paired differences.
+Multiplicity handling uses Nemenyi within each metric and Holm-Bonferroni across the five primary metrics for each inferential family (Friedman, Wilcoxon-45, Wilcoxon-70). Reported uncertainty/effect summaries include mean, standard deviation, CV, confidence intervals (where generated), Kendall's $W$, Cohen's $d_z$, and median paired differences.
 
 Artifact qualification is deterministic: malformed or empty runs are excluded, no synthetic reconstruction is used, and omnibus tests are restricted to block-complete contexts.
 
@@ -258,19 +258,19 @@ This section reports results from two evidence streams: EXP2 robustness (global 
 \toprule
 Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
 \midrule
-SHAP    & 0.8176 & 0.7377 & 0.2264 & 0.4474 & 685220.23 \\
+SHAP    & 0.8149 & 0.7358 & 0.2264 & 0.4350 & 612679.47 \\
 LIME    & 0.5602 & 0.0144 & 0.0846 & 0.3342 & 3660.68 \\
-Anchors & 0.3853 & 0.0006 & 0.0928 & 0.2382 & 25326.92 \\
-DiCE    & 0.1716 & 0.3602 & 0.0164 & 0.0988 & 16306.50 \\
+Anchors & 0.3850 & 0.0188 & 0.0929 & 0.2380 & 37371.50 \\
+DiCE    & 0.1714 & 0.3597 & 0.0164 & 0.0987 & 27951.22 \\
 \bottomrule
 \end{tabular}
 \label{tab:global-tradeoffs}
 \end{table}
 ```
 
-SHAP has the highest Fidelity (0.8176), highest Stability (0.7377), and highest Faithfulness Gap (0.4474). DiCE has the lowest Sparsity value (0.0164), while LIME has the lowest Cost (3660.68 ms). Anchors shows very low Stability (0.0006) with Cost (25326.92 ms) above LIME and DiCE.
+SHAP has the highest Fidelity (0.8149), highest Stability (0.7358), and highest Faithfulness Gap (0.4350). DiCE has the lowest Sparsity value (0.0164), while LIME has the lowest Cost (3660.68 ms). Anchors and LIME both remain near zero on Stability under this protocol, but Anchors carries substantially higher Cost (37371.50 ms).
 
-The reported means show an explicit quality--cost frontier: SHAP occupies the strongest quality region on Fidelity/Stability/Faithfulness Gap with the highest runtime (685220.23 ms), whereas LIME occupies the lowest-cost region with lower Fidelity and Stability. DiCE provides the lowest Sparsity value with lower Fidelity and Faithfulness Gap. This trade-off pattern is consistent with mechanistic differences between local surrogate and additive-attribution families \citep{ribeiro2016lime,lundberg2017shap}.
+The reported means show an explicit quality--cost frontier: SHAP occupies the strongest quality region on Fidelity/Stability/Faithfulness Gap with the highest runtime (612679.47 ms), whereas LIME occupies the lowest-cost region with lower Fidelity and Stability. DiCE provides the lowest Sparsity value with lower Fidelity and Faithfulness Gap. This trade-off pattern is consistent with mechanistic differences between local surrogate and additive-attribution families \citep{ribeiro2016lime,lundberg2017shap}.
 
 ### Global Statistical Evidence Across Methods
 
@@ -283,10 +283,10 @@ The reported means show an explicit quality--cost frontier: SHAP occupies the st
 Metric & Statistic & p-value & Significant \\
 \midrule
 Fidelity         & 42.12 & 3.78e-09 & Yes \\
-Stability        & 43.88 & 1.60e-09 & Yes \\
+Stability        & 42.12 & 3.78e-09 & Yes \\
 Sparsity         & 35.64 & 8.92e-08 & Yes \\
 Faithfulness Gap & 45.00 & 9.25e-10 & Yes \\
-Cost             & 27.72 & 4.16e-06 & Yes \\
+Cost             & 26.60 & 7.14e-06 & Yes \\
 \bottomrule
 \end{tabular}
 \label{tab:friedman}
@@ -304,10 +304,10 @@ For every metric, the Friedman test rejects the null of equal performance across
 Metric & $\chi^2$ & Kendall's $W$ \\
 \midrule
 Fidelity         & 42.12 & 0.936 \\
-Stability        & 43.88 & 0.975 \\
+Stability        & 42.12 & 0.936 \\
 Sparsity         & 35.64 & 0.792 \\
 Faithfulness Gap & 45.00 & 1.000 \\
-Cost             & 27.72 & 0.616 \\
+Cost             & 26.60 & 0.591 \\
 \bottomrule
 \end{tabular}
 \label{tab:friedman-effect-size}
@@ -362,6 +362,10 @@ Interpretation limits:
 - Anchors stability values near zero should be interpreted with implementation caveats: effective runtime behavior uses fixed precision threshold 0.95 and binary rule-membership importance vectors, which can reduce perturbation-based similarity under this protocol.
 - Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
 
+### Code and Artifact Availability
+
+The current submission snapshot is publicly available at `https://github.com/jonnabio/xai-eval-framework` and archived in Zenodo as release tag `paper-a-submission-2026-03-28` with version-specific DOI [`10.5281/zenodo.19297724`](https://doi.org/10.5281/zenodo.19297724). Materials required to reproduce the Paper A analyses include `experiments/exp2_scaled/results/`, `outputs/analysis/paper_a_exp2_stats/`, `scripts/run_exp2_statistical_analysis.py`, `scripts/generate_paper_a_figures.py`, and the manuscript sources under `docs/reports/paper_a/`. The repository is released under the MIT License.
+
 ## Conclusion
 
 The reported metrics indicate a multi-objective frontier rather than a single best method: SHAP is strongest on the reported quality-oriented metrics, LIME is strongest on runtime efficiency, and DiCE is strongest on the reported sparsity criterion. Global tests reject the null of equal method performance across the primary metrics, and paired SHAP--LIME analysis indicates a quality--cost trade-off on shared model families. This reinforces multi-objective interpretation guidance in current XAI evaluation literature \citep{pawlicki2024multiple,adadi2018xai,arrieta2020xai}.
@@ -370,11 +374,11 @@ Methodologically, the current paper contributes FOM-7 (Framework Operation Metho
 
 - **Takeaway:** method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
 - **Takeaway:** statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-- **Limitation:** incomplete EXP2 coverage and malformed artifacts qualify confidence in full-grid frontier stability.
-- **Next steps:** publish a missingness diagnostic by model/explainer/seed/sample-size and release a versioned reproducibility bundle with immutable DOI (code, configs, run outputs, inferential exports, and figure scripts).
+- **Limitation:** current EXP2 availability gaps are concentrated in Anchors and DiCE, with one residual malformed SVM-SHAP artifact; this qualifies confidence in full-grid frontier stability.
+- **Next steps:** publish a missingness diagnostic by model/explainer/seed/sample-size and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 248 analyzed artifacts.
 - **Next steps:** replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
 
-\acks{Funding and competing-interest disclosures are to be finalized in the submission package. This draft was prepared from repository artifacts dated February 2026.}
+\acks{This work received no external funding. The study was self-funded by the author, and the author reports no competing interests. This draft was prepared from repository artifacts dated March 2026.}
 
 ## References
 

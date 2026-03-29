@@ -100,20 +100,24 @@ This script checks:
 4.  Metric values (within valid tolerance of original results).
 5.  Presence of generated LaTeX artifacts.
 
-## 7. Archiving
+## 7. Repository Snapshot and Archiving
 
-The final results, including trained models and figures, are archived at Zenodo:
-*   **DOI**: [10.5281/zenodo.placeholder](https://doi.org/10.5281/zenodo.placeholder)
-*   **Citation**:
-    ```bibtex
-    @misc{xai_framework_exp1,
-      title={XAI Evaluation Framework - Experiment 1 Results},
-      author={Author Name},
-      year={2026},
-      publisher={Zenodo},
-      doi={10.5281/zenodo.placeholder}
-    }
-    ```
+The current public repository is:
+*   **Repository**: [https://github.com/jonnabio/xai-eval-framework](https://github.com/jonnabio/xai-eval-framework)
+*   **Paper A snapshot release tag**: `paper-a-submission-2026-03-28`
+*   **Version-specific Zenodo DOI**: [10.5281/zenodo.19297724](https://doi.org/10.5281/zenodo.19297724)
+
+Archive citation:
+```bibtex
+@software{herrera_vasquez_2026_xai_eval_framework,
+  author = {Jonathan Herrera-Vasquez},
+  title = {XAI Evaluation Framework},
+  version = {0.2.0},
+  doi = {10.5281/zenodo.19297724},
+  url = {https://github.com/jonnabio/xai-eval-framework},
+  note = {Repository snapshot for reproducibility materials; release tag paper-a-submission-2026-03-28}
+}
+```
 
 ## 8. Troubleshooting
 
