@@ -9,39 +9,38 @@
 \usepackage{enumitem}
 \usepackage{lastpage}
 
-\jmlrheading{0}{2026}{1-\pageref{LastPage}}{2/26}{}{PAPER-B-0001}{Jonathan Herrera-Vasquez}
-\ShortHeadings{LIME vs SHAP: A Comprehensive Empirical Comparison}{Herrera-Vasquez}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 3/2026}{Preprint}{PAPER-B-0001}{Jonathan Herrera-Vasquez}
+\ShortHeadings{LIME vs SHAP: A Paired Comparison}{Herrera-Vasquez}
 \firstpageno{1}
 
 \begin{document}
 
-\title{LIME vs SHAP: A Comprehensive Empirical Comparison}
+\title{LIME vs SHAP: A Paired Empirical Comparison}
 
 \author{
 \name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
 \addr UNADE
 }
 
-\editor{To be assigned}
+\editor{}
 
 \maketitle
 
 \begin{abstract}
 
 LIME and SHAP are widely used explainability methods, yet guidance on
-when to use each remains limited and often anecdotal. We present the
-first comprehensive empirical comparison evaluating both methods across
-five primary technical metrics with a secondary semantic analysis
-layer, using a rigorous benchmarking framework. Our
-study on tabular data reveals strong, statistically robust directional
-separation: SHAP dominates on stability and faithfulness-oriented
-quality metrics, while LIME yields substantially sparser explanations
-and lower latency in most matched contexts. The cost gap is large but
-heterogeneous across model families, with a heavy-tailed SHAP runtime
-distribution (matched-cell medians: 1,098.1 ms for SHAP versus 64.4 ms
-for LIME; means: 503,870.2 ms versus 3,083.1 ms). Based on these findings, we
-provide deployment-oriented guidance: SHAP for high-assurance auditing
-and LIME for strict latency-oriented interfaces.
+when each is preferable remains limited and often anecdotal. This paper
+presents a focused paired empirical comparison of the two methods on
+tabular data using five primary technical metrics under a controlled
+benchmarking protocol. Across 75 matched SHAP-LIME cells, SHAP
+dominates on stability, fidelity, and faithfulness gap, while LIME
+yields systematically sparser explanations and lower runtime in most
+contexts. The cost trade-off is statistically significant but
+heterogeneous across model families: matched-cell medians are 684.1 ms
+for SHAP versus 65.7 ms for LIME, whereas means are 11,708.3 ms versus
+3,660.7 ms because kernel-SHAP tails are heavy. These findings support
+objective-driven deployment guidance: SHAP for high-assurance auditing
+and LIME for latency-sensitive user-facing explanation workflows.
 \end{abstract}
 
 \begin{keywords}
@@ -89,6 +88,12 @@ protocols further show that method rankings can change under different
 metric families and perturbation settings
 \citep{agarwal2022openxai,sithakoul2024beexai,zheng2025ffidelity}.
 
+Within the broader benchmark program, this manuscript isolates the
+matched LIME-versus-SHAP decision problem rather than repeating the
+full multi-method framework contribution. This narrower scope allows a
+more detailed paired analysis of quality-cost trade-offs across model
+families and runtime regimes.
+
 This paper provides a paired, multi-objective benchmark using an
 audited, configuration-driven protocol on tabular data (UCI Adult). We
 evaluate five technical endpoints with explicit directionality:
@@ -103,9 +108,10 @@ Inference is performed on matched SHAP-LIME cells with identical
 \citep{holm1979simple}.
 
 Our paired analysis indicates a consistent trade-off: SHAP tends to
-provide stronger stability and fidelity signals, while LIME offers
-substantially lower runtime cost. This supports objective-driven method
-selection rather than universal method supremacy
+provide stronger stability, fidelity, and top-\(k\) faithfulness
+signals, while LIME offers systematically sparser explanations and
+substantially lower runtime cost in most settings. This supports
+objective-driven method selection rather than universal method supremacy
 \citep{agrawal2025xaieval}.
 
 Our contributions are:
@@ -184,9 +190,8 @@ produce claim-ready evidence on quality-cost trade-offs under controlled
 conditions.
 
 \subsection{Research Questions and Hypotheses}
-The methodology is model-agnostic and reproducibility-oriented,
-integrating quantitative endpoints with a secondary semantic assessment
-layer.
+The methodology is model-agnostic and reproducibility-oriented, with
+all confirmatory claims anchored in quantitative endpoints.
 
 We address the following questions:
 \begin{enumerate}[leftmargin=*]
@@ -300,34 +305,8 @@ metrics \citep{holm1979simple}.
 \end{enumerate}
 
 All inferential claims are restricted to artifact-qualified runs:
-parseable, non-empty results with explicit matched pairing.
-
-\subsection{Secondary Semantic Evaluation}
-Aligned with this paper's objective of producing claim-ready comparative
-evidence on LIME-versus-SHAP quality-cost trade-offs, the framework
-includes an LLM-based semantic layer (clarity/intuitiveness-style
-scoring). This layer is auxiliary to the primary functionally grounded
-endpoints and is not used to test \(H_1\)-\(H_4\), compute adjusted
-\(p\)-values, or determine method superiority
-\citep{pawlicki2024metrics,canha2025benchmark}.
-
-Methodologically, we position semantic scoring within the current
-LLM-as-a-judge evidence base: rubric-guided judging can be scalable and
-informative, but requires explicit reliability framing because outputs
-are sensitive to judge bias and prompt design
-\citep{zheng2023judging,gu2024llmjudge}. Domain-specific evidence also
-shows that rationale-aware LLM judging can correlate strongly with
-expert assessment when the rubric is structured
-\citep{zhou2025medthink}.
-
-At the same time, proxy LLM judges may diverge from end-user
-perceptions, so semantic scores are interpreted as contextual evidence
-rather than human-ground-truth utility estimates
-\citep{wu2025userperceptions}. Therefore, inferential conclusions in this
-paper remain anchored in technical metrics, with semantic outputs used to
-support interpretation of practical deployment trade-offs.
-In this artifact freeze, no human-agreement coefficient (e.g., \(\kappa\))
-is claimed for the semantic layer in this paper.
+parseable, non-empty results with explicit matched pairing. No semantic
+endpoint enters the confirmatory analysis reported here.
 
 \subsection{Reproducibility Contract}
 The protocol is fully configuration-driven (YAML + seeded execution),
@@ -337,17 +316,19 @@ audit trail from configuration to manuscript-level claim.
 
 \section{Results}
 Results are reported from the artifact-qualified EXP2 robustness cohort.
-Of 300 run files, 283 are analyzable; for this paper's paired
-LIME-versus-SHAP inference we retain 150 analyzable runs (75 LIME, 75
-SHAP) and 75 matched cells with identical \((\mathrm{model}, \mathrm{seed},
-N)\). Matched coverage spans all five model families
+In the current merged recovery snapshot, the EXP2 analysis exports
+contain 252 analyzable unique runs out of 300 planned cells overall.
+For this paper's paired LIME-versus-SHAP inference, we use the fully
+matched subset: 150 analyzable runs (75 LIME, 75 SHAP) forming 75
+paired cells with identical \((\mathrm{model}, \mathrm{seed}, N)\).
+Matched coverage spans all five model families
 (\(\mathrm{xgb}=15\), \(\mathrm{logreg}=15\), \(\mathrm{rf}=15\),
 \(\mathrm{mlp}=15\), \(\mathrm{svm}=15\)) and all sampling intensities
 \(N\in\{50,100,200\}\) with near-balanced counts.
 
 \subsection{Primary Paired Inference}
 Table~\ref{tab:paired_main} summarizes paired run-level outcomes on the
-65 matched cells. All five primary endpoints remain significant under
+75 matched cells. All five primary endpoints remain significant under
 Holm-adjusted testing.
 All numeric entries in Table~\ref{tab:paired_main} are source-locked to
 the analysis export \texttt{wilcoxon\_shap\_lime\_all\_models.csv} under
@@ -360,20 +341,20 @@ the analysis export \texttt{wilcoxon\_shap\_lime\_all\_models.csv} under
 \label{tab:paired_main}
 \begin{tabular}{lrrrrr}
 \toprule
-Metric & LIME Mean & SHAP Mean & \(\Delta\) & \(p\) (Wilcoxon) & \(d_z\) \\
+Metric & LIME Mean & SHAP Mean & \(\Delta\) & \(p_{\mathrm{Holm}}\) & \(d_z\) \\
 \midrule
-Stability & 0.014 & 0.742 & +0.728 & \(2.4\times10^{-12}\) & 3.07 \\
-Sparsity (active ratio) & 0.085 & 0.247 & +0.162 & \(2.4\times10^{-12}\) & 0.94 \\
-Fidelity & 0.558 & 0.812 & +0.254 & \(2.4\times10^{-12}\) & 3.97 \\
-Faithfulness Gap & 0.336 & 0.429 & +0.093 & \(2.4\times10^{-12}\) & 0.94 \\
-Cost (ms) & 3083.1 & 503870.2 & +500787.1 & \(6.5\times10^{-10}\) & 0.29 \\
+Stability & 0.014 & 0.732 & +0.718 & \(2.6\times10^{-13}\) & 3.00 \\
+Sparsity (active ratio) & 0.085 & 0.226 & +0.142 & \(2.6\times10^{-13}\) & 0.84 \\
+Fidelity & 0.560 & 0.808 & +0.248 & \(2.6\times10^{-13}\) & 4.82 \\
+Faithfulness Gap & 0.334 & 0.380 & +0.045 & \(2.6\times10^{-13}\) & 2.63 \\
+Cost (ms) & 3660.7 & 11708.3 & +8047.6 & \(1.2\times10^{-10}\) & 0.45 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The stability effect is the largest practical separation in the study.
-Median paired stability difference is \(+0.864\) in favor of SHAP, and
-the direction is consistent in all 65 matched cells. This indicates that
+Median paired stability difference is \(+0.866\) in favor of SHAP, and
+the direction is consistent in all 75 matched cells. This indicates that
 LIME's local surrogate sampling introduces substantial run-to-run
 volatility under perturbation, whereas SHAP is comparatively invariant.
 
@@ -382,9 +363,11 @@ interpretation requires care: the metric here is active-feature ratio.
 SHAP's larger value means denser explanations; thus LIME is systematically
 sparser and therefore easier to compress for user-facing narratives.
 
-Fidelity and faithfulness gap both favor SHAP in all matched cells. The
-fidelity margin (\(+0.254\) mean paired difference) and very large
-paired effect size (\(d_z=3.97\)) indicate not only statistical
+Fidelity favors SHAP in all 75 matched cells, with a mean paired
+difference of \(+0.248\) and a very large paired effect size
+\((d_z=4.82)\). Faithfulness gap also favors SHAP in 74 of 75 matched
+cells, with a mean paired difference of \(+0.045\) and a large paired
+effect size \((d_z=2.63)\). These results indicate not only statistical
 separation but practically meaningful quality gains under this protocol.
 Figure~\ref{fig:quality_endpoints} visualizes these paired mean
 separations for the four quality-oriented endpoints.
@@ -400,22 +383,25 @@ lower values imply sparser explanations.}
 
 \subsection{Runtime Distribution and Heterogeneity}
 The cost signal is significant but strongly heterogeneous. SHAP is slower
-in 60 of 75 matched cells, with a median cost ratio of approximately
-\(11.5\times\) (SHAP/LIME). However, the distribution is heavy-tailed:
-for SHAP, the 90th and 95th percentile latencies are approximately
-1,539,671 ms and 1,603,727 ms, respectively, compared with 12,825 ms and
-13,138 ms for LIME. This tail behavior is concentrated in kernel-SHAP
-contexts (notably SVM), which inflates mean cost beyond median behavior.
+in 59 of 75 matched cells. Matched-cell median cost is 684.1 ms for
+SHAP versus 65.7 ms for LIME, corresponding to a median SHAP/LIME cost
+ratio of approximately \(5.3\times\). Means are more separated
+(11,708.3 ms versus 3,660.7 ms) because the SHAP distribution is
+heavy-tailed: the 90th and 95th percentile latencies are approximately
+51,456 ms and 67,066 ms, respectively, compared with 12,825 ms and
+13,192 ms for LIME. This tail behavior is concentrated in kernel-SHAP
+contexts, especially SVM, which inflates mean cost beyond median
+behavior.
 Figure~\ref{fig:runtime_heterogeneity} shows both the overall log-scale
 runtime distribution and model-level median heterogeneity.
 
 Heterogeneity analysis by model family shows that quality ordering
 (stability, sparsity-direction, fidelity, faithfulness gap) is robust,
-while cost ranking is model dependent. In particular, all 15 XGBoost
-matched cells show SHAP faster than LIME, whereas RF, SVM, MLP, and
-LogReg are predominantly or uniformly SHAP-slower. Therefore, ``LIME is
-faster'' is valid as a majority statement in this cohort, but it is not
-universally true across model classes.
+while cost ranking is model dependent. In particular, SHAP is faster in
+all 15 XGBoost matched cells and in one SVM cell, whereas LogReg, RF,
+and MLP are uniformly SHAP-slower. Therefore, ``LIME is faster'' is a
+majority statement in this cohort, but it is not universally true across
+model classes.
 
 \begin{figure}[t]
 \centering
@@ -446,19 +432,63 @@ Deployment Pattern}:
 \begin{itemize}[leftmargin=*]
 \item Use when explaining predictions to end-users in a live application
 (e.g., ``Why was my loan denied?'' in a mobile app).
-\item Requirement: \(< 200\) ms latency.
-\item Acceptance criterion: explanations are ``generally correct'' sketches.
-Reduced fidelity is an acceptable trade-off for usability.
+\item Evidence basis: lower matched median runtime (65.7 ms) and
+systematically lower active-feature ratio under the current protocol.
+\item Recommended use condition: interactive settings where sub-second
+latency and compact explanations matter more than maximizing fidelity.
+\item Caveat: XGBoost is an exception in this cohort, where SHAP is
+consistently faster than LIME.
 \end{itemize}
 \item \textbf{Tier 2: Auditing / Data Science (Use SHAP)}
 \begin{itemize}[leftmargin=*]
 \item Use when analyzing model bias, debugging model logic, or responding
 to regulatory inquiries.
-\item Requirement: exactness and stability.
-\item Acceptance criterion: latency of seconds or minutes is acceptable.
-Evaluating a batch of data can be done offline.
+\item Evidence basis: consistent paired advantages in stability,
+fidelity, and faithfulness gap across the matched cohort.
+\item Recommended use condition: analyst-mediated or offline workflows
+where second-level or minute-level latency is acceptable.
+\item Caveat: runtime costs depend strongly on whether SHAP operates in
+tree-specific or kernel mode.
 \end{itemize}
 \end{enumerate}
+
+\section{Validity Boundaries}
+
+\subsection{Statistical and Construct Validity}
+This manuscript's confirmatory claims are restricted to the 75 fully
+matched SHAP-LIME cells in the EXP2 robustness cohort. Unlike the full
+multi-method benchmark reported in Paper A, the pairwise subset used
+here is claim-complete after artifact qualification: 75 LIME runs and
+75 SHAP runs remain available for paired inference. Reported metrics are
+implementation-bound rather than abstract labels; their operational
+definitions are anchored in \path{src/metrics/fidelity.py},
+\path{src/metrics/stability.py}, \path{src/metrics/sparsity.py},
+\path{src/metrics/faithfulness.py}, and \path{src/metrics/cost.py}. No
+semantic, human-utility, or LLM-judge claim enters the confirmatory
+scope of this paper.
+
+\subsection{Internal and External Validity}
+Runtime comparisons are protocol-specific. SHAP combines TreeExplainer
+for tree models and KernelExplainer for non-tree models, whereas LIME is
+run with fixed local-surrogate settings
+(\texttt{num\_features=10}, effective \texttt{num\_samples=1000},
+\texttt{kernel\_width=3.0}). Accordingly, the reported cost gap reflects
+both method family and concrete implementation pathway. External
+generalization beyond Adult tabular classification is not established;
+rankings may shift under different datasets, modalities, feature
+transformations, masking schemes, or hyperparameter settings.
+
+\subsection{Reproducibility and Operational Validity}
+All reported claims are traceable to seeded YAML configurations, per-run
+\texttt{results.json} artifacts, explicit exclusion of malformed or
+empty runs, and inferential exports under
+\path{outputs/analysis/paper\_a\_exp2\_stats/}. The current merged
+recovery snapshot contains 252 analyzable unique runs overall, but the
+Paper B subset is fully matched and therefore sufficient for the
+SHAP-versus-LIME claims made here. Figures are regenerated directly from
+\path{wilcoxon\_shap\_lime\_all\_models.csv} and
+\path{paired\_cells\_shap\_lime\_all\_models.csv}, and no synthetic
+imputation is used at any stage.
 
 \section{Limitations and Future Work}
 
@@ -468,25 +498,54 @@ Image and text domains may exhibit different trade-offs.
 \item \textbf{Configuration Space}: We compared standard configurations
 (KernelSHAP versus standard LIME). Hyperparameter tuning (e.g., LIME
 kernel width) can alter results.
-\item \textbf{Adversarial Robustness}: We did not subject the methods to
-active adversarial attacks, only random perturbations.
+\item \textbf{Runtime Heterogeneity}: Cost differences are strongly
+model-family dependent; the XGBoost exception shows that ``LIME is
+faster'' should not be interpreted as a universal rule.
+\item \textbf{Human-Centered Utility}: This paper does not establish
+human-grounded usefulness or semantic clarity; validated user studies or
+human-calibrated semantic evaluation remain future work.
+\item \textbf{Next Extensions}: Replication on additional datasets and
+integration of thesis-planned causal or counterfactual endpoints remain
+open follow-up tasks rather than current contributions.
 \end{itemize}
+
+\section{Code and Artifact Availability}
+The current manuscript draft and supporting materials are available in
+the public repository at
+\url{https://github.com/jonnabio/xai-eval-framework}. Materials needed
+to reproduce Paper B include:
+\begin{itemize}[leftmargin=*]
+\item \path{experiments/exp2\_scaled/results/}
+\item inferential export directory:
+\path{outputs/analysis/paper\_a\_exp2\_stats/}
+\item key export: \texttt{analysis\_summary.json}
+\item key export: \texttt{wilcoxon\_shap\_lime\_all\_models.csv}
+\item key export: \texttt{paired\_cells\_shap\_lime\_all\_models.csv}
+\item \path{scripts/run\_exp2\_statistical\_analysis.py}
+\item \path{scripts/generate\_paper\_b\_figures.py}
+\item manuscript sources under \path{docs/reports/paper\_b/}
+\end{itemize}
+The repository is released under the MIT License. Before journal
+submission, the exact review snapshot should be frozen as a versioned
+release and archived under a version-specific DOI.
 
 \section{Conclusion}
 
 The choice between LIME and SHAP is not a matter of ``better,'' but of
-``fit for purpose.'' SHAP is the scientifically rigorous choice for
-understanding \emph{what the model actually does}, while LIME is the
-pragmatic choice for \emph{explaining it quickly}. Our paired analysis
-across 75 matched robustness cells shows consistent SHAP advantages in
-stability and faithfulness-oriented quality, alongside strong LIME
-advantages in sparsity and latency for most (but not all) model
-contexts. This evidence supports architecture-level deployment patterns
-that separate user-facing low-latency explanation paths from
-high-assurance auditing workflows.
+``fit for purpose.'' Under this protocol, SHAP is the preferred choice
+when stability and fidelity-oriented quality dominate the objective,
+while LIME remains the pragmatic option when latency and compactness are
+the primary constraints. Our paired analysis across 75 matched
+robustness cells shows consistent SHAP advantages in stability,
+fidelity, and faithfulness gap, alongside systematic LIME advantages in
+sparsity and lower runtime for most (but not all) model contexts. This
+evidence supports architecture-level deployment patterns that separate
+user-facing low-latency explanation paths from high-assurance auditing
+workflows.
 
-\acks{No external funding supported this work. The author declares no
-competing interests.}
+\acks{This work received no external funding. The study was self-funded
+by the author, and the author reports no competing interests. This
+draft was prepared from repository artifacts dated March 2026.}
 
 \clearpage
 \phantomsection
