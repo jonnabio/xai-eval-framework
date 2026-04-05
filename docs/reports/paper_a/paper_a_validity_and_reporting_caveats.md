@@ -6,19 +6,19 @@ This companion note describes the validity boundaries and technical constraints 
 
 ### 5.1 Statistical Conclusion Validity
 
-**Issue.** The current live EXP2 robustness cohort contains 52 unavailable cells from the planned 300-run grid: 26 are missing folders, 25 are present-but-empty result artifacts, and one result artifact is malformed.
+**Issue.** The committed `experiments/exp2_scaled/results` tree still contains 53 unavailable artifact cells from the planned 300-run grid: 27 are missing folders, 25 are present-but-empty result artifacts, and one result artifact is malformed. The current merged recovery analysis now overlays 30 SHAP reruns from `outputs/batch_results.csv`, which reduces the unresolved gap to 48 unavailable unique cells.
 
 **Why it matters.** Missing and invalid runs reduce inferential coverage and can affect confidence in estimated method rankings and the reported quality-cost frontier if missingness is systematic.
 
-**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifacts, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests. In the current live repo snapshot, this yields 274 present result artifacts and 248 analyzable runs out of the planned 300 (82.7% analyzable coverage).
+**Mitigation already done.** The analysis uses explicit artifact qualification, excludes malformed/empty artifact-tree runs, applies block-complete filtering for omnibus tests, and uses matched-cell filtering for paired tests. In the current merged recovery snapshot, this combines 273 committed result artifacts with a 30-row SHAP recovery batch, replacing 25 existing `mlp_shap`/`svm_shap` runs and filling 5 previously unavailable cells. The resulting evidence set contains 252 analyzable unique runs out of the planned 300 (84.0% analyzable coverage).
 
-**Residual risk / Systematic Diagnosis.** Availability loss is systematic and now spans both missing cells and invalid present artifacts:
+**Residual risk / Systematic Diagnosis.** Availability loss remains systematic after the recovery overlay:
 
-1. **Missing result cells (26 cells):** These are concentrated in **Anchors (11)**, **DiCE (11)**, and **SHAP (4)**, with the heaviest model-level gaps in MLP, RF, and SVM configurations. This means the live grid no longer supports claims of near-complete factor coverage.
-2. **Empty result artifacts (25 cells):** These are concentrated in **Anchors (18)** and **DiCE (7)**. Anchors empties are especially pronounced in `logreg` and `mlp`, while DiCE empties remain distributed across several higher-cost model families. These should be treated as MNAR-style operational failures rather than ignorable random omissions.
-3. **Serialization corruption (1 artifact):** Specifically `svm_shap_s999_n200`. This artifact remains malformed due to an invalid control character in the JSON stream.
+1. **Residual unavailable cells (48 cells):** After the SHAP recovery overlay, unresolved availability loss is concentrated in **Anchors (30)** and **DiCE (18)**. SHAP is fully covered in the merged snapshot through the combination of committed artifacts and the recovery batch, and LIME remains fully covered at 75/75.
+2. **Residual missing result cells (23 cells):** These remaining missing cells are now confined to Anchors and DiCE families, with the heaviest model-level gaps in `logreg`, `rf`, and `mlp` configurations. This means the grid still falls short of near-complete factor coverage even after SHAP recovery.
+3. **Residual empty result artifacts (25 cells):** These continue to be concentrated in **Anchors** and **DiCE**. Anchors empties remain especially pronounced in `logreg` and `mlp`, while DiCE empties remain distributed across several higher-cost model families. These should still be treated as MNAR-style operational failures rather than ignorable random omissions.
 
-Omnibus results remain valid as the filtering protocol still admits model-size blocks with 100% explainer family coverage (15/15 blocks), but the effective dataset is reduced to 248 analyzed runs. Because unavailable cells are concentrated in Anchors and DiCE, their global quality/cost summaries should be interpreted cautiously; LIME is the only method with full 75/75 availability in the current live snapshot.
+Omnibus results remain valid as the filtering protocol still admits model-size blocks with 100% explainer family coverage (15/15 blocks), but the effective merged dataset is still reduced to 252 analyzed runs. Because unresolved unavailable cells are concentrated in Anchors and DiCE, their global quality/cost summaries should be interpreted cautiously even though the SHAP availability problem has been materially reduced by the recovery batch.
 
 ### 5.2 Construct Validity
 

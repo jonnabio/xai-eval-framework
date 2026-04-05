@@ -12,6 +12,7 @@ Outputs are written to:
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
@@ -31,6 +32,7 @@ from src.analysis.confidence import compute_cis
 
 
 EXP2_RESULTS_DIR = PROJECT_ROOT / "experiments" / "exp2_scaled" / "results"
+RECOVERY_BATCH_RESULTS = PROJECT_ROOT / "outputs" / "batch_results.csv"
 OUTPUT_DIR = PROJECT_ROOT / "outputs" / "analysis" / "paper_a_exp2_stats"
 
 MODEL_ORDER = ["logreg", "rf", "xgb", "svm", "mlp"]
@@ -39,6 +41,7 @@ SEED_ORDER = [42, 123, 456, 789, 999]
 N_ORDER = [50, 100, 200]
 PRIMARY_METRICS = ["fidelity", "stability", "sparsity", "faithfulness_gap", "cost"]
 PAIRWISE_METRICS = PRIMARY_METRICS
+RECOVERY_NAME_RE = re.compile(r"rec_p1_exp2_([a-z0-9]+)_([a-z]+)_s(\d+)_n(\d+)")
 
 
 @dataclass(frozen=True)
@@ -139,6 +142,73 @@ def load_exp2_runs() -> Tuple[pd.DataFrame, pd.DataFrame]:
         run_rows.append(row)
 
     return pd.DataFrame(run_rows), pd.DataFrame(inventory_rows)
+
+
+def load_recovery_batch_overlay() -> pd.DataFrame:
+    """
+    Load optional recovery rows from outputs/batch_results.csv.
+
+    These rows currently encode recovered EXP2 SHAP runs for the `mlp` and `svm`
+    families. When present, they supersede same-key run-level metrics from the
+    committed `exp2_scaled/results` tree and may also fill previously missing or
+    malformed cells.
+    """
+    if not RECOVERY_BATCH_RESULTS.exists():
+        return pd.DataFrame(
+            columns=["model", "method", "seed", "n", "path"] + PRIMARY_METRICS
+        )
+
+    overlay_rows: List[Dict[str, object]] = []
+    batch_df = pd.read_csv(RECOVERY_BATCH_RESULTS)
+    for row in batch_df.to_dict(orient="records"):
+        experiment_name = str(row.get("experiment_name", ""))
+        match = RECOVERY_NAME_RE.fullmatch(experiment_name)
+        if not match:
+            continue
+
+        model, method, seed, n_value = match.groups()
+        overlay_rows.append(
+            {
+                "model": model,
+                "method": method,
+                "seed": int(seed),
+                "n": int(n_value),
+                "path": f"{RECOVERY_BATCH_RESULTS}::{experiment_name}",
+                "fidelity": float(row["fidelity_mean"]),
+                "stability": float(row["stability_mean"]),
+                "sparsity": float(row["sparsity_mean"]),
+                "faithfulness_gap": float(row["faithfulness_gap_mean"]),
+                "cost": float(row["cost_mean"]),
+            }
+        )
+
+    return pd.DataFrame(overlay_rows)
+
+
+def apply_recovery_overlay(run_df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, object]]:
+    """
+    Overlay recovery batch rows onto committed EXP2 run-level metrics.
+    """
+    overlay_df = load_recovery_batch_overlay()
+    if overlay_df.empty:
+        return run_df.copy(), {"overlay_applied": False, "overlay_rows": 0, "overlay_replaced_existing_runs": 0}
+
+    key_cols = ["model", "method", "seed", "n"]
+    overlay_keys = set(tuple(row) for row in overlay_df[key_cols].itertuples(index=False, name=None))
+    base_keys = set(tuple(row) for row in run_df[key_cols].itertuples(index=False, name=None))
+    replaced_existing = len(base_keys & overlay_keys)
+
+    base_without_overlay = run_df.loc[
+        ~run_df[key_cols].apply(lambda row: tuple(row) in overlay_keys, axis=1)
+    ].copy()
+    merged = pd.concat([base_without_overlay, overlay_df], ignore_index=True)
+    merged.sort_values(key_cols, inplace=True)
+    return merged, {
+        "overlay_applied": True,
+        "overlay_rows": int(len(overlay_df)),
+        "overlay_replaced_existing_runs": int(replaced_existing),
+        "overlay_source": str(RECOVERY_BATCH_RESULTS),
+    }
 
 
 def find_complete_blocks(df: pd.DataFrame) -> List[Tuple[str, int]]:
@@ -335,6 +405,7 @@ def main() -> None:
 
     run_df, inventory_df = load_exp2_runs()
     inventory_df.sort_values(["model", "method", "seed", "n"], inplace=True)
+    run_df, overlay_meta = apply_recovery_overlay(run_df)
     run_df.sort_values(["model", "method", "seed", "n"], inplace=True)
 
     complete_blocks = find_complete_blocks(run_df)
@@ -372,10 +443,14 @@ def main() -> None:
     status_counts = inventory_df["status"].value_counts().to_dict()
     summary = {
         "source_dir": str(EXP2_RESULTS_DIR),
+        "overlay_batch_results_csv": overlay_meta.get("overlay_source"),
         "output_dir": str(OUTPUT_DIR),
         "present_files": int(len(inventory_df)),
         "status_counts": status_counts,
         "analyzable_runs": int(len(run_df)),
+        "overlay_applied": bool(overlay_meta.get("overlay_applied", False)),
+        "overlay_rows": int(overlay_meta.get("overlay_rows", 0)),
+        "overlay_replaced_existing_runs": int(overlay_meta.get("overlay_replaced_existing_runs", 0)),
         "complete_blocks": [list(b) for b in complete_blocks],
         "n_complete_blocks": int(len(complete_blocks)),
         "n_pairs_primary_logreg_rf_xgb": int(len(pairs_primary)),

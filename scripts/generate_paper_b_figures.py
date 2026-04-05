@@ -51,6 +51,7 @@ def generate_quality_figure(wilcoxon_csv: Path, output_dir: Path) -> None:
     labels = ["Stability", "Fidelity", "Faithfulness Gap", "Active Ratio (Sparsity)"]
 
     subset = df.set_index("metric").loc[metric_order].reset_index()
+    n_pairs = int(subset["n_pairs"].iloc[0])
     lime_vals = subset["lime_mean"].values
     shap_vals = subset["shap_mean"].values
 
@@ -64,7 +65,7 @@ def generate_quality_figure(wilcoxon_csv: Path, output_dir: Path) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
     ax.set_ylabel("Mean value across matched cells")
-    ax.set_title("Primary Quality Endpoints (n=65 matched SHAP-LIME cells)")
+    ax.set_title(f"Primary Quality Endpoints (n={n_pairs} matched SHAP-LIME cells)")
     ax.grid(axis="y", alpha=0.25)
     ax.legend(loc="upper right")
 
