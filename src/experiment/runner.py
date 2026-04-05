@@ -12,12 +12,20 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Any
 from datetime import datetime
+import os
+
+# Limit BLAS/OpenMP threads to 1 to prevent oversubscription when running parallel workers
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 import numpy as np
 import pandas as pd
 import joblib
 import concurrent.futures
 import multiprocessing
-import os
 import pickle
 import warnings
 
@@ -68,16 +76,24 @@ class ExperimentRunner:
         # Concurrency
         self.max_workers = config.max_workers
         if self.max_workers is None:
-            # Default to CPU count + 4 for I/O bound, or just CPU count for CPU bound
-            # SHAP/LIME are CPU bound.
-            
+            # SHAP/LIME are CPU bound but highly memory intensive.
             # CRITICAL SAFETY: Check if we are already in a worker process to prevent explosion
-            # (e.g. running inside BatchRunner)
             if multiprocessing.current_process().daemon:
                 logger.info("Detected execution inside worker process. Forcing max_workers=1 to avoid process explosion.")
                 self.max_workers = 1
             else:
-                self.max_workers = os.cpu_count() or 4
+                import psutil
+                # Dynamically calculate max workers based on available RAM (leaving 2GB buffer for OS)
+                mem_info = psutil.virtual_memory()
+                available_gb = (mem_info.available / (1024 ** 3)) - 2.0
+                # Using hardcoded limit from ResourceGuard defaults (4.0 GB target per worker)
+                # But to be safe, cap at 3 max for typical 16GB machines to avoid swapping
+                calculated_workers = max(1, int(available_gb // 4.0))
+                
+                # Further constraint: don't exceed physical cores
+                cpu_count = os.cpu_count() or 4
+                self.max_workers = min(calculated_workers, cpu_count)
+                logger.info(f"Dynamically set max_workers to {self.max_workers} based on available RAM: {available_gb+2.0:.1f}GB")
         
     def setup(self) -> None:
         """

@@ -13,6 +13,7 @@ import logging
 import signal
 import threading
 import time
+import _thread
 from typing import Any, Callable, Dict, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor, TimeoutError
 
@@ -46,10 +47,10 @@ class ResourceGuard:
                 usage = self._process.memory_info().rss
                 if usage > limit_bytes:
                     logger.error(f"Memory limit exceeded! {usage / (1024**3):.2f} GB > {self.memory_limit_gb} GB.")
-                    # In a guarded execution, we want to kill the offensive task.
-                    # Since we are in the same process, we can't easily 'kill' just the thread.
-                    # But we can signal the runner to abort.
-                    os._exit(1) # Radical, but keeps the benchmark integrity by failing the run.
+                    # Gracefully interrupt the main thread instead of exiting completely,
+                    # to prevent breaking the ProcessPoolExecutor and crashing subsequent jobs.
+                    _thread.interrupt_main()
+                    break
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 break
             time.sleep(1.0) # Check every second
@@ -87,6 +88,9 @@ class ResourceGuard:
         except TimeoutError:
             logger.error(f"Explanation timed out after {self.timeout_seconds} seconds.")
             raise
+        except KeyboardInterrupt:
+            logger.error("Guarded execution interrupted (likely due to memory limit).")
+            raise MemoryError(f"ResourceGuard terminated execution: memory limit {self.memory_limit_gb}GB exceeded.")
         except Exception as e:
             logger.error(f"Error during guarded execution: {e}")
             raise
