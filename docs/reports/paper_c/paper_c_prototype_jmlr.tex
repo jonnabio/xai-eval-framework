@@ -39,16 +39,16 @@ locating those judgments within the broader evaluation landscape. This
 paper presents a structured survey and taxonomy of evaluation metrics for
 model-agnostic explainability, focusing on how technical proxy metrics,
 benchmark-grounded metrics, human evaluation, and LLM-based semantic
-evaluation relate to one another. Using a coded literature matrix derived
-from the thesis review corpus, we organize XAI evaluation along four
-axes: evaluation target, evidence source, quality property, and task
-context. The resulting taxonomy clarifies where current metrics overlap,
-where they leave construct gaps, and why semantic evaluation should be
-treated as a complementary layer rather than a replacement for
-robustness- and fidelity-oriented measurement. The paper closes by
-mapping the taxonomy back to the thesis framework, motivating the
-benchmark design of Paper B and the evaluator-validation agenda of Paper
-A.
+evaluation relate to one another. Using a cleaned 24-study coded review
+corpus derived from the thesis literature matrix, we organize XAI
+evaluation along four axes: evaluation target, evidence source, quality
+property, and task context. The resulting taxonomy clarifies where
+current metrics overlap, where they leave construct gaps, and why
+semantic evaluation should be treated as a complementary layer rather
+than a replacement for robustness- and fidelity-oriented measurement.
+The paper closes by mapping the taxonomy back to the thesis framework,
+motivating the benchmark design of Paper B and the evaluator-validation
+agenda of Paper A.
 \end{abstract}
 
 \begin{keywords}
@@ -117,7 +117,8 @@ Scope is intentionally limited to model-agnostic post-hoc
 explainability, with emphasis on tabular settings but attention to
 transfer issues across image, text, time series, and graph contexts.
 The paper is a structured narrative survey with explicit coding
-dimensions, not a finalized systematic review or meta-analysis.
+dimensions, corpus accounting, and traceable repository artifacts, not a
+claim of exhaustive bibliometric coverage or meta-analysis.
 
 \section{Background and Definitions}
 
@@ -158,14 +159,24 @@ criteria. Both matter, but they are not interchangeable.
 
 This prototype uses a structured narrative review protocol anchored in
 the repository's literature matrix,
-\path{docs/reports/literature_review_methodology_matrix.md}. The current
-coded set contains 25 papers spanning metric taxonomies, benchmark
-toolkits, faithfulness theory, modality-specific benchmarks, and
-LLM-as-a-judge research. The paper set was originally assembled to
-support thesis methodology design rather than to satisfy a pre-registered
-systematic review workflow, so the present manuscript treats it as a
-transparent review corpus rather than as an exhaustive bibliometric
-sample.
+\path{docs/reports/literature_review_methodology_matrix.md}. For the
+current repository snapshot, the Paper C corpus was frozen on
+\path{2026-04-05}. The upstream matrix contained 25 rows; one duplicate
+record for the Pawlicki et~al.\ multiple-metrics paper was removed
+during Paper C-specific cleaning, leaving 24 unique coded papers. The
+cleaned corpus is stored in
+\path{docs/reports/paper_c/paper_c_review_corpus.csv}, and a regenerated
+descriptive summary is stored in
+\path{docs/reports/paper_c/paper_c_review_summary.md}.
+
+The coded corpus spans five thematic clusters already implied by the
+thesis materials: metric taxonomies and surveys (3 papers), benchmark
+and toolkit papers (3), faithfulness and robustness studies (8),
+modality-specific or domain-specific evaluations (6), and
+LLM-as-a-judge / proxy-human-evaluation papers (4). This spread is
+sufficient for thesis framing and gap analysis, but it is still better
+understood as a transparent working corpus than as an exhaustive
+bibliometric sample.
 
 The review objective is to answer four organizing questions:
 \begin{enumerate}[leftmargin=*]
@@ -192,6 +203,15 @@ directly relevant to post-hoc model-agnostic explanations. Exclusion
 applies to papers that focus solely on generating explanations without
 materially informing evaluation design.
 
+Beyond the four core taxonomy axes, the Paper C coding file records
+paper role, modality context, LLM-validation relevance, and
+source-confidence labels. The confidence labels are inherited from the
+upstream literature matrix (\path{high}, \path{medium}, or
+\path{title-level}) so that uncertainty remains visible instead of being
+flattened away. Coding was conducted as a single-reviewer synthesis pass
+for thesis integration rather than as an inter-rater systematic review
+exercise.
+
 \begin{table}[t]
 \centering
 \caption{Coding dimensions used to build the Paper C taxonomy.}
@@ -211,6 +231,31 @@ Task context & In what modality or domain is the metric assumed to be meaningful
 This protocol is intentionally lighter than PRISMA-style systematic
 review practice. The goal of the prototype is conceptual organization
 and thesis integration, not final exhaustive coverage claims.
+
+\begin{table}[t]
+\centering
+\caption{Descriptive profile of the cleaned Paper C review corpus.}
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Profile item} & \textbf{Current value} \\
+\midrule
+Corpus freeze date & 2026-04-05 \\
+Upstream matrix rows reviewed & 25 \\
+Duplicate rows removed during Paper C cleaning & 1 \\
+Unique coded papers & 24 \\
+Primary cluster distribution & 8 faithfulness/robustness, 6 modality/domain, 4 LLM-judge, 3 benchmark/toolkit, 3 taxonomy/survey \\
+Evidence-source coverage & 20 proxy, 6 benchmark, 4 LLM-judge, 4 end-user, 3 expert-human \\
+Confidence mix & 19 high, 3 medium, 2 title-level \\
+\bottomrule
+\end{tabularx}
+\label{tab:corpus_profile}
+\end{table}
+
+Table~\ref{tab:corpus_profile} reveals a strong proxy skew: 20 of 24
+coded papers rely on proxy evidence, whereas only 3 directly use
+expert-human evidence and 4 use end-user evidence. Paper C should
+therefore be read as a map of the current evidence landscape, not as
+proof that human-grounded constructs are already mature or standardized.
 
 \section{Taxonomy of XAI Evaluation Metrics}
 
@@ -296,6 +341,24 @@ weak on sparsity or semantic adequacy. Multi-metric reporting is
 therefore not a luxury; it is often the minimum needed to make XAI
 claims interpretable.
 
+\begin{table}[t]
+\centering
+\caption{Working construct dictionary used in the Paper C coding pass.}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Construct} & \textbf{Working operational meaning} & \textbf{Strongest direct evidence} \\
+\midrule
+Fidelity / faithfulness & Whether the explanation tracks model behavior under a specified intervention or masking scheme. & Proxy tests and benchmark-grounded checks \\
+Stability / robustness & Whether explanations remain consistent across reruns, perturbations, or nearby inputs. & Proxy perturbation studies and repeated-run analyses \\
+Sparsity / parsimony & Whether explanations keep feature load low enough to remain cognitively manageable. & Structural summaries of explanation size or weight concentration \\
+Plausibility & Whether explanations align with expert expectations or domain logic. & Expert-human review with explicit rubrics \\
+Semantic alignment & Whether explanations capture meaningful conceptual or causal structure beyond structural proxy success. & Expert review or validated semantic evaluators \\
+User usefulness & Whether explanations improve comprehension, decision quality, or trust calibration in an actual task. & End-user studies with task outcomes \\
+\bottomrule
+\end{tabularx}
+\label{tab:constructs}
+\end{table}
+
 \subsection{Taxonomy by Task Context}
 
 Metric validity also depends on context. Tabular benchmarks often make
@@ -345,9 +408,13 @@ create reproducible, quantitative anchors for benchmark comparison.
 Papers B and related benchmark work depend on these anchors for
 statistical comparison across explainers
 \citep{agarwal2022openxai,hedstrom2023quantus,canha2025functionally}.
-However, these metrics operate on structural or behavioral proxies. They
-do not directly answer whether an explanation reflects domain logic,
-causal relevance, or user-meaningful interpretation.
+However, the cleaned Paper C corpus shows how dominant these proxies
+have become: 20 of 24 coded studies use proxy evidence, while only 6 use
+benchmark-grounded evidence and even fewer use human-grounded evidence.
+This explains why structural metrics are comparatively well standardized
+while meaning-oriented constructs remain thinly operationalized. Proxy
+metrics do not directly answer whether an explanation reflects domain
+logic, causal relevance, or user-meaningful interpretation.
 
 \subsection{Gap 2: Human-Grounded Constructs Are Underspecified}
 
@@ -355,9 +422,14 @@ The literature frequently invokes interpretability, clarity,
 plausibility, and usefulness, but these are often
 under-operationalized. When human studies exist, their tasks, rubrics,
 and participant populations vary so widely that direct comparison is
-difficult \citep{ali2023trustworthy,longo2024manifesto}. This weakens
-cumulative progress because the same label may refer to different
-constructs across papers.
+difficult \citep{ali2023trustworthy,longo2024manifesto}. In the current
+coded corpus, only 3 studies directly use expert-human evidence and 4
+use end-user evidence, and those papers are concentrated in
+evaluator-validation settings rather than in the core
+explainer-benchmark literature. This weakens cumulative progress because
+the same label may refer to different constructs across papers, which is
+why Table~\ref{tab:constructs} is necessary even for a thesis-scoped
+survey.
 
 \subsection{Gap 3: Semantic Evaluation Is Rising Faster than Its Validation Base}
 
@@ -367,8 +439,10 @@ broader LLM-as-a-judge literature shows that proxy judges can display
 position bias, verbosity bias, or agreement illusions
 \citep{zheng2023judging,gu2024llmjudge}. In XAI, that means semantic
 evaluator outputs should be treated as calibrated proxies rather than as
-self-validating replacements for expert review. This gap directly
-motivates Paper A.
+self-validating replacements for expert review. The coded Paper C corpus
+contains 4 LLM-validation-relevant entries, one of which is itself a
+survey rather than a direct validation study. That is a visible but
+still small empirical base. This gap directly motivates Paper A.
 
 \begin{figure}[t]
 \centering
@@ -411,6 +485,14 @@ measurement instruments rather than convenience tools. Their agreement
 with human experts must therefore be validated. Paper A occupies the
 semantic-evaluator validation layer of the taxonomy.
 
+At the current repository snapshot, the thesis already contains
+LLM-evaluation infrastructure, prompt templates, stratified sampling,
+and a human-annotation interface. However, the human-validation layer is
+not yet complete: data collection is still pending and agreement
+analysis remains stubbed in the thesis status notes. Paper A should
+therefore be framed as an active evaluator-validation study rather than
+as a finished evidentiary layer.
+
 Third, the survey suggests a thesis-wide minimal evaluation stack:
 \begin{enumerate}[leftmargin=*]
 \item technical proxy metrics for fidelity, stability, sparsity, and
@@ -435,14 +517,19 @@ This prototype has several boundaries.
 \begin{itemize}[leftmargin=*]
 \item It is a structured narrative survey rather than a finalized
 systematic review. The coded corpus is explicit and traceable, but it is
-not yet a complete database-driven search with deduplication and flow
-reporting.
+not yet a complete database-driven search with full screening logs,
+deduplication workflow reporting, and flow diagrams.
 \item The paper emphasizes model-agnostic post-hoc XAI because that is
 the thesis focus. Intrinsic interpretability, representation-level
 interpretability, and some modality-specific traditions are only covered
 insofar as they affect metric transfer or scope boundaries.
 \item The paper argues for semantic evaluation as a necessary layer but
 does not itself validate LLM judges. That validation belongs to Paper A.
+\item The current coding pass is single-reviewer and inherits 3
+\path{medium}-confidence and 2 \path{title-level} records from the
+upstream thesis matrix. Future versions should either deepen those
+entries through full-text coding or replace them with higher-confidence
+sources.
 \item The taxonomy organizes construct space, not effect sizes. It
 clarifies what should be measured and why, but it does not estimate a
 pooled numerical ranking across studies.
