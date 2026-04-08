@@ -6,7 +6,7 @@ VENV_PYTHON=".venv/bin/python3"
 CONFIG_DIR="configs/experiments/exp2_scaled"
 LOG_FILE="logs/managed_runner.log"
 MAX_LOAD=10.0
-MIN_MEM=2000
+MIN_MEM=6000
 REPO_DIR=$(pwd)
 
 mkdir -p logs
@@ -55,6 +55,9 @@ for EXP_NAME in $MISSING_LIST; do
 
     echo "----------------------------------------------------------" | tee -a "$LOG_FILE"
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] Starting experiment: $EXP_NAME" | tee -a "$LOG_FILE"
+    
+    echo "[GIT] Pulling latest results from distributed queue..." | tee -a "$LOG_FILE"
+    git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)
     
     wait_for_resources
     

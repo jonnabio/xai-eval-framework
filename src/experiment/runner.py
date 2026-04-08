@@ -83,17 +83,16 @@ class ExperimentRunner:
                 self.max_workers = 1
             else:
                 import psutil
-                # Dynamically calculate max workers based on available RAM (leaving 2GB buffer for OS)
+                # Dynamically calculate max workers based on available RAM (leaving 4.0GB buffer for OS & IDE)
                 mem_info = psutil.virtual_memory()
-                available_gb = (mem_info.available / (1024 ** 3)) - 2.0
-                # Using hardcoded limit from ResourceGuard defaults (4.0 GB target per worker)
-                # But to be safe, cap at 3 max for typical 16GB machines to avoid swapping
-                calculated_workers = max(1, int(available_gb // 4.0))
+                available_gb = max(0, (mem_info.available / (1024 ** 3)) - 4.0)
+                # Using more conservative limit based on Anchors memory spikes (10.0 GB target per worker)
+                calculated_workers = max(1, int(available_gb // 10.0))
                 
                 # Further constraint: don't exceed physical cores
                 cpu_count = os.cpu_count() or 4
                 self.max_workers = min(calculated_workers, cpu_count)
-                logger.info(f"Dynamically set max_workers to {self.max_workers} based on available RAM: {available_gb+2.0:.1f}GB")
+                logger.info(f"Dynamically set max_workers to {self.max_workers} based on available RAM: {available_gb+1.0:.1f}GB")
         
     def setup(self) -> None:
         """
@@ -377,7 +376,7 @@ class ExperimentRunner:
         
         guard = ResourceGuard(
             max_cores=self.config.resources.max_cores,
-            memory_limit_gb=self.config.resources.memory_limit_gb,
+            memory_limit_gb=max(12.0, self.config.resources.memory_limit_gb),
             timeout_seconds=self.config.resources.timeout_seconds,
             enforce_affinity=self.config.resources.enforce_affinity
         )
