@@ -1,0 +1,716 @@
+\documentclass[twoside,11pt]{article}
+
+\usepackage{jmlr2e}
+\usepackage{amsmath}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{lastpage}
+
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 4/2026}{Preprint}{PAPER-C-0001}{Jonathan Herrera-Vasquez}
+\ShortHeadings{From Fidelity to Semantics}{Herrera-Vasquez}
+\firstpageno{1}
+
+\begin{document}
+
+\title{From Fidelity to Semantics:\\
+A Taxonomy and Survey of Evaluation Metrics for Model-Agnostic Explainability}
+
+\author{
+\name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
+\addr UNADE
+}
+
+\editor{}
+
+\maketitle
+
+\begin{abstract}
+Evaluation remains the least consolidated part of explainable artificial
+intelligence (XAI). While model-agnostic post-hoc methods such as LIME,
+SHAP, Anchors, and DiCE are widely used, the criteria used to judge them
+vary sharply across papers, toolkits, and application domains. Some
+studies emphasize faithfulness proxies, others prioritize stability,
+sparsity, or human plausibility, and newer work introduces large language
+models (LLMs) as semantic evaluators without a unified framework for
+locating those judgments within the broader evaluation landscape. This
+paper presents a structured survey and taxonomy of evaluation metrics for
+model-agnostic explainability, focusing on how technical proxy metrics,
+benchmark-grounded metrics, human evaluation, and LLM-based semantic
+evaluation relate to one another. Using a cleaned 24-study coded review
+corpus derived from the thesis literature matrix, we organize XAI
+evaluation along four axes: evaluation target, evidence source, quality
+property, and task context. The resulting taxonomy clarifies where
+current metrics overlap, where they leave construct gaps, and why
+semantic evaluation should be treated as a complementary layer rather
+than a replacement for robustness- and fidelity-oriented measurement.
+The paper closes by mapping the taxonomy back to the thesis framework,
+motivating the benchmark design of Paper B and the evaluator-validation
+agenda of Paper A.
+\end{abstract}
+
+\begin{keywords}
+explainable ai, evaluation metrics, survey, taxonomy, semantic
+evaluation, llm-as-a-judge
+\end{keywords}
+
+\section{Introduction}
+
+Progress in explainable artificial intelligence depends not only on
+generating explanations, but on evaluating whether those explanations
+are useful, faithful, stable, and meaningful. Yet the literature does
+not converge on a single definition of explanation quality. Surveys
+repeatedly note that XAI evaluation is fragmented across proxy metrics,
+qualitative user studies, and domain-specific desiderata
+\citep{adadi2018xai,arrieta2020xai,kadir2023metrics,canha2025functionally}.
+As a result, comparisons between explainers often depend as much on the
+chosen metric family as on the methods being compared.
+
+This fragmentation is especially visible in model-agnostic post-hoc
+explainability. Faithfulness-style metrics remain common because they
+are relatively easy to compute, but they do not fully capture whether an
+explanation is understandable, semantically aligned with domain
+knowledge, or decision-useful in practice
+\citep{ali2023trustworthy,longo2024manifesto}. Multi-metric work argues
+that stability, sparsity, and computational cost are also part of
+explanation quality, and recent critical examinations show that
+different metrics can reveal complementary rather than redundant
+behavior \citep{pawlicki2024multiple,zheng2025ffidelity}.
+
+At the same time, a new line of work uses LLMs as evaluators of
+explanation quality or human-centered criteria. This is promising
+because LLMs can score natural-language justifications, compare
+competing explanations, and operationalize semantic rubrics at scale.
+However, research on LLM-as-a-judge also warns that proxy judges can
+drift from human judgments, inherit style biases, and compress distinct
+quality dimensions into superficially coherent scores
+\citep{zheng2023judging,gu2024llmjudge,wu2025userperceptions}. For XAI,
+this raises a conceptual problem before it raises an empirical one:
+where should semantic evaluation sit relative to fidelity, robustness,
+and other established metric families?
+
+This paper addresses that question through a structured survey and
+taxonomy for model-agnostic XAI evaluation. Rather than proposing a new
+explainer or a new benchmark, the paper organizes the metric space
+needed to interpret the rest of the thesis. In the current dissertation
+plan, Paper B provides the quantitative benchmark layer and Paper A
+validates LLM-based semantic evaluation against human judgments. Paper C
+supplies the conceptual bridge between them.
+
+Our contributions are:
+\begin{enumerate}[leftmargin=*]
+\item a taxonomy of XAI evaluation metrics structured by evaluation
+target, evidence source, quality property, and task context;
+\item a comparative synthesis of technical proxy metrics,
+benchmark-grounded metrics, human evaluation, and LLM-based semantic
+evaluation;
+\item a gap analysis showing where current metrics fail to capture
+explanation meaning or user-facing adequacy; and
+\item a thesis-facing integration layer that motivates why Paper B needs
+a multi-metric benchmark and why Paper A needs explicit evaluator
+validation.
+\end{enumerate}
+
+Scope is intentionally limited to model-agnostic post-hoc
+explainability, with emphasis on tabular settings but attention to
+transfer issues across image, text, time series, and graph contexts.
+The paper is a structured narrative survey with explicit coding
+dimensions, corpus accounting, and traceable repository artifacts, not a
+claim of exhaustive bibliometric coverage or meta-analysis.
+
+\section{Background and Definitions}
+
+To keep the taxonomy precise, several terms that are often conflated in
+XAI writing need to be separated.
+
+First, intrinsic explainability and post-hoc explainability should not
+be evaluated as if they pose the same problem. Intrinsic models are
+designed to be interpretable by construction, whereas post-hoc methods
+attempt to explain black-box behavior after model training
+\citep{rudin2019stop,retzlaff2024posthoc}. The present survey focuses on
+the latter because Papers A and B evaluate post-hoc model-agnostic
+explainers.
+
+Second, explanation quality is not identical to model quality. A model
+may be accurate while producing unstable or semantically weak
+explanations; conversely, a model can support concise explanations
+without necessarily being more accurate. Evaluation therefore needs to
+specify whether the object under study is the explanation artifact, the
+explainer method, the predictive model, or the user-facing decision
+process.
+
+Third, local and global explanations require different expectations.
+Local attributions or counterfactuals are often judged through
+faithfulness, sparsity, or actionability, while global summaries may be
+judged by coverage, consistency, or conceptual coherence. Many reported
+metric disagreements arise because these explanatory levels are mixed
+without explicit task framing.
+
+Finally, semantic evaluation should be separated from purely structural
+proxy metrics. A metric such as perturbation faithfulness evaluates
+whether feature rankings track model sensitivity under a chosen
+intervention scheme. A semantic judgment evaluates whether an
+explanation ``makes sense'' under domain, causal, or linguistic
+criteria. Both matter, but they are not interchangeable.
+
+\section{Review Method and Coding Protocol}
+
+This prototype uses a structured narrative review protocol anchored in
+the repository's literature matrix,
+\path{docs/reports/literature_review_methodology_matrix.md}. For the
+current repository snapshot, the Paper C corpus was frozen on
+\path{2026-04-05}. The upstream matrix contained 25 rows; one duplicate
+record for the Pawlicki et~al.\ multiple-metrics paper was removed
+during Paper C-specific cleaning, leaving 24 unique coded papers. The
+cleaned corpus is stored in
+\path{docs/reports/paper_c/paper_c_review_corpus.csv}, and a regenerated
+descriptive summary is stored in
+\path{docs/reports/paper_c/paper_c_review_summary.md}.
+
+The coded corpus spans five thematic clusters already implied by the
+thesis materials: metric taxonomies and surveys (3 papers), benchmark
+and toolkit papers (3), faithfulness and robustness studies (8),
+modality-specific or domain-specific evaluations (6), and
+LLM-as-a-judge / proxy-human-evaluation papers (4). This spread is
+sufficient for thesis framing and gap analysis, but it is still better
+understood as a transparent working corpus than as an exhaustive
+bibliometric sample.
+
+The review objective is to answer four organizing questions:
+\begin{enumerate}[leftmargin=*]
+\item What kinds of objects are current XAI metrics actually evaluating?
+\item What evidence sources do they rely on?
+\item Which quality properties do they operationalize?
+\item Where do semantic or human-centered judgments become necessary?
+\end{enumerate}
+
+Each source in the coded corpus is assigned to one or more thematic
+clusters:
+\begin{itemize}[leftmargin=*]
+\item metric taxonomies and surveys;
+\item benchmark and toolkit papers;
+\item faithfulness and robustness studies;
+\item modality-specific or domain-specific evaluations; and
+\item LLM-as-a-judge and proxy-human-evaluation papers.
+\end{itemize}
+
+For this prototype, inclusion is defined pragmatically: a source must
+contribute either a formal evaluation construct, a benchmark design
+principle, a warning about metric misuse, or an evaluation paradigm
+directly relevant to post-hoc model-agnostic explanations. Exclusion
+applies to papers that focus solely on generating explanations without
+materially informing evaluation design.
+
+Beyond the four core taxonomy axes, the Paper C coding file records
+paper role, modality context, LLM-validation relevance, and
+source-confidence labels. The confidence labels are inherited from the
+upstream literature matrix (\path{high}, \path{medium}, or
+\path{title-level}) so that uncertainty remains visible instead of being
+flattened away. Coding was conducted as a single-reviewer synthesis pass
+for thesis integration rather than as an inter-rater systematic review
+exercise.
+
+\begin{table}[t]
+\centering
+\caption{Coding dimensions used to build the Paper C taxonomy.}
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Dimension} & \textbf{Operational question} \\
+\midrule
+Evaluation target & What is being judged: explanation artifact, explainer, model behavior, or user/task outcome? \\
+Evidence source & What kind of evidence supports the judgment: perturbation proxy, benchmark ground truth, human rating, user task, or LLM judge? \\
+Quality property & Which property is being claimed: fidelity, stability, sparsity, plausibility, recourse quality, semantic alignment, and related constructs? \\
+Task context & In what modality or domain is the metric assumed to be meaningful? \\
+\bottomrule
+\end{tabularx}
+\label{tab:coding}
+\end{table}
+
+This protocol is intentionally lighter than PRISMA-style systematic
+review practice. The goal of the prototype is conceptual organization
+and thesis integration, not final exhaustive coverage claims.
+
+\begin{table}[t]
+\centering
+\caption{Descriptive profile of the cleaned Paper C review corpus.}
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Profile item} & \textbf{Current value} \\
+\midrule
+Corpus freeze date & 2026-04-05 \\
+Upstream matrix rows reviewed & 25 \\
+Duplicate rows removed during Paper C cleaning & 1 \\
+Unique coded papers & 24 \\
+Primary cluster distribution & 8 faithfulness/robustness, 6 modality/domain, 4 LLM-judge, 3 benchmark/toolkit, 3 taxonomy/survey \\
+Evidence-source coverage & 20 proxy, 6 benchmark, 4 LLM-judge, 4 end-user, 3 expert-human \\
+Confidence mix & 19 high, 3 medium, 2 title-level \\
+\bottomrule
+\end{tabularx}
+\label{tab:corpus_profile}
+\end{table}
+
+Table~\ref{tab:corpus_profile} reveals a strong proxy skew: 20 of 24
+coded papers rely on proxy evidence, whereas only 3 directly use
+expert-human evidence and 4 use end-user evidence. Paper C should
+therefore be read as a map of the current evidence landscape, not as
+proof that human-grounded constructs are already mature or standardized.
+
+\section{Taxonomy of XAI Evaluation Metrics}
+
+The central claim of this paper is that XAI evaluation can be clarified
+by crossing four axes: evaluation target, evidence source, quality
+property, and task context. Metrics that appear to answer the same
+question often do not, because they attach to different objects, use
+different evidence, or imply different validity conditions.
+
+\subsection{Taxonomy by Evaluation Target}
+
+Many metric disagreements start with a hidden mismatch about what is
+being evaluated.
+\begin{itemize}[leftmargin=*]
+\item \textbf{Explanation artifact metrics} evaluate the produced
+explanation itself, such as attribution sparsity, local fidelity, or
+semantic clarity.
+\item \textbf{Explainer method metrics} evaluate the behavior of the
+explainer across cases, such as stability, reproducibility, or
+computational cost.
+\item \textbf{Model-behavior metrics} evaluate whether explanations
+track model behavior under perturbations or alternative decision
+regions.
+\item \textbf{User/task outcome metrics} evaluate whether explanations
+improve decision performance, trust calibration, or actionability.
+\end{itemize}
+
+This distinction matters because one metric family cannot automatically
+stand in for another. A sparse explanation can still be semantically
+misleading, and a faithful attribution can still be unusable in a
+decision-support workflow.
+
+\subsection{Taxonomy by Evidence Source}
+
+The second axis concerns the evidence used to justify the evaluation:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Proxy or perturbation metrics} infer quality from
+numerical sensitivity behavior.
+\item \textbf{Benchmark-grounded metrics} compare explanations to
+synthetic or domain-defined ground truth.
+\item \textbf{Human expert judgments} evaluate plausibility,
+correctness, or domain alignment.
+\item \textbf{End-user studies} assess comprehension, trust
+calibration, decision quality, or workload.
+\item \textbf{LLM judges} provide scalable semantic scoring using
+rubric-guided language-model evaluation.
+\end{itemize}
+
+These evidence sources are not equally strong for every construct.
+Proxy metrics are scalable and reproducible but may under-capture
+meaning. Human judgments are richer but expensive and variable. LLM
+judges sit in between: they are scalable like proxies but semantically
+expressive like human reviews, which is precisely why their validity
+must be established rather than assumed
+\citep{gu2024llmjudge,wu2025userperceptions,zhou2025medthink}.
+
+\subsection{Taxonomy by Quality Property}
+
+The literature repeatedly returns to a familiar set of quality
+properties, but not always with consistent definitions.
+\begin{itemize}[leftmargin=*]
+\item \textbf{Fidelity / faithfulness:} whether the explanation tracks
+how the model actually behaves under feature interventions or masking
+\citep{ribeiro2016why,lundberg2017unified,zheng2025ffidelity}.
+\item \textbf{Stability / robustness:} whether similar inputs yield
+similar explanations under perturbation or reruns
+\citep{pawlicki2024multiple,canha2025functionally}.
+\item \textbf{Sparsity / parsimony:} whether the explanation is concise
+enough to be interpretable without unnecessary feature load.
+\item \textbf{Plausibility:} whether the explanation aligns with domain
+expectations or expert reasoning.
+\item \textbf{Counterfactual or recourse quality:} whether
+explanation-linked interventions are feasible, minimal, diverse, or
+actionable \citep{mothilal2020dice}.
+\item \textbf{Semantic alignment:} whether an explanation captures
+meaningful causal or conceptual structure, even when pure proxy metrics
+are agnostic to that structure.
+\end{itemize}
+
+The key observation is that these properties are only partly
+commensurable. A method can score strongly on fidelity while remaining
+weak on sparsity or semantic adequacy. Multi-metric reporting is
+therefore not a luxury; it is often the minimum needed to make XAI
+claims interpretable.
+
+\begin{table}[t]
+\centering
+\caption{Working construct dictionary used in the Paper C coding pass.}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Construct} & \textbf{Working operational meaning} & \textbf{Strongest direct evidence} \\
+\midrule
+Fidelity / faithfulness & Whether the explanation tracks model behavior under a specified intervention or masking scheme. & Proxy tests and benchmark-grounded checks \\
+Stability / robustness & Whether explanations remain consistent across reruns, perturbations, or nearby inputs. & Proxy perturbation studies and repeated-run analyses \\
+Sparsity / parsimony & Whether explanations keep feature load low enough to remain cognitively manageable. & Structural summaries of explanation size or weight concentration \\
+Plausibility & Whether explanations align with expert expectations or domain logic. & Expert-human review with explicit rubrics \\
+Semantic alignment & Whether explanations capture meaningful conceptual or causal structure beyond structural proxy success. & Expert review or validated semantic evaluators \\
+User usefulness & Whether explanations improve comprehension, decision quality, or trust calibration in an actual task. & End-user studies with task outcomes \\
+\bottomrule
+\end{tabularx}
+\label{tab:constructs}
+\end{table}
+
+\subsection{Taxonomy by Task Context}
+
+Metric validity also depends on context. Tabular benchmarks often make
+strong assumptions about feature independence, perturbation realism, and
+local neighborhoods. These assumptions can fail in image, text, graph,
+and time-series settings, where perturbations may create
+out-of-distribution examples or semantically invalid transformations
+\citep{agarwal2023gnn_eval,proszewska2025bxaic}. This does not make
+cross-modal benchmarks impossible, but it does mean that metric
+transport cannot be assumed.
+
+\begin{table}[t]
+\centering
+\caption{Core metric families in model-agnostic XAI evaluation.}
+\footnotesize
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Metric family} & \textbf{What it captures well} & \textbf{What it leaves unresolved} \\
+\midrule
+Fidelity / faithfulness & Whether explanations track model behavior under interventions or masking. & Whether the explanation is meaningful, plausible, or useful outside the proxy setup. \\
+Stability / robustness & Whether explanations remain consistent across perturbations or repeated runs. & Whether stable explanations are actually correct or semantically adequate. \\
+Sparsity / parsimony & Whether explanations are concise and low in feature load. & Whether concision hides necessary nuance or context. \\
+Benchmark-grounded correctness & Whether explanations recover synthetic or domain-defined ground truth. & Whether the available ground truth is realistic, complete, or transferable. \\
+Human expert review & Whether explanations align with domain expectations and expert reasoning. & Whether those judgments are scalable, standardized, and reproducible. \\
+User-centered evaluation & Whether explanations improve understanding, decisions, or trust calibration in practice. & Whether findings generalize across tasks, populations, and study designs. \\
+LLM-based semantic evaluation & Whether rubric-based semantic judgments can be produced quickly and at scale. & Whether those judgments agree with humans and avoid proxy-judge bias. \\
+\bottomrule
+\end{tabularx}
+\label{tab:taxonomy}
+\end{table}
+
+Table~\ref{tab:taxonomy} illustrates the practical consequence of the
+taxonomy: each metric family gains strength by focusing on one kind of
+evidence and one kind of target, but each also leaves predictable blind
+spots. No single family can therefore exhaust explanation quality on its
+own.
+
+\section{Comparative Synthesis and Open Gaps}
+
+The taxonomy exposes three recurring gaps in current XAI evaluation
+practice.
+
+\subsection{Gap 1: Proxy Metrics Are Necessary but Not Sufficient}
+
+Faithfulness, stability, and sparsity remain essential because they
+create reproducible, quantitative anchors for benchmark comparison.
+Papers B and related benchmark work depend on these anchors for
+statistical comparison across explainers
+\citep{agarwal2022openxai,hedstrom2023quantus,canha2025functionally}.
+However, the cleaned Paper C corpus shows how dominant these proxies
+have become: 20 of 24 coded studies use proxy evidence, while only 6 use
+benchmark-grounded evidence and even fewer use human-grounded evidence.
+This explains why structural metrics are comparatively well standardized
+while meaning-oriented constructs remain thinly operationalized. Proxy
+metrics do not directly answer whether an explanation reflects domain
+logic, causal relevance, or user-meaningful interpretation.
+
+\subsection{Gap 2: Human-Grounded Constructs Are Underspecified}
+
+The literature frequently invokes interpretability, clarity,
+plausibility, and usefulness, but these are often
+under-operationalized. When human studies exist, their tasks, rubrics,
+and participant populations vary so widely that direct comparison is
+difficult \citep{ali2023trustworthy,longo2024manifesto}. In the current
+coded corpus, only 3 studies directly use expert-human evidence and 4
+use end-user evidence, and those papers are concentrated in
+evaluator-validation settings rather than in the core
+explainer-benchmark literature. This weakens cumulative progress because
+the same label may refer to different constructs across papers, which is
+why Table~\ref{tab:constructs} is necessary even for a thesis-scoped
+survey.
+
+\subsection{Gap 3: Semantic Evaluation Is Rising Faster than Its Validation Base}
+
+LLM-based judging offers a practical way to score explanation quality at
+scale, especially when explanations or rubrics are textual. But the
+broader LLM-as-a-judge literature shows that proxy judges can display
+position bias, verbosity bias, or agreement illusions
+\citep{zheng2023judging,gu2024llmjudge}. In XAI, that means semantic
+evaluator outputs should be treated as calibrated proxies rather than as
+self-validating replacements for expert review. The coded Paper C corpus
+contains 4 LLM-validation-relevant entries, one of which is itself a
+survey rather than a direct validation study. That is a visible but
+still small empirical base. This gap directly motivates Paper A.
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.94\linewidth}
+\centering
+\textbf{Evaluation continuum for post-hoc XAI}\\[4pt]
+Proxy metrics $\rightarrow$ benchmark-grounded checks $\rightarrow$ expert judgment $\rightarrow$ user-centered evaluation\\
+\vspace{4pt}
+\footnotesize LLM-based semantic evaluation occupies an intermediate role:
+more expressive than proxy metrics, more scalable than human review, but
+not self-validating.
+\end{minipage}}
+\caption{Conceptual placement of semantic evaluation within the broader XAI evaluation landscape.}
+\label{fig:continuum}
+\end{figure}
+
+Figure~\ref{fig:continuum} summarizes the evaluation continuum emphasized
+by this survey. The synthesis therefore argues for layered evaluation.
+Proxy metrics should anchor reproducibility and comparative benchmarking.
+Human or semantic layers should be added when the claim concerns
+meaning, plausibility, or causal adequacy. The mistake is not using one
+family or the other; it is allowing any single family to monopolize the
+definition of explanation quality.
+
+\section{Implications for the Thesis Framework}
+
+The value of Paper C is not only descriptive. It directly organizes the
+thesis architecture.
+
+First, the taxonomy justifies the multi-metric benchmark design of Paper
+B. If explanation quality spans fidelity, stability, sparsity, and
+computational burden, then a benchmark based on one endpoint would
+understate meaningful trade-offs. Paper B therefore occupies the
+proxy-and-robustness layer of the taxonomy.
+
+Second, the taxonomy explains why Paper A is necessary. Once the thesis
+claims to measure causal alignment, counterfactual sensitivity, or
+semantic adequacy through LLM evaluators, those evaluators become
+measurement instruments rather than convenience tools. Their agreement
+with human experts must therefore be validated. Paper A occupies the
+semantic-evaluator validation layer of the taxonomy.
+
+At the current repository snapshot, the thesis already contains
+LLM-evaluation infrastructure, prompt templates, stratified sampling,
+and a human-annotation interface. However, the human-validation layer is
+not yet complete: data collection is still pending and agreement
+analysis remains stubbed in the thesis status notes. Paper A should
+therefore be framed as an active evaluator-validation study rather than
+as a finished evidentiary layer.
+
+Third, the survey suggests a thesis-wide minimal evaluation stack:
+\begin{enumerate}[leftmargin=*]
+\item technical proxy metrics for fidelity, stability, sparsity, and
+cost;
+\item benchmark reporting with explicit scope and artifact
+traceability;
+\item semantic evaluation for constructs not captured by numerical
+proxies; and
+\item human validation whenever semantic claims become confirmatory
+rather than exploratory.
+\end{enumerate}
+
+This layered view also clarifies claim discipline. Benchmark evidence
+can support comparative technical claims. Semantic evaluator outputs can
+support exploratory interpretation until calibrated. Human agreement
+evidence can then convert those semantic constructs into stronger
+confirmatory claims.
+
+\section{Limitations}
+
+This prototype has several boundaries.
+\begin{itemize}[leftmargin=*]
+\item It is a structured narrative survey rather than a finalized
+systematic review. The coded corpus is explicit and traceable, but it is
+not yet a complete database-driven search with full screening logs,
+deduplication workflow reporting, and flow diagrams.
+\item The paper emphasizes model-agnostic post-hoc XAI because that is
+the thesis focus. Intrinsic interpretability, representation-level
+interpretability, and some modality-specific traditions are only covered
+insofar as they affect metric transfer or scope boundaries.
+\item The paper argues for semantic evaluation as a necessary layer but
+does not itself validate LLM judges. That validation belongs to Paper A.
+\item The current coding pass is single-reviewer and inherits 3
+\path{medium}-confidence and 2 \path{title-level} records from the
+upstream thesis matrix. Future versions should either deepen those
+entries through full-text coding or replace them with higher-confidence
+sources.
+\item The taxonomy organizes construct space, not effect sizes. It
+clarifies what should be measured and why, but it does not estimate a
+pooled numerical ranking across studies.
+\end{itemize}
+
+\section{Conclusion}
+
+XAI evaluation is not one problem but a family of related measurement
+problems. The literature has developed useful metric families for
+fidelity, robustness, sparsity, and benchmark reproducibility, yet
+these families do not fully capture semantic adequacy or human-centered
+meaning. By organizing model-agnostic post-hoc evaluation along the axes
+of evaluation target, evidence source, quality property, and task
+context, this paper clarifies why metric disagreement is common and why
+layered evaluation is necessary.
+
+The main practical implication is simple: benchmark metrics and semantic
+evaluation should be treated as complementary rather than competing
+forms of evidence. Within the thesis, this means Paper B should provide
+the quantitative comparative baseline, while Paper A should validate the
+semantic evaluator layer that benchmark metrics alone cannot justify.
+Paper C provides the conceptual map that makes those two efforts
+cohere.
+
+\acks{This work received no external funding. The study was self-funded
+by the author, and the author reports no competing interests. This draft
+was prepared from repository materials available in April 2026.}
+
+\clearpage
+\phantomsection
+\pdfbookmark[1]{References}{references}
+\begin{thebibliography}{99}
+
+\bibitem[Adadi and Berrada(2018)]{adadi2018xai}
+Amina Adadi and Mohammed Berrada.
+2018.
+Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI).
+\emph{IEEE Access}, 6:52138--52160.
+
+\bibitem[Agarwal et~al.(2022)Agarwal, Ley, Krishna, Saxena, Pawelczyk, Johnson, Puri, Zitnik, and Lakkaraju]{agarwal2022openxai}
+Chirag Agarwal, Dan Ley, Satyapriya Krishna, Eshika Saxena, Martin Pawelczyk,
+Nari Johnson, Isha Puri, Marinka Zitnik, and Himabindu Lakkaraju.
+2022.
+OpenXAI: Towards a Transparent Evaluation of Post hoc Model Explanations.
+\emph{arXiv preprint arXiv:2206.11104}.
+
+\bibitem[Agarwal et~al.(2023)Agarwal, Queen, Lakkaraju, and Zitnik]{agarwal2023gnn_eval}
+Chirag Agarwal, Owen Queen, Himabindu Lakkaraju, and Marinka Zitnik.
+2023.
+Evaluating explainability for graph neural networks.
+\emph{Scientific Data}, 10:144.
+
+\bibitem[Ali et~al.(2023)Ali, Abuhmed, El-Sappagh, Muhammad, Alonso-Moral, Confalonieri, Guidotti, Del Ser, Diaz-Rodriguez, and Herrera]{ali2023trustworthy}
+Safwan Ali, Tamer Abuhmed, Shaker El-Sappagh, Khan Muhammad, Jose M. Alonso-Moral,
+Roberto Confalonieri, Riccardo Guidotti, Javier Del Ser, Natalia Diaz-Rodriguez,
+and Francisco Herrera.
+2023.
+Explainable Artificial Intelligence (XAI): What we know and what is left to attain Trustworthy Artificial Intelligence.
+\emph{Information Fusion}, 99:101805.
+
+\bibitem[Arrieta et~al.(2020)]{arrieta2020xai}
+Alejandro Barredo Arrieta, Natalia Diaz-Rodriguez, Javier Del Ser,
+Adrien Bennetot, Siham Tabik, Alberto Barbado, Salvador Garcia,
+Sergio Gil-Lopez, Daniel Molina, Richard Benjamins, Raja Chatila,
+and Francisco Herrera.
+2020.
+Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI.
+\emph{Information Fusion}, 58:82--115.
+
+\bibitem[Canha et~al.(2025)Canha, Kubler, Framling, and Fagherazzi]{canha2025functionally}
+Dulce Canha, Sylvain Kubler, Kary Framling, and Guy Fagherazzi.
+2025.
+A Functionally-Grounded Benchmark Framework for XAI Methods: Insights and Foundations from a Systematic Literature Review.
+\emph{ACM Computing Surveys}, 57(12):1--40.
+
+\bibitem[Gu et~al.(2024)Gu, Jiang, Shi, Tan, Zhai, Xu, Li, Shen, Ma, Liu, Wang, Zhang, Wang, Gao, Ni, and Guo]{gu2024llmjudge}
+Jiachen Gu, Xiaofeng Jiang, Zhen Shi, Han Tan, Xiaoyi Zhai, Chang Xu,
+Wei Li, Yutong Shen, Shiyang Ma, Hongwei Liu, Sheng Wang, Kai Zhang,
+Yifei Wang, Wei Gao, Lionel Ni, and Jun Guo.
+2024.
+A Survey on LLM-as-a-Judge.
+\emph{arXiv preprint arXiv:2411.15594}.
+
+\bibitem[Hedstrom et~al.(2023)Hedstrom, Weber, Bareeva, Krakowczyk, Motzkus, Samek, Lapuschkin, and Hohne]{hedstrom2023quantus}
+Anna Hedstrom, Leander Weber, Dilyara Bareeva, Daniel Krakowczyk,
+Franz Motzkus, Wojciech Samek, Sebastian Lapuschkin, and Marina M.-C. Hohne.
+2023.
+Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond.
+\emph{Journal of Machine Learning Research}, 24:1--11.
+
+\bibitem[Kadir et~al.(2023)Kadir, Mosavi, and Sonntag]{kadir2023metrics}
+Md Abdul Kadir, Amir Mosavi, and Daniel Sonntag.
+2023.
+Evaluation Metrics for XAI: A Review, Taxonomy, and Practical Applications.
+In \emph{Proceedings of the 2023 IEEE 27th International Conference on Intelligent Engineering Systems}, 111--124.
+
+\bibitem[Longo et~al.(2024)Longo, Brcic, Cabitza, Choi, Confalonieri, Del Ser, Guidotti, Hayashi, Herrera, Holzinger, Jiang, Khosravi, Lecue, Malgieri, Paez, Samek, Schneider, Speith, and Stumpf]{longo2024manifesto}
+Luca Longo, Mario Brcic, Federico Cabitza, Jaeho Choi, Roberto Confalonieri,
+Javier Del Ser, Riccardo Guidotti, Yuki Hayashi, Francisco Herrera,
+Andreas Holzinger, Renzhe Jiang, Hassan Khosravi, Freddy Lecue,
+Gianclaudio Malgieri, Angel Paez, Wojciech Samek, Johannes Schneider,
+Timon Speith, and Simone Stumpf.
+2024.
+Explainable artificial intelligence (XAI) 2.0: A manifesto of open challenges and interdisciplinary research directions.
+\emph{Information Fusion}, 106:102301.
+
+\bibitem[Lundberg and Lee(2017)]{lundberg2017unified}
+Scott M. Lundberg and Su-In Lee.
+2017.
+A Unified Approach to Interpreting Model Predictions.
+In \emph{Advances in Neural Information Processing Systems}, volume 30,
+4765--4774.
+
+\bibitem[Mothilal et~al.(2020)Mothilal, Sharma, and Tan]{mothilal2020dice}
+Ramaravind K. Mothilal, Amit Sharma, and Chenhao Tan.
+2020.
+Explaining machine learning classifiers through diverse counterfactual explanations.
+In \emph{Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency}, 607--617.
+
+\bibitem[Pawlicki et~al.(2024)Pawlicki, Pawlicka, Uccello, Szelest, D'Antonio, Kozik, and Choras]{pawlicki2024multiple}
+Marek Pawlicki, Aleksandra Pawlicka, Federica Uccello, Sebastian Szelest,
+Salvatore D'Antonio, Rafal Kozik, and Michal Choras.
+2024.
+Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination.
+\emph{Neurocomputing}, 602:128282.
+
+\bibitem[Proszewska et~al.(2025)Proszewska, Danel, and Rymarczyk]{proszewska2025bxaic}
+Magdalena Proszewska, Tomasz Danel, and Dawid Rymarczyk.
+2025.
+B-XAIC Dataset: Benchmarking Explainable AI for Graph Neural Networks Using Chemical Data.
+\emph{arXiv preprint arXiv:2505.22252}.
+
+\bibitem[Retzlaff et~al.(2024)Retzlaff, Angerschmid, Saranti, Schneeberger, Rottger, Muller, and Holzinger]{retzlaff2024posthoc}
+Christoph O. Retzlaff, Anna Angerschmid, Alexandra Saranti, Dominik Schneeberger,
+Richard Rottger, Heimo Muller, and Andreas Holzinger.
+2024.
+Post-hoc vs ante-hoc explanations: xAI design guidelines for data scientists.
+\emph{Cognitive Systems Research}, 86:101243.
+
+\bibitem[Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin]{ribeiro2016why}
+Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+2016.
+Why Should I Trust You?: Explaining the Predictions of Any Classifier.
+In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 1135--1144.
+
+\bibitem[Rudin(2019)]{rudin2019stop}
+Cynthia Rudin.
+2019.
+Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead.
+\emph{Nature Machine Intelligence}, 1(5):206--215.
+
+\bibitem[Wu et~al.(2025)Wu, Kaushik, Li, Bauer, and Onoue]{wu2025userperceptions}
+Xinru Wu, Rohan Kaushik, Wenxin Li, Lujo Bauer, and Kenta Onoue.
+2025.
+User perceptions vs. proxy LLM judges: Privacy and helpfulness in LLM responses to privacy-sensitive scenarios.
+\emph{arXiv preprint arXiv:2510.20721}.
+
+\bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li, Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zihao Wu,
+Yuxin Zhuang, Zhiruo Lin, Zhuohan Li, Dacheng Li, Eric P. Xing,
+Hao Zhang, Joseph E. Gonzalez, and Ion Stoica.
+2023.
+Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.
+In \emph{Advances in Neural Information Processing Systems 36: Datasets and Benchmarks Track}.
+
+\bibitem[Zheng et~al.(2025)Zheng, Shirani, Chen, Lin, Cheng, Guo, and Luo]{zheng2025ffidelity}
+Xu Zheng, Farhad Shirani, Zhuomin Chen, Chaohao Lin, Wei Cheng,
+Wenbo Guo, and Dongsheng Luo.
+2025.
+F-Fidelity: A Robust Framework for Faithfulness Evaluation of Explainable AI.
+In \emph{International Conference on Learning Representations}.
+
+\bibitem[Zhou et~al.(2025)Zhou, Xie, Li, Zhan, Song, Yang, Espinoza, Welton, Mai, Jin, Xu, Chung, Xing, Tsai, Schaffer, Shi, Liu, Liu, and Zhang]{zhou2025medthink}
+Shuyi Zhou, Weijia Xie, Jie Li, Zijie Zhan, Mengyi Song, Haoyu Yang,
+Carlos Espinoza, Lauren Welton, Xiang Mai, Yichen Jin, Zhenzhen Xu,
+Yu-Han Chung, Yuhui Xing, Ming-Han Tsai, Eric Schaffer, Ya Shi,
+Ning Liu, Zhiyong Liu, and Rui Zhang.
+2025.
+Automating expert-level medical reasoning evaluation of large language models.
+\emph{npj Digital Medicine}, 9(1):34.
+
+\end{thebibliography}
+
+\end{document}
