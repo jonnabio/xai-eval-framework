@@ -17,6 +17,11 @@ echo "Starting Managed Experiment Runner at $(date)" | tee -a "$LOG_FILE"
 echo "Max CPU Load: $MAX_LOAD | Min Free Mem: $MIN_MEM MB" | tee -a "$LOG_FILE"
 echo "==========================================================" | tee -a "$LOG_FILE"
 
+# Start background sync daemon
+bash scripts/auto_push.sh >> logs/auto_push.log 2>&1 &
+SYNC_PID=$!
+echo "Started background Git sync daemon (PID: $SYNC_PID)" | tee -a "$LOG_FILE"
+
 # Function to check resources
 wait_for_resources() {
     while true; do
@@ -84,3 +89,9 @@ done
 echo "==========================================================" | tee -a "$LOG_FILE"
 echo "Managed Runner finished at $(date)" | tee -a "$LOG_FILE"
 echo "==========================================================" | tee -a "$LOG_FILE"
+
+# Cleanup sync process
+if [ -n "$SYNC_PID" ]; then
+    kill $SYNC_PID
+    echo "Stopped background Git sync daemon."
+fi
