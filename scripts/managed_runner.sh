@@ -5,6 +5,7 @@
 VENV_PYTHON=".venv/bin/python3"
 CONFIG_DIR="configs/experiments/exp2_scaled"
 LOG_FILE="logs/managed_runner.log"
+RESULTS_PATH="experiments/exp2_scaled/results"
 MAX_LOAD=10.0
 MIN_MEM=6000
 REPO_DIR=$(pwd)
@@ -60,9 +61,27 @@ for EXP_NAME in $MISSING_LIST; do
 
     echo "----------------------------------------------------------" | tee -a "$LOG_FILE"
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] Starting experiment: $EXP_NAME" | tee -a "$LOG_FILE"
-    
-    echo "[GIT] Pulling latest results from distributed queue..." | tee -a "$LOG_FILE"
-    git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)
+
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [ -z "$CURRENT_BRANCH" ]; then
+        echo "[ERROR] Failed to resolve current branch. Skipping $EXP_NAME." | tee -a "$LOG_FILE"
+        continue
+    fi
+
+    echo "[GIT] Fetching latest queue state for $RESULTS_PATH..." | tee -a "$LOG_FILE"
+    if git fetch origin "$CURRENT_BRANCH" >> "$LOG_FILE" 2>&1; then
+        if ! git diff --quiet HEAD "origin/$CURRENT_BRANCH" -- "$RESULTS_PATH"; then
+            if git restore --source "origin/$CURRENT_BRANCH" --staged --worktree -- "$RESULTS_PATH" >> "$LOG_FILE" 2>&1; then
+                echo "[GIT] Updated local result queue from origin/$CURRENT_BRANCH." | tee -a "$LOG_FILE"
+            else
+                echo "[WARN] Failed to refresh $RESULTS_PATH from origin/$CURRENT_BRANCH." | tee -a "$LOG_FILE"
+            fi
+        else
+            echo "[GIT] Local result queue already matches origin/$CURRENT_BRANCH." | tee -a "$LOG_FILE"
+        fi
+    else
+        echo "[WARN] Fetch failed; continuing with local queue state." | tee -a "$LOG_FILE"
+    fi
     
     wait_for_resources
     
@@ -75,9 +94,18 @@ for EXP_NAME in $MISSING_LIST; do
         
         # Automatic Git Commit
         echo "[GIT] Committing results for $EXP_NAME" | tee -a "$LOG_FILE"
-        git add experiments/exp2_scaled/results/
-        git commit -m "Auto-commit: Results for $EXP_NAME"
-        git push origin $(git rev-parse --abbrev-ref HEAD)
+        git add -- "$RESULTS_PATH"
+        if [ -n "$(git status --porcelain -- "$RESULTS_PATH")" ]; then
+            if git commit -m "Auto-commit: Results for $EXP_NAME"; then
+                if ! git push origin "HEAD:$CURRENT_BRANCH"; then
+                    echo "[WARN] Push failed for $EXP_NAME; results remain committed locally." | tee -a "$LOG_FILE"
+                fi
+            else
+                echo "[WARN] Commit failed for $EXP_NAME." | tee -a "$LOG_FILE"
+            fi
+        else
+            echo "[GIT] No new result changes detected for $EXP_NAME." | tee -a "$LOG_FILE"
+        fi
     else
         echo "[FAILED] Experiment $EXP_NAME failed. Check logs." | tee -a "$LOG_FILE"
     fi
