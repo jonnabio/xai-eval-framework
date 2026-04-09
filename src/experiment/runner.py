@@ -481,6 +481,10 @@ class ExperimentRunner:
             
             instances = self.generate_instances()
             
+            # SHUFFLE INSTANCES FOR DISTRIBUTED PARALLEL EXECUTION
+            # Randomizing order reduces collision if multiple VMs process the same experiment queue.
+            instances = instances.sample(frac=1).reset_index(drop=True)
+            
             # Metadata
             self.results["experiment_metadata"] = {
                 "name": self.config.name,

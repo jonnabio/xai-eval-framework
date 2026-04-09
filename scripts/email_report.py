@@ -112,12 +112,34 @@ def generate_report():
         report_lines.append("No active experiments found in recent logs.")
         
     report_lines.append("")
+    # Summarize Overall ETA
+    # (Based on current observed rate of ~10s per instance)
+    time_per_instance = 10.0
     total_remaining = total_instances_overall - total_current_progress
-    if active_count > 0:
-        report_lines.append(f"**Remaining instances across all active runs:** {total_remaining}")
+    overall_eta_seconds = total_remaining * time_per_instance
+    
+    overall_eta_hours = overall_eta_seconds / 3600.0
+    
+    report_lines.append("### Current Summary Dashboard")
+    report_lines.append(f"**Executing File:**      {eta_details[0].split(':')[0].strip('- ') if eta_details else 'N/A'}")
+    report_lines.append(f"**Current Progress:**     {total_current_progress} / {total_instances_overall} ({progress_percentage:.2f}%)")
+    report_lines.append(f"**Total Remaining:**      {total_remaining} instances")
+    report_lines.append(f"**Estimated Time:**       ~{overall_eta_hours:.1f} hours left")
+    report_lines.append(f"**Status:**               🚀 Running (3 workers)")
+    report_lines.append("")
+    
+    report_lines.append("### Instance-Level Breakdown")
+    report_lines.append(f"Fixed (Finished Experiments):   {completed_instances_overall}")
+    report_lines.append(f"In-Flight (Pending Experiments):  {active_instances_completed}")
+    report_lines.append(f"Target Total:                   {total_instances_overall}")
+    report_lines.append("")
+    
+    report_lines.append("### Detailed Active Experiments")
+    if eta_details:
+        report_lines.extend(eta_details)
     else:
-        report_lines.append("**Overall Max ETA:** N/A")
-
+        report_lines.append("No active experiments found.")
+        
     # Git status
     report_lines.append("")
     report_lines.append("### Recent Git Activity (Last 8 Commits)")
