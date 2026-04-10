@@ -69,7 +69,7 @@ for EXP_NAME in $MISSING_LIST; do
     fi
 
     echo "[GIT] Fetching latest queue state for $RESULTS_PATH..." | tee -a "$LOG_FILE"
-    if git fetch origin "$CURRENT_BRANCH" >> "$LOG_FILE" 2>&1; then
+    if git fetch --no-progress origin "$CURRENT_BRANCH" >> "$LOG_FILE" 2>&1; then
         if ! git diff --quiet HEAD "origin/$CURRENT_BRANCH" -- "$RESULTS_PATH"; then
             if git restore --source "origin/$CURRENT_BRANCH" --staged --worktree -- "$RESULTS_PATH" >> "$LOG_FILE" 2>&1; then
                 echo "[GIT] Updated local result queue from origin/$CURRENT_BRANCH." | tee -a "$LOG_FILE"

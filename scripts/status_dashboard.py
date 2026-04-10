@@ -1,166 +1,434 @@
 #!/usr/bin/env python3
+"""
+Cross-platform terminal dashboard for XAI experiment progress.
+
+Usage:
+  python scripts/status_dashboard.py
+  python scripts/status_dashboard.py --interval 5
+  python scripts/status_dashboard.py --config-dir configs/experiments/exp2_scaled
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
 import os
-import glob
+import subprocess
+import sys
 import time
+from datetime import datetime, timedelta
+from pathlib import Path
+
+import psutil
 import yaml
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_LOG_FILE = PROJECT_ROOT / "logs" / "managed_runner.log"
+DEFAULT_CONFIG_DIR = PROJECT_ROOT / "configs" / "experiments" / "exp2_scaled"
+DEFAULT_RESULTS_DIR = PROJECT_ROOT / "experiments" / "exp2_scaled" / "results"
+
+
+def clear_screen() -> None:
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def get_load_average() -> str:
+    if hasattr(os, "getloadavg"):
+        try:
+            return f"{os.getloadavg()[0]:.2f}"
+        except OSError:
+            pass
+    return "N/A"
+
+
+def get_branch_status(project_root: Path) -> str:
+    try:
+        result = subprocess.run(
+            ["git", "status", "--short", "--branch"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        first_line = result.stdout.splitlines()[0] if result.stdout else "unknown"
+        return first_line.strip()
+    except Exception:
+        return "unknown"
+
+
+def get_last_commit(project_root: Path) -> str:
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--pretty=format:%h (%cr) %s"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        return result.stdout.strip() or "Unknown"
+    except Exception:
+        return "Unknown"
+
+
+def get_live_runner_process() -> dict | None:
+    try:
+        script = r"""
 import json
 import psutil
-import subprocess
-from datetime import datetime, timedelta
 
-# Config
-PROJECT_ROOT = "/home/jonnabio/Documents/GitHub/xai-eval-framework"
-LOG_FILE = os.path.join(PROJECT_ROOT, "logs/managed_runner.log")
-CONFIG_DIR = os.path.join(PROJECT_ROOT, "configs/experiments/exp2_scaled")
-RESULTS_DIR = os.path.join(PROJECT_ROOT, "experiments/exp2_scaled/results")
-OS_RAM_BUFFER = 2.0 # GB
+matches = []
+for proc in psutil.process_iter(["pid", "ppid", "name", "cmdline", "create_time"]):
+    try:
+        cmd = proc.info.get("cmdline") or []
+        if len(cmd) >= 3 and cmd[1] == "-m" and cmd[2] == "src.experiment.runner":
+            matches.append({
+                "pid": proc.info["pid"],
+                "ppid": proc.info["ppid"],
+                "name": proc.info["name"],
+                "cmdline": cmd,
+                "create_time": proc.info["create_time"],
+            })
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
+        continue
 
-def get_status():
-    os.chdir(PROJECT_ROOT)
-    
-    # 1. System Info
-    mem = psutil.virtual_memory()
-    available_gb = mem.available / (1024**3)
-    load = os.getloadavg()[0]
-    
-    # 2. Main Progress
-    configs = glob.glob(os.path.join(CONFIG_DIR, "*.yaml"))
-    total_configs = len(configs)
-    
-    results = glob.glob(os.path.join(RESULTS_DIR, "**/results.json"), recursive=True)
-    finished_configs = len(results)
-    
-    # 3. Instance Progress
-    total_target_instances = 0
-    for cfg_path in configs:
-        try:
-            with open(cfg_path, 'r') as f:
-                c = yaml.safe_load(f)
-                total_target_instances += c.get('sampling', {}).get('samples_per_class', 100) * 4
-        except: continue
+print(json.dumps(matches))
+"""
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        payload = json.loads(result.stdout or "[]")
+        if not payload:
+            return None
+        payload.sort(key=lambda item: item.get("create_time", 0), reverse=True)
+        proc = payload[0]
+        cmdline = proc.get("cmdline") or []
+        config_path = None
+        if "--config" in cmdline:
+            idx = cmdline.index("--config")
+            if idx + 1 < len(cmdline):
+                config_path = cmdline[idx + 1]
+        return {
+            "pid": proc.get("pid"),
+            "ppid": proc.get("ppid"),
+            "name": proc.get("name"),
+            "config": config_path,
+            "started_at": datetime.fromtimestamp(proc["create_time"]) if proc.get("create_time") else None,
+        }
+    except Exception:
+        return None
 
-    completed_instances = 0
-    for r_path in results:
-        try:
-            with open(r_path, 'r') as f:
-                d = json.load(f)
-                completed_instances += len(d.get("instance_evaluations", []))
-        except: continue
-        
-    # Active Progress
-    active_instances = 0
-    active_exps = []
-    
-    # Helper to map results folder name to config path
-    name_to_config = {}
-    for cp in configs:
-        base = os.path.basename(cp).replace(".yaml", "")
-        # Normalize: svmanchorss42n200
-        norm = base.replace("_", "").replace("-", "")
-        name_to_config[norm] = cp
 
-    instance_dirs = glob.glob(os.path.join(RESULTS_DIR, "**/instances"), recursive=True)
-    for inst_dir in sorted(instance_dirs):
-        parent = os.path.dirname(inst_dir)
-        if os.path.exists(os.path.join(parent, "results.json")):
+def get_recent_log_lines(log_file: Path, max_lines: int = 8) -> list[str]:
+    if not log_file.exists():
+        return [f"Log file not found: {log_file}"]
+
+    try:
+        with log_file.open("r", encoding="utf-8", errors="replace") as handle:
+            handle.seek(0, os.SEEK_END)
+            size = handle.tell()
+            handle.seek(max(size - 12000, 0))
+            lines = handle.readlines()
+        return [line.rstrip() for line in lines[-max_lines:]]
+    except Exception as exc:
+        return [f"Error reading log: {exc}"]
+
+
+def normalize_name(name: str) -> str:
+    return name.replace("_", "").replace("-", "")
+
+
+def load_yaml(path: Path) -> dict | None:
+    try:
+        with path.open("r", encoding="utf-8") as handle:
+            return yaml.safe_load(handle)
+    except Exception:
+        return None
+
+
+def build_config_index(config_paths: list[Path]) -> dict[str, dict]:
+    index: dict[str, dict] = {}
+    for path in config_paths:
+        cfg = load_yaml(path)
+        if not cfg:
             continue
-        
-        count = len(glob.glob(os.path.join(inst_dir, "*.json")))
+
+        name = path.stem
+        normalized = normalize_name(name)
+        index[normalized] = cfg
+    return index
+
+
+def get_target_instances(cfg: dict, default: int = 400) -> int:
+    sampling = cfg.get("sampling", {}) if isinstance(cfg, dict) else {}
+    return sampling.get("samples_per_class", 100) * 4 if sampling else default
+
+
+def discover_active_experiments(results_dir: Path, config_index: dict[str, dict]) -> tuple[int, list[dict]]:
+    active_instances = 0
+    active_experiments: list[dict] = []
+
+    instance_dirs = list(results_dir.glob("**/instances"))
+    for inst_dir in sorted(instance_dirs):
+        parent = inst_dir.parent
+        if (parent / "results.json").exists():
+            continue
+
+        count = len(list(inst_dir.glob("*.json")))
         active_instances += count
-        
-        # Folder structure check
-        rel_path = os.path.relpath(parent, RESULTS_DIR)
-        parts = rel_path.split(os.sep)
-        if len(parts) >= 3:
-            # results/<method>/seed_<seed>/n_<n>
-            method, seed, n = parts[-3], parts[-2], parts[-1]
-            
-            # Normalize display name
-            display_name = f"{method}_{seed}_{n}"
-            
-            # Match to config
-            # results-based norm: svmanchorsseed42n200
-            res_norm = display_name.replace("_", "").replace("-", "")
-            # Also try without "seed" (matching s42n200)
-            res_norm_short = res_norm.replace("seed", "s").replace("n_", "n")
-            
-            target = 400 # fallback
-            match_path = name_to_config.get(res_norm_short) or name_to_config.get(res_norm)
-            
-            if match_path:
-                   try:
-                       with open(match_path) as f:
-                           c = yaml.safe_load(f)
-                           # Usually samples_per_class * 4 quadrants
-                           target = c.get('sampling', {}).get('samples_per_class', 100) * 4
-                   except: pass
-            
-            active_exps.append({"name": display_name, "done": count, "total": target})
+
+        rel_path = parent.relative_to(results_dir)
+        parts = rel_path.parts
+        if len(parts) < 3:
+            continue
+
+        method, seed, n_value = parts[-3], parts[-2], parts[-1]
+        display_name = f"{method}_{seed}_{n_value}"
+
+        res_norm = normalize_name(display_name)
+        res_norm_short = res_norm.replace("seed", "s")
+        cfg = config_index.get(res_norm_short) or config_index.get(res_norm)
+        target = get_target_instances(cfg) if cfg else 400
+        latest_file = None
+        latest_write = None
+        if count:
+            latest_file = max(inst_dir.glob("*.json"), key=lambda p: p.stat().st_mtime, default=None)
+            latest_write = datetime.fromtimestamp(latest_file.stat().st_mtime) if latest_file else None
+
+        active_experiments.append(
+            {
+                "name": display_name,
+                "done": count,
+                "total": target,
+                "output_dir": str(parent),
+                "instances_dir": str(inst_dir),
+                "latest_file": latest_file.name if latest_file else None,
+                "latest_write": latest_write,
+            }
+        )
+
+    active_experiments.sort(
+        key=lambda item: (
+            item["latest_write"] or datetime.min,
+            item["done"],
+        ),
+        reverse=True,
+    )
+    return active_instances, active_experiments
+
+
+def get_completed_instance_count(result_files: list[Path]) -> int:
+    completed_instances = 0
+    for path in result_files:
+        try:
+            with path.open("r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+            completed_instances += len(payload.get("instance_evaluations", []))
+        except Exception:
+            continue
+    return completed_instances
+
+
+def get_recent_completed_runs(result_files: list[Path], limit: int = 5) -> list[dict]:
+    recent: list[dict] = []
+    for path in sorted(result_files, key=lambda p: p.stat().st_mtime, reverse=True)[:limit]:
+        try:
+            with path.open("r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+            recent.append(
+                {
+                    "path": str(path.parent),
+                    "name": path.parent.relative_to(path.parents[3]).as_posix(),
+                    "completed_at": datetime.fromtimestamp(path.stat().st_mtime),
+                    "instances": len(payload.get("instance_evaluations", [])),
+                }
+            )
+        except Exception:
+            recent.append(
+                {
+                    "path": str(path.parent),
+                    "name": path.parent.name,
+                    "completed_at": datetime.fromtimestamp(path.stat().st_mtime),
+                    "instances": "?",
+                }
+            )
+    return recent
+
+
+def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_file: Path) -> dict:
+    config_paths = sorted(config_dir.glob("*.yaml"))
+    result_files = sorted(results_dir.glob("**/results.json"))
+    config_index = build_config_index(config_paths)
+
+    total_target_instances = 0
+    for config_path in config_paths:
+        cfg = load_yaml(config_path)
+        if cfg:
+            total_target_instances += get_target_instances(cfg)
+
+    completed_instances = get_completed_instance_count(result_files)
+    active_instances, active_experiments = discover_active_experiments(results_dir, config_index)
 
     total_done = completed_instances + active_instances
-    pct = (total_done / total_target_instances * 100) if total_target_instances > 0 else 0
-    
-    # 4. ETA
-    remaining = total_target_instances - total_done
-    # Using 10s per instance as our observed rate
+    pct = (total_done / total_target_instances * 100) if total_target_instances else 0.0
+
+    remaining = max(total_target_instances - total_done, 0)
     eta_seconds = remaining * 10
-    eta_delta = timedelta(seconds=int(eta_seconds))
-    
-    # Git
-    try:
-        last_commit = subprocess.check_output(["git", "log", "-1", "--pretty=format:%h (%cr) %s"], text=True).strip()
-    except: last_commit = "Unknown"
+
+    mem = psutil.virtual_memory()
+    cpu_percent = psutil.cpu_percent(interval=0.1)
 
     return {
-        "mem": available_gb,
-        "load": load,
-        "total_configs": total_configs,
-        "finished_configs": finished_configs,
-        "progress_inst": f"{total_done:,} / {total_target_instances:,} ({pct:.2f}%)",
-        "active": active_exps,
-        "eta": str(eta_delta),
-        "last_git": last_commit
+        "timestamp": datetime.now(),
+        "cpu_percent": cpu_percent,
+        "mem_available_gb": mem.available / (1024**3),
+        "mem_used_percent": mem.percent,
+        "load": get_load_average(),
+        "total_configs": len(config_paths),
+        "finished_configs": len(result_files),
+        "completed_instances": completed_instances,
+        "active_instances": active_instances,
+        "total_target_instances": total_target_instances,
+        "progress_pct": pct,
+        "active": active_experiments,
+        "current_result": active_experiments[0] if active_experiments else None,
+        "recent_completed": get_recent_completed_runs(result_files),
+        "live_runner": get_live_runner_process(),
+        "eta": timedelta(seconds=int(eta_seconds)),
+        "last_git": get_last_commit(project_root),
+        "branch_status": get_branch_status(project_root),
+        "log_lines": get_recent_log_lines(log_file),
+        "log_file": str(log_file),
+        "config_dir": str(config_dir),
+        "results_dir": str(results_dir),
     }
 
-def draw(status):
-    os.system('clear')
-    print("\033[94m" + "="*70 + "\033[0m")
-    print("\033[1;37mXAI EXPERIMENT DASHBOARD\033[0m".center(70))
-    print("\033[94m" + "="*70 + "\033[0m")
-    
-    print(f" \033[1mSystem Status:\033[0m")
-    print(f" RAM Available: {status['mem']:.2f} GB  |  Load (1m): {status['load']:.2f}")
-    print(f" Workers Ready: 3 concurrent (RAM Limited)")
-    print("-" * 70)
-    
-    print(f" \033[1mOverall Progress:\033[0m")
-    print(f" Experiments Finished: {status['finished_configs']} / {status['total_configs']}")
-    print(f" Instance Progress:     \033[1;32m{status['progress_inst']}\033[0m")
-    print(f" Total ETA:             \033[1;33m~ {status['eta']} remaining\033[0m")
-    print("-" * 70)
-    
-    print(f" \033[1mActive Experiments:\033[0m")
-    if not status['active']:
-        print("  - [WAIT] Waiting for scheduler...")
-    else:
-        for exp in status['active'][:5]: # Show top 5
-            epct = (exp['done'] / exp['total'] * 100)
-            bar_len = 20
-            filled = int(epct / 100 * bar_len)
-            bar = "█" * filled + "░" * (bar_len - filled)
-            print(f"  {exp['name'][:30]:<30} [{bar}] {exp['done']}/{exp['total']} ({epct:.1f}%)")
-    
-    print("-" * 70)
-    print(f" \033[1mLast Git Activity:\033[0m")
-    print(f" {status['last_git']}")
-    print("\033[94m" + "="*70 + "\033[0m")
-    print(f" Update Cycle: 5s | Press Ctrl+C to exit dashboard (Runner will continue)")
 
-if __name__ == "__main__":
+def bar(done: int, total: int, width: int = 24) -> str:
+    if total <= 0:
+        return "-" * width
+    pct = max(0.0, min(done / total, 1.0))
+    filled = int(round(pct * width))
+    return "#" * filled + "." * (width - filled)
+
+
+def draw(status: dict, interval: int) -> None:
+    clear_screen()
+
+    print("=" * 88)
+    print("XAI EXPERIMENT DASHBOARD".center(88))
+    print("=" * 88)
+    print(f"Updated: {status['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Git: {status['branch_status']}")
+    print(f"Last Commit: {status['last_git']}")
+    print("-" * 88)
+    print("System")
+    print(
+        f"CPU: {status['cpu_percent']:.1f}%  |  RAM Free: {status['mem_available_gb']:.2f} GB"
+        f"  |  RAM Used: {status['mem_used_percent']:.1f}%  |  Load: {status['load']}"
+    )
+    print("-" * 88)
+    print("Overall Progress")
+    print(f"Configs Finished: {status['finished_configs']} / {status['total_configs']}")
+    print(
+        "Instances: "
+        f"{status['completed_instances'] + status['active_instances']:,} / "
+        f"{status['total_target_instances']:,} ({status['progress_pct']:.2f}%)"
+    )
+    print(f"ETA: ~ {status['eta']} remaining")
+    print("-" * 88)
+    print("Active Experiments")
+
+    if not status["active"]:
+        print("Waiting for scheduler or no in-progress instance folders detected.")
+    else:
+        for exp in status["active"][:8]:
+            pct = (exp["done"] / exp["total"] * 100) if exp["total"] else 0.0
+            age_min = (
+                f"{((status['timestamp'] - exp['latest_write']).total_seconds() / 60):.1f}m"
+                if exp.get("latest_write")
+                else "n/a"
+            )
+            print(
+                f"{exp['name'][:36]:<36} "
+                f"[{bar(exp['done'], exp['total'])}] "
+                f"{exp['done']}/{exp['total']} ({pct:5.1f}%) last:{age_min}"
+            )
+
+    print("-" * 88)
+    print("Live Worker")
+    runner = status.get("live_runner")
+    if not runner:
+        print("No active src.experiment.runner process detected.")
+    else:
+        started_at = runner["started_at"].strftime("%Y-%m-%d %H:%M:%S") if runner.get("started_at") else "unknown"
+        config = runner.get("config") or "unknown"
+        print(f"PID: {runner['pid']}  |  Started: {started_at}")
+        print(f"Config: {config}"[:88])
+
+    print("-" * 88)
+    print("Current Results")
+    current = status.get("current_result")
+    if not current:
+        print("No active result directory detected.")
+    else:
+        latest_age = (
+            f"{((status['timestamp'] - current['latest_write']).total_seconds() / 60):.1f} min ago"
+            if current.get("latest_write")
+            else "n/a"
+        )
+        print(f"Run: {current['name']}")
+        print(f"Output: {current['output_dir']}"[:88])
+        print(
+            f"Instances Complete: {current['done']} / {current['total']}  |  "
+            f"Latest Write: {latest_age}  |  Latest File: {current.get('latest_file') or 'n/a'}"
+        )
+
+    print("-" * 88)
+    print("Recent Completed Runs")
+    if not status["recent_completed"]:
+        print("No completed results.json files found.")
+    else:
+        for item in status["recent_completed"]:
+            completed_at = item["completed_at"].strftime("%Y-%m-%d %H:%M:%S")
+            print(
+                f"{completed_at}  {str(item['instances']).rjust(4)} inst  {item['name']}"[:88]
+            )
+
+    print("-" * 88)
+    print(f"Recent Log Tail: {status['log_file']}")
+    for line in status["log_lines"]:
+        print(line[:88])
+    print("=" * 88)
+    print(f"Refresh: {interval}s | Press Ctrl+C to exit")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Cross-platform XAI experiment dashboard")
+    parser.add_argument("--interval", type=int, default=5, help="Refresh interval in seconds")
+    parser.add_argument("--config-dir", default=str(DEFAULT_CONFIG_DIR), help="Directory containing config YAMLs")
+    parser.add_argument("--results-dir", default=str(DEFAULT_RESULTS_DIR), help="Directory containing experiment results")
+    parser.add_argument("--log-file", default=str(DEFAULT_LOG_FILE), help="Managed runner log file")
+    args = parser.parse_args()
+
+    project_root = PROJECT_ROOT
+    config_dir = Path(args.config_dir).resolve()
+    results_dir = Path(args.results_dir).resolve()
+    log_file = Path(args.log_file).resolve()
+
     try:
         while True:
-            s = get_status()
-            draw(s)
-            time.sleep(5)
+            status = collect_status(project_root, config_dir, results_dir, log_file)
+            draw(status, args.interval)
+            time.sleep(args.interval)
     except KeyboardInterrupt:
-        print("\n\nDashboard exited. experiments are still running in the background.")
+        print("\nDashboard exited. Background experiments continue running.")
+        return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,8 +1,8 @@
 #!/bin/bash
-# auto_push.sh - Periodic git sync for experiment results and logs only.
+# auto_push.sh - Periodic git sync for experiment results only.
 
 INTERVAL=900
-TRACKED_PATHS=("experiments/exp2_scaled/results" "logs")
+TRACKED_PATHS=("experiments/exp2_scaled/results")
 
 while true; do
     echo "[$(date)] Syncing progress with Git pool..."
@@ -17,23 +17,23 @@ while true; do
     git add -- "${TRACKED_PATHS[@]}"
 
     if [ -n "$(git status --porcelain -- "${TRACKED_PATHS[@]}")" ]; then
-        if ! git commit -m "Auto-sync queue: Results and logs checkpoint"; then
-            echo "[$(date)] Commit failed; skipping pull/push for this cycle."
+        if ! git commit -m "Auto-sync queue: Results checkpoint"; then
+            echo "[$(date)] Commit failed; skipping fetch/push for this cycle."
             sleep "$INTERVAL"
             continue
         fi
     else
-        echo "[$(date)] No result/log changes to commit."
+        echo "[$(date)] No result changes to commit."
     fi
 
-    if ! git pull --rebase --autostash origin "$CURRENT_BRANCH"; then
-        echo "[$(date)] Pull --rebase failed; manual review may be required."
+    if ! git fetch --no-progress origin "$CURRENT_BRANCH"; then
+        echo "[$(date)] Fetch failed; manual review may be required."
         sleep "$INTERVAL"
         continue
     fi
 
-    if ! git push origin "$CURRENT_BRANCH"; then
-        echo "[$(date)] Push failed; changes remain local for the next sync cycle."
+    if ! git push --no-progress origin "$CURRENT_BRANCH"; then
+        echo "[$(date)] Push failed, likely due to remote divergence; changes remain local for the next sync cycle."
     else
         echo "[$(date)] Sync complete."
     fi
