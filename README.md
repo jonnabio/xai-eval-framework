@@ -65,6 +65,8 @@ xai-eval-framework/
 | :--- | :--- | :--- |
 | **[EXP1: Adult Baseline](experiments/exp1_adult/README.md)** | Establishes a robust Random Forest baseline on census data to serve as a target for LIME/SHAP benchmarking. | ✅ Complete |
 | **EXP2: Semantic Eval** | (Planned) Evaluating natural language explanations using LLMs. | 📅 Pending |
+| **[Experiment Design Hub](docs/experiments/README.md)** | Single-point documentation hub for experiment families, scope, and artifact boundaries. | Active |
+| **[EXP3: Cross-Dataset Validation](docs/experiments/exp3_cross_dataset/README.md)** | Minimal external-validation package to test whether key Adult-benchmark findings generalize to additional tabular datasets. | Proposed |
 
 ## 🔗 Integration Status
 Phase 1 integration is complete and under review:
@@ -91,6 +93,9 @@ The backend is configured for deployment on **Render.com** (Free Tier).
 ## 📚 Documentation
 
 - [**Config Schema**](docs/config_schema.md): Detailed reference for configuration parameters.
+- [**Experiment Design Hub**](docs/experiments/README.md): Single-point entry for experiment design across the project.
+- [**Experiments Catalog**](docs/experiments/EXPERIMENTS_CATALOG.md): Lightweight registry of experiment families and artifact roots.
+- [**EXP3 Cross-Dataset Validation**](docs/experiments/exp3_cross_dataset/README.md): Thesis-focused design for the smallest defensible external-validation package.
 - [**Branching Strategy**](BRANCHING.md): Guide to contribution workflow.
 
 ## 📝 Citation

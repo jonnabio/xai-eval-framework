@@ -1,0 +1,32 @@
+experiment_set: exp3_cross_dataset
+status: proposed
+thesis_role: external_validation
+total_configs: 24
+dimensions:
+  datasets:
+  - breast_cancer
+  - german_credit
+  models:
+  - rf
+  - xgb
+  explainers:
+  - shap
+  - anchors
+  seeds:
+  - 42
+  - 123
+  - 456
+  sample_sizes:
+  - 100
+estimated_instances: 9600
+stability_perturbations: 15
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+naming_pattern: exp3_<dataset>_<model>_<explainer>_s<seed>_n100
+config_root: configs/experiments/exp3_cross_dataset/
+result_root: experiments/exp3_cross_dataset/results/
