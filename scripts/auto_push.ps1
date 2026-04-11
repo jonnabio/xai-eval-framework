@@ -24,8 +24,10 @@ $GitExe = if (Test-Path "C:\Program Files\Git\cmd\git.exe") {
     (Get-Command git -ErrorAction Stop).Source
 }
 
-$Interval = 900 # 15 minutes
+$CommitInterval = 900 # 15 minutes
+$PushInterval = 21600 # 6 hours
 $LogFile = "logs\auto_push.log"
+$LastPushFile = "logs\auto_push_last_push.txt"
 $TrackedPaths = @(
     "experiments/exp2_scaled/results"
 )
@@ -156,8 +158,24 @@ function Get-GitStatusPorcelain {
     return @($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
+function Get-LastPushTime {
+    if (-not (Test-Path $LastPushFile)) {
+        return $null
+    }
+
+    try {
+        return [datetime](Get-Content -Path $LastPushFile -ErrorAction Stop | Select-Object -First 1)
+    } catch {
+        return $null
+    }
+}
+
+function Set-LastPushTime {
+    (Get-Date).ToString("o") | Out-File -FilePath $LastPushFile -Encoding utf8
+}
+
 while ($true) {
-    Write-Log "Syncing progress with Git pool..."
+    Write-Log "Checkpointing progress with Git pool..."
 
     $CycleOk = Invoke-WithGitMutex -Reason "auto_push_cycle" -Action {
         $BranchResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "HEAD")
@@ -187,17 +205,34 @@ while ($true) {
             Write-Log "No result changes to commit."
         }
 
+        $LastPushTime = Get-LastPushTime
+        $PushDue = $null -eq $LastPushTime -or ((Get-Date) - $LastPushTime).TotalSeconds -ge $PushInterval
+
+        if (-not $PushDue) {
+            $SecondsUntilPush = [math]::Max(0, $PushInterval - [int]((Get-Date) - $LastPushTime).TotalSeconds)
+            Write-Log "Push not due yet. Next push window in about $SecondsUntilPush seconds."
+            return $true
+        }
+
+        Write-Log "Push window reached; fetching and rebasing before push."
         $FetchExitCode = Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", $CurrentBranch)
         if ($FetchExitCode -ne 0) {
-            Write-Log "Fetch failed; manual review may be required."
+            Write-Log "Fetch failed; changes remain committed locally."
             return $false
         }
 
-        $PushExitCode = Invoke-GitLogged -Arguments @("push", "--no-progress", "origin", $CurrentBranch)
+        $RebaseExitCode = Invoke-GitLogged -Arguments @("-c", "core.editor=true", "rebase", "origin/$CurrentBranch")
+        if ($RebaseExitCode -ne 0) {
+            Write-Log "Rebase failed; changes remain committed locally and need manual reconciliation."
+            return $false
+        }
+
+        $PushExitCode = Invoke-GitLogged -Arguments @("push", "--no-progress", "origin", "HEAD:$CurrentBranch")
         if ($PushExitCode -ne 0) {
-            Write-Log "Push failed, likely due to remote divergence; changes remain local for the next sync cycle."
+            Write-Log "Push failed; changes remain committed locally for the next push window."
         } else {
             Write-Log "Sync complete."
+            Set-LastPushTime
         }
 
         return $true
@@ -207,6 +242,6 @@ while ($true) {
         Write-Log "Skipped sync cycle because Git mutex was unavailable."
     }
 
-    Write-Log "Sleeping for $Interval seconds..."
-    Start-Sleep -Seconds $Interval
+    Write-Log "Sleeping for $CommitInterval seconds..."
+    Start-Sleep -Seconds $CommitInterval
 }

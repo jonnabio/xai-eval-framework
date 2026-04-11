@@ -446,10 +446,7 @@ try {
                 if ($PendingResultChanges.Count -gt 0) {
                     $CommitExitCode = Invoke-GitLogged -Arguments @("commit", "-m", "Auto-commit: Results for $ExpName")
                     if ($CommitExitCode -eq 0) {
-                        $PushExitCode = Invoke-GitLogged -Arguments @("push", "origin", "HEAD:$CurrentBranch")
-                        if ($PushExitCode -ne 0) {
-                            Write-Log "[WARN] Push failed for $ExpName; results remain committed locally."
-                        }
+                        Write-Log "[GIT] Results committed locally for $ExpName. Push is handled by auto_push.ps1 on the 6-hour schedule."
                     } else {
                         Write-Log "[WARN] Commit failed for $ExpName."
                     }
