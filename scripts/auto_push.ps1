@@ -124,21 +124,34 @@ function Get-GitCommandOutput {
     if (Test-Path $StdOutPath) { Remove-Item $StdOutPath -Force -ErrorAction SilentlyContinue }
     if (Test-Path $StdErrPath) { Remove-Item $StdErrPath -Force -ErrorAction SilentlyContinue }
 
-    $Process = Start-Process `
-        -FilePath $GitExe `
-        -ArgumentList (ConvertTo-ProcessArgumentString -Arguments $Arguments) `
-        -WorkingDirectory (Get-Location).Path `
-        -WindowStyle Hidden `
-        -RedirectStandardOutput $StdOutPath `
-        -RedirectStandardError $StdErrPath `
-        -Wait `
-        -PassThru
+    $PreviousOptionalLocks = $env:GIT_OPTIONAL_LOCKS
+    $env:GIT_OPTIONAL_LOCKS = "0"
+    try {
+        $Process = Start-Process `
+            -FilePath $GitExe `
+            -ArgumentList (ConvertTo-ProcessArgumentString -Arguments $Arguments) `
+            -WorkingDirectory (Get-Location).Path `
+            -WindowStyle Hidden `
+            -RedirectStandardOutput $StdOutPath `
+            -RedirectStandardError $StdErrPath `
+            -Wait `
+            -PassThru
+    } finally {
+        $env:GIT_OPTIONAL_LOCKS = $PreviousOptionalLocks
+    }
 
     $Output = if (Test-Path $StdOutPath) { Get-Content -Path $StdOutPath -ErrorAction SilentlyContinue } else { @() }
-    foreach ($Path in @($StdOutPath, $StdErrPath)) {
-        if (Test-Path $Path) {
-            Remove-Item -Path $Path -Force -ErrorAction SilentlyContinue
+    if ($Process.ExitCode -ne 0) {
+        Write-Log "[WARN] Git command failed: git $(ConvertTo-ProcessArgumentString -Arguments $Arguments)"
+        foreach ($Path in @($StdOutPath, $StdErrPath)) {
+            if (Test-Path $Path) {
+                Get-Content -Path $Path -ErrorAction SilentlyContinue | Out-File -FilePath $LogFile -Append
+            }
         }
+    }
+
+    foreach ($Path in @($StdOutPath, $StdErrPath)) {
+        Remove-Item -Path $Path -Force -ErrorAction SilentlyContinue
     }
 
     return @{
@@ -187,7 +200,11 @@ while ($true) {
 
         # Stage only experiment outputs. This avoids sweeping in
         # locally retrained model binaries, config edits, or other workspace changes.
-        Invoke-GitLogged -Arguments @("add", "--", $TrackedPaths[0]) | Out-Null
+        $AddExitCode = Invoke-GitLogged -Arguments @("add", "--", $TrackedPaths[0])
+        if ($AddExitCode -ne 0) {
+            Write-Log "Git add failed; preserving files and retrying next cycle."
+            return $false
+        }
 
         $PendingChanges = Get-GitStatusPorcelain -TrackedPath $TrackedPaths[0]
         if ($null -eq $PendingChanges) {

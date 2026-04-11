@@ -100,15 +100,21 @@ function Get-GitCommandOutput {
     if (Test-Path $StdOutPath) { Remove-Item $StdOutPath -Force -ErrorAction SilentlyContinue }
     if (Test-Path $StdErrPath) { Remove-Item $StdErrPath -Force -ErrorAction SilentlyContinue }
 
-    $Process = Start-Process `
-        -FilePath $GitExe `
-        -ArgumentList (ConvertTo-ProcessArgumentString -Arguments $Arguments) `
-        -WorkingDirectory (Get-Location).Path `
-        -WindowStyle Hidden `
-        -RedirectStandardOutput $StdOutPath `
-        -RedirectStandardError $StdErrPath `
-        -Wait `
-        -PassThru
+    $PreviousOptionalLocks = $env:GIT_OPTIONAL_LOCKS
+    $env:GIT_OPTIONAL_LOCKS = "0"
+    try {
+        $Process = Start-Process `
+            -FilePath $GitExe `
+            -ArgumentList (ConvertTo-ProcessArgumentString -Arguments $Arguments) `
+            -WorkingDirectory (Get-Location).Path `
+            -WindowStyle Hidden `
+            -RedirectStandardOutput $StdOutPath `
+            -RedirectStandardError $StdErrPath `
+            -Wait `
+            -PassThru
+    } finally {
+        $env:GIT_OPTIONAL_LOCKS = $PreviousOptionalLocks
+    }
 
     $Output = if (Test-Path $StdOutPath) { Get-Content -Path $StdOutPath -ErrorAction SilentlyContinue } else { @() }
     if ($Process.ExitCode -ne 0) {
@@ -435,7 +441,12 @@ try {
             # Automatic Git Commit
             "[GIT] Committing results for $ExpName" | Out-File -FilePath $LogFile -Append
             Invoke-WithGitMutex -Reason "managed_runner_commit" -Action {
-                Invoke-GitLogged -Arguments @("add", "--", $ResultsPath) | Out-Null
+                $AddExitCode = Invoke-GitLogged -Arguments @("add", "--", $ResultsPath)
+                if ($AddExitCode -ne 0) {
+                    Write-Log "[WARN] Git add failed for $ExpName; preserving files for the next sync cycle."
+                    return
+                }
+
                 $PendingResultChanges = Get-GitStatusPorcelain -TrackedPath $ResultsPath
 
                 if ($null -eq $PendingResultChanges) {
