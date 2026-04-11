@@ -37,6 +37,23 @@ git pull --rebase origin main
 pip install -r requirements.txt
 ```
 
+Set a stable worker identity once per workstation. Use a different value on
+each physical machine:
+
+```powershell
+[Environment]::SetEnvironmentVariable("XAI_WORKER_ID", "workstation-a", "User")
+$env:XAI_WORKER_ID = "workstation-a"
+```
+
+The worker writes and pushes to:
+
+```text
+results/<XAI_WORKER_ID>
+```
+
+For example, `workstation-a` pushes to `results/workstation-a`. This keeps
+live checkpoint commits from colliding with the other workstations.
+
 ## Validate Model Artifacts
 
 The worker depends on healthy model binaries. At minimum, verify the models load locally:
@@ -70,6 +87,11 @@ Start-Process powershell -ArgumentList "-NoProfile -WindowStyle Hidden -Executio
 This starts:
 - the managed experiment runner
 - the periodic result-sync daemon
+
+At startup, `managed_runner.ps1` switches the repository from `main` to the
+worker result branch (`results/<worker_id>`). The sync daemon commits every
+15 minutes and pushes that worker branch every 6 hours. It does **not** rebase
+while experiments are running.
 
 ## Monitor Worker
 
@@ -112,19 +134,44 @@ Get-ChildItem .\experiments\exp2_scaled\results\rf_dice\seed_456\n_50\instances 
 
 The runner also logs progress snapshots based on instance-file growth.
 
+Each worker also writes manifest files under:
+
+```text
+experiments/exp2_scaled/worker_manifests/<worker_id>/
+```
+
+The most useful file is:
+
+```text
+experiments/exp2_scaled/worker_manifests/<worker_id>/current.json
+```
+
+It records the active experiment, status, result branch, output directory,
+instance count, target count, latest checkpoint time, and whether
+`results.json` exists.
+
 ## Important Operational Notes
 
-1. Auto-commit is implemented on Windows.
+1. Auto-commit is implemented on Windows worker branches.
    - `managed_runner.ps1` attempts a per-experiment results commit.
    - `auto_push.ps1` creates periodic local checkpoint commits.
 
-2. Auto-push may still fail if the local branch is behind `origin/main`.
+2. Auto-push targets `results/<worker_id>`, not `main`.
+   - This avoids rebase conflicts on `main` during active experiments.
+   - Final aggregation into `main` should be done by a separate collector step.
+
+3. Auto-push may still fail if the worker branch was changed elsewhere.
    - This does not mean the experiment stopped.
    - It means results were committed locally but not pushed yet.
+   - Do not rebase during an active experiment; inspect and reconcile later.
 
-3. Long-running experiments can stay quiet for a while.
+4. Long-running experiments can stay quiet for a while.
    - Check the dashboard’s `Current Results` and `Live Worker` sections.
    - Check the latest write time in the active `instances/` folder.
+   - Check the worker manifest `current.json`.
+
+5. Do not run two workstations with the same `XAI_WORKER_ID`.
+   - If two machines share the same worker branch, push conflicts can return.
 
 ## If the Worker Stops
 
@@ -144,6 +191,54 @@ If the worker is stale, restart it:
 Start-Process powershell -ArgumentList "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File .\scripts\managed_runner.ps1"
 ```
 
+## Updating Existing Workers Safely
+
+Use this sequence on every workstation before adopting this branch-based
+workflow. It preserves any local result files before pulling script updates:
+
+```powershell
+cd C:\Users\jonna\Github\xai-eval-framework
+
+# 1. Stop local worker processes only.
+Get-CimInstance Win32_Process | Where-Object {
+    $_.CommandLine -like '*managed_runner.ps1*' -or
+    $_.CommandLine -like '*auto_push.ps1*' -or
+    $_.CommandLine -like '*src.experiment.runner*'
+} | ForEach-Object {
+    Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue
+}
+
+# 2. Back up local uncommitted result files outside Git history.
+$stamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$backup = "outputs\git_safety_backups\$stamp-before-worker-branch-update"
+New-Item -ItemType Directory -Path $backup -Force | Out-Null
+git status --porcelain -- experiments/exp2_scaled/results | Out-File "$backup\git-status-results.txt"
+Compress-Archive -Path "experiments\exp2_scaled\results" -DestinationPath "$backup\results.zip" -Force
+
+# 3. Commit local result changes to a safety branch if any exist.
+$safetyBranch = "safety/$env:COMPUTERNAME-$stamp-before-worker-branch-update"
+git switch -c $safetyBranch
+git add -- experiments/exp2_scaled/results experiments/exp2_scaled/worker_manifests
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) {
+    git commit -m "Safety checkpoint before worker branch update"
+    git push -u origin HEAD
+}
+
+# 4. Pull the updated workflow from main.
+git fetch origin
+git switch main
+git pull --ff-only origin main
+
+# 5. Set a unique worker id for this machine, then launch.
+[Environment]::SetEnvironmentVariable("XAI_WORKER_ID", "workstation-a", "User")
+$env:XAI_WORKER_ID = "workstation-a"
+Start-Process powershell -ArgumentList "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File .\scripts\managed_runner.ps1"
+```
+
+Change `workstation-a` to a unique value on each machine, such as
+`workstation-b` and `workstation-c`.
+
 ## Suggested LLM Prompt For Another Windows Machine
 
 Use this exact instruction:
@@ -155,6 +250,7 @@ Work only from the repository root.
 Before launching the worker, verify the model binaries load successfully.
 Then start scripts/managed_runner.ps1 in the background and monitor it with scripts/status_dashboard.ps1.
 If Git push fails due to remote divergence, do not stop the worker; report that results are committing locally but not pushing.
+Use a unique XAI_WORKER_ID on this machine so it pushes to its own results/<worker_id> branch.
 ```
 
 ## Document To Reference

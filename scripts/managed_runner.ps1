@@ -41,6 +41,35 @@ if (-not (Test-Path -Path $TempLogDir)) {
     New-Item -ItemType Directory -Path $TempLogDir | Out-Null
 }
 
+function Get-WorkerId {
+    $RawWorkerId = if (-not [string]::IsNullOrWhiteSpace($env:XAI_WORKER_ID)) {
+        $env:XAI_WORKER_ID
+    } elseif (-not [string]::IsNullOrWhiteSpace($env:COMPUTERNAME)) {
+        $env:COMPUTERNAME
+    } else {
+        [System.Net.Dns]::GetHostName()
+    }
+
+    $WorkerId = ($RawWorkerId.ToLowerInvariant() -replace '[^a-z0-9._-]', '-').Trim('-')
+    if ([string]::IsNullOrWhiteSpace($WorkerId)) {
+        return "windows-worker"
+    }
+
+    return $WorkerId
+}
+
+$WorkerId = Get-WorkerId
+$ResultsBranch = if (-not [string]::IsNullOrWhiteSpace($env:XAI_RESULTS_BRANCH)) {
+    $env:XAI_RESULTS_BRANCH
+} else {
+    "results/$WorkerId"
+}
+$ManifestRoot = "experiments/exp2_scaled/worker_manifests/$WorkerId"
+$TrackedPaths = @(
+    $ResultsPath,
+    "experiments/exp2_scaled/worker_manifests"
+)
+
 function Write-Log {
     param([string]$Message)
     $CurrentDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -189,6 +218,40 @@ function Get-GitStatusPorcelain {
     return ,@($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
+function Ensure-ResultsBranch {
+    $BranchResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "HEAD")
+    $CurrentBranch = @($BranchResult.Output)[-1]
+    if ($BranchResult.ExitCode -ne 0 -or [string]::IsNullOrWhiteSpace($CurrentBranch) -or $CurrentBranch -eq "HEAD") {
+        Write-Log "[ERROR] Failed to resolve current branch."
+        return $false
+    }
+
+    if ($CurrentBranch -eq $ResultsBranch) {
+        return $true
+    }
+
+    Write-Log "[GIT] Switching from $CurrentBranch to worker result branch $ResultsBranch."
+    $BranchExists = Get-GitCommandOutput -Arguments @("rev-parse", "--verify", "refs/heads/$ResultsBranch")
+    if ($BranchExists.ExitCode -eq 0) {
+        $SwitchExitCode = Invoke-GitLogged -Arguments @("switch", $ResultsBranch)
+    } else {
+        $SwitchExitCode = Invoke-GitLogged -Arguments @("switch", "-c", $ResultsBranch)
+    }
+
+    if ($SwitchExitCode -ne 0) {
+        Write-Log "[ERROR] Failed to switch to worker result branch $ResultsBranch."
+        return $false
+    }
+
+    $MergeExitCode = Invoke-GitLogged -Arguments @("merge", "--no-edit", $CurrentBranch)
+    if ($MergeExitCode -ne 0) {
+        Write-Log "[ERROR] Failed to merge $CurrentBranch into $ResultsBranch. Resolve manually before running experiments."
+        return $false
+    }
+
+    return $true
+}
+
 function Get-MissingExperimentList {
     try {
         $StdOutPath = Join-Path $TempLogDir "missing_results.stdout.log"
@@ -253,6 +316,25 @@ print(data.get('output_dir', ''))
     }
 }
 
+function Get-ConfigTargetInstances {
+    param([string]$ConfigPath)
+
+    try {
+        $Script = @"
+import sys
+import yaml
+with open(sys.argv[1], 'r', encoding='utf-8') as f:
+    data = yaml.safe_load(f)
+samples_per_class = data.get('sampling', {}).get('samples_per_class')
+print(int(samples_per_class) * 4 if samples_per_class else '')
+"@
+        $TargetInstances = @($Script | & $PythonExe - $ConfigPath)[-1]
+        return ($TargetInstances | Out-String).Trim()
+    } catch {
+        return ""
+    }
+}
+
 function Get-InstanceProgressSnapshot {
     param([string]$OutputDir)
 
@@ -277,6 +359,77 @@ function Get-InstanceProgressSnapshot {
     }
 }
 
+function Write-RunManifest {
+    param(
+        [string]$ExperimentName,
+        [string]$ConfigPath,
+        [string]$OutputDir,
+        [string]$Status,
+        [datetime]$StartedAt,
+        [Nullable[int]]$ExitCode = $null
+    )
+
+    if (-not (Test-Path -Path $ManifestRoot)) {
+        New-Item -ItemType Directory -Path $ManifestRoot -Force | Out-Null
+    }
+
+    $Snapshot = if (-not [string]::IsNullOrWhiteSpace($OutputDir)) {
+        Get-InstanceProgressSnapshot -OutputDir $OutputDir
+    } else {
+        @{
+            Exists = $false
+            Count = 0
+            LatestWrite = $null
+            InstancesDir = ""
+        }
+    }
+
+    $TargetInstancesText = if (-not [string]::IsNullOrWhiteSpace($ConfigPath) -and (Test-Path -Path $ConfigPath)) {
+        Get-ConfigTargetInstances -ConfigPath $ConfigPath
+    } else {
+        ""
+    }
+    $TargetInstances = if (-not [string]::IsNullOrWhiteSpace($TargetInstancesText)) {
+        [int]$TargetInstancesText
+    } else {
+        $null
+    }
+
+    $ResultsFile = if (-not [string]::IsNullOrWhiteSpace($OutputDir)) {
+        Join-Path $OutputDir "results.json"
+    } else {
+        ""
+    }
+
+    $Manifest = [ordered]@{
+        worker_id = $WorkerId
+        host = $env:COMPUTERNAME
+        results_branch = $ResultsBranch
+        experiment_name = $ExperimentName
+        config_path = $ConfigPath
+        output_dir = $OutputDir
+        status = $Status
+        started_at = if ($StartedAt) { $StartedAt.ToString("o") } else { $null }
+        last_checkpoint_at = (Get-Date).ToString("o")
+        instances_done = $Snapshot.Count
+        target_instances = $TargetInstances
+        latest_instance_write = if ($Snapshot.LatestWrite) { $Snapshot.LatestWrite.ToString("o") } else { $null }
+        results_json_exists = if (-not [string]::IsNullOrWhiteSpace($ResultsFile)) { Test-Path -Path $ResultsFile } else { $false }
+        exit_code = $ExitCode
+        runner_pid = $PID
+    }
+
+    $ManifestJson = $Manifest | ConvertTo-Json -Depth 5
+    $SafeName = if (-not [string]::IsNullOrWhiteSpace($ExperimentName)) {
+        $ExperimentName -replace '[^A-Za-z0-9_.-]', '_'
+    } else {
+        "idle"
+    }
+
+    $ManifestJson | Set-Content -Path (Join-Path $ManifestRoot "current.json") -Encoding UTF8
+    $ManifestJson | Set-Content -Path (Join-Path $ManifestRoot "$SafeName.json") -Encoding UTF8
+}
+
 function Invoke-ExperimentProcess {
     param(
         [string]$ConfigPath,
@@ -288,6 +441,7 @@ function Invoke-ExperimentProcess {
     $StdOutPath = Join-Path $TempLogDir "$SafeName.attempt$Attempt.stdout.log"
     $StdErrPath = Join-Path $TempLogDir "$SafeName.attempt$Attempt.stderr.log"
     $OutputDir = Get-ConfigOutputDir -ConfigPath $ConfigPath
+    $StartedAt = Get-Date
 
     $Process = Start-Process `
         -FilePath $PythonExe `
@@ -297,6 +451,8 @@ function Invoke-ExperimentProcess {
         -RedirectStandardOutput $StdOutPath `
         -RedirectStandardError $StdErrPath `
         -PassThru
+
+    Write-RunManifest -ExperimentName $ExperimentName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "running" -StartedAt $StartedAt
 
     $LastProgressLog = Get-Date
     $LastSnapshot = if ($OutputDir) { Get-InstanceProgressSnapshot -OutputDir $OutputDir } else { $null }
@@ -331,6 +487,7 @@ function Invoke-ExperimentProcess {
             }
 
             Write-Log "[PROGRESS] $ExperimentName instances=$($Snapshot.Count) latest_write_age_min=$AgeText dir=$($Snapshot.InstancesDir)"
+            Write-RunManifest -ExperimentName $ExperimentName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "running" -StartedAt $StartedAt
             $LastProgressLog = Get-Date
             $LastSnapshot = $Snapshot
         }
@@ -338,17 +495,28 @@ function Invoke-ExperimentProcess {
 
     $Process.Refresh()
     Append-ProcessLogs -StdOutPath $StdOutPath -StdErrPath $StdErrPath
+    Write-RunManifest -ExperimentName $ExperimentName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "process_exited" -StartedAt $StartedAt -ExitCode $Process.ExitCode
     return $Process.ExitCode
 }
 
 $CurrentDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 "==========================================================" | Out-File -FilePath $LogFile -Append
 "Starting Managed Experiment Runner at $CurrentDate" | Out-File -FilePath $LogFile -Append
+"Worker ID: $WorkerId" | Out-File -FilePath $LogFile -Append
+"Worker results branch: $ResultsBranch" | Out-File -FilePath $LogFile -Append
 "==========================================================" | Out-File -FilePath $LogFile -Append
+
+$BranchReady = Invoke-WithGitMutex -Reason "managed_runner_branch_setup" -Action {
+    Ensure-ResultsBranch
+}
+if (-not $BranchReady) {
+    Write-Log "[FATAL] Could not enter worker result branch $ResultsBranch. Exiting to protect results."
+    exit 1
+}
 
 # Start background sync daemon
 try {
-    $SyncProcess = Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File .\scripts\auto_push.ps1" -PassThru -WindowStyle Hidden
+    $SyncProcess = Start-Process powershell -ArgumentList @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ".\scripts\auto_push.ps1") -PassThru -WindowStyle Hidden
     "Started background Git sync daemon (PID: $($SyncProcess.Id))" | Out-File -FilePath $LogFile -Append
 } catch {
     "Failed to start sync daemon: $_" | Out-File -FilePath $LogFile -Append
@@ -383,22 +551,12 @@ try {
                 return $false
             }
 
-            Write-Log "[GIT] Fetching latest queue state for $ResultsPath..."
-            $FetchExitCode = Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", $script:ManagedRunnerCurrentBranch)
+            Write-Log "[GIT] Fetching origin/main for visibility without modifying local results..."
+            $FetchExitCode = Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", "main")
             if ($FetchExitCode -eq 0) {
-                $DiffExitCode = Invoke-GitQuiet -Arguments @("diff", "--quiet", "HEAD", "origin/$script:ManagedRunnerCurrentBranch", "--", $ResultsPath)
-                if ($DiffExitCode -ne 0) {
-                    $RestoreExitCode = Invoke-GitLogged -Arguments @("restore", "--source", "origin/$script:ManagedRunnerCurrentBranch", "--staged", "--worktree", "--", $ResultsPath)
-                    if ($RestoreExitCode -eq 0) {
-                        Write-Log "[GIT] Updated local result queue from origin/$script:ManagedRunnerCurrentBranch."
-                    } else {
-                        Write-Log "[WARN] Failed to refresh $ResultsPath from origin/$script:ManagedRunnerCurrentBranch."
-                    }
-                } else {
-                    Write-Log "[GIT] Local result queue already matches origin/$script:ManagedRunnerCurrentBranch."
-                }
+                Write-Log "[GIT] Fetched origin/main. Local worker results were left untouched to avoid cross-worker collisions."
             } else {
-                Write-Log "[WARN] Fetch failed; continuing with local queue state."
+                Write-Log "[WARN] Fetch failed; continuing with local worker branch state."
             }
 
             return $true
@@ -415,6 +573,7 @@ try {
             $ResultsFile = Join-Path $OutputDir "results.json"
             if (Test-Path -Path $ResultsFile) {
                 Write-Log "[SKIP] $ExpName already exists after queue refresh. Another worker likely completed it."
+                Write-RunManifest -ExperimentName $ExpName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "skipped_existing_results" -StartedAt (Get-Date)
                 Start-Sleep -Seconds 2
                 continue
             }
@@ -437,24 +596,31 @@ try {
 
         if ($ExitCode -eq 0) {
             "[SUCCESS] Finished $ExpName" | Out-File -FilePath $LogFile -Append
+            Write-RunManifest -ExperimentName $ExpName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "success" -StartedAt (Get-Date) -ExitCode $ExitCode
             
             # Automatic Git Commit
             "[GIT] Committing results for $ExpName" | Out-File -FilePath $LogFile -Append
             Invoke-WithGitMutex -Reason "managed_runner_commit" -Action {
-                $AddExitCode = Invoke-GitLogged -Arguments @("add", "--", $ResultsPath)
+                $AddArguments = @("add", "--") + $TrackedPaths
+                $AddExitCode = Invoke-GitLogged -Arguments $AddArguments
                 if ($AddExitCode -ne 0) {
                     Write-Log "[WARN] Git add failed for $ExpName; preserving files for the next sync cycle."
                     return
                 }
 
                 $PendingResultChanges = Get-GitStatusPorcelain -TrackedPath $ResultsPath
+                $PendingManifestChanges = Get-GitStatusPorcelain -TrackedPath "experiments/exp2_scaled/worker_manifests"
 
                 if ($null -eq $PendingResultChanges) {
                     Write-Log "[WARN] Failed to inspect pending result changes."
                     return
                 }
+                if ($null -eq $PendingManifestChanges) {
+                    Write-Log "[WARN] Failed to inspect pending manifest changes."
+                    return
+                }
 
-                if ($PendingResultChanges.Count -gt 0) {
+                if (($PendingResultChanges.Count + $PendingManifestChanges.Count) -gt 0) {
                     $CommitExitCode = Invoke-GitLogged -Arguments @("commit", "-m", "Auto-commit: Results for $ExpName")
                     if ($CommitExitCode -eq 0) {
                         Write-Log "[GIT] Results committed locally for $ExpName. Push is handled by auto_push.ps1 on the 6-hour schedule."
@@ -471,6 +637,7 @@ try {
             } else {
                 "[FAILED] Experiment $ExpName failed. Check logs." | Out-File -FilePath $LogFile -Append
             }
+            Write-RunManifest -ExperimentName $ExpName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "failed" -StartedAt (Get-Date) -ExitCode $ExitCode
         }
         
         # Cooldown
