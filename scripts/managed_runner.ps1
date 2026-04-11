@@ -302,37 +302,32 @@ function Get-ConfigOutputDir {
     param([string]$ConfigPath)
 
     try {
-        $Script = @"
-import sys
-import yaml
-with open(sys.argv[1], 'r', encoding='utf-8') as f:
-    data = yaml.safe_load(f)
-print(data.get('output_dir', ''))
-"@
-        $OutputDir = @($Script | & $PythonExe - $ConfigPath)[-1]
-        return ($OutputDir | Out-String).Trim()
+        $OutputLine = Get-Content -Path $ConfigPath -ErrorAction Stop | Where-Object {
+            $_ -match '^\s*output_dir\s*:\s*(.+?)\s*$'
+        } | Select-Object -First 1
+        if ($OutputLine -match '^\s*output_dir\s*:\s*(.+?)\s*$') {
+            return $Matches[1].Trim('"', "'")
+        }
     } catch {
-        return ""
     }
+
+    return ""
 }
 
 function Get-ConfigTargetInstances {
     param([string]$ConfigPath)
 
     try {
-        $Script = @"
-import sys
-import yaml
-with open(sys.argv[1], 'r', encoding='utf-8') as f:
-    data = yaml.safe_load(f)
-samples_per_class = data.get('sampling', {}).get('samples_per_class')
-print(int(samples_per_class) * 4 if samples_per_class else '')
-"@
-        $TargetInstances = @($Script | & $PythonExe - $ConfigPath)[-1]
-        return ($TargetInstances | Out-String).Trim()
+        $SamplesLine = Get-Content -Path $ConfigPath -ErrorAction Stop | Where-Object {
+            $_ -match '^\s*samples_per_class\s*:\s*(\d+)\s*$'
+        } | Select-Object -First 1
+        if ($SamplesLine -match '^\s*samples_per_class\s*:\s*(\d+)\s*$') {
+            return ([int]$Matches[1] * 4).ToString()
+        }
     } catch {
-        return ""
     }
+
+    return ""
 }
 
 function Get-InstanceProgressSnapshot {
