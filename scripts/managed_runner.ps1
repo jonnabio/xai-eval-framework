@@ -186,7 +186,7 @@ function Get-GitStatusPorcelain {
         return $null
     }
 
-    return @($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    return ,@($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
 function Get-MissingExperimentList {
