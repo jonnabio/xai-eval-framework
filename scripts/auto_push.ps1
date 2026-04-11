@@ -292,7 +292,9 @@ while ($true) {
         }
 
         $LastPushTime = Get-LastPushTime
-        $PushDue = $null -eq $LastPushTime -or ((Get-Date) - $LastPushTime).TotalSeconds -ge $PushInterval
+        $UpstreamResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}")
+        $HasUpstream = $UpstreamResult.ExitCode -eq 0
+        $PushDue = (-not $HasUpstream) -or $null -eq $LastPushTime -or ((Get-Date) - $LastPushTime).TotalSeconds -ge $PushInterval
 
         if (-not $PushDue) {
             $SecondsUntilPush = [math]::Max(0, $PushInterval - [int]((Get-Date) - $LastPushTime).TotalSeconds)
