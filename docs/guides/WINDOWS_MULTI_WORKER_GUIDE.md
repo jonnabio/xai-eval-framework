@@ -90,7 +90,7 @@ This starts:
 
 At startup, `managed_runner.ps1` switches the repository from `main` to the
 worker result branch (`results/<worker_id>`). The sync daemon commits every
-15 minutes and pushes that worker branch every 6 hours. It does **not** rebase
+15 minutes and pushes that worker branch every 3 hours. It does **not** rebase
 while experiments are running.
 
 ## Monitor Worker
