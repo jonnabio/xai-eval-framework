@@ -25,17 +25,43 @@ $GitExe = if (Test-Path "C:\Program Files\Git\cmd\git.exe") {
 }
 
 $CommitInterval = 900 # 15 minutes
-$PushInterval = 10800 # 3 hours
+$PushInterval = 21600 # 6 hours
 $LogFile = "logs\auto_push.log"
 $LastPushFile = "logs\auto_push_last_push.txt"
-$TrackedPaths = @(
-    "experiments/exp2_scaled/results"
-)
 $GitMutexDir = "logs\git_mutex"
 
 if (-not (Test-Path -Path "logs")) {
     New-Item -ItemType Directory -Path "logs" | Out-Null
 }
+
+function Get-WorkerId {
+    $RawWorkerId = if (-not [string]::IsNullOrWhiteSpace($env:XAI_WORKER_ID)) {
+        $env:XAI_WORKER_ID
+    } elseif (-not [string]::IsNullOrWhiteSpace($env:COMPUTERNAME)) {
+        $env:COMPUTERNAME
+    } else {
+        [System.Net.Dns]::GetHostName()
+    }
+
+    $WorkerId = ($RawWorkerId.ToLowerInvariant() -replace '[^a-z0-9._-]', '-').Trim('-')
+    if ([string]::IsNullOrWhiteSpace($WorkerId)) {
+        return "windows-worker"
+    }
+
+    return $WorkerId
+}
+
+$WorkerId = Get-WorkerId
+$ResultsBranch = if (-not [string]::IsNullOrWhiteSpace($env:XAI_RESULTS_BRANCH)) {
+    $env:XAI_RESULTS_BRANCH
+} else {
+    "results/$WorkerId"
+}
+$ManifestRoot = "experiments/exp2_scaled/worker_manifests/$WorkerId"
+$TrackedPaths = @(
+    "experiments/exp2_scaled/results",
+    "experiments/exp2_scaled/worker_manifests"
+)
 
 function Write-Log {
     param([string]$Message)
@@ -171,6 +197,40 @@ function Get-GitStatusPorcelain {
     return ,@($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
+function Ensure-ResultsBranch {
+    $BranchResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "HEAD")
+    $CurrentBranch = @($BranchResult.Output)[-1]
+    if ($BranchResult.ExitCode -ne 0 -or [string]::IsNullOrWhiteSpace($CurrentBranch) -or $CurrentBranch -eq "HEAD") {
+        Write-Log "Error resolving current branch."
+        return $false
+    }
+
+    if ($CurrentBranch -eq $ResultsBranch) {
+        return $true
+    }
+
+    Write-Log "Switching from $CurrentBranch to worker result branch $ResultsBranch."
+    $BranchExists = Get-GitCommandOutput -Arguments @("rev-parse", "--verify", "refs/heads/$ResultsBranch")
+    if ($BranchExists.ExitCode -eq 0) {
+        $SwitchExitCode = Invoke-GitLogged -Arguments @("switch", $ResultsBranch)
+    } else {
+        $SwitchExitCode = Invoke-GitLogged -Arguments @("switch", "-c", $ResultsBranch)
+    }
+
+    if ($SwitchExitCode -ne 0) {
+        Write-Log "Failed to switch to worker result branch $ResultsBranch."
+        return $false
+    }
+
+    $MergeExitCode = Invoke-GitLogged -Arguments @("merge", "--no-edit", $CurrentBranch)
+    if ($MergeExitCode -ne 0) {
+        Write-Log "Failed to merge $CurrentBranch into $ResultsBranch. Resolve manually before running experiments."
+        return $false
+    }
+
+    return $true
+}
+
 function Get-LastPushTime {
     if (-not (Test-Path $LastPushFile)) {
         return $null
@@ -191,29 +251,38 @@ while ($true) {
     Write-Log "Checkpointing progress with Git pool..."
 
     $CycleOk = Invoke-WithGitMutex -Reason "auto_push_cycle" -Action {
-        $BranchResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "HEAD")
-        $CurrentBranch = @($BranchResult.Output)[-1]
-        if ($BranchResult.ExitCode -ne 0 -or [string]::IsNullOrWhiteSpace($CurrentBranch)) {
-            Write-Log "Error resolving current branch."
+        if (-not (Ensure-ResultsBranch)) {
             return $false
         }
 
         # Stage only experiment outputs. This avoids sweeping in
         # locally retrained model binaries, config edits, or other workspace changes.
-        $AddExitCode = Invoke-GitLogged -Arguments @("add", "--", $TrackedPaths[0])
+        foreach ($TrackedPath in $TrackedPaths) {
+            if (-not (Test-Path -Path $TrackedPath)) {
+                New-Item -ItemType Directory -Path $TrackedPath -Force | Out-Null
+            }
+        }
+
+        $AddArguments = @("add", "--") + $TrackedPaths
+        $AddExitCode = Invoke-GitLogged -Arguments $AddArguments
         if ($AddExitCode -ne 0) {
             Write-Log "Git add failed; preserving files and retrying next cycle."
             return $false
         }
 
         $PendingChanges = Get-GitStatusPorcelain -TrackedPath $TrackedPaths[0]
+        $PendingManifestChanges = Get-GitStatusPorcelain -TrackedPath $TrackedPaths[1]
         if ($null -eq $PendingChanges) {
             Write-Log "Failed to inspect pending changes."
             return $false
         }
+        if ($null -eq $PendingManifestChanges) {
+            Write-Log "Failed to inspect pending manifest changes."
+            return $false
+        }
 
-        if ($PendingChanges.Count -gt 0) {
-            $CommitExitCode = Invoke-GitLogged -Arguments @("commit", "-m", "Auto-sync queue: Results checkpoint")
+        if (($PendingChanges.Count + $PendingManifestChanges.Count) -gt 0) {
+            $CommitExitCode = Invoke-GitLogged -Arguments @("commit", "-m", "Auto-sync worker checkpoint: $WorkerId")
             if ($CommitExitCode -ne 0) {
                 Write-Log "Commit failed; skipping fetch/push for this cycle."
                 return $false
@@ -223,7 +292,9 @@ while ($true) {
         }
 
         $LastPushTime = Get-LastPushTime
-        $PushDue = $null -eq $LastPushTime -or ((Get-Date) - $LastPushTime).TotalSeconds -ge $PushInterval
+        $UpstreamResult = Get-GitCommandOutput -Arguments @("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}")
+        $HasUpstream = $UpstreamResult.ExitCode -eq 0
+        $PushDue = (-not $HasUpstream) -or $null -eq $LastPushTime -or ((Get-Date) - $LastPushTime).TotalSeconds -ge $PushInterval
 
         if (-not $PushDue) {
             $SecondsUntilPush = [math]::Max(0, $PushInterval - [int]((Get-Date) - $LastPushTime).TotalSeconds)
@@ -231,24 +302,12 @@ while ($true) {
             return $true
         }
 
-        Write-Log "Push window reached; fetching and rebasing before push."
-        $FetchExitCode = Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", $CurrentBranch)
-        if ($FetchExitCode -ne 0) {
-            Write-Log "Fetch failed; changes remain committed locally."
-            return $false
-        }
-
-        $RebaseExitCode = Invoke-GitLogged -Arguments @("-c", "core.editor=true", "rebase", "origin/$CurrentBranch")
-        if ($RebaseExitCode -ne 0) {
-            Write-Log "Rebase failed; changes remain committed locally and need manual reconciliation."
-            return $false
-        }
-
-        $PushExitCode = Invoke-GitLogged -Arguments @("push", "--no-progress", "origin", "HEAD:$CurrentBranch")
+        Write-Log "Push window reached; pushing worker branch $ResultsBranch without rebasing."
+        $PushExitCode = Invoke-GitLogged -Arguments @("push", "--no-progress", "--set-upstream", "origin", "HEAD:refs/heads/$ResultsBranch")
         if ($PushExitCode -ne 0) {
-            Write-Log "Push failed; changes remain committed locally for the next push window."
+            Write-Log "Push failed; worker checkpoint commits remain local for the next push window."
         } else {
-            Write-Log "Sync complete."
+            Write-Log "Worker branch sync complete: $ResultsBranch."
             Set-LastPushTime
         }
 
