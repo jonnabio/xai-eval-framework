@@ -25,7 +25,7 @@ $GitExe = if (Test-Path "C:\Program Files\Git\cmd\git.exe") {
 }
 
 $CommitInterval = 900 # 15 minutes
-$PushInterval = 21600 # 6 hours
+$PushInterval = 10800 # 3 hours
 $LogFile = "logs\auto_push.log"
 $LastPushFile = "logs\auto_push_last_push.txt"
 $TrackedPaths = @(
