@@ -71,6 +71,80 @@ def get_last_commit(project_root: Path) -> str:
         return "Unknown"
 
 
+def get_main_sync_status(project_root: Path) -> dict:
+    status = {
+        "main_head": "Unknown",
+        "main_results_last_commit": "Unknown",
+        "pending_to_main_files": "?",
+        "pending_from_main_files": "?",
+    }
+
+    try:
+        main_head = subprocess.run(
+            ["git", "log", "-1", "--pretty=format:%h (%cr) %s", "origin/main"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if main_head.stdout.strip():
+            status["main_head"] = main_head.stdout.strip()
+
+        main_results_commit = subprocess.run(
+            [
+                "git",
+                "log",
+                "-1",
+                "--pretty=format:%h (%cr) %s",
+                "origin/main",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if main_results_commit.stdout.strip():
+            status["main_results_last_commit"] = main_results_commit.stdout.strip()
+
+        to_main = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--name-only",
+                "origin/main..HEAD",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        from_main = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--name-only",
+                "HEAD..origin/main",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        status["pending_to_main_files"] = len([line for line in to_main.stdout.splitlines() if line.strip()])
+        status["pending_from_main_files"] = len([line for line in from_main.stdout.splitlines() if line.strip()])
+    except Exception:
+        return status
+
+    return status
+
+
 def get_live_runner_process() -> dict | None:
     try:
         script = r"""
@@ -305,6 +379,7 @@ def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_
         "log_file": str(log_file),
         "config_dir": str(config_dir),
         "results_dir": str(results_dir),
+        "main_sync": get_main_sync_status(project_root),
     }
 
 
@@ -399,6 +474,20 @@ def draw(status: dict, interval: int) -> None:
                 f"{completed_at}  {str(item['instances']).rjust(4)} inst  {item['name']}"[:88]
             )
 
+    print("-" * 88)
+    print("Main Branch Sync")
+    main_sync = status.get("main_sync", {})
+    print(f"origin/main HEAD: {main_sync.get('main_head', 'Unknown')}")
+    print(
+        "Latest main results commit: "
+        f"{main_sync.get('main_results_last_commit', 'Unknown')}"
+    )
+    print(
+        "Result files pending this branch -> main: "
+        f"{main_sync.get('pending_to_main_files', '?')}  |  "
+        "main-only result files not in this branch: "
+        f"{main_sync.get('pending_from_main_files', '?')}"
+    )
     print("-" * 88)
     print(f"Recent Log Tail: {status['log_file']}")
     for line in status["log_lines"]:
