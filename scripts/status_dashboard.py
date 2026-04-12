@@ -27,6 +27,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_LOG_FILE = PROJECT_ROOT / "logs" / "managed_runner.log"
 DEFAULT_CONFIG_DIR = PROJECT_ROOT / "configs" / "experiments" / "exp2_scaled"
 DEFAULT_RESULTS_DIR = PROJECT_ROOT / "experiments" / "exp2_scaled" / "results"
+REMOTE_WORKER_PREFIX = "origin/results/"
+REMOTE_WORKER_FETCH_REFSPEC = "+refs/heads/results/*:refs/remotes/origin/results/*"
+_LAST_REMOTE_WORKER_FETCH: datetime | None = None
 
 
 def clear_screen() -> None:
@@ -69,6 +72,106 @@ def get_last_commit(project_root: Path) -> str:
         return result.stdout.strip() or "Unknown"
     except Exception:
         return "Unknown"
+
+
+def run_git(project_root: Path, args: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["git", *args],
+        cwd=project_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def parse_git_datetime(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    normalized = value.strip()
+    if not normalized:
+        return None
+    try:
+        return datetime.fromisoformat(normalized).replace(tzinfo=None)
+    except ValueError:
+        # PowerShell/.NET timestamps can contain 7 fractional digits; Python
+        # accepts 6, so truncate only the fractional part before parsing.
+        if "." in normalized:
+            head, tail = normalized.split(".", 1)
+            offset = ""
+            for marker in ("+", "-"):
+                idx = tail.rfind(marker)
+                if idx > 0:
+                    tail, offset = tail[:idx], tail[idx:]
+                    break
+            try:
+                return datetime.fromisoformat(f"{head}.{tail[:6]}{offset}").replace(tzinfo=None)
+            except ValueError:
+                return None
+    return None
+
+
+def normalize_remote_worker_branch(ref: str) -> str:
+    return ref.removeprefix(REMOTE_WORKER_PREFIX)
+
+
+def maybe_fetch_remote_worker_branches(
+    project_root: Path, enabled: bool, fetch_interval: int
+) -> tuple[bool, str]:
+    global _LAST_REMOTE_WORKER_FETCH
+
+    if not enabled:
+        return False, "disabled"
+
+    now = datetime.now()
+    if (
+        _LAST_REMOTE_WORKER_FETCH
+        and fetch_interval > 0
+        and (now - _LAST_REMOTE_WORKER_FETCH).total_seconds() < fetch_interval
+    ):
+        return False, "cached"
+
+    result = run_git(
+        project_root,
+        ["fetch", "--no-progress", "--prune", "origin", REMOTE_WORKER_FETCH_REFSPEC],
+    )
+    if result.returncode == 0:
+        _LAST_REMOTE_WORKER_FETCH = now
+        return True, "ok"
+
+    message = (result.stderr or result.stdout or "fetch failed").strip().splitlines()
+    return False, message[-1] if message else "fetch failed"
+
+
+def get_remote_worker_refs(project_root: Path) -> list[str]:
+    result = run_git(
+        project_root,
+        [
+            "for-each-ref",
+            "--format=%(refname:short)",
+            "refs/remotes/origin/results",
+        ],
+    )
+    if result.returncode != 0:
+        return []
+    return sorted(
+        ref.strip()
+        for ref in result.stdout.splitlines()
+        if ref.strip().startswith(REMOTE_WORKER_PREFIX)
+    )
+
+
+def git_show_text(project_root: Path, ref: str, path: str) -> str | None:
+    result = run_git(project_root, ["show", f"{ref}:{path}"])
+    if result.returncode != 0:
+        return None
+    return result.stdout
+
+
+def git_tree_paths(project_root: Path, ref: str, path: str) -> list[str]:
+    result = run_git(project_root, ["ls-tree", "-r", "--name-only", ref, path])
+    if result.returncode != 0:
+        return []
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
 def get_main_sync_status(project_root: Path) -> dict:
@@ -242,6 +345,141 @@ def get_target_instances(cfg: dict, default: int = 400) -> int:
     return sampling.get("samples_per_class", 100) * 4 if sampling else default
 
 
+def target_for_result_dir(output_dir: str, config_index: dict[str, dict]) -> int:
+    parts = Path(output_dir.replace("\\", "/")).parts
+    if len(parts) < 3:
+        return 400
+
+    method, seed, n_value = parts[-3], parts[-2], parts[-1]
+    display_name = f"{method}_{seed}_{n_value}"
+    res_norm = normalize_name(display_name)
+    res_norm_short = res_norm.replace("seed", "s")
+    cfg = config_index.get(res_norm_short) or config_index.get(res_norm)
+    return get_target_instances(cfg) if cfg else 400
+
+
+def get_remote_worker_manifest(project_root: Path, ref: str) -> dict | None:
+    manifest_paths = [
+        path
+        for path in git_tree_paths(
+            project_root,
+            ref,
+            "experiments/exp2_scaled/worker_manifests",
+        )
+        if path.endswith("/current.json")
+    ]
+    for manifest_path in manifest_paths:
+        raw_manifest = git_show_text(project_root, ref, manifest_path)
+        if not raw_manifest:
+            continue
+        try:
+            return json.loads(raw_manifest.lstrip("\ufeffï»¿"))
+        except json.JSONDecodeError:
+            continue
+    return None
+
+
+def remote_worker_from_manifest(ref: str, manifest: dict, config_index: dict[str, dict]) -> dict:
+    output_dir = manifest.get("output_dir") or ""
+    target_instances = manifest.get("target_instances") or target_for_result_dir(output_dir, config_index)
+    latest_checkpoint = parse_git_datetime(manifest.get("last_checkpoint_at"))
+    latest_write = parse_git_datetime(manifest.get("latest_instance_write"))
+
+    return {
+        "worker_id": manifest.get("worker_id") or normalize_remote_worker_branch(ref),
+        "branch": ref,
+        "source": "manifest",
+        "experiment": manifest.get("experiment_name") or "unknown",
+        "status": manifest.get("status") or "unknown",
+        "done": int(manifest.get("instances_done") or 0),
+        "total": int(target_instances or 0),
+        "latest_checkpoint": latest_checkpoint,
+        "latest_write": latest_write,
+        "results_json_exists": bool(manifest.get("results_json_exists")),
+        "output_dir": output_dir or "unknown",
+    }
+
+
+def summarize_remote_worker_tree(project_root: Path, ref: str, config_index: dict[str, dict]) -> dict:
+    result_root = "experiments/exp2_scaled/results"
+    paths = git_tree_paths(project_root, ref, result_root)
+    result_files = {path for path in paths if path.endswith("/results.json")}
+    instance_counts: dict[str, int] = {}
+
+    for path in paths:
+        if "/instances/" not in path or not path.endswith(".json"):
+            continue
+        run_dir = path.split("/instances/", 1)[0]
+        instance_counts[run_dir] = instance_counts.get(run_dir, 0) + 1
+
+    active_runs = [
+        (run_dir, count)
+        for run_dir, count in instance_counts.items()
+        if f"{run_dir}/results.json" not in result_files
+    ]
+    active_runs.sort(key=lambda item: item[1], reverse=True)
+
+    if active_runs:
+        output_dir, done = active_runs[0]
+        experiment = "_".join(Path(output_dir).parts[-3:])
+        total = target_for_result_dir(output_dir, config_index)
+        status = "running-or-partial"
+    else:
+        output_dir = "unknown"
+        experiment = "no active run detected"
+        done = 0
+        total = 0
+        status = "idle-or-complete"
+
+    return {
+        "worker_id": normalize_remote_worker_branch(ref),
+        "branch": ref,
+        "source": "tree",
+        "experiment": experiment,
+        "status": status,
+        "done": done,
+        "total": total,
+        "latest_checkpoint": None,
+        "latest_write": None,
+        "results_json_exists": False,
+        "output_dir": output_dir,
+    }
+
+
+def collect_remote_workers(
+    project_root: Path,
+    config_index: dict[str, dict],
+    fetch_remote_workers: bool,
+    remote_fetch_interval: int,
+) -> dict:
+    fetched, fetch_status = maybe_fetch_remote_worker_branches(
+        project_root, fetch_remote_workers, remote_fetch_interval
+    )
+    workers: list[dict] = []
+
+    for ref in get_remote_worker_refs(project_root):
+        manifest = get_remote_worker_manifest(project_root, ref)
+        if manifest:
+            workers.append(remote_worker_from_manifest(ref, manifest, config_index))
+        else:
+            workers.append(summarize_remote_worker_tree(project_root, ref, config_index))
+
+    workers.sort(
+        key=lambda item: (
+            item.get("latest_checkpoint") or item.get("latest_write") or datetime.min,
+            item.get("done") or 0,
+        ),
+        reverse=True,
+    )
+
+    return {
+        "enabled": fetch_remote_workers,
+        "fetched": fetched,
+        "fetch_status": fetch_status,
+        "workers": workers,
+    }
+
+
 def discover_active_experiments(results_dir: Path, config_index: dict[str, dict]) -> tuple[int, list[dict]]:
     active_instances = 0
     active_experiments: list[dict] = []
@@ -333,7 +571,14 @@ def get_recent_completed_runs(result_files: list[Path], limit: int = 5) -> list[
     return recent
 
 
-def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_file: Path) -> dict:
+def collect_status(
+    project_root: Path,
+    config_dir: Path,
+    results_dir: Path,
+    log_file: Path,
+    fetch_remote_workers: bool,
+    remote_fetch_interval: int,
+) -> dict:
     config_paths = sorted(config_dir.glob("*.yaml"))
     result_files = sorted(results_dir.glob("**/results.json"))
     config_index = build_config_index(config_paths)
@@ -380,6 +625,12 @@ def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_
         "config_dir": str(config_dir),
         "results_dir": str(results_dir),
         "main_sync": get_main_sync_status(project_root),
+        "remote_workers": collect_remote_workers(
+            project_root,
+            config_index,
+            fetch_remote_workers,
+            remote_fetch_interval,
+        ),
     }
 
 
@@ -489,6 +740,33 @@ def draw(status: dict, interval: int) -> None:
         f"{main_sync.get('pending_from_main_files', '?')}"
     )
     print("-" * 88)
+    print("Remote Worker Branches")
+    remote_workers = status.get("remote_workers", {})
+    fetch_label = remote_workers.get("fetch_status", "unknown")
+    print(f"Remote refresh: {fetch_label}")
+    workers = remote_workers.get("workers", [])
+    if not workers:
+        print("No origin/results/* worker branches detected.")
+    else:
+        for worker in workers[:8]:
+            done = worker.get("done") or 0
+            total = worker.get("total") or 0
+            pct = (done / total * 100) if total else 0.0
+            timestamp = worker.get("latest_checkpoint") or worker.get("latest_write")
+            age = (
+                f"{((status['timestamp'] - timestamp).total_seconds() / 60):.1f}m"
+                if timestamp
+                else "n/a"
+            )
+            print(
+                f"{worker.get('worker_id', '?')[:16]:<16} "
+                f"{worker.get('experiment', 'unknown')[:28]:<28} "
+                f"[{bar(done, total, 14)}] {done}/{total} "
+                f"({pct:5.1f}%) {worker.get('status', '?')[:10]:<10} "
+                f"{worker.get('source', '?'):<8} age:{age}"
+            )
+            print(f"  {worker.get('branch', '?')} -> {worker.get('output_dir', '?')}"[:88])
+    print("-" * 88)
     print(f"Recent Log Tail: {status['log_file']}")
     for line in status["log_lines"]:
         print(line[:88])
@@ -502,6 +780,17 @@ def main() -> int:
     parser.add_argument("--config-dir", default=str(DEFAULT_CONFIG_DIR), help="Directory containing config YAMLs")
     parser.add_argument("--results-dir", default=str(DEFAULT_RESULTS_DIR), help="Directory containing experiment results")
     parser.add_argument("--log-file", default=str(DEFAULT_LOG_FILE), help="Managed runner log file")
+    parser.add_argument(
+        "--no-remote-workers",
+        action="store_true",
+        help="Disable read-only origin/results/* worker branch summaries",
+    )
+    parser.add_argument(
+        "--remote-fetch-interval",
+        type=int,
+        default=300,
+        help="Seconds between read-only fetches of origin/results/* worker branches",
+    )
     args = parser.parse_args()
 
     project_root = PROJECT_ROOT
@@ -511,7 +800,14 @@ def main() -> int:
 
     try:
         while True:
-            status = collect_status(project_root, config_dir, results_dir, log_file)
+            status = collect_status(
+                project_root,
+                config_dir,
+                results_dir,
+                log_file,
+                fetch_remote_workers=not args.no_remote_workers,
+                remote_fetch_interval=args.remote_fetch_interval,
+            )
             draw(status, args.interval)
             time.sleep(args.interval)
     except KeyboardInterrupt:

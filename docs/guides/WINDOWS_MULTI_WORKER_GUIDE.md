@@ -106,9 +106,15 @@ Use the Windows terminal dashboard:
 The dashboard shows:
 - overall progress
 - active experiment result directories
+- remote worker branch progress from `origin/results/*`
 - latest write age
 - recent completed runs
 - live worker PID and config path
+
+The remote worker section is read-only. It fetches `origin/results/*` and
+uses worker manifests when available, with a remote-tree file-count fallback
+for branches that have not pushed manifests yet. It does not switch branches,
+merge result branches into `main`, or rebase active worker branches.
 
 ### 2. Raw Runner Log
 
