@@ -28,7 +28,7 @@ Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 \maketitle
 
 \begin{abstract}
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged protocol (EXP1 calibration/reproducibility and EXP2 comparative/robustness benchmarking); the current merged recovery snapshot contains 291 committed result artifacts (97.0\% artifact coverage) plus a 30-row SHAP recovery batch, yielding 268 analyzable unique runs out of 300 planned cells (89.3\%). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=40.68$, $p=7.65\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=32.12$, $p=4.94\times10^{-7}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME remains fastest overall. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged evidence protocol: a calibration/reproducibility stage (EXP1) followed by a primary comparative/robustness benchmark (EXP2); the current merged recovery snapshot contains 291 committed result artifacts (97.0\% artifact coverage) plus a 30-row SHAP recovery batch, yielding 268 analyzable unique runs out of 300 planned cells (89.3\%). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=40.68$, $p=7.65\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=32.12$, $p=4.94\times10^{-7}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME remains fastest overall. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
 \end{abstract}
 
 \begin{keywords}
@@ -77,8 +77,9 @@ This paper contributes:
 \begin{enumerate}[leftmargin=*]
     \item a model-agnostic benchmark framework spanning five model families
     and four explainer families under shared execution controls;
-    \item a staged evaluation protocol (EXP1/EXP2) with explicit artifact
-    qualification and claim-role separation;
+    \item a staged evidence-generation protocol, spanning
+    calibration/reproducibility (EXP1) and primary benchmarking (EXP2),
+    with explicit artifact qualification and claim-role separation;
     \item a multi-metric inferential stack combining Friedman omnibus tests,
     Nemenyi localization, and paired Wilcoxon contrasts with multiplicity
     control;
@@ -88,16 +89,16 @@ This paper contributes:
     claim-traceable reporting.
 \end{enumerate}
 
-FOM-7 emerged while consolidating early pilot/calibration cycles (EXP1), where
+FOM-7 emerged while consolidating early calibration-stage pilot cycles (EXP1), where
 protocol drift, malformed artifacts, and ad-hoc analysis-table harmonization
 repeatedly threatened claim comparability. The method was therefore formalized
 as a seven-gate operation protocol that makes claim eligibility auditable.
 
 Scope is intentionally bounded to model-agnostic tabular post-hoc explanation
 benchmarking on Adult Income with quantitative metrics (fidelity, stability,
-sparsity, faithfulness gap, and cost). Overall, the current merged EXP2
-recovery snapshot combines 291 committed result artifacts with a 30-row SHAP
-recovery batch, yielding 268 analyzable unique runs out of 300 planned cells
+sparsity, faithfulness gap, and cost). Overall, the current merged
+primary benchmark (EXP2) recovery snapshot combines 291 committed result
+artifacts with a 30-row SHAP recovery batch, yielding 268 analyzable unique runs out of 300 planned cells
 (89.3\%). The remainder of this
 paper presents the methodology (Section~\ref{sec:methodology}), reports
 comparative and reproducibility evidence (Section~\ref{sec:results}), and
@@ -126,14 +127,14 @@ decisions auditable before inferential claims are finalized.
 \begin{table}[t]
 \centering
 \caption{Evidence cohorts and their role in this study's claims.}
-\begin{tabularx}{\linewidth}{l X X}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.30\linewidth} X X}
 \toprule
 \textbf{Cohort} & \textbf{Primary objective} & \textbf{Role in claims} \\
 \midrule
-EXP1 pilot/calibration & Implementation sanity checks before scaled runs. & Not used for confirmatory significance claims. \\
-EXP1 reproducibility & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
-EXP2 comparative & Broad method-model coverage under fixed seeds. & Descriptive comparative context. \\
-EXP2 robustness & Multi-seed, multi-sample-size benchmark runs. & Primary inferential cohort for global and paired tests. \\
+Calibration sanity checks (EXP1 pilot) & Implementation checks before scaled runs. & Not used for confirmatory significance claims. \\
+Reproducibility repeatability cohort (EXP1) & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
+Comparative screening cohort (EXP2 comparative) & Broad method-model coverage under fixed seeds. & Descriptive comparative context. \\
+Primary robustness benchmark (EXP2 robustness) & Multi-seed, multi-sample-size benchmark runs. & Primary inferential cohort for global and paired tests. \\
 \bottomrule
 \end{tabularx}
 \label{tab:cohorts}
@@ -148,7 +149,7 @@ The confirmatory questions are:
     \item \textbf{RQ3 (reproducibility profile):} how much metric dispersion appears under repeated runs?
 \end{enumerate}
 
-EXP2 is a crossed design with model family $g$, explainer method $k$, seed $s$,
+The primary robustness benchmark (EXP2) is a crossed design with model family $g$, explainer method $k$, seed $s$,
 and per-quadrant sampling intensity $n$:
 \[
 g\in\{\text{logreg},\text{rf},\text{xgb},\text{svm},\text{mlp}\},\quad
@@ -158,7 +159,7 @@ k\in\{\text{shap},\text{lime},\text{anchors},\text{dice}\},
 s\in\{42,123,456,789,999\},\quad
 n\in\{50,100,200\}.
 \]
-Planned EXP2 robustness size is $5\times4\times5\times3=300$ runs. In the
+Planned primary robustness benchmark (EXP2) size is $5\times4\times5\times3=300$ runs. In the
 current merged recovery snapshot, 291 result artifacts are committed under
 \path{experiments/exp2_scaled/results/}; a 30-row SHAP recovery batch in
 \path{outputs/batch_results.csv} supersedes the \path{mlp_shap}/\path{svm_shap}
@@ -166,7 +167,7 @@ slice, yielding 268 analyzable unique runs and leaving 32 unresolved cells (7
 missing, 25 empty).
 \begin{table}[t]
 \centering
-\caption{EXP2 evidence accounting for inferential qualification.}
+\caption{Primary benchmark (EXP2) evidence accounting for inferential qualification.}
 \begin{tabularx}{\linewidth}{l r X}
 \toprule
 \textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
@@ -190,7 +191,7 @@ Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completio
 \vspace{2pt}
 \footnotesize Overlay effect: 28 replacement MLP/SVM-SHAP runs + 2 newly recovered cells; residual unavailability = 7 missing artifacts + 25 empty artifacts.
 \end{minipage}}
-\caption{Evidence qualification waterfall for EXP2 robustness inference.}
+\caption{Evidence qualification waterfall for primary robustness benchmark (EXP2) inference.}
 \label{fig:evidence-waterfall}
 \end{figure}
 
@@ -226,8 +227,9 @@ to stratum capacity).
 
 \subsection{Model and Explanation Protocol}
 \label{sec:methods-protocol}
-EXP2 evaluates frozen EXP1 model artifacts; models are not retrained during
-EXP2. Model families are \texttt{logreg}, \texttt{rf}, \texttt{xgb},
+The primary robustness benchmark (EXP2) evaluates model artifacts frozen during
+the calibration/reproducibility stage (EXP1); models are not retrained during
+the primary benchmark. Model families are \texttt{logreg}, \texttt{rf}, \texttt{xgb},
 \texttt{svm}, and \texttt{mlp}, with fixed repository-tracked settings.
 
 All methods are executed through \texttt{ExplainerWrapper.explain\_instance} under a standardized runtime constraint protocol (Cores=1, RAM=4GB, Timeout=300s) enforced by the infrastructure's resource guard to ensure comparable wall-clock duration reporting.
@@ -305,8 +307,8 @@ FOM-7 denotes the \textbf{F}ramework \textbf{O}peration \textbf{M}ethod with
 seven sequential quality gates. It was derived from two inputs: (i)
 literature-grounded benchmark requirements for transparent, reproducible
 evaluation \citep{canha2025functionally,agarwal2022openxai,hedstrom2023quantus},
-and (ii) failure modes observed in the EXP1 pilot/calibration stream
-(Table~\ref{tab:cohorts}), especially protocol drift, artifact integrity
+and (ii) failure modes observed in the calibration-stage pilot stream
+(EXP1; Table~\ref{tab:cohorts}), especially protocol drift, artifact integrity
 failures, and non-equivalent analysis exports. To convert these risks into
 explicit controls, the benchmark workflow was restructured as the following
 stage-gated protocol:
@@ -344,7 +346,7 @@ The reproducibility package includes code, experiment configurations, model and
 preprocessor artifacts, per-run outputs, analysis exports, and figure scripts.
 Primary repository anchors used in this paper are:
 \begin{itemize}[leftmargin=*]
-    \item \path{configs/experiments/exp2_scaled/manifest.yaml} (declared EXP2 run grid),
+    \item \path{configs/experiments/exp2_scaled/manifest.yaml} (declared primary benchmark (EXP2) run grid),
     \item \path{experiments/exp2_scaled/results/} (qualified per-run outputs),
     \item \path{outputs/paper_analysis/paper_comparison.csv} (aggregated comparison export),
     \item \path{scripts/generate_paper_a_figures.py} (figure-generation entry point).
@@ -368,14 +370,15 @@ Validity controls and residual risks are summarized as follows:
 
 Scope of claims: conclusions in Section~\ref{sec:results} are comparative and bounded to this
 benchmark setting (Adult tabular task, declared models/explainers, and
-artifact-qualified EXP2 subsets).
+artifact-qualified primary benchmark (EXP2) subsets).
 
 \section{Results}
 \label{sec:results}
 
 \subsection{Overview of Evaluation Setup}
-This section reports results from two evidence streams: EXP2 robustness (global
-and paired method comparisons) and EXP1 reproducibility (variance profiling).
+This section reports results from two evidence streams: the primary robustness
+benchmark (EXP2) for global and paired method comparisons, and the
+reproducibility repeatability cohort (EXP1) for variance profiling.
 Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are
 Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms).
 This multi-metric framing treats explanation quality as a vector of properties
@@ -383,7 +386,8 @@ rather than a single scalar score
 \citep{kadir2023metrics,pawlicki2024multiple,arrieta2020xai}.
 Metric definitions and the inferential workflow are specified in
 Section~\ref{sec:methods-inference}.
-``15 complete model-size blocks'' denotes the block-level EXP2 units used for
+``15 complete model-size blocks'' denotes the block-level primary benchmark
+(EXP2) units used for
 global inference, and ``45 matched configs'' denotes the SHAP--LIME subset with
 shared $(\text{model},\text{seed},N)$ cells on \texttt{logreg/rf/xgb}.
 Metric direction is defined in Table~\ref{tab:metric-orientation}, and cohort
@@ -392,7 +396,7 @@ qualification counts are reported in Table~\ref{tab:evidence-accounting}.
 \subsection{Global Trade-offs Across Methods (Quality vs Cost)}
 \begin{table}[h]
 \centering
-\caption{Global method means (EXP2 robustness: 15 complete model-size blocks).}
+\caption{Global method means (primary robustness benchmark (EXP2): 15 complete model-size blocks).}
 \begin{tabular}{lrrrrr}
 \toprule
 Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
@@ -493,7 +497,7 @@ the SHAP--LIME pair, including rule-based and counterfactual families
 \citep{ribeiro2018anchors,mothilal2020dice}.
 
 \subsection{Reproducibility and Variance Profile}
-EXP1 repeated-run evidence indicates lower dispersion for quality-oriented
+The reproducibility repeatability cohort (EXP1) indicates lower dispersion for quality-oriented
 metrics and higher dispersion for runtime behavior. Quality metrics remain
 relatively stable across repeated seeds, while Cost varies more strongly for
 SHAP variants, consistent with recent calls for variance-aware benchmark
@@ -525,7 +529,7 @@ under a new versioned release and DOI before submission. A prior submission
 snapshot for release tag \path{paper-a-submission-2026-03-28} has
 version-specific DOI
 \href{https://doi.org/10.5281/zenodo.19297724}{10.5281/zenodo.19297724}, but
-that prior DOI does not by itself identify the refreshed EXP2 evidence cut
+that prior DOI does not by itself identify the refreshed primary benchmark (EXP2) evidence cut
 reported here. Materials required to
 reproduce the Paper A analyses include
 \path{experiments/exp2_scaled/results/},
@@ -554,7 +558,7 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} Current EXP2 availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 32 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
+    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 32 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
     \item \textbf{Next steps:} Normalize the remaining SHAP recovery rows into committed per-run outputs where appropriate and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 268 analyzable-run snapshot.
     \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
 \end{itemize}

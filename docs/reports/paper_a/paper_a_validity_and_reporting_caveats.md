@@ -38,7 +38,7 @@ Omnibus results remain valid as the filtering protocol still admits model-size b
 | **Faithfulness Gap** | `faithfulness.py` | `FaithfulnessMetric` (`faithfulness_gap`) |
 | **Cost (ms)** | `cost.py` | `CostMetric` |
 
-EEU remains uncomputed in EXP2 runtime and therefore cannot support energy-based claims.
+EEU remains uncomputed in the primary benchmark (EXP2) runtime and therefore cannot support energy-based claims.
 
 ### 5.3 Internal Validity (Runtime Comparability and Configuration Fidelity)
 
