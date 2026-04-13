@@ -164,7 +164,11 @@ function Convert-ToRemoteBranch {
 function Get-ResultJsonCount {
     param([string]$Ref)
 
-    $Paths = Invoke-Git -Arguments @("ls-tree", "-r", "--name-only", $Ref, "experiments/exp2_scaled/results")
+    $Result = Invoke-GitProcess -Arguments @("ls-tree", "-r", "--name-only", $Ref, "experiments/exp2_scaled/results") -LogOutput $false
+    if ($Result.ExitCode -ne 0) {
+        throw "git ls-tree failed while counting results for $Ref"
+    }
+    $Paths = @($Result.Output)
     return @($Paths | Where-Object { $_ -match '/results\.json$' }).Count
 }
 
