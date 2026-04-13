@@ -110,6 +110,36 @@ The dashboard shows:
 - recent completed runs
 - live worker PID and config path
 
+## Consolidate All Worker Branches
+
+Use `main` as the consolidated source of truth. Individual workstations can
+show different percentages because each one is checked out on its own worker
+branch and may not have every other workstation's latest pushed checkpoints.
+
+Run the collector from one machine only:
+
+```powershell
+cd C:\Users\jonna\Github\xai-eval-framework
+.\scripts\collect_worker_results.ps1 -Push
+```
+
+The collector automatically merges all remote branches matching:
+
+```text
+origin/results/*
+```
+
+If a workstation used a non-standard branch name, pass it explicitly:
+
+```powershell
+.\scripts\collect_worker_results.ps1 -ExtraBranches origin/linux_dell -Push
+```
+
+The collector does not switch the active checkout or rebase worker branches.
+It fetches GitHub, creates merge commits from Git objects, pushes `main`, and
+uses `logs\git_mutex` so it does not collide with local auto-push operations.
+After it finishes, read the global completion percentage from `main`.
+
 ### 2. Raw Runner Log
 
 ```powershell
