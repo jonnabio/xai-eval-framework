@@ -71,6 +71,80 @@ def get_last_commit(project_root: Path) -> str:
         return "Unknown"
 
 
+def get_main_sync_status(project_root: Path) -> dict:
+    status = {
+        "main_head": "Unknown",
+        "main_results_last_commit": "Unknown",
+        "pending_to_main_files": "?",
+        "pending_from_main_files": "?",
+    }
+
+    try:
+        main_head = subprocess.run(
+            ["git", "log", "-1", "--pretty=format:%h (%cr) %s", "origin/main"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if main_head.stdout.strip():
+            status["main_head"] = main_head.stdout.strip()
+
+        main_results_commit = subprocess.run(
+            [
+                "git",
+                "log",
+                "-1",
+                "--pretty=format:%h (%cr) %s",
+                "origin/main",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if main_results_commit.stdout.strip():
+            status["main_results_last_commit"] = main_results_commit.stdout.strip()
+
+        to_main = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--name-only",
+                "origin/main..HEAD",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        from_main = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--name-only",
+                "HEAD..origin/main",
+                "--",
+                "experiments/exp2_scaled/results",
+            ],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        status["pending_to_main_files"] = len([line for line in to_main.stdout.splitlines() if line.strip()])
+        status["pending_from_main_files"] = len([line for line in from_main.stdout.splitlines() if line.strip()])
+    except Exception:
+        return status
+
+    return status
+
+
 def get_live_runner_process() -> dict | None:
     try:
         script = r"""
@@ -168,17 +242,32 @@ def get_target_instances(cfg: dict, default: int = 400) -> int:
     return sampling.get("samples_per_class", 100) * 4 if sampling else default
 
 
-def discover_active_experiments(results_dir: Path, config_index: dict[str, dict]) -> tuple[int, list[dict]]:
+def discover_active_experiments(results_dir: Path, config_index: dict[str, dict], main_paths: set = None) -> tuple[int, list[dict]]:
+    if main_paths is None:
+        main_paths = set()
+        
     active_instances = 0
     active_experiments: list[dict] = []
 
     instance_dirs = list(results_dir.glob("**/instances"))
     for inst_dir in sorted(instance_dirs):
         parent = inst_dir.parent
-        if (parent / "results.json").exists():
+        parent_norm = str(parent.relative_to(results_dir.parent)).replace(os.sep, "/")
+        
+        # Skip if this experiment is already finished on origin/main
+        if any(p.startswith(f"{parent_norm}/results.json") for p in main_paths):
             continue
 
-        count = len(list(inst_dir.glob("*.json")))
+        # Union of local files and files already on origin/main for this directory
+        local_files = {f.name for f in inst_dir.glob("*.json")}
+        main_files_here = {
+            os.path.basename(p) for p in main_paths
+            if p.startswith(f"{parent_norm}/instances/") and p.endswith(".json")
+        }
+        count = len(local_files | main_files_here)
+        if count == 0:
+            continue
+            
         active_instances += count
 
         rel_path = parent.relative_to(results_dir)
@@ -260,18 +349,49 @@ def get_recent_completed_runs(result_files: list[Path], limit: int = 5) -> list[
 
 
 def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_file: Path) -> dict:
+    import subprocess
+    
     config_paths = sorted(config_dir.glob("*.yaml"))
-    result_files = sorted(results_dir.glob("**/results.json"))
     config_index = build_config_index(config_paths)
 
+    # Fetch origin/main to get cross-workstation global progress
+    subprocess.run(
+        ["git", "fetch", "origin", "--prune", "--quiet"],
+        cwd=str(project_root),
+        check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+    
+    # Get finished configs and completed instances from origin/main
+    try:
+        main_tree_raw = subprocess.check_output(
+            ["git", "ls-tree", "-r", "--name-only", "origin/main", "--",
+             "experiments/exp2_scaled/results"],
+            text=True, cwd=str(project_root)
+        )
+        main_paths = set(main_tree_raw.strip().splitlines())
+    except subprocess.CalledProcessError:
+        main_paths = set()
+    
+    # Finished configs = dirs with results.json on origin/main
+    finished_dirs_main = {os.path.dirname(p) for p in main_paths if p.endswith("/results.json")}
+    
+    # Completed instances = instance JSON count in finished dirs on origin/main
+    completed_instances = sum(
+        1 for p in main_paths
+        if '/instances/' in p and p.endswith('.json')
+        and p.split('/instances/')[0] in finished_dirs_main
+    )
+    
+    # Also load local result files for recent_completed_runs display
+    result_files = sorted(results_dir.glob("**/results.json"))
+    
     total_target_instances = 0
     for config_path in config_paths:
         cfg = load_yaml(config_path)
         if cfg:
             total_target_instances += get_target_instances(cfg)
 
-    completed_instances = get_completed_instance_count(result_files)
-    active_instances, active_experiments = discover_active_experiments(results_dir, config_index)
+    active_instances, active_experiments = discover_active_experiments(results_dir, config_index, main_paths)
 
     total_done = completed_instances + active_instances
     pct = (total_done / total_target_instances * 100) if total_target_instances else 0.0
@@ -289,7 +409,7 @@ def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_
         "mem_used_percent": mem.percent,
         "load": get_load_average(),
         "total_configs": len(config_paths),
-        "finished_configs": len(result_files),
+        "finished_configs": len(finished_dirs_main),
         "completed_instances": completed_instances,
         "active_instances": active_instances,
         "total_target_instances": total_target_instances,
@@ -305,6 +425,7 @@ def collect_status(project_root: Path, config_dir: Path, results_dir: Path, log_
         "log_file": str(log_file),
         "config_dir": str(config_dir),
         "results_dir": str(results_dir),
+        "main_sync": get_main_sync_status(project_root),
     }
 
 
@@ -399,6 +520,20 @@ def draw(status: dict, interval: int) -> None:
                 f"{completed_at}  {str(item['instances']).rjust(4)} inst  {item['name']}"[:88]
             )
 
+    print("-" * 88)
+    print("Main Branch Sync")
+    main_sync = status.get("main_sync", {})
+    print(f"origin/main HEAD: {main_sync.get('main_head', 'Unknown')}")
+    print(
+        "Latest main results commit: "
+        f"{main_sync.get('main_results_last_commit', 'Unknown')}"
+    )
+    print(
+        "Result files pending this branch -> main: "
+        f"{main_sync.get('pending_to_main_files', '?')}  |  "
+        "main-only result files not in this branch: "
+        f"{main_sync.get('pending_from_main_files', '?')}"
+    )
     print("-" * 88)
     print(f"Recent Log Tail: {status['log_file']}")
     for line in status["log_lines"]:
