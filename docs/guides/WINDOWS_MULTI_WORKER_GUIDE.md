@@ -93,6 +93,24 @@ worker result branch (`results/<worker_id>`). The sync daemon commits every
 15 minutes and pushes that worker branch every 6 hours. It does **not** rebase
 while experiments are running.
 
+## Global Experiment Claims
+
+Before a workstation starts an experiment, it now reserves that experiment on
+`main` by creating:
+
+```text
+experiments/exp2_scaled/worker_claims/<experiment_name>.json
+```
+
+The claim is pushed to GitHub immediately. If another workstation already
+claimed the experiment, the runner skips it and chooses another one. This is
+the duplication guard: worker result branches store outputs, while `main`
+stores the shared claim queue and consolidated completed results.
+
+Do not edit or delete claim files while workers are running unless you are
+manually recovering a dead worker. A claim without a final `results.json` means
+that a workstation owns or previously owned that experiment.
+
 ## Monitor Worker
 
 ### 1. Dashboard
@@ -190,17 +208,22 @@ instance count, target count, latest checkpoint time, and whether
    - This avoids rebase conflicts on `main` during active experiments.
    - Final aggregation into `main` should be done by a separate collector step.
 
-3. Auto-push may still fail if the worker branch was changed elsewhere.
+3. Work assignment claims target `main`.
+   - Claims are tiny JSON files under `worker_claims/`.
+   - They are pushed before the expensive experiment starts.
+   - If the claim push is rejected, the worker fetches again and picks another experiment.
+
+4. Auto-push may still fail if the worker branch was changed elsewhere.
    - This does not mean the experiment stopped.
    - It means results were committed locally but not pushed yet.
    - Do not rebase during an active experiment; inspect and reconcile later.
 
-4. Long-running experiments can stay quiet for a while.
+5. Long-running experiments can stay quiet for a while.
    - Check the dashboard’s `Current Results` and `Live Worker` sections.
    - Check the latest write time in the active `instances/` folder.
    - Check the worker manifest `current.json`.
 
-5. Do not run two workstations with the same `XAI_WORKER_ID`.
+6. Do not run two workstations with the same `XAI_WORKER_ID`.
    - If two machines share the same worker branch, push conflicts can return.
 
 ## If the Worker Stops
