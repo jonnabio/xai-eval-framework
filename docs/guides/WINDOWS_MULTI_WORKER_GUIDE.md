@@ -93,6 +93,24 @@ worker result branch (`results/<worker_id>`). The sync daemon commits every
 15 minutes and pushes that worker branch every 3 hours. It does **not** rebase
 while experiments are running.
 
+## Branch Model
+
+The project now uses a strict multi-workstation branch model:
+
+- `main` is the shared integration branch for scripts, docs, dashboards, and curated result snapshots.
+- `results/<worker_id>` is the live worker branch for each machine.
+- Do not run experiments directly on `main`.
+- Do not let two machines share the same `results/<worker_id>` branch.
+
+Current examples:
+
+- `main`
+- `results/jonaasusrog`
+- `results/jon_asus`
+
+Only keep worker branches that are actively producing results or still hold unique unpublished output.
+Temporary helper branches created for sync or maintenance should be deleted after use.
+
 ## Monitor Worker
 
 ### 1. Dashboard
@@ -110,7 +128,6 @@ The dashboard shows:
 - latest write age
 - recent completed runs
 - live worker PID and config path
-
 The remote worker section is read-only. It fetches `origin/results/*` and
 uses worker manifests when available, with a remote-tree file-count fallback
 for branches that have not pushed manifests yet. It does not switch branches,
