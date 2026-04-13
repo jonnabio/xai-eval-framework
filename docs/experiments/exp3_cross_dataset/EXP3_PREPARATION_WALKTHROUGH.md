@@ -6,6 +6,7 @@
 - **Experiment family**: `exp3_cross_dataset`
 - **Status**: Prepared, not executed
 - **Reason for deferral**: Active EXP2 worker is still running
+- **Implementation commit**: `bf1096e4 feat(exp3): prepare cross-dataset validation scaffold`
 
 ## 2. Goal
 
@@ -93,7 +94,46 @@ The docs now distinguish between EXP3 preparation and EXP3 execution, and
 recommend starting with a Breast Cancer SHAP smoke test after the active EXP2
 worker finishes.
 
-## 4. Verification
+## 4. File-Level Change Inventory
+
+### 4.1 Code
+
+| Path | Change |
+|------|--------|
+| `src/data_loading/cross_dataset.py` | Added EXP3 dataset loaders for `breast_cancer` and `german_credit`, plus the `load_tabular_dataset` dispatcher. |
+| `src/data_loading/__init__.py` | Exported the EXP3 dataset loaders and dispatcher. |
+| `src/experiment/runner.py` | Added runner support for `breast_cancer` and `german_credit`, including optional seed-specific preprocessor loading beside the model artifact. |
+
+### 4.2 Scripts
+
+| Path | Change |
+|------|--------|
+| `scripts/generate_exp3_configs.py` | Added the config generator for the fixed 24-run EXP3 grid. |
+| `scripts/train_exp3_models.py` | Added the model artifact preparation entry point for seed-specific RF/XGB model and preprocessor artifacts. |
+
+### 4.3 Configs
+
+| Path | Change |
+|------|--------|
+| `configs/experiments/exp3_cross_dataset/manifest.yaml` | Updated EXP3 status from `proposed` to `prepared`, added `model_root`, and normalized artifact roots. |
+| `configs/experiments/exp3_cross_dataset/breast_cancer/*.yaml` | Added 12 Breast Cancer configs across RF/XGB, SHAP/Anchors, and seeds `42`, `123`, `456`. |
+| `configs/experiments/exp3_cross_dataset/german_credit/*.yaml` | Added 12 German Credit configs across RF/XGB, SHAP/Anchors, and seeds `42`, `123`, `456`. |
+
+### 4.4 Documentation
+
+| Path | Change |
+|------|--------|
+| `docs/experiments/exp3_cross_dataset/README.md` | Documented preparation status, execution priority, and the first smoke-test sequence. |
+| `docs/results/exp3_cross_dataset/README.md` | Documented result-side status and deferred execution semantics. |
+| `docs/experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md` | Added the session-level walkthrough, validation record, and change inventory. |
+
+### 4.5 Tests
+
+| Path | Change |
+|------|--------|
+| `tests/test_cross_dataset_loader.py` | Added loader smoke tests for Breast Cancer and dispatcher validation. |
+
+## 5. Verification
 
 Commands run:
 
@@ -111,7 +151,7 @@ Observed results:
 - Breast Cancer loader smoke check:
   `(455, 30) (114, 30) 30 0.6264 0.6316`.
 
-## 5. Deferred Execution
+## 6. Deferred Execution
 
 Do not run the full EXP3 grid until the active EXP2 worker finishes.
 

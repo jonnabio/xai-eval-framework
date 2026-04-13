@@ -17,6 +17,9 @@ artifacts are trained and at least one smoke-test run has passed. The current
 preparation stage provides dataset-loader support, config generation, and a
 model-training entry point, but execution is deferred while EXP2 is active.
 
+The preparation change inventory is documented in
+[docs/experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md](../../experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md).
+
 ## Planned Raw Artifact Root
 
 Planned root:

@@ -22,6 +22,8 @@ Status:
 - dataset-loader support is prepared for `breast_cancer` and `german_credit`;
 - config generation is handled by `scripts/generate_exp3_configs.py`;
 - model artifact preparation is handled by `scripts/train_exp3_models.py`;
+- preparation walkthrough and file-level change inventory are documented in
+  [EXP3_PREPARATION_WALKTHROUGH.md](./EXP3_PREPARATION_WALKTHROUGH.md);
 - full execution should wait until the active EXP2 worker has finished.
 
 EXP3 compute should start with a single Breast Cancer SHAP smoke run before any
@@ -65,6 +67,7 @@ Within each block:
 Design:
 
 - this document
+- [EXP3 preparation walkthrough](./EXP3_PREPARATION_WALKTHROUGH.md)
 
 Results guide:
 
@@ -73,6 +76,13 @@ Results guide:
 Execution/config:
 
 - [configs/experiments/exp3_cross_dataset](../../../configs/experiments/exp3_cross_dataset)
+- `scripts/generate_exp3_configs.py`
+- `scripts/train_exp3_models.py`
+
+Code support:
+
+- `src/data_loading/cross_dataset.py`
+- `src/experiment/runner.py`
 
 Raw outputs:
 
