@@ -1,0 +1,27 @@
+name: exp3_german_credit_rf_shap_s456_n100
+version: '3.0'
+dataset: german_credit
+random_seed: 456
+model:
+  name: german_credit_rf
+  path: experiments/exp3_cross_dataset/models/german_credit/rf/seed_456/rf.joblib
+  type: rf
+explainer:
+  method: shap
+  params:
+    n_background_samples: 50
+  explainer_type: tree
+sampling:
+  strategy: stratified
+  samples_per_class: 100
+  random_seed: 456
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+max_workers: 1
+output_dir: experiments/exp3_cross_dataset/results/german_credit/rf_shap/seed_456/n_100

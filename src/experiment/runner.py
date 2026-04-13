@@ -35,6 +35,7 @@ warnings.filterwarnings("ignore", message=".*no training data record had discret
 
 from src.experiment.config import ExperimentConfig
 from src.data_loading.adult import load_adult
+from src.data_loading.cross_dataset import load_tabular_dataset
 from src.xai.shap_tabular import SHAPTabularWrapper
 from src.xai.lime_tabular import LIMETabularWrapper
 # from src.xai.dice_wrapper import DiCETabularWrapper  <-- Moved to setup() to avoid hard dependency on dice_ml
@@ -155,6 +156,44 @@ class ExperimentRunner:
             # Compute baseline for Faithfulness metric (mean of training data)
             self.baseline_values = np.mean(X_train, axis=0)
             
+
+        elif self.config.dataset in {"breast_cancer", "german_credit"}:
+            data_dir = str(Path("data").resolve())
+            preprocessor = None
+            model_dir = self.config.model.path.parent
+            potential_paths = [
+                model_dir / "preprocessor.pkl",
+                model_dir / "preprocessor.joblib"
+            ]
+            for p_path in potential_paths:
+                if p_path.exists():
+                    logger.info(f"Loading existing preprocessor from {p_path}")
+                    try:
+                        preprocessor = joblib.load(p_path)
+                        break
+                    except Exception as e:
+                        logger.warning(f"Failed to load preprocessor {p_path}: {e}")
+
+            if preprocessor is not None:
+                logger.info("Using pre-fitted preprocessor due to existing artifact.")
+
+            X_train, X_test, y_train, y_test, feature_names, _ = load_tabular_dataset(
+                self.config.dataset,
+                cache_dir=data_dir,
+                random_state=self.config.random_seed,
+                preprocessor=preprocessor
+            )
+
+            self.dataset = {
+                'X_train': X_train,
+                'X_test': X_test,
+                'y_train': y_train,
+                'y_test': y_test,
+                'feature_names': feature_names,
+                'class_names': ['negative', 'positive']
+            }
+
+            self.baseline_values = np.mean(X_train, axis=0)
 
         else:
             raise ValueError(f"Unsupported dataset: {self.config.dataset}")

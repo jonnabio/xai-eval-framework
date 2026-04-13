@@ -1,0 +1,26 @@
+name: exp3_german_credit_xgb_anchors_s123_n100
+version: '3.0'
+dataset: german_credit
+random_seed: 123
+model:
+  name: german_credit_xgb
+  path: experiments/exp3_cross_dataset/models/german_credit/xgb/seed_123/xgb.joblib
+  type: xgb
+explainer:
+  method: anchors
+  params:
+    threshold: 0.95
+sampling:
+  strategy: stratified
+  samples_per_class: 100
+  random_seed: 123
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+max_workers: 1
+output_dir: experiments/exp3_cross_dataset/results/german_credit/xgb_anchors/seed_123/n_100

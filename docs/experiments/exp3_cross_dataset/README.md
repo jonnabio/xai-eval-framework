@@ -14,6 +14,19 @@ EXP3 supports bounded claims about external validity:
 - selected explainer trade-offs are not purely Adult-specific
 - key quantitative patterns can be rechecked on additional tabular datasets
 
+## Preparation Status
+
+Status:
+
+- design manifest exists;
+- dataset-loader support is prepared for `breast_cancer` and `german_credit`;
+- config generation is handled by `scripts/generate_exp3_configs.py`;
+- model artifact preparation is handled by `scripts/train_exp3_models.py`;
+- full execution should wait until the active EXP2 worker has finished.
+
+EXP3 compute should start with a single Breast Cancer SHAP smoke run before any
+Anchors jobs are launched.
+
 ## Planned Matrix
 
 Declared in [configs/experiments/exp3_cross_dataset/manifest.yaml](../../../configs/experiments/exp3_cross_dataset/manifest.yaml):
@@ -32,10 +45,15 @@ Planned total:
 
 Recommended order:
 
-1. Breast Cancer + SHAP
-2. Breast Cancer + Anchors
-3. German Credit + SHAP
-4. German Credit + Anchors
+1. Generate EXP3 configs with `python scripts/generate_exp3_configs.py`.
+2. Train Breast Cancer model artifacts with:
+   `python scripts/train_exp3_models.py --datasets breast_cancer --models rf xgb --seeds 42 123 456`.
+3. Run one smoke-test configuration:
+   `python -m src.experiment.runner --config configs/experiments/exp3_cross_dataset/breast_cancer/rf_shap_s42_n100.yaml`.
+4. Complete Breast Cancer + SHAP.
+5. Complete Breast Cancer + Anchors.
+6. Train and execute German Credit + SHAP.
+7. Complete German Credit + Anchors.
 
 Within each block:
 

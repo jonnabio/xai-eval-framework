@@ -1,0 +1,27 @@
+name: exp3_breast_cancer_xgb_shap_s123_n100
+version: '3.0'
+dataset: breast_cancer
+random_seed: 123
+model:
+  name: breast_cancer_xgb
+  path: experiments/exp3_cross_dataset/models/breast_cancer/xgb/seed_123/xgb.joblib
+  type: xgb
+explainer:
+  method: shap
+  params:
+    n_background_samples: 50
+  explainer_type: tree
+sampling:
+  strategy: stratified
+  samples_per_class: 100
+  random_seed: 123
+metrics:
+  fidelity: true
+  stability: true
+  sparsity: true
+  cost: true
+  domain: false
+  counterfactual: false
+  stability_perturbations: 15
+max_workers: 1
+output_dir: experiments/exp3_cross_dataset/results/breast_cancer/xgb_shap/seed_123/n_100

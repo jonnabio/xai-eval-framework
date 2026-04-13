@@ -10,9 +10,12 @@ It is the result-side companion to [docs/experiments/exp3_cross_dataset/README.m
 
 Status:
 
-- proposed / not yet executed
+- prepared / not yet executed
 
-No EXP3 raw result tree is expected to be complete until the EXP3 configs, dataset loaders, and model artifacts are implemented.
+No EXP3 raw result tree is expected to be complete until the EXP3 model
+artifacts are trained and at least one smoke-test run has passed. The current
+preparation stage provides dataset-loader support, config generation, and a
+model-training entry point, but execution is deferred while EXP2 is active.
 
 ## Planned Raw Artifact Root
 
