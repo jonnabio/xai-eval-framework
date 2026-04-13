@@ -90,26 +90,8 @@ This starts:
 
 At startup, `managed_runner.ps1` switches the repository from `main` to the
 worker result branch (`results/<worker_id>`). The sync daemon commits every
-15 minutes and pushes that worker branch every 3 hours. It does **not** rebase
+15 minutes and pushes that worker branch every 6 hours. It does **not** rebase
 while experiments are running.
-
-## Branch Model
-
-The project now uses a strict multi-workstation branch model:
-
-- `main` is the shared integration branch for scripts, docs, dashboards, and curated result snapshots.
-- `results/<worker_id>` is the live worker branch for each machine.
-- Do not run experiments directly on `main`.
-- Do not let two machines share the same `results/<worker_id>` branch.
-
-Current examples:
-
-- `main`
-- `results/jonaasusrog`
-- `results/jon_asus`
-
-Only keep worker branches that are actively producing results or still hold unique unpublished output.
-Temporary helper branches created for sync or maintenance should be deleted after use.
 
 ## Monitor Worker
 
@@ -124,14 +106,39 @@ Use the Windows terminal dashboard:
 The dashboard shows:
 - overall progress
 - active experiment result directories
-- remote worker branch progress from `origin/results/*`
 - latest write age
 - recent completed runs
 - live worker PID and config path
-The remote worker section is read-only. It fetches `origin/results/*` and
-uses worker manifests when available, with a remote-tree file-count fallback
-for branches that have not pushed manifests yet. It does not switch branches,
-merge result branches into `main`, or rebase active worker branches.
+
+## Consolidate All Worker Branches
+
+Use `main` as the consolidated source of truth. Individual workstations can
+show different percentages because each one is checked out on its own worker
+branch and may not have every other workstation's latest pushed checkpoints.
+
+Run the collector from one machine only:
+
+```powershell
+cd C:\Users\jonna\Github\xai-eval-framework
+.\scripts\collect_worker_results.ps1 -Push
+```
+
+The collector automatically merges all remote branches matching:
+
+```text
+origin/results/*
+```
+
+If a workstation used a non-standard branch name, pass it explicitly:
+
+```powershell
+.\scripts\collect_worker_results.ps1 -ExtraBranches origin/linux_dell -Push
+```
+
+The collector does not switch the active checkout or rebase worker branches.
+It fetches GitHub, creates merge commits from Git objects, pushes `main`, and
+uses `logs\git_mutex` so it does not collide with local auto-push operations.
+After it finishes, read the global completion percentage from `main`.
 
 ### 2. Raw Runner Log
 
