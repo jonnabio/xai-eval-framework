@@ -71,6 +71,21 @@ single, auditable protocol that links benchmark execution governance, artifact
 quality control, and inferential reporting. The methodological contribution is
 not a new explainer algorithm; it is a reproducible benchmark operation model
 that connects design decisions to claim eligibility.
+\begin{table}[t]
+\centering
+\caption{Novelty boundary relative to adjacent XAI benchmark resources.}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Resource} & \textbf{Primary emphasis} & \textbf{Delta in this paper} \\
+\midrule
+OpenXAI \citep{agarwal2022openxai} & Transparent evaluation of post-hoc explanations. & Adds an operation-level protocol that links execution gates, artifact qualification, and claim eligibility. \\
+Quantus \citep{hedstrom2023quantus} & Toolkit support for many explanation quality metrics. & Uses metrics inside a fixed inferential workflow with block-level tests, recovery overlays, and failure accounting. \\
+BEExAI \citep{sithakoul2024beexai} & Benchmarking infrastructure for XAI comparison. & Emphasizes snapshot governance, deterministic analysis exports, and reproducibility profiling as first-class benchmark outputs. \\
+This work & Model-agnostic tabular benchmark governance. & Provides FOM-7, a staged claim-control protocol connecting protocol freeze, controlled execution, integrity audit, statistical export, and bounded reporting. \\
+\bottomrule
+\end{tabularx}
+\label{tab:novelty-delta}
+\end{table}
 
 \subsection{Contributions and Scope}
 This paper contributes:
@@ -515,6 +530,24 @@ Interpretation limits:
     \item Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
 \end{itemize}
 
+\subsection{Responsible Use and Benchmark Boundaries}
+This benchmark should not be read as evidence that post-hoc explanations are
+appropriate for all high-stakes decision settings. The Adult Income task
+contains demographic and socioeconomic variables, and benchmark rankings over
+this dataset can reflect properties of the task, preprocessing choices, model
+families, and metric implementations rather than universal properties of an
+explainer family. In particular, higher scores on the reported quantitative
+metrics do not imply fairness, causal validity, user trust, or suitability for
+deployment in eligibility, employment, credit, or other consequential settings
+\citep{rudin2019stop}.
+
+The intended use of the released artifacts is methodological: reproducing the
+reported benchmark, auditing the effect of artifact qualification and
+statistical filtering, and extending the protocol to additional datasets or
+explanation families. Claims about deployment utility, human interpretability,
+or cross-domain method superiority require additional validation beyond the
+quantitative-only scope of this paper.
+
 \subsection{Code and Artifact Availability}
 The current submission snapshot is publicly available at
 \url{https://github.com/jonnabio/xai-eval-framework}. The Zenodo archive for
@@ -527,7 +560,9 @@ reproduce the Paper A analyses include
 \path{outputs/analysis/paper_a_exp2_stats/},
 \path{scripts/run_exp2_statistical_analysis.py},
 \path{scripts/generate_paper_a_figures.py}, and the manuscript sources under
-\path{docs/reports/paper_a/}. The repository is released under the MIT License.
+\path{docs/reports/paper_a/}. A path-level artifact index is maintained in
+\path{docs/reports/paper_a/paper_a_artifact_index.md}. The repository is
+released under the MIT License.
 
 \section{Conclusion}
 \label{sec:conclusion}
