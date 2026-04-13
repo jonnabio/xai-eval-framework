@@ -32,6 +32,7 @@ $GitExe = if (Test-Path "C:\Program Files\Git\cmd\git.exe") {
 
 $LogFile = "logs\managed_runner.log"
 $ResultsPath = "experiments/exp2_scaled/results"
+$ClaimRoot = "experiments/exp2_scaled/worker_claims"
 $TempLogDir = "logs\runner_temp"
 $GitMutexDir = "logs\git_mutex"
 if (-not (Test-Path -Path "logs")) {
@@ -216,6 +217,175 @@ function Get-GitStatusPorcelain {
     }
 
     return ,@($StatusResult.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+}
+
+function Invoke-GitScalar {
+    param([string[]]$Arguments)
+
+    $Result = Get-GitCommandOutput -Arguments $Arguments
+    if ($Result.ExitCode -ne 0) {
+        return $null
+    }
+
+    return (($Result.Output | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Last 1) -as [string]).Trim()
+}
+
+function ConvertTo-GitPath {
+    param([string]$Path)
+    return ($Path -replace '\\', '/')
+}
+
+function Test-GitPathExists {
+    param(
+        [string]$Ref,
+        [string]$Path
+    )
+
+    $GitPath = ConvertTo-GitPath -Path $Path
+    return (Invoke-GitQuiet -Arguments @("cat-file", "-e", "$Ref`:$GitPath")) -eq 0
+}
+
+function Get-GitFileText {
+    param(
+        [string]$Ref,
+        [string]$Path
+    )
+
+    $GitPath = ConvertTo-GitPath -Path $Path
+    $Result = Get-GitCommandOutput -Arguments @("show", "$Ref`:$GitPath")
+    if ($Result.ExitCode -ne 0) {
+        return $null
+    }
+
+    return ($Result.Output -join "`n")
+}
+
+function New-ExperimentClaim {
+    param(
+        [string]$ExperimentName,
+        [string]$ConfigPath,
+        [string]$OutputDir
+    )
+
+    $FetchExitCode = Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", "main")
+    if ($FetchExitCode -ne 0) {
+        Write-Log "[CLAIM] Could not fetch origin/main before claiming $ExperimentName. Will retry later."
+        return "retry"
+    }
+
+    $BaseCommit = Invoke-GitScalar -Arguments @("rev-parse", "origin/main")
+    if ([string]::IsNullOrWhiteSpace($BaseCommit)) {
+        Write-Log "[CLAIM] Could not resolve origin/main before claiming $ExperimentName."
+        return "retry"
+    }
+
+    $ResultsFile = Join-Path $OutputDir "results.json"
+    if ((-not [string]::IsNullOrWhiteSpace($OutputDir)) -and (Test-GitPathExists -Ref $BaseCommit -Path $ResultsFile)) {
+        Write-Log "[CLAIM] $ExperimentName already has results.json on origin/main. Skipping."
+        return "completed"
+    }
+
+    $ClaimPath = "$ClaimRoot/$ExperimentName.json"
+    $ExistingClaim = Get-GitFileText -Ref $BaseCommit -Path $ClaimPath
+    if (-not [string]::IsNullOrWhiteSpace($ExistingClaim)) {
+        try {
+            $Claim = $ExistingClaim | ConvertFrom-Json
+            if ($Claim.worker_id -eq $WorkerId) {
+                Write-Log "[CLAIM] Reusing existing claim for $ExperimentName owned by this worker."
+                return "claimed"
+            }
+
+            Write-Log "[CLAIM] $ExperimentName is already claimed by worker $($Claim.worker_id); skipping."
+            return "claimed_by_other"
+        } catch {
+            Write-Log "[CLAIM] $ExperimentName has an unreadable claim on main; skipping to avoid duplicate work."
+            return "claimed_by_other"
+        }
+    }
+
+    $ClaimObject = [ordered]@{
+        experiment_name = $ExperimentName
+        worker_id = $WorkerId
+        host = $env:COMPUTERNAME
+        results_branch = $ResultsBranch
+        config_path = ConvertTo-GitPath -Path $ConfigPath
+        output_dir = ConvertTo-GitPath -Path $OutputDir
+        claimed_at = (Get-Date).ToString("o")
+        base_main_commit = $BaseCommit
+        claim_version = 1
+    }
+
+    $ClaimJson = $ClaimObject | ConvertTo-Json -Depth 5
+    $ClaimTempPath = Join-Path $TempLogDir ("claim-{0}.json" -f ([System.Guid]::NewGuid().ToString("N")))
+    $MessagePath = Join-Path $TempLogDir ("claim-message-{0}.txt" -f ([System.Guid]::NewGuid().ToString("N")))
+    $IndexPath = Join-Path $TempLogDir ("claim-index-{0}" -f ([System.Guid]::NewGuid().ToString("N")))
+    $PreviousIndex = $env:GIT_INDEX_FILE
+
+    try {
+        $ClaimJson | Set-Content -Path $ClaimTempPath -Encoding UTF8
+        $Blob = Invoke-GitScalar -Arguments @("hash-object", "-w", $ClaimTempPath)
+        if ([string]::IsNullOrWhiteSpace($Blob)) {
+            Write-Log "[CLAIM] Could not write claim blob for $ExperimentName."
+            return "retry"
+        }
+
+        $env:GIT_INDEX_FILE = $IndexPath
+        $ReadTreeExitCode = Invoke-GitQuiet -Arguments @("read-tree", $BaseCommit)
+        if ($ReadTreeExitCode -ne 0) {
+            Write-Log "[CLAIM] Could not prepare temporary index for $ExperimentName."
+            return "retry"
+        }
+
+        $GitClaimPath = ConvertTo-GitPath -Path $ClaimPath
+        $UpdateExitCode = Invoke-GitQuiet -Arguments @("update-index", "--add", "--cacheinfo", "100644,$Blob,$GitClaimPath")
+        if ($UpdateExitCode -ne 0) {
+            Write-Log "[CLAIM] Could not add claim to temporary index for $ExperimentName."
+            return "retry"
+        }
+
+        $Tree = Invoke-GitScalar -Arguments @("write-tree")
+        if ([string]::IsNullOrWhiteSpace($Tree)) {
+            Write-Log "[CLAIM] Could not write claim tree for $ExperimentName."
+            return "retry"
+        }
+
+        "Claim experiment $ExperimentName for $WorkerId`n`nReserve $ExperimentName before running so other workstations skip it." | Set-Content -Path $MessagePath -Encoding UTF8
+        $PreviousAuthorName = $env:GIT_AUTHOR_NAME
+        $PreviousAuthorEmail = $env:GIT_AUTHOR_EMAIL
+        $PreviousCommitterName = $env:GIT_COMMITTER_NAME
+        $PreviousCommitterEmail = $env:GIT_COMMITTER_EMAIL
+        try {
+            $env:GIT_AUTHOR_NAME = "jonna"
+            $env:GIT_AUTHOR_EMAIL = "jonna@users.noreply.github.com"
+            $env:GIT_COMMITTER_NAME = "jonna"
+            $env:GIT_COMMITTER_EMAIL = "jonna@users.noreply.github.com"
+            $ClaimCommit = Invoke-GitScalar -Arguments @("commit-tree", $Tree, "-p", $BaseCommit, "-F", $MessagePath)
+        } finally {
+            $env:GIT_AUTHOR_NAME = $PreviousAuthorName
+            $env:GIT_AUTHOR_EMAIL = $PreviousAuthorEmail
+            $env:GIT_COMMITTER_NAME = $PreviousCommitterName
+            $env:GIT_COMMITTER_EMAIL = $PreviousCommitterEmail
+        }
+
+        if ([string]::IsNullOrWhiteSpace($ClaimCommit)) {
+            Write-Log "[CLAIM] Could not create claim commit for $ExperimentName."
+            return "retry"
+        }
+    } finally {
+        $env:GIT_INDEX_FILE = $PreviousIndex
+        Remove-Item -Path $ClaimTempPath, $MessagePath, $IndexPath -Force -ErrorAction SilentlyContinue
+    }
+
+    $PushExitCode = Invoke-GitLogged -Arguments @("push", "--no-progress", "origin", "$ClaimCommit`:refs/heads/main")
+    if ($PushExitCode -eq 0) {
+        Write-Log "[CLAIM] Claimed $ExperimentName on main with commit $ClaimCommit."
+        Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", "main") | Out-Null
+        return "claimed"
+    }
+
+    Write-Log "[CLAIM] Claim push for $ExperimentName was rejected, likely because another worker updated main. Retrying queue."
+    Invoke-GitLogged -Arguments @("fetch", "--no-progress", "origin", "main") | Out-Null
+    return "retry"
 }
 
 function Ensure-ResultsBranch {
@@ -518,11 +688,12 @@ try {
 }
 
 try {
+    $SessionSkippedExperiments = [System.Collections.Generic.HashSet[string]]::new()
     while ($true) {
         $MissingList = Get-MissingExperimentList
-        $ExpName = $MissingList | Select-Object -First 1
+        $ExpName = $MissingList | Where-Object { -not $SessionSkippedExperiments.Contains($_) } | Select-Object -First 1
         if ([string]::IsNullOrWhiteSpace($ExpName)) {
-            Write-Log "[INFO] No missing experiments remain. Exiting managed runner."
+            Write-Log "[INFO] No unclaimed missing experiments remain for this session. Exiting managed runner."
             break
         }
 
@@ -572,6 +743,19 @@ try {
                 Start-Sleep -Seconds 2
                 continue
             }
+        }
+
+        $ClaimStatus = Invoke-WithGitMutex -Reason "managed_runner_claim" -Action {
+            New-ExperimentClaim -ExperimentName $ExpName -ConfigPath $ConfigPath -OutputDir $OutputDir
+        }
+        if ($ClaimStatus -ne "claimed") {
+            Write-Log "[SKIP] $ExpName claim status is $ClaimStatus. Selecting another experiment."
+            Write-RunManifest -ExperimentName $ExpName -ConfigPath $ConfigPath -OutputDir $OutputDir -Status "skipped_$ClaimStatus" -StartedAt (Get-Date)
+            if ($null -ne $ClaimStatus -and $ClaimStatus -ne "retry") {
+                $SessionSkippedExperiments.Add($ExpName) | Out-Null
+            }
+            Start-Sleep -Seconds 5
+            continue
         }
 
         # Run the experiment in an isolated child process so a console/window
