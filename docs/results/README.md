@@ -93,7 +93,7 @@ Canonical roots:
 - `experiments/exp1_adult/results/`
 - `experiments/exp2_comparative/results/`
 - `experiments/exp2_scaled/results/`
-- future: `experiments/exp3_cross_dataset/results/`
+- prepared, not yet executed: `experiments/exp3_cross_dataset/results/`
 
 ### 4.2 Layer B: Recovery / Remediation Artifacts
 
@@ -262,6 +262,10 @@ Start here for family-specific result semantics:
 - [EXP2 Scaled Results](./exp2_scaled/README.md)
 - [EXP2 Scaled Artifact Qualification](./exp2_scaled/QUALIFICATION.md)
 - [EXP3 Cross-Dataset Results](./exp3_cross_dataset/README.md)
+
+EXP3 currently has preparation artifacts but no raw result cohort. See
+[EXP3 Preparation Walkthrough](../experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md)
+for the implemented loaders, config grid, scripts, and validation checks.
 
 ## 11. Migration Sequence
 

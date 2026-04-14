@@ -8,9 +8,36 @@ Use the new README as the source of truth for experiment identity and package bo
 
 The content below is preserved as extended design rationale.
 
-> Status: Proposed
+> Status: Prepared, not executed
 >
 > Thesis role: Smallest additional package to strengthen external validity beyond the Adult-only benchmark in EXP1/EXP2.
+
+## 0. Implementation Update
+
+As of 2026-04-13, EXP3 has moved from proposal to preparation.
+
+Implemented preparation artifacts:
+
+- dataset loaders for `breast_cancer` and `german_credit` in `src/data_loading/cross_dataset.py`;
+- runner dispatch support for EXP3 datasets in `src/experiment/runner.py`;
+- 24 generated configs under `configs/experiments/exp3_cross_dataset/`;
+- config generation script at `scripts/generate_exp3_configs.py`;
+- seed-specific model artifact preparation script at `scripts/train_exp3_models.py`;
+- loader validation tests at `tests/test_cross_dataset_loader.py`;
+- result-side semantics in `docs/results/exp3_cross_dataset/README.md`;
+- session walkthrough and file-level inventory in
+  [exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md](./exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md).
+
+Deferred artifacts:
+
+- trained EXP3 model binaries and preprocessors under `experiments/exp3_cross_dataset/models/`;
+- raw EXP3 execution results under `experiments/exp3_cross_dataset/results/`;
+- derived EXP3 analysis exports under `outputs/`.
+
+Reason for deferral:
+
+- the active EXP2 worker is still running, so EXP3 execution should begin only
+  with the first Breast Cancer RF SHAP smoke test after EXP2 finishes.
 
 ## 1. Purpose
 

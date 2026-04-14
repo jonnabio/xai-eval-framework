@@ -26,10 +26,27 @@ def generate_report():
     total_experiments = len(configs)
     finished = 0
     
-    # Count finished experiments by checking for results.json in output dirs
-    outputs = glob.glob("experiments/exp2_scaled/results/**/results.json", recursive=True)
-    finished = len(outputs)
-    
+    # Fetch latest origin/main to get cross-workstation global progress
+    subprocess.run(
+        ["git", "fetch", "origin", "--prune", "--quiet"],
+        check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+    try:
+        main_tree_raw = subprocess.check_output(
+            ["git", "ls-tree", "-r", "--name-only", "origin/main", "--",
+             "experiments/exp2_scaled/results"],
+            text=True
+        )
+        main_paths = set(main_tree_raw.strip().splitlines())
+    except subprocess.CalledProcessError:
+        main_paths = set()
+
+    # Finished experiments = dirs that have a results.json on origin/main (global view)
+    finished_dirs_main = {
+        os.path.dirname(p) for p in main_paths if p.endswith("/results.json")
+    }
+    finished = len(finished_dirs_main)
+
     # 1. Total instances in all configs
     total_instances_overall = 0
     for cfg in configs:
@@ -39,15 +56,13 @@ def generate_report():
             target_instances = spc * 4
             total_instances_overall += target_instances
 
-    # 2. Total completed instances from finished experiments
-    completed_instances_overall = 0
-    for out in outputs:
-        try:
-            with open(out, 'r') as f:
-                d = json.load(f)
-                completed_instances_overall += len(d.get("instance_evaluations", []))
-        except (json.JSONDecodeError, IOError):
-            pass
+    # 2. Completed instances = instance JSON files inside finished dirs on origin/main
+    completed_instances_overall = sum(
+        1 for p in main_paths
+        if '/instances/' in p
+        and p.endswith('.json')
+        and p.split('/instances/')[0] in finished_dirs_main
+    )
             
     # 3. Running instances progress — count instance JSON files directly from filesystem.
     # Log-parsing is unreliable for parallel workers since all workers share one log file
@@ -59,10 +74,17 @@ def generate_report():
     instance_dirs = glob.glob("experiments/exp2_scaled/results/**/instances", recursive=True)
     for inst_dir in sorted(instance_dirs):
         parent = os.path.dirname(inst_dir)
-        if os.path.exists(os.path.join(parent, "results.json")):
-            continue  # already counted in completed_instances_overall
+        parent_norm = parent.replace(os.sep, "/")
+        if parent_norm in finished_dirs_main:
+            continue  # already counted via origin/main finished dirs
 
-        count = len(glob.glob(os.path.join(inst_dir, "*.json")))
+        # Union of local files and in-progress files already on origin/main for this dir
+        local_files = {os.path.basename(f) for f in glob.glob(os.path.join(inst_dir, "*.json"))}
+        main_files_here = {
+            os.path.basename(p) for p in main_paths
+            if p.startswith(f"{parent_norm}/instances/") and p.endswith(".json")
+        }
+        count = len(local_files | main_files_here)
         active_instances_completed += count
 
         # Derive config name from path: .../results/<method>/seed_<s>/n_<n>/instances
@@ -96,7 +118,7 @@ def generate_report():
     
     report_lines.append("### EXP2 Scaled Batch Status")
     report_lines.append(f"Total Configs: {total_experiments}")
-    report_lines.append(f"Finished: {finished} / {total_experiments}")
+    report_lines.append(f"Finished: {finished} / {total_experiments}  (global — from origin/main)")
     report_lines.append("")
     report_lines.append("### Instance-Level Progress")
     report_lines.append(f"Total Target Instances:           {total_instances_overall}")
@@ -142,26 +164,33 @@ def generate_report():
         
     # Git status
     report_lines.append("")
-    report_lines.append("### Recent Git Activity (Last 8 Commits)")
+    report_lines.append("### Recent Git Activity on main (Last 8 Commits)")
     try:
         git_log = subprocess.check_output(
-            ["git", "log", "-n", "8", "--pretty=format:%h %ai %s"],
+            ["git", "log", "-n", "8", "--pretty=format:%h %ai %s", "origin/main"],
             text=True
         )
         report_lines.append(git_log)
-        
-        # Check sync status
+
+        # Check sync status of THIS workstation's branch vs its own remote
         try:
-            subprocess.run(["git", "fetch", "origin"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            current_branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True
+            ).strip()
             local_hash = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-            remote_hash = subprocess.check_output(["git", "rev-parse", "origin/main"], text=True).strip()
-            
-            if local_hash == remote_hash:
-                report_lines.append("\nStatus: Synchronized with GitHub (All changes pushed)")
+            remote_branch_hash = subprocess.check_output(
+                ["git", "rev-parse", f"origin/{current_branch}"], text=True
+            ).strip()
+            if local_hash == remote_branch_hash:
+                report_lines.append(f"\nWorker Branch ({current_branch}): Synchronized with GitHub")
             else:
-                unpushed_count = subprocess.check_output(["git", "rev-list", "--count", "origin/main..HEAD"], text=True).strip()
-                report_lines.append(f"\nStatus: {unpushed_count} commits pending push (Pushes occur every 6h)")
-        except:
+                unpushed_count = subprocess.check_output(
+                    ["git", "rev-list", "--count", f"origin/{current_branch}..HEAD"], text=True
+                ).strip()
+                report_lines.append(
+                    f"\nWorker Branch ({current_branch}): {unpushed_count} commits pending push"
+                )
+        except Exception:
             pass
             
     except Exception as e:
