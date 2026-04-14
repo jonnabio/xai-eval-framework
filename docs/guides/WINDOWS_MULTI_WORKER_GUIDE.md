@@ -93,6 +93,165 @@ worker result branch (`results/<worker_id>`). The sync daemon commits every
 15 minutes and pushes that worker branch every 6 hours. It does **not** rebase
 while experiments are running.
 
+## Global Experiment Claims
+
+Before a workstation starts an experiment, it now reserves that experiment on
+`main` by creating:
+
+```text
+experiments/exp2_scaled/worker_claims/<experiment_name>.json
+```
+
+The claim is pushed to GitHub immediately. If another workstation already
+claimed the experiment, the runner skips it and chooses another one. This is
+the duplication guard: worker result branches store outputs, while `main`
+stores the shared claim queue and consolidated completed results.
+
+Do not edit or delete claim files while workers are running unless you are
+manually recovering a dead worker. A claim without a final `results.json` means
+that a workstation owns or previously owned that experiment.
+
+## Handoff Instructions For Other Workstation LLMs
+
+Use this section when another LLM is operating one of the other workstations.
+The goal is to adopt the global claim guard without losing local results.
+
+### What The LLM Must Understand
+
+- There are three worker branches, one per workstation.
+- Worker branches receive local experiment outputs and checkpoints.
+- `main` is the consolidated scoreboard and the shared claim queue.
+- A worker must claim an experiment on `main` before starting it.
+- A claim is stored at `experiments/exp2_scaled/worker_claims/<experiment_name>.json`.
+- If a claim already exists for another worker, do not run that experiment.
+- Completed experiment outputs still go to the workstation's own branch.
+- Consolidation into `main` is done later by `scripts/collect_worker_results.ps1`.
+
+### If An Experiment Is Already Running
+
+Do not kill an active experiment just to update the runner script.
+
+First check the current manifest:
+
+```powershell
+Get-Content .\experiments\exp2_scaled\worker_manifests\$env:XAI_WORKER_ID\current.json
+```
+
+If `status` is `running`, let the current experiment finish unless the user
+explicitly asks you to stop it. The current in-memory runner will not load new
+claim-guard code until it is restarted.
+
+If an experiment was already running before the claim guard was deployed, make
+sure it is represented on `main` by a claim file. If you are not certain how to
+create that claim safely, stop and ask the primary workstation/user for help.
+
+### Windows: Adopt Claim Guard On A Worker Branch
+
+Run from PowerShell at the repository root. This sequence preserves local
+results, pulls the latest scripts from `main`, commits those scripts onto the
+current worker branch, and restarts the worker.
+
+```powershell
+cd C:\Users\jonna\Github\xai-eval-framework
+
+$branch = git branch --show-current
+if ([string]::IsNullOrWhiteSpace($branch)) {
+    throw "Could not resolve current Git branch."
+}
+
+git fetch origin main
+
+# Preserve any local result/manifest changes before script updates.
+git add -- experiments/exp2_scaled/results experiments/exp2_scaled/worker_manifests
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) {
+    git commit -m "Checkpoint before claim guard update"
+    git push origin "HEAD:refs/heads/$branch"
+}
+
+# Bring only the workflow scripts/docs from main into this worker branch.
+git restore --source origin/main -- `
+    scripts/managed_runner.ps1 `
+    docs/guides/WINDOWS_MULTI_WORKER_GUIDE.md
+
+git add -- scripts/managed_runner.ps1 docs/guides/WINDOWS_MULTI_WORKER_GUIDE.md
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) {
+    git commit -m "Adopt global experiment claim guard"
+    git push origin "HEAD:refs/heads/$branch"
+}
+
+# Restart only if no experiment is currently running, or after the current one finishes.
+Start-Process powershell -ArgumentList "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File .\scripts\managed_runner.ps1"
+```
+
+If Git says there is nothing to commit, that is okay. It usually means the
+worker branch already has the claim-guard scripts.
+
+### Linux: Adopt Claim Guard On The Linux Worker
+
+Run from Bash at the repository root. Adjust the path if this checkout lives
+somewhere else.
+
+```bash
+cd ~/Documents/GitHub/xai-eval-framework
+
+branch=$(git branch --show-current)
+if [ -z "$branch" ]; then
+  echo "Could not resolve current Git branch." >&2
+  exit 1
+fi
+
+git fetch origin main
+
+# Preserve any local result/manifest changes before script updates.
+git add -- experiments/exp2_scaled/results experiments/exp2_scaled/worker_manifests
+if ! git diff --cached --quiet; then
+  git commit -m "Checkpoint before claim guard update"
+  git push origin "HEAD:refs/heads/$branch"
+fi
+
+# Bring only the workflow scripts/docs from main into this worker branch.
+git restore --source origin/main -- \
+  scripts/managed_runner.sh \
+  docs/guides/WINDOWS_MULTI_WORKER_GUIDE.md
+
+git add -- scripts/managed_runner.sh docs/guides/WINDOWS_MULTI_WORKER_GUIDE.md
+if ! git diff --cached --quiet; then
+  git commit -m "Adopt global experiment claim guard"
+  git push origin "HEAD:refs/heads/$branch"
+fi
+
+# Restart only if no experiment is currently running, or after the current one finishes.
+bash scripts/managed_runner.sh >> logs/managed_runner.log 2>&1 &
+```
+
+### Verify Claim Guard Is Active
+
+After the worker starts its next experiment, check for claim messages:
+
+```powershell
+Get-Content -Path "logs\managed_runner.log" -Tail 80
+```
+
+Expected messages include:
+
+```text
+[CLAIM] Claimed <experiment_name> on main with commit <sha>.
+[CLAIM] <experiment_name> is already claimed by worker <worker_id>; skipping.
+```
+
+Also verify that GitHub `main` contains claim files:
+
+```powershell
+git fetch origin main
+git ls-tree -r --name-only origin/main experiments/exp2_scaled/worker_claims
+```
+
+If no claim messages appear after the next experiment starts, the old runner is
+still active. Wait for the current experiment to finish, then restart the
+managed runner.
+
 ## Monitor Worker
 
 ### 1. Dashboard
@@ -109,6 +268,36 @@ The dashboard shows:
 - latest write age
 - recent completed runs
 - live worker PID and config path
+
+## Consolidate All Worker Branches
+
+Use `main` as the consolidated source of truth. Individual workstations can
+show different percentages because each one is checked out on its own worker
+branch and may not have every other workstation's latest pushed checkpoints.
+
+Run the collector from one machine only:
+
+```powershell
+cd C:\Users\jonna\Github\xai-eval-framework
+.\scripts\collect_worker_results.ps1 -Push
+```
+
+The collector automatically merges all remote branches matching:
+
+```text
+origin/results/*
+```
+
+If a workstation used a non-standard branch name, pass it explicitly:
+
+```powershell
+.\scripts\collect_worker_results.ps1 -ExtraBranches origin/linux_dell -Push
+```
+
+The collector does not switch the active checkout or rebase worker branches.
+It fetches GitHub, creates merge commits from Git objects, pushes `main`, and
+uses `logs\git_mutex` so it does not collide with local auto-push operations.
+After it finishes, read the global completion percentage from `main`.
 
 ### 2. Raw Runner Log
 
@@ -160,17 +349,22 @@ instance count, target count, latest checkpoint time, and whether
    - This avoids rebase conflicts on `main` during active experiments.
    - Final aggregation into `main` should be done by a separate collector step.
 
-3. Auto-push may still fail if the worker branch was changed elsewhere.
+3. Work assignment claims target `main`.
+   - Claims are tiny JSON files under `worker_claims/`.
+   - They are pushed before the expensive experiment starts.
+   - If the claim push is rejected, the worker fetches again and picks another experiment.
+
+4. Auto-push may still fail if the worker branch was changed elsewhere.
    - This does not mean the experiment stopped.
    - It means results were committed locally but not pushed yet.
    - Do not rebase during an active experiment; inspect and reconcile later.
 
-4. Long-running experiments can stay quiet for a while.
+5. Long-running experiments can stay quiet for a while.
    - Check the dashboard’s `Current Results` and `Live Worker` sections.
    - Check the latest write time in the active `instances/` folder.
    - Check the worker manifest `current.json`.
 
-5. Do not run two workstations with the same `XAI_WORKER_ID`.
+6. Do not run two workstations with the same `XAI_WORKER_ID`.
    - If two machines share the same worker branch, push conflicts can return.
 
 ## If the Worker Stops
