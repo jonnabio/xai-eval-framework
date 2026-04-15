@@ -2,10 +2,10 @@
 
 ## 1. Metadata
 
-- **Date**: 2026-04-13
+- **Date**: 2026-04-14
 - **Paper**: Paper A, JMLR-style benchmark manuscript
 - **Purpose**: Reviewer-facing path map for the code, data, analysis, and reporting artifacts used by Paper A
-- **Status**: Draft index; regenerate analysis counts after the active EXP2 worker finishes
+- **Status**: Draft index; analysis counts regenerated on 2026-04-14 and should be rerun after `svm_shap_s456_n200` is committed as a per-run artifact
 
 ## 2. Primary Manuscript Artifacts
 
@@ -13,6 +13,8 @@
 | :--- | :--- | :--- |
 | JMLR manuscript source | `docs/reports/paper_a/paper_a_prototype_jmlr.tex` | Main Paper A LaTeX source. |
 | Rendered manuscript | `docs/reports/paper_a/paper_a_prototype_jmlr.pdf` | Compiled PDF used for review. |
+| Neutral manuscript source | `docs/reports/paper_a/paper_a_prototype_neutral.tex` | Internal-conference wrapper that reuses the main LaTeX source with the JMLR style package in unbranded preprint mode. |
+| Neutral rendered manuscript | `docs/reports/paper_a/paper_a_prototype_neutral.pdf` | Compiled PDF for internal university presentation without visible JMLR journal branding. |
 | Validity caveats | `docs/reports/paper_a/paper_a_validity_and_reporting_caveats.md` | Boundaries for statistical, construct, internal, external, and reproducibility validity. |
 | JMLR-track positioning | `docs/reports/paper_a/paper_a_jmlr_track_positioning.md` | Companion note for benchmark-track contribution framing. |
 | Quality assessment | `docs/reports/paper_a/paper_a_quality_assessment.md` | Internal scorecard and 85+ improvement plan. |
@@ -41,7 +43,7 @@
 | Artifact | Path | Role |
 | :--- | :--- | :--- |
 | Statistical analysis driver | `scripts/run_exp2_statistical_analysis.py` | Deterministically generates Paper A inferential tables from qualified EXP2 inputs. |
-| Expected analysis output directory | `outputs/analysis/paper_a_exp2_stats/` | Target directory for run inventory, run-level metrics, block summaries, Friedman tests, Nemenyi tables, Wilcoxon tests, uncertainty tables, paired-cell exports, and `analysis_summary.json`. |
+| Analysis output directory | `outputs/analysis/paper_a_exp2_stats/` | Regenerated on 2026-04-14 with run inventory, run-level metrics, block summaries, Friedman tests, Nemenyi tables, Wilcoxon tests, uncertainty tables, paired-cell exports, and `analysis_summary.json`. |
 | Figure generation driver | `scripts/generate_paper_a_figures.py` | Generates Paper A figures from qualified analysis outputs. |
 
 ## 6. Dependency and Environment Artifacts
@@ -64,8 +66,20 @@
 For manuscript submission, all numerical evidence-accounting statements should
 come from `outputs/analysis/paper_a_exp2_stats/analysis_summary.json`.
 
+The current regenerated snapshot reports:
+
+- 299 committed result artifacts out of 300 planned EXP2 cells;
+- 30 SHAP recovery overlay rows;
+- 29 overlay replacements;
+- 275 analyzable unique runs after the overlay;
+- 25 residual unavailable cells after the overlay, concentrated in Anchors and
+  DiCE empty artifacts;
+- 15/15 complete `(model, sample-size)` blocks for Friedman tests;
+- 45 primary SHAP-LIME matched cells on `logreg/rf/xgb`;
+- 75 SHAP-LIME matched cells across all models.
+
 The following manuscript quantities must be checked against that generated
-summary after the active EXP2 worker has finished:
+summary after any new result repair or rerun:
 
 - present result artifacts;
 - empty or malformed artifacts;

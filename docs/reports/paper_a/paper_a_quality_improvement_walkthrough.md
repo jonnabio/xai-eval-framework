@@ -2,18 +2,18 @@
 
 ## 1. Metadata
 
-- **Date**: 2026-04-13
+- **Date**: 2026-04-14
 - **Scope**: Paper A quality-score improvement pass
-- **Status**: Completed for safe non-result-tree edits
+- **Status**: Manuscript and assessment synchronized to regenerated EXP2 analysis
 - **Commit intent**: Stage for next push cycle
 
 ## 2. Goal
 
-Improve Paper A's high-standard assessment score while an EXP2 worker is still
-running, without reading or rewriting the live experiment result snapshot as a
-final analysis source.
+Improve Paper A's high-standard assessment score while preserving the
+handoff/claim protocol and using the regenerated EXP2 analysis as the single
+source for result-count updates.
 
-The selected safe work items were:
+The selected first-pass safe work items were:
 
 - novelty delta;
 - responsible-use section;
@@ -87,22 +87,32 @@ Completed checks:
 - confirmed `rf_anchors_s42_n100` was still running and avoided analysis
   regeneration while the result snapshot is live;
 - confirmed the staged work does not require touching `experiments/`.
+- after experiment consolidation, installed the declared
+  `scikit-posthocs==0.11.4` dependency in the active environment;
+- ran `python scripts/run_exp2_statistical_analysis.py`;
+- verified `outputs/analysis/paper_a_exp2_stats/analysis_summary.json` reports
+  299 committed artifacts, 275 analyzable unique runs, 30 overlay rows, 29
+  replacement rows, 15/15 complete Friedman blocks, 45 primary SHAP-LIME
+  matched pairs, and 75 all-model SHAP-LIME matched pairs;
+- synchronized `paper_a_prototype_jmlr.tex`, `paper_a_prototype.md`,
+  `paper_a_validity_and_reporting_caveats.md`, and
+  `paper_a_quality_assessment.md` to the regenerated snapshot.
+- rebuilt `paper_a_prototype_jmlr.pdf` with portable Tectonic 0.16.8 after
+  confirming `latexmk` and `pdflatex` were unavailable on this workstation.
 
 Not run:
 
-- LaTeX rebuild of `paper_a_prototype_jmlr.pdf`;
-- `scripts/run_exp2_statistical_analysis.py`;
-- regeneration of `outputs/analysis/paper_a_exp2_stats/`.
-
-These are intentionally deferred until the active EXP2 worker finishes.
+- archival release/DOI refresh for the April 2026 result cut.
 
 ## 5. Next Steps
 
-After the active `rf_anchors_s42_n100` worker finishes:
+Before the next submission/release cut:
 
-1. install/update dependencies in the intended analysis environment;
-2. run `python scripts/run_exp2_statistical_analysis.py`;
-3. update Paper A and the caveats note from
-   `outputs/analysis/paper_a_exp2_stats/analysis_summary.json`;
-4. rebuild the manuscript PDF;
-5. commit the regenerated analysis outputs and synchronized manuscript counts.
+1. explicitly bundle or force-add `outputs/analysis/paper_a_exp2_stats/`,
+   because `outputs/` is ignored by default;
+2. resolve or document the claimed `svm_shap_s456_n200` per-run artifact so the
+   committed tree no longer relies only on the overlay for that SHAP cell;
+3. diagnose the 25 empty Anchors/DiCE artifacts and decide whether targeted
+   reruns are worth the compute cost;
+4. refresh the April 2026 release/DOI after the paper source, PDF, and analysis
+   outputs are synchronized.

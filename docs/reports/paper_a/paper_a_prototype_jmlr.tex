@@ -9,8 +9,8 @@
 \usepackage{enumitem}
 \usepackage{lastpage}
 
-\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 2/2026}{Preprint}{PAPER-A-0001}{Jonathan Herrera-Vasquez}
-\ShortHeadings{XAI Benchmarking Framework and Operation Protocol}{XAI Benchmarking Framework}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 2/2026}{Preprint}{PAPER-A-0001}{Herrera-Vasquez and Herrero-Uceda}
+\ShortHeadings{XAI Benchmarking Framework and Operation Protocol}{Herrera-Vasquez and Herrero-Uceda}
 \firstpageno{1}
 
 \begin{document}
@@ -21,6 +21,9 @@ Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 \author{
 \name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
 \addr UNADE
+\AND
+\name Miguel Herrero-Uceda \email miguel.herrero.tutor@gmail.com \\
+\addr UNADE
 }
 
 \editor{}
@@ -28,7 +31,7 @@ Multi-Metric Statistical Benchmarking, Operational Protocol, and Reproducibility
 \maketitle
 
 \begin{abstract}
-Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged evidence protocol: a calibration/reproducibility stage (EXP1) followed by a primary comparative/robustness benchmark (EXP2); the current merged recovery snapshot contains 291 committed result artifacts (97.0\% artifact coverage) plus a 30-row SHAP recovery batch, yielding 268 analyzable unique runs out of 300 planned cells (89.3\%). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=40.68$, $p=7.65\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=32.12$, $p=4.94\times10^{-7}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME remains fastest overall. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
+Evaluating explainability methods requires more than a single faithfulness proxy. We present a modular benchmarking framework centered on quantitative XAI quality metrics: fidelity, stability, sparsity, computational cost, and faithfulness gap, plus an explicit method for operating the framework end-to-end. On the UCI Adult benchmark, we use a staged evidence protocol: a calibration/reproducibility stage (EXP1) followed by a primary comparative/robustness benchmark (EXP2); the current merged recovery snapshot contains 299 committed result artifacts (99.7\% artifact coverage) plus a 30-row SHAP recovery batch, yielding 275 analyzable unique runs out of 300 planned cells (91.7\%). Across complete model-size blocks ($5$ models, $N \in \{50,100,200\}$), Friedman tests indicate significant method differences for fidelity ($\chi^2=42.12$, $p=3.78\times10^{-9}$), stability ($\chi^2=40.68$, $p=7.65\times10^{-9}$), sparsity ($\chi^2=35.64$, $p=8.92\times10^{-8}$), faithfulness gap ($\chi^2=45.00$, $p=9.25\times10^{-10}$), and runtime ($\chi^2=30.44$, $p=1.12\times10^{-6}$). SHAP leads on fidelity/stability, DiCE leads on sparsity, and LIME remains fastest overall. We release the framework, operation protocol, and artifacts with explicit data-quality caveats for reproducible benchmark use under a quantitative-only claim scope.
 \end{abstract}
 
 \begin{keywords}
@@ -113,9 +116,9 @@ as a seven-gate operation protocol that makes claim eligibility auditable.
 Scope is intentionally bounded to model-agnostic tabular post-hoc explanation
 benchmarking on Adult Income with quantitative metrics (fidelity, stability,
 sparsity, faithfulness gap, and cost). Overall, the current merged
-primary benchmark (EXP2) recovery snapshot combines 291 committed result
-artifacts with a 30-row SHAP recovery batch, yielding 268 analyzable unique runs out of 300 planned cells
-(89.3\%). The remainder of this
+primary benchmark (EXP2) recovery snapshot combines 299 committed result
+artifacts with a 30-row SHAP recovery batch, yielding 275 analyzable unique runs out of 300 planned cells
+(91.7\%). The remainder of this
 paper presents the methodology (Section~\ref{sec:methodology}), reports
 comparative and reproducibility evidence (Section~\ref{sec:results}), and
 concludes with implications, limitations, and next steps
@@ -176,11 +179,13 @@ s\in\{42,123,456,789,999\},\quad
 n\in\{50,100,200\}.
 \]
 Planned primary robustness benchmark (EXP2) size is $5\times4\times5\times3=300$ runs. In the
-current merged recovery snapshot, 291 result artifacts are committed under
+current merged recovery snapshot, 299 result artifacts are committed under
 \path{experiments/exp2_scaled/results/}; a 30-row SHAP recovery batch in
 \path{outputs/batch_results.csv} supersedes the \path{mlp_shap}/\path{svm_shap}
-slice, yielding 268 analyzable unique runs and leaving 32 unresolved cells (7
-missing, 25 empty).
+slice, yielding 275 analyzable unique runs and leaving 25 unresolved cells after
+the overlay. The committed tree still has one missing SHAP artifact and 25
+present-but-empty artifacts; the recovery overlay fills the missing SHAP cell for
+analysis.
 \begin{table}[t]
 \centering
 \caption{Primary benchmark (EXP2) evidence accounting for inferential qualification.}
@@ -189,9 +194,9 @@ missing, 25 empty).
 \textbf{Qualification stage} & \textbf{Count} & \textbf{Share of planned runs} \\
 \midrule
 Planned robustness grid ($5\times4\times5\times3$) & 300 & 100.0\% \\
-Present artifacts & 291 & 97.0\% \\
-Analyzable unique runs (committed + recovery overlay) & 268 & 89.3\% \\
-Unavailable cells after recovery overlay (7 missing + 25 empty) & 32 & 10.7\% \\
+Present artifacts & 299 & 99.7\% \\
+Analyzable unique runs (committed + recovery overlay) & 275 & 91.7\% \\
+Unavailable cells after recovery overlay (25 empty) & 25 & 8.3\% \\
 Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completion \\
 \bottomrule
 \end{tabularx}
@@ -202,10 +207,10 @@ Complete $(g,n)$ blocks used by Friedman tests & 15/15 & 100.0\% block completio
 \centering
 \fbox{\begin{minipage}{0.94\linewidth}
 \centering
-\textbf{Planned} 300 $\rightarrow$ \textbf{Committed artifacts} 291 + \textbf{Recovery overlay} 30 $\rightarrow$
-\textbf{Analyzable unique runs} 268 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
+\textbf{Planned} 300 $\rightarrow$ \textbf{Committed artifacts} 299 + \textbf{Recovery overlay} 30 $\rightarrow$
+\textbf{Analyzable unique runs} 275 $\rightarrow$ \textbf{Friedman-ready blocks} 15/15\\
 \vspace{2pt}
-\footnotesize Overlay effect: 28 replacement MLP/SVM-SHAP runs + 2 newly recovered cells; residual unavailability = 7 missing artifacts + 25 empty artifacts.
+\footnotesize Overlay effect: 29 replacement MLP/SVM-SHAP runs + 1 newly recovered SHAP cell; residual unavailability = 25 empty Anchors/DiCE artifacts.
 \end{minipage}}
 \caption{Evidence qualification waterfall for primary robustness benchmark (EXP2) inference.}
 \label{fig:evidence-waterfall}
@@ -419,15 +424,15 @@ Method & Fidelity & Stability & Sparsity & Faithfulness Gap & Time (ms) \\
 \midrule
 SHAP    & 0.8081 & 0.7320 & 0.2264 & 0.3796 & 11708.26 \\
 LIME    & 0.5602 & 0.0144 & 0.0846 & 0.3342 & 3660.68 \\
-Anchors & 0.3858 & 0.0421 & 0.0910 & 0.2373 & 34630.25 \\
-DiCE    & 0.1700 & 0.3610 & 0.0165 & 0.0948 & 27735.92 \\
+Anchors & 0.3886 & 0.0429 & 0.0851 & 0.2361 & 32463.44 \\
+DiCE    & 0.1701 & 0.3611 & 0.0166 & 0.0946 & 27940.35 \\
 \bottomrule
 \end{tabular}
 \label{tab:global-tradeoffs}
 \end{table}
 
 SHAP has the highest Fidelity (0.8081), highest Stability (0.7320), and highest
-Faithfulness Gap (0.3796). DiCE has the lowest Sparsity value (0.0165), while
+Faithfulness Gap (0.3796). DiCE has the lowest Sparsity value (0.0166), while
 LIME has the lowest Cost (3660.68 ms). In the merged recovery snapshot, SHAP's
 mean Cost is 11708.26 ms, remaining above LIME but below Anchors and
 DiCE.
@@ -453,7 +458,7 @@ Fidelity         & 42.12 & 3.78e-09 & Yes \\
 Stability        & 40.68 & 7.65e-09 & Yes \\
 Sparsity         & 35.64 & 8.92e-08 & Yes \\
 Faithfulness Gap & 45.00 & 9.25e-10 & Yes \\
-Cost             & 32.12 & 4.94e-07 & Yes \\
+Cost             & 30.44 & 1.12e-06 & Yes \\
 \bottomrule
 \end{tabular}
 \label{tab:friedman}
@@ -473,7 +478,7 @@ Fidelity         & 42.12 & 0.936 \\
 Stability        & 40.68 & 0.904 \\
 Sparsity         & 35.64 & 0.792 \\
 Faithfulness Gap & 45.00 & 1.000 \\
-Cost             & 32.12 & 0.714 \\
+Cost             & 30.44 & 0.676 \\
 \bottomrule
 \end{tabular}
 \label{tab:friedman-effect-size}
@@ -594,12 +599,12 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 32 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
-    \item \textbf{Next steps:} Normalize the remaining SHAP recovery rows into committed per-run outputs where appropriate and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 268 analyzable-run snapshot.
+    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
+    \item \textbf{Next steps:} Commit the recovered \path{svm_shap_s456_n200} per-run artifact when the active claim completes, diagnose the remaining empty Anchors/DiCE artifacts, and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 275 analyzable-run snapshot.
     \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
 \end{itemize}
 
-\acks{This work received no external funding. The study was self-funded by the author, and the author reports no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}
+\acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}
 
 \clearpage
 \phantomsection
