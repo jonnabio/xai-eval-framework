@@ -543,6 +543,42 @@ Interpretation limits:
     \item Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
 \end{itemize}
 
+\subsection{Formal Problem Framing and Scope of XAI Evaluation}
+\label{sec:formal_framing}
+
+Recent work argues that many XAI evaluations are method-first rather than
+problem-first, which can obscure what a given metric actually validates
+\citep{haufe2026formalization}. Following this critique, we treat explanation
+quality as purpose-conditioned: an explanation is evaluated relative to a clearly
+specified stakeholder question, not as a universal property of a method. In this
+study, we therefore distinguish between correctness-oriented criteria and secondary
+quality indicators. Correctness-oriented criteria address whether an explanation
+supports the intended inferential use under stated assumptions; secondary indicators
+include robustness, stability, sparsity, and computational efficiency, which are
+informative but not sufficient on their own to establish explanation validity
+\citep{doshivelez2017rigorous,hedstrom2023quantus}.
+
+A central risk identified in recent theory is that attribution methods may assign
+high importance to suppressor variables, that is, variables that improve prediction
+but are not associated with the target in the intended explanatory sense
+\citep{wilming2022scrutinizing,wilming2023theoretical,haufe2026formalization}.
+This possibility motivates conservative interpretation of attribution rankings,
+especially in dependent-feature settings. Accordingly, we report method performance
+as comparative evidence within the benchmark design, while avoiding the stronger
+claim that higher benchmark scores necessarily imply explanation correctness for all
+use cases. Where possible, we interpret results as compatibility with specific
+explanatory goals rather than definitive proof of faithful explanation.
+
+Operationally, we adopt a requirements-to-metric traceability approach: each
+evaluation objective is tied to an intended use, an explicit assumption set, and a
+statistical test. This framing is consistent with formalization-oriented
+recommendations in recent XAI governance and assessment literature
+\citep{sokol2020factsheets,dinspec92001,zicari2021zinspection}. Under this design,
+our benchmark is intended to support transparent comparison and hypothesis generation
+about method behavior, while acknowledging that full correctness claims may require
+additional theoretical analysis or controlled ground-truth experiments
+\citep{haufe2026formalization}.
+
 \subsection{Responsible Use and Benchmark Boundaries}
 This benchmark should not be read as evidence that post-hoc explanations are
 appropriate for all high-stakes decision settings. The Adult Income task
@@ -730,6 +766,106 @@ Xu Zheng, Farhad Shirani, Zhuomin Chen, Chaohao Lin, Wei Cheng, Wenbo Guo, and D
 2025.
 F-FIDELITY: A Robust Framework for Faithfulness Evaluation of Explainable AI.
 In \emph{International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Adebayo et~al.(2018)Adebayo, Gilmer, Muelly, Goodfellow, Hardt, and Kim]{adebayo2018sanity}
+Julius Adebayo, Justin Gilmer, Michael Muelly, Ian Goodfellow, Moritz Hardt,
+and Been Kim.
+2018.
+Sanity Checks for Saliency Maps.
+In \emph{Advances in Neural Information Processing Systems}, volume~31,
+pages 9525--9536.
+
+\bibitem[Bansal et~al.(2021)Bansal, Wu, Vaughan, and Wallach]{bansal2021whole}
+Gagan Bansal, Tongshuang Wu, Joel Vaughan, and Hanna Wallach.
+2021.
+Does the Whole Exceed Its Parts? The Effect of {AI} Explanations on
+Complementary Team Performance.
+In \emph{Proceedings of the CHI Conference on Human Factors in Computing
+Systems}, pages 1--16.
+
+\bibitem[Bu\c{c}inca et~al.(2020)Bu\c{c}inca, Lin, Gajos, and Glassman]{bucinca2020proxy}
+Zana Bu\c{c}inca, Phoebe Lin, Krzysztof~Z. Gajos, and Elena~L. Glassman.
+2020.
+Proxy Tasks and Subjective Measures Can Be Misleading in Evaluating Explainable
+{AI} Systems.
+In \emph{Proceedings of the 25th International Conference on Intelligent User
+Interfaces}, pages 454--464.
+
+\bibitem[{DIN}(2023)]{dinspec92001}
+{DIN Deutsches Institut f{\"u}r Normung e.~V.}
+2023.
+{DIN SPEC 92001-3:2023-04}. Artificial Intelligence---Life Cycle Processes and
+Quality Requirements---Part~3: Explainability.
+
+\bibitem[Doshi-Velez and Kim(2017)]{doshivelez2017rigorous}
+Finale Doshi-Velez and Been Kim.
+2017.
+Towards a Rigorous Science of Interpretable Machine Learning.
+\emph{arXiv preprint arXiv:1702.08608}.
+
+\bibitem[Fok and Weld(2023)]{fok2023verifiability}
+Raymond Fok and Daniel~S. Weld.
+2023.
+In Search of Verifiability: Explanations Rarely Enable Complementary Performance
+in {AI}-Advised Decision Making.
+\emph{AI Magazine}, 45(3):317--332.
+
+\bibitem[Haufe et~al.(2026)Haufe, Wilming, Clark, Zhumagambetov, Boubekki, Martin, and Panknin]{haufe2026formalization}
+Stefan Haufe, Rick Wilming, Benedict Clark, Rustam Zhumagambetov, Ahc\`ene
+Boubekki, J{\"o}rg Martin, and Danny Panknin.
+2026.
+Explainable {AI} Needs Formalization.
+\emph{npj Artificial Intelligence}, 2:42.
+\url{https://doi.org/10.1038/s44387-026-00095-1}.
+
+\bibitem[Hooker et~al.(2019)Hooker, Erhan, Kindermans, and Kim]{hooker2019benchmark}
+Sara Hooker, Dumitru Erhan, Pieter-Jan Kindermans, and Been Kim.
+2019.
+A Benchmark for Interpretability Methods in Deep Neural Networks.
+In \emph{Advances in Neural Information Processing Systems}, volume~32,
+pages 9737--9748.
+
+\bibitem[Jacovi and Goldberg(2020)]{jacovi2020faithfulness}
+Alon Jacovi and Yoav Goldberg.
+2020.
+Towards Faithfully Interpretable {NLP} Systems: How Should We Define and Evaluate
+Faithfulness?
+In \emph{Proceedings of the 58th Annual Meeting of the Association for
+Computational Linguistics}, pages 4198--4205.
+
+\bibitem[Rong et~al.(2022)Rong, Leemann, Borisov, Kasneci, and Kasneci]{rong2022consistent}
+Yao Rong, Tobias Leemann, Vadim Borisov, Gjergji Kasneci, and Enkelejda Kasneci.
+2022.
+A Consistent and Efficient Evaluation Strategy for Attribution Methods.
+In \emph{Proceedings of the 39th International Conference on Machine Learning},
+pages 18770--18795.
+
+\bibitem[Sokol and Flach(2020)]{sokol2020factsheets}
+Kacper Sokol and Peter Flach.
+2020.
+Explainability Fact Sheets: A Framework for Systematic Assessment of Explainable
+Approaches.
+In \emph{Proceedings of the ACM Conference on Fairness, Accountability, and
+Transparency}, pages 56--67.
+
+\bibitem[Wilming et~al.(2022)Wilming, Budding, M{\"u}ller, and Haufe]{wilming2022scrutinizing}
+Rick Wilming, Christian Budding, Klaus-Robert M{\"u}ller, and Stefan Haufe.
+2022.
+Scrutinizing {XAI} Using Linear Ground-Truth Data with Suppressor Variables.
+\emph{Machine Learning}, pages 1--21.
+
+\bibitem[Wilming et~al.(2023)Wilming, Kieslich, Clark, and Haufe]{wilming2023theoretical}
+Rick Wilming, Lisa Kieslich, Benedict Clark, and Stefan Haufe.
+2023.
+Theoretical Behavior of {XAI} Methods in the Presence of Suppressor Variables.
+In \emph{Proceedings of the 40th International Conference on Machine Learning},
+volume 202, pages 37091--37107.
+
+\bibitem[Zicari et~al.(2021)]{zicari2021zinspection}
+Roberto~V. Zicari et~al.
+2021.
+Z-Inspection\textregistered: A Process to Assess Trustworthy {AI}.
+\emph{IEEE Transactions on Technology and Society}, 2(2):83--97.
 
 \end{thebibliography}
 

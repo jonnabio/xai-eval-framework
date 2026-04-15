@@ -454,6 +454,35 @@ tree-specific or kernel mode.
 
 \section{Validity Boundaries}
 
+\subsection{Interpretation Scope of SHAP--LIME Comparisons}
+\label{sec:interpretation_scope}
+
+The SHAP--LIME differences reported here should be interpreted as comparative
+performance within our benchmark protocol, not as definitive evidence that one
+method is universally more correct. Recent formal analyses show that multiple
+attribution families can produce high-importance assignments to suppressor
+variables in dependent-feature settings, which complicates direct interpretation
+of attribution magnitude as target-relevant importance
+\citep{wilming2022scrutinizing,wilming2023theoretical,haufe2026formalization}.
+Consequently, observed performance gaps between SHAP and LIME may reflect both
+methodological differences and sensitivity to data dependence structure.
+
+To reduce over-interpretation, we distinguish \emph{ranking claims} from
+\emph{validity claims}. A ranking claim states that one explainer outperforms
+another on predefined benchmark criteria in this dataset and protocol. A validity
+claim would require stronger evidence that explanations satisfy a formal
+correctness criterion for the intended task, potentially including controlled
+ground-truth tests and explicit assumption checks
+\citep{haufe2026formalization,doshivelez2017rigorous}. In this paper, we
+primarily make ranking claims and treat broader validity claims as provisional.
+
+This framing also aligns with prior findings that faithfulness-style evaluations
+can be informative but are not always sufficient to resolve correctness questions
+in isolation \citep{jacovi2020faithfulness,adebayo2018sanity,hooker2019benchmark,
+rong2022consistent}. Therefore, the SHAP--LIME comparison presented here is best
+read as robust comparative evidence under the evaluated conditions, with external
+validity depending on how closely downstream applications match those conditions.
+
 \subsection{Statistical and Construct Validity}
 This manuscript's confirmatory claims are restricted to the 75 fully
 matched SHAP-LIME cells in the EXP2 robustness cohort. Unlike the full
@@ -714,6 +743,56 @@ Schaffer, E., Shi, Y., Liu, N., Liu, Z., and Zhang, R. (2025).
 Automating expert-level medical reasoning evaluation of large language models.
 \emph{npj Digital Medicine}, 9(1):34.
 \url{https://doi.org/10.1038/s41746-025-02208-7}.
+
+\bibitem[Adebayo et~al.(2018)Adebayo, Gilmer, Muelly, Goodfellow, Hardt, and Kim]{adebayo2018sanity}
+Adebayo, J., Gilmer, J., Muelly, M., Goodfellow, I., Hardt, M., and Kim, B.
+(2018).
+Sanity checks for saliency maps.
+In \emph{Advances in Neural Information Processing Systems}, volume 31,
+9525--9536.
+
+\bibitem[Doshi-Velez and Kim(2017)]{doshivelez2017rigorous}
+Doshi-Velez, F. and Kim, B. (2017).
+Towards a rigorous science of interpretable machine learning.
+\emph{arXiv preprint arXiv:1702.08608}.
+\url{https://arxiv.org/abs/1702.08608}.
+
+\bibitem[Haufe et~al.(2026)Haufe, Wilming, Clark, Zhumagambetov, Boubekki, Martin, and Panknin]{haufe2026formalization}
+Haufe, S., Wilming, R., Clark, B., Zhumagambetov, R., Boubekki, A.,
+Martin, J., and Panknin, D. (2026).
+Explainable {AI} needs formalization.
+\emph{npj Artificial Intelligence}, 2:42.
+\url{https://doi.org/10.1038/s44387-026-00095-1}.
+
+\bibitem[Hooker et~al.(2019)Hooker, Erhan, Kindermans, and Kim]{hooker2019benchmark}
+Hooker, S., Erhan, D., Kindermans, P.-J., and Kim, B. (2019).
+A benchmark for interpretability methods in deep neural networks.
+In \emph{Advances in Neural Information Processing Systems}, volume 32,
+9737--9748.
+
+\bibitem[Jacovi and Goldberg(2020)]{jacovi2020faithfulness}
+Jacovi, A. and Goldberg, Y. (2020).
+Towards faithfully interpretable {NLP} systems: How should we define and evaluate
+faithfulness?
+In \emph{Proceedings of the 58th Annual Meeting of the Association for
+Computational Linguistics}, 4198--4205.
+
+\bibitem[Rong et~al.(2022)Rong, Leemann, Borisov, Kasneci, and Kasneci]{rong2022consistent}
+Rong, Y., Leemann, T., Borisov, V., Kasneci, G., and Kasneci, E. (2022).
+A consistent and efficient evaluation strategy for attribution methods.
+In \emph{Proceedings of the 39th International Conference on Machine Learning},
+18770--18795.
+
+\bibitem[Wilming et~al.(2022)Wilming, Budding, M{\"u}ller, and Haufe]{wilming2022scrutinizing}
+Wilming, R., Budding, C., M{\"u}ller, K.-R., and Haufe, S. (2022).
+Scrutinizing {XAI} using linear ground-truth data with suppressor variables.
+\emph{Machine Learning}, 1--21.
+
+\bibitem[Wilming et~al.(2023)Wilming, Kieslich, Clark, and Haufe]{wilming2023theoretical}
+Wilming, R., Kieslich, L., Clark, B., and Haufe, S. (2023).
+Theoretical behavior of {XAI} methods in the presence of suppressor variables.
+In \emph{Proceedings of the 40th International Conference on Machine Learning},
+202, 37091--37107.
 
 \end{thebibliography}
 
