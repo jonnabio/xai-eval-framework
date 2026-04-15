@@ -292,7 +292,6 @@ def _download_from_uci(cache_dir: Path) -> Optional[pd.DataFrame]:
                             raise e
                         logger.warning(f"Download attempt {attempt+1} failed: {e}. Retrying...")
                         time.sleep(1)
-                
                 logger.info(f"Reading {split} csv from {local_path}...")
                 
                 # Read from local file
