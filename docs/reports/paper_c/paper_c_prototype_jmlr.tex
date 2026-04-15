@@ -511,6 +511,34 @@ support exploratory interpretation until calibrated. Human agreement
 evidence can then convert those semantic constructs into stronger
 confirmatory claims.
 
+\subsection{Formalization-Aware Semantic Evaluation of XAI Claims}
+\label{sec:formalization_aware}
+
+We extend the semantic evaluation scope from linguistic coherence to
+methodological adequacy by introducing formalization-aware criteria. Specifically,
+the evaluator checks whether a reviewed paper: (i)~states a concrete stakeholder
+information need, (ii)~specifies an explicit explanation problem,
+(iii)~defines or approximates a correctness criterion, (iv)~separates correctness
+from secondary desiderata such as robustness, and (v)~provides evidence aligned
+with the stated criterion \citep{haufe2026formalization,sokol2020factsheets}.
+This design aims to reduce false confidence induced by well-written but weakly
+specified explanation claims.
+
+The motivation is that the XAI literature may contain claim--evidence mismatches,
+where broad interpretability conclusions are drawn from metrics that do not fully
+validate the intended explanatory use \citep{haufe2026formalization,hedstrom2023quantus}.
+Our evaluator does not attempt to determine the absolute truth of methodological
+claims; rather, it assesses claim discipline, assumption transparency, and evidence
+alignment. In this sense, the system is a structured meta-evaluation tool, intended
+to support reproducible review rather than to replace domain expert judgment.
+
+This formalization-aware layer may improve cross-paper comparability and reduce
+overstatement in synthesis workflows. However, we treat evaluator output as decision
+support, not adjudication. Consistent with prior human--{AI} evaluation findings,
+semantic plausibility should not be conflated with epistemic validity, and human
+review remains necessary for high-stakes interpretation
+\citep{bucinca2020proxy,bansal2021whole,fok2023verifiability}.
+
 \section{Limitations}
 
 This prototype has several boundaries.
@@ -710,6 +738,64 @@ Ning Liu, Zhiyong Liu, and Rui Zhang.
 2025.
 Automating expert-level medical reasoning evaluation of large language models.
 \emph{npj Digital Medicine}, 9(1):34.
+
+\bibitem[Bansal et~al.(2021)Bansal, Wu, Vaughan, and Wallach]{bansal2021whole}
+Gagan Bansal, Tongshuang Wu, Joel Vaughan, and Hanna Wallach.
+2021.
+Does the Whole Exceed Its Parts? The Effect of {AI} Explanations on
+Complementary Team Performance.
+In \emph{Proceedings of the CHI Conference on Human Factors in Computing Systems},
+pages 1--16.
+
+\bibitem[Bu\c{c}inca et~al.(2020)Bu\c{c}inca, Lin, Gajos, and Glassman]{bucinca2020proxy}
+Zana Bu\c{c}inca, Phoebe Lin, Krzysztof~Z. Gajos, and Elena~L. Glassman.
+2020.
+Proxy Tasks and Subjective Measures Can Be Misleading in Evaluating Explainable
+{AI} Systems.
+In \emph{Proceedings of the 25th International Conference on Intelligent User
+Interfaces}, pages 454--464.
+
+\bibitem[Doshi-Velez and Kim(2017)]{doshivelez2017rigorous}
+Finale Doshi-Velez and Been Kim.
+2017.
+Towards a Rigorous Science of Interpretable Machine Learning.
+\emph{arXiv preprint arXiv:1702.08608}.
+
+\bibitem[Fok and Weld(2023)]{fok2023verifiability}
+Raymond Fok and Daniel~S. Weld.
+2023.
+In Search of Verifiability: Explanations Rarely Enable Complementary Performance
+in {AI}-Advised Decision Making.
+\emph{AI Magazine}, 45(3):317--332.
+
+\bibitem[Haufe et~al.(2026)Haufe, Wilming, Clark, Zhumagambetov, Boubekki, Martin, and Panknin]{haufe2026formalization}
+Stefan Haufe, Rick Wilming, Benedict Clark, Rustam Zhumagambetov, Ahc\`ene
+Boubekki, J{\"o}rg Martin, and Danny Panknin.
+2026.
+Explainable {AI} Needs Formalization.
+\emph{npj Artificial Intelligence}, 2:42.
+\url{https://doi.org/10.1038/s44387-026-00095-1}.
+
+\bibitem[Sokol and Flach(2020)]{sokol2020factsheets}
+Kacper Sokol and Peter Flach.
+2020.
+Explainability Fact Sheets: A Framework for Systematic Assessment of Explainable
+Approaches.
+In \emph{Proceedings of the ACM Conference on Fairness, Accountability, and
+Transparency}, pages 56--67.
+
+\bibitem[Wilming et~al.(2022)Wilming, Budding, M{\"u}ller, and Haufe]{wilming2022scrutinizing}
+Rick Wilming, Christian Budding, Klaus-Robert M{\"u}ller, and Stefan Haufe.
+2022.
+Scrutinizing {XAI} Using Linear Ground-Truth Data with Suppressor Variables.
+\emph{Machine Learning}, pages 1--21.
+
+\bibitem[Wilming et~al.(2023)Wilming, Kieslich, Clark, and Haufe]{wilming2023theoretical}
+Rick Wilming, Lisa Kieslich, Benedict Clark, and Stefan Haufe.
+2023.
+Theoretical Behavior of {XAI} Methods in the Presence of Suppressor Variables.
+In \emph{Proceedings of the 40th International Conference on Machine Learning},
+volume 202, pages 37091--37107.
 
 \end{thebibliography}
 
