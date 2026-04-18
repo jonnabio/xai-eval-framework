@@ -1,35 +1,146 @@
 # Marco teórico específico / fundamentos conceptuales
 
+## Estado del arte en XAI e interpretabilidad agnóstica
+
+El campo de la Inteligencia Artificial Explicable (XAI) ha experimentado una
+expansión sin precedentes en la última década, consolidándose como un pilar
+crítico para la adopción de modelos de caja negra en sectores de alta
+responsabilidad. Las revisiones sistemáticas más recientes [@abdulkadir2023;
+@canha2025] coinciden en que, si bien la literatura ha producido un crecimiento
+asintótico en el número de algoritmos propuestos —destacando métodos líderes
+como LIME [@ribeiro2016], SHAP [@lundberg2017] y Anchors [@ribeiro2018]—, el
+desarrollo de protocolos de evaluación estandarizados no ha seguido el mismo
+ritmo. De hecho, un análisis basado en la metodología PRISMA realizado por
+@abdulkadir2023 revela que, a pesar de la madurez percibida del área, solo una
+fracción marginal de la producción científica (estimada en un 14%) incorpora
+marcos de evaluación cuantitativa rigurosos, limitándose mayoritariamente a
+validaciones cualitativas o anecdóticas.
+
+Esta fragmentación ha dado lugar a lo que @pawlicki2024 define como una
+proliferación de métricas inconexas, donde la duplicidad de criterios y la falta
+de consenso sobre las propiedades fundamentales de una explicación (como la
+fidelidad, la estabilidad y la robustez) dificultan la comparación objetiva
+entre aproximaciones. Investigaciones contemporáneas [@bhattacharya2024;
+@nizam2023] argumentan que la falta de un estándar unificado impide valorar la
+explicabilidad de manera multidimensional, ignorando a menudo el hecho de que
+los sistemas de IA modernos no solo requieren precisión técnica, sino también
+validez semántica para sus destinatarios humanos. En respuesta a este vacío, han
+surgido ecosistemas de benchmarking integrales como Quantus [@hedstrom2023] y
+OpenXAI [@agarwal2022], los cuales intentan sistematizar el proceso de
+quantificación mediante toolkits automatizados que agrupan métricas por afinidad
+lógica. Sin embargo, como señala @zheng2025, incluso estos marcos enfrentan retos
+técnicos significativos, como la inestabilidad de las métricas ante datos fuera
+de la distribución (OOD), lo que subraya la necesidad de seguir evolucionando
+hacia marcos de evaluación multinivel y más robustos, tal como se propone en el
+presente estudio.
+
 ## Fundamentos de IA de caja negra
+
+Para comprender el estado actual de la XAI, es imperativo analizar la naturaleza
+técnica de la "caja negra" (*black-box models*). La evolución de la IA ha pasado
+de modelos estadísticos transparentes —como la regresión lineal o árboles de
+decisión simples— a sistemas cuya lógica interna es inescrutable debido a su
+altísima dimensionalidad y no linealidad. Los modelos de ensamble (Random Forest,
+XGBoost) y las Redes Neuronales Profundas (DNN) logran niveles de precisión
+sobresalientes sacrificando la interpretabilidad directa. Esta opacidad no es un
+fallo de diseño, sino una consecuencia de la complejidad requerida para capturar
+patrones en datos no estructurados. Como señalan @canha2025 y @pawlicki2024, esto
+genera un "dilema de confianza" donde el usuario debe aceptar una decisión sin
+acceso a su proceso deductivo, marcando el punto de partida para las técnicas de
+explicabilidad agnóstica.
 
 ## Interpretabilidad y explicabilidad
 
-## Métodos agnósticos de explicación
+A pesar de que los términos "interpretabilidad" y "explicabilidad" se utilizan a
+menudo como sinónimos en la literatura técnica, revisiones sistemáticas de gran
+escala destacadas por @abdulkadir2023 destacan una falta de consenso
+terminológico que fragmenta el campo. Para los propósitos de este marco
+multinivel, es fundamental establecer una distinción operativa basada en el
+destinatario final de la información: el ser humano. Mientras que la
+interpretabilidad se asocia frecuentemente con la transparencia intrínseca de los
+mecanismos internos de un modelo, la explicabilidad emerge como un concepto que
+busca traducir esa complejidad en un lenguaje comprensible para el usuario
+[@canha2025].
 
-### LIME
-
-### SHAP
-
-### Anchors
-
-### PDP, ICE y variantes
+Siguiendo la propuesta de @linardatos2021, se define la interpretabilidad como la
+capacidad de discernir la mecánica interna de un sistema sin necesidad de conocer
+el "porqué" profundo de cada decisión, conectando primordialmente con la
+intuición técnica. Por el contrario, la explicabilidad añade una "capa de
+razonamiento" (*reasoning layer*) sobre los mecanismos técnicos para clarificar
+el proceso lógico que condujo a una salida específica [@canha2025]. Esta
+distinción es especialmente relevante para esta tesis, ya que justifica la
+necesidad de no solo evaluar la "fidelidad" al modelo (parámetro técnico), sino
+también la "coherencia semántica" (capa de razonamiento humano) sustentada por
+criterios multidimensionales [@bhattacharya2024].
 
 ## Criterios de evaluación de explicaciones
 
+La evaluación de la calidad de una explicación es un proceso multidimensional que
+requiere la cuantificación de diversas propiedades funcionales. A continuación,
+se detallan los criterios técnicos fundamentales adoptados en este estudio,
+sustentados en la jerarquía funcional propuesta por @canha2025 y los marcos de
+benchmarking de @agarwal2022.
+
 ### Fidelidad
+
+La fidelidad (\textit{fidelity}) mide el grado en que un método de explicación
+logra representar el verdadero proceso deductivo del modelo de caja negra.
+Siguiendo la definición de @canha2025, esta se operacionaliza a menudo como el
+"acuerdo del sustituto" (\textit{surrogate agreement}), formulado como:
+
+$$ m_{fid} = 1 - \frac{\sum_{i=1}^{N} |b(x_i) - s(x_i)|}{N \cdot \max(b(x))} $$
+
+Donde $b(x)$ representa la salida del modelo de caja negra y $s(x)$ la del modelo
+sustituto o aproximación local. Es vital distinguir la fidelidad de la
+fehaciencia (\textit{faithfulness}), ya que un modelo puede ser fiel en su
+mimetismo predictivo pero no necesariamente fehaciente en capturar la lógica
+causal subyacente [@zheng2025].
 
 ### Estabilidad
 
+La estabilidad evalúa la consistencia de las explicaciones ante variaciones
+mínimas en los datos de entrada que no alteran la predicción del modelo. Se
+formaliza comúnmente mediante la Estabilidad de Entrada Relativa ($RIS$), que
+estima la sensibilidad del explicador ante perturbaciones en el vecindario de $x$
+[@agarwal2022]:
+
+$$ RIS = \max_{x'} \frac{||ex(x) - ex(x')||}{||x - x'||} $$
+
+Donde $ex(x)$ es la importancia de características generada para la instancia
+$x$. Una $RIS$ elevada señala una fragilidad técnica, indicando que cambios
+imperceptibles en los datos pueden generar interpretaciones contradictorias.
+
 ### Robustez
+
+A diferencia de la estabilidad, la robustez se enfoca en la resistencia del
+explicador ante ataques adversarios o cambios significativos en la distribución.
+Como identifica @zheng2025, muchas métricas tradicionales fallan al operar con
+datos "fuera de la distribución" (OOD), por lo que la robustez técnica implica
+garantizar que el explicador mantenga su validez incluso cuando el modelo
+enfrenta instancias atípicas.
 
 ### Sparsity / complejidad
 
+La complejidad de una explicación debe estar alineada con las capacidades
+cognitivas humanas. @canha2025 recurre a la "Ley de Miller" para fundamentar este
+criterio, sugiriendo que el tamaño óptimo de una explicación informativa debe
+mantenerse en un rango de $7 \pm 2$ elementos resaltados. Una explicación con
+baja cardinalidad (alta \textit{sparsity}) es preferible para reducir la carga
+cognitiva sin sacrificar la información crítica.
+
 ### Coste computacional
+
+La eficiencia computacional es un criterio pragmático indispensable. Existe una
+compensación (\textit{trade-off}) intrínseca entre la fidelidad de métodos como
+KernelSHAP —que requieren miles de evaluaciones del modelo— y la rapidez de
+aproximaciones lineales como LIME. Este estudio adopta métricas de latencia de
+inferencia para valorar la viabilidad del despliegue bajo demanda.
 
 ### Alineación causal y sensibilidad contrafactual
 
-## XAI en visión, texto, tabular y series temporales
-
-## Confianza, utilidad y evaluación centrada en el usuario
-
-## Bases conceptuales del framework híbrido propuesto
+Finalmente, se introduce la alineación causal, que evalúa si las características
+identificadas corresponden a relaciones lógicas reales en el dominio de
+aplicación. Este criterio se complementa con la sensibilidad contrafactual, que
+responde a cambios mínimos necesarios para invertir la decisión del modelo,
+proporcionando una validación semántica que trasciende la métrica puramente
+matemática [@bhattacharya2024; @reif2024].
