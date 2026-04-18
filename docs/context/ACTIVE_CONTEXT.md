@@ -1,15 +1,17 @@
 # Active Context: XAI Evaluation Framework
 
-- **Current Objective:** Run and maintain the XAI experiment pipeline and serve results to the dashboard.
+- **Current Objective:** Developing the Multi-Level Evaluation Framework and drafting the PhD Thesis.
 - **Current State:** 
-    - **API:** Running on Render (Oregon) and synchronized with the latest recovery data.
-    - **Experiments:** Phase 1 Recovery is **82.4% complete**. All MLP experiments are finalized. Currently running the high-latency **SVM + Kernel SHAP** batch (6 workers optimized).
-    - **Data:** 344 healthy runs confirmed live in production dashboard.
-    - **Dashboard Assets:** Updated Radar plots, Trade-off scatter plots, and Pearson Heatmaps generated with the 82% dataset and pushed to `outputs/`.
+    - **Thesis:** Structure finalized into a 5-chapter Quarto production environment in the top-level `/thesis` directory.
+    - **Framework:** Transitioned title to "Marco para la Evaluación Multinivel de la Explicabilidad en IA".
+    - **API & Dashboard:** Successfully integrated and serving finalized Experiment 1 results.
+    - **References:** Consolidated ~124 research items into `thesis/references.bib`.
 - **Next Steps:**
-    1. Complete the final 17.6% of recovery (SVM-only).
-    2. Finalize Paper A/B drafts with full statistical significance.
-    3. Monitor background workers for potential SVM budget timeouts.
+    1. Populate **Chapter 1** with refined Objectives and Research Questions.
+    2. Populate **Chapter 2 (Foundations)** with LIME/SHAP and Taxonomy details from Paper C.
+    3. Finalize Paper A (LLM Semantic Evaluation) results integration into **Chapter 4**.
+    4. Render the first consolidated Word draft using `render.ps1`.
 - **Active Constraints:**
-    - Python 3.10+ required.
-    - `alibi` and `dice-ml` are required.
+    - **Tooling:** Quarto (required for thesis compilation).
+    - **Template:** Must adhere to `thesis/assets/Plantilla_Tesis_Doctorado.docx`.
+    - **Citations:** Use BibTeX format in `references.bib`.
