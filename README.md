@@ -1,6 +1,6 @@
 # Model-Agnostic XAI Evaluation Framework
 
-> **PhD Thesis Project**: "Arquitectura Agnóstica para la Interpretabilidad de Modelos de Inteligencia Artificial de Caja Negra"
+> **PhD Thesis Project**: "Marco para la Evaluación Multinivel de la Explicabilidad en IA: Una Integración de Benchmarking Técnico y Protocolos de Evaluación Semántica"
 > [![Render Status](https://img.shields.io/badge/Render-Deployed-success)](https://xai-benchmark-frontend.onrender.com)
 
 A modular, extensible framework for benchmarking Explainable AI (XAI) methods. This toolkit provides rigorous evaluation pipelines combining classical metrics (fidelity, stability) with novel LLM-based semantic evaluation for post-hoc explanations (LIME, SHAP).
@@ -52,6 +52,7 @@ xai-eval-framework/
 │   ├── data_loading/     # Data loaders (Adult, etc.)
 │   ├── models/           # Scikit-learn wrappers & training logic
 │   └── metrics/          # XAI evaluation metrics (Fidelity, Stability)
+├── thesis/               # PhD Thesis Production (Quarto-based)
 ├── docs/                 # Documentation & Design Docs
 ├── tests/                # Global unit & integration tests
 ├── environment.yml       # Conda environment definition

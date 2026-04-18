@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Thesis Production - Initialized] - 2026-04-18
+### Added
+- **PhD Thesis Environment**: Established a top-level `/thesis` directory for dissertation production.
+- **Workflow**: Implemented a "Source-First" Quarto-to-Word pipeline for the thesis.
+- **Documentation**: Added `/thesis/README.md` and `render.ps1` automation for consistent builds.
+- **References**: Consolidated 120+ research citations into `thesis/references.bib`.
+- **Structural Integration**: Mapped Papers A, B, and C into a 5-chapter thesis outline.
+
 ## [Experiment 1 - In Progress]
 
 ### 2025-12-26 - EXP1-26 & EXP1-27 (Metrics & Experiments)
