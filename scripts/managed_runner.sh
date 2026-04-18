@@ -8,10 +8,17 @@ LOG_FILE="logs/managed_runner.log"
 RESULTS_PATH="experiments/exp2_scaled/results"
 CLAIM_ROOT="experiments/exp2_scaled/worker_claims"
 MAX_LOAD=10.0
-MIN_MEM=6000
+MIN_MEM="${MIN_MEM:-4200}"
 REPO_DIR=$(pwd)
-WORKER_ID="${XAI_WORKER_ID:-$(hostname | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g; s/^-*//; s/-*$//')}"
-RESULTS_BRANCH="${XAI_RESULTS_BRANCH:-results/$WORKER_ID}"
+CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+if [ -n "${XAI_WORKER_ID:-}" ]; then
+    WORKER_ID="$XAI_WORKER_ID"
+elif [[ "$CURRENT_GIT_BRANCH" == results/* ]]; then
+    WORKER_ID="${CURRENT_GIT_BRANCH#results/}"
+else
+    WORKER_ID="$(hostname | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g; s/^-*//; s/-*$//')"
+fi
+RESULTS_BRANCH="${XAI_RESULTS_BRANCH:-${CURRENT_GIT_BRANCH:-results/$WORKER_ID}}"
 
 mkdir -p logs
 touch "$LOG_FILE"
