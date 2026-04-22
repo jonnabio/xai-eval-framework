@@ -1,16 +1,63 @@
 ---
-title: "Marco para la Evaluación Multinivel de la Explicabilidad en IA: Una Integración de Benchmarking Técnico y Protocolos de Evaluación Semántica"
+title: "Marco para la Evaluación Multinivel de la Explicabilidad en IA"
+subtitle: "Integración de Benchmarking Técnico, Protocolo Reproducible (FOM-7) y Taxonomía de Métricas"
 number-sections: false
 ---
 
 # Resumen {.unnumbered}
 
-Esta tesis propone un marco de evaluación multinivel para la Inteligencia Artificial Explicable (XAI). A diferencia de los enfoques tradicionales que se centran en una única métrica, este trabajo integra una taxonomía de cuatro ejes para categorizar métricas, un benchmark cuantitativo de fidelidad y estabilidad (Paper B), y un protocolo de evaluación semántica basado en modelos de lenguaje (Paper A).
+Esta tesis propone un marco de evaluación multinivel para la Inteligencia
+Artificial Explicable (XAI) orientado a comparar métodos agnósticos al modelo
+bajo condiciones de benchmarking controladas y reproducibles. El trabajo
+responde a la “crisis de evaluación” en XAI articulando tres componentes
+complementarios: (i) un protocolo de operación reproducible de siete puertas
+(FOM-7) que conecta diseño experimental, calificación de artefactos e inferencia
+estadística admisible; (ii) un benchmark cuantitativo multi-métrico sobre datos
+tabulares reales que evalúa SHAP, LIME, Anchors y DiCE en cinco familias de
+modelos; y (iii) una taxonomía estructurada del espacio de métricas de
+evaluación XAI organizada en cuatro ejes (objetivo de evaluación, fuente de
+evidencia, propiedad de calidad y contexto de tarea). El estudio empírico se realiza sobre el conjunto Adult (UCI Adult Income) y
+operacionaliza cinco métricas primarias: fidelidad, estabilidad, parsimonia,
+brecha de fidelidad (*faithfulness gap*) y coste computacional. La inferencia
+confirmativa se apoya en comparaciones no paramétricas con control de
+multiplicidad y en un análisis pareado SHAP–LIME para cuantificar el trade-off
+calidad–coste. Los resultados muestran diferencias grandes y consistentes entre
+métodos: SHAP domina en fidelidad y estabilidad en los contextos evaluados,
+mientras que LIME resulta competitivo cuando la latencia es crítica, a costa de
+explicaciones estructuralmente inestables. Anchors y DiCE se posicionan como
+enfoques con objetivos explicativos cualitativamente distintos a la atribución
+de características. En conjunto, la tesis aporta un protocolo portable y un
+marco conceptual que permiten seleccionar métodos XAI en función de objetivos
+operativos y acumular evidencia de forma reproducible.
 
-**Palabras clave:** XAI, Evaluación, LLM-as-a-judge, Benchmarking, Interpretabilidad.
+**Palabras clave:** inteligencia artificial explicable (XAI), evaluación
+multimétrica, benchmarking reproducible, protocolo FOM-7, atribución de
+características, explicaciones contrafactuales, datos tabulares.
 
 # Abstract {.unnumbered}
 
-This thesis proposes a multilevel evaluation framework for Explainable Artificial Intelligence (XAI). Unlike traditional approaches focusing on a single metric, this work integrates a four-axis taxonomy to categorize metrics, a quantitative benchmark for fidelity and stability (Paper B), and a semantic evaluation protocol based on language models (Paper A).
+This thesis proposes a multilevel evaluation framework for Explainable
+Artificial Intelligence (XAI) aimed at comparing model-agnostic explainers under
+controlled and reproducible benchmarking conditions. To address the evaluation
+fragmentation in XAI, the framework integrates three complementary components:
+(i) a seven-gate operational protocol (FOM-7) that links experimental design,
+artifact qualification, and statistically admissible inference; (ii) a
+multi-metric quantitative benchmark on real-world tabular data evaluating SHAP,
+LIME, Anchors, and DiCE across five model families; and (iii) a structured
+taxonomy of XAI evaluation metrics organized along four axes (evaluation target,
+evidence source, quality property, and task context). The empirical study uses the Adult (UCI Adult Income) dataset and
+operationalizes five primary metrics: faithfulness, stability, parsimony,
+faithfulness gap, and computational cost. Confirmatory inference relies on
+nonparametric comparisons with multiplicity control and on a paired SHAP–LIME
+analysis to quantify the quality–cost trade-off. Results show large and
+consistent differences across methods: SHAP dominates in faithfulness and
+stability in the evaluated settings, whereas LIME becomes attractive when
+latency constraints dominate, at the cost of structurally unstable explanations.
+Anchors and DiCE address qualitatively different explanatory objectives than
+feature attribution. Overall, the thesis contributes a portable protocol and a
+conceptual framework to support operationally grounded XAI method selection and
+reproducible evidence accumulation.
 
-**Keywords:** XAI, Evaluation, LLM-as-a-judge, Benchmarking, Interpretability.
+**Keywords:** explainable AI (XAI), multi-metric evaluation, reproducible
+benchmarking, FOM-7 protocol, feature attribution, counterfactual explanations,
+tabular data.

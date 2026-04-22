@@ -1,29 +1,289 @@
 # Marco Metodológico
 
+Este capítulo establece el posicionamiento investigativo de la tesis. Se
+articula en cuatro ejes: el problema de investigación que motiva el trabajo, la
+justificación de su relevancia científica y práctica, los objetivos e hipótesis
+formales que orientan la indagación empírica, y la metodología general que
+estructura el diseño de los estudios. La exposición detallada de los fundamentos
+conceptuales —incluyendo las bases técnicas de los métodos de explicabilidad y
+los criterios de evaluación— se desarrolla en el Capítulo 2.
+
 ## Problema de investigación
 
+La Inteligencia Artificial Explicable (XAI) ha consolidado un ecosistema de
+métodos *post-hoc* agnósticos al modelo cuya adopción en dominios de alto riesgo
+crece de forma sostenida [@adadi2018; @arrieta2019a; @angelov2021; @schwalbe2023;
+@ali2023; @belle2021; @linardatos2020; @saarela2024; @malwade2023]. Sin embargo, la capacidad del campo para *evaluar* esos
+métodos de manera comparativa, rigurosa y reproducible no ha avanzado al mismo
+ritmo [@doshi-velez2017; @samek2019; @canha2025]. En la práctica, esta tensión
+se observa incluso en explicadores locales ampliamente utilizados —como LIME y
+SHAP— cuyo uso extensivo contrasta con la variabilidad de criterios de
+evaluación reportados entre estudios [@ribeiro2016; @lundberg2017;
+@pawlicki2024]. Revisiones sistemáticas recientes
+identifican una marcada proliferación de métricas inconexas, inconsistencia en
+los criterios de inclusión de instancias y ausencia de protocolos que conecten
+la ejecución experimental con la inferencia estadística admisible
+[@pawlicki2024; @abdulkadir2023; @altukhi2025; @bhattacharya2024; @lipton2018]. Como
+resultado, los estudios publicados son frecuentemente inconmensurables entre sí
+y no permiten la acumulación sistemática de evidencia [@doshi-velez2017;
+@canha2025].
+
+La raíz técnica de este problema es doble. Por un lado, las métricas de
+fidelidad —las más ampliamente utilizadas— no capturan dimensiones igualmente
+relevantes para el despliegue práctico: la estabilidad ante perturbaciones de
+entrada, la parsimonia de las explicaciones producidas y el coste computacional
+por instancia [@bhattacharya2024; @abdulkadir2023; @canha2025; @brown2023]. Por
+otro lado, muchas de estas
+métricas sufren del problema de datos fuera de la distribución (*Out-of-
+Distribution*, OOD): la perturbación de características genera instancias que el
+modelo nunca encontró durante el entrenamiento, invalidando las puntuaciones de
+fidelidad resultantes [@ref_7; @zheng2025]. La disponibilidad de herramientas de
+benchmarking como Quantus [@hedstrom2023] y OpenXAI [@agarwal2022] ha mejorado
+la estandarización de la medición, pero no resuelve la ausencia de un protocolo
+de operación que discipline la trazabilidad de artefactos y la corrección de
+multiplicidad en la inferencia [@doshi-velez2017; @canha2025].
+
+El problema de investigación de esta tesis se formula en los siguientes
+términos: **¿En qué medida difieren los métodos de explicabilidad agnósticos al
+modelo en un conjunto multidimensional de métricas de calidad bajo condiciones
+de benchmarking controladas y reproducibles, y qué criterios técnicos permiten
+orientar su selección en función de los objetivos operativos?**
+
 ## Justificación científica y práctica
+
+Desde el punto de vista científico, esta investigación responde a una necesidad
+metodológica identificada de forma recurrente en la literatura: la falta de un
+protocolo unificado que conecte el diseño experimental, la calificación de
+artefactos y la inferencia estadística controlada [@hedstrom2023; @agarwal2022;
+@zheng2025; @doshi-velez2017; @allen2024]. La formalización de ese protocolo
+como un método de operación de siete puertas (FOM-7) constituye en sí misma una
+contribución al campo de la metodología de evaluación en XAI [@canha2025].
+Complementariamente, la construcción de una taxonomía estructurada del espacio
+de métricas de evaluación proporciona un marco conceptual que organiza las
+brechas de constructo actualmente dispersas en la literatura [@pawlicki2024;
+@abdulkadir2023; @nizam2023; @marcinkevičs2023; @schwalbe2023].
+
+Desde el punto de vista práctico, los sistemas de IA se despliegan de forma
+creciente en dominios donde la explicabilidad no es opcional, sino un requisito
+normativo y ético [@mittelstadt2019; @floridi2018; @hassija2023; @ali2023]. En
+este contexto, los profesionales y organizaciones necesitan criterios técnicos
+fundamentados que orienten la selección de métodos XAI en función de objetivos
+operativos concretos —p. ej., alta fiabilidad auditora frente a baja latencia de
+respuesta— y de las preferencias y expectativas de los usuarios
+[@murdoch2019; @rudin2022; @belle2021; @tripathy2024; @brown2023;
+@nussberger2022]. Esta
+tesis provee esa orientación a través de un análisis empírico pareado,
+reproducible y estadísticamente riguroso
+sobre datos tabulares reales.
 
 ## Objetivos e hipótesis
 
 ### Objetivo general
 
+Desarrollar y validar un marco de evaluación multinivel y reproducible para
+métodos de explicabilidad agnósticos al modelo, que integre un protocolo de
+benchmarking cuantitativo multi-métrico y un análisis taxonómico estructurado,
+con el fin de establecer criterios técnicamente rigurosos para la selección y
+comparación de métodos XAI en contextos de datos tabulares.
+
 ### Objetivos específicos
 
+1. Diseñar y formalizar un protocolo de benchmarking reproducible (FOM-7) que
+   garantice trazabilidad entre artefactos de ejecución, calificación de
+   evidencia e inferencia estadística admisible [@canha2025; @hedstrom2023;
+   @agarwal2022].
+
+2. Evaluar comparativamente cuatro métodos agnósticos —SHAP, LIME, Anchors y
+   DiCE— sobre cinco familias de modelos en el conjunto de datos UCI Adult
+   Income, utilizando un conjunto multidimensional de métricas: fidelidad,
+   estabilidad, parsimonia, brecha de fidelidad y coste computacional.
+   [@lundberg2017; @ribeiro2016; @ribeiro2018; @mothilal2020; @wachter2017;
+   @kohavi1996; @abdulkadir2023; @bhattacharya2024]
+
+3. Cuantificar las diferencias en el trade-off calidad-coste entre LIME y SHAP
+   mediante pruebas estadísticas pareadas sobre celdas coincidentes de modelo,
+   semilla y tamaño de muestra.
+
+4. Caracterizar el perfil de reproducibilidad del protocolo de benchmarking
+   mediante el análisis de la dispersión métrica bajo ejecuciones repetidas con
+   semillas distintas.
+
+5. Construir una taxonomía estructurada del espacio de métricas de evaluación
+   XAI organizada en cuatro ejes —objetivo de evaluación, fuente de evidencia,
+   propiedad de calidad y contexto de tarea— que sirva de marco conceptual
+   integrador para los Estudios A y B [@abdulkadir2023; @pawlicki2024; @nizam2023;
+   @marcinkevičs2023; @schwalbe2023].
+
 ### Hipótesis o proposiciones de trabajo
+
+Las hipótesis estadísticas formales se estructuran en torno a los tres ejes
+confirmatorios de la investigación empírica.
+
+**H1 — Diferencias globales entre métodos (fidelidad)**
+
+$H_{0,1}$: No existen diferencias significativas entre los métodos XAI en la
+métrica de fidelidad bajo el diseño de bloques emparejados.
+
+$H_{1,1}$: Al menos un par de métodos difiere significativamente en fidelidad.
+
+**H2 — Diferencias globales entre métodos (estabilidad)**
+
+$H_{0,2}$: No existen diferencias significativas entre los métodos XAI en la
+métrica de estabilidad bajo el diseño de bloques emparejados.
+
+$H_{1,2}$: Al menos un par de métodos difiere significativamente en estabilidad.
+
+**H3 — Trade-off calidad-coste SHAP vs. LIME**
+
+$H_{0,3}$: SHAP y LIME no difieren en las métricas de calidad ni en el coste
+computacional sobre celdas pareadas.
+
+$H_{1,3}$: SHAP y LIME difieren significativamente en al menos una métrica de
+calidad o en el coste computacional sobre celdas pareadas.
+
+**P1 — Reproducibilidad del protocolo (proposición)**
+
+El protocolo FOM-7 produce un coeficiente de variación (CV) inferior al 15% en
+las métricas primarias bajo ejecuciones repetidas con semillas distintas en
+condiciones de configuración idéntica, lo que constituye evidencia de
+estabilidad operativa del benchmarking.
+
+Las hipótesis H1 y H2 se contrastan mediante la prueba de Friedman con bloques
+$(g, n)$ y localización *post-hoc* de Nemenyi. La hipótesis H3 se contrasta
+mediante pruebas de Wilcoxon bilaterales pareadas sobre 75 celdas coincidentes
+SHAP-LIME, con corrección de Holm-Bonferroni para multiplicidad [@friedman1937;
+@demsar2006; @nemenyi1963; @wilcoxon1945].
 
 ## Metodología general de la investigación
 
 ### Enfoque
 
+Esta investigación adopta un enfoque cuantitativo-empírico con componente
+teórico-taxonómico. El núcleo empírico de los Estudios A y B descansa en el
+análisis estadístico de métricas computadas sobre experimentos controlados y
+reproducibles, siguiendo una lógica hipotético-deductiva. El componente
+taxonómico del Estudio C —que actúa como puente conceptual integrador— adopta
+una metodología de revisión estructurada con codificación explícita de
+dimensiones, siguiendo protocolos de síntesis narrativa rigurosa
+[@linardatos2020; @gilpin2018; @schwalbe2023; @abdulkadir2023].
+
 ### Tipo de investigación
+
+Los Estudios A y B corresponden a investigación comparativa-experimental no
+intervencional: los métodos XAI son los factores de tratamiento, los modelos
+predictivos son el contexto experimental y las métricas de calidad son las
+variables de resultado. El Estudio C corresponde a una revisión sistemática
+estructurada con propósito taxonómico y de síntesis de brechas de constructo en
+el campo de la evaluación XAI.
 
 ### Universo y contexto experimental
 
+El universo experimental está constituido por el conjunto de problemas de
+clasificación tabular supervisada en los que es necesario generar explicaciones
+*post-hoc* locales mediante métodos agnósticos al modelo. El contexto operativo
+se acota al conjunto de datos Adult (UCI Adult Income) [@kohavi1996], que
+contiene 48,842 instancias, 14 características (numéricas y categóricas) y una
+variable binaria de predicción (ingreso anual superior o inferior a 50,000
+USD). Este conjunto es ampliamente utilizado en estudios de benchmarking XAI,
+lo que facilita la comparación externa de resultados y la verificación de
+reproducibilidad [@agarwal2022; @hedstrom2023; @canha2025].
+
 ### Muestra de datasets, modelos y métodos XAI
+
+El diseño experimental adopta una estructura factorial cruzada. Las familias de
+modelos predictivos son: regresión logística (`logreg`), bosque aleatorio
+(`rf`) [@breiman2001], *gradient boosting* XGBoost (`xgb`), máquina de vectores
+soporte (`svm`) y perceptrón multicapa (`mlp`). Los métodos de explicabilidad
+evaluados son SHAP [@lundberg2017], LIME [@ribeiro2016], Anchors [@ribeiro2018]
+y DiCE [@mothilal2020; @wachter2017]. El tamaño de muestra por estrato se varía
+en tres niveles: $N
+\in \{50, 100, 200\}$. Cada celda del diseño se replica con cinco semillas de
+aleatoriedad: $s \in \{42, 123, 456, 789, 999\}$. El tamaño planificado del
+benchmark primario (Estudio A) es $5 \times 4 \times 5 \times 3 = 300$
+ejecuciones; el análisis pareado LIME-SHAP (Estudio B) opera sobre 75 celdas
+coincidentes.
 
 ### Criterios de inclusión y exclusión
 
+**Criterios de inclusión:**
+
+- Artefactos de resultado (`results.json`) con esquema completo y valores
+  numéricos válidos en todas las métricas primarias.
+- Ejecuciones pertenecientes al benchmark primario de robustez (EXP2), cuya
+  configuración ha sido congelada antes del inicio de la inferencia
+  confirmativa.
+- Celdas para las que existen artefactos en ambos métodos comparados (SHAP y
+  LIME) para el análisis pareado del Estudio B.
+
+**Criterios de exclusión:**
+
+- Artefactos vacíos o con esquema incompatible detectados en la auditoría de
+  integridad (puerta 3 del protocolo FOM-7).
+- Ejecuciones pertenecientes a la fase de calibración (EXP1), que tienen rol de
+  reproducibilidad y no se emplean para inferencia confirmativa.
+- Reconstrucciones sintéticas de artefactos faltantes; únicamente se acepta como
+  excepción la superposición de recuperación documentada sobre las celdas
+  `mlp_shap`/`svm_shap`.
+
 ### Variables, dimensiones y métricas
 
+Las **variables independientes** del diseño son: familia de modelo ($g$), método
+XAI ($k$), semilla de aleatoriedad ($s$) y tamaño de muestra por estrato ($n$).
+Las **variables dependientes** son cinco métricas primarias:
+
+- **Fidelidad**: correlación entre los pesos de importancia asignados por el
+  explicador y el efecto observado al enmascarar las características de mayor
+  peso (dirección: mayor es mejor).
+- **Estabilidad**: similitud coseno media entre explicaciones generadas sobre
+  instancias perturbadas con ruido gaussiano (dirección: mayor es mejor).
+- **Parsimonia** (*sparsity*): proporción de características activas en la
+  explicación (dirección: menor es mejor).
+- **Brecha de fidelidad** (*faithfulness gap*): diferencia en la salida del
+  modelo entre la instancia original y la instancia con las características
+  principales enmascaradas (dirección: mayor es mejor).
+- **Coste computacional**: tiempo de ejecución en milisegundos por instancia
+  (dirección: menor es mejor).
+
+La unidad de análisis inferencial es la ejecución agregada a nivel de bloque
+$(g, n)$, evitando la pseudorreplicación a nivel de instancia.
+
+La definición operativa de estas dimensiones y sus modos de medición sigue las
+taxonomías y recomendaciones recientes de evaluación multi-métrica para XAI
+[@abdulkadir2023; @bhattacharya2024; @canha2025; @zheng2025].
+
 ### Estrategia procedimental
+
+La estrategia procedimental se organiza en torno al protocolo FOM-7 (*Framework
+Operation Method*, siete puertas), derivado de los requisitos de benchmarking
+reproducible identificados en la literatura [@canha2025; @agarwal2022;
+@hedstrom2023] y de los modos de fallo observados durante la fase de calibración
+piloto.
+
+Las siete puertas secuenciales son:
+
+1. **Congelación del protocolo**: bloqueo de versiones de código,
+   configuraciones, factores y plan de inferencia antes de las ejecuciones
+   confirmativas.
+2. **Ejecución por lotes controlada**: ejecución desde manifiestos declarativos
+   con semillas fijas y registro del contexto de tiempo de ejecución.
+3. **Auditoría de integridad de artefactos**: detección y exclusión de salidas
+   malformadas, vacías o con esquema incompatible.
+4. **Armonización a tablas listas para el análisis**: estandarización de claves
+   y campos de métricas en tablas de inferencia deterministas.
+5. **Exportación inferencial**: generación determinista de tablas omnibus y de
+   pruebas pareadas a partir exclusivamente de entradas calificadas.
+6. **Perfilado de reproducibilidad**: cuantificación de la dispersión entre
+   ejecuciones y del comportamiento del coeficiente de variación en
+   configuraciones replicadas.
+7. **Reporte con trazabilidad de afirmaciones**: las afirmaciones inferenciales
+   solo se permiten cuando todas las puertas previas están satisfechas y son
+   trazables a artefactos fuente.
+
+La secuencia experimental distingue dos cohortes de evidencia con roles
+diferenciados: la etapa de calibración y reproducibilidad (EXP1), destinada a la
+verificación de implementación y al perfilado de dispersión; y el benchmark
+primario de robustez (EXP2), destinado a la inferencia confirmativa. Esta
+separación reduce la contaminación entre actividades exploratorias y
+afirmaciones confirmativas, en línea con las recomendaciones de disciplina de
+partición de evidencia discutidas en trabajos recientes sobre fidelidad de
+evaluación [@zheng2025].
