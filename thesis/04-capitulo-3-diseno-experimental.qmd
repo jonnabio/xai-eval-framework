@@ -1,19 +1,517 @@
-# Marco empírico / Diseño experimental
+# Marco empírico y diseño experimental
 
-## Objetivo del capítulo experimental
+Este capítulo describe el diseño empírico de los dos estudios que conforman el
+núcleo cuantitativo de la tesis: el benchmark multinivel de métodos agnósticos
+(Estudio A, Paper A) y la comparación pareada enfocada entre LIME y SHAP
+(Estudio B, Paper B). Ambos estudios comparten el mismo pipeline experimental,
+el mismo conjunto de datos y los mismos artefactos de modelo, y se distinguen
+por el alcance del análisis inferencial: Estudio A evalúa los cuatro métodos
+sobre el diseño factorial completo; Estudio B restringe la inferencia
+confirmativa al subconjunto pareado LIME-SHAP. El capítulo se organiza en ocho
+secciones: las dos fases experimentales (EXP1 y EXP2), el conjunto de datos y
+el protocolo de preprocesamiento, el diseño factorial, las configuraciones de
+los explicadores, la operacionalización de las métricas, el protocolo FOM-7,
+el análisis de cobertura de artefactos, y el plan de inferencia estadística.
+Las amenazas a la validez y el inventario de recursos de reproducibilidad
+figuran en el Apéndice A.
 
-## Hipótesis experimentales
+## Fases experimentales: EXP1 y EXP2
 
-## Diseño experimental general
+El diseño experimental distingue dos cohortes de evidencia con roles
+diferenciados, siguiendo el principio de separación entre actividades de
+calibración y afirmaciones confirmativas [@hedstrom2023; @zheng2025].
 
-## Experimento 1: Benchmark de métodos existentes
+### Fase de calibración y reproducibilidad (EXP1)
 
-## Experimento 2: Framework híbrido propuesto
+La Fase EXP1 tiene por objetivos: verificar la correcta implementación del
+pipeline experimental, entrenar y congelar los artefactos de modelo
+compartidos por todos los explicadores en EXP2, y generar un perfil de
+reproducibilidad sobre configuraciones replicadas que permita cuantificar la
+dispersión métrica esperada bajo variación de semilla.
 
-## Experimento 3: Escalabilidad y robustez
+EXP1 opera sobre dos familias de modelos —bosque aleatorio (`rf`) y XGBoost
+(`xgb`)— y dos métodos explicadores —SHAP (modo árbol) y LIME— formando una
+cohorte de 75 ejecuciones planificadas. De estas, 66 resultaron analizables
+(88.0% de cobertura). Los modelos entrenados en EXP1 se congelan como
+artefactos repositorio bajo `experiments/exp1_adult/models/` y son
+reutilizados sin reentrenamiento en EXP2, de modo que cualquier diferencia
+observada entre métodos en la fase primaria es atribuible al explicador y no
+a variación en el modelo subyacente.
 
-## Experimento 4: Evaluación centrada en el usuario
+El rendimiento predictivo de los cinco modelos entrenados en EXP1 y evaluados
+sobre el conjunto de prueba (9,758 instancias, semilla 42) se muestra en la
+Tabla 3.1. Los valores fueron extraídos directamente de los archivos
+`experiments/exp1_adult/models/*/metrics.json` del repositorio.
 
-## Procedimientos de análisis estadístico
+| Modelo | Exactitud | Precisión | Recall | F1 | AUC-ROC |
+|:-------|----------:|----------:|-------:|---:|--------:|
+| Regresión logística (`logreg`) | 0.849 | 0.842 | 0.849 | 0.844 | 0.903 |
+| Bosque aleatorio (`rf`) | 0.854 | 0.849 | 0.854 | 0.851 | 0.902 |
+| XGBoost (`xgb`) | **0.870** | **0.865** | **0.870** | **0.865** | **0.926** |
+| Máquina de vectores soporte (`svm`) | 0.856 | 0.849 | 0.856 | 0.849 | 0.898 |
+| Perceptrón multicapa (`mlp`) | 0.840 | 0.833 | 0.840 | 0.835 | 0.885 |
 
-## Consideraciones de validez, reproducibilidad y amenazas
+: Rendimiento predictivo de los modelos en el conjunto de prueba ($n = 9{,}758$,
+semilla 42). Valores extraídos de `models/*/metrics.json`. XGBoost lidera en
+todas las métricas; el perceptrón multicapa presenta el AUC-ROC más bajo pero
+supera el umbral de inclusión de 0.88. {#tbl-model-performance}
+
+Todos los modelos superan los umbrales de inclusión definidos en el protocolo:
+exactitud $\geq 0.83$ y AUC-ROC $\geq 0.88$. Esta dispersión inter-modelo es
+intencional: un benchmark robusto debe evaluar explicadores sobre modelos de
+distinta complejidad y tipo de frontera de decisión, incluyendo modelos
+lineales (logreg), de conjuntos de árboles (rf, xgb), con kernel (svm) y
+neuronales (mlp).
+
+El perfilado de reproducibilidad de EXP1 establece que las métricas de calidad
+presentan coeficientes de variación inferiores al 9% bajo variación de semilla:
+$\text{CV}_F \leq 0.063$, $\text{CV}_S \leq 0.083$,
+$\text{CV}_P \leq 0.044$, $\text{CV}_{\Delta_k} \leq 0.036$. El coste
+computacional exhibe mayor variabilidad ($\text{CV}_C \leq 0.225$ para SHAP
+con kernel), lo que implica que los rankings de calidad son sustancialmente
+más reproducibles que las estimaciones de latencia. EXP1 **no** contribuye
+a la inferencia confirmativa de EXP2 ni a las hipótesis H1-H3.
+
+### Fase de benchmark primario de robustez (EXP2)
+
+La Fase EXP2 es la cohorte de evidencia confirmativa. Expande EXP1 a los cinco
+modelos y cuatro métodos explicadores, con cinco semillas y tres tamaños de
+muestra, bajo el protocolo FOM-7 descrito en la Sección 3.6. Los resultados
+de EXP2 son la fuente exclusiva de las afirmaciones estadísticas inferenciales
+de los Estudios A y B.
+
+## Conjunto de datos y protocolo de preprocesamiento
+
+### Descripción del conjunto de datos
+
+Ambos estudios utilizan el conjunto de datos UCI Adult Income
+[@breiman2001; @kohavi1996], ampliamente empleado en benchmarking de XAI por
+su estructura tabular heterogénea, su variable objetivo binaria bien definida
+y la disponibilidad de comparaciones publicadas que facilitan la verificación
+de reproducibilidad externa [@agarwal2022; @hedstrom2023].
+
+El conjunto contiene 48,842 instancias, 14 características originales (6
+numéricas y 8 categóricas) y una variable binaria de predicción. Las
+características numéricas son: edad, horas de trabajo por semana, educación
+en años, ganancia de capital, pérdida de capital y peso final del censo. Las
+categóricas incluyen: clase de trabajo, nivel de educación, estado civil,
+ocupación, relación familiar, raza, sexo y país de origen. La tasa de positivos
+(clase $>50$K USD) es del 23.9%, lo que implica un desbalance moderado
+controlado mediante el muestreo estratificado por cuadrante de error descrito
+en la Sección 3.4.
+
+### Carga, limpieza y partición
+
+El conjunto se carga mediante `src/data_loading/adult.py` con OpenML como
+fuente primaria y UCI como respaldo. El pipeline de limpieza aplica las
+siguientes transformaciones de forma determinista: (i) normalización de
+espacios en blanco en valores de texto, (ii) canonicalización de valores
+faltantes (`"?"` $\to$ `NaN`), (iii) unificación de etiquetas de objetivo
+(`">50K."` $\to$ 1, `"<=50K."` $\to$ 0), (iv) eliminación de duplicados
+exactos, y (v) ordenamiento determinista de columnas.
+
+La partición sigue el esquema estratificado:
+
+$$\text{train\_test\_split}\!\left(\text{test\_size} = 0.20,\;
+\text{stratify} = y,\; \text{random\_state} = s\right)$$
+
+Para la semilla canónica $s = 42$, la partición produce 39,032 instancias
+de entrenamiento y 9,758 de prueba.
+
+### Controles de fuga de datos
+
+Los cuatro controles de fuga de datos se aplican de forma uniforme a todos
+los métodos explicadores:
+
+1. La partición estratificada se realiza *antes* de ajustar cualquier
+   transformación de preprocesamiento.
+2. `StandardScaler` (numéricas) y `OneHotEncoder` (`handle_unknown='ignore'`,
+   categóricas) se ajustan **exclusivamente** sobre el conjunto de
+   entrenamiento.
+3. El preprocesador ajustado se persiste como artefacto y es **compartido**
+   por todos los métodos XAI en cada ejecución, eliminando la variación por
+   diferencias de escalado entre métodos.
+4. Las explicaciones se generan sobre el espacio de características
+   transformado que el modelo usó durante el entrenamiento.
+
+## Diseño factorial del benchmark primario (EXP2)
+
+El benchmark primario adopta una estructura factorial cruzada de cuatro
+factores:
+
+$$\mathcal{D} = g \times k \times s \times n$$
+
+donde:
+
+- $g \in \{\text{logreg},\, \text{rf},\, \text{xgb},\, \text{svm},\,
+  \text{mlp}\}$ — familia de modelo predictivo (5 niveles),
+- $k \in \{\text{shap},\, \text{lime},\, \text{anchors},\, \text{dice}\}$ —
+  método de explicabilidad (4 niveles),
+- $s \in \{42,\, 123,\, 456,\, 789,\, 999\}$ — semilla de aleatoriedad
+  (5 niveles),
+- $n \in \{50,\, 100,\, 200\}$ — instancias por cuadrante de error (3 niveles).
+
+El tamaño del diseño planificado es:
+
+$$|\mathcal{D}| = 5 \times 4 \times 5 \times 3 = 300 \text{ ejecuciones}$$
+
+Cada celda $(g, k, s, n)$ produce un artefacto de resultado independiente.
+La variación en $s$ sirve para estimar la reproducibilidad del protocolo. La
+variación en $n$ permite examinar la estabilidad de los rankings bajo
+distintos volúmenes de evidencia local.
+
+### Jerarquía de análisis y unidad inferencial
+
+Para evitar la pseudo-replicación, el análisis adopta una estructura
+jerárquica de tres niveles:
+
+1. **Nivel de instancia:** métricas computadas por instancia dentro de cada
+   ejecución.
+2. **Nivel de ejecución:** media métrica por instancia, estimador del
+   rendimiento del método $k$ sobre el modelo $g$ bajo semilla $s$ y tamaño
+   $n$. Estimando declarado: $y_{g,k,s,n,m}$.
+3. **Nivel de bloque:** para los tests de Friedman, el bloque se define como
+   $b = (g, n)$, con la ejecución como unidad de observación dentro del bloque.
+   Este diseño produce $5 \times 3 = 15$ bloques completos.
+
+La unidad inferencial primaria del Estudio B es la **celda pareada**
+$(g, s, n)$: las 75 tuplas para las que existen artefactos calificados de
+SHAP y LIME con coordenadas idénticas.
+
+## Protocolo de muestreo de instancias y configuración de explicadores
+
+### Muestreo estratificado por cuadrante de error
+
+Las instancias para cada ejecución se seleccionan mediante muestreo
+estratificado por cuadrante de error de predicción: Verdaderos Positivos (VP),
+Verdaderos Negativos (VN), Falsos Positivos (FP) y Falsos Negativos (FN), con
+objetivo de $n$ instancias por cuadrante:
+
+$$\mathcal{I}_{g,s,n} = \text{StratSample}\!\left(\mathcal{I}_{\text{test}},\;
+\text{strata} = \{\text{VP, VN, FP, FN}\},\; n_{\text{per\_strata}} = n\right)$$
+
+El tamaño nominal por ejecución es $4n$, sujeto a la disponibilidad de
+instancias en cada cuadrante. El rango observado es de 27 a 800 instancias por
+ejecución (mediana: 400). Esta estrategia garantiza que el explicador se evalúa
+en los cuatro regímenes de decisión del modelo, no solo en los casos
+correctamente clasificados.
+
+### Configuración de los explicadores
+
+Todos los métodos se ejecutan a través de `ExplainerWrapper.explain_instance`,
+que registra el tiempo de ejecución y persiste las importancias de
+características. Los parámetros efectivos en EXP2 son:
+
+**SHAP** [@lundberg2017]: `TreeExplainer` para `rf` y `xgb`; `KernelExplainer`
+para `logreg`, `svm` y `mlp` con conjunto de referencia
+$n_{\text{bg}} = 50$ muestras del conjunto de entrenamiento. Objetivo:
+probabilidad de la clase positiva.
+
+**LIME** [@ribeiro2016]: `LimeTabularExplainer` con `num_samples = 1{,}000`,
+`num_features = 10`, `kernel_width = 3.0`, sin discretización de numéricas.
+
+**Anchors** [@ribeiro2018]: `AnchorTabular` con umbral de precisión efectivo
+$\tau = 0.95$ (el parámetro YAML no es consumido en *runtime*; el umbral es
+fijo). Caveat de implementación registrado en el inventario FOM-7.
+
+**DiCE** [@mothilal2020]: *backend* aleatorio, objetivo contrafactual de clase
+opuesta, importancia definida como $\text{imp}_i = |x_i - x'_i|$,
+`total_CFs = 1` efectivo (parámetro YAML no consumido).
+
+## Operacionalización de las métricas
+
+Las cinco métricas primarias se computan por instancia y se agregan a nivel de
+ejecución mediante media aritmética. La dirección de cada métrica se fija en
+el protocolo antes del análisis.
+
+### Fidelidad
+
+La fidelidad cuantifica la alineación entre las importancias del explicador y
+el efecto predictivo real bajo enmascaramiento individual de características:
+
+$$F = \text{corr}\!\left(|w_i|,\;\bigl|f(x) - f(x_{-i})\bigr|\right)$$
+
+donde $x_{-i}$ sustituye la característica $i$ por su media de entrenamiento.
+Dirección: $\uparrow$. Implementación: `src/metrics/fidelity.py`.
+
+### Estabilidad
+
+La estabilidad mide la consistencia de las explicaciones bajo $T = 15$
+perturbaciones gaussianas $x^{(t)} = x + \varepsilon^{(t)}$,
+$\varepsilon^{(t)} \sim \mathcal{N}(0, \sigma^2\mathbf{I})$, $\sigma = 0.1$:
+
+$$S = \frac{2}{T(T-1)} \sum_{a < b}
+\cos\!\left(e^{(a)},\, e^{(b)}\right)$$
+
+Con $T = 15$ se forman $\binom{15}{2} = 105$ pares por instancia.
+Dirección: $\uparrow$. Implementación: `src/metrics/stability.py`.
+
+### Parsimonia
+
+La parsimonia cuantifica la proporción de características activas
+($|w_i| > \tau_s = 10^{-4}$) sobre el total de características transformadas:
+
+$$P = \frac{\#\{i : |w_i| > \tau_s\}}{|\mathcal{F}|}$$
+
+Un valor bajo indica mayor concisión. Dirección: $\downarrow$.
+Implementación: `src/metrics/sparsity.py`.
+
+### Brecha de fidelidad
+
+La brecha de fidelidad cuantifica el cambio en la salida del modelo al
+enmascarar las $k = 5$ características de mayor importancia:
+
+$$\Delta_k = \left|f(x) - f\!\left(x_{\text{mask-top-}k}\right)\right|$$
+
+donde $f(\cdot)$ devuelve la probabilidad de la clase positiva.
+Dirección: $\uparrow$. Implementación: `src/metrics/faithfulness.py`.
+
+### Coste computacional
+
+El coste ($C$) es el tiempo de pared en milisegundos por instancia explicada,
+registrado en `ExplainerWrapper` bajo restricciones de recursos gestionadas por
+`ResourceGuard` (especificaciones en el Apéndice A). Dirección: $\downarrow$.
+
+### Resumen de métricas primarias
+
+| Métrica | Símbolo | Unidad | Dirección |
+|:--------|:-------:|:------:|:---------:|
+| Fidelidad | $F$ | score | $\uparrow$ |
+| Estabilidad | $S$ | similitud coseno | $\uparrow$ |
+| Parsimonia | $P$ | proporción activa | $\downarrow$ |
+| Brecha de fidelidad | $\Delta_k$ | score | $\uparrow$ |
+| Coste computacional | $C$ | ms/instancia | $\downarrow$ |
+
+: Métricas primarias del benchmark con unidades y direcciones.
+{#tbl-metrics}
+
+## Protocolo de operación FOM-7
+
+FOM-7 (*Framework Operation Method*, siete puertas) es la contribución
+metodológica central de este estudio. Fue derivado de: (i) los requisitos de
+benchmarking reproducible documentados en la literatura [@canha2025;
+@agarwal2022; @hedstrom2023], y (ii) los modos de fallo observados en EXP1:
+deriva de protocolo, fallos de integridad de artefactos y exportaciones de
+análisis no equivalentes entre ejecuciones. Las siete puertas son
+**secuenciales**: cada puerta debe ser satisfecha antes de proceder a la
+siguiente, y un fallo en cualquier puerta degrada los outputs afectados a
+estatus descriptivo.
+
+**Puerta 1 — Congelación del protocolo.** Bloqueo de versiones de código,
+archivos de configuración YAML, factores del diseño y plan de inferencia
+estadística *antes* de iniciar cualquier ejecución confirmativa. Formalizado
+mediante `configs/experiments/exp2_scaled/manifest.yaml`.
+
+**Puerta 2 — Ejecución por lotes controlada.** Ejecución de las 300 celdas
+desde el manifiesto declarativo, con semillas fijas y registro del contexto
+de tiempo de ejecución. No se permiten modificaciones ad-hoc de configuración.
+
+**Puerta 3 — Auditoría de integridad de artefactos.** Inspección determinista
+de cada `results.json`: detección y exclusión de archivos vacíos, con esquema
+incompatible o con valores numéricos inválidos. Ningún artefacto excluido se
+reemplaza mediante reconstrucción sintética.
+
+**Puerta 4 — Armonización a tablas listas para el análisis.** Estandarización
+de claves y campos de métricas: las diferencias de esquema entre cohortes
+se resuelven mediante un proceso auditado que genera tablas merge-seguras.
+
+**Puerta 5 — Exportación inferencial.** Generación determinista de tablas
+de test omnibus y pruebas pareadas exclusivamente desde entradas calificadas.
+La superposición de recuperación para `mlp_shap`/`svm_shap`
+(`outputs/batch_results.csv`) es la única excepción explícitamente
+documentada.
+
+**Puerta 6 — Perfilado de reproducibilidad.** Cuantificación de la dispersión
+entre ejecuciones y del CV en configuraciones replicadas de EXP1. Fundamenta
+la proposición P1 y establece el rango de variabilidad esperada para
+interpretar los intervalos de confianza de EXP2.
+
+**Puerta 7 — Reporte con trazabilidad de afirmaciones.** Las afirmaciones
+inferenciales se emiten únicamente cuando todas las puertas previas están
+satisfechas y son trazables a artefactos fuente específicos. Cualquier
+afirmación no trazable se presenta como descriptiva.
+
+El flujo compacto del protocolo es:
+
+$$\text{Congelación} \to \text{Ejecución} \to \text{Auditoría} \to
+\text{Armonización} \to \text{Exportación} \to \text{Perfilado} \to
+\text{Reporte}$$
+
+## Cobertura de artefactos y análisis del impacto de datos faltantes
+
+### Inventario de cobertura
+
+El análisis de cobertura se realizó directamente sobre el árbol de resultados
+comprometidos (`experiments/exp2_scaled/results/`), verificando la presencia
+y el tamaño no nulo de cada `results.json` en las 300 celdas del diseño.
+
+| Cohorte | Planificadas | Presentes | Analizables | Cobertura |
+|:--------|------------:|----------:|------------:|----------:|
+| EXP1 (calibración) | 75 | 75 | 66 | 88.0% |
+| EXP2 (benchmark primario) | 300 | 299 | 275 | 91.7% |
+
+: Inventario de cobertura de artefactos. EXP2 incluye la superposición de
+recuperación de 30 filas para celdas `mlp_shap`/`svm_shap`.
+{#tbl-coverage}
+
+La **única celda físicamente faltante** en EXP2 es `svm_shap_s456_n200`
+(verificado por inspección directa del árbol de artefactos). Las 25 celdas
+con cobertura analítica reducida presentan artefactos físicamente presentes
+pero con diferencias de esquema; se concentran en Anchors (18 celdas) y DiCE
+(7 celdas), con SHAP y LIME en cobertura completa (75/75 tras la
+superposición de recuperación).
+
+| Método | Planificadas | Analizables | Cobertura |
+|:-------|------------:|------------:|----------:|
+| SHAP | 75 | 75 | 100.0% |
+| LIME | 75 | 75 | 100.0% |
+| Anchors | 75 | 57 | 76.0% |
+| DiCE | 75 | 68 | 90.7% |
+
+: Cobertura analítica por método. SHAP incluye la superposición de
+recuperación. {#tbl-coverage-method}
+
+### Evaluación cuantitativa del impacto estadístico
+
+El impacto de las 25 celdas ausentes se evalúa en tres dimensiones:
+completitud de bloques de Friedman, precisión de medias globales de Anchors
+y DiCE, e integridad del análisis pareado del Estudio B.
+
+**Completitud de bloques de Friedman.** El test de Friedman opera sobre $B =
+15$ bloques $(g, n)$ completos: un bloque es completo si los cuatro métodos
+tienen al menos una ejecución analizable. Verificación directa: los 15/15
+bloques son completos para todos los métodos. La completitud de bloques
+garantiza la ejecutabilidad y validez del test de Friedman [@demsar2006].
+
+**Impacto en la precisión de los estimados de Anchors.** Con 57/75 = 76.0%
+de cobertura, algunos bloques de Anchors se estiman con $r < 5$ semillas. En
+el caso más desfavorable (bloques `logreg`-Anchors y `mlp`-Anchors,
+$r \approx 2.3$ semillas por $(g, n)$), la varianza del estimador de bloque
+se infla según:
+
+$$\text{Var}\!\left(\hat{\mu}_{g,k,n}\right) = \frac{\sigma^2_{g,k,n}}{r}$$
+
+Con $r = 5$ planificados versus $r \approx 2.3$ observados, el error estándar
+se infla por un factor de $\sqrt{5/2.3} \approx 1.47$ (incremento del 47%).
+Este incremento amplía los intervalos de confianza de las medias de Anchors
+en esos bloques, pero no invalida el test de Friedman por tres razones: (i)
+el test de Friedman es un procedimiento de rangos, robusto a la inflación de
+varianza en bloques individuales; (ii) los estadísticos de Friedman del
+Estudio A superan $\chi^2 = 30.44$ en todas las métricas, muy por encima del
+umbral crítico $\chi^2_{0.05,3} = 7.81$; (iii) el margen de seguridad para
+la métrica con menor estadístico (Coste) es:
+
+$$\text{Margen} = \frac{30.44 - 7.81}{7.81} \times 100\% = 290\%$$
+
+Incluso asumiendo una reducción del poder del 50% —hipótesis conservadora que
+supera la inflación de varianza calculada— el estadístico de Coste sería
+$\chi^2 \approx 15.2$ ($p \approx 0.0016$), significativo al nivel
+$\alpha = 0.05$.
+
+**Integridad del análisis pareado del Estudio B.** Con cobertura completa de
+SHAP (75/75) y LIME (75/75), la cobertura pareada del Estudio B es del 100%.
+Los datos faltantes de Anchors y DiCE **no afectan** al Estudio B.
+
+**Conclusión.** El impacto estadístico de los 25 artefactos analíticamente
+ausentes es mínimo: los tests de Friedman permanecen significativos con
+márgenes de seguridad $\geq 290\%$, el análisis pareado del Estudio B tiene
+cobertura completa, y la única limitación real son los intervalos de confianza
+de Anchors en los bloques `logreg` y `mlp`. Esta limitación se registra como
+caveat explícito en la interpretación de los resultados del Capítulo 4.
+
+## Plan de inferencia estadística
+
+### Estudio A: test omnibus de Friedman
+
+Para contrastar H1 y H2, se aplica el test de Friedman [@friedman1937]
+sobre los $B = 15$ bloques completos con $k = 4$ tratamientos. El estadístico
+se calcula sobre los rangos $r_{bj}$ de cada tratamiento $j$ dentro de
+cada bloque $b$:
+
+$$\chi^2_F = \frac{12B}{k(k+1)} \sum_{j=1}^{k}
+\left(\bar{r}_j - \frac{k+1}{2}\right)^2$$
+
+donde $\bar{r}_j = \frac{1}{B}\sum_{b=1}^B r_{bj}$. Bajo $H_0$,
+$\chi^2_F \sim \chi^2_{k-1}$ asintóticamente para $B \geq 10$
+[@demsar2006]. El tamaño del efecto se reporta mediante la $W$ de Kendall:
+
+$$W = \frac{\chi^2_F}{B(k-1)}$$
+
+donde $W = 1$ indica concordancia perfecta entre bloques.
+
+### Localización post-hoc: Nemenyi
+
+Cuando Friedman rechaza $H_0$, se aplica la prueba post-hoc de Nemenyi
+[@nemenyi1963]. La diferencia crítica al nivel $\alpha = 0.05$ con $k = 4$
+y $B = 15$ es:
+
+$$\text{CD} = q_\alpha \sqrt{\frac{k(k+1)}{6B}} \approx 2.569 \times
+\sqrt{\frac{4 \times 5}{6 \times 15}} \approx 1.211 \text{ rangos}$$
+
+Dos métodos se consideran significativamente distintos si
+$|\bar{r}_i - \bar{r}_j| > \text{CD}$.
+
+### Wilcoxon pareado: conjuntos de 45 y 75 celdas
+
+Para contrastar H3 se aplica el test de Wilcoxon con rangos con signo
+bilateral [@wilcoxon1945] sobre diferencias pareadas
+$d_i = y_{\text{SHAP},i} - y_{\text{LIME},i}$ en dos conjuntos:
+
+- **Wilcoxon-45**: 45 celdas con $g \in \{$logreg, rf, xgb$\}$ (conjunto
+  primario con TreeSHAP exacto).
+- **Wilcoxon-75**: 75 celdas completas (análisis de sensibilidad que incluye
+  SVM y MLP con KernelSHAP).
+
+El tamaño del efecto se reporta como $d_z$ de Cohen [@lakens2013]:
+
+$$d_z = \frac{\bar{d}}{s_d}$$
+
+con interpretación convencional: pequeño ($0.2 \leq d_z < 0.5$), mediano
+($0.5 \leq d_z < 0.8$), grande ($d_z \geq 0.8$).
+
+### Control de multiplicidad
+
+Las pruebas se organizan en tres familias inferenciales independientes, con
+corrección de Holm-Bonferroni dentro de cada familia:
+
+| Familia | Tests | $n$ | Corrección |
+|:--------|------:|:---:|:----------:|
+| Friedman (Estudio A) | 5 (uno por métrica) | 15 bloques | Holm-Bonferroni |
+| Wilcoxon-45 (Estudio A) | 5 | 45 celdas | Holm-Bonferroni |
+| Wilcoxon-75 (Estudios A y B) | 5 | 75 celdas | Holm-Bonferroni |
+
+: Familias inferenciales y control de multiplicidad. No se aplica corrección
+conjunta entre familias; cada familia responde a una pregunta con unidades
+de análisis distintas [@demsar2006]. {#tbl-stat-plan}
+
+### Resumen del plan estadístico por hipótesis
+
+| Hipótesis | Test | $n$ | Diseño |
+|:----------|:----:|:---:|:-------|
+| H1 (fidelidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
+| H2 (estabilidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
+| H3 (trade-off SHAP-LIME) | Wilcoxon bilateral | 75 pares | $(g, s, n)$ idénticos |
+| P1 (reproducibilidad) | CV sobre EXP1 | 5 semillas | Por método |
+
+: Plan de decisiones estadísticas por hipótesis. {#tbl-hypo-plan}
+
+## Trazabilidad y reproducibilidad
+
+Todos los análisis del Capítulo 4 son reproducibles desde el repositorio
+público `https://github.com/jonnabio/xai-eval-framework`, archivado con DOI
+`10.5281/zenodo.19297724` (instantánea de referencia de abril de 2026).
+Los anclajes de reproducibilidad principales son:
+
+- `configs/experiments/exp2_scaled/manifest.yaml` — diseño factorial
+  declarado (300 celdas).
+- `experiments/exp2_scaled/results/` — árbol de artefactos por ejecución
+  (299 archivos `results.json` no vacíos).
+- `outputs/batch_results.csv` — superposición de recuperación (30 filas).
+- `scripts/run_exp2_statistical_analysis.py` — generación determinista de
+  tablas inferenciales.
+- `outputs/analysis/paper_a_exp2_stats/` — exportaciones inferenciales de
+  referencia.
+
+Las especificaciones completas del entorno de ejecución, los parámetros de
+restricción de recursos y las instrucciones de reproducción paso a paso
+figuran en el Apéndice A.

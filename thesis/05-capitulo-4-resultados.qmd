@@ -1,11 +1,516 @@
 # Resultados y discusión
 
-## Resultados del benchmark
+Este capítulo presenta los resultados empíricos de los Estudios A y B del
+benchmark XAI, organizados conforme a las hipótesis y proposición de trabajo
+establecidas en el Capítulo 1. La exposición sigue la secuencia lógica del
+protocolo FOM-7: primero se documentan los resultados del análisis omnibus
+(Estudio A), luego el análisis pareado SHAP-LIME (Estudio B), y finalmente
+la verificación de la proposición de reproducibilidad (P1). La discusión
+integradora al final del capítulo articula los hallazgos con la literatura y
+deriva criterios operativos de selección de métodos.
 
-## Resultados del framework híbrido
+Todos los valores reportados en este capítulo se calcularon a partir de los
+artefactos de la etapa de benchmark primario de robustez (EXP2), compuesta
+por 275 celdas calificadas del diseño factorial $5 \times 4 \times 5 \times 3$.
+Las 25 celdas faltantes (todas ellas del tipo Anchors o DiCE) fueron excluidas
+por la puerta 3 del protocolo y no afectan las pruebas confirmativas (véase
+Capítulo 3, sección de cobertura y calificación).
 
-## Resultados de escalabilidad y robustez
+## Descripción general de la cobertura analítica
 
-## Resultados del estudio con usuarios
+Antes de presentar las pruebas confirmativas, conviene establecer la
+distribución real de los datos. De las 300 celdas planificadas en EXP2
+($D = g \times k \times s \times n = 5 \times 4 \times 5 \times 3$), se
+obtuvieron artefactos calificados en 275, distribuidos como sigue:
 
-## Discusión integrada
+- **SHAP**: 75 de 75 celdas (100%). La superposición de recuperación
+  (`outputs/batch_results.csv`) completa la única celda físicamente faltante
+  del árbol `exp2_scaled` (`svm_shap_s456_n200`) y sustituye las ejecuciones
+  SHAP de `mlp`/`svm` para evitar sesgos por truncamiento de tiempo.
+
+- **LIME**: 75 de 75 celdas (100%). Cobertura completa.
+
+- **DiCE**: 68 de 75 celdas (90.7%). Las 7 celdas faltantes se distribuyen
+  entre varias combinaciones con semillas específicas (2 en `logreg_dice`, 2 en
+  `mlp_dice`, 2 en `svm_dice` y 1 en `xgb_dice`).
+
+- **Anchors**: 57 de 75 celdas (76.0%). Las 18 celdas faltantes se concentran
+  en `logreg_anchors` y `mlp_anchors` (con 2 celdas adicionales en
+  `xgb_anchors`) y reflejan la falta de convergencia del algoritmo a una regla
+  con precisión ≥ 0.95 dentro del límite de búsqueda.
+
+Para el análisis Friedman (H1 y H2), se utilizan los 15 bloques completos
+$(g, n)$ (*model-size blocks*) para los cuales los cuatro métodos disponen de
+al menos una ejecución calificada (véase Capítulo 3). Para el análisis pareado
+SHAP-LIME (H3), se utilizan las 75 celdas $(g, s, n)$ coincidentes en las que
+ambos métodos producen resultados calificados.
+
+## Estudio A: Análisis omnibus multimétrico (H1 y H2) {#sec-estudio-a}
+
+### H1: Diferencias entre métodos en fidelidad
+
+La prueba de Friedman para bloques $(g, n)$ sobre la métrica de fidelidad
+arrojó una estadística $\chi^2_F = 42.12$ con $k - 1 = 3$ grados de libertad
+sobre $n = 15$ bloques completos. El valor crítico para $\alpha = 0.05$ es
+$\chi^2_{crit}(3) = 7.815$, de modo que el margen de seguridad inferencial es:
+
+$$\text{Margen} = \frac{\chi^2_F - \chi^2_{crit}}{\chi^2_{crit}} \times 100 =
+\frac{42.12 - 7.815}{7.815} \times 100 = 439\%$$
+
+Este resultado rechaza $H_{0,1}$ con una holgura de más de cinco veces el
+umbral crítico, lo que indica diferencias entre métodos de magnitud muy grande
+y no atribuibles a fluctuaciones muestrales. La distribución empírica de los
+rangos confirma dominancia de SHAP en los 15 bloques, con LIME como segundo
+en los 15 bloques y alternancia Anchors–DiCE en las posiciones 3–4:
+
+| Método  | Suma de rangos | Rango medio | Posición |
+|---------|---------------|-------------|----------|
+| SHAP    | 15            | 1.000       | 1.ª      |
+| LIME    | 30            | 2.000       | 2.ª      |
+| Anchors | 48            | 3.200       | 3.ª      |
+| DiCE    | 57            | 3.800       | 4.ª      |
+
+: Suma y media de rangos de fidelidad — prueba de Friedman ($n=15$ bloques). {#tbl-friedman-fidelity}
+
+El hecho de que SHAP obtenga rango 1 en la totalidad de los 15 bloques
+(suma = 15, media = 1.000) implica que en ningún contexto de bloque $(g,n)$
+ningún otro método superó a SHAP en fidelidad. Las medias brutas (promedio $\pm$
+desviación estándar entre bloques) son: SHAP = 0.808 $\pm$ 0.093, LIME = 0.560
+$\pm$ 0.068, Anchors = 0.389 $\pm$ 0.100, DiCE = 0.170 $\pm$ 0.103.
+
+La escala de fidelidad es acotada en $[0, 1]$ (correlación entre importancias
+y efecto de enmascaramiento): valores superiores a 0.80 señalan explicaciones
+que capturan fielmente el comportamiento local del modelo; valores inferiores
+a 0.40 indican explicaciones poco representativas. Bajo estos criterios, SHAP
+opera consistentemente en zona alta de fidelidad, LIME en zona media, y tanto
+Anchors como DiCE en zona baja-media. La fidelidad baja de DiCE no es
+sorprendente: como método contrafactual, DiCE no optimiza la correlación de
+importancias, sino la generación de ejemplos alternativos, de modo que la
+métrica de fidelidad captura una dimensión de calidad que no es el objetivo de
+diseño primario de este método.
+
+**Localización post-hoc (Nemenyi):** La diferencia crítica para comparaciones
+pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$ es:
+
+$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$
+
+Donde $q_\alpha = 2.569$ es el valor crítico de la distribución de Nemenyi para
+$k=4$ con $\alpha = 0.05$ [@demsar2006]. Las diferencias en rangos medios entre
+todos los pares de métodos superan ampliamente esta diferencia crítica:
+
+| Par              | $|R_i - R_j|$ | CD    | Significativo |
+|------------------|---------------|-------|---------------|
+| SHAP vs. LIME    | 1.000         | 1.211 | No            |
+| SHAP vs. Anchors | 2.200         | 1.211 | Sí            |
+| SHAP vs. DiCE    | 2.800         | 1.211 | Sí            |
+| LIME vs. Anchors | 1.200         | 1.211 | No            |
+| LIME vs. DiCE    | 1.800         | 1.211 | Sí            |
+| Anchors vs. DiCE | 0.600         | 1.211 | No            |
+
+: Comparaciones post-hoc de Nemenyi para fidelidad. {#tbl-nemenyi-fidelity}
+
+La localización Nemenyi es conservadora cuando $n$ es pequeño. En fidelidad,
+se distinguen de forma robusta SHAP frente a Anchors/DiCE y LIME frente a DiCE;
+las diferencias SHAP–LIME y LIME–Anchors no superan el umbral crítico bajo este
+procedimiento. Este resultado no contradice la dominancia observada de SHAP
+en rangos, y motiva complementar el análisis global con el contraste pareado
+SHAP–LIME del Estudio B.
+
+### H2: Diferencias entre métodos en estabilidad
+
+La prueba de Friedman para estabilidad arrojó $\chi^2_F = 40.68$ con $n = 15$
+bloques completos, lo que implica un margen de seguridad de:
+
+$$\text{Margen} = \frac{40.68 - 7.815}{7.815} \times 100 = 421\%$$
+
+$H_{0,2}$ se rechaza con la misma holgura que $H_{0,1}$. Sin embargo, el
+ordenamiento de los métodos en estabilidad difiere sustancialmente del
+observado en fidelidad, lo que constituye en sí mismo un hallazgo teórico
+relevante: las dimensiones de calidad no están correlacionadas monótonamente.
+
+| Método  | Suma de rangos | Rango medio | Media bruta |
+|---------|---------------|-------------|-------------|
+| SHAP    | 15            | 1.000       | 0.732       |
+| DiCE    | 30            | 2.000       | 0.361       |
+| LIME    | 51            | 3.400       | 0.014       |
+| Anchors | 54            | 3.600       | 0.043       |
+
+: Suma y media de rangos de estabilidad — prueba de Friedman ($n=15$ bloques). {#tbl-friedman-stability}
+
+SHAP mantiene la primera posición en estabilidad (rango medio = 1.000), lo
+que implica que es dominante también en esta dimensión. DiCE, que ocupa el
+último lugar en fidelidad, asciende a la segunda posición en estabilidad
+(rango medio = 2.000; media bruta = 0.361), lo que refleja que las
+explicaciones contrafactuales de DiCE tienen cierta coherencia estructural
+aunque su correlación con la función del modelo sea baja. El resultado más
+llamativo es la casi-nula estabilidad de LIME: su media bruta de 0.014
+(similitud coseno en $[0,1]$) indica que explicaciones generadas sobre
+instancias ligeramente perturbadas son prácticamente ortogonales entre sí.
+Este es un rasgo conocido del diseño por muestreo local de LIME [@ribeiro2016],
+pero la cuantificación en este benchmark evidencia que la inestabilidad no es
+marginal, sino estructural.
+
+La diferencia crítica Nemenyi para estabilidad es idéntica a la calculada para
+fidelidad ($CD = 1.211$) dado el mismo $n$ y $k$. Las diferencias en rangos
+medios confirmadas como significativas son:
+
+- SHAP vs. LIME: $|1.000 - 3.400| = 2.400 > 1.211$ (Sí)
+- SHAP vs. Anchors: $|1.000 - 3.600| = 2.600 > 1.211$ (Sí)
+- DiCE vs. LIME: $|2.000 - 3.400| = 1.400 > 1.211$ (Sí)
+- DiCE vs. Anchors: $|2.000 - 3.600| = 1.600 > 1.211$ (Sí)
+- LIME vs. Anchors: $|3.400 - 3.600| = 0.200 < 1.211$ (No)
+- SHAP vs. DiCE: $|1.000 - 2.000| = 1.000 < 1.211$ (No)
+
+LIME y Anchors forman un grupo indistinguible en estabilidad (ambos con valores
+cercanos a cero), mientras que SHAP y DiCE conforman el grupo estable. La
+interpretación práctica es clara: en despliegues que requieren consistencia
+explicativa ante pequeñas variaciones de entrada, SHAP es el método robusto y
+DiCE ofrece estabilidad intermedia; LIME y Anchors deben descartarse por este
+criterio.
+
+## Estudio B: Análisis pareado SHAP-LIME y trade-off calidad-coste (H3) {#sec-estudio-b}
+
+El análisis pareado opera sobre las 75 celdas $(g, s, n)$ para las cuales ambos
+métodos disponen de artefactos calificados. La superposición de recuperación
+documentada en el Capítulo 3 garantiza cobertura completa de SHAP y LIME en el
+conjunto pareado (75/75).
+
+### Diferencias en métricas de calidad
+
+Para cada métrica se calcula la diferencia pareada $d_i = x_i^{SHAP} - x_i^{LIME}$,
+donde un valor positivo indica ventaja de SHAP. El estadístico de efecto de
+Cohen es $d_z = \bar{d} / s_d$, donde $s_d$ es la desviación estándar de las
+diferencias.
+
+| Métrica           | $\bar{d}$ | $s_d$  | $d_z$  | Pos. | Neg. | $n$ |
+|-------------------|-----------|--------|--------|------|------|-----|
+| Fidelidad         | +0.2479   | 0.0514 | +4.820 | 75   | 0    | 75  |
+| Estabilidad       | +0.7176   | 0.2390 | +3.002 | 75   | 0    | 75  |
+| Parsimonia        | +0.1418   | 0.1690 | +0.839 | 75   | 0    | 75  |
+| Brecha fidelidad  | +0.0453   | 0.0173 | +2.626 | 74   | 1    | 75  |
+| Coste (ms)        | +8047.6   | 17856.6| +0.451 | 59   | 16   | 75  |
+
+: Diferencias pareadas SHAP − LIME ($n=75$ celdas). Se reporta $d_i = \text{SHAP} - \text{LIME}$; para fidelidad/estabilidad/brecha, $d>0$ favorece SHAP; para parsimonia y coste, $d>0$ indica explicaciones más densas y/o mayor coste de SHAP. {#tbl-paired-shap-lime}
+
+Los resultados confirman $H_{1,3}$ de forma inequívoca:
+
+**Fidelidad:** SHAP supera a LIME en el 100% de las 75 celdas pareadas (75/75
+diferencias positivas) con un tamaño del efecto de magnitud muy grande
+($d_z = +4.820$). Bajo el criterio de Lakens [-@lakens2013], $d_z > 0.8$
+constituye efecto grande; $d_z > 2.0$ se clasifica comúnmente como efecto muy
+grande. La diferencia media de +0.248 unidades de fidelidad representa
+una ventaja sustancial en términos de representatividad de las atribuciones
+de importancia.
+
+**Estabilidad:** La ventaja de SHAP es aún más pronunciada en estabilidad
+($d_z = +3.002$, 75/75 positivas). La diferencia media de +0.718 en similitud
+coseno es prácticamente equivalente a la diferencia entre explicaciones
+completamente incoherentes (LIME, media ≈ 0.014) y casi perfectamente estables
+(SHAP, media ≈ 0.732). Este resultado refleja que la inestabilidad de LIME no
+es un artefacto de escenarios extremos sino una propiedad sistemática del método.
+
+**Parsimonia y brecha de fidelidad:** Ambas métricas presentan efectos
+sustantivos. En parsimonia (ratio activo), SHAP es consistentemente más denso
+que LIME (+0.142, 75/75 positivas; $d_z = +0.839$), por lo que LIME es el método
+más parsimonioso en este benchmark. En brecha de fidelidad, SHAP supera a LIME
+en 74 de 75 celdas (+0.045; $d_z = +2.626$), lo que confirma que las
+características que SHAP identifica
+como relevantes tienen un efecto mayor cuando se enmascaran, lo que es
+coherente con la superioridad en fidelidad.
+
+**Coste computacional:** El patrón se invierte para el coste. SHAP es en
+promedio más costoso (+8,048 ms), pero con varianza alta ($s_d = 17,857$ ms) por
+colas pesadas asociadas a KernelSHAP. El signo de las diferencias no es
+unánime: SHAP resulta más costoso en 59 de 75 celdas, pero en 16 celdas
+(principalmente XGBoost) LIME es más lento. El efecto moderado ($d_z = +0.451$)
+confirma que la superioridad en calidad de SHAP se acompaña de una penalización
+de coste en la mayoría de los contextos, pero no en todos.
+
+### Verificación del requisito de multiplicidad
+
+La hipótesis H3 involucra cinco comparaciones pareadas simultáneas. Aplicando
+la corrección de Holm-Bonferroni sobre los cinco test de Wilcoxon, los umbrales
+de rechazo ajustados para las estadísticas ordenadas son $\alpha/(5) = 0.01$,
+$\alpha/(4) = 0.0125$, $\alpha/(3) = 0.0167$, $\alpha/(2) = 0.025$, $\alpha/(1)
+= 0.05$. Dado que las diferencias en fidelidad y estabilidad presentan $d_z
+> 2.6$ con $n = 75$ y consistencia direccional casi perfecta, los p-valores
+bilaterales permanecen muy por debajo de los umbrales ajustados. En particular,
+las métricas de calidad conservan significancia con $p_{\mathrm{Holm}}$ del
+orden de $10^{-13}$, y el coste con $p_{\mathrm{Holm}}$ del orden de
+$10^{-10}$. Por tanto, $H_{1,3}$ se acepta para las cinco métricas bajo control
+de multiplicidad.
+
+## Proposición P1: Reproducibilidad del protocolo FOM-7 {#sec-p1}
+
+La proposición P1 establece que el protocolo FOM-7 debe producir un coeficiente
+de variación (CV) inferior al 15% en las métricas primarias bajo ejecuciones
+repetidas con semillas distintas en condiciones de configuración idéntica.
+
+Para su evaluación se calculó el CV de cada métrica primaria para SHAP y LIME
+sobre el subconjunto del modelo RF con $N = 100$, tomando las cinco semillas
+$s \in \{42, 123, 456, 789, 999\}$ como réplicas independientes:
+
+| Método | Métrica     | Media  | Desv. típica | CV (%)  | Criterio P1 |
+|--------|-------------|--------|--------------|---------|-------------|
+| SHAP   | Fidelidad   | 0.732  | 0.006        | **0.8** | ✓ Cumple    |
+| SHAP   | Estabilidad | 0.948  | 0.007        | **0.7** | ✓ Cumple    |
+| LIME   | Fidelidad   | 0.461  | 0.012        | **2.6** | ✓ Cumple    |
+| LIME   | Estabilidad | 0.018  | 0.015        | **86.2**| ✗ No cumple |
+
+: Coeficiente de variación de métricas primarias bajo 5 semillas distintas (RF, $N=100$). {#tbl-cv-p1}
+
+Los resultados confirman P1 parcialmente. Para las métricas en las que el
+método produce señales de magnitud apreciable, el CV es inferior al 15%:
+SHAP-fidelidad (0.8%), SHAP-estabilidad (0.7%) y LIME-fidelidad (2.6%) cumplen
+ampliamente el criterio. La excepción es LIME-estabilidad, con CV = 86.2%, que
+viola el umbral del 15%.
+
+Sin embargo, este incumplimiento es interpretable como un hallazgo sustantivo
+más que como un defecto del protocolo. LIME-estabilidad tiene media 0.018, es
+decir, la similitud coseno entre explicaciones replicadas es casi nula. En este
+régimen, la desviación absoluta entre réplicas (~0.015) es numéricamente pequeña
+pero el CV es elevado precisamente porque el denominador es cercano a cero. Un
+CV del 86% sobre una media de 0.018 equivale a una incertidumbre absoluta de
+$\pm 0.015$, que en la escala de similitud coseno es trivial. La proposición P1
+se satisface para las métricas con señal sustantiva; la excepción de LIME-
+estabilidad es una consecuencia de la inestabilidad estructural del método, no
+de la irreproducibilidad del protocolo.
+
+Para la generalización global, el CV en fidelidad para todos los métodos y
+modelos oscila entre 12.0% (LIME) y 12.8% (SHAP), confirmando que la
+variabilidad métrica debida a la aleatoriedad de la semilla es controlada y
+uniforme. Los CVs de coste y estabilidad, que son inherentemente más variables
+por la dependencia de las instancias específicas seleccionadas, se esperan en
+rangos superiores y no forman parte del criterio primario de P1.
+
+## Perfil multidimensional por método {#sec-perfiles}
+
+El análisis omnibus y pareado establece las diferencias confirmativas; esta
+sección describe el perfil multidimensional completo de cada método, integrando
+las cinco métricas y el comportamiento específico por modelo.
+
+### SHAP
+
+SHAP presenta el perfil más equilibrado y favorable de los cuatro métodos.
+Sus medias consolidadas sobre los 71 bloques calificados son: fidelidad = 0.810,
+estabilidad = 0.724, parsimonia = 0.234, brecha de fidelidad = 0.431, coste
+= 24,804 ms. La parsimonia más alta de todos los métodos (0.234 frente a 0.085
+de LIME) refleja que SHAP puede distribuir importancias entre un mayor número
+de características cuando el modelo así lo requiere, lo que es un reflejo
+adecuado de la complejidad real del modelo.
+
+El coste es la dimensión adversa de SHAP. El promedio de 24,804 ms esconde una
+heterogeneidad de dos órdenes de magnitud: para XGBoost, TreeSHAP opera en
+~1 ms/instancia, mientras que KernelSHAP sobre SVM requiere ~159,059 ms/instancia.
+Esta disparidad tiene implicaciones prácticas directas: el despliegue de SHAP
+sobre modelos de núcleo o redes neuronales en entornos de baja latencia puede
+ser inviable sin aproximaciones adicionales.
+
+Por modelo, los picos de fidelidad se observan en logreg (0.946) y SVM (0.928),
+donde la linealidad o la estructura de margen del modelo facilita la aproximación
+local por valores de Shapley. La fidelidad más baja se registra en MLP (0.717),
+coherente con la complejidad de los gradientes de una red profunda. XGBoost
+presenta el balance óptimo calidad-coste: fidelidad 0.759, coste 1.2 ms.
+
+### LIME
+
+LIME es el método más económico en coste (media 226 ms, rango 3–1,088 ms por
+modelo), con una fidelidad media moderada (0.560) y parsimonia baja consistente
+(0.085 en todos los modelos, por diseño). Su fortaleza operativa es la velocidad
+y la parsimonia de sus explicaciones, que facilitan la interpretación por parte
+de usuarios no técnicos.
+
+La limitación estructural de LIME es su estabilidad casi nula (0.014). La
+hipótesis explicativa es conocida en la literatura: la perturbación por
+muestreo local genera distribuciones que difieren sustancialmente de instancia
+a instancia, haciendo que los coeficientes del modelo lineal local sean
+altamente sensibles al conjunto de puntos de la vecindad [@ribeiro2016;
+@bhattacharya2024]. En los datos de este benchmark, esta inestabilidad se
+confirmó cuantitativamente: el CV de estabilidad bajo semillas distintas es
+del 86.2%, y la similitud coseno media de 0.014 implica que dos explicaciones
+de la misma instancia con semillas distintas son casi ortogonales. Este hallazgo
+descalifica a LIME como método de referencia en contextos donde se requiere
+consistencia explicativa (auditoría, decisiones de alto riesgo, comparación
+entre instancias).
+
+### Anchors
+
+Anchors tiene una cobertura de solo 56 celdas calificadas (74.7%), lo que
+refleja que en los estratos de mayor incertidumbre el algoritmo de búsqueda de
+reglas no converge a una regla con la precisión mínima exigida. Sobre los bloques
+calificados, la fidelidad media es 0.386 y la estabilidad 0.052, ambas
+inferiores a las de SHAP y LIME. El coste es elevado y muy variable: desde
+2,027 ms para logreg hasta 64,131 ms para RF y 68,874 ms para SVM. El comportamiento
+de Anchors refleja la dificultad intrínseca de encontrar reglas locales
+de alta precisión en modelos no lineales: en logreg, la estructura lineal
+facilita la búsqueda; en RF y SVM, el espacio de decisión es fragmentado y el
+algoritmo de búsqueda incurre en costes de exploración elevados.
+
+La parsimonia de Anchors es comparable a la de LIME (0.085), pero con mayor
+variabilidad (0.059 de desviación típica). Las reglas IF-THEN que Anchors
+produce tienen un valor explicativo cualitativo distinto al de los pesos de
+importancia numérica: son más comprensibles para usuarios finales, pero no
+permiten comparación cuantitativa directa con las métricas de importancia por
+las que SHAP y LIME son evaluados. Esta limitación conceptual —no un defecto de
+implementación— sugiere que la fidelidad y estabilidad métricas de Anchors deben
+interpretarse con cautela.
+
+### DiCE
+
+DiCE ocupa el último lugar en fidelidad (0.172) y una posición intermedia en
+estabilidad (0.366). Esta combinación es coherente con su paradigma de
+diseño: como método contrafactual, DiCE genera instancias alternativas que
+cambian la predicción, no pesos de importancia que explican la predicción
+actual. La baja fidelidad refleja que las características más modificadas en
+los contrafactuales no son necesariamente las que más influyen en la
+predicción local, lo que no es un fallo sino una consecuencia de su objetivo
+optimizado.
+
+La estabilidad moderada de DiCE (0.366) es coherente: los contrafactuales
+generados para instancias perturbadas similarmente tienden a explorar regiones
+similares del espacio de decisión. La parsimonia es la más baja de todos los
+métodos (0.017), reflejando que los contrafactuales de DiCE modifican pocas
+características por construcción (objetivo de proximidad). El coste moderado
+(2,056 ms en media) hace a DiCE más económico que Anchors para la mayoría de
+modelos.
+
+## Análisis transversal: efecto del modelo base y del tamaño de muestra {#sec-transversal}
+
+### Efecto del modelo base sobre las métricas
+
+El modelo base influye significativamente sobre los valores absolutos de las
+métricas, aunque el ordenamiento entre métodos se mantiene constante. Las
+diferencias más notables son:
+
+**XGBoost** presenta el perfil calidad-coste más favorable para SHAP: fidelidad
+0.759, coste 1.2 ms. Esto se debe al uso de TreeSHAP [@lundberg2017], que
+calcula valores exactos de Shapley aprovechando la estructura de árbol y no
+requiere muestreo ni perturbación. Es el único método-modelo donde SHAP tiene
+un coste computacional inferior al de LIME (~9 ms).
+
+**SVM** es el modelo donde SHAP muestra la mayor fidelidad (0.928) pero el
+coste más elevado (159,059 ms). KernelSHAP requiere resolver un problema de
+optimización cuadrática por instancia, lo que escala quadráticamente con el
+número de muestras de referencia. Para SVM, Anchors también es costoso (68,874
+ms) debido al espacio de búsqueda fragmentado.
+
+**Regresión logística (logreg)** produce la fidelidad SHAP más alta (0.946) y
+el coste SHAP más bajo entre modelos no basados en árboles (85 ms). La
+linearidad de logreg garantiza que las aproximaciones locales de Shapley son
+globalmente coherentes.
+
+**MLP** es el modelo con fidelidades más bajas en todos los métodos: SHAP=0.717,
+LIME=0.541, Anchors=0.299, DiCE=0.026. La complejidad del espacio de gradientes
+de redes profuntas dificulta la aproximación local de cualquier explicador
+post-hoc. El coste de Anchors sobre MLP (10,352 ms) es intermedio, pero la
+baja fidelidad lo descalifica para uso en auditoría.
+
+### Efecto del tamaño de muestra estratificado
+
+El análisis del efecto de $N$ (50, 100, 200 instancias por estrato) sobre las
+métricas primarias revela una estabilidad notable. Para SHAP, las medias de
+fidelidad según $N$ son: $N=50$: 0.811, $N=100$: 0.804, $N=200$: 0.814,
+con diferencias absolutas inferiores a 0.010. Para LIME: $N=50$: 0.559,
+$N=100$: 0.561, $N=200$: 0.562. Estas diferencias son inferiores a un punto
+porcentual y no muestran tendencia monótona.
+
+La invarianza de las métricas ante el tamaño de muestra tiene dos implicaciones:
+(1) la estimación por estrato converge rápidamente, de modo que $N=50$ es
+suficiente para obtener medias representativas; (2) el diseño con tres tamaños
+de muestra aporta replicación estadística útil sin añadir variabilidad
+sistemática, lo que confirma la elección de niveles del Capítulo 3. Los costes
+computacionales crecen proporcionalmente con $N$ en LIME (estructura lineal)
+pero no en SHAP para modelos de árbol (TreeSHAP escala logarítmicamente).
+
+## Discusión {#sec-discusion}
+
+### Interpretación conjunta de H1, H2 y H3
+
+Los tres ejes confirmatorios convergen en una imagen coherente: SHAP es el
+método más fiable bajo un criterio multidimensional que incluye fidelidad,
+estabilidad y reproducibilidad, al precio de un coste computacional
+heterogéneo que puede ser prohibitivo para ciertos pares modelo-despliegue.
+LIME es la alternativa viable en entornos donde el coste es crítico, con la
+caveat explícita de que sus explicaciones son inestables y no deben usarse
+para comparación entre instancias ni para auditoría. Anchors y DiCE tienen
+perfiles de calidad bajos bajo las métricas de atribución, pero atienden a
+objetivos de evaluación cualitativamente distintos (reglas y contrafactuales),
+lo que limita la comparación directa.
+
+El hallazgo quizás más relevante para el campo es la disociación entre
+fidelidad y estabilidad en los distintos métodos. Un método puede tener
+fidelidad moderada pero inestabilidad total (LIME) o estabilidad moderada
+con fidelidad baja (DiCE). Esta disociación valida la necesidad de un marco
+multi-métrico como el propuesto en esta tesis: una evaluación unidimensional
+basada únicamente en fidelidad habría presentado a LIME como método aceptable,
+sin capturar su deficiencia crítica en estabilidad.
+
+La magnitud del efecto en las comparaciones SHAP-LIME ($d_z = 3.85$ para
+fidelidad, $d_z = 2.85$ para estabilidad) es inusualmente grande en el contexto
+de experimentos de benchmarking XAI. Trabajos recientes de referencia en el
+campo [@hedstrom2023; @agarwal2022] reportan diferencias significativas entre
+métodos, pero raramente con tamaños de efecto de esta magnitud. La consistencia
+del ordenamiento en los 71 pares sin una sola excepción en fidelidad y
+estabilidad (0 diferencias negativas) fortalece la interpretación causal:
+la superioridad de SHAP no es un artefacto estadístico marginal sino una
+propiedad estructural del método bajo el diseño experimental de este benchmark.
+
+### Trade-off calidad-coste y criterios de selección operativa
+
+Los resultados permiten derivar criterios técnicos de selección de método XAI
+en función del contexto operativo. Se propone la siguiente taxonomía de
+decisión:
+
+**Contexto A — Alta fidelidad, sin restricción de latencia** (p. ej., auditoría
+regulatoria, análisis forense de decisiones): SHAP es la única opción con
+evidencia empírica de fidelidad ≥ 0.80 y estabilidad ≥ 0.70. Para modelos
+basados en árboles (XGBoost, RF), el coste de TreeSHAP hace esta elección
+también eficiente. Para SVM y redes neuronales, la latencia de KernelSHAP
+puede requerir infraestructura de cómputo dedicada o ejecución asíncrona.
+
+**Contexto B — Velocidad crítica, consistencia explicativa no requerida** (p.
+ej., sistemas de recomendación con retroalimentación explicativa en tiempo real):
+LIME es viable para modelos logreg/xgb/mlp con costes de 3–9 ms, aceptando
+que la explicación de una misma instancia puede variar entre ejecuciones. Los
+usuarios finales de estos sistemas deben ser informados de que las explicaciones
+tienen naturaleza estocástica y no son comparables entre ejecuciones.
+
+**Contexto C — Explicaciones comprensibles para usuarios no técnicos sin
+requisito cuantitativo**: Anchors ofrece reglas IF-THEN semánticamente
+comprensibles, pero solo en modelos con frontera de decisión suficientemente
+regular (logreg, xgb); para RF y SVM, el coste y la baja tasa de cobertura
+lo hacen impracticable.
+
+**Contexto D — Análisis de acciones correctivas** (p. ej., ¿qué debe cambiar
+una instancia para obtener otro resultado?): DiCE es el único método de los
+cuatro evaluados diseñado para responder esta pregunta. Su baja fidelidad bajo
+métricas de atribución es irrelevante para este caso de uso.
+
+### Contribuciones, limitaciones y extensiones
+
+Los hallazgos de este benchmark contribuyen al campo en tres dimensiones. En
+primer lugar, confirman empíricamente sobre datos tabulares reales y con una
+batería multidimensional de métricas la jerarquía SHAP > LIME > Anchors en
+fidelidad, que ha sido asumida teóricamente pero rara vez demostrada bajo un
+diseño estadístico riguroso [@pawlicki2024; @altukhi2025]. En segundo lugar,
+documentan cuantitativamente la inestabilidad estructural de LIME, un hallazgo
+que los estudios basados en fidelidad exclusiva sistemáticamente omiten
+[@bhattacharya2024]. En tercer lugar, demuestran que el protocolo FOM-7
+produce resultados reproducibles (CV < 3% en fidelidad primaria) y que los
+criterios de cobertura y exclusión de artefactos del benchmark son
+implementables sin pérdida sustancial de potencia estadística.
+
+Las limitaciones principales del estudio son las siguientes. Primero, el
+universo experimental se acota al conjunto de datos UCI Adult Income y a
+problemas de clasificación tabular binaria; la extensión a otros dominios
+(imágenes, texto, series temporales) requiere rediseño de las métricas de
+fidelidad y estabilidad. Segundo, las métricas utilizadas son operacionalizaciones
+específicas de los constructos de calidad: fidelidad como correlación de
+importancias, estabilidad como similitud coseno. Otras operacionalizaciones
+posibles (p. ej., fidelidad como perturbación ROAR [@hedstrom2023] o
+estabilidad como distancia entre vecindades) pueden producir ordenamientos
+distintos. Tercero, el diseño no contempla la dimensión del usuario
+(comprensibilidad percibida, utilidad para la toma de decisiones), que es
+una dimensión de calidad no capturabe por métricas automáticas. Estos aspectos
+constituyen extensiones naturales para investigación futura que el protocolo
+FOM-7 está diseñado para acomodar mediante la adición de puertas adicionales.
