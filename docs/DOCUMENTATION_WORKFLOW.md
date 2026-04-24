@@ -109,6 +109,7 @@ Specific workflow for thesis-bound content.
 2.  **Generate Figures**: `python src/scripts/generate_paper_figures.py` -> PDFs in `outputs/paper_figures/`.
 3.  **Update TeX**: The script updates `figures_include.tex`.
 4.  **Write Chapter**: Use insights from `walkthrough.md` and figures to write `docs/thesis_methodology_log.md` or the actual thesis document.
+5.  **Sync Publications**: update `pub/claims.toml` and run `scripts/pubs/build_all.ps1` (Windows) or `scripts/pubs/build_all.sh` (WSL/Linux) to regenerate `pub/fragments/*` and verify papers/thesis are wired to the SSOT.
 
 ## Checklist for Closing a Task
 

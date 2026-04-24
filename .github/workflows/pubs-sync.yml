@@ -1,0 +1,27 @@
+name: pubs-sync
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  fragments:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate fragments
+        run: python3 scripts/pubs/generate_fragments.py
+
+      - name: Verify wiring
+        run: python3 scripts/pubs/verify_sync.py
+
+      - name: Ensure fragments are up to date
+        run: |
+          git diff --exit-code pub/fragments
+
