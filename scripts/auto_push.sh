@@ -1,10 +1,14 @@
 #!/bin/bash
 # auto_push.sh - Periodic git sync for experiment results only.
 
-INTERVAL=900
-PUSH_INTERVAL=10800
+INTERVAL="${INTERVAL:-900}"
+PUSH_INTERVAL="${PUSH_INTERVAL:-10800}"
 LAST_PUSH_EPOCH=0
-TRACKED_PATHS=("experiments/exp2_scaled/results")
+if [ "$#" -gt 0 ]; then
+    TRACKED_PATHS=("$@")
+else
+    TRACKED_PATHS=("experiments/exp2_scaled/results")
+fi
 
 while true; do
     echo "[$(date)] Checking for result changes to commit..."

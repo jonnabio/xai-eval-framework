@@ -62,6 +62,13 @@ Within each block:
 - `rf` before `xgb`
 - seeds `42`, `123`, `456`
 
+## Resumability and Git Checkpointing
+
+- **Training resumability:** `scripts/train_exp3_models.py` skips existing artifacts unless `--force` is passed.
+- **Run resumability:** the runner checkpoints each evaluated instance under `.../instances/<id>.json`; re-running the same config resumes from checkpoints until `results.json` is written.
+- **Batch resumability:** `scripts/managed_runner_exp3.sh` skips configs that already have `results.json`.
+- **Frequent commits/pushes:** `scripts/managed_runner_exp3.sh` starts `scripts/auto_push.sh experiments/exp3_cross_dataset/results` in the background and commits after each completed config; configure push cadence with `INTERVAL` and `PUSH_INTERVAL`.
+
 ## Artifact Contract
 
 Design:
