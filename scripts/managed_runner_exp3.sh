@@ -12,6 +12,8 @@ LOG_FILE="${LOG_FILE:-logs/managed_runner_exp3.log}"
 
 PUSH_REMOTE="${PUSH_REMOTE:-origin}"
 PUSH_BRANCH="${PUSH_BRANCH:-$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)}"
+LOCK_FILE="${LOCK_FILE:-.git/xai_git_sync.lock}"
+LOCK_WAIT_SECONDS="${LOCK_WAIT_SECONDS:-300}"
 
 # Override with VENV_PYTHON if you use a dedicated environment (recommended on Windows/WSL).
 if [ -n "${VENV_PYTHON:-}" ]; then
@@ -27,6 +29,12 @@ fi
 mkdir -p logs
 touch "$LOG_FILE"
 
+LOCK_FD=0
+if command -v flock >/dev/null 2>&1; then
+  # shellcheck disable=SC2094
+  exec {LOCK_FD}>"$LOCK_FILE"
+fi
+
 echo "==========================================================" | tee -a "$LOG_FILE"
 echo "EXP3 Managed Runner starting at $(date)" | tee -a "$LOG_FILE"
 echo "Python: $PYTHON" | tee -a "$LOG_FILE"
@@ -34,6 +42,19 @@ echo "Config dir: $CONFIG_DIR" | tee -a "$LOG_FILE"
 echo "Results path: $RESULTS_PATH" | tee -a "$LOG_FILE"
 echo "Push target: $PUSH_REMOTE $PUSH_BRANCH" | tee -a "$LOG_FILE"
 echo "==========================================================" | tee -a "$LOG_FILE"
+
+# Preflight: fail early if required deps are missing.
+if ! "$PYTHON" - <<'PY' 2>/dev/null; then
+import importlib
+
+for mod in ["yaml", "numpy", "pandas", "sklearn", "xgboost", "shap", "alibi"]:
+    importlib.import_module(mod)
+print("OK")
+PY
+  echo "[ERROR] Python environment is missing EXP3 dependencies." | tee -a "$LOG_FILE"
+  echo "        Recommended: bash scripts/setup_venv_wsl.sh" | tee -a "$LOG_FILE"
+  exit 3
+fi
 
 # Background checkpoint daemon (commits often; pushes periodically).
 # Configure cadence via env vars:
@@ -117,9 +138,18 @@ for CONFIG_PATH in "${CONFIGS[@]}"; do
 
   echo "[SUCCESS] Finished $EXP_NAME" | tee -a "$LOG_FILE"
 
+  if [ "$LOCK_FD" -ne 0 ]; then
+    if ! flock -w "$LOCK_WAIT_SECONDS" "$LOCK_FD"; then
+      echo "[WARN] Could not acquire git lock; skipping commit/push for $EXP_NAME." | tee -a "$LOG_FILE"
+      sleep 5
+      continue
+    fi
+  fi
+
   git add -- "$RESULTS_PATH"
   if git diff --cached --quiet -- "$RESULTS_PATH"; then
     echo "[GIT] No EXP3 result changes to commit for $EXP_NAME." | tee -a "$LOG_FILE"
+    if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
     continue
   fi
 
@@ -130,6 +160,8 @@ for CONFIG_PATH in "${CONFIGS[@]}"; do
   else
     echo "[WARN] Commit failed for $EXP_NAME (results still staged)." | tee -a "$LOG_FILE"
   fi
+
+  if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
 
   sleep 5
 done

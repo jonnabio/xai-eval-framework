@@ -3,11 +3,19 @@
 
 INTERVAL="${INTERVAL:-900}"
 PUSH_INTERVAL="${PUSH_INTERVAL:-10800}"
+LOCK_FILE="${LOCK_FILE:-.git/xai_git_sync.lock}"
+LOCK_WAIT_SECONDS="${LOCK_WAIT_SECONDS:-300}"
 LAST_PUSH_EPOCH=0
 if [ "$#" -gt 0 ]; then
     TRACKED_PATHS=("$@")
 else
     TRACKED_PATHS=("experiments/exp2_scaled/results")
+fi
+
+LOCK_FD=0
+if command -v flock >/dev/null 2>&1; then
+    # shellcheck disable=SC2094
+    exec {LOCK_FD}>"$LOCK_FILE"
 fi
 
 while true; do
@@ -18,9 +26,18 @@ while true; do
         PUSH_DUE=1
     fi
 
+    if [ "$LOCK_FD" -ne 0 ]; then
+        if ! flock -w "$LOCK_WAIT_SECONDS" "$LOCK_FD"; then
+            echo "[$(date)] Could not acquire git lock ($LOCK_FILE); skipping this cycle."
+            sleep "$INTERVAL"
+            continue
+        fi
+    fi
+
     CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
     if [ -z "$CURRENT_BRANCH" ]; then
         echo "[$(date)] Error resolving current branch."
+        if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
         sleep "$INTERVAL"
         continue
     fi
@@ -30,6 +47,7 @@ while true; do
     if [ -n "$(git status --porcelain -- "${TRACKED_PATHS[@]}")" ]; then
         if ! git commit -m "Auto-sync queue: Results checkpoint"; then
             echo "[$(date)] Commit failed; skipping fetch/push for this cycle."
+            if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
             sleep "$INTERVAL"
             continue
         fi
@@ -41,6 +59,7 @@ while true; do
         NEXT_PUSH_MINUTES=$(( (PUSH_INTERVAL - (NOW_EPOCH - LAST_PUSH_EPOCH) + 59) / 60 ))
         echo "[$(date)] Push not due yet; next push window opens in about $NEXT_PUSH_MINUTES minutes."
         echo "[$(date)] Sleeping for $INTERVAL seconds..."
+        if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
         sleep "$INTERVAL"
         continue
     fi
@@ -50,6 +69,7 @@ while true; do
 
     if ! git fetch --no-progress origin "$CURRENT_BRANCH"; then
         echo "[$(date)] Fetch failed; manual review may be required."
+        if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
         sleep "$INTERVAL"
         continue
     fi
@@ -61,5 +81,6 @@ while true; do
     fi
 
     echo "[$(date)] Sleeping for $INTERVAL seconds..."
+    if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
     sleep "$INTERVAL"
 done

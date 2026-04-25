@@ -45,6 +45,22 @@ Planned total:
 
 ## Execution Priority
 
+## Python Environment (WSL/Linux)
+
+EXP3 is designed to run under WSL/Linux as well as native Linux.
+
+- Do **not** reuse a Python venv created on Windows from WSL.
+- Use a WSL venv (recommended: `.venv-wsl`) and point runners with `VENV_PYTHON`.
+- EXP3 includes Anchors configs, which require `alibi` to be installed.
+
+Quick setup:
+
+```bash
+bash scripts/setup_venv_wsl.sh
+```
+
+Reference: `docs/guides/WSL_PYTHON_ENV.md`.
+
 Recommended order:
 
 1. Generate EXP3 configs with `python scripts/generate_exp3_configs.py`.
@@ -67,7 +83,9 @@ Within each block:
 - **Training resumability:** `scripts/train_exp3_models.py` skips existing artifacts unless `--force` is passed.
 - **Run resumability:** the runner checkpoints each evaluated instance under `.../instances/<id>.json`; re-running the same config resumes from checkpoints until `results.json` is written.
 - **Batch resumability:** `scripts/managed_runner_exp3.sh` skips configs that already have `results.json`.
-- **Frequent commits/pushes:** `scripts/managed_runner_exp3.sh` starts `scripts/auto_push.sh experiments/exp3_cross_dataset/results` in the background and commits after each completed config; configure push cadence with `INTERVAL` and `PUSH_INTERVAL`.
+- **Frequent commits/pushes:** `scripts/managed_runner_exp3.sh` starts `scripts/auto_push.sh` in the background to commit/push checkpoints while a config is still running; configure cadence with `INTERVAL` and `PUSH_INTERVAL`. A shared Git lock (`.git/xai_git_sync.lock`) prevents index races.
+
+Full runbook: `docs/planning/exp3_execution_plan.md`.
 
 ## Artifact Contract
 

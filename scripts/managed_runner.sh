@@ -7,6 +7,8 @@ CONFIG_DIR="configs/experiments/exp2_scaled"
 LOG_FILE="logs/managed_runner.log"
 RESULTS_PATH="experiments/exp2_scaled/results"
 CLAIM_ROOT="experiments/exp2_scaled/worker_claims"
+LOCK_FILE="${LOCK_FILE:-.git/xai_git_sync.lock}"
+LOCK_WAIT_SECONDS="${LOCK_WAIT_SECONDS:-300}"
 MAX_LOAD=10.0
 MIN_MEM="${MIN_MEM:-4200}"
 REPO_DIR=$(pwd)
@@ -22,6 +24,12 @@ RESULTS_BRANCH="${XAI_RESULTS_BRANCH:-${CURRENT_GIT_BRANCH:-results/$WORKER_ID}}
 
 mkdir -p logs
 touch "$LOG_FILE"
+
+LOCK_FD=0
+if command -v flock >/dev/null 2>&1; then
+    # shellcheck disable=SC2094
+    exec {LOCK_FD}>"$LOCK_FILE"
+fi
 
 echo "==========================================================" | tee -a "$LOG_FILE"
 echo "Starting Managed Experiment Runner at $(date)" | tee -a "$LOG_FILE"
@@ -210,6 +218,13 @@ for EXP_NAME in $MISSING_LIST; do
         
         # Automatic Git Commit
         echo "[GIT] Committing results for $EXP_NAME" | tee -a "$LOG_FILE"
+        if [ "$LOCK_FD" -ne 0 ]; then
+            if ! flock -w "$LOCK_WAIT_SECONDS" "$LOCK_FD"; then
+                echo "[WARN] Could not acquire git lock; skipping commit/push for $EXP_NAME." | tee -a "$LOG_FILE"
+                sleep 5
+                continue
+            fi
+        fi
         git add -- "$RESULTS_PATH"
         if [ -n "$(git status --porcelain -- "$RESULTS_PATH")" ]; then
             if git commit -m "Auto-commit: Results for $EXP_NAME"; then
@@ -222,6 +237,7 @@ for EXP_NAME in $MISSING_LIST; do
         else
             echo "[GIT] No new result changes detected for $EXP_NAME." | tee -a "$LOG_FILE"
         fi
+        if [ "$LOCK_FD" -ne 0 ]; then flock -u "$LOCK_FD" || true; fi
     else
         echo "[FAILED] Experiment $EXP_NAME failed. Check logs." | tee -a "$LOG_FILE"
     fi
