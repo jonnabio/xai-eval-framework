@@ -486,6 +486,41 @@ una instancia para obtener otro resultado?): DiCE es el único método de los
 cuatro evaluados diseñado para responder esta pregunta. Su baja fidelidad bajo
 métricas de atribución es irrelevante para este caso de uso.
 
+### Validación externa EXP3: integración con EXP1 y EXP2
+
+La evidencia empírica queda organizada en tres capas complementarias. EXP1
+funciona como calibración sobre Adult; EXP2 constituye el benchmark
+confirmativo principal sobre Adult; y EXP3 opera como validación externa
+compacta sobre dos dominios tabulares adicionales. En conjunto, la formulación
+más precisa para la tesis es: **benchmark centrado en Adult con validación
+tabular externa en dos dominios**.
+
+EXP2 conserva el peso inferencial principal: 275 ejecuciones analizables
+después de aplicar la superposición de recuperación documentada. EXP3 añade 24
+ejecuciones completas, distribuidas entre Breast Cancer y German Credit, y
+permite comprobar si los patrones técnicos principales se mantienen fuera de
+Adult. Esta separación evita mezclar unidades estadísticas heterogéneas: EXP3
+no se agrega al contraste Friedman de EXP2, sino que se interpreta como una
+prueba de portabilidad del protocolo, del contrato de artefactos y del paquete
+de métricas.
+
+La síntesis integrada muestra continuidad en la ventaja técnica de SHAP en
+fidelidad y estabilidad. En EXP3, SHAP alcanza medias de fidelidad 0.702 y
+estabilidad 0.873, frente a 0.319 y 0.533 en Anchors. Anchors conserva, sin
+embargo, su perfil de explicación compacta: el ratio de características activas
+es 0.080 frente a 0.756 en SHAP. El argumento de coste también debe formularse
+con cautela: LIME sigue siendo el comparador de baja latencia en EXP2, mientras
+que en EXP3 Anchors resulta computacionalmente más costoso que SHAP en promedio
+(2744 ms frente a 1003 ms).
+
+El impacto interpretativo es doble. Primero, EXP3 debilita la objeción de que
+el marco solo funciona sobre UCI Adult Income, porque los mismos componentes
+operativos se ejecutan en un dominio biomédico y un dominio de riesgo
+crediticio. Segundo, EXP3 no autoriza una afirmación universal de superioridad
+entre métodos. La conclusión integrada debe formularse como una frontera de
+selección dependiente del objetivo: fidelidad/estabilidad, parsimonia, forma
+explicativa y restricciones de tiempo.
+
 ### Contribuciones, limitaciones y extensiones
 
 Los hallazgos de este benchmark contribuyen al campo en tres dimensiones. En
@@ -501,10 +536,12 @@ criterios de cobertura y exclusión de artefactos del benchmark son
 implementables sin pérdida sustancial de potencia estadística.
 
 Las limitaciones principales del estudio son las siguientes. Primero, el
-universo experimental se acota al conjunto de datos UCI Adult Income y a
-problemas de clasificación tabular binaria; la extensión a otros dominios
-(imágenes, texto, series temporales) requiere rediseño de las métricas de
-fidelidad y estabilidad. Segundo, las métricas utilizadas son operacionalizaciones
+universo inferencial confirmativo se acota al conjunto de datos UCI Adult Income
+y a problemas de clasificación tabular binaria. EXP3 amplía la validez externa
+a Breast Cancer y German Credit como dominios tabulares adicionales, pero no
+convierte el benchmark en una prueba universal ni cubre modalidades como
+imágenes, texto o series temporales; esas extensiones requieren rediseño de las
+métricas de fidelidad y estabilidad. Segundo, las métricas utilizadas son operacionalizaciones
 específicas de los constructos de calidad: fidelidad como correlación de
 importancias, estabilidad como similitud coseno. Otras operacionalizaciones
 posibles (p. ej., fidelidad como perturbación ROAR [@hedstrom2023] o

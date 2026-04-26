@@ -490,6 +490,15 @@ support exploratory interpretation until calibrated. Human agreement
 evidence can then convert those semantic constructs into stronger
 confirmatory claims.
 
+The completed EXP3 validation package reinforces this layered interpretation.
+EXP3 adds Breast Cancer and German Credit artifacts to the Adult-centered
+benchmark stream, but it remains a technical proxy layer: it compares SHAP and
+Anchors on fidelity, stability, active-feature ratio, faithfulness gap, and
+runtime. Those artifacts are valuable precisely because they create paired dense
+attribution and compact rule-style explanations on the same tabular cells. They
+can support future semantic or LLM-judge studies, but they do not by themselves
+validate semantic preference, user comprehension, or domain-causal adequacy.
+
 \subsection{Formalization-Aware Semantic Evaluation of XAI Claims}
 \label{sec:formalization_aware}
 
@@ -531,7 +540,9 @@ the thesis focus. Intrinsic interpretability, representation-level
 interpretability, and some modality-specific traditions are only covered
 insofar as they affect metric transfer or scope boundaries.
 \item The paper argues for semantic evaluation as a necessary layer but
-does not itself validate LLM judges. That validation belongs to Paper A.
+does not itself validate LLM judges. EXP3 supplies additional cross-domain
+technical artifacts for future semantic comparison, but that validation belongs
+to Paper A.
 \item The current coding pass is single-reviewer and inherits 3
 \path{medium}-confidence and 2 \path{title-level} records from the
 upstream thesis matrix. Future versions should either deepen those
@@ -556,10 +567,10 @@ layered evaluation is necessary.
 The main practical implication is simple: benchmark metrics and semantic
 evaluation should be treated as complementary rather than competing
 forms of evidence. Within the thesis, this means Paper B should provide
-the quantitative comparative baseline, while Paper A should validate the
-semantic evaluator layer that benchmark metrics alone cannot justify.
-Paper C provides the conceptual map that makes those two efforts
-cohere.
+the quantitative comparative baseline, EXP3 should provide bounded
+cross-dataset technical validation, and Paper A should validate the semantic
+evaluator layer that benchmark metrics alone cannot justify. Paper C provides
+the conceptual map that makes those efforts cohere.
 
 \acks{This work received no external funding. The study was self-funded
 by the author, and the author reports no competing interests. This draft

@@ -51,6 +51,16 @@ Writing guidance:
 - Do not pool EXP2 and EXP3 into one omnibus hypothesis test without a new
   preregistered cross-study design.
 
+Manuscript integration:
+
+- Thesis Chapter 4 now includes an EXP3 external-validation integration section.
+- Thesis Chapter 5 limitations now distinguish Adult-centered confirmatory
+  inference from EXP3 two-domain tabular validation.
+- Paper A includes EXP3 as a framework portability and external-validity check.
+- Paper B includes EXP3 as supporting context, not as a replacement for the
+  SHAP-LIME paired test.
+- Paper C uses EXP3 to motivate layered technical-plus-semantic evaluation.
+
 ## EXP3 Completion and Merge: 2026-04-26
 
 Current objective:

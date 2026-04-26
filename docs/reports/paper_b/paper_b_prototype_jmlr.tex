@@ -494,6 +494,22 @@ generalization beyond Adult tabular classification is not established;
 rankings may shift under different datasets, modalities, feature
 transformations, masking schemes, or hyperparameter settings.
 
+\subsection{EXP3 Context for External Validity}
+The repository now includes a completed EXP3 cross-dataset validation package on
+Breast Cancer and German Credit. This package should be treated as supporting
+context for Paper B, not as a replacement for the SHAP--LIME paired test,
+because EXP3 compares SHAP with Anchors rather than LIME. The useful conclusion
+is narrower: SHAP's technical-quality profile persists when evaluated against a
+compact rule-style explainer on two additional tabular datasets.
+
+Across 24 EXP3 runs, SHAP has higher mean fidelity (0.702 vs.\ 0.319) and
+stability (0.873 vs.\ 0.533) than Anchors, while Anchors remains much more
+compact (active-feature ratio 0.080 vs.\ 0.756). EXP3 also shows why runtime
+language must remain bounded: in this validation package, Anchors is slower than
+SHAP on average. Paper B should therefore continue to claim a LIME--SHAP
+quality-cost frontier under EXP2, while using EXP3 only to show that the broader
+technical-quality pattern is not obviously Adult-specific.
+
 \subsection{Reproducibility and Operational Validity}
 All reported claims are traceable to seeded YAML configurations, per-run
 \texttt{results.json} artifacts, explicit exclusion of malformed or
@@ -510,7 +526,8 @@ imputation is used at any stage.
 
 \begin{itemize}
 \item \textbf{Data Set Scope}: This study focuses on tabular data (Adult).
-Image and text domains may exhibit different trade-offs.
+EXP3 provides supporting evidence from two additional tabular datasets, but image
+and text domains may exhibit different trade-offs.
 \item \textbf{Configuration Space}: We compared standard configurations
 (KernelSHAP versus standard LIME). Hyperparameter tuning (e.g., LIME
 kernel width) can alter results.
@@ -521,8 +538,9 @@ faster'' should not be interpreted as a universal rule.
 human-grounded usefulness or semantic clarity; validated user studies or
 human-calibrated semantic evaluation remain future work.
 \item \textbf{Next Extensions}: Replication on additional datasets and
-integration of thesis-planned causal or counterfactual endpoints remain
-open follow-up tasks rather than current contributions.
+integration of thesis-planned causal or counterfactual endpoints remain open
+follow-up tasks. EXP3 is the first completed tabular extension, not a universal
+generalization study.
 \end{itemize}
 
 \section{Code and Artifact Availability}

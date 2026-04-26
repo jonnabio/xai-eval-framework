@@ -384,7 +384,8 @@ Validity controls and residual risks are summarized as follows:
     \item \textbf{Statistical conclusion validity:} matched-design non-parametric
     tests with multiplicity control; residual risk from absent equivalence bands.
     \item \textbf{External validity:} diversity across model families and seeds,
-    but single tabular dataset scope.
+    with a completed compact EXP3 portability check on Breast Cancer and German
+    Credit; modality transfer remains outside the present claim scope.
     \item \textbf{Implementation validity:} effective runtime parameter bindings
     are disclosed; harmonization changes may shift absolute levels.
 \end{enumerate}
@@ -540,8 +541,45 @@ reporting \citep{agarwal2022openxai,hedstrom2023quantus}.
 Interpretation limits:
 \begin{itemize}[leftmargin=*]
     \item Anchors stability values near zero should be interpreted with implementation caveats: effective runtime behavior uses fixed precision threshold 0.95 and binary rule-membership importance vectors, which can reduce perturbation-based similarity under this protocol.
-    \item Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
+    \item Method rankings are inferentially validated on the Adult robustness
+    benchmark (EXP2). A compact EXP3 validation package extends the artifact
+    contract to Breast Cancer and German Credit, but broad cross-domain or
+    cross-modality claims still require additional replications.
 \end{itemize}
+
+\subsection{EXP3 Cross-Dataset Validation}
+\label{sec:exp3-validation}
+
+After the primary EXP2 analysis was frozen, the same framework was applied to a
+compact external-validation package (EXP3) on two additional tabular domains:
+Breast Cancer and German Credit. EXP3 contains 24 completed runs
+(\(2\) datasets \(\times\) \(2\) models \(\times\) \(2\) explainers
+\(\times\) \(3\) seeds), comparing SHAP with Anchors on the same primary
+technical metrics used by the benchmark layer. The integrated evidence export is
+stored under \path{outputs/analysis/integrated_evidence/}.
+
+\begin{table}[h]
+\centering
+\caption{EXP3 explainer means across Breast Cancer and German Credit.}
+\begin{tabular}{lrrrrr}
+\toprule
+Explainer & Runs & Fidelity & Stability & Active ratio & Cost (ms) \\
+\midrule
+SHAP    & 12 & 0.702 & 0.873 & 0.756 & 1003.1 \\
+Anchors & 12 & 0.319 & 0.533 & 0.080 & 2744.4 \\
+\bottomrule
+\end{tabular}
+\label{tab:exp3-validation}
+\end{table}
+
+This result strengthens the framework claim rather than changing the primary
+statistical claim. EXP2 remains the confirmatory cohort for omnibus and
+SHAP--LIME inference. EXP3 shows that the framework can carry the same artifact
+contract and metric bundle beyond Adult, and that SHAP's technical-quality
+profile persists when contrasted with a compact rule-style method on two
+additional tabular datasets. The correct reporting boundary is therefore an
+Adult-centered benchmark with two-domain external tabular validation, not a
+universal cross-domain ranking.
 
 \subsection{Formal Problem Framing and Scope of XAI Evaluation}
 \label{sec:formal_framing}
@@ -594,8 +632,8 @@ The intended use of the released artifacts is methodological: reproducing the
 reported benchmark, auditing the effect of artifact qualification and
 statistical filtering, and extending the protocol to additional datasets or
 explanation families. Claims about deployment utility, human interpretability,
-or cross-domain method superiority require additional validation beyond the
-quantitative-only scope of this paper.
+or universal cross-domain method superiority require additional validation
+beyond the quantitative-only scope of this paper.
 
 \subsection{Code and Artifact Availability}
 The current refreshed analysis snapshot is publicly available at
@@ -637,7 +675,9 @@ is operational and reproducibility-focused rather than algorithmic.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
     \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
     \item \textbf{Next steps:} Commit the recovered \path{svm_shap_s456_n200} per-run artifact when the active claim completes, diagnose the remaining empty Anchors/DiCE artifacts, and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 275 analyzable-run snapshot.
-    \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
+    \item \textbf{Next steps:} expand the completed EXP3 validation design to
+    additional tabular and non-tabular datasets to test ranking stability under
+    stronger dataset shift.
 \end{itemize}
 
 \acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}
