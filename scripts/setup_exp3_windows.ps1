@@ -75,6 +75,18 @@ function Resolve-Python311 {
         }
     }
 
+    $UserPython311 = Join-Path $env:LOCALAPPDATA "Programs\Python\Python311\python.exe"
+    if (Test-Path -Path $UserPython311) {
+        & $UserPython311 --version 2>&1 | Tee-Object -FilePath $LogFile -Append
+        if ($LASTEXITCODE -eq 0) {
+            return @{
+                FilePath = $UserPython311
+                Arguments = @()
+                Display = $UserPython311
+            }
+        }
+    }
+
     throw "Python 3.11 was not found. Install Python 3.11, then rerun this script."
 }
 
