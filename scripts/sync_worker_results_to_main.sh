@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # Safely sync worker result branches into main without rebasing or force pushing.
-# - Runs in a temporary worktree on origin/main
-# - Limits updates to result paths
-# - Additive-only: skips files that already exist in main
+# - Operates in a temporary worktree on origin/main
+# - Limits updates to experiment results and worker manifests
+# - Only adds files absent in main; never overwrites or deletes
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
@@ -29,7 +29,7 @@ Usage: scripts/sync_worker_results_to_main.sh [--dry-run] [--worker <branch>]...
 
 Options:
   --dry-run          Preview what would be synced without committing
-  --worker <branch>  Add worker branch (example: results/workstation-a)
+  --worker <branch>  Add a worker branch (example: results/workstation-a)
   --help             Show this help
 EOF
 }
@@ -57,6 +57,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Deduplicate branch list while preserving order.
 declare -A seen
 deduped=()
 for b in "${WORKER_BRANCHES[@]}"; do
@@ -109,11 +110,10 @@ for worker in "${WORKER_BRANCHES[@]}"; do
 
       if [[ "$MODE" == "dry-run" ]]; then
         echo "  + $file (from $worker)"
-        staged_total+=1
       else
         git checkout "$remote_ref" -- "$file"
-        staged_total+=1
       fi
+      staged_total+=1
     done < <(git ls-tree -r --name-only "$remote_ref" -- "$path")
   done
 done
