@@ -16,6 +16,41 @@
     - **Template:** Must adhere to `thesis/assets/Plantilla_Tesis_Doctorado.docx`.
     - **Citations:** Use BibTeX format in `references.bib`.
 
+## Integrated Evidence Pipeline: 2026-04-26
+
+Current objective:
+
+- Analyze EXP3 together with EXP1 and EXP2, then propagate the integrated
+  evidence into the thesis and Paper A/B/C drafting surfaces.
+
+Pipeline added:
+
+- `scripts/integrate_experiment_evidence.py`
+  - Normalizes EXP1, qualified EXP2, and completed EXP3 run-level metrics.
+  - Applies the EXP2 recovery overlay from `outputs/batch_results.csv`.
+  - Generates thesis and paper handoff fragments under
+    `outputs/analysis/integrated_evidence/`.
+- `docs/analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md`
+  - Documents inputs, qualification rules, outputs, and publication guardrails.
+
+Generated snapshot:
+
+- EXP1 core calibration runs: `4 / 4`.
+- EXP2 present result files: `299 / 300`.
+- EXP2 qualified raw runs before recovery overlay: `274`.
+- EXP2 recovery overlay rows: `30`.
+- EXP2 analyzable runs after overlay: `275 / 300`.
+- EXP3 completed runs: `24 / 24`.
+- Integrated run rows: `303`.
+
+Writing guidance:
+
+- Use EXP2 for confirmatory statistical claims.
+- Use EXP3 for external-validity and portability language.
+- Use EXP1 for calibration, reproducibility, and historical continuity.
+- Do not pool EXP2 and EXP3 into one omnibus hypothesis test without a new
+  preregistered cross-study design.
+
 ## EXP3 Completion and Merge: 2026-04-26
 
 Current objective:

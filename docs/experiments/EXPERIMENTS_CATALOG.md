@@ -11,7 +11,7 @@ For experiment design, start at [README.md](./README.md).
 | `exp1_adult` | Baseline Adult-dataset calibration and reproducibility | [exp1_adult/README.md](./exp1_adult/README.md) | `experiments/exp1_adult/`, `outputs/` |
 | `exp2_comparative` | Fixed-grid comparative benchmark on Adult | [exp2_comparative/README.md](./exp2_comparative/README.md) | `experiments/exp2_comparative/results/`, `outputs/` |
 | `exp2_scaled` | Main robustness benchmark on Adult across seeds and sample sizes | [exp2_scaled/README.md](./exp2_scaled/README.md) | `experiments/exp2_scaled/results/`, `outputs/` |
-| `exp3_cross_dataset` | Prepared external-validation package beyond Adult; execution deferred until EXP2 finishes | [exp3_cross_dataset/README.md](./exp3_cross_dataset/README.md) | `configs/experiments/exp3_cross_dataset/`, `experiments/exp3_cross_dataset/models/`, `experiments/exp3_cross_dataset/results/`, `outputs/` |
+| `exp3_cross_dataset` | Completed external-validation package beyond Adult on Breast Cancer and German Credit | [exp3_cross_dataset/README.md](./exp3_cross_dataset/README.md) | `configs/experiments/exp3_cross_dataset/`, `experiments/exp3_cross_dataset/models/`, `experiments/exp3_cross_dataset/results/`, `outputs/` |
 
 ## Recent Change Record
 
@@ -23,11 +23,12 @@ EXP3 preparation is documented in:
 - [EXP3 sequential execution plan](../planning/exp3_execution_plan.md)
 - [EXP3 partitioned Windows + Linux/WSL execution plan](../planning/exp3_partitioned_execution_plan.md)
 
-The current EXP3 state is `ready_for_partitioned_execution`: configs, loaders,
-runner support, model-prep scripts, validation tests, all 12 model/preprocessor
-artifact pairs, and the Breast Cancer RF/SHAP seed-42 smoke result exist. The
-remaining raw EXP3 result artifacts should be produced through the Windows +
-Linux/WSL partitioned runbook.
+The current EXP3 state is `complete`: the Windows Breast Cancer partition and
+Linux/WSL German Credit partition were merged into
+`results/exp3-windows-breast-cancer`, yielding `24 / 24` planned run artifacts.
+
+Cross-study integration across EXP1, EXP2, and EXP3 is documented in
+[EXP1-EXP2-EXP3 Integration Pipeline](../analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md).
 
 ## Rule
 

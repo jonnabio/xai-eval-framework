@@ -34,6 +34,8 @@
 | :--- | :--- | :--- |
 | Review summary generator | `scripts/generate_paper_c_review_summary.py` | Generates `paper_c_review_summary.md` from the cleaned corpus CSV. |
 | Paper metrics generator | `scripts/generate_paper_metrics.py` | Shared cross-paper metrics generator. |
+| Cross-study integration driver | `scripts/integrate_experiment_evidence.py` | Generates EXP1/EXP2/EXP3 evidence handoff tables and the Paper C EXP3 integration addendum. |
+| EXP3 integration addendum | `outputs/analysis/integrated_evidence/paper_c_exp3_addendum.md` | Paper C note positioning EXP3 as future semantic-evaluation material, not as completed semantic preference validation. |
 
 ## 5. Dependency and Environment Artifacts
 

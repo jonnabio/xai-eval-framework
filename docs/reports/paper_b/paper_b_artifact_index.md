@@ -45,6 +45,8 @@
 | Paper metrics generator | `scripts/generate_paper_metrics.py` | Generates per-paper statistical summary metrics. |
 | Statistical analysis driver | `scripts/run_exp2_statistical_analysis.py` | Deterministically generates inferential tables from qualified EXP2 inputs. |
 | Analysis output directory | `outputs/analysis/paper_a_exp2_stats/` | Shared EXP2 analysis outputs (run inventory, run-level metrics, Wilcoxon tests, paired-cell exports etc.). |
+| Cross-study integration driver | `scripts/integrate_experiment_evidence.py` | Generates EXP1/EXP2/EXP3 evidence handoff tables and the Paper B EXP3 integration addendum. |
+| EXP3 integration addendum | `outputs/analysis/integrated_evidence/paper_b_exp3_addendum.md` | Paper B context note for using EXP3 as supporting evidence rather than a replacement for the SHAP-LIME paired test. |
 
 ## 6. Dependency and Environment Artifacts
 

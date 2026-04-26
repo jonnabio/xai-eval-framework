@@ -22,6 +22,23 @@ The output document will be created at: `thesis/_output/index.docx`.
 
 ## ✍️ Writing and Citing
 
+## Evidence Integration
+
+Before updating Chapter 4 result narratives, regenerate the integrated evidence
+handoff:
+
+```powershell
+python3 scripts/integrate_experiment_evidence.py
+```
+
+Use the generated thesis fragment as the working source for the EXP1/EXP2/EXP3
+integration discussion:
+
+- `outputs/analysis/integrated_evidence/thesis_fragment_es.qmd`
+
+The integration procedure is documented in
+`docs/analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md`.
+
 ### Citations
 Do not type references manually. Use the citation keys from `references.bib`:
 - Parenthetical: `[@adadi2018]` -> (Adadi & Berrada, 2018)

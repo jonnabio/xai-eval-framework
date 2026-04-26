@@ -45,6 +45,8 @@
 | Statistical analysis driver | `scripts/run_exp2_statistical_analysis.py` | Deterministically generates Paper A inferential tables from qualified EXP2 inputs. |
 | Analysis output directory | `outputs/analysis/paper_a_exp2_stats/` | Regenerated on 2026-04-14 with run inventory, run-level metrics, block summaries, Friedman tests, Nemenyi tables, Wilcoxon tests, uncertainty tables, paired-cell exports, and `analysis_summary.json`. |
 | Figure generation driver | `scripts/generate_paper_a_figures.py` | Generates Paper A figures from qualified analysis outputs. |
+| Cross-study integration driver | `scripts/integrate_experiment_evidence.py` | Generates EXP1/EXP2/EXP3 evidence handoff tables and the Paper A EXP3 integration addendum. |
+| EXP3 integration addendum | `outputs/analysis/integrated_evidence/paper_a_exp3_addendum.md` | Paper A portability and external-validity language derived from the completed EXP3 package. |
 
 ## 6. Dependency and Environment Artifacts
 

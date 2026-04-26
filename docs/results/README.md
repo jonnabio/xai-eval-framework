@@ -263,10 +263,12 @@ Start here for family-specific result semantics:
 - [EXP2 Scaled Results](./exp2_scaled/README.md)
 - [EXP2 Scaled Artifact Qualification](./exp2_scaled/QUALIFICATION.md)
 - [EXP3 Cross-Dataset Results](./exp3_cross_dataset/README.md)
+- [EXP1-EXP2-EXP3 Integration Pipeline](../analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md)
 
-EXP3 currently has preparation artifacts but no raw result cohort. See
-[EXP3 Preparation Walkthrough](../experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md)
-for the implemented loaders, config grid, scripts, and validation checks.
+EXP3 now has a completed raw result cohort (`24 / 24` planned runs). The
+integrated evidence package generated from EXP1, EXP2, and EXP3 lives under:
+
+- `outputs/analysis/integrated_evidence/`
 
 ## 11. Migration Sequence
 
@@ -276,7 +278,9 @@ Recommended order:
 2. Add per-family result READMEs
 3. Cross-link from `docs/experiments/...`
 4. Document EXP2 overlay and qualification logic clearly
-5. Only after that, consider any filesystem cleanup
+5. Generate integrated evidence for thesis/paper handoff with
+   `python3 scripts/integrate_experiment_evidence.py`
+6. Only after that, consider any filesystem cleanup
 
 ## 12. Risks
 
@@ -307,8 +311,9 @@ First make them understandable through a documentation layer. Then revisit wheth
 
 ## 13. Recommended Next Step
 
-Implement the minimal-change version:
+Continue the minimal-change version:
 
 - keep current storage
-- add `docs/results` as the single human-readable hub for result semantics
-- start with `exp2_scaled`, because it has the highest complexity and the most recovery/overlay nuance
+- use `docs/results` as the single human-readable hub for result semantics
+- use `outputs/analysis/integrated_evidence/` as the generated handoff layer for
+  thesis and paper integration
