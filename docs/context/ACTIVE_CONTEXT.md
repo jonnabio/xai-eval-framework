@@ -86,6 +86,27 @@ Execution readiness:
   Linux smoke result already satisfies the EXP3 gate, but a Windows-side
   preflight remains necessary because Windows uses a separate `.venv-exp3`.
 
+Branching status:
+
+- `origin/results/exp3-linux-german-credit` exists and is the Linux/WSL result
+  branch.
+- `origin/results/exp3-windows-breast-cancer` exists and is the Windows result
+  branch.
+- Both were initialized at
+  `6960da6c EXP3: prepare partitioned execution branches`.
+
+Linux/WSL launch handoff:
+
+```bash
+git fetch origin
+git switch results/exp3-linux-german-credit
+git pull --ff-only
+git push --dry-run
+```
+
+Then run only the German Credit partition from
+`docs/planning/exp3_partitioned_execution_plan.md`.
+
 Resume on Windows:
 
 1. Open Windows PowerShell at the repo root:

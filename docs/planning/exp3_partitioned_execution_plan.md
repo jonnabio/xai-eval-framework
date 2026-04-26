@@ -106,6 +106,16 @@ Recommended branch names:
 - Windows: `results/exp3-windows-breast-cancer`
 - Linux/WSL: `results/exp3-linux-german-credit`
 
+Branching status as of 2026-04-26:
+
+- `origin/results/exp3-windows-breast-cancer` exists.
+- `origin/results/exp3-linux-german-credit` exists.
+- Both branches were initialized at:
+  `6960da6c EXP3: prepare partitioned execution branches`.
+- The shared initialization commit contains the EXP3 readiness docs, scripts,
+  model/preprocessor artifacts, and the completed Breast Cancer RF/SHAP seed-42
+  smoke result.
+
 ## Phase 0 - Preflight
 
 Current Linux/container verification already passed:
@@ -291,13 +301,39 @@ This partition is ready to launch from this Linux/WSL checkout after confirming
 the target branch can be pushed:
 
 ```bash
+git fetch origin
+git switch results/exp3-linux-german-credit
+git pull --ff-only
 git push --dry-run
+```
+
+Recommended pre-run checks:
+
+```bash
+python -m py_compile scripts/email_report.py
+bash -n scripts/install_cronjob.sh
+python scripts/email_report.py --print-only --no-fetch
+find experiments/exp3_cross_dataset/models \( -name rf.joblib -o -name xgb.joblib \) | wc -l
+find experiments/exp3_cross_dataset/models -name preprocessor.joblib | wc -l
+```
+
+Expected model artifact counts: `12` and `12`.
+
+Start Linux-side checkpoint commits and pushes before launching the partition:
+
+```bash
+mkdir -p logs
+INTERVAL=900 PUSH_INTERVAL=10800 \
+  bash scripts/auto_push.sh experiments/exp3_cross_dataset/results/german_credit \
+  >> logs/auto_push_exp3_linux.log 2>&1 &
 ```
 
 Linux/WSL:
 
 ```bash
 set -euo pipefail
+PYTHON=.venv-wsl/bin/python3
+[ -x "$PYTHON" ] || PYTHON=python3
 
 configs=(
   configs/experiments/exp3_cross_dataset/german_credit/rf_shap_s42_n100.yaml
@@ -315,8 +351,17 @@ configs=(
 )
 
 for config in "${configs[@]}"; do
-  .venv-wsl/bin/python3 -m src.experiment.runner --config "$config"
+  "$PYTHON" -m src.experiment.runner --config "$config" 2>&1 | tee -a logs/exp3_linux_german_credit.log
 done
+```
+
+Monitor Linux progress:
+
+```bash
+python scripts/status_dashboard.py \
+  --config-dir configs/experiments/exp3_cross_dataset \
+  --results-dir experiments/exp3_cross_dataset/results \
+  --log-file logs/exp3_linux_german_credit.log
 ```
 
 ## Phase 4 - Checkpointing and Git
