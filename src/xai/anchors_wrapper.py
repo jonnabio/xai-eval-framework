@@ -25,6 +25,32 @@ class AnchorsTabularWrapper(ExplainerWrapper):
     def __init__(self, training_data: np.ndarray, feature_names: List[str], **kwargs):
         super().__init__(training_data, feature_names, **kwargs)
         self.explainer = None
+        # Most EXP3 categorical features become one-hot encoded 0/1 columns.
+        # Stability perturbations add Gaussian noise, which can produce invalid
+        # near-binary values for AnchorTabular. We snap those columns back to a
+        # valid binary domain before explanation.
+        self._binary_feature_mask = np.all(np.isin(self.training_data, [0.0, 1.0]), axis=0)
+        self._continuous_feature_indices = np.where(~self._binary_feature_mask)[0]
+        self._observed_continuous_values = {
+            idx: np.unique(self.training_data[:, idx]) for idx in self._continuous_feature_indices
+        }
+
+    def _sanitize_sample(self, sample: np.ndarray) -> np.ndarray:
+        """Project perturbed samples back into the explainer's valid feature space."""
+        sanitized = np.array(sample, dtype=float, copy=True)
+        if sanitized.ndim != 1:
+            sanitized = sanitized.reshape(-1)
+
+        if self._binary_feature_mask.any():
+            sanitized[self._binary_feature_mask] = (
+                sanitized[self._binary_feature_mask] >= 0.5
+            ).astype(float)
+
+        for idx in self._continuous_feature_indices:
+            observed = self._observed_continuous_values[idx]
+            nearest_idx = np.abs(observed - sanitized[idx]).argmin()
+            sanitized[idx] = observed[nearest_idx]
+        return sanitized
         
     def _lazy_init(self, predict_fn):
         """Initialize Alibi explainer lazily to verify dependencies/performance."""
@@ -82,7 +108,8 @@ class AnchorsTabularWrapper(ExplainerWrapper):
         for i in range(n_samples):
             try:
                 # threshold=0.95 is standard for high precision
-                explanation = self.explainer.explain(X_samples[i], threshold=0.95)
+                sample = self._sanitize_sample(X_samples[i])
+                explanation = self.explainer.explain(sample, threshold=0.95)
                 
                 # explanation.data['raw']['feature'] contains indices of features in the anchor
                 # Note: Alibi might return indices relevant to discretised buckets, but usually maps back.
