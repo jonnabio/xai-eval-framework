@@ -4,6 +4,9 @@ This plan is the **operational runbook** for EXP3: prerequisites, training,
 resumability, and how we checkpoint results into Git so they reliably make it to
 the thesis + papers via the publication sync pipeline.
 
+For the Windows + Linux/WSL split-run procedure, use the companion
+[EXP3 partitioned execution plan](./exp3_partitioned_execution_plan.md).
+
 ## Goal
 
 - Execute the 24-run EXP3 matrix on `breast_cancer` + `german_credit`.
@@ -44,8 +47,39 @@ git push --dry-run
 
 ### OpenML access (German Credit only)
 
-German Credit uses OpenML (`credit-g`). The first run requires internet access
-and caches under `data/openml/`.
+German Credit uses OpenML `credit-g` dataset id `31`. The loader uses the
+canonical direct ARFF download and caches it under `data/openml/` to avoid
+sklearn OpenML metadata API redirect failures.
+
+The current cache file is:
+
+```text
+data/openml/dataset_31_credit-g.arff
+```
+
+The first run in a fresh checkout requires internet access; subsequent runs can
+use the cached ARFF file.
+
+## Current Readiness Checkpoint (2026-04-26)
+
+- EXP3 configs present: `24`.
+- Model artifacts prepared: `12` model binaries and `12` preprocessors.
+- Training summaries prepared: `12`.
+- Smoke gate passed:
+  `experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json`.
+- Result files currently complete: `1 / 24`.
+- Loader verification passed:
+  `pytest -q tests/test_cross_dataset_loader.py`.
+- German Credit loader smoke passed with `(800, 61)` train and `(200, 61)` test
+  matrices.
+
+Before launching the remaining matrix, still confirm on each execution worker:
+
+```bash
+git push --dry-run
+```
+
+and the platform-specific dependency preflight from the partitioned runbook.
 
 ## Step 1 — Train EXP3 model artifacts (idempotent)
 
@@ -80,6 +114,9 @@ Run the managed runner (recommended):
 ```bash
 VENV_PYTHON=.venv-wsl/bin/python3 bash scripts/managed_runner_exp3.sh
 ```
+
+For parallel execution, do not point two workers at this full config tree. Use
+the partitioned runbook instead.
 
 Grid resumability:
 
@@ -127,8 +164,8 @@ before rendering.
 
 ## Verification checklist
 
-- [ ] `scripts/train_exp3_models.py` completed for both datasets.
-- [ ] Smoke test `breast_cancer/rf_shap_s42_n100` produces `results.json`.
+- [x] `scripts/train_exp3_models.py` completed for both datasets.
+- [x] Smoke test `breast_cancer/rf_shap_s42_n100` produces `results.json`.
 - [ ] `experiments/exp3_cross_dataset/results/**/results.json` exists for all 24 runs (or an explicitly recorded partial subset).
 - [ ] GitHub has recent pushes containing `instances/*.json` checkpoints and final `results.json`.
 - [ ] `scripts/pubs/build_all.sh` passes `scripts/pubs/verify_sync.py`.

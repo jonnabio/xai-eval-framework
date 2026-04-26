@@ -93,7 +93,8 @@ Canonical roots:
 - `experiments/exp1_adult/results/`
 - `experiments/exp2_comparative/results/`
 - `experiments/exp2_scaled/results/`
-- prepared, not yet executed: `experiments/exp3_cross_dataset/results/`
+- ready for partitioned execution; smoke result present:
+  `experiments/exp3_cross_dataset/results/`
 
 ### 4.2 Layer B: Recovery / Remediation Artifacts
 

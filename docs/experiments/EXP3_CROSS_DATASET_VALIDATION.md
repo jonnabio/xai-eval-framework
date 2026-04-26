@@ -14,7 +14,8 @@ The content below is preserved as extended design rationale.
 
 ## 0. Implementation Update
 
-As of 2026-04-13, EXP3 has moved from proposal to preparation.
+As of 2026-04-26, EXP3 has moved from preparation to
+`ready_for_partitioned_execution`.
 
 Implemented preparation artifacts:
 
@@ -28,16 +29,22 @@ Implemented preparation artifacts:
 - session walkthrough and file-level inventory in
   [exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md](./exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md).
 
-Deferred artifacts:
+Prepared execution artifacts:
 
 - trained EXP3 model binaries and preprocessors under `experiments/exp3_cross_dataset/models/`;
-- raw EXP3 execution results under `experiments/exp3_cross_dataset/results/`;
+- Breast Cancer RF/SHAP seed-42 smoke result under
+  `experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json`;
+- German Credit OpenML ARFF cache under `data/openml/dataset_31_credit-g.arff`.
+
+Remaining deferred artifacts:
+
+- the remaining 23 raw EXP3 execution results under `experiments/exp3_cross_dataset/results/`;
 - derived EXP3 analysis exports under `outputs/`.
 
-Reason for deferral:
+Execution condition:
 
-- the active EXP2 worker is still running, so EXP3 execution should begin only
-  with the first Breast Cancer RF SHAP smoke test after EXP2 finishes.
+- use the Windows + Linux/WSL partitioned runbook after platform-specific
+  dependency preflights and non-interactive Git push checks pass.
 
 ## 1. Purpose
 

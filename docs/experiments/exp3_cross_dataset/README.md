@@ -22,12 +22,18 @@ Status:
 - dataset-loader support is prepared for `breast_cancer` and `german_credit`;
 - config generation is handled by `scripts/generate_exp3_configs.py`;
 - model artifact preparation is handled by `scripts/train_exp3_models.py`;
+- all 12 seed-specific EXP3 model/preprocessor artifact pairs were prepared on
+  2026-04-26;
+- the Breast Cancer RF/SHAP seed-42 smoke gate passed on 2026-04-26 and wrote
+  `experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json`;
 - preparation walkthrough and file-level change inventory are documented in
   [EXP3_PREPARATION_WALKTHROUGH.md](./EXP3_PREPARATION_WALKTHROUGH.md);
-- full execution should wait until the active EXP2 worker has finished.
+- full partitioned execution may begin once the Windows Python 3.11 preflight
+  and non-interactive Git push checks pass on the execution workers.
 
-EXP3 compute should start with a single Breast Cancer SHAP smoke run before any
-Anchors jobs are launched.
+EXP3 compute has passed the required single Breast Cancer SHAP smoke run. The
+remaining matrix should still execute SHAP before Anchors within each dataset
+partition.
 
 ## Planned Matrix
 
@@ -85,7 +91,10 @@ Within each block:
 - **Batch resumability:** `scripts/managed_runner_exp3.sh` skips configs that already have `results.json`.
 - **Frequent commits/pushes:** `scripts/managed_runner_exp3.sh` starts `scripts/auto_push.sh` in the background to commit/push checkpoints while a config is still running; configure cadence with `INTERVAL` and `PUSH_INTERVAL`. A shared Git lock (`.git/xai_git_sync.lock`) prevents index races.
 
-Full runbook: `docs/planning/exp3_execution_plan.md`.
+Full runbook: [docs/planning/exp3_execution_plan.md](../../planning/exp3_execution_plan.md).
+
+Partitioned Windows + Linux/WSL runbook:
+[docs/planning/exp3_partitioned_execution_plan.md](../../planning/exp3_partitioned_execution_plan.md).
 
 ## Artifact Contract
 

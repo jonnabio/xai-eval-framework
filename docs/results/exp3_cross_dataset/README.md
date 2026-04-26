@@ -10,12 +10,21 @@ It is the result-side companion to [docs/experiments/exp3_cross_dataset/README.m
 
 Status:
 
-- prepared / not yet executed
+- ready for partitioned execution; smoke result complete
 
-No EXP3 raw result tree is expected to be complete until the EXP3 model
-artifacts are trained and at least one smoke-test run has passed. The current
-preparation stage provides dataset-loader support, config generation, and a
-model-training entry point, but execution is deferred while EXP2 is active.
+The EXP3 model artifacts are trained and the first Breast Cancer RF/SHAP smoke
+test has passed. The complete raw result tree is not expected until both
+dataset partitions finish.
+
+Current raw result count:
+
+- `1 / 24`
+
+Completed smoke result:
+
+```text
+experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json
+```
 
 The preparation change inventory is documented in
 [docs/experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md](../../experiments/exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md).

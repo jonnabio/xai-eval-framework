@@ -164,3 +164,47 @@ Recommended first execution sequence:
 3. If successful, train the remaining Breast Cancer RF/XGB artifacts.
 4. Run Breast Cancer SHAP configs before starting Anchors.
 5. Defer German Credit until Breast Cancer is verified.
+
+## 7. Readiness Checkpoint: 2026-04-26
+
+EXP3 moved from scaffold-ready to execution-ready for the remaining partitioned
+matrix.
+
+Commands completed:
+
+```bash
+python scripts/train_exp3_models.py --datasets breast_cancer --models rf --seeds 42
+python -m src.experiment.runner --config configs/experiments/exp3_cross_dataset/breast_cancer/rf_shap_s42_n100.yaml
+python scripts/train_exp3_models.py --datasets breast_cancer german_credit --models rf xgb --seeds 42 123 456
+pytest -q tests/test_cross_dataset_loader.py
+```
+
+Observed results:
+
+- Breast Cancer RF/SHAP seed-42 smoke run completed and wrote:
+  `experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json`.
+- EXP3 model artifacts prepared:
+  - `12` model binaries: `rf.joblib` / `xgb.joblib`;
+  - `12` fitted preprocessors: `preprocessor.joblib`;
+  - `12` training summaries: `exp3_training_summary.json`.
+- Current raw EXP3 results: `1 / 24`.
+- Loader tests: `3 passed`.
+- German Credit loader smoke: `(800, 61)` train and `(200, 61)` test.
+- German Credit cache:
+  `data/openml/dataset_31_credit-g.arff`.
+
+Implementation note:
+
+- sklearn's OpenML metadata API path failed in this environment with HTTP 301
+  redirect loops.
+- `src/data_loading/cross_dataset.py` now loads OpenML German Credit dataset id
+  `31` through the canonical direct ARFF download and local cache.
+
+Execution handoff:
+
+- Linux/WSL German Credit partition is ready after `git push --dry-run` passes.
+- Windows Breast Cancer partition is ready after pulling/syncing these changes,
+  using Python 3.11 `.venv-exp3`, passing the Windows dependency preflight, and
+  confirming Git push works.
+- Continue to use the partitioned runbook:
+  `docs/planning/exp3_partitioned_execution_plan.md`.

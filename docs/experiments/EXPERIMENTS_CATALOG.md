@@ -20,11 +20,14 @@ EXP3 preparation is documented in:
 - [EXP3 preparation walkthrough](./exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md)
 - [EXP3 detailed rationale](./EXP3_CROSS_DATASET_VALIDATION.md)
 - [EXP3 result semantics](../results/exp3_cross_dataset/README.md)
+- [EXP3 sequential execution plan](../planning/exp3_execution_plan.md)
+- [EXP3 partitioned Windows + Linux/WSL execution plan](../planning/exp3_partitioned_execution_plan.md)
 
-The current EXP3 state is `prepared / not yet executed`: configs, loaders,
-runner support, model-prep scripts, and validation tests exist; raw EXP3
-result artifacts are intentionally absent until the active EXP2 worker
-finishes and the first Breast Cancer SHAP smoke test is run.
+The current EXP3 state is `ready_for_partitioned_execution`: configs, loaders,
+runner support, model-prep scripts, validation tests, all 12 model/preprocessor
+artifact pairs, and the Breast Cancer RF/SHAP seed-42 smoke result exist. The
+remaining raw EXP3 result artifacts should be produced through the Windows +
+Linux/WSL partitioned runbook.
 
 ## Rule
 

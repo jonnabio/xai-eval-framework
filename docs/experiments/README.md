@@ -31,20 +31,28 @@ The corresponding machine-readable manifest should live under `configs/experimen
 | `exp1_adult` | [exp1_adult/README.md](./exp1_adult/README.md) | Mixed legacy config layout | Active / legacy |
 | `exp2_comparative` | [exp2_comparative/README.md](./exp2_comparative/README.md) | [configs/experiments/exp2_comparative](../../configs/experiments/exp2_comparative) | Active |
 | `exp2_scaled` | [exp2_scaled/README.md](./exp2_scaled/README.md) | [configs/experiments/exp2_scaled/manifest.yaml](../../configs/experiments/exp2_scaled/manifest.yaml) | Active |
-| `exp3_cross_dataset` | [exp3_cross_dataset/README.md](./exp3_cross_dataset/README.md) | [configs/experiments/exp3_cross_dataset/manifest.yaml](../../configs/experiments/exp3_cross_dataset/manifest.yaml) | Prepared / execution deferred |
+| `exp3_cross_dataset` | [exp3_cross_dataset/README.md](./exp3_cross_dataset/README.md) | [configs/experiments/exp3_cross_dataset/manifest.yaml](../../configs/experiments/exp3_cross_dataset/manifest.yaml) | Ready for partitioned execution |
 
-## Recent EXP3 Preparation
+## Recent EXP3 Readiness
 
-EXP3 is now prepared at the scaffold level. The project has:
+EXP3 is now ready for the remaining partitioned matrix. The project has:
 
 - dataset-loader support for `breast_cancer` and `german_credit`;
 - 24 generated YAML configs across two datasets, two models, two explainers, and three seeds;
-- model artifact preparation through `scripts/train_exp3_models.py`;
+- 12 trained model binaries and 12 fitted preprocessors from `scripts/train_exp3_models.py`;
+- the Breast Cancer RF/SHAP seed-42 smoke result under `experiments/exp3_cross_dataset/results/`;
 - runner dispatch support for the new EXP3 datasets;
 - loader tests and lightweight config validation;
 - a full change inventory in [exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md](./exp3_cross_dataset/EXP3_PREPARATION_WALKTHROUGH.md).
 
-Full EXP3 execution remains deferred until the active EXP2 worker finishes.
+The remaining 23 raw results should be produced through the partitioned
+Windows + Linux/WSL runbook after each worker passes its local dependency and
+Git push preflights.
+
+EXP3 execution runbooks:
+
+- [Sequential EXP3 execution plan](../planning/exp3_execution_plan.md)
+- [Partitioned Windows + Linux/WSL EXP3 execution plan](../planning/exp3_partitioned_execution_plan.md)
 
 ## Storage Policy
 
