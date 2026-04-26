@@ -16,7 +16,64 @@
     - **Template:** Must adhere to `thesis/assets/Plantilla_Tesis_Doctorado.docx`.
     - **Citations:** Use BibTeX format in `references.bib`.
 
+## EXP3 Completion and Merge: 2026-04-26
+
+Current objective:
+
+- Analyze EXP3 as a completed cross-dataset validation package and integrate the
+  findings into the thesis and paper result narratives.
+
+Execution status:
+
+- Windows Breast Cancer partition completed: `12 / 12` configs.
+- Linux/WSL German Credit partition completed: `12 / 12` configs.
+- The two result branches were merged into
+  `results/exp3-windows-breast-cancer`.
+- Merged branch head:
+  `aa22d1112 Merge remote-tracking branch 'origin/results/exp3-linux-german-credit' into results/exp3-windows-breast-cancer`.
+- Raw EXP3 artifact count:
+  - `24 / 24` `results.json`;
+  - `24 / 24` `metrics.csv`.
+
+Documentation added:
+
+- `docs/adr/0012-exp3-partitioned-result-merge.md`
+  - Records the accepted partition merge procedure and branch-level provenance.
+- `docs/results/exp3_cross_dataset/MERGED_ANALYSIS.md`
+  - Summarizes EXP3 as one 24-run cross-dataset unit.
+- `docs/results/exp3_cross_dataset/README.md`
+  - Updated from "ready for partitioned execution" to "complete; both dataset
+    partitions merged."
+
+Primary merged result interpretation:
+
+- SHAP preserved a strong advantage over Anchors on fidelity, faithfulness gap,
+  and stability across the merged EXP3 unit.
+- Anchors preserved a compact rule-style profile, with far fewer active
+  features.
+- Runtime favored SHAP overall in EXP3 because Anchors was slower on both
+  dataset partitions.
+- German Credit XGB is the main dataset/model-sensitive caveat: Anchors slightly
+  exceeded SHAP on stability while SHAP retained higher fidelity.
+
+Thesis impact:
+
+- EXP3 now supports the bounded phrase "Adult-centered benchmark with
+  two-domain external tabular validation."
+- EXP3 should not be described as a replacement for EXP2 or as a universal
+  cross-domain benchmark.
+
+Next steps:
+
+1. Use the merged result set for publication-quality EXP3 statistical tables.
+2. Integrate the bounded EXP3 claim into the thesis external-validity section.
+3. Decide whether to create a neutral branch alias from `aa22d1112` for final
+   archival packaging.
+
 ## EXP3 Handoff: 2026-04-26
+
+Superseded by the completion record above. The original handoff notes are
+preserved for provenance.
 
 Current objective:
 

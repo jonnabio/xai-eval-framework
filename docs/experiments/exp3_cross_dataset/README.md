@@ -14,26 +14,34 @@ EXP3 supports bounded claims about external validity:
 - selected explainer trade-offs are not purely Adult-specific
 - key quantitative patterns can be rechecked on additional tabular datasets
 
-## Preparation Status
+## Execution Status
 
 Status:
 
-- design manifest exists;
-- dataset-loader support is prepared for `breast_cancer` and `german_credit`;
+- complete; both dataset partitions merged.
+
+Completed artifacts:
+
+- dataset-loader support exists for `breast_cancer` and `german_credit`;
 - config generation is handled by `scripts/generate_exp3_configs.py`;
 - model artifact preparation is handled by `scripts/train_exp3_models.py`;
-- all 12 seed-specific EXP3 model/preprocessor artifact pairs were prepared on
+- all seed-specific EXP3 model/preprocessor artifact pairs were prepared on
   2026-04-26;
-- the Breast Cancer RF/SHAP seed-42 smoke gate passed on 2026-04-26 and wrote
-  `experiments/exp3_cross_dataset/results/breast_cancer/rf_shap/seed_42/n_100/results.json`;
-- preparation walkthrough and file-level change inventory are documented in
-  [EXP3_PREPARATION_WALKTHROUGH.md](./EXP3_PREPARATION_WALKTHROUGH.md);
-- full partitioned execution may begin once the Windows Python 3.11 preflight
-  and non-interactive Git push checks pass on the execution workers.
+- the Windows Breast Cancer partition completed `12 / 12` configs;
+- the Linux/WSL German Credit partition completed `12 / 12` configs;
+- the raw result tree contains `24 / 24` `results.json` files and `24 / 24`
+  `metrics.csv` files;
+- both partitions were merged into
+  `results/exp3-windows-breast-cancer` at commit `aa22d1112`.
 
-EXP3 compute has passed the required single Breast Cancer SHAP smoke run. The
-remaining matrix should still execute SHAP before Anchors within each dataset
-partition.
+The merge procedure is recorded in
+[ADR 0012](../../adr/0012-exp3-partitioned-result-merge.md).
+
+The merged result interpretation is recorded in
+[docs/results/exp3_cross_dataset/MERGED_ANALYSIS.md](../../results/exp3_cross_dataset/MERGED_ANALYSIS.md).
+
+The preparation walkthrough and file-level change inventory are documented in
+[EXP3_PREPARATION_WALKTHROUGH.md](./EXP3_PREPARATION_WALKTHROUGH.md).
 
 ## Planned Matrix
 
@@ -50,6 +58,9 @@ Planned total:
 - `24` configurations
 
 ## Execution Priority
+
+The execution priority below is preserved as historical runbook guidance. The
+planned matrix has now completed.
 
 ## Python Environment (WSL/Linux)
 
