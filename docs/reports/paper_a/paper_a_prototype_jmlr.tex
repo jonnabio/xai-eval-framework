@@ -154,10 +154,18 @@ Calibration sanity checks (EXP1 pilot) & Implementation checks before scaled run
 Reproducibility repeatability cohort (EXP1) & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
 Comparative screening cohort (EXP2 comparative) & Broad method-model coverage under fixed seeds. & Descriptive comparative context. \\
 Primary robustness benchmark (EXP2 robustness) & Multi-seed, multi-sample-size benchmark runs. & Primary inferential cohort for global and paired tests. \\
+External tabular validation package (EXP3) & Compact Breast Cancer and German Credit validation. & Portability and external-validity evidence; not pooled into EXP2 confirmatory tests. \\
 \bottomrule
 \end{tabularx}
 \label{tab:cohorts}
 \end{table}
+
+EXP3 is methodologically downstream of the primary benchmark. It reuses the
+framework's configuration, runner, artifact contract, and metric bundle on two
+additional tabular datasets, while deliberately reducing the grid to RF/XGB,
+SHAP/Anchors, three seeds, and \(N=100\). This design tests whether the
+benchmark operation model travels beyond Adult without changing the denominator
+of the confirmatory EXP2 inference.
 
 \subsection{Research Questions, Factors, and Analysis Units}
 \label{sec:methods-design}
@@ -186,6 +194,19 @@ slice, yielding 275 analyzable unique runs and leaving 25 unresolved cells after
 the overlay. The committed tree still has one missing SHAP artifact and 25
 present-but-empty artifacts; the recovery overlay fills the missing SHAP cell for
 analysis.
+
+The external-validation package (EXP3) uses a separate compact design:
+\[
+d\in\{\text{breast\_cancer},\text{german\_credit}\},\quad
+g\in\{\text{rf},\text{xgb}\},\quad
+k\in\{\text{shap},\text{anchors}\},
+\]
+\[
+s\in\{42,123,456\},\quad n=100.
+\]
+Its planned and completed size is \(2\times2\times2\times3=24\) runs. EXP3
+metrics are summarized descriptively and through the integrated evidence export;
+they are not included in Friedman, Nemenyi, or SHAP--LIME Wilcoxon tests.
 \begin{table}[t]
 \centering
 \caption{Primary benchmark (EXP2) evidence accounting for inferential qualification.}
@@ -376,7 +397,7 @@ Primary repository anchors used in this paper are:
 Validity controls and residual risks are summarized as follows:
 \begin{enumerate}[leftmargin=*]
     \item \textbf{Internal validity:} explicit missingness audit and
-    block-complete inference. A standardized runtime constraint protocol 
+    block-complete inference. A standardized runtime constraint protocol
     (Cores=1, RAM=4GB, Timeout=300s) is configured in the experiment layer via
     the \texttt{ResourceGuard} utility to improve architectural comparability;
     residual risk from non-random coverage gaps.

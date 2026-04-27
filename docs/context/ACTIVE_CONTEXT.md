@@ -56,10 +56,17 @@ Manuscript integration:
 - Thesis Chapter 4 now includes an EXP3 external-validation integration section.
 - Thesis Chapter 5 limitations now distinguish Adult-centered confirmatory
   inference from EXP3 two-domain tabular validation.
+- Thesis Chapter 3 methodology now documents EXP3 as a compact external
+  validation phase with its own datasets, factors, and statistical boundary.
 - Paper A includes EXP3 as a framework portability and external-validity check.
 - Paper B includes EXP3 as supporting context, not as a replacement for the
   SHAP-LIME paired test.
 - Paper C uses EXP3 to motivate layered technical-plus-semantic evaluation.
+
+Regenerated review artifacts:
+
+- Paper A/B/C branded and neutral PDFs were regenerated with Tectonic.
+- Thesis DOCX and PDF were regenerated with Quarto.
 
 ## EXP3 Completion and Merge: 2026-04-26
 

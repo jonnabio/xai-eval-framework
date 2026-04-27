@@ -1,21 +1,24 @@
 # Marco empírico y diseño experimental
 
-Este capítulo describe el diseño empírico de los dos estudios que conforman el
+Este capítulo describe el diseño empírico de los estudios que conforman el
 núcleo cuantitativo de la tesis: el benchmark multinivel de métodos agnósticos
-(Estudio A, Paper A) y la comparación pareada enfocada entre LIME y SHAP
-(Estudio B, Paper B). Ambos estudios comparten el mismo pipeline experimental,
-el mismo conjunto de datos y los mismos artefactos de modelo, y se distinguen
-por el alcance del análisis inferencial: Estudio A evalúa los cuatro métodos
-sobre el diseño factorial completo; Estudio B restringe la inferencia
-confirmativa al subconjunto pareado LIME-SHAP. El capítulo se organiza en ocho
-secciones: las dos fases experimentales (EXP1 y EXP2), el conjunto de datos y
-el protocolo de preprocesamiento, el diseño factorial, las configuraciones de
-los explicadores, la operacionalización de las métricas, el protocolo FOM-7,
-el análisis de cobertura de artefactos, y el plan de inferencia estadística.
-Las amenazas a la validez y el inventario de recursos de reproducibilidad
-figuran en el Apéndice A.
+(Estudio A, Paper A), la comparación pareada enfocada entre LIME y SHAP
+(Estudio B, Paper B) y la validación externa compacta EXP3. Los dos primeros
+estudios comparten el mismo pipeline experimental, el mismo conjunto de datos
+Adult y los mismos artefactos de modelo, y se distinguen por el alcance del
+análisis inferencial: Estudio A evalúa los cuatro métodos sobre el diseño
+factorial completo; Estudio B restringe la inferencia confirmativa al
+subconjunto pareado LIME-SHAP. EXP3 reutiliza el contrato operativo y el paquete
+de métricas para evaluar portabilidad en Breast Cancer y German Credit, sin
+incorporarse al contraste confirmativo de EXP2. El capítulo se organiza en ocho
+secciones: las fases experimentales (EXP1, EXP2 y EXP3), los conjuntos de datos
+y protocolos de preprocesamiento, el diseño factorial, las configuraciones de
+los explicadores, la operacionalización de las métricas, el protocolo FOM-7, el
+análisis de cobertura de artefactos, y el plan de inferencia estadística. Las
+amenazas a la validez y el inventario de recursos de reproducibilidad figuran
+en el Apéndice A.
 
-## Fases experimentales: EXP1 y EXP2
+## Fases experimentales: EXP1, EXP2 y EXP3
 
 El diseño experimental distingue dos cohortes de evidencia con roles
 diferenciados, siguiendo el principio de separación entre actividades de
@@ -80,7 +83,48 @@ muestra, bajo el protocolo FOM-7 descrito en la Sección 3.6. Los resultados
 de EXP2 son la fuente exclusiva de las afirmaciones estadísticas inferenciales
 de los Estudios A y B.
 
-## Conjunto de datos y protocolo de preprocesamiento
+### Fase de validación externa compacta (EXP3)
+
+La Fase EXP3 se añade como capa de validez externa tabular. Su objetivo no es
+replicar el diseño factorial completo de EXP2, sino comprobar si el mismo
+contrato de ejecución, persistencia de artefactos, métricas primarias y reglas
+de calificación pueden operar fuera de UCI Adult Income. Por esta razón, EXP3
+se interpreta como evidencia de portabilidad y no como una nueva cohorte
+confirmativa para las hipótesis H1-H3.
+
+EXP3 utiliza dos conjuntos tabulares adicionales:
+
+- `breast_cancer`: dominio biomédico, pequeño y de baja fricción computacional.
+- `german_credit`: dominio socioeconómico y de riesgo crediticio.
+
+El diseño EXP3 es:
+
+$$2\ \text{datasets} \times 2\ \text{modelos} \times 2\ \text{explicadores}
+\times 3\ \text{semillas} \times 1\ \text{tamaño de muestra} = 24
+\text{ ejecuciones}$$
+
+Los factores son:
+
+- datasets: `breast_cancer`, `german_credit`;
+- modelos: `rf`, `xgb`;
+- explicadores: `shap`, `anchors`;
+- semillas: `42`, `123`, `456`;
+- tamaño de muestra: `n = 100`.
+
+La elección de SHAP y Anchors preserva heterogeneidad metodológica: SHAP
+representa atribución densa de características y Anchors representa reglas
+compactas IF-THEN. LIME y DiCE no se incluyen para mantener EXP3 como paquete
+compacto y evitar convertirlo en un segundo EXP2. Los resultados completos se
+integran mediante `scripts/integrate_experiment_evidence.py`, que genera el
+paquete `outputs/analysis/integrated_evidence/` con tablas normalizadas,
+fragmentos de tesis y notas de integración para Paper A/B/C.
+
+EXP3 completó `24 / 24` ejecuciones planificadas. En el análisis estadístico,
+sus métricas se reportan como resumen descriptivo y evidencia de validez
+externa. No se agregan a los bloques Friedman de EXP2 ni a la prueba pareada
+SHAP-LIME de Paper B.
+
+## Conjuntos de datos y protocolo de preprocesamiento
 
 ### Descripción del conjunto de datos
 
