@@ -53,6 +53,13 @@ Writing guidance:
 
 Manuscript integration:
 
+- Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
+  the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
+  SHAP-vs-Anchors portability result.
+- Paper A/B/C abstracts now include the relevant EXP3 interpretation boundary:
+  Paper A as portability evidence, Paper B as non-pooled supporting context, and
+  Paper C as taxonomy grounding across reproducibility, confirmatory benchmark,
+  and external-validation evidence.
 - Thesis Chapter 4 now includes an EXP3 external-validation integration section.
 - Thesis Chapter 5 limitations now distinguish Adult-centered confirmatory
   inference from EXP3 two-domain tabular validation.
