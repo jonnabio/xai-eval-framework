@@ -53,6 +53,15 @@ Writing guidance:
 
 Manuscript integration:
 
+- Thesis introduction and future-work sections now position EXP4 as the next
+  planned extension: an LLM-based semantic proxy evaluation layer for clarity,
+  coherence, audit usefulness, and plausibility. This is explicitly bounded as
+  proxy evaluation, not direct human validation.
+- EXP4 planning documentation now follows the project experiment standard:
+  experiment design README, result semantics README, execution plan, and ADR.
+- EXP4 detailed protocol now defines PhD-level research questions, hypotheses,
+  sampling, LLM judge conditions, rubric, schemas, statistical analysis, quality
+  gates, and validity threats.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

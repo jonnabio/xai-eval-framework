@@ -12,6 +12,7 @@ For experiment design, start at [README.md](./README.md).
 | `exp2_comparative` | Fixed-grid comparative benchmark on Adult | [exp2_comparative/README.md](./exp2_comparative/README.md) | `experiments/exp2_comparative/results/`, `outputs/` |
 | `exp2_scaled` | Main robustness benchmark on Adult across seeds and sample sizes | [exp2_scaled/README.md](./exp2_scaled/README.md) | `experiments/exp2_scaled/results/`, `outputs/` |
 | `exp3_cross_dataset` | Completed external-validation package beyond Adult on Breast Cancer and German Credit | [exp3_cross_dataset/README.md](./exp3_cross_dataset/README.md) | `configs/experiments/exp3_cross_dataset/`, `experiments/exp3_cross_dataset/models/`, `experiments/exp3_cross_dataset/results/`, `outputs/` |
+| `exp4_llm_evaluation` | Planned LLM-based semantic proxy evaluation of XAI explanations | [exp4_llm_evaluation/README.md](./exp4_llm_evaluation/README.md) | `experiments/exp4_llm_evaluation/`, `outputs/analysis/exp4_llm_evaluation/` |
 
 ## Recent Change Record
 
@@ -29,6 +30,16 @@ Linux/WSL German Credit partition were merged into
 
 Cross-study integration across EXP1, EXP2, and EXP3 is documented in
 [EXP1-EXP2-EXP3 Integration Pipeline](../analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md).
+
+EXP4 planning is documented in:
+
+- [EXP4 experiment design](./exp4_llm_evaluation/README.md)
+- [EXP4 detailed protocol](./exp4_llm_evaluation/DETAILED_DESIGN.md)
+- [EXP4 rubric v1](./exp4_llm_evaluation/RUBRIC_V1.md)
+- [EXP4 schema v1](./exp4_llm_evaluation/SCHEMA_V1.md)
+- [EXP4 result semantics](../results/exp4_llm_evaluation/README.md)
+- [EXP4 execution plan](../planning/exp4_llm_evaluation_plan.md)
+- [ADR 0013: EXP4 as LLM-Based Semantic Proxy Evaluation](../adr/0013-exp4-llm-semantic-proxy-evaluation.md)
 
 ## Rule
 

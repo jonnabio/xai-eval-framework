@@ -306,12 +306,14 @@ ejemplo, fidelidad como ROAR [@zheng2025] o estabilidad como estimación de la
 constante de Lipschitz local [@canha2025]— pueden producir ordenamientos
 distintos, especialmente en el rango medio de los métodos (Anchors-DiCE).
 
-**Ausencia de evaluación human-centered.** El benchmark es exclusivamente
-funcionally-grounded. La dimensión de comprehensibilidad percibida, utilidad
-para la toma de decisiones y confianza del usuario [@bhattacharya2024] no está
-cubierta. La taxonomía del Estudio C hace explícita esta limitación y la
-localiza en los Ejes 2 y 4, pero los criterios de selección prescriptivos
-derivados no incorporan preferencias de usuarios finales.
+**Ausencia de evaluación semántica y human-centered.** El benchmark es
+exclusivamente *functionally-grounded*. La dimensión de comprehensibilidad
+percibida, utilidad para la toma de decisiones, confianza del usuario y
+coherencia semántica de la explicación [@bhattacharya2024] no está cubierta por
+los resultados confirmativos. La taxonomía del Estudio C hace explícita esta
+limitación y la localiza en los Ejes 2 y 4, pero los criterios de selección
+prescriptivos derivados no incorporan todavía una capa de evaluación semántica
+proxy ni preferencias de usuarios finales.
 
 **Configuraciones de referencia.** Los resultados son válidos bajo las
 configuraciones predeterminadas de cada método (número de muestras de LIME,
@@ -322,7 +324,7 @@ explorada de forma exhaustiva en este benchmark.
 ## Líneas de investigación futura {#sec-futuro}
 
 Los resultados, las limitaciones y la taxonomía del Estudio C convergen en
-señalar cinco extensiones de investigación con fundamento empírico:
+señalar seis extensiones de investigación con fundamento empírico:
 
 **1. Extensión del benchmark a dominios de imagen y texto.** La arquitectura
 experimental del FOM-7 es portátil. Su aplicación a dominios no tabulares
@@ -332,28 +334,39 @@ de características por pixel-flipping o eliminación de tokens) y estabilidad
 dominio). El protocolo FOM-7 está diseñado para acomodar esta extensión sin
 cambios en su lógica de puertas.
 
-**2. Incorporación de evaluación human-centered.** La brecha identificada en
+**2. Evaluación semántica proxy mediante LLMs (EXP4).** La siguiente extensión
+experimental debe introducir una capa de evaluación semántica reproducible
+basada en LLMs como jueces rubricados. Su objetivo no es sustituir la validación
+humana, sino estimar de forma controlada dimensiones que las métricas
+funcionales no capturan directamente: claridad, completitud, concisión, utilidad
+auditora, plausibilidad semántica y capacidad de apoyar la interpretación de una
+decisión. Esta fase permitiría estudiar si las ventajas técnicas observadas en
+fidelidad y estabilidad se corresponden con perfiles semánticos favorables, y
+si explicadores como Anchors obtienen ventajas en claridad o forma discursiva a
+pesar de resultados funcionales más débiles.
+
+**3. Incorporación de evaluación human-centered.** La brecha identificada en
 el Eje 2 (fuente de evidencia) de la taxonomía apunta directamente a la
 necesidad de integrar estudios de usuario en el protocolo. Un estudio con
 usuarios expertos (médicos, analistas de crédito) que evalúen la comprensión
-de las explicaciones de SHAP y LIME complementaría los hallazgos funcionales
-con evidencia de utilidad práctica, completando el espacio de evaluación
-multi-eje.
+de las explicaciones de SHAP y LIME complementaría los hallazgos funcionales y
+la evaluación semántica proxy con evidencia de utilidad práctica, completando
+el espacio de evaluación multi-eje.
 
-**3. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
+**4. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
 benchmark primario opera con configuraciones de referencia. Un diseño factorial
 extendido que varíe sistemáticamente los hiperparámetros clave —número de
 muestras de LIME, estrategia de referencia de SHAP, parámetros de umbral de
 Anchors— permitiría determinar en qué medida los perfiles de calidad obtenidos
 son robustos a la sintonización de cada método.
 
-**4. Replicación en dominios de alto riesgo.** Los criterios prescriptivos
+**5. Replicación en dominios de alto riesgo.** Los criterios prescriptivos
 derivados de este benchmark son válidos bajo el contexto experimental de UCI
 Adult Income. Su validación en dominios regulados (crédito, salud, justicia)
 con restricciones normativas explícitas (EU AI Act, GDPR) constituye la
 extensión de mayor impacto práctico de esta línea de investigación.
 
-**5. Formalización del eje de comprehensibilidad en la taxonomía.** El Eje 4
+**6. Formalización del eje de comprehensibilidad en la taxonomía.** El Eje 4
 (contexto de tarea) de la taxonomía incluye el contexto *usuario final* pero
 no dispone de métricas experimentales en este benchmark. La formalización de
 métricas de comprehensibilidad normalizadas —siguiendo la propuesta de

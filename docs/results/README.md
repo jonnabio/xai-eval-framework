@@ -263,6 +263,7 @@ Start here for family-specific result semantics:
 - [EXP2 Scaled Results](./exp2_scaled/README.md)
 - [EXP2 Scaled Artifact Qualification](./exp2_scaled/QUALIFICATION.md)
 - [EXP3 Cross-Dataset Results](./exp3_cross_dataset/README.md)
+- [EXP4 LLM Evaluation Results](./exp4_llm_evaluation/README.md)
 - [EXP1-EXP2-EXP3 Integration Pipeline](../analysis/EXP1_EXP2_EXP3_INTEGRATION_PIPELINE.md)
 
 EXP3 now has a completed raw result cohort (`24 / 24` planned runs). The
