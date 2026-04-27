@@ -62,6 +62,14 @@ Manuscript integration:
 - EXP4 detailed protocol now defines PhD-level research questions, hypotheses,
   sampling, LLM judge conditions, rubric, schemas, statistical analysis, quality
   gates, and validity threats.
+- EXP4 implementation planning now maps the protocol to concrete modules:
+  schemas, case sampler, prompt renderer, LLM runner, parser, analysis pipeline,
+  tests, and execution commands.
+- EXP4 first-pass code implementation is now present: manifest, Pydantic
+  schemas, EXP2/EXP3 case extraction, prompt rendering, dry-run/provider runner,
+  parser, analysis exports, CLI scripts, and `tests/exp4`. The Windows
+  `.venv-exp3` verification command `python -m pytest tests/exp4` passes with
+  10 tests.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

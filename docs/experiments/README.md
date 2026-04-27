@@ -66,6 +66,7 @@ EXP4 planning documents:
 - [EXP4 experiment design](./exp4_llm_evaluation/README.md)
 - [EXP4 result semantics](../results/exp4_llm_evaluation/README.md)
 - [EXP4 execution plan](../planning/exp4_llm_evaluation_plan.md)
+- [EXP4 implementation plan](../planning/exp4_implementation_plan.md)
 - [ADR 0013](../adr/0013-exp4-llm-semantic-proxy-evaluation.md)
 
 ## Storage Policy

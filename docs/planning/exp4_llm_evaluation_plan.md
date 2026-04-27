@@ -10,6 +10,9 @@ for selected explanation artifacts from EXP2 and EXP3.
 The full scientific protocol is defined in
 [docs/experiments/exp4_llm_evaluation/DETAILED_DESIGN.md](../experiments/exp4_llm_evaluation/DETAILED_DESIGN.md).
 
+The code implementation plan is defined in
+[docs/planning/exp4_implementation_plan.md](./exp4_implementation_plan.md).
+
 ## Objective
 
 Design a reproducible LLM-evaluation workflow that scores XAI explanations on

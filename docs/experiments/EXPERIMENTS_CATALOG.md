@@ -39,6 +39,7 @@ EXP4 planning is documented in:
 - [EXP4 schema v1](./exp4_llm_evaluation/SCHEMA_V1.md)
 - [EXP4 result semantics](../results/exp4_llm_evaluation/README.md)
 - [EXP4 execution plan](../planning/exp4_llm_evaluation_plan.md)
+- [EXP4 implementation plan](../planning/exp4_implementation_plan.md)
 - [ADR 0013: EXP4 as LLM-Based Semantic Proxy Evaluation](../adr/0013-exp4-llm-semantic-proxy-evaluation.md)
 
 ## Rule
