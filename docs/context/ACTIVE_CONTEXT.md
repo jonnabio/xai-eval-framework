@@ -74,6 +74,10 @@ Manuscript integration:
   candidates: 96 from EXP2 Adult and 96 from EXP3 external-validation datasets
   (Breast Cancer and German Credit). The inventory has 192 unique case IDs and
   no empty normalized explanations.
+- EXP4 5-case dry run has been executed end-to-end across the three prompt
+  conditions. It produced 15 dummy LLM judgments, 15 parsed score rows, zero
+  parse failures, and dry-run analysis summaries. These artifacts validate the
+  execution path but are not real LLM evidence.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

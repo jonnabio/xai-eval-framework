@@ -20,7 +20,11 @@ def main() -> None:
     args = parser.parse_args()
 
     summary = analyze_exp4(args.manifest)
-    print(f"Analyzed {summary['score_rows']} score rows from {summary['case_rows']} cases")
+    print(
+        f"Analyzed {summary['score_rows']} score rows from "
+        f"{summary['scored_cases']} scored cases "
+        f"({summary['case_inventory_rows']} inventory cases)"
+    )
     print(f"Analysis directory: {summary['analysis_dir']}")
 
 

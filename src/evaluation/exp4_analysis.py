@@ -42,7 +42,8 @@ def analyze_exp4(manifest_path: Path) -> Dict[str, Any]:
 
     summary = {
         "score_rows": len(scores),
-        "case_rows": len(cases),
+        "case_inventory_rows": len(cases),
+        "scored_cases": scores["case_id"].nunique(),
         "analysis_dir": str(output_dir),
         "outputs": {name: str(output_dir / f"{name}.csv") for name in outputs},
     }
@@ -99,7 +100,11 @@ def _metric_alignment(data: pd.DataFrame) -> pd.DataFrame:
         score_col = f"{score_field}_score"
         for metric_col in metric_cols:
             subset = data[[score_col, metric_col]].dropna()
-            if len(subset) < 3 or subset[metric_col].nunique() < 2:
+            if (
+                len(subset) < 3
+                or subset[metric_col].nunique() < 2
+                or subset[score_col].nunique() < 2
+            ):
                 corr = None
             else:
                 corr = subset[score_col].corr(subset[metric_col], method="spearman")
