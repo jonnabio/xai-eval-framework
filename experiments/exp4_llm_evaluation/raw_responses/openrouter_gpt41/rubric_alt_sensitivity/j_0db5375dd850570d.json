@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_0db5375dd850570d",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_cae54143c3307788_8e89b087e9c734a8.txt",
+  "prompt_version": "8e89b087e9c734a8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest how the user could change the outcome. Only 'age' and 'education_9th' have nonzero values, but no directionality or recourse is given.\",\n    \"audit_usefulness\": \"For audit, the explanation is minimally useful: it identifies which features the model considered most important locally, but the dominance of 'age' and the lack of other contributing factors (all zeros) limits insight into model behavior, especially for a false positive.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their weights. However, it lacks context or interpretation, which may hinder understanding for non-technical reviewers.\",\n    \"completeness\": \"The explanation is incomplete: it only lists numeric weights without describing how these relate to the prediction or why other features are zero. It does not address the model's reasoning or the instance's specifics.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their weights. However, this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is sparse and minimally informative for audit or recourse. It is technically correct but lacks depth, context, and actionable insight.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that 'age' and 'education_9th' could be important for income prediction, but the total absence of other factors (all zeros) is suspicious and may not reflect true model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:04:08.482982+00:00"
+}

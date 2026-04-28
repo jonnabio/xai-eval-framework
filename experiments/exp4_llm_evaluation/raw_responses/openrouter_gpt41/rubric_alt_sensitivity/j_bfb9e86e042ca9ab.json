@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_bfb9e86e042ca9ab",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_49b4fcf4bf2d7761_0513010ce2848a49.txt",
+  "prompt_version": "0513010ce2848a49",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not indicate how changing any feature would affect the prediction. This makes it difficult for a user or auditor to determine what recourse is possible.\",\n    \"audit_usefulness\": \"The explanation identifies which features were anchors for the prediction, but does not provide insight into why the model made a false positive error or how sensitive the prediction is to changes in these features. This limits its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance, but lacks interpretive context or guidance on what the values mean for the specific instance.\",\n    \"completeness\": \"Only a subset of features are highlighted as anchors, with the rest assigned zero importance. There is no information about the actual values of the features for this instance, nor about the directionality of their influence.\",\n    \"concision\": \"The explanation is concise, listing only a few features, but this comes at the cost of informativeness.\",\n    \"overall_quality\": \"While the explanation is formatted clearly and is concise, it lacks actionable, locally informative, and contextually plausible details needed for effective audit or recourse.\",\n    \"semantic_plausibility\": \"The features listed as anchors are plausible in the context of credit scoring, but without more detail or context, it is difficult to assess if the explanation truly reflects the model's reasoning for this specific instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:44:58.619182+00:00"
+}

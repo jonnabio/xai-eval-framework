@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_e5829831b8a3696d",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_aa1ea16859fa26f1_bd6b828d8240b70e.txt",
+  "prompt_version": "bd6b828d8240b70e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local factors and their weights, which could help a user identify which features most influenced the prediction. However, the weights are small and the explanation does not clarify how changes to these features would affect the outcome, limiting its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of features and their contributions, which allows for some inspection of model behavior. However, the lack of context about the instance's actual feature values and the small magnitude of the weights make it difficult to meaningfully audit the decision.\",\n    \"clarity\": \"The explanation is organized as a simple list of features and their associated weights, which is easy to read. However, it lacks any narrative or interpretation, which may hinder understanding for non-technical users.\",\n    \"completeness\": \"The explanation includes the top local factors and their weights, but does not provide the actual values for these features in the instance, nor does it explain the directionality or threshold for the prediction. This limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their weights without unnecessary information. It is compact relative to its content.\",\n    \"overall_quality\": \"While the explanation is concise and clear in format, it lacks depth and context, limiting its usefulness for actionability and audit. It is adequate for a technical audience but insufficient for thorough inspection or recourse.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features are relevant to the adult dataset and the model type. The weights are coherent with the context, though their small magnitude may reduce interpretability.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:57:15.824685+00:00"
+}

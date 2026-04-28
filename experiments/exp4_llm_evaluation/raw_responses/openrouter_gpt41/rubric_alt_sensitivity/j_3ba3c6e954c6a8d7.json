@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_3ba3c6e954c6a8d7",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_8fce321dd80c84b7_480fd171eb8596d7.txt",
+  "prompt_version": "480fd171eb8596d7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not clarify how changing any feature would affect the prediction, nor does it provide actionable guidance for recourse.\",\n    \"audit_usefulness\": \"For audit, the explanation is minimally useful: it identifies which features were anchors for the prediction, but does not indicate directionality, sensitivity, or how robust the prediction is to changes in these features. The lack of confidence or coverage information further limits audit value.\",\n    \"clarity\": \"The explanation is terse and uses technical terms (e.g., 'ANCHORS', feature names with underscores) without elaboration. It is not clear to a non-expert what the numbers mean or how to interpret them.\",\n    \"completeness\": \"Only three features are marked as anchors (with 1.0), and the rest are shown as 0.0. There is no information about the context, the instance's actual values, or how these features interact. The explanation omits important details for a full local understanding.\",\n    \"concision\": \"The explanation is compact, but this comes at the cost of informativeness. While not verbose, it is overly sparse and omits necessary context.\",\n    \"overall_quality\": \"The explanation is technically correct in listing anchor features, but lacks depth, context, and actionable or audit-relevant information. It is not sufficient for thorough model-behavior review.\",\n    \"semantic_plausibility\": \"The features listed as anchors are plausible in the context of credit scoring, but without further context or explanation, it is difficult to assess if these are truly the most important for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:53:34.990959+00:00"
+}

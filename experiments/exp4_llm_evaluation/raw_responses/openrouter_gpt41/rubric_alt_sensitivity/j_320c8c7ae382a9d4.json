@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_320c8c7ae382a9d4",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_228433fa3f4cc5bb.txt",
+  "prompt_version": "228433fa3f4cc5bb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not indicate how changing any feature would affect the prediction or provide actionable guidance for recourse.\",\n    \"audit_usefulness\": \"The explanation identifies which features were anchors for the prediction, but does not clarify how these features interact or why they led to a false negative. It is difficult to audit model behavior or understand the error from this output.\",\n    \"clarity\": \"The explanation is clear in format, but lacks interpretability for a reviewer unfamiliar with the anchor method or the meaning of the binary scores.\",\n    \"completeness\": \"The explanation only lists a subset of features as anchors and ignores others, providing no information about their values or the context of the instance. It is incomplete for thorough audit inspection.\",\n    \"concision\": \"The explanation is concise, listing only a few features, but this comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks the necessary detail to be useful for audit or recourse. It does not provide insight into the model's decision process for this specific instance.\",\n    \"semantic_plausibility\": \"The features listed as anchors are plausible in the context of the Adult dataset, but the binary importance scores are not explained, reducing semantic usefulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:06:39.845721+00:00"
+}

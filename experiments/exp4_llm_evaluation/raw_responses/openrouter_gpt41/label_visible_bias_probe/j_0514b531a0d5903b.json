@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_cc3c47f9ed102eb0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_0514b531a0d5903b",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_cc3c47f9ed102eb0_a5539993b50e276a.txt",
+  "prompt_version": "a5539993b50e276a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_cc3c47f9ed102eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were important (with anchors at 1.0) and which were not (0.0), but does not provide actionable thresholds or guidance for recourse or intervention. Users cannot determine what changes would alter the prediction.\",\n    \"audit_usefulness\": \"The explanation identifies the top local factors influencing the prediction, which is useful for auditing which features the model relied on. However, it lacks detail about the specific values or thresholds that triggered the decision, limiting deeper inspection.\",\n    \"clarity\": \"The explanation is clearly organized as a list of features with associated importance scores. The wording is straightforward and understandable.\",\n    \"completeness\": \"The explanation provides the top local factors and their importance, but omits the actual feature values and does not specify the anchor conditions (e.g., value ranges or rules), which are central to the anchors method.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their importance scores without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks key details (such as anchor conditions and feature values) that would make it fully informative and actionable. It is adequate but not strong.\",\n    \"semantic_plausibility\": \"The explanation is plausible in the context of a breast cancer prediction task, as the listed features are relevant. The use of anchors and importance scores is coherent with the method and context.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:03:10.408874+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_7179b39971c68e60",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_957e2266f53826de.txt",
+  "prompt_version": "957e2266f53826de",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only highlights 'marital-status_Married-civ-spouse' as a factor with full weight, with all other features at zero. This provides no actionable insight for recourse, as it suggests only marital status matters, which is not easily changed or actionable.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It fails to provide a nuanced view of the model's local behavior, as it only anchors on a single categorical feature and ignores all others, making it impossible to understand why the model made a false negative prediction.\",\n    \"clarity\": \"The explanation is technically clear in format, but the content is misleadingly simple and does not clarify the model's reasoning for this instance.\",\n    \"completeness\": \"The explanation is incomplete. It omits any contribution from other features, which is implausible for a logistic regression model on the Adult dataset. This lack of coverage undermines its completeness.\",\n    \"concision\": \"While the explanation is concise, this is due to oversimplification rather than effective summarization. It sacrifices informativeness for brevity.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of audit inspection. It is not locally informative, plausible, or helpful for review or recourse.\",\n    \"semantic_plausibility\": \"It is not semantically plausible that only marital status would determine the model's output in this context, especially for a logistic regression model on a complex dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:07:18.580709+00:00"
+}

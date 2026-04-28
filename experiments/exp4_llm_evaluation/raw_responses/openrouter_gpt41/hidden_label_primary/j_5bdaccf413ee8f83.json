@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_df5a815f94424dc9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_5bdaccf413ee8f83",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\hidden_label_primary\\exp4_df5a815f94424dc9_e74892a01a46f677.txt",
+  "prompt_version": "e74892a01a46f677",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_df5a815f94424dc9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features are anchors (age, education-num, capital-gain) but does not provide actionable information about how changing these features would affect the prediction or what specific values led to the decision. This limits its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it does not specify the values or thresholds that triggered the prediction, making it difficult to audit the model's behavior for this instance.\",\n    \"clarity\": \"The explanation is organized and uses clear labels for each feature, with associated importance scores. However, it lacks detail about what the anchor conditions actually are (e.g., specific value ranges), which reduces clarity.\",\n    \"completeness\": \"The explanation is incomplete because it does not specify the actual feature values or the precise anchor conditions that led to the prediction. It only lists which features are anchors and their importance.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their importance. However, the lack of detail means it is concise at the expense of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal to be useful for inspection, recourse, or auditing. It identifies important features but omits critical information about their values or how they interact to produce the prediction.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible in that it refers to reasonable features for the Adult dataset and uses terminology consistent with anchors explanations. However, the lack of detail about the anchor conditions limits its practical plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:06:54.069040+00:00"
+}

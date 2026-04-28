@@ -2,7 +2,8 @@
 
 ## Status
 
-Status: first implementation pass complete.
+Status: first implementation pass complete; OpenRouter full single-judge
+replicated execution complete.
 
 Implemented components:
 
@@ -544,9 +545,11 @@ python scripts/exp4_analyze_llm_scores.py --manifest configs/experiments/exp4_ll
 7. Implement parser. Completed.
 8. Implement analysis pipeline. Completed.
 9. Run 5-case dry run. Pending execution gate.
-10. Run 24-case pilot. Pending budget/model gate.
-11. Freeze prompt/rubric/schema versions. Pending pilot review.
-12. Run full execution. Pending pilot approval.
+10. Run 24-case pilot. Complete.
+11. Freeze prompt/rubric/schema versions. Complete for OpenRouter GPT-4.1
+    single-judge execution.
+12. Run full execution. Complete for 192 cases, three prompt conditions, and
+    three replicates.
 
 ## Engineering Risks
 

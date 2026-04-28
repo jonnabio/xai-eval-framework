@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_34bcedc7431327c3",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_48bc41dc6e2d3e80.txt",
+  "prompt_version": "48bc41dc6e2d3e80",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or recourse for the user. It is unclear how to change the outcome based on the information provided.\",\n    \"audit_usefulness\": \"The explanation identifies which features were most influential locally, but the dominance of a single feature (education-num) and the presence of many zero-valued features limit insight into model behavior. It is minimally helpful for auditing why this specific false positive occurred.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance, but lacks context or interpretation, which reduces clarity for a reviewer.\",\n    \"completeness\": \"The explanation only provides a ranked list of local feature importances, omitting any information about the instance's actual feature values, the model's confidence, or how these factors led to the prediction.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors and their weights, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks depth, context, and actionable insight. It is not very useful for audit or recourse purposes.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it lists features relevant to the Adult dataset and a logistic regression model, but the overwhelming weight on a single feature and zeros elsewhere may indicate poor local fidelity or an uninformative explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:49:38.343791+00:00"
+}

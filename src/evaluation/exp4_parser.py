@@ -73,9 +73,12 @@ def parse_manifest_responses(manifest_path: Path) -> Dict[str, Any]:
 
 
 def _score_row(envelope: Dict[str, Any], judgment: Exp4Judgment, raw_path: Path) -> Dict[str, Any]:
+    envelope_case_id = envelope.get("case_id")
     row = {
         "judgment_id": envelope.get("judgment_id"),
-        "case_id": judgment.case_id,
+        "case_id": envelope_case_id or judgment.case_id,
+        "response_case_id": judgment.case_id,
+        "case_id_mismatch": bool(envelope_case_id and judgment.case_id != envelope_case_id),
         "judge_model": envelope.get("judge_model"),
         "provider": envelope.get("provider"),
         "model_version": envelope.get("model_version") or envelope.get("judge_model"),
@@ -126,6 +129,8 @@ def _score_fieldnames() -> List[str]:
     fields = [
         "judgment_id",
         "case_id",
+        "response_case_id",
+        "case_id_mismatch",
         "judge_model",
         "provider",
         "model_version",

@@ -108,6 +108,16 @@ Manuscript integration:
   rubric sensitivity. The pilot produced 72 real OpenRouter judgments with zero
   parse failures. The alternate rubric produced substantially lower semantic
   scores, confirming rubric sensitivity as a methodological factor.
+- EXP4 full OpenRouter single-judge replicated execution is complete. The run
+  covers all 192 inventory cases across hidden-label primary, label-visible
+  bias-probe, and alternate-rubric conditions with three replicates per
+  condition, yielding 1,728 real OpenRouter GPT-4.1 judgments and zero parse
+  failures. The PhD-level result note is
+  `docs/results/exp4_llm_evaluation/openrouter_full_replicated_results.md`.
+- EXP4 analysis now excludes the 15 dry-run validation rows from research
+  summaries while retaining them in the parsed-score artifact for execution
+  provenance. Real-analysis outputs are under
+  `outputs/analysis/exp4_llm_evaluation/`.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

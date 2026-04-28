@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d793ddda2393ae14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_dedd57707aaa89c4",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d793ddda2393ae14_7eb9556d4047ab5b.txt",
+  "prompt_version": "7eb9556d4047ab5b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_d793ddda2393ae14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable information for recourse, as it only lists features with binary importance (1.0 or 0.0) and does not indicate how changing any feature would affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not very useful. It only identifies two features as important anchors and assigns all others zero importance, without describing the local decision boundary or providing insight into why the model predicted negative for this instance.\",\n    \"clarity\": \"The explanation is clear in format, but the meaning of the 1.0000 and 0.0000 values is not explicitly defined, which could confuse reviewers unfamiliar with the explainer's output conventions.\",\n    \"completeness\": \"The explanation is incomplete. It omits any discussion of how the identified features interact or why they are decisive, and does not contextualize the instance within the broader feature space.\",\n    \"concision\": \"The explanation is concise, but this comes at the cost of informativeness. It lists features and values without elaboration.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is too sparse, lacks context, and does not support meaningful review of model behavior.\",\n    \"semantic_plausibility\": \"While the features listed are plausible in the breast cancer context, the binary importance scores (1.0 or 0.0) without further explanation make the output semantically shallow and not fully plausible as a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:06:24.196009+00:00"
+}

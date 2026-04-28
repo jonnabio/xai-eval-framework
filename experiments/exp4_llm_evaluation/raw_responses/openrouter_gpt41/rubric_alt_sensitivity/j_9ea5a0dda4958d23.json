@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_9ea5a0dda4958d23",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_cc3c0dfb1a930816.txt",
+  "prompt_version": "cc3c0dfb1a930816",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with their importance, but does not provide actionable guidance for recourse or how to change the prediction. It is not clear what specific changes would alter the model's output.\",\n    \"audit_usefulness\": \"The explanation identifies which features were most influential locally, but the lack of detail about how these features interact or why they matter limits its usefulness for auditing model behavior, especially for understanding this false positive.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., feature:value pairs), which may not be clear to all reviewers. It does not explain what the values mean or how they relate to the prediction.\",\n    \"completeness\": \"Only the top three features are marked as important, with the rest at zero, but there is no context or reasoning provided. The explanation omits how these features led to the specific prediction or why the model erred.\",\n    \"concision\": \"The explanation is compact, listing only the most relevant features and their importance. However, this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks depth, making it difficult to use for thorough audit or recourse. It is not sufficiently informative for model-behavior review.\",\n    \"semantic_plausibility\": \"The features listed as important (education-num, occupation_Exec-managerial, relationship_Husband) are plausible for income prediction, but without further context, it is hard to judge if their influence is reasonable in this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:42:04.185272+00:00"
+}

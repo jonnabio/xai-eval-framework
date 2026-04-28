@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_a0a159b96b4ed790",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_957e2266f53826de.txt",
+  "prompt_version": "957e2266f53826de",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only highlights 'marital-status_Married-civ-spouse' as a factor with any weight, and all other features are shown as having zero influence. This does not provide actionable insight for recourse, as it suggests that only one immutable or hard-to-change feature matters.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It does not provide a nuanced or locally informative view of the model's behavior, especially in a false negative case. The lack of detail about other features' contributions limits the ability to review or challenge the model's decision.\",\n    \"clarity\": \"The explanation is clear in format, but the content is uninformative. Listing all zeros except one feature does not help the reviewer understand the local decision logic.\",\n    \"completeness\": \"The explanation is incomplete. It fails to capture the local context or any interplay between features, and does not explain why the model made a false negative prediction.\",\n    \"concision\": \"While the explanation is compact, it is so sparse that it loses informativeness. Concision here comes at the cost of utility.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is technically correct in format but fails to provide meaningful insight into the model's local behavior.\",\n    \"semantic_plausibility\": \"It is implausible that only one feature would fully determine the outcome in a logistic regression model on the Adult dataset. The explanation does not align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:07:23.428755+00:00"
+}

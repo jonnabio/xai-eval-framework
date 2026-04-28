@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_3c0d54ea86aca0b1",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7b78e47140c1369b_01c0d2765d3f2f89.txt",
+  "prompt_version": "01c0d2765d3f2f89",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights 'capital-gain' as a factor with a nonzero value, and all other features are shown as zero. This does not provide the user with any clear steps or recourse for changing the prediction.\",\n    \"audit_usefulness\": \"For audit purposes, the explanation is of limited use. It identifies 'capital-gain' as the only influential factor, but does not provide insight into the relative importance of other features or the model's behavior in the local context. The lack of detail about other features' potential impact limits its usefulness for reviewing model behavior.\",\n    \"clarity\": \"The explanation is clear in format, listing each feature and its associated value. However, the meaning of the numeric value (e.g., 1.6384 for 'capital-gain') is not explained, which may confuse auditors unfamiliar with the explainer's output.\",\n    \"completeness\": \"The explanation is incomplete. It only provides information about one feature with a nonzero value and does not discuss the potential influence or irrelevance of the other features beyond stating their values as zero.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors and their values. However, this conciseness comes at the expense of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks depth. It fails to provide sufficient information for audit or recourse, and does not contextualize the model's decision in a meaningful way.\",\n    \"semantic_plausibility\": \"It is plausible that 'capital-gain' could be a significant factor in the adult dataset for income prediction, but it is implausible that all other features have zero influence, especially in a complex model like an MLP. This raises concerns about the explanation's faithfulness or the explainer's configuration.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:51:37.863071+00:00"
+}

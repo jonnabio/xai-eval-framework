@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_159ea8d08874e17c",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_44c1e011120b2dd5_784dc740f3ce9269.txt",
+  "prompt_version": "784dc740f3ce9269",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, which could help a user identify which features most influenced the prediction. However, it does not provide actionable guidance or thresholds for recourse, limiting its practical utility for decision support or intervention.\",\n    \"audit_usefulness\": \"The explanation allows an auditor to see which features had the largest impact on the model's decision for this instance, supporting inspection of model behavior. However, the lack of context about feature values or directionality (e.g., what high or low means) limits deeper auditability.\",\n    \"clarity\": \"The explanation is clearly organized as a list of features with associated SHAP values, and the wording is straightforward. However, it assumes familiarity with SHAP values and does not explain what the numbers mean in terms of the prediction.\",\n    \"completeness\": \"The explanation covers the top local factors and their SHAP values, which is generally sufficient for local interpretability. However, it omits the actual feature values and does not clarify how these values relate to the prediction outcome.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors and their SHAP values without unnecessary detail.\",\n    \"overall_quality\": \"The explanation provides a reasonable summary of the model's local decision factors, but lacks context and actionable detail. It is adequate for a technical audience but may not fully support non-expert review or recourse.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features are relevant to breast cancer prediction and the SHAP values are coherent with the context of a random forest model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:44:30.079139+00:00"
+}

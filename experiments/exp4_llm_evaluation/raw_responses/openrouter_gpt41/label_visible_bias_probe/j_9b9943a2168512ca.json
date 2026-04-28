@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_9b9943a2168512ca",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_50e3b33d6c3d012f_9ff05b9e65d2130b.txt",
+  "prompt_version": "9ff05b9e65d2130b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their values, but does not indicate how these values could be changed to alter the prediction or what directionality (positive/negative influence) each factor has. This limits its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"The explanation provides the most influential features and their SHAP values, which allows some inspection of model behavior. However, the lack of directionality and absence of feature values for this instance restricts deeper auditing or understanding of why the model made this specific prediction.\",\n    \"clarity\": \"The explanation is clearly organized as a ranked list of features with associated SHAP values. However, it lacks context about what the SHAP values mean (e.g., direction of influence), which may confuse some users.\",\n    \"completeness\": \"The explanation includes the top local factors and their SHAP values, but omits the direction (positive/negative) and the actual feature values for this instance. This makes it incomplete for fully understanding the local decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their SHAP values without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and somewhat clear, it lacks key information (directionality, feature values) needed for a full semantic account of the model's decision. This limits its overall quality.\",\n    \"semantic_plausibility\": \"The explanation is plausible as a SHAP output for a breast cancer prediction, listing relevant features. However, the lack of directionality and context reduces its semantic informativeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:46:19.160410+00:00"
+}

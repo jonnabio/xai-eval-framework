@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0bb8592dcc826334",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_eebb2f494f0333eb",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_0bb8592dcc826334_e9d291b2d59df59a.txt",
+  "prompt_version": "e9d291b2d59df59a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_0bb8592dcc826334\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or indicate how changes to features would affect the prediction. The lack of direction or thresholds limits its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential, it does not clarify how these values led to the specific prediction or why the model made a false negative. The absence of directionality or context for the feature values limits its utility for auditing model behavior.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated numeric values, but it is not clear what the numbers represent (e.g., coefficients, importance scores, or contributions). The wording is terse and lacks interpretive context.\",\n    \"completeness\": \"Only the top local factors are listed, and most have a value of 0. There is no information about the actual feature values for the instance, nor about how these factors interact or contribute to the decision boundary.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features and their associated values. However, the brevity comes at the expense of informativeness, as most values are zero and the meaning of the numbers is unclear.\",\n    \"overall_quality\": \"The explanation is minimal and lacks interpretability, context, and actionable insights. It does not provide a meaningful semantic account of the model's decision for this instance.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it lists features relevant to the Adult dataset, but the dominance of zeros and lack of context for the nonzero values make it difficult to understand how the model arrived at its prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:36:25.648096+00:00"
+}

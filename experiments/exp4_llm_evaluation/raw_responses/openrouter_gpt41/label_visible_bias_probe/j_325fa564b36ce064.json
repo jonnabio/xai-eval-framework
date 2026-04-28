@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_325fa564b36ce064",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_07f7eab6526a79eb_3fd6b0b474bcc33b.txt",
+  "prompt_version": "3fd6b0b474bcc33b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable insights or guidance for recourse. Users cannot easily determine what changes would alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies which features influenced the prediction and their direction, the small and similar magnitudes make it difficult to audit for bias or errors. The lack of context about feature values further limits auditability.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated weights, which is clear in format. However, the meaning of the weights and their impact on the decision may not be immediately understandable to non-experts.\",\n    \"completeness\": \"The explanation provides the top local factors and their weights, but omits the actual feature values for this instance, which are necessary to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their weights without unnecessary information.\",\n    \"overall_quality\": \"The explanation is a standard LIME output, but lacks context and actionable detail. It is clear and concise, but incomplete and of limited practical use for auditing or recourse.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it lists reasonable features for the Adult dataset and assigns weights that could influence the model's decision. However, without feature values, the semantic connection to the specific case is weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:34:12.518612+00:00"
+}

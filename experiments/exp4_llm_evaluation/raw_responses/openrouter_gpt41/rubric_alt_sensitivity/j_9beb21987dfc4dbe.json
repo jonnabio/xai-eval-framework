@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_79966d2bb70844bf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_9beb21987dfc4dbe",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_79966d2bb70844bf_36499c7c462af718.txt",
+  "prompt_version": "36499c7c462af718",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_79966d2bb70844bf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors and their weights, but does not provide actionable guidance or suggest how a user could change the outcome. Most factors are zero, and the only nonzero, actionable feature is 'education-num', but no direction or threshold is given.\",\n    \"audit_usefulness\": \"For audit, the explanation is of limited use. It identifies 'education-num' as the main factor, but the presence of many zero-weighted features and lack of context or thresholds makes it hard to assess model behavior or fairness. The explanation does not clarify why the prediction was made or how sensitive it is to changes.\",\n    \"clarity\": \"The explanation is terse and uses a clear format, but the meaning of the weights (e.g., 4.6840) is not explained, nor is their impact on the prediction. The use of underscores and feature names is readable but not user-friendly.\",\n    \"completeness\": \"The explanation only lists a subset of features, most of which have zero contribution. It does not explain the model's decision process, the meaning of the weights, or how the features interact. Important context is missing.\",\n    \"concision\": \"The explanation is concise, but this comes at the cost of informativeness. Listing many zero-weight features is not helpful and wastes space.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is technically correct in listing local factors, but lacks interpretability, context, and actionable insights.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that 'education-num' can be important for income prediction, but the presence of a nonzero 'native-country_England' with no context, and all other features at zero, raises questions about the model's behavior and the explanation's faithfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:51:27.316976+00:00"
+}

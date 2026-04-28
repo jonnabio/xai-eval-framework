@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_a94fc3d4aaae1394",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_50e3b33d6c3d012f_091ea55d58863d63.txt",
+  "prompt_version": "091ea55d58863d63",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features and their SHAP values, which could help a reviewer identify which aspects of the input most influenced the model's prediction. However, it does not provide guidance on how to change the outcome or what recourse might be possible.\",\n    \"audit_usefulness\": \"The explanation is locally informative, showing which features contributed most to the prediction for this instance. This is helpful for auditing model behavior, as it allows inspection of feature importance at the instance level. However, the lack of directionality (positive/negative influence) and absence of context about feature values or thresholds limits deeper audit insights.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values in descending order. However, it does not specify whether the contributions are positive or negative, which could cause some ambiguity.\",\n    \"completeness\": \"The explanation covers the top local factors and their SHAP values, which is generally sufficient for local interpretability. However, it omits the direction of influence and does not relate the features to their actual values or the model's decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary detail, focusing on the most important features and their SHAP values.\",\n    \"overall_quality\": \"The explanation is clear, concise, and locally informative, making it useful for audit inspection. Its main limitations are the lack of directionality and actionable guidance, but it is otherwise plausible and contextually appropriate.\",\n    \"semantic_plausibility\": \"The features listed are medically relevant and plausible for breast cancer prediction, and the SHAP values are reasonable. The explanation aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:45:57.218444+00:00"
+}

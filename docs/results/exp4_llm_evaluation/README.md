@@ -14,13 +14,16 @@ Status:
 - fixed case inventory generated;
 - 5-case dry run completed;
 - OpenRouter one-case connectivity pilot completed;
-- OpenRouter 24-case hidden-label pilot completed.
+- OpenRouter 24-case hidden-label pilot completed;
+- OpenRouter 24-case three-condition pilot completed;
+- OpenRouter full 192-case, three-condition, three-replicate execution completed.
 
 Current result notes:
 
 - [OpenRouter pilot results](./openrouter_pilot_results.md)
 - [OpenRouter label-visible bias-probe results](./openrouter_bias_probe_results.md)
 - [OpenRouter 24-case complete pilot](./openrouter_24_case_pilot_complete.md)
+- [OpenRouter full replicated results](./openrouter_full_replicated_results.md)
 - [Attribution versus explanation interpretation note](./attribution_vs_explanation_note.md)
 
 ## Planned Raw Artifact Root

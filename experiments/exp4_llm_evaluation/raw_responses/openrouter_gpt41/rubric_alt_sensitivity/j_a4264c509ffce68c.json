@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7e9b6f55ee9b538e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_a4264c509ffce68c",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7e9b6f55ee9b538e_e83f6f65a6cc453e.txt",
+  "prompt_version": "e83f6f65a6cc453e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_7e9b6f55ee9b538e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local SHAP factors and their contributions, but does not provide actionable guidance or suggest recourse for the individual. It is not clear how a user could use this information to change the outcome.\",\n    \"audit_usefulness\": \"The explanation is locally informative by ranking the most influential features for this instance, which is helpful for auditing model behavior. However, the lack of context (e.g., feature values, directionality relative to the prediction) limits its usefulness for a thorough audit.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values. However, it lacks context about what the values mean (e.g., are positive values pushing towards approval or denial?), which may confuse auditors unfamiliar with the model.\",\n    \"completeness\": \"The explanation covers the top 10 local features, which is generally sufficient for local interpretability. However, it omits the actual feature values and does not clarify the direction of the prediction, reducing completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their SHAP values without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is concise and somewhat informative, the lack of context and actionable insight limits its overall quality for audit and recourse purposes.\",\n    \"semantic_plausibility\": \"The features and their contributions are plausible in the context of credit scoring, and the SHAP values are reasonable. However, without knowing the actual feature values, full plausibility is harder to assess.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:52:01.029531+00:00"
+}

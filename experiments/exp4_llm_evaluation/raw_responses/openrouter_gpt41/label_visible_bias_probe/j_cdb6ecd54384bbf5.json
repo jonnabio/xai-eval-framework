@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_cdb6ecd54384bbf5",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_dc2b678dea61424b_7ea0b02dd339bb98.txt",
+  "prompt_version": "7ea0b02dd339bb98",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were anchors for the prediction, but does not provide actionable guidance or suggest how a user could change the outcome. The binary anchor values are not directly interpretable for recourse.\",\n    \"audit_usefulness\": \"The explanation identifies which features were decisive (anchors) for the model's prediction, which is useful for auditing. However, it lacks detail about how these features interact or why they are anchors, limiting deeper inspection.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated anchor values, which is clear in format. However, the meaning of the anchor values (1.0000 or 0.0000) is not explained, which may confuse users unfamiliar with the method.\",\n    \"completeness\": \"The explanation covers the top local factors and their anchor status, but does not provide information about the instance's actual feature values or how the anchors led to the prediction. This limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their anchor status without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and somewhat clear, it lacks depth and actionable detail. The absence of context for the anchor values and the lack of instance-specific information reduce its overall quality.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible as an output from the Anchors method, and the listed features are reasonable factors for the Adult dataset. However, the simultaneous presence of mutually exclusive education levels (7th-8th and Masters) as anchors is implausible, suggesting a possible issue with the explanation's coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:05:18.921385+00:00"
+}

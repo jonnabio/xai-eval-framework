@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_b6cfd88e8b17c174",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_c71f9ed1b1a0812a_e3f55a6b15885138.txt",
+  "prompt_version": "e3f55a6b15885138",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is minimally actionable. Only 'hours-per-week' has a substantial nonzero value, suggesting that increasing or decreasing work hours could affect the prediction. However, the lack of actionable information for other features limits recourse options.\",\n    \"audit_usefulness\": \"For audit purposes, the explanation is weak. It identifies 'hours-per-week' as the only influential factor, but provides no insight into why other features are zero or how sensitive the model is to changes in them. This limits the ability to review model behavior or detect potential issues.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance scores. However, the meaning of the numeric values (e.g., 3.5972) is not explained, which may confuse auditors unfamiliar with the explainer's output scale.\",\n    \"completeness\": \"The explanation is incomplete. It lists several features but assigns zero importance to most, without justification or context. It does not explain the model's decision process or the local context beyond the single dominant feature.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features and their scores. However, the inclusion of many zero-valued features adds unnecessary length without informative value.\",\n    \"overall_quality\": \"Overall, the explanation is below average for audit inspection. It is clear and concise but lacks depth, context, and actionable insights. It does not support thorough model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"It is plausible that 'hours-per-week' is influential in the adult income dataset, but the complete absence of influence from other features (e.g., age, education) is questionable and may indicate a limitation of the explainer or model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:03:46.327788+00:00"
+}

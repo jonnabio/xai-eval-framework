@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_c161bc59d6853155",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_c3a6d29157145c8e_89bc9ebdf96dfad7.txt",
+  "prompt_version": "89bc9ebdf96dfad7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the most influential features and their SHAP values, which could help a domain expert or practitioner identify which aspects of the input most affected the prediction. However, it does not provide actionable guidance or thresholds for intervention, limiting its practical utility for recourse.\",\n    \"audit_usefulness\": \"The explanation identifies the top contributing features and their relative importance, supporting inspection of which variables the model relied on. However, it lacks directionality (whether each feature increased or decreased the prediction) and does not contextualize the values, which limits deeper auditing.\",\n    \"clarity\": \"The explanation is clearly organized as a ranked list of features with associated SHAP values. The wording is straightforward and understandable for users familiar with SHAP or feature importance explanations.\",\n    \"completeness\": \"The explanation provides the top ten local factors and their SHAP values, which is generally sufficient for understanding the main drivers of the prediction. However, it omits the direction of influence and the actual feature values for this instance, which are important for full completeness.\",\n    \"concision\": \"The explanation is concise, presenting only the most relevant features and their SHAP values without unnecessary detail or repetition.\",\n    \"overall_quality\": \"The explanation is a clear and concise summary of the main local factors influencing the model's decision. It is semantically plausible and useful for inspection, but lacks directionality and actionable detail, which limits its utility for recourse or deeper audit.\",\n    \"semantic_plausibility\": \"The explanation is coherent with the context of a breast cancer prediction task and the use of SHAP with a random forest model. The listed features are plausible and relevant for this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:00:41.656431+00:00"
+}

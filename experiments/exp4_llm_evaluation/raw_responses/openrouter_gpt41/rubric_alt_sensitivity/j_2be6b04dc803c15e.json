@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_2be6b04dc803c15e",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_07197d290136f3e3_95c160d850f3cde2.txt",
+  "prompt_version": "95c160d850f3cde2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were anchors for the prediction, but does not provide actionable guidance for recourse or indicate how changing features would affect the outcome. The binary presentation (1.0 or 0.0) is not user-friendly for action planning.\",\n    \"audit_usefulness\": \"The explanation identifies which features were critical for the model's local decision, but the lack of detail about how these features interact or why they matter limits its usefulness for auditing model behavior, especially in a false negative case.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., feature: 1.0000), which may not be clear to auditors or stakeholders unfamiliar with the anchors method or the dataset's feature encoding.\",\n    \"completeness\": \"Only the presence or absence of features as anchors is shown, with no information about feature values, thresholds, or the local context of the instance. This is insufficient for a full understanding of the model's reasoning.\",\n    \"concision\": \"The explanation is compact, listing only relevant features and their anchor status. However, the brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"The explanation is minimal and technically correct, but lacks the detail, context, and interpretability needed for effective audit or recourse. It does not support a thorough review of the model's behavior in this FN case.\",\n    \"semantic_plausibility\": \"The features listed as anchors (education-num, capital-gain, capital-loss) are plausible as important for income prediction, but the explanation does not clarify how they contributed to the specific prediction or why others were not anchors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:33:50.424658+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_998a172c9fcda16e",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_03f9ac9f3ab42b8b_d0c259d7e8d33c2d.txt",
+  "prompt_version": "d0c259d7e8d33c2d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local SHAP factors with their contributions, which could help a user or auditor identify which features most influenced the model's decision. However, it does not provide actionable guidance or suggest what changes could alter the outcome.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is moderately useful: it clearly identifies which features had the largest impact on the prediction, allowing an auditor to check for reasonableness or bias. However, it lacks context about the instance's actual feature values and does not explain why these features matter in this specific case.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values. However, it assumes familiarity with SHAP and the dataset's feature encoding, which may limit clarity for some reviewers.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values for this instance and does not provide the model's confidence. This limits the ability to fully understand the decision context.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions without unnecessary detail.\",\n    \"overall_quality\": \"Overall, the explanation is compact and locally informative, but lacks some context (feature values, confidence) that would make it more useful for thorough audit or recourse. It is plausible and helpful, but not optimal.\",\n    \"semantic_plausibility\": \"The listed features and their directions are plausible in the context of the Adult dataset and a logistic regression model. The factors align with known influences on income prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:31:34.066515+00:00"
+}

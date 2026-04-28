@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_f34489d2ea359c49",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_b60690c60417e4de_e4fc48b0b71a433e.txt",
+  "prompt_version": "e4fc48b0b71a433e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top contributing features and their weights, but does not provide actionable guidance or suggest what changes could alter the prediction. It is not tailored for recourse or decision support beyond feature inspection.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the model's decision and their directionality, which is useful for auditing. However, the lack of context about feature values and absence of confidence or threshold information limits deeper inspection.\",\n    \"clarity\": \"The explanation is clearly organized as a list of features with associated weights, and the wording is straightforward. However, it assumes familiarity with the dataset's feature encoding.\",\n    \"completeness\": \"The explanation provides the top local factors and their weights, but omits the actual feature values for this instance and does not explain how these weights combine to yield the prediction. This limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their weights without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks completeness and actionability due to missing feature values and absence of guidance for recourse. It is adequate for basic inspection but limited for deeper review.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features and their directions are reasonable for a logistic regression model on the Adult dataset. The weights are small but coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:59:08.531436+00:00"
+}

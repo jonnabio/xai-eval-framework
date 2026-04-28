@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_fbc9ce50ddf0f883",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_5a283f4d6f1cf5e1_01b3b845347ee09d.txt",
+  "prompt_version": "01b3b845347ee09d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features and their contributions, which could help a user identify which factors to change for a different outcome. However, the magnitudes are small and the directionality is not always intuitive, limiting practical recourse.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local feature importances, which is useful for auditing the model's behavior on this instance. However, the small coefficients and lack of context about the instance's actual values reduce its utility for deeper inspection.\",\n    \"clarity\": \"The explanation is clear in format, with each feature and its weight listed. However, it lacks context about what the values mean for this specific instance, which could confuse auditors unfamiliar with the dataset.\",\n    \"completeness\": \"The explanation covers the top local factors, but omits the actual feature values for the instance, which are important for a full audit. It also does not explain the absence of other potentially relevant features.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their weights without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is clear and concise, its lack of instance-specific context and the small, hard-to-interpret coefficients limit its usefulness for audit and recourse. It is a standard LIME output, but could be improved for audit purposes.\",\n    \"semantic_plausibility\": \"The features listed are plausible and relevant for the Adult dataset and logistic regression. The directions of influence generally make sense, though the small magnitudes may not be meaningful.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:47:27.234049+00:00"
+}

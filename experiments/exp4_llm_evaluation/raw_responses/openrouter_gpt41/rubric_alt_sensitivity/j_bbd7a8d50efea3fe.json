@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_bbd7a8d50efea3fe",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_5169d5420efbc3da_4a70e6f78f8098a5.txt",
+  "prompt_version": "4a70e6f78f8098a5",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse, as it only lists two features (education-num and occupation_Farming-fishing) as anchors with maximum importance, without indicating how changing these would affect the prediction or what specific values are relevant.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not very useful. It lacks detail about the local decision boundary, does not clarify why the model made a false negative, and does not help identify potential sources of error or bias.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., feature: value) without context or interpretation, making it unclear to a reviewer unfamiliar with the anchor method or the dataset's feature encoding.\",\n    \"completeness\": \"The explanation is incomplete. It only highlights two features as anchors and assigns zero importance to all others, without describing the instance's actual values or how these features interact to produce the prediction.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits necessary context and interpretability, sacrificing informativeness for brevity.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of an audit: it is not clear, actionable, or sufficiently informative for reviewing model behavior or supporting recourse.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible in context. Assigning 1.0 to only two features and 0.0 to all others, without further detail, does not plausibly reflect the complexity of a logistic regression decision, especially for a false negative case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:46:08.525299+00:00"
+}

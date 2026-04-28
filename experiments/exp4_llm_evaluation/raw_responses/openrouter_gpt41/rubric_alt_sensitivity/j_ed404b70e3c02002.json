@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_ed404b70e3c02002",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_228433fa3f4cc5bb.txt",
+  "prompt_version": "228433fa3f4cc5bb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not indicate how changing any feature would affect the prediction or provide actionable recourse for the user.\",\n    \"audit_usefulness\": \"The explanation identifies which features were anchors for the prediction, but does not clarify how these features interact or why they led to a false negative. It lacks detail for a thorough audit of model behavior.\",\n    \"clarity\": \"The format is clear in listing features and their importance, but the meaning of the anchor values (all 1.0 or 0.0) is not explained, which may confuse auditors unfamiliar with the explainer.\",\n    \"completeness\": \"The explanation only lists a subset of features as anchors and ignores others, providing no information about their possible influence or the context of the instance. It is incomplete for a full local review.\",\n    \"concision\": \"The explanation is concise, listing only a few features, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks actionable or locally informative content for effective audit or recourse. It does not provide sufficient insight into the model's decision process.\",\n    \"semantic_plausibility\": \"The features listed as anchors are plausible in the context of the Adult dataset, but the binary importance values and lack of explanation for their selection reduce semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:06:44.735412+00:00"
+}

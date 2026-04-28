@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_6f4a2d9eb0c8d43b",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_103d89f1e4cb72f6_d8fbd86797345509.txt",
+  "prompt_version": "d8fbd86797345509",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest what changes could alter the prediction. The user cannot easily determine what to do for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally useful for audit: it identifies which features had nonzero influence, but most are zero, and the only nonzero factor is 'capital-gain'. This does not provide a nuanced view of model behavior for this instance.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance, but the meaning of the numeric values (e.g., 8.9161 for capital-gain) is not explained, reducing interpretability.\",\n    \"completeness\": \"The explanation is incomplete: it only lists a few features with nonzero or zero values, and does not contextualize why the prediction was made or how the features interact.\",\n    \"concision\": \"The explanation is concise, but this is due to lack of detail rather than effective summarization. It omits potentially relevant information for understanding the decision.\",\n    \"overall_quality\": \"Overall, the explanation is not very useful for audit or recourse. It is clear and concise, but lacks depth, context, and actionable insights.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that 'capital-gain' could be important for income prediction, but the dominance of a single feature and zeros elsewhere is suspicious and may not reflect true model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:38:28.383695+00:00"
+}

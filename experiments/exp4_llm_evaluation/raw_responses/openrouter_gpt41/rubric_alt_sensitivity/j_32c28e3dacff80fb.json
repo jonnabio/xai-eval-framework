@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_32c28e3dacff80fb",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_3c34585b1d65d81e_e871edc4eb1796e6.txt",
+  "prompt_version": "e871edc4eb1796e6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local factors and their weights, which could help a user identify which features to change for recourse. However, the weights are small and the explanation does not clarify the direction or magnitude of change needed for a different outcome, limiting practical actionability.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation provides a clear ranking of influential features for this instance, which is useful for understanding model behavior. However, the lack of context (e.g., actual feature values, prediction confidence) and the small, similar weights make it harder to judge the model's reasoning or spot issues.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their weights. However, it lacks context about what the weights mean in terms of the model's decision, and does not explain the sign or scale of the weights.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values for this instance and does not provide the model's confidence. This limits the completeness for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors with their weights. There is no unnecessary information.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks important context (feature values, confidence) and the weights are not very interpretable without further information. It is moderately useful for audit but not ideal.\",\n    \"semantic_plausibility\": \"The listed features (capital-gain, marital-status, occupation, sex, education) are plausible factors for income prediction in the Adult dataset. The signs of the weights are also reasonable.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:42:43.501243+00:00"
+}

@@ -2,7 +2,12 @@
 
 ## Status
 
-Status: planned, not executed.
+Status: full single-judge replicated execution complete.
+
+The OpenRouter `openrouter_gpt41` execution completed the 192-case inventory
+across three prompt conditions and three replicates, producing 1,728 real LLM
+judgments with zero parse failures. The design remains open for a future
+second-judge extension.
 
 EXP4 is the next experiment family after the completed EXP3 external-validation
 package. It is intentionally defined as an LLM-based semantic proxy evaluation

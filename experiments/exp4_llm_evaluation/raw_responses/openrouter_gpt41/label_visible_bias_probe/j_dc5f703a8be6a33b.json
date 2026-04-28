@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_dc5f703a8be6a33b",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_0f6578287491844e_5b8db3fcdff02ccf.txt",
+  "prompt_version": "5b8db3fcdff02ccf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, which could help a user identify which features most influenced the negative prediction. However, it does not provide actionable guidance or suggest what changes could alter the outcome.\",\n    \"audit_usefulness\": \"The explanation allows an auditor to see which features had the largest impact on the prediction and in which direction, supporting inspection for potential bias or unexpected model behavior. However, the lack of feature values and context limits deeper auditability.\",\n    \"clarity\": \"The explanation is clearly organized as a ranked list of features with associated SHAP values, and the wording is straightforward. However, some feature names may be cryptic to non-experts.\",\n    \"completeness\": \"The explanation covers the top local factors and their contributions, but does not provide the actual feature values for this instance or the model's overall confidence, which limits full inspection of the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their SHAP values without unnecessary detail.\",\n    \"overall_quality\": \"The explanation is a standard SHAP output that is clear and concise, and provides a plausible account of the model's decision. However, it lacks some context (feature values, confidence) that would make it more actionable and complete.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features and their directions are reasonable for a credit decision context and align with the model's negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:38:06.034261+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_8569f49081305637",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_e21903bfbf430049",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_8569f49081305637_83df3b708414ba27.txt",
+  "prompt_version": "83df3b708414ba27",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_8569f49081305637\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local factors with their importance, but does not provide actionable insights or suggestions for recourse. Users cannot easily determine what changes would alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential, it lacks detail on how these features interact or thresholds that trigger the prediction, limiting its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated importance scores, which is clear in format. However, the meaning of the scores (e.g., why some are 1.0 and others 0.0) is not explained, which may confuse non-expert users.\",\n    \"completeness\": \"Only the top local factors are shown, with binary-like importance values. There is no information about how these features combine to produce the prediction, nor about the role of features with 0.0 importance.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features and their scores without unnecessary detail.\",\n    \"overall_quality\": \"The explanation provides a basic, readable summary of which features mattered most, but lacks depth, context, and actionable detail. It is adequate for a quick glance but insufficient for thorough inspection or recourse.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it highlights relevant features for credit decisions (e.g., duration, checking status, purpose), but the binary scoring and lack of context reduce its interpretability.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:52:36.898921+00:00"
+}

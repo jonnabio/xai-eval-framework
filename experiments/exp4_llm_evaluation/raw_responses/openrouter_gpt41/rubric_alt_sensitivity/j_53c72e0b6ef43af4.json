@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_53c72e0b6ef43af4",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d68ee28a2b213ee2_e0a3ddd927066fb1.txt",
+  "prompt_version": "e0a3ddd927066fb1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse, as it only lists features with binary importance (1.0 or 0.0) and does not indicate how changing any feature would affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful: it lacks detail about how the listed features contributed to the false negative, and the binary importance scores do not help reviewers understand model behavior or errors.\",\n    \"clarity\": \"The explanation is clear in format but not in meaning; it is not obvious what '1.0000' or '0.0000' mean in this context, and there is no explanation of how these values relate to the prediction.\",\n    \"completeness\": \"The explanation is incomplete: it only lists a few features with binary scores and omits any discussion of feature values, thresholds, or interactions relevant to the instance.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits critical information needed for understanding or review.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide useful, actionable, or locally informative insights for audit or recourse. It is not plausible or helpful for reviewing model behavior in this false negative case.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible: it is unlikely that only two features (mean perimeter and worst perimeter) fully determine the prediction, and the binary scoring is not credible for a complex model like a random forest.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:06:13.951847+00:00"
+}

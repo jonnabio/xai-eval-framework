@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_9817211b4c04f39f",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_c70818c7cb4297fc.txt",
+  "prompt_version": "c70818c7cb4297fc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features and their weights, but the magnitudes are extremely small and do not clearly indicate actionable changes for recourse. It is unclear what a user or auditor could do to meaningfully alter the prediction based on this information.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local factors, but the very low absolute values of the coefficients suggest minimal influence on the prediction. This makes it difficult for an auditor to understand why the model made a false negative error or to identify potential issues in model behavior.\",\n    \"clarity\": \"The format is clear and the features are named, but the meaning of the small weights is not explained, and there is no context for how these values relate to the model's decision.\",\n    \"completeness\": \"The explanation includes the top local factors, but omits any information about the overall prediction confidence, the directionality of the prediction, or how these features interact. It does not provide enough context for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top factors, but this brevity comes at the cost of informativeness, as the listed values are too small to be meaningful.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is clear and compact, but lacks local informativeness, actionable insight, and plausible connection to the model's behavior in this context.\",\n    \"semantic_plausibility\": \"While the features themselves are plausible for the Adult dataset, the extremely small weights make it implausible that these factors meaningfully contributed to the prediction. This reduces trust in the explanation's faithfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:01:02.572109+00:00"
+}

@@ -20,10 +20,11 @@ def analyze_exp4(manifest_path: Path) -> Dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     scores = pd.read_csv(scores_path)
+    analysis_scores = _analysis_scope(scores)
     cases = pd.DataFrame([case.model_dump(mode="json") for case in read_cases_jsonl(cases_path)])
     metrics = pd.json_normalize(cases["technical_metrics"]).add_prefix("metric_")
     cases_flat = pd.concat([cases.drop(columns=["technical_metrics"]), metrics], axis=1)
-    data = scores.merge(cases_flat, on="case_id", how="left")
+    data = analysis_scores.merge(cases_flat, on="case_id", how="left")
 
     outputs = {
         "score_summary": _score_summary(data),
@@ -41,14 +42,24 @@ def analyze_exp4(manifest_path: Path) -> Dict[str, Any]:
     (output_dir / "thesis_fragment_es.qmd").write_text(_thesis_fragment_es(data, outputs), encoding="utf-8")
 
     summary = {
-        "score_rows": len(scores),
+        "parsed_score_rows": len(scores),
+        "score_rows": len(analysis_scores),
+        "excluded_non_real_rows": len(scores) - len(analysis_scores),
         "case_inventory_rows": len(cases),
-        "scored_cases": scores["case_id"].nunique(),
+        "scored_cases": analysis_scores["case_id"].nunique(),
         "analysis_dir": str(output_dir),
         "outputs": {name: str(output_dir / f"{name}.csv") for name in outputs},
     }
     (output_dir / "exp4_analysis_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     return summary
+
+
+def _analysis_scope(scores: pd.DataFrame) -> pd.DataFrame:
+    """Use real LLM judgments when present, preserving dry-run-only workflows."""
+    judge_model = scores["judge_model"].fillna("").astype(str).str.lower()
+    dry_run_like = judge_model.str.contains("dummy|dry-run|dry_run", regex=True)
+    real_scores = scores[~dry_run_like].copy()
+    return real_scores if not real_scores.empty else scores.copy()
 
 
 def _score_summary(data: pd.DataFrame) -> pd.DataFrame:
@@ -144,7 +155,7 @@ def _summary_markdown(data: pd.DataFrame, outputs: Dict[str, pd.DataFrame]) -> s
     lines = [
         "# EXP4 LLM Evaluation Analysis Summary",
         "",
-        f"- Parsed judgments: {len(data)}",
+        f"- Analyzed judgments: {len(data)}",
         f"- Unique cases: {data['case_id'].nunique()}",
         f"- Judge models: {', '.join(sorted(map(str, data['judge_model'].dropna().unique())))}",
         f"- Prompt conditions: {', '.join(sorted(map(str, data['prompt_condition'].dropna().unique())))}",

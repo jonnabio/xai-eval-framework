@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_15b85fdefe2b99c7",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_27ff1641b5ef1b1a_b65ab3f83091647e.txt",
+  "prompt_version": "b65ab3f83091647e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, but does not provide actionable guidance or suggest how to change the outcome. It is not clear how a user could use this information for recourse or decision support beyond seeing which features contributed most.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the prediction and their direction, which is useful for auditing the model's behavior on this instance. However, it lacks context about feature values or thresholds, limiting deeper inspection.\",\n    \"clarity\": \"The explanation is clearly organized as a list of features with associated SHAP values, and the negative values are easy to interpret as contributing to the negative class. However, it assumes familiarity with SHAP and the feature names.\",\n    \"completeness\": \"The explanation provides the top local factors and their SHAP values, which is sufficient for understanding the main contributors to the prediction. However, it does not include the actual feature values or how close they are to decision boundaries.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors and their SHAP values without unnecessary detail.\",\n    \"overall_quality\": \"The explanation is a standard SHAP output that is clear and concise, and provides enough information to understand the main drivers of the prediction. However, it lacks actionable detail and deeper context for thorough auditing or recourse.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible: the listed features are known to be relevant in breast cancer prediction, and the negative SHAP values align with a negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:40:38.470560+00:00"
+}

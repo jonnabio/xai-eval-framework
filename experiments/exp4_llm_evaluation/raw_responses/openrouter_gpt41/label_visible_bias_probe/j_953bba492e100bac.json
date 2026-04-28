@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_953bba492e100bac",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_b2fb50fe3096e9d2_411f3ba8dab4c4d7.txt",
+  "prompt_version": "411f3ba8dab4c4d7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were important for the prediction, but does not provide actionable guidance or indicate how changing any feature would affect the outcome. This limits its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation identifies the features that anchored the prediction, it does not provide enough detail to understand why these features led to the specific prediction or how robust the decision is to changes in these features. This limits its value for auditing model behavior.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated importance scores, which is clear in format. However, the meaning of the scores (all 1.0000 or 0.0000) and their implications are not explained, which may confuse users unfamiliar with the anchor method.\",\n    \"completeness\": \"The explanation only lists a subset of features as anchors and assigns binary importance, omitting how non-anchor features may have influenced the prediction. It lacks context about the instance's actual feature values and does not explain the model's reasoning process.\",\n    \"concision\": \"The explanation is concise, presenting only the most relevant features and their importance. However, this brevity comes at the cost of omitting useful context and interpretability.\",\n    \"overall_quality\": \"The explanation provides a minimal semantic account of the model's decision, identifying which features were anchors, but lacks depth, context, and actionable insights. It is clear in structure but insufficient for thorough inspection or recourse.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it identifies features that could reasonably influence a credit decision, but without more context or justification, it is difficult to assess the coherence of the explanation with the specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:58:52.301419+00:00"
+}

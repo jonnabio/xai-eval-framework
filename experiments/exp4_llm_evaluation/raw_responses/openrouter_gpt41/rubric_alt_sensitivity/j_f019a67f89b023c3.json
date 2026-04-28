@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_f019a67f89b023c3",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ec3d891e0d43658f_35f8b068974a029f.txt",
+  "prompt_version": "35f8b068974a029f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not indicate how changing any feature would affect the prediction, nor does it provide actionable guidance for recourse.\",\n    \"audit_usefulness\": \"The explanation identifies which features were anchors for the prediction, but the binary presentation (1.0 or 0.0) lacks nuance and does not help an auditor understand the model's local behavior or sensitivity to changes.\",\n    \"clarity\": \"The explanation is clear in format, but the meaning of the binary values is not explained, and the lack of context for what constitutes an 'anchor' may confuse reviewers unfamiliar with the method.\",\n    \"completeness\": \"The explanation only highlights three features as anchors and ignores all others, providing no information about the role or influence of the remaining features, which limits completeness.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their anchor status, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks the detail needed for effective audit or recourse. It is not sufficiently informative for model-behavior review.\",\n    \"semantic_plausibility\": \"The features identified as anchors are plausible in the context of credit scoring, but the lack of detail about their effect or thresholds reduces the semantic value.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:09:44.680680+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_084580efd1317ebc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_a03d2e22cdbd41d3",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_084580efd1317ebc_caf5d94e79a53a14.txt",
+  "prompt_version": "caf5d94e79a53a14",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_084580efd1317ebc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest what changes could alter the prediction. The user cannot easily infer what to do for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it is not very informative for audit purposes because it lacks context about the instance, the direction of influence, or how these values compare to typical thresholds.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance scores, but it does not explain what the numbers mean or how they relate to the prediction outcome.\",\n    \"completeness\": \"The explanation is incomplete: it does not specify the instance's actual feature values, the direction of influence (positive or negative), or how the top features contributed to the false negative error.\",\n    \"concision\": \"The explanation is concise, listing only the top features and their scores, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is minimally useful for audit or recourse. It is clear and concise but lacks actionable, contextual, and complete information needed for effective review.\",\n    \"semantic_plausibility\": \"The features listed as important (education-num, capital-gain) are plausible in the context of the Adult dataset and a logistic regression model, but the lack of directionality or context limits interpretability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:34:58.132048+00:00"
+}

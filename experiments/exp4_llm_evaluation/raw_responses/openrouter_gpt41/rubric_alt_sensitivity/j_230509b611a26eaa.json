@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_230509b611a26eaa",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_45af74f0fdcedd43_123d1603b798b09f.txt",
+  "prompt_version": "123d1603b798b09f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local SHAP factors and their contributions, but does not provide actionable guidance or suggest what could be changed to alter the prediction. It is not clear how a user could use this information for recourse.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the model's decision for this instance, which is helpful for auditing. However, the lack of context about the feature values and the directionality of the prediction (why these features led to a false positive) limits its usefulness for a thorough audit.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values, but lacks interpretive context (e.g., what the feature values were, or what the sign means in this context). This reduces clarity for non-technical reviewers.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values and does not relate the contributions to the specific prediction outcome. This limits completeness, as a reviewer cannot fully understand the decision rationale.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is concise and technically clear, it lacks actionable detail, interpretive context, and completeness for effective audit or recourse. It is minimally useful for model-behavior review.\",\n    \"semantic_plausibility\": \"The listed features and their contributions are plausible for a credit decision context, and the SHAP values are reasonable. However, without feature values or more context, it is difficult to fully assess plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:44:29.031785+00:00"
+}

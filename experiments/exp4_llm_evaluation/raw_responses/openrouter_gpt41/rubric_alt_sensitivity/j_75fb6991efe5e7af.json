@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_75fb6991efe5e7af",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_fbb0082b6f2ae806_7b4784b8ef6ee6c2.txt",
+  "prompt_version": "7b4784b8ef6ee6c2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but the magnitudes are very small and do not clearly indicate actionable changes for recourse. It is unclear what specific changes would meaningfully affect the prediction.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local factors, but the low absolute values and lack of context (e.g., no prediction confidence, no feature values) make it difficult to audit why the model made a false negative error. The explanation does not help pinpoint a clear cause or suggest a plausible fix.\",\n    \"clarity\": \"The format is clear and the factors are labeled, but the meaning of the coefficients (especially their small size) is not explained, which may confuse auditors.\",\n    \"completeness\": \"The explanation only lists the top 10 features with their weights, without providing the actual feature values for this instance or any context about the model's decision boundary. This is insufficient for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks the necessary context and actionable insight to be useful for audit or recourse. It is not sufficiently informative for model-behavior review.\",\n    \"semantic_plausibility\": \"The listed features are plausible in the context of the Adult dataset, but the very small coefficients raise questions about their real impact on the prediction. The explanation does not make the model's behavior seem plausible for this specific error case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:11:20.254909+00:00"
+}

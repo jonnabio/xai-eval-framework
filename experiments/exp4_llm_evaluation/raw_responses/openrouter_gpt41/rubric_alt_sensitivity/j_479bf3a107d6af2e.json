@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_479bf3a107d6af2e",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e759e990528304a2_ad7ac47165964783.txt",
+  "prompt_version": "ad7ac47165964783",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features and their contributions, which could help a user understand what factors influenced the prediction and suggest possible recourse (e.g., improving education or occupation). However, the weights are small and not clearly contextualized, limiting direct actionability.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local factors with their weights, which is useful for auditing the model's behavior on this instance. However, the lack of context (e.g., actual feature values, directionality of influence) and the small magnitude of weights reduce its audit value.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their weights. However, it lacks context about what the weights mean (e.g., are they log-odds, probabilities, or raw model outputs?), and does not specify the instance's actual feature values.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual values for the features and does not explain the overall prediction or confidence. This limits completeness for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors with their weights. There is no unnecessary information.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks important context (feature values, prediction confidence, directionality), which limits its usefulness for audit and recourse. It is a standard LIME output but could be improved for audit purposes.\",\n    \"semantic_plausibility\": \"The listed features (occupation, capital-gain, marital status, age, etc.) are plausible factors for income prediction in the Adult dataset. The explanation is semantically reasonable.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:09:04.236420+00:00"
+}

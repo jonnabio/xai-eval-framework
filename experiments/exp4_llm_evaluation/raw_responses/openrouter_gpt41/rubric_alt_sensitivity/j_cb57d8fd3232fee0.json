@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_cb57d8fd3232fee0",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_78dfd1648ed95148_a77ab002c2eaf6b4.txt",
+  "prompt_version": "a77ab002c2eaf6b4",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local SHAP factors and their contributions, which could help a user identify which features most influenced the model's decision. However, it does not provide actionable guidance or suggestions for recourse, limiting its practical utility for users seeking to change the outcome.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is locally informative by quantifying the impact of each feature on the prediction. It allows an auditor to see which features drove the false negative, but lacks context about the instance's actual feature values or how these compare to typical cases, which would be helpful for deeper review.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values. However, the use of feature names and value ranges (e.g., 'employment_4<=X<7') may not be immediately interpretable without domain knowledge or a data dictionary.\",\n    \"completeness\": \"The explanation covers the top contributing features but omits the actual feature values for this instance and does not indicate the directionality of the prediction (i.e., what class 0 means). It also does not contextualize the importance of these features relative to the full feature set.\",\n    \"concision\": \"The explanation is compact, listing only the top 10 features and their SHAP values, which is appropriate for local interpretability. There is no extraneous information.\",\n    \"overall_quality\": \"While the explanation is concise and locally informative, it lacks actionable guidance, context, and some clarity for non-experts. It is useful for a technical audit but limited for broader review or recourse.\",\n    \"semantic_plausibility\": \"The features and their contributions are plausible for a credit scoring context, and the SHAP values are within expected ranges. The explanation is semantically coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:51:04.881213+00:00"
+}

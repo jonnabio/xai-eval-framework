@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_d351b41f25ddf0fd",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7b78e47140c1369b_01c0d2765d3f2f89.txt",
+  "prompt_version": "01c0d2765d3f2f89",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights 'capital-gain' as a factor with a nonzero value, and all other features are shown as having no impact. This does not provide the user with any clear steps or recourse for changing the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is of limited use. It suggests that only 'capital-gain' influenced the model's decision locally, but does not provide insight into why other features had no effect or how sensitive the model is to changes in those features. This restricts the ability to review model behavior or fairness.\",\n    \"clarity\": \"The explanation is clear in format and easy to read, listing each feature and its importance. However, the meaning of the numeric value for 'capital-gain' is not explained, and the zero values for all other features are not contextualized.\",\n    \"completeness\": \"The explanation is incomplete. It does not discuss the direction of influence, the threshold for importance, or why only one feature is nonzero. It omits context about the instance or the model's reasoning.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors and their values. However, this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is too sparse, lacks context, and does not support meaningful review of the model's local behavior.\",\n    \"semantic_plausibility\": \"It is implausible that only 'capital-gain' would have any local effect, especially in a complex dataset like 'adult' with many relevant features. This raises concerns about the faithfulness or granularity of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:51:45.253656+00:00"
+}
