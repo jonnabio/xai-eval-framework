@@ -99,6 +99,11 @@ Manuscript integration:
   as SHAP top-feature values are treated as compact technical signals, while
   EXP4 evaluates whether they include enough context, directionality, domain
   meaning, audit usefulness, and actionability to function as explanations.
+- EXP4 label-visible bias-probe execution has partial OpenRouter results: 12 of
+  24 planned label-visible pilot judgments completed with zero parse failures
+  before OpenRouter account credits stopped additional requests. In the 12
+  paired cases, label visibility did not materially change overall quality
+  scores, though semantic plausibility decreased modestly.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.
