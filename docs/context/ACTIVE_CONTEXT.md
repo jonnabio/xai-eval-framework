@@ -103,6 +103,11 @@ Manuscript integration:
   OpenRouter pilot with zero parse failures. In the 24 paired cases, label
   visibility did not materially change overall quality scores, though semantic
   plausibility decreased modestly.
+- EXP4 24-case OpenRouter pilot is now complete across all three prompt
+  conditions: hidden-label primary, label-visible bias probe, and alternate
+  rubric sensitivity. The pilot produced 72 real OpenRouter judgments with zero
+  parse failures. The alternate rubric produced substantially lower semantic
+  scores, confirming rubric sensitivity as a methodological factor.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

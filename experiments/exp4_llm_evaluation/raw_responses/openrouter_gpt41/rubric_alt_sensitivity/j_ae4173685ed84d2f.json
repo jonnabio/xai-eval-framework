@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_ae4173685ed84d2f",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_103d89f1e4cb72f6_d8fbd86797345509.txt",
+  "prompt_version": "d8fbd86797345509",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest what changes could alter the prediction. The user cannot easily determine what to do for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, the dominance of a single feature (capital-gain) and all others being zero limits insight into model behavior. It is difficult to audit model sensitivity or fairness from this output.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance scores. However, the meaning of the numeric values (e.g., 8.9161) is not explained, which may confuse reviewers.\",\n    \"completeness\": \"The explanation only lists a subset of features, and most have zero importance. It does not provide context about the instance, the prediction, or why the model made a false negative error.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors. However, the inclusion of many zero-importance features adds unnecessary length.\",\n    \"overall_quality\": \"The explanation is minimally useful for audit or recourse. It is clear and concise but lacks actionable insight, context, and depth needed for effective review.\",\n    \"semantic_plausibility\": \"It is plausible that capital-gain is important for income prediction, but the complete absence of influence from other features is questionable and may indicate issues with the explanation method or model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:20:04.078859+00:00"
+}

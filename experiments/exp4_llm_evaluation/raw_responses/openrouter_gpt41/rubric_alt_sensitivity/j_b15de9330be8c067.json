@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_b15de9330be8c067",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_196e6ce035ebf3e3_9569a4997d6be0cd.txt",
+  "prompt_version": "9569a4997d6be0cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local SHAP factors and their contributions, which could help a user identify which features most influenced the prediction. However, it does not provide actionable guidance or suggest recourse steps, limiting its practical utility for end-users seeking to change the outcome.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is moderately useful: it clearly identifies which features had the largest local impact and their directionality. However, the lack of context about feature values, model confidence, or thresholds limits deeper auditability and the ability to verify if the model's behavior is reasonable for this instance.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values with directionality. However, some feature names are cryptic (e.g., 'checking_status_<0'), which may reduce clarity for non-expert auditors.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values for this instance and does not indicate the total SHAP sum or prediction confidence. This limits completeness for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions without unnecessary detail.\",\n    \"overall_quality\": \"Overall, the explanation is compact and locally informative, but lacks some context and actionable detail that would make it highly useful for audit or recourse. It is plausible and helpful for a quick review, but not optimal for in-depth inspection.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible: the listed features are reasonable drivers of credit decisions, and the SHAP values are within expected ranges.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:20:31.312990+00:00"
+}
