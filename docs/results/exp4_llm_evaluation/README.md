@@ -19,7 +19,7 @@ Status:
 Current result notes:
 
 - [OpenRouter pilot results](./openrouter_pilot_results.md)
-- [OpenRouter label-visible partial results](./openrouter_bias_probe_partial_results.md)
+- [OpenRouter label-visible bias-probe results](./openrouter_bias_probe_results.md)
 - [Attribution versus explanation interpretation note](./attribution_vs_explanation_note.md)
 
 ## Planned Raw Artifact Root
