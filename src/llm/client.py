@@ -7,6 +7,9 @@ import os
 import time
 import logging
 import json
+from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Import official SDKs (assuming they are installed/will be mocked)
 # We use conditional imports or assume existence based on requirements
@@ -23,6 +26,19 @@ except ImportError:
 from src.experiment.config import LLMConfig
 
 logger = logging.getLogger(__name__)
+
+
+def load_llm_env_files() -> None:
+    """Load local, git-ignored LLM secret files if present."""
+    repo_root = Path(__file__).resolve().parents[2]
+    for env_path in (
+        repo_root / ".env",
+        repo_root / ".env.local",
+        repo_root / "configs" / "secrets" / "exp4.local.env",
+    ):
+        if env_path.exists():
+            load_dotenv(env_path, override=False)
+
 
 class BaseLLMClient(ABC):
     """Abstract base class for LLM clients."""
@@ -58,6 +74,7 @@ class OpenAIClient(BaseLLMClient):
     
     def __init__(self, config: LLMConfig):
         super().__init__(config)
+        load_llm_env_files()
         if openai is None:
             raise ImportError("openai package is not installed.")
         
@@ -110,6 +127,7 @@ class GeminiClient(BaseLLMClient):
     
     def __init__(self, config: LLMConfig):
         super().__init__(config)
+        load_llm_env_files()
         if genai is None:
             raise ImportError("google-generativeai package is not installed.")
             
@@ -162,6 +180,7 @@ class OpenRouterClient(BaseLLMClient):
     
     def __init__(self, config: LLMConfig):
         super().__init__(config)
+        load_llm_env_files()
         if openai is None:
             raise ImportError("openai package is not installed (required for OpenRouter).")
             
