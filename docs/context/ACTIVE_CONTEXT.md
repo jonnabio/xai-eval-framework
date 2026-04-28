@@ -94,6 +94,11 @@ Manuscript integration:
   concision and semantic plausibility than completeness, audit usefulness, and
   actionability, supporting the thesis claim that technical XAI outputs require
   complementary semantic evaluation.
+- EXP4 interpretation guidance now explicitly documents the distinction between
+  raw feature attribution and human-usable explanation. Attribution lists such
+  as SHAP top-feature values are treated as compact technical signals, while
+  EXP4 evaluates whether they include enough context, directionality, domain
+  meaning, audit usefulness, and actionability to function as explanations.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

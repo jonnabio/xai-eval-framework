@@ -11,9 +11,15 @@ It is the result-side companion to
 
 Status:
 
-- planned, not executed.
+- fixed case inventory generated;
+- 5-case dry run completed;
+- OpenRouter one-case connectivity pilot completed;
+- OpenRouter 24-case hidden-label pilot completed.
 
-No EXP4 raw LLM-evaluation results have been produced yet.
+Current result notes:
+
+- [OpenRouter pilot results](./openrouter_pilot_results.md)
+- [Attribution versus explanation interpretation note](./attribution_vs_explanation_note.md)
 
 ## Planned Raw Artifact Root
 
@@ -110,6 +116,11 @@ the rubric.
 ## Interpretation Rules
 
 EXP4 results should be interpreted as LLM-based semantic proxy evidence.
+
+The central interpretation distinction is documented in
+[Attribution Is Not Yet Explanation](./attribution_vs_explanation_note.md).
+Many XAI artifacts are compact attribution lists. EXP4 evaluates whether those
+artifacts are also usable as explanations for audit and decision review.
 
 EXP4 may support:
 

@@ -60,6 +60,12 @@ actionability were substantially lower, indicating that explanations often
 identified influential factors without supplying sufficient interpretive detail,
 directionality, or recourse-oriented information.
 
+This pattern is consistent with the distinction documented in
+[Attribution Is Not Yet Explanation](./attribution_vs_explanation_note.md): many
+model explanations in the pilot are technically useful attribution lists, but
+they do not yet provide the contextual information a human reviewer would need
+for audit or decision support.
+
 ## Explainer-Level Pilot Pattern
 
 | Explainer | n | Mean Overall Quality | SD | Median |
