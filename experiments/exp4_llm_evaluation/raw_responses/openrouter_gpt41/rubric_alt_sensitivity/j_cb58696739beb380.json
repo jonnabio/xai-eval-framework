@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_cb58696739beb380",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ba96b41ceb2e14cb_3359367835b04c9d.txt",
+  "prompt_version": "3359367835b04c9d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights two features with nonzero importance, both of which are categorical and not easily changed by the individual (relationship_Other-relative, native-country_Portugal). No guidance is provided for recourse.\",\n    \"audit_usefulness\": \"The explanation is of very limited use for audit inspection. It does not provide insight into why the model made a false negative prediction, nor does it help identify potential sources of error or bias. The extremely high faithfulness gap further undermines trust in the explanation.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance, but the meaning of the numeric values (e.g., 0.4000) is not explained, and the context for why only two features are nonzero is missing.\",\n    \"completeness\": \"The explanation is incomplete. It only lists two features with nonzero importance and provides no information about the role of other features or the overall decision logic. This is especially problematic for a complex model like an MLP.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits critical information needed for understanding or reviewing the model's behavior.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of an audit or review. It is neither informative nor actionable, and its faithfulness is questionable.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible. It is unlikely that only two categorical features would dominate the decision for a neural network on the Adult dataset, and the zero importance for all other features is suspicious.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:09:26.305155+00:00"
+}

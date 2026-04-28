@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 94,
+  "instance_id": "7247",
+  "model_family": "mlp",
+  "normalized_explanation": "LIME top local factors: hours-per-week: 0.0481; occupation_Other-service: -0.0435; sex_Female: -0.0325; marital-status_Never-married: -0.0313; education_HS-grad: -0.0288; relationship_Own-child: -0.0286; relationship_Not-in-family: 0.0244; marital-status_Married-civ-spouse: 0.0156; workclass_Private: -0.0150; occupation_Sales: 0.0145",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 123,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_lime\\seed_123\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 3.2042920065578073,
+    "faithfulness_gap": 0.3923955560335244,
+    "fidelity": 0.4917477764694508,
+    "runtime_ms": 3.2042920065578073,
+    "sparsity": 0.09259259259259259,
+    "stability": -0.011499970657315828
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

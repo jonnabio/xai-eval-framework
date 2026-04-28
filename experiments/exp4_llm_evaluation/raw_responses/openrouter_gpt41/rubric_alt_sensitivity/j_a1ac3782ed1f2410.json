@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_a1ac3782ed1f2410",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_9294bc72ae3aeda0_21b4b890608bd9cb.txt",
+  "prompt_version": "21b4b890608bd9cb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features (e.g., education-num, hours-per-week, education_Masters) that are relevant for recourse, but does not indicate how changing these would affect the prediction, nor does it clarify which direction matters. This limits its practical actionability.\",\n    \"audit_usefulness\": \"The explanation identifies which features are anchors for the prediction, which is helpful for auditing local model behavior. However, it does not provide any information about the values or thresholds that define these anchors, nor does it clarify the local decision boundary.\",\n    \"clarity\": \"The explanation is clear in listing the features and their importance (all 1.0000 or 0.0000), but it lacks context about what these numbers mean and how they relate to the instance. The binary nature of the scores is not explained.\",\n    \"completeness\": \"The explanation covers the top local factors but omits any detail about the actual values for this instance or how these features interact. It does not explain why these features are anchors or what would happen if they changed.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their scores without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and lists relevant features, it lacks actionable detail, context, and interpretability for audit or recourse. It is minimally useful for reviewing model behavior.\",\n    \"semantic_plausibility\": \"The features listed as anchors are plausible in the context of the Adult dataset and income prediction. However, the lack of explanation for the binary scores reduces interpretability.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:59:44.532499+00:00"
+}

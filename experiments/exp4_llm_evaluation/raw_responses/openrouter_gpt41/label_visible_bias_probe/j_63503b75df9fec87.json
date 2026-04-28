@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_df5a815f94424dc9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_63503b75df9fec87",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_df5a815f94424dc9_e31800de3ddefc9c.txt",
+  "prompt_version": "e31800de3ddefc9c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_df5a815f94424dc9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were anchors (age, education-num, capital-gain), but does not provide actionable information about how changing these features would affect the prediction or what specific values led to the outcome.\",\n    \"audit_usefulness\": \"While the explanation identifies the most influential features, it lacks detail about their values or thresholds, making it difficult to audit the model's behavior or understand why the prediction was made.\",\n    \"clarity\": \"The explanation is organized and uses clear labels, but the meaning of the numeric values (e.g., 1.0000, 0.0000) is not explained, which may confuse users unfamiliar with the anchors method.\",\n    \"completeness\": \"The explanation only lists which features are anchors and which are not, without specifying the actual values or ranges that triggered the prediction. This is insufficient for a full understanding of the local decision.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their anchor status, but this brevity comes at the cost of omitting necessary detail.\",\n    \"overall_quality\": \"The explanation is too sparse to be useful for most inspection or decision support purposes. It identifies important features but fails to provide enough context or actionable insight.\",\n    \"semantic_plausibility\": \"It is plausible that age, education-num, and capital-gain are important for this prediction in the adult dataset, but the lack of detail about how these features interact with the model's decision limits the semantic value.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:19:02.281322+00:00"
+}

@@ -1,0 +1,76 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. The true label is
+visible for this bias-probe condition, but it must not dominate the score. Score
+the explanation as a semantic account of the model decision, not as a verdict on
+whether the prediction was correct.
+
+Rubric version: RUBRIC_V1
+Prompt condition: label_visible_bias_probe
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 87,
+  "instance_id": "9618",
+  "model_family": "logreg",
+  "normalized_explanation": "LIME top local factors: education_Doctorate: 0.0179; capital-loss: 0.0095; occupation_Prof-specialty: 0.0056; education-num: 0.0051; marital-status_Married-civ-spouse: 0.0026; age: 0.0024; fnlwgt: -0.0023; hours-per-week: 0.0018; sex_Female: -0.0016; marital-status_Never-married: -0.0013",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 999,
+  "sample_size": 50,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_lime\\seed_999\\n_50\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 4.2910409974865615,
+    "faithfulness_gap": 0.6905170984091951,
+    "fidelity": 0.48893676901701316,
+    "runtime_ms": 4.2910409974865615,
+    "sparsity": 0.09259259259259259,
+    "stability": 0.12567559372297007
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

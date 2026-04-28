@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_edb61c48d0912d06",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_c70818c7cb4297fc.txt",
+  "prompt_version": "c70818c7cb4297fc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features and their weights, but the weights are extremely small and do not clearly indicate actionable directions for recourse. It is unclear which changes would meaningfully affect the prediction.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local factors, but the very low magnitude of all coefficients makes it difficult to discern which features truly influenced the model's decision. This limits its usefulness for auditing model behavior, especially for a false negative.\",\n    \"clarity\": \"The format is clear and the features are named, but the meaning of the small weights is not explained, and the lack of context (e.g., actual feature values) reduces interpretability.\",\n    \"completeness\": \"The explanation includes the top local factors, but omits the actual values for the instance and does not contextualize the importance of the features. It is incomplete for a thorough audit.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary information, but this brevity comes at the cost of omitting critical context needed for understanding.\",\n    \"overall_quality\": \"While the explanation is formatted clearly and is concise, it lacks actionable insight, context, and meaningful differentiation among features, making it of low overall quality for audit or recourse.\",\n    \"semantic_plausibility\": \"The listed features are plausible in the context of the Adult dataset, but the extremely small weights raise questions about whether these are truly the most influential factors for this prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:10:06.141643+00:00"
+}

@@ -1,0 +1,76 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. The true label is
+visible for this bias-probe condition, but it must not dominate the score. Score
+the explanation as a semantic account of the model decision, not as a verdict on
+whether the prediction was correct.
+
+Rubric version: RUBRIC_V1
+Prompt condition: label_visible_bias_probe
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dataset": "german_credit",
+  "explainer": "anchors",
+  "explanation_length_tokens": 67,
+  "instance_id": "185",
+  "model_family": "xgb",
+  "normalized_explanation": "ANCHORS top local factors: duration: 1.0000; installment_commitment: 1.0000; checking_status_no checking: 1.0000; purpose_new car: 1.0000; housing_for free: 1.0000; own_telephone_none: 1.0000; credit_amount: 0.0000; residence_since: 0.0000; age: 0.0000; existing_credits: 0.0000",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "FN",
+  "random_seed": 123,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\german_credit\\xgb_anchors\\seed_123\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 2000.960044999374,
+    "faithfulness_gap": 0.3793364465236664,
+    "fidelity": 0.7193774339083032,
+    "runtime_ms": 2000.960044999374,
+    "sparsity": 0.09836065573770492,
+    "stability": 0.7825396825396828
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

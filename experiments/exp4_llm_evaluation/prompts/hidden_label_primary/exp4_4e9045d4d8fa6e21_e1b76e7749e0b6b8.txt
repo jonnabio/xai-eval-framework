@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dataset": "adult",
+  "explainer": "dice",
+  "explanation_length_tokens": 86,
+  "instance_id": "4203",
+  "model_family": "logreg",
+  "normalized_explanation": "DICE top local factors: marital-status_Married-civ-spouse: 0.6000; age: 0.0000; fnlwgt: 0.0000; education-num: 0.0000; capital-gain: 0.0000; capital-loss: 0.0000; hours-per-week: 0.0000; workclass_Federal-gov: 0.0000; workclass_Local-gov: 0.0000; workclass_Never-worked: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 42,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_dice\\seed_42\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 458.6256670008879,
+    "faithfulness_gap": 0.21130916234328645,
+    "fidelity": 0.6141351705493326,
+    "runtime_ms": 458.6256670008879,
+    "sparsity": 0.009259259259259259,
+    "stability": 0.029855764628661557
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

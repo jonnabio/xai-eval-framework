@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_0f84ccff4777bc96",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_fbb0082b6f2ae806_7b4784b8ef6ee6c2.txt",
+  "prompt_version": "7b4784b8ef6ee6c2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest recourse for the user. It is unclear how one could use this information to change the model's prediction.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local feature importances, but the effect sizes are very small and lack context (e.g., no indication of the instance's actual feature values or how these factors led to the false negative). This limits its usefulness for auditing model behavior or identifying sources of error.\",\n    \"clarity\": \"The explanation is clear in format (feature: weight), but lacks context about the instance or the meaning of the weights, which may confuse auditors unfamiliar with the scale or directionality.\",\n    \"completeness\": \"The explanation omits the actual feature values for the instance and does not relate the listed factors to the model's output or the error (false negative). It is incomplete for thorough audit inspection.\",\n    \"concision\": \"The explanation is concise, listing only the top factors, but this brevity comes at the cost of missing necessary context for interpretation.\",\n    \"overall_quality\": \"Overall, the explanation is minimally useful for audit purposes: it is clear and concise, but lacks actionable, complete, and contextually informative content. It does not support effective review or recourse.\",\n    \"semantic_plausibility\": \"The listed features are plausible in the context of the Adult dataset, but the small magnitude of weights and lack of context make it difficult to judge their true relevance to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:25:43.966738+00:00"
+}

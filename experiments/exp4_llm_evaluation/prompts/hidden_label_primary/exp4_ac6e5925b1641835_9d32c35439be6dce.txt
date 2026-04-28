@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 87,
+  "instance_id": "5308",
+  "model_family": "mlp",
+  "normalized_explanation": "LIME top local factors: race_Amer-Indian-Eskimo: 0.0003; occupation_Protective-serv: 0.0002; workclass_State-gov: 0.0002; hours-per-week: 0.0001; race_White: -0.0001; workclass_Private: -0.0001; fnlwgt: -0.0001; education_HS-grad: 0.0000; relationship_Husband: 0.0000; marital-status_Married-civ-spouse: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 789,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_lime\\seed_789\\n_100\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 3.0936250113882124,
+    "faithfulness_gap": 0.784518593617883,
+    "fidelity": 0.42243043568959593,
+    "runtime_ms": 3.0936250113882124,
+    "sparsity": 0.037037037037037035,
+    "stability": 0.2023338653440639
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

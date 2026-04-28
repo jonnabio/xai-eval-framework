@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_e30a22b87be39e2f",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_78dfd1648ed95148_e356d5ebf5fba456.txt",
+  "prompt_version": "e356d5ebf5fba456",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, but does not provide actionable guidance or suggest what could be changed to alter the prediction. The user would need to infer possible actions from the feature names and values.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the model's decision and their directionality, which is useful for auditing. However, it lacks context about the instance's actual feature values and does not clarify how close the decision was or if small changes would flip the outcome.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated SHAP values, which is clear for users familiar with SHAP. However, it may be less clear to non-technical users, as it lacks plain language or context.\",\n    \"completeness\": \"The explanation provides the top local factors and their SHAP values, but omits the actual feature values for this instance and does not explain the overall prediction process or threshold. This limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions without unnecessary detail. It is compact relative to the information provided.\",\n    \"overall_quality\": \"The explanation is a standard SHAP output, providing a concise and partially informative account of the model's decision. It is useful for technical users but lacks context and actionable detail for broader audiences.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features are relevant to credit decisions and the SHAP values are coherent with the context of a credit scoring model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:55:16.575780+00:00"
+}

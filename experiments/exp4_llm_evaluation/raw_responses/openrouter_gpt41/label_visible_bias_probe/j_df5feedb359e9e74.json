@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_df5feedb359e9e74",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_ee716d060cd5c242.txt",
+  "prompt_version": "ee716d060cd5c242",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only a list of features and their coefficients, with no guidance on how to change the outcome or what actions could be taken. The small magnitude of the coefficients and lack of context about feature values further limit recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation lists the top local factors, the coefficients are extremely small and the explanation lacks context about the instance's actual feature values. This makes it difficult to meaningfully inspect or audit the model's behavior for this prediction.\",\n    \"clarity\": \"The explanation is organized as a simple list of features and coefficients, which is clear in format, but the meaning of the coefficients and their impact on the prediction are not explained. The wording is technical and may not be easily understood by non-experts.\",\n    \"completeness\": \"The explanation omits the actual values of the features for this instance and does not provide any information about the model's confidence or how the listed factors combine to produce the prediction. This limits the ability to fully inspect the local decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their coefficients. However, the brevity comes at the expense of useful content, as important context is missing.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks the necessary context and interpretability to be useful for most stakeholders. It is technically correct in listing local factors, but does not provide a meaningful semantic account of the model's decision.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it lists features relevant to the Adult dataset and their local contributions, but the extremely small coefficients and lack of context make it difficult to interpret how these factors led to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:44:03.383647+00:00"
+}

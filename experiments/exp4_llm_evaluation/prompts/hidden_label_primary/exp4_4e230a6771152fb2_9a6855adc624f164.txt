@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 86,
+  "instance_id": "2627",
+  "model_family": "logreg",
+  "normalized_explanation": "LIME top local factors: occupation_Protective-serv: -0.0158; capital-gain: 0.0110; race_Black: -0.0080; marital-status_Divorced: -0.0069; race_White: 0.0063; marital-status_Married-civ-spouse: 0.0063; education-num: 0.0051; marital-status_Never-married: -0.0015; relationship_Husband: 0.0006; sex_Female: 0.0005",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "TN",
+  "random_seed": 789,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_lime\\seed_789\\n_100\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 2.9700419981963933,
+    "faithfulness_gap": 0.052488423132932976,
+    "fidelity": 0.7118438840497955,
+    "runtime_ms": 2.9700419981963933,
+    "sparsity": 0.09259259259259259,
+    "stability": 0.11021331519406845
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

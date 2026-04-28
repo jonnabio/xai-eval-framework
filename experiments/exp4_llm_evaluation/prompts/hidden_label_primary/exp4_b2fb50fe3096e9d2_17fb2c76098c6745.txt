@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dataset": "german_credit",
+  "explainer": "anchors",
+  "explanation_length_tokens": 70,
+  "instance_id": "11",
+  "model_family": "rf",
+  "normalized_explanation": "ANCHORS top local factors: duration: 1.0000; installment_commitment: 1.0000; checking_status_no checking: 1.0000; housing_own: 1.0000; credit_amount: 0.0000; residence_since: 0.0000; age: 0.0000; existing_credits: 0.0000; num_dependents: 0.0000; checking_status_0<=X<200: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 42,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\german_credit\\rf_anchors\\seed_42\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1000.8960219984147,
+    "faithfulness_gap": 0.15999999999999992,
+    "fidelity": 0.699869662637493,
+    "runtime_ms": 1000.8960219984147,
+    "sparsity": 0.06557377049180328,
+    "stability": 0.7642857142857142
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

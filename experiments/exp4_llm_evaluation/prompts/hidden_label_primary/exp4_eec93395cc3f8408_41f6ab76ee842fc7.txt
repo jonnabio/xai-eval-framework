@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dataset": "german_credit",
+  "explainer": "shap",
+  "explanation_length_tokens": 90,
+  "instance_id": "79",
+  "model_family": "rf",
+  "normalized_explanation": "SHAP top local factors: checking_status_<0: -0.0718; credit_history_no credits/all paid: -0.0462; checking_status_no checking: -0.0402; savings_status_<100: -0.0270; other_payment_plans_stores: -0.0226; credit_history_critical/other existing credit: -0.0220; other_payment_plans_none: -0.0186; property_magnitude_life insurance: 0.0182; age: 0.0164; checking_status_0<=X<200: 0.0139",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "TN",
+  "random_seed": 42,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\german_credit\\rf_shap\\seed_42\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1012.9841649995797,
+    "faithfulness_gap": 0.19999999999999996,
+    "fidelity": 0.5684043590709178,
+    "runtime_ms": 1012.9841649995797,
+    "sparsity": 0.9344262295081968,
+    "stability": 0.9962623738604081
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

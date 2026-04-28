@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_c26cdb8b9ce06ff8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_59102b62c0a19520",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_c26cdb8b9ce06ff8_d0ab2fb5db709df4.txt",
+  "prompt_version": "d0ab2fb5db709df4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_c26cdb8b9ce06ff8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not indicate how changing any feature would affect the prediction, nor does it provide actionable thresholds or directions for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features are considered important by the anchor, it does not clarify how these features interact or why they matter for this specific instance. The lack of detail on feature values or their effect on the prediction limits its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is terse and uses a compact format, but the meaning of the numbers (all 1.0 or 0.0) is not explained, and the context for their importance is missing. This reduces clarity for auditors unfamiliar with the anchor method.\",\n    \"completeness\": \"The explanation omits the actual values of the features for this instance and does not describe the local decision boundary or provide any context about the model's reasoning. It is incomplete for thorough review.\",\n    \"concision\": \"The explanation is concise, listing only the features and their binary importance, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks the necessary context, detail, and interpretability to be useful for audit or recourse. It fails to meet the standards for a locally informative and actionable explanation.\",\n    \"semantic_plausibility\": \"The features listed as important are plausible in the context of credit scoring, but without further context or explanation, it is difficult to assess whether their importance is justified for this specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:10:58.622540+00:00"
+}

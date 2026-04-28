@@ -1,0 +1,64 @@
+You are an independent evaluator auditing whether a local explanation is useful
+for model-behavior review.
+
+Use the same 1-5 scale as the primary rubric, but emphasize audit inspection:
+the best explanation is clear, compact, locally informative, plausible in the
+given context, and helpful for review or recourse.
+
+Rubric version: RUBRIC_V1
+Prompt condition: rubric_alt_sensitivity
+
+Case:
+{
+  "case_id": "exp4_7e9b6f55ee9b538e",
+  "dataset": "german_credit",
+  "explainer": "shap",
+  "explanation_length_tokens": 77,
+  "instance_id": "191",
+  "model_family": "xgb",
+  "normalized_explanation": "SHAP top local factors: duration: 0.0961; checking_status_no checking: -0.0470; property_magnitude_real estate: 0.0264; num_dependents: -0.0198; employment_4<=X<7: -0.0197; installment_commitment: 0.0191; other_payment_plans_none: 0.0185; checking_status_<0: 0.0182; housing_own: 0.0139; own_telephone_none: -0.0136",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 456,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\german_credit\\xgb_shap\\seed_456\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1001.466636999794,
+    "faithfulness_gap": 0.13262277841567993,
+    "fidelity": 0.822273334532148,
+    "runtime_ms": 1001.466636999794,
+    "sparsity": 0.819672131147541,
+    "stability": 0.7827019703099264
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_7e9b6f55ee9b538e",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

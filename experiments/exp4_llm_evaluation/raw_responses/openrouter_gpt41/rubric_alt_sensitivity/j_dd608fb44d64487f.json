@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_dd608fb44d64487f",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_5a283f4d6f1cf5e1_01b3b845347ee09d.txt",
+  "prompt_version": "01b3b845347ee09d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features and their contributions, which could help a user identify which factors to change for a different outcome. However, the magnitudes are small and the directionality is not always intuitive, limiting practical recourse.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local feature importances, which is useful for auditing the model's behavior on this instance. It allows an auditor to see which features most influenced the prediction, but lacks context about the instance's actual values and the overall decision boundary.\",\n    \"clarity\": \"The explanation is clear in format, with features and their weights presented in a straightforward manner. However, it assumes familiarity with the dataset's feature encoding and does not explain what the values mean in context.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values for this instance, which limits understanding of why these features mattered. It also does not provide the model's confidence or how close the instance is to the decision boundary.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their weights. There is no extraneous information.\",\n    \"overall_quality\": \"The explanation is reasonably clear, concise, and locally informative, but lacks some context (feature values, confidence) that would make it more actionable and complete for audit or recourse.\",\n    \"semantic_plausibility\": \"The listed features and their directions are plausible in the context of the Adult dataset and logistic regression. The weights are small but reasonable for a linear model.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:47:50.612378+00:00"
+}

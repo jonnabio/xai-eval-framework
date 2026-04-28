@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_374932ef256e4645",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ae5f3b200cc3bef3_1432ba5b563562d1.txt",
+  "prompt_version": "1432ba5b563562d1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse, as it only highlights two features (age and native-country_China) as anchors with maximum importance, and all other features are marked as having zero influence. This does not guide the user on what could be changed to alter the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It lacks detail about why these two features are decisive, and the zero values for all other features suggest either a limitation in the explainer or a lack of local sensitivity, making it hard to review model behavior or fairness.\",\n    \"clarity\": \"While the format is clear and the output is easy to read, the meaning behind the numbers (especially the zeros) is not explained, reducing interpretability.\",\n    \"completeness\": \"The explanation is incomplete. It only lists two features as relevant and provides no context or reasoning for the exclusion of all other features, nor does it explain the model's decision boundary in this local context.\",\n    \"concision\": \"The explanation is concise, but this is due to a lack of substantive content rather than effective summarization. It omits necessary information for understanding or auditing the decision.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of an audit or review. It is too sparse, lacks actionable or informative content, and does not support recourse or fairness analysis.\",\n    \"semantic_plausibility\": \"It is implausible that only age and native-country_China are solely responsible for the prediction, especially in a logistic regression model on the Adult dataset. The explanation does not align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:06:26.084986+00:00"
+}

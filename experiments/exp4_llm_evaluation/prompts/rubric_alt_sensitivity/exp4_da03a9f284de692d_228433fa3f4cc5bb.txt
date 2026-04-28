@@ -1,0 +1,64 @@
+You are an independent evaluator auditing whether a local explanation is useful
+for model-behavior review.
+
+Use the same 1-5 scale as the primary rubric, but emphasize audit inspection:
+the best explanation is clear, compact, locally informative, plausible in the
+given context, and helpful for review or recourse.
+
+Rubric version: RUBRIC_V1
+Prompt condition: rubric_alt_sensitivity
+
+Case:
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dataset": "adult",
+  "explainer": "anchors",
+  "explanation_length_tokens": 80,
+  "instance_id": "5279",
+  "model_family": "mlp",
+  "normalized_explanation": "ANCHORS top local factors: age: 1.0000; fnlwgt: 1.0000; education-num: 1.0000; workclass_Private: 1.0000; capital-gain: 0.0000; capital-loss: 0.0000; hours-per-week: 0.0000; workclass_Federal-gov: 0.0000; workclass_Local-gov: 0.0000; workclass_Never-worked: 0.0000",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "FN",
+  "random_seed": 456,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_anchors\\seed_456\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 1029.4756249641068,
+    "faithfulness_gap": 0.2621456628971796,
+    "fidelity": 0.232678603284863,
+    "runtime_ms": 1029.4756249641068,
+    "sparsity": 0.037037037037037035,
+    "stability": 0.0
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

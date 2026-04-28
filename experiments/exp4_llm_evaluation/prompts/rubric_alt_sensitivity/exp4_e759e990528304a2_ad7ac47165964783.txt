@@ -1,0 +1,64 @@
+You are an independent evaluator auditing whether a local explanation is useful
+for model-behavior review.
+
+Use the same 1-5 scale as the primary rubric, but emphasize audit inspection:
+the best explanation is clear, compact, locally informative, plausible in the
+given context, and helpful for review or recourse.
+
+Rubric version: RUBRIC_V1
+Prompt condition: rubric_alt_sensitivity
+
+Case:
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 87,
+  "instance_id": "9271",
+  "model_family": "mlp",
+  "normalized_explanation": "LIME top local factors: occupation_Prof-specialty: 0.0458; capital-gain: 0.0430; marital-status_Divorced: 0.0427; age: 0.0339; relationship_Not-in-family: 0.0273; workclass_Private: -0.0265; sex_Female: -0.0206; marital-status_Never-married: -0.0204; education_HS-grad: -0.0164; relationship_Own-child: -0.0150",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 123,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_lime\\seed_123\\n_100\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 3.5801660269498825,
+    "faithfulness_gap": 0.941323034454221,
+    "fidelity": 0.42863210763108067,
+    "runtime_ms": 3.5801660269498825,
+    "sparsity": 0.09259259259259259,
+    "stability": 0.013409995828510938
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_e759e990528304a2",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

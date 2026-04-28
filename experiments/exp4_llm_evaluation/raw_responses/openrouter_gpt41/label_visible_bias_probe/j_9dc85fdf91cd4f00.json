@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_9dc85fdf91cd4f00",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_de91280a4d84e7ca_fc736250c37cd313.txt",
+  "prompt_version": "fc736250c37cd313",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only highlights a single feature (marital-status_Married-civ-spouse) as relevant, with all other features assigned zero importance. This does not provide actionable insight for recourse or decision support, as it is unclear how changing other features would affect the prediction.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing model behavior because it does not reveal how the model weighs other potentially important features. It only states that one feature is decisive, which limits the ability to inspect for bias or errors.\",\n    \"clarity\": \"The explanation is clear in its format and wording, listing features and their importance scores. However, the meaning of the zero values and the implication of the anchor are not explained, which may confuse users unfamiliar with the method.\",\n    \"completeness\": \"The explanation is incomplete as it only provides information about one feature and ignores the potential influence of all others. It does not give a full account of the local decision context.\",\n    \"concision\": \"The explanation is concise, as it lists only the relevant features and their scores without unnecessary information.\",\n    \"overall_quality\": \"Overall, the explanation is lacking in depth and utility. While it is concise and somewhat clear, it fails to provide a comprehensive or actionable account of the model's decision.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible in that it identifies a feature that could reasonably influence the prediction, but it is implausible that all other features have zero influence, especially for a logistic regression model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:18:29.746402+00:00"
+}

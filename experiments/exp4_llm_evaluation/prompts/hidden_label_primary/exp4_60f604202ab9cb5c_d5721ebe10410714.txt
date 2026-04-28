@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dataset": "breast_cancer",
+  "explainer": "anchors",
+  "explanation_length_tokens": 75,
+  "instance_id": "35",
+  "model_family": "xgb",
+  "normalized_explanation": "ANCHORS top local factors: worst radius: 1.0000; worst perimeter: 1.0000; mean radius: 0.0000; mean texture: 0.0000; mean perimeter: 0.0000; mean area: 0.0000; mean smoothness: 0.0000; mean compactness: 0.0000; mean concavity: 0.0000; mean concave points: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 42,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\breast_cancer\\xgb_anchors\\seed_42\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1001.3632000191137,
+    "faithfulness_gap": 0.7253313660621643,
+    "fidelity": 0.5371478635522347,
+    "runtime_ms": 1001.3632000191137,
+    "sparsity": 0.06666666666666667,
+    "stability": 0.24219908247412278
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

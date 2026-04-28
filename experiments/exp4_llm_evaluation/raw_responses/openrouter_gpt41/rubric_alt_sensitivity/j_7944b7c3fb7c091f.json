@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_7944b7c3fb7c091f",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d47138a03cd221ff_ff1b3d77ad03b093.txt",
+  "prompt_version": "ff1b3d77ad03b093",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but the magnitudes are extremely small, making it unclear how any actionable change could affect the prediction. There is no guidance for recourse.\",\n    \"audit_usefulness\": \"For audit, the explanation is not useful: the feature weights are so close to zero that they do not meaningfully explain why the model made a false positive. The local behavior is not illuminated.\",\n    \"clarity\": \"The format is clear (feature: value), but the meaning is obscured by the tiny coefficients and lack of context about the instance or the model's decision boundary.\",\n    \"completeness\": \"The explanation lists several features, but omits any context about the instance's actual values or why these features matter for this specific prediction.\",\n    \"concision\": \"The explanation is concise in length, but the information density is low because the listed factors do not meaningfully contribute to understanding the decision.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide insight into the model's local behavior for this instance. It is not helpful for review or recourse.\",\n    \"semantic_plausibility\": \"The features listed are plausible for the Adult dataset, but the extremely small weights make it implausible that these are the true drivers of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:16:11.877639+00:00"
+}

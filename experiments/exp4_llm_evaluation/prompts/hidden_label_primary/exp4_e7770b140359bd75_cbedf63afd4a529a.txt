@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dataset": "adult",
+  "explainer": "anchors",
+  "explanation_length_tokens": 80,
+  "instance_id": "5982",
+  "model_family": "logreg",
+  "normalized_explanation": "ANCHORS top local factors: education-num: 1.0000; occupation_Exec-managerial: 1.0000; relationship_Husband: 1.0000; age: 0.0000; fnlwgt: 0.0000; capital-gain: 0.0000; capital-loss: 0.0000; hours-per-week: 0.0000; workclass_Federal-gov: 0.0000; workclass_Local-gov: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 123,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_anchors\\seed_123\\n_100\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 3012.9475749999983,
+    "faithfulness_gap": 0.36503881262277826,
+    "fidelity": 0.6664828132949601,
+    "runtime_ms": 3012.9475749999983,
+    "sparsity": 0.027777777777777776,
+    "stability": 0.29668089737112496
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

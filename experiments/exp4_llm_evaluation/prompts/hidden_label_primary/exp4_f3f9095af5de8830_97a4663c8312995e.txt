@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_f3f9095af5de8830",
+  "dataset": "breast_cancer",
+  "explainer": "shap",
+  "explanation_length_tokens": 84,
+  "instance_id": "72",
+  "model_family": "rf",
+  "normalized_explanation": "SHAP top local factors: mean concave points: 0.0555; worst concave points: -0.0490; worst perimeter: 0.0391; worst texture: -0.0358; worst smoothness: -0.0316; worst concavity: -0.0310; mean concavity: -0.0224; mean texture: -0.0209; mean area: 0.0165; worst fractal dimension: -0.0129",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "FP",
+  "random_seed": 123,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\breast_cancer\\rf_shap\\seed_123\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1001.6359000001103,
+    "faithfulness_gap": 0.1499999999999999,
+    "fidelity": 0.6549220862908843,
+    "runtime_ms": 1001.6359000001103,
+    "sparsity": 0.9333333333333333,
+    "stability": 0.738055259357552
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_f3f9095af5de8830",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

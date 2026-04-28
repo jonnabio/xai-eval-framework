@@ -1,0 +1,76 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. The true label is
+visible for this bias-probe condition, but it must not dominate the score. Score
+the explanation as a semantic account of the model decision, not as a verdict on
+whether the prediction was correct.
+
+Rubric version: RUBRIC_V1
+Prompt condition: label_visible_bias_probe
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dataset": "adult",
+  "explainer": "dice",
+  "explanation_length_tokens": 86,
+  "instance_id": "6336",
+  "model_family": "logreg",
+  "normalized_explanation": "DICE top local factors: marital-status_Married-civ-spouse: 0.6000; age: 0.0000; fnlwgt: 0.0000; education-num: 0.0000; capital-gain: 0.0000; capital-loss: 0.0000; hours-per-week: 0.0000; workclass_Federal-gov: 0.0000; workclass_Local-gov: 0.0000; workclass_Never-worked: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 999,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_dice\\seed_999\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 544.955958990613,
+    "faithfulness_gap": 0.2094011511565509,
+    "fidelity": 0.621682135887841,
+    "runtime_ms": 544.955958990613,
+    "sparsity": 0.009259259259259259,
+    "stability": 0.048746552100841514
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

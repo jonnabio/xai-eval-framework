@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_78f82c912f113368",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_3118a0f719dfdef8_8c68d15dadd648f6.txt",
+  "prompt_version": "8c68d15dadd648f6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest recourse for the user or auditor. It is not clear how to use this information to address the false positive outcome.\",\n    \"audit_usefulness\": \"While the explanation identifies the top contributing features for the prediction, it lacks context about the instance's actual feature values or how these contributions led to the incorrect prediction. This limits its usefulness for auditing model behavior or diagnosing errors.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values, but does not explain what the values mean or how they relate to the prediction. For a reviewer unfamiliar with SHAP, the meaning may be opaque.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values and does not relate them to the model's decision boundary or the specific error (false positive). It is incomplete for thorough audit inspection.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their SHAP values, without unnecessary information.\",\n    \"overall_quality\": \"The explanation is compact and clear in listing SHAP values, but lacks actionable insight, context, and completeness for audit or recourse. It is minimally useful for reviewing model behavior in this error case.\",\n    \"semantic_plausibility\": \"The features listed are plausible contributors to a breast cancer prediction model, and the SHAP values are reasonable. However, without context, their specific impact on this instance is unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:37:34.587763+00:00"
+}

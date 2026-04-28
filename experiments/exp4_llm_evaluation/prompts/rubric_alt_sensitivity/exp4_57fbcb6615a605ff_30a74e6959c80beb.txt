@@ -1,0 +1,64 @@
+You are an independent evaluator auditing whether a local explanation is useful
+for model-behavior review.
+
+Use the same 1-5 scale as the primary rubric, but emphasize audit inspection:
+the best explanation is clear, compact, locally informative, plausible in the
+given context, and helpful for review or recourse.
+
+Rubric version: RUBRIC_V1
+Prompt condition: rubric_alt_sensitivity
+
+Case:
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dataset": "breast_cancer",
+  "explainer": "shap",
+  "explanation_length_tokens": 76,
+  "instance_id": "73",
+  "model_family": "xgb",
+  "normalized_explanation": "SHAP top local factors: worst texture: 0.0736; mean concave points: 0.0505; worst concave points: 0.0505; worst area: 0.0384; worst perimeter: 0.0237; area error: 0.0193; worst concavity: 0.0163; mean texture: 0.0128; worst radius: 0.0096; mean radius: 0.0089",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 456,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\breast_cancer\\xgb_shap\\seed_456\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1001.3821000466123,
+    "faithfulness_gap": 0.48992496728897095,
+    "fidelity": 0.5832711430900775,
+    "runtime_ms": 1001.3821000466123,
+    "sparsity": 0.3333333333333333,
+    "stability": 0.9901593320740969
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

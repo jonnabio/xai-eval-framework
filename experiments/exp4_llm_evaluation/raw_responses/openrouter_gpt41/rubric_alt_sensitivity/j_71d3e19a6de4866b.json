@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_71d3e19a6de4866b",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_9a991f3bd7709007_69266d7fc4da11d5.txt",
+  "prompt_version": "69266d7fc4da11d5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest recourse for the user or auditor. It is not clear how to use this information to change the prediction or address the false positive.\",\n    \"audit_usefulness\": \"While the explanation identifies which features contributed most to the prediction, it lacks context about the instance's actual feature values, the directionality of the prediction, or how these factors relate to the model's error (false positive). This limits its usefulness for auditing model behavior or diagnosing the error.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values, but lacks interpretive context (e.g., what a negative or positive value means for this prediction, or what the baseline is).\",\n    \"completeness\": \"The explanation only provides the top SHAP values without any reference to the instance's actual feature values, the model's baseline, or how these features interact. It is incomplete for a thorough audit.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions, without unnecessary information.\",\n    \"overall_quality\": \"The explanation is concise and formatted clearly, but lacks actionable insight, context, and completeness for effective audit or recourse. It is minimally useful for reviewing model behavior in this false positive case.\",\n    \"semantic_plausibility\": \"The features listed are plausible contributors in a breast cancer context, and the SHAP values are reasonable. However, without more context, it is difficult to fully assess the plausibility of the explanation for this specific instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:01:27.764143+00:00"
+}

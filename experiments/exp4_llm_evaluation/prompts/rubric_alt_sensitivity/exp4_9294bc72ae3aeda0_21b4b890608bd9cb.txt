@@ -1,0 +1,64 @@
+You are an independent evaluator auditing whether a local explanation is useful
+for model-behavior review.
+
+Use the same 1-5 scale as the primary rubric, but emphasize audit inspection:
+the best explanation is clear, compact, locally informative, plausible in the
+given context, and helpful for review or recourse.
+
+Rubric version: RUBRIC_V1
+Prompt condition: rubric_alt_sensitivity
+
+Case:
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dataset": "adult",
+  "explainer": "anchors",
+  "explanation_length_tokens": 82,
+  "instance_id": "9656",
+  "model_family": "mlp",
+  "normalized_explanation": "ANCHORS top local factors: education-num: 1.0000; hours-per-week: 1.0000; education_Masters: 1.0000; marital-status_Never-married: 1.0000; occupation_Exec-managerial: 1.0000; age: 0.0000; fnlwgt: 0.0000; capital-gain: 0.0000; capital-loss: 0.0000; workclass_Federal-gov: 0.0000",
+  "prediction": 1,
+  "prediction_confidence": null,
+  "quadrant": "TP",
+  "random_seed": 456,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_anchors\\seed_456\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 1386.3842079881579,
+    "faithfulness_gap": 0.002801467847627359,
+    "fidelity": 0.5951366086430863,
+    "runtime_ms": 1386.3842079881579,
+    "sparsity": 0.046296296296296294,
+    "stability": 0.0647466421213204
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

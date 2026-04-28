@@ -1,0 +1,76 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. The true label is
+visible for this bias-probe condition, but it must not dominate the score. Score
+the explanation as a semantic account of the model decision, not as a verdict on
+whether the prediction was correct.
+
+Rubric version: RUBRIC_V1
+Prompt condition: label_visible_bias_probe
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 91,
+  "instance_id": "8772",
+  "model_family": "logreg",
+  "normalized_explanation": "LIME top local factors: education_7th-8th: -0.0095; occupation_Handlers-cleaners: -0.0066; hours-per-week: 0.0048; education-num: 0.0037; capital-gain: 0.0035; age: -0.0033; relationship_Husband: -0.0017; marital-status_Married-civ-spouse: -0.0007; sex_Female: 0.0003; marital-status_Never-married: 0.0001",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "TN",
+  "random_seed": 789,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_lime\\seed_789\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 2.8521670028567314,
+    "faithfulness_gap": 0.5982181134239704,
+    "fidelity": 0.5214384432684172,
+    "runtime_ms": 2.8521670028567314,
+    "sparsity": 0.08333333333333333,
+    "stability": 0.08313890945664147
+  },
+  "true_label": 0
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

@@ -1,0 +1,75 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer hidden
+facts, do not reward or penalize an explainer family by reputation, and do not
+assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dataset": "german_credit",
+  "explainer": "shap",
+  "explanation_length_tokens": 80,
+  "instance_id": "99",
+  "model_family": "xgb",
+  "normalized_explanation": "SHAP top local factors: duration: -0.1719; checking_status_no checking: 0.1267; other_payment_plans_none: -0.1165; employment_4<=X<7: -0.0458; purpose_education: -0.0426; installment_commitment: 0.0404; purpose_new car: 0.0308; age: -0.0286; housing_own: -0.0278; savings_status_no known savings: -0.0262",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "FN",
+  "random_seed": 456,
+  "sample_size": 100,
+  "source_artifact_path": "experiments\\exp3_cross_dataset\\results\\german_credit\\xgb_shap\\seed_456\\n_100\\results.json",
+  "source_experiment": "exp3_cross_dataset",
+  "technical_metrics": {
+    "cost": 1005.2689470003315,
+    "faithfulness_gap": 0.2572210729122162,
+    "fidelity": 0.8085096252382088,
+    "runtime_ms": 1005.2689470003315,
+    "sparsity": 0.8524590163934426,
+    "stability": 0.7819726211104161
+  },
+  "true_label": null
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_c04339897f75190f",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}

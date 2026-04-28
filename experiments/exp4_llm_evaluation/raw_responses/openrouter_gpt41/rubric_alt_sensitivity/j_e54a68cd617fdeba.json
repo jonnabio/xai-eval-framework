@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_e54a68cd617fdeba",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_3c34585b1d65d81e_e871edc4eb1796e6.txt",
+  "prompt_version": "e871edc4eb1796e6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific, interpretable features (e.g., capital-gain, marital-status, occupation) and their contributions, which could guide recourse or review. However, the numeric values are not contextualized (e.g., what threshold matters), limiting direct actionability.\",\n    \"audit_usefulness\": \"The explanation is locally informative, showing which features most influenced the prediction for this instance. It is plausible for a logistic regression model and helps an auditor understand the model's behavior. However, the lack of context about the instance's actual feature values and the absence of a confidence score slightly reduce its audit value.\",\n    \"clarity\": \"The explanation is clear in format: each feature is listed with a weight, and the sign indicates directionality. However, it could be clearer if it included the actual feature values for this instance.\",\n    \"completeness\": \"The explanation covers the top local factors and their weights, which is generally sufficient for local interpretability. However, it omits the actual values of the features for this instance and does not explain the overall prediction or confidence.\",\n    \"concision\": \"The explanation is compact, listing only the top 10 features and their weights. There is no unnecessary information.\",\n    \"overall_quality\": \"The explanation is clear, concise, and locally informative, making it useful for audit and review. Its main limitations are the lack of instance-specific feature values and prediction confidence, which would improve actionability and completeness.\",\n    \"semantic_plausibility\": \"The explanation is plausible for a logistic regression model on the Adult dataset. The features and their directions make sense in context.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:39:13.189806+00:00"
+}

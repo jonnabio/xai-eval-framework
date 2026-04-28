@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_86c797d926282ac0",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_d372ea8e16367348_33b84f3bba5b4f2e.txt",
+  "prompt_version": "33b84f3bba5b4f2e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists which features were anchors (with value 1.0) and which were not, but does not provide thresholds, directions, or actionable information for recourse or intervention.\",\n    \"audit_usefulness\": \"While the explanation identifies the most influential features for the prediction, it lacks detail on how these features contributed (e.g., value ranges or thresholds), limiting its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated scores, but the meaning of the scores (especially 1.0 vs 0.0) is not explained, which may confuse users unfamiliar with the Anchors method.\",\n    \"completeness\": \"The explanation only indicates which features were anchors, without specifying the actual feature values, thresholds, or how they interact to produce the prediction. This is insufficient for fully inspecting the local decision.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their anchor status, without unnecessary information.\",\n    \"overall_quality\": \"The explanation provides a minimal semantic account of the model's decision, identifying key features but lacking detail on their specific influence or actionable insights.\",\n    \"semantic_plausibility\": \"It is plausible that the listed features are important for the model's decision, but the lack of detail about how they influence the outcome reduces the semantic informativeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:15:00.936127+00:00"
+}

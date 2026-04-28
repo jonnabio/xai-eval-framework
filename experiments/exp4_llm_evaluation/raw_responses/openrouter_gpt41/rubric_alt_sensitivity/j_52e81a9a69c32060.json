@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_52e81a9a69c32060",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_cae54143c3307788_8e89b087e9c734a8.txt",
+  "prompt_version": "8e89b087e9c734a8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest how to change the prediction. Users cannot easily infer what changes would alter the outcome.\",\n    \"audit_usefulness\": \"The explanation identifies which features were most influential locally, but the dominance of a single feature (age) and the presence of many zero-valued features limit insight into model behavior. It is minimally helpful for understanding why this false positive occurred.\",\n    \"clarity\": \"The explanation is clear in format, directly listing features and their weights. However, it lacks context or interpretation, which may hinder understanding for non-technical reviewers.\",\n    \"completeness\": \"The explanation covers all local features, but most are zero, and it does not explain the meaning or direction of influence. It omits context about the instance or why these features matter.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors and their weights without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks actionable insight, context, and interpretability, limiting its usefulness for audit or recourse.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that age is often a strong predictor in the Adult dataset, but the lack of nonzero contributions from other features is questionable and may indicate issues with the explanation's faithfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T22:13:22.638344+00:00"
+}

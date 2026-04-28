@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-2025-04-14",
+  "judgment_id": "j_39987ec1da982767",
+  "model_version": "openai/gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_4919484756fd435e_73d76d897ff04181.txt",
+  "prompt_version": "73d76d897ff04181",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights 'education-num' as a factor with a nonzero value, and all other features are shown as 0.0000, providing no guidance on what changes could alter the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It does not provide insight into why the model made this prediction, nor does it help identify potential issues or biases, since only one feature is implicated and the rest are zeroed out.\",\n    \"clarity\": \"The explanation is clear in format but lacks substantive content. Listing mostly zeros does not clarify the model's behavior for this instance.\",\n    \"completeness\": \"The explanation is incomplete. It fails to account for the possible influence of other features, and does not explain why only 'education-num' is relevant or how it interacts with the prediction.\",\n    \"concision\": \"While the explanation is concise, this is due to the lack of meaningful content rather than effective summarization. It is terse but not informative.\",\n    \"overall_quality\": \"Overall, the explanation is poor for audit or review purposes. It does not provide actionable, informative, or plausible insight into the model's local behavior.\",\n    \"semantic_plausibility\": \"It is implausible that only 'education-num' would have any effect, especially in a logistic regression model on the Adult dataset. The zeros for all other features suggest a problem with the explanation's generation or relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T21:43:08.910622+00:00"
+}

@@ -1,0 +1,76 @@
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. The true label is
+visible for this bias-probe condition, but it must not dominate the score. Score
+the explanation as a semantic account of the model decision, not as a verdict on
+whether the prediction was correct.
+
+Rubric version: RUBRIC_V1
+Prompt condition: label_visible_bias_probe
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dataset": "adult",
+  "explainer": "lime",
+  "explanation_length_tokens": 91,
+  "instance_id": "5952",
+  "model_family": "mlp",
+  "normalized_explanation": "LIME top local factors: native-country_India: -0.0000; occupation_Tech-support: -0.0000; race_Asian-Pac-Islander: -0.0000; native-country_United-States: 0.0000; education_Bachelors: -0.0000; race_White: 0.0000; relationship_Husband: -0.0000; marital-status_Married-civ-spouse: -0.0000; education-num: -0.0000; age: 0.0000",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "FN",
+  "random_seed": 999,
+  "sample_size": 50,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\mlp_lime\\seed_999\\n_50\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 2.790750004351139,
+    "faithfulness_gap": 0.6157605396902566,
+    "fidelity": 0.0,
+    "runtime_ms": 2.790750004351139,
+    "sparsity": 0.0,
+    "stability": -2.5176038286072204e-34
+  },
+  "true_label": 1
+}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}
