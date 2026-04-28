@@ -49,6 +49,37 @@ def sample_cases(cases: List[Exp4Case], target_cases: int, seed: int) -> List[Ex
     if len(cases) <= target_cases:
         return sorted(cases, key=lambda case: case.case_id)
 
+    by_source: Dict[str, List[Exp4Case]] = defaultdict(list)
+    for case in cases:
+        by_source[case.source_experiment].append(case)
+    if len(by_source) > 1:
+        selected: List[Exp4Case] = []
+        sources = sorted(by_source)
+        base_quota = target_cases // len(sources)
+        remainder = target_cases % len(sources)
+        shortfall = 0
+        for index, source in enumerate(sources):
+            quota = base_quota + (1 if index < remainder else 0)
+            source_cases = by_source[source]
+            if len(source_cases) < quota:
+                shortfall += quota - len(source_cases)
+                quota = len(source_cases)
+            selected.extend(_sample_cases_within_pool(source_cases, quota, seed + index))
+
+        if shortfall:
+            selected_ids = {case.case_id for case in selected}
+            remaining = [case for case in cases if case.case_id not in selected_ids]
+            selected.extend(_sample_cases_within_pool(remaining, shortfall, seed + len(sources)))
+
+        return sorted(selected[:target_cases], key=lambda case: case.case_id)
+
+    return _sample_cases_within_pool(cases, target_cases, seed)
+
+
+def _sample_cases_within_pool(cases: List[Exp4Case], target_cases: int, seed: int) -> List[Exp4Case]:
+    if len(cases) <= target_cases:
+        return sorted(cases, key=lambda case: case.case_id)
+
     by_bucket: Dict[str, List[Exp4Case]] = defaultdict(list)
     medians = _metric_medians(cases)
     for case in cases:

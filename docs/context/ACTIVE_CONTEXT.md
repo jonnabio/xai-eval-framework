@@ -70,6 +70,10 @@ Manuscript integration:
   parser, analysis exports, CLI scripts, and `tests/exp4`. The Windows
   `.venv-exp3` verification command `python -m pytest tests/exp4` passes with
   10 tests.
+- EXP4 fixed case inventory has been generated with 192 cases from 126,017
+  candidates: 96 from EXP2 Adult and 96 from EXP3 external-validation datasets
+  (Breast Cancer and German Credit). The inventory has 192 unique case IDs and
+  no empty normalized explanations.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.
