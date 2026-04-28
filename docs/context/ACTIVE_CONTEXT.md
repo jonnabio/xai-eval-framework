@@ -78,6 +78,12 @@ Manuscript integration:
   conditions. It produced 15 dummy LLM judgments, 15 parsed score rows, zero
   parse failures, and dry-run analysis summaries. These artifacts validate the
   execution path but are not real LLM evidence.
+- EXP4 real-judge execution is prepared but not yet run. The local environment
+  has OpenAI and Google API credentials available, OpenRouter is not configured,
+  and the manifest now includes `openai_gpt41` using the locked
+  `gpt-4.1-2025-04-14` snapshot. The runner supports `--judge-id` filtering so
+  the real pilot can be limited to one judge, one condition, and a small case
+  count before any full execution.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.

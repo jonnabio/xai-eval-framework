@@ -20,6 +20,7 @@ def run_exp4_judges(
     limit: Optional[int] = None,
     replicates: Optional[int] = None,
     condition: Optional[str] = None,
+    judge_id: Optional[str] = None,
     force: bool = False,
 ) -> Dict[str, Any]:
     manifest = load_manifest(manifest_path)
@@ -38,6 +39,10 @@ def run_exp4_judges(
     run_manifest_dir.mkdir(parents=True, exist_ok=True)
 
     judges = manifest.judges if not dry_run else [_dry_run_judge()]
+    if judge_id:
+        judges = [judge for judge in judges if judge_key(judge) == judge_id]
+        if not judges:
+            raise ValueError(f"No EXP4 judge configured with judge_id={judge_id}")
     clients = {
         judge_key(judge): None if dry_run else LLMClientFactory.create(_to_llm_config(judge))
         for judge in judges

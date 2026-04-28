@@ -21,6 +21,7 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--replicates", type=int, default=None)
     parser.add_argument("--condition", choices=["hidden_label_primary", "label_visible_bias_probe", "rubric_alt_sensitivity"], default=None)
+    parser.add_argument("--judge-id", default=None, help="Run only one configured judge, e.g. openai_gpt41")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
@@ -30,6 +31,7 @@ def main() -> None:
         limit=args.limit,
         replicates=args.replicates,
         condition=args.condition,
+        judge_id=args.judge_id,
         force=args.force,
     )
     print(f"Wrote {summary['written_responses']} raw responses; skipped {summary['skipped_existing']}")
