@@ -88,6 +88,12 @@ Manuscript integration:
   using `openrouter_gpt41` (`openai/gpt-4.1-2025-04-14`) on the hidden-label
   primary condition. The run wrote one raw OpenRouter response, parsed it
   successfully, and kept parser failures at zero.
+- EXP4 OpenRouter real pilot expansion has been completed for 24 hidden-label
+  cases. It produced 24 raw OpenRouter judgments, parsed all responses with zero
+  failures, and generated analysis summaries. The pilot pattern shows higher
+  concision and semantic plausibility than completeness, audit usefulness, and
+  actionability, supporting the thesis claim that technical XAI outputs require
+  complementary semantic evaluation.
 - Thesis Resumen and Abstract now include the EXP1/EXP2/EXP3 evidence structure,
   the EXP3 Breast Cancer/German Credit validation role, and the bounded EXP3
   SHAP-vs-Anchors portability result.
