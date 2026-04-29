@@ -51,9 +51,9 @@ def select_human_validation_cases(
     else:
         cases_df = pd.read_csv(cases_manifest_path)
     
-    # Define score dimensions (exclude metadata columns)
-    score_dims = ['clarity', 'completeness', 'concision', 'semantic_plausibility',
-                  'audit_usefulness', 'actionability', 'overall_quality']
+    # Define score dimensions (use actual column names with _score suffix)
+    score_dims = ['clarity_score', 'completeness_score', 'concision_score', 'semantic_plausibility_score',
+                  'audit_usefulness_score', 'actionability_score', 'overall_quality_score']
     
     # Compute disagreement per case using primary condition
     primary_condition = 'hidden_label_primary'

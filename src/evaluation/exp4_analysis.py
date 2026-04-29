@@ -225,7 +225,8 @@ def _krippendorff_per_dimension(data: pd.DataFrame) -> pd.DataFrame:
 
 def _judge_disagreement_matrix(data: pd.DataFrame) -> pd.DataFrame:
     """Compute case-level disagreement for human validation case selection."""
-    dimensions = [col.replace("_score", "") for col in data.columns if col.endswith("_score")]
+    # Get all score columns (with _score suffix as they appear in data)
+    dimensions = [col for col in data.columns if col.endswith("_score")]
     
     return MultiJudgeComparison.judge_disagreement_matrix(
         data,

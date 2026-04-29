@@ -28,10 +28,10 @@ def run_command(cmd: list[str], description: str) -> bool:
     result = subprocess.run(cmd, cwd=ROOT)
     
     if result.returncode == 0:
-        print(f"✅ Success: {description}")
+        print(f"[OK] Success: {description}")
         return True
     else:
-        print(f"❌ Failed: {description} (exit code: {result.returncode})")
+        print(f"[FAIL] Failed: {description} (exit code: {result.returncode})")
         return False
 
 
@@ -170,7 +170,7 @@ def main() -> None:
     print(f"Manifest: {manifest_path}")
     print(f"Parsed scores: {parsed_scores_path}")
     print(f"Analysis output: {analysis_dir}")
-    print(f"Human validation cases: {n_cases}")
+    print(f"Human validation cases: {args.n_cases}")
     
     if args.phase in ["1", "all"]:
         success = phase_1_completion(manifest_path, parsed_scores_dir, analysis_dir)
@@ -185,7 +185,7 @@ def main() -> None:
             sys.exit(1)
     
     print("\n" + "="*70)
-    print("✅ ORCHESTRATION COMPLETE")
+    print("[OK] ORCHESTRATION COMPLETE")
     print("="*70)
     print("\nNext steps:")
     print("1. Review multi-judge metrics (Phase 1):")
