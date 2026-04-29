@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_6e4d738ec2896a3e",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_dc46675654a709a2_e84193b5db595e88.txt",
+  "prompt_version": "e84193b5db595e88",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but does not provide guidance or insight on how to change the prediction or improve the outcome, limiting its usefulness for decision support or recourse.\",\n    \"audit_usefulness\": \"The explanation provides only two features with nonzero importance and zero values for all others, offering minimal insight into the model's decision process and making it difficult to audit or understand nuanced behavior.\",\n    \"clarity\": \"The explanation is presented as a list of features with associated numeric values, but the meaning of these values (e.g., why some are exactly 1.0 and others 0.0) is not clearly explained, reducing understandability.\",\n    \"completeness\": \"The explanation is very sparse, showing only two features with importance and ignoring all others, which is insufficient to fully inspect the local decision or understand the model's reasoning.\",\n    \"concision\": \"The explanation is concise but overly so, omitting important contextual details and reducing its informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks depth, clarity, and actionable insights, resulting in a poor semantic account of the model's decision.\",\n    \"semantic_plausibility\": \"The explanation identifies 'education-num' and 'marital-status_Never-married' as top factors, which are plausible features for the adult dataset, but the zero values for all other features and lack of further context reduce the coherence and richness of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:55:13.442844+00:00"
+}

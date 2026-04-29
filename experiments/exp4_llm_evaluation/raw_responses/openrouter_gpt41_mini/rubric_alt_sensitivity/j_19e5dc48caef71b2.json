@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b168d0ab73784973",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_19e5dc48caef71b2",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_b168d0ab73784973_340ba3b9a615808a.txt",
+  "prompt_version": "340ba3b9a615808a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b168d0ab73784973\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local SHAP factors with their contributions, but does not provide guidance on how to change features to improve the prediction or recourse steps, limiting actionability.\",\n    \"audit_usefulness\": \"The explanation is somewhat informative about feature contributions locally, but the low fidelity (0.50) and faithfulness gap (0.17) reduce confidence in its reliability for auditing model behavior. The explanation lacks deeper insight into why the model made a false negative error.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with numeric values, which is clear in format but may be difficult to interpret without additional context on feature encoding or directionality.\",\n    \"completeness\": \"The explanation covers the top 10 features influencing the prediction, which is reasonably complete for a local explanation, but it does not contextualize these contributions relative to the true label or model error.\",\n    \"concision\": \"The explanation is concise, listing only the top factors with their SHAP values without extraneous information.\",\n    \"overall_quality\": \"Overall, the explanation is clear and concise but limited in audit usefulness and actionability due to moderate fidelity and lack of contextual interpretation, resulting in low overall quality for model-behavior review.\",\n    \"semantic_plausibility\": \"The feature contributions appear plausible given the dataset context (e.g., checking account status and purpose of credit), but the presence of contradictory signs and low fidelity raise questions about the explanation's semantic reliability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:20:00.047917+00:00"
+}

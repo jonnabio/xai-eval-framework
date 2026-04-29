@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_282b2b337bb41d87",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_54bef1007a9a8820",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_282b2b337bb41d87_fdd17ff533c2d42d.txt",
+  "prompt_version": "fdd17ff533c2d42d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_282b2b337bb41d87\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values (1.0 or 0.0) but does not provide guidance on how to act on these features or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is sparse and lacks detail on how these features influence the prediction locally. The presence of many zero values and no confidence score reduces its informativeness for auditing model behavior, especially given the false negative case.\",\n    \"clarity\": \"The explanation is presented as a list of features with associated numeric values, but the meaning of these values (e.g., 1.0 vs 0.0) is not explicitly clarified, making it less clear for a reviewer unfamiliar with the explainer's output format.\",\n    \"completeness\": \"The explanation only includes a subset of features with binary importance indicators and omits any contextual information about the instance or model decision process, resulting in an incomplete picture of the local decision rationale.\",\n    \"concision\": \"The explanation is relatively concise, listing only a few features with importance scores, but this conciseness comes at the cost of informativeness and clarity.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to lack of clarity, limited local informativeness, and poor actionability, especially in a false negative context where understanding model errors is critical.\",\n    \"semantic_plausibility\": \"The features identified as important (e.g., area error, fractal dimension error, worst texture) are plausible factors in breast cancer diagnosis models, but the binary importance values and lack of explanation reduce confidence in the semantic meaningfulness of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:28:51.824395+00:00"
+}

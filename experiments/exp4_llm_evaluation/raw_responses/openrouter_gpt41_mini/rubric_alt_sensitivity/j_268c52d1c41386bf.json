@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_268c52d1c41386bf",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_1c525ff1deb5c1a6_94b855d4aee1f2a4.txt",
+  "prompt_version": "94b855d4aee1f2a4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only one feature with a nonzero importance (marital-status_Never-married) and assigns zero importance to all other features, providing no guidance on how to change the prediction or improve the outcome. This severely limits actionable insights for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing a single dominant factor with a high value and all others zero, which is unlikely to reflect the true local decision boundary. The low fidelity and high faithfulness gap metrics further indicate poor reliability, making it unhelpful for auditing or understanding model behavior in this false negative case.\",\n    \"clarity\": \"The explanation is straightforward and easy to read, listing features and their importance scores clearly. However, the presence of many zero values without explanation reduces interpretability of the model's reasoning.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies one feature with importance and ignores all others, which is unlikely to fully capture the local decision factors, especially given the false negative prediction and the true label being positive.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with mostly zero values, which is a positive aspect, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit purposes due to lack of actionable insights, low fidelity, and incomplete feature importance representation, despite being clear and concise.\",\n    \"semantic_plausibility\": \"It is implausible that only marital-status_Never-married influences the prediction with such a high weight while all other features have zero impact, especially in a complex dataset like adult where multiple factors typically contribute.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:21:32.185716+00:00"
+}

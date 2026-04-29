@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_aa0d2427f637293a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_10757be283c8c8d3",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_aa0d2427f637293a_177003f40134ab57.txt",
+  "prompt_version": "177003f40134ab57",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_aa0d2427f637293a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with equal importance scores of 1.0 for four features and zero for others, but it does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"The explanation is limited in audit usefulness because it only highlights features with maximum importance scores without quantifying their effect or interaction, and the faithfulness gap is relatively high (0.33), indicating the explanation may not fully reflect the model's behavior locally.\",\n    \"clarity\": \"The explanation is clear in presenting the top features and their importance scores, but the format is somewhat terse and lacks contextual interpretation, which reduces clarity for a reviewer unfamiliar with the dataset or feature encoding.\",\n    \"completeness\": \"The explanation is incomplete as it only shows a binary importance (1.0 or 0.0) for features without further detail on how these features influence the prediction or their thresholds, limiting understanding of the local decision boundary.\",\n    \"concision\": \"The explanation is concise, listing only the top factors with their importance scores and omitting less relevant features, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks depth to be truly useful for model-behavior review or recourse, despite being concise and somewhat clear.\",\n    \"semantic_plausibility\": \"The features identified as important (duration, age, checking_status_<0, credit_history_critical/other existing credit) are plausible factors influencing credit decisions, consistent with domain knowledge, supporting semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:09:05.457479+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_ef51ac411b5e350f",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_6ce495f3482aecc1_ae276fc83d1a28b9.txt",
+  "prompt_version": "ae276fc83d1a28b9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance values (1.0 or 0.0) but does not provide actionable insight on how to change or interpret these features for recourse or improvement.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it lacks nuance and detail; it only highlights two features as important with maximum weight and all others as zero, which is unlikely to reflect the true local model behavior and thus is not informative for model behavior inspection.\",\n    \"clarity\": \"The explanation is clear in format and easy to read, but the binary 1.0/0.0 values without further context or gradation reduce interpretability of the model's decision rationale.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies two features as important and ignores the rest, which may omit relevant local factors influencing the prediction.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero importance, but this conciseness comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to lack of detail, poor informativeness, and limited actionable insight, despite being clear and concise.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible since worst texture and worst concave points are known relevant features in breast cancer diagnosis, but the strict binary importance values and ignoring other features reduce its credibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:23:00.485831+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_7396f9d92ff0f282",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_4e9045d4d8fa6e21_3ceccb02f9e9cf4d.txt",
+  "prompt_version": "3ceccb02f9e9cf4d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies only one feature with a nonzero importance score, marital-status_Married-civ-spouse, but provides no guidance on how to change the prediction or improve the outcome. Thus, it is not actionable for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing a single dominant factor with a high score and all others zero. However, the low fidelity (0.61) and high faithfulness gap (0.21) suggest the explanation poorly reflects the model's true behavior locally, limiting its usefulness for audit review.\",\n    \"clarity\": \"The explanation is clear in format and easy to read, listing features and their normalized importance scores in a straightforward manner.\",\n    \"completeness\": \"The explanation is very sparse, highlighting only one feature with a nonzero value and ignoring all others. This lack of detail reduces completeness and leaves out potentially relevant factors.\",\n    \"concision\": \"The explanation is concise, with only one feature having a nonzero importance score and a short token length (86 tokens).\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and low fidelity to be useful for meaningful audit or recourse. It is clear and concise but lacks completeness, actionability, and semantic plausibility given the false positive prediction.\",\n    \"semantic_plausibility\": \"It is questionable that only marital status drives the prediction with such a high weight while all other features have zero importance, especially given the false positive outcome. This reduces the explanation's plausibility in context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:56:58.566354+00:00"
+}

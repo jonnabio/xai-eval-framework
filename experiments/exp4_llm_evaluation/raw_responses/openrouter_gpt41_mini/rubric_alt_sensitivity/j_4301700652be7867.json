@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_4301700652be7867",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_683e588090eecf9e.txt",
+  "prompt_version": "683e588090eecf9e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies top local factors with maximum importance scores but provides no guidance on how to change the prediction or improve the outcome, limiting actionable insights.\",\n    \"audit_usefulness\": \"The explanation is sparse and highlights only three features with full importance, but the fidelity is very low (0.417), indicating poor alignment with the model's actual behavior locally, making it unhelpful for reliable audit or recourse.\",\n    \"clarity\": \"The explanation is clear in listing the top features and their importance scores, but the zero scores for many features and lack of further detail reduce interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only shows a few features with importance and ignores others, and does not provide confidence or rationale for the prediction, especially since the prediction is a false negative.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero importance, avoiding unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to poor fidelity, lack of actionable insights, and incomplete context, despite being concise and somewhat clear.\",\n    \"semantic_plausibility\": \"The features identified as important (education-num, capital-gain, hours-per-week) are plausible factors influencing income prediction, but the zero importance for age and workclass is questionable given domain knowledge, reducing plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:06:23.767761+00:00"
+}

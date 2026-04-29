@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_91b179c57d94435c",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_4838b07b3f340d51_4e0a31ff7ae8e21a.txt",
+  "prompt_version": "4e0a31ff7ae8e21a",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only highlights two features as anchors (checking_status_no checking and housing_own), both fixed at 1.0, with all other features at 0.0. This does not provide actionable insight for recourse, as it does not indicate how changing any feature would affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It does not clarify why the model made a false positive prediction, nor does it provide insight into model behavior in this local context. The anchors are too sparse and do not reflect the complexity of the decision.\",\n    \"clarity\": \"The explanation is technically clear in format, but the meaning is opaque: it is not clear why only these two features are anchors, or what their values mean in context. The 1.0/0.0 values are not explained.\",\n    \"completeness\": \"The explanation is incomplete. It omits any discussion of the other features, their possible influence, or the interplay between features. It does not address why the model erred in this FP case.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise, as it omits critical information needed for understanding or auditing the decision.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide useful, actionable, or locally informative insight for audit or recourse. It is too sparse and lacks context.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible in context: it is unlikely that only two features at fixed values fully determine the model's prediction, especially given the low fidelity and faithfulness metrics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:36:34.513379+00:00"
+}

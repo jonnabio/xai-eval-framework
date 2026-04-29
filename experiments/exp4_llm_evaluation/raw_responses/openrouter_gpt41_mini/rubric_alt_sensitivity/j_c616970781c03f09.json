@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_c616970781c03f09",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_07f7eab6526a79eb_ba013373b904049d.txt",
+  "prompt_version": "ba013373b904049d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance values but lacks guidance on how to change the prediction or improve the outcome, limiting its usefulness for recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is not very helpful for auditing because it has low fidelity (0.64) and a high faithfulness gap (0.70), indicating it poorly reflects the model's true local behavior. The features and weights given do not clearly explain the false positive prediction in a locally informative way.\",\n    \"clarity\": \"The explanation is presented as a list of feature contributions with numeric weights, which is straightforward, but the lack of context or interpretation reduces clarity for a reviewer unfamiliar with the dataset or model.\",\n    \"completeness\": \"The explanation includes the top 10 local factors, which is reasonably complete in terms of feature coverage, but it does not provide confidence or uncertainty information, nor does it contextualize the prediction or error type.\",\n    \"concision\": \"The explanation is relatively concise, listing only the top features with their weights without extraneous information, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to poor fidelity and faithfulness, limited clarity and actionability, and minimal contextual information, making it of low utility for model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The feature contributions appear plausible given the dataset (e.g., marital status and hours per week influencing income prediction), but the contradictory positive and negative weights for related features and the false positive prediction reduce confidence in the explanation's semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:00:59.192554+00:00"
+}

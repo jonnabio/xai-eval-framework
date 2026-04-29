@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_dc5e0af1e6f9ee71",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_1a62f386aa869177",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_dc5e0af1e6f9ee71_2cdfe3d7c30aaaa9.txt",
+  "prompt_version": "2cdfe3d7c30aaaa9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc5e0af1e6f9ee71\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists many features with zero importance except two, but does not provide guidance on what changes could alter the prediction or how to interpret these anchors for recourse, making it not actionable.\",\n    \"audit_usefulness\": \"The explanation is not helpful for auditing model behavior because it is dominated by two features with full weight and many zero-weight features, which is confusing and not locally informative. It lacks insight into why the model made this prediction or how robust it is.\",\n    \"clarity\": \"The explanation is unclear due to the presence of many features with zero importance values, which dilutes focus and makes it hard to understand the key drivers of the prediction.\",\n    \"completeness\": \"The explanation is incomplete as it does not provide confidence or additional context about the anchors' coverage or precision, limiting understanding of the explanation's reliability.\",\n    \"concision\": \"The explanation is not concise; it includes many zero-valued features that add noise without value, reducing compactness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes because it is unclear, not actionable, not concise, and provides little useful insight into the model's local behavior.\",\n    \"semantic_plausibility\": \"The explanation is semantically implausible because it assigns full importance to two features and zero to all others, which is unlikely in a complex model and dataset, suggesting a problem with the explanation generation or presentation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:56:26.118760+00:00"
+}

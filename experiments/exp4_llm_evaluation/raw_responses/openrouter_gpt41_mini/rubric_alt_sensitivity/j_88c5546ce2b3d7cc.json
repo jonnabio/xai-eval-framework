@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_88c5546ce2b3d7cc",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_07f7eab6526a79eb_ba013373b904049d.txt",
+  "prompt_version": "ba013373b904049d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance values but does not clearly indicate how a user could act to change the prediction or address the false positive, limiting its practical recourse value.\",\n    \"audit_usefulness\": \"The explanation is limited by low fidelity (0.64) and high faithfulness gap (0.70), indicating it poorly reflects the model's true local behavior. The presence of contradictory feature effects (e.g., both positive and negative marital-status factors) and low stability further reduce its reliability for audit review.\",\n    \"clarity\": \"The explanation lists top features with numeric weights, but the presentation is dense and lacks intuitive interpretation or contextualization, making it hard to quickly grasp the key drivers of the prediction.\",\n    \"completeness\": \"While the explanation includes the top 10 features, it does not provide confidence or uncertainty measures, nor does it explain the interaction or cumulative effect, limiting completeness for thorough audit.\",\n    \"concision\": \"The explanation is relatively concise with only 89 tokens and a sparse set of features, but the compactness comes at the cost of clarity and informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to poor fidelity, low stability, and limited actionable insight, making it minimally useful for model-behavior review or recourse in this false positive case.\",\n    \"semantic_plausibility\": \"The feature attributions are plausible in the context of the adult dataset (e.g., marital status and hours per week are relevant), but the contradictory signs and low fidelity undermine confidence in their semantic correctness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:01:06.547891+00:00"
+}

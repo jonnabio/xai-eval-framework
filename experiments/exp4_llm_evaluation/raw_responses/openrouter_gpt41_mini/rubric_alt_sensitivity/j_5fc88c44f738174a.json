@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_5fc88c44f738174a",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_07197d290136f3e3_95c160d850f3cde2.txt",
+  "prompt_version": "95c160d850f3cde2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights because it only lists feature importance scores without indicating how changes in these features would affect the prediction or suggesting any recourse for the false negative outcome.\",\n    \"audit_usefulness\": \"The explanation is minimally useful for audit purposes as it identifies top features but lacks detail on their specific values or thresholds, and the very low fidelity and faithfulness gap metrics suggest it poorly reflects the model's true local behavior, limiting its utility for model-behavior review.\",\n    \"clarity\": \"The explanation is presented as a list of features with numeric importance scores, but the meaning of these scores and their impact on the prediction is not clearly explained, making it difficult to interpret for audit inspection.\",\n    \"completeness\": \"The explanation is incomplete because it only highlights three features with importance 1.0 and ignores the rest, without providing context on feature values or how these features contribute to the prediction, especially given the false negative case.\",\n    \"concision\": \"The explanation is concise, listing only a few features with their importance scores, which is appropriate in length and avoids unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit review: it is concise but lacks clarity, completeness, and actionable information, and its low fidelity undermines trust in its accuracy.\",\n    \"semantic_plausibility\": \"The explanation's emphasis on education-num, capital-gain, and capital-loss as top factors is plausible given the dataset context, but the zero importance for age and workclass features may be questionable, and the lack of further detail reduces confidence in its semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:59:56.831112+00:00"
+}

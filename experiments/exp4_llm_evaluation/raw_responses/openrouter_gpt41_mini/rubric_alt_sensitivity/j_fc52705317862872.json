@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_fc52705317862872",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_959ed027a5ab7370_ae39082174427d1f.txt",
+  "prompt_version": "ae39082174427d1f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with equal importance scores but does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it shows a false negative case without clarifying why the model failed or how the features contributed to the incorrect prediction. The low fidelity and stability metrics further reduce trust in the explanation.\",\n    \"clarity\": \"The explanation is presented as a list of features with uniform importance scores, but the meaning of some feature encodings (e.g., checking_status_<0) is unclear without additional context, reducing clarity.\",\n    \"completeness\": \"The explanation includes several features but omits any indication of their directionality or interaction effects, and the zero importance scores for some features add noise without explanation, making it incomplete.\",\n    \"concision\": \"The explanation is relatively compact with only a few features listed, but the inclusion of zero-importance features detracts from conciseness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to lack of actionable insights, poor clarity, incomplete information, and questionable semantic plausibility given the false negative prediction.\",\n    \"semantic_plausibility\": \"The explanation's uniform importance scores and inclusion of contradictory checking_status categories reduce plausibility. The model's false negative prediction suggests the explanation does not align well with the true label or expected feature influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:52:24.302039+00:00"
+}

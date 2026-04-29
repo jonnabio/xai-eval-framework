@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_b636304011d74040",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_44c1e011120b2dd5_f7f1591f19bebaa1.txt",
+  "prompt_version": "f7f1591f19bebaa1",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, but does not provide actionable guidance for recourse or how to change the prediction. It is not clear how a user could use this information to alter the outcome.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the prediction and their direction, which is helpful for auditing model behavior, especially in a false negative case. However, it lacks context about the instance's actual feature values or how these contributions compare to typical cases.\",\n    \"clarity\": \"The explanation is clear in listing features and their SHAP values, and the sign of each contribution is explicit. However, it assumes familiarity with SHAP and the feature names, which may not be universally understood.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values and does not relate the contributions to the model's output or the instance's specifics. It does not explain why these features matter in this context.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors with their contributions. There is no extraneous information.\",\n    \"overall_quality\": \"The explanation is compact and locally informative, but lacks actionable detail and deeper context for thorough audit or recourse. It is plausible and clear for a technical audience, but limited in completeness and actionability.\",\n    \"semantic_plausibility\": \"The explanation is plausible: the listed features are known to be relevant in breast cancer prediction, and the directions of influence are reasonable. The SHAP values are within expected ranges.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:35:09.269400+00:00"
+}

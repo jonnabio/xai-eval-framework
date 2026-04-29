@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_61e026fadfdc2dcb",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_b352dc7c29edc22c_25acf91539b695ce.txt",
+  "prompt_version": "25acf91539b695ce",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top SHAP feature contributions but does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies influential features, it lacks deeper insight into why the model made a false positive error, and the presence of contradictory feature effects (e.g., both positive and negative marital-status features) is not clarified, reducing its usefulness for audit review.\",\n    \"clarity\": \"The explanation is presented as a list of feature names with numeric values, which is straightforward but somewhat dense and technical, making it less clear for quick understanding without additional context.\",\n    \"completeness\": \"The explanation covers the top 10 features contributing locally, which is reasonably complete for a local explanation, but it does not contextualize these contributions relative to the instance or model behavior overall.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features with their SHAP values, avoiding unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is technically correct and concise but falls short in clarity, actionability, and audit usefulness due to lack of contextual interpretation and guidance.\",\n    \"semantic_plausibility\": \"The feature contributions appear plausible given the dataset and model type, with expected features like marital status and occupation influencing the prediction, but the mixed positive and negative contributions for related features could confuse interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:22:09.813437+00:00"
+}

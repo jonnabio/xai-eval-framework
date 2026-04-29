@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_caa5491bd6cf51a0",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_7ee17e1b81806239_e265d147c2e95853.txt",
+  "prompt_version": "e265d147c2e95853",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest how changes to features might alter the prediction. The small magnitude of the coefficients and lack of context about the instance's actual feature values further limit recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation identifies which features influenced the model's decision and their direction, the extremely small values and absence of the instance's actual feature values make it difficult to meaningfully audit the model's behavior for this specific case.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated coefficients, which is a standard LIME output. However, the meaning of the coefficients (e.g., their scale, impact, or units) is not explained, which may confuse non-expert users.\",\n    \"completeness\": \"The explanation provides the top local factors and their contributions, but omits the actual feature values for the instance, making it hard to fully understand why the model made its prediction. The lack of context about the instance reduces completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their coefficients without unnecessary information. However, this brevity comes at the cost of omitting useful context.\",\n    \"overall_quality\": \"The explanation is a minimal LIME output that lists local feature contributions, but lacks context and actionable information. It is clear and concise, but not sufficiently informative for thorough inspection or recourse.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it lists reasonable features for the Adult dataset and their contributions, but the very small coefficients and lack of context about the instance's values make it hard to interpret the semantic meaning of the model's decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:08:07.483985+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_0cb6c65c124851f2",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_2a63737c16fa6edb_7245fc01a23954a1.txt",
+  "prompt_version": "7245fc01a23954a1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance values but lacks clear guidance on how to act on these factors to change the prediction or improve outcomes, making it minimally actionable.\",\n    \"audit_usefulness\": \"The explanation is a simple list of local feature weights with very low fidelity (0.52) and high faithfulness gap (0.60), indicating poor alignment with the model's true behavior locally. This limits its usefulness for auditing or recourse review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with numeric values, but the meaning of these values and their impact on the prediction is not explicitly explained, reducing clarity for audit purposes.\",\n    \"completeness\": \"The explanation covers the top local factors but does not provide context such as prediction confidence or how these factors combine to produce the prediction, making it incomplete for thorough audit inspection.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features with their weights, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Due to low fidelity, lack of actionable insights, and limited clarity and completeness, the overall quality of this explanation for audit purposes is very low.\",\n    \"semantic_plausibility\": \"The feature contributions appear plausible given the dataset and model type, with expected features like education and occupation influencing the prediction, but the very small magnitudes and mixed signs reduce confidence in their meaningfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:31:51.903706+00:00"
+}

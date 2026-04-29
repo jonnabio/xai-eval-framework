@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_a32659966507ca30",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_a138a3019aad47d9_015324b8a096ab9e.txt",
+  "prompt_version": "015324b8a096ab9e",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights 'hours-per-week' as a factor with a nonzero value, and all other features are shown as having zero contribution. This does not provide any guidance on what changes could alter the prediction or help the user understand what to do differently.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It fails to provide insight into why the model made a false negative prediction, as only one feature is listed with a nonzero value and the rest are zero, which is implausible for a complex model like an MLP on the Adult dataset.\",\n    \"clarity\": \"While the format is clear and easy to read, the content is not informative. Listing mostly zeros does not clarify the model's behavior for this instance.\",\n    \"completeness\": \"The explanation is incomplete. It does not capture the likely multifactorial nature of the model's decision-making process, especially given the low fidelity and faithfulness metrics.\",\n    \"concision\": \"The explanation is concise, but this is due to a lack of substantive content rather than effective summarization.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of audit or review. It is not locally informative, plausible, or helpful for recourse.\",\n    \"semantic_plausibility\": \"It is implausible that only 'hours-per-week' would have any influence on the prediction, especially for a neural network model on this dataset. The explanation does not align with domain knowledge or expected model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:22:54.026924+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_c43f12da5fd34c63",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e4a3c652adf1d046_cdcbe592b39d6bae.txt",
+  "prompt_version": "cdcbe592b39d6bae",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with uniform importance scores of 1.0 for several features, but it does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"The explanation is not very useful for auditing because the fidelity is low (0.44), faithfulness gap is high (0.24), and stability is zero, indicating unreliable and inconsistent explanations. The factors listed do not help understand why the model made a false positive error in this instance.\",\n    \"clarity\": \"The explanation is presented as a list of features with numeric importance scores, but the meaning of these scores and their impact on the prediction is not clearly explained, reducing clarity for a reviewer.\",\n    \"completeness\": \"The explanation only includes a subset of features with top importance scores and ignores others, but it does not contextualize or explain the interaction or contribution of these features to the prediction, making it incomplete for thorough review.\",\n    \"concision\": \"The explanation is relatively concise, listing only a few features with importance scores, which is appropriate for local explanations and avoids overwhelming detail.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to poor fidelity, lack of stability, unclear presentation, and limited actionable insight, making it unhelpful for model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The explanation is not very plausible because it assigns equal maximum importance to multiple features without justification, and the model prediction is incorrect (false positive), suggesting the explanation does not align well with the true label or expected reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:02:59.554927+00:00"
+}

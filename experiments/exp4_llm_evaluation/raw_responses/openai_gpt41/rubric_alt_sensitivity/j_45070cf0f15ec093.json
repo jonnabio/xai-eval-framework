@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_45070cf0f15ec093",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_81c9024ae418939e_6fab4404f8b67da6.txt",
+  "prompt_version": "6fab4404f8b67da6",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse, as it only lists two features (age and relationship_Husband) as anchors with no guidance on how to change the outcome.\",\n    \"audit_usefulness\": \"The explanation is of limited use for audit inspection. It only highlights two features as determinative, with all others at zero, which may not reflect the true local decision boundary or help understand the model's error in this false negative case.\",\n    \"clarity\": \"While the format is clear and the anchor features are listed with their weights, the meaning of the weights (all or nothing) and the absence of further context may confuse auditors.\",\n    \"completeness\": \"The explanation is incomplete: it ignores all but two features, and does not explain why the prediction was a false negative or how the anchors relate to the model's error.\",\n    \"concision\": \"The explanation is concise, but this comes at the cost of informativeness. It is short but omits important context.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for model-behavior review or recourse. It is too sparse, lacks context, and does not help an auditor understand or address the model's error.\",\n    \"semantic_plausibility\": \"It is implausible that only age and relationship_Husband fully determine the prediction, especially in a complex dataset like 'adult'. The explanation does not align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:08:54.314294+00:00"
+}

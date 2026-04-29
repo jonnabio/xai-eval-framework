@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_b6693c50ff48ad32",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_60f604202ab9cb5c_21067576b9f324b6.txt",
+  "prompt_version": "21067576b9f324b6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only binary importance values (1.0 or 0.0) for features without any indication of directionality or thresholds, making it unhelpful for taking any corrective or investigative action.\",\n    \"audit_usefulness\": \"The explanation is overly simplistic and lacks nuance, with only two features marked as important and the rest zeroed out. It does not provide insight into why the model made a false positive prediction or how the features interact locally, limiting its usefulness for audit review.\",\n    \"clarity\": \"The explanation is clear in format but the meaning of the values (1.0 vs 0.0) is not explicitly explained, and the lack of contextual detail or feature value ranges reduces interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights two features with importance and ignores all others, providing no information about feature interactions or confidence, which are important for a thorough local explanation.\",\n    \"concision\": \"The explanation is concise, listing only a few features with binary importance values, but this conciseness comes at the cost of informativeness and depth.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes because it is not locally informative, lacks actionable detail, and does not help understand the model's false positive prediction in context.\",\n    \"semantic_plausibility\": \"The explanation's binary importance values seem implausible given the complexity of breast cancer data and the model's behavior; it is unlikely that only two features fully explain the prediction, reducing trust in the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:11:12.351195+00:00"
+}

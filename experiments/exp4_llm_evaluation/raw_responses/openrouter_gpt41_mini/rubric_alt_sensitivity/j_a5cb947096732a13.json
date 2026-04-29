@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_a5cb947096732a13",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ba96b41ceb2e14cb_3359367835b04c9d.txt",
+  "prompt_version": "3359367835b04c9d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only two features with nonzero importance scores, but these features (relationship_Other-relative and native-country_Portugal) have equal weights and no guidance on how to act on them. The zero values for all other features limit actionable insights for recourse or improvement.\",\n    \"audit_usefulness\": \"The explanation is sparse and does not clearly differentiate which features contributed to the false negative prediction. The high faithfulness gap and low fidelity indicate poor alignment with model behavior, reducing its utility for auditing or understanding the model locally.\",\n    \"clarity\": \"The explanation is presented in a straightforward format listing feature importance scores, but the meaning of zero values and the significance of the two highlighted features are not elaborated, limiting clarity for a reviewer unfamiliar with the context.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights two features with nonzero importance and ignores the rest, which may still influence the model. It lacks contextual information such as prediction confidence or counterfactual examples that would aid completeness.\",\n    \"concision\": \"The explanation is concise, listing only a few features with importance scores and omitting others, which is positive for brevity but at the cost of completeness and informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks sufficient detail and context to be useful for auditing or recourse. It fails to provide a clear, plausible, and actionable understanding of the model's local behavior for this instance.\",\n    \"semantic_plausibility\": \"The features identified as important (relationship_Other-relative and native-country_Portugal) are plausible factors in the adult dataset context, but the zero importance for age and education-num, which are typically influential, reduces the explanation's semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:25:42.034561+00:00"
+}

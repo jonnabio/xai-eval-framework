@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_9a226701a08b8503",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_6af7798c2cb4bb08_a8512e4a73e6572e.txt",
+  "prompt_version": "a8512e4a73e6572e",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, which could help a user identify which features most influenced the model's decision. However, it lacks actionable guidance or context on how to change the outcome or what specific thresholds matter, limiting its practical use for recourse.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of feature contributions, which is useful for auditing the model's local behavior. However, the absence of feature values and directionality context (e.g., what 'checking_status_<0' means in practice) reduces its effectiveness for a thorough audit.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated SHAP values, which is a standard and clear format for those familiar with SHAP. However, the use of feature codes and lack of definitions may hinder clarity for non-expert users.\",\n    \"completeness\": \"The explanation covers the top local factors influencing the prediction, but does not provide the actual feature values for this instance or the baseline, which limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their SHAP values without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and provides the main contributing factors, it lacks context, feature values, and actionable insights, which limits its overall semantic quality as an account of the model's decision.\",\n    \"semantic_plausibility\": \"The explanation is plausible in the context of a SHAP explanation for a random forest on the German Credit dataset, and the listed features are relevant to credit decisions. However, without feature values, the semantic connection to the specific case is weakened.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:55:46.028883+00:00"
+}

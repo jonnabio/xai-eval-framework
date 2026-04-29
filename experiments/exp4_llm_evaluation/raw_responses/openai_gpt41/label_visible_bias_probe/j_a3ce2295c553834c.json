@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_a3ce2295c553834c",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_ba8a2c4ca53c1a08_8ec38b69ef9a5695.txt",
+  "prompt_version": "8ec38b69ef9a5695",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local factors and their weights, which could help a user identify which features most influenced the prediction. However, the weights are small and the explanation does not clarify how changes to these features would affect the outcome, limiting its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of features with associated weights, allowing for some inspection of model behavior. However, the lack of context about the instance's actual feature values and the meaning of the weights reduces its utility for thorough auditing.\",\n    \"clarity\": \"The explanation is organized as a list of features and their weights, which is clear in format. However, the meaning of the weights and their impact on the prediction is not explained, which may confuse non-expert users.\",\n    \"completeness\": \"The explanation includes the top local factors and their weights, but omits the actual values of these features for the instance and does not explain the directionality or magnitude of their influence in context. This limits the ability to fully inspect the prediction.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their weights without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and somewhat clear, it lacks important context and interpretability for users to fully understand or act on the model's decision. The absence of feature values and insufficient explanation of the weights' meaning limit its overall quality.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible as a LIME output for a tabular model, listing relevant features and weights. However, without more context, it is difficult to fully assess the coherence with the specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:35:07.339060+00:00"
+}

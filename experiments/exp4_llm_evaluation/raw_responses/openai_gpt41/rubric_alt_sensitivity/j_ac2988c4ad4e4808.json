@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_ac2988c4ad4e4808",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_36ff2c1056b28459_d794c28914cdc552.txt",
+  "prompt_version": "d794c28914cdc552",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides no actionable information for recourse, as all but one feature have zero contribution, and the only nonzero factor ('native-country_Italy') is not typically actionable for an individual.\",\n    \"audit_usefulness\": \"For audit inspection, this explanation is not useful. It does not reveal which features meaningfully influenced the model's prediction, nor does it help identify potential sources of error or bias, especially given the false negative outcome.\",\n    \"clarity\": \"While the format is clear and easy to read, the content is uninformative, as it lists mostly zero-valued factors.\",\n    \"completeness\": \"The explanation is incomplete: it fails to provide insight into why the model made a false negative prediction, as it suggests that only 'native-country_Italy' had any effect, which is implausible for a logistic regression model on this dataset.\",\n    \"concision\": \"The explanation is concise, but this is due to the lack of substantive content rather than effective summarization.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for model-behavior review or recourse. It lacks informativeness, plausibility, and actionable detail.\",\n    \"semantic_plausibility\": \"It is implausible that only 'native-country_Italy' would have any effect on the prediction, with all other features at zero, especially for a logistic regression model. This suggests a problem with the explanation's fidelity or the explainer's configuration.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:26:43.656507+00:00"
+}

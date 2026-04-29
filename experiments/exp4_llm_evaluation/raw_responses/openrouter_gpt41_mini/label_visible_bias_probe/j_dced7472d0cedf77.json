@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_dced7472d0cedf77",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_7b78e47140c1369b_594d45a76e5317b2.txt",
+  "prompt_version": "594d45a76e5317b2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation is presented as a list of features with associated numeric values, but the meaning of these values and their impact on the prediction is not clearly explained. The wording is terse and lacks interpretive guidance, making it difficult to understand the rationale behind the model's decision.\",\n    \"completeness\": \"The explanation only highlights one feature with a non-zero value (capital-gain) and sets all others to zero, providing minimal insight into the model's decision process. It does not explain how these values relate to the prediction or the instance's characteristics, limiting the completeness of the local decision information.\",\n    \"concision\": \"The explanation is very brief and compact, listing only a few features with mostly zero values. While concise, this brevity comes at the cost of informativeness and interpretability.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible in that capital-gain is a relevant feature for income prediction in the adult dataset, but the zero values for all other features, including age and education-num, which are typically important, reduce the semantic coherence of the explanation.\",\n    \"audit_usefulness\": \"The explanation provides very limited information for auditing the model's behavior, as it does not clarify how the features influence the prediction or allow for deeper inspection of model reasoning.\",\n    \"actionability\": \"The explanation does not support meaningful review or recourse because it lacks actionable insights or suggestions for changing the prediction outcome. It does not guide the user on what factors could be modified or considered.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks sufficient detail, clarity, and interpretability to serve as a useful semantic account of the model's decision. It fails to provide a meaningful understanding of why the model predicted the positive class.\"\n  },\n  \"scores\": {\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"semantic_plausibility\": 1,\n    \"audit_usefulness\": 1,\n    \"actionability\": 1,\n    \"overall_quality\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:37:14.862960+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_a1c0af89a79393e2",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_902d690264149a09_1fe26e359588495b.txt",
+  "prompt_version": "1fe26e359588495b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top SHAP factors with their contributions but does not provide guidance on how to change features to alter the prediction or improve the outcome, limiting actionable insights.\",\n    \"audit_usefulness\": \"The explanation is somewhat informative about local feature impacts but lacks connection to the false negative prediction and does not clarify why the model erred, reducing its usefulness for audit review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with numeric values, which is clear in format but may be difficult to interpret without additional context on feature encoding or directionality.\",\n    \"completeness\": \"The explanation includes the top 10 features with SHAP values, which is reasonably complete for local explanation, but it does not address the prediction confidence or model uncertainty, which are relevant for audit.\",\n    \"concision\": \"The explanation is concise, listing only the top contributing features and their SHAP values without extraneous information, maintaining focus on local factors.\",\n    \"overall_quality\": \"Overall, the explanation is clear and concise but falls short in providing actionable or audit-relevant insights, especially given the false negative context and low fidelity metrics.\",\n    \"semantic_plausibility\": \"The features and their directions appear plausible given the dataset context (e.g., lower education level negatively impacting prediction), but the explanation does not fully reconcile with the incorrect prediction outcome.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:48:17.812833+00:00"
+}

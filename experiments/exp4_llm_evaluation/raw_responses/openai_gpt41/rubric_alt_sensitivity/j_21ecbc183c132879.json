@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_21ecbc183c132879",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_19b944710e090900_dcf7b36d43b79047.txt",
+  "prompt_version": "dcf7b36d43b79047",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but the magnitudes are extremely small and do not clearly indicate actionable directions for recourse. It is unclear what changes would meaningfully affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is of limited use: the feature weights are so small that it is difficult to discern which factors truly influenced the model's decision. The explanation does not help identify possible sources of error or bias in this false negative case.\",\n    \"clarity\": \"The format is clear and the features are named, but the meaning of the small coefficients is not explained, and the directionality is ambiguous without context on the model's output scale.\",\n    \"completeness\": \"The explanation lists the top local factors, but the low magnitude of all coefficients suggests either the instance is not strongly influenced by any feature or the explanation is not faithful. There is no information about the overall prediction confidence or how these features interact.\",\n    \"concision\": \"The explanation is concise in terms of length, but this comes at the cost of informativeness. The brevity does not provide enough insight for review.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is technically correct in format but fails to provide meaningful insight into the model's behavior for this instance.\",\n    \"semantic_plausibility\": \"The features listed are plausible for the Adult dataset, but the extremely small coefficients make it implausible that these are the true drivers of the model's decision for this case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:09:46.727109+00:00"
+}

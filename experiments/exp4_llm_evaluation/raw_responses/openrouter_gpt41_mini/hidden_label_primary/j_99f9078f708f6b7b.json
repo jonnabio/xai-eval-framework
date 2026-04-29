@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_99f9078f708f6b7b",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\hidden_label_primary\\exp4_052659e044864140_9efede7c92cb22bf.txt",
+  "prompt_version": "9efede7c92cb22bf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists SHAP values for features without any guidance or interpretation on how to act on these values or improve the decision, thus it does not support review, recourse, or decision support.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of feature contributions with negative SHAP values, but lacks any indication of the predicted class probability or how these values influence the final prediction, limiting its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is a simple list of features with associated SHAP values, but the wording is terse and lacks context or explanation of what these values mean, making it difficult for a non-expert to understand.\",\n    \"completeness\": \"The explanation only shows the top local factors with their SHAP values but does not provide the predicted probability, baseline value, or any indication of how these features combine to produce the prediction, resulting in insufficient information to fully inspect the prediction.\",\n    \"concision\": \"The explanation is concise, presenting only the top 10 features with their SHAP values in a compact format without unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks interpretative context, making it weak in clarity, completeness, and usefulness despite being concise and semantically plausible as a SHAP output.\",\n    \"semantic_plausibility\": \"The explanation is coherent with the breast cancer dataset context and the SHAP method, listing medically relevant features with negative contributions, which is plausible for a negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:56:21.116421+00:00"
+}

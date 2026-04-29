@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_06d5a64cd16598a8",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_20242fe53fbadae4_b8a82a57871ae39c.txt",
+  "prompt_version": "b8a82a57871ae39c",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists many features as anchors with maximum importance (1.0), but does not indicate how changing any of them would affect the prediction or provide actionable recourse for the user.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not locally informative: it simply enumerates a large set of features as equally important, without clarifying which are most decisive for this specific instance or how they interact. This makes it difficult to review model behavior or identify sources of error in this false negative case.\",\n    \"clarity\": \"The explanation is a dense list of features and values with associated scores, but lacks narrative or structure to help the reviewer understand the local decision logic. The meaning of the anchor scores is not explained.\",\n    \"completeness\": \"While many features are listed, the explanation does not clarify their relationship to the prediction, nor does it explain why the model made a false negative. It omits context about the instance or the model's reasoning.\",\n    \"concision\": \"The explanation is verbose, listing nine features with identical scores, which is excessive and not compact. It could be much shorter and more focused on the most relevant factors.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse: it is unclear, not locally informative, and not actionable. It fails to provide insight into the model's behavior for this instance.\",\n    \"semantic_plausibility\": \"Assigning a score of 1.0 to nearly every feature is implausible, as it suggests all are equally and maximally important, which is unlikely in practice. The explanation does not reflect a realistic or meaningful local decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:16:04.954838+00:00"
+}

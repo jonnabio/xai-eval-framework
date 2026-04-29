@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7c871a5926ed569e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_f858905e079be109",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7c871a5926ed569e_e2cac3c2da0721fe.txt",
+  "prompt_version": "e2cac3c2da0721fe",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7c871a5926ed569e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for the user or reviewer to understand why the model made a false negative prediction or how to correct it. The anchor values are mostly zero except for two features, which limits guidance for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally useful for audit purposes because it highlights only two features with nonzero importance but lacks detail on how these features influence the prediction or why the model failed on this instance. The low fidelity and stability metrics further reduce trust in the explanation's reliability.\",\n    \"clarity\": \"The explanation is clear in listing the top local factors and their weights, but the meaning of zero values for most features is not explicitly clarified, which may confuse auditors about the significance of those features.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies two features as important and ignores the rest, providing no context or reasoning about the model's decision boundary or the instance's characteristics relative to the true label.\",\n    \"concision\": \"The explanation is concise, listing only a few features with their importance scores, but this conciseness comes at the cost of informativeness and depth.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for model-behavior review due to its lack of actionable insights, poor fidelity, and limited contextual information, making it insufficient for meaningful audit or recourse.\",\n    \"semantic_plausibility\": \"The explanation's focus on mean area and area error as top factors is plausible given the domain, but the zero importance for other potentially relevant features reduces confidence in the explanation's semantic completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:38:38.233397+00:00"
+}

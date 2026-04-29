@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_4be7905594f65bc9",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7b78e47140c1369b_01c0d2765d3f2f89.txt",
+  "prompt_version": "01c0d2765d3f2f89",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only highlights 'capital-gain' as a nonzero factor, with all other features at zero, providing no guidance on what changes could alter the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It does not provide insight into the model's local behavior beyond indicating that only 'capital-gain' mattered for this instance, which is implausible given the context and the number of features.\",\n    \"clarity\": \"The explanation is clear in format but lacks substantive content, as it simply lists features with zero or one nonzero value.\",\n    \"completeness\": \"It is incomplete, as it fails to explain why other features had no impact or how 'capital-gain' influenced the prediction. It does not contextualize the importance or provide supporting information.\",\n    \"concision\": \"While the explanation is concise, this is due to the lack of meaningful content rather than effective summarization.\",\n    \"overall_quality\": \"Overall, the explanation is poor for audit or review purposes. It is not informative, actionable, or plausible, and does not support recourse or inspection.\",\n    \"semantic_plausibility\": \"It is implausible that only 'capital-gain' would have any effect, with all other features at exactly zero, especially in a complex model like an MLP on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:05:55.283475+00:00"
+}

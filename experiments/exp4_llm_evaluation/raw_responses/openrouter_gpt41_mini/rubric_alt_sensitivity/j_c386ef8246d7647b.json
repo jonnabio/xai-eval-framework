@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b168d0ab73784973",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_c386ef8246d7647b",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_b168d0ab73784973_340ba3b9a615808a.txt",
+  "prompt_version": "340ba3b9a615808a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b168d0ab73784973\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top SHAP feature contributions but does not provide clear guidance on how to change the outcome or what specific actions the individual could take to improve their credit decision. The negative and positive contributions are shown but without thresholds or actionable insights.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local feature impacts, which is somewhat useful for audit inspection. However, the fidelity is low (~0.5) and faithfulness gap is high (0.17), indicating the explanation may not reliably reflect the model's true reasoning. This limits its usefulness for thorough model-behavior review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature names and SHAP values, but the shorthand feature names (e.g., checking_status_no, purpose_new car) may not be immediately clear to all auditors without additional context. The numeric values are precise but lack interpretation or summary.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which is a reasonable scope for local interpretability. However, it does not include any contextual information about the instance or how these factors combine to produce the prediction, limiting completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features with their SHAP values in a brief format. It avoids unnecessary verbosity and focuses on the most influential factors.\",\n    \"overall_quality\": \"Overall, the explanation is compact and somewhat informative but lacks clarity and actionable insights. The low fidelity and faithfulness gap reduce confidence in its reliability for audit purposes, making it a weak explanation for model-behavior review.\",\n    \"semantic_plausibility\": \"The features identified as influential are plausible given the domain (credit scoring), such as checking account status and purpose of the loan. The directions of influence (positive or negative SHAP values) appear reasonable, but without further context or model details, full plausibility is uncertain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:19:54.327069+00:00"
+}

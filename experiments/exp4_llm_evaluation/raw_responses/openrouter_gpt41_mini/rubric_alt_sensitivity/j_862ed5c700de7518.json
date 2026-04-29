@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_862ed5c700de7518",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_228433fa3f4cc5bb.txt",
+  "prompt_version": "228433fa3f4cc5bb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for the user to understand or contest the model's false negative prediction, as it highlights features with zero contribution and does not clarify why the model erred.\",\n    \"audit_usefulness\": \"The explanation is not useful for audit purposes because it lacks fidelity and faithfulness, with very low fidelity (0.23) and a high faithfulness gap (0.26), indicating it poorly reflects the model's true decision process locally.\",\n    \"clarity\": \"The explanation is presented as a list of feature importance scores, but the presence of many zero values and lack of contextual interpretation reduces clarity and makes it difficult to interpret the model's reasoning.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights a few features with full importance and ignores others, failing to capture the complexity of the model's decision boundary, especially given the false negative outcome.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero importance, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality due to poor fidelity, lack of actionable insights, and insufficient clarity and completeness, making it unhelpful for model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible because it assigns full importance to features like age, fnlwgt, education-num, and workclass_Private, but the model prediction contradicts the true label, suggesting the explanation does not align well with the actual decision context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:53:33.488891+00:00"
+}

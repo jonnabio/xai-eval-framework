@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_ae20455240ca491e",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_b8b0fea843b02a9e.txt",
+  "prompt_version": "b8b0fea843b02a9e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions with negative and positive SHAP values but does not provide guidance on how to act on these insights or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"While the explanation identifies top local factors, it lacks connection to the prediction confidence or model decision boundary, and the fidelity and faithfulness metrics are moderate, reducing its utility for thorough audit review.\",\n    \"clarity\": \"The explanation is presented as a compact list of features with numeric SHAP values, but the meaning of these values and their impact on the prediction is not explicitly explained, which may confuse non-expert auditors.\",\n    \"completeness\": \"The explanation covers the top 10 features influencing the prediction, but it does not contextualize these factors relative to the instance's true label or explain why the model erred (false negative), leaving gaps in understanding.\",\n    \"concision\": \"The explanation is reasonably concise, listing only the top contributing features without extraneous information, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Overall, the explanation is limited in clarity, actionability, and audit usefulness due to lack of interpretive context and guidance, resulting in a low-quality local explanation for model-behavior review.\",\n    \"semantic_plausibility\": \"The features listed (e.g., worst area, worst perimeter) are plausible and relevant to breast cancer diagnosis, and the SHAP values align with expected directions, supporting semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:09:55.294902+00:00"
+}

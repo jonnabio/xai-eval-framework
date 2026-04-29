@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_8f9d54ad1d165008",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_02c7c70809a7065b.txt",
+  "prompt_version": "02c7c70809a7065b",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists specific features and their contributions, which could help a user identify which factors to change for a different outcome. However, the negative and positive contributions are not contextualized (e.g., what direction is favorable), and the absence of prediction confidence limits recourse planning.\",\n    \"audit_usefulness\": \"The explanation is locally informative, showing which features most influenced the model's (incorrect) negative prediction. This helps an auditor see which factors the model relied on, but lacks context about the instance's actual feature values and the model's overall behavior, limiting deeper audit insights.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values. However, it assumes familiarity with SHAP and does not explain what the values mean in plain language or how they relate to the prediction.\",\n    \"completeness\": \"The explanation covers the top local factors, but omits the actual feature values for this instance and does not provide the model's confidence. This limits understanding of why the model made a false negative.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors with their SHAP values. No unnecessary information is included.\",\n    \"overall_quality\": \"The explanation is compact and locally informative, but lacks context (feature values, confidence, plain-language interpretation) that would make it more actionable and audit-friendly. It is above average but not exemplary.\",\n    \"semantic_plausibility\": \"The listed features and their directions are plausible for the adult income dataset and align with known correlates of income. No implausible or nonsensical factors are present.\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:31:00.825624+00:00"
+}

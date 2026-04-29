@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_c355f1b3d1fc53e0",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_681f91e7c50b9380_cd2ceef416811573.txt",
+  "prompt_version": "cd2ceef416811573",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation is presented as a list of feature names with associated numeric values, but it lacks any narrative or interpretation, making it difficult to understand the meaning or importance of these values without prior knowledge of the DICE method or the dataset features.\",\n    \"completeness\": \"The explanation only highlights one feature with a nonzero value (native-country_Ireland: 1.0000) and sets all others to zero, providing minimal insight into the model's decision process for this instance. It does not explain how this factor influences the prediction or why other features are irrelevant.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with mostly zero values, which is compact but at the cost of informativeness.\",\n    \"semantic_plausibility\": \"The explanation suggests that the model's decision is driven solely by the feature 'native-country_Ireland' with a strong positive factor, which is plausible given the dataset context, but the lack of further detail or interaction with other features reduces confidence in this interpretation.\",\n    \"audit_usefulness\": \"The explanation provides limited support for auditing the model's behavior because it does not clarify how the highlighted feature affects the prediction or how the model treats other relevant features, especially since the prediction is a false positive and the true label is visible.\",\n    \"actionability\": \"The explanation does not offer actionable insights or guidance for recourse or decision support, as it does not indicate what changes in features might alter the prediction or how to interpret the model's bias or errors.\",\n    \"overall_quality\": \"Overall, the explanation is minimal and lacks depth, clarity, and actionable information, making it a weak semantic account of the model's decision despite correctly identifying a key feature.\"\n  },\n  \"scores\": {\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"semantic_plausibility\": 1,\n    \"audit_usefulness\": 1,\n    \"actionability\": 1,\n    \"overall_quality\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:18:41.714968+00:00"
+}

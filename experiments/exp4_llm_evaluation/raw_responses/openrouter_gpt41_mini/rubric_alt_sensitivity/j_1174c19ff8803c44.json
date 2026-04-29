@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_1174c19ff8803c44",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e354d1466bc2ce9c_b9ea9f907f4fe480.txt",
+  "prompt_version": "b9ea9f907f4fe480",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance values but lacks guidance on how to change the prediction or improve the outcome, making it not actionable for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is minimally informative locally, listing many small coefficients with very low magnitudes and no clear dominant factors. The low fidelity and high faithfulness gap further reduce its reliability for auditing model behavior.\",\n    \"clarity\": \"The explanation is a simple list of feature contributions with numeric values, but the very small magnitudes and multiple similar values make it hard to interpret which features truly matter locally.\",\n    \"completeness\": \"The explanation includes the top 10 local factors, but the very low magnitude coefficients and lack of contextual interpretation limit its completeness in explaining the prediction.\",\n    \"concision\": \"The explanation is relatively concise, listing only 10 features with their contributions, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to low fidelity, unclear importance of features, and lack of actionable insights, making it of low quality for model-behavior review.\",\n    \"semantic_plausibility\": \"The features listed are plausible for the adult dataset and the logistic regression model, but the very small coefficients and contradictory signs (e.g., marital-status_Married-civ-spouse positive but very small) reduce confidence in the explanation's semantic meaningfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:00:51.787875+00:00"
+}

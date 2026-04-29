@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_684faf23c031fdc2",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_b8b0fea843b02a9e.txt",
+  "prompt_version": "b8b0fea843b02a9e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide guidance on how to change the prediction or what specific actions could be taken to alter the outcome, limiting its usefulness for recourse.\",\n    \"audit_usefulness\": \"The explanation is a straightforward SHAP output showing feature impacts, but it lacks deeper insight into why the model made a false negative error or how the features interplay locally, reducing its value for thorough audit review.\",\n    \"clarity\": \"The explanation is presented as a list of feature names with numeric values, but the meaning of positive versus negative contributions is not explicitly clarified, which may confuse auditors unfamiliar with SHAP conventions.\",\n    \"completeness\": \"While the explanation covers the top 10 features, it does not contextualize their combined effect or relate them to the prediction confidence or error type, making it incomplete for a full local understanding.\",\n    \"concision\": \"The explanation is relatively compact, listing only the top features with their SHAP values, which is appropriate for local explanations and avoids unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is technically correct but falls short in providing actionable, clear, and contextually rich information needed for effective model-behavior review and recourse in this false negative case.\",\n    \"semantic_plausibility\": \"The features listed and their directions of influence are plausible given the breast cancer dataset and model type, but without further context or interpretation, the explanation's semantic value is limited.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:10:00.446898+00:00"
+}

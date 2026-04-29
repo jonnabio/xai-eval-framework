@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_3933806f901c1498",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ae5f3b200cc3bef3_1432ba5b563562d1.txt",
+  "prompt_version": "1432ba5b563562d1",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse, as it only lists two features (age and native-country_China) as anchors with no indication of how changing them would affect the prediction, and both are immutable or difficult to change.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful: it lacks detail about why these features are anchors, how they interact, or what the model's sensitivity is to other features. The technical metrics also indicate low fidelity and faithfulness.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., 'age: 1.0000'), which may not be clear to auditors or reviewers unfamiliar with the anchors method.\",\n    \"completeness\": \"It is incomplete, as it only highlights two features as anchors and assigns zero importance to all others, without context or justification. It does not explain the model's behavior in the local region beyond these two features.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits necessary context and interpretability for review.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide clear, actionable, or locally informative insights for audit or recourse. It is not plausible or helpful in the given context.\",\n    \"semantic_plausibility\": \"The explanation's claim that only age and native-country_China matter, with all other features at zero, is implausible for a logistic regression model on the Adult dataset, suggesting a lack of faithfulness or a problem with the explainer.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:29:28.065431+00:00"
+}

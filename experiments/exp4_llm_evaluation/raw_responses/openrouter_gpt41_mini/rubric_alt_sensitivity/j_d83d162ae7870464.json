@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_d83d162ae7870464",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_214506591db1e703_cc94c8c78f519100.txt",
+  "prompt_version": "cc94c8c78f519100",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only two features with nonzero importance, but the values given (0.3 and 0.1) are not clearly tied to actionable changes for the individual instance, especially since the true label is 0 and prediction is 1, making recourse unclear.\",\n    \"audit_usefulness\": \"The explanation is minimal and does not provide sufficient insight into why the model predicted positive for a true negative instance. The low fidelity and high faithfulness gap metrics further reduce trust in the explanation's utility for auditing.\",\n    \"clarity\": \"The explanation is straightforward in listing feature contributions, but the zero values for most features and lack of context about their impact reduce clarity on the model's decision process.\",\n    \"completeness\": \"The explanation is incomplete as it only lists a few features with nonzero importance and does not explain the role of other features or the overall decision boundary, limiting understanding of the local model behavior.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero importance and zero for others, but this conciseness comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is poor for audit purposes due to low fidelity, minimal feature importance detail, and lack of actionable or plausible insights, making it unhelpful for model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The importance of marital-status features is plausible given the dataset context, but the zero importance for all other features including age and education-num is suspicious and reduces confidence in the explanation's semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:24:56.432923+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_52ed2fe68041b4f8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_32ec11e442787da6",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_52ed2fe68041b4f8_cb30f4189bd1e17b.txt",
+  "prompt_version": "cb30f4189bd1e17b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_52ed2fe68041b4f8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies only two features with nonzero importance, but provides no guidance on how these factors influence the prediction or what changes could alter the outcome, making it unhelpful for actionable recourse.\",\n    \"audit_usefulness\": \"The explanation is minimal and lacks detail about the local decision boundary or feature interactions. The low fidelity and stability metrics further reduce confidence in its reliability for auditing model behavior.\",\n    \"clarity\": \"The explanation lists feature names with numeric values but does not clarify what these values represent or how they contribute to the prediction, resulting in poor interpretability.\",\n    \"completeness\": \"Key features have zero importance, but no explanation is given for their exclusion or the rationale behind the selected anchors. The explanation is incomplete for understanding the model's local reasoning.\",\n    \"concision\": \"While the explanation is compact, its brevity sacrifices informativeness and clarity, making it too sparse to be useful despite being concise.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide a clear, plausible, and informative local rationale, limiting its utility for model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The selection of 'education-num' and 'occupation_Other-service' as anchors is plausible given the dataset context, but the zero importance assigned to age and other features is questionable and unexplained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:02:00.880002+00:00"
+}

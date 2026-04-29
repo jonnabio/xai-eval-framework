@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_7f4b0f7c1ff862cd",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ccbc751d89be60ef_dd99719cf4ce454a.txt",
+  "prompt_version": "dd99719cf4ce454a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values but provides no guidance on how to act on these features or improve the prediction, making it not actionable for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing which features are considered important locally, but the zero values for many features and lack of quantitative detail limit its usefulness for thorough model-behavior review or debugging.\",\n    \"clarity\": \"The explanation is straightforward in format, listing features and their importance scores clearly, but the meaning of zero versus one values is not explicitly explained, which may confuse some auditors.\",\n    \"completeness\": \"The explanation covers a small subset of features with binary importance, omitting any nuance or continuous importance scores, thus lacking completeness in describing the local decision rationale.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with simple importance values, which is a positive aspect for quick inspection.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and simplistic to be truly helpful for auditing model behavior or providing meaningful local insight, resulting in low quality for this purpose.\",\n    \"semantic_plausibility\": \"The features identified as important (mean concave points and worst texture) are plausible factors in breast cancer prediction, but the binary importance values and zeros for other features reduce confidence in the explanation's semantic richness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:42:46.769660+00:00"
+}

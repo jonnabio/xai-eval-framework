@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_9bbda5e65680e5fd",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_03f9ac9f3ab42b8b_d0c259d7e8d33c2d.txt",
+  "prompt_version": "d0c259d7e8d33c2d",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance for recourse. Users cannot easily infer what changes would alter the prediction.\",\n    \"audit_usefulness\": \"The explanation identifies which features influenced the prediction, but the magnitudes are small and the directionality is not clearly tied to the model's error (false negative). It is difficult to audit why the model failed in this specific case.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values, but lacks context or interpretation, making it harder to understand for non-technical reviewers.\",\n    \"completeness\": \"The explanation covers the top local factors, but omits the overall context (e.g., the instance's actual feature values or the model's confidence), limiting completeness for audit.\",\n    \"concision\": \"The explanation is concise, listing only the top factors, but could be more compact by grouping related features or omitting negligible contributions.\",\n    \"overall_quality\": \"While technically correct, the explanation is not sufficiently informative or actionable for audit or recourse. It lacks context, interpretability, and clear connection to the model's error.\",\n    \"semantic_plausibility\": \"The listed features and their directions are plausible for a logistic regression model on the Adult dataset, but without instance values, it is hard to fully assess plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:55:24.175067+00:00"
+}

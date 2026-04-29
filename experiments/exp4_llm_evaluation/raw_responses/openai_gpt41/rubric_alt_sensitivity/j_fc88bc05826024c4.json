@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_fc88bc05826024c4",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_103d89f1e4cb72f6_d8fbd86797345509.txt",
+  "prompt_version": "d8fbd86797345509",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or recourse for the user. It does not indicate how changing any feature would affect the prediction or what minimal changes could flip the outcome.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is of limited use. While it identifies which features are locally important, the dominance of a single feature (capital-gain) and the presence of many zero-valued features do not provide insight into why the model made a false negative error or how the decision boundary behaves locally.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their associated values. However, it lacks context or interpretation, making it difficult for an auditor to understand the implications of the numbers.\",\n    \"completeness\": \"The explanation is incomplete for audit purposes. It does not describe the instance's actual feature values, the directionality of influence, or how the listed factors contributed to the specific prediction.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features and their scores. However, the inclusion of many zero-valued features adds unnecessary noise.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for model-behavior review or recourse. It lacks actionable insight, interpretability, and fails to illuminate the model's local behavior in this false negative case.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible in that it lists reasonable features for the Adult dataset, but the dominance of a single feature and the zero values for others raise questions about the plausibility of the local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:05:54.780263+00:00"
+}

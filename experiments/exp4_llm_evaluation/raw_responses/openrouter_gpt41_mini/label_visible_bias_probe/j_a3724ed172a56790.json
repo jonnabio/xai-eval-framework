@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_a3724ed172a56790",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_c71f9ed1b1a0812a_8074484057a3478e.txt",
+  "prompt_version": "8074484057a3478e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation is presented as a list of feature names with associated numeric values, but it lacks any narrative or interpretation. The meaning of the values (e.g., importance scores) is not explained, making it difficult for a user to understand the explanation without prior knowledge of the explainer's output format.\",\n    \"completeness\": \"The explanation only lists a few features with mostly zero values except for 'hours-per-week' and 'education_1st-4th'. It does not provide any insight into how these factors influenced the prediction or their directionality, limiting the information needed to fully inspect the model's decision locally.\",\n    \"concision\": \"The explanation is very brief and compact, listing only a handful of features with their scores. While concise, this brevity comes at the cost of informativeness and interpretability.\",\n    \"semantic_plausibility\": \"The explanation identifies 'hours-per-week' as the dominant factor, which is plausible given the dataset context (adult income prediction). However, the presence of zero values for other features without explanation reduces the semantic coherence of the explanation as a meaningful account of the decision.\",\n    \"audit_usefulness\": \"The explanation provides minimal actionable insight for auditing the model's behavior. It does not clarify how the features contribute to the prediction or reveal potential biases or model weaknesses, limiting its utility for model inspection.\",\n    \"actionability\": \"The explanation does not support meaningful recourse or decision support because it lacks guidance on how changes in features might alter the prediction or what factors are critical. It is not actionable for a user seeking to understand or contest the model's decision.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and technical without interpretive context, making it a weak semantic account of the model's local decision. It fails to clearly communicate the rationale behind the prediction or support user understanding.\"\n  },\n  \"scores\": {\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"semantic_plausibility\": 2,\n    \"audit_usefulness\": 1,\n    \"actionability\": 1,\n    \"overall_quality\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:35:52.550500+00:00"
+}

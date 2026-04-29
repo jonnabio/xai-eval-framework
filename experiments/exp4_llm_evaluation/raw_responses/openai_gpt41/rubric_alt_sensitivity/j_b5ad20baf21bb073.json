@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_b5ad20baf21bb073",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_902d690264149a09_1fe26e359588495b.txt",
+  "prompt_version": "1fe26e359588495b",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest how the user could change the outcome. The factors are presented as static influences without recourse suggestions.\",\n    \"audit_usefulness\": \"While the explanation identifies which features most influenced the model's decision, it lacks context about the instance or the directionality of the prediction (e.g., what a negative or positive value means for the outcome). This limits its usefulness for auditing why this specific false negative occurred.\",\n    \"clarity\": \"The explanation is somewhat clear in listing features and their SHAP values, but it does not explain what the values mean or how they relate to the prediction. The use of feature names with encoded values (e.g., education_7th-8th) may not be immediately interpretable to all reviewers.\",\n    \"completeness\": \"The explanation provides the top local factors but omits the actual feature values for this instance and does not relate the SHAP values to the model's output or the true label. This makes it incomplete for thorough audit inspection.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their SHAP values. However, the lack of interpretive context means that brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is a standard SHAP output with limited interpretability for audit or recourse purposes. It is compact but lacks context, actionable insight, and interpretive clarity, making it of low quality for model-behavior review.\",\n    \"semantic_plausibility\": \"The features listed are plausible factors for income prediction in the Adult dataset, and the SHAP values are within expected ranges. However, without more context, the semantic connection to the specific prediction is weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:13:50.739898+00:00"
+}

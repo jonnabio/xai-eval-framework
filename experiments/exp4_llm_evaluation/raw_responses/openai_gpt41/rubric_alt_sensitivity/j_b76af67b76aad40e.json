@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_b76af67b76aad40e",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_48bc41dc6e2d3e80.txt",
+  "prompt_version": "48bc41dc6e2d3e80",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not provide actionable guidance or suggest what changes could alter the prediction. The user cannot easily infer what to do for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally useful for audit: it identifies 'education-num' as the dominant factor, but the rest of the features have zero or negligible contribution, which may not reflect the true local behavior or model sensitivity. The lack of detail on how these values relate to the instance or prediction limits auditability.\",\n    \"clarity\": \"The explanation is terse and uses a technical format (feature: value), but does not explain what the numbers mean (e.g., are they coefficients, contributions, or something else?). This reduces clarity for reviewers.\",\n    \"completeness\": \"The explanation omits context about the instance, the meaning of the numbers, and why only one feature is nonzero. It does not provide a full picture of the local decision logic.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits necessary context and interpretability, making it unhelpful despite its brevity.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for model-behavior review or recourse. It lacks clarity, context, and actionable information, and does not support effective auditing.\",\n    \"semantic_plausibility\": \"It is implausible that only 'education-num' meaningfully contributed to the prediction, with all other features at zero. This suggests a problem with the explanation's faithfulness or the explainer's configuration.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:57:31.636533+00:00"
+}

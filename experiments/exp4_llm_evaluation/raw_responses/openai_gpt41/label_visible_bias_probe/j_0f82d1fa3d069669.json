@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_0f82d1fa3d069669",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_a6bb167d1c81d8a5_236da23473f0886d.txt",
+  "prompt_version": "236da23473f0886d",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, but without the instance's actual feature values or actionable thresholds, it is difficult for a user to determine what could be changed to alter the prediction or to support recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features most influenced the prediction and their directionality, it lacks context such as the actual feature values, the magnitude of the prediction, or how these factors compare to typical cases, limiting its usefulness for auditing model behavior.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated SHAP values, which is clear in format. However, the meaning of the SHAP values (e.g., what negative or positive values imply for the prediction) is not explained, which may confuse non-expert users.\",\n    \"completeness\": \"The explanation provides the top local factors and their SHAP values, but omits the actual feature values for this instance, the model's confidence, and any baseline or reference information, making it incomplete for fully inspecting the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their SHAP values without unnecessary information.\",\n    \"overall_quality\": \"The explanation is a standard SHAP output, providing some insight into feature importance for the prediction, but lacks context and actionable detail, limiting its overall semantic quality.\",\n    \"semantic_plausibility\": \"The explanation is plausible as a SHAP output for a random forest on the breast cancer dataset, and the listed features are relevant to the domain. However, without more context, the coherence with the specific case is limited.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:25:27.024385+00:00"
+}

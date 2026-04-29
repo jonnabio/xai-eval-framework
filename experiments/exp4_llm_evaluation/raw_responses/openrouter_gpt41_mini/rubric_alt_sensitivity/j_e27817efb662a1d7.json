@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_e27817efb662a1d7",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_b8b0fea843b02a9e.txt",
+  "prompt_version": "b8b0fea843b02a9e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions with SHAP values but does not provide guidance on how to act on these factors or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"While the explanation identifies top local factors, it lacks contextual interpretation or connection to the false negative prediction, making it difficult to use for thorough model-behavior review or error analysis.\",\n    \"clarity\": \"The explanation is presented as a list of features with numeric SHAP values, which is clear in format but not easily interpretable without domain knowledge or additional context about feature meaning and directionality.\",\n    \"completeness\": \"The explanation covers the top 10 features by SHAP value, which is a reasonable subset, but it does not explain the prediction confidence or how these values relate to the false negative outcome, reducing completeness for audit purposes.\",\n    \"concision\": \"The explanation is relatively concise, listing only the top contributing features without extraneous information, which is appropriate for local explanations.\",\n    \"overall_quality\": \"Overall, the explanation is technically correct and concise but falls short in providing actionable insights, interpretability, and audit relevance, resulting in low practical utility for model-behavior review.\",\n    \"semantic_plausibility\": \"The features and their SHAP values appear plausible given the breast cancer dataset context, but the negative contributions for features typically associated with malignancy and the positive contributions for concave points are not explicitly explained, limiting semantic clarity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:10:05.543440+00:00"
+}

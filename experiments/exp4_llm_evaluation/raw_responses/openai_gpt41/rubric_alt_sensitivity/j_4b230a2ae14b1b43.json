@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_4b230a2ae14b1b43",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_1c525ff1deb5c1a6_94b855d4aee1f2a4.txt",
+  "prompt_version": "94b855d4aee1f2a4",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable information for recourse, as only one feature (marital-status_Never-married) is nonzero and the rest are all zero, giving no guidance on what changes could alter the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful: it does not clarify why the model made a false negative prediction, since only one factor is highlighted and all others are zero, which is implausible for a complex model like an MLP on the Adult dataset.\",\n    \"clarity\": \"The explanation is technically clear in format, but the content is confusing because it suggests only one feature matters and all others have no effect, which is unlikely and not well explained.\",\n    \"completeness\": \"The explanation is incomplete, as it fails to account for the influence of most features and does not provide a meaningful local view of the model's behavior.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits relevant information and oversimplifies the local decision logic.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for review or recourse. It lacks informativeness, plausibility, and actionable detail.\",\n    \"semantic_plausibility\": \"It is implausible that only marital-status_Never-married has any local effect and all other features are exactly zero, especially for a neural network model on this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:12:13.620150+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_b0758726ce397bc2",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_5169d5420efbc3da_4a70e6f78f8098a5.txt",
+  "prompt_version": "4a70e6f78f8098a5",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse or improvement since it highlights only two features with full weight and ignores others, including age and capital gains, which are often relevant in income prediction. This limits the user's ability to understand how to change the outcome.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing because it is overly sparse and does not clarify why the model predicted 0 when the true label is 1. The anchors focus on education-num and occupation_Farming-fishing but do not explain the false negative well, reducing its utility for model-behavior review.\",\n    \"clarity\": \"The explanation is clear in listing the top local factors with their weights, but the meaning of zero weights for many features is not elaborated, which may confuse auditors about the role of those features in this instance.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights two features with full importance and ignores others that might contribute to the prediction, especially given the false negative context. It lacks context or additional information to understand the model's decision fully.\",\n    \"concision\": \"The explanation is concise, presenting only a few features with nonzero importance, which is good for readability but at the cost of completeness and informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes because it is too sparse, lacks actionable insights, and does not help understand the false negative prediction in a meaningful way.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible since education and occupation are relevant features for income prediction, but the zero importance of age and other features is questionable given typical domain knowledge, reducing plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:00:51.065685+00:00"
+}

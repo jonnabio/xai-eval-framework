@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_a04e779347bce550",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_57d1693f50447ebd_3944bbbafe37ad59.txt",
+  "prompt_version": "3944bbbafe37ad59",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation is not actionable because it only lists feature importances without indicating how changes to these features would affect the prediction or what specific recourse is possible.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. Most features have zero importance, and the only nonzero factor is 'hours-per-week', which lacks context or directionality. There is no information about how these factors contributed to the specific prediction or what a reviewer should focus on.\",\n    \"clarity\": \"The explanation is not clear. It presents a list of features and numeric values without explaining what the numbers mean, their direction (positive/negative influence), or how they relate to the model's decision.\",\n    \"completeness\": \"The explanation is incomplete. It omits any reasoning about the prediction, does not describe the instance's values, and fails to provide insight into the model's behavior for this case.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise because it omits necessary context and interpretability, making the brevity unhelpful.\",\n    \"overall_quality\": \"Overall, the explanation fails to meet the needs of audit inspection. It is not informative, actionable, or clear, and does not support model-behavior review.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible, as it suggests only one feature ('hours-per-week') has any influence, which is unlikely for a logistic regression model on the Adult dataset. The zero values for all other features are suspicious and reduce trust in the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:47:11.875951+00:00"
+}

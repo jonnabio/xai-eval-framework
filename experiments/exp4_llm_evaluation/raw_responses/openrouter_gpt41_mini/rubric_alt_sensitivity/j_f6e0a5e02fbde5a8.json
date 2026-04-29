@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_af2a9f1c15262b41",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_f6e0a5e02fbde5a8",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_af2a9f1c15262b41_bd3b5fe3b8f3516d.txt",
+  "prompt_version": "bd3b5fe3b8f3516d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_af2a9f1c15262b41\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values (1.0 or 0.0) but does not provide guidance on how to act on these features or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is sparse and only highlights two features as important with maximum importance, while all others are zero. This binary and minimal information is insufficient for a thorough audit or understanding of model behavior locally, especially given the low fidelity metric.\",\n    \"clarity\": \"The explanation format is straightforward, listing features and their importance scores clearly. However, the meaning of the scores (1.0 vs 0.0) is not explicitly explained, which may confuse some users.\",\n    \"completeness\": \"The explanation only includes a small subset of features with binary importance values and does not provide any additional context or quantitative insight into how these features influence the prediction, making it incomplete for detailed review.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with importance values, which is a positive aspect for quick inspection.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and binary to be useful for meaningful local model behavior review or recourse. It lacks depth, nuance, and actionable insights despite being clear and concise.\",\n    \"semantic_plausibility\": \"The features identified as important (area error and worst texture) are plausible factors in breast cancer diagnosis models, but the strict binary importance values reduce the nuance and may not fully reflect the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:14:57.971742+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_084580efd1317ebc",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_a8dae4ea3423a55e",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_084580efd1317ebc_caf5d94e79a53a14.txt",
+  "prompt_version": "caf5d94e79a53a14",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_084580efd1317ebc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest what changes could alter the prediction. Users cannot easily infer what to do for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it lacks detail about how these features contributed to the false negative. The zero values for most features are not informative, and the lack of directionality or thresholds limits audit value.\",\n    \"clarity\": \"The explanation is terse and uses a clear format, but the meaning of the numeric values (e.g., 2.9016 for education-num) is not explained. It is unclear whether these are weights, contributions, or something else.\",\n    \"completeness\": \"Only a subset of features is shown, and most are listed as zero. There is no information about the instance's actual feature values, the model's confidence, or how the top features led to the prediction.\",\n    \"concision\": \"The explanation is compact, but this comes at the cost of informativeness. Listing many zeros is not helpful and could be omitted for brevity.\",\n    \"overall_quality\": \"The explanation is minimally useful for audit or recourse. It identifies some important features but lacks context, directionality, and actionable insight.\",\n    \"semantic_plausibility\": \"It is plausible that education-num and capital-gain are important for this model, but the unexplained numeric values and many zeros reduce trust in the explanation's meaningfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:59:42.875258+00:00"
+}

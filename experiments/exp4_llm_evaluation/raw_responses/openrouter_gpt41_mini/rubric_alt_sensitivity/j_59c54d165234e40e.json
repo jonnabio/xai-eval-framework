@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_59c54d165234e40e",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d68ee28a2b213ee2_e0a3ddd927066fb1.txt",
+  "prompt_version": "e0a3ddd927066fb1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values but provides no guidance on how to act or adjust the model or input to change the prediction, limiting recourse or improvement steps.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing only which features are considered important locally but lacks detail on feature values or their influence direction, making it unhelpful for thorough model-behavior review or error analysis.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the meaning of the scores (1.0 vs 0.0) is not explicitly explained, and the zero values clutter the explanation, reducing clarity.\",\n    \"completeness\": \"The explanation only includes a few features with binary importance and omits any contextual information such as feature values or how these factors contribute to the false negative prediction, making it incomplete for audit purposes.\",\n    \"concision\": \"While the explanation is short, it is not concise in a meaningful way because it includes many zero-valued features that add noise without value, reducing the overall conciseness and focus.\",\n    \"overall_quality\": \"Overall, the explanation is weak for audit inspection: it is not locally informative beyond a binary importance flag, lacks actionable insights, and does not clearly communicate the rationale behind the model's false negative prediction.\",\n    \"semantic_plausibility\": \"The features identified as important (mean perimeter and worst perimeter) are plausible factors in breast cancer diagnosis models, but the zero importance for other features without explanation reduces confidence in the semantic completeness of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:50:07.296754+00:00"
+}

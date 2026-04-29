@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_f9f55a096c64879a",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_103d89f1e4cb72f6_d8fbd86797345509.txt",
+  "prompt_version": "d8fbd86797345509",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or recourse for the user. It does not indicate how changing any feature would affect the prediction or what minimal changes could flip the outcome.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is of limited use. While it identifies 'capital-gain' and 'education_Bachelors' as the only nonzero contributors, it does not clarify how these values relate to the model's decision boundary or why the instance was misclassified (FN). There is no context on the instance's actual feature values or how close it was to a different prediction.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their associated values. However, the meaning of the numeric values (e.g., 8.9161 for capital-gain) is not explained, reducing interpretability.\",\n    \"completeness\": \"The explanation is incomplete. It omits the actual feature values for the instance, does not explain the model's reasoning, and does not provide context for the FN error. It only lists a subset of features with nonzero importance.\",\n    \"concision\": \"The explanation is concise, listing only a few features, but this comes at the cost of informativeness. The brevity results in a lack of actionable or contextual detail.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It is too sparse, lacks context, and does not support meaningful review of the model's behavior for this FN case.\",\n    \"semantic_plausibility\": \"The features listed are plausible as important for the adult dataset, but the explanation does not clarify why only these features matter for this instance or how their values led to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:05:47.950382+00:00"
+}

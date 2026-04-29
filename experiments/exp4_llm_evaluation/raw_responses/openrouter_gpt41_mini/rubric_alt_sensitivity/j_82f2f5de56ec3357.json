@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_82f2f5de56ec3357",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_c70818c7cb4297fc.txt",
+  "prompt_version": "c70818c7cb4297fc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance values but lacks guidance on how to change the prediction or improve the outcome, making it minimally actionable for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is not very useful for auditing because it shows very small and close-to-zero coefficients, low fidelity (0.41), and a high faithfulness gap (0.43), indicating poor local approximation of the model's behavior. It does not clearly highlight why the model made a false negative error.\",\n    \"clarity\": \"The explanation lists features with their weights in a straightforward manner, but the very small magnitude of coefficients and presence of missing value indicators (occupation_nan, workclass_nan) reduce interpretability and clarity.\",\n    \"completeness\": \"The explanation includes the top local factors but does not provide confidence or additional context about the prediction, nor does it explain the model's decision boundary or error, limiting completeness.\",\n    \"concision\": \"The explanation is relatively concise, listing only a few features with their weights, avoiding unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to poor fidelity, low informativeness, and limited actionability, making it of low quality for model-behavior review in this context.\",\n    \"semantic_plausibility\": \"The feature weights are plausible in the context of the adult dataset, with education and missing occupation/workclass features influencing the prediction, but the very small magnitudes and contradictory signs reduce confidence in the explanation's semantic meaningfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:27:23.869740+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_2aac1fa3b6aebe40",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_683e588090eecf9e.txt",
+  "prompt_version": "683e588090eecf9e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights features with maximum importance scores but does not provide actionable insights for correcting the false negative prediction or improving the model's decision locally.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it lacks fidelity (0.417) and faithfulness (gap 0.094), and it does not clarify why the model misclassified this instance, limiting its utility for model-behavior understanding or recourse.\",\n    \"clarity\": \"The explanation is clear in listing top features with their importance scores, but the presence of zero weights for many features and lack of contextual interpretation reduces clarity about the model's reasoning.\",\n    \"completeness\": \"The explanation is incomplete as it only shows a few features with full importance and many with zero, without explaining the role of other potentially relevant features or the reason for the false negative outcome.\",\n    \"concision\": \"The explanation is concise, presenting only a small set of features with importance scores, avoiding unnecessary detail.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit purposes due to low fidelity, lack of actionable insights, and insufficient context to understand the model's failure on this instance.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible because it assigns full importance to features like education-num, capital-gain, and hours-per-week but zero to age and workclass, which are typically relevant, making the explanation questionable in this context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:06:37.777122+00:00"
+}

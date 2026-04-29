@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_9c6228593dc9102c",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_681f91e7c50b9380_59cfb1ce3a716412.txt",
+  "prompt_version": "59cfb1ce3a716412",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable information for recourse, as it only highlights 'native-country_Ireland' with a value of 1.0 and all other features at 0.0, without indicating how changes would affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful. It fails to reveal which features meaningfully contributed to the model's false positive, as only one feature is nonzero and the rest are all zero, which is implausible for a complex model like an MLP.\",\n    \"clarity\": \"The explanation is technically clear in format, but the content is confusing: it is unclear why only one feature is nonzero and all others are zero, which does not match expectations for a local explanation.\",\n    \"completeness\": \"The explanation is incomplete, as it does not provide a realistic or comprehensive view of the local factors influencing the prediction. It omits any nuanced or multi-feature contributions.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise, as it omits necessary information and thus fails to be compact in a useful way.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It lacks informativeness, plausibility, and actionable detail.\",\n    \"semantic_plausibility\": \"It is not semantically plausible that only 'native-country_Ireland' would have a nonzero contribution in an MLP model for this dataset, especially with all other features at exactly zero.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:54:27.812741+00:00"
+}

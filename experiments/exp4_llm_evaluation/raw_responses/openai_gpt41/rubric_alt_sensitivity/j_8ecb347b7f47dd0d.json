@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_8ecb347b7f47dd0d",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_ac6e5925b1641835_c295a6926a6a02cc.txt",
+  "prompt_version": "c295a6926a6a02cc",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only extremely small coefficients for each feature, with most values near zero, making it impossible to identify actionable factors for recourse or intervention.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful: the minuscule weights do not reveal which features meaningfully influenced the model's false positive prediction, nor do they help identify potential sources of bias or error.\",\n    \"clarity\": \"The explanation is technically clear in format, but the information content is so minimal (all coefficients are near zero) that it fails to clarify the model's behavior for this instance.\",\n    \"completeness\": \"The explanation lists several features, but none are shown to have a significant impact. It omits any sense of which features actually drove the prediction, so it is incomplete for review purposes.\",\n    \"concision\": \"While the explanation is not overly verbose, it is not meaningfully concise because it lists many features with negligible impact, rather than focusing on the most relevant ones.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide insight into the model's local decision-making, making it unhelpful for audit or recourse.\",\n    \"semantic_plausibility\": \"The feature list is plausible for the dataset, but the near-zero coefficients are implausible as an explanation for a confident model prediction, especially for a false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:28:10.177033+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_254152ddb3812f5f",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d68ee28a2b213ee2_e0a3ddd927066fb1.txt",
+  "prompt_version": "e0a3ddd927066fb1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only two features with full importance and several with zero importance, providing no nuanced insight into the model's decision for this false negative instance. It does not suggest clear steps for recourse or model improvement.\",\n    \"audit_usefulness\": \"The explanation is overly simplistic and sparse, showing only two features as anchors with full weight and the rest zero. This low fidelity and faithfulness gap indicate it poorly reflects the model's true reasoning, limiting its usefulness for auditing or understanding model behavior locally.\",\n    \"clarity\": \"The explanation is straightforward in format but lacks meaningful detail. Listing many features with zero importance dilutes focus and does not clarify why the model predicted negative when the true label is positive.\",\n    \"completeness\": \"The explanation is incomplete as it fails to capture the complexity of the model's decision. It ignores many potentially relevant features and does not provide a comprehensive local rationale for the prediction.\",\n    \"concision\": \"While the explanation is relatively short, it is not concise in a helpful way. Including many zero-valued features adds noise rather than distilling the key factors influencing the prediction.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes. It is not locally informative, lacks plausibility given the false negative outcome, and does not support meaningful review or recourse.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible because it assigns full importance to perimeter features only, ignoring other relevant features that typically influence breast cancer predictions. This narrow focus does not align well with domain knowledge or the model's expected behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:49:55.442065+00:00"
+}

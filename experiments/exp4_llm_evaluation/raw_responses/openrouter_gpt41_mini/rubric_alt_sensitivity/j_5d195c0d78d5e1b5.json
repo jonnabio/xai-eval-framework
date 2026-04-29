@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_5d195c0d78d5e1b5",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_a138a3019aad47d9_015324b8a096ab9e.txt",
+  "prompt_version": "015324b8a096ab9e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only one feature with a nonzero importance score, hours-per-week, but provides no guidance on how to change the prediction or improve the outcome. This limits its usefulness for recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing a single dominant factor with all others at zero. It lacks depth and does not help understand the model's behavior locally, especially given the false negative prediction and the true label being positive.\",\n    \"clarity\": \"The explanation is clear in format and presentation, listing feature importance scores in a straightforward manner. However, the meaning of zero values for all but one feature is not elaborated, which reduces interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only reports one feature with importance and ignores the rest, providing no context or additional information about the model's decision boundary or alternative influential features.\",\n    \"concision\": \"The explanation is concise, with only 80 tokens and a very sparse set of features reported, but this conciseness comes at the cost of informativeness and usefulness.\",\n    \"overall_quality\": \"Overall, the explanation is poor for audit purposes. It is too sparse, lacks actionable insights, and does not provide a meaningful understanding of the model's local behavior in this false negative case.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that hours-per-week could be an important factor, but the zero importance for all other features, including age and education-num, is suspicious and reduces confidence in the explanation's fidelity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:02:27.780389+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_5d03332daf089041",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_02c7c70809a7065b.txt",
+  "prompt_version": "02c7c70809a7065b",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, which could help a user identify which features to change for recourse. However, the numeric values are small and the directionality may not be intuitive for non-experts, limiting practical actionability.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is locally informative: it shows which features most influenced the model's false negative prediction. The factors are plausible and relevant for the adult dataset. However, the lack of prediction confidence and absence of a summary statement reduce its usefulness for a reviewer seeking a quick understanding.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their SHAP values. However, it assumes familiarity with SHAP and does not explain what the values mean or how they relate to the prediction, which may hinder clarity for some reviewers.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which is generally sufficient for local interpretability. However, it does not contextualize the overall prediction or provide a summary of the main drivers, which would improve completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 factors with their contributions. There is no extraneous information.\",\n    \"overall_quality\": \"Overall, the explanation is compact, locally informative, and plausible, but lacks context and interpretive guidance for non-expert reviewers. It is useful for audit but could be improved with a brief summary or clearer connection to the prediction.\",\n    \"semantic_plausibility\": \"The listed features and their directions are plausible for the adult income dataset and align with domain expectations (e.g., marital status, education, occupation).\"\n  },\n  \"scores\": {\n    \"actionability\": 3,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:30:55.445883+00:00"
+}

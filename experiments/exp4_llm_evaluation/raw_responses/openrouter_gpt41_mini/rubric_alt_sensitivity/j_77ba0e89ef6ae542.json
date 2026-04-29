@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_77ba0e89ef6ae542",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_36ff2c1056b28459_d794c28914cdc552.txt",
+  "prompt_version": "d794c28914cdc552",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only one feature with a nonzero importance (native-country_Italy: 0.5) while all other features have zero importance, providing no actionable insight on how to change the prediction or improve the outcome.\",\n    \"audit_usefulness\": \"The explanation is minimally informative for audit purposes because it lacks detail on other influential features and does not clarify why the model predicted 0 when the true label is 1, limiting its usefulness for model-behavior review or recourse.\",\n    \"clarity\": \"The explanation is straightforward and easy to read, listing feature importance scores clearly, but the meaning of zero values for most features without further context reduces interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies one feature with importance and ignores the rest, providing an insufficient picture of the local decision boundary or factors contributing to the false negative prediction.\",\n    \"concision\": \"The explanation is concise, presenting only a few features with their importance scores, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit review: it is clear and concise but lacks completeness, actionability, and sufficient local informativeness to be useful for understanding or contesting the model's behavior.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it identifies a single feature with importance, but the zero importance for all other features is suspicious given the complexity of the dataset and the false negative outcome, reducing confidence in the explanation's semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:37:53.100617+00:00"
+}

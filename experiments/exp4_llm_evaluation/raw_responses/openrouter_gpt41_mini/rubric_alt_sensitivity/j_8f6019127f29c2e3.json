@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_8f6019127f29c2e3",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_afc105601fc7fdd6_d53073a1e95bfc71.txt",
+  "prompt_version": "d53073a1e95bfc71",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values (1.0 or 0.0) but does not provide actionable insights or guidance on how to address the false positive prediction or improve the model decision.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it lacks nuance and detail; it only highlights two features as important with maximum weight and ignores all others, which is unlikely to reflect the true local decision boundary. The low fidelity and stability metrics further suggest the explanation is unreliable for auditing.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance scores, but the binary 1.0/0.0 values without further context or explanation reduce interpretability and meaningful understanding.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies two features as important and assigns zero importance to all others, which is unlikely to fully capture the local decision factors for this instance, especially given the false positive outcome.\",\n    \"concision\": \"The explanation is concise, listing only a few features with importance scores, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is of low quality for audit purposes due to poor fidelity, lack of actionable insights, and oversimplified importance values that do not support meaningful model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The explanation's focus on 'worst radius' and 'worst concave points' as top factors is plausible given domain knowledge in breast cancer diagnosis, but the zero importance for all other features and the binary importance values reduce confidence in the explanation's semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:17:27.040694+00:00"
+}

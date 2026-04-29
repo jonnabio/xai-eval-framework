@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_6e661b9510fd6c00",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_cc3c0dfb1a930816.txt",
+  "prompt_version": "cc3c0dfb1a930816",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not clarify how changing these features would affect the prediction or provide actionable recourse for the user.\",\n    \"audit_usefulness\": \"The explanation identifies which features were most influential locally, but the lack of detail about how these features interact or why they matter limits its usefulness for auditing model behavior, especially in a false positive case.\",\n    \"clarity\": \"The explanation is clear in format, but the meaning of the numeric values (all 1.0 or 0.0) is not explained, and the rationale for their selection is not provided.\",\n    \"completeness\": \"The explanation only lists a subset of features with binary importance and omits any discussion of feature interactions, model confidence, or why the model made a false positive error.\",\n    \"concision\": \"The explanation is concise, listing only a few features, but this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks the depth needed for effective audit or recourse. It does not provide sufficient insight into the model's behavior in this instance.\",\n    \"semantic_plausibility\": \"The features listed as important (education-num, occupation_Exec-managerial, relationship_Husband) are plausible for the adult dataset, but the binary importance values and lack of context reduce trust in the explanation's meaningfulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:25:34.663466+00:00"
+}

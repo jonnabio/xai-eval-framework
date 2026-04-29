@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_340a6f558d107f2f",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_4f96f4d65555df8d_2787293096e6904b.txt",
+  "prompt_version": "2787293096e6904b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with uniform importance scores of 1.0 for most features, but it does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"The explanation is not very helpful for audit review because it lacks differentiation in feature importance (many features have identical max scores), and the faithfulness gap is relatively high (0.39), indicating limited fidelity to the model's true decision process. This reduces confidence in using it to understand or challenge the model behavior locally.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the uniform scores and inclusion of zero-valued features without clear separation reduce clarity. It is not immediately clear which features are truly influential versus irrelevant.\",\n    \"completeness\": \"The explanation covers several key features but includes features with zero importance, which adds noise. It does not provide confidence or directionality of influence, limiting completeness in understanding the local decision.\",\n    \"concision\": \"The explanation is relatively concise with 70 tokens and a short list of features, but the inclusion of zero-importance features detracts from conciseness by adding unnecessary information.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to poor differentiation of feature importance, limited actionable insight, and moderate faithfulness. It is not sufficiently clear or informative for effective local model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The features listed (duration, credit amount, age, checking status, purpose, savings, property) are plausible factors in credit risk assessment, so the explanation is semantically reasonable in context despite its other shortcomings.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:58:26.678205+00:00"
+}

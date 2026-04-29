@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_eb411696ed66505b",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_cae54143c3307788_8e89b087e9c734a8.txt",
+  "prompt_version": "8e89b087e9c734a8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only a list of feature importance scores without guidance on how to change the prediction or improve the outcome, making it not actionable for recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing only one dominant factor (age) with a nonzero value and many zero values, which limits its usefulness for auditing model behavior or understanding the false positive prediction.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature scores, but the meaning of the values and their impact on the prediction is not clearly explained, reducing clarity.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights a few features with mostly zero values and does not provide a fuller picture of the local decision boundary or feature interactions.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero values, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit purposes due to low informativeness, lack of actionable insights, and limited clarity and completeness.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible since age is a known important factor in the adult dataset, but the zero values for other relevant features reduce confidence in the explanation's semantic completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:39:06.281654+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_0dfdbbbc7531d129",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_f18f76706d7aa678_d434251d58510ecb.txt",
+  "prompt_version": "d434251d58510ecb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists multiple top local factors with equal importance scores of 1.0, but it does not provide guidance on how to change the prediction or improve the outcome, limiting its actionability for recourse.\",\n    \"audit_usefulness\": \"The explanation is not very useful for audit inspection because it includes many factors with identical importance, some of which are contradictory or redundant (e.g., workclass_Local-gov and workclass_nan both at 1.0), and the zero importance for age and capital-gain is not clearly contextualized. This reduces its informativeness and plausibility for reviewing model behavior locally.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the presence of multiple features all scored equally at 1.0 without further differentiation or explanation reduces clarity. The meaning of zero scores for some features is not explained, making it harder to interpret.\",\n    \"completeness\": \"The explanation covers a set of features but does not clarify how these features interact or why some features have zero importance. It lacks contextual details that would make the explanation more complete for understanding the local prediction.\",\n    \"concision\": \"The explanation is relatively concise in token length (80 tokens) but includes redundant or conflicting features with identical importance scores, which could be pruned or better summarized to improve concision.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to lack of clear differentiation among top features, questionable plausibility of some feature importances, and limited actionable insight. It does not effectively support model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The explanation is semantically questionable because it assigns equal maximum importance to both a specific workclass category and a missing workclass indicator, which is contradictory. Also, the zero importance for age and capital-gain is plausible but unexplained, reducing trust in the explanation's semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:13:52.642595+00:00"
+}

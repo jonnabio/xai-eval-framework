@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_be2fe86d11813244",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_959ed027a5ab7370_ae39082174427d1f.txt",
+  "prompt_version": "ae39082174427d1f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for the user or reviewer to understand why the model predicted 0 instead of the true label 1, nor does it suggest how to change the input to alter the prediction.\",\n    \"audit_usefulness\": \"The explanation is not helpful for auditing because it lists many factors with equal importance (all 1.0) without differentiating their relative influence, and includes features with zero importance, which adds noise. The fidelity is low (0.55), indicating poor local faithfulness to the model's behavior.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the presence of multiple features all scored equally at 1.0 and some at 0.0 makes it confusing and unclear which features truly anchor the prediction locally.\",\n    \"completeness\": \"The explanation includes many features but does not clarify their combined effect or how they interact to produce the prediction. It also lacks confidence or probability information to contextualize the prediction.\",\n    \"concision\": \"The explanation is not concise; it includes features with zero importance and multiple features all scored equally, which could be pruned to focus on the most relevant anchors.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for local model-behavior review due to poor clarity, low fidelity, lack of actionable insights, and excessive, undifferentiated feature listing.\",\n    \"semantic_plausibility\": \"The features listed are plausible factors in credit prediction, but the equal importance scores and inclusion of zero-importance features reduce the semantic plausibility of the explanation as a meaningful local anchor.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:52:10.648863+00:00"
+}

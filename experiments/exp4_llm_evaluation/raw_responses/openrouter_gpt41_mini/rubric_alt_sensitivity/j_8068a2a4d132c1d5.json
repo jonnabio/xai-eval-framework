@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_8068a2a4d132c1d5",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_719c3e5dafe19965_6e11741db83dcfd4.txt",
+  "prompt_version": "6e11741db83dcfd4",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary weights (1.0 or 0.0) but provides no guidance on how to change the prediction or improve the outcome, making it not actionable for recourse.\",\n    \"audit_usefulness\": \"The explanation is sparse and only highlights two features with full weight, but the lack of confidence scores and the low fidelity (0.625) and high faithfulness gap (0.316) reduce its reliability for auditing model behavior. It does not help understand why the model made a false positive error.\",\n    \"clarity\": \"The explanation format is clear in showing which features are considered important locally, but the meaning of zero weights and the lack of further detail limit interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only shows binary importance for a few features without any context or quantitative insight into their influence or interaction, and it omits confidence or uncertainty information.\",\n    \"concision\": \"The explanation is concise, listing only a few features with simple weights, which is a positive aspect.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks depth, making it insufficient for meaningful local model behavior review or recourse decisions.\",\n    \"semantic_plausibility\": \"The features identified (installment_commitment and purpose_used car) are plausible factors in credit decisions, but the zero weights for other relevant features and the lack of nuance reduce the explanation's semantic richness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:26:36.189508+00:00"
+}

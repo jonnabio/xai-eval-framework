@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_1436249b6fcef9b9",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_dc46675654a709a2_3bd93d55df739d1c.txt",
+  "prompt_version": "3bd93d55df739d1c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies only two features with nonzero importance, but provides no guidance on how to change the prediction or improve the outcome, limiting its usefulness for recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is overly sparse and lacks detail about the model's local decision boundary. It does not provide sufficient information to understand or challenge the model's behavior in this instance, making it unhelpful for thorough audit review.\",\n    \"clarity\": \"The explanation is presented as a list of feature importance scores, but the zero values for most features and the lack of contextual interpretation reduce clarity. It is not clear why only two features matter or how they influence the prediction.\",\n    \"completeness\": \"The explanation is incomplete because it ignores many potentially relevant features and does not explain the model's reasoning beyond two factors. It lacks coverage of other features that might contribute locally.\",\n    \"concision\": \"The explanation is concise, listing only a few features with nonzero importance, but this conciseness comes at the cost of informativeness and completeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks the depth and context needed for effective local model-behavior review or recourse, resulting in low quality for audit purposes.\",\n    \"semantic_plausibility\": \"The explanation's focus on education-num and marital-status as top factors is plausible given the dataset context, but the zero importance assigned to age and other features is questionable and reduces trust in the explanation's semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:55:17.879953+00:00"
+}

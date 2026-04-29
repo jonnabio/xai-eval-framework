@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_e234af0233848b82",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_957e2266f53826de.txt",
+  "prompt_version": "957e2266f53826de",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights only one feature with a nonzero importance (marital-status_Married-civ-spouse), but the model prediction is 0 while the true label is 1, indicating a false negative. This single anchor does not provide actionable insight for recourse or correction since it ignores other potentially relevant features.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing because it is overly sparse and does not reveal why the model made a false negative error. The low fidelity (0.60) and high faithfulness gap suggest the explanation poorly reflects the model's decision process locally, limiting its utility for model-behavior review.\",\n    \"clarity\": \"The explanation is clear in format and presentation, listing feature importance scores explicitly. However, the meaning of zero values for all but one feature is not well contextualized, reducing interpretability in this case.\",\n    \"completeness\": \"The explanation is incomplete as it only identifies one feature with importance and ignores others that might contribute to the prediction. Given the false negative outcome, a more comprehensive explanation is needed to understand the model's behavior.\",\n    \"concision\": \"The explanation is concise, with only one feature highlighted and the rest zeroed out, but this conciseness comes at the cost of informativeness and usefulness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to poor fidelity, lack of actionable insights, and insufficient coverage of relevant features, despite being clear and concise.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible in that marital status can be an important factor in income prediction, but the zero importance for all other features is suspicious given the complexity of the task and the false negative prediction, reducing plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:57:10.670469+00:00"
+}

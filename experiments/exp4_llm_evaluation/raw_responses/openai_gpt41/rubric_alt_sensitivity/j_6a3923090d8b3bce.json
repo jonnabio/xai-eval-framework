@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_7e9b6f55ee9b538e",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_6a3923090d8b3bce",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_7e9b6f55ee9b538e_e83f6f65a6cc453e.txt",
+  "prompt_version": "e83f6f65a6cc453e",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_7e9b6f55ee9b538e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not indicate how changing any feature would alter the prediction, limiting its direct usefulness for recourse.\",\n    \"audit_usefulness\": \"The explanation provides a ranked list of local feature attributions, which is helpful for understanding the model's decision for this instance. However, it lacks context about the instance's actual feature values and does not relate the attributions to the model's overall behavior or thresholds.\",\n    \"clarity\": \"The explanation is clear in format, with features and their SHAP values presented in a straightforward manner. However, the meaning of the SHAP values (positive/negative direction) is not explicitly explained.\",\n    \"completeness\": \"The explanation covers the top local factors but omits the actual feature values for this instance, which are important for full interpretability. It also does not mention the model's confidence or how close the instance is to the decision boundary.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their SHAP values without unnecessary detail.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks actionable guidance, instance context, and some completeness for thorough audit inspection. It is a standard SHAP output but could be improved for audit and recourse purposes.\",\n    \"semantic_plausibility\": \"The features and their directions are plausible in the context of credit scoring, and the SHAP values are reasonable. However, without feature values, it's harder to fully assess plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:07:30.362804+00:00"
+}

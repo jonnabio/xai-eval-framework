@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_2db7d173e6a652a6",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_a2878ddc3d3b22b3_24b174f0b649636d.txt",
+  "prompt_version": "24b174f0b649636d",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable information for recourse, as most features have zero contribution and the only nonzero factors (age and workclass_Self-emp-not-inc) are not explained in terms of how changing them would affect the prediction.\",\n    \"audit_usefulness\": \"For audit inspection, the explanation is not useful: it lists coefficients without context, directionality, or indication of how these factors led to the specific false positive. The zero values for most features are uninformative, and the nonzero values lack interpretation.\",\n    \"clarity\": \"The explanation is a raw list of feature names and numeric values, with no guidance on what the numbers mean (e.g., are they weights, contributions, or something else?). This makes it unclear for reviewers.\",\n    \"completeness\": \"The explanation omits context about the instance, the meaning of the numbers, and how the listed factors relate to the model's decision. It does not explain why this instance was a false positive.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise: it includes many zero-value features, which add no value and clutter the output.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide clear, actionable, or locally informative insight into the model's behavior for this instance. It is not helpful for audit or recourse.\",\n    \"semantic_plausibility\": \"The explanation is not semantically plausible, as it does not connect the listed factors to the prediction in a way that makes sense for human review. The presence of many zero values and lack of interpretation undermines plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:23:44.399403+00:00"
+}

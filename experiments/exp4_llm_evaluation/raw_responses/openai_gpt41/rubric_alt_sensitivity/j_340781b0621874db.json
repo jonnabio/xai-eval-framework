@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_340781b0621874db",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_b2fb50fe3096e9d2_dd23a7f02adb7ba9.txt",
+  "prompt_version": "dd23a7f02adb7ba9",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary weights (1.0 or 0.0), but does not clarify how changing any feature would affect the prediction. This limits its usefulness for recourse or user action.\",\n    \"audit_usefulness\": \"For audit, the explanation is not very helpful: it does not specify how the listed features interact or why they are important for this specific instance. The anchor format is opaque and lacks context for the FP (false positive) outcome.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., 'checking_status_no checking: 1.0000'), which may not be clear to auditors or stakeholders unfamiliar with the feature encoding.\",\n    \"completeness\": \"Only a subset of features is shown with binary importance, and there is no information about how these features led to the prediction or why others are irrelevant. The explanation omits context about the instance.\",\n    \"concision\": \"While the explanation is short, it is not meaningfully concise: it lists many features with zero importance, which adds noise without value.\",\n    \"overall_quality\": \"Overall, the explanation is not useful for audit or recourse. It lacks clarity, context, and actionable insight, and does not help reviewers understand or challenge the model's behavior.\",\n    \"semantic_plausibility\": \"The explanation's format (binary weights) is plausible for anchors, but without further context or justification, it is not semantically informative for this FP case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:33:11.414095+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_a1214d33f56359db",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_cc3c0dfb1a930816.txt",
+  "prompt_version": "cc3c0dfb1a930816",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not clarify how changing these features would affect the prediction or provide actionable recourse for the user.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it lacks detail on how these features interact or why they matter, limiting its usefulness for auditing model behavior, especially in a false positive case.\",\n    \"clarity\": \"The explanation is terse and uses technical notation (e.g., 'education-num: 1.0000'), which may not be clear to non-technical reviewers. It does not explain what the numbers mean or how to interpret them.\",\n    \"completeness\": \"The explanation only lists a subset of features with their importance, omitting any context about the instance, the model's reasoning, or the meaning of the values. It does not address why the model made a false positive prediction.\",\n    \"concision\": \"The explanation is concise in terms of length, but this comes at the expense of informativeness. It is essentially a list of features and numbers, with no narrative or interpretive content.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and technical to be useful for model-behavior review or recourse. It fails to provide actionable, clear, or contextually meaningful information.\",\n    \"semantic_plausibility\": \"The features listed as important (education-num, occupation_Exec-managerial, relationship_Husband) are plausible for the adult dataset, but the lack of explanation for their importance or interaction reduces semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:25:29.594225+00:00"
+}

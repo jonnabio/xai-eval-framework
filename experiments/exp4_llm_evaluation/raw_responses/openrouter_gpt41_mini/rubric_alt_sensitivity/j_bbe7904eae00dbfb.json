@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_bbe7904eae00dbfb",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_445567f442799a48_8e1a78a016ef4cd9.txt",
+  "prompt_version": "8e1a78a016ef4cd9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with their SHAP values but does not provide guidance on how to change features to alter the prediction or improve creditworthiness, limiting actionable insights for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies key features influencing the prediction, the relatively low fidelity (0.49) and high faithfulness gap (0.33) reduce confidence in the explanation's accuracy, making it less useful for thorough audit review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with numeric values, which is straightforward to read, but the use of shorthand feature names and lack of contextual interpretation may hinder understanding for some auditors.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which is a reasonable subset, but it lacks contextual information such as feature value ranges or how these contributions combine to produce the final prediction, limiting completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top contributing features with their SHAP values without extraneous information, which supports quick inspection.\",\n    \"overall_quality\": \"Given the moderate clarity and concision but limited actionability, audit usefulness, and completeness, the explanation quality is low for model-behavior review purposes.\",\n    \"semantic_plausibility\": \"The features identified (e.g., checking status, credit history, savings) are plausible factors affecting credit risk, and their positive or negative contributions align with domain expectations, supporting semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:47:45.903405+00:00"
+}

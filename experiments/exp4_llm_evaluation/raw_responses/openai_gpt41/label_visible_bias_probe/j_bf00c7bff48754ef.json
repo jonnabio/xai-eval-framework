@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_bf00c7bff48754ef",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_49b4fcf4bf2d7761_f166070a9d86e25d.txt",
+  "prompt_version": "f166070a9d86e25d",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top local factors with their importance, but does not provide actionable guidance or indicate how changing features would affect the prediction. This limits its usefulness for recourse or decision support.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential (age, checking_status, credit_history), it does not specify the values or thresholds that triggered the prediction, making it difficult to audit the model's behavior in detail.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated importance scores, which is clear in format. However, the meaning of the scores (e.g., why some are 1.0 and others 0.0) and the absence of feature values may confuse some users.\",\n    \"completeness\": \"The explanation only provides the names of the most influential features and their importance, without showing the actual feature values for this instance or how they interact. This is insufficient for fully inspecting the local decision.\",\n    \"concision\": \"The explanation is concise, listing only the relevant features and their importance, without unnecessary information.\",\n    \"overall_quality\": \"The explanation is clear and concise but lacks critical information (feature values, thresholds, or logic) needed for a full semantic account of the model's decision. It is thus inadequate for most inspection or recourse purposes.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that it highlights features commonly relevant to credit decisions, but without feature values or more detail, it is not fully coherent with the context of a specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:38:02.362294+00:00"
+}

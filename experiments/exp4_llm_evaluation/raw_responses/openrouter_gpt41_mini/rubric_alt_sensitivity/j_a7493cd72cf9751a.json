@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_a7493cd72cf9751a",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_959ed027a5ab7370_ae39082174427d1f.txt",
+  "prompt_version": "ae39082174427d1f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for the user or reviewer to understand why the model predicted 0 instead of the true label 1, as it only lists factors with equal importance scores without indicating how to change the outcome.\",\n    \"audit_usefulness\": \"The explanation is not useful for audit because it lacks differentiation among features (many have identical importance scores), has low fidelity (0.55), and does not clarify the model's reasoning for this false negative instance, limiting its value for model-behavior review or recourse.\",\n    \"clarity\": \"The explanation is presented as a list of features with uniform importance scores, but the meaning of these scores and their impact on the prediction is unclear, making it difficult to interpret locally.\",\n    \"completeness\": \"The explanation omits confidence information and does not contextualize the feature values or their thresholds, providing an incomplete picture of the local decision boundary or why the prediction was incorrect.\",\n    \"concision\": \"The explanation is relatively concise, listing only a few features, but this conciseness comes at the cost of informativeness and clarity.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to low informativeness, poor clarity, and limited audit value, making it unhelpful for understanding or contesting the model's false negative prediction.\",\n    \"semantic_plausibility\": \"The explanation lists plausible features relevant to credit risk, but the uniform importance scores and lack of contextual detail reduce its semantic plausibility as a meaningful local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:52:18.282849+00:00"
+}

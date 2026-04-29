@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_815af44d36700020",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_48bc41dc6e2d3e80.txt",
+  "prompt_version": "48bc41dc6e2d3e80",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides numeric values for local factors but lacks guidance on how to act on these factors to change the prediction, making it not actionable for recourse or improvement.\",\n    \"audit_usefulness\": \"The explanation is minimal and mostly zeroed out except for education-num and race_Other, which limits its usefulness for auditing model behavior in this false positive case. It does not clearly reveal why the model erred or suggest meaningful local insights.\",\n    \"clarity\": \"The explanation is presented as a list of feature values with no narrative or interpretation, making it difficult to understand the significance of the values or their impact on the prediction.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights two features with nonzero values and ignores the rest, providing a very narrow view of the local factors influencing the prediction.\",\n    \"concision\": \"The explanation is concise in length but overly sparse, to the point of being uninformative, which undermines its value despite brevity.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for audit purposes due to lack of actionable insights, limited local informativeness, and poor clarity, making it unhelpful for reviewing or contesting the model's false positive prediction.\",\n    \"semantic_plausibility\": \"The explanation's emphasis on education-num and race_Other as top factors is plausible given the dataset context, but the zero values for all other features reduce confidence in the explanation's completeness and reliability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:24:08.825510+00:00"
+}

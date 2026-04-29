@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_82e2d0fc5d9fb454",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_9be4c2983f0c443c_cf1508d586d0a139.txt",
+  "prompt_version": "cf1508d586d0a139",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values but provides no guidance on how to act or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"While the explanation identifies features with maximal importance, it lacks depth and context to help an auditor understand why the model made a false positive prediction or how these features interact locally, reducing its utility for model-behavior review.\",\n    \"clarity\": \"The explanation is straightforward in format but the meaning of the numeric values (1.0000 or 0.0000) is not explicitly defined, which may confuse users unfamiliar with the explainer's output conventions.\",\n    \"completeness\": \"The explanation only highlights a few features with binary importance and omits any nuanced or continuous importance scores, missing potentially relevant local factors and interactions that could provide a fuller picture.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with clear zero or one values, which is a positive aspect in terms of brevity.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks actionable insights or detailed local context, making it of limited value for auditing or recourse despite its conciseness.\",\n    \"semantic_plausibility\": \"The features identified as important (area error, worst texture) are plausible factors in breast cancer prediction models, but the zero values for other features without explanation reduce confidence in the semantic completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:56:02.336712+00:00"
+}

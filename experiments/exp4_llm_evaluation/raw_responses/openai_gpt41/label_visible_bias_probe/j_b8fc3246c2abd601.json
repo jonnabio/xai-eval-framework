@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_b8fc3246c2abd601",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_10ccf6bdc14f2a99_a44bbf85f77e4175.txt",
+  "prompt_version": "a44bbf85f77e4175",
+  "provider": "openai",
+  "replicate": 1,
+  "response_text": "{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top contributing features and their SHAP values, but does not provide actionable guidance or indicate how changes to features might alter the prediction. Without knowing the feature values or thresholds, users cannot determine what actions to take.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the prediction and their directionality, which is useful for auditing the model's behavior. However, the lack of feature values and context limits deeper inspection.\",\n    \"clarity\": \"The explanation is clearly organized as a ranked list of features with associated SHAP values. The wording is concise and understandable for users familiar with SHAP, but may be less clear to lay users.\",\n    \"completeness\": \"The explanation provides the top local factors and their contributions, but omits the actual feature values for this instance and does not contextualize the SHAP values (e.g., relative to thresholds or typical values). This limits the ability to fully inspect the decision.\",\n    \"concision\": \"The explanation is concise, listing only the top 10 features and their SHAP values without unnecessary detail. It is compact relative to the information provided.\",\n    \"overall_quality\": \"The explanation is a standard SHAP output, providing a clear and concise list of influential features and their contributions. However, the lack of feature values and context reduces its completeness, actionability, and audit usefulness.\",\n    \"semantic_plausibility\": \"The explanation is semantically plausible, as the listed features are known to be relevant in breast cancer prediction and the negative SHAP values are consistent with a prediction of class 0 (benign).\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:06:21.120506+00:00"
+}

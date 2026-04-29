@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_7bb9711ba74f6136",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_cc3c0dfb1a930816.txt",
+  "prompt_version": "cc3c0dfb1a930816",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies top local factors but provides no guidance on how to change the prediction or improve the outcome, limiting its usefulness for recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is sparse and highlights only three features with full weight and others with zero, but the faithfulness and fidelity metrics are low, indicating the explanation may not reliably reflect the model's true decision process, reducing its utility for audit review.\",\n    \"clarity\": \"The explanation is presented as a list of features with numeric importance scores, but the meaning of the zero values and the context of these features are not clearly explained, making it hard to interpret for a reviewer unfamiliar with the dataset or model.\",\n    \"completeness\": \"The explanation omits any mention of prediction confidence and does not clarify why some features have zero importance, nor does it address the false positive nature of the prediction, resulting in an incomplete picture of the model's behavior locally.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with importance scores, which is positive; however, this conciseness comes at the cost of informativeness and clarity.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks sufficient detail, clarity, and reliability to be useful for auditing or understanding the model's local behavior, especially given the false positive prediction and low fidelity.\",\n    \"semantic_plausibility\": \"The features identified as important (education-num, occupation_Exec-managerial, relationship_Husband) are plausible factors in income prediction, but the zero importance for age and other features is questionable given typical domain knowledge, reducing semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:36:32.957961+00:00"
+}

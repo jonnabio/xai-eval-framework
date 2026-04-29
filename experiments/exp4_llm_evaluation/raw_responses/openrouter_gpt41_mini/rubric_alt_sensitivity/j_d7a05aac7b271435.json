@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_d7a05aac7b271435",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_228433fa3f4cc5bb.txt",
+  "prompt_version": "228433fa3f4cc5bb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for the user or reviewer to understand why the model predicted 0 instead of the true label 1, as it only lists features with binary importance scores without further context or guidance.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing because it lacks fidelity (0.23) and faithfulness gap (0.26) is high, indicating poor alignment with the model's actual behavior. The zero stability and very low sparsity suggest the explanation is not robust or informative locally.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the meaning of these scores and their impact on the prediction is unclear, making it difficult to interpret without additional context.\",\n    \"completeness\": \"The explanation only highlights a few features with full importance and ignores others, but does not explain how these features contribute to the prediction or the false negative outcome, resulting in an incomplete picture.\",\n    \"concision\": \"The explanation is concise in length (80 tokens) and feature count, but this conciseness comes at the cost of informativeness and clarity, limiting its usefulness.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for model-behavior review due to poor fidelity, lack of actionable insights, unclear presentation, and insufficient detail to understand or challenge the model's decision.\",\n    \"semantic_plausibility\": \"The features identified (age, fnlwgt, education-num, workclass_Private) are plausible factors in the adult dataset, but the zero importance for capital-gain and hours-per-week is questionable given their known relevance, reducing plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:53:39.448288+00:00"
+}

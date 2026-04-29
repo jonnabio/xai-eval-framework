@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_3b339bfd17a081cc",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_28cfcd5501fa69b2_b5dc963a6097af90.txt",
+  "prompt_version": "b5dc963a6097af90",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with equal importance scores but provides no guidance on how to change the prediction or improve the outcome, limiting actionable insights.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it lacks differentiation among features (all top factors have identical importance), has low fidelity (0.47), and does not clarify why the model predicted 0 when the true label is 1, making it difficult to assess model behavior or identify errors.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores, but the uniform scores and lack of contextual interpretation reduce clarity and make it hard to understand the model's reasoning locally.\",\n    \"completeness\": \"The explanation covers only a few features with nonzero importance and ignores others, but given the low fidelity and faithfulness gap, it likely misses important factors influencing the prediction, thus incomplete for audit purposes.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features with importance scores, which is appropriate in length and avoids unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is weak due to low fidelity, lack of actionable insights, poor clarity, and limited completeness, making it unhelpful for meaningful model-behavior review or recourse.\",\n    \"semantic_plausibility\": \"The features identified as top factors (duration, checking status, credit history, employment) are plausible in the credit domain, but the zero importance for credit amount and other relevant features reduces the explanation's semantic credibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:29:47.148222+00:00"
+}

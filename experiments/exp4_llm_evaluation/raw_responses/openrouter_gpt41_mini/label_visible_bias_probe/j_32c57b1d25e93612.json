@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_32c57b1d25e93612",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_de938d5223748d7d_5ce802a0b365d0c8.txt",
+  "prompt_version": "5ce802a0b365d0c8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation is presented as a list of feature names with associated numeric values, but the meaning of these values (e.g., 1.0000 vs 0.0000) is not explicitly explained. The wording is terse and lacks narrative or interpretation, making it difficult for a non-expert to understand the significance of the features or their values.\",\n    \"completeness\": \"The explanation only lists a few features with binary-like values (1.0 or 0.0) without describing how these features influenced the prediction or their relative importance beyond the binary indicator. There is no information on the model's confidence or how these features interact, limiting the ability to fully inspect the local decision.\",\n    \"concision\": \"The explanation is very compact, listing only a few features with their values. However, this conciseness comes at the cost of clarity and completeness, as the explanation lacks context or elaboration.\",\n    \"semantic_plausibility\": \"The explanation identifies 'mean smoothness' and 'worst perimeter' as top local factors with values of 1.0, which are plausible features for a breast cancer model. However, the binary 0.0 values for other features without explanation reduce the semantic richness and make it unclear how these features contribute to the decision.\",\n    \"audit_usefulness\": \"The explanation provides minimal information to audit the model's behavior. It does not clarify how the features influence the prediction or provide insight into the model's reasoning process, limiting its usefulness for inspection.\",\n    \"actionability\": \"The explanation does not support actionable insights or recourse, as it does not indicate what changes in features might alter the prediction or how to interpret the model's decision in a way that supports decision-making or review.\",\n    \"overall_quality\": \"Overall, the explanation is very limited in scope and detail. It lacks interpretability, context, and actionable information, resulting in a poor semantic account of the model's local decision.\"\n  },\n  \"scores\": {\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"semantic_plausibility\": 1,\n    \"audit_usefulness\": 1,\n    \"actionability\": 1,\n    \"overall_quality\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:57:54.419314+00:00"
+}

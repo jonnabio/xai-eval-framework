@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import pandas as pd
 
 from src.evaluation.exp4_cases import load_manifest, read_cases_jsonl
 from src.evaluation.exp4_schema import SCORE_FIELDS
+from src.evaluation.exp4_reliability_metrics import ICC, KrippendorffAlpha, MultiJudgeComparison
 
 
 def analyze_exp4(manifest_path: Path) -> Dict[str, Any]:
@@ -33,6 +34,13 @@ def analyze_exp4(manifest_path: Path) -> Dict[str, Any]:
         "metric_alignment": _metric_alignment(data),
         "bias_diagnostics": _bias_diagnostics(data),
     }
+    
+    # Add multi-judge metrics if 2+ judges present
+    if data["judge_model"].nunique() >= 2:
+        outputs["icc_analysis"] = _icc_per_dimension(data)
+        outputs["krippendorff_alpha"] = _krippendorff_per_dimension(data)
+        outputs["judge_disagreement"] = _judge_disagreement_matrix(data)
+        outputs["judge_comparison_summary"] = _judge_comparison_summary(data)
 
     for name, frame in outputs.items():
         frame.to_csv(output_dir / f"{name}.csv", index=False)
@@ -149,6 +157,94 @@ def _bias_diagnostics(data: pd.DataFrame) -> pd.DataFrame:
             }
         )
     return pd.DataFrame(rows)
+
+
+def _icc_per_dimension(data: pd.DataFrame) -> pd.DataFrame:
+    """Compute ICC(2,1) per score dimension for inter-judge reliability."""
+    # Map score column names to dimension names
+    dimension_mapping = {
+        "clarity_score": "clarity",
+        "completeness_score": "completeness",
+        "concision_score": "concision",
+        "semantic_plausibility_score": "semantic_plausibility",
+        "audit_usefulness_score": "audit_usefulness",
+        "actionability_score": "actionability",
+        "overall_quality_score": "overall_quality",
+    }
+    
+    results = []
+    for score_col, dim_name in dimension_mapping.items():
+        if score_col not in data.columns:
+            continue
+        
+        # Rename for ICC function
+        temp_data = data[["case_id", "judge_model", score_col]].copy()
+        temp_data.columns = ["case_id", "judge_model", "score"]
+        
+        icc_dict = ICC.icc_2_1(temp_data, judge_col="judge_model", case_col="case_id", score_col="score")
+        results.append({
+            "dimension": dim_name,
+            **icc_dict,
+        })
+    
+    return pd.DataFrame(results)
+
+
+def _krippendorff_per_dimension(data: pd.DataFrame) -> pd.DataFrame:
+    """Compute Krippendorff's alpha per score dimension for ordinal agreement."""
+    dimension_mapping = {
+        "clarity_score": "clarity",
+        "completeness_score": "completeness",
+        "concision_score": "concision",
+        "semantic_plausibility_score": "semantic_plausibility",
+        "audit_usefulness_score": "audit_usefulness",
+        "actionability_score": "actionability",
+        "overall_quality_score": "overall_quality",
+    }
+    
+    results = []
+    for score_col, dim_name in dimension_mapping.items():
+        if score_col not in data.columns:
+            continue
+        
+        # Rename for Krippendorff function
+        temp_data = data[["case_id", "judge_model", score_col]].copy()
+        temp_data.columns = ["case_id", "judge_model", "score"]
+        
+        alpha_dict = KrippendorffAlpha.alpha_ordinal(
+            temp_data, judge_col="judge_model", case_col="case_id", score_col="score",
+            min_val=1, max_val=5
+        )
+        results.append({
+            "dimension": dim_name,
+            **alpha_dict,
+        })
+    
+    return pd.DataFrame(results)
+
+
+def _judge_disagreement_matrix(data: pd.DataFrame) -> pd.DataFrame:
+    """Compute case-level disagreement for human validation case selection."""
+    dimensions = [col.replace("_score", "") for col in data.columns if col.endswith("_score")]
+    
+    return MultiJudgeComparison.judge_disagreement_matrix(
+        data,
+        dimensions=dimensions,
+        case_col="case_id",
+        judge_col="judge_model"
+    )
+
+
+def _judge_comparison_summary(data: pd.DataFrame) -> pd.DataFrame:
+    """Generate per-judge summary (mean/std) for each dimension."""
+    dimensions = [col.replace("_score", "") for col in data.columns if col.endswith("_score")]
+    
+    return MultiJudgeComparison.judge_comparison_summary(
+        data,
+        dimensions=dimensions,
+        judge_col="judge_model",
+        groupby_cols=["judge_model"]
+    )
 
 
 def _summary_markdown(data: pd.DataFrame, outputs: Dict[str, pd.DataFrame]) -> str:

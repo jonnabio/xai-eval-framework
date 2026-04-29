@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_4d1d83a39dbbfe64",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_5169d5420efbc3da_4a70e6f78f8098a5.txt",
+  "prompt_version": "4a70e6f78f8098a5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse since it highlights features with zero importance alongside two features with full importance, which is confusing and uninformative for changing the prediction.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing model behavior because it lacks differentiation among features, shows zero importance for most, and does not clarify why the model predicted 0 when the true label is 1, limiting its value for error analysis.\",\n    \"clarity\": \"The explanation is unclear due to the presence of multiple features with zero importance and two features with perfect importance scores, without contextualizing their roles or interactions, making it hard to interpret locally.\",\n    \"completeness\": \"The explanation is incomplete as it only lists a few features with extreme importance values and ignores others, providing no nuanced insight into the model's decision boundary or the instance's feature values.\",\n    \"concision\": \"The explanation is concise in length but overly simplistic, which undermines its informativeness and usefulness for audit purposes.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for model-behavior review because it fails to provide clear, plausible, and locally informative insights necessary for understanding or contesting the prediction.\",\n    \"semantic_plausibility\": \"The explanation is semantically implausible since it assigns full importance to 'education-num' and 'occupation_Farming-fishing' but zero to all other relevant features, including 'age' and 'workclass', which are typically important in this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:00:43.023711+00:00"
+}

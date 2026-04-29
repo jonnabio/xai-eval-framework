@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_084580efd1317ebc",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_8b9b20faf8b2563d",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_084580efd1317ebc_caf5d94e79a53a14.txt",
+  "prompt_version": "caf5d94e79a53a14",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_084580efd1317ebc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importances but does not provide actionable guidance or suggest what changes could alter the prediction. It is not clear how a user could use this information for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it lacks detail about the direction of influence or how these values relate to the specific instance. This limits its usefulness for auditing model behavior, especially for understanding why this false negative occurred.\",\n    \"clarity\": \"The explanation is terse and uses a clear format, but it does not explain what the numbers mean (e.g., are they coefficients, importance scores, or something else?), nor does it relate them to the instance's actual values.\",\n    \"completeness\": \"The explanation only provides a list of features with associated numbers, omitting context such as the instance's feature values, the direction of influence, or how these factors led to the prediction. This is insufficient for a thorough review.\",\n    \"concision\": \"The explanation is concise, listing only the top local factors and their scores. However, this brevity comes at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal to be useful for audit or recourse. It lacks context, actionable insights, and interpretability.\",\n    \"semantic_plausibility\": \"The features listed are plausible for the Adult dataset and logistic regression, but the meaning of the scores is unclear, and the presence of many zeros is unexplained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-28T23:59:38.832700+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_38344ffd041f7ba8",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_18fe52436b35526b_3dcc8fad3d922218.txt",
+  "prompt_version": "3dcc8fad3d922218",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists many features all with equal maximum importance (1.0), including contradictory workclass categories and multiple education levels simultaneously, which is not actionable for recourse or improvement since it does not pinpoint specific factors to change.\",\n    \"audit_usefulness\": \"The explanation is not useful for audit because it lacks differentiation among features, shows zero stability, and has very low fidelity, making it unclear which features truly influence the prediction locally. This hinders meaningful model-behavior review.\",\n    \"clarity\": \"The explanation is presented as a list of features with identical importance scores, but the inclusion of multiple mutually exclusive categories (e.g., workclass_Private, workclass_State-gov, workclass_nan) without context reduces clarity and interpretability.\",\n    \"completeness\": \"While the explanation includes many features, it fails to provide a coherent or plausible local rationale for the prediction, missing a focused subset of truly relevant features, thus incomplete for understanding the model's decision.\",\n    \"concision\": \"The explanation is verbose and redundant, listing many features with the same importance score, which could be condensed to highlight only the truly relevant factors, reducing noise and improving conciseness.\",\n    \"overall_quality\": \"Overall, the explanation is poor quality for local model-behavior review: it is unclear, not actionable, not plausible, and not concise, with technical metrics supporting its low fidelity and zero stability.\",\n    \"semantic_plausibility\": \"The explanation is semantically implausible because it simultaneously assigns full importance to multiple mutually exclusive categories and education levels, which is inconsistent with realistic data distributions and model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:16:08.689684+00:00"
+}

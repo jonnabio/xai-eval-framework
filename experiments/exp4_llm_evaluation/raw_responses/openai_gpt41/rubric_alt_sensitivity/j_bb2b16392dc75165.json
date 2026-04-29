@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_bb2b16392dc75165",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_cc3c0dfb1a930816.txt",
+  "prompt_version": "cc3c0dfb1a930816",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary importance (1.0 or 0.0), but does not provide actionable guidance for recourse or indicate how changing features would affect the prediction. It is not clear what a user or auditor could do with this information.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were most influential locally, it lacks detail on how these features interact or why they matter. The absence of confidence or coverage information, and the lack of nuance in the importance scores, limits its usefulness for auditing model behavior, especially for a false positive.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance, but lacks interpretive context or explanation of what the scores mean. The binary nature of the scores (1.0 or 0.0) is not explained.\",\n    \"completeness\": \"The explanation omits information about how the anchor was constructed, what the anchor actually is (i.e., which feature values are fixed), and does not provide coverage or precision metrics typical of anchor explanations. It also does not explain the model's error (FP) in this case.\",\n    \"concision\": \"The explanation is concise, listing only a handful of features, but this brevity comes at the cost of informativeness and context.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks the necessary context and detail to be useful for audit or recourse. It does not provide enough information to understand or challenge the model's decision.\",\n    \"semantic_plausibility\": \"The features listed as important (education-num, occupation_Exec-managerial, relationship_Husband) are plausible for the adult income dataset, but the lack of nuance or explanation for their importance in this specific instance reduces plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:25:41.446796+00:00"
+}

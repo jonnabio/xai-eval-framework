@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_de0785b7840aef3b",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_6d6ef32df0477323_3c0bca9422a56bb6.txt",
+  "prompt_version": "3c0bca9422a56bb6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation is presented as a list of feature names with associated numeric values, but it lacks any narrative or interpretation. The meaning of the values (e.g., positive or zero) is not explained, making it difficult to understand the model's reasoning clearly.\",\n    \"completeness\": \"The explanation only lists a few features with mostly zero values except for 'education-num' and 'race_Other'. It does not provide sufficient detail about how these features influenced the prediction or why other features have zero impact, limiting the ability to fully inspect the local decision.\",\n    \"concision\": \"The explanation is very brief and compact, listing only a few features and their values without additional commentary. While concise, this brevity comes at the cost of informativeness.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible in that 'education-num' has a strong positive value, which aligns with known importance of education in income prediction models. However, the presence of 'race_Other' with a small positive value and many zero values without context reduces semantic coherence.\",\n    \"audit_usefulness\": \"The explanation provides minimal insight into the model's decision process due to lack of interpretive detail and context. It does not help an auditor understand why the model predicted a positive label for this instance, especially since the true label is negative.\",\n    \"actionability\": \"The explanation does not support meaningful review or recourse because it does not clarify which features could be changed to alter the prediction or how the model weighs different factors. It is not actionable for decision support.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and lacks interpretive clarity to serve as a useful semantic account of the model's decision. It fails to provide a meaningful narrative or sufficient detail to understand or challenge the prediction.\"\n  },\n  \"scores\": {\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"semantic_plausibility\": 2,\n    \"audit_usefulness\": 1,\n    \"actionability\": 1,\n    \"overall_quality\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:23:37.794805+00:00"
+}

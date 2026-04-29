@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_df50e5c566ee6eca",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_c04339897f75190f_b491c6e6a9175c2c.txt",
+  "prompt_version": "b491c6e6a9175c2c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top SHAP feature contributions with numeric values but does not provide guidance on how to change features to alter the prediction or improve the outcome, limiting actionable insights for recourse.\",\n    \"audit_usefulness\": \"While the explanation identifies key local factors influencing the model's false negative prediction, the relatively high faithfulness gap (0.257) and moderate fidelity (0.81) reduce confidence in the explanation's accuracy. The explanation is somewhat informative but lacks deeper context or interaction effects, limiting its usefulness for thorough audit review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with clear numeric values, making it straightforward to read and understand the direction and magnitude of each factor's influence on the prediction.\",\n    \"completeness\": \"The explanation covers the top 10 local features affecting the prediction, which is a reasonable scope for local interpretability. However, it does not include confidence or uncertainty measures, nor does it contextualize the features relative to the instance's baseline or global model behavior.\",\n    \"concision\": \"The explanation is concise, listing only the top contributing features with their SHAP values, avoiding unnecessary verbosity or extraneous information.\",\n    \"overall_quality\": \"The explanation is clear and concise with reasonable completeness but is limited by moderate faithfulness and lack of actionable guidance, reducing its overall utility for audit and recourse purposes.\",\n    \"semantic_plausibility\": \"The features and their directions of influence are plausible given the domain (credit risk), e.g., longer duration reducing risk, no checking account increasing risk, and employment length having a small negative effect. This aligns with domain knowledge, supporting semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:28:42.892248+00:00"
+}

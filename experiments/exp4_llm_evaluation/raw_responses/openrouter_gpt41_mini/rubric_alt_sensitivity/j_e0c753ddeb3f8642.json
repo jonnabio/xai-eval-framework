@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_e0c753ddeb3f8642",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_e594d44f0a99f099_6366f635c1b3eda6.txt",
+  "prompt_version": "6366f635c1b3eda6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top local factors with binary importance values (1.0 or 0.0) but does not provide guidance on how to act on these features or improve the prediction, limiting its usefulness for recourse or intervention.\",\n    \"audit_usefulness\": \"The explanation is overly simplistic and lacks nuance, showing only two features with importance 1.0 and all others 0.0, which does not provide a rich or detailed understanding of the model's local behavior. The low fidelity (0.63) and moderate stability (0.47) further reduce confidence in the explanation's reliability for audit purposes.\",\n    \"clarity\": \"The explanation is clear in format, listing features and their importance scores, but the binary 1.0/0.0 values without further context or explanation reduce interpretability and meaningful insight.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights two features with importance and ignores the rest, providing no information on how these features interact or contribute to the prediction beyond a binary indicator.\",\n    \"concision\": \"The explanation is concise, listing only a few features with importance scores, but this conciseness comes at the cost of informativeness and depth.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit review: it is too sparse, lacks actionable insights, and does not convincingly represent the model's local decision process.\",\n    \"semantic_plausibility\": \"The features identified (area error and worst perimeter) are plausible important factors in breast cancer diagnosis models, but the zero importance for all other features is suspicious and likely oversimplified, reducing semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T03:06:10.978816+00:00"
+}

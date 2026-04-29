@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_bd6dd5ce6a871f36",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_abc8fc5d476871ed.txt",
+  "prompt_version": "abc8fc5d476871ed",
+  "provider": "openai",
+  "replicate": 2,
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable insights for recourse or decision support, as it only lists one non-zero factor ('native-country_South') and all other features are zero, without context or guidance on how to change the outcome.\",\n    \"audit_usefulness\": \"The explanation is not useful for auditing model behavior because it suggests that only one feature ('native-country_South') influenced the decision, which is implausible for a logistic regression model on the Adult dataset. It does not allow for inspection of model reasoning or potential biases.\",\n    \"clarity\": \"The explanation is organized as a list of features and their importance scores, but the meaning of the scores (especially the zeros) and the method for determining 'top local factors' are not explained, making it difficult to interpret.\",\n    \"completeness\": \"The explanation is incomplete, as it only highlights one feature and provides no information about how other features contributed to the prediction. It lacks sufficient detail to understand the local decision.\",\n    \"concision\": \"While the explanation is brief, it is not concise in a useful way, as it omits necessary information for understanding the decision. The brevity comes at the expense of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation fails to provide a meaningful semantic account of the model's decision. It lacks clarity, completeness, and utility for both auditing and actionability.\",\n    \"semantic_plausibility\": \"It is implausible that only 'native-country_South' with a score of 1.0 and all other features at 0.0 would fully explain a logistic regression prediction on this dataset. The explanation does not cohere with expectations for this context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:03:42.938801+00:00"
+}

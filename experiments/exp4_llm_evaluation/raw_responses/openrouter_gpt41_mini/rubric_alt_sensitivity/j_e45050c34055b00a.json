@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_e45050c34055b00a",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_36ff2c1056b28459_d794c28914cdc552.txt",
+  "prompt_version": "d794c28914cdc552",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies only one local factor with a nonzero value (native-country_Italy: 0.5) and all others zero, providing no clear guidance on how to change the prediction or improve the outcome. This limits its usefulness for actionable recourse.\",\n    \"audit_usefulness\": \"The explanation is minimally informative, showing a single factor with influence and many zeros, which is insufficient for thorough model-behavior review. It does not clarify why the model predicted 0 when the true label is 1, nor does it help identify model weaknesses or biases.\",\n    \"clarity\": \"The explanation is straightforward and easy to read, listing factors and their values clearly. However, the meaning of zero values for most features without further context reduces interpretability.\",\n    \"completeness\": \"The explanation is incomplete as it only highlights one factor with a nonzero value and ignores the rest, which are all zero. This sparse information does not provide a full picture of the local decision boundary or feature contributions.\",\n    \"concision\": \"The explanation is very concise, listing only a few features with mostly zero values, which is appropriate for brevity but at the cost of informativeness.\",\n    \"overall_quality\": \"Overall, the explanation is too sparse and uninformative to be useful for auditing or recourse. It lacks depth, actionable insights, and sufficient context to understand the model's local behavior.\",\n    \"semantic_plausibility\": \"It is plausible that native-country_Italy has some influence, but the zero values for all other features are suspicious and unlikely to reflect a nuanced local explanation, reducing semantic plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:37:40.392126+00:00"
+}

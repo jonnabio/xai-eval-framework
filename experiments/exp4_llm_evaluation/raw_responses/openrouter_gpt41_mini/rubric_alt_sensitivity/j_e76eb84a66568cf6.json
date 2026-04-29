@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_e76eb84a66568cf6",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_683e588090eecf9e.txt",
+  "prompt_version": "683e588090eecf9e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation highlights features with maximum importance scores but does not provide actionable insights for recourse, especially since the prediction is a false negative and the true label is positive. It lacks guidance on what changes could alter the prediction.\",\n    \"audit_usefulness\": \"The explanation is minimally useful for audit as it identifies top local factors but fails to clarify why the model misclassified this instance. The low fidelity and faithfulness gap suggest the explanation may not reliably reflect the model's decision process locally.\",\n    \"clarity\": \"The explanation is clear in listing top features with their importance scores, but the presence of many zero-valued features without further context reduces interpretability for a reviewer.\",\n    \"completeness\": \"The explanation is incomplete because it only lists a few features with binary importance values and omits any nuanced or gradient information. It does not explain the role of zero-importance features or the model's reasoning behind the false negative.\",\n    \"concision\": \"The explanation is concise, providing a short list of features with importance scores, avoiding unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is poor in quality for audit purposes due to low fidelity, lack of actionable insights, and insufficient detail to understand the model's local behavior in this false negative case.\",\n    \"semantic_plausibility\": \"The explanation is somewhat plausible as education-num, capital-gain, and hours-per-week are reasonable factors for income prediction, but the zero importance for age and workclass features may be questionable given typical domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:06:30.982442+00:00"
+}

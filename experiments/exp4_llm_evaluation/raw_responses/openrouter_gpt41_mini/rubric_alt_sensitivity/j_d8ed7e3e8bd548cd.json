@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_d8ed7e3e8bd548cd",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_902d690264149a09_1fe26e359588495b.txt",
+  "prompt_version": "1fe26e359588495b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists top SHAP factors with their contributions but does not provide guidance on how to change features to alter the prediction, limiting recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is somewhat informative about local feature impacts but lacks context or interpretation to help an auditor understand why the model made a false negative error, reducing its usefulness for model-behavior review.\",\n    \"clarity\": \"The explanation is presented as a compact list of feature contributions with numeric values, but the format is terse and may be difficult for non-experts to interpret quickly without additional context or visualization.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which is reasonably complete for a local explanation, but it does not include confidence or uncertainty information, nor does it explain the directionality or interaction effects clearly.\",\n    \"concision\": \"The explanation is concise, listing only the top factors with their SHAP values, avoiding unnecessary verbosity.\",\n    \"overall_quality\": \"Overall, the explanation is limited in clarity and actionable insight, and its moderate faithfulness and stability metrics suggest it may not reliably reflect the model's reasoning, resulting in low overall quality for audit purposes.\",\n    \"semantic_plausibility\": \"The factors identified (education level, hours per week, marital status, sex) are plausible predictors in the adult dataset context, but the explanation does not clarify why the model erred on this instance, reducing semantic plausibility for audit.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T01:48:04.861383+00:00"
+}

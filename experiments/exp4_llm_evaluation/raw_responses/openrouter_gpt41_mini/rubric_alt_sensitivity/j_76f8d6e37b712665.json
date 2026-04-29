@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_76f8d6e37b712665",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_1de08b8c2918a436_9ce8c2ee75b35985.txt",
+  "prompt_version": "9ce8c2ee75b35985",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies top local factors but provides no guidance on how to change the prediction or improve the outcome, limiting its usefulness for recourse or actionable insights.\",\n    \"audit_usefulness\": \"The explanation is sparse and highlights only three features with full weights and others with zero, which oversimplifies the local decision boundary and does not provide a nuanced understanding of the false positive prediction, reducing its utility for thorough audit review.\",\n    \"clarity\": \"The explanation is straightforward in listing top factors with their weights, but the presence of zero weights for many features without explanation may confuse users about their relevance.\",\n    \"completeness\": \"The explanation lacks depth by showing only three features with nonzero importance and ignoring the rest, which may omit important local influences and does not fully capture the model's reasoning for this instance.\",\n    \"concision\": \"The explanation is compact and concise, focusing on a small number of features, which is positive, but this conciseness comes at the cost of missing important context.\",\n    \"overall_quality\": \"Overall, the explanation is too minimal and lacks actionable or detailed insights, making it of limited value for model-behavior review or recourse in this false positive case.\",\n    \"semantic_plausibility\": \"The features identified as anchors (checking_status_no, savings_status_<100, property_magnitude_real estate) are plausible factors in credit risk assessment, but the zero weights for other features without further context reduce confidence in the explanation's completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:22:54.100399+00:00"
+}

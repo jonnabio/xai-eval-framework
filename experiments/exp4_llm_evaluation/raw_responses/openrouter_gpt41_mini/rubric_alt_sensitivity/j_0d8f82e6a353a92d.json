@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-4.1-mini",
+  "judgment_id": "j_0d8f82e6a353a92d",
+  "model_version": "openai/gpt-4.1-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\rubric_alt_sensitivity\\exp4_d372ea8e16367348_5b75104cb92c560e.txt",
+  "prompt_version": "5b75104cb92c560e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists many features with binary importance values (1.0 or 0.0) without indicating how these features influence the prediction or what changes could alter the outcome, making it not actionable for recourse or improvement.\",\n    \"audit_usefulness\": \"The explanation is not helpful for audit review because it lacks nuance and detail about feature contributions, and the presence of many zero-valued features dilutes focus on truly relevant factors, limiting insight into model behavior locally.\",\n    \"clarity\": \"The explanation is presented as a list of features with importance scores but does not clarify the meaning of these scores or how they relate to the prediction, reducing interpretability and clarity.\",\n    \"completeness\": \"The explanation is incomplete as it does not provide any contextual information about the instance or the directionality of feature effects, nor does it explain why some features have zero importance while others have full importance.\",\n    \"concision\": \"While the explanation is relatively short, it is not concise in a meaningful way because it includes many zero-valued features that add noise rather than focus, reducing the efficiency of communication.\",\n    \"overall_quality\": \"Overall, the explanation is low quality for audit purposes due to lack of actionable insights, poor clarity, and insufficient detail to understand or verify the model's local decision-making.\",\n    \"semantic_plausibility\": \"The explanation's binary importance values (1.0 or 0.0) for multiple features seem implausible in a real-world breast cancer model context, where feature importance is typically more graded and nuanced.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T02:45:57.262656+00:00"
+}

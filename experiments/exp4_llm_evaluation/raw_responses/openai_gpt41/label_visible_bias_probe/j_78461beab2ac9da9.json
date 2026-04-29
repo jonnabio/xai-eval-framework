@@ -1,0 +1,17 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "gpt-4.1-2025-04-14",
+  "judgment_id": "j_78461beab2ac9da9",
+  "model_version": "gpt-4.1-2025-04-14",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_llm_evaluation\\prompts\\label_visible_bias_probe\\exp4_45af74f0fdcedd43_d4b87d568db29dce.txt",
+  "prompt_version": "d4b87d568db29dce",
+  "provider": "openai",
+  "replicate": 3,
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the top SHAP factors and their contributions, but does not provide actionable guidance or suggest what changes could alter the prediction. Without knowing the feature values or how to influence them, recourse is not supported.\",\n    \"audit_usefulness\": \"The explanation identifies which features most influenced the model's decision and their directionality, which is useful for auditing. However, the lack of feature values and context limits deeper inspection or understanding of potential biases.\",\n    \"clarity\": \"The explanation is organized as a list of features with associated SHAP values, which is clear for users familiar with SHAP. However, it may be less clear to lay users due to technical terminology and lack of feature value context.\",\n    \"completeness\": \"The explanation provides the top local factors and their SHAP values, but omits the actual feature values for this instance and does not contextualize the magnitude of contributions relative to the model's output. This limits completeness.\",\n    \"concision\": \"The explanation is concise, listing only the top factors and their contributions without unnecessary information.\",\n    \"overall_quality\": \"While the explanation is concise and provides the main contributing features, it lacks context (feature values, model output baseline) and actionable information, limiting its overall semantic quality.\",\n    \"semantic_plausibility\": \"The explanation is plausible as a SHAP output for a random forest on this dataset, and the listed features are reasonable. However, without feature values, it is difficult to fully assess the coherence with the specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-04-29T00:35:48.697029+00:00"
+}
