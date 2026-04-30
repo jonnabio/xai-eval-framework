@@ -17,7 +17,7 @@ class ICC:
         data: pd.DataFrame,
         judge_col: str = "judge_model",
         case_col: str = "case_id",
-        score_col: str,
+        score_col: str = "score",
     ) -> Dict[str, float]:
         """
         Compute ICC(2,1): two-way mixed effects, absolute agreement, single rater.
@@ -108,7 +108,7 @@ class KrippendorffAlpha:
         data: pd.DataFrame,
         judge_col: str = "judge_model",
         case_col: str = "case_id",
-        score_col: str,
+        score_col: str = "score",
         min_val: int = 1,
         max_val: int = 5,
     ) -> Dict[str, float]:
