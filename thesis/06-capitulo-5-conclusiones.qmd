@@ -334,24 +334,9 @@ de características por pixel-flipping o eliminación de tokens) y estabilidad
 dominio). El protocolo FOM-7 está diseñado para acomodar esta extensión sin
 cambios en su lógica de puertas.
 
-**2. Evaluación semántica proxy mediante LLMs (EXP4).** La siguiente extensión
-experimental debe introducir una capa de evaluación semántica reproducible
-basada en LLMs como jueces rubricados. Su objetivo no es sustituir la validación
-humana, sino estimar de forma controlada dimensiones que las métricas
-funcionales no capturan directamente: claridad, completitud, concisión, utilidad
-auditora, plausibilidad semántica y capacidad de apoyar la interpretación de una
-decisión. Esta fase permitiría estudiar si las ventajas técnicas observadas en
-fidelidad y estabilidad se corresponden con perfiles semánticos favorables, y
-si explicadores como Anchors obtienen ventajas en claridad o forma discursiva a
-pesar de resultados funcionales más débiles.
+**2. Evaluación semántica proxy mediante LLMs (EXP4) — completada.** La evaluación semántica con LLMs como jueces rubricados ha sido ejecutada y sus resultados se presentan en el §4.7. EXP4 analizó 4 775 juicios de tres modelos-juez (GPT-4.1-2025-04-14 × 2 rutas, GPT-4.1-mini) sobre 192 casos del benchmark. El acuerdo inter-juez es moderado en las dimensiones más objetivas —completitud ICC(2,1) = 0.585, plausibilidad semántica ICC(2,1) = 0.601— y débil en dimensiones más interpretativas como claridad (0.321). El diagnóstico de sesgo por visibilidad de etiqueta no detectó diferencias sistemáticas (mediana Δ = 0 en todas las dimensiones). La alineación con métricas técnicas es más alta para la esparsidad (ρ ≈ 0.40), confirmando que las dimensiones semánticas aportan información parcialmente no redundante. La evaluación semántica proxy tiene carácter exploratorio; la conversión en afirmaciones confirmatorias requiere validación humana adicional.
 
-**3. Incorporación de evaluación human-centered.** La brecha identificada en
-el Eje 2 (fuente de evidencia) de la taxonomía apunta directamente a la
-necesidad de integrar estudios de usuario en el protocolo. Un estudio con
-usuarios expertos (médicos, analistas de crédito) que evalúen la comprensión
-de las explicaciones de SHAP y LIME complementaría los hallazgos funcionales y
-la evaluación semántica proxy con evidencia de utilidad práctica, completando
-el espacio de evaluación multi-eje.
+**3. Validación humana calibrada.** La brecha identificada en el Eje 2 (fuente de evidencia) de la taxonomía apunta a la necesidad de integrar estudios de usuario en el protocolo. Una cohorte inicial de anotadores legos ha completado 20 respuestas mediante la interfaz de validación desplegada en `https://xai-benchmark.onrender.com/validation`, pero el tamaño de muestra es insuficiente para correlación LLM–humano. El objetivo es reclutar 5–10 anotadores para ejecutar el análisis de correlación de Spearman entre puntuaciones LLM y humanas, y calcular el ICC(2,1) de fiabilidad inter-anotador humano. La hipótesis de validez proxy (ρ ≥ 0.40) permitiría convertir los perfiles semánticos de EXP4 en evidencia confirmativa.
 
 **4. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
 benchmark primario opera con configuraciones de referencia. Un diseño factorial

@@ -699,6 +699,18 @@ is operational and reproducibility-focused rather than algorithmic.
     \item \textbf{Next steps:} expand the completed EXP3 validation design to
     additional tabular and non-tabular datasets to test ranking stability under
     stronger dataset shift.
+    \item \textbf{Completed extension — EXP4 semantic evaluation:} A companion
+    LLM-as-a-judge evaluation layer (EXP4) has been completed on 192 cases from
+    this benchmark. Three judge models (GPT-4.1-2025-04-14 \texttimes{} 2 routes,
+    GPT-4.1-mini) produced 4,775 structured judgments across seven semantic
+    dimensions. Inter-judge agreement is moderate on completeness
+    ($\text{ICC}(2,1)=0.585$) and semantic plausibility
+    ($\text{ICC}(2,1)=0.601$), and weaker on clarity (0.321). Label-visibility
+    bias diagnostics show no systematic inflation (median $\Delta=0$ on all
+    dimensions). Semantic profiles are consistent with the technical ranking
+    reported here: SHAP scores highest on completeness and plausibility; Anchors
+    scores high on concision but low on completeness. This semantic evidence is
+    exploratory until human-calibration data reach sufficient scale.
 \end{itemize}
 
 \acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}

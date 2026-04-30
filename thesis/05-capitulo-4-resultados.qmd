@@ -422,6 +422,53 @@ sistemática, lo que confirma la elección de niveles del Capítulo 3. Los coste
 computacionales crecen proporcionalmente con $N$ en LIME (estructura lineal)
 pero no en SHAP para modelos de árbol (TreeSHAP escala logarítmicamente).
 
+## Estudio D: Evaluación semántica proxy mediante LLMs (EXP4) {#sec-estudio-d}
+
+### Diseño y corpus de evaluación
+
+EXP4 introduce una capa de evaluación semántica complementaria al benchmark técnico, basada en LLMs como jueces rubricados. El objetivo no es sustituir las métricas funcionales de los Estudios A–C, sino estimar dimensiones que esas métricas no capturan directamente: claridad, completitud, concisión, plausibilidad semántica, utilidad auditora y capacidad de apoyar interpretación de decisiones.
+
+El corpus comprende **192 casos** seleccionados del experimento EXP2 escalado, estratificados por método explicador (SHAP, LIME, Anchors, DiCE) y cuadrante de predicción (VP, VN, FP, FN). Los casos se evaluaron bajo tres condiciones de *prompt*: (1) `hidden_label_primary` —condición principal, etiqueta de predicción oculta al juez para evitar sesgo de confirmación—, (2) `label_visible_bias_probe` —sonda de sesgo con etiqueta visible—, y (3) `rubric_alt_sensitivity` —rúbrica alternativa para análisis de sensibilidad. Se obtuvieron **4 790 juicios parseados** de tres modelos-juez: GPT-4.1-2025-04-14 (OpenAI direct), GPT-4.1-2025-04-14 (vía OpenRouter) y GPT-4.1-mini (vía OpenRouter). Tras excluir 15 filas de prueba (*dry-run*), el conjunto analítico contiene **4 775 juicios reales**.
+
+### Acuerdo inter-juez: ICC(2,1) y α de Krippendorff
+
+La consistencia entre los tres modelos-juez se cuantifica con dos estimadores: el coeficiente de correlación intraclase ICC(2,1) —efectos mixtos de dos vías, acuerdo absoluto, juez único— sobre los 147 casos para los que los tres jueces produjeron puntuaciones completas, y el α de Krippendorff ordinal sobre los 192 casos.
+
+| Dimensión | ICC(2,1) | IC 95 % | α Krippendorff | Interpretación |
+|---|---|---|---|---|
+| Claridad | 0.321 | [0.167, 0.459] | 0.278 | Acuerdo débil |
+| Completitud | **0.585** | [0.467, 0.682] | **0.566** | Acuerdo moderado |
+| Concisión | 0.453 | [0.314, 0.573] | 0.409 | Acuerdo moderado |
+| Plausibilidad semántica | **0.601** | [0.486, 0.695] | **0.573** | Acuerdo moderado–bueno |
+| Utilidad auditora | 0.376 | [0.228, 0.507] | 0.340 | Acuerdo débil |
+| Accionabilidad | 0.400 | [0.254, 0.528] | 0.362 | Acuerdo débil |
+| Calidad global | 0.431 | [0.289, 0.554] | 0.394 | Acuerdo débil–moderado |
+
+: Fiabilidad inter-juez en EXP4 (n = 147 casos completos para ICC; n = 192 para Krippendorff; 3 jueces). {#tbl-exp4-icc}
+
+Los valores más altos se concentran en *completitud* y *plausibilidad semántica*, dimensiones que los jueces interpretan de forma más convergente. *Claridad* y *utilidad auditora* muestran acuerdo más débil, lo que sugiere mayor variabilidad entre modelos-juez en la interpretación de esos constructos. Estos niveles son comparables a los reportados en estudios de fiabilidad inter-juez con LLMs sobre tareas de evaluación estructurada [@zheng2023judging; @gu2024llmjudge].
+
+### Perfiles semánticos por método explicador
+
+Bajo la condición `hidden_label_primary`, los perfiles medios por explainer revelan una jerarquía semántica coherente con la técnica:
+
+- **SHAP** obtiene las puntuaciones más altas en claridad, completitud y plausibilidad semántica, coherente con su capacidad de producir explicaciones con valores de importancia precisos y ordenados.
+- **LIME** alcanza puntuaciones medias similares a SHAP en varias dimensiones, con ventaja en concisión dado su subconjunto reducido de características activas.
+- **Anchors** muestra puntuaciones dispares: alta concisión semántica (reglas IF-THEN compactas) pero baja completitud, coherente con que las reglas de anclaje no cubren todos los factores predictivos.
+- **DiCE** obtiene puntuaciones consistentemente bajas en completitud y calidad global, confirmando que los contrafácticos responden una pregunta diferente (¿qué cambiaría la decisión?) y no una explicación del caso actual.
+
+### Alineación LLM–métricas técnicas
+
+La correlación de Spearman entre puntuaciones LLM y métricas técnicas cuantifica en qué medida las dimensiones semánticas captan varianza adicional respecto a las métricas funcionales. Las correlaciones más altas (ρ ≈ 0.38–0.40) se observan entre *completitud* y *esparsidad*, y entre *concisión* y *esparsidad*, indicando que la esparsidad de la explicación —número de características activas— es la métrica técnica con mayor solapamiento semántico. En contraste, las correlaciones con fidelidad y estabilidad son más débiles (ρ ≈ 0.28–0.32), lo que confirma que las dimensiones semánticas aportan información no redundante respecto al benchmark técnico.
+
+### Diagnóstico de sesgo por visibilidad de etiqueta
+
+La sonda de sesgo compara las puntuaciones de la condición `label_visible_bias_probe` con la condición `hidden_label_primary`. Las diferencias medias son pequeñas (todas con mediana = 0), lo que indica que los modelos-juez no alteran sistemáticamente sus evaluaciones cuando se les informa del resultado de la predicción. La diferencia más grande se observa en *concisión* (Δmedio = +0.20), lo que sugiere una leve tendencia a puntuar más alto la concisión cuando la etiqueta es visible, pero sin alcanzar magnitud prácticamente relevante.
+
+### Síntesis integradora EXP1–EXP4
+
+Los cuatro estudios forman una cadena de evidencia complementaria. EXP1 establece la reproducibilidad del protocolo. EXP2 proporciona el benchmark técnico confirmativo. EXP3 valida la portabilidad del marco a dominios tabulares adicionales. EXP4 añade una capa semántica que confirma que la jerarquía técnica SHAP > LIME > Anchors se extiende, en líneas generales, a las dimensiones de comprensibilidad y plausibilidad evaluadas por los jueces LLM. La evaluación semántica proxy de EXP4 tiene carácter exploratorio: sus afirmaciones son válidas como evidencia de consistencia entre métodos, pero no reemplazan la validación con usuarios reales (véase §5.4 sobre trabajo futuro). La validación humana con anotadores legos, iniciada en paralelo mediante interfaz web con 20 respuestas recolectadas, constituye el paso siguiente para convertir las puntuaciones LLM en afirmaciones confirmatorias.
+
 ## Discusión {#sec-discusion}
 
 ### Interpretación conjunta de H1, H2 y H3

@@ -41,7 +41,10 @@ class ICC:
         """
         # Pivot: rows=cases, columns=judges, values=scores
         pivot = data.pivot_table(index=case_col, columns=judge_col, values=score_col, aggfunc="mean")
-        
+
+        # Drop cases where any judge has no rating (ICC(2,1) requires complete data)
+        pivot = pivot.dropna()
+
         if pivot.shape[0] < 2 or pivot.shape[1] < 2:
             return {"icc_2_1": np.nan, "ci_lower": np.nan, "ci_upper": np.nan, "n_cases": pivot.shape[0]}
         
@@ -49,14 +52,15 @@ class ICC:
         n = pivot.shape[0]  # number of cases
         
         # Grand mean
-        grand_mean = pivot.values.mean()
+        grand_mean = float(np.mean(pivot.values))
         
         # Between-cases mean square (BMS)
         case_means = pivot.mean(axis=1)
-        bms = k * np.sum((case_means - grand_mean) ** 2) / (n - 1)
+        bms = k * float(np.sum((case_means.values - grand_mean) ** 2)) / (n - 1)
         
         # Within-cases mean square (WMS)
-        wms = np.sum((pivot.values - case_means.values[:, np.newaxis]) ** 2) / (n * (k - 1))
+        residuals = pivot.values - case_means.values[:, np.newaxis]
+        wms = float(np.sum(residuals ** 2)) / (n * (k - 1))
         
         # ICC(2,1)
         icc = (bms - wms) / (bms + (k - 1) * wms)

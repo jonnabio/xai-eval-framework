@@ -427,10 +427,27 @@ broader LLM-as-a-judge literature shows that proxy judges can display
 position bias, verbosity bias, or agreement illusions
 \citep{zheng2023judging,gu2024llmjudge}. In XAI, that means semantic
 evaluator outputs should be treated as calibrated proxies rather than as
-self-validating replacements for expert review. The coded Paper C corpus
-contains 4 LLM-validation-relevant entries, one of which is itself a
-survey rather than a direct validation study. That is a visible but
-still small empirical base. This gap directly motivates Paper A.
+self-validating replacements for expert review.
+
+This thesis now includes a completed LLM-judge evaluation layer (EXP4)
+that directly addresses this gap. Three GPT-4.1-class judge models
+produced 4,775 structured judgments on 192 cases drawn from the primary
+benchmark, covering seven semantic dimensions on a 1--5 ordinal rubric.
+Inter-judge agreement is moderate on the most objective dimensions
+---completeness $\text{ICC}(2,1)=0.585$, $95\%\,\text{CI}=[0.47,\ 0.68]$;
+and semantic plausibility $\text{ICC}(2,1)=0.601$, $[0.49,\ 0.70]$---
+and weaker on more interpretive dimensions such as clarity (0.321) and
+audit usefulness (0.376). Krippendorff's $\alpha$ ordinal values are
+consistent: 0.566 for completeness, 0.573 for semantic plausibility, and
+0.278 for clarity. Label-visibility bias diagnostics show no systematic
+judge inflation when the true label is revealed (median $\Delta=0$ on
+all dimensions), supporting the validity of the hidden-label primary
+condition. These agreement levels are broadly consistent with
+prior LLM-as-a-judge studies on structured rubric tasks
+\citep{zheng2023judging,gu2024llmjudge}. EXP4 therefore provides an
+empirical foundation for the semantic claims in Paper A, while confirming
+that calibration against human annotators remains necessary before
+those claims become confirmatory.
 
 \begin{figure}[t]
 \centering
@@ -473,13 +490,18 @@ measurement instruments rather than convenience tools. Their agreement
 with human experts must therefore be validated. Paper A occupies the
 semantic-evaluator validation layer of the taxonomy.
 
-At the current repository snapshot, the thesis already contains
-LLM-evaluation infrastructure, prompt templates, stratified sampling,
-and a human-annotation interface. However, the human-validation layer is
-not yet complete: data collection is still pending and agreement
-analysis remains stubbed in the thesis status notes. Paper A should
-therefore be framed as an active evaluator-validation study rather than
-as a finished evidentiary layer.
+The LLM-judge evaluation layer (EXP4) is now complete. The thesis
+contains 4,775 real judgments from three GPT-4.1-class models on 192
+cases, with structured inter-judge agreement statistics and a
+label-visibility bias diagnostic. Moderate-to-good agreement on
+completeness ($\text{ICC}=0.585$) and semantic plausibility
+($\text{ICC}=0.601$) indicates that LLM judges can be used as
+reproducible ordinal proxies for these dimensions. Human-calibration
+data collection is under way (20 responses collected); once a
+sufficient human cohort is complete ($n\geq50$ annotations), Paper A
+can report the Spearman $\rho$ between LLM and human scores and the
+human inter-rater ICC as calibration evidence. Until then, the semantic
+claims from EXP4 remain at the exploratory level.
 
 Third, the survey suggests a thesis-wide minimal evaluation stack:
 \begin{enumerate}[leftmargin=*]
@@ -578,7 +600,11 @@ evaluation should be treated as complementary rather than competing
 forms of evidence. Within the thesis, this means Paper B should provide
 the quantitative comparative baseline, EXP3 should provide bounded
 cross-dataset technical validation, and Paper A should validate the semantic
-evaluator layer that benchmark metrics alone cannot justify. Paper C provides
+evaluator layer that benchmark metrics alone cannot justify. EXP4 now provides
+the empirical inter-judge reliability data and bias diagnostics that underpin
+Paper A's evaluator-validation claims: moderate-to-good ICC on completeness and
+semantic plausibility, minimal label-visibility bias, and partial but informative
+LLM--technical metric alignment. Paper C provides
 the conceptual map that makes those efforts cohere.
 
 \acks{This work received no external funding. The study was self-funded

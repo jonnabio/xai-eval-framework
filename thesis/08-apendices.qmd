@@ -4,10 +4,86 @@
 
 ## Apéndice B: Configuración de los modelos de caja negra
 
-## Apéndice C: Prompts utilizados para la evaluación con LLMs
+## Apéndice C: Prompts y protocolo de evaluación con LLMs (EXP4)
 
-Este apéndice queda reservado para la fase EXP4, orientada a la evaluación
-semántica proxy de explicaciones mediante LLMs. Los prompts definitivos se
-documentarán junto con el diseño experimental, la rúbrica de puntuación, los
-controles de sesgo del evaluador y las reglas de almacenamiento de respuestas
-crudas y puntuaciones parseadas.
+### C.1 Diseño general del protocolo de evaluación
+
+EXP4 utiliza LLMs como jueces rubricados (*LLM-as-a-judge*) para evaluar semánticamente las explicaciones generadas por los cuatro métodos del benchmark. Los juicios se producen con tres modelos: GPT-4.1-2025-04-14 (OpenAI directo), GPT-4.1-2025-04-14 (vía OpenRouter) y GPT-4.1-mini (vía OpenRouter). Las respuestas se almacenan como JSON estructurado en `experiments/exp4_llm_evaluation/responses/` y las puntuaciones parseadas en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv`.
+
+### C.2 Condiciones de prompt
+
+Se utilizaron tres condiciones de prompt, implementadas en `experiments/exp4_llm_evaluation/prompts/`:
+
+1. **`hidden_label_primary`** (condición principal): La etiqueta de la predicción del modelo (*prediction*) está incluida en el contexto del caso, pero el *true_label* es nulo. Esta condición es la base de todos los análisis de EXP4 y evita que el juez conozca si la predicción fue correcta.
+
+2. **`label_visible_bias_probe`** (sonda de sesgo): Idéntica a la condición principal excepto que el *true_label* es visible. Permite cuantificar si los jueces alteran sus puntuaciones semánticas al saber si el modelo acertó.
+
+3. **`rubric_alt_sensitivity`** (sensibilidad de rúbrica): Versión alternativa con definiciones de dimensiones ligeramente reformuladas. Permite evaluar la robustez de los resultados a la redacción de la rúbrica.
+
+### C.3 Plantilla de prompt (condición `hidden_label_primary`)
+
+```
+You are an independent evaluator of local XAI explanations.
+
+Evaluate only the explanation and case context shown below. Do not infer
+hidden facts, do not reward or penalize an explainer family by reputation,
+and do not assume that the ground-truth label is available.
+
+Rubric version: RUBRIC_V1
+Prompt condition: hidden_label_primary
+
+Scoring scale for every dimension:
+1 = very poor, 2 = weak, 3 = adequate, 4 = strong, 5 = excellent.
+
+Dimensions:
+- clarity: understandable organization and wording.
+- completeness: enough local decision information to inspect the prediction.
+- concision: compact relative to useful content.
+- semantic_plausibility: coherent with the provided context.
+- audit_usefulness: supports inspection of model behavior.
+- actionability: supports review, recourse, or decision support.
+- overall_quality: holistic semantic quality.
+
+Case:
+{<JSON del caso: case_id, dataset, explainer, normalized_explanation,
+  prediction, quadrant, technical_metrics, ...>}
+
+Return strict JSON only, with this exact shape:
+{
+  "case_id": "...",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": { <string per dimension> },
+  "scores": { <integer 1–5 per dimension> }
+}
+```
+
+El campo `normalized_explanation` contiene la explicación textual normalizada del método (p. ej., "SHAP top local factors: age: 0.32; ..." o una regla IF-THEN para Anchors). Las métricas técnicas están incluidas en el contexto pero el juez no recibe instrucción explícita de usarlas; su presencia permite analizar si el juez las incorpora implícitamente (alineación LLM–métricas).
+
+### C.4 Rúbrica de puntuación (RUBRIC_V1)
+
+| Dimensión | Descripción |
+|---|---|
+| `clarity` | La explicación tiene organización y lenguaje comprensible para un lector no especialista. |
+| `completeness` | La explicación proporciona suficiente información local para inspeccionar la predicción del modelo. |
+| `concision` | La explicación es compacta en relación con el contenido útil que aporta. |
+| `semantic_plausibility` | La explicación es coherente con el contexto del caso y los datos del dominio. |
+| `audit_usefulness` | La explicación facilita la inspección del comportamiento del modelo por parte de un auditor. |
+| `actionability` | La explicación apoya la revisión, la búsqueda de recurso o el apoyo a la toma de decisiones. |
+| `overall_quality` | Calidad semántica holística de la explicación. |
+
+Escala: 1 = muy pobre, 2 = débil, 3 = adecuado, 4 sólido, 5 = excelente. El juez produce también rationales textuales por dimensión.
+
+### C.5 Controles de sesgo del evaluador
+
+- **Ocultación de etiqueta**: la condición principal no revela si la predicción fue correcta; el diagnóstico de sesgo (`label_visible_bias_probe`) confirma que las diferencias de puntuación con etiqueta visible son mínimas (mediana Δ = 0 en todas las dimensiones).
+- **Prohibición explícita de sesgo por reputación**: la instrucción del sistema prohíbe al juez penalizar o beneficiar a un método por su nombre o familia.
+- **Respuesta estructurada**: el juez debe retornar JSON estricto; las respuestas que no parsean se excluyen del análisis.
+- **Flags de control de calidad**: si el juez detecta `format_problem`, `insufficient_context` o `safety_or_policy_issue`, el caso se marca para revisión.
+
+### C.6 Almacenamiento y trazabilidad
+
+Las respuestas crudas se almacenan en `experiments/exp4_llm_evaluation/responses/{judge_id}/{case_id}_{replicate}.json`. Las puntuaciones parseadas se consolidan en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv` con las columnas: `case_id`, `judge_model`, `prompt_condition`, `replicate`, y una columna de puntuación por dimensión (sufijo `_score`). Los análisis de fiabilidad, alineación y sesgo se generan mediante `scripts/exp4_analyze_llm_scores.py` y se almacenan en `experiments/exp4_llm_evaluation/analysis/`.
