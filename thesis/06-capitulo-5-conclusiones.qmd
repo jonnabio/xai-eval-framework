@@ -10,7 +10,10 @@ entre el diseño experimental, los artefactos de resultado y las afirmaciones
 inferenciales. Esta tesis responde a ese problema con tres contribuciones
 articuladas: un protocolo de operación reproducible (FOM-7), un benchmark
 multi-métrico sobre datos tabulares reales y una taxonomía estructurada del
-espacio de métricas de evaluación XAI.
+espacio de métricas de evaluación XAI. Como capa empírica complementaria, la
+tesis incorpora además una validación humana piloto de 120 anotaciones que
+examina dimensiones semánticas de calidad explicativa no observables mediante
+las métricas funcionales automáticas.
 
 ## Respuesta al problema de investigación e hipótesis {#sec-respuesta}
 
@@ -53,6 +56,16 @@ siguiente:
 | OE5 — Construir taxonomía estructurada | Completado. Véase Sección 5.2. |
 
 : Cierre de objetivos específicos. {#tbl-objetivos}
+
+Además de estos objetivos confirmativos, la tesis produjo una capa descriptiva
+de validación humana de explicaciones. Esta capa no modifica la resolución de
+H1--H3, pero amplía la interpretación de los resultados al mostrar que las
+explicaciones son valoradas positivamente en claridad, completitud,
+plausibilidad y utilidad de auditoría, mientras que la concisión constituye la
+debilidad perceptiva más marcada. La evidencia humana refuerza la tesis central
+de que la calidad explicativa es multidimensional y que los resultados
+funcionales deben complementarse con evidencia semántica cuando las
+afirmaciones se refieren a comprensión o utilidad para auditoría.
 
 ## Estudio C: Taxonomía estructurada del espacio de métricas de evaluación XAI {#sec-taxonomia}
 
@@ -197,14 +210,16 @@ hallazgo es coherente con la posición de Bhattacharya y Verbert [-@bhattacharya
 que argumentan que la evaluación unidimensional produce comparaciones
 engañosas entre métodos que atienden distintas dimensiones de explicabilidad.
 
-**Segunda afirmación:** La taxonomía evidencia la brecha de cobertura de este
-benchmark. El Eje 2 de fuente de evidencia no incluye *estudios con usuario*
-(evaluación human-centered), y el Eje 4 de contexto de tarea no incluye
-*soporte a usuario final* como escenario experimental. Esta brecha es
-deliberada —el benchmark es funcionally-grounded por diseño, siguiendo la
-clasificación de Canha et al. [-@canha2025]— pero la taxonomía la hace
-explícita y trazable, orientando las extensiones futuras hacia la dimensión
-faltante.
+**Segunda afirmación:** La taxonomía evidencia qué parte del espacio de
+evaluación cubre cada fuente de evidencia. El benchmark EXP2 es
+*functionally-grounded* por diseño, siguiendo la clasificación de Canha et al.
+[-@canha2025], y por tanto no puede justificar por sí solo afirmaciones sobre
+comprensión o utilidad percibida. La validación humana piloto añadida en esta
+tesis cubre parcialmente esa brecha al evaluar claridad, completitud,
+concisión, plausibilidad y utilidad de auditoría. La taxonomía permite
+mantener separadas ambas capas: métricas funcionales para afirmaciones sobre
+comportamiento del explicador frente al modelo, y ratings humanos para
+afirmaciones descriptivas sobre la recepción semántica de las explicaciones.
 
 ## Contribuciones científicas {#sec-contribuciones}
 
@@ -241,7 +256,7 @@ tamaños de efecto de magnitud muy grande ($d_z > 2.8$) y sin excepciones en
 75 pares, constituye evidencia cuantitativa de una propiedad que la literatura
 había asumido pero raramente demostrado: las dimensiones de calidad de las
 explicaciones XAI son parcialmente independientes y no sustituibles entre sí
-[@brown2023; @bhattacharya2024]. Específicamente, la inestabilidad de LIME no
+[@bhattacharya2024; @canha2025]. Específicamente, la inestabilidad de LIME no
 es un artefacto de escenarios extremos sino una propiedad estructural del
 método bajo condiciones controladas. Esta demostración cuantifica el riesgo
 de usar LIME en contextos donde se exija consistencia explicativa (auditoría,
@@ -251,11 +266,14 @@ decisiones de alto riesgo), un riesgo que los trabajos de referencia sobre LIME
 La taxonomía del Estudio C complementa este hallazgo empírico con un marco
 conceptual que organiza el espacio de métricas de evaluación en cuatro ejes
 y que localiza explícitamente las dimensiones no cubiertas por los benchmarks
-funcionally-grounded, incluyendo la comprehensibilidad percibida por el usuario
-[@bhattacharya2024; @arrieta2019a]. La taxonomía integra y extiende los marcos
-previos de Schwalbe y Finzel [-@schwalbe2023], Abdulkadir et al.
-[-@abdulkadir2023] y Canha et al. [-@canha2025], alineándola explícitamente con
-el espacio experimental del benchmark.
+functionally-grounded, incluyendo la comprehensibilidad percibida por el usuario
+[@bhattacharya2024; @arrieta2019a]. La validación humana piloto incorporada en
+el Capítulo 4 muestra que esta dimensión no es solo conceptual: claridad y
+plausibilidad presentan alto acuerdo entre anotadores, mientras que
+completitud y utilidad de auditoría son más variables. La taxonomía integra y
+extiende los marcos previos de Schwalbe y Finzel [-@schwalbe2023], Abdulkadir
+et al. [-@abdulkadir2023] y Canha et al. [-@canha2025], alineándola
+explícitamente con el espacio experimental del benchmark.
 
 ### Contribución aplicada: criterios prescriptivos de selección de métodos XAI
 
@@ -305,12 +323,14 @@ ejemplo, fidelidad como ROAR [@zheng2025] o estabilidad como estimación de la
 constante de Lipschitz local [@canha2025]— pueden producir ordenamientos
 distintos, especialmente en el rango medio de los métodos (Anchors-DiCE).
 
-**Ausencia de evaluación human-centered.** El benchmark es exclusivamente
-funcionally-grounded. La dimensión de comprehensibilidad percibida, utilidad
-para la toma de decisiones y confianza del usuario [@bhattacharya2024] no está
-cubierta. La taxonomía del Estudio C hace explícita esta limitación y la
-localiza en los Ejes 2 y 4, pero los criterios de selección prescriptivos
-derivados no incorporan preferencias de usuarios finales.
+**Alcance piloto de la evaluación human-centered.** La tesis incorpora una
+validación humana descriptiva de 120 anotaciones, suficiente para demostrar que
+las dimensiones semánticas de calidad son observables y no redundantes. Sin
+embargo, esta capa no sustituye un estudio de usuarios confirmativo con
+participantes expertos, tareas controladas y análisis de acuerdo humano--LLM.
+Por tanto, los criterios prescriptivos derivados del benchmark funcional deben
+seguirse interpretando principalmente como criterios técnicos; las preferencias
+de usuarios finales solo quedan cubiertas de forma exploratoria.
 
 **Configuraciones de referencia.** Los resultados son válidos bajo las
 configuraciones predeterminadas de cada método (número de muestras de LIME,
@@ -331,13 +351,12 @@ de características por pixel-flipping o eliminación de tokens) y estabilidad
 dominio). El protocolo FOM-7 está diseñado para acomodar esta extensión sin
 cambios en su lógica de puertas.
 
-**2. Incorporación de evaluación human-centered.** La brecha identificada en
-el Eje 2 (fuente de evidencia) de la taxonomía apunta directamente a la
-necesidad de integrar estudios de usuario en el protocolo. Un estudio con
-usuarios expertos (médicos, analistas de crédito) que evalúen la comprensión
-de las explicaciones de SHAP y LIME complementaría los hallazgos funcionales
-con evidencia de utilidad práctica, completando el espacio de evaluación
-multi-eje.
+**2. Ampliación de la evaluación human-centered.** La validación humana piloto
+de esta tesis debe ampliarse hacia estudios de usuario confirmativos. Un
+estudio con usuarios expertos (médicos, analistas de crédito) que evalúen
+comprensión, completitud y utilidad de auditoría bajo tareas controladas
+permitiría estimar con mayor precisión la validez externa de los ratings
+observados y contrastar la concordancia entre evaluadores humanos y jueces LLM.
 
 **3. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
 benchmark primario opera con configuraciones de referencia. Un diseño factorial

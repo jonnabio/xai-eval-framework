@@ -15,6 +15,15 @@ el análisis de cobertura de artefactos, y el plan de inferencia estadística.
 Las amenazas a la validez y el inventario de recursos de reproducibilidad
 figuran en el Apéndice A.
 
+Además de estos dos estudios confirmativos, la tesis incorpora una capa
+descriptiva de validación humana de explicaciones. Esta capa se usa para
+evaluar dimensiones semánticas de calidad —claridad, completitud, concisión,
+plausibilidad y utilidad para auditoría— que no pueden inferirse directamente
+de las métricas funcionales de EXP2. Su rol es complementario: no modifica el
+diseño factorial ni los contrastes H1--H3, pero permite interpretar si las
+explicaciones producidas por los métodos XAI son percibidas como artefactos
+comprensibles y útiles por evaluadores humanos.
+
 ## Fases experimentales: EXP1 y EXP2
 
 El diseño experimental distingue dos cohortes de evidencia con roles
@@ -284,6 +293,38 @@ registrado en `ExplainerWrapper` bajo restricciones de recursos gestionadas por
 
 : Métricas primarias del benchmark con unidades y direcciones.
 {#tbl-metrics}
+
+## Capa de validación humana complementaria
+
+La validación humana se diseñó como una capa posterior al benchmark funcional.
+Su unidad de observación es la anotación humana sobre un caso de explicación,
+no la celda factorial $(g,k,s,n)$ de EXP2. Cada caso presenta una explicación
+normalizada junto con metadatos de contexto: conjunto de datos, método
+explicador, cuadrante de predicción (TP/TN/FP/FN), predicción y etiqueta
+verdadera. Para reducir sesgos de expectativa, los evaluadores no reciben las
+métricas automáticas ni los scores producidos por jueces LLM durante la tarea.
+
+El instrumento de anotación usa cinco ítems Likert de 1 a 5:
+
+| Dimensión humana | Pregunta operacional | Dirección |
+|------------------|----------------------|-----------|
+| Claridad | La explicación es fácil de entender. | $\uparrow$ |
+| Completitud | La explicación cubre suficientemente por qué el modelo decidió así. | $\uparrow$ |
+| Concisión | La explicación es concisa y no excesivamente extensa. | $\uparrow$ |
+| Plausibilidad | La explicación tiene sentido práctico en el dominio. | $\uparrow$ |
+| Utilidad para auditoría | La explicación serviría para revisar si el modelo decide de forma justa o razonable. | $\uparrow$ |
+
+: Dimensiones del instrumento de validación humana. {#tbl-human-validation-instrument}
+
+El archivo consolidado de respuestas humanas se mantiene en
+`experiments/exp4_llm_evaluation/human_validation_responses.csv`. El análisis
+descriptivo se genera a partir de este archivo y se almacena en
+`outputs/analysis/exp4_llm_evaluation/human_validation_rerun/`. Dado que esta
+capa no fue planificada como contraste confirmativo entre métodos, los
+resultados se interpretan como evidencia descriptiva y de validez de constructo:
+sirven para identificar perfiles semánticos, variabilidad entre dimensiones y
+necesidades de calibración humano--LLM, no para reemplazar las pruebas
+estadísticas de EXP2.
 
 ## Protocolo de operación FOM-7
 

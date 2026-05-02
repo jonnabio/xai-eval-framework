@@ -5,16 +5,23 @@ benchmark XAI, organizados conforme a las hipótesis y proposición de trabajo
 establecidas en el Capítulo 1. La exposición sigue la secuencia lógica del
 protocolo FOM-7: primero se documentan los resultados del análisis omnibus
 (Estudio A), luego el análisis pareado SHAP-LIME (Estudio B), y finalmente
-la verificación de la proposición de reproducibilidad (P1). La discusión
-integradora al final del capítulo articula los hallazgos con la literatura y
-deriva criterios operativos de selección de métodos.
+la verificación de la proposición de reproducibilidad (P1). A continuación se
+incorpora una capa complementaria de validación humana de las explicaciones
+generadas, orientada a dimensiones semánticas y de utilidad que no son
+capturadas por las métricas funcionales automáticas. La discusión integradora
+al final del capítulo articula los hallazgos con la literatura y deriva
+criterios operativos de selección de métodos.
 
-Todos los valores reportados en este capítulo se calcularon a partir de los
-artefactos de la etapa de benchmark primario de robustez (EXP2), compuesta
-por 275 celdas calificadas del diseño factorial $5 \times 4 \times 5 \times 3$.
+Los resultados confirmativos de H1--H3 y P1 se calcularon a partir de los
+artefactos de la etapa de benchmark primario de robustez (EXP2), compuesta por
+275 celdas calificadas del diseño factorial $5 \times 4 \times 5 \times 3$.
 Las 25 celdas faltantes (todas ellas del tipo Anchors o DiCE) fueron excluidas
 por la puerta 3 del protocolo y no afectan las pruebas confirmativas (véase
-Capítulo 3, sección de cobertura y calificación).
+Capítulo 3, sección de cobertura y calificación). La validación humana se
+reporta como análisis descriptivo complementario sobre el archivo
+`experiments/exp4_llm_evaluation/human_validation_responses.csv`; no altera
+los contrastes inferenciales de EXP2, sino que añade evidencia *human-centered*
+sobre la percepción de calidad de las explicaciones.
 
 ## Descripción general de la cobertura analítica
 
@@ -282,6 +289,183 @@ variabilidad métrica debida a la aleatoriedad de la semilla es controlada y
 uniforme. Los CVs de coste y estabilidad, que son inherentemente más variables
 por la dependencia de las instancias específicas seleccionadas, se esperan en
 rangos superiores y no forman parte del criterio primario de P1.
+
+## Validación humana de calidad explicativa {#sec-validacion-humana}
+
+Las métricas funcionales anteriores evalúan propiedades observables del
+explicador respecto al modelo: fidelidad, estabilidad, parsimonia, relevancia
+causal local y coste. Sin embargo, una explicación también debe ser evaluada
+como artefacto interpretativo: debe ser clara, suficientemente completa,
+concisa, plausible en el dominio y útil para tareas de auditoría. Para explorar
+esta capa *human-centered*, se consolidó un estudio de validación humana con
+120 anotaciones sobre 60 casos de explicación, almacenado en
+`experiments/exp4_llm_evaluation/human_validation_responses.csv`.
+
+La muestra incluye 12 anotadores, cada uno con 10 evaluaciones: `JonH`,
+`Steward` y `annotator_01`--`annotator_10`. Los casos proceden de tres
+conjuntos de datos tabulares: Adult Income (75 anotaciones), German Credit
+(35) y Breast Cancer (10). También cubren cuatro métodos de explicación:
+Anchors (32 anotaciones), SHAP (31), LIME (30) y DiCE (27). La distribución por
+cuadrante de predicción es razonablemente balanceada para un piloto:
+verdaderos positivos (39), falsos positivos (30), falsos negativos (26) y
+verdaderos negativos (25).
+
+Cada anotación utiliza una escala Likert de 1 a 5 en cinco dimensiones:
+
+- **Claridad:** si la explicación es fácil de entender.
+- **Completitud:** si la explicación cubre suficientemente por qué el modelo
+  produjo la predicción.
+- **Concisión:** si la explicación evita información excesiva o redundante.
+- **Plausibilidad:** si la explicación tiene sentido práctico en el dominio.
+- **Utilidad para auditoría:** si la explicación serviría para revisar o
+  cuestionar la decisión del modelo.
+
+La Tabla @tbl-human-validation-summary resume los resultados globales. Las
+medias muestran una estructura clara: claridad, completitud, plausibilidad y
+utilidad de auditoría se sitúan en la zona positiva de la escala, mientras que
+concisión es sustancialmente inferior.
+
+| Dimensión | $n$ | Media | Mediana | Desv. típica | Mín. | Máx. | % $\geq 4$ |
+|-----------|----:|------:|--------:|-------------:|-----:|-----:|----------:|
+| Claridad | 120 | 3.73 | 4 | 0.44 | 3 | 4 | 73.3% |
+| Completitud | 120 | 3.57 | 4 | 0.78 | 1 | 4 | 72.5% |
+| Concisión | 120 | 2.18 | 2 | 0.56 | 2 | 4 | 8.3% |
+| Plausibilidad | 120 | 3.76 | 4 | 0.45 | 2 | 4 | 76.7% |
+| Utilidad para auditoría | 120 | 3.83 | 4 | 0.75 | 3 | 5 | 62.5% |
+
+: Resumen descriptivo de la validación humana de explicaciones ($n=120$
+anotaciones). Fuente: `human_validation_rerun/human_validation_dimension_summary.csv`. {#tbl-human-validation-summary}
+
+El hallazgo más importante es la disociación entre adecuación semántica y
+compacidad. Las explicaciones son juzgadas mayoritariamente como claras
+(73.3% de puntuaciones $\geq 4$), plausibles (76.7%) y útiles para auditoría
+(62.5%), pero solo el 8.3% alcanza puntuaciones $\geq 4$ en concisión. En
+otras palabras, los participantes no están rechazando las explicaciones por
+incomprensibles; las perciben como razonablemente informativas, pero demasiado
+largas, densas o poco depuradas como artefactos comunicativos. Este patrón
+refuerza el argumento central de la tesis: la calidad explicativa no es
+unidimensional, y una métrica de parsimonia estructural no sustituye una
+evaluación humana de concisión.
+
+La completitud merece una lectura específica. Una inspección inicial del
+endpoint de Render sugería un posible efecto techo, porque la exportación viva
+reportaba completitud igual a 4 para las anotaciones actualmente expuestas. Sin
+embargo, el archivo consolidado usado para análisis contiene variación real:
+87 puntuaciones de 4, 16 de 3, 15 de 2 y 2 de 1. Por tanto, la completitud no
+debe tratarse como dimensión plana. Su media (3.57) es positiva, pero su
+desviación típica (0.78) es la más alta entre claridad, completitud,
+concisión y plausibilidad. Esto indica que los evaluadores distinguen entre
+explicaciones que "mencionan factores" y explicaciones que cubren de forma
+suficiente la lógica de la decisión.
+
+La Tabla @tbl-human-validation-agreement muestra un resumen simple de acuerdo
+entre anotadores para los casos con solapamiento. La claridad y la
+plausibilidad presentan los acuerdos más altos, mientras que completitud y
+utilidad para auditoría son más variables.
+
+| Dimensión | Comparaciones pareadas | Acuerdo exacto | Diferencia absoluta media | Diferencia máxima |
+|-----------|-----------------------:|---------------:|--------------------------:|------------------:|
+| Claridad | 91 | 0.91 | 0.09 | 1 |
+| Completitud | 91 | 0.53 | 0.70 | 3 |
+| Concisión | 91 | 0.79 | 0.38 | 2 |
+| Plausibilidad | 91 | 0.88 | 0.13 | 2 |
+| Utilidad para auditoría | 91 | 0.60 | 0.44 | 2 |
+
+: Acuerdo pareado entre anotadores para casos con más de una evaluación.
+Fuente: `human_validation_rerun/human_validation_pairwise_agreement.csv`.
+{#tbl-human-validation-agreement}
+
+Este patrón tiene implicaciones metodológicas. Claridad y plausibilidad
+parecen funcionar como constructos perceptivos relativamente estables: los
+anotadores tienden a coincidir sobre si una explicación se entiende y si tiene
+sentido práctico. En cambio, completitud y utilidad para auditoría requieren
+inferencias más exigentes sobre la tarea: qué información sería suficiente
+para justificar una predicción y qué información permitiría auditarla. Por
+ello, su menor acuerdo no invalida la dimensión; más bien muestra que son
+constructos de mayor carga contextual. En términos de diseño experimental,
+estas dimensiones deben reportarse separadamente y no deben agregarse sin
+examinar su fiabilidad.
+
+### Diferencias descriptivas por método
+
+La Tabla @tbl-human-validation-explainer resume las medias humanas por método.
+Los resultados no deben leerse como contrastes inferenciales definitivos,
+porque el muestreo no fue diseñado como prueba confirmativa entre explicadores;
+sí ofrecen, no obstante, señales útiles sobre el perfil semántico de cada
+método.
+
+| Método | $n$ | Claridad | Completitud | Concisión | Plausibilidad | Utilidad auditoría |
+|--------|----:|---------:|------------:|----------:|--------------:|-------------------:|
+| Anchors | 32 | 3.97 | 3.44 | 2.19 | 3.97 | 3.63 |
+| DiCE | 27 | 3.85 | 3.59 | 2.22 | 3.89 | 3.59 |
+| LIME | 30 | 3.40 | 3.60 | 2.07 | 3.37 | 4.47 |
+| SHAP | 31 | 3.71 | 3.65 | 2.23 | 3.81 | 3.65 |
+
+: Medias de validación humana por método de explicación. Fuente:
+`human_validation_rerun/human_validation_by_explainer.csv`.
+{#tbl-human-validation-explainer}
+
+El perfil por método matiza los resultados funcionales de EXP2. Anchors obtiene
+las medias más altas de claridad y plausibilidad, probablemente porque sus
+explicaciones en forma de regla son fáciles de reconocer como condiciones
+discretas. DiCE también es percibido como claro y plausible, aunque su utilidad
+de auditoría es moderada. SHAP mantiene un perfil equilibrado, sin extremos
+marcados. LIME, en cambio, presenta el contraste más interesante: es el método
+con menor claridad y plausibilidad, pero con mayor utilidad para auditoría
+(4.47). Esta disociación sugiere que una explicación puede ser menos elegante
+o menos natural como texto, pero aun así resultar útil para inspeccionar
+factores de decisión.
+
+La lectura integrada con los resultados funcionales es importante. En EXP2,
+SHAP domina en fidelidad y estabilidad, mientras que LIME es estructuralmente
+inestable. La validación humana no revierte esa conclusión, pero añade una
+capa de interpretación: los usuarios pueden atribuir utilidad de auditoría a
+explicaciones LIME aun cuando el método sea técnicamente inestable. Por tanto,
+la recomendación prescriptiva no debe ser "LIME es inútil", sino más precisa:
+LIME puede ser percibido como útil para inspección local, pero no debe usarse
+como base de auditoría comparativa o longitudinal si se requiere consistencia.
+
+### Diferencias descriptivas por conjunto de datos
+
+La Tabla @tbl-human-validation-dataset muestra que German Credit alcanza las
+medias más altas en claridad y plausibilidad, mientras que Adult Income obtiene
+la mayor utilidad para auditoría. Breast Cancer debe interpretarse con cautela
+por su tamaño reducido ($n=10$).
+
+| Conjunto de datos | $n$ | Claridad | Completitud | Concisión | Plausibilidad | Utilidad auditoría |
+|-------------------|----:|---------:|------------:|----------:|--------------:|-------------------:|
+| Adult Income | 75 | 3.65 | 3.63 | 2.16 | 3.64 | 4.04 |
+| Breast Cancer | 10 | 3.50 | 3.70 | 2.40 | 3.80 | 3.20 |
+| German Credit | 35 | 3.97 | 3.40 | 2.14 | 4.00 | 3.57 |
+
+: Medias de validación humana por conjunto de datos. Fuente:
+`human_validation_rerun/human_validation_by_dataset.csv`.
+{#tbl-human-validation-dataset}
+
+La diferencia Adult--German Credit sugiere que el contexto semántico del
+dominio influye en la valoración humana. Las explicaciones de German Credit
+pueden parecer más plausibles por contener variables financieras familiares
+(duración, monto del crédito, historial), mientras que Adult Income genera
+mayor utilidad de auditoría porque sus atributos sociales y laborales invitan
+a revisar sesgos o criterios sensibles. Este resultado apoya la necesidad de
+reportar la evaluación XAI por contexto de tarea y no solo por método.
+
+### Implicaciones para la tesis
+
+La validación humana modifica el alcance empírico de la tesis en tres formas.
+Primero, transforma la dimensión *human-centered* de una extensión futura a
+una capa descriptiva piloto con datos reales. Segundo, confirma por una fuente
+independiente que las dimensiones de calidad explicativa son separables:
+claridad, completitud, concisión, plausibilidad y utilidad de auditoría no se
+mueven como un único factor. Tercero, muestra que los criterios técnicos y los
+juicios humanos pueden divergir de forma informativa. SHAP domina métricas
+funcionales; LIME puede conservar utilidad percibida para auditoría; Anchors
+puede ser semánticamente claro aunque tenga cobertura y estabilidad limitadas.
+
+Estas observaciones no sustituyen los contrastes confirmativos de H1--H3. Su
+rol es complementar el benchmark funcional con evidencia de percepción humana
+y delimitar la siguiente fase de validación: estimar la concordancia entre
+evaluadores humanos y jueces LLM sobre las mismas dimensiones semánticas.
 
 ## Perfil multidimensional por método {#sec-perfiles}
 
