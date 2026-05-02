@@ -241,7 +241,7 @@ tamaños de efecto de magnitud muy grande ($d_z > 2.8$) y sin excepciones en
 75 pares, constituye evidencia cuantitativa de una propiedad que la literatura
 había asumido pero raramente demostrado: las dimensiones de calidad de las
 explicaciones XAI son parcialmente independientes y no sustituibles entre sí
-[@brown2023; @bhattacharya2024]. Específicamente, la inestabilidad de LIME no
+[@brown2020; @bhattacharya2024]. Específicamente, la inestabilidad de LIME no
 es un artefacto de escenarios extremos sino una propiedad estructural del
 método bajo condiciones controladas. Esta demostración cuantifica el riesgo
 de usar LIME en contextos donde se exija consistencia explicativa (auditoría,
@@ -306,14 +306,14 @@ ejemplo, fidelidad como ROAR [@zheng2025] o estabilidad como estimación de la
 constante de Lipschitz local [@canha2025]— pueden producir ordenamientos
 distintos, especialmente en el rango medio de los métodos (Anchors-DiCE).
 
-**Ausencia de evaluación semántica y human-centered.** El benchmark es
-exclusivamente *functionally-grounded*. La dimensión de comprehensibilidad
-percibida, utilidad para la toma de decisiones, confianza del usuario y
-coherencia semántica de la explicación [@bhattacharya2024] no está cubierta por
-los resultados confirmativos. La taxonomía del Estudio C hace explícita esta
-limitación y la localiza en los Ejes 2 y 4, pero los criterios de selección
-prescriptivos derivados no incorporan todavía una capa de evaluación semántica
-proxy ni preferencias de usuarios finales.
+**Evaluación semántica no humana.** El benchmark confirmativo de EXP2 es
+*functionally-grounded*. EXP4 añade una capa de evaluación semántica proxy con
+LLMs como jueces, pero no sustituye una validación con participantes humanos. La
+dimensión de comprehensibilidad percibida, utilidad para la toma de decisiones,
+confianza del usuario y coherencia semántica de la explicación
+[@bhattacharya2024] queda parcialmente aproximada por EXP4, pero no confirmada
+como experiencia de usuario real. La taxonomía del Estudio C hace explícita
+esta limitación y la localiza en los Ejes 2 y 4.
 
 **Configuraciones de referencia.** Los resultados son válidos bajo las
 configuraciones predeterminadas de cada método (número de muestras de LIME,
@@ -334,9 +334,9 @@ de características por pixel-flipping o eliminación de tokens) y estabilidad
 dominio). El protocolo FOM-7 está diseñado para acomodar esta extensión sin
 cambios en su lógica de puertas.
 
-**2. Evaluación semántica proxy mediante LLMs (EXP4) — completada.** La evaluación semántica con LLMs como jueces rubricados ha sido ejecutada y sus resultados se presentan en el §4.7. EXP4 analizó 4 775 juicios de tres modelos-juez (GPT-4.1-2025-04-14 × 2 rutas, GPT-4.1-mini) sobre 192 casos del benchmark. El acuerdo inter-juez es moderado en las dimensiones más objetivas —completitud ICC(2,1) = 0.585, plausibilidad semántica ICC(2,1) = 0.601— y débil en dimensiones más interpretativas como claridad (0.321). El diagnóstico de sesgo por visibilidad de etiqueta no detectó diferencias sistemáticas (mediana Δ = 0 en todas las dimensiones). La alineación con métricas técnicas es más alta para la esparsidad (ρ ≈ 0.40), confirmando que las dimensiones semánticas aportan información parcialmente no redundante. La evaluación semántica proxy tiene carácter exploratorio; la conversión en afirmaciones confirmatorias requiere validación humana adicional.
+**2. Evaluación semántica proxy mediante LLMs (EXP4) — completada como evidencia proxy.** La evaluación semántica con LLMs como jueces rubricados ha sido ejecutada y sus resultados se presentan en el §4.7. EXP4 analizó 4 775 juicios reales de tres modelos-juez (GPT-4.1-2025-04-14 × 2 rutas, GPT-4.1-mini) sobre 192 casos del benchmark; esta cifra procede de `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json`, después de excluir 15 filas de prueba. El acuerdo inter-juez es moderado en las dimensiones más objetivas —completitud ICC(2,1) = 0.585, plausibilidad semántica ICC(2,1) = 0.601— y débil en dimensiones más interpretativas como claridad (0.321). El diagnóstico de sesgo por visibilidad de etiqueta no detectó diferencias sistemáticas (mediana Δ = 0 en todas las dimensiones). La alineación con métricas técnicas es más alta para la esparsidad (ρ ≈ 0.40), confirmando que las dimensiones semánticas aportan información parcialmente no redundante. La evaluación semántica proxy tiene carácter exploratorio; la conversión en afirmaciones confirmatorias requiere validación humana adicional.
 
-**3. Validación humana calibrada.** La brecha identificada en el Eje 2 (fuente de evidencia) de la taxonomía apunta a la necesidad de integrar estudios de usuario en el protocolo. Una cohorte inicial de anotadores legos ha completado 20 respuestas mediante la interfaz de validación desplegada en `https://xai-benchmark.onrender.com/validation`, pero el tamaño de muestra es insuficiente para correlación LLM–humano. El objetivo es reclutar 5–10 anotadores para ejecutar el análisis de correlación de Spearman entre puntuaciones LLM y humanas, y calcular el ICC(2,1) de fiabilidad inter-anotador humano. La hipótesis de validez proxy (ρ ≥ 0.40) permitiría convertir los perfiles semánticos de EXP4 en evidencia confirmativa.
+**3. Validación humana calibrada — pendiente como evidencia confirmatoria.** La brecha identificada en el Eje 2 (fuente de evidencia) de la taxonomía apunta a la necesidad de integrar estudios de usuario en el protocolo. Una cohorte inicial de anotadores legos ha completado 20 respuestas mediante la interfaz de validación desplegada en `https://xai-benchmark.onrender.com/validation`, pero el tamaño de muestra es insuficiente para correlación LLM--humano. El objetivo es reclutar 5--10 anotadores para ejecutar el análisis de correlación de Spearman entre puntuaciones LLM y humanas, y calcular el ICC(2,1) de fiabilidad inter-anotador humano. La hipótesis de validez proxy (ρ >= 0.40) permitiría convertir los perfiles semánticos de EXP4 en evidencia confirmativa. Hasta entonces, EXP4 debe citarse como evaluación semántica proxy reproducible, no como validación humana.
 
 **4. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
 benchmark primario opera con configuraciones de referencia. Un diseño factorial
