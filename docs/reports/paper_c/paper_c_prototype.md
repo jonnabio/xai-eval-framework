@@ -239,7 +239,7 @@ First, the taxonomy justifies the multi-metric benchmark design of Paper B. If e
 
 Second, the taxonomy explains why Paper A is necessary. Once the thesis claims to measure causal alignment, counterfactual sensitivity, or semantic adequacy through LLM evaluators, those evaluators become measurement instruments rather than convenience tools. Their agreement with human experts must therefore be validated. Paper A occupies the semantic-evaluator validation layer of the taxonomy.
 
-At the current repository snapshot, the thesis already contains LLM-evaluation infrastructure, prompt templates, stratified sampling, and a human-annotation interface. However, the human-validation layer is not yet complete: data collection is still pending and agreement analysis remains stubbed in the thesis status notes. Paper A should therefore be framed as an active evaluator-validation study rather than as a finished evidentiary layer.
+At the current repository snapshot, the thesis already contains LLM-evaluation infrastructure, prompt templates, stratified sampling, and a human-annotation interface. The LLM-based semantic proxy layer is complete for thesis reporting, but the human-validation layer is not yet complete as confirmatory evidence: pilot human responses are insufficient for a human--LLM correlation claim, and human-rater agreement analysis remains a future calibration step. Paper A should therefore be framed as an active evaluator-validation study rather than as a finished human-validation layer.
 
 Third, the survey suggests a thesis-wide minimal evaluation stack:
 

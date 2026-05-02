@@ -1,12 +1,26 @@
 # EXP4 Multi-Judge & Human Validation Implementation Status
 
 **Date**: 2026-04-28  
-**Status**: Implementation In Progress  
+**Status**: Superseded by generated EXP4 analysis outputs  
 **Timeline**: Parallel execution; judges running in background (~3-4 hours)
 
 ---
 
-## Phase 1: Multi-Judge LLM Analysis (IN PROGRESS)
+## Supersession Note
+
+This file is retained as an execution-status note from the implementation
+period. For thesis claims, use
+`outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json` and the
+derived CSV files in the same directory. The generated analysis reports 4,790
+parsed rows, 15 excluded dry-run rows, and 4,775 real analyzed judgments across
+three judge labels.
+
+The multi-judge LLM proxy layer is complete for thesis reporting. The human
+validation layer is not complete as confirmatory evidence; the available human
+annotation infrastructure and pilot responses should be described as preparation
+for future human--LLM calibration.
+
+## Phase 1: Multi-Judge LLM Analysis (historical status)
 
 ### ✅ Completed Setup
 
@@ -23,14 +37,14 @@
    - ✅ Added `_judge_disagreement_matrix()` for Phase 2 case selection
    - ✅ Added `_judge_comparison_summary()` for per-judge profiling
 
-### 🚀 Currently Running
+### Historical Execution Snapshot
 
 | Judge | Status | Expected Completion | Cases |
 |-------|--------|---------------------|-------|
-| **OpenAI GPT-4** | 🟢 EXECUTING | ~3 hours | 1,728 (192 × 3 conditions × 3 replicates) |
-| **OpenRouter GPT-4-mini** | 🟢 EXECUTING | ~2 hours | 1,728 |
+| **OpenAI GPT-4** | Completed in later generated analysis | Historical estimate was ~3 hours | 1,728 (192 × 3 conditions × 3 replicates) |
+| **OpenRouter GPT-4-mini** | Completed in later generated analysis | Historical estimate was ~2 hours | 1,728 |
 
-**Parallel Execution**: Both judges running simultaneously on independent API calls.  
+**Parallel Execution**: Both judges were launched simultaneously on independent API calls.  
 **Terminal IDs**:
 - OpenAI: `f3426b61-f83c-45b8-8093-d5b8fe0b753f`
 - GPT-4-mini: `07955e0a-f6f4-41f1-801e-4648cfedec71`

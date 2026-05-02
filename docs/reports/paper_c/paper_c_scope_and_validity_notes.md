@@ -46,7 +46,8 @@ At the current repository snapshot, the broader thesis already contains:
 
 What remains incomplete for the Paper A layer is the confirmatory human-validation step itself:
 
-- human data collection is still pending;
-- agreement analysis is still stubbed in thesis status notes.
+- human data collection is not yet sufficient for confirmatory claims; a small
+  pilot exists but does not support human--LLM correlation claims;
+- agreement analysis for human raters remains a future calibration step.
 
 That means Paper C should position semantic evaluation as necessary and promising, but still instrument-like rather than fully validated.

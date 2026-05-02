@@ -1,5 +1,18 @@
 # EXP4 OpenRouter Full Replicated Results
 
+## Snapshot Status
+
+This document records the completed **single-judge OpenRouter snapshot** for
+`openai/gpt-4.1-2025-04-14`: 192 cases × 3 prompt conditions × 3 replicates =
+1,728 judgments. It is retained as provenance for the first full OpenRouter
+execution.
+
+The current thesis-level EXP4 analysis is the later **multi-judge** snapshot in
+`outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json`, which reports
+4,790 parsed rows, excludes 15 dry-run rows, and analyzes 4,775 real judgments
+across three judge labels. If this document and the generated multi-judge
+summary disagree for thesis claims, the generated multi-judge summary controls.
+
 ## Purpose
 
 This note documents the completed EXP4 single-judge replicated execution using

@@ -4,13 +4,91 @@
 
 ## Apéndice B: Configuración de los modelos de caja negra
 
-## Apéndice C: Prompts y protocolo de evaluación con LLMs (EXP4)
+## Apéndice C: Trazabilidad de evidencias y afirmaciones
 
-### C.1 Diseño general del protocolo de evaluación
+La tesis utiliza una regla de trazabilidad única: las cifras reportadas en el
+texto deben proceder de artefactos generados por los scripts de análisis. Las
+notas narrativas, reportes intermedios y manuscritos derivados se consideran
+capas de interpretación. Cuando exista discrepancia, prevalece el artefacto
+generado más cercano al análisis.
 
-EXP4 utiliza LLMs como jueces rubricados (*LLM-as-a-judge*) para evaluar semánticamente las explicaciones generadas por los cuatro métodos del benchmark. Los juicios se producen con tres modelos: GPT-4.1-2025-04-14 (OpenAI directo), GPT-4.1-2025-04-14 (vía OpenRouter) y GPT-4.1-mini (vía OpenRouter). Las respuestas se almacenan como JSON estructurado en `experiments/exp4_llm_evaluation/responses/` y las puntuaciones parseadas en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv`.
+| Afirmación o componente | Fuente canónica | Sección principal | Límite de interpretación |
+|---|---|---|---|
+| Cobertura, bloques completos e inferencia de EXP2 | `outputs/analysis/paper_a_exp2_stats/analysis_summary.json` | Capítulos 3--4 | Benchmark confirmativo centrado en Adult Income. |
+| Inventario de artefactos EXP2 | `outputs/analysis/paper_a_exp2_stats/exp2_run_inventory.csv` | Capítulo 3 | Distingue artefactos presentes, vacíos y analizables. |
+| Métricas por ejecución EXP2 | `outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv` | Capítulo 4 | No debe interpretarse con pruebas a nivel de instancia. |
+| Evidencia integrada EXP1--EXP3 | `outputs/analysis/integrated_evidence/evidence_snapshot.json` | Capítulos 4--5 | EXP3 es validación externa descriptiva, no prueba omnibus combinada. |
+| Evaluación semántica EXP4 | `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json` | Capítulos 4--5 | Evidencia proxy con LLMs; no validación humana confirmatoria. |
+| Tesis compilada | `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` | Documento completo | Requiere actualización manual del índice en Word antes de entrega final. |
 
-### C.2 Condiciones de prompt
+## Apéndice D: Mapa de contribuciones
+
+| Contribución | Evidencia principal | Sección | Limitación asociada |
+|---|---|---|---|
+| Protocolo FOM-7 para benchmarking reproducible | Diseño de puertas, inventario de artefactos y análisis regenerable | Capítulo 3 | La portabilidad se demuestra solo en dominios tabulares. |
+| Benchmark multimétrico de métodos XAI agnósticos | EXP2 con 275 ejecuciones analizables y 15 bloques completos | Capítulo 4 | Adult Income concentra el peso inferencial confirmativo. |
+| Análisis pareado SHAP--LIME | 75 celdas coincidentes por modelo, semilla y tamaño muestral | Capítulo 4 | Contraste limitado a métodos de atribución comparables. |
+| Validación externa compacta | EXP3 con Breast Cancer y German Credit | Capítulo 4 | Evidencia descriptiva; no sustituye un benchmark multidominio completo. |
+| Taxonomía de métricas XAI | Revisión estructurada y mapeo de métricas del benchmark | Capítulo 5 | No es una revisión bibliométrica exhaustiva. |
+| Evaluación semántica proxy | EXP4 con 4 775 juicios reales de tres modelos-juez | Capítulo 4 | No constituye validación con usuarios reales. |
+
+## Apéndice E: Inventario de celdas EXP2 no analizables
+
+La instantánea canónica de EXP2 contiene 299 archivos `results.json` presentes,
+274 con evaluaciones de instancia y 25 artefactos vacíos. Tras aplicar la
+superposición de recuperación SHAP, el conjunto analítico contiene 275
+ejecuciones analizables. Las 25 celdas no analizables restantes se concentran
+en Anchors y DiCE:
+
+| Modelo | Método | Celdas no analizables |
+|---|---:|---:|
+| logreg | anchors | 8 |
+| mlp | anchors | 8 |
+| xgb | anchors | 2 |
+| logreg | dice | 2 |
+| mlp | dice | 2 |
+| svm | dice | 2 |
+| xgb | dice | 1 |
+
+El detalle completo reside en
+`outputs/analysis/paper_a_exp2_stats/exp2_run_inventory.csv`. La lista de
+celdas vacías en la instantánea regenerada es:
+
+| Modelo | Método | Semilla | N | Estado |
+|---|---|---:|---:|---|
+| logreg | anchors | 42 | 50 | empty |
+| logreg | anchors | 42 | 200 | empty |
+| logreg | anchors | 123 | 50 | empty |
+| logreg | anchors | 123 | 200 | empty |
+| logreg | anchors | 456 | 100 | empty |
+| logreg | anchors | 789 | 200 | empty |
+| logreg | anchors | 999 | 50 | empty |
+| logreg | anchors | 999 | 200 | empty |
+| logreg | dice | 123 | 50 | empty |
+| logreg | dice | 999 | 50 | empty |
+| mlp | anchors | 42 | 50 | empty |
+| mlp | anchors | 42 | 100 | empty |
+| mlp | anchors | 123 | 200 | empty |
+| mlp | anchors | 456 | 50 | empty |
+| mlp | anchors | 456 | 100 | empty |
+| mlp | anchors | 789 | 50 | empty |
+| mlp | anchors | 789 | 200 | empty |
+| mlp | anchors | 999 | 200 | empty |
+| mlp | dice | 456 | 50 | empty |
+| mlp | dice | 456 | 200 | empty |
+| svm | dice | 123 | 50 | empty |
+| svm | dice | 456 | 100 | empty |
+| xgb | anchors | 42 | 200 | empty |
+| xgb | anchors | 123 | 50 | empty |
+| xgb | dice | 789 | 100 | empty |
+
+## Apéndice F: Prompts y protocolo de evaluación con LLMs (EXP4)
+
+### F.1 Diseño general del protocolo de evaluación
+
+EXP4 utiliza LLMs como jueces rubricados para evaluar semánticamente las explicaciones generadas por los cuatro métodos del benchmark. Los juicios se producen con tres modelos: GPT-4.1-2025-04-14 (OpenAI directo), GPT-4.1-2025-04-14 (vía OpenRouter) y GPT-4.1-mini (vía OpenRouter). Las respuestas se almacenan como JSON estructurado en `experiments/exp4_llm_evaluation/raw_responses/` y las puntuaciones parseadas en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv`. El resumen cuantitativo canónico para la tesis es `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json`.
+
+### F.2 Condiciones de prompt
 
 Se utilizaron tres condiciones de prompt, implementadas en `experiments/exp4_llm_evaluation/prompts/`:
 
@@ -20,7 +98,7 @@ Se utilizaron tres condiciones de prompt, implementadas en `experiments/exp4_llm
 
 3. **`rubric_alt_sensitivity`** (sensibilidad de rúbrica): Versión alternativa con definiciones de dimensiones ligeramente reformuladas. Permite evaluar la robustez de los resultados a la redacción de la rúbrica.
 
-### C.3 Plantilla de prompt (condición `hidden_label_primary`)
+### F.3 Plantilla de prompt (condición `hidden_label_primary`)
 
 ```
 You are an independent evaluator of local XAI explanations.
@@ -63,7 +141,7 @@ Return strict JSON only, with this exact shape:
 
 El campo `normalized_explanation` contiene la explicación textual normalizada del método (p. ej., "SHAP top local factors: age: 0.32; ..." o una regla IF-THEN para Anchors). Las métricas técnicas están incluidas en el contexto pero el juez no recibe instrucción explícita de usarlas; su presencia permite analizar si el juez las incorpora implícitamente (alineación LLM–métricas).
 
-### C.4 Rúbrica de puntuación (RUBRIC_V1)
+### F.4 Rúbrica de puntuación (RUBRIC_V1)
 
 | Dimensión | Descripción |
 |---|---|
@@ -77,13 +155,13 @@ El campo `normalized_explanation` contiene la explicación textual normalizada d
 
 Escala: 1 = muy pobre, 2 = débil, 3 = adecuado, 4 sólido, 5 = excelente. El juez produce también rationales textuales por dimensión.
 
-### C.5 Controles de sesgo del evaluador
+### F.5 Controles de sesgo del evaluador
 
 - **Ocultación de etiqueta**: la condición principal no revela si la predicción fue correcta; el diagnóstico de sesgo (`label_visible_bias_probe`) confirma que las diferencias de puntuación con etiqueta visible son mínimas (mediana Δ = 0 en todas las dimensiones).
 - **Prohibición explícita de sesgo por reputación**: la instrucción del sistema prohíbe al juez penalizar o beneficiar a un método por su nombre o familia.
 - **Respuesta estructurada**: el juez debe retornar JSON estricto; las respuestas que no parsean se excluyen del análisis.
 - **Flags de control de calidad**: si el juez detecta `format_problem`, `insufficient_context` o `safety_or_policy_issue`, el caso se marca para revisión.
 
-### C.6 Almacenamiento y trazabilidad
+### F.6 Almacenamiento y trazabilidad
 
-Las respuestas crudas se almacenan en `experiments/exp4_llm_evaluation/responses/{judge_id}/{case_id}_{replicate}.json`. Las puntuaciones parseadas se consolidan en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv` con las columnas: `case_id`, `judge_model`, `prompt_condition`, `replicate`, y una columna de puntuación por dimensión (sufijo `_score`). Los análisis de fiabilidad, alineación y sesgo se generan mediante `scripts/exp4_analyze_llm_scores.py` y se almacenan en `experiments/exp4_llm_evaluation/analysis/`.
+Las respuestas crudas se almacenan en `experiments/exp4_llm_evaluation/raw_responses/`. Las puntuaciones parseadas se consolidan en `experiments/exp4_llm_evaluation/parsed_scores/exp4_llm_scores.csv` con las columnas: `case_id`, `judge_model`, `prompt_condition`, `replicate`, y una columna de puntuación por dimensión (sufijo `_score`). Los análisis de fiabilidad, alineación y sesgo se generan mediante `scripts/exp4_analyze_llm_scores.py` y se almacenan en `outputs/analysis/exp4_llm_evaluation/`.

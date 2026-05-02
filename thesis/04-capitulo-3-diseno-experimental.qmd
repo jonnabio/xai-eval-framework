@@ -543,17 +543,33 @@ de análisis distintas [@demsar2006]. {#tbl-stat-plan}
 Todos los análisis del Capítulo 4 son reproducibles desde el repositorio
 público `https://github.com/jonnabio/xai-eval-framework`, archivado con DOI
 `10.5281/zenodo.19297724` (instantánea de referencia de abril de 2026).
+Las cifras reportadas en la tesis se toman de artefactos generados por los
+scripts de análisis, no de tablas mantenidas manualmente en el texto. En caso
+de discrepancia entre una nota narrativa y un artefacto generado, prevalece el
+artefacto generado correspondiente.
+
+Los artefactos canónicos para afirmaciones numéricas son:
+
+- `outputs/analysis/paper_a_exp2_stats/analysis_summary.json` para conteos,
+  cobertura e inferencia de EXP2.
+- `outputs/analysis/integrated_evidence/evidence_snapshot.json` para la
+  integración EXP1--EXP3.
+- `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json` para
+  conteos y cobertura de EXP4.
+
 Los anclajes de reproducibilidad principales son:
 
 - `configs/experiments/exp2_scaled/manifest.yaml` — diseño factorial
   declarado (300 celdas).
 - `experiments/exp2_scaled/results/` — árbol de artefactos por ejecución
-  (299 archivos `results.json` no vacíos).
+  (299 archivos `results.json` presentes; 274 con evaluaciones de instancia y
+  25 artefactos vacíos excluidos por calificación).
 - `outputs/batch_results.csv` — superposición de recuperación (30 filas).
 - `scripts/run_exp2_statistical_analysis.py` — generación determinista de
   tablas inferenciales.
 - `outputs/analysis/paper_a_exp2_stats/` — exportaciones inferenciales de
-  referencia.
+  referencia; la instantánea regenerada contiene 275 ejecuciones analizables
+  tras aplicar la superposición de recuperación.
 
 Las especificaciones completas del entorno de ejecución, los parámetros de
 restricción de recursos y las instrucciones de reproducción paso a paso

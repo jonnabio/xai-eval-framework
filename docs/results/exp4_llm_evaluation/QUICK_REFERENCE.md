@@ -1,16 +1,22 @@
 # EXP4 Multi-Judge & Human Validation: Quick Reference Guide
 
-**Created**: 2026-04-28 | **Status**: Implementation Complete, Judges Executing
+**Created**: 2026-04-28 | **Status**: Superseded by generated analysis outputs
+
+> This quick reference is retained as an implementation-period note. For thesis
+> claims, use `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json`,
+> which reports 4,790 parsed rows, 15 excluded dry-run rows, and 4,775 real
+> analyzed judgments across three judge labels. Human validation remains a
+> separate, non-completed confirmatory calibration layer.
 
 ---
 
-## 🚀 Current Status
+## Current Status
 
 | Component | Status | Execution | Terminal ID |
 |-----------|--------|-----------|-----------|
-| OpenAI GPT-4 Judge | 🟢 Running | 1,728 cases | f3426b61-f83c-45b8-8093-d5b8fe0b753f |
-| OpenRouter GPT-4-mini | 🟢 Running | 1,728 cases | 07955e0a-f6f4-41f1-801e-4648cfedec71 |
-| **ETA Completion** | **~3-4 hours** | Parallel execution | Both judges |
+| OpenAI GPT-4 Judge | Completed in later analysis snapshot | 1,728 planned judgments | f3426b61-f83c-45b8-8093-d5b8fe0b753f |
+| OpenRouter GPT-4-mini | Completed in later analysis snapshot | 1,728 planned judgments | 07955e0a-f6f4-41f1-801e-4648cfedec71 |
+| Thesis source | Generated analysis controls | 4,775 real analyzed judgments | `exp4_analysis_summary.json` |
 
 ---
 
@@ -49,12 +55,12 @@
 
 ---
 
-## ⏱️ Timeline
+## Historical Timeline
 
 ```
-NOW (04-28-2026, ~14:00):
-├─ GPT-4 OpenAI: 🟢 Running (~3 hours)
-├─ GPT-4-mini: 🟢 Running (~2 hours)
+04-28-2026, ~14:00:
+├─ GPT-4 OpenAI: launched (historical estimate ~3 hours)
+├─ GPT-4-mini: launched (historical estimate ~2 hours)
 │
 ~17:00 (Judge Completion):
 ├─ Parse + Analyze: 30 min

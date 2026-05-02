@@ -17,6 +17,7 @@ Status:
 - OpenRouter 24-case hidden-label pilot completed;
 - OpenRouter 24-case three-condition pilot completed;
 - OpenRouter full 192-case, three-condition, three-replicate execution completed.
+- multi-judge EXP4 analysis generated as thesis-level semantic-proxy evidence.
 
 Current result notes:
 
@@ -25,6 +26,20 @@ Current result notes:
 - [OpenRouter 24-case complete pilot](./openrouter_24_case_pilot_complete.md)
 - [OpenRouter full replicated results](./openrouter_full_replicated_results.md)
 - [Attribution versus explanation interpretation note](./attribution_vs_explanation_note.md)
+
+## Current Source of Truth
+
+For thesis claims, the canonical EXP4 numeric source is:
+
+- `outputs/analysis/exp4_llm_evaluation/exp4_analysis_summary.json`
+
+The generated summary currently reports 4,790 parsed rows, 15 excluded dry-run
+rows, 4,775 real analyzed judgments, 192 scored cases, and three judge labels.
+Older OpenRouter notes that report 1,728 judgments describe a single-judge
+snapshot and should be cited only when discussing that specific execution.
+
+EXP4 is complete as **LLM-based semantic proxy evaluation**. It is not complete
+as human-subject validation; human responses remain a separate calibration layer.
 
 ## Planned Raw Artifact Root
 
