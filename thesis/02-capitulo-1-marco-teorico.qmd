@@ -1,4 +1,4 @@
-# Marco Metodológico
+# Problema, objetivos y diseño general de la investigación
 
 Este capítulo establece el posicionamiento investigativo de la tesis. Se
 articula en cuatro ejes: el problema de investigación que motiva el trabajo, la
@@ -37,7 +37,7 @@ otro lado, muchas de estas
 métricas sufren del problema de datos fuera de la distribución (*Out-of-
 Distribution*, OOD): la perturbación de características genera instancias que el
 modelo nunca encontró durante el entrenamiento, invalidando las puntuaciones de
-fidelidad resultantes [@ref_7; @zheng2025]. La disponibilidad de herramientas de
+fidelidad resultantes [@alvarezmelis2018; @zheng2025]. La disponibilidad de herramientas de
 benchmarking como Quantus [@hedstrom2023] y OpenXAI [@agarwal2022] ha mejorado
 la estandarización de la medición, pero no resuelve la ausencia de un protocolo
 de operación que discipline la trazabilidad de artefactos y la corrección de
@@ -61,7 +61,7 @@ contribución al campo de la metodología de evaluación en XAI [@canha2025].
 Complementariamente, la construcción de una taxonomía estructurada del espacio
 de métricas de evaluación proporciona un marco conceptual que organiza las
 brechas de constructo actualmente dispersas en la literatura [@pawlicki2024;
-@abdulkadir2023; @nizam2023; @marcinkevičs2023; @schwalbe2023].
+@abdulkadir2023; @nizam2023; @marcinkevics2023; @schwalbe2023].
 
 Desde el punto de vista práctico, los sistemas de IA se despliegan de forma
 creciente en dominios donde la explicabilidad no es opcional, sino un requisito
@@ -100,7 +100,7 @@ comparación de métodos XAI en contextos de datos tabulares.
    [@lundberg2017; @ribeiro2016; @ribeiro2018; @mothilal2020; @wachter2017;
    @kohavi1996; @abdulkadir2023; @bhattacharya2024]
 
-3. Cuantificar las diferencias en el trade-off calidad-coste entre LIME y SHAP
+3. Cuantificar las diferencias en el relación calidad-coste entre LIME y SHAP
    mediante pruebas estadísticas pareadas sobre celdas coincidentes de modelo,
    semilla y tamaño de muestra.
 
@@ -112,7 +112,7 @@ comparación de métodos XAI en contextos de datos tabulares.
    XAI organizada en cuatro ejes —objetivo de evaluación, fuente de evidencia,
    propiedad de calidad y contexto de tarea— que sirva de marco conceptual
    integrador para los Estudios A y B [@abdulkadir2023; @pawlicki2024; @nizam2023;
-   @marcinkevičs2023; @schwalbe2023].
+   @marcinkevics2023; @schwalbe2023].
 
 ### Hipótesis o proposiciones de trabajo
 
@@ -133,7 +133,7 @@ métrica de estabilidad bajo el diseño de bloques emparejados.
 
 $H_{1,2}$: Al menos un par de métodos difiere significativamente en estabilidad.
 
-**H3 — Trade-off calidad-coste SHAP vs. LIME**
+**H3 — Relación calidad-coste SHAP vs. LIME**
 
 $H_{0,3}$: SHAP y LIME no difieren en las métricas de calidad ni en el coste
 computacional sobre celdas pareadas.
@@ -278,6 +278,14 @@ Las siete puertas secuenciales son:
 7. **Reporte con trazabilidad de afirmaciones**: las afirmaciones inferenciales
    solo se permiten cuando todas las puertas previas están satisfechas y son
    trazables a artefactos fuente.
+
+Este capítulo ha establecido el problema doctoral, la pregunta de investigación,
+los objetivos, las hipótesis y el diseño general que articula los tres estudios.
+La consecuencia metodológica es que la tesis no puede limitarse a comparar
+promedios de métodos XAI: debe justificar qué constructos se miden, bajo qué
+condiciones y con qué alcance inferencial. El siguiente capítulo desarrolla ese
+marco conceptual y convierte la necesidad empírica identificada aquí en una
+brecha teórica que justifica FOM-7.
 
 La secuencia experimental distingue dos cohortes de evidencia con roles
 diferenciados: la etapa de calibración y reproducibilidad (EXP1), destinada a la

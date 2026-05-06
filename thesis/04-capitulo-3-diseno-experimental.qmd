@@ -15,6 +15,14 @@ el análisis de cobertura de artefactos, y el plan de inferencia estadística.
 Las amenazas a la validez y el inventario de recursos de reproducibilidad
 figuran en el Apéndice A.
 
+El diseño traduce los constructos definidos en el Capítulo 2 a decisiones
+operativas: fidelidad, estabilidad, robustez, complejidad, coste computacional,
+calificación de artefactos, admisibilidad estadística y trazabilidad de claims.
+Esta traducción es deliberadamente functionally-grounded: las métricas producen
+evidencia computacional reproducible, no evidencia directa de utilidad humana ni
+de verdad causal de las explicaciones [@doshi-velez2017; @hedstrom2023;
+@nauta2023].
+
 ## Fases experimentales: EXP1 y EXP2
 
 El diseño experimental distingue dos cohortes de evidencia con roles
@@ -224,6 +232,13 @@ Las cinco métricas primarias se computan por instancia y se agregan a nivel de
 ejecución mediante media aritmética. La dirección de cada métrica se fija en
 el protocolo antes del análisis.
 
+Estas métricas deben leerse como proxies operacionales de los constructos
+revisados en el Capítulo 2. Fidelidad, estabilidad, parsimonia, brecha de
+fidelidad y coste no son intercambiables con utilidad humana, plausibilidad
+semántica o causalidad del mecanismo; son indicadores reproducibles que
+permiten comparar artefactos explicativos bajo condiciones experimentales
+controladas [@carvalho2019; @tomsett2020; @nauta2023].
+
 ### Fidelidad
 
 La fidelidad cuantifica la alineación entre las importancias del explicador y
@@ -336,6 +351,23 @@ El flujo compacto del protocolo es:
 $$\text{Congelación} \to \text{Ejecución} \to \text{Auditoría} \to
 \text{Armonización} \to \text{Exportación} \to \text{Perfilado} \to
 \text{Reporte}$$
+
+La Tabla @tbl-fom7-gates resume la función de gobierno de cada puerta. La
+tabla explicita qué entra, qué sale y qué modo de fallo queda controlado, de
+modo que FOM-7 pueda auditarse como protocolo y no solo como narración
+metodológica.
+
+| Puerta | Propósito | Artefacto de entrada | Artefacto de salida | Fallo controlado | Evidencia |
+|:--|:--|:--|:--|:--|:--|
+| 1. Congelación | Fijar diseño, versiones y plan inferencial antes de EXP2 | `configs/experiments/exp2_scaled/manifest.yaml`, código versionado | Diseño factorial declarado | Deriva de protocolo, cambio post-hoc de hipótesis | `manifest.yaml`, commit de tesis |
+| 2. Ejecución | Ejecutar celdas desde configuración declarativa | YAML por celda, modelos congelados | Árbol `experiments/exp2_scaled/results/` | Ejecuciones ad-hoc, semillas no registradas | `results.json` por celda |
+| 3. Auditoría | Calificar integridad de resultados | `results.json` crudos | Inventario de celdas analizables | Archivos vacíos, esquemas incompatibles, valores inválidos | `outputs/analysis/paper_a_exp2_stats/exp2_run_inventory.csv` |
+| 4. Armonización | Convertir resultados heterogéneos en tablas de análisis | Artefactos calificados y `outputs/batch_results.csv` | Métricas a nivel de ejecución y bloque | Campos no comparables, mezclas de esquema | `exp2_run_level_metrics.csv`, `exp2_block_method_summary.csv` |
+| 5. Exportación | Generar tablas inferenciales deterministas | Tablas armonizadas | Friedman, Nemenyi y Wilcoxon exportados | Cálculos manuales, doble conteo, pseudorreplicación | `friedman_results.csv`, `nemenyi_*.csv`, `wilcoxon_*.csv` |
+| 6. Perfilado | Cuantificar reproducibilidad bajo semillas | Réplicas EXP1 y métricas primarias | CV por método/métrica | Confundir variación de semilla con efecto de método | `experiments/exp1_adult/reproducibility/reproducibility_report.csv` |
+| 7. Reporte | Vincular cada claim con evidencia identificable | Resultados, tablas, scripts, limitaciones | Claims trazables en Capítulo 4 | Sobreclaiming, afirmaciones no auditables | Tablas @tbl-results-overview y @tbl-claim-traceability |
+
+: Puertas FOM-7, artefactos y modos de fallo controlados. {#tbl-fom7-gates}
 
 ## Cobertura de artefactos y análisis del impacto de datos faltantes
 
@@ -490,10 +522,31 @@ de análisis distintas [@demsar2006]. {#tbl-stat-plan}
 |:----------|:----:|:---:|:-------|
 | H1 (fidelidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
 | H2 (estabilidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
-| H3 (trade-off SHAP-LIME) | Wilcoxon bilateral | 75 pares | $(g, s, n)$ idénticos |
+| H3 (relación SHAP-LIME) | Wilcoxon bilateral | 75 pares | $(g, s, n)$ idénticos |
 | P1 (reproducibilidad) | CV sobre EXP1 | 5 semillas | Por método |
 
 : Plan de decisiones estadísticas por hipótesis. {#tbl-hypo-plan}
+
+## Amenazas a la validez
+
+La interpretación de los resultados se acota mediante cinco familias de amenazas.
+Estas amenazas no invalidan el diseño, pero delimitan qué tipo de afirmación
+puede sostenerse a partir del benchmark.
+
+| Familia | Amenaza principal | Control aplicado | Riesgo residual |
+|:--|:--|:--|:--|
+| Validez interna | Diferencias atribuibles al modelo o preprocesamiento, no al explicador | Modelos y preprocesador congelados; misma partición y mismas semillas por celda | Variación no observada por implementación interna de cada librería |
+| Validez de constructo | Métricas automáticas que no capturan utilidad humana, plausibilidad o causalidad | Definición previa de fidelidad, estabilidad, parsimonia, brecha y coste como proxies functionally-grounded | No se infiere utilidad humana directa ni verdad causal |
+| Validez externa | Generalización fuera de Adult Income y clasificación tabular binaria | Framing explícito como benchmark tabular Adult; comparación con literatura XAI tabular | No cubre imágenes, texto, series temporales ni dominios causales |
+| Conclusión estadística | Pseudorreplicación, multiplicidad y datos faltantes | Unidad inferencial por bloque/celda; Friedman, Nemenyi, Wilcoxon y Holm-Bonferroni; análisis de cobertura | Menor precisión en Anchors para bloques con baja cobertura |
+| Reproducibilidad | Dependencia de versiones, semillas, recursos y artefactos locales | Manifiestos YAML, artefactos versionados, scripts de análisis y DOI Zenodo | Reproducción completa requiere entorno compatible con Python 3.11 y dependencias fijadas |
+
+: Amenazas a la validez, controles y riesgo residual. {#tbl-validity-threats}
+
+El límite más importante es de constructo: el estudio produce evidencia
+computacional reproducible sobre artefactos explicativos, no una validación
+psicológica o causal de la explicación. Esta delimitación es consistente con el
+Capítulo 2 y protege la interpretación de los resultados del Capítulo 4.
 
 ## Trazabilidad y reproducibilidad
 

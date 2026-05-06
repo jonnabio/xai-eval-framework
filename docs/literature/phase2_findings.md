@@ -6,15 +6,17 @@ summaries.
 
 ## Current Baseline
 
-- `thesis/03-capitulo-2-fundamentos.qmd` currently has 8,390 words after the
-  final Phase 2 sprint expanded metric taxonomy, FOM-7 synthesis, and added a
+- `thesis/03-capitulo-2-fundamentos.qmd` currently has 8,413 words after the
+  polish pass tightened Spanish orthography, added targeted citation anchors,
+  and preserved the final Phase 2 metric taxonomy, FOM-7 synthesis, and
   method-vs-evaluation-construct matrix.
 - Target length is 8,000-12,000 words.
 - The current chapter already introduces XAI, black-box models, basic
   interpretability/explainability distinctions, and evaluation criteria.
-- The chapter now meets the 8,000-12,000 word target. The main remaining gap is
-  polish: tighten prose, check Spanish orthography/accents if desired, and
-  ensure Chapter 3 explicitly reuses the FOM-7 constructs introduced here.
+- The chapter now meets the 8,000-12,000 word target. The polish pass also made
+  Chapter 3 explicitly reuse the FOM-7 constructs introduced here: fidelity,
+  stability, robustness, complexity, cost, artifact qualification, statistical
+  admissibility, and claim traceability.
 
 ## Initial Synthesis
 

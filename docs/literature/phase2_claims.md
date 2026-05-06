@@ -39,7 +39,7 @@ scope-calibrated and backed by verified sources in `xai_literature_matrix.md`.
 
 - **Statement**: Metrics based on perturbing or masking features may create out-of-distribution instances or otherwise measure a proxy that diverges from explanation truth.
 - **Status**: supported-draft
-- **Sources**: `ref_7`, `zheng2025`
+- **Sources**: `alvarezmelis2018`, `zheng2025`
 - **Chapter Use**: Fidelity/faithfulness caveats and robustness discussion.
 - **Scope Boundary**: Applies to relevant perturbation-based evaluation schemes; avoid claiming all fidelity metrics are invalid.
 

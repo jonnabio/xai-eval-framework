@@ -51,12 +51,11 @@ the next full thesis render.
 ## Key Normalization Notes
 
 - Prefer ASCII citation keys where possible.
-- Existing key `marcinkevičs2023` contains a non-ASCII character. It is currently
-  both cited and present, but it is a render-risk candidate if tooling behaves
-  inconsistently. Consider renaming to `marcinkevics2023` in both `.qmd` and
-  `references.bib`.
-- Avoid anonymous keys like `ref_7` for sources that become central to the
-  thesis argument. Replace with author-year keys after verification.
+- Existing key `marcinkevičs2023` contained a non-ASCII character. It was
+  normalized to `marcinkevics2023` in both `.qmd` citations and
+  `references.bib` during the thesis auditability pass.
+- Anonymous key `ref_7` was normalized to `alvarezmelis2018` for the robustness
+  of interpretability methods citation.
 
 ## Repair Workflow
 

@@ -1,929 +1,935 @@
-# Marco teorico especifico / fundamentos conceptuales
+# Marco teórico específico / fundamentos conceptuales
 
-## Proposito del capitulo
+## Propósito del capítulo
 
-Este capitulo establece el marco conceptual especifico que sostiene la
-propuesta FOM-7. Su funcion no es solamente definir la Inteligencia Artificial
-Explicable (XAI), sino mostrar por que la evaluacion de explicaciones requiere
-un protocolo operativo que conecte diseno experimental, calificacion de
-artefactos, seleccion de metricas, admisibilidad estadistica, reproducibilidad y
-trazabilidad de afirmaciones. La tesis parte de una observacion central: la
-literatura dispone de metodos de explicacion maduros y de toolkits de
-evaluacion cada vez mas sofisticados, pero aun persiste una brecha entre la
-existencia de metricas y la construccion de evidencia doctoralmente defendible.
+Este capítulo establece el marco conceptual específico que sostiene la
+propuesta FOM-7. Su función no es solamente definir la Inteligencia Artificial
+Explicable (XAI), sino mostrar por qué la evaluación de explicaciones requiere
+un protocolo operativo que conecte diseño experimental, calificación de
+artefactos, selección de métricas, admisibilidad estadística, reproducibilidad y
+trazabilidad de afirmaciones. La tesis parte de una observación central: la
+literatura dispone de métodos de explicación maduros y de toolkits de
+evaluación cada vez más sofisticados, pero aún persiste una brecha entre la
+existencia de métricas y la construcción de evidencia doctoralmente defendible.
 
-En este sentido, el capitulo organiza la revision en siete ejes. Primero,
-reconstruye el desarrollo historico desde modelos transparentes hacia
+En este sentido, el capítulo organiza la revisión en siete ejes. Primero,
+reconstruye el desarrollo histórico desde modelos transparentes hacia
 explicaciones post-hoc y enfoques human-centered. Segundo, fija distinciones
 conceptuales indispensables para evitar sobreinterpretaciones. Tercero, examina
-los cuatro metodos evaluados en esta tesis: LIME, SHAP, Anchors y DiCE. Cuarto,
-analiza marcos de evaluacion como Quantus, OpenXAI y la taxonomia de
-evaluacion propuesta por @doshi-velez2017. Quinto, sintetiza familias de
-metricas y brechas de constructo. Sexto, vincula reproducibilidad y trazabilidad
-con benchmarking XAI. Finalmente, formula la brecha critica que justifica
+los cuatro métodos evaluados en esta tesis: LIME, SHAP, Anchors y DiCE. Cuarto,
+analiza marcos de evaluación como Quantus, OpenXAI y la taxonomía de
+evaluación propuesta por @doshi-velez2017. Quinto, sintetiza familias de
+métricas y brechas de constructo. Sexto, vincula reproducibilidad y trazabilidad
+con benchmarking XAI. Finalmente, formula la brecha crítica que justifica
 FOM-7.
 
-## Desarrollo historico de la interpretabilidad y la XAI
+## Desarrollo histórico de la interpretabilidad y la XAI
 
-La interpretabilidad en aprendizaje automatico no surge como una preocupacion
-posterior a los modelos modernos, sino como una condicion historica de muchos
-modelos estadisticos y simbolicos. La regresion lineal, los arboles de decision
-pequenos, los sistemas basados en reglas y algunos modelos aditivos permiten
-inspeccionar directamente los parametros, reglas o relaciones que conducen a una
-prediccion. En estos casos, la transparencia forma parte de la arquitectura del
+La interpretabilidad en aprendizaje automático no surge como una preocupación
+posterior a los modelos modernos, sino como una condición histórica de muchos
+modelos estadísticos y simbólicos. La regresión lineal, los árboles de decisión
+pequeños, los sistemas basados en reglas y algunos modelos aditivos permiten
+inspeccionar directamente los parámetros, reglas o relaciones que conducen a una
+predicción. En estos casos, la transparencia forma parte de la arquitectura del
 modelo: el analista puede seguir el mecanismo inferencial sin construir un
-artefacto explicativo externo. Esta tradicion se asocia con modelos
-intrinsecamente interpretables.
+artefacto explicativo externo. Esta tradición se asocia con modelos
+intrínsecamente interpretables [@lipton2018; @arrieta2019a].
 
 El punto doctoralmente relevante es que la interpretabilidad inicial estaba
-ligada a una relacion directa entre representacion, inferencia y comunicacion.
+ligada a una relación directa entre representación, inferencia y comunicación.
 Cuando un modelo lineal asigna coeficientes a variables observables, la
-explicacion puede apoyarse en el mismo lenguaje que el modelo utiliza para
-predecir. Cuando un arbol de decision pequeno separa casos mediante reglas, el
-camino desde la raiz hasta una hoja puede funcionar como una narracion de la
-decision. Esta cercania entre mecanismo y explicacion reduce la necesidad de un
-segundo artefacto interpretativo. Sin embargo, tambien limita la clase de
+explicación puede apoyarse en el mismo lenguaje que el modelo utiliza para
+predecir. Cuando un árbol de decisión pequeño separa casos mediante reglas, el
+camino desde la raíz hasta una hoja puede funcionar como una narración de la
+decisión. Esta cercanía entre mecanismo y explicación reduce la necesidad de un
+segundo artefacto interpretativo. Sin embargo, también limita la clase de
 patrones que el modelo puede capturar. La historia de la XAI se entiende mejor
-como una tension continua entre expresividad predictiva, transparencia
+como una tensión continua entre expresividad predictiva, transparencia
 estructural y utilidad humana [@arrieta2019a; @lipton2018].
 
-El desplazamiento hacia modelos de mayor capacidad predictiva modifico este
-equilibrio. Los ensambles, los metodos kernel, las redes neuronales profundas y
-otros modelos de alta dimensionalidad aumentaron la precision en tareas
-complejas, pero hicieron menos accesible la logica interna de decision. La
+El desplazamiento hacia modelos de mayor capacidad predictiva modificó este
+equilibrio. Los ensambles, los métodos kernel, las redes neuronales profundas y
+otros modelos de alta dimensionalidad aumentaron la precisión en tareas
+complejas, pero hicieron menos accesible la lógica interna de decisión. La
 opacidad no implica necesariamente ausencia de estructura; implica que la
 estructura aprendida no se presenta en una forma cognitivamente manejable para
-un humano. Esta tension entre rendimiento y comprensibilidad aparece de forma
+un humano. Esta tensión entre rendimiento y comprensibilidad aparece de forma
 recurrente en revisiones de XAI e interpretabilidad [@arrieta2019a;
 @linardatos2020; @canha2025].
 
-Este desplazamiento no debe interpretarse como una oposicion simple entre
+Este desplazamiento no debe interpretarse como una oposición simple entre
 modelos "buenos pero opacos" y modelos "malos pero transparentes". La literatura
-critica ha mostrado que la interpretabilidad es una nocion plural: puede
-referirse a simulabilidad, descomponibilidad, transparencia algoritmica,
+crítica ha mostrado que la interpretabilidad es una noción plural: puede
+referirse a simulabilidad, descomponibilidad, transparencia algorítmica,
 explicaciones locales, explicaciones globales, visualizaciones, reglas,
 atribuciones o ejemplos contrafactuales [@lipton2018; @arrieta2019a]. Por tanto,
 un modelo no es interpretable o no interpretable en abstracto; lo es respecto a
-un destinatario, una tarea, una escala de analisis y un criterio de exito. Esta
-observacion sera importante para FOM-7, porque impide convertir la evaluacion
-XAI en una competencia unica donde todos los metodos se ordenan bajo una misma
-nocion de calidad.
+un destinatario, una tarea, una escala de análisis y un criterio de éxito. Esta
+observación será importante para FOM-7, porque impide convertir la evaluación
+XAI en una competencia única donde todos los métodos se ordenan bajo una misma
+noción de calidad.
 
-La expansion de modelos de caja negra tambien modifico la forma en que se
-construyen responsabilidades epistemicas. En un modelo transparente, el analista
+La expansión de modelos de caja negra también modificó la forma en que se
+construyen responsabilidades epistémicas. En un modelo transparente, el analista
 puede examinar directamente parte del mecanismo. En un modelo de caja negra, la
-explicacion se vuelve mediada: depende de consultas, perturbaciones, gradientes,
+explicación se vuelve mediada: depende de consultas, perturbaciones, gradientes,
 aproximaciones locales, reglas inducidas o contrafactuales generados. Esa
-mediacion introduce una pregunta adicional: no basta con saber si el predictor
+mediación introduce una pregunta adicional: no basta con saber si el predictor
 funciona; debe evaluarse si el artefacto que lo explica es confiable bajo las
 condiciones en que se usa. La XAI moderna nace, en buena medida, de esta
-separacion entre modelo predictivo y artefacto explicativo [@linardatos2020;
+separación entre modelo predictivo y artefacto explicativo [@linardatos2020;
 @doshi-velez2017].
 
-La respuesta metodologica dominante ha sido el desarrollo de explicaciones
+La respuesta metodológica dominante ha sido el desarrollo de explicaciones
 post-hoc. En vez de exigir que el modelo predictivo sea transparente, se
 construye un segundo artefacto que describe aspectos de su comportamiento. LIME
-aproxima localmente la frontera de decision mediante modelos sustitutos
+aproxima localmente la frontera de decisión mediante modelos sustitutos
 simples [@ribeiro2016]. SHAP interpreta predicciones mediante atribuciones
 aditivas inspiradas en el valor de Shapley [@lundberg2017]. Anchors produce
-reglas de alta precision que buscan condiciones suficientes para una prediccion
+reglas de alta precisión que buscan condiciones suficientes para una predicción
 local [@ribeiro2018]. DiCE desplaza el foco hacia explicaciones
-contrafactuales: cambios alternativos que permitirian obtener una decision
-diferente [@mothilal2020]. Estos metodos no explican el modelo en el mismo
+contrafactuales: cambios alternativos que permitirían obtener una decisión
+diferente [@mothilal2020]. Estos métodos no explican el modelo en el mismo
 sentido; producen objetos explicativos distintos, con supuestos y criterios de
-evaluacion diferentes.
+evaluación diferentes.
 
-La categoria post-hoc, sin embargo, cubre familias heterogeneas. Las
-atribuciones asignan importancia a caracteristicas; las reglas buscan
+La categoría post-hoc, sin embargo, cubre familias heterogéneas. Las
+atribuciones asignan importancia a características; las reglas buscan
 condiciones suficientes o patrones comprensibles; los sustitutos locales
 aproximan el comportamiento del modelo en un vecindario; los contrafactuales
-describen alternativas que cambiarian una decision; las visualizaciones
+describen alternativas que cambiarían una decisión; las visualizaciones
 representan patrones agregados o activaciones. Esta pluralidad es una fortaleza
-del campo, porque permite adaptar la explicacion a objetivos distintos. Pero
-tambien es una fuente de dificultad evaluativa: una metrica apropiada para
-atribuciones no necesariamente evalua bien reglas, y una metrica orientada a
+del campo, porque permite adaptar la explicación a objetivos distintos. Pero
+también es una fuente de dificultad evaluativa: una métrica apropiada para
+atribuciones no necesariamente evalúa bien reglas, y una métrica orientada a
 validez contrafactual no necesariamente mide fidelidad local de un sustituto
 [@arrieta2019a; @hedstrom2023].
 
-La literatura tambien distingue metodos agnosticos y especificos del modelo
-[@arrieta2019a; @linardatos2020]. Los metodos agnosticos tratan al predictor
+La literatura también distingue métodos agnósticos y específicos del modelo
+[@arrieta2019a; @linardatos2020]. Los métodos agnósticos tratan al predictor
 como una caja negra y solo requieren consultar entradas y salidas. Esta
 propiedad permite aplicar un mismo explicador a diversos clasificadores, pero
 introduce riesgos: el explicador puede capturar regularidades de las consultas
-realizadas, no necesariamente el mecanismo interno del modelo. Los metodos
-especificos aprovechan propiedades internas de familias concretas de modelos,
-por ejemplo estructuras de arboles o gradientes en redes neuronales. La tension
-entre generalidad y fidelidad es una de las razones por las que la evaluacion
-XAI no puede reducirse a una sola metrica [@doshi-velez2017; @hedstrom2023].
+realizadas, no necesariamente el mecanismo interno del modelo. Los métodos
+específicos aprovechan propiedades internas de familias concretas de modelos,
+por ejemplo estructuras de árboles o gradientes en redes neuronales. La tensión
+entre generalidad y fidelidad es una de las razones por las que la evaluación
+XAI no puede reducirse a una sola métrica [@doshi-velez2017; @hedstrom2023].
 
-Esta distincion historica es especialmente importante para la tesis porque los
-metodos agnosticos suelen ganar en portabilidad experimental. Un mismo pipeline
+Esta distinción histórica es especialmente importante para la tesis porque los
+métodos agnósticos suelen ganar en portabilidad experimental. Un mismo pipeline
 puede aplicarse a clasificadores distintos, lo que facilita el benchmarking.
 Pero esa portabilidad no elimina la necesidad de controles: si el explicador
 solo observa entradas y salidas, su conocimiento del modelo es indirecto y
-dependiente de la muestra consultada. En cambio, los metodos especificos pueden
-explotar informacion interna para mejorar eficiencia o precision, aunque pagan
-el precio de una menor generalidad. FOM-7 debe mantener visible este trade-off:
-no comparar solamente valores metricos, sino interpretar esos valores segun el
-tipo de acceso que cada explicador tiene al modelo.
+dependiente de la muestra consultada. En cambio, los métodos específicos pueden
+explotar información interna para mejorar eficiencia o precisión, aunque pagan
+el precio de una menor generalidad. FOM-7 debe mantener visible esta relación:
+no comparar solamente valores métricos, sino interpretar esos valores según el
+tipo de acceso que cada explicador tiene al modelo [@arrieta2019a;
+@linardatos2020].
 
-Otra distincion historica relevante es la diferencia entre explicaciones
-locales y globales [@arrieta2019a; @linardatos2020]. Una explicacion local
-describe el comportamiento del modelo alrededor de una instancia o decision
-particular. Una explicacion global intenta describir patrones generales del
+Otra distinción histórica relevante es la diferencia entre explicaciones
+locales y globales [@arrieta2019a; @linardatos2020]. Una explicación local
+describe el comportamiento del modelo alrededor de una instancia o decisión
+particular. Una explicación global intenta describir patrones generales del
 modelo en el dominio completo o en regiones amplias del espacio de entrada.
 LIME, SHAP y Anchors suelen emplearse en configuraciones locales, aunque pueden
-agregarse para obtener resumenes globales [@ribeiro2016; @lundberg2017;
-@ribeiro2018]. Esta agregacion, sin embargo, no elimina el problema conceptual:
-una coleccion de explicaciones locales no equivale automaticamente a una teoria
+agregarse para obtener resúmenes globales [@ribeiro2016; @lundberg2017;
+@ribeiro2018]. Esta agregación, sin embargo, no elimina el problema conceptual:
+una colección de explicaciones locales no equivale automáticamente a una teoría
 global del modelo.
 
 El nivel local resulta atractivo porque muchas decisiones de alto impacto se
-formulan caso por caso: por que se rechazo una solicitud, por que una instancia
-fue clasificada como riesgosa, por que un modelo asigno una etiqueta. Sin
-embargo, una explicacion local tiene un alcance limitado por definicion. Puede
-ser valida alrededor de una instancia y no describir otras regiones del espacio
-de datos. La explicacion global, por su parte, promete una vision mas amplia,
+formulan caso por caso: por qué se rechazó una solicitud, por qué una instancia
+fue clasificada como riesgosa, por qué un modelo asignó una etiqueta. Sin
+embargo, una explicación local tiene un alcance limitado por definición. Puede
+ser válida alrededor de una instancia y no describir otras regiones del espacio
+de datos. La explicación global, por su parte, promete una visión más amplia,
 pero puede ocultar heterogeneidad local o subgrupos con comportamientos
 distintos. Este problema conecta directamente con la trazabilidad de claims: una
-afirmacion local no debe presentarse como global, y una tendencia global no debe
+afirmación local no debe presentarse como global, y una tendencia global no debe
 usarse para justificar decisiones individuales sin evidencia adicional
 [@doshi-velez2017; @hedstrom2023].
 
-Finalmente, el campo ha incorporado una orientacion human-centered. La pregunta
-ya no es solo si una explicacion se parece al comportamiento del modelo, sino si
+Finalmente, el campo ha incorporado una orientación human-centered. La pregunta
+ya no es solo si una explicación se parece al comportamiento del modelo, sino si
 apoya una tarea humana concreta sin inducir confianza injustificada. Esta
 perspectiva enfatiza destinatarios, contexto de uso, carga cognitiva,
-calibracion de confianza y utilidad para la toma de decisiones [@hoffman2023;
-@mohseni2021]. Para esta tesis, esta evolucion historica es clave: FOM-7 no se
+calibración de confianza y utilidad para la toma de decisiones [@hoffman2023;
+@mohseni2021]. Para esta tesis, esta evolución histórica es clave: FOM-7 no se
 justifica por la ausencia de explicaciones, sino por la necesidad de evaluar
-explicaciones como artefactos tecnicos, estadisticos y comunicables.
+explicaciones como artefactos técnicos, estadísticos y comunicables.
 
-La orientacion human-centered introduce una correccion necesaria al entusiasmo
-puramente algoritmico. Una explicacion no circula en el vacio: aparece en una
+La orientación human-centered introduce una corrección necesaria al entusiasmo
+puramente algorítmico. Una explicación no circula en el vacío: aparece en una
 interfaz, ante un usuario con objetivos concretos, bajo restricciones de tiempo,
 con ciertos conocimientos previos y con riesgos de confianza excesiva o
-desconfianza injustificada. @mohseni2021 proponen pensar el diseno y la
-evaluacion de XAI como una relacion entre objetivos, grupos de usuarios y
-metodos de evaluacion. @hoffman2023, desde una perspectiva psicologica,
-insisten en que el valor de una explicacion depende de como apoya comprension,
-calibracion y accion. Esto no convierte a la presente tesis en un estudio de
-usuarios, pero si obliga a delimitar el tipo de evidencia producida: FOM-7
-evalua propiedades tecnicas y reproducibles de explicaciones post-hoc, y deja
-claros los limites de inferir utilidad humana directa a partir de metricas
+desconfianza injustificada. @mohseni2021 proponen pensar el diseño y la
+evaluación de XAI como una relación entre objetivos, grupos de usuarios y
+métodos de evaluación. @hoffman2023, desde una perspectiva psicológica,
+insisten en que el valor de una explicación depende de cómo apoya comprensión,
+calibración y acción. Esto no convierte a la presente tesis en un estudio de
+usuarios, pero sí obliga a delimitar el tipo de evidencia producida: FOM-7
+evalúa propiedades técnicas y reproducibles de explicaciones post-hoc, y deja
+claros los límites de inferir utilidad humana directa a partir de métricas
 computacionales.
 
-Asi, el desarrollo historico de la XAI puede leerse como una serie de
-desplazamientos: de transparencia intrinseca a explicacion post-hoc; de modelos
+Así, el desarrollo histórico de la XAI puede leerse como una serie de
+desplazamientos: de transparencia intrínseca a explicación post-hoc; de modelos
 simples a modelos de alta capacidad; de descripciones globales a explicaciones
-locales; de evaluaciones cualitativas a toolkits metricos; y de una mirada
+locales; de evaluaciones cualitativas a toolkits métricos; y de una mirada
 centrada en el algoritmo a una mirada que incluye usuarios, contexto y
-responsabilidad. La contribucion de FOM-7 se ubica despues de esos
-desplazamientos. No regresa nostalgicamente a modelos simples ni promete una
-explicacion universal. Propone gobernar la evaluacion de explicaciones en un
+responsabilidad. La contribución de FOM-7 se ubica después de esos
+desplazamientos. No regresa nostálgicamente a modelos simples ni promete una
+explicación universal. Propone gobernar la evaluación de explicaciones en un
 escenario donde los objetos explicativos son plurales, los criterios son
-multidimensionales y las conclusiones deben ser rastreables.
+multidimensionales y las conclusiones deben ser rastreables [@doshi-velez2017;
+@hedstrom2023; @nauta2023].
 
 ## Distinciones conceptuales fundamentales
 
-La literatura XAI utiliza con frecuencia terminos cercanos como
+La literatura XAI utiliza con frecuencia términos cercanos como
 interpretabilidad, explicabilidad, transparencia, fidelidad, plausibilidad,
-robustez y utilidad. Sin una delimitacion conceptual, estos terminos pueden
-producir inferencias demasiado amplias. Un resultado alto en una metrica de
-estabilidad, por ejemplo, no prueba que una explicacion sea causalmente correcta
-ni que sea util para un usuario experto. Por ello, la tesis adopta distinciones
-operativas que protegen la validez de las afirmaciones.
+robustez y utilidad. Sin una delimitación conceptual, estos términos pueden
+producir inferencias demasiado amplias. Un resultado alto en una métrica de
+estabilidad, por ejemplo, no prueba que una explicación sea causalmente correcta
+ni que sea útil para un usuario experto. Por ello, la tesis adopta distinciones
+operativas que protegen la validez de las afirmaciones [@lipton2018;
+@doshi-velez2017; @nauta2023].
 
-Estas distinciones cumplen una funcion metodologica, no solamente terminologica.
+Estas distinciones cumplen una función metodológica, no solamente terminológica.
 En una tesis doctoral, los conceptos deben controlar el alcance de las
 conclusiones. Si se afirma que un explicador es "mejor", debe indicarse mejor
-respecto a que propiedad: fidelidad, estabilidad, robustez, complejidad, coste,
-accionabilidad o utilidad para un usuario. Si se afirma que una explicacion es
-"correcta", debe aclararse si la correccion se refiere al comportamiento
+respecto a qué propiedad: fidelidad, estabilidad, robustez, complejidad, coste,
+accionabilidad o utilidad para un usuario. Si se afirma que una explicación es
+"correcta", debe aclararse si la corrección se refiere al comportamiento
 observable del modelo, a una estructura causal del dominio, a la aceptabilidad
-humana de la narrativa o a la consistencia con una metrica. El valor de estas
-distinciones es evitar que un resultado empirico local se transforme en una
-afirmacion teorica excesiva [@doshi-velez2017; @lipton2018].
+humana de la narrativa o a la consistencia con una métrica. El valor de estas
+distinciones es evitar que un resultado empírico local se transforme en una
+afirmación teórica excesiva [@doshi-velez2017; @lipton2018].
 
-La primera distincion separa interpretabilidad y explicabilidad. La
+La primera distinción separa interpretabilidad y explicabilidad. La
 interpretabilidad se asocia con la posibilidad de comprender la estructura o
-mecanica de un modelo. En modelos transparentes, esta comprension puede
+mecánica de un modelo. En modelos transparentes, esta comprensión puede
 derivarse directamente del objeto predictivo. La explicabilidad, en cambio,
-puede entenderse como la produccion de razones, artefactos o representaciones
-que hacen comprensible una prediccion para un destinatario. @linardatos2020
-presentan esta diferencia como parte del vocabulario central de los metodos de
-interpretabilidad en aprendizaje automatico. Para esta tesis, la distincion
+puede entenderse como la producción de razones, artefactos o representaciones
+que hacen comprensible una predicción para un destinatario. @linardatos2020
+presentan esta diferencia como parte del vocabulario central de los métodos de
+interpretabilidad en aprendizaje automático. Para esta tesis, la distinción
 permite evaluar explicadores post-hoc sin tratarlos como si fueran equivalentes
 a modelos transparentes.
 
 La interpretabilidad puede entenderse como una propiedad relacional: algo es
 interpretable para alguien, con cierto conocimiento, respecto a una tarea y en
-un nivel determinado de detalle. Esta lectura coincide con advertencias criticas
-de la literatura: el termino "interpretable" puede volverse ambiguo si no se
-explicita que aspecto del sistema se vuelve comprensible [@lipton2018]. La
-explicabilidad, en cambio, suele remitir al proceso de producir una explicacion
-utilizable. Esta tesis adopta una posicion operacional: evalua artefactos
-explicativos generados por metodos concretos, no la interpretabilidad total del
-sistema sociotecnico. Esa delimitacion es deliberada y evita prometer mas de lo
+un nivel determinado de detalle. Esta lectura coincide con advertencias críticas
+de la literatura: el término "interpretable" puede volverse ambiguo si no se
+explicita qué aspecto del sistema se vuelve comprensible [@lipton2018]. La
+explicabilidad, en cambio, suele remitir al proceso de producir una explicación
+utilizable. Esta tesis adopta una posición operacional: evalúa artefactos
+explicativos generados por métodos concretos, no la interpretabilidad total del
+sistema sociotécnico. Esa delimitación es deliberada y evita prometer más de lo
 que el experimento puede sostener.
 
-La segunda distincion separa transparencia y explicacion. Un modelo transparente
-expone su logica interna de forma relativamente directa; una explicacion puede
-ser una aproximacion, simplificacion, regla local, atribucion o contrafactual
-generado despues de entrenar el modelo. La transparencia pertenece al modelo; la
-explicacion pertenece al ecosistema de interpretacion. Esta diferencia es
-importante porque una explicacion puede ser comprensible y aun asi no reflejar
-con precision el mecanismo decisional.
+La segunda distinción separa transparencia y explicación. Un modelo transparente
+expone su lógica interna de forma relativamente directa; una explicación puede
+ser una aproximación, simplificación, regla local, atribución o contrafactual
+generado después de entrenar el modelo. La transparencia pertenece al modelo; la
+explicación pertenece al ecosistema de interpretación. Esta diferencia es
+importante porque una explicación puede ser comprensible y aun así no reflejar
+con precisión el mecanismo decisional [@arrieta2019a; @linardatos2020].
 
 La transparencia tampoco es un valor absoluto. Un modelo puede ser transparente
-en su forma matematica y aun asi dificil de comprender si contiene miles de
-variables, interacciones o reglas. De forma inversa, una explicacion post-hoc
+en su forma matemática y aun así difícil de comprender si contiene miles de
+variables, interacciones o reglas. De forma inversa, una explicación post-hoc
 puede ser muy legible y, sin embargo, alejarse del mecanismo real. La
 transparencia se refiere a la accesibilidad del objeto predictivo; la
-explicacion se refiere al artefacto construido para hacerlo inteligible. Esta
+explicación se refiere al artefacto construido para hacerlo inteligible. Esta
 diferencia tiene consecuencias para el benchmarking: no se debe evaluar una
-explicacion post-hoc como si ofreciera acceso directo al interior del modelo,
-sino como una representacion cuya fidelidad y estabilidad deben probarse bajo
-condiciones especificas [@arrieta2019a; @linardatos2020].
+explicación post-hoc como si ofreciera acceso directo al interior del modelo,
+sino como una representación cuya fidelidad y estabilidad deben probarse bajo
+condiciones específicas [@arrieta2019a; @linardatos2020].
 
-La tercera distincion separa fidelidad y faithfulness. En esta tesis,
+La tercera distinción separa fidelidad y faithfulness. En esta tesis,
 fidelidad se refiere al grado en que el artefacto explicativo reproduce o
 aproxima el comportamiento observable del modelo bajo condiciones definidas. La
-faithfulness, o fehaciencia, apunta a una exigencia mas fuerte: que la
-explicacion represente aspectos relevantes del verdadero proceso decisional. Una
-explicacion puede tener alta fidelidad local en un vecindario muestreado y aun
-asi no capturar la logica que el modelo utiliza en regiones no observadas o ante
-perturbaciones fuera de distribucion [@zheng2025].
+faithfulness, o fehaciencia, apunta a una exigencia más fuerte: que la
+explicación represente aspectos relevantes del verdadero proceso decisional. Una
+explicación puede tener alta fidelidad local en un vecindario muestreado y aún
+así no capturar la lógica que el modelo utiliza en regiones no observadas o ante
+perturbaciones fuera de distribución [@zheng2025].
 
 La diferencia es sutil pero central. La fidelidad puede evaluarse mediante
 comparaciones observables: si el sustituto predice de forma similar al modelo de
 caja negra en las instancias evaluadas, se obtiene evidencia de acuerdo local o
-global. La faithfulness exige una correspondencia mas profunda entre la
-explicacion y los factores que realmente gobiernan la decision. En modelos
-complejos, esta correspondencia suele ser dificil de demostrar de forma directa.
+global. La faithfulness exige una correspondencia más profunda entre la
+explicación y los factores que realmente gobiernan la decisión. En modelos
+complejos, esta correspondencia suele ser difícil de demostrar de forma directa.
 Por ello, FOM-7 trata la fidelidad como un constructo medible y la faithfulness
-como una aspiracion interpretativa que requiere cautela. El protocolo no debe
-convertir una metrica de acuerdo en una afirmacion fuerte sobre verdad causal.
+como una aspiración interpretativa que requiere cautela. El protocolo no debe
+convertir una métrica de acuerdo en una afirmación fuerte sobre verdad causal.
 
-La cuarta distincion separa plausibilidad y correccion. Una explicacion
+La cuarta distinción separa plausibilidad y corrección. Una explicación
 plausible coincide con expectativas humanas, conocimiento de dominio o patrones
-narrativamente convincentes. Pero la plausibilidad no garantiza correccion. Esta
-distincion es especialmente delicada en XAI porque explicaciones persuasivas
-pueden aumentar confianza aun cuando no sean tecnicamente adecuadas. La
-literatura critica sobre interpretabilidad advierte que el campo debe evitar
+narrativamente convincentes. Pero la plausibilidad no garantiza corrección. Esta
+distinción es especialmente delicada en XAI porque explicaciones persuasivas
+pueden aumentar confianza aún cuando no sean técnicamente adecuadas. La
+literatura crítica sobre interpretabilidad advierte que el campo debe evitar
 confundir comprensibilidad con verdad del mecanismo [@lipton2018;
 @hoffman2023].
 
-Esta distincion protege especialmente contra explicaciones persuasivas. En
-entornos de decision, una explicacion que "suena razonable" puede aumentar la
-confianza del usuario, incluso si el modelo uso patrones espurios o si el
-explicador produjo una aproximacion inestable. La plausibilidad pertenece al
-encuentro entre explicacion y expectativas humanas; la correccion pertenece a la
-relacion entre explicacion, modelo y dominio. Ambas propiedades pueden coincidir,
-pero no deben fusionarse. En la practica, esta tesis puede medir propiedades
-computacionales y discutir plausibilidad semantica con cautela, pero no puede
-afirmar correccion humana o causal sin evidencia especifica de ese tipo
+Esta distinción protege especialmente contra explicaciones persuasivas. En
+entornos de decisión, una explicación que "suena razonable" puede aumentar la
+confianza del usuario, incluso si el modelo usó patrones espurios o si el
+explicador produjo una aproximación inestable. La plausibilidad pertenece al
+encuentro entre explicación y expectativas humanas; la corrección pertenece a la
+relación entre explicación, modelo y dominio. Ambas propiedades pueden coincidir,
+pero no deben fusionarse. En la práctica, esta tesis puede medir propiedades
+computacionales y discutir plausibilidad semántica con cautela, pero no puede
+afirmar corrección humana o causal sin evidencia específica de ese tipo
 [@mohseni2021; @hoffman2023].
 
-La quinta distincion separa robustez y estabilidad. La estabilidad evalua si
-pequenos cambios en la entrada, que no modifican la prediccion, producen
-explicaciones similares. La robustez evalua la resistencia del explicador ante
-cambios mas agresivos, distribuciones atipicas, ataques o condiciones de
+La quinta distinción separa robustez y estabilidad. La estabilidad evalúa si
+pequeños cambios en la entrada, que no modifican la predicción, producen
+explicaciones similares. La robustez evalúa la resistencia del explicador ante
+cambios más agresivos, distribuciones atípicas, ataques o condiciones de
 despliegue no ideales. Esta tesis usa ambas nociones como constructos
-relacionados pero no intercambiables. Una explicacion puede ser estable ante
-ruido leve y fragil ante casos fuera de distribucion.
+relacionados pero no intercambiables. Una explicación puede ser estable ante
+ruido leve y frágil ante casos fuera de distribución [@zheng2025;
+@burger2023].
 
 La estabilidad es especialmente importante para comparaciones locales. Si dos
-instancias casi identicas reciben explicaciones radicalmente distintas, el
-explicador puede fallar como instrumento de analisis, aunque el modelo predictivo
-sea estable. La robustez amplia el foco hacia condiciones mas exigentes: cambios
-de distribucion, perturbaciones adversarias, datos atipicos o supuestos
-violados. La evaluacion XAI necesita ambas dimensiones porque responden a
+instancias casi idénticas reciben explicaciones radicalmente distintas, el
+explicador puede fallar como instrumento de análisis, aunque el modelo predictivo
+sea estable. La robustez amplía el foco hacia condiciones más exigentes: cambios
+de distribución, perturbaciones adversarias, datos atípicos o supuestos
+violados. La evaluación XAI necesita ambas dimensiones porque responden a
 preguntas distintas. La estabilidad pregunta por consistencia en proximidad; la
-robustez pregunta por resistencia ante condiciones que ponen a prueba el metodo.
+robustez pregunta por resistencia ante condiciones que ponen a prueba el método.
 FOM-7 debe reportar estas dimensiones como parte de un perfil, no como sinonimos
 [@hedstrom2023; @zheng2025].
 
-La sexta distincion separa utilidad de la explicacion y verdad de la
-explicacion. Una explicacion puede ser util para depurar, comunicar o seleccionar
+La sexta distinción separa utilidad de la explicación y verdad de la
+explicación. Una explicación puede ser útil para depurar, comunicar o seleccionar
 instancias sin demostrar que captura causalmente el funcionamiento del modelo.
-De forma inversa, una explicacion tecnicamente rigurosa puede no ser util para
-un usuario no experto si excede su contexto cognitivo. Esta separacion permite
-ubicar las metricas de FOM-7: no pretenden agotar la verdad semantica de una
-explicacion, sino establecer evidencia operacional sobre propiedades medibles y
+De forma inversa, una explicación técnicamente rigurosa puede no ser útil para
+un usuario no experto si excede su contexto cognitivo. Esta separación permite
+ubicar las métricas de FOM-7: no pretenden agotar la verdad semántica de una
+explicación, sino establecer evidencia operacional sobre propiedades medibles y
 trazables.
 
-La utilidad depende del uso. Un cientifico de datos puede necesitar una
-explicacion para depurar variables, un experto de dominio para contrastar una
-hipotesis, un regulador para auditar una decision y un usuario final para
-comprender opciones. La misma explicacion puede ser adecuada para un grupo y
+La utilidad depende del uso. Un científico de datos puede necesitar una
+explicación para depurar variables, un experto de dominio para contrastar una
+hipótesis, un regulador para auditar una decisión y un usuario final para
+comprender opciones. La misma explicación puede ser adecuada para un grupo y
 deficiente para otro. Esta es una de las razones por las que la literatura
-human-centered insiste en conectar objetivos, usuarios y metodos de evaluacion
+human-centered insiste en conectar objetivos, usuarios y métodos de evaluación
 [@mohseni2021; @hoffman2023]. En esta tesis, la utilidad se interpreta de forma
-limitada: una explicacion es util para el protocolo si permite construir
-evidencia comparativa, reproducible y trazable sobre metodos post-hoc. Otras
-formas de utilidad, como satisfaccion de usuario o mejora de decisiones humanas,
-quedan fuera del alcance empirico principal.
+limitada: una explicación es útil para el protocolo si permite construir
+evidencia comparativa, reproducible y trazable sobre métodos post-hoc. Otras
+formas de utilidad, como satisfacción de usuario o mejora de decisiones humanas,
+quedan fuera del alcance empírico principal.
 
-En conjunto, estas distinciones convierten el marco teorico en una defensa de
+En conjunto, estas distinciones convierten el marco teórico en una defensa de
 la prudencia inferencial. La tesis no busca demostrar que un explicador es
-universalmente superior, ni que una metrica representa la verdad completa de una
-explicacion. Busca producir afirmaciones condicionadas: bajo este diseno, con
-estos artefactos, estas metricas y estos criterios estadisticos, se observan
+universalmente superior, ni que una métrica representa la verdad completa de una
+explicación. Busca producir afirmaciones condicionadas: bajo este diseño, con
+estos artefactos, estas métricas y estos criterios estadísticos, se observan
 determinadas propiedades comparativas. Esta forma de razonamiento es menos
-espectacular que un ranking absoluto, pero es mucho mas defendible al nivel de
+espectacular que un ranking absoluto, pero es mucho más defendible al nivel de
 un doctorado. Precisamente por eso la arquitectura FOM-7 exige trazabilidad de
-claims: cada conclusion debe indicar que constructo evalua, que evidencia la
-sostiene y que limites conserva.
+claims: cada conclusión debe indicar qué constructo evalúa, qué evidencia la
+sostiene y qué límites conserva.
 
-## Metodos de explicacion evaluados en esta tesis
+## Métodos de explicación evaluados en esta tesis
 
 ### LIME: sustitutos locales, muestreo e inestabilidad
 
 LIME propone explicar predicciones individuales aproximando localmente el modelo
 de caja negra con un modelo interpretable, usualmente lineal [@ribeiro2016]. Su
-intuicion es poderosa: aunque el modelo global sea complejo, una region cercana
-a una instancia puede ser aproximada por una frontera mas simple. Para construir
-esta aproximacion, el metodo genera perturbaciones alrededor de la instancia,
+intuición es poderosa: aunque el modelo global sea complejo, una región cercana
+a una instancia puede ser aproximada por una frontera más simple. Para construir
+esta aproximación, el método genera perturbaciones alrededor de la instancia,
 consulta el modelo original y ajusta un sustituto ponderado por proximidad. La
-explicacion resultante identifica caracteristicas con mayor influencia local.
+explicación resultante identifica características con mayor influencia local.
 
-Esta logica convierte a LIME en un metodo flexible y agnostico. Puede aplicarse
+Esta lógica convierte a LIME en un método flexible y agnóstico. Puede aplicarse
 a clasificadores diversos y produce salidas comprensibles para usuarios
-tecnicos. Sin embargo, su fuerza tambien es una fuente de riesgo. La explicacion
-depende del esquema de muestreo, de la definicion de vecindario, del kernel de
-proximidad, del numero de perturbaciones y del modelo interpretable elegido. Si
-estos elementos cambian, la explicacion puede variar de forma sustancial. Por
+técnicos. Sin embargo, su fuerza también es una fuente de riesgo. La explicación
+depende del esquema de muestreo, de la definición de vecindario, del kernel de
+proximidad, del número de perturbaciones y del modelo interpretable elegido. Si
+estos elementos cambian, la explicación puede variar de forma sustancial. Por
 ello, la estabilidad de LIME debe evaluarse explicitamente, no asumirse como una
 propiedad garantizada [@burger2023].
 
 En el marco de esta tesis, LIME representa la familia de explicaciones por
-sustitucion local. Su evaluacion debe considerar fidelidad local, estabilidad,
+sustitución local. Su evaluación debe considerar fidelidad local, estabilidad,
 coste computacional y sensibilidad al muestreo. No es suficiente afirmar que una
-explicacion LIME es interpretable porque sea lineal; debe demostrarse que el
-sustituto es una aproximacion adecuada bajo condiciones experimentales
-controladas.
+explicación LIME es interpretable porque sea lineal; debe demostrarse que el
+sustituto es una aproximación adecuada bajo condiciones experimentales
+controladas [@ribeiro2016; @guidotti2018].
 
 La literatura posterior ha mostrado que esta exigencia no es secundaria. LIME
 puede ser una herramienta poderosa para comunicar patrones locales, pero su
 salida no es independiente del proceso que genera el vecindario artificial. En
-terminos de evaluacion, esto significa que el experimento no solo compara
-"LIME" como etiqueta, sino una configuracion concreta de LIME: estrategia de
-perturbacion, kernel, numero de muestras, seleccion de variables y modelo
-sustituto. Si esos elementos no se congelan y documentan, la explicacion deja de
+términos de evaluación, esto significa que el experimento no solo compara
+"LIME" como etiqueta, sino una configuración concreta de LIME: estrategia de
+perturbación, kernel, número de muestras, selección de variables y modelo
+sustituto. Si esos elementos no se congelan y documentan, la explicación deja de
 ser un artefacto reproducible y se convierte en una realizacion contingente del
-pipeline. Este punto conecta con la critica mas amplia a las explicaciones
+pipeline. Este punto conecta con la crítica más amplia a las explicaciones
 post-hoc: su aparente simplicidad puede ocultar supuestos fuertes sobre la
-region local que se esta aproximando [@guidotti2018; @carvalho2019].
+región local que se está aproximando [@guidotti2018; @carvalho2019].
 
-Ademas, la estabilidad de LIME no debe confundirse con su plausibilidad visual.
-Una explicacion puede seleccionar variables intuitivas y aun asi variar ante
-perturbaciones pequenas, cambios de semilla o modificaciones en la muestra de
+Además, la estabilidad de LIME no debe confundirse con su plausibilidad visual.
+Una explicación puede seleccionar variables intuitivas y aun así variar ante
+perturbaciones pequeñas, cambios de semilla o modificaciones en la muestra de
 consulta. Estudios sobre confiabilidad de LIME y ataques a explicadores
-post-hoc muestran que la fragilidad puede tener consecuencias epistemicas
+post-hoc muestran que la frágilidad puede tener consecuencias epistémicas
 importantes: el usuario puede recibir una narrativa convincente sin saber que
-otra ejecucion razonable produciria una narrativa distinta [@burger2023;
-@slack2020]. Por ello, FOM-7 debe tratar LIME como un caso ejemplar de metodo
-agnostico con alta utilidad comunicativa, pero que requiere controles de
-estabilidad, trazabilidad de parametros y delimitacion estricta del alcance
+otra ejecución razonable produciría una narrativa distinta [@burger2023;
+@slack2020]. Por ello, FOM-7 debe tratar LIME como un caso ejemplar de método
+agnóstico con alta utilidad comunicativa, pero que requiere controles de
+estabilidad, trazabilidad de parámetros y delimitación estricta del alcance
 local.
 
-### SHAP: valores de Shapley y atribucion aditiva
+### SHAP: valores de Shapley y atribución aditiva
 
-SHAP conecta metodos de atribucion de caracteristicas con fundamentos de teoria
-de juegos, especialmente el valor de Shapley [@lundberg2017]. La prediccion se
-expresa como una suma de contribuciones atribuibles a cada caracteristica, bajo
+SHAP conecta métodos de atribución de características con fundamentos de teoría
+de juegos, especialmente el valor de Shapley [@lundberg2017]. La predicción se
+expresa como una suma de contribuciones atribuibles a cada característica, bajo
 un conjunto de propiedades deseables para explicaciones aditivas. Esta base
-formal ha convertido a SHAP en uno de los enfoques mas influyentes para
+formal ha convertido a SHAP en uno de los enfoques más influyentes para
 interpretar modelos complejos.
 
-La fortaleza de SHAP esta en su marco unificado: diferentes aproximaciones
+La fortaleza de SHAP está en su marco unificado: diferentes aproximaciones
 pueden entenderse como miembros de una familia de modelos explicativos
-aditivos. TreeSHAP aprovecha la estructura de modelos basados en arboles para
-calcular atribuciones de forma mas eficiente. KernelSHAP, en cambio, opera de
-manera mas general pero puede requerir numerosas evaluaciones del modelo,
-generando costes computacionales elevados. Esta diferencia ilustra una tension
+aditivos. TreeSHAP aprovecha la estructura de modelos basados en árboles para
+calcular atribuciones de forma más eficiente. KernelSHAP, en cambio, opera de
+manera más general pero puede requerir numerosas evaluaciones del modelo,
+generando costes computacionales elevados. Esta diferencia ilustra una tensión
 recurrente: mayor generalidad suele implicar mayor coste o dependencia de
 aproximaciones.
 
-SHAP tambien exige decisiones metodologicas que afectan la interpretacion: el
-conjunto de referencia, el tratamiento de dependencias entre caracteristicas y
+SHAP también exige decisiones metodológicas que afectan la interpretación: el
+conjunto de referencia, el tratamiento de dependencias entre características y
 la forma de estimar contribuciones marginales. Por ello, la tesis no interpreta
 valores SHAP como verdades causales automaticas. Los trata como atribuciones
-operacionales cuya calidad debe contrastarse mediante metricas de fidelidad,
+operacionales cuya calidad debe contrastarse mediante métricas de fidelidad,
 estabilidad, complejidad y coste.
 
-El caracter formal de SHAP puede inducir una lectura excesivamente fuerte si no
-se separa fundamento matematico de uso empirico. El valor de Shapley aporta una
-justificacion axiomatica para repartir una contribucion entre jugadores o
-caracteristicas, pero la aplicacion a modelos predictivos requiere definir una
-distribucion de referencia y una forma de simular presencia o ausencia de
-caracteristicas. En datos reales, especialmente cuando existen dependencias
-entre variables, estas decisiones afectan el significado de la atribucion. Por
-eso, una tabla de valores SHAP no debe presentarse como una descomposicion
-causal directa de la prediccion; debe presentarse como una atribucion bajo
-supuestos operacionales especificos [@lundberg2017; @carvalho2019].
+El carácter formal de SHAP puede inducir una lectura excesivamente fuerte si no
+se separa fundamento matemático de uso empírico. El valor de Shapley aporta una
+justificación axiomática para repartir una contribución entre jugadores o
+características, pero la aplicación a modelos predictivos requiere definir una
+distribución de referencia y una forma de simular presencia o ausencia de
+características. En datos reales, especialmente cuando existen dependencias
+entre variables, estas decisiones afectan el significado de la atribución. Por
+eso, una tabla de valores SHAP no debe presentarse como una descomposición
+causal directa de la predicción; debe presentarse como una atribución bajo
+supuestos operacionales específicos [@lundberg2017; @carvalho2019].
 
-La diferencia entre KernelSHAP y TreeSHAP tambien es relevante para el diseno
-experimental. KernelSHAP conserva una orientacion agnostica, pero puede exigir
-un numero elevado de consultas al modelo. TreeSHAP aprovecha la estructura de
-arboles para reducir coste y mejorar factibilidad en familias concretas de
-modelos. Esta diferencia muestra que "usar SHAP" no describe por si mismo una
-condicion experimental suficiente. Se debe especificar variante, modelo base,
-conjunto de referencia, estrategia de aproximacion y coste de computo. La
-literatura teorica sobre la tractabilidad de SHAP refuerza esta precaucion:
-calcular explicaciones exactas puede ser dificil o inviable en clases amplias de
-modelos, por lo que la evaluacion debe registrar cuando se trabaja con
-aproximaciones y que trade-offs introducen [@vandenbroeck2022].
+La diferencia entre KernelSHAP y TreeSHAP también es relevante para el diseño
+experimental. KernelSHAP conserva una orientación agnóstica, pero puede exigir
+un número elevado de consultas al modelo. TreeSHAP aprovecha la estructura de
+árboles para reducir coste y mejorar factibilidad en familias concretas de
+modelos. Esta diferencia muestra que "usar SHAP" no describe por sí mismo una
+condición experimental suficiente. Se debe específicar variante, modelo base,
+conjunto de referencia, estrategia de aproximación y coste de cómputo. La
+literatura teórica sobre la tractabilidad de SHAP refuerza esta precaución:
+calcular explicaciones exactas puede ser difícil o inviable en clases amplias de
+modelos, por lo que la evaluación debe registrar cuando se trabaja con
+aproximaciones y qué compromisos introducen [@vandenbroeck2022].
 
-SHAP ocupa asi una posicion doble en la tesis. Por un lado, es un referente
-indispensable por su formalizacion de la atribucion aditiva y su adopcion en
-investigacion aplicada. Por otro lado, es un ejemplo de que una base formal no
+SHAP ocupa asi una posición doble en la tesis. Por un lado, es un referente
+indispensable por su formalizacion de la atribución aditiva y su adopcion en
+investigación aplicada. Por otro lado, es un ejemplo de que una base formal no
 elimina la necesidad de gobernanza experimental. FOM-7 debe evitar comparar SHAP
 con LIME o Anchors como si todos produjeran explicaciones del mismo tipo. En
-SHAP, el objeto central es una asignacion de contribuciones; en LIME, una
-aproximacion local; en Anchors, una regla; en DiCE, una alternativa
-contrafactual. Esta heterogeneidad exige metricas diferenciadas y afirmaciones
+SHAP, el objeto central es una asignación de contribuciones; en LIME, una
+aproximación local; en Anchors, una regla; en DiCE, una alternativa
+contrafactual. Esta heterogeneidad exige métricas diferenciadas y afirmaciones
 cuidadosamente acotadas [@guidotti2018; @nauta2023].
 
-### Anchors: reglas de alta precision y limites de cobertura
+### Anchors: reglas de alta precisión y límites de cobertura
 
-Anchors propone explicaciones en forma de reglas locales de alta precision
-[@ribeiro2018]. En vez de asignar pesos a caracteristicas, busca condiciones
-que, cuando se cumplen, hacen que el modelo mantenga una prediccion con alta
+Anchors propone explicaciones en forma de reglas locales de alta precisión
+[@ribeiro2018]. En vez de asignar pesos a características, busca condiciones
+que, cuando se cumplen, hacen que el modelo mantenga una predicción con alta
 probabilidad. La promesa de Anchors es comunicativa: una regla del tipo "si se
-cumplen estas condiciones, la prediccion se mantiene" puede ser mas accionable
+cumplen estas condiciones, la predicción se mantiene" puede ser más accionable
 que una lista de pesos.
 
-La precision de una regla, sin embargo, debe interpretarse junto con su
-cobertura. Una regla extremadamente especifica puede alcanzar alta precision
-porque aplica a muy pocos casos. Una regla mas general puede cubrir una region
-amplia, pero perder precision. Esta tension convierte a Anchors en un caso
-fundamental para la evaluacion multinivel: una metrica aislada puede favorecer
-reglas aparentemente excelentes que no son utiles fuera de un subconjunto
+La precisión de una regla, sin embargo, debe interpretarse junto con su
+cobertura. Una regla extremadamente específica puede alcanzar alta precisión
+porque aplica a muy pocos casos. Una regla más general puede cubrir una región
+amplia, pero perder precisión. Esta tensión convierte a Anchors en un caso
+fundamental para la evaluación multinivel: una métrica aislada puede favorecer
+reglas aparentemente excelentes que no son útiles fuera de un subconjunto
 limitado.
 
 Para FOM-7, Anchors representa explicaciones basadas en condiciones suficientes
-aproximadas. Su evaluacion debe separar precision local, cobertura,
-complejidad de regla y reproducibilidad. Esta separacion evita comparar Anchors
+aproximadas. Su evaluación debe separar precisión local, cobertura,
+complejidad de regla y reproducibilidad. Esta separación evita comparar Anchors
 con LIME o SHAP como si todos produjeran el mismo tipo de evidencia.
 
-La contribucion conceptual de Anchors es introducir una forma de explicacion que
-se aproxima al razonamiento por condiciones: una prediccion se mantiene cuando
-ciertas premisas se conservan. Esta estructura puede ser mas legible que una
-lista de pesos, especialmente cuando la explicacion se comunica a personas que
+La contribución conceptual de Anchors es introducir una forma de explicación que
+se aproxima al razonamiento por condiciones: una predicción se mantiene cuando
+ciertas premisas se conservan. Esta estructura puede ser más legible que una
+lista de pesos, especialmente cuando la explicación se comunica a personas que
 razonan mediante reglas o excepciones. Sin embargo, la legibilidad no resuelve
-el problema de validez. Una regla de alta precision puede estar anclada en una
-region pequena del espacio de datos; una regla de mayor cobertura puede perder
-garantias locales. Por tanto, precision y cobertura deben reportarse juntas, y
-ninguna debe convertirse por si sola en sinonimo de calidad explicativa
+el problema de validez. Una regla de alta precisión puede estar anclada en una
+región pequena del espacio de datos; una regla de mayor cobertura puede perder
+garantias locales. Por tanto, precisión y cobertura deben reportarse juntas, y
+ninguna debe convertirse por sí sola en sinonimo de calidad explicativa
 [@ribeiro2018; @guidotti2018].
 
-Anchors tambien muestra por que la evaluacion debe atender al formato de salida.
-Una regla tiene cardinalidad, condiciones, umbrales y cobertura; una atribucion
+Anchors también muestra por qué la evaluación debe atender al formato de salida.
+Una regla tiene cardinalidad, condiciones, umbrales y cobertura; una atribución
 tiene pesos; un contrafactual tiene distancia, factibilidad y validez. Si el
 benchmark traduce todos esos objetos a una sola escala, corre el riesgo de
-medir mas la conveniencia de la metrica que la calidad del metodo. Para FOM-7,
-Anchors cumple entonces una funcion teorica: obliga a reconocer que las metricas
-deben estar alineadas con el tipo de explicacion. La tesis no debe preguntar
-solo "que metodo gana", sino "que propiedad de que objeto explicativo se esta
-evaluando bajo que condiciones" [@carvalho2019; @nauta2023].
+medir más la conveniencia de la métrica que la calidad del método. Para FOM-7,
+Anchors cumple entonces una función teórica: obliga a reconocer que las métricas
+deben estar alineadas con el tipo de explicación. La tesis no debe preguntar
+solo "qué método gana", sino "qué propiedad de qué objeto explicativo se está
+evaluando bajo qué condiciones" [@carvalho2019; @nauta2023].
 
 ### DiCE: contrafactuales, accionabilidad y validez
 
 DiCE introduce explicaciones contrafactuales diversas, orientadas a mostrar
-cambios plausibles que podrian alterar la decision de un modelo [@mothilal2020].
-Su pregunta no es "que caracteristicas contribuyeron mas a esta prediccion",
-sino "que tendria que cambiar para obtener otro resultado". Esta diferencia
+cambios plausibles que podrían alterar la decisión de un modelo [@mothilal2020].
+Su pregunta no es "qué características contribuyeron más a esta predicción",
+sino "qué tendría que cambiar para obtener otro resultado". Esta diferencia
 ubica a DiCE en una familia explicativa distinta, especialmente relevante para
-escenarios donde el usuario necesita comprender alternativas de accion.
+escenarios donde el usuario necesita comprender alternativas de acción.
 
-La evaluacion de contrafactuales exige criterios adicionales. Un contrafactual
-debe ser valido respecto al modelo, cercano a la instancia original, diverso
+La evaluación de contrafactuales exige criterios adicionales. Un contrafactual
+debe ser válido respecto al modelo, cercano a la instancia original, diverso
 respecto a otras alternativas y, en muchos dominios, accionable. La
-accionabilidad impone restricciones semanticas: no todas las caracteristicas
-pueden modificarse, y no todos los cambios matematicamente cercanos son
-realistas. Por ello, una metrica de fidelidad tradicional puede ser insuficiente
-para evaluar DiCE si no se acompana de criterios de plausibilidad,
-factibilidad y coherencia con el dominio.
+accionabilidad impone restricciones semánticas: no todas las características
+pueden modificarse, y no todos los cambios matemáticamente cercanos son
+realistas. Por ello, una métrica de fidelidad tradicional puede ser insuficiente
+para evaluar DiCE si no se acompaña de criterios de plausibilidad,
+factibilidad y coherencia con el dominio [@mothilal2020; @karimi2022].
 
-En esta tesis, DiCE permite mostrar que FOM-7 no debe forzar una metrica unica
-sobre objetos explicativos heterogeneos. Las explicaciones contrafactuales
+En esta tesis, DiCE permite mostrar que FOM-7 no debe forzar una métrica única
+sobre objetos explicativos heterogéneos. Las explicaciones contrafactuales
 requieren una lectura propia dentro del protocolo, especialmente cuando se
 discuten utilidad, sensibilidad y trazabilidad de afirmaciones.
 
-La familia contrafactual amplia la XAI hacia preguntas de recourse y accion.
-Mientras LIME o SHAP suelen describir por que una decision fue tomada en
-terminos de contribuciones o aproximaciones, el contrafactual pregunta que
-alternativas podrian cambiar el resultado. Esta orientacion es atractiva en
-dominios de decision porque conecta explicacion con posibilidad de intervencion.
-Sin embargo, tambien introduce exigencias mas fuertes: los cambios sugeridos
+La familia contrafactual amplía la XAI hacia preguntas de recourse y acción.
+Mientras LIME o SHAP suelen describir por qué una decisión fue tomada en
+términos de contribuciones o aproximaciones, el contrafactual pregunta que
+alternativas podrían cambiar el resultado. Esta orientación es atractiva en
+dominios de decisión porque conecta explicación con posibilidad de intervencion.
+Sin embargo, también introduce exigencias más fuertes: los cambios sugeridos
 deben ser posibles, coherentes con restricciones del dominio y no meramente
-artefactos matematicos cercanos en el espacio de variables. La literatura sobre
-recourse enfatiza precisamente que una recomendacion consecuencial debe evaluar
-factibilidad, accionabilidad y consecuencias, no solo inversion de etiqueta
+artefactos matemáticos cercanos en el espacio de variables. La literatura sobre
+recourse enfatiza precisamente que una recomendación consecuencial debe evaluar
+factibilidad, accionabilidad y consecuencias, no solo inversión de etiqueta
 [@karimi2022].
 
 DiCE aporta diversidad de alternativas contrafactuales, pero diversidad no
-equivale automaticamente a accionabilidad. Un conjunto de contrafactuales puede
-ser diverso en distancia matematica y aun asi incluir cambios imposibles para
+equivale automáticamente a accionabilidad. Un conjunto de contrafactuales puede
+ser diverso en distancia matemática y aun así incluir cambios imposibles para
 una persona o incoherentes con relaciones del dominio. FACE aborda esta
-preocupacion al enfatizar contrafactuales factibles y accionables en regiones
-conectadas por datos observados [@poyiadzi2020]. A la vez, las criticas sobre
-contrafactuales post-hoc advierten que una explicacion puede ser injustificada
+preocupación al enfatizar contrafactuales factibles y accionables en regiones
+conectadas por datos observados [@poyiadzi2020]. A la vez, las críticas sobre
+contrafactuales post-hoc advierten que una explicación puede ser injustificada
 si se apoya en regiones poco plausibles o si no respeta la estructura local del
-problema [@laugel2019]. Para FOM-7, esta tension exige que DiCE sea evaluado
+problema [@laugel2019]. Para FOM-7, esta tensión exige que DiCE sea evaluado
 con criterios propios: validez de cambio de salida, proximidad, diversidad,
-factibilidad, accionabilidad y limites de inferencia.
+factibilidad, accionabilidad y límites de inferencia.
 
 El papel de los contrafactuales en la tesis no es demostrar que el usuario
-puede ejecutar realmente la accion sugerida en cualquier dominio. El alcance es
-mas prudente: examinar si el metodo produce artefactos que cumplen criterios
-operacionales definidos y si esos criterios son trazables. Esta distincion es
+puede ejecutar realmente la acción sugerida en cualquier dominio. El alcance es
+más prudente: examinar si el método produce artefactos que cumplen criterios
+operacionales definidos y si esos criterios son trazables. Esta distinción es
 importante porque la accionabilidad plena suele requerir conocimiento causal,
 normativo y contextual que excede un benchmark puramente computacional. FOM-7
 puede registrar la distancia entre validez para el modelo y accionabilidad para
-la persona, y esa distancia es justamente una de las brechas que una revision
+la persona, y esa distancia es justamente una de las brechas que una revisión
 doctoral debe hacer visible [@langer2021; @karimi2022].
 
-## Marcos y protocolos de evaluacion XAI
+## Marcos y protocolos de evaluación XAI
 
-La evaluacion de interpretabilidad requiere distinguir niveles de evidencia.
-@doshi-velez2017 proponen una taxonomia influyente: evaluacion
-application-grounded, human-grounded y functionally-grounded. La primera evalua
-explicaciones en tareas reales con usuarios y dominios especificos. La segunda
+La evaluación de interpretabilidad requiere distinguir niveles de evidencia.
+@doshi-velez2017 proponen una taxonomía influyente: evaluación
+application-grounded, human-grounded y functionally-grounded. La primera evalúa
+explicaciones en tareas reales con usuarios y dominios específicos. La segunda
 usa tareas simplificadas con humanos para estudiar propiedades generales de la
-explicacion. La tercera reemplaza la evaluacion humana por proxies formales o
-computacionales cuando existe una razon teorica para hacerlo. Esta distincion
+explicación. La tercera reemplaza la evaluación humana por proxies formales o
+computacionales cuando existe una razón teórica para hacerlo. Esta distinción
 es esencial para FOM-7, porque la presente tesis se ubica principalmente en una
-evaluacion functionally-grounded con aspiraciones de trazabilidad hacia
-afirmaciones tecnicas.
+evaluación functionally-grounded con aspiraciones de trazabilidad hacia
+afirmaciones técnicas.
 
-La distincion entre estos niveles evita una confusion frecuente: evaluar una
-explicacion con una metrica computacional no equivale a demostrar que mejora la
-decision humana. Los estudios human-grounded muestran que la relacion entre
-formato explicativo y comportamiento del usuario es empirica, no deducible solo
-de la elegancia del metodo. Por ejemplo, evaluar si ciertas explicaciones ayudan
+La distinción entre estos niveles evita una confusión frecuente: evaluar una
+explicación con una métrica computacional no equivale a demostrar que mejora la
+decisión humana. Los estudios human-grounded muestran que la relación entre
+formato explicativo y comportamiento del usuario es empírica, no deducible solo
+de la elegancia del método. Por ejemplo, evaluar si ciertas explicaciones ayudan
 a usuarios a predecir el comportamiento del modelo pertenece a una pregunta
 distinta de medir fidelidad o estabilidad en un benchmark [@hase2020]. Del
-mismo modo, los estudios con cientificos de datos muestran que las herramientas
-de interpretabilidad se insertan en practicas de depuracion, validacion y
-comunicacion que no se reducen a una puntuacion unica [@kaur2020]. Por ello,
-FOM-7 debe afirmar con precision que produce evidencia functionally-grounded y
+mismo modo, los estudios con científicos de datos muestran que las herramientas
+de interpretabilidad se insertan en practicas de depuración, validación y
+comunicación que no se reducen a una puntuación única [@kaur2020]. Por ello,
+FOM-7 debe afirmar con precisión que produce evidencia functionally-grounded y
 no evidencia application-grounded.
 
 Quantus responde a la necesidad de evaluar explicaciones mediante un toolkit
-que agrupa metricas y facilita comparaciones sistematicas [@hedstrom2023].
-Su contribucion es importante porque reduce friccion tecnica, ordena familias de
-metricas y promueve evaluaciones mas reproducibles. No obstante, un toolkit no
-resuelve por si solo el problema de gobernanza del protocolo. Antes de ejecutar
-metricas deben definirse artefactos, condiciones experimentales, filtros de
+que agrupa métricas y facilita comparaciones sistemáticas [@hedstrom2023].
+Su contribución es importante porque reduce friccion tecnica, ordena familias de
+métricas y promueve evaluaciones más reproducibles. No obstante, un toolkit no
+resuelve por sí solo el problema de gobernanza del protocolo. Antes de ejecutar
+métricas deben definirse artefactos, condiciones experimentales, filtros de
 admisibilidad, estructura de reporte y reglas para convertir resultados en
 afirmaciones defendibles.
 
 OpenXAI avanza en una direccion complementaria al proponer una plataforma de
-evaluacion transparente para explicaciones post-hoc [@agarwal2022]. Su aporte
-esta en hacer comparables metodos y condiciones de benchmarking. Para esta
+evaluación transparente para explicaciones post-hoc [@agarwal2022]. Su aporte
+esta en hacer comparables métodos y condiciones de benchmarking. Para esta
 tesis, OpenXAI funciona como referente directo: confirma que el problema de
-estandarizacion es reconocido por la comunidad, pero tambien permite delimitar
-la contribucion de FOM-7. FOM-7 no pretende reemplazar estos marcos; busca
-operacionalizar el camino desde el diseno experimental hasta la trazabilidad de
-conclusiones en el contexto empirico de la tesis.
+estandarización es reconocido por la comunidad, pero también permite delimitar
+la contribución de FOM-7. FOM-7 no pretende reemplazar estos marcos; busca
+operacionalizar el camino desde el diseño experimental hasta la trazabilidad de
+conclusiones en el contexto empírico de la tesis.
 
-La revision sistematica de evaluacion XAI refuerza este posicionamiento.
-@nauta2023 describen un desplazamiento necesario desde evidencia anecdotica
-hacia metodos cuantitativos de evaluacion, pero ese desplazamiento no resuelve
-por si solo la relacion entre metrica, constructo y claim. La evaluacion puede
-ser cuantitativa y aun asi estar mal alineada si la metrica mide una propiedad
-distinta a la afirmacion. Los sanity checks para metricas de saliencia apuntan a
-un problema similar: no basta con evaluar explicaciones; tambien deben
-examinarse las metricas usadas para evaluarlas [@tomsett2020]. Esta idea es
-central para FOM-7, porque la tesis no puede tratar las metricas como
-instrumentos neutrales. Debe documentar que mide cada metrica, bajo que
-supuestos, y que afirmaciones permite sostener.
+La revisión sistemática de evaluación XAI refuerza este posiciónamiento.
+@nauta2023 describen un desplazamiento necesario desde evidencia anecdótica
+hacia métodos cuantitativos de evaluación, pero ese desplazamiento no resuelve
+por sí solo la relación entre métrica, constructo y claim. La evaluación puede
+ser cuantitativa y aun así estar mal alineada si la métrica mide una propiedad
+distinta a la afirmación. Los sanity checks para métricas de saliencia apuntan a
+un problema similar: no basta con evaluar explicaciones; también deben
+examinarse las métricas usadas para evaluarlas [@tomsett2020]. Esta idea es
+central para FOM-7, porque la tesis no puede tratar las métricas como
+instrumentos neutrales. Debe documentar qué mide cada métrica, bajo qué
+supuestos, y qué afirmaciones permite sostener.
 
 Los marcos existentes ofrecen piezas importantes del problema. Quantus facilita
-la implementacion sistematica de metricas; OpenXAI promueve comparabilidad y
-transparencia de benchmark; las taxonomias de evaluacion distinguen niveles de
+la implementación sistemática de métricas; OpenXAI promueve comparabilidad y
+transparencia de benchmark; las taxonomías de evaluación distinguen niveles de
 evidencia; los estudios human-centered muestran que la utilidad depende de
 usuarios y tareas [@doshi-velez2017; @hedstrom2023; @agarwal2022;
 @zhang2024]. FOM-7 se ubica entre estas piezas como una capa de integracion
-operativa. Su pregunta no es solamente "que metrica ejecutar", sino como
-asegurar que cada resultado metricamente calculado pueda transformarse en una
-afirmacion doctoralmente admisible, con artefactos calificados y limites de
-alcance explicitos.
+operativa. Su pregunta no es solamente "qué métrica ejecutar", sino como
+asegurar que cada resultado métricamente calculado pueda transformarse en una
+afirmación doctoralmente admisible, con artefactos calificados y límites de
+alcance explícitos.
 
-En dominios de alta responsabilidad, como salud, esta distincion se vuelve aun
-mas visible: las revisiones de XAI medico muestran que la explicabilidad debe
-relacionarse con confianza, validacion, responsabilidad y restricciones del
-contexto de uso, no solo con la disponibilidad de una visualizacion o una lista
-de importancias [@tjoa2020]. Aunque esta tesis no se limita al dominio medico,
+En dominios de alta responsabilidad, como salud, esta distinción se vuelve aún
+más visible: las revisiones de XAI médico muestran que la explicabilidad debe
+relacionarse con confianza, validación, responsabilidad y restricciones del
+contexto de uso, no solo con la disponibilidad de una visualización o una lista
+de importancias [@tjoa2020]. Aunque esta tesis no se limita al dominio médico,
 ese tipo de literatura refuerza la necesidad de separar utilidad contextual,
 evidencia computacional y admisibilidad de claims.
 
-La literatura reciente sobre metricas XAI insiste en que la evaluacion
+La literatura reciente sobre métricas XAI insiste en que la evaluación
 unidimensional es insuficiente [@abdulkadir2023; @pawlicki2024]. Fidelidad,
 estabilidad, robustez, complejidad, coste y utilidad capturan constructos
-diferentes. Un metodo puede ser rapido y estable, pero poco fiel; otro puede ser
-fiel y costoso; otro puede ser comprensible pero fragil ante perturbaciones. La
-consecuencia metodologica es clara: la tesis debe reportar perfiles de
-desempeno, no rankings absolutos simplificados.
+diferentes. Un método puede ser rápido y estable, pero poco fiel; otro puede ser
+fiel y costoso; otro puede ser comprensible pero frágil ante perturbaciones. La
+consecuencia metodológica es clara: la tesis debe reportar perfiles de
+desempeño, no rankings absolutos simplificados.
 
-La perspectiva human-centered refuerza la misma conclusion desde otro angulo.
-No hay una explicacion universalmente adecuada para todos los usuarios, tareas y
-contextos. Las revisiones y estudios de usuarios muestran que la explicacion
+La perspectiva human-centered refuerza la misma conclusión desde otro ángulo.
+No hay una explicación universalmente adecuada para todos los usuarios, tareas y
+contextos. Las revisiones y estudios de usuarios muestran que la explicación
 puede servir para depurar modelos, justificar decisiones, calibrar confianza,
-enseñar comportamiento del sistema, identificar errores o apoyar accion
+enseñar comportamiento del sistema, identificar errores o apoyar acción
 [@miller2019; @abdul2018; @langer2021; @sokol2020; @zhang2024]. Cada finalidad
 demanda criterios distintos. Por ello, FOM-7 no debe usar la palabra "mejor" sin
 calificador. Debe hablar de mejor fidelidad local, mayor estabilidad bajo una
-perturbacion definida, menor coste computacional, mayor cobertura de regla o
-mayor satisfaccion de un criterio contrafactual. Esta disciplina semantica es
-parte del aporte teorico del protocolo.
+perturbación definida, menor coste computacional, mayor cobertura de regla o
+mayor satisfacción de un criterio contrafactual. Esta disciplina semántica es
+parte del aporte teórico del protocolo.
 
-## Taxonomias de metricas y brechas de constructo
+## Taxonomias de métricas y brechas de constructo
 
-La fidelidad mide hasta que punto una explicacion aproxima el comportamiento
-observable del modelo. En metodos de sustitucion local, puede operacionalizarse
+La fidelidad mide hasta qué punto una explicación aproxima el comportamiento
+observable del modelo. En métodos de sustitución local, puede operacionalizarse
 como acuerdo entre el modelo de caja negra y el sustituto en un vecindario
-definido. Sin embargo, la fidelidad depende de como se construye ese
-vecindario, de que instancias se consultan y de que diferencia se considera
+definido. Sin embargo, la fidelidad depende de cómo se construye ese
+vecindario, de qué instancias se consultan y de qué diferencia se considera
 relevante. Por ello, FOM-7 trata la fidelidad como un resultado condicionado por
-decisiones experimentales, no como propiedad absoluta del metodo.
+decisiones experimentales, no como propiedad absoluta del método.
 
-La fidelidad debe leerse como una relacion entre tres elementos: el modelo que
-se explica, el artefacto explicativo y el dominio de comparacion. En LIME, por
+La fidelidad debe leerse como una relación entre tres elementos: el modelo que
+se explica, el artefacto explicativo y el dominio de comparación. En LIME, por
 ejemplo, la fidelidad remite al acuerdo entre el modelo de caja negra y el
 sustituto local en un vecindario definido. En SHAP, la pregunta se desplaza
-hacia la coherencia de una atribucion aditiva bajo supuestos de referencia. En
-Anchors, la fidelidad no aparece como peso continuo sino como precision de una
+hacia la coherencia de una atribución aditiva bajo supuestos de referencia. En
+Anchors, la fidelidad no aparece como peso continuo sino como precisión de una
 regla bajo condiciones de cobertura. En DiCE, la validez de un contrafactual
 depende de si el cambio propuesto modifica efectivamente la salida del modelo.
-Estos ejemplos muestran que la fidelidad no es una propiedad homogenea entre
-familias explicativas; debe operacionalizarse segun el objeto que cada metodo
+Estos ejemplos muestran que la fidelidad no es una propiedad homogénea entre
+familias explicativas; debe operacionalizarse según el objeto que cada método
 produce [@guidotti2018; @carvalho2019; @nauta2023].
 
-La estabilidad evalua la consistencia de explicaciones ante variaciones
-pequenas. Esta propiedad es central porque un usuario puede perder confianza si
-instancias casi identicas reciben explicaciones incompatibles. Sin embargo, una
-explicacion estable no es necesariamente correcta; puede repetir de forma
-consistente una aproximacion pobre. La estabilidad debe leerse junto con
+La estabilidad evalúa la consistencia de explicaciones ante variaciones
+pequeñas. Esta propiedad es central porque un usuario puede perder confianza si
+instancias casi idénticas reciben explicaciones incompatibles. Sin embargo, una
+explicación estable no es necesariamente correcta; puede repetir de forma
+consistente una aproximación pobre. La estabilidad debe leerse junto con
 fidelidad, robustez y alcance del experimento.
 
 En FOM-7, la estabilidad funciona como un control de sensibilidad. Su pregunta
-no es si la explicacion es verdadera, sino si el explicador responde de forma
-coherente ante variaciones que no deberian alterar sustancialmente la
-interpretacion. Esta distincion es relevante porque algunos explicadores
-post-hoc pueden variar por razones tecnicas ajenas al fenomeno que se desea
-explicar, como el muestreo, la seleccion de caracteristicas o la aleatoriedad
+no es si la explicación es verdadera, sino si el explicador responde de forma
+coherente ante variaciones que no deberían alterar sustancialmente la
+interpretación. Esta distinción es relevante porque algunos explicadores
+post-hoc pueden variar por razones técnicas ajenas al fenómeno que se desea
+explicar, como el muestreo, la selección de características o la aleatoriedad
 del procedimiento [@burger2023; @slack2020]. Por ello, reportar estabilidad
 ayuda a distinguir entre una diferencia significativa del modelo y una
 diferencia inducida por el explicador.
 
-La robustez amplia el analisis hacia perturbaciones mayores, ataques o
-condiciones fuera de distribucion. En evaluacion XAI, esto es especialmente
-problematico porque muchas metricas operan alterando entradas. Si las entradas
-alteradas dejan de representar casos plausibles del dominio, la metrica puede
+La robustez amplía el análisis hacia perturbaciones mayores, ataques o
+condiciones fuera de distribución. En evaluación XAI, esto es especialmente
+problemático porque muchas métricas operan alterando entradas. Si las entradas
+alteradas dejan de representar casos plausibles del dominio, la métrica puede
 estar evaluando un comportamiento artificial del modelo. Esta advertencia
 respalda la necesidad de documentar generadores de perturbaciones, dominios de
 validez y criterios de admisibilidad [@zheng2025].
 
-La complejidad o sparsity evalua el tamano cognitivo del artefacto explicativo.
-Explicaciones mas breves pueden ser mas comprensibles, pero la parquedad no
-garantiza calidad. Una explicacion demasiado simple puede omitir factores
-necesarios; una demasiado extensa puede ser tecnicamente rica pero inutil para
-un usuario. FOM-7 usa complejidad como una dimension de perfil, no como criterio
-supremo.
+La complejidad o sparsity evalúa el tamaño cognitivo del artefacto explicativo.
+Explicaciones más breves pueden ser más comprensibles, pero la parquedad no
+garantiza calidad. Una explicación demasiado simple puede omitir factores
+necesarios; una demasiado extensa puede ser técnicamente rica pero inútil para
+un usuario. FOM-7 usa complejidad como una dimensión de perfil, no como criterio
+supremo [@nauta2023].
 
-El coste computacional incorpora una dimension practica. Explicaciones que
-requieren miles de consultas al modelo pueden ser aceptables en investigacion
+El coste computacional incorpora una dimensión práctica. Explicaciones que
+requieren miles de consultas al modelo pueden ser aceptables en investigación
 offline, pero inadecuadas para sistemas interactivos o despliegues con
-restricciones de latencia. La comparacion entre KernelSHAP y aproximaciones mas
-rapidas muestra que la evaluacion debe incluir trade-offs de factibilidad.
+restricciones de latencia. La comparación entre KernelSHAP y aproximaciones más
+rápidas muestra que la evaluación debe incluir compromisos de factibilidad
+[@lundberg2017; @vandenbroeck2022].
 
-El coste no es solamente una medida de eficiencia; tambien condiciona que
-preguntas pueden contestarse dentro de un benchmark. Un metodo costoso puede
-limitar el numero de instancias evaluadas, reducir la cantidad de semillas,
-impedir analisis de sensibilidad o forzar aproximaciones. La literatura sobre
+El coste no es solamente una medida de eficiencia; también condiciona que
+preguntas pueden contestarse dentro de un benchmark. Un método costoso puede
+limitar el número de instancias evaluadas, reducir la cantidad de semillas,
+impedir análisis de sensibilidad o forzar aproximaciones. La literatura sobre
 tractabilidad de SHAP ilustra que la complejidad computacional no es un detalle
-de implementacion, sino una propiedad que afecta la admisibilidad experimental
-[@vandenbroeck2022]. FOM-7 incorpora el coste para evitar que la comparacion
-privilegie explicaciones teoricamente atractivas pero impracticables bajo
+de implementación, sino una propiedad que afecta la admisibilidad experimental
+[@vandenbroeck2022]. FOM-7 incorpora el coste para evitar que la comparación
+privilegie explicaciones teóricamente atractivas pero impracticables bajo
 restricciones reales.
 
-La utilidad y la plausibilidad introducen una capa distinta. Una explicacion
-puede ser util para un cientifico de datos que busca depurar un pipeline, para
-un experto de dominio que evalua coherencia sustantiva o para un usuario que
-necesita entender una decision. Sin embargo, esos usos no se derivan
-automaticamente de las metricas computacionales. Los estudios human-centered
+La utilidad y la plausibilidad introducen una capa distinta. Una explicación
+puede ser útil para un científico de datos que busca depurar un pipeline, para
+un experto de dominio que evalúa coherencia sustantiva o para un usuario que
+necesita entender una decisión. Sin embargo, esos usos no se derivan
+automáticamente de las métricas computacionales. Los estudios human-centered
 muestran que la utilidad depende de usuario, tarea, interfaz y contexto
 [@miller2019; @kaur2020; @hase2020; @zhang2024]. Por ello, FOM-7 debe mantener
 separada la utilidad inferida por proxy de la utilidad demostrada en una tarea
 humana.
 
-La brecha de constructo aparece cuando una metrica mide una propiedad cercana
-pero no identica a la afirmacion que se desea hacer. Por ejemplo, una metrica de
-fidelidad local no autoriza automaticamente afirmar utilidad humana; una metrica
+La brecha de constructo aparece cuando una métrica mide una propiedad cercana
+pero no idéntica a la afirmación que se desea hacer. Por ejemplo, una métrica de
+fidelidad local no autoriza automáticamente afirmar utilidad humana; una métrica
 de estabilidad no prueba causalidad; una regla Anchor precisa no garantiza
-cobertura amplia; un contrafactual valido para el modelo no siempre es
+cobertura amplia; un contrafactual válido para el modelo no siempre es
 accionable para la persona. Esta brecha es uno de los fundamentos conceptuales
 de FOM-7.
 
-El problema se agrava cuando la metrica produce una cifra facil de comparar. La
+El problema se agrava cuando la métrica produce una cifra fácil de comparar. La
 forma tabular puede sugerir una objetividad mayor que la realmente disponible.
-Una diferencia numerica entre dos explicadores solo es significativa si la
-metrica es valida para el constructo, si la variabilidad fue estimada, si el
-procedimiento es reproducible y si la afirmacion resultante respeta el alcance
-del experimento. Las revisiones de metodos y metricas insisten en la necesidad
-de interpretar la evaluacion XAI como un conjunto de dimensiones relacionadas,
-no como un unico eje de optimizacion [@carvalho2019; @nauta2023]. FOM-7 adopta
+Una diferencia numérica entre dos explicadores solo es significativa si la
+métrica es válida para el constructo, si la variabilidad fue estimada, si el
+procedimiento es reproducible y si la afirmación resultante respeta el alcance
+del experimento. Las revisiones de métodos y métricas insisten en la necesidad
+de interpretar la evaluación XAI como un conjunto de dimensiones relacionadas,
+no como un único eje de optimización [@carvalho2019; @nauta2023]. FOM-7 adopta
 esta lectura y la convierte en una regla de reporte: cada resultado debe
-mantener unido metodo, metrica, constructo, condicion experimental y claim.
+mantener unido método, métrica, constructo, condición experimental y claim.
 
-La siguiente matriz resume esta alineacion entre metodos, objetos explicativos y
-constructos de evaluacion. Su funcion no es sustituir el analisis empirico, sino
-hacer explicita la razon por la cual FOM-7 evalua perfiles y no rankings
+La siguiente matriz resume esta alineación entre métodos, objetos explicativos y
+constructos de evaluación. Su función no es sustituir el análisis empírico, sino
+hacer explícita la razón por la cual FOM-7 evalúa perfiles y no rankings
 absolutos.
 
-| Metodo | Objeto explicativo principal | Constructos naturalmente alineados | Riesgos de evaluacion | Lectura dentro de FOM-7 |
+| Método | Objeto explicativo principal | Constructos naturalmente alineados | Riesgos de evaluación | Lectura dentro de FOM-7 |
 |---|---|---|---|---|
-| LIME | Sustituto local interpretable | Fidelidad local, estabilidad, complejidad, coste | Sensibilidad al muestreo, vecindarios artificiales, manipulabilidad post-hoc | Valido como aproximacion local condicionada por parametros documentados |
-| SHAP | Atribucion aditiva de caracteristicas | Consistencia atributiva, coste, estabilidad, sensibilidad al conjunto de referencia | Coste elevado, supuestos sobre ausencia/presencia de variables, lectura causal indebida | Valido como perfil de atribucion bajo variante y referencia especificadas |
-| Anchors | Regla local de alta precision | Precision, cobertura, complejidad de regla, reproducibilidad | Reglas demasiado estrechas, cobertura limitada, comparacion dificil con atribuciones | Valido como evidencia condicional cuando precision y cobertura se reportan juntas |
-| DiCE | Conjunto de contrafactuales diversos | Validez, proximidad, diversidad, factibilidad, accionabilidad | Cambios imposibles, recourse no garantizado, confundir cambio de etiqueta con accion real | Valido como evidencia contrafactual bajo restricciones de factibilidad explicitadas |
+| LIME | Sustituto local interpretable | Fidelidad local, estabilidad, complejidad, coste | Sensibilidad al muestreo, vecindarios artificiales, manipulabilidad post-hoc | Válido como aproximación local condicionada por parámetros documentados |
+| SHAP | Atribución aditiva de características | Consistencia atributiva, coste, estabilidad, sensibilidad al conjunto de referencia | Coste elevado, supuestos sobre ausencia/presencia de variables, lectura causal indebida | Válido como perfil de atribución bajo variante y referencia especificadas |
+| Anchors | Regla local de alta precisión | Precisión, cobertura, complejidad de regla, reproducibilidad | Reglas demasiado estrechas, cobertura limitada, comparación difícil con atribuciones | Válido como evidencia condicional cuando precisión y cobertura se reportan juntas |
+| DiCE | Conjunto de contrafactuales diversos | Validez, proximidad, diversidad, factibilidad, accionabilidad | Cambios imposibles, recourse no garantizado, confundir cambio de etiqueta con acción real | Válido como evidencia contrafactual bajo restricciones de factibilidad explicitadas |
 
-La matriz tambien muestra que la comparacion entre metodos es necesariamente
-asimetrica. LIME y SHAP pueden compararse parcialmente en terminos de
-atribucion o fidelidad local, pero Anchors introduce cobertura de regla y DiCE
-introduce accionabilidad contrafactual. Si el protocolo fuerza una escala unica,
-puede castigar a un metodo por no producir el tipo de artefacto que la metrica
-espera. FOM-7 evita ese error al requerir que cada conclusion especifique el
+La matriz también muestra que la comparación entre métodos es necesariamente
+asimétrica. LIME y SHAP pueden compararse parcialmente en términos de
+atribución o fidelidad local, pero Anchors introduce cobertura de regla y DiCE
+introduce accionabilidad contrafactual. Si el protocolo fuerza una escala única,
+puede castigar a un método por no producir el tipo de artefacto que la métrica
+espera. FOM-7 evita ese error al requerir que cada conclusión especifique el
 constructo evaluado y el tipo de objeto explicativo al que se aplica
 [@mothilal2020; @ribeiro2018; @lundberg2017; @karimi2022].
 
 ## Reproducibilidad y trazabilidad en benchmarking XAI
 
-La reproducibilidad en XAI no se limita a publicar codigo. Un benchmark de
-explicaciones depende de versiones de datos, modelos, semillas, hiperparametros,
-metodos de perturbacion, parametros de explicadores, definiciones de metricas y
-reglas de agregacion. Si estos elementos no se registran, dos estudios pueden
-usar el mismo nombre de metodo y producir evidencia no comparable. La
-reproducibilidad requiere entonces una descripcion del pipeline completo.
+La reproducibilidad en XAI no se limita a publicar código. Un benchmark de
+explicaciones depende de versiones de datos, modelos, semillas, hiperparámetros,
+métodos de perturbación, parámetros de explicadores, definiciones de métricas y
+reglas de agregación. Si estos elementos no se registran, dos estudios pueden
+usar el mismo nombre de método y producir evidencia no comparable. La
+reproducibilidad requiere entonces una descripción del pipeline completo
+[@hedstrom2023; @nauta2023].
 
-La literatura de evaluacion XAI muestra que esta exigencia es particularmente
+La literatura de evaluación XAI muestra que esta exigencia es particularmente
 delicada porque las explicaciones suelen depender de decisiones que parecen
 menores: una semilla, un conjunto de referencia, una forma de imputar ausencia
 de variables, un umbral de regla o un generador de perturbaciones. Cuando esas
 decisiones no se documentan, el resultado puede parecer una propiedad estable
-del metodo aunque en realidad sea una propiedad de una configuracion concreta.
-Por eso, el paso desde evaluacion anecdotica hacia evaluacion cuantitativa debe
-acompanarse de una disciplina de trazabilidad: no basta con que una metrica
+del método aunque en realidad sea una propiedad de una configuración concreta.
+Por eso, el paso desde evaluación anecdótica hacia evaluación cuantitativa debe
+acompañarse de una disciplina de trazabilidad: no basta con que una métrica
 exista, debe poder reconstruirse como parte de un experimento completo
 [@nauta2023; @hedstrom2023].
 
-FOM-7 incorpora esta preocupacion mediante una secuencia de control: congelar el
-diseno experimental, calificar artefactos, ejecutar metricas armonizadas,
-aplicar criterios estadisticos, perfilar reproducibilidad y mapear afirmaciones
+FOM-7 incorpora esta preocupación mediante una secuencia de control: congelar el
+diseño experimental, calificar artefactos, ejecutar métricas armonizadas,
+aplicar criterios estadísticos, perfilar reproducibilidad y mapear afirmaciones
 a evidencia. Esta secuencia evita que los resultados se presenten como
 conclusiones generales sin indicar las condiciones que los sostienen.
 
-Esta secuencia tambien protege contra un problema frecuente en revisiones
-comparativas: la conversion de resultados de herramienta en conclusiones de
-teoria. Un toolkit puede calcular metricas correctamente y, aun asi, el estudio
+Esta secuencia también protege contra un problema frecuente en revisiones
+comparativas: la conversión de resultados de herramienta en conclusiones de
+teoría. Un toolkit puede calcular métricas correctamente y, aun así, el estudio
 puede sobreinterpretar el resultado si no distingue entre constructo medido,
-objeto explicativo y alcance del dataset. Los sanity checks de metricas y las
-criticas a explicaciones post-hoc muestran que tanto los explicadores como los
-instrumentos de evaluacion pueden fallar de maneras no obvias [@tomsett2020;
+objeto explicativo y alcance del dataset. Los sanity checks de métricas y las
+críticas a explicaciones post-hoc muestran que tanto los explicadores como los
+instrumentos de evaluación pueden fallar de maneras no obvias [@tomsett2020;
 @slack2020; @laugel2019]. FOM-7 responde a esta vulnerabilidad haciendo que la
-calificacion del artefacto y la admisibilidad del claim sean pasos explicitos,
+calificación del artefacto y la admisibilidad del claim sean pasos explícitos,
 no inferencias dejadas al lector.
 
 La trazabilidad de afirmaciones es especialmente relevante para una tesis
-doctoral. Cada afirmacion fuerte debe poder regresar a una tabla, figura,
-metrica, prueba estadistica o decision metodologica. Si se afirma que un metodo
-es mas estable, debe quedar claro en que dataset, modelo, configuracion,
-vecindario, semilla y metrica se observo esa estabilidad. Si se afirma que un
-metodo es preferible, debe especificarse preferible respecto a que criterio y
-bajo que restricciones.
+doctoral. Cada afirmación fuerte debe poder regresar a una tabla, figura,
+métrica, prueba estadística o decisión metodológica. Si se afirma que un método
+es más estable, debe quedar claro en qué dataset, modelo, configuración,
+vecindario, semilla y métrica se observó esa estabilidad. Si se afirma que un
+método es preferible, debe específicarse preferible respecto a qué criterio y
+bajo qué restricciones.
 
-Esta disciplina tambien protege contra sobreclaiming. FOM-7 no convierte la
-evaluacion functionally-grounded en evidencia application-grounded. Tampoco
-pretende resolver todos los problemas human-centered de la XAI. Su contribucion
-es mas precisa: construir un protocolo operacional para producir evidencia
+Esta disciplina también protege contra sobreclaiming. FOM-7 no convierte la
+evaluación functionally-grounded en evidencia application-grounded. Tampoco
+pretende resolver todos los problemas human-centered de la XAI. Su contribución
+es más precisa: construir un protocolo operacional para producir evidencia
 multinivel, reproducible y trazable en un benchmark de explicaciones post-hoc.
 
-La consecuencia practica es que cada tabla de resultados debe leerse como una
+La consecuencia práctica es que cada tabla de resultados debe leerse como una
 tabla de evidencia condicionada. Un valor de fidelidad pertenece a una
-combinacion de modelo, dataset, explicador, perturbacion y criterio de
-agregacion. Un valor de estabilidad pertenece a una definicion de vecindario y
-a una clase de variacion. Una medicion de coste pertenece a una configuracion de
-hardware, implementacion y parametros. Sin esta informacion, la comparacion
-puede ser util como orientacion preliminar, pero debil como evidencia doctoral.
-Con esta informacion, en cambio, la tesis puede formular conclusiones
+combinación de modelo, dataset, explicador, perturbación y criterio de
+agregación. Un valor de estabilidad pertenece a una definición de vecindario y
+a una clase de variación. Una medición de coste pertenece a una configuración de
+hardware, implementación y parámetros. Sin esta información, la comparación
+puede ser útil como orientación preliminar, pero débil como evidencia doctoral.
+Con esta información, en cambio, la tesis puede formular conclusiones
 delimitadas y auditables: no "este explicador es mejor", sino "este explicador
 exhibe mayor estabilidad bajo estas condiciones y con este criterio de
-medicion". Ese cambio de lenguaje es una parte sustantiva de la contribucion
-metodologica.
+medición". Ese cambio de lenguaje es una parte sustantiva de la contribución
+metodológica.
 
-## Sintesis critica: justificacion de FOM-7
+## Síntesis crítica: justificación de FOM-7
 
-La revision permite formular la brecha central de la tesis. La literatura ofrece
-metodos de explicacion influyentes, como LIME, SHAP, Anchors y DiCE. Tambien
-ofrece marcos de evaluacion y toolkits, como Quantus y OpenXAI. Ademas,
-dispone de taxonomias conceptuales que distinguen tipos de evaluacion,
-constructos metricos y niveles de participacion humana. El problema, por tanto,
-no es la ausencia total de recursos teoricos o tecnicos.
+La revisión permite formular la brecha central de la tesis. La literatura ofrece
+métodos de explicación influyentes, como LIME, SHAP, Anchors y DiCE. También
+ofrece marcos de evaluación y toolkits, como Quantus y OpenXAI. Además,
+dispone de taxonomías conceptuales que distinguen tipos de evaluación,
+constructos métricos y niveles de participación humana. El problema, por tanto,
+no es la ausencia total de recursos teóricos o técnicos.
 
-La brecha reside en la integracion operacional. En la practica, evaluar XAI para
-fines comparativos exige responder preguntas encadenadas: que artefactos son
-admisibles, que metodos se comparan, bajo que datasets y modelos, con que
-parametros, mediante que metricas, con que controles estadisticos, bajo que
-criterios de reproducibilidad y con que limites de interpretacion. Cuando estas
-decisiones no se integran en un protocolo, la evaluacion puede producir tablas
-aparentemente rigurosas pero debiles como evidencia cientifica.
+La brecha reside en la integración operacional. En la práctica, evaluar XAI para
+fines comparativos exige responder preguntas encadenadas: qué artefactos son
+admisibles, qué métodos se comparan, bajo qué datasets y modelos, con qué
+parámetros, mediante qué métricas, con qué controles estadísticos, bajo qué
+criterios de reproducibilidad y con qué límites de interpretación. Cuando estas
+decisiones no se integran en un protocolo, la evaluación puede producir tablas
+aparentemente rigurosas pero débiles como evidencia científica.
 
-Esta brecha no debe formularse como una descalificacion de los marcos
-existentes. Quantus, OpenXAI y las revisiones sistematicas recientes representan
-avances reales hacia la estandarizacion, la comparabilidad y la cuantificacion
+Esta brecha no debe formularse como una descalificación de los marcos
+existentes. Quantus, OpenXAI y las revisiones sistemáticas recientes representan
+avances reales hacia la estandarización, la comparabilidad y la cuantificación
 de explicaciones [@hedstrom2023; @agarwal2022; @nauta2023]. La tesis no afirma
-que esos recursos sean insuficientes en terminos absolutos, sino que no agotan
+que esos recursos sean insuficientes en términos absolutos, sino que no agotan
 la necesidad de un protocolo situado que gobierne el ciclo completo de evidencia
 en este estudio. La diferencia es sutil pero decisiva: un toolkit puede ofrecer
-metricas; un protocolo doctoral debe decir cuando esas metricas son admisibles,
-como se documentan, como se comparan, que inferencias permiten y que limites
+métricas; un protocolo doctoral debe decir cuándo esas métricas son admisibles,
+cómo se documentan, cómo se comparan, qué inferencias permiten y qué límites
 conservan.
 
-La revision tambien muestra que las familias de explicacion no comparten una
-ontologia unica. LIME produce sustitutos locales; SHAP produce atribuciones;
+La revisión también muestra que las familias de explicación no comparten una
+ontología única. LIME produce sustitutos locales; SHAP produce atribuciones;
 Anchors produce reglas; DiCE produce contrafactuales. Esta diversidad implica
 que el protocolo no puede asumir una equivalencia natural entre salidas
-explicativas. La comparacion debe ser multinivel porque cada metodo se relaciona
+explicativas. La comparación debe ser multinivel porque cada método se relaciona
 de manera distinta con fidelidad, estabilidad, coste, cobertura, accionabilidad
-y utilidad. La matriz anterior formaliza esta asimetria y convierte una
-observacion teorica en una regla metodologica: ninguna conclusion comparativa
+y utilidad. La matriz anterior formaliza esta asimetría y convierte una
+observación teórica en una regla metodológica: ninguna conclusión comparativa
 puede separarse del tipo de objeto explicativo que la sostiene.
 
-El tercer elemento de la brecha es la admisibilidad estadistica. Una diferencia
-observada entre metodos no basta para sostener una afirmacion doctoral si no se
-acompaña de controles sobre variabilidad, repeticion, comparabilidad y alcance.
-La literatura de benchmarking XAI ha avanzado al ofrecer metricas y esquemas de
-evaluacion, pero el paso desde resultado numerico hasta claim requiere una capa
-de decision metodologica. FOM-7 ubica esa capa dentro del protocolo: antes de
+El tercer elemento de la brecha es la admisibilidad estadística. Una diferencia
+observada entre métodos no basta para sostener una afirmación doctoral si no se
+acompaña de controles sobre variabilidad, repetición, comparabilidad y alcance.
+La literatura de benchmarking XAI ha avanzado al ofrecer métricas y esquemas de
+evaluación, pero el paso desde resultado numérico hasta claim requiere una capa
+de decisión metodológica. FOM-7 ubica esa capa dentro del protocolo: antes de
 declarar superioridad, preferencia o robustez, el estudio debe establecer si el
-resultado es estable, si la prueba estadistica es apropiada, si los artefactos
-son comparables y si la conclusion respeta el constructo evaluado.
+resultado es estable, si la prueba estadística es apropiada, si los artefactos
+son comparables y si la conclusión respeta el constructo evaluado.
 
 El cuarto elemento es la trazabilidad. En una tesis doctoral, la credibilidad no
 depende solo de tener resultados, sino de que el lector pueda seguir el camino
-desde una afirmacion hasta sus condiciones de produccion. Esta trazabilidad
-incluye referencias bibliograficas, definiciones conceptuales, decisiones de
-diseno, configuraciones experimentales, metricas, pruebas estadisticas y
+desde una afirmación hasta sus condiciones de producción. Esta trazabilidad
+incluye referencias bibliográficas, definiciones conceptuales, decisiones de
+diseño, configuraciones experimentales, métricas, pruebas estadísticas y
 limitaciones. FOM-7 convierte esta exigencia en arquitectura: cada claim debe
 vincularse con evidencia identificable y cada evidencia debe declarar su alcance
-interpretativo. Asi, el protocolo evita que la literatura revise conceptos por
+interpretativo. Así, el protocolo evita que la literatura revise conceptos por
 un lado y los experimentos reporten cifras por otro, sin un puente claro entre
 ambos.
 
 FOM-7 se justifica como respuesta a esa brecha. Su aporte no es proponer una
-metrica aislada ni afirmar que un metodo de explicacion domina universalmente a
-los demas. Su aporte es estructurar un proceso de evaluacion multinivel que
-conecta diseno experimental, calificacion de artefactos, medicion,
-admisibilidad estadistica, reproducibilidad y trazabilidad de claims. Esta
-conexion permite que las conclusiones de la tesis sean evaluables, replicables y
+métrica aislada ni afirmar que un método de explicación domina universalmente a
+los demás. Su aporte es estructurar un proceso de evaluación multinivel que
+conecta diseño experimental, calificación de artefactos, medición,
+admisibilidad estadística, reproducibilidad y trazabilidad de claims. Esta
+conexión permite que las conclusiones de la tesis sean evaluables, replicables y
 delimitadas.
 
-En consecuencia, FOM-7 puede describirse como una contribucion de gobernanza
-metodologica para evaluacion XAI. No compite con LIME, SHAP, Anchors o DiCE,
-porque no es un explicador. No compite con Quantus u OpenXAI como libreria de
-metricas, porque su foco no es ampliar el catalogo de implementaciones. Su
-espacio propio esta en coordinar los pasos que permiten convertir explicaciones
-y metricas en evidencia cientifica: seleccion de artefactos, congelamiento de
-condiciones, ejecucion comparable, analisis estadistico, perfil reproducible y
-claim trazable. Esta posicion hace que la contribucion sea defendible sin
+En consecuencia, FOM-7 puede describirse como una contribución de gobernanza
+metodológica para evaluación XAI. No compite con LIME, SHAP, Anchors o DiCE,
+porque no es un explicador. No compite con Quantus u OpenXAI como librería de
+métricas, porque su foco no es ampliar el catálogo de implementaciones. Su
+espacio propio está en coordinar los pasos que permiten convertir explicaciones
+y métricas en evidencia científica: selección de artefactos, congelamiento de
+condiciones, ejecución comparable, análisis estadístico, perfil reproducible y
+claim trazable. Esta posición hace que la contribución sea defendible sin
 sobreclaiming.
 
-El capitulo tambien delimita lo que FOM-7 no demuestra. No demuestra utilidad
-humana directa, porque esa afirmacion requeriria estudios human-grounded o
-application-grounded especificos [@doshi-velez2017; @hase2020; @zhang2024]. No
-demuestra verdad causal de las explicaciones, porque las metricas
+El capítulo también delimita lo que FOM-7 no demuestra. No demuestra utilidad
+humana directa, porque esa afirmación requeriría estudios human-grounded o
+application-grounded específicos [@doshi-velez2017; @hase2020; @zhang2024]. No
+demuestra verdad causal de las explicaciones, porque las métricas
 functionally-grounded operan sobre proxies definidos. No demuestra superioridad
-universal de un metodo, porque los metodos producen objetos heterogeneos y
+universal de un método, porque los métodos producen objetos heterogéneos y
 responden a constructos distintos. Estas limitaciones no debilitan la tesis; al
-contrario, fortalecen su precision. Un protocolo doctoral robusto no elimina los
-limites, los vuelve visibles y auditables.
+contrario, fortalecen su precisión. Un protocolo doctoral robusto no elimina los
+límites, los vuelve visibles y auditables.
 
-Desde esta perspectiva, el capitulo 2 cumple una funcion argumentativa:
-demuestra que la XAI ha madurado como campo de metodos, que la evaluacion ha
-avanzado mediante taxonomias y toolkits, y que aun falta una capa operacional
-que gobierne el paso desde resultados metricos hacia afirmaciones cientificas.
-Esa capa es el espacio de contribucion de FOM-7 y el puente conceptual hacia el
-diseno experimental desarrollado en el capitulo siguiente.
+Desde esta perspectiva, el capítulo 2 cumple una función argumentativa:
+demuestra que la XAI ha madurado como campo de métodos, que la evaluación ha
+avanzado mediante taxonomías y toolkits, y que aún falta una capa operacional
+que gobierne el paso desde resultados métricos hacia afirmaciones científicas.
+Esa capa es el espacio de contribución de FOM-7 y el puente conceptual hacia el
+diseño experimental desarrollado en el capítulo siguiente.
 
-El resultado de esta revision es, por tanto, una tesis de transicion: la
-literatura no necesita solamente mas explicadores ni solamente mas metricas,
-sino formas mas rigurosas de enlazar explicadores, metricas y afirmaciones. La
-pregunta doctoral deja de ser "que explicacion parece mejor" y se convierte en
-"bajo que condiciones, con que evidencia, respecto a que constructo y con que
-limites puede sostenerse una afirmacion sobre un explicador". FOM-7 nace de esa
-pregunta y prepara el terreno para el diseno experimental del siguiente
-capitulo.
+El resultado de esta revisión es, por tanto, una tesis de transición: la
+literatura no necesita solamente más explicadores ni solamente más métricas,
+sino formas más rigurosas de enlazar explicadores, métricas y afirmaciones. La
+pregunta doctoral deja de ser "qué explicación parece mejor" y se convierte en
+"bajo qué condiciones, con qué evidencia, respecto a qué constructo y con qué
+límites puede sostenerse una afirmación sobre un explicador". FOM-7 nace de esa
+pregunta y prepara el terreno para el diseño experimental del siguiente
+capítulo.

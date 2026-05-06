@@ -1,0 +1,224 @@
+# Taxonomía de métricas y síntesis conceptual
+
+Este capítulo desarrolla el Estudio C de la tesis: una taxonomía estructurada
+del espacio de métricas de evaluación XAI. Su función es dar peso conceptual
+propio a la tercera contribución doctoral. Los capítulos anteriores mostraron
+que FOM-7 necesita distinguir objetos explicativos, constructos de calidad,
+fuentes de evidencia y contextos de uso. Este capítulo convierte esa necesidad
+en una matriz de clasificación que permite interpretar el benchmark y, al mismo
+tiempo, orientar evaluaciones futuras.
+
+La taxonomía se presenta como una **síntesis integradora y operacional**, no
+como una taxonomía completamente nueva en sentido fuerte. Integra distinciones
+ya presentes en la literatura —por ejemplo, evaluación functionally-grounded,
+human-grounded y application-grounded; fidelidad, robustez, plausibilidad,
+complejidad y utilidad— y las reorganiza en una estructura práctica para
+benchmarks comparativos de XAI [@doshi-velez2017; @schwalbe2023;
+@abdulkadir2023; @pawlicki2024; @nauta2023]. Su contribución específica es
+hacer explícita la conexión entre métrica, fuente de evidencia, propiedad de
+calidad, contexto de tarea y claim admisible dentro del protocolo FOM-7.
+
+## Método de construcción de la taxonomía {#sec-taxonomia-metodo}
+
+La construcción siguió una revisión estructurada de alcance narrativo. No se
+presenta como revisión sistemática PRISMA, porque su objetivo no fue estimar
+prevalencias bibliométricas ni agotar todo el universo de publicaciones, sino
+organizar constructos recurrentes que ya estaban documentados en encuestas,
+toolkits, benchmarks y trabajos metodológicos relevantes para la evaluación
+XAI.
+
+El corpus de apoyo combina cuatro tipos de fuentes. Primero, revisiones y
+taxonomías de interpretabilidad y XAI que establecen el vocabulario conceptual
+del campo [@arrieta2019a; @lipton2018; @linardatos2020; @schwalbe2023].
+Segundo, trabajos sobre evaluación y benchmarking que distinguen niveles de
+evidencia, métricas functionally-grounded y reproducibilidad
+[@doshi-velez2017; @hedstrom2023; @agarwal2022; @nauta2023]. Tercero, artículos
+metodológicos sobre explicadores concretos, necesarios para ubicar qué objeto
+produce cada método [@ribeiro2016; @lundberg2017; @ribeiro2018; @mothilal2020].
+Cuarto, revisiones recientes centradas en métricas, robustez y evaluación
+human-centered [@abdulkadir2023; @pawlicki2024; @bhattacharya2024;
+@zhang2024].
+
+Los criterios de inclusión fueron: (i) fuentes con relación directa con
+interpretabilidad, explicabilidad o evaluación XAI; (ii) trabajos que definieran
+o usaran métricas de calidad explicativa; (iii) artículos que permitieran
+clasificar métricas por fuente de evidencia o contexto de uso; y (iv) fuentes
+con metadatos bibliográficos verificados en `references.bib`. Se excluyeron
+fuentes meramente divulgativas, trabajos sin relación con evaluación de
+explicaciones y referencias no verificadas.
+
+La codificación se realizó sobre cuatro dimensiones: objetivo de evaluación,
+fuente de evidencia, propiedad de calidad y contexto de tarea. Cuando una
+métrica admitía múltiples lecturas, se codificó según su uso dominante en la
+literatura y se registró la ambigüedad como riesgo de constructo. Por ejemplo,
+fidelity puede funcionar como acuerdo local entre modelo y sustituto, como
+cambio de predicción ante enmascaramiento o como proxy de faithfulness; la
+taxonomía separa esas lecturas para evitar que una misma palabra sostenga claims
+no equivalentes.
+
+## Motivación y posicionamiento {#sec-taxonomia-motivacion}
+
+El estado del arte en evaluación XAI muestra un patrón claro: los estudios
+proponen métricas de forma proliferante pero sin un marco conceptual integrador
+que permita comparar, seleccionar o acumular evidencia entre ellas
+[@pawlicki2024; @abdulkadir2023; @bhattacharya2024]. La revisión sistemática de
+Pawlicki et al. [-@pawlicki2024] identificó casi noventa métricas distintas en
+la literatura, con solapes conceptuales notorios; un mismo constructo puede
+aparecer bajo nombres distintos, y un mismo nombre puede aplicarse a
+operacionalizaciones diferentes.
+
+Canha et al. [-@canha2025] y Bhattacharya y Verbert [-@bhattacharya2024]
+convergen en señalar la necesidad de distinguir métricas calculadas sin
+participantes humanos de métricas basadas en estudios de usuario. Esta distinción
+es central para la tesis porque los Estudios A y B producen evidencia
+functionally-grounded: cuantifican propiedades computacionales de artefactos
+explicativos, pero no miden directamente utilidad humana, satisfacción,
+calibración de confianza o calidad de decisión.
+
+La taxonomía propuesta organiza el espacio en cuatro ejes ortogonales. Los ejes
+responden a preguntas distintas y complementarias: qué se evalúa, con qué
+evidencia, qué propiedad de calidad se operacionaliza y para qué tarea es
+relevante. La ortogonalidad evita que una métrica se interprete como evaluación
+total de una explicación. Una métrica puede ser válida para medir estabilidad,
+pero débil para inferir utilidad humana; puede ser adecuada para auditoría
+técnica, pero insuficiente para soporte a usuario final.
+
+## Los cuatro ejes de la taxonomía {#sec-taxonomia-ejes}
+
+**Eje 1 — Objetivo de evaluación.** Este eje clasifica la dimensión de la
+explicación que la métrica interroga. Se identifican cinco objetivos primarios:
+
+- *Representatividad local*: en qué medida la explicación captura la función
+  del modelo en la vecindad de la instancia. Las métricas de fidelidad e
+  infidelidad operan en este objetivo [@abdulkadir2023].
+- *Consistencia bajo perturbación*: en qué medida la explicación es estable
+  ante pequeñas variaciones de la instancia de entrada. Las métricas de
+  estabilidad y robustez operan en este objetivo [@schwalbe2023; @pawlicki2024].
+- *Compacidad explicativa*: en qué medida la explicación es concisa y no
+  redundante. Parsimonia, sparsity y complejidad efectiva pertenecen a este
+  objetivo [@pawlicki2024].
+- *Relevancia causal local*: en qué medida actuar sobre las características
+  explicadas produce los efectos predichos por la explicación. La brecha de
+  fidelidad y métricas de eliminación/perturbación top-k operan aquí
+  [@abdulkadir2023; @zheng2025].
+- *Eficiencia operativa*: tiempo y coste computacional de producir la
+  explicación, relevante para despliegues de baja latencia [@canha2025].
+
+**Eje 2 — Fuente de evidencia.** Las métricas también se diferencian por la
+operación que genera la señal de evaluación:
+
+- *Enmascaramiento de características*: se eliminan o reemplazan características
+  del input y se mide el cambio en la salida del modelo. Incluye fidelidad por
+  correlación de importancias, faithfulness gap, ROAR o MoRF
+  [@zheng2025; @abdulkadir2023].
+- *Perturbación del input*: se añade ruido o transformación a la instancia y se
+  mide la similitud entre las explicaciones resultantes. Incluye estabilidad
+  como similitud coseno y estimaciones locales tipo Lipschitz
+  [@pawlicki2024; @canha2025].
+- *Comparación con verdad-terreno*: la explicación se compara con explicaciones
+  de referencia conocidas, disponibles en benchmarks sintéticos o anotaciones
+  especializadas [@pawlicki2024].
+- *Estudio con usuario*: la explicación se evalúa mediante comprensión,
+  confianza, satisfacción, utilidad percibida o desempeño humano
+  [@bhattacharya2024; @arrieta2019a; @zhang2024].
+
+**Eje 3 — Propiedad de calidad.** Siguiendo las sistematizaciones recientes, se
+identifican seis propiedades primarias:
+
+- *Faithfulness / fidelidad*: correspondencia entre la importancia asignada por
+  el explicador y el efecto real sobre la salida del modelo [@pawlicki2024].
+- *Robustness / estabilidad*: consistencia de las explicaciones bajo
+  perturbaciones del input.
+- *Simplicity / parsimonia*: compacidad de la representación explicativa,
+  inversamente relacionada con complejidad [@schwalbe2023].
+- *Completeness*: cobertura de factores relevantes del modelo por la
+  explicación.
+- *Efficiency*: coste computacional de generar la explicación.
+- *Fairness*: equidad en la calidad explicativa entre subgrupos, dimensión
+  transversal identificada en benchmarks como OpenXAI [@agarwal2022].
+
+**Eje 4 — Contexto de tarea.** El contexto determina qué propiedades son
+prioritarias y qué nivel de coste es aceptable [@arrieta2019a;
+@bhattacharya2024]:
+
+- *Auditoría y cumplimiento regulatorio*: requiere alta fidelidad, estabilidad
+  y trazabilidad; el coste computacional puede ser secundario.
+- *Inferencia en tiempo real*: requiere baja latencia; puede aceptar fidelidad
+  moderada si el objetivo es respuesta inmediata.
+- *Soporte a usuario final*: requiere parsimonia, comprensibilidad y
+  comunicación; la métrica automática no basta para demostrar utilidad.
+- *Diagnóstico de modelos y depuración*: requiere fidelidad local, cobertura y
+  sensibilidad a errores del modelo; la eficiencia es secundaria.
+
+## Matriz taxonómica de métricas XAI {#sec-taxonomia-matriz}
+
+La Tabla @tbl-taxonomia-ampliada resume métricas frecuentes y su ubicación
+dentro de la taxonomía. La columna de alcance inferencial indica qué puede
+sostenerse razonablemente cuando la métrica se usa en un benchmark técnico.
+
+| Métrica / constructo | Objetivo | Fuente de evidencia | Propiedad | Contexto típico | Alcance inferencial |
+|:--|:--|:--|:--|:--|:--|
+| Fidelidad local | Representatividad local | Comparación modelo-explicador | Faithfulness proxy | Auditoría, diagnóstico | Acuerdo bajo vecindario definido |
+| Infidelity | Representatividad local | Perturbación/enmascaramiento | Faithfulness proxy | Diagnóstico | Sensibilidad entre explicación y cambio de salida |
+| Faithfulness gap / top-k | Relevancia local | Enmascaramiento top-k | Relevancia causal local | Diagnóstico | Cambio de predicción bajo intervención operacional |
+| Robustez | Consistencia | Perturbación o estrés | Robustness | Alto riesgo | Resistencia bajo condiciones definidas |
+| Estabilidad | Consistencia | Perturbación leve | Stability | Auditoría | Consistencia ante variaciones pequeñas |
+| Sparsity / parsimonia | Compacidad | Conteo de características activas | Simplicity | Interfaces, usuario final | Tamaño cognitivo aproximado |
+| Complejidad | Compacidad | Conteo, longitud, reglas | Simplicity/complejidad | Comunicación | Carga estructural del artefacto |
+| Plausibilidad | Aceptabilidad humana | Estudio con usuario o experto | Plausibility | Soporte a usuario | Coherencia percibida; no prueba verdad |
+| Comprensibilidad | Soporte cognitivo | Estudio con usuario | Comprehensibility | Usuario final | Facilidad de comprensión observada |
+| Satisfacción humana | Experiencia de uso | Encuesta/experimento | Usefulness | Aplicación | Preferencia o utilidad percibida |
+| Validez contrafactual | Cambio de resultado | Evaluación de contrafactual | Validity | Recourse | La alternativa cambia la predicción |
+| Actionability | Factibilidad de cambio | Reglas de dominio/usuario | Actionability | Recourse | El cambio es ejecutable bajo restricciones |
+| Alineamiento causal | Relación explicación-dominio | Modelo causal/experto | Causal alignment | Alto riesgo | Requiere evidencia causal externa |
+| Coste computacional | Eficiencia | Tiempo/recurso | Efficiency | Producción | Factibilidad operacional |
+| Equidad explicativa | Comparación entre subgrupos | Métrica estratificada | Fairness | Auditoría | Diferencias de calidad explicativa por grupo |
+
+: Taxonomía ampliada de métricas y constructos de evaluación XAI. {#tbl-taxonomia-ampliada}
+
+## Mapeo del benchmark a la taxonomía {#sec-taxonomia-benchmark}
+
+Las cinco métricas operacionalizadas en los Estudios A y B se localizan en la
+taxonomía de la siguiente manera:
+
+| Métrica | Eje 1: objetivo | Eje 2: fuente de evidencia | Eje 3: propiedad | Eje 4: contexto prioritario |
+|:--|:--|:--|:--|:--|
+| Fidelidad ($F$) | Representatividad local | Enmascaramiento de características | Faithfulness proxy | Auditoría, diagnóstico |
+| Estabilidad ($S$) | Consistencia bajo perturbación | Perturbación gaussiana del input | Stability / robustness | Auditoría, alto riesgo |
+| Parsimonia ($P$) | Compacidad explicativa | Conteo de atribuciones activas | Simplicity | Usuario final, interfaces |
+| Brecha de fidelidad ($\Delta_k$) | Relevancia causal local | Enmascaramiento top-k | Faithfulness operacional | Diagnóstico, responsabilidad |
+| Coste ($C$) | Eficiencia operativa | Tiempo de pared por instancia | Efficiency | Despliegue en tiempo real |
+
+: Mapeo de las métricas del benchmark a los cuatro ejes de la taxonomía. {#tbl-taxonomia-benchmark}
+
+Este mapeo muestra que el benchmark cubre de forma fuerte la evaluación
+functionally-grounded, pero no cubre directamente los cuadrantes human-centered:
+plausibilidad, satisfacción, comprehensibilidad y utilidad en tarea humana. Esa
+ausencia no es una falla del estudio; es una delimitación. La taxonomía permite
+nombrar el límite con precisión y evita que el resultado estadístico se use para
+claimar propiedades no medidas.
+
+## Contribución teórica de la taxonomía {#sec-taxonomia-contribucion}
+
+El valor de la taxonomía no es meramente descriptivo. Permite derivar dos
+afirmaciones con implicaciones directas para el diseño de futuros benchmarks.
+
+Primero, las propiedades del eje de calidad no son redundantes. La evidencia
+empírica de esta tesis muestra que fidelidad y estabilidad son disociables:
+LIME obtiene una fidelidad media moderada y una estabilidad prácticamente nula.
+Esta disociación habría sido invisible en un benchmark mono-métrico de
+fidelidad, lo que confirma que la evaluación multi-métrica organizada por
+constructos es necesaria para detectar perfiles de riesgo ocultos
+[@bhattacharya2024; @pawlicki2024].
+
+Segundo, la taxonomía convierte las limitaciones en información científica. Al
+mostrar que el benchmark no incluye estudios con usuario ni validación causal
+externa, evita sobreinterpretar los resultados y define qué evidencia sería
+necesaria para ampliar los claims. Así, FOM-7 y la taxonomía se refuerzan
+mutuamente: FOM-7 gobierna el flujo de evidencia; la taxonomía gobierna el
+significado de esa evidencia.
+
+En consecuencia, la taxonomía debe entenderse como una operacionalización
+doctoral del espacio de evaluación XAI. No reemplaza los marcos existentes; los
+integra para que cada métrica usada en la tesis tenga una ubicación conceptual,
+un alcance inferencial y una relación explícita con los resultados empíricos.
