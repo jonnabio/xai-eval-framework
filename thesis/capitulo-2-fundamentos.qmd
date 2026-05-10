@@ -611,11 +611,34 @@ la implementación sistemática de métricas; OpenXAI promueve comparabilidad y
 transparencia de benchmark; las taxonomías de evaluación distinguen niveles de
 evidencia; los estudios human-centered muestran que la utilidad depende de
 usuarios y tareas [@doshi-velez2017; @hedstrom2023; @agarwal2022;
-@zhang2024]. FOM-7 se ubica entre estas piezas como una capa de integracion
-operativa. Su pregunta no es solamente "qué métrica ejecutar", sino como
+@zhang2024]. FOM-7 se ubica entre estas piezas como una capa de integración
+operativa. Su pregunta no es solamente "qué métrica ejecutar", sino cómo
 asegurar que cada resultado métricamente calculado pueda transformarse en una
 afirmación doctoralmente admisible, con artefactos calificados y límites de
 alcance explícitos.
+
+La Tabla @tbl-framework-comparison compara los marcos de evaluación más
+relevantes para la tesis según cuatro dimensiones: la cobertura de métricas
+ofrecida, el soporte a la reproducibilidad experimental, la presencia de un
+protocolo de gobernanza secuencial y el tipo de evaluación predominante.
+
+| Marco / protocolo | Cobertura de métricas | Soporte a reproducibilidad | Protocolo de gobernanza | Tipo de evaluación predominante |
+|:---|:---|:---|:---|:---|
+| **Quantus** [@hedstrom2023] | Alta: 20+ métricas implementadas (fidelidad, robustez, complejidad, localidad, aleatoriedad) | Moderado: versiones fijadas, pero sin protocolo de calificación de artefactos | Ninguno: uso ad-hoc por el investigador | Functionally-grounded; sin capa inferencial integrada |
+| **OpenXAI** [@agarwal2022] | Alta: cubre fidelidad, estabilidad, fairness; incluye ground-truth sintético | Moderado: plataforma y conjuntos estandarizados; sin control de semillas declarativo | Ninguno: comparabilidad por convención, no por protocolo | Functionally-grounded + comparación con ground-truth |
+| **Encuesta Nauta et al.** [@nauta2023] | Muy alta: revisión de 30 propiedades de evaluación; incluye nivel de usuario y tarea | Bajo: documento de revisión, sin implementación de pipeline | Ninguno: marco conceptual, no operativo | Múltiple: application, human y functionally-grounded |
+| **CARLA** [@pawlicki2024] | Moderada: orientada a contrafactuales y recourse; cubre validez, proximidad, diversidad | Moderado: librería de benchmarking, configuraciones documentadas | Ninguno: librería sin protocolo de admisibilidad | Functionally-grounded + counterfactual-specific |
+| **FOM-7** (esta tesis) | Moderada: cinco métricas primarias operacionalizadas; extensible por diseño | Alto: manifiestos YAML, semillas declarativas, artefactos calificados, DOI Zenodo | Sí: siete puertas secuenciales con criterios de admisibilidad y falla explícitos | Functionally-grounded con admisibilidad estadística integrada |
+
+: Comparación de marcos de evaluación XAI según cobertura, reproducibilidad, gobernanza y tipo de evaluación. {#tbl-framework-comparison}
+
+Esta comparación muestra que los marcos existentes cubren bien la dimensión de
+cobertura de métricas (Quantus, OpenXAI) o la dimensión conceptual (Nauta et
+al.), pero ninguno integra un protocolo de gobernanza secuencial que garantice
+que cada paso del ciclo de evidencia —desde la congelación del diseño hasta la
+trazabilidad de afirmaciones— esté regulado por criterios de admisibilidad
+explícitos. Esa integración es precisamente la contribución diferenciadora de
+FOM-7 respecto a los marcos enumerados.
 
 En dominios de alta responsabilidad, como salud, esta distinción se vuelve aún
 más visible: las revisiones de XAI médico muestran que la explicabilidad debe
@@ -644,6 +667,121 @@ calificador. Debe hablar de mejor fidelidad local, mayor estabilidad bajo una
 perturbación definida, menor coste computacional, mayor cobertura de regla o
 mayor satisfacción de un criterio contrafactual. Esta disciplina semántica es
 parte del aporte teórico del protocolo.
+
+### Evaluación human-centered: usuarios, tareas y calidad explicativa
+
+La evaluación human-centered constituye una rama de la XAI que parte de una
+premisa metodológica distinta: la calidad de una explicación no puede medirse
+solo con proxies computacionales, sino que depende de su efecto sobre el
+entendimiento, la confianza, la calibración y la acción de personas concretas
+[@doshi-velez2017; @miller2019]. Esta perspectiva no invalida la evaluación
+functionally-grounded, sino que la complementa al señalar que las métricas
+automáticas responden a preguntas distintas a las que responden los usuarios.
+
+@miller2019 revisa la literatura sobre explicación en ciencias cognitivas y
+sociales e identifica un conjunto de propiedades empíricamente validadas sobre
+qué hace útil una explicación para los humanos. Las explicaciones son
+contrastivas (respondemos a "¿por qué P y no Q?" mejor que a "¿por qué P?"),
+selectivas (preferimos explicaciones que citan pocas causas), sociales (el valor
+de una explicación depende del destinatario y del diálogo) y dependientes del
+contexto de uso. Estas propiedades no están capturadas por métricas como fidelidad
+o estabilidad, que son agnósticas al destinatario. La consecuencia metodológica
+es clara: una tesis que produce evidencia functionally-grounded debe reconocer
+explícitamente que no puede derivar inferencias sobre comprensión humana o
+utilidad en tarea.
+
+El problema de calibración de confianza ha recibido atención creciente
+[@hoffman2023; @kaur2020]. Estudios con científicos de datos muestran que las
+herramientas de XAI pueden inducir exceso de confianza: los usuarios tienden a
+aceptar explicaciones visualmente atractivas sin verificar su validez técnica
+[@kaur2020]. Este fenómeno es especialmente problemático en explicaciones LIME,
+donde el sustituto local puede parecer coherente —una lista de importancias
+lineales— aunque sea inestable o de baja fidelidad. La literatura de evaluación
+human-centered sugiere que medir confianza calibrada (si la confianza del usuario
+en el modelo aumenta cuando la explicación es fiable y disminuye cuando no lo
+es) es un criterio de calidad distinto e irreductible a los criterios
+computacionales [@hoffman2023].
+
+@hase2020 evalúan directamente la relación entre explicaciones y comprensión del
+modelo por parte de usuarios. Sus experimentos muestran que explicaciones con
+mayor fidelidad no siempre producen mejor comprensión: los usuarios pueden
+modelar mejor el comportamiento del clasificador con explicaciones simples y
+ligeramente imprecisas que con atribuciones técnicamente más exactas pero
+cognitivamente costosas. Esta disociación —fidelidad técnica y comprensión
+humana no alineadas— es una de las razones por las que la taxonomía de este
+trabajo distingue el eje de contexto de tarea y señala que el contexto de
+"soporte a usuario final" requiere criterios propios.
+
+@bhattacharya2024 y @zhang2024 contribuyen revisiones sistemáticas de la
+literatura sobre XAI human-centered que convergen en recomendar el uso de
+escalas normalizadas para medir comprehensibilidad entre sistemas, la separación
+entre satisfacción de usuario y utilidad en tarea, y la necesidad de reportar
+características del usuario (experto, no experto, dominio) como covariables de
+los estudios. Estos estudios refuerzan la pertinencia de que la presente tesis
+declare explícitamente sus límites: FOM-7 opera en el dominio de la evaluación
+functionally-grounded y cualquier extensión a evaluación human-centered
+requeriría un protocolo propio con participantes, tareas, escalas y análisis de
+fiabilidad interrater.
+
+La ausencia de evaluación human-centered no es una omisión inadvertida de esta
+tesis; es una delimitación metodológica explícita y defendible. La taxonomía del
+Capítulo 5 localiza con precisión qué cuadrantes del espacio de evaluación XAI
+cubre el benchmark y cuáles no, lo que convierte la limitación en información
+científica estructurada y evita sobreinterpretar los resultados empíricos.
+
+### Reproducibilidad en XAI: crisis, causas y respuestas
+
+La reproducibilidad es una condición de validez científica, no un detalle
+técnico. En aprendizaje automático, la crisis de reproducibilidad ha sido
+documentada tanto en investigación fundamental [@hutson2018] como en evaluación
+XAI [@pawlicki2024; @canha2025]. En el contexto de XAI, la reproducibilidad
+tiene una dimensión adicional: no solo deben reproducirse las predicciones del
+modelo, sino también los artefactos explicativos, las métricas calculadas sobre
+ellos y las conclusiones inferenciales derivadas. Esta cadena de reproducibilidad
+es más frágil que la del modelo base porque introduce más puntos de variación:
+semillas del explicador, estrategias de muestreo, conjuntos de referencia,
+umbrales de reglas, y parámetros de métricas.
+
+La literatura identifica al menos cinco fuentes de irreproducibilidad específicas
+de los benchmarks XAI. Primera, la **sensibilidad a hiperparámetros no declarados**:
+LIME sin declarar `num_samples`, `kernel_width` y `discretize_continuous` puede
+producir explicaciones sustancialmente distintas entre estudios que usan "LIME"
+como etiqueta sin especificar configuración [@burger2023; @slack2020]. Segunda,
+la **dependencia de semillas aleatorias**: los explicadores estocásticos como
+LIME y DiCE producen resultados distintos con semillas distintas, lo que requiere
+múltiples réplicas y análisis de varianza por semilla para distinguir señal de
+ruido [@canha2025]. Tercera, la **mezcla de cohortes de evidencia**: estudios
+que usan los mismos artefactos para calibración y para inferencia confirmativa
+pueden reportar efectos estadísticos inflados, no por fraude sino por falta de
+una arquitectura que separe las dos funciones [@hedstrom2023]. Cuarta, la
+**ausencia de criterios de calificación de artefactos**: un artefacto vacío,
+malformado o de convergencia fallida que no se detecta en la etapa de auditoría
+contamina las tablas métricas con valores espurios [@pawlicki2024]. Quinta, la
+**dependencia del entorno computacional**: versiones de librerías, hardware
+disponible y órdenes de ejecución pueden afectar el timing y, en algunos casos,
+los valores de métricas.
+
+Canha et al. [-@canha2025] proponen un conjunto de principios de reproducibilidad
+para XAI que incluye declaración de semillas, versionado de dependencias,
+separación entre datos de entrenamiento y de evaluación, y publicación de
+artefactos en repositorios con DOI. FOM-7 operacionaliza estos principios en
+siete puertas: la puerta 1 (congelación del protocolo) previene modificaciones
+post-hoc; la puerta 2 (ejecución con semillas declarativas) previene
+sensibilidad no documentada; la puerta 3 (auditoría de integridad) previene
+contaminación por artefactos malformados; y la puerta 6 (perfilado de
+reproducibilidad) cuantifica la varianza residual de semilla. Estas puertas no
+eliminan todas las fuentes de variación, pero las documentan y controlan dentro
+del alcance del diseño experimental.
+
+La importancia de la reproducibilidad se amplifica en el contexto regulatorio.
+El EU AI Act exige que los sistemas de IA de alto riesgo sean auditables, lo que
+implica que las explicaciones usadas en decisiones consecuentes deben poder
+regenerarse con los mismos parámetros y producir el mismo resultado. Un método
+de explicación con alta variabilidad de semilla no puede satisfacer este
+requisito de auditabilidad, independientemente de su fidelidad media. El
+protocolo FOM-7, al incorporar reproducibilidad como criterio explícito de
+admisibilidad (proposición P1), conecta la dimensión técnica del benchmark con
+este requisito normativo emergente.
 
 ## Taxonomias de métricas y brechas de constructo
 
@@ -925,11 +1063,16 @@ que gobierne el paso desde resultados métricos hacia afirmaciones científicas.
 Esa capa es el espacio de contribución de FOM-7 y el puente conceptual hacia el
 diseño experimental desarrollado en el capítulo siguiente.
 
-El resultado de esta revisión es, por tanto, una tesis de transición: la
-literatura no necesita solamente más explicadores ni solamente más métricas,
-sino formas más rigurosas de enlazar explicadores, métricas y afirmaciones. La
-pregunta doctoral deja de ser "qué explicación parece mejor" y se convierte en
-"bajo qué condiciones, con qué evidencia, respecto a qué constructo y con qué
-límites puede sostenerse una afirmación sobre un explicador". FOM-7 nace de esa
-pregunta y prepara el terreno para el diseño experimental del siguiente
-capítulo.
+Este capítulo ha establecido el fundamento conceptual que sostiene la propuesta
+FOM-7. La revisión muestra que la literatura dispone de explicadores maduros,
+toolkits de evaluación funcionales y taxonomías conceptuales que distinguen
+niveles de evidencia —pero ningún protocolo operativo que gobierne el ciclo
+completo desde el diseño experimental hasta la trazabilidad de afirmaciones. Las
+dos subsecciones finales —evaluación human-centered y reproducibilidad en XAI—
+sitúan esa brecha en su contexto más amplio: la reproducibilidad es un requisito
+de validez científica y un requisito normativo emergente; la evaluación centrada
+en el usuario es una dimensión de calidad que el benchmark puede delimitar, pero
+no sustituir. La consecuencia operativa de esta revisión es que el Capítulo 3
+no puede limitarse a describir qué métricas se calculan: debe especificar bajo
+qué condiciones experimentales son admisibles, qué artefactos las sostienen y
+qué inferencias permiten. Esa especificación es el diseño de FOM-7.

@@ -1,0 +1,364 @@
+# Conclusiones
+
+Esta tesis parte de una constatación empírica recurrente en la literatura: el
+campo de la evaluación de métodos XAI carece de marcos operativos que conecten
+la ejecución experimental con la inferencia estadística admisible
+[@pawlicki2024; @abdulkadir2023; @canha2025]. El problema no es la ausencia de
+métricas —se han identificado más de noventa constructos distintos
+[@pawlicki2024]— sino la fragmentación conceptual y la falta de vinculación
+auditable entre diseño experimental, artefactos de resultado y afirmaciones
+inferenciales. Esta tesis responde a ese problema con tres contribuciones
+articuladas: la secuencia operativa FOM-7, un benchmark multi-métrico sobre
+datos tabulares reales y una taxonomía del espacio de métricas de evaluación XAI.
+
+## Respuesta al problema de investigación e hipótesis {#sec-respuesta}
+
+El problema de investigación formulado en el Capítulo 1 pregunta: *¿En qué
+medida difieren los métodos de explicabilidad agnósticos al modelo en un
+conjunto multidimensional de métricas de calidad bajo condiciones de
+benchmarking controladas y reproducibles, y qué criterios técnicos permiten
+orientar su selección en función de los objetivos operativos?*
+
+Los resultados del benchmark responden esta pregunta con precisión
+cuantitativa. Las diferencias entre métodos son grandes, consistentes y
+estadísticamente robustas bajo el protocolo FOM-7. La respuesta directa es:
+**SHAP presenta el mejor perfil de fidelidad y estabilidad en los contextos
+modelo-muestra evaluados; LIME es una alternativa cuando el coste computacional
+es crítico, con la condición de aceptar explicaciones inestables; Anchors y
+DiCE atienden objetivos explicativos cualitativamente distintos que las métricas
+de atribución no capturan plenamente.** Esta orientación es robusta: emerge de
+275 artefactos calificados,
+se replica a través de cinco modelos, cinco semillas y tres tamaños de muestra,
+y es resistente al 8.3% de datos ausentes del diseño.
+
+La resolución formal de las hipótesis y objetivos se sintetiza en la tabla
+siguiente:
+
+| Hipótesis / Proposición | Resultado | Estadístico clave |
+|-------------------------|-----------|-------------------|
+| H1: diferencias en fidelidad | **Confirmada** | $\chi^2_F = 42.12$; margen 439% |
+| H2: diferencias en estabilidad | **Confirmada** | $\chi^2_F = 40.68$; margen 421% |
+| H3: SHAP-LIME difieren en calidad y coste | **Confirmada** | $d_z = +4.82$ (fidelidad); $d_z = +3.00$ (estabilidad); 75/75 positivas |
+| P1: CV < 15% en métricas primarias | **Parcialmente confirmada** | SHAP-fidelidad: CV=0.8%; LIME-estabilidad: CV=86.2% (incoherencia estructural, no ruido del protocolo) |
+| P2: Jueces LLM alcanzan fiabilidad aceptable en evaluación semántica XAI | **No confirmada (resultado negativo)** | ICC(2,1) entre 0.321 y 0.601; ninguna dimensión alcanza umbral $\geq 0.75$ (EXP4, $n=147$, 3 jueces) |
+
+: Síntesis de hipótesis y proposiciones de trabajo. {#tbl-hipotesis}
+
+| Objetivo específico | Estado |
+|---------------------|--------|
+| OE1 — Formalizar protocolo FOM-7 | Completado. El protocolo opera como secuencia de 7 puertas y produjo 275 artefactos calificados con trazabilidad completa. |
+| OE2 — Evaluar SHAP, LIME, Anchors, DiCE sobre 5 modelos | Completado. Benchmark multi-métrico sobre UCI Adult Income con 5 métricas primarias. |
+| OE3 — Cuantificar la relación calidad-coste SHAP-LIME | Completado. Análisis pareado sobre 75 celdas coincidentes con corrección de multiplicidad Holm-Bonferroni. |
+| OE4 — Caracterizar reproducibilidad del protocolo | Completado. CV < 3% para fidelidad; variabilidad del coste inherente a la heterogeneidad del hardware. |
+| OE5 — Construir taxonomía estructurada | Completado. Véase el Capítulo 5. |
+| OE6 — Cuantificar fiabilidad de evaluadores semánticos LLM | Completado (resultado negativo). EXP4: ICC(2,1) entre 0.321 y 0.601 en 7 dimensiones; ninguna alcanza umbral $\geq 0.75$. Véase §sec-exp4-fiabilidad. |
+
+: Cierre de objetivos específicos. {#tbl-objetivos}
+
+## Contribuciones científicas {#sec-contribuciones}
+
+
+### Contribución metodológica: protocolo FOM-7
+
+El protocolo FOM-7 (*Framework Operation Method*, siete puertas) formaliza los
+requisitos de benchmarking reproducible identificados en la literatura
+[@canha2025; @agarwal2022; @hedstrom2023] en una secuencia operativa
+implementable: (1) congelación del protocolo, (2) ejecución por lotes con
+semillas declarativas, (3) auditoría de integridad de artefactos, (4)
+armonización a tablas de análisis, (5) exportación inferencial determinista,
+(6) perfilado de reproducibilidad, (7) reporte con trazabilidad de
+afirmaciones.
+
+La contribución metodológica no es la lista de siete pasos —cada uno de ellos
+es un requisito conocido individualmente— sino su integración en una
+secuencia que garantiza que *ninguna afirmación inferencial puede formularse
+sin que todas las puertas previas estén satisfechas*. Esta propiedad de
+cierre secuencial elimina la categoría de estudios que reportan estadísticos
+significativos sobre artefactos contaminados (datos de calibración mezclados
+con datos confirmatorios, artefactos malformados no detectados, corrección de
+multiplicidad omitida). Es precisamente este tipo de contaminación el que,
+según Pawlicki et al. [-@pawlicki2024], hace que los estudios publicados en
+evaluación XAI sean frecuentemente inconmensurables entre sí.
+
+FOM-7 está disponible como código fuente verificable con rastreabilidad completa
+de artefactos, satisfaciendo los criterios de la iniciativa *Reproducible AI*
+discutidos en [@canha2025].
+
+### Contribución teórica: disociación fidelidad-estabilidad y taxonomía de métricas
+
+La disociación empírica entre fidelidad y estabilidad, documentada con
+tamaños de efecto de magnitud muy grande ($d_z > 2.8$) y sin excepciones en
+75 pares, constituye evidencia cuantitativa de una propiedad que la literatura
+había asumido pero raramente demostrado: las dimensiones de calidad de las
+explicaciones XAI son parcialmente independientes y no sustituibles entre sí
+[@pawlicki2024; @bhattacharya2024; @burger2023]. Específicamente, la inestabilidad de LIME no
+es un artefacto de escenarios extremos sino una propiedad estructural del
+método bajo condiciones controladas. Esta demostración cuantifica el riesgo
+de usar LIME en contextos donde se exija consistencia explicativa (auditoría,
+decisiones de alto riesgo), un riesgo que los trabajos de referencia sobre LIME
+[@ribeiro2016] no cuantifican en benchmarks multi-métricos.
+
+La taxonomía desarrollada en el Capítulo 5 complementa este hallazgo empírico con un marco
+conceptual que organiza el espacio de métricas de evaluación en cuatro ejes
+y que localiza explícitamente las dimensiones no cubiertas por los benchmarks
+funcionally-grounded, incluyendo la comprehensibilidad percibida por el usuario
+[@bhattacharya2024; @arrieta2019a]. La taxonomía integra y extiende los marcos
+previos de Schwalbe y Finzel [-@schwalbe2023], Abdulkadir et al.
+[-@abdulkadir2023] y Canha et al. [-@canha2025], alineándola explícitamente con
+el espacio experimental del benchmark.
+
+### Contribución aplicada: criterios prescriptivos de selección de métodos XAI
+
+Los resultados del benchmark son suficientemente consistentes para formular
+criterios de selección prescriptivos en lugar de simples "recomendaciones
+contextuales":
+
+**SHAP debe seleccionarse** como método primario en cualquier aplicación que
+requiera fidelidad verificable ($\bar{F} \geq 0.80$) o consistencia
+explicativa ($\bar{S} \geq 0.70$). Para modelos basados en árboles (XGBoost,
+Random Forest), TreeSHAP produce estas garantías con un coste de 1–322 ms/
+instancia, lo que hace esta elección también la más eficiente.
+
+**LIME puede seleccionarse** exclusivamente cuando el coste computacional es
+el criterio dominante y la aplicación no requiere comparación de explicaciones
+entre instancias ni auditoría de consistencia. Los 3–9 ms de LIME en
+logreg/xgb/mlp hacen posible la explicación en tiempo real, con la condición
+explícita de que las explicaciones no sean comparadas entre ejecuciones.
+
+**Anchors debe usarse con cautela** para modelos no-lineales (RF, SVM, MLP) en
+aplicaciones de latencia crítica: sus costes de 10,000–70,000 ms/instancia
+son inviables en producción. Su uso es justificable exclusivamente cuando la
+forma semántica IF-THEN es un requisito regulatorio o de usuario y el modelo
+es de complejidad baja (logreg).
+
+**DiCE es la opción de esta comparación orientada a acciones correctivas**
+cuando el objetivo es generar acciones correctivas
+(*algorithmic recourse*) para cambiar la predicción. Sus métricas de fidelidad
+bajas son irrelevantes para este objetivo; sus costes moderados (770–4,500 ms)
+son aceptables en la mayoría de los contextos.
+
+## Posicionamiento respecto a la literatura y separación de contribuciones {#sec-posicionamiento}
+
+Las tres contribuciones de esta tesis deben separarse con precisión de los
+trabajos más cercanos para que su originalidad sea evaluable. La Tabla
+@tbl-contribucion-separacion realiza esta separación de forma explícita.
+
+| Contribución | Trabajos más cercanos | En qué se solapa | En qué difiere esta tesis |
+|:---|:---|:---|:---|
+| **FOM-7 — protocolo de benchmarking reproducible** | OpenXAI [@agarwal2022]; Quantus [@hedstrom2023]; Canha et al. [-@canha2025] | Objetivo de estandarización, uso de métricas functionally-grounded, énfasis en reproducibilidad | FOM-7 añade siete puertas secuenciales con criterios de admisibilidad y falla explícitos; OpenXAI y Quantus no regulan la cadena diseño-artefacto-inferencia-claim; Canha et al. proponen principios sin implementación operativa completa |
+| **Benchmark multi-métrico SHAP-LIME-Anchors-DiCE** | Nauta et al. [-@nauta2023] (revisión de 30 propiedades); Altukhi et al. [-@altukhi2025] (comparación de explicadores); Hedström et al. [-@hedstrom2023] (Quantus evaluation) | Comparación de métodos agnósticos; uso de fidelidad y estabilidad como métricas primarias | Esta tesis usa diseño factorial con cinco modelos, cinco semillas y tres tamaños de muestra; reporta tamaños de efecto ($d_z$) y control de multiplicidad Holm-Bonferroni; cuantifica la disociación fidelidad-estabilidad con evidencia pareada en 75 celdas |
+| **Taxonomía de cuatro ejes** | Schwalbe y Finzel [-@schwalbe2023] (taxonomía de conceptos XAI); Abdulkadir et al. [-@abdulkadir2023] (revisión de métricas); Doshi-Velez y Kim [-@doshi-velez2017] (tres tipos de evaluación) | Uso de dimensiones de calidad (fidelidad, robustez, complejidad); distinción entre evaluación humana y computacional | La taxonomía de esta tesis añade el eje de contexto de tarea como dimensión operativa; la ubica explícitamente en relación con el benchmark empírico; y proporciona el alcance inferencial admisible para cada cuadrante |
+
+: Separación de contribuciones respecto a los trabajos más cercanos. {#tbl-contribucion-separacion}
+
+El posicionamiento más informativo se obtiene comparando la tesis con los dos
+trabajos más cercanos en alcance. OpenXAI [@agarwal2022] proporciona una
+plataforma con ground-truth sintético y permite comparar métodos bajo
+condiciones estandarizadas; sin embargo, no ofrece un protocolo de calificación
+de artefactos, no requiere separación EXP1/EXP2, y no contempla control de
+multiplicidad sobre familias de hipótesis. Nauta et al. [-@nauta2023]
+proporcionan la revisión más amplia disponible de propiedades de evaluación XAI
+(30 propiedades, taxonomía propia), pero su contribución es conceptual: no
+producen un benchmark experimental con análisis inferencial. Esta tesis ocupa
+el espacio entre ambas obras: implementa un pipeline experimental completo con
+gobernanza de protocolo (FOM-7), produce evidencia empírica con análisis
+estadístico riguroso, y contribuye una taxonomía que integra esas propiedades
+con su alcance inferencial operacional.
+
+El aporte de FOM-7 respecto a Canha et al. [-@canha2025] es también
+diferenciable. Canha et al. articulan principios de reproducibilidad para XAI
+(declaración de semillas, versionado, separación de conjuntos), pero sin una
+secuencia de puertas con criterios explícitos de falla y admisibilidad. FOM-7
+convierte esos principios en un protocolo ejecutable cuya puerta 3 (auditoría de
+integridad de artefactos) controla la contaminación antes de la inferencia, y
+cuya puerta 7 (trazabilidad de claims) garantiza que cada afirmación publicada
+puede rastrearse hasta una celda del diseño factorial.
+
+## Limitaciones del estudio {#sec-limitaciones}
+
+Cuatro limitaciones deben tenerse en cuenta al interpretar los resultados y
+generalizar los criterios de selección.
+
+**Universo experimental acotado.** El benchmark opera sobre el conjunto de
+datos UCI Adult Income, que es tabular, binario y de tamaño moderado (48,842
+instancias). La extensión de los hallazgos a datos de imagen, texto o series
+temporales requiere redefinir las operacionalizaciones de fidelidad y
+estabilidad, que en este benchmark son específicas de la estructura de
+características tabulares.
+
+**Operacionalizaciones métricas específicas.** Fidelidad y estabilidad se
+operacionalizan aquí mediante enmascaramiento de características y
+perturbación gaussiana, respectivamente. Otras operacionalizaciones —por
+ejemplo, fidelidad como ROAR [@zheng2025] o estabilidad como estimación de la
+constante de Lipschitz local [@canha2025]— pueden producir ordenamientos
+distintos, especialmente en el rango medio de los métodos (Anchors-DiCE).
+
+**Ausencia de evaluación human-centered.** El benchmark es exclusivamente
+funcionally-grounded. La dimensión de comprehensibilidad percibida, utilidad
+para la toma de decisiones y confianza del usuario [@bhattacharya2024] no está
+cubierta. La taxonomía del Capítulo 5 hace explícita esta limitación y la
+localiza en los ejes de fuente de evidencia y contexto de tarea, pero los
+criterios de selección prescriptivos derivados no incorporan preferencias de
+usuarios finales.
+
+**Configuraciones de referencia.** Los resultados son válidos bajo las
+configuraciones predeterminadas de cada método (número de muestras de LIME,
+número de vecinos de SHAP, parámetros de búsqueda de Anchors). La sensibilidad
+de los resultados a variaciones sistemáticas de hiperparámetros no ha sido
+explorada de forma exhaustiva en este benchmark.
+
+## Fronteras de generalización {#sec-fronteras}
+
+La claridad sobre los límites de las afirmaciones es un requisito de integridad
+científica. La Tabla @tbl-fronteras-generalizacion especifica el alcance
+soportado y el alcance no soportado de los hallazgos principales, junto con la
+evidencia que sería necesaria para extender las conclusiones.
+
+| Afirmación | Soportada para | No soportada para | Validación futura requerida |
+|:---|:---|:---|:---|
+| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §sec-exp3-nota). Pendiente: replicación del contraste SHAP-LIME en datasets adicionales. |
+| La inestabilidad de LIME es estructural (CV=86%, media≈0.014) | UCI Adult Income; estabilidad definida como similitud coseno bajo perturbación gaussiana; configuración `num_samples=1000`, `kernel_width=3.0` | Otras configuraciones de LIME; otras definiciones de estabilidad (distancia Lipschitz local, varianza de pesos) | Análisis de sensibilidad de hiperparámetros con variación sistemática de `num_samples`, `kernel_width` y estrategia de perturbación |
+| FOM-7 produce resultados reproducibles (CV<3% en fidelidad primaria) | Entorno controlado; cinco semillas definidas; modelos congelados en EXP1 | Otros entornos computacionales sin control de recursos; modelos re-entrenados entre ejecuciones; datasets con alta varianza de instancias | Replicación independiente con infraestructura distinta; publicación de resultados en Zenodo con instrucciones verificadas |
+| Los criterios prescriptivos de selección son válidos (Contextos A-D) | Condiciones del benchmark descritas; modelos y métricas definidas | Dominios regulados con restricciones normativas propias; preferencias de usuarios finales; criterios de comprehensibilidad | Estudios human-centered en dominios específicos (crédito, salud, justicia) con usuarios expertos |
+| DiCE es preferible para recourse sobre otros métodos | Objetivo de cambio de predicción; dataset Adult Income | Entornos con restricciones de factibilidad semántica; dominios donde la accionabilidad requiere validación causal | Evaluación de contrafactuales bajo restricciones de dominio reales con expertos |
+| La taxonomía de cuatro ejes organiza el espacio de métricas XAI | Las 15 métricas catalogadas en la matriz taxonómica; literatura revisada en el corpus de construcción | Métricas emergentes no revisadas; métricas específicas de dominio (XAI médica, XAI legal) con propiedades propias | Extensión del corpus de revisión; validación por expertos de dominio |
+
+: Fronteras de generalización de los hallazgos principales. {#tbl-fronteras-generalizacion}
+
+Esta tabla cumple la función de convertir las limitaciones del estudio en
+información científica estructurada. Al especificar qué evidencia sería
+necesaria para extender cada afirmación, la tesis no solo reconoce sus límites
+sino que define la agenda de investigación de la manera más útil para
+investigadores que deseen construir sobre estos resultados.
+
+### Nota sobre la validación externa parcial: EXP3 {#sec-exp3-nota}
+
+Durante el desarrollo de esta línea de investigación se completó una validación
+externa parcial del ordenamiento de fidelidad (EXP3). El estudio comparó SHAP
+frente a Anchors en dos datasets tabulares binarios adicionales: Breast Cancer
+Wisconsin [$n = 569$, 30 características, @dua2019uci] y German Credit [$n =
+1{,}000$, 20 características, @dua2019uci], empleando los modelos Random Forest
+y XGBoost con tres semillas por combinación ($3 \times 2 \times 2 = 12$
+comparaciones pareadas por dataset $\times$ modelo $\times$ semilla). SHAP
+superó a Anchors en fidelidad en las 12 combinaciones, con brechas medias de
+$+0.26$ (German Credit, RF) a $+0.51$ (Breast Cancer, RF). Estos resultados
+replican el ordenamiento observado en EXP2 en espacios de características con
+dimensionalidad y distribución distintas al dataset primario.
+
+El alcance de EXP3 es, no obstante, deliberadamente acotado en tres sentidos.
+Primero, compara SHAP frente a Anchors, no frente a LIME; el contraste central
+de esta tesis (SHAP-LIME) no fue incluido en EXP3. Segundo, instrumenta
+únicamente fidelidad: el protocolo de perturbación gaussiana requerido para la
+métrica de similitud coseno no fue implementado en los datasets adicionales, por
+lo que la estabilidad no se evaluó de forma cross-dataset. Tercero, no cubre los
+modelos SVM y MLP. En consecuencia, el ordenamiento de fidelidad SHAP-Anchors
+dispone ahora de respaldo cross-dataset robusto, pero la afirmación principal de
+esta tesis —SHAP supera a LIME en fidelidad ($d_z = 4.82$) y en estabilidad
+($d_z = 3.00$)— permanece acotada a UCI Adult Income bajo las condiciones del
+diseño EXP2. La extensión de EXP3 con LIME y con las métricas de estabilidad
+constituye la prioridad de validación externa de mayor relevancia para trabajos
+que busquen generalizar los criterios prescriptivos de selección aquí derivados.
+
+## Líneas de investigación futura {#sec-futuro}
+
+Los resultados, las limitaciones y la taxonomía del Capítulo 5 convergen en
+señalar cinco extensiones de investigación con fundamento empírico:
+
+**1. Extensión del benchmark a dominios de imagen y texto.** La arquitectura
+experimental del FOM-7 es portátil. Su aplicación a dominios no tabulares
+requiere redefinir las métricas de fidelidad (sustituyendo enmascaramiento
+de características por pixel-flipping o eliminación de tokens) y estabilidad
+(sustituyendo perturbación gaussiana por transformaciones específicas del
+dominio). El protocolo FOM-7 está diseñado para acomodar esta extensión sin
+cambios en su lógica de puertas.
+
+**2. Validación de evaluadores semánticos e incorporación de evaluación
+human-centered.** EXP4 (§sec-exp4-fiabilidad) estableció que los jueces LLM
+actuales no alcanzan la convergencia inter-juez necesaria bajo rúbricas sin
+especificación de stakeholder. La continuación directa de este resultado son dos
+líneas: primera, rediseñar las rúbricas con los cuatro criterios de formalización
+identificados en §sec-exp4-fiabilidad (especificación de stakeholder, criterio
+de corrección verificable, separación de desiderata secundarios, calibración
+contra expertos humanos) y replicar EXP4 con las rúbricas revisadas para
+determinar si la brecha de fiabilidad se cierra con mayor formalización o
+refleja límites del paradigma LLM-as-a-judge. Segunda: incorporar estudios de
+usuario con expertos de dominio (médicos, analistas de crédito) que evalúen
+comprensión, confianza y utilidad de las explicaciones de SHAP y LIME bajo
+condiciones de tarea real, produciendo la calibración humana necesaria para
+validar cualquier evaluador semántico automático.
+
+**3. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
+benchmark primario opera con configuraciones de referencia. Un diseño factorial
+extendido que varíe sistemáticamente los hiperparámetros clave —número de
+muestras de LIME, estrategia de referencia de SHAP, parámetros de umbral de
+Anchors— permitiría determinar en qué medida los perfiles de calidad obtenidos
+son robustos a la sintonización de cada método.
+
+**4. Extensión cross-dataset del contraste SHAP-LIME y replicación en dominios
+de alto riesgo.** EXP3 replicó el ordenamiento de fidelidad SHAP-Anchors en
+Breast Cancer Wisconsin y German Credit, pero excluyó a LIME y las métricas de
+estabilidad. La extensión prioritaria es, por tanto, incorporar LIME y la métrica
+de similitud coseno al protocolo cross-dataset, de modo que los hallazgos
+centrales de esta tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en
+estabilidad— sean verificables fuera del contexto UCI Adult Income. Una segunda
+dirección es la validación en dominios regulados (crédito, salud, justicia) con
+restricciones normativas explícitas (EU AI Act, GDPR Art. 22), donde la
+elección del método explicador tiene consecuencias legales directas.
+
+**5. Formalización del eje de comprehensibilidad en la taxonomía.** El eje de
+contexto de tarea de la taxonomía incluye el contexto *usuario final* pero no
+dispone de métricas experimentales en este benchmark. La formalización de
+métricas de comprehensibilidad normalizadas —siguiendo la propuesta de
+Bhattacharya y Verbert [-@bhattacharya2024] de escalas normalizadas entre
+sistemas— permitiría cerrar el espacio taxonómico con evidencia empírica
+comparable a la obtenida en los ejes funcionales.
+
+## Síntesis final {#sec-sintesis}
+
+Esta tesis demuestra empíricamente que los métodos de explicabilidad
+post-hoc agnósticos al modelo difieren de forma sustantiva, consistente y
+estadísticamente robusta en múltiples dimensiones de calidad simultáneas. Bajo
+un protocolo reproducible y trazable, con márgenes de seguridad inferencial
+que superan el umbral crítico con amplia holgura, los resultados ofrecen una
+base sólida para la interpretación principal: SHAP es el método más fiable
+cuando fidelidad y estabilidad son requisitos; LIME es la alternativa eficiente
+con inestabilidad estructural documentada; Anchors y DiCE satisfacen objetivos
+explicativos cualitativamente distintos que las métricas de atribución no
+capturan de forma adecuada.
+
+El aporte adicional de esta investigación no es solo el resultado del
+benchmark —que podría derivarse de otros estudios comparativos— sino la
+arquitectura que lo soporta. El protocolo FOM-7 proporciona las condiciones
+bajo las cuales afirmaciones inferenciales sobre métodos XAI pueden
+considerarse científicamente acumulables. La taxonomía de cuatro ejes
+proporciona el mapa conceptual que permite situar cualquier métrica futura en
+relación con las ya evaluadas. Juntos, protocolo y taxonomía constituyen la
+infraestructura metodológica que el campo de evaluación XAI necesita para
+avanzar de la proliferación de métricas hacia la acumulación sistemática de
+evidencia [@pawlicki2024; @canha2025; @bhattacharya2024].
+
+La implicación más amplia de esta tesis trasciende el contexto experimental.
+El hallazgo de que LIME exhibe inestabilidad estructural —no marginal, sino
+sistemática, con CV=86.2% y similitud coseno media de 0.014— es relevante para
+cualquier sistema de apoyo a la decisión que emplee LIME en entornos de
+auditoría, regulación o alto riesgo. El contexto normativo actual (EU AI Act,
+GDPR Art. 22) demanda explicaciones verificables y consistentes; un método que
+produce explicaciones casi ortogonales entre dos ejecuciones de la misma
+instancia no satisface ese requisito. Esta conclusión, sostenida por 75 pares
+de contraste con efecto $d_z = 3.002$, es la afirmación de mayor impacto
+práctico de la tesis: no es un argumento teórico contra LIME, sino una
+cuantificación empírica de su riesgo en el tipo de despliegue que la regulación
+exige evaluar.
+
+El camino hacia la excelencia en evaluación XAI no pasa por proponer una métrica
+adicional ni por declarar un método dominante universal. Pasa por construir la
+infraestructura de gobernanza que permita comparar, acumular y defender
+evidencia sobre métodos de explicación bajo condiciones auditables. FOM-7 y la
+taxonomía asociada son una contribución concreta a esa infraestructura, y este
+benchmark es la primera demostración de su aplicación sobre datos tabulares
+reales bajo control estadístico riguroso. La agenda de investigación señalada
+en la Sección @sec-futuro —extensión a dominios no tabulares, incorporación de
+evaluación human-centered, análisis de sensibilidad de hiperparámetros,
+replicación en dominios regulados— define el camino para transformar esta
+infraestructura en un estándar de facto para la evaluación comparativa de
+métodos XAI.

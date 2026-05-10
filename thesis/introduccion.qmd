@@ -1,0 +1,100 @@
+---
+number-sections: false
+---
+
+# Introducción {.unnumbered}
+
+El rápido avance de la inteligencia artificial (IA), particularmente en el
+ámbito del aprendizaje profundo y los modelos complejos de aprendizaje
+automático, ha transformado radicalmente la capacidad predictiva en dominios tan
+diversos como la atención médica, las finanzas y los sistemas autónomos. Sin
+embargo, esta evolución tecnológica ha traído consigo una problemática
+fundamental: la naturaleza de "caja negra" de estos modelos, la cual plantea
+serias preocupaciones respecto a la confianza, la transparencia y la
+responsabilidad algorítmica. En este escenario, la interpretabilidad emerge no
+solo como un desafío técnico de primer orden, sino como un requisito ético y
+legal indispensable para el despliegue de soluciones en el mundo real. Para
+abordar esta opacidad, los métodos de explicación agnósticos al modelo —tales
+como LIME [@ribeiro2016], SHAP [@lundberg2017], Anchors [@ribeiro2018] y DiCE
+[@mothilal2020]— han ganado protagonismo al intentar proporcionar explicaciones
+*post-hoc* sin necesidad de alterar los componentes internos del modelo,
+facilitando así la detección de sesgos y la validación de resultados en
+aplicaciones críticas.
+
+La urgencia de esta investigación se amplifica por un contexto regulatorio en
+rápida evolución. El Reglamento General de Protección de Datos de la Unión
+Europea (GDPR) establece en su Artículo 22 el derecho de las personas a obtener
+explicaciones significativas sobre decisiones automatizadas que les afecten
+[@voigt2017]. La Ley de Inteligencia Artificial de la Unión Europea (EU AI Act,
+2024) va más lejos: clasifica ciertos sistemas de IA como de alto riesgo y exige
+requisitos de transparencia, trazabilidad y supervisión humana que dependen
+directamente de la disponibilidad de métodos de explicación verificables. En el
+ámbito financiero, la Directiva de Crédito Hipotecario y la regulación bancaria
+(Basilea IV) demandan modelos auditables. En el sector sanitario, la FDA
+norteamericana y la EMA europea han publicado marcos de gobernanza que vinculan
+aprobación de sistemas de IA con explicabilidad comprobable. Esta confluencia
+normativa convierte la evaluación rigurosa de métodos de explicación en una
+necesidad operativa, no solo académica.
+
+A pesar de su potencial, los enfoques actuales de explicabilidad
+adolecen de limitaciones significativas que restringen su aplicabilidad
+práctica. En primer lugar, la comunidad científica enfrenta lo que se ha
+denominado una "crisis de evaluación", caracterizada por una proliferación de
+métricas inconexas que a menudo generan resultados duplicados o contradictorios
+[@pawlicki2024]. Revisiones sistemáticas recientes [@abdulkadir2023] revelan que,
+a pesar del auge de la disciplina, solo una pequeña fracción del corpus de
+investigación —aproximadamente el 14%— incorpora evaluaciones cuantitativas
+rigurosas. Esta carencia de estándares se ve agravada por la falta de consenso
+formal sobre las propiedades fundamentales de una "buena" explicación, lo que
+dificulta la comparación objetiva entre métodos [@canha2025; @nizam2023]. La
+ausencia de criterios consensuados provoca que, a menudo, se ignore la "validez
+semántica" de la explicación, priorizando métricas matemáticas proxy que no
+siempre logran capturar el juicio comprensible para un experto humano.
+
+A los desafíos de estandarización se suman debilidades técnicas críticas en los
+marcos de evaluación vigentes. Estudios recientes han identificado que muchas de
+las métricas de fidelidad tradicionales sufren del problema de datos
+"fuera de la distribución" (Out-of-Distribution o OOD), donde la eliminación o
+perturbación de características genera instancias que el modelo original nunca
+encontró durante su entrenamiento, invalidando así sus respuestas y las
+puntuaciones de fiabilidad resultantes [@zheng2025]. Si bien han surgido
+ecosistemas de benchmarking integrales como Quantus [@hedstrom2023] y OpenXAI
+[@agarwal2022] para intentar unificar el campo, todavía persiste una brecha
+significativa: ninguno de estos marcos ofrece un protocolo operativo completo
+que conecte diseño experimental, calificación de artefactos, admisibilidad
+estadística, reproducibilidad y trazabilidad de afirmaciones en una secuencia
+auditable [@pawlicki2024; @canha2025]. Esa brecha es el problema central de esta
+tesis.
+
+Esta investigación responde a la brecha con tres contribuciones articuladas.
+La **contribución metodológica** es el protocolo FOM-7 (*Framework Operation
+Method*, siete puertas), una secuencia operativa reproducible que gobierna el
+ciclo completo de evidencia en evaluación XAI comparativa: desde la congelación
+del protocolo experimental hasta la trazabilidad de afirmaciones inferenciales.
+La **contribución empírica** es un benchmark multi-métrico sobre datos tabulares
+reales que compara SHAP, LIME, Anchors y DiCE bajo cinco modelos, cinco
+semillas y tres tamaños de muestra, produciendo 275 artefactos calificados con
+análisis estadístico mediante pruebas no paramétricas con control de
+multiplicidad. La **contribución teórica** es una taxonomía estructurada de
+cuatro ejes que organiza el espacio de métricas de evaluación XAI,
+localiza explícitamente las dimensiones cubiertas y no cubiertas por el
+benchmark, y vincula cada métrica a su alcance inferencial admisible. Juntas,
+estas tres contribuciones avanzan el campo desde la proliferación de métricas
+hacia la acumulación sistemática de evidencia defendible.
+
+Para alcanzar estos objetivos, el documento se estructura en seis capítulos
+y dos elementos complementarios. Tras esta introducción, el **Capítulo 1**
+formaliza el problema de investigación, los objetivos específicos y las
+hipótesis estadísticas. El **Capítulo 2** establece el marco teórico:
+desarrolla el desarrollo histórico de la XAI, las distinciones conceptuales
+fundamentales, los cuatro métodos evaluados y los marcos de evaluación
+existentes, cerrando con la síntesis crítica que justifica FOM-7. El
+**Capítulo 3** describe el diseño experimental: el protocolo FOM-7, el conjunto
+de datos, el diseño factorial, la operacionalización de métricas, el análisis de
+cobertura y el plan de inferencia estadística. El **Capítulo 4** expone y
+discute los resultados empíricos de los Estudios A y B, con plena trazabilidad
+de afirmaciones. El **Capítulo 5** desarrolla la taxonomía de métricas XAI como
+contribución teórica autónoma. El **Capítulo 6** sintetiza las conclusiones,
+separa las contribuciones de la literatura previa, reconoce las limitaciones y
+propone líneas de investigación futura. Los apéndices documentan los datos,
+modelos, configuraciones, salidas estadísticas y entorno de reproducción.

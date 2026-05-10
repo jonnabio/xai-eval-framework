@@ -1,5 +1,47 @@
 # Taxonomía de métricas y síntesis conceptual
 
+El Capítulo 4 produjo un resultado que no era predecible a priori y que tiene
+consecuencias metodológicas directas sobre cómo debe organizarse el espacio de
+métricas XAI. LIME obtuvo una fidelidad media de 0.560 —por encima del umbral
+de uso en producción para muchos equipos de datos— y al mismo tiempo una
+estabilidad estructural prácticamente nula: similitud coseno media de 0.014 y
+coeficiente de variación del 86.2% entre explicaciones generadas para la misma
+instancia con distintas semillas. SHAP, en cambio, mantuvo fidelidad de 0.810
+y estabilidad de 0.724, con d~z~=4.82 y d~z~=3.00 respectivamente. La
+correlación empírica entre fidelidad y estabilidad —visible en la
+@fig-correlacion-metricas— es baja, lo que significa que ambas dimensiones
+aportan información no redundante sobre la calidad de una explicación. Un
+benchmark que solo reportara fidelidad habría concluido que LIME es aceptable
+para uso en auditoría. Un benchmark que solo reportara estabilidad habría
+eliminado LIME sin valorar su ventaja en coste y parsimonia. Ningún escalar
+único captura el perfil completo.
+
+Esta disociación no es un artefacto del diseño. La parsimonia media de DiCE
+(0.085 características activas) y su fidelidad baja (0.412) responden a una
+lógica distinta a la de SHAP o LIME: DiCE minimiza la perturbación del
+contrafactual, no la aproximación local al modelo. Que DiCE tenga perfil óptimo
+en parsimonia y eficiencia, pero deficiente en fidelidad técnica, indica que los
+ejes de calidad no colapsan sobre un único factor latente. La @fig-radar-metodos
+hace visible esta estructura: ningún método domina simultáneamente en todas las
+dimensiones, y los cuellos de botella difieren por método. Este patrón solo es
+observable si las métricas están conceptualmente separadas antes de la medición,
+no consolidadas post-hoc en un índice compuesto.
+
+La pregunta que emerge de esos resultados no es cuál método gana, sino *qué
+dimensiones de calidad son genuinamente ortogonales, cuál fuente de evidencia
+mide cada una, y para qué contexto de tarea resulta relevante cada perfil*. Sin
+un marco conceptual que responda esas tres preguntas de forma articulada, el
+benchmark produce números correctos pero no produce orientación. Un evaluador
+que conozca solo los rangos de fidelidad (SHAP: 0.810, LIME: 0.560,
+Anchors: 0.514, DiCE: 0.412) no sabe si una diferencia de 0.05 puntos en
+parsimonia es sustantiva o trivial, ni si la brecha de fidelidad justifica el
+coste adicional de SHAP en un sistema de tiempo real. La taxonomía de este
+capítulo es, por tanto, una respuesta necesaria a lo que el benchmark demostró
+empíricamente: que el espacio de métricas es multidimensional, que las
+dimensiones son operativamente independientes, y que la selección de método
+requiere un lenguaje conceptual que articule cuál dimensión importa según el
+contexto de uso.
+
 Este capítulo desarrolla el Estudio C de la tesis: una taxonomía estructurada
 del espacio de métricas de evaluación XAI. Su función es dar peso conceptual
 propio a la tercera contribución doctoral. Los capítulos anteriores mostraron
@@ -25,19 +67,32 @@ presenta como revisión sistemática PRISMA, porque su objetivo no fue estimar
 prevalencias bibliométricas ni agotar todo el universo de publicaciones, sino
 organizar constructos recurrentes que ya estaban documentados en encuestas,
 toolkits, benchmarks y trabajos metodológicos relevantes para la evaluación
-XAI.
+XAI. La taxonomía resultante se clasifica como una **operacionalización
+doctoral integradora**: integra y reorganiza distinciones ya presentes en la
+literatura en una estructura práctica, y añade el eje de contexto de tarea como
+dimensión operativa no explícita en los marcos previos. No es una taxonomía
+completamente nueva en sentido fuerte (no propone dimensiones sin antecedentes
+en la literatura) ni una mera síntesis descriptiva (la estructura de cuatro ejes
+y su mapeo al benchmark es una contribución propia).
 
-El corpus de apoyo combina cuatro tipos de fuentes. Primero, revisiones y
+El corpus de apoyo combina cuatro tipos de fuentes, que suman **47 referencias
+directas** a la construcción de la taxonomía. Primero, revisiones y
 taxonomías de interpretabilidad y XAI que establecen el vocabulario conceptual
-del campo [@arrieta2019a; @lipton2018; @linardatos2020; @schwalbe2023].
-Segundo, trabajos sobre evaluación y benchmarking que distinguen niveles de
-evidencia, métricas functionally-grounded y reproducibilidad
-[@doshi-velez2017; @hedstrom2023; @agarwal2022; @nauta2023]. Tercero, artículos
-metodológicos sobre explicadores concretos, necesarios para ubicar qué objeto
-produce cada método [@ribeiro2016; @lundberg2017; @ribeiro2018; @mothilal2020].
-Cuarto, revisiones recientes centradas en métricas, robustez y evaluación
-human-centered [@abdulkadir2023; @pawlicki2024; @bhattacharya2024;
-@zhang2024].
+del campo: 11 trabajos, incluyendo las revisiones fundacionales de
+@arrieta2019a, @lipton2018, @linardatos2020 y la taxonomía sistemática de
+@schwalbe2023. Segundo, trabajos sobre evaluación y benchmarking que distinguen
+niveles de evidencia, métricas functionally-grounded y reproducibilidad:
+9 trabajos, incluyendo la taxonomía de niveles de @doshi-velez2017, el toolkit
+Quantus [@hedstrom2023], la plataforma OpenXAI [@agarwal2022] y la revisión de
+propiedades de evaluación de @nauta2023. Tercero, artículos metodológicos sobre
+los cuatro explicadores evaluados, necesarios para ubicar qué objeto produce
+cada método y qué métricas le son adecuadas: 8 trabajos
+[@ribeiro2016; @lundberg2017; @ribeiro2018; @mothilal2020; @guidotti2018;
+@carvalho2019; @karimi2022; @poyiadzi2020]. Cuarto, revisiones recientes
+centradas en métricas, robustez, reproducibilidad y evaluación human-centered:
+19 trabajos, incluyendo las revisiones de métricas de @abdulkadir2023 y
+@pawlicki2024, el estudio de comprehensibilidad de @bhattacharya2024 y trabajos
+sobre utilidad y confianza [@zhang2024; @miller2019; @hoffman2023; @mohseni2021].
 
 Los criterios de inclusión fueron: (i) fuentes con relación directa con
 interpretabilidad, explicabilidad o evaluación XAI; (ii) trabajos que definieran
@@ -51,10 +106,13 @@ La codificación se realizó sobre cuatro dimensiones: objetivo de evaluación,
 fuente de evidencia, propiedad de calidad y contexto de tarea. Cuando una
 métrica admitía múltiples lecturas, se codificó según su uso dominante en la
 literatura y se registró la ambigüedad como riesgo de constructo. Por ejemplo,
-fidelity puede funcionar como acuerdo local entre modelo y sustituto, como
+*fidelity* puede funcionar como acuerdo local entre modelo y sustituto, como
 cambio de predicción ante enmascaramiento o como proxy de faithfulness; la
 taxonomía separa esas lecturas para evitar que una misma palabra sostenga claims
-no equivalentes.
+no equivalentes. Los 15 constructos métricos de la Tabla @tbl-taxonomia-ampliada
+son el resultado de consolidar y desambiguar los constructos identificados en el
+corpus de 47 referencias; se reportan como una selección representativa, no como
+un catálogo exhaustivo.
 
 ## Motivación y posicionamiento {#sec-taxonomia-motivacion}
 
@@ -222,3 +280,69 @@ En consecuencia, la taxonomía debe entenderse como una operacionalización
 doctoral del espacio de evaluación XAI. No reemplaza los marcos existentes; los
 integra para que cada métrica usada en la tesis tenga una ubicación conceptual,
 un alcance inferencial y una relación explícita con los resultados empíricos.
+
+## Estudio de fiabilidad de evaluadores semánticos (EXP4) {#sec-exp4-fiabilidad}
+
+La Brecha 3 identifica que la evaluación semántica crece más rápido que su base
+de validación empírica. EXP4 (diseñado en §sec-exp4-diseno, Capítulo 3)
+cuantifica directamente esa brecha: mide si los jueces LLM actuales alcanzan la
+convergencia inter-juez necesaria para operar como evidencia confirmativa.
+
+**Resultados.** La Tabla @tbl-exp4-icc reporta ICC(2,1) y $\alpha$ de
+Krippendorff por dimensión para los tres jueces LLM sobre $n = 147$ pares.
+Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
+[@koo2016].
+
+| Dimensión | ICC(2,1) | Krippendorff $\alpha$ |
+|:----------|:--------:|:---------------------:|
+| Claridad | 0.321 | 0.278 |
+| Concisión | 0.453 | 0.409 |
+| Accionabilidad | 0.400 | 0.362 |
+| Utilidad para auditoría | 0.376 | 0.340 |
+| Completitud | 0.585 | 0.566 |
+| Plausibilidad semántica | 0.601 | 0.573 |
+| Calidad global | 0.431 | 0.394 |
+
+: Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4;
+$n = 147$ pares, 3 jueces LLM). ICC(2,1): modelo bidireccional de efectos
+aleatorios, concordancia absoluta. Ninguna dimensión alcanza el umbral
+aceptable $\geq 0.75$ [@koo2016]. {#tbl-exp4-icc}
+
+Las dimensiones con mayor consistencia relativa son Completitud
+($\alpha = 0.566$) y Plausibilidad Semántica ($\alpha = 0.573$); las de
+menor consistencia son Claridad ($\alpha = 0.278$) y Utilidad para auditoría
+($\alpha = 0.340$). Los valores ICC(2,1) entre 0.321 y 0.601 se clasifican
+como fiabilidad *poor* a *moderate* según @koo2016, situándose en todos los
+casos por debajo de la categoría *good*.
+
+**Interpretación.** La diferencia entre dimensiones de alta y baja consistencia
+es interpretable: Completitud y Plausibilidad Semántica tienen referentes
+relativamente objetivos (¿cubre los factores relevantes?, ¿es coherente con el
+dominio?), mientras que Claridad y Utilidad para auditoría dependen del perfil
+del destinatario y el contexto de uso, que la rúbrica no especificó. Esto
+señala un déficit de formalización: el juez no tiene acceso al stakeholder ni
+al contexto de tarea al calificar, lo que introduce varianza inter-juez evitable.
+
+**Consecuencias para el diseño de evaluación semántica.** EXP4 confirma
+cuantitativamente la Brecha 3: los jueces LLM actuales, bajo rúbricas sin
+especificación de stakeholder ni criterio de corrección explícito, no alcanzan
+la convergencia necesaria para afirmaciones confirmativas. Esto no clausura la
+evaluación semántica; establece los requisitos que las rúbricas deben satisfacer:
+(i) especificación de la necesidad informativa del stakeholder, (ii) definición
+de un criterio de corrección o referencia verificable, (iii) separación de
+desiderata secundarios de la dimensión central, y (iv) calibración contra juicios
+humanos expertos antes del uso confirmativo. Estos requisitos son la
+operacionalización doctoral de la Brecha 3 y constituyen la agenda de
+investigación directamente derivada de esta taxonomía.
+
+Este capítulo ha establecido la tercera contribución doctoral: una taxonomía de
+cuatro ejes que organiza el espacio de métricas XAI, localiza las cinco métricas
+del benchmark en su cuadrante correspondiente y hace explícito el alcance
+inferencial de cada una. La consecuencia teórica de esta revisión es que la
+evaluación XAI no puede reducirse a un único criterio ni generalizarse a
+dominios de usuario sin evidencia adicional: cada métrica responde a una
+pregunta específica sobre un tipo de objeto explicativo en un contexto de uso
+determinado. El Capítulo 6 cierra la tesis sintetizando las tres contribuciones,
+posicionándolas respecto a la literatura más cercana, reconociendo las
+limitaciones con precisión y trazando las líneas de investigación futura que
+emergen directamente de los hallazgos y las fronteras de la taxonomía.

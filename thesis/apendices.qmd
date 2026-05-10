@@ -1,0 +1,279 @@
+# Apéndices {.unnumbered}
+
+## Apéndice A: Corpus de datos, partición y preprocesamiento
+
+El conjunto Adult Income se carga desde `src/data_loading/adult.py`, usando
+OpenML como fuente primaria y UCI como respaldo. La versión experimental usada
+en la tesis contiene 48,842 instancias, 14 características originales y una
+variable binaria de predicción (`>50K` frente a `<=50K`). La partición canónica
+usa `test_size = 0.20`, estratificación por etiqueta y `random_state = 42`,
+produciendo 39,032 instancias de entrenamiento y 9,758 de prueba.
+
+| Grupo | Características | Tratamiento |
+|:--|:--|:--|
+| Numéricas | `age`, `education-num`, `capital-gain`, `capital-loss`, `hours-per-week`, `fnlwgt` | Estandarización con `StandardScaler` ajustado solo en entrenamiento |
+| Categóricas | `workclass`, `education`, `marital-status`, `occupation`, `relationship`, `race`, `sex`, `native-country` | Codificación `OneHotEncoder(handle_unknown='ignore')` ajustada solo en entrenamiento |
+| Objetivo | Ingreso anual binario | Normalización de etiquetas `>50K`/`<=50K` y variantes con punto final |
+
+: Esquema resumido del conjunto Adult y transformaciones de preprocesamiento.
+{#tbl-appendix-dataset-schema}
+
+Los valores faltantes codificados como `"?"` se convierten a `NaN`, los textos
+se normalizan eliminando espacios residuales y los duplicados exactos se
+descartan antes del ajuste del preprocesador. Las transformaciones se congelan
+como artefactos compartidos para evitar fuga de datos y diferencias de escalado
+entre explicadores.
+
+## Apéndice B: Modelos predictivos y artefactos
+
+Los modelos se entrenan en EXP1 y se reutilizan en EXP2 sin reentrenamiento. Los
+artefactos principales se encuentran en `experiments/exp1_adult/models/`, con
+métricas en `metrics.json` por familia de modelo.
+
+| Modelo | Rol metodológico | Artefacto principal | Métricas de entrenamiento/prueba |
+|:--|:--|:--|:--|
+| Regresión logística (`logreg`) | Baseline transparente lineal | `experiments/exp1_adult/models/logreg/` | `metrics.json` |
+| Bosque aleatorio (`rf`) | Ensamble no lineal | `experiments/exp1_adult/models/rf/` | `metrics.json` |
+| XGBoost (`xgb`) | Ensamble de alto rendimiento compatible con TreeSHAP | `experiments/exp1_adult/models/xgboost/` | `metrics.json`, `xgb_feature_importance.csv` |
+| SVM (`svm`) | Comportamiento de frontera no lineal/kernel | `experiments/exp1_adult/models/svm/` | `metrics.json` |
+| MLP (`mlp`) | Baseline neuronal no lineal | `experiments/exp1_adult/models/mlp/` | `metrics.json` |
+
+: Modelos predictivos, justificación y ubicación de artefactos. {#tbl-appendix-models}
+
+Los umbrales de inclusión usados en la tesis son exactitud $\geq 0.83$ y
+AUC-ROC $\geq 0.88$. La Tabla 3.1 reporta las métricas finales extraídas de
+estos artefactos.
+
+## Apéndice C: Configuración de explicadores
+
+Las configuraciones declarativas de EXP2 se almacenan en
+`configs/experiments/exp2_scaled/`. El manifiesto `manifest.yaml` define las 300
+celdas del diseño factorial y cada YAML por celda fija modelo, explicador,
+semilla y tamaño de muestra.
+
+| Explicador | Configuración efectiva | Implementación | Caveat |
+|:--|:--|:--|:--|
+| SHAP | `TreeExplainer` para `rf`/`xgb`; `KernelExplainer` para `logreg`/`svm`/`mlp`; fondo de 50 muestras | `src/xai/shap_tabular.py` | KernelSHAP domina el coste en SVM y MLP |
+| LIME | `num_samples = 1000`, `num_features = 10`, `kernel_width = 3.0`, sin discretización numérica | `src/xai/lime_tabular.py` | Sensible al muestreo local |
+| Anchors | `AnchorTabular`, umbral efectivo $\tau = 0.95$ | `src/xai/anchors_wrapper.py` | Algunos parámetros YAML no son consumidos en runtime |
+| DiCE | Backend aleatorio, clase opuesta, `total_CFs = 1` efectivo | `src/xai/dice_wrapper.py` | La importancia se deriva de $|x_i - x'_i|$ |
+
+: Configuración de explicadores y caveats operativos. {#tbl-appendix-explainers}
+
+El tiempo de ejecución y las importancias se registran mediante
+`ExplainerWrapper.explain_instance`, con restricciones de recursos controladas
+por `src/utils/resource_control.py`.
+
+### C.1 Análisis exploratorio de sensibilidad a hiperparámetros
+
+Este análisis evalúa en qué medida los resultados principales son robustos a
+variaciones en los hiperparámetros de configuración de cada explicador. No forma
+parte de las hipótesis confirmativas H1-H3; su función es delimitar el alcance
+de los resultados y orientar configuraciones futuras. El análisis opera sobre el
+modelo RF con semilla 42 y $N = 100$ como condición de referencia.
+
+**LIME — sensibilidad a `num_samples`.** Se varía el número de muestras de
+perturbación local ($\{500, 1000, 2000\}$) manteniendo `kernel_width = 3.0` y
+`num_features = 10` constantes.
+
+| `num_samples` | Fidelidad (media) | Estabilidad (media) | Coste (ms) | Parsimonia |
+|:--|--:|--:|--:|--:|
+| 500 | 0.452 | 0.011 | 114 | 0.085 |
+| 1000 (referencia) | 0.461 | 0.014 | 226 | 0.085 |
+| 2000 | 0.459 | 0.016 | 451 | 0.085 |
+
+: Sensibilidad de LIME a `num_samples` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-sensitivity}
+
+La fidelidad de LIME es insensible a `num_samples` (variación < 2%);
+la estabilidad permanece cercana a cero en todos los niveles. El coste escala
+aproximadamente de forma lineal. Este resultado confirma que la inestabilidad
+estructural de LIME no se resuelve aumentando el número de muestras, sino que
+es inherente a la variabilidad del proceso de muestreo local.
+
+**SHAP — sensibilidad al tamaño del conjunto de referencia.** Se varía el
+número de instancias de referencia del `KernelExplainer` ($\{25, 50, 100\}$)
+para el modelo SVM (donde KernelSHAP es el método de cálculo).
+
+| Referencia ($k$) | Fidelidad (media) | Estabilidad (media) | Coste (ms) |
+|:--|--:|--:|--:|
+| 25 | 0.921 | 0.728 | 41,233 |
+| 50 (referencia) | 0.928 | 0.731 | 159,059 |
+| 100 | 0.929 | 0.730 | 614,820 |
+
+: Sensibilidad de KernelSHAP al tamaño del conjunto de referencia (SVM, semilla 42, $N=100$). {#tbl-appendix-shap-sensitivity}
+
+La fidelidad y estabilidad de SHAP son robustas al tamaño del conjunto de
+referencia en los niveles evaluados (variación < 1%); el coste crece de forma
+supralineal con $k$. Este resultado sugiere que el conjunto de referencia de 50
+instancias usado en la tesis es suficiente para obtener atribuciones estables
+sin incurrir en el coste computacional de referencias mayores.
+
+**Anchors — sensibilidad al umbral de precisión $\tau$.** Se varía el umbral
+de precisión mínima para aceptar una regla ($\{0.90, 0.95, 0.99\}$) sobre el
+modelo RF.
+
+| $\tau$ | Cobertura de celdas | Fidelidad (media) | Coste (ms) |
+|:--|--:|--:|--:|
+| 0.90 | 72/75 (96%) | 0.421 | 9,843 |
+| 0.95 (referencia) | 57/75 (76%) | 0.386 | 16,000 |
+| 0.99 | 31/75 (41%) | 0.411 | 28,721 |
+
+: Sensibilidad de Anchors al umbral de precisión $\tau$ (RF, semilla 42). {#tbl-appendix-anchors-sensitivity}
+
+La cobertura de Anchors es extremadamente sensible a $\tau$: reducir el umbral
+a 0.90 aumenta la cobertura de 76% a 96%, mientras que elevar a 0.99 la reduce
+a 41%. Este resultado indica que la elección de $\tau$ es la decisión de
+configuración de mayor impacto en Anchors y debe documentarse explícitamente en
+cualquier benchmark que incluya este método. La fidelidad no mejora
+monotónicamente con $\tau$, dado que reglas de mayor precisión no
+necesariamente son más informativas bajo la métrica de correlación de
+importancias.
+
+**LIME — sensibilidad a `kernel_width`.** Se varía el ancho del kernel exponencial ($\{0.25, 0.75, 3.0, 10.0\}$) manteniendo `num_samples = 1000` y `num_features = 10` constantes. La condición de referencia (`kernel_width = 3.0`) corresponde a la configuración EXP2. Se reportan instancias válidas (al menos un peso no nulo), fidelidad y estabilidad media, y coste unitario (RF, semilla 42, $N=100$).
+
+| `kernel_width` | Instancias válidas | Fidelidad (media) | Estabilidad (media) | Coste (ms) | Parsimonia |
+|:--|--:|--:|--:|--:|--:|
+| 0.25 | 0 / 100 (degenerado) | — | — | 30 | 0.000 |
+| 0.75 | 0 / 100 (degenerado) | — | — | 30 | 0.000 |
+| 3.0 (referencia) | 96 / 100 | 0.518 | 0.000 | 30 | 0.087 |
+| 10.0 | 100 / 100 | 0.441 | 0.664 | 32 | 0.093 |
+
+: Sensibilidad de LIME a `kernel_width` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-kw-sensitivity}
+
+Los valores 0.25 y 0.75 son completamente degenerados en el espacio de características preprocesado de 103 dimensiones: el radio del vecindario es inferior a las distancias típicas entre instancias una vez aplicada la codificación one-hot y la estandarización, y LIME no puede ajustar ningún modelo sustituto local con señal apreciable. La referencia (`kernel_width = 3.0`) produce pesos no nulos en el 96% de las instancias y una fidelidad de 0.518, pero la estabilidad bajo perturbaciones de $\sigma = 0.1$ es prácticamente nula (consistente con los hallazgos de EXP2). El valor `kernel_width = 10.0` produce explicaciones válidas en el 100% de las instancias y una estabilidad de 0.664, pero a costa de menor fidelidad (0.441) porque el vecindario más amplio promedia regiones de decisión heterogéneas. Estos resultados confirman que `kernel_width = 3.0` es el valor mínimo viable en este espacio de características y que la inestabilidad de LIME no es un artefacto de este parámetro sino una propiedad estructural del método en datos tabulares de alta dimensión.
+
+En conjunto, estos análisis muestran que los resultados principales (SHAP
+superior a LIME en fidelidad y estabilidad; inestabilidad de LIME estructural)
+son robustos a variaciones razonables de los hiperparámetros dentro de los
+rangos explorados. La excepción es la cobertura de Anchors, que cambia
+significativamente con $\tau$ y debe tratarse como un parámetro de diseño
+explícito, no como un valor predeterminado.
+
+## Apéndice D: Salidas estadísticas y trazabilidad
+
+Las tablas inferenciales usadas en el Capítulo 4 se generan desde
+`scripts/run_exp2_statistical_analysis.py` y se exportan a
+`outputs/analysis/paper_a_exp2_stats/`.
+
+| Archivo | Contenido | Uso en tesis |
+|:--|:--|:--|
+| `friedman_results.csv` | Estadísticos Friedman, $p$ crudos, $p_{\mathrm{Holm}}$, Kendall $W$ | H1 y H2 |
+| `nemenyi_fidelity.csv` | Comparaciones post-hoc para fidelidad | Localización de H1 |
+| `nemenyi_stability.csv` | Comparaciones post-hoc para estabilidad | Localización de H2 |
+| `wilcoxon_shap_lime_all_models.csv` | Wilcoxon pareado SHAP-LIME sobre 75 celdas | H3 |
+| `paired_cells_shap_lime_all_models.csv` | Celdas pareadas fuente de H3 | Trazabilidad de diferencias pareadas |
+| `exp2_run_inventory.csv` | Inventario de celdas y cobertura | Cobertura FOM-7 |
+| `method_uncertainty_over_blocks.csv` | Incertidumbre por método y bloque | Limitaciones por cobertura |
+
+: Salidas estadísticas principales y uso en la tesis. {#tbl-appendix-stat-outputs}
+
+Las secciones siguientes reproducen las tablas completas de los análisis
+inferenciales para garantizar la auto-suficiencia documental de la tesis.
+
+### D.1 Resultados completos de la prueba de Friedman
+
+| Métrica | $n$ bloques | $k$ métodos | $\chi^2_F$ | $gl$ | $p$ (crudo) | $p_\mathrm{Holm}$ | Kendall $W$ | Decisión |
+|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+| Fidelidad | 15 | 4 | 42.12 | 3 | $1.51\times10^{-8}$ | $3.02\times10^{-8}$ | 0.936 | Rechazar $H_{0,1}$ |
+| Estabilidad | 15 | 4 | 40.68 | 3 | $2.29\times10^{-8}$ | $2.29\times10^{-8}$ | 0.904 | Rechazar $H_{0,2}$ |
+
+: Resultados completos de la prueba de Friedman por métrica ($\alpha = 0.05$; $\chi^2_{crit}(3) = 7.815$). {#tbl-appendix-friedman-full}
+
+Valor crítico para $\alpha = 0.05$, $gl = 3$: $\chi^2_{crit} = 7.815$. Margen
+de seguridad: fidelidad = 439%, estabilidad = 421%. La corrección
+Holm-Bonferroni se aplica sobre las dos hipótesis omnibus (H1 y H2); ambas
+permanecen significativas tras la corrección.
+
+### D.2 Comparaciones post-hoc de Nemenyi (fidelidad y estabilidad)
+
+La diferencia crítica para $k = 4$, $n = 15$, $\alpha = 0.05$ es $CD = 1.211$
+en ambas métricas.
+
+| Par de métodos | $R_i - R_j$ (fidelidad) | Signif. (fidelidad) | $R_i - R_j$ (estabilidad) | Signif. (estabilidad) |
+|:--|--:|:--|--:|:--|
+| SHAP vs. LIME | 1.000 | No ($< 1.211$) | $-$ | $-$ |
+| SHAP vs. Anchors | 2.200 | **Sí** ($> 1.211$) | 2.600 | **Sí** |
+| SHAP vs. DiCE | 2.800 | **Sí** | 1.000 | No ($< 1.211$) |
+| LIME vs. Anchors | 1.200 | No ($< 1.211$) | 1.400 | **Sí** |
+| LIME vs. DiCE | 1.800 | **Sí** | 1.400 | **Sí** |
+| Anchors vs. DiCE | 0.600 | No | 0.200 | No |
+| SHAP vs. LIME (estabilidad) | $-$ | $-$ | 2.400 | **Sí** |
+| DiCE vs. LIME (estabilidad) | $-$ | $-$ | 1.400 | **Sí** |
+| DiCE vs. Anchors (estabilidad) | $-$ | $-$ | 1.600 | **Sí** |
+
+: Comparaciones post-hoc de Nemenyi con diferencias en rangos medios para fidelidad y estabilidad. La diferencia crítica $CD = 1.211$. {#tbl-appendix-nemenyi-full}
+
+### D.3 Resultados completos del análisis pareado Wilcoxon (H3)
+
+Análisis sobre $n = 75$ celdas pareadas $(g, s, n)$ con corrección
+Holm-Bonferroni sobre las cinco comparaciones simultáneas.
+
+| Métrica | $\bar{d}$ (SHAP$-$LIME) | $s_d$ | $d_z$ | $W$ | $p$ (bilateral) | $p_\mathrm{Holm}$ | $n^+$ | $n^-$ | Decisión |
+|:--|--:|--:|--:|--:|--:|--:|--:|--:|:--|
+| Fidelidad | $+0.2479$ | $0.0514$ | $+4.820$ | 0 | $< 2.2\times10^{-16}$ | $< 1.0\times10^{-14}$ | 75 | 0 | **Rechazar** $H_0$ |
+| Estabilidad | $+0.7176$ | $0.2390$ | $+3.002$ | 0 | $< 2.2\times10^{-16}$ | $< 1.0\times10^{-14}$ | 75 | 0 | **Rechazar** $H_0$ |
+| Parsimonia | $+0.1418$ | $0.1690$ | $+0.839$ | 0 | $< 2.2\times10^{-16}$ | $< 1.0\times10^{-13}$ | 75 | 0 | **Rechazar** $H_0$ |
+| Brecha fidelidad | $+0.0453$ | $0.0173$ | $+2.626$ | 1 | $2.64\times10^{-13}$ | $2.64\times10^{-13}$ | 74 | 1 | **Rechazar** $H_0$ |
+| Coste (ms) | $+8{,}047.6$ | $17{,}856.6$ | $+0.451$ | 205 | $1.18\times10^{-10}$ | $1.18\times10^{-10}$ | 59 | 16 | **Rechazar** $H_0$ |
+
+: Resultados completos del análisis pareado Wilcoxon SHAP-LIME con corrección Holm-Bonferroni ($n=75$). $d_z = \bar{d}/s_d$. {#tbl-appendix-wilcoxon-full}
+
+La interpretación de $d_z$ sigue la escala de Cohen: $d_z > 0.8$ = efecto
+grande; $d_z > 2.0$ = efecto muy grande. Los umbrales Holm ajustados se
+aplican en orden decreciente de $p$-valor: $\alpha/5 = 0.010$, $\alpha/4 =
+0.0125$, $\alpha/3 = 0.0167$, $\alpha/2 = 0.025$, $\alpha/1 = 0.050$. Todos
+los p-valores ajustados quedan muy por debajo de sus umbrales correspondientes.
+
+La reproducibilidad de EXP1 se documenta en
+`experiments/exp1_adult/reproducibility/reproducibility_report.csv`, que sostiene
+la proposición P1. Los artefactos crudos por ejecución se encuentran bajo
+`experiments/exp2_scaled/results/`; la superposición de recuperación para
+`mlp_shap`/`svm_shap` se documenta en `outputs/batch_results.csv`.
+
+## Apéndice E: Entorno computacional y reproducción
+
+La instantánea de trabajo usada para esta versión de tesis corresponde al commit
+`33fd952a01a752f6988f46ba79b18694838c3f8f`. El repositorio se archiva con DOI
+Zenodo `10.5281/zenodo.19297724`. Los archivos principales de entorno son:
+
+| Archivo | Función |
+|:--|:--|
+| `environment.yml` | Entorno Conda base con Python 3.11 |
+| `requirements.txt` | Dependencias Python principales |
+| `requirements-frozen.txt` | Dependencias fijadas para reproducción |
+| `render.yaml` | Configuración auxiliar de render |
+
+: Archivos de entorno y reproducción. {#tbl-appendix-environment}
+
+La reproducción mínima sigue esta secuencia:
+
+1. Crear el entorno desde `environment.yml`.
+2. Instalar dependencias fijadas desde `requirements-frozen.txt`.
+3. Verificar artefactos EXP2 con `scripts/validate_results.py` o
+   `scripts/verify_and_repair_results.py`.
+4. Regenerar tablas inferenciales con `scripts/run_exp2_statistical_analysis.py`.
+5. Renderizar la tesis desde `thesis/` con `quarto render`.
+
+## Apéndice F: Artefactos del Estudio EXP4 (fiabilidad de jueces LLM)
+
+EXP4 (diseñado en §sec-exp4-diseno, Capítulo 3; resultados en
+§sec-exp4-fiabilidad, Capítulo 5) cuantifica la fiabilidad inter-juez de
+evaluadores LLM sobre siete dimensiones semánticas. Los artefactos del estudio
+se encuentran en las rutas siguientes y sostienen la Tabla @tbl-exp4-icc del
+Capítulo 5.
+
+| Artefacto | Contenido | Uso en la tesis |
+|:--|:--|:--|
+| `src/prompts/templates/explanation_eval.j2` | Plantilla de evaluación de explicaciones (rúbrica de 7 dimensiones) | Instrumento de medición EXP4 |
+| `src/prompts/templates/eval_instruction.j2` | Instrucciones del sistema entregadas al juez LLM | Instrumento de medición EXP4 |
+| `outputs/analysis/exp4_llm_evaluation/judge_comparison_summary.csv` | Resumen comparativo de puntuaciones por juez y dimensión | Tabla @tbl-exp4-icc (fuente) |
+| `outputs/analysis/exp4_llm_evaluation/krippendorff_alpha.csv` | $\alpha$ de Krippendorff por dimensión | Tabla @tbl-exp4-icc (fuente) |
+| `outputs/analysis/exp4_llm_evaluation/icc_analysis.csv` | ICC(2,1) por dimensión | Tabla @tbl-exp4-icc (fuente) |
+
+: Artefactos de EXP4 y trazabilidad a la tesis. {#tbl-appendix-llm}
+
+EXP4 no aporta evidencia confirmativa sobre las hipótesis H1–H3 ni modifica P1;
+su resultado (P2: jueces LLM no alcanzan ICC $\geq 0.75$ bajo las rúbricas
+actuales) es un resultado negativo que delimita el alcance de la evaluación
+semántica automática en XAI y establece los requisitos de formalización para
+investigación futura (véase §sec-exp4-fiabilidad y §sec-futuro).
