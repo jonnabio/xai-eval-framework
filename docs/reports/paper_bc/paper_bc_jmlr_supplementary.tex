@@ -1,0 +1,207 @@
+\documentclass[twoside,11pt]{article}
+\usepackage{jmlr2e}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{path}
+
+\jmlrheading{}{}{}{}{}{Herrera}
+
+\ShortHeadings{XAI Metrics: Taxonomy and LIME--SHAP Comparison -- Supplementary}{Herrera}
+
+\firstpageno{1}
+
+\begin{document}
+
+\appendix
+
+\section*{Supplementary Material}
+\label{sec:supplementary}
+
+This supplementary document contains three tables referenced from the main
+text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
+LIME \texttt{kernel\_width} sensitivity probe results; and (S3) pairwise
+feature correlations for the Adult Income dataset.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S1 — EXP4 Evaluation Rubric and Judge Prompts}
+\label{sec:supp_exp4_rubric}
+%% ────────────────────────────────────────────────────────────────────────────
+
+EXP4 employed three LLM judges each evaluating $n = 147$ paired SHAP/LIME
+explanation outputs on seven semantic dimensions using a structured rubric.
+The template was rendered per instance with the following fixed prompt
+structure:
+
+\medskip
+\noindent\textbf{System instruction (delivered once per judge session):}
+\begin{quote}\small
+You are an expert AI evaluator specialising in Explainable AI (XAI) for
+tabular data. Your task is to evaluate the quality of natural-language
+explanation summaries produced for a binary classification model
+(UCI Adult Income dataset, target: annual income $>$\$50K). Evaluate each
+explanation on seven dimensions using a 1--5 integer Likert scale. Return
+your response in strict JSON format with keys \texttt{scores} (object),
+\texttt{rationales} (object), and optional \texttt{flags} (array). Do not
+add commentary outside the JSON block.
+\end{quote}
+
+\medskip
+\noindent\textbf{Per-instance user prompt (template variables in \{\{\}\}):}
+\begin{quote}\small
+\textbf{Dataset}: UCI Adult Income (Census Income, 14 features).\\
+\textbf{Model}: \{\{model\_name\}\} (e.g., Random Forest, XGBoost).\\
+\textbf{Explainer}: \{\{method\_name\}\} (SHAP or LIME).\\
+\textbf{Predicted label}: \{\{prediction\_label\}\}. \textbf{True label}:
+\{\{true\_label\}\}.\\[4pt]
+\textbf{Explanation text}:\\
+\{\{explanation\_text\}\}\\[4pt]
+Rate the explanation on the seven dimensions below (1 = very poor,
+5 = excellent). Return strict JSON.
+\end{quote}
+
+\begin{table}[h]
+\centering
+\small
+\caption{EXP4 rubric: seven semantic evaluation dimensions, operational
+definitions, and scoring anchors. Temperature = 0.0 for all judges.
+Three primary condition: \texttt{hidden\_label} (standard), \texttt{label\_visible}
+(bias probe), \texttt{rubric\_alt} (rubric sensitivity). Primary ICC
+results come from the \texttt{hidden\_label} condition.}
+\label{tab:s1_rubric}
+\begin{tabularx}{\linewidth}{l p{4.2cm} p{5.6cm}}
+\toprule
+\textbf{Dimension} & \textbf{Operational definition} & \textbf{Scoring anchors} \\
+\midrule
+Clarity
+  & Understandable organisation and wording for a non-expert reader.
+  & 1 = incomprehensible; 3 = requires domain knowledge; 5 = clear to any reader \\[4pt]
+Concision
+  & Compact relative to useful information content; avoids unnecessary redundancy.
+  & 1 = verbose or padded; 3 = adequate; 5 = maximally informative per word \\[4pt]
+Actionability
+  & Supports recourse, decision review, or explicit next steps for a user.
+  & 1 = no actionable content; 3 = vague suggestions; 5 = specific, feasible actions \\[4pt]
+Audit Usefulness
+  & Supports inspection of model behaviour by an auditor or data scientist.
+  & 1 = no audit value; 3 = partially informative about model logic; 5 = fully supports bias/error investigation \\[4pt]
+Completeness
+  & Provides sufficient local decision information to understand the specific prediction.
+  & 1 = missing key drivers; 3 = covers main drivers; 5 = full local decision context \\[4pt]
+Semantic Plausibility
+  & Coherent with the instance context and general domain knowledge.
+  & 1 = implausible or contradictory; 3 = plausible; 5 = highly consistent with domain expectations \\[4pt]
+Overall Quality
+  & Holistic semantic quality integrating all dimensions above.
+  & 1 = very poor; 3 = acceptable; 5 = excellent \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Judge models and configuration:}
+\begin{itemize}\itemsep0pt
+  \item Judge A: \texttt{gpt-4o-mini} (OpenAI), temperature 0.0, max\_tokens 512.
+  \item Judge B: \texttt{claude-3-haiku-20240307} (Anthropic), temperature 0.0, max\_tokens 512.
+  \item Judge C: \texttt{gemini-1.5-flash} (Google), temperature 0.0, max\_tokens 512.
+\end{itemize}
+
+\noindent All judges used identical prompts; the rubric template is archived at
+\path{src/prompts/templates/explanation_eval.j2} in the companion repository.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S2 — LIME \texttt{kernel\_width} Sensitivity Probe}
+\label{sec:supp_kw}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s2_kw} reports LIME metrics under four \texttt{kernel\_width}
+settings (RF model, seed 42, $N=100$, \texttt{num\_samples=1000},
+\texttt{num\_features=10}). Fidelity and stability are computed only over
+instances with at least one non-zero weight (``valid instances'').
+
+\begin{table}[h]
+\centering
+\caption{LIME sensitivity to \texttt{kernel\_width} (RF, seed 42, $N=100$).
+Fidelity = Pearson $r$ between $|w_i|$ and per-feature prediction drop.
+Stability = mean pairwise cosine similarity under $T=15$ Gaussian
+perturbations ($\sigma=0.1$). Reference condition: \texttt{kernel\_width=3.0}.}
+\label{tab:s2_kw}
+\begin{tabular}{lrcccc}
+\toprule
+\texttt{kernel\_width} & Valid instances & Fidelity & Stability & Sparsity & Cost (ms) \\
+\midrule
+0.25  & 0/100 (degenerate) & ---   & ---   & 0.000 & 30 \\
+0.75  & 0/100 (degenerate) & ---   & ---   & 0.000 & 30 \\
+3.0 \emph{(ref.)} & 96/100 & 0.518 & 0.000 & 0.087 & 30 \\
+10.0  & 100/100            & 0.441 & 0.664 & 0.093 & 32 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Kernel widths of 0.25 and 0.75 produce zero-weight explanations for
+all 100 instances, because the exponential neighbourhood collapses in the
+103-dimensional one-hot-encoded feature space. The reference value (3.0) is the
+minimum viable setting. \texttt{kernel\_width=10.0} yields stable explanations
+($0.664$) by averaging over a wider neighbourhood, at a cost of lower fidelity
+($0.441$). These results confirm that LIME instability under the reference
+configuration is not a calibration artifact: narrowing the kernel does not
+improve stability; it degenerates the explanations. Widening the kernel
+improves stability but at the cost of locality.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S3 — Adult Income Feature Correlation Structure}
+\label{sec:supp_corr}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s3_corr} contextualises the out-of-distribution masking
+discussion in the main text. Numeric--numeric correlations were computed as
+Pearson $r$ on the raw (pre-preprocessing) training set; categorical--categorical
+associations as Cramér's $V$ on the full dataset ($n = 48{,}842$).
+Only pairs with $|r| > 0.10$ or $V > 0.15$ are shown.
+
+\begin{table}[h]
+\centering
+\caption{Selected feature associations in the Adult Income dataset.
+Pearson $r$ for numeric pairs; Cramér's $V$ for categorical pairs.
+\texttt{education} and \texttt{education-num} are functionally identical
+(one-to-one mapping; $V \equiv 1.0$). All values computed on the full
+pre-split dataset ($n = 48{,}842$).}
+\label{tab:s3_corr}
+\begin{tabular}{llcc}
+\toprule
+Feature 1 & Feature 2 & Type & Association \\
+\midrule
+\multicolumn{4}{l}{\textit{Deterministic / near-perfect relationships}} \\
+\texttt{education}     & \texttt{education-num}  & ordinal encode  & $V \equiv 1.0$ \\
+\midrule
+\multicolumn{4}{l}{\textit{Strong categorical associations ($V > 0.40$)}} \\
+\texttt{relationship}  & \texttt{sex}            & Cramér's $V$    & 0.647 \\
+\texttt{marital-status} & \texttt{relationship}  & Cramér's $V$    & 0.488 \\
+\texttt{marital-status} & \texttt{sex}           & Cramér's $V$    & 0.460 \\
+\texttt{occupation}    & \texttt{sex}            & Cramér's $V$    & 0.422 \\
+\midrule
+\multicolumn{4}{l}{\textit{Moderate categorical associations ($0.15 < V \leq 0.40$)}} \\
+\texttt{workclass}     & \texttt{occupation}     & Cramér's $V$    & 0.210 \\
+\texttt{education}     & \texttt{occupation}     & Cramér's $V$    & 0.190 \\
+\texttt{occupation}    & \texttt{relationship}   & Cramér's $V$    & 0.171 \\
+\midrule
+\multicolumn{4}{l}{\textit{Numeric correlations ($|r| > 0.10$; all others $< 0.10$)}} \\
+\texttt{education-num} & \texttt{hours-per-week} & Pearson $r$     & 0.144 \\
+\texttt{capital-gain}  & \texttt{education-num}  & Pearson $r$     & 0.125 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent The four strongest associations (\texttt{relationship}--\texttt{sex},
+\texttt{marital-status}--\texttt{relationship}, \texttt{marital-status}--\texttt{sex},
+\texttt{occupation}--\texttt{sex}) all involve protected attributes, meaning that
+independent feature masking during fidelity evaluation discards statistically
+plausible joint values for these features. The functional duplicate
+\texttt{education}/\texttt{education-num} means that any fidelity measurement
+which masks one but not the other is measuring the effect of partial
+information removal rather than true feature exclusion. These associations
+do not invalidate the SHAP--LIME comparison---both methods are evaluated under
+identical masking protocols---but they limit the interpretation of absolute
+fidelity values as measures of causal feature importance.
+
+\end{document}

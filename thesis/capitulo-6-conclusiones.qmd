@@ -201,11 +201,13 @@ localiza en los ejes de fuente de evidencia y contexto de tarea, pero los
 criterios de selección prescriptivos derivados no incorporan preferencias de
 usuarios finales.
 
-**Configuraciones de referencia.** Los resultados son válidos bajo las
-configuraciones predeterminadas de cada método (número de muestras de LIME,
-número de vecinos de SHAP, parámetros de búsqueda de Anchors). La sensibilidad
-de los resultados a variaciones sistemáticas de hiperparámetros no ha sido
-explorada de forma exhaustiva en este benchmark.
+**Configuraciones de referencia y artefactos de diseño.** Los resultados son válidos bajo las configuraciones de referencia de cada método. Tres caveats específicos deben tenerse en cuenta al interpretar las métricas de LIME.
+
+*Artefacto de parsimonia.* El parámetro `num_features = 10` de LIME actúa como techo rígido sobre el número de características activas devueltas. La parsimonia de LIME es, por tanto, un artefacto de configuración, no una propiedad emergente del modelo sustituto local. Las comparaciones de parsimonia con métodos sin restricción explícita deben interpretarse en este contexto.
+
+*Inestabilidad estructural de LIME.* La inestabilidad de LIME (CV = 86.2%, similitud coseno media ≈ 0.014) fue examinada sistemáticamente variando `num_samples` ∈ {500, 1000, 2000}: la estabilidad permanece cercana a cero en todos los niveles, descartando que el resultado sea un artefacto de convergencia. Un análisis adicional de sensibilidad a `kernel_width` ∈ {0.25, 0.75, 3.0, 10.0} muestra que los valores inferiores a 3.0 producen pesos degenerados (cero) en el espacio de características preprocesado de 103 dimensiones, confirmando que la referencia es el mínimo viable y que la inestabilidad es estructural, no dependiente de la configuración del kernel (Apéndice C).
+
+*Sesgo de enmascaramiento y correlaciones de características.* La métrica de fidelidad enmascara características individualmente sustituyéndolas por valores de referencia medios. En el dataset Adult Income, pares como `education`/`education-num` ($r = 1.0$) y `occupation`/`education` (Cramér's $V \approx 0.34$) están moderadamente correlacionados. El enmascaramiento independiente de características correlacionadas genera instancias fuera de la distribución de entrenamiento, lo que puede sesgar la estimación de la importancia de características al hacer que el modelo reciba combinaciones de valores implausibles. No puede descartarse que parte de la brecha de fidelidad SHAP-LIME refleje sensibilidad diferencial a este sesgo en lugar de diferencias puras de calidad de atribución.
 
 ## Fronteras de generalización {#sec-fronteras}
 
@@ -245,19 +247,36 @@ $+0.26$ (German Credit, RF) a $+0.51$ (Breast Cancer, RF). Estos resultados
 replican el ordenamiento observado en EXP2 en espacios de características con
 dimensionalidad y distribución distintas al dataset primario.
 
-El alcance de EXP3 es, no obstante, deliberadamente acotado en tres sentidos.
-Primero, compara SHAP frente a Anchors, no frente a LIME; el contraste central
-de esta tesis (SHAP-LIME) no fue incluido en EXP3. Segundo, instrumenta
-únicamente fidelidad: el protocolo de perturbación gaussiana requerido para la
-métrica de similitud coseno no fue implementado en los datasets adicionales, por
-lo que la estabilidad no se evaluó de forma cross-dataset. Tercero, no cubre los
-modelos SVM y MLP. En consecuencia, el ordenamiento de fidelidad SHAP-Anchors
-dispone ahora de respaldo cross-dataset robusto, pero la afirmación principal de
-esta tesis —SHAP supera a LIME en fidelidad ($d_z = 4.82$) y en estabilidad
-($d_z = 3.00$)— permanece acotada a UCI Adult Income bajo las condiciones del
-diseño EXP2. La extensión de EXP3 con LIME y con las métricas de estabilidad
-constituye la prioridad de validación externa de mayor relevancia para trabajos
-que busquen generalizar los criterios prescriptivos de selección aquí derivados.
+Adicionalmente, se completó una extensión de EXP3 que incluye LIME en los
+mismos dos datasets, utilizando el protocolo de fidelidad y estabilidad del
+diseño EXP2 ($N = 100$, 50 por clase; estabilidad: $T = 15$ perturbaciones
+gaussianas, $\sigma = 0.1$). Los resultados principales son los siguientes.
+En fidelidad, LIME alcanza valores de $0.713$ (BC, RF) y $0.543$ (BC, XGB),
+frente a $0.483$ (GC, RF) y $0.468$ (GC, XGB). El ordenamiento SHAP > LIME se
+sostiene en German Credit pero la brecha se reduce en Breast Cancer ($+0.07$
+en BC frente a $+0.27$ en Adult). El resultado más notable concierne a la
+estabilidad: LIME obtiene similitud coseno media de $0.922$–$0.927$ en Breast
+Cancer y $0.748$–$0.854$ en German Credit, en marcado contraste con el valor
+de $0.014$ registrado en Adult Income. Esta disparidad apunta al espacio de
+características como factor mediador: Adult Income fue preprocesado mediante
+codificación one-hot de 13 variables categóricas, produciendo un espacio de
+103 dimensiones predominantemente binario; Breast Cancer (30 características
+continuas) y German Credit (61 dimensiones tras preprocesamiento, mezcla de
+continuas y binarias) presentan estructuras de vecindad más densas y regulares
+para el kernel de LIME. La inestabilidad estructural de LIME documentada en
+EXP2 es, por tanto, dependiente del espacio de características, no una
+propiedad universal del método.
+
+El alcance de EXP3 permanece acotado en dos sentidos relevantes. Primero, la
+estabilidad de SHAP no fue instrumentada en los datasets adicionales (la sonda
+se diseñó para LIME), por lo que no es posible calcular diferencias pareadas
+SHAP-LIME de estabilidad en BC ni GC. Segundo, los modelos SVM y MLP no están
+cubiertos. En consecuencia, la afirmación principal de esta tesis —SHAP supera
+a LIME en fidelidad ($d_z = 4.82$) y en estabilidad ($d_z = 3.00$)— permanece
+referida a UCI Adult Income bajo las condiciones del diseño EXP2; la extensión
+cross-dataset muestra que la ventaja de fidelidad se mantiene pero se atenúa, y
+que la brecha de estabilidad puede ser un artefacto del espacio de alta dimensión
+y no una diferencia intrínseca entre métodos.
 
 ## Líneas de investigación futura {#sec-futuro}
 
@@ -287,12 +306,7 @@ comprensión, confianza y utilidad de las explicaciones de SHAP y LIME bajo
 condiciones de tarea real, produciendo la calibración humana necesaria para
 validar cualquier evaluador semántico automático.
 
-**3. Análisis de la sensibilidad a la configuración de hiperparámetros.** El
-benchmark primario opera con configuraciones de referencia. Un diseño factorial
-extendido que varíe sistemáticamente los hiperparámetros clave —número de
-muestras de LIME, estrategia de referencia de SHAP, parámetros de umbral de
-Anchors— permitiría determinar en qué medida los perfiles de calidad obtenidos
-son robustos a la sintonización de cada método.
+**3. Extensión del análisis de sensibilidad a hiperparámetros.** Los análisis de sensibilidad completados en el Apéndice C establecen tres resultados base: (i) la inestabilidad de LIME es robusta a variaciones de `num_samples` ∈ {500, 1000, 2000} —la similitud coseno permanece cercana a cero en todos los niveles, descartando que sea un artefacto de convergencia—; (ii) `kernel_width` ∈ {0.25, 0.75} produce pesos degenerados en el espacio preprocesado de 103 dimensiones, con `kernel_width = 3.0` como valor mínimo viable y `kernel_width = 10.0` como alternativa más estable a costa de localidad; y (iii) la cobertura de Anchors es extremadamente sensible al umbral de precisión $\tau$. Las brechas pendientes incluyen la sensibilidad del tamaño del conjunto de referencia de SHAP más allá del rango evaluado (25–100), la interacción entre `kernel_width` y `num_samples` en espacios de dimensionalidad variable, y la extensión de los análisis a los modelos SVM y MLP, que emplean KernelSHAP en lugar de TreeSHAP y exhiben distintos perfiles de coste-estabilidad.
 
 **4. Extensión cross-dataset del contraste SHAP-LIME y replicación en dominios
 de alto riesgo.** EXP3 replicó el ordenamiento de fidelidad SHAP-Anchors en

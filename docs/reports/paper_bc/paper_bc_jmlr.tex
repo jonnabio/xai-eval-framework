@@ -948,20 +948,36 @@ profile remains operationally attractive.
 \subsection{External Validation: Cross-Dataset Replication (EXP3)}
 \label{sec:exp3}
 
-To partially address the single-dataset limitation, we ran a cross-dataset
-validation experiment (EXP3) comparing SHAP versus Anchors
+To address the single-dataset limitation, we ran a cross-dataset
+validation experiment (EXP3) comparing SHAP, LIME, and Anchors
 \citep{ribeiro2018anchors} on two additional binary classification
 datasets: Breast Cancer Wisconsin \citep{dua2019uci} ($n=569$, 30
-features) and German Credit \citep{dua2019uci} ($n=1{,}000$, 20 features).
-Both used random forest and XGBoost models across three random seeds each,
-yielding 12 paired (dataset $\times$ model $\times$ seed) fidelity
-comparisons.
+continuous features) and German Credit \citep{dua2019uci} ($n=1{,}000$,
+20 mixed features). Both used random forest and XGBoost models across
+three random seeds each, yielding 12 paired (dataset $\times$ model
+$\times$ seed) comparisons per method pair.
 
+\textbf{Fidelity ordering (SHAP vs.\ Anchors).}
 SHAP outperforms Anchors in fidelity in all 12 paired combinations
 (Table~\ref{tab:exp3_fidelity}, Figure~\ref{fig:exp3_fidelity}), with
 mean gaps ranging from $+0.26$ (German Credit, RF) to $+0.51$ (Breast
-Cancer, RF). This replicates the EXP2 direction across genuinely different
-feature spaces, dimensionalities, and class distributions.
+Cancer, RF). This replicates the EXP2 fidelity direction across genuinely
+different feature spaces, dimensionalities, and class distributions.
+
+\textbf{LIME cross-dataset extension.}
+Table~\ref{tab:exp3_lime} reports LIME fidelity and stability on the same
+datasets. Two findings are noteworthy. First, SHAP $>$ LIME fidelity holds
+consistently on German Credit (gaps $+0.23$--$+0.24$ for RF, $+0.24$--$+0.25$
+for XGB), replicating the EXP2 direction. On Breast Cancer the fidelity gap
+narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.06$
+(XGB), compared to $+0.27$ on Adult. Second, and more critically, LIME
+\emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
+higher than on Adult ($0.014$). This reveals that the near-zero stability
+observed in EXP2 is not a fixed structural property of LIME: it is strongly
+modulated by feature-space characteristics. The Adult dataset's 103-dimensional
+one-hot-encoded space appears to be the primary driver of instability; in
+lower-dimensional spaces with more continuous features, LIME produces
+substantially more consistent explanations.
 
 \begin{table}[t]
 \centering
@@ -981,11 +997,33 @@ German Credit  & XGB   & 0.711 & 0.451   \\
 \end{tabular}
 \end{table}
 
-\textbf{Scope limitation.} Stability was not instrumented in EXP3 (the
-perturbation-sampling required for the cosine-similarity metric was not
-included in the cross-dataset protocol). LIME was also not included.
-EXP3 therefore supports fidelity generalization only; SHAP-LIME stability
-and cost comparisons remain bounded to the Adult dataset.
+\begin{table}[t]
+\centering
+\caption{EXP3 LIME extension: mean fidelity and stability (3-seed average)
+for LIME on the two cross-dataset cohorts.
+Stability = mean pairwise cosine similarity under $T=15$ Gaussian
+perturbations ($\sigma=0.1$); same protocol as EXP2.
+For comparison: LIME on Adult (EXP2) has fidelity $= 0.461$,
+stability $\approx 0.014$.}
+\label{tab:exp3_lime}
+\begin{tabular}{llcccc}
+\toprule
+Dataset        & Model & Fidelity & Stability & Sparsity & Cost (ms) \\
+\midrule
+Breast Cancer  & RF    & 0.713    & 0.922     & 0.331    & 12.3 \\
+Breast Cancer  & XGB   & 0.543    & 0.927     & 0.331    & 7.5  \\
+German Credit  & RF    & 0.483    & 0.854     & 0.163    & 21.1 \\
+German Credit  & XGB   & 0.468    & 0.748     & 0.163    & 10.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Scope limitation.} SHAP stability on the cross-dataset cohorts was
+not instrumented in EXP3; a direct SHAP--LIME stability comparison on Breast
+Cancer and German Credit remains pending. The finding that LIME stability
+varies dramatically with feature-space dimensionality and encoding density
+should be taken as a moderation hypothesis requiring further confirmation
+across a broader set of datasets and preprocessing schemes.
 
 \begin{figure}[t]
 \centering
@@ -1117,6 +1155,23 @@ fidelity advantage over Anchors across Breast Cancer and German Credit
 datasets; SHAP-LIME comparisons and stability rankings remain bounded to
 the Adult cohort and may shift under different modalities, feature
 transformations, masking schemes, or hyperparameter settings.
+
+\paragraph{LIME stability is not a convergence artifact.}
+A direct test of whether the near-zero LIME stability (cosine similarity mean $\approx
+0.014$, CV $= 86.2\%$) reflects insufficient perturbation samples was conducted
+by varying \texttt{num\_samples} $\in \{500, 1000, 2000\}$ under otherwise
+identical conditions (RF model, seed 42, $N=100$, \texttt{kernel\_width=3.0}).
+Stability remained near-zero at all levels ($0.011$, $0.014$, $0.016$,
+respectively), while fidelity was essentially flat ($0.452$, $0.461$, $0.459$).
+Doubling or halving the sample budget neither stabilizes the explanations nor
+changes the fidelity ordering. The instability is therefore structural---it
+reflects inherent variability in LIME's local surrogate fitting process under
+Gaussian input perturbation, not an insufficient sample count that more compute
+would resolve. A companion \texttt{kernel\_width} probe ($0.25$, $0.75$, $3.0$,
+$10.0$) further shows that widths below $3.0$ produce degenerate zero-weight
+explanations in this 103-dimensional preprocessed space, confirming that the
+reference setting is the minimum viable configuration rather than a conservative
+choice (see companion repository, \path{outputs/analysis/}).
 
 \paragraph{Feature correlation and out-of-distribution masking.}
 The Adult Income dataset contains moderate inter-feature correlations that affect the validity of perturbation-based fidelity metrics. Notably, \texttt{education} and \texttt{education-num} encode the same ordinal construct ($r = 1.0$ by construction); \texttt{occupation} and \texttt{education} show moderate Cramér's $V \approx 0.34$; and \texttt{hours-per-week} correlates with \texttt{occupation} and \texttt{workclass}. When these features are independently zeroed or replaced by reference values during masking---as in our fidelity and faithfulness-gap computations---the resulting masked instances may fall outside the training distribution. Under such out-of-distribution (OOD) inputs, tree-based model outputs can be unreliable extrapolations, and the correlation structure between masked and retained features is ignored. This can cause fidelity metrics to either overestimate (if the model is insensitive to OOD inputs) or underestimate (if the model reacts to implausible feature combinations) the true attribution quality. We cannot rule out that some portion of the SHAP--LIME fidelity gap reflects differential sensitivity to OOD masking artifacts rather than solely attribution accuracy. Studies using marginal versus conditional SHAP variants, or masking schemes that preserve feature dependencies, are needed to isolate this contribution.
