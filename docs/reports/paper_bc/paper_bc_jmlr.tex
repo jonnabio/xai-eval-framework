@@ -44,12 +44,15 @@ comparing LIME and SHAP across 75 matched cells spanning five model
 families, five seeds, and three sampling sizes on tabular data. Results
 are consistent and large in magnitude: SHAP dominates all quality
 endpoints (stability $d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness
-gap $d_z{=}2.63$), while LIME is faster in the majority of model
-contexts (median 65.7 ms vs.\ 684.1 ms for SHAP). Cross-dataset replication on two additional datasets confirms SHAP's
-fidelity advantage over Anchors in all 12 paired combinations. Together, the
-taxonomy and the benchmark motivate a layered evaluation architecture
-that separates real-time explanation paths from high-assurance auditing
-workflows. All experimental artifacts are publicly available.
+gap $d_z{=}2.63$), while LIME is faster for non-tree model families
+(median 65.7 ms vs.\ 684.1 ms for SHAP); for tree-based models, SHAP's
+\texttt{TreeExplainer} reverses this ordering. Cross-dataset replication
+on two additional datasets confirms SHAP's fidelity advantage over Anchors
+in all 12 paired combinations. Together, the taxonomy and the benchmark
+motivate a model-architecture-conditioned deployment pattern: SHAP is
+preferred at both fidelity and latency for tree-based models, while LIME
+retains a latency advantage for black-box architectures lacking a
+model-aware explainer. All experimental artifacts are publicly available.
 \end{abstract}
 
 \begin{keywords}
@@ -101,7 +104,10 @@ metrics reveal complementary signals \citep{pawlicki2024metrics,zheng2025ffideli
 
 LIME and SHAP are the most widely deployed model-agnostic post-hoc
 explainers for tabular data, yet their systematic multi-metric comparison
-under controlled conditions remains scarce. LIME explains locally by
+under controlled conditions remains scarce. \citet{retzlaff2024posthoc} survey post-hoc versus ante-hoc design
+guidelines and review method properties, but do not provide matched
+empirical benchmarks across model families, metrics, and sampling regimes;
+this paper fills that gap. LIME explains locally by
 fitting a sparse surrogate around $x$:
 \[
 \xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g),
@@ -1046,16 +1052,25 @@ Based on the taxonomy (Section~\ref{sec:taxonomy}), the gap analysis
 Pattern}:
 
 \begin{enumerate}[leftmargin=*]
-\item \textbf{Tier 1: Real-Time / End-User (Use LIME)}
+\item \textbf{Tier 1: Real-Time / End-User}
 \begin{itemize}[leftmargin=*]
-\item Use when explaining predictions to end-users in a live application
-(e.g., ``Why was my loan denied?'' in a mobile app).
-\item Evidence basis: lower matched median runtime (65.7 ms) and
-systematically lower active-feature ratio under the benchmark protocol.
-\item Recommended condition: interactive settings where sub-second
-latency and compact explanations matter more than maximizing fidelity.
-\item Caveat: XGBoost is an exception in this cohort, where SHAP is
-consistently faster than LIME.
+\item \textbf{Primary selection criterion: model architecture.}
+  For \emph{tree-based models} (e.g., XGBoost, LightGBM, Random Forest),
+  use \textbf{SHAP} with \texttt{TreeExplainer}.  The algorithm computes
+  exact Shapley values in $O(TLD)$ time (trees~$\times$ leaves~$\times$
+  depth), which in this cohort consistently undercuts LIME's perturbation
+  sampling loop even at the lowest sample budgets.  The fidelity--latency
+  trade-off that motivates Tier~1 therefore does not apply: SHAP is
+  simultaneously faster \emph{and} more faithful on tree architectures.
+  For \emph{non-tree or black-box models} (e.g., neural networks, opaque
+  APIs), use \textbf{LIME}; lower matched median runtime (65.7~ms) and a
+  compact active-feature ratio give it a meaningful latency advantage where
+  perturbation sampling is the only option.
+\item Recommended condition: interactive settings where sub-second latency
+  and compact explanations matter more than maximising fidelity, \emph{and}
+  no model-aware explainer is available.
+\item Evidence basis: runtime distribution in Figure~\ref{fig:runtime};
+  XGBoost reversal visible as a structural outlier, not an anomaly.
 \end{itemize}
 \item \textbf{Tier 2: Auditing / Data Science (Use SHAP)}
 \begin{itemize}[leftmargin=*]
@@ -1066,16 +1081,22 @@ and faithfulness gap across the matched cohort ($d_z = 3.00$, $4.82$, and
 $2.63$ respectively).
 \item Recommended condition: analyst-mediated or offline workflows where
 second-level or minute-level latency is acceptable.
-\item Caveat: runtime costs depend strongly on whether SHAP operates in
-tree-specific or kernel mode.
+\item Note: runtime costs in this tier depend on whether SHAP operates in
+tree-specific or kernel mode; plan sample budgets accordingly.
 \end{itemize}
 \end{enumerate}
 
 This two-tier pattern directly reflects the layered evaluation
 architecture identified in Section~\ref{sec:synthesis}: proxy and
-benchmark evidence (Tier 2) can be complemented by interaction-optimized
-lightweight explanations (Tier 1), each operating within its validated
-scope.
+benchmark evidence (Tier~2) can be complemented by interaction-optimised
+lightweight explanations (Tier~1), each operating within its validated
+scope.  Critically, the Tier~1 criterion is not a blanket method preference
+but a function of model architecture: the existence of a model-aware
+explainer (e.g., \texttt{TreeExplainer}) collapses the fidelity--latency
+trade-off, making SHAP the dominant choice at both tiers for tree-based
+deployments.  This maps directly onto the Task Context axis of the taxonomy
+(Section~\ref{sec:taxonomy}): explainer selection is determined first by
+architectural affordance, then by deployment constraint.
 
 % -----------------------------------------------------------------------
 \section{Validity Boundaries and Limitations}
@@ -1140,7 +1161,20 @@ sparsity, faithfulness, and cost. No semantic, human-utility, or
 LLM-judge claim enters the confirmatory scope.
 
 \paragraph{Axiomatic properties and metric alignment.}
-SHAP Shapley values satisfy four properties---dummy, linearity, symmetry, and efficiency---that collectively guarantee attributions distribute the full prediction change $f(x) - \mathbb{E}[f]$ as uniquely fair marginal contributions. Perturbation-based fidelity metrics measure whether high-magnitude attributions correspond to large prediction drops under feature masking. These two perspectives are structurally compatible: both quantify how faithfully attribution magnitudes encode feature-level causal responsibility for the model output. SHAP's axiomatic guarantee implies that, conditional on its background distribution assumptions, its attribution rankings are optimally aligned with the feature-removal signal that fidelity metrics probe. This does not mean SHAP axioms certify correctness in all deployment contexts---the axioms hold for the model, not for any latent data-generative mechanism---but it does explain why SHAP consistently outperforms LIME on perturbation-based fidelity without requiring that LIME violates a formal criterion.
+SHAP satisfies four axioms---dummy, linearity, symmetry, and efficiency---that
+guarantee attributions distribute the full prediction change $f(x) -
+\mathbb{E}[f]$ as uniquely fair marginal contributions.
+Perturbation-based fidelity metrics measure whether high-magnitude attributions
+correspond to large prediction drops under feature masking.
+These two perspectives are structurally compatible: both quantify how faithfully
+attribution magnitudes encode feature-level causal responsibility for the model
+output. SHAP's axiomatic guarantee implies that, conditional on its background
+distribution assumptions, its attribution rankings are optimally aligned with
+the feature-removal signal that fidelity metrics probe. This does not mean SHAP
+axioms certify correctness in all deployment contexts---the axioms hold for the
+model, not for any latent data-generative mechanism---but it does explain why
+SHAP consistently outperforms LIME on perturbation-based fidelity without
+requiring that LIME violates a formal criterion.
 
 \subsection{Internal and External Validity}
 
