@@ -146,6 +146,44 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Extraction Pass 1
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="5">
+  <name>Populate initial references, citation audit, and metrics table</name>
+  <objective>Extract verified bibliography entries and metric definitions from thesis sources before drafting chapter prose.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_metrics.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify BibTeX keys were copied from `thesis/references.bib`.</test>
+    <test>Verify `table_metrics.md` reflects thesis metric definitions and source files.</test>
+    <test>Verify citation audit distinguishes copied entries from APA/DOI validation still pending.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Initial core references exist in the chapter bibliography.</criterion>
+    <criterion>Metrics table is populated before prose drafting.</criterion>
+    <criterion>No original thesis, paper, or experiment artifacts were edited.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Source map commit 6fc27c503</dependencies>
+</task>
+
+### Verification
+
+- [x] Core method and evaluation references copied from thesis bibliography.
+- [x] Citation audit records pending citation insertion, DOI checks, URL checks, and table source dependencies.
+- [x] Metrics table populated from thesis metric definitions.
+- [x] Original thesis and paper artifacts were used read-only for extraction.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

@@ -24,6 +24,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 ### In Progress
 - CIFIE Spanish technical book chapter workstream setup for FOM-7/XAI evaluation.
 - Source inventory and evidence mapping for section-by-section chapter drafting.
+- Extraction pass 1 completed for initial references, citation audit, and metrics table.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked
@@ -31,10 +32,11 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 
 ## Next Steps
 1. Use `publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md` to extract verified material section by section.
-2. Populate references, metrics table, FOM-7 details, and empirical-result summaries before drafting full prose.
-3. Populate the CIFIE chapter manuscript from dissertation and related paper material without overwriting thesis or paper artifacts.
-4. Continue using narrow Git commands for status checks on this worktree.
-5. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
+2. Complete APA 7 reference formatting, DOI/URL validation, and citation insertion planning.
+3. Extract FOM-7 details and empirical-result summaries before drafting full prose.
+4. Populate the CIFIE chapter manuscript from dissertation and related paper material without overwriting thesis or paper artifacts.
+5. Continue using narrow Git commands for status checks on this worktree.
+6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
 
 ## Active Constraints
 - Do not commit secrets, generated caches, datasets, model binaries, or local assistant tooling.
