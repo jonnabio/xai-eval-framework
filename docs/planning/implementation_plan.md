@@ -110,6 +110,42 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Source Inventory and Evidence Map
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Architect
+
+<task id="4">
+  <name>Create source inventory and evidence map</name>
+  <objective>Prepare section-level planning artifacts that map the CIFIE chapter to thesis, paper, figure, table, reference, and experiment sources without modifying the original artifacts.</objective>
+  <files>
+    <create>publications/book_chapters/2026_cifie_xai_fom7/sources/source_inventory.md</create>
+    <create>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</create>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify source-planning files exist under the new workstream.</test>
+    <test>Verify no thesis or paper source artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>The chapter has a clear section-by-section extraction plan.</criterion>
+    <criterion>Empirical claims are mapped to source artifacts requiring verification.</criterion>
+    <criterion>Original thesis and paper artifacts remain read-only during this task.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Scaffold commit bb726805a</dependencies>
+</task>
+
+### Verification
+
+- [x] Source inventory exists under the CIFIE workstream.
+- [x] Evidence map exists under the CIFIE workstream.
+- [x] Original thesis and paper artifacts were used read-only for planning.
+- [x] ACTIVE_CONTEXT.md updated with the source-mapping checkpoint.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
