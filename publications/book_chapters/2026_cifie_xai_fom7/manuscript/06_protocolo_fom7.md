@@ -6,7 +6,9 @@ Fuente inicial: `thesis/capitulo-1-marco-teorico.qmd`, `thesis/capitulo-2-fundam
 
 FOM-7 (*Framework Operation Method*, siete puertas) se define como una secuencia operativa para convertir ejecuciones de benchmarking XAI en evidencia reproducible, comparable y trazable. Su propósito no es introducir un nuevo explicador ni una métrica aislada, sino gobernar el ciclo completo que conecta diseño experimental, ejecución controlada, calificación de artefactos, armonización analítica, inferencia estadística, reproducibilidad y reporte de afirmaciones.
 
-El protocolo responde a una brecha identificada en la evaluación de XAI: la existencia de métodos, métricas y toolkits no garantiza por sí misma que los resultados sean admisibles como evidencia científica. Un toolkit puede calcular métricas correctamente y, aun así, el estudio puede sobreinterpretar sus resultados si no declara qué artefactos son válidos, qué configuraciones fueron congeladas, qué pruebas estadísticas son admisibles y qué límites conserva cada afirmación.
+El protocolo responde directamente a la crisis de evaluación descrita en la sección anterior. La existencia de métodos, métricas y herramientas no garantiza por sí misma que los resultados sean admisibles como evidencia científica. Una herramienta puede calcular métricas correctamente y, aun así, el estudio puede sobreinterpretar sus resultados si no declara qué artefactos son válidos, qué configuraciones fueron congeladas, qué pruebas estadísticas son admisibles y qué límites conserva cada afirmación.
+
+FOM-7 opera como puente entre el diagnóstico y la práctica experimental: transforma problemas de fragmentación, reproducibilidad y trazabilidad en controles secuenciales verificables.
 
 ## Regla secuencial de admisibilidad
 

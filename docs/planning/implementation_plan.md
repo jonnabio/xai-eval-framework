@@ -295,6 +295,43 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Controlled Drafting Pass 2
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="9">
+  <name>Draft XAI evaluation crisis and bridge to FOM-7</name>
+  <objective>Populate the crisis section and lightly revise the FOM-7 protocol section so the argument flows from evaluation fragmentation to protocol governance.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/05_crisis_evaluacion_xai.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify crisis-section citations exist in chapter `references/references.bib`.</test>
+    <test>Verify the FOM-7 section retains its extracted gate details.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Crisis section explains fragmentation, metric insufficiency, construct gaps, reproducibility, and toolkit-governance limits.</criterion>
+    <criterion>FOM-7 section includes a clear transition from crisis diagnosis to protocol solution.</criterion>
+    <criterion>Drafting remains scoped to the CIFIE workstream.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Controlled drafting pass 1 commit b6b5b3c99</dependencies>
+</task>
+
+### Verification
+
+- [x] Crisis section drafted.
+- [x] FOM-7 opening lightly revised to bridge from crisis diagnosis.
+- [x] Citations limited to entries already present in the chapter bibliography.
+- [x] Original thesis and paper artifacts were used read-only for drafting.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
