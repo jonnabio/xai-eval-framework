@@ -332,6 +332,43 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Controlled Drafting Pass 3
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="10">
+  <name>Draft empirical design and results sections</name>
+  <objective>Populate `07_diseno_empirico.md` and `08_resultados.md` using extracted metrics, FOM-7 gates, and result summaries as evidence controls.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/07_diseno_empirico.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/08_resultados.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify both manuscript files are populated.</test>
+    <test>Verify empirical figures and statistics are traceable to extracted tables.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Design section describes dataset, models, factors, metrics, FOM-7 controls, and inferential plan.</criterion>
+    <criterion>Results section reports coverage, hypothesis decisions, method profiles, reproducibility, and quality-cost interpretation.</criterion>
+    <criterion>Claims remain within the scope documented in extracted evidence tables.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Controlled drafting pass 2 commit 1186af587</dependencies>
+</task>
+
+### Verification
+
+- [x] Empirical design section drafted.
+- [x] Results section drafted.
+- [x] Statistics and method profiles use `table_results_summary.md`, `table_metrics.md`, and `table_fom7_gates.md` as controls.
+- [x] Original thesis and paper artifacts were used read-only for drafting.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
