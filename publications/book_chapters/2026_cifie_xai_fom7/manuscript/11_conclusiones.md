@@ -1,0 +1,17 @@
+# Conclusiones
+
+Este capítulo abordó un problema práctico y metodológico: cómo evaluar explicaciones post-hoc de aprendizaje automático sin reducir la interpretabilidad a una métrica aislada ni convertir resultados experimentales en afirmaciones más generales de lo que la evidencia permite. La respuesta propuesta combina una lectura multidimensional de los métodos XAI con FOM-7, un protocolo de siete puertas para producir evidencia reproducible, comparable y trazable.
+
+El resultado empírico principal es que, en el benchmark Adult/tabular evaluado, SHAP ofrece el perfil más fuerte de fidelidad y estabilidad. Las pruebas globales muestran diferencias significativas entre métodos, y el contraste pareado SHAP-LIME confirma una ventaja sistemática de SHAP en las 75 celdas coincidentes. Esta ventaja tiene un coste: SHAP es más denso y, en promedio, más costoso que LIME.
+
+LIME conserva valor cuando la prioridad es velocidad, concisión y exploración local de bajo coste. Su limitación crítica es la estabilidad: bajo las condiciones evaluadas, sus explicaciones no deben tratarse como evidencia consistente para auditoría o comparación robusta. Anchors y DiCE ocupan espacios distintos. Anchors resulta pertinente cuando se necesita una regla condicional local; DiCE, cuando la pregunta es contrafactual y orientada a alternativas de acción.
+
+La conclusión metodológica es que no existe un método universalmente dominante. La selección debe depender del objetivo explicativo, la tolerancia al coste, la necesidad de estabilidad, la forma de explicación requerida y el nivel de riesgo del contexto. En aplicaciones donde la explicación debe ser defendible, no basta con producir una salida interpretable: se requiere saber si esa salida es fiel, estable, reproducible y trazable.
+
+FOM-7 contribuye precisamente en ese punto. Sus puertas de congelación, ejecución, auditoría, armonización, exportación, perfilado y reporte convierten el benchmarking XAI en un proceso gobernado. El protocolo no garantiza utilidad humana ni verdad causal, pero sí reduce la ambigüedad metodológica: distingue artefactos calificados de artefactos no admisibles, inferencia confirmativa de descripción, y evidencia delimitada de sobreafirmación.
+
+La contribución del capítulo es doble. En el plano empírico, ofrece criterios de selección para LIME, SHAP, Anchors y DiCE bajo un diseño factorial controlado. En el plano metodológico, muestra cómo FOM-7 puede ordenar métricas, resultados y límites en una cadena auditable de evidencia. Esta combinación permite pasar de explicaciones plausibles a afirmaciones defendibles.
+
+El alcance de estas conclusiones es deliberadamente acotado. Los resultados no deben extrapolarse sin validación a otras modalidades, métricas, poblaciones o contextos de decisión. La utilidad humana, la acción contrafactual real y la validez causal exigen estudios adicionales. Aun así, el capítulo aporta una base concreta para avanzar desde la proliferación de métodos XAI hacia una cultura de evaluación más disciplinada.
+
+En síntesis, la pregunta no es solo qué método explica mejor, sino bajo qué condiciones, para qué propósito, con qué evidencia y con qué límites. FOM-7 ofrece una forma de formular y responder esa pregunta sin perder trazabilidad. Esa es la contribución central: hacer que la evaluación de XAI sea menos dependiente de intuiciones y más dependiente de evidencia verificable.

@@ -369,6 +369,45 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Controlled Drafting Pass 4
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="11">
+  <name>Draft discussion, limitations, and conclusions</name>
+  <objective>Populate the closing manuscript block using extracted result summaries, FOM-7 limits, and thesis conclusion material while preserving the chapter's bounded empirical scope.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/09_discusion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/10_limitaciones_trabajo_futuro.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/11_conclusiones.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify the three closing manuscript files are populated.</test>
+    <test>Verify discussion and conclusions preserve Adult/tabular scope and FOM-7 limitations.</test>
+    <test>Verify citations used are present in chapter `references/references.bib`.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Discussion synthesizes method profiles without universal method dominance claims.</criterion>
+    <criterion>Limitations and future work include dataset, metric, configuration, human-validation, coverage, and FOM-7 generalization limits.</criterion>
+    <criterion>Conclusions summarize empirical and methodological contributions within documented evidence boundaries.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Controlled drafting pass 3 commit 893d8136c</dependencies>
+</task>
+
+### Verification
+
+- [x] Discussion, limitations/future work, and conclusions sections drafted.
+- [x] Closing block uses `table_results_summary.md` and `table_fom7_gates.md` as evidence controls.
+- [x] Citations limited to entries already present in the chapter bibliography.
+- [x] Original thesis and paper artifacts were used read-only for drafting.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
