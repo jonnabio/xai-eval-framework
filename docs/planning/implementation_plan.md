@@ -184,6 +184,43 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Extraction Pass 2
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="6">
+  <name>Populate result summary and figure registry</name>
+  <objective>Extract result claims, statistical summaries, method profiles, traceability notes, and candidate figures from `thesis/capitulo-4-resultados.qmd` before drafting prose.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_results_summary.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/figures/figure_registry.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify result summaries are traceable to `thesis/capitulo-4-resultados.qmd`.</test>
+    <test>Verify figure registry points to existing thesis figure assets.</test>
+    <test>Verify no original thesis, paper, or figure assets were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Result summary table is populated before prose drafting.</criterion>
+    <criterion>Figure registry identifies candidate figures, source files, and chapter destinations.</criterion>
+    <criterion>Original thesis artifacts remain read-only.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Extraction pass 1 commit 8e51eb1fd</dependencies>
+</task>
+
+### Verification
+
+- [x] Coverage, hypothesis decisions, SHAP-LIME paired results, method profiles, and claim traceability extracted.
+- [x] Seven candidate Spanish thesis figures registered.
+- [x] Figure files were not copied or modified during this pass.
+- [x] Original thesis and paper artifacts were used read-only for extraction.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
