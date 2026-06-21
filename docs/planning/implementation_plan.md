@@ -221,6 +221,43 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Extraction Pass 3
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="7">
+  <name>Extract FOM-7 protocol details</name>
+  <objective>Populate the FOM-7 manuscript section and reconcile the FOM-7 gates table against thesis protocol details before drafting broader prose.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_fom7_gates.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify the seven gates match `thesis/capitulo-3-diseno-experimental.qmd`.</test>
+    <test>Verify the manuscript section preserves FOM-7 scope, admissibility rule, and limits.</test>
+    <test>Verify no original thesis, paper, or experiment artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>FOM-7 protocol section is populated from verified thesis sources.</criterion>
+    <criterion>FOM-7 gates table includes purpose, input, output, controlled failure, and evidence.</criterion>
+    <criterion>Original thesis artifacts remain read-only.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Extraction pass 2 commit b91a27f94</dependencies>
+</task>
+
+### Verification
+
+- [x] Seven FOM-7 gates extracted and reconciled against the thesis protocol table.
+- [x] Sequential admissibility rule included.
+- [x] Limits of FOM-7 included to prevent overclaiming.
+- [x] Original thesis and paper artifacts were used read-only for extraction.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
