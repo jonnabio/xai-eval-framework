@@ -258,6 +258,43 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Controlled Drafting Pass 1
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="8">
+  <name>Draft XAI foundations and method sections</name>
+  <objective>Populate the first two technical manuscript sections from extracted thesis sources and verified chapter references.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/03_fundamentos_xai.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify both manuscript files are populated.</test>
+    <test>Verify citations used are present in chapter `references/references.bib`.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Sections are drafted in Spanish academic style.</criterion>
+    <criterion>Drafting remains scoped to foundations and method descriptions.</criterion>
+    <criterion>No empirical claims exceed the extracted evidence tables.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Extraction pass 3 commit 998c91d53</dependencies>
+</task>
+
+### Verification
+
+- [x] XAI foundations section drafted.
+- [x] LIME, SHAP, Anchors, and DiCE method section drafted.
+- [x] Citations limited to entries already present in the chapter bibliography.
+- [x] Original thesis and paper artifacts were used read-only for drafting.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

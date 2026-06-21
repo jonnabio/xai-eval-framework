@@ -27,6 +27,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Extraction pass 1 completed for initial references, citation audit, and metrics table.
 - Extraction pass 2 completed for empirical result summary and figure registry.
 - Extraction pass 3 completed for FOM-7 protocol details and gate reconciliation.
+- Controlled drafting pass 1 completed for XAI foundations and methods sections.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked
@@ -36,7 +37,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 1. Use `publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md` to extract verified material section by section.
 2. Complete APA 7 reference formatting, DOI/URL validation, and citation insertion planning.
 3. Decide which registered thesis figures should be copied/exported into the chapter package.
-4. Begin section-level drafting from the extracted evidence maps, starting with foundations and method sections.
+4. Continue section-level drafting with `05_crisis_evaluacion_xai.md` and refine links to `06_protocolo_fom7.md`.
 5. Continue using narrow Git commands for status checks on this worktree.
 6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
 
