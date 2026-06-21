@@ -19,8 +19,8 @@ Este archivo funciona como índice operativo para ensamblar el capítulo complet
 
 ## Pendientes antes de versión de envío
 
-- Insertar tablas finales desde `tables/` con numeración editorial.
-- Seleccionar, copiar/exportar y numerar figuras desde `figures/figure_registry.md`.
+- Convertir las tablas de trabajo de `tables/` al formato editorial final.
+- Confirmar que las figuras copiadas en `figures/exported/` cumplen resolución y formato editorial.
 - Validar formato APA 7 en `references/references_apa7.md`.
 - Revisar extensión total contra las indicaciones CIFIE.
 - Generar una versión limpia en `drafts/v2_technical_draft/` o `drafts/v3_editorial_review/`.

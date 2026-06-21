@@ -8,6 +8,8 @@ Los resultados proceden del benchmark EXP2 sobre UCI Adult Income. El diseño pl
 
 La cobertura fue completa para SHAP y LIME, con 75 de 75 celdas cada uno. DiCE alcanzó 68 de 75 celdas y Anchors 57 de 75. Esta diferencia de cobertura no debe ocultarse: forma parte de la evidencia sobre viabilidad operativa de los métodos y condiciona la precisión de las conclusiones para Anchors y DiCE.
 
+La Figura 1 documenta visualmente la cobertura analítica de EXP2 y debe leerse junto con la auditoría de artefactos de FOM-7.
+
 ## Diferencias globales entre métodos
 
 El análisis global muestra diferencias estadísticamente significativas entre métodos en fidelidad y estabilidad. Para fidelidad, la prueba de Friedman produjo $\chi^2_F = 42.12$ sobre 15 bloques completos, con $p_{\mathrm{Holm}} = 1.51 \times 10^{-8}$ y $W = 0.936$. Este resultado rechaza la hipótesis nula de igualdad global entre métodos y muestra un patrón consistente: SHAP ocupa la primera posición de rango, seguido por LIME, Anchors y DiCE.
@@ -16,6 +18,10 @@ Para estabilidad, la prueba de Friedman produjo $\chi^2_F = 40.68$, con $p_{\mat
 
 La implicación central es metodológica: una evaluación centrada en una única métrica habría perdido parte del fenómeno. Los métodos no se distinguen solo por cuánto se alinean con el comportamiento local del modelo, sino también por cuánto varían sus explicaciones bajo perturbaciones y por qué tipo de objeto explicativo producen.
 
+![Figura 2. Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad. Fuente: figura derivada de `thesis/assets/figures/fig_cd_diagram_es.png`.](../figures/exported/fig_cd_diagram_es.png)
+
+![Figura 3. Distribución de fidelidad y estabilidad por método. Fuente: figura derivada de `thesis/assets/figures/fig_boxplots_metricas_es.png`.](../figures/exported/fig_boxplots_metricas_es.png)
+
 ## Comparación pareada SHAP-LIME
 
 El contraste pareado SHAP-LIME se realizó sobre 75 celdas coincidentes $(g,s,n)$. Los resultados muestran una ventaja sistemática de SHAP en métricas de calidad explicativa, acompañada de una penalización de coste en la mayoría de contextos.
@@ -23,6 +29,10 @@ El contraste pareado SHAP-LIME se realizó sobre 75 celdas coincidentes $(g,s,n)
 En fidelidad, SHAP supera a LIME en las 75 celdas, con diferencia media de +0.2479 y tamaño de efecto $d_z = +4.820$. En estabilidad, la ventaja también aparece en las 75 celdas, con diferencia media de +0.7176 y $d_z = +3.002$. Estos tamaños de efecto son muy grandes y respaldan la afirmación de que SHAP ofrece un perfil más fuerte cuando el objetivo principal es fidelidad y consistencia explicativa.
 
 La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en promedio más costoso, con diferencia media de +8047.6 ms, aunque el efecto es heterogéneo por modelo. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias.
+
+![Figura 4. Diferencias pareadas SHAP-LIME para fidelidad y estabilidad. Fuente: figura derivada de `thesis/assets/figures/fig_diferencias_pareadas_es.png`.](../figures/exported/fig_diferencias_pareadas_es.png)
+
+![Figura 5. Relación entre estabilidad y coste por método. Fuente: figura derivada de `thesis/assets/figures/fig_estabilidad_coste_es.png`.](../figures/exported/fig_estabilidad_coste_es.png)
 
 ## Perfil de SHAP
 
@@ -56,10 +66,12 @@ Esta excepción no invalida el protocolo. Más bien, revela una propiedad estruc
 
 ## Lectura integrada
 
-Los resultados, resumidos en `tables/table_results_summary.md`, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
+Los resultados, resumidos en la Tabla 4, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
 
 La frontera calidad-coste es, por tanto, el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas.
 
-## Figuras candidatas
+## Figuras integradas
 
-Las visualizaciones registradas en `figures/figure_registry.md` deben usarse como apoyo, no como sustituto de las pruebas estadísticas. Las figuras candidatas incluyen la relación estabilidad-coste, la correlación entre métricas, la cobertura EXP2, el diagrama de diferencia crítica, boxplots de fidelidad/estabilidad, diferencias pareadas SHAP-LIME y perfil radar por método. Antes de incorporarlas al manuscrito final, deben copiarse o exportarse al paquete del capítulo y registrarse con fuente exacta. En particular, `fig-radar-metodos` puede apoyar la discusión de perfiles, mientras `fig-cobertura-exp2` debe acompañar cualquier lectura sobre artefactos faltantes.
+Las visualizaciones registradas en `figures/figure_registry.md` se usan como apoyo, no como sustituto de las pruebas estadísticas. Las figuras integradas incluyen la cobertura EXP2, el diagrama de diferencia crítica, boxplots de fidelidad/estabilidad, diferencias pareadas SHAP-LIME, la relación estabilidad-coste, la correlación entre métricas y el perfil radar por método. En particular, la Figura 7 apoya la discusión de perfiles, mientras la Figura 1 debe acompañar cualquier lectura sobre artefactos faltantes.
+
+![Figura 6. Correlación entre métricas del benchmark. Fuente: figura derivada de `thesis/assets/figures/fig_correlacion_metricas_es.png`.](../figures/exported/fig_correlacion_metricas_es.png)

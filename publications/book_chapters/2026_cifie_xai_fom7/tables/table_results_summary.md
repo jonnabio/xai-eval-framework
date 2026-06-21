@@ -1,4 +1,4 @@
-# Resumen de resultados empíricos
+# Tabla 4. Resumen de resultados empíricos
 
 Fuente inicial: `thesis/capitulo-4-resultados.qmd`.
 

@@ -32,6 +32,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Controlled drafting pass 3 completed for empirical design and results sections.
 - Controlled drafting pass 4 completed for discussion, limitations/future work, and conclusions.
 - Controlled drafting pass 5 completed for abstract/keywords, introduction, chapter assembly index, and terminology/callout harmonization.
+- Figure and table integration pass completed: selected thesis figures copied into the CIFIE workstream and manuscript callouts numbered.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked
@@ -39,9 +40,9 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 
 ## Next Steps
 1. Complete APA 7 reference formatting, DOI/URL validation, and final citation audit.
-2. Decide which registered thesis figures should be copied/exported into the chapter package.
-3. Convert working table/figure references into final numbered editorial callouts.
-4. Prepare a clean technical draft in `drafts/v2_technical_draft/` after figure/table selection.
+2. Validate copied figure resolution/format against final CIFIE editorial requirements.
+3. Prepare a clean technical draft in `drafts/v2_technical_draft/`.
+4. Review table formatting for editorial width and numbering before submission packaging.
 5. Continue using narrow Git commands for status checks on this worktree.
 6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
 

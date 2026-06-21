@@ -1,4 +1,4 @@
-# Comparación de métodos XAI
+# Tabla 2. Comparación de métodos XAI
 
 | Método | Base matemática | Tipo de salida | Fortaleza principal | Limitación principal | Uso dentro del capítulo |
 | ------ | --------------- | -------------- | -------------------- | -------------------- | ----------------------- |

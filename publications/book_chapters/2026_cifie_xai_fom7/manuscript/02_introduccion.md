@@ -26,9 +26,9 @@ El capítulo también aporta una lectura empírica de perfiles explicativos. Baj
 
 ## Alcance empírico
 
-El benchmark se acota al conjunto UCI Adult Income, un problema tabular de clasificación binaria. El diseño compara cuatro métodos XAI sobre cinco familias de modelos, cinco semillas y tres tamaños de muestra. Las métricas primarias son fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional, descritas en `tables/table_metrics.md`.
+El benchmark se acota al conjunto UCI Adult Income, un problema tabular de clasificación binaria. El diseño compara cuatro métodos XAI sobre cinco familias de modelos, cinco semillas y tres tamaños de muestra. Las métricas primarias son fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional, resumidas en la Tabla 1.
 
-El alcance de los resultados es deliberadamente limitado. Las conclusiones no se presentan como superioridad universal de un método, sino como evidencia bajo condiciones experimentales controladas. Las figuras candidatas registradas en `figures/figure_registry.md` y las tablas de trabajo del capítulo funcionan como controles de trazabilidad para evitar sobreafirmaciones.
+El alcance de los resultados es deliberadamente limitado. Las conclusiones no se presentan como superioridad universal de un método, sino como evidencia bajo condiciones experimentales controladas. Las figuras numeradas en `figures/figure_registry.md` y las tablas de trabajo del capítulo funcionan como controles de trazabilidad para evitar sobreafirmaciones.
 
 ## Marco del capítulo
 

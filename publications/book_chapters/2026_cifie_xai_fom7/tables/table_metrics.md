@@ -1,4 +1,4 @@
-# Métricas primarias del benchmark
+# Tabla 1. Métricas primarias del benchmark
 
 Fuente inicial: `thesis/capitulo-1-marco-teorico.qmd` y `thesis/capitulo-3-diseno-experimental.qmd`.
 

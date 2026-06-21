@@ -452,6 +452,48 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Figure and Table Integration Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="13">
+  <name>Integrate selected figures and final callouts</name>
+  <objective>Copy registered thesis figures into the CIFIE chapter package and convert working table/figure references into numbered callouts for the technical draft.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/figures/figure_registry.md</modify>
+    <create>publications/book_chapters/2026_cifie_xai_fom7/figures/exported/*.png</create>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/*.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/*.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify copied figure files exist under `figures/exported/`.</test>
+    <test>Verify table headings use final numbering.</test>
+    <test>Verify manuscript figure references use chapter-local relative paths.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>All selected figures are copied from thesis assets into the chapter workstream.</criterion>
+    <criterion>Figures are numbered in first-appearance order and registered in `figure_registry.md`.</criterion>
+    <criterion>Tables 1-4 and Figures 1-7 are referenced from the manuscript using final callouts.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Controlled drafting pass 5 commit f5aad4a88</dependencies>
+</task>
+
+### Verification
+
+- [x] Seven registered figures copied into `figures/exported/`.
+- [x] Figure registry updated with Figure 1-7 numbering and copied status.
+- [x] Tables renamed as Table 1-4 working artifacts.
+- [x] Manuscript callouts updated to use numbered tables and chapter-local image paths.
+- [x] Original thesis and paper artifacts were used read-only for figure copying and callout integration.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

@@ -20,7 +20,7 @@ Este mapa orienta la conversión de materiales de tesis y artículos en un capí
 
 ## Afirmaciones empíricas prioritarias
 
-| Afirmación candidata | Fuente inicial | Evidencia requerida antes de redacción final | Estado |
+| Afirmación prioritaria | Fuente inicial | Evidencia requerida antes de redacción final | Estado |
 | --------------- | -------------- | -------------------------------------------- | ------ |
 | El benchmark EXP2 produjo diferencias globales significativas entre métodos en fidelidad. | `pub/fragments/paper_a_abstract_en.tex`, `thesis/capitulo-4-resultados.qmd`, `thesis/capitulo-6-conclusiones.qmd` | Estadístico Friedman, p-valor, diseño de bloques, tamaño de muestra analizable. | Pendiente de verificar |
 | SHAP presentó el perfil más fuerte en fidelidad y estabilidad en los contextos evaluados. | `pub/claims.toml`, `thesis/capitulo-4-resultados.qmd`, `thesis/capitulo-6-conclusiones.qmd` | Tabla/figura de resultados, alcance por modelo/conjunto de datos, límites inferenciales. | Verificado en extracción |
@@ -29,13 +29,13 @@ Este mapa orienta la conversión de materiales de tesis y artículos en un capí
 | Anchors aporta reglas locales de alta precisión, con límites de cobertura y coste según configuración. | `thesis/capitulo-2-fundamentos.qmd`, `thesis/capitulo-4-resultados.qmd` | Resultados de precisión/cobertura si se reportan, costes por modelo, citas fundacionales. | Pendiente de verificar |
 | FOM-7 convierte resultados numéricos en afirmaciones trazables mediante siete puertas. | `thesis/capitulo-1-marco-teorico.qmd`, `thesis/capitulo-2-fundamentos.qmd`, `thesis/capitulo-3-diseno-experimental.qmd` | Descripción exacta de puertas, criterios de admisibilidad y artefactos esperados. | Verificado en extracción |
 
-## Figuras y tablas candidatas
+## Figuras y tablas del capítulo
 
-| Artefacto del capítulo | Fuente candidata | Acción requerida | Estado |
+| Artefacto del capítulo | Fuente | Acción requerida | Estado |
 | ---------------------- | ---------------- | ---------------- | ------ |
 | `tables/table_metrics.md` | `thesis/capitulo-1-marco-teorico.qmd`, `thesis/capitulo-3-diseno-experimental.qmd` | Completar definiciones de fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste. | Pendiente |
 | `tables/table_results_summary.md` | `thesis/capitulo-4-resultados.qmd`, `pub/fragments/paper_a_abstract_en.tex`, `pub/fragments/paper_b_abstract_en.tex` | Extraer resultados confirmados y límites de interpretación. | Pendiente |
-| `figures/exported/` | `thesis/assets/figures/*_es.png` | Copiar solo figuras seleccionadas y registrar fuente en `figures/figure_registry.md`. | Pendiente |
+| `figures/exported/` | `thesis/assets/figures/*_es.png` | Figuras seleccionadas copiadas y registradas en `figures/figure_registry.md`. | Completado |
 | `references/references.bib` | `thesis/references.bib` | Copiar solo entradas citadas en el capítulo y auditar DOI/APA 7. | Pendiente |
 
 ## Secuencia recomendada de extracción

@@ -10,6 +10,8 @@ El protocolo responde directamente a la crisis de evaluación descrita en la sec
 
 FOM-7 opera como puente entre el diagnóstico y la práctica experimental: transforma problemas de fragmentación, reproducibilidad y trazabilidad en controles secuenciales verificables.
 
+La Tabla 3 resume las siete puertas, sus artefactos de entrada y salida, y el tipo de fallo metodológico que cada una busca controlar.
+
 ## Regla secuencial de admisibilidad
 
 Las siete puertas de FOM-7 son secuenciales. Cada puerta debe satisfacerse antes de proceder a la siguiente. Si una puerta falla, los resultados afectados no desaparecen necesariamente, pero se degradan a estatus descriptivo y no pueden sostener afirmaciones inferenciales.

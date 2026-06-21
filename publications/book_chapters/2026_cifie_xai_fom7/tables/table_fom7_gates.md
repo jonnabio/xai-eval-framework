@@ -1,4 +1,4 @@
-# Puertas del protocolo FOM-7
+# Tabla 3. Puertas del protocolo FOM-7
 
 Fuente inicial: `thesis/capitulo-3-diseno-experimental.qmd`, Tabla `@tbl-fom7-gates`.
 

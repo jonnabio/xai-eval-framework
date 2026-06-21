@@ -6,6 +6,8 @@ Fuente inicial: `thesis/capitulo-2-fundamentos.qmd`, `tables/table_methods_compa
 
 Los cuatro métodos analizados representan familias distintas de explicación post-hoc agnóstica o parcialmente agnóstica al modelo. LIME produce sustitutos locales; SHAP genera atribuciones aditivas de características; Anchors formula reglas locales de alta precisión; DiCE construye ejemplos contrafactuales diversos. Esta heterogeneidad es metodológicamente importante porque cada método produce un objeto explicativo diferente y, por tanto, no debe evaluarse como si todos respondieran exactamente la misma pregunta.
 
+La Tabla 2 sintetiza la base matemática, el tipo de salida, las fortalezas y las limitaciones que orientan la comparación empírica.
+
 La comparación del capítulo debe leerse como evaluación de perfiles, no como ranking universal. FOM-7 exige que cada conclusión conserve unido el método, el objeto explicativo, la métrica, el contexto experimental y el alcance de la afirmación.
 
 ## LIME: sustitutos locales e inestabilidad potencial

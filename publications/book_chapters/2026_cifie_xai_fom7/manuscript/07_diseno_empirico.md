@@ -51,6 +51,8 @@ Las instancias se seleccionan mediante muestreo estratificado por cuadrante de e
 
 El tamaño nominal de una ejecución depende del número de instancias por cuadrante, aunque la disponibilidad real puede variar por modelo y estrato. Esta decisión vincula la evaluación XAI con situaciones de auditoría más realistas: un explicador debe examinarse no solo cuando el modelo acierta, sino también cuando falla.
 
+![Figura 1. Cobertura analítica EXP2 por modelo y método. Fuente: figura derivada de `thesis/assets/figures/fig_cobertura_exp2_es.png`.](../figures/exported/fig_cobertura_exp2_es.png)
+
 ## Configuración de explicadores
 
 SHAP se ejecuta con variantes acordes al modelo base: `TreeExplainer` para modelos de árboles y `KernelExplainer` para modelos donde se requiere aproximación más general. LIME utiliza `LimeTabularExplainer` con parámetros congelados de muestreo, número de características y ancho de kernel. Anchors emplea reglas locales con umbral de precisión efectivo de 0.95. DiCE genera contrafactuales orientados a la clase opuesta, usando diferencias entre instancia original y contrafactual como base de importancia.
@@ -59,7 +61,7 @@ Estas configuraciones deben interpretarse como parte del protocolo experimental.
 
 ## Métricas primarias
 
-El benchmark utiliza cinco métricas primarias, resumidas en la tabla de métricas (`tables/table_metrics.md`):
+El benchmark utiliza cinco métricas primarias, resumidas en la Tabla 1:
 
 - fidelidad: alineación entre importancias y efecto predictivo observado;
 - estabilidad: similitud entre explicaciones bajo perturbaciones controladas;
@@ -77,7 +79,7 @@ Para el contraste SHAP-LIME, la unidad primaria es la celda pareada $(g,s,n)$. E
 
 ## Control FOM-7
 
-El diseño se gobierna mediante FOM-7, resumido en la tabla de puertas del protocolo (`tables/table_fom7_gates.md`). Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones.
+El diseño se gobierna mediante FOM-7, resumido en la Tabla 3. Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones.
 
 Esta estructura es necesaria porque el benchmark no solo produce resultados; produce resultados que deben ser admisibles como evidencia. Una celda con artefacto vacío, esquema incompatible o valores inválidos no puede alimentar pruebas confirmativas. Una afirmación sin trazabilidad a tabla, script, configuración o límite de alcance no debe presentarse como inferencial.
 

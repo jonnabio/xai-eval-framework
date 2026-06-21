@@ -16,6 +16,8 @@ El hallazgo conceptual más importante es la disociación entre fidelidad, estab
 
 Por ello, el capítulo propone interpretar los métodos como perfiles. SHAP corresponde al perfil de auditoría de alta fidelidad y estabilidad; LIME al perfil de explicación rápida y económica; Anchors al perfil de regla local condicional; DiCE al perfil contrafactual y de exploración de alternativas. Esta lectura es más útil que un ranking único porque conecta la selección del método con el propósito de uso.
 
+![Figura 7. Perfil multidimensional normalizado por método. Fuente: figura derivada de `thesis/assets/figures/fig_radar_metodos_es.png`.](../figures/exported/fig_radar_metodos_es.png)
+
 La literatura ha señalado de forma recurrente que la interpretabilidad no es un constructo unitario y que la evaluación de XAI debe explicitar qué propiedad se mide, para qué tarea y con qué supuesto de validez [@doshi-velez2017; @alvarezmelis2018; @nauta2023]. Los resultados aquí discutidos refuerzan esa posición desde una evidencia empírica controlada: no basta con preguntar qué método explica mejor, sino qué tipo de explicación se necesita y qué riesgos se aceptan.
 
 ## Papel metodológico de FOM-7
