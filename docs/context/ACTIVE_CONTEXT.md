@@ -31,16 +31,17 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Controlled drafting pass 2 completed for the XAI evaluation crisis section and FOM-7 transition.
 - Controlled drafting pass 3 completed for empirical design and results sections.
 - Controlled drafting pass 4 completed for discussion, limitations/future work, and conclusions.
+- Controlled drafting pass 5 completed for abstract/keywords, introduction, chapter assembly index, and terminology/callout harmonization.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked
 - Full `git status` can be slow or time out on the WSL `/mnt/c` worktree; prefer targeted Git checks when possible.
 
 ## Next Steps
-1. Use `publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md` to extract verified material section by section.
-2. Complete APA 7 reference formatting, DOI/URL validation, and citation insertion planning.
-3. Decide which registered thesis figures should be copied/exported into the chapter package.
-4. Continue section-level drafting with remaining front/back matter and cross-section harmonization.
+1. Complete APA 7 reference formatting, DOI/URL validation, and final citation audit.
+2. Decide which registered thesis figures should be copied/exported into the chapter package.
+3. Convert working table/figure references into final numbered editorial callouts.
+4. Prepare a clean technical draft in `drafts/v2_technical_draft/` after figure/table selection.
 5. Continue using narrow Git commands for status checks on this worktree.
 6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
 

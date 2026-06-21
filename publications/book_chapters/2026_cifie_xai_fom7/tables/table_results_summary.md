@@ -23,7 +23,7 @@ Este resumen identifica los hallazgos que pueden alimentar la sección `08_resul
 | ----- | ---- | ---------- | ----------- | ---------- | ------ | -------- |
 | H1: existen diferencias de fidelidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F = 42.12$ | $p_{\mathrm{Holm}} = 1.51 \times 10^{-8}$ | $W = 0.936$ | Rechazar $H_{0,1}$; SHAP supera a Anchors/DiCE y LIME supera a DiCE. |
 | H2: existen diferencias de estabilidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F = 40.68$ | $p_{\mathrm{Holm}} = 2.29 \times 10^{-8}$ | $W = 0.904$ | Rechazar $H_{0,2}$; SHAP/DiCE forman el grupo más estable. |
-| H3: SHAP y LIME difieren en calidad-costo | Wilcoxon pareado bilateral | 75 celdas $(g,s,n)$ | $W = 0$ a $205$ | $\leq 2.64 \times 10^{-13}$ para calidad; $1.18 \times 10^{-10}$ para coste | $d_z = 0.451$ a $4.820$ | Rechazar $H_{0,3}$; SHAP mejora calidad y aumenta coste medio. |
+| H3: SHAP y LIME difieren en calidad-coste | Wilcoxon pareado bilateral | 75 celdas $(g,s,n)$ | $W = 0$ a $205$ | $\leq 2.64 \times 10^{-13}$ para calidad; $1.18 \times 10^{-10}$ para coste | $d_z = 0.451$ a $4.820$ | Rechazar $H_{0,3}$; SHAP mejora calidad y aumenta coste medio. |
 | P1: el protocolo es reproducible bajo semillas | CV sobre EXP1 | 5 semillas RF, $N=100$ | CV por métrica | No aplica | CV < 3% en señales principales | Confirmación parcial; LIME-estabilidad queda fuera por media cercana a cero. |
 
 ## Rangos y medias por fidelidad
@@ -52,11 +52,11 @@ Este resumen identifica los hallazgos que pueden alimentar la sección `08_resul
 | SHAP | Perfil global más equilibrado: fidelidad = 0.810, estabilidad = 0.724, parsimonia = 0.234, brecha de fidelidad = 0.431, coste = 24,804 ms sobre bloques calificados. | Coste alto y heterogéneo; KernelSHAP puede ser inviable en baja latencia para SVM/MLP. | Método fuerte para auditoría y calidad explicativa cuando la fidelidad/estabilidad son prioritarias. |
 | LIME | Método más económico: coste medio 226 ms, fidelidad moderada 0.560 y parsimonia 0.085. | Estabilidad casi nula: media 0.014 y CV de estabilidad 86.2% bajo semillas. | Alternativa de bajo coste para contextos de latencia, con advertencia fuerte sobre consistencia. |
 | Anchors | Reglas locales cualitativamente interpretables; parsimonia comparable a LIME. | Cobertura incompleta y coste alto/variable; fidelidad media 0.386 y estabilidad 0.052. | Útil para explicar condiciones locales, pero no comparable de forma directa con atribuciones numéricas. |
-| DiCE | Estabilidad intermedia 0.366, parsimonia muy baja 0.017 y coste moderado 2,056 ms. | Fidelidad baja 0.172 porque su objetivo es contrafactual, no atribucional. | Método orientado a recourse/contrafactualidad; no debe juzgarse solo como método de atribución. |
+| DiCE | Estabilidad intermedia 0.366, parsimonia muy baja 0.017 y coste moderado 2,056 ms. | Fidelidad baja 0.172 porque su objetivo es contrafactual, no atribucional. | Método orientado a acción correctiva/contrafactualidad; no debe juzgarse solo como método de atribución. |
 
-## Trazabilidad de claims principales
+## Trazabilidad de afirmaciones principales
 
-| Claim | Evidencia en tesis | Artefacto fuente | Script / proceso | Alcance |
+| Afirmación | Evidencia en tesis | Artefacto fuente | Script / proceso | Alcance |
 | ----- | ------------------ | ---------------- | ---------------- | ------- |
 | Existen diferencias globales entre métodos en fidelidad. | Tablas `@tbl-friedman-fidelity` y `@tbl-nemenyi-fidelity`. | `outputs/analysis/paper_a_exp2_stats/friedman_results.csv`, `nemenyi_fidelity.csv`. | `scripts/run_exp2_statistical_analysis.py` | 15 bloques Adult Income, cuatro métodos, cinco modelos. |
 | Existen diferencias globales entre métodos en estabilidad. | Tabla `@tbl-friedman-stability` y localización Nemenyi en texto. | `friedman_results.csv`, `nemenyi_stability.csv`. | `scripts/run_exp2_statistical_analysis.py` | Mismo diseño de bloques; estabilidad como similitud coseno. |

@@ -408,6 +408,50 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Controlled Drafting Pass 5
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="12">
+  <name>Draft front matter and harmonize manuscript</name>
+  <objective>Populate remaining front matter and perform a cross-section harmonization pass for terminology, citations, and table/figure callouts.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/01_resumen_palabras_clave.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/chapter_full.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/*.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/*.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify front matter files are populated.</test>
+    <test>Verify citation keys used in manuscript exist in `references/references.bib`.</test>
+    <test>Verify common English leakage and mojibake patterns are absent or intentionally parenthetical.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Abstract, keywords, introduction, and chapter framing are drafted in Spanish academic style.</criterion>
+    <criterion>Terminology is harmonized around coste, conjunto de datos, puertas FOM-7, and afirmaciones trazables.</criterion>
+    <criterion>Table and figure callouts point to chapter workstream registries rather than untracked thesis assets.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Controlled drafting pass 4 commit f4c29f824</dependencies>
+</task>
+
+### Verification
+
+- [x] `01_resumen_palabras_clave.md` and `02_introduccion.md` drafted.
+- [x] `chapter_full.md` now documents section assembly order and pre-submission tasks.
+- [x] Cross-section terminology harmonized for coste, conjunto de datos, FOM-7 doors, and evidence claims.
+- [x] Citation audit updated to reflect manuscript citation insertion.
+- [x] Original thesis and paper artifacts were used read-only for drafting.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

@@ -48,11 +48,11 @@ Desarrollar las siete etapas de FOM-7:
 
 ### 8. Diseño empírico del benchmark
 
-Describir dataset, modelos, métodos XAI, celdas experimentales, artefactos, métricas y pruebas estadísticas.
+Describir conjunto de datos, modelos, métodos XAI, celdas experimentales, artefactos, métricas y pruebas estadísticas.
 
-### 9. Resultados principales: frontera calidad-costo
+### 9. Resultados principales: frontera calidad-coste
 
-Presentar los hallazgos centrales: diferencias globales significativas, SHAP como método fuerte en calidad explicativa, LIME como alternativa de bajo costo, DiCE como opción destacada en concisión/contrafactualidad y ausencia de un método universalmente dominante.
+Presentar los hallazgos centrales: diferencias globales significativas, SHAP como método fuerte en calidad explicativa, LIME como alternativa de bajo coste, DiCE como opción destacada en concisión/contrafactualidad y ausencia de un método universalmente dominante.
 
 ### 10. Discusión
 

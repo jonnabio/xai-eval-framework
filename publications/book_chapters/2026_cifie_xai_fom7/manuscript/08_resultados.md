@@ -1,4 +1,4 @@
-# Resultados principales: frontera calidad-costo
+# Resultados principales: frontera calidad-coste
 
 Fuente inicial: `thesis/capitulo-4-resultados.qmd`, `tables/table_results_summary.md`, `tables/table_metrics.md` y `figures/figure_registry.md`.
 
@@ -22,7 +22,7 @@ El contraste pareado SHAP-LIME se realizó sobre 75 celdas coincidentes $(g,s,n)
 
 En fidelidad, SHAP supera a LIME en las 75 celdas, con diferencia media de +0.2479 y tamaño de efecto $d_z = +4.820$. En estabilidad, la ventaja también aparece en las 75 celdas, con diferencia media de +0.7176 y $d_z = +3.002$. Estos tamaños de efecto son muy grandes y respaldan la afirmación de que SHAP ofrece un perfil más fuerte cuando el objetivo principal es fidelidad y consistencia explicativa.
 
-La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en promedio más costoso, con diferencia media de +8047.6 ms, aunque el efecto es heterogéneo por modelo. Esto define la frontera calidad-costo: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias.
+La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en promedio más costoso, con diferencia media de +8047.6 ms, aunque el efecto es heterogéneo por modelo. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias.
 
 ## Perfil de SHAP
 
@@ -56,10 +56,10 @@ Esta excepción no invalida el protocolo. Más bien, revela una propiedad estruc
 
 ## Lectura integrada
 
-Los resultados sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
+Los resultados, resumidos en `tables/table_results_summary.md`, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
 
-La frontera calidad-costo es, por tanto, el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas.
+La frontera calidad-coste es, por tanto, el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas.
 
 ## Figuras candidatas
 
-Las visualizaciones registradas en `figures/figure_registry.md` deben usarse como apoyo, no como sustituto de las pruebas estadísticas. Las figuras candidatas incluyen la relación estabilidad-coste, la correlación entre métricas, la cobertura EXP2, el diagrama de diferencia crítica, boxplots de fidelidad/estabilidad, diferencias pareadas SHAP-LIME y perfil radar por método. Antes de incorporarlas al manuscrito final, deben copiarse o exportarse al paquete del capítulo y registrarse con fuente exacta.
+Las visualizaciones registradas en `figures/figure_registry.md` deben usarse como apoyo, no como sustituto de las pruebas estadísticas. Las figuras candidatas incluyen la relación estabilidad-coste, la correlación entre métricas, la cobertura EXP2, el diagrama de diferencia crítica, boxplots de fidelidad/estabilidad, diferencias pareadas SHAP-LIME y perfil radar por método. Antes de incorporarlas al manuscrito final, deben copiarse o exportarse al paquete del capítulo y registrarse con fuente exacta. En particular, `fig-radar-metodos` puede apoyar la discusión de perfiles, mientras `fig-cobertura-exp2` debe acompañar cualquier lectura sobre artefactos faltantes.

@@ -10,7 +10,7 @@ Las métricas se computan por instancia y se agregan a nivel de ejecución media
 | Estabilidad | $S$ | Similitud coseno media entre explicaciones generadas sobre perturbaciones gaussianas de una misma instancia; en la tesis se usa $T = 15$, con 105 pares por instancia. | similitud coseno | Mayor es mejor | `src/metrics/stability.py` | Evalúa consistencia local de las explicaciones ante variación controlada de entrada. |
 | Parsimonia | $P$ | Proporción de características activas, definida por pesos con $|w_i| > 10^{-4}$ respecto del total de características transformadas. | proporción activa | Menor es mejor | `src/metrics/sparsity.py` | Evalúa concisión de la explicación y carga potencial de interpretación. |
 | Brecha de fidelidad | $\Delta_k$ | Cambio absoluto en la probabilidad de la clase positiva al enmascarar las $k = 5$ características de mayor importancia. | score | Mayor es mejor | `src/metrics/faithfulness.py` | Evalúa sensibilidad del modelo ante la remoción de las características consideradas más relevantes. |
-| Coste computacional | $C$ | Tiempo de pared en milisegundos por instancia explicada, registrado durante la ejecución del explicador. | ms/instancia | Menor es mejor | `ExplainerWrapper` y `ResourceGuard` | Evalúa viabilidad operativa y trade-off calidad-costo de cada método. |
+| Coste computacional | $C$ | Tiempo de pared en milisegundos por instancia explicada, registrado durante la ejecución del explicador. | ms/instancia | Menor es mejor | `ExplainerWrapper` y `ResourceGuard` | Evalúa viabilidad operativa y frontera calidad-coste de cada método. |
 
 ## Notas de interpretación
 

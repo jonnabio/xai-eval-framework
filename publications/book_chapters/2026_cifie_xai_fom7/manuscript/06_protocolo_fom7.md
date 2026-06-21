@@ -70,4 +70,4 @@ La formulación recomendada para los resultados no es "este explicador es mejor"
 
 ## Límites explícitos
 
-FOM-7 no demuestra utilidad humana directa, verdad causal de las explicaciones ni superioridad universal de un método. Su alcance es functionally-grounded: produce evidencia comparativa, reproducible y trazable sobre métodos post-hoc bajo condiciones experimentales controladas. Las dimensiones human-grounded o application-grounded requerirían protocolos adicionales con usuarios, tareas, escalas e instrumentos propios.
+FOM-7 no demuestra utilidad humana directa, verdad causal de las explicaciones ni superioridad universal de un método. Su alcance es funcionalmente fundamentado (*functionally-grounded*): produce evidencia comparativa, reproducible y trazable sobre métodos post-hoc bajo condiciones experimentales controladas. Las dimensiones centradas en humanos (*human-grounded*) o centradas en aplicación (*application-grounded*) requerirían protocolos adicionales con usuarios, tareas, escalas e instrumentos propios.

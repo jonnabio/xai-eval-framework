@@ -10,7 +10,7 @@ Fuente inicial: `thesis/capitulo-3-diseno-experimental.qmd`, Tabla `@tbl-fom7-ga
 | 4. Armonización | Convertir resultados heterogéneos en tablas comparables para análisis. | Artefactos calificados y `outputs/batch_results.csv`. | Métricas a nivel de ejecución y bloque. | Campos no comparables; mezclas de esquema; errores de agregación. | `exp2_run_level_metrics.csv`, `exp2_block_method_summary.csv`. |
 | 5. Exportación | Generar tablas inferenciales deterministas desde entradas calificadas. | Tablas armonizadas. | Resultados Friedman, Nemenyi y Wilcoxon exportados. | Cálculos manuales; doble conteo; pseudorreplicación; uso de artefactos no calificados. | `friedman_results.csv`, `nemenyi_*.csv`, `wilcoxon_*.csv`. |
 | 6. Perfilado | Cuantificar reproducibilidad bajo semillas y variabilidad residual. | Réplicas EXP1 y métricas primarias. | CV por método/métrica y rango esperado de variación. | Confundir variación de semilla con efecto de método o fallo de protocolo. | `experiments/exp1_adult/reproducibility/reproducibility_report.csv`. |
-| 7. Reporte | Vincular cada claim con evidencia identificable y límites de interpretación. | Resultados, tablas, scripts, configuraciones y limitaciones. | Claims trazables y delimitados. | Sobreclaiming; afirmaciones no auditables; conclusiones sin fuente verificable. | Tablas `@tbl-results-overview` y `@tbl-claim-traceability`. |
+| 7. Reporte | Vincular cada afirmación con evidencia identificable y límites de interpretación. | Resultados, tablas, scripts, configuraciones y limitaciones. | Afirmaciones trazables y delimitadas. | Sobreafirmación; afirmaciones no auditables; conclusiones sin fuente verificable. | Tablas de resumen de resultados y trazabilidad de afirmaciones. |
 
 ## Regla de elegibilidad
 

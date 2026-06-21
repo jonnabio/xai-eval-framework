@@ -30,7 +30,7 @@
 
 ## Referencias sin cita en texto
 
-Todas las entradas de `references/references.bib` están pendientes de inserción en el manuscrito porque los archivos de prosa todavía no han sido redactados.
+Tras las pasadas de redacción controlada, las referencias fundacionales y de evaluación más relevantes ya se citan en el manuscrito. Antes del envío debe ejecutarse una revisión final para detectar entradas remanentes en `references/references.bib` que no aparezcan en `manuscript/*.md`.
 
 ## Citas sin entrada bibliográfica
 

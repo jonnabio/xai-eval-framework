@@ -26,7 +26,7 @@ La salida típica de SHAP es un vector de atribuciones, local para una instancia
 
 No obstante, SHAP requiere decisiones operativas relevantes. El conjunto de referencia, la forma de simular ausencia de características, la dependencia entre variables y la variante concreta del explicador condicionan el significado de las atribuciones. KernelSHAP conserva mayor generalidad, pero puede ser costoso; TreeSHAP aprovecha modelos de árbol y puede ser mucho más eficiente. Por ello, "usar SHAP" no describe por sí solo una configuración experimental completa.
 
-En los resultados extraídos de la tesis, SHAP presenta el perfil global más fuerte en fidelidad y estabilidad dentro del benchmark, aunque con costes heterogéneos por familia de modelo. Su uso dentro del capítulo debe enfatizar esta frontera calidad-costo: SHAP es especialmente defendible cuando la prioridad es evidencia explicativa de alta calidad, pero su viabilidad práctica depende del modelo base y de las restricciones de latencia.
+En los resultados extraídos de la tesis, SHAP presenta el perfil global más fuerte en fidelidad y estabilidad dentro del benchmark, aunque con costes heterogéneos por familia de modelo. Su uso dentro del capítulo debe enfatizar esta frontera calidad-coste: SHAP es especialmente defendible cuando la prioridad es evidencia explicativa de alta calidad, pero su viabilidad práctica depende del modelo base y de las restricciones de latencia.
 
 ## Anchors: reglas locales de alta precisión
 

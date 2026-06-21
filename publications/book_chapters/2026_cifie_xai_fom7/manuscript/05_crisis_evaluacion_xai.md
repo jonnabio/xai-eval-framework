@@ -32,7 +32,7 @@ La reproducibilidad en XAI no se limita a publicar código. También requiere ve
 
 Cuando esos elementos no se registran, dos ejecuciones pueden producir explicaciones diferentes sin que el lector pueda distinguir si la diferencia proviene del modelo, del explicador, de la semilla, de la métrica o del entorno computacional. Esto debilita la auditabilidad de resultados y dificulta la acumulación de evidencia.
 
-La trazabilidad también es necesaria para controlar la sobreafirmación. Cada afirmación fuerte debería poder regresar a un artefacto fuente: tabla, figura, configuración, script, prueba estadística o decisión metodológica. Si se afirma que un método es más estable, debe quedar claro en qué dataset, modelo, métrica, configuración y unidad experimental se observó esa estabilidad.
+La trazabilidad también es necesaria para controlar la sobreafirmación. Cada afirmación fuerte debería poder regresar a un artefacto fuente: tabla, figura, configuración, script, prueba estadística o decisión metodológica. Si se afirma que un método es más estable, debe quedar claro en qué conjunto de datos, modelo, métrica, configuración y unidad experimental se observó esa estabilidad.
 
 ## Herramientas sin protocolo de gobernanza suficiente
 

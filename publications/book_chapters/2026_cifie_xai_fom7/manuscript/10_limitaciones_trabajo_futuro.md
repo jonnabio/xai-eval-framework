@@ -30,7 +30,7 @@ El estudio es principalmente funcional y computacional. Evalúa si las explicaci
 
 Esta limitación es importante porque una explicación técnicamente fiel puede no ser comprensible, y una explicación comprensible puede inducir confianza indebida. Del mismo modo, un contrafactual plausible desde el modelo puede no ser accionable para una persona si viola restricciones sociales, legales, económicas o causales.
 
-Por tanto, FOM-7 debe entenderse como una infraestructura para evidencia comparativa trazable, no como sustituto de estudios con usuarios. Las dimensiones human-grounded y application-grounded requieren instrumentos propios, tareas representativas y criterios de validez adicionales [@doshi-velez2017].
+Por tanto, FOM-7 debe entenderse como una infraestructura para evidencia comparativa trazable, no como sustituto de estudios con usuarios. Las dimensiones centradas en humanos (*human-grounded*) y centradas en aplicación (*application-grounded*) requieren instrumentos propios, tareas representativas y criterios de validez adicionales [@doshi-velez2017].
 
 ## Cobertura incompleta y artefactos faltantes
 

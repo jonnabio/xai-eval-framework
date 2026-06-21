@@ -28,7 +28,7 @@ FOM-7 conserva esta distinción porque la portabilidad no equivale automáticame
 
 Una explicación local describe el comportamiento del modelo alrededor de una instancia, predicción o vecindario específico. Una explicación global intenta resumir patrones del modelo en una región amplia o en el conjunto de datos completo. LIME, SHAP y Anchors suelen utilizarse localmente, aunque sus salidas pueden agregarse para construir resúmenes globales [@ribeiro2016; @lundberg2017; @ribeiro2018].
 
-La agregación de explicaciones locales no convierte automáticamente un conjunto de explicaciones en una teoría global del modelo. Un patrón estable en una región puede no sostenerse en otra, y una tendencia global puede ocultar heterogeneidades locales relevantes. Por esta razón, las afirmaciones del capítulo deben declarar su escala: instancia, bloque experimental, método, modelo, dataset o benchmark completo.
+La agregación de explicaciones locales no convierte automáticamente un conjunto de explicaciones en una teoría global del modelo. Un patrón estable en una región puede no sostenerse en otra, y una tendencia global puede ocultar heterogeneidades locales relevantes. Por esta razón, las afirmaciones del capítulo deben declarar su escala: instancia, bloque experimental, método, modelo, conjunto de datos o benchmark completo.
 
 ## Plausibilidad, fidelidad y corrección
 
@@ -46,6 +46,6 @@ Esta lectura multi-métrica es importante porque los métodos post-hoc producen 
 
 ## Alcance de la evidencia
 
-El capítulo se ubica principalmente en evaluación *functionally-grounded* o funcionalmente fundamentada: utiliza proxies computacionales y artefactos verificables en lugar de estudios directos con usuarios. Esta elección permite reproducibilidad y control estadístico, pero no autoriza conclusiones sobre utilidad humana, satisfacción, confianza calibrada o desempeño en tareas reales. En la terminología de @doshi-velez2017, esas afirmaciones requerirían diseños human-grounded o application-grounded.
+El capítulo se ubica principalmente en evaluación funcionalmente fundamentada (*functionally-grounded*): utiliza proxies computacionales y artefactos verificables en lugar de estudios directos con usuarios. Esta elección permite reproducibilidad y control estadístico, pero no autoriza conclusiones sobre utilidad humana, satisfacción, confianza calibrada o desempeño en tareas reales. En la terminología de @doshi-velez2017, esas afirmaciones requerirían diseños centrados en humanos (*human-grounded*) o centrados en aplicación (*application-grounded*).
 
-Por tanto, el lenguaje inferencial debe conservar el alcance de la evidencia. No debe afirmarse que un método "explica mejor" en términos universales. Debe afirmarse, cuando proceda, que un método presenta mayor fidelidad, estabilidad, parsimonia o eficiencia bajo un dataset, modelo, métrica, configuración y unidad de análisis determinados.
+Por tanto, el lenguaje inferencial debe conservar el alcance de la evidencia. No debe afirmarse que un método "explica mejor" en términos universales. Debe afirmarse, cuando proceda, que un método presenta mayor fidelidad, estabilidad, parsimonia o eficiencia bajo un conjunto de datos, modelo, métrica, configuración y unidad de análisis determinados.
