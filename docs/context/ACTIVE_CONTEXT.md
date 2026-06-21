@@ -33,16 +33,17 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Controlled drafting pass 4 completed for discussion, limitations/future work, and conclusions.
 - Controlled drafting pass 5 completed for abstract/keywords, introduction, chapter assembly index, and terminology/callout harmonization.
 - Figure and table integration pass completed: selected thesis figures copied into the CIFIE workstream and manuscript callouts numbered.
+- V2 technical draft and editorial pass completed under `drafts/v2_technical_draft/`.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked
 - Full `git status` can be slow or time out on the WSL `/mnt/c` worktree; prefer targeted Git checks when possible.
 
 ## Next Steps
-1. Complete APA 7 reference formatting, DOI/URL validation, and final citation audit.
-2. Validate copied figure resolution/format against final CIFIE editorial requirements.
-3. Prepare a clean technical draft in `drafts/v2_technical_draft/`.
-4. Review table formatting for editorial width and numbering before submission packaging.
+1. Confirm final CIFIE template, word limit, and citation rendering requirements.
+2. Reduce/adapt the v2 technical draft if the 7,000-8,500 word target is enforced.
+3. Convert wide working tables into the final template format.
+4. Prepare `drafts/v3_editorial_review/` after APA/DOI validation and template adaptation.
 5. Continue using narrow Git commands for status checks on this worktree.
 6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
 

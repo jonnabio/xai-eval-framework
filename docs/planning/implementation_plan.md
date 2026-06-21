@@ -494,6 +494,49 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: V2 Technical Draft and Editorial Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-20
+> **Role:** Developer
+
+<task id="14">
+  <name>Prepare v2 technical draft and editorial review</name>
+  <objective>Assemble a clean technical draft from section files and perform an editorial pass for table width, APA 7 references, and CIFIE formatting readiness.</objective>
+  <files>
+    <create>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</create>
+    <create>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</create>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_metrics.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/compliance/*.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify the v2 technical draft exists and includes references.</test>
+    <test>Verify figure paths in the v2 draft resolve from the draft folder.</test>
+    <test>Verify APA 7 working references are populated.</test>
+    <test>Verify table parsing issue from vertical bars is corrected.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Version v2 technical draft is assembled in the correct draft folder.</criterion>
+    <criterion>Editorial pass documents table width risks and remaining CIFIE formatting actions.</criterion>
+    <criterion>APA 7 working reference list is available for final validation.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Figure and table integration commit 40d1684ac</dependencies>
+</task>
+
+### Verification
+
+- [x] V2 technical draft assembled with title block, manuscript sections, figures, and APA working references.
+- [x] Editorial pass documents table-width actions, APA 7 status, and CIFIE formatting readiness.
+- [x] Compliance checklist, rubric self-assessment, and submission packet updated for v2 status.
+- [x] Table 1 Markdown parsing corrected for the parsimonia formula.
+- [x] Original thesis and paper artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
