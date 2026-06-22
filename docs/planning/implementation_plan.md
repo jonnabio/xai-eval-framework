@@ -666,6 +666,44 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Methods Evidence Enrichment Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-21
+> **Role:** Developer
+
+<task id="18">
+  <name>Deepen method profiles with benchmark evidence</name>
+  <objective>Repeat the enrichment exercise for `04_metodos_lime_shap_anchors_dice.md` by tying the method descriptions more explicitly to extracted benchmark evidence and profile-based interpretation.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `04_metodos_lime_shap_anchors_dice.md` contains no Pandoc citation keys.</test>
+    <test>Verify v2 technical draft is regenerated after the second methods enrichment pass.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Methods section includes stronger empirical profile interpretation from extracted tables.</criterion>
+    <criterion>Methods citations remain in APA 7 author-year style.</criterion>
+    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
+  </acceptance_criteria>
+  <complexity>S</complexity>
+  <dependencies>Methods enrichment commit c52416ff2</dependencies>
+</task>
+
+### Verification
+
+- [x] Methods section deepened with coverage counts, metric values, and profile-based interpretation.
+- [x] Methods citations remain in APA author-year style with no Pandoc keys.
+- [x] V2 technical draft regenerated with updated method profiles.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

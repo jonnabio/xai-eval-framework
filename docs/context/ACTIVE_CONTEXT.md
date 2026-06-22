@@ -37,6 +37,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Introduction enrichment pass completed with `02_introduccion.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
 - Foundations enrichment pass completed with `03_fundamentos_xai.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
 - Methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
+- Second methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: method profiles tied more explicitly to extracted benchmark evidence.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked

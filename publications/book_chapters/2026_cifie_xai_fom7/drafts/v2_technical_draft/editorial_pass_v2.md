@@ -7,7 +7,7 @@ Archivo principal revisado: `cifie_xai_fom7_v2_technical_draft.md`
 ## Estado general
 
 - Versión técnica v2 ensamblada desde los archivos seccionales `manuscript/01_*.md` a `manuscript/11_*.md`.
-- Extensión aproximada tras enriquecer la introducción, fundamentos XAI y métodos post-hoc: 13,198 palabras, incluyendo referencias.
+- Extensión aproximada tras el segundo enriquecimiento de métodos post-hoc: 13,834 palabras, incluyendo referencias.
 - Figuras: 7 figuras copiadas y referenciadas con rutas relativas válidas desde `drafts/v2_technical_draft/`.
 - Tablas: 4 tablas de trabajo numeradas como Tabla 1 a Tabla 4.
 - Referencias: lista APA 7 de trabajo poblada en `references/references_apa7.md`.
