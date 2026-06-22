@@ -13,12 +13,19 @@
 - `@ali2023` — estado de XAI y requisitos de IA confiable.
 - `@arrieta2019` — conceptos, taxonomías y retos de XAI responsable.
 - `@belle2021` — principios y práctica de aprendizaje automático explicable.
+- `@carvalho2019` — revisión de métodos y métricas de interpretabilidad.
+- `@guidotti2018` — revisión de métodos para explicar modelos de caja negra.
+- `@karimi2022` — recourse algorítmico, recomendaciones consecuenciales y contrafactuales.
+- `@laugel2019` — riesgos de contrafactuales post-hoc injustificados.
 - `@lundberg2017` — SHAP / valores de Shapley.
 - `@lipton2018` — crítica conceptual a la interpretabilidad.
 - `@marcinkevics2023` — panorama metodológico de interpretabilidad y explicabilidad.
 - `@ribeiro2018` — Anchors / reglas locales de alta precisión.
 - `@mothilal2020` — DiCE / explicaciones contrafactuales diversas.
 - `@murdoch2019` — definiciones, métodos y aplicaciones de aprendizaje interpretable.
+- `@poyiadzi2020` — FACE y contrafactuales factibles/accionables.
+- `@slack2020` — ataques adversariales a explicaciones post-hoc LIME/SHAP.
+- `@vandenbroeck2022` — tractabilidad de explicaciones SHAP.
 - `@wachter2017` — contrafactuales y decisiones automatizadas.
 - `@doshi-velez2017` — evaluación rigurosa de interpretabilidad.
 - `@alvarezmelis2018` — robustez de métodos de interpretabilidad.

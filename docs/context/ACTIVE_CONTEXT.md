@@ -36,6 +36,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - V2 technical draft and editorial pass completed under `drafts/v2_technical_draft/`.
 - Introduction enrichment pass completed with `02_introduccion.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
 - Foundations enrichment pass completed with `03_fundamentos_xai.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
+- Methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked

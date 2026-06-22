@@ -623,6 +623,49 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Methods Enrichment and APA Citation Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-21
+> **Role:** Developer
+
+<task id="17">
+  <name>Improve LIME, SHAP, Anchors, and DiCE methods section</name>
+  <objective>Expand `04_metodos_lime_shap_anchors_dice.md` into fuller academic paragraphs, enrich it with method-specific sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `04_metodos_lime_shap_anchors_dice.md` contains no Pandoc citation keys.</test>
+    <test>Verify newly cited method references exist in both BibTeX and APA working references.</test>
+    <test>Verify v2 technical draft is regenerated after methods changes.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Methods section paragraphs are richer and less fragmented.</criterion>
+    <criterion>Methods citations use APA 7 author-year style.</criterion>
+    <criterion>Reference files include the additional sources used to enrich the methods section.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Foundations enrichment commit 0f2df4c55</dependencies>
+</task>
+
+### Verification
+
+- [x] Methods section expanded and enriched using thesis/papers source spine.
+- [x] Methods in-text citations converted to APA author-year style.
+- [x] Added Carvalho, Guidotti, Karimi, Laugel, Poyiadzi, Slack, and Van den Broeck references to chapter reference files.
+- [x] V2 technical draft regenerated with updated methods section and references.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
