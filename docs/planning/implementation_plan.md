@@ -580,6 +580,49 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Foundations Enrichment and APA Citation Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-21
+> **Role:** Developer
+
+<task id="16">
+  <name>Improve XAI foundations with thesis paper sources</name>
+  <objective>Expand `03_fundamentos_xai.md` into fuller academic paragraphs, enrich it with additional sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/03_fundamentos_xai.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `03_fundamentos_xai.md` contains no Pandoc citation keys.</test>
+    <test>Verify newly cited references exist in both BibTeX and APA working references.</test>
+    <test>Verify v2 technical draft is regenerated after foundations changes.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Foundations section paragraphs are richer and less fragmented.</criterion>
+    <criterion>Foundations citations use APA 7 author-year style.</criterion>
+    <criterion>Reference files include the additional sources used to enrich the foundations section.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Introduction enrichment commit 90039e07d</dependencies>
+</task>
+
+### Verification
+
+- [x] Foundations section expanded and enriched using thesis/papers source spine.
+- [x] Foundations in-text citations converted to APA author-year style.
+- [x] Added Belle, Marcinkevičs, and Murdoch references to chapter reference files.
+- [x] V2 technical draft regenerated with updated foundations and references.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
