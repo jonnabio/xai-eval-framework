@@ -537,6 +537,49 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Introduction Enrichment and APA Citation Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-21
+> **Role:** Developer
+
+<task id="15">
+  <name>Improve introduction with thesis paper sources</name>
+  <objective>Expand `02_introduccion.md` into fuller academic paragraphs, enrich it with sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `02_introduccion.md` contains no Pandoc citation keys.</test>
+    <test>Verify newly cited references exist in both BibTeX and APA working references.</test>
+    <test>Verify v2 technical draft is regenerated after introduction changes.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Introduction paragraphs are richer and less fragmented.</criterion>
+    <criterion>Introduction citations use APA 7 author-year style.</criterion>
+    <criterion>Reference files include the additional sources used to enrich the introduction.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>V2 technical draft commit af666d56c</dependencies>
+</task>
+
+### Verification
+
+- [x] Introduction expanded and enriched using thesis/papers source spine.
+- [x] Introduction in-text citations converted to APA author-year style.
+- [x] Added Adadi, Ali, Arrieta, Lipton, and Rudin references to chapter reference files.
+- [x] V2 technical draft regenerated with updated introduction and references.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

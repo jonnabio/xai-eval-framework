@@ -9,7 +9,11 @@
 ## Citas pendientes de verificar
 
 - `@ribeiro2016` — LIME / modelos sustitutos locales.
+- `@adadi2018` — revisión XAI y problema de caja negra.
+- `@ali2023` — estado de XAI y requisitos de IA confiable.
+- `@arrieta2019` — conceptos, taxonomías y retos de XAI responsable.
 - `@lundberg2017` — SHAP / valores de Shapley.
+- `@lipton2018` — crítica conceptual a la interpretabilidad.
 - `@ribeiro2018` — Anchors / reglas locales de alta precisión.
 - `@mothilal2020` — DiCE / explicaciones contrafactuales diversas.
 - `@wachter2017` — contrafactuales y decisiones automatizadas.
@@ -21,6 +25,7 @@
 - `@agarwal2022` — OpenXAI y evaluación transparente.
 - `@zheng2025` — F-FIDELITY y evaluación de fidelidad.
 - `@nauta2023` — revisión sistemática de evaluación cuantitativa XAI.
+- `@rudin2022` — principios y retos de aprendizaje automático interpretable.
 - `@friedman1937` — prueba de Friedman para comparación por rangos.
 - `@altukhi2025` — revisión reciente de avances XAI.
 - `@schwalbe2023` — taxonomía de conceptos y métodos XAI.
