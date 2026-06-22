@@ -704,6 +704,44 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: XAI Evaluation Crisis Enrichment Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-21
+> **Role:** Developer
+
+<task id="19">
+  <name>Improve XAI evaluation crisis section</name>
+  <objective>Expand `05_crisis_evaluacion_xai.md` into fuller academic prose, enrich it from the thesis source material, and convert in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/05_crisis_evaluacion_xai.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `05_crisis_evaluacion_xai.md` contains no Pandoc citation keys.</test>
+    <test>Verify v2 technical draft is regenerated after the crisis-section enrichment pass.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Crisis section paragraphs are richer and less fragmented.</criterion>
+    <criterion>Crisis section citations use APA 7 author-year style.</criterion>
+    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Methods evidence enrichment commit 88bc5ab4b</dependencies>
+</task>
+
+### Verification
+
+- [x] Crisis section expanded using thesis source material on metric fragmentation, construct gaps, reproducibility, and tool governance.
+- [x] Crisis-section in-text citations converted to APA author-year style.
+- [x] V2 technical draft regenerated with updated crisis section.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
