@@ -742,6 +742,44 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: FOM-7 Protocol Enrichment Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-22
+> **Role:** Developer
+
+<task id="20">
+  <name>Improve FOM-7 protocol section</name>
+  <objective>Expand `06_protocolo_fom7.md` into fuller academic prose, enrich it from thesis protocol material, and convert in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `06_protocolo_fom7.md` contains no Pandoc citation keys.</test>
+    <test>Verify v2 technical draft is regenerated after the FOM-7 enrichment pass.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>FOM-7 section explains protocol purpose, admissibility logic, gate functions, and limits in fuller prose.</criterion>
+    <criterion>FOM-7 citations use APA 7 author-year style.</criterion>
+    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>XAI evaluation crisis enrichment commit f00b052c2</dependencies>
+</task>
+
+### Verification
+
+- [x] FOM-7 section expanded with gate-by-gate rationale and admissibility logic.
+- [x] FOM-7 in-text citations converted to APA author-year style.
+- [x] V2 technical draft regenerated with updated protocol section.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |
