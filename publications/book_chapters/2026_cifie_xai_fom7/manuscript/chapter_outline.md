@@ -50,13 +50,13 @@ Desarrollar las siete etapas de FOM-7:
 
 Describir conjunto de datos, modelos, métodos XAI, celdas experimentales, artefactos, métricas y pruebas estadísticas.
 
-### 9. Resultados principales: frontera calidad-coste
+### 9. Aplicación empírica: perfiles explicativos bajo FOM-7
 
-Presentar los hallazgos centrales: diferencias globales significativas, SHAP como método fuerte en calidad explicativa, LIME como alternativa de bajo coste, DiCE como opción destacada en concisión/contrafactualidad y ausencia de un método universalmente dominante.
+Presentar los hallazgos centrales como evidencia integrada: diferencias globales significativas, SHAP como método fuerte en calidad explicativa, LIME como alternativa de bajo coste, Anchors como evidencia condicional, DiCE como contrafactualidad, y ausencia de un método universalmente dominante.
 
-### 10. Discusión
+### 10. Implicaciones para la evaluación auditable de XAI
 
-Interpretar las implicaciones para IA confiable, auditoría técnica, gobernanza de modelos, investigación doctoral y reproducibilidad científica.
+Sintetizar las implicaciones metodológicas para IA confiable, auditoría técnica, selección de métodos, gobernanza de evidencia y reproducibilidad científica.
 
 ### 11. Limitaciones y trabajo futuro
 

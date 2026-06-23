@@ -823,6 +823,47 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Book Chapter Results-Discussion Integration
+
+> **Status:** Completed
+> **Started:** 2026-06-23
+> **Role:** Scientific Editor
+
+<task id="22">
+  <name>Restructure results and discussion for book chapter format</name>
+  <objective>Transform the paper-like `08_resultados.md` and `09_discusion.md` split into an integrated empirical application and methodological implications structure appropriate for a book chapter.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/08_resultados.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/09_discusion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/chapter_outline.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify revised sections contain no Pandoc citation keys.</test>
+    <test>Verify v2 technical draft is regenerated after the structural revision.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Section 08 integrates empirical findings with interpretation as a book-chapter evidence block.</criterion>
+    <criterion>Section 09 becomes a concise methodological implications synthesis.</criterion>
+    <criterion>Outline and v2 draft reflect the revised chapter structure.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Empirical design enrichment commit c697c58fe</dependencies>
+</task>
+
+### Verification
+
+- [x] Results section reframed as `Aplicación empírica: perfiles explicativos bajo FOM-7`.
+- [x] Discussion section reframed as `Implicaciones para la evaluación auditable de XAI`.
+- [x] Chapter outline updated to match book-chapter structure.
+- [x] V2 technical draft regenerated with integrated evidence/implications flow.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

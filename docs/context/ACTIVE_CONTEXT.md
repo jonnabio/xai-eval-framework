@@ -41,6 +41,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - XAI evaluation crisis enrichment pass completed with `05_crisis_evaluacion_xai.md`: expanded metric-fragmentation, construct-gap, reproducibility, and governance arguments with APA-style citations.
 - FOM-7 protocol enrichment pass completed with `06_protocolo_fom7.md`: expanded gate-by-gate admissibility logic, operational controls, and limits with APA-style citations.
 - Empirical design enrichment pass completed with `07_diseno_empirico.md`: expanded EXP1/EXP2, Adult dataset, sampling, metrics, units, FOM-7 controls, and inferential plan with APA-style citations.
+- Book-chapter structural revision completed for `08_resultados.md` and `09_discusion.md`: results are now an integrated empirical application/evidence block and discussion is a concise methodological implications section.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked

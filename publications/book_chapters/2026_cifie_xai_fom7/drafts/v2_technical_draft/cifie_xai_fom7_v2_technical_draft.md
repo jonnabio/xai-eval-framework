@@ -388,127 +388,93 @@ El análisis pareado SHAP-LIME utiliza pruebas bilaterales de Wilcoxon sobre cel
 El objetivo del plan inferencial no es producir un ranking universal de explicadores, sino determinar qué diferencias son defendibles bajo el diseño, con qué tamaño de efecto, sobre qué unidad de análisis y dentro de qué alcance empírico. Por ello, los resultados posteriores deben leerse como afirmaciones condicionadas: diferencias entre métodos sobre Adult Income, con cinco familias de modelos, cinco semillas, tres tamaños de muestra, métricas definidas y artefactos calificados por FOM-7.
 
 
-# Resultados principales: frontera calidad-coste
+# Aplicación empírica: perfiles explicativos bajo FOM-7
 
 
-## Alcance de los resultados
+## De resultados estadísticos a evidencia de capítulo
 
-Los resultados proceden del benchmark EXP2 sobre UCI Adult Income. El diseño planificado comprendía 300 celdas, resultantes de cinco modelos, cuatro métodos XAI, cinco semillas y tres tamaños de muestra. Tras la auditoría de artefactos de FOM-7, se obtuvieron 275 celdas calificadas. Las celdas no calificadas fueron excluidas antes de la inferencia confirmativa.
+En un artículo empírico, esta sección podría presentarse como un bloque de resultados separado de la discusión. En este capítulo, su función es distinta: mostrar cómo FOM-7 transforma salidas de benchmarking en perfiles explicativos interpretables, trazables y metodológicamente delimitados. Por ello, las cifras se presentan junto con su lectura sustantiva. La pregunta no es solo qué método obtuvo el mejor valor en una métrica, sino qué enseña cada patrón sobre la evaluación auditable de explicaciones post-hoc.
 
-La cobertura fue completa para SHAP y LIME, con 75 de 75 celdas cada uno. DiCE alcanzó 68 de 75 celdas y Anchors 57 de 75. Esta diferencia de cobertura no debe ocultarse: forma parte de la evidencia sobre viabilidad operativa de los métodos y condiciona la precisión de las conclusiones para Anchors y DiCE.
+Los resultados proceden del benchmark EXP2 sobre UCI Adult Income. El diseño planificado comprendía 300 celdas, resultantes de cinco modelos, cuatro métodos XAI, cinco semillas y tres tamaños de muestra. Tras la auditoría de artefactos de FOM-7, se obtuvieron 275 celdas calificadas. Las celdas no calificadas fueron excluidas antes de la inferencia confirmativa. Esta primera cifra ya es una conclusión metodológica: un benchmark auditable no empieza con la prueba estadística, sino con la calificación de qué evidencia puede entrar a la prueba.
 
-La Figura 1 documenta visualmente la cobertura analítica de EXP2 y debe leerse junto con la auditoría de artefactos de FOM-7.
+La cobertura fue completa para SHAP y LIME, con 75 de 75 celdas cada uno. DiCE alcanzó 68 de 75 celdas y Anchors 57 de 75. Esta diferencia de cobertura no debe ocultarse ni tratarse como un pie de página técnico: forma parte de la evidencia sobre viabilidad operativa de los métodos y condiciona la precisión de las conclusiones para reglas y contrafactuales. La Figura 1 documenta visualmente la cobertura analítica de EXP2 y debe leerse junto con la auditoría de artefactos de FOM-7.
 
-## Diferencias globales entre métodos
+## Evidencia global: diferencias reales, no ranking universal
 
-El análisis global muestra diferencias estadísticamente significativas entre métodos en fidelidad y estabilidad. Para fidelidad, la prueba de Friedman produjo $\chi^2_F = 42.12$ sobre 15 bloques completos, con $p_{\mathrm{Holm}} = 1.51 \times 10^{-8}$ y $W = 0.936$. Este resultado rechaza la hipótesis nula de igualdad global entre métodos y muestra un patrón consistente: SHAP ocupa la primera posición de rango, seguido por LIME, Anchors y DiCE.
+El análisis global muestra diferencias estadísticamente significativas entre métodos en fidelidad y estabilidad. Para fidelidad, la prueba de Friedman produjo $\chi^2_F = 42.12$ sobre 15 bloques completos, con $p_{\mathrm{Holm}} = 1.51 \times 10^{-8}$ y $W = 0.936$. Este resultado rechaza la hipótesis nula de igualdad global entre métodos y muestra un patrón consistente: SHAP ocupa la primera posición de rango, seguido por LIME, Anchors y DiCE. La lectura inmediata es que, bajo esta operacionalización de fidelidad, las atribuciones SHAP se alinean mejor con los cambios observados en la salida del modelo.
 
-Para estabilidad, la prueba de Friedman produjo $\chi^2_F = 40.68$, con $p_{\mathrm{Holm}} = 2.29 \times 10^{-8}$ y $W = 0.904$. El patrón no replica simplemente el orden de fidelidad: SHAP mantiene el perfil más fuerte, pero DiCE aparece como método relativamente estable en comparación con LIME y Anchors. Esta diferencia confirma que fidelidad y estabilidad no son constructos equivalentes.
+Para estabilidad, la prueba de Friedman produjo $\chi^2_F = 40.68$, con $p_{\mathrm{Holm}} = 2.29 \times 10^{-8}$ y $W = 0.904$. El patrón no replica simplemente el orden de fidelidad: SHAP mantiene el perfil más fuerte, pero DiCE aparece como método relativamente estable en comparación con LIME y Anchors. Esta diferencia confirma que fidelidad y estabilidad no son constructos equivalentes. Una evaluación centrada en una única métrica habría perdido parte del fenómeno: los métodos no se distinguen solo por cuánto se alinean con el comportamiento local del modelo, sino también por cuánto varían sus explicaciones bajo perturbaciones y por qué tipo de objeto explicativo producen.
 
-La implicación central es metodológica: una evaluación centrada en una única métrica habría perdido parte del fenómeno. Los métodos no se distinguen solo por cuánto se alinean con el comportamiento local del modelo, sino también por cuánto varían sus explicaciones bajo perturbaciones y por qué tipo de objeto explicativo producen.
+La implicación para un capítulo de libro es conceptual. El resultado estadístico no debe convertirse en la frase "SHAP gana". Debe convertirse en una lección sobre evaluación: cuando los métodos producen artefactos heterogéneos, las diferencias globales son útiles solo si se interpretan como perfiles condicionados por métrica, objeto explicativo y alcance experimental.
 
 ![Figura 2. Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad. Fuente: figura derivada de `thesis/assets/figures/fig_cd_diagram_es.png`.](../../figures/exported/fig_cd_diagram_es.png)
 
 ![Figura 3. Distribución de fidelidad y estabilidad por método. Fuente: figura derivada de `thesis/assets/figures/fig_boxplots_metricas_es.png`.](../../figures/exported/fig_boxplots_metricas_es.png)
 
-## Comparación pareada SHAP-LIME
+## SHAP y LIME: frontera calidad-coste
 
-El contraste pareado SHAP-LIME se realizó sobre 75 celdas coincidentes $(g,s,n)$. Los resultados muestran una ventaja sistemática de SHAP en métricas de calidad explicativa, acompañada de una penalización de coste en la mayoría de contextos.
+El contraste pareado SHAP-LIME se realizó sobre 75 celdas coincidentes $(g,s,n)$. Esta comparación es especialmente informativa porque ambos métodos alcanzaron cobertura completa y se evaluaron en las mismas coordenadas experimentales. Los resultados muestran una ventaja sistemática de SHAP en métricas de calidad explicativa, acompañada de una penalización de coste en la mayoría de contextos.
 
-En fidelidad, SHAP supera a LIME en las 75 celdas, con diferencia media de +0.2479 y tamaño de efecto $d_z = +4.820$. En estabilidad, la ventaja también aparece en las 75 celdas, con diferencia media de +0.7176 y $d_z = +3.002$. Estos tamaños de efecto son muy grandes y respaldan la afirmación de que SHAP ofrece un perfil más fuerte cuando el objetivo principal es fidelidad y consistencia explicativa.
+En fidelidad, SHAP supera a LIME en las 75 celdas, con diferencia media de +0.2479 y tamaño de efecto $d_z = +4.820$. En estabilidad, la ventaja también aparece en las 75 celdas, con diferencia media de +0.7176 y $d_z = +3.002$. Estos tamaños de efecto son muy grandes y respaldan la afirmación de que SHAP ofrece un perfil más fuerte cuando el objetivo principal es fidelidad y consistencia explicativa. En términos de auditoría técnica, esta regularidad importa más que una diferencia puntual de promedio: muestra que la ventaja aparece de forma sistemática a través de modelos, semillas y tamaños de muestra.
 
-La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en promedio más costoso, con diferencia media de +8047.6 ms, aunque el efecto es heterogéneo por modelo. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias.
+La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en promedio más costoso, con diferencia media de +8047.6 ms, aunque el efecto es heterogéneo por modelo. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias. La consecuencia no es descartar LIME, sino delimitar su uso. LIME puede ser adecuado para exploración rápida o interfaces de baja latencia, pero su estabilidad casi nula bajo las condiciones evaluadas impide tratar sus salidas como evidencia robusta de auditoría.
 
 ![Figura 4. Diferencias pareadas SHAP-LIME para fidelidad y estabilidad. Fuente: figura derivada de `thesis/assets/figures/fig_diferencias_pareadas_es.png`.](../../figures/exported/fig_diferencias_pareadas_es.png)
 
 ![Figura 5. Relación entre estabilidad y coste por método. Fuente: figura derivada de `thesis/assets/figures/fig_estabilidad_coste_es.png`.](../../figures/exported/fig_estabilidad_coste_es.png)
 
-## Perfil de SHAP
+## Cuatro perfiles explicativos
 
-SHAP presenta el perfil global más equilibrado en el benchmark. Sus valores consolidados reportados en la tesis son fidelidad = 0.810, estabilidad = 0.724, parsimonia = 0.234, brecha de fidelidad = 0.431 y coste = 24,804 ms sobre bloques calificados.
+SHAP presenta el perfil global más equilibrado en el benchmark. Sus valores consolidados reportados en la tesis son fidelidad = 0.810, estabilidad = 0.724, parsimonia = 0.234, brecha de fidelidad = 0.431 y coste = 24,804 ms sobre bloques calificados. Este perfil lo posiciona como método fuerte para auditoría técnica cuando se requiere fidelidad y estabilidad. Sin embargo, su coste es heterogéneo: TreeSHAP puede ser eficiente en modelos de árboles, mientras que KernelSHAP puede ser costoso en modelos como SVM o MLP. Por tanto, la recomendación no debe formularse como superioridad universal, sino como preferencia condicionada por el modelo base y las restricciones operativas.
 
-Este perfil lo posiciona como método fuerte para auditoría técnica cuando se requiere fidelidad y estabilidad. Sin embargo, su coste es heterogéneo: TreeSHAP puede ser eficiente en modelos de árboles, mientras que KernelSHAP puede ser costoso en modelos como SVM o MLP. Por tanto, la recomendación no debe formularse como superioridad universal, sino como preferencia condicionada por el modelo base y las restricciones operativas.
+LIME aparece como método eficiente y parsimonioso. Su coste medio reportado es 226 ms y su fidelidad media 0.560, con parsimonia de 0.085. Estos valores sostienen su utilidad en escenarios donde se requiere explicación rápida, legible y de bajo coste. La limitación crítica es su estabilidad casi nula bajo las condiciones evaluadas: estabilidad media cercana a 0.014 y CV de estabilidad de 86.2% bajo semillas. El valor de LIME dentro del capítulo es mostrar que una explicación plausible y barata no necesariamente es una explicación reproducible.
 
-## Perfil de LIME
+Anchors produce reglas locales de alta precisión, cualitativamente distintas a las atribuciones numéricas de LIME y SHAP. Su fortaleza está en la legibilidad condicional: una regla puede comunicar bajo qué condiciones se mantiene una predicción. En el benchmark, Anchors presenta cobertura incompleta, coste alto y variable, fidelidad media de 0.386 y estabilidad de 0.052. Esta lectura debe ser prudente. No implica que Anchors sea inútil, sino que sus reglas requieren criterios propios de precisión, cobertura y aplicabilidad. Su comparación directa mediante métricas diseñadas para atribuciones debe conservar esta advertencia.
 
-LIME aparece como método eficiente y parsimonioso. Su coste medio reportado es 226 ms y su fidelidad media 0.560, con parsimonia de 0.085. Estos valores sostienen su utilidad en escenarios donde se requiere explicación rápida, legible y de bajo coste.
-
-La limitación crítica es su estabilidad casi nula bajo las condiciones evaluadas. La tesis reporta estabilidad media cercana a 0.014 y CV de estabilidad de 86.2% bajo semillas. Esto restringe su uso en auditoría, comparación entre instancias o escenarios donde dos ejecuciones razonables deberían producir explicaciones consistentes.
-
-## Perfil de Anchors
-
-Anchors produce reglas locales de alta precisión, cualitativamente distintas a las atribuciones numéricas de LIME y SHAP. Su fortaleza está en la legibilidad condicional: una regla puede comunicar bajo qué condiciones se mantiene una predicción.
-
-En el benchmark, Anchors presenta cobertura incompleta, coste alto y variable, fidelidad media de 0.386 y estabilidad de 0.052. Esta lectura debe ser prudente. No implica que Anchors sea inútil, sino que sus reglas requieren criterios propios de precisión, cobertura y aplicabilidad. Su comparación directa mediante métricas diseñadas para atribuciones debe conservar esta advertencia.
-
-## Perfil de DiCE
-
-DiCE genera contrafactuales, no atribuciones de importancia. Por ello, su baja fidelidad bajo métricas de atribución no debe interpretarse como fallo absoluto. En la tesis, DiCE presenta fidelidad de 0.172, estabilidad intermedia de 0.366, parsimonia muy baja de 0.017 y coste moderado de 2,056 ms.
-
-Este perfil sugiere que DiCE es más pertinente cuando el objetivo explicativo es explorar alternativas de acción o corrección, no cuando se busca auditar importancias locales. Su presencia en el benchmark ayuda a mostrar por qué FOM-7 evalúa perfiles y no rankings universales.
-
-## Reproducibilidad del protocolo
-
-La proposición de reproducibilidad se confirma parcialmente. En configuraciones replicadas de EXP1, SHAP-fidelidad, SHAP-estabilidad y LIME-fidelidad muestran CV inferiores al umbral del 15%, con valores principales por debajo de 3%. La excepción es LIME-estabilidad, con CV de 86.2%, explicable por una media cercana a cero.
-
-Esta excepción no invalida el protocolo. Más bien, revela una propiedad estructural del método bajo la configuración evaluada: cuando la estabilidad media es casi nula, pequeñas variaciones absolutas producen un CV relativo alto. FOM-7 permite distinguir entre irreproducibilidad del protocolo e inestabilidad sustantiva del explicador.
-
-## Lectura integrada
-
-Los resultados, resumidos en la Tabla 4, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
-
-La frontera calidad-coste es, por tanto, el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas.
-
-## Figuras integradas
-
-Las visualizaciones registradas en `figures/figure_registry.md` se usan como apoyo, no como sustituto de las pruebas estadísticas. Las figuras integradas incluyen la cobertura EXP2, el diagrama de diferencia crítica, boxplots de fidelidad/estabilidad, diferencias pareadas SHAP-LIME, la relación estabilidad-coste, la correlación entre métricas y el perfil radar por método. En particular, la Figura 7 apoya la discusión de perfiles, mientras la Figura 1 debe acompañar cualquier lectura sobre artefactos faltantes.
+DiCE genera contrafactuales, no atribuciones de importancia. Por ello, su baja fidelidad bajo métricas de atribución no debe interpretarse como fallo absoluto. En la tesis, DiCE presenta fidelidad de 0.172, estabilidad intermedia de 0.366, parsimonia muy baja de 0.017 y coste moderado de 2,056 ms. Este perfil sugiere que DiCE es más pertinente cuando el objetivo explicativo es explorar alternativas de acción o corrección, no cuando se busca auditar importancias locales. Su presencia en el benchmark ayuda a mostrar por qué FOM-7 evalúa perfiles y no rankings universales.
 
 ![Figura 6. Correlación entre métricas del benchmark. Fuente: figura derivada de `thesis/assets/figures/fig_correlacion_metricas_es.png`.](../../figures/exported/fig_correlacion_metricas_es.png)
 
-
-# Discusión
-
-## Lectura integrada de los hallazgos
-
-Los resultados del benchmark no sostienen una jerarquía universal de métodos XAI, sino una frontera de uso condicionada por el objetivo explicativo. Esta distinción es central para interpretar el capítulo: LIME, SHAP, Anchors y DiCE no producen el mismo tipo de objeto explicativo, no fallan por las mismas razones y no deberían seleccionarse mediante una única escala de calidad.
-
-Bajo las condiciones evaluadas en EXP2, SHAP presenta el perfil más sólido para auditoría técnica. La ventaja frente a LIME en fidelidad y estabilidad aparece en las 75 celdas pareadas, con tamaños de efecto muy grandes. Esta regularidad empírica respalda una recomendación práctica: cuando el objetivo es defender explicaciones ante revisión técnica, comparar resultados entre modelos o sostener inferencias sobre comportamiento local, SHAP ofrece la opción más robusta dentro del diseño Adult/tabular analizado.
-
-LIME conserva, sin embargo, un lugar metodológico claro. Su coste medio bajo y su parsimonia lo hacen atractivo para escenarios de exploración rápida, baja latencia o comunicación concisa. La advertencia es igualmente clara: su estabilidad casi nula bajo las condiciones evaluadas impide tratar sus explicaciones como evidencia estable en auditoría. En este sentido, el resultado no invalida LIME como herramienta, pero sí restringe el tipo de afirmación que puede sostenerse a partir de sus salidas.
-
-Anchors y DiCE obligan a ampliar la discusión más allá del eje atribucional. Anchors produce reglas condicionales locales; DiCE produce contrafactuales orientados a acción. Su evaluación mediante métricas de atribución sirve para caracterizar límites comparativos, pero no agota su utilidad. La baja fidelidad de DiCE, por ejemplo, no equivale a fracaso explicativo si la pregunta relevante es qué cambios podrían modificar una predicción. Del mismo modo, la cobertura incompleta de Anchors debe interpretarse como una señal operativa relevante, no como una simple anomalía experimental.
-
-## De métricas aisladas a perfiles explicativos
-
-El hallazgo conceptual más importante es la disociación entre fidelidad, estabilidad, coste y forma explicativa. Una evaluación que use solo fidelidad habría favorecido SHAP, pero habría invisibilizado su coste. Una evaluación centrada solo en parsimonia habría favorecido LIME, pero habría omitido su inestabilidad. Una evaluación centrada solo en interpretabilidad semántica habría destacado Anchors o DiCE, pero sin resolver la trazabilidad inferencial de sus resultados.
-
-Por ello, el capítulo propone interpretar los métodos como perfiles. SHAP corresponde al perfil de auditoría de alta fidelidad y estabilidad; LIME al perfil de explicación rápida y económica; Anchors al perfil de regla local condicional; DiCE al perfil contrafactual y de exploración de alternativas. Esta lectura es más útil que un ranking único porque conecta la selección del método con el propósito de uso.
-
 ![Figura 7. Perfil multidimensional normalizado por método. Fuente: figura derivada de `thesis/assets/figures/fig_radar_metodos_es.png`.](../../figures/exported/fig_radar_metodos_es.png)
 
-La literatura ha señalado de forma recurrente que la interpretabilidad no es un constructo unitario y que la evaluación de XAI debe explicitar qué propiedad se mide, para qué tarea y con qué supuesto de validez [@doshi-velez2017; @alvarezmelis2018; @nauta2023]. Los resultados aquí discutidos refuerzan esa posición desde una evidencia empírica controlada: no basta con preguntar qué método explica mejor, sino qué tipo de explicación se necesita y qué riesgos se aceptan.
+## Reproducibilidad como hallazgo, no solo control
 
-## Papel metodológico de FOM-7
+La proposición de reproducibilidad se confirma parcialmente. En configuraciones replicadas de EXP1, SHAP-fidelidad, SHAP-estabilidad y LIME-fidelidad muestran CV inferiores al umbral del 15%, con valores principales por debajo de 3%. La excepción es LIME-estabilidad, con CV de 86.2%, explicable por una media cercana a cero. Esta excepción no invalida el protocolo. Más bien, revela una propiedad estructural del método bajo la configuración evaluada: cuando la estabilidad media es casi nula, pequeñas variaciones absolutas producen un CV relativo alto.
 
-FOM-7 funciona como la infraestructura que hace defendible esta interpretación. Sin una secuencia de puertas, la comparación entre métodos podría confundirse con una colección de salidas experimentales: algunas completas, otras incompletas, algunas comparables y otras no. El protocolo separa explícitamente ejecución, auditoría, armonización, inferencia y reporte, de modo que cada afirmación conserve su unidad de análisis y su evidencia fuente.
+Este punto es importante para el argumento del capítulo. FOM-7 no solo confirma resultados; también ayuda a distinguir entre fallas del protocolo y propiedades problemáticas del método. Si una métrica varía porque el pipeline es inestable, el estudio pierde confiabilidad. Si una métrica varía porque el explicador produce salidas intrínsecamente inestables bajo condiciones controladas, el hallazgo es sustantivo. En este caso, la reproducibilidad funciona como lente interpretativa y no solo como requisito técnico.
 
-La puerta de auditoría es especialmente relevante para EXP2. El diseño planificado contemplaba 300 celdas, pero solo 275 fueron calificadas. En lugar de ocultar esta pérdida o completarla mediante reconstrucciones no verificables, FOM-7 obliga a reportarla y a delimitar su impacto. Esto preserva la validez de las pruebas confirmativas donde los bloques son completos, y al mismo tiempo impide sobreextender conclusiones sobre métodos con cobertura menor.
+## Síntesis del bloque empírico
 
-La puerta de reporte también modifica el tono de las conclusiones. Una afirmación admisible no dice simplemente que SHAP es superior, sino que SHAP mostró mayor fidelidad y estabilidad que LIME en 75 celdas pareadas del benchmark Adult/tabular, bajo las métricas y configuraciones especificadas. Esta formulación es más estrecha, pero también más científica: reduce la generalidad retórica para aumentar la auditabilidad.
+Los resultados, resumidos en la Tabla 4, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: LIME conserva ventajas de coste y parsimonia; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
 
-## Implicaciones para selección de métodos XAI
+La frontera calidad-coste es el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas. Para un capítulo de libro, esta es la contribución más relevante del bloque empírico: mostrar que el valor de los resultados no reside en una tabla aislada, sino en la manera en que el protocolo convierte diferencias métricas en criterios de uso.
 
-La selección práctica de métodos debería comenzar por el objetivo de explicación. Si se requiere auditoría técnica, trazabilidad y consistencia, la evidencia favorece SHAP, aceptando su coste computacional. Si se requiere explicación rápida y compacta, LIME puede ser adecuado, siempre que no se usen sus salidas como evidencia estable sin controles adicionales. Si se requiere comunicar una condición local en forma de regla, Anchors ofrece una semántica más directa, pero exige revisar cobertura y coste. Si se requiere explorar acciones o cambios contrafactuales, DiCE responde a una pregunta distinta de la atribución y debe evaluarse con criterios de acción correctiva, plausibilidad y factibilidad.
 
-Esta lectura desplaza la recomendación desde "el mejor método" hacia "el método admisible para una tarea y un riesgo". En aplicaciones de alto impacto, esa diferencia no es menor. Una explicación barata pero inestable puede ser aceptable para exploración interna y problemática para auditoría. Una explicación estable pero costosa puede ser inviable en baja latencia y apropiada para revisión diferida. Una regla clara puede ser comunicativamente potente, pero insuficiente si la cobertura es baja. Un contrafactual puede orientar acción, pero requiere restricciones causales o de dominio antes de traducirse en recomendación real.
+# Implicaciones para la evaluación auditable de XAI
+
+## De la selección de métodos a la gobernanza de evidencia
+
+La aplicación empírica muestra que la selección de métodos XAI no puede resolverse mediante una jerarquía universal. LIME, SHAP, Anchors y DiCE producen objetos explicativos distintos, responden preguntas distintas y exhiben compromisos distintos entre fidelidad, estabilidad, coste, cobertura y forma de explicación. Por ello, la pregunta editorialmente más valiosa para un capítulo de libro no es qué método "gana", sino qué condiciones hacen admisible una afirmación sobre cada método.
+
+Este desplazamiento cambia la función del benchmark. Los resultados no se presentan como una competencia cerrada entre explicadores, sino como evidencia de que la evaluación XAI necesita una capa de gobernanza. SHAP ilustra el perfil de auditoría de alta fidelidad y estabilidad; LIME ilustra la tensión entre bajo coste y fragilidad; Anchors ilustra el problema de comparar reglas con métricas de atribución; DiCE ilustra la necesidad de criterios propios para contrafactuales. En conjunto, los cuatro métodos funcionan como casos de una tesis más general: la explicabilidad útil depende de la relación entre objetivo, artefacto, métrica y alcance.
+
+## FOM-7 como disciplina de formulación
+
+La contribución metodológica de FOM-7 es hacer visible el camino entre una salida experimental y una afirmación publicable. Sin una secuencia de puertas, la comparación entre métodos podría confundirse con una colección de resultados: algunos completos, otros incompletos, algunos comparables y otros no. FOM-7 separa ejecución, auditoría, armonización, inferencia, reproducibilidad y reporte, de modo que cada conclusión conserve su unidad de análisis y su evidencia fuente.
+
+Esta disciplina modifica el lenguaje científico. Una afirmación admisible no dice simplemente que SHAP es superior; dice que SHAP mostró mayor fidelidad y estabilidad bajo EXP2, sobre Adult Income, en celdas calificadas, con métricas definidas y pruebas no paramétricas específicas. Una afirmación admisible no dice que LIME sea inadecuado; dice que LIME fue eficiente y parsimonioso, pero inestable bajo semillas y perturbaciones controladas. Esta forma de escribir es más estrecha, pero también más robusta: reduce generalidad retórica para aumentar auditabilidad.
+
+## Implicaciones prácticas
+
+Para auditoría técnica, la evidencia favorece métodos con mayor fidelidad y estabilidad, aun cuando el coste sea mayor. En el benchmark, ese perfil corresponde principalmente a SHAP, con la advertencia de que su viabilidad depende de la variante del explicador y del modelo base. Para exploración rápida, baja latencia o comunicación preliminar, LIME conserva un lugar claro, siempre que sus salidas no se usen como evidencia estable sin controles adicionales. Para explicaciones condicionales, Anchors puede ser útil si se reportan precisión, cobertura y complejidad de regla. Para escenarios orientados a acción o corrección, DiCE responde a una pregunta distinta y debe evaluarse con criterios de validez, proximidad, diversidad y factibilidad.
+
+La recomendación práctica, por tanto, es condicional: seleccionar el método según tarea, riesgo, objeto explicativo y tolerancia al coste. En aplicaciones de alto impacto, una explicación barata pero inestable puede ser aceptable para exploración interna y problemática para auditoría. Una explicación estable pero costosa puede ser inviable en baja latencia y apropiada para revisión diferida. Una regla clara puede ser comunicativamente potente, pero insuficiente si la cobertura es baja. Un contrafactual puede orientar acción, pero requiere restricciones causales o de dominio antes de traducirse en recomendación real.
 
 ## Relación con el estado del campo
 
-El capítulo se alinea con la crítica contemporánea a la proliferación de métricas y herramientas sin gobernanza experimental. Recursos como OpenXAI, Quantus y revisiones recientes han ampliado el repertorio de evaluación, pero la dificultad persiste cuando los estudios no declaran criterios de admisibilidad, alcance inferencial o trazabilidad de artefactos [@agarwal2022; @hedstrom2023; @canha2025].
+El capítulo se alinea con la crítica contemporánea a la proliferación de métricas y herramientas sin gobernanza experimental. Recursos como OpenXAI, Quantus y revisiones recientes han ampliado el repertorio de evaluación, pero la dificultad persiste cuando los estudios no declaran criterios de admisibilidad, alcance inferencial o trazabilidad de artefactos (Agarwal et al., 2022; Hedström et al., 2023; Canha et al., 2025). La contribución específica de FOM-7 no es reemplazar esos recursos, sino ordenar su uso dentro de una secuencia verificable.
 
-La contribución específica de FOM-7 no es reemplazar esos recursos, sino ordenar su uso dentro de una secuencia verificable. Las métricas siguen siendo necesarias, pero dejan de operar como evidencia autosuficiente. Su valor depende de que el diseño esté congelado, los artefactos sean íntegros, las unidades de análisis sean comparables y las conclusiones declaren límites.
-
-En conjunto, la discusión sugiere que la madurez de XAI no depende solo de producir explicadores más sofisticados. También depende de construir prácticas de evaluación capaces de distinguir evidencia fuerte, evidencia descriptiva y observaciones aún no generalizables.
+En conjunto, la discusión sugiere que la madurez de XAI no depende solo de producir explicadores más sofisticados. También depende de construir prácticas de evaluación capaces de distinguir evidencia fuerte, evidencia descriptiva y observaciones aún no generalizables. Esta es la razón por la que el capítulo propone pasar de explicaciones plausibles a evidencia auditable: no para reducir la XAI a métricas, sino para impedir que las métricas se conviertan en afirmaciones sin control metodológico.
 
 
 # Limitaciones y trabajo futuro
