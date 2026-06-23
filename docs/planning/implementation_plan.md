@@ -780,6 +780,49 @@ After all tasks complete:
 
 ---
 
+## Follow-up Task: Empirical Design Enrichment Pass
+
+> **Status:** Completed
+> **Started:** 2026-06-22
+> **Role:** Developer
+
+<task id="21">
+  <name>Improve empirical design section</name>
+  <objective>Expand `07_diseno_empirico.md` into fuller academic prose, enrich it from thesis design material and extracted tables, and convert in-text citations to APA 7 author-year style.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/07_diseno_empirico.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify `07_diseno_empirico.md` contains no Pandoc citation keys.</test>
+    <test>Verify newly cited empirical/statistical references exist in both BibTeX and APA working references.</test>
+    <test>Verify v2 technical draft is regenerated after the empirical-design enrichment pass.</test>
+    <test>Verify no original thesis or paper artifacts were edited.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Empirical design section explains EXP1/EXP2, dataset, sampling, metrics, units, FOM-7 controls, and inferential plan in fuller prose.</criterion>
+    <criterion>Empirical design citations use APA 7 author-year style.</criterion>
+    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>FOM-7 enrichment commit 7178cffbe</dependencies>
+</task>
+
+### Verification
+
+- [x] Empirical design section expanded with stronger rationale and evidence controls.
+- [x] Empirical design in-text citations converted to APA author-year style.
+- [x] Added Breiman, Kohavi/Becker, Demšar, Nemenyi, Wilcoxon, and Lakens references to chapter reference files.
+- [x] V2 technical draft regenerated with updated empirical design section.
+- [x] Original `thesis/` and `pub/` artifacts were not edited.
+
+---
+
 ## Approval
 
 | Role | Name | Date | Status |

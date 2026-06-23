@@ -40,6 +40,7 @@ Create and maintain a separate CIFIE collective book chapter workstream derived 
 - Second methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: method profiles tied more explicitly to extracted benchmark evidence.
 - XAI evaluation crisis enrichment pass completed with `05_crisis_evaluacion_xai.md`: expanded metric-fragmentation, construct-gap, reproducibility, and governance arguments with APA-style citations.
 - FOM-7 protocol enrichment pass completed with `06_protocolo_fom7.md`: expanded gate-by-gate admissibility logic, operational controls, and limits with APA-style citations.
+- Empirical design enrichment pass completed with `07_diseno_empirico.md`: expanded EXP1/EXP2, Adult dataset, sampling, metrics, units, FOM-7 controls, and inferential plan with APA-style citations.
 - Preserve useful project context while excluding local assistant tooling artifacts.
 
 ### Blocked

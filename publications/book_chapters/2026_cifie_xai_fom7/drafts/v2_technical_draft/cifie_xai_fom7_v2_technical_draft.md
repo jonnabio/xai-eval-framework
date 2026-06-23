@@ -307,23 +307,27 @@ Estos límites no debilitan el protocolo; delimitan su contribución. FOM-7 no s
 
 ## Enfoque general
 
-El diseño empírico operacionaliza la evaluación de métodos XAI agnósticos al modelo como un benchmark cuantitativo, reproducible y multi-métrico. Su finalidad es comparar LIME, SHAP, Anchors y DiCE bajo condiciones controladas, evitando que las diferencias observadas se confundan con variaciones no documentadas de modelo, semilla, muestra, configuración o artefacto.
+El diseño empírico operacionaliza la evaluación de métodos XAI agnósticos al modelo como un benchmark cuantitativo, reproducible y multi-métrico. Su finalidad es comparar LIME, SHAP, Anchors y DiCE bajo condiciones controladas, evitando que las diferencias observadas se confundan con variaciones no documentadas de modelo, semilla, muestra, configuración o artefacto. En lugar de tratar las explicaciones como productos aislados, el diseño las inserta en una cadena experimental completa: modelos predictivos congelados, explicadores configurados, artefactos auditados, métricas operacionalizadas y pruebas estadísticas aplicadas sobre unidades de análisis explícitas.
 
-El estudio se ubica en una lógica funcionalmente fundamentada (*functionally-grounded*): las métricas utilizadas son proxies computacionales de calidad explicativa y no evidencia directa de utilidad humana, plausibilidad semántica o causalidad. Esta delimitación es central para sostener afirmaciones prudentes y auditables.
+El estudio se ubica en una lógica funcionalmente fundamentada (*functionally-grounded*): las métricas utilizadas son proxies computacionales de calidad explicativa y no evidencia directa de utilidad humana, plausibilidad semántica o causalidad. Esta delimitación es central para sostener afirmaciones prudentes y auditables. En la taxonomía de Doshi-Velez y Kim (2017), el capítulo no evalúa si una explicación mejora decisiones humanas en una tarea real; evalúa si un conjunto de métodos produce artefactos comparables bajo métricas reproducibles. Esa elección permite control experimental, pero exige que cada conclusión conserve su alcance: datos tabulares, UCI Adult Income, configuraciones declaradas y explicadores post-hoc.
+
+El diseño traduce la discusión conceptual de las secciones anteriores en decisiones operativas. La crisis de evaluación se responde mediante separación de cohortes, congelamiento de modelos, muestreo estratificado, métricas primarias, auditoría FOM-7 y pruebas no paramétricas. La unidad central de la sección no es una cifra de resultado, sino la arquitectura que hace admisible esa cifra. Por ello, las decisiones de partición, preprocesamiento, muestreo, ejecución y análisis se presentan como controles metodológicos y no como detalles secundarios de implementación.
 
 ## Fases experimentales
 
-El diseño distingue dos cohortes de evidencia. La primera, EXP1, funciona como fase de calibración y reproducibilidad. Su propósito es verificar la implementación del pipeline, entrenar y congelar modelos, y estimar dispersión métrica bajo variación de semilla. EXP1 no se utiliza para sostener las afirmaciones confirmativas principales.
+El diseño distingue dos cohortes de evidencia con funciones diferenciadas. La primera, EXP1, funciona como fase de calibración y reproducibilidad. Su propósito es verificar la implementación del pipeline, entrenar y congelar los artefactos de modelo compartidos por todos los explicadores en EXP2, y estimar la dispersión métrica bajo variación de semilla. EXP1 opera como una fase de control: permite observar si las métricas principales son suficientemente estables y si los modelos cumplen umbrales mínimos de desempeño, pero no sostiene las afirmaciones confirmativas principales.
 
-La segunda, EXP2, constituye el benchmark primario. En esta fase se ejecuta el diseño factorial completo y se producen los artefactos que alimentan las pruebas estadísticas, los perfiles por método y las afirmaciones empíricas del capítulo. La separación entre EXP1 y EXP2 reduce la contaminación entre decisiones exploratorias y evidencia confirmatoria.
+La segunda cohorte, EXP2, constituye el benchmark primario. En esta fase se ejecuta el diseño factorial completo y se producen los artefactos que alimentan las pruebas estadísticas, los perfiles por método y las afirmaciones empíricas del capítulo. La separación entre EXP1 y EXP2 reduce la contaminación entre decisiones exploratorias y evidencia confirmatoria. Esta separación es importante porque, en evaluación XAI, los ajustes de configuración después de observar resultados pueden cambiar tanto las métricas como la interpretación de los métodos. FOM-7 convierte esta separación en una regla de admisibilidad: la calibración informa el diseño, pero la inferencia se formula sobre la cohorte confirmativa.
+
+La función de EXP1 también es reproducible. En la tesis, esta fase establece que las métricas de calidad presentan coeficientes de variación inferiores al 9% bajo variación de semilla, mientras que el coste computacional exhibe mayor variabilidad, especialmente en configuraciones con KernelSHAP. Esta diferencia anticipa una tensión que recorre todo el capítulo: la calidad explicativa puede ser más estable que la latencia, y por tanto el coste debe reportarse como dimensión propia del perfil de método, no como simple dato de ingeniería.
 
 ## Conjunto de datos y modelos predictivos
 
-El benchmark utiliza el conjunto UCI Adult Income, un conjunto de datos tabular con variable objetivo binaria y características numéricas y categóricas. Su uso es pertinente para XAI porque permite evaluar explicadores post-hoc en un contexto tabular heterogéneo y ampliamente utilizado en comparaciones de explicabilidad.
+El benchmark utiliza el conjunto UCI Adult Income, un problema tabular de clasificación binaria ampliamente utilizado en aprendizaje automático y evaluación XAI por su estructura heterogénea, su variable objetivo clara y la existencia de comparaciones externas. El conjunto contiene variables numéricas y categóricas asociadas con características demográficas, laborales y educativas, y la tarea consiste en predecir si el ingreso anual supera un umbral de 50,000 dólares (Kohavi & Becker, 1996). Su uso es pertinente para este capítulo porque permite evaluar explicadores post-hoc sobre un escenario tabular con transformaciones de preprocesamiento, variables correlacionadas y clases desbalanceadas de forma moderada.
 
-El pipeline de preprocesamiento se aplica de forma determinista: partición estratificada, tratamiento de valores faltantes, codificación de variables categóricas, escalado de variables numéricas y persistencia del preprocesador ajustado. Las transformaciones se ajustan exclusivamente sobre el conjunto de entrenamiento para evitar fuga de datos.
+El pipeline de preprocesamiento se aplica de forma determinista: partición estratificada, normalización de valores faltantes, codificación de variables categóricas, escalado de variables numéricas y persistencia del preprocesador ajustado. Las transformaciones se ajustan exclusivamente sobre el conjunto de entrenamiento para evitar fuga de datos. Este control es esencial porque los explicadores operan sobre el espacio transformado que consumen los modelos; si el preprocesamiento variara entre métodos, una diferencia atribuida al explicador podría provenir de diferencias de representación. Por ello, el preprocesador se trata como artefacto compartido y congelado.
 
-Se consideran cinco familias de modelos: regresión logística (`logreg`), bosque aleatorio (`rf`), XGBoost (`xgb`), máquina de vectores soporte (`svm`) y perceptrón multicapa (`mlp`). Esta selección permite observar explicadores sobre fronteras de decisión lineales, basadas en árboles, con kernel y neuronales.
+Se consideran cinco familias de modelos: regresión logística (`logreg`), bosque aleatorio (`rf`), XGBoost (`xgb`), máquina de vectores soporte (`svm`) y perceptrón multicapa (`mlp`). Esta selección permite observar explicadores sobre fronteras de decisión lineales, basadas en árboles, con kernel y neuronales. La inclusión de bosque aleatorio sigue la tradición de modelos de ensamblado introducida por Breiman (2001), mientras que XGBoost y los modelos no lineales amplían la diversidad de mecanismos predictivos. El objetivo no es evaluar qué modelo predictivo es superior, sino someter los explicadores a familias de decisión con estructuras distintas y verificar si los perfiles XAI se mantienen bajo esa heterogeneidad.
 
 ## Diseño factorial EXP2
 
@@ -339,58 +343,49 @@ Formalmente, el diseño planificado corresponde a:
 5 modelos x 4 métodos x 5 semillas x 3 tamaños de muestra = 300 celdas
 ```
 
-Los factores son:
+Los factores son: modelos (`logreg`, `rf`, `xgb`, `svm`, `mlp`), métodos (`shap`, `lime`, `anchors`, `dice`), semillas (42, 123, 456, 789, 999) y tamaños de muestra por estrato (50, 100 y 200). Cada celda produce un artefacto independiente de resultados. La variación de semilla permite analizar reproducibilidad, mientras que la variación de tamaño de muestra permite examinar la estabilidad de patrones bajo distintos volúmenes de evidencia local. Esta estructura cruzada evita que una comparación entre explicadores dependa de un único modelo, una única semilla o una única escala de muestra.
 
-- modelos: `logreg`, `rf`, `xgb`, `svm`, `mlp`;
-- métodos: `shap`, `lime`, `anchors`, `dice`;
-- semillas: 42, 123, 456, 789, 999;
-- tamaños de muestra por estrato: 50, 100 y 200.
-
-Cada celda produce un artefacto independiente de resultados. La variación de semilla permite analizar reproducibilidad, mientras que la variación de tamaño de muestra permite examinar la estabilidad de los patrones bajo distintos volúmenes de evidencia local.
+El diseño planificado produce 300 celdas, pero el análisis confirmativo utiliza 275 celdas calificadas tras la auditoría FOM-7. Esta distinción entre diseño planificado y cobertura analítica es deliberada. Los artefactos faltantes o no armonizables no se reemplazan de forma sintética ni se ocultan en promedios globales; se registran como parte de la evidencia. SHAP y LIME alcanzan cobertura completa, DiCE conserva 68 de 75 celdas y Anchors 57 de 75, con impacto interpretativo específico para reglas y contrafactuales. La Figura 1 presenta esta cobertura analítica por modelo y método.
 
 ## Muestreo de instancias
 
-Las instancias se seleccionan mediante muestreo estratificado por cuadrante de error: verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos. Esta estrategia evita evaluar los explicadores únicamente sobre aciertos del modelo y obliga a observar su comportamiento en regiones de decisión correctas e incorrectas.
+Las instancias se seleccionan mediante muestreo estratificado por cuadrante de error: verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos. Esta estrategia evita evaluar los explicadores únicamente sobre aciertos del modelo y obliga a observar su comportamiento en regiones de decisión correctas e incorrectas. En un benchmark de explicabilidad, esta decisión es importante porque una explicación puede parecer razonable cuando el modelo acierta y resultar más difícil de interpretar cuando el modelo falla. Incluir falsos positivos y falsos negativos aproxima el diseño a escenarios de auditoría, donde los errores del modelo suelen ser tan relevantes como sus aciertos.
 
-El tamaño nominal de una ejecución depende del número de instancias por cuadrante, aunque la disponibilidad real puede variar por modelo y estrato. Esta decisión vincula la evaluación XAI con situaciones de auditoría más realistas: un explicador debe examinarse no solo cuando el modelo acierta, sino también cuando falla.
+El tamaño nominal de una ejecución depende del número de instancias por cuadrante, aunque la disponibilidad real puede variar por modelo y estrato. En la tesis, el rango observado va de 27 a 800 instancias por ejecución, con mediana de 400. Esta variación no invalida el diseño porque la inferencia se realiza sobre agregados controlados, no sobre instancias tratadas como réplicas independientes. Además, la estratificación por cuadrante de error permite que cada explicador sea examinado en condiciones de decisión más ricas que una muestra aleatoria simple del conjunto de prueba.
 
 ![Figura 1. Cobertura analítica EXP2 por modelo y método. Fuente: figura derivada de `thesis/assets/figures/fig_cobertura_exp2_es.png`.](../../figures/exported/fig_cobertura_exp2_es.png)
 
 ## Configuración de explicadores
 
-SHAP se ejecuta con variantes acordes al modelo base: `TreeExplainer` para modelos de árboles y `KernelExplainer` para modelos donde se requiere aproximación más general. LIME utiliza `LimeTabularExplainer` con parámetros congelados de muestreo, número de características y ancho de kernel. Anchors emplea reglas locales con umbral de precisión efectivo de 0.95. DiCE genera contrafactuales orientados a la clase opuesta, usando diferencias entre instancia original y contrafactual como base de importancia.
+SHAP se ejecuta con variantes acordes al modelo base: `TreeExplainer` para modelos de árboles y `KernelExplainer` para modelos donde se requiere aproximación más general. LIME utiliza `LimeTabularExplainer` con parámetros congelados de muestreo, número de características y ancho de kernel. Anchors emplea reglas locales con umbral de precisión efectivo de 0.95. DiCE genera contrafactuales orientados a la clase opuesta, usando diferencias entre instancia original y contrafactual como base de importancia. Estas configuraciones deben interpretarse como parte del protocolo experimental. No se evalúan nombres abstractos de métodos, sino implementaciones concretas con parámetros específicos, artefactos registrados y límites conocidos.
 
-Estas configuraciones deben interpretarse como parte del protocolo experimental. No se evalúan nombres abstractos de métodos, sino implementaciones concretas con parámetros específicos, artefactos registrados y límites conocidos.
+La decisión de registrar configuraciones efectivas es crucial porque el nombre de un explicador no determina por sí solo la evidencia que produce. KernelSHAP y TreeSHAP difieren en coste y supuestos; LIME depende de perturbaciones y vecindario; Anchors depende de condiciones de búsqueda y umbral; DiCE depende de restricciones contrafactuales y del modo de generación. Por ello, el diseño empírico no compara etiquetas, sino ejecuciones protocolizadas. Cualquier conclusión posterior debe conservar esta configuración como parte de su alcance.
 
 ## Métricas primarias
 
-El benchmark utiliza cinco métricas primarias, resumidas en la Tabla 1:
+El benchmark utiliza cinco métricas primarias, resumidas en la Tabla 1: fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional. La fidelidad mide la alineación entre importancias y efecto predictivo observado; la estabilidad mide similitud entre explicaciones bajo perturbaciones controladas; la parsimonia aproxima concisión mediante proporción de características activas; la brecha de fidelidad estima el cambio en la salida del modelo al enmascarar características principales; y el coste registra tiempo de ejecución por instancia explicada.
 
-- fidelidad: alineación entre importancias y efecto predictivo observado;
-- estabilidad: similitud entre explicaciones bajo perturbaciones controladas;
-- parsimonia: proporción de características activas;
-- brecha de fidelidad: cambio en la salida del modelo al enmascarar las características principales;
-- coste computacional: tiempo por instancia explicada.
-
-Estas métricas se computan por instancia y se agregan a nivel de ejecución. La unidad inferencial no es la instancia aislada, sino la ejecución agregada y, para las pruebas globales, el bloque experimental.
+Estas métricas se computan por instancia y se agregan a nivel de ejecución mediante media aritmética. La unidad inferencial no es la instancia aislada, sino la ejecución agregada y, para las pruebas globales, el bloque experimental. Esta jerarquía evita pseudorreplicación y mantiene coherencia entre el nivel donde se calcula una métrica y el nivel donde se sostiene una afirmación. Además, cada métrica conserva dirección e interpretación propias: fidelidad, estabilidad y brecha buscan valores mayores; parsimonia y coste se leen en sentido inverso. Una lectura multi-métrica evita confundir calidad explicativa con una única escala.
 
 ## Unidades de análisis
 
-El análisis evita la pseudorreplicación mediante una jerarquía de niveles. A nivel de instancia se calculan métricas individuales. A nivel de ejecución se obtiene el promedio para una combinación de modelo, método, semilla y tamaño. A nivel de bloque, las pruebas Friedman consideran pares modelo-tamaño $(g,n)$, generando 15 bloques completos.
+El análisis adopta una jerarquía explícita. A nivel de instancia se calculan métricas individuales. A nivel de ejecución se obtiene el promedio para una combinación de modelo, método, semilla y tamaño. A nivel de bloque, las pruebas Friedman consideran pares modelo-tamaño $(g,n)$, generando 15 bloques completos. Esta jerarquía es el control principal contra la pseudorreplicación: muchas instancias explicadas dentro de una misma celda no equivalen a muchas réplicas independientes del método.
 
-Para el contraste SHAP-LIME, la unidad primaria es la celda pareada $(g,s,n)$. Esto permite comparar ambos métodos en 75 coordenadas experimentales coincidentes, reduciendo la confusión por modelo, semilla o tamaño de muestra.
+Para el contraste SHAP-LIME, la unidad primaria es la celda pareada $(g,s,n)$. Esto permite comparar ambos métodos en 75 coordenadas experimentales coincidentes, reduciendo la confusión por modelo, semilla o tamaño de muestra. La comparación pareada es más estricta que una comparación de promedios independientes porque exige que ambos métodos existan en la misma coordenada experimental. En este caso, la cobertura completa de SHAP y LIME permite sostener una inferencia más limpia sobre la frontera calidad-coste entre ambos métodos.
 
 ## Control FOM-7
 
-El diseño se gobierna mediante FOM-7, resumido en la Tabla 3. Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones.
+El diseño se gobierna mediante FOM-7, resumido en la Tabla 3. Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones. Esta estructura es necesaria porque el benchmark no solo produce resultados; produce resultados que deben ser admisibles como evidencia. Una celda con artefacto vacío, esquema incompatible o valores inválidos no puede alimentar pruebas confirmativas. Una afirmación sin trazabilidad a tabla, script, configuración o límite de alcance no debe presentarse como inferencial.
 
-Esta estructura es necesaria porque el benchmark no solo produce resultados; produce resultados que deben ser admisibles como evidencia. Una celda con artefacto vacío, esquema incompatible o valores inválidos no puede alimentar pruebas confirmativas. Una afirmación sin trazabilidad a tabla, script, configuración o límite de alcance no debe presentarse como inferencial.
+En la práctica, FOM-7 conecta el diseño con los resultados. La puerta 3 explica por qué las 25 celdas no calificadas se excluyen de ciertas pruebas; la puerta 4 permite transformar artefactos heterogéneos en tablas comparables; la puerta 5 genera tablas de Friedman, Nemenyi y Wilcoxon desde entradas calificadas; la puerta 6 sostiene la lectura de reproducibilidad; y la puerta 7 obliga a que cada afirmación pueda regresar a un artefacto fuente. Este control evita que el capítulo dependa de una confianza informal en el pipeline y convierte la auditabilidad en parte del método.
 
 ## Plan inferencial
 
-Las diferencias globales entre métodos se evalúan mediante pruebas de Friedman y comparaciones post-hoc de Nemenyi sobre bloques completos. El análisis pareado SHAP-LIME utiliza pruebas bilaterales de Wilcoxon y corrección de multiplicidad Holm-Bonferroni. La reproducibilidad se examina mediante coeficientes de variación en configuraciones replicadas.
+Las diferencias globales entre métodos se evalúan mediante pruebas de Friedman y comparaciones post-hoc de Nemenyi sobre bloques completos. Esta elección es apropiada para comparar varios tratamientos sobre bloques relacionados y se apoya en la tradición de pruebas no paramétricas para comparación de clasificadores y métodos sobre diseños repetidos (Friedman, 1937; Demšar, 2006). Cuando Friedman rechaza la hipótesis nula, Nemenyi permite localizar diferencias de rangos entre métodos sin asumir normalidad fuerte de las métricas (Nemenyi, 1963).
 
-El objetivo del plan inferencial no es producir un ranking universal de explicadores, sino determinar qué diferencias son defendibles bajo el diseño, con qué tamaño de efecto, sobre qué unidad de análisis y dentro de qué alcance empírico.
+El análisis pareado SHAP-LIME utiliza pruebas bilaterales de Wilcoxon sobre celdas coincidentes, con corrección de multiplicidad Holm-Bonferroni y reporte de tamaños de efecto. Wilcoxon es adecuado para contrastar diferencias pareadas cuando no se desea asumir normalidad de las diferencias (Wilcoxon, 1945), mientras que el tamaño de efecto permite evaluar magnitud práctica y no solo significación estadística (Lakens, 2013). La reproducibilidad se examina mediante coeficientes de variación en configuraciones replicadas, especialmente para distinguir señales estables de variación inducida por semilla.
+
+El objetivo del plan inferencial no es producir un ranking universal de explicadores, sino determinar qué diferencias son defendibles bajo el diseño, con qué tamaño de efecto, sobre qué unidad de análisis y dentro de qué alcance empírico. Por ello, los resultados posteriores deben leerse como afirmaciones condicionadas: diferencias entre métodos sobre Adult Income, con cinco familias de modelos, cinco semillas, tres tamaños de muestra, métricas definidas y artefactos calificados por FOM-7.
 
 
 # Resultados principales: frontera calidad-coste
@@ -613,6 +608,8 @@ Belle, V., & Papantonis, I. (2021). Principles and practice of explainable machi
 
 Bhattacharya, A., & Verbert, K. (2024). How good is your explanation? Towards a standardised evaluation approach for diverse XAI methods on multiple dimensions of explainability. In *Proceedings of the 32nd ACM Conference on User Modeling, Adaptation and Personalization (UMAP Adjunct '24)*. https://doi.org/10.1145/3631700.3664911
 
+Breiman, L. (2001). Random forests. *Machine Learning, 45*(1), 5-32. https://doi.org/10.1023/a:1010933404324
+
 Burger, C., Chen, L., & Le, T. (2023). Are your explanations reliable? Investigating the stability of LIME in explaining text classifiers by marrying XAI and adversarial attack. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing* (pp. 12931-12944). https://doi.org/10.18653/v1/2023.emnlp-main.792
 
 Canha, D., Kubler, S., Främling, K., & Fagherazzi, G. (2025). A functionally-grounded benchmark framework for XAI methods: Insights and foundations from a systematic literature review. *ACM Computing Surveys, 57*(12). https://doi.org/10.1145/3737445
@@ -621,6 +618,8 @@ Carvalho, D. V., Pereira, E. M., & Cardoso, J. S. (2019). Machine learning inter
 
 Doshi-Velez, F., & Kim, B. (2017). *Towards a rigorous science of interpretable machine learning*. arXiv. https://doi.org/10.48550/arXiv.1702.08608
 
+Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research, 7*, 1-30. https://www.jmlr.org/papers/v7/demsar06a.html
+
 Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. *Journal of the American Statistical Association, 32*(200), 675-701. https://doi.org/10.1080/01621459.1937.10503522
 
 Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi, D. (2018). A survey of methods for explaining black box models. *ACM Computing Surveys, 51*(5), 1-42. https://doi.org/10.1145/3236009
@@ -628,6 +627,10 @@ Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi
 Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., & Höhne, M. M.-C. (2023). Quantus: An explainable AI toolkit for responsible evaluation of neural network explanations and beyond. *Journal of Machine Learning Research, 24*(34), 1-11.
 
 Karimi, A.-H., Barthe, G., Schölkopf, B., & Valera, I. (2022). A survey of algorithmic recourse: Contrastive explanations and consequential recommendations. *ACM Computing Surveys, 55*(5), 1-29. https://doi.org/10.1145/3527848
+
+Kohavi, R., & Becker, B. (1996). *Adult data set*. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/2/adult
+
+Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. *Frontiers in Psychology, 4*, 863. https://doi.org/10.3389/fpsyg.2013.00863
 
 Laugel, T., Lesot, M.-J., Marsala, C., Renard, X., & Detyniecki, M. (2019). The dangers of post-hoc interpretability: Unjustified counterfactual explanations. In *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence* (pp. 2801-2807). https://doi.org/10.24963/ijcai.2019/388
 
@@ -642,6 +645,8 @@ Mothilal, R. K., Sharma, A., & Tan, C. (2020). Explaining machine learning class
 Murdoch, W. J., Singh, C., Kumbier, K., Abbasi-Asl, R., & Yu, B. (2019). Definitions, methods, and applications in interpretable machine learning. *Proceedings of the National Academy of Sciences, 116*(44), 22071-22080. https://doi.org/10.1073/pnas.1900654116
 
 Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y., Schlötterer, J., van Keulen, M., & Seifert, C. (2023). From anecdotal evidence to quantitative evaluation methods: A systematic review on evaluating explainable AI. *ACM Computing Surveys, 55*(13s), 1-42. https://doi.org/10.1145/3583558
+
+Nemenyi, P. B. (1963). *Distribution-free multiple comparisons* [Doctoral dissertation, Princeton University]. https://catalog.princeton.edu/catalog/2081365
 
 Pawlicki, M., Pawlicka, A., Uccello, F., Szelest, S., D'Antonio, S., Kozik, R., & Choraś, M. (2024). Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination. *Neurocomputing, 602*, 128282. https://doi.org/10.1016/j.neucom.2024.128282
 
@@ -660,5 +665,7 @@ Slack, D., Hilgard, S., Jia, E., Singh, S., & Lakkaraju, H. (2020). Fooling LIME
 Van den Broeck, G., Lykov, A., Schleich, M., & Suciu, D. (2022). On the tractability of SHAP explanations. *Journal of Artificial Intelligence Research, 74*, 851-886. https://doi.org/10.1613/jair.1.13283
 
 Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. *SSRN Electronic Journal*. https://doi.org/10.2139/ssrn.3063289
+
+Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin, 1*(6), 80-83. https://doi.org/10.2307/3001968
 
 Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., & Luo, D. (2025). F-FIDELITY: A robust framework for faithfulness evaluation of explainable AI. *ICLR 2025 Proceedings*. https://trustai4s-lab.github.io/ffidelity

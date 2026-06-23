@@ -14,8 +14,11 @@
 - `@arrieta2019` — conceptos, taxonomías y retos de XAI responsable.
 - `@belle2021` — principios y práctica de aprendizaje automático explicable.
 - `@carvalho2019` — revisión de métodos y métricas de interpretabilidad.
+- `@breiman2001` — bosque aleatorio como familia de modelo predictivo.
 - `@guidotti2018` — revisión de métodos para explicar modelos de caja negra.
 - `@karimi2022` — recourse algorítmico, recomendaciones consecuenciales y contrafactuales.
+- `@kohavi1996` — conjunto UCI Adult Income.
+- `@lakens2013` — reporte e interpretación de tamaños de efecto.
 - `@laugel2019` — riesgos de contrafactuales post-hoc injustificados.
 - `@lundberg2017` — SHAP / valores de Shapley.
 - `@lipton2018` — crítica conceptual a la interpretabilidad.
@@ -37,6 +40,9 @@
 - `@nauta2023` — revisión sistemática de evaluación cuantitativa XAI.
 - `@rudin2022` — principios y retos de aprendizaje automático interpretable.
 - `@friedman1937` — prueba de Friedman para comparación por rangos.
+- `@demsar2006` — comparación estadística no paramétrica de clasificadores/métodos.
+- `@nemenyi1963` — comparaciones múltiples post-hoc de Nemenyi.
+- `@wilcoxon1945` — prueba pareada de rangos con signo.
 - `@altukhi2025` — revisión reciente de avances XAI.
 - `@schwalbe2023` — taxonomía de conceptos y métodos XAI.
 - `@pawlicki2024` — necesidad de múltiples métricas en evaluación XAI.
