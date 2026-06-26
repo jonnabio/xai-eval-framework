@@ -1,59 +1,70 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-06-21
+- **Last Updated:** 2026-06-25
 - **Branch:** publication/cifie-xai-fom7-book-chapter
-- **Mode:** Publication workstream scaffolding
+- **Mode:** Publication workstream handoff
 
 ## Current Objective
 Create and maintain a separate CIFIE collective book chapter workstream derived from the doctoral XAI research while preserving existing thesis and paper artifacts.
 
-## Current State
+## Handoff Summary
 
-### Working
-- Core framework supports config-driven XAI experiments.
-- FastAPI backend serves experiment runs, health checks, batch operations, and human evaluation endpoints.
-- Thesis production is organized under `thesis/` with publication fragments under `pub/`.
-- Experiment and recovery workflows are organized under `configs/`, `experiments/`, `scripts/`, and `src/experiment/`.
-- CIFIE book chapter scaffolding is organized under `publications/book_chapters/2026_cifie_xai_fom7/` as an independent publication artifact.
+- **Completed**:
+  - Created and maintained the CIFIE/FOM-7 book chapter as a separate publication workstream under `publications/book_chapters/2026_cifie_xai_fom7/`, without overwriting thesis or paper artifacts.
+  - Read and applied project/ACE context, chapter instructions, protected-file guidance, and thesis sources as read-only evidence.
+  - Built the chapter scaffold, source inventory, evidence map, references workspace, figure/table registries, and v2 technical draft workflow.
+  - Completed extraction pass 1: populated `references/references.bib`, `references/citation_audit.md`, and `tables/table_metrics.md`.
+  - Completed extraction pass 2: populated `tables/table_results_summary.md` and firmed up `figures/figure_registry.md` from thesis results.
+  - Completed extraction pass 3: pulled FOM-7 protocol details into `06_protocolo_fom7.md` and reconciled `tables/table_fom7_gates.md`.
+  - Drafted the core Spanish chapter sections from `01_resumen_palabras_clave.md` through `11_conclusiones.md`.
+  - Copied registered thesis figures into `figures/exported/` and converted working table/figure references into numbered callouts.
+  - Prepared `drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md` and `editorial_pass_v2.md`.
+  - Enriched `02_introduccion.md` with fuller academic prose, thesis paper sources, APA 7 author-year citations, and updated references.
+  - Enriched `03_fundamentos_xai.md` with expanded XAI foundations and APA 7 author-year citations.
+  - Enriched `04_metodos_lime_shap_anchors_dice.md` twice: first for method-specific literature support, then for benchmark-evidence profiles.
+  - Enriched `05_crisis_evaluacion_xai.md` around metric fragmentation, construct gaps, reproducibility, traceability, and governance.
+  - Enriched `06_protocolo_fom7.md` with gate-by-gate admissibility logic, operational controls, and explicit limits.
+  - Enriched `07_diseno_empirico.md` with EXP1/EXP2 rationale, Adult dataset details, sampling, metrics, units of analysis, FOM-7 controls, and inferential plan.
+  - Restructured `08_resultados.md` and `09_discusion.md` for book-chapter form: results are now an integrated empirical application/evidence block, and discussion is a concise methodological implications section.
+  - Updated `chapter_outline.md`, `references_apa7.md`, `citation_audit.md`, `editorial_pass_v2.md`, and `docs/planning/implementation_plan.md` throughout the workstream.
+  - Latest committed chapter-workstream commit: `250493372 Integrate CIFIE results and discussion for book chapter`.
 
-### Local Tooling
-- ACE is local AI-assisted Coding Engineering tooling and is not part of the project source.
-- ACE generated files should remain ignored locally via `.git/info/exclude`, not committed to the repository.
+- **Current State**:
+  - Branch is `publication/cifie-xai-fom7-book-chapter`.
+  - Current HEAD is `250493372`.
+  - The CIFIE chapter has a complete technical v2 draft assembled from section files, with enriched sections `02` through `07` and a book-chapter-oriented `08`/`09` structure.
+  - `02_introduccion.md` through `07_diseno_empirico.md` have been converted to APA 7 author-year in-text citations.
+  - `08_resultados.md` and `09_discusion.md` contain no Pandoc citation keys after the structural revision.
+  - `references/references.bib` and `references/references_apa7.md` include the added literature used during enrichment passes.
+  - The v2 draft is intentionally long after enrichment; latest recorded approximate word count is 17,465 words including references.
+  - Thesis and paper artifacts under `thesis/` and `pub/` were used as read-only source material during this workstream.
 
-### In Progress
-- CIFIE Spanish technical book chapter workstream setup for FOM-7/XAI evaluation.
-- Source inventory and evidence mapping for section-by-section chapter drafting.
-- Extraction pass 1 completed for initial references, citation audit, and metrics table.
-- Extraction pass 2 completed for empirical result summary and figure registry.
-- Extraction pass 3 completed for FOM-7 protocol details and gate reconciliation.
-- Controlled drafting pass 1 completed for XAI foundations and methods sections.
-- Controlled drafting pass 2 completed for the XAI evaluation crisis section and FOM-7 transition.
-- Controlled drafting pass 3 completed for empirical design and results sections.
-- Controlled drafting pass 4 completed for discussion, limitations/future work, and conclusions.
-- Controlled drafting pass 5 completed for abstract/keywords, introduction, chapter assembly index, and terminology/callout harmonization.
-- Figure and table integration pass completed: selected thesis figures copied into the CIFIE workstream and manuscript callouts numbered.
-- V2 technical draft and editorial pass completed under `drafts/v2_technical_draft/`.
-- Introduction enrichment pass completed with `02_introduccion.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
-- Foundations enrichment pass completed with `03_fundamentos_xai.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
-- Methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: paragraphs expanded using thesis paper sources and APA-style in-text citations.
-- Second methods enrichment pass completed with `04_metodos_lime_shap_anchors_dice.md`: method profiles tied more explicitly to extracted benchmark evidence.
-- XAI evaluation crisis enrichment pass completed with `05_crisis_evaluacion_xai.md`: expanded metric-fragmentation, construct-gap, reproducibility, and governance arguments with APA-style citations.
-- FOM-7 protocol enrichment pass completed with `06_protocolo_fom7.md`: expanded gate-by-gate admissibility logic, operational controls, and limits with APA-style citations.
-- Empirical design enrichment pass completed with `07_diseno_empirico.md`: expanded EXP1/EXP2, Adult dataset, sampling, metrics, units, FOM-7 controls, and inferential plan with APA-style citations.
-- Book-chapter structural revision completed for `08_resultados.md` and `09_discusion.md`: results are now an integrated empirical application/evidence block and discussion is a concise methodological implications section.
-- Preserve useful project context while excluding local assistant tooling artifacts.
+- **Next Steps**:
+  1. Enrich and APA-normalize `10_limitaciones_trabajo_futuro.md` and `11_conclusiones.md` so the closing block matches the revised book-chapter voice.
+  2. Review `01_resumen_palabras_clave.md` after the body stabilizes, because abstract/keywords should reflect the new evidence-and-implications structure.
+  3. Run a chapter-wide citation sweep for remaining Pandoc keys in `manuscript/*.md` and convert any remaining citations to APA 7 author-year style.
+  4. Perform a reduction/adaptation pass against the final CIFIE word limit and template requirements.
+  5. Prepare `drafts/v3_editorial_review/` after APA/DOI validation, table-width adaptation, and final figure/table checks.
 
-### Blocked
-- Full `git status` can be slow or time out on the WSL `/mnt/c` worktree; prefer targeted Git checks when possible.
+- **Blockers/Issues**:
+  - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
+  - The enriched v2 draft is much longer than the earlier 7,000-8,500 word target and will require a deliberate compression pass if that target applies.
+  - Full `git status` can be slow or time out on the WSL `/mnt/c` worktree.
+  - Pre-existing unrelated local changes remain under `pub/` and `thesis/`; they were not part of the chapter commits and should not be reverted or committed accidentally.
+  - APA 7 reference list is still a working list: DOI/URL details, proceedings formatting, capitalization, and final hanging-indent formatting require editorial validation.
 
-## Next Steps
-1. Continue section-by-section prose improvement while converting remaining citations to APA 7 in-text style.
-2. Confirm final CIFIE template, word limit, and citation rendering requirements.
-3. Reduce/adapt the v2 technical draft if the 7,000-8,500 word target is enforced.
-4. Prepare `drafts/v3_editorial_review/` after APA/DOI validation and template adaptation.
-5. Continue using narrow Git commands for status checks on this worktree.
-6. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
+- **Notes**:
+  - Keep the CIFIE chapter as a distinct publication output under `publications/book_chapters/2026_cifie_xai_fom7/`.
+  - Do not overwrite or rewrite existing thesis or paper artifacts; use `thesis/` and `pub/` only as read-only evidence unless explicitly instructed otherwise.
+  - Prefer targeted Git commands over full `git status` on this WSL-mounted worktree.
+  - Use narrow commits that stage explicit file paths only. The successful low-level commit pattern used in this session was:
+    ```bash
+    git add <specific files>
+    tree_sha=$(git write-tree) && parent_sha=$(git rev-parse HEAD) && commit_sha=$(printf '%s\n' '<message>' | git commit-tree "$tree_sha" -p "$parent_sha") && git update-ref refs/heads/publication/cifie-xai-fom7-book-chapter "$commit_sha" "$parent_sha" && git show --stat --oneline --no-renames --summary "$commit_sha"
+    ```
+  - Known unrelated local diffs observed repeatedly: `pub/claims.toml`, `pub/fragments/build_meta.env`, `pub/fragments/paper_a_abstract_en.tex`, `pub/fragments/paper_b_abstract_en.tex`, `pub/fragments/paper_c_abstract_en.tex`, `pub/fragments/thesis_abstract_en.qmd`, `pub/fragments/thesis_resumen_es.qmd`, `thesis/capitulo-3-diseno-experimental.qmd`, and `thesis/introduccion.qmd`.
+  - ACE/local assistant tooling should remain excluded unless the project explicitly adopts it.
 
 ## Active Constraints
 - Do not commit secrets, generated caches, datasets, model binaries, or local assistant tooling.
