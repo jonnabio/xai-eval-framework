@@ -12,8 +12,8 @@ Este archivo funciona como índice operativo para ensamblar el capítulo complet
 6. `05_crisis_evaluacion_xai.md`
 7. `06_protocolo_fom7.md`
 8. `07_diseno_empirico.md`
-9. `08_resultados.md`
-10. `09_discusion.md`
+9. `08_aplicacion_empirica_perfiles_fom7.md`
+10. `09_implicaciones_evaluacion_auditable_xai.md`
 11. `10_limitaciones_trabajo_futuro.md`
 12. `11_conclusiones.md`
 

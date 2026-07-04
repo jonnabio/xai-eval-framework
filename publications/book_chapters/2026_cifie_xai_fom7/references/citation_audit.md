@@ -30,14 +30,14 @@
 - `@slack2020` — ataques adversariales a explicaciones post-hoc LIME/SHAP.
 - `@vandenbroeck2022` — tractabilidad de explicaciones SHAP.
 - `@wachter2017` — contrafactuales y decisiones automatizadas.
-- `@doshi-velez2017` — evaluación rigurosa de interpretabilidad.
+- `@doshi-velez2017` — evaluación rigurosa de interpretabilidad; verificada en pasada OA 2026-07-04 mediante OpenAlex/arXiv.
 - `@alvarezmelis2018` — robustez de métodos de interpretabilidad.
-- `@canha2025` — benchmark functionally-grounded para XAI.
+- `@canha2025` — benchmark functionally-grounded para XAI; verificada en pasada OA 2026-07-04 mediante OpenAlex y Crossref.
 - `@abdulkadir2023` — revisión/taxonomía de métricas XAI.
-- `@hedstrom2023` — Quantus y evaluación responsable de explicaciones.
-- `@agarwal2022` — OpenXAI y evaluación transparente.
+- `@hedstrom2023` — Quantus y evaluación responsable de explicaciones; verificada en pasada OA 2026-07-04 mediante Semantic Scholar, OpenAlex/arXiv y JMLR.
+- `@agarwal2022` — OpenXAI y evaluación transparente; verificada en pasada OA 2026-07-04 mediante Semantic Scholar y OpenAlex/arXiv.
 - `@zheng2025` — F-FIDELITY y evaluación de fidelidad.
-- `@nauta2023` — revisión sistemática de evaluación cuantitativa XAI.
+- `@nauta2023` — revisión sistemática de evaluación cuantitativa XAI; verificada en pasada OA 2026-07-04 mediante Semantic Scholar, OpenAlex y Crossref.
 - `@rudin2022` — principios y retos de aprendizaje automático interpretable.
 - `@friedman1937` — prueba de Friedman para comparación por rangos.
 - `@demsar2006` — comparación estadística no paramétrica de clasificadores/métodos.
@@ -45,9 +45,47 @@
 - `@wilcoxon1945` — prueba pareada de rangos con signo.
 - `@altukhi2025` — revisión reciente de avances XAI.
 - `@schwalbe2023` — taxonomía de conceptos y métodos XAI.
-- `@pawlicki2024` — necesidad de múltiples métricas en evaluación XAI.
-- `@bhattacharya2024` — evaluación multidimensional de explicaciones.
+- `@pawlicki2024` — necesidad de múltiples métricas en evaluación XAI; verificada en pasada OA 2026-07-04 mediante Semantic Scholar, OpenAlex y Crossref.
+- `@bhattacharya2024` — evaluación multidimensional de explicaciones; verificada en pasada OA 2026-07-04 mediante OpenAlex y Crossref.
 - `@burger2023` — estabilidad de LIME.
+
+## Pasada de enriquecimiento OA: 2026-07-04
+
+Objetivo: reforzar afirmaciones sobre evaluación multidimensional, límites de transferencia de métricas, distinción entre evaluación funcional y estudios con usuarios, y necesidad de benchmarks trazables.
+
+### Bases consultadas
+
+- Semantic Scholar Graph API:
+  - Búsquedas temáticas intentadas: evaluación XAI, OpenXAI, Quantus, evaluación human-grounded y benchmark functionally-grounded.
+  - Resultado: la búsqueda general devolvió HTTP 429 por límite del *shared rate pool* sin API key.
+  - Consultas por identificador con resultado parcial:
+    - `DOI:10.1145/3583558` → `@nauta2023`, Semantic Scholar paperId `7caaafd5a3ee033c98e792c7ea5b699d005753d5`, OA confirmado, PDF ACM registrado.
+    - `DOI:10.1016/j.neucom.2024.128282` → `@pawlicki2024`, Semantic Scholar paperId `c44d4ef36b44e4d40861c900881e7153a2cbf958`, OA confirmado.
+    - `ARXIV:2202.06861` → `@hedstrom2023`, Semantic Scholar paperId `30e776268268e84becd2863b0632247da61238b9`, identificado como Quantus/JMLR/arXiv.
+    - `ARXIV:2206.11104` → `@agarwal2022`, Semantic Scholar paperId `868e35374cb9c0fc6e4cfb17f96835aefcf520cc`, identificado como OpenXAI/arXiv.
+- OpenAlex:
+  - `@nauta2023` → OpenAlex `W4321786089`, DOI `10.1145/3583558`, OA híbrido, ACM Computing Surveys.
+  - `@canha2025` → OpenAlex `W4410705990`, DOI `10.1145/3737445`, OA verde, ACM Computing Surveys.
+  - `@pawlicki2024` → OpenAlex `W4401009060`, DOI `10.1016/j.neucom.2024.128282`, OA híbrido, Neurocomputing.
+  - `@bhattacharya2024` → OpenAlex `W4400106588`, DOI `10.1145/3631700.3664911`, OA verde, UMAP Adjunct.
+  - `@doshi-velez2017` → OpenAlex `W2594475271`, DOI `10.48550/arXiv.1702.08608`, OA verde, arXiv.
+- Crossref:
+  - DOI metadata verified for `@nauta2023`, `@canha2025`, `@pawlicki2024`, and `@bhattacharya2024`.
+  - Crossref returned 404 for arXiv DOI lookups `10.48550/arXiv.1702.08608`, `10.48550/arXiv.2202.06861`, and `10.48550/arXiv.2206.11104`; these remain verified through OpenAlex/Semantic Scholar/arXiv/JMLR URLs rather than Crossref.
+
+### Fuentes aceptadas para esta pasada
+
+- `@nauta2023` — aceptada para respaldar que la evaluación XAI requiere métodos cuantitativos, multidimensionales y dependientes del tipo de explicación.
+- `@canha2025` — aceptada para respaldar el encuadre *functionally-grounded* y los límites de generalización de benchmarks funcionales.
+- `@pawlicki2024` — aceptada para respaldar la necesidad de múltiples métricas en evaluación XAI.
+- `@bhattacharya2024` — aceptada para respaldar la evaluación multidimensional y la estandarización de criterios para métodos XAI diversos.
+- `@doshi-velez2017` — aceptada para respaldar la distinción entre evaluación funcional, *human-grounded* y *application-grounded*.
+- `@hedstrom2023` y `@agarwal2022` — conservadas como soporte de herramientas/benchmarks de evaluación; se añadieron URLs OA a las referencias de trabajo.
+
+### Fuentes no aceptadas o no usadas
+
+- Búsquedas generales de Semantic Scholar no produjeron candidatos adicionales por HTTP 429.
+- No se añadieron fuentes nuevas solo por actualidad; las fuentes aceptadas ya tenían correspondencia directa con afirmaciones presentes en las secciones 09 y 10.
 
 ## Referencias sin cita en texto
 
@@ -60,16 +98,16 @@ Tras las pasadas de redacción controlada, las referencias fundacionales y de ev
 ## DOI pendientes
 
 - `@alvarezmelis2018`: entrada arXiv con URL; sin DOI en la fuente de tesis.
-- `@hedstrom2023`: falta DOI en la entrada fuente; verificar si JMLR registra DOI o usar URL oficial.
-- `@agarwal2022`: falta DOI en la entrada fuente; verificar registro NeurIPS/OpenReview si aplica.
+- `@hedstrom2023`: sin DOI JMLR registrado en la entrada de trabajo; URL oficial JMLR y arXiv `2202.06861` añadidos.
+- `@agarwal2022`: sin DOI NeurIPS registrado en la entrada de trabajo; URL arXiv `2206.11104` añadida.
 - `@zheng2025`: entrada fuente usa URL del proyecto; verificar DOI/publicación final si existe.
 
 ## URL pendientes de validación
 
 - `https://arxiv.org/abs/1806.08049` (`@alvarezmelis2018`).
 - `https://trustai4s-lab.github.io/ffidelity` (`@zheng2025`).
-- Página oficial de Quantus/JMLR para `@hedstrom2023`.
-- Página oficial NeurIPS/OpenReview para `@agarwal2022`.
+- Página oficial de Quantus/JMLR para `@hedstrom2023` registrada en la pasada OA de 2026-07-04.
+- Página arXiv/OpenXAI para `@agarwal2022` registrada en la pasada OA de 2026-07-04.
 
 ## Figuras/tablas que requieren fuente
 

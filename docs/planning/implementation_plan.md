@@ -1,81 +1,117 @@
-# Implementation Plan: CIFIE XAI FOM-7 Book Chapter Workstream
+# Implementation Plan: CIFIE Manuscript Editing Skill
 
 > **Status:** Completed
-> **Created:** 2026-06-20
-> **Author:** Architect
-> **PRD Reference:** publications/book_chapters/chapter_instructions.md
+> **Created:** 2026-07-04
+> **Author:** Scientific Editor
+> **PRD Reference:** publications/book_chapters/2026_cifie_xai_fom7/
 
 ---
 
 ## Overview
 
-Create a separate publication workstream for the CIFIE collective book chapter derived from the doctoral research on model-agnostic XAI evaluation. The workstream will live under `publications/book_chapters/2026_cifie_xai_fom7/` and must not overwrite thesis or paper artifacts.
+Create a project-local ACE skill for editing the CIFIE/FOM-7 Spanish book chapter manuscript with guidance for academic prose, APA 7 consistency, evidence traceability, and submission readiness.
 
 ---
 
 ## Prerequisites
 
 - [x] Requirements analyzed and understood
-- [x] Existing publication structure inspected
+- [x] Existing ACE skill patterns inspected
 - [x] Regression guards reviewed
-- [x] Branch created: `publication/cifie-xai-fom7-book-chapter`
-- [x] Stakeholder confirmed normalization of Spanish UTF-8 accents
+- [x] Environment ready
+- [x] Project-local skill location selected: `.ace/skills/cifie-manuscript-editing/`
 
 ---
 
 ## Tasks
 
 <task id="1">
-  <name>Create publication directory structure</name>
-  <objective>Establish the independent CIFIE book chapter workstream under publications/book_chapters/2026_cifie_xai_fom7/.</objective>
+  <name>Create CIFIE manuscript editing skill</name>
+  <objective>Add a reusable ACE skill for revising and literature-enriching the CIFIE/FOM-7 chapter while preserving workstream constraints.</objective>
   <files>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/**</create>
-    <modify>None outside the new workstream</modify>
+    <create>.ace/skills/cifie-manuscript-editing/SKILL.md</create>
+    <create>.ace/skills/cifie-manuscript-editing/agents/openai.yaml</create>
+    <modify>.aceconfig</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
   </files>
   <tests>
-    <test>Verify the requested directories exist.</test>
+    <test>Validate the skill folder with the skill-creator quick validator.</test>
+    <test>Verify `.aceconfig` contains CIFIE manuscript editing trigger mappings.</test>
   </tests>
   <acceptance_criteria>
-    <criterion>No thesis or paper artifacts are overwritten.</criterion>
-    <criterion>Requested directory tree exists.</criterion>
+    <criterion>The skill can be invoked for CIFIE, book chapter, manuscript editing, and publication editing requests.</criterion>
+    <criterion>The skill preserves thesis/paper read-only evidence constraints, FOM-7 terminology, APA 7 discipline, open-access literature verification, and ACTIVE_CONTEXT updates.</criterion>
   </acceptance_criteria>
   <complexity>S</complexity>
   <dependencies>None</dependencies>
 </task>
 
 <task id="2">
-  <name>Create manuscript, table, figure, reference, and compliance placeholders</name>
-  <objective>Create the requested publication files with normalized Spanish text where content was specified.</objective>
+  <name>Open-access literature enrichment pass</name>
+  <objective>Strengthen the CIFIE/FOM-7 manuscript with verified open-access XAI evaluation sources found through Semantic Scholar and cross-checked through Crossref/OpenAlex/Unpaywall.</objective>
   <files>
-    <create>README.md, manuscript/*.md, tables/*.md, references/*.md, references/*.bib, compliance/*.md, figures/figure_registry.md</create>
-    <modify>None outside the new workstream</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/*.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
   </files>
   <tests>
-    <test>Verify requested files exist.</test>
-    <test>Inspect key files for normalized Spanish accents.</test>
+    <test>Verify accepted sources were searched in Semantic Scholar and cross-checked through Crossref/OpenAlex or Unpaywall/OA metadata.</test>
+    <test>Verify added manuscript citations have matching bibliography and APA working-list entries.</test>
+    <test>Verify edited manuscript sections contain no leftover Pandoc citation keys.</test>
   </tests>
   <acceptance_criteria>
-    <criterion>Content-bearing files match the instruction intent.</criterion>
-    <criterion>Requested empty manuscript section files remain empty.</criterion>
+    <criterion>Only verified sources are added as confirmed citations.</criterion>
+    <criterion>Accepted and rejected sources are documented in the citation audit.</criterion>
+    <criterion>FOM-7 terminology and thesis/paper read-only constraints are preserved.</criterion>
   </acceptance_criteria>
   <complexity>M</complexity>
   <dependencies>Task 1</dependencies>
 </task>
 
 <task id="3">
-  <name>Update active context</name>
-  <objective>Record the new publication workstream and current branch in ACTIVE_CONTEXT.md.</objective>
+  <name>Revise limitations and future work section</name>
+  <objective>Improve `10_limitaciones_trabajo_futuro.md` for academic Spanish prose, stronger in-text citation support, and clearer FOM-7 alignment.</objective>
   <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/10_limitaciones_trabajo_futuro.md</modify>
     <modify>docs/context/ACTIVE_CONTEXT.md</modify>
   </files>
   <tests>
-    <test>Verify active context reflects the new workstream without removing existing context.</test>
+    <test>Verify the revised section contains no Pandoc citation keys.</test>
+    <test>Verify in-text citations correspond to entries in `references/references.bib`.</test>
+    <test>Verify thesis and paper artifacts remain read-only.</test>
   </tests>
   <acceptance_criteria>
-    <criterion>ACTIVE_CONTEXT.md documents the CIFIE workstream and constraint against overwriting thesis/paper artifacts.</criterion>
+    <criterion>Section 10 reads as publication-ready Spanish academic prose.</criterion>
+    <criterion>Limitations and future work are framed through FOM-7 evidence boundaries, not generic caveats.</criterion>
+    <criterion>Claims about metrics, human validation, method sensitivity, and generalization are citation-supported.</criterion>
   </acceptance_criteria>
-  <complexity>S</complexity>
-  <dependencies>Tasks 1 and 2</dependencies>
+  <complexity>M</complexity>
+  <dependencies>Task 2</dependencies>
+</task>
+
+<task id="4">
+  <name>Revise introduction section</name>
+  <objective>Improve `02_introduccion.md` for academic Spanish prose, stronger in-text citation support, and clearer FOM-7 alignment.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify the revised section contains no Pandoc citation keys.</test>
+    <test>Verify in-text citations correspond to entries in `references/references.bib`.</test>
+    <test>Verify thesis and paper artifacts remain read-only.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Section 02 reads as publication-ready Spanish academic prose.</criterion>
+    <criterion>The introduction frames FOM-7 as a response to an evidentiary gap in XAI evaluation.</criterion>
+    <criterion>Claims about opacity, post-hoc methods, metric fragmentation, benchmarks, and contribution are citation-supported.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Task 3</dependencies>
 </task>
 
 ---
@@ -84,12 +120,15 @@ Create a separate publication workstream for the CIFIE collective book chapter d
 
 After all tasks complete:
 
-- [x] Requested directories exist
-- [x] Requested files exist
-- [x] Specified Spanish content uses normalized UTF-8 accents
-- [x] Placeholder manuscript section files requested as empty are empty
-- [x] No existing thesis or paper artifacts modified by this task
+- [x] Skill validation passes
+- [x] `.aceconfig` trigger mappings added
+- [x] Open-access literature enrichment workflow added
+- [x] Open-access literature enrichment pass completed
+- [x] Section 10 revision completed
+- [x] Section 02 revision completed
+- [x] Documentation updated
 - [x] ACTIVE_CONTEXT.md updated
+- [x] Acceptance criteria verified
 
 ---
 
@@ -97,770 +136,14 @@ After all tasks complete:
 
 | Risk | Likelihood | Impact | Mitigation |
 | ---- | ---------- | ------ | ---------- |
-| Encoding artifacts from the source instruction could enter Spanish publication files | M | M | Normalize Spanish accents manually in created content |
-| Existing thesis or paper files could be accidentally touched | L | H | Scope writes to the new publication folder plus ACE planning/context files only |
-| The WSL view of `chapter_instructions.md` differs from Windows | M | L | Use the PowerShell-read instruction content as authoritative |
+| Skill trigger is too broad and activates on unrelated book chapters | M | L | Keep the skill body scoped to CIFIE/FOM-7 and project paths |
+| Manuscript edits introduce unsupported claims | M | H | Require evidence-map and citation-audit checks for claim-sensitive edits |
 
 ---
 
 ## Open Items
 
-- [ ] Editorial template and final CIFIE formatting requirements remain pending.
-- [ ] Miguel Herrero-Uceda ORCID remains pending / unavailable.
-
----
-
-## Follow-up Task: Source Inventory and Evidence Map
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Architect
-
-<task id="4">
-  <name>Create source inventory and evidence map</name>
-  <objective>Prepare section-level planning artifacts that map the CIFIE chapter to thesis, paper, figure, table, reference, and experiment sources without modifying the original artifacts.</objective>
-  <files>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/sources/source_inventory.md</create>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</create>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify source-planning files exist under the new workstream.</test>
-    <test>Verify no thesis or paper source artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>The chapter has a clear section-by-section extraction plan.</criterion>
-    <criterion>Empirical claims are mapped to source artifacts requiring verification.</criterion>
-    <criterion>Original thesis and paper artifacts remain read-only during this task.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Scaffold commit bb726805a</dependencies>
-</task>
-
-### Verification
-
-- [x] Source inventory exists under the CIFIE workstream.
-- [x] Evidence map exists under the CIFIE workstream.
-- [x] Original thesis and paper artifacts were used read-only for planning.
-- [x] ACTIVE_CONTEXT.md updated with the source-mapping checkpoint.
-
----
-
-## Follow-up Task: Extraction Pass 1
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="5">
-  <name>Populate initial references, citation audit, and metrics table</name>
-  <objective>Extract verified bibliography entries and metric definitions from thesis sources before drafting chapter prose.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_metrics.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify BibTeX keys were copied from `thesis/references.bib`.</test>
-    <test>Verify `table_metrics.md` reflects thesis metric definitions and source files.</test>
-    <test>Verify citation audit distinguishes copied entries from APA/DOI validation still pending.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Initial core references exist in the chapter bibliography.</criterion>
-    <criterion>Metrics table is populated before prose drafting.</criterion>
-    <criterion>No original thesis, paper, or experiment artifacts were edited.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Source map commit 6fc27c503</dependencies>
-</task>
-
-### Verification
-
-- [x] Core method and evaluation references copied from thesis bibliography.
-- [x] Citation audit records pending citation insertion, DOI checks, URL checks, and table source dependencies.
-- [x] Metrics table populated from thesis metric definitions.
-- [x] Original thesis and paper artifacts were used read-only for extraction.
-
----
-
-## Follow-up Task: Extraction Pass 2
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="6">
-  <name>Populate result summary and figure registry</name>
-  <objective>Extract result claims, statistical summaries, method profiles, traceability notes, and candidate figures from `thesis/capitulo-4-resultados.qmd` before drafting prose.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_results_summary.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/figures/figure_registry.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify result summaries are traceable to `thesis/capitulo-4-resultados.qmd`.</test>
-    <test>Verify figure registry points to existing thesis figure assets.</test>
-    <test>Verify no original thesis, paper, or figure assets were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Result summary table is populated before prose drafting.</criterion>
-    <criterion>Figure registry identifies candidate figures, source files, and chapter destinations.</criterion>
-    <criterion>Original thesis artifacts remain read-only.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Extraction pass 1 commit 8e51eb1fd</dependencies>
-</task>
-
-### Verification
-
-- [x] Coverage, hypothesis decisions, SHAP-LIME paired results, method profiles, and claim traceability extracted.
-- [x] Seven candidate Spanish thesis figures registered.
-- [x] Figure files were not copied or modified during this pass.
-- [x] Original thesis and paper artifacts were used read-only for extraction.
-
----
-
-## Follow-up Task: Extraction Pass 3
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="7">
-  <name>Extract FOM-7 protocol details</name>
-  <objective>Populate the FOM-7 manuscript section and reconcile the FOM-7 gates table against thesis protocol details before drafting broader prose.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_fom7_gates.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify the seven gates match `thesis/capitulo-3-diseno-experimental.qmd`.</test>
-    <test>Verify the manuscript section preserves FOM-7 scope, admissibility rule, and limits.</test>
-    <test>Verify no original thesis, paper, or experiment artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>FOM-7 protocol section is populated from verified thesis sources.</criterion>
-    <criterion>FOM-7 gates table includes purpose, input, output, controlled failure, and evidence.</criterion>
-    <criterion>Original thesis artifacts remain read-only.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Extraction pass 2 commit b91a27f94</dependencies>
-</task>
-
-### Verification
-
-- [x] Seven FOM-7 gates extracted and reconciled against the thesis protocol table.
-- [x] Sequential admissibility rule included.
-- [x] Limits of FOM-7 included to prevent overclaiming.
-- [x] Original thesis and paper artifacts were used read-only for extraction.
-
----
-
-## Follow-up Task: Controlled Drafting Pass 1
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="8">
-  <name>Draft XAI foundations and method sections</name>
-  <objective>Populate the first two technical manuscript sections from extracted thesis sources and verified chapter references.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/03_fundamentos_xai.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify both manuscript files are populated.</test>
-    <test>Verify citations used are present in chapter `references/references.bib`.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Sections are drafted in Spanish academic style.</criterion>
-    <criterion>Drafting remains scoped to foundations and method descriptions.</criterion>
-    <criterion>No empirical claims exceed the extracted evidence tables.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Extraction pass 3 commit 998c91d53</dependencies>
-</task>
-
-### Verification
-
-- [x] XAI foundations section drafted.
-- [x] LIME, SHAP, Anchors, and DiCE method section drafted.
-- [x] Citations limited to entries already present in the chapter bibliography.
-- [x] Original thesis and paper artifacts were used read-only for drafting.
-
----
-
-## Follow-up Task: Controlled Drafting Pass 2
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="9">
-  <name>Draft XAI evaluation crisis and bridge to FOM-7</name>
-  <objective>Populate the crisis section and lightly revise the FOM-7 protocol section so the argument flows from evaluation fragmentation to protocol governance.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/05_crisis_evaluacion_xai.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify crisis-section citations exist in chapter `references/references.bib`.</test>
-    <test>Verify the FOM-7 section retains its extracted gate details.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Crisis section explains fragmentation, metric insufficiency, construct gaps, reproducibility, and toolkit-governance limits.</criterion>
-    <criterion>FOM-7 section includes a clear transition from crisis diagnosis to protocol solution.</criterion>
-    <criterion>Drafting remains scoped to the CIFIE workstream.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Controlled drafting pass 1 commit b6b5b3c99</dependencies>
-</task>
-
-### Verification
-
-- [x] Crisis section drafted.
-- [x] FOM-7 opening lightly revised to bridge from crisis diagnosis.
-- [x] Citations limited to entries already present in the chapter bibliography.
-- [x] Original thesis and paper artifacts were used read-only for drafting.
-
----
-
-## Follow-up Task: Controlled Drafting Pass 3
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="10">
-  <name>Draft empirical design and results sections</name>
-  <objective>Populate `07_diseno_empirico.md` and `08_resultados.md` using extracted metrics, FOM-7 gates, and result summaries as evidence controls.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/07_diseno_empirico.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/08_resultados.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify both manuscript files are populated.</test>
-    <test>Verify empirical figures and statistics are traceable to extracted tables.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Design section describes dataset, models, factors, metrics, FOM-7 controls, and inferential plan.</criterion>
-    <criterion>Results section reports coverage, hypothesis decisions, method profiles, reproducibility, and quality-cost interpretation.</criterion>
-    <criterion>Claims remain within the scope documented in extracted evidence tables.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Controlled drafting pass 2 commit 1186af587</dependencies>
-</task>
-
-### Verification
-
-- [x] Empirical design section drafted.
-- [x] Results section drafted.
-- [x] Statistics and method profiles use `table_results_summary.md`, `table_metrics.md`, and `table_fom7_gates.md` as controls.
-- [x] Original thesis and paper artifacts were used read-only for drafting.
-
----
-
-## Follow-up Task: Controlled Drafting Pass 4
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="11">
-  <name>Draft discussion, limitations, and conclusions</name>
-  <objective>Populate the closing manuscript block using extracted result summaries, FOM-7 limits, and thesis conclusion material while preserving the chapter's bounded empirical scope.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/09_discusion.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/10_limitaciones_trabajo_futuro.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/11_conclusiones.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify the three closing manuscript files are populated.</test>
-    <test>Verify discussion and conclusions preserve Adult/tabular scope and FOM-7 limitations.</test>
-    <test>Verify citations used are present in chapter `references/references.bib`.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Discussion synthesizes method profiles without universal method dominance claims.</criterion>
-    <criterion>Limitations and future work include dataset, metric, configuration, human-validation, coverage, and FOM-7 generalization limits.</criterion>
-    <criterion>Conclusions summarize empirical and methodological contributions within documented evidence boundaries.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Controlled drafting pass 3 commit 893d8136c</dependencies>
-</task>
-
-### Verification
-
-- [x] Discussion, limitations/future work, and conclusions sections drafted.
-- [x] Closing block uses `table_results_summary.md` and `table_fom7_gates.md` as evidence controls.
-- [x] Citations limited to entries already present in the chapter bibliography.
-- [x] Original thesis and paper artifacts were used read-only for drafting.
-
----
-
-## Follow-up Task: Controlled Drafting Pass 5
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="12">
-  <name>Draft front matter and harmonize manuscript</name>
-  <objective>Populate remaining front matter and perform a cross-section harmonization pass for terminology, citations, and table/figure callouts.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/01_resumen_palabras_clave.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/chapter_full.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/*.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/*.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify front matter files are populated.</test>
-    <test>Verify citation keys used in manuscript exist in `references/references.bib`.</test>
-    <test>Verify common English leakage and mojibake patterns are absent or intentionally parenthetical.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Abstract, keywords, introduction, and chapter framing are drafted in Spanish academic style.</criterion>
-    <criterion>Terminology is harmonized around coste, conjunto de datos, puertas FOM-7, and afirmaciones trazables.</criterion>
-    <criterion>Table and figure callouts point to chapter workstream registries rather than untracked thesis assets.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Controlled drafting pass 4 commit f4c29f824</dependencies>
-</task>
-
-### Verification
-
-- [x] `01_resumen_palabras_clave.md` and `02_introduccion.md` drafted.
-- [x] `chapter_full.md` now documents section assembly order and pre-submission tasks.
-- [x] Cross-section terminology harmonized for coste, conjunto de datos, FOM-7 doors, and evidence claims.
-- [x] Citation audit updated to reflect manuscript citation insertion.
-- [x] Original thesis and paper artifacts were used read-only for drafting.
-
----
-
-## Follow-up Task: Figure and Table Integration Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="13">
-  <name>Integrate selected figures and final callouts</name>
-  <objective>Copy registered thesis figures into the CIFIE chapter package and convert working table/figure references into numbered callouts for the technical draft.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/figures/figure_registry.md</modify>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/figures/exported/*.png</create>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/*.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/*.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify copied figure files exist under `figures/exported/`.</test>
-    <test>Verify table headings use final numbering.</test>
-    <test>Verify manuscript figure references use chapter-local relative paths.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>All selected figures are copied from thesis assets into the chapter workstream.</criterion>
-    <criterion>Figures are numbered in first-appearance order and registered in `figure_registry.md`.</criterion>
-    <criterion>Tables 1-4 and Figures 1-7 are referenced from the manuscript using final callouts.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Controlled drafting pass 5 commit f5aad4a88</dependencies>
-</task>
-
-### Verification
-
-- [x] Seven registered figures copied into `figures/exported/`.
-- [x] Figure registry updated with Figure 1-7 numbering and copied status.
-- [x] Tables renamed as Table 1-4 working artifacts.
-- [x] Manuscript callouts updated to use numbered tables and chapter-local image paths.
-- [x] Original thesis and paper artifacts were used read-only for figure copying and callout integration.
-
----
-
-## Follow-up Task: V2 Technical Draft and Editorial Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-20
-> **Role:** Developer
-
-<task id="14">
-  <name>Prepare v2 technical draft and editorial review</name>
-  <objective>Assemble a clean technical draft from section files and perform an editorial pass for table width, APA 7 references, and CIFIE formatting readiness.</objective>
-  <files>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</create>
-    <create>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</create>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/tables/table_metrics.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/compliance/*.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify the v2 technical draft exists and includes references.</test>
-    <test>Verify figure paths in the v2 draft resolve from the draft folder.</test>
-    <test>Verify APA 7 working references are populated.</test>
-    <test>Verify table parsing issue from vertical bars is corrected.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Version v2 technical draft is assembled in the correct draft folder.</criterion>
-    <criterion>Editorial pass documents table width risks and remaining CIFIE formatting actions.</criterion>
-    <criterion>APA 7 working reference list is available for final validation.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Figure and table integration commit 40d1684ac</dependencies>
-</task>
-
-### Verification
-
-- [x] V2 technical draft assembled with title block, manuscript sections, figures, and APA working references.
-- [x] Editorial pass documents table-width actions, APA 7 status, and CIFIE formatting readiness.
-- [x] Compliance checklist, rubric self-assessment, and submission packet updated for v2 status.
-- [x] Table 1 Markdown parsing corrected for the parsimonia formula.
-- [x] Original thesis and paper artifacts were not edited.
-
----
-
-## Follow-up Task: Introduction Enrichment and APA Citation Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-21
-> **Role:** Developer
-
-<task id="15">
-  <name>Improve introduction with thesis paper sources</name>
-  <objective>Expand `02_introduccion.md` into fuller academic paragraphs, enrich it with sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `02_introduccion.md` contains no Pandoc citation keys.</test>
-    <test>Verify newly cited references exist in both BibTeX and APA working references.</test>
-    <test>Verify v2 technical draft is regenerated after introduction changes.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Introduction paragraphs are richer and less fragmented.</criterion>
-    <criterion>Introduction citations use APA 7 author-year style.</criterion>
-    <criterion>Reference files include the additional sources used to enrich the introduction.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>V2 technical draft commit af666d56c</dependencies>
-</task>
-
-### Verification
-
-- [x] Introduction expanded and enriched using thesis/papers source spine.
-- [x] Introduction in-text citations converted to APA author-year style.
-- [x] Added Adadi, Ali, Arrieta, Lipton, and Rudin references to chapter reference files.
-- [x] V2 technical draft regenerated with updated introduction and references.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: Foundations Enrichment and APA Citation Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-21
-> **Role:** Developer
-
-<task id="16">
-  <name>Improve XAI foundations with thesis paper sources</name>
-  <objective>Expand `03_fundamentos_xai.md` into fuller academic paragraphs, enrich it with additional sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/03_fundamentos_xai.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `03_fundamentos_xai.md` contains no Pandoc citation keys.</test>
-    <test>Verify newly cited references exist in both BibTeX and APA working references.</test>
-    <test>Verify v2 technical draft is regenerated after foundations changes.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Foundations section paragraphs are richer and less fragmented.</criterion>
-    <criterion>Foundations citations use APA 7 author-year style.</criterion>
-    <criterion>Reference files include the additional sources used to enrich the foundations section.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Introduction enrichment commit 90039e07d</dependencies>
-</task>
-
-### Verification
-
-- [x] Foundations section expanded and enriched using thesis/papers source spine.
-- [x] Foundations in-text citations converted to APA author-year style.
-- [x] Added Belle, Marcinkevičs, and Murdoch references to chapter reference files.
-- [x] V2 technical draft regenerated with updated foundations and references.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: Methods Enrichment and APA Citation Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-21
-> **Role:** Developer
-
-<task id="17">
-  <name>Improve LIME, SHAP, Anchors, and DiCE methods section</name>
-  <objective>Expand `04_metodos_lime_shap_anchors_dice.md` into fuller academic paragraphs, enrich it with method-specific sources from `thesis/papers`, and convert its in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `04_metodos_lime_shap_anchors_dice.md` contains no Pandoc citation keys.</test>
-    <test>Verify newly cited method references exist in both BibTeX and APA working references.</test>
-    <test>Verify v2 technical draft is regenerated after methods changes.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Methods section paragraphs are richer and less fragmented.</criterion>
-    <criterion>Methods citations use APA 7 author-year style.</criterion>
-    <criterion>Reference files include the additional sources used to enrich the methods section.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Foundations enrichment commit 0f2df4c55</dependencies>
-</task>
-
-### Verification
-
-- [x] Methods section expanded and enriched using thesis/papers source spine.
-- [x] Methods in-text citations converted to APA author-year style.
-- [x] Added Carvalho, Guidotti, Karimi, Laugel, Poyiadzi, Slack, and Van den Broeck references to chapter reference files.
-- [x] V2 technical draft regenerated with updated methods section and references.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: Methods Evidence Enrichment Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-21
-> **Role:** Developer
-
-<task id="18">
-  <name>Deepen method profiles with benchmark evidence</name>
-  <objective>Repeat the enrichment exercise for `04_metodos_lime_shap_anchors_dice.md` by tying the method descriptions more explicitly to extracted benchmark evidence and profile-based interpretation.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/04_metodos_lime_shap_anchors_dice.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `04_metodos_lime_shap_anchors_dice.md` contains no Pandoc citation keys.</test>
-    <test>Verify v2 technical draft is regenerated after the second methods enrichment pass.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Methods section includes stronger empirical profile interpretation from extracted tables.</criterion>
-    <criterion>Methods citations remain in APA 7 author-year style.</criterion>
-    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
-  </acceptance_criteria>
-  <complexity>S</complexity>
-  <dependencies>Methods enrichment commit c52416ff2</dependencies>
-</task>
-
-### Verification
-
-- [x] Methods section deepened with coverage counts, metric values, and profile-based interpretation.
-- [x] Methods citations remain in APA author-year style with no Pandoc keys.
-- [x] V2 technical draft regenerated with updated method profiles.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: XAI Evaluation Crisis Enrichment Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-21
-> **Role:** Developer
-
-<task id="19">
-  <name>Improve XAI evaluation crisis section</name>
-  <objective>Expand `05_crisis_evaluacion_xai.md` into fuller academic prose, enrich it from the thesis source material, and convert in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/05_crisis_evaluacion_xai.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `05_crisis_evaluacion_xai.md` contains no Pandoc citation keys.</test>
-    <test>Verify v2 technical draft is regenerated after the crisis-section enrichment pass.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Crisis section paragraphs are richer and less fragmented.</criterion>
-    <criterion>Crisis section citations use APA 7 author-year style.</criterion>
-    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Methods evidence enrichment commit 88bc5ab4b</dependencies>
-</task>
-
-### Verification
-
-- [x] Crisis section expanded using thesis source material on metric fragmentation, construct gaps, reproducibility, and tool governance.
-- [x] Crisis-section in-text citations converted to APA author-year style.
-- [x] V2 technical draft regenerated with updated crisis section.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: FOM-7 Protocol Enrichment Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-22
-> **Role:** Developer
-
-<task id="20">
-  <name>Improve FOM-7 protocol section</name>
-  <objective>Expand `06_protocolo_fom7.md` into fuller academic prose, enrich it from thesis protocol material, and convert in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/06_protocolo_fom7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `06_protocolo_fom7.md` contains no Pandoc citation keys.</test>
-    <test>Verify v2 technical draft is regenerated after the FOM-7 enrichment pass.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>FOM-7 section explains protocol purpose, admissibility logic, gate functions, and limits in fuller prose.</criterion>
-    <criterion>FOM-7 citations use APA 7 author-year style.</criterion>
-    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>XAI evaluation crisis enrichment commit f00b052c2</dependencies>
-</task>
-
-### Verification
-
-- [x] FOM-7 section expanded with gate-by-gate rationale and admissibility logic.
-- [x] FOM-7 in-text citations converted to APA author-year style.
-- [x] V2 technical draft regenerated with updated protocol section.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: Empirical Design Enrichment Pass
-
-> **Status:** Completed
-> **Started:** 2026-06-22
-> **Role:** Developer
-
-<task id="21">
-  <name>Improve empirical design section</name>
-  <objective>Expand `07_diseno_empirico.md` into fuller academic prose, enrich it from thesis design material and extracted tables, and convert in-text citations to APA 7 author-year style.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/07_diseno_empirico.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify `07_diseno_empirico.md` contains no Pandoc citation keys.</test>
-    <test>Verify newly cited empirical/statistical references exist in both BibTeX and APA working references.</test>
-    <test>Verify v2 technical draft is regenerated after the empirical-design enrichment pass.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Empirical design section explains EXP1/EXP2, dataset, sampling, metrics, units, FOM-7 controls, and inferential plan in fuller prose.</criterion>
-    <criterion>Empirical design citations use APA 7 author-year style.</criterion>
-    <criterion>V2 draft and editorial word-count note are synchronized.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>FOM-7 enrichment commit 7178cffbe</dependencies>
-</task>
-
-### Verification
-
-- [x] Empirical design section expanded with stronger rationale and evidence controls.
-- [x] Empirical design in-text citations converted to APA author-year style.
-- [x] Added Breiman, Kohavi/Becker, Demšar, Nemenyi, Wilcoxon, and Lakens references to chapter reference files.
-- [x] V2 technical draft regenerated with updated empirical design section.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
-
----
-
-## Follow-up Task: Book Chapter Results-Discussion Integration
-
-> **Status:** Completed
-> **Started:** 2026-06-23
-> **Role:** Scientific Editor
-
-<task id="22">
-  <name>Restructure results and discussion for book chapter format</name>
-  <objective>Transform the paper-like `08_resultados.md` and `09_discusion.md` split into an integrated empirical application and methodological implications structure appropriate for a book chapter.</objective>
-  <files>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/08_resultados.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/09_discusion.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/chapter_outline.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md</modify>
-    <modify>publications/book_chapters/2026_cifie_xai_fom7/drafts/v2_technical_draft/editorial_pass_v2.md</modify>
-    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
-  </files>
-  <tests>
-    <test>Verify revised sections contain no Pandoc citation keys.</test>
-    <test>Verify v2 technical draft is regenerated after the structural revision.</test>
-    <test>Verify no original thesis or paper artifacts were edited.</test>
-  </tests>
-  <acceptance_criteria>
-    <criterion>Section 08 integrates empirical findings with interpretation as a book-chapter evidence block.</criterion>
-    <criterion>Section 09 becomes a concise methodological implications synthesis.</criterion>
-    <criterion>Outline and v2 draft reflect the revised chapter structure.</criterion>
-  </acceptance_criteria>
-  <complexity>M</complexity>
-  <dependencies>Empirical design enrichment commit c697c58fe</dependencies>
-</task>
-
-### Verification
-
-- [x] Results section reframed as `Aplicación empírica: perfiles explicativos bajo FOM-7`.
-- [x] Discussion section reframed as `Implicaciones para la evaluación auditable de XAI`.
-- [x] Chapter outline updated to match book-chapter structure.
-- [x] V2 technical draft regenerated with integrated evidence/implications flow.
-- [x] Original `thesis/` and `pub/` artifacts were not edited.
+- [ ] Final CIFIE template and word limit remain pending outside this skill task.
 
 ---
 
@@ -868,8 +151,7 @@ After all tasks complete:
 
 | Role | Name | Date | Status |
 | ---- | ---- | ---- | ------ |
-| Architect | Codex | 2026-06-20 | Completed |
-| Stakeholder | Jonathan Herrera-Vásquez | 2026-06-20 | Approved for scaffolding |
+| Scientific Editor | Codex | 2026-07-04 | Completed |
 
 ---
 

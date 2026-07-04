@@ -2,7 +2,7 @@
 
 Fuente inicial: `thesis/capitulo-4-resultados.qmd`.
 
-Este resumen identifica los hallazgos que pueden alimentar la sección `08_resultados.md`. Las cifras deben conservar su alcance inferencial: benchmark EXP2 sobre UCI Adult Income, métodos LIME, SHAP, Anchors y DiCE, cinco familias de modelos, semillas y tamaños de muestra definidos en la tesis.
+Este resumen identifica los hallazgos que pueden alimentar la sección `08_aplicacion_empirica_perfiles_fom7.md`. Las cifras deben conservar su alcance inferencial: benchmark EXP2 sobre UCI Adult Income, métodos LIME, SHAP, Anchors y DiCE, cinco familias de modelos, semillas y tamaños de muestra definidos en la tesis.
 
 ## Cobertura analítica EXP2
 
