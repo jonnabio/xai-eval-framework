@@ -8,6 +8,8 @@
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage{lastpage}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta}
 
 \jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 5/2026}{Preprint}{PAPER-BC-0001}{Jonathan Herrera-Vasquez}
 \ShortHeadings{XAI Metrics: Taxonomy and LIME--SHAP Comparison}{Herrera-Vasquez}
@@ -16,12 +18,13 @@
 \begin{document}
 
 \title{From Fidelity to Semantics:\\
-A Taxonomy of XAI Evaluation Metrics and Paired Empirical\\
-Comparison of LIME versus SHAP}
+A Taxonomy of XAI Evaluation Metrics\\
+and Paired Empirical Comparison of LIME versus SHAP}
 
 \author{
 \name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
-\addr UNADE
+\addr Universidad Americana de Europa (UNADE)\\
+Canc\'un, Quintana Roo, M\'exico
 }
 
 \editor{}
@@ -45,7 +48,7 @@ families, five seeds, and three sampling sizes on tabular data. Results
 are consistent and large in magnitude: SHAP dominates all quality
 endpoints (stability $d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness
 gap $d_z{=}2.63$), while LIME is faster for non-tree model families
-(median 65.7 ms vs.\ 684.1 ms for SHAP); for tree-based models, SHAP's
+(median 53.3 ms vs.\ 694.6 ms for SHAP); for tree-based models, SHAP's
 \texttt{TreeExplainer} reverses this ordering. Cross-dataset replication
 on two additional datasets confirms SHAP's fidelity advantage over Anchors
 in all 12 paired combinations. Together, the taxonomy and the benchmark
@@ -129,10 +132,10 @@ and task context, making explicit why metric disagreements arise.
 \item \textbf{Gap analysis}: from a documented corpus of 48 papers
 (five databases, PRISMA-style screening) we identify three systematic
 gaps---proxy dominance, underspecified human constructs, and semantic
-evaluation outpacing its validation base---and provide the first
-multi-rater LLM-judge reliability measurement in XAI (ICC$<$0.75
-across all seven semantic dimensions).
-\item \textbf{Formalized deployment decision}: we frame LIME-vs-SHAP
+evaluation outpacing its validation base---and provide, to our
+knowledge, the first multi-rater LLM-judge reliability measurement in
+XAI (ICC$<$0.75 across all seven semantic dimensions).
+\item \textbf{Formalized deployment decision}: we pose LIME-vs-SHAP
 selection as a constrained multi-objective problem over quality, parsimony,
 and cost.
 \item \textbf{Paired inferential evidence}: we quantify method differences
@@ -602,18 +605,42 @@ any single family to monopolize the definition of explanation quality.
 
 \begin{figure}[t]
 \centering
-\fbox{\begin{minipage}{0.94\linewidth}
-\centering
-\textbf{Evaluation continuum for post-hoc XAI}\\[4pt]
-Proxy metrics $\rightarrow$ benchmark-grounded checks $\rightarrow$
-expert judgment $\rightarrow$ user-centered evaluation\\
-\vspace{4pt}
-\footnotesize LLM-based semantic evaluation occupies an intermediate role:
-more expressive than proxy metrics, more scalable than human review, but
-not self-validating.
-\end{minipage}}
-\caption{Conceptual placement of semantic evaluation within the broader
-XAI evaluation landscape.}
+\begin{tikzpicture}[
+  font=\footnotesize,
+  stage/.style={draw, rounded corners=2pt, align=center,
+    minimum height=1.5cm, text width=2.6cm, inner sep=3pt},
+  bridge/.style={draw, dashed, rounded corners=2pt, align=center,
+    text width=6.2cm, inner sep=4pt},
+  >={Stealth[length=2mm]}]
+\node[stage] (proxy) {\textbf{Proxy metrics}\\[2pt]
+  fidelity, stability,\\ sparsity, cost\\[2pt]
+  {\scriptsize EXP2/EXP3 (this paper)}};
+\node[stage, right=0.5cm of proxy] (bench) {\textbf{Benchmark-grounded}\\[2pt]
+  synthetic or domain\\ ground truth};
+\node[stage, right=0.5cm of bench] (expert) {\textbf{Expert judgment}\\[2pt]
+  plausibility,\\ rubric-based review};
+\node[stage, right=0.5cm of expert] (user) {\textbf{User-centered}\\[2pt]
+  task outcomes,\\ trust calibration};
+\draw[->] (proxy) -- (bench);
+\draw[->] (bench) -- (expert);
+\draw[->] (expert) -- (user);
+\node[bridge] (llm) at ($(bench.south)!0.5!(expert.south) + (0,-1.5)$)
+  {\textbf{LLM-based semantic evaluation}\\[2pt]
+  more expressive than proxies, more scalable than human review,
+  but not self-validating\\[2pt]
+  {\scriptsize EXP4 (this paper): ICC(2,1) $<$ 0.75 on all seven dimensions}};
+\draw[dashed, ->] (proxy.south) to[out=-60, in=180] (llm.west);
+\draw[dashed, ->] (llm.east) to[out=0, in=-120] (user.south);
+\draw[->] ($(proxy.north west)+(0,0.3)$) -- ($(user.east |- proxy.north)+(0,0.3)$)
+  node[midway, above] {\scriptsize semantic expressiveness increases $\rightarrow$};
+\draw[->] ($(user.east |- llm.south)+(0,-0.35)$) -- ($(proxy.west |- llm.south)+(0,-0.35)$)
+  node[midway, below] {\scriptsize $\leftarrow$ scalability and reproducibility increase};
+\end{tikzpicture}
+\caption{Evaluation continuum for post-hoc XAI, with representative metric
+families mapped to each evidence layer. LLM-based semantic evaluation
+occupies an intermediate position between proxy metrics and human
+review; the EXP4 reliability result (Section~\ref{sec:synthesis})
+shows it is not yet self-validating.}
 \label{fig:continuum}
 \end{figure}
 
@@ -802,8 +829,12 @@ Method mean values and average ranks are shown in
 Table~\ref{tab:method_ranks}. Nemenyi post-hoc testing
 ($\mathrm{CD}=1.211$, $\alpha=0.05$) confirms that SHAP significantly
 outperforms Anchors and DiCE in fidelity (rank gaps $2.2$ and $2.8$), and
-significantly outperforms LIME, Anchors, and DiCE in stability (rank gaps
-$2.4$, $2.6$, $1.0$). The SHAP-LIME omnibus fidelity rank gap equals
+significantly outperforms LIME and Anchors in stability (rank gaps
+$2.4$ and $2.6$). The SHAP--DiCE stability rank gap ($1.0$) falls below
+the CD threshold (Nemenyi $p = 0.15$), consistent with the comparative
+run-to-run consistency of DiCE's counterfactual outputs; SHAP's stability
+advantage over DiCE is therefore descriptive rather than confirmed at the
+omnibus level. The SHAP-LIME omnibus fidelity rank gap equals
 exactly 1.0---marginally below the CD threshold---but the directional
 paired Wilcoxon below demonstrates significance when power is concentrated
 on this specific two-method comparison.
@@ -955,13 +986,13 @@ profile remains operationally attractive.
 \label{sec:exp3}
 
 To address the single-dataset limitation, we ran a cross-dataset
-validation experiment (EXP3) comparing SHAP, LIME, and Anchors
+validation study (EXP3) comparing SHAP, LIME, and Anchors
 \citep{ribeiro2018anchors} on two additional binary classification
 datasets: Breast Cancer Wisconsin \citep{dua2019uci} ($n=569$, 30
 continuous features) and German Credit \citep{dua2019uci} ($n=1{,}000$,
 20 mixed features). Both used random forest and XGBoost models across
-three random seeds each, yielding 12 paired (dataset $\times$ model
-$\times$ seed) comparisons per method pair.
+three random seeds each, yielding 12 paired dataset--model--seed
+comparisons per method pair.
 
 \textbf{Fidelity ordering (SHAP vs.\ Anchors).}
 SHAP outperforms Anchors in fidelity in all 12 paired combinations
@@ -976,7 +1007,8 @@ datasets. Two findings are noteworthy. First, SHAP $>$ LIME fidelity holds
 consistently on German Credit (gaps $+0.23$--$+0.24$ for RF, $+0.24$--$+0.25$
 for XGB), replicating the EXP2 direction. On Breast Cancer the fidelity gap
 narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.06$
-(XGB), compared to $+0.27$ on Adult. Second, and more critically, LIME
+(XGB), compared to $+0.27$ (RF) and $+0.21$ (XGB) in the corresponding
+model strata on Adult. Second, and more critically, LIME
 \emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
 higher than on Adult ($0.014$). This reveals that the near-zero stability
 observed in EXP2 is not a fixed structural property of LIME: it is strongly
@@ -1009,8 +1041,9 @@ German Credit  & XGB   & 0.711 & 0.451   \\
 for LIME on the two cross-dataset cohorts.
 Stability = mean pairwise cosine similarity under $T=15$ Gaussian
 perturbations ($\sigma=0.1$); same protocol as EXP2.
-For comparison: LIME on Adult (EXP2) has fidelity $= 0.461$,
-stability $\approx 0.014$.}
+For comparison, LIME on Adult (EXP2) in the matched model strata:
+fidelity $0.457$ (RF) and $0.553$ (XGB); stability $\approx 0.01$--$0.02$
+across all model families.}
 \label{tab:exp3_lime}
 \begin{tabular}{llcccc}
 \toprule
@@ -1063,14 +1096,16 @@ Pattern}:
   trade-off that motivates Tier~1 therefore does not apply: SHAP is
   simultaneously faster \emph{and} more faithful on tree architectures.
   For \emph{non-tree or black-box models} (e.g., neural networks, opaque
-  APIs), use \textbf{LIME}; lower matched median runtime (65.7~ms) and a
-  compact active-feature ratio give it a meaningful latency advantage where
-  perturbation sampling is the only option.
+  APIs), use \textbf{LIME}; lower median runtime on non-tree cells
+  (53.3~ms vs.\ 694.6~ms for KernelSHAP) and a compact active-feature
+  ratio give it a meaningful latency advantage where perturbation
+  sampling is the only option.
 \item Recommended condition: interactive settings where sub-second latency
   and compact explanations matter more than maximising fidelity, \emph{and}
   no model-aware explainer is available.
-\item Evidence basis: runtime distribution in Figure~\ref{fig:runtime};
-  XGBoost reversal visible as a structural outlier, not an anomaly.
+\item Evidence basis: runtime distribution in
+  Figure~\ref{fig:runtime_heterogeneity}; XGBoost reversal visible as a
+  structural outlier, not an anomaly.
 \end{itemize}
 \item \textbf{Tier 2: Auditing / Data Science (Use SHAP)}
 \begin{itemize}[leftmargin=*]
@@ -1326,13 +1361,6 @@ prepared from repository artifacts dated May 2026.}
 \pdfbookmark[1]{References}{references}
 \begin{thebibliography}{99}
 
-\bibitem[Alvarez-Melis and Jaakkola(2018)]{alvarezmelis2018robustness}
-Alvarez-Melis, D. and Jaakkola, T.~S. (2018).
-On the robustness of interpretability methods.
-In \emph{ICML Workshop on Human Interpretability in Machine Learning
-(WHI 2018)}.
-\url{https://arxiv.org/abs/1806.08049}.
-
 \bibitem[Adadi and Berrada(2018)]{adadi2018xai}
 Adadi, A. and Berrada, M. (2018).
 Peeking inside the black-box: A survey on explainable artificial
@@ -1380,6 +1408,13 @@ to attain Trustworthy Artificial Intelligence.
 \emph{Information Fusion}, 99:101805.
 \url{https://doi.org/10.1016/j.inffus.2023.101805}.
 
+\bibitem[Alvarez-Melis and Jaakkola(2018)]{alvarezmelis2018robustness}
+Alvarez-Melis, D. and Jaakkola, T.~S. (2018).
+On the robustness of interpretability methods.
+In \emph{ICML Workshop on Human Interpretability in Machine Learning
+(WHI 2018)}.
+\url{https://arxiv.org/abs/1806.08049}.
+
 \bibitem[Arrieta et~al.(2020)Arrieta, D\'{i}az-Rodr\'{i}guez, Del~Ser,
 et~al.]{arrieta2020xai}
 Arrieta, A.~B., D\'{i}az-Rodr\'{i}guez, N., Del~Ser, J., et~al. (2020).
@@ -1394,12 +1429,6 @@ complementary team performance.
 In \emph{Proceedings of the CHI Conference on Human Factors in Computing
 Systems}, 1--16.
 
-\bibitem[Burkart and Huber(2021)]{burkart2021survey}
-Burkart, N. and Huber, M.~F. (2021).
-A survey on the explainability of supervised machine learning.
-\emph{Journal of Artificial Intelligence Research}, 70:245--317.
-\url{https://doi.org/10.1613/jair.1.12228}.
-
 \bibitem[Breiman(2001)]{breiman2001random}
 Breiman, L. (2001).
 Random forests.
@@ -1412,6 +1441,12 @@ Proxy tasks and subjective measures can be misleading in evaluating
 explainable AI systems.
 In \emph{Proceedings of the 25th International Conference on Intelligent
 User Interfaces}, 454--464.
+
+\bibitem[Burkart and Huber(2021)]{burkart2021survey}
+Burkart, N. and Huber, M.~F. (2021).
+A survey on the explainability of supervised machine learning.
+\emph{Journal of Artificial Intelligence Research}, 70:245--317.
+\url{https://doi.org/10.1613/jair.1.12228}.
 
 \bibitem[Canha et~al.(2025)Canha, Kubler, Fr\"{a}mling, and
 Fagherazzi]{canha2025benchmark}
@@ -1440,33 +1475,23 @@ Dems\v{a}r, J. (2006).
 Statistical comparisons of classifiers over multiple data sets.
 \emph{Journal of Machine Learning Research}, 7:1--30.
 
-\bibitem[Guidotti et~al.(2018)Guidotti, Monreale, Ruggieri, Turini,
-Giannotti, and Pedreschi]{guidotti2018survey}
-Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F.,
-and Pedreschi, D. (2018).
-A survey of methods for explaining black box models.
-\emph{ACM Computing Surveys}, 51(5):93:1--93:42.
-\url{https://doi.org/10.1145/3236009}.
-
 \bibitem[Doshi-Velez and Kim(2017)]{doshivelez2017rigorous}
 Doshi-Velez, F. and Kim, B. (2017).
 Towards a rigorous science of interpretable machine learning.
 \emph{arXiv preprint arXiv:1702.08608}.
 \url{https://arxiv.org/abs/1702.08608}.
 
+\bibitem[Dua and Graff(2019)]{dua2019uci}
+Dua, D. and Graff, C. (2019).
+{UCI} Machine Learning Repository.
+University of California, Irvine, School of Information and Computer Science.
+\url{http://archive.ics.uci.edu/ml}.
+
 \bibitem[Fok and Weld(2023)]{fok2023verifiability}
 Fok, R. and Weld, D.~S. (2023).
 In search of verifiability: Explanations rarely enable complementary
 performance in AI-advised decision making.
 \emph{AI Magazine}, 45(3):317--332.
-
-\bibitem[Hase and Bansal(2020)]{hase2020evaluating}
-Hase, P. and Bansal, M. (2020).
-Evaluating explainable {AI}: Which algorithmic explanations help users
-predict model behavior?
-In \emph{Proceedings of the 58th Annual Meeting of the Association for
-Computational Linguistics}, 5540--5552.
-\url{https://doi.org/10.18653/v1/2020.acl-main.491}.
 
 \bibitem[Gu et~al.(2024)Gu, Jiang, Shi, Tan, Zhai, Xu, Li, Shen, Ma,
 Liu, Wang, Zhang, Wang, Gao, Ni, and Guo]{gu2024llmjudge}
@@ -1476,6 +1501,22 @@ Guo, J. (2024).
 A survey on LLM-as-a-Judge.
 \emph{arXiv preprint arXiv:2411.15594}.
 \url{https://doi.org/10.48550/arXiv.2411.15594}.
+
+\bibitem[Guidotti et~al.(2018)Guidotti, Monreale, Ruggieri, Turini,
+Giannotti, and Pedreschi]{guidotti2018survey}
+Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F.,
+and Pedreschi, D. (2018).
+A survey of methods for explaining black box models.
+\emph{ACM Computing Surveys}, 51(5):93:1--93:42.
+\url{https://doi.org/10.1145/3236009}.
+
+\bibitem[Hase and Bansal(2020)]{hase2020evaluating}
+Hase, P. and Bansal, M. (2020).
+Evaluating explainable {AI}: Which algorithmic explanations help users
+predict model behavior?
+In \emph{Proceedings of the 58th Annual Meeting of the Association for
+Computational Linguistics}, 5540--5552.
+\url{https://doi.org/10.18653/v1/2020.acl-main.491}.
 
 \bibitem[Haufe et~al.(2026)Haufe, Wilming, Clark, Zhumagambetov, Boubekki,
 Martin, and Panknin]{haufe2026formalization}
@@ -1512,6 +1553,12 @@ evaluate faithfulness?
 In \emph{Proceedings of the 58th Annual Meeting of the Association for
 Computational Linguistics}, 4198--4205.
 
+\bibitem[Kadir et~al.(2023)Kadir, Mosavi, and Sonntag]{kadir2023metrics}
+Kadir, M.~A., Mosavi, A., and Sonntag, D. (2023).
+Evaluation metrics for XAI: A review, taxonomy, and practical applications.
+In \emph{Proceedings of the IEEE 27th International Conference on
+Intelligent Engineering Systems}, 111--124.
+
 \bibitem[Kaur et~al.(2020)Kaur, Nori, Jenkins, Caruana, Wallach, and
 Vaughan]{kaur2020interpreting}
 Kaur, H., Nori, H., Jenkins, S., Caruana, R., Wallach, H., and
@@ -1522,11 +1569,18 @@ In \emph{Proceedings of the 2020 {CHI} Conference on Human Factors in
 Computing Systems}, 1--14.
 \url{https://doi.org/10.1145/3313831.3376219}.
 
-\bibitem[Kadir et~al.(2023)Kadir, Mosavi, and Sonntag]{kadir2023metrics}
-Kadir, M.~A., Mosavi, A., and Sonntag, D. (2023).
-Evaluation metrics for XAI: A review, taxonomy, and practical applications.
-In \emph{Proceedings of the IEEE 27th International Conference on
-Intelligent Engineering Systems}, 111--124.
+\bibitem[Kohavi(1996)]{kohavi1996scaling}
+Kohavi, R. (1996).
+Scaling up the accuracy of Naive-Bayes classifiers: A decision-tree hybrid.
+In \emph{Proceedings of the Second International Conference on Knowledge
+Discovery and Data Mining}, 202--207.
+
+\bibitem[Koo and Li(2016)]{koo2016guideline}
+Koo, T.~K. and Li, M.~Y. (2016).
+A guideline of selecting and reporting intraclass correlation coefficients
+for reliability research.
+\emph{Journal of Chiropractic Medicine}, 15(2):155--163.
+\url{https://doi.org/10.1016/j.jcm.2016.02.012}.
 
 \bibitem[Kumar et~al.(2020)Kumar, Venkatasubramanian, Scheidegger, and
 Friedler]{kumar2020problems}
@@ -1538,23 +1592,17 @@ In \emph{Proceedings of the 37th International Conference on Machine
 Learning}, 5491--5500.
 \url{https://arxiv.org/abs/2002.11097}.
 
-\bibitem[Kohavi(1996)]{kohavi1996scaling}
-Kohavi, R. (1996).
-Scaling up the accuracy of Naive-Bayes classifiers: A decision-tree hybrid.
-In \emph{Proceedings of the Second International Conference on Knowledge
-Discovery and Data Mining}, 202--207.
+\bibitem[Lakens(2013)]{lakens2013calculating}
+Lakens, D. (2013).
+Calculating and reporting effect sizes to facilitate cumulative science:
+A practical primer for $t$-tests and ANOVAs.
+\emph{Frontiers in Psychology}, 4:863.
 
 \bibitem[Lipton(2018)]{lipton2018mythos}
 Lipton, Z.~C. (2018).
 The mythos of model interpretability.
 \emph{Queue}, 16(3):31--57.
 \url{https://doi.org/10.1145/3236386.3241340}.
-
-\bibitem[Lakens(2013)]{lakens2013calculating}
-Lakens, D. (2013).
-Calculating and reporting effect sizes to facilitate cumulative science:
-A practical primer for $t$-tests and ANOVAs.
-\emph{Frontiers in Psychology}, 4:863.
 
 \bibitem[Longo et~al.(2024)Longo, Brcic, Cabitza, Choi, Confalonieri,
 Del~Ser, Guidotti, Hayashi, Herrera, Holzinger, Jiang, Khosravi, Lecue,
@@ -1614,6 +1662,41 @@ B-XAIC dataset: Benchmarking explainable AI for graph neural networks
 using chemical data.
 \emph{arXiv preprint arXiv:2505.22252}.
 
+\bibitem[Retzlaff et~al.(2024)Retzlaff, Angerschmid, Saranti,
+Schneeberger, R\"{o}ttger, M\"{u}ller, and Holzinger]{retzlaff2024posthoc}
+Retzlaff, C.~O., Angerschmid, A., Saranti, A., Schneeberger, D.,
+R\"{o}ttger, R., M\"{u}ller, H., and Holzinger, A. (2024).
+Post-hoc vs ante-hoc explanations: xAI design guidelines for data
+scientists.
+\emph{Cognitive Systems Research}, 86:101243.
+\url{https://doi.org/10.1016/j.cogsys.2024.101243}.
+
+\bibitem[Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin]{ribeiro2016why}
+Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
+Why should I trust you?: Explaining the predictions of any classifier.
+In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
+Knowledge Discovery and Data Mining}, 1135--1144.
+
+\bibitem[Ribeiro et~al.(2018)Ribeiro, Singh, and Guestrin]{ribeiro2018anchors}
+Ribeiro, M.~T., Singh, S., and Guestrin, C. (2018).
+Anchors: High-precision model-agnostic explanations.
+In \emph{Proceedings of the Thirty-Second AAAI Conference on Artificial
+Intelligence}, 1527--1535.
+\url{https://doi.org/10.1609/aaai.v32i1.11491}.
+
+\bibitem[Rong et~al.(2022)Rong, Leemann, Borisov, Kasneci, and
+Kasneci]{rong2022consistent}
+Rong, Y., Leemann, T., Borisov, V., Kasneci, G., and Kasneci, E. (2022).
+A consistent and efficient evaluation strategy for attribution methods.
+In \emph{Proceedings of the 39th International Conference on Machine
+Learning}, 18770--18795.
+
+\bibitem[Rudin(2019)]{rudin2019stop}
+Rudin, C. (2019).
+Stop explaining black box machine learning models for high stakes
+decisions and use interpretable models instead.
+\emph{Nature Machine Intelligence}, 1(5):206--215.
+
 \bibitem[Samek et~al.(2017)Samek, Binder, Montavon, Lapuschkin, and
 M\"{u}ller]{samek2017evaluating}
 Samek, W., Binder, A., Montavon, G., Lapuschkin, S., and
@@ -1623,14 +1706,13 @@ Evaluating the visualization of what a deep neural network has learned.
 28(11):2660--2673.
 \url{https://doi.org/10.1109/TNNLS.2016.2599820}.
 
-\bibitem[Retzlaff et~al.(2024)Retzlaff, Angerschmid, Saranti,
-Schneeberger, R\"{o}ttger, M\"{u}ller, and Holzinger]{retzlaff2024posthoc}
-Retzlaff, C.~O., Angerschmid, A., Saranti, A., Schneeberger, D.,
-R\"{o}ttger, R., M\"{u}ller, H., and Holzinger, A. (2024).
-Post-hoc vs ante-hoc explanations: xAI design guidelines for data
-scientists.
-\emph{Cognitive Systems Research}, 86:101243.
-\url{https://doi.org/10.1016/j.cogsys.2024.101243}.
+\bibitem[Sithakoul et~al.(2024)Sithakoul, Meftah, and
+Feutry]{sithakoul2024beexai}
+Sithakoul, S., Meftah, S., and Feutry, C. (2024).
+BEExAI: Benchmark to evaluate explainable AI.
+In \emph{Explainable Artificial Intelligence}, 445--468.
+Springer Nature Switzerland.
+\url{https://doi.org/10.1007/978-3-031-63787-2_23}.
 
 \bibitem[Slack et~al.(2020)Slack, Hilgard, Jia, Singh, and
 Lakkaraju]{slack2020fooling}
@@ -1641,18 +1723,12 @@ In \emph{Proceedings of the AAAI/ACM Conference on AI, Ethics, and
 Society}, 180--186.
 \url{https://doi.org/10.1145/3375627.3375830}.
 
-\bibitem[Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin]{ribeiro2016why}
-Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
-Why should I trust you?: Explaining the predictions of any classifier.
-In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
-Knowledge Discovery and Data Mining}, 1135--1144.
-
-\bibitem[Rong et~al.(2022)Rong, Leemann, Borisov, Kasneci, and
-Kasneci]{rong2022consistent}
-Rong, Y., Leemann, T., Borisov, V., Kasneci, G., and Kasneci, E. (2022).
-A consistent and efficient evaluation strategy for attribution methods.
-In \emph{Proceedings of the 39th International Conference on Machine
-Learning}, 18770--18795.
+\bibitem[Sokol and Flach(2020)]{sokol2020factsheets}
+Sokol, K. and Flach, P. (2020).
+Explainability fact sheets: A framework for systematic assessment of
+explainable approaches.
+In \emph{Proceedings of the ACM Conference on Fairness, Accountability,
+and Transparency}, 56--67.
 
 \bibitem[Wachter et~al.(2018)Wachter, Mittelstadt, and
 Russell]{wachter2017counterfactual}
@@ -1661,56 +1737,6 @@ Counterfactual explanations without opening the black box: Automated
 decisions and the {GDPR}.
 \emph{Harvard Journal of Law \& Technology}, 31(2):841--887.
 \url{https://doi.org/10.2139/ssrn.3063289}.
-
-\bibitem[Rudin(2019)]{rudin2019stop}
-Rudin, C. (2019).
-Stop explaining black box machine learning models for high stakes
-decisions and use interpretable models instead.
-\emph{Nature Machine Intelligence}, 1(5):206--215.
-
-\bibitem[Sithakoul et~al.(2024)Sithakoul, Meftah, and
-Feutry]{sithakoul2024beexai}
-Sithakoul, S., Meftah, S., and Feutry, C. (2024).
-BEExAI: Benchmark to evaluate explainable AI.
-In \emph{Explainable Artificial Intelligence}, 445--468.
-Springer Nature Switzerland.
-\url{https://doi.org/10.1007/978-3-031-63787-2_23}.
-
-\bibitem[Sokol and Flach(2020)]{sokol2020factsheets}
-Sokol, K. and Flach, P. (2020).
-Explainability fact sheets: A framework for systematic assessment of
-explainable approaches.
-In \emph{Proceedings of the ACM Conference on Fairness, Accountability,
-and Transparency}, 56--67.
-
-\bibitem[Dua and Graff(2019)]{dua2019uci}
-Dua, D. and Graff, C. (2019).
-{UCI} Machine Learning Repository.
-University of California, Irvine, School of Information and Computer Science.
-\url{http://archive.ics.uci.edu/ml}.
-
-\bibitem[Koo and Li(2016)]{koo2016guideline}
-Koo, T.~K. and Li, M.~Y. (2016).
-A guideline of selecting and reporting intraclass correlation coefficients
-for reliability research.
-\emph{Journal of Chiropractic Medicine}, 15(2):155--163.
-\url{https://doi.org/10.1016/j.jcm.2016.02.012}.
-
-\bibitem[Ribeiro et~al.(2018)Ribeiro, Singh, and Guestrin]{ribeiro2018anchors}
-Ribeiro, M.~T., Singh, S., and Guestrin, C. (2018).
-Anchors: High-precision model-agnostic explanations.
-In \emph{Proceedings of the Thirty-Second AAAI Conference on Artificial
-Intelligence}, 1527--1535.
-\url{https://doi.org/10.1609/aaai.v32i1.11491}.
-
-\bibitem[Yeh et~al.(2019)Yeh, Hsieh, Suggala, Inouye, and
-Ravikumar]{yeh2019infidelity}
-Yeh, C.-K., Hsieh, C.-Y., Suggala, A.~S., Inouye, D.~I., and
-Ravikumar, P. (2019).
-On the (in)fidelity and sensitivity of explanations.
-In \emph{Advances in Neural Information Processing Systems 32},
-10967--10978.
-\url{https://arxiv.org/abs/1901.09392}.
 
 \bibitem[Wilcoxon(1945)]{wilcoxon1945individual}
 Wilcoxon, F. (1945).
@@ -1737,6 +1763,15 @@ User perceptions vs.\ proxy LLM judges: Privacy and helpfulness in LLM
 responses to privacy-sensitive scenarios.
 \emph{arXiv preprint arXiv:2510.20721}.
 \url{https://doi.org/10.48550/arXiv.2510.20721}.
+
+\bibitem[Yeh et~al.(2019)Yeh, Hsieh, Suggala, Inouye, and
+Ravikumar]{yeh2019infidelity}
+Yeh, C.-K., Hsieh, C.-Y., Suggala, A.~S., Inouye, D.~I., and
+Ravikumar, P. (2019).
+On the (in)fidelity and sensitivity of explanations.
+In \emph{Advances in Neural Information Processing Systems 32},
+10967--10978.
+\url{https://arxiv.org/abs/1901.09392}.
 
 \bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang,
 Lin, Li, Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
