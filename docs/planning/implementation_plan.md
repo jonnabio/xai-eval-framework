@@ -1,57 +1,51 @@
-# Implementation Plan: [Feature/Task Name]
+# Implementation Plan: Manuscript Editing Skill Rename
 
-> **Status:** [Draft | Approved | In Progress | Completed]
-> **Created:** [YYYY-MM-DD]
-> **Author:** [Role: Architect]
-> **PRD Reference:** [docs/requirements/PRD-xxx.md]
+> **Status:** Completed
+> **Created:** 2026-07-04
+> **Author:** Scientific Editor
+> **PRD Reference:** .ace/skills/manuscript-editing/SKILL.md
 
 ---
 
 ## Overview
 
-[Brief description of what will be built and the approach]
+Rename the project-local `cifie-manuscript-editing` skill to the reusable `manuscript-editing` skill while preserving CIFIE/FOM-7 behavior as a project profile.
 
 ---
 
 ## Prerequisites
 
-- [ ] Requirements analyzed and understood
-- [ ] Relevant ADRs reviewed
-- [ ] Dependencies identified
-- [ ] Environment ready
-- [ ] Plan approved by stakeholder
+- [x] Requirements analyzed and understood
+- [x] Existing skill and `.aceconfig` trigger paths inspected
+- [x] Regression guards reviewed
+- [x] Environment ready
+- [x] Rename scope identified
 
 ---
 
 ## Tasks
 
 <task id="1">
-  <name>[Task Name]</name>
-  <objective>[What is done when this task completes]</objective>
+  <name>Rename manuscript editing skill</name>
+  <objective>Generalize the CIFIE-specific skill into a reusable manuscript editing skill with a CIFIE/FOM-7 project profile.</objective>
   <files>
-    <create>[file paths]</create>
-    <modify>[file paths]</modify>
+    <modify>.ace/skills/manuscript-editing/SKILL.md</modify>
+    <modify>.ace/skills/manuscript-editing/agents/openai.yaml</modify>
+    <modify>.aceconfig</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
   </files>
   <tests>
-    <test>[Test case description]</test>
+    <test>Validate `.ace/skills/manuscript-editing` with the skill-creator quick validator.</test>
+    <test>Verify old `cifie-manuscript-editing` references are removed from `.ace` and `.aceconfig`.</test>
   </tests>
   <acceptance_criteria>
-    <criterion>[Measurable criterion]</criterion>
+    <criterion>The skill name and folder are `manuscript-editing`.</criterion>
+    <criterion>The CIFIE/FOM-7 constraints remain available as a project profile.</criterion>
+    <criterion>ACE triggers point to `.ace/skills/manuscript-editing/SKILL.md`.</criterion>
   </acceptance_criteria>
-  <complexity>[S | M | L]</complexity>
+  <complexity>S</complexity>
   <dependencies>None</dependencies>
 </task>
-
-<task id="2">
-  <name>[Task Name]</name>
-  ...
-</task>
-
----
-
-### Task 3: [Name]
-
-[Continue pattern...]
 
 ---
 
@@ -59,35 +53,34 @@
 
 After all tasks complete:
 
-- [ ] All unit tests pass
-- [ ] Integration tests pass
-- [ ] Code review completed
-- [ ] Documentation updated
-- [ ] ACTIVE_CONTEXT.md updated
-- [ ] Acceptance criteria verified
+- [x] Skill validation passes
+- [x] `.aceconfig` trigger mappings updated
+- [x] Documentation updated
+- [x] ACTIVE_CONTEXT.md updated
+- [x] Acceptance criteria verified
 
 ---
 
 ## Risks
 
-| Risk   | Likelihood | Impact  | Mitigation |
-| ------ | ---------- | ------- | ---------- |
-| [Risk] | [H/M/L]    | [H/M/L] | [Strategy] |
+| Risk | Likelihood | Impact | Mitigation |
+| ---- | ---------- | ------ | ---------- |
+| Generic skill loses CIFIE-specific safeguards | M | H | Preserve CIFIE/FOM-7 behavior as an explicit project profile |
+| Old skill path remains in triggers | L | M | Verify references after rename |
 
 ---
 
 ## Open Items
 
-- [ ] [Decision or question pending resolution]
+- [ ] Decide later whether `.ace/` and `.aceconfig` should remain local-only or become project-tracked artifacts.
 
 ---
 
 ## Approval
 
-| Role        | Name | Date | Status |
-| ----------- | ---- | ---- | ------ |
-| Architect   |      |      |        |
-| Stakeholder |      |      |        |
+| Role | Name | Date | Status |
+| ---- | ---- | ---- | ------ |
+| Scientific Editor | Codex | 2026-07-04 | Completed |
 
 ---
 
