@@ -6,7 +6,7 @@
 \usepackage{multirow}
 \usepackage{path}
 
-\jmlrheading{}{}{}{}{}{Herrera}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 5/2026}{Supplement}{PAPER-BC-SUPP}{Jonathan Herrera-Vasquez}
 
 \ShortHeadings{XAI Metrics: Taxonomy and LIME--SHAP Comparison -- Supplementary}{Herrera}
 
@@ -19,10 +19,11 @@
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
-This supplementary document contains three tables referenced from the main
+This supplementary document contains four tables referenced from the main
 text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
-LIME \texttt{kernel\_width} sensitivity probe results; and (S3) pairwise
-feature correlations for the Adult Income dataset.
+LIME \texttt{kernel\_width} sensitivity probe results; (S3) pairwise
+feature correlations for the Adult Income dataset; and (S4) the
+second-reviewer taxonomy audit template.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S1 — EXP4 Evaluation Rubric and Judge Prompts}
@@ -107,7 +108,8 @@ Overall Quality
 \end{itemize}
 
 \noindent All judges used identical prompts; the rubric template is archived at
-\path{src/prompts/templates/explanation_eval.j2} in the companion repository.
+\texttt{src/prompts/templates/}\\
+\texttt{explanation\_eval.j2} in the companion repository.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S2 — LIME \texttt{kernel\_width} Sensitivity Probe}
@@ -203,5 +205,72 @@ information removal rather than true feature exclusion. These associations
 do not invalidate the SHAP--LIME comparison---both methods are evaluated under
 identical masking protocols---but they limit the interpretation of absolute
 fidelity values as measures of causal feature importance.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S4 — Second-Reviewer Taxonomy Audit}
+\label{sec:supp_taxonomy_audit}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s4_audit} reports the simulated second-reviewer audit used to
+stress-test single-reviewer bias in the taxonomy construction. The audited
+subset contains 16 papers sampled across the six thematic clusters in the coded corpus:
+faithfulness/robustness, human-grounded, taxonomy/survey, benchmark/toolkit,
+LLM-judge, and counterfactual/recourse. For each paper, the simulated
+Reviewer~2 records whether the source satisfies inclusion criteria and
+independently assigns the four taxonomy axes. Agreement is then computed
+against Reviewer~1 coding.
+For multi-label axes, report both exact percent agreement and Jaccard
+similarity; for single-label inclusion decisions, report Cohen's $\kappa$.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Simulated second-reviewer audit summary. Cohen's $\kappa$ is not
+estimable for the inclusion decision because the simulated subset contains
+included records only.}
+\label{tab:s4_audit}
+\begin{tabularx}{\linewidth}{p{2.8cm} p{2.0cm} p{2.8cm} p{2.4cm} X}
+\toprule
+\textbf{Audit item} & \textbf{Sample} & \textbf{Agreement metric} & \textbf{Result} & \textbf{Action} \\
+\midrule
+Title/abstract inclusion decision
+  & 16 stratified records
+  & Percent agreement; Cohen's $\kappa$
+  & 100.0\%; $\kappa$ not estimable
+  & Adjudicate include/exclude conflicts \\[3pt]
+Evaluation target axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 62.5\%; mean $J{=}0.802$
+  & Revise axis definitions if disagreement clusters \\[3pt]
+Evidence source axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 56.2\%; mean $J{=}0.771$
+  & Clarify proxy, benchmark, human, and LLM labels \\[3pt]
+Quality property axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 25.0\%; mean $J{=}0.657$
+  & Split or merge ambiguous construct labels \\[3pt]
+Task context axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 81.2\%; mean $J{=}0.906$
+  & Clarify modality and domain-transfer labels \\[3pt]
+Overall adjudication log
+  & All disagreements
+  & Count and qualitative summary
+  & 12/16 records; mean axis $J{=}0.784$
+  & Preserve final rationale in audit notes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The row-level simulated audit is archived in
+\texttt{docs/reports/paper\_bc/}\\
+\texttt{second\_reviewer\_audit\_simulated\_results.csv}. These
+values should be replaced by an independent human second-reviewer audit before
+making inter-rater reliability claims in a submitted journal version.
 
 \end{document}

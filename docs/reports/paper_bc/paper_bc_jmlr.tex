@@ -35,8 +35,9 @@ Canc\'un, Quintana Roo, M\'exico
 Evaluation of post-hoc explanations in machine learning remains fragmented
 across incompatible metric families, yielding method comparisons that are
 sensitive to which endpoints are chosen. We address this through two
-complementary contributions. First, drawing on 48 coded papers from a five-database structured
-search with PRISMA-style screening, we build a four-axis taxonomy---by
+complementary contributions. First, drawing on a 48-paper structured
+scoping corpus assembled through a documented five-database search and
+transparent screening record, we build a four-axis taxonomy---by
 evaluation target, evidence source, quality property, and task
 context---that maps the measurement landscape and exposes three recurring
 gaps: proxy metrics dominate despite not
@@ -44,18 +45,21 @@ capturing semantics; human-grounded constructs remain underspecified; and
 semantic evaluation is growing faster than its empirical validation base.
 Second, we fill the proxy-layer gap with a paired empirical benchmark
 comparing LIME and SHAP across 75 matched cells spanning five model
-families, five seeds, and three sampling sizes on tabular data. Results
-are consistent and large in magnitude: SHAP dominates all quality
-endpoints (stability $d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness
-gap $d_z{=}2.63$), while LIME is faster for non-tree model families
-(median 53.3 ms vs.\ 694.6 ms for SHAP); for tree-based models, SHAP's
-\texttt{TreeExplainer} reverses this ordering. Cross-dataset replication
-on two additional datasets confirms SHAP's fidelity advantage over Anchors
-in all 12 paired combinations. Together, the taxonomy and the benchmark
-motivate a model-architecture-conditioned deployment pattern: SHAP is
-preferred at both fidelity and latency for tree-based models, while LIME
-retains a latency advantage for black-box architectures lacking a
-model-aware explainer. All experimental artifacts are publicly available.
+families, five seeds, and three sampling sizes on the Adult tabular
+benchmark. Within this protocol, results are consistent and large in
+magnitude: SHAP dominates all measured quality endpoints (stability
+$d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness gap $d_z{=}2.63$),
+while LIME is faster for non-tree model families (median 53.3 ms vs.\
+694.6 ms for SHAP); for tree-based models, SHAP's \texttt{TreeExplainer}
+reverses this ordering. A tabular cross-dataset
+extension on two additional datasets provides partial support for the
+fidelity direction, but does not establish cross-modal generality.
+Together, the taxonomy and the benchmark motivate a
+model-architecture-conditioned deployment pattern for tabular
+classification: SHAP is preferred at both fidelity and latency for
+tree-based models, while LIME retains a latency advantage for black-box
+architectures lacking a model-aware explainer. All experimental artifacts
+are publicly available.
 \end{abstract}
 
 \begin{keywords}
@@ -106,8 +110,8 @@ metrics reveal complementary signals \citep{pawlicki2024metrics,zheng2025ffideli
 \end{sloppypar}
 
 LIME and SHAP are the most widely deployed model-agnostic post-hoc
-explainers for tabular data, yet their systematic multi-metric comparison
-under controlled conditions remains scarce. \citet{retzlaff2024posthoc} survey post-hoc versus ante-hoc design
+explainers for tabular data, yet controlled multi-metric comparisons
+under matched conditions remain scarce. \citet{retzlaff2024posthoc} survey post-hoc versus ante-hoc design
 guidelines and review method properties, but do not provide matched
 empirical benchmarks across model families, metrics, and sampling regimes;
 this paper fills that gap. LIME explains locally by
@@ -129,19 +133,21 @@ This paper makes five contributions:
 \item \textbf{Four-axis taxonomy}: we organize model-agnostic XAI
 evaluation along evaluation target, evidence source, quality property,
 and task context, making explicit why metric disagreements arise.
-\item \textbf{Gap analysis}: from a documented corpus of 48 papers
-(five databases, PRISMA-style screening) we identify three systematic
-gaps---proxy dominance, underspecified human constructs, and semantic
+\item \textbf{Gap analysis}: from a documented 48-paper scoping corpus
+assembled through a five-database search and explicit inclusion criteria,
+we identify three recurring gaps---proxy dominance, underspecified human constructs, and semantic
 evaluation outpacing its validation base---and provide, to our
 knowledge, the first multi-rater LLM-judge reliability measurement in
-XAI (ICC$<$0.75 across all seven semantic dimensions).
+XAI (ICC$<$0.75 across all seven semantic dimensions). We do not claim
+human-subject or task-outcome validation in this paper.
 \item \textbf{Formalized deployment decision}: we pose LIME-vs-SHAP
 selection as a constrained multi-objective problem over quality, parsimony,
 and cost.
 \item \textbf{Paired inferential evidence}: we quantify method differences
-on 75 matched cells with Holm-corrected significance testing and effect
-sizes for five endpoints, and replicate fidelity rankings across two
-additional datasets via cross-dataset validation (EXP3).
+on 75 matched Adult Income cells with Holm-corrected significance testing
+and effect sizes for five endpoints, and partially probe tabular fidelity
+transfer across two additional datasets via cross-dataset validation
+(EXP3).
 \item \textbf{Layered deployment architecture}: we derive deployment
 recommendations from both the taxonomy and the empirical results, mapping
 system constraints to explainer choice.
@@ -403,14 +409,16 @@ Borderline cases were resolved by conservatively admitting sources
 containing at least one codeable evaluation construct relevant to the
 four-axis taxonomy.
 
-\paragraph{PRISMA-style screening record.}
+\paragraph{Structured screening record.}
 Table~\ref{tab:prisma} documents the staged screening. Records were
 first pooled and deduplicated across databases, then screened on title
-and abstract, then assessed in full text.
+and abstract, then assessed in full text. The record borrows the staged
+accounting logic of systematic reviews, but the review component is a
+structured scoping synthesis rather than a full systematic review.
 
 \begin{table}[t]
 \centering
-\caption{Corpus construction screening record (PRISMA-style).}
+\caption{Corpus construction screening record.}
 \label{tab:prisma}
 \begin{tabular}{lr}
 \toprule
@@ -451,6 +459,24 @@ Task context & In what modality or domain is the metric assumed to be meaningful
 \end{tabularx}
 \label{tab:coding_dims}
 \end{table}
+
+\paragraph{Simulated second-reviewer audit.}
+The initial title/abstract screen and coding pass were conducted by the
+primary author. To stress-test the taxonomy before human adjudication, we
+ran a simulated second-reviewer audit on a stratified subset of 16 papers
+(one third of the coded corpus), sampled across the six thematic clusters
+reported in Table~\ref{tab:corpus_profile}. The simulated audit records
+agreement on inclusion status and on the four taxonomy axes in
+Table~\ref{tab:coding_dims}; detailed results are reported in
+Supplementary Table~S4. Because several axes are multi-label, agreement
+is summarized as exact agreement and Jaccard similarity, with Cohen's
+$\kappa$ reserved for single-label screening decisions when both positive
+and negative cases are present. The simulation produced 100\% inclusion
+agreement on the audited included records, but lower exact agreement for
+the taxonomy axes, especially quality-property coding (25.0\% exact
+agreement; mean Jaccard 0.657). We therefore treat the exercise as a
+bias-detection and codebook-refinement step, not as a substitute for an
+independent human inter-rater review.
 
 \begin{table}[t]
 \centering
@@ -598,10 +624,13 @@ interpretation \citep{bucinca2020proxy,bansal2021whole,fok2023verifiability}.
 \subsection{Layered Evaluation Architecture}
 
 The synthesis argues for layered evaluation. Proxy metrics should anchor
-reproducibility and comparative benchmarking. Human or semantic layers
-should be added when the claim concerns meaning, plausibility, or causal
-adequacy. The mistake is not using one family or another; it is allowing
-any single family to monopolize the definition of explanation quality.
+reproducibility and comparative benchmarking. Human-subject or expert
+layers are required when the claim concerns user usefulness, task
+outcomes, plausibility, or causal adequacy. The present paper maps those
+layers and tests an LLM-proxy reliability condition, but it does not
+conduct a human-subject user study. The mistake is not using one family
+or another; it is allowing any single family to monopolize the definition
+of explanation quality.
 
 \begin{figure}[t]
 \centering
@@ -647,8 +676,8 @@ shows it is not yet self-validating.}
 Figure~\ref{fig:continuum} summarizes the evaluation continuum. Benchmark
 evidence can support comparative technical claims. Semantic evaluator
 outputs can support exploratory interpretation until calibrated. Human
-agreement evidence can then convert those semantic constructs into
-confirmatory claims.
+agreement and task-outcome evidence are required before semantic or
+user-centered constructs can be treated as confirmatory claims.
 
 % -----------------------------------------------------------------------
 \section{Empirical Benchmark: LIME versus SHAP}
@@ -659,10 +688,11 @@ Section~\ref{sec:synthesis} established that proxy metrics dominate the
 current evidence base while human-grounded constructs remain underspecified.
 The present section fills the proxy layer with a controlled, paired
 comparison of LIME and SHAP---the two most widely deployed
-model-agnostic post-hoc explainers for tabular data. The study is designed
-to produce auditable, scope-bounded evidence on quality-cost trade-offs
-under controlled conditions, directly instantiating the ``proxy and
-robustness'' cell of the layered evaluation architecture.
+model-agnostic post-hoc explainers for tabular data. It does not test
+whether users make better decisions with either explainer. The study is
+designed to produce auditable, scope-bounded evidence on quality-cost
+trade-offs under controlled conditions, directly instantiating the
+``proxy and robustness'' cell of the layered evaluation architecture.
 
 \subsection{Research Questions and Hypotheses}
 \label{sec:rqs}
@@ -892,7 +922,7 @@ volatility under perturbation, whereas SHAP is comparatively invariant.
 For sparsity, the sign is also consistent in all 75 matched cells, but
 interpretation requires care: the metric here is active-feature ratio.
 SHAP's larger value means denser explanations; LIME is therefore
-systematically sparser and easier to compress for user-facing narratives.
+systematically sparser and easier to compress for user-facing presentation.
 
 Fidelity favors SHAP in all 75 matched cells, with a mean paired
 difference of $+0.248$ and a very large effect size ($d_z = 4.82$).
@@ -985,7 +1015,7 @@ profile remains operationally attractive.
 \subsection{External Validation: Cross-Dataset Replication (EXP3)}
 \label{sec:exp3}
 
-To address the single-dataset limitation, we ran a cross-dataset
+To partially probe tabular external validity, we ran a cross-dataset
 validation study (EXP3) comparing SHAP, LIME, and Anchors
 \citep{ribeiro2018anchors} on two additional binary classification
 datasets: Breast Cancer Wisconsin \citep{dua2019uci} ($n=569$, 30
@@ -998,8 +1028,9 @@ comparisons per method pair.
 SHAP outperforms Anchors in fidelity in all 12 paired combinations
 (Table~\ref{tab:exp3_fidelity}, Figure~\ref{fig:exp3_fidelity}), with
 mean gaps ranging from $+0.26$ (German Credit, RF) to $+0.51$ (Breast
-Cancer, RF). This replicates the EXP2 fidelity direction across genuinely
-different feature spaces, dimensionalities, and class distributions.
+Cancer, RF). This provides partial tabular support for the EXP2 fidelity
+direction across different feature spaces, dimensionalities, and class
+distributions.
 
 \textbf{LIME cross-dataset extension.}
 Table~\ref{tab:exp3_lime} reports LIME fidelity and stability on the same
@@ -1172,18 +1203,18 @@ downstream applications match those conditions.
 \subsection{Taxonomy Scope and Single-Reviewer Limitation}
 
 The survey employs a structured database search with documented inclusion
-and exclusion criteria and a PRISMA-style screening record
+and exclusion criteria and a transparent screening record
 (Table~\ref{tab:prisma}). It is not, however, a full systematic review:
 the search used five databases rather than an exhaustive database set,
-and the title/abstract screen was performed by a single reviewer. The emphasis on model-agnostic
-post-hoc XAI reflects the scope of the empirical study; intrinsic
-interpretability and some modality-specific traditions are covered only
-insofar as they affect metric transfer. The coding pass is single-reviewer
-and inherits records at varying confidence levels from the upstream matrix.
-Future versions should deepen lower-confidence entries through full-text
-coding or replace them with higher-confidence sources. The taxonomy
-organizes construct space---not effect sizes---and does not estimate a
-pooled numerical ranking across studies.
+and the initial title/abstract screen and coding pass were performed by a
+single reviewer. The simulated audit described in
+Section~\ref{sec:synthesis} identifies likely coding ambiguities, but it
+does not replace a fully independent human inter-rater review pipeline.
+The emphasis on model-agnostic post-hoc XAI reflects the scope of the
+empirical study; intrinsic interpretability and some modality-specific
+traditions are covered only insofar as they affect metric transfer. The
+taxonomy organizes construct space---not effect sizes---and does not
+estimate a pooled numerical ranking across studies.
 
 \subsection{Statistical and Construct Validity}
 
@@ -1218,12 +1249,31 @@ for tree models and KernelExplainer for non-tree models, whereas LIME is
 run with fixed local-surrogate settings (\texttt{num\_features=10},
 effective \texttt{num\_samples=1000}, \texttt{kernel\_width=3.0}).
 Accordingly, the reported cost gap reflects both method family and
-concrete implementation pathway. External generalization is partially
-supported by EXP3 (Section~\ref{sec:exp3}), which replicates SHAP's
-fidelity advantage over Anchors across Breast Cancer and German Credit
-datasets; SHAP-LIME comparisons and stability rankings remain bounded to
-the Adult cohort and may shift under different modalities, feature
-transformations, masking schemes, or hyperparameter settings.
+concrete implementation pathway. External generalization is only partially
+probed by EXP3 (Section~\ref{sec:exp3}), which supports the tabular
+fidelity direction across Breast Cancer and German Credit but does not
+replicate the full SHAP--LIME endpoint set. SHAP--LIME comparisons and
+stability rankings remain bounded to the Adult cohort and may shift under
+different modalities, feature transformations, masking schemes, or
+hyperparameter settings.
+
+\begin{table}[t]
+\centering
+\caption{Generalizability boundary of empirical claims.}
+\label{tab:generalizability_boundary}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Claim} & \textbf{Current evidence} & \textbf{Generalization status} \\
+\midrule
+SHAP $>$ LIME stability & Adult Income matched cells only & Confirmed only for the Adult tabular protocol; EXP3 does not instrument SHAP stability \\
+SHAP $>$ LIME fidelity & Adult Income plus partial EXP3 tabular extension & Partially supported within tabular classification; not established for image, text, graph, or time-series data \\
+LIME lower runtime & Adult Income, model-dependent & Bounded by model architecture and SHAP implementation; tree-specific SHAP reverses the ranking \\
+SHAP $>$ Anchors fidelity & EXP3 Breast Cancer and German Credit & Partial tabular replication of fidelity ordering, not a SHAP--LIME stability or runtime replication \\
+Human-subject utility & No participant study; EXP4 is an LLM reliability probe only & Not established; user/task outcomes remain outside confirmatory scope \\
+Non-tabular behavior & No image, text, graph, or time-series experiments & Out of scope for the present confirmatory benchmark \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \paragraph{LIME stability is not a convergence artifact.}
 A direct test of whether the near-zero LIME stability (cosine similarity mean $\approx
@@ -1243,7 +1293,42 @@ reference setting is the minimum viable configuration rather than a conservative
 choice (see companion repository, \path{outputs/analysis/}).
 
 \paragraph{Feature correlation and out-of-distribution masking.}
-The Adult Income dataset contains moderate inter-feature correlations that affect the validity of perturbation-based fidelity metrics. Notably, \texttt{education} and \texttt{education-num} encode the same ordinal construct ($r = 1.0$ by construction); \texttt{occupation} and \texttt{education} show moderate Cramér's $V \approx 0.34$; and \texttt{hours-per-week} correlates with \texttt{occupation} and \texttt{workclass}. When these features are independently zeroed or replaced by reference values during masking---as in our fidelity and faithfulness-gap computations---the resulting masked instances may fall outside the training distribution. Under such out-of-distribution (OOD) inputs, tree-based model outputs can be unreliable extrapolations, and the correlation structure between masked and retained features is ignored. This can cause fidelity metrics to either overestimate (if the model is insensitive to OOD inputs) or underestimate (if the model reacts to implausible feature combinations) the true attribution quality. We cannot rule out that some portion of the SHAP--LIME fidelity gap reflects differential sensitivity to OOD masking artifacts rather than solely attribution accuracy. Studies using marginal versus conditional SHAP variants, or masking schemes that preserve feature dependencies, are needed to isolate this contribution.
+The Adult Income dataset contains moderate inter-feature correlations that
+affect the validity of perturbation-based fidelity metrics. Notably,
+\texttt{education} and \texttt{education-num} encode the same ordinal
+construct ($r = 1.0$ by construction); \texttt{occupation} and
+\texttt{education} show moderate Cramér's $V \approx 0.34$; and
+\texttt{hours-per-week} correlates with \texttt{occupation} and
+\texttt{workclass}. When these features are independently zeroed or
+replaced by reference values during masking---as in our fidelity and
+faithfulness-gap computations---the resulting masked instances may fall
+outside the training distribution. Under such out-of-distribution (OOD)
+inputs, tree-based model outputs can be unreliable extrapolations, and the
+correlation structure between masked and retained features is ignored.
+This can cause fidelity metrics to either overestimate (if the model is
+insensitive to OOD inputs) or underestimate (if the model reacts to
+implausible feature combinations) the true attribution quality.
+
+To assess whether this concern changes the method ordering, we added EXP6,
+a top-feature masking-sensitivity probe over the Adult RF stratum. EXP6
+reuses stored EXP2 top-10 explanations for the $n=50$ RF runs across five
+seeds and recomputes prediction-drop metrics under four masking schemes:
+independent zero masking, mean replacement, marginal empirical replacement,
+and grouped mean replacement. The grouped scheme masks correlated processed
+feature sets together, including \texttt{education}/\texttt{education-num},
+\texttt{marital-status}/\texttt{relationship}/\texttt{sex}, and
+\texttt{workclass}/\texttt{occupation}. SHAP's top-$k$ prediction-drop
+advantage remains positive in all five paired RF seed cells under every
+scheme, but its magnitude is masking-sensitive: the mean SHAP--LIME gap is
+$+0.098$ under zero masking, $+0.098$ under mean replacement, $+0.081$
+under marginal replacement, and $+0.053$ under grouped mean replacement.
+The top-feature drop-correlation advantage is also directionally stable
+(mean deltas $+0.493$ to $+0.625$ across schemes). Because EXP6 uses stored
+top-10 explanations rather than full attribution vectors, it should be read
+as a construct-validity stress test rather than a replacement for the
+primary full-run fidelity analysis. The appropriate interpretation is that
+the RF fidelity direction is robust in this probe, while the effect
+magnitude is partly masking-protocol dependent.
 
 \subsection{Reproducibility and Operational Validity}
 
@@ -1259,10 +1344,13 @@ a version-specific DOI.
 
 Several limitations define natural extensions:
 \begin{itemize}[leftmargin=*]
-\item \textbf{Dataset scope:} The primary paired benchmark focuses on the
-Adult tabular dataset; EXP3 partially extends fidelity replication to
-Breast Cancer and German Credit. Image, text, and graph domains remain
-untested and may exhibit different trade-offs.
+\item \textbf{Dataset and modality scope:} The confirmatory SHAP--LIME
+comparison is bounded to tabular classification, with the strongest
+evidence coming from the Adult Income benchmark. EXP3 partially extends
+fidelity observations to Breast Cancer and German Credit, but it does not
+replicate the full SHAP--LIME endpoint set and does not test image, text,
+graph, or time-series explanations. Those modalities require different
+masking schemes, perturbation semantics, and evaluation endpoints.
 \item \textbf{Configuration space:} Both methods were run with default
 hyperparameter settings. A dedicated kernel-width probe (four values: 0.25,
 0.75, 3.0, 10.0) reveals that values below 3.0 are degenerate in the
@@ -1276,8 +1364,9 @@ settings rather than reflecting a calibration artifact. SHAP background-set
 sensitivity and cross-model kernel-width effects remain open.
 \item \textbf{Runtime heterogeneity:} The XGBoost exception shows that
 ``LIME is faster'' is not a universal rule and warrants tree-specific analysis.
-\item \textbf{Human-centered utility:} This paper does not establish
-human-grounded usefulness; validated user studies with task-outcome
+\item \textbf{No human-subject validation:} This paper does not establish
+human-grounded usefulness, user comprehension, trust calibration, or
+decision-quality improvements. Validated user studies with task-outcome
 measures remain future work.
 \item \textbf{LLM-judge calibration:} EXP4 shows that ICC remains below
 0.75 for all seven semantic dimensions; developing rubrics that achieve
@@ -1309,8 +1398,11 @@ MIT License. Artifacts needed to reproduce the empirical study include:
 \item EXP3 results: \path{experiments/exp3_cross_dataset/results/}
 (with LIME extension exports in \path{outputs/exp3_lime_results.csv})
 \item EXP4 ICC exports: \path{outputs/analysis/exp4_llm_evaluation/}
+\item EXP6 masking-sensitivity exports:
+\path{outputs/analysis/exp6_masking_sensitivity/}
 \item analysis scripts: \path{scripts/run_exp2_statistical_analysis.py},
-\path{scripts/generate_paper_b_figures.py}
+\path{scripts/generate_paper_b_figures.py},
+\path{scripts/run_exp6_masking_sensitivity.py}
 \end{itemize}
 \end{sloppypar}
 
@@ -1342,16 +1434,19 @@ is the preferred choice when stability and fidelity-oriented quality
 dominate the objective, while LIME remains the pragmatic option when
 latency and compactness are the primary constraints.
 
-Our paired analysis across 75 matched robustness cells shows consistent
-SHAP advantages in stability ($d_z = 3.00$), fidelity ($d_z = 4.82$),
-and faithfulness gap ($d_z = 2.63$), alongside systematic LIME advantages
-in sparsity and lower runtime for most model contexts. Cross-dataset
-replication (EXP3) confirms SHAP's fidelity advantage over Anchors across
-all 12 paired combinations on two independent datasets, strengthening the
-generalizability of the fidelity ranking. These results, read through the
-lens of the taxonomy, support a layered deployment architecture that
-separates user-facing low-latency explanation paths from high-assurance
-auditing workflows.
+Our paired analysis across 75 matched Adult Income robustness cells shows
+consistent SHAP advantages in stability ($d_z = 3.00$), fidelity
+($d_z = 4.82$), and faithfulness gap ($d_z = 2.63$), alongside systematic
+LIME advantages in sparsity and lower runtime for most model contexts.
+Cross-dataset replication (EXP3) provides partial tabular support for the
+fidelity direction on two additional datasets, while leaving stability,
+runtime, and non-tabular generalization unresolved. These results, read
+through the lens of the taxonomy, support a layered deployment
+architecture for tabular classification that separates user-facing
+low-latency explanation paths from high-assurance auditing workflows. This
+deployment architecture is derived from proxy metrics and runtime
+constraints; it should not be read as evidence that either method improves
+human task performance without a separate user study.
 
 \acks{This work received no external funding. The study was self-funded by
 the author, and the author reports no competing interests. This draft was
