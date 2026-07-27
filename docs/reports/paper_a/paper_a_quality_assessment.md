@@ -5,8 +5,8 @@
 - **Date**: 2026-04-14 (original assessment); revised 2026-07-17; gap-closure pass 2026-07-22/24
 - **Artifact**: `docs/reports/paper_a/paper_a_prototype_jmlr.tex`
 - **Assessment target**: Paper A as a benchmark/methodology paper for XAI and ML evaluation
-- **Status**: Score target reached (87/100); publication still blocked on non-editorial items (Zenodo DOI refresh, two environment-blocked result gaps)
-- **Overall score**: 87/100
+- **Status**: Submission-ready as of 2026-07-24. Score target reached (88/100); Zenodo DOI refreshed and verified; the two remaining result gaps (37 Anchors/DiCE cells, 1 SHAP overlay cell) were reviewed with the author and accepted as permanent, disclosed limitations rather than pursued further.
+- **Overall score**: 88/100
 - **Target score**: 85+ (reached)
 
 ## 1.1 2026-07-17 Revision Pass
@@ -25,9 +25,11 @@ Verified unchanged since April:
 - `experiments/exp2_scaled/results/svm_shap/seed_456/n_200/` still has no
   committed `results.json`; the paper still depends on the
   `outputs/batch_results.csv` recovery overlay for that cell.
-- The Zenodo DOI (`10.5281/zenodo.19297724`) still corresponds only to the
-  2026-03-28 snapshot, not the current evidence cut; the manuscript still
-  discloses this gap rather than overclaiming archival coverage.
+- Resolved 2026-07-24: a new Zenodo version (DOI `10.5281/zenodo.21538180`,
+  concept DOI `10.5281/zenodo.19297723`) archives commit `553f65d71` (the
+  evidence cut in this manuscript), verified publicly resolvable via both the
+  DOI redirect and the Zenodo public records API. The prior 2026-03-28
+  snapshot DOI (`10.5281/zenodo.19297724`) is retained for provenance only.
 - `configs/experiments/exp3_cross_dataset/` now exists with trained
   `breast_cancer`/`german_credit` model artifacts (added for the thesis, not
   Paper A), but has no benchmark run results yet, so it is not usable as an
@@ -142,10 +144,10 @@ Local verification findings from this reassessment pass:
 | Novelty and prior-work delta | 10 | 8 | The manuscript now includes a compact novelty-delta table against related XAI benchmark/toolkit work. The remaining risk is to avoid overclaiming algorithmic novelty. |
 | Benchmark design and construct validity | 15 | 13 | The crossed design, metric orientation, leakage controls, and implementation caveats are strong. A bounded SHAP-only cross-dataset check (2026-07-24) now supports partial external-validity evidence beyond Adult, with one documented non-transfer case (German Credit/xgb Stability); the single-dataset scope for the full four-method ranking remains the main limit. |
 | Statistical rigor and uncertainty | 20 | 19 | Friedman, Nemenyi, Wilcoxon, Holm correction, effect sizes, matched cells, and block aggregation are strong, and the regenerated analysis confirms 15/15 complete omnibus blocks. The 2026-07-17 pass fixed a raw-vs-Holm-corrected p-value transparency gap; the 2026-07-24 pass added Cohen's $d_z$ practical-importance reporting for the primary paired contrast. The remaining 25 empty Anchors/DiCE cells (root cause now diagnosed but not fixed) and the absence of a formal TOST equivalence procedure keep this below top-tier readiness. |
-| Reproducibility and artifact quality | 20 | 17 | The model artifacts are repaired, the dependency is declared and installed in the active environment, the analysis outputs are regenerated and now force-added to the repository (2026-07-24), and the manuscript PDF has been rebuilt. The 25 empty Anchors/DiCE cells and the `svm_shap_s456_n200` overlay dependency are diagnosed but unresolved (environment/compute blockers, not neglect), and the release/DOI still needs refreshing. |
+| Reproducibility and artifact quality | 20 | 18 | The model artifacts are repaired, the dependency is declared and installed in the active environment, the analysis outputs are regenerated and force-added to the repository, and the manuscript PDF has been rebuilt. The Zenodo release/DOI is refreshed and verified (2026-07-24). The 25 empty Anchors/DiCE cells and the `svm_shap_s456_n200` overlay dependency remain diagnosed but unresolved (environment/compute blockers, not neglect). |
 | Claim discipline, limitations, and ethics | 10 | 9 | The caveats note is transparent and the manuscript now includes responsible-use and overgeneralization boundaries. |
 | Clarity and scholarly presentation | 10 | 9 | The draft is readable, the novelty/artifact sections are stronger, the result-count narrative is synchronized to the regenerated analysis summary, and prior passes fixed an inconsistent EXP1/EXP2 cohort naming pattern and a page-margin overflow defect. |
-| **Total** | **100** | **87** | **Above the 85+ target on manuscript quality and rigor. Publication is still blocked on artifact/process items outside manuscript editing: a stale Zenodo DOI and two environment-blocked gaps (25 empty EXP2 cells, 12 EXP3 Anchors cells) that require a separate Python environment to close.** |
+| **Total** | **100** | **88** | **Above the 85+ target on manuscript quality and rigor. The Zenodo DOI is refreshed. Publication is still blocked on two environment-blocked result gaps (25 empty EXP2 cells, 12 EXP3 Anchors cells) that require a separate Python environment to close, and the deliberately-deferred `svm_shap_s456_n200` cell.** |
 
 ## 5. Analysis
 
@@ -223,34 +225,36 @@ as by narrative results.
   x 3 seeds) were run and are reported as a bounded external-validation check
   (see Section 7.4). The 12 Anchors-based `exp3` configs remain blocked by the
   same `alibi`/`numpy` environment gap described above.
-- **Archive versioning gap**: The March Zenodo release remains valid for the
-  prior snapshot, but the refreshed cut needs a new release and DOI before
-  submission. Pending: a Zenodo API token from the user to script the deposit;
-  not yet provided as of this writing.
+- **Archive versioning gap**: resolved 2026-07-24 — a new Zenodo version (DOI
+  `10.5281/zenodo.21538180`) archives commit `553f65d71`, the evidence cut
+  reported in this manuscript, verified publicly resolvable. The prior March
+  snapshot DOI (`10.5281/zenodo.19297724`) is retained for provenance only.
 
 ## 7. Conclusion and Next Steps
 
 ### 7.1 Verdict
 
-Paper A currently scores **87/100** under a high-standard benchmark-paper
+Paper A currently scores **88/100** under a high-standard benchmark-paper
 rubric after the April 2026 result synchronization, the 2026-07-17 editorial
-revision pass, and the 2026-07-22/24 gap-closure pass. **Paper A is still not
-ready for publication, but for a narrower and more concrete set of reasons
-than before.** The manuscript text, statistical reporting, and reporting
-transparency are now at or above the 85+ target. What remains is not
-editorial: (1) a stale Zenodo DOI that needs a refreshed release (blocked on
-receiving a Zenodo API token from the user), and (2) two result gaps — the 25
-empty EXP2 Anchors/DiCE cells and the 12 EXP3 Anchors cells — that are fully
-diagnosed (a Python 3.13 venv incompatible with `alibi`'s `numpy<2.0`
-requirement) but require setting up a separate, compatible Python environment
-to close, which was not attempted in this pass. The `svm_shap_s456_n200`
-overlay dependency also remains open (an estimated 2-3 days of further
-compute, judged not worth pursuing versus disclosure).
+revision pass, and the 2026-07-22/24 gap-closure pass (including the
+2026-07-24 Zenodo DOI refresh). **As of 2026-07-24, Paper A is considered
+submission-ready.** The two remaining result gaps — the 25 empty EXP2
+Anchors/DiCE cells plus the 12 EXP3 Anchors cells (diagnosed:
+`alibi`/`numpy<2.0` incompatible with this Python 3.13 environment), and the
+`svm_shap_s456_n200` overlay dependency (an estimated 2-3 days of further
+compute for one cell) — were explicitly reviewed with the author and a
+decision was made **not to pursue further compute or environment migration**.
+Both are disclosed transparently in the manuscript's own limitations
+sections (Section~\ref{sec:results}, "Limitation" bullets) and in this
+assessment, and neither affects the paper's reported statistical
+conclusions (the Friedman tests already run on 15/15 complete blocks; the
+SHAP-LIME paired contrast already has its full 45/75 matched cells). This is
+now the final position for this evidence cut, not a pending action item.
 
-The paper reached **85+** without changing its core research idea. The
-remaining highest-leverage work is refreshing the Zenodo release/DOI and, if
-time allows, standing up a Python `<3.13`/`numpy<2.0` environment to close the
-Anchors/DiCE result gaps.
+The paper reached **85+** without changing its core research idea. Should a
+reviewer or venue explicitly require full-grid completeness, the
+`<3.13`/`numpy<2.0` environment work described above remains the path to close
+the Anchors/DiCE gaps; it is not planned unless that feedback occurs.
 
 ### 7.2 Priority plan to reach 85+ (historical; target reached — see 7.1)
 
@@ -347,14 +351,24 @@ Completed on 2026-07-22/24 (gap-closure pass):
   large conventions;
 - fixed an EXP1/EXP2 cohort-naming inconsistency and a page-margin overflow
   defect (carried over from the 2026-07-17 pass's verification);
-- updated the working score from 84/100 to 87/100.
+- committed the Paper A gap-closure work (commit `553f65d71`);
+- refreshed the Zenodo release: published version DOI `10.5281/zenodo.21538180`
+  (concept DOI `10.5281/zenodo.19297723`) archiving commit `553f65d71`,
+  verified publicly resolvable via the DOI redirect and the Zenodo public
+  records API; updated the manuscript's Code and Artifact Availability
+  section and acknowledgments accordingly;
+- updated the working score from 84/100 to 88/100.
 
-Still required before the next submission/release cut:
+Completed on 2026-07-24 (final decision on remaining gaps):
 
-- refresh the Zenodo release/DOI (blocked on receiving an API token from the
-  user);
-- set up a Python `<3.13`/`numpy<2.0` environment to close the 25 empty EXP2
-  cells and the 12 EXP3 Anchors cells, or make a final decision to disclose
-  them as a permanent limitation instead;
-- resolve or document the claimed `svm_shap_s456_n200` per-run artifact (not
-  pursued in this pass: estimated 2-3 days of further compute).
+- reviewed the 25 empty EXP2 Anchors/DiCE cells, the 12 EXP3 Anchors cells,
+  and the `svm_shap_s456_n200` overlay dependency with the author; decided
+  not to pursue the required Python `<3.13`/`numpy<2.0` environment migration
+  or the further ~2-3 days of SHAP compute, and to accept all three as
+  permanent, disclosed limitations of this evidence cut instead;
+- updated the manuscript's "Limitation" and "Next steps" bullets in
+  Section~\ref{sec:conclusion} to reflect this as a final position rather
+  than pending work; rebuilt both PDFs.
+
+Nothing further is required before submission unless review feedback asks
+for full-grid completeness.

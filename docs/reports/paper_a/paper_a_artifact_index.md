@@ -62,7 +62,8 @@
 | Artifact | Location | Role |
 | :--- | :--- | :--- |
 | Public repository | `https://github.com/jonnabio/xai-eval-framework` | Public code and artifact repository. |
-| Zenodo archive | `https://doi.org/10.5281/zenodo.19297724` | Version-specific archive for release tag `paper-a-submission-2026-03-28`. |
+| Zenodo archive (current) | `https://doi.org/10.5281/zenodo.21538180` | Version-specific archive for commit `553f65d71b077ec181ad36da7bb6e7c9942fe116` (2026-07-24), the evidence cut reported in the current manuscript. Concept DOI `10.5281/zenodo.19297723` always resolves to the latest version. |
+| Zenodo archive (prior) | `https://doi.org/10.5281/zenodo.19297724` | Version-specific archive for release tag `paper-a-submission-2026-03-28`; kept for provenance, does not reflect the current evidence cut. |
 
 ## 8. Snapshot Synchronization Rule
 

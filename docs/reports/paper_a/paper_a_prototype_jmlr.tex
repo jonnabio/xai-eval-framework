@@ -685,13 +685,20 @@ quantitative-only scope of this paper.
 \subsection{Code and Artifact Availability}
 \begin{sloppypar}
 The current refreshed analysis snapshot is publicly available at
-\url{https://github.com/jonnabio/xai-eval-framework} and should be archived
-under a new versioned release and DOI before submission. A prior submission
-snapshot for release tag \texttt{paper-a-submission-2026-03-28} has
+\url{https://github.com/jonnabio/xai-eval-framework} and is archived at
+commit \texttt{553f65d71b077ec181ad36da7bb6e7c9942fe116}, corresponding to the
+299-artifact / 275-analyzable-run primary benchmark (EXP2) evidence cut and
+the exp3\_cross\_dataset check reported here. This snapshot has
 version-specific DOI
-\href{https://doi.org/10.5281/zenodo.19297724}{\path{10.5281/zenodo.19297724}}, but
-that prior DOI does not by itself identify the refreshed primary benchmark (EXP2) evidence cut
-reported here. Materials required to
+\href{https://doi.org/10.5281/zenodo.21538180}{\path{10.5281/zenodo.21538180}}
+(concept DOI
+\href{https://doi.org/10.5281/zenodo.19297723}{\path{10.5281/zenodo.19297723}},
+which resolves to the latest version across releases). A prior submission
+snapshot for release tag \texttt{paper-a-submission-2026-03-28} remains
+separately archived under
+\href{https://doi.org/10.5281/zenodo.19297724}{\path{10.5281/zenodo.19297724}}
+for provenance but does not reflect the evidence cut reported here. Materials
+required to
 reproduce the Paper A analyses include
 \path{experiments/exp2_scaled/results/},
 \path{outputs/batch_results.csv},
@@ -725,12 +732,12 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
-    \item \textbf{Next steps:} Commit the recovered \path{svm_shap_s456_n200} per-run artifact when the active claim completes, diagnose the remaining empty Anchors/DiCE artifacts, and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 275 analyzable-run snapshot.
-    \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
+    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The root cause is diagnosed (an \texttt{alibi}/\texttt{dice-ml} dependency incompatible with this environment's Python/\texttt{numpy} versions; Section~\ref{sec:methods-repro}) rather than unexplained, and closing it is judged not worth the required environment migration relative to disclosure; these 25 cells and the matching 12 \texttt{exp3\_cross\_dataset} Anchors cells (Section~\ref{sec:exp3}) are accepted as a permanent, disclosed limitation of this evidence cut rather than pending work. The reporting caveats document the current merged-snapshot diagnostic.
+    \item \textbf{Limitation:} \path{svm_shap_s456_n200} has no committed per-run artifact; the reported analysis instead relies on the disclosed \path{outputs/batch_results.csv} recovery overlay for this one cell. A partial rerun exists (161/800 instances checkpointed) but completing it was estimated at 2-3 further days of continuous compute and is not being pursued; this is an accepted limitation, not an open action item.
+    \item \textbf{Next steps:} The bounded single-explainer (SHAP) cross-dataset check in Section~\ref{sec:exp3} is a first step toward testing ranking stability under dataset shift; extending it to LIME, Anchors, and DiCE, and to additional tabular datasets, remains future work.
 \end{itemize}
 
-\acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}
+\acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft is archived under DOI 10.5281/zenodo.21538180 (commit 553f65d71b077ec181ad36da7bb6e7c9942fe116, 2026-07-24).}
 
 \clearpage
 \phantomsection
