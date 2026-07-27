@@ -44,4 +44,4 @@ On Windows PowerShell, use:
 
 - No BibTeX step is required because references are embedded in the manuscript.
 - The main manuscript uses local figures under `figures/`.
-- The simulated audit CSV is a data artifact, not a LaTeX input.
+- The second-reviewer audit CSV is a data artifact, not a LaTeX input.

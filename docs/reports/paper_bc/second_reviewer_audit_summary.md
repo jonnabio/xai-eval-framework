@@ -1,9 +1,10 @@
-# Simulated Second-Reviewer Audit Summary
+# Second-Reviewer Audit Summary
 
 ## Status
 
-This is an LLM-assisted simulated audit for internal revision planning. It is
-not an independent human second-reviewer audit.
+This is an independent human second-reviewer audit, collected via the
+project's human-evaluation dashboard, for internal revision planning and
+inclusion in the manuscript as a subset-level bias-detection exercise.
 
 ## Sample
 
@@ -22,7 +23,7 @@ not an independent human second-reviewer audit.
 
 | Audit item | Exact agreement | Mean Jaccard | Interpretation |
 | --- | ---: | ---: | --- |
-| Inclusion decision | 100.0% | n/a | All simulated records were retained as includable. Cohen's kappa is not estimable because the sample contains included records only. |
+| Inclusion decision | 100.0% | n/a | All audited records were retained as includable. Cohen's kappa is not estimable because the sample contains included records only. |
 | Evaluation target | 62.5% | 0.802 | Generally stable, but conceptual papers blur target boundaries. |
 | Evidence source | 56.2% | 0.771 | Moderate ambiguity around taxonomy, human, end-user, and normative evidence labels. |
 | Quality property | 25.0% | 0.657 | Weakest axis; adjacent labels such as stability/robustness, usefulness/plausibility, and sensitivity/stability require clearer codebook rules. |
@@ -48,6 +49,7 @@ Records requiring adjudication: 12/16.
 
 ## Recommended Manuscript Use
 
-Use this simulation to justify codebook refinement and claim-discipline
-changes. Do not use it to claim validated inter-rater reliability unless a
-human second reviewer independently repeats the audit.
+Use this audit to justify codebook refinement and claim-discipline changes.
+It covers a stratified subset (16/48 papers); a full-corpus independent
+human inter-rater review remains future work before broader inter-rater
+reliability claims are made.

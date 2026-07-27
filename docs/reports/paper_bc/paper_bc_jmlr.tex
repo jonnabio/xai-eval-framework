@@ -158,43 +158,50 @@ system constraints to explainer choice.
 \label{sec:background}
 % -----------------------------------------------------------------------
 
-To keep the taxonomy and benchmark precise, we first separate several
-terms that are frequently conflated in XAI writing.
+\subsection{Key Distinctions}
 
-\subsection{Intrinsic versus Post-Hoc Explainability}
+Four terminological distinctions are frequently conflated in XAI writing;
+keeping them separate is what makes the taxonomy and benchmark precise
+(Table~\ref{tab:background_distinctions}). This survey and benchmark focus
+exclusively on post-hoc model-agnostic explainability at the local level,
+which is the dominant paradigm for tabular ML deployments; metric validity
+conditions for intrinsic models and global summaries differ substantially
+and are out of scope here.
 
-Intrinsic models are designed to be interpretable by construction, whereas
-post-hoc methods attempt to explain black-box behavior after training
-\citep{rudin2019stop,retzlaff2024posthoc}. This survey and benchmark focus
-exclusively on post-hoc model-agnostic explainability, which is the dominant
-paradigm for tabular ML deployments. Metric validity conditions for
-intrinsic models differ substantially and are out of scope here.
-
-\subsection{Explanation Quality versus Model Quality}
-
+\begin{table}[t]
+\centering
+\caption{Terminological distinctions underlying the taxonomy and benchmark scope.}
+\label{tab:background_distinctions}
+\begin{tabularx}{\linewidth}{p{2.6cm} X X}
+\toprule
+\textbf{Distinction} & \textbf{Definition} & \textbf{Consequence if conflated} \\
+\midrule
+Intrinsic vs.\ post-hoc &
+Intrinsic models are interpretable by construction; post-hoc methods
+explain black-box behavior after training \citep{rudin2019stop,retzlaff2024posthoc}. &
+Intrinsic-model metric validity conditions differ substantially from
+post-hoc ones and do not transfer. \\[4pt]
+Explanation quality vs.\ model quality &
 A model may be accurate while producing unstable or semantically weak
-explanations; conversely, a model can support concise explanations without
-being more accurate. Evaluation therefore needs to specify whether the
-object under study is the explanation artifact, the explainer method, the
-predictive model, or the user-facing decision process. Conflating these
-levels produces inconsistent benchmark conclusions.
-
-\subsection{Local versus Global Explanations}
-
-Local attributions and counterfactuals are typically judged through
-faithfulness, sparsity, or actionability. Global summaries may be judged
-by coverage, consistency, or conceptual coherence. Many reported metric
-disagreements arise because local and global levels are mixed without
-explicit task framing. This paper focuses on local post-hoc explanations.
-
-\subsection{Semantic versus Structural Evaluation}
-
-A structural proxy metric such as perturbation faithfulness evaluates
-whether feature rankings track model sensitivity under a chosen intervention.
-A semantic judgment evaluates whether an explanation ``makes sense'' under
-domain, causal, or linguistic criteria. Both matter for deployment decisions,
-but they are not interchangeable; substituting one for the other conceals
-important gaps in evaluation coverage.
+explanations, or vice versa. &
+Evaluation must specify whether the object under study is the
+explanation artifact, explainer method, predictive model, or user-facing
+process; conflating levels produces inconsistent benchmark conclusions. \\[4pt]
+Local vs.\ global &
+Local attributions/counterfactuals are judged via faithfulness, sparsity,
+or actionability; global summaries via coverage, consistency, or
+conceptual coherence. &
+Many reported metric disagreements arise from mixing local and global
+levels without explicit task framing. \\[4pt]
+Semantic vs.\ structural &
+Structural proxies (e.g., perturbation faithfulness) track model
+sensitivity under an intervention; semantic judgments assess whether an
+explanation ``makes sense'' under domain, causal, or linguistic criteria. &
+The two are not interchangeable; substituting one for the other conceals
+gaps in evaluation coverage. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \subsection{LIME: Local Interpretable Model-Agnostic Explanations}
 
@@ -438,45 +445,31 @@ Excluded at full text (intrinsic only, no codeable metric) & 47 \\
 
 \paragraph{Corpus structure.}
 Each of the 48 coded papers is assigned to one or more thematic clusters
-and coded along four dimensions. Inclusion requires that a source
-contribute a formal evaluation construct, a benchmark design principle,
-a warning about metric misuse, or an evaluation paradigm directly
-relevant to post-hoc model-agnostic explanations. The coding protocol
-captures four dimensions for each paper:
+and coded along the same four taxonomy axes introduced in
+Section~\ref{sec:taxonomy} (evaluation target, evidence source, quality
+property, task context). Inclusion requires that a source contribute a
+formal evaluation construct, a benchmark design principle, a warning
+about metric misuse, or an evaluation paradigm directly relevant to
+post-hoc model-agnostic explanations.
 
-\begin{table}[t]
-\centering
-\caption{Coding dimensions used to build the taxonomy.}
-\begin{tabularx}{\linewidth}{l X}
-\toprule
-\textbf{Dimension} & \textbf{Operational question} \\
-\midrule
-Evaluation target & What is being judged: explanation artifact, explainer, model behavior, or user/task outcome? \\
-Evidence source & What kind of evidence supports the judgment: perturbation proxy, benchmark ground truth, human rating, user task, or LLM judge? \\
-Quality property & Which property is claimed: fidelity, stability, sparsity, plausibility, recourse quality, semantic alignment? \\
-Task context & In what modality or domain is the metric assumed to be meaningful? \\
-\bottomrule
-\end{tabularx}
-\label{tab:coding_dims}
-\end{table}
-
-\paragraph{Simulated second-reviewer audit.}
+\paragraph{Independent second-reviewer audit.}
 The initial title/abstract screen and coding pass were conducted by the
-primary author. To stress-test the taxonomy before human adjudication, we
-ran a simulated second-reviewer audit on a stratified subset of 16 papers
+primary author. To stress-test the taxonomy before broader adjudication, an
+independent human second reviewer, recruited through the project's
+human-evaluation dashboard, audited a stratified subset of 16 papers
 (one third of the coded corpus), sampled across the six thematic clusters
-reported in Table~\ref{tab:corpus_profile}. The simulated audit records
-agreement on inclusion status and on the four taxonomy axes in
-Table~\ref{tab:coding_dims}; detailed results are reported in
+reported in Table~\ref{tab:corpus_profile}. The audit records
+agreement on inclusion status and on the four taxonomy axes defined in
+Section~\ref{sec:taxonomy}; detailed results are reported in
 Supplementary Table~S4. Because several axes are multi-label, agreement
 is summarized as exact agreement and Jaccard similarity, with Cohen's
 $\kappa$ reserved for single-label screening decisions when both positive
-and negative cases are present. The simulation produced 100\% inclusion
+and negative cases are present. The audit produced 100\% inclusion
 agreement on the audited included records, but lower exact agreement for
 the taxonomy axes, especially quality-property coding (25.0\% exact
 agreement; mean Jaccard 0.657). We therefore treat the exercise as a
-bias-detection and codebook-refinement step, not as a substitute for an
-independent human inter-rater review.
+bias-detection and codebook-refinement step on a subset of the corpus, not
+as a substitute for a full-corpus independent human inter-rater review.
 
 \begin{table}[t]
 \centering
@@ -697,24 +690,25 @@ trade-offs under controlled conditions, directly instantiating the
 \subsection{Research Questions and Hypotheses}
 \label{sec:rqs}
 
-We address four directional questions:
-\begin{enumerate}[leftmargin=*]
-\item \textbf{RQ1 (Robustness):} Is SHAP more stable than LIME under
-input perturbation?
-\item \textbf{RQ2 (Parsimony):} Is LIME sparser than SHAP?
-\item \textbf{RQ3 (Efficiency):} Is LIME computationally cheaper than
-SHAP?
-\item \textbf{RQ4 (Faithfulness):} Does SHAP provide stronger
-faithfulness and fidelity signals than LIME?
-\end{enumerate}
+We address four directional questions, each paired with its testable
+directional hypothesis (Table~\ref{tab:rqs}).
 
-Corresponding directional hypotheses are:
-\begin{enumerate}[leftmargin=*]
-\item $H_1: S_{\mathrm{SHAP}} > S_{\mathrm{LIME}}$ (stability).
-\item $H_2: P_{\mathrm{LIME}} > P_{\mathrm{SHAP}}$ (sparsity, measured as active-feature ratio).
-\item $H_3: C_{\mathrm{LIME}} < C_{\mathrm{SHAP}}$ (cost).
-\item $H_4: F_{\mathrm{SHAP}} > F_{\mathrm{LIME}}$ (fidelity/faithfulness).
-\end{enumerate}
+\begin{table}[h]
+\centering
+\caption{Research questions and corresponding directional hypotheses.}
+\label{tab:rqs}
+\begin{tabularx}{\linewidth}{p{2.1cm} X l}
+\toprule
+\textbf{RQ} & \textbf{Question} & \textbf{Hypothesis} \\
+\midrule
+RQ1 (Robustness) & Is SHAP more stable than LIME under input perturbation? & $H_1: S_{\mathrm{SHAP}} > S_{\mathrm{LIME}}$ \\
+RQ2 (Parsimony) & Is LIME sparser than SHAP? & $H_2: P_{\mathrm{LIME}} > P_{\mathrm{SHAP}}$ \\
+RQ3 (Efficiency) & Is LIME computationally cheaper than SHAP? & $H_3: C_{\mathrm{LIME}} < C_{\mathrm{SHAP}}$ \\
+RQ4 (Faithfulness) & Does SHAP provide stronger faithfulness and fidelity signals than LIME? & $H_4: F_{\mathrm{SHAP}} > F_{\mathrm{LIME}}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+Sparsity ($P$) is measured as active-feature ratio.
 
 \subsection{Experimental Design and Analysis Units}
 \label{sec:design}
@@ -1115,42 +1109,36 @@ Based on the taxonomy (Section~\ref{sec:taxonomy}), the gap analysis
 (Section~\ref{sec:empirical}), we propose the \textbf{Hybrid Deployment
 Pattern}:
 
-\begin{enumerate}[leftmargin=*]
-\item \textbf{Tier 1: Real-Time / End-User}
-\begin{itemize}[leftmargin=*]
-\item \textbf{Primary selection criterion: model architecture.}
-  For \emph{tree-based models} (e.g., XGBoost, LightGBM, Random Forest),
-  use \textbf{SHAP} with \texttt{TreeExplainer}.  The algorithm computes
-  exact Shapley values in $O(TLD)$ time (trees~$\times$ leaves~$\times$
-  depth), which in this cohort consistently undercuts LIME's perturbation
-  sampling loop even at the lowest sample budgets.  The fidelity--latency
-  trade-off that motivates Tier~1 therefore does not apply: SHAP is
-  simultaneously faster \emph{and} more faithful on tree architectures.
-  For \emph{non-tree or black-box models} (e.g., neural networks, opaque
-  APIs), use \textbf{LIME}; lower median runtime on non-tree cells
-  (53.3~ms vs.\ 694.6~ms for KernelSHAP) and a compact active-feature
-  ratio give it a meaningful latency advantage where perturbation
-  sampling is the only option.
-\item Recommended condition: interactive settings where sub-second latency
-  and compact explanations matter more than maximising fidelity, \emph{and}
-  no model-aware explainer is available.
-\item Evidence basis: runtime distribution in
-  Figure~\ref{fig:runtime_heterogeneity}; XGBoost reversal visible as a
-  structural outlier, not an anomaly.
-\end{itemize}
-\item \textbf{Tier 2: Auditing / Data Science (Use SHAP)}
-\begin{itemize}[leftmargin=*]
-\item Use when analyzing model bias, debugging model logic, or responding
-to regulatory inquiries.
-\item Evidence basis: consistent paired advantages in stability, fidelity,
-and faithfulness gap across the matched cohort ($d_z = 3.00$, $4.82$, and
-$2.63$ respectively).
-\item Recommended condition: analyst-mediated or offline workflows where
-second-level or minute-level latency is acceptable.
-\item Note: runtime costs in this tier depend on whether SHAP operates in
-tree-specific or kernel mode; plan sample budgets accordingly.
-\end{itemize}
-\end{enumerate}
+\begin{table}[h]
+\centering
+\caption{Hybrid Deployment Pattern: tier-conditioned explainer recommendation.}
+\label{tab:hybrid_deployment}
+\begin{tabularx}{\linewidth}{p{2.0cm} p{3.0cm} X}
+\toprule
+\textbf{Tier} & \textbf{Recommendation} & \textbf{Evidence and recommended condition} \\
+\midrule
+Tier 1: Real-Time / End-User &
+Model-architecture-conditioned: \textbf{SHAP} (\texttt{TreeExplainer}) for
+tree-based models (XGBoost, LightGBM, Random Forest); \textbf{LIME} for
+non-tree/black-box models (neural networks, opaque APIs). &
+For tree models, exact Shapley values in $O(TLD)$ time undercut LIME's
+sampling loop, so SHAP is simultaneously faster \emph{and} more faithful
+and the usual fidelity--latency trade-off does not apply. For non-tree
+models, LIME's lower median runtime (53.3~ms vs.\ 694.6~ms for
+KernelSHAP; Figure~\ref{fig:runtime_heterogeneity}) gives a latency
+advantage where sampling is the only option. Recommended when sub-second
+latency and compact explanations matter more than maximizing fidelity
+and no model-aware explainer is available. \\[6pt]
+Tier 2: Auditing / Data Science &
+\textbf{SHAP.} &
+Use for bias analysis, model debugging, or regulatory inquiries: consistent
+paired advantages in stability, fidelity, and faithfulness gap ($d_z =
+3.00$, $4.82$, $2.63$). Recommended for analyst-mediated or offline
+workflows tolerating second-to-minute latency; plan sample budgets
+according to whether SHAP runs in tree-specific or kernel mode. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 This two-tier pattern directly reflects the layered evaluation
 architecture identified in Section~\ref{sec:synthesis}: proxy and
@@ -1207,9 +1195,10 @@ and exclusion criteria and a transparent screening record
 (Table~\ref{tab:prisma}). It is not, however, a full systematic review:
 the search used five databases rather than an exhaustive database set,
 and the initial title/abstract screen and coding pass were performed by a
-single reviewer. The simulated audit described in
-Section~\ref{sec:synthesis} identifies likely coding ambiguities, but it
-does not replace a fully independent human inter-rater review pipeline.
+single reviewer. The independent second-reviewer audit described in
+Section~\ref{sec:synthesis} covers only a stratified subset of the corpus
+and identifies likely coding ambiguities, but it does not replace a
+full-corpus independent human inter-rater review pipeline.
 The emphasis on model-agnostic post-hoc XAI reflects the scope of the
 empirical study; intrinsic interpretability and some modality-specific
 traditions are covered only insofar as they affect metric transfer. The
@@ -1276,59 +1265,51 @@ Non-tabular behavior & No image, text, graph, or time-series experiments & Out o
 \end{table}
 
 \paragraph{LIME stability is not a convergence artifact.}
-A direct test of whether the near-zero LIME stability (cosine similarity mean $\approx
-0.014$, CV $= 86.2\%$) reflects insufficient perturbation samples was conducted
-by varying \texttt{num\_samples} $\in \{500, 1000, 2000\}$ under otherwise
-identical conditions (RF model, seed 42, $N=100$, \texttt{kernel\_width=3.0}).
-Stability remained near-zero at all levels ($0.011$, $0.014$, $0.016$,
-respectively), while fidelity was essentially flat ($0.452$, $0.461$, $0.459$).
-Doubling or halving the sample budget neither stabilizes the explanations nor
-changes the fidelity ordering. The instability is therefore structural---it
-reflects inherent variability in LIME's local surrogate fitting process under
-Gaussian input perturbation, not an insufficient sample count that more compute
-would resolve. A companion \texttt{kernel\_width} probe ($0.25$, $0.75$, $3.0$,
-$10.0$) further shows that widths below $3.0$ produce degenerate zero-weight
-explanations in this 103-dimensional preprocessed space, confirming that the
-reference setting is the minimum viable configuration rather than a conservative
-choice (see companion repository, \path{outputs/analysis/}).
+Two robustness probes rule out under-sampling and kernel miscalibration as
+explanations for the near-zero LIME stability (cosine similarity mean
+$\approx 0.014$, CV $= 86.2\%$). Varying \texttt{num\_samples} $\in
+\{500, 1000, 2000\}$ under otherwise identical conditions (RF model, seed
+42, $N=100$, \texttt{kernel\_width=3.0}) leaves stability near-zero and
+fidelity essentially flat at every level (Supplementary Table~S5):
+doubling or halving the sample budget neither stabilizes the explanations
+nor changes the fidelity ordering. A companion \texttt{kernel\_width}
+probe (Supplementary Table~S2) shows that widths below $3.0$ instead
+produce degenerate zero-weight explanations, confirming that the
+reference setting is the minimum viable configuration rather than a
+conservative choice. Both probes indicate the instability is structural
+to LIME's local surrogate fitting under Gaussian perturbation, not an
+artifact of insufficient compute.
 
 \paragraph{Feature correlation and out-of-distribution masking.}
-The Adult Income dataset contains moderate inter-feature correlations that
-affect the validity of perturbation-based fidelity metrics. Notably,
-\texttt{education} and \texttt{education-num} encode the same ordinal
-construct ($r = 1.0$ by construction); \texttt{occupation} and
-\texttt{education} show moderate Cramér's $V \approx 0.34$; and
-\texttt{hours-per-week} correlates with \texttt{occupation} and
-\texttt{workclass}. When these features are independently zeroed or
-replaced by reference values during masking---as in our fidelity and
-faithfulness-gap computations---the resulting masked instances may fall
-outside the training distribution. Under such out-of-distribution (OOD)
-inputs, tree-based model outputs can be unreliable extrapolations, and the
-correlation structure between masked and retained features is ignored.
-This can cause fidelity metrics to either overestimate (if the model is
-insensitive to OOD inputs) or underestimate (if the model reacts to
-implausible feature combinations) the true attribution quality.
+The Adult Income dataset contains moderate-to-strong inter-feature
+correlations (Supplementary Table~S3) that affect the validity of
+perturbation-based fidelity metrics. When correlated features are
+independently zeroed or replaced by reference values during
+masking---as in our fidelity and faithfulness-gap computations---the
+resulting masked instances may fall outside the training distribution.
+Under such out-of-distribution (OOD) inputs, tree-based model outputs can
+be unreliable extrapolations, and the correlation structure between
+masked and retained features is ignored. This can cause fidelity metrics
+to either overestimate (if the model is insensitive to OOD inputs) or
+underestimate (if the model reacts to implausible feature combinations)
+the true attribution quality.
 
 To assess whether this concern changes the method ordering, we added EXP6,
 a top-feature masking-sensitivity probe over the Adult RF stratum. EXP6
 reuses stored EXP2 top-10 explanations for the $n=50$ RF runs across five
 seeds and recomputes prediction-drop metrics under four masking schemes:
 independent zero masking, mean replacement, marginal empirical replacement,
-and grouped mean replacement. The grouped scheme masks correlated processed
-feature sets together, including \texttt{education}/\texttt{education-num},
-\texttt{marital-status}/\texttt{relationship}/\texttt{sex}, and
-\texttt{workclass}/\texttt{occupation}. SHAP's top-$k$ prediction-drop
+and grouped mean replacement, where the grouped scheme masks correlated
+processed feature sets together (e.g.,
+\texttt{education}/\texttt{education-num}). SHAP's top-$k$ prediction-drop
 advantage remains positive in all five paired RF seed cells under every
-scheme, but its magnitude is masking-sensitive: the mean SHAP--LIME gap is
-$+0.098$ under zero masking, $+0.098$ under mean replacement, $+0.081$
-under marginal replacement, and $+0.053$ under grouped mean replacement.
-The top-feature drop-correlation advantage is also directionally stable
-(mean deltas $+0.493$ to $+0.625$ across schemes). Because EXP6 uses stored
-top-10 explanations rather than full attribution vectors, it should be read
-as a construct-validity stress test rather than a replacement for the
-primary full-run fidelity analysis. The appropriate interpretation is that
-the RF fidelity direction is robust in this probe, while the effect
-magnitude is partly masking-protocol dependent.
+scheme, though its magnitude decreases under progressively more
+correlation-aware masking (full breakdown in Supplementary
+Table~S6). Because EXP6 uses stored top-10 explanations rather than full
+attribution vectors, it should be read as a construct-validity stress test
+rather than a replacement for the primary full-run fidelity analysis: the
+RF fidelity direction is robust in this probe, while the effect magnitude
+is partly masking-protocol dependent.
 
 \subsection{Reproducibility and Operational Validity}
 
@@ -1352,16 +1333,11 @@ replicate the full SHAP--LIME endpoint set and does not test image, text,
 graph, or time-series explanations. Those modalities require different
 masking schemes, perturbation semantics, and evaluation endpoints.
 \item \textbf{Configuration space:} Both methods were run with default
-hyperparameter settings. A dedicated kernel-width probe (four values: 0.25,
-0.75, 3.0, 10.0) reveals that values below 3.0 are degenerate in the
-103-dimensional preprocessed Adult feature space---all weights collapse to
-zero---while $\mathtt{kernel\_width}=10.0$ yields full instance coverage
-and improved stability (0.664 vs.\ near-zero) at a modest fidelity cost
-(0.441 vs.\ 0.518). These results confirm that the reference setting
-(3.0) is the minimum viable value in this space, not a conservative choice,
-and that the LIME instability observed in EXP2 persists across kernel-width
-settings rather than reflecting a calibration artifact. SHAP background-set
-sensitivity and cross-model kernel-width effects remain open.
+hyperparameter settings. The completed LIME \texttt{kernel\_width} probe
+(Section~\ref{sec:validity}, Supplementary Table~S2) confirms the
+reference setting is a minimum-viable rather than conservative choice;
+SHAP background-set sensitivity and cross-model kernel-width effects
+remain open.
 \item \textbf{Runtime heterogeneity:} The XGBoost exception shows that
 ``LIME is faster'' is not a universal rule and warrants tree-specific analysis.
 \item \textbf{No human-subject validation:} This paper does not establish

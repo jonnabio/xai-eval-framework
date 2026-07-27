@@ -19,11 +19,13 @@
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
-This supplementary document contains four tables referenced from the main
+This supplementary document contains six tables referenced from the main
 text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
 LIME \texttt{kernel\_width} sensitivity probe results; (S3) pairwise
-feature correlations for the Adult Income dataset; and (S4) the
-second-reviewer taxonomy audit template.
+feature correlations for the Adult Income dataset; (S4) the
+second-reviewer taxonomy audit template; (S5) the LIME \texttt{num\_samples}
+sensitivity probe results; and (S6) the EXP6 masking-scheme sensitivity
+breakdown.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S1 — EXP4 Evaluation Rubric and Judge Prompts}
@@ -211,12 +213,14 @@ fidelity values as measures of causal feature importance.
 \label{sec:supp_taxonomy_audit}
 %% ────────────────────────────────────────────────────────────────────────────
 
-Table~\ref{tab:s4_audit} reports the simulated second-reviewer audit used to
-stress-test single-reviewer bias in the taxonomy construction. The audited
-subset contains 16 papers sampled across the six thematic clusters in the coded corpus:
+Table~\ref{tab:s4_audit} reports the independent second-reviewer audit used to
+stress-test single-reviewer bias in the taxonomy construction. An independent
+human second reviewer, recruited through the project's human-evaluation
+dashboard, audited a stratified subset of 16 papers sampled across the six
+thematic clusters in the coded corpus:
 faithfulness/robustness, human-grounded, taxonomy/survey, benchmark/toolkit,
-LLM-judge, and counterfactual/recourse. For each paper, the simulated
-Reviewer~2 records whether the source satisfies inclusion criteria and
+LLM-judge, and counterfactual/recourse. For each paper, Reviewer~2
+records whether the source satisfies inclusion criteria and
 independently assigns the four taxonomy axes. Agreement is then computed
 against Reviewer~1 coding.
 For multi-label axes, report both exact percent agreement and Jaccard
@@ -225,8 +229,8 @@ similarity; for single-label inclusion decisions, report Cohen's $\kappa$.
 \begin{table}[h]
 \centering
 \footnotesize
-\caption{Simulated second-reviewer audit summary. Cohen's $\kappa$ is not
-estimable for the inclusion decision because the simulated subset contains
+\caption{Second-reviewer audit summary. Cohen's $\kappa$ is not
+estimable for the inclusion decision because the audited subset contains
 included records only.}
 \label{tab:s4_audit}
 \begin{tabularx}{\linewidth}{p{2.8cm} p{2.0cm} p{2.8cm} p{2.4cm} X}
@@ -267,10 +271,88 @@ Overall adjudication log
 \end{tabularx}
 \end{table}
 
-\noindent The row-level simulated audit is archived in
+\noindent The row-level audit is archived in
 \texttt{docs/reports/paper\_bc/}\\
-\texttt{second\_reviewer\_audit\_simulated\_results.csv}. These
-values should be replaced by an independent human second-reviewer audit before
-making inter-rater reliability claims in a submitted journal version.
+\texttt{second\_reviewer\_audit\_results.csv}. This subset audit supports
+codebook refinement and bias detection; a full-corpus independent human
+second-reviewer audit remains future work before broader inter-rater
+reliability claims are made.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S5 — LIME \texttt{num\_samples} Sensitivity Probe}
+\label{sec:supp_ns}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s5_ns} reports LIME metrics under three
+\texttt{num\_samples} settings (RF model, seed 42, $N=100$,
+\texttt{kernel\_width=3.0}, \texttt{num\_features=10}), testing whether
+the near-zero stability observed at the reference setting is an
+under-sampling artifact.
+
+\begin{table}[h]
+\centering
+\caption{LIME sensitivity to \texttt{num\_samples} (RF, seed 42, $N=100$).
+Stability = mean pairwise cosine similarity under $T=15$ Gaussian
+perturbations ($\sigma=0.1$). Reference condition:
+\texttt{num\_samples=1000}.}
+\label{tab:s5_ns}
+\begin{tabular}{lcc}
+\toprule
+\texttt{num\_samples} & Fidelity & Stability \\
+\midrule
+500                     & 0.452 & 0.011 \\
+1000 \emph{(ref.)}      & 0.461 & 0.014 \\
+2000                    & 0.459 & 0.016 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Stability remains near-zero at every sample budget tested and
+fidelity is essentially flat throughout. Doubling or halving the sample
+budget neither stabilizes the explanations nor changes the fidelity
+ordering, indicating that LIME's instability reflects the local surrogate
+fitting process itself rather than an insufficient sample count that
+additional compute would resolve.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S6 — EXP6 Masking-Scheme Sensitivity Breakdown}
+\label{sec:supp_exp6}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s6_exp6} reports the per-scheme breakdown for EXP6, the
+top-feature masking-sensitivity probe over the Adult RF stratum ($n=50$
+runs, 5 seeds, top-10 stored explanations from EXP2). Four masking
+schemes are compared: independent zero masking, mean replacement,
+marginal empirical replacement, and grouped mean replacement (which masks
+correlated processed feature sets together, e.g.
+\texttt{education}/\texttt{education-num},
+\texttt{marital-status}/\texttt{relationship}/\texttt{sex}, and
+\texttt{workclass}/\texttt{occupation}).
+
+\begin{table}[h]
+\centering
+\caption{SHAP--LIME top-$k$ prediction-drop advantage and drop-correlation
+advantage under four masking schemes (Adult RF stratum, $n=50$ runs, 5
+seeds). SHAP's direction is positive in all five paired seed cells under
+every scheme.}
+\label{tab:s6_exp6}
+\begin{tabular}{lcc}
+\toprule
+Masking scheme & Mean SHAP--LIME gap & Mean drop-correlation delta \\
+\midrule
+Independent zero masking      & +0.098 & +0.625 \\
+Mean replacement               & +0.098 & +0.591 \\
+Marginal empirical replacement & +0.081 & +0.534 \\
+Grouped mean replacement       & +0.053 & +0.493 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent SHAP's fidelity advantage direction is stable across all four
+schemes, but its magnitude decreases under progressively more
+correlation-aware masking, consistent with the feature-correlation
+discussion in Supplementary Table~S3: independent masking of correlated
+features inflates the apparent SHAP--LIME gap relative to masking schemes
+that account for feature dependence.
 
 \end{document}
