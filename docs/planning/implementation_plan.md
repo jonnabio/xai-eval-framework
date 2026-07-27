@@ -114,6 +114,32 @@ Create a project-local ACE skill for editing the CIFIE/FOM-7 Spanish book chapte
   <dependencies>Task 3</dependencies>
 </task>
 
+<task id="5">
+  <name>Revise technical XAI foundations section</name>
+  <objective>Strengthen `03_fundamentos_xai.md` through an iterative literature-enrichment loop, sharpening conceptual distinctions and FOM-7 alignment while preserving APA 7 citation discipline.</objective>
+  <files>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/manuscript/03_fundamentos_xai.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references.bib</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/references_apa7.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/references/citation_audit.md</modify>
+    <modify>publications/book_chapters/2026_cifie_xai_fom7/sources/evidence_map.md</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Query Semantic Scholar first and cross-check accepted sources through OpenAlex or Crossref metadata.</test>
+    <test>Prefer open-access sources verified through OpenAlex, arXiv, publisher, repository, or comparable OA links.</test>
+    <test>Verify section 03 contains no Pandoc citation keys and every in-text citation has a matching reference entry.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Section 03 distinguishes interpretability, explainability, transparency, local/global scope, plausibility, fidelity, stability, robustness, and metric proxies.</criterion>
+    <criterion>Section 03 explicitly frames FOM-7 as a protocol for admissible, traceable evidence rather than universal method ranking.</criterion>
+    <criterion>Accepted and rejected literature sources are documented with identifiers and verification status.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Task 4</dependencies>
+</task>
+
 ---
 
 ## Verification Plan

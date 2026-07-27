@@ -26,6 +26,7 @@
 - `@ribeiro2018` — Anchors / reglas locales de alta precisión.
 - `@mothilal2020` — DiCE / explicaciones contrafactuales diversas.
 - `@murdoch2019` — definiciones, métodos y aplicaciones de aprendizaje interpretable.
+- `@miller2019` — explicación como fenómeno contrastivo y social; verificada en pasada fundamentos XAI 2026-07-04 mediante Semantic Scholar, OpenAlex, Crossref y arXiv.
 - `@poyiadzi2020` — FACE y contrafactuales factibles/accionables.
 - `@slack2020` — ataques adversariales a explicaciones post-hoc LIME/SHAP.
 - `@vandenbroeck2022` — tractabilidad de explicaciones SHAP.
@@ -86,6 +87,43 @@ Objetivo: reforzar afirmaciones sobre evaluación multidimensional, límites de 
 
 - Búsquedas generales de Semantic Scholar no produjeron candidatos adicionales por HTTP 429.
 - No se añadieron fuentes nuevas solo por actualidad; las fuentes aceptadas ya tenían correspondencia directa con afirmaciones presentes en las secciones 09 y 10.
+
+## Pasada de enriquecimiento fundamentos XAI: 2026-07-04
+
+Objetivo: fortalecer `03_fundamentos_xai.md` con distinciones verificadas sobre interpretabilidad, explicabilidad, transparencia, artefactos post-hoc, alcance local/global, plausibilidad, fidelidad, estabilidad, robustez y evaluación funcional bajo FOM-7.
+
+### Bases consultadas
+
+- Semantic Scholar Graph API:
+  - Consulta por DOI con resultado aceptado:
+    - `DOI:10.1073/pnas.1900654116` → `@murdoch2019`, Semantic Scholar paperId `b9518627db25f05930e931f56497602363a75491`, CorpusId `204755862`, OA confirmado, PDF PNAS registrado.
+    - `DOI:10.1002/widm.1493` → `@marcinkevics2023`, Semantic Scholar paperId `7297439e3d43ac95080c9a572b2a925cdc8f9765`, CorpusId `257290340`, OA confirmado, PDF Wiley registrado.
+    - `DOI:10.1016/j.artint.2018.07.007` → `@miller2019`, Semantic Scholar paperId `e89dfa306723e8ef031765e9c44e5f6f94fd8fda`, CorpusId `36024272`, OA confirmado, PDF arXiv `1706.07269` registrado.
+  - Consultas por DOI con HTTP 429 en el *shared rate pool*: `@lipton2018`, `@nauta2023`, `@schwalbe2023`, `@rudin2022`.
+  - Búsqueda temática `explainable AI evaluation fidelity stability robustness metrics` devolvió HTTP 429; se usaron OpenAlex y Crossref para cross-check de candidatos ya identificados por DOI.
+- OpenAlex:
+  - `@murdoch2019` → OpenAlex `W2910705748`, DOI `10.1073/pnas.1900654116`, OA bronce, PNAS.
+  - `@marcinkevics2023` → OpenAlex `W4322621694`, DOI `10.1002/widm.1493`, OA híbrido, WIREs Data Mining and Knowledge Discovery.
+  - `@nauta2023` → OpenAlex `W4321786089`, DOI `10.1145/3583558`, OA híbrido, ACM Computing Surveys.
+  - `@schwalbe2023` → OpenAlex `W4313650676`, DOI `10.1007/s10618-022-00867-8`, OA híbrido, Data Mining and Knowledge Discovery.
+  - `@rudin2022` → OpenAlex `W3137125108`, DOI `10.1214/21-SS133`, OA diamante, Statistics Surveys.
+  - `@miller2019` → OpenAlex `W2670253439`, DOI `10.1016/j.artint.2018.07.007`, OA verde, arXiv PDF `1706.07269`.
+- Crossref:
+  - DOI metadata verified for `@lipton2018`, `@murdoch2019`, `@marcinkevics2023`, `@nauta2023`, `@schwalbe2023`, `@rudin2022`, and `@miller2019`.
+  - Crossref confirmed `@miller2019` as journal article in *Artificial Intelligence*, published 2019-02.
+
+### Fuentes aceptadas para esta pasada
+
+- `@miller2019` — añadida para respaldar que las explicaciones tienen una dimensión contrastiva y social, sin convertir plausibilidad para una audiencia en fidelidad técnica.
+- `@murdoch2019` — reutilizada para respaldar definiciones y métodos de aprendizaje interpretable.
+- `@marcinkevics2023` y `@schwalbe2023` — reutilizadas para respaldar distinciones entre familias de métodos, conceptos y salidas explicativas.
+- `@nauta2023`, `@canha2025`, `@pawlicki2024`, `@bhattacharya2024`, `@hedstrom2023` y `@zheng2025` — reutilizadas para sostener evaluación cuantitativa, multidimensional, proxy-based y dependiente del constructo.
+- `@lipton2018`, `@rudin2022`, `@doshi-velez2017` y `@alvarezmelis2018` — reutilizadas para sostener ambigüedad conceptual, preferencia por modelos interpretables cuando corresponde, alcance de evaluación funcional y límites de robustez.
+
+### Fuentes no aceptadas o no usadas
+
+- No se aceptaron candidatos nuevos a partir de búsqueda temática porque Semantic Scholar devolvió HTTP 429.
+- No se añadieron fuentes adicionales sobre explicabilidad human-centered más allá de `@miller2019`, ya que el capítulo no evalúa usuarios ni comprensión subjetiva.
 
 ## Referencias sin cita en texto
 
