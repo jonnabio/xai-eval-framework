@@ -391,9 +391,10 @@ Validity controls and residual risks are summarized as follows:
     \item \textbf{External validity:} diversity across model families and seeds
     on the primary Adult benchmark, supplemented by a bounded single-explainer
     (SHAP) cross-dataset check on two additional tabular datasets
-    (Section~\ref{sec:exp3}); a matching Anchors-based cross-dataset check is
-    blocked by an environment dependency gap (see below) and remains follow-up
-    work.
+    (Section~\ref{sec:exp3}). This Paper A check remains narrower than the
+    companion synthesis evidence base, which also reports a LIME-only EXP3
+    extension; neither source establishes a full paired SHAP--LIME
+    cross-dataset stability comparison.
     \item \textbf{Implementation validity:} effective runtime parameter bindings
     are disclosed; harmonization changes may shift absolute levels.
 \end{enumerate}
@@ -625,7 +626,7 @@ confirmatory cross-dataset ranking.
 Interpretation limits:
 \begin{itemize}[leftmargin=*]
     \item Anchors stability values near zero should be interpreted with implementation caveats: effective runtime behavior uses fixed precision threshold 0.95 and binary rule-membership importance vectors, which can reduce perturbation-based similarity under this protocol.
-    \item The full four-method ranking (SHAP, LIME, Anchors, DiCE) is validated only on one tabular benchmark (Adult). A bounded single-explainer check (Section~\ref{sec:exp3}) shows SHAP's Stability advantage largely transfers to two additional datasets, with one model/dataset exception; this does not extend to LIME, Anchors, or DiCE, and full cross-domain generalization still requires replication on additional datasets and modalities before cross-domain ranking claims are made.
+    \item The full four-method ranking (SHAP, LIME, Anchors, DiCE) is validated only on one tabular benchmark (Adult). A bounded single-explainer check (Section~\ref{sec:exp3}) shows SHAP's Stability advantage largely transfers to two additional datasets, with one model/dataset exception; it does not establish any cross-dataset ranking against LIME, Anchors, or DiCE, and full cross-domain generalization still requires replication on additional datasets and modalities before cross-domain ranking claims are made.
 \end{itemize}
 
 \subsection{Formal Problem Framing and Scope of XAI Evaluation}
@@ -661,7 +662,8 @@ recommendations in recent XAI governance and assessment literature
 \citep{sokol2020factsheets,dinspec92001,zicari2021zinspection}. Under this design,
 our benchmark is intended to support transparent comparison and hypothesis generation
 about method behavior, while acknowledging that full correctness claims may require
-additional theoretical analysis or controlled ground-truth experiments
+additional theoretical analysis, transparent-model or synthetic ground-truth
+experiments, and dependency-aware perturbation protocols
 \citep{haufe2026formalization}.
 
 \subsection{Responsible Use and Benchmark Boundaries}
@@ -679,8 +681,8 @@ The intended use of the released artifacts is methodological: reproducing the
 reported benchmark, auditing the effect of artifact qualification and
 statistical filtering, and extending the protocol to additional datasets or
 explanation families. Claims about deployment utility, human interpretability,
-or cross-domain method superiority require additional validation beyond the
-quantitative-only scope of this paper.
+human-centered usefulness, or cross-domain method superiority require additional
+validation beyond the quantitative-only scope of this paper.
 
 \subsection{Code and Artifact Availability}
 \begin{sloppypar}
@@ -734,7 +736,7 @@ is operational and reproducibility-focused rather than algorithmic.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
     \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The root cause is diagnosed (an \texttt{alibi}/\texttt{dice-ml} dependency incompatible with this environment's Python/\texttt{numpy} versions; Section~\ref{sec:methods-repro}) rather than unexplained, and closing it is judged not worth the required environment migration relative to disclosure; these 25 cells and the matching 12 \texttt{exp3\_cross\_dataset} Anchors cells (Section~\ref{sec:exp3}) are accepted as a permanent, disclosed limitation of this evidence cut rather than pending work. The reporting caveats document the current merged-snapshot diagnostic.
     \item \textbf{Limitation:} \path{svm_shap_s456_n200} has no committed per-run artifact; the reported analysis instead relies on the disclosed \path{outputs/batch_results.csv} recovery overlay for this one cell. A partial rerun exists (161/800 instances checkpointed) but completing it was estimated at 2-3 further days of continuous compute and is not being pursued; this is an accepted limitation, not an open action item.
-    \item \textbf{Next steps:} The bounded single-explainer (SHAP) cross-dataset check in Section~\ref{sec:exp3} is a first step toward testing ranking stability under dataset shift; extending it to LIME, Anchors, and DiCE, and to additional tabular datasets, remains future work.
+    \item \textbf{Next steps:} The bounded single-explainer (SHAP) cross-dataset check in Section~\ref{sec:exp3} is a first step toward testing ranking stability under dataset shift. Integrating the separate LIME-only EXP3 extension into a fully paired SHAP--LIME stability design, extending the check to Anchors and DiCE, and adding further tabular datasets remain future work.
 \end{itemize}
 
 \acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft is archived under DOI 10.5281/zenodo.21538180 (commit 553f65d71b077ec181ad36da7bb6e7c9942fe116, 2026-07-24).}

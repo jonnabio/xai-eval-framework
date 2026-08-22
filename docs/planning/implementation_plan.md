@@ -25,6 +25,32 @@ Create a project-local ACE skill for editing the CIFIE/FOM-7 Spanish book chapte
 
 ## Tasks
 
+<task id="6">
+  <name>Synchronize thesis, Paper A, and Paper B+C</name>
+  <objective>Create a claim-level sync matrix and align validation-boundary wording across the thesis, Paper A, and the merged Paper B+C manuscript.</objective>
+  <files>
+    <create>docs/reports/sync/thesis_paper_sync_matrix.md</create>
+    <modify>thesis/capitulo-3-diseno-experimental.qmd</modify>
+    <modify>thesis/capitulo-6-conclusiones.qmd</modify>
+    <modify>docs/reports/paper_a/paper_a_prototype_jmlr.tex</modify>
+    <modify>docs/reports/paper_a/paper_a_validity_and_reporting_caveats.md</modify>
+    <modify>docs/reports/paper_bc/paper_bc_jmlr.tex</modify>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>Verify EXP3 wording is consistent across thesis, Paper A, and Paper B+C.</test>
+    <test>Verify no manuscript claims synthetic ground-truth validation, transparent-model recovery, human-centered validation, or a composite metric as completed work.</test>
+    <test>Verify shared validation-boundary language remains scoped to functionally grounded comparative evidence.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>Each output uses the same distinction between ranking claims and broader validity claims.</criterion>
+    <criterion>Paper A remains canonical for benchmark protocol and quantitative evidence; Paper B+C remains canonical for taxonomy and validity-boundary framing; the thesis synthesizes both without contradictions.</criterion>
+    <criterion>The sync matrix records the source of truth and action status for major shared claims.</criterion>
+  </acceptance_criteria>
+  <complexity>S</complexity>
+  <dependencies>None</dependencies>
+</task>
+
 <task id="1">
   <name>Create CIFIE manuscript editing skill</name>
   <objective>Add a reusable ACE skill for revising and literature-enriching the CIFIE/FOM-7 chapter while preserving workstream constraints.</objective>

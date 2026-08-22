@@ -218,7 +218,7 @@ evidencia que sería necesaria para extender las conclusiones.
 
 | Afirmación | Soportada para | No soportada para | Validación futura requerida |
 |:---|:---|:---|:---|
-| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §sec-exp3-nota). Pendiente: replicación del contraste SHAP-LIME en datasets adicionales. |
+| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §sec-exp3-nota). La extensión posterior incorporó LIME en esos dos datasets, pero no instrumentó estabilidad de SHAP; por tanto, el contraste pareado SHAP-LIME completo fuera de Adult permanece pendiente. |
 | La inestabilidad de LIME es estructural (CV=86%, media≈0.014) | UCI Adult Income; estabilidad definida como similitud coseno bajo perturbación gaussiana; configuración `num_samples=1000`, `kernel_width=3.0` | Otras configuraciones de LIME; otras definiciones de estabilidad (distancia Lipschitz local, varianza de pesos) | Análisis de sensibilidad de hiperparámetros con variación sistemática de `num_samples`, `kernel_width` y estrategia de perturbación |
 | FOM-7 produce resultados reproducibles (CV<3% en fidelidad primaria) | Entorno controlado; cinco semillas definidas; modelos congelados en EXP1 | Otros entornos computacionales sin control de recursos; modelos re-entrenados entre ejecuciones; datasets con alta varianza de instancias | Replicación independiente con infraestructura distinta; publicación de resultados en Zenodo con instrucciones verificadas |
 | Los criterios prescriptivos de selección son válidos (Contextos A-D) | Condiciones del benchmark descritas; modelos y métricas definidas | Dominios regulados con restricciones normativas propias; preferencias de usuarios finales; criterios de comprehensibilidad | Estudios human-centered en dominios específicos (crédito, salud, justicia) con usuarios expertos |
@@ -308,16 +308,19 @@ validar cualquier evaluador semántico automático.
 
 **3. Extensión del análisis de sensibilidad a hiperparámetros.** Los análisis de sensibilidad completados en el Apéndice C establecen tres resultados base: (i) la inestabilidad de LIME es robusta a variaciones de `num_samples` ∈ {500, 1000, 2000} —la similitud coseno permanece cercana a cero en todos los niveles, descartando que sea un artefacto de convergencia—; (ii) `kernel_width` ∈ {0.25, 0.75} produce pesos degenerados en el espacio preprocesado de 103 dimensiones, con `kernel_width = 3.0` como valor mínimo viable y `kernel_width = 10.0` como alternativa más estable a costa de localidad; y (iii) la cobertura de Anchors es extremadamente sensible al umbral de precisión $\tau$. Las brechas pendientes incluyen la sensibilidad del tamaño del conjunto de referencia de SHAP más allá del rango evaluado (25–100), la interacción entre `kernel_width` y `num_samples` en espacios de dimensionalidad variable, y la extensión de los análisis a los modelos SVM y MLP, que emplean KernelSHAP en lugar de TreeSHAP y exhiben distintos perfiles de coste-estabilidad.
 
-**4. Extensión cross-dataset del contraste SHAP-LIME y replicación en dominios
+**4. Completar el contraste cross-dataset SHAP-LIME y replicar en dominios
 de alto riesgo.** EXP3 replicó el ordenamiento de fidelidad SHAP-Anchors en
-Breast Cancer Wisconsin y German Credit, pero excluyó a LIME y las métricas de
-estabilidad. La extensión prioritaria es, por tanto, incorporar LIME y la métrica
-de similitud coseno al protocolo cross-dataset, de modo que los hallazgos
-centrales de esta tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en
-estabilidad— sean verificables fuera del contexto UCI Adult Income. Una segunda
-dirección es la validación en dominios regulados (crédito, salud, justicia) con
-restricciones normativas explícitas (EU AI Act, GDPR Art. 22), donde la
-elección del método explicador tiene consecuencias legales directas.
+Breast Cancer Wisconsin y German Credit, y una extensión posterior incorporó
+LIME con las mismas métricas de fidelidad y estabilidad. Sin embargo, la
+estabilidad de SHAP no fue instrumentada en esos datasets, por lo que aún no
+existe un contraste pareado SHAP-LIME completo de estabilidad fuera de UCI Adult
+Income. La extensión prioritaria es completar esa instrumentación y ampliar el
+diseño a más modelos y datasets, de modo que los hallazgos centrales de esta
+tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en estabilidad— sean verificables
+fuera del contexto Adult. Una segunda dirección es la validación en dominios
+regulados (crédito, salud, justicia) con restricciones normativas explícitas
+(EU AI Act, GDPR Art. 22), donde la elección del método explicador tiene
+consecuencias legales directas.
 
 **5. Formalización del eje de comprehensibilidad en la taxonomía.** El eje de
 contexto de tarea de la taxonomía incluye el contexto *usuario final* pero no

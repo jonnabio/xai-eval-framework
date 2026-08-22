@@ -579,8 +579,8 @@ evaluadores semánticos LLM como instrumento de medición.
 
 ### EXP3: Validación cruzada de fidelidad en datasets adicionales {#sec-exp3-diseno}
 
-EXP3 replica el ordenamiento de fidelidad SHAP frente a Anchors en dos datasets
-tabulares de clasificación binaria distintos al dataset primario:
+EXP3 replica parcialmente los ordenamientos de fidelidad fuera del dataset
+primario mediante dos datasets tabulares de clasificación binaria:
 
 - **Breast Cancer Wisconsin** [@dua2019uci]: $n = 569$ instancias, 30
   características numéricas continuas (sin categóricas), clasificación binaria
@@ -588,14 +588,16 @@ tabulares de clasificación binaria distintos al dataset primario:
 - **German Credit** [@dua2019uci]: $n = 1{,}000$ instancias, 20 características
   (mixtas numéricas y codificadas), clasificación binaria crédito-bueno/malo.
 
-El diseño de EXP3 cruza dos modelos (Random Forest y XGBoost), tres semillas
-($\{42, 123, 456\}$) y los dos datasets, produciendo $2 \times 2 \times 3 = 12$
-comparaciones pareadas SHAP–Anchors. La métrica evaluada es fidelidad con la
-misma operacionalización que EXP2 (correlación importancias–enmascaramiento).
-La métrica de estabilidad no fue instrumentada en EXP3 por razones de
-factibilidad computacional; LIME tampoco fue incluido. EXP3 proporciona
-validación cross-dataset del ordenamiento SHAP $>$ Anchors en fidelidad; el
-contraste SHAP-LIME y la estabilidad permanecen acotados a UCI Adult Income.
+El diseño base de EXP3 cruza dos modelos (Random Forest y XGBoost), tres
+semillas ($\{42, 123, 456\}$) y los dos datasets, produciendo $2 \times 2
+\times 3 = 12$ comparaciones pareadas SHAP–Anchors. La métrica evaluada es
+fidelidad con la misma operacionalización que EXP2
+(correlación importancias–enmascaramiento). Una extensión posterior incorporó
+LIME en los mismos datasets y modelos, reportando fidelidad y estabilidad de
+LIME bajo el protocolo EXP2. Sin embargo, la estabilidad de SHAP no fue
+instrumentada en esa extensión, por lo que EXP3 proporciona validación
+cross-dataset parcial de los ordenamientos de fidelidad, pero no un contraste
+pareado SHAP-LIME completo de estabilidad fuera de UCI Adult Income.
 
 ### EXP4: Estudio de fiabilidad de jueces LLM para evaluación semántica {#sec-exp4-diseno}
 
