@@ -25,6 +25,21 @@
   the substantive fixes need author decisions (branch merge, canonical EXP3 SHAP snapshot,
   provenance of Ch.5's 0.514/0.412). Sync matrix updated with the corrected EXP3 row, three new
   rows, and five new checklist items.
+- **Mode (2026-08-22, third pass):** PUBLICATION — remediation. Landed the four-week backlog in
+  three commits (`d1c9ba1d1` Paper B+C F01/F02 + EXP3 path; `00cdc8f3e` thesis/Paper A EXP3 wording
+  + sync matrix; `b09b92a1d` both review reports + context), then applied six artifact-verified
+  fixes in `3eeed3b04`: A02 partial (Paper A "LIME-only" mischaracterisation), A06 (thesis Anchors
+  coverage 56→57 / 74.7%→76.0%), A07 (EXP3 minimum gap German Credit RF→XGB, in both Paper B+C and
+  thesis Ch.6), A08 (EXP4 n=147/192 disclosure ported into thesis Ch.5), A10 (Paper B+C Friedman
+  p-values labelled Holm-adjusted), A13 (new: dangling `@tbl-exp4-dimensiones` crossref in Ch.3,
+  found by the rebuild, repointed to `@tbl-exp4-icc`). No statistic or table value changed.
+  Rebuilt all four outputs — three PDFs via `tools/tectonic-portable`, thesis DOCX via
+  `thesis/render.ps1` — all clean. Toolchain notes: MiKTeX `pdflatex` cannot build Paper A
+  (microtype font-expansion error at the bibliography), use Tectonic; `render.ps1` calls a
+  nonexistent `quarto clean` and prints a harmless error every run.
+  **Still blocked on author decisions:** A01 (merge `results/exp3-*` branches, then rewrite Paper A
+  §sec:exp3 + Conclusion), A03 (canonical EXP3 SHAP snapshot: July 0.6165 vs April 0.6065),
+  A04 (thesis Ch.5 0.514/0.412 provenance), A05 (thesis Ch.4 cost profile), A09 (thesis Zenodo DOI).
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
