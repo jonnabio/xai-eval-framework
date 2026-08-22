@@ -847,11 +847,14 @@ four-method field is not exchangeable.
 \centering
 \caption{Friedman omnibus test across four methods (EXP2, $n=15$ blocks ---
 5 model families $\times$ 3 sampling intensities, each a 5-seed mean ---
-$k=4$). $W$ = Kendall's concordance coefficient.}
+$k=4$). Reported $p$-values are Holm-Bonferroni-adjusted across the five
+primary metrics; the corresponding raw values are
+$3.78\times10^{-9}$ (fidelity) and $7.65\times10^{-9}$ (stability).
+$W$ = Kendall's concordance coefficient.}
 \label{tab:friedman}
 \begin{tabular}{lrrl}
 \toprule
-Metric    & $\chi^2$ (df\,=\,3) & $p$-value             & $W$   \\
+Metric    & $\chi^2$ (df\,=\,3) & $p_{\mathrm{Holm}}$   & $W$   \\
 \midrule
 Fidelity  & 42.12               & $1.51\times10^{-8}$  & 0.936 \\
 Stability & 40.68               & $2.29\times10^{-8}$  & 0.904 \\
@@ -1033,7 +1036,7 @@ comparisons per method pair.
 \textbf{Fidelity ordering (SHAP vs.\ Anchors).}
 SHAP outperforms Anchors in fidelity in all 12 paired combinations
 (Table~\ref{tab:exp3_fidelity}, Figure~\ref{fig:exp3_fidelity}), with
-mean gaps ranging from $+0.26$ (German Credit, RF) to $+0.51$ (Breast
+mean gaps ranging from $+0.26$ (German Credit, XGB) to $+0.51$ (Breast
 Cancer, RF). This provides partial tabular support for the EXP2 fidelity
 direction across different feature spaces, dimensionalities, and class
 distributions.

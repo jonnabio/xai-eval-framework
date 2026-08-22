@@ -53,7 +53,7 @@ numbers that Paper B+C and the thesis already publish.
   retained for the **25 EXP2 cells**; it is only the 12 EXP3 Anchors cells that are wrongly
   described.
 
-### A02 [major] — The 2026-08-22 Paper A edit fixed the symptom in one place and left it in two others
+### A02 [major, PARTIALLY FIXED 2026-08-22] — The 2026-08-22 Paper A edit fixed the symptom in one place and left it in two others
 
 - **Location**: `paper_a_prototype_jmlr.tex:391-397` vs `:582-586` and `:737`.
 - **Evidence**: today's working-tree edit removed the "blocked by an environment dependency gap"
@@ -63,6 +63,14 @@ numbers that Paper B+C and the thesis already publish.
   extension, so "LIME-only" mischaracterises it. (ii) §sec:exp3 and the Conclusion bullet still
   carry the original "could not be executed" / "permanent limitation" wording, so Paper A is now
   internally inconsistent as well as inconsistent with the other two documents.
+- **Resolution (2026-08-22, partial)**: problem (i) fixed — the bullet now reads *"the companion
+  synthesis evidence base, which reports both a SHAP--Anchors fidelity comparison and a LIME
+  fidelity/stability extension on the same two datasets."* Problem (ii) is **not** fixed and cannot
+  be until A01 is decided: rewriting §sec:exp3 and the Conclusion bullet depends on whether the
+  `results/exp3-*` branches are merged. Note that this partial fix makes Paper A's internal tension
+  *more* visible, not less — the validity bullet now correctly names a SHAP--Anchors comparison
+  that §sec:exp3 two pages later still calls impossible. That is the intended state: accurate and
+  visibly incomplete, rather than inaccurate and superficially coherent.
 
 ### A03 [major] — Paper A and Paper B+C report different values for the same EXP3 SHAP cell
 
@@ -124,15 +132,17 @@ numbers that Paper B+C and the thesis already publish.
   of which re-verified as exact matches to the artifacts. It is confined to the descriptive profile
   section, but that section is where a reader looks up "how expensive is SHAP."
 
-### A06 [minor] — Thesis internal contradiction on Anchors coverage
+### A06 [minor, FIXED 2026-08-22] — Thesis internal contradiction on Anchors coverage
 
 - **Location**: `capitulo-4-resultados.qmd:356` (*"cobertura de solo 56 celdas calificadas (74.7%)"*)
   vs `capitulo-4-resultados.qmd:37` and `capitulo-3-diseno-experimental.qmd:400`
   (*"57 de 75 celdas (76.0%)"*).
 - **Artifact check**: 57 qualified Anchors runs. The 57 / 76.0% figure is correct and is what Paper A
   and Paper B+C both use (Paper B+C: "57/75 artifact-qualified runs"). Ch.4:356 is the outlier.
+- **Resolution (2026-08-22)**: `capitulo-4-resultados.qmd:356` corrected to
+  *"57 celdas calificadas (76.0%)"*. No other number in the paragraph depends on it.
 
-### A07 [minor] — The "+0.26 (German Credit, RF)" gap is mislabelled in both Paper B+C and the thesis
+### A07 [minor, FIXED 2026-08-22] — The "+0.26 (German Credit, RF)" gap is mislabelled in both Paper B+C and the thesis
 
 - **Location**: `paper_bc_jmlr.tex:1036-1037`; `thesis/capitulo-6-conclusiones.qmd:245-246`.
 - **Evidence**: both state mean SHAP−Anchors fidelity gaps range *"from +0.26 (German Credit, RF)
@@ -140,8 +150,11 @@ numbers that Paper B+C and the thesis already publish.
 - **Artifact check**: GC/RF gap = 0.7137 − 0.3510 = **+0.363**. The minimum gap is GC/**XGB**
   (0.7108 − 0.4507 = **+0.260**). BC/RF = +0.514 ✓. The two documents are consistent with each
   other and both wrong against the artifact — a shared-source error, so fix in both.
+- **Resolution (2026-08-22)**: both corrected to *"German Credit, XGB"*
+  (`paper_bc_jmlr.tex:1039`, `capitulo-6-conclusiones.qmd:246`). The `+0.26` and `+0.51` values
+  themselves were correct and are unchanged; only the model label was wrong.
 
-### A08 [minor] — Thesis carries the EXP4 n=147/n=192 defect that Paper B+C already fixed
+### A08 [minor, FIXED 2026-08-22] — Thesis carries the EXP4 n=147/n=192 defect that Paper B+C already fixed
 
 - **Location**: `thesis/capitulo-5-taxonomia.qmd:291-292,305-307` (table `@tbl-exp4-icc`).
 - **Evidence**: the thesis presents ICC(2,1) and Krippendorff's α side by side under a single
@@ -153,6 +166,11 @@ numbers that Paper B+C and the thesis already publish.
 - **Remediation**: port the Paper B+C disclosure sentence and caption wording into Ch.5.
   Note the standing F04 caveat: the EXP4 analysis scripts and raw judge data are absent from the
   repo, so this remains a documented-but-not-re-derivable explanation in either document.
+- **Resolution (2026-08-22)**: ported. `capitulo-5-taxonomia.qmd` now carries a Spanish rendering of
+  the Paper B+C disclosure sentence (ICC requires a complete cases × judges matrix, hence n=147;
+  Krippendorff's α tolerates missing ratings, hence n=192), and the `@tbl-exp4-icc` caption states
+  both sample sizes. No values changed. The F04 caveat (missing EXP4 scripts and raw judge data)
+  stands and is unaffected.
 
 ### A09 [minor] — Thesis archives to a superseded DOI
 
@@ -167,7 +185,7 @@ numbers that Paper B+C and the thesis already publish.
   cut. For a thesis whose central methodological claim is end-to-end traceability, this is the kind
   of gap a committee will probe.
 
-### A10 [minor] — Undisclosed raw-vs-adjusted p-value convention between Paper A and Paper B+C
+### A10 [minor, FIXED 2026-08-22] — Undisclosed raw-vs-adjusted p-value convention between Paper A and Paper B+C
 
 - **Location**: Paper A `tab:friedman` (`:462-476`) vs Paper B+C `tab:friedman` (`:846-860`).
 - **Evidence**: same $\chi^2$ (42.12, 40.68), different p-values: Paper A reports
@@ -176,6 +194,23 @@ numbers that Paper B+C and the thesis already publish.
   "p-value (raw)" with a Holm sentence following ✓. Paper B+C reports `p_value_holm` under a bare
   "$p$-value" heading. The thesis matches Paper B+C (Holm). Both are correct; only Paper B+C's
   label is ambiguous. One-word caption fix.
+- **Resolution (2026-08-22)**: `tab:friedman`'s column header is now $p_{\mathrm{Holm}}$ and the
+  caption states the values are Holm-Bonferroni-adjusted across the five primary metrics, quoting
+  the raw values (3.78e-09 fidelity, 7.65e-09 stability) so the two papers can be reconciled by a
+  reader without opening the CSV. No values changed.
+
+### A13 [minor, FIXED 2026-08-22] — Broken cross-reference in thesis Ch.3 (found during rebuild)
+
+- **Location**: `thesis/capitulo-3-diseno-experimental.qmd:619`.
+- **Evidence**: the EXP4 design section referenced *"(Tabla @tbl-exp4-dimensiones del Capítulo 5)"*.
+  No `tbl-exp4-dimensiones` label exists anywhere in the thesis; Ch.5 defines only
+  `tbl-taxonomia-ampliada`, `tbl-taxonomia-benchmark`, and `tbl-exp4-icc`.
+- **Detection**: surfaced by the Quarto rebuild —
+  `WARNING Unable to resolve crossref @tbl-exp4-dimensiones`. It was not visible in the previous
+  rendered output because that output predates the current sources; a dangling crossref renders as
+  a literal `?@tbl-exp4-dimensiones` in the DOCX.
+- **Resolution (2026-08-22)**: repointed to `@tbl-exp4-icc`, whose first column enumerates the seven
+  semantic dimensions the sentence is describing. Re-rendered: no crossref warnings remain.
 
 ### A11 [suggestion] — Paper A's headline $d_z$ differs from the other two documents by design
 
@@ -199,23 +234,45 @@ numbers that Paper B+C and the thesis already publish.
 
 ## Recency audit
 
+**Status at audit time (2026-08-22, before rebuild):**
+
 | Artifact | Source last modified | Rendered output | Gap |
 |---|---|---|---|
-| Paper A | `paper_a_prototype_jmlr.tex` 2026-08-22 | PDF 2026-07-24 | PDF predates today's edits |
-| Paper B+C | `paper_bc_jmlr.tex` 2026-08-22 | PDF 2026-07-29 | PDF predates the F01/F02 fixes **and** today's edits |
+| Paper A | `paper_a_prototype_jmlr.tex` 2026-08-22 | PDF 2026-07-24 | PDF predates the edits |
+| Paper B+C | `paper_bc_jmlr.tex` 2026-08-22 | PDF 2026-07-29 | PDF predates the F01/F02 fixes **and** the 08-22 edits |
 | Paper B+C supplementary | — | PDF 2026-07-26 | not re-verified (Paper B+C review F03, still open) |
-| Thesis | `.qmd` 2026-08-22 | `_output/*.docx` 2026-05-10 | rendered output is 3.5 months stale, predating all EXP3 and alignment work |
+| Thesis | `.qmd` 2026-08-22 | `_output/*.docx` 2026-05-10 | rendered output 3.5 months stale, predating all EXP3 and alignment work |
 
-Neither PDF reflects the working tree. All three documents must be rebuilt before any of this is
-circulated.
+**Resolved 2026-08-22.** All four outputs rebuilt from current sources:
 
-## Working-tree risk
+| Artifact | Toolchain | Result |
+|---|---|---|
+| `paper_a_prototype_jmlr.pdf` | `tools/tectonic-portable/tectonic.exe` | 147.07 KiB, clean; 2 pre-existing underfull-box warnings |
+| `paper_bc_jmlr.pdf` | same | 257.32 KiB, clean; 1 overfull hbox (0.90 pt), pre-existing |
+| `paper_bc_jmlr_supplementary.pdf` | same | 80.79 KiB, clean |
+| `JHerrera_XAI_Tesis_Doctorado.docx` | `thesis/render.ps1` (Quarto to DOCX) | clean; the one crossref warning was A13, now fixed and re-rendered warning-free |
 
-Every alignment fix made to date is **uncommitted**: the Paper B+C F01/F02 statistical-labelling
-fixes (2026-07-28/29), today's EXP3 wording edits to Paper A and thesis Ch.3/Ch.6, the two review
-reports, and the sync matrix are all untracked or modified-not-staged on
-`publication/cifie-xai-fom7-book-chapter`. The Paper B+C fixes in particular have survived nearly
-four weeks in the working tree only. Commit before further edits.
+Two toolchain notes for the record:
+
+- The repository's portable Tectonic is the correct builder for both papers. A MiKTeX
+  `pdflatex` build of Paper A fails with *"pdfTeX error (font expansion): auto expansion is only
+  possible with scalable fonts"* at the bibliography -- an environment/`microtype` interaction, not
+  a manuscript defect. Paper B+C happens to build under both, but at ~3x the file size because of
+  different font embedding. Use Tectonic per `docs/reports/paper_bc/BUILD.md`.
+- `thesis/render.ps1` calls `quarto clean`, which is not a valid command in the installed Quarto
+  version and prints `ERROR: Unknown command "clean"` on every run. The render proceeds regardless
+  (the script's own `Remove-Item` calls already do the cleaning), but the line should be dropped so
+  a real failure is not mistaken for this cosmetic one.
+
+## Working-tree risk -- RESOLVED 2026-08-22
+
+At audit time every alignment fix was uncommitted, including the Paper B+C F01/F02 statistical
+fixes that had survived nearly four weeks in the working tree only. Landed in three commits:
+
+- `d1c9ba1d1` -- Paper B+C rigor-review fixes F01/F02 and the EXP3 export path, plus the review
+  report that motivated them.
+- `00cdc8f3e` -- thesis Ch.3/Ch.6 and Paper A EXP3 scope wording; adds the sync matrix.
+- `b09b92a1d` -- the 2026-08-11 thesis review, this audit, and the ACTIVE_CONTEXT update.
 
 ## What is confirmed aligned
 
