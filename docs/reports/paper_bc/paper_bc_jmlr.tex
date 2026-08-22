@@ -556,7 +556,11 @@ explanation outputs on seven semantic dimensions using structured rubrics
 (rubric template archived at \path{src/prompts/templates/explanation_eval.j2}
 in the companion repository).
 Table~\ref{tab:exp4_icc} reports intra-class correlation ICC(2,1) and
-Krippendorff's $\alpha$ for each dimension. All values fall below the
+Krippendorff's $\alpha$ for each dimension. ICC(2,1) requires a complete
+cases-by-judges matrix and is therefore computed on the $n=147$
+fully-triple-rated cases; Krippendorff's $\alpha$ tolerates missing ratings
+and is computed on the fuller $n=192$-case pool, which includes cases with
+at least one missing judge score. All values fall below the
 conventionally accepted reliability threshold of $\geq 0.75$ for
 \emph{good} agreement \citep{koo2016guideline}, confirming that semantic
 evaluation at this scale lacks the inter-rater convergence needed for
@@ -569,8 +573,9 @@ Completeness and semantic plausibility show the highest consistency
 
 \begin{table}[t]
 \centering
-\caption{LLM-judge reliability on seven semantic dimensions (EXP4;
-$n=147$ runs, 3 LLM judges). ICC(2,1) = two-way random-effects
+\caption{LLM-judge reliability on seven semantic dimensions (EXP4; ICC on
+$n=147$ fully-rated cases, Krippendorff's $\alpha$ on $n=192$ cases (see
+text); 3 LLM judges). ICC(2,1) = two-way random-effects
 absolute-agreement model. No dimension reaches the $\geq 0.75$
 good-reliability threshold \citep{koo2016guideline}.}
 \label{tab:exp4_icc}
@@ -826,8 +831,12 @@ $\mathrm{svm}=15$) and all sampling intensities with near-balanced counts.
 
 As pre-analysis context, we ran a Friedman test across all four methods
 in EXP2 (SHAP, LIME, Anchors \citep{ribeiro2018anchors}, DiCE
-\citep{mothilal2020dice}) on $n=75$ run means per method, treating
-$(g, s, N)$ combinations as blocks. The full EXP2 cohort covers all four
+\citep{mothilal2020dice}) on $n=15$ blocks per method, one per $(g,N)$
+model-family-and-sampling-intensity combination, each block value the mean
+across the 5 available seeds. Block-level aggregation was necessary because
+Anchors and DiCE runs are not complete across the full $(g,s,N)$ grid (57/75
+and 68/75 artifact-qualified runs, respectively, versus 75/75 for SHAP and
+LIME). The full EXP2 cohort covers all four
 methods; the paired inference below is restricted to the LIME-SHAP matched
 subset for confirmatory claims. Table~\ref{tab:friedman}
 shows highly significant systematic differences in both fidelity and
@@ -836,7 +845,8 @@ four-method field is not exchangeable.
 
 \begin{table}[t]
 \centering
-\caption{Friedman omnibus test across four methods (EXP2, $n=75$ blocks,
+\caption{Friedman omnibus test across four methods (EXP2, $n=15$ blocks ---
+5 model families $\times$ 3 sampling intensities, each a 5-seed mean ---
 $k=4$). $W$ = Kendall's concordance coefficient.}
 \label{tab:friedman}
 \begin{tabular}{lrrl}
@@ -865,9 +875,11 @@ on this specific two-method comparison.
 
 \begin{table}[t]
 \centering
-\caption{Mean metric values by method from EXP2 ($n=75$ runs each) with
-Nemenyi average ranks. CD\,=\,1.211; pairs with rank gap\,$>$\,CD are
-significant at $\alpha=0.05$.}
+\caption{Mean metric values by method from EXP2 (mean of 15
+model$\times$sampling-intensity block means; underlying artifact-qualified
+run coverage: 75/75 SHAP and LIME, 68/75 DiCE, 57/75 Anchors) with Nemenyi
+average ranks. CD\,=\,1.211; pairs with rank gap\,$>$\,CD are significant at
+$\alpha=0.05$.}
 \label{tab:method_ranks}
 \begin{tabular}{lcccc}
 \toprule
@@ -1176,7 +1188,8 @@ ranking claim states that one explainer outperforms another on predefined
 benchmark criteria in this dataset and protocol. A validity claim would
 require stronger evidence that explanations satisfy a formal correctness
 criterion for the intended task, potentially including controlled
-ground-truth tests and explicit assumption checks
+synthetic or transparent-model ground-truth tests, dependency-aware
+perturbation protocols, human-centered validation, and explicit assumption checks
 \citep{haufe2026formalization,doshivelez2017rigorous}. This paper
 primarily makes ranking claims; broader validity claims remain provisional.
 
@@ -1372,7 +1385,7 @@ MIT License. Artifacts needed to reproduce the empirical study include:
 \path{wilcoxon_shap_lime_all_models.csv},
 \path{paired_cells_shap_lime_all_models.csv})
 \item EXP3 results: \path{experiments/exp3_cross_dataset/results/}
-(with LIME extension exports in \path{outputs/exp3_lime_results.csv})
+(with LIME extension exports in \path{outputs/analysis/exp3_lime_results.csv})
 \item EXP4 ICC exports: \path{outputs/analysis/exp4_llm_evaluation/}
 \item EXP6 masking-sensitivity exports:
 \path{outputs/analysis/exp6_masking_sensitivity/}
