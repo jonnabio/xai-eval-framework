@@ -580,11 +580,17 @@ tree mode on \texttt{rf} and \texttt{xgb} models across three seeds
 definitions to Section~\ref{sec:methods-inference}). This check is
 deliberately narrow: it covers one explainer family, two model families, and
 two additional datasets, and it is not a second full benchmark. A
-matching Anchors-based cross-dataset check was planned in the same
-\texttt{exp3\_cross\_dataset} configuration set but could not be executed in
-this pass; it is blocked by the same \texttt{alibi}/\texttt{dice-ml}
-environment incompatibility described in
-Section~\ref{sec:methods-repro} and is left as follow-up work.
+matching Anchors-based cross-dataset check was executed from the same
+\texttt{exp3\_cross\_dataset} configuration set on an earlier environment that
+still satisfied the \texttt{alibi} dependency constraint; its 12 runs are
+released with this snapshot under
+\path{experiments/exp3_cross_dataset/results/*/{rf,xgb}_anchors/} and are
+analyzed in the companion synthesis paper rather than here, because the
+SHAP-only cohort is what supports this paper's external-validity argument.
+The \texttt{alibi}/\texttt{dice-ml} incompatibility described in
+Section~\ref{sec:methods-repro} applies to the current environment and to the
+25 unavailable primary-benchmark (EXP2) cells; it did not prevent the EXP3
+Anchors cohort from being produced.
 \begin{table}[h]
 \centering
 \caption{SHAP mean metrics on two additional tabular datasets (tree mode,
@@ -710,7 +716,8 @@ reproduce the Paper A analyses include
 \path{scripts/generate_paper_a_figures.py},
 \path{configs/experiments/exp3_cross_dataset/}, and
 \path{experiments/exp3_cross_dataset/results/} for the cross-dataset SHAP
-check in Section~\ref{sec:exp3}, and the manuscript sources under
+check in Section~\ref{sec:exp3} (the same tree also carries the 12 EXP3 Anchors
+runs analyzed in the companion paper), and the manuscript sources under
 \path{docs/reports/paper_a/}. A path-level artifact index is maintained in
 \path{docs/reports/paper_a/paper_a_artifact_index.md}. The repository is
 released under the MIT License.
@@ -735,7 +742,7 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The root cause is diagnosed (an \texttt{alibi}/\texttt{dice-ml} dependency incompatible with this environment's Python/\texttt{numpy} versions; Section~\ref{sec:methods-repro}) rather than unexplained, and closing it is judged not worth the required environment migration relative to disclosure; these 25 cells and the matching 12 \texttt{exp3\_cross\_dataset} Anchors cells (Section~\ref{sec:exp3}) are accepted as a permanent, disclosed limitation of this evidence cut rather than pending work. The reporting caveats document the current merged-snapshot diagnostic.
+    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The root cause is diagnosed (an \texttt{alibi}/\texttt{dice-ml} dependency incompatible with this environment's Python/\texttt{numpy} versions; Section~\ref{sec:methods-repro}) rather than unexplained, and closing it is judged not worth the required environment migration relative to disclosure; these 25 cells are accepted as a permanent, disclosed limitation of this evidence cut rather than pending work. The 12 \texttt{exp3\_cross\_dataset} Anchors cells are \emph{not} part of this gap: they were executed on an earlier environment and are released with this snapshot (Section~\ref{sec:exp3}). The reporting caveats document the current merged-snapshot diagnostic.
     \item \textbf{Limitation:} \path{svm_shap_s456_n200} has no committed per-run artifact; the reported analysis instead relies on the disclosed \path{outputs/batch_results.csv} recovery overlay for this one cell. A partial rerun exists (161/800 instances checkpointed) but completing it was estimated at 2-3 further days of continuous compute and is not being pursued; this is an accepted limitation, not an open action item.
     \item \textbf{Next steps:} The bounded single-explainer (SHAP) cross-dataset check in Section~\ref{sec:exp3} is a first step toward testing ranking stability under dataset shift. Integrating the separate LIME-only EXP3 extension into a fully paired SHAP--LIME stability design, extending the check to Anchors and DiCE, and adding further tabular datasets remain future work.
 \end{itemize}

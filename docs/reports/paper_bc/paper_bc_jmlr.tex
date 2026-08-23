@@ -1046,7 +1046,7 @@ Table~\ref{tab:exp3_lime} reports LIME fidelity and stability on the same
 datasets. Two findings are noteworthy. First, SHAP $>$ LIME fidelity holds
 consistently on German Credit (gaps $+0.23$--$+0.24$ for RF, $+0.24$--$+0.25$
 for XGB), replicating the EXP2 direction. On Breast Cancer the fidelity gap
-narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.06$
+narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.07$
 (XGB), compared to $+0.27$ (RF) and $+0.21$ (XGB) in the corresponding
 model strata on Adult. Second, and more critically, LIME
 \emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
@@ -1061,14 +1061,16 @@ substantially more consistent explanations.
 \centering
 \caption{EXP3 external validation: mean fidelity (3-seed average) for
 SHAP vs.\ Anchors across two additional datasets. SHAP $>$ Anchors in all
-12 paired combinations.}
+12 paired combinations. SHAP values are taken from the current committed
+\texttt{experiments/exp3\_cross\_dataset/results/} snapshot, which is also the
+cohort Paper~A reports.}
 \label{tab:exp3_fidelity}
 \begin{tabular}{llcc}
 \toprule
 Dataset        & Model & SHAP  & Anchors \\
 \midrule
 Breast Cancer  & RF    & 0.779 & 0.265   \\
-Breast Cancer  & XGB   & 0.607 & 0.208   \\
+Breast Cancer  & XGB   & 0.617 & 0.208   \\
 German Credit  & RF    & 0.714 & 0.351   \\
 German Credit  & XGB   & 0.711 & 0.451   \\
 \bottomrule
