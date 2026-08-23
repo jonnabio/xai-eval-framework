@@ -25,7 +25,7 @@ numbers that Paper B+C and the thesis already publish.
 
 ## Severity-ranked findings
 
-### A01 [major] — Paper A denies experimental work that exists and is published elsewhere
+### A01 [major, RESOLVED 2026-08-23] — Paper A denies experimental work that exists and is published elsewhere
 
 - **Location**: `paper_a_prototype_jmlr.tex:582-586` (§External Validity Check) and
   `:737` (Conclusion, Limitation bullet).
@@ -52,8 +52,24 @@ numbers that Paper B+C and the thesis already publish.
   (or to cite the companion paper for it). The `alibi`/`dice-ml` block remains true and should be
   retained for the **25 EXP2 cells**; it is only the 12 EXP3 Anchors cells that are wrongly
   described.
+- **Resolution (2026-08-23)**: author approved the merge. The 12 Anchors run directories (1,768
+  files) were imported from `results/exp3-windows-breast-cancer` via
+  `git checkout <branch> -- <anchors paths>` rather than a full branch merge — that branch diverged
+  at `89fae3d45` and carries stale docs plus junk paths (`.venvScriptspython.exe`, a file named
+  `[14`) that must not reach the publication branch. No SHAP result was touched. Re-verified on the
+  merged tree with July-canonical SHAP: SHAP > Anchors in 12/12 seed-level pairs, gap range
+  +0.2601 (GC/XGB) to +0.5137 (BC/RF) — unchanged from what was already published.
+  Paper A §sec:exp3, the Conclusion limitation bullet, and §Code and Artifact Availability were
+  rewritten: the Anchors cohort is now described as executed on an earlier environment and released
+  with this snapshot, and the `alibi`/`dice-ml` block is correctly scoped to the current
+  environment and the 25 EXP2 cells.
+- **Root cause (identified 2026-08-23)**: `scripts/run_exp3_shap_configs.py`, the July runner, opens
+  with *"These don't need alibi/dice-ml, unlike the 12 Anchors configs in the same experiment set,
+  which remain blocked by a numpy<2.0 vs. Python 3.13 environment incompatibility."* That statement
+  is true **of the July environment**. Paper A was drafted from the July snapshot and generalized it
+  into "could not be executed," losing the fact that the April environment had already run them.
 
-### A02 [major, PARTIALLY FIXED 2026-08-22] — The 2026-08-22 Paper A edit fixed the symptom in one place and left it in two others
+### A02 [major, RESOLVED 2026-08-23] — The 2026-08-22 Paper A edit fixed the symptom in one place and left it in two others
 
 - **Location**: `paper_a_prototype_jmlr.tex:391-397` vs `:582-586` and `:737`.
 - **Evidence**: today's working-tree edit removed the "blocked by an environment dependency gap"
@@ -71,8 +87,11 @@ numbers that Paper B+C and the thesis already publish.
   *more* visible, not less — the validity bullet now correctly names a SHAP--Anchors comparison
   that §sec:exp3 two pages later still calls impossible. That is the intended state: accurate and
   visibly incomplete, rather than inaccurate and superficially coherent.
+- **Resolution (2026-08-23)**: problem (ii) closed alongside A01. §sec:exp3 and the Conclusion bullet
+  no longer describe the Anchors cohort as unexecuted, so Paper A is internally consistent again and
+  consistent with the other two documents.
 
-### A03 [major] — Paper A and Paper B+C report different values for the same EXP3 SHAP cell
+### A03 [major, RESOLVED 2026-08-23] — Paper A and Paper B+C report different values for the same EXP3 SHAP cell
 
 - **Location**: Paper A `tab:exp3-shap` (`:598-601`) vs Paper B+C `tab:exp3_fidelity` (`:1067-1070`).
 - **Evidence**: Breast Cancer / XGB SHAP fidelity is **0.6165** in Paper A and **0.607** in Paper B+C.
@@ -89,6 +108,24 @@ numbers that Paper B+C and the thesis already publish.
 - **Remediation**: pick one snapshot as canonical for EXP3 SHAP across both papers, state which,
   and re-derive both tables from it. The July run is the one currently committed and the one
   Paper A's archived DOI resolves to.
+- **Resolution (2026-08-23)**: author selected the **July** snapshot as canonical. Paper B+C
+  `tab:exp3_fidelity` BC/XGB corrected 0.607 → **0.617**, the BC/XGB SHAP−LIME fidelity gap follows
+  (+0.06 → **+0.07**, from 0.6165 − 0.5433), and the caption now names the snapshot the SHAP column
+  is drawn from. The gap range quoted in both Paper B+C and thesis `sec-exp3-nota` (+0.26 to +0.51)
+  was re-verified against the merged tree and is unchanged.
+- **Why only BC/XGB was re-run (investigated 2026-08-23)**: it was not re-run alone — all 12 SHAP
+  configs were re-executed on 2026-07-23/24, and per-run cost differs everywhere by timing noise.
+  BC/XGB is the only cell whose *quality* metrics moved (sparsity 0.3333 → 0.8822, fidelity
+  0.6065 → 0.6165, stability 0.9531 → 0.9625); BC/RF, GC/RF and GC/XGB reproduced bit-identical
+  fidelity. The cause is not the model and not the code: the EXP3 models were retrained 2026-05-10
+  with identical config and **identical test metrics** (BC/XGB accuracy 0.9474, ROC-AUC 0.9934,
+  same confusion matrix), and the July runner is a thin wrapper over the same `ExperimentRunner`
+  and the same YAML configs. The signature is in the attribution vectors: in April the BC/XGB
+  explanation had 10 of 30 features above the 1e-4 activity threshold; in July it had ~26.5 of 30.
+  A denser TreeExplainer output for the same tree ensemble points to a SHAP/XGBoost library change
+  between the April (numpy<2) and July (Python 3.13) environments — the same environment migration
+  that made Anchors unrunnable in July. The remaining uncertainty is which library and version;
+  pinning that would need the two environments' lockfiles, which are not in the repo.
 
 ### A04 [major] — Thesis F01 (Ch.5 vs Ch.4 numeric contradiction) is still open
 
@@ -101,9 +138,58 @@ numbers that Paper B+C and the thesis already publish.
   not DiCE's.
 - **Status**: carried forward unchanged from the 2026-08-11 review (F01, major). It remains the
   single most examiner-visible defect in the thesis, because the thesis's own gate 7 is a
-  claim-traceability guarantee.
+  claim-traceability guarantee. **This is the only finding still open.**
 
-### A05 [major] — Thesis per-method profile section is built on a pre-recovery snapshot
+#### Provenance answered (2026-08-23)
+
+The 2026-08-11 review asked whether 0.514 / 0.412 trace to some other aggregation or are draft
+slips. They are draft slips, and the evidence is decisive:
+
+- `git log -S "Anchors: 0.514"` returns exactly one commit, `f639935d0` (2026-05-10, *"resolve
+  editor feedback ... and integrate EXP4 into thesis"*). The whole paragraph arrives as new `+`
+  lines — the numbers were not carried over from an earlier revision.
+- At that commit, `outputs/analysis/` **did not exist in the repository**. `git ls-tree -r
+  f639935d0 outputs/analysis/` returns nothing; the EXP2 inferential exports were first committed
+  in `553f65d71` (July). So when this paragraph was written there was no committed artifact to
+  check the numbers against.
+- No file in the repository, at any commit, contains 0.514 or 0.412 as an Anchors or DiCE fidelity.
+
+So the fix is a numeric correction, not a re-derivation from some other cohort.
+
+#### Full numeric audit of the Ch.5 opening
+
+The scope is wider than the two numbers named in the original finding. Against
+`exp2_run_level_metrics.csv`:
+
+| Ch.5 claim | Stated | Artifact | Verdict |
+|---|---|---|---|
+| LIME fidelity | 0.560 | 0.5602 | correct |
+| LIME stability | 0.014 | 0.0144 | correct |
+| LIME stability CV | 86.2% | 86.2% | correct |
+| SHAP fidelity | 0.810 | 0.8081 | rounds to 0.808 |
+| SHAP stability | 0.724 | **0.7320** | wrong — same stale value fixed in Ch.4 under A05 |
+| $d_z$ fidelity / stability | 4.82 / 3.00 | 4.820 / 3.002 | correct |
+| DiCE parsimony | 0.085 | **0.0166** | wrong — 0.085 is LIME/Anchors |
+| DiCE fidelity | 0.412 | **0.1716** | wrong |
+| Anchors fidelity | 0.514 | **0.3880** | wrong |
+| DiCE "óptimo en parsimonia y eficiencia" | — | parsimony 0.0166 (best); cost 28,209 ms (2nd worst) | parsimony correct, **efficiency claim wrong** |
+
+The qualitative argument of the chapter — no method dominates every axis, fidelity and stability
+are non-redundant — survives every correction. The DiCE efficiency claim is the only one that needs
+rewording rather than renumbering: DiCE is the most parsimonious method but is not cheap.
+
+#### Proposed edit (awaiting author approval)
+
+- *"(SHAP: 0.810, LIME: 0.560, Anchors: 0.514, DiCE: 0.412)"* → *"(SHAP: 0.808, LIME: 0.560,
+  Anchors: 0.388, DiCE: 0.172)"*
+- *"La parsimonia media de DiCE (0.085 características activas) y su fidelidad baja (0.412)"* →
+  *"La parsimonia media de DiCE (0.017 de ratio activo, la más concisa del benchmark) y su fidelidad
+  baja (0.172)"*
+- *"estabilidad de 0.724"* → *"estabilidad de 0.732"*
+- *"perfil óptimo en parsimonia y eficiencia"* → *"perfil óptimo en parsimonia, aunque no en coste"*
+
+
+### A05 [major, RESOLVED 2026-08-23] — Thesis per-method profile section is built on a pre-recovery snapshot
 
 - **Location**: `thesis/capitulo-4-resultados.qmd:313-315` (SHAP), `:341` (LIME), `:390-393` (DiCE).
 - **Evidence**: *"Sus medias consolidadas sobre los 71 bloques calificados son: fidelidad = 0.810,
@@ -131,6 +217,28 @@ numbers that Paper B+C and the thesis already publish.
 - **Impact**: this does not touch H1–H3, which rest on Ch.4's block-level and paired tables — both
   of which re-verified as exact matches to the artifacts. It is confined to the descriptive profile
   section, but that section is where a reader looks up "how expensive is SHAP."
+- **Answer to "is it worth stating both?" (2026-08-23)**: stating both aggregations would be worth
+  it if both were currently true at different levels. They are not. Every plausible aggregation was
+  computed from `exp2_run_level_metrics.csv` — mean of run-level values, median of run-level values,
+  per-model mean, per-model median — and **none** reproduces the thesis's 24,804 / 226 / 2,056 ms.
+  Those are simply superseded values. What *is* worth stating is the mean **and** the median,
+  because the cost distribution is extremely heavy-tailed (SHAP mean 11,708 ms vs median 684 ms),
+  and a single mean invites the reader to think SHAP costs 12 seconds per instance in the typical
+  case when the typical case is under a second.
+- **Root cause (identified 2026-08-23)**: two separate problems, not one. (i) The SHAP figures
+  predate the 30-row recovery overlay. (ii) The §Análisis transversal subsection silently mixed
+  **per-model means** with **single-cell Appendix C sensitivity values** — "SVM ... 0.928 ... 159,059
+  ms" is the `k=50` row of `@tbl-appendix-shap-sensitivity` (SVM, seed 42, N=100), not the 15-run
+  SVM mean (0.882 / 54,231 ms). Likewise XGB "1.2 ms" and logreg "85 ms".
+- **Resolution (2026-08-23)**: both subsections rewritten from the artifact with the aggregation
+  stated explicitly in each. SHAP 0.808 / 0.732 / 0.226 / 0.380 / 11,708 ms mean with 684 ms median
+  over **75** qualified runs (the "71 bloques" denominator was also wrong); LIME cost 3,661 ms mean
+  / 65.7 ms median; Anchors fidelity 0.388, cost 38,159 ms mean; DiCE cost 28,209 ms mean / 11,880 ms
+  median. Per-model: SHAP SVM 0.882, MLP 0.725, XGB cost 21 ms, SVM cost 54,231 ms, logreg 936 ms;
+  Anchors SVM 37,415 ms, MLP 15,564 ms. The N-effect SHAP means were stale too
+  (0.811/0.804/0.814 → **0.809/0.809/0.807**); the "differences below 0.010" claim tightens to 0.002
+  and still holds. The KernelSHAP scaling argument now cites Appendix C explicitly as a single-cell
+  study instead of borrowing its numbers as per-model summaries.
 
 ### A06 [minor, FIXED 2026-08-22] — Thesis internal contradiction on Anchors coverage
 
@@ -172,7 +280,7 @@ numbers that Paper B+C and the thesis already publish.
   both sample sizes. No values changed. The F04 caveat (missing EXP4 scripts and raw judge data)
   stands and is unaffected.
 
-### A09 [minor] — Thesis archives to a superseded DOI
+### A09 [minor, RESOLVED 2026-08-23] — Thesis archives to a superseded DOI
 
 - **Location**: `thesis/capitulo-3-diseno-experimental.qmd:554-555` and `apendices.qmd:236-237`.
 - **Evidence**: thesis cites commit `33fd952a...` / DOI `10.5281/zenodo.19297724`, *"instantánea de
@@ -225,12 +333,17 @@ numbers that Paper B+C and the thesis already publish.
   $d_z=5.37$" and "$d_z=4.82$" for what looks like the same contrast. One sentence in Paper A
   giving the 75-cell values alongside would close the gap at no cost.
 
-### A12 [suggestion] — Thesis F03 (parsimony-direction slip) still open
+### A12 [suggestion, RESOLVED 2026-08-23] — Thesis F03 (parsimony-direction slip) still open
 
 - **Location**: `capitulo-4-resultados.qmd:315` — *"La parsimonia más alta de todos los métodos
   (0.234 frente a 0.085 de LIME)"* — against the same chapter's later, correct *"LIME es el método
   más parsimonioso en este benchmark."* Parsimony is defined ↓ in Ch.3. Carried forward unchanged
   from the 2026-08-11 review.
+- **Resolution (2026-08-23)**: fixed incidentally while rewriting the profile section for A05. The
+  SHAP paragraph now reads *"El ratio activo más alto de todos los métodos (0.226 frente a 0.085 de
+  LIME) ... por la dirección de la métrica (§sec-metricas), esto significa que SHAP es el método
+  *menos* parsimonioso del benchmark,"* and the LIME paragraph states explicitly that LIME is the
+  most parsimonious. The two passages now agree.
 
 ## Recency audit
 
@@ -295,23 +408,38 @@ fixes that had survived nearly four weeks in the working tree only. Landed in th
 
 ## Correction to the sync matrix
 
-`docs/reports/sync/thesis_paper_sync_matrix.md` row "EXP3 cross-dataset status" records Paper A's
-narrower SHAP-only check as an accepted scoping choice. Given A01, that row's premise is wrong:
-Paper A is not narrower by choice, it is out of date, and its stated reason is false. The row and
-the "Source-of-Truth Rule" (which makes Paper A canonical for artifact counts and reproducibility
-status) should be revised — Paper B+C is currently the more accurate source for EXP3 scope.
+`docs/reports/sync/thesis_paper_sync_matrix.md` originally recorded Paper A's narrower SHAP-only
+EXP3 check as an accepted scoping choice and made Paper A canonical for artifact counts and
+reproducibility status. A01 showed that premise was wrong for EXP3. The matrix has been updated:
+the EXP3 row now records the true history, three rows were added (EXP3 SHAP snapshot, EXP4 sample
+sizes, archive DOI), and the checklist tracks each finding. As of 2026-08-23 every row is closed
+except the Ch.5 numeric contradiction.
 
-## Questions for the author
+## Status
 
-1. **A01/A03**: should the two `results/exp3-*` branches be merged into the publication branch?
-   Until they are, Paper B+C's and the thesis's EXP3 Anchors claims have no artifact backing on
-   the branch their availability sections cite, and Paper A's "never executed" wording is
-   defensible only as a statement about the main-line tree.
-2. **A03**: which EXP3 SHAP snapshot is canonical — the committed July re-run (BC/XGB fidelity
-   0.6165) or the April side-branch run (0.6065)? Why was BC/XGB alone re-run?
-3. **A04**: can Ch.5's 0.514 / 0.412 be traced to any artifact, or are they draft-stage
-   transcription slips? This determines whether the fix is one line or a full Ch.5 numeric re-audit.
-4. **A05**: are the Ch.4 profile cost figures per-instance or per-run, and should the section be
-   regenerated from `exp2_run_level_metrics.csv`?
-5. **A09**: will a new Zenodo release be cut for the thesis, or should Ch.3/appendix cite the
-   existing `10.5281/zenodo.21538180`?
+| Finding | Severity | Status |
+|---|---|---|
+| A01 Paper A denies executed EXP3 Anchors work | major | Resolved 2026-08-23 — artifacts imported, Paper A rewritten |
+| A02 partial fix left two sites stale | major | Resolved 2026-08-23 |
+| A03 same EXP3 cell, two values | major | Resolved 2026-08-23 — July canonical, Paper B+C corrected |
+| **A04 thesis Ch.5 vs Ch.4 numbers** | **major** | **OPEN — provenance answered, edit proposed, awaiting approval** |
+| A05 thesis Ch.4 profile on stale snapshot | major | Resolved 2026-08-23 — both subsections regenerated |
+| A06 Anchors coverage 56 vs 57 | minor | Fixed 2026-08-22 |
+| A07 EXP3 minimum-gap model mislabelled | minor | Fixed 2026-08-22 |
+| A08 EXP4 n=147/192 not in thesis | minor | Fixed 2026-08-22 |
+| A09 thesis on superseded DOI | minor | Resolved 2026-08-23 |
+| A10 raw vs Holm p-value labelling | minor | Fixed 2026-08-22 |
+| A13 dangling crossref in Ch.3 | minor | Fixed 2026-08-22 |
+| A11 Paper A 45-cell vs 75-cell $d_z$ | suggestion | Open, no action requested |
+| A12 parsimony-direction slip | suggestion | Resolved 2026-08-23 |
+
+Carried over from earlier reviews and still open, unchanged by this pass:
+Paper B+C **F03** (supplementary tables never independently re-derived) and **F04** (EXP4 analysis
+scripts and raw judge data absent from the repository; accepted as-is on 2026-07-30).
+
+## Remaining question for the author
+
+**A04** — approve the four-part Ch.5 edit proposed above? The provenance question is settled: the
+numbers were written on 2026-05-10, at a commit where no analysis exports existed in the repository
+to check them against, and they appear nowhere in any artifact at any commit. The chapter's argument
+is unaffected; only the illustrative figures and one claim about DiCE's cost need to change.

@@ -40,6 +40,29 @@
   **Still blocked on author decisions:** A01 (merge `results/exp3-*` branches, then rewrite Paper A
   §sec:exp3 + Conclusion), A03 (canonical EXP3 SHAP snapshot: July 0.6165 vs April 0.6065),
   A04 (thesis Ch.5 0.514/0.412 provenance), A05 (thesis Ch.4 cost profile), A09 (thesis Zenodo DOI).
+- **Mode (2026-08-23):** PUBLICATION — remediation round 2, on author decisions. (1) Merged the EXP3
+  Anchors cohort: imported the 12 run dirs (1,768 files) from `results/exp3-windows-breast-cancer`
+  surgically via `git checkout <branch> -- <anchors paths>` (a full merge would have dragged in
+  stale docs and junk paths `.venvScriptspython.exe` / `[14`); SHAP > Anchors re-verified 12/12,
+  gap range +0.2601 GC/XGB to +0.5137 BC/RF. Paper A §sec:exp3 + Conclusion + artifact availability
+  rewritten — A01/A02 closed. **Root cause of A01 found:** `scripts/run_exp3_shap_configs.py`'s
+  docstring says Anchors "remain blocked by numpy<2.0 vs Python 3.13", true of the *July*
+  environment; Paper A generalized it to "never executed". (2) A03 closed with July as canonical:
+  Paper B+C BC/XGB 0.607→0.617, gap +0.06→+0.07. **Why BC/XGB differed:** all 12 SHAP configs were
+  re-run 2026-07-23/24; only BC/XGB's quality metrics moved (sparsity 0.3333→0.8822 — 10/30 vs
+  ~26.5/30 features above the 1e-4 threshold). Models were retrained 2026-05-10 with identical
+  config *and identical test metrics*, and the runner is a thin wrapper over the same
+  ExperimentRunner + YAML, so the cause is a SHAP/XGBoost library change across the April→July
+  environment migration, not model or code. (3) A05 closed: Ch.4's profile *and* transversal
+  subsections regenerated from `exp2_run_level_metrics.csv` with aggregation stated; the transversal
+  section had been mixing per-model means with single-cell Appendix C sensitivity values (SVM
+  0.928/159,059 is the k=50 row of `@tbl-appendix-shap-sensitivity`, not the 15-run mean 0.882/54,231).
+  N-effect SHAP means also refreshed. (4) A09 closed: thesis repointed to `10.5281/zenodo.21538180`
+  / commit `553f65d71`. (5) A12 closed incidentally. All four outputs rebuilt clean.
+  **Only A04 remains open** — Ch.5's 0.514/0.412: provenance now settled (written in `f639935d0`,
+  2026-05-10, at a commit where `outputs/analysis/` did not yet exist, and matching no artifact at
+  any commit), full Ch.5 numeric audit done, four-part edit proposed in the review report and
+  awaiting author approval.
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
