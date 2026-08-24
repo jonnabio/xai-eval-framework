@@ -69,6 +69,29 @@
   are pre-existing and author-accepted: Paper B+C F03 (supplementary tables not independently
   re-derived) and F04 (EXP4 scripts + raw judge data unrecoverable); A11 (Paper A leads with the
   45-cell d_z, the others with the 75-cell) is an open suggestion with no action requested.
+- **Mode (2026-08-24):** INCIDENT → EXECUTION — RCA-001 Phase 1, the permanent fix for the defect
+  class behind the whole audit. Diagnosis: FOM-7 gate 7 (claim traceability) was editorial policy
+  with no mechanism, in a workflow where the same quantity is authored independently in three
+  documents. The SSOT machinery already existed (`pub/claims.toml` → `pub/fragments/` →
+  `pubs-sync.yml`) but covered only abstracts/keywords, hand-typed its own numbers, and excluded
+  Paper B+C entirely. Built: `pub/claim_registry.toml` (44 numbers, each with resolver + every
+  manuscript carrying it), `scripts/pubs/claim_sources.py` (resolvers over `outputs/analysis/` and
+  the EXP3 tree; separates block-level from run-level aggregation — the origin of A05),
+  `scripts/pubs/verify_claims.py` (4 checks: value vs artifact, per-site occurrence count, retired
+  values, cited-artifact existence), `docs/rca/RCA-001-manuscript-artifact-drift.md`. Wired Paper
+  B+C into the fragment pipeline (rebuilt byte-equivalent), added the verifier to `pubs-sync.yml`
+  CI and to `.aceconfig` `pre_commit`, and registered the **first entry in
+  `regression-guards.yaml`** (9 guarded files, 6 invariants, 2 tests, 4 review triggers).
+  Negative-tested, not just passing: the first manuscript-site check failed to catch an edited
+  Paper A table cell because the value recurs in prose, so per-site occurrence counts were added.
+  **New finding A14 (major, OPEN):** building the verifier revealed Paper B+C claims a 48-paper
+  coded corpus throughout, while the only committed corpus artifact
+  (`docs/reports/paper_c/paper_c_review_corpus.csv`) has 24 rows and no 48-row corpus exists at any
+  commit. Deliberately not registered in the registry (would encode an unbacked number or force CI
+  red); needs the author to commit the corpus or correct the manuscript.
+  Note: `.aceconfig` is excluded via `.git/info/exclude`, so its new hook line is local-only.
+  Phase 2 remains: generate numbers into LaTeX macros / Quarto inline values, and a CI build gate
+  failing on undefined references.
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 

@@ -245,6 +245,37 @@ chapter are the EXP4 ICC/Krippendorff values, already verified against
   and still holds. The KernelSHAP scaling argument now cites Appendix C explicitly as a single-cell
   study instead of borrowing its numbers as per-model summaries.
 
+### A14 [major, OPEN — found 2026-08-24 while building RCA-001 Phase 1]
+
+Paper B+C's review corpus has no committed artifact at the size it claims.
+
+- **Location**: `paper_bc_jmlr.tex` — abstract ("48-paper structured scoping
+  corpus"), `tab:prisma` ("Included in coded corpus: **48**"), `tab:corpus_profile`
+  ("Unique coded papers: 48"), §Gap 1 ("29 of 48 coded studies"), and the
+  second-reviewer audit ("16 papers, one third of the coded corpus").
+- **Evidence**: the only review-corpus artifact in the repository,
+  `docs/reports/paper_c/paper_c_review_corpus.csv`, has **24 rows**. `git log`
+  shows it added once, in `8d2864f56`, and no 48-row corpus exists at any commit.
+  Paper C's abstract (via `pub/claims.toml`) says "cleaned **24**-study coded
+  review corpus", which matches the artifact.
+- **Reasoning**: Paper B+C is internally consistent at 48 — the cluster
+  distribution sums to 48 and the "one third" audit fraction works — so this is
+  not an arithmetic slip inside the paper. Either the 48-paper corpus was built
+  and never committed, or the corpus grew from 24 to 48 without the artifact
+  being updated. Paper B+C's §Code and Artifact Availability tells readers "the
+  review corpus CSV underlying the taxonomy and gap analysis is also available in
+  the companion repository," which is currently true only of a 24-row file
+  describing a different paper.
+- **Severity**: this is the same class as F04 (EXP4 scripts and raw judge data
+  missing) but load-bearing for a headline contribution: the taxonomy and all
+  three gap claims rest on this corpus, and the paper's own single-reviewer
+  limitation discussion invites a reviewer to inspect it.
+- **Deliberately not registered** in `pub/claim_registry.toml`: doing so would
+  either encode a number with no backing artifact or force CI red from day one.
+  The registry carries a comment at that point explaining why.
+- **Resolution requires the author**: commit the 48-paper corpus, or correct
+  Paper B+C to the corpus that exists. I cannot determine which is right.
+
 ### A06 [minor, FIXED 2026-08-22] — Thesis internal contradiction on Anchors coverage
 
 - **Location**: `capitulo-4-resultados.qmd:356` (*"cobertura de solo 56 celdas calificadas (74.7%)"*)
@@ -435,6 +466,7 @@ except the Ch.5 numeric contradiction.
 | A09 thesis on superseded DOI | minor | Resolved 2026-08-23 |
 | A10 raw vs Holm p-value labelling | minor | Fixed 2026-08-22 |
 | A13 dangling crossref in Ch.3 | minor | Fixed 2026-08-22 |
+| **A14 Paper B+C 48-paper corpus has no artifact** | **major** | **OPEN — found 2026-08-24, needs author** |
 | A11 Paper A 45-cell vs 75-cell $d_z$ | suggestion | Open, no action requested |
 | A12 parsimony-direction slip | suggestion | Resolved 2026-08-23 |
 
@@ -444,7 +476,7 @@ scripts and raw judge data absent from the repository; accepted as-is on 2026-07
 
 ## Outcome
 
-All twelve findings from this audit are closed, plus A13 found during the rebuild. The only items
+All thirteen findings from the original audit are closed. Two were found by the remediation itself: A13 by rebuilding the thesis, and **A14 by building the claim verifier** — Paper B+C's 48-paper corpus has no committed artifact. A14 is open and needs the author. The only items
 still outstanding in the publication set are carried over from earlier reviews and were accepted
 as-is by the author: Paper B+C **F03** (supplementary tables never independently re-derived) and
 **F04** (EXP4 analysis scripts and raw judge-response data absent from the repository; investigated
