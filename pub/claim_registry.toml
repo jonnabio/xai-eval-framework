@@ -457,6 +457,23 @@ tolerance = 0.5
 appears_in = [{ file = "pub/fragments/paper_c_abstract_en.tex", text = "24-study" }]
 
 # ---------------------------------------------------------------------------
+# Review corpus distributions as stated by each manuscript.
+# Checked with: python scripts/pubs/check_review_corpus.py --corpus <csv> --expect <key>
+# ---------------------------------------------------------------------------
+
+[review_corpus.paper_bc]
+# Transcribed from paper_bc_jmlr.tex: tab:prisma, tab:corpus_profile and Gap 1.
+# There is no corpus CSV that satisfies this yet -- see finding A14.
+size = 48
+clusters = { faithfulness_robustness = 17, human_grounded = 11, taxonomy_survey = 9, benchmark_toolkit = 5, llm_judge = 4, counterfactual_recourse = 2 }
+evidence_sources = { proxy = 29, benchmark = 10, end_user = 9, human_expert = 11, llm_judge = 4 }
+confidence = { high = 43, medium = 4, title_level = 1 }
+
+[review_corpus.paper_c]
+# Satisfied by docs/reports/paper_c/paper_c_review_corpus.csv.
+size = 24
+
+# ---------------------------------------------------------------------------
 # Artifacts a manuscript points readers at. These must exist in the working
 # tree: A01 was a paper citing evidence that lived only on an unmerged branch.
 # ---------------------------------------------------------------------------
