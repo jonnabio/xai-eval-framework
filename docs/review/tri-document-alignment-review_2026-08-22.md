@@ -127,7 +127,7 @@ numbers that Paper B+C and the thesis already publish.
   that made Anchors unrunnable in July. The remaining uncertainty is which library and version;
   pinning that would need the two environments' lockfiles, which are not in the repo.
 
-### A04 [major] — Thesis F01 (Ch.5 vs Ch.4 numeric contradiction) is still open
+### A04 [major, RESOLVED 2026-08-23] — Thesis F01 (Ch.5 vs Ch.4 numeric contradiction)
 
 - **Location**: `thesis/capitulo-5-taxonomia.qmd:20,35-36` vs `capitulo-4-resultados.qmd:93-94,378,390`.
 - **Evidence**: Ch.5 still reads *"(SHAP: 0.810, LIME: 0.560, Anchors: 0.514, DiCE: 0.412)"* and
@@ -138,7 +138,7 @@ numbers that Paper B+C and the thesis already publish.
   not DiCE's.
 - **Status**: carried forward unchanged from the 2026-08-11 review (F01, major). It remains the
   single most examiner-visible defect in the thesis, because the thesis's own gate 7 is a
-  claim-traceability guarantee. **This is the only finding still open.**
+  claim-traceability guarantee. Open since 2026-08-11; closed 2026-08-23.
 
 #### Provenance answered (2026-08-23)
 
@@ -178,7 +178,7 @@ The qualitative argument of the chapter — no method dominates every axis, fide
 are non-redundant — survives every correction. The DiCE efficiency claim is the only one that needs
 rewording rather than renumbering: DiCE is the most parsimonious method but is not cheap.
 
-#### Proposed edit (awaiting author approval)
+#### Applied 2026-08-23 (author approved)
 
 - *"(SHAP: 0.810, LIME: 0.560, Anchors: 0.514, DiCE: 0.412)"* → *"(SHAP: 0.808, LIME: 0.560,
   Anchors: 0.388, DiCE: 0.172)"*
@@ -186,7 +186,12 @@ rewording rather than renumbering: DiCE is the most parsimonious method but is n
   *"La parsimonia media de DiCE (0.017 de ratio activo, la más concisa del benchmark) y su fidelidad
   baja (0.172)"*
 - *"estabilidad de 0.724"* → *"estabilidad de 0.732"*
-- *"perfil óptimo en parsimonia y eficiencia"* → *"perfil óptimo en parsimonia, aunque no en coste"*
+- *"perfil óptimo en parsimonia y eficiencia"* → *"perfil óptimo en parsimonia --aunque no en coste,
+  donde su media de 28,209 ms solo mejora a la de Anchors--"*
+
+A sweep of the rest of Ch.5 found no further benchmark numbers: the only other figures in the
+chapter are the EXP4 ICC/Krippendorff values, already verified against
+`outputs/analysis/exp4_llm_evaluation/`. Thesis re-rendered clean.
 
 
 ### A05 [major, RESOLVED 2026-08-23] — Thesis per-method profile section is built on a pre-recovery snapshot
@@ -422,7 +427,7 @@ except the Ch.5 numeric contradiction.
 | A01 Paper A denies executed EXP3 Anchors work | major | Resolved 2026-08-23 — artifacts imported, Paper A rewritten |
 | A02 partial fix left two sites stale | major | Resolved 2026-08-23 |
 | A03 same EXP3 cell, two values | major | Resolved 2026-08-23 — July canonical, Paper B+C corrected |
-| **A04 thesis Ch.5 vs Ch.4 numbers** | **major** | **OPEN — provenance answered, edit proposed, awaiting approval** |
+| A04 thesis Ch.5 vs Ch.4 numbers | major | Resolved 2026-08-23 — four-part edit applied, Ch.5 swept |
 | A05 thesis Ch.4 profile on stale snapshot | major | Resolved 2026-08-23 — both subsections regenerated |
 | A06 Anchors coverage 56 vs 57 | minor | Fixed 2026-08-22 |
 | A07 EXP3 minimum-gap model mislabelled | minor | Fixed 2026-08-22 |
@@ -437,9 +442,12 @@ Carried over from earlier reviews and still open, unchanged by this pass:
 Paper B+C **F03** (supplementary tables never independently re-derived) and **F04** (EXP4 analysis
 scripts and raw judge data absent from the repository; accepted as-is on 2026-07-30).
 
-## Remaining question for the author
+## Outcome
 
-**A04** — approve the four-part Ch.5 edit proposed above? The provenance question is settled: the
-numbers were written on 2026-05-10, at a commit where no analysis exports existed in the repository
-to check them against, and they appear nowhere in any artifact at any commit. The chapter's argument
-is unaffected; only the illustrative figures and one claim about DiCE's cost need to change.
+All twelve findings from this audit are closed, plus A13 found during the rebuild. The only items
+still outstanding in the publication set are carried over from earlier reviews and were accepted
+as-is by the author: Paper B+C **F03** (supplementary tables never independently re-derived) and
+**F04** (EXP4 analysis scripts and raw judge-response data absent from the repository; investigated
+2026-07-30 and confirmed unrecoverable without re-running EXP4). **A11** (Paper A leads with the
+45-cell $d_z$ while the other two documents lead with the 75-cell values) remains an open
+suggestion; both sets are declared and correct, so no action was requested.

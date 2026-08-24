@@ -6,8 +6,8 @@ métricas XAI. LIME obtuvo una fidelidad media de 0.560 —por encima del umbral
 de uso en producción para muchos equipos de datos— y al mismo tiempo una
 estabilidad estructural prácticamente nula: similitud coseno media de 0.014 y
 coeficiente de variación del 86.2% entre explicaciones generadas para la misma
-instancia con distintas semillas. SHAP, en cambio, mantuvo fidelidad de 0.810
-y estabilidad de 0.724, con d~z~=4.82 y d~z~=3.00 respectivamente. La
+instancia con distintas semillas. SHAP, en cambio, mantuvo fidelidad de 0.808
+y estabilidad de 0.732, con d~z~=4.82 y d~z~=3.00 respectivamente. La
 correlación empírica entre fidelidad y estabilidad —visible en la
 @fig-correlacion-metricas— es baja, lo que significa que ambas dimensiones
 aportan información no redundante sobre la calidad de una explicación. Un
@@ -17,11 +17,12 @@ eliminado LIME sin valorar su ventaja en coste y parsimonia. Ningún escalar
 único captura el perfil completo.
 
 Esta disociación no es un artefacto del diseño. La parsimonia media de DiCE
-(0.085 características activas) y su fidelidad baja (0.412) responden a una
-lógica distinta a la de SHAP o LIME: DiCE minimiza la perturbación del
-contrafactual, no la aproximación local al modelo. Que DiCE tenga perfil óptimo
-en parsimonia y eficiencia, pero deficiente en fidelidad técnica, indica que los
-ejes de calidad no colapsan sobre un único factor latente. La @fig-radar-metodos
+(0.017 de ratio activo, la más concisa del benchmark) y su fidelidad baja
+(0.172) responden a una lógica distinta a la de SHAP o LIME: DiCE minimiza la
+perturbación del contrafactual, no la aproximación local al modelo. Que DiCE
+tenga perfil óptimo en parsimonia —aunque no en coste, donde su media de
+28,209 ms solo mejora a la de Anchors— pero deficiente en fidelidad técnica,
+indica que los ejes de calidad no colapsan sobre un único factor latente. La @fig-radar-metodos
 hace visible esta estructura: ningún método domina simultáneamente en todas las
 dimensiones, y los cuellos de botella difieren por método. Este patrón solo es
 observable si las métricas están conceptualmente separadas antes de la medición,
@@ -32,8 +33,8 @@ dimensiones de calidad son genuinamente ortogonales, cuál fuente de evidencia
 mide cada una, y para qué contexto de tarea resulta relevante cada perfil*. Sin
 un marco conceptual que responda esas tres preguntas de forma articulada, el
 benchmark produce números correctos pero no produce orientación. Un evaluador
-que conozca solo los rangos de fidelidad (SHAP: 0.810, LIME: 0.560,
-Anchors: 0.514, DiCE: 0.412) no sabe si una diferencia de 0.05 puntos en
+que conozca solo los rangos de fidelidad (SHAP: 0.808, LIME: 0.560,
+Anchors: 0.388, DiCE: 0.172) no sabe si una diferencia de 0.05 puntos en
 parsimonia es sustantiva o trivial, ni si la brecha de fidelidad justifica el
 coste adicional de SHAP en un sistema de tiempo real. La taxonomía de este
 capítulo es, por tanto, una respuesta necesaria a lo que el benchmark demostró

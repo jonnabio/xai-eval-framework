@@ -62,7 +62,7 @@ Use manuscript-specific versions of this boundary:
 - [x] Paper A and Paper B+C use compatible validity-boundary language.
 - [x] No manuscript describes a completed experiment as never executed (A01, A02 — closed 2026-08-23).
 - [x] The same experimental cell reports the same value in every manuscript (A03 — July snapshot canonical, 2026-08-23).
-- [ ] Thesis Ch.5 illustrative numbers match Ch.4/Appendix D (A04, open since 2026-08-11).
+- [x] Thesis Ch.5 illustrative numbers match Ch.4/Appendix D (A04 — closed 2026-08-23).
 - [x] Thesis Ch.4 per-method profile figures match `exp2_run_level_metrics.csv` (A05 — regenerated 2026-08-23).
 - [x] Thesis archive DOI matches the reported evidence cut (A09 — 2026-08-23).
 - [x] All rendered outputs (3 PDFs + thesis docx) rebuilt from current sources, 2026-08-22.

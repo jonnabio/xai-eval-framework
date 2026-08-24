@@ -59,10 +59,16 @@
   0.928/159,059 is the k=50 row of `@tbl-appendix-shap-sensitivity`, not the 15-run mean 0.882/54,231).
   N-effect SHAP means also refreshed. (4) A09 closed: thesis repointed to `10.5281/zenodo.21538180`
   / commit `553f65d71`. (5) A12 closed incidentally. All four outputs rebuilt clean.
-  **Only A04 remains open** — Ch.5's 0.514/0.412: provenance now settled (written in `f639935d0`,
-  2026-05-10, at a commit where `outputs/analysis/` did not yet exist, and matching no artifact at
-  any commit), full Ch.5 numeric audit done, four-part edit proposed in the review report and
-  awaiting author approval.
+  (6) A04 closed on author approval: Ch.5's illustrative figures corrected to
+  Anchors 0.388 / DiCE 0.172 / DiCE parsimony 0.017 / SHAP stability 0.732, and the "óptimo en
+  parsimonia y eficiencia" claim reworded since DiCE's 28,209 ms cost is second-worst. Provenance
+  settled first: the numbers entered in `f639935d0` (2026-05-10) at a commit where
+  `outputs/analysis/` did not yet exist, and match no artifact at any commit — draft figures, not a
+  different aggregation. Rest of Ch.5 swept: no other benchmark numbers.
+  **All 13 audit findings (A01-A13) are now closed.** Remaining open items in the publication set
+  are pre-existing and author-accepted: Paper B+C F03 (supplementary tables not independently
+  re-derived) and F04 (EXP4 scripts + raw judge data unrecoverable); A11 (Paper A leads with the
+  45-cell d_z, the others with the 75-cell) is an open suggestion with no action requested.
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
