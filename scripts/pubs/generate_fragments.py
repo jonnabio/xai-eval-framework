@@ -64,7 +64,7 @@ def main(argv: list[str]) -> int:
     )
 
     # Papers (LaTeX fragments)
-    for paper_id in ("paper_a", "paper_b", "paper_c"):
+    for paper_id in ("paper_a", "paper_b", "paper_bc", "paper_c"):
         paper = papers[paper_id]
         _write(
             out_dir / f"{paper_id}_abstract_en.tex",

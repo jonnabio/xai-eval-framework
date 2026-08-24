@@ -21,6 +21,9 @@ jobs:
       - name: Verify wiring
         run: python3 scripts/pubs/verify_sync.py
 
+      - name: Verify manuscript claims against artifacts
+        run: python3 scripts/pubs/verify_claims.py
+
       - name: Ensure fragments are up to date
         run: |
           git diff --exit-code pub/fragments

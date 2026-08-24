@@ -15,7 +15,48 @@ version: "1.0"
 # 3. If guarded, review the RCA and ensure fix is not regressed
 # 4. Run associated tests before committing
 
-guards: []
+guards:
+  - id: RCA-001
+    title: "Manuscript numbers drift from their source artifacts"
+    severity: high
+    created: 2026-08-24
+    rca_file: docs/rca/RCA-001-manuscript-artifact-drift.md
+
+    # Files that are protected by this guard
+    guarded_files:
+      - docs/reports/paper_a/paper_a_prototype_jmlr.tex
+      - docs/reports/paper_bc/paper_bc_jmlr.tex
+      - thesis/capitulo-3-diseno-experimental.qmd
+      - thesis/capitulo-4-resultados.qmd
+      - thesis/capitulo-5-taxonomia.qmd
+      - thesis/capitulo-6-conclusiones.qmd
+      - thesis/apendices.qmd
+      - pub/claims.toml
+      - pub/claim_registry.toml
+
+    # What must remain true
+    invariants:
+      - "Every published number is registered in pub/claim_registry.toml with the resolver that re-derives it"
+      - "A registered value matches its artifact within the declared tolerance"
+      - "A quantity appearing in more than one manuscript is registered once, listing every document that carries it"
+      - "No value retired by an audit reappears in any manuscript"
+      - "Every artifact path a manuscript cites exists in the working tree, not only on a side branch"
+      - "The aggregation level (block-level vs run-level, mean vs median) is stated wherever a number is reported"
+
+    # Tests that verify the fix
+    tests:
+      - scripts/pubs/verify_claims.py
+      - scripts/pubs/verify_sync.py
+
+    # Standard rule that was added
+    standard_rule: "FOM-7 gate 7 is enforced by scripts/pubs/verify_claims.py, not by convention (see RCA-001)"
+
+    # Trigger: what should cause a review
+    review_triggers:
+      - "Any edit to a manuscript body containing a numeric result"
+      - "Any re-run of an experiment that regenerates outputs/analysis/"
+      - "Adding or removing an artifact path from a Code and Artifact Availability section"
+      - "Merging experiment-result branches into a publication branch"
 
 # Example guard entry:
 # - id: RCA-001
