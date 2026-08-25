@@ -39,8 +39,9 @@ never committed, rather than a number that was invented.
 Zotero collection, or notes file that produced 17/11/9/5/4/2. Then this is a
 data-entry job; follow "Committing it" below.
 
-**Case B — it does not exist.** Then Paper B+C must be corrected to the corpus
-that does exist, and the correction is larger than one number: the PRISMA chain
+**Case B — it does not exist.** Then either reconstruct (see below: ~44 of 48
+are recoverable) or correct Paper B+C to the corpus that does exist. Either way
+the correction is larger than one number: the PRISMA chain
 (312 identified → 65 deduplicated → 247 screened → 152 excluded → 95 full text →
 47 excluded → 48 included), the corpus profile table, "29 of 48", and the
 second-reviewer audit's "16 papers = one third" all follow from the corpus size.
@@ -48,6 +49,61 @@ second-reviewer audit's "16 papers = one third" all follow from the corpus size.
 Do not resolve this by editing 48 to 24. The two corpora have different cluster
 vocabularies, so the rest of the paper's gap analysis would no longer follow
 from the file.
+
+## What is recoverable (investigated 2026-08-24)
+
+### `thesis/papers/` is the library, not the corpus
+
+The folder holds **110 unique PDFs** (202 files; 92 are `- Copy` duplicates, all
+committed to git and worth cleaning up separately). That is the reading library,
+not the coded 48. It is almost certainly the pool the corpus was drawn from —
+matching the 24 Paper C entries against filenames gives 13 outright hits and
+several more that match on inspection — and 110 sits plausibly close to the
+PRISMA "95 full text assessed" figure. But a folder of PDFs carries no selection
+record and no coding, so it cannot by itself tell you which 48 were included or
+how each was coded.
+
+### 16 of the 48 are fully recoverable, with their original coding
+
+`docs/reports/paper_bc/second_reviewer_audit_results.csv` is the stratified
+one-third sample the paper describes. It carries, for each of 16 papers:
+
+- `citation_key` and `title` — the identity
+- `primary_cluster` — the cluster assignment
+- `r1_evaluation_target`, `r1_evidence_source`, `r1_quality_property`,
+  `r1_task_context` — the **original first-reviewer coding on all four axes**
+
+All 16 keys resolve against Paper B+C's bibliography. These rows can be lifted
+straight into the corpus schema.
+
+### About 28 more are identifiable, and roughly 4 are not
+
+Paper B+C defines 59 bibliography keys, 51 cited in the body. Removing the 16
+audited leaves 37 candidates, of which roughly nine are infrastructure rather
+than corpus entries — `breiman2001random`, `chen2016xgboost`,
+`demsar2006statistical`, `holm1979simple`, `wilcoxon1945individual`,
+`lakens2013calculating`, `koo2016guideline`, `kohavi1996scaling`, `dua2019uci`.
+That leaves about 28 plausible corpus members against the 32 still needed.
+
+The shortfall is expected: a scoping review codes papers it never ends up
+citing. So **roughly 44 of 48 are reconstructible, and about 4 are not.**
+
+### What that means
+
+Full restoration is not possible. A defensible reconstruction is — but a
+reconstruction is a **new coding pass**, and its cluster distribution will
+almost certainly not reproduce 17/11/9/5/4/2. If you go that route, the
+manuscript's numbers follow the corpus, not the other way round: the PRISMA
+chain, `tab:corpus_profile`, "29 of 48" and the audit's "one third" all have to
+be recomputed and the paper must say the corpus was reconstructed.
+
+That is a legitimate and honest outcome. What is not legitimate is publishing
+17/11/9/5/4/2 against a file that does not produce those counts.
+
+**Before reconstructing, look once more for the original coding pass** — a
+spreadsheet, Zotero collection with tags, or notes file that produced those six
+cluster counts. Recovering it makes this a transcription job and keeps every
+number in the paper intact. That is worth an hour of searching.
 
 ## Committing it (Case A)
 
