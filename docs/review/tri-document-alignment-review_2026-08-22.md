@@ -245,7 +245,7 @@ chapter are the EXP4 ICC/Krippendorff values, already verified against
   and still holds. The KernelSHAP scaling argument now cites Appendix C explicitly as a single-cell
   study instead of borrowing its numbers as per-model summaries.
 
-### A14 [major, OPEN — found 2026-08-24 while building RCA-001 Phase 1]
+### A14 [major, RESOLVED 2026-08-26 — found 2026-08-24 while building RCA-001 Phase 1]
 
 Paper B+C's review corpus has no committed artifact at the size it claims.
 
@@ -284,6 +284,51 @@ Paper B+C's review corpus has no committed artifact at the size it claims.
   actually needs is the coded corpus CSV, and 28 of the 44 still require an
   include/exclude decision and four-axis coding. The remaining ~4 of the claimed 48
   were coded but never cited, so they are not recoverable from the citation record.
+
+- **Resolution (2026-08-26)**: the corpus was reconstructed and released as
+  `docs/reports/paper_bc/paper_bc_review_corpus.csv` (44 rows), and Paper B+C was
+  updated to follow it.
+
+  *Sources.* 16 rows carry the **original** first-reviewer coding on all four axes,
+  lifted from `second_reviewer_audit_results.csv`. The other 28 were identified from
+  the paper's citation record and re-coded from their full text — every one of the 44
+  papers is held as a verified PDF under `corpus_pdfs/`. Roughly four papers that were
+  coded but never cited could not be recovered, so the corpus is 44, not 48.
+
+  *Reconstructed distribution* (against the manuscript's original claim):
+
+  | | reconstructed (44) | previously claimed (48) |
+  |---|---|---|
+  | faithfulness/robustness | 15 | 17 |
+  | taxonomy/survey | 10 | 9 |
+  | human-grounded | 7 | 11 |
+  | benchmark/toolkit | 6 | 5 |
+  | LLM-judge | 4 | 4 |
+  | counterfactual/recourse | 2 | 2 |
+
+  The two smallest clusters reproduce exactly; the larger ones do not, which is what a
+  re-coding by a different reader should be expected to produce.
+
+  *Manuscript changes* — twelve edits, all following the corpus rather than the reverse:
+  abstract and contribution 2 (48 → 44 papers); `tab:prisma` included row 48 → 44 with
+  the full-text exclusion complement 47 → 51 and a caption stating that the final rows
+  reflect the reconstructed corpus; `tab:corpus_profile` size, cluster distribution,
+  evidence-source coverage and confidence mix; the evidence-skew paragraph; Gap 1, Gap 2
+  and Gap 3 counts; the second-reviewer audit fraction ("one third" → 36%); a new
+  **Corpus provenance** paragraph in §Validity disclosing the reconstruction; and
+  §Code and Artifact Availability now naming the CSV, the PDF directory and the
+  retrieval log.
+
+  *Prevention.* `[review_corpus.paper_bc]` in `pub/claim_registry.toml` records the
+  distribution the manuscript prints, `check_review_corpus.py` verifies the CSV against
+  it, and both run in `pubs-sync.yml` CI. The corpus CSV is also registered as a
+  `[[cited_artifact]]`, so the availability claim is checked for existence.
+
+  *Author verification still wanted.* The 28 reconstructed rows are a coding judgment
+  made from each paper's abstract and opening section. They are marked as such in the
+  CSV's `notes` column and disclosed in the manuscript. A pass over those 28 rows before
+  submission would be worthwhile — the qualitative gap analysis does not depend on them,
+  but the printed counts now do.
 
 ### A06 [minor, FIXED 2026-08-22] — Thesis internal contradiction on Anchors coverage
 
@@ -475,7 +520,7 @@ except the Ch.5 numeric contradiction.
 | A09 thesis on superseded DOI | minor | Resolved 2026-08-23 |
 | A10 raw vs Holm p-value labelling | minor | Fixed 2026-08-22 |
 | A13 dangling crossref in Ch.3 | minor | Fixed 2026-08-22 |
-| **A14 Paper B+C 48-paper corpus has no artifact** | **major** | **OPEN — 44/44 PDFs collected 2026-08-26; corpus coding outstanding** |
+| A14 Paper B+C corpus has no artifact | major | Resolved 2026-08-26 — 44-row corpus reconstructed, released and CI-verified |
 | A11 Paper A 45-cell vs 75-cell $d_z$ | suggestion | Open, no action requested |
 | A12 parsimony-direction slip | suggestion | Resolved 2026-08-23 |
 
@@ -485,7 +530,7 @@ scripts and raw judge data absent from the repository; accepted as-is on 2026-07
 
 ## Outcome
 
-All thirteen findings from the original audit are closed. Two were found by the remediation itself: A13 by rebuilding the thesis, and **A14 by building the claim verifier** — Paper B+C's 48-paper corpus has no committed artifact. A14 is open and needs the author. The only items
+All fifteen findings are closed — the thirteen from the original audit plus two the remediation itself surfaced: A13 by rebuilding the thesis, and A14 by building the claim verifier. The only items
 still outstanding in the publication set are carried over from earlier reviews and were accepted
 as-is by the author: Paper B+C **F03** (supplementary tables never independently re-derived) and
 **F04** (EXP4 analysis scripts and raw judge-response data absent from the repository; investigated

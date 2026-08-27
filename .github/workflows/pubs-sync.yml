@@ -24,6 +24,11 @@ jobs:
       - name: Verify manuscript claims against artifacts
         run: python3 scripts/pubs/verify_claims.py
 
+      - name: Verify review corpus matches the manuscript
+        run: |
+          python3 scripts/pubs/check_review_corpus.py --corpus docs/reports/paper_bc/paper_bc_review_corpus.csv --expect paper_bc
+          python3 scripts/pubs/check_review_corpus.py --corpus docs/reports/paper_c/paper_c_review_corpus.csv --expect paper_c
+
       - name: Ensure fragments are up to date
         run: |
           git diff --exit-code pub/fragments

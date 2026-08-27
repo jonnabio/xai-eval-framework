@@ -104,9 +104,10 @@ verifier with a specific message.
 - **Prose claims.** The verifier checks numbers. It would not have caught A04's
   qualitative half, where DiCE — the second most expensive method — was
   described as efficient. Peer review remains necessary.
-- **Numbers with no artifact.** EXP4's reliability figures (F04) and Paper B+C's
-  48-paper corpus (A14) cannot be verified because their sources were never
-  committed. The forward-looking rule is archival: no result artifact enters the
+- **Numbers with no artifact.** EXP4's reliability figures (F04) cannot be
+  verified because the scripts and raw judge data were never committed. Paper
+  B+C's corpus (A14) was in the same position and was recoverable: it has since
+  been reconstructed and is now verified like any other claim. The forward-looking rule is archival: no result artifact enters the
   repository without its generating script and raw inputs.
 - **Render-time defects.** A13, a dangling cross-reference, was found only by
   rebuilding. Building all outputs in CI and failing on undefined references is
@@ -118,6 +119,9 @@ verifier with a specific message.
    values so a number exists in exactly one place.
 2. Phase 2: rebuild all four outputs in CI, failing on undefined references and
    crossref warnings.
-3. Resolve A14 — commit the 48-paper corpus, or correct Paper B+C.
+3. ~~Resolve A14~~ — done 2026-08-26: 44-row corpus reconstructed from the audit
+   record plus the citation record, released, and CI-verified against the
+   manuscript's printed distribution. The reconstruction is disclosed in
+   Paper B+C §Validity.
 4. Add the archival rule to `.ace/standards/documentation.md` and to the FOM-7
    gate 5 definition.

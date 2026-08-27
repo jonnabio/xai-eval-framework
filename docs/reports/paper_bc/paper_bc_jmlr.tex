@@ -106,7 +106,7 @@ This paper makes five contributions:
 \item \textbf{Four-axis taxonomy}: we organize model-agnostic XAI
 evaluation along evaluation target, evidence source, quality property,
 and task context, making explicit why metric disagreements arise.
-\item \textbf{Gap analysis}: from a documented 48-paper scoping corpus
+\item \textbf{Gap analysis}: from a documented 44-paper scoping corpus
 assembled through a five-database search and explicit inclusion criteria,
 we identify three recurring gaps---proxy dominance, underspecified human constructs, and semantic
 evaluation outpacing its validation base---and provide, to our
@@ -398,7 +398,7 @@ structured scoping synthesis rather than a full systematic review.
 
 \begin{table}[t]
 \centering
-\caption{Corpus construction screening record.}
+\caption{Corpus construction screening record. Identification and screening counts are from the original search log. The final two rows reflect the coded corpus released with this paper (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), which was reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
 \label{tab:prisma}
 \begin{tabular}{lr}
 \toprule
@@ -409,15 +409,15 @@ Removed after cross-database deduplication & 65 \\
 Screened on title and abstract & 247 \\
 Excluded at screen (out of scope, non-English, no eval component) & 152 \\
 Full text assessed for eligibility & 95 \\
-Excluded at full text (intrinsic only, no codeable metric) & 47 \\
+Excluded at full text (intrinsic only, no codeable metric) & 51 \\
 \midrule
-\textbf{Included in coded corpus} & \textbf{48} \\
+\textbf{Included in coded corpus} & \textbf{44} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Corpus structure.}
-Each of the 48 coded papers is assigned to one or more thematic clusters
+Each of the 44 coded papers is assigned to one or more thematic clusters
 and coded along the same four taxonomy axes introduced in
 Section~\ref{sec:taxonomy} (evaluation target, evidence source, quality
 property, task context). Inclusion requires that a source contribute a
@@ -430,7 +430,7 @@ The initial title/abstract screen and coding pass were conducted by the
 primary author. To stress-test the taxonomy before broader adjudication, an
 independent human second reviewer, recruited through the project's
 human-evaluation dashboard, audited a stratified subset of 16 papers
-(one third of the coded corpus), sampled across the six thematic clusters
+(36\% of the coded corpus), sampled across the six thematic clusters
 reported in Table~\ref{tab:corpus_profile}. The audit records
 agreement on inclusion status and on the four taxonomy axes defined in
 Section~\ref{sec:taxonomy}; detailed results are reported in
@@ -446,7 +446,7 @@ as a substitute for a full-corpus independent human inter-rater review.
 
 \begin{table}[t]
 \centering
-\caption{Descriptive profile of the review corpus (48 coded papers).}
+\caption{Descriptive profile of the review corpus (44 coded papers).}
 \begin{tabularx}{\linewidth}{l X}
 \toprule
 \textbf{Profile item} & \textbf{Value} \\
@@ -454,21 +454,22 @@ as a substitute for a full-corpus independent human inter-rater review.
 Corpus freeze & April 2026 \\
 Databases searched & 5 (Semantic Scholar, Google Scholar, ACM DL, IEEE Xplore, ACL Anthology) \\
 Records screened & 247 (post-deduplication; see Table~\ref{tab:prisma}) \\
-Unique coded papers & 48 \\
-Cluster distribution & 17 faithfulness/robustness, 11 human-grounded, 9 taxonomy/survey, 5 benchmark/toolkit, 4 LLM-judge, 2 counterfactual/recourse \\
-Evidence-source coverage & 29 proxy, 10 benchmark, 9 end-user, 11 expert/taxonomy, 4 LLM-judge (papers coded under multiple sources) \\
-Confidence mix & 43 high, 4 medium, 1 title-level \\
+Unique coded papers & 44 \\
+Cluster distribution & 15 faithfulness/robustness, 10 taxonomy/survey, 7 human-grounded, 6 benchmark/toolkit, 4 LLM-judge, 2 counterfactual/recourse \\
+Evidence-source coverage & 21 proxy, 15 expert/taxonomy, 13 benchmark, 12 end-user, 4 LLM-judge (papers coded under multiple sources; 65 codes over 44 papers) \\
+Confidence mix & 44 high (full text held for every coded paper) \\
 \bottomrule
 \end{tabularx}
 \label{tab:corpus_profile}
 \end{table}
 
 The evidence-source distribution in Table~\ref{tab:corpus_profile}
-reveals a strong proxy skew: 29 of 48 coded papers rely on proxy
-evidence as their primary source, while only 11 draw primarily on
-expert-structured or taxonomy-level evidence and 9 on end-user studies.
-This confirms that structural metrics are comparatively well standardized
-while meaning-oriented constructs remain thinly operationalized.
+reveals a proxy skew: proxy evidence is coded for 21 of the 44 papers and is
+the primary source for 14 of them, the largest single category; benchmark-grounded
+evidence is coded for 13 papers and end-user evidence for 12. Structural metrics
+are therefore comparatively well standardized, while the meaning-oriented
+constructs remain thinly operationalized relative to the attention they
+receive.
 
 \subsection{Gap 1: Proxy Metrics Are Necessary but Not Sufficient}
 
@@ -476,9 +477,9 @@ Faithfulness, stability, and sparsity remain essential because they create
 reproducible, quantitative anchors for benchmark comparison
 \citep{agarwal2022openxai,hedstrom2023quantus,canha2025benchmark,
 nauta2023anecdotal,burkart2021survey}. However, the coded corpus shows
-how dominant these proxies have become: 29 of 48 coded studies use proxy
-evidence as their primary source, while only 10 use benchmark-grounded
-evidence and fewer still use human-grounded evidence. Recent work
+how dominant these proxies have become: proxy evidence is coded for 21 of the
+44 studies and is the primary source for 14, more than any other category,
+while benchmark-grounded evidence is coded for 13. Recent work
 confirms that proxy-only evaluation can be misleading: attribution
 methods that score well on perturbation proxies may still fail sanity
 checks \citep{adebayo2018sanity}, be sensitive to hyperparameters
@@ -497,8 +498,9 @@ and usefulness, but these are often under-operationalized. When human
 studies exist, their tasks, rubrics, and participant populations vary so
 widely that direct comparison is difficult
 \citep{ali2023trustworthy,longo2024manifesto,mohseni2021survey}. In the
-coded corpus, only 11 studies use expert-structured or taxonomy-level
-evidence and 9 use end-user evidence. User studies further show that data
+coded corpus, 15 studies use expert-structured or taxonomy-level evidence and
+12 use end-user evidence, but only 6 make end-user evidence their primary
+source. User studies further show that data
 scientists and ML practitioners engage with interpretability tools in ways
 that diverge from how tool designers intend them to be used
 \citep{kaur2020interpreting,hase2020evaluating,bucinca2020proxy}. This
@@ -518,7 +520,7 @@ bias, verbosity bias, or agreement illusions
 \citep{zheng2023judging,gu2024llmjudge}. In XAI, semantic evaluator
 outputs should be treated as calibrated proxies rather than as
 self-validating replacements for expert review. The coded corpus contains
-4 LLM-validation-relevant entries, one of which is itself a survey.
+4 LLM-validation-relevant entries out of 44, one of which is itself a survey.
 That empirical base remains thin relative to the uptake of LLM evaluation
 in practice.
 
@@ -1181,6 +1183,19 @@ downstream applications match those conditions.
 
 \subsection{Taxonomy Scope and Single-Reviewer Limitation}
 
+\paragraph{Corpus provenance.} The coded corpus released with this paper was
+reconstructed. The original coding pass was not preserved in the project
+repository, and the corpus was rebuilt from two surviving sources: the
+second-reviewer audit record, which carries the original first-reviewer coding
+on all four axes for 16 papers, and the paper's own citation record, from which
+a further 28 coded papers were identified and re-coded from their full text.
+Approximately four papers that were coded but never cited could not be
+recovered, so the released corpus contains 44 rather than the 48 originally
+coded, and the distributions in Table~\ref{tab:corpus_profile} are those of the
+reconstruction rather than of the original pass. The qualitative gap analysis is
+unchanged by this, but readers should treat the corpus counts as reconstructed
+figures with a documented provenance rather than as a preserved primary record.
+
 The survey employs a structured database search with documented inclusion
 and exclusion criteria and a transparent screening record
 (Table~\ref{tab:prisma}). It is not, however, a full systematic review:
@@ -1373,8 +1388,10 @@ MIT License. Artifacts needed to reproduce the empirical study include:
 \end{itemize}
 \end{sloppypar}
 
-The review corpus CSV underlying the taxonomy and gap analysis is also
-available in the companion repository. Before journal submission, the
+The review corpus underlying the taxonomy and gap analysis is released as
+\path{docs/reports/paper_bc/paper_bc_review_corpus.csv}, with the retrieved
+full texts under \path{docs/reports/paper_bc/corpus_pdfs/} and per-paper
+provenance in \path{docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md}. Before journal submission, the
 exact snapshot will be frozen as a versioned release with a DOI.
 
 % -----------------------------------------------------------------------

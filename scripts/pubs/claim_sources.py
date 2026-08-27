@@ -162,7 +162,12 @@ def resolve(expr: str) -> float:
         raise MissingArtifact(f"EXP4 {stat} not found for dimension {dimension}")
 
     if kind == "review_corpus_rows":
-        return float(len(_rows(ROOT / "docs" / "reports" / "paper_c" / "paper_c_review_corpus.csv")))
+        paper = args[0] if args else "paper_c"
+        path = {
+            "paper_c": ROOT / "docs" / "reports" / "paper_c" / "paper_c_review_corpus.csv",
+            "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_review_corpus.csv",
+        }[paper]
+        return float(len(_rows(path)))
 
     if kind == "exp4_n":
         (stat,) = args

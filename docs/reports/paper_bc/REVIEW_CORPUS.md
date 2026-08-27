@@ -1,5 +1,11 @@
 # Paper B+C review corpus — how to commit it
 
+> **Status 2026-08-26: RESOLVED.** The corpus was reconstructed and released as
+> `paper_bc_review_corpus.csv` (44 rows), Paper B+C was updated to follow it, and
+> `check_review_corpus.py` verifies the two against each other in CI. Case B below
+> is what happened. The rest of this document is retained as the record of the
+> decision and the method.
+
 Resolves finding **A14** (`docs/review/tri-document-alignment-review_2026-08-22.md`).
 
 ## The situation

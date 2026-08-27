@@ -41,6 +41,23 @@ TARGET_MAP = {
     "user_task_outcome": "user_task",
 }
 
+# Evidence sources likewise. `taxonomy` folds into `human_expert` because the
+# manuscript's corpus profile reports the two together as "expert/taxonomy",
+# and `human_task` is the paper's `end_user` category.
+SOURCE_MAP = {
+    "expert_human": "human_expert",
+    "taxonomy": "human_expert",
+    "human_task": "end_user",
+    "proxy": "proxy",
+    "benchmark": "benchmark",
+    "llm_judge": "llm_judge",
+    # Audit-only vocabulary that predates the corpus schema.
+    "human": "human_expert",
+    "human_preference": "end_user",       # crowd preference votes, e.g. MT-Bench
+    "normative": "human_expert",          # legal / normative analysis (Wachter, GDPR)
+    "counterfactual_formalism": "human_expert",
+}
+
 
 def _read(path: Path) -> list[dict]:
     if not path.exists():
@@ -49,10 +66,12 @@ def _read(path: Path) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
-def _map_targets(raw: str) -> str:
+def _map(raw: str, table: dict) -> str:
     out = []
     for item in filter(None, (s.strip() for s in raw.split(";"))):
-        out.append(TARGET_MAP.get(item, item))
+        mapped = table.get(item, item)
+        if mapped not in out:
+            out.append(mapped)
     return ";".join(out)
 
 
@@ -83,11 +102,11 @@ def main(argv: list[str]) -> int:
             "primary_cluster": entry["primary_cluster"],
             "paper_role": "",
             "modality_context": entry.get("r1_task_context", ""),
-            "evaluation_targets": _map_targets(entry.get("r1_evaluation_target", "")),
-            "evidence_sources": entry.get("r1_evidence_source", ""),
+            "evaluation_targets": _map(entry.get("r1_evaluation_target", ""), TARGET_MAP),
+            "evidence_sources": _map(entry.get("r1_evidence_source", ""), SOURCE_MAP),
             "quality_properties": entry.get("r1_quality_property", ""),
             "llm_validation_relevant": "",
-            "source_confidence": "",
+            "source_confidence": "high",
             "notes": "Coding recovered from second_reviewer_audit_results.csv (reviewer 1).",
         })
 

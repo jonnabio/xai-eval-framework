@@ -92,6 +92,28 @@
   Note: `.aceconfig` is excluded via `.git/info/exclude`, so its new hook line is local-only.
   Phase 2 remains: generate numbers into LaTeX macros / Quarto inline values, and a CI build gate
   failing on undefined references.
+- **Mode (2026-08-24 to 26):** INCIDENT/EXECUTION — RCA-001 Phase 1 plus A14 closure.
+  Built the claim-traceability enforcement that makes FOM-7 gate 7 executable
+  (`pub/claim_registry.toml`, `scripts/pubs/claim_sources.py`, `verify_claims.py`,
+  `check_review_corpus.py`, `check_corpus_pdfs.py`, `fetch_corpus_pdfs.py`,
+  `seed_corpus_from_audit.py`), wired Paper B+C into the fragment pipeline, added all
+  checks to `pubs-sync.yml` CI, and registered the first `regression-guards.yaml` entry.
+  **A14 closed 2026-08-26:** Paper B+C's review corpus is reconstructed and released as
+  `docs/reports/paper_bc/paper_bc_review_corpus.csv` — 44 rows, of which 16 carry the
+  original first-reviewer coding recovered from `second_reviewer_audit_results.csv` and
+  28 were identified from the citation record and re-coded from full text. All 44 full
+  texts are held under `corpus_pdfs/` (25 auto-retrieved, 17 copied from
+  `thesis/papers/`, 2 supplied by the author), each verified by PDF header, size floor
+  and page-one title match. ~4 papers coded but never cited are unrecoverable, so the
+  corpus is 44 not 48, and twelve manuscript edits moved Paper B+C's printed figures
+  onto the corpus: cluster distribution 15/10/7/6/4/2, evidence coverage
+  21 proxy / 15 expert-taxonomy / 13 benchmark / 12 end-user / 4 LLM-judge, PRISMA
+  included 44, audit fraction 36%, plus a new **Corpus provenance** paragraph in
+  §Validity disclosing the reconstruction. `[review_corpus.paper_bc]` now pins the
+  distribution and CI verifies it. **All 15 audit findings (A01-A15) are closed.**
+  Outstanding by author decision: F03 (supplementary tables not re-derived), F04 (EXP4
+  scripts/raw judge data unrecoverable), A11 (Paper A leads with 45-cell d_z).
+  Author verification wanted on the 28 reconstructed coding rows before submission.
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 

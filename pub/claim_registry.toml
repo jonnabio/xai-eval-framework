@@ -440,18 +440,25 @@ appears_in = [
 # ---------------------------------------------------------------------------
 # Literature review corpus
 #
-# NOTE (finding A14, 2026-08-24): the only committed corpus artifact has 24
-# rows, which matches Paper C. Paper B+C states a 48-paper coded corpus
-# throughout (PRISMA table, cluster distribution, the "16 papers = one third"
-# second-reviewer audit) and no 48-row artifact exists at any commit. Paper B+C
-# is therefore deliberately NOT registered here: doing so would either encode a
-# number with no backing artifact or force CI red. Resolve by committing the
-# 48-paper corpus, or by correcting Paper B+C to the corpus that exists.
+# Paper B+C's corpus was reconstructed in 2026-08-26 (finding A14 / RCA-001) from
+# the second-reviewer audit record and the citation record, and is now released
+# as docs/reports/paper_bc/paper_bc_review_corpus.csv. Its distribution is
+# checked by scripts/pubs/check_review_corpus.py against [review_corpus.paper_bc].
 # ---------------------------------------------------------------------------
 
 [[claim]]
+id = "review.corpus.paper_bc.rows"
+source = "review_corpus_rows:paper_bc"
+value = "44"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "44 coded papers" },
+  { file = "pub/claims.toml", text = "44-paper structured" },
+]
+
+[[claim]]
 id = "review.corpus.rows"
-source = "review_corpus_rows"
+source = "review_corpus_rows:paper_c"
 value = "24"
 tolerance = 0.5
 appears_in = [{ file = "pub/fragments/paper_c_abstract_en.tex", text = "24-study" }]
@@ -462,12 +469,13 @@ appears_in = [{ file = "pub/fragments/paper_c_abstract_en.tex", text = "24-study
 # ---------------------------------------------------------------------------
 
 [review_corpus.paper_bc]
-# Transcribed from paper_bc_jmlr.tex: tab:prisma, tab:corpus_profile and Gap 1.
-# There is no corpus CSV that satisfies this yet -- see finding A14.
-size = 48
-clusters = { faithfulness_robustness = 17, human_grounded = 11, taxonomy_survey = 9, benchmark_toolkit = 5, llm_judge = 4, counterfactual_recourse = 2 }
-evidence_sources = { proxy = 29, benchmark = 10, end_user = 9, human_expert = 11, llm_judge = 4 }
-confidence = { high = 43, medium = 4, title_level = 1 }
+# Matches the reconstructed corpus released 2026-08-26 and the figures now
+# printed in tab:prisma, tab:corpus_profile and the Gap sections. If the coding
+# changes, change the manuscript and this block together -- never this alone.
+size = 44
+clusters = { faithfulness_robustness = 15, taxonomy_survey = 10, human_grounded = 7, benchmark_toolkit = 6, llm_judge = 4, counterfactual_recourse = 2 }
+evidence_sources = { proxy = 21, human_expert = 15, benchmark = 13, end_user = 12, llm_judge = 4 }
+confidence = { high = 44 }
 
 [review_corpus.paper_c]
 # Satisfied by docs/reports/paper_c/paper_c_review_corpus.csv.
@@ -511,6 +519,11 @@ id = "exp4.reliability"
 path = "outputs/analysis/exp4_llm_evaluation"
 glob = "*.csv"
 cited_by = "Paper B+C, thesis Ch.5"
+
+[[cited_artifact]]
+id = "review.corpus.paper_bc"
+path = "docs/reports/paper_bc/paper_bc_review_corpus.csv"
+cited_by = "Paper B+C Code and Artifact Availability"
 
 [[cited_artifact]]
 id = "exp6.masking"

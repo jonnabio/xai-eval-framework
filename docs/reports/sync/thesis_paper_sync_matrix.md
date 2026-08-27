@@ -39,7 +39,7 @@ best-supported and most developed current version is canonical:
 | Transparent-model recovery limitation | Paper B+C | Indirect through formal correctness boundary | Added to validation ladder | Added to validation ladder | Wording aligned |
 | OOD / feature-dependence limitation | Thesis + Paper B+C | Present in masking/correlation caveat | Present through dependent-feature/suppressor framing | Present in metric transport and validity limits | No edit needed |
 | Human-centered validation limitation | Paper B+C / Thesis | Present | Present as out of quantitative scope | Present as evidence-source and user-usefulness boundary | No edit needed |
-| Review corpus size | **Unresolved (A14)** | Not stated at corpus level | Out of scope | Claims 48 coded papers; only committed corpus CSV has 24 rows | **Open:** commit the 48-paper corpus or correct the manuscript |
+| Review corpus size | **Resolved 2026-08-26** — 44-row reconstructed corpus released | Not stated at corpus level | Out of scope | 44 coded papers, distribution CI-verified against `paper_bc_review_corpus.csv` | Reconstruction disclosed in §Validity |
 | Composite metric / weighting scheme | Thesis / Paper B+C | Present as multi-metric, no scalar collapse | Uses multi-metric benchmark, no composite | Taxonomy organizes constructs, not pooled ranking | No edit needed |
 
 ## Shared Boundary Text
@@ -74,4 +74,4 @@ Use manuscript-specific versions of this boundary:
 - [x] No dangling cross-references in the thesis (A13).
 - [x] Manuscript numbers are machine-verified against artifacts (RCA-001, `scripts/pubs/verify_claims.py`).
 - [x] Paper B+C corpus source PDFs collected and verified (44/44, 2026-08-26).
-- [ ] Paper B+C's review corpus has a committed *coded* CSV (A14, open — 28 rows need coding).
+- [x] Paper B+C's review corpus has a committed coded CSV, CI-verified against the manuscript (A14, closed 2026-08-26).
