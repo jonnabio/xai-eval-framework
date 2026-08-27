@@ -1,5 +1,12 @@
 # Paper B+C corpus — PDFs to retrieve
 
+> **Status 2026-08-26: collection complete — 44/44.**
+> 25 retrieved automatically by `scripts/pubs/fetch_corpus_pdfs.py`, 17 copied
+> from `thesis/papers/`, and 2 (`kaur2020interpreting`, `retzlaff2024posthoc`)
+> supplied manually by the author from institutional access and verified on
+> arrival. Per-paper provenance is in `corpus_pdfs/RETRIEVAL_LOG.md`.
+> The list below is retained as the record of what was needed.
+
 Generated from `corpus_pdf_manifest.csv`. Resolves the retrieval half of finding A14.
 
 | | count |

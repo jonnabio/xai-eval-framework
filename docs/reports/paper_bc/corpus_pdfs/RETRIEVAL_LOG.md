@@ -9,7 +9,7 @@ Written by `scripts/pubs/fetch_corpus_pdfs.py`. STATUS is DONE, FAILED or PENDIN
 | `yeh2019infidelity` | DONE | https://arxiv.org/pdf/1901.09392 | arXiv 1901.09392 (from bibliography); verified (title overlap 0.67, 5884 KB) |
 | `rong2022consistent` | DONE | https://arxiv.org/pdf/2202.00449 | OpenAlex title search; verified (title overlap 0.83, 19495 KB) |
 | `hase2020evaluating` | DONE | https://www.aclweb.org/anthology/2020.acl-main.491.pdf | OpenAlex open-access location; verified (title overlap 1.00, 839 KB) |
-| `kaur2020interpreting` | FAILED |  | no open-access PDF found (arXiv + OpenAlex) |
+| `kaur2020interpreting` | DONE | https://doi.org/10.1145/3313831.3376219 | supplied manually by author (institutional access); verified 2026-08-26: 14 pages, 1777 KB, title overlap 1.00 |
 | `bucinca2020proxy` | DONE | https://arxiv.org/pdf/2001.08298 | OpenAlex title search; verified (title overlap 1.00, 2360 KB) |
 | `nauta2023anecdotal` | DONE | https://ris.utwente.nl/ws/files/420944940/3583558.pdf | OpenAlex title search; verified (title overlap 1.00, 1531 KB) |
 | `gu2024llmjudge` | DONE | https://arxiv.org/pdf/2411.15594 | arXiv 2411.15594 (from bibliography); verified (title overlap 1.00, 9559 KB) |
@@ -24,7 +24,7 @@ Written by `scripts/pubs/fetch_corpus_pdfs.py`. STATUS is DONE, FAILED or PENDIN
 | `jacovi2020faithfulness` | DONE | https://www.aclweb.org/anthology/2020.acl-main.386.pdf | OpenAlex title search; verified (title overlap 0.83, 231 KB) |
 | `kumar2020problems` | DONE | https://arxiv.org/pdf/2002.11097 | arXiv 2002.11097 (from bibliography); verified (title overlap 1.00, 477 KB) |
 | `mohseni2021survey` | DONE | https://arxiv.org/pdf/1811.11839 | OpenAlex open-access location; verified (title overlap 1.00, 1157 KB) |
-| `retzlaff2024posthoc` | FAILED | https://www.sciencedirect.com/science/article/pii/S1389041724000378 | download failed verification: not a PDF (missing %PDF header) |
+| `retzlaff2024posthoc` | DONE | https://doi.org/10.1016/j.cogsys.2024.101243 | supplied manually by author (Elsevier open access); verified 2026-08-26: 17 pages, 1849 KB, title overlap 1.00 |
 | `slack2020fooling` | DONE | https://arxiv.org/pdf/1911.02508 | OpenAlex title search; verified (title overlap 1.00, 1183 KB) |
 | `sokol2020factsheets` | DONE | https://arxiv.org/pdf/1912.05100 | OpenAlex title search; verified (title overlap 1.00, 1979 KB) |
 | `wilming2022scrutinizing` | DONE | https://link.springer.com/content/pdf/10.1007/s10994-022-06167-y.pdf | OpenAlex title search; verified (title overlap 1.00, 2306 KB) |
@@ -32,4 +32,4 @@ Written by `scripts/pubs/fetch_corpus_pdfs.py`. STATUS is DONE, FAILED or PENDIN
 | `wu2025userperceptions` | DONE | https://arxiv.org/pdf/2510.20721 | arXiv 2510.20721 (from bibliography); verified (title overlap 1.00, 697 KB) |
 | `zhou2025medthink` | DONE | https://www.nature.com/articles/s41746-025-02208-7_reference.pdf | OpenAlex open-access location; verified (title overlap 1.00, 2756 KB) |
 
-**25 DONE · 2 FAILED · 0 PENDING**
+**27 DONE · 0 FAILED · 0 PENDING**

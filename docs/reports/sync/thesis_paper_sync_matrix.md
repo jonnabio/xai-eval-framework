@@ -73,4 +73,5 @@ Use manuscript-specific versions of this boundary:
 - [x] Paper B+C Friedman p-values labelled as Holm-adjusted (A10).
 - [x] No dangling cross-references in the thesis (A13).
 - [x] Manuscript numbers are machine-verified against artifacts (RCA-001, `scripts/pubs/verify_claims.py`).
-- [ ] Paper B+C's 48-paper review corpus has a committed artifact (A14, open).
+- [x] Paper B+C corpus source PDFs collected and verified (44/44, 2026-08-26).
+- [ ] Paper B+C's review corpus has a committed *coded* CSV (A14, open — 28 rows need coding).

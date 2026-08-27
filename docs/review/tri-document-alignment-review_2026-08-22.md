@@ -276,6 +276,15 @@ Paper B+C's review corpus has no committed artifact at the size it claims.
 - **Resolution requires the author**: commit the 48-paper corpus, or correct
   Paper B+C to the corpus that exists. I cannot determine which is right.
 
+- **Progress (2026-08-26)**: the *source material* is now assembled — all 44
+  identifiable corpus PDFs are collected under `docs/reports/paper_bc/corpus_pdfs/`,
+  named by citation key, each verified as the correct paper (PDF header, size floor,
+  page-one title match). Provenance per paper in `corpus_pdfs/RETRIEVAL_LOG.md`.
+  **A14 remains open**: the PDFs are the input, not the deliverable. What Paper B+C
+  actually needs is the coded corpus CSV, and 28 of the 44 still require an
+  include/exclude decision and four-axis coding. The remaining ~4 of the claimed 48
+  were coded but never cited, so they are not recoverable from the citation record.
+
 ### A06 [minor, FIXED 2026-08-22] — Thesis internal contradiction on Anchors coverage
 
 - **Location**: `capitulo-4-resultados.qmd:356` (*"cobertura de solo 56 celdas calificadas (74.7%)"*)
@@ -466,7 +475,7 @@ except the Ch.5 numeric contradiction.
 | A09 thesis on superseded DOI | minor | Resolved 2026-08-23 |
 | A10 raw vs Holm p-value labelling | minor | Fixed 2026-08-22 |
 | A13 dangling crossref in Ch.3 | minor | Fixed 2026-08-22 |
-| **A14 Paper B+C 48-paper corpus has no artifact** | **major** | **OPEN — found 2026-08-24, needs author** |
+| **A14 Paper B+C 48-paper corpus has no artifact** | **major** | **OPEN — 44/44 PDFs collected 2026-08-26; corpus coding outstanding** |
 | A11 Paper A 45-cell vs 75-cell $d_z$ | suggestion | Open, no action requested |
 | A12 parsimony-direction slip | suggestion | Resolved 2026-08-23 |
 
