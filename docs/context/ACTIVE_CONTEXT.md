@@ -1,7 +1,7 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-08-22
+- **Last Updated:** 2026-08-28
 - **Active Role:** Scientific Editor
 - **Mode:** PUBLICATION — synchronized the thesis, Paper A, and merged Paper B+C around validation-boundary wording and EXP3 status. Created `docs/reports/sync/thesis_paper_sync_matrix.md`; updated the implementation plan with sync task 6; aligned Chapter 3/6 EXP3 wording to the Paper B+C + artifact source of truth (SHAP-Anchors fidelity replication plus LIME-only extension, but no full paired SHAP-LIME cross-dataset stability test); aligned Paper A boundary language while preserving its narrower SHAP-only EXP3 claim scope; aligned Paper B+C validity-claim language and corrected the LIME extension export path.
 - **Mode (2026-08-22, second pass):** PUBLICATION — full tri-document alignment + recency audit
@@ -114,15 +114,63 @@
   Outstanding by author decision: F03 (supplementary tables not re-derived), F04 (EXP4
   scripts/raw judge data unrecoverable), A11 (Paper A leads with 45-cell d_z).
   Author verification wanted on the 28 reconstructed coding rows before submission.
+- **Mode (2026-08-28):** PUBLICATION / RCA — closed the two findings carried as
+  accepted-as-is at the end of RCA-001, then finished the recovery they opened.
+  **F04 was not unrecoverable.** The EXP4 sources were gone from the tree and from
+  history, but their bytecode survived in `__pycache__`. All 16 files are now
+  reconstructed and committed: 7 modules (`exp4_reliability_metrics`, `exp4_prompts`,
+  `exp4_schema`, `exp4_parser`, `exp4_runner`, `exp4_cases`, `exp4_analysis`), 4 CLI
+  scripts, 5 test modules. `scripts/pubs/verify_exp4_reconstruction.py` proves the
+  modules compile to the same instruction stream as the original `.pyc`; the scripts
+  (3.12 bytecode) get a structural check; the tests are verified by running (7 pass,
+  4 skip). The recovery found **the published ICC is ICC(1,1), one-way random
+  effects — not the ICC(2,1) all three documents described**. It is the conservative
+  direction and the negative result stands (max 0.601, CI upper 0.695 vs the 0.75
+  threshold); relabelled across Paper B+C and thesis Ch.3/Ch.5/Ch.6/appendix. It also
+  answers the 2026-07-28 rigor review's open question 2 as fact: `icc_2_1` calls
+  `pivot_table().dropna()` (n=147), `alpha_ordinal` does not and masks with
+  `np.isnan` (n=192). **F03 found two wrong supplementary tables.** Table S6's
+  drop-correlation column was wrong in 3 of 4 rows and printed a monotone sequence the
+  artifact does not show (marginal replacement is highest, not lowest); the prose
+  generalised the attenuation claim to both endpoints and now holds it to the top-k
+  gap. Table S3's four occupation/workclass associations reproduced under no
+  convention — those columns are unobserved on the same 2,809 records — and are now
+  computed over pairwise-complete cases with the rule stated in the caption. Running
+  the recovered tests surfaced a third defect: the EXP4 Jinja templates were never
+  committed, and the `explanation_eval.j2` cited as the EXP4 rubric in Paper B+C, the
+  supplementary and the thesis appendix is an unrelated three-dimension EXP1 template;
+  all three citations corrected. 16 supplementary claims, 2 retired-value guards and
+  2 cited artifacts added to the registry with stdlib-only resolvers. RCA-002 opened
+  and closed for source recovery; RCA-001's "not covered" section corrected. Commits
+  `1b4157116` and `357a03201`.
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
 ## Current Objective
-Maintain the CIFIE/FOM-7 book chapter workstream and its ACE manuscript-editing support tooling.
+**Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
+Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
+values so the manuscripts consume them rather than restating them, and build all four
+outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
+that a manuscript number still matches its artifact; Phase 2 removes the opportunity
+for it to diverge at all, and closes the one gap Phase 1 cannot cover — render-time
+defects like A13, which was found only by rebuilding.
+
+Standing workstream (unchanged): maintain the CIFIE/FOM-7 book chapter and its ACE
+manuscript-editing support tooling.
 
 ## Current State
 
 ### Working
+- **Task 1 (closed 2026-08-26):** Paper B+C's review corpus released as a 44-row coded
+  CSV, CI-verified against the manuscript's printed distribution; reconstruction
+  disclosed in §Validity. Author verification still wanted on the 28 reconstructed
+  coding rows before submission.
+- **Task 2 (closed 2026-08-28):** F03 and F04 resolved. All 16 EXP4 source files
+  recovered from bytecode and verified; ICC relabelled ICC(1,1); Supplementary Tables
+  S3 and S6 corrected; EXP4 rubric citation corrected in three documents. See RCA-002.
+- Manuscript-claim enforcement now covers the supplementary document as well as the
+  main text: 61 claims, 111 manuscript sites, 16 retired-value guards, 10 cited
+  artifacts, plus both review corpora and the EXP4 reconstruction, all in CI.
 - Thesis/Paper synchronization pass completed for validation-boundary language and EXP3 scope. The sync matrix is available at `docs/reports/sync/thesis_paper_sync_matrix.md`.
 - New `Scientific Advisor` role added to `.ace/roles/roles.md` (idea/hypothesis critique, manuscript rigor review, reference audit), sitting between Data Scientist/AI Expert (research) and Scientific Editor (publication) in the Research Workflow.
 - New project-local skill `.ace/skills/scientific-rigor-review/SKILL.md`: adapts the ai-research pack's ARA-directory `rigor-reviewer` (6-dimension epistemic review) to plain manuscript/thesis-chapter prose. Produces severity-ranked reports to `docs/review/scientific-rigor-review_*.md`. Read-only on the manuscript.
@@ -140,6 +188,8 @@ Maintain the CIFIE/FOM-7 book chapter workstream and its ACE manuscript-editing 
 - `@miller2019` was added to the CIFIE references to support the social/contrastive dimension of explanation while keeping the manuscript clear that audience plausibility is not technical fidelity.
 
 ### In Progress
+- **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
+  macros and Quarto inline values; all four outputs built in CI.
 - CIFIE/FOM-7 book chapter publication editing
 - Thesis/Paper final scientific-editor consistency checks
 
@@ -147,6 +197,13 @@ Maintain the CIFIE/FOM-7 book chapter workstream and its ACE manuscript-editing 
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
+0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
+   inline values; add a CI job building Paper A, Paper B+C, the supplementary and the
+   thesis, failing on undefined references and crossref warnings.
+0a. [ ] Author-verify the 28 reconstructed review-corpus coding rows before submission.
+0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
+   script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
+   disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
 1. [ ] Resolve remaining thesis-review numerical findings F01/F03 in Ch.4/Ch.5 before defense.
 2. [ ] Re-run targeted consistency check for EXP3 mentions after any future Paper A or Paper B+C edits.
 3. [ ] Verify final rendered PDFs after publication manuscripts stabilize.
@@ -180,3 +237,12 @@ Maintain the CIFIE/FOM-7 book chapter workstream and its ACE manuscript-editing 
 - Added `@miller2019` to `references/references.bib` and `references/references_apa7.md`; updated `references/citation_audit.md` and `sources/evidence_map.md` for the section 03 literature loop.
 - Revised `03_fundamentos_xai.md` for academic Spanish prose, citation support, and FOM-7 alignment; no `thesis/` or `pub/` artifacts were edited.
 - Added `Scientific Advisor` role and `scientific-rigor-review`/`reference-audit` skills to extend ACE with peer-review-style science-correctness and bibliography-hygiene capability, on user request. No thesis/paper/CIFIE content was reviewed or edited in this session — this was a framework-extension task only.
+- 2026-08-28: "unrecoverable" is a claim about evidence and deserves the same
+  verification as any other. RCA-001 wrote off the EXP4 scripts without checking
+  `__pycache__`; all seven modules, four CLI scripts and five test modules were in
+  fact recoverable, and recovering them exposed a mislabelled statistic (ICC(1,1)
+  reported as ICC(2,1)) and a mis-cited measurement instrument that no amount of
+  re-reading the manuscripts would have found.
+- 2026-08-28: the EXP4 bytecode in `src/evaluation/__pycache__/` and
+  `scripts/__pycache__/` is now the only surviving copy of the original source and is
+  guarded by RCA-002. Do not delete it.
