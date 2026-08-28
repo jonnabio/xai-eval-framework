@@ -33,3 +33,16 @@ jobs:
         run: |
           git diff --exit-code pub/fragments
 
+  exp4-reconstruction:
+    # Runs on 3.13 because it compares against CPython 3.13 bytecode.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Verify reconstructed EXP4 sources match their bytecode
+        run: python3 scripts/pubs/verify_exp4_reconstruction.py
+

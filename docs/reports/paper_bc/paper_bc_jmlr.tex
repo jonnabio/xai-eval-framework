@@ -530,12 +530,19 @@ study (EXP4) in which three LLM judges independently scored $n=147$ paired
 explanation outputs on seven semantic dimensions using structured rubrics
 (rubric template archived at \path{src/prompts/templates/explanation_eval.j2}
 in the companion repository).
-Table~\ref{tab:exp4_icc} reports intra-class correlation ICC(2,1) and
-Krippendorff's $\alpha$ for each dimension. ICC(2,1) requires a complete
-cases-by-judges matrix and is therefore computed on the $n=147$
+Table~\ref{tab:exp4_icc} reports intra-class correlation ICC(1,1) and
+Krippendorff's $\alpha$ for each dimension. The ICC is computed from a
+one-way random-effects decomposition, which requires a complete
+cases-by-judges matrix and is therefore evaluated on the $n=147$
 fully-triple-rated cases; Krippendorff's $\alpha$ tolerates missing ratings
 and is computed on the fuller $n=192$-case pool, which includes cases with
-at least one missing judge score. All values fall below the
+at least one missing judge score. A one-way model treats systematic
+between-judge offsets as error rather than as a separable rater effect, so
+these values are conservative with respect to the two-way ICC(2,1): where
+judges differ in mean severity, ICC(2,1) would be somewhat higher. The
+margin is well inside the gap to the reliability threshold --- the largest
+observed value is $0.601$ with an upper confidence bound of $0.695$ ---
+so the negative conclusion does not depend on the choice of model. All values fall below the
 conventionally accepted reliability threshold of $\geq 0.75$ for
 \emph{good} agreement \citep{koo2016guideline}, confirming that semantic
 evaluation at this scale lacks the inter-rater convergence needed for
@@ -550,14 +557,14 @@ Completeness and semantic plausibility show the highest consistency
 \centering
 \caption{LLM-judge reliability on seven semantic dimensions (EXP4; ICC on
 $n=147$ fully-rated cases, Krippendorff's $\alpha$ on $n=192$ cases (see
-text); 3 LLM judges). ICC(2,1) = two-way random-effects
-absolute-agreement model. No dimension reaches the $\geq 0.75$
+text); 3 LLM judges). ICC(1,1) = one-way random-effects
+single-rater model, computed on the $n=147$ complete cases. No dimension reaches the $\geq 0.75$
 good-reliability threshold \citep{koo2016guideline}.}
 \label{tab:exp4_icc}
 \small
 \begin{tabular}{lcc}
 \toprule
-Dimension              & ICC(2,1) & Krippendorff $\alpha$ \\
+Dimension              & ICC(1,1) & Krippendorff $\alpha$ \\
 \midrule
 Clarity                & 0.321    & 0.278 \\
 Concision              & 0.453    & 0.409 \\
@@ -630,7 +637,7 @@ of explanation quality.
   {\textbf{LLM-based semantic evaluation}\\[2pt]
   more expressive than proxies, more scalable than human review,
   but not self-validating\\[2pt]
-  {\scriptsize EXP4 (this paper): ICC(2,1) $<$ 0.75 on all seven dimensions}};
+  {\scriptsize EXP4 (this paper): ICC(1,1) $<$ 0.75 on all seven dimensions}};
 \draw[dashed, ->] (proxy.south) to[out=-60, in=180] (llm.west);
 \draw[dashed, ->] (llm.east) to[out=0, in=-120] (user.south);
 \draw[->] ($(proxy.north west)+(0,0.3)$) -- ($(user.east |- proxy.north)+(0,0.3)$)

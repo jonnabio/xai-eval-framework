@@ -289,9 +289,10 @@ de validación empírica. EXP4 (diseñado en §sec-exp4-diseno, Capítulo 3)
 cuantifica directamente esa brecha: mide si los jueces LLM actuales alcanzan la
 convergencia inter-juez necesaria para operar como evidencia confirmativa.
 
-**Resultados.** La Tabla @tbl-exp4-icc reporta ICC(2,1) y $\alpha$ de
+**Resultados.** La Tabla @tbl-exp4-icc reporta ICC(1,1) y $\alpha$ de
 Krippendorff por dimensión para los tres jueces LLM. Los dos estadísticos se
-calculan sobre conjuntos de casos distintos: ICC(2,1) exige una matriz completa
+calculan sobre conjuntos de casos distintos: el ICC se obtiene de una
+descomposición unidireccional de efectos aleatorios, que exige una matriz completa
 de casos $\times$ jueces y se restringe por tanto a los $n = 147$ casos
 puntuados por los tres jueces, mientras que $\alpha$ de Krippendorff tolera
 puntuaciones ausentes y se calcula sobre el conjunto más amplio de $n = 192$
@@ -299,7 +300,7 @@ casos, que incluye aquellos con al menos una puntuación de juez faltante.
 Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
 [@koo2016].
 
-| Dimensión | ICC(2,1) | Krippendorff $\alpha$ |
+| Dimensión | ICC(1,1) | Krippendorff $\alpha$ |
 |:----------|:--------:|:---------------------:|
 | Claridad | 0.321 | 0.278 |
 | Concisión | 0.453 | 0.409 |
@@ -311,14 +312,16 @@ Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
 
 : Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4; ICC sobre
 $n = 147$ casos con puntuación completa, $\alpha$ de Krippendorff sobre
-$n = 192$ casos —véase el texto—; 3 jueces LLM). ICC(2,1): modelo bidireccional
-de efectos aleatorios, concordancia absoluta. Ninguna dimensión alcanza el
+$n = 192$ casos —véase el texto—; 3 jueces LLM). ICC(1,1): modelo unidireccional
+de efectos aleatorios, evaluador único. Un modelo unidireccional trata los
+sesgos sistemáticos entre jueces como error y no como efecto separable, por lo
+que estos valores son conservadores respecto de ICC(2,1). Ninguna dimensión alcanza el
 umbral aceptable $\geq 0.75$ [@koo2016]. {#tbl-exp4-icc}
 
 Las dimensiones con mayor consistencia relativa son Completitud
 ($\alpha = 0.566$) y Plausibilidad Semántica ($\alpha = 0.573$); las de
 menor consistencia son Claridad ($\alpha = 0.278$) y Utilidad para auditoría
-($\alpha = 0.340$). Los valores ICC(2,1) entre 0.321 y 0.601 se clasifican
+($\alpha = 0.340$). Los valores ICC(1,1) entre 0.321 y 0.601 se clasifican
 como fiabilidad *poor* a *moderate* según @koo2016, situándose en todos los
 casos por debajo de la categoría *good*.
 

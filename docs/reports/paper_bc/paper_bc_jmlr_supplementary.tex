@@ -159,8 +159,11 @@ improves stability but at the cost of locality.
 
 Table~\ref{tab:s3_corr} contextualises the out-of-distribution masking
 discussion in the main text. Numeric--numeric correlations were computed as
-Pearson $r$ on the raw (pre-preprocessing) training set; categorical--categorical
-associations as Cramér's $V$ on the full dataset ($n = 48{,}842$).
+Pearson $r$ over the raw (pre-preprocessing) dataset ($n = 48{,}842$);
+categorical--categorical associations as Cramér's $V$ over pairwise-complete
+cases, dropping records missing either value. \texttt{workclass} and
+\texttt{occupation} are unobserved on the same $2{,}809$ records, so admitting
+missingness as its own category would manufacture an association between them.
 Only pairs with $|r| > 0.10$ or $V > 0.15$ are shown.
 
 \begin{table}[h]
@@ -168,8 +171,8 @@ Only pairs with $|r| > 0.10$ or $V > 0.15$ are shown.
 \caption{Selected feature associations in the Adult Income dataset.
 Pearson $r$ for numeric pairs; Cramér's $V$ for categorical pairs.
 \texttt{education} and \texttt{education-num} are functionally identical
-(one-to-one mapping; $V \equiv 1.0$). All values computed on the full
-pre-split dataset ($n = 48{,}842$).}
+(one-to-one mapping; $V \equiv 1.0$). Pearson $r$ over the full pre-split
+dataset ($n = 48{,}842$); Cramér's $V$ over pairwise-complete cases.}
 \label{tab:s3_corr}
 \begin{tabular}{llcc}
 \toprule
@@ -182,12 +185,12 @@ Feature 1 & Feature 2 & Type & Association \\
 \texttt{relationship}  & \texttt{sex}            & Cramér's $V$    & 0.647 \\
 \texttt{marital-status} & \texttt{relationship}  & Cramér's $V$    & 0.488 \\
 \texttt{marital-status} & \texttt{sex}           & Cramér's $V$    & 0.460 \\
-\texttt{occupation}    & \texttt{sex}            & Cramér's $V$    & 0.422 \\
+\texttt{occupation}    & \texttt{sex}            & Cramér's $V$    & 0.435 \\
 \midrule
 \multicolumn{4}{l}{\textit{Moderate categorical associations ($0.15 < V \leq 0.40$)}} \\
-\texttt{workclass}     & \texttt{occupation}     & Cramér's $V$    & 0.210 \\
-\texttt{education}     & \texttt{occupation}     & Cramér's $V$    & 0.190 \\
-\texttt{occupation}    & \texttt{relationship}   & Cramér's $V$    & 0.171 \\
+\texttt{workclass}     & \texttt{occupation}     & Cramér's $V$    & 0.216 \\
+\texttt{education}     & \texttt{occupation}     & Cramér's $V$    & 0.196 \\
+\texttt{occupation}    & \texttt{relationship}   & Cramér's $V$    & 0.176 \\
 \midrule
 \multicolumn{4}{l}{\textit{Numeric correlations ($|r| > 0.10$; all others $< 0.10$)}} \\
 \texttt{education-num} & \texttt{hours-per-week} & Pearson $r$     & 0.144 \\
@@ -340,19 +343,25 @@ every scheme.}
 \toprule
 Masking scheme & Mean SHAP--LIME gap & Mean drop-correlation delta \\
 \midrule
-Independent zero masking      & +0.098 & +0.625 \\
-Mean replacement               & +0.098 & +0.591 \\
-Marginal empirical replacement & +0.081 & +0.534 \\
-Grouped mean replacement       & +0.053 & +0.493 \\
+Independent zero masking      & +0.098 & +0.515 \\
+Mean replacement               & +0.098 & +0.512 \\
+Marginal empirical replacement & +0.081 & +0.625 \\
+Grouped mean replacement       & +0.053 & +0.494 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \noindent SHAP's fidelity advantage direction is stable across all four
-schemes, but its magnitude decreases under progressively more
-correlation-aware masking, consistent with the feature-correlation
-discussion in Supplementary Table~S3: independent masking of correlated
-features inflates the apparent SHAP--LIME gap relative to masking schemes
-that account for feature dependence.
+schemes. Its magnitude, measured as the top-$k$ prediction-drop gap,
+decreases monotonically under progressively more correlation-aware
+masking ($+0.098 \rightarrow +0.098 \rightarrow +0.081 \rightarrow
++0.053$), consistent with the feature-correlation discussion in
+Supplementary Table~S3: independent masking of correlated features
+inflates the apparent SHAP--LIME gap relative to schemes that account for
+feature dependence. The drop-correlation delta does \emph{not} follow this
+ordering --- it is highest under marginal empirical replacement
+($+0.625$) and lowest under grouped mean replacement ($+0.494$) --- so the
+attenuation claim is supported by the prediction-drop gap alone and is not
+a general property of every masking-sensitivity endpoint.
 
 \end{document}

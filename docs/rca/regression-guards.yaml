@@ -90,3 +90,34 @@ guards:
 
 # Active Guards (add new guards below)
 # ------------------------------------
+
+  - id: RCA-002
+    title: "EXP4 sources lost from the tree; supplementary tables never re-derived"
+    severity: high
+    created: 2026-08-28
+    rca_file: docs/rca/RCA-002-exp4-source-recovery.md
+
+    guarded_files:
+      - src/evaluation/exp4_reliability_metrics.py
+      - src/evaluation/__pycache__/exp4_reliability_metrics.cpython-313.pyc
+      - docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex
+      - docs/reports/paper_bc/paper_bc_jmlr.tex
+      - thesis/capitulo-5-taxonomia.qmd
+      - pub/claim_registry.toml
+
+    invariants:
+      - "Reconstructed EXP4 sources compile to the same instructions as their committed bytecode"
+      - "The EXP4 .pyc files are never deleted: they are the only surviving copy of the original source"
+      - "The ICC is reported as ICC(1,1), one-way random effects, matching what the code computes"
+      - "Every supplementary table value is registered in pub/claim_registry.toml or explicitly disclosed as unbacked"
+      - "Cramer's V for Table S3 is computed over pairwise-complete cases, never with missingness as a category"
+
+    tests:
+      - python scripts/pubs/verify_exp4_reconstruction.py   # requires Python 3.13
+      - python scripts/pubs/verify_claims.py
+
+    review_triggers:
+      - "Any edit to a supplementary table value or caption"
+      - "Any change to how ICC or Krippendorff's alpha is described"
+      - "Any reconstruction of a further EXP4 module (add it to PAIRS in the verifier)"
+      - "Any proposal to re-run the EXP4 judges: that creates a new cohort, not a reproduction"

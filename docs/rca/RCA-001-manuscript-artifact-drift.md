@@ -109,6 +109,14 @@ verifier with a specific message.
   B+C's corpus (A14) was in the same position and was recoverable: it has since
   been reconstructed and is now verified like any other claim. The forward-looking rule is archival: no result artifact enters the
   repository without its generating script and raw inputs.
+
+  **Superseded in part, 2026-08-28 ([RCA-002](RCA-002-exp4-source-recovery.md)).**
+  The EXP4 *scripts* were recoverable after all: their bytecode survives in
+  `__pycache__`, and the reliability module has been reconstructed and is
+  verified against it in CI. The recovery showed the published ICC is a one-way
+  ICC(1,1), not the two-way ICC(2,1) the manuscripts described. Only the raw
+  judge responses remain genuinely lost. The lesson generalises: "unrecoverable"
+  is a claim about evidence and needs the same verification as any other.
 - **Render-time defects.** A13, a dangling cross-reference, was found only by
   rebuilding. Building all outputs in CI and failing on undefined references is
   Phase 2.
@@ -125,3 +133,5 @@ verifier with a specific message.
    Paper B+C §Validity.
 4. Add the archival rule to `.ace/standards/documentation.md` and to the FOM-7
    gate 5 definition.
+5. Continue the EXP4 source recovery started in RCA-002: six modules, four CLI
+   scripts and five test modules remain in bytecode only.

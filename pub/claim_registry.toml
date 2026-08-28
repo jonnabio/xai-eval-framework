@@ -607,3 +607,181 @@ id = "A13.dangling.crossref"
 text = "@tbl-exp4-dimensiones"
 reason = "no such label exists; the seven dimensions are listed in @tbl-exp4-icc"
 files = ["thesis/capitulo-3-diseno-experimental.qmd"]
+
+# ---------------------------------------------------------------------------
+# Supplementary tables S2/S3/S6 (F03).
+#
+# The rigor review flagged that the supplementary tables carry three of the
+# paper's robustness arguments but had never been re-derived from their source
+# artifacts. Verifying them found Table S6's drop-correlation column wrong in
+# three of four rows and Table S3's occupation/workclass associations
+# unreproducible; both were corrected on 2026-08-28. These entries keep them
+# tied to their sources.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "supp.s6.zero.topk_gap"
+source = "exp6_paired:zero:topk_gap"
+value = "+0.098"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.098 & +0.515" },
+]
+
+[[claim]]
+id = "supp.s6.zero.corr"
+source = "exp6_paired:zero:top_feature_corr"
+value = "+0.515"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.515" },
+]
+
+[[claim]]
+id = "supp.s6.mean.corr"
+source = "exp6_paired:mean:top_feature_corr"
+value = "+0.512"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.512" },
+]
+
+[[claim]]
+id = "supp.s6.marginal.corr"
+source = "exp6_paired:marginal:top_feature_corr"
+value = "+0.625"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.625", count = 2 },
+]
+
+[[claim]]
+id = "supp.s6.grouped.corr"
+source = "exp6_paired:grouped_mean:top_feature_corr"
+value = "+0.494"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.494", count = 2 },
+]
+
+[[claim]]
+id = "supp.s2.kw3.fidelity"
+source = "lime_kernel_width:3.0:fidelity_mean"
+value = "0.518"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.518" },
+]
+
+[[claim]]
+id = "supp.s2.kw10.stability"
+source = "lime_kernel_width:10.0:stability_mean"
+value = "0.664"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.664", count = 2 },
+]
+
+[[claim]]
+id = "supp.s3.relationship_sex"
+source = "adult_cramers_v:relationship:sex"
+value = "0.647"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.647" },
+]
+
+[[claim]]
+id = "supp.s3.marital_relationship"
+source = "adult_cramers_v:marital-status:relationship"
+value = "0.488"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.488" },
+]
+
+[[claim]]
+id = "supp.s3.marital_sex"
+source = "adult_cramers_v:marital-status:sex"
+value = "0.460"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.460" },
+]
+
+[[claim]]
+id = "supp.s3.occupation_sex"
+source = "adult_cramers_v:occupation:sex"
+value = "0.435"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.435" },
+]
+
+[[claim]]
+id = "supp.s3.workclass_occupation"
+source = "adult_cramers_v:workclass:occupation"
+value = "0.216"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.216" },
+]
+
+[[claim]]
+id = "supp.s3.education_occupation"
+source = "adult_cramers_v:education:occupation"
+value = "0.196"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.196" },
+]
+
+[[claim]]
+id = "supp.s3.occupation_relationship"
+source = "adult_cramers_v:occupation:relationship"
+value = "0.176"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.176" },
+]
+
+[[claim]]
+id = "supp.s3.educnum_hours"
+source = "adult_pearson_r:education-num:hours-per-week"
+value = "0.144"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.144" },
+]
+
+[[claim]]
+id = "supp.s3.capgain_educnum"
+source = "adult_pearson_r:capital-gain:education-num"
+value = "0.125"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.125" },
+]
+
+[[retired]]
+id = "F03.s6.corr.column"
+text = "+0.098 & +0.625"
+reason = "Table S6 drop-correlation column was misaligned; zero masking is +0.515, marginal is +0.625"
+files = ["docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex"]
+
+[[retired]]
+id = "F03.s6.monotone.prose"
+text = "but its magnitude decreases under progressively more"
+reason = "attenuation holds for the top-k gap only; the drop-correlation delta peaks at marginal masking"
+files = ["docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex"]
+
+[[cited_artifact]]
+id = "exp6.masking"
+path = "outputs/analysis/exp6_masking_sensitivity"
+glob = "*.csv"
+cited_by = "Paper B+C supplementary (Table S6)"
+
+[[cited_artifact]]
+id = "lime.kernel_width"
+path = "outputs/analysis/lime_kernel_width_sensitivity.csv"
+cited_by = "Paper B+C supplementary (Table S2)"
