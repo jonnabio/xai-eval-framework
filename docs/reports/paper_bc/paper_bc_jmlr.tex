@@ -527,9 +527,14 @@ in practice.
 \paragraph{Negative result: LLM-judge inter-rater reliability (EXP4).}
 To empirically ground this concern, we conducted a multi-rater reliability
 study (EXP4) in which three LLM judges independently scored $n=147$ paired
-explanation outputs on seven semantic dimensions using structured rubrics
-(rubric template archived at \path{src/prompts/templates/explanation_eval.j2}
-in the companion repository).
+explanation outputs on seven semantic dimensions using structured rubrics.
+The rubric itself is reproduced in full in Supplementary Table~S1; the three
+Jinja templates that rendered it
+(\texttt{exp4\_semantic\_eval\_v1\{,\_label\_visible,\_alt\}.j2}) were not
+retained in the repository, so the transcribed rubric is the authoritative
+record of the instrument. The seven dimensions and their 1--5 scale are
+independently corroborated by the recovered scoring schema and by the released
+per-dimension result tables.
 Table~\ref{tab:exp4_icc} reports intra-class correlation ICC(1,1) and
 Krippendorff's $\alpha$ for each dimension. The ICC is computed from a
 one-way random-effects decomposition, which requires a complete

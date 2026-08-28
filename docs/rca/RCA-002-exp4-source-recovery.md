@@ -1,6 +1,6 @@
 # RCA-002: EXP4 sources lost from the tree; supplementary tables never re-derived
 
-**Status**: Open (partial recovery landed; see Remaining)
+**Status**: Closed for source recovery; three artifact gaps remain (see Remaining)
 **Severity**: High
 **Opened**: 2026-08-28
 **Role**: Scientific Editor → Incident Responder
@@ -112,13 +112,26 @@ extensions RCA-001's fix did not reach:
 
 ## Fixes (2026-08-28)
 
-- `src/evaluation/exp4_reliability_metrics.py` reconstructed from bytecode.
-- `scripts/pubs/verify_exp4_reconstruction.py` compares the reconstruction's
+- **All seven EXP4 modules reconstructed** from bytecode and verified:
+  `exp4_reliability_metrics`, `exp4_prompts`, `exp4_schema`, `exp4_parser`,
+  `exp4_runner`, `exp4_cases`, `exp4_analysis`.
+- **All four CLI scripts reconstructed**: `exp4_build_cases`,
+  `exp4_run_llm_judges`, `exp4_parse_llm_responses`, `exp4_analyze_llm_scores`.
+  These carry 3.12 bytecode, whose instruction stream a 3.13 interpreter cannot
+  reproduce, so they get the structural check (names, constants, signatures)
+  rather than the opcode check. No CPython 3.12 is available here.
+- **All five test modules reconstructed** and, better than bytecode-matched,
+  *executed*: 7 pass, 4 skip (see Remaining). Their `.pyc` files carry pytest's
+  rewritten assertions, so opcode comparison would be meaningless; running them
+  against the reconstructed modules is the stronger check.
+- `scripts/pubs/verify_exp4_reconstruction.py` compares each reconstruction's
   opcode stream, signatures, defaults and constants against the original
-  `.pyc`, ignoring line numbers and the added provenance docstring. It found
-  two real defects in a first draft of the reconstruction (a missing
-  `dim in group_df.columns` guard, and a call whose argument layout changed the
-  emitted instructions) before it passed.
+  `.pyc`, ignoring line numbers and the added provenance docstring. It
+  auto-discovers new reconstructions. It earned its keep repeatedly, catching
+  a missing `dim in group_df.columns` guard, a tuple that was really a list, a
+  `return None` that was really a conditional expression, a dropped
+  `encoding="utf-8"`, an inverted conditional, and several call layouts whose
+  formatting changed the emitted instructions.
 - ICC relabelled ICC(1,1) with the conservativeness noted, in Paper B+C
   (text, caption, table header, validity-ladder figure) and the thesis
   (Ch.3, Ch.5 ×3, Ch.6 ×2, appendix).
@@ -128,26 +141,49 @@ extensions RCA-001's fix did not reach:
 - 16 supplementary claims, 2 retired-value guards and 2 cited artifacts added
   to `pub/claim_registry.toml`, with stdlib-only resolvers for Cramér's V and
   Pearson r so CI needs no scientific stack.
+- The EXP4 rubric citation corrected in three places (Paper B+C body,
+  Supplementary Table S1, thesis appendix): they named
+  `src/prompts/templates/explanation_eval.j2`, which is an unrelated
+  three-dimension EXP1 template. Found by running the recovered tests.
 - `pubs-sync.yml` gains an `exp4-reconstruction` job pinned to Python 3.13.
 
 ## Remaining
 
-1. **Six EXP4 modules and four CLI scripts are still unreconstructed**:
-   `exp4_analysis`, `exp4_cases`, `exp4_parser`, `exp4_prompts`,
-   `exp4_runner`, `exp4_schema`, plus `exp4_build_cases`,
-   `exp4_run_llm_judges`, `exp4_parse_llm_responses`,
-   `exp4_analyze_llm_scores`, and five test modules. All are recoverable by the
-   method above; the reliability module was prioritised because it is the one
-   that produces the published statistics. Add each to `PAIRS` in the verifier
-   as it lands.
-2. **Raw judge responses are genuinely gone.** Only aggregates, 192 case IDs
-   and per-case disagreement survive; `experiments/exp1_adult/llm_eval/` is
-   EXP1's 80-case set, not EXP4's. The EXP4 figures therefore still cannot be
-   re-derived end-to-end. Re-running the judges would produce a new cohort, not
-   a reproduction — a re-experiment, not a fix.
+The source recovery is complete. Three artifact gaps remain, none of them
+recoverable from what the repository holds:
+
+1. **Raw judge responses are gone.** Only aggregates, 192 case IDs and per-case
+   disagreement survive. `experiments/exp4_llm_evaluation/` was never created in
+   this tree, and `experiments/exp1_adult/llm_eval/` is EXP1's 80-case set, not
+   EXP4's. The EXP4 figures therefore still cannot be re-derived end-to-end.
+   Re-running the judges would produce a new cohort, not a reproduction — a
+   re-experiment, not a fix.
+2. **The three EXP4 Jinja templates are gone.** `exp4_prompts` loads
+   `exp4_semantic_eval_v1.j2`, `..._label_visible.j2` and `..._alt.j2`; none is
+   in the repository. This was found by *running* the recovered tests, which is
+   why four of them skip. The `explanation_eval.j2` that Paper B+C, the
+   supplementary and the thesis appendix all cited as the EXP4 rubric is a
+   different instrument: a three-dimension EXP1 template (Coherence /
+   Faithfulness / Usefulness) whose variables
+   (`model_name`, `true_label`, `prediction_prob`, `explanation_text`) are not
+   the four that `render_exp4_prompt` passes. All three citations were corrected
+   on 2026-08-28; Supplementary Table S1 is now stated as the authoritative
+   record of the instrument, corroborated by the recovered scoring schema.
 3. **Table S5 needs its probe re-run** and the output archived, or the table
-   withdrawn. Until then it is the one supplementary table with no backing
-   artifact.
-4. Whether to state in §Validity that EXP4's raw judge responses were not
-   retained. Recommended: the paper already reports EXP4 as a negative result
-   and discloses its other limits plainly.
+   withdrawn. Its generating script `src/scripts/run_sensitivity_analysis.py`
+   *is* committed, so this one is recoverable with compute rather than lost.
+
+Two smaller items, both preserved rather than fixed so the reconstruction
+matches its bytecode:
+
+- `scripts/exp4_analyze_llm_scores.py` prints `summary["case_rows"]`, but
+  `analyze_exp4()` returns `case_inventory_rows`. The CLI raises `KeyError`
+  *after* every analysis CSV is written, so the committed outputs are
+  unaffected. Flagged in the file's docstring.
+- `test_hidden_label_prompt_masks_true_label` ends with a tautological
+  assertion (`prompt_version_hash(prompt) == prompt_version_hash(prompt)`).
+  That is what the bytecode encodes.
+
+The EXP4 tests are not in CI: `backend-ci.yml` is path-filtered to `src/api`,
+and running these needs pandas, pydantic, jinja2 and pyyaml. The CI gate is the
+dependency-free opcode check in `pubs-sync.yml`.

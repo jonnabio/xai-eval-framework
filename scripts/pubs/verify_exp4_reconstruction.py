@@ -22,13 +22,39 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-# reconstructed source -> the .pyc it must match
-PAIRS = [
-    (
-        ROOT / "src" / "evaluation" / "exp4_reliability_metrics.py",
-        ROOT / "src" / "evaluation" / "__pycache__" / "exp4_reliability_metrics.cpython-313.pyc",
-    ),
-]
+SRC_DIR = ROOT / "src" / "evaluation"
+SCRIPT_DIR = ROOT / "scripts"
+
+
+def discover() -> list[tuple[Path, Path]]:
+    """Pair every reconstructed exp4_*.py with the 3.13 bytecode it came from.
+
+    New reconstructions are picked up automatically; a module whose .pyc is
+    missing is reported rather than silently skipped.
+    """
+    pairs = []
+    for src in sorted(SRC_DIR.glob("exp4_*.py")):
+        pyc = SRC_DIR / "__pycache__" / f"{src.stem}.cpython-313.pyc"
+        pairs.append((src, pyc))
+    return pairs
+
+
+def discover_scripts() -> list[tuple[Path, Path]]:
+    """Pair the reconstructed EXP4 CLI scripts with their 3.12 bytecode.
+
+    These get the structural check only: their bytecode is CPython 3.12, whose
+    instruction stream a 3.13 interpreter cannot reproduce. marshal still reads
+    the code objects, so names and constants remain comparable.
+    """
+    pairs = []
+    for src in sorted(SCRIPT_DIR.glob("exp4_*.py")):
+        pyc = SCRIPT_DIR / "__pycache__" / f"{src.stem}.cpython-312.pyc"
+        pairs.append((src, pyc))
+    return pairs
+
+
+PAIRS = discover()
+SCRIPT_PAIRS = discover_scripts()
 
 PYC_HEADER = 16
 
@@ -79,7 +105,7 @@ def strip_module_doc(code):
     return code.replace(co_consts=tuple(consts))
 
 
-def compare(src: Path, pyc: Path) -> list[str]:
+def compare(src: Path, pyc: Path, opcode_check: bool = True) -> list[str]:
     problems: list[str] = []
     rel = src.relative_to(ROOT).as_posix()
 
@@ -88,7 +114,7 @@ def compare(src: Path, pyc: Path) -> list[str]:
         compile(src.read_text(encoding="utf-8"), str(src), "exec")
     )
 
-    a, b = opcodes(original), opcodes(rebuilt)
+    a, b = (opcodes(original), opcodes(rebuilt)) if opcode_check else ([], [])
     if a != b:
         # report the first divergence with a little context
         for i, (x, y) in enumerate(zip(a, b)):
@@ -135,6 +161,8 @@ def main() -> int:
     problems: list[str] = []
     for src, pyc in PAIRS:
         problems.extend(compare(src, pyc))
+    for src, pyc in SCRIPT_PAIRS:
+        problems.extend(compare(src, pyc, opcode_check=False))
 
     if problems:
         print("EXP4 reconstruction does NOT match the original bytecode:\n")
@@ -144,7 +172,9 @@ def main() -> int:
 
     print(
         f"OK: {len(PAIRS)} reconstructed EXP4 module(s) compile to the same "
-        f"instructions as the committed bytecode"
+        f"instructions as the committed bytecode; "
+        f"{len(SCRIPT_PAIRS)} CLI script(s) match structurally (3.12 bytecode, "
+        f"opcode stream not comparable)"
     )
     return 0
 
