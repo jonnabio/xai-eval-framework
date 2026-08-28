@@ -143,6 +143,51 @@
   2 cited artifacts added to the registry with stdlib-only resolvers. RCA-002 opened
   and closed for source recovery; RCA-001's "not covered" section corrected. Commits
   `1b4157116` and `357a03201`.
+- **Mode (2026-08-28, second pass):** PEER_REVIEW — Scientific Advisor ran
+  `scientific-rigor-review` against the full thesis (index through apendices). Report at
+  `docs/review/scientific-rigor-review_thesis_2026-08-28.md` (Grade: **Accept**, mean 3.9/5;
+  D1=3.5 D2=4.5 D3=3.5 D4=3.5 D5'=4.5 D6=4.0). Read-only: no manuscript file was edited.
+  Confirmed fixed from the 2026-08-11 review: F01 (Ch.5 vs Ch.4 numbers), F02 (Ch.6 item 4 vs
+  `sec-exp3-nota`), F03 (parsimony direction). Crossrefs verified clean (69 labels, 0 dangling)
+  and the confirmatory core re-derived exactly from `exp2_run_level_metrics.csv`.
+  13 findings, 3 major:
+  **F01** — the thesis's self-nominated highest-impact claim ("LIME's instability is
+  structural") is contradicted by two of its own results: Appendix C's `kernel_width` table
+  (kw=10.0 → stability **0.664** vs 0.000 at the reference kw=3.0) and EXP3 (LIME stability
+  0.748–0.927 on BC/GC at the reference kw). Ch.6 §sec-limitaciones states "no dependiente de
+  la configuración del kernel" while §sec-futuro item 3, one page later, calls kw=10.0 the
+  "alternativa más estable"; §sec-sintesis generalises to "cualquier sistema". §sec-exp3-nota
+  states the correct narrow conclusion and it is not propagated.
+  **F02** — the prescriptive per-instance cost ranges in Ch.4 Contextos A–D and Ch.6 are not
+  derivable from any artifact: DiCE "770–4,500 ms" vs run-level mean **28,209** (and vs Ch.4's
+  and Ch.5's own text); LIME "3–9 ms" vs per-model means 51.6–122.3; TreeSHAP "1–322 ms" vs RF
+  533–7,836. Same defect class as A05, which was fixed in Ch.4's profile/transversal sections
+  but never reached the Contexto paragraphs or Ch.6's criteria.
+  **F03** — Appendix C's two LIME tables report four different values for the *identical*
+  reference cell (RF/s42/N=100/kw=3.0/num_samples=1000): fidelity 0.461 vs 0.518, stability
+  0.014 vs 0.000, cost 226 vs 30 ms. Only the kw table is artifact-backed; the `num_samples`
+  probe is the open RCA-002 leftover.
+  Minor: F04 (SHAP F>=0.80 / S>=0.70 asserted as guarantees, but fail in 2/5 model families
+  each — including the tree models the same sentence recommends: xgb stability 0.575, rf
+  fidelity 0.729), F05 (CV<3% reproducibility headline is the RF/N=100 subgroup; benchmark-wide
+  is 12.0–12.8%), F06 ("Brecha 3" referenced 4x, never defined anywhere in the thesis —
+  the conceptual analogue of A13), F07 (Fronteras row for LIME instability omits the
+  dataset/feature-space boundary and requests future work Appendix C already completed),
+  F08 (Appendix C Anchors-tau table: coverage column is design-wide x/75 but the caption
+  scopes it to "RF, semilla 42"), F09 (Ch.4 Anchors profile labels run-level means 0.388/0.052
+  as "sobre los bloques"; block-level is 0.3886/0.0429).
+  Suggestions: F10–F12 carried unchanged from 2026-08-11 (chi2~15.2 underived; Anchors MNAR
+  bias direction undisclosed; "prescriptivos" register). **F13 is a Task 3 input:**
+  `verify_claims.py` is green (61 claims / 111 sites) yet F02/F03/F08/F09 all passed through
+  it, because those numbers were never *registered*. Phase 1 guarantees "a registered number
+  matches its artifact"; the failure mode actually found is "a load-bearing number was never
+  registered". Recommend a registration-completeness sweep plus an unregistered-numeric-literal
+  check before Phase 2's macro generation.
+  Readiness: defensible as-is — no finding touches H1–H3, P1, P2, the statistical plan or
+  FOM-7 itself — but F01/F02/F04/F06 are half a day of prose edits and sit in exactly the
+  passages an examiner will probe. F01/F02/F04 concern quantities shared with Paper A and
+  Paper B+C, so any fix must go through the sync matrix (RCA-001 invariant 3), and all
+  implicated files are guarded (Ch.3–6 + apendices by RCA-001, Ch.5 also by RCA-002).
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
@@ -204,13 +249,70 @@ manuscript-editing support tooling.
 0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
    script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
    disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
-1. [ ] Resolve remaining thesis-review numerical findings F01/F03 in Ch.4/Ch.5 before defense.
+0c. [x] **Thesis rigor review 2026-08-28 remediation — DONE 2026-08-28.** All 3 major,
+   6 minor and 2 of 4 suggestions closed in 8 atomic commits (e7d1f01f4..dd589660c);
+   F10 and F11 remain open as accepted suggestions. Plan:
+   `docs/planning/thesis_rigor_remediation_plan_2026-08-28.md` (Architect, 2026-08-28).
+   Blast radius verified: **F02 and F04 are thesis-only** (Paper A carries only the registered
+   aggregate costs); only F01 crosses documents, into one Paper B+C paragraph (~l.1297);
+   Paper A §636 and Supplementary Table S2 are already correctly scoped.
+   Author decisions taken 2026-08-28: **D1 = Option A** (defend the narrow,
+   configuration-/feature-space-scoped LIME instability claim; EXP3's 0.75-0.93 and Appendix C's
+   kw=10.0 -> 0.664 become a second reported finding rather than contradictions);
+   **D2 = re-run the Table S5 num_samples probe, 1h timebox**, falling back to historical
+   disclosure (closes the RCA-002 leftover either way); **D3 = keep "prescriptivos"** plus a
+   scope sentence, promoted to T2.9 now that T2.4 removes the threshold tension.
+   Plan is registry-first by design: Phase 1 registers 20 per-model cost cells + 10 SHAP quality
+   cells + 4 retired-value guards BEFORE any prose edit, because F02/F03/F08/F09 all passed a
+   green verifier for want of registration, not for want of accuracy.
+   Critical path Phases 1-3 ~9h; Phase 5 (F13 unregistered-literal check) folds into Task 3.
+   Detail of the finding list below / in the review:
+0d. [ ] (superseded detail) original per-finding priority order (see
+   `docs/review/scientific-rigor-review_thesis_2026-08-28.md`). Priority order:
+   F01 (scope the LIME "structural instability" claim in Ch.6 §sec-limitaciones,
+   §sec-sintesis and Ch.5's opening — it currently contradicts Appendix C and EXP3),
+   F02 (re-derive the four prescriptive cost ranges; rewrite the DiCE recommendation),
+   F04 (make the SHAP F>=0.80 / S>=0.70 thresholds conditional on model family),
+   F06 (define the Brechas or drop the numbering), then F05/F07/F09 (sentence-level).
+   If time allows: F03, F08, F10, F11, F12. All targets are RCA-001-guarded; run
+   `verify_claims.py` + `verify_sync.py` and register new numbers rather than typing them.
+1. [x] Resolve the 2026-08-11 thesis-review findings F01/F02/F03 in Ch.4/Ch.5/Ch.6 —
+   verified fixed by the 2026-08-28 re-review.
 2. [ ] Re-run targeted consistency check for EXP3 mentions after any future Paper A or Paper B+C edits.
 3. [ ] Verify final rendered PDFs after publication manuscripts stabilize.
 4. [ ] Use `manuscript-editing` with the CIFIE/FOM-7 profile for future CIFIE section revision passes.
 5. [ ] Continue APA/citation and compression checks once final CIFIE requirements are confirmed.
 6. [ ] Validate final submission artifacts after manuscript stabilization.
 7. [ ] Run `Scientific Advisor` (`scientific-rigor-review` + `reference-audit`) against the CIFIE chapter and/or Paper A/B+C once each is near-final, before final submission.
+
+- **Mode (2026-08-28, third pass):** EXECUTION — Developer applied the rigor-review
+  remediation, Phases 1-3 of the approved plan, in 8 atomic commits:
+  F01 (e7d1f01f4), F02 (ed54a97ec), F04+F12 (9baf99921), F03 (fdee4e9bf),
+  F08+F09 (6046171ac), F05+F07 (d398bcb8f), F06 (46fab539f), Paper B+C F01 +
+  sync matrix (dd589660c). **No statistic changed in any commit.**
+  Registry grew 61 -> 83 claims and 111 -> 157 manuscript sites: 13 per-model cost
+  claims, 8 per-model SHAP quality claims, supp.s2.kw10.fidelity, plus 5 new
+  retired-value guards (F01.lime.kernel_independence and F02.{dice,lime,treeshap,
+  anchors}.cost_range). The F02 guard was negative-tested: reinserting "770-4,500"
+  fails verify_claims.py with exit 1.
+  **F03 took the D2 fallback.** The re-run was not attempted because the surviving
+  script `src/scripts/run_sensitivity_analysis.py` sweeps {500,1000,2000,5000,10000}
+  over the EXP1 base config, not the appendix's three levels at RF/seed42/N=100 —
+  running it would produce a new measurement, not a reproduction of Table S5 (the
+  same reasoning RCA-002 applied to re-running the EXP4 judges). Table S5 is now
+  disclosed as a historical exploratory probe, with the two probes' disagreement
+  stated explicitly and both held to their directional conclusion. This closes the
+  RCA-002 leftover by disclosure. **Do not re-run that script expecting Table S5.**
+  Blast radius confirmed during execution: F02 and F04 were thesis-only; Paper A
+  needed no edit at all (its §636 was already correctly scoped); the Paper B+C
+  supplementary was already correct — only its main-text summary of Table S2 had
+  dropped the kw=10.0 row while citing the table.
+  Verification: verify_claims.py, verify_sync.py and verify_exp4_reconstruction.py
+  all green; crossrefs 70 labels / 0 dangling; all four outputs rebuilt clean
+  (3 PDFs via tectonic-portable, thesis DOCX via render.ps1) with no undefined
+  references; the four retired cost ranges absent from all sources.
+  Still open: F10 (chi2~15.2 underived) and F11 (Anchors MNAR bias direction) as
+  accepted suggestions, and F13 -> Task 3.
 
 ## Active Constraints
 - .ace/standards/coding.md
