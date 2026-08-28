@@ -532,6 +532,142 @@ glob = "*.csv"
 cited_by = "Paper B+C"
 
 # ---------------------------------------------------------------------------
+# EXP2 per-model run-level cost means (thesis Ch.4 Contextos A-D and Ch.6
+# prescriptive selection criteria). Added after the 2026-08-28 rigor review
+# (F02): these passages carried hand-typed ranges -- DiCE "770-4,500 ms" against
+# a real mean of 28,209 -- that no resolver ever checked, because they were
+# never registered. Registering them is the fix; correcting the prose alone
+# would rebuild the same defect.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.run.shap.model_mean.xgb.cost"
+source = "exp2_model_mean:shap:cost:xgb"
+value = "20.70"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "21 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "21 ms" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.rf.cost"
+source = "exp2_model_mean:shap:cost:rf"
+value = "2819.83"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "2,820 ms" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.svm.cost"
+source = "exp2_model_mean:shap:cost:svm"
+value = "54230.47"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "54,231 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "54,231 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.logreg.cost"
+source = "exp2_model_mean:lime:cost:logreg"
+value = "73.15"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "73 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "73 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.xgb.cost"
+source = "exp2_model_mean:lime:cost:xgb"
+value = "122.28"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "122 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "122 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.mlp.cost"
+source = "exp2_model_mean:lime:cost:mlp"
+value = "51.59"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "52 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "52 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.svm.cost"
+source = "exp2_model_mean:lime:cost:svm"
+value = "17620.44"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "17,620 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "17,620 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.logreg.cost"
+source = "exp2_model_mean:anchors:cost:logreg"
+value = "2917.67"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "2,918 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "2,918 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.rf.cost"
+source = "exp2_model_mean:anchors:cost:rf"
+value = "48954.77"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "48,955 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "48,955 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.svm.cost"
+source = "exp2_model_mean:anchors:cost:svm"
+value = "37415.16"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "37,415 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "37,415 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.mlp.cost"
+source = "exp2_model_mean:anchors:cost:mlp"
+value = "15563.95"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15,564 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "15,564 ms" },
+]
+
+[[claim]]
+id = "exp2.run.dice.model_mean.mlp.cost"
+source = "exp2_model_mean:dice:cost:mlp"
+value = "12633.81"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "12,634 ms" },
+]
+
+[[claim]]
+id = "exp2.run.dice.model_mean.svm.cost"
+source = "exp2_model_mean:dice:cost:svm"
+value = "66266.06"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "66,266 ms" },
+]
+
+# ---------------------------------------------------------------------------
 # Retired values -- the regression guard proper. Each was removed by the
 # 2026-08-22/23 audit; if one reappears, a stale snapshot has been reintroduced.
 # ---------------------------------------------------------------------------
@@ -595,6 +731,30 @@ id = "A03.exp3.bc_xgb.april"
 text = "& 0.607 &"
 reason = "April side-branch snapshot; the canonical July value is 0.617"
 files = ["docs/reports/paper_bc/paper_bc_jmlr.tex"]
+
+[[retired]]
+id = "F02.dice.cost_range"
+text = "770–4,500"
+reason = "unbacked DiCE cost range framed as moderate; run-level mean is 28,209 ms, second-highest in the benchmark (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.lime.cost_range"
+text = "3–9 ms"
+reason = "unbacked LIME cost range; per-model run means are 52-122 ms on logreg/xgb/mlp (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.treeshap.cost_range"
+text = "1–322 ms"
+reason = "unbacked TreeSHAP cost range; SHAP run means are 20.7 ms on XGBoost but 2,819.8 ms on RF (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.anchors.cost_range"
+text = "10,000–70,000"
+reason = "unbacked Anchors cost range; per-model run means are 15,564-48,955 ms on RF/SVM/MLP (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
 
 [[retired]]
 id = "F01.lime.kernel_independence"

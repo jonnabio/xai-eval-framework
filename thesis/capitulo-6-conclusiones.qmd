@@ -119,27 +119,37 @@ contextuales":
 
 **SHAP debe seleccionarse** como método primario en cualquier aplicación que
 requiera fidelidad verificable ($\bar{F} \geq 0.80$) o consistencia
-explicativa ($\bar{S} \geq 0.70$). Para modelos basados en árboles (XGBoost,
-Random Forest), TreeSHAP produce estas garantías con un coste de 1–322 ms/
-instancia, lo que hace esta elección también la más eficiente.
+explicativa ($\bar{S} \geq 0.70$). Para modelos basados en árboles, TreeSHAP
+reduce el coste en dos o tres órdenes de magnitud respecto a KernelSHAP —21 ms
+por instancia en XGBoost y 2,820 ms en Random Forest, frente a 54,231 ms en SVM—
+lo que hace esta elección también la más eficiente en XGBoost.
 
 **LIME puede seleccionarse** exclusivamente cuando el coste computacional es
 el criterio dominante y la aplicación no requiere comparación de explicaciones
-entre instancias ni auditoría de consistencia. Los 3–9 ms de LIME en
-logreg/xgb/mlp hacen posible la explicación en tiempo real, con la condición
-explícita de que las explicaciones no sean comparadas entre ejecuciones.
+entre instancias ni auditoría de consistencia. Las medias por familia de modelo
+de LIME en logreg/xgb/mlp —73 ms, 122 ms y 52 ms por instancia respectivamente—
+hacen posible la explicación en tiempo real, con la condición
+explícita de que las explicaciones no sean comparadas entre ejecuciones. En SVM
+esa ventaja desaparece: LIME asciende a 17,620 ms de media.
 
 **Anchors debe usarse con cautela** para modelos no-lineales (RF, SVM, MLP) en
-aplicaciones de latencia crítica: sus costes de 10,000–70,000 ms/instancia
-son inviables en producción. Su uso es justificable exclusivamente cuando la
+aplicaciones de latencia crítica: sus medias por familia de modelo —15,564 ms
+(MLP), 37,415 ms (SVM) y 48,955 ms (RF) por instancia— son inviables en
+producción, y su cobertura analítica cae al 76.0% por no convergencia. Su uso es
+justificable exclusivamente cuando la
 forma semántica IF-THEN es un requisito regulatorio o de usuario y el modelo
-es de complejidad baja (logreg).
+es de complejidad baja (logreg, 2,918 ms).
 
 **DiCE es la opción de esta comparación orientada a acciones correctivas**
 cuando el objetivo es generar acciones correctivas
 (*algorithmic recourse*) para cambiar la predicción. Sus métricas de fidelidad
-bajas son irrelevantes para este objetivo; sus costes moderados (770–4,500 ms)
-son aceptables en la mayoría de los contextos.
+bajas son irrelevantes para este objetivo, puesto que la métrica de atribución no
+mide lo que DiCE optimiza. Su coste, en cambio, sí es una restricción real y no
+debe presentarse como moderado: con una media de 28,209 ms por instancia
+(mediana 11,880 ms) es el segundo más elevado del benchmark, solo por debajo de
+Anchors (38,159 ms), y varía entre 12,634 ms (MLP) y 66,266 ms (SVM) según la
+familia de modelo. DiCE se justifica cuando el recourse es el objetivo y no
+existe sustituto, no por eficiencia.
 
 ## Posicionamiento respecto a la literatura y separación de contribuciones {#sec-posicionamiento}
 

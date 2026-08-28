@@ -579,7 +579,10 @@ puede requerir infraestructura de cómputo dedicada o ejecución asíncrona.
 
 **Contexto B — Velocidad crítica, consistencia explicativa no requerida** (p.
 ej., sistemas de recomendación con retroalimentación explicativa en tiempo real):
-LIME es viable para modelos logreg/xgb/mlp con costes de 3–9 ms, aceptando
+LIME es viable para modelos logreg/xgb/mlp, cuyas medias por familia de modelo
+—52 ms (mlp), 73 ms (logreg) y 122 ms (xgb) por instancia, agregadas a nivel de
+ejecución— se mantienen dos órdenes de magnitud por debajo de las de SVM
+(17,620 ms), aceptando
 que la explicación de una misma instancia puede variar entre ejecuciones. Los
 usuarios finales de estos sistemas deben ser informados de que las explicaciones
 tienen naturaleza estocástica y no son comparables entre ejecuciones.
