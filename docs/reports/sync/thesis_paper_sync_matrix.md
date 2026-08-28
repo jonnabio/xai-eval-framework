@@ -75,3 +75,20 @@ Use manuscript-specific versions of this boundary:
 - [x] Manuscript numbers are machine-verified against artifacts (RCA-001, `scripts/pubs/verify_claims.py`).
 - [x] Paper B+C corpus source PDFs collected and verified (44/44, 2026-08-26).
 - [x] Paper B+C's review corpus has a committed coded CSV, CI-verified against the manuscript (A14, closed 2026-08-26).
+- [x] The LIME instability claim is stated with its configuration and feature-space scope in every document (F01, closed 2026-08-28). Thesis Ch.5/Ch.6 and Paper B+C §"LIME stability is not a convergence artifact" now all carry the `kernel_width=10.0` → 0.664 bound and the EXP3 cross-dataset range; Paper A (§636) and Supplementary Table S2 were already correctly scoped and needed no change.
+- [x] Per-instance cost figures in prescriptive selection criteria are re-derived from `exp2_run_level_metrics.csv`, not hand-typed (F02, closed 2026-08-28). Thesis-only: Paper A carries only the registered aggregates.
+- [x] SHAP selection thresholds ($\bar{F} \geq 0.80$, $\bar{S} \geq 0.70$) are stated per model family, not on the global mean (F04, closed 2026-08-28). Thesis-only.
+- [x] The reproducibility headline distinguishes the RF/$N=100$ subgroup (CV < 3%) from the benchmark-wide figure (12.0–12.8%) (F05, closed 2026-08-28).
+- [x] The construct gaps the taxonomy names are enumerated, so "Brecha 3" resolves (F06, closed 2026-08-28).
+
+## Cross-document claim rows added 2026-08-28 (rigor review remediation)
+
+| Quantity | Canonical source | Thesis | Paper A | Paper B+C | Supplementary |
+|:--|:--|:--|:--|:--|:--|
+| LIME stability at `kernel_width=10.0` (0.664) and fidelity (0.441) | `outputs/analysis/lime_kernel_width_sensitivity.csv` via `supp.s2.*` | Ch.6 §sec-limitaciones, Apéndice C | — | §"LIME stability is not a convergence artifact" | Table S2 |
+| Per-model run-level cost means (20 cells, 4 methods × 5 models) | `exp2_run_level_metrics.csv` via `exp2_model_mean:<method>:cost:<model>` | Ch.4 Contextos A–D, Ch.6 criterios | — | — | — |
+| Per-model SHAP fidelity / stability means | `exp2_run_level_metrics.csv` via `exp2_model_mean:shap:<metric>:<model>` | Ch.4 Contexto A, Ch.6 criterios | — | — | — |
+
+All three rows are enforced by `scripts/pubs/verify_claims.py`; the four superseded
+cost ranges are held retired (`F02.*`) and the withdrawn kernel-independence
+wording is held retired (`F01.lime.kernel_independence`).

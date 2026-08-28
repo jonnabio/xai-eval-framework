@@ -1294,9 +1294,18 @@ nor changes the fidelity ordering. A companion \texttt{kernel\_width}
 probe (Supplementary Table~S2) shows that widths below $3.0$ instead
 produce degenerate zero-weight explanations, confirming that the
 reference setting is the minimum viable configuration rather than a
-conservative choice. Both probes indicate the instability is structural
-to LIME's local surrogate fitting under Gaussian perturbation, not an
-artifact of insufficient compute.
+conservative choice. The same probe, however, bounds the claim from the
+other side: widening the kernel to $10.0$ recovers stability to $0.664$
+at the cost of fidelity ($0.518 \rightarrow 0.441$), so the near-zero
+reading is specific to the reference kernel rather than intrinsic to the
+method. Taken together with the cross-dataset extension above, where LIME
+reaches $0.85$--$0.93$ at that same reference width, the two probes
+support a bounded conclusion: under the reference configuration in
+Adult's 103-dimensional one-hot space, LIME's instability is a property
+of its local surrogate fitting under Gaussian perturbation and not an
+artifact of insufficient compute --- but it is modulated by both kernel
+width and feature-space geometry, and should not be read as a
+configuration-independent property of LIME.
 
 \paragraph{Feature correlation and out-of-distribution masking.}
 The Adult Income dataset contains moderate-to-strong inter-feature
