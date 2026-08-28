@@ -92,11 +92,15 @@ tamaños de efecto de magnitud muy grande ($d_z > 2.8$) y sin excepciones en
 había asumido pero raramente demostrado: las dimensiones de calidad de las
 explicaciones XAI son parcialmente independientes y no sustituibles entre sí
 [@pawlicki2024; @bhattacharya2024; @burger2023]. Específicamente, la inestabilidad de LIME no
-es un artefacto de escenarios extremos sino una propiedad estructural del
-método bajo condiciones controladas. Esta demostración cuantifica el riesgo
-de usar LIME en contextos donde se exija consistencia explicativa (auditoría,
-decisiones de alto riesgo), un riesgo que los trabajos de referencia sobre LIME
-[@ribeiro2016] no cuantifican en benchmarks multi-métricos.
+es un artefacto de escenarios extremos ni de un presupuesto de muestreo
+insuficiente, sino una propiedad reproducible del método bajo las condiciones
+controladas del benchmark —y, como delimitan §sec-limitaciones y §sec-exp3-nota,
+una propiedad del par (configuración, espacio de características) más que del
+método en abstracto. Esta demostración cuantifica el riesgo de usar LIME en
+contextos donde se exija consistencia explicativa (auditoría, decisiones de alto
+riesgo) sin haber medido antes su estabilidad en el espacio de despliegue, un
+riesgo que los trabajos de referencia sobre LIME [@ribeiro2016] no cuantifican
+en benchmarks multi-métricos.
 
 La taxonomía desarrollada en el Capítulo 5 complementa este hallazgo empírico con un marco
 conceptual que organiza el espacio de métricas de evaluación en cuatro ejes
@@ -205,7 +209,7 @@ usuarios finales.
 
 *Artefacto de parsimonia.* El parámetro `num_features = 10` de LIME actúa como techo rígido sobre el número de características activas devueltas. La parsimonia de LIME es, por tanto, un artefacto de configuración, no una propiedad emergente del modelo sustituto local. Las comparaciones de parsimonia con métodos sin restricción explícita deben interpretarse en este contexto.
 
-*Inestabilidad estructural de LIME.* La inestabilidad de LIME (CV = 86.2%, similitud coseno media ≈ 0.014) fue examinada sistemáticamente variando `num_samples` ∈ {500, 1000, 2000}: la estabilidad permanece cercana a cero en todos los niveles, descartando que el resultado sea un artefacto de convergencia. Un análisis adicional de sensibilidad a `kernel_width` ∈ {0.25, 0.75, 3.0, 10.0} muestra que los valores inferiores a 3.0 producen pesos degenerados (cero) en el espacio de características preprocesado de 103 dimensiones, confirmando que la referencia es el mínimo viable y que la inestabilidad es estructural, no dependiente de la configuración del kernel (Apéndice C).
+*Alcance de la inestabilidad de LIME.* La inestabilidad de LIME observada en EXP2 (CV = 86.2%, similitud coseno media ≈ 0.014) fue examinada sistemáticamente variando `num_samples` ∈ {500, 1000, 2000}: la estabilidad permanece cercana a cero en todos los niveles, lo que descarta que el resultado sea un artefacto de convergencia del muestreo. La sensibilidad al ancho del kernel, en cambio, sí es sustantiva. Un análisis a `kernel_width` ∈ {0.25, 0.75, 3.0, 10.0} muestra que los valores inferiores a 3.0 producen pesos degenerados (cero) en el espacio de características preprocesado de 103 dimensiones —de modo que 3.0 es el mínimo viable— pero que `kernel_width = 10.0` recupera una estabilidad de 0.664 a costa de la fidelidad, que desciende de 0.518 a 0.441 (Apéndice C, @tbl-appendix-lime-kw-sensitivity). El resultado debe enunciarse, por tanto, con su condición de producción: bajo la configuración de referencia y en el espacio de 103 dimensiones de Adult Income, las explicaciones de LIME son casi ortogonales entre réplicas; no se trata de una propiedad universal del método, sino de una propiedad del par (configuración, espacio de características). La validación cruzada de EXP3 (§sec-exp3-nota) confirma esta lectura desde el otro extremo: con el mismo `kernel_width = 3.0`, LIME alcanza estabilidades de 0.748–0.927 en Breast Cancer y German Credit. La consecuencia práctica no es más débil, sino más accionable: la estabilidad de LIME no puede presuponerse a partir de la literatura ni de este benchmark, debe medirse en el espacio de características y la configuración del despliegue concreto.
 
 *Sesgo de enmascaramiento y correlaciones de características.* La métrica de fidelidad enmascara características individualmente sustituyéndolas por valores de referencia medios. En el dataset Adult Income, pares como `education`/`education-num` ($r = 1.0$) y `occupation`/`education` (Cramér's $V \approx 0.34$) están moderadamente correlacionados. El enmascaramiento independiente de características correlacionadas genera instancias fuera de la distribución de entrenamiento, lo que puede sesgar la estimación de la importancia de características al hacer que el modelo reciba combinaciones de valores implausibles. No puede descartarse que parte de la brecha de fidelidad SHAP-LIME refleje sensibilidad diferencial a este sesgo en lugar de diferencias puras de calidad de atribución.
 
@@ -355,17 +359,26 @@ avanzar de la proliferación de métricas hacia la acumulación sistemática de
 evidencia [@pawlicki2024; @canha2025; @bhattacharya2024].
 
 La implicación más amplia de esta tesis trasciende el contexto experimental.
-El hallazgo de que LIME exhibe inestabilidad estructural —no marginal, sino
-sistemática, con CV=86.2% y similitud coseno media de 0.014— es relevante para
-cualquier sistema de apoyo a la decisión que emplee LIME en entornos de
-auditoría, regulación o alto riesgo. El contexto normativo actual (EU AI Act,
-GDPR Art. 22) demanda explicaciones verificables y consistentes; un método que
-produce explicaciones casi ortogonales entre dos ejecuciones de la misma
-instancia no satisface ese requisito. Esta conclusión, sostenida por 75 pares
-de contraste con efecto $d_z = 3.002$, es la afirmación de mayor impacto
-práctico de la tesis: no es un argumento teórico contra LIME, sino una
-cuantificación empírica de su riesgo en el tipo de despliegue que la regulación
-exige evaluar.
+El hallazgo de que LIME puede exhibir inestabilidad casi total —no marginal,
+sino sistemática, con CV=86.2% y similitud coseno media de 0.014 bajo la
+configuración de referencia en el espacio de 103 dimensiones de Adult Income—
+es relevante para cualquier sistema de apoyo a la decisión que emplee LIME en
+entornos de auditoría, regulación o alto riesgo. El contexto normativo actual
+(EU AI Act, GDPR Art. 22) demanda explicaciones verificables y consistentes; un
+método que produce explicaciones casi ortogonales entre dos ejecuciones de la
+misma instancia no satisface ese requisito. La implicación operativa, sin
+embargo, no es que LIME deba descartarse universalmente: EXP3 muestra
+estabilidades de 0.748–0.927 en espacios de menor dimensión con la misma
+configuración, y el ancho del kernel modula el resultado dentro de un mismo
+espacio (§sec-limitaciones). La conclusión defendible —sostenida por 75 pares
+de contraste con efecto $d_z = 3.002$ y delimitada por ambos análisis— es que la
+estabilidad de LIME es una propiedad contingente del despliegue y no puede
+presuponerse: en un régimen regulatorio que exige consistencia, debe medirse y
+documentarse para el espacio de características y la configuración concretos
+antes de admitir el método como evidencia. Esta es la afirmación de mayor
+impacto práctico de la tesis: no es un argumento teórico contra LIME, sino la
+especificación empírica de qué debe verificarse antes de usarlo en el tipo de
+despliegue que la regulación exige evaluar.
 
 El camino hacia la excelencia en evaluación XAI no pasa por proponer una métrica
 adicional ni por declarar un método dominante universal. Pasa por construir la
