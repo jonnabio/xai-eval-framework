@@ -82,13 +82,36 @@ perturbación local ($\{500, 1000, 2000\}$) manteniendo `kernel_width = 3.0` y
 | 1000 (referencia) | 0.461 | 0.014 | 226 | 0.085 |
 | 2000 | 0.459 | 0.016 | 451 | 0.085 |
 
-: Sensibilidad de LIME a `num_samples` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-sensitivity}
+: Sensibilidad de LIME a `num_samples` (RF, semilla 42, $N=100$). Medición
+exploratoria histórica: sus valores no han podido re-derivarse bajo el entorno
+actual (véase la nota de procedencia siguiente). {#tbl-appendix-lime-sensitivity}
 
 La fidelidad de LIME es insensible a `num_samples` (variación < 2%);
 la estabilidad permanece cercana a cero en todos los niveles. El coste escala
-aproximadamente de forma lineal. Este resultado confirma que la inestabilidad
-estructural de LIME no se resuelve aumentando el número de muestras, sino que
+aproximadamente de forma lineal. Este resultado indica que la inestabilidad
+de LIME no se resuelve aumentando el número de muestras, sino que
 es inherente a la variabilidad del proceso de muestreo local.
+
+*Nota de procedencia y alcance.* Esta sonda es una medición exploratoria
+anterior cuyo artefacto de salida no se conserva en el repositorio, a diferencia
+de la sonda de `kernel_width` (@tbl-appendix-lime-kw-sensitivity), que se
+re-deriva de `outputs/analysis/lime_kernel_width_sensitivity.csv`. Ambas tablas
+declaran la misma condición de referencia (RF, semilla 42, $N=100$,
+`num_samples = 1000`, `kernel_width = 3.0`) pero reportan valores distintos para
+ella —fidelidad 0.461 frente a 0.518, estabilidad 0.014 frente a 0.000, coste
+226 ms frente a 30 ms—, lo que indica que fueron ejecutadas con instrumentaciones
+distintas: el coste de ambas queda además por debajo del rango observado para
+LIME sobre RF en EXP2 (300–919 ms por ejecución), de modo que ninguna de las dos
+mide una ejecución completa del protocolo EXP2. Las dos sondas se reportan aquí
+por su valor cualitativo —la dirección del efecto de `num_samples` y de
+`kernel_width`— y no como estimaciones puntuales comparables entre sí ni con las
+medias de EXP2. La conclusión que ambas sostienen conjuntamente, y que sí es
+robusta a esta discrepancia, es direccional: aumentar `num_samples` no recupera
+estabilidad, mientras que ampliar `kernel_width` sí lo hace a costa de fidelidad.
+Re-ejecutar la sonda de `num_samples` produciría una medición nueva y no una
+reproducción de esta tabla, dado que el script de sensibilidad conservado
+(`src/scripts/run_sensitivity_analysis.py`) recorre una rejilla distinta
+($\{500, 1000, 2000, 5000, 10000\}$) sobre la configuración base de EXP1.
 
 **SHAP — sensibilidad al tamaño del conjunto de referencia.** Se varía el
 número de instancias de referencia del `KernelExplainer` ($\{25, 50, 100\}$)
