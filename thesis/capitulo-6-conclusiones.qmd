@@ -115,11 +115,23 @@ el espacio experimental del benchmark.
 
 Los resultados del benchmark son suficientemente consistentes para formular
 criterios de selección prescriptivos en lugar de simples "recomendaciones
-contextuales":
+contextuales". El carácter prescriptivo se refiere a la firmeza del criterio
+dada la evidencia, no a su alcance: cada criterio queda condicionado a las
+condiciones del benchmark especificadas en @tbl-fronteras-generalizacion
+—dataset Adult Income, clasificación tabular binaria, las cinco familias de
+modelo evaluadas y las operacionalizaciones métricas del Capítulo 3— y ninguno
+se extiende a preferencias de usuarios finales, dominios regulados con
+restricciones normativas propias ni criterios de comprehensibilidad. Con esa
+delimitación:
 
 **SHAP debe seleccionarse** como método primario en cualquier aplicación que
-requiera fidelidad verificable ($\bar{F} \geq 0.80$) o consistencia
-explicativa ($\bar{S} \geq 0.70$). Para modelos basados en árboles, TreeSHAP
+requiera fidelidad o consistencia explicativa verificables, con la condición de
+comprobar el umbral en la familia de modelo concreta. Sobre la media global SHAP
+satisface $\bar{F} = 0.808 \geq 0.80$ y $\bar{S} = 0.732 \geq 0.70$, pero la
+media global no es el criterio operativo: por familia, la fidelidad alcanza
+$\geq 0.80$ solo en logreg (0.946) y SVM (0.882), y la estabilidad alcanza
+$\geq 0.70$ solo en logreg (0.880), RF (0.949) y SVM (0.925), descendiendo a
+0.575 en XGBoost y 0.331 en MLP. Para modelos basados en árboles, TreeSHAP
 reduce el coste en dos o tres órdenes de magnitud respecto a KernelSHAP —21 ms
 por instancia en XGBoost y 2,820 ms en Random Forest, frente a 54,231 ms en SVM—
 lo que hace esta elección también la más eficiente en XGBoost.

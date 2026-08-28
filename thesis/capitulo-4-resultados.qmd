@@ -572,9 +572,16 @@ decisión:
 
 **Contexto A — Alta fidelidad, sin restricción de latencia** (p. ej., auditoría
 regulatoria, análisis forense de decisiones): SHAP es la opción con mejor
-evidencia empírica de fidelidad ≥ 0.80 y estabilidad ≥ 0.70. Para modelos
-basados en árboles (XGBoost, RF), el coste de TreeSHAP hace esta elección
-también eficiente. Para SVM y redes neuronales, la latencia de KernelSHAP
+evidencia empírica en ambas dimensiones, pero el umbral operativo debe
+verificarse por familia de modelo y no sobre la media global. La media de
+fidelidad de SHAP (0.808) supera 0.80, y la de estabilidad (0.732) supera 0.70;
+por familia, sin embargo, solo logreg (0.946) y SVM (0.882) alcanzan
+fidelidad ≥ 0.80, y solo logreg (0.880), RF (0.949) y SVM (0.925) alcanzan
+estabilidad ≥ 0.70. En XGBoost la estabilidad desciende a 0.575 y en MLP a
+0.331, de modo que un requisito de consistencia explicativa no queda garantizado
+en esas dos familias por el mero hecho de elegir SHAP. Para modelos
+basados en árboles, el coste de TreeSHAP hace esta elección también
+eficiente. Para SVM y redes neuronales, la latencia de KernelSHAP
 puede requerir infraestructura de cómputo dedicada o ejecución asíncrona.
 
 **Contexto B — Velocidad crítica, consistencia explicativa no requerida** (p.
