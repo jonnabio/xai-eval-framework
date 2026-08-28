@@ -364,9 +364,15 @@ comparación entre instancias.
 
 Anchors tiene una cobertura de solo 57 celdas calificadas (76.0%), lo que
 refleja que en los estratos de mayor incertidumbre el algoritmo de búsqueda de
-reglas no converge a una regla con la precisión mínima exigida. Sobre los bloques
-calificados, la fidelidad media es 0.388 y la estabilidad 0.052, ambas
-inferiores a las de SHAP y LIME. El coste es el más elevado del benchmark y muy
+reglas no converge a una regla con la precisión mínima exigida. Sobre las 57
+ejecuciones calificadas, la fidelidad media es 0.388 y la estabilidad 0.052,
+ambas inferiores a las de SHAP y LIME. Estos valores son medias a nivel de
+ejecución; las medias a nivel de bloque $(g, n)$ que alimentan el test de
+Friedman son 0.389 y 0.043 (@tbl-friedman-fidelity, @tbl-friedman-stability). La
+discrepancia en estabilidad —0.052 frente a 0.043— es específica de Anchors y
+refleja que su cobertura se distribuye de forma desigual entre bloques, de modo
+que promediar ejecuciones y promediar bloques no son operaciones equivalentes;
+para SHAP y LIME, con cobertura completa, ambas agregaciones coinciden. El coste es el más elevado del benchmark y muy
 variable: media global de 38,159 ms, con medias por familia de modelo desde
 2,918 ms para logreg hasta 48,955 ms para RF y 57,705 ms para XGBoost. El comportamiento
 de Anchors refleja la dificultad intrínseca de encontrar reglas locales

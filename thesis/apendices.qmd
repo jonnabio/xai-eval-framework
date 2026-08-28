@@ -135,13 +135,18 @@ sin incurrir en el coste computacional de referencias mayores.
 de precisión mínima para aceptar una regla ($\{0.90, 0.95, 0.99\}$) sobre el
 modelo RF.
 
-| $\tau$ | Cobertura de celdas | Fidelidad (media) | Coste (ms) |
+| $\tau$ | Cobertura del diseño completo (75 celdas) | Fidelidad (media) | Coste (ms) |
 |:--|--:|--:|--:|
 | 0.90 | 72/75 (96%) | 0.421 | 9,843 |
 | 0.95 (referencia) | 57/75 (76%) | 0.386 | 16,000 |
 | 0.99 | 31/75 (41%) | 0.411 | 28,721 |
 
-: Sensibilidad de Anchors al umbral de precisión $\tau$ (RF, semilla 42). {#tbl-appendix-anchors-sensitivity}
+: Sensibilidad de Anchors al umbral de precisión $\tau$. **Las dos columnas
+tienen alcances distintos**: la cobertura se computa sobre las 75 celdas del
+diseño completo de Anchors (5 modelos $\times$ 5 semillas $\times$ 3 tamaños) —de
+ahí que la fila de referencia coincida exactamente con el 57/75 = 76.0% de
+@tbl-coverage-method—, mientras que la fidelidad y el coste corresponden a la
+condición de sondeo RF, semilla 42. {#tbl-appendix-anchors-sensitivity}
 
 La cobertura de Anchors es extremadamente sensible a $\tau$: reducir el umbral
 a 0.90 aumenta la cobertura de 76% a 96%, mientras que elevar a 0.99 la reduce
