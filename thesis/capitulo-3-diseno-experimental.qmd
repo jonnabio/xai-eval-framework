@@ -435,14 +435,51 @@ la métrica con menor estadístico (Coste) es:
 
 $$\text{Margen} = \frac{30.44 - 7.81}{7.81} \times 100\% = 290\%$$
 
-Incluso asumiendo una reducción del poder del 50% —hipótesis conservadora que
-supera la inflación de varianza calculada— el estadístico de Coste sería
-$\chi^2 \approx 15.2$ ($p \approx 0.0016$), significativo al nivel
-$\alpha = 0.05$.
+Para acotar el margen de forma explícita se aplica una prueba de esfuerzo
+deliberadamente severa sobre la métrica menos favorable: se divide por dos el
+estadístico observado de Coste, una degradación que excede con holgura la
+inflación de varianza calculada de 1.47. El resultado sigue siendo significativo:
+
+$$\chi^2_{\text{estrés}} = \frac{30.44}{2} = 15.22 \;\Rightarrow\;
+p = P\!\left(\chi^2_3 > 15.22\right) = 0.0016 < 0.05$$
+
+Conviene precisar qué operación es esta y qué no es. Dividir el estadístico por
+dos no equivale a una reducción del poder del 50%: es una degradación directa de
+la evidencia observada, aplicada como cota inferior conservadora. Bajo la
+interpretación alternativa —reducir a la mitad el parámetro de no centralidad
+$\lambda = \chi^2_F - gl = 27.44$, de modo que $\mathbb{E}[\chi^2] = gl +
+\lambda/2 = 16.72$— la conclusión es todavía más holgada ($p = 0.0008$). Ambas
+lecturas dejan el estadístico por encima del umbral crítico
+$\chi^2_{0.05,3} = 7.815$, de modo que la significación de Coste no depende de
+cuál de las dos se adopte.
 
 **Integridad del análisis pareado del Estudio B.** Con cobertura completa de
 SHAP (75/75) y LIME (75/75), la cobertura pareada del Estudio B es del 100%.
 Los datos faltantes de Anchors y DiCE **no afectan** al Estudio B.
+
+**Dirección del sesgo de selección en Anchors.** El análisis anterior cuantifica
+el efecto de la cobertura reducida sobre la *varianza* de los estimadores, pero
+la ausencia de datos en Anchors no es aleatoria y exige además una consideración
+sobre el *sesgo*. Las 18 celdas ausentes lo están porque el algoritmo no
+convergió a una regla con precisión $\geq \tau$ dentro del límite de búsqueda:
+la ausencia depende del resultado que se habría observado, es decir, es
+*missing not at random* (MNAR) y se concentra en los estratos de mayor
+incertidumbre local, precisamente aquellos en los que Anchors habría obtenido
+previsiblemente sus peores métricas. La consecuencia es direccional: las medias
+de calidad reportadas para Anchors son, con toda probabilidad, **optimistas**
+respecto a su rendimiento sobre el conjunto completo de celdas intentadas.
+
+El análisis de sensibilidad al umbral (@tbl-appendix-anchors-sensitivity) ofrece
+una estimación empírica de la magnitud de este efecto. Al relajar $\tau$ de 0.95
+a 0.90, la cobertura asciende de 57/75 (76%) a 72/75 (96%) y la fidelidad media
+*aumenta* de 0.386 a 0.421 —no disminuye—, lo que confirma que las celdas
+recuperadas al relajar el criterio no son las de peor calidad bajo la métrica de
+correlación de importancias, sino que el umbral y la métrica de fidelidad no
+están alineados. El sesgo existe, por tanto, pero su magnitud es moderada y su
+dirección no invalida la posición de Anchors en el ordenamiento: el método ya
+ocupa la tercera o cuarta posición incluso bajo esta estimación potencialmente
+favorable. Esta consideración refuerza —no debilita— la cautela con la que el
+Capítulo 6 recomienda el uso de Anchors.
 
 **Conclusión.** El impacto estadístico de los 25 artefactos analíticamente
 ausentes es mínimo: los tests de Friedman permanecen significativos con
