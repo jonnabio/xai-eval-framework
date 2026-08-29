@@ -448,3 +448,65 @@ carrying the quantity, not to the thesis alone.
 - **F06**: does a numbered list of construct gaps (Brecha 1, 2, 3) exist in a draft that did not
   make it into the current Ch.5, or was "Brecha 3" always shorthand for the semantic-evaluation
   gap alone?
+
+---
+
+# Addendum — 2026-08-28, post-remediation
+
+All 13 findings above are closed. Two further defects were found **by the F13
+coverage check itself**, while sweeping Chapter 4 (T5.2), and are recorded here
+for completeness. Neither was reachable by reading the manuscript: both required
+re-deriving a number that no registry entry had ever claimed.
+
+### F14 [minor] — D6 (Methodological Rigor) — *found by the F13 sweep, fixed*
+
+- **Location**: `capitulo-4-resultados.qmd` @tbl-claim-traceability, P1 row; and
+  `apendices.qmd` Appendix D closing paragraph.
+- **Evidence**: both cited
+  `experiments/exp1_adult/reproducibility/reproducibility_report.csv` as the artifact
+  behind @tbl-cv-p1.
+- **Observation**: that artifact is a different cohort — `n_runs = 9` per configuration,
+  `rf`/`xgb` only — and its values do not match the table (e.g. it gives RF/SHAP fidelity
+  0.737 and stability 0.942, against the table's 0.732 and 0.948). All twelve printed
+  values re-derive **exactly** from `exp2_run_level_metrics.csv`, RF/$N=100$ stratum, five
+  seeds, sample standard deviation: 0.7315/0.0058/0.80%, 0.9478/0.0067/0.71%,
+  0.4606/0.0121/2.62%, 0.0176/0.0151/86.15%.
+- **Reasoning**: the numbers were always correct; the provenance pointer was not — in the
+  table whose entire purpose is to demonstrate FOM-7 gate 7. An examiner who followed the
+  citation to check P1 would not find these numbers there.
+- **Fix applied**: both attributions corrected to the EXP2 run-level table, with the EXP1
+  report retained as the complementary gate-6 dispersion profile it actually is;
+  @tbl-results-overview's "CV sobre EXP1" relabelled "CV sobre el estrato replicado". All
+  twelve values registered (`p1.*`) behind new `exp2_subset_{mean,sd,cv}` resolvers.
+
+### F15 [minor] — D1 (Evidence Relevance) — *found by the F13 sweep, fixed*
+
+- **Location**: `capitulo-4-resultados.qmd` §sec-p1 closing paragraph and §sec-discusion.
+- **Evidence**: *"el CV en fidelidad para todos los métodos y modelos oscila entre 12.0%
+  (LIME) y 12.8% (SHAP)"*.
+- **Observation**: LIME's figure is right (pooled CV 11.96%). SHAP's is not: the pooled CV
+  is **11.43%**, and no aggregation tested — pooled sample or population SD, mean or median
+  of per-stratum CVs, mean or median of per-model CVs — reproduces 12.8%. More importantly
+  the comparison is **inverted**: SHAP is the *more* reproducible of the two, not the less,
+  so the sentence presented SHAP as the upper bound of a range it actually floors.
+- **Reasoning**: P1 is unaffected — both values sit far below the 15% threshold — but the
+  sentence is offered as evidence that seed variability is "controlada y uniforme", and it
+  misstates which method is more variable, in a chapter whose thesis is that SHAP is the
+  more dependable method.
+- **Fix applied**: corrected to 11.4% (SHAP) and 12.0% (LIME) at both sites, with the
+  ordering stated explicitly; registered as `exp2.pooled_cv.*` behind a new
+  `exp2_pooled_cv` resolver.
+
+### What this says about F13
+
+F13 was filed as a process observation — a green verifier reading as broader assurance than
+it was. Acting on it immediately produced two real defects in the chapter that four prior
+audits (2026-08-11, 08-22, 08-23, 08-28) had all read past, in a document already covered
+by two regression guards. That is the argument for extending `[coverage]` to the remaining
+manuscript files rather than treating Chapter 4 as a one-off.
+
+**Coverage status**: `thesis/capitulo-4-resultados.qmd` fully registered (90 unregistered
+literals → 0; registry 84 → 138 claims, 159 → 219 sites). Ch.3, Ch.5, Ch.6, `apendices.qmd`,
+Paper A, Paper B+C and the supplementary are **not yet swept** — each should be added to
+`[coverage]` one at a time, triaged with `--coverage-report`, before RCA-001 Phase 2's macro
+generation.

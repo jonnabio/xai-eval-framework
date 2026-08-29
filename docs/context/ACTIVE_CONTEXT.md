@@ -249,9 +249,9 @@ manuscript-editing support tooling.
 0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
    script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
    disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
-0c. [x] **Thesis rigor review 2026-08-28 remediation — DONE 2026-08-28.** All 3 major,
-   6 minor and 2 of 4 suggestions closed in 8 atomic commits (e7d1f01f4..dd589660c);
-   F10 and F11 remain open as accepted suggestions. Plan:
+0c. [x] **Thesis rigor review 2026-08-28 remediation — COMPLETE 2026-08-28.** All 13
+   findings closed in 11 commits (e7d1f01f4..35eccb62b), plus F14/F15 found and fixed by
+   the new coverage check. Plan:
    `docs/planning/thesis_rigor_remediation_plan_2026-08-28.md` (Architect, 2026-08-28).
    Blast radius verified: **F02 and F04 are thesis-only** (Paper A carries only the registered
    aggregate costs); only F01 crosses documents, into one Paper B+C paragraph (~l.1297);
@@ -313,6 +313,39 @@ manuscript-editing support tooling.
   references; the four retired cost ranges absent from all sources.
   Still open: F10 (chi2~15.2 underived) and F11 (Anchors MNAR bias direction) as
   accepted suggestions, and F13 -> Task 3.
+
+- **Mode (2026-08-28, fourth pass):** EXECUTION — Phases 4 and 5 of the remediation plan.
+  **All 13 review findings now closed** (F10 `df49569b0`, F11 same commit, F13 `35eccb62b`).
+  F10's figure turned out to be arithmetically exact but mislabelled: 30.44/2 = 15.22 and
+  P(chi2_3 > 15.22) = 0.0016 is *halving the statistic*, not a 50% power reduction. The
+  passage now shows the operation and adds the noncentrality reading (16.72, p = 0.0008) so
+  the conclusion holds under either. F11 bounded the Anchors MNAR bias empirically with the
+  tau=0.90 row: coverage 76->96% and fidelity 0.386->0.421, so the bias is real, moderate,
+  and does not move Anchors off third/fourth.
+  **F13 built the check that closes the defect class.** `verify_claims.py` gained a fourth
+  check, `_check_coverage`: for files listed under `[coverage]` in the registry, every
+  result-shaped numeric literal must be registered, retired, `[[unbacked]]`, or declared
+  structural. `[[unbacked]]` is the escape hatch and the point — "we cannot re-derive this"
+  becomes a reviewable entry with a reason instead of a silent gap. `--coverage-report`
+  triages a new file without failing. Negative-tested: an invented "4,321.9" in Ch.4 fails
+  with exit 1.
+  **The Ch.4 sweep found two more defects that four prior audits read past.**
+  **F14:** the P1 table is attributed to the wrong artifact — `tbl-claim-traceability` and
+  Appendix D both cited `exp1_adult/reproducibility/reproducibility_report.csv`, a different
+  cohort (n_runs=9, rf/xgb only, RF/SHAP fidelity 0.737 vs the table's 0.732). All twelve
+  values re-derive exactly from the EXP2 run-level table, RF/N=100, five seeds, sample SD.
+  Numbers right, provenance pointer wrong — in the table that demonstrates FOM-7 gate 7.
+  **F15:** the pooled fidelity CV was wrong and the comparison inverted. LIME's 12.0% is
+  right (11.96%); SHAP is 11.43%, not 12.8%, and no aggregation tested reproduces 12.8. SHAP
+  is the *more* reproducible of the two, not the less. Both corrected and registered.
+  Registry 84 -> 138 claims, 159 -> 219 sites, via 9 new resolvers (exp2_subset_{mean,sd,cv},
+  exp2_n_mean, exp2_pooled_cv, exp2_sd, exp2_block_sd, friedman_rank,
+  wilcoxon_{meandiff,sd}). RCA-001 gained two invariants and a review trigger.
+  **Coverage is Ch.4 only.** Ch.3, Ch.5, Ch.6, apendices, Paper A, Paper B+C and the
+  supplementary are NOT swept — add them to `[coverage]` one at a time, triage with
+  `--coverage-report`, before RCA-001 Phase 2's macro generation. F14/F15 are the argument
+  for doing it: one swept file yielded two defects in a document already under two guards.
+  All four outputs rebuilt clean; all three verifiers green; crossrefs 70 labels / 0 dangling.
 
 ## Active Constraints
 - .ace/standards/coding.md

@@ -42,6 +42,8 @@ guards:
       - "No value retired by an audit reappears in any manuscript"
       - "Every artifact path a manuscript cites exists in the working tree, not only on a side branch"
       - "The aggregation level (block-level vs run-level, mean vs median) is stated wherever a number is reported"
+      - "Every result-shaped numeric literal in a file listed under [coverage] is registered, retired, annotated [[unbacked]], or declared structural -- absence of registration is a failure, not a silence (added 2026-08-28, review F13)"
+      - "A claim-traceability row names the artifact the number is actually derived from, not a related artifact from a different cohort (added 2026-08-28, review F14)"
 
     # Tests that verify the fix
     tests:
@@ -54,6 +56,7 @@ guards:
     # Trigger: what should cause a review
     review_triggers:
       - "Any edit to a manuscript body containing a numeric result"
+      - "Adding a file to [coverage] in pub/claim_registry.toml (run --coverage-report first and triage)"
       - "Any re-run of an experiment that regenerates outputs/analysis/"
       - "Adding or removing an artifact path from a Code and Artifact Availability section"
       - "Merging experiment-result branches into a publication branch"
