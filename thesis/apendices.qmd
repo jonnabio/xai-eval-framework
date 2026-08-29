@@ -168,12 +168,13 @@ importancias.
 
 : Sensibilidad de LIME a `kernel_width` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-kw-sensitivity}
 
-Los valores 0.25 y 0.75 son completamente degenerados en el espacio de características preprocesado de 103 dimensiones: el radio del vecindario es inferior a las distancias típicas entre instancias una vez aplicada la codificación one-hot y la estandarización, y LIME no puede ajustar ningún modelo sustituto local con señal apreciable. La referencia (`kernel_width = 3.0`) produce pesos no nulos en el 96% de las instancias y una fidelidad de 0.518, pero la estabilidad bajo perturbaciones de $\sigma = 0.1$ es prácticamente nula (consistente con los hallazgos de EXP2). El valor `kernel_width = 10.0` produce explicaciones válidas en el 100% de las instancias y una estabilidad de 0.664, pero a costa de menor fidelidad (0.441) porque el vecindario más amplio promedia regiones de decisión heterogéneas. Estos resultados confirman que `kernel_width = 3.0` es el valor mínimo viable en este espacio de características y que la inestabilidad de LIME no es un artefacto de este parámetro sino una propiedad estructural del método en datos tabulares de alta dimensión.
+Los valores 0.25 y 0.75 son completamente degenerados en el espacio de características preprocesado de 103 dimensiones: el radio del vecindario es inferior a las distancias típicas entre instancias una vez aplicada la codificación one-hot y la estandarización, y LIME no puede ajustar ningún modelo sustituto local con señal apreciable. La referencia (`kernel_width = 3.0`) produce pesos no nulos en el 96% de las instancias y una fidelidad de 0.518, pero la estabilidad bajo perturbaciones de $\sigma = 0.1$ es prácticamente nula (consistente con los hallazgos de EXP2). El valor `kernel_width = 10.0` produce explicaciones válidas en el 100% de las instancias y una estabilidad de 0.664, pero a costa de menor fidelidad (0.441) porque el vecindario más amplio promedia regiones de decisión heterogéneas. Estos resultados delimitan el alcance del hallazgo de EXP2 en dos direcciones. Por un lado, la inestabilidad observada bajo la configuración de referencia no se debe a una calibración deficiente del kernel: reducir el ancho no la corrige, sino que degenera las explicaciones, y `kernel_width = 3.0` es el valor mínimo viable en este espacio. Por otro, tampoco es independiente de ese parámetro: ampliar el kernel a 10.0 recupera una estabilidad de 0.664 a costa de localidad y de fidelidad. La lectura conjunta es que la estabilidad de LIME en datos tabulares de alta dimensión depende del par (ancho de kernel, espacio de características) y debe medirse para la configuración concreta de despliegue, no presuponerse.
 
 En conjunto, estos análisis muestran que los resultados principales (SHAP
-superior a LIME en fidelidad y estabilidad; inestabilidad de LIME estructural)
-son robustos a variaciones razonables de los hiperparámetros dentro de los
-rangos explorados. La excepción es la cobertura de Anchors, que cambia
+superior a LIME en fidelidad y estabilidad; estabilidad de LIME casi nula bajo
+la configuración de referencia) son robustos a variaciones razonables de los
+hiperparámetros dentro de los rangos explorados, con la excepción explícita del
+ancho de kernel, que sí modifica sustancialmente la estabilidad de LIME. La excepción es la cobertura de Anchors, que cambia
 significativamente con $\tau$ y debe tratarse como un parámetro de diseño
 explícito, no como un valor predeterminado.
 

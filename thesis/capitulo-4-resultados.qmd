@@ -291,8 +291,8 @@ pero el CV es elevado precisamente porque el denominador es cercano a cero. Un
 CV del 86% sobre una media de 0.018 equivale a una incertidumbre absoluta de
 $\pm 0.015$, que en la escala de similitud coseno es trivial. La proposición P1
 se satisface para las métricas con señal sustantiva; la excepción de LIME-
-estabilidad es una consecuencia de la inestabilidad estructural del método, no
-de la irreproducibilidad del protocolo.
+estabilidad es una consecuencia de la inestabilidad del método bajo esta
+configuración, no de la irreproducibilidad del protocolo.
 
 Para la generalización global, el CV en fidelidad agrupando todas las
 ejecuciones calificadas de cada método es de 11.4% (SHAP) y 12.0% (LIME) —es
@@ -349,7 +349,8 @@ del benchmark. Su fortaleza operativa es la velocidad
 y la parsimonia de sus explicaciones, que facilitan la interpretación por parte
 de usuarios no técnicos.
 
-La limitación estructural de LIME es su estabilidad casi nula (0.014). La
+La limitación principal de LIME en este benchmark es su estabilidad casi nula
+(0.014) bajo la configuración de referencia. La
 hipótesis explicativa es conocida en la literatura: la perturbación por
 muestreo local genera distribuciones que difieren sustancialmente de instancia
 a instancia, haciendo que los coeficientes del modelo lineal local sean
@@ -518,8 +519,8 @@ sobre los 15 bloques $(g, n)$ del diseño factorial. Cada punto representa un
 bloque; la caja muestra el rango intercuartílico; la línea interna, la mediana.
 Para fidelidad, las cajas de SHAP y LIME no se solapan con las de Anchors y
 DiCE. Para estabilidad, la caja de LIME colapsa casi en cero (mediana ≈ 0.014),
-confirmando la inestabilidad estructural del método en todos los bloques del
-benchmark.](assets/figures/fig_boxplots_metricas_es.png){#fig-boxplots-metricas width=95%}
+confirmando que la inestabilidad afecta a todos los bloques del
+benchmark y no a un subconjunto de modelos.](assets/figures/fig_boxplots_metricas_es.png){#fig-boxplots-metricas width=95%}
 
 ![Diferencias pareadas $d_i = \text{SHAP} - \text{LIME}$ para fidelidad
 (izquierda) y estabilidad (derecha) sobre las 75 celdas $(g, s, n)$ del
@@ -620,7 +621,8 @@ primer lugar, confirman empíricamente sobre datos tabulares reales y con una
 batería multidimensional de métricas la jerarquía SHAP > LIME > Anchors en
 fidelidad, que ha sido asumida teóricamente pero rara vez demostrada bajo un
 diseño estadístico riguroso [@pawlicki2024; @altukhi2025]. En segundo lugar,
-documentan cuantitativamente la inestabilidad estructural de LIME, un hallazgo
+documentan cuantitativamente la inestabilidad de LIME bajo la configuración de
+referencia, un hallazgo
 que los estudios basados en fidelidad exclusiva sistemáticamente omiten
 [@bhattacharya2024]. En tercer lugar, demuestran que el protocolo FOM-7
 produce resultados reproducibles (CV < 3% en fidelidad para el subgrupo
