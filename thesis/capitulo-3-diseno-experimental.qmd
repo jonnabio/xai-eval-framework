@@ -324,7 +324,12 @@ de tiempo de ejecución. No se permiten modificaciones ad-hoc de configuración.
 **Puerta 3 — Auditoría de integridad de artefactos.** Inspección determinista
 de cada `results.json`: detección y exclusión de archivos vacíos, con esquema
 incompatible o con valores numéricos inválidos. Ningún artefacto excluido se
-reemplaza mediante reconstrucción sintética.
+reemplaza mediante reconstrucción sintética. Esta decisión descarta
+deliberadamente las estrategias de imputación habituales en presencia de datos
+faltantes [@adhikari2022]: imputar una métrica de calidad equivaldría a fabricar
+evidencia sobre el comportamiento de un explicador que no llegó a ejecutarse, de
+modo que la cobertura reducida se declara y se cuantifica (Sección 3.7) en lugar
+de completarse.
 
 **Puerta 4 — Armonización a tablas listas para el análisis.** Estandarización
 de claves y campos de métricas: las diferencias de esquema entre cohortes
@@ -661,11 +666,19 @@ sobre la misma instancia o configuración comparable.
 ciega (sin conocer la puntuación de los otros jueces) sobre siete dimensiones
 semánticas estructuradas mediante una rúbrica de escala 1–5 por dimensión
 (las siete dimensiones se enumeran en la Tabla @tbl-exp4-icc del Capítulo 5).
+El uso de modelos de lenguaje como instrumento de medida exige cautela: estos
+sistemas producen salidas fluidas y plausibles con independencia de su
+corrección factual, un modo de fallo ampliamente documentado en generación de
+lenguaje natural [@ji2022], por lo que su convergencia inter-juez debe
+establecerse empíricamente antes de tratarla como evidencia.
 
 **Análisis.** La fiabilidad inter-juez se cuantifica mediante la correlación
 intraclase ICC(1,1) —modelo de efectos aleatorios unidireccional, evaluador
 único— y el $\alpha$ de Krippendorff [@krippendorff2018], estadístico que tolera
-puntuaciones ausentes y admite escalas ordinales. El umbral de fiabilidad
+puntuaciones ausentes y admite escalas ordinales. Se prefieren ambos al
+coeficiente $\kappa$ de Cohen [@cohen1960] porque este último se define para dos
+evaluadores y escalas nominales, mientras que el diseño de EXP4 involucra tres
+jueces y puntuaciones ordinales de 1 a 5. El umbral de fiabilidad
 aceptable es
 $\geq 0.75$ [@koo2016], que corresponde a la categoría *good* o superior según
 los criterios de @koo2016.

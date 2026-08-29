@@ -98,12 +98,18 @@ atribuciones asignan importancia a características; las reglas buscan
 condiciones suficientes o patrones comprensibles; los sustitutos locales
 aproximan el comportamiento del modelo en un vecindario; los contrafactuales
 describen alternativas que cambiarían una decisión; las visualizaciones
-representan patrones agregados o activaciones. Esta pluralidad es una fortaleza
+representan patrones agregados o activaciones —como las curvas de expectativa
+condicional individual [@goldstein2014] o los gráficos de efectos locales
+acumulados [@apley2020], que describen el efecto marginal de una característica
+sobre el conjunto de datos en lugar de atribuir importancia a una predicción
+concreta—. Esta pluralidad es una fortaleza
 del campo, porque permite adaptar la explicación a objetivos distintos. Pero
 también es una fuente de dificultad evaluativa: una métrica apropiada para
 atribuciones no necesariamente evalúa bien reglas, y una métrica orientada a
 validez contrafactual no necesariamente mide fidelidad local de un sustituto
-[@arrieta2019a; @hedstrom2023].
+[@arrieta2019a; @hedstrom2023]. Esta tesis acota su evaluación a explicaciones
+locales por instancia, de modo que las familias de visualización global antes
+citadas quedan fuera de su alcance experimental.
 
 La literatura también distingue métodos agnósticos y específicos del modelo
 [@arrieta2019a; @linardatos2020]. Los métodos agnósticos tratan al predictor
@@ -456,7 +462,9 @@ cuidadosamente acotadas [@guidotti2018; @nauta2023].
 ### Anchors: reglas de alta precisión y límites de cobertura
 
 Anchors propone explicaciones en forma de reglas locales de alta precisión
-[@ribeiro2018]. En vez de asignar pesos a características, busca condiciones
+[@ribeiro2018], continuando una tradición que había explorado ya las reglas como
+formato explicativo mediante ensembles de reglas ajustados sobre el modelo
+predictivo [@friedman2008]. En vez de asignar pesos a características, busca condiciones
 que, cuando se cumplen, hacen que el modelo mantenga una predicción con alta
 probabilidad. La promesa de Anchors es comunicativa: una regla del tipo "si se
 cumplen estas condiciones, la predicción se mantiene" puede ser más accionable
@@ -677,7 +685,9 @@ La evaluación human-centered constituye una rama de la XAI que parte de una
 premisa metodológica distinta: la calidad de una explicación no puede medirse
 solo con proxies computacionales, sino que depende de su efecto sobre el
 entendimiento, la confianza, la calibración y la acción de personas concretas
-[@doshi-velez2017; @miller2019]. Esta perspectiva no invalida la evaluación
+[@doshi-velez2017; @miller2019]. Esta premisa enlaza con una línea previa que ya
+situaba a la persona como participante activo del ciclo de aprendizaje, y no como
+receptor pasivo de su salida [@amershi2014]. Esta perspectiva no invalida la evaluación
 functionally-grounded, sino que la complementa al señalar que las métricas
 automáticas responden a preguntas distintas a las que responden los usuarios.
 
