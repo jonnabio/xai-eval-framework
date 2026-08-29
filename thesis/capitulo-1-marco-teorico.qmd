@@ -100,7 +100,7 @@ comparación de métodos XAI en contextos de datos tabulares.
    [@lundberg2017; @ribeiro2016; @ribeiro2018; @mothilal2020; @wachter2017;
    @kohavi1996; @abdulkadir2023; @bhattacharya2024]
 
-3. Cuantificar las diferencias en el relación calidad-coste entre LIME y SHAP
+3. Cuantificar las diferencias en la relación calidad-coste entre LIME y SHAP
    mediante pruebas estadísticas pareadas sobre celdas coincidentes de modelo,
    semilla y tamaño de muestra.
 
@@ -114,10 +114,22 @@ comparación de métodos XAI en contextos de datos tabulares.
    integrador para los Estudios A y B [@abdulkadir2023; @pawlicki2024; @nizam2023;
    @marcinkevics2023; @schwalbe2023].
 
+6. Cuantificar la fiabilidad inter-juez de evaluadores semánticos basados en
+   modelos de lenguaje sobre explicaciones del corpus experimental, con el fin de
+   determinar si dicho instrumento alcanza la convergencia necesaria para
+   sostener afirmaciones confirmativas. Este objetivo se deriva de la Brecha 3
+   identificada por la taxonomía del Capítulo 5 y, a diferencia de los objetivos
+   1–5, se formuló una vez construida esa taxonomía; su alcance es por tanto
+   exploratorio y de calibración instrumental, no confirmativo
+   [@koo2016; @bhattacharya2024].
+
 ### Hipótesis o proposiciones de trabajo
 
 Las hipótesis estadísticas formales se estructuran en torno a los tres ejes
-confirmatorios de la investigación empírica.
+confirmatorios de la investigación empírica (H1–H3), acompañados de una
+proposición de reproducibilidad del protocolo (P1). A estas se añade una
+proposición de carácter exploratorio (P2), cuyo estatuto diferenciado se declara
+explícitamente al final de esta sección.
 
 **H1 — Diferencias globales entre métodos (fidelidad)**
 
@@ -153,6 +165,30 @@ $(g, n)$ y localización *post-hoc* de Nemenyi. La hipótesis H3 se contrasta
 mediante pruebas de Wilcoxon bilaterales pareadas sobre 75 celdas coincidentes
 SHAP-LIME, con corrección de Holm-Bonferroni para multiplicidad [@friedman1937;
 @demsar2006; @nemenyi1963; @wilcoxon1945].
+
+**P2 — Fiabilidad de los evaluadores semánticos (proposición exploratoria)**
+
+Un conjunto de jueces basados en modelos de lenguaje, operando sobre una rúbrica
+multidimensional sin especificación de destinatario ni criterio de corrección
+verificable, alcanza una fiabilidad inter-juez igual o superior al umbral
+convencionalmente aceptable de $0.75$ [@koo2016], medida mediante la correlación
+intraclase y el $\alpha$ de Krippendorff. La proposición se considera refutada si
+alguna dimensión de la rúbrica queda por debajo de ese umbral.
+
+**Estatuto epistémico diferenciado de P2.** P2 no forma parte del plan
+inferencial congelado en la puerta 1 del protocolo FOM-7 y no comparte el
+estatuto confirmativo de H1–H3 y P1. Se formuló con posterioridad, una vez que la
+taxonomía del Capítulo 5 identificó la Brecha 3 —la evaluación semántica crece
+más rápido que su base de validación empírica— y su función es calibrar un
+*instrumento de medida*, no evaluar los métodos explicadores. Esta distinción se
+declara aquí de forma explícita, y no *a posteriori*, porque el propio protocolo
+que esta tesis propone exige que el alcance inferencial admisible de cada
+afirmación sea declarado junto con la afirmación misma: presentar P2 como si
+hubiera sido preespecificada junto a H1–H3 sería precisamente el modo de fallo
+que la puerta 7 está diseñada para impedir. En consecuencia, el resultado de P2
+—cualquiera que sea— no modifica las conclusiones confirmativas de los Estudios A
+y B, y se reporta como evidencia de calibración del instrumento semántico
+(Capítulos 3, 5 y 6).
 
 ## Metodología general de la investigación
 

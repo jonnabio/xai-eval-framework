@@ -15,7 +15,11 @@ blocking as written.
 
 ## Gate 0 — Blocking. Resolve before deposit.
 
-- [ ] **0.1 — P2 is never declared. It appears for the first time alongside its own result.**
+> **Status 2026-08-29**: 0.1 and 0.2 resolved in Ch.1 (see amendment note at the end of this
+> section). 0.3 remains open — it is an independent re-verification and cannot be discharged
+> by the same agent that made the fixes.
+
+- [x] **0.1 — RESOLVED 2026-08-29 (commit below). P2 is never declared. It appears for the first time alongside its own result.**
   Ch.1 §"Hipótesis o proposiciones de trabajo" declares **H1, H2, H3 and P1 only**. P2
   ("los jueces LLM alcanzan fiabilidad aceptable") is first *stated* in Ch.6
   @tbl-hipotesis — in the same cell that reports it as not confirmed. Ch.3 §sec-exp4-diseno
@@ -31,7 +35,7 @@ blocking as written.
   and its falsification condition, and state its exploratory (non-confirmatory) status there
   rather than only in Ch.3.
 
-- [ ] **0.2 — Objectives don't reconcile: Ch.1 declares five, Ch.6 closes six.**
+- [x] **0.2 — RESOLVED 2026-08-29. Objectives don't reconcile: Ch.1 declares five, Ch.6 closes six.**
   Ch.1 §"Objetivos específicos" lists 1–5. Ch.6 @tbl-objetivos closes **OE1–OE6**, where OE6
   ("Cuantificar fiabilidad de evaluadores semánticos LLM") has no antecedent in Ch.1.
   **Fix**: either add OE6 to Ch.1 (consistent with fixing 0.1, since both concern EXP4) or
@@ -47,6 +51,15 @@ blocking as written.
   ```
   Expect: verifier green; the only surviving "inestabilidad estructural" at
   `capitulo-6-conclusiones.qmd:292`, where the same sentence qualifies it.
+
+**Amendment note (0.1 / 0.2).** P2 was *not* backdated into the confirmatory set. Ch.1 now
+declares it with its true provenance: formulated after the Ch.5 taxonomy identified Gap 3,
+outside the plan frozen at Gate 1, exploratory and instrument-calibrating rather than
+confirmatory. Presenting it as pre-specified alongside H1–H3 would have manufactured exactly
+the appearance of pre-registration that Gate 7 exists to prevent; the amendment says so
+explicitly in the text, which converts a structural defect into a demonstration of the
+thesis's own discipline. OE6 is added on the same basis. Objective 3's grammar slip
+("en el relación") fixed in passing.
 
 ---
 
