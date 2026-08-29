@@ -203,15 +203,25 @@ inferenciales para garantizar la auto-suficiencia documental de la tesis.
 
 | Métrica | $n$ bloques | $k$ métodos | $\chi^2_F$ | $gl$ | $p$ (crudo) | $p_\mathrm{Holm}$ | Kendall $W$ | Decisión |
 |:--|:--|:--|:--|:--|:--|:--|:--|:--|
-| Fidelidad | 15 | 4 | 42.12 | 3 | $1.51\times10^{-8}$ | $3.02\times10^{-8}$ | 0.936 | Rechazar $H_{0,1}$ |
-| Estabilidad | 15 | 4 | 40.68 | 3 | $2.29\times10^{-8}$ | $2.29\times10^{-8}$ | 0.904 | Rechazar $H_{0,2}$ |
+| Fidelidad | 15 | 4 | 42.12 | 3 | $3.78\times10^{-9}$ | $1.51\times10^{-8}$ | 0.936 | Rechazar $H_{0,1}$ |
+| Estabilidad | 15 | 4 | 40.68 | 3 | $7.65\times10^{-9}$ | $2.29\times10^{-8}$ | 0.904 | Rechazar $H_{0,2}$ |
 
-: Resultados completos de la prueba de Friedman por métrica ($\alpha = 0.05$; $\chi^2_{crit}(3) = 7.815$). {#tbl-appendix-friedman-full}
+: Resultados completos de la prueba de Friedman por métrica ($\alpha = 0.05$;
+$\chi^2_{crit}(3) = 7.815$). Valores $p$ crudos y ajustados extraídos de
+`outputs/analysis/paper_a_exp2_stats/friedman_results.csv`.
+{#tbl-appendix-friedman-full}
 
 Valor crítico para $\alpha = 0.05$, $gl = 3$: $\chi^2_{crit} = 7.815$. Margen
 de seguridad: fidelidad = 439%, estabilidad = 421%. La corrección
-Holm-Bonferroni se aplica sobre las dos hipótesis omnibus (H1 y H2); ambas
-permanecen significativas tras la corrección.
+Holm-Bonferroni se aplica sobre la familia inferencial completa del test omnibus
+—las cinco métricas primarias evaluadas mediante Friedman, conforme al plan
+declarado en la @tbl-stat-plan del Capítulo 3— y no únicamente sobre H1 y H2. El
+factor de ajuste correspondiente a cada métrica depende, por tanto, de su
+posición en el orden creciente de los cinco valores $p$: la fidelidad, con el
+$p$ crudo menor, recibe el factor $m = 4$ ($3.78\times10^{-9} \times 4 =
+1.51\times10^{-8}$) y la estabilidad, la siguiente en orden, el factor $m = 3$
+($7.65\times10^{-9} \times 3 = 2.29\times10^{-8}$). Ambas hipótesis permanecen
+significativas tras la corrección con varios órdenes de magnitud de margen.
 
 ### D.2 Comparaciones post-hoc de Nemenyi (fidelidad y estabilidad)
 
