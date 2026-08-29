@@ -159,6 +159,110 @@ def resolve(expr: str) -> float:
         method, metric, model = args
         return statistics.mean(_exp2_values(method, metric, model))
 
+    if kind in ("exp2_subset_mean", "exp2_subset_sd", "exp2_subset_cv"):
+        # A single (model, N) stratum across its five seeds. This is the P1
+        # reproducibility cell: the thesis reports it as "CV sobre EXP1" and
+        # cites the EXP1 reproducibility report, but the printed values
+        # re-derive exactly from the EXP2 run-level table and not from that
+        # artifact (n_runs=9, different means). See review finding F14.
+        method, metric, model, n = args
+        values = [
+            float(row[metric])
+            for row in _exp2_run_level()
+            if row["method"] == method
+            and row["model"] == model
+            and row["n"] == n
+            and row[metric] not in ("", "nan")
+        ]
+        if not values:
+            raise MissingArtifact(
+                f"no EXP2 runs for {method}/{model}/N={n}/{metric}"
+            )
+        mean = statistics.mean(values)
+        if kind == "exp2_subset_mean":
+            return mean
+        sd = statistics.stdev(values)  # sample SD: the printed values match it
+        return sd if kind == "exp2_subset_sd" else 100.0 * sd / mean
+
+    if kind in ("exp2_block_sd", "friedman_rank"):
+        # Block-level dispersion and the Friedman mean ranks, both computed from
+        # exp2_block_method_summary.csv over the 15 complete (g, N) blocks.
+        metric = args[1] if kind == "exp2_block_sd" else args[0]
+        rows = [
+            row
+            for row in _rows(EXP2_STATS / "exp2_block_method_summary.csv")
+            if row[metric] not in ("", "nan")
+        ]
+        if kind == "exp2_block_sd":
+            method = args[0]
+            values = [float(r[metric]) for r in rows if r["method"] == method]
+            if not values:
+                raise MissingArtifact(f"no EXP2 blocks for {method}/{metric}")
+            return statistics.stdev(values)
+
+        target = args[1]
+        blocks: dict[tuple[str, str], dict[str, float]] = {}
+        for r in rows:
+            blocks.setdefault((r["model"], r["n"]), {})[r["method"]] = float(r[metric])
+        ranks: list[int] = []
+        for cell in blocks.values():
+            if len(cell) < 4:  # Friedman uses complete blocks only
+                continue
+            order = sorted(cell, key=lambda m: -cell[m])  # rank 1 = best
+            ranks.append(order.index(target) + 1)
+        if not ranks:
+            raise MissingArtifact(f"no complete blocks for {metric}")
+        return statistics.mean(ranks)
+
+    if kind == "exp2_sd":
+        method, metric = args
+        values = [
+            float(row[metric])
+            for row in _exp2_run_level()
+            if row["method"] == method and row[metric] not in ("", "nan")
+        ]
+        if not values:
+            raise MissingArtifact(f"no EXP2 runs for {method}/{metric}")
+        return statistics.stdev(values)
+
+    if kind == "exp2_pooled_cv":
+        # CV over every qualified run of a method, as a percentage. Distinct
+        # from the per-stratum CV of the P1 cell; the thesis reports both and
+        # had them the wrong way round for SHAP (F15).
+        method, metric = args
+        values = [
+            float(row[metric])
+            for row in _exp2_run_level()
+            if row["method"] == method and row[metric] not in ("", "nan")
+        ]
+        if not values:
+            raise MissingArtifact(f"no EXP2 runs for {method}/{metric}")
+        return 100.0 * statistics.stdev(values) / statistics.mean(values)
+
+    if kind == "exp2_n_mean":
+        method, metric, n = args
+        values = [
+            float(row[metric])
+            for row in _exp2_run_level()
+            if row["method"] == method and row["n"] == n and row[metric] not in ("", "nan")
+        ]
+        if not values:
+            raise MissingArtifact(f"no EXP2 runs for {method}/N={n}/{metric}")
+        return statistics.mean(values)
+
+    if kind in ("wilcoxon_meandiff", "wilcoxon_sd"):
+        # The thesis reports the paired mean difference and its SD; the exported
+        # table carries the two group means and d_z, from which both follow.
+        comparison_set, metric = args
+        name = "primary" if comparison_set == "primary" else "all_models"
+        for row in _rows(EXP2_STATS / f"wilcoxon_shap_lime_{name}.csv"):
+            if row["metric"] == metric:
+                diff = float(row["shap_mean"]) - float(row["lime_mean"])
+                if kind == "wilcoxon_meandiff":
+                    return diff
+                return diff / float(row["cohens_dz"])
+        raise MissingArtifact(f"wilcoxon row not found: {comparison_set}/{metric}")
+
     if kind == "exp2_runs":
         (method,) = args
         return float(len(_exp2_values(method, "fidelity")))

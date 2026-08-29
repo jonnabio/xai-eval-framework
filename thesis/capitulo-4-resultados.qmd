@@ -55,7 +55,7 @@ análisis de cada claim.
 | H1: existen diferencias de fidelidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F=42.12$ | $1.51\times10^{-8}$ | $W=0.936$ | Rechazar $H_{0,1}$; SHAP supera a Anchors/DiCE y LIME supera a DiCE |
 | H2: existen diferencias de estabilidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F=40.68$ | $2.29\times10^{-8}$ | $W=0.904$ | Rechazar $H_{0,2}$; SHAP/DiCE forman el grupo más estable |
 | H3: SHAP y LIME difieren en calidad-coste | Wilcoxon pareado bilateral | 75 celdas $(g,s,n)$ | $W=0$ a $205$ | $\leq 2.64\times10^{-13}$ para calidad; $1.18\times10^{-10}$ para coste | $d_z=0.451$ a $4.820$ | Rechazar $H_{0,3}$; SHAP mejora calidad y aumenta coste medio |
-| P1: el protocolo es reproducible bajo semillas | CV sobre EXP1 | 5 semillas RF, $N=100$ | CV por métrica | No aplica | CV < 3% en señales principales | Confirmación parcial; LIME-estabilidad queda fuera por media cercana a cero |
+| P1: el protocolo es reproducible bajo semillas | CV sobre el estrato replicado | 5 semillas RF, $N=100$ | CV por métrica | No aplica | CV < 3% en señales principales | Confirmación parcial; LIME-estabilidad queda fuera por media cercana a cero |
 
 : Resumen auditable de hipótesis, pruebas y decisiones. {#tbl-results-overview}
 
@@ -294,10 +294,12 @@ se satisface para las métricas con señal sustantiva; la excepción de LIME-
 estabilidad es una consecuencia de la inestabilidad estructural del método, no
 de la irreproducibilidad del protocolo.
 
-Para la generalización global, el CV en fidelidad para todos los métodos y
-modelos oscila entre 12.0% (LIME) y 12.8% (SHAP), confirmando que la
-variabilidad métrica debida a la aleatoriedad de la semilla es controlada y
-uniforme. Los CVs de coste y estabilidad, que son inherentemente más variables
+Para la generalización global, el CV en fidelidad agrupando todas las
+ejecuciones calificadas de cada método es de 11.4% (SHAP) y 12.0% (LIME) —es
+decir, SHAP es además el más reproducible de los dos, no el más disperso—,
+confirmando que la variabilidad métrica debida a la aleatoriedad de la semilla
+es controlada y uniforme, y que ambos valores quedan por debajo del umbral del
+15% fijado en P1. Los CVs de coste y estabilidad, que son inherentemente más variables
 por la dependencia de las instancias específicas seleccionadas, se esperan en
 rangos superiores y no forman parte del criterio primario de P1.
 
@@ -476,7 +478,7 @@ del capítulo de resultados.
 | Existen diferencias globales entre métodos en fidelidad | Tablas @tbl-friedman-fidelity y @tbl-nemenyi-fidelity | `outputs/analysis/paper_a_exp2_stats/friedman_results.csv`, `nemenyi_fidelity.csv` | `scripts/run_exp2_statistical_analysis.py` | 15 bloques Adult Income, cuatro métodos, cinco modelos |
 | Existen diferencias globales entre métodos en estabilidad | Tabla @tbl-friedman-stability y localización Nemenyi en texto | `friedman_results.csv`, `nemenyi_stability.csv` | `scripts/run_exp2_statistical_analysis.py` | Mismo diseño de bloques; estabilidad como similitud coseno |
 | SHAP supera a LIME en fidelidad y estabilidad pero aumenta el coste medio | Tabla @tbl-paired-shap-lime | `wilcoxon_shap_lime_all_models.csv`, `paired_cells_shap_lime_all_models.csv` | `scripts/run_exp2_statistical_analysis.py` | 75 celdas pareadas $(g,s,n)$; no generaliza fuera de Adult/tabular |
-| FOM-7 produce señales reproducibles para métricas principales | Tabla @tbl-cv-p1 | `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | Ejecuciones EXP1 por semilla | Confirmación parcial; LIME-estabilidad queda limitada por media cercana a cero |
+| FOM-7 produce señales reproducibles para métricas principales | Tabla @tbl-cv-p1 | `outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv` (estrato RF/$N=100$, cinco semillas); perfil complementario en `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | Agregación por celda desde el nivel de ejecución | Confirmación parcial; LIME-estabilidad queda limitada por media cercana a cero |
 | La cobertura faltante no invalida las pruebas confirmativas principales | Capítulo 3, tablas de cobertura | `exp2_run_inventory.csv`, árbol `experiments/exp2_scaled/results/` | Auditoría FOM-7 puerta 3 | Afecta precisión de Anchors/DiCE; no afecta SHAP-LIME pareado |
 
 : Trazabilidad de claims, artefactos y alcance inferencial. {#tbl-claim-traceability}
@@ -622,8 +624,9 @@ documentan cuantitativamente la inestabilidad estructural de LIME, un hallazgo
 que los estudios basados en fidelidad exclusiva sistemáticamente omiten
 [@bhattacharya2024]. En tercer lugar, demuestran que el protocolo FOM-7
 produce resultados reproducibles (CV < 3% en fidelidad para el subgrupo
-replicado RF/$N=100$, y CV de 12.0-12.8% sobre el conjunto completo de métodos y
-modelos, ambos dentro del umbral del 15% fijado en P1) y que los
+replicado RF/$N=100$, y CV agrupado de 11.4% para SHAP y 12.0% para LIME sobre
+el conjunto completo de ejecuciones, todos dentro del umbral del 15% fijado en
+P1) y que los
 criterios de cobertura y exclusión de artefactos del benchmark son
 implementables sin pérdida sustancial de potencia estadística.
 

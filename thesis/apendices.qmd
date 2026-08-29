@@ -252,9 +252,15 @@ aplican en orden decreciente de $p$-valor: $\alpha/5 = 0.010$, $\alpha/4 =
 0.0125$, $\alpha/3 = 0.0167$, $\alpha/2 = 0.025$, $\alpha/1 = 0.050$. Todos
 los p-valores ajustados quedan muy por debajo de sus umbrales correspondientes.
 
-La reproducibilidad de EXP1 se documenta en
-`experiments/exp1_adult/reproducibility/reproducibility_report.csv`, que sostiene
-la proposición P1. Los artefactos crudos por ejecución se encuentran bajo
+La proposición P1 se evalúa sobre el estrato replicado RF/$N=100$ del nivel de
+ejecución de EXP2, agregando las cinco semillas: los valores de la
+@tbl-cv-p1 se re-derivan de
+`outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv`. El perfilado
+de dispersión de EXP1, documentado de forma independiente en
+`experiments/exp1_adult/reproducibility/reproducibility_report.csv`, cubre una
+cohorte distinta (nueve ejecuciones por configuración, modelos `rf`/`xgb` con
+SHAP y LIME) y sostiene la puerta 6 del protocolo, pero no es la fuente de las
+cifras de la @tbl-cv-p1. Los artefactos crudos por ejecución se encuentran bajo
 `experiments/exp2_scaled/results/`; la superposición de recuperación para
 `mlp_shap`/`svm_shap` se documenta en `outputs/batch_results.csv`.
 
