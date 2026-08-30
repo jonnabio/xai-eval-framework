@@ -95,7 +95,82 @@ def set_page_numbering(sectpr: ET.Element, fmt: str = "decimal") -> None:
         pg_num.set(qn("start"), "1")
 
 
-def patch_document_xml(xml_bytes: bytes) -> bytes:
+# --- Cover page -------------------------------------------------------------
+
+TITLE_BLOCK_STYLES = {"Title", "Subtitle", "Author", "Date"}
+
+
+def load_cover(path: Path) -> list[tuple[str, str]]:
+    """Parse `STYLE|TEXT` lines into (style, text) pairs; `|` alone is a spacer."""
+    items: list[tuple[str, str]] = []
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.rstrip()
+        if not line or line.lstrip().startswith("#"):
+            continue
+        style, _, text = line.partition("|")
+        items.append((style.strip(), text.strip()))
+    return items
+
+
+def make_paragraph(style: str, text: str) -> ET.Element:
+    """A centred, single-spaced paragraph. Direct formatting is deliberate: it
+    overrides the justified 1.5 spacing that patch_styles_xml applies to every
+    style, which is right for body prose and wrong for a cover."""
+    p = ET.Element(qn("p"))
+    ppr = ET.SubElement(p, qn("pPr"))
+    if style:
+        ET.SubElement(ppr, qn("pStyle")).set(qn("val"), style)
+    spacing = ET.SubElement(ppr, qn("spacing"))
+    spacing.set(qn("line"), "240")
+    spacing.set(qn("lineRule"), "auto")
+    ET.SubElement(ppr, qn("jc")).set(qn("val"), "center")
+    if text:
+        run = ET.SubElement(p, qn("r"))
+        node = ET.SubElement(run, qn("t"))
+        node.set("{http://www.w3.org/XML/1998/namespace}space", "preserve")
+        node.text = text
+    return p
+
+
+def make_page_break() -> ET.Element:
+    p = ET.Element(qn("p"))
+    run = ET.SubElement(p, qn("r"))
+    ET.SubElement(run, qn("br")).set(qn("type"), "page")
+    return p
+
+
+def insert_cover_page(root: ET.Element, items: list[tuple[str, str]]) -> bool:
+    """Swap the leading Quarto title block for the cover. Returns True if applied.
+
+    Only the *leading* run of title-block paragraphs is removed: the same styles
+    recur later in the document and must be left alone.
+    """
+    body = root.find("w:body", NS)
+    if body is None:
+        return False
+
+    children = list(body)
+    end = 0
+    for child in children:
+        if child.tag != qn("p"):
+            break
+        style = child.find("w:pPr/w:pStyle", NS)
+        if style is None or style.get(qn("val")) not in TITLE_BLOCK_STYLES:
+            break
+        end += 1
+
+    for child in children[:end]:
+        body.remove(child)
+
+    for offset, (style, text) in enumerate(items):
+        body.insert(offset, make_paragraph(style, text))
+    body.insert(len(items), make_page_break())
+    return True
+
+
+def patch_document_xml(
+    xml_bytes: bytes, cover: list[tuple[str, str]] | None = None
+) -> bytes:
     root = ET.fromstring(xml_bytes)
     for p in root.findall(".//w:p", NS):
         ppr = p.find("w:pPr", NS)
@@ -105,10 +180,18 @@ def patch_document_xml(xml_bytes: bytes) -> bytes:
         set_paragraph_format(ppr)
     for sectpr in root.findall(".//w:sectPr", NS):
         set_page_numbering(sectpr)
+    # After the formatting sweep, so the cover keeps its own centred spacing.
+    if cover:
+        insert_cover_page(root, cover)
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
-def patch_docx(path: Path, patch_document: bool = False, backup: bool = True) -> None:
+def patch_docx(
+    path: Path,
+    patch_document: bool = False,
+    backup: bool = True,
+    cover: list[tuple[str, str]] | None = None,
+) -> None:
     if backup:
         backup_path = path.with_suffix(path.suffix + ".bak")
         if not backup_path.exists():
@@ -122,7 +205,7 @@ def patch_docx(path: Path, patch_document: bool = False, backup: bool = True) ->
                 if item.filename == "word/styles.xml":
                     data = patch_styles_xml(data)
                 elif patch_document and item.filename == "word/document.xml":
-                    data = patch_document_xml(data)
+                    data = patch_document_xml(data, cover=cover)
                 zout.writestr(item, data)
         shutil.move(str(tmp_path), path)
 
@@ -160,15 +243,17 @@ def main() -> None:
         help="Also patch concrete paragraphs in word/document.xml, useful for generated outputs.",
     )
     parser.add_argument("--no-backup", action="store_true")
+    parser.add_argument("--cover", help="Path to a cover definition file (STYLE|TEXT lines)")
     parser.add_argument("--inspect", action="store_true")
     args = parser.parse_args()
+    cover = load_cover(Path(args.cover)) if args.cover else None
 
     for raw in args.docx:
         path = Path(raw)
         if args.inspect:
             inspect_docx(path)
         else:
-            patch_docx(path, patch_document=args.document, backup=not args.no_backup)
+            patch_docx(path, patch_document=args.document, backup=not args.no_backup, cover=cover)
             inspect_docx(path)
 
 
