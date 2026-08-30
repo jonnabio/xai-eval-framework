@@ -1,42 +1,438 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-07-04
-- **Branch:** main
-- **Mode:** Repository sanitation and project context preservation
+- **Last Updated:** 2026-08-29
+- **Active Role:** Scientific Editor
+- **Mode:** PUBLICATION — synchronized the thesis, Paper A, and merged Paper B+C around validation-boundary wording and EXP3 status. Created `docs/reports/sync/thesis_paper_sync_matrix.md`; updated the implementation plan with sync task 6; aligned Chapter 3/6 EXP3 wording to the Paper B+C + artifact source of truth (SHAP-Anchors fidelity replication plus LIME-only extension, but no full paired SHAP-LIME cross-dataset stability test); aligned Paper A boundary language while preserving its narrower SHAP-only EXP3 claim scope; aligned Paper B+C validity-claim language and corrected the LIME extension export path.
+- **Mode (2026-08-22, second pass):** PUBLICATION — full tri-document alignment + recency audit
+  (Paper A, Paper B+C, thesis Ch.1-6), every shared numeric claim re-derived from committed
+  artifacts. Report at `docs/review/tri-document-alignment-review_2026-08-22.md`: 12 findings
+  (A01-A05 major, A06-A10 minor, A11-A12 suggestions). All EXP2 confirmatory statistics verified
+  and consistent across all three documents. **A01 (headline, and it inverts the earlier sync
+  assumption):** Paper A says the EXP3 Anchors cross-dataset check "could not be executed" and
+  books 12 cells as a permanent `alibi`/`dice-ml` limitation, but those 12 runs completed
+  2026-04-26 and sit on the unmerged `results/exp3-windows-breast-cancer` and
+  `results/exp3-linux-german-credit` branches; their recomputed fidelity means (0.2648 / 0.2079 /
+  0.3510 / 0.4507) match Paper B+C's `tab:exp3_fidelity` exactly, and SHAP > Anchors holds 12/12.
+  Paper A, not the thesis, is the stale document on EXP3. A02: the earlier same-day Paper A edit
+  fixed only one of three places and mislabels the companion as a "LIME-only" extension. A03: the
+  two papers report different values for EXP3 SHAP Breast Cancer/XGB (0.6165 committed July re-run
+  vs 0.607 April side-branch snapshot). A04: thesis F01 (Ch.5 vs Ch.4 numbers) still unfixed. A05:
+  thesis Ch.4 per-method profile uses pre-recovery-overlay costs (SHAP 24,804 ms vs artifact
+  11,708 ms; LIME 226 vs 3,660.7; DiCE 2,056 vs 28,208.8). A08: thesis never received the Paper B+C
+  EXP4 n=147/192 disclosure fix. A09: thesis cites the superseded `10.5281/zenodo.19297724`.
+  Recency: both PDFs and the thesis `.docx` predate the current sources. No manuscript was edited —
+  the substantive fixes need author decisions (branch merge, canonical EXP3 SHAP snapshot,
+  provenance of Ch.5's 0.514/0.412). Sync matrix updated with the corrected EXP3 row, three new
+  rows, and five new checklist items.
+- **Mode (2026-08-22, third pass):** PUBLICATION — remediation. Landed the four-week backlog in
+  three commits (`d1c9ba1d1` Paper B+C F01/F02 + EXP3 path; `00cdc8f3e` thesis/Paper A EXP3 wording
+  + sync matrix; `b09b92a1d` both review reports + context), then applied six artifact-verified
+  fixes in `3eeed3b04`: A02 partial (Paper A "LIME-only" mischaracterisation), A06 (thesis Anchors
+  coverage 56→57 / 74.7%→76.0%), A07 (EXP3 minimum gap German Credit RF→XGB, in both Paper B+C and
+  thesis Ch.6), A08 (EXP4 n=147/192 disclosure ported into thesis Ch.5), A10 (Paper B+C Friedman
+  p-values labelled Holm-adjusted), A13 (new: dangling `@tbl-exp4-dimensiones` crossref in Ch.3,
+  found by the rebuild, repointed to `@tbl-exp4-icc`). No statistic or table value changed.
+  Rebuilt all four outputs — three PDFs via `tools/tectonic-portable`, thesis DOCX via
+  `thesis/render.ps1` — all clean. Toolchain notes: MiKTeX `pdflatex` cannot build Paper A
+  (microtype font-expansion error at the bibliography), use Tectonic; `render.ps1` calls a
+  nonexistent `quarto clean` and prints a harmless error every run.
+  **Still blocked on author decisions:** A01 (merge `results/exp3-*` branches, then rewrite Paper A
+  §sec:exp3 + Conclusion), A03 (canonical EXP3 SHAP snapshot: July 0.6165 vs April 0.6065),
+  A04 (thesis Ch.5 0.514/0.412 provenance), A05 (thesis Ch.4 cost profile), A09 (thesis Zenodo DOI).
+- **Mode (2026-08-23):** PUBLICATION — remediation round 2, on author decisions. (1) Merged the EXP3
+  Anchors cohort: imported the 12 run dirs (1,768 files) from `results/exp3-windows-breast-cancer`
+  surgically via `git checkout <branch> -- <anchors paths>` (a full merge would have dragged in
+  stale docs and junk paths `.venvScriptspython.exe` / `[14`); SHAP > Anchors re-verified 12/12,
+  gap range +0.2601 GC/XGB to +0.5137 BC/RF. Paper A §sec:exp3 + Conclusion + artifact availability
+  rewritten — A01/A02 closed. **Root cause of A01 found:** `scripts/run_exp3_shap_configs.py`'s
+  docstring says Anchors "remain blocked by numpy<2.0 vs Python 3.13", true of the *July*
+  environment; Paper A generalized it to "never executed". (2) A03 closed with July as canonical:
+  Paper B+C BC/XGB 0.607→0.617, gap +0.06→+0.07. **Why BC/XGB differed:** all 12 SHAP configs were
+  re-run 2026-07-23/24; only BC/XGB's quality metrics moved (sparsity 0.3333→0.8822 — 10/30 vs
+  ~26.5/30 features above the 1e-4 threshold). Models were retrained 2026-05-10 with identical
+  config *and identical test metrics*, and the runner is a thin wrapper over the same
+  ExperimentRunner + YAML, so the cause is a SHAP/XGBoost library change across the April→July
+  environment migration, not model or code. (3) A05 closed: Ch.4's profile *and* transversal
+  subsections regenerated from `exp2_run_level_metrics.csv` with aggregation stated; the transversal
+  section had been mixing per-model means with single-cell Appendix C sensitivity values (SVM
+  0.928/159,059 is the k=50 row of `@tbl-appendix-shap-sensitivity`, not the 15-run mean 0.882/54,231).
+  N-effect SHAP means also refreshed. (4) A09 closed: thesis repointed to `10.5281/zenodo.21538180`
+  / commit `553f65d71`. (5) A12 closed incidentally. All four outputs rebuilt clean.
+  (6) A04 closed on author approval: Ch.5's illustrative figures corrected to
+  Anchors 0.388 / DiCE 0.172 / DiCE parsimony 0.017 / SHAP stability 0.732, and the "óptimo en
+  parsimonia y eficiencia" claim reworded since DiCE's 28,209 ms cost is second-worst. Provenance
+  settled first: the numbers entered in `f639935d0` (2026-05-10) at a commit where
+  `outputs/analysis/` did not yet exist, and match no artifact at any commit — draft figures, not a
+  different aggregation. Rest of Ch.5 swept: no other benchmark numbers.
+  **All 13 audit findings (A01-A13) are now closed.** Remaining open items in the publication set
+  are pre-existing and author-accepted: Paper B+C F03 (supplementary tables not independently
+  re-derived) and F04 (EXP4 scripts + raw judge data unrecoverable); A11 (Paper A leads with the
+  45-cell d_z, the others with the 75-cell) is an open suggestion with no action requested.
+- **Mode (2026-08-24):** INCIDENT → EXECUTION — RCA-001 Phase 1, the permanent fix for the defect
+  class behind the whole audit. Diagnosis: FOM-7 gate 7 (claim traceability) was editorial policy
+  with no mechanism, in a workflow where the same quantity is authored independently in three
+  documents. The SSOT machinery already existed (`pub/claims.toml` → `pub/fragments/` →
+  `pubs-sync.yml`) but covered only abstracts/keywords, hand-typed its own numbers, and excluded
+  Paper B+C entirely. Built: `pub/claim_registry.toml` (44 numbers, each with resolver + every
+  manuscript carrying it), `scripts/pubs/claim_sources.py` (resolvers over `outputs/analysis/` and
+  the EXP3 tree; separates block-level from run-level aggregation — the origin of A05),
+  `scripts/pubs/verify_claims.py` (4 checks: value vs artifact, per-site occurrence count, retired
+  values, cited-artifact existence), `docs/rca/RCA-001-manuscript-artifact-drift.md`. Wired Paper
+  B+C into the fragment pipeline (rebuilt byte-equivalent), added the verifier to `pubs-sync.yml`
+  CI and to `.aceconfig` `pre_commit`, and registered the **first entry in
+  `regression-guards.yaml`** (9 guarded files, 6 invariants, 2 tests, 4 review triggers).
+  Negative-tested, not just passing: the first manuscript-site check failed to catch an edited
+  Paper A table cell because the value recurs in prose, so per-site occurrence counts were added.
+  **New finding A14 (major, OPEN):** building the verifier revealed Paper B+C claims a 48-paper
+  coded corpus throughout, while the only committed corpus artifact
+  (`docs/reports/paper_c/paper_c_review_corpus.csv`) has 24 rows and no 48-row corpus exists at any
+  commit. Deliberately not registered in the registry (would encode an unbacked number or force CI
+  red); needs the author to commit the corpus or correct the manuscript.
+  Note: `.aceconfig` is excluded via `.git/info/exclude`, so its new hook line is local-only.
+  Phase 2 remains: generate numbers into LaTeX macros / Quarto inline values, and a CI build gate
+  failing on undefined references.
+- **Mode (2026-08-24 to 26):** INCIDENT/EXECUTION — RCA-001 Phase 1 plus A14 closure.
+  Built the claim-traceability enforcement that makes FOM-7 gate 7 executable
+  (`pub/claim_registry.toml`, `scripts/pubs/claim_sources.py`, `verify_claims.py`,
+  `check_review_corpus.py`, `check_corpus_pdfs.py`, `fetch_corpus_pdfs.py`,
+  `seed_corpus_from_audit.py`), wired Paper B+C into the fragment pipeline, added all
+  checks to `pubs-sync.yml` CI, and registered the first `regression-guards.yaml` entry.
+  **A14 closed 2026-08-26:** Paper B+C's review corpus is reconstructed and released as
+  `docs/reports/paper_bc/paper_bc_review_corpus.csv` — 44 rows, of which 16 carry the
+  original first-reviewer coding recovered from `second_reviewer_audit_results.csv` and
+  28 were identified from the citation record and re-coded from full text. All 44 full
+  texts are held under `corpus_pdfs/` (25 auto-retrieved, 17 copied from
+  `thesis/papers/`, 2 supplied by the author), each verified by PDF header, size floor
+  and page-one title match. ~4 papers coded but never cited are unrecoverable, so the
+  corpus is 44 not 48, and twelve manuscript edits moved Paper B+C's printed figures
+  onto the corpus: cluster distribution 15/10/7/6/4/2, evidence coverage
+  21 proxy / 15 expert-taxonomy / 13 benchmark / 12 end-user / 4 LLM-judge, PRISMA
+  included 44, audit fraction 36%, plus a new **Corpus provenance** paragraph in
+  §Validity disclosing the reconstruction. `[review_corpus.paper_bc]` now pins the
+  distribution and CI verifies it. **All 15 audit findings (A01-A15) are closed.**
+  Outstanding by author decision: F03 (supplementary tables not re-derived), F04 (EXP4
+  scripts/raw judge data unrecoverable), A11 (Paper A leads with 45-cell d_z).
+  Author verification wanted on the 28 reconstructed coding rows before submission.
+- **Mode (2026-08-28):** PUBLICATION / RCA — closed the two findings carried as
+  accepted-as-is at the end of RCA-001, then finished the recovery they opened.
+  **F04 was not unrecoverable.** The EXP4 sources were gone from the tree and from
+  history, but their bytecode survived in `__pycache__`. All 16 files are now
+  reconstructed and committed: 7 modules (`exp4_reliability_metrics`, `exp4_prompts`,
+  `exp4_schema`, `exp4_parser`, `exp4_runner`, `exp4_cases`, `exp4_analysis`), 4 CLI
+  scripts, 5 test modules. `scripts/pubs/verify_exp4_reconstruction.py` proves the
+  modules compile to the same instruction stream as the original `.pyc`; the scripts
+  (3.12 bytecode) get a structural check; the tests are verified by running (7 pass,
+  4 skip). The recovery found **the published ICC is ICC(1,1), one-way random
+  effects — not the ICC(2,1) all three documents described**. It is the conservative
+  direction and the negative result stands (max 0.601, CI upper 0.695 vs the 0.75
+  threshold); relabelled across Paper B+C and thesis Ch.3/Ch.5/Ch.6/appendix. It also
+  answers the 2026-07-28 rigor review's open question 2 as fact: `icc_2_1` calls
+  `pivot_table().dropna()` (n=147), `alpha_ordinal` does not and masks with
+  `np.isnan` (n=192). **F03 found two wrong supplementary tables.** Table S6's
+  drop-correlation column was wrong in 3 of 4 rows and printed a monotone sequence the
+  artifact does not show (marginal replacement is highest, not lowest); the prose
+  generalised the attenuation claim to both endpoints and now holds it to the top-k
+  gap. Table S3's four occupation/workclass associations reproduced under no
+  convention — those columns are unobserved on the same 2,809 records — and are now
+  computed over pairwise-complete cases with the rule stated in the caption. Running
+  the recovered tests surfaced a third defect: the EXP4 Jinja templates were never
+  committed, and the `explanation_eval.j2` cited as the EXP4 rubric in Paper B+C, the
+  supplementary and the thesis appendix is an unrelated three-dimension EXP1 template;
+  all three citations corrected. 16 supplementary claims, 2 retired-value guards and
+  2 cited artifacts added to the registry with stdlib-only resolvers. RCA-002 opened
+  and closed for source recovery; RCA-001's "not covered" section corrected. Commits
+  `1b4157116` and `357a03201`.
+- **Mode (2026-08-28, second pass):** PEER_REVIEW — Scientific Advisor ran
+  `scientific-rigor-review` against the full thesis (index through apendices). Report at
+  `docs/review/scientific-rigor-review_thesis_2026-08-28.md` (Grade: **Accept**, mean 3.9/5;
+  D1=3.5 D2=4.5 D3=3.5 D4=3.5 D5'=4.5 D6=4.0). Read-only: no manuscript file was edited.
+  Confirmed fixed from the 2026-08-11 review: F01 (Ch.5 vs Ch.4 numbers), F02 (Ch.6 item 4 vs
+  `sec-exp3-nota`), F03 (parsimony direction). Crossrefs verified clean (69 labels, 0 dangling)
+  and the confirmatory core re-derived exactly from `exp2_run_level_metrics.csv`.
+  13 findings, 3 major:
+  **F01** — the thesis's self-nominated highest-impact claim ("LIME's instability is
+  structural") is contradicted by two of its own results: Appendix C's `kernel_width` table
+  (kw=10.0 → stability **0.664** vs 0.000 at the reference kw=3.0) and EXP3 (LIME stability
+  0.748–0.927 on BC/GC at the reference kw). Ch.6 §sec-limitaciones states "no dependiente de
+  la configuración del kernel" while §sec-futuro item 3, one page later, calls kw=10.0 the
+  "alternativa más estable"; §sec-sintesis generalises to "cualquier sistema". §sec-exp3-nota
+  states the correct narrow conclusion and it is not propagated.
+  **F02** — the prescriptive per-instance cost ranges in Ch.4 Contextos A–D and Ch.6 are not
+  derivable from any artifact: DiCE "770–4,500 ms" vs run-level mean **28,209** (and vs Ch.4's
+  and Ch.5's own text); LIME "3–9 ms" vs per-model means 51.6–122.3; TreeSHAP "1–322 ms" vs RF
+  533–7,836. Same defect class as A05, which was fixed in Ch.4's profile/transversal sections
+  but never reached the Contexto paragraphs or Ch.6's criteria.
+  **F03** — Appendix C's two LIME tables report four different values for the *identical*
+  reference cell (RF/s42/N=100/kw=3.0/num_samples=1000): fidelity 0.461 vs 0.518, stability
+  0.014 vs 0.000, cost 226 vs 30 ms. Only the kw table is artifact-backed; the `num_samples`
+  probe is the open RCA-002 leftover.
+  Minor: F04 (SHAP F>=0.80 / S>=0.70 asserted as guarantees, but fail in 2/5 model families
+  each — including the tree models the same sentence recommends: xgb stability 0.575, rf
+  fidelity 0.729), F05 (CV<3% reproducibility headline is the RF/N=100 subgroup; benchmark-wide
+  is 12.0–12.8%), F06 ("Brecha 3" referenced 4x, never defined anywhere in the thesis —
+  the conceptual analogue of A13), F07 (Fronteras row for LIME instability omits the
+  dataset/feature-space boundary and requests future work Appendix C already completed),
+  F08 (Appendix C Anchors-tau table: coverage column is design-wide x/75 but the caption
+  scopes it to "RF, semilla 42"), F09 (Ch.4 Anchors profile labels run-level means 0.388/0.052
+  as "sobre los bloques"; block-level is 0.3886/0.0429).
+  Suggestions: F10–F12 carried unchanged from 2026-08-11 (chi2~15.2 underived; Anchors MNAR
+  bias direction undisclosed; "prescriptivos" register). **F13 is a Task 3 input:**
+  `verify_claims.py` is green (61 claims / 111 sites) yet F02/F03/F08/F09 all passed through
+  it, because those numbers were never *registered*. Phase 1 guarantees "a registered number
+  matches its artifact"; the failure mode actually found is "a load-bearing number was never
+  registered". Recommend a registration-completeness sweep plus an unregistered-numeric-literal
+  check before Phase 2's macro generation.
+  Readiness: defensible as-is — no finding touches H1–H3, P1, P2, the statistical plan or
+  FOM-7 itself — but F01/F02/F04/F06 are half a day of prose edits and sit in exactly the
+  passages an examiner will probe. F01/F02/F04 concern quantities shared with Paper A and
+  Paper B+C, so any fix must go through the sync matrix (RCA-001 invariant 3), and all
+  implicated files are guarded (Ch.3–6 + apendices by RCA-001, Ch.5 also by RCA-002).
+- **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
+- **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
 ## Current Objective
-Maintain a clean main branch while preserving project-relevant context for the XAI evaluation framework and thesis production work.
+**Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
+Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
+values so the manuscripts consume them rather than restating them, and build all four
+outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
+that a manuscript number still matches its artifact; Phase 2 removes the opportunity
+for it to diverge at all, and closes the one gap Phase 1 cannot cover — render-time
+defects like A13, which was found only by rebuilding.
+
+Standing workstream (unchanged): maintain the CIFIE/FOM-7 book chapter and its ACE
+manuscript-editing support tooling.
 
 ## Current State
 
 ### Working
-- Core framework supports config-driven XAI experiments.
-- FastAPI backend serves experiment runs, health checks, batch operations, and human evaluation endpoints.
-- Thesis production is organized under `thesis/` with publication fragments under `pub/`.
-- Experiment and recovery workflows are organized under `configs/`, `experiments/`, `scripts/`, and `src/experiment/`.
-- Local ACE skill `cifie-manuscript-editing` was renamed to reusable `manuscript-editing`.
-- The generic manuscript skill retains CIFIE/FOM-7 behavior through a project profile for `publications/book_chapters/2026_cifie_xai_fom7/`.
-- `.aceconfig` manuscript-related triggers now point to `.ace/skills/manuscript-editing/SKILL.md`.
-
-### Local Tooling
-- ACE is local AI-assisted Coding Engineering tooling and is not part of the project source.
-- ACE generated files should remain ignored locally via `.git/info/exclude`, not committed to the repository.
-- The local manuscript editing skill is available as `.ace/skills/manuscript-editing/SKILL.md`; invoke it as `manuscript-editing`, or with the CIFIE/FOM-7 profile for CIFIE book chapter work.
+- **Task 1 (closed 2026-08-26):** Paper B+C's review corpus released as a 44-row coded
+  CSV, CI-verified against the manuscript's printed distribution; reconstruction
+  disclosed in §Validity. Author verification still wanted on the 28 reconstructed
+  coding rows before submission.
+- **Task 2 (closed 2026-08-28):** F03 and F04 resolved. All 16 EXP4 source files
+  recovered from bytecode and verified; ICC relabelled ICC(1,1); Supplementary Tables
+  S3 and S6 corrected; EXP4 rubric citation corrected in three documents. See RCA-002.
+- Manuscript-claim enforcement now covers the supplementary document as well as the
+  main text: 61 claims, 111 manuscript sites, 16 retired-value guards, 10 cited
+  artifacts, plus both review corpora and the EXP4 reconstruction, all in CI.
+- Thesis/Paper synchronization pass completed for validation-boundary language and EXP3 scope. The sync matrix is available at `docs/reports/sync/thesis_paper_sync_matrix.md`.
+- New `Scientific Advisor` role added to `.ace/roles/roles.md` (idea/hypothesis critique, manuscript rigor review, reference audit), sitting between Data Scientist/AI Expert (research) and Scientific Editor (publication) in the Research Workflow.
+- New project-local skill `.ace/skills/scientific-rigor-review/SKILL.md`: adapts the ai-research pack's ARA-directory `rigor-reviewer` (6-dimension epistemic review) to plain manuscript/thesis-chapter prose. Produces severity-ranked reports to `docs/review/scientific-rigor-review_*.md`. Read-only on the manuscript.
+- New project-local skill `.ace/skills/reference-audit/SKILL.md`: bibliography dedup, orphaned/unused citation detection, APA7 consistency checks, and re-verification via `paper-lookup`. Produces reports to `docs/review/reference-audit_*.md`. Report-only by default; does not edit `.bib`/reference files without explicit instruction.
+- `.aceconfig` updated: added `PEER_REVIEW: Scientific Advisor` to `role_routing`, and trigger keywords `idea review`, `hypothesis review`, `peer review`, `science correctness`, `methodology review` → scientific-rigor-review; `references`, `bibliography`, `duplicate citations`, `citation dedup` → reference-audit.
+- `.ace/packs/scientific/.aceconfig-ext` updated: added `scientific rigor` / `reference audit` triggers and `Scientific Advisor` to `roles_augmented`.
+- Project-local reusable manuscript editing skill available at `.ace/skills/manuscript-editing/SKILL.md`.
+- `.aceconfig` now maps `cifie`, `book chapter`, `manuscript editing`, `publication editing`, `academic manuscript`, `citation editing`, and `literature enrichment` to the reusable skill.
+- The skill supports Spanish academic prose revision, APA 7 consistency, evidence traceability, open-access literature enrichment, FOM-7 terminology preservation, and submission-readiness checks.
+- Sections 09 and 10 have been strengthened with verified open-access XAI evaluation sources supporting multidimensional evaluation, functionally grounded benchmarks, and human/application-grounded limits.
+- `10_limitaciones_trabajo_futuro.md` has been revised into a stronger academic Spanish section aligned with FOM-7 evidence boundaries, with expanded in-text citations for metric dependence, method configuration sensitivity, human validation limits, recourse constraints, coverage gaps, and future-work priorities.
+- `02_introduccion.md` has been revised into a stronger academic Spanish introduction that frames FOM-7 as a response to the evidentiary gap in XAI evaluation, with expanded APA-style in-text citations for opacity, post-hoc methods, metric fragmentation, functional evaluation, toolkits, and auditable evidence.
+- `02_introduccion.md` received a follow-up polish aligning its evidentiary language with section 03: explanation as evidence must not confuse narrative persuasiveness with technical validity, and FOM-7 preserves the relationship among artefact, construct, test, result, and claim.
+- `03_fundamentos_xai.md` has been revised through a literature-enrichment loop into a stronger foundations section. It now distinguishes artifact type, interpretability, explainability, transparency, local/global scope, plausibility, fidelity, stability, robustness, metric proxies, and the functionally-grounded scope of FOM-7.
+- `@miller2019` was added to the CIFIE references to support the social/contrastive dimension of explanation while keeping the manuscript clear that audience plausibility is not technical fidelity.
 
 ### In Progress
-- Repository hygiene cleanup on `main`.
-- Preserve useful project context while excluding local assistant tooling artifacts.
+- **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
+  macros and Quarto inline values; all four outputs built in CI.
+- CIFIE/FOM-7 book chapter publication editing
+- Thesis/Paper final scientific-editor consistency checks
 
 ### Blocked
-- Full `git status` can be slow or time out on the WSL `/mnt/c` worktree; prefer targeted Git checks when possible.
+- Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
-1. Commit the project context updates.
-2. Continue using narrow Git commands for status checks on this worktree.
-3. Keep ACE artifacts out of project commits unless the project explicitly adopts them later.
+0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
+   inline values; add a CI job building Paper A, Paper B+C, the supplementary and the
+   thesis, failing on undefined references and crossref warnings.
+0a. [ ] Author-verify the 28 reconstructed review-corpus coding rows before submission.
+0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
+   script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
+   disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
+0c. [x] **Thesis rigor review 2026-08-28 remediation — COMPLETE 2026-08-28.** All 13
+   findings closed in 11 commits (e7d1f01f4..35eccb62b), plus F14/F15 found and fixed by
+   the new coverage check. Plan:
+   `docs/planning/thesis_rigor_remediation_plan_2026-08-28.md` (Architect, 2026-08-28).
+   Blast radius verified: **F02 and F04 are thesis-only** (Paper A carries only the registered
+   aggregate costs); only F01 crosses documents, into one Paper B+C paragraph (~l.1297);
+   Paper A §636 and Supplementary Table S2 are already correctly scoped.
+   Author decisions taken 2026-08-28: **D1 = Option A** (defend the narrow,
+   configuration-/feature-space-scoped LIME instability claim; EXP3's 0.75-0.93 and Appendix C's
+   kw=10.0 -> 0.664 become a second reported finding rather than contradictions);
+   **D2 = re-run the Table S5 num_samples probe, 1h timebox**, falling back to historical
+   disclosure (closes the RCA-002 leftover either way); **D3 = keep "prescriptivos"** plus a
+   scope sentence, promoted to T2.9 now that T2.4 removes the threshold tension.
+   Plan is registry-first by design: Phase 1 registers 20 per-model cost cells + 10 SHAP quality
+   cells + 4 retired-value guards BEFORE any prose edit, because F02/F03/F08/F09 all passed a
+   green verifier for want of registration, not for want of accuracy.
+   Critical path Phases 1-3 ~9h; Phase 5 (F13 unregistered-literal check) folds into Task 3.
+   Detail of the finding list below / in the review:
+0d. [ ] (superseded detail) original per-finding priority order (see
+   `docs/review/scientific-rigor-review_thesis_2026-08-28.md`). Priority order:
+   F01 (scope the LIME "structural instability" claim in Ch.6 §sec-limitaciones,
+   §sec-sintesis and Ch.5's opening — it currently contradicts Appendix C and EXP3),
+   F02 (re-derive the four prescriptive cost ranges; rewrite the DiCE recommendation),
+   F04 (make the SHAP F>=0.80 / S>=0.70 thresholds conditional on model family),
+   F06 (define the Brechas or drop the numbering), then F05/F07/F09 (sentence-level).
+   If time allows: F03, F08, F10, F11, F12. All targets are RCA-001-guarded; run
+   `verify_claims.py` + `verify_sync.py` and register new numbers rather than typing them.
+1. [x] Resolve the 2026-08-11 thesis-review findings F01/F02/F03 in Ch.4/Ch.5/Ch.6 —
+   verified fixed by the 2026-08-28 re-review.
+2. [ ] Re-run targeted consistency check for EXP3 mentions after any future Paper A or Paper B+C edits.
+3. [ ] Verify final rendered PDFs after publication manuscripts stabilize.
+4. [ ] Use `manuscript-editing` with the CIFIE/FOM-7 profile for future CIFIE section revision passes.
+5. [ ] Continue APA/citation and compression checks once final CIFIE requirements are confirmed.
+6. [ ] Validate final submission artifacts after manuscript stabilization.
+7. [ ] Run `Scientific Advisor` (`scientific-rigor-review` + `reference-audit`) against the CIFIE chapter and/or Paper A/B+C once each is near-final, before final submission.
+
+- **Mode (2026-08-28, third pass):** EXECUTION — Developer applied the rigor-review
+  remediation, Phases 1-3 of the approved plan, in 8 atomic commits:
+  F01 (e7d1f01f4), F02 (ed54a97ec), F04+F12 (9baf99921), F03 (fdee4e9bf),
+  F08+F09 (6046171ac), F05+F07 (d398bcb8f), F06 (46fab539f), Paper B+C F01 +
+  sync matrix (dd589660c). **No statistic changed in any commit.**
+  Registry grew 61 -> 83 claims and 111 -> 157 manuscript sites: 13 per-model cost
+  claims, 8 per-model SHAP quality claims, supp.s2.kw10.fidelity, plus 5 new
+  retired-value guards (F01.lime.kernel_independence and F02.{dice,lime,treeshap,
+  anchors}.cost_range). The F02 guard was negative-tested: reinserting "770-4,500"
+  fails verify_claims.py with exit 1.
+  **F03 took the D2 fallback.** The re-run was not attempted because the surviving
+  script `src/scripts/run_sensitivity_analysis.py` sweeps {500,1000,2000,5000,10000}
+  over the EXP1 base config, not the appendix's three levels at RF/seed42/N=100 —
+  running it would produce a new measurement, not a reproduction of Table S5 (the
+  same reasoning RCA-002 applied to re-running the EXP4 judges). Table S5 is now
+  disclosed as a historical exploratory probe, with the two probes' disagreement
+  stated explicitly and both held to their directional conclusion. This closes the
+  RCA-002 leftover by disclosure. **Do not re-run that script expecting Table S5.**
+  Blast radius confirmed during execution: F02 and F04 were thesis-only; Paper A
+  needed no edit at all (its §636 was already correctly scoped); the Paper B+C
+  supplementary was already correct — only its main-text summary of Table S2 had
+  dropped the kw=10.0 row while citing the table.
+  Verification: verify_claims.py, verify_sync.py and verify_exp4_reconstruction.py
+  all green; crossrefs 70 labels / 0 dangling; all four outputs rebuilt clean
+  (3 PDFs via tectonic-portable, thesis DOCX via render.ps1) with no undefined
+  references; the four retired cost ranges absent from all sources.
+  Still open: F10 (chi2~15.2 underived) and F11 (Anchors MNAR bias direction) as
+  accepted suggestions, and F13 -> Task 3.
+
+- **Mode (2026-08-28, fourth pass):** EXECUTION — Phases 4 and 5 of the remediation plan.
+  **All 13 review findings now closed** (F10 `df49569b0`, F11 same commit, F13 `35eccb62b`).
+  F10's figure turned out to be arithmetically exact but mislabelled: 30.44/2 = 15.22 and
+  P(chi2_3 > 15.22) = 0.0016 is *halving the statistic*, not a 50% power reduction. The
+  passage now shows the operation and adds the noncentrality reading (16.72, p = 0.0008) so
+  the conclusion holds under either. F11 bounded the Anchors MNAR bias empirically with the
+  tau=0.90 row: coverage 76->96% and fidelity 0.386->0.421, so the bias is real, moderate,
+  and does not move Anchors off third/fourth.
+  **F13 built the check that closes the defect class.** `verify_claims.py` gained a fourth
+  check, `_check_coverage`: for files listed under `[coverage]` in the registry, every
+  result-shaped numeric literal must be registered, retired, `[[unbacked]]`, or declared
+  structural. `[[unbacked]]` is the escape hatch and the point — "we cannot re-derive this"
+  becomes a reviewable entry with a reason instead of a silent gap. `--coverage-report`
+  triages a new file without failing. Negative-tested: an invented "4,321.9" in Ch.4 fails
+  with exit 1.
+  **The Ch.4 sweep found two more defects that four prior audits read past.**
+  **F14:** the P1 table is attributed to the wrong artifact — `tbl-claim-traceability` and
+  Appendix D both cited `exp1_adult/reproducibility/reproducibility_report.csv`, a different
+  cohort (n_runs=9, rf/xgb only, RF/SHAP fidelity 0.737 vs the table's 0.732). All twelve
+  values re-derive exactly from the EXP2 run-level table, RF/N=100, five seeds, sample SD.
+  Numbers right, provenance pointer wrong — in the table that demonstrates FOM-7 gate 7.
+  **F15:** the pooled fidelity CV was wrong and the comparison inverted. LIME's 12.0% is
+  right (11.96%); SHAP is 11.43%, not 12.8%, and no aggregation tested reproduces 12.8. SHAP
+  is the *more* reproducible of the two, not the less. Both corrected and registered.
+  Registry 84 -> 138 claims, 159 -> 219 sites, via 9 new resolvers (exp2_subset_{mean,sd,cv},
+  exp2_n_mean, exp2_pooled_cv, exp2_sd, exp2_block_sd, friedman_rank,
+  wilcoxon_{meandiff,sd}). RCA-001 gained two invariants and a review trigger.
+  **Coverage is Ch.4 only.** Ch.3, Ch.5, Ch.6, apendices, Paper A, Paper B+C and the
+  supplementary are NOT swept — add them to `[coverage]` one at a time, triage with
+  `--coverage-report`, before RCA-001 Phase 2's macro generation. F14/F15 are the argument
+  for doing it: one swept file yielded two defects in a document already under two guards.
+  All four outputs rebuilt clean; all three verifiers green; crossrefs 70 labels / 0 dangling.
+
+- **Mode (2026-08-29):** PUBLICATION — Scientific Editor retired the thesis's letter-based
+  study labels. The trigger was OE5 on p. 14 (`capitulo-1-marco-teorico.qmd`), which promised a
+  taxonomy that would integrate "los Estudios A y B" — letters the reader does not meet until
+  Chapter 3. Three defects behind it: forward references with no antecedent; three competing
+  naming systems for the same objects (letter / Paper A-B / EXP1-EXP2, all three colliding in
+  Chapter 3's opening sentence); and a scheme that no longer closed, because the LLM inter-judge
+  study behind OE6 was formulated after the taxonomy and never got a letter.
+  **Canonical names now:** Estudio Omnibus Multimétrico (was A, OE2), Estudio Pareado LIME–SHAP
+  (was B, OE3), Estudio Taxonómico (was C, OE5), Estudio de Fiabilidad Inter-juez (was unlettered,
+  OE6). OE1 and OE4 are declared transversal to the two empirical studies rather than assigned to
+  one. Definition site is the new `{#tbl-estudios}` table in Chapter 1, placed between the specific
+  objectives and the hypotheses — before any study name is used in an argument.
+  36 sites migrated across `introduccion`, `capitulo-1`, `capitulo-3`, `capitulo-4`, `capitulo-5`.
+  **Anchors deliberately frozen:** `#sec-estudio-a`, `#sec-estudio-b`, `#sec-exp4-fiabilidad` keep
+  their identifiers though their headings were renamed — they are crossref infrastructure, and
+  churning them breaks `@sec-` references for no reader-visible gain.
+  **Second, author-directed change:** the thesis now cites no paper. "Paper A"/"Paper B" removed
+  from Chapter 3's opening (a pre-existing reference) and from the glossary note. A thesis is a
+  self-contained deposit document, and the "Paper B" it named no longer exists under that name —
+  it is the merged Paper B+C. This also closes the Paper B vs Paper B+C discrepancy flagged in
+  `thesis_paper_sync_matrix.md` by removing the reference rather than correcting it.
+  **Out of scope, deliberately:** `outputs/analysis/paper_a_exp2_stats/` paths in `apendices`,
+  `capitulo-3` and `capitulo-4` stay. They are artifact locations under the RCA-001 invariant
+  "every artifact path a manuscript cites exists in the working tree", and are consumed by Paper A
+  and Paper B+C too; renaming is an artifact migration (directory + generating scripts +
+  `claim_registry.toml` resolvers), not a prose edit.
+  No numeric value, table datum or citation changed; `verify_claims.py` (142 claims, 225 sites,
+  26 retired-value guards) and `verify_sync.py` green before and after. Diff line counts are
+  inflated by re-wrapping paragraphs to the files' ~78-column prose width. Prior review reports
+  that use the old letters are dated records and were **not** rewritten.
+  Decision recorded in `docs/adr/0012-thesis-study-nomenclature.md`. Outputs not rebuilt — the
+  thesis `.docx` still carries the old labels until the next `thesis/render.ps1` run.
+  **Resolved later the same day (OE5/OE6 wording, a content change, not a naming one).** The open
+  item was that OE5 claimed only an integrative role while OE6 declared itself derived from the
+  taxonomy's Brecha 3, leaving OE6 without a legitimate antecedent. The forward reference first
+  considered — OE5 saying "y base de la que se deriva el objetivo 6" — was **rejected**: an
+  objective is stated ex ante and must not describe an ex post outcome, which is the very vice
+  OE6 admits about itself. Fixed instead from both ends:
+  (1) **OE5 gains an ex-ante deliverable** — "y que haga explícitas las brechas de constructo del
+  campo". Gap-identification is formulable in advance, is what Chapter 5 already delivers
+  (§`sec-taxonomia-brechas`, three gaps) and is already how Ch.1's "Tipo de investigación"
+  describes the taxonomic component. OE6 now executes something OE5 promised.
+  (2) **OE6 compressed from four sentences to two.** Its epistemic-status defence was stated four
+  times over (OE6 itself, the "Estatuto epistémico diferenciado de P2" paragraph, Ch.5 §`sec-exp4-fiabilidad`, the Ch.6 objectives table); in a list where OE1–OE5 are single sentences,
+  the four-sentence outlier flagged OE6 as the weak objective before the reader had cause to think
+  so. The redundant sentence ("a diferencia de los objetivos 1–5, se formuló una vez construida esa
+  taxonomía") is dropped; Brecha-3 traceability, the exploratory/non-confirmatory scope marker and
+  both citations are kept, with the status argument left to P2 where the claim is actually made.
+  **No scope declaration was retired — only de-duplicated.** Ch.6's OE5 row updated to match
+  ("y explicitar brechas de constructo", pointing at the three gaps and Brecha 3 as OE6's origin);
+  its OE6 row is left as "Completado (resultado negativo)", which is right: the objective was to
+  *quantify*, and a low ICC is the objective met, not failed.
 
 ## Active Constraints
-- Do not commit secrets, generated caches, datasets, model binaries, or local assistant tooling.
-- Keep experiment, thesis, API, and dashboard context project-specific.
-- Preserve existing project source and generated research artifacts unless explicitly asked to remove them.
+- .ace/standards/coding.md
+- .ace/standards/security.md
+- Keep thesis and paper artifacts read-only unless explicitly instructed otherwise.
+- Keep the CIFIE chapter as a distinct publication output under `publications/book_chapters/2026_cifie_xai_fom7/`.
+- Thesis study nomenclature is fixed by ADR-0012: functional names (Estudio Omnibus Multimétrico / Estudio Pareado LIME–SHAP / Estudio Taxonómico / Estudio de Fiabilidad Inter-juez), never letters; the thesis names no paper; section anchors `#sec-estudio-a`, `#sec-estudio-b`, `#sec-exp4-fiabilidad` are frozen.
+
+## Session Notes
+- Synchronized thesis, Paper A, and Paper B+C around the June 13 validation-boundary assessment: functionally grounded comparative evidence is retained as the supported contribution; synthetic/transparent-model ground-truth tests, dependency-aware perturbation, and human-centered validation remain future validity-strengthening work.
+- Updated `thesis/capitulo-3-diseno-experimental.qmd` and `thesis/capitulo-6-conclusiones.qmd` so EXP3 no longer contradicts the later LIME extension: EXP3 supports SHAP-Anchors fidelity replication and a LIME-only extension, but not a full paired SHAP-LIME cross-dataset stability claim.
+- Updated `docs/reports/paper_a/paper_a_prototype_jmlr.tex` and `docs/reports/paper_a/paper_a_validity_and_reporting_caveats.md` to keep Paper A scoped to its SHAP-only EXP3 check while acknowledging the broader LIME-only extension outside Paper A's confirmatory claim.
+- Updated `docs/reports/paper_bc/paper_bc_jmlr.tex` to align the validity-claim ladder and correct the LIME extension export path to `outputs/analysis/exp3_lime_results.csv`.
+- Created and later generalized the CIFIE skill into the reusable `manuscript-editing` ACE skill with CIFIE/FOM-7 profile support.
+- Updated `.aceconfig` trigger mappings for CIFIE manuscript editing tasks.
+- Strengthened the skill with an explicit open-access literature enrichment workflow that uses the `literature` / `paper-lookup` skill for Semantic Scholar, Crossref/OpenAlex, and OA verification before citations are added.
+- Ran an OA literature enrichment pass: Semantic Scholar returned HTTP 429 for broad searches but verified selected identifier lookups; OpenAlex and Crossref verified accepted DOI metadata and OA status for Nauta et al. (2023), Canha et al. (2025), Pawlicki et al. (2024), Bhattacharya and Verbert (2024), and Doshi-Velez and Kim (2017).
+- Updated section 09/10 manuscript citations, `references.bib`, `references_apa7.md`, `citation_audit.md`, and `sources/evidence_map.md` with accepted source details.
+- Revised `10_limitaciones_trabajo_futuro.md` for academic prose, APA 7 in-text citation support, and FOM-7 alignment; no thesis or paper artifacts were edited.
+- Revised `02_introduccion.md` for academic prose, APA 7 in-text citation support, and FOM-7 alignment; no thesis or paper artifacts were edited.
+- Updated `docs/planning/implementation_plan.md` for the skill creation task.
+- On branch `publication/cifie-xai-fom7-book-chapter`, added implementation-plan task 5 for revising section 03 through a literature-enrichment loop.
+- Queried Semantic Scholar first for selected XAI foundations sources; the shared pool returned successful DOI lookups for Murdoch et al. (2019), Marcinkevičs and Vogt (2023), and Miller (2019), and HTTP 429 for some other DOI/topic queries.
+- Cross-checked accepted foundations sources through OpenAlex and Crossref. OpenAlex verified OA status for Murdoch et al. (PNAS PDF), Marcinkevičs and Vogt (Wiley PDF), Nauta et al. (ACM PDF), Schwalbe and Finzel (Springer PDF), Rudin et al. (Project Euclid PDF), and Miller (arXiv PDF).
+- Added `@miller2019` to `references/references.bib` and `references/references_apa7.md`; updated `references/citation_audit.md` and `sources/evidence_map.md` for the section 03 literature loop.
+- Revised `03_fundamentos_xai.md` for academic Spanish prose, citation support, and FOM-7 alignment; no `thesis/` or `pub/` artifacts were edited.
+- Added `Scientific Advisor` role and `scientific-rigor-review`/`reference-audit` skills to extend ACE with peer-review-style science-correctness and bibliography-hygiene capability, on user request. No thesis/paper/CIFIE content was reviewed or edited in this session — this was a framework-extension task only.
+- 2026-08-28: "unrecoverable" is a claim about evidence and deserves the same
+  verification as any other. RCA-001 wrote off the EXP4 scripts without checking
+  `__pycache__`; all seven modules, four CLI scripts and five test modules were in
+  fact recoverable, and recovering them exposed a mislabelled statistic (ICC(1,1)
+  reported as ICC(2,1)) and a mis-cited measurement instrument that no amount of
+  re-reading the manuscripts would have found.
+- 2026-08-28: the EXP4 bytecode in `src/evaluation/__pycache__/` and
+  `scripts/__pycache__/` is now the only surviving copy of the original source and is
+  guarded by RCA-002. Do not delete it.
+- 2026-08-29: Retired the thesis's Estudio A/B/C letters for functional names and removed every Paper A / Paper B reference from thesis prose, on user request. Definition site is `{#tbl-estudios}` in Chapter 1; section anchors kept. See `docs/adr/0012-thesis-study-nomenclature.md`. Regression check: grep the thesis sources for a bare study letter (only the tbl-estudios note should match) and for "Paper A"/"Paper B"/"Paper C" (nothing should match).

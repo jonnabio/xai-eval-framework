@@ -40,7 +40,7 @@ siguiente:
 | H2: diferencias en estabilidad | **Confirmada** | $\chi^2_F = 40.68$; margen 421% |
 | H3: SHAP-LIME difieren en calidad y coste | **Confirmada** | $d_z = +4.82$ (fidelidad); $d_z = +3.00$ (estabilidad); 75/75 positivas |
 | P1: CV < 15% en métricas primarias | **Parcialmente confirmada** | SHAP-fidelidad: CV=0.8%; LIME-estabilidad: CV=86.2% (incoherencia estructural, no ruido del protocolo) |
-| P2: Jueces LLM alcanzan fiabilidad aceptable en evaluación semántica XAI | **No confirmada (resultado negativo)** | ICC(2,1) entre 0.321 y 0.601; ninguna dimensión alcanza umbral $\geq 0.75$ (EXP4, $n=147$, 3 jueces) |
+| P2 (exploratoria, declarada en el Capítulo 1): Jueces LLM alcanzan fiabilidad aceptable en evaluación semántica XAI | **No confirmada (resultado negativo)** | ICC(1,1) entre 0.321 y 0.601; ninguna dimensión alcanza umbral $\geq 0.75$ (EXP4, $n=147$, 3 jueces) |
 
 : Síntesis de hipótesis y proposiciones de trabajo. {#tbl-hipotesis}
 
@@ -49,9 +49,9 @@ siguiente:
 | OE1 — Formalizar protocolo FOM-7 | Completado. El protocolo opera como secuencia de 7 puertas y produjo 275 artefactos calificados con trazabilidad completa. |
 | OE2 — Evaluar SHAP, LIME, Anchors, DiCE sobre 5 modelos | Completado. Benchmark multi-métrico sobre UCI Adult Income con 5 métricas primarias. |
 | OE3 — Cuantificar la relación calidad-coste SHAP-LIME | Completado. Análisis pareado sobre 75 celdas coincidentes con corrección de multiplicidad Holm-Bonferroni. |
-| OE4 — Caracterizar reproducibilidad del protocolo | Completado. CV < 3% para fidelidad; variabilidad del coste inherente a la heterogeneidad del hardware. |
-| OE5 — Construir taxonomía estructurada | Completado. Véase el Capítulo 5. |
-| OE6 — Cuantificar fiabilidad de evaluadores semánticos LLM | Completado (resultado negativo). EXP4: ICC(2,1) entre 0.321 y 0.601 en 7 dimensiones; ninguna alcanza umbral $\geq 0.75$. Véase §sec-exp4-fiabilidad. |
+| OE4 — Caracterizar reproducibilidad del protocolo | Completado. CV < 3% en fidelidad para el subgrupo replicado RF/$N=100$ y CV agrupado de 11.4% (SHAP) y 12.0% (LIME) sobre el conjunto completo de ejecuciones, todos por debajo del umbral del 15% de P1; variabilidad del coste inherente a la heterogeneidad del hardware. |
+| OE5 — Construir taxonomía estructurada y explicitar brechas de constructo | Completado. Taxonomía de cuatro ejes en el Capítulo 5; tres brechas enunciadas en §sec-taxonomia-brechas, de las que la Brecha 3 origina OE6. |
+| OE6 — Cuantificar fiabilidad de evaluadores semánticos LLM (objetivo exploratorio, derivado de la Brecha 3) | Completado (resultado negativo). EXP4: ICC(1,1) entre 0.321 y 0.601 en 7 dimensiones; ninguna alcanza umbral $\geq 0.75$. Véase §sec-exp4-fiabilidad. |
 
 : Cierre de objetivos específicos. {#tbl-objetivos}
 
@@ -92,11 +92,15 @@ tamaños de efecto de magnitud muy grande ($d_z > 2.8$) y sin excepciones en
 había asumido pero raramente demostrado: las dimensiones de calidad de las
 explicaciones XAI son parcialmente independientes y no sustituibles entre sí
 [@pawlicki2024; @bhattacharya2024; @burger2023]. Específicamente, la inestabilidad de LIME no
-es un artefacto de escenarios extremos sino una propiedad estructural del
-método bajo condiciones controladas. Esta demostración cuantifica el riesgo
-de usar LIME en contextos donde se exija consistencia explicativa (auditoría,
-decisiones de alto riesgo), un riesgo que los trabajos de referencia sobre LIME
-[@ribeiro2016] no cuantifican en benchmarks multi-métricos.
+es un artefacto de escenarios extremos ni de un presupuesto de muestreo
+insuficiente, sino una propiedad reproducible del método bajo las condiciones
+controladas del benchmark —y, como delimitan §sec-limitaciones y §sec-exp3-nota,
+una propiedad del par (configuración, espacio de características) más que del
+método en abstracto. Esta demostración cuantifica el riesgo de usar LIME en
+contextos donde se exija consistencia explicativa (auditoría, decisiones de alto
+riesgo) sin haber medido antes su estabilidad en el espacio de despliegue, un
+riesgo que los trabajos de referencia sobre LIME [@ribeiro2016] no cuantifican
+en benchmarks multi-métricos.
 
 La taxonomía desarrollada en el Capítulo 5 complementa este hallazgo empírico con un marco
 conceptual que organiza el espacio de métricas de evaluación en cuatro ejes
@@ -111,31 +115,53 @@ el espacio experimental del benchmark.
 
 Los resultados del benchmark son suficientemente consistentes para formular
 criterios de selección prescriptivos en lugar de simples "recomendaciones
-contextuales":
+contextuales". El carácter prescriptivo se refiere a la firmeza del criterio
+dada la evidencia, no a su alcance: cada criterio queda condicionado a las
+condiciones del benchmark especificadas en @tbl-fronteras-generalizacion
+—dataset Adult Income, clasificación tabular binaria, las cinco familias de
+modelo evaluadas y las operacionalizaciones métricas del Capítulo 3— y ninguno
+se extiende a preferencias de usuarios finales, dominios regulados con
+restricciones normativas propias ni criterios de comprehensibilidad. Con esa
+delimitación:
 
 **SHAP debe seleccionarse** como método primario en cualquier aplicación que
-requiera fidelidad verificable ($\bar{F} \geq 0.80$) o consistencia
-explicativa ($\bar{S} \geq 0.70$). Para modelos basados en árboles (XGBoost,
-Random Forest), TreeSHAP produce estas garantías con un coste de 1–322 ms/
-instancia, lo que hace esta elección también la más eficiente.
+requiera fidelidad o consistencia explicativa verificables, con la condición de
+comprobar el umbral en la familia de modelo concreta. Sobre la media global SHAP
+satisface $\bar{F} = 0.808 \geq 0.80$ y $\bar{S} = 0.732 \geq 0.70$, pero la
+media global no es el criterio operativo: por familia, la fidelidad alcanza
+$\geq 0.80$ solo en logreg (0.946) y SVM (0.882), y la estabilidad alcanza
+$\geq 0.70$ solo en logreg (0.880), RF (0.949) y SVM (0.925), descendiendo a
+0.575 en XGBoost y 0.331 en MLP. Para modelos basados en árboles, TreeSHAP
+reduce el coste en dos o tres órdenes de magnitud respecto a KernelSHAP —21 ms
+por instancia en XGBoost y 2,820 ms en Random Forest, frente a 54,231 ms en SVM—
+lo que hace esta elección también la más eficiente en XGBoost.
 
 **LIME puede seleccionarse** exclusivamente cuando el coste computacional es
 el criterio dominante y la aplicación no requiere comparación de explicaciones
-entre instancias ni auditoría de consistencia. Los 3–9 ms de LIME en
-logreg/xgb/mlp hacen posible la explicación en tiempo real, con la condición
-explícita de que las explicaciones no sean comparadas entre ejecuciones.
+entre instancias ni auditoría de consistencia. Las medias por familia de modelo
+de LIME en logreg/xgb/mlp —73 ms, 122 ms y 52 ms por instancia respectivamente—
+hacen posible la explicación en tiempo real, con la condición
+explícita de que las explicaciones no sean comparadas entre ejecuciones. En SVM
+esa ventaja desaparece: LIME asciende a 17,620 ms de media.
 
 **Anchors debe usarse con cautela** para modelos no-lineales (RF, SVM, MLP) en
-aplicaciones de latencia crítica: sus costes de 10,000–70,000 ms/instancia
-son inviables en producción. Su uso es justificable exclusivamente cuando la
+aplicaciones de latencia crítica: sus medias por familia de modelo —15,564 ms
+(MLP), 37,415 ms (SVM) y 48,955 ms (RF) por instancia— son inviables en
+producción, y su cobertura analítica cae al 76.0% por no convergencia. Su uso es
+justificable exclusivamente cuando la
 forma semántica IF-THEN es un requisito regulatorio o de usuario y el modelo
-es de complejidad baja (logreg).
+es de complejidad baja (logreg, 2,918 ms).
 
 **DiCE es la opción de esta comparación orientada a acciones correctivas**
 cuando el objetivo es generar acciones correctivas
 (*algorithmic recourse*) para cambiar la predicción. Sus métricas de fidelidad
-bajas son irrelevantes para este objetivo; sus costes moderados (770–4,500 ms)
-son aceptables en la mayoría de los contextos.
+bajas son irrelevantes para este objetivo, puesto que la métrica de atribución no
+mide lo que DiCE optimiza. Su coste, en cambio, sí es una restricción real y no
+debe presentarse como moderado: con una media de 28,209 ms por instancia
+(mediana 11,880 ms) es el segundo más elevado del benchmark, solo por debajo de
+Anchors (38,159 ms), y varía entre 12,634 ms (MLP) y 66,266 ms (SVM) según la
+familia de modelo. DiCE se justifica cuando el recourse es el objetivo y no
+existe sustituto, no por eficiencia.
 
 ## Posicionamiento respecto a la literatura y separación de contribuciones {#sec-posicionamiento}
 
@@ -205,7 +231,7 @@ usuarios finales.
 
 *Artefacto de parsimonia.* El parámetro `num_features = 10` de LIME actúa como techo rígido sobre el número de características activas devueltas. La parsimonia de LIME es, por tanto, un artefacto de configuración, no una propiedad emergente del modelo sustituto local. Las comparaciones de parsimonia con métodos sin restricción explícita deben interpretarse en este contexto.
 
-*Inestabilidad estructural de LIME.* La inestabilidad de LIME (CV = 86.2%, similitud coseno media ≈ 0.014) fue examinada sistemáticamente variando `num_samples` ∈ {500, 1000, 2000}: la estabilidad permanece cercana a cero en todos los niveles, descartando que el resultado sea un artefacto de convergencia. Un análisis adicional de sensibilidad a `kernel_width` ∈ {0.25, 0.75, 3.0, 10.0} muestra que los valores inferiores a 3.0 producen pesos degenerados (cero) en el espacio de características preprocesado de 103 dimensiones, confirmando que la referencia es el mínimo viable y que la inestabilidad es estructural, no dependiente de la configuración del kernel (Apéndice C).
+*Alcance de la inestabilidad de LIME.* La inestabilidad de LIME observada en EXP2 (CV = 86.2%, similitud coseno media ≈ 0.014) fue examinada sistemáticamente variando `num_samples` ∈ {500, 1000, 2000}: la estabilidad permanece cercana a cero en todos los niveles, lo que descarta que el resultado sea un artefacto de convergencia del muestreo. La sensibilidad al ancho del kernel, en cambio, sí es sustantiva. Un análisis a `kernel_width` ∈ {0.25, 0.75, 3.0, 10.0} muestra que los valores inferiores a 3.0 producen pesos degenerados (cero) en el espacio de características preprocesado de 103 dimensiones —de modo que 3.0 es el mínimo viable— pero que `kernel_width = 10.0` recupera una estabilidad de 0.664 a costa de la fidelidad, que desciende de 0.518 a 0.441 (Apéndice C, @tbl-appendix-lime-kw-sensitivity). El resultado debe enunciarse, por tanto, con su condición de producción: bajo la configuración de referencia y en el espacio de 103 dimensiones de Adult Income, las explicaciones de LIME son casi ortogonales entre réplicas; no se trata de una propiedad universal del método, sino de una propiedad del par (configuración, espacio de características). La validación cruzada de EXP3 (§sec-exp3-nota) confirma esta lectura desde el otro extremo: con el mismo `kernel_width = 3.0`, LIME alcanza estabilidades de 0.748–0.927 en Breast Cancer y German Credit. La consecuencia práctica no es más débil, sino más accionable: la estabilidad de LIME no puede presuponerse a partir de la literatura ni de este benchmark, debe medirse en el espacio de características y la configuración del despliegue concreto.
 
 *Sesgo de enmascaramiento y correlaciones de características.* La métrica de fidelidad enmascara características individualmente sustituyéndolas por valores de referencia medios. En el dataset Adult Income, pares como `education`/`education-num` ($r = 1.0$) y `occupation`/`education` (Cramér's $V \approx 0.34$) están moderadamente correlacionados. El enmascaramiento independiente de características correlacionadas genera instancias fuera de la distribución de entrenamiento, lo que puede sesgar la estimación de la importancia de características al hacer que el modelo reciba combinaciones de valores implausibles. No puede descartarse que parte de la brecha de fidelidad SHAP-LIME refleje sensibilidad diferencial a este sesgo en lugar de diferencias puras de calidad de atribución.
 
@@ -218,9 +244,9 @@ evidencia que sería necesaria para extender las conclusiones.
 
 | Afirmación | Soportada para | No soportada para | Validación futura requerida |
 |:---|:---|:---|:---|
-| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §sec-exp3-nota). Pendiente: replicación del contraste SHAP-LIME en datasets adicionales. |
-| La inestabilidad de LIME es estructural (CV=86%, media≈0.014) | UCI Adult Income; estabilidad definida como similitud coseno bajo perturbación gaussiana; configuración `num_samples=1000`, `kernel_width=3.0` | Otras configuraciones de LIME; otras definiciones de estabilidad (distancia Lipschitz local, varianza de pesos) | Análisis de sensibilidad de hiperparámetros con variación sistemática de `num_samples`, `kernel_width` y estrategia de perturbación |
-| FOM-7 produce resultados reproducibles (CV<3% en fidelidad primaria) | Entorno controlado; cinco semillas definidas; modelos congelados en EXP1 | Otros entornos computacionales sin control de recursos; modelos re-entrenados entre ejecuciones; datasets con alta varianza de instancias | Replicación independiente con infraestructura distinta; publicación de resultados en Zenodo con instrucciones verificadas |
+| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §sec-exp3-nota). La extensión posterior incorporó LIME en esos dos datasets, pero no instrumentó estabilidad de SHAP; por tanto, el contraste pareado SHAP-LIME completo fuera de Adult permanece pendiente. |
+| La inestabilidad de LIME es casi total en la condición medida (CV=86%, media≈0.014) | UCI Adult Income; espacio preprocesado de 103 dimensiones predominantemente binario; estabilidad definida como similitud coseno bajo perturbación gaussiana; configuración `num_samples=1000`, `kernel_width=3.0` | Otros espacios de características o datasets —§sec-exp3-nota mide 0.748–0.927 en Breast Cancer y German Credit bajo la misma configuración—; otros anchos de kernel (`kernel_width=10.0` produce 0.664, Apéndice C); otras definiciones de estabilidad (distancia Lipschitz local, varianza de pesos) | Interacción entre `kernel_width` y la dimensionalidad del espacio de características; estabilidad bajo esquemas de perturbación no gaussianos; instrumentación de la estabilidad de SHAP en los datasets de EXP3 para obtener el contraste pareado completo |
+| FOM-7 produce resultados reproducibles (CV<3% en fidelidad en el subgrupo replicado RF/$N=100$; CV agrupado 11.4% SHAP y 12.0% LIME sobre el conjunto completo, frente al umbral del 15% de P1) | Entorno controlado; cinco semillas definidas; modelos congelados en EXP1 | Otros entornos computacionales sin control de recursos; modelos re-entrenados entre ejecuciones; datasets con alta varianza de instancias | Replicación independiente con infraestructura distinta; publicación de resultados en Zenodo con instrucciones verificadas |
 | Los criterios prescriptivos de selección son válidos (Contextos A-D) | Condiciones del benchmark descritas; modelos y métricas definidas | Dominios regulados con restricciones normativas propias; preferencias de usuarios finales; criterios de comprehensibilidad | Estudios human-centered en dominios específicos (crédito, salud, justicia) con usuarios expertos |
 | DiCE es preferible para recourse sobre otros métodos | Objetivo de cambio de predicción; dataset Adult Income | Entornos con restricciones de factibilidad semántica; dominios donde la accionabilidad requiere validación causal | Evaluación de contrafactuales bajo restricciones de dominio reales con expertos |
 | La taxonomía de cuatro ejes organiza el espacio de métricas XAI | Las 15 métricas catalogadas en la matriz taxonómica; literatura revisada en el corpus de construcción | Métricas emergentes no revisadas; métricas específicas de dominio (XAI médica, XAI legal) con propiedades propias | Extensión del corpus de revisión; validación por expertos de dominio |
@@ -243,7 +269,7 @@ Wisconsin [$n = 569$, 30 características, @dua2019uci] y German Credit [$n =
 y XGBoost con tres semillas por combinación ($3 \times 2 \times 2 = 12$
 comparaciones pareadas por dataset $\times$ modelo $\times$ semilla). SHAP
 superó a Anchors en fidelidad en las 12 combinaciones, con brechas medias de
-$+0.26$ (German Credit, RF) a $+0.51$ (Breast Cancer, RF). Estos resultados
+$+0.26$ (German Credit, XGB) a $+0.51$ (Breast Cancer, RF). Estos resultados
 replican el ordenamiento observado en EXP2 en espacios de características con
 dimensionalidad y distribución distintas al dataset primario.
 
@@ -308,16 +334,19 @@ validar cualquier evaluador semántico automático.
 
 **3. Extensión del análisis de sensibilidad a hiperparámetros.** Los análisis de sensibilidad completados en el Apéndice C establecen tres resultados base: (i) la inestabilidad de LIME es robusta a variaciones de `num_samples` ∈ {500, 1000, 2000} —la similitud coseno permanece cercana a cero en todos los niveles, descartando que sea un artefacto de convergencia—; (ii) `kernel_width` ∈ {0.25, 0.75} produce pesos degenerados en el espacio preprocesado de 103 dimensiones, con `kernel_width = 3.0` como valor mínimo viable y `kernel_width = 10.0` como alternativa más estable a costa de localidad; y (iii) la cobertura de Anchors es extremadamente sensible al umbral de precisión $\tau$. Las brechas pendientes incluyen la sensibilidad del tamaño del conjunto de referencia de SHAP más allá del rango evaluado (25–100), la interacción entre `kernel_width` y `num_samples` en espacios de dimensionalidad variable, y la extensión de los análisis a los modelos SVM y MLP, que emplean KernelSHAP en lugar de TreeSHAP y exhiben distintos perfiles de coste-estabilidad.
 
-**4. Extensión cross-dataset del contraste SHAP-LIME y replicación en dominios
+**4. Completar el contraste cross-dataset SHAP-LIME y replicar en dominios
 de alto riesgo.** EXP3 replicó el ordenamiento de fidelidad SHAP-Anchors en
-Breast Cancer Wisconsin y German Credit, pero excluyó a LIME y las métricas de
-estabilidad. La extensión prioritaria es, por tanto, incorporar LIME y la métrica
-de similitud coseno al protocolo cross-dataset, de modo que los hallazgos
-centrales de esta tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en
-estabilidad— sean verificables fuera del contexto UCI Adult Income. Una segunda
-dirección es la validación en dominios regulados (crédito, salud, justicia) con
-restricciones normativas explícitas (EU AI Act, GDPR Art. 22), donde la
-elección del método explicador tiene consecuencias legales directas.
+Breast Cancer Wisconsin y German Credit, y una extensión posterior incorporó
+LIME con las mismas métricas de fidelidad y estabilidad. Sin embargo, la
+estabilidad de SHAP no fue instrumentada en esos datasets, por lo que aún no
+existe un contraste pareado SHAP-LIME completo de estabilidad fuera de UCI Adult
+Income. La extensión prioritaria es completar esa instrumentación y ampliar el
+diseño a más modelos y datasets, de modo que los hallazgos centrales de esta
+tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en estabilidad— sean verificables
+fuera del contexto Adult. Una segunda dirección es la validación en dominios
+regulados (crédito, salud, justicia) con restricciones normativas explícitas
+(EU AI Act, GDPR Art. 22), donde la elección del método explicador tiene
+consecuencias legales directas.
 
 **5. Formalización del eje de comprehensibilidad en la taxonomía.** El eje de
 contexto de tarea de la taxonomía incluye el contexto *usuario final* pero no
@@ -336,7 +365,8 @@ un protocolo reproducible y trazable, con márgenes de seguridad inferencial
 que superan el umbral crítico con amplia holgura, los resultados ofrecen una
 base sólida para la interpretación principal: SHAP es el método más fiable
 cuando fidelidad y estabilidad son requisitos; LIME es la alternativa eficiente
-con inestabilidad estructural documentada; Anchors y DiCE satisfacen objetivos
+con inestabilidad documentada bajo la configuración y el espacio de
+características evaluados; Anchors y DiCE satisfacen objetivos
 explicativos cualitativamente distintos que las métricas de atribución no
 capturan de forma adecuada.
 
@@ -352,17 +382,26 @@ avanzar de la proliferación de métricas hacia la acumulación sistemática de
 evidencia [@pawlicki2024; @canha2025; @bhattacharya2024].
 
 La implicación más amplia de esta tesis trasciende el contexto experimental.
-El hallazgo de que LIME exhibe inestabilidad estructural —no marginal, sino
-sistemática, con CV=86.2% y similitud coseno media de 0.014— es relevante para
-cualquier sistema de apoyo a la decisión que emplee LIME en entornos de
-auditoría, regulación o alto riesgo. El contexto normativo actual (EU AI Act,
-GDPR Art. 22) demanda explicaciones verificables y consistentes; un método que
-produce explicaciones casi ortogonales entre dos ejecuciones de la misma
-instancia no satisface ese requisito. Esta conclusión, sostenida por 75 pares
-de contraste con efecto $d_z = 3.002$, es la afirmación de mayor impacto
-práctico de la tesis: no es un argumento teórico contra LIME, sino una
-cuantificación empírica de su riesgo en el tipo de despliegue que la regulación
-exige evaluar.
+El hallazgo de que LIME puede exhibir inestabilidad casi total —no marginal,
+sino sistemática, con CV=86.2% y similitud coseno media de 0.014 bajo la
+configuración de referencia en el espacio de 103 dimensiones de Adult Income—
+es relevante para cualquier sistema de apoyo a la decisión que emplee LIME en
+entornos de auditoría, regulación o alto riesgo. El contexto normativo actual
+(EU AI Act, GDPR Art. 22) demanda explicaciones verificables y consistentes; un
+método que produce explicaciones casi ortogonales entre dos ejecuciones de la
+misma instancia no satisface ese requisito. La implicación operativa, sin
+embargo, no es que LIME deba descartarse universalmente: EXP3 muestra
+estabilidades de 0.748–0.927 en espacios de menor dimensión con la misma
+configuración, y el ancho del kernel modula el resultado dentro de un mismo
+espacio (§sec-limitaciones). La conclusión defendible —sostenida por 75 pares
+de contraste con efecto $d_z = 3.002$ y delimitada por ambos análisis— es que la
+estabilidad de LIME es una propiedad contingente del despliegue y no puede
+presuponerse: en un régimen regulatorio que exige consistencia, debe medirse y
+documentarse para el espacio de características y la configuración concretos
+antes de admitir el método como evidencia. Esta es la afirmación de mayor
+impacto práctico de la tesis: no es un argumento teórico contra LIME, sino la
+especificación empírica de qué debe verificarse antes de usarlo en el tipo de
+despliegue que la regulación exige evaluar.
 
 El camino hacia la excelencia en evaluación XAI no pasa por proponer una métrica
 adicional ni por declarar un método dominante universal. Pasa por construir la

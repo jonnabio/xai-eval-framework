@@ -6,7 +6,7 @@
 \usepackage{multirow}
 \usepackage{path}
 
-\jmlrheading{}{}{}{}{}{Herrera}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 5/2026}{Supplement}{PAPER-BC-SUPP}{Jonathan Herrera-Vasquez}
 
 \ShortHeadings{XAI Metrics: Taxonomy and LIME--SHAP Comparison -- Supplementary}{Herrera}
 
@@ -19,10 +19,13 @@
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
-This supplementary document contains three tables referenced from the main
+This supplementary document contains six tables referenced from the main
 text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
-LIME \texttt{kernel\_width} sensitivity probe results; and (S3) pairwise
-feature correlations for the Adult Income dataset.
+LIME \texttt{kernel\_width} sensitivity probe results; (S3) pairwise
+feature correlations for the Adult Income dataset; (S4) the
+second-reviewer taxonomy audit template; (S5) the LIME \texttt{num\_samples}
+sensitivity probe results; and (S6) the EXP6 masking-scheme sensitivity
+breakdown.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S1 — EXP4 Evaluation Rubric and Judge Prompts}
@@ -106,8 +109,17 @@ Overall Quality
   \item Judge C: \texttt{gemini-1.5-flash} (Google), temperature 0.0, max\_tokens 512.
 \end{itemize}
 
-\noindent All judges used identical prompts; the rubric template is archived at
-\path{src/prompts/templates/explanation_eval.j2} in the companion repository.
+\noindent All judges used identical prompts. The three Jinja templates that
+rendered this rubric under the three conditions
+(\texttt{exp4\_semantic\_eval\_v1.j2}, \texttt{\_label\_visible.j2},
+\texttt{\_alt.j2}) were not retained in the repository; the table above is
+therefore the authoritative record of the instrument rather than a transcription
+of a committed file. The unrelated
+\texttt{src/prompts/templates/explanation\_eval.j2} present in the repository is
+an earlier three-dimension instrument from EXP1 and was \emph{not} used for
+EXP4. The seven dimensions and the 1--5 integer scale are corroborated by the
+recovered EXP4 scoring schema (\texttt{src/evaluation/exp4\_schema.py}) and by
+the per-dimension reliability tables.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S2 — LIME \texttt{kernel\_width} Sensitivity Probe}
@@ -155,8 +167,11 @@ improves stability but at the cost of locality.
 
 Table~\ref{tab:s3_corr} contextualises the out-of-distribution masking
 discussion in the main text. Numeric--numeric correlations were computed as
-Pearson $r$ on the raw (pre-preprocessing) training set; categorical--categorical
-associations as Cramér's $V$ on the full dataset ($n = 48{,}842$).
+Pearson $r$ over the raw (pre-preprocessing) dataset ($n = 48{,}842$);
+categorical--categorical associations as Cramér's $V$ over pairwise-complete
+cases, dropping records missing either value. \texttt{workclass} and
+\texttt{occupation} are unobserved on the same $2{,}809$ records, so admitting
+missingness as its own category would manufacture an association between them.
 Only pairs with $|r| > 0.10$ or $V > 0.15$ are shown.
 
 \begin{table}[h]
@@ -164,8 +179,8 @@ Only pairs with $|r| > 0.10$ or $V > 0.15$ are shown.
 \caption{Selected feature associations in the Adult Income dataset.
 Pearson $r$ for numeric pairs; Cramér's $V$ for categorical pairs.
 \texttt{education} and \texttt{education-num} are functionally identical
-(one-to-one mapping; $V \equiv 1.0$). All values computed on the full
-pre-split dataset ($n = 48{,}842$).}
+(one-to-one mapping; $V \equiv 1.0$). Pearson $r$ over the full pre-split
+dataset ($n = 48{,}842$); Cramér's $V$ over pairwise-complete cases.}
 \label{tab:s3_corr}
 \begin{tabular}{llcc}
 \toprule
@@ -178,12 +193,12 @@ Feature 1 & Feature 2 & Type & Association \\
 \texttt{relationship}  & \texttt{sex}            & Cramér's $V$    & 0.647 \\
 \texttt{marital-status} & \texttt{relationship}  & Cramér's $V$    & 0.488 \\
 \texttt{marital-status} & \texttt{sex}           & Cramér's $V$    & 0.460 \\
-\texttt{occupation}    & \texttt{sex}            & Cramér's $V$    & 0.422 \\
+\texttt{occupation}    & \texttt{sex}            & Cramér's $V$    & 0.435 \\
 \midrule
 \multicolumn{4}{l}{\textit{Moderate categorical associations ($0.15 < V \leq 0.40$)}} \\
-\texttt{workclass}     & \texttt{occupation}     & Cramér's $V$    & 0.210 \\
-\texttt{education}     & \texttt{occupation}     & Cramér's $V$    & 0.190 \\
-\texttt{occupation}    & \texttt{relationship}   & Cramér's $V$    & 0.171 \\
+\texttt{workclass}     & \texttt{occupation}     & Cramér's $V$    & 0.216 \\
+\texttt{education}     & \texttt{occupation}     & Cramér's $V$    & 0.196 \\
+\texttt{occupation}    & \texttt{relationship}   & Cramér's $V$    & 0.176 \\
 \midrule
 \multicolumn{4}{l}{\textit{Numeric correlations ($|r| > 0.10$; all others $< 0.10$)}} \\
 \texttt{education-num} & \texttt{hours-per-week} & Pearson $r$     & 0.144 \\
@@ -203,5 +218,158 @@ information removal rather than true feature exclusion. These associations
 do not invalidate the SHAP--LIME comparison---both methods are evaluated under
 identical masking protocols---but they limit the interpretation of absolute
 fidelity values as measures of causal feature importance.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S4 — Second-Reviewer Taxonomy Audit}
+\label{sec:supp_taxonomy_audit}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s4_audit} reports the independent second-reviewer audit used to
+stress-test single-reviewer bias in the taxonomy construction. An independent
+human second reviewer, recruited through the project's human-evaluation
+dashboard, audited a stratified subset of 16 papers sampled across the six
+thematic clusters in the coded corpus:
+faithfulness/robustness, human-grounded, taxonomy/survey, benchmark/toolkit,
+LLM-judge, and counterfactual/recourse. For each paper, Reviewer~2
+records whether the source satisfies inclusion criteria and
+independently assigns the four taxonomy axes. Agreement is then computed
+against Reviewer~1 coding.
+For multi-label axes, report both exact percent agreement and Jaccard
+similarity; for single-label inclusion decisions, report Cohen's $\kappa$.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Second-reviewer audit summary. Cohen's $\kappa$ is not
+estimable for the inclusion decision because the audited subset contains
+included records only.}
+\label{tab:s4_audit}
+\begin{tabularx}{\linewidth}{p{2.8cm} p{2.0cm} p{2.8cm} p{2.4cm} X}
+\toprule
+\textbf{Audit item} & \textbf{Sample} & \textbf{Agreement metric} & \textbf{Result} & \textbf{Action} \\
+\midrule
+Title/abstract inclusion decision
+  & 16 stratified records
+  & Percent agreement; Cohen's $\kappa$
+  & 100.0\%; $\kappa$ not estimable
+  & Adjudicate include/exclude conflicts \\[3pt]
+Evaluation target axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 62.5\%; mean $J{=}0.802$
+  & Revise axis definitions if disagreement clusters \\[3pt]
+Evidence source axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 56.2\%; mean $J{=}0.771$
+  & Clarify proxy, benchmark, human, and LLM labels \\[3pt]
+Quality property axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 25.0\%; mean $J{=}0.657$
+  & Split or merge ambiguous construct labels \\[3pt]
+Task context axis
+  & 16 included records
+  & Percent agreement; Jaccard similarity
+  & 81.2\%; mean $J{=}0.906$
+  & Clarify modality and domain-transfer labels \\[3pt]
+Overall adjudication log
+  & All disagreements
+  & Count and qualitative summary
+  & 12/16 records; mean axis $J{=}0.784$
+  & Preserve final rationale in audit notes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The row-level audit is archived in
+\texttt{docs/reports/paper\_bc/}\\
+\texttt{second\_reviewer\_audit\_results.csv}. This subset audit supports
+codebook refinement and bias detection; a full-corpus independent human
+second-reviewer audit remains future work before broader inter-rater
+reliability claims are made.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S5 — LIME \texttt{num\_samples} Sensitivity Probe}
+\label{sec:supp_ns}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s5_ns} reports LIME metrics under three
+\texttt{num\_samples} settings (RF model, seed 42, $N=100$,
+\texttt{kernel\_width=3.0}, \texttt{num\_features=10}), testing whether
+the near-zero stability observed at the reference setting is an
+under-sampling artifact.
+
+\begin{table}[h]
+\centering
+\caption{LIME sensitivity to \texttt{num\_samples} (RF, seed 42, $N=100$).
+Stability = mean pairwise cosine similarity under $T=15$ Gaussian
+perturbations ($\sigma=0.1$). Reference condition:
+\texttt{num\_samples=1000}.}
+\label{tab:s5_ns}
+\begin{tabular}{lcc}
+\toprule
+\texttt{num\_samples} & Fidelity & Stability \\
+\midrule
+500                     & 0.452 & 0.011 \\
+1000 \emph{(ref.)}      & 0.461 & 0.014 \\
+2000                    & 0.459 & 0.016 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Stability remains near-zero at every sample budget tested and
+fidelity is essentially flat throughout. Doubling or halving the sample
+budget neither stabilizes the explanations nor changes the fidelity
+ordering, indicating that LIME's instability reflects the local surrogate
+fitting process itself rather than an insufficient sample count that
+additional compute would resolve.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection*{Table S6 — EXP6 Masking-Scheme Sensitivity Breakdown}
+\label{sec:supp_exp6}
+%% ────────────────────────────────────────────────────────────────────────────
+
+Table~\ref{tab:s6_exp6} reports the per-scheme breakdown for EXP6, the
+top-feature masking-sensitivity probe over the Adult RF stratum ($n=50$
+runs, 5 seeds, top-10 stored explanations from EXP2). Four masking
+schemes are compared: independent zero masking, mean replacement,
+marginal empirical replacement, and grouped mean replacement (which masks
+correlated processed feature sets together, e.g.
+\texttt{education}/\texttt{education-num},
+\texttt{marital-status}/\texttt{relationship}/\texttt{sex}, and
+\texttt{workclass}/\texttt{occupation}).
+
+\begin{table}[h]
+\centering
+\caption{SHAP--LIME top-$k$ prediction-drop advantage and drop-correlation
+advantage under four masking schemes (Adult RF stratum, $n=50$ runs, 5
+seeds). SHAP's direction is positive in all five paired seed cells under
+every scheme.}
+\label{tab:s6_exp6}
+\begin{tabular}{lcc}
+\toprule
+Masking scheme & Mean SHAP--LIME gap & Mean drop-correlation delta \\
+\midrule
+Independent zero masking      & +0.098 & +0.515 \\
+Mean replacement               & +0.098 & +0.512 \\
+Marginal empirical replacement & +0.081 & +0.625 \\
+Grouped mean replacement       & +0.053 & +0.494 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent SHAP's fidelity advantage direction is stable across all four
+schemes. Its magnitude, measured as the top-$k$ prediction-drop gap,
+decreases monotonically under progressively more correlation-aware
+masking ($+0.098 \rightarrow +0.098 \rightarrow +0.081 \rightarrow
++0.053$), consistent with the feature-correlation discussion in
+Supplementary Table~S3: independent masking of correlated features
+inflates the apparent SHAP--LIME gap relative to schemes that account for
+feature dependence. The drop-correlation delta does \emph{not} follow this
+ordering --- it is highest under marginal empirical replacement
+($+0.625$) and lowest under grouped mean replacement ($+0.494$) --- so the
+attenuation claim is supported by the prediction-drop gap alone and is not
+a general property of every masking-sensitivity endpoint.
 
 \end{document}

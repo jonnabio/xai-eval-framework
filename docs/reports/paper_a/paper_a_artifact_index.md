@@ -37,6 +37,9 @@
 | SHAP recovery batch | `outputs/batch_results.csv` | Recovery overlay source for MLP/SVM SHAP rows used by the merged Paper A snapshot. |
 | Paper-level comparison export | `outputs/paper_analysis/paper_comparison.csv` | Existing paper-facing comparison table. |
 | Complete comparison export | `outputs/paper_analysis/complete_comparison.csv` | Broader comparison export used for exploratory/reporting context. |
+| EXP3 cross-dataset result tree | `experiments/exp3_cross_dataset/results/` | Per-run outputs for the bounded external-validation check (Section "External Validity Check" in the manuscript). Contains all 12 SHAP configs (breast_cancer/german_credit x rf/xgb x 3 seeds); the 12 matching Anchors configs are not present, blocked by the alibi/numpy environment gap (see quality assessment note, Section 6). |
+| EXP3 gap-rerun driver | `scripts/run_exp3_shap_configs.py` | Script used to execute the 12 SHAP-only EXP3 configs; status tracked in `logs/run_exp3_shap_configs_status.json`. |
+| EXP2 gap-rerun driver (blocked) | `scripts/rerun_paper_a_gaps.py` | Script prepared to rerun the 25 empty EXP2 Anchors/DiCE cells and the 12 Anchors EXP3 cells once a compatible `alibi`/`dice-ml` environment is available; not runnable in the current `.venv`. |
 
 ## 5. Analysis and Figure Artifacts
 
@@ -59,7 +62,8 @@
 | Artifact | Location | Role |
 | :--- | :--- | :--- |
 | Public repository | `https://github.com/jonnabio/xai-eval-framework` | Public code and artifact repository. |
-| Zenodo archive | `https://doi.org/10.5281/zenodo.19297724` | Version-specific archive for release tag `paper-a-submission-2026-03-28`. |
+| Zenodo archive (current) | `https://doi.org/10.5281/zenodo.21538180` | Version-specific archive for commit `553f65d71b077ec181ad36da7bb6e7c9942fe116` (2026-07-24), the evidence cut reported in the current manuscript. Concept DOI `10.5281/zenodo.19297723` always resolves to the latest version. |
+| Zenodo archive (prior) | `https://doi.org/10.5281/zenodo.19297724` | Version-specific archive for release tag `paper-a-submission-2026-03-28`; kept for provenance, does not reflect the current evidence cut. |
 
 ## 8. Snapshot Synchronization Rule
 

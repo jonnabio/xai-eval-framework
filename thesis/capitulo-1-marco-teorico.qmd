@@ -23,7 +23,11 @@ evaluación reportados entre estudios [@ribeiro2016; @lundberg2017;
 identifican una marcada proliferación de métricas inconexas, inconsistencia en
 los criterios de inclusión de instancias y ausencia de protocolos que conecten
 la ejecución experimental con la inferencia estadística admisible
-[@pawlicki2024; @abdulkadir2023; @altukhi2025; @bhattacharya2024; @lipton2018]. Como
+[@pawlicki2024; @abdulkadir2023; @altukhi2025; @bhattacharya2024; @lipton2018]. Las
+revisiones panorámicas del campo coinciden en el diagnóstico: el catálogo de
+técnicas ha crecido con rapidez [@dwivedi2022], mientras que los retos abiertos
+de evaluación permanecen en buena medida sin resolver a lo largo de sucesivas
+meta-revisiones [@saeed2023]. Como
 resultado, los estudios publicados son frecuentemente inconmensurables entre sí
 y no permiten la acumulación sistemática de evidencia [@doshi-velez2017;
 @canha2025].
@@ -76,6 +80,23 @@ tesis provee esa orientación a través de un análisis empírico pareado,
 reproducible y estadísticamente riguroso
 sobre datos tabulares reales.
 
+La amplitud de dominios en que la explicabilidad se despliega refuerza la
+necesidad de criterios de selección fundamentados. La literatura reciente
+documenta aplicaciones en seguridad informática —análisis de programas
+maliciosos [@saqib2024], detección de URL fraudulentas [@mittal2023] y robustez
+frente a ejemplos adversarios [@gafur2024]—, en educación [@iatrellis2023;
+@gomez2024], en agricultura digital [@porfirio2024], en biología estructural
+[@tan2023], en la auditoría de sesgos en sistemas de clasificación de texto
+[@muntasir2024] y en la anticipación de necesidades formativas [@bobitan2024].
+El mismo desplazamiento alcanza a la simulación [@feldkamp2023], a la computación
+evolutiva [@bacardit2024] y al diseño de agentes autónomos, donde la exigencia de
+explicabilidad se plantea ya como requisito arquitectónico [@rodriguez2024;
+@hosseini2025]. En todos estos contextos la pregunta operativa es la misma —qué
+método explicador elegir y con qué garantías— y en ninguno se responde con un
+criterio único: cada dominio prioriza dimensiones de calidad distintas, lo que
+justifica un marco de evaluación multidimensional en lugar de un ranking
+absoluto.
+
 ## Objetivos e hipótesis
 
 ### Objetivo general
@@ -100,7 +121,7 @@ comparación de métodos XAI en contextos de datos tabulares.
    [@lundberg2017; @ribeiro2016; @ribeiro2018; @mothilal2020; @wachter2017;
    @kohavi1996; @abdulkadir2023; @bhattacharya2024]
 
-3. Cuantificar las diferencias en el relación calidad-coste entre LIME y SHAP
+3. Cuantificar las diferencias en la relación calidad-coste entre LIME y SHAP
    mediante pruebas estadísticas pareadas sobre celdas coincidentes de modelo,
    semilla y tamaño de muestra.
 
@@ -111,13 +132,45 @@ comparación de métodos XAI en contextos de datos tabulares.
 5. Construir una taxonomía estructurada del espacio de métricas de evaluación
    XAI organizada en cuatro ejes —objetivo de evaluación, fuente de evidencia,
    propiedad de calidad y contexto de tarea— que sirva de marco conceptual
-   integrador para los Estudios A y B [@abdulkadir2023; @pawlicki2024; @nizam2023;
-   @marcinkevics2023; @schwalbe2023].
+   integrador para el Estudio Omnibus Multimétrico —la comparación de los
+   cuatro métodos agnósticos— y el Estudio Pareado LIME–SHAP, y que haga
+   explícitas las brechas de constructo del campo [@abdulkadir2023;
+   @pawlicki2024; @nizam2023; @marcinkevics2023; @schwalbe2023].
+
+6. Cuantificar la fiabilidad inter-juez de evaluadores semánticos basados en
+   modelos de lenguaje sobre explicaciones del corpus experimental, con el fin
+   de determinar si dicho instrumento alcanza la convergencia necesaria para
+   sostener afirmaciones confirmativas. Derivado de la Brecha 3 del Capítulo 5,
+   su alcance es exploratorio y de calibración instrumental, no confirmativo;
+   el estatuto epistémico de la proposición asociada se argumenta junto a P2
+   [@koo2016; @bhattacharya2024].
+
+### Nomenclatura de los estudios
+
+La investigación se articula en cuatro estudios, cuya denominación se emplea de
+forma uniforme en el resto del documento. Los objetivos 1 y 4 —formalización del
+protocolo FOM-7 y caracterización de su reproducibilidad— son transversales a los
+dos estudios empíricos y no se adscriben a uno solo de ellos.
+
+| Estudio | Pregunta que responde | Objetivo | Capítulos |
+|:--------|:----------------------|:--------:|:---------:|
+| **Estudio Omnibus Multimétrico** | ¿Difieren SHAP, LIME, Anchors y DiCE en las cinco métricas de calidad sobre el diseño factorial completo? | OE2 | 3 y 4 |
+| **Estudio Pareado LIME–SHAP** | ¿Cómo se comporta la relación calidad-coste entre LIME y SHAP sobre celdas coincidentes de modelo, semilla y tamaño de muestra? | OE3 | 3 y 4 |
+| **Estudio Taxonómico** | ¿Qué estructura conceptual organiza el espacio de métricas de evaluación XAI y qué brechas de constructo revela? | OE5 | 5 |
+| **Estudio de Fiabilidad Inter-juez** | ¿Alcanzan los evaluadores semánticos basados en LLM la convergencia inter-juez necesaria para sostener afirmaciones confirmativas? | OE6 | 3 y 5 |
+
+: Nomenclatura, alcance y trazabilidad de los cuatro estudios. {#tbl-estudios}
+
+Estos nombres sustituyen a las letras identificadoras (Estudios A, B y C)
+empleadas en versiones previas del documento.
 
 ### Hipótesis o proposiciones de trabajo
 
 Las hipótesis estadísticas formales se estructuran en torno a los tres ejes
-confirmatorios de la investigación empírica.
+confirmatorios de la investigación empírica (H1–H3), acompañados de una
+proposición de reproducibilidad del protocolo (P1). A estas se añade una
+proposición de carácter exploratorio (P2), cuyo estatuto diferenciado se declara
+explícitamente al final de esta sección.
 
 **H1 — Diferencias globales entre métodos (fidelidad)**
 
@@ -154,27 +207,55 @@ mediante pruebas de Wilcoxon bilaterales pareadas sobre 75 celdas coincidentes
 SHAP-LIME, con corrección de Holm-Bonferroni para multiplicidad [@friedman1937;
 @demsar2006; @nemenyi1963; @wilcoxon1945].
 
+**P2 — Fiabilidad de los evaluadores semánticos (proposición exploratoria)**
+
+Un conjunto de jueces basados en modelos de lenguaje, operando sobre una rúbrica
+multidimensional sin especificación de destinatario ni criterio de corrección
+verificable, alcanza una fiabilidad inter-juez igual o superior al umbral
+convencionalmente aceptable de $0.75$ [@koo2016], medida mediante la correlación
+intraclase y el $\alpha$ de Krippendorff [@krippendorff2018]. La proposición se
+considera refutada si
+alguna dimensión de la rúbrica queda por debajo de ese umbral.
+
+**Estatuto epistémico diferenciado de P2.** P2 no forma parte del plan
+inferencial congelado en la puerta 1 del protocolo FOM-7 y no comparte el
+estatuto confirmativo de H1–H3 y P1. Se formuló con posterioridad, una vez que
+la taxonomía del Capítulo 5 identificó la Brecha 3 —la evaluación semántica
+crece más rápido que su base de validación empírica— y su función es calibrar
+un *instrumento de medida*, no evaluar los métodos explicadores. Esta
+distinción se declara aquí de forma explícita, y no *a posteriori*, porque el
+propio protocolo que esta tesis propone exige que el alcance inferencial
+admisible de cada afirmación sea declarado junto con la afirmación misma:
+presentar P2 como si hubiera sido preespecificada junto a H1–H3 sería
+precisamente el modo de fallo que la puerta 7 está diseñada para impedir. En
+consecuencia, el resultado de P2 —cualquiera que sea— no modifica las
+conclusiones confirmativas del Estudio Omnibus Multimétrico ni del Estudio
+Pareado LIME–SHAP, y se reporta como evidencia de calibración del instrumento
+semántico (Capítulos 3, 5 y 6).
+
 ## Metodología general de la investigación
 
 ### Enfoque
 
 Esta investigación adopta un enfoque cuantitativo-empírico con componente
-teórico-taxonómico. El núcleo empírico de los Estudios A y B descansa en el
-análisis estadístico de métricas computadas sobre experimentos controlados y
-reproducibles, siguiendo una lógica hipotético-deductiva. El componente
-taxonómico del Estudio C —que actúa como puente conceptual integrador— adopta
-una metodología de revisión estructurada con codificación explícita de
-dimensiones, siguiendo protocolos de síntesis narrativa rigurosa
-[@linardatos2020; @gilpin2018; @schwalbe2023; @abdulkadir2023].
+teórico-taxonómico. El núcleo empírico del Estudio Omnibus Multimétrico y del
+Estudio Pareado LIME–SHAP descansa en el análisis estadístico de métricas
+computadas sobre experimentos controlados y reproducibles, siguiendo una
+lógica hipotético-deductiva. El Estudio Taxonómico —que actúa como puente
+conceptual integrador— adopta una metodología de revisión estructurada con
+codificación explícita de dimensiones, siguiendo protocolos de síntesis
+narrativa rigurosa [@linardatos2020; @gilpin2018; @schwalbe2023;
+@abdulkadir2023].
 
 ### Tipo de investigación
 
-Los Estudios A y B corresponden a investigación comparativa-experimental no
-intervencional: los métodos XAI son los factores de tratamiento, los modelos
-predictivos son el contexto experimental y las métricas de calidad son las
-variables de resultado. El Estudio C corresponde a una revisión sistemática
-estructurada con propósito taxonómico y de síntesis de brechas de constructo en
-el campo de la evaluación XAI.
+El Estudio Omnibus Multimétrico y el Estudio Pareado LIME–SHAP corresponden a
+investigación comparativa-experimental no intervencional: los métodos XAI son
+los factores de tratamiento, los modelos predictivos son el contexto
+experimental y las métricas de calidad son las variables de resultado. El
+Estudio Taxonómico corresponde a una revisión sistemática estructurada con
+propósito taxonómico y de síntesis de brechas de constructo en el campo de la
+evaluación XAI.
 
 ### Universo y contexto experimental
 
@@ -192,16 +273,16 @@ reproducibilidad [@agarwal2022; @hedstrom2023; @canha2025].
 
 El diseño experimental adopta una estructura factorial cruzada. Las familias de
 modelos predictivos son: regresión logística (`logreg`), bosque aleatorio
-(`rf`) [@breiman2001], *gradient boosting* XGBoost (`xgb`), máquina de vectores
+(`rf`) [@breiman2001], *gradient boosting* XGBoost (`xgb`) [@friedman2001], máquina de vectores
 soporte (`svm`) y perceptrón multicapa (`mlp`). Los métodos de explicabilidad
 evaluados son SHAP [@lundberg2017], LIME [@ribeiro2016], Anchors [@ribeiro2018]
 y DiCE [@mothilal2020; @wachter2017]. El tamaño de muestra por estrato se varía
 en tres niveles: $N
 \in \{50, 100, 200\}$. Cada celda del diseño se replica con cinco semillas de
 aleatoriedad: $s \in \{42, 123, 456, 789, 999\}$. El tamaño planificado del
-benchmark primario (Estudio A) es $5 \times 4 \times 5 \times 3 = 300$
-ejecuciones; el análisis pareado LIME-SHAP (Estudio B) opera sobre 75 celdas
-coincidentes.
+benchmark primario (Estudio Omnibus Multimétrico) es
+$5 \times 4 \times 5 \times 3 = 300$ ejecuciones; el Estudio Pareado LIME–SHAP opera
+sobre 75 celdas coincidentes.
 
 ### Criterios de inclusión y exclusión
 
@@ -213,7 +294,7 @@ coincidentes.
   configuración ha sido congelada antes del inicio de la inferencia
   confirmativa.
 - Celdas para las que existen artefactos en ambos métodos comparados (SHAP y
-  LIME) para el análisis pareado del Estudio B.
+  LIME) para el Estudio Pareado LIME–SHAP.
 
 **Criterios de exclusión:**
 

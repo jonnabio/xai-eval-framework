@@ -1,0 +1,1672 @@
+# Manuscript claim registry -- single source of truth for numeric claims.
+#
+# Verified by scripts/pubs/verify_claims.py, which (a) re-derives every `value`
+# from the committed artifacts via `source`, (b) confirms the literal text is
+# still present in each manuscript listed under `appears_in`, and (c) fails if
+# any `[[retired]]` value reappears.
+#
+# Created after the 2026-08-22/23 tri-document alignment audit (RCA-001), whose
+# thirteen findings all reduced to the same cause: numbers reached the
+# manuscripts by hand and nothing ever re-derived them.
+#
+# Adding a claim: pick the resolver in scripts/pubs/claim_sources.py that
+# matches the aggregation the manuscript actually uses. Block-level and
+# run-level means differ for Anchors and DiCE, whose grid coverage is
+# incomplete -- registering the wrong one produces a false failure.
+
+[meta]
+version = 1
+rca = "RCA-001"
+
+# ---------------------------------------------------------------------------
+# EXP2 block-level means (Paper A global table, Paper B+C method ranks)
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.block.shap.fidelity"
+source = "exp2_block_mean:shap:fidelity"
+value = "0.8081"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.8081", count = 2 },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.808" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.808" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.808" },
+]
+
+[[claim]]
+id = "exp2.block.lime.fidelity"
+source = "exp2_block_mean:lime:fidelity"
+value = "0.5602"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.5602", count = 1 },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.560" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.560" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.560" },
+]
+
+[[claim]]
+id = "exp2.block.anchors.fidelity"
+source = "exp2_block_mean:anchors:fidelity"
+value = "0.3886"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.3886", count = 1 },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.389" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.389" },
+]
+
+[[claim]]
+id = "exp2.block.dice.fidelity"
+source = "exp2_block_mean:dice:fidelity"
+value = "0.1701"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.1701", count = 1 },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.170" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.170" },
+]
+
+[[claim]]
+id = "exp2.block.shap.stability"
+source = "exp2_block_mean:shap:stability"
+value = "0.7320"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.7320", count = 2 },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.732" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.732" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.732" },
+]
+
+[[claim]]
+id = "exp2.block.lime.stability"
+source = "exp2_block_mean:lime:stability"
+value = "0.0144"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.0144" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.014" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.014" },
+]
+
+# ---------------------------------------------------------------------------
+# EXP2 run-level means and medians (thesis Ch.4 per-method profile)
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.run.shap.cost.mean"
+source = "exp2_mean:shap:cost"
+value = "11708"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "11,708.3" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "11,708 ms" },
+]
+
+[[claim]]
+id = "exp2.run.shap.cost.median"
+source = "exp2_median:shap:cost"
+value = "684"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "684.1" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "684 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.cost.mean"
+source = "exp2_mean:lime:cost"
+value = "3661"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "3,660.7" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "3,661 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.cost.median"
+source = "exp2_median:lime:cost"
+value = "65.7"
+tolerance = 0.1
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "65.7" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "65.7 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.cost.mean"
+source = "exp2_mean:anchors:cost"
+value = "38159"
+tolerance = 1.0
+appears_in = [{ file = "thesis/capitulo-4-resultados.qmd", text = "38,159 ms" }]
+
+[[claim]]
+id = "exp2.run.dice.cost.mean"
+source = "exp2_mean:dice:cost"
+value = "28209"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "28,209 ms" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "28,209 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.fidelity"
+source = "exp2_mean:anchors:fidelity"
+value = "0.388"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.388" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.388" },
+]
+
+[[claim]]
+id = "exp2.run.dice.fidelity"
+source = "exp2_mean:dice:fidelity"
+value = "0.172"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.172" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.172" },
+]
+
+[[claim]]
+id = "exp2.run.dice.sparsity"
+source = "exp2_mean:dice:sparsity"
+value = "0.017"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.017" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.017" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.svm.fidelity"
+source = "exp2_model_mean:shap:fidelity:svm"
+value = "0.882"
+appears_in = [{ file = "thesis/capitulo-4-resultados.qmd", text = "0.882" }]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.logreg.fidelity"
+source = "exp2_model_mean:shap:fidelity:logreg"
+value = "0.946"
+appears_in = [{ file = "thesis/capitulo-4-resultados.qmd", text = "0.946" }]
+
+[[claim]]
+id = "exp2.run.anchors.qualified"
+source = "exp2_runs:anchors"
+value = "57"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "57/75" },
+  { file = "thesis/capitulo-3-diseno-experimental.qmd", text = "57/75" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "57 celdas calificadas (76.0%)" },
+]
+
+[[claim]]
+id = "exp2.run.dice.qualified"
+source = "exp2_runs:dice"
+value = "68"
+tolerance = 0.5
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "68/75" }]
+
+# ---------------------------------------------------------------------------
+# Inferential statistics
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "friedman.fidelity.chi2"
+source = "friedman:fidelity:friedman_statistic"
+value = "42.12"
+tolerance = 0.01
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "42.12" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "42.12" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "42.12" },
+]
+
+[[claim]]
+id = "friedman.stability.chi2"
+source = "friedman:stability:friedman_statistic"
+value = "40.68"
+tolerance = 0.01
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "40.68" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "40.68" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "40.68" },
+]
+
+[[claim]]
+id = "friedman.cost.chi2"
+source = "friedman:cost:friedman_statistic"
+value = "30.44"
+tolerance = 0.01
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "30.44", count = 2 },
+  { file = "thesis/capitulo-3-diseno-experimental.qmd", text = "30.44", count = 3 },
+]
+
+[[claim]]
+id = "friedman.fidelity.kendall_w"
+source = "friedman:fidelity:kendall_w"
+value = "0.936"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.936" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.936" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.936" },
+]
+
+[[claim]]
+id = "friedman.blocks"
+source = "friedman:fidelity:n_blocks"
+value = "15"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "$n=15$ blocks" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15 bloques" },
+]
+
+[[claim]]
+id = "wilcoxon.all.fidelity.dz"
+source = "wilcoxon:all_models:fidelity:cohens_dz"
+value = "4.82"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "4.82" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "+4.820" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "4.82" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "d_z=4.82" },
+]
+
+[[claim]]
+id = "wilcoxon.all.stability.dz"
+source = "wilcoxon:all_models:stability:cohens_dz"
+value = "3.00"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "3.00" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "+3.002" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "3.00" },
+]
+
+[[claim]]
+id = "wilcoxon.all.sparsity.dz"
+source = "wilcoxon:all_models:sparsity:cohens_dz"
+value = "0.84"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.84" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "+0.839" },
+]
+
+[[claim]]
+id = "wilcoxon.all.faithfulness_gap.dz"
+source = "wilcoxon:all_models:faithfulness_gap:cohens_dz"
+value = "2.63"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "2.63" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "+2.626" },
+]
+
+[[claim]]
+id = "wilcoxon.primary.fidelity.dz"
+source = "wilcoxon:primary:fidelity:cohens_dz"
+value = "5.37"
+tolerance = 0.005
+appears_in = [{ file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "5.37" }]
+
+[[claim]]
+id = "wilcoxon.primary.stability.dz"
+source = "wilcoxon:primary:stability:cohens_dz"
+value = "4.85"
+tolerance = 0.005
+appears_in = [{ file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "4.85" }]
+
+# ---------------------------------------------------------------------------
+# EXP3 cross-dataset cohort
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp3.shap.breast_cancer.rf.fidelity"
+source = "exp3_shap:breast_cancer:rf:fidelity"
+value = "0.7785"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.7785" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.779" },
+]
+
+[[claim]]
+id = "exp3.shap.breast_cancer.xgb.fidelity"
+source = "exp3_shap:breast_cancer:xgb:fidelity"
+value = "0.6165"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.6165" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.617" },
+]
+
+[[claim]]
+id = "exp3.shap.german_credit.rf.fidelity"
+source = "exp3_shap:german_credit:rf:fidelity"
+value = "0.7137"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.7137" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.714" },
+]
+
+[[claim]]
+id = "exp3.shap.german_credit.xgb.fidelity"
+source = "exp3_shap:german_credit:xgb:fidelity"
+value = "0.7108"
+appears_in = [
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "0.7108" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.711" },
+]
+
+[[claim]]
+id = "exp3.anchors.breast_cancer.rf.fidelity"
+source = "exp3_anchors:breast_cancer:rf:fidelity"
+value = "0.265"
+tolerance = 0.001
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.265" }]
+
+[[claim]]
+id = "exp3.anchors.breast_cancer.xgb.fidelity"
+source = "exp3_anchors:breast_cancer:xgb:fidelity"
+value = "0.208"
+tolerance = 0.001
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.208" }]
+
+[[claim]]
+id = "exp3.anchors.german_credit.rf.fidelity"
+source = "exp3_anchors:german_credit:rf:fidelity"
+value = "0.351"
+tolerance = 0.001
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.351" }]
+
+[[claim]]
+id = "exp3.anchors.german_credit.xgb.fidelity"
+source = "exp3_anchors:german_credit:xgb:fidelity"
+value = "0.451"
+tolerance = 0.001
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.451" }]
+
+[[claim]]
+id = "exp3.lime.breast_cancer.rf.fidelity"
+source = "exp3_lime:breast_cancer:rf:fidelity"
+value = "0.713"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.713" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.713" },
+]
+
+[[claim]]
+id = "exp3.lime.german_credit.xgb.stability"
+source = "exp3_lime:german_credit:xgb:stability"
+value = "0.748"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.748" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.748" },
+]
+
+# ---------------------------------------------------------------------------
+# EXP4 LLM-judge reliability
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp4.icc.n_cases"
+source = "exp4_n:icc"
+value = "147"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "n=147" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "n = 147" },
+]
+
+[[claim]]
+id = "exp4.alpha.n_cases"
+source = "exp4_n:alpha"
+value = "192"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "n=192" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "n = 192" },
+]
+
+[[claim]]
+id = "exp4.icc.clarity"
+source = "exp4:icc:clarity"
+value = "0.321"
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.321" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.321" },
+]
+
+[[claim]]
+id = "exp4.icc.semantic_plausibility"
+source = "exp4:icc:semantic_plausibility"
+value = "0.601"
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.601" },
+  { file = "thesis/capitulo-5-taxonomia.qmd", text = "0.601" },
+]
+
+# ---------------------------------------------------------------------------
+# Literature review corpus
+#
+# Paper B+C's corpus was reconstructed in 2026-08-26 (finding A14 / RCA-001) from
+# the second-reviewer audit record and the citation record, and is now released
+# as docs/reports/paper_bc/paper_bc_review_corpus.csv. Its distribution is
+# checked by scripts/pubs/check_review_corpus.py against [review_corpus.paper_bc].
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "review.corpus.paper_bc.rows"
+source = "review_corpus_rows:paper_bc"
+value = "44"
+tolerance = 0.5
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "44 coded papers" },
+  { file = "pub/claims.toml", text = "44-paper structured" },
+]
+
+[[claim]]
+id = "review.corpus.rows"
+source = "review_corpus_rows:paper_c"
+value = "24"
+tolerance = 0.5
+appears_in = [{ file = "pub/fragments/paper_c_abstract_en.tex", text = "24-study" }]
+
+# ---------------------------------------------------------------------------
+# Review corpus distributions as stated by each manuscript.
+# Checked with: python scripts/pubs/check_review_corpus.py --corpus <csv> --expect <key>
+# ---------------------------------------------------------------------------
+
+[review_corpus.paper_bc]
+# Matches the reconstructed corpus released 2026-08-26 and the figures now
+# printed in tab:prisma, tab:corpus_profile and the Gap sections. If the coding
+# changes, change the manuscript and this block together -- never this alone.
+size = 44
+clusters = { faithfulness_robustness = 15, taxonomy_survey = 10, human_grounded = 7, benchmark_toolkit = 6, llm_judge = 4, counterfactual_recourse = 2 }
+evidence_sources = { proxy = 21, human_expert = 15, benchmark = 13, end_user = 12, llm_judge = 4 }
+confidence = { high = 44 }
+
+[review_corpus.paper_c]
+# Satisfied by docs/reports/paper_c/paper_c_review_corpus.csv.
+size = 24
+
+# ---------------------------------------------------------------------------
+# Artifacts a manuscript points readers at. These must exist in the working
+# tree: A01 was a paper citing evidence that lived only on an unmerged branch.
+# ---------------------------------------------------------------------------
+
+[[cited_artifact]]
+id = "exp2.results"
+path = "experiments/exp2_scaled/results"
+cited_by = "Paper A, Paper B+C"
+
+[[cited_artifact]]
+id = "exp2.stats"
+path = "outputs/analysis/paper_a_exp2_stats"
+glob = "*.csv"
+cited_by = "Paper A, Paper B+C"
+
+[[cited_artifact]]
+id = "exp3.shap"
+path = "experiments/exp3_cross_dataset/results"
+glob = "*/*_shap/*/*/results.json"
+cited_by = "Paper A, Paper B+C"
+
+[[cited_artifact]]
+id = "exp3.anchors"
+path = "experiments/exp3_cross_dataset/results"
+glob = "*/*_anchors/*/*/results.json"
+cited_by = "Paper B+C, thesis sec-exp3-nota"
+
+[[cited_artifact]]
+id = "exp3.lime"
+path = "outputs/analysis/exp3_lime_results.csv"
+cited_by = "Paper B+C"
+
+[[cited_artifact]]
+id = "exp4.reliability"
+path = "outputs/analysis/exp4_llm_evaluation"
+glob = "*.csv"
+cited_by = "Paper B+C, thesis Ch.5"
+
+[[cited_artifact]]
+id = "review.corpus.paper_bc"
+path = "docs/reports/paper_bc/paper_bc_review_corpus.csv"
+cited_by = "Paper B+C Code and Artifact Availability"
+
+[[cited_artifact]]
+id = "exp6.masking"
+path = "outputs/analysis/exp6_masking_sensitivity"
+glob = "*.csv"
+cited_by = "Paper B+C"
+
+# ---------------------------------------------------------------------------
+# EXP2 per-model run-level cost means (thesis Ch.4 Contextos A-D and Ch.6
+# prescriptive selection criteria). Added after the 2026-08-28 rigor review
+# (F02): these passages carried hand-typed ranges -- DiCE "770-4,500 ms" against
+# a real mean of 28,209 -- that no resolver ever checked, because they were
+# never registered. Registering them is the fix; correcting the prose alone
+# would rebuild the same defect.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.run.shap.model_mean.xgb.cost"
+source = "exp2_model_mean:shap:cost:xgb"
+value = "20.70"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "21 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "21 ms" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.rf.cost"
+source = "exp2_model_mean:shap:cost:rf"
+value = "2819.83"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "2,820 ms" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.svm.cost"
+source = "exp2_model_mean:shap:cost:svm"
+value = "54230.47"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "54,231 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "54,231 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.logreg.cost"
+source = "exp2_model_mean:lime:cost:logreg"
+value = "73.15"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "73 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "73 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.xgb.cost"
+source = "exp2_model_mean:lime:cost:xgb"
+value = "122.28"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "122 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "122 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.mlp.cost"
+source = "exp2_model_mean:lime:cost:mlp"
+value = "51.59"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "52 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "52 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.svm.cost"
+source = "exp2_model_mean:lime:cost:svm"
+value = "17620.44"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "17,620 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "17,620 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.logreg.cost"
+source = "exp2_model_mean:anchors:cost:logreg"
+value = "2917.67"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "2,918 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "2,918 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.rf.cost"
+source = "exp2_model_mean:anchors:cost:rf"
+value = "48954.77"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "48,955 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "48,955 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.svm.cost"
+source = "exp2_model_mean:anchors:cost:svm"
+value = "37415.16"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "37,415 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "37,415 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.mlp.cost"
+source = "exp2_model_mean:anchors:cost:mlp"
+value = "15563.95"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15,564 ms" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "15,564 ms" },
+]
+
+[[claim]]
+id = "exp2.run.dice.model_mean.mlp.cost"
+source = "exp2_model_mean:dice:cost:mlp"
+value = "12633.81"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "12,634 ms" },
+]
+
+[[claim]]
+id = "exp2.run.dice.model_mean.svm.cost"
+source = "exp2_model_mean:dice:cost:svm"
+value = "66266.06"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "66,266 ms" },
+]
+
+# ---------------------------------------------------------------------------
+# EXP2 per-model run-level SHAP quality means. Added after the 2026-08-28 rigor
+# review (F04): Ch.4 Contexto A and Ch.6 asserted F >= 0.80 / S >= 0.70 as
+# operational guarantees, true of the global mean but false for two of five
+# model families each -- including the tree models the same sentence recommends.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.run.shap.model_mean.rf.fidelity"
+source = "exp2_model_mean:shap:fidelity:rf"
+value = "0.7287"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.729" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.xgb.fidelity"
+source = "exp2_model_mean:shap:fidelity:xgb"
+value = "0.7589"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.759" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.mlp.fidelity"
+source = "exp2_model_mean:shap:fidelity:mlp"
+value = "0.7248"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.725" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.logreg.stability"
+source = "exp2_model_mean:shap:stability:logreg"
+value = "0.8801"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.880" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.880" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.rf.stability"
+source = "exp2_model_mean:shap:stability:rf"
+value = "0.9487"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.949" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.949" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.xgb.stability"
+source = "exp2_model_mean:shap:stability:xgb"
+value = "0.5752"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.575" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.575" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.svm.stability"
+source = "exp2_model_mean:shap:stability:svm"
+value = "0.9248"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.925" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.925" },
+]
+
+[[claim]]
+id = "exp2.run.shap.model_mean.mlp.stability"
+source = "exp2_model_mean:shap:stability:mlp"
+value = "0.3313"
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.331" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.331" },
+]
+
+# ---------------------------------------------------------------------------
+# Chapter 4 registration sweep (T5.2, rigor review F13). Everything the coverage
+# check flagged in capitulo-4-resultados.qmd that an artifact can re-derive.
+# Two defects surfaced during the sweep and are recorded as F14 and F15.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "p1.shap.fidelity.mean"
+source = "exp2_subset_mean:shap:fidelity:rf:100"
+value = "0.7315"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.732" },
+]
+
+[[claim]]
+id = "p1.shap.fidelity.sd"
+source = "exp2_subset_sd:shap:fidelity:rf:100"
+value = "0.0058"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.006" },
+]
+
+[[claim]]
+id = "p1.shap.fidelity.cv"
+source = "exp2_subset_cv:shap:fidelity:rf:100"
+value = "0.80"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.8" },
+]
+
+[[claim]]
+id = "p1.shap.stability.mean"
+source = "exp2_subset_mean:shap:stability:rf:100"
+value = "0.9478"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.948" },
+]
+
+[[claim]]
+id = "p1.shap.stability.sd"
+source = "exp2_subset_sd:shap:stability:rf:100"
+value = "0.0067"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.007" },
+]
+
+[[claim]]
+id = "p1.shap.stability.cv"
+source = "exp2_subset_cv:shap:stability:rf:100"
+value = "0.71"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.7" },
+]
+
+[[claim]]
+id = "p1.lime.fidelity.mean"
+source = "exp2_subset_mean:lime:fidelity:rf:100"
+value = "0.4606"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.461" },
+]
+
+[[claim]]
+id = "p1.lime.fidelity.sd"
+source = "exp2_subset_sd:lime:fidelity:rf:100"
+value = "0.0121"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.012" },
+]
+
+[[claim]]
+id = "p1.lime.fidelity.cv"
+source = "exp2_subset_cv:lime:fidelity:rf:100"
+value = "2.62"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "2.6" },
+]
+
+[[claim]]
+id = "p1.lime.stability.mean"
+source = "exp2_subset_mean:lime:stability:rf:100"
+value = "0.0176"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.018" },
+]
+
+[[claim]]
+id = "p1.lime.stability.sd"
+source = "exp2_subset_sd:lime:stability:rf:100"
+value = "0.0151"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.015" },
+]
+
+[[claim]]
+id = "p1.lime.stability.cv"
+source = "exp2_subset_cv:lime:stability:rf:100"
+value = "86.15"
+tolerance = 0.1
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "86.2" },
+]
+
+[[claim]]
+id = "exp2.n_mean.shap.fidelity.50"
+source = "exp2_n_mean:shap:fidelity:50"
+value = "0.8087"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.809" },
+]
+
+[[claim]]
+id = "exp2.n_mean.shap.fidelity.200"
+source = "exp2_n_mean:shap:fidelity:200"
+value = "0.8069"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.807" },
+]
+
+[[claim]]
+id = "exp2.n_mean.lime.fidelity.50"
+source = "exp2_n_mean:lime:fidelity:50"
+value = "0.5585"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.559" },
+]
+
+[[claim]]
+id = "exp2.n_mean.lime.fidelity.100"
+source = "exp2_n_mean:lime:fidelity:100"
+value = "0.5605"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.561" },
+]
+
+[[claim]]
+id = "exp2.n_mean.lime.fidelity.200"
+source = "exp2_n_mean:lime:fidelity:200"
+value = "0.5616"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.562" },
+]
+
+[[claim]]
+id = "exp2.run.shap.sparsity"
+source = "exp2_mean:shap:sparsity"
+value = "0.2262"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.226" },
+]
+
+[[claim]]
+id = "exp2.run.shap.faithfulness_gap"
+source = "exp2_mean:shap:faithfulness_gap"
+value = "0.3798"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.380" },
+]
+
+[[claim]]
+id = "exp2.run.lime.sparsity"
+source = "exp2_mean:lime:sparsity"
+value = "0.0846"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.085" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.stability"
+source = "exp2_mean:anchors:stability"
+value = "0.0521"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.052" },
+]
+
+[[claim]]
+id = "exp2.run.dice.stability"
+source = "exp2_mean:dice:stability"
+value = "0.3661"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.366" },
+]
+
+[[claim]]
+id = "exp2.run.dice.cost.median"
+source = "exp2_median:dice:cost"
+value = "11880"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "11,880 ms" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.xgb.cost"
+source = "exp2_model_mean:anchors:cost:xgb"
+value = "57704.89"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "57,705 ms" },
+]
+
+[[claim]]
+id = "exp2.run.lime.model_mean.mlp.fidelity"
+source = "exp2_model_mean:lime:fidelity:mlp"
+value = "0.5414"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.541" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.model_mean.mlp.fidelity"
+source = "exp2_model_mean:anchors:fidelity:mlp"
+value = "0.2988"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.299" },
+]
+
+[[claim]]
+id = "exp2.run.dice.model_mean.mlp.fidelity"
+source = "exp2_model_mean:dice:fidelity:mlp"
+value = "0.0263"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.026" },
+]
+
+[[claim]]
+id = "wilcoxon.all.cost.meandiff"
+source = "wilcoxon_meandiff:all:cost"
+value = "8047.6"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "8047.6" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "8,048" },
+]
+
+[[claim]]
+id = "wilcoxon.all.cost.sd"
+source = "wilcoxon_sd:all:cost"
+value = "17856.6"
+tolerance = 1.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "17856.6" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "17,857" },
+]
+
+[[claim]]
+id = "wilcoxon.all.faithfulness_gap.meandiff"
+source = "wilcoxon_meandiff:all:faithfulness_gap"
+value = "0.0453"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.0453" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.045" },
+]
+
+[[claim]]
+id = "exp2.pooled_cv.shap.fidelity"
+source = "exp2_pooled_cv:shap:fidelity"
+value = "11.43"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "11.4%" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "11.4%" },
+]
+
+[[claim]]
+id = "exp2.pooled_cv.lime.fidelity"
+source = "exp2_pooled_cv:lime:fidelity"
+value = "11.96"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "12.0%" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "12.0%" },
+]
+
+[[claim]]
+id = "wilcoxon.all.fidelity.meandiff"
+source = "wilcoxon_meandiff:all:fidelity"
+value = "0.2479"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.2479" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.248" },
+]
+
+[[claim]]
+id = "wilcoxon.all.fidelity.sd"
+source = "wilcoxon_sd:all:fidelity"
+value = "0.0514"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.0514" },
+]
+
+[[claim]]
+id = "wilcoxon.all.stability.meandiff"
+source = "wilcoxon_meandiff:all:stability"
+value = "0.7176"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.7176" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.718" },
+]
+
+[[claim]]
+id = "wilcoxon.all.stability.sd"
+source = "wilcoxon_sd:all:stability"
+value = "0.2390"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.2390" },
+]
+
+[[claim]]
+id = "wilcoxon.all.sparsity.meandiff"
+source = "wilcoxon_meandiff:all:sparsity"
+value = "0.1418"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.1418" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.142" },
+]
+
+[[claim]]
+id = "wilcoxon.all.sparsity.sd"
+source = "wilcoxon_sd:all:sparsity"
+value = "0.1690"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.1690" },
+]
+
+[[claim]]
+id = "wilcoxon.all.faithfulness_gap.sd"
+source = "wilcoxon_sd:all:faithfulness_gap"
+value = "0.0173"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.0173" },
+]
+
+[[claim]]
+id = "exp2.run.anchors.sparsity.sd"
+source = "exp2_sd:anchors:sparsity"
+value = "0.0591"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.059" },
+]
+
+[[claim]]
+id = "friedman.fidelity.rank.shap"
+source = "friedman_rank:fidelity:shap"
+value = "1.000"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "1.000" },
+]
+
+[[claim]]
+id = "friedman.fidelity.rank.lime"
+source = "friedman_rank:fidelity:lime"
+value = "2.000"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "2.000" },
+]
+
+[[claim]]
+id = "friedman.fidelity.rank.anchors"
+source = "friedman_rank:fidelity:anchors"
+value = "3.200"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "3.200" },
+]
+
+[[claim]]
+id = "friedman.fidelity.rank.dice"
+source = "friedman_rank:fidelity:dice"
+value = "3.800"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "3.800" },
+]
+
+[[claim]]
+id = "friedman.stability.rank.lime"
+source = "friedman_rank:stability:lime"
+value = "3.400"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "3.400" },
+]
+
+[[claim]]
+id = "friedman.stability.rank.anchors"
+source = "friedman_rank:stability:anchors"
+value = "3.600"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "3.600" },
+]
+
+[[claim]]
+id = "exp2.block.shap.fidelity.sd"
+source = "exp2_block_sd:shap:fidelity"
+value = "0.0928"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.093" },
+]
+
+[[claim]]
+id = "exp2.block.lime.fidelity.sd"
+source = "exp2_block_sd:lime:fidelity"
+value = "0.0679"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.068" },
+]
+
+[[claim]]
+id = "exp2.block.anchors.fidelity.sd"
+source = "exp2_block_sd:anchors:fidelity"
+value = "0.1001"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.100" },
+]
+
+[[claim]]
+id = "exp2.block.dice.fidelity.sd"
+source = "exp2_block_sd:dice:fidelity"
+value = "0.1027"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.103" },
+]
+
+[[claim]]
+id = "exp2.block.dice.stability"
+source = "exp2_block_mean:dice:stability"
+value = "0.3611"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.361" },
+]
+
+[[claim]]
+id = "exp2.block.anchors.stability"
+source = "exp2_block_mean:anchors:stability"
+value = "0.0429"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.043" },
+]
+
+[[claim]]
+id = "friedman.stability.kendall_w"
+source = "friedman:stability:kendall_w"
+value = "0.904"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "0.904" },
+]
+
+[[claim]]
+id = "exp2.run.dice.coverage_pct"
+source = "exp2_runs:dice"
+value = "68"
+tolerance = 0.5
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "90.7%" },
+]
+
+# ---------------------------------------------------------------------------
+# Friedman p-values, raw and Holm-adjusted. Registered after review finding F16:
+# Appendix D.1 had the Holm value in the raw column and printed 3.02e-8 as Holm,
+# a figure matching no artifact, while the true raw values appeared nowhere.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "friedman.fidelity.p_raw"
+source = "friedman:fidelity:p_value_raw"
+value = "3.783632553510819e-09"
+tolerance = 1e-11
+appears_in = [
+  { file = "thesis/apendices.qmd", text = '3.78\times10^{-9}', count = 2 },
+]
+
+[[claim]]
+id = "friedman.fidelity.p_holm"
+source = "friedman:fidelity:p_value_holm"
+value = "1.5134530214043276e-08"
+tolerance = 1e-10
+appears_in = [
+  { file = "thesis/apendices.qmd", text = '1.51\times10^{-8}', count = 2 },
+]
+
+[[claim]]
+id = "friedman.stability.p_raw"
+source = "friedman:stability:p_value_raw"
+value = "7.645189063115296e-09"
+tolerance = 1e-11
+appears_in = [
+  { file = "thesis/apendices.qmd", text = '7.65\times10^{-9}', count = 2 },
+]
+
+[[claim]]
+id = "friedman.stability.p_holm"
+source = "friedman:stability:p_value_holm"
+value = "2.293556718934589e-08"
+tolerance = 1e-10
+appears_in = [
+  { file = "thesis/apendices.qmd", text = '2.29\times10^{-8}', count = 2 },
+]
+
+# ---------------------------------------------------------------------------
+# Coverage -- the F13 check (rigor review 2026-08-28). Files listed here must
+# have EVERY result-shaped numeric literal either registered above or annotated
+# as [[unbacked]] below. Checks 1-3 ask "is this registered number still right?";
+# this one asks "is this number registered at all?", which is the question the
+# F02/F03/F08/F09 defects slipped through.
+# ---------------------------------------------------------------------------
+
+[coverage]
+files = [
+  "thesis/capitulo-4-resultados.qmd",
+]
+# Design constants and decision thresholds, not measured results: Holm-adjusted
+# alpha levels, Cohen's d_z interpretation cut-points, the selection-criterion
+# thresholds and a stated tolerance. Fixed by the protocol, not derived from an
+# artifact, so a resolver would be meaningless.
+structural = [
+  "0.05", "0.01", "0.0125", "0.0167", "0.025",
+  "0.2", "0.5", "0.8", "2.0",
+  "0.70", "0.80", "0.40",
+  "0.002",
+  # Tabulated/derived statistical constants: chi2 critical value at df=3, the
+  # Nemenyi studentised-range quantile for k=4, the resulting critical
+  # difference and its radical term. Fixed by the test, not by these data.
+  "7.815", "7.81", "2.569", "1.211", "0.4714",
+  # Anchors' effective precision threshold tau: a protocol setting.
+  "0.95",
+  # Mantissas of Holm-adjusted p-values already registered by magnitude
+  # elsewhere; the exponent carries the claim, not the mantissa.
+  "1.51", "2.29", "1.18", "2.64",
+  # Nemenyi mean-rank differences: arithmetic on the registered mean ranks
+  # (friedman.*.rank.*), not independent measurements.
+  "2.200", "2.800", "1.200", "1.800", "0.600",
+  "2.400", "2.600", "1.400", "1.600", "0.200",
+]
+
+# ---------------------------------------------------------------------------
+# Unbacked -- values a manuscript prints that no committed artifact re-derives,
+# each disclosed as such in the text. The F13 coverage check accepts these, so
+# that "we cannot re-derive this" is an explicit, reviewable decision rather
+# than a silent gap.
+# ---------------------------------------------------------------------------
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe"
+text = "41,233"
+reason = "KernelSHAP reference-set probe (SVM, seed 42, N=100); exploratory measurement whose output artifact is not committed. Disclosed in Apendice C."
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe_k100"
+text = "614,820"
+reason = "same probe at k=100; see appendixC.shap_reference_probe"
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/apendices.qmd"]
+
+# ---------------------------------------------------------------------------
+# Retired values -- the regression guard proper. Each was removed by the
+# 2026-08-22/23 audit; if one reappears, a stale snapshot has been reintroduced.
+# ---------------------------------------------------------------------------
+
+[[retired]]
+id = "A05.shap.cost"
+text = "24,804"
+reason = "pre-recovery-overlay SHAP cost; current run-level mean is 11,708 ms"
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/capitulo-5-taxonomia.qmd"]
+
+[[retired]]
+id = "A05.lime.cost"
+text = "media 226 ms"
+reason = "superseded LIME cost; current run-level mean is 3,661 ms"
+files = ["thesis/capitulo-4-resultados.qmd"]
+
+[[retired]]
+id = "A05.dice.cost"
+text = "2,056 ms"
+reason = "superseded DiCE cost; current run-level mean is 28,209 ms"
+files = ["thesis/capitulo-4-resultados.qmd"]
+
+[[retired]]
+id = "A05.shap.stability"
+text = "estabilidad = 0.724"
+reason = "pre-recovery-overlay SHAP stability; current value is 0.732"
+files = ["thesis/capitulo-4-resultados.qmd"]
+
+[[retired]]
+id = "A04.anchors.fidelity"
+text = "Anchors: 0.514"
+reason = "draft-stage figure with no artifact backing; Anchors fidelity is 0.388"
+files = ["thesis/capitulo-5-taxonomia.qmd"]
+
+[[retired]]
+id = "A04.dice.fidelity"
+text = "DiCE: 0.412"
+reason = "draft-stage figure with no artifact backing; DiCE fidelity is 0.172"
+files = ["thesis/capitulo-5-taxonomia.qmd"]
+
+[[retired]]
+id = "A06.anchors.coverage"
+text = "56 celdas calificadas"
+reason = "Anchors has 57 qualified runs (76.0%), not 56 (74.7%)"
+files = ["thesis/capitulo-4-resultados.qmd"]
+
+[[retired]]
+id = "A07.exp3.gap.model"
+text = "(German Credit, RF)"
+reason = "minimum EXP3 fidelity gap is German Credit/XGB (+0.260); GC/RF is +0.363"
+files = ["docs/reports/paper_bc/paper_bc_jmlr.tex", "thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "A01.exp3.anchors.blocked"
+text = "could not be executed"
+reason = "the 12 EXP3 Anchors runs were completed 2026-04-26 and are committed"
+files = ["docs/reports/paper_a/paper_a_prototype_jmlr.tex"]
+
+[[retired]]
+id = "A03.exp3.bc_xgb.april"
+text = "& 0.607 &"
+reason = "April side-branch snapshot; the canonical July value is 0.617"
+files = ["docs/reports/paper_bc/paper_bc_jmlr.tex"]
+
+[[retired]]
+id = "F02.dice.cost_range"
+text = "770–4,500"
+reason = "unbacked DiCE cost range framed as moderate; run-level mean is 28,209 ms, second-highest in the benchmark (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.lime.cost_range"
+text = "3–9 ms"
+reason = "unbacked LIME cost range; per-model run means are 52-122 ms on logreg/xgb/mlp (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.treeshap.cost_range"
+text = "1–322 ms"
+reason = "unbacked TreeSHAP cost range; SHAP run means are 20.7 ms on XGBoost but 2,819.8 ms on RF (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F02.anchors.cost_range"
+text = "10,000–70,000"
+reason = "unbacked Anchors cost range; per-model run means are 15,564-48,955 ms on RF/SVM/MLP (rigor review 2026-08-28, F02)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F16.friedman.fake_holm"
+text = '3.02\times10^{-8}'
+reason = "invented Holm p-value for fidelity (2x the true Holm 1.51e-8); the artifact gives raw 3.78e-9, Holm 1.51e-8 (rigor review 2026-08-29, F16)"
+files = ["thesis/apendices.qmd"]
+
+[[retired]]
+id = "F16.friedman.wrong_family"
+text = "se aplica sobre las dos hipótesis omnibus"
+reason = "Holm is applied over the five Friedman metrics per tbl-stat-plan, not over H1/H2 only (rigor review 2026-08-29, F16)"
+files = ["thesis/apendices.qmd"]
+
+[[retired]]
+id = "F15.shap.pooled_cv"
+text = "12.8%"
+reason = "SHAP pooled fidelity CV is 11.43%, not 12.8%; the printed range also inverted the SHAP/LIME ordering (rigor review 2026-08-28, F15)"
+files = ["thesis/capitulo-4-resultados.qmd", "thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "F01.lime.kernel_independence"
+text = "no dependiente de la configuración del kernel"
+reason = "contradicted by @tbl-appendix-lime-kw-sensitivity: kernel_width=10.0 yields stability 0.664 vs 0.000 at the 3.0 reference (rigor review 2026-08-28, F01)"
+files = ["thesis/capitulo-6-conclusiones.qmd"]
+
+[[retired]]
+id = "A09.superseded.doi"
+text = "archivado con DOI\n`10.5281/zenodo.19297724`"
+reason = "thesis must cite 10.5281/zenodo.21538180, the evidence cut Ch.4 reports"
+files = ["thesis/capitulo-3-diseno-experimental.qmd"]
+
+[[retired]]
+id = "A13.dangling.crossref"
+text = "@tbl-exp4-dimensiones"
+reason = "no such label exists; the seven dimensions are listed in @tbl-exp4-icc"
+files = ["thesis/capitulo-3-diseno-experimental.qmd"]
+
+# ---------------------------------------------------------------------------
+# Supplementary tables S2/S3/S6 (F03).
+#
+# The rigor review flagged that the supplementary tables carry three of the
+# paper's robustness arguments but had never been re-derived from their source
+# artifacts. Verifying them found Table S6's drop-correlation column wrong in
+# three of four rows and Table S3's occupation/workclass associations
+# unreproducible; both were corrected on 2026-08-28. These entries keep them
+# tied to their sources.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "supp.s6.zero.topk_gap"
+source = "exp6_paired:zero:topk_gap"
+value = "+0.098"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.098 & +0.515" },
+]
+
+[[claim]]
+id = "supp.s6.zero.corr"
+source = "exp6_paired:zero:top_feature_corr"
+value = "+0.515"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.515" },
+]
+
+[[claim]]
+id = "supp.s6.mean.corr"
+source = "exp6_paired:mean:top_feature_corr"
+value = "+0.512"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.512" },
+]
+
+[[claim]]
+id = "supp.s6.marginal.corr"
+source = "exp6_paired:marginal:top_feature_corr"
+value = "+0.625"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.625", count = 2 },
+]
+
+[[claim]]
+id = "supp.s6.grouped.corr"
+source = "exp6_paired:grouped_mean:top_feature_corr"
+value = "+0.494"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "+0.494", count = 2 },
+]
+
+[[claim]]
+id = "supp.s2.kw3.fidelity"
+source = "lime_kernel_width:3.0:fidelity_mean"
+value = "0.518"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.518" },
+  { file = "thesis/apendices.qmd", text = "0.518" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.518" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.518" },
+]
+
+[[claim]]
+id = "supp.s2.kw10.stability"
+source = "lime_kernel_width:10.0:stability_mean"
+value = "0.664"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.664", count = 2 },
+  { file = "thesis/apendices.qmd", text = "0.664", count = 3 },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.664" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.664" },
+]
+
+[[claim]]
+id = "supp.s2.kw10.fidelity"
+source = "lime_kernel_width:10.0:fidelity_mean"
+value = "0.441"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.441", count = 2 },
+  { file = "thesis/apendices.qmd", text = "0.441", count = 2 },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.441" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.441" },
+]
+
+[[claim]]
+id = "supp.s3.relationship_sex"
+source = "adult_cramers_v:relationship:sex"
+value = "0.647"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.647" },
+]
+
+[[claim]]
+id = "supp.s3.marital_relationship"
+source = "adult_cramers_v:marital-status:relationship"
+value = "0.488"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.488" },
+]
+
+[[claim]]
+id = "supp.s3.marital_sex"
+source = "adult_cramers_v:marital-status:sex"
+value = "0.460"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.460" },
+]
+
+[[claim]]
+id = "supp.s3.occupation_sex"
+source = "adult_cramers_v:occupation:sex"
+value = "0.435"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.435" },
+]
+
+[[claim]]
+id = "supp.s3.workclass_occupation"
+source = "adult_cramers_v:workclass:occupation"
+value = "0.216"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.216" },
+]
+
+[[claim]]
+id = "supp.s3.education_occupation"
+source = "adult_cramers_v:education:occupation"
+value = "0.196"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.196" },
+]
+
+[[claim]]
+id = "supp.s3.occupation_relationship"
+source = "adult_cramers_v:occupation:relationship"
+value = "0.176"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.176" },
+]
+
+[[claim]]
+id = "supp.s3.educnum_hours"
+source = "adult_pearson_r:education-num:hours-per-week"
+value = "0.144"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.144" },
+]
+
+[[claim]]
+id = "supp.s3.capgain_educnum"
+source = "adult_pearson_r:capital-gain:education-num"
+value = "0.125"
+tolerance = 0.001
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.125" },
+]
+
+[[retired]]
+id = "F03.s6.corr.column"
+text = "+0.098 & +0.625"
+reason = "Table S6 drop-correlation column was misaligned; zero masking is +0.515, marginal is +0.625"
+files = ["docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex"]
+
+[[retired]]
+id = "F03.s6.monotone.prose"
+text = "but its magnitude decreases under progressively more"
+reason = "attenuation holds for the top-k gap only; the drop-correlation delta peaks at marginal masking"
+files = ["docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex"]
+
+[[cited_artifact]]
+id = "exp6.masking"
+path = "outputs/analysis/exp6_masking_sensitivity"
+glob = "*.csv"
+cited_by = "Paper B+C supplementary (Table S6)"
+
+[[cited_artifact]]
+id = "lime.kernel_width"
+path = "outputs/analysis/lime_kernel_width_sensitivity.csv"
+cited_by = "Paper B+C supplementary (Table S2)"

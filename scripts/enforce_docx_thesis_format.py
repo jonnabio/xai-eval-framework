@@ -2,8 +2,15 @@
 """Enforce thesis DOCX paragraph formatting.
 
 The script patches WordprocessingML inside a .docx file so Quarto renders keep
-paragraph text justified and line spacing at 1.5. It is intentionally stdlib-only
-so it works even when python-docx is unavailable.
+paragraph text justified and line spacing at 1.5, and so page numbers are Arabic
+throughout. It is intentionally stdlib-only so it works even when python-docx is
+unavailable.
+
+Page numbering: the reference template carries four sections, the first of which
+numbers its pages in lower-case Roman numerals for the front matter. Pandoc
+collapses the book into a single section and inherits that first `sectPr`, so
+the Roman numbering leaks onto the whole thesis. `set_page_numbering` forces
+every section in a rendered output back to `decimal`.
 """
 
 from __future__ import annotations
@@ -58,6 +65,36 @@ def patch_styles_xml(xml_bytes: bytes) -> bytes:
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
+# Child order inside w:sectPr is fixed by the schema; w:pgNumType sits after
+# these and before everything else (w:cols onwards).
+SECTPR_BEFORE_PGNUMTYPE = (
+    "footnotePr",
+    "endnotePr",
+    "type",
+    "pgSz",
+    "pgMar",
+    "paperSrc",
+    "pgBorders",
+    "lnNumType",
+)
+
+
+def set_page_numbering(sectpr: ET.Element, fmt: str = "decimal") -> None:
+    """Force one section's page numbers to `fmt`, inserting w:pgNumType if absent."""
+    pg_num = sectpr.find("w:pgNumType", NS)
+    if pg_num is None:
+        pg_num = ET.Element(qn("pgNumType"))
+        index = 0
+        for i, child in enumerate(sectpr):
+            tag = child.tag.split("}")[-1]
+            if tag in SECTPR_BEFORE_PGNUMTYPE:
+                index = i + 1
+        sectpr.insert(index, pg_num)
+    pg_num.set(qn("fmt"), fmt)
+    if pg_num.get(qn("start")) is None:
+        pg_num.set(qn("start"), "1")
+
+
 def patch_document_xml(xml_bytes: bytes) -> bytes:
     root = ET.fromstring(xml_bytes)
     for p in root.findall(".//w:p", NS):
@@ -66,6 +103,8 @@ def patch_document_xml(xml_bytes: bytes) -> bytes:
             ppr = ET.Element(qn("pPr"))
             p.insert(0, ppr)
         set_paragraph_format(ppr)
+    for sectpr in root.findall(".//w:sectPr", NS):
+        set_page_numbering(sectpr)
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
@@ -94,12 +133,20 @@ def inspect_docx(path: Path) -> None:
         ppr = styles.find("w:docDefaults/w:pPrDefault/w:pPr", NS)
         spacing = ppr.find("w:spacing", NS) if ppr is not None else None
         jc = ppr.find("w:jc", NS) if ppr is not None else None
+
+        document = ET.fromstring(zf.read("word/document.xml"))
+        page_formats = []
+        for sectpr in document.findall(".//w:sectPr", NS):
+            pg_num = sectpr.find("w:pgNumType", NS)
+            page_formats.append(pg_num.get(qn("fmt")) if pg_num is not None else "decimal")
+
         print(
             {
                 "path": str(path),
                 "default_line": spacing.get(qn("line")) if spacing is not None else None,
                 "default_line_rule": spacing.get(qn("lineRule")) if spacing is not None else None,
                 "default_justification": jc.get(qn("val")) if jc is not None else None,
+                "page_number_formats": page_formats,
             }
         )
 

@@ -2,12 +2,75 @@
 
 ## 1. Metadata
 
-- **Date**: 2026-04-14
+- **Date**: 2026-04-14 (original assessment); revised 2026-07-17; gap-closure pass 2026-07-22/24
 - **Artifact**: `docs/reports/paper_a/paper_a_prototype_jmlr.tex`
 - **Assessment target**: Paper A as a benchmark/methodology paper for XAI and ML evaluation
-- **Status**: Revision in progress after April result synchronization
-- **Overall score**: 83/100
-- **Target score**: 85+
+- **Status**: Submission-ready as of 2026-07-24. Score target reached (88/100); Zenodo DOI refreshed and verified; the two remaining result gaps (37 Anchors/DiCE cells, 1 SHAP overlay cell) were reviewed with the author and accepted as permanent, disclosed limitations rather than pursued further.
+- **Overall score**: 88/100
+- **Target score**: 85+ (reached)
+
+## 1.1 2026-07-17 Revision Pass
+
+This pass re-verified the April 2026 findings against the current repository
+state and made editorial corrections to the manuscript. It did not attempt to
+resolve the substantive evidence gaps (those still require rerunning or
+importing artifacts, not text edits).
+
+Verified unchanged since April:
+
+- `outputs/analysis/paper_a_exp2_stats/analysis_summary.json` still reports
+  299 present artifacts, 275 analyzable unique runs, 25 residual empty
+  Anchors/DiCE cells, and 15/15 complete Friedman blocks; manuscript numbers
+  remain synchronized to it.
+- `experiments/exp2_scaled/results/svm_shap/seed_456/n_200/` still has no
+  committed `results.json`; the paper still depends on the
+  `outputs/batch_results.csv` recovery overlay for that cell.
+- Resolved 2026-07-24: a new Zenodo version (DOI `10.5281/zenodo.21538180`,
+  concept DOI `10.5281/zenodo.19297723`) archives commit `553f65d71` (the
+  evidence cut in this manuscript), verified publicly resolvable via both the
+  DOI redirect and the Zenodo public records API. The prior 2026-03-28
+  snapshot DOI (`10.5281/zenodo.19297724`) is retained for provenance only.
+- `configs/experiments/exp3_cross_dataset/` now exists with trained
+  `breast_cancer`/`german_credit` model artifacts (added for the thesis, not
+  Paper A), but has no benchmark run results yet, so it is not usable as an
+  external-validity extension for Paper A in its current state.
+
+Editorial corrections applied to
+`docs/reports/paper_a/paper_a_prototype_jmlr.tex`:
+
+- Standardized cohort terminology: introduced "primary benchmark (EXP2)" as
+  an explicit shorthand for the primary robustness benchmark, and simplified
+  "reproducibility repeatability cohort" to "reproducibility cohort"
+  throughout, removing an internal naming inconsistency between the cohorts
+  table and the running text.
+- Clarified a methodological transparency gap: the Friedman and 45-cell
+  Wilcoxon tables displayed raw p-values while the text claimed
+  Holm-Bonferroni correction across the five primary metrics for each
+  inferential family. Table captions and surrounding text now explicitly
+  label the values as raw and report the Holm-corrected family-wise
+  conclusion (all five metrics remain significant at $\alpha=0.05$ in both
+  families; verified directly against
+  `outputs/analysis/paper_a_exp2_stats/friedman_results.csv` and
+  `wilcoxon_shap_lime_primary.csv`). Also added a one-line note that the
+  identical raw p-value across four Wilcoxon metrics reflects the exact
+  signed-rank floor for 45 same-direction matched pairs, not a copy-paste
+  error.
+- Fixed a LaTeX formatting defect: the Code and Artifact Availability
+  paragraph produced a ~50pt overfull line (text extending past the page
+  margin) because a git tag string and a DOI were set in non-breaking
+  verbatim-style commands; wrapped the paragraph in `sloppypar` and made the
+  DOI display breakable. Confirmed via rebuild that both
+  `paper_a_prototype_jmlr.pdf` and `paper_a_prototype_neutral.pdf` now
+  compile with no overfull boxes beyond sub-20pt cosmetic warnings typical of
+  any LaTeX document.
+- Rebuilt both PDFs with portable Tectonic; no undefined references or
+  citations in either build.
+
+Score impact: +1 (83 to 84) for improved statistical-reporting transparency
+and terminology consistency. The score does not move further because the
+April assessment's core blockers (residual empty artifacts, the uncommitted
+SHAP cell, the stale DOI, and the un-bundled `outputs/` analysis tree) are
+evidentiary/artifact gaps that text edits cannot close.
 
 ## 2. Objective
 
@@ -79,12 +142,12 @@ Local verification findings from this reassessment pass:
 | :--- | ---: | ---: | :--- |
 | Venue fit and contribution importance | 15 | 12 | Strong fit for benchmark-focused ML venues if FOM-7 is framed as a reusable benchmark operation method, not only a project-specific workflow. |
 | Novelty and prior-work delta | 10 | 8 | The manuscript now includes a compact novelty-delta table against related XAI benchmark/toolkit work. The remaining risk is to avoid overclaiming algorithmic novelty. |
-| Benchmark design and construct validity | 15 | 12 | The crossed design, metric orientation, leakage controls, and implementation caveats are strong. The single Adult tabular dataset remains the main external-validity limit. |
-| Statistical rigor and uncertainty | 20 | 17 | Friedman, Nemenyi, Wilcoxon, Holm correction, effect sizes, matched cells, and block aggregation are strong, and the regenerated analysis confirms 15/15 complete omnibus blocks. The remaining 25 empty Anchors/DiCE cells and no equivalence-band analysis keep this below top-tier readiness. |
-| Reproducibility and artifact quality | 20 | 16 | The model artifacts are repaired, the dependency is declared and installed in the active environment, the analysis outputs are regenerated, and the manuscript PDF has been rebuilt. The ignored analysis outputs and updated release/DOI still need a clean submission bundle. |
+| Benchmark design and construct validity | 15 | 13 | The crossed design, metric orientation, leakage controls, and implementation caveats are strong. A bounded SHAP-only cross-dataset check (2026-07-24) now supports partial external-validity evidence beyond Adult, with one documented non-transfer case (German Credit/xgb Stability); the single-dataset scope for the full four-method ranking remains the main limit. |
+| Statistical rigor and uncertainty | 20 | 19 | Friedman, Nemenyi, Wilcoxon, Holm correction, effect sizes, matched cells, and block aggregation are strong, and the regenerated analysis confirms 15/15 complete omnibus blocks. The 2026-07-17 pass fixed a raw-vs-Holm-corrected p-value transparency gap; the 2026-07-24 pass added Cohen's $d_z$ practical-importance reporting for the primary paired contrast. The remaining 25 empty Anchors/DiCE cells (root cause now diagnosed but not fixed) and the absence of a formal TOST equivalence procedure keep this below top-tier readiness. |
+| Reproducibility and artifact quality | 20 | 18 | The model artifacts are repaired, the dependency is declared and installed in the active environment, the analysis outputs are regenerated and force-added to the repository, and the manuscript PDF has been rebuilt. The Zenodo release/DOI is refreshed and verified (2026-07-24). The 25 empty Anchors/DiCE cells and the `svm_shap_s456_n200` overlay dependency remain diagnosed but unresolved (environment/compute blockers, not neglect). |
 | Claim discipline, limitations, and ethics | 10 | 9 | The caveats note is transparent and the manuscript now includes responsible-use and overgeneralization boundaries. |
-| Clarity and scholarly presentation | 10 | 9 | The draft is readable, the novelty/artifact sections are stronger, and the result-count narrative is now synchronized to the regenerated analysis summary. |
-| **Total** | **100** | **83** | **Strong revision in progress; not yet 85+ because of residual empty artifacts and submission-bundle work.** |
+| Clarity and scholarly presentation | 10 | 9 | The draft is readable, the novelty/artifact sections are stronger, the result-count narrative is synchronized to the regenerated analysis summary, and prior passes fixed an inconsistent EXP1/EXP2 cohort naming pattern and a page-margin overflow defect. |
+| **Total** | **100** | **88** | **Above the 85+ target on manuscript quality and rigor. The Zenodo DOI is refreshed. Publication is still blocked on two environment-blocked result gaps (25 empty EXP2 cells, 12 EXP3 Anchors cells) that require a separate Python environment to close, and the deliberately-deferred `svm_shap_s456_n200` cell.** |
 
 ## 5. Analysis
 
@@ -124,39 +187,76 @@ as by narrative results.
 
 ## 6. Anomalies and Deviations
 
-- **Residual empty artifacts**: The merged snapshot still excludes 25
-  present-but-empty Anchors/DiCE result artifacts. These remain systematic
-  operational failures, not random omissions.
+- **Residual empty artifacts, root cause now diagnosed**: The merged snapshot
+  still excludes 25 present-but-empty Anchors/DiCE result artifacts. A
+  2026-07-22 live rerun of one cell (`logreg_anchors_s123_n50`) reproduced the
+  exact failure: `alibi`/`dice-ml` are not importable in the project's active
+  `.venv` (Python 3.13), so every per-instance explanation call raises a
+  caught-but-unlogged-at-run-level `ImportError`, and the run "completes" with
+  zero evaluations instead of crashing. This is a deterministic environment
+  gap, not a random operational failure, and it is **not yet fixed**:
+  `alibi==0.9.6` requires `numpy<2.0`, which has no Python 3.13 wheel and is
+  incompatible with the `numpy==2.2.6` this environment's `scipy`/
+  `scikit-learn` require. A source build of `numpy<2.0` failed on this
+  machine's toolchain; forcing an unconstrained resolver install downgrades
+  `alibi` to version 0.5.5 (2021-era Anchors internals) and breaks
+  `protobuf`-dependent tooling elsewhere in the environment, so that path was
+  rolled back rather than kept. Closing this gap requires a separate Python
+  (`<3.13`, `numpy<2.0`) environment dedicated to these 25 cells.
 - **Overlay dependency for one SHAP cell**: The committed result tree still
   lacks `svm_shap_s456_n200`, although the recovery overlay covers that cell
-  for Paper A analysis.
-- **Submission-bundle drift risk**: The regenerated analysis outputs live under
-  ignored `outputs/` paths and must be explicitly bundled or force-added for the
-  next submission/release snapshot.
+  for Paper A analysis. A resumable rerun exists (161/800 instances
+  checkpointed as of 2026-04-14) but is not being pursued further: SVM kernel
+  SHAP on this benchmark times out on most instances at the 300s guard limit,
+  and completing the remaining ~640 instances was estimated at 2-3 additional
+  days of continuous runtime, which was judged not worth pursuing versus
+  disclosing the gap.
+- **Submission-bundle drift risk**: resolved 2026-07-22 —
+  `outputs/analysis/paper_a_exp2_stats/` is now force-added to the repository
+  (`.gitignore` alone cannot re-include files under an already-ignored parent
+  directory such as `outputs/`, so `git add -f` was required, matching how
+  `outputs/batch_results.csv` was evidently added previously).
 - **TeX toolchain reproducibility risk**: The PDF was rebuilt with portable
   Tectonic because `latexmk`/`pdflatex` are not installed on this workstation;
   the release workflow should record the exact compiler path or use a standard
   TeX environment.
-- **External validity limit**: The main benchmark evidence is still bounded to
-  Adult Income tabular classification.
-- **Archive versioning gap**: The March Zenodo release remains valid for the
-  prior snapshot, but the refreshed April 2026 cut needs a new release and DOI
-  before submission.
+- **External validity limit**: partially addressed 2026-07-22/23 — the 12
+  SHAP-only `exp3_cross_dataset` configs (rf/xgb x breast_cancer/german_credit
+  x 3 seeds) were run and are reported as a bounded external-validation check
+  (see Section 7.4). The 12 Anchors-based `exp3` configs remain blocked by the
+  same `alibi`/`numpy` environment gap described above.
+- **Archive versioning gap**: resolved 2026-07-24 — a new Zenodo version (DOI
+  `10.5281/zenodo.21538180`) archives commit `553f65d71`, the evidence cut
+  reported in this manuscript, verified publicly resolvable. The prior March
+  snapshot DOI (`10.5281/zenodo.19297724`) is retained for provenance only.
 
 ## 7. Conclusion and Next Steps
 
 ### 7.1 Verdict
 
-Paper A currently scores **83/100** under a high-standard benchmark-paper
-rubric after the April 2026 result synchronization. The likely decision profile
-is still **major revision**, but the revision risk is now concentrated in a
-smaller set of artifact and submission-bundle items.
+Paper A currently scores **88/100** under a high-standard benchmark-paper
+rubric after the April 2026 result synchronization, the 2026-07-17 editorial
+revision pass, and the 2026-07-22/24 gap-closure pass (including the
+2026-07-24 Zenodo DOI refresh). **As of 2026-07-24, Paper A is considered
+submission-ready.** The two remaining result gaps — the 25 empty EXP2
+Anchors/DiCE cells plus the 12 EXP3 Anchors cells (diagnosed:
+`alibi`/`numpy<2.0` incompatible with this Python 3.13 environment), and the
+`svm_shap_s456_n200` overlay dependency (an estimated 2-3 days of further
+compute for one cell) — were explicitly reviewed with the author and a
+decision was made **not to pursue further compute or environment migration**.
+Both are disclosed transparently in the manuscript's own limitations
+sections (Section~\ref{sec:results}, "Limitation" bullets) and in this
+assessment, and neither affects the paper's reported statistical
+conclusions (the Friedman tests already run on 15/15 complete blocks; the
+SHAP-LIME paired contrast already has its full 45/75 matched cells). This is
+now the final position for this evidence cut, not a pending action item.
 
-The paper can plausibly reach **85+** without changing its core research idea.
-The highest-leverage work is to turn the current synchronized analysis into a
-clean, reviewable, versioned submission bundle.
+The paper reached **85+** without changing its core research idea. Should a
+reviewer or venue explicitly require full-grid completeness, the
+`<3.13`/`numpy<2.0` environment work described above remains the path to close
+the Anchors/DiCE gaps; it is not planned unless that feedback occurs.
 
-### 7.2 Priority plan to reach 85+
+### 7.2 Priority plan to reach 85+ (historical; target reached — see 7.1)
 
 1. **Submission-bundle synchronization**
    - Keep the rebuilt `docs/reports/paper_a/paper_a_prototype_jmlr.pdf`
@@ -229,9 +329,46 @@ Completed on 2026-04-14 after result synchronization:
   confirming `latexmk` and `pdflatex` were unavailable locally;
 - updated the working score from 72/100 to 83/100.
 
-Still required before the next submission/release cut:
+Completed on 2026-07-22/24 (gap-closure pass):
 
-- explicitly include the regenerated analysis outputs in the versioned bundle;
-- resolve or document the claimed `svm_shap_s456_n200` per-run artifact;
-- diagnose the 25 empty Anchors/DiCE artifacts and decide whether targeted
-  reruns are worth the runtime cost.
+- force-added `outputs/analysis/paper_a_exp2_stats/` to the repository
+  (`git add -f`, since `.gitignore` negation cannot re-include files under an
+  already-ignored parent directory such as `outputs/`);
+- diagnosed the root cause of the 25 empty Anchors/DiCE artifacts via a live
+  rerun: `alibi`/`dice-ml` are not importable in the active Python 3.13
+  `.venv`; confirmed `alibi==0.9.6` requires `numpy<2.0`, which has no
+  Python 3.13 wheel and is incompatible with this environment's
+  `numpy==2.2.6`; attempted and rolled back an unconstrained install that
+  would have downgraded `alibi` to 0.5.5 and broken `protobuf`-dependent
+  tooling; left the 25 cells and the 12 EXP3 Anchors configs unresolved
+  pending a dedicated Python `<3.13`/`numpy<2.0` environment;
+- ran the 12 SHAP-only `exp3_cross_dataset` configs (breast_cancer/
+  german_credit x rf/xgb x 3 seeds) and added a new manuscript subsection,
+  "External Validity Check: Cross-Dataset SHAP Stability", reporting the
+  results as a bounded, single-explainer check;
+- added Cohen's $d_z$ practical-importance reporting to the primary
+  SHAP-LIME paired comparison table, grounded in Cohen (1988) small/medium/
+  large conventions;
+- fixed an EXP1/EXP2 cohort-naming inconsistency and a page-margin overflow
+  defect (carried over from the 2026-07-17 pass's verification);
+- committed the Paper A gap-closure work (commit `553f65d71`);
+- refreshed the Zenodo release: published version DOI `10.5281/zenodo.21538180`
+  (concept DOI `10.5281/zenodo.19297723`) archiving commit `553f65d71`,
+  verified publicly resolvable via the DOI redirect and the Zenodo public
+  records API; updated the manuscript's Code and Artifact Availability
+  section and acknowledgments accordingly;
+- updated the working score from 84/100 to 88/100.
+
+Completed on 2026-07-24 (final decision on remaining gaps):
+
+- reviewed the 25 empty EXP2 Anchors/DiCE cells, the 12 EXP3 Anchors cells,
+  and the `svm_shap_s456_n200` overlay dependency with the author; decided
+  not to pursue the required Python `<3.13`/`numpy<2.0` environment migration
+  or the further ~2-3 days of SHAP compute, and to accept all three as
+  permanent, disclosed limitations of this evidence cut instead;
+- updated the manuscript's "Limitation" and "Next steps" bullets in
+  Section~\ref{sec:conclusion} to reflect this as a final position rather
+  than pending work; rebuilt both PDFs.
+
+Nothing further is required before submission unless review feedback asks
+for full-grid completeness.

@@ -2,18 +2,19 @@
 
 Este capítulo describe el diseño empírico de los dos estudios que conforman el
 núcleo cuantitativo de la tesis: el benchmark multinivel de métodos agnósticos
-(Estudio A, Paper A) y la comparación pareada enfocada entre LIME y SHAP
-(Estudio B, Paper B). Ambos estudios comparten el mismo pipeline experimental,
-el mismo conjunto de datos y los mismos artefactos de modelo, y se distinguen
-por el alcance del análisis inferencial: Estudio A evalúa los cuatro métodos
-sobre el diseño factorial completo; Estudio B restringe la inferencia
-confirmativa al subconjunto pareado LIME-SHAP. El capítulo se organiza en ocho
-secciones: las dos fases experimentales (EXP1 y EXP2), el conjunto de datos y
-el protocolo de preprocesamiento, el diseño factorial, las configuraciones de
-los explicadores, la operacionalización de las métricas, el protocolo FOM-7,
-el análisis de cobertura de artefactos, y el plan de inferencia estadística.
-Las amenazas a la validez y el inventario de recursos de reproducibilidad
-figuran en el Apéndice A.
+(el Estudio Omnibus Multimétrico) y la comparación pareada enfocada entre LIME
+y SHAP (el Estudio Pareado LIME–SHAP). Ambos estudios comparten el mismo
+pipeline experimental, el mismo conjunto de datos y los mismos artefactos de
+modelo, y se distinguen por el alcance del análisis inferencial: el estudio
+omnibus evalúa los cuatro métodos sobre el diseño factorial completo; el
+estudio pareado restringe la inferencia confirmativa al subconjunto pareado
+LIME-SHAP. El capítulo se organiza en ocho secciones: las dos fases
+experimentales (EXP1 y EXP2), el conjunto de datos y el protocolo de
+preprocesamiento, el diseño factorial, las configuraciones de los
+explicadores, la operacionalización de las métricas, el protocolo FOM-7, el
+análisis de cobertura de artefactos, y el plan de inferencia estadística. Las
+amenazas a la validez y el inventario de recursos de reproducibilidad figuran
+en el Apéndice A.
 
 El diseño traduce los constructos definidos en el Capítulo 2 a decisiones
 operativas: fidelidad, estabilidad, robustez, complejidad, coste computacional,
@@ -86,7 +87,7 @@ La Fase EXP2 es la cohorte de evidencia confirmativa. Expande EXP1 a los cinco
 modelos y cuatro métodos explicadores, con cinco semillas y tres tamaños de
 muestra, bajo el protocolo FOM-7 descrito en la Sección 3.6. Los resultados
 de EXP2 son la fuente exclusiva de las afirmaciones estadísticas inferenciales
-de los Estudios A y B.
+del Estudio Omnibus Multimétrico y del Estudio Pareado LIME–SHAP.
 
 ## Conjunto de datos y protocolo de preprocesamiento
 
@@ -182,9 +183,9 @@ jerárquica de tres niveles:
    $b = (g, n)$, con la ejecución como unidad de observación dentro del bloque.
    Este diseño produce $5 \times 3 = 15$ bloques completos.
 
-La unidad inferencial primaria del Estudio B es la **celda pareada**
-$(g, s, n)$: las 75 tuplas para las que existen artefactos calificados de
-SHAP y LIME con coordenadas idénticas.
+La unidad inferencial primaria del Estudio Pareado LIME–SHAP es la **celda
+pareada** $(g, s, n)$: las 75 tuplas para las que existen artefactos
+calificados de SHAP y LIME con coordenadas idénticas.
 
 ## Protocolo de muestreo de instancias y configuración de explicadores
 
@@ -324,7 +325,12 @@ de tiempo de ejecución. No se permiten modificaciones ad-hoc de configuración.
 **Puerta 3 — Auditoría de integridad de artefactos.** Inspección determinista
 de cada `results.json`: detección y exclusión de archivos vacíos, con esquema
 incompatible o con valores numéricos inválidos. Ningún artefacto excluido se
-reemplaza mediante reconstrucción sintética.
+reemplaza mediante reconstrucción sintética. Esta decisión descarta
+deliberadamente las estrategias de imputación habituales en presencia de datos
+faltantes [@adhikari2022]: imputar una métrica de calidad equivaldría a fabricar
+evidencia sobre el comportamiento de un explicador que no llegó a ejecutarse, de
+modo que la cobertura reducida se declara y se cuantifica (Sección 3.7) en lugar
+de completarse.
 
 **Puerta 4 — Armonización a tablas listas para el análisis.** Estandarización
 de claves y campos de métricas: las diferencias de esquema entre cohortes
@@ -407,7 +413,7 @@ recuperación. {#tbl-coverage-method}
 
 El impacto de las 25 celdas ausentes se evalúa en tres dimensiones:
 completitud de bloques de Friedman, precisión de medias globales de Anchors
-y DiCE, e integridad del análisis pareado del Estudio B.
+y DiCE, e integridad del Estudio Pareado LIME–SHAP.
 
 **Completitud de bloques de Friedman.** El test de Friedman opera sobre $B =
 15$ bloques $(g, n)$ completos: un bloque es completo si los cuatro métodos
@@ -429,31 +435,68 @@ Este incremento amplía los intervalos de confianza de las medias de Anchors
 en esos bloques, pero no invalida el test de Friedman por tres razones: (i)
 el test de Friedman es un procedimiento de rangos, robusto a la inflación de
 varianza en bloques individuales; (ii) los estadísticos de Friedman del
-Estudio A superan $\chi^2 = 30.44$ en todas las métricas, muy por encima del
-umbral crítico $\chi^2_{0.05,3} = 7.81$; (iii) el margen de seguridad para
+estudio omnibus superan $\chi^2 = 30.44$ en todas las métricas, muy por
+encima del umbral crítico $\chi^2_{0.05,3} = 7.81$; (iii) el margen de seguridad para
 la métrica con menor estadístico (Coste) es:
 
 $$\text{Margen} = \frac{30.44 - 7.81}{7.81} \times 100\% = 290\%$$
 
-Incluso asumiendo una reducción del poder del 50% —hipótesis conservadora que
-supera la inflación de varianza calculada— el estadístico de Coste sería
-$\chi^2 \approx 15.2$ ($p \approx 0.0016$), significativo al nivel
-$\alpha = 0.05$.
+Para acotar el margen de forma explícita se aplica una prueba de esfuerzo
+deliberadamente severa sobre la métrica menos favorable: se divide por dos el
+estadístico observado de Coste, una degradación que excede con holgura la
+inflación de varianza calculada de 1.47. El resultado sigue siendo significativo:
 
-**Integridad del análisis pareado del Estudio B.** Con cobertura completa de
-SHAP (75/75) y LIME (75/75), la cobertura pareada del Estudio B es del 100%.
-Los datos faltantes de Anchors y DiCE **no afectan** al Estudio B.
+$$\chi^2_{\text{estrés}} = \frac{30.44}{2} = 15.22 \;\Rightarrow\;
+p = P\!\left(\chi^2_3 > 15.22\right) = 0.0016 < 0.05$$
+
+Conviene precisar qué operación es esta y qué no es. Dividir el estadístico por
+dos no equivale a una reducción del poder del 50%: es una degradación directa de
+la evidencia observada, aplicada como cota inferior conservadora. Bajo la
+interpretación alternativa —reducir a la mitad el parámetro de no centralidad
+$\lambda = \chi^2_F - gl = 27.44$, de modo que $\mathbb{E}[\chi^2] = gl +
+\lambda/2 = 16.72$— la conclusión es todavía más holgada ($p = 0.0008$). Ambas
+lecturas dejan el estadístico por encima del umbral crítico
+$\chi^2_{0.05,3} = 7.815$, de modo que la significación de Coste no depende de
+cuál de las dos se adopte.
+
+**Integridad del Estudio Pareado LIME–SHAP.** Con cobertura completa de
+SHAP (75/75) y LIME (75/75), su cobertura pareada es del 100%. Los datos
+faltantes de Anchors y DiCE **no afectan** a este estudio.
+
+**Dirección del sesgo de selección en Anchors.** El análisis anterior cuantifica
+el efecto de la cobertura reducida sobre la *varianza* de los estimadores, pero
+la ausencia de datos en Anchors no es aleatoria y exige además una consideración
+sobre el *sesgo*. Las 18 celdas ausentes lo están porque el algoritmo no
+convergió a una regla con precisión $\geq \tau$ dentro del límite de búsqueda:
+la ausencia depende del resultado que se habría observado, es decir, es
+*missing not at random* (MNAR) y se concentra en los estratos de mayor
+incertidumbre local, precisamente aquellos en los que Anchors habría obtenido
+previsiblemente sus peores métricas. La consecuencia es direccional: las medias
+de calidad reportadas para Anchors son, con toda probabilidad, **optimistas**
+respecto a su rendimiento sobre el conjunto completo de celdas intentadas.
+
+El análisis de sensibilidad al umbral (@tbl-appendix-anchors-sensitivity) ofrece
+una estimación empírica de la magnitud de este efecto. Al relajar $\tau$ de 0.95
+a 0.90, la cobertura asciende de 57/75 (76%) a 72/75 (96%) y la fidelidad media
+*aumenta* de 0.386 a 0.421 —no disminuye—, lo que confirma que las celdas
+recuperadas al relajar el criterio no son las de peor calidad bajo la métrica de
+correlación de importancias, sino que el umbral y la métrica de fidelidad no
+están alineados. El sesgo existe, por tanto, pero su magnitud es moderada y su
+dirección no invalida la posición de Anchors en el ordenamiento: el método ya
+ocupa la tercera o cuarta posición incluso bajo esta estimación potencialmente
+favorable. Esta consideración refuerza —no debilita— la cautela con la que el
+Capítulo 6 recomienda el uso de Anchors.
 
 **Conclusión.** El impacto estadístico de los 25 artefactos analíticamente
 ausentes es mínimo: los tests de Friedman permanecen significativos con
-márgenes de seguridad $\geq 290\%$, el análisis pareado del Estudio B tiene
+márgenes de seguridad $\geq 290\%$, el Estudio Pareado LIME–SHAP tiene
 cobertura completa, y la única limitación real son los intervalos de confianza
 de Anchors en los bloques `logreg` y `mlp`. Esta limitación se registra como
 caveat explícito en la interpretación de los resultados del Capítulo 4.
 
 ## Plan de inferencia estadística
 
-### Estudio A: test omnibus de Friedman
+### Estudio Omnibus Multimétrico: test omnibus de Friedman
 
 Para contrastar H1 y H2, se aplica el test de Friedman [@friedman1937]
 sobre los $B = 15$ bloques completos con $k = 4$ tratamientos. El estadístico
@@ -508,9 +551,9 @@ corrección de Holm-Bonferroni dentro de cada familia:
 
 | Familia | Tests | $n$ | Corrección |
 |:--------|------:|:---:|:----------:|
-| Friedman (Estudio A) | 5 (uno por métrica) | 15 bloques | Holm-Bonferroni |
-| Wilcoxon-45 (Estudio A) | 5 | 45 celdas | Holm-Bonferroni |
-| Wilcoxon-75 (Estudios A y B) | 5 | 75 celdas | Holm-Bonferroni |
+| Friedman (estudio omnibus) | 5 (uno por métrica) | 15 bloques | Holm-Bonferroni |
+| Wilcoxon-45 (estudio omnibus) | 5 | 45 celdas | Holm-Bonferroni |
+| Wilcoxon-75 (omnibus y pareado) | 5 | 75 celdas | Holm-Bonferroni |
 
 : Familias inferenciales y control de multiplicidad. No se aplica corrección
 conjunta entre familias; cada familia responde a una pregunta con unidades
@@ -552,7 +595,14 @@ Capítulo 2 y protege la interpretación de los resultados del Capítulo 4.
 
 Todos los análisis del Capítulo 4 son reproducibles desde el repositorio
 público `https://github.com/jonnabio/xai-eval-framework`, archivado con DOI
-`10.5281/zenodo.19297724` (instantánea de referencia de abril de 2026).
+`10.5281/zenodo.21538180` (commit `553f65d71b077ec181ad36da7bb6e7c9942fe116`,
+2026-07-24), que es el corte de evidencia efectivamente reportado en el
+Capítulo 4: 299 artefactos comprometidos y 275 ejecuciones analizables tras la
+superposición de recuperación. El DOI de concepto
+`10.5281/zenodo.19297723` resuelve siempre a la versión más reciente. La
+instantánea previa `10.5281/zenodo.19297724` (abril de 2026) permanece
+archivada por procedencia, pero es anterior a la superposición de recuperación
+y no corresponde a las cifras reportadas aquí.
 Los anclajes de reproducibilidad principales son:
 
 - `configs/experiments/exp2_scaled/manifest.yaml` — diseño factorial
@@ -579,8 +629,8 @@ evaluadores semánticos LLM como instrumento de medición.
 
 ### EXP3: Validación cruzada de fidelidad en datasets adicionales {#sec-exp3-diseno}
 
-EXP3 replica el ordenamiento de fidelidad SHAP frente a Anchors en dos datasets
-tabulares de clasificación binaria distintos al dataset primario:
+EXP3 replica parcialmente los ordenamientos de fidelidad fuera del dataset
+primario mediante dos datasets tabulares de clasificación binaria:
 
 - **Breast Cancer Wisconsin** [@dua2019uci]: $n = 569$ instancias, 30
   características numéricas continuas (sin categóricas), clasificación binaria
@@ -588,14 +638,16 @@ tabulares de clasificación binaria distintos al dataset primario:
 - **German Credit** [@dua2019uci]: $n = 1{,}000$ instancias, 20 características
   (mixtas numéricas y codificadas), clasificación binaria crédito-bueno/malo.
 
-El diseño de EXP3 cruza dos modelos (Random Forest y XGBoost), tres semillas
-($\{42, 123, 456\}$) y los dos datasets, produciendo $2 \times 2 \times 3 = 12$
-comparaciones pareadas SHAP–Anchors. La métrica evaluada es fidelidad con la
-misma operacionalización que EXP2 (correlación importancias–enmascaramiento).
-La métrica de estabilidad no fue instrumentada en EXP3 por razones de
-factibilidad computacional; LIME tampoco fue incluido. EXP3 proporciona
-validación cross-dataset del ordenamiento SHAP $>$ Anchors en fidelidad; el
-contraste SHAP-LIME y la estabilidad permanecen acotados a UCI Adult Income.
+El diseño base de EXP3 cruza dos modelos (Random Forest y XGBoost), tres
+semillas ($\{42, 123, 456\}$) y los dos datasets, produciendo $2 \times 2
+\times 3 = 12$ comparaciones pareadas SHAP–Anchors. La métrica evaluada es
+fidelidad con la misma operacionalización que EXP2
+(correlación importancias–enmascaramiento). Una extensión posterior incorporó
+LIME en los mismos datasets y modelos, reportando fidelidad y estabilidad de
+LIME bajo el protocolo EXP2. Sin embargo, la estabilidad de SHAP no fue
+instrumentada en esa extensión, por lo que EXP3 proporciona validación
+cross-dataset parcial de los ordenamientos de fidelidad, pero no un contraste
+pareado SHAP-LIME completo de estabilidad fuera de UCI Adult Income.
 
 ### EXP4: Estudio de fiabilidad de jueces LLM para evaluación semántica {#sec-exp4-diseno}
 
@@ -603,7 +655,7 @@ EXP4 es un estudio de calibración empírica cuyo propósito es cuantificar la
 convergencia inter-juez de evaluadores LLM sobre explicaciones del corpus
 experimental de EXP2. Su función en la tesis es proporcionar evidencia
 cuantitativa de la brecha de evaluación semántica identificada en la taxonomía
-del Capítulo 5 (Brecha 3: la evaluación semántica crece más rápido que su base
+del Capítulo 5 (Brecha 3, §sec-taxonomia-brechas: la evaluación semántica crece más rápido que su base
 de validación empírica).
 
 **Muestra.** Se seleccionaron $n = 147$ pares de salidas de explicación del
@@ -614,11 +666,21 @@ sobre la misma instancia o configuración comparable.
 **Jueces.** Tres jueces LLM independientes puntuaron cada par de forma
 ciega (sin conocer la puntuación de los otros jueces) sobre siete dimensiones
 semánticas estructuradas mediante una rúbrica de escala 1–5 por dimensión
-(Tabla @tbl-exp4-dimensiones del Capítulo 5).
+(las siete dimensiones se enumeran en la Tabla @tbl-exp4-icc del Capítulo 5).
+El uso de modelos de lenguaje como instrumento de medida exige cautela: estos
+sistemas producen salidas fluidas y plausibles con independencia de su
+corrección factual, un modo de fallo ampliamente documentado en generación de
+lenguaje natural [@ji2022], por lo que su convergencia inter-juez debe
+establecerse empíricamente antes de tratarla como evidencia.
 
 **Análisis.** La fiabilidad inter-juez se cuantifica mediante la correlación
-intraclase ICC(2,1) —modelo de efectos aleatorios bidireccionales, concordancia
-absoluta— y el $\alpha$ de Krippendorff. El umbral de fiabilidad aceptable es
+intraclase ICC(1,1) —modelo de efectos aleatorios unidireccional, evaluador
+único— y el $\alpha$ de Krippendorff [@krippendorff2018], estadístico que tolera
+puntuaciones ausentes y admite escalas ordinales. Se prefieren ambos al
+coeficiente $\kappa$ de Cohen [@cohen1960] porque este último se define para dos
+evaluadores y escalas nominales, mientras que el diseño de EXP4 involucra tres
+jueces y puntuaciones ordinales de 1 a 5. El umbral de fiabilidad
+aceptable es
 $\geq 0.75$ [@koo2016], que corresponde a la categoría *good* o superior según
 los criterios de @koo2016.
 
@@ -627,7 +689,8 @@ no la calidad de los métodos explicadores. Sus resultados no modifican las
 conclusiones confirmativas de H1–H3; aportan evidencia sobre el diseño de
 rúbricas para evaluación semántica futura. EXP4 tiene carácter exploratorio y
 no genera hipótesis confirmativas propias; su resultado se clasifica como
-proposición de calibración P2 (Capítulo 6).
+proposición de calibración P2, declarada con su estatuto epistémico diferenciado
+en el Capítulo 1 y reportada en los Capítulos 5 y 6.
 
 Este capítulo ha operacionalizado el protocolo FOM-7 y ha establecido las
 condiciones bajo las cuales los resultados del Capítulo 4 son estadísticamente

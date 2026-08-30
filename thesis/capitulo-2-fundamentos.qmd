@@ -93,17 +93,40 @@ diferente [@mothilal2020]. Estos métodos no explican el modelo en el mismo
 sentido; producen objetos explicativos distintos, con supuestos y criterios de
 evaluación diferentes.
 
+La alternativa a explicar *a posteriori* es diseñar modelos intrínsecamente
+interpretables. Esta posición ha sido defendida con fuerza para decisiones de
+alto riesgo, argumentando que la explicación post-hoc de una caja negra no
+sustituye a un modelo comprensible por construcción [@rudin2019], y se ha
+materializado en arquitecturas que incorporan la interpretabilidad como
+restricción de diseño: modelos con cuello de botella conceptual [@koh2020],
+redes con características monótonas [@nguyen2019], arquitecturas prototípicas
+[@hess2023] o representaciones funcionales explícitas [@liu2024]. En paralelo,
+una línea formal explora la explicabilidad basada en lógica, con garantías de
+corrección de las que carecen los métodos aproximados [@marquessilva2024]. Esta
+tesis no adopta esa vía —su objeto son explicadores agnósticos aplicados a
+modelos ya entrenados— pero la frontera importa para interpretar sus resultados:
+la crítica de fondo, que las explicaciones aproximadas pueden ser plausibles sin
+ser fieles, es exactamente la que motiva medir fidelidad en lugar de suponerla.
+Advertencias equivalentes se han formulado sobre el uso de mecanismos internos
+del modelo, como la atención, en calidad de explicación [@bastings2020].
+
 La categoría post-hoc, sin embargo, cubre familias heterogéneas. Las
 atribuciones asignan importancia a características; las reglas buscan
 condiciones suficientes o patrones comprensibles; los sustitutos locales
 aproximan el comportamiento del modelo en un vecindario; los contrafactuales
 describen alternativas que cambiarían una decisión; las visualizaciones
-representan patrones agregados o activaciones. Esta pluralidad es una fortaleza
+representan patrones agregados o activaciones —como las curvas de expectativa
+condicional individual [@goldstein2014] o los gráficos de efectos locales
+acumulados [@apley2020], que describen el efecto marginal de una característica
+sobre el conjunto de datos en lugar de atribuir importancia a una predicción
+concreta—. Esta pluralidad es una fortaleza
 del campo, porque permite adaptar la explicación a objetivos distintos. Pero
 también es una fuente de dificultad evaluativa: una métrica apropiada para
 atribuciones no necesariamente evalúa bien reglas, y una métrica orientada a
 validez contrafactual no necesariamente mide fidelidad local de un sustituto
-[@arrieta2019a; @hedstrom2023].
+[@arrieta2019a; @hedstrom2023]. Esta tesis acota su evaluación a explicaciones
+locales por instancia, de modo que las familias de visualización global antes
+citadas quedan fuera de su alcance experimental.
 
 La literatura también distingue métodos agnósticos y específicos del modelo
 [@arrieta2019a; @linardatos2020]. Los métodos agnósticos tratan al predictor
@@ -395,9 +418,29 @@ local.
 ### SHAP: valores de Shapley y atribución aditiva
 
 SHAP conecta métodos de atribución de características con fundamentos de teoría
-de juegos, especialmente el valor de Shapley [@lundberg2017]. La predicción se
+de juegos, especialmente el valor de Shapley [@shapley1952], formulado
+originalmente para repartir de forma única la ganancia de un juego cooperativo
+entre sus participantes y trasladado por @lundberg2017 al problema de atribuir
+importancia entre características. La predicción se
 expresa como una suma de contribuciones atribuibles a cada característica, bajo
-un conjunto de propiedades deseables para explicaciones aditivas. Esta base
+un conjunto de propiedades deseables para explicaciones aditivas.
+
+El coste de calcular exactamente el valor de Shapley crece de forma exponencial
+con el número de características, de modo que su uso práctico descansa en
+estimadores muestrales cuyas garantías han sido estudiadas de forma específica
+[@mitchell2022], y su complejidad computacional se ha caracterizado también para
+familias de funciones concretas [@karmakar2024]. La formulación aditiva original
+tiene además límites conocidos que han motivado extensiones: no captura
+interacciones entre características, lo que ha dado lugar a índices de
+interacción con garantías de fidelidad [@tsai2023]; asume independencia entre
+características, supuesto que se viola en datos tabulares reales y que ha
+motivado estimadores sensibles a la dependencia [@olsen2022]; y se ha extendido
+recientemente a escenarios multimodales [@wang2025]. Esta familia de trabajos es
+relevante para el Capítulo 3 porque delimita qué significa exactamente «SHAP» en
+un experimento: la etiqueta cubre estimadores distintos con supuestos distintos.
+Una preocupación análoga por la dependencia entre características subyace a las
+medidas de importancia por permutación, cuya interpretación exige razonar sobre
+clases enteras de modelos y no sobre un único ajuste [@fisher2019]. Esta base
 formal ha convertido a SHAP en uno de los enfoques más influyentes para
 interpretar modelos complejos.
 
@@ -453,7 +496,9 @@ cuidadosamente acotadas [@guidotti2018; @nauta2023].
 ### Anchors: reglas de alta precisión y límites de cobertura
 
 Anchors propone explicaciones en forma de reglas locales de alta precisión
-[@ribeiro2018]. En vez de asignar pesos a características, busca condiciones
+[@ribeiro2018], continuando una tradición que había explorado ya las reglas como
+formato explicativo mediante ensembles de reglas ajustados sobre el modelo
+predictivo [@friedman2008]. En vez de asignar pesos a características, busca condiciones
 que, cuando se cumplen, hacen que el modelo mantenga una predicción con alta
 probabilidad. La promesa de Anchors es comunicativa: una regla del tipo "si se
 cumplen estas condiciones, la predicción se mantiene" puede ser más accionable
@@ -551,6 +596,25 @@ la persona, y esa distancia es justamente una de las brechas que una revisión
 doctoral debe hacer visible [@langer2021; @karimi2022].
 
 ## Marcos y protocolos de evaluación XAI
+
+La última década ha producido, junto a los toolkits ya citados, un conjunto
+creciente de marcos y bancos de prueba orientados específicamente a *evaluar*
+explicaciones en lugar de generarlas. Los trabajos recientes incluyen bancos de
+prueba multi-métrica de propósito general [@sithakoul2024], revisiones y
+taxonomías de métricas de evaluación [@kadir2023], protocolos para dominios
+concretos como las redes neuronales sobre grafos [@agarwal2023; @proszewska2025]
+o la detección de contenido sintético [@tsigos2024], evaluaciones centradas en la
+representación visual de las atribuciones [@cunha2024], estudios que miden la
+interpretabilidad percibida del propio artefacto explicativo [@morrison2023], y
+pruebas de robustez de las explicaciones frente a ejemplos adversarios
+[@kumagai2023]. A ellos se suman las bibliotecas que instrumentan la generación y
+el análisis de explicaciones de forma reproducible [@li2022], los tutoriales
+metodológicos que consolidan buenas prácticas de aplicación [@bennetot2024] y las
+propuestas que desplazan la evaluación desde la atribución por característica
+hacia conceptos de alto nivel definidos por el usuario [@kim2018]. El panorama
+resultante confirma la premisa de esta tesis: existe abundancia de instrumentos
+de medida y escasez de protocolos que gobiernen su uso.
+
 
 La evaluación de interpretabilidad requiere distinguir niveles de evidencia.
 @doshi-velez2017 proponen una taxonomía influyente: evaluación
@@ -670,11 +734,31 @@ parte del aporte teórico del protocolo.
 
 ### Evaluación human-centered: usuarios, tareas y calidad explicativa
 
+Esta rama ha alcanzado en los últimos años una madurez propia, con agendas
+explícitas de consolidación [@ehsan2023] y revisiones críticas que cuestionan los
+supuestos dominantes del campo [@ehsan2024]. La investigación reciente muestra
+que la calidad percibida de una explicación depende de variables que ninguna
+métrica computacional recoge: las características y el nivel de experiencia del
+destinatario [@nimmo2024], el contexto cultural desde el que se interpreta
+[@peters2024], el diseño de la interfaz que la presenta [@bhat2024;
+@alkhateeb2025], e incluso su materialización física en artefactos tangibles
+[@colley2023]. La transparencia y la explicabilidad se han estudiado también como
+antecedentes de la confianza calibrada [@kim2024] y como práctica organizativa
+más que como propiedad técnica [@ramachandram2025], mientras que otros trabajos
+documentan las contrapartidas que impone perseguir explicabilidad
+[@brown2024] e incluso el coste reputacional que puede acarrear el uso declarado
+de IA [@reif2025]. A ello se añade una literatura sobre las implicaciones éticas
+del campo [@nannini2024; @vainiopekka2023] y sobre la distancia entre la
+inteligencia de la máquina y la comprensión humana [@choudhari2025].
+
+
 La evaluación human-centered constituye una rama de la XAI que parte de una
 premisa metodológica distinta: la calidad de una explicación no puede medirse
 solo con proxies computacionales, sino que depende de su efecto sobre el
 entendimiento, la confianza, la calibración y la acción de personas concretas
-[@doshi-velez2017; @miller2019]. Esta perspectiva no invalida la evaluación
+[@doshi-velez2017; @miller2019]. Esta premisa enlaza con una línea previa que ya
+situaba a la persona como participante activo del ciclo de aprendizaje, y no como
+receptor pasivo de su salida [@amershi2014]. Esta perspectiva no invalida la evaluación
 functionally-grounded, sino que la complementa al señalar que las métricas
 automáticas responden a preguntas distintas a las que responden los usuarios.
 
@@ -784,6 +868,20 @@ admisibilidad (proposición P1), conecta la dimensión técnica del benchmark co
 este requisito normativo emergente.
 
 ## Taxonomias de métricas y brechas de constructo
+
+El esfuerzo por ordenar este espacio ha generado una literatura de síntesis
+abundante y heterogénea. Existen historias breves del campo que sitúan la
+interpretabilidad en una tradición estadística de más de dos siglos
+[@molnar2020], panorámicas compactas de métodos [@holzinger2022; @long2019],
+revisiones sistemáticas de técnicas y retos abiertos [@abusitta2024; @ullah2024],
+inventarios de aplicaciones por dominio [@kalasampath2025] y revisiones
+focalizadas en tareas concretas [@ngueajio2025; @fan2026]. La reflexión más
+articulada sobre el estado del campo es el manifiesto que propone una segunda
+generación de XAI y enumera los desafíos abiertos que la primera no resolvió
+[@longo2024]. La proliferación de estas síntesis es, en sí misma, un síntoma del
+problema que esta tesis aborda: se acumulan mapas del territorio con mayor
+rapidez que protocolos para transitarlo.
+
 
 La fidelidad mide hasta qué punto una explicación aproxima el comportamiento
 observable del modelo. En métodos de sustitución local, puede operacionalizarse

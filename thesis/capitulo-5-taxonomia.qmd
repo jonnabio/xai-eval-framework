@@ -4,10 +4,12 @@ El Capítulo 4 produjo un resultado que no era predecible a priori y que tiene
 consecuencias metodológicas directas sobre cómo debe organizarse el espacio de
 métricas XAI. LIME obtuvo una fidelidad media de 0.560 —por encima del umbral
 de uso en producción para muchos equipos de datos— y al mismo tiempo una
-estabilidad estructural prácticamente nula: similitud coseno media de 0.014 y
-coeficiente de variación del 86.2% entre explicaciones generadas para la misma
-instancia con distintas semillas. SHAP, en cambio, mantuvo fidelidad de 0.810
-y estabilidad de 0.724, con d~z~=4.82 y d~z~=3.00 respectivamente. La
+estabilidad prácticamente nula bajo la configuración de referencia del
+benchmark: similitud coseno media de 0.014 y coeficiente de variación del 86.2%
+entre explicaciones generadas para la misma instancia con distintas semillas
+(el Capítulo 6 delimita el alcance de este resultado, que depende del espacio
+de características y del ancho del kernel). SHAP, en cambio, mantuvo fidelidad de 0.808
+y estabilidad de 0.732, con d~z~=4.82 y d~z~=3.00 respectivamente. La
 correlación empírica entre fidelidad y estabilidad —visible en la
 @fig-correlacion-metricas— es baja, lo que significa que ambas dimensiones
 aportan información no redundante sobre la calidad de una explicación. Un
@@ -17,11 +19,12 @@ eliminado LIME sin valorar su ventaja en coste y parsimonia. Ningún escalar
 único captura el perfil completo.
 
 Esta disociación no es un artefacto del diseño. La parsimonia media de DiCE
-(0.085 características activas) y su fidelidad baja (0.412) responden a una
-lógica distinta a la de SHAP o LIME: DiCE minimiza la perturbación del
-contrafactual, no la aproximación local al modelo. Que DiCE tenga perfil óptimo
-en parsimonia y eficiencia, pero deficiente en fidelidad técnica, indica que los
-ejes de calidad no colapsan sobre un único factor latente. La @fig-radar-metodos
+(0.017 de ratio activo, la más concisa del benchmark) y su fidelidad baja
+(0.172) responden a una lógica distinta a la de SHAP o LIME: DiCE minimiza la
+perturbación del contrafactual, no la aproximación local al modelo. Que DiCE
+tenga perfil óptimo en parsimonia —aunque no en coste, donde su media de
+28,209 ms solo mejora a la de Anchors— pero deficiente en fidelidad técnica,
+indica que los ejes de calidad no colapsan sobre un único factor latente. La @fig-radar-metodos
 hace visible esta estructura: ningún método domina simultáneamente en todas las
 dimensiones, y los cuellos de botella difieren por método. Este patrón solo es
 observable si las métricas están conceptualmente separadas antes de la medición,
@@ -32,8 +35,8 @@ dimensiones de calidad son genuinamente ortogonales, cuál fuente de evidencia
 mide cada una, y para qué contexto de tarea resulta relevante cada perfil*. Sin
 un marco conceptual que responda esas tres preguntas de forma articulada, el
 benchmark produce números correctos pero no produce orientación. Un evaluador
-que conozca solo los rangos de fidelidad (SHAP: 0.810, LIME: 0.560,
-Anchors: 0.514, DiCE: 0.412) no sabe si una diferencia de 0.05 puntos en
+que conozca solo los rangos de fidelidad (SHAP: 0.808, LIME: 0.560,
+Anchors: 0.388, DiCE: 0.172) no sabe si una diferencia de 0.05 puntos en
 parsimonia es sustantiva o trivial, ni si la brecha de fidelidad justifica el
 coste adicional de SHAP en un sistema de tiempo real. La taxonomía de este
 capítulo es, por tanto, una respuesta necesaria a lo que el benchmark demostró
@@ -42,13 +45,13 @@ dimensiones son operativamente independientes, y que la selección de método
 requiere un lenguaje conceptual que articule cuál dimensión importa según el
 contexto de uso.
 
-Este capítulo desarrolla el Estudio C de la tesis: una taxonomía estructurada
-del espacio de métricas de evaluación XAI. Su función es dar peso conceptual
-propio a la tercera contribución doctoral. Los capítulos anteriores mostraron
-que FOM-7 necesita distinguir objetos explicativos, constructos de calidad,
-fuentes de evidencia y contextos de uso. Este capítulo convierte esa necesidad
-en una matriz de clasificación que permite interpretar el benchmark y, al mismo
-tiempo, orientar evaluaciones futuras.
+Este capítulo desarrolla el Estudio Taxonómico de la tesis: una taxonomía
+estructurada del espacio de métricas de evaluación XAI. Su función es dar peso
+conceptual propio a la tercera contribución doctoral. Los capítulos anteriores
+mostraron que FOM-7 necesita distinguir objetos explicativos, constructos de
+calidad, fuentes de evidencia y contextos de uso. Este capítulo convierte esa
+necesidad en una matriz de clasificación que permite interpretar el benchmark
+y, al mismo tiempo, orientar evaluaciones futuras.
 
 La taxonomía se presenta como una **síntesis integradora y operacional**, no
 como una taxonomía completamente nueva en sentido fuerte. Integra distinciones
@@ -75,24 +78,35 @@ completamente nueva en sentido fuerte (no propone dimensiones sin antecedentes
 en la literatura) ni una mera síntesis descriptiva (la estructura de cuatro ejes
 y su mapeo al benchmark es una contribución propia).
 
-El corpus de apoyo combina cuatro tipos de fuentes, que suman **47 referencias
-directas** a la construcción de la taxonomía. Primero, revisiones y
+El corpus de apoyo combina cuatro tipos de fuentes. Primero, revisiones y
 taxonomías de interpretabilidad y XAI que establecen el vocabulario conceptual
-del campo: 11 trabajos, incluyendo las revisiones fundacionales de
-@arrieta2019a, @lipton2018, @linardatos2020 y la taxonomía sistemática de
+del campo, incluyendo las revisiones fundacionales de
+@arrieta2019a, @lipton2018, @linardatos2020, la historia breve del campo de
+@molnar2020 y la taxonomía sistemática de
 @schwalbe2023. Segundo, trabajos sobre evaluación y benchmarking que distinguen
-niveles de evidencia, métricas functionally-grounded y reproducibilidad:
-9 trabajos, incluyendo la taxonomía de niveles de @doshi-velez2017, el toolkit
-Quantus [@hedstrom2023], la plataforma OpenXAI [@agarwal2022] y la revisión de
+niveles de evidencia, métricas functionally-grounded y reproducibilidad,
+incluyendo la taxonomía de niveles de @doshi-velez2017, el toolkit
+Quantus [@hedstrom2023], la plataforma OpenXAI [@agarwal2022], el banco de
+pruebas de @sithakoul2024 y la revisión de
 propiedades de evaluación de @nauta2023. Tercero, artículos metodológicos sobre
 los cuatro explicadores evaluados, necesarios para ubicar qué objeto produce
-cada método y qué métricas le son adecuadas: 8 trabajos
+cada método y qué métricas le son adecuadas
 [@ribeiro2016; @lundberg2017; @ribeiro2018; @mothilal2020; @guidotti2018;
 @carvalho2019; @karimi2022; @poyiadzi2020]. Cuarto, revisiones recientes
-centradas en métricas, robustez, reproducibilidad y evaluación human-centered:
-19 trabajos, incluyendo las revisiones de métricas de @abdulkadir2023 y
-@pawlicki2024, el estudio de comprehensibilidad de @bhattacharya2024 y trabajos
+centradas en métricas, robustez, reproducibilidad y evaluación human-centered,
+incluyendo las revisiones de métricas de @abdulkadir2023 y
+@pawlicki2024, el estudio de comprehensibilidad de @bhattacharya2024, la agenda
+de @ehsan2023 y trabajos
 sobre utilidad y confianza [@zhang2024; @miller2019; @hoffman2023; @mohseni2021].
+
+El corpus se amplió durante la revisión hasta las **127 referencias de contenido
+XAI** que sostienen esta tesis —la bibliografía completa suma 140 entradas, de
+las cuales 13 corresponden a infraestructura estadística, conjuntos de datos y
+familias de modelo, no al objeto de la taxonomía—. De ese corpus, **107
+documentos se conservan a texto completo** en el repositorio público de la tesis
+(`thesis/papers/`), de modo que la base documental de la taxonomía es auditable
+y no solamente declarada: cada entrada de la bibliografía está citada en el
+cuerpo del texto, y no existen referencias registradas sin uso.
 
 Los criterios de inclusión fueron: (i) fuentes con relación directa con
 interpretabilidad, explicabilidad o evaluación XAI; (ii) trabajos que definieran
@@ -111,7 +125,7 @@ cambio de predicción ante enmascaramiento o como proxy de faithfulness; la
 taxonomía separa esas lecturas para evitar que una misma palabra sostenga claims
 no equivalentes. Los 15 constructos métricos de la Tabla @tbl-taxonomia-ampliada
 son el resultado de consolidar y desambiguar los constructos identificados en el
-corpus de 47 referencias; se reportan como una selección representativa, no como
+corpus descrito; se reportan como una selección representativa, no como
 un catálogo exhaustivo.
 
 ## Motivación y posicionamiento {#sec-taxonomia-motivacion}
@@ -128,7 +142,7 @@ operacionalizaciones diferentes.
 Canha et al. [-@canha2025] y Bhattacharya y Verbert [-@bhattacharya2024]
 convergen en señalar la necesidad de distinguir métricas calculadas sin
 participantes humanos de métricas basadas en estudios de usuario. Esta distinción
-es central para la tesis porque los Estudios A y B producen evidencia
+es central para la tesis porque los dos estudios empíricos producen evidencia
 functionally-grounded: cuantifican propiedades computacionales de artefactos
 explicativos, pero no miden directamente utilidad humana, satisfacción,
 calibración de confianza o calidad de decisión.
@@ -236,8 +250,8 @@ sostenerse razonablemente cuando la métrica se usa en un benchmark técnico.
 
 ## Mapeo del benchmark a la taxonomía {#sec-taxonomia-benchmark}
 
-Las cinco métricas operacionalizadas en los Estudios A y B se localizan en la
-taxonomía de la siguiente manera:
+Las cinco métricas operacionalizadas en el Estudio Omnibus Multimétrico y el
+Estudio Pareado LIME–SHAP se localizan en la taxonomía de la siguiente manera:
 
 | Métrica | Eje 1: objetivo | Eje 2: fuente de evidencia | Eje 3: propiedad | Eje 4: contexto prioritario |
 |:--|:--|:--|:--|:--|
@@ -255,6 +269,45 @@ plausibilidad, satisfacción, comprehensibilidad y utilidad en tarea humana. Esa
 ausencia no es una falla del estudio; es una delimitación. La taxonomía permite
 nombrar el límite con precisión y evita que el resultado estadístico se use para
 claimar propiedades no medidas.
+
+## Brechas de constructo que la taxonomía hace explícitas {#sec-taxonomia-brechas}
+
+El mapeo anterior no solo localiza lo que el benchmark mide: delimita lo que no
+mide y por qué. Las tres brechas siguientes se derivan de esa delimitación y se
+numeran aquí porque el resto de la tesis se refiere a ellas de forma abreviada.
+No son defectos del diseño experimental, sino distancias estructurales entre lo
+que una métrica computa y lo que un claim pretende afirmar.
+
+**Brecha 1 — Distancia entre proxy y constructo.** Ninguna de las cinco métricas
+del benchmark mide el constructo que su nombre sugiere en sentido pleno: la
+fidelidad por correlación de importancias no autoriza a afirmar utilidad humana,
+la estabilidad bajo perturbación no prueba causalidad, una regla Anchor de alta
+precisión no garantiza cobertura amplia y un contrafactual válido para el modelo
+no es necesariamente accionable para la persona (Capítulo 2). La brecha se
+agrava cuando la métrica produce una cifra fácil de tabular, porque la forma
+tabular sugiere una objetividad mayor que la disponible. La taxonomía la
+gestiona obligando a que cada métrica declare su alcance inferencial admisible
+en la columna correspondiente de la Tabla @tbl-taxonomia-ampliada.
+
+**Brecha 2 — Ausencia de evidencia human-grounded y application-grounded.** El
+mapeo de la Tabla @tbl-taxonomia-benchmark muestra que las cinco métricas se
+concentran en dos fuentes de evidencia —enmascaramiento y perturbación— y dejan
+vacías las celdas de *estudio con usuario* y *comparación con verdad-terreno*.
+En consecuencia, plausibilidad, comprensibilidad, satisfacción y utilidad en
+tarea quedan fuera del alcance de los dos estudios empíricos. Esta brecha es de
+cobertura, no de validez: se cierra añadiendo estudios con participantes
+humanos, no reinterpretando las métricas existentes.
+
+**Brecha 3 — La evaluación semántica crece más rápido que su base de validación
+empírica.** La respuesta natural a la Brecha 2 ha sido delegar el juicio
+semántico en evaluadores automáticos —crecientemente, jueces LLM— que prometen
+aproximar el criterio humano sin el coste de un estudio con participantes. El
+problema es que esos evaluadores se adoptan como instrumento de medida antes de
+que su fiabilidad haya sido establecida: se usan para puntuar explicaciones sin
+que exista evidencia de que dos jueces independientes puntúan igual la misma
+explicación. La brecha, por tanto, no es de cobertura sino de calibración del
+instrumento, y es contrastable empíricamente. EXP4 la contrasta y la confirma en
+§sec-exp4-fiabilidad.
 
 ## Contribución teórica de la taxonomía {#sec-taxonomia-contribucion}
 
@@ -281,19 +334,26 @@ doctoral del espacio de evaluación XAI. No reemplaza los marcos existentes; los
 integra para que cada métrica usada en la tesis tenga una ubicación conceptual,
 un alcance inferencial y una relación explícita con los resultados empíricos.
 
-## Estudio de fiabilidad de evaluadores semánticos (EXP4) {#sec-exp4-fiabilidad}
+## Estudio de Fiabilidad Inter-juez (EXP4) {#sec-exp4-fiabilidad}
 
-La Brecha 3 identifica que la evaluación semántica crece más rápido que su base
-de validación empírica. EXP4 (diseñado en §sec-exp4-diseno, Capítulo 3)
+La Brecha 3 (§sec-taxonomia-brechas) identifica que la evaluación semántica
+crece más rápido que su base de validación empírica. EXP4 (diseñado en
+§sec-exp4-diseno, Capítulo 3)
 cuantifica directamente esa brecha: mide si los jueces LLM actuales alcanzan la
 convergencia inter-juez necesaria para operar como evidencia confirmativa.
 
-**Resultados.** La Tabla @tbl-exp4-icc reporta ICC(2,1) y $\alpha$ de
-Krippendorff por dimensión para los tres jueces LLM sobre $n = 147$ pares.
+**Resultados.** La Tabla @tbl-exp4-icc reporta ICC(1,1) y $\alpha$ de
+Krippendorff por dimensión para los tres jueces LLM. Los dos estadísticos se
+calculan sobre conjuntos de casos distintos: el ICC se obtiene de una
+descomposición unidireccional de efectos aleatorios, que exige una matriz completa
+de casos $\times$ jueces y se restringe por tanto a los $n = 147$ casos
+puntuados por los tres jueces, mientras que $\alpha$ de Krippendorff tolera
+puntuaciones ausentes y se calcula sobre el conjunto más amplio de $n = 192$
+casos, que incluye aquellos con al menos una puntuación de juez faltante.
 Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
 [@koo2016].
 
-| Dimensión | ICC(2,1) | Krippendorff $\alpha$ |
+| Dimensión | ICC(1,1) | Krippendorff $\alpha$ |
 |:----------|:--------:|:---------------------:|
 | Claridad | 0.321 | 0.278 |
 | Concisión | 0.453 | 0.409 |
@@ -303,15 +363,18 @@ Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
 | Plausibilidad semántica | 0.601 | 0.573 |
 | Calidad global | 0.431 | 0.394 |
 
-: Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4;
-$n = 147$ pares, 3 jueces LLM). ICC(2,1): modelo bidireccional de efectos
-aleatorios, concordancia absoluta. Ninguna dimensión alcanza el umbral
-aceptable $\geq 0.75$ [@koo2016]. {#tbl-exp4-icc}
+: Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4; ICC sobre
+$n = 147$ casos con puntuación completa, $\alpha$ de Krippendorff sobre
+$n = 192$ casos —véase el texto—; 3 jueces LLM). ICC(1,1): modelo unidireccional
+de efectos aleatorios, evaluador único. Un modelo unidireccional trata los
+sesgos sistemáticos entre jueces como error y no como efecto separable, por lo
+que estos valores son conservadores respecto de ICC(2,1). Ninguna dimensión alcanza el
+umbral aceptable $\geq 0.75$ [@koo2016]. {#tbl-exp4-icc}
 
 Las dimensiones con mayor consistencia relativa son Completitud
 ($\alpha = 0.566$) y Plausibilidad Semántica ($\alpha = 0.573$); las de
 menor consistencia son Claridad ($\alpha = 0.278$) y Utilidad para auditoría
-($\alpha = 0.340$). Los valores ICC(2,1) entre 0.321 y 0.601 se clasifican
+($\alpha = 0.340$). Los valores ICC(1,1) entre 0.321 y 0.601 se clasifican
 como fiabilidad *poor* a *moderate* según @koo2016, situándose en todos los
 casos por debajo de la categoría *good*.
 

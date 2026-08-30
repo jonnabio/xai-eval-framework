@@ -82,13 +82,36 @@ perturbación local ($\{500, 1000, 2000\}$) manteniendo `kernel_width = 3.0` y
 | 1000 (referencia) | 0.461 | 0.014 | 226 | 0.085 |
 | 2000 | 0.459 | 0.016 | 451 | 0.085 |
 
-: Sensibilidad de LIME a `num_samples` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-sensitivity}
+: Sensibilidad de LIME a `num_samples` (RF, semilla 42, $N=100$). Medición
+exploratoria histórica: sus valores no han podido re-derivarse bajo el entorno
+actual (véase la nota de procedencia siguiente). {#tbl-appendix-lime-sensitivity}
 
 La fidelidad de LIME es insensible a `num_samples` (variación < 2%);
 la estabilidad permanece cercana a cero en todos los niveles. El coste escala
-aproximadamente de forma lineal. Este resultado confirma que la inestabilidad
-estructural de LIME no se resuelve aumentando el número de muestras, sino que
+aproximadamente de forma lineal. Este resultado indica que la inestabilidad
+de LIME no se resuelve aumentando el número de muestras, sino que
 es inherente a la variabilidad del proceso de muestreo local.
+
+*Nota de procedencia y alcance.* Esta sonda es una medición exploratoria
+anterior cuyo artefacto de salida no se conserva en el repositorio, a diferencia
+de la sonda de `kernel_width` (@tbl-appendix-lime-kw-sensitivity), que se
+re-deriva de `outputs/analysis/lime_kernel_width_sensitivity.csv`. Ambas tablas
+declaran la misma condición de referencia (RF, semilla 42, $N=100$,
+`num_samples = 1000`, `kernel_width = 3.0`) pero reportan valores distintos para
+ella —fidelidad 0.461 frente a 0.518, estabilidad 0.014 frente a 0.000, coste
+226 ms frente a 30 ms—, lo que indica que fueron ejecutadas con instrumentaciones
+distintas: el coste de ambas queda además por debajo del rango observado para
+LIME sobre RF en EXP2 (300–919 ms por ejecución), de modo que ninguna de las dos
+mide una ejecución completa del protocolo EXP2. Las dos sondas se reportan aquí
+por su valor cualitativo —la dirección del efecto de `num_samples` y de
+`kernel_width`— y no como estimaciones puntuales comparables entre sí ni con las
+medias de EXP2. La conclusión que ambas sostienen conjuntamente, y que sí es
+robusta a esta discrepancia, es direccional: aumentar `num_samples` no recupera
+estabilidad, mientras que ampliar `kernel_width` sí lo hace a costa de fidelidad.
+Re-ejecutar la sonda de `num_samples` produciría una medición nueva y no una
+reproducción de esta tabla, dado que el script de sensibilidad conservado
+(`src/scripts/run_sensitivity_analysis.py`) recorre una rejilla distinta
+($\{500, 1000, 2000, 5000, 10000\}$) sobre la configuración base de EXP1.
 
 **SHAP — sensibilidad al tamaño del conjunto de referencia.** Se varía el
 número de instancias de referencia del `KernelExplainer` ($\{25, 50, 100\}$)
@@ -112,13 +135,18 @@ sin incurrir en el coste computacional de referencias mayores.
 de precisión mínima para aceptar una regla ($\{0.90, 0.95, 0.99\}$) sobre el
 modelo RF.
 
-| $\tau$ | Cobertura de celdas | Fidelidad (media) | Coste (ms) |
+| $\tau$ | Cobertura del diseño completo (75 celdas) | Fidelidad (media) | Coste (ms) |
 |:--|--:|--:|--:|
 | 0.90 | 72/75 (96%) | 0.421 | 9,843 |
 | 0.95 (referencia) | 57/75 (76%) | 0.386 | 16,000 |
 | 0.99 | 31/75 (41%) | 0.411 | 28,721 |
 
-: Sensibilidad de Anchors al umbral de precisión $\tau$ (RF, semilla 42). {#tbl-appendix-anchors-sensitivity}
+: Sensibilidad de Anchors al umbral de precisión $\tau$. **Las dos columnas
+tienen alcances distintos**: la cobertura se computa sobre las 75 celdas del
+diseño completo de Anchors (5 modelos $\times$ 5 semillas $\times$ 3 tamaños) —de
+ahí que la fila de referencia coincida exactamente con el 57/75 = 76.0% de
+@tbl-coverage-method—, mientras que la fidelidad y el coste corresponden a la
+condición de sondeo RF, semilla 42. {#tbl-appendix-anchors-sensitivity}
 
 La cobertura de Anchors es extremadamente sensible a $\tau$: reducir el umbral
 a 0.90 aumenta la cobertura de 76% a 96%, mientras que elevar a 0.99 la reduce
@@ -140,12 +168,13 @@ importancias.
 
 : Sensibilidad de LIME a `kernel_width` (RF, semilla 42, $N=100$). {#tbl-appendix-lime-kw-sensitivity}
 
-Los valores 0.25 y 0.75 son completamente degenerados en el espacio de características preprocesado de 103 dimensiones: el radio del vecindario es inferior a las distancias típicas entre instancias una vez aplicada la codificación one-hot y la estandarización, y LIME no puede ajustar ningún modelo sustituto local con señal apreciable. La referencia (`kernel_width = 3.0`) produce pesos no nulos en el 96% de las instancias y una fidelidad de 0.518, pero la estabilidad bajo perturbaciones de $\sigma = 0.1$ es prácticamente nula (consistente con los hallazgos de EXP2). El valor `kernel_width = 10.0` produce explicaciones válidas en el 100% de las instancias y una estabilidad de 0.664, pero a costa de menor fidelidad (0.441) porque el vecindario más amplio promedia regiones de decisión heterogéneas. Estos resultados confirman que `kernel_width = 3.0` es el valor mínimo viable en este espacio de características y que la inestabilidad de LIME no es un artefacto de este parámetro sino una propiedad estructural del método en datos tabulares de alta dimensión.
+Los valores 0.25 y 0.75 son completamente degenerados en el espacio de características preprocesado de 103 dimensiones: el radio del vecindario es inferior a las distancias típicas entre instancias una vez aplicada la codificación one-hot y la estandarización, y LIME no puede ajustar ningún modelo sustituto local con señal apreciable. La referencia (`kernel_width = 3.0`) produce pesos no nulos en el 96% de las instancias y una fidelidad de 0.518, pero la estabilidad bajo perturbaciones de $\sigma = 0.1$ es prácticamente nula (consistente con los hallazgos de EXP2). El valor `kernel_width = 10.0` produce explicaciones válidas en el 100% de las instancias y una estabilidad de 0.664, pero a costa de menor fidelidad (0.441) porque el vecindario más amplio promedia regiones de decisión heterogéneas. Estos resultados delimitan el alcance del hallazgo de EXP2 en dos direcciones. Por un lado, la inestabilidad observada bajo la configuración de referencia no se debe a una calibración deficiente del kernel: reducir el ancho no la corrige, sino que degenera las explicaciones, y `kernel_width = 3.0` es el valor mínimo viable en este espacio. Por otro, tampoco es independiente de ese parámetro: ampliar el kernel a 10.0 recupera una estabilidad de 0.664 a costa de localidad y de fidelidad. La lectura conjunta es que la estabilidad de LIME en datos tabulares de alta dimensión depende del par (ancho de kernel, espacio de características) y debe medirse para la configuración concreta de despliegue, no presuponerse.
 
 En conjunto, estos análisis muestran que los resultados principales (SHAP
-superior a LIME en fidelidad y estabilidad; inestabilidad de LIME estructural)
-son robustos a variaciones razonables de los hiperparámetros dentro de los
-rangos explorados. La excepción es la cobertura de Anchors, que cambia
+superior a LIME en fidelidad y estabilidad; estabilidad de LIME casi nula bajo
+la configuración de referencia) son robustos a variaciones razonables de los
+hiperparámetros dentro de los rangos explorados, con la excepción explícita del
+ancho de kernel, que sí modifica sustancialmente la estabilidad de LIME. La excepción es la cobertura de Anchors, que cambia
 significativamente con $\tau$ y debe tratarse como un parámetro de diseño
 explícito, no como un valor predeterminado.
 
@@ -174,15 +203,25 @@ inferenciales para garantizar la auto-suficiencia documental de la tesis.
 
 | Métrica | $n$ bloques | $k$ métodos | $\chi^2_F$ | $gl$ | $p$ (crudo) | $p_\mathrm{Holm}$ | Kendall $W$ | Decisión |
 |:--|:--|:--|:--|:--|:--|:--|:--|:--|
-| Fidelidad | 15 | 4 | 42.12 | 3 | $1.51\times10^{-8}$ | $3.02\times10^{-8}$ | 0.936 | Rechazar $H_{0,1}$ |
-| Estabilidad | 15 | 4 | 40.68 | 3 | $2.29\times10^{-8}$ | $2.29\times10^{-8}$ | 0.904 | Rechazar $H_{0,2}$ |
+| Fidelidad | 15 | 4 | 42.12 | 3 | $3.78\times10^{-9}$ | $1.51\times10^{-8}$ | 0.936 | Rechazar $H_{0,1}$ |
+| Estabilidad | 15 | 4 | 40.68 | 3 | $7.65\times10^{-9}$ | $2.29\times10^{-8}$ | 0.904 | Rechazar $H_{0,2}$ |
 
-: Resultados completos de la prueba de Friedman por métrica ($\alpha = 0.05$; $\chi^2_{crit}(3) = 7.815$). {#tbl-appendix-friedman-full}
+: Resultados completos de la prueba de Friedman por métrica ($\alpha = 0.05$;
+$\chi^2_{crit}(3) = 7.815$). Valores $p$ crudos y ajustados extraídos de
+`outputs/analysis/paper_a_exp2_stats/friedman_results.csv`.
+{#tbl-appendix-friedman-full}
 
 Valor crítico para $\alpha = 0.05$, $gl = 3$: $\chi^2_{crit} = 7.815$. Margen
 de seguridad: fidelidad = 439%, estabilidad = 421%. La corrección
-Holm-Bonferroni se aplica sobre las dos hipótesis omnibus (H1 y H2); ambas
-permanecen significativas tras la corrección.
+Holm-Bonferroni se aplica sobre la familia inferencial completa del test omnibus
+—las cinco métricas primarias evaluadas mediante Friedman, conforme al plan
+declarado en la @tbl-stat-plan del Capítulo 3— y no únicamente sobre H1 y H2. El
+factor de ajuste correspondiente a cada métrica depende, por tanto, de su
+posición en el orden creciente de los cinco valores $p$: la fidelidad, con el
+$p$ crudo menor, recibe el factor $m = 4$ ($3.78\times10^{-9} \times 4 =
+1.51\times10^{-8}$) y la estabilidad, la siguiente en orden, el factor $m = 3$
+($7.65\times10^{-9} \times 3 = 2.29\times10^{-8}$). Ambas hipótesis permanecen
+significativas tras la corrección con varios órdenes de magnitud de margen.
 
 ### D.2 Comparaciones post-hoc de Nemenyi (fidelidad y estabilidad)
 
@@ -224,17 +263,28 @@ aplican en orden decreciente de $p$-valor: $\alpha/5 = 0.010$, $\alpha/4 =
 0.0125$, $\alpha/3 = 0.0167$, $\alpha/2 = 0.025$, $\alpha/1 = 0.050$. Todos
 los p-valores ajustados quedan muy por debajo de sus umbrales correspondientes.
 
-La reproducibilidad de EXP1 se documenta en
-`experiments/exp1_adult/reproducibility/reproducibility_report.csv`, que sostiene
-la proposición P1. Los artefactos crudos por ejecución se encuentran bajo
+La proposición P1 se evalúa sobre el estrato replicado RF/$N=100$ del nivel de
+ejecución de EXP2, agregando las cinco semillas: los valores de la
+@tbl-cv-p1 se re-derivan de
+`outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv`. El perfilado
+de dispersión de EXP1, documentado de forma independiente en
+`experiments/exp1_adult/reproducibility/reproducibility_report.csv`, cubre una
+cohorte distinta (nueve ejecuciones por configuración, modelos `rf`/`xgb` con
+SHAP y LIME) y sostiene la puerta 6 del protocolo, pero no es la fuente de las
+cifras de la @tbl-cv-p1. Los artefactos crudos por ejecución se encuentran bajo
 `experiments/exp2_scaled/results/`; la superposición de recuperación para
 `mlp_shap`/`svm_shap` se documenta en `outputs/batch_results.csv`.
 
 ## Apéndice E: Entorno computacional y reproducción
 
 La instantánea de trabajo usada para esta versión de tesis corresponde al commit
-`33fd952a01a752f6988f46ba79b18694838c3f8f`. El repositorio se archiva con DOI
-Zenodo `10.5281/zenodo.19297724`. Los archivos principales de entorno son:
+`553f65d71b077ec181ad36da7bb6e7c9942fe116` (2026-07-24), archivado con DOI
+Zenodo `10.5281/zenodo.21538180`; el DOI de concepto
+`10.5281/zenodo.19297723` resuelve a la versión más reciente. La instantánea
+anterior (`33fd952a01a752f6988f46ba79b18694838c3f8f`, DOI
+`10.5281/zenodo.19297724`, abril de 2026) se conserva por procedencia pero es
+anterior a la superposición de recuperación de SHAP y no reproduce las cifras
+del Capítulo 4. Los archivos principales de entorno son:
 
 | Archivo | Función |
 |:--|:--|
@@ -264,11 +314,12 @@ Capítulo 5.
 
 | Artefacto | Contenido | Uso en la tesis |
 |:--|:--|:--|
-| `src/prompts/templates/explanation_eval.j2` | Plantilla de evaluación de explicaciones (rúbrica de 7 dimensiones) | Instrumento de medición EXP4 |
-| `src/prompts/templates/eval_instruction.j2` | Instrucciones del sistema entregadas al juez LLM | Instrumento de medición EXP4 |
+| `src/evaluation/exp4_schema.py` | Esquema de puntuación EXP4: las siete dimensiones y la escala 1--5 | Instrumento de medición EXP4 (fuente reconstruida, RCA-002) |
+| `src/prompts/templates/explanation_eval.j2` | Plantilla de tres dimensiones de EXP1; **no** es el instrumento de EXP4 | Referencia histórica |
+| `src/prompts/templates/eval_instruction.j2` | Instrucciones del sistema para el juez LLM (EXP1) | Referencia histórica |
 | `outputs/analysis/exp4_llm_evaluation/judge_comparison_summary.csv` | Resumen comparativo de puntuaciones por juez y dimensión | Tabla @tbl-exp4-icc (fuente) |
 | `outputs/analysis/exp4_llm_evaluation/krippendorff_alpha.csv` | $\alpha$ de Krippendorff por dimensión | Tabla @tbl-exp4-icc (fuente) |
-| `outputs/analysis/exp4_llm_evaluation/icc_analysis.csv` | ICC(2,1) por dimensión | Tabla @tbl-exp4-icc (fuente) |
+| `outputs/analysis/exp4_llm_evaluation/icc_analysis.csv` | ICC(1,1) por dimensión | Tabla @tbl-exp4-icc (fuente) |
 
 : Artefactos de EXP4 y trazabilidad a la tesis. {#tbl-appendix-llm}
 

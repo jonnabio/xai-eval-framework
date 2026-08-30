@@ -11,6 +11,14 @@ venv/
 env/
 .env
 
+# Secrets (local API keys — never commit)
+configs/secrets/*
+!configs/secrets/.gitkeep
+*.local.env
+
+# MS Office owner lock files
+~$*
+
 # Jupyter Notebooks
 .ipynb_checkpoints
 
@@ -42,6 +50,9 @@ logs/
 outputs/
 !outputs/batch_results.csv
 !outputs/batch_manifest.json
+!outputs/analysis/
+!outputs/analysis/paper_a_exp2_stats/
+!outputs/analysis/paper_a_exp2_stats/**
 experiments/**/results/
 !experiments/exp1_adult/reproducibility/**/results.json
 !experiments/exp1_adult/results/tuning/**/results.json
@@ -61,3 +72,7 @@ tools/tectonic-portable/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Corpus PDFs are reproducible from corpus_pdfs/RETRIEVAL_LOG.md (source URL per paper).
+# Not tracked: ~139MB, and 17 are duplicates of files already in thesis/papers/.
+docs/reports/paper_bc/corpus_pdfs/*.pdf

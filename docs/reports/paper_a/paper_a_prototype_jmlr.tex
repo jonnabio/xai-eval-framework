@@ -151,13 +151,15 @@ decisions auditable before inferential claims are finalized.
 \textbf{Cohort} & \textbf{Primary objective} & \textbf{Role in claims} \\
 \midrule
 Calibration sanity checks (EXP1 pilot) & Implementation checks before scaled runs. & Not used for confirmatory significance claims. \\
-Reproducibility repeatability cohort (EXP1) & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
+Reproducibility cohort (EXP1) & Repeated-seed variance profiling on core settings. & Supports reproducibility characterization (dispersion/CV). \\
 Comparative screening cohort (EXP2 comparative) & Broad method-model coverage under fixed seeds. & Descriptive comparative context. \\
 Primary robustness benchmark (EXP2 robustness) & Multi-seed, multi-sample-size benchmark runs. & Primary inferential cohort for global and paired tests. \\
 \bottomrule
 \end{tabularx}
 \label{tab:cohorts}
 \end{table}
+Hereafter, the primary robustness benchmark (EXP2 robustness) is referred to,
+interchangeably, as the primary benchmark (EXP2).
 
 \subsection{Research Questions, Factors, and Analysis Units}
 \label{sec:methods-design}
@@ -382,9 +384,18 @@ Validity controls and residual risks are summarized as follows:
     residual risk from non-random coverage gaps.
     \item \textbf{Construct validity:} metric definitions are operationalized in the \texttt{src/metrics/} directory. For technical traceability, conceptual definitions reported in Section~\ref{sec:methods-inference} are anchored to implementation classes: \texttt{FidelityMetric}, \texttt{StabilityMetric}, \texttt{SparsityMetric}, \texttt{FaithfulnessMetric} (gap field), and \texttt{CostMetric}.
     \item \textbf{Statistical conclusion validity:} matched-design non-parametric
-    tests with multiplicity control; residual risk from absent equivalence bands.
-    \item \textbf{External validity:} diversity across model families and seeds,
-    but single tabular dataset scope.
+    tests with multiplicity control, supplemented by Cohen's $d_z$
+    practical-importance reporting on the primary paired contrast
+    (Section~\ref{sec:results}); residual risk from the absence of a formal
+    two-one-sided-tests (TOST) equivalence procedure.
+    \item \textbf{External validity:} diversity across model families and seeds
+    on the primary Adult benchmark, supplemented by a bounded single-explainer
+    (SHAP) cross-dataset check on two additional tabular datasets
+    (Section~\ref{sec:exp3}). This Paper A check remains narrower than the
+    companion synthesis evidence base, which reports both a SHAP--Anchors
+    fidelity comparison and a LIME fidelity/stability extension on the same two
+    datasets; neither source establishes a full paired SHAP--LIME
+    cross-dataset stability comparison.
     \item \textbf{Implementation validity:} effective runtime parameter bindings
     are disclosed; harmonization changes may shift absolute levels.
 \end{enumerate}
@@ -399,7 +410,7 @@ artifact-qualified primary benchmark (EXP2) subsets).
 \subsection{Overview of Evaluation Setup}
 This section reports results from two evidence streams: the primary robustness
 benchmark (EXP2) for global and paired method comparisons, and the
-reproducibility repeatability cohort (EXP1) for variance profiling.
+reproducibility cohort (EXP1) for variance profiling.
 Compared explainers are SHAP, LIME, Anchors, and DiCE. Reported metrics are
 Fidelity, Stability, Sparsity, Faithfulness Gap, and Cost (ms).
 This multi-metric framing treats explanation quality as a vector of properties
@@ -449,10 +460,11 @@ families \citep{ribeiro2016lime,lundberg2017shap}.
 \subsection{Global Statistical Evidence Across Methods}
 \begin{table}[h]
 \centering
-\caption{Friedman tests across methods.}
+\caption{Friedman tests across methods (raw p-values shown; see text for the
+Holm-Bonferroni-adjusted family-wise decision).}
 \begin{tabular}{lrrl}
 \toprule
-Metric & Statistic & p-value & Significant \\
+Metric & Statistic & p-value (raw) & Significant \\
 \midrule
 Fidelity         & 42.12 & 3.78e-09 & Yes \\
 Stability        & 40.68 & 7.65e-09 & Yes \\
@@ -466,7 +478,10 @@ Cost             & 30.44 & 1.12e-06 & Yes \\
 
 For every metric, the Friedman test rejects the null of equal performance across
 methods. This establishes global between-method differences, but does not
-identify pairwise direction without post-hoc localization.
+identify pairwise direction without post-hoc localization. Table~\ref{tab:friedman}
+reports raw p-values; after Holm-Bonferroni correction across the five primary
+metrics, all five Friedman tests remain significant at $\alpha=0.05$
+(largest corrected $p\approx 1.12\times10^{-6}$, for Cost).
 \begin{table}[h]
 \centering
 \caption{Friedman effect sizes (Kendall's $W=\chi^2/[N(k-1)]$; $N=15$, $k=4$).}
@@ -491,16 +506,19 @@ separation across all five metrics.
 \subsection{Targeted Pairwise Comparison (SHAP vs LIME on Shared Families)}
 \begin{table}[h]
 \centering
-\caption{Paired Wilcoxon comparison on 45 matched configurations (\texttt{logreg/rf/xgb}).}
-\begin{tabular}{lrrr}
+\caption{Paired Wilcoxon comparison on 45 matched configurations
+(\texttt{logreg/rf/xgb}); raw p-values shown. Cohen's $d_z$ is the
+paired-difference effect size, interpreted against the conventional
+small/medium/large benchmarks of 0.2/0.5/0.8 \citep{cohen1988statistical}.}
+\begin{tabular}{lrrrr}
 \toprule
-Metric & SHAP Mean & LIME Mean & Wilcoxon p-value \\
+Metric & SHAP Mean & LIME Mean & Wilcoxon p-value (raw) & Cohen's $d_z$ \\
 \midrule
-Fidelity         & 0.8112 & 0.5556 & 5.68e-14 \\
-Stability        & 0.8013 & 0.0154 & 5.68e-14 \\
-Sparsity         & 0.3156 & 0.0845 & 5.68e-14 \\
-Faithfulness Gap & 0.3924 & 0.3408 & 5.68e-14 \\
-Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 \\
+Fidelity         & 0.8112 & 0.5556 & 5.68e-14 & 5.37 (very large) \\
+Stability        & 0.8013 & 0.0154 & 5.68e-14 & 4.85 (very large) \\
+Sparsity         & 0.3156 & 0.0845 & 5.68e-14 & 1.39 (very large) \\
+Faithfulness Gap & 0.3924 & 0.3408 & 5.68e-14 & 3.62 (very large) \\
+Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 & 0.56 (medium) \\
 \bottomrule
 \end{tabular}
 \label{tab:shap-lime}
@@ -509,8 +527,29 @@ Cost (ms)        & 1258.72 & 210.45 & 2.29e-06 \\
 Within this matched subset, SHAP is higher on Fidelity, Stability, and
 Faithfulness Gap, while LIME has lower Cost and lower Sparsity value. The
 reported p-values indicate non-zero paired differences for all listed metrics.
-Practically, the quality gains for SHAP are accompanied by a runtime penalty
-relative to LIME under shared cells.
+After Holm-Bonferroni correction across the five metrics, all five contrasts
+remain significant at $\alpha=0.05$ (largest corrected $p\approx 2.29\times10^{-6}$,
+for Cost); the identical raw p-value on the other four metrics reflects the
+exact Wilcoxon signed-rank floor for 45 matched pairs in which every pair
+favors the same method, not a reporting error. Practically, the quality gains
+for SHAP are accompanied by a runtime penalty relative to LIME under shared
+cells.
+
+\paragraph{Practical importance.} Statistical significance alone does not
+establish that a difference is large enough to matter operationally, so we
+report Cohen's $d_z$ for each paired contrast as a scale-free practical-importance
+measure, following the conventional small/medium/large thresholds of
+0.2/0.5/0.8 \citep{cohen1988statistical}. Four of the five metrics exceed even
+the large-effect threshold by a wide margin (Fidelity, Stability, Sparsity,
+Faithfulness Gap; $d_z \in [1.39, 5.37]$), indicating that the SHAP--LIME
+separation on quality-oriented metrics is not a marginal artifact of a large
+sample. The Cost contrast is the one exception: $d_z=0.56$ is a medium effect,
+smaller than the quality-side effects by roughly an order of magnitude,
+consistent with practically overlapping runtime distributions between the two
+methods across a subset of matched cells even though the aggregate mean
+difference is large. We treat $d_z<0.2$ as the threshold below which a paired
+difference would not be considered practically distinguishable under this
+convention; no metric in Table~\ref{tab:shap-lime} falls below it.
 
 This comparison is restricted to \texttt{logreg/rf/xgb} matched configurations
 and is not directly generalizable to non-matched families or to methods outside
@@ -518,7 +557,7 @@ the SHAP--LIME pair, including rule-based and counterfactual families
 \citep{ribeiro2018anchors,mothilal2020dice}.
 
 \subsection{Reproducibility and Variance Profile}
-The reproducibility repeatability cohort (EXP1) indicates lower dispersion for quality-oriented
+The reproducibility cohort (EXP1) indicates lower dispersion for quality-oriented
 metrics and higher dispersion for runtime behavior. Quality metrics remain
 relatively stable across repeated seeds, while Cost varies more strongly for
 SHAP variants, consistent with recent calls for variance-aware benchmark
@@ -528,6 +567,60 @@ reporting \citep{agarwal2022openxai,hedstrom2023quantus}.
     \item Runtime instability (cost): Cost CV reaches 0.225 for SHAP variants.
     \item Decision implication: quality rankings are more repeatable than runtime behavior under the reported repeated-run protocol.
 \end{itemize}
+
+\subsection{External Validity Check: Cross-Dataset SHAP Stability}
+\label{sec:exp3}
+To probe whether the SHAP quality profile observed on Adult Income transfers to
+other tabular tasks, we ran a bounded, single-explainer external-validation
+check (EXP3) on two additional public tabular benchmarks, Breast Cancer
+Wisconsin \citep{breastcancerwisconsin} (569 instances, 30 features) and German
+Credit \citep{germancredit} (1{,}000 instances, 20 features), using SHAP in
+tree mode on \texttt{rf} and \texttt{xgb} models across three seeds
+($n{=}100$ per class, 15 stability perturbations, identical metric
+definitions to Section~\ref{sec:methods-inference}). This check is
+deliberately narrow: it covers one explainer family, two model families, and
+two additional datasets, and it is not a second full benchmark. A
+matching Anchors-based cross-dataset check was executed from the same
+\texttt{exp3\_cross\_dataset} configuration set on an earlier environment that
+still satisfied the \texttt{alibi} dependency constraint; its 12 runs are
+released with this snapshot under
+\path{experiments/exp3_cross_dataset/results/*/{rf,xgb}_anchors/} and are
+analyzed in the companion synthesis paper rather than here, because the
+SHAP-only cohort is what supports this paper's external-validity argument.
+The \texttt{alibi}/\texttt{dice-ml} incompatibility described in
+Section~\ref{sec:methods-repro} applies to the current environment and to the
+25 unavailable primary-benchmark (EXP2) cells; it did not prevent the EXP3
+Anchors cohort from being produced.
+\begin{table}[h]
+\centering
+\caption{SHAP mean metrics on two additional tabular datasets (tree mode,
+\texttt{rf}/\texttt{xgb}, 3 seeds each, $n{=}100$ per class). Sparsity and
+Cost are not directly comparable in absolute scale to
+Table~\ref{tab:global-tradeoffs} because feature-space dimensionality and
+hardware conditions differ from the Adult benchmark.}
+\begin{tabular}{llrrrrr}
+\toprule
+Dataset & Model & Fidelity & Stability & Sparsity & Faithfulness Gap & Cost (ms) \\
+\midrule
+Breast Cancer & RF  & 0.7785 & 0.9531 & 0.9786 & 0.2778 & 1021.34 \\
+Breast Cancer & XGB & 0.6165 & 0.9625 & 0.9134 & 0.3532 & 1026.64 \\
+German Credit & RF  & 0.7137 & 0.9853 & 0.9082 & 0.1485 & 1005.62 \\
+German Credit & XGB & 0.7108 & 0.6014 & 0.8054 & 0.2230 & 1007.43 \\
+\bottomrule
+\end{tabular}
+\label{tab:exp3-shap}
+\end{table}
+SHAP Stability remains high (${\geq}0.95$) for both models on Breast Cancer and
+for \texttt{rf} on German Credit, consistent with the high Stability observed
+on Adult (Table~\ref{tab:global-tradeoffs}). The one qualitative departure is
+\texttt{xgb} on German Credit, where Stability drops to 0.6014 while Fidelity
+remains comparable to the other cells; this indicates that SHAP's stability
+advantage on Adult does not transfer uniformly across model families and
+datasets, and should not be read as an intrinsic, dataset-independent property
+of the method. Because this check uses only one explainer family and omits
+seed-level significance testing across datasets, it supports a claim of
+\emph{directional consistency with one documented exception}, not a
+confirmatory cross-dataset ranking.
 
 \subsection{Synthesis and Implications for Practice}
 \begin{itemize}[leftmargin=*]
@@ -540,7 +633,7 @@ reporting \citep{agarwal2022openxai,hedstrom2023quantus}.
 Interpretation limits:
 \begin{itemize}[leftmargin=*]
     \item Anchors stability values near zero should be interpreted with implementation caveats: effective runtime behavior uses fixed precision threshold 0.95 and binary rule-membership importance vectors, which can reduce perturbation-based similarity under this protocol.
-    \item Method rankings are currently validated only on one tabular benchmark (Adult); external generalization requires replication on additional datasets and modalities before cross-domain claims are made.
+    \item The full four-method ranking (SHAP, LIME, Anchors, DiCE) is validated only on one tabular benchmark (Adult). A bounded single-explainer check (Section~\ref{sec:exp3}) shows SHAP's Stability advantage largely transfers to two additional datasets, with one model/dataset exception; it does not establish any cross-dataset ranking against LIME, Anchors, or DiCE, and full cross-domain generalization still requires replication on additional datasets and modalities before cross-domain ranking claims are made.
 \end{itemize}
 
 \subsection{Formal Problem Framing and Scope of XAI Evaluation}
@@ -576,7 +669,8 @@ recommendations in recent XAI governance and assessment literature
 \citep{sokol2020factsheets,dinspec92001,zicari2021zinspection}. Under this design,
 our benchmark is intended to support transparent comparison and hypothesis generation
 about method behavior, while acknowledging that full correctness claims may require
-additional theoretical analysis or controlled ground-truth experiments
+additional theoretical analysis, transparent-model or synthetic ground-truth
+experiments, and dependency-aware perturbation protocols
 \citep{haufe2026formalization}.
 
 \subsection{Responsible Use and Benchmark Boundaries}
@@ -594,27 +688,40 @@ The intended use of the released artifacts is methodological: reproducing the
 reported benchmark, auditing the effect of artifact qualification and
 statistical filtering, and extending the protocol to additional datasets or
 explanation families. Claims about deployment utility, human interpretability,
-or cross-domain method superiority require additional validation beyond the
-quantitative-only scope of this paper.
+human-centered usefulness, or cross-domain method superiority require additional
+validation beyond the quantitative-only scope of this paper.
 
 \subsection{Code and Artifact Availability}
+\begin{sloppypar}
 The current refreshed analysis snapshot is publicly available at
-\url{https://github.com/jonnabio/xai-eval-framework} and should be archived
-under a new versioned release and DOI before submission. A prior submission
-snapshot for release tag \path{paper-a-submission-2026-03-28} has
+\url{https://github.com/jonnabio/xai-eval-framework} and is archived at
+commit \texttt{553f65d71b077ec181ad36da7bb6e7c9942fe116}, corresponding to the
+299-artifact / 275-analyzable-run primary benchmark (EXP2) evidence cut and
+the exp3\_cross\_dataset check reported here. This snapshot has
 version-specific DOI
-\href{https://doi.org/10.5281/zenodo.19297724}{10.5281/zenodo.19297724}, but
-that prior DOI does not by itself identify the refreshed primary benchmark (EXP2) evidence cut
-reported here. Materials required to
+\href{https://doi.org/10.5281/zenodo.21538180}{\path{10.5281/zenodo.21538180}}
+(concept DOI
+\href{https://doi.org/10.5281/zenodo.19297723}{\path{10.5281/zenodo.19297723}},
+which resolves to the latest version across releases). A prior submission
+snapshot for release tag \texttt{paper-a-submission-2026-03-28} remains
+separately archived under
+\href{https://doi.org/10.5281/zenodo.19297724}{\path{10.5281/zenodo.19297724}}
+for provenance but does not reflect the evidence cut reported here. Materials
+required to
 reproduce the Paper A analyses include
 \path{experiments/exp2_scaled/results/},
 \path{outputs/batch_results.csv},
 \path{outputs/analysis/paper_a_exp2_stats/},
 \path{scripts/run_exp2_statistical_analysis.py},
-\path{scripts/generate_paper_a_figures.py}, and the manuscript sources under
+\path{scripts/generate_paper_a_figures.py},
+\path{configs/experiments/exp3_cross_dataset/}, and
+\path{experiments/exp3_cross_dataset/results/} for the cross-dataset SHAP
+check in Section~\ref{sec:exp3} (the same tree also carries the 12 EXP3 Anchors
+runs analyzed in the companion paper), and the manuscript sources under
 \path{docs/reports/paper_a/}. A path-level artifact index is maintained in
 \path{docs/reports/paper_a/paper_a_artifact_index.md}. The repository is
 released under the MIT License.
+\end{sloppypar}
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -635,12 +742,12 @@ is operational and reproducibility-focused rather than algorithmic.
 \begin{itemize}[leftmargin=*]
     \item \textbf{Takeaway:} method choice should be objective-driven (quality, sparsity, or runtime), not based on a single aggregated score.
     \item \textbf{Takeaway:} statistical evidence supports method differentiation at the omnibus level; pairwise direction must be interpreted within matched-design limits.
-    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The reporting caveats document the current merged-snapshot diagnostic.
-    \item \textbf{Next steps:} Commit the recovered \path{svm_shap_s456_n200} per-run artifact when the active claim completes, diagnose the remaining empty Anchors/DiCE artifacts, and maintain the versioned reproducibility bundle (code, configs, run outputs, inferential exports, and figure scripts) synchronized to the current 275 analyzable-run snapshot.
-    \item \textbf{Next steps:} replicate this quantitative protocol on additional tabular datasets to test ranking stability under dataset shift.
+    \item \textbf{Limitation:} Current primary benchmark (EXP2) availability gaps remain concentrated in Anchors and DiCE; after integrating the 30-row SHAP recovery batch, 25 unavailable cells still qualify confidence in full-grid frontier stability. The root cause is diagnosed (an \texttt{alibi}/\texttt{dice-ml} dependency incompatible with this environment's Python/\texttt{numpy} versions; Section~\ref{sec:methods-repro}) rather than unexplained, and closing it is judged not worth the required environment migration relative to disclosure; these 25 cells are accepted as a permanent, disclosed limitation of this evidence cut rather than pending work. The 12 \texttt{exp3\_cross\_dataset} Anchors cells are \emph{not} part of this gap: they were executed on an earlier environment and are released with this snapshot (Section~\ref{sec:exp3}). The reporting caveats document the current merged-snapshot diagnostic.
+    \item \textbf{Limitation:} \path{svm_shap_s456_n200} has no committed per-run artifact; the reported analysis instead relies on the disclosed \path{outputs/batch_results.csv} recovery overlay for this one cell. A partial rerun exists (161/800 instances checkpointed) but completing it was estimated at 2-3 further days of continuous compute and is not being pursued; this is an accepted limitation, not an open action item.
+    \item \textbf{Next steps:} The bounded single-explainer (SHAP) cross-dataset check in Section~\ref{sec:exp3} is a first step toward testing ranking stability under dataset shift. Integrating the separate LIME-only EXP3 extension into a fully paired SHAP--LIME stability design, extending the check to Anchors and DiCE, and adding further tabular datasets remain future work.
 \end{itemize}
 
-\acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft was prepared from repository artifacts dated April 2026 and should be paired with a refreshed archival DOI before submission.}
+\acks{This work received no external funding. The study was self-funded by the authors, and the authors report no competing interests. This draft is archived under DOI 10.5281/zenodo.21538180 (commit 553f65d71b077ec181ad36da7bb6e7c9942fe116, 2026-07-24).}
 
 \clearpage
 \phantomsection
@@ -783,6 +890,18 @@ Complementary Team Performance.
 In \emph{Proceedings of the CHI Conference on Human Factors in Computing
 Systems}, pages 1--16.
 
+\bibitem[Wolberg et~al.(1995)]{breastcancerwisconsin}
+William~H. Wolberg, W.~Nick Street, and Olvi~L. Mangasarian.
+1995.
+Breast Cancer Wisconsin (Diagnostic) Data Set.
+\emph{UCI Machine Learning Repository}.
+
+\bibitem[Hofmann(1994)]{germancredit}
+Hans Hofmann.
+1994.
+Statlog (German Credit Data) Data Set.
+\emph{UCI Machine Learning Repository}.
+
 \bibitem[Bu\c{c}inca et~al.(2020)Bu\c{c}inca, Lin, Gajos, and Glassman]{bucinca2020proxy}
 Zana Bu\c{c}inca, Phoebe Lin, Krzysztof~Z. Gajos, and Elena~L. Glassman.
 2020.
@@ -796,6 +915,12 @@ Interfaces}, pages 454--464.
 2023.
 {DIN SPEC 92001-3:2023-04}. Artificial Intelligence---Life Cycle Processes and
 Quality Requirements---Part~3: Explainability.
+
+\bibitem[Cohen(1988)]{cohen1988statistical}
+Jacob Cohen.
+1988.
+\emph{Statistical Power Analysis for the Behavioral Sciences}, 2nd edition.
+Lawrence Erlbaum Associates, Hillsdale, NJ.
 
 \bibitem[Doshi-Velez and Kim(2017)]{doshivelez2017rigorous}
 Finale Doshi-Velez and Been Kim.
