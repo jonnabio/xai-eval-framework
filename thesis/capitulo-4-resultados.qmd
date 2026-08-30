@@ -1,13 +1,14 @@
 # Resultados y discusión
 
-Este capítulo presenta los resultados empíricos de los Estudios A y B del
-benchmark XAI, organizados conforme a las hipótesis y proposición de trabajo
-establecidas en el Capítulo 1. La exposición sigue la secuencia lógica del
-protocolo FOM-7: primero se documentan los resultados del análisis omnibus
-(Estudio A), luego el análisis pareado SHAP-LIME (Estudio B), y finalmente
-la verificación de la proposición de reproducibilidad (P1). La discusión
-integradora al final del capítulo articula los hallazgos con la literatura y
-deriva criterios operativos de selección de métodos.
+Este capítulo presenta los resultados empíricos del Estudio Omnibus
+Multimétrico y del Estudio Pareado LIME–SHAP, organizados conforme a las
+hipótesis y proposición de trabajo establecidas en el Capítulo 1. La
+exposición sigue la secuencia lógica del protocolo FOM-7: primero se
+documentan los resultados del análisis omnibus multimétrico, luego el análisis
+pareado SHAP-LIME, y finalmente la verificación de la proposición de
+reproducibilidad (P1). La discusión integradora al final del capítulo articula
+los hallazgos con la literatura y deriva criterios operativos de selección de
+métodos.
 
 Todos los valores reportados en este capítulo se calcularon a partir de los
 artefactos de la etapa de benchmark primario de robustez (EXP2), compuesta
@@ -59,7 +60,7 @@ análisis de cada claim.
 
 : Resumen auditable de hipótesis, pruebas y decisiones. {#tbl-results-overview}
 
-## Estudio A: Análisis omnibus multimétrico (H1 y H2) {#sec-estudio-a}
+## Estudio Omnibus Multimétrico: H1 y H2 {#sec-estudio-a}
 
 ### H1: Diferencias entre métodos en fidelidad
 
@@ -128,8 +129,8 @@ La localización Nemenyi es conservadora cuando $n$ es pequeño. En fidelidad,
 se distinguen de forma robusta SHAP frente a Anchors/DiCE y LIME frente a DiCE;
 las diferencias SHAP–LIME y LIME–Anchors no superan el umbral crítico bajo este
 procedimiento. Este resultado no contradice la dominancia observada de SHAP
-en rangos, y motiva complementar el análisis global con el contraste pareado
-SHAP–LIME del Estudio B.
+en rangos, y motiva complementar el análisis global con el contraste
+pareado del Estudio Pareado LIME–SHAP.
 
 ### H2: Diferencias entre métodos en estabilidad
 
@@ -184,7 +185,7 @@ ofrece el perfil más sólido en este benchmark y DiCE ofrece estabilidad
 intermedia; LIME y Anchors requieren cautela si la estabilidad local es un
 criterio de selección.
 
-## Estudio B: Análisis pareado SHAP-LIME y relación calidad-coste (H3) {#sec-estudio-b}
+## Estudio Pareado LIME–SHAP: relación calidad-coste (H3) {#sec-estudio-b}
 
 El análisis pareado opera sobre las 75 celdas $(g, s, n)$ para las cuales ambos
 métodos disponen de artefactos calificados. La superposición de recuperación

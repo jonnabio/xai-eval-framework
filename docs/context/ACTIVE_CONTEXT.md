@@ -1,7 +1,7 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-08-28
+- **Last Updated:** 2026-08-29
 - **Active Role:** Scientific Editor
 - **Mode:** PUBLICATION — synchronized the thesis, Paper A, and merged Paper B+C around validation-boundary wording and EXP3 status. Created `docs/reports/sync/thesis_paper_sync_matrix.md`; updated the implementation plan with sync task 6; aligned Chapter 3/6 EXP3 wording to the Paper B+C + artifact source of truth (SHAP-Anchors fidelity replication plus LIME-only extension, but no full paired SHAP-LIME cross-dataset stability test); aligned Paper A boundary language while preserving its narrower SHAP-only EXP3 claim scope; aligned Paper B+C validity-claim language and corrected the LIME extension export path.
 - **Mode (2026-08-22, second pass):** PUBLICATION — full tri-document alignment + recency audit
@@ -347,11 +347,49 @@ manuscript-editing support tooling.
   for doing it: one swept file yielded two defects in a document already under two guards.
   All four outputs rebuilt clean; all three verifiers green; crossrefs 70 labels / 0 dangling.
 
+- **Mode (2026-08-29):** PUBLICATION — Scientific Editor retired the thesis's letter-based
+  study labels. The trigger was OE5 on p. 14 (`capitulo-1-marco-teorico.qmd`), which promised a
+  taxonomy that would integrate "los Estudios A y B" — letters the reader does not meet until
+  Chapter 3. Three defects behind it: forward references with no antecedent; three competing
+  naming systems for the same objects (letter / Paper A-B / EXP1-EXP2, all three colliding in
+  Chapter 3's opening sentence); and a scheme that no longer closed, because the LLM inter-judge
+  study behind OE6 was formulated after the taxonomy and never got a letter.
+  **Canonical names now:** Estudio Omnibus Multimétrico (was A, OE2), Estudio Pareado LIME–SHAP
+  (was B, OE3), Estudio Taxonómico (was C, OE5), Estudio de Fiabilidad Inter-juez (was unlettered,
+  OE6). OE1 and OE4 are declared transversal to the two empirical studies rather than assigned to
+  one. Definition site is the new `{#tbl-estudios}` table in Chapter 1, placed between the specific
+  objectives and the hypotheses — before any study name is used in an argument.
+  36 sites migrated across `introduccion`, `capitulo-1`, `capitulo-3`, `capitulo-4`, `capitulo-5`.
+  **Anchors deliberately frozen:** `#sec-estudio-a`, `#sec-estudio-b`, `#sec-exp4-fiabilidad` keep
+  their identifiers though their headings were renamed — they are crossref infrastructure, and
+  churning them breaks `@sec-` references for no reader-visible gain.
+  **Second, author-directed change:** the thesis now cites no paper. "Paper A"/"Paper B" removed
+  from Chapter 3's opening (a pre-existing reference) and from the glossary note. A thesis is a
+  self-contained deposit document, and the "Paper B" it named no longer exists under that name —
+  it is the merged Paper B+C. This also closes the Paper B vs Paper B+C discrepancy flagged in
+  `thesis_paper_sync_matrix.md` by removing the reference rather than correcting it.
+  **Out of scope, deliberately:** `outputs/analysis/paper_a_exp2_stats/` paths in `apendices`,
+  `capitulo-3` and `capitulo-4` stay. They are artifact locations under the RCA-001 invariant
+  "every artifact path a manuscript cites exists in the working tree", and are consumed by Paper A
+  and Paper B+C too; renaming is an artifact migration (directory + generating scripts +
+  `claim_registry.toml` resolvers), not a prose edit.
+  No numeric value, table datum or citation changed; `verify_claims.py` (142 claims, 225 sites,
+  26 retired-value guards) and `verify_sync.py` green before and after. Diff line counts are
+  inflated by re-wrapping paragraphs to the files' ~78-column prose width. Prior review reports
+  that use the old letters are dated records and were **not** rewritten.
+  Decision recorded in `docs/adr/0012-thesis-study-nomenclature.md`. Outputs not rebuilt — the
+  thesis `.docx` still carries the old labels until the next `thesis/render.ps1` run.
+  **Still open from the same session:** OE5 says the taxonomy integrates the two empirical studies,
+  but the taxonomy *is* the Estudio Taxonómico and also originates OE6 (per OE6's own wording,
+  derived from the taxonomy's Brecha 3). A more exact formulation — "… y base de la que se deriva
+  el objetivo 6" — was offered and not yet decided; it is a content change, not a naming one.
+
 ## Active Constraints
 - .ace/standards/coding.md
 - .ace/standards/security.md
 - Keep thesis and paper artifacts read-only unless explicitly instructed otherwise.
 - Keep the CIFIE chapter as a distinct publication output under `publications/book_chapters/2026_cifie_xai_fom7/`.
+- Thesis study nomenclature is fixed by ADR-0012: functional names (Estudio Omnibus Multimétrico / Estudio Pareado LIME–SHAP / Estudio Taxonómico / Estudio de Fiabilidad Inter-juez), never letters; the thesis names no paper; section anchors `#sec-estudio-a`, `#sec-estudio-b`, `#sec-exp4-fiabilidad` are frozen.
 
 ## Session Notes
 - Synchronized thesis, Paper A, and Paper B+C around the June 13 validation-boundary assessment: functionally grounded comparative evidence is retained as the supported contribution; synthetic/transparent-model ground-truth tests, dependency-aware perturbation, and human-centered validation remain future validity-strengthening work.
@@ -381,3 +419,4 @@ manuscript-editing support tooling.
 - 2026-08-28: the EXP4 bytecode in `src/evaluation/__pycache__/` and
   `scripts/__pycache__/` is now the only surviving copy of the original source and is
   guarded by RCA-002. Do not delete it.
+- 2026-08-29: Retired the thesis's Estudio A/B/C letters for functional names and removed every Paper A / Paper B reference from thesis prose, on user request. Definition site is `{#tbl-estudios}` in Chapter 1; section anchors kept. See `docs/adr/0012-thesis-study-nomenclature.md`. Regression check: grep the thesis sources for a bare study letter (only the tbl-estudios note should match) and for "Paper A"/"Paper B"/"Paper C" (nothing should match).

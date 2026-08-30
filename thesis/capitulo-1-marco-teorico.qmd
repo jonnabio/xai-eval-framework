@@ -129,11 +129,13 @@ comparación de métodos XAI en contextos de datos tabulares.
    mediante el análisis de la dispersión métrica bajo ejecuciones repetidas con
    semillas distintas.
 
-5. Construir una taxonomía estructurada del espacio de métricas de evaluación
-   XAI organizada en cuatro ejes —objetivo de evaluación, fuente de evidencia,
-   propiedad de calidad y contexto de tarea— que sirva de marco conceptual
-   integrador para los Estudios A y B [@abdulkadir2023; @pawlicki2024; @nizam2023;
-   @marcinkevics2023; @schwalbe2023].
+5. Construir una taxonomía estructurada del espacio de métricas de
+   evaluación XAI organizada en cuatro ejes —objetivo de evaluación, fuente de
+   evidencia, propiedad de calidad y contexto de tarea— que sirva de marco
+   conceptual integrador para el Estudio Omnibus Multimétrico —la comparación
+   de los cuatro métodos agnósticos— y el Estudio Pareado LIME–SHAP
+   [@abdulkadir2023; @pawlicki2024; @nizam2023; @marcinkevics2023;
+   @schwalbe2023].
 
 6. Cuantificar la fiabilidad inter-juez de evaluadores semánticos basados en
    modelos de lenguaje sobre explicaciones del corpus experimental, con el fin de
@@ -143,6 +145,25 @@ comparación de métodos XAI en contextos de datos tabulares.
    1–5, se formuló una vez construida esa taxonomía; su alcance es por tanto
    exploratorio y de calibración instrumental, no confirmativo
    [@koo2016; @bhattacharya2024].
+
+### Nomenclatura de los estudios
+
+La investigación se articula en cuatro estudios, cuya denominación se emplea de
+forma uniforme en el resto del documento. Los objetivos 1 y 4 —formalización del
+protocolo FOM-7 y caracterización de su reproducibilidad— son transversales a los
+dos estudios empíricos y no se adscriben a uno solo de ellos.
+
+| Estudio | Pregunta que responde | Objetivo | Capítulos |
+|:--------|:----------------------|:--------:|:---------:|
+| **Estudio Omnibus Multimétrico** | ¿Difieren SHAP, LIME, Anchors y DiCE en las cinco métricas de calidad sobre el diseño factorial completo? | OE2 | 3 y 4 |
+| **Estudio Pareado LIME–SHAP** | ¿Cómo se comporta la relación calidad-coste entre LIME y SHAP sobre celdas coincidentes de modelo, semilla y tamaño de muestra? | OE3 | 3 y 4 |
+| **Estudio Taxonómico** | ¿Qué estructura conceptual organiza el espacio de métricas de evaluación XAI y qué brechas de constructo revela? | OE5 | 5 |
+| **Estudio de Fiabilidad Inter-juez** | ¿Alcanzan los evaluadores semánticos basados en LLM la convergencia inter-juez necesaria para sostener afirmaciones confirmativas? | OE6 | 3 y 5 |
+
+: Nomenclatura, alcance y trazabilidad de los cuatro estudios. {#tbl-estudios}
+
+Estos nombres sustituyen a las letras identificadoras (Estudios A, B y C)
+empleadas en versiones previas del documento.
 
 ### Hipótesis o proposiciones de trabajo
 
@@ -199,40 +220,43 @@ alguna dimensión de la rúbrica queda por debajo de ese umbral.
 
 **Estatuto epistémico diferenciado de P2.** P2 no forma parte del plan
 inferencial congelado en la puerta 1 del protocolo FOM-7 y no comparte el
-estatuto confirmativo de H1–H3 y P1. Se formuló con posterioridad, una vez que la
-taxonomía del Capítulo 5 identificó la Brecha 3 —la evaluación semántica crece
-más rápido que su base de validación empírica— y su función es calibrar un
-*instrumento de medida*, no evaluar los métodos explicadores. Esta distinción se
-declara aquí de forma explícita, y no *a posteriori*, porque el propio protocolo
-que esta tesis propone exige que el alcance inferencial admisible de cada
-afirmación sea declarado junto con la afirmación misma: presentar P2 como si
-hubiera sido preespecificada junto a H1–H3 sería precisamente el modo de fallo
-que la puerta 7 está diseñada para impedir. En consecuencia, el resultado de P2
-—cualquiera que sea— no modifica las conclusiones confirmativas de los Estudios A
-y B, y se reporta como evidencia de calibración del instrumento semántico
-(Capítulos 3, 5 y 6).
+estatuto confirmativo de H1–H3 y P1. Se formuló con posterioridad, una vez que
+la taxonomía del Capítulo 5 identificó la Brecha 3 —la evaluación semántica
+crece más rápido que su base de validación empírica— y su función es calibrar
+un *instrumento de medida*, no evaluar los métodos explicadores. Esta
+distinción se declara aquí de forma explícita, y no *a posteriori*, porque el
+propio protocolo que esta tesis propone exige que el alcance inferencial
+admisible de cada afirmación sea declarado junto con la afirmación misma:
+presentar P2 como si hubiera sido preespecificada junto a H1–H3 sería
+precisamente el modo de fallo que la puerta 7 está diseñada para impedir. En
+consecuencia, el resultado de P2 —cualquiera que sea— no modifica las
+conclusiones confirmativas del Estudio Omnibus Multimétrico ni del Estudio
+Pareado LIME–SHAP, y se reporta como evidencia de calibración del instrumento
+semántico (Capítulos 3, 5 y 6).
 
 ## Metodología general de la investigación
 
 ### Enfoque
 
 Esta investigación adopta un enfoque cuantitativo-empírico con componente
-teórico-taxonómico. El núcleo empírico de los Estudios A y B descansa en el
-análisis estadístico de métricas computadas sobre experimentos controlados y
-reproducibles, siguiendo una lógica hipotético-deductiva. El componente
-taxonómico del Estudio C —que actúa como puente conceptual integrador— adopta
-una metodología de revisión estructurada con codificación explícita de
-dimensiones, siguiendo protocolos de síntesis narrativa rigurosa
-[@linardatos2020; @gilpin2018; @schwalbe2023; @abdulkadir2023].
+teórico-taxonómico. El núcleo empírico del Estudio Omnibus Multimétrico y del
+Estudio Pareado LIME–SHAP descansa en el análisis estadístico de métricas
+computadas sobre experimentos controlados y reproducibles, siguiendo una
+lógica hipotético-deductiva. El Estudio Taxonómico —que actúa como puente
+conceptual integrador— adopta una metodología de revisión estructurada con
+codificación explícita de dimensiones, siguiendo protocolos de síntesis
+narrativa rigurosa [@linardatos2020; @gilpin2018; @schwalbe2023;
+@abdulkadir2023].
 
 ### Tipo de investigación
 
-Los Estudios A y B corresponden a investigación comparativa-experimental no
-intervencional: los métodos XAI son los factores de tratamiento, los modelos
-predictivos son el contexto experimental y las métricas de calidad son las
-variables de resultado. El Estudio C corresponde a una revisión sistemática
-estructurada con propósito taxonómico y de síntesis de brechas de constructo en
-el campo de la evaluación XAI.
+El Estudio Omnibus Multimétrico y el Estudio Pareado LIME–SHAP corresponden a
+investigación comparativa-experimental no intervencional: los métodos XAI son
+los factores de tratamiento, los modelos predictivos son el contexto
+experimental y las métricas de calidad son las variables de resultado. El
+Estudio Taxonómico corresponde a una revisión sistemática estructurada con
+propósito taxonómico y de síntesis de brechas de constructo en el campo de la
+evaluación XAI.
 
 ### Universo y contexto experimental
 
@@ -257,9 +281,9 @@ y DiCE [@mothilal2020; @wachter2017]. El tamaño de muestra por estrato se varí
 en tres niveles: $N
 \in \{50, 100, 200\}$. Cada celda del diseño se replica con cinco semillas de
 aleatoriedad: $s \in \{42, 123, 456, 789, 999\}$. El tamaño planificado del
-benchmark primario (Estudio A) es $5 \times 4 \times 5 \times 3 = 300$
-ejecuciones; el análisis pareado LIME-SHAP (Estudio B) opera sobre 75 celdas
-coincidentes.
+benchmark primario (Estudio Omnibus Multimétrico) es
+$5 \times 4 \times 5 \times 3 = 300$ ejecuciones; el Estudio Pareado LIME–SHAP opera
+sobre 75 celdas coincidentes.
 
 ### Criterios de inclusión y exclusión
 
@@ -271,7 +295,7 @@ coincidentes.
   configuración ha sido congelada antes del inicio de la inferencia
   confirmativa.
 - Celdas para las que existen artefactos en ambos métodos comparados (SHAP y
-  LIME) para el análisis pareado del Estudio B.
+  LIME) para el Estudio Pareado LIME–SHAP.
 
 **Criterios de exclusión:**
 
