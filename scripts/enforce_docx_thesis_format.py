@@ -168,6 +168,25 @@ def insert_cover_page(root: ET.Element, items: list[tuple[str, str]]) -> bool:
     return True
 
 
+def insert_break_after_toc(root: ET.Element) -> bool:
+    """Start the first chapter on its own page.
+
+    Quarto promotes a chapter file's first level-1 heading to the chapter title
+    when the file declares no `title`, hoisting it above everything else in the
+    file -- so a page break written at the top of index.qmd lands *after* that
+    heading and strands it on the TOC page. Inserting the break here, right
+    after the TOC block, is immune to that reordering.
+    """
+    body = root.find("w:body", NS)
+    if body is None:
+        return False
+    for index, child in enumerate(body):
+        if child.tag == qn("sdt"):
+            body.insert(index + 1, make_page_break())
+            return True
+    return False
+
+
 def patch_document_xml(
     xml_bytes: bytes, cover: list[tuple[str, str]] | None = None
 ) -> bytes:
@@ -183,6 +202,7 @@ def patch_document_xml(
     # After the formatting sweep, so the cover keeps its own centred spacing.
     if cover:
         insert_cover_page(root, cover)
+        insert_break_after_toc(root)
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
