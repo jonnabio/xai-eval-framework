@@ -379,10 +379,26 @@ manuscript-editing support tooling.
   that use the old letters are dated records and were **not** rewritten.
   Decision recorded in `docs/adr/0012-thesis-study-nomenclature.md`. Outputs not rebuilt — the
   thesis `.docx` still carries the old labels until the next `thesis/render.ps1` run.
-  **Still open from the same session:** OE5 says the taxonomy integrates the two empirical studies,
-  but the taxonomy *is* the Estudio Taxonómico and also originates OE6 (per OE6's own wording,
-  derived from the taxonomy's Brecha 3). A more exact formulation — "… y base de la que se deriva
-  el objetivo 6" — was offered and not yet decided; it is a content change, not a naming one.
+  **Resolved later the same day (OE5/OE6 wording, a content change, not a naming one).** The open
+  item was that OE5 claimed only an integrative role while OE6 declared itself derived from the
+  taxonomy's Brecha 3, leaving OE6 without a legitimate antecedent. The forward reference first
+  considered — OE5 saying "y base de la que se deriva el objetivo 6" — was **rejected**: an
+  objective is stated ex ante and must not describe an ex post outcome, which is the very vice
+  OE6 admits about itself. Fixed instead from both ends:
+  (1) **OE5 gains an ex-ante deliverable** — "y que haga explícitas las brechas de constructo del
+  campo". Gap-identification is formulable in advance, is what Chapter 5 already delivers
+  (§`sec-taxonomia-brechas`, three gaps) and is already how Ch.1's "Tipo de investigación"
+  describes the taxonomic component. OE6 now executes something OE5 promised.
+  (2) **OE6 compressed from four sentences to two.** Its epistemic-status defence was stated four
+  times over (OE6 itself, the "Estatuto epistémico diferenciado de P2" paragraph, Ch.5 §`sec-exp4-fiabilidad`, the Ch.6 objectives table); in a list where OE1–OE5 are single sentences,
+  the four-sentence outlier flagged OE6 as the weak objective before the reader had cause to think
+  so. The redundant sentence ("a diferencia de los objetivos 1–5, se formuló una vez construida esa
+  taxonomía") is dropped; Brecha-3 traceability, the exploratory/non-confirmatory scope marker and
+  both citations are kept, with the status argument left to P2 where the claim is actually made.
+  **No scope declaration was retired — only de-duplicated.** Ch.6's OE5 row updated to match
+  ("y explicitar brechas de constructo", pointing at the three gaps and Brecha 3 as OE6's origin);
+  its OE6 row is left as "Completado (resultado negativo)", which is right: the objective was to
+  *quantify*, and a low ICC is the objective met, not failed.
 
 ## Active Constraints
 - .ace/standards/coding.md
