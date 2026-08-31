@@ -255,12 +255,166 @@ def number_headings(root: ET.Element, unnumbered: set[str]) -> int:
     return applied
 
 
+# Child order inside w:pPr is fixed by the schema; only the members this script
+# touches or preserves are listed, and anything unknown is appended after them.
+PPR_ORDER = (
+    "pStyle",
+    "keepNext",
+    "keepLines",
+    "pageBreakBefore",
+    "framePr",
+    "widowControl",
+    "numPr",
+    "pBdr",
+    "shd",
+    "tabs",
+    "bidi",
+    "spacing",
+    "ind",
+    "contextualSpacing",
+    "jc",
+    "textDirection",
+    "textAlignment",
+    "outlineLvl",
+    "rPr",
+    "sectPr",
+)
+
+
+def merge_paragraph_properties(root) -> int:
+    """Collapse duplicate w:pPr elements into one, in schema order.
+
+    A w:p may carry at most one w:pPr and it must come first. Earlier revisions
+    of this script inserted a fresh w:pPr at index 0 whenever `find` missed the
+    existing one, which left all 44 caption paragraphs with two: an injected one
+    holding the justification, ahead of pandoc's, which holds `pStyle`. Word
+    honours the first and the caption style is lost -- and any lookup by style
+    finds the wrong element. Later definitions win, so pandoc's pStyle survives.
+    """
+    fixed = 0
+    for para in root.iter(qn("p")):
+        pprs = [child for child in para if child.tag == qn("pPr")]
+        if len(pprs) < 2:
+            continue
+        merged: dict[str, ET.Element] = {}
+        for ppr in pprs:
+            for child in ppr:
+                merged[child.tag.split("}")[-1]] = child
+            para.remove(ppr)
+        combined = ET.Element(qn("pPr"))
+        for tag in PPR_ORDER:
+            if tag in merged:
+                combined.append(merged.pop(tag))
+        for leftover in merged.values():
+            combined.append(leftover)
+        para.insert(0, combined)
+        fixed += 1
+    return fixed
+
+
+# --- Tables and figures -----------------------------------------------------
+
+# Child order inside w:tblPr is fixed by the schema. w:jc sits after these,
+# and w:tblBorders after those plus jc/tblCellSpacing/tblInd.
+TBLPR_BEFORE_JC = (
+    "tblStyle",
+    "tblpPr",
+    "tblOverlap",
+    "bidiVisual",
+    "tblStyleRowBandSize",
+    "tblStyleColBandSize",
+    "tblW",
+)
+TBLPR_BEFORE_BORDERS = TBLPR_BEFORE_JC + ("jc", "tblCellSpacing", "tblInd")
+
+# Order inside w:tblBorders is also fixed.
+BORDER_EDGES = ("top", "left", "bottom", "right", "insideH", "insideV")
+
+CAPTION_STYLES = {"ImageCaption", "TableCaption", "Descripcin", "Leyenda"}
+
+
+def _insert_ordered(parent, tag, before_tags):
+    """Insert (or find) a child, respecting the schema's fixed child order."""
+    existing = parent.find(f"w:{tag}", NS)
+    if existing is not None:
+        return existing
+    node = ET.Element(qn(tag))
+    index = 0
+    for i, child in enumerate(parent):
+        if child.tag.split("}")[-1] in before_tags:
+            index = i + 1
+    parent.insert(index, node)
+    return node
+
+
+def set_table_borders(tblpr):
+    """Give a table solid black gridlines on every edge.
+
+    The rendered tables reference a table style named "Table" that the reference
+    template does not define, and neither w:tblBorders nor w:tcBorders appears
+    anywhere in the output, so they arrive in Word with no rules at all. No cell
+    overrides them, so setting the borders once at table level covers every cell.
+    """
+    borders = _insert_ordered(tblpr, "tblBorders", TBLPR_BEFORE_BORDERS)
+    for edge in BORDER_EDGES:
+        node = borders.find(f"w:{edge}", NS)
+        if node is None:
+            node = ET.SubElement(borders, qn(edge))
+        node.set(qn("val"), "single")
+        node.set(qn("sz"), "4")
+        node.set(qn("space"), "0")
+        node.set(qn("color"), "000000")
+
+
+def format_tables(root) -> int:
+    """Centre every table and give it solid black borders."""
+    count = 0
+    for tbl in root.iter(qn("tbl")):
+        tblpr = tbl.find("w:tblPr", NS)
+        if tblpr is None:
+            tblpr = ET.Element(qn("tblPr"))
+            tbl.insert(0, tblpr)
+        _insert_ordered(tblpr, "jc", TBLPR_BEFORE_JC).set(qn("val"), "center")
+        set_table_borders(tblpr)
+        count += 1
+    return count
+
+
+def centre_captions_and_figures(root) -> tuple[int, int]:
+    """Centre caption paragraphs and the paragraphs holding an image.
+
+    Runs after the global formatting sweep, which justifies every paragraph --
+    correct for body prose, wrong for a caption or a figure. Pandoc gives table
+    captions and figure captions the same style, so one rule covers both.
+    """
+    captions = figures = 0
+    for para in root.iter(qn("p")):
+        ppr = para.find("w:pPr", NS)
+        if ppr is None:
+            continue
+        style = ppr.find("w:pStyle", NS)
+        is_caption = style is not None and style.get(qn("val")) in CAPTION_STYLES
+        is_figure = para.find(".//w:drawing", NS) is not None
+        if not (is_caption or is_figure):
+            continue
+        jc = ppr.find("w:jc", NS)
+        if jc is None:
+            jc = ET.SubElement(ppr, qn("jc"))
+        jc.set(qn("val"), "center")
+        if is_caption:
+            captions += 1
+        else:
+            figures += 1
+    return captions, figures
+
+
 def patch_document_xml(
     xml_bytes: bytes,
     cover: list[tuple[str, str]] | None = None,
     unnumbered: set[str] | None = None,
 ) -> bytes:
     root = ET.fromstring(xml_bytes)
+    merge_paragraph_properties(root)
     for p in root.findall(".//w:p", NS):
         ppr = p.find("w:pPr", NS)
         if ppr is None:
@@ -269,6 +423,8 @@ def patch_document_xml(
         set_paragraph_format(ppr)
     for sectpr in root.findall(".//w:sectPr", NS):
         set_page_numbering(sectpr)
+    format_tables(root)
+    centre_captions_and_figures(root)
     # After the formatting sweep, so the cover keeps its own centred spacing.
     if cover:
         insert_cover_page(root, cover)
