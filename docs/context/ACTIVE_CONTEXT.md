@@ -329,14 +329,23 @@ manuscript-editing support tooling.
 5. [ ] Continue APA/citation and compression checks once final CIFIE requirements are confirmed.
 6. [ ] Validate final submission artifacts after manuscript stabilization.
 7. [ ] Run `Scientific Advisor` (`scientific-rigor-review` + `reference-audit`) against the CIFIE chapter and/or Paper A/B+C once each is near-final, before final submission.
-8. [ ] Delete the stale remote branch:
-   `git push origin --delete publication/cifie-xai-fom7-book-chapter` (already deleted locally;
-   fully merged into `main`, so nothing is at risk).
+8. [x] **Done 2026-08-30.** Stale remote branch `publication/cifie-xai-fom7-book-chapter`
+   deleted on origin. It was fully merged into `main`, so nothing became unreachable.
 9. [ ] Refresh the Table of Contents in Word - `render.ps1` prints this reminder every run and it
    is the one step the pipeline cannot do itself.
-10. [ ] Decide whether the 44 corpus PDFs under `docs/reports/paper_bc/corpus_pdfs/` should be
-    committed or formally ignored; they are currently untracked and un-ignored, so they exist
-    only on this machine.
+10. [x] **No action needed - the item was wrong.** The corpus PDFs are already formally
+    ignored: `.gitignore:78` carries `docs/reports/paper_bc/corpus_pdfs/*.pdf`, added in
+    `1a9c0a6af`. The claim that they were un-ignored came from grepping `.gitignore` while the
+    tree was still on the pre-merge `main`, whose copy predates that rule. The decision was
+    taken deliberately and stands: ~142 MB of third-party publications, 17 of them duplicates of
+    `thesis/papers/`, are not redistributed through the repository. What is tracked is the
+    evidence the manuscript rests on - `paper_bc_review_corpus.csv`, `corpus_pdfs/README.md` and
+    `RETRIEVAL_LOG.md`, the last recording a source URL and verification per paper so the set is
+    reproducible via `scripts/pubs/fetch_corpus_pdfs.py`. `check_corpus_pdfs.py` is not in CI and
+    tolerates the directory being absent.
+    **Residual risk, unchanged:** the retrieved files themselves live only on this machine, and
+    two were supplied by the author under institutional access rather than fetched. Worth a
+    backup outside git before deposit.
 
 - **Mode (2026-08-28, third pass):** EXECUTION — Developer applied the rigor-review
   remediation, Phases 1-3 of the approved plan, in 8 atomic commits:
