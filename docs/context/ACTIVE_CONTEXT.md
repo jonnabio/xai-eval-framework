@@ -223,6 +223,112 @@
 - **Prior session (2026-08-11):** ran `scientific-rigor-review` against the full PhD thesis (`thesis/index.qmd` through `apendices.qmd`, all 6 chapters + appendices); report at `docs/review/scientific-rigor-review_thesis_2026-08-11.md` (Grade: Accept, mean 4.3/5). Six findings: F01/F02 major (Ch.5 restates Ch.4's Anchors/DiCE fidelity+parsimony numbers incorrectly — needs a numeric fix before defense; Ch.6 "future work" item 4 contradicts the completed-work note `sec-exp3-nota` a few paragraphs earlier), F03-F06 minor/suggestions (parsimony-direction wording slip in Ch.4, undreived 50%-power-reduction sensitivity claim in Ch.3, unflagged Anchors non-convergence selection-bias direction, "prescriptivo" framing in Ch.6 in tension with the thesis's own conditional-language discipline).
 - **Prior session (2026-07-30):** ran `scientific-rigor-review` against `docs/reports/paper_bc/paper_bc_jmlr.pdf`; report at `docs/reports/paper_bc/scientific-rigor-review_paper_bc_jmlr_2026-07-28.md` (Grade: Accept, mean 4.0/5). F01 (major, Friedman/Nemenyi block-count mislabeling) and F02 (minor, EXP4 ICC/Krippendorff n=147-vs-192 disclosure) were fixed with captioning-only edits to `paper_bc_jmlr.tex`; recompiled clean both times, no statistics changed. F03 (suggestion, supplementary tables not independently re-verified) remains open, lower priority. F04 (EXP4 analysis scripts + raw judge-response data both missing from the repo, never committed) was investigated in depth on 2026-07-30 — confirmed not fixable without re-running EXP4 from scratch; author decided to leave it as-is rather than fabricate a restoration. CIFIE PUBLICATION work below is unaffected by either review.
 
+## Session Handoff - 2026-08-30
+
+Authoritative summary of the 2026-08-30 session. 15 commits on
+`thesis/rca-001-phase-2` (`ef4ec67f1`..`778151f9a`) plus the merge commit
+`72a2a9665` on `main`. Working tree clean, everything pushed.
+
+- **Completed**
+  - **Branch restructuring.** The tree was found checked out on `main`, still a
+    2026-07-04 snapshot, while all real work sat on
+    `publication/cifie-xai-fom7-book-chapter` - a branch named for the book chapter
+    that had been the trunk since May (78 commits). Merged into `main` byte-identical
+    (12 conflicts: 10 CRLF-only, 2 superseded), cut `thesis/rca-001-phase-2` from it,
+    deleted the old branch locally and on origin.
+  - **Objectives.** Citations removed from all six specific objectives in Chapter 1.
+    No bibliography orphan created: every key stays cited elsewhere.
+  - **Front matter.** Dedicatoria and Agradecimientos added; cover page (programme,
+    title, author, director, place) placed ahead of the TOC from `thesis/cover.txt`;
+    the duplicate title heading after the TOC removed.
+  - **Official title adopted** across `_quarto.yml`, `index.qmd`, `pub/claims.toml`
+    (SSOT) and `README.md`, which had carried a third variant. Fragments regenerated.
+  - **Crossreferences.** `lang: es` set; 20 self-labelled crossrefs switched to `-@`
+    (80 English prefixes and 15 doubled labels eliminated); 20 leaked `sec-...` slugs
+    converted to real crossrefs, which exposed and fixed a dangling `sec-metricas`.
+  - **Numbering.** Hierarchical heading numbers generated post-render, with level 1
+    reading "Capitulo N."; front matter, Referencias and the self-lettered Apendices
+    excluded. Reverted `88933c7f6`, which had hardcoded the labels in the sources.
+  - **Tables and figures.** All 82 tables centred; the 38 data tables given solid
+    black borders and bold header rows; the 44 captions and 7 figures centred; the
+    37 caption wrappers and 7 figure wrappers left unbordered.
+  - **Two latent DOCX defects fixed.** All 44 caption paragraphs carried two `w:pPr`
+    elements (malformed; Word honoured the injected one and dropped the caption
+    style) - now merged into one schema-ordered element. Tables had no borders at
+    all, because they reference a table style the template never defines.
+  - **Context hygiene.** ACTIVE_CONTEXT updated twice; a wrong earlier finding about
+    the corpus PDFs corrected rather than deleted.
+
+- **Current State**
+  - `thesis/rca-001-phase-2` at `778151f9a`, pushed; `main` at `72a2a9665`, pushed.
+    Working tree clean. Origin holds exactly these two branches.
+  - `scripts/enforce_docx_thesis_format.py` is now the thesis presentation layer:
+    `merge_paragraph_properties`, `insert_cover_page`, `insert_break_after_toc`,
+    `number_headings` + `collect_unnumbered_titles`, `format_tables` +
+    `set_table_borders` + `bolden_header_row` + `is_layout_wrapper`, and
+    `centre_captions_and_figures`. All driven from version-controlled sources, never
+    the binary template.
+  - Thesis sources: all seven `.qmd` files touched, plus `_quarto.yml`, `index.qmd`,
+    new `thesis/cover.txt`. No numeric result, table value or citation changed in any
+    commit this session.
+  - Rendered DOCX committed and current: p1 cover, p2 TOC, p3 Dedicatoria,
+    p4 Agradecimientos, p5 Resumen; Capitulo 1-6 numbered, sub-sections 1.1/1.1.1.
+  - All three verifiers green: `verify_claims.py` (142 claims / 225 sites / 26
+    retired-value guards / 10 cited artifacts), `verify_sync.py`,
+    `verify_exp4_reconstruction.py`.
+
+- **Next Steps**
+  1. **Refresh the Table of Contents in Word** (author, manual). Highest priority:
+     headings changed to "Capitulo N." and the TOC field still holds the old text.
+     `render.ps1` prints this reminder on every run and cannot do it itself.
+  2. **Resume the standing objective, Task 3 / RCA-001 Phase 2** - emit registry
+     values as LaTeX macros and Quarto inline values, and add a CI job building all
+     four outputs, failing on undefined references and crossref warnings.
+  3. **Coverage sweep, one file at a time**, before Phase 2's macro generation. Only
+     Chapter 4 is in `[coverage]`; Ch.3, Ch.5, Ch.6, `apendices`, Paper A, Paper B+C
+     and the supplementary are unswept. Triage each with
+     `python scripts/pubs/verify_claims.py --coverage-report`.
+  4. **Author-verify the 28 reconstructed review-corpus coding rows** before
+     submission.
+
+- **Blockers/Issues**
+  - **Word file lock.** `render.ps1` deletes the old DOCX first, so it fails while the
+    document is open in Word. Close it before rendering. To validate without closing:
+    `quarto render --to docx --output-dir _output_test`, then patch that copy - but
+    note the post-render hook globs `_output*`, so it will also try the locked one.
+  - **CIFIE chapter still blocked** on final template, word limit and citation
+    rendering requirements (pre-existing, unchanged).
+  - **Corpus PDFs exist only on this machine.** Correctly gitignored, but two were
+    supplied by the author under institutional access and are not re-fetchable.
+    Back them up outside git before deposit.
+  - **Open by author decision, unchanged:** Paper B+C F03 (supplementary tables not
+    independently re-derived) and A11 (Paper A leads with the 45-cell d_z).
+  - **Cosmetic, unresolved:** `render.ps1` calls a nonexistent `quarto clean` and
+    prints a harmless error every run.
+
+- **Notes**
+  - **A green render proves nothing about layout.** Four defects this session
+    survived a successful `render.ps1`: two silently-failed CRLF edits, a page break
+    Quarto reordered, headings numbered nowhere, and a frame drawn around every
+    figure. Verify by unzipping the DOCX and reading `word/document.xml`.
+  - **Count tables with a tree walk, not a regex.** `<w:tbl>.*?</w:tbl>` cannot see
+    nesting and reported 45 where there are 82. The document is 38 data tables +
+    37 caption wrappers + 7 figure wrappers; pandoc wraps captioned content in
+    single-cell tables, which must never take a border.
+  - **`scripts/enforce_docx_thesis_format.py` is CRLF.** Multi-line edits written
+    with a bare newline match nothing, fail silently, and leave a file that still
+    parses and runs. Assert on every replacement.
+  - **Quarto promotes a chapter file's first level-1 heading** to the chapter title
+    when the file declares no `title`, hoisting it above everything else in that
+    file - so a page break written at the top of `index.qmd` lands after it. Insert
+    such breaks post-render.
+  - Useful commands: `thesis/render.ps1` (full render + post-render patches);
+    `python scripts/pubs/verify_claims.py`; `verify_sync.py`;
+    `verify_exp4_reconstruction.py` (needs Python 3.13);
+    `python scripts/pubs/generate_fragments.py` after editing `pub/claims.toml`.
+  - The fragment generator rewrites files with LF; if only line endings change,
+    `git checkout -- pub/fragments/` to drop the churn.
+
 ## Current Objective
 **Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
@@ -263,19 +369,19 @@ manuscript-editing support tooling.
 - `02_introduccion.md` received a follow-up polish aligning its evidentiary language with section 03: explanation as evidence must not confuse narrative persuasiveness with technical validity, and FOM-7 preserves the relationship among artefact, construct, test, result, and claim.
 - `03_fundamentos_xai.md` has been revised through a literature-enrichment loop into a stronger foundations section. It now distinguishes artifact type, interpretability, explainability, transparency, local/global scope, plausibility, fidelity, stability, robustness, metric proxies, and the functionally-grounded scope of FOM-7.
 - `@miller2019` was added to the CIFIE references to support the social/contrastive dimension of explanation while keeping the manuscript clear that audience plausibility is not technical fidelity.
-- **Thesis front matter and presentation (closed 2026-08-30):** cover page, Dedicatoria,
+- **Thesis front matter, presentation and table/figure formatting (closed 2026-08-30;
+  see Session Handoff above for the full record):** cover page, Dedicatoria,
   Agradecimientos, official title, Spanish crossref labels, resolved section references and
   hierarchical heading numbering. The rendered DOCX now reads: p1 cover, p2 TOC, p3 Dedicatoria,
   p4 Agradecimientos, p5 Resumen. Integrity in the render: raw slugs 0, unresolved crossrefs 0,
   doubled labels 0, English crossref prefixes 0.
-- The thesis DOCX pipeline now carries three post-render patches in
-  `scripts/enforce_docx_thesis_format.py`, all driven from version-controlled sources rather than
-  the binary template: `insert_cover_page` (+ `thesis/cover.txt`), `insert_break_after_toc`, and
-  `number_headings` (+ `collect_unnumbered_titles`, which reads the `{.unnumbered}` markers from
-  the .qmd sources because the rendered DOCX gives numbered and unnumbered headings identical
-  style and pPr).
-
-### In Progress
+- `scripts/enforce_docx_thesis_format.py` is the thesis presentation layer, all of it driven
+  from version-controlled sources rather than the binary template:
+  `merge_paragraph_properties`, `insert_cover_page` (+ `thesis/cover.txt`),
+  `insert_break_after_toc`, `number_headings` (+ `collect_unnumbered_titles`, which reads the
+  `{.unnumbered}` markers from the .qmd sources because the rendered DOCX gives numbered and
+  unnumbered headings identical style and pPr), `format_tables` (+ `set_table_borders`,
+  `bolden_header_row`, `is_layout_wrapper`) and `centre_captions_and_figures`.
 
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
