@@ -244,7 +244,11 @@ def number_headings(root: ET.Element, unnumbered: set[str]) -> int:
         counters[level] += 1
         for deeper in range(level + 1, len(counters)):
             counters[deeper] = 0
-        label = ".".join(str(counters[i]) for i in range(1, level + 1))
+        number = ".".join(str(counters[i]) for i in range(1, level + 1))
+        # Level 1 carries the word the thesis uses when it refers to itself:
+        # Table 1.1's "Capitulos" column and 54 prose references all say
+        # "Capitulo N". Generated here, never typed into the heading.
+        label = f"Capítulo {number}." if level == 1 else number
 
         run = ET.Element(qn("r"))
         node = ET.SubElement(run, qn("t"))
@@ -366,17 +370,45 @@ def set_table_borders(tblpr):
         node.set(qn("color"), "000000")
 
 
-def format_tables(root) -> tuple[int, int]:
-    """Centre every table; give solid black borders to the data tables only.
+def is_layout_wrapper(tbl) -> bool:
+    """True for the single-cell tables pandoc uses purely for layout.
 
-    Pandoc wraps each captioned table in a single-cell table that holds the
-    caption and the real table together, so the document has two tbl elements
-    per captioned table. Centring both is right -- it centres the whole block --
-    but bordering both would draw a second box around caption and table. Borders
-    therefore go only to leaf tables, those containing no nested table, which is
-    also how the document looked before: the wrapper never had rules.
+    Pandoc keeps a caption with its content by wrapping the pair in a one-row,
+    one-cell table: around a table (which then nests) and around a figure (which
+    does not). Both are invisible scaffolding, so neither may take a border --
+    bordering the figure wrappers is exactly what put a frame around every
+    figure. A real data table always has more than one cell.
     """
-    centred = bordered = 0
+    rows = tbl.findall("w:tr", NS)
+    if len(rows) != 1:
+        return False
+    return len(rows[0].findall("w:tc", NS)) == 1
+
+
+def bolden_header_row(tbl) -> bool:
+    """Bold every run in a data table's first row."""
+    rows = tbl.findall("w:tr", NS)
+    if not rows:
+        return False
+    for run in rows[0].iter(qn("r")):
+        rpr = run.find("w:rPr", NS)
+        if rpr is None:
+            rpr = ET.Element(qn("rPr"))
+            run.insert(0, rpr)  # w:rPr must be the first child of w:r
+        for tag in ("b", "bCs"):
+            if rpr.find(f"w:{tag}", NS) is None:
+                rpr.insert(0, ET.Element(qn(tag)))
+    return True
+
+
+def format_tables(root) -> tuple[int, int, int]:
+    """Centre every table; border and embolden only the real data tables.
+
+    Centring applies to the layout wrappers too, since that is what centres the
+    whole block. Borders and the bold header row apply only to tables that carry
+    data: see is_layout_wrapper.
+    """
+    centred = bordered = bolded = 0
     for tbl in root.iter(qn("tbl")):
         tblpr = tbl.find("w:tblPr", NS)
         if tblpr is None:
@@ -384,10 +416,14 @@ def format_tables(root) -> tuple[int, int]:
             tbl.insert(0, tblpr)
         _insert_ordered(tblpr, "jc", TBLPR_BEFORE_JC).set(qn("val"), "center")
         centred += 1
-        if not list(tbl.iter(qn("tbl")))[1:]:
-            set_table_borders(tblpr)
-            bordered += 1
-    return centred, bordered
+        nested = bool(list(tbl.iter(qn("tbl")))[1:])
+        if nested or is_layout_wrapper(tbl):
+            continue
+        set_table_borders(tblpr)
+        bordered += 1
+        if bolden_header_row(tbl):
+            bolded += 1
+    return centred, bordered, bolded
 
 
 def centre_captions_and_figures(root) -> tuple[int, int]:
