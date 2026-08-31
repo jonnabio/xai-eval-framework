@@ -278,9 +278,18 @@ Authoritative summary of the 2026-08-30 session. 15 commits on
     `verify_exp4_reconstruction.py`.
 
 - **Next Steps**
-  1. **Refresh the Table of Contents in Word** (author, manual). Highest priority:
-     headings changed to "Capitulo N." and the TOC field still holds the old text.
-     `render.ps1` prints this reminder on every run and cannot do it itself.
+  1. **Done 2026-08-30 by the author, but it is not durable.** The TOC was refreshed
+     in Word and saved, and that saved file is what is committed: 127 TOC entries
+     (13/53/61 at levels 1-3) against the empty field Quarto emits. **The tracked
+     DOCX is therefore a post-Word-save artifact, not raw `render.ps1` output.** Any
+     future render overwrites it and empties the TOC again, so the refresh must be
+     repeated after every render, as the last step before the file is shared.
+     Word also normalised the style ids on save (`Ttulo1` -> `Heading1`, `Compact`/
+     `Textoindependiente` -> `BodyText`, and the caption style likewise). All direct
+     formatting survived intact - verified after the save: 82/82 tables centred,
+     38/38 bordered and bold-headed, 0/7 figure wrappers bordered, 7/7 figures
+     centred, 0 duplicate `w:pPr`, Capitulo 1-6 headings present. The post-render
+     script is unaffected because it only ever runs on a fresh render.
   2. **Resume the standing objective, Task 3 / RCA-001 Phase 2** - emit registry
      values as LaTeX macros and Quarto inline values, and add a CI job building all
      four outputs, failing on undefined references and crossref warnings.
@@ -322,6 +331,11 @@ Authoritative summary of the 2026-08-30 session. 15 commits on
     when the file declares no `title`, hoisting it above everything else in that
     file - so a page break written at the top of `index.qmd` lands after it. Insert
     such breaks post-render.
+  - **The committed DOCX is Word-saved, not render output.** Re-rendering resets the
+    TOC to an empty field and reverts Word's style-id normalisation; that is expected.
+    Sequence for a shareable document: edit sources -> `thesis/render.ps1` -> open in
+    Word -> refresh the TOC -> save -> commit. Verifying a fresh render against the
+    committed file will show large diffs for this reason alone.
   - Useful commands: `thesis/render.ps1` (full render + post-render patches);
     `python scripts/pubs/verify_claims.py`; `verify_sync.py`;
     `verify_exp4_reconstruction.py` (needs Python 3.13);
