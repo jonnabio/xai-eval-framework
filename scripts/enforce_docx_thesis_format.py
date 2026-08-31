@@ -366,18 +366,28 @@ def set_table_borders(tblpr):
         node.set(qn("color"), "000000")
 
 
-def format_tables(root) -> int:
-    """Centre every table and give it solid black borders."""
-    count = 0
+def format_tables(root) -> tuple[int, int]:
+    """Centre every table; give solid black borders to the data tables only.
+
+    Pandoc wraps each captioned table in a single-cell table that holds the
+    caption and the real table together, so the document has two tbl elements
+    per captioned table. Centring both is right -- it centres the whole block --
+    but bordering both would draw a second box around caption and table. Borders
+    therefore go only to leaf tables, those containing no nested table, which is
+    also how the document looked before: the wrapper never had rules.
+    """
+    centred = bordered = 0
     for tbl in root.iter(qn("tbl")):
         tblpr = tbl.find("w:tblPr", NS)
         if tblpr is None:
             tblpr = ET.Element(qn("tblPr"))
             tbl.insert(0, tblpr)
         _insert_ordered(tblpr, "jc", TBLPR_BEFORE_JC).set(qn("val"), "center")
-        set_table_borders(tblpr)
-        count += 1
-    return count
+        centred += 1
+        if not list(tbl.iter(qn("tbl")))[1:]:
+            set_table_borders(tblpr)
+            bordered += 1
+    return centred, bordered
 
 
 def centre_captions_and_figures(root) -> tuple[int, int]:
