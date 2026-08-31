@@ -16,6 +16,7 @@ every section in a rendered output back to `decimal`.
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import tempfile
 import zipfile
@@ -187,8 +188,77 @@ def insert_break_after_toc(root: ET.Element) -> bool:
     return False
 
 
+# --- Section numbering ------------------------------------------------------
+
+HEADING_STYLE = re.compile(r"^(?:Ttulo|Titulo|Heading)(\d)$")
+
+
+def collect_unnumbered_titles(source_dir: Path) -> set[str]:
+    """Heading texts marked `{.unnumbered}` in the Quarto sources.
+
+    The rendered DOCX gives numbered and unnumbered headings the identical
+    style and pPr, so the output alone cannot distinguish them; the sources can.
+    """
+    titles: set[str] = set()
+    for qmd in sorted(source_dir.glob("*.qmd")):
+        for line in qmd.read_text(encoding="utf-8").splitlines():
+            m = re.match(r"^#+\s+(.*?)\s*\{([^}]*)\}\s*$", line)
+            if m and ".unnumbered" in m.group(2):
+                titles.add(m.group(1).strip())
+    return titles
+
+
+def number_headings(root: ET.Element, unnumbered: set[str]) -> int:
+    """Prefix headings with 1, 1.1, 1.1.1 ... matching Quarto's own counting.
+
+    Quarto computes these numbers for `@sec-` crossrefs but pandoc's docx
+    writer never puts them on the headings, so every "Seccion 3.6" reference
+    pointed at a label the document did not show. Numbering here rather than in
+    the .docx template keeps the rule in version control.
+
+    An unnumbered level-1 heading suppresses numbering for everything beneath
+    it, which is what keeps Resumen, Introduccion, Referencias and the
+    self-lettered Apendices (A, B, C.1 ...) out of the sequence.
+    """
+    body = root.find("w:body", NS)
+    if body is None:
+        return 0
+    counters = [0] * 10
+    skipping = False
+    applied = 0
+    for para in body.findall("w:p", NS):
+        style = para.find("w:pPr/w:pStyle", NS)
+        if style is None:
+            continue
+        match = HEADING_STYLE.match(style.get(qn("val")) or "")
+        if not match:
+            continue
+        level = int(match.group(1))
+        text = "".join(node.text or "" for node in para.iter(qn("t"))).strip()
+        if level == 1:
+            skipping = text in unnumbered
+            if skipping:
+                continue
+        elif skipping:
+            continue
+        counters[level] += 1
+        for deeper in range(level + 1, len(counters)):
+            counters[deeper] = 0
+        label = ".".join(str(counters[i]) for i in range(1, level + 1))
+
+        run = ET.Element(qn("r"))
+        node = ET.SubElement(run, qn("t"))
+        node.set("{http://www.w3.org/XML/1998/namespace}space", "preserve")
+        node.text = f"{label} "
+        para.insert(1, run)  # after w:pPr
+        applied += 1
+    return applied
+
+
 def patch_document_xml(
-    xml_bytes: bytes, cover: list[tuple[str, str]] | None = None
+    xml_bytes: bytes,
+    cover: list[tuple[str, str]] | None = None,
+    unnumbered: set[str] | None = None,
 ) -> bytes:
     root = ET.fromstring(xml_bytes)
     for p in root.findall(".//w:p", NS):
@@ -203,6 +273,8 @@ def patch_document_xml(
     if cover:
         insert_cover_page(root, cover)
         insert_break_after_toc(root)
+    if unnumbered is not None:
+        number_headings(root, unnumbered)
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
@@ -211,6 +283,7 @@ def patch_docx(
     patch_document: bool = False,
     backup: bool = True,
     cover: list[tuple[str, str]] | None = None,
+    unnumbered: set[str] | None = None,
 ) -> None:
     if backup:
         backup_path = path.with_suffix(path.suffix + ".bak")
@@ -225,7 +298,7 @@ def patch_docx(
                 if item.filename == "word/styles.xml":
                     data = patch_styles_xml(data)
                 elif patch_document and item.filename == "word/document.xml":
-                    data = patch_document_xml(data, cover=cover)
+                    data = patch_document_xml(data, cover=cover, unnumbered=unnumbered)
                 zout.writestr(item, data)
         shutil.move(str(tmp_path), path)
 

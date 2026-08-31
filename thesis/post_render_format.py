@@ -16,7 +16,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from enforce_docx_thesis_format import load_cover, patch_docx  # noqa: E402
+from enforce_docx_thesis_format import (  # noqa: E402
+    collect_unnumbered_titles,
+    load_cover,
+    patch_docx,
+)
 
 
 def main() -> None:
@@ -25,9 +29,16 @@ def main() -> None:
     cover = load_cover(cover_file) if cover_file.exists() else None
     if cover is None:
         print(f"AVISO: no se encontro {cover_file}; se omite la portada.")
+    unnumbered = collect_unnumbered_titles(thesis_dir)
     docx_files = sorted(thesis_dir.glob("_output*/JHerrera_XAI_Tesis_Doctorado.docx"))
     for docx in docx_files:
-        patch_docx(docx, patch_document=True, backup=False, cover=cover)
+        patch_docx(
+            docx,
+            patch_document=True,
+            backup=False,
+            cover=cover,
+            unnumbered=unnumbered,
+        )
         print(f"Formato DOCX aplicado: {docx}")
 
 
