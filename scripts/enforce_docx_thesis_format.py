@@ -316,6 +316,77 @@ def merge_paragraph_properties(root) -> int:
     return fixed
 
 
+# --- Dedication-style front matter ------------------------------------------
+
+# Sections whose body is set in right-aligned italics under a centred, upright
+# heading. Matched on the heading text, which is also how collect_unnumbered_titles
+# identifies them, so the two stay in step.
+DEDICATION_SECTIONS = {"Dedicatoria", "Agradecimientos"}
+
+
+def _set_alignment(para, value):
+    ppr = para.find("w:pPr", NS)
+    if ppr is None:
+        ppr = ET.Element(qn("pPr"))
+        para.insert(0, ppr)
+    jc = ppr.find("w:jc", NS)
+    if jc is None:
+        jc = ET.SubElement(ppr, qn("jc"))
+    jc.set(qn("val"), value)
+
+
+def _set_italic(para, italic):
+    """Add or strip w:i / w:iCs on every run of a paragraph."""
+    for run in para.iter(qn("r")):
+        rpr = run.find("w:rPr", NS)
+        if italic:
+            if rpr is None:
+                rpr = ET.Element(qn("rPr"))
+                run.insert(0, rpr)  # w:rPr must lead w:r
+            for tag in ("i", "iCs"):
+                if rpr.find(f"w:{tag}", NS) is None:
+                    rpr.insert(0, ET.Element(qn(tag)))
+        elif rpr is not None:
+            for tag in ("i", "iCs"):
+                node = rpr.find(f"w:{tag}", NS)
+                if node is not None:
+                    rpr.remove(node)
+
+
+def format_dedication_sections(root) -> int:
+    """Centre the heading, then right-align and italicise the section body.
+
+    Applies to Dedicatoria and Agradecimientos, whose body is a personal address
+    rather than argument: it is set in italics, ranged right, under an upright
+    centred heading. Runs after the global sweep, which justifies everything.
+
+    A section ends at the next heading of any level, so nothing downstream is
+    caught. The heading itself is explicitly de-italicised rather than merely
+    left alone, so the rule holds even if the template styles it otherwise.
+    """
+    body = root.find("w:body", NS)
+    if body is None:
+        return 0
+    formatted = 0
+    inside = False
+    for para in body.findall("w:p", NS):
+        ppr = para.find("w:pPr", NS)
+        style = ppr.find("w:pStyle", NS) if ppr is not None else None
+        value = style.get(qn("val")) if style is not None else ""
+        if HEADING_STYLE.match(value or ""):
+            text = "".join(node.text or "" for node in para.iter(qn("t"))).strip()
+            inside = text in DEDICATION_SECTIONS
+            if inside:
+                _set_alignment(para, "center")
+                _set_italic(para, False)
+                formatted += 1
+            continue
+        if inside:
+            _set_alignment(para, "right")
+            _set_italic(para, True)
+    return formatted
+
+
 # --- Tables and figures -----------------------------------------------------
 
 # Child order inside w:tblPr is fixed by the schema. w:jc sits after these,
@@ -471,6 +542,7 @@ def patch_document_xml(
         set_page_numbering(sectpr)
     format_tables(root)
     centre_captions_and_figures(root)
+    format_dedication_sections(root)
     # After the formatting sweep, so the cover keeps its own centred spacing.
     if cover:
         insert_cover_page(root, cover)
