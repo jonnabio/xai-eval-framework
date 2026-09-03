@@ -400,6 +400,7 @@ source = "exp3_lime:breast_cancer:rf:fidelity"
 value = "0.713"
 tolerance = 0.001
 appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.713" },
   { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.713" },
   { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.713" },
 ]
@@ -410,6 +411,7 @@ source = "exp3_lime:german_credit:xgb:stability"
 value = "0.748"
 tolerance = 0.001
 appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.748" },
   { file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "0.748" },
   { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.748" },
 ]
@@ -1321,6 +1323,11 @@ appears_in = [
 [coverage]
 files = [
   "thesis/capitulo-4-resultados.qmd",
+  # capitulo-6 is registered but not yet enforced: 12 of its 18 literals are
+  # registered or structural; the remaining 6 are differences and complements
+  # of registered values and need a composing resolver. See the 2026-09-02
+  # sweep note in docs/review/top-level-statement-sweep.md.
+  # "thesis/capitulo-6-conclusiones.qmd",
 ]
 # Design constants and decision thresholds, not measured results: Holm-adjusted
 # alpha levels, Cohen's d_z interpretation cut-points, the selection-criterion
@@ -1337,6 +1344,14 @@ structural = [
   "7.815", "7.81", "2.569", "1.211", "0.4714",
   # Anchors' effective precision threshold tau: a protocol setting.
   "0.95",
+  # Chapter 6 sweep (2026-09-02). Decision thresholds and protocol settings:
+  # the ICC acceptability cut-point, the Gaussian perturbation scale, and the
+  # lowest kernel_width probed in the Appendix C sweep. Plus the size of the
+  # Adult corpus, a property of the dataset rather than a result.
+  "0.75", "0.1", "0.25", "48842",
+  # r = 1.0 between education and education-num is definitional: the
+  # supplementary states the two columns are functionally identical.
+  "1.0",
   # Mantissas of Holm-adjusted p-values already registered by magnitude
   # elsewhere; the exponent carries the claim, not the mantissa.
   "1.51", "2.29", "1.18", "2.64",
@@ -1685,3 +1700,75 @@ cited_by = "Paper B+C supplementary (Table S6)"
 id = "lime.kernel_width"
 path = "outputs/analysis/lime_kernel_width_sensitivity.csv"
 cited_by = "Paper B+C supplementary (Table S2)"
+
+# ---------------------------------------------------------------------------
+# Chapter 6 coverage sweep, 2026-09-02. Registering the chapter's numeric
+# literals found that its masking-bias passage still cited Cramer's V = 0.34
+# for education/occupation, the value RCA-002 corrected to 0.196 in the
+# supplementary on 2026-08-28 and never propagated to the thesis. The six
+# EXP3 LIME cells below all re-derived exactly on first attempt.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp3.lime.breast_cancer.xgb.fidelity"
+source = "exp3_lime:breast_cancer:xgb:fidelity"
+value = "0.543"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.543" },
+]
+
+[[claim]]
+id = "exp3.lime.german_credit.rf.fidelity"
+source = "exp3_lime:german_credit:rf:fidelity"
+value = "0.483"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.483" },
+]
+
+[[claim]]
+id = "exp3.lime.german_credit.xgb.fidelity"
+source = "exp3_lime:german_credit:xgb:fidelity"
+value = "0.468"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.468" },
+]
+
+[[claim]]
+id = "exp3.lime.breast_cancer.rf.stability"
+source = "exp3_lime:breast_cancer:rf:stability"
+value = "0.922"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.922" },
+]
+
+[[claim]]
+id = "exp3.lime.breast_cancer.xgb.stability"
+source = "exp3_lime:breast_cancer:xgb:stability"
+value = "0.927"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.927" },
+]
+
+[[claim]]
+id = "exp3.lime.german_credit.rf.stability"
+source = "exp3_lime:german_credit:rf:stability"
+value = "0.854"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.854" },
+]
+
+[[claim]]
+id = "supp.s3.education_occupation"
+source = "adult_cramers_v:education:occupation"
+value = "0.196"
+tolerance = 0.001
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.196" },
+  { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.196" },
+]
