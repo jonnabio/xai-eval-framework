@@ -399,6 +399,8 @@ restructuring and the first presentation pass. 5 further commits,
      be a self-assessment of my own text and is worth less than the first review.
   4. **Resume Task 3 / RCA-001 Phase 2**, the standing objective, with the coverage
      sweep first (only Chapter 4 is in `[coverage]`).
+  5. **Run the top-level statement sweep** whenever a claim is rescoped in the body,
+     and once more before deposit: `docs/review/top-level-statement-sweep.md`.
 
 - **Blockers/Issues**
   - **The Word file lock recurred four times this session.** `render.ps1` deletes the
@@ -481,6 +483,11 @@ manuscript-editing support tooling.
 - **Dedication-style front matter (closed 2026-09-02):** Dedicatoria and
   Agradecimientos in right-aligned italics under centred upright headings, generated
   post-render.
+- **Top-level statement sweep (added 2026-09-02):**
+  `docs/review/top-level-statement-sweep.md` maps the 14 statements read as promises
+  — objetivo general, OE1-6, H1-H3, P1, P2, Resumen, Abstract, `tbl-estudios` — to the
+  body sections whose correction would falsify them, with the checks that catch the
+  mechanical half and a sweep log. Wired into RCA-001 as a review trigger.
 
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
