@@ -1,7 +1,7 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-08-30
+- **Last Updated:** 2026-09-02
 - **Active Role:** Scientific Editor / Developer
 - **Mode (2026-08-30):** PUBLICATION / EXECUTION - repository restructuring plus a thesis
   front-matter and presentation pass. Nine commits on the new branch `thesis/rca-001-phase-2`,
@@ -343,6 +343,84 @@ Authoritative summary of the 2026-08-30 session. 15 commits on
   - The fragment generator rewrites files with LF; if only line endings change,
     `git checkout -- pub/fragments/` to drop the churn.
 
+## Session Handoff - 2026-09-02
+
+Continues the 2026-08-30 session below, which remains accurate for the branch
+restructuring and the first presentation pass. 5 further commits,
+`ceb87964f`..`18f183a4e`. Working tree clean, everything pushed.
+
+- **Completed**
+  - **Dedication-style front matter.** Dedicatoria and Agradecimientos are set in
+    right-aligned italics under centred, upright headings, generated post-render by
+    `format_dedication_sections`. Scope is bounded by the next heading of any level:
+    the only right-aligned paragraphs in the document are those six body lines plus
+    the two empty page-break paragraphs inside the sections, and Resumen immediately
+    after is still justified and upright.
+  - **Resumen and Abstract rewritten, and mirrored.** A Scientific Editor review
+    scored the old Resumen 2.83/5 (Weak Reject) as a standalone summary against the
+    thesis's own 4.3/5 Accept - the gap being that the abstract had not kept up with
+    the corrected body. Four majors fixed: (F01) it asserted LIME instability as
+    "estructuralmente inestables", the universal framing Chapter 6 explicitly
+    retracts, and the English abstract repeated it - both now carry the scoped claim;
+    (F02) OE6 and its negative inter-judge result were absent entirely and now have
+    their own paragraph; (F03) the cross-dataset replication was unmentioned;
+    (F04) the abstract carried no quantitative result at all. Three minors also
+    closed: "SHAP domina" softened to the mean-with-exceptions form Ch.4 supports,
+    the taxonomy now reports its three construct gaps, and the ES/EN framing mismatch
+    resolved. Resumen 245 -> 404 words, Abstract 341, three paragraphs each.
+  - **Registry discipline held.** Only already-registered figures were used, so no new
+    resolver was needed - "12/12" and the 0.75 ICC threshold were deliberately
+    avoided because neither is registered. Five claims gained 15 sites (225 -> 240).
+    Negative-tested: replacing the ICC 0.321 fails `verify_claims.py`, and localises
+    to the ES fragment while `claims.toml` still holds the value in the English text.
+  - **The Word-saved DOCX with a refreshed TOC** was committed rather than discarded
+    (`ceb87964f`), then necessarily replaced by later renders.
+
+- **Current State**
+  - `thesis/rca-001-phase-2` at `18f183a4e`, pushed; `main` at `72a2a9665`. Clean tree.
+  - `scripts/enforce_docx_thesis_format.py` gained `format_dedication_sections` and
+    `DEDICATION_SECTIONS`, joining the existing post-render set.
+  - The Resumen and Abstract live in `pub/claims.toml` and flow to
+    `pub/fragments/thesis_resumen_es.qmd` and `thesis_abstract_en.qmd`; both were
+    regenerated from the SSOT, never hand-edited.
+  - Rendered DOCX current and committed. Verified in it: retracted wording 0
+    occurrences, the new figures present, 82/82 tables centred, 38/38 data tables
+    bordered and bold-headed, 0/7 figure wrappers bordered, 0 duplicate `w:pPr`,
+    Capitulo 1-6 intact, raw slugs 0, unresolved crossrefs 0.
+  - All three verifiers green: 142 claims, 240 manuscript sites.
+
+- **Next Steps**
+  1. **Refresh the TOC in Word** (author, manual, recurring after every render).
+  2. **Confirm the faculty abstract word limit.** The Resumen is 404 words, up from
+     245. If capped, the closing sentence of paragraph 3 and the taxonomy clause in
+     paragraph 1 are the cleanest cuts - neither carries a registered figure, so
+     trimming them needs no registry work.
+  3. **Have the author read the revised Resumen.** The re-score after the edit would
+     be a self-assessment of my own text and is worth less than the first review.
+  4. **Resume Task 3 / RCA-001 Phase 2**, the standing objective, with the coverage
+     sweep first (only Chapter 4 is in `[coverage]`).
+
+- **Blockers/Issues**
+  - **The Word file lock recurred four times this session.** `render.ps1` deletes the
+    old DOCX first and fails while the document is open; a stale `~WRL*.tmp` in
+    `_output` is the tell. Workaround that avoids the hook's `_output*` glob:
+    `quarto render --to docx --output-dir _scratch`, then patch that copy by hand.
+  - Everything listed under the 2026-08-30 handoff's Blockers is unchanged: the CIFIE
+    template, the corpus PDFs held only on this machine, Paper B+C F03, A11, and the
+    harmless `quarto clean` error.
+
+- **Notes**
+  - **An abstract is a manuscript site like any other.** The August rigor review
+    scoped the LIME claim across Ch.4-6 and Paper B+C and registered a retired value
+    for it, but nothing swept `pub/claims.toml`, so the retracted wording survived for
+    five weeks in the most-read text of the thesis. When a claim is rescoped, sweep
+    the abstracts in the same pass.
+  - **Prefer figures that are already registered when editing an abstract.** Reaching
+    for an unregistered number ("12/12", the 0.75 ICC threshold) turns a prose edit
+    into a resolver-writing exercise or forces an `[[unbacked]]` entry.
+  - Everything in the 2026-08-30 Notes still applies, in particular that a green
+    render proves nothing about layout.
+
 ## Current Objective
 **Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
@@ -396,6 +474,13 @@ manuscript-editing support tooling.
   `{.unnumbered}` markers from the .qmd sources because the rendered DOCX gives numbered and
   unnumbered headings identical style and pPr), `format_tables` (+ `set_table_borders`,
   `bolden_header_row`, `is_layout_wrapper`) and `centre_captions_and_figures`.
+- **Resumen and Abstract rewritten (closed 2026-09-02):** four major and three minor
+  editorial findings closed, including a claim the body had retracted five weeks
+  earlier; both are mirrored and regenerated from `pub/claims.toml`. See the
+  2026-09-02 Session Handoff.
+- **Dedication-style front matter (closed 2026-09-02):** Dedicatoria and
+  Agradecimientos in right-aligned italics under centred upright headings, generated
+  post-render.
 
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
@@ -598,6 +683,14 @@ manuscript-editing support tooling.
   numbers are applied post-render by `number_headings`.
 - Chapter and section numbers must never be typed literally into headings; they are generated.
 - Thesis prose is Spanish; interaction, reports and commit messages are English.
+- The Resumen and Abstract are authored in `pub/claims.toml` and regenerated into
+  `pub/fragments/`; never hand-edit the fragments, and keep the two languages mirrored
+  paragraph for paragraph. Any figure either one cites must be registered in
+  `pub/claim_registry.toml` first, with the fragment listed as a site.
+- Dedicatoria and Agradecimientos formatting is generated post-render via
+  `DEDICATION_SECTIONS`; do not hand-format those sections in the `.qmd` sources.
+- Single-cell tables are pandoc layout wrappers, around both captioned tables and
+  figures, and must never take a border - bordering them is what framed every figure.
 
 ## Session Notes
 - Synchronized thesis, Paper A, and Paper B+C around the June 13 validation-boundary assessment: functionally grounded comparative evidence is retained as the supported contribution; synthetic/transparent-model ground-truth tests, dependency-aware perturbation, and human-centered validation remain future validity-strengthening work.
