@@ -284,6 +284,7 @@ source = "wilcoxon:all_models:stability:cohens_dz"
 value = "3.00"
 tolerance = 0.005
 appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "3.00" },
   { file = "pub/claims.toml", text = "3.00" },
   { file = "pub/fragments/thesis_resumen_es.qmd", text = "3.00" },
   { file = "pub/fragments/thesis_abstract_en.qmd", text = "3.00" },
@@ -1327,7 +1328,7 @@ files = [
   # registered or structural; the remaining 6 are differences and complements
   # of registered values and need a composing resolver. See the 2026-09-02
   # sweep note in docs/review/top-level-statement-sweep.md.
-  # "thesis/capitulo-6-conclusiones.qmd",
+  "thesis/capitulo-6-conclusiones.qmd",
 ]
 # Design constants and decision thresholds, not measured results: Holm-adjusted
 # alpha levels, Cohen's d_z interpretation cut-points, the selection-criterion
@@ -1771,4 +1772,58 @@ tolerance = 0.001
 appears_in = [
   { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.196" },
   { file = "docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex", text = "0.196" },
+]
+
+# ---------------------------------------------------------------------------
+# Chapter 6 sweep, part 2 (2026-09-04). Differences and complements of values
+# already registered individually, resolvable through the composing 'diff'
+# kind rather than recorded as unbacked -- they are derivable, just not by a
+# single lookup. Registering the Adult SHAP-LIME gap showed it to be the RF
+# cell (0.2716), not the benchmark-wide figure (0.2479); the chapter now says
+# so, per RCA-001 invariant 6.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp3.gap.shap_anchors.min"
+source = "diff:exp3_shap:german_credit:xgb:fidelity|exp3_anchors:german_credit:xgb:fidelity"
+value = "0.2601"
+tolerance = 0.005
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.26" },
+]
+
+[[claim]]
+id = "exp3.gap.shap_anchors.max"
+source = "diff:exp3_shap:breast_cancer:rf:fidelity|exp3_anchors:breast_cancer:rf:fidelity"
+value = "0.5137"
+tolerance = 0.005
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.51" },
+]
+
+[[claim]]
+id = "exp3.gap.shap_lime.breast_cancer.rf"
+source = "diff:exp3_shap:breast_cancer:rf:fidelity|exp3_lime:breast_cancer:rf:fidelity"
+value = "0.0652"
+tolerance = 0.005
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.07" },
+]
+
+[[claim]]
+id = "exp2.gap.shap_lime.rf"
+source = "diff:exp2_model_mean:shap:fidelity:rf|exp2_model_mean:lime:fidelity:rf"
+value = "0.2716"
+tolerance = 0.005
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "0.27" },
+]
+
+[[claim]]
+id = "exp2.missing_pct"
+source = "exp2_missing_pct"
+value = "8.33"
+tolerance = 0.05
+appears_in = [
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "8.3" },
 ]

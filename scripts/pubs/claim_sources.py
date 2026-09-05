@@ -263,6 +263,28 @@ def resolve(expr: str) -> float:
                 return diff / float(row["cohens_dz"])
         raise MissingArtifact(f"wilcoxon row not found: {comparison_set}/{metric}")
 
+    if kind == "diff":
+        # Composing resolver: "diff:<exprA>|<exprB>" -> resolve(A) - resolve(B).
+        # The operands are themselves colon-delimited, so they are separated by
+        # "|" rather than ":". Chapters state gaps and ranges as differences of
+        # quantities that are individually registered; without this they could
+        # only be recorded as unbacked, which would be untrue -- they are
+        # derivable, just not by a single lookup.
+        left, sep, right = expr.split(":", 1)[1].partition("|")
+        if not sep:
+            raise ValueError(f"diff expects two |-separated expressions: {expr}")
+        return resolve(left) - resolve(right)
+
+    if kind == "exp2_missing_pct":
+        # Share of the planned EXP2 grid with no analysable artifact, the
+        # complement of the coverage percentage reported in Chapter 3.
+        planned = float(args[0]) if args else 300.0
+        qualified = sum(
+            len(_exp2_values(method, "fidelity"))
+            for method in ("shap", "lime", "anchors", "dice")
+        )
+        return 100.0 * (1.0 - qualified / planned)
+
     if kind == "exp2_runs":
         (method,) = args
         return float(len(_exp2_values(method, "fidelity")))
