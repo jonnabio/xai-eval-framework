@@ -1,7 +1,7 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-02
+- **Last Updated:** 2026-09-04
 - **Active Role:** Scientific Editor / Developer
 - **Mode (2026-08-30):** PUBLICATION / EXECUTION - repository restructuring plus a thesis
   front-matter and presentation pass. Nine commits on the new branch `thesis/rca-001-phase-2`,
@@ -423,6 +423,80 @@ restructuring and the first presentation pass. 5 further commits,
   - Everything in the 2026-08-30 Notes still applies, in particular that a green
     render proves nothing about layout.
 
+## Session Handoff - 2026-09-04
+
+Task 3 / RCA-001 Phase 2 is under way: the coverage sweep. 4 commits,
+`b17573245`..`ca309ac6b`. Working tree clean, everything pushed.
+
+- **Completed**
+  - **Objetivo general revised** after a Scientific Editor review scored it 3.00/5.
+    `validar` overreached what Ch.6 concedes and became `evaluar empíricamente`; the
+    three components now sit in apposition, which defines "multinivel" at its first
+    use, since the term was load-bearing and enumerated nowhere; a closing clause on
+    delimiting validity scope gives OE6 somewhere to belong.
+  - **Top-level statement sweep created** (`docs/review/top-level-statement-sweep.md`)
+    and wired into RCA-001 as a sixth review trigger. It maps the 14 statements read
+    as promises to the sections that can falsify them, because `verify_claims.py`
+    checks numbers and these are prose.
+  - **Coverage sweep: Chapters 6 and 5 registered and enforced.** `[coverage]` went
+    from one file to three (Ch.4, Ch.6, Ch.5). Registry 142 -> 166 claims,
+    225 -> 270 sites.
+  - **Two defects found in Ch.6, both by asking an artifact rather than reading:**
+    (1) the masking-bias passage cited Cramér's V = 0.34 for education/occupation,
+    the value RCA-002 corrected to 0.196 in the supplementary on 2026-08-28 and never
+    propagated -- wrong by 74% for five weeks; (2) "+0.07 en BC frente a +0.27 en
+    Adult" are both RF cells, not dataset-wide figures (the benchmark-wide Adult gap
+    is 0.2479), so the scope is now stated -- RCA-001 invariant 6, the F09 class.
+    One editorial tightening: `$d_z > 2.8$`, an author-chosen floor, became
+    `$d_z \geq 3.00$`, which is exact and already registered.
+  - **Chapter 5 came back clean.** All fourteen EXP4 cells re-derived exactly on the
+    first attempt; nothing in that table changed.
+  - **A composing resolver was the blocker and is now built.** Six Ch.6 literals were
+    differences or complements of registered values, so `[[unbacked]]` would have been
+    untrue. `claim_sources.py` gained `diff:<exprA>|<exprB>` and `exp2_missing_pct`.
+
+- **Current State**
+  - `thesis/rca-001-phase-2` at `ca309ac6b`, pushed; `main` at `72a2a9665`. Clean tree.
+  - `[coverage]` enforces `capitulo-4-resultados`, `capitulo-6-conclusiones`,
+    `capitulo-5-taxonomia`. 166 claims, 270 sites, 26 retired-value guards.
+  - All three verifiers green. DOCX rebuilt and current.
+
+- **Next Steps**
+  1. **Refresh the TOC in Word** (author, manual, recurring after every render).
+  2. **Continue the coverage sweep, one file at a time.** Remaining: `capitulo-3`,
+     `capitulo-2`, `capitulo-1`, `apendices`, Paper A, Paper B+C, the supplementary.
+     Take `capitulo-3` next: it carries the design tables and the FOM-7 gate
+     definitions. Workflow: add the file to `[coverage]`, run
+     `python scripts/pubs/verify_claims.py --coverage-report` (exits 0), triage,
+     register or declare structural, then leave enforcement on.
+  3. **Then RCA-001 Phase 2 proper:** emit registry values as LaTeX macros and Quarto
+     inline values, and add a CI job building all four outputs, failing on undefined
+     references and crossref warnings.
+  4. **Run the top-level statement sweep** before deposit and after any rescoping.
+
+- **Blockers/Issues**
+  - **The Word file lock** recurs constantly; close the document before rendering. To
+    validate without closing: `quarto render --to docx --output-dir _scratch`, then
+    patch that copy by hand (`_scratch` avoids the post-render hook's `_output*` glob).
+  - Everything under the 2026-09-02 and 2026-08-30 handoffs is unchanged: the CIFIE
+    template, the corpus PDFs held only on this machine, Paper B+C F03, A11, and the
+    harmless `quarto clean` error.
+
+- **Notes**
+  - **The sweep is finding real defects at a steady rate:** two files, four findings
+    (F14/F15 in Ch.4; the stale V and the unstated RF scope in Ch.6). Ch.5 clean. Treat
+    the remaining files as likely to contain one or two each, not as a formality.
+  - **Before calling a mismatch a defect, try every aggregation.** The Adult gap looked
+    wrong at 0.2479 vs 0.27 until the per-model RF figure (0.2716) matched; the finding
+    was undisclosed scope, not a wrong number. This is what F15 taught.
+  - **`[[unbacked]]` is for values that cannot be re-derived, not for values that need
+    arithmetic.** Prefer a resolver.
+  - **Editing `pub/claim_registry.toml` programmatically:** it is CRLF, and joining a
+    block with NL and then calling `.replace("\n", NL)` double-converts, producing
+    CR-CR-LF that breaks the TOML parser. Always assert
+    `open(p,'rb').read().count(b'\r\r\n') == 0` and re-parse before committing.
+  - The EXP4 dimension key in the artifact is `concision`, not `conciseness`.
+
 ## Current Objective
 **Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
@@ -488,6 +562,10 @@ manuscript-editing support tooling.
   — objetivo general, OE1-6, H1-H3, P1, P2, Resumen, Abstract, `tbl-estudios` — to the
   body sections whose correction would falsify them, with the checks that catch the
   mechanical half and a sweep log. Wired into RCA-001 as a review trigger.
+- **RCA-001 Phase 2 coverage sweep, in progress (2026-09-04):** three of ten files
+  enforced (Ch.4, Ch.6, Ch.5); 166 claims / 270 sites; `diff` and `exp2_missing_pct`
+  resolvers added. Two defects found in Ch.6, none in Ch.5. See the 2026-09-04
+  Session Handoff.
 
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
@@ -698,6 +776,11 @@ manuscript-editing support tooling.
   `DEDICATION_SECTIONS`; do not hand-format those sections in the `.qmd` sources.
 - Single-cell tables are pandoc layout wrappers, around both captioned tables and
   figures, and must never take a border - bordering them is what framed every figure.
+- A number that needs arithmetic over registered values is not `[[unbacked]]`: compose
+  it with the `diff:<exprA>|<exprB>` resolver kind. `[[unbacked]]` is reserved for
+  values that genuinely cannot be re-derived.
+- Wherever a gap, range or mean could be read at more than one aggregation level, the
+  level must be stated in the sentence (RCA-001 invariant 6).
 
 ## Session Notes
 - Synchronized thesis, Paper A, and Paper B+C around the June 13 validation-boundary assessment: functionally grounded comparative evidence is retained as the supported contribution; synthetic/transparent-model ground-truth tests, dependency-aware perturbation, and human-centered validation remain future validity-strengthening work.
