@@ -28,20 +28,23 @@ because identity-revealing content is guarded in terms of that option:
 
 | Build | Preamble line | Effect |
 | ----- | ------------- | ------ |
-| Submission (default) | `\usepackage{tmlr}` | anonymous; acknowledgments and prior-publication disclosure suppressed; repository cited as an anonymised mirror |
-| Camera-ready | `\usepackage[accepted]{tmlr}` | authors, acknowledgments, disclosure and the real repository URL restored |
+| Submission (default) | `\usepackage{tmlr}` | anonymous; acknowledgments suppressed; artifacts cited as the supplementary bundle |
+| Camera-ready | `\usepackage[accepted]{tmlr}` | authors, acknowledgments, the repository URL and the archive DOI restored |
 | Preprint / arXiv | `\usepackage[preprint]{tmlr}` | as accepted, without the TMLR running head |
 
-Two guards exist. `\ifdeanon{shown}{hidden}` is for inline fragments; the
+Two guard forms exist. `\ifdeanon{shown}{hidden}` is for inline fragments; the
 block form `\ifdeanonymised ... \fi` is for content spanning paragraphs, where
-the argument-grabbing macro would be fragile. Three things are guarded today:
+the argument-grabbing macro would be fragile. Three fragments are guarded
+today, all anonymity rather than policy:
 
 1. the `\acks{...}` funding and competing-interests statement;
 2. the GitHub URL in §Code and Artifact Availability;
-(A third guard covered the prior-publication disclosure. It was removed on
-2026-09-06: with no result reported in both documents, §Validity "Provenance of
-the Empirical Cohort" is an ordinary provenance statement and is visible to
-reviewers.)
+3. the archive DOI in the same section.
+
+A fourth guard covered the prior-publication disclosure and was removed on
+2026-09-06. With no result reported in both documents, §Validity "Provenance
+of the Empirical Cohort" is an ordinary provenance statement, and it is
+visible to reviewers.
 
 ## Before submitting
 
@@ -49,12 +52,12 @@ reviewers.)
   this submission and the published RIMI paper, but the two rest on the same
   executions. `EIC_ENQUIRY_prior_publication.md` is the note; the paper states
   the same provenance openly in §Validity.
-- **Replace the anonymised-mirror wording with a real anonymous artifact
-  link** (for example anonymous.4open.science). Reviewers otherwise have no way
-  to reach the code, and the abstract promises that all experimental artifacts
-  are publicly available.
+- **Attach the artifact bundle.** Build it with
+  `python scripts/pubs/build_artifact_bundle.py` and upload
+  `paper_bc_artifacts.zip` as supplementary material; §Code and Artifact
+  Availability points reviewers at it.
 - Rebuild and confirm the anonymous PDF shows no author name, email,
-  affiliation, acknowledgments or disclosure section.
+  affiliation or acknowledgments.
 
 Set `\month` and `\year`, and point `\openreview` at the forum URL, only for
 the camera-ready build.
