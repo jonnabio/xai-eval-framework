@@ -227,7 +227,7 @@ fijo). Caveat de implementación registrado en el inventario FOM-7.
 opuesta, importancia definida como $\text{imp}_i = |x_i - x'_i|$,
 `total_CFs = 1` efectivo (parámetro YAML no consumido).
 
-## Operacionalización de las métricas
+## Operacionalización de las métricas {#sec-metricas}
 
 Las cinco métricas primarias se computan por instancia y se agregan a nivel de
 ejecución mediante media aritmética. La dirección de cada métrica se fija en
@@ -358,7 +358,7 @@ $$\text{Congelación} \to \text{Ejecución} \to \text{Auditoría} \to
 \text{Armonización} \to \text{Exportación} \to \text{Perfilado} \to
 \text{Reporte}$$
 
-La Tabla @tbl-fom7-gates resume la función de gobierno de cada puerta. La
+La Tabla -@tbl-fom7-gates resume la función de gobierno de cada puerta. La
 tabla explicita qué entra, qué sale y qué modo de fallo queda controlado, de
 modo que FOM-7 pueda auditarse como protocolo y no solo como narración
 metodológica.
@@ -371,7 +371,7 @@ metodológica.
 | 4. Armonización | Convertir resultados heterogéneos en tablas de análisis | Artefactos calificados y `outputs/batch_results.csv` | Métricas a nivel de ejecución y bloque | Campos no comparables, mezclas de esquema | `exp2_run_level_metrics.csv`, `exp2_block_method_summary.csv` |
 | 5. Exportación | Generar tablas inferenciales deterministas | Tablas armonizadas | Friedman, Nemenyi y Wilcoxon exportados | Cálculos manuales, doble conteo, pseudorreplicación | `friedman_results.csv`, `nemenyi_*.csv`, `wilcoxon_*.csv` |
 | 6. Perfilado | Cuantificar reproducibilidad bajo semillas | Réplicas EXP1 y métricas primarias | CV por método/métrica | Confundir variación de semilla con efecto de método | `experiments/exp1_adult/reproducibility/reproducibility_report.csv` |
-| 7. Reporte | Vincular cada claim con evidencia identificable | Resultados, tablas, scripts, limitaciones | Claims trazables en Capítulo 4 | Sobreclaiming, afirmaciones no auditables | Tablas @tbl-results-overview y @tbl-claim-traceability |
+| 7. Reporte | Vincular cada claim con evidencia identificable | Resultados, tablas, scripts, limitaciones | Claims trazables en Capítulo 4 | Sobreclaiming, afirmaciones no auditables | Tablas -@tbl-results-overview y -@tbl-claim-traceability |
 
 : Puertas FOM-7, artefactos y modos de fallo controlados. {#tbl-fom7-gates}
 
@@ -655,7 +655,7 @@ EXP4 es un estudio de calibración empírica cuyo propósito es cuantificar la
 convergencia inter-juez de evaluadores LLM sobre explicaciones del corpus
 experimental de EXP2. Su función en la tesis es proporcionar evidencia
 cuantitativa de la brecha de evaluación semántica identificada en la taxonomía
-del Capítulo 5 (Brecha 3, §sec-taxonomia-brechas: la evaluación semántica crece más rápido que su base
+del Capítulo 5 (Brecha 3, §-@sec-taxonomia-brechas: la evaluación semántica crece más rápido que su base
 de validación empírica).
 
 **Muestra.** Se seleccionaron $n = 147$ pares de salidas de explicación del
@@ -666,7 +666,7 @@ sobre la misma instancia o configuración comparable.
 **Jueces.** Tres jueces LLM independientes puntuaron cada par de forma
 ciega (sin conocer la puntuación de los otros jueces) sobre siete dimensiones
 semánticas estructuradas mediante una rúbrica de escala 1–5 por dimensión
-(las siete dimensiones se enumeran en la Tabla @tbl-exp4-icc del Capítulo 5).
+(las siete dimensiones se enumeran en la Tabla -@tbl-exp4-icc del Capítulo 5).
 El uso de modelos de lenguaje como instrumento de medida exige cautela: estos
 sistemas producen salidas fluidas y plausibles con independencia de su
 corrección factual, un modo de fallo ampliamente documentado en generación de

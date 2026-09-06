@@ -1,6 +1,6 @@
 # Model-Agnostic XAI Evaluation Framework
 
-> **PhD Thesis Project**: "Marco para la Evaluación Multinivel de la Explicabilidad en IA: Una Integración de Benchmarking Técnico y Protocolos de Evaluación Semántica"
+> **PhD Thesis Project**: "Arquitectura Agnóstica para la Interpretabilidad de Modelos de Inteligencia Artificial de Caja Negra: Integración de Benchmarking Técnico, Protocolo Reproducible (FOM-7) y Taxonomía de Métricas"
 > [![Render Status](https://img.shields.io/badge/Render-Deployed-success)](https://xai-benchmark-frontend.onrender.com)
 
 A modular, extensible framework for benchmarking Explainable AI (XAI) methods. This toolkit provides rigorous evaluation pipelines combining classical metrics (fidelity, stability) with novel LLM-based semantic evaluation for post-hoc explanations (LIME, SHAP).

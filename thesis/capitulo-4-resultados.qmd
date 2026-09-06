@@ -46,7 +46,7 @@ al menos una ejecución calificada (véase Capítulo 3). Para el análisis parea
 SHAP-LIME (H3), se utilizan las 75 celdas $(g, s, n)$ coincidentes en las que
 ambos métodos producen resultados calificados.
 
-La Tabla @tbl-results-overview resume las decisiones inferenciales principales
+La Tabla -@tbl-results-overview resume las decisiones inferenciales principales
 antes de desarrollar cada resultado. Su función es separar la evidencia
 estadística de la interpretación sustantiva y hacer explícita la unidad de
 análisis de cada claim.
@@ -319,7 +319,7 @@ fidelidad = 0.380, coste = 11,708 ms. El ratio activo más alto de todos los
 métodos (0.226 frente a 0.085 de LIME) refleja que SHAP puede distribuir
 importancias entre un mayor número de características cuando el modelo así lo
 requiere, lo que es un reflejo adecuado de la complejidad real del modelo; por
-la dirección de la métrica (§sec-metricas), esto significa que SHAP es el
+la dirección de la métrica (§-@sec-metricas), esto significa que SHAP es el
 método *menos* parsimonioso del benchmark.
 
 El coste es la dimensión adversa de SHAP. Todas las cifras de coste de esta
@@ -471,16 +471,16 @@ pero no en SHAP para modelos de árbol (TreeSHAP escala logarítmicamente).
 
 ## Trazabilidad de claims principales {#sec-trazabilidad-resultados}
 
-La Tabla @tbl-claim-traceability vincula las afirmaciones principales con los
+La Tabla -@tbl-claim-traceability vincula las afirmaciones principales con los
 artefactos que las sostienen. Esta tabla implementa la puerta 7 de FOM-7 dentro
 del capítulo de resultados.
 
 | Claim | Evidencia en tesis | Artefacto fuente | Script / proceso | Alcance |
 |:--|:--|:--|:--|:--|
-| Existen diferencias globales entre métodos en fidelidad | Tablas @tbl-friedman-fidelity y @tbl-nemenyi-fidelity | `outputs/analysis/paper_a_exp2_stats/friedman_results.csv`, `nemenyi_fidelity.csv` | `scripts/run_exp2_statistical_analysis.py` | 15 bloques Adult Income, cuatro métodos, cinco modelos |
-| Existen diferencias globales entre métodos en estabilidad | Tabla @tbl-friedman-stability y localización Nemenyi en texto | `friedman_results.csv`, `nemenyi_stability.csv` | `scripts/run_exp2_statistical_analysis.py` | Mismo diseño de bloques; estabilidad como similitud coseno |
-| SHAP supera a LIME en fidelidad y estabilidad pero aumenta el coste medio | Tabla @tbl-paired-shap-lime | `wilcoxon_shap_lime_all_models.csv`, `paired_cells_shap_lime_all_models.csv` | `scripts/run_exp2_statistical_analysis.py` | 75 celdas pareadas $(g,s,n)$; no generaliza fuera de Adult/tabular |
-| FOM-7 produce señales reproducibles para métricas principales | Tabla @tbl-cv-p1 | `outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv` (estrato RF/$N=100$, cinco semillas); perfil complementario en `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | Agregación por celda desde el nivel de ejecución | Confirmación parcial; LIME-estabilidad queda limitada por media cercana a cero |
+| Existen diferencias globales entre métodos en fidelidad | Tablas -@tbl-friedman-fidelity y -@tbl-nemenyi-fidelity | `outputs/analysis/paper_a_exp2_stats/friedman_results.csv`, `nemenyi_fidelity.csv` | `scripts/run_exp2_statistical_analysis.py` | 15 bloques Adult Income, cuatro métodos, cinco modelos |
+| Existen diferencias globales entre métodos en estabilidad | Tabla -@tbl-friedman-stability y localización Nemenyi en texto | `friedman_results.csv`, `nemenyi_stability.csv` | `scripts/run_exp2_statistical_analysis.py` | Mismo diseño de bloques; estabilidad como similitud coseno |
+| SHAP supera a LIME en fidelidad y estabilidad pero aumenta el coste medio | Tabla -@tbl-paired-shap-lime | `wilcoxon_shap_lime_all_models.csv`, `paired_cells_shap_lime_all_models.csv` | `scripts/run_exp2_statistical_analysis.py` | 75 celdas pareadas $(g,s,n)$; no generaliza fuera de Adult/tabular |
+| FOM-7 produce señales reproducibles para métricas principales | Tabla -@tbl-cv-p1 | `outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv` (estrato RF/$N=100$, cinco semillas); perfil complementario en `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | Agregación por celda desde el nivel de ejecución | Confirmación parcial; LIME-estabilidad queda limitada por media cercana a cero |
 | La cobertura faltante no invalida las pruebas confirmativas principales | Capítulo 3, tablas de cobertura | `exp2_run_inventory.csv`, árbol `experiments/exp2_scaled/results/` | Auditoría FOM-7 puerta 3 | Afecta precisión de Anchors/DiCE; no afecta SHAP-LIME pareado |
 
 : Trazabilidad de claims, artefactos y alcance inferencial. {#tbl-claim-traceability}
