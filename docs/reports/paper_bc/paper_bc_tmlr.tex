@@ -4,7 +4,7 @@
 % "Anonymous authors / Paper under double-blind review" unless it is loaded
 % with [accepted] or [preprint]. Do not de-anonymise by hand: flip the option
 % and everything guarded by \ifdeanon below follows.
-%   camera-ready   \usepackage[accepted]{tmlr}
+%   camera-ready   \usepackage{tmlr}
 %   preprint/arXiv \usepackage[preprint]{tmlr}
 \usepackage{tmlr}
 
@@ -31,6 +31,9 @@
 % above so the anonymous and de-anonymised builds cannot disagree.
 \makeatletter
 \newcommand{\ifdeanon}[2]{\if@accepted#1\else#2\fi}
+% Block form, for content spanning paragraphs: \ifdeanonymised ... \fi
+\newif\ifdeanonymised
+\if@accepted\deanonymisedtrue\fi
 \makeatother
 
 % tmlr.sty provides no keywords environment, but jmlr2e did and
@@ -125,6 +128,15 @@ are Shapley-based contributions with game-theoretic guarantees
 known, but do not by themselves resolve deployment choices across model
 families, sampling regimes, and runtime constraints
 \citep{retzlaff2024posthoc,ali2023trustworthy}.
+
+The multi-metric evaluation protocol and the four-method omnibus comparison
+that the benchmark reported here extends were introduced by
+\citet{herrera2026framework}, which establishes the measurement instrument,
+the reproducibility contract, and the omnibus result that the four
+explainer families differ significantly on every endpoint. That work leaves
+open which of the two dominant model-agnostic explainers should be preferred
+under a given deployment constraint, and offers no account of why metric
+families disagree in the first place. Both questions are taken up here.
 
 This paper makes five contributions:
 \begin{enumerate}[leftmargin=*]
@@ -704,6 +716,17 @@ designed to produce auditable, scope-bounded evidence on quality-cost
 trade-offs under controlled conditions, directly instantiating the
 ``proxy and robustness'' cell of the layered evaluation architecture.
 
+The runs analysed in this section come from the same execution cohort
+released by \citet{herrera2026framework}, under the protocol and
+reproducibility contract defined there. The analysis is not the same: that
+study reports an omnibus comparison across four explainer families at the
+block level, whereas the present section is a paired, cell-matched contrast
+of the two model-agnostic explainers at the run level, with directional
+hypotheses, Holm-corrected paired tests, and per-endpoint effect sizes that
+an omnibus test cannot supply. Re-using the cohort rather than re-executing
+it is deliberate: a fresh execution would introduce environment variation
+into a comparison whose whole purpose is to isolate the explainer.
+
 \subsection{Research Questions and Hypotheses}
 \label{sec:rqs}
 
@@ -1186,6 +1209,27 @@ architectural affordance, then by deployment constraint.
 \label{sec:validity}
 % -----------------------------------------------------------------------
 
+% Suppressed while under review: naming the shared cohort identifies the
+% authors. It is NOT withdrawn -- the overlap must be declared to the Action
+% Editor in the OpenReview submission form instead, and this block is
+% restored automatically in the [accepted] and [preprint] builds.
+% See BUILD.md, "Before submitting".
+\ifdeanonymised
+\subsection{Relationship to Previously Published Work}
+\label{sec:prior_publication}
+
+The empirical cohort underlying Section~\ref{sec:empirical} has been
+published previously \citep{herrera2026framework}, and the two studies
+therefore share their raw execution artifacts, their preprocessing pipeline,
+and their model controls. What is new here is the taxonomy, the scoping
+corpus and gap analysis, the LLM-judge reliability measurement, the paired
+run-level inferential treatment of the LIME--SHAP contrast, and the
+cross-dataset extension. Readers comparing the two should treat the shared
+cohort as one body of evidence reported at two levels of aggregation, not as
+independent replications: agreement between them is arithmetic, not
+corroborative.
+\fi
+
 \subsection{Interpretation Scope of SHAP--LIME Comparisons}
 \label{sec:interpretation_scope}
 
@@ -1664,6 +1708,15 @@ Quantus: An explainable AI toolkit for responsible evaluation of neural
 network explanations and beyond.
 \emph{Journal of Machine Learning Research}, 24:1--11.
 
+\bibitem[Herrera Vasquez and Herrero Uceda(2026)]{herrera2026framework}
+Herrera Vasquez, J. and Herrero Uceda, M. (2026).
+A framework for rigorous evaluation of model-agnostic explainability
+methods: multi-metric statistical benchmarking, operational protocol, and
+reproducibility.
+\emph{Revista de Investigaci\'on Multidisciplinaria Iberoamericana (RIMI)},
+(3).
+\url{https://doi.org/10.69850/rimi.vi3.307}.
+
 \bibitem[Holm(1979)]{holm1979simple}
 Holm, S. (1979).
 A simple sequentially rejective multiple test procedure.
@@ -1768,7 +1821,7 @@ In \emph{Proceedings of the 2020 Conference on Fairness, Accountability,
 and Transparency}, 607--617.
 
 \bibitem[Nauta et~al.(2023)Nauta, Trienes, Pathak, Nguyen, Peters,
-Schmitt, Schlötterer, van Keulen, and Seifert]{nauta2023anecdotal}
+Schmitt, SchlÃ¶tterer, van Keulen, and Seifert]{nauta2023anecdotal}
 Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y.,
 Schl\"{o}tterer, J., van Keulen, M., and Seifert, C. (2023).
 From anecdotal evidence to quantitative evaluation methods: A systematic
