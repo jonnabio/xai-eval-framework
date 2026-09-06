@@ -1,7 +1,7 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-04
+- **Last Updated:** 2026-09-05
 - **Active Role:** Scientific Editor / Developer
 - **Mode (2026-08-30):** PUBLICATION / EXECUTION - repository restructuring plus a thesis
   front-matter and presentation pass. Nine commits on the new branch `thesis/rca-001-phase-2`,
@@ -425,8 +425,13 @@ restructuring and the first presentation pass. 5 further commits,
 
 ## Session Handoff - 2026-09-04
 
-Task 3 / RCA-001 Phase 2 is under way: the coverage sweep. 4 commits,
-`b17573245`..`ca309ac6b`. Working tree clean, everything pushed.
+Task 3 / RCA-001 Phase 2 is under way: the coverage sweep. **Session closed
+2026-09-05.** 5 commits, `b17573245`..`c9d504da6` (the fifth being this handoff
+itself). Working tree clean, nothing unpushed, no commits after `c9d504da6`.
+Verified at close: `verify_claims.py` 166 claims / 270 sites / 26 retired-value
+guards / 10 cited artifacts / 3 files fully registered; `verify_sync.py` and
+`verify_exp4_reconstruction.py` green; `main` at `72a2a9665`, branch at
+`c9d504da6`, and origin holds only those two branches.
 
 - **Completed**
   - **Objetivo general revised** after a Scientific Editor review scored it 3.00/5.
