@@ -54,9 +54,6 @@ and Paired Empirical Comparison of LIME versus SHAP}
 \name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
 \addr Universidad Americana de Europa (UNADE)\\
 Canc\'un, Quintana Roo, M\'exico
-\AND
-\name Miguel Herrero-Uceda \email miguel.herrero.tutor@gmail.com \\
-\addr Universidad Americana de Europa (UNADE)
 }
 
 \begin{document}
@@ -1420,9 +1417,9 @@ causal attribution methods and diverse counterfactual generation
 
 The manuscript, experimental code, and supporting materials are available
 in the public repository at
-\ifdeanon{\url{https://github.com/jonnabio/xai-eval-framework}}%
-{an anonymised mirror linked from the OpenReview submission}, released under the
-MIT License. Artifacts needed to reproduce the empirical study include:
+\ifdeanon{the public repository \url{https://github.com/jonnabio/xai-eval-framework}}%
+{the anonymised artifact bundle supplied as supplementary material with this
+submission}, released under the MIT License. Artifacts needed to reproduce the empirical study include:
 \begin{sloppypar}
 \begin{itemize}[leftmargin=*]
 \item EXP2 results: \path{experiments/exp2_scaled/results/}
@@ -1444,10 +1441,49 @@ MIT License. Artifacts needed to reproduce the empirical study include:
 The review corpus underlying the taxonomy and gap analysis is released as
 \path{docs/reports/paper_bc/paper_bc_review_corpus.csv}, with the retrieved
 full texts under \path{docs/reports/paper_bc/corpus_pdfs/} and per-paper
-provenance in \path{docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md}. Before journal submission, the
-exact snapshot will be frozen as a versioned release with a DOI.
+provenance in \path{docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md}.
+
+The supplementary bundle contains every artifact from which a number in this
+paper is computed, and each reported value re-derives from it. Two items are
+described but not shipped: the raw EXP2 run tree, which exceeds the
+supplementary size limit and whose analysis exports are included in its place,
+and the review corpus full texts, which are third-party publications. Both are
+in the archived release, \ifdeanon{\url{https://doi.org/10.5281/zenodo.21538180}}%
+{whose DOI is given in the camera-ready version}.
 
 % -----------------------------------------------------------------------
+% -----------------------------------------------------------------------
+\section*{Broader Impact Statement}
+% -----------------------------------------------------------------------
+
+This is a measurement study, but it issues deployment recommendations for
+explainers applied to Adult Income, a standard benchmark that stands in for
+credit and employment decisions. Two cautions follow, and neither is
+rhetorical.
+
+First, the endpoints measured here---fidelity, stability, parsimony,
+faithfulness gap, cost---quantify how well an explanation tracks the model it
+explains. They say nothing about whether that model is accurate, lawful or
+fair. A high-fidelity explanation of a discriminatory model is a faithful
+account of discrimination, and a deployment that treats explanation quality as
+evidence of decision quality inverts what these metrics measure. Nothing in
+this paper licenses that inference.
+
+Second, the recommendations are scoped to tabular binary classification under
+the protocol described in Section~\ref{sec:empirical}, and the cross-dataset
+extension supports the fidelity direction only. They should not be transferred
+to image, text or sequential data, to multi-class or causal settings, or to
+high-stakes deployment, without evidence gathered in those settings.
+
+The inter-judge reliability result cuts in a protective direction and is worth
+stating as such: automated semantic evaluation of explanations did not reach
+the agreement threshold required to substitute for human review. Read together
+with the taxonomy's gap analysis, it argues against replacing human evaluation
+with LLM judges in any setting where the assessment carries consequences.
+
+All artifacts are released so that these boundaries can be checked rather than
+taken on trust.
+
 \section{Conclusion}
 \label{sec:conclusion}
 % -----------------------------------------------------------------------
@@ -1488,7 +1524,7 @@ human task performance without a separate user study.
 % Suppressed under double-blind review; restored by [accepted]/[preprint].
 \ifdeanon{%
 \acks{This work received no external funding. The study was self-funded by
-the authors, who report no competing interests. This draft was
+the author, who reports no competing interests. This draft was
 prepared from repository artifacts dated May 2026.}%
 }{}
 
