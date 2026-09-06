@@ -4,7 +4,7 @@
 % "Anonymous authors / Paper under double-blind review" unless it is loaded
 % with [accepted] or [preprint]. Do not de-anonymise by hand: flip the option
 % and everything guarded by \ifdeanon below follows.
-%   camera-ready   \usepackage[accepted]{tmlr}
+%   camera-ready   \usepackage{tmlr}
 %   preprint/arXiv \usepackage[preprint]{tmlr}
 \usepackage{tmlr}
 
@@ -31,6 +31,9 @@
 % above so the anonymous and de-anonymised builds cannot disagree.
 \makeatletter
 \newcommand{\ifdeanon}[2]{\if@accepted#1\else#2\fi}
+% Block form, for content spanning paragraphs: \ifdeanonymised ... \fi
+\newif\ifdeanonymised
+\if@accepted\deanonymisedtrue\fi
 \makeatother
 
 % tmlr.sty provides no keywords environment, but jmlr2e did and
@@ -1206,6 +1209,12 @@ architectural affordance, then by deployment constraint.
 \label{sec:validity}
 % -----------------------------------------------------------------------
 
+% Suppressed while under review: naming the shared cohort identifies the
+% authors. It is NOT withdrawn -- the overlap must be declared to the Action
+% Editor in the OpenReview submission form instead, and this block is
+% restored automatically in the [accepted] and [preprint] builds.
+% See BUILD.md, "Before submitting".
+\ifdeanonymised
 \subsection{Relationship to Previously Published Work}
 \label{sec:prior_publication}
 
@@ -1219,6 +1228,7 @@ cross-dataset extension. Readers comparing the two should treat the shared
 cohort as one body of evidence reported at two levels of aggregation, not as
 independent replications: agreement between them is arithmetic, not
 corroborative.
+\fi
 
 \subsection{Interpretation Scope of SHAP--LIME Comparisons}
 \label{sec:interpretation_scope}
@@ -1811,7 +1821,7 @@ In \emph{Proceedings of the 2020 Conference on Fairness, Accountability,
 and Transparency}, 607--617.
 
 \bibitem[Nauta et~al.(2023)Nauta, Trienes, Pathak, Nguyen, Peters,
-Schmitt, Schlötterer, van Keulen, and Seifert]{nauta2023anecdotal}
+Schmitt, SchlÃ¶tterer, van Keulen, and Seifert]{nauta2023anecdotal}
 Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y.,
 Schl\"{o}tterer, J., van Keulen, M., and Seifert, C. (2023).
 From anecdotal evidence to quantitative evaluation methods: A systematic

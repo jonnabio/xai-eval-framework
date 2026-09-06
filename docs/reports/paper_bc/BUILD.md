@@ -24,22 +24,38 @@ Review is double-blind. `tmlr.sty` handles this: loaded plain, it prints
 source is simply not typeset.
 
 **Do not de-anonymise by hand.** Flip the package option and the rest follows,
-because identity-revealing content is guarded by `\ifdeanon`, which is defined
-in terms of that option:
+because identity-revealing content is guarded in terms of that option:
 
 | Build | Preamble line | Effect |
 | ----- | ------------- | ------ |
-| Submission (default) | `\usepackage{tmlr}` | anonymous; acknowledgments suppressed; repository cited as an anonymised mirror |
-| Camera-ready | `\usepackage[accepted]{tmlr}` | authors, acknowledgments and the real repository URL restored |
+| Submission (default) | `\usepackage{tmlr}` | anonymous; acknowledgments and prior-publication disclosure suppressed; repository cited as an anonymised mirror |
+| Camera-ready | `\usepackage[accepted]{tmlr}` | authors, acknowledgments, disclosure and the real repository URL restored |
 | Preprint / arXiv | `\usepackage[preprint]{tmlr}` | as accepted, without the TMLR running head |
 
-Two blocks are guarded today: the `\acks{...}` funding and competing-interests
-statement, and the GitHub URL in §Code and Artifact Availability.
+Two guards exist. `\ifdeanon{shown}{hidden}` is for inline fragments; the
+block form `\ifdeanonymised ... \fi` is for content spanning paragraphs, where
+the argument-grabbing macro would be fragile. Three things are guarded today:
 
-**Before submitting, replace the anonymised-mirror wording with a real
-anonymous artifact link** (for example anonymous.4open.science). Reviewers
-otherwise have no way to reach the code, and the abstract promises that all
-experimental artifacts are publicly available.
+1. the `\acks{...}` funding and competing-interests statement;
+2. the GitHub URL in §Code and Artifact Availability;
+3. §Validity "Relationship to Previously Published Work", which discloses that
+   the empirical cohort was published in the RIMI paper.
+
+## Before submitting
+
+- **Declare the prior publication to the Action Editor.** Guard 3 above keeps
+  the shared-cohort disclosure out of the reviewed PDF because naming the
+  overlap identifies the authors. It is suppressed, *not withdrawn*: the
+  overlap with `herrera2026framework` must be stated in the OpenReview
+  submission form so the editor has it, and it reappears automatically in the
+  camera-ready. Omitting both is a prior-publication problem, not a formatting
+  one.
+- **Replace the anonymised-mirror wording with a real anonymous artifact
+  link** (for example anonymous.4open.science). Reviewers otherwise have no way
+  to reach the code, and the abstract promises that all experimental artifacts
+  are publicly available.
+- Rebuild and confirm the anonymous PDF shows no author name, email,
+  affiliation, acknowledgments or disclosure section.
 
 Set `\month` and `\year`, and point `\openreview` at the forum URL, only for
 the camera-ready build.
