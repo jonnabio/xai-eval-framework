@@ -168,6 +168,55 @@ Create a project-local ACE skill for editing the CIFIE/FOM-7 Spanish book chapte
 
 ---
 
+<task id="7">
+  <name>Adopt the publication branching model (ADR-0013)</name>
+  <objective>Enable Paper B+C work to proceed in parallel with the thesis without either lane
+  verifying green against a stale claim substrate, and without forking pub/claim_registry.toml,
+  which RCA-001 invariant 3 forbids.</objective>
+  <files>
+    <create>docs/adr/0013-publication-branching-model.md</create>
+    <modify>docs/context/ACTIVE_CONTEXT.md</modify>
+  </files>
+  <tests>
+    <test>main is green under verify_claims.py, verify_sync.py and verify_exp4_reconstruction.py after the checkpoint merge.</test>
+    <test>The paper/bc lane is cut from the refreshed main, not from the thesis lane tip, and its substrate is byte-identical to main's.</test>
+    <test>The paper_bc worktree carries the untracked .ace/ framework directory and .aceconfig.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>main tracks completed green work continuously rather than at workstream close.</criterion>
+    <criterion>Lane ownership, the shared-substrate list and the five merge rules are recorded in an accepted ADR and mirrored in Active Constraints.</criterion>
+    <criterion>No numeric value, registered claim, guard or artifact changes in adopting the model.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Task 6</dependencies>
+</task>
+
+<task id="8">
+  <name>Enforce substrate currency and per-branch CI</name>
+  <objective>Make ADR-0013 rule 3 mechanical rather than procedural: a lane whose pub/,
+  scripts/pubs/ or docs/rca/ is behind origin/main must fail CI, not rely on the author
+  remembering to merge. Enforcement must live in pubs-sync.yml, because .aceconfig and .ace/
+  are git-excluded and their pre_commit hooks never reach CI.</objective>
+  <files>
+    <create>scripts/pubs/check_substrate_current.py</create>
+    <modify>.github/workflows/pubs-sync.yml</modify>
+    <modify>.gitattributes</modify>
+  </files>
+  <tests>
+    <test>Negative test: a branch artificially reverted to an older pub/claim_registry.toml fails check_substrate_current.py with exit 1.</test>
+    <test>pubs-sync.yml runs on push to main, thesis/**, paper/**, pubs/** as well as on pull_request.</test>
+    <test>Regenerating fragments after a simulated conflict resolution leaves git diff --exit-code pub/fragments clean.</test>
+  </tests>
+  <acceptance_criteria>
+    <criterion>A stale-substrate lane cannot merge to main with CI green.</criterion>
+    <criterion>Local merges without a pull request are still verified.</criterion>
+  </acceptance_criteria>
+  <complexity>M</complexity>
+  <dependencies>Task 7</dependencies>
+</task>
+
+---
+
 ## Verification Plan
 
 After all tasks complete:

@@ -758,6 +758,25 @@ manuscript-editing support tooling.
   *quantify*, and a low ICC is the objective met, not failed.
 
 ## Active Constraints
+- **Branching is governed by ADR-0013.** Manuscript bodies are branch-private; the claim
+  substrate is trunk-owned. A work branch's `pub/`, `scripts/pubs/` and `docs/rca/` may be
+  ahead of `main`, never behind it. Lanes: `thesis/*`, `paper/bc-*`, `paper/a-*`,
+  `chapter/cifie-*`, `pubs/*` (substrate only), `rca/*`, `results/*`. `main` is never worked
+  on directly and must be green under all three verifiers after every merge.
+- No commit mixes shared-substrate files (`pub/claim_registry.toml`, `pub/claims.toml`,
+  `pub/fragments/`, `scripts/pubs/**`, `docs/rca/**`, the sync matrix, `pubs-sync.yml`,
+  `ACTIVE_CONTEXT.md`) with manuscript-body files. Substrate commits reach `main` in the
+  session they are made; both lanes then pull `main`. Lanes never merge into each other,
+  and `results/*` merges into `main` only.
+- Adding any file to `[coverage]` in `pub/claim_registry.toml` is a trunk event: it turns CI
+  red on every lane, so it is triaged to `--coverage-report` exit 0 on a `pubs/*` branch and
+  merged before any lane consumes it.
+- `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`, so the ACE framework is untracked
+  and absent from any new worktree - copy or link it in. For the same reason `.aceconfig`
+  `pre_commit` hooks are local-only: anything that must hold across lanes belongs in
+  `.github/workflows/pubs-sync.yml`.
+- `pub/fragments/` conflicts are never resolved by hand: take either side and re-run
+  `scripts/pubs/generate_fragments.py`.
 - .ace/standards/coding.md
 - .ace/standards/security.md
 - Keep thesis and paper artifacts read-only unless explicitly instructed otherwise.
