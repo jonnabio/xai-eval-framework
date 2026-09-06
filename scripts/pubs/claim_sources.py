@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import statistics
 from functools import lru_cache
 from pathlib import Path
@@ -22,6 +23,9 @@ EXP4_DIR = ROOT / "outputs" / "analysis" / "exp4_llm_evaluation"
 EXP6_PAIRED = ROOT / "outputs" / "analysis" / "exp6_masking_sensitivity" / "exp6_paired_shap_lime.csv"
 LIME_KW = ROOT / "outputs" / "analysis" / "lime_kernel_width_sensitivity.csv"
 ADULT = ROOT / "data" / "adult.csv"
+EXP1_MODELS = ROOT / "experiments" / "exp1_adult" / "models"
+EXP1_REPRO = ROOT / "experiments" / "exp1_adult" / "reproducibility" / "reproducibility_report.csv"
+EXP2_INVENTORY = EXP2_STATS / "exp2_run_inventory.csv"
 
 
 class MissingArtifact(Exception):
@@ -143,6 +147,46 @@ def _pearson_r(col_a: str, col_b: str) -> float:
     return num / den
 
 
+# ---------------------------------------------------------------------------
+# EXP1 calibration cohort (Chapter 3 design tables)
+# ---------------------------------------------------------------------------
+
+# The thesis labels the gradient-boosting model "xgb" but its artifact
+# directory is "xgboost". The manuscript cites the glob models/*/metrics.json,
+# which resolves either way; the mapping only matters here.
+_EXP1_DIRS = {"logreg": "logreg", "rf": "rf", "xgb": "xgboost", "svm": "svm", "mlp": "mlp"}
+
+
+@lru_cache(maxsize=None)
+def _exp1_metrics(model: str) -> dict:
+    name = _EXP1_DIRS.get(model, model)
+    path = EXP1_MODELS / name / "metrics.json"
+    if not path.exists():
+        raise MissingArtifact(f"artifact not found: {path.relative_to(ROOT).as_posix()}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=None)
+def _exp1_confusion_totals() -> tuple[int, int]:
+    """(test-set size, positive count) from any EXP1 model's confusion matrix.
+
+    All five models are scored on the same held-out split, so the matrix
+    totals are a property of the partition rather than of the model.
+    """
+    cm = _exp1_metrics("logreg")["confusion_matrix"]
+    return sum(sum(row) for row in cm), sum(cm[1])
+
+
+def _chi2_sf_df3(x: float) -> float:
+    """P(chi^2_3 > x), closed form so the verifier stays stdlib-only.
+
+    For df=3 the CDF is erf(sqrt(x/2)) - sqrt(2x/pi) e^{-x/2}; the survival
+    function below is its complement. CI installs no packages, so scipy is
+    not available to any resolver.
+    """
+    return math.erfc(math.sqrt(x / 2.0)) + math.sqrt(2.0 * x / math.pi) * math.exp(-x / 2.0)
+
+
 def resolve(expr: str) -> float:
     """Resolve one source expression to a number derived from the artifacts."""
     kind, *args = expr.split(":")
@@ -262,6 +306,86 @@ def resolve(expr: str) -> float:
                     return diff
                 return diff / float(row["cohens_dz"])
         raise MissingArtifact(f"wilcoxon row not found: {comparison_set}/{metric}")
+
+    if kind == "exp1_model_metric":
+        model, metric = args
+        return float(_exp1_metrics(model)[metric])
+
+    if kind == "exp1_split":
+        # "test" and "train" sizes of the canonical seed-42 partition, and the
+        # positive-class rate as a percentage. The test size comes from the
+        # confusion-matrix total; the training size from the dataset_shape
+        # recorded when the model was fitted.
+        (what,) = args
+        n_test, n_pos = _exp1_confusion_totals()
+        if what == "test":
+            return float(n_test)
+        if what == "positive_rate":
+            return 100.0 * n_pos / n_test
+        if what == "train":
+            meta = json.loads(
+                (EXP1_MODELS / "xgboost" / "xgb_metrics.json").read_text(encoding="utf-8")
+            )
+            return float(meta["training_metadata"]["dataset_shape"][0])
+        raise ValueError(f"unknown exp1_split argument: {what}")
+
+    if kind == "exp1_repro_cv_max":
+        # Chapter 3 reports the EXP1 reproducibility profile as upper bounds
+        # over the four cohort rows, so the resolver returns the maximum of the
+        # column. The manuscript states each bound rounded up, so these claims
+        # carry a tolerance rather than matching to the last digit.
+        (metric,) = args
+        rows = _rows(EXP1_REPRO)
+        return max(float(row[f"{metric}_cv"]) for row in rows)
+
+    if kind == "exp2_artifacts_present":
+        # Rows in the run inventory: artifacts physically present, which is the
+        # planned grid minus the one cell that was never written.
+        return float(len(_rows(EXP2_INVENTORY)))
+
+    if kind == "exp2_coverage_pct":
+        # Analysable share of the planned grid. The complement of
+        # exp2_missing_pct, stated directly because Chapter 3 tabulates it.
+        planned = float(args[0]) if args else 300.0
+        qualified = sum(
+            len(_exp2_values(method, "fidelity"))
+            for method in ("shap", "lime", "anchors", "dice")
+        )
+        return 100.0 * qualified / planned
+
+    if kind == "exp2_method_coverage_pct":
+        method, planned = args[0], float(args[1]) if len(args) > 1 else 75.0
+        return 100.0 * len(_exp2_values(method, "fidelity")) / planned
+
+    if kind == "exp2_block_replication":
+        # Mean number of qualified seeds per (model, N) block for one method,
+        # restricted to the |-separated models named. Chapter 3 uses the
+        # worst-case models to bound the variance inflation of Anchors.
+        method, models = args[0], args[1].split("|")
+        counts: dict[tuple[str, str], int] = {}
+        for row in _rows(EXP2_INVENTORY):
+            if row["method"] != method or row["status"] != "ok_instance":
+                continue
+            if row["model"] not in models:
+                continue
+            counts[(row["model"], row["n"])] = counts.get((row["model"], row["n"]), 0) + 1
+        grid = {(m, n) for m in models for n in {r["n"] for r in _rows(EXP2_INVENTORY)}}
+        if not grid:
+            raise MissingArtifact(f"no inventory rows for method={method}")
+        return statistics.mean(counts.get(cell, 0) for cell in grid)
+
+    if kind == "linear":
+        # Composing resolver: "linear:<a>|<b>|<expr>" -> a * resolve(expr) + b.
+        # Chapter 3's stress test is arithmetic performed inline on a registered
+        # Friedman statistic; registering the results this way means they go red
+        # if that statistic ever moves, which a structural declaration would not.
+        rest = expr.split(":", 1)[1]
+        a, b, sub = rest.split("|", 2)
+        return float(a) * resolve(sub) + float(b)
+
+    if kind == "chi2_sf3":
+        # "chi2_sf3:<expr>" -> P(chi^2_3 > resolve(expr)).
+        return _chi2_sf_df3(resolve(expr.split(":", 1)[1]))
 
     if kind == "diff":
         # Composing resolver: "diff:<exprA>|<exprB>" -> resolve(A) - resolve(B).
