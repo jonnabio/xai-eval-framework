@@ -864,73 +864,30 @@ $\mathrm{svm}=15$) and all sampling intensities with near-balanced counts.
 
 \subsubsection*{Multi-Method Context (Friedman)}
 
-As pre-analysis context, we ran a Friedman test across all four methods
-in EXP2 (SHAP, LIME, Anchors \citep{ribeiro2018anchors}, DiCE
-\citep{mothilal2020dice}) on $n=15$ blocks per method, one per $(g,N)$
-model-family-and-sampling-intensity combination, each block value the mean
-across the 5 available seeds. Block-level aggregation was necessary because
-Anchors and DiCE runs are not complete across the full $(g,s,N)$ grid (57/75
-and 68/75 artifact-qualified runs, respectively, versus 75/75 for SHAP and
-LIME). The full EXP2 cohort covers all four
-methods; the paired inference below is restricted to the LIME-SHAP matched
-subset for confirmatory claims. Table~\ref{tab:friedman}
-shows highly significant systematic differences in both fidelity and
-stability (Kendall's $W > 0.90$ in both cases), establishing that the
-four-method field is not exchangeable.
+As pre-analysis context, the four-method omnibus comparison over this
+cohort---SHAP, LIME, Anchors \citep{ribeiro2018anchors} and DiCE
+\citep{mothilal2020dice}, tested over $n=15$ blocks per method, one per
+$(g,N)$ model-family-and-sampling-intensity combination, each block value
+the mean across the 5 available seeds---is reported by
+\citet{herrera2026framework} and is not reproduced here. That analysis
+establishes that the four-method field is not exchangeable on either
+fidelity or stability, that SHAP leads both endpoints, and that the
+SHAP--LIME fidelity separation falls marginally below the Nemenyi critical
+difference at the omnibus level. Block-level aggregation was necessary
+there because Anchors and DiCE are not complete across the full $(g,s,N)$
+grid (57/75 and 68/75 artifact-qualified runs, respectively, versus 75/75
+for SHAP and LIME).
 
-\begin{table}[t]
-\centering
-\caption{Friedman omnibus test across four methods (EXP2, $n=15$ blocks ---
-5 model families $\times$ 3 sampling intensities, each a 5-seed mean ---
-$k=4$). Reported $p$-values are Holm-Bonferroni-adjusted across the five
-primary metrics; the corresponding raw values are
-$3.78\times10^{-9}$ (fidelity) and $7.65\times10^{-9}$ (stability).
-$W$ = Kendall's concordance coefficient.}
-\label{tab:friedman}
-\begin{tabular}{lrrl}
-\toprule
-Metric    & $\chi^2$ (df\,=\,3) & $p_{\mathrm{Holm}}$   & $W$   \\
-\midrule
-Fidelity  & 42.12               & $1.51\times10^{-8}$  & 0.936 \\
-Stability & 40.68               & $2.29\times10^{-8}$  & 0.904 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Method mean values and average ranks are shown in
-Table~\ref{tab:method_ranks}. Nemenyi post-hoc testing
-($\mathrm{CD}=1.211$, $\alpha=0.05$) confirms that SHAP significantly
-outperforms Anchors and DiCE in fidelity (rank gaps $2.2$ and $2.8$), and
-significantly outperforms LIME and Anchors in stability (rank gaps
-$2.4$ and $2.6$). The SHAP--DiCE stability rank gap ($1.0$) falls below
-the CD threshold (Nemenyi $p = 0.15$), consistent with the comparative
-run-to-run consistency of DiCE's counterfactual outputs; SHAP's stability
-advantage over DiCE is therefore descriptive rather than confirmed at the
-omnibus level. The SHAP-LIME omnibus fidelity rank gap equals
-exactly 1.0---marginally below the CD threshold---but the directional
-paired Wilcoxon below demonstrates significance when power is concentrated
-on this specific two-method comparison.
-
-\begin{table}[t]
-\centering
-\caption{Mean metric values by method from EXP2 (mean of 15
-model$\times$sampling-intensity block means; underlying artifact-qualified
-run coverage: 75/75 SHAP and LIME, 68/75 DiCE, 57/75 Anchors) with Nemenyi
-average ranks. CD\,=\,1.211; pairs with rank gap\,$>$\,CD are significant at
-$\alpha=0.05$.}
-\label{tab:method_ranks}
-\begin{tabular}{lcccc}
-\toprule
-          & SHAP  & LIME  & Anchors & DiCE  \\
-\midrule
-Fidelity (mean)   & 0.808 & 0.560 & 0.389   & 0.170 \\
-Stability (mean)  & 0.732 & 0.014 & 0.043   & 0.361 \\
-\midrule
-Fidelity rank     & 1.0   & 2.0   & 3.2     & 3.8   \\
-Stability rank    & 1.0   & 3.4   & 3.6     & 2.0   \\
-\bottomrule
-\end{tabular}
-\end{table}
+That is precisely the question the omnibus leaves open, and it is the one
+this section answers. An omnibus test distributes its power across four
+methods and reports on the field as a whole; it cannot license a
+two-method deployment choice, and on the SHAP--LIME contrast specifically
+it returns a separation too small to call. The analysis below concentrates
+the design on that single matched comparison---paired at the run level over
+the 75 cells where both explainers are complete, with directional
+hypotheses, Holm-adjusted tests and per-endpoint effect sizes---and
+resolves it. The four-method material above is context, not evidence, for
+any claim made in this paper.
 
 \subsubsection*{Primary Paired Inference}
 
@@ -1096,9 +1053,11 @@ substantially more consistent explanations.
 \centering
 \caption{EXP3 external validation: mean fidelity (3-seed average) for
 SHAP vs.\ Anchors across two additional datasets. SHAP $>$ Anchors in all
-12 paired combinations. SHAP values are taken from the current committed
-\texttt{experiments/exp3\_cross\_dataset/results/} snapshot, which is also the
-cohort Paper~A reports.}
+12 paired combinations. The SHAP column reproduces values previously published by
+\citet{herrera2026framework}, from the same committed
+\texttt{experiments/exp3\_cross\_dataset/results/} snapshot, and is shown
+only as the reference condition for the Anchors contrast, which is new
+here.}
 \label{tab:exp3_fidelity}
 \begin{tabular}{llcc}
 \toprule
