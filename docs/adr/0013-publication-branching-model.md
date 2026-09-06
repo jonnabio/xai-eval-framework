@@ -29,7 +29,7 @@ alone and 130 the thesis alone. A per-lane registry fork would register those
 prevent. The registry therefore **cannot** be branch-private.
 
 **3. `verify_claims.py` is already a sufficient cross-document gate — against
-the registry present on the branch.** Changing `0.808` in `paper_bc_jmlr.tex`
+the registry present on the branch.** Changing `0.808` in `paper_bc_tmlr.tex`
 without the registry fails check (b), the per-site occurrence count; changing
 the registry to match fails check (a) against the artifact. Drift cannot
 survive a green verifier. It can only survive a *stale* one.
@@ -40,7 +40,7 @@ trunk 29 commits behind would have begun on a 142-claim registry without the
 `[coverage]` — verifying green while checking the wrong things.
 
 Two further couplings constrain the model. RCA-002 guards
-`paper_bc_jmlr_supplementary.tex` and `thesis/capitulo-5-taxonomia.qmd`
+`paper_bc_tmlr_supplementary.tex` and `thesis/capitulo-5-taxonomia.qmd`
 together, so its invariants (ICC reported as ICC(1,1); Cramér's V over
 pairwise-complete cases) bind both lanes at once. And `[coverage]` enforcement
 is repository-wide: the moment a file joins that list, every unregistered

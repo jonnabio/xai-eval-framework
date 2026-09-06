@@ -28,7 +28,7 @@ Named by the **citation key exactly as given below**, lowercase, `.pdf` extensio
 For example `adebayo2018sanity.pdf`, `zheng2023judging.pdf`.
 
 Do not use the paper title as a filename. The citation key is the join between
-the PDF, the bibliography entry in `docs/reports/paper_bc/paper_bc_jmlr.tex`, and
+the PDF, the bibliography entry in `docs/reports/paper_bc/paper_bc_tmlr.tex`, and
 the `record_slug` column of the corpus CSV. A wrong filename silently breaks that
 link.
 

@@ -6,10 +6,15 @@ style files (`tmlr.sty`, `fancyhdr.sty`, from
 <https://github.com/JmlrOrg/tmlr-style-file>) and uses the repository's
 portable Tectonic binary by default.
 
-The filenames keep the `_jmlr` suffix on purpose. TMLR is published by the
-JMLR organisation, and both `scripts/pubs/verify_sync.py` and
-`pub/claim_registry.toml` address the manuscript by path; renaming it would be
-a substrate change touching two regression guards for no reader-visible gain.
+The manuscript files are `paper_bc_tmlr.tex` and
+`paper_bc_tmlr_supplementary.tex`, renamed from `paper_bc_jmlr*` on 2026-09-05
+when the target venue was settled. Both `scripts/pubs/verify_sync.py` and
+`pub/claim_registry.toml` address them by path, so the rename was a single
+substrate commit that also updated both regression guards.
+
+Dated records deliberately keep the old name: the 2026-07-28 rigor review, the
+2026-08-22 alignment review, the dated remediation plans and the
+`ACTIVE_CONTEXT.md` session narratives describe the file as it was then called.
 
 ## Anonymity
 
@@ -49,8 +54,8 @@ make all
 
 This produces:
 
-- `paper_bc_jmlr.pdf` (main manuscript)
-- `paper_bc_jmlr_supplementary.pdf` (six supplementary tables)
+- `paper_bc_tmlr.pdf` (main manuscript)
+- `paper_bc_tmlr_supplementary.pdf` (six supplementary tables)
 
 ## Build One PDF
 
@@ -64,15 +69,15 @@ make supplement
 From the repository root:
 
 ```bash
-./tools/tectonic-portable/tectonic docs/reports/paper_bc/paper_bc_jmlr.tex
-./tools/tectonic-portable/tectonic docs/reports/paper_bc/paper_bc_jmlr_supplementary.tex
+./tools/tectonic-portable/tectonic docs/reports/paper_bc/paper_bc_tmlr.tex
+./tools/tectonic-portable/tectonic docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex
 ```
 
 On Windows PowerShell, use:
 
 ```powershell
-.\tools\tectonic-portable\tectonic.exe .\docs\reports\paper_bc\paper_bc_jmlr.tex
-.\tools\tectonic-portable\tectonic.exe .\docs\reports\paper_bc\paper_bc_jmlr_supplementary.tex
+.\tools\tectonic-portable\tectonic.exe .\docs\reports\paper_bc\paper_bc_tmlr.tex
+.\tools\tectonic-portable\tectonic.exe .\docs\reports\paper_bc\paper_bc_tmlr_supplementary.tex
 ```
 
 ## Notes
