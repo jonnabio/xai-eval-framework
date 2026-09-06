@@ -1,34 +1,59 @@
-\documentclass[twoside,11pt]{article}
+\documentclass[10pt]{article}
 
-\usepackage{jmlr2e}
+% TMLR submission. The tmlr package hides the author block and prints
+% "Anonymous authors / Paper under double-blind review" unless it is loaded
+% with [accepted] or [preprint]. Do not de-anonymise by hand: flip the option
+% and everything guarded by \ifdeanon below follows.
+%   camera-ready   \usepackage[accepted]{tmlr}
+%   preprint/arXiv \usepackage[preprint]{tmlr}
+\usepackage{tmlr}
+
 \usepackage{amsmath}
+% jmlr2e supplied these; tmlr.sty does not.
+\usepackage{amssymb}
+\usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{enumitem}
-\usepackage{lastpage}
+\usepackage{url}
+\usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc,arrows.meta}
 
-\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 5/2026}{Preprint}{PAPER-BC-0001}{Jonathan Herrera-Vasquez}
-\ShortHeadings{XAI Metrics: Taxonomy and LIME--SHAP Comparison}{Herrera-Vasquez}
-\firstpageno{1}
+% Used by tmlr.sty only in the accepted build; harmless while under review.
+\def\month{MM}
+\def\year{2026}
+\def\openreview{\url{https://openreview.net/forum?id=XXXX}}
 
-\begin{document}
+% Single switch for identity-revealing content, driven by the package option
+% above so the anonymous and de-anonymised builds cannot disagree.
+\makeatletter
+\newcommand{\ifdeanon}[2]{\if@accepted#1\else#2\fi}
+\makeatother
+
+% tmlr.sty provides no keywords environment, but jmlr2e did and
+% scripts/pubs/verify_sync.py requires the keywords fragment to stay wired in.
+\newenvironment{keywords}
+  {\bgroup\leftskip 20pt\rightskip 20pt \small\noindent{\bf Keywords:} }
+  {\par\egroup\vskip 0.25ex}
+
+% tmlr.sty provides no \acks either.
+\newcommand{\acks}[1]{\subsubsection*{Acknowledgments}#1}
 
 \title{From Fidelity to Semantics:\\
 A Taxonomy of XAI Evaluation Metrics\\
 and Paired Empirical Comparison of LIME versus SHAP}
 
+% Not printed while under review; tmlr.sty substitutes the anonymous block.
 \author{
 \name Jonathan Herrera-Vasquez \email jonnabio@gmail.com \\
 \addr Universidad Americana de Europa (UNADE)\\
 Canc\'un, Quintana Roo, M\'exico
 }
 
-\editor{}
-
+\begin{document}
 \maketitle
 
 \begin{abstract}
@@ -776,7 +801,7 @@ after masking the top-$k$ features ($k=5$):
 \end{enumerate}
 
 \paragraph{Sparsity operationalization note.}
-LIME's active-feature count is governed by the \texttt{num\_features=10} hyperparameter, which acts as a hard ceiling on the number of non-zero attributions returned. This means LIME sparsity is a \emph{hyperparameter constraint}, not an emergent property of the explanation model. The active-feature ratio metric therefore measures whether LIME, \emph{as configured}, returns fewer significant features than SHAP; it does not test whether LIME is intrinsically sparser under unconstrained settings. Readers comparing parsimony results across studies should verify that equivalent \texttt{num\_features} bounds are applied, since the direction and magnitude of the SHAP–LIME parsimony gap will change with different settings.
+LIME's active-feature count is governed by the \texttt{num\_features=10} hyperparameter, which acts as a hard ceiling on the number of non-zero attributions returned. This means LIME sparsity is a \emph{hyperparameter constraint}, not an emergent property of the explanation model. The active-feature ratio metric therefore measures whether LIME, \emph{as configured}, returns fewer significant features than SHAP; it does not test whether LIME is intrinsically sparser under unconstrained settings. Readers comparing parsimony results across studies should verify that equivalent \texttt{num\_features} bounds are applied, since the direction and magnitude of the SHAP--LIME parsimony gap will change with different settings.
 
 \subsection{Inferential Protocol}
 \label{sec:inference}
@@ -1389,7 +1414,8 @@ causal attribution methods and diverse counterfactual generation
 
 The manuscript, experimental code, and supporting materials are available
 in the public repository at
-\url{https://github.com/jonnabio/xai-eval-framework}, released under the
+\ifdeanon{\url{https://github.com/jonnabio/xai-eval-framework}}%
+{an anonymised mirror linked from the OpenReview submission}, released under the
 MIT License. Artifacts needed to reproduce the empirical study include:
 \begin{sloppypar}
 \begin{itemize}[leftmargin=*]
@@ -1453,9 +1479,12 @@ deployment architecture is derived from proxy metrics and runtime
 constraints; it should not be read as evidence that either method improves
 human task performance without a separate user study.
 
+% Suppressed under double-blind review; restored by [accepted]/[preprint].
+\ifdeanon{%
 \acks{This work received no external funding. The study was self-funded by
 the author, and the author reports no competing interests. This draft was
-prepared from repository artifacts dated May 2026.}
+prepared from repository artifacts dated May 2026.}%
+}{}
 
 \clearpage
 \phantomsection

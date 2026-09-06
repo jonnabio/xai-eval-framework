@@ -9,7 +9,7 @@ human reviewer rather than the primary author.
 
 ## Scope
 
-- Manuscript: `docs/reports/paper_bc/paper_bc_jmlr.tex`
+- Manuscript: `docs/reports/paper_bc/paper_bc_tmlr.tex`
 - Review component: four-axis XAI evaluation taxonomy
 - Available source basis: Paper BC bibliography and the repository literature
   matrix

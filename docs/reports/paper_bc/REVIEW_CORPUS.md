@@ -184,7 +184,7 @@ id = "review.corpus.paper_bc.rows"
 source = "review_corpus_rows:paper_bc"
 value = "48"
 tolerance = 0.5
-appears_in = [{ file = "docs/reports/paper_bc/paper_bc_jmlr.tex", text = "48" }]
+appears_in = [{ file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = "48" }]
 ```
 
 The `review_corpus_rows` resolver in `scripts/pubs/claim_sources.py` currently
