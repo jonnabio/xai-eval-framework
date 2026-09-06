@@ -1,6 +1,6 @@
 # Paper B+C review corpus — citation tracking list
 
-Generated from `paper_bc_jmlr.tex` and `second_reviewer_audit_results.csv`.
+Generated from `paper_bc_tmlr.tex` and `second_reviewer_audit_results.csv`.
 
 
 ## Group 1 — confirmed corpus members (16), with original coding

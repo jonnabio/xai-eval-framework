@@ -34,7 +34,7 @@ def main() -> int:
     papers = {
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
         "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_prototype_jmlr.tex",
-        "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_jmlr.tex",
+        "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_tmlr.tex",
         "paper_c": ROOT / "docs" / "reports" / "paper_c" / "paper_c_prototype_jmlr.tex",
     }
     for paper_id, path in papers.items():
