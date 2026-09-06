@@ -898,18 +898,22 @@ Holm-adjusted testing.
 \begin{table}[t]
 \centering
 \caption{Matched SHAP-versus-LIME paired results ($n=75$ cells). For all
-metrics, $\Delta = $ SHAP $-$ LIME. Sparsity is measured as
-active-feature ratio; larger values indicate denser explanations.}
+metrics, $\Delta = $ SHAP $-$ LIME, with a $95\%$ confidence interval on the
+mean paired difference. Sparsity is measured as active-feature ratio, so a
+positive $\Delta$ means SHAP produces denser explanations. Per-method mean
+levels for this cohort are reported by \citet{herrera2026framework} and are
+not restated here; the contrast, its interval and the effect sizes are the
+quantities this analysis contributes.}
 \label{tab:paired_main}
-\begin{tabular}{lrrrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Metric & LIME Mean & SHAP Mean & $\Delta$ & $p_{\mathrm{Holm}}$ & $d_z$ \\
+Metric & $\Delta$ & $95\%$ CI & $p_{\mathrm{Holm}}$ & $d_z$ \\
 \midrule
-Stability & 0.014 & 0.732 & +0.718 & $2.6\times10^{-13}$ & 3.00 \\
-Sparsity (active ratio) & 0.085 & 0.226 & +0.142 & $2.6\times10^{-13}$ & 0.84 \\
-Fidelity & 0.560 & 0.808 & +0.248 & $2.6\times10^{-13}$ & 4.82 \\
-Faithfulness Gap & 0.334 & 0.380 & +0.045 & $2.6\times10^{-13}$ & 2.63 \\
-Cost (ms) & 3660.7 & 11708.3 & +8047.6 & $1.2\times10^{-10}$ & 0.45 \\
+Stability & +0.718 & $[+0.663, +0.773]$ & $2.6\times10^{-13}$ & 3.00 \\
+Sparsity (active ratio) & +0.142 & $[+0.103, +0.181]$ & $2.6\times10^{-13}$ & 0.84 \\
+Fidelity & +0.248 & $[+0.236, +0.260]$ & $2.6\times10^{-13}$ & 4.82 \\
+Faithfulness Gap & +0.045 & $[+0.041, +0.049]$ & $2.6\times10^{-13}$ & 2.63 \\
+Cost (ms) & +8047.6 & $[+3939.2, +12155.9]$ & $1.2\times10^{-10}$ & 0.45 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -952,7 +956,7 @@ Table~\ref{tab:cv_reproducibility}. SHAP yields highly reproducible
 fidelity and stability readings ($\mathrm{CV}<1\%$). LIME fidelity is
 acceptable ($\mathrm{CV}=2.6\%$), whereas LIME stability is structurally
 irreproducible ($\mathrm{CV}=86.2\%$). This is not a measurement artifact:
-when the mean cosine similarity is $\approx 0.014$, any nonzero variation
+when the mean cosine similarity is near zero, any nonzero variation
 produces an extreme relative deviation. The CV probe confirms that LIME
 stability is geometrically unstable---not merely noisy.
 
@@ -1042,7 +1046,7 @@ narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.07$
 (XGB), compared to $+0.27$ (RF) and $+0.21$ (XGB) in the corresponding
 model strata on Adult. Second, and more critically, LIME
 \emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
-higher than on Adult ($0.014$). This reveals that the near-zero stability
+higher than on Adult, where it is near zero. This reveals that the near-zero stability
 observed in EXP2 is not a fixed structural property of LIME: it is strongly
 modulated by feature-space characteristics. The Adult dataset's 103-dimensional
 one-hot-encoded space appears to be the primary driver of instability; in
@@ -1051,22 +1055,21 @@ substantially more consistent explanations.
 
 \begin{table}[t]
 \centering
-\caption{EXP3 external validation: mean fidelity (3-seed average) for
-SHAP vs.\ Anchors across two additional datasets. SHAP $>$ Anchors in all
-12 paired combinations. The SHAP column reproduces values previously published by
-\citet{herrera2026framework}, from the same committed
-\texttt{experiments/exp3\_cross\_dataset/results/} snapshot, and is shown
-only as the reference condition for the Anchors contrast, which is new
-here.}
+\caption{EXP3 external validation: mean Anchors fidelity (3-seed average)
+and the paired SHAP$-$Anchors fidelity gap across two additional datasets.
+SHAP $>$ Anchors in all 12 paired combinations, and the gap is positive in
+every cell. SHAP fidelity levels for this cohort are reported by
+\citet{herrera2026framework}; the Anchors levels and the gaps are
+contributed here.}
 \label{tab:exp3_fidelity}
 \begin{tabular}{llcc}
 \toprule
-Dataset        & Model & SHAP  & Anchors \\
+Dataset        & Model & Anchors & Gap (SHAP $-$ Anchors) \\
 \midrule
-Breast Cancer  & RF    & 0.779 & 0.265   \\
-Breast Cancer  & XGB   & 0.617 & 0.208   \\
-German Credit  & RF    & 0.714 & 0.351   \\
-German Credit  & XGB   & 0.711 & 0.451   \\
+Breast Cancer  & RF    & 0.265   & $+0.514$ \\
+Breast Cancer  & XGB   & 0.208   & $+0.409$ \\
+German Credit  & RF    & 0.351   & $+0.363$ \\
+German Credit  & XGB   & 0.451   & $+0.260$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1102,11 +1105,12 @@ across a broader set of datasets and preprocessing schemes.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig_exp3_fidelity.pdf}
-\caption{EXP3 external validation: mean fidelity (3-seed average) for
-SHAP vs.\ Anchors across four dataset-model combinations. SHAP exceeds
-Anchors in all 12 paired (dataset $\times$ model $\times$ seed)
-combinations. BC\,=\,Breast Cancer; GC\,=\,German Credit.}
+\includegraphics[width=0.95\linewidth]{figures/fig_exp3_gap.pdf}
+\caption{EXP3 external validation: mean Anchors fidelity (3-seed average,
+solid) with the paired SHAP$-$Anchors gap stacked above it (shaded), so each
+bar reaches the SHAP level without restating it. SHAP exceeds Anchors in all
+12 paired (dataset $\times$ model $\times$ seed) combinations.
+BC\,=\,Breast Cancer; GC\,=\,German Credit.}
 \label{fig:exp3_fidelity}
 \end{figure}
 
@@ -1312,8 +1316,8 @@ Non-tabular behavior & No image, text, graph, or time-series experiments & Out o
 
 \paragraph{LIME stability is not a convergence artifact.}
 Two robustness probes rule out under-sampling and kernel miscalibration as
-explanations for the near-zero LIME stability (cosine similarity mean
-$\approx 0.014$, CV $= 86.2\%$). Varying \texttt{num\_samples} $\in
+explanations for the near-zero LIME stability (cosine similarity near
+zero, CV $= 86.2\%$). Varying \texttt{num\_samples} $\in
 \{500, 1000, 2000\}$ under otherwise identical conditions (RF model, seed
 42, $N=100$, \texttt{kernel\_width=3.0}) leaves stability near-zero and
 fidelity essentially flat at every level (Supplementary Table~S5):
