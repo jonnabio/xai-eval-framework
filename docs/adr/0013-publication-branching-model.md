@@ -112,10 +112,18 @@ in Word (a recurring file lock) and a full render is slow.
 git worktree add ../xai-paper-bc paper/bc-<topic>
 ```
 
-`.git/info/exclude` excludes `/.ace/` and `/.aceconfig`, so the ACE framework is
-untracked and **does not appear in a new worktree**. It must be copied or linked
-in. The same exclusion means `.aceconfig`'s `pre_commit` hooks are local-only:
-any check that must actually hold across lanes belongs in `pubs-sync.yml`.
+`.git/info/exclude` excludes `/.ace/` and `/.aceconfig`. The exclusion does not
+reach already-tracked files, so exactly four files travel to a new worktree --
+`.ace/standards/{architecture,coding,documentation,security}.md` -- and
+**everything else does not**: `roles/`, `skills/`, `packs/`, `prompts/`,
+`scripts/`, `workflows/`, `schemas/`, `knowledge/`, `feedback/` and `.aceconfig`
+are all absent. They must be copied in, and because the `standards/` directory
+already exists there, the copy must be of the directory *contents*
+(`cp -r .ace/. <worktree>/.ace/`), not of the directory, or it nests.
+
+The same exclusion means `.aceconfig`'s `pre_commit` hooks are local-only and
+never run in CI: any check that must actually hold across lanes belongs in
+`pubs-sync.yml`.
 
 ## Consequences
 
@@ -143,8 +151,9 @@ any check that must actually hold across lanes belongs in `pubs-sync.yml`.
 - Adding a Paper B+C document to `[coverage]` becomes a trunk event that must be
   triaged to `--coverage-report` exit 0 before merging, because it turns CI red
   on the thesis lane too. It can no longer ride along inside a prose commit.
-- More branches to track for a solo author, and a worktree that must be kept in
-  sync by hand with the untracked `.ace/` directory.
+- More branches to track for a solo author, and a worktree whose ACE framework
+  must be seeded and kept in sync by hand, since git carries only the four
+  tracked `.ace/standards/` files.
 
 ### Neutral
 
