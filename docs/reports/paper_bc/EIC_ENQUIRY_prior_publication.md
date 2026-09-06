@@ -1,92 +1,71 @@
-# Enquiry to the TMLR Editors-in-Chief — prior publication overlap
+# Note to the TMLR Editors-in-Chief — shared experimental cohort
 
-**Purpose.** Ask, before submitting, whether the overlap described below is
-compatible with TMLR's policy on reuse of results. Send to the Editors-in-Chief
-address listed on the TMLR site.
+**Status of this document.** Rewritten 2026-09-06 after the overlap it
+originally described was eliminated. It is no longer a request for permission;
+it is a disclosure, sent so the editors learn of the shared cohort from the
+author rather than from a reviewer.
 
-**Why ask rather than submit.** TMLR's editorial policy prohibits reuse of
-written text, figures or results with any paper published at an archival,
-peer-reviewed venue, and its carve-out covers only non-archival venues. The
-overlap here is confined to results, is partly unavoidable in a paired
-analysis, and has already been reduced once. Whether what remains counts as
-reuse is an editorial judgement, and it is cheaper to ask than to be told after
-review.
+**Why send it at all.** TMLR prohibits reuse of written text, figures or
+results with work published at an archival venue. No result is now reported in
+both documents. But the two studies rest on the same executions, and that is a
+fact an editor should have. Volunteering it costs nothing; having it surface
+during review costs a great deal.
+
+**Where to send.** The Editors-in-Chief address on the TMLR site, or the
+comment field on the OpenReview submission form.
 
 ---
 
 ## Draft message
 
-> **Subject:** Pre-submission question on prior-publication policy — overlap
-> with an earlier journal article
+> **Subject:** Disclosure of a shared experimental cohort with an earlier
+> publication
 >
 > Dear Editors-in-Chief,
 >
-> I am preparing a submission to TMLR and would like to check a
-> prior-publication question before I submit, rather than after.
+> I am about to submit to TMLR and would like to place one fact on the record
+> in advance.
 >
-> **The prior article.** In September 2026 the *Revista de Investigación
-> Multidisciplinaria Iberoamericana* (RIMI), issue 3,
-> doi:10.69850/rimi.vi3.307, published "A framework for rigorous evaluation of
-> model-agnostic explainability methods: multi-metric statistical benchmarking,
-> operational protocol, and reproducibility". It reports a multi-metric
-> evaluation protocol and a four-method omnibus comparison — SHAP, LIME,
-> Anchors and DiCE — over an execution cohort of 275 analysable runs on the
-> UCI Adult benchmark. It is a Spanish-language regional journal; the article
-> is in English.
+> The empirical cohort my submission analyses was released with an earlier
+> article: "A framework for rigorous evaluation of model-agnostic
+> explainability methods: multi-metric statistical benchmarking, operational
+> protocol, and reproducibility", *Revista de Investigación Multidisciplinaria
+> Iberoamericana* (RIMI), issue 3, 2026, doi:10.69850/rimi.vi3.307. The two
+> studies therefore share raw executions, preprocessing and model controls.
 >
-> **The submission.** The paper I intend to submit contributes a four-axis
-> taxonomy of XAI evaluation metrics, a gap analysis over a 44-paper scoping
-> corpus, a multi-rater LLM-judge reliability measurement, a paired run-level
-> comparison of LIME and SHAP, and a cross-dataset extension. It uses the same
-> execution cohort as the RIMI article.
+> Reading your policy on reuse of text, figures and results, I audited the
+> submission against that article rather than assuming the overlap was
+> immaterial. It originally re-reported thirteen numeric results. All thirteen
+> have been removed:
 >
-> **What I have already removed.** The submission originally reported thirteen
-> numeric results that also appear in the RIMI article. I have removed the two
-> tables that carried the prior article's own headline findings — the
-> four-method Friedman omnibus, and the four-method block means with Nemenyi
-> ranks — and replaced them with a cited paragraph that attributes those
-> results to the RIMI article and states that they are context rather than
-> evidence for any claim in the submission. Five results are now absent from
-> the manuscript entirely.
+> - The four-method Friedman omnibus and the four-method block means with
+>   Nemenyi ranks — the earlier article's own headline findings — are gone,
+>   replaced by a cited paragraph.
+> - The paired comparison table no longer prints per-method mean levels. It
+>   reports the mean paired difference with a 95% confidence interval, the
+>   adjusted p-values and the effect sizes, which are the quantities the paired
+>   analysis contributes.
+> - The cross-dataset table no longer prints SHAP fidelity levels. It reports
+>   the Anchors levels and the SHAP−Anchors gaps.
+> - The corresponding figure was regenerated, because it had been labelling the
+>   SHAP levels directly.
 >
-> **What remains, and why.** Eight results still appear in both.
+> Text and figures never overlapped: across 405 sentences of at least twelve
+> words the two papers share two, both bibliography titles, and the earlier
+> article contains no figures.
 >
-> Four are the SHAP and LIME group means for fidelity and stability, in the
-> table reporting the paired comparison alongside the differences, adjusted
-> p-values and effect sizes. I do not see how to remove them: effect sizes
-> without the means they are computed from are uninterpretable. They coincide
-> with the block-level means in the RIMI article only because both explainers
-> have complete 75/75 coverage, which makes run-level and block-level
-> aggregation arithmetically identical for those two methods. The analysis
-> itself — paired, cell-matched, at the run level, with directional hypotheses
-> — is not in the prior article, which reports an omnibus over four methods at
-> the block level.
+> The submission states this provenance openly in its validity section rather
+> than in a note only you would see. It records that the cohort came from the
+> earlier study, that the levels are cited rather than restated, and that
+> because both analyses rest on the same executions, agreement between them is
+> arithmetic and neither is an independent replication of the other.
 >
-> Four are SHAP fidelity values in a cross-dataset table, where they serve as
-> the reference condition for an Anchors comparison that is new. **If you
-> would prefer zero overlap, I can replace these with the SHAP−Anchors gaps
-> and cite the prior article for the levels.** I am ready to do that.
+> One further disclosure: the earlier article has two authors. I am the sole
+> author of this submission, my co-author on that article having declined
+> authorship here on the grounds that this work is not his.
 >
-> **What does not overlap.** I checked rather than assumed. Across 405
-> sentences of at least twelve words, the two papers share two verbatim
-> sentences, both of which are titles in the bibliography. The prior article
-> contains no figures; the three in the submission are its own. The taxonomy,
-> the scoping corpus and gap analysis, the LLM-judge reliability study and the
-> paired analysis have no counterpart in it.
->
-> **Two further disclosures.** The prior article has two authors; the
-> submission has one, because my co-author on that article has declined
-> authorship here on the grounds that this work is not his. And the submission
-> currently keeps its account of this overlap in a section that is suppressed
-> under double-blind review, because naming the shared cohort identifies me. I
-> would restore it at camera-ready, or reword it now if you would rather it be
-> visible to reviewers.
->
-> I would be grateful to know whether the eight remaining results are
-> acceptable as they stand, whether you would prefer the cross-dataset four
-> converted to gaps, or whether the shared cohort makes the work unsuitable for
-> TMLR. I would rather adjust or withdraw now than have this surface during
-> review.
+> I would rather you heard this from me. If you consider the shared cohort
+> disqualifying notwithstanding the removals, I would prefer to know now.
 >
 > Thank you for your time.
 >
@@ -97,23 +76,30 @@ review.
 
 ## Before sending
 
-- Confirm the RIMI journal name and DOI against the published article; the
-  journal's own site spells the title "multidisiplinaria", which appears to be
-  a typo, and the bibliography entry in the manuscript uses the corrected
-  spelling.
-- Confirm no other venue currently holds this work under review.
-- If the answer permits submission, revisit the `\ifdeanonymised` guard on the
-  §Validity subsection "Relationship to Previously Published Work" in light of
-  what the editors say.
+- Confirm the RIMI journal name and DOI against the published article. The
+  journal's site spells the title "multidisiplinaria", apparently a typo; the
+  manuscript's bibliography uses the corrected spelling.
+- Confirm the work is under review at no other venue.
 
-## Supporting evidence, if they ask for specifics
+## Supporting detail, if asked
 
-The eight shared results, by registry id:
+Removed outright: the fidelity and stability Friedman statistics, Kendall's W
+for fidelity, the Anchors and DiCE block-level fidelity means, the SHAP and
+LIME fidelity and stability means, and the four cross-dataset SHAP fidelity
+levels.
 
-    exp2.block.shap.fidelity      exp3.shap.breast_cancer.rf.fidelity
-    exp2.block.lime.fidelity      exp3.shap.breast_cancer.xgb.fidelity
-    exp2.block.shap.stability     exp3.shap.german_credit.rf.fidelity
-    exp2.block.lime.stability     exp3.shap.german_credit.xgb.fidelity
+The audit is mechanical and repeatable. Each published number is registered in
+`pub/claim_registry.toml` against the manuscripts that carry it, so a shared
+result is a claim whose entry names both documents:
 
-The five removed: the fidelity and stability Friedman statistics, Kendall's W
-for fidelity, and the Anchors and DiCE block-level fidelity means.
+```python
+import tomllib
+d = tomllib.load(open('pub/claim_registry.toml','rb'))
+for c in d['claim']:
+    files = {s['file'] for s in c.get('appears_in', [])}
+    if any('paper_a' in f for f in files) and any('paper_bc' in f for f in files):
+        print(c['id'])
+```
+
+This now returns nothing. It returned thirteen entries on 2026-09-06 before
+the removals.
