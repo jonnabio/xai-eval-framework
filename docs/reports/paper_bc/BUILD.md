@@ -38,18 +38,17 @@ the argument-grabbing macro would be fragile. Three things are guarded today:
 
 1. the `\acks{...}` funding and competing-interests statement;
 2. the GitHub URL in §Code and Artifact Availability;
-3. §Validity "Relationship to Previously Published Work", which discloses that
-   the empirical cohort was published in the RIMI paper.
+(A third guard covered the prior-publication disclosure. It was removed on
+2026-09-06: with no result reported in both documents, §Validity "Provenance of
+the Empirical Cohort" is an ordinary provenance statement and is visible to
+reviewers.)
 
 ## Before submitting
 
-- **Declare the prior publication to the Action Editor.** Guard 3 above keeps
-  the shared-cohort disclosure out of the reviewed PDF because naming the
-  overlap identifies the authors. It is suppressed, *not withdrawn*: the
-  overlap with `herrera2026framework` must be stated in the OpenReview
-  submission form so the editor has it, and it reappears automatically in the
-  camera-ready. Omitting both is a prior-publication problem, not a formatting
-  one.
+- **Send the disclosure note to the editors.** No result is reported in both
+  this submission and the published RIMI paper, but the two rest on the same
+  executions. `EIC_ENQUIRY_prior_publication.md` is the note; the paper states
+  the same provenance openly in §Validity.
 - **Replace the anonymised-mirror wording with a real anonymous artifact
   link** (for example anonymous.4open.science). Reviewers otherwise have no way
   to reach the code, and the abstract promises that all experimental artifacts
