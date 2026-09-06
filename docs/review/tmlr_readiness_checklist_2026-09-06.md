@@ -153,3 +153,87 @@ overlap. The advice given at that point — "disclose the overlap to the Action 
 described a disclosure regime. TMLR operates a prohibition. The fit argument for TMLR
 still holds on its merits; B1 is a separate question that has to be settled first, and
 it may yet send this paper elsewhere.
+
+---
+
+# Revision — after applying Option 2 (2026-09-06)
+
+**Status: B1 materially reduced, not eliminated. B2 and B3 unchanged.
+Still not submittable, but the remaining exposure is a judgement call rather
+than a clear conflict.**
+
+## B1 after remediation: 13 → 8 shared results
+
+Removed from the manuscript entirely, with the two tables that carried them:
+
+| Removed | Was in |
+| ------- | ------ |
+| χ² 42.12, χ² 40.68, Kendall W 0.936 | `tab:friedman` (four-method omnibus) |
+| Anchors fidelity 0.389, DiCE fidelity 0.170 | `tab:method_ranks` (four-method means + Nemenyi ranks) |
+
+Both tables reported Paper A's own headline findings over methods this paper
+does not otherwise analyse. They are replaced by a cited paragraph that keeps
+the argument — the field is not exchangeable, and the SHAP–LIME separation is
+too small to call at the omnibus level — and says explicitly that the
+four-method material is context, not evidence, for any claim made here.
+
+### The 8 that remain, and why
+
+**Four in `tab:paired_main`** — SHAP and LIME fidelity and stability means.
+These cannot be removed: a paired analysis must report the group means beside
+Δ, *p* and *d_z*, or the effect sizes are uninterpretable. They coincide with
+the block-level means Paper A reports **only because SHAP and LIME both have
+complete 75/75 coverage**, which makes run-level and block-level aggregation
+arithmetically identical. This is a coincidence of the design, not a
+restatement of Paper A's analysis.
+
+**Four in `tab:exp3_fidelity`** — SHAP cross-dataset fidelity. The caption now
+attributes them explicitly to the published paper and frames them as the
+reference condition for the Anchors contrast, which is new. These *are*
+avoidable if zero overlap is required: report the Anchors levels and the
+SHAP−Anchors gap, citing Paper A for the SHAP levels. That is a further half
+day of work and would need four new registered gap claims.
+
+### Residual recommendation
+
+The strict reading of "no reuse of results" is still not satisfied, and whether
+attributed group means count as reuse is an editorial judgement, not one this
+review can settle. **Proceed with Option 1 as a follow-up**: describe the
+remaining eight to the Editors-in-Chief, with the coverage argument for the
+four in the paired table and an offer to convert the EXP3 four into gaps. That
+conversation is now short and concrete, which it would not have been at 13.
+
+## Unchanged
+
+- **B2 — author set.** Still one author here, two on the published paper.
+  Must be settled before submission; TMLR admits no exceptions.
+- **B3 — anonymous artifact link.** Still placeholder wording.
+- Recommended: Broader Impact Statement; author contributions if B2 resolves
+  to two.
+
+## Re-verified after the edit
+
+| Check | Result |
+| ----- | ------ |
+| Build | exit 0, 25 pages |
+| Unresolved references / citations | 0 / 0 |
+| Removed values absent from PDF | confirmed for all five |
+| Dangling `\ref` to deleted tables | none |
+| `verify_claims.py` | 209 claims, 308 sites (was 313), green |
+| `verify_sync.py` | green |
+| Anonymity | anonymous title block, TMLR head, no identity leaks |
+
+RCA-001 gained an invariant and a review trigger for this defect class: a
+result registered as appearing in an archivally published manuscript must not
+be re-reported in a submission to a venue prohibiting reuse, and publication of
+any registered manuscript triggers a re-check of every unpublished one. The
+detection query:
+
+```python
+import tomllib
+d = tomllib.load(open('pub/claim_registry.toml','rb'))
+for c in d['claim']:
+    files = {s['file'] for s in c.get('appears_in', [])}
+    if any('paper_a' in f for f in files) and any('paper_bc' in f for f in files):
+        print(c['id'])
+```
