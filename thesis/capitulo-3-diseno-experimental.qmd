@@ -49,7 +49,7 @@ a variación en el modelo subyacente.
 
 El rendimiento predictivo de los cinco modelos entrenados en EXP1 y evaluados
 sobre el conjunto de prueba (9,758 instancias, semilla 42) se muestra en la
-Tabla 3.1. Los valores fueron extraídos directamente de los archivos
+Tabla -@tbl-model-performance. Los valores fueron extraídos directamente de los archivos
 `experiments/exp1_adult/models/*/metrics.json` del repositorio.
 
 | Modelo | Exactitud | Precisión | Recall | F1 | AUC-ROC |
@@ -74,8 +74,8 @@ neuronales (mlp).
 
 El perfilado de reproducibilidad de EXP1 establece que las métricas de calidad
 presentan coeficientes de variación inferiores al 9% bajo variación de semilla:
-$\text{CV}_F \leq 0.063$, $\text{CV}_S \leq 0.083$,
-$\text{CV}_P \leq 0.044$, $\text{CV}_{\Delta_k} \leq 0.036$. El coste
+$\text{CV}_F \leq 0.064$, $\text{CV}_S \leq 0.083$,
+$\text{CV}_P \leq 0.045$, $\text{CV}_{\Delta_k} \leq 0.036$. El coste
 computacional exhibe mayor variabilidad ($\text{CV}_C \leq 0.225$ para SHAP
 con kernel), lo que implica que los rankings de calidad son sustancialmente
 más reproducibles que las estimaciones de latencia. EXP1 **no** contribuye
@@ -85,7 +85,7 @@ a la inferencia confirmativa de EXP2 ni a las hipótesis H1-H3.
 
 La Fase EXP2 es la cohorte de evidencia confirmativa. Expande EXP1 a los cinco
 modelos y cuatro métodos explicadores, con cinco semillas y tres tamaños de
-muestra, bajo el protocolo FOM-7 descrito en la Sección 3.6. Los resultados
+muestra, bajo el protocolo FOM-7 descrito en la Sección -@sec-fom7. Los resultados
 de EXP2 son la fuente exclusiva de las afirmaciones estadísticas inferenciales
 del Estudio Omnibus Multimétrico y del Estudio Pareado LIME–SHAP.
 
@@ -107,7 +107,7 @@ categóricas incluyen: clase de trabajo, nivel de educación, estado civil,
 ocupación, relación familiar, raza, sexo y país de origen. La tasa de positivos
 (clase $>50$K USD) es del 23.9%, lo que implica un desbalance moderado
 controlado mediante el muestreo estratificado por cuadrante de error descrito
-en la Sección 3.4.
+en la Sección -@sec-muestreo.
 
 ### Carga, limpieza y partición
 
@@ -187,7 +187,7 @@ La unidad inferencial primaria del Estudio Pareado LIME–SHAP es la **celda
 pareada** $(g, s, n)$: las 75 tuplas para las que existen artefactos
 calificados de SHAP y LIME con coordenadas idénticas.
 
-## Protocolo de muestreo de instancias y configuración de explicadores
+## Protocolo de muestreo de instancias y configuración de explicadores {#sec-muestreo}
 
 ### Muestreo estratificado por cuadrante de error
 
@@ -301,7 +301,7 @@ registrado en `ExplainerWrapper` bajo restricciones de recursos gestionadas por
 : Métricas primarias del benchmark con unidades y direcciones.
 {#tbl-metrics}
 
-## Protocolo de operación FOM-7
+## Protocolo de operación FOM-7 {#sec-fom7}
 
 FOM-7 (*Framework Operation Method*, siete puertas) es la contribución
 metodológica central de este estudio. Fue derivado de: (i) los requisitos de
@@ -329,7 +329,7 @@ reemplaza mediante reconstrucción sintética. Esta decisión descarta
 deliberadamente las estrategias de imputación habituales en presencia de datos
 faltantes [@adhikari2022]: imputar una métrica de calidad equivaldría a fabricar
 evidencia sobre el comportamiento de un explicador que no llegó a ejecutarse, de
-modo que la cobertura reducida se declara y se cuantifica (Sección 3.7) en lugar
+modo que la cobertura reducida se declara y se cuantifica (Sección -@sec-cobertura) en lugar
 de completarse.
 
 **Puerta 4 — Armonización a tablas listas para el análisis.** Estandarización
@@ -375,7 +375,7 @@ metodológica.
 
 : Puertas FOM-7, artefactos y modos de fallo controlados. {#tbl-fom7-gates}
 
-## Cobertura de artefactos y análisis del impacto de datos faltantes
+## Cobertura de artefactos y análisis del impacto de datos faltantes {#sec-cobertura}
 
 ### Inventario de cobertura
 
