@@ -40,6 +40,13 @@ guards:
       - "A registered value matches its artifact within the declared tolerance"
       - "A quantity appearing in more than one manuscript is registered once, listing every document that carries it"
       - "No value retired by an audit reappears in any manuscript"
+      - "A retired or unregistered value must not survive inside a FIGURE. Numbers
+         baked into an embedded PDF are invisible to verify_claims.py, which reads
+         manuscript text. Every figure carrying data labels needs a committed
+         generator, so it can be rebuilt when a value changes (added 2026-09-06,
+         after the retired A03 value 0.607 was found still labelling a bar in
+         fig_exp3_fidelity.pdf five weeks after the correction, in a figure no
+         committed script could regenerate)"
       - "Every artifact path a manuscript cites exists in the working tree, not only on a side branch"
       - "A cited artifact is TRACKED BY GIT, not merely present on the author machine:
          .gitignore cannot re-include a file whose parent directory is excluded, so a
@@ -143,6 +150,8 @@ guards:
 
     review_triggers:
       - "Any edit to a supplementary table value or caption"
+      - "Any figure with numeric data labels being added or changed: confirm a
+         generator is committed and re-run it after any value correction"
       - "Any change to how ICC or Krippendorff's alpha is described"
       - "Any reconstruction of a further EXP4 module (add it to PAIRS in the verifier)"
       - "Any proposal to re-run the EXP4 judges: that creates a new cohort, not a reproduction"
