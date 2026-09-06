@@ -771,9 +771,12 @@ manuscript-editing support tooling.
 - Adding any file to `[coverage]` in `pub/claim_registry.toml` is a trunk event: it turns CI
   red on every lane, so it is triaged to `--coverage-report` exit 0 on a `pubs/*` branch and
   merged before any lane consumes it.
-- `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`, so the ACE framework is untracked
-  and absent from any new worktree - copy or link it in. For the same reason `.aceconfig`
-  `pre_commit` hooks are local-only: anything that must hold across lanes belongs in
+- `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`. Only the four tracked
+  `.ace/standards/*.md` files reach a new worktree; roles, skills, packs, prompts, scripts,
+  workflows, schemas, knowledge, feedback and `.aceconfig` do not. Seed a worktree with
+  `cp -r .ace/. <worktree>/.ace/` (contents, not the directory - `standards/` already exists
+  there) plus `cp .aceconfig <worktree>/`. For the same reason `.aceconfig` `pre_commit` hooks
+  are local-only: anything that must hold across lanes belongs in
   `.github/workflows/pubs-sync.yml`.
 - `pub/fragments/` conflicts are never resolved by hand: take either side and re-run
   `scripts/pubs/generate_fragments.py`.
