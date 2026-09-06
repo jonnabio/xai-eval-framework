@@ -47,7 +47,10 @@ htmlcov/
 
 # Outputs and Logs
 logs/
-outputs/
+# outputs/* not outputs/: git cannot re-include a file whose parent
+# directory is excluded, so the negations below were silently inert and
+# three cited artifacts never entered the repository.
+outputs/*
 !outputs/batch_results.csv
 !outputs/batch_manifest.json
 !outputs/analysis/
