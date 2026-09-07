@@ -1,8 +1,11 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-05
-- **Active Role:** Scientific Editor / Developer
+- **Last Updated:** 2026-09-06
+- **Active Role:** Scientific Editor / Developer / Architect
+- **Mode (2026-09-06):** ARCHITECTURE / PUBLICATION - adopted ADR-0013 and a second
+  worktree so Paper B+C could proceed beside the thesis; swept Ch.3; took Paper B+C
+  to TMLR-submittable. See the 2026-09-06 Session Handoff below.
 - **Mode (2026-08-30):** PUBLICATION / EXECUTION - repository restructuring plus a thesis
   front-matter and presentation pass. Nine commits on the new branch `thesis/rca-001-phase-2`,
   pushed. **Branch hygiene first:** the working tree was found checked out on `main`, which still
@@ -502,8 +505,175 @@ guards / 10 cited artifacts / 3 files fully registered; `verify_sync.py` and
     `open(p,'rb').read().count(b'\r\r\n') == 0` and re-parse before committing.
   - The EXP4 dimension key in the artifact is `concision`, not `conciseness`.
 
+## Session Handoff - 2026-09-06
+
+Two workstreams ran in parallel for the first time: the thesis coverage sweep and
+Paper B+C's venue preparation. 78 commits on `main` (`72a2a9665`..`357f62af8`).
+All three lanes level, working trees clean, everything pushed. Verified at close:
+`verify_claims.py` 209 claims / 300 sites / 26 retired-value guards / 10 cited
+artifacts / 4 files fully registered; `verify_sync.py` and
+`verify_exp4_reconstruction.py` green.
+
+### Completed
+
+- **ADR-0013, the publication branching model.** The trunk was 29 commits behind
+  the only active lane, so any second lane would have started on a stale claim
+  substrate. Principle adopted: *manuscript bodies are branch-private, the claim
+  substrate is trunk-owned, a lane may be ahead of `main` but never behind*. It
+  follows from RCA-001 invariant 3, which forbids registering a shared quantity
+  twice and so forbids forking `pub/claim_registry.toml`. Lanes, the shared-file
+  list and five merge rules are in `docs/adr/0013-publication-branching-model.md`
+  and mirrored into Active Constraints. Plan tasks 7 and 8 added.
+- **Second worktree** at `C:\Users\jonna\Github\xai-paper-bc` on
+  `paper/bc-venue-definition`, so the thesis DOCX can stay open in Word while
+  Paper B+C builds.
+- **Ch.3 coverage sweep (thesis).** Fourth file enforced. Registry 166 -> 209
+  claims, 270 -> 313 sites; nine resolvers added (`exp1_model_metric`,
+  `exp1_split`, `exp1_repro_cv_max`, `exp2_artifacts_present`,
+  `exp2_coverage_pct`, `exp2_method_coverage_pct`, `exp2_block_replication`,
+  plus the composers `linear:<a>|<b>|<expr>` and `chi2_sf3:<expr>`). Two defects:
+  **F16**, four section and table numbers typed rather than generated - all
+  correct, which is why nothing had caught them - now `@sec-`/`@tbl-` crossrefs
+  with three new anchors (`sec-muestreo`, `sec-fom7`, `sec-cobertura`); **F17**,
+  two EXP1 CV bounds stated one ulp below the value they bound.
+- **Three cited artifacts were untracked.** `verify_claims.py` was green on this
+  machine and red on any fresh checkout, proved by running it in the new
+  worktree: 41 failures. `.gitignore` excluded `outputs/`, and git cannot
+  re-include a file under an excluded directory, so every `!outputs/analysis/...`
+  negation was inert. `exp4_llm_evaluation/`, `lime_kernel_width_sensitivity.csv`
+  and `exp3_lime_results.csv` had never entered the repository. Fixed with
+  `outputs/*`; RCA-001 gained the invariant that a cited artifact must be
+  *tracked*, not merely present.
+- **Paper B+C venue: TMLR.** Chosen over IJIMAI, which caps papers at 12 pages
+  against this manuscript's 26 and would have forced un-merging Papers B and C.
+  Converted to the official `tmlr.sty`, renamed `paper_bc_jmlr*` ->
+  `paper_bc_tmlr*` (78 references repointed across ten live pointers; dated
+  review reports deliberately keep the old name), anonymised through the package
+  option with `\ifdeanon` / `\ifdeanonymised` guards driven by the same
+  `\if@accepted`.
+- **Paper A published and cited.** RIMI (3), 2026, doi:10.69850/rimi.vi3.307.
+  Cited in the Introduction and at the head of the empirical section.
+- **B1, prior publication - closed.** TMLR forbids reuse of text, figures *or
+  results* with archivally published work; the carve-out covers only
+  non-archival venues. Thirteen registered results appeared in both papers.
+  All thirteen removed: the four-method Friedman omnibus and the block-means /
+  Nemenyi tables replaced by a cited paragraph; the paired table's per-method
+  mean columns replaced by the mean difference with a 95% CI it never carried;
+  the EXP3 SHAP column replaced by the SHAP-Anchors gap; three prose uses of
+  LIME's stability level reworded to "near zero". **Text and figures never
+  overlapped** - 2 shared sentences out of 405, both bibliography titles, and
+  Paper A has no figures.
+- **A retired value was shipping inside a figure.** `fig_exp3_fidelity.pdf`
+  labelled its Breast Cancer / XGB bar `0.607`, the April snapshot retired
+  2026-08-23 as `A03.exp3.bc_xgb.april`. It survived five weeks because
+  `verify_claims.py` reads manuscript text and cannot see inside an embedded
+  figure, and no committed script produced that figure. Wrote
+  `scripts/generate_exp3_gap_figure.py`; `fig_exp3_gap.pdf` plots Anchors levels
+  with the gap stacked above, so each bar still reaches the SHAP level without
+  labelling it. RCA-001/002 gained the matching invariant.
+- **B2, authorship - closed.** Dr Herrero-Uceda was added, then removed at his
+  request ("he says I made all the work"); sole author is Jonathan
+  Herrera-Vasquez, acknowledgment singular. OpenReview profile created under a
+  UNADE email. He remains an author of the RIMI paper, which is cited.
+- **B3, artifacts - closed.** `scripts/pubs/build_artifact_bundle.py` produces
+  `docs/reports/paper_bc/paper_bc_artifacts.zip`, 3.8 MB / 3,568 files
+  (gitignored; regenerate rather than store). Scrubbed **577 absolute paths
+  containing the author username** from three exports - in the bundle copies
+  only, never in the repository artifacts, which are the evidence the registry
+  resolves against.
+- **Abstract typography.** `pub/claims.toml` had `vs.\` at a line end; TOML reads
+  a trailing backslash as a line continuation and ate the space, so the abstract
+  read "53.3 ms vs.694.6 ms". Only instance in the file.
+- **Broader Impact Statement** added, and the prior-publication subsection
+  unguarded and retitled *Provenance of the Empirical Cohort* now that no result
+  is shared.
+
+### Current State
+
+- `main` `357f62af8`; both lanes level with it, 0 substrate files differing.
+- **Thesis:** `[coverage]` enforces four files (Ch.3, 4, 5, 6). Six remain:
+  `capitulo-1`, `capitulo-2`, `introduccion`, `apendices`, Paper A, Paper B+C.
+- **Paper B+C: submittable on the evidence available.** 26 pp + 5 pp
+  supplementary, zero unresolved references or citations, `tmlr.sty`
+  byte-identical to upstream, anonymous title block with no name, email or
+  affiliation, zero results shared with the published Paper A.
+
+### Next Steps
+
+1. **Author actions before submitting Paper B+C** (nothing in the manuscript
+   blocks): send the editor note
+   `docs/reports/paper_bc/EIC_ENQUIRY_prior_publication.md`; build the bundle
+   with `python scripts/pubs/build_artifact_bundle.py` and attach
+   `paper_bc_artifacts.zip` as supplementary; confirm the RIMI journal spelling
+   and DOI, that the work is under review nowhere else, and that
+   `10.5281/zenodo.21538180` is the right snapshot for this paper. After
+   submission, set `\openreview`, `\month` and `\year` for the camera-ready.
+2. **Decide `data/adult.csv`.** Ten `verify_claims.py` failures on any clean
+   checkout, all from the `supp.s3.*` claims reaching into the 5.3 MB raw
+   dataset, which `/data/` ignores. Recommended: derive
+   `outputs/analysis/supp_s3_associations.csv` using the existing resolver code
+   so values are identical by construction, and repoint those ten claims; the
+   alternative is vendoring the dataset. Not done because it changes how
+   RCA-002-guarded statistics resolve.
+3. **Continue the coverage sweep.** Take `apendices` next: it carries the same
+   typed section/table numbers F16 fixed in Ch.3, and the Anchors-tau and
+   Appendix C probe values.
+4. **Plan task 8** - `scripts/pubs/check_substrate_current.py` in CI, plus
+   `pubs-sync.yml` triggers for `thesis/**`, `paper/**`, `pubs/**`.
+5. **RCA-001 Phase 2 proper** - registry values into Quarto inline values, and a
+   CI job building all four outputs.
+
+### Blockers/Issues
+
+- **CI is almost certainly red** and has been: `verify_claims.py` fails on a
+  fresh checkout for `data/adult.csv` (item 2 above). Could not confirm - `gh`
+  is not installed on this machine.
+- `pubs-sync.yml` runs only on `pull_request` and push to `main`, so a local
+  merge on a lane gets no CI at all.
+- **TMLR's judgement on the shared cohort** is the one thing outside our
+  control. No result is shared, but both papers rest on the same executions;
+  the editor note discloses it.
+- Author verification of the 28 reconstructed review-corpus coding rows, and an
+  off-machine backup of the 44 corpus PDFs, both still open from earlier
+  sessions.
+- Word TOC refresh after every thesis render - manual, unavoidable.
+
+### Notes
+
+- **Worktrees need seeding.** `.ace/` (except the four tracked
+  `standards/*.md`), `.aceconfig`, `tools/tectonic-portable/` and
+  `outputs/` are gitignored, so a new worktree lacks them. Seed with
+  `cp -r .ace/. <worktree>/.ace/` - contents, not the directory, or it nests.
+  Copy `tectonic.exe` explicitly: **Git Bash resolves `tectonic` to
+  `tectonic.exe` on Windows** and silently overwrote one with the other.
+- **Do not write Python with backslashes through a Bash heredoc.** The harness
+  collapses `\\` to `\`, which silently corrupts LaTeX anchors and regexes.
+  Write the script to a file first, then run it. This cost several retries.
+- **PowerShell `Set-Content -Encoding utf8` adds a BOM.** It did, to
+  `paper_bc_tmlr.tex`; stripped afterwards. Prefer Python for round-trips.
+- **The post-render hook rewrites `thesis/_output/` even when Quarto is given
+  `--output-dir _scratch`**, contrary to the older note. Restore `_output` from
+  git after a scratch validation render.
+- **Two worktrees means two copies of every file.** Twice this session a stale
+  PDF was read from the thesis lane while the work sat on the paper lane. Merge
+  to `main` as soon as a unit is green.
+- **The registry can detect prior-publication conflicts.** A claim whose
+  `appears_in` names both a published document and a live submission is a
+  candidate; the query is in the editor note. Re-run it whenever any registered
+  manuscript is published - RCA-001 has the trigger.
+- Paper B+C build: `python scripts/pubs/build_artifact_bundle.py` for the ZIP;
+  Tectonic for the PDFs; `docs/reports/paper_bc/BUILD.md` documents the three
+  anonymity modes and the pre-submission checklist.
+
 ## Current Objective
-**Task 3 — RCA-001 Phase 2: make each published number exist in exactly one place.**
+**Two workstreams, one per lane (ADR-0013).**
+
+**`paper/bc-venue-definition` — submit Paper B+C to TMLR.** The manuscript is
+submittable; what remains is author action, listed under Next Steps in the
+2026-09-06 handoff. Do not submit before sending the editor note.
+
+**`thesis/rca-001-phase-2` — Task 3, RCA-001 Phase 2: make each published number
+exist in exactly one place.**
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
 values so the manuscripts consume them rather than restating them, and build all four
 outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
@@ -517,6 +687,17 @@ manuscript-editing support tooling.
 ## Current State
 
 ### Working
+- **Paper B+C is ready to submit to TMLR (2026-09-06).** 26 pp plus a 5 pp
+  supplementary, official `tmlr.sty` unmodified, anonymous under double-blind,
+  zero results shared with the published RIMI paper, Broader Impact Statement
+  present, artifacts released as a 3.8 MB anonymised bundle from which all 48
+  of its registered claims re-derive. Submission artifacts:
+  `docs/reports/paper_bc/paper_bc_tmlr.tex` / `.pdf`,
+  `paper_bc_tmlr_supplementary.tex` / `.pdf`,
+  `paper_bc_artifacts.zip` (gitignored; rebuild with
+  `scripts/pubs/build_artifact_bundle.py`),
+  `EIC_ENQUIRY_prior_publication.md`, `BUILD.md`, and the readiness record
+  `docs/review/tmlr_readiness_checklist_2026-09-06.md`.
 - **Task 1 (closed 2026-08-26):** Paper B+C's review corpus released as a 44-row coded
   CSV, CI-verified against the manuscript's printed distribution; reconstruction
   disclosed in §Validity. Author verification still wanted on the 28 reconstructed
@@ -582,6 +763,14 @@ manuscript-editing support tooling.
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
+00. [ ] **Paper B+C is TMLR-submittable; the remaining steps are the author's.**
+   Send `docs/reports/paper_bc/EIC_ENQUIRY_prior_publication.md` to the
+   Editors-in-Chief; build the bundle with
+   `python scripts/pubs/build_artifact_bundle.py` and attach
+   `docs/reports/paper_bc/paper_bc_artifacts.zip` as supplementary material;
+   confirm the RIMI DOI, no concurrent submission, and the Zenodo snapshot.
+   Full detail and the anonymity build modes: the 2026-09-06 Session Handoff
+   and `docs/reports/paper_bc/BUILD.md`.
 0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
    inline values; add a CI job building Paper A, Paper B+C, the supplementary and the
    thesis, failing on undefined references and crossref warnings.
