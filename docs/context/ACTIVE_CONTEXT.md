@@ -1,8 +1,10 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-06
+- **Last Updated:** 2026-09-08
 - **Active Role:** Scientific Editor / Developer / Architect
+- **Mode (2026-09-08):** STATUS - no changes. Paper B+C is submission-ready and
+  blocked on OpenReview account approval. See the 2026-09-08 Session Handoff.
 - **Mode (2026-09-06):** ARCHITECTURE / PUBLICATION - adopted ADR-0013 and a second
   worktree so Paper B+C could proceed beside the thesis; swept Ch.3; took Paper B+C
   to TMLR-submittable. See the 2026-09-06 Session Handoff below.
@@ -665,6 +667,76 @@ artifacts / 4 files fully registered; `verify_sync.py` and
   Tectonic for the PDFs; `docs/reports/paper_bc/BUILD.md` documents the three
   anonymity modes and the pre-submission checklist.
 
+## Session Handoff - 2026-09-08
+
+**Status update only. No code, manuscript or registry change.** Repository
+identical to the 2026-09-06 close: `main` `eeec4852b`, both lanes level, working
+trees clean, nothing unpushed, all three verifiers green (209 claims / 300 sites
+/ 26 retired-value guards / 10 cited artifacts / 4 files fully registered).
+
+### Completed
+
+- Nothing was built or changed. This entry exists to record where the Paper B+C
+  submission actually stands, so a resuming session does not mistake "ready" for
+  "submitted".
+
+### Current State
+
+- **Paper B+C is submission-ready and not submitted.** All three blockers from
+  the readiness review (B1 prior publication, B2 authorship, B3 artifacts) are
+  closed; the manuscript, supplementary, artifact bundle and editor note are
+  complete and committed.
+- **Submission is blocked on OpenReview account approval.** The profile was
+  created under a UNADE email on 2026-09-06 and is still awaiting moderator
+  activation. TMLR submissions go only through OpenReview, so nothing can be
+  filed until it clears.
+- **The editor note is written and will be sent with the submission, not
+  before.** Author's decision, recorded as such: the earlier recommendation was
+  to send it in advance. The note already supports this route - it names the
+  OpenReview submission comment field as an alternative to the Editors-in-Chief
+  address - so no change to
+  `docs/reports/paper_bc/EIC_ENQUIRY_prior_publication.md` is needed. The risk
+  accepted is that if the editors object to the shared cohort, that objection
+  now arrives after filing rather than before.
+
+### Next Steps
+
+1. **Wait for OpenReview activation**, then submit. In order: build the bundle
+   (`python scripts/pubs/build_artifact_bundle.py`), upload
+   `paper_bc_tmlr.pdf` with `paper_bc_artifacts.zip` as supplementary, and post
+   the editor note in the submission's comment field at the same time.
+2. **After submission**, set `\openreview` to the forum URL, and `\month` /
+   `\year`, for the camera-ready build only. See
+   `docs/reports/paper_bc/BUILD.md`.
+3. **Three confirmations still pending** and unchanged since 2026-09-06 - see
+   Blockers below.
+4. Thesis workstream continues as before: sweep `apendices` next.
+
+### Blockers/Issues
+
+- **OpenReview account not yet approved.** Hard blocker on submission; outside
+  our control, no workaround.
+- **Three author confirmations outstanding**, all carried from 2026-09-06 and
+  none yet done: the RIMI journal-title spelling and DOI against the published
+  article (the journal's own site prints "multidisiplinaria", apparently a typo,
+  while the manuscript bibliography uses the corrected spelling); that the work
+  is under review at no other venue; and that
+  `10.5281/zenodo.21538180` is the correct snapshot DOI for this paper rather
+  than for the thesis, since it was adopted there first.
+- Everything under the 2026-09-06 Blockers section is unchanged: the
+  `data/adult.csv` decision and the CI it is probably failing, the
+  `pubs-sync.yml` trigger gap, the 28 reconstructed corpus rows, the corpus-PDF
+  backup, and the Word TOC refresh.
+
+### Notes
+
+- **Ready is not submitted.** The readiness checklist
+  (`docs/review/tmlr_readiness_checklist_2026-09-06.md`) reads "submittable",
+  which is a statement about the manuscript, not about the filing. Do not close
+  Next Steps item 00 until an OpenReview forum ID exists.
+- Nothing else from the 2026-09-06 Notes has changed; the worktree seeding,
+  heredoc-backslash, PowerShell BOM and figure-blind-spot notes all still apply.
+
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
 
@@ -763,12 +835,15 @@ manuscript-editing support tooling.
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
-00. [ ] **Paper B+C is TMLR-submittable; the remaining steps are the author's.**
-   Send `docs/reports/paper_bc/EIC_ENQUIRY_prior_publication.md` to the
-   Editors-in-Chief; build the bundle with
+00. [ ] **Paper B+C is TMLR-submittable but NOT submitted; blocked on OpenReview
+   account approval (as of 2026-09-08).** When the account clears: build the
+   bundle with
    `python scripts/pubs/build_artifact_bundle.py` and attach
-   `docs/reports/paper_bc/paper_bc_artifacts.zip` as supplementary material;
-   confirm the RIMI DOI, no concurrent submission, and the Zenodo snapshot.
+   `docs/reports/paper_bc/paper_bc_artifacts.zip` as supplementary material,
+   and post `EIC_ENQUIRY_prior_publication.md` in the submission's comment
+   field at the same time (author's decision: sent with the submission, not
+   ahead of it). Still to confirm: the RIMI DOI and journal-title spelling,
+   no concurrent submission, and that the Zenodo snapshot is this paper's.
    Full detail and the anonymity build modes: the 2026-09-06 Session Handoff
    and `docs/reports/paper_bc/BUILD.md`.
 0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
