@@ -8,6 +8,45 @@ LaTeX converted and inline math kept for OpenReview's MathJax. **If
 
 Submission venue: <https://openreview.net/group?id=TMLR>
 
+> **The paper is under author revision as of 2026-09-15 and must not be filed
+> from the package verified on 2026-09-14.** Run "After any revision" below and
+> hand the author the result first.
+
+## After any revision — regenerate before submitting
+
+Any edit to `paper_bc_tmlr.tex`, `paper_bc_tmlr_supplementary.tex` or
+`pub/claims.toml` invalidates the built PDFs, the artifact bundle and the
+abstract reproduced in this sheet. Work in the paper lane, with `data/adult.csv`
+present (it is gitignored, so copy it in from the main worktree if missing).
+
+1. **Register first, edit second.** Any new or changed number goes into
+   `pub/claim_registry.toml` before it reaches the manuscript (RCA-001
+   invariant 1). A rescoped or retracted claim also triggers
+   `docs/review/top-level-statement-sweep.md`.
+2. **Rebuild both PDFs.**
+   `./tools/tectonic-portable/tectonic.exe docs/reports/paper_bc/paper_bc_tmlr.tex`
+   and the same for `paper_bc_tmlr_supplementary.tex`. Confirm zero undefined
+   references and citations.
+3. **Read page 1 of the built PDF**, not the source. On 2026-09-14 the abstract
+   printed "SHAP's extttTreeExplainer" past a green verifier, a green readiness
+   checklist and an anonymity pass (RCA-003).
+4. **Re-run all three verifiers:** `verify_claims.py`, `verify_sync.py`,
+   `verify_exp4_reconstruction.py` (needs Python 3.13).
+5. **Re-scan for identity.** Both PDFs, text and metadata, and every file in the
+   bundle. The only permitted hits are the third-person citation of the RIMI
+   paper in the main PDF.
+6. **Re-run the shared-result query** from `EIC_ENQUIRY_prior_publication.md`.
+   It must return nothing: a result shared with the published Paper A is a TMLR
+   policy conflict, not a style issue.
+7. **Rebuild the bundle** — `python scripts/pubs/build_artifact_bundle.py` —
+   and confirm it contains `supplementary_tables.pdf`.
+8. **Regenerate this sheet's abstract** from
+   `pub/fragments/paper_bc_abstract_en.tex`; never retype it. Update the word
+   and character counts, the page counts, and the commit stamp at the top.
+9. **Report the result to the author in writing** before anything is uploaded.
+   If the revision changed the title, abstract or keywords, the form fields
+   below change with it.
+
 ## Status of the pre-submission confirmations
 
 | Item | Status |
