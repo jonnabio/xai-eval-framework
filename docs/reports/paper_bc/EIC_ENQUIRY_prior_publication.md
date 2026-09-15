@@ -1,9 +1,9 @@
 # Note to the TMLR Editors-in-Chief — shared experimental cohort
 
 **Status of this document.** Rewritten 2026-09-06 after the overlap it
-originally described was eliminated. It is no longer a request for permission;
-it is a disclosure, sent so the editors learn of the shared cohort from the
-author rather than from a reviewer.
+originally described was eliminated; revised 2026-09-14 for sending *after*
+submission. It is a disclosure, not a request for permission, sent so the
+editors learn of the shared cohort from the author rather than from a reviewer.
 
 **Why send it at all.** TMLR prohibits reuse of written text, figures or
 results with work published at an archival venue. No result is now reported in
@@ -11,20 +11,27 @@ both documents. But the two studies rest on the same executions, and that is a
 fact an editor should have. Volunteering it costs nothing; having it surface
 during review costs a great deal.
 
-**Where to send.** The Editors-in-Chief address on the TMLR site, or the
-comment field on the OpenReview submission form.
+**When and where.** Author's decision (2026-09-08): with the submission, not
+ahead of it. Send by **email to tmlr-editors@jmlr.org** as soon as the
+submission number exists. Do not post it as a forum comment: the note is
+signed and names the earlier article's authors, so any comment a reviewer can
+read would break double-blind review.
 
 ---
 
 ## Draft message
 
-> **Subject:** Disclosure of a shared experimental cohort with an earlier
-> publication
+> **To:** tmlr-editors@jmlr.org
+>
+> **Subject:** TMLR submission [NUMBER]: disclosure of a shared experimental
+> cohort with an earlier publication
 >
 > Dear Editors-in-Chief,
 >
-> I am about to submit to TMLR and would like to place one fact on the record
-> in advance.
+> I have just submitted "From Fidelity to Semantics: A Taxonomy of XAI
+> Evaluation Metrics and Paired Empirical Comparison of LIME versus SHAP"
+> to TMLR (submission [NUMBER], [FORUM URL]), and would like to place one fact
+> on the record at the outset of review.
 >
 > The empirical cohort my submission analyses was released with an earlier
 > article: "A framework for rigorous evaluation of model-agnostic
@@ -62,10 +69,15 @@ comment field on the OpenReview submission form.
 >
 > One further disclosure: the earlier article has two authors. I am the sole
 > author of this submission, my co-author on that article having declined
-> authorship here on the grounds that this work is not his.
+> authorship here on the grounds that this work is not his. He is also my
+> doctoral tutor, and is declared as a conflict of interest on my OpenReview
+> profile.
 >
 > I would rather you heard this from me. If you consider the shared cohort
-> disqualifying notwithstanding the removals, I would prefer to know now.
+> disqualifying notwithstanding the removals, I would prefer to know early.
+>
+> Because this message identifies me, I would be grateful if it were not
+> forwarded to reviewers.
 >
 > Thank you for your time.
 >
@@ -76,10 +88,15 @@ comment field on the OpenReview submission form.
 
 ## Before sending
 
-- Confirm the RIMI journal name and DOI against the published article. The
-  journal's site spells the title "multidisiplinaria", apparently a typo; the
-  manuscript's bibliography uses the corrected spelling.
-- Confirm the work is under review at no other venue.
+- Fill in `[NUMBER]` (twice) and `[FORUM URL]`.
+- Send from the address registered on the OpenReview profile, so the editors
+  can match the note to the submission.
+- Confirmed 2026-09-14: the RIMI DOI resolves in Crossref to this article
+  (issue 3, published 2026-09-01), and Crossref spells the journal
+  "multidisciplinaria" correctly. The "multidisiplinaria" seen on the journal's
+  site is the site's own typo.
+- The only remaining confirmation: the work is under review at no other venue.
+  The submission form asks for the same thing.
 
 ## Supporting detail, if asked
 

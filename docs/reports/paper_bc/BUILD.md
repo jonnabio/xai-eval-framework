@@ -46,16 +46,22 @@ A fourth guard covered the prior-publication disclosure and was removed on
 of the Empirical Cohort" is an ordinary provenance statement, and it is
 visible to reviewers.
 
-## Before submitting
+## Submitting
 
-- **Send the disclosure note to the editors.** No result is reported in both
-  this submission and the published RIMI paper, but the two rest on the same
-  executions. `EIC_ENQUIRY_prior_publication.md` is the note; the paper states
-  the same provenance openly in §Validity.
+Form fields, uploads and suggested Action Editors are in
+`OPENREVIEW_SUBMISSION.md`.
+
 - **Attach the artifact bundle.** Build it with
   `python scripts/pubs/build_artifact_bundle.py` and upload
   `paper_bc_artifacts.zip` as supplementary material; §Code and Artifact
-  Availability points reviewers at it.
+  Availability points reviewers at it. It carries the supplementary tables
+  PDF, because OpenReview accepts only one supplementary file.
+- **Email the disclosure note to the editors right after submitting**, quoting
+  the submission number. No result is reported in both this submission and the
+  published RIMI paper, but the two rest on the same executions.
+  `EIC_ENQUIRY_prior_publication.md` is the note; the paper states the same
+  provenance openly in §Validity. Send it by email, not as a forum comment,
+  because the note identifies the author.
 - Rebuild and confirm the anonymous PDF shows no author name, email,
   affiliation or acknowledgments.
 
