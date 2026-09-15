@@ -1,8 +1,12 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-08
+- **Last Updated:** 2026-09-14
 - **Active Role:** Scientific Editor / Developer / Architect
+- **Mode (2026-09-14):** PUBLICATION / INCIDENT - OpenReview account activated;
+  pre-submission check of Paper B+C found and fixed two defects (RCA-003) and
+  prepared the submission sheet. Not yet submitted. See the 2026-09-14 Session
+  Handoff.
 - **Mode (2026-09-08):** STATUS - no changes. Paper B+C is submission-ready and
   blocked on OpenReview account approval. See the 2026-09-08 Session Handoff.
 - **Mode (2026-09-06):** ARCHITECTURE / PUBLICATION - adopted ADR-0013 and a second
@@ -737,6 +741,76 @@ trees clean, nothing unpushed, all three verifiers green (209 claims / 300 sites
 - Nothing else from the 2026-09-06 Notes has changed; the worktree seeding,
   heredoc-backslash, PowerShell BOM and figure-blind-spot notes all still apply.
 
+## Session Handoff - 2026-09-14
+
+**OpenReview account active; Paper B+C is ready to file and NOT yet submitted.**
+The pre-submission check found two defects that every earlier check had passed.
+Both are fixed. The author's confirmations are all in except one.
+
+### Completed
+
+- **Author actions confirmed (2026-09-14):** OpenReview profile complete
+  (affiliation, publication history including RIMI); Dr Herrero-Uceda declared
+  as a conflict of interest (thesis tutor); RIMI DOI confirmed, and Crossref
+  resolves it to the article (issue 3, 2026-09-01, ISSN 2992-7978) with the
+  journal name correctly spelled, so the bibliography needs no change; Zenodo
+  snapshot `10.5281/zenodo.21538180` confirmed as this paper's.
+- **Defect 1, the abstract printed "SHAP's extttTreeExplainer" (RCA-003).**
+  `pub/claims.toml` held `\texttt` with a single backslash, which TOML reads as
+  a TAB. It was present since 2026-08-24, and it is the second instance of the
+  class: `3d6ba90ba` fixed `vs.\` one line above and did not look further.
+  `verify_sync.py` now fails, in CI, on any odd-length backslash run inside a
+  `"""` string in `claims.toml` and on any control character in a fragment.
+  Negative-tested against the old source. Guard RCA-003 added.
+- **Defect 2, the supplementary tables were not in the upload.** OpenReview
+  takes one supplementary file; the ZIP lacked `paper_bc_tmlr_supplementary.pdf`.
+  `build_artifact_bundle.py` now ships it as `supplementary_tables.pdf`, and
+  refuses to build when an input is missing.
+- **Submission sheet** `docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md` (paper
+  lane): one-line title, the abstract converted by script from the fragment
+  (246 words, inline math kept for MathJax), keywords, upload paths,
+  human-subjects/funding/competing-interest answers matching the manuscript,
+  and five suggested Action Editors from the TMLR board's listed areas: Dennis
+  Wei, Satoshi Hara, Amir-Hossein Karimi, Mengnan Du, Olawale Elijah Salaudeen.
+  None is cited in the manuscript.
+- **Editor note revised** for email to `tmlr-editors@jmlr.org` right after
+  submission, quoting the submission number. It is signed, so it must not go
+  in as a forum comment. It now also discloses the tutor relationship. BUILD.md
+  updated to match.
+- Verified: anonymity scan of both PDFs (text and metadata) and all 3,569 bundle
+  files, where the only name hits are the third-person RIMI citation; PDF 26 pp,
+  0 undefined refs; shared-result query 0 of 209; verifiers green.
+
+### Current State
+
+- `main` `2e1bb6a33` (+ this handoff). Paper lane `16ae73404`: main plus the
+  rebuilt PDF and the submission documents. Thesis lane `be6f79e68`: main merged.
+  All pushed.
+- The paper worktree now holds an untracked copy of `data/adult.csv`, which it
+  needs for `verify_claims.py` and the bundle build. It is gitignored.
+
+### Next Steps
+
+1. **Author: confirm the work is under review at no other venue** (form
+   checkbox), then submit using `OPENREVIEW_SUBMISSION.md`. Rebuild the bundle
+   just before uploading.
+2. **Right after submitting:** email the editor note with the number and forum
+   URL filled in.
+3. Record the forum ID here and close Next Steps item 00.
+4. Camera-ready only: the acknowledgment's "This draft was prepared from
+   repository artifacts dated May 2026" is stale. It is hidden in the anonymous
+   build.
+
+### Notes
+
+- **A generator's output is a manuscript site.** Source, verifier and
+  readiness checklist were all green while page 1 of the PDF was wrong. Read the
+  rendered text of anything that passes through `generate_fragments.py`.
+- **`git worktree add` under the session scratchpad fails** with "Filename too
+  long" (`thesis/papers/`, `outputs/git_safety_backups/`). The substrate merge
+  was a fast-forwardable no-conflict case, so it was done with `git commit-tree`
+  + `git update-ref`, with no checkout. For a real merge, use a short path.
+
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
 
@@ -835,8 +909,10 @@ manuscript-editing support tooling.
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
-00. [ ] **Paper B+C is TMLR-submittable but NOT submitted; blocked on OpenReview
-   account approval (as of 2026-09-08).** When the account clears: build the
+00. [ ] **Paper B+C is TMLR-submittable but NOT submitted. OpenReview account
+   ACTIVE (2026-09-14); ready to file with `docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md`;
+   remaining confirmation: no concurrent submission. Editor note goes by email to
+   tmlr-editors@jmlr.org right after filing (see the 2026-09-14 handoff).** When the account clears: build the
    bundle with
    `python scripts/pubs/build_artifact_bundle.py` and attach
    `docs/reports/paper_bc/paper_bc_artifacts.zip` as supplementary material,
