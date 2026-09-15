@@ -1,8 +1,13 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-14
+- **Last Updated:** 2026-09-15
 - **Active Role:** Scientific Editor / Developer / Architect
+- **Mode (2026-09-15):** HANDOFF - submission-preparation task CLOSED. The Paper B+C
+  package is complete and re-verified, and the author is now revising the manuscript
+  in detail before filing. Active objective returns to Task 3 / RCA-001 Phase 2 on the
+  thesis lane. **The package must be regenerated and re-reviewed after that revision;
+  it must not be submitted as it stands.** See the 2026-09-15 Session Handoff.
 - **Mode (2026-09-14):** PUBLICATION / INCIDENT - OpenReview account activated;
   pre-submission check of Paper B+C found and fixed two defects (RCA-003) and
   prepared the submission sheet. Not yet submitted. See the 2026-09-14 Session
@@ -811,15 +816,81 @@ Both are fixed. The author's confirmations are all in except one.
   was a fast-forwardable no-conflict case, so it was done with `git commit-tree`
   + `git update-ref`, with no checkout. For a real merge, use a short path.
 
+## Session Handoff - 2026-09-15
+
+**Submission-preparation task closed. Paper B+C is NOT submitted, and must not be
+submitted from its current package.** The author is revising the manuscript in
+detail; any revision invalidates parts of the package that were built from it.
+Active objective moves back to Task 3 / RCA-001 Phase 2 on the thesis lane.
+
+### Where the paper stands
+
+- Everything needed to file exists and was verified on 2026-09-14: anonymous PDF
+  (26 pp, 0 undefined references), artifact bundle (3.9 MB, 3,569 files,
+  including `supplementary_tables.pdf`), editor note, and the submission sheet
+  `docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md`.
+- Author confirmations in hand: OpenReview profile complete, Herrero-Uceda
+  declared as a conflict, RIMI DOI verified against Crossref, Zenodo snapshot
+  confirmed.
+- **Two things outstanding, both author-side:** confirm the work is under review
+  at no other venue (form checkbox), and finish the detailed revision.
+- Lanes at close: `main` `ec1433b33`, paper lane `14bf66b6f`, thesis lane
+  `5c4705d03`, all pushed, both worktrees clean.
+
+### The submission gate (do not skip)
+
+A revision to `paper_bc_tmlr.tex`, its supplementary, or `pub/claims.toml`
+invalidates the built PDF, the bundle, and the abstract copied into the
+submission sheet. Before filing, run the re-verification checklist in
+`docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md` ("After any revision") and
+report the result to the author. **Never confirm the package is ready on the
+strength of the 2026-09-14 verification.** In short: rebuild both PDFs and the
+bundle, re-run all three verifiers, re-scan both PDFs and the bundle for author
+identity, re-run the shared-result query against Paper A, regenerate the
+sheet's abstract from the fragment, and re-read page 1 of the built PDF.
+
+The last item is not ceremony: on 2026-09-14 the abstract printed
+"SHAP's extttTreeExplainer" through a green verifier, a green readiness
+checklist and an anonymity pass (RCA-003).
+
+### Next steps, in order
+
+1. **Author:** finish the detailed revision of Paper B+C.
+2. **Then, before any submission:** run the re-verification checklist and hand
+   the author a written result. Register any new or changed number in
+   `pub/claim_registry.toml` first - a revision that introduces an unregistered
+   figure fails RCA-001 invariant 1, and prose edits that rescope a claim
+   trigger the top-level statement sweep.
+3. **Author:** confirm no concurrent submission, then file using the sheet.
+4. **Immediately after filing:** email the editor note to tmlr-editors@jmlr.org
+   with the submission number and forum URL filled in. Not as a forum comment -
+   the note is signed.
+5. **After filing:** record the forum ID here and close Next Steps item 00.
+6. **Thesis lane, meanwhile:** Task 3 / RCA-001 Phase 2 - continue the coverage
+   sweep with `apendices`, then `capitulo-1`, `capitulo-2`, `introduccion`,
+   Paper A and the supplementary, then the macro generation and the CI build
+   job.
+
+### Note on sweeping Paper B+C
+
+`docs/reports/paper_bc/paper_bc_tmlr.tex` is one of the ten files still outside
+`[coverage]`. Do not add it while the author is revising it: adding a file to
+`[coverage]` is a trunk event that turns CI red on every lane until triaged, and
+it would collide with in-flight manuscript edits. Sweep it after the revision
+settles, before filing.
+
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
 
-**`paper/bc-venue-definition` — submit Paper B+C to TMLR.** The manuscript is
-submittable; what remains is author action, listed under Next Steps in the
-2026-09-06 handoff. Do not submit before sending the editor note.
+**`paper/bc-venue-definition` — Paper B+C, TMLR: PAUSED for author revision
+(2026-09-15).** The submission package is complete and was verified on
+2026-09-14, but the author is revising the manuscript in detail. The package
+must be regenerated and re-reviewed against the revised manuscript before
+filing — see the submission gate in the 2026-09-15 handoff. Do not submit
+before that re-verification, and do not submit before sending the editor note.
 
-**`thesis/rca-001-phase-2` — Task 3, RCA-001 Phase 2: make each published number
-exist in exactly one place.**
+**ACTIVE — `thesis/rca-001-phase-2` — Task 3, RCA-001 Phase 2: make each
+published number exist in exactly one place.**
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
 values so the manuscripts consume them rather than restating them, and build all four
 outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
@@ -909,10 +980,14 @@ manuscript-editing support tooling.
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
-00. [ ] **Paper B+C is TMLR-submittable but NOT submitted. OpenReview account
-   ACTIVE (2026-09-14); ready to file with `docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md`;
-   remaining confirmation: no concurrent submission. Editor note goes by email to
-   tmlr-editors@jmlr.org right after filing (see the 2026-09-14 handoff).** When the account clears: build the
+00. [ ] **Paper B+C is NOT submitted and is PAUSED for author revision
+   (2026-09-15).** OpenReview account active since 2026-09-14 and the package is
+   built, but it was verified against the pre-revision manuscript. **Before filing,
+   run the "After any revision" checklist in
+   `docs/reports/paper_bc/OPENREVIEW_SUBMISSION.md` and report the result to the
+   author.** Remaining author confirmation: no concurrent submission. Editor note
+   goes by email to tmlr-editors@jmlr.org right after filing, never as a forum
+   comment (see the 2026-09-14 and 2026-09-15 handoffs). When the account clears: build the
    bundle with
    `python scripts/pubs/build_artifact_bundle.py` and attach
    `docs/reports/paper_bc/paper_bc_artifacts.zip` as supplementary material,
@@ -1098,6 +1173,13 @@ manuscript-editing support tooling.
   *quantify*, and a low ICC is the objective met, not failed.
 
 ## Active Constraints
+- **Paper B+C is not submitted, and no submission proceeds on an unverified package.**
+  Any edit to `docs/reports/paper_bc/paper_bc_tmlr.tex`, its supplementary or
+  `pub/claims.toml` invalidates the built PDFs, the artifact bundle and the abstract
+  copied into `OPENREVIEW_SUBMISSION.md`. Rebuild and re-verify all of them, and hand
+  the author a written result, before the manuscript is filed (added 2026-09-15 at the
+  author's instruction; the gate exists because a defect on page 1 of the abstract
+  survived a green verifier and a readiness checklist on 2026-09-14, RCA-003).
 - **Branching is governed by ADR-0013.** Manuscript bodies are branch-private; the claim
   substrate is trunk-owned. A work branch's `pub/`, `scripts/pubs/` and `docs/rca/` may be
   ahead of `main`, never behind it. Lanes: `thesis/*`, `paper/bc-*`, `paper/a-*`,
