@@ -155,3 +155,26 @@ guards:
       - "Any change to how ICC or Krippendorff's alpha is described"
       - "Any reconstruction of a further EXP4 module (add it to PAIRS in the verifier)"
       - "Any proposal to re-run the EXP4 judges: that creates a new cohort, not a reproduction"
+  - id: RCA-003
+    title: "TOML escapes silently corrupt LaTeX in the claims SSOT"
+    severity: medium
+    created: 2026-09-14
+    rca_file: docs/rca/RCA-003-toml-escape-in-abstract.md
+
+    guarded_files:
+      - pub/claims.toml
+      - pub/fragments/paper_bc_abstract_en.tex
+      - scripts/pubs/verify_sync.py
+      - scripts/pubs/build_artifact_bundle.py
+
+    invariants:
+      - "Every backslash run inside a triple-quoted basic string in pub/claims.toml has even length: LaTeX macros are written with a doubled backslash"
+      - "No generated fragment under pub/fragments/ contains a control character"
+      - "The artifact bundle contains the supplementary tables PDF, and build_artifact_bundle.py refuses to write a bundle with a missing input"
+
+    tests:
+      - python scripts/pubs/verify_sync.py
+
+    review_triggers:
+      - "Any edit to prose in pub/claims.toml: re-read the rendered abstract in the PDF, not only the source"
+      - "Any change to the OpenReview upload set: confirm every cited supplementary item is inside the one uploaded file"

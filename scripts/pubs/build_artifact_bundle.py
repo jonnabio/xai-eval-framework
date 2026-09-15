@@ -34,6 +34,10 @@ COPY = [
     ("docs/reports/paper_bc/paper_bc_review_corpus.csv", "review_corpus/review_corpus.csv"),
     ("docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md", "review_corpus/RETRIEVAL_LOG.md"),
     ("data/adult.csv", "data/adult.csv"),
+    # OpenReview accepts one supplementary file, so the supplementary tables
+    # travel inside the bundle; without this reviewers never see S1-S6.
+    ("docs/reports/paper_bc/paper_bc_tmlr_supplementary.pdf",
+     "supplementary_tables.pdf"),
 ]
 
 missing = []
@@ -48,6 +52,9 @@ for src, dst in COPY:
     else:
         shutil.copy2(s, d)
 print("copied:", len(COPY) - len(missing), "entries; missing:", missing or "none")
+if missing:
+    shutil.rmtree(STAGE)
+    raise SystemExit("refusing to build an incomplete bundle")
 
 # --- scrub identifying absolute paths from the copies --------------------
 PATTERNS = [
@@ -80,6 +87,8 @@ versus SHAP". Anonymised for double-blind review.
 
 ## Contents
 
+    supplementary_tables.pdf          supplementary Tables S1-S6 cited in
+                                      the paper.
     analysis/exp2_stats/              EXP2 inferential exports. Every EXP2
                                       number in the paper is computed from
                                       these files, not from the raw runs.

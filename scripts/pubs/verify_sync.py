@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 import sys
 
 
@@ -57,6 +58,31 @@ def main() -> int:
     for frag in fragments:
         if not frag.exists():
             problems.append(f"Missing generated fragment: {frag}")
+
+    # TOML basic strings treat a single backslash as an escape, so a LaTeX
+    # macro typed with one backslash is silently eaten: \texttt became a tab
+    # plus "exttt", and a trailing "vs.\" became a line continuation. Every
+    # backslash run inside a """ string must therefore be of even length.
+    claims = ROOT / "pub" / "claims.toml"
+    src = _read(claims)
+    for block in re.finditer(r'"""(.*?)"""', src, re.S):
+        for run in re.finditer(r"\\+", block.group(1)):
+            if len(run.group(0)) % 2:
+                line = src.count("\n", 0, block.start(1) + run.start()) + 1
+                problems.append(
+                    f"Undoubled backslash in {claims}:{line} "
+                    "(TOML reads it as an escape; write \\\\ for LaTeX)"
+                )
+
+    # Belt and braces: a generated fragment must carry no control characters.
+    for frag in sorted((ROOT / "pub" / "fragments").glob("*")):
+        text = _read(frag).replace("\r\n", "\n")
+        ctrl = re.search(r"[\x00-\x09\x0b-\x1f]", text)
+        if ctrl:
+            line = text.count("\n", 0, ctrl.start()) + 1
+            problems.append(
+                f"Control character {ctrl.group(0)!r} in {frag}:{line}"
+            )
 
     if problems:
         joined = "\n".join(f"- {p}" for p in problems)
