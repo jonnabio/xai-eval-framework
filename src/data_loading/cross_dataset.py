@@ -12,12 +12,14 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
+from urllib.request import urlopen
 
 import joblib
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.datasets import fetch_openml, load_breast_cancer as sklearn_load_breast_cancer
+from scipy.io import arff
+from sklearn.datasets import load_breast_cancer as sklearn_load_breast_cancer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -26,6 +28,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 logger = logging.getLogger(__name__)
 
 TabularSplit = Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, List[str], ColumnTransformer]
+GERMAN_CREDIT_ARFF_URL = "https://www.openml.org/data/download/31/dataset_31_credit-g.arff"
 
 
 def _coerce_binary_target(y: pd.Series, positive_label: Optional[str] = None) -> pd.Series:
@@ -57,6 +60,28 @@ def _coerce_binary_target(y: pd.Series, positive_label: Optional[str] = None) ->
         raise ValueError(f"Positive label {positive_label!r} not in target values: {unique_values}")
 
     return (y_str == positive_label).astype(int)
+
+
+def _decode_arff_frame(path: Path) -> pd.DataFrame:
+    """Load an ARFF file into a pandas frame with byte labels decoded."""
+    data, _ = arff.loadarff(path)
+    frame = pd.DataFrame(data)
+    for column in frame.columns:
+        if frame[column].dtype == object:
+            frame[column] = frame[column].map(
+                lambda value: value.decode("utf-8") if isinstance(value, bytes) else value
+            )
+    return frame
+
+
+def _load_cached_german_credit_arff(cache_dir: str) -> pd.DataFrame:
+    """Load German Credit from a cached direct OpenML ARFF download."""
+    arff_path = Path(cache_dir) / "openml" / "dataset_31_credit-g.arff"
+    if not arff_path.exists():
+        arff_path.parent.mkdir(parents=True, exist_ok=True)
+        with urlopen(GERMAN_CREDIT_ARFF_URL, timeout=30) as response:
+            arff_path.write_bytes(response.read())
+    return _decode_arff_frame(arff_path)
 
 
 def _split_feature_types(X: pd.DataFrame) -> tuple[List[str], List[str]]:
@@ -219,15 +244,9 @@ def load_german_credit(
     """
     if verbose:
         logger.info("Loading German Credit dataset from OpenML for EXP3")
-    dataset = fetch_openml(
-        name="credit-g",
-        version=1,
-        data_home=str(Path(cache_dir) / "openml"),
-        as_frame=True,
-        parser="auto",
-    )
-    X = dataset.data.copy()
-    y = _coerce_binary_target(pd.Series(dataset.target, name="target"), positive_label="good")
+    frame = _load_cached_german_credit_arff(cache_dir)
+    X = frame.drop(columns=["class"])
+    y = _coerce_binary_target(pd.Series(frame["class"], name="target"), positive_label="good")
     return _prepare_tabular_split(
         X,
         y,
