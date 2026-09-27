@@ -197,10 +197,24 @@ class OpenRouterClient(BaseLLMClient):
                     # Defaulting to 0 for now as we can't easily know the price without lookup.
                     # Or we could assume a default if we knew the model.
                     # For now, just track tokens.
-                    cost = 0.0 
+                    cost = 0.0
                     self._track_usage(usage.prompt_tokens, usage.completion_tokens, cost)
-                
-                return response.choices[0].message.content.strip()
+
+                # What OpenRouter actually served, for the raw-response record:
+                # the routed model version can differ from the requested alias.
+                choice = response.choices[0]
+                self.last_response_meta = {
+                    "requested_model": self.config.model_name,
+                    "served_model": getattr(response, "model", None),
+                    "generation_id": getattr(response, "id", None),
+                    "finish_reason": getattr(choice, "finish_reason", None),
+                    "usage": usage.model_dump() if usage is not None else None,
+                    "attempt": attempt + 1,
+                }
+                # Reasoning models can spend the whole token budget before
+                # answering and return no content; hand back "" for the parser
+                # to reject rather than crashing on None.
+                return (choice.message.content or "").strip()
                 
             except Exception as e:
                 if attempt < max_retries - 1:

@@ -1,0 +1,56 @@
+# EXP4 cohort 2: re-run of the three-judge reliability study (author decision
+# 2026-09-27). A NEW cohort, not a reproduction of the original (RCA-002):
+# - Cases: the identical 192 original cases, recovered by ID
+#   (scripts/exp4_recover_case_inventory.py); not re-sampled.
+# - Judges: three current small-tier models via OpenRouter, chosen by the
+#   author; the originals (gpt-4o-mini, claude-3-haiku-20240307,
+#   gemini-1.5-flash) are not all available.
+# - Prompts: rebuilt templates (src/prompts/templates/exp4_semantic_eval_v1*.j2);
+#   the originals are lost. The rubric_alt wording is new.
+# Everything this cohort produces is committed, including raw responses. It
+# never writes to the original cohort's outputs/analysis/exp4_llm_evaluation/.
+experiment_family: exp4_llm_evaluation
+status: cohort2_2026_09
+schema_version: SCHEMA_V1
+rubric_version: RUBRIC_V1_REBUILT_2026_09
+
+case_inventory:
+  target_cases: 192
+  random_seed: 42
+  sources:
+    - name: exp2_scaled
+      results_root: experiments/exp2_scaled/results
+    - name: exp3_cross_dataset
+      results_root: experiments/exp3_cross_dataset/results
+
+judges:
+  - judge_id: openai_gpt-5.4-mini
+    provider: openrouter
+    model_name: openai/gpt-5.4-mini
+    temperature: 0.0
+    max_tokens: 4000
+  - judge_id: anthropic_claude-haiku-4.5
+    provider: openrouter
+    model_name: anthropic/claude-haiku-4.5
+    temperature: 0.0
+    max_tokens: 4000
+  - judge_id: google_gemini-3.8-flash
+    provider: openrouter
+    model_name: google/gemini-3.8-flash
+    temperature: 0.0
+    max_tokens: 4000
+
+prompt_conditions:
+  - hidden_label_primary
+  - label_visible_bias_probe
+  - rubric_alt_sensitivity
+replicates: 3
+
+paths:
+  cases_dir: experiments/exp4_cohort2/cases
+  prompts_dir: experiments/exp4_cohort2/prompts
+  raw_responses_dir: experiments/exp4_cohort2/raw_responses
+  parsed_scores_dir: experiments/exp4_cohort2/parsed_scores
+  run_manifests_dir: experiments/exp4_cohort2/run_manifests
+  analysis_dir: outputs/analysis/exp4_cohort2
+  log_file: logs/exp4_cohort2.log
