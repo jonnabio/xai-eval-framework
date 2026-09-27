@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3dab6bd2bd40d831",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4deccedcca9c7800_a3fe4eb879822849.txt",
+  "prompt_version": "a3fe4eb879822849",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549697-U8a3sZwmJvXp7tcmaCAQ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1125,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 734,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0052125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00421875,
+        "upstream_inference_cost": 0.0052125,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2450
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable demographic characteristics (race, sex) and raw feature weights without stating the individual's baseline values or actionable counterfactual thresholds.\",\n    \"audit_usefulness\": \"It exposes the model's reliance on sensitive attributes like race and sex, providing useful starting points for auditing fairness, though low fidelity diminishes overall trust.\",\n    \"clarity\": \"The representation relies on raw one-hot encoded feature names and numeric coefficients that are difficult for non-technical users to interpret.\",\n    \"completeness\": \"While ten top factors are presented, the explanation omits the actual feature values and the very small coefficients leave the decision rationale incomplete.\",\n    \"concision\": \"The list is compact, reporting only top features and numeric weights without fluff or boilerplate.\",\n    \"overall_quality\": \"The explanation gives some insight into model bias, but low local fidelity and confusing one-hot encoded outputs make it weak overall.\",\n    \"semantic_plausibility\": \"The negative associations with lower education (12th grade) and specific job categories align well with known trends in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:55:06.816861+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_96bbe573ef94cf6b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c04339897f75190f_934de7055d7ae40d.txt",
+  "prompt_version": "934de7055d7ae40d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549130-Oos27tbZFr1VAItibRSY",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 999,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 602,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00474225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00374625,
+        "upstream_inference_cost": 0.00474225,
+        "upstream_inference_prompt_cost": 0.000996
+      },
+      "is_byok": false,
+      "prompt_tokens": 1328,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2327
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists attribution scores but omits the actual feature values, giving only weak implicit hints about what features (e.g., duration) might need adjustment.\",\n    \"audit_usefulness\": \"It provides a clear view of which features drive the model's prediction and their directional impact, giving solid diagnostic value to an auditor.\",\n    \"clarity\": \"The raw feature attribution weights and encoded feature names are technical and difficult for a layperson to interpret intuitively.\",\n    \"completeness\": \"The top 10 local factors account for the majority of the decision weight, though the lack of base feature values leaves some local context missing.\",\n    \"concision\": \"The explanation is compact, focusing directly on the top influential factors and their numerical attributions without filler.\",\n    \"overall_quality\": \"A solid, standard local feature attribution summary that effectively highlights key drivers, limited mostly by lack of feature values and lay accessibility.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as duration, checking account status, and payment plans\u2014align well with standard credit underwriting logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:45:38.653251+00:00"
+}

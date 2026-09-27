@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4b9463514163b095",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4f96f4d65555df8d_4cb91b9c9e81bcbf.txt",
+  "prompt_version": "4cb91b9c9e81bcbf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547128-bQ5UlCvCa1bPjj2e4g8h",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1079,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 631,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00503775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00404625,
+        "upstream_inference_cost": 0.00503775,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2401
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with binary indicator weights (1.0 vs 0.0) but gives no actionable thresholds, directionality, or guidance on what an applicant could change to achieve approval.\",\n    \"audit_usefulness\": \"While it shows which features were part of the anchor rule, the lack of predicate values and decision bounds makes it difficult for an auditor to evaluate potential bias or model failure on this false negative.\",\n    \"clarity\": \"The format uses raw feature names and arbitrary 1.0000/0.0000 weight flags that would be confusing to a non-technical user without an explanation of what the numbers signify.\",\n    \"completeness\": \"The explanation identifies which attributes formed the anchor, but fails to provide the actual condition ranges (e.g., duration or age thresholds) necessary to understand the decision.\",\n    \"concision\": \"It is relatively short, but including features with 0.0000 weights adds unnecessary clutter.\",\n    \"overall_quality\": \"The explanation is weak because Anchors should provide interpretable rule predicates, whereas this output only reports binary feature inclusion without values, cutoffs, or directional effects.\",\n    \"semantic_plausibility\": \"The features selected (duration, credit amount, age, checking/savings status) are sensible and standard determinants of creditworthiness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:12:17.785617+00:00"
+}

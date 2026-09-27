@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_99188a61b3de9ed4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ef9c0ef01eb60617",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_99188a61b3de9ed4_86d9225d215a5c8f.txt",
+  "prompt_version": "86d9225d215a5c8f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549859-lOOKYZZGDAtWKXxPDWwl",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1086,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 713,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00507225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040725,
+        "upstream_inference_cost": 0.00507225,
+        "upstream_inference_prompt_cost": 0.00099975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1333,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2419
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_99188a61b3de9ed4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed feature weights but does not state the underlying feature values or provide counterfactual thresholds to change the outcome.\",\n    \"audit_usefulness\": \"Provides clear signed attributions for the top 10 local factors, giving good technical insight into which features influenced the prediction.\",\n    \"clarity\": \"Uses raw one-hot encoded feature names and numeric SHAP values, which require technical and domain familiarity to understand.\",\n    \"completeness\": \"Covers the top ten positive and negative contributing factors, though it omits the actual feature values and base value.\",\n    \"concision\": \"Dense and concise formatting that conveys feature names and attribution scores without unnecessary filler.\",\n    \"overall_quality\": \"A serviceable technical SHAP summary that clearly reports top local factors, though lacking feature values and layperson clarity.\",\n    \"semantic_plausibility\": \"The identified risk drivers (checking account status, credit amount, duration, and credit history) strongly align with credit domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:57:48.265945+00:00"
+}

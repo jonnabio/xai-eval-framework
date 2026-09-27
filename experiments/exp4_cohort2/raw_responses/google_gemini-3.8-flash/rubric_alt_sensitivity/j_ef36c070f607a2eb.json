@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ef36c070f607a2eb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c523b5e4b177b22e_a45528bea66c431d.txt",
+  "prompt_version": "a45528bea66c431d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547243-foS6Q9bsyKdZuOAQcnEN",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1143,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 764,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005286,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00428625,
+        "upstream_inference_cost": 0.005286,
+        "upstream_inference_prompt_cost": 0.00099975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1333,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2476
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed feature attributions without actionable counterfactual recommendations, leaving potential steps only weakly implied.\",\n    \"audit_usefulness\": \"Provides clear insight into which local features drove the XGBoost prediction, useful for inspecting local model logic despite missing raw feature values.\",\n    \"clarity\": \"Uses technical feature names, one-hot encodings, and raw numerical SHAP values, which are difficult for a non-technical reader to interpret.\",\n    \"completeness\": \"Covers the top ten influential factors and their directional contributions, providing the main drivers behind the classification decision.\",\n    \"concision\": \"Presents attribution weights concisely in a structured list with minimal filler.\",\n    \"overall_quality\": \"A serviceable local SHAP explanation that captures the main factors driving the prediction, though limited by technical presentation and lack of direct recourse.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as loan duration, checking account status, and credit amount\u2014align well with established credit underwriting principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:12.588266+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6af418f31a4a00fb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f567ef56c34dada8_0ab4da6e0bdb3cad.txt",
+  "prompt_version": "0ab4da6e0bdb3cad",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547206-dnNkLzRNNdCOtTqp0X65",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1143,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 735,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005268,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00428625,
+        "upstream_inference_cost": 0.005268,
+        "upstream_inference_prompt_cost": 0.00098175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1309,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2452
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable thresholds or guidance on what an applicant could adjust, especially as age is immutable and features are presented without directional advice.\",\n    \"audit_usefulness\": \"It highlights the subset of features included in the anchor rule for this false positive, but very low fidelity (0.21) and the absence of clear conditions limit its auditing utility.\",\n    \"clarity\": \"The representation lists raw encoded feature strings alongside binary 1.0/0.0 values, which requires technical familiarity to decipher.\",\n    \"completeness\": \"The explanation indicates which features form the rule, but omits specific threshold values for continuous variables like age and fails to detail directional impact.\",\n    \"concision\": \"Listing zero-weighted features adds unnecessary clutter to an otherwise compact rule set.\",\n    \"overall_quality\": \"The explanation provides a weak summary of the anchor rule, hampered by omitted feature thresholds, low fidelity, and extraneous zero-valued entries.\",\n    \"semantic_plausibility\": \"Features like negative checking status and critical credit history typically correlate with risk, making their presence as anchor features for a positive credit prediction unintuitive without explicit context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:13:34.525614+00:00"
+}

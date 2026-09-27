@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_150e487766227401",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1c525ff1deb5c1a6_1cd3fbc63df7e3c2.txt",
+  "prompt_version": "1cd3fbc63df7e3c2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549689-RDyoTS7ggUsJEeT7VXAN",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 625,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00477075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00378375,
+        "upstream_inference_cost": 0.00477075,
+        "upstream_inference_prompt_cost": 0.000987
+      },
+      "is_byok": false,
+      "prompt_tokens": 1316,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2325
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points to marital status as the sole distinguishing factor, but marital status is not readily actionable and the summary lacks concrete counterfactual target values.\",\n    \"audit_usefulness\": \"It highlights model sensitivity to marital status for this false negative instance, but provides minimal insight into how other key features interact or contribute.\",\n    \"clarity\": \"The raw feature name string with one-hot encoding syntax and decimal weights requires technical background to interpret comfortably.\",\n    \"completeness\": \"Only a single feature receives non-zero weight, leaving out the impact of education, occupation, and capital gains on this prediction.\",\n    \"concision\": \"Nine out of the ten listed features have a score of zero, needlessly padding the output with uninformative values.\",\n    \"overall_quality\": \"The explanation is weak because it collapses counterfactual information into a sparse list dominated by one factor alongside zeroed-out features.\",\n    \"semantic_plausibility\": \"Marital status is known to be a strong predictor in the Adult dataset, making its prominence believable.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:54:57.352445+00:00"
+}

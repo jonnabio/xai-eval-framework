@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_284d8977ffe785b1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a3f635ae972c4ad_c1d636799bf06501.txt",
+  "prompt_version": "c1d636799bf06501",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546733-C6KnWlDYRVN3hqgtIbZb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1078,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00671925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0057225,
+        "upstream_inference_cost": 0.00671925,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2855
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation indicates which general dimensions influence the prediction (e.g., education, hours worked), but does not state the individual's current feature values or specify the threshold required to change the model's decision.\",\n    \"audit_usefulness\": \"The feature weights clearly highlight sensitive attributes such as sex and marital status contributing negatively, providing useful signals for auditing algorithmic bias and investigating this false negative error.\",\n    \"clarity\": \"The list of raw feature names and numerical regression coefficients is understandable to technical users but requires domain and XAI familiarity to interpret the scale and direction relative to the predicted class.\",\n    \"completeness\": \"The top 10 local factors provide the primary positive and negative contributors to the score, though omitting the base value/intercept and the instance's specific feature values limits a full reconstruction of the decision.\",\n    \"concision\": \"The explanation is brief, presenting only key feature attributions without unnecessary filler or redundancy.\",\n    \"overall_quality\": \"This is a serviceable LIME explanation that clearly lists important positive and negative factors, though it is hindered by raw technical formatting and low stability metrics.\",\n    \"semantic_plausibility\": \"The direction of effects aligns well with known dynamics in the Adult dataset (e.g., capital gain and education favoring higher income, while specific marital/relationship categories and female sex pull downward).\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:05:49.696929+00:00"
+}

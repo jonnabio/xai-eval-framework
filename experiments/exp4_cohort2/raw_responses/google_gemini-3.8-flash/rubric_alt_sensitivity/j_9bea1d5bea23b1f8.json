@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9bea1d5bea23b1f8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cd6abd1a9433542b_b7f15803d0ffa231.txt",
+  "prompt_version": "b7f15803d0ffa231",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549373-adRPuj2V1kRKPGXcZyOA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 903,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 502,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00437625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00338625,
+        "upstream_inference_cost": 0.00437625,
+        "upstream_inference_prompt_cost": 0.00099
+      },
+      "is_byok": false,
+      "prompt_tokens": 1320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2223
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it suggests occupation and native country matter for a counterfactual change, one cannot change their native country, and the output provides perturbation frequencies rather than concrete target values.\",\n    \"audit_usefulness\": \"It provides marginal help by revealing that the MLP relies on sensitive or arbitrary features like native country to flip predictions, but lacks sufficient context on baseline feature values.\",\n    \"clarity\": \"The representation lists raw encoded feature names with decimal scores and several zero-weight attributes, which is confusing for non-technical users.\",\n    \"completeness\": \"Only two features carry non-zero importance while the rest are zero, giving minimal detail into the holistic profile required to cross the threshold.\",\n    \"concision\": \"A significant portion of the explanation is consumed by listing features with zero importance.\",\n    \"overall_quality\": \"The explanation is weak because DiCE counterfactuals have been collapsed into an uninformative feature-weight list that includes an immutable geographic feature.\",\n    \"semantic_plausibility\": \"Suggesting that native country (Ireland) is the primary driver for altering an income prediction is doubtful and counterintuitive in domain practice.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:49:41.918574+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7e036e3951a70998",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_d7929e6662f20d44.txt",
+  "prompt_version": "d7929e6662f20d44",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546645-FbEK67S9MV99T4eKNlZL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1238,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 806,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00563775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0046425,
+        "upstream_inference_cost": 0.00563775,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2565
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Raw SHAP values do not provide concrete counterfactual steps or recourse recommendations for an individual to reverse the false-negative classification.\",\n    \"audit_usefulness\": \"The explanation offers insight into which features drove this false-negative prediction downward, though auditing is hindered by the omission of the underlying feature values (e.g., whether a category is present or absent).\",\n    \"clarity\": \"The output is a technical list of one-hot encoded variable names and numeric SHAP values without explanation of signs or baselines, making it hard for non-technical users to interpret.\",\n    \"completeness\": \"The top 10 factors are presented with weights, but the absence of the actual feature values and baseline value leaves the local explanation incomplete.\",\n    \"concision\": \"The summary is compact, listing only key factors and their attribution scores without extraneous filler.\",\n    \"overall_quality\": \"The explanation provides a standard, serviceable set of SHAP feature attributions, but is limited by missing feature values and low accessibility.\",\n    \"semantic_plausibility\": \"Several one-hot categories from the same attribute (e.g., Married-civ-spouse and Never-married) have positive weights, which is confusing without knowing whether these represent presence or absence.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:04:15.270054+00:00"
+}

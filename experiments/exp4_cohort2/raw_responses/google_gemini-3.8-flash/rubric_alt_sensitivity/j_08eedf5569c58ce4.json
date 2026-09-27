@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_08eedf5569c58ce4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba96b41ceb2e14cb_7b1afe516e96beea.txt",
+  "prompt_version": "7b1afe516e96beea",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549842-ZdriL5aGn10Gigakaavh",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1143,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 750,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00526875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00428625,
+        "upstream_inference_cost": 0.00526875,
+        "upstream_inference_prompt_cost": 0.0009825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1310,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2453
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points only to immutable or non-actionable attributes (native country, relationship) with no target values or directional guidance.\",\n    \"audit_usefulness\": \"It flags that the model may rely heavily on demographic/country features, offering marginal insight into potential bias, but provides no directional detail.\",\n    \"clarity\": \"Raw feature names and one-hot encoded variable names with uncalibrated numerical weights make it difficult for non-technical users to interpret.\",\n    \"completeness\": \"Only two one-hot features carry weight while all major continuous income drivers are scored zero, providing an incomplete picture of the decision.\",\n    \"concision\": \"A significant portion of the explanation is consumed by listing features with zero importance.\",\n    \"overall_quality\": \"The explanation suffers from high faithfulness gap, focuses on doubtful primary drivers, and reduces counterfactual data to an uninformative feature weight list.\",\n    \"semantic_plausibility\": \"Attributing income prediction primarily to being from Portugal and an other-relative, while core determinants like education and capital gains have zero weight, is doubtful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:57:30.835674+00:00"
+}

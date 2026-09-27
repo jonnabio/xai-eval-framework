@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_910cf00122a88ad3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28188c86ac4bdfad_a3cbcc30585c0015.txt",
+  "prompt_version": "a3cbcc30585c0015",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547599-auVKiNs5ATC7qSAgCFsS",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1317,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 910,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0059295,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00493875,
+        "upstream_inference_cost": 0.0059295,
+        "upstream_inference_prompt_cost": 0.00099075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1321,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2638
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable demographic traits and raw feature weights without stating feature values or providing actionable steps to change the outcome.\",\n    \"audit_usefulness\": \"It provides useful signals for an auditor by highlighting the reliance on sensitive attributes (sex) and revealing artifacts of one-hot encoding where mutually exclusive categories both receive weights.\",\n    \"clarity\": \"The list of one-hot dummy variables and signed coefficient weights is technical and confusing for non-experts, especially with mutually exclusive categories appearing together.\",\n    \"completeness\": \"While ten top local weights are provided, the actual feature values of the instance are omitted, making it incomplete for understanding the exact state of the individual.\",\n    \"concision\": \"The output is compact and contains no filler text, though displaying multiple mutually exclusive dummy variables adds slight redundancy.\",\n    \"overall_quality\": \"The explanation is weak because omitting feature values and including conflicting one-hot categories makes it difficult to interpret accurately.\",\n    \"semantic_plausibility\": \"The general direction of features aligns with typical income patterns, but listing opposing categories (e.g., sex_Female and sex_Male) without context strains plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:20:10.118824+00:00"
+}

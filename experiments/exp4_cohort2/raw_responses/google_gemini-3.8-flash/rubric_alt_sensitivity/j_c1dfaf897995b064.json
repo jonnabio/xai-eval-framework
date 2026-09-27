@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_25c0ece7cf9b15de",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c1dfaf897995b064",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_25c0ece7cf9b15de_a2493b568c4afce1.txt",
+  "prompt_version": "a2493b568c4afce1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548442-qvpz3ioL6p7ADn7QR5UO",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 577,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046545,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036525,
+        "upstream_inference_cost": 0.0046545,
+        "upstream_inference_prompt_cost": 0.001002
+      },
+      "is_byok": false,
+      "prompt_tokens": 1336,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2310
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_25c0ece7cf9b15de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists signed numerical SHAP values without showing the actual feature values or actionable thresholds needed to alter the decision.\",\n    \"audit_usefulness\": \"It provides the top 10 local feature attributions with signs and magnitudes, giving an auditor solid insight into which features drove the random forest's prediction.\",\n    \"clarity\": \"The raw feature-attribution pairs with one-hot encoded names and signed floats require technical familiarity with explainable AI and credit modeling to interpret.\",\n    \"completeness\": \"It provides a wide view of the top ten contributors to the decision, though it omits the baseline prediction and the applicant's concrete feature values.\",\n    \"concision\": \"The presentation is compact and information-dense, presenting only key feature names and numeric contributions.\",\n    \"overall_quality\": \"A solid, standard local attribution summary that serves technical validation well, though it lacks context and accessibility for non-technical stakeholders.\",\n    \"semantic_plausibility\": \"The relationships, such as loan duration increasing risk while clean credit history and checking account status mitigate risk, align well with domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:34:10.055154+00:00"
+}

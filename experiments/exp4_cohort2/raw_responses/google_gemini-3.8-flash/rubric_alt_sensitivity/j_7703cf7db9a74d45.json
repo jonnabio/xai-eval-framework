@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7703cf7db9a74d45",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4440b587017f192b_f6c1af9f7622dae9.txt",
+  "prompt_version": "f6c1af9f7622dae9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548294-8gZBrcnyNy8bmUrOfhAw",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 944,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 553,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00454125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00354,
+        "upstream_inference_cost": 0.00454125,
+        "upstream_inference_prompt_cost": 0.00100125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1335,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2279
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives raw directional SHAP weights without concrete thresholds or actionable steps for an applicant to change the outcome.\",\n    \"audit_usefulness\": \"It provides the top 10 contributing factors with signed contributions for a false positive prediction, including sensitive features like personal status, making it useful for model auditing.\",\n    \"clarity\": \"The output is a technical list of feature names, dummy encodings, and floating-point attribution weights that require technical familiarity to interpret.\",\n    \"completeness\": \"The top 10 local factors provide a solid representation of the model's main drivers, though lower-order features and base values are omitted.\",\n    \"concision\": \"Information is presented in a dense, compact format without unnecessary verbosity.\",\n    \"overall_quality\": \"A standard, serviceable local feature-attribution explanation that highlights key drivers of an erroneous prediction but lacks lay accessibility and actionability.\",\n    \"semantic_plausibility\": \"Features like residence duration, loan duration, and checking status are standard credit risk indicators, aligning well with domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:31:42.252039+00:00"
+}

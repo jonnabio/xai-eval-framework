@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_04ff63de01204b62",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ea764fae63b129dc_2a91c67909043ba1.txt",
+  "prompt_version": "2a91c67909043ba1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546713-6B9CEPCfl30p8hrP9TFE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1056,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 672,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00495975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00396,
+        "upstream_inference_cost": 0.00495975,
+        "upstream_inference_prompt_cost": 0.00099975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1333,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2389
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output provides signed SHAP attributions without baseline values, thresholds, or clear actionable counterfactual recommendations, and several top factors are immutable.\",\n    \"audit_usefulness\": \"This explanation offers substantial audit utility, clearly revealing feature contributions for a false positive, including the influence of protected attributes like personal_status.\",\n    \"clarity\": \"The raw technical string of feature names and signed floating-point attributions requires technical knowledge of SHAP to interpret properly.\",\n    \"completeness\": \"The top ten local factors provide the primary drivers behind the prediction, though the actual feature values and expected value baseline are omitted.\",\n    \"concision\": \"The explanation is compact and dense, presenting the most influential features and weights without unnecessary text.\",\n    \"overall_quality\": \"A solid, serviceable SHAP attribution list that clearly conveys feature impacts, but lacks non-technical accessibility and direct actionability.\",\n    \"semantic_plausibility\": \"The identified risk factors such as checking account status, credit history, and duration align with standard credit risk domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:05:22.411400+00:00"
+}

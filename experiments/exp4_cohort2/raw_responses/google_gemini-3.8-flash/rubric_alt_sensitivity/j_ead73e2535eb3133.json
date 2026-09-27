@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ead73e2535eb3133",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4deccedcca9c7800_a3fe4eb879822849.txt",
+  "prompt_version": "a3fe4eb879822849",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549717-ouyPXkptfpIjSOoaH0VT",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1135,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 756,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00425625,
+        "upstream_inference_cost": 0.00525,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2460
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Most influential factors are immutable demographics such as race and sex, and the explanation lacks concrete thresholds or feature values to guide change.\",\n    \"audit_usefulness\": \"It directly exposes the model's reliance on protected attributes (race_Black, sex_Female) which is valuable for fairness auditing, though fidelity is somewhat low.\",\n    \"clarity\": \"The raw key-value format with one-hot encoded feature names and negative decimal coefficients requires statistical familiarity to interpret.\",\n    \"completeness\": \"Lists ten top features and their directional contributions, but omits the actual instance feature values and baseline comparison.\",\n    \"concision\": \"Compact and focused strictly on the top local weights without extraneous text.\",\n    \"overall_quality\": \"A serviceable local explanation that surfaces key risk factors and bias indicators, but is hindered by moderate fidelity and lack of explicit feature values.\",\n    \"semantic_plausibility\": \"The negative associations with lower education levels, certain occupations, and unmarried status align logically with known income trends in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:55:25.840873+00:00"
+}

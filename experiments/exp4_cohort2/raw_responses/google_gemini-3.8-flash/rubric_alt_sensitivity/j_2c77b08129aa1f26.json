@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2c77b08129aa1f26",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_78dfd1648ed95148_edf006a971b774b3.txt",
+  "prompt_version": "edf006a971b774b3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546516-dJLA4fsLrzIJ6rq3gVAc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 583,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046245,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00362625,
+        "upstream_inference_cost": 0.0046245,
+        "upstream_inference_prompt_cost": 0.00099825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1331,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2298
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists attribution scores without displaying the underlying feature values or specifying required thresholds, offering only weak hints about what to adjust.\",\n    \"audit_usefulness\": \"The signed SHAP values identify the primary drivers behind this false negative decision, providing an auditor with solid insight into why the model misclassified the applicant.\",\n    \"clarity\": \"The raw feature string encodings and signed decimal values require technical literacy in machine learning to properly interpret.\",\n    \"completeness\": \"Listing the top ten ranked local factors covers the vast majority of the model's decision-making logic for this instance.\",\n    \"concision\": \"The text presents the key factors and their quantitative attributions directly with zero filler or redundant phrasing.\",\n    \"overall_quality\": \"A solid, standard local SHAP attribution summary that clearly informs model auditing despite low lay-user accessibility.\",\n    \"semantic_plausibility\": \"The directions of impact align well with financial risk intuition, such as duration, lack of property, and low savings pushing toward an adverse credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:02:04.053389+00:00"
+}

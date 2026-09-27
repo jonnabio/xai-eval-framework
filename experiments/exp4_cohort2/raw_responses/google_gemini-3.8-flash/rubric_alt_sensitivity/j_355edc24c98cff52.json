@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_355edc24c98cff52",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28188c86ac4bdfad_a3cbcc30585c0015.txt",
+  "prompt_version": "a3cbcc30585c0015",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547620-otO9KEeSx6luzelK7edV",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1140,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 738,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00526575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004275,
+        "upstream_inference_cost": 0.00526575,
+        "upstream_inference_prompt_cost": 0.00099075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1321,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2461
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers only static, small-magnitude linear weights without actionable thresholds or guidance for changing the classification.\",\n    \"audit_usefulness\": \"It provides useful audit signals by exposing that the model relies on sensitive attributes like sex, but also reveals artifacts of independent one-hot perturbations (e.g., both sex_Female and sex_Male appearing).\",\n    \"clarity\": \"The raw feature string with negative and positive decimal coefficients requires technical familiarity to interpret properly.\",\n    \"completeness\": \"The explanation lists ten top features influencing the local decision, covering major demographic and occupational factors.\",\n    \"concision\": \"The summary is compact and directly presents the feature weights without unnecessary text.\",\n    \"overall_quality\": \"The explanation is weak due to unhandled one-hot encoding artifacts that lead to conflicting feature attributions (e.g., opposing sex and workclass indicators simultaneously).\",\n    \"semantic_plausibility\": \"While individual factors like Other-service occupation correlate reasonably with lower income, presenting mutually exclusive dummy variables (e.g., sex_Female and sex_Male) for a single instance undermines plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:20:29.447745+00:00"
+}

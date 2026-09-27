@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7d108ddf858e38de",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_052659e044864140_142ebfeb15a15184.txt",
+  "prompt_version": "142ebfeb15a15184",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548197-nnwHUgQIYZzl9vnOnFii",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 876,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 498,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00426675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003285,
+        "upstream_inference_cost": 0.00426675,
+        "upstream_inference_prompt_cost": 0.00098175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1309,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2185
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists historical cell nuclei morphological features and attribution scores, offering no practical recourse or guidance on how to alter the prediction.\",\n    \"audit_usefulness\": \"Provides clear feature attribution weights showing which factors pushed the model towards a benign prediction, which is helpful for model validation and auditing.\",\n    \"clarity\": \"Uses technical feature names and signed SHAP contribution values without context or feature values, making it difficult for non-technical users to interpret.\",\n    \"completeness\": \"Presents the top ten local contributing features with their directional attributions, capturing the primary drivers of the model's decision.\",\n    \"concision\": \"Directly presents the top features and scores in a compact format without unnecessary fluff.\",\n    \"overall_quality\": \"A solid, standard local feature importance summary that clearly communicates the main model drivers to a technical reviewer.\",\n    \"semantic_plausibility\": \"Factors such as worst concave points, area, and perimeter are well-established clinical indicators for breast cancer diagnosis.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:30:04.818279+00:00"
+}

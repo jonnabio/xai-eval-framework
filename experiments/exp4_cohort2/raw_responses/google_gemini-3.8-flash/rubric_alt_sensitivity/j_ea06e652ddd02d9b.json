@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ea06e652ddd02d9b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c715759299b480a0_7ce86a3f66d30e38.txt",
+  "prompt_version": "7ce86a3f66d30e38",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548274-J6Figumdr1YShlBwh9Tb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1182,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 777,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005442,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044325,
+        "upstream_inference_cost": 0.005442,
+        "upstream_inference_prompt_cost": 0.0010095
+      },
+      "is_byok": false,
+      "prompt_tokens": 1346,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2528
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature attribution weights without specifying current feature values or concrete steps needed to achieve a different decision.\",\n    \"audit_usefulness\": \"The inclusion of specific attribution weights and sensitive attributes like gender/marital status directly enables an auditor to investigate potential bias and inspect model behavior.\",\n    \"clarity\": \"The output is a raw string of one-hot encoded feature names paired with signed decimal SHAP values, which is difficult for a layperson to interpret without technical training.\",\n    \"completeness\": \"It provides the top ten local feature contributions with their numerical impact, capturing the primary drivers of the decision even though baseline and exact feature values are omitted.\",\n    \"concision\": \"The explanation is compact and dense, presenting strictly the key feature names and their attribution scores with no superfluous text.\",\n    \"overall_quality\": \"This is a serviceable, standard SHAP explanation that offers good auditing utility despite low consumer accessibility and limited actionable recourse.\",\n    \"semantic_plausibility\": \"The identified features\u2014such as checking account status, savings, loan duration, and employment length\u2014are standard and believable drivers in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:31:25.048721+00:00"
+}
