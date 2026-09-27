@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ef3bc240227cb5d0",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1de08b8c2918a436_63142a14b39d456a.txt",
+  "prompt_version": "63142a14b39d456a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546026-P8YLUnfwFLDW3fmn5lEO",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 610,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004338,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00305,
+        "upstream_inference_cost": 0.004338,
+        "upstream_inference_prompt_cost": 0.001288
+      },
+      "is_byok": false,
+      "prompt_tokens": 1288,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1898
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three specific feature conditions (no checking account, savings <100, real estate property) but provides no guidance on what actions could change the outcome. For a credit decision, actionable insights would specify which conditions could be modified or what thresholds matter.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the decision, but the low fidelity (0.78) and high faithfulness gap (0.28) suggest the explanation may not reliably represent the model's actual behavior. This undermines confidence in using it for bias or error auditing. The false positive status (predicted 1, true label 0) makes this particularly concerning.\",\n    \"clarity\": \"The explanation uses domain-specific terminology (checking_status, savings_status, property_magnitude) and numerical notation that requires familiarity with credit datasets. The format with feature names and weights is technical rather than narrative, making it less accessible to non-experts.\",\n    \"completeness\": \"Only 3 of 10 features are identified as important (with non-zero weights), and 7 features show zero contribution. While anchors are sparse by design, this leaves substantial uncertainty about why the model made this particular decision, especially given the false positive outcome.\",\n    \"concision\": \"The explanation is compact at 68 tokens with minimal redundancy. Each feature-weight pair conveys specific information without padding, though the technical format limits how much insight is gained per word.\",\n    \"overall_quality\": \"The explanation is weak due to the combination of low fidelity, high faithfulness gap, false positive prediction, and limited actionability. While it identifies some anchoring features, the technical metrics and incorrect prediction undermine confidence in the explanation's reliability and usefulness.\",\n    \"semantic_plausibility\": \"In credit lending, having no checking account, low savings, and real estate property are plausible risk factors that could influence a denial decision. However, the model predicted approval (1) when the true label is denial (0), raising questions about whether these factors are being used appropriately by the model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:53:52.533992+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f3f9095af5de8830",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_aa2e2835b90a2780",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f3f9095af5de8830_074449a5b6c62b65.txt",
+  "prompt_version": "074449a5b6c62b65",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545403-pjdC8zwhDevuXQa3XP83",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004217,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002935,
+        "upstream_inference_cost": 0.004217,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1869
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f3f9095af5de8830\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken. It does not indicate what feature values would need to change to alter the prediction, making it impossible for a clinician or patient to act on this information.\",\n    \"audit_usefulness\": \"The explanation shows top contributing features with their SHAP values, which helps auditors understand the model's local reasoning. However, the false positive error (predicting malignant when truly benign) and moderate fidelity (0.655) suggest the explanation may not fully capture why the model made this incorrect decision.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical contributions\u2014but requires understanding of SHAP values and medical terminology (concave points, perimeter, texture, etc.). Non-technical readers would struggle to interpret what these features mean or why their contributions matter.\",\n    \"completeness\": \"The explanation identifies the top 10 contributing features, which covers the main local factors. However, it lacks context about the actual feature values for this instance, the base prediction rate, or why these particular features led to the incorrect classification.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is presented efficiently without padding, though the brevity comes at the cost of interpretability for non-experts.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies influential features but fails to provide actionable insights, lacks context for understanding the error, and would be difficult for non-technical stakeholders to use. The false positive error and moderate technical metrics further reduce its utility.\",\n    \"semantic_plausibility\": \"The features listed (concave points, perimeter, texture, smoothness, concavity) are medically relevant to breast cancer diagnosis. However, the explanation does not clarify whether the feature values themselves are typical of malignant or benign cases, making it hard to assess if the model's reasoning aligns with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:43:29.209518+00:00"
+}

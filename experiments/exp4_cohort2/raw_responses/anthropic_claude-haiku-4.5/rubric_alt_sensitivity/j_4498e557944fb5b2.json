@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7334ccb1f9958dda",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4498e557944fb5b2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7334ccb1f9958dda_f17313bf5964e230.txt",
+  "prompt_version": "f17313bf5964e230",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545823-WFgSjc4rC5PEvC5HiquJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004085,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002805,
+        "upstream_inference_cost": 0.004085,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1841
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7334ccb1f9958dda\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. It does not indicate what values would need to change or in what direction to alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies occupation_Transport-moving as the dominant factor (0.9), the high faithfulness_gap (0.487) and low stability (0.042) suggest the explanation may not reliably reflect model behavior. This undermines confidence in using it for bias or error auditing.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical scores. However, without context about what these scores mean (importance? distance? probability?), the interpretation is unclear even to technical users. The label 'DICE top local factors' is vague.\",\n    \"completeness\": \"The explanation identifies one dominant factor but provides minimal insight into why the model predicted class 0. It lists many features with zero scores, which adds noise rather than understanding. The mechanism of the decision remains opaque.\",\n    \"concision\": \"The explanation is padded with many zero-valued features that add no information. A more concise version would list only non-zero or meaningful features, making better use of the 82 tokens.\",\n    \"overall_quality\": \"The explanation has significant limitations: poor technical metrics (low fidelity, high faithfulness gap, low stability), unclear semantics, and minimal actionability. While it identifies one salient feature, it fails to provide reliable or actionable insight into the model's decision.\",\n    \"semantic_plausibility\": \"In the adult income dataset, occupation is a known predictor of income. However, the explanation does not clarify whether Transport-moving predicts higher or lower income, or how this relates to the negative prediction (class 0). The semantic connection is incomplete and potentially misleading.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:29.951030+00:00"
+}

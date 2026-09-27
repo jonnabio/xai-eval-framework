@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5a4ca956769e5636",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0f6578287491844e_01911a9148711713.txt",
+  "prompt_version": "01911a9148711713",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546204-wf8W7lFsl3RnWRighXGv",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003935,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00264,
+        "upstream_inference_cost": 0.003935,
+        "upstream_inference_prompt_cost": 0.001295
+      },
+      "is_byok": false,
+      "prompt_tokens": 1295,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1823
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their application would alter the decision.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings offer useful insight into model behavior for auditing purposes. However, the low stability (0.50) and moderate faithfulness gap (0.53) raise concerns about reliability. Still useful for investigating model logic and potential bias patterns.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and directions) but reasonably interpretable. Non-technical users may struggle with understanding what negative/positive SHAP values mean, though the feature names are clear.\",\n    \"completeness\": \"The explanation covers the top 10 contributing factors, which captures the main drivers of the decision. However, it lacks context about feature values, thresholds, or interactions that would fully explain the local decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line conveys a feature and its contribution efficiently without padding.\",\n    \"overall_quality\": \"This is a serviceable explanation that correctly identifies key factors and their directions, but is limited by moderate technical metrics (stability 0.50, faithfulness gap 0.53), lack of actionability, and insufficient context for non-technical users. It serves basic audit purposes but falls short of being compelling or complete.\",\n    \"semantic_plausibility\": \"For a credit denial (prediction=0), the negative contributions from positive credit history, no checking account issues, and new car purpose are plausible. The positive contribution from low savings is also reasonable in credit risk assessment. The pattern aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:56:49.960285+00:00"
+}

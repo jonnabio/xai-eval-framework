@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_99a64109beb17037",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6ce495f3482aecc1_280534767081171c.txt",
+  "prompt_version": "280534767081171c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547080-yq5MPbb1P8vJctRXFbzn",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 574,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004155,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00287,
+        "upstream_inference_cost": 0.004155,
+        "upstream_inference_prompt_cost": 0.001285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1285,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1859
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features matter (worst texture and worst concave points) but provides no guidance on what values would change the prediction or what actions could be taken. It is purely descriptive of the current decision.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the decision, which is useful for auditing. However, the low fidelity (0.074) and moderate faithfulness gap (0.053) suggest the explanation may not reliably represent the model's actual decision logic, limiting its utility for bias detection.\",\n    \"clarity\": \"The format is straightforward: feature names with importance weights. However, without domain knowledge about what 'worst texture' and 'worst concave points' mean clinically, a non-expert would struggle to interpret the significance.\",\n    \"completeness\": \"Only two features are identified as important (both with weight 1.0), while eight others are listed with weight 0.0. This sparse representation may miss nuanced interactions or secondary factors that contributed to the decision.\",\n    \"concision\": \"The explanation is relatively compact at 76 tokens, but includes many zero-weighted features that add length without information value. A more concise version could omit the zero-weight features entirely.\",\n    \"overall_quality\": \"The explanation is serviceable but limited. It correctly identifies the prediction and key features, but the low fidelity score, lack of actionability, and incomplete feature representation prevent it from being strong. The true negative prediction is correct, but the explanation's reliability is questionable.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and concave points are known clinically relevant features for malignancy assessment. The focus on 'worst' values (maximum measurements) aligns with medical understanding. However, the complete absence of other known risk factors (radius, area, smoothness) raises questions about whether the explanation captures the full decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:26.902740+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c1afbcd9580538a4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b390a38d2a582d09",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c1afbcd9580538a4_f547ba2b2efcacab.txt",
+  "prompt_version": "f547ba2b2efcacab",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547055-mTUSDpVvwJ34NdkhSVCN",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004119,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002835,
+        "upstream_inference_cost": 0.004119,
+        "upstream_inference_prompt_cost": 0.001284
+      },
+      "is_byok": false,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1851
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c1afbcd9580538a4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with uniform weights (all 1.0) but provides no guidance on what values would change the outcome or what actions could be taken. It is purely descriptive without prescriptive content.\",\n    \"audit_usefulness\": \"While the explanation identifies which features were considered, the uniform weighting across all features (including all three checking_status categories simultaneously) suggests the anchors method may not have properly isolated distinguishing factors. This raises questions about model behavior but doesn't clearly illuminate it.\",\n    \"clarity\": \"The format is straightforward and uses feature names that are interpretable. However, the simultaneous inclusion of mutually exclusive categories (checking_status_0<=X<200, checking_status_<0, checking_status_>=200) is confusing and suggests a technical issue rather than a clear explanation.\",\n    \"completeness\": \"The explanation lists many features but lacks depth about their actual values for this instance or how they interact. It does not explain why these particular feature values led to the prediction, only that these features were involved.\",\n    \"concision\": \"The explanation is relatively brief but contains redundancy: all features are weighted identically at 1.0, and the inclusion of all three mutually exclusive checking_status categories is wasteful. The information density is moderate.\",\n    \"overall_quality\": \"This explanation has significant limitations. The uniform weighting across all features, the inclusion of mutually exclusive categories, and the low fidelity (0.107) suggest the anchors method did not produce a reliable or meaningful explanation. While technically formatted correctly, it fails to provide genuine insight.\",\n    \"semantic_plausibility\": \"The inclusion of all three checking_status categories simultaneously is implausible\u2014an applicant cannot simultaneously have checking account status in all three ranges. This technical artifact undermines the credibility of the explanation and suggests a failure in the explanation generation process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:01.499146+00:00"
+}

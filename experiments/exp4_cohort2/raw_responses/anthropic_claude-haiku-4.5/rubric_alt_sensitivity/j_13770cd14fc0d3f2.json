@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0ab8ed6bc65f8c5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_13770cd14fc0d3f2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a0ab8ed6bc65f8c5_12f7d1361295477d.txt",
+  "prompt_version": "12f7d1361295477d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547674-Zbyumc7tdm1J8siIoOdD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003913,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003913,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1821
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a0ab8ed6bc65f8c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature weights are essentially zero (ranging from -0.0000 to 0.0000), providing no actionable guidance on what changes would alter the prediction. No concrete steps can be derived from this explanation.\",\n    \"audit_usefulness\": \"The explanation offers minimal audit value. The near-zero weights across all features suggest either a degenerate model behavior or a failure of LIME to extract meaningful local patterns. This raises concerns but doesn't help diagnose the root cause.\",\n    \"clarity\": \"The format is straightforward and accessible to non-technical readers. However, the content itself\u2014a list of near-zero coefficients\u2014is inherently difficult to interpret meaningfully, limiting practical clarity.\",\n    \"completeness\": \"The explanation is severely incomplete. With all weights at zero, it fails to identify any meaningful reasons for the model's positive prediction. The main drivers of the decision are absent.\",\n    \"concision\": \"While the explanation is brief, the brevity stems from lack of substance rather than tight information density. The zero-valued features add no informative content.\",\n    \"overall_quality\": \"This explanation is unusable for practical purposes. The technical metrics (fidelity=0.21, faithfulness_gap=0.20, stability\u22480) indicate severe quality issues. The explanation fails to capture the model's actual decision logic.\",\n    \"semantic_plausibility\": \"The explanation is implausible. For an adult income prediction (likely >$50k), we would expect meaningful contributions from features like education, occupation, hours-per-week, and marital status. All-zero weights contradict domain expectations and suggest model or explanation failure.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:21:20.247410+00:00"
+}

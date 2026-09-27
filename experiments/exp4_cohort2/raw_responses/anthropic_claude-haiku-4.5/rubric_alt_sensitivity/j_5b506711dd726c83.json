@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc5e0af1e6f9ee71",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5b506711dd726c83",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_dc5e0af1e6f9ee71_a3b31c860dd63a9f.txt",
+  "prompt_version": "a3b31c860dd63a9f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547074-KoNZGiFFOLTN48WH3pTc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 601,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004293,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003005,
+        "upstream_inference_cost": 0.004293,
+        "upstream_inference_prompt_cost": 0.001288
+      },
+      "is_byok": false,
+      "prompt_tokens": 1288,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1889
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc5e0af1e6f9ee71\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken. It does not indicate what feature values would need to change to alter the prediction, making it impossible for a clinician or patient to act on this information.\",\n    \"audit_usefulness\": \"While the explanation identifies which features matter (concave points features with weight 1.0), the low fidelity (0.72) and stability (0.57) scores undermine confidence in these findings. An auditor would struggle to rely on this for bias detection given the technical limitations.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical weights. However, without explanation of what these weights mean, what the scale represents, or why only two features have non-zero weights, a non-technical reader would find this cryptic.\",\n    \"completeness\": \"The explanation identifies only two active features (mean and worst concave points) out of ten listed. While these may be the primary drivers, the explanation lacks context about why other features are excluded or whether this represents a complete local decision boundary.\",\n    \"concision\": \"The explanation is compact at 76 tokens, but includes ten features with zero weights that add little informational value. Removing the zero-weight features would improve the signal-to-noise ratio without losing essential information.\",\n    \"overall_quality\": \"This is a weak explanation. While it correctly predicts the true label (TN) and identifies relevant features, the low technical metrics (fidelity 0.72, stability 0.57), lack of actionability, and minimal context severely limit its utility for understanding or auditing the model's decision.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points are clinically relevant morphological features associated with malignancy. The focus on these features is plausible. However, the complete absence of other known risk factors and the binary weight scheme (1.0 or 0.0) seem oversimplified for a complex medical classification task.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:20.794891+00:00"
+}

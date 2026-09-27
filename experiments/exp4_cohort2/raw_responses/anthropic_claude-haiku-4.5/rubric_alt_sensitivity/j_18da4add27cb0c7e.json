@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_18da4add27cb0c7e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c6d96339976f5220_1c8eba547f186bcd.txt",
+  "prompt_version": "1c8eba547f186bcd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546403-ASnJq2QqoAzLBnSytPw2",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003801,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002515,
+        "upstream_inference_cost": 0.003801,
+        "upstream_inference_prompt_cost": 0.001286
+      },
+      "is_byok": false,
+      "prompt_tokens": 1286,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1789
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature conditions but provides no guidance on what actions could change the outcome. A person denied credit would not know what to do with this information.\",\n    \"audit_usefulness\": \"The anchor conditions and their weights offer some insight into which features the model relied on, but the low fidelity (0.009) and moderate stability (0.665) raise concerns about whether these anchors truly represent the model's decision logic.\",\n    \"clarity\": \"The format is technical with feature names and threshold notation (e.g., 'checking_status_<0', '4<=X<7') that requires domain knowledge of the German credit dataset to interpret. Not accessible to non-technical users.\",\n    \"completeness\": \"Only four features are highlighted as important (all with weight 1.0), while six others are marked as 0.0. This sparse representation may miss important interactions or secondary factors contributing to the decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without padding.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in utility. While it correctly identifies the prediction (TP), the very low fidelity score and lack of actionable insights limit its practical value for auditing or decision-making.\",\n    \"semantic_plausibility\": \"The anchored features (checking account status, employment duration, housing type) are plausible credit risk factors in lending domains. However, the binary weight scheme (1.0 or 0.0) oversimplifies their actual contribution.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:00:08.566718+00:00"
+}

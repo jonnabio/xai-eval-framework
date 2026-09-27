@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0fcfd274c5715233",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e564a6093e40672d_ecdf024f03a30781.txt",
+  "prompt_version": "ecdf024f03a30781",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547239-sS277ZaywBojNcjOe34K",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004109,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002825,
+        "upstream_inference_cost": 0.004109,
+        "upstream_inference_prompt_cost": 0.001284
+      },
+      "is_byok": false,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1849
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A person would not know which features to modify or in what direction to alter them to achieve a different result.\",\n    \"audit_usefulness\": \"While the feature list could help identify which variables the model relies on, the low fidelity (0.386) and high faithfulness gap (0.249) suggest the explanation may not accurately represent the model's actual decision logic, limiting its utility for bias detection or error investigation.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical scores, which is accessible to non-technical users. However, the meaning of the scores (importance weights) and the prediction class are not explicitly stated, requiring some domain knowledge.\",\n    \"completeness\": \"The explanation identifies 10 features but lacks context about their values in this instance, the direction of their influence, or how they interact. It does not explain why these specific features matter for the >50K income prediction.\",\n    \"concision\": \"The format is compact and avoids redundancy, efficiently listing features and scores. However, the low fidelity and stability metrics suggest the explanation may be capturing noise rather than signal, reducing information quality per token.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical performance (fidelity 0.386, stability 0.173), lack of actionable insights, and insufficient context about feature values and directions. While it identifies relevant features, the low reliability metrics undermine confidence in the explanation.\",\n    \"semantic_plausibility\": \"The features listed (age, education, occupation, relationship status, hours-per-week) are plausibly related to income prediction in the adult dataset. However, without knowing the instance's actual feature values or the direction of influence, it is difficult to assess whether the explanation makes sense for this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:05.782082+00:00"
+}

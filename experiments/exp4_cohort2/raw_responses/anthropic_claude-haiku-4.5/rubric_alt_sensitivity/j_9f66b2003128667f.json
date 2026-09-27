@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9f66b2003128667f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a138a3019aad47d9_2d7263d517cfb77f.txt",
+  "prompt_version": "2d7263d517cfb77f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546934-GEbLBSvYkJ3g5zjmaejL",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 592,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004239,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00296,
+        "upstream_inference_cost": 0.004239,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1871
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only identifies hours-per-week as influential (0.6484) but provides no counterfactual guidance or specific values to change. It does not indicate what adjustment to hours-per-week would flip the prediction from 0 to 1, making it impossible to act on.\",\n    \"audit_usefulness\": \"The explanation shows only one meaningful feature weight among many zeros, which is suspicious. However, the poor technical metrics (fidelity 0.15, faithfulness_gap 0.33, stability 0.03) suggest the explanation is unreliable for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with weights\u2014and accessible to non-technical readers. However, the meaning of the weights and why only hours-per-week matters is not explained.\",\n    \"completeness\": \"The explanation identifies hours-per-week as the primary factor but fails to explain the decision mechanism. It does not indicate whether high or low hours-per-week drove the prediction, nor does it account for why all other features have zero weight, which seems incomplete.\",\n    \"concision\": \"The explanation is brief but includes many zero-weight features that add no information. Removing the uninformative features would improve information density without loss of content.\",\n    \"overall_quality\": \"This is a weak explanation. It identifies one feature but provides minimal insight into the decision. The poor technical metrics (especially fidelity 0.15 and stability 0.03) indicate the explanation is unreliable. The false negative (predicted 0, true label 1) combined with low fidelity suggests the explanation may not accurately reflect why the model made this error.\",\n    \"semantic_plausibility\": \"Hours-per-week is plausibly relevant to income prediction in the adult dataset. However, the explanation is suspicious: all other features having exactly zero weight is unusual and suggests a potential artifact rather than a genuine reflection of model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:09:00.771331+00:00"
+}

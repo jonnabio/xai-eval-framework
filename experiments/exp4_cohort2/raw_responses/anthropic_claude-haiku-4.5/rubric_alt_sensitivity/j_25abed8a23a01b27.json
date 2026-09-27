@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_25abed8a23a01b27",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_679cae8cfc0b290c_8eb78225f8edd3bc.txt",
+  "prompt_version": "8eb78225f8edd3bc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547028-wX3M7jcdlVMKISzj3VBP",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 504,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0038,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00252,
+        "upstream_inference_cost": 0.0038,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1784
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no counterfactual actions or concrete steps to change the outcome. A user cannot determine what specific changes would alter the prediction.\",\n    \"audit_usefulness\": \"While the feature rankings could help identify which features the model relies on, the near-zero scores for most features and the low fidelity (0.479) raise concerns about explanation reliability. Limited utility for bias detection without deeper context.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical scores. However, without explanation of what the scores mean or why education-num dominates, non-technical readers would struggle to interpret the results.\",\n    \"completeness\": \"Only one feature (education-num) has a meaningful score; all others are zero. This sparse representation may reflect the actual model behavior but leaves major questions about the decision-making process unanswered.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. However, the many zero-valued features add little information and could be omitted for better efficiency.\",\n    \"overall_quality\": \"The explanation is minimal and difficult to act upon. While technically correct in format, the low fidelity score (0.479) and lack of actionable insights limit its practical value for understanding or auditing the model.\",\n    \"semantic_plausibility\": \"Education level influencing income prediction is domain-plausible. However, the complete absence of other known predictors (age, workclass, hours-per-week) is suspicious and suggests the explanation may not fully capture the model's actual reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:10:33.776138+00:00"
+}

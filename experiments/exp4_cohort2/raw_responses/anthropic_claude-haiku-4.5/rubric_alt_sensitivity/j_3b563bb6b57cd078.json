@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3b563bb6b57cd078",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_eec93395cc3f8408_f2e0f66b3209f739.txt",
+  "prompt_version": "f2e0f66b3209f739",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545615-gURtzO2G3xTOKQJzClc0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003703,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00239,
+        "upstream_inference_cost": 0.003703,
+        "upstream_inference_prompt_cost": 0.001313
+      },
+      "is_byok": false,
+      "prompt_tokens": 1313,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1791
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their financial situation would alter the denial decision.\",\n    \"audit_usefulness\": \"SHAP values with direction and magnitude are useful for auditing model behavior and detecting bias patterns. The low fidelity (0.568) is concerning and limits confidence in the explanation's faithfulness to actual model decisions.\",\n    \"clarity\": \"The format is technical with SHAP values and feature names that require understanding of credit terminology and machine learning concepts. Non-technical users would struggle to interpret the numerical contributions.\",\n    \"completeness\": \"The explanation covers the top 10 contributing factors, which captures the main drivers. However, the low fidelity score (0.568) suggests the explanation may not fully account for the model's actual decision logic.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line presents a feature and its SHAP value efficiently without padding.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility. While SHAP provides interpretable feature contributions, the low fidelity, lack of actionability, and technical presentation reduce its overall value for most stakeholders.\",\n    \"semantic_plausibility\": \"The negative contributions from poor checking status and credit history align with credit risk assessment domain knowledge. The small positive contributions from life insurance and age are reasonable. The pattern is consistent with lending practices.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:47:00.459443+00:00"
+}

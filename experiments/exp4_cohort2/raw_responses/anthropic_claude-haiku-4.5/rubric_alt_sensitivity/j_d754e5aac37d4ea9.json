@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d754e5aac37d4ea9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_d7929e6662f20d44.txt",
+  "prompt_version": "d7929e6662f20d44",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544529-hfNvspuVYbgxirxTL9ic",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 583,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004215,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002915,
+        "upstream_inference_cost": 0.004215,
+        "upstream_inference_prompt_cost": 0.0013
+      },
+      "is_byok": false,
+      "prompt_tokens": 1300,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1883
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person denied income would not know what to modify (e.g., pursue additional education, change occupation) to potentially reverse the decision.\",\n    \"audit_usefulness\": \"The SHAP values reveal which features influenced this false negative prediction, useful for auditing. However, the low fidelity (0.65) and high faithfulness gap (0.13) suggest the explanation may not accurately represent the model's actual decision boundary, limiting audit confidence.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical contributions\u2014but requires understanding SHAP methodology and the adult dataset's encoded categorical variables. Non-technical readers would struggle with terms like 'marital-status_Married-civ-spouse' and what negative/positive values mean.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, capturing major factors. However, it omits the base prediction value and doesn't explain why these features matter for income prediction or how they interact, leaving gaps in understanding the full decision logic.\",\n    \"concision\": \"The explanation is compact at 92 tokens with no obvious redundancy. Each feature-value pair is necessary information, though the format could be slightly more efficient with better organization.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies relevant features but suffers from low technical fidelity, lacks actionability, and is inaccessible to non-technical users. The false negative case (predicted 0, true 1) deserves deeper insight into why the model failed.\",\n    \"semantic_plausibility\": \"The features align with income prediction domain knowledge (education, marital status, occupation, gender are known predictors). However, the specific contribution directions and magnitudes cannot be verified without domain expertise, and the low fidelity raises questions about whether these values truly reflect the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:28:55.531988+00:00"
+}

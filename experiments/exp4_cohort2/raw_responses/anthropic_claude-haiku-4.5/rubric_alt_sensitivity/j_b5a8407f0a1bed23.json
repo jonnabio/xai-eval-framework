@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b5a8407f0a1bed23",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a6075392942e36b2_08b74188c94cc4cf.txt",
+  "prompt_version": "08b74188c94cc4cf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545783-RL9HzhPAnAIWxPac9Sua",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00385,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00255,
+        "upstream_inference_cost": 0.00385,
+        "upstream_inference_prompt_cost": 0.0013
+      },
+      "is_byok": false,
+      "prompt_tokens": 1300,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1810
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could change the outcome. It does not indicate whether features should be modified or what threshold changes would alter the prediction.\",\n    \"audit_usefulness\": \"The low fidelity (0.54) and high faithfulness gap (0.48) suggest the explanation poorly represents the model's actual decision logic. This severely limits its utility for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, inequality operators, decimal weights) that requires familiarity with the dataset schema and machine learning concepts. Non-technical stakeholders would struggle to interpret it.\",\n    \"completeness\": \"While multiple features are listed, the explanation lacks context about their relationships, thresholds, or relative importance. The presence of zero-weighted features is unexplained, and the decision boundary is unclear.\",\n    \"concision\": \"The format is compact but dense with technical notation. Each element carries information, though the presentation could be more efficient by grouping related features or explaining the weighting scheme.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance metrics (low fidelity, high faithfulness gap) and limited interpretability. While it identifies relevant features, it fails to provide actionable or auditable insights into the model's decision.\",\n    \"semantic_plausibility\": \"The features selected (credit history, savings, checking account status, loan purpose, residence) are plausible for credit decisions. However, the zero weights on credit_amount and installment_commitment are counterintuitive in lending contexts, raising questions about explanation validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:49:48.165646+00:00"
+}

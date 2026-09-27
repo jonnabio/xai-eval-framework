@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_41e910d9fd66c6f9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a6bb167d1c81d8a5_7a446f18630e7124.txt",
+  "prompt_version": "7a446f18630e7124",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546295-Fy44kvBpViy71DVeJrJk",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 566,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004105,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00283,
+        "upstream_inference_cost": 0.004105,
+        "upstream_inference_prompt_cost": 0.001275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1841
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what could be changed to alter the prediction. A clinician or patient cannot act on abstract SHAP values without knowing feature ranges, clinical significance, or feasibility of change.\",\n    \"audit_usefulness\": \"The feature list and their SHAP values enable an auditor to see which features drove the false positive prediction. However, low fidelity (0.648) and stability (0.412) suggest the explanation may not reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical values\u2014but requires understanding SHAP methodology and what positive/negative values mean. Non-technical readers would struggle to interpret the signs and magnitudes.\",\n    \"completeness\": \"The explanation identifies top 10 contributing features, which captures the main drivers. However, it lacks context about feature values in this instance, thresholds, or how these features interact, leaving gaps in understanding the full decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is necessary information, though the list format is dense and could benefit from brief interpretation.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies relevant features but suffers from low technical metrics (fidelity 0.648, stability 0.412), lacks actionability, and provides minimal context for interpretation. The false positive status (true label 0, predicted 1) makes understanding the error mechanism important but underexplored.\",\n    \"semantic_plausibility\": \"The features (concave points, radius, texture, area, perimeter) are medically relevant to cancer diagnosis. However, the explanation does not clarify whether the feature values themselves are abnormal, making it difficult to assess if the reasoning aligns with clinical expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:58:21.612036+00:00"
+}

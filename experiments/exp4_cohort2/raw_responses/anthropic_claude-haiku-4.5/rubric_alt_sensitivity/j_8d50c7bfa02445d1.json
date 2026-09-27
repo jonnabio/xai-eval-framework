@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8d50c7bfa02445d1",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a63737c16fa6edb_11d628d55dc485da.txt",
+  "prompt_version": "11d628d55dc485da",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545474-TGXBn1kjaflZUscdO6BD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 578,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004186,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00289,
+        "upstream_inference_cost": 0.004186,
+        "upstream_inference_prompt_cost": 0.001296
+      },
+      "is_byok": false,
+      "prompt_tokens": 1296,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1874
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. The coefficients are too small to suggest meaningful interventions, and no threshold or decision boundary information is provided.\",\n    \"audit_usefulness\": \"While the feature list could help identify which variables the model considers, the extremely low fidelity (0.52) and high faithfulness gap (0.60) severely undermine confidence in these explanations for auditing purposes. The stability is also very poor (0.08), suggesting unreliable feature rankings.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical coefficients\u2014but requires understanding of logistic regression, LIME methodology, and the adult dataset features. Non-technical readers would struggle with interpretation.\",\n    \"completeness\": \"The explanation shows top factors but with very small magnitudes, all within \u00b10.01 range. This raises questions about whether these truly explain the decision or are noise. The low fidelity suggests the local model poorly approximates the actual model's behavior for this instance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and coefficients. However, the brevity comes at the cost of context\u2014no explanation of what these numbers mean or why they matter.\",\n    \"overall_quality\": \"The explanation is technically produced but undermined by poor technical metrics. The low fidelity, high faithfulness gap, and poor stability indicate the LIME approximation is unreliable. While the format is clear, the substance is questionable for decision support or auditing.\",\n    \"semantic_plausibility\": \"The features identified (education, occupation, hours-per-week, age) are plausible predictors of income in the adult dataset. However, the extremely small coefficient magnitudes and poor model fidelity raise doubts about whether these truly reflect the model's reasoning or are artifacts of LIME's local approximation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:44:39.765854+00:00"
+}

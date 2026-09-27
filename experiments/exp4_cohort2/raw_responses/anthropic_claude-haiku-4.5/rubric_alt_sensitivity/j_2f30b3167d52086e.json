@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2f30b3167d52086e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a2878ddc3d3b22b3_a44aef4ad17f0157.txt",
+  "prompt_version": "a44aef4ad17f0157",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547564-ljDWHdW4sjK2XOq2Czrb",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 546,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00273,
+        "upstream_inference_cost": 0.004022,
+        "upstream_inference_prompt_cost": 0.001292
+      },
+      "is_byok": false,
+      "prompt_tokens": 1292,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1838
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what values would need to change to alter the prediction. A user cannot determine what specific actions (e.g., changing age or employment type) would flip the outcome from positive to negative.\",\n    \"audit_usefulness\": \"The raw importance scores offer limited insight into model behavior. The poor technical metrics (low fidelity=0.068, low stability=0.013, high faithfulness_gap=0.046) suggest the explanation may not reliably represent the model's actual decision logic, limiting its value for bias or error detection.\",\n    \"clarity\": \"The format is technical and requires understanding of feature importance scores and their magnitudes. Non-technical stakeholders would struggle to interpret what these numerical weights mean for the income prediction decision.\",\n    \"completeness\": \"Only two features show non-zero importance (age and workclass_Self-emp-not-inc), while most features are zero. This sparse representation may miss important interactions or context about why the model made this false positive prediction.\",\n    \"concision\": \"The explanation is relatively brief but includes many zero-valued features that add little information. Removing the zero-weight features would improve information density without loss of content.\",\n    \"overall_quality\": \"This explanation has significant limitations. The poor technical metrics indicate low fidelity to the actual model, the format lacks actionability, and it provides minimal insight into this specific false positive case. While not completely unusable, it falls short of being useful for practical purposes.\",\n    \"semantic_plausibility\": \"Age and self-employment status are plausible factors for income prediction in the adult dataset. However, the explanation doesn't contextualize these factors or explain the direction of their influence, making it difficult to assess full domain consistency.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:19:29.570475+00:00"
+}

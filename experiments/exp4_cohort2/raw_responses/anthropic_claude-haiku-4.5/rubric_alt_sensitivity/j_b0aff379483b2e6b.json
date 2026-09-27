@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b0aff379483b2e6b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28cfcd5501fa69b2_271a01e743266611.txt",
+  "prompt_version": "271a01e743266611",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546349-7PeTDUmLeZjccu1tErro",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004228,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00294,
+        "upstream_inference_cost": 0.004228,
+        "upstream_inference_prompt_cost": 0.001288
+      },
+      "is_byok": false,
+      "prompt_tokens": 1288,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1876
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies specific feature conditions (duration, checking status, credit history, employment) but provides no guidance on what could be changed to alter the outcome. It is purely descriptive of what drove the prediction, not prescriptive about next steps.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction, but the low fidelity (0.47) and high faithfulness gap (0.19) suggest the explanation may not reliably represent the model's actual decision logic. This undermines confidence in using it for bias or error investigation.\",\n    \"clarity\": \"The format is technical (feature names with numerical weights) and assumes familiarity with credit terminology and machine learning concepts. A non-technical person would struggle to interpret what 'checking_status_no checking: 1.0000' means in practical terms.\",\n    \"completeness\": \"The explanation lists four features with high importance (1.0) and six with zero importance, but does not explain the relationships between these features or why they matter for credit decisions. It lacks context about thresholds or decision boundaries.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their weights. However, the format is dense and could benefit from brief contextual labels for accessibility.\",\n    \"overall_quality\": \"This is a false negative case where the model predicted 0 (bad credit) but the true label is 1 (good credit). The explanation identifies anchoring features but with concerning technical metrics (fidelity 0.47, faithfulness gap 0.19). The explanation is sparse and technical, limiting its utility for understanding or correcting the error.\",\n    \"semantic_plausibility\": \"The identified features (short duration, no checking account, delayed payment history, recent employment) are plausible risk factors in credit assessment. However, the model's incorrect prediction (FN) raises questions about whether these factors were weighted appropriately, making the explanation's reliability questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:59:16.208533+00:00"
+}

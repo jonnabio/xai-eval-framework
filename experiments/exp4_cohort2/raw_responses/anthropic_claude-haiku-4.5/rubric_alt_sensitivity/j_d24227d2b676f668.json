@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d24227d2b676f668",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_aa1ea16859fa26f1_42970c1c8986ea67.txt",
+  "prompt_version": "42970c1c8986ea67",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545846-i05zB20HYrQo7gIf11nL",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003974,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.003974,
+        "upstream_inference_prompt_cost": 0.001289
+      },
+      "is_byok": false,
+      "prompt_tokens": 1289,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1826
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person would not know whether to pursue education, change occupation, or adjust other factors to alter the prediction.\",\n    \"audit_usefulness\": \"While the feature weights are presented, the low fidelity (0.489) and high faithfulness gap (0.691) suggest the explanation may not accurately reflect the model's actual decision logic. This undermines its utility for auditing bias or errors. The sparse sample (n=50) also limits confidence.\",\n    \"clarity\": \"The explanation is presented as raw feature-weight pairs without context or interpretation. Someone without technical training would not understand what these numbers mean, why these features matter, or how they combine to produce the prediction.\",\n    \"completeness\": \"The explanation shows top factors but lacks crucial context: no indication of feature values for this instance, no explanation of why these features are important, and no account of how they interact. The decision logic remains opaque.\",\n    \"concision\": \"The format is compact but dense. Each feature-weight pair is tightly packed with minimal interpretation, making it efficient in length but not in information transfer for non-technical audiences.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides feature importance weights, but poor fidelity metrics, lack of actionability, and inaccessibility to non-experts make it serviceable at best. It serves as a raw output rather than a coherent explanation.\",\n    \"semantic_plausibility\": \"The features identified (education, occupation, marital status, age) are plausible predictors of income in the adult dataset and align with domain knowledge. However, without instance-specific values or context, plausibility cannot be fully verified.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:51.538434+00:00"
+}

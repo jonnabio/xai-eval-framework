@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_69383b81edd399bc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e354d1466bc2ce9c_dd46e90abeb74105.txt",
+  "prompt_version": "dd46e90abeb74105",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546076-TYIoqeu3Imv4yvn3IeCS",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 569,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004152,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002845,
+        "upstream_inference_cost": 0.004152,
+        "upstream_inference_prompt_cost": 0.001307
+      },
+      "is_byok": false,
+      "prompt_tokens": 1307,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1876
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the prediction. A user cannot determine what specific changes to marital status, capital gains, or occupation would alter the outcome.\",\n    \"audit_usefulness\": \"The feature weights and directions are useful for auditing, but the low fidelity (0.675) and high faithfulness gap (0.276) suggest the explanation may not accurately represent the model's actual decision boundary. This limits confidence in using it to detect bias.\",\n    \"clarity\": \"The format is technical with feature names and numerical weights. While interpretable to data scientists, non-technical stakeholders would struggle with notation like 'marital-status_Married-spouse-absent' and understanding what the coefficients mean.\",\n    \"completeness\": \"The explanation shows top 10 factors but with very small magnitudes (largest is 0.0142). It's unclear whether these truly capture the decision logic, especially given the low fidelity score. The explanation may be incomplete regarding the actual drivers of the false positive.\",\n    \"concision\": \"The list format is compact and avoids redundancy. Each entry conveys feature name and weight efficiently without padding.\",\n    \"overall_quality\": \"The explanation is weak overall. While technically sound as a LIME output, the poor fidelity (0.675), high faithfulness gap, and low stability (0.073) indicate the local approximation poorly represents the model's behavior. The false positive prediction combined with weak technical metrics suggests the explanation may be misleading.\",\n    \"semantic_plausibility\": \"The factors align with income prediction domain knowledge (marital status, capital gains, occupation, education are relevant). However, the magnitudes are suspiciously small and the false positive (predicting >50K when true label is \u226450K) raises questions about whether these factors genuinely drove the incorrect prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:54:42.324173+00:00"
+}
