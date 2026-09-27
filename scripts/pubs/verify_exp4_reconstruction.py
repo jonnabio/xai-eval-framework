@@ -84,6 +84,30 @@ def load_pyc(path: Path):
     return marshal.loads(path.read_bytes()[PYC_HEADER:])
 
 
+def compiled_from_current_source(src: Path, pyc: Path) -> bool:
+    """True if the .pyc was generated from the file as it is now, not an original.
+
+    Importing a reconstructed module makes Python write a fresh .pyc into
+    __pycache__; comparing the source against that proves nothing. A
+    timestamp-based .pyc header stores the mtime (bytes 8-12) and size
+    (bytes 12-16) of the source it was compiled from, so a .pyc whose header
+    matches the current file was compiled from it. Hash-based .pyc files
+    (flags != 0) are treated as possibly original.
+    """
+    header = pyc.read_bytes()[:PYC_HEADER]
+    if int.from_bytes(header[4:8], "little") != 0:
+        return False
+    stat = src.stat()
+    mtime = int.from_bytes(header[8:12], "little")
+    size = int.from_bytes(header[12:16], "little")
+    return mtime == (int(stat.st_mtime) & 0xFFFFFFFF) and size == (stat.st_size & 0xFFFFFFFF)
+
+
+def original_bytecode(pairs: list[tuple[Path, Path]]) -> list[tuple[Path, Path]]:
+    """Pairs whose .pyc exists and was not compiled from the current source."""
+    return [(s, p) for s, p in pairs if p.exists() and not compiled_from_current_source(s, p)]
+
+
 def opcodes(code) -> list[str]:
     """Flatten a code object's opcode stream, recursing into nested code objects."""
     out = [instr.opname for instr in dis.get_instructions(code)]
@@ -189,10 +213,11 @@ def check_pins() -> tuple[list[str], int]:
 def main() -> int:
     problems, n_pins = check_pins()
 
-    # The bytecode comparison runs only if the lost .pyc files are ever restored.
-    pairs = [(s, p) for s, p in PAIRS if p.exists()]
-    script_pairs = [(s, p) for s, p in SCRIPT_PAIRS if p.exists()]
-    bytecode_note = "bytecode absent (lost 2026-09-27), comparison not run"
+    # The bytecode comparison runs only if the lost .pyc files are ever restored;
+    # bytecode Python regenerated from the current sources does not count.
+    pairs = original_bytecode(PAIRS)
+    script_pairs = original_bytecode(SCRIPT_PAIRS)
+    bytecode_note = "original bytecode absent (lost 2026-09-27), comparison not run"
     if pairs or script_pairs:
         if sys.version_info[:2] == REQUIRED_PYTHON:
             for src, pyc in pairs:

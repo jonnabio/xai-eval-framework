@@ -68,3 +68,31 @@ here: the paper is under author revision.
 | API keys | None set on this laptop. |
 | Scale | 192 cases x 3 judges x 3 replicates = 1,728 calls for the primary condition; 5,184 with all three conditions. |
 | Retention | Raw responses, parsed scores, prompts, rendered-prompt hashes and run manifests all committed, under a new cohort directory. |
+
+## 4. Found while building the pipeline (2026-09-27)
+
+- **The published ICC may pool all three prompt conditions (OPEN).**
+  `_icc_per_dimension` and `_krippendorff_per_dimension` pass every parsed row
+  to a `pivot_table(..., aggfunc="mean")`, i.e. each case x judge cell is the
+  mean over every condition and replicate present. Supplementary Table S1 says
+  "Primary ICC results come from the `hidden_label` condition". Both are true
+  only if the original run executed `hidden_label` alone, which can no longer be
+  checked. Cohort 2 reports both views. Needs a manuscript decision.
+- **Only `hidden_label_primary` withholds the true label.** `render_exp4_prompt`
+  blanks `true_label` for that condition alone, so `rubric_alt_sensitivity`
+  also shows it; its clean contrast is `label_visible_bias_probe`.
+- **Verifier flaw, fixed.** Running the EXP4 code regenerates `.pyc` files in
+  `__pycache__`, and the pin verifier then "compared" the sources against
+  bytecode compiled from themselves. It now skips any `.pyc` whose header
+  records the current source's mtime and size. CI was unaffected (it never
+  has `.pyc` files).
+
+## 5. Cohort 2 is prepared (2026-09-27)
+
+Branch `results/exp4-cohort2`: the recovered case inventory, rebuilt templates,
+manifest (judges `openai/gpt-5.4-mini`, `anthropic/claude-haiku-4.5`,
+`google/gemini-3.8-flash` via OpenRouter; 3 conditions x 3 replicates; 5,184
+calls), and a client/runner change that records what the provider actually
+served. A full dry run passed (1,728 dummy responses, 0 parse failures), and the
+three-judge ICC/alpha path was exercised on synthetic data. Awaiting
+`OPENROUTER_API_KEY`; the first live step is a small pilot per judge.
