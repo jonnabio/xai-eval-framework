@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5d87ea599e9e4677",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bc76a653e558e0c2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5d87ea599e9e4677_7e76ea0807363bae.txt",
+  "prompt_version": "7e76ea0807363bae",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541350-tgNkr2Yy00CmXjc4v3jx",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00299475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.00299475,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5d87ea599e9e4677\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next steps; it only lists local feature contributions. A user cannot tell what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is moderately useful for audit because it exposes the strongest local factors and their directions, which can help inspect model behavior. However, it lacks enough detail about feature values, baseline, and decision threshold to fully diagnose the false negative.\",\n    \"clarity\": \"The wording is straightforward and the ranked factors are easy to read, even for a non-expert. The main limitation is that the sign convention is not explained, so the meaning of positive versus negative contributions is implicit rather than explicit.\",\n    \"completeness\": \"It includes the main local drivers of the prediction, but not the instance's actual feature values, class probabilities, or threshold information. Because this is a false negative, the explanation is incomplete for understanding why the model missed the positive class.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy while still listing the top local factors. It is short enough to be digestible without omitting too much in the given format.\",\n    \"overall_quality\": \"Overall this is a usable but limited local explanation: it is readable, compact, and somewhat informative about feature influence. Its main weaknesses are weak actionability, limited completeness, and only moderate support for auditing a false negative.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset, with age, education, workclass, occupation, marital status, relationship, and sex all being relevant variables. The signs and magnitudes also look coherent as local feature attributions, even though they do not fully explain the false negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:53.021698+00:00"
+}

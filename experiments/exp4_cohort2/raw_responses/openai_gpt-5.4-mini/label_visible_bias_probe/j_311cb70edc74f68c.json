@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_311cb70edc74f68c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_36ff2c1056b28459_0655e37c2482b1e7.txt",
+  "prompt_version": "0655e37c2482b1e7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542638-mUQyME0t9FWixrO8SsV8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.00295575,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any feasible recourse or next steps. It lists a counterfactual factor but with no clear direction on how changing it would affect the prediction.\",\n    \"audit_usefulness\": \"It is only minimally useful for audit because it exposes one local feature and mostly zero-valued entries, but it does not explain the model\u2019s decision path or why the false negative occurred. The very low fidelity also reduces trust for debugging.\",\n    \"clarity\": \"The output is easy to read syntactically, but the meaning is unclear because many listed factors are zero and the single nonzero factor is not interpreted in plain language. A non-expert would not understand how this explains the prediction.\",\n    \"completeness\": \"It provides only a sparse and fragmentary view of the local decision, with no key positive and negative contributors or comparison to the actual instance values. For a false negative, it fails to explain why the model predicted class 0 despite the true label being 1.\",\n    \"concision\": \"The explanation is compact, but much of the content is low-value repetition of zero contributions. It is short without being informative enough to justify the space it uses.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, hard to interpret, and not very faithful to the model behavior. It offers limited insight into the false negative and little practical value for users or auditors.\",\n    \"semantic_plausibility\": \"The listed feature names are plausible for the Adult dataset, and the output format resembles a counterfactual-style explanation. However, the pattern of mostly zero attributions with only one feature highlighted is not very convincing as a meaningful local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:21.209142+00:00"
+}

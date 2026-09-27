@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b560a5afc9b94460",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542348-dMST1ACA09BWtmbt6G8c",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002304,
+        "upstream_inference_cost": 0.0030945,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1566
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate how changing any feature would affect the prediction in a meaningful way. It mentions one strong factor, education-num, but all other listed factors are zero, so there is little usable guidance for action.\",\n    \"audit_usefulness\": \"It offers limited audit value because it exposes only a sparse set of local factors without showing directionality, comparison to baseline, or a coherent counterfactual. The extremely low sparsity and modest fidelity also suggest it is not very informative for investigating model behavior.\",\n    \"clarity\": \"The wording is simple, but the output is hard to interpret because many features are shown with 0.0000 and there is no explanation of what those numbers mean. A non-expert would likely not understand why the prediction was made from this list alone.\",\n    \"completeness\": \"The explanation identifies one non-zero driver, education-num, but omits the magnitude, sign, and any meaningful contribution of the other variables. It does not provide enough local decision context to fully understand why the model predicted class 1.\",\n    \"concision\": \"It is fairly short, but much of the content is redundant because most listed factors are zero and add little information. The explanation is compact, though not especially efficient in terms of useful content per word.\",\n    \"overall_quality\": \"Overall this is a weak local explanation: it is sparse and somewhat readable, but it lacks meaningful decision logic, actionable guidance, and interpretability. The technical metrics also indicate only moderate fidelity, which lowers confidence in its usefulness.\",\n    \"semantic_plausibility\": \"The one salient factor, education-num, is plausible for an Adult-income prediction, since education is commonly related to income. However, the near-all-zero feature list makes the explanation feel incomplete and somewhat artificial in how it summarizes the decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:30.813691+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8c837401e1b14349",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_75520768088e5528_4e515e268b90b14b.txt",
+  "prompt_version": "4e515e268b90b14b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541420-rLoSNwJYODNrQFNCMqVY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003081,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.003081,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1568
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features that pushed the prediction up or down, but it does not translate them into any concrete recourse or decision steps. A user cannot tell what to change to alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for inspection because it shows the main local SHAP contributors and their directions, which helps a data scientist see which variables influenced the model. However, it lacks context about baseline value, feature values, and whether the signs align with broader model behavior across cases.\",\n    \"clarity\": \"The wording is concise and the feature-attribution format is easy to parse, even for a non-expert. That said, the shorthand feature names and positive/negative scores require some familiarity with the dataset and SHAP to interpret fully.\",\n    \"completeness\": \"It covers several top contributors to the decision, but it does not state the actual instance values, the decision threshold, or the model's confidence. Because this is a false negative, the explanation also does not help identify why the model missed the positive class in a fuller local context.\",\n    \"concision\": \"The explanation is compact and lists only the top local factors, avoiding unnecessary prose. It is fairly information-dense for its length, though it still omits some context needed for interpretation.\",\n    \"overall_quality\": \"Overall, this is a reasonably good local feature-attribution explanation: readable, compact, and informative about the main drivers. Its main weaknesses are limited actionability and incomplete decision context, especially for understanding a false negative.\",\n    \"semantic_plausibility\": \"The attributions are plausible for the Adult dataset, with features such as age, education, relationship, occupation, marital status, hours per week, and sex all being relevant predictors of income. The directions are not obviously contradictory, so the explanation is semantically coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:03.773367+00:00"
+}

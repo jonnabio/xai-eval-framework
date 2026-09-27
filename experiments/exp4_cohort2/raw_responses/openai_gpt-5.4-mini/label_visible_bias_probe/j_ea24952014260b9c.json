@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ea24952014260b9c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1c525ff1deb5c1a6_65858197c9aa6ed5.txt",
+  "prompt_version": "65858197c9aa6ed5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542100-Q7c7z5ogY8tr7zRQLs9R",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00303675,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1559
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only names one feature as relevant and lists several with zero contribution, but it does not suggest concrete recourse actions or show what changes would move the prediction. For a false negative, this gives almost no usable next step for a user.\",\n    \"audit_usefulness\": \"It provides a very limited view of the local logic and the near-zero feature set is not informative for diagnosing why the model predicted class 0. The low fidelity and stability metrics also suggest it is weak for auditing model behavior.\",\n    \"clarity\": \"The text is mechanically simple and easy to parse, but the meaning of the numeric values is not explained and the list format is not very informative. A non-expert would not understand how these factors relate to the outcome.\",\n    \"completeness\": \"The explanation omits the main drivers of the prediction and only reports one non-zero factor plus many zeros. It does not explain why the model predicted the negative class or why this was a false negative relative to the true label.\",\n    \"concision\": \"It is short, but much of the content is wasted on zero-valued features that add little information. The explanation is compact in length yet not efficient in communicating useful decision content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is sparse, only partially aligned with the prediction, and provides little insight into the model's decision process. The low faithfulness and stability further reduce confidence in its usefulness.\",\n    \"semantic_plausibility\": \"It is plausible that marital status, age, education, and work-related variables matter for Adult income prediction, but the pattern of mostly zero factors is not very convincing as a local explanation. The result is semantically consistent in a broad sense, yet too thin to feel trustworthy.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:23.110142+00:00"
+}

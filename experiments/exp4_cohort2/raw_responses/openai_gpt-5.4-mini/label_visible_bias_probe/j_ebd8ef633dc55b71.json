@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ebd8ef633dc55b71",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1a9c16ecde743d5e_517ffe545d4d947a.txt",
+  "prompt_version": "517ffe545d4d947a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541601-bI9A0CbkgfCoyALa7RVQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.002985,
+        "upstream_inference_prompt_cost": 0.000807
+      },
+      "is_byok": false,
+      "prompt_tokens": 1076,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the model output up or down, but it does not translate them into concrete recourse or decision steps. A user cannot easily infer what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the top local SHAP contributions and their directions, which helps inspect whether the model relied on sensible credit factors. However, the low fidelity metric suggests the explanation only partially captures the model\u2019s actual local behavior.\",\n    \"clarity\": \"The list is compact and uses a consistent sign-and-value format, so a technical reader can follow it. A non-expert would still need familiarity with the encoded German Credit features and SHAP values to interpret it properly.\",\n    \"completeness\": \"The explanation covers the main local contributors and includes both positive and negative factors, which is helpful for understanding the prediction. Still, it lacks a base value, probability, and any narrative linking these factors to the false-negative outcome.\",\n    \"concision\": \"It is fairly compact for the amount of information given, with only the top factors shown and no obvious padding. The format is terse but efficient.\",\n    \"overall_quality\": \"This is a decent local explanation with good structure and useful feature attributions, but it falls short on interpretability for non-experts and on decision support. Its moderate fidelity also limits confidence in how fully it represents the model\u2019s true reasoning.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit model, and the directions of influence are generally consistent with credit-risk intuition. The false-negative case is not obviously contradicted by the features, though the absence of a confidence score limits contextual interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:07.449062+00:00"
+}

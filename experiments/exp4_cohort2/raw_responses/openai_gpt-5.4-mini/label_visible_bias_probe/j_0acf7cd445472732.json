@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6591a8e5ad6efec9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0acf7cd445472732",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6591a8e5ad6efec9_9abd47d1e9c99f2a.txt",
+  "prompt_version": "9abd47d1e9c99f2a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542557-evG5Kh7RcwltLeE8IXOP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030045,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.0030045,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6591a8e5ad6efec9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete next step, recourse, or decision review action. It only lists feature names with binary values, so a user cannot tell what to change or investigate.\",\n    \"audit_usefulness\": \"It gives limited audit value because it names a few local factors, but not their direction, magnitude, or how they support the negative prediction. The all-or-nothing style also makes it hard to inspect model behavior or diagnose the false negative.\",\n    \"clarity\": \"The wording is brief and readable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand whether these are conditions, weights, or rule satisfaction indicators.\",\n    \"completeness\": \"It mentions only two active anchors and then lists many inactive features without explaining their relevance to the prediction. For a false negative case, it does not provide enough local decision context to understand why the model predicted class 0 against the true label 1.\",\n    \"concision\": \"The explanation is compact and contains little extraneous text. However, much of the token budget is spent on a long list of zeros, which adds repetition without much useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for a mistaken prediction: it is compact but under-informative and not very interpretable. It offers some trace of the model's local rule structure, but not enough to support understanding, audit, or action.\",\n    \"semantic_plausibility\": \"The selected breast cancer features are plausible for this domain, and anchors-style outputs commonly identify rule conditions. Still, the presentation of many zero-valued factors without explanation makes the semantics only moderately coherent for interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:59.515188+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c47f6712d14db5d8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_681f91e7c50b9380_5c591c5bd13d2cb7.txt",
+  "prompt_version": "5c591c5bd13d2cb7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542501-1WhZYRZMQvxjBmVgnZ1M",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002277,
+        "upstream_inference_cost": 0.00306975,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a feasible recourse path or any concrete next steps for changing the prediction. It only lists feature importance values, most of which are zero, so a user cannot infer what to do differently.\",\n    \"audit_usefulness\": \"It offers very limited value for auditing because it does not explain why the model predicted the positive class beyond one dominant feature and many zeros. The near-zero sparsity and negative fidelity also suggest weak diagnostic usefulness for investigating model behavior.\",\n    \"clarity\": \"The text is short and technically simple, but the meaning of the feature scores is not explained in plain language. A non-expert would not understand how '1.0000' versus '0.0000' relates to the prediction or what DICE is doing here.\",\n    \"completeness\": \"It only exposes a tiny subset of the local decision context and omits the instance's actual feature values, counterfactual changes, and the main drivers behind the false positive. That is not enough to understand the specific prediction well.\",\n    \"concision\": \"The explanation is compact in length, but much of the content is uninformative because it repeats zero-valued factors. It is brief, yet not especially efficient in conveying useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but minimally interpretable, minimally actionable, and only lightly informative for understanding or auditing the prediction. The presence of mostly zero-valued factors makes it especially poor for explaining the specific false positive.\",\n    \"semantic_plausibility\": \"The listed features are plausible Adult dataset variables, and a single country-related factor could reasonably appear in a model explanation. However, the dominance of 'native-country_Ireland' with all other factors at zero is not very informative and feels incomplete for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:04.328377+00:00"
+}

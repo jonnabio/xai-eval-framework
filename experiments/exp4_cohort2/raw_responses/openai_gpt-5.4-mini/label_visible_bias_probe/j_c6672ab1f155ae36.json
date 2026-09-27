@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c49ba0b8d18e8b6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c6672ab1f155ae36",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1c49ba0b8d18e8b6_c9e413d5c4c49b4a.txt",
+  "prompt_version": "c9e413d5c4c49b4a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542529-8EjuuvIWpidLAd50CCmw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002376,
+        "upstream_inference_cost": 0.0031725,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1590
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1c49ba0b8d18e8b6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete recourse path or specific actions the user could take to change the prediction. It only lists local factors and their values, with no indication of which changes would matter most.\",\n    \"audit_usefulness\": \"It offers some limited audit value by exposing a few local features, but the signal is extremely sparse and mostly zero-valued, so it is hard to inspect the model\u2019s behavior meaningfully. The very low fidelity and sparsity further reduce its usefulness for diagnosing errors or bias.\",\n    \"clarity\": \"The output is readable in a technical sense, but it is not clearly explained for a non-expert because it consists of raw feature names and numeric values without interpretation. A reader would have to already know what the features mean and how DICE encodes them.\",\n    \"completeness\": \"The explanation does not adequately cover the drivers of this specific prediction, since almost all listed factors are zero and only hours-per-week has a nonzero value. It lacks a fuller local decision context such as directionality, comparative importance, or how the factors relate to the negative prediction.\",\n    \"concision\": \"It is compact, but the brevity comes at the expense of usefulness because the list is dominated by zero entries. The explanation could have been shorter while still being more informative by focusing on the truly relevant factors.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and somewhat interpretable, but it provides little substantive understanding of why the model predicted the negative class. Low fidelity and minimal sparsity make it especially poor as an explanatory artifact.\",\n    \"semantic_plausibility\": \"The content is broadly plausible for an Adult-income style tabular case, and hours-per-week is a reasonable feature to appear among local factors. However, the near-all-zero factor list makes the explanation feel mechanically generated and only weakly aligned with an intuitive decision story.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:31.862696+00:00"
+}

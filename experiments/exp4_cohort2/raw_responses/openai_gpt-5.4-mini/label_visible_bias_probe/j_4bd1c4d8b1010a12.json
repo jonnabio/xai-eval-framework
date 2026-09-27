@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4bd1c4d8b1010a12",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_36ff2c1056b28459_0655e37c2482b1e7.txt",
+  "prompt_version": "0655e37c2482b1e7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542641-J9NurevwEP2AAxTxBWSs",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00301875,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1550
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step the person could take to change the prediction. Listing features with mostly zero values offers no actionable guidance for review or intervention.\",\n    \"audit_usefulness\": \"It gives only a sparse and somewhat opaque ranking of local factors, which is not enough to inspect why the model made a false negative prediction. The near-zero scores and lack of directionality make it hard to diagnose bias or decision logic.\",\n    \"clarity\": \"The output is short and technically simple, but it is not very understandable to a non-expert because the feature values are unexplained and the meaning of the zero entries is unclear. The single nonzero factor is presented without context.\",\n    \"completeness\": \"It includes only a thin slice of local information and omits the main reasons the model predicted class 0, especially for a false negative case. There is no indication of feature changes, counterfactuals, or how these factors relate to the prediction.\",\n    \"concision\": \"The explanation is brief and avoids unnecessary verbosity, but much of the space is spent listing many zero-valued factors that add little information. It is compact, though not especially efficient in informational value.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is short but provides very limited insight into the specific prediction and is not helpful for review or recourse. The sparse factors and lack of interpretability reduce its practical value substantially.\",\n    \"semantic_plausibility\": \"The content is at least structurally plausible for the Adult dataset and a DICE local explanation, but the dominance of zero-valued factors makes the result feel uninformative and somewhat odd. It does not obviously contradict the instance context, but it is not very convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:23.674799+00:00"
+}

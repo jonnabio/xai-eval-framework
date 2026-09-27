@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bf2a4376e6325cff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6075392942e36b2_337895e4acf1369b.txt",
+  "prompt_version": "337895e4acf1369b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541796-tUNh9peP0qOFxTYOvAhw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.0029175,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete user-facing steps or recourse options. It only lists local anchor conditions without indicating what could be changed to alter the outcome.\",\n    \"audit_usefulness\": \"It gives some evidence about which feature conditions were used by the anchor rule, but it lacks thresholds, directionality, and how strongly each factor supported the negative prediction. This limits its usefulness for serious model auditing.\",\n    \"clarity\": \"The feature names are understandable in a technical sense, and the list format is straightforward. However, the meaning of the 1.0000 and 0.0000 values is not explained, so a non-expert would still struggle to interpret it.\",\n    \"completeness\": \"The explanation names several local factors, but it does not explain why these factors imply class 0 or how they interact. It also omits a natural-language summary of the decision logic and any counterfactual context.\",\n    \"concision\": \"The output is short and compact, with no obvious padding. It is fairly efficient in terms of words used, though some of the listed features add little interpretive value without context.\",\n    \"overall_quality\": \"This is a moderately useful anchor-style explanation, but it is too technical and incomplete for easy understanding or strong decision review. It provides some local signal, yet not enough context or interpretation to be considered high quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, such as checking status, savings, property, and credit amount. Nothing appears contradictory or implausible for this domain, even if the exact anchor formatting is hard to interpret.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:18.629725+00:00"
+}

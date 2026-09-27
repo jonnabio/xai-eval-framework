@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8569f49081305637",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dd93ba0618aac178",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8569f49081305637_40699e0acf17d776.txt",
+  "prompt_version": "40699e0acf17d776",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541617-eSBL7Tvjcw21Gq5NShPp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002988,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.002988,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8569f49081305637\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing which features were part of the anchor rule. A user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the local rule features the model relied on, especially duration and checking status. However, it lacks directionality, effect sizes, and enough context to diagnose why those features mattered.\",\n    \"clarity\": \"The output is easy to read as a short feature list, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. Without knowing anchors, a reader may not understand what constitutes the actual decision rationale versus unused features.\",\n    \"completeness\": \"It includes only a few top local factors and omits how they combine to support the positive prediction. There is no information about thresholds, interactions, or why the listed features lead to the class 1 outcome.\",\n    \"concision\": \"The explanation is brief and mostly compact, with little redundancy. Still, some listed zero-valued features add noise without contributing to understanding.\",\n    \"overall_quality\": \"Overall, this is a limited but somewhat informative local explanation: it is short, stable, and points to key features, but it does not explain the prediction in a way that is actionable or fully interpretable. It is adequate for a rough audit check, not for deep decision review.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit risk, since duration, checking status, purpose, and credit amount are standard drivers. The content is consistent with a credit model's local behavior, even though the zero-valued entries are not very informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:19.561043+00:00"
+}

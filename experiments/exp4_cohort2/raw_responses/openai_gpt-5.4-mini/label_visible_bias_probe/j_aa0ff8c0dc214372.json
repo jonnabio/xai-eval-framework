@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d8a899ad70b4c53f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_aa0ff8c0dc214372",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d8a899ad70b4c53f_ecf10240436d5a9a.txt",
+  "prompt_version": "ecf10240436d5a9a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541542-MuIavCkrUMYtflx2to4w",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003012,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022185,
+        "upstream_inference_cost": 0.003012,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d8a899ad70b4c53f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few strong local factors but does not translate them into concrete recourse steps or decision guidance. A user cannot tell what to change, by how much, or whether any of these features are practically modifiable.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it shows which features anchored the prediction and which were unused. However, it lacks directionality, thresholds, and feature-level reasoning detail, so it only partially supports deeper model inspection.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, even for a non-expert. That said, the meaning of the 1.0000 and 0.0000 values is not explained, which limits interpretability.\",\n    \"completeness\": \"The explanation names only three positive local factors and then a set of inactive features, without explaining how they combine to yield the prediction. It omits the relative importance of each driver and does not provide the full local decision context.\",\n    \"concision\": \"The output is compact and contains little redundancy. It is efficient in length, though some of the listed zero-valued features add limited value beyond the main anchors.\",\n    \"overall_quality\": \"This is a usable but shallow explanation: it is readable and succinct, and it identifies the main anchoring features, but it lacks the detail needed for strong understanding, recourse, or audit analysis. Overall, it is adequate rather than excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income model: higher education, marital status, and capital gain are all reasonable predictors of a positive outcome. The explanation is therefore coherent with both the instance context and domain expectations, even if it is not very informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:05.133058+00:00"
+}

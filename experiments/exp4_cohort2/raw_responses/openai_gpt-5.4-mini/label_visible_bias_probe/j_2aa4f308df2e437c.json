@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9fe396b73843aa9e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2aa4f308df2e437c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9fe396b73843aa9e_5c43b158ad8b538d.txt",
+  "prompt_version": "5c43b158ad8b538d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542690-oitXo2Rtw0GHC5AvTv2P",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002874,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.002874,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9fe396b73843aa9e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no meaningful recourse or next steps, and the listed feature contributions are effectively all zero. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It is of very limited value for auditing because it does not reveal which variables actually drove the decision, only near-zero local weights. The near-zero and zero fidelity values also suggest the explanation is not reliable for inspecting model behavior.\",\n    \"clarity\": \"The wording is technically simple, but the output is mostly a list of feature names with 0.0000 values, which is hard to interpret in practical terms. A non-expert would not learn why the model predicted class 0.\",\n    \"completeness\": \"It does not provide the main local decision drivers, direction of influence in a meaningful way, or any contrast with the counterfactual class. As a result, it is incomplete for understanding this specific prediction.\",\n    \"concision\": \"The explanation is short, but much of that brevity comes from uninformative zero-valued entries. It is compact, yet not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a poor explanation because it provides almost no substantive local insight and appears effectively empty. Its low fidelity and zero sparsity make it especially weak for both users and auditors.\",\n    \"semantic_plausibility\": \"The content is not contradictory, but an explanation where all top local factors are essentially zero is semantically implausible as a useful account of a real prediction. It does not align well with what one would expect from an informative LIME explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:14.290582+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_657352755f8064eb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d47138a03cd221ff_aeb347bdaa01ce30.txt",
+  "prompt_version": "aeb347bdaa01ce30",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541839-eeLL3QP37hnfbcm5e2Fq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002088,
+        "upstream_inference_cost": 0.00287925,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few local factors, but it does not translate them into concrete recourse or next-step advice. A user cannot clearly tell what changes would move the prediction toward the opposite class.\",\n    \"audit_usefulness\": \"For auditing, it provides a sparse list of feature contributions, which is useful at a basic level for checking whether the model relies on sensible variables. However, the small magnitudes, low fidelity, and low stability limit its value for deeper investigation.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, even though the feature names are technical. A non-expert can follow that some attributes push the prediction up or down, but not much more than that.\",\n    \"completeness\": \"It covers several main local drivers, including education, occupation, marital status, hours per week, age, and capital gain. Still, it omits an overall decision summary, the base prediction context, and any stronger evidence about why the model chose class 1.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It gives a short ranked list of factors without unnecessary prose.\",\n    \"overall_quality\": \"This is a reasonably readable local explanation, but it is weak as an explanation of a false positive because it is sparse, low-fidelity, and not very stable. Overall it is serviceable but limited.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and fit general expectations about income prediction. The signs and feature types are not obviously contradictory, though the tiny contributions make the explanation feel weakly grounded.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:02.186731+00:00"
+}

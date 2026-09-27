@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5dea6e9d974dc671",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_57d1693f50447ebd_0cdd160dcdb1d0e8.txt",
+  "prompt_version": "0cdd160dcdb1d0e8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542468-B9Ou732MmdABiAnfXfse",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030255,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002232,
+        "upstream_inference_cost": 0.0030255,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete counterfactual or a clear next step a user could take to change the prediction. It only lists local factors with values, so it offers little recourse guidance.\",\n    \"audit_usefulness\": \"It gives a limited view of which features were considered locally, but the values shown are mostly zeros and do not indicate direction or magnitude of influence. This makes it only weakly useful for auditing model behavior.\",\n    \"clarity\": \"The output is short and syntactically simple, but the meaning of entries like 'education_5th-6th: 0.2000' and many zero-valued factors is not self-explanatory. A non-expert would likely struggle to interpret what these numbers mean for the prediction.\",\n    \"completeness\": \"It mentions a few local factors, especially hours-per-week, but omits a clear account of how these factors combine to support the negative prediction. The explanation lacks directional effects, baseline comparison, and any full decision context.\",\n    \"concision\": \"The explanation is fairly compact and not padded with unnecessary text. However, its brevity comes at the cost of explanatory value, since the listed factors are not well contextualized.\",\n    \"overall_quality\": \"As an explanation, it is weakly informative: it is compact but hard to interpret, offers little actionability, and only partial insight into the model's decision. The local content is not sufficient to support robust understanding or review.\",\n    \"semantic_plausibility\": \"The mention of hours-per-week and education-related attributes is plausible for the Adult dataset, and the TN outcome is consistent with a negative classification. However, the prevalence of zero-valued factors makes the explanation feel only loosely connected to an actual decision rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:30.792533+00:00"
+}

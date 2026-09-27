@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d847607b4ad99577",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_de938d5223748d7d_3bc12c875f9f9897.txt",
+  "prompt_version": "3bc12c875f9f9897",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542430-YfLGKfB6OrhlB0qQcGhN",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002304,
+        "upstream_inference_cost": 0.00308925,
+        "upstream_inference_prompt_cost": 0.00078525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1047,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1559
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or decision-review steps. It lists feature names and binary-looking values without stating what a user should do differently or what thresholds matter.\",\n    \"audit_usefulness\": \"It offers limited audit value because it does not clearly indicate which factors actually supported the negative prediction versus which were merely present in the anchor rule. The near-zero fidelity and sparse, generic feature listing make it hard to inspect model behavior reliably.\",\n    \"clarity\": \"The wording is brief and technically formatted, but the meaning is not clear to a non-expert. The 1.0000 and 0.0000 values are unexplained, so the reader cannot tell whether they are feature importances, rule satisfaction indicators, or normalized inputs.\",\n    \"completeness\": \"It identifies only two apparent local factors, but does not explain how they combine to produce the prediction or how strong the evidence is. Key local decision context such as class-specific directionality, confidence, or comparison to the baseline is missing.\",\n    \"concision\": \"The explanation is short, but it is not efficiently informative because most listed items are zeros and add little value. The useful content is compressed too much into an opaque anchor-style dump rather than a compact human-readable rationale.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for a specific prediction: it is terse, opaque, and not very helpful for understanding or auditing the decision. Its only strength is that it at least names two local factors, but the low fidelity and missing interpretation severely limit quality.\",\n    \"semantic_plausibility\": \"The two named factors, mean smoothness and worst perimeter, are plausible breast-cancer-related features, so the content is not contradictory. However, the presented 0/1 pattern is not semantically interpretable as written, which reduces plausibility in practice.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:53.202612+00:00"
+}

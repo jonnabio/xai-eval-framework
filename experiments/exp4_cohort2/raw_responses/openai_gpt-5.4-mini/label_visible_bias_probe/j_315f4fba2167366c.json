@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_315f4fba2167366c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_719c3e5dafe19965_c5d25bb4565ad66b.txt",
+  "prompt_version": "c5d25bb4565ad66b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542188-QTqvxCo8sEUkBljq7l5l",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.00294975,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1538
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or decision steps. It only lists anchors with binary values, so a user cannot tell what changing the case might do.\",\n    \"audit_usefulness\": \"It provides some audit value by identifying the two active anchor conditions, but it gives almost no insight into why the model predicted the positive class or why this was a false positive. The many zero-valued features are not helpful for tracing model behavior.\",\n    \"clarity\": \"The output is compact and the feature names are readable, but the anchor-style encoding is not self-explanatory for non-experts. The meaning of the 1.0000 and 0.0000 values is unclear without prior knowledge of Anchors.\",\n    \"completeness\": \"Only two local factors are active, and no supporting context is given about how they relate to the prediction or to the false-positive outcome. Important decision context such as feature directionality, thresholds, or confidence is missing.\",\n    \"concision\": \"The explanation is fairly short, but much of the token budget is spent on zero-valued features that add little information. It is concise in length but not maximally informative per word.\",\n    \"overall_quality\": \"This is a limited local explanation: it is plausible and somewhat interpretable, but too sparse and technical to fully support understanding or review of the specific false-positive prediction. It is acceptable as a partial explanation, not an excellent one.\",\n    \"semantic_plausibility\": \"The active factors, installment commitment and used car purpose, are plausible predictors in German credit scoring. However, the presentation does not make the causal or directional relationship to the positive prediction clear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:50.905188+00:00"
+}

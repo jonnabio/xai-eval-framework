@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_87868a4043dbdfc0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07f7eab6526a79eb_44c8f4ec8e915325.txt",
+  "prompt_version": "44c8f4ec8e915325",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541596-LaxCCq09KJFU2CQmUmaD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 520,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00313875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00234,
+        "upstream_inference_cost": 0.00313875,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names influential features, but it does not translate them into concrete recourse or decision-review steps. A user cannot tell what to change or what evidence to inspect next to affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for an auditor because it exposes the main local drivers and their directions, which can help inspect whether the model relies on sensible demographic and work-pattern features. However, the evidence is limited to a small set of LIME weights and lacks comparison to counterfactuals or broader model behavior.\",\n    \"clarity\": \"The feature list is readable and the signs are easy to follow, but the shorthand feature names and one-token output style still require some familiarity with the Adult dataset encoding. A non-expert would understand the general idea but not every term immediately.\",\n    \"completeness\": \"The explanation covers several main positive and negative contributors, which gives a partial view of the local decision. It does not explain the baseline, the net balance of evidence, or why the model made a false positive overall, so key decision context is missing.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, with a short ranked list of local factors. It is efficient in wording, though the dense feature encoding slightly reduces information per word for non-experts.\",\n    \"overall_quality\": \"This is a reasonably good local explanation in compact form: it identifies influential features and their directions for the specific prediction. Its main weaknesses are limited actionability, only partial completeness, and modest interpretability for non-technical readers.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset, especially marital status, relationship, education, age, sex, and hours worked, which are all common correlates in this domain. The directions are also coherent enough to be believable for a local explanation, even though the prediction is a false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:59.204653+00:00"
+}

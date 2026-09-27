@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_54842b6f9724ca9d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9ee15210bf45996e_983dcfc0067567d2.txt",
+  "prompt_version": "983dcfc0067567d2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542082-taY59wM5YEEvE0iHvGqV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 456,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00283725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002052,
+        "upstream_inference_cost": 0.00283725,
+        "upstream_inference_prompt_cost": 0.00078525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1047,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential features but gives no specific recourse or decision steps the user could take. It does not say what feature changes would reduce or increase the prediction.\",\n    \"audit_usefulness\": \"The ranked SHAP values are useful for checking which inputs drove the model's positive prediction and for comparing feature importance. However, it lacks directionality, baseline context, and instance-level interpretation needed for deeper auditing.\",\n    \"clarity\": \"The output is easy to read as a ranked list of feature contributions, and the naming follows common breast cancer terminology. Still, the meaning of the numbers is not explained, so a non-expert may not fully understand them.\",\n    \"completeness\": \"It covers the top local factors behind the prediction, which helps explain the decision at a high level. But it does not include the predicted class rationale, reference value, sign of contributions, or how these features combine to produce the final outcome.\",\n    \"concision\": \"The explanation is compact and contains only the most important local factors without extra text. It is efficient, though slightly terse because it omits interpretive context.\",\n    \"overall_quality\": \"This is a solid, concise SHAP summary that gives a reasonable view of the main drivers of the positive prediction. Its usefulness is limited by the lack of directionality and actionable or contextual interpretation.\",\n    \"semantic_plausibility\": \"The listed drivers are highly plausible for a breast cancer classifier, especially worst concave points, radius, perimeter, and area. The feature ranking is consistent with known diagnostic patterns and a true positive case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:04.672880+00:00"
+}

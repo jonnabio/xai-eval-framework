@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cc3c47f9ed102eb0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_963bb7dd53f39d79",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cc3c47f9ed102eb0_3a7075a2d26ace78.txt",
+  "prompt_version": "3a7075a2d26ace78",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542396-5ZqtEr6Oe7ZYDUObqyvQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.0029925,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1545
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cc3c47f9ed102eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few feature values but does not tell the user what to change or how to act on the result. It offers no recourse guidance, threshold, or decision rule that could support a next step.\",\n    \"audit_usefulness\": \"For auditing, it gives only a sparse list of local feature values and does not explain directionality or how those features affected the prediction. The very low sparsity and low faithfulness gap make it hard to assess model logic from this explanation alone.\",\n    \"clarity\": \"The wording is simple and the feature names are recognizable, but the presentation is essentially a raw feature dump with no narrative structure. A non-expert would struggle to understand why these values matter for the positive prediction.\",\n    \"completeness\": \"It mentions a few top local factors, but it does not explain whether they increased or decreased the predicted class, nor how they compare to meaningful reference values. This leaves the local decision context incomplete despite covering some features.\",\n    \"concision\": \"The explanation is short, but much of it is low-information repetition of zeros and does not efficiently communicate the prediction rationale. It is concise in length, yet not maximally informative per word.\",\n    \"overall_quality\": \"The explanation has limited utility because it is sparse, mostly descriptive, and lacks causal or comparative detail. It is understandable enough to identify some involved features, but it falls short of a strong local explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible for a breast cancer model, and the positive prediction is consistent with a malignant/positive outcome task. However, the explanation does not coherently connect the feature values to the decision, so the semantic support is only moderate.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:18.712524+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_da5ba45f2aae47af",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_636acbcad2a09395_7796499e42563aa2.txt",
+  "prompt_version": "7796499e42563aa2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541565-0d8ZeipFzo0jlvsHEkS1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00290925,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps; it only lists features with binary-looking scores. A user cannot tell what to change or review to affect the decision.\",\n    \"audit_usefulness\": \"It reveals which local conditions were part of the anchor set, but not why the model predicted class 1 or how these features interacted. For auditing, it is only mildly informative because the values shown are sparse and not interpretable as effects.\",\n    \"clarity\": \"The output is short and syntactically simple, but the meaning of the numeric values is unclear to a non-expert. It does not explain whether 1.0000 means present, important, or satisfied, so the message is not truly clear.\",\n    \"completeness\": \"It includes a few top local factors, but omits the direction of influence, thresholds, and any explanation of how they support the positive prediction. This leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. However, it achieves brevity partly by omitting explanatory detail, so it is only moderately efficient in useful information per word.\",\n    \"overall_quality\": \"This is a sparse anchor-style summary that gives some local feature context but little interpretive value. It is usable as a rough hint about the decision, yet it falls short on clarity, completeness, and practical usefulness.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in German credit data, such as duration, installment commitment, property magnitude, and credit amount. The issue is not plausibility of the factors themselves, but the opaque scoring format.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:27.887102+00:00"
+}

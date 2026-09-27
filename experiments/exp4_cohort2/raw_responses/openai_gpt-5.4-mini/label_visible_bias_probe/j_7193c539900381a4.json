@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7193c539900381a4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07197d290136f3e3_9100826f784fa46f.txt",
+  "prompt_version": "9100826f784fa46f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542537-NzDrR1zCgACuDmeTbQUj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 454,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002043,
+        "upstream_inference_cost": 0.00282975,
+        "upstream_inference_prompt_cost": 0.00078675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1049,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or decision-review steps. It only lists features with weights, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It provides some local feature importance information, but the all-ones and all-zeros pattern is too crude to meaningfully inspect model behavior. With low fidelity and zero stability, it is weak for auditing.\",\n    \"clarity\": \"The output is short and readable, but the numeric pattern is not explained in plain language. A non-expert would likely not understand what the 1.0000 and 0.0000 values mean.\",\n    \"completeness\": \"It names a few features, yet it omits directionality, baseline context, and how these factors drove the false negative prediction. That leaves the local decision only partially explained.\",\n    \"concision\": \"The explanation is brief and avoids excess wording, so it is reasonably compact. However, much of the content is repetitive feature listing with limited informational payoff.\",\n    \"overall_quality\": \"As a local explanation it is only weakly informative: readable and short, but not very insightful, actionable, or faithful. The low technical metrics also support a poor overall assessment.\",\n    \"semantic_plausibility\": \"The listed adult-income features are plausible for the domain, and the prediction being a false negative is coherent with a logreg model on this dataset. However, the explanation format itself is not semantically very informative because it does not explain why those features matter.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:39.595958+00:00"
+}

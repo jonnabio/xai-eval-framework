@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f27af2f3bc00808a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_19b944710e090900_6708367060c4a3c2.txt",
+  "prompt_version": "6708367060c4a3c2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541612-aV6ZAqSr1oFft3RqjVdM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002991,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.002991,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features associated with the prediction, but it does not give any concrete recourse steps or indicate which changes would likely move the prediction toward the true class. It is therefore not useful for a user trying to act on the result.\",\n    \"audit_usefulness\": \"It provides the top local LIME weights, which helps an auditor see which variables influenced this decision and in what direction. However, the signals are weak and mixed, so it offers only limited support for deeper error analysis or bias investigation.\",\n    \"clarity\": \"The explanation is easy to parse because it uses a simple feature-and-weight list. A non-expert may still find the variable names obscure, but the overall structure is straightforward.\",\n    \"completeness\": \"It includes several local drivers of the prediction, but the weights are small and there is no baseline, intercept, or narrative tying them together. For a false negative, it does not clearly explain why the model rejected the positive class.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, giving a short ranked list of local factors. It is informative per word, though the value is limited by the lack of interpretation beyond the raw weights.\",\n    \"overall_quality\": \"This is a readable but weak explanation: it is concise and somewhat auditable, yet it does not sufficiently explain the false negative or support action. Its low stability and modest fidelity also reduce trust in the local interpretation.\",\n    \"semantic_plausibility\": \"The factors mentioned, such as education, occupation, marital status, age, and sex, are plausible predictors in the Adult dataset and the directions are not obviously contradictory. The tiny coefficients, however, make the explanation feel only weakly informative rather than strongly convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:14.653860+00:00"
+}

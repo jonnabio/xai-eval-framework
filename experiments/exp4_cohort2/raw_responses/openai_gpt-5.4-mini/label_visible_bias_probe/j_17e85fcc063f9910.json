@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_17e85fcc063f9910",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e4a3c652adf1d046_35c884742e46f3de.txt",
+  "prompt_version": "35c884742e46f3de",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542069-eFV7KZMh3yYeyhHFCeFr",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030165,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.0030165,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next step. It lists features with binary weights but gives no guidance on what change could affect the outcome.\",\n    \"audit_usefulness\": \"It offers some local feature information, which is useful for a cursory inspection, but the binary 1/0 format and lack of directionality make it hard to assess model behavior deeply. Given the false positive case, it is only partially helpful for debugging.\",\n    \"clarity\": \"The output is readable in a technical sense, but it is not well explained for a non-expert because terms like feature names and 1.0000/0.0000 weights are left uninterpreted. The structure is simple, though the meaning of the listed factors is unclear.\",\n    \"completeness\": \"It names several local factors, but it does not explain how they combine to produce the positive prediction or why these particular factors matter more than others. Important decision context, such as feature values and their influence direction, is missing.\",\n    \"concision\": \"The explanation is compact and contains little redundant text, so it is efficient in length. However, it is so terse that it sacrifices interpretability and useful detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and somewhat structured, but it is not very informative, actionable, or diagnostic. It provides limited insight into why the model predicted class 1 for a true negative instance.\",\n    \"semantic_plausibility\": \"The listed anchors are broadly plausible for an Adult-income style model, especially age, education, hours, occupation, and relationship. However, the all-or-nothing weights and absence of contextual interpretation reduce confidence in how semantically meaningful the explanation is.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:51.736128+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c34b039f969b7998",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afc105601fc7fdd6_a6a97ed2397fefc0.txt",
+  "prompt_version": "a6a97ed2397fefc0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542621-fGygCWLgfKX6MeHjKowq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029955,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029955,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, only a list of features with binary-looking values. A user cannot tell what changes would move the prediction or how to review the decision.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it names the local features associated with the prediction, but it lacks directionality, thresholds, and effect sizes. The low fidelity and stability metrics also limit confidence for deeper model-behavior inspection.\",\n    \"clarity\": \"The wording is readable, but the output is not easy to interpret for a non-expert because the feature values are cryptic and the labels are terse. It does not explain what the 1.0000 and 0.0000 values mean in context.\",\n    \"completeness\": \"The explanation lists several top local factors, but it does not explain their contributions, interactions, or why the model predicted class 1. Given the false positive outcome, it omits the key local context needed to understand the error.\",\n    \"concision\": \"It is fairly compact and avoids long prose, but the list is somewhat redundant because many features are shown with zero values. The information density is moderate rather than maximally efficient.\",\n    \"overall_quality\": \"Overall, the explanation is only marginally informative: it identifies some relevant features but fails to make the prediction understandable or actionable, especially for a false positive case. Its low fidelity and sparse, undeveloped formatting further reduce quality.\",\n    \"semantic_plausibility\": \"The named breast cancer features are appropriate and plausible for this domain, and the highlighted radius/concave-point variables are consistent with known clinical predictors. However, the presentation of many zero-valued features without explanation makes the semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:04.025647+00:00"
+}

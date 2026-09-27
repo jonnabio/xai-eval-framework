@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d63f428c2f65c6ba",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_60f604202ab9cb5c_544b180664d6363e.txt",
+  "prompt_version": "544b180664d6363e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542699-NHBp5NDjtAz12du8Uwx9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003006,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.003006,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of feature names with placeholder-looking values. It does not tell a user what could be changed or reviewed to affect the prediction.\",\n    \"audit_usefulness\": \"It gives a minimal view of which local factors were considered, but the values are not interpretable as effect sizes or directions. The low fidelity and high faithfulness gap further limit its usefulness for auditing model behavior.\",\n    \"clarity\": \"The wording is simple, but the content is not understandable as a real explanation because the listed 0.0000 and 1.0000 values are unexplained. A non-expert would not know what these numbers mean or why they matter.\",\n    \"completeness\": \"It includes several local feature names, but not the prediction logic, thresholds, or directional influence needed to understand why the model predicted class 1. The absence of any relation between the anchors and the false positive outcome leaves the decision context incomplete.\",\n    \"concision\": \"The explanation is short and compact, but much of the content is low-value because it repeats a feature list without interpretation. It is concise, though not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact but largely opaque, provides little actionable or audit-relevant insight, and does not adequately justify the false positive prediction. The technical metrics also suggest limited fidelity and stability, reinforcing the poor practical quality.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are domain-relevant, so the explanation is not obviously nonsensical. However, the zeroed values and one-hot-like pattern are not semantically convincing for continuous medical measurements, making the explanation only weakly plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:22.341467+00:00"
+}

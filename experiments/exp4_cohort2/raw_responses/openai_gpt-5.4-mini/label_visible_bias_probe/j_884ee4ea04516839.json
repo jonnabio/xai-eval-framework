@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_884ee4ea04516839",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542345-XMqaO8vJLAHSRgW0iAyY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.0029595,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps such as what to change or by how much to alter the prediction. It only lists feature values, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It reveals one apparent positive driver, education-num, but the remaining features are all shown as zero and offer little insight into the model's decision logic. This limits its usefulness for auditing feature effects or checking for errors.\",\n    \"clarity\": \"The output is short and readable, but the meaning of the values is ambiguous without context, especially the many zeros and the unexplained format of the counterfactual-style listing. A non-expert would likely struggle to interpret what the factors mean.\",\n    \"completeness\": \"It exposes only a minimal set of local factors and does not explain why the prediction is positive beyond one feature. Important contextual information such as directionality, baseline comparison, or alternative influential attributes is missing.\",\n    \"concision\": \"The explanation is compact and not overly verbose, but much of the content is low-information repetition of zero-valued features. It is reasonably brief, though not especially efficient in communicating useful content.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: it is terse and somewhat understandable, but offers little actionable or diagnostic value. Its main strength is that it highlights one likely important feature, yet it remains too sparse to fully explain the prediction.\",\n    \"semantic_plausibility\": \"The highlighted importance of education-num is plausible for the Adult income task, and the instance being a true positive makes the positive prediction contextually reasonable. However, the presentation of many zero-valued factors makes the explanation feel somewhat unnatural and incomplete.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:28.152508+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_90ff15db0a18d3a7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_19b944710e090900_6708367060c4a3c2.txt",
+  "prompt_version": "6708367060c4a3c2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541609-DF0abpUhuzLdYWucrlne",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002865,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00207,
+        "upstream_inference_cost": 0.002865,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only a ranked list of contributing features. A user cannot readily infer what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows which local features pushed the model up or down, but the tiny weights and low stability limit confidence in the pattern. It would help only partially with investigating the false negative.\",\n    \"clarity\": \"The list format is straightforward and the feature names are readable, so a non-expert can follow the basic idea of positive and negative contributions. However, the meaning of the numeric weights and one-hot encoded features is still somewhat technical.\",\n    \"completeness\": \"The explanation covers several local drivers, but it does not explain the model's overall decision boundary, baseline, or why the instance became a false negative. The small and mixed contributions leave the decision context incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, packing the top factors into a short list. It is efficient, though some entries are near-duplicate encodings such as sex_Male and sex_Female.\",\n    \"overall_quality\": \"This is an average-quality local explanation: readable and concise, but only moderately informative and not very actionable. Low stability and modest fidelity further reduce its usefulness for a reliable interpretation.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset, and the directions of influence are not obviously contradictory. The presence of small positive and negative effects across related demographic and job features is consistent with a local LIME explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:12.066719+00:00"
+}

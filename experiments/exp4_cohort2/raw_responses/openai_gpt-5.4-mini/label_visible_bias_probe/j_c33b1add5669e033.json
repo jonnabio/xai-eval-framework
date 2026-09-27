@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c33b1add5669e033",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d372ea8e16367348_09a3388cb5ff759f.txt",
+  "prompt_version": "09a3388cb5ff759f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542242-KRODcx0zsVKTilgCuigl",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 425,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00269325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019125,
+        "upstream_inference_cost": 0.00269325,
+        "upstream_inference_prompt_cost": 0.00078075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1041,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1466
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps. It lists feature values without saying what change, if any, would affect the prediction.\",\n    \"audit_usefulness\": \"It gives only a sparse feature list and no directionality, thresholds, or rule semantics, so it is weak for auditing model behavior. The very low fidelity also limits trust for bias or error analysis.\",\n    \"clarity\": \"The wording is short and readable, but the output is cryptic because it is just a list of feature names and values. A non-expert would not understand why these factors matter.\",\n    \"completeness\": \"It mentions several local factors, but not how they combine or whether they support the positive class. Missing rule conditions and impact directions prevents full understanding of the specific decision.\",\n    \"concision\": \"The explanation is compact and contains little extraneous text. However, it is so compressed that much of the useful information is omitted.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and somewhat readable, but not very informative, actionable, or reliable. The technical metrics also suggest poor fidelity and limited stability.\",\n    \"semantic_plausibility\": \"The output is plausible in the sense that breast cancer models can use these kinds of features. However, the many 0.0000 and 1.0000 values without interpretation make the explanation semantically thin and only loosely grounded.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:47.334533+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_651e27fdf46656c5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_31e8607f1316e545",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_651e27fdf46656c5_6f984190511d3c71.txt",
+  "prompt_version": "6f984190511d3c71",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541387-oKLySnP9jt93TqW67ngm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030255,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002232,
+        "upstream_inference_cost": 0.0030255,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_651e27fdf46656c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few local factors, but it does not translate them into any concrete recourse or next step for the applicant. The user is left without guidance on what could be changed to affect the decision.\",\n    \"audit_usefulness\": \"For auditing, it is somewhat useful because it reveals the main anchors the model relied on, especially duration, checking status, and property magnitude. However, it lacks directionality and effect sizes, so it is only partially informative for model inspection.\",\n    \"clarity\": \"The wording is short and easy to parse, but the output is mostly a raw feature list with binary values rather than a natural-language explanation. A non-expert would likely understand the listed attributes but not how they combine to support the prediction.\",\n    \"completeness\": \"It covers a few top local factors, but it does not explain how these factors push the prediction toward class 1 or how they compare with the other zero-weighted features. The absence of any relationship strength or counterfactual context limits the local decision understanding.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary detail, but much of the content is just a feature dump with repeated zeros. It is concise in length, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a usable but limited explanation: it is plausible and somewhat audit-relevant, yet it remains sparse, non-causal, and not especially helpful for a non-expert decision review. Overall it is acceptable but clearly not strong.\",\n    \"semantic_plausibility\": \"The selected factors are plausible drivers in the German credit setting, and the combination of short duration, no checking account, and real estate ownership fits a positive credit outcome. Nothing in the explanation conflicts with general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:31.285460+00:00"
+}

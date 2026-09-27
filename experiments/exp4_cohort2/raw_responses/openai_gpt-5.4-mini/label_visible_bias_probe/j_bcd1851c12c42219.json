@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bcd1851c12c42219",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_10ccf6bdc14f2a99_cd978b13b5259102.txt",
+  "prompt_version": "cd978b13b5259102",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541377-vpfTv9maLd6bqMaEhbUG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002883,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.002883,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or threshold-based guidance, so a user cannot easily act on it. It only lists influential features and their SHAP values.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the main local drivers of the negative prediction and their directions. However, it lacks a baseline comparison, feature values, or class-specific reasoning that would better support deeper inspection.\",\n    \"clarity\": \"The wording is straightforward and the ranking of features is easy to follow for a technically literate reader. A non-expert may still struggle because the meaning of SHAP values and the sign convention are not explained.\",\n    \"completeness\": \"The explanation covers the main contributing features for this instance and shows which ones pushed the model toward class 0. It does not provide the actual feature values, decision threshold, or how strong the evidence was relative to the full model context.\",\n    \"concision\": \"The output is compact and focused on the top local factors, with little redundancy. It conveys a reasonable amount of information in few words.\",\n    \"overall_quality\": \"This is a solid local feature attribution summary, but it is limited to a ranked list of SHAP contributions. It is useful for understanding why the model predicted 0, yet not strong enough to support action or full decision review.\",\n    \"semantic_plausibility\": \"The cited breast cancer features are clinically plausible as important predictors, and negative SHAP values are consistent with features pushing toward the negative class. The pattern is coherent with a true negative prediction on this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:20.795160+00:00"
+}

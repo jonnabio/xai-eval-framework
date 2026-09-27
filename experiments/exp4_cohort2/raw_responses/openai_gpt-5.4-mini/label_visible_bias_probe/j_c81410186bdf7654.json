@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c81410186bdf7654",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9294bc72ae3aeda0_e4e51b69ac921fed.txt",
+  "prompt_version": "e4e51b69ac921fed",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541727-5rBm3aCYOyeNIHHNNdqC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002997,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.002997,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies several local factors but does not translate them into concrete recourse or decision-review steps. It does not indicate which features could realistically change or how they would affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows which features were considered important by the anchor method, but it lacks directional effects and a clear link to the model's decision boundary. The all-ones pattern is not very informative for diagnosing model behavior.\",\n    \"clarity\": \"The output is easy to scan because it lists feature names and numeric values in a simple format. However, the meaning of the values is not explained for a non-expert reader, especially why several features are marked 1.0000 and others 0.0000.\",\n    \"completeness\": \"It gives only a partial local explanation and does not explain how the listed anchors combine to support the positive prediction. Important contextual information such as thresholds, support coverage, or counterfactual alternatives is missing.\",\n    \"concision\": \"The explanation is brief and avoids unnecessary text, which helps readability. Still, some of the listed features add little interpretive value because the output is mostly a raw feature list without synthesis.\",\n    \"overall_quality\": \"Overall, the explanation is usable as a compact anchor summary but falls short of being truly informative. It is moderately clear and plausible, yet weak on interpretability, completeness, and practical usefulness.\",\n    \"semantic_plausibility\": \"The named factors are plausible for an Adult-income prediction, since education, hours worked, marital status, and occupation are all relevant in this domain. The exact 1.0000/0.0000 pattern is less interpretable, but the feature set itself is coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:10.189144+00:00"
+}

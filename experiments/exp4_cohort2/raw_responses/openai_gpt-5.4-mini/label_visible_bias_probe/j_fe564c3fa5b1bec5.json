@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fe564c3fa5b1bec5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afad86e31d6d5cf6_d07054ab27eb63ce.txt",
+  "prompt_version": "d07054ab27eb63ce",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542131-V1EaXT5nCuP1oirsE5jE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0030075,
+        "upstream_inference_prompt_cost": 0.0008025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1070,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give meaningful recourse or next-step guidance. It lists contributing features but does not translate them into specific actions a person could take or a reviewer could test.\",\n    \"audit_usefulness\": \"It offers some local signal about which encoded features influenced the prediction, which is useful for inspection. However, the weights are very small, somewhat unstable-looking, and lack enough context to support deeper audit or bias analysis.\",\n    \"clarity\": \"The feature list is easy to read at a basic level, with positive and negative contributions shown directly. Still, one needs some familiarity with the Adult dataset and one-hot encoded categories to interpret the terms properly.\",\n    \"completeness\": \"It includes several top local factors and indicates the prediction was negative, which helps explain the decision direction. But it does not provide the base value, threshold, or a clearer summary of the dominant drivers, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is fairly compact and avoids long prose. That said, it is mostly a raw list of feature weights, so the information density is limited by the lack of synthesis rather than by excess wording.\",\n    \"overall_quality\": \"This is an acceptable but weak local explanation: it is readable and technically plausible, yet it provides only a thin, low-magnitude feature list with little interpretive support. It is useful as a quick glimpse into the model, but not strong enough for robust user understanding or detailed review.\",\n    \"semantic_plausibility\": \"The features named are plausible for an Adult-income model, and the negative contributions align with a true negative outcome. The explanation is coherent with the dataset and prediction, though the very small magnitudes make the effect sizes feel less informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:53.675013+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5d1ea44e9352607a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542350-ua5aVUWleqmyweb4bY0G",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029685,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.0029685,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1538
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps; it only lists one strong factor and several zero-valued features without telling the user what to change. A user cannot readily translate this into feasible actions.\",\n    \"audit_usefulness\": \"It offers limited audit value because it mainly exposes a single dominant feature and many irrelevant zeros, with no direction on feature influence or counterfactual behavior. This is only weakly helpful for investigating why the model predicted the positive class.\",\n    \"clarity\": \"The wording is simple, but the output is largely a raw feature list and is not well organized into a human-readable explanation of the decision. A non-expert would struggle to understand why these values matter.\",\n    \"completeness\": \"The explanation omits the main local decision context, such as how the listed feature values compare to the instance or how they support the positive prediction. It does not summarize the key drivers beyond education-num.\",\n    \"concision\": \"It is compact, but much of the content is wasted on repeated zero-valued features that add little explanatory value. The most informative part is very short, yet the overall output is inefficient per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is technically concise and somewhat stable, but it lacks interpretive depth, actionable guidance, and a clear account of the prediction. It is only minimally useful for understanding the model's positive prediction.\",\n    \"semantic_plausibility\": \"The explanation is plausible in that education level is a reasonable driver of income prediction in the Adult dataset, and the positive outcome is consistent with that domain. However, the prominence of multiple zero-valued features makes the explanation feel incomplete and not especially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:33.442364+00:00"
+}

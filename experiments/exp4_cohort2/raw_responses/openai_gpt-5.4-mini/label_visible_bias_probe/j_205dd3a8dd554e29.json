@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_bb289ffc9c031dd6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_205dd3a8dd554e29",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_bb289ffc9c031dd6_fec433c57c40dbec.txt",
+  "prompt_version": "fec433c57c40dbec",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541740-8zgvbEUEaVSeU7xy5sk3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022545,
+        "upstream_inference_cost": 0.00305025,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_bb289ffc9c031dd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors but does not translate them into concrete recourse steps or actionable advice. A user cannot tell what changes would likely reduce the predicted positive class.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the top local SHAP drivers and their directions, which can help inspect whether the model relies on sensible credit features. However, it lacks contextual detail about feature values and how strongly they interact, so audit value is only partial.\",\n    \"clarity\": \"The output is compact and the SHAP sign convention is easy to follow, so a reader can identify which features pushed the prediction up or down. Still, feature names like checking_status variants may be confusing to non-experts without dataset context.\",\n    \"completeness\": \"It covers several main local drivers, but it does not provide the instance's actual feature values, the baseline value, or how these contributions combine into the final prediction. Because this is a false positive, the explanation also does not clarify why the model crossed the decision threshold.\",\n    \"concision\": \"The explanation is terse and information-dense, with little redundancy and a reasonable number of top features. It is slightly limited by the raw list format, but overall it is efficient.\",\n    \"overall_quality\": \"This is a decent local explanation: it is interpretable, stable, and informative about feature importance, but it remains shallow for decision review because it lacks actionable guidance and fuller prediction context. Its quality is solid rather than excellent.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit scoring, especially checking status, installment commitment, credit amount, savings status, age, and employment. The directions are also broadly believable for a credit-risk model, even though the exact instance-level effect cannot be fully verified from the summary alone.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:22.749098+00:00"
+}

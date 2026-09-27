@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa0d2427f637293a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f3f52efbd9cfefa2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_aa0d2427f637293a_4474463903371c17.txt",
+  "prompt_version": "4474463903371c17",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541583-0yybZeCS5mQf4YKw2Qyk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029835,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.0029835,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa0d2427f637293a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model decision into any concrete recourse or next steps. It lists features with binary values but gives no guidance on what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a small set of local factors used by the anchor explanation. However, the zero-valued entries and lack of rule semantics limit deeper inspection of why the model predicted the positive class.\",\n    \"clarity\": \"The wording is simple and the structure is easy to scan, but the meaning of '1.0000' and '0.0000' is not explained. A non-expert would likely not understand whether these are feature importances, rule satisfaction indicators, or confidence values.\",\n    \"completeness\": \"The explanation only surfaces a few local factors and omits how they combine to support the prediction. It lacks any threshold-based rule, directionality, or comparative context needed to fully understand this specific decision.\",\n    \"concision\": \"The output is compact and contains little redundant text. It is concise, though some space is spent on features with zero contribution that do not add much explanatory value.\",\n    \"overall_quality\": \"This is a modestly useful local explanation that identifies some relevant features, but it is too sparse and underspecified to strongly support understanding or review. Its main strength is brevity; its main weakness is that it does not explain the decision mechanism in a user-friendly way.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the German Credit domain, such as age, duration, checking status, and credit history. The pattern is coherent with credit-risk reasoning, even though the exact values are not easy to interpret.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:46.238339+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e31fcbf9f503f847",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f567ef56c34dada8_bd9e10dc71a79731.txt",
+  "prompt_version": "bd9e10dc71a79731",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541399-qDtYyTnPng4jCIkzNmAm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031245,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023355,
+        "upstream_inference_cost": 0.0031245,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1571
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few local factors, but it does not translate them into concrete recourse or next steps for the applicant or reviewer. The listed anchors are also not framed as modifiable versus non-modifiable drivers.\",\n    \"audit_usefulness\": \"It provides some inspection value by showing which features were active in the local rule, but the zero values for several listed attributes and the lack of directionality make it hard to audit why the random forest predicted class 1. The very low fidelity further limits its usefulness for model debugging.\",\n    \"clarity\": \"The output is short and mostly readable, but the meaning of the anchor scores and the mix of feature names with 1.0000/0.0000 values is not intuitive for a non-expert. It requires some familiarity with Anchors and the German Credit variables to interpret properly.\",\n    \"completeness\": \"It names a small set of top local factors, but it does not explain how they combine to produce the prediction, nor does it provide feature values or thresholds for the instance. Because this is a false positive, the explanation is especially incomplete for understanding the error.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. However, its brevity comes at the cost of interpretive content, so it is only moderately informative per word.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: it is concise and somewhat readable, but it lacks actionable guidance, strong audit value, and sufficient detail to explain the specific false positive. The low fidelity score also suggests the explanation is not very trustworthy.\",\n    \"semantic_plausibility\": \"The mentioned drivers are plausible for German credit risk, especially checking status and credit history, and the overall pattern is consistent with standard domain expectations. The presence of age and other payment-plan features also fits the dataset context, even though the explanation is not very informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:42.182329+00:00"
+}

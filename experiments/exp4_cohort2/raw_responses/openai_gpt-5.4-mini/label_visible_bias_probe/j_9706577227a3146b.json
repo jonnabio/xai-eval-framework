@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9706577227a3146b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b352dc7c29edc22c_e38133a68039c12d.txt",
+  "prompt_version": "e38133a68039c12d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541323-TEdXjfCxFcDqfUZeUcF9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003099,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002295,
+        "upstream_inference_cost": 0.003099,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1582
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or actionable steps for the user. It only lists contributing features without indicating what could be changed or reviewed to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows the local SHAP contributors and their signs, which can help inspect which variables pushed the model toward the positive class. However, it lacks deeper context such as baseline value, feature values, or comparison to similar cases, so audit value is limited.\",\n    \"clarity\": \"The output is easy to read in a technical sense because it is a short ranked list of feature names with scores. Still, the feature encoding is not intuitive for non-experts, and the meaning of positive versus negative contributions is not explicitly explained.\",\n    \"completeness\": \"It covers several top local drivers of the prediction, which gives a partial view of why the model predicted class 1. However, it omits the actual instance values, the decision threshold, and a fuller account of how the features combine to produce the final prediction.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with a concise list of the top factors. It is slightly harder to parse because multiple one-hot encoded variants of the same conceptual attribute are listed separately.\",\n    \"overall_quality\": \"Overall, this is a reasonably informative SHAP summary for a single prediction, but it remains shallow and somewhat technical for a broad audience. It is useful for quick inspection, yet insufficient for strong explanation quality or recourse support.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and a logistic regression model, and the mix of positive and negative contributions is coherent. The presence of multiple correlated one-hot features from the same original attributes is also expected in this setting.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:26.430829+00:00"
+}

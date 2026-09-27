@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6589e9ddef6b77a5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_03f9ac9f3ab42b8b_5542cc89826e0b53.txt",
+  "prompt_version": "5542cc89826e0b53",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541263-aYibLQe9zufO1Ncb7Wvm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00304875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00225,
+        "upstream_inference_cost": 0.00304875,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or review steps. It lists contributing features but does not indicate what could be changed or checked.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the main local SHAP drivers and their directions. However, it lacks baseline context, class-specific interpretation, and does not explain the false-negative outcome well enough for deeper investigation.\",\n    \"clarity\": \"The list format is easy to scan, but the meaning of values such as positive and negative SHAP contributions may not be obvious to a non-expert. The presence of both one-hot encoded categories and raw features also makes the explanation slightly harder to interpret.\",\n    \"completeness\": \"It covers several local drivers of the prediction and indicates which features pushed toward either class. Still, it does not provide the model\u2019s score, the reference value, or a direct explanation for why a true positive case was predicted as negative.\",\n    \"concision\": \"The explanation is fairly compact and contains mostly relevant information. There is some redundancy from mutually exclusive categories like sex and relationship being listed together, but overall the length is reasonable.\",\n    \"overall_quality\": \"This is a decent local attribution summary with good compactness and moderate audit value, but it is limited by weak interpretability for non-experts and poor support for recourse or full decision understanding. For a false negative, it does not fully explain the miss or what could be done next.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions are broadly consistent with a logistic regression SHAP explanation. The mixture of correlated demographic and occupational features is expected, though the inclusion of both sex_Female and sex_Male as separate top factors is somewhat awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:26.379855+00:00"
+}

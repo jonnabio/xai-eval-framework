@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7982d390c3e51c7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6f61c76846d4138a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7982d390c3e51c7d_c122f055f58d1dbe.txt",
+  "prompt_version": "c122f055f58d1dbe",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542087-lU4zXLue5dch2nPmz0lZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029115,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0029115,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7982d390c3e51c7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, such as which feature changes would alter the prediction. It only lists local factors with no guidance for action.\",\n    \"audit_usefulness\": \"It gives some view into which features the anchor method considered locally relevant, but the output is too sparse and unstructured to support strong error or bias analysis. The numerical pattern is also not explanatory enough to inspect model behavior meaningfully.\",\n    \"clarity\": \"The text is syntactically readable, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. A general reader would struggle to interpret what these numbers imply about the prediction.\",\n    \"completeness\": \"It names a few features, but it does not explain their direction, relative importance, or how they combine to produce the negative prediction. Key local decision context is therefore missing.\",\n    \"concision\": \"The explanation is short, but much of the content is repetitive feature listing with little interpretive value. It is compact, yet not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and brief, but largely opaque, minimally actionable, and only partially useful for understanding the prediction. Its main limitation is that it fails to translate anchor outputs into a clear local decision rationale.\",\n    \"semantic_plausibility\": \"The listed breast-cancer-related features are plausible for this dataset, and the selected attributes are consistent with common domain patterns. However, the 0.0000 values are not semantically explained, which limits confidence in the interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:10.302549+00:00"
+}

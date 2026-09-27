@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0ab8ed6bc65f8c5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dc1e11cc784ac920",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a0ab8ed6bc65f8c5_ebd2d836bed7e771.txt",
+  "prompt_version": "ebd2d836bed7e771",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542681-nwD6JVhsswccLm8QwNUH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.00287175,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a0ab8ed6bc65f8c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. All listed factors have essentially zero contribution, so a user cannot infer what to change or review.\",\n    \"audit_usefulness\": \"It is of limited audit value because it reveals that the local surrogate assigned nearly zero weight to all shown features, which does not help diagnose model behavior or feature effects. The very low fidelity also weakens trust in the explanation for auditing purposes.\",\n    \"clarity\": \"The output is mechanically understandable, but the repeated zero-valued factors make it hard to interpret in a meaningful way. A non-expert would not learn why the model predicted the positive class.\",\n    \"completeness\": \"It lists several top local factors, but they all have near-zero influence, so the actual local decision drivers are missing. The explanation therefore does not adequately describe the specific prediction.\",\n    \"concision\": \"The explanation is brief and not padded, but the brevity comes at the cost of useful information. It is compact, yet the content is largely uninformative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is mostly a list of negligible contributions with no real interpretive value. Low fidelity and zero sparsity-driven differentiation make it poor for understanding the prediction.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the Adult dataset, and the positive prediction for a true positive case is reasonable. However, the near-all-zero attributions are semantically unhelpful and suggest the explanation is not meaningfully aligned with the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:03.131997+00:00"
+}
