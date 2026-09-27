@@ -215,6 +215,18 @@ What this does and does not change:
 applies to it: it must be *tracked*, not merely present. The guard said "never
 delete" when it needed to say "commit".
 
-**Open (author decision):** retire the opcode check, replace it with a hash pin
-of the reconstructed sources as verified, or keep it as a documented permanent
-failure.
+**Decision (author, 2026-09-27): hash pins.** The opcode check is replaced by
+`scripts/pubs/exp4_source_pins.json`: SHA-256 pins (LF-normalised) of all 16
+reconstructed files, taken from the blobs of `357a03201`, the 2026-08-28
+commit that finished the verification, and cross-checked against `main`, where
+none of the 16 had changed. `verify_exp4_reconstruction.py` now fails on a
+changed or missing pinned file and on any `exp4_*.py` without a pin. The pins
+do not re-verify the reconstruction; they keep the verified text from changing
+silently. The bytecode comparison is kept and runs automatically if the `.pyc`
+files are ever restored. The guard's two bytecode invariants are replaced
+accordingly in `regression-guards.yaml`.
+
+The 11 files the 2026-08-28 check covered (7 modules by opcode stream, 4 CLI
+scripts by names and constants) and the 5 test modules (recovered with them,
+executed, never bytecode-compared) are pinned alike; each pin records which
+level of verification its file had.
