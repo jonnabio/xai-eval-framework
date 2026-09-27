@@ -130,22 +130,35 @@ guards:
     rca_file: docs/rca/RCA-002-exp4-source-recovery.md
 
     guarded_files:
-      - src/evaluation/exp4_reliability_metrics.py
-      - src/evaluation/__pycache__/exp4_reliability_metrics.cpython-313.pyc
+      - src/evaluation/exp4_*.py
+      - scripts/exp4_*.py
+      - tests/exp4/*.py
+      - scripts/pubs/exp4_source_pins.json
+      - outputs/analysis/exp4_llm_evaluation/*.csv
       - docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex
       - docs/reports/paper_bc/paper_bc_tmlr.tex
       - thesis/capitulo-5-taxonomia.qmd
       - pub/claim_registry.toml
 
     invariants:
-      - "Reconstructed EXP4 sources compile to the same instructions as their committed bytecode"
-      - "The EXP4 .pyc files are never deleted: they are the only surviving copy of the original source"
+      - "Reconstructed EXP4 sources hash to their pins in scripts/pubs/exp4_source_pins.json,
+         the text verified against the original bytecode on 2026-08-28. The bytecode was
+         never committed and was lost on 2026-09-27, so the verification is a dated record
+         that cannot be repeated; the pins stop the verified text from changing silently.
+         Changing a pinned file means changing its pin in the same commit, with the reason
+         (replaced 2026-09-27; the former invariants were 'sources compile to the same
+         instructions as their committed bytecode' and 'the .pyc files are never deleted')"
+      - "Any file a result or a verification depends on is COMMITTED, not merely kept on
+         disk: 'never delete' is not a preservation mechanism (added 2026-09-27)"
+      - "The committed aggregate results outputs/analysis/exp4_llm_evaluation/*.csv
+         (commit f6591d680) are the cohort every published EXP4 number comes from. A new
+         judge run is a NEW cohort: it goes to its own directory and never overwrites them"
       - "The ICC is reported as ICC(1,1), one-way random effects, matching what the code computes"
       - "Every supplementary table value is registered in pub/claim_registry.toml or explicitly disclosed as unbacked"
       - "Cramer's V for Table S3 is computed over pairwise-complete cases, never with missingness as a category"
 
     tests:
-      - python scripts/pubs/verify_exp4_reconstruction.py   # requires Python 3.13
+      - python scripts/pubs/verify_exp4_reconstruction.py   # hash pins; bytecode check only if .pyc restored
       - python scripts/pubs/verify_claims.py
 
     review_triggers:
@@ -153,7 +166,8 @@ guards:
       - "Any figure with numeric data labels being added or changed: confirm a
          generator is committed and re-run it after any value correction"
       - "Any change to how ICC or Krippendorff's alpha is described"
-      - "Any reconstruction of a further EXP4 module (add it to PAIRS in the verifier)"
+      - "Any edit to a pinned EXP4 source, or a new exp4_*.py: update exp4_source_pins.json
+         in the same commit and say why"
       - "Any proposal to re-run the EXP4 judges: that creates a new cohort, not a reproduction"
   - id: RCA-003
     title: "TOML escapes silently corrupt LaTeX in the claims SSOT"

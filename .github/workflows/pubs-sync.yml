@@ -36,7 +36,9 @@ jobs:
           git diff --exit-code -- pub/fragments ':!pub/fragments/build_meta.env'
 
   exp4-reconstruction:
-    # Runs on 3.13 because it compares against CPython 3.13 bytecode.
+    # Checks the reconstructed EXP4 sources against the hash pins recorded from
+    # the 2026-08-28 bytecode verification (the bytecode was lost 2026-09-27).
+    # 3.13 so the bytecode comparison can run if the .pyc files ever return.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +47,6 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Verify reconstructed EXP4 sources match their bytecode
+      - name: Verify reconstructed EXP4 sources match their verified hash pins
         run: python3 scripts/pubs/verify_exp4_reconstruction.py
 

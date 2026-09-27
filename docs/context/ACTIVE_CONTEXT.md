@@ -906,10 +906,15 @@ settles, before filing.
 - **EXP4 `.pyc` files are gone.** They were never committed on any branch and
   existed only on the old laptop. The reconstructed sources verified against them
   on 2026-08-28 (RCA-002) are all that remain; that verification cannot be
-  repeated. `verify_exp4_reconstruction.py` and the CI `exp4-reconstruction` job
-  fail on "missing bytecode" and will stay red until the author decides how to
-  amend RCA-002 (its invariant "the .pyc files are never deleted" is now
-  violated). Not yet decided.
+  repeated. **Resolved by author decision (2026-09-27): hash pins.**
+  `scripts/pubs/exp4_source_pins.json` pins all 16 files as of `357a03201`;
+  `verify_exp4_reconstruction.py` checks them (and still runs the bytecode
+  comparison if the `.pyc` files ever return). RCA-002 guard invariants updated.
+- **Author decision (2026-09-27): re-run the three EXP4 LLM judges** to obtain raw
+  data. This is a NEW cohort, not a reproduction: the templates are lost, so the
+  prompts must be rebuilt from Supplementary Table S1, and the output goes to its
+  own directory beside, never over, the committed aggregates. Planning pending;
+  see the next session's notes.
 - **EXP4 cannot be recomputed from raw data** (author asked 2026-09-27). A full
   forensic search - all Git history and refs, unreachable objects, GitHub
   releases and artifacts, this laptop - found no raw judge responses, templates
