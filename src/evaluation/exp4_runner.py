@@ -94,6 +94,10 @@ def run_exp4_judges(
                         response_text=response_text,
                         dry_run=dry_run,
                     )
+                    # Added 2026-09-27 (cohort 2): keep what the provider actually
+                    # served -- model version, finish reason, token usage.
+                    if not dry_run:
+                        envelope["response_meta"] = getattr(clients[key], "last_response_meta", None)
                     output_path.write_text(json.dumps(envelope, indent=2, sort_keys=True), encoding="utf-8")
                     written += 1
 
