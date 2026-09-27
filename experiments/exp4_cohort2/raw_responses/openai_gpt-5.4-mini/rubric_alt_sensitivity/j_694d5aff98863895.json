@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_694d5aff98863895",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c3a6d29157145c8e_df49bf5fa851105b.txt",
+  "prompt_version": "df49bf5fa851105b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543007-z7Yr8JhGqBfmM0xAkQyd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 349,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00241725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0015705,
+        "upstream_inference_cost": 0.00241725,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1478
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and does not suggest what changes could alter the prediction.\",\n    \"audit_usefulness\": \"The ranked feature attributions are useful for inspecting which variables matter locally, but they do not show directionality or interaction effects.\",\n    \"clarity\": \"The feature list is easy to read, but terms like 'worst concave points' and the SHAP values still require some technical or domain knowledge.\",\n    \"completeness\": \"It identifies the main local factors behind the prediction, but it does not explain how they combine, their directions, or how strongly they pushed toward class 1 versus 0.\",\n    \"concision\": \"The explanation is brief and information-dense, with little padding.\",\n    \"overall_quality\": \"A solid local attribution summary, but limited by the lack of direction, contextual interpretation, and concrete decision logic.\",\n    \"semantic_plausibility\": \"For the breast cancer dataset, features such as worst area, perimeter, radius, and concave points are plausible and medically relevant predictors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:28.854795+00:00"
+}

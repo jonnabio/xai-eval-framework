@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0b3d2c099af6c7a1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba8a2c4ca53c1a08_22076daa1c5a64da.txt",
+  "prompt_version": "22076daa1c5a64da",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543199-bRglcIQMyLpUrzm5QWXL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002451,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0015885,
+        "upstream_inference_cost": 0.002451,
+        "upstream_inference_prompt_cost": 0.0008625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1150,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not say what changes would increase or decrease the prediction, beyond listing correlated features and small weights.\",\n    \"audit_usefulness\": \"It gives local feature attributions that can be inspected for patterns, but the low stability and moderate fidelity limit how much an auditor can trust it.\",\n    \"clarity\": \"The terms are straightforward for a tabular ML audience, but the one-hot feature names require some domain familiarity to interpret.\",\n    \"completeness\": \"It identifies several local factors, but the attributions are thin and do not provide a full account of why the model predicted class 1.\",\n    \"concision\": \"The explanation is short and mostly just a ranked list of factors, with little filler.\",\n    \"overall_quality\": \"It is a usable LIME summary, but the small coefficients, low stability, and only moderate fidelity make it more informative than decisive.\",\n    \"semantic_plausibility\": \"The highlighted adult-income features, such as education, occupation, relationship, and marital status, are broadly sensible for this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:41.303453+00:00"
+}

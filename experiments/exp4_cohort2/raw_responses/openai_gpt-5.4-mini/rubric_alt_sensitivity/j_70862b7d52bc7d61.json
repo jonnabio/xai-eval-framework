@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_70862b7d52bc7d61",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_e113217e22add838.txt",
+  "prompt_version": "e113217e22add838",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543352-v9Vwo99ywGq0GwC3z2tI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 403,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018135,
+        "upstream_inference_cost": 0.0026595,
+        "upstream_inference_prompt_cost": 0.000846
+      },
+      "is_byok": false,
+      "prompt_tokens": 1128,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors with binary weights and gives no concrete way to change the prediction or identify feasible next steps.\",\n    \"audit_usefulness\": \"It provides a sparse set of feature indicators, which is somewhat useful for checking which variables were present, but the near-zero sparsity and low stability limit its value for auditing model behavior.\",\n    \"clarity\": \"The listed features are easy to recognize, but the meaning of the 1.0000 and 0.0000 values is not explained, so a non-technical reader would struggle to interpret them fully.\",\n    \"completeness\": \"It names only a few local factors and omits how they combine or why they led to the false positive, so it does not give a complete account of the decision.\",\n    \"concision\": \"The explanation is short and information-dense, though some of the listed zero-valued factors add little useful detail.\",\n    \"overall_quality\": \"It is a limited explanation: somewhat interpretable and concise, but incomplete, weakly actionable, and not very informative about the specific mistaken prediction.\",\n    \"semantic_plausibility\": \"The highlighted adult-dataset features are plausible predictors, but the explanation reads more like feature presence than a true rationale, and it does not clearly connect them to the false positive outcome.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:13.766736+00:00"
+}

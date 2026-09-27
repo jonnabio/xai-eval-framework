@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_599fde798a760d03",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_b60690c60417e4de_a38d70f4ef49dc00.txt",
+  "prompt_version": "a38d70f4ef49dc00",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542782-Jr2hGKqcky8Kowk9330A",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 381,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00256725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017145,
+        "upstream_inference_cost": 0.00256725,
+        "upstream_inference_prompt_cost": 0.00085275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1137,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists influential features and their weights; it does not say what feature changes might alter the prediction or suggest next steps.\",\n    \"audit_usefulness\": \"It gives a local ranking of contributing variables, which is useful for inspecting model behavior, but the weak faithfulness gap and low stability reduce its value for rigorous auditing.\",\n    \"clarity\": \"The feature list is easy to read, but the meaning of positive and negative weights in this specific model is not fully explained for non-technical readers.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, but it does not provide a full account of how these factors combine to produce the false positive decision.\",\n    \"concision\": \"The explanation is compact and mostly all signal, with little unnecessary wording.\",\n    \"overall_quality\": \"It is a useful local summary of the model\u2019s reasoning, but it is only moderately trustworthy and incomplete for understanding a false positive in depth.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult-income modeling, but some entries like sex_Female and marital-status categories are only weakly informative on their own, and the explanation does not fully align with the instance-specific decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:43.753894+00:00"
+}

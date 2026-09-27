@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4e8d4eeebe000338",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cbdb515ea6b51b47_a7f8302e84875afa.txt",
+  "prompt_version": "a7f8302e84875afa",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542763-ddJZ3j4HmACubqAOwdfK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 371,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025215,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016695,
+        "upstream_inference_cost": 0.0025215,
+        "upstream_inference_prompt_cost": 0.000852
+      },
+      "is_byok": false,
+      "prompt_tokens": 1136,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1507
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It identifies local factors but does not translate them into concrete changes that would alter the prediction, so it offers little actionable guidance.\",\n    \"audit_usefulness\": \"The ranked feature contributions are useful for checking whether the model relies on sensible attributes like capital-gain and marital status, but the explanation is too shallow for a deeper audit of this false negative.\",\n    \"clarity\": \"The output is short and uses plain feature names, so it is fairly easy to follow, though the sign and magnitude conventions of LIME still require some familiarity.\",\n    \"completeness\": \"It provides the top local factors, but not enough context to fully explain this specific wrong prediction or why the model missed the positive class.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with little obvious padding.\",\n    \"overall_quality\": \"It is a reasonable local explanation with understandable feature attributions, but it is incomplete for a false negative and only moderately useful for diagnosis.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, and the directions generally make sense, though some small weights and the lack of context limit confidence.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:25.203541+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f79662c8771ea4f4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_78dfd1648ed95148_edf006a971b774b3.txt",
+  "prompt_version": "edf006a971b774b3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542769-k23wEv1ZsiRbSA70kgWY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00265275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017955,
+        "upstream_inference_cost": 0.00265275,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists feature attributions, so it does not give a concrete way to change the decision or suggest next steps.\",\n    \"audit_usefulness\": \"The SHAP rankings are useful for inspecting which variables pushed the prediction up or down, but they are still only a partial local view and not enough on their own to diagnose bias or error.\",\n    \"clarity\": \"The output is easy to read for someone familiar with tabular features, but terms like SHAP values and one-hot style feature names still require some technical or domain knowledge.\",\n    \"completeness\": \"It identifies the main local contributors to the prediction, but it does not explain the full decision logic, interactions, or why the model ended up with the wrong class in this false-negative case.\",\n    \"concision\": \"The explanation is compact and information-dense, with little filler beyond the ranked feature contributions.\",\n    \"overall_quality\": \"A solid local explanation: it is readable, reasonably faithful, and highlights the main factors, but it lacks deeper interpretive context and does not fully explain the error.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit, and their directions make sense as local drivers of the prediction, even though the explanation does not explicitly connect them to the true positive outcome.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:30.832756+00:00"
+}

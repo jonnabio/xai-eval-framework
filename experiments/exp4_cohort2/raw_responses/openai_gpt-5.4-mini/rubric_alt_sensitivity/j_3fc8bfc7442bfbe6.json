@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3fc8bfc7442bfbe6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f567ef56c34dada8_0ab4da6e0bdb3cad.txt",
+  "prompt_version": "0ab4da6e0bdb3cad",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542916-kLuAUjAmK6iAErSTpA6K",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 360,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0024675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00162,
+        "upstream_inference_cost": 0.0024675,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1490
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors with weights, so it does not tell a person what to change to alter the prediction.\",\n    \"audit_usefulness\": \"The listed anchors and their weights give some insight into which features were used, but the very low fidelity makes it weak for diagnosing model behavior.\",\n    \"clarity\": \"The feature names are understandable enough, but the numeric support values and anchor-style output require some technical knowledge.\",\n    \"completeness\": \"It names a few apparent drivers of the decision, but it does not explain how they combine or why the model predicted class 1 for this false positive case.\",\n    \"concision\": \"It is short and mostly information-dense, though the full list of near-zero factors adds little practical value.\",\n    \"overall_quality\": \"As an explanation, it is moderately informative but limited by low fidelity and lack of decision logic, so it is only serviceable.\",\n    \"semantic_plausibility\": \"The cited factors, such as checking status and credit history, are plausible drivers in German credit, but the output does not clearly justify this specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:58.327539+00:00"
+}

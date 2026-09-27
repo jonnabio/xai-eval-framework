@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5d87ea599e9e4677",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_56c4478ec2bbf506",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_5d87ea599e9e4677_8f018be3d803dbb8.txt",
+  "prompt_version": "8f018be3d803dbb8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542885-gOJaRBcgAlUwIiLuOQVj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00261225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001755,
+        "upstream_inference_cost": 0.00261225,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5d87ea599e9e4677\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists features with local weights, so it does not tell a person what specific change might alter the prediction or what to do next.\",\n    \"audit_usefulness\": \"The ranked feature contributions give some insight into the model's local behavior, but the explanation is shallow and not enough by itself to investigate bias or error in detail.\",\n    \"clarity\": \"The output is compact and uses straightforward feature names, though a non-technical reader may still need some familiarity with one-hot encoded tabular features and LIME weights.\",\n    \"completeness\": \"It includes several local factors, but it does not explain the full decision path, the intercept/base value, or how these factors combine to produce the false negative.\",\n    \"concision\": \"The explanation is fairly tight: it conveys the top local factors in a short list without much filler.\",\n    \"overall_quality\": \"Useful as a brief local summary, but limited by lack of context, no prediction probability, and only moderate faithfulness/stability, so overall it is only serviceable.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, and the signs are broadly believable, though the explanation does not explicitly connect them to the missed positive class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:27.801265+00:00"
+}

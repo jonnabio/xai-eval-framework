@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1ca460bfddd4e1b9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_7e2161bb490167c3.txt",
+  "prompt_version": "7e2161bb490167c3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543355-K6DA2Xgr5Hy2H92yRG0J",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 393,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00262275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017685,
+        "upstream_inference_cost": 0.00262275,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists local feature contributions but does not explain what changes would plausibly alter the prediction, so it gives almost no concrete next step.\",\n    \"audit_usefulness\": \"The ranked feature attributions can help inspect which variables influenced the model, but the weak fidelity and instability limit how much one can trust it for bias or error analysis.\",\n    \"clarity\": \"The output is short and uses standard feature names with numeric weights, so it is easy to read, though the meaning of the signs may still require some technical background.\",\n    \"completeness\": \"It identifies several local factors behind the decision, but the contributions are very small and the explanation does not really account for the main reasons the model predicted class 0 for a false negative case.\",\n    \"concision\": \"The explanation is compact and mostly free of filler, with each token contributing to the attribution list.\",\n    \"overall_quality\": \"It is a usable LIME summary, but the tiny coefficients, low fidelity, and low stability make it only moderately informative and not very reliable.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income model, but the near-zero weights and inclusion of missing-value indicators make the explanation feel only weakly connected to the actual prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:17.750240+00:00"
+}

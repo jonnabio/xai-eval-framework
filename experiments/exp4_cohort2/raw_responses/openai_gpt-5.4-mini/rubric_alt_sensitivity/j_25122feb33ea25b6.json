@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_25122feb33ea25b6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f75792557c566daf_a033c4ca803266fd.txt",
+  "prompt_version": "a033c4ca803266fd",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542780-aiNxHKzs8KITzisC7Het",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002445,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016065,
+        "upstream_inference_cost": 0.002445,
+        "upstream_inference_prompt_cost": 0.0008385
+      },
+      "is_byok": false,
+      "prompt_tokens": 1118,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1475
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists contributing features, but it does not say what changes would plausibly alter the prediction or how to act on the result.\",\n    \"audit_usefulness\": \"The SHAP ranking gives some local insight into which inputs drove the prediction, but the low fidelity and moderate stability limit its usefulness for deeper auditing.\",\n    \"clarity\": \"The feature names and signed contributions are understandable in general, though the explanation assumes some familiarity with medical/tabular features and SHAP values.\",\n    \"completeness\": \"It identifies several important local factors, but it does not explain the full decision logic or how these factors combined to produce the false positive.\",\n    \"concision\": \"The explanation is short and information-dense, with little wasted wording.\",\n    \"overall_quality\": \"It is a decent local explanation with clear feature attributions, but it is incomplete and only moderately faithful, so it is not exemplary.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible drivers of a random forest prediction, and the mix of positive and negative contributions is consistent with a local attribution summary.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:41.921016+00:00"
+}

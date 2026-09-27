@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a24c0e0b05ffc573",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba96b41ceb2e14cb_7b1afe516e96beea.txt",
+  "prompt_version": "7b1afe516e96beea",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543505-LvZWoaZF79WKhOF0ZZDK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00248175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016335,
+        "upstream_inference_cost": 0.00248175,
+        "upstream_inference_prompt_cost": 0.00084825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1131,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1494
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not suggest any concrete changes that could alter the prediction; it only lists features with no counterfactual guidance.\",\n    \"audit_usefulness\": \"It provides very little insight for auditing because the listed factors are sparse, mostly zero-weighted, and do not explain the false negative in a meaningful way.\",\n    \"clarity\": \"The feature names are understandable only with some familiarity with the Adult dataset, and the meaning of the 0.0000 values is not explained.\",\n    \"completeness\": \"It omits the main reasons for the model's decision and does not explain why the instance was predicted negative despite being a false negative.\",\n    \"concision\": \"The output is short, but much of it is low-information feature listing, so it is only moderately efficient.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is technically formatted, but it does not meaningfully explain the prediction or support inspection.\",\n    \"semantic_plausibility\": \"The cited features are plausible in the Adult domain, but the explanation does not convincingly connect them to the specific false negative decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:47.315073+00:00"
+}

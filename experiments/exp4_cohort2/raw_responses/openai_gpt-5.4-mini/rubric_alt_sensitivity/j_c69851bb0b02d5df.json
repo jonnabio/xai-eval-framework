@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c69851bb0b02d5df",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_44c1e011120b2dd5_ad7b05e662534e53.txt",
+  "prompt_version": "ad7b05e662534e53",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542972-4vBzb3HW2ijqAcn90J19",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00254775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001701,
+        "upstream_inference_cost": 0.00254775,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1507
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It identifies which features would need to shift to affect the prediction, but it does not translate them into concrete, feasible actions or threshold changes.\",\n    \"audit_usefulness\": \"The ranked SHAP contributions are useful for checking which medical features drove the model and could support debugging or bias review, though they are limited to a local view.\",\n    \"clarity\": \"The list format is straightforward, but understanding the signs and feature names still requires some familiarity with SHAP and breast cancer features.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, but it does not explain interactions, baseline value, or why the model still predicted class 0 despite several positive contributions.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with little filler and only the top local factors shown.\",\n    \"overall_quality\": \"It is a solid local attribution summary with good fidelity and stability, but it lacks contextual interpretation and does not fully explain the false negative decision.\",\n    \"semantic_plausibility\": \"The prominent radius, perimeter, and area features are medically plausible predictors in the breast cancer domain, and their directions are reasonable for a malignant-risk model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:54.642485+00:00"
+}

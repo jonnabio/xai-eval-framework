@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e5a549b357c36895",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3c34585b1d65d81e_5d028f3ba5c47f32.txt",
+  "prompt_version": "5d028f3ba5c47f32",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542799-ERYbfmTdj5CImX6HweID",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 371,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00252825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016695,
+        "upstream_inference_cost": 0.00252825,
+        "upstream_inference_prompt_cost": 0.00085875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1145,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1516
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and coefficients; it does not suggest any concrete change that would alter the prediction.\",\n    \"audit_usefulness\": \"The local feature weights are useful for inspecting which variables the model relied on, but the near-zero stability and high faithfulness gap limit how much an auditor can trust it.\",\n    \"clarity\": \"The feature list is straightforward for a technical reader, but one still needs some familiarity with one-hot encoded tabular data and LIME to interpret it well.\",\n    \"completeness\": \"It provides the top local factors behind the positive prediction, but not a full enough account of how they combine or how strong the decision boundary was.\",\n    \"concision\": \"The explanation is compact and information-dense, with little unnecessary wording.\",\n    \"overall_quality\": \"It is a clear, concise local explanation with useful feature attributions, but limited completeness, weak stability, and no actionable guidance keep it from being excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult income prediction, especially capital gain and marital status, and the signs of the contributions are broadly sensible for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:01.345419+00:00"
+}

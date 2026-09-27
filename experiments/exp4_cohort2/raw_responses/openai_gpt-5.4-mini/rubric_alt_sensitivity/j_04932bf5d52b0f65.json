@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_04932bf5d52b0f65",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9294bc72ae3aeda0_1ed2ad7e52abe1ad.txt",
+  "prompt_version": "1ed2ad7e52abe1ad",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543166-o6aGcOoPqFeCXXIeboEc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026055,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001755,
+        "upstream_inference_cost": 0.0026055,
+        "upstream_inference_prompt_cost": 0.0008505
+      },
+      "is_byok": false,
+      "prompt_tokens": 1134,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors with weights, so it does not suggest what a person could change to affect the outcome or what a reviewer should do next.\",\n    \"audit_usefulness\": \"The listed features are useful for checking which variables influenced the prediction, but the near-binary weights and low fidelity/stability limit how much the model can really be audited from this explanation alone.\",\n    \"clarity\": \"The explanation is short and uses feature names directly, but the anchor-style weights and encoded variables require some technical understanding to interpret properly.\",\n    \"completeness\": \"It identifies several influential features, but it does not explain how they combine, whether they are sufficient conditions, or why the model predicted class 1 in this specific case.\",\n    \"concision\": \"The explanation is compact and largely non-redundant, though the feature list includes some zero-weight entries that add little value.\",\n    \"overall_quality\": \"It is a usable local summary of influential features, but the low fidelity and stability make it only moderately trustworthy and not especially informative.\",\n    \"semantic_plausibility\": \"For an Adult dataset prediction, education, hours-per-week, marital status, and occupation are plausible drivers, so the explanation is broadly consistent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:08.464970+00:00"
+}

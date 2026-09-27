@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8569f49081305637",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fe7c43e71719d557",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_8569f49081305637_1a7f5c56dfa6861b.txt",
+  "prompt_version": "1a7f5c56dfa6861b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543078-tbDglGv6W8u442HOJkpD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 393,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002619,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017685,
+        "upstream_inference_cost": 0.002619,
+        "upstream_inference_prompt_cost": 0.0008505
+      },
+      "is_byok": false,
+      "prompt_tokens": 1134,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8569f49081305637\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not suggest any concrete changes that would likely alter the prediction; it only lists anchor conditions already satisfied by the instance.\",\n    \"audit_usefulness\": \"The anchor-style conditions show a small set of local rules, which can help inspect the model\u2019s behavior somewhat, but the zero-valued extra features and low fidelity limit deeper auditing value.\",\n    \"clarity\": \"The feature names are understandable in a credit context, and the short list is easy to scan, though the 1.0000/0.0000 values are not very intuitive to non-technical readers.\",\n    \"completeness\": \"It identifies a few top local factors, but it does not explain how they combine, why they support class 1, or what the actual feature values were for this case.\",\n    \"concision\": \"The explanation is brief and mostly information-dense, but the long list of zero-weight features adds some unnecessary bulk.\",\n    \"overall_quality\": \"Useful as a compact local rule summary, but limited by low fidelity, minimal depth, and weak guidance for interpreting the specific decision.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit risk, especially short duration and poor checking status, and they fit a positive classification in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:40.524439+00:00"
+}

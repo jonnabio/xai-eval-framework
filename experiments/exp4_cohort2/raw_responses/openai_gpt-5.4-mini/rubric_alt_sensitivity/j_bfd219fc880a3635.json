@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bfd219fc880a3635",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba8a2c4ca53c1a08_22076daa1c5a64da.txt",
+  "prompt_version": "22076daa1c5a64da",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543201-3cKd8oGVJyEjEhfiVPJk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 372,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025365,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001674,
+        "upstream_inference_cost": 0.0025365,
+        "upstream_inference_prompt_cost": 0.0008625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1150,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential features, but it does not tell a person what specific changes would plausibly alter the prediction or what threshold matters.\",\n    \"audit_usefulness\": \"Useful as a quick local feature ranking, but the small weights and low fidelity/stability limit its value for serious bias or error analysis.\",\n    \"clarity\": \"The terms are plain enough for a non-expert to read, but the one-hot encoded feature names require some domain/data understanding to interpret fully.\",\n    \"completeness\": \"It identifies several local factors, but it does not explain the overall decision logic or how these factors combine to produce the prediction.\",\n    \"concision\": \"The explanation is compact and mostly every token contributes, though the long list of similar feature indicators reduces efficiency somewhat.\",\n    \"overall_quality\": \"A reasonable LIME summary for a true positive case, but the low stability and only moderate fidelity keep it from being strong or fully trustworthy.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult-income modeling, especially education, occupation, relationship, and marital status, and they fit the kind of patterns such models often learn.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:43.278984+00:00"
+}

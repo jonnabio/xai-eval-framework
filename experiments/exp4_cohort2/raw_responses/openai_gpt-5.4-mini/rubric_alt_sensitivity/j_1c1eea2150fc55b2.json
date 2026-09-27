@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1c1eea2150fc55b2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_19b944710e090900_36873c65d5805a6b.txt",
+  "prompt_version": "36873c65d5805a6b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543073-RElKSovz8eWtklKkdFC0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 309,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002244,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0013905,
+        "upstream_inference_cost": 0.002244,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1447
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_19b944710e090900\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It only lists local feature contributions and does not say what change might alter the prediction or what a person should do next.\",\"audit_usefulness\":\"It gives some glimpse into which variables the local surrogate used, but the low fidelity and stability mean it is only weakly useful for diagnosing model behavior or bias.\",\"clarity\":\"The feature names are understandable to a technically literate reader, but the sign conventions and one-hot encoded variables make it harder for a non-technical person to follow.\",\"completeness\":\"It provides several local factors, but not a complete account of why this false negative occurred, especially given the modest fidelity and lack of a broader decision summary.\",\"concision\":\"The explanation is fairly compact and mostly consists of the top local factors, with little padding.\",\"overall_quality\":\"Useful as a brief local summary, but limited by low stability and only moderate fidelity, so it is not very trustworthy or complete.\",\"semantic_plausibility\":\"The listed factors are plausible for the Adult dataset and the directions are not obviously contradictory, though some contributions are very small and the explanation does not strongly explain the false negative.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":2,\"clarity\":3,\"completeness\":2,\"concision\":4,\"overall_quality\":2,\"semantic_plausibility\":3}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:34.683208+00:00"
+}
