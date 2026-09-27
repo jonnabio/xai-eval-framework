@@ -1,6 +1,7 @@
 # RCA-002: EXP4 sources lost from the tree; supplementary tables never re-derived
 
-**Status**: Closed for source recovery; three artifact gaps remain (see Remaining)
+**Status**: Closed for source recovery; three artifact gaps remain (see Remaining);
+the recovery bytecode itself was lost on 2026-09-27 (see Addendum)
 **Severity**: High
 **Opened**: 2026-08-28
 **Role**: Scientific Editor → Incident Responder
@@ -187,3 +188,33 @@ matches its bytecode:
 The EXP4 tests are not in CI: `backend-ci.yml` is path-filtered to `src/api`,
 and running these needs pandas, pydantic, jinja2 and pyyaml. The CI gate is the
 dependency-free opcode check in `pubs-sync.yml`.
+
+## Addendum (2026-09-27): the recovery bytecode is lost
+
+The `.pyc` files this RCA recovered from were never committed. They lived only
+in `__pycache__` on the previous author laptop and did not survive the move to
+a new machine. Invariant 2 of the RCA-002 guard ("the EXP4 .pyc files are never
+deleted") is therefore violated, and the opcode comparison can no longer run:
+`verify_exp4_reconstruction.py` and the `exp4-reconstruction` CI job fail on
+`missing bytecode`. They never passed in CI either, since CI never had the
+files; the green result was local to that laptop.
+
+What this does and does not change:
+
+- The reconstructed sources stand as verified on 2026-08-28, a dated result
+  that can no longer be repeated.
+- The committed aggregate results are untouched: the four
+  `outputs/analysis/exp4_llm_evaluation/*.csv` blobs (committed in `f6591d680`)
+  still re-derive every published EXP4 number through `verify_claims.py`.
+- A search of all Git history, remote refs, unreachable objects, GitHub
+  releases and artifacts, and the new laptop found no copy of the bytecode, the
+  raw judge responses or the templates. Record:
+  `docs/review/exp4-forensic-search_2026-09-27.md`.
+
+**Lesson:** a file the recovery depends on is an artifact, and RCA-001's rule
+applies to it: it must be *tracked*, not merely present. The guard said "never
+delete" when it needed to say "commit".
+
+**Open (author decision):** retire the opcode check, replace it with a hash pin
+of the reconstructed sources as verified, or keep it as a documented permanent
+failure.
