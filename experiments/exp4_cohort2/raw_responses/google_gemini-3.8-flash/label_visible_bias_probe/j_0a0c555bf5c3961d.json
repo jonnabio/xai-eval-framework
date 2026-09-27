@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0a0c555bf5c3961d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cbdb515ea6b51b47_6835d0c85f7a806f.txt",
+  "prompt_version": "6835d0c85f7a806f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541198-hcLFRm8J44kNE1QTuv37",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1154,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 758,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00526575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0043275,
+        "upstream_inference_cost": 0.00526575,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2405
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution values without feature values or target thresholds, offering no actionable recourse for the individual.\",\n    \"audit_usefulness\": \"It provides insight into the top weighted features influencing the false negative prediction, though perturbation artifacts on one-hot encoded categories limit deeper auditing.\",\n    \"clarity\": \"The explanation presents a plain list of one-hot encoded feature weights without explanatory context or actual feature values, making it difficult for non-experts to interpret.\",\n    \"completeness\": \"The top ten local factors capture primary drivers like capital gain and marital status, but omitting actual instance values leaves the decision context incomplete.\",\n    \"concision\": \"The summary is compact, though presenting multiple mutually exclusive dummy variables for marital status and sex introduces redundant information.\",\n    \"overall_quality\": \"While mathematically straightforward, the explanation is hindered by raw one-hot encoding artifacts, absent feature values, and lack of actionable insights.\",\n    \"semantic_plausibility\": \"General relationships like education and capital gains align with domain expectations, but having opposing binary categories like male and female both register negative weights degrades plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:28.266760+00:00"
+}

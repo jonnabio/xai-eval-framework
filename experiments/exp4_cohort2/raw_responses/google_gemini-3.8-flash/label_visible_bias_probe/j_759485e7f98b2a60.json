@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_759485e7f98b2a60",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_75520768088e5528_4e515e268b90b14b.txt",
+  "prompt_version": "4e515e268b90b14b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541973-jhxtgfqf56HmlLEgDCrC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1010,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 632,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00473025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0037875,
+        "upstream_inference_cost": 0.00473025,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2267
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without indicating the individual's underlying feature values or suggesting actionable steps for recourse.\",\n    \"audit_usefulness\": \"It provides the top numerical feature contributions for an auditor, though the absence of base values and actual feature levels slightly limits verification.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded SHAP values requires technical understanding of model interpretability to parse.\",\n    \"completeness\": \"While ten influential features are reported with attribution weights, missing instance values make it difficult to fully understand the local prediction context.\",\n    \"concision\": \"The presentation is compact and delivers feature attribution weights without any unnecessary filler.\",\n    \"overall_quality\": \"The explanation serves as a basic technical readout of SHAP values, but lacks context, feature states, and actionable insight.\",\n    \"semantic_plausibility\": \"The directions of impact for high school education and occupation generally align with domain expectations on the Adult dataset, though dummy encoding artifacts appear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:22.018444+00:00"
+}

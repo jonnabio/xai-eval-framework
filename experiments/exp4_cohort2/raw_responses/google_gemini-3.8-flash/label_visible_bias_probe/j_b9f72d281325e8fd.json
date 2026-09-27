@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b9f72d281325e8fd",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28cfcd5501fa69b2_0b9082a65658ad31.txt",
+  "prompt_version": "0b9082a65658ad31",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544126-i1C5KUjm4XermZ2UvdDq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1173,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 799,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005331,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00439875,
+        "upstream_inference_cost": 0.005331,
+        "upstream_inference_prompt_cost": 0.00093225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1243,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2416
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide directional guidance or specific cutoffs, offering no actionable path for recourse.\",\n    \"audit_usefulness\": \"While it highlights which four features form the local anchor, the absence of predicate thresholds severely limits its utility for auditing model logic.\",\n    \"clarity\": \"The list of raw feature names paired with binary 1.0/0.0 values is confusing and omits the actual decision rules for continuous features like duration.\",\n    \"completeness\": \"Key local decision rules are incomplete because the specific threshold conditions for duration and the impact of the features are missing.\",\n    \"concision\": \"Including multiple zero-weighted features adds unnecessary clutter without contributing informative value.\",\n    \"overall_quality\": \"The explanation suffers from truncated rule predicates and uninformative zero-weight padding, though the active features make domain sense.\",\n    \"semantic_plausibility\": \"Selecting short employment, delayed credit history, and checking account status as risk drivers is highly consistent with credit domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:22:16.407153+00:00"
+}

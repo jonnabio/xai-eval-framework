@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ab4ca8fc8d54927d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1de08b8c2918a436_5b0b4d8c9f82934f.txt",
+  "prompt_version": "5b0b4d8c9f82934f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543642-MBvXqKEHNN0WLQT7K5XI",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 576,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00458475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003645,
+        "upstream_inference_cost": 0.00458475,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2225
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the model approved the credit application (prediction 1), recourse is not strictly necessary, and the rule format offers no guidance on what would flip the decision.\",\n    \"audit_usefulness\": \"The explanation clearly isolates three conditions driving the false positive prediction, giving auditors a clear starting point to evaluate why approval was granted.\",\n    \"clarity\": \"The list of features with binary weights is straightforward to read, though listing zero-weighted features without explanation makes the format slightly technical.\",\n    \"completeness\": \"The three active anchor conditions define the local rule, providing sufficient context for why the random forest assigned class 1.\",\n    \"concision\": \"Including multiple features with weights of 0.0000 adds unnecessary clutter to an otherwise compact rule-based explanation.\",\n    \"overall_quality\": \"The explanation adequately identifies the active anchor predicates for this false positive prediction, despite padding with zero-weight features.\",\n    \"semantic_plausibility\": \"The combination of having real estate property alongside low savings and no checking account represents a coherent, plausible profile within the German credit domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:09.901577+00:00"
+}

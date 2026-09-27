@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_89ff61291c243b1f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e354d1466bc2ce9c_10e832294b940ae3.txt",
+  "prompt_version": "10e832294b940ae3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543687-vq1sYFrodPJ9zVW4636U",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 958,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 581,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004539,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035925,
+        "upstream_inference_cost": 0.004539,
+        "upstream_inference_prompt_cost": 0.0009465
+      },
+      "is_byok": false,
+      "prompt_tokens": 1262,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2220
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static attribution weights without baseline reference points, thresholds, or concrete recourse guidance for the individual.\",\n    \"audit_usefulness\": \"It provides directional weights for key factors that an auditor can inspect to understand why the model yielded a false positive, though fidelity is only moderate.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric coefficients requires technical or domain literacy to interpret accurately.\",\n    \"completeness\": \"While ten influential features are reported with weights, the actual underlying feature values for the instance are omitted.\",\n    \"concision\": \"The text is concise and dense, presenting the top weights directly without superfluous narrative.\",\n    \"overall_quality\": \"The explanation offers a compact, standard local attribution summary useful for basic inspection, but lacks instance feature values and actionable recourse.\",\n    \"semantic_plausibility\": \"Features like executive occupation, higher education, and capital gains align well with higher income, though the high weight on spouse-absent status is somewhat unusual.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:54.620138+00:00"
+}

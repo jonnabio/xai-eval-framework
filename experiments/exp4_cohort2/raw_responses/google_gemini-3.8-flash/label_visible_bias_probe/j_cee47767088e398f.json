@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_cee47767088e398f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_196e6ce035ebf3e3_8353ce8fdbe0c3a9.txt",
+  "prompt_version": "8353ce8fdbe0c3a9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542683-sJNBaeWQfj5y4ZpHJkcn",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 773,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005271,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00432,
+        "upstream_inference_cost": 0.005271,
+        "upstream_inference_prompt_cost": 0.000951
+      },
+      "is_byok": false,
+      "prompt_tokens": 1268,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2420
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without indicating actual feature values or providing actionable recourse paths for the applicant.\",\n    \"audit_usefulness\": \"Auditors can verify the directional impact of top features, but the absence of instance feature values and baseline context restricts comprehensive debugging.\",\n    \"clarity\": \"The list relies on raw encoded feature strings and numeric SHAP values, requiring statistical and domain literacy to interpret correctly.\",\n    \"completeness\": \"The top ten local factors are provided with their signed contributions, though it omits the base value and the original feature values.\",\n    \"concision\": \"The text delivers the top local attributions directly and compactly without redundant filler.\",\n    \"overall_quality\": \"It provides a decent technical summary of local feature importance for practitioners, but is limited by the lack of feature values and layperson clarity.\",\n    \"semantic_plausibility\": \"The highlighted variables\u2014such as checking account status, credit amount, savings, and duration\u2014align with standard domain expectations in credit evaluation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:11.663435+00:00"
+}

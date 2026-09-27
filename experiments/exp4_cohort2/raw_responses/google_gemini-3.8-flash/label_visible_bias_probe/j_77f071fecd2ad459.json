@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_77f071fecd2ad459",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6496b69e203cf5db_023743d1ed8097fd.txt",
+  "prompt_version": "023743d1ed8097fd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544391-WfDgwrZET4bBWSPwCOgp",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 577,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003645,
+        "upstream_inference_cost": 0.0045825,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2222
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While DiCE is designed for counterfactual recourse, this output merely lists feature frequency scores without concrete feature value changes or feasible guidance.\",\n    \"audit_usefulness\": \"It highlights that marital status and low education level were the dominant factors modified in counterfactual generation, offering modest insight into model sensitivity for this false positive.\",\n    \"clarity\": \"The list format is straightforward to read, but presenting raw feature names and frequency proportions without explanation of their meaning requires technical interpretation.\",\n    \"completeness\": \"Only two features show non-zero importance, and crucial context such as current feature values, target values, and direction of effect is missing.\",\n    \"concision\": \"Most of the output consists of features with 0.0000 values, which needlessly clutters the explanation.\",\n    \"overall_quality\": \"The explanation strips away the actionable value of counterfactuals, leaving a sparse and partially padded list of feature weights.\",\n    \"semantic_plausibility\": \"Marital status and education level are well-established strong predictors in the Adult dataset, making their prominence plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:26:40.869448+00:00"
+}

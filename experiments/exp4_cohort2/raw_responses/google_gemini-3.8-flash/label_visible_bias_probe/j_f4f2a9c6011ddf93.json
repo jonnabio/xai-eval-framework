@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f4f2a9c6011ddf93",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_9796c10b545d65fb.txt",
+  "prompt_version": "9796c10b545d65fb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545622-sFqEx67LPZSPfAij9PIK",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 597,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00456075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036225,
+        "upstream_inference_cost": 0.00456075,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2217
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points exclusively to native country, an immutable demographic attribute that provides zero feasible recourse for the user.\",\n    \"audit_usefulness\": \"It alerts auditors to potential bias regarding national origin in the model, though the lack of context or directional thresholds limits deeper debugging.\",\n    \"clarity\": \"The list of raw feature names and numerical weights is legible, but it lacks natural language interpretation for a non-expert.\",\n    \"completeness\": \"Only a single binary feature has non-zero attribution, entirely omitting core predictive drivers such as education, age, or capital gains.\",\n    \"concision\": \"The output is unnecessarily cluttered with nine features that have zero importance values.\",\n    \"overall_quality\": \"The explanation is poor because it relies entirely on an unchangeable demographic characteristic while padding the rest of the output with zeros.\",\n    \"semantic_plausibility\": \"Attributing the classification decision entirely to native country contradicts standard economic domain intuition regarding income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:47:11.556972+00:00"
+}

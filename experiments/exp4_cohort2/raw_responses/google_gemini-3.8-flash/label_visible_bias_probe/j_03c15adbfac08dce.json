@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_03c15adbfac08dce",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_dc46675654a709a2_307502fbb55860f0.txt",
+  "prompt_version": "307502fbb55860f0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543277-YlOoGqj3K2zLTbs7uM9c",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1003,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 631,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046905,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376125,
+        "upstream_inference_cost": 0.0046905,
+        "upstream_inference_prompt_cost": 0.00092925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2242
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directional guidance required for recourse.\",\n    \"audit_usefulness\": \"It highlights that education and marital status are the primary anchor features, though the absence of specific predicate conditions limits deeper auditing.\",\n    \"clarity\": \"The list format is readable, but presenting an anchor rule as binary indicator weights without threshold conditions is confusing to non-experts.\",\n    \"completeness\": \"While it identifies the two features forming the anchor rule, it omits the actual values and relational operators defining the decision boundary.\",\n    \"concision\": \"Including a long tail of irrelevant features with 0.0000 weights introduces unnecessary clutter.\",\n    \"overall_quality\": \"The explanation indicates key factors but suffers from awkward formatting that strips out the actual rule predicates and pads with zero-weight features.\",\n    \"semantic_plausibility\": \"Marital status and education are well-established key predictors of income level in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:05.294964+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_41634bad0ca3e2d3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d47138a03cd221ff_aeb347bdaa01ce30.txt",
+  "prompt_version": "aeb347bdaa01ce30",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543394-c01BLeLVgyAfynDJtyop",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1056,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 676,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00396,
+        "upstream_inference_cost": 0.0048945,
+        "upstream_inference_prompt_cost": 0.0009345
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2302
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local attribution weights but provides no actionable paths, target thresholds, or guidance for recourse.\",\n    \"audit_usefulness\": \"It provides useful insight into why this false positive occurred by highlighting strong positive drivers like Doctorate and professional specialty, though missing baseline values limits deeper audit.\",\n    \"clarity\": \"The list of feature names and numeric coefficients is structured and legible, but requires basic familiarity with attribution methods to interpret.\",\n    \"completeness\": \"The top ten local factors provide a broad view of the model's decision drivers, though the absence of specific feature values slightly diminishes context.\",\n    \"concision\": \"The text is compact and directly presents the key weights without unnecessary padding.\",\n    \"overall_quality\": \"This is a solid, standard feature attribution explanation that clearly shows the drivers of the false positive prediction, balanced by modest actionability.\",\n    \"semantic_plausibility\": \"The weights align well with domain knowledge, as advanced education and professional specialty are strong real-world indicators of higher income.\",\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:02.760342+00:00"
+}

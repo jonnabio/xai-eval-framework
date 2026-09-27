@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fc0ce1c7aae688fa",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e9eba60d9edc4d8a_fa0525ac736e8faf.txt",
+  "prompt_version": "fa0525ac736e8faf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541182-TiPsYPywcRO9EAHVF9YU",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 946,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 567,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00447,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035475,
+        "upstream_inference_cost": 0.00447,
+        "upstream_inference_prompt_cost": 0.0009225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2176
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw feature attributions for biopsy measurements without any recourse, recommendations, or clinical guidance.\",\n    \"audit_usefulness\": \"It provides signed attribution values for the top ten features, giving an auditor a clear view into why the model produced a false negative prediction.\",\n    \"clarity\": \"The list of raw feature names paired with floating-point SHAP values requires technical knowledge of machine learning attributions to interpret properly.\",\n    \"completeness\": \"The top ten local contributors are listed with signs and magnitudes, though actual feature values and the baseline reference value are omitted.\",\n    \"concision\": \"The presentation is compact and delivers key attribution information without unnecessary filler or redundancy.\",\n    \"overall_quality\": \"While technically sound and useful for debugging a false negative, the lack of feature values and lay explanations limits its broader utility.\",\n    \"semantic_plausibility\": \"The identified features, such as cell area, perimeter, and concavity, are standard pathological markers consistent with domain expectations for breast cancer classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:09.775076+00:00"
+}

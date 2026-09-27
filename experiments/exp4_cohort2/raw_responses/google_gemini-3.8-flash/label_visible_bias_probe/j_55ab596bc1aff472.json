@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_55ab596bc1aff472",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_902d690264149a09_521d2ecc46286163.txt",
+  "prompt_version": "521d2ecc46286163",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543157-PYhRJ7pocnpqPuQJboSL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 928,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 524,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00442275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00348,
+        "upstream_inference_cost": 0.00442275,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2185
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP feature attributions without stating current feature values or prescribing clear, actionable steps for recourse.\",\n    \"audit_usefulness\": \"It provides signed attribution scores for key features, helping an auditor identify that low educational attainment was the primary factor driving this false negative prediction.\",\n    \"clarity\": \"The raw key-value format using one-hot encoded variable names and decimal weights is clear to technical analysts but difficult for a non-expert reader to interpret.\",\n    \"completeness\": \"The explanation highlights the top ten contributing features, though it omits the base value and the observed feature values necessary for a complete local picture.\",\n    \"concision\": \"The text compactly lists the top features without superfluous phrasing or redundant tokens.\",\n    \"overall_quality\": \"The explanation offers an acceptable technical summary of model weights that is plausible and concise, though limited by low actionability and non-expert clarity.\",\n    \"semantic_plausibility\": \"It is highly plausible in the Adult domain that having an education level of 7th-8th grade strongly depresses the likelihood of earning over 50k.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:06.008328+00:00"
+}

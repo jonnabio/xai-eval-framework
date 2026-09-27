@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_eb056ba34728e73a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ccbc751d89be60ef_bd1aafc7b9568738.txt",
+  "prompt_version": "bd1aafc7b9568738",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545408-1zpR5xOrAbaJMdaQ2F2E",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 736,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005055,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00412875,
+        "upstream_inference_cost": 0.005055,
+        "upstream_inference_prompt_cost": 0.00092625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2336
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides diagnostic measurements without thresholds or actionable guidance, offering no clear path for recourse.\",\n    \"audit_usefulness\": \"While it highlights which two features were selected, it completely omits the underlying rule conditions and thresholds necessary for auditing.\",\n    \"clarity\": \"The text presents a list of feature weights rather than clear decision rules, which may confuse non-experts regarding what the 1.0 values signify.\",\n    \"completeness\": \"It indicates the active features but lacks crucial context, including the actual feature values, decision bounds, and rule precision.\",\n    \"concision\": \"The explanation contains substantial bloat by listing multiple irrelevant features with zero values.\",\n    \"overall_quality\": \"Overall quality is low because the normalization flattens an anchor rule into pseudo-weights and discards the rule predicates.\",\n    \"semantic_plausibility\": \"Mean concave points and worst texture are clinically established key indicators of malignancy in breast cytology datasets.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:43:36.675069+00:00"
+}

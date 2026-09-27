@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d7acab17d7f3c2cc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0f6578287491844e_4726aaad9c3fcb4a.txt",
+  "prompt_version": "4726aaad9c3fcb4a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543910-u7fyymMoiHLxLjWoqW53",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1235,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 836,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0055755,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00463125,
+        "upstream_inference_cost": 0.0055755,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2494
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature attribution scores and offers no actionable guidance, counterfactual thresholds, or recourse steps.\",\n    \"audit_usefulness\": \"Auditors can inspect the relative influence and directions of the top ten features, though the absence of original feature values limits deeper model debugging.\",\n    \"clarity\": \"The raw format displays one-hot encoded feature names and signed SHAP values that are difficult for a non-technical user to interpret without baseline context.\",\n    \"completeness\": \"The explanation lists the top ten local drivers across both directions, but omits the applicant's actual feature values and the model's base value.\",\n    \"concision\": \"The list is compact, reporting only the key local factors and their attribution weights without unnecessary filler.\",\n    \"overall_quality\": \"This is an acceptable technical SHAP output that provides useful directional attribution for analysts, but falls short on actionability and layperson interpretability.\",\n    \"semantic_plausibility\": \"The primary drivers\u2014credit history, checking account status, and loan amount\u2014are coherent and fully aligned with credit risk assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:40.615272+00:00"
+}

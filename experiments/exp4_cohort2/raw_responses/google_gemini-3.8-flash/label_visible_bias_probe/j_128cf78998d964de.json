@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_128cf78998d964de",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_03f9ac9f3ab42b8b_5542cc89826e0b53.txt",
+  "prompt_version": "5542cc89826e0b53",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541467-4tSZ3NbPi1dy94KuDCut",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 725,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00516675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00423,
+        "upstream_inference_cost": 0.00516675,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2377
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature weights without instance values, thresholds, or guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It clearly demonstrates to an auditor that protected attributes like sex strongly suppress the prediction, helping diagnose potential disparate impact and false negative causes.\",\n    \"clarity\": \"The raw list of one-hot encoded feature names and numeric SHAP values is difficult for non-experts to interpret, especially when mutually exclusive categories both appear.\",\n    \"completeness\": \"The top 10 local factors with directional signs are reported, though omission of the base value and the individual's actual feature values limits full local understanding.\",\n    \"concision\": \"The presentation is compact and direct, though listing multiple inactive one-hot categories adds unnecessary clutter.\",\n    \"overall_quality\": \"While mathematically informative for auditing bias in a false negative prediction, the raw feature-attribution format lacks actionable context and clarity for general users.\",\n    \"semantic_plausibility\": \"The negative impact of female gender on income predictions aligns with known bias patterns in the Adult dataset, though seeing opposing categorical flags simultaneously can be confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:56.518203+00:00"
+}

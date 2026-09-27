@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5416f0a88ea021db",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_3adf691ba6671f41.txt",
+  "prompt_version": "3adf691ba6671f41",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544332-a1WPuP5QHNOfOsIrDEpd",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1114,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 736,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00511725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041775,
+        "upstream_inference_cost": 0.00511725,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2367
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable demographic traits and raw attribution weights without providing actionable steps or counterfactual paths to change the outcome.\",\n    \"audit_usefulness\": \"It provides a clear view of the model's reliance on sensitive features such as race and sex, which is valuable for fairness auditing despite low overall fidelity.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric coefficients requires technical familiarity with local linear surrogates to interpret properly.\",\n    \"completeness\": \"While ten top factors are presented, it omits the actual underlying feature values of the instance, leaving the context incomplete.\",\n    \"concision\": \"The explanation is brief and directly presents the key weights without any extraneous text.\",\n    \"overall_quality\": \"It is an acceptable technical feature-importance summary for an auditor, but limited in non-expert usability and practical actionability.\",\n    \"semantic_plausibility\": \"The negative associations of lower education, specific manual occupations, and unmarried status with high income are consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:25:42.635909+00:00"
+}

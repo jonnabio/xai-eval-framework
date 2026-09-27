@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_beaf832148640ddb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3e006f8c0e7512b1_26ff424cdfa1d4dd.txt",
+  "prompt_version": "26ff424cdfa1d4dd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541341-5M1V6utWrvOfypuiqzfb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1022,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 631,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00477375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0038325,
+        "upstream_inference_cost": 0.00477375,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2277
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw SHAP attribution values without actionable guidance, recourse pathways, or feature thresholds.\",\n    \"audit_usefulness\": \"It provides the top signed feature contributions, allowing an auditor to see why the MLP produced a false negative, though the absence of original feature values limits deeper debugging.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded features and numerical attributions requires technical and domain knowledge to interpret.\",\n    \"completeness\": \"The top ten local drivers are displayed with their directional impacts, though omitting the actual input values makes the decision context incomplete.\",\n    \"concision\": \"The presentation is compact and delivers feature-attribution pairs without unnecessary filler words.\",\n    \"overall_quality\": \"While it reliably communicates the model's primary mathematical drivers for the false negative, the lack of input values and non-expert readability lowers its practical utility.\",\n    \"semantic_plausibility\": \"Several attributions appear confusing without knowing the underlying binary states, such as opposing marital statuses both showing positive impacts or professional specialty pulling negatively.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:50.892527+00:00"
+}

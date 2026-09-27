@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_99188a61b3de9ed4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fd10fc7880f0d710",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_99188a61b3de9ed4_3b12f9b1251b445a.txt",
+  "prompt_version": "3b12f9b1251b445a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544504-1Z2MtBnaU8qtSblg7fht",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 718,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005112,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00416625,
+        "upstream_inference_cost": 0.005112,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2372
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_99188a61b3de9ed4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature attribution values without actionable guidance, thresholds, or counterfactual recourse for the applicant.\",\n    \"audit_usefulness\": \"It provides signed attribution scores for the top 10 features, which helps an auditor see model drivers, though the lack of original feature values limits deeper technical debugging.\",\n    \"clarity\": \"The raw format with one-hot encoded variable names and decimal attribution values requires technical familiarity to interpret properly.\",\n    \"completeness\": \"It covers the top 10 contributing factors with signed weights, but misses the model base value and the actual input values for continuous variables like age and duration.\",\n    \"concision\": \"The presentation is compact and directly reports the top local drivers without padding or redundant text.\",\n    \"overall_quality\": \"It serves as an acceptable baseline local attribution summary for technical users, though it lacks user-facing clarity, feature values, and actionable recommendations.\",\n    \"semantic_plausibility\": \"The highlighted drivers\u2014checking account status, credit amount, age, and duration\u2014align closely with standard credit risk assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:28:34.825404+00:00"
+}

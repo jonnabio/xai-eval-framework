@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_64f2bbf655d51128",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7ee17e1b81806239_0cf808e25f237572.txt",
+  "prompt_version": "0cf808e25f237572",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544914-ZsJ9YgjAO0jlPjBx6Bgn",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1214,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 798,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00549675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0045525,
+        "upstream_inference_cost": 0.00549675,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2473
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only raw attribution weights without guidance, counterfactual thresholds, or practical recourse for the individual.\",\n    \"audit_usefulness\": \"An auditor can inspect the top factors contributing to the false negative, but the lack of underlying instance values and presence of conflicting one-hot dummy variables limit diagnostic depth.\",\n    \"clarity\": \"The list of one-hot encoded feature names and tiny numerical coefficients is difficult for non-experts to interpret, particularly without knowing whether the individual possesses these attributes.\",\n    \"completeness\": \"While ten local weights are displayed, the omission of actual feature values, intercept, and baseline reference leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is brief and tightly formatted, though presenting multiple mutually exclusive dummy indicators slightly dilutes the information density.\",\n    \"overall_quality\": \"The explanation is of below-average quality because it presents raw one-hot coefficients without feature values, resulting in counter-intuitive signs and minimal actionable value.\",\n    \"semantic_plausibility\": \"Negative weights for typically high-earning indicators like Doctorate and Prof-specialty appear counter-intuitive, likely reflecting the absence of the feature rather than intuitive domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:35:23.454422+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ccfea76665832b07",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_445412523328930a_774a6acc2fb3e57a.txt",
+  "prompt_version": "774a6acc2fb3e57a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545830-0IInj6oqWvo3bN50goJ2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 813,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0055725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00461625,
+        "upstream_inference_cost": 0.0055725,
+        "upstream_inference_prompt_cost": 0.00095625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2506
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"No clear thresholds, directional advice, or recourse paths are provided to help an applicant understand what changes would overturn the adverse prediction.\",\n    \"audit_usefulness\": \"The explanation lacks rule predicates and assigns an identical weight of 1.0000 to all listed features, offering very limited insight into the model's actual decision boundary.\",\n    \"clarity\": \"Presenting raw feature names and one-hot encoded categories alongside an uninterpreted '1.0000' score is confusing for non-technical users.\",\n    \"completeness\": \"Key decision logic is missing because the output omits inequalities, actual feature values, and relative importances.\",\n    \"concision\": \"Listing multiple mutually exclusive one-hot levels (e.g., all categories of checking_status) with identical values creates substantial redundancy.\",\n    \"overall_quality\": \"The explanation fails to provide the characteristic interpretable if-then rules of Anchors, yielding a degenerate list of uniform feature weights that poorly explains the false negative outcome.\",\n    \"semantic_plausibility\": \"Simultaneously listing every level of categorical variables with equal weight is semantically unnatural and difficult to reconcile with standard tabular decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:39.846712+00:00"
+}

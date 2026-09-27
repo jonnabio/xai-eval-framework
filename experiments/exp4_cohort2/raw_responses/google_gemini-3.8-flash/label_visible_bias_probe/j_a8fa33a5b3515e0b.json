@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4204b78d9c679eb0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a8fa33a5b3515e0b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4204b78d9c679eb0_12418eae2acdad13.txt",
+  "prompt_version": "12418eae2acdad13",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545761-OZpvA0pZD6cn8G0dLOeH",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 839,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00556275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00461625,
+        "upstream_inference_cost": 0.00556275,
+        "upstream_inference_prompt_cost": 0.0009465
+      },
+      "is_byok": false,
+      "prompt_tokens": 1262,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2493
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4204b78d9c679eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it provides neither feature values nor directional thresholds, only listing feature names with identical weights.\",\n    \"audit_usefulness\": \"It has very little audit utility for diagnosing this false positive prediction, as it fails to output rule conditions and assigns arbitrary uniform weights to conflicting one-hot categories.\",\n    \"clarity\": \"While the key-value text is readable, presenting unexplained 1.0000 values without rule predicates is confusing to non-expert readers.\",\n    \"completeness\": \"The explanation completely omits the actual anchor predicates or local decision boundaries necessary to understand the logistic regression prediction.\",\n    \"concision\": \"The output includes redundant one-hot occupation indicators with identical weights, providing low useful information per token.\",\n    \"overall_quality\": \"Overall quality is very poor because the explainer failed to output interpretable decision rules, resulting in an uninformative list of uniform weights.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting multiple mutually exclusive occupation categories with identical weights is semantically inconsistent for a single individual.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:49:31.648321+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cc3c47f9ed102eb0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4568eb15d2ee7535",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cc3c47f9ed102eb0_3a7075a2d26ace78.txt",
+  "prompt_version": "3a7075a2d26ace78",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545392-srnUBVQins606tRQBpne",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 924,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 528,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00438825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003465,
+        "upstream_inference_cost": 0.00438825,
+        "upstream_inference_prompt_cost": 0.00092325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1231,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2155
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cc3c47f9ed102eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recommendations or clinical recourse, as it merely lists non-modifiable pathological cell characteristics.\",\n    \"audit_usefulness\": \"While it reveals that 'area error' and 'worst texture' triggered the anchor, the omission of actual rule predicates and decision thresholds significantly limits auditing capability.\",\n    \"clarity\": \"The list format is readable, but presenting rule-based anchors as arbitrary 1.0000 and 0.0000 weights is confusing without explaining what those numbers represent.\",\n    \"completeness\": \"The explanation is incomplete because it truncates the condition bounds and feature values necessary to understand why the anchor satisfied the prediction.\",\n    \"concision\": \"Listing eight irrelevant features with zero weights adds unnecessary clutter that dilutes the two active features.\",\n    \"overall_quality\": \"Overall quality is low because converting an anchor rule into a sparse weight vector discards crucial threshold logic and inflates the output with zeroed features.\",\n    \"semantic_plausibility\": \"Identifying texture and area error as key indicators for breast cancer malignancy aligns well with standard biomedical understanding.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:43:19.580919+00:00"
+}

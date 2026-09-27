@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2fb8d841944fa76b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_61aa23b353e92c1a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2fb8d841944fa76b_b0b027d8fecc0c12.txt",
+  "prompt_version": "b0b027d8fecc0c12",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546029-1u5mCza73wgiVDSRpu6B",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1265,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 862,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005679,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00474375,
+        "upstream_inference_cost": 0.005679,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2512
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2fb8d841944fa76b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance on how changing specific attributes could alter the model's decision.\",\n    \"audit_usefulness\": \"While it isolates which binary features were identified by the explainer, the presence of mutually contradictory categories limits its diagnostic value for model auditing.\",\n    \"clarity\": \"Presenting rule components as a pseudo-attribution list with 1.0 and 0.0 values without thresholds or relational operators makes it difficult for non-experts to interpret.\",\n    \"completeness\": \"The explanation lists the selected anchor features but lacks vital rule context such as precision, coverage, and the direction of influence.\",\n    \"concision\": \"Listing six features with 0.0000 values introduces unnecessary clutter that dilutes the informative content.\",\n    \"overall_quality\": \"Overall quality is poor due to uninformative zero-value padding, formatting ambiguity, and conflicting savings status indicators.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive categories ('savings_status_<100' and 'savings_status_no known savings') as active is logically inconsistent within this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:53:57.788430+00:00"
+}

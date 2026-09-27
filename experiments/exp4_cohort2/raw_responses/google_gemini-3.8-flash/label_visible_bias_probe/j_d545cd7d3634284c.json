@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d545cd7d3634284c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_719c3e5dafe19965_c5d25bb4565ad66b.txt",
+  "prompt_version": "c5d25bb4565ad66b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544650-1ij8CIAzPiYUneQ3lNQJ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00626625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00532875,
+        "upstream_inference_cost": 0.00626625,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2671
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Without feature thresholds, current values, or directional guidance, the explanation offers no actionable recourse for the applicant.\",\n    \"audit_usefulness\": \"While it isolates two features relevant to this false positive prediction, the absence of decision rule predicates and modest fidelity limit deeper auditing.\",\n    \"clarity\": \"Presenting binary weights (1.0000 vs 0.0000) without thresholds or direction makes it unclear to non-experts whether the numbers reflect importance, feature values, or rule conditions.\",\n    \"completeness\": \"The explanation indicates which two features are in the anchor but strips the actual rule boundaries and decision conditions, offering an incomplete local picture.\",\n    \"concision\": \"Listing eight zero-valued features creates unnecessary clutter rather than succinctly reporting only the active anchor conditions.\",\n    \"overall_quality\": \"The explanation suffers from stripped predicate details, unnecessary zero-weight padding, and a complete lack of actionable guidance.\",\n    \"semantic_plausibility\": \"Installment commitment and loan purpose are plausible drivers of credit risk, though the lack of condition values restricts full domain validation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:31:02.325749+00:00"
+}

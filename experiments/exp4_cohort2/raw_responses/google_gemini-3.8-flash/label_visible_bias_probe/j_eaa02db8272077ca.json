@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_99188a61b3de9ed4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_eaa02db8272077ca",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_99188a61b3de9ed4_3b12f9b1251b445a.txt",
+  "prompt_version": "3b12f9b1251b445a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544524-ULPsA3JQT6j0l4R3ltp2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 893,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 503,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0042945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00334875,
+        "upstream_inference_cost": 0.0042945,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2154
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_99188a61b3de9ed4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without counterfactual targets, thresholds, or concrete recourse steps for the applicant.\",\n    \"audit_usefulness\": \"It provides signed local SHAP attributions for the top 10 features, enabling auditors to see key model drivers, though actual feature values are omitted.\",\n    \"clarity\": \"The list of one-hot encoded variable names and numeric SHAP weights is technical and difficult for a lay reader to interpret.\",\n    \"completeness\": \"The top 10 local factors provide a broad overview of positive and negative drivers, but the lack of baseline value and instance feature values limits completeness.\",\n    \"concision\": \"The text presents the top contributors compactly with no filler or redundant phrasing.\",\n    \"overall_quality\": \"This is an acceptable technical feature attribution summary that serves diagnostic needs but lacks accessibility, actual feature values, and actionable guidance.\",\n    \"semantic_plausibility\": \"The identified features\u2014such as checking account status, credit amount, duration, and age\u2014are standard, plausible determinants in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:28:51.741431+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ef996af699826152",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_196e6ce035ebf3e3_8353ce8fdbe0c3a9.txt",
+  "prompt_version": "8353ce8fdbe0c3a9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542701-gMbR4HppjIQI0VsK7myM",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 705,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049785,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040275,
+        "upstream_inference_cost": 0.0049785,
+        "upstream_inference_prompt_cost": 0.000951
+      },
+      "is_byok": false,
+      "prompt_tokens": 1268,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2342
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without practical recourse or clear instructions on how the applicant could improve their outcome.\",\n    \"audit_usefulness\": \"It provides a clear ranking of signed feature contributions that allows an auditor to examine which factors pushed the model toward or away from approval.\",\n    \"clarity\": \"The list format using one-hot encoded variable names and technical contribution numbers is hard for non-experts to interpret without background knowledge.\",\n    \"completeness\": \"While the top ten drivers and directional influences are listed, the actual input values and baseline expectation are omitted.\",\n    \"concision\": \"The explanation is brief and directly communicates the top local factors without extraneous filler.\",\n    \"overall_quality\": \"It serves as an adequate technical summary of local feature importance for engineers, but lacks accessibility and actionable guidance.\",\n    \"semantic_plausibility\": \"The identified risk factors such as checking balance, savings, and credit amount are sensible domain drivers in credit scoring.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:29.817672+00:00"
+}

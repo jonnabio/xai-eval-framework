@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3a58b0f2a664b36b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4f96f4d65555df8d_70b23973ccdd3e93.txt",
+  "prompt_version": "70b23973ccdd3e93",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541813-zTwvQbT7651MwFI0I3TW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1273,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 854,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00571125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00477375,
+        "upstream_inference_cost": 0.00571125,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2523
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it omits feature values, thresholds, and directional effects needed to understand what changes would alter the outcome.\",\n    \"audit_usefulness\": \"An auditor can identify which features were included in the anchor rule, but the absence of specific predicate conditions and thresholds limits deep inspection of the model's false-negative error.\",\n    \"clarity\": \"The raw key-value format with binary weights (1.0000 vs 0.0000) is grammatically clean but unintuitive for non-experts who expect directional explanations or rules.\",\n    \"completeness\": \"While it indicates which features were active in the rule, it omits the actual decision boundaries and inequality conditions that define the local prediction space.\",\n    \"concision\": \"The summary is compact, though including features with zero importance adds slight unnecessary clutter.\",\n    \"overall_quality\": \"The explanation identifies relevant credit risk features, but the loss of rule predicates and directions substantially weakens its practical utility and interpretability.\",\n    \"semantic_plausibility\": \"The selected features, such as credit amount, duration, and checking status, are entirely plausible drivers of credit risk in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:42.696760+00:00"
+}
