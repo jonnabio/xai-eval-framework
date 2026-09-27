@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_851765e06c3dc4c7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_445412523328930a_774a6acc2fb3e57a.txt",
+  "prompt_version": "774a6acc2fb3e57a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542514-KiZNJQSfRQhOPjWyWzh8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002916,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.002916,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of local factors. A user cannot tell what to change or verify to affect the decision.\",\n    \"audit_usefulness\": \"It identifies several features associated with the prediction, which is somewhat useful for checking model behavior. However, it lacks directionality, feature values for the instance, and any reasoning about how the factors contributed to a false negative.\",\n    \"clarity\": \"The wording is simple, but the output is mostly a dense list of feature names with repeated 1.0000 values and no plain-language interpretation. A non-expert would struggle to understand what this means for the specific case.\",\n    \"completeness\": \"It names some potentially relevant features, but it omits the instance's actual values, the predicted class rationale, and why the model missed the positive label. The local decision context is therefore incomplete.\",\n    \"concision\": \"The explanation is fairly short, but it is not efficient because it repeats several checking_status and credit_history categories without adding interpretive value. It is compact but not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat stable and feature-focused, but it is not interpretable, actionable, or sufficiently specific to explain the false negative. Its utility is limited by the generic anchor-style listing without meaningful local context.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the German credit domain, and the explanation is not contradictory. Still, the repeated all-ones formatting and absence of instance-specific interpretation reduce its overall semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:16.619344+00:00"
+}

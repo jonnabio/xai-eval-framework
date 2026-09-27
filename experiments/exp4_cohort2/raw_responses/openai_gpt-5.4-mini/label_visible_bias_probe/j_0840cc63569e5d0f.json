@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0840cc63569e5d0f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e475cad54cb8d814_c731c25aad28fe2e.txt",
+  "prompt_version": "c731c25aad28fe2e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541493-GZXUZY62VlOrHYT3k9mU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030345,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.0030345,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or decision next steps. A user cannot tell what should be changed, by how much, or whether any changes are feasible.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the top local SHAP contributors and their directions, which helps inspect what drove the positive prediction. However, it lacks feature values, units, and comparison to a baseline, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The ranking of feature contributions is easy to read, and the sign convention is straightforward for a technical or moderately informed reader. For a non-expert, though, the meaning of positive and negative SHAP values is not explained, so it is only partly clear.\",\n    \"completeness\": \"The explanation covers the main local drivers of the prediction and gives a reasonable snapshot of feature influence. It does not provide the instance\u2019s actual feature values, baseline score, or an explicit link between these contributions and the final class, so the local decision context is incomplete.\",\n    \"concision\": \"The output is compact and focused on the most important features, without unnecessary narrative. It delivers useful information per word, though a small amount of additional context would improve interpretability.\",\n    \"overall_quality\": \"This is a solid local feature-attribution explanation that is reasonably informative and technically useful, but it is not especially accessible or actionable. Its main strengths are brevity and audit value; its main weakness is the lack of contextual detail needed for full understanding.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and their mixed positive/negative contributions are plausible for a random forest SHAP explanation. Nothing in the attribution pattern appears contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:16.689138+00:00"
+}

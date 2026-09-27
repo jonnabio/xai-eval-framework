@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7aad73493ae1e208",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ccbc751d89be60ef_bd1aafc7b9568738.txt",
+  "prompt_version": "bd1aafc7b9568738",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542401-VYSjErEVse3cobQBeQfH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00290475,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1523
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing features. It does not say which feature values could be changed or how they influenced the positive prediction.\",\n    \"audit_usefulness\": \"It gives a rough view of which features were considered, but the values are mostly binary-looking scores without clear interpretation. This limits its usefulness for checking whether the model relied on sensible breast-cancer factors or for diagnosing errors.\",\n    \"clarity\": \"The output is readable and the feature names are understandable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not know whether these are weights, rule satisfactions, or importances.\",\n    \"completeness\": \"It mentions a few top local factors, but it does not explain the decision threshold, the direction of influence, or the relative contribution of each factor. That leaves the local prediction context only partially understood.\",\n    \"concision\": \"The explanation is short and avoids unnecessary detail, which is a strength. However, the compactness comes partly from omitting interpretive information, so it is only moderately efficient in communicating useful insight.\",\n    \"overall_quality\": \"This is a minimal but usable anchor-style summary of local factors, with some value for inspection. Still, the lack of interpretation, directionality, and actionable guidance keeps it from being a strong explanation.\",\n    \"semantic_plausibility\": \"The highlighted features are medically plausible for breast cancer prediction, especially mean concave points, worst texture, radius, perimeter, and area. The pattern is broadly consistent with domain expectations even though the numeric encoding is unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:23.444535+00:00"
+}

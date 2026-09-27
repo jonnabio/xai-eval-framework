@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cc76feecaaffa486",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28188c86ac4bdfad_be08606449c7a18d.txt",
+  "prompt_version": "be08606449c7a18d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538780-EWU1IkvLQfV54RN1ygVh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028995,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021015,
+        "upstream_inference_cost": 0.0028995,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers only feature contributions and does not translate them into concrete steps a user could take to change the prediction. It gives no recourse guidance or decision-review advice.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the main local factors and their directions, which helps inspect whether the model relies on sensible attributes. However, the small weights and limited context make deeper error or bias analysis only partial.\",\n    \"clarity\": \"The output is short and mostly readable, but the feature-encoding style (for example, one-hot names and signed coefficients) requires some familiarity with tabular ML explanations. A non-expert would understand the general idea but not all details.\",\n    \"completeness\": \"It covers the top local contributors to the prediction and gives a reasonable sense of why the model predicted class 0. Still, it lacks a baseline comparison, probability, and any broader context about how strongly these factors outweighed others.\",\n    \"concision\": \"The explanation is compact and information-dense, with little redundancy. It communicates the main local factors in a small number of tokens.\",\n    \"overall_quality\": \"This is a decent local explanation: it is compact, plausible, and moderately useful for inspection, but it is limited by low interpretability for non-experts and the absence of actionable or probability information. Overall it is acceptable rather than excellent.\",\n    \"semantic_plausibility\": \"The listed factors are consistent with the Adult dataset and the signs are broadly plausible for a negative prediction, especially features like unmarried relationship and some service occupations. Nothing appears contradictory or implausible in the local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:02.979835+00:00"
+}

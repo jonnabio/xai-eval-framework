@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_de2bc97dfdbd33b5",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b2fb50fe3096e9d2_f86393be180318ed.txt",
+  "prompt_version": "f86393be180318ed",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539712-hzQvl8RZaeCgqT1k19Sc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 529,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00430125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00336375,
+        "upstream_inference_cost": 0.00430125,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2147
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Without specific rule thresholds or directional guidance, the user cannot know what values would maintain or change the credit decision.\",\n    \"audit_usefulness\": \"An auditor can identify which four features were selected in the anchor, but the absence of rule conditions severely restricts deep inspection.\",\n    \"clarity\": \"The explanation lists features with binary indicator weights rather than intuitive decision rules, making it obscure for non-experts.\",\n    \"completeness\": \"The output highlights the active variables but omits the actual rule intervals, precision, and coverage essential to an anchor explanation.\",\n    \"concision\": \"Several features with zero importance are included, unnecessarily padding the explanation.\",\n    \"overall_quality\": \"The presentation is low quality because stripping the rule conditions reduces an anchor to an uninformative binary feature list.\",\n    \"semantic_plausibility\": \"The selected active features\u2014duration, installment rate, checking account status, and housing\u2014are standard and plausible drivers of credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:39.156930+00:00"
+}

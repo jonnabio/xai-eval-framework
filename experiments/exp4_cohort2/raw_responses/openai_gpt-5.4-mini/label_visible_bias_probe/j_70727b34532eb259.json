@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3830b6d4d8e8784b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_70727b34532eb259",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3830b6d4d8e8784b_aedc1dd9056968e8.txt",
+  "prompt_version": "aedc1dd9056968e8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542139-cpGSlbXhUGo7HKw64tQ7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002997,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.002997,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3830b6d4d8e8784b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the user. It only lists local factors with binary indicator values, so a person cannot tell what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It offers limited audit value because it identifies a few features associated with the prediction, but the all-zero pattern for most features is not informative about model behavior. The very low stability further reduces confidence for inspection or debugging.\",\n    \"clarity\": \"The output is short and uses a simple list format, but the meaning of values like 1.0000 and 0.0000 is not explained. A non-expert would likely not understand how these numbers relate to the prediction.\",\n    \"completeness\": \"It names only two active factors and then pads the explanation with many zero-valued features, so it does not give a full local decision context. Important details such as direction of influence, thresholds, or how the factors combine are missing.\",\n    \"concision\": \"The explanation is relatively compact, but much of the content is low-value because it enumerates many features with zero contribution. It is concise in length, yet not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but not very interpretable, only partially useful for auditing, and gives little help in understanding why the model predicted class 0. Its low stability and sparse content further limit trustworthiness.\",\n    \"semantic_plausibility\": \"The highlighted adult-dataset factors are plausible for a logistic-regression prediction, especially education and occupation. However, the all-zero scores for unrelated features without explanation makes the output feel mechanistic rather than semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:01.697913+00:00"
+}

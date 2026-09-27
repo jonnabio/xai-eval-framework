@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3a542f1cdab168d9",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1de08b8c2918a436_63142a14b39d456a.txt",
+  "prompt_version": "63142a14b39d456a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548993-jWo7ddjq2jJkaKdqnvhs",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 644,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00497625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039825,
+        "upstream_inference_cost": 0.00497625,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2387
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation specifies which conditions formed the decision anchor, giving indirect hints on what factors matter, but offers no guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It reveals the specific combination of conditions (no checking account, low savings, real estate ownership) that led the model to a false positive prediction, providing solid insight for auditing model errors.\",\n    \"clarity\": \"The rule-like feature names and binary indicator weights are somewhat technical and formatted like raw output, though the feature meanings remain understandable.\",\n    \"completeness\": \"The three active anchor conditions that drive the rule are identified, though several irrelevant features with zero weights are also listed.\",\n    \"concision\": \"Listing seven irrelevant features with 0.0000 weights introduces unnecessary clutter to an otherwise compact three-factor anchor.\",\n    \"overall_quality\": \"Serviceable rule-based explanation that clearly identifies the anchor conditions behind a false positive decision, slightly degraded by zero-weight padding.\",\n    \"semantic_plausibility\": \"Real estate ownership is a sensible positive credit factor, though low savings combined with no checking account making up a positive prediction highlights a potential model flaw rather than sound domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:43:20.800400+00:00"
+}

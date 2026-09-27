@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_28fe2de0883f0604",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1759e90b50c033fd_d4ada202a3cabb32.txt",
+  "prompt_version": "d4ada202a3cabb32",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544116-u6k5IFF48vmkkhWNNqsE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1065,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 677,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049395,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00399375,
+        "upstream_inference_cost": 0.0049395,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2326
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature attribution weights without providing actionable steps or counterfactual guidance for changing the outcome.\",\n    \"audit_usefulness\": \"The signed SHAP values help an auditor identify which attributes drove this false positive prediction, though the absence of original feature values limits deeper technical debugging.\",\n    \"clarity\": \"The output is a technical list of one-hot encoded feature names and numeric SHAP scores, which requires statistical knowledge to interpret correctly.\",\n    \"completeness\": \"It provides the top ten positive and negative drivers of the decision, though it omits the base value and actual feature measurements.\",\n    \"concision\": \"The presentation is dense and efficient, presenting high-impact feature attributions without any conversational filler.\",\n    \"overall_quality\": \"While useful as a concise technical snapshot for auditing model behavior, the explanation lacks actionable recourse and accessible language for end users.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as checking account status, loan duration, and savings levels\u2014align logically with standard credit risk assessment principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:22:06.317521+00:00"
+}

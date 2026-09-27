@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_32435a284d5edbae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_19b944710e090900_36873c65d5805a6b.txt",
+  "prompt_version": "36873c65d5805a6b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547928-FLHhEK77ZOH4R1IyJSvo",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1628,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1191,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00710025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.006105,
+        "upstream_inference_cost": 0.00710025,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2955
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists directional weights for various features, providing only indirect hints about which attributes (like education or occupation) influence the outcome, without concrete thresholds or actionable steps.\",\n    \"audit_usefulness\": \"It provides useful visibility into the MLP's reliance on protected attributes like sex and marital status, which aids in fairness audits, though the lack of original feature values limits deeper error diagnosis.\",\n    \"clarity\": \"The output consists of raw one-hot encoded variable names and small floating-point coefficients, which are difficult for a non-technical audience to interpret without guidance.\",\n    \"completeness\": \"Ten local features and weights are provided, but the actual feature values for this instance and baseline prediction values are missing, leaving the local decision context incomplete.\",\n    \"concision\": \"The explanation is brief and dense, packing ten key feature attributions into a concise string without redundant text.\",\n    \"overall_quality\": \"A serviceable but basic local attribution summary that highlights key factors but suffers from low clarity, missing feature values, and moderate fidelity.\",\n    \"semantic_plausibility\": \"Negative weights for lower education levels and blue-collar occupations are believable, though having negative weights for both sex_Male and sex_Female and a negative weight for married-civ-spouse is somewhat confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:25:42.861398+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2b7f0960e24d0158",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8fce321dd80c84b7_45324a13a6777a92.txt",
+  "prompt_version": "45324a13a6777a92",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541893-7YSzZN5zr84daa1CmfR7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003042,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.003042,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1561
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists a few influential features, but it does not translate them into any concrete recourse or next steps for the applicant or reviewer. It is not specific enough to support a decision review or actionable intervention.\",\n    \"audit_usefulness\": \"It identifies which features were used locally by the anchor explanation, which is somewhat useful for checking model behavior. However, it lacks directionality, thresholds, and a narrative tying features to the positive prediction, limiting its value for deeper audit or error analysis.\",\n    \"clarity\": \"The output is short and uses simple feature names, so it is easy to read at a surface level. Still, the meaning of the 1.0000 and 0.0000 values is not explained, making it unclear to a non-expert what the explanation actually represents.\",\n    \"completeness\": \"Only a small subset of features is shown, and the explanation does not state why these factors support class 1 or how strongly they influenced the decision. It gives some local evidence, but not enough context to fully understand this specific prediction.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary detail, which is appropriate for a local explanation. However, the brevity comes at the cost of interpretability because it omits explanatory context.\",\n    \"overall_quality\": \"This is a modestly informative anchor summary, but it is too sparse and underexplained to be highly useful for a human decision review. It is acceptable as a technical local summary, yet not strong as an end-user explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible drivers in German credit data, especially duration, personal status, foreign worker status, and credit amount. Nothing in the explanation is obviously contradictory to the domain or the positive-class prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:55.892413+00:00"
+}

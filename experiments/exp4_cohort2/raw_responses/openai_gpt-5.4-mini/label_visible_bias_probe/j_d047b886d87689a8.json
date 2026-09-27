@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d047b886d87689a8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f18f76706d7aa678_bd035f16f68bfad9.txt",
+  "prompt_version": "bd035f16f68bfad9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541992-aSNRZ4h6PE0LUTEzGrpZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002955,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.002955,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or decision steps; it only lists feature names and weights. A user cannot tell what to change or verify next.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it exposes the features the anchor explanation relied on, but it lacks directional effects, thresholds, and context for why those features matter. The very low stability also limits trust for investigation.\",\n    \"clarity\": \"The output is terse and technically formatted, so a non-expert may not understand what the 1.0000 values mean or how the listed factors support the prediction. The mixture of one-hot encoded fields and raw attributes makes it harder to read.\",\n    \"completeness\": \"It identifies several local factors behind the positive prediction, but it does not explain how they combine, whether they are necessary or sufficient, or what the model\u2019s confidence is. Important contextual details for a specific decision are missing.\",\n    \"concision\": \"The explanation is short and avoids extended prose, but it is not especially information-dense because it repeats many feature indicators without interpretation. It is compact, though not maximally efficient in communicating meaning.\",\n    \"overall_quality\": \"Overall, the explanation is only modestly useful: it points to some relevant local features for a true positive prediction, but it is poorly interpretable and provides little actionable or diagnostic insight. Low stability further reduces its quality.\",\n    \"semantic_plausibility\": \"The listed features are broadly plausible for the Adult dataset and a positive income prediction, especially education, marital status, and relationship. However, the presence of one-hot indicators and raw numeric fields together without explanation makes the semantics somewhat awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:34.910532+00:00"
+}

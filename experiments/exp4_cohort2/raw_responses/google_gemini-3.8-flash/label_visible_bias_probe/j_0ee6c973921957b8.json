@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0ee6c973921957b8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3c34585b1d65d81e_29d70d5a1119e51c.txt",
+  "prompt_version": "29d70d5a1119e51c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541369-WUQHU40C1cL07r9MPXAe",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 621,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004647,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003705,
+        "upstream_inference_cost": 0.004647,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2244
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static feature weights without counterfactual guidance or actionable steps to alter the prediction.\",\n    \"audit_usefulness\": \"It exposes directional feature contributions and highlights sensitive attributes like sex, providing moderate utility for bias auditing.\",\n    \"clarity\": \"The raw list of one-hot encoded variable names and numeric coefficients requires technical literacy to interpret.\",\n    \"completeness\": \"While it lists the top ten local contributors, it omits the actual feature values for continuous variables and the overall base value.\",\n    \"concision\": \"The text is compact and directly presents the key weights without filler or unnecessary verbosity.\",\n    \"overall_quality\": \"It is an adequate raw local attribution summary, technically sound and domain-plausible but lacking consumer-facing interpretability and recourse.\",\n    \"semantic_plausibility\": \"The identified drivers, such as capital gains and marital status, align well with established socio-economic patterns in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:17.233449+00:00"
+}

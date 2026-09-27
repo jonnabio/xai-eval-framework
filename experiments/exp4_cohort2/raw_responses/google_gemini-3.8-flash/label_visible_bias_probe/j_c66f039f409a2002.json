@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c66f039f409a2002",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_778dd7d6e1653158_4a5c45ff9336fc93.txt",
+  "prompt_version": "4a5c45ff9336fc93",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542823-QxmZ5i7XQhmHH1OfQ0pt",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 733,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00508875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00415125,
+        "upstream_inference_cost": 0.00508875,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2357
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists attribution weights without stating current feature values or prescribing clear, actionable steps for recourse.\",\n    \"audit_usefulness\": \"It provides quantitative local attribution scores that allow an auditor to inspect model logic and identify sensitive attributes like sex influencing the prediction.\",\n    \"clarity\": \"The explanation is presented as a raw list of one-hot encoded feature names and numeric SHAP values, which requires technical literacy to interpret.\",\n    \"completeness\": \"The top ten drivers and their directional contributions are identified, though the baseline value and actual observed feature values are missing.\",\n    \"concision\": \"The presentation is compact and direct, listing the key factors without unnecessary verbosity.\",\n    \"overall_quality\": \"It offers an acceptable, technically sound local attribution summary for auditors, but lacks user-facing actionability and context.\",\n    \"semantic_plausibility\": \"The negative influences from factors such as demographic and employment variables are generally consistent with common domain patterns in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:32.396842+00:00"
+}

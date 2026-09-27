@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_95fa159fa26d7c3b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f18f76706d7aa678_bd035f16f68bfad9.txt",
+  "prompt_version": "bd035f16f68bfad9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543938-2gM5PmB3mmqP5EzG4KNH",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 841,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00557925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0046575,
+        "upstream_inference_cost": 0.00557925,
+        "upstream_inference_prompt_cost": 0.00092175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2471
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable paths or guidance because it merely displays binary indicators without feature values, directions, or thresholds.\",\n    \"audit_usefulness\": \"While it shows which features were selected, the absence of rule conditions combined with poor fidelity (0.59) and a high faithfulness gap severely limits audit utility.\",\n    \"clarity\": \"Presenting anchor rules as arbitrary 1.0000/0.0000 weights without relational operators or values is confusing to non-expert readers.\",\n    \"completeness\": \"The explanation lists active features but omits the actual predicate ranges and context required to understand why the prediction occurred.\",\n    \"concision\": \"The token length is compact, though including features with 0.0000 values adds unnecessary clutter.\",\n    \"overall_quality\": \"The explanation reduces an anchor rule to ambiguous binary scores with potential contradictions, resulting in weak explanatory power.\",\n    \"semantic_plausibility\": \"Simultaneously indicating active flags for conflicting categories such as 'workclass_Local-gov' and 'workclass_nan' strains semantic credibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:19:09.268147+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_abee113219b56689",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6d6ef32df0477323_9176e22b9d728fa7.txt",
+  "prompt_version": "9176e22b9d728fa7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539188-TnIL0vcyqbnad230Aua2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00291975,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give a user any concrete recourse or next steps. It only lists features and numeric values, without translating them into actionable changes or decision-review guidance.\",\n    \"audit_usefulness\": \"It provides some local feature information, which is useful for a basic audit, but the sparse and zero-heavy output makes it hard to inspect why the model predicted positive. It is only partially informative about the model's behavior on this instance.\",\n    \"clarity\": \"The text is readable and the feature names are recognizable, but the meaning of the numbers is not explained. A non-expert would not know what '5.0987' or the many 0.0000 entries imply for the prediction.\",\n    \"completeness\": \"It highlights only one meaningful factor and omits a coherent ranking or direction of influence for the prediction. The explanation is therefore too incomplete to fully understand this specific decision.\",\n    \"concision\": \"The explanation is short, but much of it is low-value repetition because many listed factors are zero. It is reasonably compact, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak local explanation: it is sparse, only partially interpretable, and not very helpful for understanding the positive prediction. It has some audit value, but overall it does not provide a satisfying explanation of the model decision.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult income task, especially education and race-related features. However, the many zero-valued entries and lack of directionality make the explanation feel only moderately coherent as an account of this specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:59:52.453685+00:00"
+}

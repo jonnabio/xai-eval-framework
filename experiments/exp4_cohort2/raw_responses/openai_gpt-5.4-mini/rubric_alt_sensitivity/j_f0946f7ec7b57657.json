@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_af2a9f1c15262b41",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f0946f7ec7b57657",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_af2a9f1c15262b41_9f5121e643d28d07.txt",
+  "prompt_version": "9f5121e643d28d07",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543790-2AqVz1u4uy7vmrgHmw2O",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 377,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025485,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016965,
+        "upstream_inference_cost": 0.0025485,
+        "upstream_inference_prompt_cost": 0.000852
+      },
+      "is_byok": false,
+      "prompt_tokens": 1136,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1513
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_af2a9f1c15262b41\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not explain what changes would move the prediction, only lists feature values.\",\n    \"audit_usefulness\": \"The output is too raw and unclear to support much auditing beyond noting which features appear, and the zeros do not explain the decision logic.\",\n    \"clarity\": \"A non-technical reader would likely not understand why some features are shown as 1.0000 or 0.0000 or what these numbers mean.\",\n    \"completeness\": \"It names a couple of possible anchor features but gives no actual rule, threshold, or directionality, so the local decision is not explained.\",\n    \"concision\": \"It is short, but much of the content is uninformative repeated zeros, so the useful information density is low.\",\n    \"overall_quality\": \"This is a weak explanation: it hints at relevant features, but it lacks a human-readable decision rule and offers little insight into the model's reasoning.\",\n    \"semantic_plausibility\": \"For breast cancer data, area error and worst texture can plausibly matter, but the presentation as plain 1.0000/0.0000 values is not semantically informative for the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:16:33.232492+00:00"
+}

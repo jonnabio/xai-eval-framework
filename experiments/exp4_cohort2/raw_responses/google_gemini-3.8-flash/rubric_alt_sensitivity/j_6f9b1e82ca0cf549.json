@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6f9b1e82ca0cf549",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_31247e881a13bce1_7ed957cf8b628973.txt",
+  "prompt_version": "7ed957cf8b628973",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549068-nkQticmSBLvCktMohC8n",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1073,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 682,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005019,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00402375,
+        "upstream_inference_cost": 0.005019,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2400
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without specifying current feature values or clear thresholds required to flip the prediction.\",\n    \"audit_usefulness\": \"It gives auditors useful visibility into model weights, revealing the influence of protected attributes like sex and marital status as well as potential artifacts from one-hot encoding.\",\n    \"clarity\": \"The list of one-hot encoded feature names with decimal coefficients is technical and difficult for a layperson to interpret without background knowledge.\",\n    \"completeness\": \"It provides the top 10 local factors driving the surrogate decision, but lacks the actual values of the instance and baseline reference information.\",\n    \"concision\": \"The summary is compact and dense, presenting the top weights directly without superfluous text.\",\n    \"overall_quality\": \"Serviceable but weak overall due to ungrounded one-hot indicators, low fidelity metrics, and lack of intuitive readability for non-experts.\",\n    \"semantic_plausibility\": \"The directions of the weights generally align with domain knowledge regarding income, though mutually exclusive one-hot categories appear together without context.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:44:38.078051+00:00"
+}

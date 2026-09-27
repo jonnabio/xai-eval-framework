@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_02f8f7afe7c22c5c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_49b4fcf4bf2d7761_9d473b8dcca25f25.txt",
+  "prompt_version": "9d473b8dcca25f25",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546823-d14lNz4YOMVhk1zFNWPs",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004049,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002755,
+        "upstream_inference_cost": 0.004049,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1845
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A person denied credit would not know what to modify (e.g., improve credit history, increase savings, reduce loan duration).\",\n    \"audit_usefulness\": \"The raw importance scores help identify which features drove the prediction, but the low fidelity (0.048) and moderate faithfulness_gap (0.06) suggest the explanation may not reliably represent the model's actual decision logic. Limited utility for bias detection without context.\",\n    \"clarity\": \"The format is technical with feature names and numerical scores. Non-technical users would struggle to interpret what 'checking_status_<0: 1.0000' means or why these specific thresholds matter in credit decisions.\",\n    \"completeness\": \"Only three features are highlighted as important (age, checking_status, credit_history), while seven others are marked 0.0000. This sparse coverage may miss important interactions or secondary factors that contributed to the false positive prediction.\",\n    \"concision\": \"The explanation is compact at 75 tokens, but the list format with many zero-valued features is somewhat redundant. Could be tighter by omitting features with zero importance.\",\n    \"overall_quality\": \"The explanation identifies some relevant factors but suffers from poor fidelity metrics, lacks actionability, and is difficult for non-experts to interpret. It provides limited insight into why the model made a false positive error.\",\n    \"semantic_plausibility\": \"The highlighted factors (age, checking account status, credit history) are plausible credit risk indicators in the domain. However, the false positive prediction (predicting good credit when true label is bad) raises questions about whether these factors were correctly weighted or if the model has learned spurious patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:07:09.134135+00:00"
+}

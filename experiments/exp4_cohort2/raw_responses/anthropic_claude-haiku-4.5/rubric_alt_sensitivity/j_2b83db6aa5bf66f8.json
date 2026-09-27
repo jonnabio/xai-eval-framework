@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89444d28efe2ceee",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2b83db6aa5bf66f8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_89444d28efe2ceee_50904a2bf8da68bc.txt",
+  "prompt_version": "50904a2bf8da68bc",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547339-qVink9T3bAU5emMfwtm1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004082,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0028,
+        "upstream_inference_cost": 0.004082,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1842
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_89444d28efe2ceee\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features matter (worst texture and worst perimeter) but provides no guidance on what values would change the outcome or what actions could be taken. It is purely descriptive of the current decision.\",\n    \"audit_usefulness\": \"The sparse feature importance weights (only 2 of 10 features with non-zero weights) help identify which features drove this prediction, useful for bias checking. However, the low fidelity (0.089) and stability (0.348) metrics suggest the explanation may not reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is straightforward: feature names with importance weights. However, without domain context, a non-expert may not understand what 'worst texture' or 'worst perimeter' mean clinically or why they matter for cancer classification.\",\n    \"completeness\": \"The explanation covers only the top 2 anchoring features out of 10 total features. While these are identified as most important, the explanation lacks information about feature values, thresholds, or how they interact to produce the malignant prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line conveys a feature and its weight efficiently, though the list of zero-weighted features adds some padding.\",\n    \"overall_quality\": \"The explanation is serviceable but limited. It correctly identifies key features for a true positive case, but weak technical metrics (low fidelity and stability), lack of actionability, and incomplete reasoning about the decision reduce its utility.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and perimeter measurements are clinically relevant features for distinguishing malignant from benign tumors. The focus on 'worst' values (maximum measurements) aligns with domain knowledge that extreme morphological features indicate malignancy.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:15:45.495011+00:00"
+}

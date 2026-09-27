@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_70bcdb8805e8211b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_959ed027a5ab7370_e0dc6f1f4af1e066.txt",
+  "prompt_version": "e0dc6f1f4af1e066",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539347-vGMnydYlsO1WeTshS38i",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 731,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0051765,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042375,
+        "upstream_inference_cost": 0.0051765,
+        "upstream_inference_prompt_cost": 0.000939
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2382
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance, as it omits feature thresholds and directional effects entirely.\",\n    \"audit_usefulness\": \"While an auditor can identify which features the explainer included in the local rule, the lack of predicate values and decision boundaries severely limits debugging or bias assessment.\",\n    \"clarity\": \"The list format is readable, but presenting anchor rules as raw binary weights (1.0000 and 0.0000) makes the intended decision logic opaque to non-experts.\",\n    \"completeness\": \"The explanation omits the actual feature values and rule predicates, failing to provide the full local conditions governing the prediction.\",\n    \"concision\": \"Listing features with zero weights adds unnecessary clutter rather than highlighting only the active rule conditions.\",\n    \"overall_quality\": \"The explanation is mediocre because the underlying Anchor rule predicates have been reduced to binary feature indicators, limiting interpretability and practical utility.\",\n    \"semantic_plausibility\": \"The selected active factors\u2014such as duration, credit amount, and checking account status\u2014align well with established credit risk evaluation principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:37.198458+00:00"
+}

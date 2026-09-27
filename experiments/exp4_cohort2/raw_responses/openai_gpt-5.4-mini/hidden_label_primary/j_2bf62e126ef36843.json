@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2bf62e126ef36843",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cd6abd1a9433542b_de756704398a0758.txt",
+  "prompt_version": "de756704398a0758",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539449-CZEqh7PWaj32vkvlcj4r",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002892,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021015,
+        "upstream_inference_cost": 0.002892,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It only lists local factors and weights, without translating them into actionable guidance.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which features DICE considered locally relevant, but the very sparse and zero-heavy output limits deeper inspection. It does not explain counterfactual directions or how the model would respond to feature changes.\",\n    \"clarity\": \"The list format is easy to scan, and the feature names are mostly understandable. However, the meaning of the numbers is not explained, so a non-expert would not know how to interpret the weights.\",\n    \"completeness\": \"It covers only a small subset of local factors and omits the actual counterfactual changes needed to alter the prediction. As a result, it gives only partial decision context for this specific instance.\",\n    \"concision\": \"The explanation is short and compact, with little redundancy. However, its brevity comes at the cost of limited informative content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and somewhat readable, but it lacks actionable counterfactuals and provides limited insight into the model's decision. The technical signals also suggest low fidelity and sparsity, which further reduce quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, especially occupation and country of origin, and the output structure is consistent with a local explanation summary. Still, the dominance of a single feature with a value of 1.0 and several zeros makes the explanation feel underdeveloped.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:13.635322+00:00"
+}

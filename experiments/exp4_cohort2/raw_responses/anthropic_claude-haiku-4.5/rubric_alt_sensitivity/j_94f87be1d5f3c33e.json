@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56b2fc0abd88017e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_94f87be1d5f3c33e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_56b2fc0abd88017e_d862eadc682ddf21.txt",
+  "prompt_version": "d862eadc682ddf21",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545554-Reb58BsYlOqMOK5j2WLS",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004118,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00282,
+        "upstream_inference_cost": 0.004118,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1862
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_56b2fc0abd88017e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user would not know whether to reduce credit amount, change checking status, or take other steps to alter the decision.\",\n    \"audit_usefulness\": \"SHAP contributions enable auditors to see which features drove the prediction and their direction/magnitude. However, the low fidelity (0.357) raises concerns about whether these explanations accurately represent the model's actual decision boundary, limiting audit confidence.\",\n    \"clarity\": \"The format is technical (feature names with SHAP values) and assumes familiarity with SHAP methodology and feature encoding. Non-technical stakeholders would struggle to interpret what 'checking_status_no checking: -0.0725' means in practical terms.\",\n    \"completeness\": \"Ten features are listed with their contributions, covering the main drivers. However, the low fidelity score (0.357) suggests the explanation may not fully capture the model's decision logic, and no base value or prediction probability context is provided.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line conveys a feature and its SHAP value efficiently without padding, though domain knowledge is required to extract meaning.\",\n    \"overall_quality\": \"The explanation is serviceable but limited by low fidelity (0.357), lack of actionability, and technical presentation. It provides some insight into feature importance but raises questions about whether it truly reflects the model's reasoning. The true positive prediction is correct, but the explanation's reliability is questionable.\",\n    \"semantic_plausibility\": \"The factors align with credit risk intuition (no checking account and new car purchase are negative signals; savings and credit amount are positive). However, the low fidelity undermines confidence that these contributions genuinely reflect the model's logic rather than post-hoc rationalization.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:46:00.920390+00:00"
+}

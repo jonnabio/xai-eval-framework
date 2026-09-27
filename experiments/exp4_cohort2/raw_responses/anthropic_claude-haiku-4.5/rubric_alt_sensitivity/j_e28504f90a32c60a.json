@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e28504f90a32c60a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_07f7eab6526a79eb_9c33bcafcff2a0c3.txt",
+  "prompt_version": "9c33bcafcff2a0c3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545327-QDMrkdC9P8lV1aYnm2UZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003822,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002525,
+        "upstream_inference_cost": 0.003822,
+        "upstream_inference_prompt_cost": 0.001297
+      },
+      "is_byok": false,
+      "prompt_tokens": 1297,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1802
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person would not know whether to change marital status, work hours, or other attributes to alter the prediction.\",\n    \"audit_usefulness\": \"The feature weights and directions are useful for auditing, but the poor fidelity (0.64) and large faithfulness gap (0.70) suggest the explanation may not accurately represent the model's actual decision logic, limiting audit reliability.\",\n    \"clarity\": \"The format is technical (feature names with coefficients) and requires understanding of LIME, feature encoding, and the adult dataset schema. Non-technical readers would struggle to interpret the meaning.\",\n    \"completeness\": \"Ten features are listed, covering major predictors for income classification. However, the low fidelity indicates the local approximation may miss important aspects of the actual decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting features and weights efficiently without padding.\",\n    \"overall_quality\": \"This is a false positive case with poor technical metrics (fidelity 0.64, faithfulness gap 0.70, negative stability). While the format is standard LIME output, the low fidelity undermines confidence in the explanation's validity for this instance.\",\n    \"semantic_plausibility\": \"The features and their directions align with domain knowledge about income prediction (marital status, hours worked, education, sex are known predictors). However, the false positive prediction itself suggests model error, and the poor fidelity raises questions about whether the explanation reflects the actual decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:42:12.997962+00:00"
+}

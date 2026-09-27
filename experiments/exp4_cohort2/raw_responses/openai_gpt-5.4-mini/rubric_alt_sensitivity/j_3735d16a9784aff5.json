@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3735d16a9784aff5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_75520768088e5528_cf1189e92436e6ab.txt",
+  "prompt_version": "cf1189e92436e6ab",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542932-XTYsp02kkPZFVD8qOaYc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 383,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002577,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017235,
+        "upstream_inference_cost": 0.002577,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists feature contributions but does not say what changes would likely flip the prediction or how to act on the result.\",\n    \"audit_usefulness\": \"The top SHAP factors give a useful local view of the model\u2019s drivers, but the explanation is only moderate because it lacks direction on the FN decision and deeper context.\",\n    \"clarity\": \"The output is straightforward and uses familiar feature names, though the SHAP values and encoded feature labels still require some technical knowledge.\",\n    \"completeness\": \"It identifies several local factors, but it does not explain the overall decision logic, the dominant negative reasons for the false negative, or how these factors combine.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with a short list of the most important local features.\",\n    \"overall_quality\": \"Useful as a quick local summary, but limited by modest fidelity, low sparsity/stability, and the lack of a coherent narrative for why the model predicted class 0 on a positive case.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset and the directions are generally believable, though the mix of positive and negative contributions is not fully interpretable without more context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:14.683501+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3a45cc7b9f72791f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c3a6d29157145c8e_df49bf5fa851105b.txt",
+  "prompt_version": "df49bf5fa851105b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545167-fGaajiLmvOeeEDl8Bcaa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003939,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002665,
+        "upstream_inference_cost": 0.003939,
+        "upstream_inference_prompt_cost": 0.001274
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1807
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken. A clinician or patient cannot determine what changes to measurements or interventions would alter the outcome.\",\n    \"audit_usefulness\": \"SHAP values with feature importance scores help auditors understand which features drove the prediction and can support bias investigation. However, the lack of direction or threshold information limits deeper investigation of model behavior.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and numerical scores. While technically clear, it requires domain knowledge to understand what 'worst area' or 'mean concave points' represent in clinical context.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, which covers the main drivers of this prediction. However, it lacks context about feature values, thresholds, or how these features interact to produce the malignancy classification.\",\n    \"concision\": \"The explanation is compact and efficiently formatted as a ranked list. Each entry contains only essential information (feature name and score), with no redundancy.\",\n    \"overall_quality\": \"This is a serviceable but basic explanation. It correctly identifies important features and the model prediction is correct (TP). However, it lacks actionability, clinical context, and deeper insight into the decision logic. The moderate fidelity (0.799) and notable faithfulness gap (0.32) suggest some explanatory limitations.\",\n    \"semantic_plausibility\": \"The features listed (area, perimeter, radius, concave points, texture) are standard breast cancer diagnostic measurements. Their importance for malignancy classification is medically plausible, though the explanation doesn't confirm whether high or low values drove the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:32.807753+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_24af31948ff2f88e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6d6ef32df0477323_50d7cd020c5a783e.txt",
+  "prompt_version": "50d7cd020c5a783e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543366-dIcVIOz2V8DU5PYJnH07",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1133,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 741,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00518175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00424875,
+        "upstream_inference_cost": 0.00518175,
+        "upstream_inference_prompt_cost": 0.000933
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2377
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the direction of change or a concrete counterfactual target, and perturbing protected attributes like race is not actionable.\",\n    \"audit_usefulness\": \"It highlights that education-num and race_Other are the primary drivers of the counterfactual shift, which helps identify potential demographic sensitivities in this false positive prediction.\",\n    \"clarity\": \"The raw key-value list contains unformatted technical feature names and decimal values that require domain familiarity to interpret properly.\",\n    \"completeness\": \"The output only lists feature shift magnitudes without baseline feature values, target values, or directional signs needed to understand the full decision boundary.\",\n    \"concision\": \"Including multiple features with 0.0000 values adds visual clutter without providing meaningful information.\",\n    \"overall_quality\": \"Presenting counterfactual output as a raw list of feature differences reduces its practical utility, though it still conveys the primary active features.\",\n    \"semantic_plausibility\": \"Education is standardly a dominant driver of income predictions, making its high weight plausible despite questionable perturbation of race.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:36.587330+00:00"
+}

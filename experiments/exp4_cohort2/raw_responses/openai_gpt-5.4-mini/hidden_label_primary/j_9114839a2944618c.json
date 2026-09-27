@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9114839a2944618c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_679cae8cfc0b290c_0d12b36368296bf2.txt",
+  "prompt_version": "0d12b36368296bf2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539960-uy2xfMmoBibAYuqE9Auv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.00295575,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate what changes would alter the prediction. It only lists local factors with mostly zero values, so a user cannot use it to act on the outcome.\",\n    \"audit_usefulness\": \"It offers limited audit value because it names one influential feature, education-num, but gives no direction of effect, comparison baseline, or meaningful feature contributions. The near-all-zero list makes it hard to inspect model behavior or detect bias.\",\n    \"clarity\": \"The wording is simple, but the content is not very interpretable because most listed factors are zero and no narrative explains what the numbers mean. A non-expert would struggle to understand why the model predicted class 1.\",\n    \"completeness\": \"It captures only a tiny slice of the local decision context, essentially just education-num with other features suppressed to zero. Missing effect direction and substantive feature contributions makes it insufficient to understand this specific prediction.\",\n    \"concision\": \"The explanation is short, but much of the length is wasted on irrelevant zero-valued factors. It is compact, yet not informative enough per word to be considered highly concise.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is minimally readable and stable, but it lacks substantive local insight, recourse guidance, and audit-ready detail. The sparse zero-heavy format makes it only marginally useful for understanding the prediction.\",\n    \"semantic_plausibility\": \"The emphasis on education-num is plausible for the Adult income task, since education is often predictive. However, listing many unrelated features at exactly zero without interpreting their relevance makes the explanation feel mechanically generated rather than semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:44.444446+00:00"
+}

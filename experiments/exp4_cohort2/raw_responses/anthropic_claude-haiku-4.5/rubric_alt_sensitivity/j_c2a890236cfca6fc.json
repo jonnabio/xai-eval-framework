@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c2a890236cfca6fc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_4bcf426ccc95842c.txt",
+  "prompt_version": "4bcf426ccc95842c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544399-87KcyhOuAYob1Ol1itqD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 592,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004249,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00296,
+        "upstream_inference_cost": 0.004249,
+        "upstream_inference_prompt_cost": 0.001289
+      },
+      "is_byok": false,
+      "prompt_tokens": 1289,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1881
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome. A clinician or patient would not know what interventions might alter the prediction from malignant to benign.\",\n    \"audit_usefulness\": \"The SHAP values reveal which features drove the prediction, useful for model debugging. However, the false negative (predicted benign when truly malignant) combined with moderate fidelity (0.754) and large faithfulness gap (0.402) raises concerns about whether the explanation faithfully represents the model's actual decision boundary.\",\n    \"clarity\": \"The explanation is presented as a technical list of feature names and numerical SHAP values. Non-technical stakeholders would struggle to interpret what 'worst area: -0.1336' means or why these specific measurements matter for cancer diagnosis.\",\n    \"completeness\": \"The explanation covers the top 10 features by magnitude, capturing the main drivers. However, it lacks context about feature interactions, the base prediction rate, or why certain morphological features are pushing toward a benign classification when the true label is malignant.\",\n    \"concision\": \"The format is compact with minimal padding. Each entry contains only the feature name and value, making efficient use of space without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a weak explanation. While technically sound as a SHAP output, it fails to provide actionable insights, lacks domain context, and the false negative error combined with moderate technical metrics suggests the explanation may not fully capture why the model made this critical misclassification.\",\n    \"semantic_plausibility\": \"The features listed (area, perimeter, radius, texture, concavity, symmetry) are medically relevant to tumor classification. However, the pattern of negative contributions from 'worst area' and 'worst perimeter' pushing toward benign is counterintuitive\u2014larger, more irregular tumors typically suggest malignancy, making the explanation's direction questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:26:45.730499+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_36dc1a96c402a1c8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1759e90b50c033fd_d43df75543040d2f.txt",
+  "prompt_version": "d43df75543040d2f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543405-g6tvt5twOkorMiZAShRV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 372,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025335,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001674,
+        "upstream_inference_cost": 0.0025335,
+        "upstream_inference_prompt_cost": 0.0008595
+      },
+      "is_byok": false,
+      "prompt_tokens": 1146,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential factors and their directions, but it does not translate them into concrete steps that would plausibly change the loan decision.\",\n    \"audit_usefulness\": \"The top SHAP factors give useful insight into which features drove the prediction and can support model inspection, but the explanation is only for one case and does not expose broader bias patterns.\",\n    \"clarity\": \"The feature names are mostly readable, but understanding their meaning requires some familiarity with credit data and SHAP sign conventions.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, but it does not explain the full decision logic, interactions, or why these factors outweighed others in this false positive case.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious filler.\",\n    \"overall_quality\": \"As a local feature ranking it is useful and fairly concise, but it is only moderately complete and not very actionable for a user trying to understand or contest the decision.\",\n    \"semantic_plausibility\": \"The cited credit-related factors are generally plausible for German credit scoring, and the feature directions look consistent with a model explanation for this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:07.239397+00:00"
+}

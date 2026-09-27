@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_802f81a0693ef3c5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_60730b2d1280bac2_3db610f8e438481a.txt",
+  "prompt_version": "3db610f8e438481a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541291-cZznIK6s3BYILMD1fJJh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031635,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023625,
+        "upstream_inference_cost": 0.0031635,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1593
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists a few positive and negative local factors, but it does not translate them into specific recourse steps or tell the user what could be changed to alter the prediction. It offers no concrete next actions beyond naming influential features.\",\n    \"audit_usefulness\": \"For an auditor, the feature attributions provide a basic view of which inputs pushed the prediction up or down, which is useful for a quick sanity check. However, the low fidelity and stability metrics limit confidence in using it for deeper model-behavior investigation.\",\n    \"clarity\": \"The explanation is short and uses a simple ranked list format that is easy to scan. A non-expert may still struggle with encoded feature names like workclass_Self-emp-inc and the meaning of positive versus negative contributions, but the overall structure is understandable.\",\n    \"completeness\": \"It includes several of the main local drivers for the positive prediction, such as capital-gain, relationship, occupation, education, and marital status. Still, it does not give the prediction score, baseline, or enough context to fully reconstruct why the model predicted class 1.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, conveying multiple local factors in a small number of tokens. It is appropriately brief for a local explanation while still listing several relevant contributors.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is readable, compact, and broadly plausible, but it lacks actionable guidance and is weakened by the poor technical quality signals. Overall it supports a quick glance rather than a robust understanding of the decision.\",\n    \"semantic_plausibility\": \"The highlighted factors are consistent with the Adult dataset and with common income-related patterns, where education, occupation, capital gain, and marital status often matter. The mix of positive and negative contributions also fits a real local explanation, even if some encoded categories are not self-explanatory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:53.683112+00:00"
+}

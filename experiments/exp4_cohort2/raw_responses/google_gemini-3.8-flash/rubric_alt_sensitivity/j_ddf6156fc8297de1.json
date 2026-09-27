@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ddf6156fc8297de1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e9045d4d8fa6e21_d35ef0416e0dc96f.txt",
+  "prompt_version": "d35ef0416e0dc96f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549525-Uvk7nDAE2AJHKOL2N7ZY",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1022,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 636,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048255,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0038325,
+        "upstream_inference_cost": 0.0048255,
+        "upstream_inference_prompt_cost": 0.000993
+      },
+      "is_byok": false,
+      "prompt_tokens": 1324,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2346
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs a feature weight score rather than a clear counterfactual instruction, and marital status is not a readily actionable attribute.\",\n    \"audit_usefulness\": \"It highlights that the model's false positive prediction was heavily driven by marital status, providing some insight into demographic bias in the logistic regression model.\",\n    \"clarity\": \"It uses raw feature names with one-hot encoding syntax and numerical values that lack intuitive interpretation for a layperson.\",\n    \"completeness\": \"Only a single factor has a non-zero value, leaving out any other potential contributing features or contextual details about the decision boundary.\",\n    \"concision\": \"Most of the text consists of features assigned zero values, which adds unnecessary clutter.\",\n    \"overall_quality\": \"The explanation weakly repurposes counterfactual data into sparse scores dominated by zeros, offering minimal actionable or clear insight.\",\n    \"semantic_plausibility\": \"Marital status (Married-civ-spouse) is well-documented as a strong positive predictor of high income in the Adult census dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:52:13.602189+00:00"
+}

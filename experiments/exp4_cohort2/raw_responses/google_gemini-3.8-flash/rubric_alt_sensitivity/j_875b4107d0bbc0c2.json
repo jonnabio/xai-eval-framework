@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_875b4107d0bbc0c2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f4658b35cc204bfb_452042e63b750a41.txt",
+  "prompt_version": "452042e63b750a41",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548871-fP345CuenWtG0QyQexVU",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1192,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 784,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00545775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00447,
+        "upstream_inference_cost": 0.00545775,
+        "upstream_inference_prompt_cost": 0.00098775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1317,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2509
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable demographic features like native country and provides only static importance values without specifying target values or counterfactual changes.\",\n    \"audit_usefulness\": \"Highlighting native-country_Honduras as the dominant factor for a false positive prediction offers useful insight for an auditor looking into bias or spurious demographic correlations.\",\n    \"clarity\": \"The list of feature weights is relatively easy to parse, though interpreting what the 0.0 to 0.9 scale means in the context of counterfactuals requires technical background.\",\n    \"completeness\": \"Only two non-zero features are presented, and the output omits feature values, change directions, or counterfactual alternatives.\",\n    \"concision\": \"While short, a substantial portion of the output is taken up by features with zero weights.\",\n    \"overall_quality\": \"The explanation reduces counterfactual analysis to bare weights with poor fidelity, omitting actionable guidance and showing questionable semantic drivers.\",\n    \"semantic_plausibility\": \"Attributing the model's high-income prediction predominantly to native-country_Honduras is dubious from a domain standpoint, likely highlighting a model artifact or bias.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:41:21.737920+00:00"
+}

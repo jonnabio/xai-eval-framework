@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_99cc51ce2b4f4baa",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f75792557c566daf_52e4af63df8ebed1.txt",
+  "prompt_version": "52e4af63df8ebed1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538468-JhsUAAS1L7VVCSgBWA1E",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00291375,
+        "upstream_inference_prompt_cost": 0.00078075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1041,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1515
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse, thresholds, or next steps a user could take. It is useful for reflection, but not for action planning.\",\n    \"audit_usefulness\": \"It provides a ranked set of local feature contributions, which helps inspect what drove the model\u2019s decision. However, without baseline values, feature directions in context, or comparison to similar cases, it only partially supports audit work.\",\n    \"clarity\": \"The output is short and easy to scan for a technical reader, and the feature names are standard in this dataset. Still, a non-expert may not understand what the SHAP numbers mean or how positive and negative values affect the prediction.\",\n    \"completeness\": \"It covers the top local factors, but it does not explain the model output in terms of an overall decision summary, feature values for the instance, or how much each factor moved the prediction. The missing context limits full understanding of this specific false positive.\",\n    \"concision\": \"The explanation is compact and contains only the main local contributors, with little redundant wording. It is efficient, though somewhat terse for a complete explanation.\",\n    \"overall_quality\": \"Overall, this is a fairly solid local explanation: readable, compact, and informative about the model\u2019s top drivers. Its main weakness is the lack of contextual interpretation and actionable guidance, which keeps it from being excellent.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and SHAP-style positive/negative contributions are plausible and consistent with the domain and model family. The mixture of positive and negative contributions also makes sense for a local explanation of a random forest classifier.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:51.170359+00:00"
+}

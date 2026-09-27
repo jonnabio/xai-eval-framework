@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9bd90dd216fabeda",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_5169d5420efbc3da_376622d3ddc4405a.txt",
+  "prompt_version": "376622d3ddc4405a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539487-hiMRToEFsqk8339w3sAW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.00301125,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1545
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete next step or recourse, and it only lists factors with zero/one weights. A user cannot tell what to change or verify to influence the prediction.\",\n    \"audit_usefulness\": \"It has limited audit value because it provides almost no interpretable local reasoning beyond two seemingly active features and several zero-valued ones. There is not enough detail to inspect model behavior or diagnose why this specific false negative occurred.\",\n    \"clarity\": \"The output is terse and technically formatted, but it is not readily understandable to a non-expert because the values are unexplained and the feature list lacks context. The meaning of the 1.0000 and 0.0000 entries is unclear without knowing the Anchors semantics.\",\n    \"completeness\": \"It identifies only two apparently influential features and then lists irrelevant zeros, which is insufficient to explain the specific prediction well. Key local context such as direction of influence, threshold conditions, and relation to the negative prediction is missing.\",\n    \"concision\": \"The explanation is short, but much of its content is low-value padding in the form of zero-scored features. It is not especially information-dense given the limited usefulness of the numbers provided.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is compact but minimally interpretable, not actionable, and only partially informative about the model's decision. It offers some local signal, but not enough to support a meaningful understanding of the false negative.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for Adult-income data, especially education and occupation. However, the presentation of many zero-valued features without interpretation makes the explanation feel only loosely aligned with a coherent decision rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:51.275177+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_67f80ef4512c4ad2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_81c9024ae418939e_46d6d7790a288007.txt",
+  "prompt_version": "46d6d7790a288007",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540205-4UFsoicRDeOuK65Lr9ev",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.00298575,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps, so a user cannot act on it. It only lists factors with binary-like weights, without indicating how changing them would affect the outcome.\",\n    \"audit_usefulness\": \"It gives a limited view of which features were involved, but the values are too sparse and oddly encoded to support strong auditing. The near-zero importance values and lack of directionality make it hard to investigate model behavior or bias.\",\n    \"clarity\": \"The text is short and machine-readable, but not readily understandable to a non-expert because it uses technical feature names and unexplained numeric scores. The meaning of the 1.0000 and 0.0000 values is not made explicit.\",\n    \"completeness\": \"It names only a couple of local factors and omits how they combine to produce the negative prediction, especially for this false-negative case. There is no contextual explanation of why the model rejected the positive class.\",\n    \"concision\": \"The explanation is compact and avoids lengthy prose, but it is so terse that it loses useful interpretability. It provides only a minimal list of features with little explanatory content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat structured, but it is not very understandable, actionable, or informative about the specific decision. Its main value is as a partial feature listing rather than a genuine local explanation.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset, especially age and marital/relationship status. However, the presentation of perfect 1.0 and 0.0 scores for features as 'top local factors' is awkward and not fully convincing as a human explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:49.826439+00:00"
+}

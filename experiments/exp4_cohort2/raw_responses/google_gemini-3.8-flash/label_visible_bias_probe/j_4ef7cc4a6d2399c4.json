@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4ef7cc4a6d2399c4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_de938d5223748d7d_3bc12c875f9f9897.txt",
+  "prompt_version": "3bc12c875f9f9897",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545521-SGTxStjj5KonwPjz2k5T",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 727,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00530925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00439125,
+        "upstream_inference_cost": 0.00530925,
+        "upstream_inference_prompt_cost": 0.000918
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2395
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no recourse, clinical pathways, or actionable guidance on how feature adjustments would alter the prediction.\",\n    \"audit_usefulness\": \"While an auditor can see that mean smoothness and worst perimeter are the selected anchor features, the absence of actual cutoffs, thresholds, or directional logic severely limits audit utility.\",\n    \"clarity\": \"The list of feature names with binary weights (1.0000 vs 0.0000) is confusing to a non-expert because it omits clear predicate statements or threshold explanations.\",\n    \"completeness\": \"The explanation indicates which two features were part of the rule but completely omits the condition intervals necessary to understand the decision rule.\",\n    \"concision\": \"Listing eight irrelevant features weighted at 0.0000 creates unnecessary padding that dilutes the key information.\",\n    \"overall_quality\": \"The explanation is of low overall quality because it strips away Anchor rule predicates and pads the output with zeroed features, leaving only a vague feature attribution.\",\n    \"semantic_plausibility\": \"Mean smoothness and worst perimeter are biologically sound predictors for breast cancer diagnosis, making their selection clinically plausible.\",\n    \"overall_quality\": \"The explanation is poor overall due to stripped rule intervals and redundant zero-weight features that fail to explain the prediction clearly.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:45:31.135194+00:00"
+}

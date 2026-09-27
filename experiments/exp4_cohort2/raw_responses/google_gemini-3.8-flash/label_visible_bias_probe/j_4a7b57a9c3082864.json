@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4a7b57a9c3082864",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c715759299b480a0_5521c4c4e040aff1.txt",
+  "prompt_version": "5521c4c4e040aff1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542914-wQD5aoGu2h67czP6kBuj",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 951,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 581,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00452175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00356625,
+        "upstream_inference_cost": 0.00452175,
+        "upstream_inference_prompt_cost": 0.0009555
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2225
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation merely lists SHAP attribution values without actionable guidance, recourse suggestions, or counterfactual paths for the applicant.\",\n    \"audit_usefulness\": \"It provides valuable technical insight for an auditor into the model's key drivers and directional influences, including the impact of demographic features.\",\n    \"clarity\": \"The list of raw one-hot encoded feature names and numerical weights is difficult for non-technical readers to interpret.\",\n    \"completeness\": \"The top ten factors capture the primary drivers of the RF model, although omitting actual instance feature values limits complete local context.\",\n    \"concision\": \"The text presents the essential top attribution scores directly without redundant or padded phrasing.\",\n    \"overall_quality\": \"The explanation serves technical auditing needs reasonably well, but lacks readability and actionable recourse for an end-user.\",\n    \"semantic_plausibility\": \"Features like checking account status, savings, and loan duration align strongly with financial credit risk domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:02.469352+00:00"
+}

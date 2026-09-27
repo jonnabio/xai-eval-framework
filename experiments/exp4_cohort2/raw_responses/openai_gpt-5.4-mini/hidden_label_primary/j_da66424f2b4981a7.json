@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_da66424f2b4981a7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6ce495f3482aecc1_77fc4228b0c8a099.txt",
+  "prompt_version": "77fc4228b0c8a099",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540001-5JGhr1kn6KO7loRYlu8A",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020655,
+        "upstream_inference_cost": 0.00285975,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only a list of features with binary weights. A user cannot tell what to change or how the prediction might be influenced.\",\n    \"audit_usefulness\": \"It identifies a few feature names, which is somewhat useful for inspection, but the 0/1 style output provides no directional effect, threshold, or causal insight. That makes it weak for debugging model behavior or investigating bias.\",\n    \"clarity\": \"The wording is simple, but the presentation is cryptic because it is just a flat feature list with zeros and ones. A non-expert would not understand what the values mean in relation to the prediction.\",\n    \"completeness\": \"It mentions two seemingly important features, but it omits the actual decision logic, feature directions, and any explanation of why the model predicted class 0. The local context is therefore incomplete.\",\n    \"concision\": \"The explanation is short, but much of the content is low-information repetition of feature names paired with zeros. It is compact, yet not maximally informative per word.\",\n    \"overall_quality\": \"As an Anchors-style summary, it is only minimally informative and does not convincingly explain the specific negative prediction. The output is somewhat plausible but too sparse and opaque to be high quality.\",\n    \"semantic_plausibility\": \"For a breast cancer tabular case, worst texture and worst concave points are plausible factors to matter, and the class 0 prediction is not contradictory. However, the many zero-valued features without interpretation make the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:25.685559+00:00"
+}

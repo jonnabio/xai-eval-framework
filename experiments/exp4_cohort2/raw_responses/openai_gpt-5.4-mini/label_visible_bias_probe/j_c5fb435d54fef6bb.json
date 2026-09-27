@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c5fb435d54fef6bb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_dc46675654a709a2_307502fbb55860f0.txt",
+  "prompt_version": "307502fbb55860f0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541809-kyDmo7cK2j9sNNFpeOB8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.00300975,
+        "upstream_inference_prompt_cost": 0.00078675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1049,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1543
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model decision into any concrete next step or recourse for the individual. It only lists feature names and zero/one weights, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It offers limited audit value because it identifies a few local factors, but the signal is too sparse and uninterpretable to assess why the MLP predicted the negative class. The near-zero values and lack of rule text make model-behavior inspection weak.\",\n    \"clarity\": \"The output is formatted as a feature list, but the meaning of the numbers is not explained in plain language. A non-expert would not understand what '1.0000' versus '0.0000' means or how it relates to the prediction.\",\n    \"completeness\": \"Only two features appear as active while the rest are zeroed out, with no explanation of direction, threshold, or interaction effects. That is not enough to understand the specific local decision context for this instance.\",\n    \"concision\": \"The explanation is short and avoids unnecessary detail, but much of the length is spent on a mostly uninformative list of zero-valued factors. It is concise in form but not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for a single prediction because it is terse, under-explained, and provides little causal insight. It is only marginally useful for understanding or reviewing the model's decision.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset, since education and marital status are commonly relevant to income prediction. However, the presentation of many zero-valued features without interpretation makes the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:31.757935+00:00"
+}

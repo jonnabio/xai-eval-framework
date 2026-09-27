@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_09752ba299f3696c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9ee15210bf45996e_ac11485c68ad4d13.txt",
+  "prompt_version": "ac11485c68ad4d13",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540515-m4KlDfl69a5De5x60fCO",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003474,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00226,
+        "upstream_inference_cost": 0.003474,
+        "upstream_inference_prompt_cost": 0.001214
+      },
+      "is_byok": false,
+      "prompt_tokens": 1214,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1666
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions a clinician or patient could take, such as which measurements warrant follow-up or how to interpret the findings clinically.\",\n    \"audit_usefulness\": \"The ranked SHAP values enable inspection of which morphological features drove the prediction, supporting model behavior auditing and bias investigation in a medical context.\",\n    \"clarity\": \"The explanation is well-organized as a ranked list with clear feature names and numerical scores, easily understood by readers with basic familiarity with breast cancer screening terminology.\",\n    \"completeness\": \"The top 10 features are provided with their SHAP contributions, covering the main local drivers; however, the prediction confidence is null and no information about feature values or thresholds is included.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked features and scores without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides transparent, auditable feature rankings suitable for model inspection, but lacks clinical context, actionability, and confidence information needed for high-quality decision support.\",\n    \"semantic_plausibility\": \"The identified features (concave points, area, radius, perimeter, concavity, texture) are well-established morphological markers in breast cancer diagnosis, making the explanation highly plausible within domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:21:59.999961+00:00"
+}

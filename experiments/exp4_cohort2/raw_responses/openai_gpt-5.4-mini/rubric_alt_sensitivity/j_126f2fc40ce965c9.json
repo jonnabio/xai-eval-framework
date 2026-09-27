@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_126f2fc40ce965c9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ac6e5925b1641835_5d9c3d712ad9fa5c.txt",
+  "prompt_version": "5d9c3d712ad9fa5c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543894-0qoJG2dwHVI3jGr6CXYx",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 376,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00254925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001692,
+        "upstream_inference_cost": 0.00254925,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists local factors, but they are not translated into concrete changes a person or reviewer could make to alter the prediction.\",\n    \"audit_usefulness\": \"The feature weights give some insight into the model's local behavior, but the near-zero magnitudes and low fidelity limit usefulness for diagnosing bias or error.\",\n    \"clarity\": \"The wording is simple and feature names are recognizable, but it still requires some familiarity with tabular ML features and one-hot encodings.\",\n    \"completeness\": \"It shows only a handful of top factors and their tiny contributions, without an overall decision summary or enough context to explain the false positive fully.\",\n    \"concision\": \"The explanation is short and focused, with little wasted text, though the value is reduced by the very small and mostly uninformative coefficients.\",\n    \"overall_quality\": \"This is a weak-to-moderate local explanation: readable and concise, but the signal is tiny, incomplete, and not very helpful for understanding the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible adult-income predictors, but the near-zero weights and mixed signs do not strongly support a clear explanation for this false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:18.238396+00:00"
+}

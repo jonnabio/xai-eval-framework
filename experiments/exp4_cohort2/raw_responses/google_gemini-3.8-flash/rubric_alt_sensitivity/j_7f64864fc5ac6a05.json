@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7f64864fc5ac6a05",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_959ed027a5ab7370_2433e9654677ac02.txt",
+  "prompt_version": "2433e9654677ac02",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547433-mLTD21kIOtmYqObmHlml",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1108,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 720,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00514725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004155,
+        "upstream_inference_cost": 0.00514725,
+        "upstream_inference_prompt_cost": 0.00099225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1323,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2431
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable advice or thresholds, only binary indicators of which features were included in the rule.\",\n    \"audit_usefulness\": \"An auditor can see which features the anchor selected, but the lack of rule conditions, bounds, or directional effects severely limits its diagnostic value.\",\n    \"clarity\": \"The representation relies on raw one-hot encoded feature names and binary indicator weights without explaining what the values mean to a layperson.\",\n    \"completeness\": \"The actual rule predicates and value ranges that define an anchor are completely missing, showing only whether a feature was included.\",\n    \"concision\": \"While reasonably short, it wastes space listing several irrelevant features with zero weights.\",\n    \"overall_quality\": \"The explanation is weak because stripping the actual conditions and inequalities from an anchor leaves little explanatory value.\",\n    \"semantic_plausibility\": \"Including mutually exclusive dummy variables like 'checking_status_<0' and 'checking_status_no checking' simultaneously as 1.0000 is confusing and doubtful without the underlying predicates.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:17:22.425089+00:00"
+}

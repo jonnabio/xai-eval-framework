@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_00e098a9373665bb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0da6a71373977fce_3ba15b68decdafee.txt",
+  "prompt_version": "3ba15b68decdafee",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540128-bBKmZamBmnqNrzOV85jn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00302025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00302025,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or indicate which input changes would move the prediction. It only lists factors with almost all values at zero, so a user cannot act on it meaningfully.\",\n    \"audit_usefulness\": \"It offers very limited insight into the model's decision logic because the listed factors are mostly zero and do not show direction, magnitude, or comparison against a baseline. The near-zero fidelity and stability metrics also suggest it is weak for auditing.\",\n    \"clarity\": \"The wording is short and technically simple, but the content is not understandable as an explanation of why the model predicted the positive class. A non-expert would not know what the zero-valued factors imply for this specific case.\",\n    \"completeness\": \"It fails to provide the main local drivers of the prediction in an interpretable way, and it does not explain how the highlighted native-country feature contributed. Key context such as feature impact direction and counterfactual changes is missing.\",\n    \"concision\": \"The text is compact, but much of it is uninformative because it repeats zero-valued features without explaining their relevance. It is brief, yet not efficient in conveying useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is sparse, not actionable, and only marginally informative about the local prediction. The technical metrics reinforce that it is unlikely to be a reliable explanation artifact.\",\n    \"semantic_plausibility\": \"The highlighted feature native-country_South can plausibly matter in the Adult dataset, but the pattern of one feature at 1.0000 and many others at 0.0000 is not very informative for a local explanation. The explanation is internally coherent, but not convincingly tied to the specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:31.938008+00:00"
+}

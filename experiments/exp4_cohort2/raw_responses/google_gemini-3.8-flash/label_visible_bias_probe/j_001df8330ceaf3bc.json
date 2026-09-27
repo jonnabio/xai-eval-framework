@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_001df8330ceaf3bc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28cfcd5501fa69b2_0b9082a65658ad31.txt",
+  "prompt_version": "0b9082a65658ad31",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544144-Nw0sTvEJb7SdwV4vwImw",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 630,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00485475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039225,
+        "upstream_inference_cost": 0.00485475,
+        "upstream_inference_prompt_cost": 0.00093225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1243,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2289
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no guidance or actionable thresholds, especially since numerical features like duration omit actual values and target ranges.\",\n    \"audit_usefulness\": \"It highlights key risk indicators such as previous credit delays and short employment duration, but the absence of rule cutoffs and very low fidelity (0.47) limit rigorous debugging.\",\n    \"clarity\": \"The list format using binary indicators (1.0000 vs 0.0000) is somewhat readable, but continuous variables like duration lack specific values or relational operators.\",\n    \"completeness\": \"The output captures the active rule conditions but fails to provide relational operators or bounds for continuous variables, alongside several uninformative zero-weight entries.\",\n    \"concision\": \"Listing multiple non-contributing features with 0.0000 weights introduces unnecessary bloat relative to the concise anchor itself.\",\n    \"overall_quality\": \"The explanation identifies plausible credit risk drivers for this false negative prediction, but lacks predicate bounds and includes redundant zero-weight features.\",\n    \"semantic_plausibility\": \"Associating credit risk with delayed credit history, short employment, and no checking account aligns well with standard credit underwriting domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:22:32.617412+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cec2317b737a2a70",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_778dd7d6e1653158_4a5c45ff9336fc93.txt",
+  "prompt_version": "4a5c45ff9336fc93",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541674-EijveBFnDL6YUhx7mXVn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028875,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide explicit recourse or next steps, only a ranked list of features and SHAP values. A user cannot easily tell what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the local feature contributions and their signs, which helps inspect whether the model is relying on sensible predictors. However, it lacks contextual grounding for deeper error or bias analysis.\",\n    \"clarity\": \"The format is concise and the feature contributions are easy to scan, even for a non-expert familiar with basic feature names. Still, the use of encoded feature names like 'marital-status_Married-civ-spouse' may be slightly opaque to some readers.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and includes both positive and negative contributions. However, it does not explain the base value, feature values for the instance, or how the contributions combine to produce the final class.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the top local factors. It is informative per word and does not include unnecessary narrative.\",\n    \"overall_quality\": \"Overall this is a strong local SHAP explanation for a logistic regression model: clear, compact, and useful for inspection. Its main weakness is limited interpretability for action or full decision reconstruction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the sign pattern is consistent with a negative-class prediction. The presence of marital status, sex, age, and hours worked as influential variables fits general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:19.005874+00:00"
+}

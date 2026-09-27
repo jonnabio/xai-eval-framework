@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4353255cc850fac1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_103d89f1e4cb72f6_6f729f7cbaf69168.txt",
+  "prompt_version": "6f729f7cbaf69168",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539238-kcyJQFc7CZoLfIQ3wwyu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.00308025,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1567
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete recourse path or any specific changes that would help alter the prediction. It lists factors and values, but does not translate them into feasible next steps for the user.\",\n    \"audit_usefulness\": \"It gives some local feature information, but the zero-valued entries and lack of directionality make it weak for auditing model behavior. An auditor cannot easily tell whether the listed factors increased or decreased the prediction or whether the output is coherent.\",\n    \"clarity\": \"The wording is short and readable, but the meaning is not clear to a non-expert because it looks like a raw feature dump rather than an explanation. The many zero entries and the ambiguous 'capital-gain: 8.9161' format reduce interpretability.\",\n    \"completeness\": \"It mentions only a small set of top local factors and omits a coherent account of how they combine to yield the prediction. There is no clear indication of which features were most influential or why this particular instance was predicted as class 0.\",\n    \"concision\": \"The explanation is brief, but it wastes space on several zero-contribution features that add little value. A more compact presentation of only the meaningful drivers would be more informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short but not truly explanatory, offers little actionable or audit value, and is hard to interpret in context. It contains some local signal, but not enough structure or semantic guidance to support understanding the prediction well.\",\n    \"semantic_plausibility\": \"The mention of capital-gain and education aligns with the Adult dataset and is broadly plausible as a driver of income prediction. However, the output is internally awkward because many features are shown with zero impact and the sign or role of the factors is not explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:41.995222+00:00"
+}

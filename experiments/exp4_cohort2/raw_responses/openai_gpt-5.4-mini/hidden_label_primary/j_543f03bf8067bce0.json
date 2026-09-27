@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_543f03bf8067bce0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_18fe52436b35526b_6f26ab40bdd8848f.txt",
+  "prompt_version": "6f26ab40bdd8848f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540358-x6nIerndSGdd0hBGtblK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00289575,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps. It only lists features with weights, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It gives some local feature names, which is weakly useful for inspection, but it does not explain directionality, thresholds, or why these features mattered for the false positive. The low fidelity and zero stability further reduce its audit value.\",\n    \"clarity\": \"The text is short and readable, but the repeated feature list with all weights equal to 1.0000 is not meaningful to a non-expert. It lacks plain-language interpretation of what the anchors mean.\",\n    \"completeness\": \"It names a few features, but provides no decision logic, no rule conditions, and no indication of how they combine to produce the prediction. For a specific instance, this is far from sufficient local context.\",\n    \"concision\": \"The output is brief, but much of the brevity comes from omitting explanatory content rather than efficient communication. It is compact, though not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but largely uninformative, with poor support for understanding, debugging, or acting on the prediction. The technical metrics also suggest low faithfulness and instability.\",\n    \"semantic_plausibility\": \"The listed adult-dataset features are plausible for this domain, and the explanation format is consistent with an anchor-based local summary. However, the all-ones feature weights and inclusion of seemingly unrelated anchors make the explanation only moderately plausible as an explanation of this specific false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:19:22.491793+00:00"
+}

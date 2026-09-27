@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_028162ef52fe6d26",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e354d1466bc2ce9c_dd46e90abeb74105.txt",
+  "prompt_version": "dd46e90abeb74105",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549039-Z3dFvbPpNDVWRXvOhAJy",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1294,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 889,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005853,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0048525,
+        "upstream_inference_cost": 0.005853,
+        "upstream_inference_prompt_cost": 0.0010005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1334,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2628
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists directional contributions for features, several of which are immutable demographics, without specifying the feature values or concrete steps needed to change the classification.\",\n    \"audit_usefulness\": \"It provides insight into which features drove the false-positive prediction, including demographic signals like sex and marital status, though the lack of raw input values limits deeper error analysis.\",\n    \"clarity\": \"The list format using one-hot encoded variable names and raw numerical coefficients requires technical familiarity with linear/surrogate models to interpret.\",\n    \"completeness\": \"The top ten local factors are provided with weights, but the instance's actual feature values are missing, leaving part of the local picture incomplete.\",\n    \"concision\": \"The summary is tightly formatted and presents the key attributions directly without unnecessary filler.\",\n    \"overall_quality\": \"This is a serviceable LIME explanation that clearly communicates top local drivers, though hindered by missing instance values and technical presentation.\",\n    \"semantic_plausibility\": \"Most factors like executive occupation and education align well with high-income predictions, though married-spouse-absent carrying the highest positive weight is somewhat unusual.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:44:10.135426+00:00"
+}

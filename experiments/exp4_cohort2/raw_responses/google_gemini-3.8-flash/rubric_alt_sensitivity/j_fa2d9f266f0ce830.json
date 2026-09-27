@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778d3be3c54f91e6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fa2d9f266f0ce830",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_778d3be3c54f91e6_6b63cee12a9b3973.txt",
+  "prompt_version": "6b63cee12a9b3973",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547214-Cs7K7VbDG2nFWy8i7HWu",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 529,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004488,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0034875,
+        "upstream_inference_cost": 0.004488,
+        "upstream_inference_prompt_cost": 0.0010005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1334,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2264
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778d3be3c54f91e6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed feature attributions without baseline values, counterfactual targets, or clear recourse steps, leaving actionability largely implied.\",\n    \"audit_usefulness\": \"It provides the top 10 local SHAP contributions, helping auditors analyze which features drove the false positive prediction, though the fidelity metric is moderate.\",\n    \"clarity\": \"The output consists of raw feature names, one-hot encoded categories, and signed numerical SHAP values, which require technical literacy to interpret properly.\",\n    \"completeness\": \"The top 10 influential factors are presented with their local contributions, capturing the primary drivers of the decision but omitting feature values and the model baseline.\",\n    \"concision\": \"Information density is high with minimal boilerplate, listing only the most prominent local factors and their values.\",\n    \"overall_quality\": \"A serviceable standard SHAP feature attribution summary that effectively highlights key drivers but lacks lay readability and prescriptive guidance.\",\n    \"semantic_plausibility\": \"The identified features\u2014checking account status, credit history, purpose, employment duration, and housing\u2014are well-aligned with standard credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:13:41.806355+00:00"
+}

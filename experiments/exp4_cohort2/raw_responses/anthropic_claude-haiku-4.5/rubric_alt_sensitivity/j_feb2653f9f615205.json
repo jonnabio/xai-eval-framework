@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_06e7340405176025",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_feb2653f9f615205",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_06e7340405176025_0680cdd9978503d1.txt",
+  "prompt_version": "0680cdd9978503d1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546863-0r2Uh2fVbG169CvNvgpV",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004156,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002885,
+        "upstream_inference_cost": 0.004156,
+        "upstream_inference_prompt_cost": 0.001271
+      },
+      "is_byok": false,
+      "prompt_tokens": 1271,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1848
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_06e7340405176025\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome or what thresholds matter. A clinician or patient cannot act on abstract SHAP values without knowing target ranges or decision boundaries.\",\n    \"audit_usefulness\": \"SHAP values enable systematic auditing of model behavior and can reveal bias patterns across instances. The fidelity of 0.60 and faithfulness gap of 0.12 suggest moderate reliability for audit purposes, though the low fidelity raises concerns about explanation accuracy.\",\n    \"clarity\": \"The format is technical and requires understanding of SHAP values and their sign conventions. Non-technical stakeholders would struggle to interpret what positive vs. negative contributions mean or why these specific features matter for a benign diagnosis.\",\n    \"completeness\": \"Ten features are listed with their contributions, covering the main drivers of the prediction. However, the explanation lacks context about the base rate, decision threshold, or relative importance of these factors in reaching the benign classification.\",\n    \"concision\": \"The explanation is compact and lists only the top factors with their values. No redundancy is present, though the format is dense and could benefit from brief interpretation.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility. It correctly identifies influential features and the model made the right prediction (TN), but the low fidelity (0.60) and moderate stability (0.75) suggest the explanation may not fully capture the model's reasoning. Useful for model debugging but weak for stakeholder communication.\",\n    \"semantic_plausibility\": \"The features (area, concavity, texture, radius, smoothness) are medically relevant to breast cancer diagnosis. The pattern of negative contributions from 'worst area' and 'worst radius' aligning with a benign prediction is plausible, as larger/worse measurements typically indicate malignancy. The explanation is consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:07:49.665093+00:00"
+}

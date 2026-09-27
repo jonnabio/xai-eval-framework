@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b7d1b81f91e1a527",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cbdb515ea6b51b47_41c50b22ffd50593.txt",
+  "prompt_version": "41c50b22ffd50593",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538466-wlSoegdFgx6As12A0T30",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 859,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 494,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00416025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00322125,
+        "upstream_inference_cost": 0.00416025,
+        "upstream_inference_prompt_cost": 0.000939
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2111
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without actionable recourse or guidance on how a user could alter the predicted outcome.\",\n    \"audit_usefulness\": \"It provides transparency into the local surrogate weights, allowing auditors to inspect model coefficients and spot one-hot encoding artifacts.\",\n    \"clarity\": \"The output is a technical list of one-hot encoded feature names and weights, requiring technical literacy to interpret.\",\n    \"completeness\": \"The actual feature values of the instance are omitted, making it difficult to understand whether these features were present or absent for this individual.\",\n    \"concision\": \"The presentation is compact and directly presents the top local coefficients without conversational filler.\",\n    \"overall_quality\": \"Overall quality is limited by the absence of instance feature values and the presence of conflicting one-hot dummy attributions.\",\n    \"semantic_plausibility\": \"Attributing negative weights simultaneously to mutually exclusive categories like both sexes and multiple marital statuses creates domain confusion.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:52.870233+00:00"
+}

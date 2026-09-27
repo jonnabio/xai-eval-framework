@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e81dab1ef92f705b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f4658b35cc204bfb_bdbdae2256a06136.txt",
+  "prompt_version": "bdbdae2256a06136",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540080-3CN9MuPIu6ziXoRFkGZC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004002,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00278,
+        "upstream_inference_cost": 0.004002,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1778
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what actions are feasible, or how the instance differs from a counterfactual. DICE should generate actionable counterfactuals, but none are presented here.\",\n    \"audit_usefulness\": \"The normalized scores show which features DICE identified as locally important, but the poor fidelity (-0.024) and high faithfulness gap (0.132) suggest the explanation poorly represents actual model behavior. This severely limits audit value for understanding true model logic.\",\n    \"clarity\": \"The output is a simple list of feature names with normalized scores, which is easy to parse syntactically but lacks context about what these scores mean, why these features matter, or how they drive the prediction toward class 1.\",\n    \"completeness\": \"DICE is designed to provide counterfactual examples showing how to change the prediction; this explanation only provides feature importance rankings without the core counterfactual information needed to understand the local decision boundary.\",\n    \"concision\": \"The explanation is compact in token count but contains mostly zero-valued features that add little information; the non-zero features (native-country_Honduras, occupation_Sales) could be presented more efficiently with interpretation.\",\n    \"overall_quality\": \"The explanation fails to deliver DICE's primary value proposition\u2014actionable counterfactuals\u2014and instead presents a feature importance ranking with poor technical fidelity. The low stability (0.058) and negative fidelity further undermine confidence in the explanation's quality.\",\n    \"semantic_plausibility\": \"The identified features (country of origin, occupation) are plausible predictors in income classification, but without counterfactual context or instance details, it is unclear whether these factors are genuinely driving this specific prediction or are artifacts of the explanation method.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:45.788537+00:00"
+}

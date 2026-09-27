@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9418623e9c98beab",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_778dd7d6e1653158_04766602af93829c.txt",
+  "prompt_version": "04766602af93829c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543121-PpdqUL2Ig7e2iHsM13ab",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 405,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002676,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018225,
+        "upstream_inference_cost": 0.002676,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1543
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local feature contributions and does not say what changes would plausibly alter the prediction or how an affected person could act on it.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows which features pushed the model toward the negative class and by how much, allowing inspection of feature dependence and potential bias patterns.\",\n    \"clarity\": \"The feature names and signed contributions are easy to read for someone familiar with SHAP, but a non-technical reader may still need help interpreting the encoded categories and negative values.\",\n    \"completeness\": \"It gives the main local drivers of the decision, but it does not summarize the overall baseline, threshold, or how the listed factors combine into the final prediction.\",\n    \"concision\": \"The list is compact and focused on the top factors, with little obvious redundancy, though the raw feature encoding reduces readability somewhat.\",\n    \"overall_quality\": \"This is a solid SHAP summary for a tabular model: faithful, concise, and informative about the main local influences, but not especially explanatory to a layperson.\",\n    \"semantic_plausibility\": \"The factors are plausible for Adult-income prediction, and the directions are reasonable for a negative prediction on a true negative case, though the explanation is limited to encoded feature effects rather than narrative domain reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:23.346238+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cd6e1d1dada2e035",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a6bb167d1c81d8a5_7a446f18630e7124.txt",
+  "prompt_version": "7a446f18630e7124",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543389-bIdhzzfkVeR5CSFE7F6Y",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 380,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00171,
+        "upstream_inference_cost": 0.0025575,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential features but gives no concrete changes that would alter the prediction or guidance for next steps.\",\n    \"audit_usefulness\": \"The feature attributions are useful for inspecting which variables drove the model, but the explanation is too sparse and only moderately stable to support deep bias or error analysis.\",\n    \"clarity\": \"The feature names and signed contributions are straightforward, but the SHAP-style output still requires some technical familiarity to interpret fully.\",\n    \"completeness\": \"It identifies several top local factors, but it does not explain the interaction of features, thresholds, or enough of the decision logic to fully account for the false positive.\",\n    \"concision\": \"The explanation is compact and information-dense, with little padding beyond the ranked feature contributions.\",\n    \"overall_quality\": \"This is a reasonable SHAP summary for a single prediction, but it is limited by lack of narrative context, only moderate faithfulness/stability, and no actionable guidance.\",\n    \"semantic_plausibility\": \"The highlighted breast-cancer features are domain-consistent, and the directions of influence are plausible for a malignant-class prediction, though the explanation does not strongly tie them to the specific false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:51.478249+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_41b8621452567c57",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544230-slS6OV6K9pO7d5dvp7hc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1001,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0064425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00550125,
+        "upstream_inference_cost": 0.0064425,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2722
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no guidance on what feature changes would modify the prediction or what specific values are required. It merely flags features with a binary indicator without directionality.\",\n    \"audit_usefulness\": \"While it isolates four candidate features identified by the anchor, the absence of inequality operators, thresholds, or actual instance values severely limits an auditor's ability to verify the model's logic. Furthermore, showing multiple mutually exclusive category dummies without clear signs impedes debugging.\",\n    \"clarity\": \"The representation lists raw encoded feature names alongside arbitrary binary weights (1.0000 vs 0.0000) rather than human-readable if-then rules. Non-expert readers cannot readily interpret what conditions are actually satisfied.\",\n    \"completeness\": \"The explanation indicates which features form the local anchor but strips out the actual rule predicates and directional impact. The local decision boundary context remains incomplete.\",\n    \"concision\": \"More than half of the listed features are non-contributing zero-weight placeholders, creating unnecessary clutter.\",\n    \"overall_quality\": \"Converting an anchor into an unadorned list of binary weights strips away the core rule semantics, leaving a low-clarity explanation with minimal practical utility.\",\n    \"semantic_plausibility\": \"Highlighting employment, housing, and checking status aligns with credit risk evaluation principles. However, simultaneously listing mutually exclusive checking status indicators without operational values creates semantic ambiguity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:24:03.775060+00:00"
+}

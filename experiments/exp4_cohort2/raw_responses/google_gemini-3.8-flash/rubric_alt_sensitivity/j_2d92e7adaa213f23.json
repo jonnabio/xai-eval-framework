@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2d92e7adaa213f23",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c6d96339976f5220_1c8eba547f186bcd.txt",
+  "prompt_version": "1c8eba547f186bcd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549580-TYCNnOGNtXC75zyYIxMI",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1262,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 856,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00572775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0047325,
+        "upstream_inference_cost": 0.00572775,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2589
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output contains binary importance indicators without values, thresholds, or directional guidance, offering no actionable steps for a loan applicant.\",\n    \"audit_usefulness\": \"It identifies a few categorical features involved in the rule (checking status, employment, housing), but without clear predicate conditions or values, auditing utility is marginal.\",\n    \"clarity\": \"The representation relies on one-hot encoded technical feature names and arbitrary 1.0/0.0 weights, making it difficult for non-technical individuals to interpret.\",\n    \"completeness\": \"The explanation lists features deemed active in the anchor but strips away the actual logic, inequalities, and context necessary to fully understand the model's decision.\",\n    \"concision\": \"Several features with 0.0000 values are retained in the output, adding unnecessary clutter.\",\n    \"overall_quality\": \"The explanation is weak because it reduces an anchor rule into raw feature indicators without predicates, offering poor clarity and minimal utility.\",\n    \"semantic_plausibility\": \"Checking status, employment length, and housing are well-known domain drivers of credit risk, making the highlighted factors plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:53:10.213573+00:00"
+}

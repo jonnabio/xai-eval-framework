@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_556f39d440211fec",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7ee17e1b81806239_9de11beca7ceff94.txt",
+  "prompt_version": "9de11beca7ceff94",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542050-UI0NGqOx4detyvAaXzhN",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 689,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004965,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00402,
+        "upstream_inference_cost": 0.004965,
+        "upstream_inference_prompt_cost": 0.000945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1260,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2332
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating baseline values, thresholds, or concrete recourse steps for the individual.\",\n    \"audit_usefulness\": \"While it displays signed feature contributions, the lack of actual feature values and the very low fidelity (0.46) significantly limit its reliability for auditing model logic.\",\n    \"clarity\": \"The raw key-value string format with one-hot encoded variables requires statistical and technical literacy to interpret.\",\n    \"completeness\": \"The explanation provides top local weights but omits the instance's specific input values, base rate, and intercept information necessary for a complete local picture.\",\n    \"concision\": \"The text is compact and directly presents the top ten factors without extraneous filler.\",\n    \"overall_quality\": \"Overall quality is low due to poor semantic plausibility, lack of feature values, and weak technical fidelity.\",\n    \"semantic_plausibility\": \"Features like having a Doctorate or Professional Specialty having negative contributions toward high income run contrary to standard domain expectations for the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:38.870637+00:00"
+}

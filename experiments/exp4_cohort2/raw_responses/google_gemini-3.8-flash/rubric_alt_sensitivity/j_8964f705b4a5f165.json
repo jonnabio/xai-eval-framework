@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_8964f705b4a5f165",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f75792557c566daf_a033c4ca803266fd.txt",
+  "prompt_version": "a033c4ca803266fd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546567-SAmkXkgmUFDKKmgh0P83",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 519,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0043755,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00342,
+        "upstream_inference_cost": 0.0043755,
+        "upstream_inference_prompt_cost": 0.0009555
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2186
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable biological characteristics of a tumor with raw attribution scores, offering no practical recourse or guidance on what would alter the prediction.\",\n    \"audit_usefulness\": \"It provides the top 10 feature contributions driving this false positive prediction, giving an auditor moderate insight into which features pushed the model toward an incorrect label.\",\n    \"clarity\": \"The format presents raw numerical attribution scores alongside technical diagnostic feature names without feature values or accessible context for non-technical users.\",\n    \"completeness\": \"The explanation details 10 influential positive and negative SHAP factors, though baseline values and actual feature measurements are omitted.\",\n    \"concision\": \"The text is very compact, presenting only the primary local feature attributions without filler words.\",\n    \"overall_quality\": \"A serviceable local SHAP explanation that exposes model factors for a false positive, limited primarily by low lay clarity and lack of actionability.\",\n    \"semantic_plausibility\": \"Features like texture, concavity, and symmetry are well-established diagnostic indicators in breast cancer evaluation, making the identified factors plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:02:54.907719+00:00"
+}

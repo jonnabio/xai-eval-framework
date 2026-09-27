@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c41868b1c46645e1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_214506591db1e703_499c7d859f37a004.txt",
+  "prompt_version": "499c7d859f37a004",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540009-kGnKzwQNOUIxu61S7lQ1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.00287475,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1523
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or decision guidance. It lists features with coefficients, but does not tell a user what could realistically change the outcome.\",\n    \"audit_usefulness\": \"It gives a narrow view of local factors, but the values are mostly zero and do not explain the FP in a way that supports meaningful model inspection. Low fidelity and very low stability further reduce its audit value.\",\n    \"clarity\": \"The output is readable in a technical sense, but it is not written for a non-expert and the feature list is not interpreted in plain language. The meaning of the numeric values is also unclear without context.\",\n    \"completeness\": \"It names a few local features, especially marital status, but omits the prediction direction, baseline comparison, and any substantive explanation of why the model predicted class 1. Given the false-positive case, this is not enough to understand the specific decision.\",\n    \"concision\": \"The explanation is fairly short and compact, but much of the listed information is uninformative because most features are zero. It is concise, though not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but only minimally informative, not actionable, and not very useful for understanding or auditing the prediction. The technical metrics also suggest poor faithfulness and stability.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset, especially marital status, and there is no obvious contradiction in the feature names. However, the dominance of zero-valued factors makes the explanation only moderately believable as a local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:33.398551+00:00"
+}

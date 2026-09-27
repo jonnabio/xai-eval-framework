@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6b4ed0706f2c116c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a2878ddc3d3b22b3_95eb1d108b6dd240.txt",
+  "prompt_version": "95eb1d108b6dd240",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540306-A9WBdus3wYGqzFVMUO1P",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030705,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022725,
+        "upstream_inference_cost": 0.0030705,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1569
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse steps or indicate which changes would move the outcome. It only lists local factors and coefficients, so a user cannot act on it directly.\",\n    \"audit_usefulness\": \"It provides some model-inspection value by exposing local feature contributions, but the information is too sparse and odd-looking to support serious error or bias analysis. The near-zero values and lack of directionality make it hard to diagnose why the model predicted class 1.\",\n    \"clarity\": \"The wording is brief and the feature list is readable, but it is not well explained for a non-expert because coefficients and zero-valued entries are presented without interpretation. A general reader would not know which factors increased or decreased the prediction.\",\n    \"completeness\": \"The explanation names a few local factors, but it omits the direction and magnitude of the main drivers needed to understand this specific decision. It also fails to explain why the model output is a false positive or how the listed factors combine into the prediction.\",\n    \"concision\": \"It is short, but much of the content is low-information repetition of zero-valued features. The explanation is not efficiently informative because it spends space on entries that do not meaningfully contribute to the decision.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is somewhat readable but not interpretable, actionable, or sufficiently informative. It offers limited insight into the model's decision and is unlikely to help a user or auditor understand this false positive.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, but the explanation is semantically odd because important coefficients are shown as zeros and no clear causal story is given. As a result, it only loosely matches expectations for a useful DICE explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:30.545538+00:00"
+}

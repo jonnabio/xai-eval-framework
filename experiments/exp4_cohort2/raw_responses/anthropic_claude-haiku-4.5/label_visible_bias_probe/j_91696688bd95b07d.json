@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_91696688bd95b07d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_719c3e5dafe19965_c5d25bb4565ad66b.txt",
+  "prompt_version": "c5d25bb4565ad66b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543335-1AHBprA6wcjgS6R5envI",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003837,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002605,
+        "upstream_inference_cost": 0.003837,
+        "upstream_inference_prompt_cost": 0.001232
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1753
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to modify them or what actions a user should take to change the prediction. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation shows feature importance weights and identifies two key drivers, which partially supports model inspection; however, the low fidelity (0.625) and high faithfulness gap (0.316) severely limit confidence in the explanation's reliability for auditing purposes.\",\n    \"clarity\": \"The explanation uses a simple tabular format with feature names and weights that is easy to parse, though domain knowledge of credit features (installment_commitment, purpose_used car) is required to fully interpret the context.\",\n    \"completeness\": \"Only two features are identified as anchors with non-zero weights, while seven features are listed with zero weight; this sparse representation may miss important decision context, particularly given the low fidelity score suggests the explanation captures only partial model logic.\",\n    \"concision\": \"The explanation is compact at 72 tokens and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance (fidelity 0.625, faithfulness gap 0.316) and is a false positive prediction, limiting its overall reliability and usefulness despite clear presentation of identified anchors.\",\n    \"semantic_plausibility\": \"The identified anchors (installment commitment and used car purpose) are plausible credit risk factors in domain context; however, the false positive prediction and low fidelity raise concerns about whether the explanation truly reflects the model's actual decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:01.460305+00:00"
+}

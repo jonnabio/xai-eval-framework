@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ebbb5b92170acaae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6bb167d1c81d8a5_83026c3e5b9ce4c5.txt",
+  "prompt_version": "83026c3e5b9ce4c5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544045-l8M2VMW8lwrLzotn0TL6",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 523,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0043575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0034425,
+        "upstream_inference_cost": 0.0043575,
+        "upstream_inference_prompt_cost": 0.000915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2138
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides purely technical SHAP attribution values for biological cellular measurements, offering no clinical recourse or actionable next steps.\",\n    \"audit_usefulness\": \"It provides a clear ranking of signed attribution values that help an auditor understand what pushed this false positive toward class 1, though raw feature values are omitted.\",\n    \"clarity\": \"The list of raw feature names paired with signed decimal attributions is difficult for a non-expert reader to interpret without background knowledge of SHAP.\",\n    \"completeness\": \"The top ten contributing features and their directional impacts are included, but baseline expected values and the observed feature measurements are missing.\",\n    \"concision\": \"The text presents the key attributions compactly and without unnecessary filler or redundant phrasing.\",\n    \"overall_quality\": \"It serves as an acceptable baseline feature attribution summary for technical inspection, but is limited by the absence of feature values and natural language synthesis.\",\n    \"semantic_plausibility\": \"The identified risk-increasing features such as worst radius, mean concavity, and worst area align closely with clinical understanding of tumor malignancy characteristics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:20:53.648853+00:00"
+}

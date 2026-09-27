@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3a3d0ceecf88651f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_95751d1d732b6cfa_37765600a0805953.txt",
+  "prompt_version": "37765600a0805953",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543835-bTSi0QIYrDMu4C7XiII4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 395,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002631,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017775,
+        "upstream_inference_cost": 0.002631,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It gives almost no actionable counterfactual guidance; only one feature has a nonzero value, but it does not explain what change would alter the prediction in a meaningful way.\",\n    \"audit_usefulness\": \"The explanation is too sparse and mostly zeros, so it offers limited insight into the model\u2019s decision logic or potential bias patterns beyond a single local factor.\",\n    \"clarity\": \"The output is short and easy to read, but the meaning of the near-all-zero feature list is not very intuitive for a non-technical reader.\",\n    \"completeness\": \"It identifies one factor, education_7th-8th, but does not provide the main reasons for the negative prediction or enough context to understand the decision fully.\",\n    \"concision\": \"It is compact and avoids unnecessary wording, but much of the space is spent listing zero-valued factors that add little useful information.\",\n    \"overall_quality\": \"The explanation is usable but weak: it is technically neat and faithful, yet too thin to support a strong understanding of the model\u2019s decision.\",\n    \"semantic_plausibility\": \"The highlighted low education level is plausible as a factor in the Adult dataset, but the dominance of one feature and the many zero entries make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:18.005367+00:00"
+}

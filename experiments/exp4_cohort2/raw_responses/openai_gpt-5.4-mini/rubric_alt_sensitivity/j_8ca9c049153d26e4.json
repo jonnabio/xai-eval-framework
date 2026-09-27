@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8ca9c049153d26e4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_60730b2d1280bac2_b9bec1630f69a60f.txt",
+  "prompt_version": "b9bec1630f69a60f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542844-yyGdUyyXZYXfadWfdA50",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002466,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016065,
+        "upstream_inference_cost": 0.002466,
+        "upstream_inference_prompt_cost": 0.0008595
+      },
+      "is_byok": false,
+      "prompt_tokens": 1146,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature contributions; it does not say what changes would likely alter the prediction or how to act on it.\",\n    \"audit_usefulness\": \"The ranked feature attributions give some insight into which inputs the MLP relied on, but the low fidelity and stability reduce its usefulness for robust auditing.\",\n    \"clarity\": \"The feature names and signed weights are easy to read, though some terms are encoded categories that require modest familiarity with the Adult dataset.\",\n    \"completeness\": \"It identifies several influential factors behind the positive prediction, but it does not provide a full local decision account or interactions among features.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious padding.\",\n    \"overall_quality\": \"It is a decent local summary of model behavior, but the explanation is limited by weak faithfulness/stability and lacks actionable or fully complete reasoning.\",\n    \"semantic_plausibility\": \"The highlighted factors are broadly consistent with a positive Adult-income prediction, especially capital gain, executive-managerial occupation, husband relationship, and higher education.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:46.403540+00:00"
+}

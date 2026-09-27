@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1b0e604315e057d5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f787cc3703d999cf_97f413cdc13bcdfd.txt",
+  "prompt_version": "97f413cdc13bcdfd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547785-FoNEuhzYs8cNyRbCMiNE",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003832,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00255,
+        "upstream_inference_cost": 0.003832,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1792
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f787cc3703d999cf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature contributions are essentially zero (\u00b10.0000), providing no actionable guidance on what changes would alter the prediction or how to challenge the decision.\",\n    \"audit_usefulness\": \"The zero-valued coefficients offer no insight into model behavior, bias, or error patterns. The high faithfulness_gap (0.616) and zero fidelity suggest the explanation is unreliable for auditing purposes.\",\n    \"clarity\": \"The format is straightforward and readable, listing features with their contributions in plain language that a non-technical person could parse structurally.\",\n    \"completeness\": \"The explanation is incomplete because all features show negligible contribution (\u00b10.0000), failing to identify which factors actually drove the false negative prediction. The model predicted 0 but true label is 1, yet no meaningful drivers are revealed.\",\n    \"concision\": \"The explanation is concise in length but lacks information density\u2014it lists many features with identical near-zero values, which is repetitive and uninformative rather than tight and efficient.\",\n    \"overall_quality\": \"This explanation is unusable. It provides no meaningful insight into why the model made its prediction. The technical metrics (fidelity=0.0, high faithfulness_gap) confirm the explanation fails to capture the model's actual decision logic, and it misclassifies the instance (FN case).\",\n    \"semantic_plausibility\": \"While the listed features are plausible for income prediction, the claim that all features contribute essentially zero is implausible given that the model made a definitive prediction. This contradicts basic model behavior expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 4,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:23:10.994782+00:00"
+}

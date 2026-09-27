@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_56e6531ec03edd90",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_003259ff27515980_2487432e1ecb4b1f.txt",
+  "prompt_version": "2487432e1ecb4b1f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541342-H71wlYu6PTSWrc8iIaRX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002922,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.002922,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_003259ff27515980\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not suggest any feasible recourse, review step, or decision threshold. A user cannot directly act on it beyond noting which variables influenced the prediction.\",\n    \"audit_usefulness\": \"It is useful for basic inspection because it exposes the top local drivers and their signed contributions. However, it lacks baseline context, feature values, and class-direction interpretation, so it only partially supports deeper error or bias analysis.\",\n    \"clarity\": \"The output is easy to read for someone familiar with SHAP, but it is still a raw technical list of feature names and numbers. A non-expert would likely not understand how to interpret the signs or magnitudes without additional explanation.\",\n    \"completeness\": \"It identifies several local contributors to the positive prediction, but it does not explain the prediction threshold, the instance's actual feature values, or how these terms combine into the final class. Important decision context is therefore missing.\",\n    \"concision\": \"The explanation is compact and contains a dense set of the most relevant local factors without much filler. It is fairly efficient, though the numerical list could be slightly more interpretable with brief aggregation or ranking context.\",\n    \"overall_quality\": \"This is a reasonably informative SHAP summary with decent local signal, but it remains too technical and incomplete for full understanding or action. It is useful as a concise model-inspection artifact rather than a strong end-user explanation.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are medically plausible predictors, and the positive/negative contributions are coherent with a real XGBoost local explanation. Nothing in the explanation contradicts the dataset or the predicted positive class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:45.669164+00:00"
+}

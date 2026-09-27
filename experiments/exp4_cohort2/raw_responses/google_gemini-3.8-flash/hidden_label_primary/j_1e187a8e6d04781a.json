@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1e187a8e6d04781a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_dc46675654a709a2_e07618a43f203468.txt",
+  "prompt_version": "e07618a43f203468",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540491-2D3KZusZgRucujuL57hx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 647,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039075,
+        "upstream_inference_cost": 0.0048375,
+        "upstream_inference_prompt_cost": 0.00093
+      },
+      "is_byok": false,
+      "prompt_tokens": 1240,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2282
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the actual thresholds or feature values required to change the outcome, offering no actionable path for recourse.\",\n    \"audit_usefulness\": \"While it identifies education-num and never-married status as the active components of the anchor, the omission of specific condition predicates limits its diagnostic value.\",\n    \"clarity\": \"The list format using pseudo-weights (1.0 vs 0.0) is confusing for non-experts, as it obscures the underlying rule conditions and feature values.\",\n    \"completeness\": \"The explanation indicates which features participate in the anchor rule but fails to provide the actual decision thresholds or instance feature values.\",\n    \"concision\": \"Listing multiple irrelevant features with zero weights adds unnecessary clutter to an explanation that consists of only two active features.\",\n    \"overall_quality\": \"The explanation provides a minimal signal regarding key features but is severely compromised by padding with zero-weight features and omitting rule predicates.\",\n    \"semantic_plausibility\": \"Marital status and education level are well-established strong predictors of income category in the Adult dataset.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:21:40.404386+00:00"
+}

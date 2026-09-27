@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c9541251c35de08b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_31f188776d06c14d.txt",
+  "prompt_version": "31f188776d06c14d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547078-qMB0J6X0NIcDeXWQjUL8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1446,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 985,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006399,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0054225,
+        "upstream_inference_cost": 0.006399,
+        "upstream_inference_prompt_cost": 0.0009765
+      },
+      "is_byok": false,
+      "prompt_tokens": 1302,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2748
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only provides binary feature inclusion flags without specific feature values, thresholds, or directional guidance, an individual cannot determine what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It reveals which four features were included in the anchor, but the absence of decision thresholds, combined with very low fidelity (0.23) and zero stability, makes it of marginal use for auditing model behavior or bias.\",\n    \"clarity\": \"Displaying features as floating-point binary indicators (1.0000 vs 0.0000) rather than human-readable rule predicates makes the output difficult for non-technical users to interpret.\",\n    \"completeness\": \"The explanation indicates which features were selected but omits the actual rule conditions, feature values, and direction of impact, leaving the local decision largely unexplained.\",\n    \"concision\": \"The text is relatively short but unnecessarily enumerates several zero-weighted features rather than focusing solely on the active anchor conditions.\",\n    \"overall_quality\": \"The explanation is weak because it reduces an anchor rule to a binary feature mask lacking thresholds, has poor fidelity, and provides little practical insight into the false negative prediction.\",\n    \"semantic_plausibility\": \"Highlighting age, education-num, and workclass as salient factors matches domain intuition for income, though fnlwgt is typically an uninformative census weight and no directional relationships are given.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:29.854192+00:00"
+}

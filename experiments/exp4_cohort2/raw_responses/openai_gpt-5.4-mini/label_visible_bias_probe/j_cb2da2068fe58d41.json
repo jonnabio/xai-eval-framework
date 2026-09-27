@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cb2da2068fe58d41",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_20242fe53fbadae4_192ad991446f80c9.txt",
+  "prompt_version": "192ad991446f80c9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541305-THGd7pnSgqZHRcjaPzFG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031545,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023625,
+        "upstream_inference_cost": 0.0031545,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1581
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature conditions associated with the prediction, but it does not suggest concrete recourse or what a user could change to affect the outcome. There are no next steps, thresholds, or alternative scenarios, so it offers little practical guidance.\",\n    \"audit_usefulness\": \"It reveals which local conditions triggered the anchor rule and can help a reviewer inspect whether the model relies on sensitive or plausible credit factors. However, it does not quantify direction, relative importance, or counterfactual behavior, so audit value is only partial.\",\n    \"clarity\": \"The output is short and readable, but it is presented as a bare list of feature tokens with all scores at 1.0000, which is not self-explanatory to a non-expert. A reader would need prior knowledge of the encoded variables and anchor explanations to interpret it.\",\n    \"completeness\": \"The explanation identifies several local conditions that characterize the instance, but it omits how these factors combine to produce the negative prediction and does not explain the false negative relative to the true label. It also lacks any indication of feature directionality or decision boundary context.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but the repeated token-style listing is somewhat redundant and not especially information-dense. It conveys a moderate amount of local information in a short form, but not as efficiently as it could.\",\n    \"overall_quality\": \"Overall, this is a moderately useful anchor-style explanation that is faithful to the local pattern but limited in interpretability and practical value. It is acceptable for technical inspection, yet weak for non-expert understanding or decision support.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit risk case and align with common credit underwriting signals such as checking status, savings, employment, and history. The anchor structure is coherent, though the all-ones presentation is not very intuitive without domain familiarity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:08.181837+00:00"
+}

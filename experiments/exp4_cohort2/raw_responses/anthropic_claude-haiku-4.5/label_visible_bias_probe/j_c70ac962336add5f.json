@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c70ac962336add5f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e23de818fd8f8613_cf8abc0ef4899376.txt",
+  "prompt_version": "cf8abc0ef4899376",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542376-xKTmkKM2ROUbeIxsbsF8",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 558,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004016,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00279,
+        "upstream_inference_cost": 0.004016,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1784
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchored the positive prediction with perfect precision (1.0), supporting model behavior inspection and bias investigation for credit decisions. However, the low fidelity (0.15) raises concerns about whether these anchors truly represent the model's decision logic.\",\n    \"clarity\": \"The format is straightforward with feature names, values, and precision scores presented in a structured list that a non-expert can parse. However, domain context (what these features mean in credit assessment) is assumed rather than explained.\",\n    \"completeness\": \"Only three features are identified as anchors while nine others show zero contribution, leaving uncertainty about whether the model genuinely ignores those features or whether the anchor method failed to capture their role. The low fidelity metric (0.15) suggests incomplete local decision context.\",\n    \"concision\": \"The explanation is compact at 68 tokens and avoids redundancy, efficiently listing anchors with their precision scores. However, the inclusion of nine zero-valued features adds minimal information and could be omitted.\",\n    \"overall_quality\": \"The explanation provides a sparse, technically valid anchor set but suffers from low fidelity, lack of actionability, and incomplete coverage of decision drivers. While structurally clear, it offers limited practical value for credit decision review or recourse.\",\n    \"semantic_plausibility\": \"The three anchors (no checking account, used car purpose, no savings) are plausible risk factors in credit assessment, aligning with domain expectations. However, the complete absence of age, credit amount, and duration as factors is counterintuitive in lending contexts.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:02.944942+00:00"
+}

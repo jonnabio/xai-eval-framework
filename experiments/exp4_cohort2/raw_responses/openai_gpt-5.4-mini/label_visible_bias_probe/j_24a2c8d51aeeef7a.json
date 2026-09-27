@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_24a2c8d51aeeef7a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4f96f4d65555df8d_70b23973ccdd3e93.txt",
+  "prompt_version": "70b23973ccdd3e93",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541372-FbHn8Tl1g3Trt1LcH93q",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00320325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0024075,
+        "upstream_inference_cost": 0.00320325,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1596
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists several features, but it does not tell the user what to change, how much to change it, or which factors are most important for reversing the decision. The all-or-nothing 1.0000/0.0000 values also do not translate into clear recourse steps.\",\n    \"audit_usefulness\": \"It provides a local set of features associated with the prediction, which is somewhat useful for inspection. However, the output lacks directionality, thresholds, and an indication of whether each feature supports class 0 or class 1, limiting its value for detailed auditing.\",\n    \"clarity\": \"The text is short and uses plain feature names, so it is easy to read at a surface level. Still, the meaning of the 1.0000 and 0.0000 scores is unclear to a non-expert, making the explanation only partially understandable.\",\n    \"completeness\": \"It names several local factors, but it does not explain why the model predicted class 0 for a false negative case or how these factors interacted. Key decision context such as feature contributions, rules, or a class-oriented summary is missing.\",\n    \"concision\": \"The explanation is compact and avoids long prose, which is good for a local summary. Yet it is also somewhat repetitive and low-information because the listed values do not communicate much beyond a set of selected features.\",\n    \"overall_quality\": \"This is a plausible but fairly bare-bones anchor-style explanation: it identifies features near the instance, but gives limited insight into the model's decision logic or how to act on it. Its usefulness is moderate at best because interpretability is shallow despite reasonable brevity.\",\n    \"semantic_plausibility\": \"The listed features are all plausible for German credit data, and they fit the domain of loan-risk modeling. Nothing in the explanation contradicts the case context, although the uniform 1.0000 scores are not very semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:15.368867+00:00"
+}

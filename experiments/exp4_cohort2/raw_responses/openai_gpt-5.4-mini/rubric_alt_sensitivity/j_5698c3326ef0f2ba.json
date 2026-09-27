@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5698c3326ef0f2ba",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6af7798c2cb4bb08_f8223dd5f869273f.txt",
+  "prompt_version": "f8223dd5f869273f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543042-dahUczW2RjHpNutdLDVm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026115,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017505,
+        "upstream_inference_cost": 0.0026115,
+        "upstream_inference_prompt_cost": 0.000861
+      },
+      "is_byok": false,
+      "prompt_tokens": 1148,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It names local factors that pushed the prediction up or down, but it does not say what specific changes would likely alter the model's output.\",\n    \"audit_usefulness\": \"The SHAP ranking is useful for checking which features influenced this false negative, but it lacks enough detail to directly diagnose bias or systematic error beyond the feature list.\",\n    \"clarity\": \"The explanation is compact and mostly understandable, though terms like the encoded credit variables and positive/negative SHAP values still require some familiarity with the dataset or SHAP.\",\n    \"completeness\": \"It gives the top contributing features, which covers the main local influences, but it does not explain the full decision logic or quantify the baseline versus final score.\",\n    \"concision\": \"The explanation is terse and information-dense, with little wasted wording.\",\n    \"overall_quality\": \"This is a solid local attribution explanation: it is compact, stable, and informative about the main drivers, but it is limited in interpretability and does not fully explain the false negative.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit and the directions are consistent with a local feature-attribution view, though the specific impact of some encoded categories is not inherently intuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:04.755196+00:00"
+}

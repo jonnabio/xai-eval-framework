@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae4b94d300defe9b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dd25e0c70b67a9c0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ae4b94d300defe9b_18685e01dc039430.txt",
+  "prompt_version": "18685e01dc039430",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542171-FZxKHdIPWutRkoJGRnUB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00310275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002304,
+        "upstream_inference_cost": 0.00310275,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1577
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae4b94d300defe9b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features associated with the prediction, but it does not translate them into any concrete recourse or next steps. A user cannot tell what to change, by how much, or whether any change would plausibly alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it identifies which variables locally pushed the model toward class 1 or away from it. However, the contribution values are small and there is no contextual comparison to the instance's actual feature values, limiting deeper inspection of model behavior.\",\n    \"clarity\": \"The list format is straightforward, and the feature names are readable for a general audience. Still, the meaning of positive and negative contributions is not explained, so a non-expert may not fully understand how the prediction was formed.\",\n    \"completeness\": \"It covers several local drivers, including education, marital status, occupation, hours worked, capital gain, and age. Even so, it lacks the instance's actual feature values, the base prediction, and a clearer indication of why this specific false positive occurred.\",\n    \"concision\": \"The explanation is compact and contains only the top local factors, with little redundancy. It is reasonably efficient, though the raw coefficient-style presentation could be slightly more readable.\",\n    \"overall_quality\": \"This is a useful but limited LIME explanation: it offers a concise local factor list, but it does not provide enough context to fully understand or act on the false positive prediction. Its main strengths are brevity and partial audit value, while its weaknesses are interpretability and lack of recourse guidance.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and broadly consistent with common income-related patterns. The mix of modest positive and negative attributions also looks reasonable for a local explanation, even if the magnitudes are small.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:33.552126+00:00"
+}

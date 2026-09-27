@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_685d9a76df349e39",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3e006f8c0e7512b1_26ff424cdfa1d4dd.txt",
+  "prompt_version": "26ff424cdfa1d4dd",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541360-T7bcZULc0IvYeEB9qzZd",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1061,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 674,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00492,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00397875,
+        "upstream_inference_cost": 0.00492,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2316
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only raw attribution values without presenting the actual feature values or actionable guidance for recourse.\",\n    \"audit_usefulness\": \"It exposes the primary directional drivers of the false negative prediction, though the lack of explicit input feature values slightly hinders complete auditability.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric SHAP weights is intelligible to data practitioners but difficult for a non-expert to parse.\",\n    \"concision\": \"The presentation is dense and directly delivers the top local factors without unnecessary filler.\",\n    \"completeness\": \"The explanation covers the top ten local features, though omitting baseline value and input values leaves the decision context somewhat incomplete.\",\n    \"semantic_plausibility\": \"While most features align with known adult income drivers, some attributions like negative Prof-specialty appear counterintuitive without knowing whether the feature was present or absent.\",\n    \"overall_quality\": \"It is an acceptable technical summary of SHAP attributions that informs model inspection but lacks user-facing clarity and actionable insights.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:09.641949+00:00"
+}

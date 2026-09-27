@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9816c9b5b813c504",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_196e6ce035ebf3e3_a663ad255bebe44a.txt",
+  "prompt_version": "a663ad255bebe44a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543090-EOuyQdp7aPNIlt8y4BYX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00262275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017595,
+        "upstream_inference_cost": 0.00262275,
+        "upstream_inference_prompt_cost": 0.00086325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1151,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their directions; it does not say what changes would likely alter the prediction or what a person could do next.\",\n    \"audit_usefulness\": \"The top SHAP factors give some insight into the model's local logic, but the moderate fidelity and lack of a broader pattern limit how much it helps with deeper bias or error analysis.\",\n    \"clarity\": \"The feature names and plus/minus contributions are fairly easy to read, though a non-technical user would still need some familiarity with the German credit variables and SHAP signs.\",\n    \"completeness\": \"It identifies several main contributors to the prediction, but it is not a full local account of why the model predicted class 1 or how the features combine.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious filler beyond the ranked feature list.\",\n    \"overall_quality\": \"It is a decent local summary of the model decision, but the moderate fidelity and lack of interpretive context keep it from being especially strong.\",\n    \"semantic_plausibility\": \"The listed credit-related factors, such as checking status, savings, duration, and credit amount, are plausible drivers for a German credit decision and fit the domain well.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:52.167796+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_aa06d8b1afd089d9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a138a3019aad47d9_2d7263d517cfb77f.txt",
+  "prompt_version": "2d7263d517cfb77f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543675-uEKfobqq5Jl9v2D9kcSZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 366,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00249375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001647,
+        "upstream_inference_cost": 0.00249375,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1495
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists factors with numeric values and does not state any concrete change that would alter the prediction.\",\n    \"audit_usefulness\": \"The output is too sparse and appears to be mostly zeros, so it gives little insight into the model's decision logic or potential bias.\",\n    \"clarity\": \"A reader can tell that hours-per-week matters most, but the meaning of the normalized numbers is not explained and the presentation is technical.\",\n    \"completeness\": \"It identifies one apparent driver, hours-per-week, but omits a full local explanation of why the model predicted the negative class for this false negative case.\",\n    \"concision\": \"The explanation is short, but much of the space is spent on zero-valued factors that add little information.\",\n    \"overall_quality\": \"As an explanation, it is weak: it offers only a partial and low-signal account, with poor usefulness for understanding or diagnosing the prediction.\",\n    \"semantic_plausibility\": \"For the Adult dataset, hours worked per week is a plausible influence, but the dominance of a single feature with many zero entries makes the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:38.379632+00:00"
+}

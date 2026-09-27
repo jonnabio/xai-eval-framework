@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4ff62fbb67e9937e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e5e8a4d0292d4cca_b85ae2443f258bd8.txt",
+  "prompt_version": "b85ae2443f258bd8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543597-wGz4fP2FZpBPuFqhiEIv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00264675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017955,
+        "upstream_inference_cost": 0.00264675,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1534
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local factors and weights; it does not say what changes might alter the decision or how to act on the result.\",\n    \"audit_usefulness\": \"It reveals which features the anchor method considered locally important, but without directionality or a clear link to the false negative, it is only moderately helpful for auditing.\",\n    \"clarity\": \"The feature names are understandable in a credit context, but the meaning of the repeated 1.0000/0.0000 values is not self-explanatory to a non-technical reader.\",\n    \"completeness\": \"It gives some local factors but not the main causal story behind the prediction, especially since the model made a false negative and the explanation does not explain why risk was underestimated.\",\n    \"concision\": \"It is brief and mostly non-redundant, but several listed zero-weight features add little value for the length.\",\n    \"overall_quality\": \"The explanation is limited and somewhat opaque: it provides a sparse list of anchor features but does not clearly justify the model's mistaken decision or support deeper understanding.\",\n    \"semantic_plausibility\": \"The listed credit-related factors are plausible for a German credit case, but the explanation does not translate them into an interpretable rationale for this specific applicant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:19.938856+00:00"
+}

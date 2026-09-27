@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_191f42deef7c9998",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a2878ddc3d3b22b3_a44aef4ad17f0157.txt",
+  "prompt_version": "a44aef4ad17f0157",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543949-82m3LaKZT7FTq5aAaOLe",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00255675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001701,
+        "upstream_inference_cost": 0.00255675,
+        "upstream_inference_prompt_cost": 0.00085575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1141,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output lists feature values/weights but gives no concrete way to change the prediction or what counterfactual move would matter.\",\n    \"audit_usefulness\": \"It provides only a sparse set of local factors with mostly zero values, which offers limited insight for checking model behavior, bias, or error.\",\n    \"clarity\": \"The feature names are understandable to a technical reader, but the coefficient-like numbers and many zeros are not self-explanatory to a non-technical user.\",\n    \"completeness\": \"It mentions only a few local factors and omits an actual causal or counterfactual story for why the model predicted class 1 on this false positive case.\",\n    \"concision\": \"The explanation is short and compact, but much of the content is low-information zeros, so its useful density is limited.\",\n    \"overall_quality\": \"This is a weak explanation: it is terse and somewhat interpretable, but it does not adequately explain the FP decision or support deeper review.\",\n    \"semantic_plausibility\": \"Age and self-employment can plausibly influence Adult-income predictions, but the explanation is just a feature list rather than a coherent instance-specific rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:19:12.185539+00:00"
+}

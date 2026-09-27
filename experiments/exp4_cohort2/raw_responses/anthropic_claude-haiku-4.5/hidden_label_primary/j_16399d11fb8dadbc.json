@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_16399d11fb8dadbc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c04339897f75190f_e492ecaca783018b.txt",
+  "prompt_version": "e492ecaca783018b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540231-pPmjnWouKeO9puMquTek",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003848,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00261,
+        "upstream_inference_cost": 0.003848,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1760
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model behavior inspection and could help identify systematic biases or errors in credit decisions. The technical metrics (fidelity 0.81, stability 0.78) indicate moderate reliability for audit purposes.\",\n    \"clarity\": \"The explanation uses domain-specific terminology (SHAP, feature names, SHAP values) and a compact numerical format that requires familiarity with machine learning concepts to interpret. A non-expert would struggle to understand the meaning of the values and their implications.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, providing reasonable local decision context. However, it lacks information about the base prediction rate, model confidence, or threshold behavior that would fully contextualize the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting 10 features with their contributions efficiently. The format is dense but appropriate for the information density required.\",\n    \"overall_quality\": \"The explanation provides technically sound SHAP-based feature importance but lacks accessibility, actionability, and contextual framing. While useful for technical auditors, it falls short of being a comprehensive, user-friendly explanation.\",\n    \"semantic_plausibility\": \"The identified factors (duration, checking status, payment plans, employment, purpose, age, housing, savings) are plausible credit risk drivers consistent with domain knowledge. The direction and magnitude of contributions align with typical credit assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:17.232183+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_41da385611c7ff39",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4e230a6771152fb2_13bd8041af355d48.txt",
+  "prompt_version": "13bd8041af355d48",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541502-vOy4DCPQ1NnobJKujVVl",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.00300825,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or decision guidance, only a ranked list of features with small signed weights. A user cannot tell what specific change would most likely affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which local features pushed the logistic regression output up or down, and includes the top factors. However, the contributions are very small and there is no baseline or probability context, limiting deeper inspection.\",\n    \"clarity\": \"The output is easy to read for a technically literate user because it is a simple list of feature names and values. Still, a non-expert may not know what the positive and negative weights mean or how strongly they influenced the prediction.\",\n    \"completeness\": \"It covers the main local drivers among the top listed factors, but it does not explain the full decision context or how these weights combine to yield class 0. The lack of model score, intercept, or feature values for the instance makes the explanation incomplete.\",\n    \"concision\": \"The explanation is compact and contains little redundancy, with only the most important local factors shown. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"This is a decent local explanation for a tabular linear model, but it is limited by weak interpretability of the small coefficients and missing decision context. It is useful as a lightweight summary, not as a full explanation for a decision review.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset, since occupation, capital gain, education, marital status, race, and sex are all relevant census-style variables. The directions are also consistent with a local linear contribution view, though the tiny magnitudes suggest limited effect size.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:24.432646+00:00"
+}

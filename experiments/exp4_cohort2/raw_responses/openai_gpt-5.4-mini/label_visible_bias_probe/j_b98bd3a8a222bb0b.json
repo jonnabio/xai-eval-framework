@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b98bd3a8a222bb0b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e564a6093e40672d_fcb9bd011d47ce31.txt",
+  "prompt_version": "fcb9bd011d47ce31",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542440-JyzhfXeicYE6ZNhFTdjQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029265,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.0029265,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps for the individual. It only lists factors with binary support values, so a user cannot infer what to change or verify.\",\n    \"audit_usefulness\": \"For auditing, it gives a sparse set of local features but no directional effects, thresholds, or comparison to the model\u2019s decision boundary. The low fidelity and stability also limit its usefulness for diagnosing model behavior.\",\n    \"clarity\": \"The output is easy to scan because it is short and uses simple labels, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand how these features relate to the positive prediction.\",\n    \"completeness\": \"It includes several apparent local factors, but it does not explain whether they increase or decrease the probability of class 1, nor how much each contributed. Important context for the specific prediction is therefore missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with only a small number of listed factors. However, the brevity comes at the cost of interpretive detail, so it is only moderately informative per word.\",\n    \"overall_quality\": \"Overall, this is a terse anchor-style explanation that is somewhat readable but weak as a decision explanation. It provides limited local insight, little actionability, and poor support for detailed review.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, especially age, education, occupation, relationship, and hours-per-week. However, the presentation as all-or-nothing local factors without effect direction makes the explanation only moderately coherent.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 2,\n      \"clarity\": 2,\n      \"completeness\": 2,\n      \"concision\": 4,\n      \"overall_quality\": 2,\n      \"semantic_plausibility\": 3\n    }\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:03.032993+00:00"
+}

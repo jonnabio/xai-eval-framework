@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_dd5c7053626bee51",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_3adf691ba6671f41.txt",
+  "prompt_version": "3adf691ba6671f41",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544342-MaafZOc4CyLOaNsuArEr",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 664,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00491475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003975,
+        "upstream_inference_cost": 0.00491475,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2313
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only signed linear attribution weights without baseline references, counterfactual goals, or actionable paths for recourse.\",\n    \"audit_usefulness\": \"It exposes the model's reliance on protected demographic features such as race and sex, which is valuable for fairness auditing despite the lack of exact feature values.\",\n    \"clarity\": \"The representation is a compact list of encoded feature names and numerical weights, which requires statistical or machine learning familiarity to properly interpret.\",\n    \"completeness\": \"While ten top drivers are listed, continuous feature values (such as hours-per-week) are omitted, leaving the local context partially incomplete.\",\n    \"concision\": \"The text delivers the top local feature attributions directly without filler words or redundant formatting.\",\n    \"overall_quality\": \"The explanation offers a direct, auditor-relevant glance into local feature importance, but suffers from low actionability and missing feature value context.\",\n    \"semantic_plausibility\": \"The direction of the attributions aligns well with known socio-economic patterns in the Adult Census dataset, such as lower educational attainment pushing towards <=50K.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:25:49.556805+00:00"
+}

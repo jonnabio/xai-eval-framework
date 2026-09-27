@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c0d339b80909e946",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_719c3e5dafe19965_34edb7ade0e140e7.txt",
+  "prompt_version": "34edb7ade0e140e7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546672-T570gFwtoXB14EPtVZYR",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004111,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00282,
+        "upstream_inference_cost": 0.004111,
+        "upstream_inference_prompt_cost": 0.001291
+      },
+      "is_byok": false,
+      "prompt_tokens": 1291,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1855
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two factors (installment_commitment and purpose_used car) but provides no guidance on what could be changed or what actions would alter the outcome. It is purely descriptive without prescriptive value.\",\n    \"audit_usefulness\": \"While the explanation shows which features matter, the low fidelity (0.625) and high faithfulness gap (0.316) suggest the explanation may not reliably represent the model's actual decision logic. This undermines confidence in using it for bias or error detection.\",\n    \"clarity\": \"The format is technical with feature names and normalized weights. A non-technical person would struggle to understand what 'installment_commitment: 1.0000' means in practical terms or why it matters for credit decisions.\",\n    \"completeness\": \"Only two features are highlighted as important, but the explanation lacks context about their values, thresholds, or how they interact. The main reasons are identified but insufficient detail is provided about this specific instance's decision.\",\n    \"concision\": \"The explanation is compact but includes many zero-weighted features that add little value. The list of features with 0.0000 weights is somewhat redundant and could be condensed.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies relevant features, the poor technical metrics (low fidelity, high faithfulness gap, moderate stability), lack of actionability, and limited interpretability for non-technical users significantly limit its utility. The false positive prediction (model said 1, true label 0) compounds concerns about reliability.\",\n    \"semantic_plausibility\": \"In credit scoring, installment commitment and vehicle purpose are plausible factors. However, the explanation's reliability is questionable given the model predicted positive (credit approval) when the true label is negative (denial), suggesting the explanation may not capture why the model made this incorrect decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:04:39.315901+00:00"
+}

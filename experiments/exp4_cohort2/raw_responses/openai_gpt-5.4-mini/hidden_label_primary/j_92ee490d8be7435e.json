@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_92ee490d8be7435e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_57fbcb6615a605ff_b94dfbf0eb6fb644.txt",
+  "prompt_version": "b94dfbf0eb6fb644",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539780-X3AR4cyyIiNtuZEwpo5c",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028455,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020565,
+        "upstream_inference_cost": 0.0028455,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1509
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57fbcb6615a605ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature attributions and does not suggest any concrete recourse or next steps. A user cannot directly act on terms like 'worst texture' without further guidance.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows which local features pushed the XGBoost prediction toward the positive class and their relative importance. However, it lacks any comparison to typical values or global context that would make investigation stronger.\",\n    \"clarity\": \"The format is straightforward and the feature ranking is easy to read, even for a non-expert. The medical feature names are somewhat technical, but the structure itself is clear.\",\n    \"completeness\": \"It covers several main positive and negative contributors, so the local decision is partially explained. Still, it does not provide the model score, baseline, feature values for the instance, or enough context to fully understand why this prediction was made.\",\n    \"concision\": \"The explanation is compact and lists the top local factors without unnecessary prose. It is efficient, though the raw feature names and values could be more interpretable.\",\n    \"overall_quality\": \"This is a decent SHAP explanation that gives a concise ranking of influential features and is reasonably useful for inspection. Its main weaknesses are limited interpretability, lack of recourse, and incomplete local context.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible and consistent with known predictive signals in this domain, especially concavity, radius, area, and texture measures. The mix of positive and negative SHAP values also appears coherent for a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:44.955697+00:00"
+}

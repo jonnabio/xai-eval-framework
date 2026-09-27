@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d0f687d1ac6f827e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9a991f3bd7709007_f1ecaf41fa27cd3e.txt",
+  "prompt_version": "f1ecaf41fa27cd3e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538997-4GMYyZGyEQeVsXrGkX42",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003072,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002277,
+        "upstream_inference_cost": 0.003072,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1566
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, only a list of contributing features with signs and magnitudes. A user could not easily act on this information without knowing what feature changes would reduce the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals which local features pushed the XGBoost model toward the positive class and which pushed against it. However, it lacks thresholds, baseline context, or comparison to the instance values, so root-cause investigation remains partial.\",\n    \"clarity\": \"The ranking and numeric attributions are easy to read, and the feature names are standard for the breast cancer domain. Still, a non-expert may not understand the meaning of the signed SHAP values without additional explanation.\",\n    \"completeness\": \"The explanation covers the main top local drivers and includes both positive and negative contributors, which helps explain the prediction direction. It does not provide the instance's actual feature values, probability, or enough context to fully understand why the model predicted class 1.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the top local factors with their SHAP contributions. It is informative per word, though the numeric list could be slightly more interpretable with brief context.\",\n    \"overall_quality\": \"This is a solid but limited local explanation: it is readable, fairly stable, and useful for model inspection, but it is not especially actionable or self-explanatory to a non-expert. Overall it provides moderate-to-good insight into the prediction without fully closing the interpretability gap.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are plausible and consistent with the domain, and the mix of positive and negative SHAP values is coherent. Nothing in the explanation contradicts typical model behavior or the dataset context.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:41.138722+00:00"
+}

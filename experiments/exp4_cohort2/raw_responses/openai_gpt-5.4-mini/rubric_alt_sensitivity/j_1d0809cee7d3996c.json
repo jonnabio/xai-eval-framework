@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1d0809cee7d3996c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_45af74f0fdcedd43_74e2f627724177e0.txt",
+  "prompt_version": "74e2f627724177e0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542943-QfwQA2G3x50UgcuQg5sM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 358,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0024645,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001611,
+        "upstream_inference_cost": 0.0024645,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1496
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their SHAP values; it does not indicate what changes would likely reverse the prediction.\",\n    \"audit_usefulness\": \"The ranked local attributions are useful for inspecting model behavior and spotting potentially suspicious feature reliance, though they are limited to one instance.\",\n    \"clarity\": \"The feature names and signs are understandable to a reader with some domain knowledge, but the meaning of positive vs. negative contributions is not fully spelled out.\",\n    \"completeness\": \"It provides the main local factors driving the prediction, but not a fuller explanation of how they combine or why the model predicted class 1 for this case.\",\n    \"concision\": \"The explanation is compact and information-dense, with little wasted wording beyond the feature list.\",\n    \"overall_quality\": \"It is a strong local explanation: concise, stable, and fairly faithful, but still limited to feature attributions without a fuller decision narrative.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, and the features shown are reasonable drivers of a credit-risk decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:25.617719+00:00"
+}

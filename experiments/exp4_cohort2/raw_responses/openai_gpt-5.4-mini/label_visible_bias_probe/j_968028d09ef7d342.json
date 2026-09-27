@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_968028d09ef7d342",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_78dfd1648ed95148_bcefa8a01705de28.txt",
+  "prompt_version": "bcefa8a01705de28",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541189-xoFZeKvU7eHTQZNrixBb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00307575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002277,
+        "upstream_inference_cost": 0.00307575,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1571
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps, only a ranked list of features with signs. A user cannot directly tell what to change to alter the prediction or how to review the decision beyond observing the listed factors.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local drivers and their directions, which helps inspect whether the model relied on sensible variables. However, it lacks baseline values, units, and a fuller local comparison, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The format is compact and the feature names with signed contributions are easy to scan for someone familiar with tabular explanations. For a non-expert, terms like SHAP values and coded categorical variables such as checking_status_no checking reduce interpretability.\",\n    \"completeness\": \"It identifies several top contributors to the prediction, but it does not explain the base value, the total score, or how these contributions combine into the final negative prediction. Important local context is also missing, especially given that this is a false negative.\",\n    \"concision\": \"The explanation is fairly compact and mostly avoids redundancy while still listing the main local factors. It is somewhat dense because it includes many features in one line, but that density is appropriate for a SHAP summary.\",\n    \"overall_quality\": \"This is a reasonably useful local explanation with decent fidelity and good sparsity, but it is limited by low accessibility and weak support for understanding or acting on a false negative. Overall it is informative for technical inspection, but not strong as a user-facing explanation.\",\n    \"semantic_plausibility\": \"The feature set is broadly plausible for German credit data, and the directions of influence look consistent with credit-risk intuition. Still, without instance values or context, it is hard to judge whether the specific combination fully fits the case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:12.556318+00:00"
+}

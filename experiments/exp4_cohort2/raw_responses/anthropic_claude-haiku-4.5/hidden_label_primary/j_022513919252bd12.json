@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c1afbcd9580538a4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_022513919252bd12",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c1afbcd9580538a4_b1c947ac67061d75.txt",
+  "prompt_version": "b1c947ac67061d75",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541104-oihueJg28uWtP75tQ6en",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004033,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002805,
+        "upstream_inference_cost": 0.004033,
+        "upstream_inference_prompt_cost": 0.001228
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1789
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c1afbcd9580538a4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names with uniform weights (all 1.0) but provides no guidance on which features matter most, their direction of influence, or what actions could change the prediction. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies features used by the model, the uniform weighting across all features (including all three checking_status categories simultaneously) suggests the anchor extraction may have failed or produced a degenerate result, limiting diagnostic value for auditing model behaviour or detecting bias.\",\n    \"clarity\": \"The format is straightforward as a list of feature names and weights, but the semantic meaning is unclear: why do all features have identical importance, and why are mutually exclusive categories (checking_status_<0, 0<=X<200, >=200) all weighted equally at 1.0?\",\n    \"completeness\": \"The explanation nominally covers many features but lacks critical information: no feature values for the instance, no direction of influence (positive/negative), no confidence intervals, and no indication of which features actually drove the prediction versus which are spurious.\",\n    \"concision\": \"The explanation is compact in token count but informationally dense in a problematic way\u2014it lists 10 features with identical weights without explaining why, creating apparent redundancy and padding rather than efficient communication.\",\n    \"overall_quality\": \"The explanation exhibits signs of anchor extraction failure (uniform weights, mutually exclusive categories all equally important, very low fidelity of 0.107) and provides minimal actionable or auditable insight into the model's decision for this instance.\",\n    \"semantic_plausibility\": \"The uniform weighting of all features including mutually exclusive categorical values is implausible and contradicts domain expectations; in credit risk assessment, features should have differentiated importance, and categorical levels should not all contribute equally.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:31:51.034335+00:00"
+}

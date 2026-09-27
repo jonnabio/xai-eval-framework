@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ad1514e50f678abb",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e23de818fd8f8613_0017a025310b52c2.txt",
+  "prompt_version": "0017a025310b52c2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545682-BDLE9tgwaFvzBDtcRnxp",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00397,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.00397,
+        "upstream_inference_prompt_cost": 0.001285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1285,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1822
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on what actions could change the outcome. It does not indicate whether these features are modifiable or what alternative values would alter the decision.\",\n    \"audit_usefulness\": \"The explanation shows which features the model relied on (checking status, purpose, savings status) but the very low fidelity (0.15) suggests the anchors poorly represent the model's actual decision logic. This limits its utility for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward with feature names and weights, but lacks context about what the values mean (e.g., what does 'no checking' represent?) and why these features matter. Domain knowledge is needed to interpret the credit-related attributes.\",\n    \"completeness\": \"Only three features are identified as important, with seven others explicitly marked as having zero weight. However, the low fidelity metric (0.15) indicates these anchors capture only a small portion of the model's actual decision logic, leaving the main reasons incomplete.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting feature names and weights efficiently without padding.\",\n    \"overall_quality\": \"While the explanation is technically sound and correctly formatted, the poor fidelity (0.15) is a critical flaw indicating the identified anchors do not reliably represent the model's decision. This undermines the explanation's utility despite correct prediction and perfect stability.\",\n    \"semantic_plausibility\": \"The identified features (checking account status, car purchase purpose, savings status) are plausible credit risk indicators in lending contexts. However, the extremely low fidelity raises doubt about whether these truly drive the model's decision or are merely artifacts of the anchoring process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:48:07.173439+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89e4fe58e0303d60",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_79fed97808fa92ed",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_89e4fe58e0303d60_591c7224531f6521.txt",
+  "prompt_version": "591c7224531f6521",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543621-VrnYFnPHN7k3N4uwqLJ9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1261,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 854,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0056655,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00472875,
+        "upstream_inference_cost": 0.0056655,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2510
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_89e4fe58e0303d60\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable thresholds or direction of change, especially for continuous features like duration, giving the applicant no path to recourse.\",\n    \"audit_usefulness\": \"While it pinpoints four features involved in the anchor, the omission of specific threshold predicates limits an auditor's ability to verify the rule's boundary conditions.\",\n    \"clarity\": \"The binary 1.0/0.0 values without clear predicate conditions (e.g., what value duration takes) make the explanation cryptic to a layperson.\",\n    \"completeness\": \"The explanation indicates which features belong to the anchor but strips the concrete conditional predicates and actual instance values required to fully understand the decision.\",\n    \"concision\": \"Listing multiple inactive features with zero weight creates unnecessary noise rather than reporting only the active anchor conditions.\",\n    \"overall_quality\": \"The explanation correctly identifies key local risk features, but the loss of rule predicates and inclusion of zero-weight features severely degrades its utility.\",\n    \"semantic_plausibility\": \"Negative checking status, lack of property, and loan duration are well-established, highly plausible drivers of credit risk in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:50.251400+00:00"
+}

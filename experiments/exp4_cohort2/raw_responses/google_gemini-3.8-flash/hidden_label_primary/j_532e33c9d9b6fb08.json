@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_532e33c9d9b6fb08",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e23de818fd8f8613_22a3e3e6a669fd4a.txt",
+  "prompt_version": "22a3e3e6a669fd4a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540290-KEt0WoUbni19fACTuurR",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1189,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 773,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00539625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00445875,
+        "upstream_inference_cost": 0.00539625,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2439
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation indicates which categorical attributes are active in the rule, but it does not specify what alternative states would change the decision or provide guidance for recourse.\",\n    \"audit_usefulness\": \"It identifies the three key conditions forming the local anchor, allowing an auditor to inspect model reliance on specific financial and purpose attributes.\",\n    \"clarity\": \"The feature names and binary indicator weights are legible, though presenting an anchor rule as numeric weights of 1.0000 and 0.0000 may confuse non-expert readers.\",\n    \"completeness\": \"The output highlights the active anchor conditions, but it omits rule coverage, precision bounds, and the baseline context of the numeric features.\",\n    \"concision\": \"Listing seven irrelevant features with 0.0000 weights introduces unnecessary clutter instead of presenting only the active anchor conditions.\",\n    \"overall_quality\": \"The explanation adequately identifies the core categorical drivers behind the prediction, but padded zero-value features and pseudo-weight formatting limit its effectiveness.\",\n    \"semantic_plausibility\": \"Using checking status, savings status, and loan purpose to explain a credit decision is logical and aligns well with financial domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 2,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:19.599803+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_93f91a07f64046e4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_196e6ce035ebf3e3_0bdb4a59425836d4.txt",
+  "prompt_version": "0bdb4a59425836d4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539367-lrfyT1wRbeUedfF6zNVJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003667,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002415,
+        "upstream_inference_cost": 0.003667,
+        "upstream_inference_prompt_cost": 0.001252
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1735
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation uses technical feature names and SHAP values without interpretation, requiring domain knowledge of the German credit dataset to understand what each feature represents and why positive/negative values matter.\",\n    \"concision\": \"The explanation is compact and lists only the top 10 factors with their SHAP values, avoiding redundancy while maintaining informativeness.\",\n    \"actionability\": \"The raw SHAP values provide no guidance on what actions could be taken to change the prediction or improve the applicant's outcome; a non-expert cannot translate these numbers into concrete steps.\",\n    \"audit_usefulness\": \"The explanation supports model auditing by showing which features drove the prediction and their relative magnitudes, enabling investigation of potential bias in checking/savings status features.\",\n    \"completeness\": \"The top 10 factors cover the main drivers, but the explanation lacks context about the base prediction probability, feature values for this instance, or how these factors combine to produce the final prediction.\",\n    \"semantic_plausibility\": \"The factors are plausible for credit risk assessment (checking status, savings, credit amount, duration), though the negative contribution of 'no checking' and 'male single' status warrants scrutiny for potential fairness concerns.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks accessibility and actionability for end users; moderate fidelity (0.44) and stability (0.58) metrics suggest the explanation may not reliably represent model behavior across similar instances.\"\n  },\n  \"scores\": {\n    \"clarity\": 2,\n    \"concision\": 5,\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"completeness\": 3,\n    \"semantic_plausibility\": 3,\n    \"overall_quality\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:52.132752+00:00"
+}

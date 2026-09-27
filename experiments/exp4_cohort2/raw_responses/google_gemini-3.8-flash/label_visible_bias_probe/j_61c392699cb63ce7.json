@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_61c392699cb63ce7",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e564a6093e40672d_fcb9bd011d47ce31.txt",
+  "prompt_version": "fcb9bd011d47ce31",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545566-l4gux8ySbELJ5ms8C5b6",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 958,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00606975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00513,
+        "upstream_inference_cost": 0.00606975,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2621
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it lacks feature values, thresholds, and directional effects.\",\n    \"audit_usefulness\": \"While it indicates which features were selected by the explainer, the lack of rule conditions, combined with poor fidelity (0.39), severely limits its diagnostic value for auditors.\",\n    \"clarity\": \"The output presents raw feature names paired with uniform weights without operators or explanatory text, making it difficult for a lay reader to interpret.\",\n    \"completeness\": \"The explanation lists several features but omits the actual predicate bounds and instance values necessary to understand why the anchor holds.\",\n    \"concision\": \"Several features are listed with identical weights of 1.0000 or 0.0000, conveying minimal distinctive information relative to its length.\",\n    \"overall_quality\": \"The degenerate presentation of rule conditions as uniform weights strips the explanation of core Anchor semantics, yielding low fidelity and poor interpretability.\",\n    \"semantic_plausibility\": \"The identified features are relevant to income prediction, but presenting mutually exclusive categorical indicators (e.g., multiple education levels) with identical weights reduces semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:46:16.464655+00:00"
+}

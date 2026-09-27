@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1833fc7e5a5ecede",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e594d44f0a99f099_23c6ef0389eed03f.txt",
+  "prompt_version": "23c6ef0389eed03f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543811-kS085H4IULbFvOfyjC0m",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1282,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 855,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00572625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0048075,
+        "upstream_inference_cost": 0.00572625,
+        "upstream_inference_prompt_cost": 0.00091875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2507
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance, which is expected for fixed clinical measurements but further limited by the absence of feature thresholds.\",\n    \"audit_usefulness\": \"While it isolates two relevant features ('area error' and 'worst perimeter'), the absence of explicit decision boundaries or inequality predicates limits its utility for rigorous model auditing.\",\n    \"clarity\": \"The text is readable, but displaying binary inclusion weights (1.0000 vs 0.0000) instead of rule predicates can confuse non-experts about what the values represent.\",\n    \"completeness\": \"The explanation indicates which two features were selected in the anchor but omits the threshold conditions necessary to understand why the instance was classified as positive.\",\n    \"concision\": \"Listing numerous inactive features with values of 0.0000 adds unnecessary clutter to an otherwise sparse two-feature anchor.\",\n    \"overall_quality\": \"The explanation identifies plausible top drivers for breast cancer classification, but the omission of actual decision thresholds and the inclusion of inactive zero-valued features reduce its overall effectiveness.\",\n    \"semantic_plausibility\": \"Focusing on 'area error' and 'worst perimeter' aligns well with established clinical knowledge regarding malignant cell nucleus morphology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:01.149847+00:00"
+}

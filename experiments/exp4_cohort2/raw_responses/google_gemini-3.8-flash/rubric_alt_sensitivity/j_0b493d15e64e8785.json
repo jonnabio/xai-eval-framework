@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0b493d15e64e8785",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_d7929e6662f20d44.txt",
+  "prompt_version": "d7929e6662f20d44",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546665-8Y7EcZvkUF0mvoyWlKHi",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 938,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006084,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00508875,
+        "upstream_inference_cost": 0.006084,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2684
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides attribution weights without baseline references or input values, making it difficult to discern concrete steps an individual could take to change the prediction.\",\n    \"audit_usefulness\": \"The attributions reveal which factors drove this false negative prediction, highlighting potentially anomalous logic (such as positive effects for never-married alongside married-civ-spouse) that auditors can investigate.\",\n    \"clarity\": \"The raw SHAP values paired with one-hot encoded feature names without explicit feature values require technical knowledge of machine learning to interpret correctly.\",\n    \"completeness\": \"The explanation supplies the top ten feature contributions, capturing the major components of the model's score, though omitting the remaining feature attributions and underlying feature states.\",\n    \"concision\": \"The list is concise, presenting the top ten factors directly without unnecessary prose.\",\n    \"overall_quality\": \"This is a serviceable feature attribution explanation that highlights why the model predicted class 0, though the absence of input feature values hampers full interpretability.\",\n    \"semantic_plausibility\": \"Several attributions appear counterintuitive or difficult to evaluate without input values, such as negative effects for prof-specialty and simultaneous positive contributions from mutually exclusive marital statuses.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:04:35.476895+00:00"
+}

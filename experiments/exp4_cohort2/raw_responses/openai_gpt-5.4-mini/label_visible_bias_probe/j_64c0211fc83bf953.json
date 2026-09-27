@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_64c0211fc83bf953",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_445567f442799a48_09da8412d7a0b79c.txt",
+  "prompt_version": "09da8412d7a0b79c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541483-TBWTeAJJQ72txtW41N2N",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.00300525,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors that influenced the prediction, but it does not translate them into concrete recourse or next steps for the applicant. A user cannot easily tell what changes would likely improve the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP contributions with signs and magnitudes, allowing inspection of which features pushed the model toward class 0. However, it lacks baseline context, feature values, and comparison to similar cases, so deeper error analysis is limited.\",\n    \"clarity\": \"The output is compact and the feature-attribution format is easy to scan, but several feature names are technical and may require domain familiarity. A non-expert can grasp the general idea, though not every term is immediately intuitive.\",\n    \"completeness\": \"The explanation covers the main local drivers and indicates whether they push the prediction up or down, which helps understand the decision. Still, it omits the actual feature values, base value, and the combined effect needed for a full local decision explanation.\",\n    \"concision\": \"The explanation is concise and information-dense, presenting ten top factors in a single short line. It avoids redundancy while still conveying the main attributions.\",\n    \"overall_quality\": \"Overall this is a solid SHAP summary for a local binary prediction: it is compact, mostly interpretable, and useful for auditing. Its main weakness is the lack of recourse guidance and richer context for fully understanding why the model predicted class 0.\",\n    \"semantic_plausibility\": \"The factors are consistent with the German credit domain, where checking status, savings, credit history, employment, and loan amount are sensible predictors. The mix of positive and negative contributions is also plausible for a TN instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:05.786033+00:00"
+}

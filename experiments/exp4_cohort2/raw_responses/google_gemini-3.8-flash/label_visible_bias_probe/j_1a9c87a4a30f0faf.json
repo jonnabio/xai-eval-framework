@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1a9c87a4a30f0faf",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7ee17e1b81806239_0cf808e25f237572.txt",
+  "prompt_version": "0cf808e25f237572",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544935-aqoFRL83O4RsoxyBXSlG",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 760,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00529425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00435,
+        "upstream_inference_cost": 0.00529425,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2419
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature weights without baseline values, directional guidance, or actionable steps for recourse.\",\n    \"audit_usefulness\": \"It provides insight into potential modeling and explainer artifacts, such as mutually exclusive marital dummy variables receiving separate weights, but lacks the instance's actual feature values.\",\n    \"clarity\": \"The raw list of one-hot encoded variable names and small floating-point coefficients requires technical knowledge to interpret.\",\n    \"completeness\": \"While ten local weights are reported, the omission of the individual's actual feature values and base prediction probability leaves the local decision context incomplete.\",\n    \"concision\": \"The presentation is compact and free of conversational padding, though listing several mutually exclusive one-hot categories adds some redundancy.\",\n    \"overall_quality\": \"The explanation provides basic LIME attribution data but suffers from one-hot encoding artifacts, counterintuitive weights, and a lack of feature values.\",\n    \"semantic_plausibility\": \"Attributing negative weights to education_Doctorate and Prof-specialty for higher income contradicts standard domain intuition, as does simultaneously weighting mutually exclusive marital statuses.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:35:45.200024+00:00"
+}

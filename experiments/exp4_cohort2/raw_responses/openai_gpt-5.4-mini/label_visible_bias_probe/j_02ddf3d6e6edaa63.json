@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_02ddf3d6e6edaa63",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f18f76706d7aa678_bd035f16f68bfad9.txt",
+  "prompt_version": "bd035f16f68bfad9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541997-Q3E5okK9YJKpR2XgKWUb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.0030675,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature indicators but gives no recourse or specific next steps a user could take to change the outcome or review the decision. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"It provides a short set of local feature flags, which is somewhat useful for inspecting what the model may have relied on, but it does not explain directionality, thresholds, or interaction structure. The low stability and modest fidelity further reduce its value for audit purposes.\",\n    \"clarity\": \"The format is readable as a ranked list of features, but the meaning of the 1.0000/0.0000 values is not explained and may be opaque to non-experts. Some entries are also awkwardly presented as one-hot indicators mixed with raw numeric features.\",\n    \"completeness\": \"The explanation includes several apparent local factors, but it omits how they combine to support the positive prediction and does not show whether these are sufficient or necessary conditions. Important context such as feature values, direction of influence, and confidence is missing.\",\n    \"concision\": \"It is fairly short and avoids long prose, so it is compact. However, much of the content is just a sparse list of feature names with binary weights, which limits the useful information per word.\",\n    \"overall_quality\": \"Overall, this is a minimally informative anchors-style output: readable enough to identify some cited factors, but weak in explanatory depth, actionability, and robustness. Its low fidelity and zero stability make it a poor explanation for a real decision review.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the positive class, especially education, marital status, relationship, and workclass. Nothing appears contradictory, although the exact 1.0000 values for several features are not semantically transparent without further context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:40.064810+00:00"
+}

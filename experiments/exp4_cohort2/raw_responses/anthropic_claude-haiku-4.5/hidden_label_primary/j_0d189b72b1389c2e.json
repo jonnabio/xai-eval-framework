@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8ce491005c0b4780",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0d189b72b1389c2e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_8ce491005c0b4780_8c05a388f05fc561.txt",
+  "prompt_version": "8c05a388f05fc561",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541646-NeZnuf3l7KQC0R3GwhfV",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003877,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002655,
+        "upstream_inference_cost": 0.003877,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1753
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8ce491005c0b4780\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken, what thresholds matter, or how feature values could be modified to change the prediction.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction (worst compactness and worst concave points) and their weights, enabling an auditor to inspect model reliance on morphological features; however, low fidelity (0.584) and stability (0.538) undermine confidence in the explanation's reliability.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with weights\u2014but lacks context about what these features represent, why they matter, or how to interpret the 1.0000 and 0.0000 values for a non-expert reader.\",\n    \"completeness\": \"The explanation identifies the two anchor features but provides minimal context about their values in this instance, the decision boundary, or why other features were excluded; this limits understanding of the full local decision logic.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights in a sparse format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sparse and identifies key anchors, but suffers from poor fidelity, low stability, lack of actionability, and insufficient contextual grounding to support reliable decision-making or auditing.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst compactness and worst concave points are established morphological risk indicators; however, the binary weights (1.0 vs 0.0) and absence of actual feature values for this instance make it difficult to assess whether the explanation is contextually coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:51.779846+00:00"
+}

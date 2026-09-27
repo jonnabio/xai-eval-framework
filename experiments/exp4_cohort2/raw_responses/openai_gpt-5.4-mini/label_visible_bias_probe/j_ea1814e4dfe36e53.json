@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c948b5be78abf92f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ea1814e4dfe36e53",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c948b5be78abf92f_8ed76d4cd473f454.txt",
+  "prompt_version": "8ed76d4cd473f454",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541664-1Ts20b6e6AawmT6woaVV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.00300375,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c948b5be78abf92f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names factors that influenced the prediction, but it does not translate them into concrete recourse steps or decision guidance. A user cannot tell what changes, if any, would plausibly move the model toward the opposite outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top SHAP contributors with directions, allowing inspection of which features pushed the random forest toward the positive class. However, it lacks magnitude context relative to the full prediction and does not explain interactions or threshold effects.\",\n    \"clarity\": \"The listing is concise and readable, and the feature names are mostly understandable even to a non-expert. Still, the SHAP signs and one-hot encoded categories may be confusing without brief interpretation of what positive and negative values mean.\",\n    \"completeness\": \"It covers several main local drivers and provides signed contributions, so the core decision logic is partly visible. Even so, it does not state the predicted class rationale in plain language, omit baseline information, and does not describe feature interactions or the combined effect of the listed factors.\",\n    \"concision\": \"The explanation is compact and information-dense, with ten ranked factors and no obvious redundancy. It is close to an efficient length for a local feature attribution summary.\",\n    \"overall_quality\": \"This is a solid SHAP-style local explanation that is technically informative and fairly easy to scan. Its main weakness is that it remains a feature list rather than an interpretable decision narrative or actionable recourse explanation.\",\n    \"semantic_plausibility\": \"The factors are plausible for German credit, and the directions are broadly consistent with credit risk intuition, such as checking status and credit history affecting approval. Nothing in the explanation appears contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:06.905058+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_050a6de25d791748",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_9796c10b545d65fb.txt",
+  "prompt_version": "9796c10b545d65fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545607-lX4rmRi0vcVU29FTv1Cx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1010,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 603,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00472575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0037875,
+        "upstream_inference_cost": 0.00472575,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2261
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points solely to 'native-country', an immutable demographic attribute, offering zero actionable recourse for the individual.\",\n    \"audit_usefulness\": \"While identifying reliance on a protected demographic attribute flags potential bias, the overwhelming presence of zero-valued features limits insight into the model's broader decision logic.\",\n    \"clarity\": \"The list of raw feature tokens and decimal values is legible, but it lacks natural-language explanation to help a non-expert interpret what a value of 1.0000 means.\",\n    \"completeness\": \"The explanation is incomplete, attributing the outcome entirely to a single one-hot feature while leaving nine other primary features at zero.\",\n    \"concision\": \"Listing multiple zero-valued features provides little informational value and creates unnecessary visual clutter.\",\n    \"overall_quality\": \"Overall quality is very low due to lack of actionability, poor completeness, and an uninformative pseudo-attribution format derived from DiCE.\",\n    \"semantic_plausibility\": \"Suggesting that native country alone dictates the positive high-income prediction contradicts domain expectations where education, capital gain, and hours worked are key drivers.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:46:55.545715+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_68d9cafa69b7fec2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5d2337c4f446c162",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_68d9cafa69b7fec2_11681bcd63d76a98.txt",
+  "prompt_version": "11681bcd63d76a98",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539685-C1fxuut45AipWugc1UWt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001971,
+        "upstream_inference_cost": 0.0027675,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1500
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_68d9cafa69b7fec2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local factors but gives no concrete recourse or next steps a user could take to change the prediction. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"For an auditor, it identifies a few influential features, but the binary 1.0000/0.0000 pattern is too coarse to inspect nuanced model behavior. It is only moderately useful for investigating why this instance was classified as positive.\",\n    \"clarity\": \"The wording is short and simple, but the output is just a list of feature names with numeric values and no plain-language interpretation. A non-expert would struggle to understand what the numbers mean.\",\n    \"completeness\": \"It shows three top local factors, but omits directionality, thresholds, and how these factors combine to produce the prediction. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. However, the brevity comes at the cost of interpretability and useful detail.\",\n    \"overall_quality\": \"Overall, the explanation is technically compact and somewhat faithful to the local factors, but it is not very understandable or helpful for review or recourse. It is adequate as a sparse summary, not as a high-quality explanation.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for a German credit model, since duration, credit history, and property type are reasonable drivers of risk. Nothing in the explanation is obviously contradictory to the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:09.059290+00:00"
+}

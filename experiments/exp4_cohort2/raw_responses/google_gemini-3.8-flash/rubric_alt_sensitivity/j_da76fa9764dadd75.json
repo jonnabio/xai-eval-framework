@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_da76fa9764dadd75",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_eec93395cc3f8408_f2e0f66b3209f739.txt",
+  "prompt_version": "f2e0f66b3209f739",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548324-hkKsDJFFRGg9VS3SjaFm",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 909,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 521,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004419,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00340875,
+        "upstream_inference_cost": 0.004419,
+        "upstream_inference_prompt_cost": 0.00101025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1347,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2256
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw attribution scores without baseline reference or counterfactual guidance, leaving any corrective actions merely implied.\",\n    \"audit_usefulness\": \"The signed SHAP contributions allow an auditor to inspect which financial features are driving the model's prediction, though absence of feature values slightly limits depth.\",\n    \"clarity\": \"The output is formatted as a technical list of one-hot encoded feature names and numeric SHAP values, which is difficult for non-technical audiences to parse.\",\n    \"completeness\": \"Listing the top ten contributing features provides a solid view of the primary factors influencing the decision, though lower-ranked features are omitted.\",\n    \"concision\": \"The summary is compact, reporting only key features and weights without unnecessary filler text.\",\n    \"overall_quality\": \"This is a serviceable, standard SHAP feature attribution summary that accurately captures primary drivers but lacks layperson interpretability and clear actionable guidance.\",\n    \"semantic_plausibility\": \"Negative checking status and low savings reducing creditworthiness align well with established domain knowledge in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:32:13.413390+00:00"
+}

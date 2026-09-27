@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5091d8f57ff83d33",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_003259ff27515980_2487432e1ecb4b1f.txt",
+  "prompt_version": "2487432e1ecb4b1f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541345-7MrZX9hotdfajjARx579",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002913,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.002913,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_003259ff27515980\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into any concrete recourse or next steps for a user. A reader cannot tell what could be changed or checked to affect the outcome.\",\n    \"audit_usefulness\": \"The ranked SHAP values are useful for auditing because they show the main local drivers and their directions. However, the explanation lacks baseline context, feature values, and a stronger sense of how large the contributions are relative to the model output.\",\n    \"clarity\": \"The output is short and structured, and the feature names are standard for breast cancer tabular data. A non-expert may still struggle with SHAP terminology and the meaning of positive and negative values without additional explanation.\",\n    \"completeness\": \"It covers the top local factors for the prediction and includes contribution directions, which helps explain the decision. It does not provide the actual feature values, the decision threshold, or a clear summary tying the factors together into a full local narrative.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording, while still listing the most important local factors. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"Overall this is a fairly good local feature-importance explanation, but it is mainly a ranked list rather than a fully interpretable decision rationale. It is useful for technical review, though less helpful for end users or recourse.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for a breast cancer classification model, and the mixture of positive and negative contributions is consistent with SHAP outputs. Nothing in the explanation conflicts with the domain or the predicted positive label.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:48.201000+00:00"
+}

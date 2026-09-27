@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_46d82d9b9be9e82a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7ee17e1b81806239_123d2ce1ab9c3063.txt",
+  "prompt_version": "123d2ce1ab9c3063",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546835-LXW5wjmcPc5me1XLyfVq",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004033,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002735,
+        "upstream_inference_cost": 0.004033,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1845
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person would not know what to modify to alter the prediction from 0 to 1.\",\n    \"audit_usefulness\": \"While the feature weights are presented, the low fidelity (0.46) and high faithfulness gap (0.20) suggest the explanation poorly represents the model's actual decision logic. This severely limits its utility for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but lacks context about what the weights mean, their relative importance, or how they combine. Non-technical readers would struggle to interpret the significance of these small coefficients.\",\n    \"completeness\": \"The explanation shows top factors but with extremely small magnitudes (all weights < 0.002 in absolute value), raising questions about whether these are truly the main drivers. The false negative case (predicted 0, true 1) deserves deeper explanation of why the model failed.\",\n    \"concision\": \"The list is compact and avoids redundancy, efficiently presenting ten features with their weights. However, the brevity comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"This explanation is weak. The poor technical metrics (fidelity 0.46, stability 0.0025), false negative prediction, and lack of actionable insight combine to produce an explanation that fails to reliably represent the model's decision or help understand the error.\",\n    \"semantic_plausibility\": \"The features and their directions are plausible for income prediction (education, marital status, occupation matter), but the extremely small weight magnitudes and the model's failure to predict the true positive case raise doubts about whether this explanation captures the real decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:07:20.821595+00:00"
+}

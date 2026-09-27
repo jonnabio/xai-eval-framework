@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0a8f165d668d9bc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b07b4ca65c818223",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a0a8f165d668d9bc_6b160f920a2df78e.txt",
+  "prompt_version": "6b160f920a2df78e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542302-QpcFtzy0KIbSlJzA1M3U",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00296775,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a0a8f165d668d9bc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps a user could take. It only lists feature names and values, without indicating how changing them would affect the prediction.\",\n    \"audit_usefulness\": \"It gives a few local feature mentions, but not in a form that helps inspect model logic or verify whether the model relied on sensible evidence. The zero-valued features and lack of directionality make it hard to use for bias or error analysis.\",\n    \"clarity\": \"The output is readable as a list, but it is not clearly explained what the numbers mean, especially the many 0.0000 entries. A non-expert would struggle to interpret why these are called top local factors.\",\n    \"completeness\": \"It covers only a small and somewhat confusing subset of local factors and does not explain how they combine to support the negative prediction. Key decision context such as positive versus negative contributions, thresholds, or rule support is missing.\",\n    \"concision\": \"The explanation is short, but much of the content is not informative and appears padded by repeated zero-valued features. It is therefore only moderately concise in terms of useful information density.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is hard to interpret, only partially informative, and offers no practical or analytical guidance. It is somewhat plausible as an anchor-style summary, but not useful enough for strong trust or review.\",\n    \"semantic_plausibility\": \"For a breast cancer classification case, features like radius, texture, perimeter, and area are domain-relevant, so the feature names are plausible. However, the all-zero values for many supposedly important factors are semantically odd and not well explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:45.327215+00:00"
+}

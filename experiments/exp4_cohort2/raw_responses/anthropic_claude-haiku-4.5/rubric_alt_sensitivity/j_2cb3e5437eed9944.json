@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2cb3e5437eed9944",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4f96f4d65555df8d_4cb91b9c9e81bcbf.txt",
+  "prompt_version": "4cb91b9c9e81bcbf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544826-v8dOp2dZdYNlS6pWg4nK",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003934,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00264,
+        "upstream_inference_cost": 0.003934,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1822
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could change the outcome. A person denied credit would not know what specific changes to their application would help.\",\n    \"audit_usefulness\": \"The feature weights and anchors provide some insight into model behavior, but the low fidelity (0.72) and high faithfulness gap (0.39) suggest the explanation may not reliably represent the model's actual decision logic, limiting audit value.\",\n    \"clarity\": \"The format is technical with feature names and numerical weights that require domain knowledge to interpret. Terms like 'checking_status_no checking' and 'savings_status_<100' are not self-explanatory to non-technical users.\",\n    \"completeness\": \"The explanation identifies 7 features with high importance and 3 with zero importance, covering the main factors. However, it lacks context about why these features matter or how they interact in the decision.\",\n    \"concision\": \"The explanation is compact at 70 tokens with minimal padding. Each feature-weight pair is necessary information, though the format could be more efficient.\",\n    \"overall_quality\": \"This is a false negative case where the model predicted 0 but true label is 1. The explanation shows which features drove the incorrect prediction, but poor fidelity metrics (0.72) and stability (0.44) undermine confidence in the explanation's reliability.\",\n    \"semantic_plausibility\": \"The identified factors (duration, credit amount, age, checking status, savings) are plausible credit risk indicators. However, the model's prediction contradicts the true label, raising questions about whether the explanation reflects sound credit logic or model error.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:33:51.604152+00:00"
+}

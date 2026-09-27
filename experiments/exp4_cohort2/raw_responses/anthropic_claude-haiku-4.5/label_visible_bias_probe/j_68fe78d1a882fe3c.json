@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_68fe78d1a882fe3c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afc105601fc7fdd6_a6a97ed2397fefc0.txt",
+  "prompt_version": "a6a97ed2397fefc0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544130-5hjnKX4Iq1U99DnsxEL9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003655,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002435,
+        "upstream_inference_cost": 0.003655,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1707
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them, what thresholds matter, or what clinical or operational actions should follow from the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies two features with non-zero weights (worst radius and worst concave points), the low fidelity (0.244) and stability (0.262) metrics severely undermine confidence in the model's actual decision logic, limiting audit value.\",\n    \"clarity\": \"The format is a simple list of feature names and normalized weights, which is straightforward to parse, but lacks context about what these features represent clinically or why they matter for the prediction.\",\n    \"completeness\": \"The explanation covers only two active features out of ten listed, and the many zero-weighted features suggest incomplete capture of decision drivers; the false positive status indicates the explanation may miss critical factors that led to the incorrect prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a normalized format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance (low fidelity and stability), a false positive prediction, and lack of actionable or clinical context, resulting in limited utility despite clear formatting.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst concave points are plausible morphological features, but the false positive prediction and weak technical metrics raise doubts about whether the explanation reflects genuine model reasoning or spurious patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:22:15.825728+00:00"
+}

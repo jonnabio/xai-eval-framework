@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_87896d6a511aa7fd",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_eec93395cc3f8408_bc747f1efd3f5edb.txt",
+  "prompt_version": "bc747f1efd3f5edb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539047-udSxG1f3WZlmFtR6SLIq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.00294525,
+        "upstream_inference_prompt_cost": 0.00080775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1077,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors associated with the prediction, but it does not translate them into concrete recourse or next steps for the applicant. A user cannot easily tell what to change to move toward the positive class.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the strongest local SHAP contributors and their directions, which can help inspect whether the model relies on sensible credit-risk signals. However, it lacks counterfactual detail or grouped reasoning that would make deeper error analysis easier.\",\n    \"clarity\": \"The wording is short and structured, and the sign of each contribution is easy to parse. Some feature names are technical, but the list is still understandable to a reasonably informed reader.\",\n    \"completeness\": \"The explanation covers the main local drivers and includes both negative and positive contributions, giving a decent picture of why the model predicted class 0. Still, it does not provide the base value, prediction probability, or a synthesized narrative tying the features together.\",\n    \"concision\": \"The output is compact and information-dense, with little redundancy. It communicates the top contributors in a minimal form.\",\n    \"overall_quality\": \"This is a solid SHAP-style local explanation for an internal reviewer, but it is not very helpful for end-user decision support. Overall it is informative, concise, and plausible, though limited in recourse and interpretive depth.\",\n    \"semantic_plausibility\": \"The factors align well with German credit domain expectations: poor checking status, weak savings, and problematic credit history push toward denial, while property and age contribute mildly in the opposite direction. The pattern is coherent and believable for a random forest credit-risk model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:30.620397+00:00"
+}

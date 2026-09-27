@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1aba8a89c403f89e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_b352dc7c29edc22c_6698d423a032cd6a.txt",
+  "prompt_version": "6698d423a032cd6a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546940-L8kckfd2q4I4KziUfZef",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 865,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00608925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00508875,
+        "upstream_inference_cost": 0.00608925,
+        "upstream_inference_prompt_cost": 0.0010005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1334,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2691
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation merely lists positive and negative SHAP attribution weights across one-hot features without indicating what actions or feature changes would reverse the false-positive prediction.\",\n    \"audit_usefulness\": \"It provides strong insight into how demographic factors like sex and native country influenced this false positive, making it very helpful for investigating bias and model behavior.\",\n    \"clarity\": \"Understanding raw one-hot encoded feature names paired with floating-point SHAP weights requires familiarity with machine learning and data encoding concepts.\",\n    \"completeness\": \"The top 10 local factors explain a significant portion of the linear model's decision, though the absence of feature values (e.g., whether the individual is actually from the Philippines or not) limits full reconstruction.\",\n    \"concision\": \"The text is very dense and focused, presenting only top feature attribution weights with zero unnecessary narrative.\",\n    \"overall_quality\": \"A serviceable technical feature attribution that aids debugging and fairness auditing, despite lack of recourse advice and lay-friendly phrasing.\",\n    \"semantic_plausibility\": \"Features like occupation, marital status, and education are recognized predictors of income, making the attribution directions believable for a logistic regression model.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 4,\n      \"clarity\": 2,\n      \"completeness\": 3,\n      \"concision\": 4,\n      \"overall_quality\": 3,\n      \"semantic_plausibility\": 4\n    }\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:09:10.853553+00:00"
+}

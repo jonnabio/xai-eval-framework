@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_56a9e2e229cac2ae",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4919484756fd435e_0240aaec5392a545.txt",
+  "prompt_version": "0240aaec5392a545",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539715-LQJFrU9eW3RDjPPKuQvD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00289425,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer concrete recourse steps or changes the user could feasibly make. It only lists a dominant feature and many zero-valued others, which does not translate into actionable guidance.\",\n    \"audit_usefulness\": \"It gives some local audit signal by indicating the model relies mainly on education-num for this case, but it lacks directionality, comparison, or enough context to inspect model behavior deeply. The near-all-zero output also makes it hard to investigate how the decision was formed.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, but the meaning of the numbers is not explained. A non-expert would not know why most features are zero or what the single nonzero value implies.\",\n    \"completeness\": \"The explanation covers only one apparent driver and omits whether higher or lower values push the prediction toward class 0 or 1. It is therefore insufficient for understanding the local decision context.\",\n    \"concision\": \"It is short and avoids narrative padding, but the brevity comes at the expense of useful information. The feature dump is compact yet not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but minimally informative, with little recourse value and limited audit utility. It provides only a thin snapshot of local factors rather than a convincing account of the prediction.\",\n    \"semantic_plausibility\": \"The content is broadly plausible for the Adult dataset and a logistic regression model, since education and work-related variables are relevant. However, the presentation of many exact zeros without interpretation feels only loosely informative rather than substantively convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:39.005191+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2644dfd21f6da531",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afad86e31d6d5cf6_d07054ab27eb63ce.txt",
+  "prompt_version": "d07054ab27eb63ce",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544438-9BLhC5aFLcC9RH09Uk14",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 992,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 601,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004659,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00372,
+        "upstream_inference_cost": 0.004659,
+        "upstream_inference_prompt_cost": 0.000939
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2244
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static feature contributions dominated by immutable demographic variables with no prescriptive guidance or counterfactual paths.\",\n    \"audit_usefulness\": \"The prominent weighting of protected attributes like race, marital status, and sex provides valuable evidence for fairness and bias auditing, despite one-hot encoding artifacts.\",\n    \"clarity\": \"The list presents raw one-hot encoded feature names and small decimal weights without explaining their reference direction or concrete meanings for non-experts.\",\n    \"completeness\": \"While ten local weights are reported, the lack of underlying instance feature values and baselines leaves the local decision context incomplete.\",\n    \"concision\": \"The text is compact and avoids conversational padding, though listing mutually exclusive one-hot categories slightly degrades efficiency.\",\n    \"overall_quality\": \"The explanation offers useful transparency for auditing potential bias, but suffers from low actionability, one-hot encoding clutter, and poor accessibility for lay users.\",\n    \"semantic_plausibility\": \"The negative associations with unmarried status, clerical occupation, and high school education align well with domain knowledge regarding lower income thresholds.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:27:27.279812+00:00"
+}

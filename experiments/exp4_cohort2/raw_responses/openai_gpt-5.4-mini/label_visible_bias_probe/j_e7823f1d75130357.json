@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e7823f1d75130357",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cae54143c3307788_0809ec5370da2bf5.txt",
+  "prompt_version": "0809ec5370da2bf5",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541329-nfsXOvhlI3OkxDvBiGKS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00296025,
+        "upstream_inference_prompt_cost": 0.00078675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1049,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or decision steps; it only lists feature values or influence scores. A user cannot tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"It gives a small set of local factors and relative magnitudes, which is somewhat useful for inspecting model behaviour, but the near-zero sparsity and low stability limit its value for serious audit work. It is only partially informative about why this specific false positive occurred.\",\n    \"clarity\": \"The output is easy to read as a ranked list, but the meaning of the numbers is not explained and a non-expert may not know whether they are contributions, distances, or counterfactual deltas. The presence of many zeros without context also reduces interpretability.\",\n    \"completeness\": \"The explanation mentions only a few variables and omits the broader local decision context needed to understand the false positive. It does not explain how the listed factors combine to produce class 1 versus class 0.\",\n    \"concision\": \"It is compact and largely free of filler, with only a short list of factors. However, the brevity comes at the cost of interpretive detail, so it is efficient but not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and somewhat readable, but it lacks semantic explanation, actionable guidance, and sufficient local context. The low stability and modest fidelity further reduce trust in the result.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset, especially age and education-related features, and nothing is obviously contradictory. However, the numeric pattern is somewhat opaque, so plausibility is only moderate rather than strong.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:31.578438+00:00"
+}

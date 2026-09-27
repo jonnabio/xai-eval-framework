@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d25c0bac60b74347",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_50e3b33d6c3d012f_7301a8f89d70719f.txt",
+  "prompt_version": "7301a8f89d70719f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542346-0QwLR5KeDWRDSKAZ7a7m",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1703,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1295,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00731025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00638625,
+        "upstream_inference_cost": 0.00731025,
+        "upstream_inference_prompt_cost": 0.000924
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2935
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides purely observational feature attributions on non-modifiable clinical measurements without suggesting clinical next steps or recourse options.\",\n    \"audit_usefulness\": \"The ranked attribution scores enable an auditor to inspect which features drove the model's decision, though the omission of the instance's actual feature values limits deeper verification.\",\n    \"clarity\": \"The list presents raw SHAP scores alongside feature names without explaining the directional impact or units, making it difficult for non-expert readers to interpret.\",\n    \"completeness\": \"The top ten drivers are captured with local weights, but the lack of baseline value and original feature measurements prevents a complete reconstruction of the decision context.\",\n    \"concision\": \"The text delivers the key feature attribution scores directly and compactly without unnecessary filler.\",\n    \"semantic_plausibility\": \"Severe morphological features such as worst perimeter, worst concave points, and area measurements are well-established clinical indicators for breast cancer classification.\",\n    \"overall_quality\": \"This is an acceptable technical summary of SHAP local importances, but its utility is constrained by the lack of feature values, directional guidance, and patient-level actionability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:39.488578+00:00"
+}

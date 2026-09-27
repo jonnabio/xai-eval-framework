@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ace34464244f3b8f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ea764fae63b129dc_2a91c67909043ba1.txt",
+  "prompt_version": "2a91c67909043ba1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542809-8OHkbstORiNCJvrmlRh5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028485,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001989,
+        "upstream_inference_cost": 0.0028485,
+        "upstream_inference_prompt_cost": 0.0008595
+      },
+      "is_byok": false,
+      "prompt_tokens": 1146,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1588
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists which features push the prediction up or down, so a reviewer can see what would need to change in the input, but it does not translate this into concrete next steps for the person or auditor.\",\n    \"audit_usefulness\": \"The ranked local SHAP factors give useful insight into the model's decision logic and support checking whether sensitive or suspicious variables are influential, but the explanation is still fairly compact and not a full diagnostic view.\",\n    \"clarity\": \"The terms are mostly standard tabular feature names and simple positive/negative contributions, so an informed reader can follow it, though some domain familiarity with German credit features is still needed.\",\n    \"completeness\": \"It captures the main local drivers of the decision, especially checking status, residence duration, and credit history, but it does not provide a full causal story or show how much each feature moved the final class score.\",\n    \"concision\": \"The explanation is compact and information-dense, with a short ranked list of the most important local factors and little filler.\",\n    \"overall_quality\": \"This is a solid SHAP summary for a single prediction: it is concise, reasonably clear, and useful for inspection, but it stops short of giving a complete or actionable account of the false-positive decision.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the directions mostly make sense in context, though the mix of positive and negative contributions is not directly interpretable without knowing the baseline and class mapping.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:11.639108+00:00"
+}

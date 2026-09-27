@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3d1e8d03f127e68f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c71f9ed1b1a0812a_3f7102a9f11b08ac.txt",
+  "prompt_version": "3f7102a9f11b08ac",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543265-6TwZ22x1SxnIjU4AwE8r",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 395,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017775,
+        "upstream_inference_cost": 0.0026325,
+        "upstream_inference_prompt_cost": 0.000855
+      },
+      "is_byok": false,
+      "prompt_tokens": 1140,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists features and numeric deltas, so it does not tell a person what specific change would alter the prediction in a feasible way.\",\n    \"audit_usefulness\": \"The explanation identifies a few local factors, but the near-zero entries and lack of directionality make it only mildly useful for diagnosing model behavior or bias.\",\n    \"clarity\": \"The feature names are mostly understandable, but the meaning of the numbers and why some are zero is not explained, so a non-technical reader would struggle.\",\n    \"completeness\": \"It gives only a partial local view: hours-per-week and one education indicator appear, but it does not explain the main decision logic or how these factors combine.\",\n    \"concision\": \"The output is fairly short, but several listed zero-valued factors add little information, so it is only moderately efficient.\",\n    \"overall_quality\": \"This is a weak-to-serviceable counterfactual-style summary: it is somewhat informative, but sparse, hard to interpret, and not very helpful for understanding the full decision.\",\n    \"semantic_plausibility\": \"The listed factors are relevant to Adult-income predictions, and hours worked plus education are plausible drivers, but the sparse zero entries make the specific explanation somewhat unconvincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:47.195312+00:00"
+}

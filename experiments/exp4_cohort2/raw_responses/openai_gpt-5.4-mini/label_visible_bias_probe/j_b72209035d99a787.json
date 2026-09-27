@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b72209035d99a787",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542074-A7Umj6WFxyle6LnL71C6",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.00293775,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing feature conditions, but it does not translate them into concrete recourse or next steps for the applicant or reviewer. It offers no clear actions that could change the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which feature conditions were present in the local anchor set. However, the formatting as top factors with many zero-valued entries provides limited insight into how the random forest actually justified the prediction.\",\n    \"clarity\": \"The output is easy to read structurally, but the meaning of the 1.0000 and 0.0000 values is not explained, which makes it opaque for non-experts. A reader can identify the listed conditions, but not fully interpret their role.\",\n    \"completeness\": \"It includes only a sparse set of feature conditions and omits the direction, magnitude, and interaction effects needed to understand the specific positive prediction. The local decision context is therefore incomplete.\",\n    \"concision\": \"The explanation is short and compact, which is good, but some of that brevity comes at the cost of interpretability. It communicates a limited amount of useful information per token.\",\n    \"overall_quality\": \"This is a weak local explanation: it is somewhat readable and compact, but it lacks interpretability, actionable guidance, and substantive decision support. The listed anchors are not enough to explain why the model predicted class 1 with confidence.\",\n    \"semantic_plausibility\": \"The listed anchors are plausible in the German credit domain, especially checking status, employment, and housing. However, the presence of several zero-valued features without explanation makes the semantic meaning of the overall output only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:56.710600+00:00"
+}

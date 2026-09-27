@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0997a6b55f4ecd12",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_cead54e1f63f31fc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0997a6b55f4ecd12_9cc9cb05afd1fa63.txt",
+  "prompt_version": "9cc9cb05afd1fa63",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546099-AnubsdTZmJDvgjk8mQmC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002635,
+        "upstream_inference_cost": 0.003945,
+        "upstream_inference_prompt_cost": 0.00131
+      },
+      "is_byok": false,
+      "prompt_tokens": 1310,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1837
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0997a6b55f4ecd12\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A non-technical user cannot determine what modifications to their application would improve their chances.\",\n    \"audit_usefulness\": \"SHAP values with numerical contributions offer some insight into feature importance for this decision. However, the low fidelity (0.418) and moderate faithfulness gap (0.210) raise concerns about whether these explanations truly reflect model behavior, limiting audit confidence.\",\n    \"clarity\": \"The format is technical, listing feature names with SHAP values. While the structure is clear, non-technical users would struggle to interpret what negative/positive values mean or why these specific features matter for credit decisions.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, which addresses the main factors. However, it lacks context about thresholds, feature interactions, or why these particular values led to rejection, leaving gaps in understanding the full decision logic.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line presents a feature and its contribution efficiently without padding, making good use of available space.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies key features and the model prediction matches the true label (TN). However, low fidelity, moderate faithfulness gap, and lack of actionable insights prevent it from being strong. The technical format also limits accessibility.\",\n    \"semantic_plausibility\": \"The identified factors (duration, checking status, savings, employment) are plausible credit risk indicators in lending domains. The negative contributions for short duration and no checking account align with typical credit assessment logic, making the explanation believable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:55:05.360401+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3799c3dcdea66be7",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4838b07b3f340d51_fb8b966aa9b340e7.txt",
+  "prompt_version": "fb8b966aa9b340e7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549742-lrbJxXxS4onBuWRdzDbY",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1043,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 646,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004908,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00391125,
+        "upstream_inference_cost": 0.004908,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2372
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest alternative conditions or counterfactual changes, and one of the anchor features (housing ownership) is difficult to change immediately.\",\n    \"audit_usefulness\": \"It provides auditors with the specific rule components (no checking account and owning a home) that led to the false positive prediction, though the fidelity metric is notably weak.\",\n    \"clarity\": \"The output uses raw dummy feature names and pseudo-weights, but the two active conditions are easy enough to identify.\",\n    \"completeness\": \"The explanation isolates two active features from the anchor rule while reporting zeros for all other features, leaving out broader context about the applicant's profile.\",\n    \"concision\": \"Listing eight irrelevant features with zero weights adds unnecessary clutter to what is essentially a two-feature rule.\",\n    \"overall_quality\": \"The explanation captures the rule behind the false positive prediction, but suffers from low fidelity and uninformative zero-padded formatting.\",\n    \"semantic_plausibility\": \"Owning a home and having no overdraft/negative checking history are sensible domain indicators for a favorable credit classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:55:50.692482+00:00"
+}

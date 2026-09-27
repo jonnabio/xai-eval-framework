@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f7191aef1c7883a1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_719c3e5dafe19965_c5d25bb4565ad66b.txt",
+  "prompt_version": "c5d25bb4565ad66b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542186-ZTDPhH03iphcFCkznszv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.00282825,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1511
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse steps or indicate how changing inputs would affect the decision. It only lists anchor conditions with no guidance for the user.\",\n    \"audit_usefulness\": \"It identifies two anchor conditions as sufficient for the prediction and shows which listed factors are inactive, which gives some limited insight into the local decision logic. However, it is too sparse to support a deeper audit of why this was a false positive.\",\n    \"clarity\": \"The text is short and mechanically readable, but the meaning of the zero-valued factors and the anchor scores is not explained for a non-expert. A reader would need prior knowledge of anchors to interpret it.\",\n    \"completeness\": \"Only two local factors are actually asserted as anchors, while the remaining listed features are not explained in terms of their effect on the prediction. This leaves out key context needed to understand the specific false positive.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording, but it is so terse that much of the useful information is implicit rather than explicit. It is efficient in length, though not maximally informative.\",\n    \"overall_quality\": \"The explanation is reasonably structured but too minimal to be very useful for understanding or correcting the model's false positive. It offers limited local insight and little practical guidance.\",\n    \"semantic_plausibility\": \"The selected features are plausible for German credit data, and the use of installment commitment and used-car purpose as anchors is consistent with a credit-risk model. The content is coherent even though the explanation is incomplete.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:48.252424+00:00"
+}

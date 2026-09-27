@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9fe396b73843aa9e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_889c1770c712cddf",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9fe396b73843aa9e_5c43b158ad8b538d.txt",
+  "prompt_version": "5c43b158ad8b538d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546259-sYDZiSeliPVak6RPyxoB",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 718,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004944,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00402,
+        "upstream_inference_cost": 0.004944,
+        "upstream_inference_prompt_cost": 0.000924
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2304
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9fe396b73843aa9e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because all feature weights are zero, the explanation offers no guidance or actionable recourse for the user.\",\n    \"audit_usefulness\": \"The explanation reveals a failure of the explainer rather than any meaningful model behavior or decision boundary logic.\",\n    \"clarity\": \"The list structure is syntactically readable, but presenting all zero and negative zero weights is confusing and unhelpful to a lay reader.\",\n    \"completeness\": \"The explanation fails to identify any true drivers of the prediction, omitting all meaningful decision context.\",\n    \"concision\": \"Listing ten features that all have zero attribution provides virtually no useful information content.\",\n    \"overall_quality\": \"This is an uninformative, degenerate explanation where all reported feature attributions have collapsed to zero.\",\n    \"semantic_plausibility\": \"Attributing zero contribution across all listed features for a logistic regression prediction is uninformative and implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:57:47.628754+00:00"
+}

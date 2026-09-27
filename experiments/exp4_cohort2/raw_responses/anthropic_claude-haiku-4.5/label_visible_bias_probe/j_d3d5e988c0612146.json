@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d3d5e988c0612146",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cae54143c3307788_0809ec5370da2bf5.txt",
+  "prompt_version": "0809ec5370da2bf5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541497-S3gpcyi8plWOWp8zPMKB",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00251,
+        "upstream_inference_cost": 0.003725,
+        "upstream_inference_prompt_cost": 0.001215
+      },
+      "is_byok": false,
+      "prompt_tokens": 1215,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1717
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction or what actions a user should take. No counterfactual suggestions or recourse paths are presented despite DICE being a counterfactual method.\",\n    \"audit_usefulness\": \"The normalized scores offer some insight into feature contributions, but the extremely low fidelity (0.558) and high faithfulness gap (0.331) severely undermine confidence in the explanation's reliability for auditing model behavior.\",\n    \"clarity\": \"The format is straightforward as a ranked list of features with numerical weights, but lacks context about what these values mean or how they relate to the prediction decision for a non-expert reader.\",\n    \"completeness\": \"Only two features show non-zero weights (age and education_9th), leaving the majority of the decision logic unexplained; the explanation is sparse and does not provide sufficient local decision context.\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-valued features that add no information; removing these would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance metrics (low fidelity, high faithfulness gap, low stability), minimal actionability, and incomplete coverage of decision drivers, resulting in limited practical utility.\",\n    \"semantic_plausibility\": \"Age and education level are plausible factors for income prediction in the adult dataset, but the near-zero contributions from all other features and the false positive prediction (predicted 1, true label 0) raise concerns about model behavior coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:23.337331+00:00"
+}

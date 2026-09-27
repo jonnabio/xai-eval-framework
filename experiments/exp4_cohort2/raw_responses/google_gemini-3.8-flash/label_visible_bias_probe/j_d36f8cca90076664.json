@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d36f8cca90076664",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5a283f4d6f1cf5e1_ee950035ca8b5510.txt",
+  "prompt_version": "ee950035ca8b5510",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542069-naz6OrBsMamgMSwnACzD",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1774,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1379,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00759375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0066525,
+        "upstream_inference_cost": 0.00759375,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 3029
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While the explanation reveals which factors positively or negatively influence the outcome, it lacks actionable thresholds or prescriptive guidance for recourse.\",\n    \"audit_usefulness\": \"It provides valuable insight into the model's local reasoning, explicitly showing the influence of key drivers as well as protected attributes like sex.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric weights is clean, but non-experts may struggle to interpret the raw coefficients.\",\n    \"completeness\": \"The explanation covers the top ten local drivers across both directions, though it omits the instance's actual feature values for continuous variables.\",\n    \"concision\": \"The presentation is compact and information-dense, delivering the top contributing factors without extraneous filler.\",\n    \"overall_quality\": \"This is a solid, standard local attribution explanation that is highly plausible and useful for auditing, though limited in user actionability.\",\n    \"semantic_plausibility\": \"The identified features\u2014such as incorporated self-employment, a Master's degree, and marital status\u2014align closely with standard economic expectations for high income.\",\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:03.369370+00:00"
+}

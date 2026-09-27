@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2f33dc9f32630dd0",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cae54143c3307788_57a70a8afbfd6699.txt",
+  "prompt_version": "57a70a8afbfd6699",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544741-ZBTmsao2fz6Eggti5xid",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003984,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00271,
+        "upstream_inference_cost": 0.003984,
+        "upstream_inference_prompt_cost": 0.001274
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1816
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A user would not know what specific changes to age or education level would alter the prediction.\",\n    \"audit_usefulness\": \"While the feature weights could help identify which features the model relies on, the poor technical metrics (low fidelity of 0.56, high faithfulness gap of 0.33, very low stability of 0.08) severely undermine confidence in these weights as reliable indicators of actual model behavior.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical scores\u2014but lacks context about what the scores mean, what the prediction represents (income threshold?), or how to interpret the relative magnitudes.\",\n    \"completeness\": \"Only two features show non-zero weights (age and education_9th), which seems incomplete for understanding a neural network's decision. The explanation omits many potentially relevant features and provides no information about feature interactions or decision boundaries.\",\n    \"concision\": \"The list is compact and avoids redundancy, though many zero-weight features could have been omitted entirely to improve signal-to-noise ratio.\",\n    \"overall_quality\": \"This is a weak explanation. The poor technical metrics (especially stability of 0.08 and fidelity of 0.56) indicate the explanation is unreliable. The false positive prediction combined with sparse, context-free feature weights provides limited insight into why the model erred.\",\n    \"semantic_plausibility\": \"Age and education being important for income prediction is plausible in the adult dataset domain. However, the extremely sparse output (only 2 non-zero features for an MLP) and poor stability metrics raise doubts about whether these weights genuinely reflect the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:32:26.878455+00:00"
+}

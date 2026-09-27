@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_514ed1ca8b732bce",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_eec93395cc3f8408_38b0d35fb0b2cf13.txt",
+  "prompt_version": "38b0d35fb0b2cf13",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541718-axOtOe4NoCONj1p61VMk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029715,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.0029715,
+        "upstream_inference_prompt_cost": 0.000807
+      },
+      "is_byok": false,
+      "prompt_tokens": 1076,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists the strongest factors behind the prediction, but it does not translate them into concrete recourse or decision-review steps. A user cannot tell what would need to change to move the prediction in a different direction.\",\n    \"audit_usefulness\": \"For an auditor, the SHAP attributions provide useful local insight into which features pushed the random forest toward the negative class. However, the explanation is still limited to feature importance values and does not show counterfactuals, interactions, or why the model relied on these factors.\",\n    \"clarity\": \"The wording is concise and the sign of each feature contribution is easy to follow. A non-expert may still find the categorical feature names somewhat technical, but the overall structure is understandable.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, including both positive and negative contributors. Still, it lacks the base value, predicted probability, and any contextual summary tying these factors together into a full decision narrative.\",\n    \"concision\": \"The explanation is compact and information-dense, listing only the top local factors with their SHAP values. There is little redundancy, though it is somewhat terse for someone wanting a fuller interpretation.\",\n    \"overall_quality\": \"This is a solid local SHAP explanation that is easy to scan and reasonably informative about the model's decision. Its main weakness is that it stops at ranked contributions and does not provide enough context for recourse or deep auditing.\",\n    \"semantic_plausibility\": \"The factors are plausible for German credit risk, especially checking status, credit history, savings status, and payment plans. The mix of negative and positive contributions also fits a realistic local explanation for a true negative case.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:01.989191+00:00"
+}

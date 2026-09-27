@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_baf6b2b63a704182",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_636acbcad2a09395_b53fbd8d09ac1d5a.txt",
+  "prompt_version": "b53fbd8d09ac1d5a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539220-aw8gxHkGVn974DVXIPS7",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003727,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00249,
+        "upstream_inference_cost": 0.003727,
+        "upstream_inference_prompt_cost": 0.001237
+      },
+      "is_byok": false,
+      "prompt_tokens": 1237,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1735
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key drivers (duration, installment_commitment, property_magnitude) but provides no guidance on how to modify these features or what actions a user should take to change the prediction outcome.\",\n    \"audit_usefulness\": \"The normalized format with importance scores (1.0 vs 0.0) clearly shows which features anchored the decision, supporting model behaviour inspection and bias investigation by data scientists.\",\n    \"clarity\": \"The explanation uses domain-relevant feature names and a simple numerical scoring system that is understandable to non-experts, though some feature names (e.g., 'property_magnitude_real estate') could be clearer.\",\n    \"completeness\": \"The explanation covers the top drivers but the high faithfulness_gap (0.46) and moderate fidelity (0.73) suggest the local decision context may not be fully captured; seven features are marked as zero-importance without explanation.\",\n    \"concision\": \"The explanation is compact at 72 tokens and efficiently presents feature importance scores without redundancy, though the list of zero-importance features adds minimal informational value.\",\n    \"overall_quality\": \"The explanation provides a reasonable local decision snapshot with clear feature rankings, but moderate technical metrics (fidelity 0.73, stability 0.73) and lack of actionability limit its overall utility for practical use.\",\n    \"semantic_plausibility\": \"For a credit approval prediction, the identified anchors (loan duration, installment commitment, property ownership) are highly plausible and consistent with standard lending decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:26.017392+00:00"
+}

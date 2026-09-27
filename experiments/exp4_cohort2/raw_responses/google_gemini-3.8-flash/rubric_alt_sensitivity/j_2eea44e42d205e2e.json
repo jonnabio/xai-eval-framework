@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2eea44e42d205e2e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0f6578287491844e_01911a9148711713.txt",
+  "prompt_version": "01911a9148711713",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549274-Cenmi9bkoE2lmaVqIGhk",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 515,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00438075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0033825,
+        "upstream_inference_cost": 0.00438075,
+        "upstream_inference_prompt_cost": 0.00099825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1331,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2233
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs raw attribution weights without actionable advice or counterfactual thresholds, offering only indirect clues about what influenced the outcome.\",\n    \"audit_usefulness\": \"Provides clear signed attributions for the top 10 local factors, which allows an auditor or data scientist to inspect the direction and relative weight of model features.\",\n    \"clarity\": \"Contains technical feature variable strings and raw decimal SHAP values, making it difficult for non-technical stakeholders to interpret without training.\",\n    \"completeness\": \"Lists the top 10 contributing local factors with exact attribution values, capturing the primary reasons for the prediction.\",\n    \"concision\": \"Very concise and dense, presenting the most influential features without unnecessary filler text.\",\n    \"overall_quality\": \"A solid, standard local SHAP explanation that serves technical verification well, though lacking lay-user accessibility and actionable guidance.\",\n    \"semantic_plausibility\": \"The direction of factors such as having all credit paid, checking status, and credit amount aligns well with domain expectations for credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:48:02.564167+00:00"
+}

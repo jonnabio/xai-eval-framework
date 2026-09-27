@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_97dcf35d39f4645d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1759e90b50c033fd_d43df75543040d2f.txt",
+  "prompt_version": "d43df75543040d2f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543407-ImJWGAEtjHHqYxkMG4nV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018405,
+        "upstream_inference_cost": 0.0027,
+        "upstream_inference_prompt_cost": 0.0008595
+      },
+      "is_byok": false,
+      "prompt_tokens": 1146,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists features that pushed the prediction up or down, but it does not say what specific changes would alter the decision or how to act on the result.\",\n    \"audit_usefulness\": \"The SHAP attributions give a useful local view of which variables influenced the model, which can help inspect whether the model relies on sensible factors, though the instability weakens trust.\",\n    \"clarity\": \"The feature names and signed contributions are understandable in general, but the meaning of positive versus negative impact and the German credit codes still require some technical or domain knowledge.\",\n    \"completeness\": \"It identifies several main contributing features, but it does not explain the overall decision logic, interactions, or why these factors outweighed others for this specific false positive.\",\n    \"concision\": \"The explanation is compact and mostly all content is relevant; it is a dense list of top local factors with little extra wording.\",\n    \"overall_quality\": \"This is a decent local explanation because it names the main SHAP factors, but it is limited by lack of narrative, no counterfactual guidance, and the model being wrong on this case.\",\n    \"semantic_plausibility\": \"The cited factors are broadly plausible for German credit data, such as checking status, savings, duration, and credit history, and the directions are not obviously contradictory to domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:09.890946+00:00"
+}

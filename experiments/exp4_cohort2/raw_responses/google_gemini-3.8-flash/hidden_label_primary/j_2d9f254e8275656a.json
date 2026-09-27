@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2d9f254e8275656a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_326c5e1bf0274243_ce109f435ee6ca01.txt",
+  "prompt_version": "ce109f435ee6ca01",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541057-AwTrGmwJZPPQ0dvVvAw2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1059,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 668,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00489825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00397125,
+        "upstream_inference_cost": 0.00489825,
+        "upstream_inference_prompt_cost": 0.000927
+      },
+      "is_byok": false,
+      "prompt_tokens": 1236,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2295
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary feature inclusion flags without any feature values, thresholds, or guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"While it identifies the three features involved in the anchor, the omission of specific predicate conditions and thresholds heavily restricts rigorous auditing.\",\n    \"clarity\": \"The list format is readable, but presenting rule components as pseudo-weights of 1.0000 alongside uninformative 0.0000 entries can confuse non-experts.\",\n    \"completeness\": \"The explanation omits the actual decision rules and feature values that define the anchor, offering only feature presence indicators.\",\n    \"concision\": \"Including numerous zero-valued features that are not part of the active rule adds unnecessary clutter.\",\n    \"overall_quality\": \"The explanation captures plausibly relevant features for high income but suffers from missing predicates and padded zero-weight features.\",\n    \"semantic_plausibility\": \"Education, executive-managerial roles, and marital status are sensible and standard drivers for high income predictions in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:31:04.615044+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b2c63b9a58f63f05",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ccbc751d89be60ef_b78db3525a72af4e.txt",
+  "prompt_version": "b78db3525a72af4e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547161-OvAxzCo8YlK0eZw5tPuy",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004201,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00292,
+        "upstream_inference_cost": 0.004201,
+        "upstream_inference_prompt_cost": 0.001281
+      },
+      "is_byok": false,
+      "prompt_tokens": 1281,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1865
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken or what changes to input values would alter the prediction. It is purely descriptive without prescriptive content.\",\n    \"audit_usefulness\": \"The explanation identifies two features with high importance (mean concave points and worst texture) and eight with zero importance, which provides some insight into model behavior. However, the lack of confidence scores and the binary importance representation limit deeper investigation of potential bias or error patterns.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical weights. However, without explanation of what these weights mean or why they matter, someone without technical training would struggle to interpret the significance of the 1.0000 vs 0.0000 values.\",\n    \"completeness\": \"The explanation identifies the top two contributing features but does not explain their actual values in this instance, the direction of their influence, or how they interact. It provides a partial account of the decision rather than a complete one.\",\n    \"concision\": \"The explanation is compact at 75 tokens and avoids redundancy. However, it includes eight features with zero importance that add little informational value, suggesting room for tighter focus on the truly relevant factors.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies key features and the prediction is correct (TP), but lacks depth in interpretation, actionability, and accessibility. The technical metrics show reasonable stability (0.87) but poor fidelity (-0.003), suggesting the explanation may not faithfully represent the model's actual decision process.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points and texture are medically plausible features for malignancy assessment. The focus on these morphological features is consistent with domain knowledge. However, the complete absence of other known risk factors (radius, area, smoothness) raises questions about whether the explanation captures the full clinical picture the model uses.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:12:47.088554+00:00"
+}

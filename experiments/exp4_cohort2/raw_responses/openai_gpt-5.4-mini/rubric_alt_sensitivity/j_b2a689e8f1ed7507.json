@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_64b60f2ab98bce43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b2a689e8f1ed7507",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_64b60f2ab98bce43_8a0abc334cc8d161.txt",
+  "prompt_version": "8a0abc334cc8d161",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543348-qHYzo787CqKpg4EprjKj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 320,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00229275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00144,
+        "upstream_inference_cost": 0.00229275,
+        "upstream_inference_prompt_cost": 0.00085275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1137,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1457
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_64b60f2ab98bce43\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It lists influential features but does not say what feature changes would alter the prediction or by how much.\",\"audit_usefulness\":\"The top contributing breast-cancer features are shown, which helps inspect whether the model relies on plausible signals, but it is limited to local ranking and lacks directionality or comparison to a baseline.\",\"clarity\":\"The terms are standard for this dataset and the output is easy to scan, though a non-technical reader may not know what the feature names mean.\",\"completeness\":\"It identifies the main local drivers of the positive prediction, but it does not explain their combined effect, direction, or how strongly they pushed toward class 1 versus class 0.\",\"concision\":\"The explanation is compact and mostly free of filler, with a concise list of the most important SHAP factors.\",\"overall_quality\":\"A useful local summary of key features, but incomplete because it omits direction and contextual interpretation, so it is good rather than exemplary.\",\"semantic_plausibility\":\"For the breast cancer dataset, perimeter, area, radius, and concavity-related features are credible drivers of a malignant prediction, so the explanation is domain-consistent.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":3,\"clarity\":4,\"completeness\":3,\"concision\":4,\"overall_quality\":3,\"semantic_plausibility\":4}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:10.070586+00:00"
+}

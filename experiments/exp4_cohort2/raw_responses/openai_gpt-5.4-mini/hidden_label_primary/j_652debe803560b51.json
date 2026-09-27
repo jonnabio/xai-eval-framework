@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_652debe803560b51",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e5e8a4d0292d4cca_28a37af127197bf6.txt",
+  "prompt_version": "28a37af127197bf6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539803-Ce7UHk5dPs6lR0RPacTw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030345,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.0030345,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features associated with the prediction, but it does not tell the user what to change or how to improve the outcome. There are no recourse steps or decision-review suggestions.\",\n    \"audit_usefulness\": \"It gives a partial view of which variables were considered locally, which can help a technical auditor inspect the model, but it lacks directionality, comparison, or a clear link to why the negative prediction occurred. The all-ones/all-zeros formatting is also hard to interpret as an explanation of influence.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand whether these are rule supports, importance weights, or binary rule conditions.\",\n    \"completeness\": \"Several candidate factors are listed, but the explanation does not state which ones actually drove the final prediction or how they combined to produce the output. It omits any threshold, comparison to alternatives, or summary of the local decision logic.\",\n    \"concision\": \"It is compact and contains only a small list of features, so it avoids unnecessary verbosity. However, the brevity comes at the cost of interpretability and useful context.\",\n    \"overall_quality\": \"Overall, the explanation is minimally informative: it is concise and technically suggestive, but not understandable or actionable for most users. It is only moderately useful for audit purposes and weak as a standalone local explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible for German credit data, and the output format is consistent with an anchors-style explanation. However, the presentation of every top local factor with identical scores and no narrative makes the explanation feel semantically thin and only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:10:07.404130+00:00"
+}

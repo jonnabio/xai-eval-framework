@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_593de87edcf60619",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7b78e47140c1369b_37d698739cc8062a.txt",
+  "prompt_version": "37d698739cc8062a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541316-YAXHUuPyCLLfOSeG3DaP",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003529,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002305,
+        "upstream_inference_cost": 0.003529,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1685
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies capital-gain as the dominant factor but provides no guidance on how to modify it or what threshold changes would alter the prediction, limiting practical recourse.\",\n    \"audit_usefulness\": \"The normalized weights and sparsity metric (0.009) support model inspection, but the high faithfulness_gap (0.298) and low stability (0.275) raise concerns about explanation reliability that an auditor must investigate.\",\n    \"clarity\": \"The format is a simple list of feature names and normalized weights, immediately understandable to any reader without domain expertise required.\",\n    \"completeness\": \"The explanation covers only the top factors but omits the actual feature values for the instance, the direction of influence, and contextual thresholds needed to fully understand the local decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"While clear and concise, the explanation suffers from low stability, high faithfulness gap, and missing contextual information (actual values, thresholds, direction), limiting its overall utility despite technical soundness.\",\n    \"semantic_plausibility\": \"Capital-gain being the dominant predictor for a positive income prediction is plausible in the adult dataset context, though the absence of other typical factors (education, age) raises questions about completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 5,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:20.897427+00:00"
+}

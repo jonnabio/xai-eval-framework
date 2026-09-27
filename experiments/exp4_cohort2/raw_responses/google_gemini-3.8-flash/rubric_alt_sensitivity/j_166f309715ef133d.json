@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_166f309715ef133d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afad86e31d6d5cf6_ab20494453a12c32.txt",
+  "prompt_version": "ab20494453a12c32",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549786-j8UQUxz3JhxSis2LlXbp",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1179,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 760,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00541425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00442125,
+        "upstream_inference_cost": 0.00541425,
+        "upstream_inference_prompt_cost": 0.000993
+      },
+      "is_byok": false,
+      "prompt_tokens": 1324,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2503
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides no actionable pathways for change, especially since the top weighted features are immutable demographics like race and sex.\",\n    \"audit_usefulness\": \"It directly alerts an auditor to the model's reliance on protected demographic attributes such as race and sex, though the inclusion of mutually exclusive dummy variables limits deep inspection.\",\n    \"clarity\": \"It presents raw feature names and small decimal coefficients without baseline context or layperson interpretation, making it difficult for non-technical users to grasp.\",\n    \"completeness\": \"While ten factors are shown, the explanation does not state the actual feature values of the individual, leaving it ambiguous which one-hot encoded categories are active.\",\n    \"concision\": \"The presentation is dense and succinct, presenting only key feature names and their associated weights without fluff.\",\n    \"overall_quality\": \"The explanation is weak overall because it lacks instance feature values, displays contradictory one-hot encoded indicators, and relies heavily on protected attributes.\",\n    \"semantic_plausibility\": \"The directions of the coefficients generally align with empirical trends in the Adult dataset, but listing opposing dummy categories (e.g., both Amer-Indian-Eskimo and White) without values reduces believability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:56:35.083021+00:00"
+}

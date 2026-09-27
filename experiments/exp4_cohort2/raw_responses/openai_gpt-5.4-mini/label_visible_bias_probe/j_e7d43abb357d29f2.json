@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e7d43abb357d29f2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c04339897f75190f_27c5e7eaef5c5bfa.txt",
+  "prompt_version": "27c5e7eaef5c5bfa",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541947-P5sUbyuaJyfflKqyyXyc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022545,
+        "upstream_inference_cost": 0.00305025,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors that influenced the prediction, but it does not translate them into concrete recourse or next steps. A user could infer that reducing loan duration or improving checking/savings status might help, but this is not stated explicitly.\",\n    \"audit_usefulness\": \"The SHAP values provide a useful local ranking of features and indicate which variables pushed the model toward class 0 or away from it. However, it lacks the predicted probability, base value, and any comparison to expected domain patterns, so deeper auditing is limited.\",\n    \"clarity\": \"The feature names and signed contributions are presented in a compact, readable format, and the meaning of positive versus negative values is reasonably inferable. Still, a non-expert may not fully understand the encoded categorical terms without domain knowledge.\",\n    \"completeness\": \"It includes the top local drivers, which is enough to see the main contributors to the decision, but it does not explain the prediction threshold, baseline, or why the model ultimately produced a false negative. The absence of class-specific interpretation limits full local understanding.\",\n    \"concision\": \"The explanation is short and information-dense, with little redundancy. It communicates the most relevant SHAP factors without unnecessary narrative.\",\n    \"overall_quality\": \"This is a strong compact local explanation with useful feature attributions, but it remains somewhat technical and does not fully support recourse or deep inspection of the false negative. Overall, it is good for summarizing model behavior but not excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit risk model, and the directions of influence are broadly consistent with credit-relevant variables such as duration, checking status, savings, and employment. The encoded feature names are a bit technical, but the explanation itself is coherent with the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:45:50.466010+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3526c54e89907290",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1a9c16ecde743d5e_d20930aa12475419.txt",
+  "prompt_version": "d20930aa12475419",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545349-E0L9j9tu15ILsnpw6CNh",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004109,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0028,
+        "upstream_inference_cost": 0.004109,
+        "upstream_inference_prompt_cost": 0.001309
+      },
+      "is_byok": false,
+      "prompt_tokens": 1309,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1869
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their application would result in approval.\",\n    \"audit_usefulness\": \"SHAP values with direction and magnitude are useful for model auditing. However, the low fidelity (0.28) and moderate faithfulness gap (0.08) raise concerns about whether these explanations accurately represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is technical, listing feature names with SHAP values. While interpretable to those familiar with credit scoring and SHAP, non-technical stakeholders would struggle to understand what 'checking_status_no checking: -0.1294' means in practical terms.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, which captures major factors. However, it omits the base prediction value and doesn't explain the interaction between features or why this particular combination led to rejection despite true label being 1 (approval).\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is necessary information, though the format could be more efficient with better organization.\",\n    \"overall_quality\": \"This is a false negative case where the model predicted 0 (reject) but should have predicted 1 (approve). The explanation identifies contributing factors but the low fidelity score (0.28) suggests the explanation may not faithfully represent why the model made this incorrect decision. The explanation is technically sound but limited in practical utility.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment (checking status, employment, savings, credit amount). However, the false negative prediction itself suggests potential model bias or error, and the explanation doesn't address why these factors led to an incorrect rejection decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:42:36.097428+00:00"
+}

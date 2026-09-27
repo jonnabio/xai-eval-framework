@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5406abb10023a036",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_e113217e22add838.txt",
+  "prompt_version": "e113217e22add838",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549214-vr3SQGLmJgn5TBYE0T7Q",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 688,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005109,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00412875,
+        "upstream_inference_cost": 0.005109,
+        "upstream_inference_prompt_cost": 0.00098025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1307,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2408
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists binary inclusion weights for features without providing directional guidance, specific thresholds, or feasible steps to change the outcome.\",\n    \"audit_usefulness\": \"Identifying that education, executive management role, and marital status drove this false positive provides some diagnostic insight into model bias, but the lack of rule conditions limits deep auditability.\",\n    \"clarity\": \"The raw format showing feature names paired with 1.0000 and 0.0000 indicators requires technical interpretation to understand that it represents rule membership.\",\n    \"completeness\": \"Only three features are highlighted as part of the anchor, and the actual threshold values and conditions defining the anchor rule are completely missing.\",\n    \"concision\": \"Listing multiple irrelevant features with zero values adds unnecessary clutter instead of presenting only the active anchor conditions.\",\n    \"overall_quality\": \"The explanation is weak because it strips out the actual predicates of the anchor rule, leaving only feature presence indicators and zero-weighted clutter.\",\n    \"semantic_plausibility\": \"Executive managerial status, high education, and married status are well-known domain predictors for high income, making the identified factors plausible drivers of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:47:03.784799+00:00"
+}

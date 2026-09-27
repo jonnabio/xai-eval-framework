@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_79966d2bb70844bf",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_14877b9a3f18f62d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_79966d2bb70844bf_fd3094ad7de9a887.txt",
+  "prompt_version": "fd3094ad7de9a887",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543566-n1pQxbMUmdRimuZsJRY9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1099,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 708,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0050565,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00412125,
+        "upstream_inference_cost": 0.0050565,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2346
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_79966d2bb70844bf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists numerical values without contextual units, direction of required change, or baseline values, offering very little practical guidance for recourse.\",\n    \"audit_usefulness\": \"It highlights that education-num and native country are the primary active features, but the lack of baseline and counterfactual profiles limits rigorous model auditing.\",\n    \"clarity\": \"The raw key-value format and dummy-encoded variables are difficult for a non-expert to interpret without context on what the numbers represent.\",\n    \"completeness\": \"The explanation only reveals two non-zero factors while padding the rest with zeros, leaving out the broader profile and decision threshold details.\",\n    \"concision\": \"A significant portion of the explanation is wasted listing features with zero impact rather than filtering to meaningful drivers.\",\n    \"overall_quality\": \"The explanation is of poor quality due to uninformative zero-valued entries, lack of counterfactual context, and opaque numerical formatting.\",\n    \"semantic_plausibility\": \"Highlighting education as a primary factor influencing income aligns well with standard domain knowledge on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:54.281920+00:00"
+}

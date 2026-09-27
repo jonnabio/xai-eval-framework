@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_972b264033e47a9d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afad86e31d6d5cf6_d07054ab27eb63ce.txt",
+  "prompt_version": "d07054ab27eb63ce",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543183-HtLn4kWHF9yodGHitxsF",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004169,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002925,
+        "upstream_inference_cost": 0.004169,
+        "upstream_inference_prompt_cost": 0.001244
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1829
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. The magnitudes are extremely small and offer no clear recourse pathway.\",\n    \"audit_usefulness\": \"While the explanation identifies which features influenced the prediction, the extremely small coefficient magnitudes (all < 0.01) and low fidelity (0.286) raise concerns about whether LIME has captured meaningful model behavior. The stability score of 0.19 further undermines confidence in the explanation's reliability for auditing.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature-coefficient pairs, which is straightforward to parse. However, the lack of context about what these coefficients mean or how they combine to produce the prediction requires some technical knowledge to interpret.\",\n    \"completeness\": \"The explanation covers 10 features but provides no information about the prediction confidence, the decision boundary, or why these particular features matter relative to others. The extremely small magnitudes suggest the model's decision may be driven by factors not well-captured by this local approximation.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the top factors with their weights in an efficient format. However, the information density is limited given the lack of contextual interpretation.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity 0.286, low stability 0.19) and provides minimal actionable or audit value despite being clearly formatted. The extremely small coefficient magnitudes and weak local model fit suggest the explanation may not reliably represent the actual model's decision logic.\",\n    \"semantic_plausibility\": \"The identified features (race, relationship status, occupation, education, sex, age) are plausible predictors in income classification tasks. However, the near-zero coefficients and low fidelity raise doubts about whether this explanation accurately reflects how the MLP actually uses these features.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:29.005602+00:00"
+}

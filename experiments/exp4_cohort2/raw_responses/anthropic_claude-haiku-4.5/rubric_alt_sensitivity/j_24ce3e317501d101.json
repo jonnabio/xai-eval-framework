@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_24ce3e317501d101",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_8fce321dd80c84b7_e1eed65ed3fef700.txt",
+  "prompt_version": "e1eed65ed3fef700",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545989-vMSawFGI0tS3TT4MbGXo",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00411,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002815,
+        "upstream_inference_cost": 0.00411,
+        "upstream_inference_prompt_cost": 0.001295
+      },
+      "is_byok": false,
+      "prompt_tokens": 1295,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1858
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features (duration, personal_status_male_mar/wid, foreign_worker_no) but provides no guidance on what values would change the outcome or what actions are feasible for an applicant or reviewer.\",\n    \"audit_usefulness\": \"Shows which features anchor the prediction with binary importance scores, but the low fidelity (0.65) and high faithfulness gap (0.33) suggest the explanation may not reliably represent model behavior. Limited utility for bias detection without confidence scores or counterfactuals.\",\n    \"clarity\": \"The format is technical with abbreviated feature names (e.g., 'personal_status_male mar/wid') that require domain knowledge to interpret. The 1.0000/0.0000 scoring system is clear but the feature names themselves are not accessible to non-experts.\",\n    \"completeness\": \"Identifies only three anchoring features out of ten shown. Does not explain why these features matter, their actual values for this instance, or how they interact. Lacks depth about the local decision boundary.\",\n    \"concision\": \"The explanation is brief (72 tokens) but includes many features with 0.0000 scores that add little value. Could be tighter by excluding non-anchoring features or providing more context about the three that matter.\",\n    \"overall_quality\": \"A weak explanation that correctly identifies the prediction (TP) but suffers from low technical fidelity, unclear feature naming, lack of actionability, and insufficient depth. The anchor method provides some interpretability but the execution here is limited.\",\n    \"semantic_plausibility\": \"In credit scoring, loan duration, marital status, and foreign worker status are plausible factors. However, without actual feature values or domain context, it is difficult to verify whether the specific combination makes sense for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:53:15.815927+00:00"
+}

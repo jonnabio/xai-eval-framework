@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_eafaa07140361053",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0da6a71373977fce_3ba15b68decdafee.txt",
+  "prompt_version": "3ba15b68decdafee",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540119-l9U1uhda1NrTCeDBgJNp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002295,
+        "upstream_inference_cost": 0.00308775,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1567
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse steps or feature changes that would plausibly alter the prediction. It is just a ranked list of factors, most of which are zeroed out, so a user cannot meaningfully act on it.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not explain the direction or magnitude of the feature effects on the prediction. The near-zero values and low sparsity/fidelity also make it hard to inspect model behavior or diagnose why this case was predicted positive.\",\n    \"clarity\": \"The wording is short and easy to parse, but the meaning of the listed values is not explained. A non-expert would not know why the top factor has value 1.0000 while the rest are 0.0000 or what those numbers represent.\",\n    \"completeness\": \"The explanation is incomplete because it omits the actual counterfactual changes or the main drivers behind the positive prediction. It only names features without indicating how they influenced the decision or what combination led to the outcome.\",\n    \"concision\": \"It is compact and contains little extraneous text. However, the brevity comes at the cost of useful interpretability, since most entries are just zero-valued feature names.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and technically formatted, but it fails to communicate why the model predicted class 1. The low fidelity and minimal informative content substantially limit its usefulness for both users and auditors.\",\n    \"semantic_plausibility\": \"The content is plausible in the sense that these are valid Adult dataset features and DICE can return feature-change style outputs. However, the presentation is odd because most listed factors are zero, which makes the explanation feel disconnected from the instance and not especially interpretable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:23.967321+00:00"
+}

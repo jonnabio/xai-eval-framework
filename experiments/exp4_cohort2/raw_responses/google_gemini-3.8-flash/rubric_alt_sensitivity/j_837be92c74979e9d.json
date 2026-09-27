@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_837be92c74979e9d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afad86e31d6d5cf6_ab20494453a12c32.txt",
+  "prompt_version": "ab20494453a12c32",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549776-JoMuG0weI4pcQa3Xhq2Y",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 928,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00606675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00507375,
+        "upstream_inference_cost": 0.00606675,
+        "upstream_inference_prompt_cost": 0.000993
+      },
+      "is_byok": false,
+      "prompt_tokens": 1324,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2677
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Most of the top features are immutable demographic attributes like race, sex, and age. The few modifiable factors (occupation, education) offer no clear target values or thresholds.\",\n    \"audit_usefulness\": \"This explanation clearly exposes heavy reliance on protected attributes (race, sex, marital status) pushing towards the low-income outcome, providing substantial utility for bias and fairness audits.\",\n    \"clarity\": \"The raw one-hot feature names and decimal weights require technical knowledge to interpret correctly, making it hard for an untrained reader to follow.\",\n    \"completeness\": \"It provides the top 10 local feature attributions covering the primary socio-demographic aspects influencing the prediction, though actual feature values of the instance are omitted.\",\n    \"concision\": \"The explanation is compact and dense, presenting key feature contributions without filler text.\",\n    \"overall_quality\": \"A serviceable feature attribution list that exposes important model tendencies and bias risks, though limited by one-hot encoding artifacts and tiny weights.\",\n    \"semantic_plausibility\": \"The directions of the effects (e.g., unmarried, female, administrative clerical role associated with lower income; married, older age with higher) align well with known demographic patterns in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:56:26.348655+00:00"
+}

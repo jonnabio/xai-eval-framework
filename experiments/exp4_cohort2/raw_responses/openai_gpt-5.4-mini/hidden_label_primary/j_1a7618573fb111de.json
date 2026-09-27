@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1a7618573fb111de",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_03f9ac9f3ab42b8b_394bab715237b08f.txt",
+  "prompt_version": "394bab715237b08f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538526-xzpRt3LeuBbHs3J90ue9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003036,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022365,
+        "upstream_inference_cost": 0.003036,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few factors that moved the prediction, but it does not translate them into concrete actions or recourse steps. A user cannot tell what could be changed to alter the outcome.\",\n    \"audit_usefulness\": \"For an auditor, the SHAP factors give some insight into which encoded features influenced the decision, and the ranking is useful for spot-checking model behavior. However, the presence of both positive and negative contributions from correlated one-hot features makes the explanation only moderately helpful for diagnosing errors.\",\n    \"clarity\": \"The list format is straightforward and the feature names are readable, so a non-expert can follow the overall idea. Still, the one-hot encoded variables and mixed sign contributions require some interpretation knowledge.\",\n    \"completeness\": \"It covers the main local drivers among the top features, which helps explain the prediction at a basic level. Even so, it lacks the base value, the total contribution sum, and a narrative linking the factors to the final class decision.\",\n    \"concision\": \"The explanation is compact and focuses on the top local factors without much redundancy. It is somewhat dense because of the raw feature names, but the information content is efficient for its length.\",\n    \"overall_quality\": \"This is a reasonably strong local explanation for a tabular model: it is compact, informative, and broadly consistent with SHAP output. Its main weaknesses are limited interpretability for non-experts and the lack of explicit decision context or recourse guidance.\",\n    \"semantic_plausibility\": \"The factors listed are plausible for the Adult dataset and the directionality is consistent with a logistic regression explanation on encoded demographic variables. The mixture of related one-hot terms is expected, though it makes the semantics less clean.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:48.908238+00:00"
+}

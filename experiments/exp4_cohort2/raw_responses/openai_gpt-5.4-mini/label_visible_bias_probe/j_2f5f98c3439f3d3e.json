@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0bb8592dcc826334",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2f5f98c3439f3d3e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0bb8592dcc826334_da04ea222e28a200.txt",
+  "prompt_version": "da04ea222e28a200",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542385-aw433xTOwgDFWjWQBbIP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029445,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.0029445,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0bb8592dcc826334\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete next steps or recourse. It lists feature names and values, but does not translate them into an actionable change the user could make to alter the prediction.\",\n    \"audit_usefulness\": \"It has limited audit value because it exposes a few local feature attributions, but the many zero-valued terms and the lack of directional interpretation make it hard to inspect model behavior rigorously. The explanation is only partially useful for bias or error analysis.\",\n    \"clarity\": \"The output is terse and mostly readable, but it uses raw feature names and numeric weights without explaining their meaning. A non-expert would struggle to understand why these factors matter or how they relate to the prediction.\",\n    \"completeness\": \"It mentions the top listed factors, especially capital-loss and education, but it does not explain whether they increase or decrease the likelihood of class 1 versus class 0. For a false negative case, this leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact, but several listed factors have zero contribution and add little value. It could be shorter while communicating the same useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat readable and locally relevant, but it lacks directionality, actionable recourse, and sufficient context for understanding a false negative. The technical metrics also suggest limited faithfulness and stability, which further reduce quality.\",\n    \"semantic_plausibility\": \"The feature set is plausible for the Adult dataset, and highlighting capital-related variables and education is consistent with common model behavior. However, the presence of many zero-valued factors and the lack of interpretation make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:08.205863+00:00"
+}

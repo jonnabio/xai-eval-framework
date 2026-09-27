@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_861ad691b7a11d62",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_9796c10b545d65fb.txt",
+  "prompt_version": "9796c10b545d65fb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542458-Dm88Jg67VK2NPzgOIaJS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003006,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.003006,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps; it only lists feature names with mostly zero values. A user cannot tell what to change or why that would affect the prediction.\",\n    \"audit_usefulness\": \"It gives almost no interpretable insight into the model's local decision logic, especially because the reported factors are mostly zero and not tied to direction or magnitude. The very low fidelity and stability also reduce trust for auditing.\",\n    \"clarity\": \"The format is readable, but the content is not meaningful to a non-expert because it presents a cryptic list of features with numeric values that are not explained. The result is more like raw output than an explanation.\",\n    \"completeness\": \"It mentions only one non-zero factor and several zero-valued features, without showing how these influenced the positive prediction or how they compare to the actual instance values. This omits the main local decision context needed to understand the TP prediction.\",\n    \"concision\": \"The output is short, but much of it is low-value filler because repeated zero-weight features do not add insight. It is compact, yet not efficient in informative content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is technically readable but offers little substantive understanding of why the model predicted class 1. The combination of poor completeness, minimal actionability, and weak audit value outweighs its brevity.\",\n    \"semantic_plausibility\": \"The single highlighted factor, native-country_South, being the only non-zero contributor is plausible in a tabular model, but the dominance of many zero-valued features is not very informative. As presented, the explanation is only weakly consistent with a useful local decision rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:20.799624+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_05a4cf3066b43db2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_45af74f0fdcedd43_f5cb5ff2274b7166.txt",
+  "prompt_version": "f5cb5ff2274b7166",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539267-pA8PaipRKSSKSu5F7ijS",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 845,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 464,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004098,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00316875,
+        "upstream_inference_cost": 0.004098,
+        "upstream_inference_prompt_cost": 0.00092925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2084
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without showing the actual feature values or providing actionable recourse steps.\",\n    \"audit_usefulness\": \"It provides a clear ranking and signed attribution of the top model drivers, enabling technical auditors to verify feature influence despite missing baseline and instance values.\",\n    \"clarity\": \"The output is a technical list of one-hot encoded feature names and numeric SHAP weights, which requires domain and technical background to interpret.\",\n    \"completeness\": \"The top 10 features capture the dominant local attribution mass, though the underlying feature values and expected base value are omitted.\",\n    \"concision\": \"The text presents the essential attribution weights directly without unnecessary padding or narrative fluff.\",\n    \"overall_quality\": \"It serves as an adequate technical attribution summary with strong fidelity and stability, but lacks consumer-facing readability and actionability.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as checking account status, loan duration, and credit history\u2014are well-aligned with standard credit risk logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:01:14.328985+00:00"
+}

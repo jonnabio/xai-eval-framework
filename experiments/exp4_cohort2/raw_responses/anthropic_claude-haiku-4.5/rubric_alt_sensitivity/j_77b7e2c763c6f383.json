@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_77b7e2c763c6f383",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c04339897f75190f_934de7055d7ae40d.txt",
+  "prompt_version": "934de7055d7ae40d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546128-K1LRmvJqrrWwjpCWPLNK",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003864,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00257,
+        "upstream_inference_cost": 0.003864,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1808
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their application would result in approval.\",\n    \"audit_usefulness\": \"SHAP values with directional contributions offer moderate insight into model behavior. However, the false negative (predicted 0, true 1) suggests the model may be overly conservative; the explanation helps identify which factors pushed toward rejection but doesn't directly support bias investigation without additional context.\",\n    \"clarity\": \"The format is technical (feature names and SHAP values) and assumes familiarity with SHAP methodology. Non-technical stakeholders would struggle to interpret what positive/negative values mean in practical terms.\",\n    \"completeness\": \"The explanation covers the top 10 contributing factors, which captures the main drivers. However, it lacks context about feature values, thresholds, or why these particular features matter for credit decisions.\",\n    \"concision\": \"The list is compact and avoids redundancy. Each entry efficiently conveys a feature and its contribution magnitude, though some domain context is sacrificed for brevity.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility. It correctly identifies influential factors but fails to bridge the gap between model mechanics and actionable insight, particularly problematic given the false negative outcome.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment (duration, checking status, employment, savings, age, housing). The direction of contributions (e.g., longer duration and no checking account pushing toward rejection) is plausible for credit models, though without feature values it's hard to fully validate.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:55:34.574057+00:00"
+}

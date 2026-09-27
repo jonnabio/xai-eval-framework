@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ce661281d4575553",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545243-gum3xumWtZxlqqQAmCAg",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 971,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 578,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045735,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00364125,
+        "upstream_inference_cost": 0.0045735,
+        "upstream_inference_prompt_cost": 0.00093225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1243,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2214
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation implies that changing education-num is key, but it does not specify the direction of change or the baseline and target values needed for recourse.\",\n    \"audit_usefulness\": \"It informs an auditor that the model's prediction relies heavily on education-num, but the raw numeric format and lack of feature direction limit deep inspection.\",\n    \"clarity\": \"The list format is readable, but presenting a single non-zero float alongside multiple zeros without units or directional context is confusing for non-experts.\",\n    \"completeness\": \"The output only highlights a single active feature and omits the original input values and counterfactual target profile.\",\n    \"concision\": \"Including numerous features with zero weight or zero change introduces unnecessary visual clutter.\",\n    \"overall_quality\": \"The explanation captures an intuitive key factor (education) but suffers from poor formatting, ambiguity of values, and redundant zero entries.\",\n    \"semantic_plausibility\": \"Education level is well-known to be a primary determinant of income in the Adult dataset, making the focus on education-num plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:40:51.076238+00:00"
+}

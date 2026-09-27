@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_68d9cafa69b7fec2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_364c455ec8c06149",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_68d9cafa69b7fec2_a6e559b6c7e20d1a.txt",
+  "prompt_version": "a6e559b6c7e20d1a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549924-Q2MHtou1vmrHh3aUdNWX",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 637,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00484875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00386625,
+        "upstream_inference_cost": 0.00484875,
+        "upstream_inference_prompt_cost": 0.0009825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1310,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2341
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_68d9cafa69b7fec2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only marks features with a 1.0 or 0.0 indicator without thresholds or directional guidance, an applicant has no actionable way to alter the outcome.\",\n    \"audit_usefulness\": \"It points an auditor to three active features contributing to the false positive, but the absence of rule conditions or feature values severely limits detailed debugging.\",\n    \"clarity\": \"The raw feature strings combined with 1.0000/0.0000 indicator values require technical knowledge to interpret properly.\",\n    \"completeness\": \"The explanation indicates which features were included in the rule anchor, but completely omits the actual decision thresholds and the applicant's observed values.\",\n    \"concision\": \"Listing several features that have zero importance clutters the explanation with non-informative text.\",\n    \"overall_quality\": \"This is a weak explanation because stripping the predicate conditions from the Anchor output leaves only binary feature indicators.\",\n    \"semantic_plausibility\": \"Credit history, loan duration, and property ownership are well-known, plausible factors in credit underwriting decisions.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:58:54.072526+00:00"
+}

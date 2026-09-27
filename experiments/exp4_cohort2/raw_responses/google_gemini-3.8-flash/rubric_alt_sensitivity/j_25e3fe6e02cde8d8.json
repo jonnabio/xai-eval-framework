@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_25e3fe6e02cde8d8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f4658b35cc204bfb_452042e63b750a41.txt",
+  "prompt_version": "452042e63b750a41",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548859-JnfwZCyKPbLk1AyLsusm",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 876,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00574275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004755,
+        "upstream_inference_cost": 0.00574275,
+        "upstream_inference_prompt_cost": 0.00098775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1317,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide counterfactual target values or actionable steps, and the top-weighted feature (native country) is an immutable demographic attribute.\",\n    \"audit_usefulness\": \"It highlights that the model's false positive prediction heavily depends on native country and occupation, which provides useful signal for detecting bias or model quirks.\",\n    \"clarity\": \"It outputs raw one-hot encoded feature names and numeric importance scores without context or explanation of what the scores represent.\",\n    \"completeness\": \"Only two features carry non-zero weights, and no directional information or reference values are provided to fully understand the counterfactual logic.\",\n    \"concision\": \"Most of the output consists of features with zero importance, padding the presentation with uninformative entries.\",\n    \"overall_quality\": \"The explanation offers weak overall utility, showing poor fidelity and reducing counterfactual insights into a sparse list dominated by zeros.\",\n    \"semantic_plausibility\": \"Attributing such high importance to native-country_Honduras for high income classification is counterintuitive and doubtful under standard domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:41:11.584476+00:00"
+}

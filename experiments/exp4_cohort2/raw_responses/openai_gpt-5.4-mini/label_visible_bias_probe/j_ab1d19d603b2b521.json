@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ab1d19d603b2b521",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_de91280a4d84e7ca_9d8e08e2d16bbd9f.txt",
+  "prompt_version": "9d8e08e2d16bbd9f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542335-ogTvMBQcsqbwEc18PztI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031095,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002313,
+        "upstream_inference_cost": 0.0031095,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1576
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides almost no concrete recourse guidance beyond listing a single satisfied anchor and several zero-valued features. It does not tell the user what changes could plausibly alter the prediction or how to verify the decision.\",\n    \"audit_usefulness\": \"For an auditor, this is only mildly useful because it reveals one local condition associated with the prediction, but it lacks threshold detail, counterfactuals, or evidence about why the false negative occurred. The mostly zero-valued feature list does not support meaningful bias or error analysis.\",\n    \"clarity\": \"The text is readable and uses simple feature names, but the meaning of the anchor-style scores is not explained and the list format is awkward. A non-expert would likely not understand how these values relate to the prediction.\",\n    \"completeness\": \"It captures only one substantive local factor, married-civ-spouse, and then many features with zero values, which does not explain why the model predicted class 0 for a true positive case. Important decision context and the decisive feature interactions are missing.\",\n    \"concision\": \"The explanation is short, but much of its content is low-information padding because the repeated zero-valued features add little value. It is compact, yet not maximally informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is weak: it is somewhat readable and brief, but it fails to explain the false negative in a useful, locally complete way. It offers limited insight for both the end user and the auditor.\",\n    \"semantic_plausibility\": \"The single highlighted factor, marital-status_Married-civ-spouse, is plausible for the Adult dataset and logistic regression, but the explanation is not semantically satisfying because it does not connect that factor to the negative prediction. The long tail of zero-valued features also feels unhelpful rather than contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:18.082289+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_71d8baa55ee0e6ad",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_10ccf6bdc14f2a99_9490b871df33eee8.txt",
+  "prompt_version": "9490b871df33eee8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544860-BTHrXV8vRwHXw7y9g0RR",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 586,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004206,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00293,
+        "upstream_inference_cost": 0.004206,
+        "upstream_inference_prompt_cost": 0.001276
+      },
+      "is_byok": false,
+      "prompt_tokens": 1276,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1862
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken. It does not indicate what feature values would need to change or in what direction to alter the prediction, making it impossible for a clinician or patient to act on.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes are useful for auditing model behavior and detecting bias. The list of top contributing features and their negative contributions helps a data scientist understand the model's decision logic, though the low fidelity (0.67) raises concerns about explanation reliability.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical values. While technically clear, it requires domain knowledge to understand that negative SHAP values indicate push toward the negative class (benign), and what these medical measurements represent.\",\n    \"completeness\": \"The explanation covers the top 10 features by SHAP magnitude, which likely captures the main decision drivers. However, it lacks context about the base prediction rate, the instance's actual feature values, or why these particular features matter for this case.\",\n    \"concision\": \"The format is compact and efficient\u2014each feature-value pair is presented without redundancy. The list structure minimizes wording while maximizing information density about relative contributions.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies influential features and their direction of effect, but lacks actionability, context, and interpretation guidance. The moderate fidelity score (0.67) and high faithfulness gap (0.28) suggest the explanation may not fully capture the model's actual decision process.\",\n    \"semantic_plausibility\": \"The features listed (area, radius, concave points, perimeter, concavity) are standard morphological measurements in breast cancer diagnosis. Their negative contributions toward class 0 (benign) are plausible, as smaller/less irregular tumors are associated with benign classification. The feature selection is medically sensible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:34:27.323460+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ca37610f1e46fe7d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c71f9ed1b1a0812a_3f7102a9f11b08ac.txt",
+  "prompt_version": "3f7102a9f11b08ac",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545917-5p7Q54rxUdiymxd6Vlmm",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 590,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004237,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00295,
+        "upstream_inference_cost": 0.004237,
+        "upstream_inference_prompt_cost": 0.001287
+      },
+      "is_byok": false,
+      "prompt_tokens": 1287,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1877
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or what changes would alter the prediction. A user cannot determine what specific modifications to hours-per-week or education would change the outcome.\",\n    \"audit_usefulness\": \"While the explanation identifies hours-per-week as the dominant factor, the very low stability (0.017) and high faithfulness gap (0.401) raise concerns about reliability. The sparse feature list (mostly zeros) limits ability to audit model behavior comprehensively, though hours-per-week's dominance is notable.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical scores. However, without context about what these scores mean (importance? distance? direction?), the interpretation requires technical knowledge. The notation and lack of explanation of the metric makes it less accessible to non-technical reviewers.\",\n    \"completeness\": \"Only two features have non-zero importance scores. While hours-per-week dominates, the explanation lacks information about why this feature matters, what threshold triggered the prediction, or how other features interact. The account is incomplete for understanding the full decision logic.\",\n    \"concision\": \"The explanation is brief but somewhat padded with many zero-valued features that add little information. Removing the zero entries would improve information density without losing content.\",\n    \"overall_quality\": \"The explanation identifies a key driver (hours-per-week) but suffers from poor technical metrics (low stability, high faithfulness gap), minimal actionability, and limited completeness. It provides a narrow view of the decision without sufficient context or reliability indicators.\",\n    \"semantic_plausibility\": \"In the adult income dataset, hours-per-week is a plausible predictor of high income (>50K). The dominance of this feature aligns with domain expectations. However, the near-zero contributions from education-num and capital-gain seem counterintuitive for income prediction, raising questions about the explanation's validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:52:03.624141+00:00"
+}

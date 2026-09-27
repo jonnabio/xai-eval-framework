@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3e5f32be6438963a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_70f1fb89c6075a2b_7a5e484ae2dddb89.txt",
+  "prompt_version": "7a5e484ae2dddb89",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542486-IP4ClLC8vooF0z97T2W1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00290175,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It only lists a few feature values with no guidance on what changing them would mean for the prediction.\",\n    \"audit_usefulness\": \"It offers a small glimpse of which features were considered locally important, which is somewhat useful for inspection. However, the zero-valued features and lack of directionality or counterfactual context limit its value for diagnosing model behavior.\",\n    \"clarity\": \"The output is short and uses a simple list format, so the structure is easy to read. Still, the meaning of the numbers is unclear to a non-expert, especially without an explanation of whether they are feature weights, distances, or counterfactual changes.\",\n    \"completeness\": \"It covers only two non-zero factors and several zero entries, but does not explain the full local decision logic. Key information such as whether these features increased or decreased the positive prediction is missing.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording. It is concise to the point of omitting important interpretive context, but the text itself is not padded or redundant.\",\n    \"overall_quality\": \"As an explanation, it is terse and somewhat informative but not genuinely interpretable for decision understanding. The lack of semantic meaning for the numbers and absence of actionable or comparative context keep the quality below acceptable.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and education-related factors can reasonably influence income predictions. However, the combination of feature names with unexplained numeric scores, including many exact zeros, makes the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:48.489594+00:00"
+}

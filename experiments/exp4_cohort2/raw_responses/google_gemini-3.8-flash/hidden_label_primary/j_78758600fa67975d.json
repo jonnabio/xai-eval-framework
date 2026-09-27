@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_78758600fa67975d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_70f1fb89c6075a2b_a4f67f22c7fccecf.txt",
+  "prompt_version": "a4f67f22c7fccecf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542857-qIZ0HaA5MFQwbOLcdywj",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 826,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00562875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00469125,
+        "upstream_inference_cost": 0.00562875,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2501
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While DiCE is designed for counterfactual recourse, summarizing it as raw numeric scores without baseline values or explicit target states offers no actionable path for the user.\",\n    \"audit_usefulness\": \"The explanation indicates that education categories were perturbed, but values exceeding 1.0 on one-hot features (e.g., 1.1000) obscure whether the counterfactual respected categorical constraints.\",\n    \"clarity\": \"The list of raw feature names with floating-point values lacks directional context, making it confusing for a layperson to interpret what the numbers represent.\",\n    \"completeness\": \"The output fails to show the original instance values, the proposed counterfactual profile, or the direction of change, providing very limited local decision context.\",\n    \"concision\": \"The summary is fairly brief, but listing numerous zero-weighted features adds clutter relative to the minimal information conveyed.\",\n    \"overall_quality\": \"Reducing a counterfactual explanation to ambiguous pseudo-attribution scores strips away both recourse utility and semantic clarity.\",\n    \"semantic_plausibility\": \"Associating positive shifts with low education categories (1st-4th, 12th) for a positive income prediction is counterintuitive without directional and baseline context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:07.429670+00:00"
+}

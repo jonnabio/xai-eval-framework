@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0b3a651eb09f68a1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28cfcd5501fa69b2_a819c1ae3878f2bb.txt",
+  "prompt_version": "a819c1ae3878f2bb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539506-VMPk89NYMguL2p17ECmY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.00294375,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local factors with binary weights and does not translate them into any recourse or next-step guidance. A user cannot tell what changes might reduce risk or how to review the decision.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the features the anchor method considered locally relevant, but it gives no directionality or detailed model behavior beyond the selected conditions. That limits its value for diagnosing why this false negative occurred.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to scan, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. Without context, the output reads like a raw feature dump rather than a clear explanation.\",\n    \"completeness\": \"It highlights a few main local conditions, but it omits the actual predicted class rationale, confidence, and how the listed anchors combine to produce the negative prediction. Important local decision context is therefore missing.\",\n    \"concision\": \"The explanation is fairly compact, but it includes many zero-valued features that add little information. It could be shorter while preserving the key anchor conditions.\",\n    \"overall_quality\": \"Overall, this is a moderately useful anchor-style summary but not a strong explanation for a specific prediction. It is readable and stable, yet too sparse and too raw to fully support understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, and the highlighted patterns like no checking account, delayed credit history, and short employment are consistent with higher credit risk. Nothing in the explanation conflicts with the domain context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:10.270244+00:00"
+}

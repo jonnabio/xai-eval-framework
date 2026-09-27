@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9573d61f9fae209e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c6d96339976f5220_5d425c2306df52f0.txt",
+  "prompt_version": "5d425c2306df52f0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541391-0k6goWEyf1631C82680C",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1182,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 793,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0053745,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044325,
+        "upstream_inference_cost": 0.0053745,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2438
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or counterfactual guidance, only listing binary feature indicators.\",\n    \"audit_usefulness\": \"While it indicates which features were selected by the explainer, the apparent inclusion of mutually exclusive categories limits its utility for robust debugging.\",\n    \"clarity\": \"The raw dummy-variable names and binary weights (1.0000 vs 0.0000) are technical and not intuitive for a non-expert reader.\",\n    \"completeness\": \"The output identifies selected features but lacks concrete instance values, decision rules, and directional effects on the outcome.\",\n    \"concision\": \"Listing multiple zero-valued features adds unnecessary clutter that dilutes the actual anchor conditions.\",\n    \"overall_quality\": \"The explanation suffers from zero-weight padding, cryptic one-hot notation, and mutually contradictory feature states, resulting in low practical quality.\",\n    \"semantic_plausibility\": \"Simultaneously selecting mutually exclusive checking status categories ('<0' and 'no checking') is logically contradictory for a single instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:40.632894+00:00"
+}

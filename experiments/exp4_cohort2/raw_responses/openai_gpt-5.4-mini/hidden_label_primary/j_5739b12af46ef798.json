@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5739b12af46ef798",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_aa1ea16859fa26f1_a194c7ee33c6cabc.txt",
+  "prompt_version": "a194c7ee33c6cabc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539185-QBo1HIYFklaYD6Xn9TiT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00288825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00288825,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate which changes would reduce the positive prediction. It only lists contributing features with weights, so a user cannot directly act on it.\",\n    \"audit_usefulness\": \"It gives some local feature attribution, which is useful for a basic inspection of the model's decision. However, the small weights, low fidelity, and low stability limit its value for deeper bias or error analysis.\",\n    \"clarity\": \"The output is short and uses a simple ranked list, so it is easy to read at a glance. Still, the meaning of the positive and negative signs is not fully explained to a non-expert, and the feature names are somewhat technical.\",\n    \"completeness\": \"The main local factors are included, but the explanation lacks a stronger indication of the overall direction and relative importance of the drivers. It also omits baseline context, prediction probability, and any contrastive reasoning.\",\n    \"concision\": \"The explanation is compact and free of obvious redundancy. It presents only the top local factors, which makes it efficient per word, though somewhat sparse.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is readable and concise, yet only moderately faithful and not very informative for action or audit purposes. The low stability and modest fidelity reduce confidence in the attribution quality.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for an Adult-income classifier, especially education, occupation, marital status, age, and hours worked. Nothing in the explanation contradicts the domain context, though some weights are very small and not especially intuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:59:48.757942+00:00"
+}

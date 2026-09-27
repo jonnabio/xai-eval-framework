@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6e2e4f9cdcd0e5c1",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4440b587017f192b_f6c1af9f7622dae9.txt",
+  "prompt_version": "f6c1af9f7622dae9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545604-TDuurnviSav42S5Vkzre",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004049,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.004049,
+        "upstream_inference_prompt_cost": 0.001299
+      },
+      "is_byok": false,
+      "prompt_tokens": 1299,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1849
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to residence_since, credit_amount, or other factors would alter the prediction.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes are useful for auditing model behavior and detecting bias patterns. The fidelity (0.80) and stability (0.87) metrics are reasonable, supporting investigation of model logic, though the false positive case itself warrants scrutiny.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and numeric contributions). Non-technical readers would struggle to interpret what positive/negative values mean or why these specific features matter for credit decisions.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, capturing the main local drivers. However, it lacks context about feature values, thresholds, or how these contributions combine to produce the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is necessary information, though the format is dense and could benefit from brief interpretation.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies key features correctly (high sparsity of 0.80 suggests good feature selection) but lacks interpretability for non-technical users and actionability. The false positive status raises concerns about model reliability that the explanation alone does not address.\",\n    \"semantic_plausibility\": \"The features (residence_since, credit_amount, duration, checking_status) are plausible credit risk factors. However, the explanation is a false positive (predicted 1, true label 0), suggesting the model may have learned spurious patterns or the feature contributions may not reflect sound credit logic in this case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:46:49.748986+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c946d14ca6045c5d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b11abd9ec480a4aa_064ed741482797cc.txt",
+  "prompt_version": "064ed741482797cc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538726-n5LibJAv9rKwgu3fiNSl",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002877,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.002877,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names features that push the prediction up or down, but it does not translate them into concrete recourse steps a user could take. It is useful for awareness, but not enough to guide a specific action.\",\n    \"audit_usefulness\": \"It provides a local ranking of influential features with signed contributions, which helps inspect model behavior around this instance. However, the low fidelity and unstable signal reduce its value for rigorous auditing.\",\n    \"clarity\": \"The explanation is short and readable, and the feature list is easy to scan. Some terms are categorical encodings that may be less intuitive to non-experts, but the overall structure is clear.\",\n    \"completeness\": \"It covers the main local factors influencing the prediction, including work, occupation, sex, marital status, education, and relationship. Still, it lacks baseline context, interaction effects, and a plain-language summary of why these factors lead to class 1.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy while still listing the key local factors. It delivers a fair amount of information per word.\",\n    \"overall_quality\": \"This is a reasonably clear local explanation, but it is only moderately trustworthy because the fidelity is limited and the stability is poor. It is useful for a quick inspection of feature influence, yet not strong enough for deep decision support or robust audit work.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the direction of effects is generally consistent with common patterns in income prediction. The presence of both positive and negative contributions also fits a local LIME explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:09.565780+00:00"
+}

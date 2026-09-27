@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3a3702eeec24853c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8fce321dd80c84b7_45324a13a6777a92.txt",
+  "prompt_version": "45324a13a6777a92",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543574-LxvaIXVU2DihFeePlHib",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1138,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 748,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00520725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042675,
+        "upstream_inference_cost": 0.00520725,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2391
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directionality, and highlights immutable demographic attributes, offering no path to recourse.\",\n    \"audit_usefulness\": \"It highlights that sensitive attributes like marital status and foreign worker status drive the prediction, but lacks explicit rule predicates needed for thorough debugging.\",\n    \"clarity\": \"The list format uses raw encoded feature names and binary weight indicators without explaining what the weights or conditions signify to a lay reader.\",\n    \"completeness\": \"It indicates which three features formed the anchor but omits the specific threshold conditions and instance values defining the rule.\",\n    \"concision\": \"Listing seven redundant features with 0.0000 values adds unnecessary clutter rather than focusing solely on the active anchor conditions.\",\n    \"overall_quality\": \"The explanation suffers from missing rule predicates and unnecessary zero-weight entries, though it successfully isolates three influential features.\",\n    \"semantic_plausibility\": \"The selected features are consistent with known credit risk drivers in this dataset, although reliance on foreign worker and marital status raises obvious fairness concerns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:04.423704+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_26840d216ceebaae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07f7eab6526a79eb_44c8f4ec8e915325.txt",
+  "prompt_version": "44c8f4ec8e915325",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542549-T1nz38RV0AcCkU0yLZyf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 422,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003981,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00304125,
+        "upstream_inference_cost": 0.003981,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2064
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists purely static attribution scores without providing feature thresholds, counterfactual paths, or actionable steps for recourse.\",\n    \"audit_usefulness\": \"It highlights key features contributing to the false positive error, but the absence of instance feature values and high faithfulness gap limit deeper audit utility.\",\n    \"clarity\": \"The representation is a raw list of one-hot encoded feature names and weights, which is somewhat technical and lacks plain-language interpretation.\",\n    \"completeness\": \"Ten local features and their directional contributions are provided, though the actual values of those features for the instance are omitted.\",\n    \"concision\": \"The summary is compact, though presenting multiple mutually exclusive dummy categories for marital status and relationship introduces slight redundancy.\",\n    \"overall_quality\": \"The explanation offers basic diagnostic value regarding model drivers, but suffers from raw formatting, lack of instance context, and poor technical faithfulness.\",\n    \"semantic_plausibility\": \"The sign and magnitude of factors align well with domain knowledge on the Adult dataset, such as marriage and work hours positively predicting high income.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:56.017138+00:00"
+}

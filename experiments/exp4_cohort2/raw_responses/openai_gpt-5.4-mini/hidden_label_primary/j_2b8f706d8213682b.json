@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_68d9cafa69b7fec2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2b8f706d8213682b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_68d9cafa69b7fec2_11681bcd63d76a98.txt",
+  "prompt_version": "11681bcd63d76a98",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539681-0W2jZ7rAqI7NVv5pLGwC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029835,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.0029835,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_68d9cafa69b7fec2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps the user could take. It only lists local factors with weights, so it is not actionable beyond indicating which features were influential.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the main local factors and their binary presence values. However, it lacks directionality, thresholds, and a clear link to why these factors pushed the model toward the positive class, limiting deeper investigation.\",\n    \"clarity\": \"The wording is straightforward and the feature names are readable, so a non-expert can at least follow the list. Still, the meaning of the 1.0000 and 0.0000 values is not explained, which reduces interpretability.\",\n    \"completeness\": \"It covers only a few top local factors and does not explain how they interact to produce the prediction. Important decision context is missing, such as whether each factor increased or decreased the score and how strongly they contributed overall.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. It is efficient in length, though some of the numeric output is not fully informative without additional context.\",\n    \"overall_quality\": \"This is a moderately useful local explanation: it is brief, readable, and gives a glimpse of the influential features, but it is too shallow to fully justify the prediction or support strong recourse. Its main weakness is the lack of directionality and interpretive context.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, and the highlighted attributes fit the domain. The explanation is coherent, although the exact 1.0000/0.0000 anchor-style scores are not self-explanatory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:05.671763+00:00"
+}

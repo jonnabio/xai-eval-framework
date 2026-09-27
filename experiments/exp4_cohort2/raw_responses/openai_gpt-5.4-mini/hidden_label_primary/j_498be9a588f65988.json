@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa0d2427f637293a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_498be9a588f65988",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_aa0d2427f637293a_9bea0545628de613.txt",
+  "prompt_version": "9bea0545628de613",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538867-WgemTL7Oe5SowuNNe470",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.00300225,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa0d2427f637293a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step a user could take. It only lists features associated with the prediction, with no indication of how changing them would affect the outcome.\",\n    \"audit_usefulness\": \"It identifies several local factors, which gives some insight into what the model may be using, but the output is very coarse and uninformative beyond a binary presence/absence style summary. The low sparsity and lack of direction or magnitude make it only moderately useful for auditing.\",\n    \"clarity\": \"The wording is simple and the feature names are readable, so a non-expert can follow the list at a basic level. However, the meaning of the 1.0000 and 0.0000 values is not explained, which limits interpretability.\",\n    \"completeness\": \"It names a few apparent top local factors, but it does not explain whether they increase or decrease the probability of class 1, nor how strongly they influenced the decision. Important local context needed to fully understand the prediction is missing.\",\n    \"concision\": \"The explanation is short and compact, but some of the listed fields with 0.0000 add little useful information. It is reasonably concise, though not maximally informative per word.\",\n    \"overall_quality\": \"The explanation is understandable and somewhat informative, but it is weak as a decision explanation because it lacks directionality, actionable guidance, and depth. Overall it is acceptable for a rough local summary, not an excellent XAI output.\",\n    \"semantic_plausibility\": \"The listed factors are plausible predictors for a German credit model, especially duration, age, checking status, and credit history. Nothing in the explanation appears contradictory to the instance context or domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:30.644529+00:00"
+}

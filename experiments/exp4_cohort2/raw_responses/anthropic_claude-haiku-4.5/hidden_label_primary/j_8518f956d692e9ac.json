@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8518f956d692e9ac",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_18fe52436b35526b_6f26ab40bdd8848f.txt",
+  "prompt_version": "6f26ab40bdd8848f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541667-zHl0HmE1caJvNbzMfMh1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003926,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002705,
+        "upstream_inference_cost": 0.003926,
+        "upstream_inference_prompt_cost": 0.001221
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1762
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names and weights but provides no guidance on how to modify inputs, challenge the prediction, or take corrective action. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies multiple features, the uniform weights (all 1.0) and lack of feature importance differentiation severely limit diagnostic value for detecting model bias or systematic errors. The high faithfulness gap (0.14) and low fidelity (0.22) undermine confidence in the explanation's representativeness.\",\n    \"clarity\": \"The format is straightforward as a list of features and weights, but the meaning of uniform 1.0 weights across diverse features is unclear without domain context. A non-expert would struggle to understand why all features are equally important.\",\n    \"completeness\": \"The explanation covers many features but lacks critical context: no feature values for the instance, no direction of influence (positive/negative), and no indication of relative importance beyond uniform weights. Key decision drivers remain obscured.\",\n    \"concision\": \"The explanation is relatively compact at 72 tokens, but the repetitive listing of features with identical weights creates redundancy without adding information density. More efficient representation is possible.\",\n    \"overall_quality\": \"The explanation suffers from low technical fidelity (0.22), zero stability, and uniform feature weights that suggest either model saturation or poor anchor extraction. The combination of weak metrics and limited interpretability yields poor overall quality.\",\n    \"semantic_plausibility\": \"For an adult income prediction task, the selected features (age, education, workclass) are plausible drivers, but the uniform weighting across all features is implausible and contradicts typical domain expectations where education and age should have differentiated impacts.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:12.821723+00:00"
+}

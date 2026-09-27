@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_25c0ece7cf9b15de",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6d5a620abfbcd497",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_25c0ece7cf9b15de_f37a68b9e41444b7.txt",
+  "prompt_version": "f37a68b9e41444b7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539838-n3jgg6w06c3CzBXANsTL",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 554,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00277,
+        "upstream_inference_cost": 0.004022,
+        "upstream_inference_prompt_cost": 0.001252
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1806
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_25c0ece7cf9b15de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation presents SHAP values in a structured list format with feature names and numerical contributions, which is clear and well-organized for readers familiar with SHAP methodology. However, the lack of contextual interpretation (e.g., what positive/negative values mean for the prediction) may challenge non-expert readers.\",\n    \"concision\": \"The explanation is highly compact, listing 10 top features with their SHAP values in minimal space without redundancy. Each entry is necessary and contributes to understanding the decision drivers.\",\n    \"actionability\": \"The explanation provides no guidance on what actions could be taken to change the prediction or improve the applicant's standing. It is purely descriptive of model behavior without suggesting recourse or next steps.\",\n    \"audit_usefulness\": \"The detailed SHAP values and feature rankings support model behavior inspection and help auditors identify which features drive the negative prediction. The high stability (0.993) and reasonable fidelity (0.764) metrics strengthen audit confidence in the explanation's reliability.\",\n    \"completeness\": \"The explanation covers the top 10 local decision drivers with quantified contributions, providing substantial insight into why the model predicted class 0. However, it lacks information about feature values for this specific instance, limiting full local context.\",\n    \"semantic_plausibility\": \"The identified factors (duration, credit history, checking status, savings) are domain-appropriate for credit risk assessment and align with standard lending criteria. The direction of contributions (e.g., longer duration and poor history pushing toward rejection) is plausible.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready, with strong stability and reasonable fidelity, but lacks interpretability aids for non-experts and provides no actionable guidance. It serves model inspection well but falls short of broader usability.\"\n  },\n  \"scores\": {\n    \"clarity\": 3,\n    \"concision\": 5,\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"completeness\": 3,\n    \"semantic_plausibility\": 4,\n    \"overall_quality\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:10:43.999157+00:00"
+}

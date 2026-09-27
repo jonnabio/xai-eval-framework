@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a198a34a7bfad462",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ec3d891e0d43658f_08b6bca3baba04e8.txt",
+  "prompt_version": "08b6bca3baba04e8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540241-5h3RS7W4G8B2uavcXT5y",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 798,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005436,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044925,
+        "upstream_inference_cost": 0.005436,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2456
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directional guidance, offering no clear path for recourse.\",\n    \"audit_usefulness\": \"While an auditor can deduce which three features were included in the anchor rule, the lack of relational predicates and specific cutoffs limits detailed model verification.\",\n    \"clarity\": \"The representation presents anchor participation as binary weights (1.0000 vs 0.0000) rather than an IF-THEN rule, which can easily confuse a non-expert reader.\",\n    \"completeness\": \"The output highlights three active variables but omits the actual decision boundaries and rule conditions needed to understand the local prediction.\",\n    \"concision\": \"Listing inactive features with zero weights adds unnecessary clutter to what should be a compact anchor rule.\",\n    \"overall_quality\": \"The explanation conveys plausible feature candidates for credit risk but is severely weakened by presenting anchor rules as raw binary weights without rule thresholds and padding with inactive features.\",\n    \"semantic_plausibility\": \"Checking account status, savings status, and residential stability are coherent and standard credit risk evaluation factors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:30.757165+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d0678fed6450f9e3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_70f1fb89c6075a2b_a4f67f22c7fccecf.txt",
+  "prompt_version": "a4f67f22c7fccecf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540169-8VH1IQlA5pnHAPPwWDrZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030195,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.0030195,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for the user. It names features but gives no guidance on what could be changed or reviewed to affect the prediction.\",\n    \"audit_usefulness\": \"It offers limited audit value because it mainly lists a few feature names with scores, without showing directionality, counterfactuals, or how those features influenced the positive prediction. The near-zero faithfulness and very low sparsity also suggest weak support for inspecting model behavior.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the numbers is not explained, and the feature names alone do not tell a non-expert why the model predicted positive. The list format is understandable but not informative.\",\n    \"completeness\": \"It is missing the main local decision context, especially the direction of influence and which factors actually pushed the prediction toward class 1. The presence of many zero-valued entries makes it hard to infer the specific drivers of this case.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but much of the content is low-information because most listed factors are zero. It is concise, though not especially information-dense.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and brief, but it provides little insight into why the MLP predicted the positive class. The low faithfulness and sparse, mostly zero-valued factor list make it of limited practical use.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and having education-related factors among the top local factors is reasonable. However, the dominance of near-zero values and the absence of directional interpretation make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:13.683396+00:00"
+}

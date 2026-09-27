@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_04a9c1a6adaa712d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_75520768088e5528_cf1189e92436e6ab.txt",
+  "prompt_version": "cf1189e92436e6ab",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547261-GfwjUKx5kEN7EBtixjkZ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1220,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 816,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00557175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004575,
+        "upstream_inference_cost": 0.00557175,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2549
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without indicating actual feature values or providing actionable guidance on how to alter the negative prediction.\",\n    \"audit_usefulness\": \"It provides a clear view of which factors pulled the model toward or away from the threshold, helping an auditor identify that factors like HS-grad and Transport-moving contributed to this false negative.\",\n    \"clarity\": \"The raw numerical attributions and one-hot encoded feature names require technical familiarity with machine learning and SHAP to interpret correctly.\",\n    \"completeness\": \"The top ten local factors give a solid overview of the primary forces behind the prediction, though omitting the instance's underlying feature values limits full understanding.\",\n    \"concision\": \"The explanation is compact and direct, presenting the top contributing factors without extraneous filler.\",\n    \"overall_quality\": \"This is a serviceable, standard SHAP attribution list that provides useful local attribution data despite missing concrete feature values and counterfactual guidance.\",\n    \"semantic_plausibility\": \"The identified features\u2014age, education, relationship, occupation, and hours worked\u2014are standard drivers of income level in the Adult domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:29.717027+00:00"
+}

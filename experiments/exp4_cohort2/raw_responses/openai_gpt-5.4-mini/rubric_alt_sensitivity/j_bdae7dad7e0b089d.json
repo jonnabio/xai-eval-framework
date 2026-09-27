@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bdae7dad7e0b089d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cd6abd1a9433542b_b7f15803d0ffa231.txt",
+  "prompt_version": "b7f15803d0ffa231",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543378-KkpNbkJyzMdnJ3QN6BRo",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 366,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00249525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001647,
+        "upstream_inference_cost": 0.00249525,
+        "upstream_inference_prompt_cost": 0.00084825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1131,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1497
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature influences, without indicating what input changes would alter the prediction or any feasible next step.\",\n    \"audit_usefulness\": \"The top factors provide some view into the model's local behavior, but the near-zero sparsity and poor fidelity/stability make it weak for auditing.\",\n    \"clarity\": \"The feature names are understandable in general, but the numeric weights and one-hot encoded fields make it only partly accessible to non-technical readers.\",\n    \"completeness\": \"It names only a couple of features and gives no directional explanation, threshold, or counterfactual details, so it does not fully explain the decision.\",\n    \"concision\": \"The explanation is brief and mostly information-dense, though some listed zero-valued factors add little value.\",\n    \"overall_quality\": \"As an explanation, it is limited by weak technical quality metrics and sparse, partly uninformative output, so it is only marginally useful.\",\n    \"semantic_plausibility\": \"The listed features are plausible Adult-dataset attributes, but the explanation is too generic and sparse to strongly support why this specific negative prediction occurred.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:40.191075+00:00"
+}

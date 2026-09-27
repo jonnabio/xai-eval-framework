@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_86cef49d2a664128",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4c3d79ea2f396cd5_e0710d3e96ab4ca9.txt",
+  "prompt_version": "e0710d3e96ab4ca9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542675-5kSDztRm4va6X0PU0PB2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00297,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1545
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, and the listed features all have near-zero values that do not suggest what could be changed. It is not useful for a user trying to alter or review the decision.\",\n    \"audit_usefulness\": \"For an auditor, this explanation is nearly uninformative because every reported contribution is essentially zero and the fidelity is 0.0. It offers no clear evidence about which features drove the false positive or whether the model behavior is reliable.\",\n    \"clarity\": \"The output is short and syntactically easy to read, but the near-zero coefficients make it hard to interpret what the explanation is actually saying. A non-expert would not understand why these factors are listed or how they relate to the prediction.\",\n    \"completeness\": \"It lists several local factors, but they all appear negligible, so it fails to explain the specific prediction in any meaningful way. Key decision drivers are missing, especially given that this is a false positive.\",\n    \"concision\": \"The explanation is compact and avoids excess wording, but much of the content is repetitive because every attribution is effectively zero. It is concise without being informative.\",\n    \"overall_quality\": \"Overall, this is a very weak explanation because it is technically terse but does not explain the prediction. The zero-valued attributions and zero fidelity make it poor for understanding, debugging, or trusting the model.\",\n    \"semantic_plausibility\": \"The listed features are plausible for Adult dataset explanations, but it is implausible that so many top factors all contribute essentially nothing while still producing a prediction. The pattern suggests the explanation is not meaningfully aligned with the instance or model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:58.736336+00:00"
+}

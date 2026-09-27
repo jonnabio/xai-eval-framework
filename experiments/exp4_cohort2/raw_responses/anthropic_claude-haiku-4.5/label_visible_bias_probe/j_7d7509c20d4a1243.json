@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7d7509c20d4a1243",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ae5f3b200cc3bef3_cccf4039e355408d.txt",
+  "prompt_version": "cccf4039e355408d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543815-eDjG4o8rV0vg6vkcoNlu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003919,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002695,
+        "upstream_inference_cost": 0.003919,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1763
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies age and native-country as anchors but provides no guidance on what actions a user could take or how to interpret these factors for decision-making. No recourse pathways or next steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchor the prediction, the low fidelity (0.356) and high faithfulness gap (0.179) severely limit its utility for auditing model behavior. The zero stability score indicates the explanation is unreliable across perturbations.\",\n    \"clarity\": \"The format is straightforward as a list of features with weights, but lacks narrative context explaining why these factors matter or what the weights represent. A non-expert would struggle to interpret the significance of the anchors.\",\n    \"completeness\": \"Only two features are identified as meaningful (age and native-country with weight 1.0), while eight others are listed with zero weight. This sparse representation may miss important decision drivers, particularly given the low fidelity score.\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-weighted features that add little informational value. Removing the zero-weight entries would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity, zero stability, high faithfulness gap) and lacks interpretability support for end users. While correctly formatted, it provides limited actionable or auditable insight into the model's decision.\",\n    \"semantic_plausibility\": \"Identifying age and native-country as key factors for income prediction is plausible in the adult dataset context, though the complete absence of education-num and hours-per-week as anchors seems counterintuitive for income classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:00.358402+00:00"
+}

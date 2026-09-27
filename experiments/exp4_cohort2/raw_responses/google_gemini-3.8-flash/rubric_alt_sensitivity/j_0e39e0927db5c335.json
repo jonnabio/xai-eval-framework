@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c26cdb8b9ce06ff8",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0e39e0927db5c335",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c26cdb8b9ce06ff8_2ec36c2dacd59309.txt",
+  "prompt_version": "2ec36c2dacd59309",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548850-vctSSfDhxKdLf5E26kcK",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 724,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005247,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00426,
+        "upstream_inference_cost": 0.005247,
+        "upstream_inference_prompt_cost": 0.000987
+      },
+      "is_byok": false,
+      "prompt_tokens": 1316,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2452
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c26cdb8b9ce06ff8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only provides binary indicator weights rather than feature values or decision thresholds, an individual cannot determine what changes would affect the outcome.\",\n    \"audit_usefulness\": \"It reveals which five features were included in the anchor rule, offering marginal insight, but the lack of rule conditions and threshold values severely restricts audit utility.\",\n    \"clarity\": \"Presenting raw feature names alongside 1.0000 and 0.0000 values without predicates or natural language explanations makes it difficult for non-technical users to comprehend.\",\n    \"completeness\": \"While it identifies the features involved in the local anchor rule, it omits the actual rule conditions, intervals, and instance feature values.\",\n    \"concision\": \"The explanation is reasonably brief, though listing multiple features with 0.0000 values adds unnecessary noise.\",\n    \"overall_quality\": \"The explanation is weak because the representation strips away the rule predicates that make Anchors useful, leaving only uninformative binary importance indicators.\",\n    \"semantic_plausibility\": \"The selected features (duration, checking status, savings, residence, property) are believable credit risk factors consistent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:40:59.686351+00:00"
+}

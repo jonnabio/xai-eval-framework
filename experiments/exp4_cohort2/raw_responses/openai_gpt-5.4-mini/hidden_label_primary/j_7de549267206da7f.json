@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7de549267206da7f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_afc105601fc7fdd6_f21a4818b8d3fa0e.txt",
+  "prompt_version": "f21a4818b8d3fa0e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540283-fbDUMAEB1szxFygiuMVp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002061,
+        "upstream_inference_cost": 0.00285225,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1513
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists features with binary-looking values and does not suggest any feasible recourse or decision review steps. A user cannot tell what to change or verify to affect the prediction.\",\n    \"audit_usefulness\": \"It provides a rough list of locally relevant features, but the information is too compressed and uninterpreted to support serious inspection of model behavior. The near-binary 0/1 presentation also makes it hard to assess whether the anchors are meaningful.\",\n    \"clarity\": \"The wording is short and readable, but the explanation is not clearly organized and the feature values are unexplained. A non-expert would not know what '1.0000' and '0.0000' mean in this context.\",\n    \"completeness\": \"It names several candidate local factors, but it does not explain directionality, thresholds, or relative importance for the specific prediction. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but it is mostly a raw feature dump rather than dense useful information. It communicates limited insight per word.\",\n    \"overall_quality\": \"This is a minimally informative anchor-style summary: it is readable and brief, but it lacks interpretation, actionable guidance, and sufficient local decision detail. Overall it is only marginally useful for understanding the prediction.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are domain-appropriate and the explanation format is plausible for an anchors method. However, the binary-looking values and lack of interpretation make the semantic meaning somewhat weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:06.816236+00:00"
+}

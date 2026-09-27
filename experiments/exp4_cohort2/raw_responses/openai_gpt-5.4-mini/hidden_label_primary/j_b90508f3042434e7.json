@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0ab8ed6bc65f8c5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b90508f3042434e7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a0ab8ed6bc65f8c5_c6c808464a842c63.txt",
+  "prompt_version": "c6c808464a842c63",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540380-eWzewj3MpYpxjgvYcPTM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002859,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002061,
+        "upstream_inference_cost": 0.002859,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a0ab8ed6bc65f8c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no meaningful recourse or next steps because all listed feature contributions are essentially zero. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It is weak for auditing because the attribution values are numerically near zero, so it reveals almost nothing about why the model predicted class 1. The very low fidelity further limits its value for inspecting model behavior.\",\n    \"clarity\": \"The list format is easy to scan, but the content is not understandable as an explanation since every factor is shown as 0.0000 or -0.0000. A non-expert would not learn why the decision was made.\",\n    \"completeness\": \"It names several features, but it does not provide any substantive local decision drivers, directionality, or magnitude. The explanation is effectively missing the key factors needed to understand this specific prediction.\",\n    \"concision\": \"The output is short and avoids unnecessary prose, but it is not informative enough to justify even this length. It is concise in a minimal sense, though not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a very poor explanation because it offers almost no local insight and has low fidelity and sparsity. It is readable but not useful for understanding, reviewing, or acting on the prediction.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the Adult dataset, but the near-zero contributions across all top factors are suspicious and not very consistent with a useful local explanation. This makes the explanation semantically weak even if not logically contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:19:44.589190+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f7a921d45620a301",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4838b07b3f340d51_42889892c8792fea.txt",
+  "prompt_version": "42889892c8792fea",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544379-qxTCgGLarUk7qyZThuIk",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1065,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00646275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00552,
+        "upstream_inference_cost": 0.00646275,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2729
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists active categorical conditions without providing counterfactual suggestions or actionable paths for recourse.\",\n    \"audit_usefulness\": \"An auditor can identify which two conditions triggered the model's false positive, though the low fidelity and omitted feature thresholds limit deeper investigation.\",\n    \"clarity\": \"The raw one-hot encoded feature names and pseudo-weights require technical familiarity, and the distinction between 1.0000 and 0.0000 is not self-explanatory for lay readers.\",\n    \"completeness\": \"The explanation only exposes two active anchor conditions, leaving all continuous attributes zeroed out and without specific instance values.\",\n    \"concision\": \"Most of the output consists of uninformative 0.0000 entries that dilute the useful signal of the two active conditions.\",\n    \"overall_quality\": \"The explanation provides minimal usable insight due to heavy zero-padding, lack of context on continuous features, and poor fidelity.\",\n    \"semantic_plausibility\": \"Associating homeownership and checking account status with credit decisions is domain-plausible, even if the model's ultimate prediction was incorrect.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:26:31.239174+00:00"
+}

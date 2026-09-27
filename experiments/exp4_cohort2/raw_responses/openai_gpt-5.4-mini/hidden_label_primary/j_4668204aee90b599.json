@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4668204aee90b599",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c3a6d29157145c8e_5098e259ef1d5953.txt",
+  "prompt_version": "5098e259ef1d5953",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538788-nnNhUcUAXEewIq6DSqDu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002976,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002976,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1538
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or decision steps. A user cannot tell what to change, what to verify, or how to act on this result.\",\n    \"audit_usefulness\": \"It is useful for inspection because it identifies the top local drivers and their relative importance, which can help a data scientist sanity-check model behavior. However, it lacks directionality and comparison to baseline values, so deeper bias or error analysis is limited.\",\n    \"clarity\": \"The wording is straightforward and the ranking of features is easy to read. A non-expert may still not understand what the medical terms mean, but the structure itself is clear.\",\n    \"completeness\": \"The explanation provides the main local factors, but only as a ranked list of SHAP magnitudes. It omits whether each feature pushed the prediction toward class 1 or away from it, and it gives no instance values or contextual baseline information.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, conveying the top features in a short list. It is efficient, though slightly bare because the brevity comes at the cost of interpretive detail.\",\n    \"overall_quality\": \"This is a solid but limited local explanation: it is readable, stable, and informative about which features matter most. Its main weakness is that it explains importance without enough direction or contextual detail to fully support understanding or action.\",\n    \"semantic_plausibility\": \"The cited features are highly plausible for a breast cancer classifier, since size- and shape-related measurements such as area, perimeter, radius, and concavity are well-known predictors. The ranking also looks consistent with a realistic model explanation for a true positive case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:11.411037+00:00"
+}

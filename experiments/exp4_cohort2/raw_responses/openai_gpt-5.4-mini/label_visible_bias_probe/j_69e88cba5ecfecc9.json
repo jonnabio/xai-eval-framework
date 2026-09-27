@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_69e88cba5ecfecc9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_103d89f1e4cb72f6_3c13376d3e2c8f89.txt",
+  "prompt_version": "3c13376d3e2c8f89",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541861-BSSjSaQJSBHxVQmsgCAf",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003138,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023445,
+        "upstream_inference_cost": 0.003138,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1579
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of feature values with little indication of what should be changed. Even though it names a few factors, it does not translate them into feasible actions for the user.\",\n    \"audit_usefulness\": \"For auditing, it is only weakly useful because it exposes a small set of local feature contributions, but the values are hard to interpret and mostly zero. It does not explain why the false negative occurred or how strongly each factor influenced the model.\",\n    \"clarity\": \"The text is short and list-like, but its meaning is not clear to a non-expert because it mixes features with raw numbers without explaining direction, units, or relevance. The presence of many 0.0000 entries makes the message harder to understand rather than easier.\",\n    \"completeness\": \"It mentions capital-gain and education, which are relevant local drivers, but omits a coherent decision narrative and does not explain how these factors combine to produce the prediction. Given the false negative, the explanation is missing key information about why the model rejected a positive case.\",\n    \"concision\": \"It is compact, but much of the space is spent on low-value zero-valued entries that add little insight. The explanation is not efficiently informative because the important factors are not summarized cleanly.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, hard to interpret, and not sufficiently informative about the prediction mechanics. It offers limited insight into the false negative and little practical or audit value.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset and a logistic regression model, but the explanation is semantically awkward because many features are shown with zero values and no explanation of sign or effect. The content is not contradictory, yet it does not read as a coherent causal account.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:23.828782+00:00"
+}

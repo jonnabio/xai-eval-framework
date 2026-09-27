@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c0de54fef8faf8c6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_de938d5223748d7d_6cff9ca78029e0c0.txt",
+  "prompt_version": "6cff9ca78029e0c0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540094-BayvpuKZ4ZeE1K4uoc38",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.00291,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps beyond listing features, so a user cannot tell what to change or verify. It is therefore not actionable for decision review.\",\n    \"audit_usefulness\": \"It names a few local features, but the output is mostly zeros and does not explain direction, thresholds, or how these factors influenced the prediction. This gives limited value for auditing model behavior or investigating errors.\",\n    \"clarity\": \"The wording is simple, but the format is awkward and the numeric pattern is unexplained, making it hard for a non-expert to interpret. A reader can identify feature names, but not understand their meaning in context.\",\n    \"completeness\": \"The explanation lists top local factors, yet it omits the effect size, whether each factor supports class 0 or class 1, and any meaningful interaction or rule summary. That leaves the local decision context incomplete.\",\n    \"concision\": \"It is short, but much of the length is spent on a long list of zero-valued features that add little information. The explanation is not efficient in communicating the useful local rationale.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is minimally informative, hard to interpret, and offers no real basis for recourse or audit. The content is somewhat plausible, but the presentation and explanatory value are poor.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are appropriate for the dataset, and an anchors-style explanation can reasonably produce feature conditions. However, the many exact 0.0000 values without interpretation make the output only weakly plausible as an explanation of a specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:57.573509+00:00"
+}

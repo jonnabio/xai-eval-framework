@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bda01aa4fae485e5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e4a3c652adf1d046_9f42f151467a8105.txt",
+  "prompt_version": "9f42f151467a8105",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543431-tQGJaASkTgkR39w7Nx5F",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 377,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002544,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016965,
+        "upstream_inference_cost": 0.002544,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1507
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors with weights and does not say what changes would alter the prediction or how to act on it.\",\n    \"audit_usefulness\": \"The listed features are useful for a rough audit of model dependencies, but the explanation is too sparse and low-fidelity to directly investigate bias or error.\",\n    \"clarity\": \"The feature names are readable, but the meaning of all weights being 1.0 or 0.0 is not intuitive to a non-technical reader without additional context.\",\n    \"completeness\": \"It names several influential fields, but it does not explain direction, thresholds, or how these factors combined to produce the false positive decision.\",\n    \"concision\": \"The explanation is short and mostly information-dense, with little obvious padding, though the numeric list is somewhat mechanical.\",\n    \"overall_quality\": \"It gives a compact snapshot of local factors, but low fidelity, very low sparsity, and missing causal detail make it only weakly useful overall.\",\n    \"semantic_plausibility\": \"The cited Adult dataset attributes are domain-relevant and plausible for an income classifier, but the explanation lacks enough nuance to fully support the decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:33.576810+00:00"
+}

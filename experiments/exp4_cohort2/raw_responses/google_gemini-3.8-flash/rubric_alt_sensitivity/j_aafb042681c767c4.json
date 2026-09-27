@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_aafb042681c767c4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a63737c16fa6edb_11d628d55dc485da.txt",
+  "prompt_version": "11d628d55dc485da",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548125-19Dj6WWtBGCSRNg7nH0m",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 559,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036,
+        "upstream_inference_cost": 0.0045945,
+        "upstream_inference_prompt_cost": 0.0009945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2286
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists directional linear weights but does not state the underlying feature values or specify the threshold required to change the predicted class.\",\n    \"audit_usefulness\": \"It provides the top 10 local feature weights for auditing, revealing potential anomalies such as negative weights on marital indicators, though low fidelity limits full trust.\",\n    \"clarity\": \"The raw key-value format of feature names and negative/positive decimal coefficients requires technical familiarity to interpret.\",\n    \"completeness\": \"It provides a top-10 list of factors driving the prediction toward class 0, covering the primary categorical and continuous drivers.\",\n    \"concision\": \"The text is compact and directly presents the top attributes and their numerical weights without unnecessary filler.\",\n    \"overall_quality\": \"Serviceable feature attribution list from LIME that gives an adequate view of local contributions, though hindered by raw presentation and weak fidelity.\",\n    \"semantic_plausibility\": \"Negative attributions for low education (7th-8th) and low-wage occupations make sense for low income, though negative signs on marriage indicators are slightly counterintuitive for this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:28:53.019309+00:00"
+}

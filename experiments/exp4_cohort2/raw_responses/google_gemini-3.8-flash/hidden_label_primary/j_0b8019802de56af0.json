@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0b8019802de56af0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7b78e47140c1369b_37d698739cc8062a.txt",
+  "prompt_version": "37d698739cc8062a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542715-NFHtGBknTjqgJCjjE3QC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 987,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 605,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046395,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00370125,
+        "upstream_inference_cost": 0.0046395,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2238
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output provides a single numerical factor weight without actual feature values, thresholds, or concrete steps for recourse.\",\n    \"audit_usefulness\": \"An auditor can see that the prediction relies overwhelmingly on capital-gain, but the lack of baseline and counterfactual feature values limits deep diagnostic utility.\",\n    \"clarity\": \"The raw key-value format requires familiarity with machine learning attribution representations to interpret correctly.\",\n    \"completeness\": \"The explanation isolates only capital-gain while listing all other features as zero, omitting the original feature values and directional impact necessary for a complete local picture.\",\n    \"concision\": \"Listing seven consecutive zero-valued features creates unnecessary visual clutter and reduces information density.\",\n    \"overall_quality\": \"The explanation reveals the dominant driver of the prediction, but is hindered by poor formatting, zero-padding, and a lack of actionable counterfactual context.\",\n    \"semantic_plausibility\": \"Identifying capital gain as the primary driver for high income is fully aligned with domain knowledge on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:43.041225+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f355a50a2d20afd4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c715759299b480a0_5521c4c4e040aff1.txt",
+  "prompt_version": "5521c4c4e040aff1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542922-VvCwV6wGTkZ3VIgC8yfj",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1038,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 660,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004848,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0038925,
+        "upstream_inference_cost": 0.004848,
+        "upstream_inference_prompt_cost": 0.0009555
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2312
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw attribution values without counterfactual targets, feature directions, or concrete recourse steps for the applicant.\",\n    \"audit_usefulness\": \"It highlights key model drivers and flags sensitive attributes like personal status and gender, though missing underlying baseline values slightly limits complete technical reconstruction.\",\n    \"clarity\": \"The raw one-hot feature names and numerical weights require familiarity with tabular machine learning outputs to interpret properly.\",\n    \"completeness\": \"The top 10 features provide the primary local contributors, but actual observed feature values and the expected value baseline are omitted.\",\n    \"concision\": \"The list is compact, direct, and avoids redundant phrasing or conversational filler.\",\n    \"overall_quality\": \"This is an acceptable technical summary of SHAP values that serves auditing well, but lacks lay clarity and actionable advice.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as checking account status, savings, duration, and employment history\u2014align well with established credit domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:10.318937+00:00"
+}

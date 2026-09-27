@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7148d9d5cc559959",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6496b69e203cf5db_023743d1ed8097fd.txt",
+  "prompt_version": "023743d1ed8097fd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543169-LaCVC2t4iCuYxd1spPZH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003492,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002265,
+        "upstream_inference_cost": 0.003492,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1680
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction or what actions a user should take; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"The low fidelity (0.38) and high faithfulness gap (0.19) indicate the explanation poorly represents actual model behaviour, severely limiting its value for auditing model logic or detecting bias.\",\n    \"clarity\": \"The format is straightforward and uses plain feature names with numeric scores, making it accessible to non-experts without requiring domain knowledge of the explanation method.\",\n    \"completeness\": \"The explanation covers multiple features but the very low fidelity and stability (0.12) suggest the identified drivers may not reliably capture the true decision factors for this instance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and normalized importance scores without extraneous text.\",\n    \"overall_quality\": \"Despite clear presentation, the explanation is fundamentally unreliable due to poor technical performance (low fidelity, high faithfulness gap, low stability), making it unsuitable for trustworthy decision support.\",\n    \"semantic_plausibility\": \"Marital status and education level are plausible predictors of income in the adult dataset, and the pattern is consistent with domain expectations for this classification task.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:13.951033+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7468633961295699",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_87662d14579e0a65",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7468633961295699_3f7629b9b63bc628.txt",
+  "prompt_version": "3f7629b9b63bc628",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543416-of7y16ELNbSoFZOhFEQu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003803,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002585,
+        "upstream_inference_cost": 0.003803,
+        "upstream_inference_prompt_cost": 0.001218
+      },
+      "is_byok": false,
+      "prompt_tokens": 1218,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1735
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7468633961295699\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors but provides no guidance on how to interpret them or what actions a user should take based on this prediction of credit denial. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"While the anchor features are listed with perfect weights (1.0), the explanation lacks depth regarding why these features matter or how they interact in the model's decision logic. The low fidelity (0.348) suggests the anchors may not faithfully represent the model's actual behavior.\",\n    \"clarity\": \"The explanation is presented as a technical list of feature names and weights without contextual interpretation or plain-language summary. A non-expert reader would struggle to understand what these anchors mean or why they matter.\",\n    \"completeness\": \"The explanation identifies ten anchor features but provides no information about their actual values for this instance, their relative importance, or how they collectively led to the denial prediction. Critical context about the instance itself is missing.\",\n    \"concision\": \"The explanation is relatively compact in token count but is padded with redundant feature listings and lacks semantic density; it could be more informative by including actual feature values and directional impact.\",\n    \"overall_quality\": \"The explanation is technically formatted but semantically hollow, offering little insight into the prediction beyond a list of feature names. The low fidelity metric and absence of interpretive context severely limit its utility.\",\n    \"semantic_plausibility\": \"The selected anchors (duration, credit amount, checking status, purpose) are plausible credit risk factors in domain terms, but the explanation provides no evidence of how these factors actually influenced the denial decision for this specific applicant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:21.859619+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cafe50d43e9b9266",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_47e4bd329e3f4bf1",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cafe50d43e9b9266_2c16d8d15a7f5ac9.txt",
+  "prompt_version": "2c16d8d15a7f5ac9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543607-cdojrmdJz8Og9t89SQmR",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002595,
+        "upstream_inference_cost": 0.003825,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1749
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cafe50d43e9b9266\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to change the prediction, modify the application, or take concrete next steps. A user cannot act on raw anchor weights without domain interpretation.\",\n    \"audit_usefulness\": \"The anchor weights and feature rankings support model inspection by showing which features anchored the decision, but the low fidelity (0.356) and high faithfulness gap (0.415) severely limit confidence in the explanation's reliability for auditing purposes.\",\n    \"clarity\": \"The explanation is presented as a technical list of feature names and numerical weights that requires familiarity with anchor methods and credit domain terminology to interpret; non-experts would struggle to understand what these weights mean.\",\n    \"completeness\": \"The explanation identifies four key anchoring features (duration, credit_amount, checking_status, savings_status, personal_status) but omits contextual information such as actual feature values, decision thresholds, or why these features matter for the negative prediction.\",\n    \"concision\": \"The explanation is compact in token count but contains redundant zero-weight features that add no information; removing non-anchoring features would improve information density.\",\n    \"overall_quality\": \"The explanation suffers from poor fidelity and high faithfulness gap, limiting trustworthiness, while also lacking clarity and actionability for end users or auditors despite being technically concise.\",\n    \"semantic_plausibility\": \"In credit risk assessment, duration, credit amount, checking status, and savings status are plausible drivers of creditworthiness; however, the explanation does not articulate why these features support a negative prediction, making semantic coherence difficult to verify.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:33.541324+00:00"
+}

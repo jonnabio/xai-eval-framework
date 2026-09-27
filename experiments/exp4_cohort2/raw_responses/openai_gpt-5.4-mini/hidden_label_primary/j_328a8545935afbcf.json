@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_328a8545935afbcf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_de91280a4d84e7ca_ed37b9c478b5535a.txt",
+  "prompt_version": "ed37b9c478b5535a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539941-r8Vu1f2G4v1y71kwWaxI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.00294375,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It only lists features with binary-style weights, so a user cannot tell what actions would matter.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not explain the direction or magnitude of feature effects, only that one anchor condition held. This is not enough to inspect whether the model behaved reasonably or biasedly.\",\n    \"clarity\": \"The wording is short and technically simple, but the output is not easy for a non-expert to interpret. The zero-valued feature entries and the meaning of the 1.0000 anchor are not explained.\",\n    \"completeness\": \"It covers only one meaningful local factor and omits the main reasons for the prediction, especially for a false negative. There is no contextual explanation of why the model predicted class 0 for this instance.\",\n    \"concision\": \"The output is compact, but much of the listed content is redundant because most features are shown with 0.0000. It is concise in length, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak explanation overall: it is sparse, not actionable, and only partially informative about the model\u2019s local reasoning. It is understandable at a glance, but it does not meaningfully support user or auditor needs.\",\n    \"semantic_plausibility\": \"The anchor on married-civ-spouse is plausible for the Adult dataset and logreg setting, but the presentation is odd because it mixes one active anchor with many zero entries. The content is not contradictory, just incomplete and somewhat unhelpful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:25.034894+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8639aa9bc13828fc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2a63737c16fa6edb_a39f06091a2e57ca.txt",
+  "prompt_version": "a39f06091a2e57ca",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541659-GUxjJZBQvOe3Is9um1q7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028335,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.0028335,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next step; it only lists local feature contributions. A user cannot readily tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which features pushed the model toward the negative class, but the very small weights and low fidelity limit diagnostic value. It is not strong enough to reliably investigate model behavior.\",\n    \"clarity\": \"The text is readable and the feature names with signed contributions are easy to scan, but the meaning of the values is not explained for a non-expert. A reader would need some familiarity with LIME and encoded tabular features.\",\n    \"completeness\": \"It includes several top local factors, but the contributions are tiny and there is no baseline, class probability, or clear statement of why the prediction is negative. Important decision context is therefore missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still listing the main local factors. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is concise and somewhat interpretable, yet the small and unstable-looking attributions plus lack of contextual framing reduce its practical value. Overall it provides only modest insight into the specific prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult income dataset, and the direction of some effects is broadly consistent with expectations for a negative prediction. Nothing in the explanation is obviously contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:01.774449+00:00"
+}

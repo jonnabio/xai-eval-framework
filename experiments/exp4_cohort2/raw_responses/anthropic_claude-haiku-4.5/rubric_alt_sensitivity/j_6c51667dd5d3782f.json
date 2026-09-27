@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6c51667dd5d3782f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_78dfd1648ed95148_edf006a971b774b3.txt",
+  "prompt_version": "edf006a971b774b3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544435-avbla0u3r82Uy8vungpM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00424,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00294,
+        "upstream_inference_cost": 0.00424,
+        "upstream_inference_prompt_cost": 0.0013
+      },
+      "is_byok": false,
+      "prompt_tokens": 1300,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1888
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user would not know whether to reduce duration, increase employment stability, or modify other factors to reverse the denial decision.\",\n    \"audit_usefulness\": \"The SHAP values show which features pushed the model toward rejection (negative values) and acceptance (positive values). However, the low fidelity (0.74) and moderate stability (0.65) suggest the explanation may not reliably represent the model's true decision boundary, limiting audit confidence.\",\n    \"clarity\": \"The format is technical but relatively straightforward: feature names with numerical contributions. However, encoded feature names like 'employment_4<=X<7' and 'checking_status_no checking' require domain knowledge to interpret, making it less accessible to non-experts.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which addresses the main drivers. However, it lacks context about feature values in this instance, thresholds, or interactions, making it incomplete for full understanding of the decision logic.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is presented efficiently without padding, though some feature names are lengthy due to encoding.\",\n    \"overall_quality\": \"This is a serviceable but flawed explanation. While SHAP provides interpretable local contributions, the moderate technical metrics (fidelity 0.74, stability 0.65, faithfulness_gap 0.20) and false negative outcome suggest the explanation may not fully capture why the model made this incorrect decision. The lack of actionability and incomplete context further limit utility.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment logic: longer duration and no checking account increase risk, while employment stability and credit amount are relevant. However, the model's false negative prediction (denying credit to someone creditworthy) raises questions about whether these contributions truly reflect sound reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:27:21.547127+00:00"
+}

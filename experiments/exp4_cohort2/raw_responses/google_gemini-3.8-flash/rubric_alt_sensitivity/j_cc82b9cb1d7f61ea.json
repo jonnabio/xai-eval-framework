@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_cc82b9cb1d7f61ea",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3e006f8c0e7512b1_d7929e6662f20d44.txt",
+  "prompt_version": "d7929e6662f20d44",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546655-HBFNZTReTeTuEmE6fS8q",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 706,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00514275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041475,
+        "upstream_inference_cost": 0.00514275,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2433
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP contribution values without specifying the instance's actual feature values or providing clear paths to alter the prediction.\",\n    \"audit_usefulness\": \"It gives auditors insight into which features drove the false negative prediction (e.g., negative pushes from education and occupation), though the absence of input values limits deeper debugging.\",\n    \"clarity\": \"The raw feature attribution format with one-hot encoded column names and signed floats requires statistical knowledge to interpret correctly.\",\n    \"completeness\": \"The top 10 local factors provide the primary drivers of the model's output, but omitting actual feature values leaves the rationale somewhat incomplete.\",\n    \"concision\": \"The summary is direct and compact, presenting key local factors without filler text.\",\n    \"overall_quality\": \"A serviceable technical feature attribution summary that accurately reflects local model mechanics, though hindered by missing baseline feature values and low accessibility.\",\n    \"semantic_plausibility\": \"The listed influences make general domain sense, though without feature values it is hard to verify whether negative attributions reflect presence or absence of high-earning traits.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:04:24.896297+00:00"
+}

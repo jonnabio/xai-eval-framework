@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5374f675d78006fb",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_445567f442799a48_661542c8843c6804.txt",
+  "prompt_version": "661542c8843c6804",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545087-srUKwvSVVFAcXPFnRdmz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004063,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00276,
+        "upstream_inference_cost": 0.004063,
+        "upstream_inference_prompt_cost": 0.001303
+      },
+      "is_byok": false,
+      "prompt_tokens": 1303,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1855
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their application would alter the decision.\",\n    \"audit_usefulness\": \"The feature contributions and their directions are useful for auditing model behavior and checking for bias patterns. However, the low fidelity (0.49) and high faithfulness gap (0.33) suggest the explanation may not accurately represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is technical with feature names and numerical coefficients. While the direction of influence (positive/negative) is clear, someone without domain knowledge of credit scoring or the German Credit dataset would struggle to interpret what these features mean.\",\n    \"completeness\": \"Ten features are listed with their SHAP values, covering major decision factors. However, the high sparsity (0.84) and moderate stability (0.69) suggest important factors may be missing or the explanation is unstable across similar instances.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line conveys a feature name and its contribution value efficiently without padding.\",\n    \"overall_quality\": \"The explanation provides a reasonable list of contributing factors but is undermined by poor technical metrics (low fidelity, high faithfulness gap, moderate stability). The format is not accessible to non-technical users, and actionability is absent. It serves as a basic audit tool but with significant limitations.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment logic (checking status, payment history, savings, employment, age, credit amount). The negative contributions from poor credit indicators and positive from age are domain-consistent. However, the true label matches the prediction (TN), so the explanation's plausibility cannot be validated against a misclassification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:38:13.169293+00:00"
+}

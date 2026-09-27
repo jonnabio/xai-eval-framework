@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c1afbcd9580538a4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b0be787fc378f4ff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c1afbcd9580538a4_3f77a2e65f9e9509.txt",
+  "prompt_version": "3f77a2e65f9e9509",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542357-MV5Yz0W8ix5xXNb7H2eR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002907,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.002907,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c1afbcd9580538a4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the applicant or reviewer. It only lists features with identical importance values, so there is no guidance on what could be changed or checked.\",\n    \"audit_usefulness\": \"It has limited audit value because it does not explain directionality, thresholds, or how the listed factors influenced the negative prediction. The repeated 1.0000 values also make it hard to inspect whether the explanation is meaningful or just a generic artifact.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the feature scores is not explained. A non-expert would likely not understand why these variables matter or what the numbers represent.\",\n    \"completeness\": \"The explanation names several candidate local factors, but it does not show which of them supported the class 0 prediction versus opposed it. It also lacks any account of feature values for the specific instance, so the local decision context is incomplete.\",\n    \"concision\": \"It is compact and contains little redundancy, but much of the content is low-information because every listed factor has the same value. This makes it concise but not especially informative.\",\n    \"overall_quality\": \"Overall, the explanation is limited by its generic, non-directional output and lack of instance-specific reasoning. It is somewhat readable and compact, but not sufficiently informative to justify the prediction well.\",\n    \"semantic_plausibility\": \"The listed German credit features are plausible for this dataset, and a random forest using them is domain-consistent. However, the identical top-factor values across many features are semantically odd and reduce confidence that the explanation reflects a meaningful local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:39.862029+00:00"
+}

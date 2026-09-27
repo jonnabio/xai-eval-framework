@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778d3be3c54f91e6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0eec5d7e62637e59",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_778d3be3c54f91e6_2d1289f24f91511b.txt",
+  "prompt_version": "2d1289f24f91511b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541407-3X9hj1jp5lWjHbPRB1jK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028845,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.0028845,
+        "upstream_inference_prompt_cost": 0.0008055
+      },
+      "is_byok": false,
+      "prompt_tokens": 1074,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_778d3be3c54f91e6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete recourse or review step. It lists contributing features only, without indicating what the applicant could change or what an auditor should inspect next.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it exposes the main SHAP contributors and their directions. However, it lacks a baseline, feature values, and broader context needed to thoroughly investigate why this was a false positive.\",\n    \"clarity\": \"The feature names and signed contributions are presented in a compact list that is easy to parse. A non-expert may still struggle to interpret encoded categories and the meaning of positive versus negative SHAP values.\",\n    \"completeness\": \"The explanation captures several local drivers of the prediction, but not the full decision context. It omits the actual feature values, the model score, and how the listed effects combine to produce the final class 1 prediction.\",\n    \"concision\": \"The response is fairly compact and mostly free of redundancy. It packs a useful set of top local factors into a short list.\",\n    \"overall_quality\": \"Overall, this is a reasonably informative local explanation with decent sparsity and interpretability, but it is limited by missing context and weak support for action or deep review. Its usefulness is good for a quick glance, but not strong enough for full decision understanding.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the directions are broadly consistent with common expectations about credit history, savings, housing, and employment. Nothing appears contradictory or implausible in the domain context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:50.091261+00:00"
+}

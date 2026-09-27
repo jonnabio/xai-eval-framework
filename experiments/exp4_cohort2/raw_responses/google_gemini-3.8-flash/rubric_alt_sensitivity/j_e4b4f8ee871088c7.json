@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e4b4f8ee871088c7",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c523b5e4b177b22e_a45528bea66c431d.txt",
+  "prompt_version": "a45528bea66c431d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547252-SviUZwxXdsMfdip2x44z",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1134,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 737,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00525225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042525,
+        "upstream_inference_cost": 0.00525225,
+        "upstream_inference_prompt_cost": 0.00099975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1333,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2467
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed attribution scores but does not provide actual feature values, thresholds, or counterfactual guidance needed to take concrete corrective action.\",\n    \"audit_usefulness\": \"The signed SHAP weights provide good insight into which features drove the model's decision for this instance, though the absence of original feature values limits deeper debugging.\",\n    \"clarity\": \"The raw format consisting of encoded feature names and numeric SHAP values is difficult for non-technical individuals to interpret.\",\n    \"completeness\": \"The top 10 local factors provide the primary drivers behind the model's prediction, although the base value and remaining feature contributions are omitted.\",\n    \"concision\": \"The explanation is compact and delivers a high density of relevant attribution information without filler.\",\n    \"overall_quality\": \"A serviceable technical explanation that provides accurate local feature contributions, but is hampered by raw formatting and lack of instance feature values.\",\n    \"semantic_plausibility\": \"The top contributing features\u2014such as duration, checking account status, and credit amount\u2014align well with established domain knowledge in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:21.102177+00:00"
+}

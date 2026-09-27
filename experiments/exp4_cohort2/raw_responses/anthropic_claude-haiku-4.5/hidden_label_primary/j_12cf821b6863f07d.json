@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_68d9cafa69b7fec2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_12cf821b6863f07d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_68d9cafa69b7fec2_11681bcd63d76a98.txt",
+  "prompt_version": "11681bcd63d76a98",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540713-jIvCig0S65jiqmuPqsAa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003893,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002655,
+        "upstream_inference_cost": 0.003893,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1769
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_68d9cafa69b7fec2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on how to modify them or what actions a user should take to change the prediction. The numeric weights offer no direction for recourse.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchored the prediction and their relative importance weights, enabling an auditor to inspect model decision logic and identify potential biases in feature reliance. The high fidelity (0.76) and stability (0.80) support confidence in the audit findings.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but requires familiarity with credit domain terminology (e.g., 'credit_history_critical/other existing credit') and understanding that 1.0 indicates anchor status. Non-experts may struggle with interpretation.\",\n    \"completeness\": \"The explanation identifies the three most influential features but omits context about their actual values in this instance, the direction of influence, or why these features matter relative to the prediction threshold. Critical local decision context is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights in a structured format without unnecessary elaboration. Token count (73) is reasonable for the information density.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insights into model behavior but falls short on user-facing dimensions like actionability and completeness. The moderate faithfulness gap (0.42) and missing instance-level context limit overall utility.\",\n    \"semantic_plausibility\": \"In credit risk assessment, duration, credit history, and property/collateral are plausible drivers of approval decisions and align with domain expectations. The feature selection is coherent with lending logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:25:19.692277+00:00"
+}

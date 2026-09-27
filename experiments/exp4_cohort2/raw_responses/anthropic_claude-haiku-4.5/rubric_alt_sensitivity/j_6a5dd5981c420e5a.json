@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6a5dd5981c420e5a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afc105601fc7fdd6_1c58c1a6f720c20a.txt",
+  "prompt_version": "1c58c1a6f720c20a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547527-ydW3ZU3mE2civc00yixH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 602,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004289,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00301,
+        "upstream_inference_cost": 0.004289,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1881
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what values would need to change to alter the prediction. A clinician or patient cannot act on abstract feature weights without knowing target ranges or thresholds.\",\n    \"audit_usefulness\": \"The low fidelity (0.244) and stability (0.262) scores indicate the explanation is unreliable. The high faithfulness gap (0.02) and poor technical metrics suggest this explanation may not accurately reflect the model's actual decision logic, limiting its value for bias detection or error investigation.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but lacks context about what these weights mean, what the features represent clinically, or how they combine to produce the prediction. Domain knowledge is needed to interpret.\",\n    \"completeness\": \"Only two features have non-zero weights (worst radius and worst concave points both at 1.0), while ten others are listed as 0.0. This sparse representation may omit important decision factors, and the explanation does not explain why these specific features matter or how they interact.\",\n    \"concision\": \"The explanation is padded with many zero-weight features that add no information. Listing ten features with 0.0 weight is repetitive and wastes space; a more concise version would mention only the two active features.\",\n    \"overall_quality\": \"This is a false positive case where the model predicted malignant (1) but the true label is benign (0). The explanation is technically weak (low fidelity and stability), sparse in actionable insight, and cluttered with uninformative zero weights. It fails to provide reliable or useful guidance for understanding or correcting the error.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst concave points are known risk indicators, so their high weights are plausible. However, the explanation does not clarify whether these values are actually elevated in this instance, and the poor technical metrics raise doubt about whether the explanation truly reflects the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:18:53.567563+00:00"
+}

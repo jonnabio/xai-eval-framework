@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_14d5db8a0e0be73a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f4658b35cc204bfb_48bbe04df4c22a52.txt",
+  "prompt_version": "48bbe04df4c22a52",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543518-Oo8IS9Q1bbZxbYb4rF3H",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 587,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00458625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036525,
+        "upstream_inference_cost": 0.00458625,
+        "upstream_inference_prompt_cost": 0.00093375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2219
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only displays abstract importance scores without providing actual counterfactual feature values, directionality, or guidance for recourse.\",\n    \"audit_usefulness\": \"It highlights that the model's prediction is sensitive to native country and occupation, which helps an auditor investigate potential demographic bias in this false positive.\",\n    \"clarity\": \"The raw key-value format is readable for technical users but lacks clear context or explanatory phrasing for non-experts.\",\n    \"completeness\": \"Only two features carry non-zero weights, omitting original instance feature values and directional changes required to flip the decision.\",\n    \"concision\": \"A majority of the listed features have zero importance, creating unnecessary clutter that could have been pruned.\",\n    \"overall_quality\": \"Converting counterfactual data into sparse feature scores without actionable targets or context results in an uninformative and mediocre explanation.\",\n    \"semantic_plausibility\": \"While occupation is a plausible driver of income, heavy reliance on native country may indicate model artifacting or bias, though it remains a plausible reflection of model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:07.125863+00:00"
+}

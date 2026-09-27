@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fa343e1c834802a3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_fbb0082b6f2ae806_5287964d2c4ede47.txt",
+  "prompt_version": "5287964d2c4ede47",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547569-AYwzw1q6M4i0GeLiNuo5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1262,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 798,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005724,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0047325,
+        "upstream_inference_cost": 0.005724,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2584
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse, as it highlights mostly immutable demographic attributes (sex, marital status) and does not specify feature values or feasible changes.\",\n    \"audit_usefulness\": \"While it flags sensitive attributes like sex and marital status that could trigger bias audits, the extremely poor fidelity (0.499) and high faithfulness gap (0.809) make it unreliable for diagnosing model behavior.\",\n    \"clarity\": \"Presenting one-hot dummy features with raw signed regression weights without indicating whether the attribute is present (1) or absent (0) is confusing for non-technical users.\",\n    \"completeness\": \"The explanation only lists one-hot categorical artifacts\u2014often including mutually exclusive categories of the same underlying variable\u2014and entirely omits key continuous features like age, capital gain, and hours worked.\",\n    \"concision\": \"The summary is fairly compact, though it wastes space listing opposing one-hot indicators for the same categorical features (e.g., sex_Female and sex_Male).\",\n    \"overall_quality\": \"The explanation is weak due to low fidelity, lack of instance feature values, and one-hot encoding artifacts that obscure the model's actual reasoning on this false-negative instance.\",\n    \"semantic_plausibility\": \"The attribution is doubtful because it assigns negative weights to typically positive indicators like Bachelors degrees and produces conflicting signals across mutually exclusive marital and relationship categories.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:19:40.126197+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c525bd2fab7171fd",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d47138a03cd221ff_84a6e5b23e6273cc.txt",
+  "prompt_version": "84a6e5b23e6273cc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548740-HkT9IuugkBJqXOshe2Ze",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1287,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 893,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00581475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00482625,
+        "upstream_inference_cost": 0.00581475,
+        "upstream_inference_prompt_cost": 0.0009885
+      },
+      "is_byok": false,
+      "prompt_tokens": 1318,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2605
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides signed attribution weights, offering only implied hints about which factors reduce or raise the prediction without clear thresholds or actionable guidance.\",\n    \"audit_usefulness\": \"It provides good insight into why the model produced a false positive (heavily pushed by Doctorate and Prof-specialty), and reveals sensitive attributes like sex being factored in.\",\n    \"clarity\": \"The list of raw feature-weight pairs and one-hot encodings without context or feature values requires statistical literacy to interpret.\",\n    \"completeness\": \"The top 10 features and their directional influences are included, though specific input feature values (such as exact age or hours worked) are not displayed.\",\n    \"concision\": \"The summary is compact and directly presents the key weights without filler text.\",\n    \"overall_quality\": \"A serviceable feature attribution explanation that clearly attributes the false positive prediction to specific professional and educational attributes, despite lower fidelity metrics.\",\n    \"semantic_plausibility\": \"Doctorate education, professional specialty, and marital status pushing income upwards aligns well with domain knowledge of census income patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:39:11.760368+00:00"
+}

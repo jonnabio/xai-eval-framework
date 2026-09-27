@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f1d10246adde88f9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f787cc3703d999cf_660897edc2024275.txt",
+  "prompt_version": "660897edc2024275",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541836-9c2JZR8ljgMgGRGM4bnf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 432,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003386,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.003386,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1658
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f787cc3703d999cf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides no actionable insights; all feature contributions are effectively zero, offering no guidance for recourse or decision review.\",\n    \"audit_usefulness\": \"The explanation fails to support auditing because zero-valued coefficients across all features provide no meaningful information about model decision logic or potential biases.\",\n    \"clarity\": \"The explanation is clearly formatted as a list of feature-coefficient pairs, making it easy to parse structurally, though the content itself is uninformative.\",\n    \"completeness\": \"The explanation is severely incomplete; it lists features but provides no meaningful local decision context since all contributions collapse to near-zero values.\",\n    \"concision\": \"While the explanation is compact in length, it is not maximally informative per word because the information content is essentially null despite the token budget.\",\n    \"overall_quality\": \"This explanation is fundamentally broken; the zero-valued coefficients indicate either a model failure, numerical instability, or a pathological LIME approximation that renders the explanation useless for any practical purpose.\",\n    \"semantic_plausibility\": \"The pattern of all-zero contributions is implausible and contradicts domain expectations; it suggests the LIME local approximation failed to capture meaningful feature relationships in the MLP's decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:00.606141+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_acc31b1b7b3e9a60",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_07f7eab6526a79eb_ff2593653cd2024a.txt",
+  "prompt_version": "ff2593653cd2024a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539768-JqHGFzNmdUciPc6h4Z12",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 790,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005403,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044625,
+        "upstream_inference_cost": 0.005403,
+        "upstream_inference_prompt_cost": 0.0009405
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2444
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw surrogate weights without concrete instance values or actionable guidance on how a user could change the outcome.\",\n    \"audit_usefulness\": \"It highlights features that influenced the local surrogate model\u2014including demographic variables like sex and marital status\u2014though utility is hampered by the lack of observed feature values and poor faithfulness metrics.\",\n    \"clarity\": \"The output is a raw string of one-hot encoded feature names and numeric coefficients, requiring technical familiarity with machine learning to interpret.\",\n    \"completeness\": \"While ten top factors are presented, the explanation omits the actual feature values of the instance and contextual baseline information.\",\n    \"concision\": \"The presentation is compact and directly presents the top ten local features with their respective weights without unnecessary filler.\",\n    \"overall_quality\": \"The explanation provides a concise snapshot of LIME weights, but falls short due to missing feature values, low faithfulness, and lack of actionable recourse.\",\n    \"semantic_plausibility\": \"The directionality of features aligns reasonably well with socioeconomic domain expectations for the Adult dataset, though several one-hot encoded categories overlap somewhat redundantly.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:37.537377+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_86a7fe855938c6d3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4440b587017f192b_71ae7a5c495313d3.txt",
+  "prompt_version": "71ae7a5c495313d3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541713-vKRkmoCWq4arIvz0b5jn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002994,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.002994,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse or decision steps, so a user cannot tell what to change to alter the prediction. It is useful for understanding drivers, not for action planning.\",\n    \"audit_usefulness\": \"This is fairly useful for auditing because it identifies the main local SHAP contributors and their directions, which helps inspect whether the model relies on sensible factors. However, it lacks a baseline comparison and broader context about why the model misclassified this FP case.\",\n    \"clarity\": \"The output is straightforward and easy to read as a ranked list of feature contributions, even for a non-expert. The notation is compact and the signs are interpretable at a high level.\",\n    \"completeness\": \"It covers several main local drivers of the prediction, including residence, credit amount, duration, and checking status. Still, it does not explain the base value, the full additive path to the final prediction, or how these factors collectively produced the false positive.\",\n    \"concision\": \"The explanation is compact and information-dense, with little redundancy. It communicates the top factors in a minimal number of tokens.\",\n    \"overall_quality\": \"Overall, this is a solid local feature-attribution explanation with good readability and useful audit value, but it stops short of giving a full decision narrative or actionable recourse. Its quality is good rather than excellent because it explains what mattered, not why the outcome occurred in an end-to-end sense.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring: credit amount, duration, checking status, savings, and credit history are all sensible drivers. The directions of influence are not obviously contradictory, though the explanation alone cannot verify the learned relationships.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:56.084071+00:00"
+}

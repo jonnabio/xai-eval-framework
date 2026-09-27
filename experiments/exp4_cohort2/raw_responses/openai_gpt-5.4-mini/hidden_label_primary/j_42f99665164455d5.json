@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_42f99665164455d5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_719c3e5dafe19965_71b0f481cb220454.txt",
+  "prompt_version": "71b0f481cb220454",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539727-cOwvyg2AyU8o85EP9kg6",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 436,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002757,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001962,
+        "upstream_inference_cost": 0.002757,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1496
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps beyond listing features. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It identifies two active anchor conditions, but the near-zero weights on many other features provide little insight into why the model predicted class 1. This offers limited support for checking decision logic or diagnosing errors.\",\n    \"clarity\": \"The output is short and the feature names are readable, but the 1.0000 and 0.0000 values are not explained in plain language. A non-expert would likely not understand what the anchor strengths mean.\",\n    \"completeness\": \"Only two features appear to drive the explanation, and there is no description of how they combine to justify the prediction. Important local context about why this specific instance was classified positive is missing.\",\n    \"concision\": \"The explanation is very compact and mostly avoids redundancy. However, it is almost too terse to convey useful information beyond a sparse feature list.\",\n    \"overall_quality\": \"The explanation is technically brief and somewhat interpretable, but it is too sparse to support understanding, review, or recourse. Its usefulness is limited by the lack of narrative context and the ambiguous anchor-style scores.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit data, since installment burden, purpose, and related credit attributes can reasonably affect approval decisions. Nothing in the explanation is obviously contradictory to the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:51.682385+00:00"
+}

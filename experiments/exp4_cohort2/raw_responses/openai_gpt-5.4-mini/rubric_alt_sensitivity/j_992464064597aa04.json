@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_992464064597aa04",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba8a2c4ca53c1a08_22076daa1c5a64da.txt",
+  "prompt_version": "22076daa1c5a64da",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543197-jZs9aqwaBiBt6kDCHhmc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 385,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017325,
+        "upstream_inference_cost": 0.002595,
+        "upstream_inference_prompt_cost": 0.0008625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1150,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature contributions and does not indicate what changes would likely alter the prediction.\",\n    \"audit_usefulness\": \"The top contributing features are visible, so a reviewer can inspect whether sensitive attributes like sex or marital status are influencing the model, but the low fidelity and stability limit deeper trust.\",\n    \"clarity\": \"The terms are simple enough for a nontechnical reader if they understand the listed columns, though the numeric weights and encoded feature names require some familiarity with the dataset.\",\n    \"completeness\": \"It provides several main local factors, but it does not explain the full decision logic or interactions, and the small weights leave the main drivers only partially clear.\",\n    \"concision\": \"The explanation is brief and mostly information-dense, with little filler beyond the list of top factors.\",\n    \"overall_quality\": \"It is a decent local summary, but the explanation is shallow, somewhat unstable, and only moderately faithful, so it is useful but not strong.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for Adult income prediction, especially education, occupation, relationship, and marital status, though the presence of both sex_Male and sex_Female is a bit awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:39.354560+00:00"
+}

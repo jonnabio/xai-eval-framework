@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_742fa41762a5dd99",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_636acbcad2a09395_b53fbd8d09ac1d5a.txt",
+  "prompt_version": "b53fbd8d09ac1d5a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538836-b0MXjL4NoDWQtdeKpsvs",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.0029595,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next step for the applicant or reviewer. It only lists feature weights, so it offers no specific actions to change the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a few influential features and their anchor-like importance values, which can help inspect model behavior. However, it lacks threshold details, directionality, and feature-value context needed for deeper error or bias analysis.\",\n    \"clarity\": \"The output is short and structured, but the meaning of the numeric values is not obvious to a non-expert, especially the many 0.0000 entries. Without explanation of what these scores represent, it is only moderately clear.\",\n    \"completeness\": \"It names the main local factors, but it does not explain how they combine to support class 1, nor does it provide the specific conditions or thresholds that triggered the anchor. Key decision context is therefore missing.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but several feature entries with zero values add little useful information. It is reasonably concise overall, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a decent technical summary of a local explanation, but it is sparse and difficult to interpret for decision support. It works better for a quick audit glance than for full understanding of why this specific prediction was made.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in German credit scoring, and the focus on duration, installment commitment, property, and credit amount is consistent with domain expectations. The explanation is semantically coherent even though it is incomplete.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:00.625759+00:00"
+}

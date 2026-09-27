@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4cba84a4964dff51",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c697ae24ec5760fd_1295dd410c3d23aa.txt",
+  "prompt_version": "1295dd410c3d23aa",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541370-AJpAtkVBRMFtznanZNjF",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004139,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0029,
+        "upstream_inference_cost": 0.004139,
+        "upstream_inference_prompt_cost": 0.001239
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1819
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take to improve creditworthiness. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model inspection and help identify which features drive the prediction, enabling bias investigation and error analysis. However, the false negative outcome (predicted 0, true 1) limits diagnostic value without context on model failure modes.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, SHAP values) that requires familiarity with credit scoring and SHAP methodology; a non-expert would struggle to interpret the semantic meaning of features like 'checking_status_no checking' or the significance of the numerical contributions.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main local drivers of the prediction. However, the explanation lacks the base prediction value and does not contextualize how these factors combine to produce the final prediction of 0.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting 10 features with their SHAP values in a structured format without unnecessary elaboration. The token count (80) is efficient for the information density.\",\n    \"overall_quality\": \"The explanation provides technically sound SHAP-based feature importance but suffers from poor clarity for non-experts, lack of actionability, and missing context on the false negative error. The low fidelity (0.403) and high faithfulness gap (0.200) suggest the explanation may not reliably represent model behavior.\",\n    \"semantic_plausibility\": \"The identified factors (no checking account, short employment, renting, education purpose) are plausible negative credit signals in domain terms, and positive factors (high checking balance, stable employment) align with credit risk expectations. The feature selection is coherent with lending logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:17.163725+00:00"
+}

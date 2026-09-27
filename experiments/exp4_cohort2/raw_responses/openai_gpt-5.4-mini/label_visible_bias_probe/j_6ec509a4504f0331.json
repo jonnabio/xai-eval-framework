@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6ec509a4504f0331",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ba96b41ceb2e14cb_f8f9975874235db1.txt",
+  "prompt_version": "f8f9975874235db1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542146-1K2oFXN0jVzNifFi32gD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00299925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.00299925,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives a few feature names but no concrete recourse or next steps a person could take to change the prediction. The listed factors are not translated into meaningful actions or thresholds.\",\n    \"audit_usefulness\": \"It is only partially useful for auditing because it shows which features DICE considered, but the near-zero scores and lack of directionality make model behavior hard to inspect. The high faithfulness gap and low stability further limit trust in this explanation.\",\n    \"clarity\": \"The output is readable and compact, but it uses raw encoded feature names like relationship_Other-relative and native-country_Portugal without explanation. A non-expert would struggle to interpret why these matter or what the values mean.\",\n    \"completeness\": \"It names several top local factors, but most are zero and it does not explain how they combine to produce the false negative prediction. Key local decision context such as the original feature values, counterfactual changes, or class-specific influence is missing.\",\n    \"concision\": \"The explanation is short and avoids excessive wording, but much of the content is low-information because most listed factors are zero. It is concise, though not especially efficient in conveying useful insight.\",\n    \"overall_quality\": \"This is a weak explanation overall: it is brief and somewhat readable, but it lacks interpretability, actionable guidance, and sufficient local detail. The technical metrics also suggest limited fidelity and very low stability, which aligns with poor practical quality.\",\n    \"semantic_plausibility\": \"The selected factors are at least plausible for the Adult dataset, since relationship and native country can influence income predictions. However, the dominance of zero-valued features and the absence of meaningful directional effects make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:08.933075+00:00"
+}

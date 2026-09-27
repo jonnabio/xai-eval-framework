@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7a5d4b90f259847c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e354d1466bc2ce9c_10e832294b940ae3.txt",
+  "prompt_version": "10e832294b940ae3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541927-boOI9l1S6XzE2ALv6KE1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002952,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.002952,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or decision guidance beyond listing influential features. A user could infer which attributes mattered, but not what to change or how that would affect the outcome.\",\n    \"audit_usefulness\": \"It is useful for a basic inspection of local feature influence because it shows several positive and negative contributors. However, the small magnitudes, low stability, and moderate fidelity limit its value for deeper bias or error analysis.\",\n    \"clarity\": \"The output is readable and the feature names are explicit, so a technical or semi-technical reader can follow it. For a non-expert, the numeric weights and encoded feature names still require some interpretation.\",\n    \"completeness\": \"It includes the top local factors and their directional contributions, which covers the main ingredients of the prediction. It lacks a base value, a clearer ranking narrative, and any explanation of how these factors combine to produce the false positive.\",\n    \"concision\": \"The explanation is fairly compact and mostly avoids redundancy, while still listing the main contributing features. It is not especially information-dense because the raw feature list is shown without synthesis, but it remains reasonably concise.\",\n    \"overall_quality\": \"This is a usable local explanation, but it is only moderately informative because it mainly exposes feature weights without a strong narrative or recourse guidance. Given the false-positive case and the modest technical quality metrics, the explanation is acceptable but not strong.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions are not obviously contradictory to common domain expectations. The presence of marital-status, education, occupation, and hours-per-week as drivers is coherent for this task.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:45:30.653132+00:00"
+}

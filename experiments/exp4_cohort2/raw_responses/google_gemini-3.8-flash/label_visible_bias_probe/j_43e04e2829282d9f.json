@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_43e04e2829282d9f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_70f1fb89c6075a2b_7a5e484ae2dddb89.txt",
+  "prompt_version": "7a5e484ae2dddb89",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545722-UtrS0ArLIdQlXKQHoDkC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1120,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0065805,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00564375,
+        "upstream_inference_cost": 0.0065805,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2754
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the user's current feature values or clear target states, making it impossible to take concrete recourse actions.\",\n    \"audit_usefulness\": \"While an auditor can identify that education dummies were modified, the lack of baseline values and complete counterfactual profiles limits rigorous model inspection.\",\n    \"clarity\": \"Presenting one-hot dummy variables alongside unexplained floating-point numbers makes the explanation confusing for a non-expert audience.\",\n    \"completeness\": \"The output omits full counterfactual instance profiles, directionality, and original feature values, leaving the local decision context largely incomplete.\",\n    \"concision\": \"Listing multiple features with zero values adds visual clutter without providing informative content.\",\n    \"overall_quality\": \"Reducing counterfactual outputs to an ambiguous list of pseudo-weights with values exceeding 1.0 on binary indicators severely impairs its overall quality.\",\n    \"semantic_plausibility\": \"Seeing positive shifts toward elementary and high school education indicators without domain context or proper binary bounds is semantically unintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:48:53.175897+00:00"
+}

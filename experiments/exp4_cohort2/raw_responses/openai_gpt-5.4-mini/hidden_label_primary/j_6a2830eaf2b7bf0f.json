@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778d3be3c54f91e6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6a2830eaf2b7bf0f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_778d3be3c54f91e6_9b6c0fad179f880d.txt",
+  "prompt_version": "9b6c0fad179f880d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538668-eJnyGY9hRRgrasjAl08e",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00315525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002349,
+        "upstream_inference_cost": 0.00315525,
+        "upstream_inference_prompt_cost": 0.00080625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1075,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1597
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_778d3be3c54f91e6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into a concrete recourse or next step for the applicant or reviewer. It lists influential features, but it does not say what could be changed or what action would reduce the predicted denial/approval outcome.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it exposes the main local SHAP contributions and shows which features pushed the prediction up or down. However, it lacks context about baseline values, feature directions in the original scale, and whether the listed contributions are sufficient to explain the false positive in detail.\",\n    \"clarity\": \"The wording is concise and largely understandable, and the feature names are standard tabular terms. Some non-expert readers may still need domain knowledge to interpret encoded categories and the meaning of positive versus negative SHAP values, but overall it is fairly clear.\",\n    \"completeness\": \"It covers a set of top local drivers and provides both positive and negative contributions, which helps explain the prediction at a high level. Still, it omits the base value, the magnitude of the final score, and any comparison to the most influential omitted factors, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious redundancy. It communicates many important factors in few tokens, though the extreme brevity limits interpretive support.\",\n    \"overall_quality\": \"This is a solid local feature-importance summary, but it is not a full explanation because it lacks baseline context, actionable guidance, and richer interpretation of the model's decision. Its main strength is that it is compact and reasonably readable.\",\n    \"semantic_plausibility\": \"The factors are plausible for German credit data and the directions are not obviously contradictory. Features such as checking status, credit history, savings, employment, housing, and age are all semantically consistent with a credit model's local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:11.347923+00:00"
+}

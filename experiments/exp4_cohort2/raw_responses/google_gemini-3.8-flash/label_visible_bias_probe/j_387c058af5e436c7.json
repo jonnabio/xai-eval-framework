@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_387c058af5e436c7",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c04339897f75190f_27c5e7eaef5c5bfa.txt",
+  "prompt_version": "27c5e7eaef5c5bfa",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543774-aaYpWpYfyT352sYb3VVx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 935,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 563,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00444825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00350625,
+        "upstream_inference_cost": 0.00444825,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2191
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers numeric feature attributions without stating current feature values or clear recourse steps for the applicant.\",\n    \"audit_usefulness\": \"The signed SHAP contributions allow an auditor to see which variables drove the false negative prediction, though the lack of baseline and instance values slightly limits depth.\",\n    \"clarity\": \"The raw list of feature names and signed floating-point SHAP values requires technical knowledge of XAI to interpret properly.\",\n    \"completeness\": \"It provides the top ten contributing features and their local attribution weights, giving a reasonable overview of the local decision logic.\",\n    \"concision\": \"The summary is compact and avoids redundant text, presenting relevant factors directly.\",\n    \"overall_quality\": \"This is an acceptable technical explanation that serves auditing needs adequately but lacks non-expert accessibility and actionable guidance.\",\n    \"semantic_plausibility\": \"Features like loan duration, checking account status, and payment plans are standard and plausible determinants in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:16:21.824552+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_651e27fdf46656c5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_dba169efb227132e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_651e27fdf46656c5_6f984190511d3c71.txt",
+  "prompt_version": "6f984190511d3c71",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541608-wQYV41BDuRfciOq7SYk0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004044,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002815,
+        "upstream_inference_cost": 0.004044,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1792
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_651e27fdf46656c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key anchors but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The normalized format with feature importance weights (1.0 vs 0.0) supports model inspection and reveals which features drive the decision, enabling auditors to assess model logic and potential bias patterns. However, the low fidelity (0.589) and high faithfulness gap (0.32) limit confidence in the explanation's representativeness.\",\n    \"clarity\": \"The explanation uses technical feature names and normalized weights that require domain knowledge to interpret; a non-expert would struggle to understand what 'checking_status_no checking' means or why these specific values matter. The format is structured but not accessible.\",\n    \"completeness\": \"Three anchors are identified as decisive (duration, checking_status, property_magnitude), but the explanation lacks context about their actual values for this instance, threshold ranges, or how they interact. The high number of zero-weighted features suggests incomplete local decision context.\",\n    \"concision\": \"The explanation is compact at 71 tokens and avoids redundancy, efficiently listing features and weights. However, the inclusion of ten zero-weighted features adds minimal information value and could be trimmed.\",\n    \"overall_quality\": \"The explanation provides a sparse, technically formatted anchor set that supports audit inspection but lacks clarity, actionability, and sufficient context for practical use. The poor fidelity and high faithfulness gap undermine confidence in the explanation's reliability.\",\n    \"semantic_plausibility\": \"In credit risk assessment, duration, checking account status, and property ownership are plausible predictors of creditworthiness; however, the explanation lacks instance-specific values and thresholds needed to verify coherence with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:14.827859+00:00"
+}

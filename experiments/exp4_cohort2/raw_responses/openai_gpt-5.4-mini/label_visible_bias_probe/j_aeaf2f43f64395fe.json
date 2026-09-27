@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_aeaf2f43f64395fe",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f75792557c566daf_c7f3ee9c85cc8f63.txt",
+  "prompt_version": "c7f3ee9c85cc8f63",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541205-luDIfz1iAjtMbTop4Htt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002967,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002967,
+        "upstream_inference_prompt_cost": 0.00078
+      },
+      "is_byok": false,
+      "prompt_tokens": 1040,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or decision steps. A user cannot tell what to change, by how much, or whether the prediction could realistically be altered.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it exposes the top SHAP contributors and their directions, which helps inspect which variables drove the false positive. However, it lacks baseline values, class-wise context, and instance-level comparison, limiting deeper error analysis.\",\n    \"clarity\": \"The feature names and signed contributions are easy to read in a compact list. Still, a non-expert may not know what the signs mean or how to interpret terms like 'worst texture' without additional explanation.\",\n    \"completeness\": \"The explanation covers several top local factors, but it does not provide the predicted probability, the magnitude of the overall score, or a narrative linking the factors to the FP outcome. For understanding this specific decision, the local context is only partially sufficient.\",\n    \"concision\": \"The output is fairly compact and avoids unnecessary filler while still listing multiple important factors. It is slightly dense because the raw feature list is presented without summarization, but overall it is efficient.\",\n    \"overall_quality\": \"This is a decent local explanation for a tabular model because it identifies the main SHAP drivers of the prediction and is reasonably concise. Its value is reduced by limited interpretability for non-experts and weak support for action or deeper review.\",\n    \"semantic_plausibility\": \"The feature set is coherent with the breast cancer domain, and the mix of positive and negative SHAP values is plausible for a random forest prediction. Nothing in the explanation contradicts the instance context or known domain structure.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:28.696306+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4e43875c9362a3c5",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_3dcff00cf090df69.txt",
+  "prompt_version": "3dcff00cf090df69",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548712-VfuNCLH27xBl8oQqYzAS",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1129,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 702,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00522075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00423375,
+        "upstream_inference_cost": 0.00522075,
+        "upstream_inference_prompt_cost": 0.000987
+      },
+      "is_byok": false,
+      "prompt_tokens": 1316,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2445
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives raw delta/weight values without indicating starting points or direction, and includes an immutable sensitive feature (race), offering very little practical guidance to an affected user.\",\n    \"audit_usefulness\": \"It highlights that education-num and race_Other are the primary factors driving the counterfactual, which offers useful signals for auditors investigating model fairness and bias.\",\n    \"clarity\": \"It presents raw feature names and unformatted numeric scores with numerous zero entries, making it difficult for a layperson to interpret without technical knowledge.\",\n    \"completeness\": \"Only two non-zero factors are identified and the full counterfactual instance or direction of change is missing, leaving the local decision logic incomplete.\",\n    \"concision\": \"Most of the explanation consists of features with zero values, padding the output unnecessarily.\",\n    \"overall_quality\": \"Serviceable but weak overall due to lack of directional context, zero-padded features, and limited lay interpretability.\",\n    \"semantic_plausibility\": \"Education is widely recognized as a strong predictor of income, making its prominence sensible and consistent with domain knowledge.\",\n    \"overall_quality\": \"The explanation provides minimal usable insight due to lack of sign, baseline values, and unnecessary zero-weight features.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:38:41.371223+00:00"
+}

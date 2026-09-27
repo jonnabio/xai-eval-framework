@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1f43e6a524351402",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28cfcd5501fa69b2_271a01e743266611.txt",
+  "prompt_version": "271a01e743266611",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549516-muZTCA33l8Ny1ZyNrAzn",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1059,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 659,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00397125,
+        "upstream_inference_cost": 0.0049575,
+        "upstream_inference_prompt_cost": 0.00098625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1315,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2374
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it highlights relevant risk factors like employment length and credit history, it provides no concrete thresholds or actionable steps to change the outcome.\",\n    \"audit_usefulness\": \"It reveals which four features form the local anchor for the negative prediction, but the lack of thresholds for continuous features like duration limits deeper audit capability.\",\n    \"clarity\": \"The representation uses raw feature strings and binary weights (1.0 vs 0.0) without explanatory text or rule operators, making it difficult for non-technical users to interpret.\",\n    \"completeness\": \"The explanation identifies the active subset of features driving the anchor, but fails to provide the actual decision boundary or condition for continuous features.\",\n    \"concision\": \"Listing multiple inactive features with 0.0000 values adds unnecessary clutter to the output.\",\n    \"overall_quality\": \"The explanation is weak because it reduces rule-based anchor logic to binary feature flags without specific conditions or relational operators.\",\n    \"semantic_plausibility\": \"Features like delayed credit history, short employment duration, and checking status are well-aligned with domain expectations for credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:52:05.188914+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5f0ebbf42d20fd54",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a2878ddc3d3b22b3_51f2ba8dde95e6c5.txt",
+  "prompt_version": "51f2ba8dde95e6c5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546069-B5Z8G7LuaX0MnWxjn8Zz",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 732,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005202,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00426,
+        "upstream_inference_cost": 0.005202,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2392
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not state baseline values, counterfactual targets, or directional changes, and the primary non-zero factor is age, which is inherently immutable.\",\n    \"audit_usefulness\": \"While it shows that age and self-employment are the primary perturbed dimensions, the lack of directional sign or full counterfactual profiles offers minimal help in diagnosing this false positive error.\",\n    \"clarity\": \"The raw key-value string format lacks explanatory framing, making it difficult for non-technical users to interpret what the numeric magnitudes represent.\",\n    \"completeness\": \"The output only highlights perturbations across a subset of features without specifying original feature values, target values, or decision thresholds.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the explanation with uninformative tokens that could have been pruned.\",\n    \"overall_quality\": \"The explanation provides minimal utility due to zero-padding, uninterpretable metric units, and a lack of actionable counterfactual recourse.\",\n    \"semantic_plausibility\": \"Age and self-employment status are plausible predictors of income bracket, though relying on age changes for recourse is logically flawed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:54:38.871194+00:00"
+}

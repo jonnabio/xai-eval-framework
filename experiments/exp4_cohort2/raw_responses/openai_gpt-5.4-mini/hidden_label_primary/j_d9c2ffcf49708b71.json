@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d9c2ffcf49708b71",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9ee15210bf45996e_ac11485c68ad4d13.txt",
+  "prompt_version": "ac11485c68ad4d13",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539559-SIS27AfFZkTF2O65RjFU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 444,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002784,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001998,
+        "upstream_inference_cost": 0.002784,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1492
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse or next steps a user could take. It does not translate the factors into feasible actions or decision guidance.\",\n    \"audit_usefulness\": \"For an auditor, the ranked SHAP factors are useful because they reveal which tumor measurements pushed the model toward class 1. However, it lacks directionality details, baseline comparison, or case-specific context that would support deeper inspection.\",\n    \"clarity\": \"The wording is simple and the ranking is easy to follow, even for a non-expert. The feature names are technical, but the structure remains understandable.\",\n    \"completeness\": \"It covers the main local drivers by listing the top contributing features, which helps explain the prediction at a surface level. Still, it omits whether each factor increased or decreased the prediction and does not provide enough local context to fully understand the decision.\",\n    \"concision\": \"The explanation is compact and information-dense, with little redundancy. It communicates a useful shortlist of factors in a small number of tokens.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: readable, compact, and supported by a stable SHAP ranking. Its main weakness is that it is descriptive rather than explanatory, so it only partially supports decision understanding or review.\",\n    \"semantic_plausibility\": \"The listed features are highly plausible for a breast cancer model, since concavity, radius, perimeter, and area are known diagnostic measurements. The ranking also fits typical model behavior in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:02.495116+00:00"
+}

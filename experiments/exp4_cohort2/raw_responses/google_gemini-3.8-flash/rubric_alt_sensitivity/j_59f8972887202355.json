@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_59f8972887202355",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_084efba639afd972_d0801c4acd2fc3e7.txt",
+  "prompt_version": "d0801c4acd2fc3e7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548546-RASIpFMeSZ4HTSPlTjLR",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 848,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00590625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004905,
+        "upstream_inference_cost": 0.00590625,
+        "upstream_inference_prompt_cost": 0.00100125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1335,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2643
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with identical weights (1.0000) and no thresholds or directional guidance, offering zero indication of what an applicant could change to alter the decision.\",\n    \"audit_usefulness\": \"While it flags sensitive attributes like personal status and relevant financial factors, the uniform weights of 1.0000 and absence of rule thresholds make it difficult to inspect the model's actual decision logic or assess error mechanics.\",\n    \"clarity\": \"The raw one-hot encoded variable names and uniform numeric values make the explanation cryptic and difficult for non-technical users to interpret.\",\n    \"completeness\": \"The output merely lists ten features with equal weights without rule conditions, inequalities, or sign of influence, leaving the rationale behind the negative prediction unclear.\",\n    \"concision\": \"Listing ten factors that all share an identical weight of 1.0000, including multiple mutually exclusive categories of the same underlying variables, provides low information density.\",\n    \"overall_quality\": \"The explanation fails to deliver standard anchor-style if-then rules, presenting instead an undifferentiated list of feature names with identical weights, resulting in weak explanatory value.\",\n    \"semantic_plausibility\": \"While duration, savings, and checking status are relevant to creditworthiness, presenting mutually exclusive categories (such as checking_status_<0 alongside checking_status_no checking) at identical weights is confusing and doubtful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:35:58.010755+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_53fab952c7554dcb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4919484756fd435e_83475a98278bed8d.txt",
+  "prompt_version": "83475a98278bed8d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542181-DsFLnPBhsiXB4URG3HsT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029925,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no concrete recourse or next steps beyond listing feature values, so a user cannot tell what to change to affect the outcome. The zero-valued entries do not translate into actionable guidance.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals the top local feature listed by DICE, but it lacks directionality, counterfactual comparison, and meaningful feature attribution detail. That limits its value for diagnosing model behavior or errors.\",\n    \"clarity\": \"The output is syntactically simple, but it is not easy for a non-expert to interpret what the numbers mean or why many features are shown as 0.0000. The explanation does not clearly state how these factors relate to the negative prediction.\",\n    \"completeness\": \"It only surfaces one non-zero factor and otherwise shows many zero entries, so it misses the main local decision drivers needed to understand this prediction. Key context such as which features favored class 0 and by how much is absent.\",\n    \"concision\": \"The explanation is short, but much of the length is spent on redundant zero-valued features that add little information. It is compact but not efficiently informative.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is partially interpretable but fails to explain the prediction in a useful local, counterfactual, or decision-oriented way. The technical metrics may be decent, but the presented explanation itself is not very helpful.\",\n    \"semantic_plausibility\": \"The content is plausible for the Adult dataset and a logistic regression model, since education and employment-related variables are relevant features. However, the dominance of a single non-zero factor with many zeros is not very informative semantically.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:43.684764+00:00"
+}

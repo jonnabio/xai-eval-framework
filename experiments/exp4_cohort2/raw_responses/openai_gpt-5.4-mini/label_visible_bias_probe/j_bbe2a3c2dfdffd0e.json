@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bbe2a3c2dfdffd0e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a138a3019aad47d9_06fcadf2ad111144.txt",
+  "prompt_version": "06fcadf2ad111144",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542313-VFcY2xsZSM0iy9f6KYVB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022185,
+        "upstream_inference_cost": 0.00300675,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete recourse path or specific changes the person could make to alter the prediction. It only highlights one influential feature without translating it into feasible next steps.\",\n    \"audit_usefulness\": \"It gives a very limited view of model behavior because only one feature has a non-zero value and there is no indication of directionality or counterfactual alternatives. For auditing a false negative, this is too thin to diagnose why the model failed.\",\n    \"clarity\": \"The output is easy to read as a list of feature names and numeric weights, but the meaning of the numbers is not explained. A non-expert would likely not understand what a 0.6484 importance score versus 0.0000 means.\",\n    \"completeness\": \"The explanation omits most of the local decision context, including whether higher or lower values pushed the prediction toward class 0, and it does not explain the false negative outcome. It identifies hours-per-week as relevant but fails to cover the main drivers of the specific prediction.\",\n    \"concision\": \"The explanation is brief and avoids unnecessary narrative, so it is compact. However, some of the listed zero-valued factors add little useful information, making it only moderately efficient.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but sparse, largely non-interpretable, and insufficient for understanding or correcting the false negative. Its utility for both end users and auditors is limited.\",\n    \"semantic_plausibility\": \"The content is broadly plausible for the Adult dataset because hours worked per week can reasonably affect income predictions. Still, the all-zero importance values for many features and the lack of directional explanation reduce confidence in its semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:56.241680+00:00"
+}

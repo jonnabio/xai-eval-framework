@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_de64f273c2b0cf36",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c6d96339976f5220_5d425c2306df52f0.txt",
+  "prompt_version": "5d425c2306df52f0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539547-qJN6oQj4Ueb1UO2hvgmS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00315,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002358,
+        "upstream_inference_cost": 0.00315,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1580
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps for the applicant; it only lists features with binary anchor-like indicators. A user cannot tell what to change or how much change would matter.\",\n    \"audit_usefulness\": \"It gives some local signal about which features were active in the rule, but the presentation is too opaque to support serious auditing of the random forest's behavior. The repeated 1.0000 values and zero-valued features do not explain why the prediction was made.\",\n    \"clarity\": \"The wording is terse and the feature names are understandable, but the meaning of the numbers is not explained, especially the mix of 1.0000 and 0.0000 values. A non-expert would likely not know how to interpret the anchor support or what the list implies about the prediction.\",\n    \"completeness\": \"It names several relevant local factors, but it does not explain the direction or strength of their contribution to the positive class. Important decision context is missing, so the user cannot fully understand why this specific instance was predicted as class 1.\",\n    \"concision\": \"The explanation is short and mostly avoids redundancy, but much of the compactness comes from omitting interpretation rather than conveying dense useful information. It is reasonably concise, though not especially informative per word.\",\n    \"overall_quality\": \"This is a minimal anchor-style output that is somewhat interpretable to a technical reader but weak for most practical uses. It has limited explanatory value because it lacks intuitive interpretation, recourse guidance, and a clear causal narrative for the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, and the positive-class prediction is not obviously inconsistent with them. However, the semantics of the 1.0000/0.0000 presentation are not self-evident, which reduces interpretability even if the content is domain-plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:51.947913+00:00"
+}
