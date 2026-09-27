@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6591a8e5ad6efec9",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5a0eec5e2682ae0d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6591a8e5ad6efec9_559a04a864b08514.txt",
+  "prompt_version": "559a04a864b08514",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547510-tmXN9BPyX7D5p5PO3FsX",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002735,
+        "upstream_inference_cost": 0.004022,
+        "upstream_inference_prompt_cost": 0.001287
+      },
+      "is_byok": false,
+      "prompt_tokens": 1287,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1834
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6591a8e5ad6efec9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what values would change the prediction or what actions could be taken. It is purely descriptive without prescriptive content.\",\n    \"audit_usefulness\": \"While the explanation identifies which features matter (mean area and worst perimeter), the low fidelity (0.46) and high faithfulness gap (0.33) suggest the explanation poorly represents the model's actual decision logic, limiting its utility for auditing.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical weights, which is accessible to non-technical readers. However, the meaning of the weights and why only two features have non-zero importance is not explained.\",\n    \"completeness\": \"The explanation identifies only two features as important (mean area and worst perimeter both at 1.0), which is sparse. Given this is a false negative case (predicted 0, true label 1), the explanation lacks depth about why the model failed to detect malignancy.\",\n    \"concision\": \"The explanation is concise at 75 tokens, but much of it consists of features with zero importance that add little value. The format is efficient but could be tighter by excluding zero-weight features.\",\n    \"overall_quality\": \"This is a weak explanation. While technically produced, it suffers from poor fidelity metrics, provides minimal insight into a false negative error, and offers no actionable guidance. The sparse feature set and lack of context about the misclassification limit its utility.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, tumor area and perimeter are plausible features for classification. However, the explanation does not clarify whether high or low values of these features drove the prediction, making it difficult to assess domain consistency.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:18:36.187081+00:00"
+}

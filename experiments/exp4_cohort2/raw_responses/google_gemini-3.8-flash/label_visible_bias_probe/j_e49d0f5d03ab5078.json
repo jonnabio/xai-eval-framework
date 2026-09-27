@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e49d0f5d03ab5078",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a857fae38ad2e004_b23b0d03977ab0b1.txt",
+  "prompt_version": "b23b0d03977ab0b1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542423-AMlOccDsnG95yXNVfJKq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1105,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 729,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00508725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00414375,
+        "upstream_inference_cost": 0.00508725,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2363
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating the instance's actual feature values or providing actionable recourse guidance.\",\n    \"audit_usefulness\": \"It provides valuable visibility into model weights and reveals the negative contribution of sensitive attributes like sex and marital status, though the lack of explicit target class labeling slightly hinders inspection.\",\n    \"clarity\": \"The list of feature weights is structured and readable, but interpreting the numerical signs and magnitude requires technical familiarity with linear attribution methods.\",\n    \"completeness\": \"While ten relevant local features are included, the absence of the individual's underlying feature values and class alignment limits complete understanding of the decision.\",\n    \"concision\": \"The explanation is highly compact and directly presents the key factors without unnecessary filler.\",\n    \"overall_quality\": \"This is a solid technical attribution summary that provides good audit value despite missing feature values and practical recourse.\",\n    \"semantic_plausibility\": \"The identified features and their directional influences align well with established socioeconomic patterns in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:51.496557+00:00"
+}

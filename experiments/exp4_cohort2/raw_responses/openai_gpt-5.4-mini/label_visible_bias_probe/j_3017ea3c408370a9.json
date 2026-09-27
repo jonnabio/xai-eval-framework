@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_79966d2bb70844bf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3017ea3c408370a9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_79966d2bb70844bf_fd3094ad7de9a887.txt",
+  "prompt_version": "fd3094ad7de9a887",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541882-m1wZMDwIRN5Dpum4w0uH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002088,
+        "upstream_inference_cost": 0.00287775,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_79966d2bb70844bf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or tell the user what could be changed to alter the prediction. It lists feature values without translating them into actionable guidance.\",\n    \"audit_usefulness\": \"It reveals a small set of local factors, which is somewhat useful for inspection, but the many zero-valued entries and lack of directionality limit analysis of why the model predicted class 1. The very low stability metric also reduces trust for audit purposes.\",\n    \"clarity\": \"The output is easy to parse mechanically, but it is not written in natural language and lacks interpretation of the feature values. A non-expert would struggle to understand what the listed numbers mean for the prediction.\",\n    \"completeness\": \"It includes only a few local factors and omits their effect direction and relative contribution to the predicted positive class. Important decision context such as how these features pushed the log-odds is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, though several zero-valued factors add little useful information. A shorter, interpreted summary would communicate more per token.\",\n    \"overall_quality\": \"This is a weak explanation: it is terse and somewhat inspection-friendly, but it is not interpretable enough for a non-expert and provides limited decision context. Its low stability and lack of actionable interpretation further reduce quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, especially education and country-related features. However, the presence of many zero-valued features in the 'top local factors' list makes the explanation semantically awkward and only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:45.150187+00:00"
+}

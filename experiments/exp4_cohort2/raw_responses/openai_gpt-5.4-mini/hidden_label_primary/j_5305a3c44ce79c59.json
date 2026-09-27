@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5305a3c44ce79c59",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_8fce321dd80c84b7_11c6900054530a86.txt",
+  "prompt_version": "11c6900054530a86",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539287-TsvBGmlwcP04ixBKftyt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00291225,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step for the applicant or reviewer. It only lists features with binary weights, so it offers little guidance on what could be changed or checked.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes which local anchor conditions were active, but it gives no direction on directionality, thresholds, or why these factors matter. The near-binary outputs and lack of context limit deeper error or bias analysis.\",\n    \"clarity\": \"The output is short and easy to parse, but the notation is not explained for a non-expert reader. Terms like \\\"ANCHORS top local factors\\\" and the 1.0000/0.0000 values require prior knowledge of the method.\",\n    \"completeness\": \"It names a few local factors, but it does not explain how they combine to support the positive prediction or whether they increase or decrease risk. Key decision context such as the actual anchor rule, coverage, and feature values is missing.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. However, some listed zero-weight features add noise without improving the useful information content.\",\n    \"overall_quality\": \"This is a limited but somewhat interpretable anchor-style summary: it identifies a few active conditions, but it lacks explanatory context, actionable insight, and directional meaning. Overall it is usable only at a very basic level.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the German credit domain, especially duration, checking status, foreign worker status, and personal status. Nothing in the explanation conflicts with typical credit-risk reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:01:31.284078+00:00"
+}

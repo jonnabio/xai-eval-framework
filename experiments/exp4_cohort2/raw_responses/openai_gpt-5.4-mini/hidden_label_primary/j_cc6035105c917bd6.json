@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cc6035105c917bd6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a138a3019aad47d9_d07adf03a2fea910.txt",
+  "prompt_version": "d07adf03a2fea910",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539904-fvYXnnqFUPVirdIOHWKy",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.002985,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names one potentially influential factor, hours-per-week, but gives no concrete counterfactual or recourse guidance. A user cannot tell what change would move the prediction or how feasible such a change would be.\",\n    \"audit_usefulness\": \"It provides a sparse local ranking of features, which is somewhat useful for a quick sanity check, but the many zero-valued factors and low fidelity limit insight into model behaviour. It is not strong enough to support thorough bias or error analysis.\",\n    \"clarity\": \"The output is short and uses simple feature names, so it is easy to read at a glance. However, the meaning of the numeric scores is not explained, and the many zero entries make the message feel ambiguous rather than clearly informative.\",\n    \"completeness\": \"The explanation highlights only hours-per-week and omits most of the local drivers needed to understand this specific prediction. With no counterfactual comparison, directionality beyond one feature, or confidence information, the decision context is incomplete.\",\n    \"concision\": \"It is concise in terms of length, but much of the content is unhelpful repetition of zero-valued features. The compactness does not translate into efficient information density.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and short, but it offers little substantive understanding of why the model predicted class 0. Low fidelity and minimal local insight make it only marginally useful.\",\n    \"semantic_plausibility\": \"The identified emphasis on hours-per-week is plausible for the Adult income task, and the feature names are consistent with the dataset. Still, the zero-heavy ranking is not very credible as a meaningful explanation of this individual prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:48.657444+00:00"
+}

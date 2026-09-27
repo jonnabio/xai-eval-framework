@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_8b6802784752ed84",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_75520768088e5528_cf1189e92436e6ab.txt",
+  "prompt_version": "cf1189e92436e6ab",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547277-3UQzPNaABNJaLt2S6n04",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1104,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 693,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00513675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00414,
+        "upstream_inference_cost": 0.00513675,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2433
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists numerical attributions across demographic and employment features without indicating specific, feasible steps or counterfactual targets to change the outcome.\",\n    \"audit_usefulness\": \"It provides a clear view of which features pushed the model toward or away from the threshold, revealing relevant features for auditing false negatives despite the lack of underlying feature values.\",\n    \"clarity\": \"The output is a raw string of feature names and decimal attribution values that requires technical knowledge of SHAP to interpret correctly.\",\n    \"completeness\": \"The top ten local factors are provided, but the actual input feature values and the base value are omitted, making it hard to see whether a factor pushed the score because it was present or absent.\",\n    \"concision\": \"The list is compact, direct, and avoids any unnecessary filler text.\",\n    \"overall_quality\": \"A serviceable standard SHAP attribution summary that conveys key model drivers but lacks raw feature values and consumer-facing context.\",\n    \"semantic_plausibility\": \"The directions of impact for education, occupation, and age generally align with expected socioeconomic dynamics, though simultaneous positive attributions for mutually exclusive categories can appear confusing without feature values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:46.371205+00:00"
+}

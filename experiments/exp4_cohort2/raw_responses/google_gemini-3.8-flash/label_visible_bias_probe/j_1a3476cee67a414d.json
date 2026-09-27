@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c26cdb8b9ce06ff8",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1a3476cee67a414d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c26cdb8b9ce06ff8_a58b9737fdb71629.txt",
+  "prompt_version": "a58b9737fdb71629",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543510-xf0vFIsXmQbpGGNGum5a",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 975,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 558,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00458925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00365625,
+        "upstream_inference_cost": 0.00458925,
+        "upstream_inference_prompt_cost": 0.000933
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2219
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c26cdb8b9ce06ff8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only provides binary indicator weights without feature thresholds, values, or directional guidance, no concrete recourse can be taken.\",\n    \"audit_usefulness\": \"An auditor can identify which features form the anchor subset, but the complete absence of decision rules, cutoffs, or predicates severely restricts auditing utility.\",\n    \"clarity\": \"The raw key-value format of feature names and binary weights (1.0000 vs 0.0000) is confusing for a layperson who will not understand what the weights represent.\",\n    \"completeness\": \"The explanation indicates which features were selected in the anchor but omits the underlying relational conditions and value ranges necessary to explain the prediction.\",\n    \"concision\": \"Listing irrelevant features assigned 0.0000 weights introduces unnecessary clutter to an already sparse representation.\",\n    \"overall_quality\": \"The explanation fails to deliver the true value of an Anchor rule due to the omission of condition predicates, yielding a vague and largely uninformative summary.\",\n    \"semantic_plausibility\": \"The highlighted features (such as duration, checking status, and savings status) are well-known, plausible drivers of credit risk in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:58.425524+00:00"
+}

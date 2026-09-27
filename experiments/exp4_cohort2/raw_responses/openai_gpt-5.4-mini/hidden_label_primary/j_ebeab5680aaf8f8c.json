@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c948b5be78abf92f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ebeab5680aaf8f8c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c948b5be78abf92f_405dd0c5ece4e23a.txt",
+  "prompt_version": "405dd0c5ece4e23a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538966-pyJSNfGiFGdOMqEz7ajn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002919,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.002919,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c948b5be78abf92f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors associated with the prediction, but it does not translate them into any concrete recourse or decision steps. A user cannot tell what would need to change to alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP contributions and their directions, allowing inspection of which features pushed the model toward class 1. However, it lacks class-conditional context, feature values, and broader comparison needed for deeper bias or error analysis.\",\n    \"clarity\": \"The wording is short and mostly understandable, and the feature names are explicit enough for a non-expert to follow at a high level. Still, the compact list of coded categorical variables and signed values requires some interpretation knowledge.\",\n    \"completeness\": \"The explanation covers the main local drivers of the prediction and includes both positive and negative contributions. It does not provide baseline probability, feature values, or enough context to fully reconstruct why this specific instance was classified as positive.\",\n    \"concision\": \"The explanation is fairly compact and focused on the most important local factors without obvious redundancy. It delivers a good amount of information per token.\",\n    \"overall_quality\": \"This is a solid local explanation with good faithfulness, sparsity, and stability, and it is adequate for understanding the model's immediate reasoning. Its main weakness is limited actionability and only partial local context.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, with checking status, credit history, savings, housing, age, and credit amount all being sensible predictors. The directions of influence are also broadly coherent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:09.671560+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4204b78d9c679eb0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a43df10a6a8c1f97",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4204b78d9c679eb0_94eb7c03f2799636.txt",
+  "prompt_version": "94eb7c03f2799636",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547367-uLfaIjni6IPwOXFDZ0gt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003937,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002635,
+        "upstream_inference_cost": 0.003937,
+        "upstream_inference_prompt_cost": 0.001302
+      },
+      "is_byok": false,
+      "prompt_tokens": 1302,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1829
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4204b78d9c679eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features but provides no information about their values, direction of influence, or what changes would alter the prediction. No concrete steps are suggested for intervention.\",\n    \"audit_usefulness\": \"While the feature list could help identify which variables the model relies on, the low fidelity (0.43) and high faithfulness gap (0.14) suggest the explanation poorly represents the model's actual decision logic, limiting audit value.\",\n    \"clarity\": \"The format is straightforward\u2014a simple list of feature names with weights\u2014but lacks context about what these features mean, their values in this instance, or how they influence the outcome. Domain knowledge is needed.\",\n    \"completeness\": \"The explanation identifies many features but omits critical information: actual feature values, direction of influence (positive/negative), relative importance beyond equal weighting, and why these particular features matter for this decision.\",\n    \"concision\": \"The explanation is compact but repetitive, listing 10 features all with identical weight (1.0000) without variation or prioritization, suggesting either incomplete analysis or uninformative output.\",\n    \"overall_quality\": \"This is a weak explanation. It presents a flat list of features without actionable insights, shows poor technical performance metrics (low fidelity, high faithfulness gap, low stability), and fails to clarify why the model made a false positive prediction on this instance.\",\n    \"semantic_plausibility\": \"The features listed (age, education, occupation, marital status) are plausible predictors of income in the adult dataset, but the uniform weighting and lack of context make it difficult to assess whether the explanation reflects genuine decision logic or is an artifact of the method's limitations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:16:13.357139+00:00"
+}

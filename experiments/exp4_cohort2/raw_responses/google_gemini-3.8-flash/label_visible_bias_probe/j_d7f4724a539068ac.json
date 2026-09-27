@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d7f4724a539068ac",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ac6e5925b1641835_f428abf2bf608aa9.txt",
+  "prompt_version": "f428abf2bf608aa9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545859-upDpwtTEaPT9n6VvWeHM",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1259,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 834,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00566625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00472125,
+        "upstream_inference_cost": 0.00566625,
+        "upstream_inference_prompt_cost": 0.000945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1260,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2519
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists marginal attribution weights without providing feature values, thresholds, or guidance on what actions could alter the model's prediction.\",\n    \"audit_usefulness\": \"While identifying sensitive attributes like race has some auditing relevance, the near-zero weights and poor fidelity (0.42) offer little reliable insight into the false-positive prediction logic.\",\n    \"clarity\": \"The output is presented as raw feature strings and small numerical weights without contextual descriptions or instance feature values, making it difficult for non-experts to interpret.\",\n    \"completeness\": \"The explanation lacks the actual instance feature values and relies on negligible weights (several being 0.0000), leaving the true local drivers of the positive prediction unexplained.\",\n    \"concision\": \"The token count is relatively brief, but several included features carry zero weight, diluting the information density.\",\n    \"overall_quality\": \"The explanation is of low quality due to vanishingly small weights, missing feature values, poor surrogate fidelity, and an inability to explain the false positive outcome.\",\n    \"semantic_plausibility\": \"Attributing a high-income prediction to tiny fractions with primary demographic factors having zero weight is counterintuitive and poorly aligned with standard domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:51:08.442873+00:00"
+}

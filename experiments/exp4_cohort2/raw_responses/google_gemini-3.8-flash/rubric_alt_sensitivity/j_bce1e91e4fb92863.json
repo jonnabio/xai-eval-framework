@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bce1e91e4fb92863",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_902d690264149a09_2c0de4bb67390881.txt",
+  "prompt_version": "2c0de4bb67390881",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548463-EkdD7wTBUEfsuZT8ouya",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 834,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0056355,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00463875,
+        "upstream_inference_cost": 0.0056355,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2566
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists numerical attributions without showing actual feature values or actionable recourse thresholds, offering only weak hints about the influence of education.\",\n    \"audit_usefulness\": \"It provides useful diagnostic information for an auditor examining this false negative, highlighting that 'education_7th-8th' was the dominant negative driver suppressing the predicted income.\",\n    \"clarity\": \"The raw SHAP attribution format, signed floats, and one-hot encoded column names make it difficult for non-technical users to interpret.\",\n    \"completeness\": \"The top ten contributing features and their signed impacts are provided, giving the primary drivers of the local decision, though omitting the actual feature values.\",\n    \"concision\": \"The text is compact and directly presents the key factors without extraneous filler.\",\n    \"overall_quality\": \"This is a serviceable local SHAP explanation that clearly identifies the main negative driver for the false negative, despite lacking raw feature values.\",\n    \"semantic_plausibility\": \"Low educational attainment (7th-8th grade) heavily reducing the likelihood of high income aligns well with standard domain knowledge on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:34:33.183597+00:00"
+}

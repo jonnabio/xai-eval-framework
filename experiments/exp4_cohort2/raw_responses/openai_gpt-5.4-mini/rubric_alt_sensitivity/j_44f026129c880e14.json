@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_44f026129c880e14",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_7ce6884cc1cac353.txt",
+  "prompt_version": "7ce6884cc1cac353",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542834-S5aGxPUk051yvyY7lWrD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002589,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017415,
+        "upstream_inference_cost": 0.002589,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists a few features but gives no concrete guidance on what would need to change to alter the prediction, especially for this false negative.\",\n    \"audit_usefulness\": \"The explanation is too sparse and mostly just names features without directional effects or human-readable conditions, so it is only weakly useful for investigating model behavior.\",\n    \"clarity\": \"The feature names are understandable to someone with basic familiarity with the Adult dataset, but the meaning of the 1.0000 and 0.0000 values is not explained clearly.\",\n    \"completeness\": \"It does not explain why the model predicted class 0 or identify the local decision logic; it omits the main reasons and any comparison to the alternative class.\",\n    \"concision\": \"It is short and compact, but a lot of the space is spent on a raw feature list with little interpretive value.\",\n    \"overall_quality\": \"As an explanation, it is weak: it provides only a shallow feature snapshot with low faithfulness and little insight into this specific false-negative decision.\",\n    \"semantic_plausibility\": \"The listed features are reasonable ones for Adult-income prediction, but the output does not make a plausible causal story for this particular instance beyond vague feature presence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:36.672425+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cafe50d43e9b9266",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_279ac50765cef9ba",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cafe50d43e9b9266_51b545a787527cb2.txt",
+  "prompt_version": "51b545a787527cb2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539925-rrUq6rLhMTmHzEDgtOcv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.00301575,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cafe50d43e9b9266\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local feature names and binary indicator values, but it does not tell the user what to change or which factors are modifiable. There are no recourse steps, thresholds, or decision guidance.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it reveals which features the anchor method considered in the local rule, but the all-ones/all-zeros pattern gives little insight into the model's actual decision logic. Low fidelity further limits trust for debugging or bias analysis.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to scan, even for a non-expert. However, the meaning of the 1.0000 and 0.0000 values is not explained, so some interpretation is still required.\",\n    \"completeness\": \"It identifies several local factors, but it does not explain how they combine to support the negative prediction or provide enough context about the instance. With only sparse anchor indicators and no directional effect, the decision is only partially understood.\",\n    \"concision\": \"The output is short and mostly free of redundancy, with a compact list of the top local factors. That said, it spends tokens on repeated binary indicator values without adding much explanatory value.\",\n    \"overall_quality\": \"This is a moderately readable but shallow explanation: it is concise and somewhat useful for inspection, yet it lacks interpretability, recourse value, and strong faithfulness. Overall it is acceptable but not strong.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, especially checking status, savings status, credit amount, and duration. The explanation is coherent with the domain, although the binary anchor-format presentation is not very informative on its own.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:09.500955+00:00"
+}

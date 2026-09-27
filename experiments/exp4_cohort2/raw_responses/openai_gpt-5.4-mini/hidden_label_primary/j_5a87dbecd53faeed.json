@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5a87dbecd53faeed",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3e006f8c0e7512b1_1ca24c7990013da3.txt",
+  "prompt_version": "1ca24c7990013da3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538495-FqSAqwAqRzZsg34rhIxU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029505,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.0029505,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1549
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer concrete recourse or next steps for changing the outcome. It only lists features and SHAP values without translating them into feasible actions.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it identifies the main local drivers of the prediction and their directions. However, it lacks context about the baseline, feature values, and why the negative factors dominated for this false negative.\",\n    \"clarity\": \"The output is concise and uses a simple top-factors format that is easy to scan. A non-expert may still struggle to interpret the meaning of SHAP signs and feature encodings like 'education_Some-college'.\",\n    \"completeness\": \"It covers several important local contributors, but it does not provide the actual feature values, the prediction probability, or a narrative tying the factors to the final class. For a false negative, the explanation is incomplete about why the model missed the positive class.\",\n    \"concision\": \"The explanation is compact and presents only the top local factors, avoiding unnecessary detail. It is fairly informative for its length, though some entries are redundant or fragmented across correlated features.\",\n    \"overall_quality\": \"This is a reasonably compact local explanation with some diagnostic value, but it is only moderately interpretable and not very actionable. Its usefulness is limited by sparse context and the lack of a clear causal story for the false negative.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and consistent with common demographic and employment patterns. The mix of positive and negative SHAP contributions also appears coherent, even if the dominance of some features is hard to verify without raw values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:17.802680+00:00"
+}

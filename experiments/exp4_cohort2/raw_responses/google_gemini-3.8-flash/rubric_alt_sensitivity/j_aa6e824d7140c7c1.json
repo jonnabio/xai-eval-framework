@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_aa6e824d7140c7c1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cae54143c3307788_57a70a8afbfd6699.txt",
+  "prompt_version": "57a70a8afbfd6699",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546985-XcS9LqyKfFVfQxjHodjg",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1252,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 858,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00568125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004695,
+        "upstream_inference_cost": 0.00568125,
+        "upstream_inference_prompt_cost": 0.00098625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1315,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2567
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While counterfactual methods are intended to guide recourse, this summary only provides perturbation magnitudes rather than specific target feature values to achieve a different outcome.\",\n    \"audit_usefulness\": \"It provides a weak signal about which variables were altered to reverse the false positive prediction, but the lack of baseline and counterfactual feature values severely limits auditing.\",\n    \"clarity\": \"The raw key-value notation with decimal weights and zero-valued one-hot encodings is difficult for a non-technical reader to interpret intuitively.\",\n    \"completeness\": \"Only two features show non-zero weights, and the explanation omits the original feature values, directional changes, and counterfactual states.\",\n    \"concision\": \"Most of the explanation is occupied by zero-valued features that provide no additional explanatory value.\",\n    \"overall_quality\": \"The explanation reduces counterfactual information to a sparse list of magnitude scores, leaving out critical context needed to understand or act on the decision.\",\n    \"semantic_plausibility\": \"Age and education level are standard and plausible determinants of income outcomes in this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:09:54.404757+00:00"
+}

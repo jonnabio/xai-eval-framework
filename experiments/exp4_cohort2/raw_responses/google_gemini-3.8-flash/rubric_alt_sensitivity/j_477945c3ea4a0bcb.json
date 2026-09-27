@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_477945c3ea4a0bcb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e230a6771152fb2_3e5fa099f2d5e396.txt",
+  "prompt_version": "3e5fa099f2d5e396",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547539-hkD76sWyhGnNwb376I01",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1177,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 751,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00541125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00441375,
+        "upstream_inference_cost": 0.00541125,
+        "upstream_inference_prompt_cost": 0.0009975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1330,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2507
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers almost no actionable guidance, as the leading features are either protected demographic traits (race, sex) or categorical attributes presented without baseline values or actionable thresholds.\",\n    \"audit_usefulness\": \"It is quite useful for auditors because it reveals that the model directly uses protected attributes like race and sex, providing immediate signals for fairness and bias assessments.\",\n    \"clarity\": \"The raw format consisting of one-hot encoded variable names and signed decimal coefficients requires technical familiarity with linear models to interpret.\",\n    \"completeness\": \"The top 10 local factors provide the primary directions contributing to the negative class prediction, though omitting instance feature values weakens full local understanding.\",\n    \"concision\": \"The explanation is reasonably concise, but including multiple mutually exclusive one-hot categories for marital status and race adds slight redundancy.\",\n    \"overall_quality\": \"Serviceable local attribution that clearly exposes model weights and fairness-relevant attributes, though hampered by raw one-hot encoding representation and lack of actionability.\",\n    \"semantic_plausibility\": \"The directions of effects generally align with standard adult dataset dynamics (e.g., positive capital-gain and education-num), though seeing opposing levels of categorical variables at the same time reflects perturbation artifacts.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:19:09.176708+00:00"
+}

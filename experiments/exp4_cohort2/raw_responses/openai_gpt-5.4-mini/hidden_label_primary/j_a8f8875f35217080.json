@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a8f8875f35217080",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6d6ef32df0477323_9176e22b9d728fa7.txt",
+  "prompt_version": "9176e22b9d728fa7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539196-2BfoI7oe28fDeNo9ylWJ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00307725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.00307725,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse steps or indicate how changing features would alter the prediction, beyond naming one large feature change. It is therefore not directly useful for a user trying to improve or contest the decision.\",\n    \"audit_usefulness\": \"It identifies a few local factors and shows a large change in education-num, which offers some limited insight into the model's behavior. However, the many zero-valued entries and lack of directionality or comparison make it weak for serious auditing or error analysis.\",\n    \"clarity\": \"The list format is easy to scan, but the explanation is cryptic because it mixes feature names with numeric values that are not self-explanatory. A non-expert would struggle to interpret what 5.0987 or 0.3000 mean in relation to the prediction.\",\n    \"completeness\": \"It only surfaces two non-zero factors and then pads the rest with zeros, so it does not provide a full local decision picture. Key contextual information such as whether features push the prediction toward class 1 or how the features jointly contributed is missing.\",\n    \"concision\": \"The explanation is short, but much of the space is spent listing irrelevant zero-valued features. It would be more informative if it summarized only the meaningful local drivers and their effects.\",\n    \"overall_quality\": \"This is a weak explanation overall: it is somewhat structured, but it is hard to interpret, low on actionable insight, and incomplete for understanding the specific prediction. Its limited local signal and verbose zero-heavy presentation reduce its practical value.\",\n    \"semantic_plausibility\": \"The presence of education-num and age as important factors is broadly plausible for the Adult dataset, and the explanation does not contain obvious contradictions. Still, the dominance of a single large value without clear semantics makes the output only moderately believable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:00.483881+00:00"
+}

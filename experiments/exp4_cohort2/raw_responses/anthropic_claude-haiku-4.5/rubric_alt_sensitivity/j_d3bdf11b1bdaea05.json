@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d3bdf11b1bdaea05",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0da6a71373977fce_b2d1fe75edb34611.txt",
+  "prompt_version": "b2d1fe75edb34611",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547290-r2GbDodtjx65z2IveTD2",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 616,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004362,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00308,
+        "upstream_inference_cost": 0.004362,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1898
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_South as the sole influential factor but provides no guidance on what actions could be taken. For a person or reviewer, there is no clear path forward\u2014changing country of origin is not feasible, and the explanation doesn't suggest alternative features or interventions.\",\n    \"audit_usefulness\": \"While the explanation highlights one feature, the near-zero weights on all other features and the poor technical metrics (fidelity: -0.033, stability: 0.023) raise concerns about reliability. An auditor would struggle to trust this explanation for bias detection or model validation without additional investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with weights. However, the meaning of these weights and why native-country_South matters is not explained in plain language. Someone without technical training would not understand what the numbers represent or why this feature drives the prediction.\",\n    \"completeness\": \"The explanation lists many features but assigns near-zero importance to all except one. This sparse output may reflect the model's actual behavior, but it leaves major questions unanswered: Why does country matter so much? Are there interactions or thresholds? The account is incomplete for understanding the decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. However, the long list of zero-weighted features adds little value and could be condensed. The format is efficient but not optimally tight.\",\n    \"overall_quality\": \"The explanation is weak overall. It identifies one dominant feature but lacks depth, actionability, and trustworthiness. Poor technical metrics (negative fidelity, low stability) and the absence of contextual interpretation make this explanation of limited practical value despite correct prediction.\",\n    \"semantic_plausibility\": \"In the adult income dataset, country of origin can correlate with income due to socioeconomic factors, so the finding is not implausible. However, the extreme sparsity (only one non-zero weight) and the poor technical metrics raise doubts about whether this truly reflects the model's reasoning or is an artifact of the DICE method's search process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:57.039100+00:00"
+}

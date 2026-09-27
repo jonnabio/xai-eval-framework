@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7982d390c3e51c7d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_14c79bbad09beacc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7982d390c3e51c7d_c122f055f58d1dbe.txt",
+  "prompt_version": "c122f055f58d1dbe",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543110-43CsdK8sqbLVr3D6E1hv",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003743,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002515,
+        "upstream_inference_cost": 0.003743,
+        "upstream_inference_prompt_cost": 0.001228
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1731
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7982d390c3e51c7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them or what actions a clinician or patient could take based on this information. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 and 0.0) and list of features support model inspection, but the low fidelity (0.69) and moderate faithfulness gap (0.11) limit confidence in the explanation's reliability for auditing model behaviour.\",\n    \"clarity\": \"The format is a simple feature-weight list that is easy to parse, but lacks context about what these features represent clinically or why they matter for the prediction. A non-expert would struggle to interpret the meaning.\",\n    \"completeness\": \"Only two features are highlighted as anchors while eight others are listed with zero weight, leaving ambiguity about whether the zero-weight features were truly uninformative or simply not selected by the algorithm.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a sparse, technically valid anchor set but lacks semantic depth, clinical context, and actionability needed for practical use in a healthcare setting. The moderate technical metrics further undermine confidence.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and concave points are established morphological features relevant to malignancy assessment, making the anchor selection plausible; however, the complete absence of other known risk factors raises questions about completeness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:16.784879+00:00"
+}

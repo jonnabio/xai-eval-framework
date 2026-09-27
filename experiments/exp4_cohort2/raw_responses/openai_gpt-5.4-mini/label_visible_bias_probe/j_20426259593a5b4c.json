@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_20426259593a5b4c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0f6578287491844e_4726aaad9c3fcb4a.txt",
+  "prompt_version": "4726aaad9c3fcb4a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541984-BGQOpRsrGdPqNadUwsJ1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003027,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002232,
+        "upstream_inference_cost": 0.003027,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the user. It only lists feature contributions without suggesting what could be changed to alter the decision.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the main local drivers and their directions, allowing inspection of whether the model relies on sensible credit-risk factors. However, it lacks deeper context such as feature values, baselines, or comparison to similar cases.\",\n    \"clarity\": \"The SHAP list is easy to read and the sign convention is straightforward for a non-expert to follow at a high level. Still, the meaning of the feature codes and the relative importance of the numbers may not be fully obvious without some familiarity with the dataset.\",\n    \"completeness\": \"The explanation covers several top contributors and gives a reasonably complete snapshot of local factors behind the prediction. It does not include the predicted class rationale in plain language, the base value, or the actual instance values, so the full decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, conveying the key local factors in a short list. It is slightly dense because many feature names are packed into one line, but the information-to-word ratio is good.\",\n    \"overall_quality\": \"Overall, this is a solid local SHAP explanation that is informative and fairly concise, with good value for model inspection. Its main weakness is limited accessibility and lack of actionable or contextual detail beyond ranked feature effects.\",\n    \"semantic_plausibility\": \"The factors listed are plausible for German credit risk, and the directions of influence broadly make sense for a low-risk approval-related outcome. The combination of paid-off history and no checking account balance being negative contributions is semantically consistent with a negative class prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:27.070214+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7468633961295699",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fb0bf691bd6048e3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7468633961295699_46309e5494350674.txt",
+  "prompt_version": "46309e5494350674",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790550126-JDOLkr46067fgWiZcEwd",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1110,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 680,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00514875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041625,
+        "upstream_inference_cost": 0.00514875,
+        "upstream_inference_prompt_cost": 0.00098625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1315,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2425
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7468633961295699\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because no feature values, decision rules, or directional impacts are provided, it is impossible for an applicant or reviewer to know what action to take.\",\n    \"audit_usefulness\": \"The output reveals candidate features, but the absence of decision thresholds and the presence of identical 1.0000 weights across conflicting categories provide only marginal diagnostic utility.\",\n    \"clarity\": \"While the feature names are recognizable, presenting raw feature names with uniform 1.0000 weights without relational operators or units makes it confusing for non-technical users.\",\n    \"completeness\": \"The explanation merely lists ten features with identical unit weights and lacks the anchor rules, bounds, and directional effects necessary to explain the decision.\",\n    \"concision\": \"The explanation is brief, though listing multiple mutually exclusive one-hot categories all tied at 1.0000 wastes space without adding information.\",\n    \"overall_quality\": \"The explanation fails to convey meaningful anchor conditions, presenting only an uninformative list of features with identical placeholder weights.\",\n    \"semantic_plausibility\": \"The listed domain features (credit amount, duration, age, checking status) are relevant to credit decisions, but including multiple mutually exclusive one-hot indicators simultaneously strains plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:02:16.176101+00:00"
+}

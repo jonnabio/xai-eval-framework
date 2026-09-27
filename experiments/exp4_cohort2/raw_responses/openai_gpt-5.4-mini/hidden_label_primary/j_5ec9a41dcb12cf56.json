@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5ec9a41dcb12cf56",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cad1d6dbc8b4e027_9572fadc84a8efaa.txt",
+  "prompt_version": "9572fadc84a8efaa",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540442-aAtf6u7viqjcPA68i72O",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002061,
+        "upstream_inference_cost": 0.00285525,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps because all listed local factors have near-zero contributions. A user cannot tell what changes would meaningfully affect the prediction.\",\n    \"audit_usefulness\": \"It offers little to no audit value because the feature attributions are effectively all zero, so there is no visible model logic to inspect. This makes it hard to investigate why the MLP predicted the positive class.\",\n    \"clarity\": \"The list format is readable, but the explanation is not informative because every factor is shown as 0.0000 or -0.0000. A non-expert would understand the text, but not the reason for the prediction.\",\n    \"completeness\": \"The explanation names several common Adult dataset features, but it fails to reveal any meaningful local drivers of the specific prediction. It therefore does not provide sufficient decision context beyond a generic feature list.\",\n    \"concision\": \"It is short and avoids filler, but that brevity comes at the cost of usefulness because the output is nearly empty of signal. The information density is low despite the compact length.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is readable and concise but essentially non-informative. The near-zero attributions make it poor for understanding, action, or auditing the prediction.\",\n    \"semantic_plausibility\": \"The features themselves are plausible for the Adult dataset and a binary income model, and the positive prediction is not inherently inconsistent. However, the all-zero attribution pattern is semantically suspicious as an explanation of a concrete decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:45.748888+00:00"
+}

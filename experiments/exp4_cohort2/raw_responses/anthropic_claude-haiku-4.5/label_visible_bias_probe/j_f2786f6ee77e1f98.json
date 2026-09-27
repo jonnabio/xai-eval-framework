@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f2786f6ee77e1f98",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_103d89f1e4cb72f6_3c13376d3e2c8f89.txt",
+  "prompt_version": "3c13376d3e2c8f89",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542609-l4oL3XDpuv68COVsQBJF",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003787,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00256,
+        "upstream_inference_cost": 0.003787,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1739
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what actions to take, or how to interpret the counterfactual direction; it is purely descriptive without recourse value.\",\n    \"audit_usefulness\": \"While the explanation identifies capital-gain as the dominant factor, the low fidelity (0.176) and high faithfulness gap (0.049) suggest the explanation poorly represents actual model behavior, limiting its utility for auditing model logic or detecting bias.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is straightforward but lacks context about what the scores mean, whether higher values indicate positive or negative influence, or how they relate to the prediction.\",\n    \"completeness\": \"The explanation covers many features but with most showing zero contribution; it fails to provide sufficient local decision context, particularly regarding why the model predicted class 0 when the true label is 1 (a false negative case).\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-valued features that add no information; removing these would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation is a bare technical output lacking interpretability, actionability, and strong fidelity to the model; it reads as a raw metric dump rather than a coherent explanation suitable for stakeholders or auditors.\",\n    \"semantic_plausibility\": \"Capital-gain being the dominant factor is plausible in income prediction, but the explanation does not contextualize this finding or explain why it led to a negative prediction despite its high importance score.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:56:54.158021+00:00"
+}

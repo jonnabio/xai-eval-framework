@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_114203d4b4b031b1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_45af74f0fdcedd43_f5cb5ff2274b7166.txt",
+  "prompt_version": "f5cb5ff2274b7166",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538699-PicPti6r6gqkptiKuJAg",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.00295575,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features that pushed the prediction up or down, but it does not translate them into any concrete recourse or next steps for the applicant. A user cannot easily tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"The SHAP values provide useful local evidence about which variables most influenced the random forest decision, which helps a reviewer inspect whether the model relied on sensible credit factors. However, it lacks enough context to fully diagnose whether the prediction is appropriate or biased.\",\n    \"clarity\": \"The explanation is compact and structured as a ranked list of features with signed contributions, which is easy to scan. Some feature names are technical, but the overall meaning is understandable to a general reader.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and includes both positive and negative influences, but it does not provide the base value, predicted probability, or a narrative linking the factors to the final class. For a false positive in particular, that missing context limits full understanding.\",\n    \"concision\": \"The explanation is short and information-dense, with little redundancy. It communicates the main local factors in a compact form without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a solid SHAP-style local explanation that is concise, stable, and useful for understanding feature influence. Its main weakness is limited recourse and incomplete decision context, especially given the false-positive case.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit scoring, since checking status, duration, credit amount, history, and property are all sensible determinants of loan risk. The directionality also broadly fits domain expectations, making the explanation coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:41.789418+00:00"
+}

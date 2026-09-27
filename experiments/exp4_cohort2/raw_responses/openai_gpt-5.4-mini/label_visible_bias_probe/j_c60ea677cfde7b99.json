@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c60ea677cfde7b99",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_45af74f0fdcedd43_05831527e6177bcf.txt",
+  "prompt_version": "05831527e6177bcf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541439-TNO7GLfv6IMoGJvjMw6n",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002982,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002982,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse or next steps for the applicant or reviewer. It is useful for understanding drivers, not for taking action.\",\n    \"audit_usefulness\": \"The ranked SHAP contributions provide a clear local breakdown of model behavior and can help an auditor inspect whether the forest relies on sensible credit factors. However, it does not by itself explain counterfactuals, thresholds, or broader error patterns.\",\n    \"clarity\": \"The output is short and structurally simple, with a straightforward list of feature contributions. A non-expert may still need to know what SHAP signs mean and what the feature names represent, but the presentation itself is readable.\",\n    \"completeness\": \"It includes the main local factors driving the prediction and their relative directions, which is enough to understand the immediate decision at a basic level. It lacks the base value, the model probability, and an explicit narrative tying the factors to the final class.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with little redundancy beyond the feature list. It delivers the core local attributions in a small number of tokens.\",\n    \"overall_quality\": \"This is a strong local explanation for inspection purposes because it is stable, faithful, and clearly lists the most influential features. Its main weaknesses are the absence of actionable guidance and limited contextual interpretation for non-experts.\",\n    \"semantic_plausibility\": \"The highlighted features are credible drivers for German credit risk, such as checking status, duration, credit amount, age, and credit history. The mixture of positive and negative contributions is also consistent with a model explaining a false positive in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:22.312390+00:00"
+}

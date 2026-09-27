@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3d663bc47eb8d69",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b4f6533127d34e64",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d3d663bc47eb8d69_cc7d886133cd2ed5.txt",
+  "prompt_version": "cc7d886133cd2ed5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542947-dVibfu3hq3lhcTUqDjYf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003654,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00243,
+        "upstream_inference_cost": 0.003654,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1710
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3d663bc47eb8d69\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the misclassification.\",\n    \"audit_usefulness\": \"While SHAP values are valuable for auditing, the low fidelity (0.555) and high faithfulness gap (0.571) suggest this explanation poorly represents actual model behavior, limiting its utility for bias or error investigation.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical SHAP values, which is clear in format but lacks context about what these values mean or why they matter for the prediction.\",\n    \"completeness\": \"The explanation covers ten features with their SHAP contributions, but given the false negative outcome and missing prediction confidence, it lacks critical context about why the model failed to predict the true positive label.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their contribution values without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance metrics (low fidelity and high faithfulness gap), a false negative prediction, and lack of interpretive guidance, resulting in limited practical value despite clear formatting.\",\n    \"semantic_plausibility\": \"The features (perimeter, area, concavity, texture) are medically plausible for breast cancer classification, but the explanation does not clarify why these negative contributions led to an incorrect benign prediction when the true label is malignant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:33.448335+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0a3c6f5f3f5e4137",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_de91280a4d84e7ca_9d8e08e2d16bbd9f.txt",
+  "prompt_version": "9d8e08e2d16bbd9f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545175-xz06chzWq38gQzJ4sa2Q",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1145,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 738,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00523425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00429375,
+        "upstream_inference_cost": 0.00523425,
+        "upstream_inference_prompt_cost": 0.0009405
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2399
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no guidance or actionable levers, as marital status is not readily changeable and no directional guidance is provided.\",\n    \"audit_usefulness\": \"It has minimal audit utility because it attributes the prediction solely to a single categorical feature while assigning zeros to nine others, offering little insight into the false negative error.\",\n    \"clarity\": \"The raw key-value format is somewhat readable, but the inclusion of multiple zero-weighted features without explanation makes it confusing for non-experts.\",\n    \"completeness\": \"The explanation is incomplete, effectively capturing only one feature while failing to explain how key continuous drivers (e.g., age, education, hours worked) influenced the outcome.\",\n    \"concision\": \"Listing nine features with identical zero values introduces substantial clutter and padding relative to the single informative factor.\",\n    \"overall_quality\": \"Overall quality is poor due to uninformative zero-padding, lack of actionable context, and inadequate explanation of a false negative prediction.\",\n    \"semantic_plausibility\": \"Attributing a low-income prediction solely to being married is semantically questionable in the Adult dataset, where marriage strongly correlates with higher income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:45.626965+00:00"
+}

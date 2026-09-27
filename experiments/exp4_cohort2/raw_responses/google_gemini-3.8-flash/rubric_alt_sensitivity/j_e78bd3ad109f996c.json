@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e78bd3ad109f996c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_8fce321dd80c84b7_e1eed65ed3fef700.txt",
+  "prompt_version": "e1eed65ed3fef700",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548924-dwm0dnNvSstr0ydZJlR7",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 696,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00509625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041025,
+        "upstream_inference_cost": 0.00509625,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2419
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"No feature thresholds or value ranges are provided, and two of the three highlighted features (marital status/sex and foreign worker status) are protected, non-actionable attributes.\",\n    \"audit_usefulness\": \"It immediately alerts an auditor to potential fairness concerns because protected attributes (personal_status_male mar/wid, foreign_worker_no) form part of the anchor.\",\n    \"clarity\": \"The raw format lists feature names followed by binary indicator values without predicate bounds, requiring technical familiarity to interpret.\",\n    \"completeness\": \"The explanation indicates which features were included in the rule anchor, but completely omits the specific rule thresholds and cutoffs.\",\n    \"concision\": \"Seven features with 0.0000 importance are explicitly listed, adding unnecessary clutter rather than focusing on the active anchor conditions.\",\n    \"overall_quality\": \"The explanation reveals which features matter for the rule, but losing the specific anchor predicates significantly reduces its practical utility.\",\n    \"semantic_plausibility\": \"Duration and demographic indicators are known drivers in the German Credit benchmark, aligning with expected model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:42:13.591314+00:00"
+}

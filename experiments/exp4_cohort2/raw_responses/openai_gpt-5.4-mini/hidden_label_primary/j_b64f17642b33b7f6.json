@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7828930153eaf25f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b64f17642b33b7f6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7828930153eaf25f_00dade875229c7f8.txt",
+  "prompt_version": "00dade875229c7f8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540267-VPohI8tKfdf4n6bRaX5O",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.0028725,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1515
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7828930153eaf25f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step for the user. It only lists local factors with no indication of how changing them would affect the prediction.\",\n    \"audit_usefulness\": \"It gives some glimpse of which features were considered, but the all-ones pattern and lack of directionality make it hard to inspect model logic. The near-zero stability and negative fidelity further reduce its value for auditing.\",\n    \"clarity\": \"The explanation is easy to read at a surface level because it is short and uses straightforward feature names. However, the meaning of all factors having value 1.0000 is not explained, so a non-expert would not understand the significance.\",\n    \"completeness\": \"It names several features that appear relevant to the prediction, but it does not state whether they increase or decrease the predicted class. Important local context such as the direction and relative importance of the features is missing.\",\n    \"concision\": \"The explanation is compact and contains little extraneous text. It is efficient in length, though some of that brevity comes at the cost of interpretability.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it provides a sparse list of features without actionable meaning or clear causal insight. Its poor fidelity and instability make it unreliable despite being short.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset, and the general idea that age, education, and hours-per-week matter fits the domain. However, the uniform 1.0000 scores are not semantically informative and suggest a degenerate or poorly rendered explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:51.437169+00:00"
+}

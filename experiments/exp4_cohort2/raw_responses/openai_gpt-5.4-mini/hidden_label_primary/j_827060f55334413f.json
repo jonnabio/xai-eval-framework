@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084580efd1317ebc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_827060f55334413f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_084580efd1317ebc_9a65606ffee84c62.txt",
+  "prompt_version": "9a65606ffee84c62",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538937-wZFJ4Mh1AeAN82uuWrH9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00291675,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_084580efd1317ebc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives feature values but no concrete recourse or next steps. It does not tell the user what changes would move the prediction in a different direction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies which local features DICE considered important, especially education-num and capital-gain. However, it lacks directionality, counterfactual targets, and enough detail to fully inspect the model's decision logic.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to scan, but the meaning of the numeric values is not explained. A non-expert would likely not understand why most features are zero or how to interpret the nonzero values.\",\n    \"completeness\": \"It includes only a narrow slice of local information and does not explain how the listed factors combine to yield the negative prediction. Key context such as the counterfactual changes needed for the opposite class is missing.\",\n    \"concision\": \"The explanation is brief and mostly avoids redundancy, so it is efficient in length. Still, the token budget is not used very effectively because the output is just a sparse feature dump without interpretive guidance.\",\n    \"overall_quality\": \"Overall this is a modestly informative but incomplete DICE explanation. It is understandable at a glance, yet it offers limited insight into the specific prediction and little practical value for decision support.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for Adult-income modeling, especially education, capital gain, age, and hours worked. The output is coherent with the dataset and model family, though the zero-valued entries make the local relevance somewhat unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:40.205074+00:00"
+}

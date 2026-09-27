@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_61ee041c76470c0f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_dc2b678dea61424b_22bb6f2ce5a73f7a.txt",
+  "prompt_version": "22bb6f2ce5a73f7a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549020-EyedgnBQiTkyqpvNRaeq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1238,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 849,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00563175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0046425,
+        "upstream_inference_cost": 0.00563175,
+        "upstream_inference_prompt_cost": 0.00098925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1319,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2557
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or counterfactual path, only displaying raw feature tags with arbitrary weights.\",\n    \"audit_usefulness\": \"While it reveals a potential artifact or issue in how categorical predicates were converted into weights, it provides minimal help for understanding the true decision boundary.\",\n    \"clarity\": \"Presenting one-hot feature names paired with raw float values without context or comparison thresholds makes it confusing for non-technical users.\",\n    \"completeness\": \"Only two one-hot categories receive non-zero scores while all other features are zeroed out, omitting meaningful reasoning for the classification.\",\n    \"concision\": \"Most of the explanation is consumed by listing features with 0.0000 scores, adding unnecessary clutter.\",\n    \"overall_quality\": \"The output is weak and poorly formatted for an anchor-based explanation, highlighting seemingly contradictory education features with identical scores.\",\n    \"semantic_plausibility\": \"Simultaneously assigning positive relevance to mutually exclusive education levels (7th-8th and Masters) is semantically confusing and doubtful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:43:50.026025+00:00"
+}

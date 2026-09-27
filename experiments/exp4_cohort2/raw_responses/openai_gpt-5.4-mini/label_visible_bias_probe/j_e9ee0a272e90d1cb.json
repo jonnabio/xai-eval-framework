@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e9ee0a272e90d1cb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a857fae38ad2e004_b23b0d03977ab0b1.txt",
+  "prompt_version": "b23b0d03977ab0b1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541558-Nl9Xp0ETgtDOSk2ijc4G",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003084,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.003084,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1572
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names influential features but does not translate them into a concrete recourse or next step. A user can infer that changing marital status or sex is not actionable, and no feasible decision-review guidance is provided.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals which local features pushed the logreg model toward the negative class, including the direction of contribution. However, it gives limited insight into whether these attributions are stable or whether they reflect spurious correlations beyond this single instance.\",\n    \"clarity\": \"The list format is straightforward and the feature contributions are easy to scan, especially for a tabular-data audience. Still, non-experts may not understand encoded variables like marital-status_Married-civ-spouse or what the sign and magnitude mean without some explanation.\",\n    \"completeness\": \"The main local drivers are present, including the strongest positive factor and several smaller positive and negative influences. Even so, the explanation does not connect these contributions to the final probability or provide a fuller local decision context beyond the top ten terms.\",\n    \"concision\": \"The explanation is fairly compact and contains mostly the information needed for a local summary. It is not padded, though the repeated one-feature-per-item structure is slightly less dense than a more synthesized narrative would be.\",\n    \"overall_quality\": \"Overall, this is a solid but basic local explanation: it is interpretable, concise, and useful for inspection, but it lacks actionable guidance and deeper context. Its quality is good for model auditing and moderate for end-user understanding.\",\n    \"semantic_plausibility\": \"The attributions are plausible for an Adult-income-style model, with capital-gain and marital-status among the strongest signals. The signs also look coherent, although the explanation alone does not justify why each encoded category affects the decision in this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:20.542052+00:00"
+}

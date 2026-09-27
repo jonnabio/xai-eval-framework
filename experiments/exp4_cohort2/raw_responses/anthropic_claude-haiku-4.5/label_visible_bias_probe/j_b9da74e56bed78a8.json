@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3d27b1d2bd43df77",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b9da74e56bed78a8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3d27b1d2bd43df77_cfe02c3baefdd6ef.txt",
+  "prompt_version": "cfe02c3baefdd6ef",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543542-7tPRkA5BS3esIqAjWX6J",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003653,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00243,
+        "upstream_inference_cost": 0.003653,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1709
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3d27b1d2bd43df77\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what thresholds matter, or what specific actions a user could take to alter the outcome.\",\n    \"audit_usefulness\": \"While the explanation identifies key features, the high faithfulness_gap (0.73) and low fidelity (0.61) severely undermine confidence in the model logic being accurately represented, limiting audit value.\",\n    \"clarity\": \"The format is a simple list of feature names with normalized weights, which is straightforward but lacks context about what these features mean or why they matter for the prediction.\",\n    \"completeness\": \"The explanation covers four high-weight features (age, hours-per-week, workclass, occupation, relationship) but omits instance-specific values, thresholds, and interaction effects needed for full local decision context.\",\n    \"concision\": \"The explanation is compact at 78 tokens and avoids redundancy, efficiently presenting feature weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is a false positive (predicted 1, true label 0) with poor technical metrics (low fidelity, high faithfulness gap, zero stability), indicating the anchors method failed to reliably explain this prediction.\",\n    \"semantic_plausibility\": \"The selected features (age, work hours, private sector, executive role, married status) are plausible income predictors in the adult dataset, but their use to justify an incorrect prediction raises coherence concerns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:27.770544+00:00"
+}

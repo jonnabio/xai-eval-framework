@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_65b7eaafe0733384",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_5a283f4d6f1cf5e1_df1e676ca0cc312b.txt",
+  "prompt_version": "df1e676ca0cc312b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538715-2N9RdarOQuD2tcNhn7i4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003018,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.003018,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential factors but does not translate them into any concrete recourse or decision-oriented next steps. A user cannot tell what specific changes might alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local features and their signed contributions, which helps inspect whether the model relies on sensible signals. However, the moderate fidelity and low stability limit how strongly an auditor can trust this single explanation.\",\n    \"clarity\": \"The list format is easy to scan, and the feature names and weights are understandable to a non-expert at a high level. Some terms are technical or encoded, but the overall message is still clear.\",\n    \"completeness\": \"It covers several main positive and negative local drivers for this prediction, giving a reasonable snapshot of why the model predicted class 1. Still, it lacks the baseline, interactions, and a fuller summary of how much each factor changed the decision.\",\n    \"concision\": \"The explanation is compact and mostly free of redundant wording, while still conveying the key local factors. It is a good information-to-length tradeoff for a LIME summary.\",\n    \"overall_quality\": \"This is a solid but limited local explanation: readable, concise, and reasonably informative about the main drivers of the positive prediction. Its usefulness is reduced by only moderate fidelity and low stability, so it is best viewed as a helpful summary rather than a fully reliable account.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult income setting, especially education, marital status, occupation, hours per week, and capital gains or losses. The directions are also broadly coherent for a logreg model, though some feature effects may reflect correlations rather than causal influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:58.014425+00:00"
+}

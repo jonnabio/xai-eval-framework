@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_58333d4438e7511a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_eec93395cc3f8408_bc747f1efd3f5edb.txt",
+  "prompt_version": "bc747f1efd3f5edb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539744-jDBe6hKDlO0BZjFS7rVf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004007,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.004007,
+        "upstream_inference_prompt_cost": 0.001257
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1807
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model behaviour inspection and could help identify systematic biases in credit decisions. However, the low fidelity (0.568) and moderate faithfulness gap (0.20) limit confidence in the explanation's reliability for audit purposes.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, SHAP values) that requires familiarity with credit datasets and SHAP methodology; a non-expert would struggle to interpret the semantic meaning of features like 'checking_status_<0' or 'credit_history_no credits/all paid'.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with both negative and positive contributions, providing reasonable coverage of the decision factors. However, it lacks context about the instance's actual feature values or thresholds that triggered these contributions.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting 10 ranked factors with their SHAP values efficiently. The format is dense but appropriate for the information density required.\",\n    \"overall_quality\": \"The explanation is technically sound and provides interpretable feature rankings, but is hampered by low fidelity, lack of actionability, and limited accessibility to non-technical users. It serves audit purposes better than end-user decision support.\",\n    \"semantic_plausibility\": \"The identified factors (checking account status, credit history, savings, payment plans, age, property) are plausible drivers of credit decisions in domain terms. The negative contributions of poor checking/credit status and positive contribution of age align with expected credit risk patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:10.752813+00:00"
+}

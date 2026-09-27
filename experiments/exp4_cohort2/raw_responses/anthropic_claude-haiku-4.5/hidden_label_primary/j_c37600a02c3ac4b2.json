@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d08e79080e9bdc99",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c37600a02c3ac4b2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d08e79080e9bdc99_1e4fcf6439b2f0d6.txt",
+  "prompt_version": "1e4fcf6439b2f0d6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541784-7tuf5Z5fUZet68LaDUxq",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003792,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002575,
+        "upstream_inference_cost": 0.003792,
+        "upstream_inference_prompt_cost": 0.001217
+      },
+      "is_byok": false,
+      "prompt_tokens": 1217,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1732
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d08e79080e9bdc99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features (mean perimeter and worst perimeter) but provides no guidance on how to interpret these values, what thresholds matter, or what actions a clinician or patient could take based on this information.\",\n    \"audit_usefulness\": \"The normalized weights and feature list support model inspection, but the very low fidelity (0.35) and stability (0.34) metrics severely undermine confidence in the explanation's reliability for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but lacks context about what the numerical values mean, why only two features have non-zero weights, and what the prediction (0) represents in clinical terms.\",\n    \"completeness\": \"The explanation covers only the top two features with meaningful weights; however, the extremely low fidelity suggests the explanation may not capture the true local decision logic, leaving critical drivers potentially unexplained.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their normalized importance scores without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability), limited interpretability for end users, and insufficient context to support clinical decision-making or model auditing despite being concise.\",\n    \"semantic_plausibility\": \"Perimeter-based features are plausible predictors in breast cancer diagnosis, but the stark binary weighting (1.0 vs 0.0) and absence of any other morphological features raises questions about whether the explanation reflects genuine model logic or an artifact of the anchors method.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:10.173931+00:00"
+}

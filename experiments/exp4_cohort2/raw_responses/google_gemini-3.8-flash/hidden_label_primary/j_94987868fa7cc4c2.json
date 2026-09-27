@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cae54143c3307788",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_94987868fa7cc4c2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cae54143c3307788_be3a2b0fd1c88010.txt",
+  "prompt_version": "be3a2b0fd1c88010",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538916-vi0fAICjv7FMJQXnfUkL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1302,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 910,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0058155,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0048825,
+        "upstream_inference_cost": 0.0058155,
+        "upstream_inference_prompt_cost": 0.000933
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2546
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cae54143c3307788\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs raw magnitude values rather than concrete feature target values or directions of change, offering no actionable guidance for recourse.\",\n    \"audit_usefulness\": \"An auditor can identify that age and education_9th were the primary features modified, but the lack of baseline values, directions, or counterfactual states severely limits diagnostic utility.\",\n    \"clarity\": \"The output is presented as a raw list of feature weights without units or definitions, making it confusing for non-expert readers to interpret what the numbers signify.\",\n    \"completeness\": \"The explanation lacks essential local context, omitting the original feature values, counterfactual endpoints, and the direction of influence.\",\n    \"concision\": \"Including multiple features with identical 0.0000 values introduces unnecessary clutter that diminishes information density.\",\n    \"overall_quality\": \"Reducing a counterfactual explanation to unexplained numeric scores with padded zeros results in a weak and uninformative explanation.\",\n    \"semantic_plausibility\": \"Highlighting age and education as primary determinants is plausible and consistent with domain expectations for the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:27.207081+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c135e9c0eccd82e5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_95751d1d732b6cfa_37765600a0805953.txt",
+  "prompt_version": "37765600a0805953",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547309-JN7TvGexd6KX3895aV8U",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 595,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004258,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002975,
+        "upstream_inference_cost": 0.004258,
+        "upstream_inference_prompt_cost": 0.001283
+      },
+      "is_byok": false,
+      "prompt_tokens": 1283,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1878
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no counterfactual or actionable guidance. It does not indicate what changes would alter the prediction, making it impossible for someone to know what actions to take.\",\n    \"audit_usefulness\": \"While the sparsity (0.009) and fidelity (0.988) are strong, the explanation itself is opaque. The dominance of education_7th-8th with a 0.7 score and all other features at 0.0 raises questions about model behavior that an auditor cannot investigate without additional context or counterfactuals.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical scores. However, without explanation of what these scores mean (importance? contribution? distance?), the interpretation is unclear to non-technical readers. The method name 'DICE' is unexplained.\",\n    \"completeness\": \"The explanation identifies one dominant factor (education_7th-8th) but provides minimal insight into why the model predicted class 0. It lacks context about the instance's actual feature values, the decision boundary, or how this factor drives the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. However, much of the content (nine features with 0.0 scores) adds little informational value and could be condensed or omitted.\",\n    \"overall_quality\": \"This is a weak explanation. While technically sound (high fidelity, good sparsity), it fails to communicate actionable insights or clear reasoning. The single dominant feature with all others zeroed out is suspicious and poorly contextualized.\",\n    \"semantic_plausibility\": \"Education level is plausibly relevant to income prediction in the adult dataset. However, the extreme sparsity (only one non-zero feature) and the specific value of 0.7 lack grounding. Without knowing the instance's actual education level or how DICE computed this score, plausibility cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:15:16.116089+00:00"
+}

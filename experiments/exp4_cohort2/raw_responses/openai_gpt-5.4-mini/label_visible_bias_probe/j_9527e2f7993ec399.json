@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9527e2f7993ec399",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_9796c10b545d65fb.txt",
+  "prompt_version": "9796c10b545d65fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542453-GHjKkd8vfpiyFikIid7t",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029385,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.0029385,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps; it only lists feature names and zero-like scores. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It offers very limited audit value because the listed factors are mostly zero and do not meaningfully explain the model's decision. An auditor cannot assess whether the model relies on sensible drivers or potential bias from this output alone.\",\n    \"clarity\": \"The wording is simple, but the content is hard to interpret because the feature importance values are not explained and many are exactly 0.0000. A non-expert would not understand why 'native-country_South' is the only nonzero factor or what the zeros mean.\",\n    \"completeness\": \"It is missing the actual local decision logic, since only one feature appears influential and the rest are zeroed out. There is no counterfactual or threshold information to explain why the model predicted the positive class.\",\n    \"concision\": \"The explanation is short and not overly verbose, but much of the text adds little information because most entries are zero. It is compact, though not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact but does not meaningfully explain the prediction or support review. The output is too sparse and mechanically formatted to be useful for understanding this specific case.\",\n    \"semantic_plausibility\": \"The listed feature names are plausible for the Adult dataset, and it is plausible that country could matter in a logistic regression model. However, the dominance of a single country indicator with all other top factors at zero is not very informative and feels incomplete.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:16.086205+00:00"
+}

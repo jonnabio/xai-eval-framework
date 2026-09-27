@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5fd5f1d43fc160d3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_20242fe53fbadae4_192ad991446f80c9.txt",
+  "prompt_version": "192ad991446f80c9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541302-dYZHSPxvyG83HQd7FM06",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030915,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022995,
+        "upstream_inference_cost": 0.0030915,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1567
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features associated with the prediction, but it does not translate them into concrete recourse or next steps for the applicant. A user cannot tell what to change to reduce the risk of rejection.\",\n    \"audit_usefulness\": \"It gives an auditor a rough view of which variables were involved, but the all-ones weights and lack of directionality make it hard to inspect the model\u2019s actual decision logic. It is only moderately helpful for investigating why this false negative occurred.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the repeated 1.0000 scores is not explained and the list is not interpreted in plain language. A non-expert would likely understand the feature names but not what the explanation is asserting.\",\n    \"completeness\": \"The main local factors are present, which helps somewhat, but the explanation lacks class-direction, threshold/coverage information, and any indication of why these features led to the negative prediction. For a false negative, the omission of contrast with the true label limits understanding.\",\n    \"concision\": \"It is compact and contains little redundant prose, though the raw feature list is somewhat repetitive and not well summarized. Overall it is concise but not especially information-dense for a human reader.\",\n    \"overall_quality\": \"This is a minimally useful technical explanation: it identifies several relevant features, but it is hard to interpret and does not support understanding, recourse, or thorough review well. Its quality is limited by poor semantic framing and missing decision context.\",\n    \"semantic_plausibility\": \"The listed variables are plausible drivers in the German credit domain, such as checking status, savings, employment, and credit history. However, the unexplained 1.0000 values and the inclusion of a zero-valued residence_since entry make the explanation feel mechanically generated rather than carefully interpreted.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:05.024809+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3b89f44c09f30ead",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545224-Q0ekDlNjhzxfKPqJtyNr",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1321,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 920,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005886,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00495375,
+        "upstream_inference_cost": 0.005886,
+        "upstream_inference_prompt_cost": 0.00093225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1243,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2564
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it identifies education-num as the primary lever, it fails to state the original value, the target value, or the direction of change needed for recourse.\",\n    \"audit_usefulness\": \"It informs an auditor that the counterfactual logic hinges almost entirely on education, but the lack of directional context and target class details limits thorough model inspection.\",\n    \"clarity\": \"The list format is readable, but the raw numeric value lacks clear units, directionality, or explanatory phrasing for a non-expert.\",\n    \"completeness\": \"The explanation isolates only a single non-zero feature change while listing numerous zeroed features, omitting the full counterfactual profile and baseline state.\",\n    \"concision\": \"Listing multiple zero-valued features creates unnecessary clutter and dilutes the useful information.\",\n    \"overall_quality\": \"The explanation offers minimal utility due to zero padding, missing directionality, and absence of baseline context, though it cleanly isolates education.\",\n    \"semantic_plausibility\": \"Focusing on education level aligns well with domain expectations for income prediction, though the raw numeric shift is difficult to contextualize directly.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:40:34.976371+00:00"
+}

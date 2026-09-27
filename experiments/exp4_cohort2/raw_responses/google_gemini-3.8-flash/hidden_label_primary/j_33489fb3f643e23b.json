@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_33489fb3f643e23b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_196e6ce035ebf3e3_0bdb4a59425836d4.txt",
+  "prompt_version": "0bdb4a59425836d4",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539906-LLolwxzJDLFdzbgT8jhJ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1271,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 802,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005718,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00476625,
+        "upstream_inference_cost": 0.005718,
+        "upstream_inference_prompt_cost": 0.00095175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1269,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2540
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values without actionable guidance, thresholds, or counterfactual recourse for the applicant.\",\n    \"audit_usefulness\": \"The feature attributions show which factors influenced the prediction, but audit utility is limited because the instance's actual feature values (e.g., specific credit amount and duration) are omitted.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded variable names and signed floating-point values requires technical knowledge of SHAP to interpret.\",\n    \"completeness\": \"The explanation covers the top ten contributing features, but lacks the baseline prediction, total probability, and underlying feature values.\",\n    \"concision\": \"The text is compact and directly presents the top attributions with minimal overhead.\",\n    \"overall_quality\": \"While mathematically standard for local feature attributions, the absence of feature values, baseline context, and layman interpretability limits its overall utility.\",\n    \"semantic_plausibility\": \"The identified features (checking status, savings, credit amount, duration) are domain-relevant determinants of credit risk.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 3,\n      \"clarity\": 2,\n      \"completeness\": 3,\n      \"concision\": 4,\n      \"overall_quality\": 2,\n      \"semantic_plausibility\": 4\n    }\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:55.874133+00:00"
+}

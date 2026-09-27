@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d08e79080e9bdc99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ab9c47362bf82b33",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d08e79080e9bdc99_cd73ce6057ed9dfb.txt",
+  "prompt_version": "cd73ce6057ed9dfb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542710-KVn12scE5QiNfjvP3O8y",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029895,
+        "upstream_inference_prompt_cost": 0.0007845
+      },
+      "is_byok": false,
+      "prompt_tokens": 1046,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d08e79080e9bdc99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step for a user, such as which features to change or how a decision might be reviewed. It is descriptive only.\",\n    \"audit_usefulness\": \"It exposes the top local factors and their binary anchor values, which gives some limited visibility into what the anchor rule is using. However, the lack of directionality, thresholds, and feature importance beyond two active anchors makes it weak for deeper auditing.\",\n    \"clarity\": \"The text is easy to parse at a basic level because it lists feature names and values in a simple format. Still, the 0/1-like formatting for continuous medical features is not self-explanatory to a non-expert.\",\n    \"completeness\": \"It includes only a sparse set of features and does not explain how these factors led to the negative prediction, nor how they compare to the rest of the instance. That leaves important local decision context missing.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but much of the listed content is repetitive zeros and provides little information density. A shorter statement of the decisive anchors would be more efficient.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for a tabular medical prediction: it is somewhat readable and sparse, but it lacks interpretability, decision support, and sufficient local context. The anchor-style output is too bare to meaningfully explain the model's TN prediction.\",\n    \"semantic_plausibility\": \"The selected features are plausible for a breast cancer classifier, and perimeter and radius are known to be relevant medical indicators. However, the 1.0000 and 0.0000 formatting for the listed factors is semantically odd and undermines interpretability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:32.960322+00:00"
+}

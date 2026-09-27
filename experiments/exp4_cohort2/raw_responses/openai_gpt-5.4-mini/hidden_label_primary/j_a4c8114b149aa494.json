@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a4c8114b149aa494",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_57fbcb6615a605ff_b94dfbf0eb6fb644.txt",
+  "prompt_version": "b94dfbf0eb6fb644",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539775-0Rwb0SjpkdwWT6B30EBz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031515,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023625,
+        "upstream_inference_cost": 0.0031515,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1577
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57fbcb6615a605ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists influential features and their SHAP values, but it gives no concrete recourse or next steps a user could take. It does not indicate which feature changes would reduce the model\u2019s positive prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the main local drivers and their relative signs, allowing a reviewer to inspect whether the model relied on clinically meaningful tumor characteristics. However, it lacks thresholds or comparison to the instance's actual feature values, limiting deeper diagnosis.\",\n    \"clarity\": \"The format is concise and the feature names are standard for this dataset, so the explanation is easy to read at a glance. Still, a non-expert may not understand terms like 'concave points' or the meaning of positive versus negative SHAP values without additional context.\",\n    \"completeness\": \"It covers the top local contributors to the prediction and includes both positive and negative influences, which gives a decent view of the decision. But it omits the instance's feature values, baseline comparison, and any summary of how these factors combine into the final score.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering a ranked list of the most important features in a small number of tokens. It may be slightly dense for non-experts, but it is efficient in information per word.\",\n    \"overall_quality\": \"Overall, this is a reasonably strong local explanation for technical inspection: it is concise, stable, and shows the main drivers of the positive prediction. Its main weakness is limited interpretability and lack of actionable or case-specific detail for a lay user.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for a breast cancer classifier, since concavity, texture, area, perimeter, and radius are all standard tumor morphology variables. The mix of positive and negative contributions is also coherent with a typical SHAP explanation for an XGBoost model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:40.068384+00:00"
+}

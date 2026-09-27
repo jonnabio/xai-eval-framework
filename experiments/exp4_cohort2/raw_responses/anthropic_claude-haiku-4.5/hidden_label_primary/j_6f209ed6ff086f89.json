@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6f209ed6ff086f89",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4c3d79ea2f396cd5_f10f7d8fba1be09c.txt",
+  "prompt_version": "f10f7d8fba1be09c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541688-Sd04t88IfpS280d5cy0S",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003521,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002285,
+        "upstream_inference_cost": 0.003521,
+        "upstream_inference_prompt_cost": 0.001236
+      },
+      "is_byok": false,
+      "prompt_tokens": 1236,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1693
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature weights are effectively zero or negligible, providing no meaningful direction for recourse or decision modification; a user cannot identify which factors to adjust to change the prediction.\",\n    \"audit_usefulness\": \"The near-zero weights across all features offer minimal insight into model behavior and cannot support meaningful bias or error investigation; the explanation fails to reveal what actually drove the prediction.\",\n    \"clarity\": \"The format is straightforward and readable, listing features and weights in a standard tabular manner that a non-expert can parse mechanically.\",\n    \"completeness\": \"The explanation is severely incomplete because all reported feature contributions are essentially zero, leaving the actual decision drivers entirely unexplained and the prediction unjustified.\",\n    \"concision\": \"The explanation is concise in length but this brevity is misleading; it compactly reports uninformative content rather than efficiently conveying useful decision information.\",\n    \"overall_quality\": \"This explanation is fundamentally broken: it provides no actionable insight, fails audit requirements, and leaves the prediction completely unexplained despite technical metrics suggesting poor fidelity (0.0) and near-zero stability.\",\n    \"semantic_plausibility\": \"The all-zero weights are implausible for a binary classification prediction; a logistic regression model must have non-zero contributions from some features to produce a confident prediction of class 1.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 4,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:33.243181+00:00"
+}

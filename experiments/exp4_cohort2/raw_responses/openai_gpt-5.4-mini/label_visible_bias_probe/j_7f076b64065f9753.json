@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7f076b64065f9753",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3118a0f719dfdef8_beaaa0ec4ea5a7fb.txt",
+  "prompt_version": "beaaa0ec4ea5a7fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541442-dBRStUkBZOTvGzPPsMQR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00301575,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the feature contributions into any concrete recourse or decision steps. It only lists influential variables, so a user cannot tell what to change or verify next.\",\n    \"audit_usefulness\": \"It provides a ranked set of local SHAP contributions, which is useful for inspecting which features pushed the model toward the positive class. However, it lacks directionality context, feature values, and a comparison to similar cases, limiting deeper audit value.\",\n    \"clarity\": \"The output is short and formatted as a simple list of features with numeric contributions, so it is easy to scan. A non-expert may still struggle to interpret what the signed values mean or how they relate to the prediction.\",\n    \"completeness\": \"The explanation identifies the main local drivers, but it omits the actual feature values, the decision threshold, and a plain-language summary of why the model predicted class 1. Because this is a false positive, the absence of counterevidence or calibration context makes the decision only partially understandable.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information without obvious padding. It is slightly limited by being a raw feature list rather than a more integrated summary.\",\n    \"overall_quality\": \"This is a moderately useful local explanation: it is concise, technically informative, and broadly plausible, but not especially interpretable for non-experts or actionable for users. The false-positive context makes the missing threshold and counterfactual detail more noticeable.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features such as perimeter, concave points, radius, and area are highly plausible drivers for an XGBoost model on this dataset. The mix of positive and negative contributions is also consistent with a reasonable SHAP explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:24.688066+00:00"
+}

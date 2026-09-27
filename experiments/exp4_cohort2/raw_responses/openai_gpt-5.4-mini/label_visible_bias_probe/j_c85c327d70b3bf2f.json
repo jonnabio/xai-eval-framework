@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c85c327d70b3bf2f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_084efba639afd972_bea219452206b323.txt",
+  "prompt_version": "bea219452206b323",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541784-11qQoViRrMyt30rmx9lE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002259,
+        "upstream_inference_cost": 0.00305625,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names but gives no explicit recourse or next steps the user could take to change the outcome. It does not indicate which factors are modifiable or how changes might affect approval.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which variables the anchor set relies on, especially credit-related and demographic attributes. However, it does not explain directional effects, thresholds, or why these anchors support a false negative.\",\n    \"clarity\": \"The output is readable and structured as a list of local factors, so a non-expert can identify the listed attributes. Still, the repeated 1.0000 values and raw encoded feature names make the explanation only moderately clear without dataset knowledge.\",\n    \"completeness\": \"It names several likely influential features for the prediction, but it omits how they combine to produce the class 0 result and provides no comparison to the true label. For a false negative, it lacks the decision context needed to fully understand why the model missed the positive case.\",\n    \"concision\": \"The explanation is fairly compact and contains mostly relevant information without much extra text. However, it is somewhat repetitive and not maximally informative because it lists many anchors without interpretation.\",\n    \"overall_quality\": \"This is a partially useful local explanation: it is concise and somewhat audit-relevant, but it is hard to interpret and does not support meaningful recourse or full understanding of the prediction. The lack of semantic explanation and the use of raw encoded features limit its overall quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit model, especially checking status, credit history, savings, employment, and purpose. Nonetheless, the blanket 1.0000 anchor scores without any interpretation make the explanation feel mechanically generated rather than semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:06.632998+00:00"
+}

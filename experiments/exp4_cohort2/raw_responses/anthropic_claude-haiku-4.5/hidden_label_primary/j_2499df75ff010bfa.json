@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_98c1b4de308b5917",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2499df75ff010bfa",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_98c1b4de308b5917_7a1664df743fa3e5.txt",
+  "prompt_version": "7a1664df743fa3e5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538718-wIdEptqifxA5GZrjDmiG",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003819,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002595,
+        "upstream_inference_cost": 0.003819,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1743
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_98c1b4de308b5917\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what thresholds matter, or what specific actions a user could take to modify the outcome.\",\n    \"audit_usefulness\": \"The explanation identifies three high-importance features (education-num, capital-gain, relationship_Husband) and many zero-importance features, which partially supports model behaviour inspection, though the low fidelity (0.668) and high faithfulness gap (0.313) raise concerns about explanation reliability.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is straightforward to parse but lacks narrative context, interpretation, or explanation of what these scores mean for a non-expert reader.\",\n    \"completeness\": \"The explanation covers the top drivers (education, capital gain, marital status) but omits critical context such as actual feature values for this instance, decision boundaries, or how these factors interact to produce the prediction.\",\n    \"concision\": \"The explanation is compact at 80 tokens and avoids redundancy, efficiently listing features and scores without padding, though it sacrifices interpretability for brevity.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides minimal actionable or interpretable insight; while it identifies key features, the low fidelity, high faithfulness gap, and lack of narrative context significantly limit its utility for decision-making or auditing.\",\n    \"semantic_plausibility\": \"For an income prediction task, the identified anchors (education, capital gains, marital status as husband) are plausible predictors of higher income, aligning with domain expectations and real-world patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:03.183529+00:00"
+}

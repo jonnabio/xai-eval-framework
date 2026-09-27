@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_52ed2fe68041b4f8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_21762634a7797fc3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_52ed2fe68041b4f8_016415bab919e083.txt",
+  "prompt_version": "016415bab919e083",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543572-7VDgn8p1T1adPCgeaHwQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002601,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017505,
+        "upstream_inference_cost": 0.002601,
+        "upstream_inference_prompt_cost": 0.0008505
+      },
+      "is_byok": false,
+      "prompt_tokens": 1134,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1523
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_52ed2fe68041b4f8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not suggest any concrete change or next step that would alter the prediction; the output is only a list of local factors with weights.\",\n    \"audit_usefulness\": \"The explanation gives a small set of features tied to the decision, but the near-zero weights for most listed features and low fidelity/stability make it only modestly useful for auditing model behavior.\",\n    \"clarity\": \"The feature names are understandable to someone with some ML/domain familiarity, but the numeric anchor-style output is not very intuitive for non-technical readers.\",\n    \"completeness\": \"It names only two features as active contributors and does not explain why the prediction is negative or how these features interact, so it captures only part of the local decision.\",\n    \"concision\": \"The explanation is short and mostly non-redundant, though the long list of zero-valued features adds little information.\",\n    \"overall_quality\": \"This is a somewhat informative but limited explanation: it identifies a couple of local anchors, yet it is sparse, not very actionable, and only moderately faithful.\",\n    \"semantic_plausibility\": \"For the Adult dataset, education and occupation are plausible predictors, and the explanation does not obviously contradict domain expectations or the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:54.736737+00:00"
+}

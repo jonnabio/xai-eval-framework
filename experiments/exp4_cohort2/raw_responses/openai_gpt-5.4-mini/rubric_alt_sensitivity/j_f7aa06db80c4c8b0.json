@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f7aa06db80c4c8b0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_07f7eab6526a79eb_9c33bcafcff2a0c3.txt",
+  "prompt_version": "9c33bcafcff2a0c3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543063-w20cWl8ff8JN7GaCDrB4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00225675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0013995,
+        "upstream_inference_cost": 0.00225675,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1454
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_07f7eab6526a79eb\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It only lists features and local weights; it does not say what change would flip the prediction or what a person could do next.\",\"audit_usefulness\":\"The top contributing features are identifiable, so an auditor can inspect likely drivers of the false positive, but the explanation is too local and unstable for deep diagnosis.\",\"clarity\":\"The output is a simple ranked list with signs, which is easy to read, though feature names are somewhat technical and one must understand the Adult dataset encoding.\",\"completeness\":\"It provides the main local factors behind the prediction, but not their interactions, baseline, or a full account of why this false positive occurred.\",\"concision\":\"The explanation is compact and mostly consists of the highest-value local factors, with little filler.\",\"overall_quality\":\"It is a useful but limited LIME summary: readable and locally informative, but not very complete, stable, or actionable.\",\"semantic_plausibility\":\"The listed factors are broadly sensible for Adult income prediction, and the positive influence of marital status/husband relationship versus negative influence of never-married, female, and less education fits domain expectations.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":3,\"clarity\":4,\"completeness\":3,\"concision\":4,\"overall_quality\":3,\"semantic_plausibility\":4}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:25.356990+00:00"
+}

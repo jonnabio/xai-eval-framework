@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b30d5de53a44ba01",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_681f91e7c50b9380_8e07eeb2a6e00da6.txt",
+  "prompt_version": "8e07eeb2a6e00da6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547384-wj0HnMAe1F3xUOc0NmLl",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 593,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004246,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002965,
+        "upstream_inference_cost": 0.004246,
+        "upstream_inference_prompt_cost": 0.001281
+      },
+      "is_byok": false,
+      "prompt_tokens": 1281,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1874
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only identifies native-country_Ireland as influential (1.0) with all other factors at 0.0, but provides no guidance on what could be changed to alter the prediction or what actions are feasible. It is purely diagnostic without prescriptive value.\",\n    \"audit_usefulness\": \"While the explanation identifies a single dominant factor, the extreme sparsity (only one non-zero weight) and poor technical metrics (negative fidelity, low stability) raise concerns about reliability. An auditor would struggle to trust this explanation for bias investigation without additional validation.\",\n    \"clarity\": \"The format is straightforward\u2014a list of factors with weights\u2014but lacks context about what the prediction means, what the model is predicting, or why native-country matters. Someone unfamiliar with the adult dataset would not understand the significance.\",\n    \"completeness\": \"The explanation is severely incomplete. It identifies only one factor as relevant while zeroing out all others, which is implausible for a complex income prediction task. Critical factors like education, age, and hours-per-week are dismissed entirely, suggesting the explanation misses the main decision drivers.\",\n    \"concision\": \"The explanation is concise in length but wastes space by listing many zero-valued factors. A tighter presentation would omit factors with zero contribution, making it more information-dense.\",\n    \"overall_quality\": \"This explanation is weak. It is a false positive (predicted 1, true label 0), has poor technical metrics (negative fidelity, low stability), identifies only one factor with implausible zero weights for others, and provides minimal actionable insight. The extreme sparsity and technical failures undermine confidence in the result.\",\n    \"semantic_plausibility\": \"The explanation is implausible. For income prediction in the adult dataset, native-country alone should not dominate the decision while education, age, and work hours contribute zero. This contradicts domain knowledge about income determinants and suggests the explanation is unreliable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:16:30.730728+00:00"
+}

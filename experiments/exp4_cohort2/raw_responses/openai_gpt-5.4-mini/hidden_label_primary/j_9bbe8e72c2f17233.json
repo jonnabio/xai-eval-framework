@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56b2fc0abd88017e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9bbe8e72c2f17233",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_56b2fc0abd88017e_da2b0239ced3def1.txt",
+  "prompt_version": "da2b0239ced3def1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539014-UK3rre7wvqtC2UxAnpy3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00207,
+        "upstream_inference_cost": 0.00286875,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56b2fc0abd88017e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into clear recourse steps, but it does indicate which features are pushing the decision up or down. A user could only infer very general areas to review, not concrete actions.\",\n    \"audit_usefulness\": \"It is useful for auditing because it lists the top local SHAP contributors with signs and magnitudes, allowing inspection of which variables drove the prediction. However, it lacks broader context such as baseline value, feature values, or comparison to similar cases.\",\n    \"clarity\": \"The output is concise and mostly understandable, especially to a reader familiar with credit features. For a non-expert, the shorthand feature names and signed SHAP values require some interpretation.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, but it does not include the actual instance values, the decision threshold, or how these contributions combine into the final probability. That limits full understanding of the specific prediction.\",\n    \"concision\": \"The explanation is compact and information-dense, listing only the top contributing factors without unnecessary filler. It is efficient, though somewhat terse for users who need interpretation.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: stable, compact, and informative about which features influenced the model. Its main weakness is limited user-facing interpretability and lack of explicit recourse or decision context.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for German credit, and the directions of influence are not obviously contradictory. The pattern of checking status, savings, credit amount, duration, and history fits the domain well.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:57.767642+00:00"
+}

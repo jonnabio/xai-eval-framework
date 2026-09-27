@@ -37,12 +37,30 @@ def iter_raw_response_files(raw_dir: Path) -> Iterable[Path]:
     return sorted(raw_dir.rglob("*.json"))
 
 
+TRAILING_COMMA = re.compile(r",(\s*[}\]])")
+
+
 def parse_raw_response_file(path: Path) -> Tuple[Dict[str, Any], Exp4Judgment | None, str | None]:
     envelope = json.loads(path.read_text(encoding="utf-8"))
     response_text = envelope.get("response_text", "")
     try:
         return envelope, parse_judgment_text(response_text), None
-    except (json.JSONDecodeError, ValidationError, TypeError, ValueError) as exc:
+    except json.JSONDecodeError as exc:
+        # Added 2026-09-27 (cohort 2): some judges emit a trailing comma before
+        # a closing brace. Only after strict parsing fails, drop such commas and
+        # retry; the result must still validate against the schema. Lossless,
+        # recorded in parse_status, and the raw response is left untouched.
+        repaired = TRAILING_COMMA.sub(r"\1", response_text)
+        if repaired != response_text:
+            try:
+                judgment = parse_judgment_text(repaired)
+            except (json.JSONDecodeError, ValidationError, TypeError, ValueError):
+                pass
+            else:
+                envelope["parse_status"] = "parsed_trailing_comma_repaired"
+                return envelope, judgment, None
+        return envelope, None, f"{type(exc).__name__}: {exc}"
+    except (ValidationError, TypeError, ValueError) as exc:
         return envelope, None, f"{type(exc).__name__}: {exc}"
 
 
@@ -95,7 +113,7 @@ def _score_row(envelope: Dict[str, Any], judgment: Exp4Judgment, raw_path: Path)
         "replicate": envelope.get("replicate"),
         "temperature": envelope.get("temperature"),
         "raw_response_path": str(raw_path),
-        "parse_status": "parsed",
+        "parse_status": envelope.get("parse_status", "parsed"),
         "timestamp_utc": envelope.get("timestamp_utc"),
         "insufficient_context": judgment.flags.insufficient_context,
         "format_problem": judgment.flags.format_problem,

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b53e03f10d6340d8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_60730b2d1280bac2_a19424fe6c5d1c5a.txt",
+  "prompt_version": "a19424fe6c5d1c5a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538799-UTSSmdOnq4zgfngBu3RB",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 920,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 526,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00439575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00345,
+        "upstream_inference_cost": 0.00439575,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2181
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw local attribution weights without counterfactual paths, thresholds, or clear actionable steps for the individual.\",\n    \"audit_usefulness\": \"It provides a clear rank-ordered attribution profile across key one-hot and continuous features, though the absence of original feature values and low surrogate fidelity limit full auditability.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric coefficients requires technical familiarity to interpret properly.\",\n    \"completeness\": \"Top positive and negative contributors are detailed, but the lack of actual feature values for continuous variables like hours-per-week and capital-gain leaves the local picture incomplete.\",\n    \"concision\": \"The text presents the top 10 local factors compactly with no extraneous wording.\",\n    \"overall_quality\": \"It is an acceptable technical local attribution explanation that aligns well with domain logic, though limited by format and lack of recourse guidance.\",\n    \"semantic_plausibility\": \"The direction of effects aligns well with established income patterns, where executive roles, incorporated self-employment, and higher education strongly favor high income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:26.512949+00:00"
+}

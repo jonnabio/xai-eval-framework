@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0afc73a5d1ff0914",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_31f188776d06c14d.txt",
+  "prompt_version": "31f188776d06c14d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544804-5NnXJEn4yJ7XAFWS0AuK",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 630,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004427,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00315,
+        "upstream_inference_cost": 0.004427,
+        "upstream_inference_prompt_cost": 0.001277
+      },
+      "is_byok": false,
+      "prompt_tokens": 1277,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1907
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what values would need to change to alter the prediction. It does not indicate whether increasing or decreasing key features would flip the outcome, making it impossible to act on.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchor the prediction, the poor technical metrics (fidelity 0.23, faithfulness_gap 0.26, stability 0.0) suggest the explanation is unreliable. An auditor would struggle to trust this for bias or error investigation given these weak performance indicators.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical scores. However, without context about what the scores mean (importance? probability? direction?), the interpretation requires technical knowledge. The binary outcome (0 vs 1) and feature names are domain-specific.\",\n    \"completeness\": \"The explanation covers many features but lacks critical context: no indication of feature values for this instance, no explanation of why these features matter, and no account of the decision boundary or model logic. It reads as a feature ranking rather than a causal explanation.\",\n    \"concision\": \"The explanation is compact at 80 tokens, but much of that space is devoted to features with zero importance (capital-gain, capital-loss, hours-per-week, workclass variants). The signal-to-noise ratio is poor; it could be tighter by omitting zero-weight features.\",\n    \"overall_quality\": \"This explanation is weak. It is a false negative case where the model predicted 0 but the true label is 1. The technical metrics are poor (low fidelity, high faithfulness gap, zero stability), suggesting the explanation is not reliably capturing the model's decision logic. The format is clear but lacks actionable insight or trustworthy grounding.\",\n    \"semantic_plausibility\": \"The explanation identifies age, fnlwgt, education-num, and workclass as important for income prediction, which aligns with domain knowledge about income determinants. However, the absence of any feature values or direction of effect makes it difficult to assess whether the specific reasoning is plausible for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:33:31.160742+00:00"
+}

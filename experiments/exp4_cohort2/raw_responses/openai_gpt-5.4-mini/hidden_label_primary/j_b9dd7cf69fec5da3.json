@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b9dd7cf69fec5da3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_084efba639afd972_e909cef5de7f5d73.txt",
+  "prompt_version": "e909cef5de7f5d73",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539124-kCaleAhwlPrfzeVqd8Uj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003003,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.003003,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names but gives no concrete recourse or next steps a user could take to change the outcome. It does not say which actions would reduce risk or how the listed factors affected the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for checking which local features Anchor considered sufficient, but it lacks directional effects and does not explain why these anchors support the negative class. For auditing a false negative, this provides only limited insight into model behavior.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, but the meaning of repeated 1.0000 values is not explained. A non-expert would likely not understand what the anchors guarantee or how they relate to the prediction.\",\n    \"completeness\": \"It names several top local factors, but it does not cover their influence, thresholds, or the model's decision logic beyond membership in the anchor set. For a specific prediction, this is only a partial explanation.\",\n    \"concision\": \"The explanation is short and mostly free of redundancy, with a compact feature list. However, it is sparse in useful semantic content, so its brevity comes at the cost of explanatory value.\",\n    \"overall_quality\": \"This is a compact but shallow explanation: it identifies relevant local features, yet it fails to translate them into an understandable or decision-supportive rationale. Overall it is acceptable as a technical anchor listing, but weak as an explanation for end users or auditors.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, such as checking status, savings, employment, and credit history. Nothing in the explanation contradicts the domain, although the repeated 1.0000 values make it look mechanical rather than interpretable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:58:47.895322+00:00"
+}

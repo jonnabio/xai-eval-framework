@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f961e09e03631427",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_81c9024ae418939e_34eca44099ccaeac.txt",
+  "prompt_version": "34eca44099ccaeac",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542506-EZj9ny7undl8fUrJmL8M",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028815,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028815,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the outcome. It only lists features with binary weights, so a user cannot infer what to modify or review.\",\n    \"audit_usefulness\": \"It gives some local signal about which attributes were considered, but the near-all-zero weights and lack of directionality limit diagnostic value. An auditor cannot tell whether the model is relying on sensible or spurious patterns from this output alone.\",\n    \"clarity\": \"The formatting is simple and readable, and the feature names are recognizable. However, the meaning of the 1.0000 and 0.0000 values is not explained, so a non-expert would not understand the actual rationale.\",\n    \"completeness\": \"Only two features have nonzero values and no explicit rule or threshold is provided, so the local decision context is incomplete. It does not explain why the model predicted the negative class for a false negative instance.\",\n    \"concision\": \"The explanation is very short and avoids redundancy, so it is compact. Still, the brevity comes at the cost of missing the decision logic behind the prediction.\",\n    \"overall_quality\": \"This is a minimal, partially interpretable explanation with limited usefulness for understanding the specific prediction. It is readable, but too sparse and under-specified to support strong analysis or recourse.\",\n    \"semantic_plausibility\": \"The identified factors, age and relationship_Husband, are plausible variables for the Adult dataset and can reasonably influence income prediction. However, the all-or-nothing values are unusual and not semantically informative about why this specific false negative occurred.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:08.986409+00:00"
+}

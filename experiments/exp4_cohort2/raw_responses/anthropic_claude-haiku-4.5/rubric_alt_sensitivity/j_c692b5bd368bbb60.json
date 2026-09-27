@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c692b5bd368bbb60",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e5e8a4d0292d4cca_b85ae2443f258bd8.txt",
+  "prompt_version": "b85ae2443f258bd8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546777-pk6xzszli72fN4dwxNAr",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004113,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00282,
+        "upstream_inference_cost": 0.004113,
+        "upstream_inference_prompt_cost": 0.001293
+      },
+      "is_byok": false,
+      "prompt_tokens": 1293,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1857
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could change the outcome. A person denied credit would not know what specific changes to their application would help.\",\n    \"audit_usefulness\": \"The feature weights and their relative importance offer some insight into model behavior, but the false negative (predicted 0, true 1) and moderate fidelity (0.72) suggest the explanation may not fully capture why the model erred. Useful for identifying which features drive decisions but limited for bias investigation.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but requires understanding that higher weights indicate stronger influence. Domain knowledge about credit features helps interpretation. Accessible to those familiar with credit scoring.\",\n    \"completeness\": \"Identifies the top contributing features (duration, installment_commitment, checking_status, purpose, housing, telephone) but doesn't explain their specific values, thresholds, or interactions. Missing context about why these particular feature values led to rejection.\",\n    \"concision\": \"The explanation is compact at 67 tokens with minimal padding. Each feature-weight pair is necessary information, though the list could be more selective by focusing only on the highest-impact features.\",\n    \"overall_quality\": \"A serviceable but limited explanation. It identifies relevant features but lacks depth, actionability, and context about feature values. The false negative case and moderate technical metrics (fidelity 0.72, faithfulness_gap 0.38) indicate the explanation may not fully capture the decision logic.\",\n    \"semantic_plausibility\": \"The identified features (duration, installment commitment, checking account status, loan purpose, housing status) are plausible credit risk factors in lending. However, the explanation doesn't clarify whether high or low values of these features drove the negative prediction, making it difficult to assess full plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:06:23.151535+00:00"
+}

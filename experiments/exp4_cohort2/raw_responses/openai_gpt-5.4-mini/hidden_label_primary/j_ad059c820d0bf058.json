@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4204b78d9c679eb0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ad059c820d0bf058",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4204b78d9c679eb0_183ac0c41bef26ec.txt",
+  "prompt_version": "183ac0c41bef26ec",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540182-VlCRC9Q7MwVacJk1Hu2r",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028935,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028935,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4204b78d9c679eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not tell the user what to change or what threshold matters, so it offers no practical recourse. It is just a list of features marked as active.\",\n    \"audit_usefulness\": \"It provides almost no insight into why the logreg model predicted class 1 beyond feature presence. Because every listed factor is shown with the same value, it is difficult to inspect model behavior or diagnose errors.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of 'top local factors' is not explained and the identical 1.0000 values are confusing. A non-expert would not understand how these features influenced the prediction.\",\n    \"completeness\": \"The explanation is incomplete for a local decision because it does not indicate direction, magnitude, or whether these factors increased the predicted class. It also omits any comparison to baseline or counterfactual evidence.\",\n    \"concision\": \"It is compact, but much of the content is repetitive and low-value because it lists many features without distinguishing importance. The result is not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and readable, but largely uninformative, non-actionable, and hard to use for understanding the specific prediction. The low fidelity and stability metrics are consistent with limited explanatory quality.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features are plausible for a logistic regression explanation, and the class prediction itself is not contradictory. However, showing all top factors with identical 1.0000 scores is semantically odd and undermines trust in the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:25.516164+00:00"
+}

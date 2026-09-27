@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_81154e2952398c40",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4e230a6771152fb2_13bd8041af355d48.txt",
+  "prompt_version": "13bd8041af355d48",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541504-yC9xzc6Ocg4PgiSViiis",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00309825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022995,
+        "upstream_inference_cost": 0.00309825,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1576
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features associated with the prediction, but it does not translate them into any concrete recourse or user-facing next steps. A person cannot tell what changes, if any, would move the outcome in the opposite direction.\",\n    \"audit_usefulness\": \"It is useful for a basic local inspection because it lists the main contributing features and their directions. However, the tiny effect sizes and lack of a baseline or class-probability context limit its usefulness for deeper auditing or bias analysis.\",\n    \"clarity\": \"The feature list is easy to scan, and the plus/minus signs convey direction at a glance. Still, the meaning of the numeric weights is not explained, so a non-expert may not understand how strongly each factor influenced the decision.\",\n    \"completeness\": \"The explanation covers several local drivers of the prediction, including occupation, capital gain, education, marital status, race, relationship, and sex. It does not provide the predicted probability, an intercept, or a clearer ranking of what most mattered, so the full local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and contains only the most relevant local factors without obvious redundancy. It is therefore fairly efficient, though the brevity comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"Overall, this is a modestly informative LIME explanation: it is readable and provides local feature signals, but the small magnitudes and limited context reduce its practical value. It is acceptable for a quick glance but not strong enough for thorough understanding or action.\",\n    \"semantic_plausibility\": \"The factors shown are plausible for an Adult-income style model, and the directions are not obviously contradictory. The presence of race and sex terms is also plausible in a learned model, though those terms may warrant scrutiny from an ethical auditing perspective.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:27.029643+00:00"
+}

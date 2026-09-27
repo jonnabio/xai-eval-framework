@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f582334ed305ed31",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cbdb515ea6b51b47_a7f8302e84875afa.txt",
+  "prompt_version": "a7f8302e84875afa",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546490-lY9eIT4Lw5t9kH0lYXba",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1233,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 845,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005616,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00462375,
+        "upstream_inference_cost": 0.005616,
+        "upstream_inference_prompt_cost": 0.00099225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1323,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2556
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without feature values or clear thresholds, providing no actionable pathway to alter the prediction.\",\n    \"audit_usefulness\": \"It highlights reliance on sensitive attributes such as sex and marital status, and reveals LIME's perturbation artifacts on one-hot encoded variables, making it somewhat useful for technical auditing.\",\n    \"clarity\": \"Presenting one-hot feature names paired with signed decimal weights requires technical literacy in machine learning to decipher.\",\n    \"completeness\": \"Ten local features are displayed, but the omission of actual feature values makes it difficult to understand how the model arrived at the negative prediction.\",\n    \"concision\": \"The output is compact and communicates the top attribution weights without extraneous narrative.\",\n    \"overall_quality\": \"The explanation is weak due to artifacts from one-hot encoding (e.g., negative weights for both sex categories) and missing input values.\",\n    \"semantic_plausibility\": \"Simultaneous negative attributions for mutually exclusive binary categories like sex_Male and sex_Female conflict with logical domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:01:39.510282+00:00"
+}

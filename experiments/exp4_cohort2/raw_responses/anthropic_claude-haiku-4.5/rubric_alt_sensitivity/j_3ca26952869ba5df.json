@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3ca26952869ba5df",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_7ce6884cc1cac353.txt",
+  "prompt_version": "7ce6884cc1cac353",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544656-1dMpaJBUrZnPoQS0QG6J",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003746,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002465,
+        "upstream_inference_cost": 0.003746,
+        "upstream_inference_prompt_cost": 0.001281
+      },
+      "is_byok": false,
+      "prompt_tokens": 1281,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1774
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what values would change the prediction or what actions are feasible. A person cannot determine what to modify to alter the outcome.\",\n    \"audit_usefulness\": \"Low fidelity (0.417) and stability (0.188) undermine confidence in the explanation. The false negative case and poor technical metrics make this unreliable for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is accessible to non-technical users. However, the meaning of the scores and why these features matter is not explained.\",\n    \"completeness\": \"Only top features are listed with weights, but no context about their actual values in this instance, their direction of influence, or how they interact. The explanation lacks sufficient detail to understand the local decision.\",\n    \"concision\": \"The explanation is brief and avoids redundancy, though it could be more efficient by omitting zero-weighted features or providing more insight per token.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical metrics (low fidelity and stability), a false negative prediction, and lack of actionable or contextual information. It provides minimal insight into why the model made this incorrect decision.\",\n    \"semantic_plausibility\": \"The identified features (education, capital gains, hours per week) are plausible predictors of income in the adult dataset. However, the explanation does not clarify their values or direction, making it difficult to assess full consistency with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:31:01.458458+00:00"
+}

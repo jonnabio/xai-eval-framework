@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eda6732d20ddcb14",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c3a6d29157145c8e_65c7a135f7d136a0.txt",
+  "prompt_version": "65c7a135f7d136a0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541890-mbWpZGKMLq3tFlFiNBo3",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 532,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00266,
+        "upstream_inference_cost": 0.003875,
+        "upstream_inference_prompt_cost": 0.001215
+      },
+      "is_byok": false,
+      "prompt_tokens": 1215,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1747
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to interpret them, what thresholds matter, or what clinical or operational actions should follow from this prediction. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"The ranked SHAP values clearly show which features drove the malignancy prediction, enabling an auditor to inspect model reliance on morphological features and check for bias. However, the explanation lacks feature values and direction of influence, limiting deeper investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of feature names with numerical contributions\u2014and requires minimal domain knowledge to parse. However, the meaning of SHAP values and their interpretation may not be immediately obvious to non-technical readers.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with quantified SHAP values, which captures the main local decision drivers. However, it omits actual feature values, prediction confidence, and the direction (positive/negative) of each contribution.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked features and their scores without padding. Each element contributes directly to understanding relative feature importance.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready, with strong stability and fidelity metrics, but lacks actionability and complete local context needed for clinical or operational decision-making. It serves model inspection well but falls short of end-user utility.\",\n    \"semantic_plausibility\": \"The top features (worst area, perimeter, radius, concave points) are well-established morphological predictors of breast cancer malignancy, aligning strongly with domain knowledge and clinical expectations. The ranking is medically coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:55.527532+00:00"
+}

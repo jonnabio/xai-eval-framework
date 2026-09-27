@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5d87ea599e9e4677",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bc528423616bc1fd",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_5d87ea599e9e4677_a91c49dd3634b919.txt",
+  "prompt_version": "a91c49dd3634b919",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538619-gzWIwlxo8QCCN4aa1TMX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003045,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.003045,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5d87ea599e9e4677\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not translate them into any concrete recourse or next steps for the user. It does not indicate what could be changed, what likely would not be changeable, or how the prediction might be affected.\",\n    \"audit_usefulness\": \"For an auditor, the sign and relative magnitude of several local factors are useful for checking whether the model relies on plausible attributes. However, the explanation is sparse and does not provide enough context to assess whether the model's reasoning is robust or potentially biased.\",\n    \"clarity\": \"The output is easy to read because it presents a short ranked list of feature contributions with numeric weights. A non-expert can follow the basic idea, although the meaning of positive versus negative contributions is not explicitly explained.\",\n    \"completeness\": \"The explanation covers several of the top local drivers, which helps explain the prediction at a basic level. Still, it lacks the baseline, class-level interpretation, and any richer context needed to fully understand why this particular instance was classified as 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It delivers a small amount of useful local information in a brief format, though the token budget is not used to add much interpretive value.\",\n    \"overall_quality\": \"Overall, this is a usable but limited local explanation: it is readable and somewhat informative, but it stops at feature weights and does not provide enough interpretive or actionable depth. Its main value is for quick inspection rather than strong decision support.\",\n    \"semantic_plausibility\": \"The listed features and directions are plausible for the Adult dataset and a binary income-style classification task. The combination of age, education, marital status, workclass, occupation, and relationship features is coherent with general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:22.805740+00:00"
+}

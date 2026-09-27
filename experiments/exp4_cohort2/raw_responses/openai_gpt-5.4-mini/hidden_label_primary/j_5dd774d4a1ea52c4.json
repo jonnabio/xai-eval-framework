@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5dd774d4a1ea52c4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c523b5e4b177b22e_dd0fafdac01365ca.txt",
+  "prompt_version": "dd0fafdac01365ca",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538674-jTsj3RI3B8TaNCitLc49",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003048,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.003048,
+        "upstream_inference_prompt_cost": 0.0008025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1070,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1569
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names factors that influenced the prediction, but it does not translate them into concrete recourse steps or tell the user what could be changed. A reviewer could infer some directions, yet no specific next actions are provided.\",\n    \"audit_usefulness\": \"The SHAP values expose the main local contributors and their signs, which is useful for inspecting model behavior. However, it lacks baseline context, feature units, and a comparison against similar cases, so it only partially supports deeper audit work.\",\n    \"clarity\": \"The list is compact and readable, and the sign of each contribution is easy to follow. Still, terms like checking_status_<0 or employment_4<=X<7 require some feature-coding knowledge, so it is not fully accessible to a non-expert.\",\n    \"completeness\": \"It identifies several top drivers of the prediction, including both positive and negative contributions, which gives a decent local picture. But it does not explain the predicted class in natural language or provide enough context to fully reconstruct why the model chose class 0.\",\n    \"concision\": \"The explanation is short and information-dense, with little obvious redundancy. It presents only the top local factors, making it efficient for the amount of content delivered.\",\n    \"overall_quality\": \"This is a fairly strong SHAP summary: it is compact, technically informative, and broadly coherent for the German credit domain. Its main weaknesses are the lack of actionable guidance and the use of encoded feature names that limit accessibility.\",\n    \"semantic_plausibility\": \"The factor pattern is plausible for credit risk, since longer duration, lack of checking status, low savings, and similar signals are commonly associated with poorer creditworthiness. The direction and mix of effects are consistent with a normal tabular credit model explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:16.840728+00:00"
+}

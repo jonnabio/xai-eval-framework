@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_88d79a04c715fdf5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_dc46675654a709a2_307502fbb55860f0.txt",
+  "prompt_version": "307502fbb55860f0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542500-pp7vMBOUPHb18ciBU0wi",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00357,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00235,
+        "upstream_inference_cost": 0.00357,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1690
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the decision boundary.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction with binary importance weights, enabling an auditor to inspect model reliance on education and marital status; however, the zero stability score and negative fidelity raise concerns about explanation reliability.\",\n    \"clarity\": \"The format is straightforward with feature names and weights clearly presented, though non-experts may struggle to interpret what anchor weights mean or why most features show 0.0000 importance.\",\n    \"completeness\": \"Only two features are identified as important (education-num and marital-status_Never-married), while many others are listed with zero weight; this sparse representation may omit contextual drivers of the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides minimal actionable insight and exhibits poor technical reliability (zero stability, negative fidelity), limiting its utility despite correct prediction and clear formatting.\",\n    \"semantic_plausibility\": \"For income prediction, education level and marital status are plausible drivers; however, the complete absence of other sociodemographic factors and the zero stability metric suggest the explanation may not be robust or representative of true model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:05.255243+00:00"
+}

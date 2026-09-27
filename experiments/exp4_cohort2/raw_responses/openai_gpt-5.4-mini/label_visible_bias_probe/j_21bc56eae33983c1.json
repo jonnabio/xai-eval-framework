@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d793ddda2393ae14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_21bc56eae33983c1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d793ddda2393ae14_6d0ac9a1d6714085.txt",
+  "prompt_version": "6d0ac9a1d6714085",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541845-ZQC7peIUQ8lqkSyyxqdD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.00282,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1500
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d793ddda2393ae14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or review steps. It only lists feature names and placeholder values, so a user cannot act on it.\",\n    \"audit_usefulness\": \"It gives a limited view of which features were considered locally, but the values are uninformative and do not show directionality or thresholds. This makes it weak for investigating model behavior or checking for bias/errors.\",\n    \"clarity\": \"The structure is readable, but the content is confusing because many features are paired with zeros or ones without interpretation. A non-expert would not understand what these numbers mean in relation to the prediction.\",\n    \"completeness\": \"It identifies a few top local factors, but it does not explain how they influenced the negative class prediction or what competing evidence existed. Key local decision context is missing.\",\n    \"concision\": \"The explanation is fairly short and not overly verbose, but much of the text is low-information repetition across feature names. It is compact, though not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is only partially informative, lacks interpretability, and offers little practical or diagnostic value. Its main benefit is that it names some local features, but even that is not enough to support understanding.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the breast cancer domain, and the prediction of the benign class fits the kind of features listed. However, the numeric formatting and many zero values make the explanation feel more like a placeholder than a coherent local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:07.761879+00:00"
+}

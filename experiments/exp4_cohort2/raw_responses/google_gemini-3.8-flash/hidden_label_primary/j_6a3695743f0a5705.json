@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_52ed2fe68041b4f8",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6a3695743f0a5705",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_52ed2fe68041b4f8_7ae501b8c667f517.txt",
+  "prompt_version": "7ae501b8c667f517",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541891-NnmuUGYdKw6UuvmcBzXa",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 674,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00492675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00399,
+        "upstream_inference_cost": 0.00492675,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2313
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_52ed2fe68041b4f8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directionality, making it impossible for a user to determine actionable steps for recourse.\",\n    \"audit_usefulness\": \"While it identifies that education-num and occupation are the active features in the rule, it omits the actual predicate conditions and thresholds necessary for thorough auditing.\",\n    \"clarity\": \"The format presents features alongside raw indicator scores without explanation or relational operators, requiring technical familiarity with the explainer to interpret.\",\n    \"completeness\": \"The explanation indicates which two features form the anchor but completely omits the condition predicates and directional impact on the prediction.\",\n    \"concision\": \"Including multiple irrelevant features with zero weights adds unnecessary clutter to what is essentially a two-feature rule.\",\n    \"overall_quality\": \"The explanation is limited because the anchor conditions have been reduced to indicator weights with zero-padded features, greatly diminishing its practical interpretability.\",\n    \"semantic_plausibility\": \"Education level and occupation type (Other-service) are intuitively consistent predictors of income classification in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:59.601310+00:00"
+}

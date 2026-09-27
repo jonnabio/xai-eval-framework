@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bca2b811be56a3fa",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6496b69e203cf5db_023743d1ed8097fd.txt",
+  "prompt_version": "023743d1ed8097fd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542118-A19kbT33ziXwuJ5wmcQ3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002868,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.002868,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete recourse path or specific changes that would alter the prediction. It only lists local factors with numeric values, so a user cannot tell what to do next.\",\n    \"audit_usefulness\": \"It gives only a weak snapshot of a few features and their local values, without showing counterfactual direction or how they influenced the false positive. The very low fidelity and stability further limit its value for auditing model behavior.\",\n    \"clarity\": \"The text is short and easy to read, but the meaning of the factor values is not explained, especially the many zeros. A non-expert would not understand why these features matter or how they relate to the prediction.\",\n    \"completeness\": \"It names only two apparently relevant features and then mostly zeros, so the main local decision logic is not well covered. For a false positive, it does not explain why the model predicted class 1 instead of 0.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but it is somewhat sparse in useful information. The brevity comes at the cost of interpretability and decision detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but not very informative, actionable, or reliable. It provides limited local insight into a false positive and is not strong enough for effective review.\",\n    \"semantic_plausibility\": \"The mentioned features are plausible for the Adult dataset, and married-civ-spouse and education level are reasonable factors in income prediction. However, the near-all-zero attribution pattern makes the explanation itself less convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:41.235758+00:00"
+}

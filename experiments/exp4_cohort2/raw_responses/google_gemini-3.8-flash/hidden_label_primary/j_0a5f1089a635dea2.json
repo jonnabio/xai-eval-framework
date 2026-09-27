@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0a5f1089a635dea2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f4658b35cc204bfb_bdbdae2256a06136.txt",
+  "prompt_version": "bdbdae2256a06136",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540732-O9E7K5xi4IfGBXyquz5l",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 994,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 600,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004662,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0037275,
+        "upstream_inference_cost": 0.004662,
+        "upstream_inference_prompt_cost": 0.0009345
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2240
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation presents counterfactual perturbation frequencies as raw importance values without concrete target values, and suggests changing immutable characteristics like native country.\",\n    \"audit_usefulness\": \"It highlights heavy reliance on native country and occupation, which is valuable for identifying potential bias, but lacks directionality and baseline feature values.\",\n    \"clarity\": \"The format lists raw one-hot encoded feature names and numeric values without explanation of what the scores represent to an end user.\",\n    \"completeness\": \"Only two features carry non-zero weights while major known income drivers are zeroed out, providing very limited insight into the decision boundary.\",\n    \"concision\": \"Most of the text is taken up by features with zero importance, adding unnecessary noise rather than focusing on key drivers.\",\n    \"overall_quality\": \"The explanation reduces counterfactual reasoning to an uninformative list padded with zero-weight features and lacks actionable guidance.\",\n    \"semantic_plausibility\": \"Attributing the highest decision weight to a specific origin country like Honduras is counterintuitive for high income prediction, reflecting likely model artifacts or severe bias.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:25:40.893768+00:00"
+}

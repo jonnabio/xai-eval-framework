@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3d663bc47eb8d69",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_dd0d5f5b4d5c82fb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d3d663bc47eb8d69_cc7d886133cd2ed5.txt",
+  "prompt_version": "cc7d886133cd2ed5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544036-OuqQJjuF6pMAqwNgTT9f",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 963,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 558,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00453375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00361125,
+        "upstream_inference_cost": 0.00453375,
+        "upstream_inference_prompt_cost": 0.0009225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2193
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3d663bc47eb8d69\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attributions for clinical measurements without providing actionable medical guidance, recourse, or next steps.\",\n    \"audit_usefulness\": \"The feature attributions show the primary factors driving this false negative prediction toward class 0, though the absence of baseline values and actual feature measurements limits in-depth debugging.\",\n    \"clarity\": \"The raw list of feature names and numeric SHAP values is straightforward for technical users, but difficult for non-experts to interpret without directional framing.\",\n    \"completeness\": \"The explanation covers the top ten local drivers with their relative directions, but omits the baseline value, model probability, and actual input feature values.\",\n    \"concision\": \"The text presents the essential top factors and their numerical weights directly without filler words or redundant formatting.\",\n    \"overall_quality\": \"This is an acceptable technical summary of local feature importance, but its utility is tempered by the lack of feature values and layperson interpretability.\",\n    \"semantic_plausibility\": \"The highlighted features\u2014such as perimeter, area, and concavity metrics\u2014are clinically well-established morphological markers in breast cancer diagnostics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:20:45.155535+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_43611a43ecf0e17a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28188c86ac4bdfad_69a35db188b951f9.txt",
+  "prompt_version": "69a35db188b951f9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541873-ql65Y9zNMXil9o9rJ1Hz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003915,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.003915,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1767
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction or what actions a user should take. The negative coefficients suggest factors pushing toward class 0, but no recourse pathway is offered.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model inspection and help identify which features drive the prediction, enabling auditors to assess whether the model relies on protected attributes like sex. However, the low fidelity (0.67) and high faithfulness gap (0.16) limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature-coefficient pairs with clear formatting, making it accessible to readers with basic statistical literacy. However, the lack of contextual interpretation or narrative reduces clarity for non-technical audiences.\",\n    \"completeness\": \"The explanation covers the top 10 features and their local contributions, which captures the main drivers of the prediction. However, it does not provide the actual feature values for this instance, limiting full understanding of the decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature names and weights. The token count (84) is efficient for the information conveyed.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks interpretability depth and actionability. The moderate fidelity and stability issues, combined with absence of narrative context, result in a functional but limited explanation.\",\n    \"semantic_plausibility\": \"The feature directions are plausible for income prediction (e.g., local government work and being unmarried negatively associated with high income), and the model correctly predicts class 0 matching the true label. The explanation aligns with domain expectations for income classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:38.530099+00:00"
+}

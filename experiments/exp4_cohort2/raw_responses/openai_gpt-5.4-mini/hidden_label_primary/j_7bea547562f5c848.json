@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_df5a815f94424dc9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7bea547562f5c848",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_df5a815f94424dc9_b91845bc55525cf8.txt",
+  "prompt_version": "b91845bc55525cf8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539739-WdCBrf0vxp1GzpPvQeM4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00301725,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_df5a815f94424dc9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It only lists features with binary-like weights, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It gives some local feature participation information, but the all-or-nothing formatting and lack of directionality limit its value for auditing model behavior. The low fidelity and stability metrics further suggest it is not reliable for deeper investigation.\",\n    \"clarity\": \"The output is syntactically simple, but the meaning of the 1.0000/0.0000 values is not explained and may confuse non-experts. It is readable, yet not truly self-explanatory.\",\n    \"completeness\": \"It names a few top local factors, but omits how they relate to the negative prediction or whether they increased or decreased the decision. There is no threshold, comparison baseline, or interaction context, so the local decision picture is incomplete.\",\n    \"concision\": \"The explanation is short, but much of the content is repetitive and low-information because many listed factors are simply zeroed out. It is compact, though not especially information-dense.\",\n    \"overall_quality\": \"This is a weak explanation: it is somewhat readable and locally relevant, but it lacks actionable guidance, interpretive depth, and sufficient decision context. The technical metrics also indicate low fidelity and poor stability, which further reduces trust.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers for the Adult dataset, and age, education, and capital-gain are reasonable variables for income prediction. However, the 1.0000 values for the top factors and 0.0000 for others are not intuitively informative, making the explanation only moderately plausible in practice.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:03.906150+00:00"
+}

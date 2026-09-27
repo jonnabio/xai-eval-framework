@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b26a880cab07ffcf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_679cae8cfc0b290c_0d12b36368296bf2.txt",
+  "prompt_version": "0d12b36368296bf2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539968-iXqOl0M5dtURIpDPsnuP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 545,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00324375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0024525,
+        "upstream_inference_cost": 0.00324375,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1600
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists feature values, mostly as zero changes, without saying what to change or by how much. The single strong factor, education-num, is not translated into a feasible user action.\",\n    \"audit_usefulness\": \"It gives limited audit value because it exposes one dominant local driver and shows the explanation is extremely sparse, but it does not indicate directionality, relative contributions, or why the model predicted class 1. Still, the high stability and low faithfulness suggest the explanation can help flag a potentially weak local explanation method.\",\n    \"clarity\": \"The text is easy to read at a surface level because it is short and uses simple listing format. However, the meaning of the zero-valued entries and the significance of education-num: 5.6342 are unclear to a non-expert.\",\n    \"completeness\": \"The explanation is incomplete for understanding the specific prediction because it mostly reports one nonzero feature and many irrelevant zeros. It lacks a clear description of how the features combined to produce the positive class and omits the actual effect direction or comparison to a baseline.\",\n    \"concision\": \"It is very short and mostly avoids redundancy, but much of the content is uninformative because many listed factors are zero. This makes it compact in length but not maximally informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is weak: it is sparse, only partially interpretable, and offers little decision insight beyond a single feature mention. The high stability is offset by low fidelity and very low sparsity usefulness, so the explanation is acceptable as a minimal summary but not strong as an XAI output.\",\n    \"semantic_plausibility\": \"The feature names and the presence of education-num as a key factor are plausible for the Adult dataset and a logistic regression model. However, the many zero-valued factors and the lack of any directional explanation make the local story only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:52.328748+00:00"
+}

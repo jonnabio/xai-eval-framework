@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_63eea7efc199638f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_7e2161bb490167c3.txt",
+  "prompt_version": "7e2161bb490167c3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549235-7T0fBDkFpqyMxjkXtGC1",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1385,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 980,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006186,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00519375,
+        "upstream_inference_cost": 0.006186,
+        "upstream_inference_prompt_cost": 0.00099225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1323,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2708
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating the actual feature values or actionable thresholds needed to alter the model's prediction.\",\n    \"audit_usefulness\": \"It provides useful clues for an auditor regarding why a false negative occurred (e.g., negative influence from low education and missing workclass/occupation), though low fidelity and tiny effect sizes limit deep diagnostic utility.\",\n    \"clarity\": \"The explanation uses raw variable tokens, missing value indicators (nan), and small numeric weights that require technical familiarity to understand.\",\n    \"completeness\": \"Ten local factors are listed, but the absence of raw feature values and baseline context makes it difficult to fully reconstruct the model's decision logic.\",\n    \"concision\": \"The presentation is compact and delivers key feature attributions directly without unnecessary filler.\",\n    \"overall_quality\": \"A weak explanation overall, hindered by low fidelity, lack of instance feature values, and relatively opaque raw coefficient representations.\",\n    \"semantic_plausibility\": \"Low education and missing employment data pushing toward lower income is domain-plausible, though the signs on marital status categories slightly run counter to typical Adult dataset patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:47:24.558073+00:00"
+}

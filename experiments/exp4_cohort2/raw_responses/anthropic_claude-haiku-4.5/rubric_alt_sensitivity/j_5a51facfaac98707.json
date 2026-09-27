@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5a51facfaac98707",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6af7798c2cb4bb08_f8223dd5f869273f.txt",
+  "prompt_version": "f8223dd5f869273f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545276-Lrbi9Xzc5x7LxEsR5rpu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003952,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00265,
+        "upstream_inference_cost": 0.003952,
+        "upstream_inference_prompt_cost": 0.001302
+      },
+      "is_byok": false,
+      "prompt_tokens": 1302,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1832
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person denied credit would not know what specific changes to their circumstances would lead to approval.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings offer quantitative insight into model behavior useful for auditing. However, the false negative (predicted 0, true 1) suggests the model may be overly conservative, and the explanation alone doesn't reveal systematic bias patterns without deeper investigation.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and coefficients) and requires understanding of machine learning concepts. Non-technical stakeholders would struggle to interpret what negative/positive values mean for their credit decision.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which represents the main local factors. However, it doesn't explain the decision threshold, base rate, or why these factors collectively led to rejection despite the true label being approval.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line contains a feature name and numerical contribution. The format is efficient for the information conveyed.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies relevant features and their directional impact, but the false negative case, low fidelity (0.75), and lack of actionable guidance reduce its utility. The technical presentation also limits accessibility.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment (checking status, age, savings, credit history are standard predictors). However, the false negative raises questions about whether the model's logic is sound\u2014the true label suggests these features should have supported approval.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:41:21.844655+00:00"
+}

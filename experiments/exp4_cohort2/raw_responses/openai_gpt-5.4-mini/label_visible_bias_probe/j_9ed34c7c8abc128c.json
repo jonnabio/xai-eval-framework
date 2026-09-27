@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9ed34c7c8abc128c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f4658b35cc204bfb_48bbe04df4c22a52.txt",
+  "prompt_version": "48bbe04df4c22a52",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541876-hVr8VzFdcSmw319urpry",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.00300225,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1543
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, only a few listed factors with no guidance on how changing them would affect the prediction. It is therefore not useful for a user trying to act on the result.\",\n    \"audit_usefulness\": \"It gives a small glimpse of local feature influence, but the values are not clearly interpretable as effects and the near-zero scores for most features limit diagnostic value. With a false positive case, it is insufficient for serious error analysis.\",\n    \"clarity\": \"The explanation is short and mechanically readable, but the feature names and numeric values are not explained in plain language. A non-expert would struggle to understand what the listed factors mean or how they relate to the prediction.\",\n    \"completeness\": \"Only two features are shown as influential, while the rest are all zeroed out, so the local decision context is very thin. It does not explain why the model predicted class 1 or how the features combine to produce the false positive.\",\n    \"concision\": \"The output is compact and avoids long prose, but it is not very informative relative to its length because most features are shown with zero values. The formatting is concise, though not especially efficient in communicating useful insight.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and readable, but it lacks interpretability, actionability, and sufficient local context. Its utility is especially limited given the false-positive outcome and the unclear meaning of the reported factor scores.\",\n    \"semantic_plausibility\": \"The highlighted factors are at least plausible for the Adult dataset, since country and occupation can influence income prediction. However, the all-zero importance pattern for most features and the lack of explanatory context make it only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:39.383024+00:00"
+}

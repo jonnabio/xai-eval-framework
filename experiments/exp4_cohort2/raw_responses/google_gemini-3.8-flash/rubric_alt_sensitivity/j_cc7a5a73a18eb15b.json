@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_cc7a5a73a18eb15b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a5e759675f7b81c4_3965915dd39c1a0e.txt",
+  "prompt_version": "3965915dd39c1a0e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549329-TGoCVnIpGWvmUOv3p1tf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1005,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0062355,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0052425,
+        "upstream_inference_cost": 0.0062355,
+        "upstream_inference_prompt_cost": 0.000993
+      },
+      "is_byok": false,
+      "prompt_tokens": 1324,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2722
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a5e759675f7b81c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only gives an attribution weight for marital status without specifying counterfactual values or actionable steps, and marital status is not readily actionable.\",\n    \"audit_usefulness\": \"It highlights heavy reliance on marital status, which is useful for checking potential proxy bias, but offers no insight into other model variables.\",\n    \"clarity\": \"The raw feature string and decimal format are somewhat technical, though simple enough to interpret with slight domain context.\",\n    \"completeness\": \"Only a single feature receives non-zero attribution, leaving out other crucial predictors like education, age, or work hours.\",\n    \"concision\": \"Nine out of the ten listed features have a score of zero, needlessly padding the output with uninformative values.\",\n    \"overall_quality\": \"The explanation is weak because it reduces the model's logic to a single feature and pads the rest with zeros, offering minimal holistic insight.\",\n    \"semantic_plausibility\": \"Marital status (specifically being married) is well-documented as one of the strongest positive associations with higher income in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:49:02.084210+00:00"
+}

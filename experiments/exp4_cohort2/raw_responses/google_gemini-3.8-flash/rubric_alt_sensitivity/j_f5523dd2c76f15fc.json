@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f5523dd2c76f15fc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9a991f3bd7709007_d2f884dfc1061d12.txt",
+  "prompt_version": "d2f884dfc1061d12",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548231-HIJabrBSgSsPZuYxqqUs",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 928,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 529,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004461,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00348,
+        "upstream_inference_cost": 0.004461,
+        "upstream_inference_prompt_cost": 0.000981
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2236
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values for biological/cytological features without actionable advice or counterfactual thresholds for changing the outcome.\",\n    \"audit_usefulness\": \"It provides the signed contributions of the top 10 features, which helps an auditor understand why the model incorrectly predicted positive (FP) through features like concave points and worst area.\",\n    \"clarity\": \"It presents raw feature names and signed SHAP floats with no baseline or intuitive explanation, making it difficult for non-technical users to interpret.\",\n    \"completeness\": \"The top 10 local SHAP values capture the primary drivers of the prediction, though the actual feature values are missing.\",\n    \"concision\": \"The explanation is concise and information-dense, presenting the feature contributions directly without filler text.\",\n    \"overall_quality\": \"A standard, serviceable local feature-attribution explanation that provides reasonable diagnostic utility for technical users despite lacking lay clarity and actionability.\",\n    \"semantic_plausibility\": \"Features like mean concave points, worst concave points, and worst area driving positive cancer predictions strongly aligns with clinical oncology literature.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:30:41.115020+00:00"
+}

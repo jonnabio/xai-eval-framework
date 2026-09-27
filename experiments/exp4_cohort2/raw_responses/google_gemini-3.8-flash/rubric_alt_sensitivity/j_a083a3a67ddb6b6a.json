@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a083a3a67ddb6b6a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d3748ef854fdb49f_57f473a42a85d7e8.txt",
+  "prompt_version": "57f473a42a85d7e8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546627-XY5mV3JDx7r6nJTlQeKx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1004,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 614,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0047565,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003765,
+        "upstream_inference_cost": 0.0047565,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2326
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides static feature importance weights without showing feature values or actionable counterfactual paths to change the outcome.\",\n    \"audit_usefulness\": \"It provides clear quantitative attributions for the top local drivers, including protected attributes like sex and marital status, which is valuable for auditing bias and model behavior.\",\n    \"clarity\": \"The explanation consists of raw one-hot encoded feature names paired with floating-point values, which requires technical familiarity to interpret.\",\n    \"completeness\": \"It enumerates the top ten contributing features and their specific local attributions, covering the primary components of the model's prediction.\",\n    \"concision\": \"The presentation is compact and directly reports the top factors without unnecessary filler.\",\n    \"overall_quality\": \"A solid, standard local feature attribution output that clearly identifies the main model inputs, though limited by raw technical formatting and a lack of feature values.\",\n    \"semantic_plausibility\": \"The highlighted features\u2014such as education level, professional specialty, and marital status\u2014align closely with standard socio-economic determinants of income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:03:55.267617+00:00"
+}

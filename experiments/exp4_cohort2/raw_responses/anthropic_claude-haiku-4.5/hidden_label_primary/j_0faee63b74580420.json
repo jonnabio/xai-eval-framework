@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0faee63b74580420",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1759e90b50c033fd_e6d340814e12d266.txt",
+  "prompt_version": "e6d340814e12d266",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540436-zM9tPs4rUkumg11Vd97p",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003727,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00248,
+        "upstream_inference_cost": 0.003727,
+        "upstream_inference_prompt_cost": 0.001247
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1743
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to challenge the prediction, modify inputs, or take corrective action; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"SHAP contributions with directional signs enable inspection of model logic and feature importance ranking, supporting bias and error investigation, though the low stability (0.297) raises concerns about explanation robustness.\",\n    \"clarity\": \"The format is straightforward\u2014feature names paired with SHAP values\u2014but requires familiarity with SHAP methodology and credit domain terminology; non-experts may struggle to interpret the semantic meaning of features like 'checking_status_no checking'.\",\n    \"completeness\": \"The top 10 features are presented with their contributions, covering the main local drivers; however, the base prediction value and model confidence are absent, limiting full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently conveying feature rankings and directional impacts within 80 tokens without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks actionability and user-friendly interpretation; the low stability metric (0.297) and moderate faithfulness gap (0.217) suggest the explanation may not reliably represent model behaviour across similar instances.\",\n    \"semantic_plausibility\": \"Feature contributions are plausible in a credit context (checking account status and loan purpose are relevant), but the absence of confidence scores and true label prevents full validation of coherence with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:42.243823+00:00"
+}

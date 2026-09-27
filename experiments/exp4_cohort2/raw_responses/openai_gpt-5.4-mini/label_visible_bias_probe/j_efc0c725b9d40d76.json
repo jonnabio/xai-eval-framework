@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_efc0c725b9d40d76",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_44c1e011120b2dd5_90af080b6db5d111.txt",
+  "prompt_version": "90af080b6db5d111",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541480-qxKAmpqPhNr6Cje96LBv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00310125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002313,
+        "upstream_inference_cost": 0.00310125,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step, only a ranked list of contributing features. A user cannot tell what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local feature drivers and their directions, which helps inspect whether the model relies on medically sensible patterns. However, it lacks context about feature values and class-specific thresholds, so the audit value is only partial.\",\n    \"clarity\": \"The wording is straightforward and the SHAP values are presented in a compact ranked list that a non-expert can follow at a high level. Still, the meaning of positive versus negative contributions may not be immediately obvious without some explanation of the prediction baseline.\",\n    \"completeness\": \"The explanation lists the top local contributors, but it does not show the actual feature values, the baseline output, or how these contributions combine to produce the final class 0 prediction. Because this is a false negative, the absence of the instance context limits understanding of why the malignant case was missed.\",\n    \"concision\": \"The explanation is fairly compact and mostly avoids redundancy while still listing the main factors. It could be slightly more informative by explaining the sign convention or grouping related features, but overall it is efficient.\",\n    \"overall_quality\": \"This is a solid SHAP explanation with good local feature ranking and decent interpretability, but it is limited by the lack of instance values, baseline context, and actionable guidance. It is useful for inspection yet not sufficient for deep understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed drivers are highly plausible for the breast cancer domain, since radius, perimeter, area, and concavity are known to be relevant morphological features. The pattern of influential measures is coherent with expected medical signals, even though the sign pattern is not fully explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:03.396272+00:00"
+}

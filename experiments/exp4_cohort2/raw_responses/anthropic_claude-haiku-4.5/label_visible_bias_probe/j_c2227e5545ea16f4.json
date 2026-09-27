@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c2227e5545ea16f4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b60690c60417e4de_98b0298aee0fa745.txt",
+  "prompt_version": "98b0298aee0fa745",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541264-1W1m3IZW3S81OIZYVY9c",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00365,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002415,
+        "upstream_inference_cost": 0.00365,
+        "upstream_inference_prompt_cost": 0.001235
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1718
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction or what actions a user should take; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model inspection and can help identify whether the model relies on protected attributes or spurious correlations, though the low stability (0.006) and high faithfulness gap (0.43) undermine confidence in the explanation's reliability.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and weights, which is easy to parse; however, the technical format and lack of contextual interpretation may challenge non-expert readers.\",\n    \"completeness\": \"The explanation covers the top 10 local factors and includes both positive and negative contributions, providing reasonable coverage of the decision drivers for this instance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and numerical weights without extraneous text.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in utility; while it identifies key factors, the poor stability, large faithfulness gap, and lack of actionability or context significantly diminish its practical value, especially given the false positive prediction.\",\n    \"semantic_plausibility\": \"The factors (capital gain, occupation, education, marital status) are plausible predictors of income in the adult dataset; however, the false positive prediction and weak technical metrics raise concerns about whether the explanation reflects genuine model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:29.260058+00:00"
+}

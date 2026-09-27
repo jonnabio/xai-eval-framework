@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_521aba01bf420ede",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7b78e47140c1369b_37d698739cc8062a.txt",
+  "prompt_version": "37d698739cc8062a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540116-akD8RqKRD2WhsJleH3Qm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 456,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00284475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002052,
+        "upstream_inference_cost": 0.00284475,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1513
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or a clear counterfactual beyond indicating capital-gain as the main factor. A user cannot tell what specific change would likely alter the prediction.\",\n    \"audit_usefulness\": \"It gives only a sparse list of local factors with many zero-valued entries, which is weak for diagnosing model logic or potential errors. The near-perfect fidelity metric helps technically, but the explanation itself offers little inspectable structure.\",\n    \"clarity\": \"The wording is simple, but the content is awkward and largely uninformative because most listed features are zero and unexplained. A non-expert would struggle to infer why the prediction was made.\",\n    \"completeness\": \"It identifies capital-gain as the only meaningful factor, but omits directionality, baseline comparison, and any interaction context. That is not enough to fully understand the specific prediction.\",\n    \"concision\": \"The output is short, but much of that brevity is spent on redundant zero-valued features rather than useful information. It is not especially informative per token.\",\n    \"overall_quality\": \"The explanation is technically compact and likely faithful, but it is too sparse and repetitive to be genuinely useful for understanding or acting on the prediction. Overall, it is acceptable only as a minimal local attribution summary.\",\n    \"semantic_plausibility\": \"For the Adult dataset, capital-gain is a plausible strong driver of predicting income above $50K, so the main signal is contextually sensible. However, the many zero attributions without interpretation make the presentation somewhat unnatural.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:19.732657+00:00"
+}

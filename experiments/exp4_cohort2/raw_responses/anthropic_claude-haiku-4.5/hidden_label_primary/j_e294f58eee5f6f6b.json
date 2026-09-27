@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e294f58eee5f6f6b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e475cad54cb8d814_8e5713baf19e66dd.txt",
+  "prompt_version": "8e5713baf19e66dd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539062-oBMRAO7MqE68q4Vmapbo",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003617,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002395,
+        "upstream_inference_cost": 0.003617,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1701
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what thresholds matter, or what clinical or operational actions should follow from the prediction.\",\n    \"audit_usefulness\": \"The ranked SHAP values enable inspection of which features drove the prediction and their relative importance, supporting model behaviour investigation and bias detection in feature contributions.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of feature names with numerical contributions\u2014but lacks context on what positive/negative values mean or how to interpret magnitudes for a non-expert reader.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which addresses the main local drivers; however, it omits the base prediction value and does not explain how these contributions combine to reach the final prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and values without padding; however, the token count and sparsity metrics suggest room for efficiency gains.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks interpretability scaffolding for end users; low fidelity (0.67) and moderate stability (0.58) raise concerns about explanation reliability.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, morphological features like concave points and texture are clinically relevant predictors; the feature selection is plausible, though the explanation does not contextualize their clinical significance.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:47.414759+00:00"
+}

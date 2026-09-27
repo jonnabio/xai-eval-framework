@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4b7d26d2e21a1f2d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cad1d6dbc8b4e027_db85c2484d2e6b06.txt",
+  "prompt_version": "db85c2484d2e6b06",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546360-mj6kgN7cLsBrCrDnsIvJ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 937,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005826,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004905,
+        "upstream_inference_cost": 0.005826,
+        "upstream_inference_prompt_cost": 0.000921
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2536
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because every listed feature has an effect size of zero, it offers no guidance on what influenced the outcome or how to achieve recourse.\",\n    \"audit_usefulness\": \"The explanation provides zero audit value regarding the model's inner decision logic, representing an explainer failure where all coefficients collapsed to zero.\",\n    \"clarity\": \"The text structure is readable, but presenting exclusively zero and negative zero weights creates immediate confusion for the reader.\",\n    \"completeness\": \"None of the actual local decision drivers are communicated, leaving the positive classification completely unexplained.\",\n    \"concision\": \"The explanation lists ten features that contribute zero information, making the text unnecessarily long for its lack of informative content.\",\n    \"overall_quality\": \"This is a degenerate explanation that completely fails to explain the prediction due to all-zero feature weights.\",\n    \"semantic_plausibility\": \"Claiming that none of the top features have any impact on the prediction contradicts the fact that a positive prediction was made.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:59:31.157849+00:00"
+}

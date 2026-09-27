@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8569f49081305637",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_684b5cb9c7041df2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8569f49081305637_40699e0acf17d776.txt",
+  "prompt_version": "40699e0acf17d776",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542649-q6E16nIOPcAtfzIeNPDQ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 827,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005436,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044925,
+        "upstream_inference_cost": 0.005436,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2456
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8569f49081305637\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary inclusion flags without indicating feature values, directional impact, or necessary thresholds for changing the outcome.\",\n    \"audit_usefulness\": \"While identifying three active features gives partial clues about the model's focus, the absence of inequality conditions or rules restricts meaningful auditability.\",\n    \"clarity\": \"The raw key-value format does not convey what the values represent, making it confusing for non-expert readers.\",\n    \"completeness\": \"The explanation omits the actual rule predicates and decision thresholds, leaving an incomplete view of the local decision boundary.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the explanation with irrelevant text that could easily be omitted.\",\n    \"overall_quality\": \"The representation degrades the utility of Anchors by dropping predicate rules and retaining extraneous zero-valued entries.\",\n    \"semantic_plausibility\": \"Focusing on checking status, duration, and loan purpose aligns with standard credit risk assessment factors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:38.581562+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2899402cbfd8ca62",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b11abd9ec480a4aa_064ed741482797cc.txt",
+  "prompt_version": "064ed741482797cc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539323-Lik2n7BpERkNWY4SokSV",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1054,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 659,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00489375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039525,
+        "upstream_inference_cost": 0.00489375,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2309
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output merely lists numerical attribution weights without actionable guidance, counterfactual paths, or the subject's baseline feature values.\",\n    \"audit_usefulness\": \"It provides a clear view of the surrogate model's signed feature weights for debugging bias and feature influence, though low fidelity and stability metrics limit reliance.\",\n    \"clarity\": \"The explanation is presented as a raw list of one-hot encoded feature weights, requiring familiarity with machine learning and feature attribution to parse.\",\n    \"completeness\": \"While it captures ten contributing features, it omits the instance's actual feature values, intercept, and prediction probability scale, leaving local context incomplete.\",\n    \"concision\": \"The explanation is compact and avoids conversational filler, conveying top local attribution weights directly.\",\n    \"overall_quality\": \"The explanation provides standard technical feature attributions that make domain sense, but its lack of instance values and actionable recourse limits utility.\",\n    \"semantic_plausibility\": \"The direction of effects largely aligns with known socioeconomic patterns in the Adult dataset, such as negative weights for Other-service occupation and high school education.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:11.317868+00:00"
+}

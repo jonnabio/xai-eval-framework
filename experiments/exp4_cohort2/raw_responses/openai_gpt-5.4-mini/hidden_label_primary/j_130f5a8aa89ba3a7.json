@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_130f5a8aa89ba3a7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_36ff2c1056b28459_c800b9705300e372.txt",
+  "prompt_version": "c800b9705300e372",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540323-oqrbMAteFd1ykiCRiy5F",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029565,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.0029565,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps. It lists a single positive factor and several zero-valued entries, but does not say what change would alter the prediction.\",\n    \"audit_usefulness\": \"It provides little insight into the model\u2019s local behavior because most listed factors have zero contribution and the only nonzero item is oddly specific. That makes it hard to inspect whether the model is relying on meaningful or spurious signals.\",\n    \"clarity\": \"The wording is short and easy to parse, but the output is confusing because many features are shown with 0.0000 and the meaning of 'top local factors' is not explained. A non-expert would struggle to understand why these are the important factors.\",\n    \"completeness\": \"It is incomplete for understanding this false-negative prediction because it does not identify the main drivers pushing toward class 0. The explanation omits a clear direction of influence for most features and gives no counterfactual context.\",\n    \"concision\": \"The explanation is compact, but not very information-dense because most tokens are spent on zero-valued features. It conveys little useful content relative to its length.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is short and superficially readable, but it lacks meaningful decision support, interpretability, and audit value. The single nonzero feature is not enough to explain the prediction well.\",\n    \"semantic_plausibility\": \"The content is internally coherent and the listed features belong to the Adult dataset, so it is at least plausible. However, the heavy concentration of zero contributions makes the explanation semantically unconvincing as a true account of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:46.958181+00:00"
+}

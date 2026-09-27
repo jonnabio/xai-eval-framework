@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0a2c56d8240af39c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8fce321dd80c84b7_45324a13a6777a92.txt",
+  "prompt_version": "45324a13a6777a92",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542672-lpsYzAgQwReJ2PKh9JP3",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003986,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.003986,
+        "upstream_inference_prompt_cost": 0.001236
+      },
+      "is_byok": false,
+      "prompt_tokens": 1236,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1786
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. The binary/categorical nature of some features (personal_status, foreign_worker) makes recourse unclear.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction but the low fidelity (0.65) and high faithfulness_gap (0.33) suggest the anchors may not reliably represent model behaviour. The zero-weighted features provide limited insight into why they were excluded from the decision.\",\n    \"clarity\": \"The explanation uses technical feature names and numerical weights without context or interpretation, requiring domain knowledge of the German credit dataset to understand what 'personal_status_male mar/wid' or 'foreign_worker_no' mean in practical terms.\",\n    \"completeness\": \"Only three features are highlighted as anchors while ten features are listed with zero weight; the explanation lacks information about why certain features were excluded or how the model integrates these factors into the final prediction.\",\n    \"concision\": \"The explanation is compact in token count but includes redundant zero-weight features that add little informational value; a more concise version could omit features with zero contribution.\",\n    \"overall_quality\": \"The explanation provides minimal actionable insight due to low fidelity metrics, unclear feature semantics, and lack of interpretive context. While technically correct as an anchor extraction, it fails to meaningfully communicate the decision logic to non-expert users.\",\n    \"semantic_plausibility\": \"The identified anchors (longer loan duration, male marital status, non-foreign worker status) are plausible predictors of credit approval in a traditional lending context, though the zero-weighting of age and credit amount is somewhat counterintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:58.260164+00:00"
+}

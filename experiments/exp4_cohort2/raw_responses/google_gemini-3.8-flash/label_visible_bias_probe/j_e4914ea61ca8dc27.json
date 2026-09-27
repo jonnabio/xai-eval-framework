@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e4914ea61ca8dc27",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_44c1e011120b2dd5_90af080b6db5d111.txt",
+  "prompt_version": "90af080b6db5d111",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542166-ZoYKCfq2bYS5vjx3gCKA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 560,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004392,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00347625,
+        "upstream_inference_cost": 0.004392,
+        "upstream_inference_prompt_cost": 0.00091575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2148
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse, which is expected given that tumor morphological characteristics cannot be altered by a patient.\",\n    \"audit_usefulness\": \"The signed SHAP values clearly show which features drove the false negative prediction toward class 0, facilitating effective technical auditing.\",\n    \"clarity\": \"The raw list of technical feature names and signed SHAP values requires background knowledge to interpret correctly.\",\n    \"completeness\": \"The top ten drivers and their directional contributions are listed, though the underlying feature values and base value are omitted.\",\n    \"concision\": \"The summary is direct and dense with information, presenting key attributions without unnecessary filler.\",\n    \"overall_quality\": \"This is a solid technical explanation that is well-suited for model debugging and audit, despite lacking lay clarity and feature values.\",\n    \"semantic_plausibility\": \"The negative contributions from lower cell dimensions pulling the model toward a benign prediction are consistent with clinical pathology expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:33.861201+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_51f9ae057da238ff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cbdb515ea6b51b47_6835d0c85f7a806f.txt",
+  "prompt_version": "6835d0c85f7a806f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541181-bIBuDYF9lGpdF0tbLTlF",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002904,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.002904,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the individual, beyond listing factors that influenced the prediction. It is not specific enough to support a meaningful action plan.\",\n    \"audit_usefulness\": \"It identifies the top local features and their directions, which is useful for a basic audit of model behavior. However, the weak stability and moderate faithfulness limit its reliability for deeper bias or error investigation.\",\n    \"clarity\": \"The output is short and uses a simple ranked list, so a reader can quickly see which variables pushed the prediction up or down. Some feature names are still technical, but the overall structure is easy to follow.\",\n    \"completeness\": \"It covers the main local drivers among the top LIME weights, but it does not explain the base prediction, feature values for the instance, or how strongly each factor contributed in context. For a false negative, that missing context makes the decision only partially understandable.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. It conveys the key factors in a small number of tokens without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a reasonably clear and concise local explanation, but it is limited by incomplete context and only moderate trustworthiness. It is useful as a quick summary, yet not strong enough for robust review or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income style model, especially marital status, education, sex, and capital gain. The sign pattern is also broadly consistent with a linear local surrogate explanation, even though some feature directions may be hard to interpret without the instance values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:04.437211+00:00"
+}

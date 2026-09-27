@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_426d44842cf642f9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4919484756fd435e_83475a98278bed8d.txt",
+  "prompt_version": "83475a98278bed8d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542178-fpE82j9CeqK5MCeLRy2Z",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031455,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002358,
+        "upstream_inference_cost": 0.0031455,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1574
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide specific recourse or next steps; it only lists features and one large value for education-num without translating that into actionable guidance. A user cannot tell what to change or review to affect the prediction.\",\n    \"audit_usefulness\": \"It offers limited audit value because it exposes a sparse set of local factors, but the many zero-valued entries and lack of directional effects make it hard to inspect why the model predicted class 0. An auditor could not reliably use this alone to diagnose model behavior or bias.\",\n    \"clarity\": \"The wording is short and readable, but the presentation is confusing because several features are shown as 0.0000 with no explanation of whether they are irrelevant, absent, or merely low impact. A non-expert would likely struggle to interpret the meaning of the listed values.\",\n    \"completeness\": \"The explanation identifies one apparent driver, education-num, but omits the direction and magnitude of influence relative to the model output, and it gives no context for why the prediction was negative. It therefore covers only part of the local decision logic.\",\n    \"concision\": \"The output is compact and mostly avoids unnecessary prose, but it wastes space listing many features with zero contribution instead of summarizing the meaningful drivers. It is brief, though not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is sparse, only partially interpretable, and provides little support for understanding or acting on the model decision. It is better than useless because it names a likely influential feature, but it falls short of a high-quality explanation.\",\n    \"semantic_plausibility\": \"The content is broadly plausible for the Adult dataset and a DICE counterfactual-style explanation, since education and work-related variables are relevant predictors. However, the zeroed-out feature values and lack of clear counterfactual interpretation make it only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:41.296488+00:00"
+}

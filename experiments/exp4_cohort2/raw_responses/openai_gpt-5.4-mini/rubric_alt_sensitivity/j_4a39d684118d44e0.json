@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4a39d684118d44e0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9ee15210bf45996e_fe7c1eb932f8ba6e.txt",
+  "prompt_version": "fe7c1eb932f8ba6e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543443-GCqvFwfuNlcdeEVWn3QL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 347,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00240525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0015615,
+        "upstream_inference_cost": 0.00240525,
+        "upstream_inference_prompt_cost": 0.00084375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1125,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1472
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Lists influential features but does not tell how changing any feature would change the prediction in a practical way.\",\n    \"audit_usefulness\": \"Useful for seeing which breast cancer measurements drive the random forest locally, but it gives only ranked contributions and not the decision boundary or subgroup behavior.\",\n    \"clarity\": \"The feature names and positive values are straightforward, though a nontechnical reader may not know what SHAP values mean without context.\",\n    \"completeness\": \"It identifies the main local factors behind the positive prediction, but it does not explain the baseline, direction in plain language, or how these factors combine.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with little filler beyond the ranked list.\",\n    \"overall_quality\": \"A solid local feature-ranking explanation for a true positive case, but not especially interpretable beyond the top contributors.\",\n    \"semantic_plausibility\": \"The listed factors are all plausible breast cancer indicators, and high values of abnormal shape/size features fitting a malignant prediction make sense.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:46.002517+00:00"
+}

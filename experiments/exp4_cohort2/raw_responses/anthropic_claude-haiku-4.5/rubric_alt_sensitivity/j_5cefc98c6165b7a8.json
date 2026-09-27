@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5cefc98c6165b7a8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d68ee28a2b213ee2_8c5a755939972e8f.txt",
+  "prompt_version": "8c5a755939972e8f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547780-FBndMBTfw3G6O0nDaVjZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003999,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00272,
+        "upstream_inference_cost": 0.003999,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1823
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two features (mean perimeter and worst perimeter) as important but provides no guidance on what values would change the prediction or what actions could be taken. No concrete next steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchored the prediction, the poor technical metrics (fidelity 0.31, stability 0.20, faithfulness_gap 0.15) suggest the explanation is unreliable. This limits its utility for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with weights, which is accessible to non-technical readers. However, the meaning of the normalized weights and why only two features have non-zero values is not explained.\",\n    \"completeness\": \"The explanation identifies only two features as important (mean and worst perimeter) while assigning zero importance to eight other features. For a false negative case, this sparse explanation lacks depth about why the model failed to predict the true positive label.\",\n    \"concision\": \"The explanation is brief at 75 tokens, but the list format with many zero-valued features is somewhat redundant. A more concise presentation would omit features with zero importance.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical metrics indicating low fidelity and stability, a false negative prediction error, and minimal actionable insight. While the format is clear, the reliability and usefulness are questionable.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, perimeter measurements are medically relevant features. However, the explanation's reliability is undermined by very low fidelity (0.31) and stability (0.20) scores, suggesting the identified features may not truly drive the model's decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:23:05.612830+00:00"
+}

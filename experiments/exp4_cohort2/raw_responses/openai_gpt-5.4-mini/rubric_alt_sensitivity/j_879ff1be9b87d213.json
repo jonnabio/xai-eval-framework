@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_05cbef61c778f3fb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_879ff1be9b87d213",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_05cbef61c778f3fb_053afec549f3cf84.txt",
+  "prompt_version": "053afec549f3cf84",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543023-AeGB6rRoygZI8nOWDlDK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 358,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00246225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001611,
+        "upstream_inference_cost": 0.00246225,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1493
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_05cbef61c778f3fb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their SHAP values, but does not say how changing them might alter the prediction.\",\n    \"audit_usefulness\": \"The ranked feature contributions are useful for inspecting the model's local logic and checking whether clinically relevant attributes drive the decision.\",\n    \"clarity\": \"The terms are short and structured, but a non-technical reader may need some domain knowledge to interpret features like concave points and texture.\",\n    \"completeness\": \"It captures the main local contributors to the prediction, but it does not explain interactions, thresholds, or why the model made a false negative overall.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious filler.\",\n    \"overall_quality\": \"This is a solid local feature-attribution summary, but it is limited by lack of causal/action guidance and by only partial coverage of the decision.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are domain-relevant and the direction of contributions is plausible for a case explanation, even though it does not tie them to clinical interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:45.518223+00:00"
+}

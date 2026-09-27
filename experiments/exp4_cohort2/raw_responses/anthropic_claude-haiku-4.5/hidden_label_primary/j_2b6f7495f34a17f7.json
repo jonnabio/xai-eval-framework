@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2fb8d841944fa76b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2b6f7495f34a17f7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_2fb8d841944fa76b_9c2c5343e9517444.txt",
+  "prompt_version": "9c2c5343e9517444",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541597-zfVBWih3RgeGQQV7mVkE",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003921,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00269,
+        "upstream_inference_cost": 0.003921,
+        "upstream_inference_prompt_cost": 0.001231
+      },
+      "is_byok": false,
+      "prompt_tokens": 1231,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1769
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2fb8d841944fa76b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies specific feature values (furniture/equipment purpose, low savings, home ownership) but provides no guidance on how to change these conditions or what actions a user could take to alter the prediction.\",\n    \"audit_usefulness\": \"The explanation lists anchor features with binary importance indicators (1.0 or 0.0) and includes technical metrics (fidelity 0.35, faithfulness_gap 0.25), enabling auditors to assess model consistency, though the low fidelity suggests limited reliability for bias investigation.\",\n    \"clarity\": \"The explanation uses domain-relevant feature names and a simple format, but the notation (e.g., 'savings_status_<100', 'savings_status_no known savings') requires familiarity with the dataset schema to fully interpret.\",\n    \"completeness\": \"Four features are marked as anchors (importance 1.0) while six are marked as non-anchors (0.0), providing a clear local decision boundary; however, the explanation lacks information about feature interactions or relative contribution magnitudes beyond binary relevance.\",\n    \"concision\": \"The explanation is compact at 70 tokens and avoids redundancy, presenting each feature once with its importance score in a structured format.\",\n    \"overall_quality\": \"The explanation provides a structured, sparse anchor-based decision rule suitable for auditing, but is undermined by low fidelity (0.35), moderate faithfulness gap (0.25), and lack of actionability or deeper insight into model reasoning.\",\n    \"semantic_plausibility\": \"The identified anchors (furniture loan purpose, low savings, home ownership) are plausible credit risk factors in lending contexts, and the pattern is coherent with typical credit decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:03.241441+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9f8528ac517c2a8c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_084efba639afd972_d0801c4acd2fc3e7.txt",
+  "prompt_version": "d0801c4acd2fc3e7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543207-AF8mX0UCpUJVvmGISvBO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00271425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018585,
+        "upstream_inference_cost": 0.00271425,
+        "upstream_inference_prompt_cost": 0.00085575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1141,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists feature conditions associated with the prediction, but does not tell a person what changes would likely alter the outcome or how to improve the decision.\",\n    \"audit_usefulness\": \"The anchor-style conditions expose which inputs locally support the model\u2019s decision, which is useful for inspecting model logic, though the explanation is not very complete and has only moderate fidelity.\",\n    \"clarity\": \"The feature names are mostly understandable to a technically literate reader, but the list format and raw binary-style markers are not very accessible to non-technical users.\",\n    \"completeness\": \"It names several local factors, but it does not explain their directionality, relative importance beyond the anchors, or why the prediction was a false negative, so the main decision logic is only partially covered.\",\n    \"concision\": \"The explanation is fairly compact and mostly consists of a short list of conditions, though it is somewhat repetitive because every listed anchor is shown with the same weight.\",\n    \"overall_quality\": \"It is useful as a rough local summary of the model\u2019s anchors, but the low interpretability, lack of outcome direction, and limited completeness make it only moderate overall.\",\n    \"semantic_plausibility\": \"The cited factors such as short duration, poor checking status, weak savings, and critical credit history are all plausible risk indicators in German credit, so the explanation fits the domain well.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:49.416239+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6033a1d2f6baa4d1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ccbc751d89be60ef_5150fbc10301c220.txt",
+  "prompt_version": "5150fbc10301c220",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540044-U70Tzx9kNDNCRXm58aPW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002946,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.002946,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next step. It only lists feature values, so a user cannot tell what to change or check.\",\n    \"audit_usefulness\": \"It gives some local feature information, but it lacks directionality, thresholds, and a clear account of why these factors led to the positive prediction. That limits its value for auditing model behavior or investigating errors.\",\n    \"clarity\": \"The output is mechanically readable and the feature names are understandable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would not know whether these are rules, scores, or binary indicators.\",\n    \"completeness\": \"It mentions only two apparently active factors and many zero-valued features, but it does not explain how they combine to produce the predicted class. Key local decision context such as feature effects, comparison to baseline, or support/coverage is missing.\",\n    \"concision\": \"The explanation is short and mostly avoids unnecessary detail, though much of the listed content is low-information repetition of zero-valued features. It is reasonably compact but not highly informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and somewhat interpretable, but it fails to explain the decision mechanism or provide actionable or audit-ready insight. Its usefulness is limited to a rough hint about which features were present.\",\n    \"semantic_plausibility\": \"For a breast cancer model, concave points and texture are plausible discriminative features, so the content is broadly consistent with domain expectations. However, the presentation as all-ones and zeros without interpretation is not very semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:07.983351+00:00"
+}

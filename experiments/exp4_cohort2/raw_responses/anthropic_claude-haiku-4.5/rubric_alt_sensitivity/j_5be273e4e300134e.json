@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5be273e4e300134e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9294bc72ae3aeda0_1ed2ad7e52abe1ad.txt",
+  "prompt_version": "1ed2ad7e52abe1ad",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545636-Xh5Y2jbg0z3Akk7f1Yk8",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003971,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.003971,
+        "upstream_inference_prompt_cost": 0.001286
+      },
+      "is_byok": false,
+      "prompt_tokens": 1286,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1823
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A person would not know what specific changes to education, hours worked, or marital status would alter the prediction.\",\n    \"audit_usefulness\": \"The feature weights help identify which factors the model relied on, but the very low stability (0.065) and fidelity (0.595) raise concerns about explanation reliability. An auditor would struggle to trust these factors as truly representative of model behavior.\",\n    \"clarity\": \"The explanation uses technical feature names (education-num, marital-status_Never-married) without plain-language translation. Someone without domain knowledge of the adult dataset would not understand what these features represent or their significance.\",\n    \"completeness\": \"The explanation identifies five high-weight factors and five zero-weight factors, covering the main decision drivers. However, it lacks context about why these factors matter or how they interact, leaving gaps in understanding the full decision logic.\",\n    \"concision\": \"The format is compact with feature names and weights, but includes many zero-weight features that add little value. The explanation could be tighter by focusing only on the influential factors.\",\n    \"overall_quality\": \"The explanation provides a basic feature importance ranking that correctly identifies the prediction (TP), but is undermined by poor technical metrics (low stability and fidelity), lack of actionability, and accessibility issues. It is serviceable but not robust.\",\n    \"semantic_plausibility\": \"The factors align with income prediction logic (education, hours worked, occupation, marital status are known predictors), and the high weights on Masters degree and executive-managerial occupation are reasonable for a >50K income prediction. The explanation is domain-plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:47:21.910681+00:00"
+}

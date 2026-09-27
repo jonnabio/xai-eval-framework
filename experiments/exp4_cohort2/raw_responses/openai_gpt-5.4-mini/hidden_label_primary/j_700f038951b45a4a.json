@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_700f038951b45a4a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ba8a2c4ca53c1a08_9e0fae6ae21aab7c.txt",
+  "prompt_version": "9e0fae6ae21aab7c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539116-AY5jGjnUUhzg7QpOqTq5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.00297375,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the contributing factors into concrete recourse steps or decision guidance. It only lists features and weights, so a user cannot readily act on it.\",\n    \"audit_usefulness\": \"It is useful at a basic level for auditing because it exposes which features locally pushed the prediction up or down. However, the tiny weights, low stability, and moderate fidelity limit how well it supports deeper error or bias analysis.\",\n    \"clarity\": \"The output is easy to read for a technical or semi-technical user because it is a simple ranked list of feature contributions. A non-expert may still struggle with one-hot feature names and the meaning of positive versus negative weights.\",\n    \"completeness\": \"It includes the main local drivers of the prediction, but it does not explain the baseline, the prediction probability, or how strongly the features combined to produce the final class. Important context for understanding this specific decision is therefore missing.\",\n    \"concision\": \"The explanation is compact and contains mostly signal rather than filler. It is somewhat repetitive because related one-hot variants of the same concept are listed separately, but overall it is reasonably concise.\",\n    \"overall_quality\": \"This is a decent local explanation with clear feature attributions, but it is limited by low stability, moderate fidelity, and the lack of user-facing interpretation. Overall it is useful for quick inspection but not strong enough for robust decision support.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult dataset, especially education, relationship, occupation, sex, and marital status. The exact mix and signs are reasonable for a local explanation, even if the small magnitudes suggest a weak decision margin.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:58:40.501352+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_acb13faca257df63",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0da6a71373977fce_9796c10b545d65fb.txt",
+  "prompt_version": "9796c10b545d65fb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543890-L9pkBTGCy6PjrpSRUYyq",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003513,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00229,
+        "upstream_inference_cost": 0.003513,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1681
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_South as the sole driver but provides no guidance on feasible recourse actions or decision review steps; a user cannot act on this information.\",\n    \"audit_usefulness\": \"While the explanation isolates one feature with high importance, the near-zero scores for all other features and the poor fidelity metric (-0.033) raise concerns about model faithfulness that an auditor would need to investigate further.\",\n    \"clarity\": \"The format is straightforward and uses clear feature names, but the meaning of the normalized scores and why only one feature matters requires domain knowledge to interpret.\",\n    \"completeness\": \"The explanation identifies only one driver (native-country_South) with all other features scoring zero, which appears incomplete given the complexity of income prediction and may mask important decision factors.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores in a sparse format.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides minimal insight; the poor fidelity metric and single-feature dominance suggest the explanation may not faithfully represent the model's actual decision logic.\",\n    \"semantic_plausibility\": \"While native-country can influence income prediction, the complete absence of other known predictors (education, hours-per-week, age) is implausible and contradicts domain expectations for income classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:20.655819+00:00"
+}

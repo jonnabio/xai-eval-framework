@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_79d3a167585cce7c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6af7798c2cb4bb08_fcb45c90dd3f3f01.txt",
+  "prompt_version": "fcb45c90dd3f3f01",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538847-YrYIbku7WSohDb9eroyc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.00308475,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1578
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features that pushed the prediction but does not translate them into concrete recourse or next steps. A user cannot tell what changes, if any, would likely alter the model outcome.\",\n    \"audit_usefulness\": \"This SHAP summary is useful for auditing because it reveals the main local drivers and their directions, especially checking status and credit-related fields. However, it lacks baseline context, magnitude interpretation in probability space, and comparison to similar cases, so audit value is moderate rather than exhaustive.\",\n    \"clarity\": \"The wording is compact and the feature list is easy to scan, but it is still somewhat technical for a non-expert because it uses SHAP notation and encoded feature names. A general reader may understand the broad idea but not all details without domain knowledge.\",\n    \"completeness\": \"The explanation covers several top local contributors and indicates whether they increased or decreased the score. It does not explain the final class decision, the prediction confidence, or how these factors combine into the false negative outcome, so it is only partially complete.\",\n    \"concision\": \"The explanation is fairly compact and contains only the top local factors, with little obvious redundancy. It is informative per word, though some space is spent on encoded feature names that are not immediately interpretable.\",\n    \"overall_quality\": \"Overall this is a solid local explanation: it is stable, sparse, and reasonably faithful, with clear directionality of important features. Its main weaknesses are limited interpretability for non-experts and weak support for actionable recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit model: checking status, savings, credit history, age, duration, and purpose are all sensible credit-risk variables. The directions are also broadly consistent with credit-risk intuition, making the explanation semantically coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:10.517944+00:00"
+}

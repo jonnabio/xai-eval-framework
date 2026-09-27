@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b3cac614698d0312",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_052659e044864140_da9d305d3e8f1d7e.txt",
+  "prompt_version": "da9d305d3e8f1d7e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541681-nyPxF3HLItGaytRRBYWX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.00294375,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into specific, feasible next steps or recourse options. It only lists feature contributions, so a non-expert cannot use it directly to change or review the decision.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the strongest local drivers and their signs, which helps inspect whether the model relies on clinically meaningful tumor-shape features. However, it lacks feature values and threshold context, so deeper error or bias analysis is only partially supported.\",\n    \"clarity\": \"The output is concise and easy to scan because it names the top contributing features and their SHAP values. A non-expert may still struggle with feature names like 'worst concave points' and the meaning of negative SHAP values without additional explanation.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and indicates that most top factors push toward class 0. Still, it does not provide the instance's actual feature values, a baseline, or a natural-language summary of why the model predicted a true negative.\",\n    \"concision\": \"The explanation is compact and information-dense, listing only the top features with their contribution scores. It avoids redundancy while still conveying the main local factors.\",\n    \"overall_quality\": \"This is a solid SHAP summary for a technical audience: it is stable, fairly faithful, and informative about the local decision. Its main weakness is limited accessibility and lack of actionable or contextual interpretation for non-experts.\",\n    \"semantic_plausibility\": \"The cited features are plausible breast-cancer predictors, and the pattern of mostly negative contributions fits a negative classification. The explanation is consistent with the dataset and the true negative outcome.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:23.580728+00:00"
+}

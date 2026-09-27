@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_01216b53203cd80b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_681f91e7c50b9380_96c2d1e5fedf4760.txt",
+  "prompt_version": "96c2d1e5fedf4760",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540189-JoH3K2uG6ie1FRWfEmrP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029445,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.0029445,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, and it does not indicate what change would move the prediction. It is therefore not useful for decision making by the affected user.\",\n    \"audit_usefulness\": \"It exposes only a single nonzero local factor and otherwise looks like a sparse feature dump, which is weak for inspecting why the model predicted positive. An auditor cannot meaningfully assess feature interactions, bias, or error sources from this output.\",\n    \"clarity\": \"The wording is simple, but the content is cryptic because most listed factors are shown as 0.0000 without explanation. A non-expert would not understand what the numbers mean or why only 'native-country_Ireland' stands out.\",\n    \"completeness\": \"The explanation misses the main local drivers and gives no counterfactual comparison, despite being tied to a false positive case. It does not sufficiently explain the specific prediction beyond one isolated feature.\",\n    \"concision\": \"It is short, but much of the space is spent listing many near-zero factors that add little information. The explanation is compact in length but inefficient in informational value.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, minimally informative, and not helpful for understanding or acting on the model's prediction. It offers limited diagnostic value despite being technically easy to read.\",\n    \"semantic_plausibility\": \"The output is plausible as a DICE-style local feature summary on Adult data, and the listed feature names are domain-consistent. However, the near-all-zero pattern makes it feel incomplete and only partially credible as an explanation of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:33.510825+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e01303d266a05def",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d47138a03cd221ff_aeb347bdaa01ce30.txt",
+  "prompt_version": "aeb347bdaa01ce30",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543384-ISwC3ROg7aIHKeS2WScp",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 633,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00477075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00383625,
+        "upstream_inference_cost": 0.00477075,
+        "upstream_inference_prompt_cost": 0.0009345
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2269
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers signed feature weights but omits actual feature values and concrete thresholds, giving the user little practical guidance on recourse.\",\n    \"audit_usefulness\": \"It provides useful visibility into the features driving the false positive prediction, though the absence of specific feature values and weak fidelity metrics somewhat hinder thorough auditing.\",\n    \"clarity\": \"The list format and signed weights are easy to read, but the lack of feature values and presence of one-hot encoded variable names require technical literacy.\",\n    \"completeness\": \"The top ten drivers are captured with local weights, yet omitting the instance's underlying feature values leaves the local context incomplete.\",\n    \"concision\": \"The attribution list is dense, focused, and communicates the key weights without any extraneous filler.\",\n    \"overall_quality\": \"It serves as an acceptable baseline local attribution explanation, clearly conveying feature impacts but lacking user-facing interpretability and instance values.\",\n    \"semantic_plausibility\": \"Attributing strong positive weight to a doctorate and professional specialty aligns well with economic intuition and the Adult dataset dynamics.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:53.981946+00:00"
+}

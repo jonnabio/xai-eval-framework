@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1e41bd69058ce815",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28188c86ac4bdfad_69a35db188b951f9.txt",
+  "prompt_version": "69a35db188b951f9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541514-S6cFqRoLiAFzB2kb5wtM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00297075,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not suggest any concrete recourse or next steps for changing the outcome. A user cannot tell which realistic changes would affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local drivers and their directions, which helps inspect whether the model is relying on sensible Adult dataset features. However, the small magnitudes and limited fidelity reduce its value for deep error or bias analysis.\",\n    \"clarity\": \"The output is concise and readable, with each feature and its signed contribution presented plainly. A non-expert can understand that positive values push toward class 1 and negative values against it, though the meaning of encoded categories still needs some familiarity.\",\n    \"completeness\": \"It covers several main local factors and gives their relative influences, but it omits baseline probability, class-level interpretation, and any explanation of interactions or confidence. For a full understanding of this specific TN prediction, that is only partially sufficient.\",\n    \"concision\": \"The explanation is compact and information-dense, listing the most relevant local factors without unnecessary prose. It is close to optimal for a short LIME summary.\",\n    \"overall_quality\": \"This is a decent local explanation: readable, compact, and moderately useful for inspection, but limited by weak fidelity/stability and the lack of actionable or contextual detail. It is good enough to understand the model's apparent reasoning at a high level, not to fully trust or act on it.\",\n    \"semantic_plausibility\": \"The feature directions are plausible for the Adult dataset, and the presence of plausible socioeconomic and demographic variables fits expected model behavior. Nothing in the explanation contradicts the instance context or the TN outcome.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:37.020600+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_41e5993f0317026c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2a63737c16fa6edb_a39f06091a2e57ca.txt",
+  "prompt_version": "a39f06091a2e57ca",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541657-yeRkVGdqxhOCmAUDFqPv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029415,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.0029415,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features associated with the negative prediction, but it does not translate them into concrete next steps or recourse options. A user cannot tell what could be changed to alter the outcome.\",\n    \"audit_usefulness\": \"For an auditor, the feature list gives a basic glimpse into which variables influenced the local prediction, but the tiny weights and lack of directionality beyond sign limit deeper inspection. The low fidelity and stability metrics also reduce its usefulness for diagnosing model behavior.\",\n    \"clarity\": \"The explanation is short and uses a straightforward ranked list, so a technical reader can parse it easily. However, the raw feature names and coefficients are not explained in plain language, which makes it less accessible to non-experts.\",\n    \"completeness\": \"It covers several local drivers for the specific prediction, but it omits the baseline/intercept, overall probability, and a clear narrative linking the factors to the final class. Because the coefficients are very small and the explanation is sparse, it does not fully explain why the instance was predicted as negative.\",\n    \"concision\": \"The output is compact and contains little redundancy, with only the top local factors presented. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"This is a concise and readable local explanation, but it is only moderately informative because it lacks interpretive context, actionable guidance, and strong technical reliability. Its low faithfulness and stability further constrain the overall quality.\",\n    \"semantic_plausibility\": \"The factors shown are plausible for the Adult income task and the signs are broadly consistent with a negative prediction. Nothing in the explanation contradicts the domain or the instance context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:59.529314+00:00"
+}

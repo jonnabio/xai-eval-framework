@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e623359886107f9c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f9cc6b6fb4f65a14_66db5efcce60086f.txt",
+  "prompt_version": "66db5efcce60086f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543644-tQML6yCtOsgZoDVhDHPA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018945,
+        "upstream_inference_cost": 0.00274725,
+        "upstream_inference_prompt_cost": 0.00085275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1137,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1558
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists feature changes/values in a counterfactual-style way, without saying what a person should change to affect the outcome or whether the listed values are feasible.\",\n    \"audit_usefulness\": \"The explanation gives a sparse set of local factors, which can hint at model behavior, but the many zero-valued entries and lack of directionality limit its usefulness for diagnosing bias or error.\",\n    \"clarity\": \"The feature names are recognizable to a technical reader, but the meaning of the numeric values is not explained, so a non-technical person would have trouble interpreting it.\",\n    \"completeness\": \"It mentions capital-gain and relationship_Own-child, but it does not explain how these factors combined to produce the negative prediction or provide the main causal story for this specific case.\",\n    \"concision\": \"It is fairly short, but much of the content is low-information padding from zero-valued features, so the useful information density is only moderate.\",\n    \"overall_quality\": \"This is a limited explanation: it is stable and somewhat informative, but too terse and underspecified to fully explain the decision or support strong review.\",\n    \"semantic_plausibility\": \"For Adult-income data, capital gain and relationship status are plausible predictors, and the instance being an Own-child with positive capital gain is a believable local profile, though the exact numeric presentation is not very intuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:07.406251+00:00"
+}

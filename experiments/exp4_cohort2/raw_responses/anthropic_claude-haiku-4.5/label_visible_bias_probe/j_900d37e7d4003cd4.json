@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9fe396b73843aa9e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_900d37e7d4003cd4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9fe396b73843aa9e_5c43b158ad8b538d.txt",
+  "prompt_version": "5c43b158ad8b538d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544276-JlqWXAKHglvR6IINyzt3",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 424,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003354,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00212,
+        "upstream_inference_cost": 0.003354,
+        "upstream_inference_prompt_cost": 0.001234
+      },
+      "is_byok": false,
+      "prompt_tokens": 1234,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1658
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9fe396b73843aa9e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature contributions are effectively zero, providing no meaningful direction for recourse or decision review; a user cannot identify which factors to modify to change the outcome.\",\n    \"audit_usefulness\": \"The explanation offers no discriminative information about model behavior, as all coefficients collapse to \u00b10.0000, making it impossible to audit decision logic or detect potential bias.\",\n    \"clarity\": \"The format is technically clear as a list of feature-coefficient pairs, but the content is uninformative due to numerical collapse to zero values.\",\n    \"completeness\": \"The explanation is severely incomplete; it fails to capture any meaningful local decision drivers, leaving the prediction entirely unexplained.\",\n    \"concision\": \"While the explanation is brief, it provides no useful information content, making brevity a liability rather than a virtue in this context.\",\n    \"overall_quality\": \"This explanation is fundamentally broken due to numerical underflow or model degeneracy, rendering it useless for any practical purpose including auditing, recourse, or understanding.\",\n    \"semantic_plausibility\": \"The near-zero coefficients across all features are implausible for a logistic regression model and suggest a technical failure rather than a valid local approximation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:24:40.244263+00:00"
+}

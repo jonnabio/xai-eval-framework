@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_76de1d6225a0eb57",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9be4c2983f0c443c_bfc598b5fd11036e.txt",
+  "prompt_version": "bfc598b5fd11036e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546599-xPv6Gz2jFxISqvIdAdfw",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004084,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0028,
+        "upstream_inference_cost": 0.004084,
+        "upstream_inference_prompt_cost": 0.001284
+      },
+      "is_byok": false,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1844
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what values would need to change to alter the prediction. A clinician or patient cannot act on abstract feature weights without knowing target ranges or thresholds.\",\n    \"audit_usefulness\": \"The explanation identifies which features influenced the decision (area error and worst texture), but the high faithfulness_gap (0.727) and low stability (0.462) suggest the explanation may not reliably represent the model's actual decision logic. Limited utility for bias detection.\",\n    \"clarity\": \"The format is technical and lists raw feature weights without interpretation. Non-technical users would struggle to understand what 'area error: 1.0000' means in clinical context or why most features have weight 0.0000.\",\n    \"completeness\": \"Only two features are identified as important (area error and worst texture), while nine others are listed as zero-weight. For a false positive case, the explanation lacks depth about why the model incorrectly predicted malignancy despite the true label being benign.\",\n    \"concision\": \"The explanation is padded with nine zero-weight features that add little information. A more concise version would focus only on the two non-zero features, eliminating redundancy.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies top features, the poor technical metrics (high faithfulness gap, low stability), false positive error context, and lack of actionable insights limit its utility. The explanation doesn't help understand why the model made an incorrect prediction.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, area error and texture features are plausible predictors of malignancy. However, the explanation doesn't address why these features led to a false positive, making it difficult to assess whether the model's reasoning is clinically sound or represents a systematic bias.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:03:24.514254+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0435704c9e93237b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ea764fae63b129dc_a8856841b7cc33d8.txt",
+  "prompt_version": "a8856841b7cc33d8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541411-LNZjafOYZXQE2pMI4m02",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 669,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049095,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00396375,
+        "upstream_inference_cost": 0.0049095,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2318
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw numerical SHAP values without practical recourse or clear instructions on how the applicant could change the outcome.\",\n    \"audit_usefulness\": \"It displays directional contributions for key features, which helps an auditor spot influential drivers, though the absence of original feature values limits depth.\",\n    \"clarity\": \"The list of raw feature names, one-hot encodings, and floating-point attribution values requires technical familiarity with ML concepts to interpret.\",\n    \"completeness\": \"The top 10 features capture the primary local drivers, but omitting baseline probabilities and actual observed feature values leaves local context incomplete.\",\n    \"concision\": \"The presentation is dense and avoids filler text, packing a high amount of attribution data into a compact format.\",\n    \"overall_quality\": \"It serves as an acceptable baseline technical explanation, but is hindered by missing feature values and lack of non-expert readability.\",\n    \"semantic_plausibility\": \"The identified risk factors, including checking account status, loan duration, and credit history, logically correspond to standard credit risk logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:01.309308+00:00"
+}

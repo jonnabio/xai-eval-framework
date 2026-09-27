@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ff8ec547d5d95aa",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eea8ae88c7a9e4b3",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9ff8ec547d5d95aa_97ab07c7e0cb78ec.txt",
+  "prompt_version": "97ab07c7e0cb78ec",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541222-mkfR0dzTAaLh7uw6l8gj",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003704,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00248,
+        "upstream_inference_cost": 0.003704,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1720
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9ff8ec547d5d95aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only numerical weights without context on what changes would alter the prediction or how to act on the information. No concrete recourse steps or decision-support guidance is offered.\",\n    \"audit_usefulness\": \"The raw factor weights with mostly zero values offer limited insight into model behavior; the dominance of hours-per-week (3.11) versus all zeros raises questions about model logic but lacks sufficient detail for systematic bias or error investigation.\",\n    \"clarity\": \"The format is a simple list of feature names and weights, which is technically clear but lacks narrative context, interpretation, or explanation of what these numbers mean for a non-expert reader.\",\n    \"completeness\": \"Only one feature (hours-per-week) shows non-zero weight while all others are zero, suggesting either incomplete feature importance reporting or a sparse explanation that may miss important decision drivers.\",\n    \"concision\": \"The explanation is compact in token count but contains substantial redundancy with nine zero-valued features listed unnecessarily; a more concise summary would omit or group zero-weight features.\",\n    \"overall_quality\": \"The explanation is minimally informative, presenting raw numerical outputs without interpretation, context, or actionable insight; it reads as unprocessed model output rather than a coherent explanation.\",\n    \"semantic_plausibility\": \"Hours-per-week as the sole driver for an income prediction is plausible in domain terms, but the complete absence of other known income predictors (education, age, workclass) is implausible and suggests potential model or explanation issues.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:48.291026+00:00"
+}

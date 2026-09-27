@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ced9169058d90bb3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cbdb515ea6b51b47_41c50b22ffd50593.txt",
+  "prompt_version": "41c50b22ffd50593",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538444-E332IL5dvdVpDbfd678u",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.00301725,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few local factors but does not translate them into any specific recourse or decision steps. It does not tell the user what changing an input might do or which factors are realistically modifiable.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it shows the main local features influencing the prediction and their signed contributions. However, it is limited by the very sparse ranking and does not provide enough detail to thoroughly inspect error causes or bias.\",\n    \"clarity\": \"The formatting is straightforward and the feature names are understandable enough for a general reader familiar with tabular attributes. Still, the meaning of the numeric weights is not explained, so a non-expert may not fully grasp their interpretation.\",\n    \"completeness\": \"The explanation covers several top local drivers, especially capital-gain, marital status, education, sex, and relationship, which helps explain the prediction. Even so, it omits a fuller local context such as the instance's actual feature values, baseline, and a clearer account of why the model predicted the negative class in a false-negative case.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, with a short ranked list of influential features. It delivers useful information per word without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: concise, readable, and partially informative for inspection. Its main weakness is that it lacks actionable guidance and deeper context needed to fully understand the false-negative prediction.\",\n    \"semantic_plausibility\": \"The featured variables are plausible predictors for the Adult dataset, and the directions of influence look consistent with common expectations for income-related classification. The presence of marital status, education, sex, and capital gain as top factors is semantically coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:27.193256+00:00"
+}

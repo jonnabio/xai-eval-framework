@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4606edac1aa49c77",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_95751d1d732b6cfa_06145a81e87028f8.txt",
+  "prompt_version": "06145a81e87028f8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540136-4aqGW4jSOyt1fdVVIcof",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021015,
+        "upstream_inference_cost": 0.00289725,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give a meaningful recourse path or next steps. It only lists feature values, and the single non-zero factor is not translated into an actionable change for the user.\",\n    \"audit_usefulness\": \"It provides very limited audit value because it does not explain why these features mattered or how they influenced the model's decision. The near-all-zero listing is especially uninformative for investigating model behavior.\",\n    \"clarity\": \"The output is short and syntactically simple, but the meaning of the numbers is not explained for a non-expert. A reader would not know whether the values indicate importance, change magnitude, or counterfactual distance.\",\n    \"completeness\": \"The explanation is missing the main local decision context, including which factors pushed the prediction toward class 0 and by how much. It also lacks a plain-language summary of the decision logic.\",\n    \"concision\": \"It is compact, but much of the content is redundant because most listed factors are zero. The brevity comes at the cost of useful information, so the concision is only moderate.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat readable, but it fails to communicate the decision logic, actionable recourse, or useful local evidence. The result is minimally informative for both users and auditors.\",\n    \"semantic_plausibility\": \"The mention of low education level and related adult-income features is broadly plausible for this dataset, but the formatting of many zero-valued factors without interpretation is not very semantically helpful. The content is not contradictory, just under-explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:39.612196+00:00"
+}

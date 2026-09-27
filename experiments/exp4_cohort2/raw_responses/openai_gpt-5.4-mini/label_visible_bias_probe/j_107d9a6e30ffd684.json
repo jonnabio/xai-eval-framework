@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_107d9a6e30ffd684",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f787cc3703d999cf_65f091cd4627677f.txt",
+  "prompt_version": "65f091cd4627677f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542737-2OMbtlDgouVGLnTKZ02z",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 435,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019575,
+        "upstream_inference_cost": 0.00274575,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1486
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f787cc3703d999cf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no concrete recourse or next steps. All listed factors are near-zero, so a user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It has little audit value because the attributions are effectively all zero, which does not reveal meaningful model behavior or feature influence. This makes it hard to diagnose why the false negative occurred.\",\n    \"clarity\": \"The output is readable and structurally simple, but the meaning is limited because every weight is essentially 0.0000. A non-expert would not learn why the model predicted class 0.\",\n    \"completeness\": \"It does not provide the main drivers of the decision, especially for a false negative. Important positive and negative influences, thresholds, or counterfactual context are missing.\",\n    \"concision\": \"The explanation is short, but much of the length is spent listing many near-zero feature weights that add little information. It is compact yet not efficient in informative content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is technically formatted but practically uninformative. It fails to explain the prediction, support review, or suggest meaningful actions.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, but the near-zero importances for all of them are not very believable as an explanation of a nontrivial false negative. The result is semantically weak even though the feature names themselves fit the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:59.547819+00:00"
+}

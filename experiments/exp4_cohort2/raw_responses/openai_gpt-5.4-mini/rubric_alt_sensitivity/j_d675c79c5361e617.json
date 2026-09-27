@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_da03a9f284de692d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d675c79c5361e617",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_da03a9f284de692d_31f188776d06c14d.txt",
+  "prompt_version": "31f188776d06c14d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542889-qTfPlg9AvSSDRNVJmaet",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 381,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002559,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017145,
+        "upstream_inference_cost": 0.002559,
+        "upstream_inference_prompt_cost": 0.0008445
+      },
+      "is_byok": false,
+      "prompt_tokens": 1126,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1507
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_da03a9f284de692d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not explain how any feature change could affect the prediction, so there are no usable next steps.\",\n    \"audit_usefulness\": \"The output gives only a sparse list of local anchors with trivial 0/1 weights, which is not enough to inspect model behavior or diagnose error sources.\",\n    \"clarity\": \"The feature names are understandable, but the 1.0000/0.0000 formatting and lack of narrative make the explanation hard to interpret for non-technical readers.\",\n    \"completeness\": \"It does not explain why the model predicted class 0 for a false negative instance, nor does it identify the main contributing conditions in a way that accounts for the decision.\",\n    \"concision\": \"It is short, but most of the content is low-information numeric boilerplate rather than meaningful explanation.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat readable, but it fails to explain the model's decision in a useful way.\",\n    \"semantic_plausibility\": \"The listed features are plausible Adult dataset variables, but saying they are top local factors with perfect weights does not convincingly describe why this specific instance was classified as negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:31.678948+00:00"
+}

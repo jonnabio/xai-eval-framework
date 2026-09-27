@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9d27d38f1c19d774",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_052659e044864140_142ebfeb15a15184.txt",
+  "prompt_version": "142ebfeb15a15184",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545521-9sKaPf2NDjCT5iN5uHsc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0039,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002625,
+        "upstream_inference_cost": 0.0039,
+        "upstream_inference_prompt_cost": 0.001275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1800
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken. A patient or clinician cannot determine what changes to measurements or follow-up steps would alter the benign classification outcome.\",\n    \"audit_usefulness\": \"Strong technical metrics (fidelity 0.87, stability 0.99) and a ranked list of contributing features enable auditors to verify model behavior and check for bias in feature weighting. The negative contributions for most features are interpretable for a TN case.\",\n    \"clarity\": \"The format is technical jargon-heavy (SHAP, feature names like 'worst concave points'). While domain experts understand these terms, non-technical stakeholders would struggle without explanation of what these measurements represent or why they matter.\",\n    \"completeness\": \"The explanation covers the top 10 features driving the prediction, which represents the main decision factors. However, it lacks context about the base rate, decision threshold, or why these particular features were most influential relative to the model's overall logic.\",\n    \"concision\": \"The list is efficiently formatted with feature names and numerical contributions. No redundancy or padding is present; each entry conveys specific information about relative importance.\",\n    \"overall_quality\": \"A serviceable explanation that succeeds technically (good fidelity and stability) but falls short in accessibility and actionability. It works well for model auditing but poorly for stakeholder communication or decision support.\",\n    \"semantic_plausibility\": \"The features listed (concave points, area, perimeter, texture) are established morphological markers in breast cancer diagnosis. Negative contributions for a benign classification are plausible. The ranking aligns with domain knowledge about diagnostic importance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:45:27.349210+00:00"
+}

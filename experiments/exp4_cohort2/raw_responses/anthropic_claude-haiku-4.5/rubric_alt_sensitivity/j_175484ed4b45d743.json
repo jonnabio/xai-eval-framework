@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_175484ed4b45d743",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cbdb515ea6b51b47_a7f8302e84875afa.txt",
+  "prompt_version": "a7f8302e84875afa",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544423-kkVGxi4tZglKaJp4NAoA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003978,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.003978,
+        "upstream_inference_prompt_cost": 0.001293
+      },
+      "is_byok": false,
+      "prompt_tokens": 1293,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1830
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person would not know whether to change capital-gain, marital status, or other attributes to alter the prediction.\",\n    \"audit_usefulness\": \"The feature weights and their directions are useful for auditing, but the low fidelity (0.78) and high faithfulness gap (0.19) suggest the explanation may not accurately represent the model's actual decision boundary. This limits confidence in using it to detect bias.\",\n    \"clarity\": \"The explanation uses technical jargon (feature names, coefficient notation) without explanation. Non-technical readers would struggle to understand what 'capital-gain: 0.0490' means or why these specific features matter.\",\n    \"completeness\": \"Only the top 10 features are shown with minimal context. The explanation lacks information about the instance's actual feature values, the decision threshold, or why the model predicted class 0 despite true label 1 (false negative).\",\n    \"concision\": \"The format is compact but repetitive in structure. Each line follows the same pattern without variation, and no synthesis or summary is provided to distill key insights.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies relevant features, the low fidelity, lack of actionability, poor clarity for non-experts, and failure to explain the false negative prediction substantially limit its utility.\",\n    \"semantic_plausibility\": \"The features listed (capital-gain, marital status, education, sex) are plausible predictors of income in the adult dataset. However, the explanation does not address why the model failed to predict the true positive label, raising questions about whether these weights tell the full story.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:27:09.043156+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_64b60f2ab98bce43",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_faa49079424c98d7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_64b60f2ab98bce43_8a0abc334cc8d161.txt",
+  "prompt_version": "8a0abc334cc8d161",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546150-lliGHWMvI4ezDo6IVQRt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003902,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00262,
+        "upstream_inference_cost": 0.003902,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1806
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_64b60f2ab98bce43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken. It does not indicate whether feature values are high/low relative to norms, making it impossible to suggest concrete interventions.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes are useful for model auditing and bias detection. The ranked list of contributing features helps identify which measurements drive the malignancy prediction, supporting systematic model review.\",\n    \"clarity\": \"The explanation uses technical medical terminology (perimeter, concave points, concavity) and SHAP jargon without explanation. A non-expert would struggle to understand what these features mean or why they matter.\",\n    \"completeness\": \"The top 10 features are listed with contribution magnitudes, covering the main drivers of the prediction. However, it lacks context about feature values, thresholds, or direction of influence (whether high or low values pushed toward malignancy).\",\n    \"concision\": \"The format is compact and efficient, listing features and values without redundancy. Each entry carries specific information about relative importance.\",\n    \"overall_quality\": \"This is a serviceable explanation that provides technical insight into model behavior but lacks accessibility and actionability. The low fidelity (0.368) and moderate faithfulness gap (0.043) suggest the explanation may not fully capture the model's decision logic.\",\n    \"semantic_plausibility\": \"The features (perimeter, area, concave points, concavity, radius, smoothness, texture) are all established morphological characteristics used in breast cancer diagnosis. Their relevance is medically sound, though the explanation doesn't confirm whether high or low values indicate malignancy.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:55:55.817385+00:00"
+}

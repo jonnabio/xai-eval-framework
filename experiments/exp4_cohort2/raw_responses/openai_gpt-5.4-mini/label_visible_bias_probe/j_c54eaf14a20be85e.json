@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c54eaf14a20be85e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cad1d6dbc8b4e027_db85c2484d2e6b06.txt",
+  "prompt_version": "db85c2484d2e6b06",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542720-6YDYqsuURWuLNjsL1s0X",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002958,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.002958,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no concrete recourse or next steps a user could take. All reported feature effects are essentially zero, so it does not indicate what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It has limited audit value because the coefficients are all near zero, making it hard to inspect which variables truly influenced the model locally. An auditor cannot meaningfully assess decision logic, bias, or error sources from this output.\",\n    \"clarity\": \"The output is easy to read in the sense that it lists top local factors, but the meaning is not clear because every contribution is 0.0000 or -0.0000. A non-expert would struggle to interpret why these factors are shown if none appear to matter.\",\n    \"completeness\": \"It does not provide the main drivers of the positive prediction, only a list of effectively null contributions. Key local decision context, such as which features increased the score and by how much, is missing.\",\n    \"concision\": \"The explanation is brief, but it is inefficient because it spends space listing many features that contribute almost nothing. It is concise in length yet low in information content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it fails to explain the positive prediction in a meaningful way. It is readable but not useful for understanding, auditing, or acting on the decision.\",\n    \"semantic_plausibility\": \"A LIME explanation with all-zero or near-zero local weights is unusual and not very plausible as a useful local explanation for a TP case. While not logically impossible, it is inconsistent with the expectation that the explanation should identify influential features.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:44.742645+00:00"
+}

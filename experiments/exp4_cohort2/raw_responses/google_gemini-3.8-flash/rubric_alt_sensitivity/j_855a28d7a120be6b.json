@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_855a28d7a120be6b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e5e8a4d0292d4cca_b85ae2443f258bd8.txt",
+  "prompt_version": "b85ae2443f258bd8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790550154-pdrDdgrx3G9eIWweqlJs",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 654,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00489525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039075,
+        "upstream_inference_cost": 0.00489525,
+        "upstream_inference_prompt_cost": 0.00098775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1317,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2359
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because no feature values, cutoffs, or directional effects are provided, there is no guidance on what changes would alter the credit decision.\",\n    \"audit_usefulness\": \"It identifies which subset of features formed the anchor rule, but the omission of specific predicates and thresholds limits its value for auditing model error.\",\n    \"clarity\": \"The binary 1.0000 and 0.0000 values attached to raw feature names make the output unintuitive for a layperson to interpret.\",\n    \"completeness\": \"The explanation indicates which features matter but entirely omits the decision rules, conditions, and thresholds that triggered the prediction.\",\n    \"concision\": \"The summary is compact and free of fluff, though listing several zero-weighted features adds minor noise.\",\n    \"overall_quality\": \"The explanation provides minimal usable insight because it lacks the actual rule predicates characteristic of Anchors.\",\n    \"semantic_plausibility\": \"The highlighted features such as duration, installment commitment, and checking status are believable risk factors in credit evaluation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:02:42.556207+00:00"
+}

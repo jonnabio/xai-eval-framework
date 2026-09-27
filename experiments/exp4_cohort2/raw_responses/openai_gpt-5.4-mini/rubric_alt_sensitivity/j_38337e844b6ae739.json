@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_38337e844b6ae739",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_681f91e7c50b9380_8e07eeb2a6e00da6.txt",
+  "prompt_version": "8e07eeb2a6e00da6",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543872-VfF4gxMgjbcQ96IwAo4b",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 361,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00247575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016245,
+        "upstream_inference_cost": 0.00247575,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1496
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not provide any concrete way to change the prediction or indicate which features would need to move in what direction.\",\n    \"audit_usefulness\": \"The explanation is too sparse and mostly meaningless as shown, so it offers little basis for auditing model behavior or bias.\",\n    \"clarity\": \"The listed feature names are understandable to a technical user, but the zero-valued weights and 'top local factors' wording make the message hard to interpret.\",\n    \"completeness\": \"It mentions only one nonzero factor and several zero-valued features, which is not enough to explain this false-positive decision.\",\n    \"concision\": \"It is short, but much of the content is uninformative because nearly all reported factors are zero.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is sparse, not very interpretable, and does not meaningfully justify the model's prediction.\",\n    \"semantic_plausibility\": \"A single feature like native-country_Ireland dominating the explanation for an Adult-income prediction is not very plausible or helpful, especially with all other factors at zero.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:54.582118+00:00"
+}

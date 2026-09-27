@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2b5bc9586ee3f417",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e9045d4d8fa6e21_d35ef0416e0dc96f.txt",
+  "prompt_version": "d35ef0416e0dc96f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546368-MsfoKGhNMaxvpnaHX90W",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004194,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0029,
+        "upstream_inference_cost": 0.004194,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1874
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the only meaningful factor (0.6 weight) but provides no guidance on what actions could be taken. It doesn't suggest what changes would alter the prediction or how to address the false positive.\",\n    \"audit_usefulness\": \"Limited utility for auditing. The explanation shows marital status dominates but doesn't reveal why the model made a false positive error. The very low stability (0.03) and high faithfulness gap (0.21) suggest the explanation may not reliably represent the model's actual decision boundary.\",\n    \"clarity\": \"Accessible to a general audience. The format is straightforward: feature names with numerical weights. However, the meaning of the weights and why most are zero requires some interpretation.\",\n    \"completeness\": \"Incomplete. Only one feature has non-zero weight; nine others are listed as 0.0. This sparse output doesn't explain the full decision logic, especially given the false positive error. The explanation lacks context about why these features matter or don't matter.\",\n    \"concision\": \"Reasonably concise but somewhat padded. Listing nine features with 0.0 weight adds length without information value. A more concise version could omit zero-weight features or summarize them.\",\n    \"overall_quality\": \"Weak to serviceable. While the explanation is clear and concise, it provides minimal insight into a false positive prediction. The poor technical metrics (low fidelity 0.61, low stability 0.03, high faithfulness gap 0.21) undermine confidence in the explanation's reliability.\",\n    \"semantic_plausibility\": \"Plausible but incomplete. Marital status being predictive of income >50K is reasonable in the adult dataset. However, the explanation doesn't address why the model incorrectly predicted this instance as high-income when the true label is low-income, raising questions about explanation validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:59:34.635199+00:00"
+}

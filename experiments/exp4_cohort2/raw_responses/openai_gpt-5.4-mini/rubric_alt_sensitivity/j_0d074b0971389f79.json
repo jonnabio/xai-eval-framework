@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0d074b0971389f79",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_103d89f1e4cb72f6_395a431e0c66e76c.txt",
+  "prompt_version": "395a431e0c66e76c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543271-daaEaPwZ4hjAuOVU0Nih",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 383,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025755,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017235,
+        "upstream_inference_cost": 0.0025755,
+        "upstream_inference_prompt_cost": 0.000852
+      },
+      "is_byok": false,
+      "prompt_tokens": 1136,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors and does not describe what input changes would be needed to alter the prediction.\",\n    \"audit_usefulness\": \"The factors provide a small amount of insight into which features the explainer considered, but the near-zero weights and low fidelity make it weak for auditing model behavior.\",\n    \"clarity\": \"The feature names are mostly understandable to a technical reader, but the numeric values and zero entries are not easy for a non-technical person to interpret.\",\n    \"completeness\": \"It names only a couple of non-zero factors and omits any direct explanation of why this false negative occurred or which features drove the model most strongly.\",\n    \"concision\": \"The output is fairly short, but much of the space is spent on uninformative zero-valued factors, so the density of useful information is only moderate.\",\n    \"overall_quality\": \"As an explanation, it is limited by sparse, low-fidelity, and partly uninformative factor listings, so it is only marginally useful overall.\",\n    \"semantic_plausibility\": \"Capital gain and education are plausible drivers for adult-income classification, but the explanation does not convincingly connect them to this specific false negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:53.731125+00:00"
+}

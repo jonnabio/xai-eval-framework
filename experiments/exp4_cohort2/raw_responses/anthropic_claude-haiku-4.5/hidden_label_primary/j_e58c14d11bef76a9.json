@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e58c14d11bef76a9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c6d96339976f5220_5d425c2306df52f0.txt",
+  "prompt_version": "5d425c2306df52f0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540504-KkksM3VEcDtYyIrWcyWM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003885,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002655,
+        "upstream_inference_cost": 0.003885,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1761
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies specific feature conditions (checking status, employment duration, housing type) but provides no guidance on how to change these factors or what actions a user should take to alter the prediction.\",\n    \"audit_usefulness\": \"The anchor format with binary importance indicators (1.0 vs 0.0) clearly shows which features the model relied on, supporting systematic audit of decision logic; however, the low fidelity (0.009) and stability (0.665) raise concerns about explanation reliability.\",\n    \"clarity\": \"The explanation uses technical feature names and threshold notation that requires domain knowledge of the German credit dataset to interpret; a non-expert would struggle to understand what 'checking_status_<0' or 'employment_4<=X<7' mean.\",\n    \"completeness\": \"Four features are identified as anchors with perfect importance, but the explanation lacks context about feature values in the instance, threshold meanings, or why these particular features matter relative to the ten features shown with zero importance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting feature-importance pairs efficiently; however, the brevity comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"While the anchor method produces a sparse, auditable explanation, the very low fidelity (0.009) and moderate stability (0.665) suggest the explanation poorly represents actual model behaviour, and the technical presentation limits accessibility.\",\n    \"semantic_plausibility\": \"In credit risk assessment, checking account status, employment stability, and housing situation are plausible predictors of creditworthiness; however, the extreme fidelity gap raises doubt about whether these anchors genuinely drive the model's decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:21:49.629983+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5e969640d3b20550",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_003259ff27515980_2487432e1ecb4b1f.txt",
+  "prompt_version": "2487432e1ecb4b1f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541348-YJbo8c16qnXDal0bNJzm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028095,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.0028095,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1501
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_003259ff27515980\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into concrete next steps or recourse for the patient or clinician. It is descriptive rather than decision-supportive.\",\n    \"audit_usefulness\": \"For an auditor, the ranked local SHAP values do reveal which features pushed the prediction up or down, which is useful for inspecting model behavior. However, the low fidelity and large faithfulness gap limit how much confidence can be placed in this local explanation.\",\n    \"clarity\": \"The feature list is readable and compact, and the signs indicate whether each factor increased or decreased the prediction. Still, a non-expert would likely not know what these breast-cancer features mean without additional context.\",\n    \"completeness\": \"The explanation covers the main local drivers in ranked order and includes both positive and negative contributions. It does not provide a baseline, probability, or narrative tying the factors together, so the full decision context is incomplete.\",\n    \"concision\": \"The explanation is succinct and contains only the most relevant local factors, with little redundancy. It is efficiently packed for the amount of information conveyed.\",\n    \"overall_quality\": \"This is a decent, compact local explanation, but it is weakened by limited interpretability for lay users and by the mediocre faithfulness metrics. Overall it is useful but not strong enough to be considered excellent.\",\n    \"semantic_plausibility\": \"The listed variables and their mixed positive and negative contributions are plausible for a breast cancer classifier. The pattern is consistent with a real local model explanation, even if not directly interpretable medically.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:50.413675+00:00"
+}

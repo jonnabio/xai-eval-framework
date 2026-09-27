@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a561be01d98fb987",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_681f91e7c50b9380_96c2d1e5fedf4760.txt",
+  "prompt_version": "96c2d1e5fedf4760",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540197-LoFI0rHYaHPc1EhgHNXX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029985,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the subject. It lists feature values without showing what changes might affect the prediction.\",\n    \"audit_usefulness\": \"For auditing, it is only weakly informative because it exposes one apparent top factor, but the rest are all zero and there is no directionality or comparison to baseline. This makes it hard to inspect why the MLP predicted the positive class or whether the explanation is reliable.\",\n    \"clarity\": \"The wording is short and readable, but the numerical list is confusing because most listed factors have zero values and no interpretation is given. A non-expert would not understand what the values mean or why 'native-country_Ireland' dominates.\",\n    \"completeness\": \"It fails to cover the local decision context adequately because it does not explain the model's main reasons, their relative strengths, or how they combine. The output looks more like a sparse artifact than a full explanation of the specific prediction.\",\n    \"concision\": \"The explanation is very brief, but much of the content is low-information repetition of zero-valued features. It is compact, yet not efficient because the useful signal is minimal.\",\n    \"overall_quality\": \"Overall, this is a low-quality explanation: it is sparse, hard to interpret, and not useful for understanding or contesting the prediction. It provides only a fragment of local feature information and lacks meaningful narrative or decision support.\",\n    \"semantic_plausibility\": \"The content is superficially plausible as a DICE output on Adult data, since country and demographic features can appear. However, the dominance of a one-hot country feature with many zero-valued items is not very semantically informative and gives little confidence in the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:41.804031+00:00"
+}

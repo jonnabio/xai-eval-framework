@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3c7b644fa6e9d136",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c715759299b480a0_7ce86a3f66d30e38.txt",
+  "prompt_version": "7ce86a3f66d30e38",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543148-vyDjLi1D9PmArGnVyNgR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 386,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00260025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001737,
+        "upstream_inference_cost": 0.00260025,
+        "upstream_inference_prompt_cost": 0.00086325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1151,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential features, but does not explain what change would alter the prediction or by how much, so it gives little direct next-step guidance.\",\n    \"audit_usefulness\": \"The SHAP attributions provide useful local insight into which variables pushed the random forest toward class 1 or away from it, which can support error or bias inspection, though only at a fairly shallow level.\",\n    \"clarity\": \"The output is a simple ranked list of features with signed contributions, so it is easy to follow, though some feature names remain domain-specific.\",\n    \"completeness\": \"It identifies several main local factors, but it does not summarize the overall decision logic, feature interactions, or the full balance of positive versus negative evidence.\",\n    \"concision\": \"The explanation is compact and mostly consists of the most relevant local feature attributions, with little wasted wording.\",\n    \"overall_quality\": \"It is a solid local explanation: readable, fairly faithful-looking, and informative about key drivers, but not detailed enough to be exemplary.\",\n    \"semantic_plausibility\": \"The factors listed are plausible for German credit risk, and the mix of checking status, savings, duration, employment, and purpose fits common expectations for a credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:50.128125+00:00"
+}

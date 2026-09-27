@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a166b0258fa33c0e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_052659e044864140_142ebfeb15a15184.txt",
+  "prompt_version": "142ebfeb15a15184",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548188-VowoldMYlrosS9Rd9Dy5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 852,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 439,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00417675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003195,
+        "upstream_inference_cost": 0.00417675,
+        "upstream_inference_prompt_cost": 0.00098175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1309,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2161
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation contains only feature attribution scores for fixed biological/pathological characteristics without raw values or recourse guidance, offering no actionable steps.\",\n    \"audit_usefulness\": \"The ranked attribution values provide solid diagnostic insight into which tumor features drove the model toward a benign (0) classification, supporting model auditing.\",\n    \"clarity\": \"The list relies on technical feature names and signed SHAP contribution numbers, making it difficult for a layperson to interpret without background knowledge.\",\n    \"completeness\": \"It provides the top 10 contributing features with their directional attributions, capturing the main local drivers of the prediction, though omitting raw feature values.\",\n    \"concision\": \"The presentation is compact and information-dense, presenting the top features and SHAP values without unnecessary filler.\",\n    \"overall_quality\": \"A solid, standard local SHAP summary that offers good technical utility and plausibility, limited primarily by low lay clarity and inherent non-actionability.\",\n    \"semantic_plausibility\": \"Features like concave points, area, and perimeter are well-established clinical indicators for breast mass diagnosis, and their collective negative pull toward class 0 aligns with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:29:57.160226+00:00"
+}

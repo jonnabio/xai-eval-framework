@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5bbceced663775d6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4838b07b3f340d51_42889892c8792fea.txt",
+  "prompt_version": "42889892c8792fea",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542111-Ur2UJw3iKn1xWkbi8FDo",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00281625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.00281625,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps. It only lists local factors with binary weights, so a user cannot tell what to change to influence the prediction.\",\n    \"audit_usefulness\": \"It gives some audit value by identifying the features used locally, but the 0/1-style output is too thin to inspect why the false positive occurred. It does not expose directionality, thresholds, or counterfactual behavior.\",\n    \"clarity\": \"The text is short and readable, but the meaning of values like 1.0000 and 0.0000 is not explained. A non-expert would not know whether these are rule satisfactions, importances, or probabilities.\",\n    \"completeness\": \"It names only a few features and omits the actual conditions, interactions, and why they led to the positive prediction. For understanding this specific false positive, the explanation is incomplete.\",\n    \"concision\": \"The explanation is very compact and contains little redundant text. However, the brevity comes at the cost of useful interpretive detail.\",\n    \"overall_quality\": \"The explanation is concise and somewhat faithful to local factors, but it is too sparse to meaningfully explain the false positive prediction. Overall it is only moderately useful.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the German Credit domain, and the combination of checking status and housing makes sense as a credit-risk signal. The numeric presentation is odd, but the content itself is not contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:33.435494+00:00"
+}

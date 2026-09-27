@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4d8c443c70ce00c2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_214506591db1e703_8c34ff80b45c26ab.txt",
+  "prompt_version": "8c34ff80b45c26ab",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547098-xH6yXuXao3Nsn7HaWTpb",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004037,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.004037,
+        "upstream_inference_prompt_cost": 0.001287
+      },
+      "is_byok": false,
+      "prompt_tokens": 1287,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1837
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors but provides no guidance on what changes would alter the prediction. While marital status is identified as influential, there is no concrete suggestion about what action to take or how to modify inputs.\",\n    \"audit_usefulness\": \"Poor technical metrics (fidelity 0.53, faithfulness_gap 0.56, stability 0.02) severely limit audit value. The explanation's low fidelity means it may not reliably represent the model's actual decision logic, making it unreliable for bias or error investigation.\",\n    \"clarity\": \"The format is straightforward with feature names and weights, but requires understanding of the adult dataset schema and DICE methodology. Most non-technical readers would struggle with the notation and what the weights represent.\",\n    \"completeness\": \"The explanation shows only two non-zero factors out of ten listed, with most features having zero weight. This sparse representation may miss important decision drivers, particularly given the low fidelity score suggesting the explanation poorly captures the actual model behavior.\",\n    \"concision\": \"The explanation is compact and avoids verbosity, efficiently presenting feature names and weights. However, the inclusion of many zero-weight features adds minimal information value.\",\n    \"overall_quality\": \"This explanation is weak due to poor technical performance (low fidelity and stability), a false positive prediction (model predicted 1, true label 0), and limited practical utility. While the format is clear, the underlying explanation quality is compromised.\",\n    \"semantic_plausibility\": \"Marital status being influential for income prediction is plausible in the adult dataset domain. However, the very low fidelity (0.53) and high faithfulness gap (0.56) raise serious doubts about whether this explanation actually reflects what the model learned, undermining confidence in its semantic validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:44.393191+00:00"
+}

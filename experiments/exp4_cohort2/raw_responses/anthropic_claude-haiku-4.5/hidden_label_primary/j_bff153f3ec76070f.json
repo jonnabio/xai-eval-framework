@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_bff153f3ec76070f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_de938d5223748d7d_6cff9ca78029e0c0.txt",
+  "prompt_version": "6cff9ca78029e0c0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541281-FH7VHCms37CMOQC5Wlrt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003663,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002445,
+        "upstream_inference_cost": 0.003663,
+        "upstream_inference_prompt_cost": 0.001218
+      },
+      "is_byok": false,
+      "prompt_tokens": 1218,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1707
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance scores but offers no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies two anchor features with perfect weights, the very low fidelity (0.30) and stability (0.32) severely undermine confidence in the model's decision logic, making audit conclusions unreliable.\",\n    \"clarity\": \"The format is a simple list of feature names with normalized weights, which is easy to parse, but lacks context about what the weights mean or why only two features are highlighted as anchors.\",\n    \"completeness\": \"The explanation identifies only two features as anchors (mean smoothness and worst perimeter) while nine others receive zero weight, leaving uncertainty about whether the model truly ignores those features or whether the anchor method failed to capture them.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their normalized weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability), limited interpretability, and minimal actionability, despite being clearly formatted and concise.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, smoothness and perimeter are plausible morphological features, but the extreme sparsity (only 2 of 11 features active) and low technical metrics raise doubts about whether this explanation genuinely reflects the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:47.495208+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6179e2118d3ee745",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d3748ef854fdb49f_b147082cfc28e9c4.txt",
+  "prompt_version": "b147082cfc28e9c4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538482-zDlJlpzwZpdw5DBh7oeO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.00296625,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1545
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few influential features, but it does not translate them into any concrete recourse or next steps for the individual. It is therefore only weakly useful for decision support.\",\n    \"audit_usefulness\": \"The SHAP attributions give an auditor a compact view of the strongest local drivers, which is helpful for checking whether the model relies on sensible variables. However, the explanation lacks directionality context beyond signed contributions and does not expose broader model behavior.\",\n    \"clarity\": \"The feature list is short and easy to read, and the formatting is straightforward. A non-expert may still need some understanding of one-hot encoded features, but the overall message is understandable.\",\n    \"completeness\": \"It covers several of the top local contributors and is consistent with a positive prediction, but it does not explain the full decision context or the relative balance between positive and negative evidence. Important contextual information such as baseline value, magnitude interpretation, or instance-specific feature values is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering the main local factors in a small number of tokens. It is slightly terse because the raw feature names are presented without interpretive framing.\",\n    \"overall_quality\": \"This is a reasonably strong local explanation for a tabular model: it is readable, concise, and informative about top drivers. Its main weaknesses are limited interpretability for non-experts and the absence of actionable or deeper diagnostic context.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and fit common patterns in income prediction, such as education, marital status, occupation, age, and sex. Nothing in the explanation appears contradictory or out of domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:04.331738+00:00"
+}

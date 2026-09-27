@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ae0665b386193831",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_10ccf6bdc14f2a99_cd978b13b5259102.txt",
+  "prompt_version": "cd978b13b5259102",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541597-lXnfYj9FaHP9KhUEJ8QU",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003532,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002315,
+        "upstream_inference_cost": 0.003532,
+        "upstream_inference_prompt_cost": 0.001217
+      },
+      "is_byok": false,
+      "prompt_tokens": 1217,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1680
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation lists feature names with SHAP values in a straightforward tabular format that is easy to parse, though domain knowledge of breast cancer morphology features aids interpretation.\",\n    \"concision\": \"The explanation is compact and efficiently presents the top 10 contributing features with their SHAP values without redundancy or padding.\",\n    \"actionability\": \"The explanation provides no guidance on what actions to take, what thresholds matter, or how to modify inputs; it is purely descriptive of model behavior rather than prescriptive.\",\n    \"audit_usefulness\": \"The ranked SHAP values effectively support model behavior inspection and bias investigation by showing which morphological features drive the benign prediction, though the negative values require interpretation.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with quantified contributions, providing substantial decision context for this true negative prediction in breast cancer classification.\",\n    \"semantic_plausibility\": \"All listed features (worst area, radius, concave points, perimeter, etc.) are established morphological descriptors in breast cancer diagnosis; negative SHAP values indicating reduced malignancy risk are medically coherent.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready, with good clarity and domain coherence, but lacks actionability and could benefit from contextual interpretation of what negative SHAP values signify for clinical decision-making.\"\n  },\n  \"scores\": {\n    \"clarity\": 4,\n    \"concision\": 5,\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"completeness\": 4,\n    \"semantic_plausibility\": 5,\n    \"overall_quality\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:02.494197+00:00"
+}

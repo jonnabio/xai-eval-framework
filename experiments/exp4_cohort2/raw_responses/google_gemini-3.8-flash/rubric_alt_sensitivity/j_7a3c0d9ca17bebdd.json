@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7a3c0d9ca17bebdd",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_20242fe53fbadae4_92d0d3b40f2c20a4.txt",
+  "prompt_version": "92d0d3b40f2c20a4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546890-777FKx7J036qWhS1MsBj",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 750,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005304,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00432,
+        "upstream_inference_cost": 0.005304,
+        "upstream_inference_prompt_cost": 0.000984
+      },
+      "is_byok": false,
+      "prompt_tokens": 1312,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2464
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify threshold values for numerical features or directional guidance on how changing specific attributes could alter the model's decision.\",\n    \"audit_usefulness\": \"It highlights relevant factors including protected attributes like personal_status, which helps an auditor spot potential bias, though the lack of decision bounds limits deeper inspection.\",\n    \"clarity\": \"The raw feature strings and dummy-variable encodings with uniform 1.0000 weights make it somewhat cryptic for a layperson to interpret without domain context.\",\n    \"completeness\": \"While multiple features are listed, the actual rule predicates or thresholds for numerical variables like credit amount and duration are completely omitted.\",\n    \"concision\": \"The list is relatively compact, though listing uniform weights of 1.0000 across almost all factors adds redundant notation.\",\n    \"overall_quality\": \"The explanation indicates which attributes form the anchor, but missing thresholds and uniform weights reduce its interpretability and practical value.\",\n    \"semantic_plausibility\": \"Features like low savings, short employment duration, and lack of property are well-aligned with domain intuitions regarding credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:08:18.777379+00:00"
+}

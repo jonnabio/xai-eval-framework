@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d793ddda2393ae14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3675deb2dfa57683",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d793ddda2393ae14_6d0ac9a1d6714085.txt",
+  "prompt_version": "6d0ac9a1d6714085",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541842-SNNgmFhFMV8JoQsIbxKm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030315,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.0030315,
+        "upstream_inference_prompt_cost": 0.000786
+      },
+      "is_byok": false,
+      "prompt_tokens": 1048,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d793ddda2393ae14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete next steps or recourse; it only lists local factors without indicating how a user could change the outcome or review it. As a result, it offers no practical guidance for action.\",\n    \"audit_usefulness\": \"It gives a sparse view of which features were considered, but the values are presented in a way that is not interpretable as thresholds, directions, or contributions. This limits its usefulness for auditing why the random forest predicted class 0.\",\n    \"clarity\": \"The wording is simple, but the meaning of the 1.0000 and 0.0000 entries is not explained, so a non-expert would not know how to read the output. The list format is understandable, but the explanatory value is weak.\",\n    \"completeness\": \"Only a few feature names are shown and there is no clear indication of how they jointly led to the prediction or which features supported versus opposed class 0. The explanation lacks the local decision context needed to fully understand this specific case.\",\n    \"concision\": \"The explanation is short, but much of the content is repetitive and not very informative because it lists many features with zero-like values. It is compact, yet not maximally efficient in conveying useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and somewhat readable, but it lacks interpretability, actionable insight, and clear decision logic. The technical metrics suggest reasonable fidelity, but the presented text does not communicate that quality well.\",\n    \"semantic_plausibility\": \"The feature names are consistent with the breast cancer domain, and the use of radius, perimeter, and texture is plausible for this prediction task. However, the numerical pattern is not semantically explained, which makes the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:04.985818+00:00"
+}

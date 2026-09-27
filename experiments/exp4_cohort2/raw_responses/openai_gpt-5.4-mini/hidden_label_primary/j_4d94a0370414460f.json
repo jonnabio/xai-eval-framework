@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d08e79080e9bdc99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4d94a0370414460f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d08e79080e9bdc99_1e4fcf6439b2f0d6.txt",
+  "prompt_version": "1e4fcf6439b2f0d6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540423-6xTPLsLTaoSpTm1bG52y",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00291375,
+        "upstream_inference_prompt_cost": 0.00078525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1047,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d08e79080e9bdc99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only a list of features and binary indicator values. A user cannot tell what to change or review to affect the prediction.\",\n    \"audit_usefulness\": \"It reveals which features were present in the anchor set, but it does not explain how those features support class 0 or how strongly they influenced the model. This limits its usefulness for diagnosing model behavior or errors.\",\n    \"clarity\": \"The wording is short and the feature names are readable, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. It is therefore only partially understandable.\",\n    \"completeness\": \"The explanation lists several local factors, but it does not provide a coherent decision rule, directionality, or enough context to understand why the model predicted class 0. Key information about the threshold or sufficient conditions is missing.\",\n    \"concision\": \"The output is brief, but it is somewhat repetitive because it lists many features with mostly zero values. It could communicate the same local information more efficiently.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat interpretable as an anchor-style summary, but it lacks actionable guidance and does not adequately justify the specific prediction. The technical metrics also suggest modest fidelity and stability, which align with the limited explanatory quality.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are relevant to the domain, and an anchor explanation using perimeter and radius is plausible for this dataset. However, the 0/1 presentation is not very intuitive and does not fully clarify the local prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:27.343158+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c4b211a48684946f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_679cae8cfc0b290c_2c3e1d2d2f68f486.txt",
+  "prompt_version": "2c3e1d2d2f68f486",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543653-NgXPSe73R6xg9lRsKIYW",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003726,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002505,
+        "upstream_inference_cost": 0.003726,
+        "upstream_inference_prompt_cost": 0.001221
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1722
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies education-num as the dominant factor but provides no guidance on how to act on this insight, such as what education level changes might alter the prediction or what recourse options exist.\",\n    \"audit_usefulness\": \"The near-zero weights for most features and the high stability (0.968) suggest the model relies heavily on education, but the low fidelity (0.479) and moderate faithfulness gap (0.087) raise concerns about whether DICE accurately represents the model's actual decision boundary.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature weights, which is straightforward to parse, though the meaning of the numerical scores and why most are zero requires some technical understanding.\",\n    \"completeness\": \"The explanation covers the primary driver (education-num) but the overwhelming dominance of a single feature and zero weights for all others suggests either incomplete feature interaction capture or potential model pathology that warrants deeper investigation.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, listing features and weights efficiently without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is clear and concise, the low fidelity score, sparse feature coverage, and lack of actionable guidance significantly limit its utility for understanding or auditing the model's decision.\",\n    \"semantic_plausibility\": \"In income prediction tasks, education is a well-established driver of outcomes, making the dominance of education-num plausible; however, the complete absence of other known factors (age, workclass) raises questions about model realism.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:18.786119+00:00"
+}

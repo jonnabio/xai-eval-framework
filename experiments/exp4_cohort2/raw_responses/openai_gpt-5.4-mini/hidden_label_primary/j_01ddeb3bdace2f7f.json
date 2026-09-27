@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_01ddeb3bdace2f7f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3e006f8c0e7512b1_1ca24c7990013da3.txt",
+  "prompt_version": "1ca24c7990013da3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538492-L725lUTpCe0SeRxEoa8N",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003045,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.003045,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1570
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features that pushed the prediction up or down, but it does not translate them into any concrete recourse or next step. A user cannot easily infer what could be changed to review or alter the decision.\",\n    \"audit_usefulness\": \"The SHAP values provide a local ranking of contributing factors, which is useful for inspecting the model\u2019s behavior on this case. However, the lack of baseline context, feature values, and a clearer link to the FN outcome limits deeper bias or error analysis.\",\n    \"clarity\": \"The wording is simple and the ranking format is easy to scan, even for a non-expert. Still, the meaning of the signed SHAP values and the mix of correlated category indicators can be confusing without some model knowledge.\",\n    \"completeness\": \"It includes the top local contributors, but it omits the actual feature values and does not explain how these factors combine to yield the negative prediction. For a false negative, the explanation is not sufficient to fully understand why the instance was classified as 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with a short list of the strongest local factors. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"This is a decent SHAP summary that gives a useful snapshot of local feature influence, but it is limited by low stability, moderate fidelity, and the absence of contextual interpretation. It is informative, yet not strong enough to fully support decision review or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult dataset, and the directions of influence look consistent with common patterns in income prediction. The presence of overlapping categorical indicators makes it somewhat messy, but not implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:15.222182+00:00"
+}

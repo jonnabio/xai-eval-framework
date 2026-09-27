@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a252a173f5a9b521",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_052659e044864140_da9d305d3e8f1d7e.txt",
+  "prompt_version": "da9d305d3e8f1d7e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542224-IKzdIZBFojK2MlaCtnEz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003726,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00251,
+        "upstream_inference_cost": 0.003726,
+        "upstream_inference_prompt_cost": 0.001216
+      },
+      "is_byok": false,
+      "prompt_tokens": 1216,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1718
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions a clinician or patient could take based on these findings. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which morphological features drove the benign classification, supporting investigation of model logic and potential biases in feature weighting.\",\n    \"clarity\": \"The explanation uses domain-specific medical imaging terminology (concave points, perimeter, texture) without definition, requiring specialized knowledge to interpret; however, the format is well-organized and the SHAP values are clearly presented.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main local drivers of the prediction; however, the explanation lacks context about feature ranges, thresholds, or how these values compare to the population baseline.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting 10 ranked features with their numerical contributions in a minimal token budget.\",\n    \"overall_quality\": \"The explanation is technically sound with strong fidelity (0.87) and stability (0.99), but lacks actionability and domain context that would elevate it beyond a feature importance listing for a non-expert audience.\",\n    \"semantic_plausibility\": \"The negative SHAP values for morphological features (concave points, area, perimeter) aligning with a benign classification (0) is plausible, as irregular morphology typically indicates malignancy; the pattern is consistent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:29.905329+00:00"
+}

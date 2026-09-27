@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6a5c3b9639782200",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ea764fae63b129dc_a8856841b7cc33d8.txt",
+  "prompt_version": "a8856841b7cc33d8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541246-DUzRnEGoRhnGD6vUXngF",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030465,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.0030465,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1567
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse steps the user could take. It is useful for review, yet it does not say what should be changed or whether change is feasible.\",\n    \"audit_usefulness\": \"The ranked SHAP factors give an auditor a reasonable view of the local decision logic and highlight opposing influences on the model output. However, without the baseline prediction score or clearer sign interpretation, it only partially supports deeper error or bias investigation.\",\n    \"clarity\": \"The feature list is readable and the numeric contributions are easy to scan, but several encoded feature names require some familiarity with the German credit dataset. A non-expert would understand the general idea, but not all terms immediately.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, including both positive and negative contributors, which is helpful for understanding the case. Still, it lacks the overall model score, class probability, and a plain-language summary tying the factors to the final decision.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious redundancy. It conveys the top local factors in a short space, which makes it efficient for inspection.\",\n    \"overall_quality\": \"This is a solid local SHAP explanation that is concise and reasonably informative, but it remains somewhat technical and does not provide decision context or recourse. Overall it is useful for model inspection rather than end-user understanding.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit model, and the mix of checking status, duration, credit amount, savings, and history aligns with domain expectations. The direction of effects is also coherent, although the explanation does not spell out why the final prediction became a false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:09.562787+00:00"
+}

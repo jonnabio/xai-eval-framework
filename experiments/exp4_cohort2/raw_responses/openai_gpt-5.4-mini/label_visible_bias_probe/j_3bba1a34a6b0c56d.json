@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3bba1a34a6b0c56d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_18fe52436b35526b_75b92af70019c0ab.txt",
+  "prompt_version": "75b92af70019c0ab",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542665-jtoUWwFVMi4y54N3kOnp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.002895,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps that could change or review the prediction. It only lists features, without indicating which direction they matter or what the user might do.\",\n    \"audit_usefulness\": \"For auditing, it is only weakly useful because it names several features but gives no directional effects, thresholds, or rule logic. The low fidelity and zero stability metrics also suggest it is unreliable for investigating model behavior.\",\n    \"clarity\": \"The list format is easy to read, but the content is not understandable as an explanation because every listed factor has the same weight of 1.0000. A non-expert cannot tell why these variables matter or how they influenced the prediction.\",\n    \"completeness\": \"It mentions some local features, but it does not explain their contribution to the false positive decision or provide a coherent decision context. Key information such as whether each feature increased or decreased the prediction is missing.\",\n    \"concision\": \"The output is short and compact, but it is not informative enough to justify the space it uses. It repeats a generic top-factors list without adding useful detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is minimally interpretable, not actionable, and poorly supports inspection of the false positive. The technical metrics reinforce that it is not a reliable local explanation.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features are plausible for a classification explanation, and the presence of workclass and education categories fits the domain. However, the all-ones weighting and duplicate-looking categorical terms make the explanation itself semantically unconvincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:47.930564+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0a00b76ea42675c4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ac6e5925b1641835_f428abf2bf608aa9.txt",
+  "prompt_version": "f428abf2bf608aa9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542521-jaynDqh7JnzXUaYS5JJX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.00293625,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next steps, only a list of small feature contributions. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It gives a limited view of which local features LIME considered, but the contributions are extremely small and the fidelity/stability metrics are weak, so it is only partially useful for auditing. The explanation also does not help diagnose why this false positive occurred.\",\n    \"clarity\": \"The feature list is readable, but the meaning of the tiny weights is not intuitive and the one-hot encoded categories are somewhat technical for non-experts. It is understandable as a model artifact, but not clear as a plain-language explanation.\",\n    \"completeness\": \"The output includes some local feature drivers, yet the values are near zero and do not explain the prediction in a meaningful way. It misses the main decision logic, decision threshold context, and any stronger evidence for the false positive.\",\n    \"concision\": \"It is short and contains only a compact ranking of local factors, with little redundancy. However, the brevity comes at the cost of low informational value.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and technically structured, but the feature effects are tiny, unstable, and not very informative. It provides limited understanding of the false positive prediction and little support for review or recourse.\",\n    \"semantic_plausibility\": \"The listed adult-dataset features are plausible inputs for an income-related classifier, and the signs of the contributions are not inherently contradictory. Still, the near-zero magnitudes make the explanation feel disconnected from a meaningful decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:24.122129+00:00"
+}

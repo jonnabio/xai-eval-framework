@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_248a85036a1e87fe",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_eec93395cc3f8408_f2e0f66b3209f739.txt",
+  "prompt_version": "f2e0f66b3209f739",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543160-uxtu7ZaIffAxb3swy7XR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 394,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026385,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001773,
+        "upstream_inference_cost": 0.0026385,
+        "upstream_inference_prompt_cost": 0.0008655
+      },
+      "is_byok": false,
+      "prompt_tokens": 1154,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The SHAP values only show which features pushed the prediction toward class 0 or away from it; they do not give a concrete actionable change that would likely alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the model's local feature drivers and their directions, which can help inspect whether the random forest relies on sensible or potentially biased credit-risk signals.\",\n    \"clarity\": \"The list format is straightforward, but it uses feature names and signed contributions that require some familiarity with the dataset and SHAP to interpret fully.\",\n    \"completeness\": \"It identifies the main local contributors to the decision, but it does not explain interactions, baseline values, or how much each factor moved the prediction overall, so it is only a partial account.\",\n    \"concision\": \"The explanation is compact and focused, with little filler; nearly every token conveys a feature contribution.\",\n    \"overall_quality\": \"This is a solid local explanation: stable, concise, and informative about feature influence, but it lacks deeper context and actionable guidance.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, and the signs are reasonable for a true negative prediction, with weaker checking and credit history features pushing toward the adverse class.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:02.427244+00:00"
+}

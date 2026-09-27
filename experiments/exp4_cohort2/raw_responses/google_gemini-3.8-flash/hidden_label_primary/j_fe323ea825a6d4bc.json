@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fe323ea825a6d4bc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9294bc72ae3aeda0_8e87217f0c739dee.txt",
+  "prompt_version": "8e87217f0c739dee",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540191-ASIT4dHVWAWGumLvJp1F",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 950,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 544,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00449625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035625,
+        "upstream_inference_cost": 0.00449625,
+        "upstream_inference_prompt_cost": 0.00093375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2195
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only marks features with binary indicator weights rather than actionable thresholds or directed recommendations, it offers very little practical recourse.\",\n    \"audit_usefulness\": \"While an auditor can see which five features constitute the anchor subset, the absence of specific decision rule predicates or thresholds limits in-depth technical auditing.\",\n    \"clarity\": \"The list structure is clean and easy to read, but presenting anchor rules as arbitrary 1.0 and 0.0 values without threshold conditions obscures the true underlying rule logic.\",\n    \"completeness\": \"The explanation identifies the active subset of features driving the prediction, but omits essential predicate conditions, feature values, and anchor coverage metrics.\",\n    \"concision\": \"Listing multiple features with zero weight adds unnecessary clutter that does not contribute informative value.\",\n    \"overall_quality\": \"The explanation successfully highlights intuitive drivers for high income, but degrades in quality due to missing condition bounds and inclusion of uninformative zero-weight features.\",\n    \"semantic_plausibility\": \"The selected active factors\u2014such as higher education, executive managerial role, and work hours\u2014are strongly plausible predictors of high income in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:38.375019+00:00"
+}

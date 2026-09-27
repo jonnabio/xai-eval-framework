@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bd3a79ab9e8df109",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28188c86ac4bdfad_be08606449c7a18d.txt",
+  "prompt_version": "be08606449c7a18d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539522-QfImyucAKbMlLpc8AmO9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 759,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0052275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00429,
+        "upstream_inference_cost": 0.0052275,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2394
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature weights for a linear surrogate model, offering no concrete recourse steps or guidance for changing the outcome.\",\n    \"audit_usefulness\": \"It enables an auditor to see which local features influenced the negative prediction, as well as revealing potential explainer artifacts around one-hot encoding.\",\n    \"clarity\": \"The list of feature names and numerical weights is structured, but relies on raw technical notation and one-hot encoded variable names.\",\n    \"completeness\": \"The explanation lists the top ten local feature contributions, but omits the baseline intercept, instance feature values, and total prediction probability.\",\n    \"concision\": \"The text is compact and directly presents the key factors without conversational filler or redundancy.\",\n    \"overall_quality\": \"While concise and somewhat informative for auditing, the explanation suffers from unhandled one-hot encoding contradictions and zero direct actionability.\",\n    \"semantic_plausibility\": \"The individual feature directions generally align with domain expectations, but presenting mutually exclusive categories such as both female and male features undermines plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:32.195708+00:00"
+}

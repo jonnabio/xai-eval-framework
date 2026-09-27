@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3d27b1d2bd43df77",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d6146355d71e0d7a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3d27b1d2bd43df77_5237fa280bbeb98e.txt",
+  "prompt_version": "5237fa280bbeb98e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546898-Q3FPX3LGNIvUficsm5Qb",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004017,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002735,
+        "upstream_inference_cost": 0.004017,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1829
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3d27b1d2bd43df77\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. It does not indicate whether increasing or decreasing specific features would alter the prediction, making it impossible to act on.\",\n    \"audit_usefulness\": \"While the explanation identifies which features influenced the decision, the poor fidelity (0.606) and high faithfulness gap (0.728) suggest the explanation may not accurately represent the model's actual decision logic. This undermines its utility for auditing bias or errors.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with normalized scores\u2014but lacks context about what these scores mean, what the prediction represents (income threshold), or how to interpret the 1.0 vs 0.0 values. Domain knowledge is needed.\",\n    \"completeness\": \"The explanation identifies key features but with zero stability and high faithfulness gap, it's unclear whether these are truly the main reasons for this specific decision. The explanation may be incomplete or misleading about the actual decision drivers.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature scores in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is undermined by poor technical metrics (fidelity 0.606, faithfulness gap 0.728, stability 0.0) and a false positive prediction. While it identifies relevant features for income prediction, the low reliability and lack of actionable insight limit its utility.\",\n    \"semantic_plausibility\": \"The features selected (age, hours-per-week, occupation, relationship status) are plausible predictors of income in the adult dataset and align with domain knowledge. However, the false positive prediction raises questions about whether the explanation reflects genuine model reasoning or spurious patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:08:24.129067+00:00"
+}

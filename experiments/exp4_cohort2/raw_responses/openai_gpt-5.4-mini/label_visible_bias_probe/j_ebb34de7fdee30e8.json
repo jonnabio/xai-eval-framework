@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ebb34de7fdee30e8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_be3a619c28fb15c4_8d670b54b05b9750.txt",
+  "prompt_version": "8d670b54b05b9750",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541979-9SgG4QTn7eILXmx4q8Yy",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022185,
+        "upstream_inference_cost": 0.00301425,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists feature contributions with no guidance on what could change the outcome. For a false negative, a user would need actionable levers, but none are stated.\",\n    \"audit_usefulness\": \"It gives a local ranking of features and their signed contributions, which is somewhat useful for inspecting model behavior. However, the effects are very small and the low fidelity/stability reduce its value for serious auditing.\",\n    \"clarity\": \"The output is readable and compact, with a simple feature-by-feature list. A non-expert may still struggle to interpret terms like 'education-num' or the meaning of small positive and negative weights without additional context.\",\n    \"completeness\": \"The explanation covers several top local factors, but it omits the true target context, a confidence score, and any broader decision threshold information. It also does not explain why the model predicted the negative class despite the true label being positive.\",\n    \"concision\": \"The explanation is brief and mostly avoids redundancy, conveying the key local factors in a small number of tokens. It is reasonably efficient, though some entries are noisy or low-value, such as missing-value indicators with tiny weights.\",\n    \"overall_quality\": \"This is a modestly informative LIME explanation, but it is weakened by tiny effect sizes, low fidelity, and low stability. It is understandable at a glance, yet not strong enough to fully explain or support trust in the false-negative prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult dataset model, and the directions of contribution do not conflict with basic domain expectations. The presence of missing-value indicators and small coefficients is also believable, though the explanation is not very informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:21.884795+00:00"
+}

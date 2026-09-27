@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_73bc248a1a9df18d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_778dd7d6e1653158_3e8204a581cdb162.txt",
+  "prompt_version": "3e8204a581cdb162",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540033-RdSjVx2cu2DzvfmazBU9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 963,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 568,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045495,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00361125,
+        "upstream_inference_cost": 0.0045495,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2214
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw SHAP attribution values without actionable guidance, recourse pathways, or target values for change.\",\n    \"audit_usefulness\": \"It provides directional weights and magnitude of the top 10 features for technical validation, though the absence of original feature values limits deeper inspection.\",\n    \"clarity\": \"The explanation uses raw one-hot encoded feature names and decimal values that are hard for a non-expert reader to interpret.\",\n    \"completeness\": \"While it displays the top ten local drivers, it omits the underlying feature values of the instance and the baseline value.\",\n    \"concision\": \"The presentation is compact and efficiently lists the most impactful local factors without extraneous filler.\",\n    \"overall_quality\": \"The explanation offers useful technical signal via SHAP values, but poor readability, lack of feature values, and zero actionability limit its overall utility.\",\n    \"semantic_plausibility\": \"The negative contributions of features like capital-gain, age, and hours-per-week toward the low-income class align reasonably well with standard Adult dataset domain patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:00.978136+00:00"
+}

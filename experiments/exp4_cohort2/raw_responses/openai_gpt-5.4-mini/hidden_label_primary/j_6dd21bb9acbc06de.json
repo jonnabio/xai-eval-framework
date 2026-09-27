@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6dd21bb9acbc06de",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ae5f3b200cc3bef3_786ae6f4db07c541.txt",
+  "prompt_version": "786ae6f4db07c541",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540082-Wpx81HnFqNkGUgdlPx6v",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.00300375,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1545
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps a user could take. It lists factors with binary indicators but offers no guidance on how to change the prediction or review the decision.\",\n    \"audit_usefulness\": \"It offers limited audit value because it exposes only a few anchor-style factors without showing why they matter or how they interact. The very low fidelity and zero stability also suggest the explanation is not reliable for deeper inspection.\",\n    \"clarity\": \"The wording is simple and the list format is easy to read, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would not understand whether these are conditions, weights, or importances.\",\n    \"completeness\": \"The explanation is incomplete for understanding this specific prediction because it does not identify the main drivers in a human-interpretable way. It also omits the direction and strength of influence for the relevant features.\",\n    \"concision\": \"It is short and compact, but much of the content is uninformative because many listed features have zero values. The explanation uses few words, yet it does not convert that brevity into useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and readable, but not very informative, actionable, or trustworthy. The anchor output appears too sparse and unstable to support meaningful understanding of the model's decision.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and age and native-country can reasonably affect an income model. However, the combination of top factors and many zero-valued entries is not very semantically helpful for interpreting why this instance was classified as negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:46.381178+00:00"
+}

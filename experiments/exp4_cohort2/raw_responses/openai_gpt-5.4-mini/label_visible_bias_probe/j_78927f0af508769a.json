@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_78927f0af508769a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ea764fae63b129dc_a8856841b7cc33d8.txt",
+  "prompt_version": "a8856841b7cc33d8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541244-j4uOf9EG5fditNgq2qqb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002934,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.002934,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not translate them into a concrete recourse or decision-review step. A user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP drivers and their signed contributions. However, it lacks deeper context such as baseline values, feature values, or comparison to similar cases, which limits full error analysis.\",\n    \"clarity\": \"The output is easy to parse and the feature-effect format is straightforward for a non-expert. That said, terms like 'checking_status_<0' and positive/negative SHAP values may still require some interpretation.\",\n    \"completeness\": \"It provides the main local factors influencing this prediction, but not the instance\u2019s actual feature values, prediction probability, or a link between the factors and the final class. For a false positive, the absence of a clearer class-level explanation makes it only partially complete.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary detail while still listing the top contributors. It is fairly information-dense for its length.\",\n    \"overall_quality\": \"Overall, this is a decent local explanation: concise, interpretable, and useful for inspection, but limited in recourse and in how fully it explains the specific false positive. Its main weakness is that it enumerates influences without turning them into an accessible narrative or actionable guidance.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit, and their directions are broadly coherent with credit-risk intuition. A few effects may be counterintuitive without the underlying feature values, but nothing appears contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:06.825337+00:00"
+}

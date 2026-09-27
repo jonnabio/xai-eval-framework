@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f74f0c86c5491ebc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_27ff1641b5ef1b1a_cda10e4a72065a63.txt",
+  "prompt_version": "cda10e4a72065a63",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541395-vvmi0DIJAZteafzEHtYw",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00402,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002795,
+        "upstream_inference_cost": 0.00402,
+        "upstream_inference_prompt_cost": 0.001225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1784
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them or what actions a clinician or patient could take based on these findings. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which features drove the benign prediction and verify model consistency with domain expectations. The high stability (0.988) and moderate fidelity (0.491) support reproducibility assessment, though fidelity concerns warrant investigation.\",\n    \"clarity\": \"The explanation is presented as a ranked list of feature names with numerical SHAP values, which is standard but requires familiarity with SHAP methodology and medical feature terminology to interpret. A non-expert would struggle to understand what these values mean.\",\n    \"completeness\": \"The top 10 features are listed with their contributions, covering the main drivers of the prediction. However, the explanation lacks context about feature ranges, baseline values, or why these particular features matter in breast cancer diagnosis.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting 10 features with their SHAP values in 85 tokens. No unnecessary elaboration is present, though minimal context is sacrificed for brevity.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks accessibility and actionability for end users. While it correctly identifies key drivers and achieves high stability, the low fidelity (0.491) and absence of clinical context or guidance limit its practical utility.\",\n    \"semantic_plausibility\": \"The identified features (concave points, area, perimeter, radius, texture) are well-established morphological predictors in breast cancer diagnosis, and their negative contributions to a benign prediction are medically coherent. The pattern aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:41.116141+00:00"
+}

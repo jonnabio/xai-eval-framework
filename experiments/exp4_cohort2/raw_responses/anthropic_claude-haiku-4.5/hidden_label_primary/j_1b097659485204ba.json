@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1b097659485204ba",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d3748ef854fdb49f_b147082cfc28e9c4.txt",
+  "prompt_version": "b147082cfc28e9c4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538525-tVVUUYLn9Y4VAfJUoIAT",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 599,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004233,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002995,
+        "upstream_inference_cost": 0.004233,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1837
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to act on this information, such as what changes might alter the prediction or what decisions follow from it. No recourse pathways or next steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which features drive the prediction and their relative importance, supporting investigation of model logic and potential bias in features like sex and marital status. The high fidelity (0.987) and stability (0.956) metrics strengthen audit confidence.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and SHAP values, which is straightforward for a technical audience but may confuse non-experts unfamiliar with SHAP methodology or feature encoding (e.g., 'marital-status_Married-civ-spouse'). The format is clear but domain-specific.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main drivers of the prediction; however, the explanation lacks context about the instance's actual feature values, the base prediction rate, or how these contributions combine to reach the final prediction of 1. The high faithfulness (0.987) suggests the features shown are representative.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked features and their values without extraneous text. Each entry is minimal and information-dense relative to its length.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready, with strong fidelity and stability metrics, but lacks actionability and user-friendly context for non-experts. It serves model inspection well but falls short of supporting broader decision-making or recourse.\",\n    \"semantic_plausibility\": \"The identified features (education, marital status, occupation, sex, age) are plausible predictors of income in the adult dataset and align with domain expectations. The relative importance ordering is coherent with typical socioeconomic patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:51.776376+00:00"
+}

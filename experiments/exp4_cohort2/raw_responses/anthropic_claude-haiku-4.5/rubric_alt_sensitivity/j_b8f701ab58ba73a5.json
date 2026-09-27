@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b8f701ab58ba73a5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_27ff1641b5ef1b1a_574a04159e576c12.txt",
+  "prompt_version": "574a04159e576c12",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544635-i27yXOC3gCR7bFqYcguA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003839,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002555,
+        "upstream_inference_cost": 0.003839,
+        "upstream_inference_prompt_cost": 0.001284
+      },
+      "is_byok": false,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1795
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken. For a medical classification, it doesn't suggest what clinical or data-driven interventions might change the outcome.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions are useful for auditing model behavior and detecting bias. The high stability (0.988) and reasonable fidelity (0.491) support investigation of model logic, though fidelity could be stronger.\",\n    \"clarity\": \"The format is technical (feature names with SHAP values) and requires understanding of SHAP methodology and breast cancer feature terminology. Non-technical readers would struggle to interpret the meaning.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which captures the main local decision factors. However, it lacks context about the base prediction or why these features matter for the classification.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-value pair is necessary information, though the technical format limits accessibility.\",\n    \"overall_quality\": \"This is a serviceable explanation that correctly identifies key contributing features with appropriate technical rigor. However, it lacks actionability, domain context, and accessibility for non-technical stakeholders. The correct prediction (TN) and high stability are positive factors.\",\n    \"semantic_plausibility\": \"The features (concave points, area, perimeter, radius, texture, concavity, smoothness) are all established breast cancer diagnostic indicators. The negative contributions of morphological features toward malignancy classification are medically plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:30:40.723938+00:00"
+}

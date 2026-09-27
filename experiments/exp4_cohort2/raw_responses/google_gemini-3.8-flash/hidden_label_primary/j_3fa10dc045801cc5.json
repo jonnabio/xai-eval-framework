@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3fa10dc045801cc5",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c697ae24ec5760fd_3e04c2e7cfcbfaeb.txt",
+  "prompt_version": "3e04c2e7cfcbfaeb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538742-5wlCpnLL8QSqcvvMxSmg",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1122,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 720,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005151,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042075,
+        "upstream_inference_cost": 0.005151,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2380
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP feature weights without actionable recourse, target thresholds, or guidance on how the applicant can improve the outcome.\",\n    \"audit_usefulness\": \"It provides the top 10 signed feature contributions, allowing an auditor to inspect model weights and check for anomalous directional impacts on the prediction.\",\n    \"clarity\": \"The raw list of one-hot encoded variable names and signed numerical values requires technical literacy and statistical familiarity to interpret.\",\n    \"completeness\": \"The explanation captures the primary local drivers and their relative strengths, though it omits the baseline prediction value and the actual observed feature values.\",\n    \"concision\": \"The summary is compact and dense, presenting the top ten drivers without conversational padding.\",\n    \"overall_quality\": \"It serves as an adequate technical attribution summary for data scientists, but lacks feature value context and layperson accessibility.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as checking account status, housing, and employment\u2014align with standard credit underwriting domains, although simultaneous negative impacts for multiple housing categories can be counterintuitive.\",\n    \"rationales_complete\": true\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:32.281375+00:00"
+}

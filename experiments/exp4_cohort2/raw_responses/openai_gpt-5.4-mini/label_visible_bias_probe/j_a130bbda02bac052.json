@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a130bbda02bac052",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e23de818fd8f8613_cf8abc0ef4899376.txt",
+  "prompt_version": "cf8abc0ef4899376",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541753-bw0n26KTjOKlBousO9xK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.003075,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few factors associated with the prediction, but it does not translate them into concrete recourse steps or decision-review guidance. A user cannot infer what to change, by how much, or whether the listed factors are modifiable.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which features formed the anchor condition set, but the zero-valued feature list adds little explanatory value. The low fidelity also limits confidence that this explanation accurately reflects the model's local behavior.\",\n    \"clarity\": \"The output is readable and uses simple feature names, but the anchor-style format and many zero-valued entries make it hard for a non-expert to interpret at a glance. The meaning of the 1.0000 and 0.0000 values is not explained.\",\n    \"completeness\": \"It covers a few top local factors, but it does not explain why these factors lead to the positive prediction or how strongly they contributed relative to alternatives. Important decision context such as directionality, thresholds, and interaction effects is missing.\",\n    \"concision\": \"The explanation is fairly short, but it includes a long tail of zero-valued features that contribute little useful information. It is not maximally compact relative to the amount of actionable or interpretive content provided.\",\n    \"overall_quality\": \"This is a limited but usable anchor explanation: it is readable and locally relevant, yet it lacks interpretive depth, actionable guidance, and strong faithfulness. Overall it gives only a partial picture of why the model predicted the positive class.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit risk, since checking status, purchase purpose, savings, and duration are reasonable predictors. However, the presentation as a list of binary anchor conditions with many irrelevant zeros is only moderately natural in context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:35.813493+00:00"
+}

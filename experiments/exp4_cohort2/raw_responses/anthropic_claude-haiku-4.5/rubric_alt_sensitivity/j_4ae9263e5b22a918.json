@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4ae9263e5b22a918",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_b11abd9ec480a4aa_e0cce8719b4c10e5.txt",
+  "prompt_version": "e0cce8719b4c10e5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545024-TQxu15H6T1E2lYTqg5F5",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 583,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004212,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002915,
+        "upstream_inference_cost": 0.004212,
+        "upstream_inference_prompt_cost": 0.001297
+      },
+      "is_byok": false,
+      "prompt_tokens": 1297,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1880
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person or reviewer cannot determine what specific changes to hours-per-week, occupation, sex, or marital status would alter the prediction.\",\n    \"audit_usefulness\": \"While the feature weights offer some insight into the model's local logic, the poor technical metrics (fidelity 0.49, faithfulness_gap 0.39, stability -0.01) severely undermine confidence in these explanations. An auditor would struggle to rely on this for bias detection or error investigation.\",\n    \"clarity\": \"The explanation uses technical jargon (LIME, feature weights, coefficients) and assumes familiarity with machine learning. Non-technical stakeholders would not understand what the numerical weights mean or how they drive the prediction.\",\n    \"completeness\": \"The explanation identifies top factors but lacks context about their relative importance, direction of influence, or how they interact. It does not explain why the model predicted class 1 (>50K income) when the true label is 0, making it incomplete for understanding this false positive.\",\n    \"concision\": \"The format is compact and lists only the top 10 factors, but each entry is a bare coefficient without interpretation. Some efficiency is lost because the numbers alone carry limited meaning without explanation.\",\n    \"overall_quality\": \"This explanation has significant weaknesses: poor technical fidelity, lack of actionability, limited clarity for non-experts, and insufficient context for understanding the false positive error. While it identifies relevant features, the overall utility is compromised by these limitations.\",\n    \"semantic_plausibility\": \"The features listed (hours-per-week, occupation, sex, marital status) are plausible predictors of income in the adult dataset and align with domain knowledge. However, the explanation does not clarify why these particular values led to a >50K prediction, limiting assessment of plausibility for this specific instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:37:10.234596+00:00"
+}

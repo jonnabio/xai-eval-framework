@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3a3aa63c72afc20c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9a991f3bd7709007_e4dcd4ea51ec906f.txt",
+  "prompt_version": "e4dcd4ea51ec906f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541688-u1ArsP2rL6aYc38Ar14x",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00288675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00288675,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for changing the prediction. It only lists influential features and their SHAP contributions.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies which variables pushed the model toward the positive class and which pushed against it. However, it lacks deeper context such as feature values or comparison to typical cases, so investigation support is partial rather than complete.\",\n    \"clarity\": \"The feature names and signed contribution values are presented in a straightforward list that is easy to scan. A non-expert may still need some interpretation of SHAP signs, but the structure is generally clear.\",\n    \"completeness\": \"The explanation includes the main local drivers of the prediction, but it does not show the underlying feature values, baseline, or how large the final margin was. For a false positive case, that missing context limits full understanding of why the model erred.\",\n    \"concision\": \"It is compact and information-dense, giving ten top factors in a short format with little redundancy. The only slight drawback is that the unfiltered list may include more factors than necessary for quick understanding.\",\n    \"overall_quality\": \"This is a solid local SHAP explanation that is easy to read and reasonably informative about model behavior. Its main weakness is the lack of actionability and the limited context needed to fully diagnose the false positive.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are plausible and consistent with known medical feature sets for this dataset. The mix of positive and negative contributions also looks coherent for a local explanation of an XGBoost model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:30.972587+00:00"
+}

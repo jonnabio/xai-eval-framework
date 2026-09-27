@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_288af89580152b61",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_20242fe53fbadae4_5d3e723cde6e16e1.txt",
+  "prompt_version": "5d3e723cde6e16e1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538566-mGLyBLtGMYkWpMbRfJvC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00311025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023175,
+        "upstream_inference_cost": 0.00311025,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1572
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or next steps for the applicant. It only lists feature conditions, so it offers little guidance on what could be changed to affect the outcome.\",\n    \"audit_usefulness\": \"It identifies several local factors associated with the prediction, which is useful for inspection, but it lacks directionality and a clear statement of how each factor supports the class decision. The very low sparsity and the odd zero-valued entry limit its value for a thorough audit.\",\n    \"clarity\": \"The formatting is readable and the feature names are understandable, but the output is essentially a raw list of anchor conditions without an explanation sentence. A non-expert would struggle to interpret what these factors mean for the model's decision.\",\n    \"completeness\": \"The explanation gives a set of local conditions but not the actual decision logic, thresholds, or how strongly each condition contributed beyond the anchor scores. For a false negative case, it does not explain why the model predicted class 0 or what evidence was missing for class 1.\",\n    \"concision\": \"The explanation is relatively short, but much of the content is redundant because it mainly enumerates feature names with repeated 1.0000 scores. It is compact in length yet not maximally informative per word.\",\n    \"overall_quality\": \"This is a plausible anchor-style local explanation, but it is only moderately informative because it is sparse in interpretation and weak on recourse. It is acceptable for a quick snapshot of local conditions, but not strong as a standalone explanation for a user or auditor.\",\n    \"semantic_plausibility\": \"The listed features are coherent with German credit risk modeling, and the selected variables are plausible drivers of a negative credit decision. The inclusion of many conditions with perfect scores and a zero-valued residence_since entry is somewhat odd, but not implausible overall.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:29.464869+00:00"
+}

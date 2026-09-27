@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b168d0ab73784973",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0c6133634e2fe96a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_b168d0ab73784973_c42c2e705dd2df28.txt",
+  "prompt_version": "c42c2e705dd2df28",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546542-QdLKND45SQ8Q4fzltGYi",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1118,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 737,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00519375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041925,
+        "upstream_inference_cost": 0.00519375,
+        "upstream_inference_prompt_cost": 0.00100125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1335,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2453
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b168d0ab73784973\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists negative feature attribution scores but offers no direct guidance or counterfactual thresholds for how the applicant could overturn the denial.\",\n    \"audit_usefulness\": \"Provides clear directional attribution values for the top ten features, enabling an auditor to see which variables drove this false-negative prediction.\",\n    \"clarity\": \"The representation relies on raw one-hot encoded feature names and decimal attribution values that require statistical or machine learning literacy to interpret.\",\n    \"completeness\": \"Covers the top ten local contributors with precise attribution signs and magnitudes, capturing the main drivers behind the model's output.\",\n    \"concision\": \"Very compact and information-dense list without extraneous wording or redundancy.\",\n    \"overall_quality\": \"A solid, standard local SHAP feature attribution summary that is technically useful for auditing despite low lay accessibility and actionability.\",\n    \"semantic_plausibility\": \"The selected financial factors (checking account status, loan purpose, savings, duration, credit history) align well with established credit scoring logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:02:31.172176+00:00"
+}

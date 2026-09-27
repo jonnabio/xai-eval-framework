@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3870726be35cfc69",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_445412523328930a_4b3b42639bce7828.txt",
+  "prompt_version": "4b3b42639bce7828",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547428-eYyPLKn5G6DgDDOz35s4",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004147,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00285,
+        "upstream_inference_cost": 0.004147,
+        "upstream_inference_prompt_cost": 0.001297
+      },
+      "is_byok": false,
+      "prompt_tokens": 1297,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1867
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names and weights but provides no guidance on what values would change the prediction or what actions are feasible. It is purely descriptive of what the model considered, not prescriptive about next steps.\",\n    \"audit_usefulness\": \"While the list of features shows what the model weighted, the uniform weights (all 1.0) and lack of direction or magnitude information limit diagnostic value. The low fidelity (0.26) and high cost suggest the explanation may not reliably represent the model's actual decision boundary.\",\n    \"clarity\": \"The format is a simple list of feature names with weights, accessible to most readers. However, the technical nature of feature names (e.g., 'checking_status_0<=X<200') and the lack of interpretation make it less accessible to non-technical stakeholders.\",\n    \"completeness\": \"The explanation lists many features but all with identical weights, providing no differentiation of their relative importance. It does not explain why these features matter or how they interact, leaving the decision logic incomplete.\",\n    \"concision\": \"The explanation is repetitive, listing ten features with identical weight values (1.0000). This repetition adds length without additional information; a summary statement would be more efficient.\",\n    \"overall_quality\": \"The explanation is weak. It suffers from low fidelity (0.26), uniform uninformative weights, no actionable guidance, and a false negative prediction (predicted 0, true label 1). The technical metrics suggest the explanation does not faithfully represent the model's reasoning.\",\n    \"semantic_plausibility\": \"The features listed (duration, checking status, credit history, installment commitment) are plausible for credit risk assessment. However, the uniform weights and lack of direction are implausible\u2014real credit models do not weight all features equally, and the false negative prediction raises questions about whether the explanation captures the actual decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:17:14.292753+00:00"
+}

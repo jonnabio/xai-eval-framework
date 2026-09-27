@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cb3a229121e9fe0e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e9eba60d9edc4d8a_fa0525ac736e8faf.txt",
+  "prompt_version": "fa0525ac736e8faf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541167-q4ahZ5AqpErsoaLviJVc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003081,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.003081,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1568
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or decision-review guidance; it only lists feature attributions. A clinician or user cannot directly infer what to change or check next from these values alone.\",\n    \"audit_usefulness\": \"The SHAP values do help an auditor see which features pushed the model toward the prediction, so there is some diagnostic value. However, the explanation lacks baselines, feature values, and comparative context, which limits deeper error or bias analysis.\",\n    \"clarity\": \"The ranking of top local factors is easy to read, and the sign/value format is straightforward for a technical or semi-technical reader. For a non-expert, the meaning of negative versus positive contributions is not explicitly explained, so it is only moderately clear.\",\n    \"completeness\": \"It includes several top contributing features, but not the actual feature values, the prediction probability, or a clear statement of how these factors combine into the final class. Given this is a false negative, the explanation is incomplete for understanding why the positive case was missed.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering a short list of the most important factors. It could be slightly more useful by adding one concise sentence interpreting the direction of the contributions.\",\n    \"overall_quality\": \"This is a reasonably good local SHAP summary with useful feature ranking, but it is limited by missing context, weak actionability, and only partial support for understanding the false negative. Overall it is acceptable but not strong.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are domain-consistent, and the pattern of influential measurements such as area, perimeter, radius, and concavity is plausible. The signs are also believable for a local explanation, even though the lack of feature values makes the exact interpretation less certain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:50.244609+00:00"
+}

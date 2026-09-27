@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5018410ce7ed06cc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_10ccf6bdc14f2a99_cd978b13b5259102.txt",
+  "prompt_version": "cd978b13b5259102",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541832-sVS57ExST28OSABRwkXi",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 682,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00492075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00400875,
+        "upstream_inference_cost": 0.00492075,
+        "upstream_inference_prompt_cost": 0.000912
+      },
+      "is_byok": false,
+      "prompt_tokens": 1216,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2285
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers purely retrospective attribution weights for uncontrollable histological measurements, providing no actionable guidance or clinical recourse.\",\n    \"audit_usefulness\": \"The signed SHAP values clearly identify the top ten features pushing the prediction toward class 0, though the omission of the raw feature values slightly limits auditability.\",\n    \"clarity\": \"The list of feature attributions is cleanly formatted, but interpreting raw negative SHAP values requires technical understanding of model attribution.\",\n    \"completeness\": \"The explanation lists the top ten contributing features and their directional weights, though baseline values and the actual feature measurements are not reported.\",\n    \"concision\": \"The presentation is compact and direct, listing only the most influential factors without extraneous filler.\",\n    \"overall_quality\": \"This is a solid, standard local SHAP attribution output that serves technical verification well, but it lacks plain-language translation and actual feature values.\",\n    \"semantic_plausibility\": \"Measurements of cell size, perimeter, and concavity driving the prediction toward a benign outcome align well with standard oncology expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:01.945115+00:00"
+}

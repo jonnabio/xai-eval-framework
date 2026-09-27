@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7740428f1871b045",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7ee17e1b81806239_9de11beca7ceff94.txt",
+  "prompt_version": "9de11beca7ceff94",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542069-cM7oc8U0XmPlZoVyifNa",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 658,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00478125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00383625,
+        "upstream_inference_cost": 0.00478125,
+        "upstream_inference_prompt_cost": 0.000945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1260,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2283
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw numerical weights with no contextual baseline or actionable guidance for changing the predicted outcome.\",\n    \"audit_usefulness\": \"It gives auditors visibility into the model's local feature weights, but the lack of actual feature values and moderate fidelity limit deeper debugging.\",\n    \"clarity\": \"The list of one-hot encoded variable names and small signed floats requires technical literacy to interpret properly.\",\n    \"completeness\": \"Ten local features are reported with weights, but the omitted instance feature values leave the decision context incomplete.\",\n    \"concision\": \"The presentation is compact and delivers feature attribution rankings without filler text.\",\n    \"overall_quality\": \"The explanation offers basic local attribution insights but suffers from poor actionability, missing feature values, and questionable semantic signs.\",\n    \"semantic_plausibility\": \"Attributing negative influences to typically high-earning indicators like a Doctorate and Professional Specialty is counterintuitive in the Adult income domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:57.929388+00:00"
+}

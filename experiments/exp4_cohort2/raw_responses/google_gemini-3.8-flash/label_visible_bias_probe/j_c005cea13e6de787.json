@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c005cea13e6de787",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_78dfd1648ed95148_bcefa8a01705de28.txt",
+  "prompt_version": "bcefa8a01705de28",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541226-zky06SJo0VYKNHORla41",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 523,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00428175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0033375,
+        "upstream_inference_cost": 0.00428175,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2149
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists attribution scores but provides no concrete guidance, thresholds, or recourse steps for the applicant.\",\n    \"audit_usefulness\": \"The quantitative breakdown of top positive and negative SHAP drivers gives auditors a clear view into why the false negative prediction occurred.\",\n    \"clarity\": \"The raw feature tokens and decimal SHAP values require technical knowledge to interpret, making it confusing for a lay reader.\",\n    \"completeness\": \"The explanation captures the top ten contributing features and their relative signs, though it lacks baseline reference values.\",\n    \"concision\": \"The text is highly dense and avoids filler words, presenting only the key contributing features and their numerical attributions.\",\n    \"overall_quality\": \"It serves as an adequate technical explanation for model inspection but falls short on user clarity and practical actionability.\",\n    \"semantic_plausibility\": \"Features like credit duration, employment tenure, and checking status are standard, intuitively sound determinants of creditworthiness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:54.543233+00:00"
+}

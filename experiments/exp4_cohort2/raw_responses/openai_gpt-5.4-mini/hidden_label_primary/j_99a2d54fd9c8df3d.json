@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8ce491005c0b4780",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_99a2d54fd9c8df3d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_8ce491005c0b4780_8c05a388f05fc561.txt",
+  "prompt_version": "8c05a388f05fc561",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540330-FwaPIBRrJszBNnmwMhSJ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.00296025,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8ce491005c0b4780\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step a user could take. It only lists features and values without saying how changing anything would affect the prediction.\",\n    \"audit_usefulness\": \"It gives some local feature signals, which is useful for a basic check of what the anchor rule is focusing on. However, the values are hard to interpret in context and there is little support for investigating model error or bias.\",\n    \"clarity\": \"The wording is short and mostly readable, but the feature list with many 0.0000 and 1.0000 entries is not self-explanatory. A non-expert would likely struggle to understand why these factors matter for the prediction.\",\n    \"completeness\": \"The explanation includes the top local factors, but it does not explain their direction, thresholds, or how they combine to support the negative prediction. That leaves out key local decision context needed to fully understand the case.\",\n    \"concision\": \"It is compact and avoids long narrative, but much of the content is a raw feature dump with limited interpretive value. The information density is moderate rather than excellent.\",\n    \"overall_quality\": \"Overall, this is a partially informative anchor-style explanation, but it is weak for interpretation because it lacks readable rules and contextual meaning. It is usable for a rough audit, yet not strong enough to clearly justify the specific prediction.\",\n    \"semantic_plausibility\": \"The cited breast cancer features are domain-appropriate and the pattern of compactness, concave points, radius, and perimeter is plausible for this task. Still, the normalized 0/1 values are not clearly tied to the instance, so the semantics are only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:54.202668+00:00"
+}

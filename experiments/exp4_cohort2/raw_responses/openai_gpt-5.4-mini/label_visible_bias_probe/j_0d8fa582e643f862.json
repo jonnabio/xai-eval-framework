@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0d8fa582e643f862",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_60730b2d1280bac2_3db610f8e438481a.txt",
+  "prompt_version": "3db610f8e438481a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541293-sr7MFYfa0XyygwetaUg2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.0030285,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few positive and negative factors, but it does not translate them into concrete recourse or decision steps. A user cannot easily tell what to change or verify to influence the prediction.\",\n    \"audit_usefulness\": \"The listed local feature contributions are useful for inspecting which variables pushed the model toward the positive class. However, the explanation is shallow and lacks enough context, such as feature values or stronger attribution structure, for thorough bias or error analysis.\",\n    \"clarity\": \"The output is concise and easy to scan, with feature names and weights presented in a straightforward list. A non-expert may still need some familiarity with encoded features like workclass_Self-emp-inc to fully interpret it.\",\n    \"completeness\": \"It covers several main drivers of the prediction, including workclass, occupation, capital gain, relationship, and education. Still, it does not provide the actual instance values or a fuller local narrative explaining why the model predicted class 1.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering a ranked set of local factors in a small number of tokens. It is reasonably efficient, though the many one-off encoded features slightly reduce readability.\",\n    \"overall_quality\": \"This is a decent local explanation for a true positive prediction, offering a plausible set of contributing factors in a compact form. Its usefulness is limited by sparse context, weak actionability, and modest technical quality indicated by low fidelity and stability.\",\n    \"semantic_plausibility\": \"The factors are broadly consistent with the Adult income domain, where higher education, executive/managerial occupation, capital gain, and spouse-related relationship status often align with the positive class. The mix of positive and negative weights also looks coherent for a local linear approximation.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:56.377284+00:00"
+}

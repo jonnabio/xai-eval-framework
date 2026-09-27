@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3830b6d4d8e8784b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c6f665a5f99bd165",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3830b6d4d8e8784b_286df28839ce1540.txt",
+  "prompt_version": "286df28839ce1540",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539631-OnJN34XjwuTP3vMT7dFA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00207,
+        "upstream_inference_cost": 0.00286275,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3830b6d4d8e8784b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few features but gives no concrete recourse or next steps a person could take to change the outcome. The zero-valued entries are not framed as actionable guidance.\",\n    \"audit_usefulness\": \"It identifies some local factors, but the fixed top-factor listing and many zero weights provide limited insight into how the logistic regression reached the prediction. Low stability further reduces its value for auditing.\",\n    \"clarity\": \"The output is short and easy to parse, with feature names and numeric scores presented plainly. However, the meaning of the anchor scores is not explained, so a non-expert may not understand what the values imply.\",\n    \"completeness\": \"Only two features have nonzero importance, and there is no explanation of directionality or how these factors combine to support the negative prediction. This leaves out much of the local decision context needed to fully understand the case.\",\n    \"concision\": \"The explanation is brief and mostly avoids redundancy, but several zero-valued features add little informational value. It is reasonably compact, though not maximally information-dense.\",\n    \"overall_quality\": \"Overall, the explanation is moderately useful as a sparse summary of local factors, but it lacks interpretive depth, recourse, and strong audit support. Its simplicity helps readability, yet the low completeness and weak practical guidance limit quality.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for the Adult dataset, especially education-num and occupation, which commonly influence income prediction. The presence of many zero-valued feature entries is also consistent with a sparse local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:07:15.303973+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2295500071a843e9",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1759e90b50c033fd_d4ada202a3cabb32.txt",
+  "prompt_version": "d4ada202a3cabb32",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544097-vG0Di5RrmXFSRAbW7Bh1",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 640,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005097,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00415125,
+        "upstream_inference_cost": 0.005097,
+        "upstream_inference_prompt_cost": 0.00094575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2368
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw mathematical attribution weights and lacks actionable recommendations or counterfactual guidance for the applicant.\",\n    \"audit_usefulness\": \"It provides clear signed feature attributions that allow an auditor to inspect why this false positive occurred and identify sensitive features like personal status driving the positive prediction.\",\n    \"clarity\": \"The presentation uses raw technical feature names and floating-point SHAP values, which require domain and statistical literacy to interpret correctly.\",\n    \"completeness\": \"The explanation covers the top ten local drivers with their relative weights, though it omits the baseline value and the underlying raw feature values for continuous variables.\",\n    \"concision\": \"The text is compact and directly presents key feature contributions without redundant filler words.\",\n    \"overall_quality\": \"While useful as a technical audit snapshot of local model logic, its lack of plain-language interpretation and actionable recourse limits its end-user value.\",\n    \"semantic_plausibility\": \"The listed risk drivers, such as duration, savings status, and credit history, align well with expected credit domain mechanisms.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 4,\n      \"clarity\": 3,\n      \"completeness\": 3,\n      \"concision\": 4,\n      \"overall_quality\": 3,\n      \"semantic_plausibility\": 4\n    }\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:21:46.580818+00:00"
+}

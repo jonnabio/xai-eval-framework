@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a228253cf3f5f004",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ac6e5925b1641835_5d9c3d712ad9fa5c.txt",
+  "prompt_version": "5d9c3d712ad9fa5c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543898-x4PHKU8HoUku6gPxyQNH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 358,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00246825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001611,
+        "upstream_inference_cost": 0.00246825,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1501
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not suggest any concrete change that would alter the prediction; the listed factors are too small to guide action.\",\n    \"audit_usefulness\": \"It gives a few local feature weights, so it offers limited insight into the model\u2019s behavior, but the near-zero values and low fidelity reduce its value for auditing.\",\n    \"clarity\": \"The feature list is easy to read, but the meaning of tiny positive and negative contributions is not intuitive for non-technical users.\",\n    \"completeness\": \"It names several local factors, but the explanation is too sparse to understand the main reasons behind this false positive.\",\n    \"concision\": \"The explanation is compact and contains little filler, though some of the listed factors add minimal useful information.\",\n    \"overall_quality\": \"The explanation is concise but weak because the attributions are tiny, not very faithful, and do not adequately explain the incorrect prediction.\",\n    \"semantic_plausibility\": \"Some listed factors are plausible in general for Adult income prediction, but the very small weights and mixed signals make the explanation only moderately convincing for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:20.736124+00:00"
+}

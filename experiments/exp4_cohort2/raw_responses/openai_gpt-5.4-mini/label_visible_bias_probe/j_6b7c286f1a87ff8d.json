@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7334ccb1f9958dda",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6b7c286f1a87ff8d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7334ccb1f9958dda_2f6cb7fdb77ed74e.txt",
+  "prompt_version": "2f6cb7fdb77ed74e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541814-O3joemsCGqBbOhmeJv8R",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.0029625,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7334ccb1f9958dda\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps; it only lists one feature with an isolated score and does not indicate how to change the outcome. A user cannot meaningfully act on it.\",\n    \"audit_usefulness\": \"It offers only minimal insight into the model\u2019s behavior and does not explain why the prediction was made or how features influenced the decision. The near-zero values for most features and the poor stability further limit its value for audit or debugging.\",\n    \"clarity\": \"The output is easy to read as a list, but the meaning of the numeric values is not explained and the selection of features is not intuitive. A non-expert would struggle to understand what the scores imply.\",\n    \"completeness\": \"It omits the main local decision context such as which features pushed the prediction toward class 0 versus class 1, and it provides no counterfactual or comparative explanation. The explanation is too sparse to fully understand this specific prediction.\",\n    \"concision\": \"It is short and contains little redundancy, but that brevity comes at the cost of useful explanatory content. As a result, it is concise yet underinformative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and readable, but it fails to explain the prediction in a meaningful way or support review and recourse. Its low stability and sparse feature information make it only marginally useful.\",\n    \"semantic_plausibility\": \"The single highlighted factor, occupation_Transport-moving, is plausible as a relevant adult-income feature, but the many exact zeros for unrelated features are not very interpretable. The explanation is not contradictory, but it feels mechanically generated rather than semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:36.628041+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7664346d6d245e8e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0c57055995cafaca_7ce6884cc1cac353.txt",
+  "prompt_version": "7ce6884cc1cac353",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546855-FcImXTBk9OGW5D3EU9uO",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 642,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00490275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003915,
+        "upstream_inference_cost": 0.00490275,
+        "upstream_inference_prompt_cost": 0.00098775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1317,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2361
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directional guidance, offering no actionable steps to alter the outcome.\",\n    \"audit_usefulness\": \"It highlights which features were included in the rule anchor (education-num, capital-gain, hours-per-week), but without condition thresholds or values, its utility for auditing this false negative error is quite limited.\",\n    \"clarity\": \"Listing feature names with binary 1.0000/0.0000 values without context or thresholds is confusing for non-technical users.\",\n    \"completeness\": \"The explanation only indicates feature selection flags rather than actual rule predicates, cutoffs, or directional effects.\",\n    \"concision\": \"Listing multiple features with zero weights adds unnecessary clutter to what should be a concise anchor rule.\",\n    \"overall_quality\": \"This is a weak explanation because the anchor rule is stripped of its predicate conditions, showing only indicator weights alongside low fidelity.\",\n    \"semantic_plausibility\": \"Education, capital gain, and hours worked are well-known primary drivers of income in the Adult dataset, making the selected set plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:07:42.687253+00:00"
+}

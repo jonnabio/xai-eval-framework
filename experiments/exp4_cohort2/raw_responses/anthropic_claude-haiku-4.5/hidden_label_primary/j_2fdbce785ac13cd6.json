@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2fdbce785ac13cd6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cd6abd1a9433542b_de756704398a0758.txt",
+  "prompt_version": "de756704398a0758",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540375-6wuYhnBMYnoFyyoNvbly",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004029,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002805,
+        "upstream_inference_cost": 0.004029,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1785
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. It is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The output shows which features DICE identified as locally important, but the extremely high cost (1006ms), poor fidelity (-0.046), and very low stability (0.017) suggest the counterfactual explanations are unreliable. This severely limits audit confidence in the model's decision logic.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature-value pairs with numerical weights, which is straightforward to parse. However, the meaning of the weights and why these specific features matter for the prediction is not explained.\",\n    \"completeness\": \"Only 10 features are shown with most weights at 0.0000, suggesting the explanation is sparse. For a complex MLP model predicting on the adult dataset, this appears to capture only surface-level information and may miss important interaction effects or non-linear decision boundaries.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights. However, the high proportion of zero-weighted features makes the presentation somewhat padded relative to actionable information.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (negative fidelity, low stability, high cost) and provides limited interpretability value. While clearly formatted, it fails to deliver reliable or actionable insights into the model's decision-making process.\",\n    \"semantic_plausibility\": \"The identification of native-country_Ireland and occupation_Tech-support as top factors is plausible for income prediction, but the extremely sparse feature set and poor technical metrics raise doubts about whether these truly reflect the model's actual decision logic or are artifacts of DICE's optimization failure.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:19:41.619993+00:00"
+}

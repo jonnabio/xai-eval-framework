@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e471eba1a7410789",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_681f91e7c50b9380_96c2d1e5fedf4760.txt",
+  "prompt_version": "96c2d1e5fedf4760",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541442-ZTdTn5cqNBflQYheUEbd",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00393,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002705,
+        "upstream_inference_cost": 0.00393,
+        "upstream_inference_prompt_cost": 0.001225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1766
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_Ireland as the sole driver (1.0) but provides no guidance on feasible recourse or decision review steps; a user cannot act on this information without additional context about why this feature matters or how to address it.\",\n    \"audit_usefulness\": \"While the explanation isolates one feature with perfect weight, the near-zero weights on all other features and poor technical metrics (fidelity: -0.047, stability: 0.018) raise concerns about model reliability that an auditor cannot resolve from this output alone.\",\n    \"clarity\": \"The format is straightforward and uses standard notation, but the meaning of the normalized weights and why only one feature dominates is not explained; a non-expert would struggle to interpret what these numbers signify.\",\n    \"completeness\": \"The explanation identifies only one feature as relevant and assigns zero importance to all others, which is suspiciously sparse and likely incomplete; critical context about the instance or model decision boundary is missing.\",\n    \"concision\": \"The explanation is compact in length but highly redundant, listing nine features with zero weights that add no information; a more concise version would omit zero-weight features entirely.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (negative fidelity, low stability), implausible sparsity (only 1 of 10 features), and lack of interpretability; it fails to provide trustworthy or actionable insight into the prediction.\",\n    \"semantic_plausibility\": \"Attributing a binary classification prediction entirely to a single categorical feature (country of origin) is implausible in the adult income domain, where education, age, and work hours typically matter; this suggests model overfitting or explanation failure.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:29.510093+00:00"
+}

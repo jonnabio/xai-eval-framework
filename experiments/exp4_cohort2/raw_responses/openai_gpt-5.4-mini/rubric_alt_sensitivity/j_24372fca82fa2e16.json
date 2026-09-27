@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_282b2b337bb41d87",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_24372fca82fa2e16",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_282b2b337bb41d87_d4f86d8618cd17e0.txt",
+  "prompt_version": "d4f86d8618cd17e0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543631-U5KHxKPquIeT53SwZXUa",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 401,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00265425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018045,
+        "upstream_inference_cost": 0.00265425,
+        "upstream_inference_prompt_cost": 0.00084975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1133,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1534
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_282b2b337bb41d87\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists feature conditions but does not explain how changing any feature would alter the prediction, so it offers little practical next step.\",\n    \"audit_usefulness\": \"The feature list gives some local signal about what the model looked at, but the near-binary 0/1 pattern and moderate fidelity limit its usefulness for diagnosing bias or error.\",\n    \"clarity\": \"The terms are standard medical features, but the output is just a raw anchor list without plain-language interpretation, so it is only partly accessible.\",\n    \"completeness\": \"It names several local factors, but it does not explain the direction of their influence, thresholds, or why this false negative occurred, so the account is incomplete.\",\n    \"concision\": \"The explanation is fairly short and mostly consists of feature names and values, but much of the content is not informative without additional context.\",\n    \"overall_quality\": \"As an anchor-style local summary it provides some hint of the decision logic, but the missing causal direction, weak faithfulness, and limited interpretability make it only mediocre overall.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible predictors in this domain, but the explanation format is awkward and the all-1/all-0 pattern is not very convincing as a human explanation of this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:53.953406+00:00"
+}

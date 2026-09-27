@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8d5db4b2c663e8dc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5169d5420efbc3da_5484c8ab4eacb31b.txt",
+  "prompt_version": "5484c8ab4eacb31b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542036-oJ8RvfQLXLymlOY5t55Q",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002997,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.002997,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide specific recourse or next steps; it only lists features and binary indicator values. A user cannot tell what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for inspection because it identifies a few local factors, especially education-num and occupation, but it lacks directionality and the anchor conditions themselves. That limits its value for diagnosing why the model produced a false negative.\",\n    \"clarity\": \"The wording is terse and the feature list is understandable in a technical sense, but the meaning of values like 1.0000 and 0.0000 is not explained. A non-expert would likely find it confusing.\",\n    \"completeness\": \"It names only a small subset of features and does not explain how they jointly support the negative prediction, especially in a false-negative case. Missing context such as the instance's actual feature values and the rule logic prevents full local understanding.\",\n    \"concision\": \"The output is compact and avoids long prose, but it is also highly compressed to the point that important explanatory content is omitted. It is reasonably concise, though not maximally informative.\",\n    \"overall_quality\": \"This is a limited explanation: it is short and somewhat audit-relevant, but it is not very actionable, clear to non-experts, or complete. Overall it provides only partial insight into why the model predicted class 0 despite the true label being 1.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset and a logistic regression model, and occupation/education are sensible predictors of income class. However, the presentation as 'top local factors' with 0/1 anchor values is not very intuitive without additional context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:19.223085+00:00"
+}

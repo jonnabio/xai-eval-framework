@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_443fa95e6bb9a53a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b1120c514459fffb",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_443fa95e6bb9a53a_92fc4ff911066295.txt",
+  "prompt_version": "92fc4ff911066295",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546965-Yv9o81MYjcuZqwQgAGaH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004148,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002855,
+        "upstream_inference_cost": 0.004148,
+        "upstream_inference_prompt_cost": 0.001293
+      },
+      "is_byok": false,
+      "prompt_tokens": 1293,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1864
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_443fa95e6bb9a53a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features but provides no information about their values, directions of influence, or what changes would alter the prediction. A person cannot act on feature names alone without knowing current values or thresholds.\",\n    \"audit_usefulness\": \"While the feature list could help identify which variables the model relies on, the uniform weights (all 1.0) and lack of directional information severely limit diagnostic value. The very low fidelity (0.28) and stability (0.0) suggest the explanation is unreliable for auditing purposes.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with weights. However, without domain context or explanation of what the weights mean or how features influence the outcome, non-technical readers cannot understand why these features matter for the prediction.\",\n    \"completeness\": \"The explanation identifies 10 features but omits critical information: their actual values in this instance, the direction and magnitude of their influence, and how they interact. This is insufficient to understand the local decision logic.\",\n    \"concision\": \"The explanation is compact but lacks substance. It lists features efficiently but sacrifices informativeness; the brevity comes at the cost of explanatory power rather than from tight, information-dense writing.\",\n    \"overall_quality\": \"This explanation is weak. It provides a bare feature list with uniform weights but lacks the contextual detail needed for understanding, auditing, or acting. The poor technical metrics (fidelity 0.28, stability 0.0) and small sample size (n=50) further undermine confidence in the result.\",\n    \"semantic_plausibility\": \"The selected features (age, education, marital status, occupation) are plausible predictors of income in the adult dataset and align with domain knowledge. However, the uniform weighting and lack of value information make it difficult to assess whether the explanation is truly consistent with the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:09:34.773348+00:00"
+}

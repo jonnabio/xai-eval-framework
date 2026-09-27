@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9d46575994a10067",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d3748ef854fdb49f_57f473a42a85d7e8.txt",
+  "prompt_version": "57f473a42a85d7e8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544511-CoMxpV39k7b3FLUxYOZc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003909,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003909,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1817
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person receiving this prediction would not know what steps to take to alter the result.\",\n    \"audit_usefulness\": \"The ranked feature contributions with SHAP values enable auditors to verify model behavior and check for bias patterns. The high fidelity (0.987) and stability (0.956) scores suggest reliable explanations for systematic auditing.\",\n    \"clarity\": \"The format is technical\u2014SHAP values and feature names require understanding of machine learning concepts. Non-technical stakeholders would struggle to interpret the numerical contributions and feature encodings like 'marital-status_Married-civ-spouse'.\",\n    \"completeness\": \"The explanation identifies the top 10 contributing factors with their relative importance. For a logistic regression model predicting income >50K, education level and marital status are the main drivers, which captures the primary decision logic.\",\n    \"concision\": \"The explanation is compact at 84 tokens with no redundancy. Each feature-value pair conveys specific information about its contribution magnitude, making efficient use of space.\",\n    \"overall_quality\": \"This is a serviceable explanation that accurately identifies key drivers and demonstrates good technical properties (high fidelity and stability), but lacks actionability and accessibility for non-technical users. It serves auditing purposes well but falls short for broader stakeholder communication.\",\n    \"semantic_plausibility\": \"The factors align with domain knowledge about income prediction: education level, marital status (married individuals typically have higher household income), and occupation type are well-established predictors. The ranking is plausible for the adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:28:37.028040+00:00"
+}

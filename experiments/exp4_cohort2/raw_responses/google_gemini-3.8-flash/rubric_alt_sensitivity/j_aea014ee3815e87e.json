@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_aea014ee3815e87e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a6075392942e36b2_08b74188c94cc4cf.txt",
+  "prompt_version": "08b74188c94cc4cf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548594-z6HNlj1TPVAsLY1UK7g8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1374,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 937,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0061575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0051525,
+        "upstream_inference_cost": 0.0061575,
+        "upstream_inference_prompt_cost": 0.001005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1340,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2714
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any feature values, thresholds, or directional guidance, giving the user no information on what could be changed to alter the outcome.\",\n    \"audit_usefulness\": \"While it identifies features that may be part of an anchor, the lack of predicate rules/bounds and the low fidelity (0.54) severely limit its usefulness for auditing.\",\n    \"clarity\": \"The representation relies on raw one-hot encoded variable names and uninformative binary weights (1.0000 vs 0.0000) rather than human-readable decision rules.\",\n    \"completeness\": \"The explanation fails to state the actual conditions or feature thresholds defining the anchor, omitting critical context needed to understand the model's decision.\",\n    \"concision\": \"The output is reasonably short, but it includes zero-weighted features that add little value.\",\n    \"overall_quality\": \"This is a weak explanation that flattens anchor rules into arbitrary 1.0/0.0 feature weights and includes contradictory one-hot categories without thresholds.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive one-hot categories (such as having no checking account and having 0<=X<200) as active factors is logically doubtful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:36:46.210299+00:00"
+}

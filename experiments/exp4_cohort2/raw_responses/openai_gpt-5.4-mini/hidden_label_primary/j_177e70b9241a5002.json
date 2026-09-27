@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_177e70b9241a5002",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1de08b8c2918a436_5c1593265af054a1.txt",
+  "prompt_version": "5c1593265af054a1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539310-RG0VTtzX43jfvYOZFXsB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.0030075,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1550
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few triggering conditions, but it does not translate them into concrete recourse steps or indicate what could change the prediction. A user cannot tell what specific actions might reduce risk or reverse the outcome.\",\n    \"audit_usefulness\": \"It reveals some local factors the anchor method found sufficient, which is useful for checking whether the model relies on sensible variables. However, it lacks detail about directionality, thresholds, or counterfactual behavior, so it only partially supports deeper audit work.\",\n    \"clarity\": \"The wording is simple and the listed features are easy to read, even for a non-expert. Still, the format is a bare feature list with repeated zeros and no plain-language explanation of why these factors matter.\",\n    \"completeness\": \"The explanation identifies three active anchors, but it does not explain how strongly they support the positive prediction or how they combine with other variables. For a false positive case, that makes the local decision context incomplete.\",\n    \"concision\": \"It is quite short and mostly free of redundancy, but much of the token budget is spent on zero-valued features that add little information. The useful content could be expressed more efficiently.\",\n    \"overall_quality\": \"This is a moderately useful anchor-style explanation: it is readable and points to a few local conditions, but it is sparse, not very actionable, and only partly informative about the model's decision process. Its utility is limited especially for understanding why the model produced a false positive.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for German credit risk modeling, and combinations like poor checking status and low savings reasonably align with a positive risk prediction. The explanation is therefore coherent with the domain, even though it remains very shallow.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:01:53.897635+00:00"
+}

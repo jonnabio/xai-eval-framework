@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0adc3fccf65f78de",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3debbe632feba167_630b904fb1ab3636.txt",
+  "prompt_version": "630b904fb1ab3636",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542201-3V7YrT1OB1ZBtKFVeSH4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00290325,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for changing the prediction. Listing feature values with zeros offers no usable guidance for a decision maker.\",\n    \"audit_usefulness\": \"It provides only a sparse ranked feature list and does not explain why these factors support the negative prediction or how they interact. The near-zero sparsity and negative fidelity further limit its value for auditing model behavior.\",\n    \"clarity\": \"The output is readable as a list, but the meaning of values like 0.0000 and the relevance of 'native-country_Ireland' are not explained in plain language. A non-expert would likely struggle to interpret what the explanation actually says.\",\n    \"completeness\": \"It includes only a few top local factors and omits the direction and magnitude of most important drivers of the prediction. There is little local decision context beyond a narrow feature snapshot.\",\n    \"concision\": \"The explanation is short and not padded, but some of the included fields are uninformative zeros. As a result, it is somewhat compact but not maximally efficient in useful content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse, but the content is too sparse and poorly interpretable to support understanding or review of the model's negative prediction. The technical metrics also suggest low fidelity and low stability, reinforcing the limited quality.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and a negative prediction for this instance is not inherently surprising. However, the explanation itself is not semantically informative because the feature values and their effect on the decision are not meaningfully described.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:03.473678+00:00"
+}

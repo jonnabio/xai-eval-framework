@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc5e0af1e6f9ee71",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a12315844a256f36",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_dc5e0af1e6f9ee71_2d54958c917fc123.txt",
+  "prompt_version": "2d54958c917fc123",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539982-k0F1RXlupBsToSzjWoZv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00281625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.00281625,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_dc5e0af1e6f9ee71\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives feature values but no concrete recourse or next steps, so a user cannot tell what to change or review. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"It identifies two influential features, which is somewhat useful for inspection, but the 0/1-like values are not interpretable as effect direction or strength. That limits its value for bias or error analysis.\",\n    \"clarity\": \"The wording is short and structurally simple, but the presentation of many features as 0.0000 or 1.0000 without explanation is hard for a non-expert to interpret. The meaning of these binary-looking values is also unclear.\",\n    \"completeness\": \"It mentions the top two local factors, but it does not explain how they influenced the prediction or provide any threshold, rule, or class-supporting evidence. This leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and contains little redundancy, so it is efficient in length. However, the brevity comes at the expense of interpretability.\",\n    \"overall_quality\": \"Overall, this is a minimal anchor-style output that is concise but only partially informative. It offers some local signal for auditing, yet it is too opaque to fully explain the specific prediction.\",\n    \"semantic_plausibility\": \"The highlighted breast-cancer features are plausible predictors in this domain, and emphasizing concave points and radius is consistent with medical intuition. The main issue is not plausibility but lack of interpretive detail.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:06.337315+00:00"
+}

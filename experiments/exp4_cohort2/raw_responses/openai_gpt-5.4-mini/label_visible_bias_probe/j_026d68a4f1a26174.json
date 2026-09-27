@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_98c1b4de308b5917",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_026d68a4f1a26174",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_98c1b4de308b5917_0e85a1717d4f1c78.txt",
+  "prompt_version": "0e85a1717d4f1c78",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541313-GwPrkvlLR2EnOH5idVNx",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00288075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00288075,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1516
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_98c1b4de308b5917\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not tell the user what they could change or verify to alter the outcome. It only lists feature indicators with no recourse or decision-review guidance.\",\n    \"audit_usefulness\": \"It gives a sparse glimpse of which local factors were active, but not enough detail to assess whether the model is behaving sensibly. The zero-one indicator style and lack of directionality limit bias or error analysis.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the 1.0000 and 0.0000 values is not explained for a non-expert. The explanation also uses technical feature names without context, making it only partly clear.\",\n    \"completeness\": \"It identifies a few local factors, but it does not explain how they combine to produce the positive prediction. Important contextual information such as feature effects, thresholds, or the instance's actual feature values is missing.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording, but it is also overly terse relative to the information needed. It compresses the result into a feature list without explanatory substance.\",\n    \"overall_quality\": \"Overall, this is a minimal anchor-style summary that is readable but not very informative. It is acceptable as a rough local cue, yet it falls short of providing a trustworthy or actionable explanation.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult dataset and a positive income prediction, especially education, capital gain, and husband relationship. However, the binary-looking scores and lack of explanation make the semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:16.313922+00:00"
+}

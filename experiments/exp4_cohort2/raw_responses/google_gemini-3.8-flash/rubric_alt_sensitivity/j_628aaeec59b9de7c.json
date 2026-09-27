@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_628aaeec59b9de7c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_44c1e011120b2dd5_ad7b05e662534e53.txt",
+  "prompt_version": "ad7b05e662534e53",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547463-S0Y6NqNMH5aGj2abpENk",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 545,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00459225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036225,
+        "upstream_inference_cost": 0.00459225,
+        "upstream_inference_prompt_cost": 0.00096975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1293,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2259
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation presents static anatomical and morphological cell nucleus measurements with attribution scores, offering no practical recourse or actionable steps for a patient or clinician.\",\n    \"audit_usefulness\": \"For an auditor investigating this false negative result, the SHAP values clearly highlight that lower size metrics (worst radius, perimeter, and area) strongly pulled the prediction toward 0 despite opposing positive concavity features.\",\n    \"clarity\": \"The raw feature-attribution format requires technical literacy in interpreting positive/negative SHAP scores and familiarity with medical imaging metrics, making it inaccessible to a layperson.\",\n    \"completeness\": \"The explanation covers the top ten local features with their directional attributions, though it lacks the actual observed feature values and baseline value to fully contextualize the prediction.\",\n    \"concision\": \"The text is compact and directly presents the key attribution weights without filler or fluff.\",\n    \"overall_quality\": \"This is a solid, standard local SHAP attribution summary that provides good technical insight into a false negative decision, constrained by raw numerical presentation.\",\n    \"semantic_plausibility\": \"The identified features\u2014radius, perimeter, area, and concavity\u2014are standard, clinically validated morphological predictors of malignancy in breast cytology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:17:51.796891+00:00"
+}

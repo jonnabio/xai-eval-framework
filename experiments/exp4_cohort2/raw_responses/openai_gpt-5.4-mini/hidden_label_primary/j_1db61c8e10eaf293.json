@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7982d390c3e51c7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1db61c8e10eaf293",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7982d390c3e51c7d_6219913fa73fea7e.txt",
+  "prompt_version": "6219913fa73fea7e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539562-nKU4WZhqLS1vAtSakwMS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00307875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.00307875,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1570
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7982d390c3e51c7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for a user. It only lists features with binary-like weights, so a person cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a few local factors the anchor method considered important, but it lacks directionality and threshold details. That makes it hard to inspect why the XGBoost model predicted class 0 or to probe for errors and biases.\",\n    \"clarity\": \"The wording is simple, but the presentation is confusing because most listed features have 0.0000 and only two have 1.0000, without explaining what those values mean. A non-expert would not understand how these factors support the prediction.\",\n    \"completeness\": \"It covers only a very sparse set of local factors and omits feature values, thresholds, and the logical rule behind the anchor. As a result, it does not provide enough context to fully understand this specific decision.\",\n    \"concision\": \"The output is short, but it is not efficient because much of the text is a long list of zero-valued features that add little information. A more compact rule-based summary would be more informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, hard to interpret, and provides limited support for understanding or validating the prediction. It has some audit value due to the identified anchors, but the lack of interpretable structure keeps it below acceptable quality.\",\n    \"semantic_plausibility\": \"The two highlighted breast-cancer features, worst texture and worst concave points, are plausible drivers in this domain. However, the zero-valued feature listing and absence of a readable rule reduce the semantic coherence of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:06.519525+00:00"
+}

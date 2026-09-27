@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_74eef6600d536f99",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f4658b35cc204bfb_452042e63b750a41.txt",
+  "prompt_version": "452042e63b750a41",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543279-jLj9Xdi6AYMZJ4eWeB6X",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 380,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00255675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00171,
+        "upstream_inference_cost": 0.00255675,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1509
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential features but does not say what changes would move the prediction, so it offers little concrete next-step guidance.\",\n    \"audit_usefulness\": \"The feature list provides some local insight into the model's behavior, but the near-zero sparsity, negative fidelity, and very low stability make it hard to use reliably for auditing.\",\n    \"clarity\": \"The output is short and mostly readable, but the meaning of the numeric scores and the one-hot encoded feature names is not obvious to a non-technical reader.\",\n    \"completeness\": \"It names only a couple of local factors and leaves out a fuller causal account of why the model predicted the positive class for this false positive instance.\",\n    \"concision\": \"The explanation is compact and contains little filler, though several zero-valued entries add limited information.\",\n    \"overall_quality\": \"As an explanation, it is brief and somewhat interpretable, but its low stability and poor fidelity make it weak overall.\",\n    \"semantic_plausibility\": \"Native-country_Honduras and occupation_Sales are plausible model features for Adult-income predictions, but the explanation is generic and the many zero-valued factors do not strongly support the specific decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:01.121412+00:00"
+}

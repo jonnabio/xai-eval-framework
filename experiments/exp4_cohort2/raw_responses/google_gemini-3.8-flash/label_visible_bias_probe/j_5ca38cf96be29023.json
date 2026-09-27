@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cafe50d43e9b9266",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5ca38cf96be29023",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cafe50d43e9b9266_2c16d8d15a7f5ac9.txt",
+  "prompt_version": "2c16d8d15a7f5ac9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545148-a6kE2X2eBZKOJSPjwrdi",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1102,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 694,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005067,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041325,
+        "upstream_inference_cost": 0.005067,
+        "upstream_inference_prompt_cost": 0.0009345
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2348
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cafe50d43e9b9266\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide directional guidance, thresholds, or concrete recourse steps for an applicant to alter the outcome.\",\n    \"audit_usefulness\": \"While it isolates the five features comprising the anchor rule, it omits rule thresholds and directional influence, limiting its utility for rigorous model auditing.\",\n    \"clarity\": \"The raw key-value format with indicator weights (1.0 vs 0.0) is syntactically readable but unintuitive for a non-expert without explanation of what 1.0000 signifies.\",\n    \"completeness\": \"The explanation lists the features included in the anchor but strips out the specific predicate ranges and decision boundaries that define the rule.\",\n    \"concision\": \"Listing irrelevant features with zero weights adds unnecessary clutter to an already sparse rule representation.\",\n    \"overall_quality\": \"Presenting an Anchor rule as a pseudo-importance list of 1s and 0s without rule conditions or feature values severely limits its practical explanatory value.\",\n    \"semantic_plausibility\": \"The primary active drivers\u2014checking status, savings status, credit duration, and amount\u2014align well with established credit risk factors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:16.808383+00:00"
+}

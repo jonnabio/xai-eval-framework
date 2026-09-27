@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_89636bc432b0711f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cad1d6dbc8b4e027_9572fadc84a8efaa.txt",
+  "prompt_version": "9572fadc84a8efaa",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543515-3TeqN7FMYuT5qgUIbROH",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 871,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 507,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004188,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00326625,
+        "upstream_inference_cost": 0.004188,
+        "upstream_inference_prompt_cost": 0.00092175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2100
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because all feature weights are reported as zero, the explanation offers no actionable levers or guidance for recourse.\",\n    \"audit_usefulness\": \"The explanation fails to reveal any meaningful feature attributions for the MLP's prediction, rendering it ineffective for model auditing beyond flagging an explainer failure.\",\n    \"clarity\": \"The feature-weight format is structurally legible, but reporting identical zero values for every listed factor is confusing for any reader.\",\n    \"completeness\": \"The explanation does not provide any non-zero attributions or context to explain why the positive class was predicted.\",\n    \"concision\": \"Listing ten distinct features that all carry zero attribution yields negligible information density.\",\n    \"overall_quality\": \"This is a degenerate explanation where zero-valued weights provide no explanatory insight into the model's decision.\",\n    \"semantic_plausibility\": \"Attributing zero impact across all top local factors while predicting class 1 contradicts expected explanatory logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:02.695151+00:00"
+}

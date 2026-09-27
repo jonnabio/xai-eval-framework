@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_dc0fee46eeb54dcd",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e759e990528304a2_d3172f2839ecee53.txt",
+  "prompt_version": "d3172f2839ecee53",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542001-gxNXqA1XVzPKv6ZsiRyb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1079,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 716,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004989,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00404625,
+        "upstream_inference_cost": 0.004989,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2336
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw local attribution coefficients without counterfactual guidance or practical steps for recourse.\",\n    \"audit_usefulness\": \"It highlights key model inputs including sensitive demographic attributes like sex and marital status, though low fidelity and high faithfulness gap limit audit reliability.\",\n    \"clarity\": \"The list format is readable, but the technical one-hot feature names and raw attribution weights require basic data science literacy.\",\n    \"completeness\": \"The top ten positive and negative contributors are shown, though the underlying feature values and baseline probability are omitted.\",\n    \"concision\": \"The presentation is compact and delivers the top local weights without extraneous wording.\",\n    \"overall_quality\": \"This is an acceptable, compact raw feature-attribution summary, though limited by zero recourse guidance and weak surrogate fidelity.\",\n    \"semantic_plausibility\": \"Features like professional specialty, capital gain, and age aligning positively with high income match domain knowledge well.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:49.694719+00:00"
+}

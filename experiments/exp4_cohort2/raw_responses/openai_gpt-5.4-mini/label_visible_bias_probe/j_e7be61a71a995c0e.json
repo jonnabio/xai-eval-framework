@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c1afbcd9580538a4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e7be61a71a995c0e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c1afbcd9580538a4_3f77a2e65f9e9509.txt",
+  "prompt_version": "3f77a2e65f9e9509",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542353-BKCZXAJ7htf7JzGCNB01",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0029025,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c1afbcd9580538a4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step, such as which feature changes might alter the prediction. It only lists local factors without indicating how they affected the outcome.\",\n    \"audit_usefulness\": \"It gives some evidence about which features were present in the local anchor set, but not how they relate to the negative prediction or whether they are individually important. This limits its usefulness for diagnosing model behavior or bias.\",\n    \"clarity\": \"The wording is simple, but the output is just a raw list of feature names with repeated 1.0000 values and no plain-language interpretation. A non-expert would not understand what these anchors mean for the decision.\",\n    \"completeness\": \"It omits the direction and magnitude of feature effects, and it does not explain why the model predicted class 0 for this applicant. The main local decision context is therefore missing.\",\n    \"concision\": \"The text is short, but it is not efficient because it repeats many features with identical values and provides little interpretable content. It is compact in length but low in information density.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is technically concise and stable, but it is not interpretable enough to support understanding, review, or recourse. The content resembles a raw anchor summary rather than a usable explanation.\",\n    \"semantic_plausibility\": \"The listed credit features are plausible for the German credit domain, and using anchors for a random forest is contextually appropriate. However, the repeated identical values without interpretation make the explanation semantically unhelpful despite being domain-consistent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:37.372799+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_127c82e9f09d4d6f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c04339897f75190f_934de7055d7ae40d.txt",
+  "prompt_version": "934de7055d7ae40d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543336-KPaMTrz0sQ0LhDAdJ7mQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 348,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00242025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001566,
+        "upstream_inference_cost": 0.00242025,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1487
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their directions; it does not say how to change inputs or what would flip the prediction.\",\n    \"audit_usefulness\": \"The SHAP ranking helps inspect which variables drive the model locally, but it is limited because it does not explain the prediction error in a broader way or give subgroup/bias insight.\",\n    \"clarity\": \"The wording is straightforward for a technical reader, but terms like SHAP values and coded feature names require some model or domain knowledge.\",\n    \"completeness\": \"It gives the top local factors, but not a full account of the decision, interactions, baseline value, or why the model made a false negative.\",\n    \"concision\": \"The explanation is compact and information-dense, with little wasted wording.\",\n    \"overall_quality\": \"A solid local feature-attribution summary, but not very actionable or fully explanatory for this false-negative case.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring and the feature directions are reasonable for an individual applicant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:58.232330+00:00"
+}

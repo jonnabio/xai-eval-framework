@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d385318c71e7823f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ba8a2c4ca53c1a08_9e0fae6ae21aab7c.txt",
+  "prompt_version": "9e0fae6ae21aab7c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539120-dGbvEfaDg2qe8zLOGa2R",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.00298275,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps beyond listing factors that influenced the prediction. A user cannot easily infer what to change or verify from these tiny coefficient values alone.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the main local features driving the MLP\u2019s prediction, including positive and negative contributors. However, the weights are small and the low stability/fidelity limit how strongly an auditor can trust them for diagnosing model behavior.\",\n    \"clarity\": \"The output is easy to read because it is a short ranked list of feature-value contributions with signs. A non-expert may still struggle to interpret the meaning of the numerical weights, but the overall structure is straightforward.\",\n    \"completeness\": \"It covers several top local drivers, but the explanation is sparse and does not provide a fuller decision context, such as the base value, predicted probability, or how the features combine. The very low sparsity and modest fidelity also suggest the explanation may omit important local nuances.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the top local factors. It communicates a reasonable amount of information in few tokens.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is readable and compact, but the tiny effect sizes, low stability, and lack of contextual detail reduce trust and practical value. It is adequate for a quick glance rather than a thorough understanding or audit.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for the Adult dataset and fit common socioeconomic patterns, such as education, occupation, relationship status, and sex. Nothing in the explanation is obviously contradictory to the instance context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:58:44.189293+00:00"
+}

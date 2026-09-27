@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d0d7ac52bf209df1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_75520768088e5528_4e515e268b90b14b.txt",
+  "prompt_version": "4e515e268b90b14b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541962-xvKoGpJDDEiZpS9MGfUG",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 857,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0056115,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00466875,
+        "upstream_inference_cost": 0.0056115,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2502
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists SHAP values without actionable recommendations, thresholds, or recourse guidance.\",\n    \"audit_usefulness\": \"It provides the top 10 local feature contributions for an auditor, though the absence of original feature values limits deeper error analysis.\",\n    \"clarity\": \"The raw key-value format requires technical knowledge of SHAP to interpret the signs, and mutually exclusive one-hot categories appear confusing without context.\",\n    \"completeness\": \"The top 10 local drivers are identified, but omitting the instance's actual feature values and base value limits full decision context.\",\n    \"concision\": \"The text is compact and directly presents the key factors without conversational filler.\",\n    \"overall_quality\": \"While it functions as a compact technical summary of SHAP attributions, the lack of feature values, actionability, and lay clarity limits its utility.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive attributes such as 'relationship_Husband' alongside 'sex_Female' creates semantic confusion for domain interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:13.824876+00:00"
+}

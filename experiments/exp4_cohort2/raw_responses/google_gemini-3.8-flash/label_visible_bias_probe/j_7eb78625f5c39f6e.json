@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7eb78625f5c39f6e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a138a3019aad47d9_06fcadf2ad111144.txt",
+  "prompt_version": "06fcadf2ad111144",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545078-EoCIiBFAwd1GW4jHsyQw",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1250,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 855,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0056205,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0046875,
+        "upstream_inference_cost": 0.0056205,
+        "upstream_inference_prompt_cost": 0.000933
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2494
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While 'hours-per-week' is identified as the relevant feature, no direction, baseline value, or specific target threshold is provided, making recourse difficult to execute.\",\n    \"audit_usefulness\": \"It indicates that the counterfactual change relies primarily on hours worked, but the lack of baseline and counterfactual feature values limits deep inspection of the model's decision boundary.\",\n    \"clarity\": \"The list of raw feature weights and one-hot encoded variables is readable but uninterpreted for a non-expert audience.\",\n    \"completeness\": \"The explanation isolates a single non-zero factor and omits the instance's actual feature values as well as the target counterfactual profile.\",\n    \"concision\": \"Listing multiple features with strictly zero values introduces unnecessary clutter that diminishes information density.\",\n    \"overall_quality\": \"The explanation captures an intuitive key feature but suffers from zero-padding, lack of directional guidance, and missing counterfactual context.\",\n    \"semantic_plausibility\": \"Working hours is a well-established, logical determinant of earning potential in the Adult income dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:38:08.356768+00:00"
+}

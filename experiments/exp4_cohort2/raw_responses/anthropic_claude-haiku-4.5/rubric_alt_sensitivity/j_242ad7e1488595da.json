@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7982d390c3e51c7d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_242ad7e1488595da",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7982d390c3e51c7d_f3b1bbb8415486c1.txt",
+  "prompt_version": "f3b1bbb8415486c1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546432-U4QiSowmLXqdCZkHNgxN",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 589,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004232,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002945,
+        "upstream_inference_cost": 0.004232,
+        "upstream_inference_prompt_cost": 0.001287
+      },
+      "is_byok": false,
+      "prompt_tokens": 1287,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1876
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7982d390c3e51c7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken or what changes to input values would alter the prediction. It is purely descriptive of the model's decision factors.\",\n    \"audit_usefulness\": \"The explanation identifies two features with high importance (worst texture and worst concave points) and many with zero importance, which could help an auditor understand feature reliance. However, the low fidelity (0.69) and moderate faithfulness gap (0.11) raise concerns about whether this truly reflects the model's behavior.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical weights. However, without domain knowledge about what these breast cancer features represent or how to interpret the 1.0 vs 0.0 scale, a non-technical person would struggle to understand the significance.\",\n    \"completeness\": \"The explanation identifies anchor features but only two features have non-zero weights. This sparse representation may miss important interactions or contextual factors that influenced the prediction, particularly given the moderate fidelity score.\",\n    \"concision\": \"The explanation is relatively compact at 76 tokens, but it includes many zero-weight features that add length without information value. A more concise version could omit features with zero contribution.\",\n    \"overall_quality\": \"The explanation is serviceable but has notable limitations. It correctly predicts the true label (TN case) and identifies key features, but the moderate technical metrics (fidelity 0.69, stability 0.74) and lack of actionable insight limit its utility. The sparse anchor (only 2 non-zero features) may oversimplify the decision.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and concave points are medically relevant features for malignancy assessment, so their importance is plausible. However, the complete absence of other mean-based features is somewhat surprising and warrants scrutiny given the moderate fidelity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:00:38.155444+00:00"
+}

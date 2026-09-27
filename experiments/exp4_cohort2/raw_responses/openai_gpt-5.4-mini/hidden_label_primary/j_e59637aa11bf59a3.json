@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e59637aa11bf59a3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e564a6093e40672d_4aabbecebea11dc1.txt",
+  "prompt_version": "4aabbecebea11dc1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540097-twVU0gAGatx3su3wM5fV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 436,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00275175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001962,
+        "upstream_inference_cost": 0.00275175,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1489
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not tell the user what to change or review to affect the outcome. It lists local factors but gives no concrete recourse or next steps.\",\n    \"audit_usefulness\": \"It provides a sparse set of feature indicators, which is somewhat useful for checking which variables were involved. However, it lacks directionality, effect size, and clear support for diagnosing why the logreg model predicted class 1.\",\n    \"clarity\": \"The feature list is readable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand how these anchors relate to the prediction.\",\n    \"completeness\": \"It mentions a few local features, but not how they combine to produce the decision or which ones increase versus decrease the prediction. Important local decision context is missing.\",\n    \"concision\": \"The explanation is short and mostly avoids repetition, but several listed features add little value without interpretation. It is reasonably compact, though not maximally informative.\",\n    \"overall_quality\": \"This is a limited explanation: it is concise and somewhat readable, but the lack of causal interpretation, recourse, and full local reasoning makes it only modestly useful overall.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features are plausible for a binary income prediction, and the presence of occupation, education, hours, and relationship variables fits the domain. The output is coherent, even if under-explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:00.709315+00:00"
+}

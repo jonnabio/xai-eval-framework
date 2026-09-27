@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_58a0cf432565fa18",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_36ff2c1056b28459_7e61a97483e411d7.txt",
+  "prompt_version": "7e61a97483e411d7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547595-lDZeWFVenJXRj3Q2tLkr",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003956,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002675,
+        "upstream_inference_cost": 0.003956,
+        "upstream_inference_prompt_cost": 0.001281
+      },
+      "is_byok": false,
+      "prompt_tokens": 1281,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1816
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_Italy as the only meaningful factor (0.5000) but provides no guidance on what could be changed to alter the prediction. It does not suggest feasible actions for the affected person or reviewer.\",\n    \"audit_usefulness\": \"While the explanation shows which feature DICE identified as important, the poor technical metrics (low fidelity: -0.034, low stability: 0.049) and the false negative case suggest the explanation may not reliably reflect model behavior. Limited utility for bias or error investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical weights. However, the meaning of the weights and why only one feature matters is not explained in accessible terms for non-technical users.\",\n    \"completeness\": \"The explanation is sparse, identifying only one feature with non-zero importance. For a false negative case, this raises questions about whether the explanation captures the full decision logic. Main reasons appear absent or oversimplified.\",\n    \"concision\": \"The explanation is concise in length but contains many zero-valued features that add little information. The presentation could be tighter by excluding features with zero contribution.\",\n    \"overall_quality\": \"This explanation is weak. It is a false negative case with poor technical metrics (negative fidelity, low stability), identifies only one feature, and provides minimal actionable insight. The explanation does not inspire confidence in understanding the model's actual decision process.\",\n    \"semantic_plausibility\": \"Native country being the dominant factor in an income prediction model is plausible but questionable as the sole explanation. The model's false negative prediction and the zero contributions from age, education, and hours-per-week seem implausible for income classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:20:01.294468+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5012ecdfa398362b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e759e990528304a2_071a415434970fcc.txt",
+  "prompt_version": "071a415434970fcc",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539233-WhUs66ZjnRGvIIthv0Pb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1282,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 877,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005751,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0048075,
+        "upstream_inference_cost": 0.005751,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2540
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw local attribution coefficients without providing the individual's baseline feature values or actionable counterfactual paths to change the outcome.\",\n    \"audit_usefulness\": \"It identifies the top directional drivers for the MLP model's prediction, but the omission of actual feature values and poor fidelity metrics limit thorough auditing.\",\n    \"clarity\": \"The list format is cleanly presented, but non-experts may find interpreting one-hot encoded feature names and raw surrogate regression weights challenging.\",\n    \"completeness\": \"While ten influential features are shown with directional weights, the absence of the instance's actual feature values and baseline prediction confidence leaves key context missing.\",\n    \"concision\": \"The presentation is compact and directly conveys the top local feature importances without filler.\",\n    \"overall_quality\": \"The explanation serves as an acceptable baseline attribution list, but its utility is constrained by missing instance values, no actionable guidance, and poor technical fidelity.\",\n    \"semantic_plausibility\": \"The observed directions\u2014such as professional specialty, capital gain, and age increasing high-income likelihood\u2014are consistent with known socioeconomic trends in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:43.116361+00:00"
+}
