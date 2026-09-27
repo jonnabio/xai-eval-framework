@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6bb83c1f85ff1e55",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_70f1fb89c6075a2b_c1e81c70221cfc75.txt",
+  "prompt_version": "c1e81c70221cfc75",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551758-mwB2m8j9thikKCDtX5Wl",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1291,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 887,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005832,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00484125,
+        "upstream_inference_cost": 0.005832,
+        "upstream_inference_prompt_cost": 0.00099075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1321,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2612
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the instance is already in the positive (>50K) class, indicating perturbations toward lower education categories provides no practical, constructive action for the individual.\",\n    \"audit_usefulness\": \"It shows that the MLP model relies on low-education dummy categories to differentiate outcomes, but the lack of baseline feature values limits diagnostic utility.\",\n    \"clarity\": \"The explanation uses one-hot encoded variable names with abstract numeric weights without defining what the positive values represent.\",\n    \"completeness\": \"The output highlights only two one-hot education indicators while filling the rest with zeros, leaving out the broader context of the prediction.\",\n    \"concision\": \"Most of the listed features have a value of 0.0000, cluttering the explanation with non-informative entries.\",\n    \"overall_quality\": \"The explanation provides a weak, hard-to-interpret slice of counterfactual feature importance with poor lay clarity and minimal actionability.\",\n    \"semantic_plausibility\": \"Associating changes in lower education levels with flipping a high-income prediction aligns broadly with domain logic, though the numerical values are somewhat opaque.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:29:30.584416+00:00"
+}

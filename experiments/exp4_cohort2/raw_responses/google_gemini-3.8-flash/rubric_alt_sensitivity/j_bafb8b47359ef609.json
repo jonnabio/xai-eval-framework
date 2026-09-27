@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3d27b1d2bd43df77",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bafb8b47359ef609",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3d27b1d2bd43df77_5237fa280bbeb98e.txt",
+  "prompt_version": "5237fa280bbeb98e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551087-EITVmUwpFpX8xHPNDtY3",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1110,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 708,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00513675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041625,
+        "upstream_inference_cost": 0.00513675,
+        "upstream_inference_prompt_cost": 0.00097425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1299,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2409
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3d27b1d2bd43df77\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because no feature values, directional signs, or thresholds are provided, there is no practical guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It highlights which features were selected in the anchor, but the complete lack of condition thresholds and poor technical metrics (zero stability, high faithfulness gap) make it marginally useful for auditing.\",\n    \"clarity\": \"Presenting features as raw binary weights (1.0000 vs 0.0000) without thresholds or natural phrasing makes it confusing for non-technical users.\",\n    \"completeness\": \"The explanation only indicates feature inclusion rather than actual rule predicates or values, omitting essential details of the decision logic.\",\n    \"concision\": \"Including zero-weight features adds unnecessary length, though the overall output remains relatively compact.\",\n    \"overall_quality\": \"The explanation is weak because the anchor conditions have been reduced to binary feature indicators without values or thresholds.\",\n    \"semantic_plausibility\": \"The selected features (age, hours worked, managerial role, marital status) are standard, sensible indicators of income level in the Adult domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:18:16.686602+00:00"
+}

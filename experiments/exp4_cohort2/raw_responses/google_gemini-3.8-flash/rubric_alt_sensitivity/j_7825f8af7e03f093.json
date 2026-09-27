@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7825f8af7e03f093",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_81c9024ae418939e_22bd8819b961954a.txt",
+  "prompt_version": "22bd8819b961954a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551821-SZdxHfn7ntNFqGTZDTiL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1003,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 617,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0047505,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376125,
+        "upstream_inference_cost": 0.0047505,
+        "upstream_inference_prompt_cost": 0.00098925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1319,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2322
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the actual feature values or thresholds required to alter the model's prediction, offering no actionable guidance.\",\n    \"audit_usefulness\": \"It reveals that 'age' and 'relationship_Husband' were the primary factors in the anchor for this false negative, but the lack of rule conditions limits its diagnostic depth.\",\n    \"clarity\": \"The list of features with binary 1.0 and 0.0 indicators is somewhat technical and confusing for a layperson expecting descriptive rules.\",\n    \"completeness\": \"Only two active features are identified, and the specific decision boundaries, thresholds, and directional effects are omitted entirely.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the explanation and reduces efficiency.\",\n    \"overall_quality\": \"The explanation identifies active features in the anchor but loses critical rule logic and includes unnecessary zero-weight features.\",\n    \"semantic_plausibility\": \"Age and marital/relationship status are standard key drivers in the Adult income dataset, making their selection plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:30:28.673504+00:00"
+}

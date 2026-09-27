@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_42f4d7247d20af11",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_07197d290136f3e3_b16d9fc03401e3e5.txt",
+  "prompt_version": "b16d9fc03401e3e5",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551935-BWyHFs7svVqDhplP2Sbz",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1052,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 650,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00492825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003945,
+        "upstream_inference_cost": 0.00492825,
+        "upstream_inference_prompt_cost": 0.00098325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1311,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2363
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary indicator weights without specifying feature values, direction of influence, or required threshold changes to alter the outcome.\",\n    \"audit_usefulness\": \"It highlights three features selected by the explainer (education-num, capital-gain, capital-loss), but the lack of rule conditions or values offers minimal insight into why the model produced a false negative.\",\n    \"clarity\": \"The list format is readable, but presenting Anchor predicates as generic 1.0/0.0 values without thresholds or context makes its meaning opaque to a layperson.\",\n    \"completeness\": \"The explanation only indicates feature inclusion flags while omitting feature values, operators, and baseline comparison information.\",\n    \"concision\": \"Several features with zero weight are explicitly listed, diluting the informative content.\",\n    \"overall_quality\": \"The explanation is weak because Anchors' rule-based structure has been reduced to binary feature flags without direction, threshold, or value context.\",\n    \"semantic_plausibility\": \"Focusing on education, capital gain, and capital loss aligns well with known income predictors in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:32:23.824876+00:00"
+}
