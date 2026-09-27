@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5bf99d20904ea8ab",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f787cc3703d999cf_65f091cd4627677f.txt",
+  "prompt_version": "65f091cd4627677f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544359-9lS5xbcn2Yoy96AiAaYz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 447,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003458,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002235,
+        "upstream_inference_cost": 0.003458,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1670
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f787cc3703d999cf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature weights all near zero with no direction or magnitude to guide any decision or recourse; no actionable insights can be derived from this output.\",\n    \"audit_usefulness\": \"With all coefficients essentially zero and zero fidelity, the explanation provides no meaningful insight into model behavior, making it useless for detecting bias, errors, or understanding decision logic.\",\n    \"clarity\": \"The format is readable as a list of features and weights, but the near-zero values across all features create profound ambiguity about what actually drove the prediction.\",\n    \"completeness\": \"The explanation is severely incomplete; all feature contributions collapse to zero, failing to identify any meaningful local drivers of the false negative prediction.\",\n    \"concision\": \"While the explanation is brief, the brevity is counterproductive because it conveys no useful information; concision without content is not a virtue.\",\n    \"overall_quality\": \"This explanation is fundamentally broken, exhibiting zero fidelity, near-zero coefficients across all features, and a false negative prediction with no interpretable justification; it fails on nearly all quality dimensions.\",\n    \"semantic_plausibility\": \"The uniform near-zero weights are implausible given that the model made a definitive prediction; real decision logic should show at least some non-trivial feature contributions.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:26:03.947023+00:00"
+}

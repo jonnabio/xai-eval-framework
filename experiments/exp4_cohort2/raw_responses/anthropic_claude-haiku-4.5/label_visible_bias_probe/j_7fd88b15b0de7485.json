@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7fd88b15b0de7485",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1a9c16ecde743d5e_517ffe545d4d947a.txt",
+  "prompt_version": "517ffe545d4d947a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542074-0SKhOpzYtMsidD48N6jA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002675,
+        "upstream_inference_cost": 0.003925,
+        "upstream_inference_prompt_cost": 0.00125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1785
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve creditworthiness. No specific, feasible recourse steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model inspection and bias investigation by showing which features drove the prediction. However, the false negative outcome (predicted 0, true 1) limits diagnostic value without context on why the model underestimated credit risk.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, SHAP values, inequality ranges) that requires familiarity with credit datasets and SHAP methodology. A non-expert would struggle to interpret the meaning of individual contributions.\",\n    \"completeness\": \"The top 10 factors are listed with their directional contributions, covering the main local drivers. However, the explanation lacks the base prediction value and does not contextualize why these factors collectively led to a negative prediction despite the true positive label.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting 10 features with their SHAP values efficiently. The format is dense but appropriate for the information density required.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility. While it correctly identifies feature importance, the false negative case, low fidelity (0.28), and lack of actionable or interpretive context significantly reduce its overall value for decision-making or auditing.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for credit risk (negative checking status, employment duration, and savings reduce risk; credit amount increases it). However, the false negative prediction itself raises questions about model calibration or feature representation in this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:01.318695+00:00"
+}

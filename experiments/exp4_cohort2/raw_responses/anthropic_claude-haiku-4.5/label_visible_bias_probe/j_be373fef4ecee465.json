@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_be373fef4ecee465",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_36ff2c1056b28459_0655e37c2482b1e7.txt",
+  "prompt_version": "0655e37c2482b1e7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544180-l82NjldYThrLbj21rR9K",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 520,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003822,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0026,
+        "upstream_inference_cost": 0.003822,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1742
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature importance scores with no guidance on how to change the prediction or what actions to take; a user cannot determine what modifications would alter the outcome.\",\n    \"audit_usefulness\": \"While the explanation identifies native-country_Italy as the sole non-zero factor, the extremely sparse output (only 1 of 10 features) and poor technical metrics (fidelity -0.034, stability 0.049) severely limit its value for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward and uses standard feature-value notation, but the meaning of the scores and why only one feature has a non-zero weight is unexplained, requiring domain knowledge to interpret.\",\n    \"completeness\": \"The explanation is severely incomplete, showing only one meaningful feature (native-country_Italy) with all other features at zero; this fails to capture the full local decision context, especially given the false negative prediction.\",\n    \"concision\": \"The explanation is concise in length but wasteful in content, listing nine features with zero importance that add no information; a more compact representation would omit zero-valued features entirely.\",\n    \"overall_quality\": \"The explanation fails on multiple critical dimensions: poor fidelity indicates it does not faithfully represent model behavior, extremely low stability suggests unreliability, and the sparse output provides minimal insight into why the model made a false negative prediction.\",\n    \"semantic_plausibility\": \"The reliance on a single categorical feature (native-country_Italy) as the sole driver for a binary income prediction is implausible and contradicts domain expectations that multiple socioeconomic factors should influence such outcomes.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:23:06.284413+00:00"
+}

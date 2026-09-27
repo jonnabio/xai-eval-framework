@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8569f49081305637",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f5f18a541998dc42",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8569f49081305637_40699e0acf17d776.txt",
+  "prompt_version": "40699e0acf17d776",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542109-6cRERK3sPKLfCzuOA1vD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003814,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002585,
+        "upstream_inference_cost": 0.003814,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1746
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8569f49081305637\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key factors but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. The normalized scores offer no direction for recourse.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction with normalized importance scores, supporting model behavior inspection. However, the low fidelity (0.52) and high faithfulness gap (0.47) suggest the explanation may not reliably represent actual model logic, limiting audit confidence.\",\n    \"clarity\": \"The format is structured and uses domain-relevant feature names, but the normalized scores (1.0 vs 0.0) without context or interpretation may confuse non-experts about what these values mean or why some features matter more than others.\",\n    \"completeness\": \"Three anchoring features are identified (duration, checking_status_<0, purpose_radio/tv), but the explanation lacks information about feature values, thresholds, or interactions that would fully contextualize the decision for this specific instance.\",\n    \"concision\": \"The explanation is compact at 73 tokens and avoids redundancy, efficiently listing features and their normalized weights without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is concise and structurally clear, it suffers from low fidelity and high faithfulness gap, limiting its reliability and usefulness for understanding the actual model decision or supporting actionable insights.\",\n    \"semantic_plausibility\": \"In credit risk assessment, loan duration, checking account status, and loan purpose are plausible predictors of creditworthiness, making the identified anchors coherent with domain expectations for this positive prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:34.949830+00:00"
+}

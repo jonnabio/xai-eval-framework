@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6e48b5a34dfe03b0",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b352dc7c29edc22c_e38133a68039c12d.txt",
+  "prompt_version": "e38133a68039c12d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541469-PLMkX7wbM3XXw5bOhlBi",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004005,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002755,
+        "upstream_inference_cost": 0.004005,
+        "upstream_inference_prompt_cost": 0.00125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1801
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to challenge the prediction, modify inputs, or take corrective action. Without context on what the prediction means or how features could be adjusted, actionability is minimal.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions support model behavior inspection and bias investigation effectively. The high fidelity (0.924) and stability (0.880) metrics indicate the explanation reliably represents model logic, enabling auditors to trace decision pathways.\",\n    \"clarity\": \"The explanation uses technical notation (feature names with categorical values and numerical SHAP values) that requires familiarity with SHAP methodology and the Adult dataset schema. A non-expert would struggle to interpret the meaning without additional context.\",\n    \"completeness\": \"The top 10 features are presented with their SHAP contributions, covering the main local drivers. However, the explanation lacks the base prediction value and does not contextualize how these factors combine to produce the final prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting each feature-value pair with its contribution efficiently. The format is dense but appropriate for the technical audience and use case.\",\n    \"overall_quality\": \"The explanation demonstrates strong technical quality (high fidelity and stability) and supports audit workflows, but is undermined by poor clarity for general audiences, lack of actionability, and missing context about the prediction outcome. The false positive nature (predicted 1, true label 0) is not addressed.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for income prediction (marital status, occupation, and country are known income correlates), but the explanation does not acknowledge that the model made an incorrect prediction, raising questions about whether the explanation adequately represents the error.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:55.047589+00:00"
+}

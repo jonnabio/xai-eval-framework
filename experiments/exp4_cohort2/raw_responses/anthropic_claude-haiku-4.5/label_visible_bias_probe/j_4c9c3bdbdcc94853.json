@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4c9c3bdbdcc94853",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_60730b2d1280bac2_3db610f8e438481a.txt",
+  "prompt_version": "3db610f8e438481a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541424-VSTa6m7wyJ0OXc7M4z52",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003841,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002595,
+        "upstream_inference_cost": 0.003841,
+        "upstream_inference_prompt_cost": 0.001246
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1765
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to act on this information or what changes would alter the prediction. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The feature weights and directions support model inspection and bias investigation by showing which features drive the high-income prediction. However, low fidelity (0.318) and high faithfulness gap (0.274) undermine confidence in the explanation's reliability for auditing.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature-weight pairs with clear formatting, making it accessible to non-experts without domain knowledge. The structure is straightforward and easy to parse.\",\n    \"completeness\": \"The explanation covers the top 10 local factors and includes both positive and negative contributions, providing reasonable coverage of the decision drivers. However, the low fidelity score suggests important decision context may be missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and weights without padding. Each entry is maximally informative per word.\",\n    \"overall_quality\": \"While the explanation is clear and concise, its poor technical performance (low fidelity, high faithfulness gap, low stability) and lack of actionability significantly limit its practical utility. The explanation reads well but may not reliably represent the model's actual decision logic.\",\n    \"semantic_plausibility\": \"The identified factors (self-employment, executive role, capital gains, marital status, education) are plausible predictors of high income in the adult dataset and align with domain expectations. The feature directions are coherent with real-world income patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:09.789114+00:00"
+}

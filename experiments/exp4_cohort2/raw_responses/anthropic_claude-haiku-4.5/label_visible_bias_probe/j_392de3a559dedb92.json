@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_392de3a559dedb92",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4e230a6771152fb2_13bd8041af355d48.txt",
+  "prompt_version": "13bd8041af355d48",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541852-K3fBbbD63z73yHByXvtT",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 536,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003915,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00268,
+        "upstream_inference_cost": 0.003915,
+        "upstream_inference_prompt_cost": 0.001235
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1771
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. The coefficients are too small and abstract to suggest concrete recourse steps.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model inspection and help identify which features drive the negative prediction, enabling auditors to assess whether the model logic is reasonable. However, the very small magnitude of most coefficients raises questions about model stability.\",\n    \"clarity\": \"The explanation is presented as a ranked list of feature names with numerical coefficients, which is standard but requires familiarity with LIME output format and the adult dataset feature names. A non-expert would struggle to interpret what these small numbers mean.\",\n    \"completeness\": \"The explanation covers the top 10 local factors and their contributions, providing reasonable coverage of the decision drivers for this specific instance. However, it lacks context about the instance's actual feature values or baseline comparisons.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential ranked list of features and coefficients without padding. Each element contributes directly to understanding relative feature importance.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility; it succeeds as a feature importance ranking but fails to translate that into actionable or easily interpretable insights for non-expert users. The very low technical stability (0.11) undermines confidence in the explanation's reliability.\",\n    \"semantic_plausibility\": \"The identified factors (occupation, capital gain, race, marital status, education) are plausible predictors of income in the adult dataset, and their directions align with domain expectations. The negative weight on protective services and positive weight on capital gain are reasonable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:18.386874+00:00"
+}

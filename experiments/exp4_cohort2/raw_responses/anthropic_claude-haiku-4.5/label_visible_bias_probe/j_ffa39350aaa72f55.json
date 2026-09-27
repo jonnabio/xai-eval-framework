@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cc3c47f9ed102eb0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ffa39350aaa72f55",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cc3c47f9ed102eb0_3a7075a2d26ace78.txt",
+  "prompt_version": "3a7075a2d26ace78",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543750-RNRclR425Gql7AxhHkg6",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003479,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002255,
+        "upstream_inference_cost": 0.003479,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1675
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cc3c47f9ed102eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two key features but provides no guidance on how to interpret them or what actions could be taken to modify the prediction or understand the decision boundary.\",\n    \"audit_usefulness\": \"The feature importance weights (1.0 vs 0.0) are useful for identifying which features anchor the decision, and the high fidelity (0.848) suggests the explanation captures model behavior reasonably well for auditing purposes.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but lacks context about what these features represent or why they matter; a non-expert would struggle to interpret the numerical weights.\",\n    \"completeness\": \"Only two features are identified as important while eight others are explicitly zeroed out, providing a sparse local decision context that may miss nuanced interactions or secondary drivers.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a minimal but technically sound anchor-based interpretation with reasonable fidelity, though it lacks the contextual richness and actionability needed for practical use.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, area error and worst texture are plausible predictive features, and their dominance is consistent with domain expectations for malignancy detection.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:15:54.874468+00:00"
+}

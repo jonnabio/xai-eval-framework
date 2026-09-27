@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_06e7340405176025",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_441aa0d24c13b467",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_06e7340405176025_02eae1e25e5d0ced.txt",
+  "prompt_version": "02eae1e25e5d0ced",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543502-crf2RFbNMj4L22yw8DUu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003902,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00269,
+        "upstream_inference_cost": 0.003902,
+        "upstream_inference_prompt_cost": 0.001212
+      },
+      "is_byok": false,
+      "prompt_tokens": 1212,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1750
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_06e7340405176025\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions a clinician or patient could take based on this prediction or how to interpret the direction of effects. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which features drove the benign prediction and their relative importance, supporting model behavior inspection and potential bias investigation. However, the low fidelity (0.598) and moderate faithfulness gap (0.120) limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The explanation uses technical feature names (worst area, mean concave points) without domain context or interpretation of what these measurements represent or why their contributions matter. A non-expert reader would struggle to understand the clinical significance.\",\n    \"completeness\": \"The top 10 SHAP features are provided with their contribution values, covering the main local drivers of the prediction. However, the explanation lacks context about the base prediction rate, model confidence, or the relative magnitude of these effects.\",\n    \"concision\": \"The explanation is compact and efficiently formatted as a ranked list of features with numerical contributions, avoiding redundancy while maintaining informativeness per token.\",\n    \"overall_quality\": \"The explanation provides technically sound feature attribution data suitable for model inspection but lacks clinical context, actionability, and interpretation that would make it useful for end-users or clinicians. The moderate technical metrics (fidelity 0.598, stability 0.748) further limit overall quality.\",\n    \"semantic_plausibility\": \"The identified features (area, concavity, texture, radius, smoothness) are plausible morphological characteristics used in breast cancer diagnosis, and their relative contributions are consistent with domain knowledge about tumor classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:49.074752+00:00"
+}

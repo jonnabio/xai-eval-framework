@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_609fd72d4ed0568a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_3adf691ba6671f41.txt",
+  "prompt_version": "3adf691ba6671f41",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543133-gX6cLMlPFXlTfjXsnGxA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004092,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00285,
+        "upstream_inference_cost": 0.004092,
+        "upstream_inference_prompt_cost": 0.001242
+      },
+      "is_byok": false,
+      "prompt_tokens": 1242,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1812
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. The negative weights are difficult to translate into concrete recourse steps.\",\n    \"audit_usefulness\": \"The feature weights and their directions support basic model inspection, but the very low fidelity (0.358) and high faithfulness gap (0.557) severely limit confidence in whether these weights accurately represent the model's actual decision logic. This undermines audit reliability.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature-weight pairs with clear formatting, making it accessible to non-experts who understand that negative weights push toward class 0. However, the lack of context about what these weights mean in practical terms limits clarity.\",\n    \"completeness\": \"The explanation covers ten features but with extremely small weight magnitudes (largest is -0.011), raising questions about whether the most important drivers are captured. The low sparsity (0.093) and stability (0.034) suggest the explanation may be incomplete or unstable.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the top factors with their weights in minimal space. Each element contributes information without padding.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality metrics (low fidelity, high faithfulness gap, low stability) that undermine trust in its validity. While the format is clear and concise, the unreliability of the underlying explanation method severely compromises overall utility.\",\n    \"semantic_plausibility\": \"The factors (education, occupation, race, sex, marital status) are plausible predictors of income in the adult dataset, and the direction of effects (e.g., 12th grade education reducing likelihood of >50k income) aligns with domain expectations. However, the extremely small magnitudes raise questions about practical significance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:38.973284+00:00"
+}

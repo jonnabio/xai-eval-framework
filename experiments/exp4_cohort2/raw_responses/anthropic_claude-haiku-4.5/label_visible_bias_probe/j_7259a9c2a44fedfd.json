@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7259a9c2a44fedfd",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9be4c2983f0c443c_2621e11f6e121556.txt",
+  "prompt_version": "2621e11f6e121556",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543268-06J3VDo72cV7Ii4ScaJ9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 516,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003805,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00258,
+        "upstream_inference_cost": 0.003805,
+        "upstream_inference_prompt_cost": 0.001225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1741
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, challenge the prediction, or take corrective action; the binary importance scores offer no direction for recourse.\",\n    \"audit_usefulness\": \"While the explanation lists feature importance weights, the high faithfulness_gap (0.727) and moderate stability (0.462) suggest the anchors may not reliably represent model behaviour, limiting audit confidence in the explanation's validity.\",\n    \"clarity\": \"The format is a simple list of feature names with binary weights, which is easy to parse structurally, but the meaning of the 1.0 and 0.0 scores and their relationship to the false positive prediction is not explained for a non-expert.\",\n    \"completeness\": \"Only two features are identified as relevant (area error and worst texture), but eight other features are listed with zero weight; the explanation lacks context on why these two features drove the incorrect positive prediction or what their actual values were.\",\n    \"concision\": \"The explanation is compact at 75 tokens, but includes redundant zero-weight features that add no information; a more concise version would omit features with zero importance.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides minimal insight into why the model made a false positive prediction; the low stability and high faithfulness gap undermine confidence in the explanation's reliability.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, area error and texture are plausible predictive features, but the explanation does not clarify whether the feature values support or contradict the positive prediction, making it difficult to assess domain coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:54.192495+00:00"
+}

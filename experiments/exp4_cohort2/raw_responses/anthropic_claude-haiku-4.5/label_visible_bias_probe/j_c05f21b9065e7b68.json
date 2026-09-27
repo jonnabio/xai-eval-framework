@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89e4fe58e0303d60",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c05f21b9065e7b68",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_89e4fe58e0303d60_591c7224531f6521.txt",
+  "prompt_version": "591c7224531f6521",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542701-B53RZCBIu3urWxr0jL7c",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003897,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002665,
+        "upstream_inference_cost": 0.003897,
+        "upstream_inference_prompt_cost": 0.001232
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1765
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_89e4fe58e0303d60\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken to change the outcome or improve the decision. No recourse pathways or next steps are suggested.\",\n    \"audit_usefulness\": \"The explanation identifies key anchoring features (duration, checking status, purpose, property) with their weights, which supports model behavior inspection and bias investigation for credit decisions. However, the low fidelity (0.607) and high faithfulness gap (0.688) limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The explanation uses technical feature names and numerical weights that require domain knowledge of the German Credit dataset to interpret; a non-expert would struggle to understand what 'checking_status_<0' or 'property_magnitude_no known property' mean in practical terms.\",\n    \"completeness\": \"The explanation covers the top anchoring features but omits confidence scores, decision thresholds, and the relative magnitude of feature contributions beyond binary weights. The high faithfulness gap suggests important decision drivers may be missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting features and weights efficiently without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a structured list of anchoring features but suffers from low fidelity, high faithfulness gap, unclear presentation for non-experts, and lack of actionability. While technically sound for audit purposes, it falls short of providing reliable, interpretable guidance.\",\n    \"semantic_plausibility\": \"The identified anchors (negative checking status, new car purpose, no known property) are plausible risk factors in credit assessment, and their association with a negative prediction (class 0) is coherent with domain expectations for loan denial.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:27.065063+00:00"
+}

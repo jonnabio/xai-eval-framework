@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_fa1780d982f05d26",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_326c5e1bf0274243_5d10672070f539d8.txt",
+  "prompt_version": "5d10672070f539d8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542859-EtqCX0EdvKe5fvpvybxX",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003783,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00256,
+        "upstream_inference_cost": 0.003783,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1735
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to change the prediction, modify inputs, or take corrective action; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"The explanation identifies three high-weight features (education-num, occupation, relationship) and many zero-weight features, which partially supports model behaviour inspection, but the low fidelity (0.624) and high faithfulness gap (0.305) undermine confidence in the explanation's reliability for auditing.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights that is easy to parse, though the meaning of the weights and why certain features matter is not explained in natural language.\",\n    \"completeness\": \"The explanation covers the top drivers (education, occupation, relationship status) but lacks context about their actual values in this instance, the direction of influence, or interaction effects that may be important for full understanding.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without padding, though it sacrifices interpretability for brevity.\",\n    \"overall_quality\": \"The explanation is a low-fidelity anchor that misclassifies the instance (FP: predicted 1, true label 0) and exhibits poor stability (0.0), limiting its overall utility despite clear formatting.\",\n    \"semantic_plausibility\": \"The identified features (education, executive-managerial occupation, married status) are plausible predictors of high income in the adult dataset, though the false positive prediction and zero stability suggest the model may have learned spurious patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:04.480239+00:00"
+}

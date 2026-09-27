@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3d37b28ff5166919",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543072-n7nSTEx12Qn2zaxrn6vg",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003687,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00246,
+        "upstream_inference_cost": 0.003687,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1719
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature conditions but provides no guidance on how to change the prediction or what actions a user should take; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The explanation clearly identifies which features anchor the prediction (four features with weight 1.0) and which are irrelevant (six features with weight 0.0), supporting systematic model behaviour inspection and bias investigation.\",\n    \"clarity\": \"The format is technical and uses abbreviated feature names and threshold notation that requires familiarity with the dataset schema; a non-expert would struggle to interpret 'checking_status_<0' or 'employment_4<=X<7' without domain context.\",\n    \"completeness\": \"The explanation covers the main decision drivers (four anchoring features) and explicitly marks irrelevant features, providing a reasonably complete local decision picture for this instance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting feature weights efficiently in a single line; however, the brevity comes at the cost of interpretability for non-experts.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks accessibility and actionability; it serves data scientists well but fails to communicate meaningfully to general users or support decision recourse.\",\n    \"semantic_plausibility\": \"The anchored features (negative checking status, no checking account, stable employment, renting housing) are plausible risk factors in credit assessment, and their joint presence supporting a positive prediction is coherent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:38.154395+00:00"
+}

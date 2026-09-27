@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4f082f9e2fb4f621",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a5e759675f7b81c4_a1fefb491519926e.txt",
+  "prompt_version": "a1fefb491519926e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542914-qv51V0rHC7isgraOVpQu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003835,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002605,
+        "upstream_inference_cost": 0.003835,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1751
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a5e759675f7b81c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the key driver but provides no guidance on how a user could act on this information or what recourse options exist. No specific, feasible next steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation shows feature importance weights, the extremely low stability (0.049) and high faithfulness gap (0.209) severely undermine its reliability for auditing model behavior. An auditor cannot confidently use this to investigate model logic or bias.\",\n    \"clarity\": \"The format is straightforward and uses familiar feature names, but the raw numerical output with many zero-weighted features lacks narrative context that would help a non-expert understand why marital status matters for the prediction.\",\n    \"completeness\": \"The explanation covers only one substantive driver (marital-status) with meaningful weight; all other features show zero contribution, which appears incomplete given the model's complexity and the prediction confidence being null.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration. The sparse format is appropriate for the information density.\",\n    \"overall_quality\": \"The explanation suffers from poor technical reliability (low stability and high faithfulness gap), limited actionability, and incomplete coverage of decision drivers. While clear in format, it fails to provide trustworthy or useful insight into the prediction.\",\n    \"semantic_plausibility\": \"Marital status being a strong predictor of income >50k in the adult dataset is plausible and consistent with domain knowledge, though the complete absence of other factors (age, education, hours-per-week) seems implausible given their known relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:00.161606+00:00"
+}

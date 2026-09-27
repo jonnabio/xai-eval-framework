@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e5bfeaa37058f262",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d68ee28a2b213ee2_90f695d38dc7c0c4.txt",
+  "prompt_version": "90f695d38dc7c0c4",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544348-6BDetu0IJU0JMMImKfFS",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00379,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00257,
+        "upstream_inference_cost": 0.00379,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1734
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features (mean perimeter and worst perimeter) but provides no guidance on how to interpret or act on this information, nor does it suggest any recourse or decision review steps.\",\n    \"audit_usefulness\": \"While the explanation lists feature importance scores, the low fidelity (0.31) and high faithfulness gap (0.15) severely undermine its utility for auditing model behavior; the anchors do not reliably represent the model's decision logic.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but the meaning of normalized scores (1.0 vs 0.0) and their relationship to the prediction is not explained for a non-expert reader.\",\n    \"completeness\": \"The explanation covers only two features with non-zero weights while omitting context about the instance values, threshold ranges, or why other features were excluded; critical local decision context is missing.\",\n    \"concision\": \"The explanation is compact in length but includes eight features with zero scores that add no informational value and could be omitted for better efficiency.\",\n    \"overall_quality\": \"The explanation fails on multiple fronts: it is a false negative (predicted 0 when true label is 1), exhibits poor technical performance (low fidelity and stability), and provides minimal actionable or auditable insight into the model's reasoning.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, perimeter-based features are medically plausible predictors, but the explanation's inability to correctly predict the positive case raises doubts about whether these anchors genuinely capture the model's decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:25:53.866599+00:00"
+}

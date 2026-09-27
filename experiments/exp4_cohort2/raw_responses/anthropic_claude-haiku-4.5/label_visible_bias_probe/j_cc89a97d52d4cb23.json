@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_cc89a97d52d4cb23",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7ee17e1b81806239_0cf808e25f237572.txt",
+  "prompt_version": "0cf808e25f237572",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543481-XaiIaMpFhYgsJYXYsDx8",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003614,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002375,
+        "upstream_inference_cost": 0.003614,
+        "upstream_inference_prompt_cost": 0.001239
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1714
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user should take; the coefficients are too small to suggest meaningful interventions.\",\n    \"audit_usefulness\": \"The low fidelity (0.46) and high faithfulness gap (0.20) indicate the explanation poorly represents model behavior, limiting its value for auditing model logic or detecting bias.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but the extremely small coefficient magnitudes and lack of context make it difficult for non-experts to interpret what these values mean.\",\n    \"completeness\": \"The explanation covers 10 features but the coefficients are so small and similar in magnitude that it fails to clearly identify which factors actually drive the prediction; the false negative case suggests key drivers are missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and coefficients without padding.\",\n    \"overall_quality\": \"The explanation suffers from poor fidelity, weak stability (0.0025), and a false negative prediction, indicating the LIME model failed to capture the true decision boundary and provides unreliable local insights.\",\n    \"semantic_plausibility\": \"The feature selections (education, marital status, occupation) are plausible for income prediction, but the near-zero coefficients and incorrect prediction (0 vs. true label 1) undermine confidence in the explanation's validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:26.160990+00:00"
+}

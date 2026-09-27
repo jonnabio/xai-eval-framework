@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_52b1cec5ce384398",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ba8a2c4ca53c1a08_2022fd23d2c9d8dc.txt",
+  "prompt_version": "2022fd23d2c9d8dc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542429-U8QtEyMxkfbZD5dT2Ifu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003607,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002365,
+        "upstream_inference_cost": 0.003607,
+        "upstream_inference_prompt_cost": 0.001242
+      },
+      "is_byok": false,
+      "prompt_tokens": 1242,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1715
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, modify inputs, or take next steps; it is purely descriptive without recourse information.\",\n    \"audit_usefulness\": \"The feature weights and directions support model inspection and bias investigation, revealing which demographic and educational factors drive the >50k income prediction; however, low stability (0.010) undermines confidence in these findings.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is clear in structure but requires familiarity with LIME output and the Adult dataset feature encoding to interpret meaningfully.\",\n    \"completeness\": \"The top 10 factors are presented, but the explanation lacks context about feature interactions, threshold values, or why these specific features matter relative to the full decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text.\",\n    \"overall_quality\": \"The explanation is technically sound but limited in practical utility; it correctly identifies key drivers for a true positive case but suffers from poor stability and lacks actionable or contextual depth.\",\n    \"semantic_plausibility\": \"Professional education and marital status as positive drivers for high income are plausible in the Adult dataset domain; however, the very small weight magnitudes and low fidelity (0.66) raise questions about whether the explanation truly reflects model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:54.993723+00:00"
+}

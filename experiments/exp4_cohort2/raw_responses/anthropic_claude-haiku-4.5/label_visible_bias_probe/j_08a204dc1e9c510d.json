@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_08a204dc1e9c510d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_95751d1d732b6cfa_45d994ef9568a940.txt",
+  "prompt_version": "45d994ef9568a940",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543911-CRw2KksOtZlPQemqa42J",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003909,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002685,
+        "upstream_inference_cost": 0.003909,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1761
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation shows which features DICE identified as locally important, but the extremely low sparsity (0.0093) and high faithfulness gap (0.989) suggest the explanation may not reliably reflect model behavior. Limited value for systematic bias or error investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical scores\u2014but lacks context about what these scores mean, why education_7th-8th dominates, or how to interpret zero-valued features for a non-expert reader.\",\n    \"completeness\": \"Only one feature (education_7th-8th) has a meaningful contribution score; all others are zero, which is sparse but raises questions about whether the explanation captures the full decision logic or if DICE failed to identify other relevant drivers.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature scores in a minimal format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sparse and concise but lacks interpretability, actionability, and robustness signals. The high faithfulness gap and low stability undermine confidence in the explanation's reliability for decision support or auditing.\",\n    \"semantic_plausibility\": \"In the adult income dataset, education level is a known predictor of income, so education_7th-8th being flagged is plausible; however, the complete absence of other features (age, hours-per-week, workclass) is counterintuitive given their typical importance in income prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:36.663792+00:00"
+}

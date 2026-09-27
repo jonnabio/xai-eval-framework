@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_cf1c0652c29a20db",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_084efba639afd972_bea219452206b323.txt",
+  "prompt_version": "bea219452206b323",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542458-4ilEGyq7fVGb1G8M4Xuz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003859,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00262,
+        "upstream_inference_cost": 0.003859,
+        "upstream_inference_prompt_cost": 0.001239
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1763
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature conditions but provides no guidance on how to change the prediction or what actions a user should take. Without context on whether these are positive or negative drivers, no recourse pathway is evident.\",\n    \"audit_usefulness\": \"The explanation identifies 10 anchor features with uniform weights (1.0), which is suspicious and suggests potential issues with anchor extraction; however, it does support inspection of which features the model relied on for this false negative prediction.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature-value pairs with weights, which is straightforward to parse but lacks narrative context explaining why these features matter or how they combine to drive the prediction.\",\n    \"completeness\": \"The explanation covers multiple feature dimensions (duration, age, checking status, credit history, purpose, savings, employment, personal status) but omits information about feature interactions, relative importance ordering, or the decision boundary logic.\",\n    \"concision\": \"The explanation is compact at 84 tokens and avoids redundancy, though the uniform 1.0 weights across all features suggest possible over-specification rather than true sparsity.\",\n    \"overall_quality\": \"The explanation suffers from low fidelity (0.52), high faithfulness gap (0.22), and a false negative prediction, indicating the model's logic is poorly captured; the uniform anchor weights and lack of narrative context further undermine quality.\",\n    \"semantic_plausibility\": \"The feature set is plausible for credit risk assessment, but the uniform weighting of all 10 features is implausible\u2014in reality, some factors (e.g., checking status, credit history) should dominate over others in credit decisions.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:24.516662+00:00"
+}

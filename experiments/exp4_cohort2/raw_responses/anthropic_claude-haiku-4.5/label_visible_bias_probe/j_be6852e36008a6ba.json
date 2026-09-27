@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_be6852e36008a6ba",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1c525ff1deb5c1a6_65858197c9aa6ed5.txt",
+  "prompt_version": "65858197c9aa6ed5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543127-70PV7o3I1Ltz9JIcXwTH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003734,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002505,
+        "upstream_inference_cost": 0.003734,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1730
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the only meaningful factor but provides no guidance on how to interpret this for decision-making or what recourse actions might be available to the individual.\",\n    \"audit_usefulness\": \"While the explanation shows which features were considered, the high faithfulness gap (0.41) and low fidelity (0.58) severely limit its utility for auditing model behavior; the explanation poorly represents actual model logic.\",\n    \"clarity\": \"The format is straightforward with feature names and weights clearly presented, making it accessible to non-experts despite the technical nature of the underlying method.\",\n    \"completeness\": \"The explanation is severely incomplete, showing only one non-zero weight (marital-status) while all other features have zero contribution, which fails to capture the full local decision context for this false negative case.\",\n    \"concision\": \"The explanation is concise in presentation, though the numerous zero-valued features add minimal informational value and could be omitted for better efficiency.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability metrics) and provides limited actionable insight despite clear presentation; it fails to adequately explain why the model incorrectly predicted class 0 when the true label is 1.\",\n    \"semantic_plausibility\": \"Marital status being the dominant factor for income prediction is plausible in the adult dataset domain, but the complete absence of other known predictors (age, education, hours-per-week) raises concerns about whether the explanation reflects genuine model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:32.945310+00:00"
+}
