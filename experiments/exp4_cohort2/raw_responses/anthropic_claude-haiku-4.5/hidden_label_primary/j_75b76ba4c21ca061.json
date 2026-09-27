@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_75b76ba4c21ca061",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e594d44f0a99f099_4b2241fa8e3960cd.txt",
+  "prompt_version": "4b2241fa8e3960cd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540253-SJS3tXibMqTuyd5qBlYP",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003734,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002515,
+        "upstream_inference_cost": 0.003734,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1722
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, modify inputs, or take clinical action; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 and 0.0) and low fidelity (0.627) suggest the anchors may not reliably represent model behaviour; the high faithfulness gap (0.13) further undermines confidence in the explanation's validity for auditing.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is straightforward to parse but lacks contextual interpretation or explanation of what the weights mean for a non-expert reader.\",\n    \"completeness\": \"Only two features are identified as important (area error and worst perimeter), while nine others are marked as zero; this sparse representation may miss important decision drivers, especially given the low fidelity score.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from low technical quality (fidelity 0.627, stability 0.467, faithfulness gap 0.13) and provides minimal interpretability value; it identifies anchors but fails to contextualize them meaningfully.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, area error and worst perimeter are plausible morphological features, but the binary weights (1.0/0.0) and absence of actual feature values or thresholds limit semantic grounding.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:38.879091+00:00"
+}

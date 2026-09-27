@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7828930153eaf25f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_90c2a079d85848b0",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7828930153eaf25f_00dade875229c7f8.txt",
+  "prompt_version": "00dade875229c7f8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541539-hdfdkcyLcRGqgCqI2Lcy",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 454,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003493,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00227,
+        "upstream_inference_cost": 0.003493,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1677
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7828930153eaf25f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features with uniform weights (all 1.0) but provides no guidance on which features to modify, their direction of influence, or feasible interventions for recourse.\",\n    \"audit_usefulness\": \"The uniform weighting across 10 features is suspicious and suggests potential issues with the anchors method; however, the explanation does not support investigation of model bias or error patterns effectively.\",\n    \"clarity\": \"The format is straightforward and readable, presenting feature names and weights in a simple list; however, the uniform weights and lack of context make interpretation difficult for non-experts.\",\n    \"completeness\": \"The explanation covers many features but the uniform 1.0 weights across all listed features suggest the anchors method may have failed to identify true local drivers, leaving the actual decision logic unclear.\",\n    \"concision\": \"The explanation is compact in length but the redundancy of identical weights (all 1.0) across diverse feature types reduces information efficiency.\",\n    \"overall_quality\": \"The explanation exhibits technical anomalies (uniform weights, zero stability, negative fidelity) that undermine its reliability and usefulness across all dimensions.\",\n    \"semantic_plausibility\": \"Uniform importance weights across heterogeneous features (age, workclass categories, capital-loss) is implausible and inconsistent with typical model behavior in income prediction tasks.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:04.448744+00:00"
+}

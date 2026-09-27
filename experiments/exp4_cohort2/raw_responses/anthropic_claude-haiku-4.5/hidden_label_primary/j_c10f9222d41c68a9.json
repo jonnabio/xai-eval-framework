@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_282b2b337bb41d87",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c10f9222d41c68a9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_282b2b337bb41d87_543512354219b0f8.txt",
+  "prompt_version": "543512354219b0f8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540910-sCs0aef2LdG9Q7CGPvu4",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 513,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003788,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002565,
+        "upstream_inference_cost": 0.003788,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1736
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_282b2b337bb41d87\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions a clinician or patient could take based on the prediction or which features could be modified. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The normalized importance scores (1.0 vs 0.0) reveal model decision logic, but the low fidelity (0.58) and high faithfulness gap (0.25) suggest the explanation may not reliably represent actual model behaviour. The binary importance pattern is suspicious and limits diagnostic value.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical scores, which is straightforward to parse but lacks context about what these scores mean or why these features matter in breast cancer diagnosis.\",\n    \"completeness\": \"Only 10 features are listed with importance weights, but the explanation does not indicate whether these represent all relevant drivers or a subset, nor does it explain the decision boundary or confidence level for the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance pairs without extraneous text.\",\n    \"overall_quality\": \"The explanation suffers from low technical fidelity and stability metrics, lacks actionable guidance, and provides minimal semantic context despite being clearly formatted. The binary importance pattern and missing confidence information further undermine utility.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture, concave points, and area measurements are clinically relevant features, but the stark binary importance pattern (1.0 vs 0.0) is implausible and suggests the explanation may not reflect genuine model reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:28:36.483703+00:00"
+}

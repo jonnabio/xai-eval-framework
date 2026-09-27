@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c31c503b4e3df606",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ae5f3b200cc3bef3_786ae6f4db07c541.txt",
+  "prompt_version": "786ae6f4db07c541",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541270-47tEoBEkc8FUpACIZw4T",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004012,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002785,
+        "upstream_inference_cost": 0.004012,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1784
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies age and native-country as anchors but provides no guidance on what actions could be taken or how these factors influence the prediction outcome. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchor the prediction, the low fidelity (0.356) and high faithfulness gap (0.179) severely limit its utility for auditing model behavior. The zero stability score indicates the explanation is unreliable across perturbations.\",\n    \"clarity\": \"The format is straightforward as a list of features with weights, but lacks narrative context explaining what the anchors mean or why they matter for the prediction. A non-expert would struggle to interpret the significance of the 1.0 and 0.0 values.\",\n    \"completeness\": \"Only two features are identified as relevant (age and native-country with 1.0 weight), while eight others are marked as 0.0, leaving substantial uncertainty about whether other features truly have zero influence or were simply not explored by the anchor algorithm.\",\n    \"concision\": \"The explanation is compact in token count but contains redundant zero-weight features that add little informational value. Removing the zero-weighted features would improve information density without loss of meaning.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability) and lacks interpretability scaffolding for end users. While it identifies potential anchors, the unreliability of the underlying explanation method and absence of contextual framing severely compromise its utility.\",\n    \"semantic_plausibility\": \"Age and native-country being predictive of income in the adult dataset is plausible from a domain perspective, but the explanation provides no context linking these features to the specific prediction (class 0) or the instance characteristics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:36.158899+00:00"
+}

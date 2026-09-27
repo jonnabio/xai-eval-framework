@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_10af1c32a83c945b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4f96f4d65555df8d_d35fa207b7c0a474.txt",
+  "prompt_version": "d35fa207b7c0a474",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538824-y3UD7SM5kXTrXZXz2IYf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003748,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00251,
+        "upstream_inference_cost": 0.003748,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1740
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors with binary importance weights but provides no guidance on how to interpret these values or what actions a user could take to change the prediction or understand the decision.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchor the prediction, the high faithfulness_gap (0.39) and moderate stability (0.44) suggest the explanation may not reliably represent model behaviour, limiting its utility for auditing model logic or detecting bias.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is straightforward to parse but lacks narrative context, interpretation, or explanation of what the weights mean for a non-expert reader.\",\n    \"completeness\": \"The explanation covers seven features with non-zero anchor weights and three with zero weights, providing reasonable coverage of local decision factors, though the meaning of the weights and their relative importance remains unclear.\",\n    \"concision\": \"The explanation is compact at 70 tokens and avoids redundancy, efficiently listing features and their anchor scores without padding.\",\n    \"overall_quality\": \"The explanation is technically minimal and lacks interpretability; while it identifies relevant features, the poor stability, high faithfulness gap, and absence of narrative context significantly limit its practical value for decision support or auditing.\",\n    \"semantic_plausibility\": \"The selected features (duration, credit_amount, age, checking_status, purpose, savings_status, property_magnitude) are plausible drivers in credit risk assessment, though the explanation does not articulate why these specific values matter or how they relate to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:49.437468+00:00"
+}

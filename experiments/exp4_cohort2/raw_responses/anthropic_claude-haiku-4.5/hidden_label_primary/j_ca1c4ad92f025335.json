@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ca1c4ad92f025335",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b352dc7c29edc22c_f9329786c5b642c6.txt",
+  "prompt_version": "f9329786c5b642c6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538723-8HPQauok6PK3yVE0HZOP",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003948,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002695,
+        "upstream_inference_cost": 0.003948,
+        "upstream_inference_prompt_cost": 0.001253
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1792
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to modify inputs, challenge the prediction, or take corrective action. Without context on what the prediction means (income threshold), actionability is severely limited.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions enable auditors to inspect feature importance and model logic systematically. The mix of positive and negative contributions supports bias investigation, though the high faithfulness_gap (0.43) raises concerns about explanation reliability.\",\n    \"clarity\": \"The format is a simple list of feature-value pairs with numerical contributions, which is clear in structure but requires familiarity with SHAP interpretation and the adult dataset feature encoding. Non-experts would struggle without additional context.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with both positive and negative contributions, providing reasonable coverage of the decision factors. However, the base prediction probability and model confidence are absent, limiting full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential feature names and SHAP values. Token count (91) is efficient for the information density provided.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks user-friendliness and actionability. The high faithfulness_gap (0.43) and moderate sparsity (0.09) suggest the explanation may not fully capture model behaviour, undermining overall reliability.\",\n    \"semantic_plausibility\": \"Marital status, country of origin, and occupation are plausible predictors in income classification tasks, and the direction of contributions (married, tech-support positive; never-married, female negative) align with historical income patterns, though such patterns may reflect dataset bias.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:09.290747+00:00"
+}

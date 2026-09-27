@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a3e0d9f6ccc43441",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a6bb167d1c81d8a5_fe6df02e2dadd9d1.txt",
+  "prompt_version": "fe6df02e2dadd9d1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540408-rMYWtm7gMkGlw496WvzZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003749,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00253,
+        "upstream_inference_cost": 0.003749,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1725
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"clarity\": \"The explanation presents feature names and SHAP values in a straightforward list format that is accessible to readers with basic statistical literacy, though domain knowledge of breast cancer features would enhance interpretation.\",\n    \"concision\": \"The explanation is compact and efficiently presents the top 10 contributing features with their SHAP values without redundancy or padding.\",\n    \"actionability\": \"The explanation provides no guidance on what actions to take, how to interpret the prediction in clinical context, or what next steps are appropriate for decision-making or recourse.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model behavior inspection and could help identify systematic biases, though the low fidelity (0.648) and stability (0.412) metrics suggest the explanation may not reliably represent model logic.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with directional impact (positive/negative SHAP values), providing reasonable local decision context, though the small magnitudes and low fidelity raise questions about whether these truly capture the prediction mechanism.\",\n    \"semantic_plausibility\": \"The features (concave points, radius, texture, concavity, area) are medically relevant to breast cancer diagnosis and their inclusion is plausible, though the very small SHAP values and false positive classification warrant scrutiny.\",\n    \"overall_quality\": \"The explanation is technically sound and clearly presented but suffers from weak technical performance metrics (low fidelity and stability), lacks actionability, and provides limited insight into why this specific prediction may be incorrect given its false positive status.\"\n  },\n  \"scores\": {\n    \"clarity\": 4,\n    \"concision\": 5,\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"completeness\": 3,\n    \"semantic_plausibility\": 3,\n    \"overall_quality\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:14.260580+00:00"
+}

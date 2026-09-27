@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4fd0c1b8436db2ab",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ba8a2c4ca53c1a08_9e0fae6ae21aab7c.txt",
+  "prompt_version": "9e0fae6ae21aab7c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539869-Mq59GkgNwAwDV6iU2ewN",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003885,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00264,
+        "upstream_inference_cost": 0.003885,
+        "upstream_inference_prompt_cost": 0.001245
+      },
+      "is_byok": false,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1773
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, modify inputs, or take corrective action; it is purely descriptive without recourse pathways.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model behaviour inspection and bias investigation, enabling auditors to verify whether the model relies on protected attributes like sex; technical metrics show moderate fidelity (0.66) and high faithfulness gap (0.17), which are useful for assessing reliability.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical weights, which is clear in structure but requires familiarity with the adult dataset and LIME methodology to interpret meaningfully.\",\n    \"completeness\": \"The top 10 features are provided with their contributions, covering the main drivers of the prediction; however, the explanation lacks context about feature values, thresholds, or why these particular features matter for the positive prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text; however, the raw format sacrifices some interpretability for brevity.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks user-facing clarity, actionability, and contextual grounding; it serves a narrow technical audience rather than supporting broad stakeholder understanding.\",\n    \"semantic_plausibility\": \"The identified features (education, relationship status, occupation, sex, marital status) are plausible drivers of income prediction in the adult dataset and align with domain expectations; the direction of weights (e.g., professional school education as positive) is coherent with real-world patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:15.198408+00:00"
+}

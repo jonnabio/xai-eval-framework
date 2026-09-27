@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d7ba8be786b044d5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e5e8a4d0292d4cca_28a37af127197bf6.txt",
+  "prompt_version": "28a37af127197bf6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540855-9kwVtx7mFYSj5COOBoWN",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003807,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00257,
+        "upstream_inference_cost": 0.003807,
+        "upstream_inference_prompt_cost": 0.001237
+      },
+      "is_byok": false,
+      "prompt_tokens": 1237,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1751
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to change the prediction, modify the application, or take concrete next steps. A user cannot act on normalized weights alone without domain context.\",\n    \"audit_usefulness\": \"The normalized weights and feature list support model inspection by showing which features drove the prediction, but the high faithfulness_gap (0.38) and moderate fidelity (0.72) suggest the explanation may not fully capture model behaviour, limiting audit confidence.\",\n    \"clarity\": \"The format is a simple list of feature names with normalized weights, which is straightforward to parse but lacks narrative context, interpretation, or explanation of what these weights mean for a non-expert reader.\",\n    \"completeness\": \"The explanation identifies six high-weight features and four zero-weight features, covering the main local drivers; however, it does not explain the direction of influence (why these features push toward class 0) or their interaction.\",\n    \"concision\": \"The explanation is compact at 67 tokens and avoids redundancy, efficiently listing features and weights without padding.\",\n    \"overall_quality\": \"The explanation is technically sound but minimal in interpretability; it serves as a feature importance summary rather than a human-friendly explanation, with moderate technical quality (fidelity 0.72) undermining confidence in its representativeness.\",\n    \"semantic_plausibility\": \"In the German credit domain, the selected features (duration, installment commitment, checking status, purpose, housing, telephone) are plausible credit risk factors; however, the explanation does not articulate why these specific values lead to a negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:27:41.198838+00:00"
+}

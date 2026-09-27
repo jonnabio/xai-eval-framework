@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89e4fe58e0303d60",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2a6c0f0f2654ccbc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_89e4fe58e0303d60_70f085a6f8911061.txt",
+  "prompt_version": "70f085a6f8911061",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540138-tW6KZI1APLJQKIx8ltCJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00406,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002825,
+        "upstream_inference_cost": 0.00406,
+        "upstream_inference_prompt_cost": 0.001235
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1800
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_89e4fe58e0303d60\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken to change the prediction or improve creditworthiness. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation identifies key anchoring features (duration, checking status, purpose, property) with their weights, which supports model behavior inspection. However, the low fidelity (0.607) and high faithfulness gap (0.688) raise concerns about whether these anchors truly represent the model's decision logic.\",\n    \"clarity\": \"The explanation uses technical feature names and numerical weights that require familiarity with the German Credit dataset schema to interpret. A non-expert would struggle to understand what 'checking_status_<0' or 'property_magnitude_no known property' mean in practical terms.\",\n    \"completeness\": \"Four features are identified as anchors with weight 1.0, but nine other features show weight 0.0, leaving ambiguity about whether they were truly irrelevant or simply not selected. The explanation lacks context about the prediction threshold or confidence level.\",\n    \"concision\": \"The explanation is compact in token count but includes redundant zero-weight features that add no information. Removing features with 0.0 weight would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation demonstrates moderate technical rigor through anchor identification and stability (0.967), but is undermined by poor fidelity metrics, lack of actionability, and presentation that requires domain expertise. It serves auditors better than end-users.\",\n    \"semantic_plausibility\": \"The identified anchors (short duration, negative checking status, new car purpose, no known property) are plausible risk factors in credit assessment, aligning with domain expectations for a negative prediction. The combination is coherent with lending risk logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:44.451700+00:00"
+}

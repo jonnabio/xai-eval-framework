@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_77a17ae878421179",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0da6a71373977fce_3ba15b68decdafee.txt",
+  "prompt_version": "3ba15b68decdafee",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541338-wRkpwPiAp3VA7nnV6Oqq",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003986,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00276,
+        "upstream_inference_cost": 0.003986,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1778
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_South as the sole driver but provides no guidance on feasible recourse or decision review steps; a user cannot act on this information without additional context about what changes are possible or desirable.\",\n    \"audit_usefulness\": \"While the explanation shows which feature dominates the decision, the extreme sparsity (only one non-zero weight) and near-zero weights on all other features raise questions about model behaviour that warrant deeper investigation; however, the format does not facilitate systematic bias or error auditing.\",\n    \"clarity\": \"The output is presented as a simple list of feature weights, which is mechanically clear but lacks narrative framing, interpretation, or explanation of what the weights mean or why native-country_South matters for the prediction.\",\n    \"completeness\": \"The explanation identifies one dominant factor but the near-zero contributions from all other features suggest either incomplete local context or a model that relies almost entirely on a single feature, leaving uncertainty about whether the full decision logic is captured.\",\n    \"concision\": \"The explanation is compact in token count but contains substantial redundancy (nine features with identical 0.0000 weights), reducing information density and suggesting the output could be more efficiently summarized.\",\n    \"overall_quality\": \"The explanation is technically sparse and mechanically presented, offering minimal interpretive value; it identifies a single dominant feature but fails to contextualize, justify, or enable action on that finding, resulting in a low-utility output despite correct format.\",\n    \"semantic_plausibility\": \"In the adult income dataset, native-country is a known predictor of income, so the finding is plausible; however, the extreme dominance of this single feature and near-zero contribution from age, education, and hours-per-week is somewhat counterintuitive and warrants scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:44.374874+00:00"
+}

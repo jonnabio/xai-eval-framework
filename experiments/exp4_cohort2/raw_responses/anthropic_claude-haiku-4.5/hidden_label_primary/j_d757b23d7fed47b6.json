@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7334ccb1f9958dda",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d757b23d7fed47b6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7334ccb1f9958dda_7f0d31b60f9aa11e.txt",
+  "prompt_version": "7f0d31b60f9aa11e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539953-c6PFzb6DrqHKM4Gv0lKJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003664,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00244,
+        "upstream_inference_cost": 0.003664,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1712
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7334ccb1f9958dda\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken to change the prediction or improve outcomes; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"The explanation shows which features DICE identified as important, but the extremely low stability (0.042) and high faithfulness gap (0.487) severely undermine confidence in the model's actual decision logic, limiting audit value.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical scores\u2014but lacks context about what the scores mean, what the prediction represents, or why these particular features matter.\",\n    \"completeness\": \"Only one feature (occupation_Transport-moving) has a non-zero importance score; the explanation is sparse and does not provide sufficient local decision context, particularly given the high faithfulness gap suggesting the explanation may not reflect true model behavior.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature scores in a minimal format.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low stability, high faithfulness gap), minimal semantic content, and lack of actionability; while concise, it fails to deliver reliable or useful insight into the prediction.\",\n    \"semantic_plausibility\": \"The identification of occupation as a key factor in an income prediction task is plausible, but the near-zero importance of all other features and the poor technical metrics raise doubts about whether this explanation genuinely reflects the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:38.230625+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc5e0af1e6f9ee71",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8ed7537d045b75f4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_dc5e0af1e6f9ee71_2d54958c917fc123.txt",
+  "prompt_version": "2d54958c917fc123",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541123-ttVrHOfJup9KMggXT2G9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003942,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00271,
+        "upstream_inference_cost": 0.003942,
+        "upstream_inference_prompt_cost": 0.001232
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1774
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc5e0af1e6f9ee71\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them, what actions to take, or how to modify inputs to change the prediction. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction (mean and worst concave points) and which did not, supporting model behaviour inspection. However, the low fidelity (0.72) and stability (0.57) metrics undermine confidence in the explanation's reliability for auditing purposes.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with weights\u2014but lacks contextual framing, interpretation guidance, or explanation of what the weights represent. A non-expert would struggle to understand the significance of the values.\",\n    \"completeness\": \"Only two features are identified as anchors (mean and worst concave points); the remaining eight features show zero weight, leaving uncertainty about whether they were truly irrelevant or simply not selected by the algorithm. The explanation lacks threshold or confidence information.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a tabular format. However, brevity comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"The explanation identifies key decision drivers but suffers from low technical fidelity, weak stability, and minimal interpretability for end users. The format is efficient but lacks the depth and reliability needed for high-quality XAI.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points are clinically relevant morphological features associated with malignancy, making the focus on these features plausible. The zero weights on other texture and shape features are reasonable given the model's apparent reliance on concavity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:09.451152+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_351992a3a4ef9b51",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_60730b2d1280bac2_a19424fe6c5d1c5a.txt",
+  "prompt_version": "a19424fe6c5d1c5a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538685-aumJMawKYVSV36GrVCst",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003744,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002495,
+        "upstream_inference_cost": 0.003744,
+        "upstream_inference_prompt_cost": 0.001249
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1748
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, modify inputs, or take concrete next steps; it is purely descriptive without recourse information.\",\n    \"audit_usefulness\": \"The feature weights and directions support model behavior inspection and could help identify potential biases in employment-related features, though the low fidelity (0.318) and high faithfulness gap (0.274) limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with weights\u2014but requires familiarity with LIME methodology and the adult dataset to interpret; non-experts may struggle with feature names and weight semantics.\",\n    \"completeness\": \"The explanation covers the top 10 local factors and includes both positive and negative contributions, providing reasonable coverage of the decision drivers for this specific instance.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and weights) without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is clear in format and reasonably complete, the poor technical metrics (low fidelity, high faithfulness gap, low stability) and lack of actionability or deeper context significantly undermine its overall utility and trustworthiness.\",\n    \"semantic_plausibility\": \"The features and their directions are plausible for an income prediction task (self-employment, managerial roles, and capital gains typically correlate with higher income), and the negative weights for private sector and never-married status align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:30.971896+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2c6bf5d2a64a89fb",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6ce495f3482aecc1_77fc4228b0c8a099.txt",
+  "prompt_version": "77fc4228b0c8a099",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541152-6lihEJWkK0WvHCp45GD1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003444,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002215,
+        "upstream_inference_cost": 0.003444,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1672
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, modify inputs, or take corrective action; it is purely descriptive without decision support.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchored the prediction and their normalized importance, enabling an auditor to inspect model reliance on texture and concave point measurements for this negative classification.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with normalized weights\u2014but lacks context on what these features represent clinically or why they matter, requiring domain knowledge to interpret.\",\n    \"completeness\": \"Only two features are identified as anchors with non-zero weight; the explanation omits the actual feature values for the instance, making it impossible to understand the full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into model behavior but lacks actionability, clinical context, and instance-specific values needed for comprehensive understanding and decision support.\",\n    \"semantic_plausibility\": \"Reliance on texture and concave point measurements for breast cancer classification is plausible given their known diagnostic relevance, though the zero weights on other mean features seem incomplete.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:36.497933+00:00"
+}

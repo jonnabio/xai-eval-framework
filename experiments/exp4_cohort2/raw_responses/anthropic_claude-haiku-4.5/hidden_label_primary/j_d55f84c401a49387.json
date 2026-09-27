@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d55f84c401a49387",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e4a3c652adf1d046_1feba94fe710617e.txt",
+  "prompt_version": "1feba94fe710617e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540492-pyvnQWW4ACkl1iBFIImx",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004065,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002835,
+        "upstream_inference_cost": 0.004065,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1797
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to interpret them, what thresholds matter, or what actions a user could take to change the prediction. No recourse pathways are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchor the prediction, the very low fidelity (0.44) and high faithfulness gap (0.24) severely undermine its utility for auditing model behaviour. The stability score of 0.0 indicates the explanation is unstable and unreliable for systematic bias investigation.\",\n    \"clarity\": \"The format is a simple list of feature names with binary importance scores (1.0 or 0.0), which is easy to parse but lacks context about what these scores mean or how they relate to the prediction. A non-expert would struggle to interpret the significance.\",\n    \"completeness\": \"The explanation identifies five positive anchors and five zero-weighted features, but does not provide actual feature values for the instance, thresholds, or the decision boundary logic. Critical local context is missing.\",\n    \"concision\": \"The explanation is compact at 80 tokens and avoids obvious redundancy, though the list format could be more efficiently summarized. The token count is reasonable for the information density.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity, high faithfulness gap, zero stability) and lacks interpretability depth. It reads as a raw feature importance dump rather than a coherent, trustworthy explanation of the prediction.\",\n    \"semantic_plausibility\": \"For an income prediction task, the anchors (age, education, hours-per-week, executive role, married status) are plausible drivers of high income. However, the absence of actual values and thresholds makes it impossible to assess whether the specific decision logic is domain-coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:21:38.243267+00:00"
+}

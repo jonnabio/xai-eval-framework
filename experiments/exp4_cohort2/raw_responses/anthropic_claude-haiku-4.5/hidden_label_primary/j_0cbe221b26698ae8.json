@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_0cbe221b26698ae8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_5169d5420efbc3da_376622d3ddc4405a.txt",
+  "prompt_version": "376622d3ddc4405a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540419-SpGAYgEmcfYZZjz5ojK7",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003728,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002505,
+        "upstream_inference_cost": 0.003728,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1724
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the decision boundary.\",\n    \"audit_usefulness\": \"The anchor weights (1.0 for education-num and occupation_Farming-fishing; 0.0 for others) provide some insight into feature importance, but the zero weights on many features and zero stability score raise concerns about explanation reliability and reproducibility.\",\n    \"clarity\": \"The output is presented as a simple list of feature-weight pairs that is easy to parse syntactically, though the semantic meaning of anchor weights and why certain features matter is not explained for a non-expert.\",\n    \"completeness\": \"Only two features are identified as anchors with non-zero weight, which may be insufficient to fully characterize the local decision boundary, especially given the high faithfulness gap (0.36) suggesting the explanation diverges from actual model behavior.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, listing features and weights efficiently without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from low stability (0.0), high faithfulness gap (0.36), and lack of interpretive context, limiting its reliability and usefulness despite being concise and syntactically clear.\",\n    \"semantic_plausibility\": \"The selection of education level and farming-fishing occupation as anchors for an income prediction task is plausible within domain knowledge, though the complete absence of other commonly relevant features (age, hours-per-week) is somewhat surprising.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:25.003282+00:00"
+}

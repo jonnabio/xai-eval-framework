@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cc3c47f9ed102eb0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b70f5d4f7a3eb7e7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cc3c47f9ed102eb0_7a063b04d989b6b7.txt",
+  "prompt_version": "7a063b04d989b6b7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541197-LAHK9FvImOsT67cHcBIt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003552,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002325,
+        "upstream_inference_cost": 0.003552,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1692
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cc3c47f9ed102eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, modify inputs, or take corrective action; it is purely descriptive without actionable recommendations.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 and 0.0) and list of zero-weighted features support model inspection and bias investigation, enabling auditors to verify whether feature importance aligns with domain expectations.\",\n    \"clarity\": \"The explanation uses technical terminology (anchors, normalized weights) and a tabular format that requires familiarity with XAI methods; a non-expert would struggle to understand what these scores mean.\",\n    \"completeness\": \"Only two features are identified as relevant (area error and worst texture), while eight others are listed with zero weight; this sparse representation may omit important decision context for the specific prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides technical audit value but lacks clarity, actionability, and sufficient context for non-expert users; it is suitable for model developers but not for broader stakeholder communication.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and area measurements are clinically relevant features; the focus on these two features is plausible, though the complete absence of other morphological features is somewhat surprising.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:22.294352+00:00"
+}
