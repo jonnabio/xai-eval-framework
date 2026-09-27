@@ -1,26 +1,40 @@
 #!/usr/bin/env python3
-"""Verify that reconstructed EXP4 sources are equivalent to the original bytecode.
+"""Verify that the reconstructed EXP4 sources are still the text that was verified.
 
 The EXP4 modules were lost from the working tree and rebuilt from the .pyc files
-left in __pycache__ (see docs/rca/RCA-002-exp4-source-recovery.md). A rebuilt
-file is only trustworthy if it compiles to the same instructions as the original,
-so this check compiles each reconstruction and compares its opcode stream against
-the committed bytecode.
+left in __pycache__ (see docs/rca/RCA-002-exp4-source-recovery.md). On 2026-08-28
+each rebuilt module was shown to compile to the same instructions as its
+original bytecode. That bytecode was never committed and was lost on
+2026-09-27, so the comparison cannot be repeated.
 
-Compared: opcode names, and the constants/names/varnames referenced by each code
-object. Ignored: line numbers, formatting, comments, and the module docstring
-(the reconstruction adds a provenance note to it).
+Two checks:
 
-Exit 0 if every reconstruction matches its bytecode, 1 otherwise.
+1. Hash pins (always). Every pinned file in exp4_source_pins.json must hash to
+   its pin: SHA-256 over the file with CRLF normalised to LF, so Windows and
+   Linux checkouts agree. A pinned file that is missing, and an exp4_*.py that
+   has no pin, both fail. This does not re-verify the reconstruction; it keeps
+   the verified text from changing silently. Changing a pinned file means
+   changing its pin in the same commit, with the reason in the message.
+
+2. Bytecode comparison (only if the .pyc files are ever present again, and only
+   under CPython 3.13). Compared: opcode names, and the constants/names/varnames
+   referenced by each code object. Ignored: line numbers, formatting, comments,
+   and the module docstring (the reconstruction adds a provenance note to it).
+
+Exit 0 if every check that could run passed, 1 otherwise.
 """
 from __future__ import annotations
 
 import dis
+import hashlib
+import json
 import marshal
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+PINS = Path(__file__).resolve().parent / "exp4_source_pins.json"
+TEST_DIR = ROOT / "tests" / "exp4"
 
 SRC_DIR = ROOT / "src" / "evaluation"
 SCRIPT_DIR = ROOT / "scripts"
@@ -147,34 +161,61 @@ def compare(src: Path, pyc: Path, opcode_check: bool = True) -> list[str]:
     return problems
 
 
-def main() -> int:
-    if sys.version_info[:2] != REQUIRED_PYTHON:
-        running = ".".join(str(v) for v in sys.version_info[:2])
-        required = ".".join(str(v) for v in REQUIRED_PYTHON)
-        print(
-            f"SKIP: EXP4 bytecode is CPython {required}; this interpreter is "
-            f"{running}, which emits different instructions. Re-run under "
-            f"Python {required} to check the reconstruction."
-        )
-        return 0
+def normalised_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
+
+def check_pins() -> tuple[list[str], int]:
+    """Compare every EXP4 source against its pin; return (problems, pins checked)."""
+    pinned = json.loads(PINS.read_text(encoding="utf-8"))["files"]
     problems: list[str] = []
-    for src, pyc in PAIRS:
-        problems.extend(compare(src, pyc))
-    for src, pyc in SCRIPT_PAIRS:
-        problems.extend(compare(src, pyc, opcode_check=False))
+    for rel, pin in sorted(pinned.items()):
+        path = ROOT / rel
+        if not path.exists():
+            problems.append(f"[{rel}] pinned file is missing")
+        elif normalised_sha256(path) != pin["sha256"]:
+            problems.append(
+                f"[{rel}] differs from the text verified on 2026-08-28 "
+                f"(pin {pin['sha256'][:12]}, now {normalised_sha256(path)[:12]})"
+            )
+    present = [src for src, _ in PAIRS + SCRIPT_PAIRS] + sorted(TEST_DIR.glob("*.py"))
+    for src in present:
+        rel = src.relative_to(ROOT).as_posix()
+        if rel not in pinned and src.name != "__init__.py":
+            problems.append(f"[{rel}] EXP4 source has no pin in {PINS.name}")
+    return problems, len(pinned)
+
+
+def main() -> int:
+    problems, n_pins = check_pins()
+
+    # The bytecode comparison runs only if the lost .pyc files are ever restored.
+    pairs = [(s, p) for s, p in PAIRS if p.exists()]
+    script_pairs = [(s, p) for s, p in SCRIPT_PAIRS if p.exists()]
+    bytecode_note = "bytecode absent (lost 2026-09-27), comparison not run"
+    if pairs or script_pairs:
+        if sys.version_info[:2] == REQUIRED_PYTHON:
+            for src, pyc in pairs:
+                problems.extend(compare(src, pyc))
+            for src, pyc in script_pairs:
+                problems.extend(compare(src, pyc, opcode_check=False))
+            bytecode_note = (
+                f"bytecode comparison run on {len(pairs)} module(s) and "
+                f"{len(script_pairs)} script(s)"
+            )
+        else:
+            required = ".".join(str(v) for v in REQUIRED_PYTHON)
+            bytecode_note = f"bytecode present but comparison needs Python {required}"
 
     if problems:
-        print("EXP4 reconstruction does NOT match the original bytecode:\n")
+        print("EXP4 reconstruction check FAILED:\n")
         for p in problems:
             print(f"  {p}")
         return 1
 
     print(
-        f"OK: {len(PAIRS)} reconstructed EXP4 module(s) compile to the same "
-        f"instructions as the committed bytecode; "
-        f"{len(SCRIPT_PAIRS)} CLI script(s) match structurally (3.12 bytecode, "
-        f"opcode stream not comparable)"
+        f"OK: {n_pins} EXP4 source file(s) match the text verified on 2026-08-28; "
+        f"{bytecode_note}"
     )
     return 0
 
