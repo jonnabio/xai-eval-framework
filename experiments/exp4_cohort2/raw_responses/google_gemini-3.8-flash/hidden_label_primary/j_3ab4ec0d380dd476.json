@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3ab4ec0d380dd476",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c715759299b480a0_f2bafd97917a76b9.txt",
+  "prompt_version": "f2bafd97917a76b9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540133-D98HSrIdNhrVIwWSReIu",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 951,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 567,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00356625,
+        "upstream_inference_cost": 0.0045225,
+        "upstream_inference_prompt_cost": 0.00095625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2226
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution values without actionable guidance or clear paths for recourse.\",\n    \"audit_usefulness\": \"It provides precise numerical attributions for the top one-hot encoded features, allowing a technical auditor to inspect model decision drivers.\",\n    \"clarity\": \"The raw feature string names and numeric attributions require technical familiarity with SHAP and encoded tabular data to interpret properly.\",\n    \"concision\": \"The presentation is compact and directly enumerates the most influential local factors without unnecessary filler.\",\n    \"completeness\": \"The top 10 features capture the primary local drivers and their directional signs, though baseline values and actual feature levels are not explicitly stated.\",\n    \"overall_quality\": \"This is an acceptable technical feature attribution summary that is sound and informative for data scientists, though limited in lay readability and user actionability.\",\n    \"semantic_plausibility\": \"The identified key risk drivers\u2014such as checking status, savings, loan duration, and employment length\u2014align well with credit risk assessment domain logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:41.093687+00:00"
+}

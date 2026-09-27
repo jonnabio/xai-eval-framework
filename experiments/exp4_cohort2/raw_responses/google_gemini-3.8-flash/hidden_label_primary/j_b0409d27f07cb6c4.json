@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b0409d27f07cb6c4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1759e90b50c033fd_e6d340814e12d266.txt",
+  "prompt_version": "e6d340814e12d266",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541283-anPf94F4vPFVTwxx3AfI",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1139,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 758,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00521775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00427125,
+        "upstream_inference_cost": 0.00521775,
+        "upstream_inference_prompt_cost": 0.0009465
+      },
+      "is_byok": false,
+      "prompt_tokens": 1262,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2401
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values without explaining how the applicant could change specific feature values to alter the outcome.\",\n    \"audit_usefulness\": \"It provides a clear breakdown of the top positive and negative feature attributions, allowing an auditor to inspect which factors influenced the prediction.\",\n    \"clarity\": \"The list presents raw feature names and signed floating-point scores, which require technical and domain familiarity to interpret correctly.\",\n    \"completeness\": \"The top 10 factors are covered with signed weights, though the base value and actual feature values for continuous variables are omitted.\",\n    \"concision\": \"The explanation is highly compact, presenting the key attributions directly without unnecessary filler text.\",\n    \"overall_quality\": \"It serves as an adequate technical explanation for an auditor, though it lacks lay clarity, actual feature values, and actionable guidance.\",\n    \"semantic_plausibility\": \"The identified risk drivers, such as checking status, duration, and savings, align well with domain expectations in credit scoring.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:52.778660+00:00"
+}

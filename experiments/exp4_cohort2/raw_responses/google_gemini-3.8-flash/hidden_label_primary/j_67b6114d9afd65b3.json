@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3d27b1d2bd43df77",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_67b6114d9afd65b3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3d27b1d2bd43df77_0033c93159985ff4.txt",
+  "prompt_version": "0033c93159985ff4",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542171-0rCQZPK7D0etw2uruOLZ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1079,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 681,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00496725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00404625,
+        "upstream_inference_cost": 0.00496725,
+        "upstream_inference_prompt_cost": 0.000921
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2307
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3d27b1d2bd43df77\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary feature importance flags without directionality, thresholds, or recourse guidance.\",\n    \"audit_usefulness\": \"While it isolates five features as part of the local anchor, the absence of rule predicates and poor fidelity/stability metrics limit its utility for rigorous auditing.\",\n    \"clarity\": \"The output is structured as a feature-weight list rather than an explicit rule, which may confuse laypersons trying to understand what the 1.0 and 0.0 scores signify.\",\n    \"completeness\": \"It indicates which features are included in the anchor rule but omits the actual condition thresholds and feature values required for a complete explanation.\",\n    \"concision\": \"The explanation unnecessarily includes five features with zero weights rather than focusing strictly on the active anchor conditions.\",\n    \"overall_quality\": \"The explanation provides plausible driver features for the Adult dataset but suffers from an uninformative representation without predicate boundaries, alongside poor faithfulness.\",\n    \"semantic_plausibility\": \"Highlighting executive occupation, hours worked, age, and marital status aligns strongly with known drivers of high income in the Adult census domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:40.022066+00:00"
+}

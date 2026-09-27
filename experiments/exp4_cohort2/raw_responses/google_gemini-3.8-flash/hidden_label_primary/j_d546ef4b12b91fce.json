@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d546ef4b12b91fce",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3e006f8c0e7512b1_1ca24c7990013da3.txt",
+  "prompt_version": "1ca24c7990013da3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538612-o6SzdSyUsofah8IlGCVZ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 665,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004857,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003915,
+        "upstream_inference_cost": 0.004857,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2300
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without practical guidance or counterfactual recommendations for altering the outcome.\",\n    \"audit_usefulness\": \"It provides directional attributions for key features, allowing an auditor to inspect local model drivers, though the absence of actual feature values limits deeper debugging.\",\n    \"clarity\": \"The raw feature names and unscaled attribution numbers require technical background in machine learning and SHAP to interpret correctly.\",\n    \"completeness\": \"The top ten factors are reported with attributions, but the underlying instance feature values are omitted, leaving the local context incomplete.\",\n    \"concision\": \"The text is very concise, presenting the essential attribution weights without unnecessary filler or redundancy.\",\n    \"overall_quality\": \"While technically sound and concise, the raw format lacks user accessibility, feature values, and actionable recourse.\",\n    \"semantic_plausibility\": \"The identified features align well with known predictors for the Adult dataset, though interpreting one-hot feature contributions without baseline context can be unintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:20.480396+00:00"
+}

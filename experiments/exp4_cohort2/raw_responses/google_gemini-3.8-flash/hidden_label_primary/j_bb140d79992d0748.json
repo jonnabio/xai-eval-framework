@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bb140d79992d0748",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c04339897f75190f_e492ecaca783018b.txt",
+  "prompt_version": "e492ecaca783018b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540981-Z0K63qqsYicdffUe7v4H",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 535,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004419,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00347625,
+        "upstream_inference_cost": 0.004419,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2184
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed attribution weights without baseline values, underlying feature values, or guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It provides a clear ranking and directionality of the top 10 contributing features, allowing an auditor to inspect model logic despite missing raw feature values.\",\n    \"clarity\": \"The raw key-value format displaying SHAP attribution values requires technical knowledge of explainability metrics to interpret correctly.\",\n    \"completeness\": \"The explanation covers the top ten local drivers, but omits the base value and actual feature values necessary for a complete reconstruction.\",\n    \"concision\": \"The text is highly compact and presents the top contributing features without unnecessary filler or redundancy.\",\n    \"overall_quality\": \"It serves as a standard, technically sound SHAP summary that is useful for an auditor but lacks actionability and clarity for a general audience.\",\n    \"semantic_plausibility\": \"The identified features\u2014such as loan duration, checking account status, and payment plans\u2014are well-established risk factors in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:29:49.566830+00:00"
+}
