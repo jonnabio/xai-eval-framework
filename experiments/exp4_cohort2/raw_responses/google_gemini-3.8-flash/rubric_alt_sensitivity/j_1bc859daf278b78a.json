@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1bc859daf278b78a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e564a6093e40672d_ecdf024f03a30781.txt",
+  "prompt_version": "ecdf024f03a30781",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551575-RnMvkgpC97QEl4XCDv4I",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1426,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 985,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00634125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0053475,
+        "upstream_inference_cost": 0.00634125,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2751
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it merely flags feature presence with binary weights without stating instance values, rule thresholds, or directional guidance.\",\n    \"audit_usefulness\": \"An auditor can identify which attributes entered the anchor rule, but the lack of rule conditions, feature values, and low fidelity (0.39) severely restricts deep auditability.\",\n    \"clarity\": \"Presenting rule-based anchor components as arbitrary '1.0000' and '0.0000' scores without relational operators is confusing and inaccessible to non-technical users.\",\n    \"completeness\": \"The explanation omits the actual decision boundaries and predicates defining the anchor rule, providing only a sparse list of included feature names.\",\n    \"concision\": \"The summary is fairly compact, though reporting binary indicator weights (1.0000 / 0.0000) for each feature takes up space without providing nuanced attribution.\",\n    \"overall_quality\": \"Overall quality is weak because the anchor conditions have been flattened into binary inclusion flags, stripping away the rule logic and leaving poor fidelity.\",\n    \"semantic_plausibility\": \"The selected features (age, education categories, hours worked, occupation) are well known to influence income in this domain, making the feature selection broadly plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:26:27.042196+00:00"
+}

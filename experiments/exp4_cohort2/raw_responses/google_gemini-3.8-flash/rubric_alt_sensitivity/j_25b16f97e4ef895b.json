@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_25b16f97e4ef895b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_60f604202ab9cb5c_b91599a986946516.txt",
+  "prompt_version": "b91599a986946516",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552298-mYEufHyzNUFTst4rITzA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 685,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040425,
+        "upstream_inference_cost": 0.005022,
+        "upstream_inference_prompt_cost": 0.0009795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1306,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2384
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no directions, threshold values, or actionable steps to understand what changes would alter the prediction.\",\n    \"audit_usefulness\": \"While it identifies worst radius and worst perimeter as the active conditions, it omits threshold cutoffs, limiting its utility for debugging this false positive.\",\n    \"clarity\": \"The list format is readable, but displaying raw binary indicator values (1.0000 vs 0.0000) instead of rule conditions makes it unintuitive for non-technical users.\",\n    \"completeness\": \"The explanation indicates which features are included in the anchor rule but omits the actual predicate ranges and feature values.\",\n    \"concision\": \"Eight out of ten listed features have zero values, adding clutter rather than useful information.\",\n    \"overall_quality\": \"The explanation is weak because it reduces an anchor rule to binary indicators without thresholds, backed by poor fidelity and a high faithfulness gap.\",\n    \"semantic_plausibility\": \"Severe tumor size dimensions like worst radius and worst perimeter are clinically plausible drivers of breast cancer classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:38:28.716011+00:00"
+}

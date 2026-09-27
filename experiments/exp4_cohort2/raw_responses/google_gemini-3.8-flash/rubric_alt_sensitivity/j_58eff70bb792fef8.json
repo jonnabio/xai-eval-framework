@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_58eff70bb792fef8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_681f91e7c50b9380_8e07eeb2a6e00da6.txt",
+  "prompt_version": "8e07eeb2a6e00da6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551793-neEABTkZFVK5x0nBVEHm",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1177,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 781,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0054075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00441375,
+        "upstream_inference_cost": 0.0054075,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2502
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The only highlighted factor is native country, an immutable characteristic that an individual cannot change to alter their outcome.\",\n    \"audit_usefulness\": \"While unhelpful for recourse, highlighting 'native-country_Ireland' as the sole active factor helps an auditor detect demographic sensitivity or spurious correlations causing the false-positive prediction.\",\n    \"clarity\": \"The raw dummy-variable notation and numeric weighting without directional context are difficult for non-technical users to interpret.\",\n    \"completeness\": \"The explanation only provides a single non-zero factor alongside zeroed-out features, offering minimal context on why the model reached a positive prediction.\",\n    \"semantic_plausibility\": \"Attributing income prediction changes solely to being from Ireland is implausible and reflects model overfitting or spurious correlation rather than sound domain logic.\",\n    \"concision\": \"The summary is fairly brief but wastes space listing numerous features with 0.0000 weights.\",\n    \"overall_quality\": \"The explanation is weak overall due to reliance on an immutable demographic feature and a format dominated by zero-weight dummy variables.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:30:01.963021+00:00"
+}

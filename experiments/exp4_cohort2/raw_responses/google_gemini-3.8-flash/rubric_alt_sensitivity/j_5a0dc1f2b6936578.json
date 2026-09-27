@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5a0dc1f2b6936578",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_95751d1d732b6cfa_37765600a0805953.txt",
+  "prompt_version": "37765600a0805953",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551652-7Q32GRRVpnWKlTOzioPE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 680,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00508125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00409125,
+        "upstream_inference_cost": 0.00508125,
+        "upstream_inference_prompt_cost": 0.00099
+      },
+      "is_byok": false,
+      "prompt_tokens": 1320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2411
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it implicitly points to low education as the decisive factor, it does not provide concrete counterfactual targets or guidance on what change would alter the prediction.\",\n    \"audit_usefulness\": \"It highlights that the model heavily weighs a low education indicator for this prediction, but the lack of detail across other features offers marginal utility for comprehensive auditing.\",\n    \"clarity\": \"The raw one-hot encoded variable names and zero-weighted numeric values make it moderately difficult for a non-technical reader to interpret.\",\n    \"completeness\": \"Only a single feature has a non-zero attribution, with the rest listed as zero, providing an incomplete picture of the model's decision boundary.\",\n    \"concision\": \"Listing multiple features with exactly 0.0000 importance takes up unnecessary space and dilutes the useful content.\",\n    \"overall_quality\": \"The explanation isolates one plausible factor but is otherwise dominated by uninformative zeros and lacks actionable counterfactual detail.\",\n    \"semantic_plausibility\": \"Having an education level of 7th-8th grade is a plausible and intuitive driver for an income prediction below 50K in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:27:41.108588+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_40a8c9087ffaf907",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ccbc751d89be60ef_b78db3525a72af4e.txt",
+  "prompt_version": "b78db3525a72af4e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551439-DouQBZE6HtTPEWZIldXW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 965,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 577,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004599,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00361875,
+        "upstream_inference_cost": 0.004599,
+        "upstream_inference_prompt_cost": 0.00098025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1307,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2272
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"This is a medical diagnostic setting where tumor measurements cannot be altered, and the explanation lacks actionable thresholds or counterfactual guidance.\",\n    \"audit_usefulness\": \"It highlights that 'mean concave points' and 'worst texture' drive the anchor, but omitting the actual predicate thresholds limits its utility for auditing.\",\n    \"clarity\": \"The list of features and values is relatively clean, but presenting anchor membership as arbitrary 1.0 and 0.0 weights without thresholds is confusing for a layperson.\",\n    \"completeness\": \"The explanation indicates which features form the anchor rule, but leaves out the actual decision boundaries and rule directions.\",\n    \"concision\": \"Listing eight irrelevant features with zero weights creates unnecessary clutter instead of only showing the active anchor conditions.\",\n    \"overall_quality\": \"The explanation captures the key features involved in the local rule, but the representation is degraded by omitting thresholds and retaining zero-weight features.\",\n    \"semantic_plausibility\": \"Mean concave points and worst texture are well-documented, clinically relevant indicators in breast cancer classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:24:06.895869+00:00"
+}

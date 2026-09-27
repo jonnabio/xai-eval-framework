@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b4d9dd3d38a9549f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_95751d1d732b6cfa_37765600a0805953.txt",
+  "prompt_version": "37765600a0805953",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551661-wmXhjNSMMSePZr1thx4g",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 575,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036225,
+        "upstream_inference_cost": 0.0046125,
+        "upstream_inference_prompt_cost": 0.00099
+      },
+      "is_byok": false,
+      "prompt_tokens": 1320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2286
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it points to education as the sole driving factor, it does not provide an explicit target level or actionable counterfactual path.\",\n    \"audit_usefulness\": \"It highlights that low educational attainment was pivotal in the model's decision, though the lack of context on other features limits deep auditing.\",\n    \"clarity\": \"It uses raw feature strings and one-hot encoding names with arbitrary float weights, which requires technical interpretation.\",\n    \"completeness\": \"Only a single feature shows non-zero attribution while the rest are zero, giving an incomplete view of the decision boundary.\",\n    \"concision\": \"Listing multiple features with exactly 0.0000 weight adds clutter without providing useful information.\",\n    \"overall_quality\": \"The explanation isolates a plausible primary factor (low education level) for predicting low income, but the presentation is cluttered with zeroes and offers limited counterfactual clarity.\",\n    \"semantic_plausibility\": \"Having an education level of 7th-8th grade is strongly and plausibly associated with earning under $50K.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:27:48.734036+00:00"
+}
