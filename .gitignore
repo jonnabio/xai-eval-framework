@@ -38,7 +38,11 @@ htmlcov/
 .idea
 
 # Local Data (exclude datasets but keep config/experiments)
-/data/
+# /data/* rather than /data/ so the negation below can re-include a file:
+# git cannot re-include a file whose parent directory is excluded (RCA-001).
+/data/*
+# Resolver input for Supplementary Table S3 in verify_claims.py (RCA-002).
+!/data/adult.csv
 /datasets/
 
 # Models

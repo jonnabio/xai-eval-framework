@@ -31,7 +31,9 @@ jobs:
 
       - name: Ensure fragments are up to date
         run: |
-          git diff --exit-code pub/fragments
+          # build_meta.env records the absolute path and mtime of claims.toml,
+          # so it differs on every machine; nothing reads it back.
+          git diff --exit-code -- pub/fragments ':!pub/fragments/build_meta.env'
 
   exp4-reconstruction:
     # Runs on 3.13 because it compares against CPython 3.13 bytecode.

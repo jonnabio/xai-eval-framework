@@ -1,8 +1,12 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-15
+- **Last Updated:** 2026-09-27
 - **Active Role:** Scientific Editor / Developer / Architect
+- **Mode (2026-09-27):** INCIDENT - new laptop. EXP4 bytecode found lost (never
+  committed); pubs-sync CI found never green. Fixed the untracked-dataset and
+  build_meta causes; EXP4 job stays red pending an author decision. Paper B+C
+  abstract EXP3 sentence restated. See the 2026-09-27 Session Handoff.
 - **Mode (2026-09-15):** HANDOFF - submission-preparation task CLOSED. The Paper B+C
   package is complete and re-verified, and the author is now revising the manuscript
   in detail before filing. Active objective returns to Task 3 / RCA-001 Phase 2 on the
@@ -878,6 +882,50 @@ checklist and an anonymity pass (RCA-003).
 `[coverage]` is a trunk event that turns CI red on every lane until triaged, and
 it would collide with in-flight manuscript edits. Sweep it after the revision
 settles, before filing.
+
+## Session Handoff - 2026-09-27
+
+**New laptop. The EXP4 bytecode is lost, and pubs-sync CI had never been green.**
+
+### Completed
+
+- Paper B+C abstract: the EXP3 sentence now states the fidelity ordering held in
+  every dataset--model stratum and reports the LIME-stability moderation finding,
+  instead of "partial support ... does not establish cross-modal generality". No
+  number changed; page 1 of the built PDF read and correct.
+- Supplementary Table S1-S6 headings: the Unicode em dash could not be set in the
+  heading font and was silently dropped from the PDF; now LaTeX `---`.
+- `data/adult.csv` is tracked (`/data/` -> `/data/*` plus a negation), regenerated
+  from OpenML 1590 via `src/data_loading/adult.py`; every Table S3 claim
+  re-derives from it.
+- `pubs-sync.yml`: `build_meta.env` excluded from the freshness diff (it holds a
+  machine path and mtime, so that step could never pass).
+
+### Blockers/Issues
+
+- **EXP4 `.pyc` files are gone.** They were never committed on any branch and
+  existed only on the old laptop. The reconstructed sources verified against them
+  on 2026-08-28 (RCA-002) are all that remain; that verification cannot be
+  repeated. `verify_exp4_reconstruction.py` and the CI `exp4-reconstruction` job
+  fail on "missing bytecode" and will stay red until the author decides how to
+  amend RCA-002 (its invariant "the .pyc files are never deleted" is now
+  violated). Not yet decided.
+- **pubs-sync was red on every run checked (40, back to at least 2026-09-07)**:
+  the claims step failed on the untracked `data/adult.csv`, the EXP4 job on the
+  untracked bytecode. "Green under all three verifiers" held only on the old
+  laptop. The first cause is fixed here; the second is the bytecode above.
+- `.aceconfig` and `.ace/` (except `standards/`) were local-only and did not
+  survive the move. Not yet restored.
+
+### Notes
+
+- Worktrees on this laptop: thesis lane in the main checkout, paper lane at
+  `../xai-paper-bc`; `core.longpaths` is on. Python 3.13 is at
+  `%LOCALAPPDATA%\Programs\Python\Python313`; Tectonic 0.17.0 portable in the
+  paper worktree's `tools/tectonic-portable/`.
+- `core.autocrlf=true` here: regenerating fragments marks all of them modified
+  though only line endings differ. `git diff --ignore-cr-at-eol` shows the real
+  change.
 
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
