@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_563800e0050aacdb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ba96b41ceb2e14cb_7a9ba2f235ac8fa3.txt",
+  "prompt_version": "7a9ba2f235ac8fa3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539651-OOrqiAk4kP7DeXj4jCjT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027435,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001953,
+        "upstream_inference_cost": 0.0027435,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1488
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It lists features with zero values without indicating what should change to affect the prediction.\",\n    \"audit_usefulness\": \"It gives only a weak view of local model behavior because the listed factors are mostly zero and do not explain why the model predicted class 0. This limits its value for investigating errors or bias.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the reported feature values is unclear to a non-expert. The term 'top local factors' is also not adequately explained in context.\",\n    \"completeness\": \"It omits the main reasons behind the prediction and does not connect the feature list to the negative outcome. For a false negative case, this is insufficient local decision context.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary length. However, much of the content is low-information because many features are shown as 0.0000.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is sparse, minimally informative, and does not meaningfully justify the prediction. It is readable, but not useful enough for understanding or reviewing the model decision.\",\n    \"semantic_plausibility\": \"The listed demographic and employment features are plausible for the Adult dataset, but the explanation is semantically odd because important factors are all zeroed out. That makes it only weakly consistent with how a useful local explanation should look.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:07:35.088980+00:00"
+}

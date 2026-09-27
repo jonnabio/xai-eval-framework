@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cd23656c7e769b37",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_103d89f1e4cb72f6_3c13376d3e2c8f89.txt",
+  "prompt_version": "3c13376d3e2c8f89",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541863-7aAZDYqKp0xfDzgjQe61",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002967,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.002967,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or indicate which changes would plausibly alter the prediction. It lists features, but most are zero and not tied to a clear next action.\",\n    \"audit_usefulness\": \"It offers limited audit value because it mainly reports feature names with one nonzero factor and many zeros, without showing directionality or a coherent decision rationale. This makes it hard to investigate why the model produced a false negative.\",\n    \"clarity\": \"The output is mechanically readable, but the meaning of values like 8.9161 and several 0.0000 entries is not explained for a non-expert. The lack of narrative structure makes it hard to understand.\",\n    \"completeness\": \"It identifies a top local factor, capital-gain, but omits how the feature relates to the negative prediction and provides little context about the instance. For a false negative, the explanation is too sparse to fully understand the decision.\",\n    \"concision\": \"The explanation is short and mostly compact, but it spends space listing many zero-valued factors that add little useful information. A more concise summary of the few meaningful drivers would be better.\",\n    \"overall_quality\": \"Overall, the explanation is only weakly informative: it is compact but not sufficiently interpretable, actionable, or diagnostic. It gives a partial hint about a feature related to the decision, yet not enough to support confident understanding or review.\",\n    \"semantic_plausibility\": \"The identified focus on capital-gain and education is plausible for Adult-income style data, but the many zero-valued features and absence of a clear causal story make the explanation feel incomplete. It is not contradictory, just underspecified.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:26.489477+00:00"
+}

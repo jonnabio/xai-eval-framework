@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4c030e5c64ecba8c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_afad86e31d6d5cf6_b4ed6b3283d9cbe4.txt",
+  "prompt_version": "b4ed6b3283d9cbe4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541579-gSdaLnDmH22l0dD9I2bp",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1312,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 900,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00585975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00492,
+        "upstream_inference_cost": 0.00585975,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2565
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation contains no actionable recourse or guidance, consisting primarily of immutable demographic attributes like race, sex, and age.\",\n    \"audit_usefulness\": \"This explanation is highly valuable for audit purposes, clearly exposing the model's reliance on sensitive attributes such as race, sex, and marital status to drive negative income predictions.\",\n    \"clarity\": \"The explanation is presented as a raw list of one-hot encoded feature names and numeric coefficients without natural language context or baseline values, requiring technical knowledge to interpret.\",\n    \"completeness\": \"The top 10 local drivers are provided with signed weights, though the omission of the instance's actual feature values slightly limits full decision context.\",\n    \"concision\": \"The presentation is compact and efficiently communicates the top local weights without redundant phrasing or filler.\",\n    \"overall_quality\": \"Overall, the explanation serves as an informative technical diagnostic for auditing demographic bias in the MLP model, though it lacks user-facing actionability and interpretability.\",\n    \"semantic_plausibility\": \"The identified directions align well with known historical correlations in the Adult dataset, such as administrative clerical roles and lower education levels pushing toward the lower income class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:51.357637+00:00"
+}

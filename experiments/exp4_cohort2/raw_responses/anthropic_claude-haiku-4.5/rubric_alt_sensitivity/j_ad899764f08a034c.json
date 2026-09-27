@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ad899764f08a034c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ea764fae63b129dc_2a91c67909043ba1.txt",
+  "prompt_version": "2a91c67909043ba1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544567-uRcDMwVcnFPtsuXjNARe",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 592,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004263,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00296,
+        "upstream_inference_cost": 0.004263,
+        "upstream_inference_prompt_cost": 0.001303
+      },
+      "is_byok": false,
+      "prompt_tokens": 1303,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1895
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome. A user would not know whether to increase residence_since, improve checking account status, or modify other factors to achieve a different decision.\",\n    \"audit_usefulness\": \"The SHAP values show which features influenced this false positive, which is useful for auditing. However, the low fidelity (0.56) and moderate faithfulness gap (0.059) raise concerns about whether these explanations reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The explanation uses technical jargon (SHAP, feature names with underscores and categorical encodings) that requires domain knowledge of credit scoring and the dataset structure. Non-technical stakeholders would struggle to interpret terms like 'checking_status_no checking' or understand what the numerical values represent.\",\n    \"completeness\": \"The explanation identifies the top 10 contributing features, which covers the main drivers. However, it lacks context about feature values, thresholds, or interactions that would fully explain why this instance was misclassified as creditworthy when it should have been denied.\",\n    \"concision\": \"The format is compact and lists only the most important factors with their contributions. No redundancy is present; each entry conveys specific information about feature impact.\",\n    \"overall_quality\": \"This is a weak explanation. While it correctly identifies influential features, the false positive prediction combined with low fidelity metrics, lack of actionability, and inaccessibility to non-technical users significantly limit its utility. The explanation shows what mattered but not why the model erred or what to do about it.\",\n    \"semantic_plausibility\": \"The factors are plausible for credit decisions (residence stability, checking account status, loan duration, credit history). However, the explanation does not clarify why these particular feature values led to an incorrect approval, making it difficult to assess whether the model's logic is sound or biased.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:29:33.566785+00:00"
+}

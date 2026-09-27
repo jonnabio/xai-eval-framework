@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3830b6d4d8e8784b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_32d9527984a3229a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3830b6d4d8e8784b_c7f9230cb7c32fe3.txt",
+  "prompt_version": "c7f9230cb7c32fe3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549811-tbANxC04WxQfrQB5Pbyx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 811,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005652,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00466875,
+        "upstream_inference_cost": 0.005652,
+        "upstream_inference_prompt_cost": 0.00098325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1311,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2556
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3830b6d4d8e8784b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it merely flags feature names without indicating current values, thresholds, or what changes would alter the prediction.\",\n    \"audit_usefulness\": \"An auditor learns that education-num and occupation_Other-service are the key factors selected by the explainer, but the absence of decision rules, thresholds, and directional signs severely limits diagnostic utility.\",\n    \"clarity\": \"A non-technical user would likely be confused by the raw indicator values (1.0000 vs 0.0000) and the lack of plain-language context or inequality conditions.\",\n    \"completeness\": \"The explanation indicates which two features constitute the anchor, but completely omits the rule predicates, thresholds, and directional impact on the outcome.\",\n    \"concision\": \"The output is cluttered with eight irrelevant features assigned 0.0000 weights instead of presenting only the active rule conditions.\",\n    \"overall_quality\": \"This explanation is weak because it reduces an anchor rule to a feature importance list without thresholds, while also padding the output with zero-valued attributes.\",\n    \"semantic_plausibility\": \"It is intuitively reasonable that education level and working in other-service occupations are strong predictors of income under 50k.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:57:00.961260+00:00"
+}

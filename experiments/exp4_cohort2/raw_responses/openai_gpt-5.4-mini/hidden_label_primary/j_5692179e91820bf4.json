@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5692179e91820bf4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ac6e5925b1641835_68c043d43f6fd50b.txt",
+  "prompt_version": "68c043d43f6fd50b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540225-LPOrD2yh6D4uXk5FEx05",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 448,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028155,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002016,
+        "upstream_inference_cost": 0.0028155,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1514
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps a user could take. It only lists small feature attributions, which are not translated into actionable guidance.\",\n    \"audit_usefulness\": \"It offers some local feature attribution, but the weights are extremely small and hard to interpret, limiting its value for diagnosing model behavior. The low fidelity and stability further reduce confidence for auditing.\",\n    \"clarity\": \"The list format is easy to parse, but the meaning of the near-zero coefficients is not explained. A non-expert would struggle to understand why these factors matter or what the signs imply.\",\n    \"completeness\": \"It identifies a few top local features, but the attributions are extremely sparse and mostly near zero, so the decision rationale is incomplete. Important context such as the base prediction, direction of influence in plain language, and stronger drivers is missing.\",\n    \"concision\": \"The explanation is short and contains only the top local factors, with little redundant text. However, the brevity comes at the cost of useful interpretation.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is compact and minimally legible, but the signal is tiny, uninformative, and not very stable or faithful. It gives only a thin local snapshot without meaningful decision support.\",\n    \"semantic_plausibility\": \"The listed adult-dataset features are plausible for a model explanation, and the feature names match the domain. However, the near-zero magnitudes make the explanation feel mechanically produced and not very semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:08.861158+00:00"
+}

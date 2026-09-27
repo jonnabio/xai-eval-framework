@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b8033be37529e70b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ba96b41ceb2e14cb_f8f9975874235db1.txt",
+  "prompt_version": "f8f9975874235db1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542141-jjBIVoarW8yzQaHWbBVz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.00287325,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1516
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names two features but does not translate them into any concrete recourse or next step for the individual. It also does not indicate how changing anything would affect the prediction.\",\n    \"audit_usefulness\": \"It provides only a very limited set of local factors, with no directionality, baseline, or comparison against the true decision boundary. The near-zero sparsity and low stability metrics further reduce usefulness for auditing model behavior.\",\n    \"clarity\": \"The text is short and grammatically simple, but the meaning of the reported values is unclear to a non-expert. Terms like 'top local factors' without an explanation of what 0.4000 means make it hard to interpret.\",\n    \"completeness\": \"It mentions only two nonzero factors and omits the instance context, feature values, and how these factors contributed to the false negative prediction. That leaves the local decision story incomplete.\",\n    \"concision\": \"The explanation is brief and avoids unnecessary wording, so it is compact. However, much of the content is just a feature list with little interpretive value.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is sparse, not very interpretable, and not useful for recourse or audit. It gives some local hints, but not enough to understand why the model predicted the negative class for a positive case.\",\n    \"semantic_plausibility\": \"The cited features, such as relationship and native-country, are plausible predictors in the Adult dataset. Still, the zero-valued scores and lack of context make the explanation feel only partially coherent rather than strongly informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:03.880558+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9fe8d6a98f728ce0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c6d96339976f5220_1c8eba547f186bcd.txt",
+  "prompt_version": "1c8eba547f186bcd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543436-9ttu03Cd5TftkEziEQEi",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 393,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00261825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017685,
+        "upstream_inference_cost": 0.00261825,
+        "upstream_inference_prompt_cost": 0.00084975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1133,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors with weights and does not say what change would alter the prediction or what action a reviewer could take next.\",\n    \"audit_usefulness\": \"It identifies a few feature conditions associated with the prediction, but the extremely low fidelity and sparse coverage limit its value for auditing the model's actual decision logic.\",\n    \"clarity\": \"The feature names are readable, but the meaning of the 1.0000/0.0000 values and the anchor-style output is not easy for a non-technical user to interpret.\",\n    \"completeness\": \"It provides only a small set of local anchors and omits the actual causal story or enough detail to fully explain why this specific loan was predicted as class 1.\",\n    \"concision\": \"The explanation is fairly short, but part of the space is spent on raw feature listings and numeric weights that add limited interpretive value.\",\n    \"overall_quality\": \"It is somewhat informative because the listed anchors are plausible, but the weak fidelity and lack of explanatory depth make it only marginally useful overall.\",\n    \"semantic_plausibility\": \"For German credit, checking status, employment, housing, and duration are all sensible factors, so the listed anchors fit domain expectations for a positive credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:38.978104+00:00"
+}

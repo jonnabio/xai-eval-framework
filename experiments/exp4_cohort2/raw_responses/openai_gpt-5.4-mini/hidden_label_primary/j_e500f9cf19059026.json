@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e500f9cf19059026",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ccbc751d89be60ef_5150fbc10301c220.txt",
+  "prompt_version": "5150fbc10301c220",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540039-hVXgqJwyRqOaRFVjYYom",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029955,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029955,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete next step or recourse for a user. It only lists factors with binary-looking values, so it is not useful for deciding what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It gives some local signal by naming the top factors, but the feature values are not interpretable as directions or strengths of influence. For auditing, this makes it hard to assess whether the model is using clinically meaningful evidence or whether the explanation is faithful.\",\n    \"clarity\": \"The wording is short and structurally simple, but the output is cryptic because it presents many features with 1.0000 and 0.0000 without explaining what those numbers mean. A non-expert would likely not understand why the model predicted positive.\",\n    \"completeness\": \"Only two features appear to matter, but the explanation does not state whether they increased or decreased the prediction or how strongly. It omits the local decision context needed to fully understand this specific positive prediction.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but much of the token budget is spent listing many zero-valued features that add little information. It is somewhat repetitive rather than maximally informative.\",\n    \"overall_quality\": \"Overall, the explanation is a minimal anchor-style output that identifies a few local factors but leaves their meaning unclear. It is usable as a rough summary, yet weak in interpretability, recourse value, and audit depth.\",\n    \"semantic_plausibility\": \"The named features are plausible for a breast cancer model, and emphasizing concave points and texture is broadly consistent with the domain. However, the all-or-nothing numeric presentation is not very semantically transparent for explaining a positive classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:04.431510+00:00"
+}

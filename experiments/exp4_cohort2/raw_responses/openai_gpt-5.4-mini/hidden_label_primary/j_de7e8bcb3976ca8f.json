@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_de7e8bcb3976ca8f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4838b07b3f340d51_eba3cd32d2827144.txt",
+  "prompt_version": "eba3cd32d2827144",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539599-eKeVJKvrIT2zC1WXBpmO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002979,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021825,
+        "upstream_inference_cost": 0.002979,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of local factors with binary/zero values. A user cannot tell what to change to improve the prediction.\",\n    \"audit_usefulness\": \"It identifies a small set of features that were involved, but the zero-valued pattern gives little insight into why the model predicted class 1. This makes it only weakly useful for auditing model behavior or checking for spurious reasoning.\",\n    \"clarity\": \"The format is terse and machine-like, and the meaning of the 1.0000/0.0000 values is not explained for a non-expert. A reader can recognize feature names, but not understand the explanation without prior knowledge of Anchors.\",\n    \"completeness\": \"The explanation lists only a few top local factors and omits the direction and strength of most evidence for the specific prediction. It is therefore incomplete for understanding why this individual was classified as positive.\",\n    \"concision\": \"The output is compact and contains little redundant text, but it is so sparse that some of the limited space is spent on near-empty zero entries. Overall it is concise, though not highly information-dense.\",\n    \"overall_quality\": \"This is a sparse, technically plausible anchor-style explanation, but it is not very interpretable or actionable for the specific prediction. Its limited detail reduces its value for both user understanding and model review.\",\n    \"semantic_plausibility\": \"The listed German credit features are appropriate for the dataset and the general pattern of checking status and housing is plausible in this domain. However, the near-binary 1.0000/0.0000 presentation is not very natural as a human explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:43.758136+00:00"
+}

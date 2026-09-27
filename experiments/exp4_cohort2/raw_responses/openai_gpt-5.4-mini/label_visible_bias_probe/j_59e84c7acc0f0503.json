@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_59e84c7acc0f0503",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cbdb515ea6b51b47_6835d0c85f7a806f.txt",
+  "prompt_version": "6835d0c85f7a806f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541176-AqwgP3hzwPwDojN08Src",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.0029985,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists features and their local contributions. A user cannot tell what to change to alter the prediction or how to review the decision.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals the main local drivers and their directions, especially the influence of capital-gain and marital-status. However, the small magnitudes and lack of baseline/context limit deeper inspection of why the model produced a false negative.\",\n    \"clarity\": \"The wording is simple and the format is easy to scan, with feature names and numeric weights separated cleanly. Some feature encodings are technical, but overall a non-expert can still follow the general message.\",\n    \"completeness\": \"The explanation covers the top local factors, but it omits the intercept, class probabilities, and any instance-specific context needed to fully understand the false negative. It also gives only a partial picture of how the factors combine to produce the final prediction.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, packing several local factors into a short list. It is reasonably information-dense for the amount of text provided.\",\n    \"overall_quality\": \"This is a decent local explanation with understandable feature attributions and reasonable compactness, but it is limited by low depth, weak actionability, and incomplete decision context. Its utility is acceptable for a quick glance but not strong for thorough review.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and align with general expectations that marital status, education, sex, and capital gain can influence income-related predictions. The directions of the contributions are also coherent, though the very small weights make the explanation somewhat weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:59.012213+00:00"
+}

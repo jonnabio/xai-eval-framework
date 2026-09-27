@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1d41bf642c610015",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_326c5e1bf0274243_ce109f435ee6ca01.txt",
+  "prompt_version": "ce109f435ee6ca01",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540285-P7c56AkAlzzD6cDDeT69",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003901,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002675,
+        "upstream_inference_cost": 0.003901,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1761
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key features (education-num, occupation, relationship status) but provides no guidance on how to interpret these values or what actions could be taken to change the prediction. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation shows feature importance weights and identifies anchoring features, which supports basic model inspection; however, the low fidelity (0.624) and high faithfulness gap (0.305) suggest the explanation may not reliably represent actual model behavior, limiting audit confidence.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but lacks context about what the values mean, what the prediction represents, or how to interpret the 1.0 and 0.0 scores for a non-expert reader.\",\n    \"completeness\": \"The explanation covers the top three anchoring features but omits critical context such as the actual feature values for this instance, the direction of influence, and why other features received zero weight. The low sparsity (0.028) suggests many features were evaluated but their roles remain unclear.\",\n    \"concision\": \"The explanation is compact in token count (80 tokens) and avoids redundancy, efficiently listing features and weights without padding.\",\n    \"overall_quality\": \"While the explanation is concise and technically formatted, it suffers from poor fidelity metrics, lack of actionability, and insufficient context for meaningful interpretation. The high faithfulness gap and zero stability raise concerns about reliability and consistency.\",\n    \"semantic_plausibility\": \"The identified features (education, executive-managerial occupation, married status) are plausible predictors of income in the adult dataset and align with domain expectations for income prediction models.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:11.027379+00:00"
+}

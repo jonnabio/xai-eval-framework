@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8323a97f390d87b5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_18fe52436b35526b_6f26ab40bdd8848f.txt",
+  "prompt_version": "6f26ab40bdd8848f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540354-xRUTWrxbpwxvGT92G1fE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00291825,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any feasible recourse or next step. It only lists features with identical weights, so a user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It gives some local feature information, but the identical 1.0000 scores provide almost no insight into which factors actually drove the model. With low fidelity and zero stability, it is weak for auditing model behavior.\",\n    \"clarity\": \"The output is easy to read syntactically, but its meaning is unclear because the feature list is repetitive and lacks an explanation of how the anchors rule applies. A non-expert would likely not understand why these factors matter.\",\n    \"completeness\": \"It names several features, but it does not explain their direction, threshold conditions, or relative importance for this specific prediction. Key local decision context is missing, especially given that the model prediction is a false positive.\",\n    \"concision\": \"The explanation is short, but much of the content is redundant because many features are listed with the same value. It is not maximally informative per word since the list does not add distinct evidence.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but largely uninformative, non-actionable, and poorly supported by the technical metrics. It only partially identifies relevant features without explaining the prediction.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features are plausible in general, but the pattern of every factor having a value of 1.0000 is suspicious and not semantically helpful. The explanation is coherent as text, yet it does not convincingly reflect an actual local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:19:18.651129+00:00"
+}

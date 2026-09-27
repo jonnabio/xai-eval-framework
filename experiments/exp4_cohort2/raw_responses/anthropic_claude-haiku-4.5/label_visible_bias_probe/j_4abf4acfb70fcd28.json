@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4abf4acfb70fcd28",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b2fb50fe3096e9d2_46ca4ba4874d889a.txt",
+  "prompt_version": "46ca4ba4874d889a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542016-jDolhzV09jXvAbnuVrvM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00354,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00231,
+        "upstream_inference_cost": 0.00354,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1692
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies key factors but provides no guidance on how to modify them or what actions a user should take to change the prediction outcome. The numeric weights offer no recourse pathway.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchor the prediction and their relative importance weights, enabling an auditor to inspect model decision logic and identify potential bias patterns in feature reliance.\",\n    \"clarity\": \"The format is technical and requires familiarity with anchor weights and feature names; a non-expert would struggle to interpret the numeric scores and their meaning without additional context.\",\n    \"completeness\": \"The explanation covers the main anchoring features (duration, installment_commitment, checking_status, housing) but lacks feature values, thresholds, or decision rules that would fully contextualize why these factors drove the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into model behavior but falls short on clarity, actionability, and completeness for end-users; it is technically sound but limited in practical utility.\",\n    \"semantic_plausibility\": \"The identified factors (duration, installment commitment, checking account status, housing ownership) are plausible credit risk drivers in lending contexts and align with domain expectations for credit decisions.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:01.878303+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6afd13e6fa7d3d3c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_31247e881a13bce1_cef77845be713ab5.txt",
+  "prompt_version": "cef77845be713ab5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543732-nCVBZGAIfUuYC3SxH3sl",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 544,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00442875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0034875,
+        "upstream_inference_cost": 0.00442875,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2185
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only outputs raw numerical attributions without actionable advice, guidance, or recourse steps for changing the classification outcome.\",\n    \"audit_usefulness\": \"The listed coefficients provide moderate utility for an auditor to inspect local feature importance, although the absence of the actual feature values weakens its diagnostic value.\",\n    \"clarity\": \"The raw list of one-hot encoded feature names and signed decimal weights requires technical and statistical familiarity to interpret correctly.\",\n    \"completeness\": \"Ten local features are listed with directional weights, but omitting the underlying feature values leaves ambiguity about which conditions are active versus inactive.\",\n    \"concision\": \"The presentation is dense and free of conversational padding, directly conveying the top weights.\",\n    \"overall_quality\": \"While concise and informative as a technical dump, the lack of instance feature values, natural language interpretation, and recourse diminishes its overall quality.\",\n    \"semantic_plausibility\": \"The negative contributions from lower-wage occupations and education categories are plausible for low-income predictions, though competing dummy categories muddy the interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:15:40.100233+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b5c90cf7f2b7baea",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_fbb0082b6f2ae806_27f457a844935c30.txt",
+  "prompt_version": "27f457a844935c30",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542278-1TeCMzCSdkVFUJQCvbi8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 898,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0058425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004905,
+        "upstream_inference_cost": 0.0058425,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2558
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable demographic attributes and raw linear coefficients without specifying actual feature values or providing actionable recourse.\",\n    \"audit_usefulness\": \"While it reveals how the local surrogate weighted specific one-hot features, the low fidelity (~0.50) and presence of mutually exclusive categorical dummies limit its audit utility.\",\n    \"clarity\": \"The explanation presents a raw list of one-hot encoded feature weights without indicating whether the attributes represent presence or absence for this individual, making interpretation difficult for non-experts.\",\n    \"completeness\": \"The summary omits baseline values, prediction probabilities, and critical continuous predictors such as age, hours worked, and capital gain.\",\n    \"concision\": \"The explanation is brief, but listing multiple opposing levels of the same categorical variables (e.g., sex_Male and sex_Female) creates unnecessary redundancy.\",\n    \"overall_quality\": \"Overall quality is poor due to one-hot encoding artifacts, poor surrogate fidelity, and lack of clear feature states for the instance.\",\n    \"semantic_plausibility\": \"Attributing negative effects to Bachelors degree and simultaneously showing effects for mutually exclusive marital and relationship states undermines semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:28.202775+00:00"
+}

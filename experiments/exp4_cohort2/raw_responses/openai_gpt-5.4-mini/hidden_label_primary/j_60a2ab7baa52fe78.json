@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d793ddda2393ae14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_60a2ab7baa52fe78",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d793ddda2393ae14_fde5b5022186dc58.txt",
+  "prompt_version": "fde5b5022186dc58",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539211-IJkE1ZepgZkIFHiBtZ5w",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.00286125,
+        "upstream_inference_prompt_cost": 0.00078675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1049,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d793ddda2393ae14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps for changing the prediction. It only lists factors, with no threshold-based guidance or actionable suggestions.\",\n    \"audit_usefulness\": \"It identifies a small set of local features that influenced the prediction, which is useful for a basic inspection. However, the zero-valued entries and lack of directionality or feature thresholds limit deeper auditing.\",\n    \"clarity\": \"The output is short and readable, but the formatting of many zero-valued feature entries makes it hard to interpret at a glance. A non-expert would likely struggle to tell which factors truly mattered and how.\",\n    \"completeness\": \"It includes some local factors, especially worst radius and worst perimeter, but gives no explanation of their relationship to the negative prediction. Important context such as whether these features were high or low relative to typical values is missing.\",\n    \"concision\": \"The explanation is relatively compact, but much of the content is redundant because many features are listed with 0.0000. It is not especially informative per word given the weak interpretability of those entries.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: it is somewhat informative about which features were selected, but it lacks directionality, actionable guidance, and clear local decision support. It is acceptable as a rough summary but not strong XAI output.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are plausible and domain-consistent, especially radius and perimeter-related measures. The many zero-valued feature attributions are unusual but not contradictory enough to make the explanation implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:15.012297+00:00"
+}

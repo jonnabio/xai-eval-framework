@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_abc4d35dcc4978af",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6af7798c2cb4bb08_3fbf0cce668c6657.txt",
+  "prompt_version": "3fbf0cce668c6657",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542484-ukmqWtCpkrgV11Ip0ckc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1082,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 687,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0050025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040575,
+        "upstream_inference_cost": 0.0050025,
+        "upstream_inference_prompt_cost": 0.000945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1260,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2342
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw attribution values without providing feature baselines, actual feature values, or guidance on how the applicant could achieve an approval.\",\n    \"audit_usefulness\": \"The attributions clearly reveal model logic, highlighting that low checking balance and age drove the negative outcome while flagging sensitive features like sex/marital status for fairness auditing.\",\n    \"clarity\": \"The raw list of feature attributions and encoded variable names is technical and difficult for a lay applicant to interpret without prior knowledge of SHAP.\",\n    \"completeness\": \"The top ten local factors provide a solid summary of major drivers, though omitting the applicant's concrete feature values and base value limits full local context.\",\n    \"concision\": \"The text compactly presents the top local factors and their numerical contributions without any unnecessary filler.\",\n    \"overall_quality\": \"This is a solid, concise technical SHAP explanation well-suited for internal auditing and debugging, but it lacks lay clarity and actionable recourse.\",\n    \"semantic_plausibility\": \"The negative impact of negative checking status and low savings aligns with standard credit risk principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:52.598106+00:00"
+}

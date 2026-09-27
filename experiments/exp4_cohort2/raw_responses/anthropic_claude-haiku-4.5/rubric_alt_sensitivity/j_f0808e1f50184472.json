@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56bce20eb20c4e00",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f0808e1f50184472",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_56bce20eb20c4e00_7588415247c73b46.txt",
+  "prompt_version": "7588415247c73b46",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547620-LYbgPRsppU8kpZJMqpEJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0041,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00282,
+        "upstream_inference_cost": 0.0041,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1844
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_56bce20eb20c4e00\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what values would need to change to alter the prediction. A clinician or patient cannot act on abstract feature weights without knowing target ranges or thresholds.\",\n    \"audit_usefulness\": \"The technical metrics reveal serious problems: fidelity of 0.28 means the explanation poorly represents model behavior, stability of 0.15 indicates unreliable explanations, and faithfulness_gap of 0.09 suggests the anchor doesn't faithfully capture the decision. These red flags are useful for auditing but the explanation itself is unreliable.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with weights\u2014but lacks context about what the weights mean, why only two features have non-zero importance, or what the prediction actually represents. Domain knowledge is needed to interpret.\",\n    \"completeness\": \"Only two features receive non-zero weights while eight receive exactly 0.0000, which is suspicious and incomplete. The explanation doesn't account for why most features are completely excluded or whether this reflects true model behavior or an anchor failure.\",\n    \"concision\": \"The explanation is compact but contains redundant zero-weight features that add no information. Removing the eight zero-weight features would improve information density without loss.\",\n    \"overall_quality\": \"This explanation is weak due to poor technical performance (low fidelity and stability), a false positive prediction (model said malignant but true label is benign), and an incomplete feature set. The anchor method appears to have failed to capture the decision boundary reliably.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points are medically relevant features, so their high importance is plausible. However, the complete exclusion of eight other standard diagnostic features is implausible and suggests the explanation method failed rather than reflecting true model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:20:26.885131+00:00"
+}

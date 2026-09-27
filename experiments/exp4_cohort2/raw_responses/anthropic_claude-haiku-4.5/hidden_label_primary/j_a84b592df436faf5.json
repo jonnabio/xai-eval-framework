@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a84b592df436faf5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3debbe632feba167_9bc9a8ed3b7e9d40.txt",
+  "prompt_version": "9bc9a8ed3b7e9d40",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540785-E2l1tJuSGHeqmLxPr0Yc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003619,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0024,
+        "upstream_inference_cost": 0.003619,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1699
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature importance scores with no guidance on how to change the prediction or what actions to take; a user cannot determine feasible recourse steps from this output.\",\n    \"audit_usefulness\": \"While the explanation identifies native-country_Ireland as the dominant factor, the overwhelming number of zero-weighted features and lack of counterfactual details limit insights into model behavior and potential biases.\",\n    \"clarity\": \"The format is a simple list of feature-weight pairs that is easy to parse, but the meaning of the weights and why most features have zero importance is not explained for a non-expert reader.\",\n    \"completeness\": \"The explanation covers many features but provides minimal context about the instance itself, the decision boundary, or why the model made this specific prediction; it reads as a partial feature ranking rather than a full decision narrative.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is sparse and technically limited, offering only a shallow feature importance ranking with poor interpretability and minimal decision context; the high cost and low fidelity metrics suggest the underlying explanation quality is weak.\",\n    \"semantic_plausibility\": \"The dominance of native-country_Ireland (0.6) in a binary classification task on the Adult dataset is plausible given known dataset biases, but the complete absence of other features' influence strains credibility and suggests potential model or explanation artifacts.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:26:31.266450+00:00"
+}

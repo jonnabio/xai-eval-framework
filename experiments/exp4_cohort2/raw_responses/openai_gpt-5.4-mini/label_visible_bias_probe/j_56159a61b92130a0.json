@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_56159a61b92130a0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9be4c2983f0c443c_2621e11f6e121556.txt",
+  "prompt_version": "2621e11f6e121556",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542161-Vz5zZj17463IgZRaSOnD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.00303975,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1558
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse, threshold, or next step that a user could act on. It identifies features but does not indicate how changing them might affect the prediction.\",\n    \"audit_usefulness\": \"It gives a minimal list of feature names with binary-looking values, which is only weakly useful for auditing the model\u2019s behavior. The lack of directions, signs, or local rule structure makes it hard to investigate why the false positive occurred.\",\n    \"clarity\": \"The wording is short and the feature names are readable, but the output is not well explained for a non-expert. The 0/1-like values are ambiguous in the context of a tabular medical dataset and leave the meaning unclear.\",\n    \"completeness\": \"It mentions only two features as apparent top factors and does not explain their contribution to the positive prediction. For a specific false positive, the explanation lacks sufficient local decision context such as which features pushed the model toward class 1 and by how much.\",\n    \"concision\": \"The explanation is very brief and avoids unnecessary filler, but much of the content is not informative. It is compact, though not especially efficient because the key interpretive information is missing.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and somewhat readable, but it provides little insight into the prediction and little help for review or recourse. The output looks more like a sparse feature listing than a meaningful local explanation.\",\n    \"semantic_plausibility\": \"The mentioned features are plausible for the breast cancer domain, and highlighting area error and worst texture is not inherently inconsistent. However, the all-zero values for most features and all-one values for the top factors are not clearly interpretable, reducing confidence in the semantic meaning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:24.045050+00:00"
+}

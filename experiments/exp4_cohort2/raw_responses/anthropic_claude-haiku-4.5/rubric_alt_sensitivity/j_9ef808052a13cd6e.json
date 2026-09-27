@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9ef808052a13cd6e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7b78e47140c1369b_288dbc4c5ecb7f7d.txt",
+  "prompt_version": "288dbc4c5ecb7f7d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547264-Ng4URocF9fwBn4vTtckj",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00383,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00255,
+        "upstream_inference_cost": 0.00383,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1790
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies capital-gain as the sole influential factor but provides no guidance on what values would change the prediction or what actions are feasible for an affected person.\",\n    \"audit_usefulness\": \"While it highlights capital-gain as dominant, the explanation lacks depth about the model's decision boundary, threshold values, or comparative feature importance that would help auditors investigate bias or error patterns.\",\n    \"clarity\": \"The format is straightforward and uses plain feature names, making it accessible to non-technical readers. However, the meaning of the numerical scores (1.6384 vs 0.0000) is not explained.\",\n    \"completeness\": \"The explanation identifies only one meaningful factor (capital-gain) with all others at zero. For an income prediction task, this seems incomplete\u2014other factors like age, education, and hours-per-week typically matter, suggesting the explanation may miss important decision drivers.\",\n    \"concision\": \"The explanation is compact and avoids verbosity, efficiently listing features and scores without padding.\",\n    \"overall_quality\": \"The explanation is serviceable but limited. It correctly identifies a key factor and the prediction is correct (TP), but the high faithfulness_gap (0.298) and low stability (0.275) suggest the explanation may not reliably represent the model's actual decision logic.\",\n    \"semantic_plausibility\": \"Capital-gain being the dominant factor for high income is plausible in the adult dataset domain. However, the complete absence of other typically important features (age, education) raises questions about whether this reflects true model behavior or an artifact of the DICE method.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:14:30.505912+00:00"
+}

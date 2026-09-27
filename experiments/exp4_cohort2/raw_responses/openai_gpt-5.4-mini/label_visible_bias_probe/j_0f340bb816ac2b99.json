@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0f340bb816ac2b99",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542071-OlNQRGJfiMnNVCsUhkbp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00303225,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next steps for the applicant or reviewer. It only lists feature conditions with binary-like weights, without indicating what could be changed or how they affect the decision.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which local conditions the anchor method considered, but the output is too shallow to inspect model logic in depth. The near-zero fidelity also limits confidence in using it for serious error or bias analysis.\",\n    \"clarity\": \"The wording is brief and technically readable, but the repeated feature names and 1.0000/0.0000 values are not self-explanatory to a non-expert. A reader would likely need prior knowledge of Anchors and the encoded feature set to interpret it.\",\n    \"completeness\": \"It identifies a few apparent top conditions, but it does not explain why they support the positive prediction or how strong each factor is in context. Important local decision context such as directionality, thresholds, or counterfactual alternatives is missing.\",\n    \"concision\": \"The explanation is short and compact, but it wastes space by listing many zero-valued features that add little information. It is only moderately informative per word because the actual decision support is minimal.\",\n    \"overall_quality\": \"Overall, this is a sparse anchor-style summary that is easy to skim but does not meaningfully explain the specific prediction. Its low fidelity and lack of interpretive depth make it only marginally useful as an explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit and fit a positive creditworthiness profile, especially stable employment and the presented housing status. However, the duplicated checking-status conditions and zero-valued attributes make the output somewhat awkward and less semantically convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:54.132937+00:00"
+}

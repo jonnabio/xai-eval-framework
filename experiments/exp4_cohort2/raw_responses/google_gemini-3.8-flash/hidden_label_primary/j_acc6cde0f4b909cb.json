@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c49ba0b8d18e8b6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_acc6cde0f4b909cb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1c49ba0b8d18e8b6_5c450adb5bd0c3cd.txt",
+  "prompt_version": "5c450adb5bd0c3cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543016-TFkQ7TOL599xWIHRkXfF",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 592,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004707,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376875,
+        "upstream_inference_cost": 0.004707,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2256
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c49ba0b8d18e8b6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation indicates that modifying hours-per-week is key, but it does not specify whether 2.3633 is a target value, an absolute increase, or a normalized delta, making practical recourse difficult.\",\n    \"audit_usefulness\": \"It reveals that the counterfactual mechanism relies solely on hours-per-week, but the absence of baseline feature values and outcome probabilities restricts thorough audit inspection.\",\n    \"clarity\": \"The output is presented as a raw list of technical feature weights or deltas with minimal contextual phrasing, making it difficult for non-experts to interpret.\",\n    \"completeness\": \"While it highlights the single active feature perturbation, it omits the original input values and counterfactual target values necessary to fully understand the prediction flip.\",\n    \"concision\": \"Listing multiple zeroed-out features adds unnecessary clutter without conveying any informative counterfactual content.\",\n    \"overall_quality\": \"The explanation captures a plausibly relevant feature for income classification, but its sparse, ungrounded delta format severely limits practical utility.\",\n    \"semantic_plausibility\": \"Increasing working hours is a logically coherent driver for increasing income in the Adult dataset context.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:44.365021+00:00"
+}

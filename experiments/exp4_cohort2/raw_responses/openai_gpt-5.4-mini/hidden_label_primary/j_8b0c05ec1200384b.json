@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0a8f165d668d9bc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8b0c05ec1200384b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a0a8f165d668d9bc_8aa051224ad9402f.txt",
+  "prompt_version": "8aa051224ad9402f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539897-dD4IC8ryyO5QXgRVbZA1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002982,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002982,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a0a8f165d668d9bc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names but gives no concrete recourse, thresholds, or next steps a user could take. It does not tell a clinician or analyst what changes would move the prediction.\",\n    \"audit_usefulness\": \"It provides some local feature signals, but the presentation is too sparse and mechanically formatted to support meaningful inspection of model behavior. There is no indication of directionality, relative importance, or how these factors relate to the negative prediction.\",\n    \"clarity\": \"The output is short and uses plain feature names, but the 0/1 values without interpretation make it hard to understand what the explanation means. A non-expert would not know whether these are present, important, or supportive of the prediction.\",\n    \"completeness\": \"It mentions only a few top local factors and omits how they influence the class decision, their strengths, and any counterfactual context. That is not enough to fully understand why this specific instance was predicted as class 0.\",\n    \"concision\": \"The explanation is compact and contains little filler, but it is also overly compressed relative to the information needed to be useful. The brevity comes at the cost of interpretability.\",\n    \"overall_quality\": \"This is a weak explanation: it is concise and technically identifiable as an anchors-style output, but it lacks interpretability, decision support, and meaningful local reasoning. Overall it offers limited value to either a lay user or an auditor.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible for the dataset, but the explanation format is odd because it reports several features with 0.0000/1.0000 values without clear semantics. That makes the content only partially coherent in context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:41.314114+00:00"
+}

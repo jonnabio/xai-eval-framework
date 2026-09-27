@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8fe6f5edcdce9eb1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a138a3019aad47d9_2d7263d517cfb77f.txt",
+  "prompt_version": "2d7263d517cfb77f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543673-dZQDgx5CJa2wXv4u2vhK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 373,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00252525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016785,
+        "upstream_inference_cost": 0.00252525,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1502
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It offers almost no feasible next steps; only one feature has a nonzero value and no counterfactual guidance is provided.\",\n    \"audit_usefulness\": \"The output is too sparse and largely uninformative for auditing because it does not explain the model's local behavior beyond a single dominant feature weight.\",\n    \"clarity\": \"The feature list is easy to read, but the zero-heavy output and unexplained numbers make it hard for a non-technical reader to understand.\",\n    \"completeness\": \"It fails to provide the main reasons for the false negative; most listed factors are zero and there is no meaningful local explanation of why the model predicted class 0.\",\n    \"concision\": \"It is short, but much of the length is spent on repetitive zero-valued features, so the useful information density is low.\",\n    \"overall_quality\": \"This is a weak explanation: it is sparse, not very informative, and does not adequately explain the specific wrong prediction.\",\n    \"semantic_plausibility\": \"The emphasis on hours-per-week is plausible for Adult-income predictions, but the near-all-zero attribution pattern makes the explanation itself unconvincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:35.593738+00:00"
+}

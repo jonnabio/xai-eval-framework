@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3391733cc6f1120a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_03f9ac9f3ab42b8b_465d151860f9ec58.txt",
+  "prompt_version": "465d151860f9ec58",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542817-bghSmYSy8YYEeX48qloX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00251325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001656,
+        "upstream_inference_cost": 0.00251325,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1511
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists feature contributions; it does not say what changes would likely increase the predicted class or alter the outcome.\",\n    \"audit_usefulness\": \"The ranked SHAP factors help inspect which inputs influenced the logreg model locally, but the explanation is too brief to fully probe bias or error patterns.\",\n    \"clarity\": \"The terms are mostly standard feature names and the plus/minus signs are understandable, though one needs some familiarity with one-hot encoded tabular data and SHAP.\",\n    \"completeness\": \"It gives the top local factors, but not their baseline values, effect sizes in context, or a fuller account of why this false negative occurred.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious padding.\",\n    \"overall_quality\": \"A useful local summary of feature influence, but limited by lack of contextual interpretation and weak support for understanding the mistaken prediction.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset and the direction of some effects is reasonable, though the mix of correlated sex and relationship features makes the story somewhat less clean.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:18.874715+00:00"
+}

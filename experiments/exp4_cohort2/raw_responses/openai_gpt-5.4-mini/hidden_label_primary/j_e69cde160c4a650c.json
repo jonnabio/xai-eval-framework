@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e69cde160c4a650c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_861c15c7ecab8f3b_5b7e65973d76612c.txt",
+  "prompt_version": "5b7e65973d76612c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539953-g6mSDeO8hOGgPE1SGx83",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0032325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002439,
+        "upstream_inference_cost": 0.0032325,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1600
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers almost no concrete recourse because it only lists features with weights and does not tell the user what to change or why the prediction would move. The two nonzero items are also not actionable for most users, since country-of-origin is typically immutable or sensitive.\",\n    \"audit_usefulness\": \"It gives a small glimpse of which inputs influenced the local explanation, but the near-zero sparsity and lack of directionality make it hard to inspect model behavior meaningfully. An auditor cannot tell whether these factors increased or decreased the prediction or whether the result is trustworthy.\",\n    \"clarity\": \"The output is short and technically formatted, but the meaning of values like 1.0000, 0.4000, and 0.0000 is not explained to a non-expert. The feature names are understandable, yet the overall presentation is not self-explanatory.\",\n    \"completeness\": \"Only two features have any nonzero importance, and even those are not contextualized, so the user gets very little local decision information. There is no indication of the comparison class, baseline, feature direction, or how these factors combine to produce the positive prediction.\",\n    \"concision\": \"The explanation is compact and avoids long prose, which is good for brevity. However, much of the content is low-value repetition of zero-valued features, so it is not maximally informative per word.\",\n    \"overall_quality\": \"This is a terse but weak explanation: it is readable in form yet provides little substantive insight into why the model predicted the positive class. Its utility for both end users and auditors is limited by missing context, weak actionability, and near-empty attribution.\",\n    \"semantic_plausibility\": \"The cited features are plausible in the Adult dataset, and the use of DICE-style local factors is consistent with the task. However, assigning importance to native-country categories alone without any explanation of direction or counterfactual meaning makes the result feel only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:36.910507+00:00"
+}

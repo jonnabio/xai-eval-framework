@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_92efc0d56dccca0f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a4e470b962cd30b0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_92efc0d56dccca0f_429473f6b7b5e0b7.txt",
+  "prompt_version": "429473f6b7b5e0b7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538949-qJZedq6w4a7fxjoxPhme",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00292725,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_92efc0d56dccca0f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not suggest any concrete recourse or next steps. A user cannot tell what to change, verify, or discuss further from this output alone.\",\n    \"audit_usefulness\": \"The ranked SHAP values provide some local insight into which features pushed the prediction, so an auditor can inspect the model's apparent drivers. However, it lacks directionality, baseline comparison, and enough context to fully assess whether the behavior is reasonable or biased.\",\n    \"clarity\": \"The wording is simple and the list is easy to scan, but the meaning of the numbers is not explained for a non-expert. It is understandable as a ranked feature list, though not fully self-explanatory.\",\n    \"completeness\": \"It covers several top local factors, which gives a partial view of the decision. But it omits the prediction probability, whether each feature increased or decreased the class score in a clearly interpretable way, and any broader context needed to fully understand this specific prediction.\",\n    \"concision\": \"The explanation is compact and contains mostly useful information with little redundancy. It is a concise ranked summary of local feature attributions.\",\n    \"overall_quality\": \"This is a reasonably good local attribution summary but not a fully explanatory one. It is concise and somewhat useful for inspection, yet it falls short on interpretability, actionability, and decision context.\",\n    \"semantic_plausibility\": \"The listed breast cancer features such as radius, perimeter, area, concavity, and concave points are highly plausible drivers for a breast cancer classifier. The pattern of many positive attributions is coherent for a positive prediction in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:53.193750+00:00"
+}

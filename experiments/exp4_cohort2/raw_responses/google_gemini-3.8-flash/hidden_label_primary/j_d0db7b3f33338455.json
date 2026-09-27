@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d0db7b3f33338455",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0f6578287491844e_57da4906aa2afb23.txt",
+  "prompt_version": "57da4906aa2afb23",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541106-V1pvCDCxw5Ci2pOP6Xl5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 719,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00423,
+        "upstream_inference_cost": 0.005175,
+        "upstream_inference_prompt_cost": 0.000945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1260,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2388
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static SHAP contribution values without counterfactual targets, thresholds, or guidance on how the applicant could improve their outcome.\",\n    \"audit_usefulness\": \"It provides signed quantitative attributions for the top ten features, allowing an auditor to inspect local feature directions and relative impact, though exact baseline and feature values are omitted.\",\n    \"clarity\": \"The raw list of one-hot encoded variable names and signed floating-point numbers is difficult for non-expert readers to interpret without background in SHAP values.\",\n    \"completeness\": \"The explanation covers the primary drivers influencing the prediction, but it lacks the model baseline, actual feature values, and total prediction score.\",\n    \"concision\": \"The text is concise and dense, delivering the key numerical weights without unnecessary verbiage.\",\n    \"overall_quality\": \"It serves as an adequate technical summary of local feature importance for an expert, but suffers from low actionability and a lack of user-friendly context.\",\n    \"semantic_plausibility\": \"The identified risk factors, including checking status, credit history, and credit amount, align well with standard credit-scoring domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:31:56.804768+00:00"
+}

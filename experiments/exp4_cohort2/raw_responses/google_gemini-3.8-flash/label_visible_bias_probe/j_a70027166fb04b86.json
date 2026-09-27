@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a70027166fb04b86",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e4a3c652adf1d046_35c884742e46f3de.txt",
+  "prompt_version": "35c884742e46f3de",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544190-ahMRBgciqIF6MbnjbsX0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 738,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0052725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00434625,
+        "upstream_inference_cost": 0.0052725,
+        "upstream_inference_prompt_cost": 0.00092625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2394
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directional guidance, offering no actionable steps for recourse.\",\n    \"audit_usefulness\": \"While identifying key anchor features (e.g., education, hours worked, occupation) offers basic clues for investigating this false positive, the absence of rule conditions and low fidelity (0.44) hinder deep auditing.\",\n    \"clarity\": \"The text is syntactically clean, but displaying binary 1.0 and 0.0 values without explaining whether they represent rule membership or weights creates ambiguity for non-experts.\",\n    \"completeness\": \"The explanation lists active features but omits the actual condition thresholds and intervals necessary to understand the decision rule.\",\n    \"concision\": \"Including five unselected features explicitly weighted at 0.0000 adds unnecessary noise to an otherwise concise list.\",\n    \"overall_quality\": \"The explanation is limited because it reduces an if-then anchor rule to feature presence indicators without values or predicates, diminishing its practical utility.\",\n    \"semantic_plausibility\": \"The selected features\u2014such as executive occupation, education, and hours worked\u2014are intuitively and empirically strong predictors of high income.\",\n    \"flags\": false\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:23:19.793877+00:00"
+}

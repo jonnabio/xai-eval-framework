@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_78a5e97b1ea60f35",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b60690c60417e4de_98b0298aee0fa745.txt",
+  "prompt_version": "98b0298aee0fa745",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541299-JR35DALeTld57DkRNGZ8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 846,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 463,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004113,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0031725,
+        "upstream_inference_cost": 0.004113,
+        "upstream_inference_prompt_cost": 0.0009405
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2100
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local feature weights without providing actionable advice, target thresholds, or feasible recourse pathways.\",\n    \"audit_usefulness\": \"It provides a clear view of the positive and negative weights driving this false-positive classification, aiding an auditor in debugging model logic.\",\n    \"clarity\": \"The representation is a clean semi-structured list of weights, though one-hot encoded feature names and numeric coefficients require some technical familiarity.\",\n    \"completeness\": \"While ten top influential factors are presented, the explanation omits the actual feature values of the instance, limiting complete interpretability.\",\n    \"concision\": \"The text is very compact and directly communicates the most important features and their weights without unnecessary filler.\",\n    \"overall_quality\": \"It offers an acceptable baseline local attribution summary for technical review, hindered primarily by the absence of instance values and actionable guidance.\",\n    \"semantic_plausibility\": \"The direction of effects aligns well with standard socioeconomic indicators on the Adult dataset, such as capital gains and education positively impacting income predictions.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:06.956207+00:00"
+}

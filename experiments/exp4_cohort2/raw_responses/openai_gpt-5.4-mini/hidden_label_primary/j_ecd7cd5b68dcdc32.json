@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ecd7cd5b68dcdc32",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3c34585b1d65d81e_cc8e223baaa9a71b.txt",
+  "prompt_version": "cc8e223baaa9a71b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538497-MD1eFYYy5PO8wneryYpD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003006,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.003006,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1558
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists features that pushed the prediction up or down. A user could not easily infer what to change in the record to alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for basic inspection because it identifies the main local drivers and their signed contributions. However, it lacks counterfactual context, feature values, or comparison to global behaviour, so it is only partially helpful for deeper auditing.\",\n    \"clarity\": \"The ranking of top local factors is easy to read, but the meaning of the one-hot encoded feature names and signed weights may not be obvious to a non-expert. It is understandable to a technical reader, but not fully clear to any reader.\",\n    \"completeness\": \"It covers the main local factors behind the prediction, especially capital-gain and marital-status, but it omits the actual feature values and the model\u2019s baseline or intercept. The explanation is therefore informative but not sufficient for a full local decision understanding.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the top contributing features. It is efficient in length relative to the information provided.\",\n    \"overall_quality\": \"Overall, this is a reasonably good LIME explanation for a technical audience, with clear local feature attributions and good brevity. Its main weaknesses are limited interpretability for non-experts and weak support for actionability or deep audit analysis.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for an Adult-income-style prediction, especially capital-gain, marital status, education, occupation, sex, and relationship. The signs also look coherent with typical model behavior, so the explanation is semantically consistent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:20.404296+00:00"
+}

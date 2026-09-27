@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_113558506c750cbc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_003259ff27515980_566a070343afd35c.txt",
+  "prompt_version": "566a070343afd35c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538609-AvmhukK1QMHbpG01b1mW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00291825,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_003259ff27515980\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or next steps. A user cannot tell what should be changed or checked to affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it exposes the local ranking of feature contributions and some directionality. However, the values are not contextualized in the original feature scale, so they are only partially helpful for diagnosing model behavior.\",\n    \"clarity\": \"The output is readable and the feature list is straightforward for a technical or semi-technical audience. Still, a non-expert may not understand terms like \\\"worst concave points\\\" or the meaning of positive versus negative SHAP values without extra explanation.\",\n    \"completeness\": \"It covers several top local drivers of the prediction and includes both positive and negative contributions. But it lacks a baseline value, probability, class-specific interpretation, and any summary of how these factors combine to produce the final decision.\",\n    \"concision\": \"The explanation is fairly compact and avoids obvious repetition while still listing the main contributors. It is not perfectly minimal, but it is concise enough for the amount of information provided.\",\n    \"overall_quality\": \"This is a decent local SHAP summary that gives a plausible ranking of influential breast-cancer features. Its main weaknesses are limited interpretability for non-experts and insufficient context for fully understanding or acting on the prediction.\",\n    \"semantic_plausibility\": \"The listed features are all sensible breast-cancer attributes, and the emphasis on concavity, perimeter, radius, and area is consistent with domain expectations. The mix of positive and negative contributions is also plausible for a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:11.831226+00:00"
+}

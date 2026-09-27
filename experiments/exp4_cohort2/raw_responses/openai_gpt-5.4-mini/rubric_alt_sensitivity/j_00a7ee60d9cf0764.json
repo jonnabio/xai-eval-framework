@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_00a7ee60d9cf0764",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4838b07b3f340d51_fb8b966aa9b340e7.txt",
+  "prompt_version": "fb8b966aa9b340e7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543474-WyC0UUXTsKYvAjmIkCD2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 375,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00254175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016875,
+        "upstream_inference_cost": 0.00254175,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1514
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors and weights; it does not explain what changes might alter the prediction or suggest any next steps.\",\n    \"audit_usefulness\": \"The highlighted features give some view into the model's local logic, but the near-binary, sparse attribution and the FP outcome limit its value for diagnosing bias or error.\",\n    \"clarity\": \"The feature names are mostly readable, but the numeric anchor-style output and zero/one weights require some technical context to interpret.\",\n    \"completeness\": \"It identifies two active anchor conditions, but it does not provide a full local explanation for why the model predicted class 1 on this false positive case.\",\n    \"concision\": \"The explanation is brief and mostly information-dense, though the list of many zero-valued factors adds some unnecessary clutter.\",\n    \"overall_quality\": \"It is a usable but limited anchor explanation: concise and somewhat interpretable, yet incomplete and not very helpful for understanding the misclassification.\",\n    \"semantic_plausibility\": \"The listed factors, such as no checking account and owning housing, are plausible credit-related signals, but the explanation does not clearly justify the specific positive prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:17.245034+00:00"
+}

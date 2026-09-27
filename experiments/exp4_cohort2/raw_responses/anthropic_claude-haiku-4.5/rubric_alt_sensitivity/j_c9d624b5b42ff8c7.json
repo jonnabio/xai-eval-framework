@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c9d624b5b42ff8c7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_196e6ce035ebf3e3_a663ad255bebe44a.txt",
+  "prompt_version": "a663ad255bebe44a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545427-10DUESFyLFtVlBDX7wvC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 554,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004078,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00277,
+        "upstream_inference_cost": 0.004078,
+        "upstream_inference_prompt_cost": 0.001308
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1862
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their application would alter the credit decision.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions offer some insight into feature importance for this prediction. However, the low fidelity (0.44) and moderate stability (0.58) suggest the explanation may not reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and numeric contributions). While readable to those familiar with credit scoring, non-technical stakeholders would struggle to interpret what 'checking_status_no checking: -0.0754' means in practical terms.\",\n    \"completeness\": \"The explanation covers 10 top features, which captures major contributors. However, with 70% sparsity, many features are omitted. The low fidelity (0.44) indicates the selected features may not fully account for the model's decision logic.\",\n    \"concision\": \"The explanation is compact at 84 tokens with no obvious redundancy. Each feature-value pair is necessary information, though the density of technical notation reduces perceived efficiency for general audiences.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies the prediction (TP) and provides SHAP-based feature rankings. However, low fidelity, moderate stability, and lack of actionable guidance constrain its utility for auditing or decision-making.\",\n    \"semantic_plausibility\": \"The factors align with credit risk logic: negative contributions from poor checking/savings status and male single status; positive contributions from savings and credit amount. The pattern is domain-consistent, though the specific magnitudes cannot be verified without domain expertise.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:43:53.552018+00:00"
+}

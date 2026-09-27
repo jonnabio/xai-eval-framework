@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f8d4b90958ef1604",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f75792557c566daf_a033c4ca803266fd.txt",
+  "prompt_version": "a033c4ca803266fd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542776-AmJMBiDeVLwci3BkK1Na",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 360,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0024585,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00162,
+        "upstream_inference_cost": 0.0024585,
+        "upstream_inference_prompt_cost": 0.0008385
+      },
+      "is_byok": false,
+      "prompt_tokens": 1118,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1478
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their SHAP values; it does not say what changes would move the prediction or how to act on the result.\",\n    \"audit_usefulness\": \"It is useful for inspecting which variables drive this specific false positive, but the low fidelity means it may not reliably reflect the model\u2019s true local logic.\",\n    \"clarity\": \"The feature names and positive/negative contributions are readable, though understanding their meaning still requires some familiarity with breast-cancer features and SHAP signs.\",\n    \"completeness\": \"It gives the top contributing factors, but not the baseline, feature values, or a fuller account of why the model crossed the decision boundary.\",\n    \"concision\": \"The explanation is compact and information-dense, with little wasted wording.\",\n    \"overall_quality\": \"A concise local feature-ranking is helpful, but the explanation is incomplete and only moderately faithful, so it is useful but not strong.\",\n    \"semantic_plausibility\": \"The listed features are medically plausible drivers in the breast-cancer domain, and mixed positive/negative contributions are reasonable for a borderline false positive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:38.128489+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a9557ec99608dc9e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ac6e5925b1641835_68c043d43f6fd50b.txt",
+  "prompt_version": "68c043d43f6fd50b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540228-mGfSip91YoApfZi4A3pS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003063,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022635,
+        "upstream_inference_cost": 0.003063,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1569
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps a user could take to change the outcome. It only lists feature contributions, and most are tiny, so it offers little guidance for decision revision.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the top local features driving the prediction and their signs. However, the effect sizes are extremely small and the low fidelity/stability metrics limit how much confidence an auditor can place in these attributions.\",\n    \"clarity\": \"The output is concise and uses a simple ranked list of features with signed contributions, which is easy to scan. That said, the meaning of the tiny values and binary encoded feature names may still be unclear to a non-expert.\",\n    \"completeness\": \"It covers a set of local feature attributions, but the explanation is incomplete because it does not provide the predicted class rationale in plain language, a baseline, or a stronger account of why the model predicted positive. Given the false-positive setting, it also does not clarify what pushed the model toward the error.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary prose, so it is efficient per word. It is slightly too sparse to be maximally informative, but the brevity itself is appropriate for a local LIME summary.\",\n    \"overall_quality\": \"Overall this is a modest explanation: readable and compact, but weak in practical usefulness and only partially informative for understanding the decision. The very small attributions together with low faithfulness and stability suggest limited explanatory quality.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset and the signs are not obviously contradictory to general domain expectations. However, the near-zero magnitudes make the explanation feel weak and somewhat unconvincing as a driver of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:13.346265+00:00"
+}

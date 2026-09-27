@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_299de64c93e7c877",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_81c9024ae418939e_34eca44099ccaeac.txt",
+  "prompt_version": "34eca44099ccaeac",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545800-iWUXIc8h6trhuNwZ6Ybv",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 884,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005784,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00484875,
+        "upstream_inference_cost": 0.005784,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2540
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers zero actionable recourse because it provides no feature thresholds and highlights unchangeable demographic attributes like age and marital status.\",\n    \"audit_usefulness\": \"While it shows that the anchor relies on age and marital status, the absence of specific predicate conditions and feature values restricts an auditor's ability to diagnose why the model produced a false negative.\",\n    \"clarity\": \"The list format is readable, but presenting an anchor rule as arbitrary binary weights without predicate thresholds makes it confusing for a lay audience.\",\n    \"completeness\": \"The explanation omits the actual predicate ranges or cutoffs defining the anchor, as well as the instance's underlying feature values and direction of influence.\",\n    \"concision\": \"Listing multiple inactive features with zero values adds unnecessary noise and clutter to what should be a concise anchor rule.\",\n    \"overall_quality\": \"The explanation provides minimal insight due to missing rule thresholds, uninformative zero-weight padding, and unchangeable attributes.\",\n    \"semantic_plausibility\": \"Age and marital status are well-established predictive features in the Adult dataset, making their selection plausible even though the specific rule logic is missing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:11.020710+00:00"
+}

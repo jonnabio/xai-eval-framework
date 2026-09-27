@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ff8ec547d5d95aa",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b7cef88f8bc2296b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9ff8ec547d5d95aa_2318c095fc7c843d.txt",
+  "prompt_version": "2318c095fc7c843d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545456-nJitt0pEtdIDsVFMFvbb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1177,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 773,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00534825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00441375,
+        "upstream_inference_cost": 0.00534825,
+        "upstream_inference_prompt_cost": 0.0009345
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2423
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9ff8ec547d5d95aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation implies that altering hours-per-week is the primary lever, but it does not specify current values, target thresholds, or clear actionable guidance.\",\n    \"audit_usefulness\": \"An auditor can see that only hours-per-week was perturbed, but the lack of baseline and counterfactual feature values limits deep diagnostic utility.\",\n    \"clarity\": \"The list of feature scores is readable, though the meaning of the metric (3.1114) is unexplained for a non-expert reader.\",\n    \"completeness\": \"The explanation shows only one active feature change and lists multiple zero-valued features, omitting the full counterfactual profile and baseline context.\",\n    \"concision\": \"Listing multiple features with values of 0.0000 adds unnecessary clutter instead of focusing on the single active driver.\",\n    \"overall_quality\": \"The explanation reveals the primary factor driving recourse but suffers from excessive zero-padding, lack of context, and missing counterfactual targets.\",\n    \"semantic_plausibility\": \"Increasing hours worked per week to move an individual above the income threshold is logically sound and domain-appropriate.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:44:26.733570+00:00"
+}

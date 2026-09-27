@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d2356eb6c5ac65bb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ec3d891e0d43658f_cf27022ac1b7ff95.txt",
+  "prompt_version": "cf27022ac1b7ff95",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543178-jGZYj5BYJSWlL8qIJPyH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00189,
+        "upstream_inference_cost": 0.00274275,
+        "upstream_inference_prompt_cost": 0.00085275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1137,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It names the local conditions associated with the prediction, but it does not explain what changes would move the outcome or what thresholds matter, so it offers little direct action.\",\n    \"audit_usefulness\": \"The listed anchors identify a few influential feature conditions, which is somewhat useful for checking model behavior, but the near-binary pattern and low fidelity limit how much an auditor can trust or investigate from it.\",\n    \"clarity\": \"The explanation is short and uses plain feature names, so it is easy to read, but the meaning of the 1.0000/0.0000 values is not self-explanatory to non-technical users.\",\n    \"completeness\": \"It gives only a small set of local factors and omits how they combine, their directionality, and any counterfactual information, so it does not fully explain this decision.\",\n    \"concision\": \"It is brief and mostly lists only the salient conditions, with little unnecessary wording, though the repeated feature-score format is somewhat terse rather than elegant.\",\n    \"overall_quality\": \"It is a usable anchor-style summary of the prediction, but the low fidelity and limited detail keep it from being a strong explanation overall.\",\n    \"semantic_plausibility\": \"For German credit, residence length, checking status, and savings status are plausible determinants of creditworthiness, so the highlighted factors make domain sense for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:06:20.376218+00:00"
+}

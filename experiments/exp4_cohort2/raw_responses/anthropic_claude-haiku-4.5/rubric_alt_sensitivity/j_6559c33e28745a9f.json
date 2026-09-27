@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6559c33e28745a9f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_45af74f0fdcedd43_74e2f627724177e0.txt",
+  "prompt_version": "74e2f627724177e0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544979-ZpHxQIqLUFvMRlSP0ZDI",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003906,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003906,
+        "upstream_inference_prompt_cost": 0.001291
+      },
+      "is_byok": false,
+      "prompt_tokens": 1291,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1814
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome. A person denied credit would not know what to do with this information.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions are useful for auditors to understand feature importance and detect potential bias patterns. The high fidelity (0.90) and stability (0.998) metrics support reliability for audit purposes.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and numerical contributions). While readable to data scientists, non-technical stakeholders would struggle to interpret the notation and what positive/negative values mean in context.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which represents the main drivers of the prediction. However, it lacks context about feature values, thresholds, or why these features matter for credit decisions.\",\n    \"concision\": \"The explanation is compact at 80 tokens with no apparent redundancy. Each feature-value pair is necessary information, though the format is dense.\",\n    \"overall_quality\": \"This is a false positive case where the model predicted 1 (approve) but true label is 0 (deny). The explanation identifies key factors but doesn't help understand why the model made an incorrect decision or how to correct it. Technical quality is good but practical utility is limited.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment (checking status, duration, credit history, age, credit amount). However, the explanation doesn't clarify whether these factors should push toward approval or denial, making it hard to assess if the reasoning is sound.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:36:24.303232+00:00"
+}

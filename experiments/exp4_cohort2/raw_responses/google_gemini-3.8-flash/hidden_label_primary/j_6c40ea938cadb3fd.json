@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6c40ea938cadb3fd",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_75520768088e5528_50c291bf7c188b5d.txt",
+  "prompt_version": "50c291bf7c188b5d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539214-60Qld0mdFUmG8zCAXWEu",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 609,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00472725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00378375,
+        "upstream_inference_cost": 0.00472725,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2267
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values without counterfactual thresholds or guidance on how a user could change their outcome.\",\n    \"audit_usefulness\": \"It exposes the primary model weights and reveals the influence of sensitive features like sex and age, though the lack of underlying feature values limits deep debugging.\",\n    \"clarity\": \"The output is a raw string of feature attributions and one-hot encoded variables that requires technical knowledge of SHAP to interpret correctly.\",\n    \"completeness\": \"It captures the top ten contributing features and their signed contributions, but omits the baseline value and the instance's actual feature values.\",\n    \"concision\": \"The presentation is compact and free of conversational filler, presenting purely the top numerical factor contributions.\",\n    \"overall_quality\": \"This is an acceptable technical summary of SHAP values that serves basic auditing needs but lacks lay readability and actionable recourse.\",\n    \"semantic_plausibility\": \"The identified features (age, education, occupation, and hours worked) align well with standard socioeconomic drivers of income, though mutually exclusive one-hot attributions can be confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:24.199571+00:00"
+}

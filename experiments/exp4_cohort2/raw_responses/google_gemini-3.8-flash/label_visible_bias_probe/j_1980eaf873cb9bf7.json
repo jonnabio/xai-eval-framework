@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1980eaf873cb9bf7",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2a3f635ae972c4ad_388d17c116af3ff8.txt",
+  "prompt_version": "388d17c116af3ff8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541432-brH3sFJuJ4QdjX3a43P0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1167,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 783,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005319,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00437625,
+        "upstream_inference_cost": 0.005319,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2424
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation merely lists raw feature weights without stating feature baseline values or actionable recourse pathways.\",\n    \"audit_usefulness\": \"It provides a clear view of which features locally influenced the logistic regression model, highlighting sensitive attributes such as sex and marital status for bias inspection.\",\n    \"clarity\": \"The output is presented as raw feature attribution pairs with one-hot encoded names, requiring technical literacy to properly interpret.\",\n    \"completeness\": \"Ten local features with signed numerical importances are provided, though the actual feature values for this instance are omitted.\",\n    \"concision\": \"The text is very concise and directly communicates the top local factors without unnecessary filler.\",\n    \"overall_quality\": \"While it functions adequately as a raw technical feature-weight summary, the absence of actual instance values and actionable guidance limits its overall quality.\",\n    \"semantic_plausibility\": \"The direction of key drivers like capital gain and education aligns well with domain logic, though opposing weights across correlated one-hot marital/relationship categories can be confusing without instance values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:21.843615+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae4b94d300defe9b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d57f043e0ea8446f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ae4b94d300defe9b_3a7e358c55c3d4d7.txt",
+  "prompt_version": "3a7e358c55c3d4d7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541746-94968aGOvW68Z691TFmx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1129,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 741,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00516975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00423375,
+        "upstream_inference_cost": 0.00516975,
+        "upstream_inference_prompt_cost": 0.000936
+      },
+      "is_byok": false,
+      "prompt_tokens": 1248,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2377
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae4b94d300defe9b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw local weights without indicating the individual's actual feature values or providing clear guidance on how to alter the outcome.\",\n    \"audit_usefulness\": \"While the signed coefficients provide some visibility into the surrogate's local linear model, the absence of underlying feature values and poor fidelity limit its audit utility.\",\n    \"clarity\": \"The explanation consists of raw feature names, one-hot encoded variables, and numeric weights, which requires technical familiarity to interpret.\",\n    \"completeness\": \"It captures the top ten local drivers but omits baseline values, prediction probabilities, and the actual values of the instance.\",\n    \"concision\": \"The text compactly presents the top local factors and their weights without unnecessary filler.\",\n    \"overall_quality\": \"This is a basic raw attribution list that lacks instance values and context, resulting in weak actionability and limited audit value.\",\n    \"semantic_plausibility\": \"Most feature directions align with domain expectations for income, such as education and marital status, though the prominence of the census weight fnlwgt is questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:35.550632+00:00"
+}

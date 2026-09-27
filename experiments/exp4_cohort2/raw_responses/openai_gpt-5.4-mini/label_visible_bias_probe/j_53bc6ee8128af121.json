@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_719c3e5dafe19965",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_53bc6ee8128af121",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_719c3e5dafe19965_c5d25bb4565ad66b.txt",
+  "prompt_version": "c5d25bb4565ad66b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542191-D0BjYkrMyAcxmK9vXP5h",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00288675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00288675,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_719c3e5dafe19965\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names two features but gives no concrete recourse or decision steps the user could take. The zero-valued entries do not translate into actionable guidance.\",\n    \"audit_usefulness\": \"For an auditor, it only shows two anchor conditions with no direction of effect, thresholds, or evidence strength beyond binary satisfaction. That provides limited insight into why the model made a false positive prediction.\",\n    \"clarity\": \"The text is short and uses simple feature labels, but the meaning of '1.0000' and '0.0000' is not explained to a non-expert. A reader would likely not understand how these values relate to the prediction.\",\n    \"completeness\": \"It mentions only two active factors and omits their contribution direction, while the rest are just zeros. For a false positive case, that is not enough to understand the local decision fully.\",\n    \"concision\": \"It is compact, but much of the content is a long list of zero-valued features that adds little information. The useful signal is brief, yet the presentation is not maximally informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is sparse and only partially informative: it identifies two conditions but does not explain how they support the predicted class or why the prediction was wrong. It is usable as a rough anchor summary, but not as a strong local explanation.\",\n    \"semantic_plausibility\": \"The cited features, installment commitment and used car purpose, are plausible drivers in German credit scoring. However, the explanation is still semantically thin because it does not indicate whether they increase or decrease risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:53.434251+00:00"
+}

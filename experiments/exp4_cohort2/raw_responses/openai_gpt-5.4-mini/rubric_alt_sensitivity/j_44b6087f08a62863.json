@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_44b6087f08a62863",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_27ff1641b5ef1b1a_574a04159e576c12.txt",
+  "prompt_version": "574a04159e576c12",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542829-FmN513XtbgQib5UkdVvE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 359,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00246975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016155,
+        "upstream_inference_cost": 0.00246975,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1498
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features and their SHAP values; it does not suggest what changes would move the prediction.\",\n    \"audit_usefulness\": \"The ranked feature contributions are useful for inspecting model behavior and checking whether the decision depends on clinically relevant variables, though it is still a single-instance view.\",\n    \"clarity\": \"The feature names are standard breast-cancer features and the sign convention is simple, but a nontechnical reader may not know what the magnitudes mean.\",\n    \"completeness\": \"It gives the main local factors driving the prediction, but not the baseline, the predicted class meaning, or how these factors combine into the final score.\",\n    \"concision\": \"Very compact: it communicates the top local contributors without extra wording.\",\n    \"overall_quality\": \"A solid local explanation: concise, plausible, and informative for model inspection, but limited in interpretability and actionable guidance.\",\n    \"semantic_plausibility\": \"The cited features are all medically relevant for breast-cancer classification, and the mix of positive and negative contributions is plausible for a true negative case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:30.905373+00:00"
+}

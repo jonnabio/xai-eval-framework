@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_30eac18e3bc5c993",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4e230a6771152fb2_13bd8041af355d48.txt",
+  "prompt_version": "13bd8041af355d48",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542233-X37bvs44Fu9vjln6T5cE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1102,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 711,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005076,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041325,
+        "upstream_inference_cost": 0.005076,
+        "upstream_inference_prompt_cost": 0.0009435
+      },
+      "is_byok": false,
+      "prompt_tokens": 1258,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2360
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static feature contributions without contextual thresholds, baseline comparisons, or actionable guidance for changing the outcome.\",\n    \"audit_usefulness\": \"It directly exposes the model's reliance on protected attributes such as race and sex, providing strong initial utility for bias auditing despite lacking instance feature values.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded features and signed coefficients is difficult for non-technical users to interpret without domain knowledge.\",\n    \"completeness\": \"While ten top drivers are presented, the absence of actual instance feature values makes it unclear which categories the individual actually belongs to.\",\n    \"concision\": \"The presentation is compact and avoids conversational filler, though reporting multiple mutually exclusive dummy variables adds slight redundancy.\",\n    \"overall_quality\": \"The explanation offers useful transparency for auditing protected attributes, but lacks instance context, plain-language interpretability, and actionable guidance.\",\n    \"semantic_plausibility\": \"The observed weights generally align with standard empirical trends on the Adult dataset, though listing contradictory one-hot levels can seem confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:43.286447+00:00"
+}

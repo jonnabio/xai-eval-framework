@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_73e403b147397186",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4838b07b3f340d51_eba3cd32d2827144.txt",
+  "prompt_version": "eba3cd32d2827144",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539603-okTq7h2gsVP2UswLVRAj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003006,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.003006,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step for the applicant, such as which feature changes might alter the outcome. It only lists anchor conditions without translating them into actionable advice.\",\n    \"audit_usefulness\": \"It gives some audit value by showing which local conditions were selected by the anchor explanation, but it does not explain directionality or how strongly each factor influenced the prediction. That limits its usefulness for diagnosing model behavior or bias.\",\n    \"clarity\": \"The wording is compact and mostly understandable, but the output is a technical list of feature names with binary values and no plain-language interpretation. A non-expert would likely struggle to infer what the model is saying.\",\n    \"completeness\": \"It covers only a very small set of local factors and omits how those factors combine to support the positive prediction. Important decision context, such as why the other listed features are zero or how the rules relate to the FP outcome, is missing.\",\n    \"concision\": \"The explanation is very short and avoids redundancy, which is good for brevity. However, much of the content is just a sparse feature dump, so it is not especially information-dense in a user-facing sense.\",\n    \"overall_quality\": \"This is a minimally useful anchor-style explanation: it is compact and somewhat interpretable, but it lacks plain-language framing, actionable guidance, and enough local context to fully justify the prediction. It is acceptable for technical inspection but weak for general explanation quality.\",\n    \"semantic_plausibility\": \"The cited features are plausible for German credit modeling, and having checking status and housing as anchors is consistent with common domain patterns. Still, the presentation is somewhat odd because it lists several zero-valued factors without explaining their relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:47.388104+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_44a6b17d44871b81",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_196e6ce035ebf3e3_8353ce8fdbe0c3a9.txt",
+  "prompt_version": "8353ce8fdbe0c3a9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542691-fXvIRK6by4wO2ExH03bl",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 834,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005556,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004605,
+        "upstream_inference_cost": 0.005556,
+        "upstream_inference_prompt_cost": 0.000951
+      },
+      "is_byok": false,
+      "prompt_tokens": 1268,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2496
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP feature attribution values without providing feature thresholds, counterfactual paths, or actionable guidance for recourse.\",\n    \"audit_usefulness\": \"The signed contributions identify primary model drivers and highlight sensitive variables like personal status, but the absence of the base value and actual feature inputs limits complete auditability.\",\n    \"clarity\": \"The list of raw feature attributions with one-hot encoded names and numerical scores is difficult for non-technical users to interpret.\",\n    \"completeness\": \"The top ten drivers are reported, but omitting actual instance values for numerical features like duration and credit amount leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact, dense, and presents the top contributing features without unnecessary wording.\",\n    \"overall_quality\": \"It serves as a standard raw technical attribution summary, but low lay clarity, lack of actionability, and missing feature values restrict its overall quality.\",\n    \"semantic_plausibility\": \"The identified features such as checking status, credit amount, and savings status are standard credit risk indicators consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:21.354085+00:00"
+}

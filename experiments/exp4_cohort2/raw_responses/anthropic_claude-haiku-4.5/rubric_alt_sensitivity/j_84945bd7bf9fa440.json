@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_84945bd7bf9fa440",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d47138a03cd221ff_84a6e5b23e6273cc.txt",
+  "prompt_version": "84a6e5b23e6273cc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545869-jD9SPGv7JoG2GvbYxTPa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00399,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002705,
+        "upstream_inference_cost": 0.00399,
+        "upstream_inference_prompt_cost": 0.001285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1285,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1826
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to their attributes would alter the prediction.\",\n    \"audit_usefulness\": \"While the feature weights are presented, the poor technical metrics (fidelity 0.40, faithfulness_gap 0.59, stability 0.12) severely undermine confidence in the explanation's reliability for auditing purposes. The low fidelity suggests the explanation poorly represents the model's actual behavior.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights. However, without explanation of what positive/negative weights mean or context about the prediction task, non-technical readers would struggle to interpret it.\",\n    \"completeness\": \"The explanation shows top 10 features but lacks context about the prediction (income >50k vs \u226450k), the instance's actual values, or why these features matter. It's unclear whether the model is predicting high income and why.\",\n    \"concision\": \"The list format is compact, but each entry is minimal\u2014just feature name and weight. No wasted space, though the information density is limited by the format itself.\",\n    \"overall_quality\": \"This is a false positive case where the model incorrectly predicted class 1. The explanation provides feature weights but with poor technical quality (low fidelity, high faithfulness gap, low stability). The explanation lacks context, actionability, and reliability signals needed for practical use.\",\n    \"semantic_plausibility\": \"The features identified (education, occupation, marital status) are plausibly related to income prediction in the adult dataset. However, the explanation doesn't clarify the prediction direction or instance context, making it difficult to assess full plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:51:14.911800+00:00"
+}

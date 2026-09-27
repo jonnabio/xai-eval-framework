@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5bac7f78c78552be",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_60f604202ab9cb5c_74ad6638bbb08809.txt",
+  "prompt_version": "74ad6638bbb08809",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541737-AARohNXLOIy3ulBbDKVM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003616,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00239,
+        "upstream_inference_cost": 0.003616,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1704
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies two features with high anchor weights, the very low fidelity (0.537) and high faithfulness gap (0.725) suggest the explanation poorly represents actual model behavior, severely limiting audit value.\",\n    \"clarity\": \"The format is a simple list of feature names and weights, which is easy to parse syntactically, but the meaning of anchor weights and their relationship to the prediction is not explained for a non-expert.\",\n    \"completeness\": \"Only two features receive non-zero weights; the explanation omits critical context about why eight other features have zero weight and whether this reflects true irrelevance or an artifact of the anchors method.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability), lacks interpretability for non-experts, and provides minimal actionable or audit value despite being concise.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst perimeter are known morphological risk factors, so their high importance is plausible; however, the complete absence of other established features raises questions about model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:22.498688+00:00"
+}

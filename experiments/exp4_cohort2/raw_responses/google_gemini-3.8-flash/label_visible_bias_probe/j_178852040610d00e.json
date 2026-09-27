@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_178852040610d00e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e23de818fd8f8613_cf8abc0ef4899376.txt",
+  "prompt_version": "cf8abc0ef4899376",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543092-K6BAbDkLlRoptffEVKge",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1099,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 689,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005058,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00412125,
+        "upstream_inference_cost": 0.005058,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2348
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the outcome is already positive (class 1), recourse is not strictly necessary, but the output offers no guidance or actionable understanding of thresholds.\",\n    \"audit_usefulness\": \"The explanation clearly isolates the three active conditions forming the anchor, providing a data scientist with the exact rule used, though several zero-weighted features add clutter.\",\n    \"clarity\": \"The feature names and binary indicator weights are reasonably clear, though presenting the anchor rule as pseudo-importance scores requires some technical interpretation.\",\n    \"completeness\": \"The explanation captures the active predicate conditions that define the local anchor, though omitting the actual rule logic (AND conditions) reduces nuance.\",\n    \"concision\": \"Listing seven irrelevant features with 0.0000 values introduces unnecessary clutter that weakens an otherwise compact three-factor anchor.\",\n    \"overall_quality\": \"The explanation offers an acceptable summary of the active decision rule, slightly hampered by the inclusion of zero-weight features and pseudo-metric formatting.\",\n    \"semantic_plausibility\": \"The highlighted features (used car purpose, savings, and checking status) are standard risk determinants in credit scoring, making the local rule plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 2,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:02.221840+00:00"
+}

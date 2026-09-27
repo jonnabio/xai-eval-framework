@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9fe396b73843aa9e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_17ef22fe0aa1d565",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9fe396b73843aa9e_5c43b158ad8b538d.txt",
+  "prompt_version": "5c43b158ad8b538d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546244-ySsuVGuIyCOPCMTTECOJ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 968,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 599,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004554,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00363,
+        "upstream_inference_cost": 0.004554,
+        "upstream_inference_prompt_cost": 0.000924
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2200
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9fe396b73843aa9e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because every listed feature has an effect of zero, the explanation provides no guidance on what changes would influence the model's decision.\",\n    \"audit_usefulness\": \"The explanation offers virtually no insight into model behavior beyond indicating a degenerate explainer output where all weights are zero.\",\n    \"clarity\": \"The list format is readable, but displaying zero values for all features makes the practical meaning confusing for non-experts.\",\n    \"completeness\": \"The explanation fails to identify any actual drivers of the prediction since all reported attribution weights are zero.\",\n    \"concision\": \"Listing ten distinct features that all have zero attribution creates uninformative clutter without conveying useful substance.\",\n    \"overall_quality\": \"The explanation is degenerate and unhelpful because all feature attributions round to zero, offering neither practical guidance nor auditing value.\",\n    \"semantic_plausibility\": \"Claiming that all top local factors contribute zero weight to the classification contradicts reasonable expectations for an informative explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:57:31.924330+00:00"
+}

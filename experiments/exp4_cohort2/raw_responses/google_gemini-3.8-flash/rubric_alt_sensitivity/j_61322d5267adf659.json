@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_61322d5267adf659",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e594d44f0a99f099_fb90aca05c4c1f22.txt",
+  "prompt_version": "fb90aca05c4c1f22",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549149-DK72AM0hMBtq14veXyDF",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 526,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004449,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00347625,
+        "upstream_inference_cost": 0.004449,
+        "upstream_inference_prompt_cost": 0.00097275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1297,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2224
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide actionable pathways or thresholds, and the features represent biological tumor measurements that cannot be modified directly.\",\n    \"audit_usefulness\": \"While it reveals that 'area error' and 'worst perimeter' are the active components of the anchor, it omits the actual rule conditions and bounds needed for thorough auditing.\",\n    \"clarity\": \"The representation relies on raw feature names and binary weights (1.0000 vs 0.0000) rather than human-readable decision rules, making it somewhat unintuitive for laypersons.\",\n    \"completeness\": \"It identifies the two selected features but leaves out the actual decision boundaries and rule predicates that Anchors generates.\",\n    \"concision\": \"Listing multiple zero-weighted non-anchor features adds unnecessary clutter that should have been pruned.\",\n    \"overall_quality\": \"The explanation provides minimal utility because it strips out the predicate thresholds characteristic of Anchors, leaving only binary indicators across features.\",\n    \"semantic_plausibility\": \"Area error and worst perimeter are clinically recognized indicators of malignancy in the Wisconsin Breast Cancer dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:45:57.952278+00:00"
+}

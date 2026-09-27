@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2e4cd14da7d07168",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_57d1693f50447ebd_1ecbacf4d24d52fa.txt",
+  "prompt_version": "1ecbacf4d24d52fa",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540150-4OEykM46tE1OMBbyd7aS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.00293175,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1534
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists local factors and their values. A user cannot tell what to change to influence the prediction.\",\n    \"audit_usefulness\": \"It gives a partial view of the top local factors, which is useful for a basic inspection of model behavior. However, the near-zero values and lack of directionality or counterfactual comparison limit its value for deeper auditing.\",\n    \"clarity\": \"The output is easy to read in a technical sense, but the meaning of the listed numbers is not explained for a non-expert. Terms like 'top local factors' and the raw feature encodings require some familiarity with the dataset and DICE.\",\n    \"completeness\": \"It identifies one apparently important feature, hours-per-week, but most listed features have zero values and no interpretation of whether they support class 0 or class 1. The explanation does not fully explain why the model predicted the negative class.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording. It is mostly a terse feature list, though some of the zero-valued entries add little useful information.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: readable and concise, but only moderately informative about the decision and weak for action or auditing. It is acceptable as a brief local summary, not as a high-quality explanatory account.\",\n    \"semantic_plausibility\": \"The highlighted factor, hours-per-week, is plausible for the Adult income task, and the listed demographic/work features fit the dataset. The use of DICE-style local factors is coherent, even if the near-zero values make the interpretation thin.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:54.581779+00:00"
+}

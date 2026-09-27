@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_00345dd9c9fbb427",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e4a3c652adf1d046_35c884742e46f3de.txt",
+  "prompt_version": "35c884742e46f3de",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544199-7b3h2056VQDAWIGqafNp",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1126,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 706,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00514875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042225,
+        "upstream_inference_cost": 0.00514875,
+        "upstream_inference_prompt_cost": 0.00092625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2361
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the explanation only provides binary indicator weights without feature values or decision thresholds, it offers no actionable recourse.\",\n    \"audit_usefulness\": \"While it reveals which five features were selected in the anchor, the complete absence of predicates, low fidelity (0.44), and zero stability limit its utility for debugging this false positive.\",\n    \"clarity\": \"The list of feature names with 1.0000 and 0.0000 values is readable but confusing to a non-expert, as it strips out the underlying rule conditions.\",\n    \"completeness\": \"The explanation fails to provide the actual feature values, comparison operators, or rule bounds necessary to understand why the model predicted class 1.\",\n    \"concision\": \"Half of the output consists of features with zero weights that provide minimal information, though the overall text remains relatively compact.\",\n    \"semantic_plausibility\": \"The selected features (age, education-num, hours-per-week, executive role, relationship status) align well with domain expectations for income prediction.\",\n    \"overall_quality\": \"The explanation is of low quality because stripping the rule thresholds from the anchor reduces it to an uninformative feature mask.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:23:28.790025+00:00"
+}

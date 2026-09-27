@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b40a9a4a9945de84",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28188c86ac4bdfad_a3cbcc30585c0015.txt",
+  "prompt_version": "a3cbcc30585c0015",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545148-aJPNIIMwX0PSDbC2wBY0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003904,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003904,
+        "upstream_inference_prompt_cost": 0.001289
+      },
+      "is_byok": false,
+      "prompt_tokens": 1289,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1812
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person receiving a negative prediction would not know what specific changes to their attributes would alter the decision.\",\n    \"audit_usefulness\": \"The feature weights and directions are useful for auditing model behavior and checking for bias patterns. However, the low fidelity (0.67) and moderate faithfulness gap (0.16) raise concerns about whether this explanation truly represents the model's decision logic.\",\n    \"clarity\": \"The format is technical, listing feature names with numerical weights. While the structure is clear, non-technical users would struggle to interpret what negative/positive weights mean or why these specific features matter for income prediction.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, which addresses the main factors. However, it lacks context about feature values, thresholds, or interactions that would fully explain why this particular instance was classified as \u226450K.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line presents a feature and its weight efficiently without padding, though the brevity comes at the cost of interpretability.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies relevant features and their directional contributions, but the moderate technical metrics (fidelity 0.67, stability -0.009), lack of actionability, and technical presentation limit its practical utility.\",\n    \"semantic_plausibility\": \"The features and their directions align with domain knowledge about income prediction (e.g., local government work and being unmarried negatively associated with >50K income). The pattern is believable though not deeply explained.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:13.956029+00:00"
+}

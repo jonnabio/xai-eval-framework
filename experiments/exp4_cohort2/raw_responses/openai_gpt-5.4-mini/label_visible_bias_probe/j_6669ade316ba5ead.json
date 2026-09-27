@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6669ade316ba5ead",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_18fe52436b35526b_75b92af70019c0ab.txt",
+  "prompt_version": "75b92af70019c0ab",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542662-UJELcKetSHe266xnKudx",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 456,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002841,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002052,
+        "upstream_inference_cost": 0.002841,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1508
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for changing the outcome. It only lists features with weights, so a user cannot tell what could be altered or reviewed.\",\n    \"audit_usefulness\": \"It provides some local feature information, which is mildly useful for checking which attributes were involved in the prediction. However, the output is too generic and low-fidelity to strongly support auditing or error analysis.\",\n    \"clarity\": \"The wording is simple and the structure is easy to scan, but the repeated 1.0000 values and unlabeled feature list make it hard to interpret what the anchors mean. A non-expert would likely not understand how these factors relate to the prediction.\",\n    \"completeness\": \"The explanation omits the direction of influence, the rule conditions, and any link between the listed features and the false positive prediction. It does not provide enough local decision context to understand why the model predicted class 1.\",\n    \"concision\": \"It is short, but much of the content is redundant because many features are simply enumerated with identical scores. The explanation is not efficient in communicating useful information.\",\n    \"overall_quality\": \"Overall, the explanation is weak: it is readable but not informative enough to explain this specific false positive. Low fidelity and zero stability further reduce trust in the explanation.\",\n    \"semantic_plausibility\": \"The listed adult-dataset features are plausible for a prediction explanation, and the explanation format matches an anchors-style output. However, the repeated universal weights and irrelevant-looking feature mix make the local explanation somewhat questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:45.278327+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_12cff7bac8883229",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6496b69e203cf5db_f5010e5d04785785.txt",
+  "prompt_version": "f5010e5d04785785",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549750-LkkmwSS2bWmHQ2p8GKx2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 855,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00566025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00466875,
+        "upstream_inference_cost": 0.00566025,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2567
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists frequency/importance scores rather than actionable counterfactual values, and marital status is not a practical lever for action.\",\n    \"audit_usefulness\": \"It highlights which two variables DiCE altered to flip the prediction, but the lack of directional context or actual instance values provides only marginal help for debugging the false positive.\",\n    \"clarity\": \"It relies on raw one-hot encoded feature names and decimal scores without explaining what the metric represents to a non-technical reader.\",\n    \"completeness\": \"Only two features receive non-zero weights and no original or target feature values are reported, leaving the decision rationale incomplete.\",\n    \"concision\": \"Most of the explanation consists of uninformative zero-valued features that clutter the output.\",\n    \"overall_quality\": \"Presenting DiCE output as a sparse list of arbitrary weights with eight zero entries offers weak utility and minimal interpretability.\",\n    \"semantic_plausibility\": \"Marital status and education level are well-known high-impact predictors in the Adult income dataset, making their selection believable.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:56:01.010507+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_69d43d2337b3183c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ba8a2c4ca53c1a08_2022fd23d2c9d8dc.txt",
+  "prompt_version": "2022fd23d2c9d8dc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541773-IzYPnuEytF94j4XxBIjJ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030045,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.0030045,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1561
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features nudged the prediction, but it does not translate them into concrete recourse steps or suggest how the outcome could be changed. A user cannot directly act on weights like these without further guidance.\",\n    \"audit_usefulness\": \"It is useful for a technical auditor because it shows the local features the LIME surrogate considered important and the direction of influence. However, the signals are weak and sparse, so it only partially supports deeper inspection of the model's behavior.\",\n    \"clarity\": \"The feature list is readable and the sign of each contribution is easy to parse, even for a non-expert. Still, the meaning of one-hot encoded categories and small coefficient-like values may be confusing without some dataset knowledge.\",\n    \"completeness\": \"The explanation covers several local drivers of the positive prediction, but it does not explain the relative strength of the decision very well or provide a broader decision context. It also omits other potentially relevant features, so the local rationale feels partial.\",\n    \"concision\": \"The output is compact and contains only the top local factors, with little redundancy. It is reasonably efficient, though the raw feature list format is not especially informative per word for a lay reader.\",\n    \"overall_quality\": \"This is a plausible and fairly compact local explanation, but it is limited by low strength and weak stability, and it lacks interpretive depth. It is useful as a quick summary of feature influence, not as a full explanation.\",\n    \"semantic_plausibility\": \"The featured factors are consistent with the Adult dataset and with plausible socioeconomic patterns such as education, relationship status, and occupation influencing income. The sign pattern is not obviously contradictory, so the explanation is semantically credible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:56.227806+00:00"
+}

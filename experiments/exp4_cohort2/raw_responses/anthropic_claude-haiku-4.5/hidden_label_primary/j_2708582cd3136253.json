@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2708582cd3136253",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3e006f8c0e7512b1_1ca24c7990013da3.txt",
+  "prompt_version": "1ca24c7990013da3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538554-OpUgNds0CjMw4BcQMwI2",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003564,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00232,
+        "upstream_inference_cost": 0.003564,
+        "upstream_inference_prompt_cost": 0.001244
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1708
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to challenge the prediction, modify inputs, or take corrective action; it is purely descriptive without recourse pathways.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes and directions enable systematic inspection of model behavior and feature importance ranking, supporting bias investigation and error analysis across instances.\",\n    \"clarity\": \"The format is straightforward\u2014feature names paired with numerical contributions\u2014but requires familiarity with SHAP methodology and the adult dataset schema to interpret meaningfully.\",\n    \"completeness\": \"The top 10 features are presented with their SHAP values, covering the primary local drivers; however, the base value and cumulative contribution context are absent, limiting full decision reconstruction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential feature-value pairs without padding or verbose elaboration.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks user-facing clarity, actionability, and contextual grounding; it serves data scientists better than end users or decision reviewers.\",\n    \"semantic_plausibility\": \"Feature contributions are plausible for income prediction (education, marital status, occupation are known drivers), though the negative weight on 'Some-college' and positive on 'Married-civ-spouse' align with typical income patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:19.722159+00:00"
+}

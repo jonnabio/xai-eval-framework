@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ceca80399584d4f8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f9cc6b6fb4f65a14_b71578cee76d08a4.txt",
+  "prompt_version": "b71578cee76d08a4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542283-xupiF6I3t4ZhWH1VTQ6P",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00292725,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or specific changes a user could make to affect the prediction. It only lists feature values, with no guidance on what would need to change to alter the outcome.\",\n    \"audit_usefulness\": \"It offers limited auditing value because the listed factors are not clearly directional, and several entries are zero, which makes it hard to infer the model\u2019s decision logic. The low fidelity also suggests the explanation may not faithfully represent the model\u2019s true behavior.\",\n    \"clarity\": \"The format is readable, but the meaning of the numeric values is not explained, so a non-expert would not know how to interpret them. The mixture of feature names and unexplained scores reduces clarity.\",\n    \"completeness\": \"It identifies some local factors, especially capital-gain and relationship_Own-child, but omits an intelligible ranking, direction of effect, or comparison to a baseline. That leaves the specific reason for the negative prediction only partially understood.\",\n    \"concision\": \"The explanation is short and compact, but it includes many zero-valued features that add little informational value. This makes it somewhat inefficient despite being brief.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact and somewhat readable, but it lacks interpretability, actionable guidance, and strong faithfulness. It is only minimally useful for understanding why the model predicted class 0.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset, and the general presence of capital gain and relationship-related attributes makes sense. However, the zero-heavy presentation and unclear factor semantics make the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:25.460872+00:00"
+}

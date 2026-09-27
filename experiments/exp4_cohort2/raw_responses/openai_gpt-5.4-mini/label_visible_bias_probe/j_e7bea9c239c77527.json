@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e7bea9c239c77527",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c523b5e4b177b22e_9415ee8a9439b182.txt",
+  "prompt_version": "9415ee8a9439b182",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541415-hcThoULO0AgR7aVzzzcH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00291675,
+        "upstream_inference_prompt_cost": 0.00080175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1069,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists factors associated with the prediction, but it does not translate them into concrete recourse steps or decision-review actions. A user could infer that shorter duration and cleaner checking status matter, but no explicit next step is given.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP contributors and their directions, which helps inspect how the XGB model reached a negative prediction. However, it lacks feature values and baseline context, so deeper error or bias analysis is only partially supported.\",\n    \"clarity\": \"The wording is compact and easy to parse, with a simple list of features and SHAP signs. Still, a non-expert may not fully understand the meaning of the numeric SHAP values without prior knowledge of SHAP.\",\n    \"completeness\": \"The explanation covers the main local drivers of the prediction and includes several supporting factors. It does not provide the actual feature values for the instance, the model baseline, or how strongly these factors combine to yield the final class.\",\n    \"concision\": \"The explanation is efficiently compressed into a short ranked list with no obvious redundancy. It provides a useful amount of information for its length.\",\n    \"overall_quality\": \"This is a solid local explanation that is technically informative and fairly easy to read, especially for someone familiar with SHAP. Its main weakness is the lack of actionable guidance and instance-level context beyond feature rankings.\",\n    \"semantic_plausibility\": \"The factors shown are consistent with a German credit setting, and the directions are plausible for a negative credit decision. There is no obvious contradiction between the listed drivers and the predicted class.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:57.986129+00:00"
+}

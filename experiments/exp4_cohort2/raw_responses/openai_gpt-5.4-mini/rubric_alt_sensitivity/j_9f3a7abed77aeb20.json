@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9f3a7abed77aeb20",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_003259ff27515980_8c5bbaf56e309632.txt",
+  "prompt_version": "8c5bbaf56e309632",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542882-lvQ2D2iJ0Dv7wZ2UpjN7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0022155,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001368,
+        "upstream_inference_cost": 0.0022155,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1434
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_003259ff27515980\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It only lists contributing features and their SHAP values; it does not say what changes would move the prediction toward the other class.\",\"audit_usefulness\":\"It is useful for inspecting which variables the xgb model relied on locally, but the explanation is too shallow to directly probe bias, thresholds, or error modes.\",\"clarity\":\"The feature names and positive/negative contributions are easy to read, though the meaning of SHAP values still requires some familiarity with the method.\",\"completeness\":\"It provides the top local factors for this one prediction, but not the base value, total attribution picture, or how these factors combine to produce the final class.\",\"concision\":\"The explanation is compact and mostly free of filler, with only the top factors and their weights.\",\"overall_quality\":\"A solid local attribution summary, but not especially complete or actionable, so it is good rather than exemplary.\",\"semantic_plausibility\":\"For a breast-cancer classifier, features like concave points, concavity, perimeter, radius, and area are highly plausible drivers and the signs are reasonable for a positive prediction.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":3,\"clarity\":4,\"completeness\":3,\"concision\":4,\"overall_quality\":4,\"semantic_plausibility\":5}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:01:23.694534+00:00"
+}

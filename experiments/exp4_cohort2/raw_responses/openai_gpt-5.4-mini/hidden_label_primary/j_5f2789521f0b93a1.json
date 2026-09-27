@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5f2789521f0b93a1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_19b944710e090900_63e11c2cfed0297c.txt",
+  "prompt_version": "63e11c2cfed0297c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538898-XG6PzbAQ9g2DTq8YNxS2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.00298275,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It only lists influential features with small weights, without indicating what change would move the model output.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which local features the model relied on and their directions. However, the very low sparsity and stability, plus modest fidelity, limit its reliability for deeper bias or error analysis.\",\n    \"clarity\": \"The feature list is easy to read for a technical audience, but non-experts may not understand encoded variables such as education_7th-8th or occupation_Machine-op-inspct. The meaning of the positive and negative coefficients is also only implicit.\",\n    \"completeness\": \"It includes several top local drivers, but the explanation is sparse and does not provide a coherent summary of why the instance was classified as negative. Key context such as the predicted probability, baseline, or grouped feature interpretation is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of filler, with a short ranked list of factors. It is concise, though some redundancy remains because both sex_Male and sex_Female, and both education categories, appear separately.\",\n    \"overall_quality\": \"This is a moderately informative LIME explanation that offers some local insight but is limited by low stability and only moderate fidelity. It is understandable enough to inspect the model at a basic level, yet not strong enough for robust decision support or audit.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions are not obviously contradictory. Still, the tiny weights and mixed feature encodings make the narrative weak and somewhat hard to interpret as a substantive explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:02.470063+00:00"
+}

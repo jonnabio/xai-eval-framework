@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f4da1829e5581090",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_5169d5420efbc3da_376622d3ddc4405a.txt",
+  "prompt_version": "376622d3ddc4405a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539483-nvqACpGlqTvCdeq2HVsn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002295,
+        "upstream_inference_cost": 0.00308325,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1561
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the user. It only lists feature names and weights, so a person cannot tell what to change or review to affect the prediction.\",\n    \"audit_usefulness\": \"It gives some limited audit value by indicating that education-num and occupation_Farming-fishing were treated as top local factors, but the meaning of the 1.0000/0.0000 values is not explained. This makes it only partially useful for investigating model behavior.\",\n    \"clarity\": \"The wording is short and the feature list is readable, but the numeric scores are not self-explanatory and the output lacks a plain-language summary. A non-expert would likely not understand how these factors relate to the prediction.\",\n    \"completeness\": \"The explanation mentions only a couple of apparent drivers and then many zero-valued features, without stating how they combine to produce the negative prediction. It does not provide enough local decision context to understand why this instance was classified as 0, especially in a false-negative case.\",\n    \"concision\": \"It is compact and avoids long prose, but much of the token budget is spent on a sparse feature list with little interpretive value. The result is concise but not especially information-dense.\",\n    \"overall_quality\": \"Overall, this is a minimally informative anchor-style output that is sparse and somewhat interpretable, but it lacks plain-language interpretation, actionable guidance, and enough local reasoning to support strong review. Its usefulness is therefore limited despite being concise.\",\n    \"semantic_plausibility\": \"The cited features are plausible predictors in the Adult dataset, and education and occupation are sensible factors for income classification. However, the presentation of all-zero importance for most listed features is not very intuitive, which weakens coherence for a reader.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:47.247194+00:00"
+}

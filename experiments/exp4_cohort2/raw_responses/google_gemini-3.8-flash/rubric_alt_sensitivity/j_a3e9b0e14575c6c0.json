@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a3e9b0e14575c6c0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a3f635ae972c4ad_c1d636799bf06501.txt",
+  "prompt_version": "c1d636799bf06501",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546749-Dny4k4gTYznLKHbhPe2s",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1540,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1122,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00677175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.005775,
+        "upstream_inference_cost": 0.00677175,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2869
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Actionability is minimal because the explanation provides only linear weights without showing the instance's actual values, target thresholds, or feasible recourse steps.\",\n    \"audit_usefulness\": \"It provides serviceable diagnostic insight by revealing that protected attributes such as sex and marital status contributed negatively to this false-negative prediction, though low stability limits reliability.\",\n    \"clarity\": \"The raw coefficient format with one-hot encoded variable names and decimal weights requires technical and statistical familiarity to parse.\",\n    \"completeness\": \"While ten features are displayed, the absence of actual feature values, baseline, or intercept makes it difficult to understand why the overall classification was negative despite strong positive weights.\",\n    \"concision\": \"The explanation is brief and dense, presenting top local factors with minimal unnecessary formatting or filler.\",\n    \"overall_quality\": \"The explanation is weak overall; it provides useful directional signals for auditing but suffers from poor stability, missing feature values, and unclear net contribution to the negative decision.\",\n    \"semantic_plausibility\": \"The directions of effects generally align with standard Adult domain dynamics (e.g., capital-gain and education increasing income probability), though presenting conflicting one-hot categories together without values reduces coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:06:02.140869+00:00"
+}

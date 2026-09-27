@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f3f9095af5de8830",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6a4da8745120672e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f3f9095af5de8830_074449a5b6c62b65.txt",
+  "prompt_version": "074449a5b6c62b65",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548011-q7ckTRVXJBaJVV6mADa5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 941,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 556,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00450825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00352875,
+        "upstream_inference_cost": 0.00450825,
+        "upstream_inference_prompt_cost": 0.0009795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1306,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2247
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f3f9095af5de8830\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable clinical cell nuclei measurements and signed attribution scores without actionable guidance or counterfactual thresholds.\",\n    \"audit_usefulness\": \"It provides the top 10 local SHAP contributions, allowing an auditor to see which conflicting features led to this false positive prediction, though the actual feature values are missing.\",\n    \"clarity\": \"A layperson would struggle to interpret raw feature names and signed SHAP values without explanation of base rates or directionality.\",\n    \"completeness\": \"The top 10 features provide the primary drivers of the local decision, though the omission of baseline probabilities and observed feature values limits full context.\",\n    \"concision\": \"The explanation is tight and directly presents the key factors and their importance weights without filler.\",\n    \"overall_quality\": \"A standard, serviceable local attribution explanation that clearly shows model weights but lacks input values and patient-facing interpretability.\",\n    \"semantic_plausibility\": \"Features relating to concave points, perimeter, and texture are well-established morphological indicators in breast cancer cytology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:27:00.190172+00:00"
+}

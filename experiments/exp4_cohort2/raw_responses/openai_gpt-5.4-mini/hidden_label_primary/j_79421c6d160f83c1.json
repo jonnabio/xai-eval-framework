@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_79421c6d160f83c1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1c525ff1deb5c1a6_4694c2d3c8f0f46b.txt",
+  "prompt_version": "4694c2d3c8f0f46b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539581-XwHrcCm6KClC0cRNu58Q",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029745,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.0029745,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps beyond listing one factor and several zero-valued attributes. It offers no usable guidance for how to change the prediction or what action a user should take.\",\n    \"audit_usefulness\": \"It gives only a very shallow view of local factors, with almost all entries at zero and no clear directionality or comparison against the predicted class. This makes it weak for investigating model behavior, feature relevance, or potential bias.\",\n    \"clarity\": \"The wording is simple, but the output format is cryptic because it is just a feature list with numeric scores and no interpretation. A non-expert would not easily understand why these values matter for the prediction.\",\n    \"completeness\": \"The explanation misses the main local drivers of the false negative and does not explain how the listed factor influenced the model toward class 0. It lacks an actual counterfactual or decision context, so the prediction is only minimally explained.\",\n    \"concision\": \"It is short, but much of the content is low-information repetition of zero-valued features. The explanation is concise in length but not efficient in informational content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is sparse, hard to interpret, and provides little insight into why the model predicted the negative class. It has limited value for both users and auditors despite being technically compact.\",\n    \"semantic_plausibility\": \"The presence of 'Never-married' as a relevant factor is plausible for Adult-income data, but the near-all-zero feature list is not very informative semantically. The explanation is coherent enough to be plausible, but it does not convincingly match a useful local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:25.378953+00:00"
+}

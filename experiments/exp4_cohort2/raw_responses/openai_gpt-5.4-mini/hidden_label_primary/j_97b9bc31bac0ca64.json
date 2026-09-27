@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c715759299b480a0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_97b9bc31bac0ca64",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c715759299b480a0_f2bafd97917a76b9.txt",
+  "prompt_version": "f2bafd97917a76b9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539017-vIUSPAisms6I7AfjDRBL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003024,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022185,
+        "upstream_inference_cost": 0.003024,
+        "upstream_inference_prompt_cost": 0.0008055
+      },
+      "is_byok": false,
+      "prompt_tokens": 1074,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1567
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c715759299b480a0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse steps a user could take. There is no guidance on what to change or what thresholds would matter.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP contributors and their signed effects, allowing inspection of which variables drove the positive prediction. However, the low fidelity suggests it may only partially reflect the model\u2019s true local logic.\",\n    \"clarity\": \"The feature list is compact and readable, and the plus/minus signs make the direction of influence easy to follow. Still, the meaning of encoded categories may be opaque to non-experts without dataset context.\",\n    \"completeness\": \"The explanation covers several top local factors, including both positive and negative contributors, so it gives a reasonable local summary. It does not provide the actual base value, predicted probability, or a fuller account of why the model chose class 1 over class 0.\",\n    \"concision\": \"The explanation is fairly compact and information-dense, with little redundancy. It is somewhat list-like, but it efficiently communicates the main contributors within a small token budget.\",\n    \"overall_quality\": \"Overall, this is a useful but limited local explanation: it is readable, compact, and helpful for inspection, but not very actionable and only moderately faithful. Its quality is good enough for a quick review, though not excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, since checking status, savings, duration, employment, and purpose are sensible drivers of approval decisions. The mix of positive and negative contributions is also coherent, though the exact encoded category effects are not directly interpretable without deeper feature knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:01.788121+00:00"
+}

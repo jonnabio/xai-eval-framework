@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de938d5223748d7d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1d71f6b73251e861",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_de938d5223748d7d_c4cf264f25d55e8b.txt",
+  "prompt_version": "c4cf264f25d55e8b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543804-3jpv0xoOmg0mPF4exK4N",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00259425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017505,
+        "upstream_inference_cost": 0.00259425,
+        "upstream_inference_prompt_cost": 0.00084375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1125,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1514
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_de938d5223748d7d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not tell a reviewer or patient what feature changes would likely alter the prediction, only lists local factors with binary-like values.\",\n    \"audit_usefulness\": \"It gives a few local feature names but the values are opaque and the explanation is sparse, so it offers limited insight into the model's decision logic or possible bias.\",\n    \"clarity\": \"The feature names are understandable, but the 1.0000/0.0000 formatting is unexplained and makes the message hard to interpret without technical context.\",\n    \"completeness\": \"It mentions only a small subset of features and does not explain how they combine to produce the negative prediction, so it is not a full account of the decision.\",\n    \"concision\": \"The explanation is short, but much of the length is spent on a repetitive list of zeros, which adds little useful information.\",\n    \"overall_quality\": \"As an Anchor-style summary it is only moderately useful: it identifies some local factors, but the presentation is confusing and the technical metrics suggest weak fidelity.\",\n    \"semantic_plausibility\": \"For breast cancer classification, smoothness, perimeter, and radius are plausible relevant factors, so the listed features make domain sense even though the numeric presentation is unusual.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:16:46.484343+00:00"
+}

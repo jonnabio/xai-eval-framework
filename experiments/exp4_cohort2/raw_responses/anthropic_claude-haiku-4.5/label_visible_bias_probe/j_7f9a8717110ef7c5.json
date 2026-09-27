@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7f9a8717110ef7c5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e9eba60d9edc4d8a_fa0525ac736e8faf.txt",
+  "prompt_version": "fa0525ac736e8faf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541173-JeOoTAkaVuavA4UeppIY",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004085,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002855,
+        "upstream_inference_cost": 0.004085,
+        "upstream_inference_prompt_cost": 0.00123
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1801
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the misclassification. No recourse pathway or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and their directions support model inspection by showing which features drove the prediction toward class 0, enabling auditors to investigate why a malignant case (true label 1) was classified as benign. The false negative context is particularly valuable for bias investigation.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical SHAP values, which is clear in format but requires familiarity with SHAP methodology and medical feature names to fully interpret. A non-expert would struggle with the meaning of 'worst area' or 'concave points'.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, providing substantial local decision context. However, it lacks the base prediction value and does not explain the relative magnitude of contributions or cumulative effect toward the final prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and SHAP values) without padding. Each entry is maximally informative per word.\",\n    \"overall_quality\": \"The explanation provides technically sound SHAP contributions useful for model auditing but falls short in accessibility, actionability, and interpretability for non-expert stakeholders. The false negative context adds value but is not leveraged in the explanation itself.\",\n    \"semantic_plausibility\": \"The negative contributions from morphological features (area, perimeter, radius) are plausible in breast cancer diagnosis, as smaller tumors typically indicate benign cases. The pattern is consistent with domain expectations, though the false negative suggests the model may have learned a problematic decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:59.109348+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_590139227e44fae6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_44c1e011120b2dd5_ad7b05e662534e53.txt",
+  "prompt_version": "ad7b05e662534e53",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545069-hzbyZ48tDu6bNflQ8owl",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 518,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003864,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00259,
+        "upstream_inference_cost": 0.003864,
+        "upstream_inference_prompt_cost": 0.001274
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1792
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome. A clinician or patient would not know what interventions might alter the prediction.\",\n    \"audit_usefulness\": \"The SHAP values reveal which features drove the prediction and their direction of influence, which is valuable for auditing model behavior and detecting potential biases in feature reliance. The false negative case is particularly useful for investigation.\",\n    \"clarity\": \"The explanation uses technical terminology (SHAP, feature names like 'worst radius') without explanation. Someone without domain knowledge in machine learning or medical imaging would struggle to interpret the meaning and implications.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main drivers of this prediction. However, it lacks context about the base prediction, feature values, or thresholds that would fully explain the decision logic.\",\n    \"concision\": \"The format is compact and lists only the most important factors with their numerical contributions. No redundancy or padding is present; each entry conveys specific information.\",\n    \"overall_quality\": \"This is a serviceable explanation that provides technical insight into model behavior but falls short on accessibility and actionability. The false negative case and reasonable fidelity (0.925) suggest the explanation captures real model logic, but the presentation limits its utility.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, morphological features like radius, perimeter, and area are clinically relevant. The negative contributions from 'worst' measurements toward a benign prediction (0) is plausible, though the explanation lacks clinical context to fully validate the pattern.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:37:54.891531+00:00"
+}

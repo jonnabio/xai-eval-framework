@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d1de8e6e6df57b97",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3c34585b1d65d81e_29d70d5a1119e51c.txt",
+  "prompt_version": "29d70d5a1119e51c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541377-tYXOfjl6ApaFNPow0HqE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 612,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00465075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00370875,
+        "upstream_inference_cost": 0.00465075,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2245
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists directional weights without providing actual feature values, thresholds, or concrete steps for recourse.\",\n    \"audit_usefulness\": \"It exposes key local drivers, including protected attributes like sex and marital status, which aids in checking for bias and auditing model logic.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded features requires technical understanding to interpret properly.\",\n    \"completeness\": \"The top ten drivers are captured with positive and negative weights, though omitting baseline values and instance feature states leaves local context incomplete.\",\n    \"concision\": \"The output is tightly structured and provides a dense summary of top local weights without filler.\",\n    \"overall_quality\": \"This is an acceptable technical local attribution, offering solid audit value despite poor layman clarity and low actionability.\",\n    \"semantic_plausibility\": \"The directions of the feature effects (e.g., positive capital gain, negative never-married status) align well with established domain dynamics on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:26.030365+00:00"
+}

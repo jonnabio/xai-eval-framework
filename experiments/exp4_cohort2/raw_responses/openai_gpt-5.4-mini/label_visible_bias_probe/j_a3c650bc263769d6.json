@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a3c650bc263769d6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ac6e5925b1641835_f428abf2bf608aa9.txt",
+  "prompt_version": "f428abf2bf608aa9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542526-TLwqoaGLXWyFMuIHchz5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00207,
+        "upstream_inference_cost": 0.00286875,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a ranked list of features with tiny coefficients. It is not actionable for changing the prediction or reviewing the case.\",\n    \"audit_usefulness\": \"It offers some limited audit value by showing which encoded features LIME associated with the prediction, but the weights are extremely small and not very informative. The very low fidelity and stability further reduce usefulness for investigating model behavior.\",\n    \"clarity\": \"The output is readable as a list of feature contributions, but the many one-hot encoded terms and near-zero numbers make the message hard for a non-expert to interpret. It does not explain what the positive prediction means in plain language.\",\n    \"completeness\": \"It includes a few local factors, but the explanation is too sparse and numerically weak to adequately support the specific prediction. Key context such as why the model predicted class 1 despite the true label being 0 is missing.\",\n    \"concision\": \"The explanation is concise and avoids unnecessary detail, but this comes at the expense of meaningful information. It is short without being especially informative.\",\n    \"overall_quality\": \"Overall, the explanation is weak because it is technically present but practically unhelpful. Low-magnitude attributions, poor fidelity, and limited interpretability make it unsuitable for understanding this false positive well.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset and the presence of common demographic and employment attributes is consistent with the domain. However, the near-zero contributions make the implied reasoning feel unconvincing for a real prediction.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 2,\n      \"clarity\": 2,\n      \"completeness\": 1,\n      \"concision\": 3,\n      \"overall_quality\": 2,\n      \"semantic_plausibility\": 3\n    }\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:29.097292+00:00"
+}

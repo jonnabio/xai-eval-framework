@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_060aa83a9608817f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b2fb50fe3096e9d2_f86393be180318ed.txt",
+  "prompt_version": "f86393be180318ed",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539249-aT3le3rDNlImzW26pDZv",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003788,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002555,
+        "upstream_inference_cost": 0.003788,
+        "upstream_inference_prompt_cost": 0.001233
+      },
+      "is_byok": false,
+      "prompt_tokens": 1233,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1744
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies specific anchor features (duration, installment_commitment, checking_status, housing_own) but provides no guidance on how to modify these factors or what actions a user should take to change the prediction outcome.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 vs 0.0) clearly distinguish anchors from non-anchors, supporting model behaviour inspection; however, the low fidelity (0.70) and high faithfulness_gap (0.16) raise concerns about whether these anchors truly represent model logic.\",\n    \"clarity\": \"The format is structured and uses domain-relevant feature names, but the normalized weights notation and lack of contextual interpretation make it difficult for non-experts to understand what the 1.0 and 0.0 values mean in practical terms.\",\n    \"completeness\": \"The explanation covers four key anchors but omits instance-specific feature values, thresholds, and the direction of influence, leaving gaps in understanding the full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their normalized weights without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is concise and structured, the low fidelity, moderate stability (0.76), and lack of actionable or contextual detail significantly limit its utility for decision-making or auditing.\",\n    \"semantic_plausibility\": \"The selected anchors (duration, installment commitment, checking account status, housing ownership) are plausible credit risk factors in the German credit domain, aligning with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:54.679795+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_cd9508b32a5f5ab0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_861c15c7ecab8f3b_a8c7a490406b6b71.txt",
+  "prompt_version": "a8c7a490406b6b71",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545205-AZqWTJ7bIisOb8HTjWKA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 844,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00553125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0045975,
+        "upstream_inference_cost": 0.00553125,
+        "upstream_inference_prompt_cost": 0.00093375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2471
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points solely to immutable demographic features (native country), offering zero viable recourse or practical actions for the user.\",\n    \"audit_usefulness\": \"It has moderate audit value because it alerts auditors to severe reliance on sensitive, immutable geographic features and potential model fairness concerns, despite negative fidelity.\",\n    \"clarity\": \"The explanation uses raw one-hot encoded variable names and decimal weights without clear non-expert definitions.\",\n    \"completeness\": \"The explanation only highlights two one-hot native country indicators while leaving all primary drivers (education, capital gain, age) at zero.\",\n    \"concision\": \"Including numerous features with zeroed-out values creates unnecessary clutter and wastes token length.\",\n    \"overall_quality\": \"The explanation is poor overall due to its complete lack of actionable recourse, low plausibility, and cluttered presentation of zero-impact features.\",\n    \"semantic_plausibility\": \"Suggesting that income prediction hinges almost exclusively on specific native country categories is domain-implausible and indicates spurious model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:40:14.934162+00:00"
+}

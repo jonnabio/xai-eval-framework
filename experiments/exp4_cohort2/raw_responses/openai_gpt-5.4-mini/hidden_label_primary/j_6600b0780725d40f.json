@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6600b0780725d40f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4deccedcca9c7800_9e2822efcab0752f.txt",
+  "prompt_version": "9e2822efcab0752f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539589-UwdsrRIfF684Dg65U6kp",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00283125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020295,
+        "upstream_inference_cost": 0.00283125,
+        "upstream_inference_prompt_cost": 0.00080175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1069,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer concrete recourse or next steps, only a ranked list of features with small weights. A user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which features locally pushed the prediction down or up, but the weights are very small and the low fidelity/stability reduce trust in the signal. This limits its value for diagnosing model behavior.\",\n    \"clarity\": \"The output is easy to read as a short list of feature contributions, but the meaning of the numbers and the one-hot encoded feature names is not explained. A non-expert would understand the general idea, though not the technical details.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, but the contributions are tiny and there is no context about the base value, predicted probability, or how these factors combine. That leaves the specific decision only partially explained.\",\n    \"concision\": \"The explanation is compact and contains only the top factors, with little redundancy. It communicates the core local information in few words.\",\n    \"overall_quality\": \"Overall, this is a usable but weak local explanation: it is readable and concise, yet lacks actionable guidance and strong evidential support. The very low stability and modest fidelity further limit its quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the signs are broadly consistent with common patterns, such as education and occupation influencing income predictions. Nothing in the explanation appears contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:32.744695+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e26a91e1325d8c0e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_052659e044864140_142ebfeb15a15184.txt",
+  "prompt_version": "142ebfeb15a15184",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543131-lWAZI1T5EDmkmx63LwMY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 376,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00253875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001692,
+        "upstream_inference_cost": 0.00253875,
+        "upstream_inference_prompt_cost": 0.00084675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1505
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not say how changing any feature would affect the prediction in a practical way.\",\n    \"audit_usefulness\": \"It is useful for inspecting which variables drove the model\u2019s output and can help spot reliance on clinical measurements, though it gives only local attribution rather than deeper behavioral evidence.\",\n    \"clarity\": \"The terms are understandable enough with some domain knowledge, but SHAP values and feature names like concave points or concavity still require familiarity with the breast cancer dataset.\",\n    \"completeness\": \"It identifies the main local factors supporting the prediction, but it does not explain the full decision path, interactions, or how much each factor mattered relative to the final classification.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious filler.\",\n    \"overall_quality\": \"This is a strong local attribution summary for a tree model: it is stable, fairly faithful, and highlights the main features behind a correct negative prediction, though it remains limited as a full explanation.\",\n    \"semantic_plausibility\": \"The cited features are clinically plausible breast-cancer indicators, and the directionality is consistent with a benign prediction for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:32.905722+00:00"
+}

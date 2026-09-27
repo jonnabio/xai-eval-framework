@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_64294bb8dbe3041c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_31247e881a13bce1_9cd20f297f2e87f0.txt",
+  "prompt_version": "9cd20f297f2e87f0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539339-VvpulARxzMYoWkVo7K3C",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002937,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.002937,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not translate them into any concrete recourse or next step. A user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it exposes the local feature ranking and signs, which helps inspect which attributes pushed the model toward class 0. However, the low fidelity and stability metrics limit how much confidence an auditor can place in these factors.\",\n    \"clarity\": \"The wording is short and easy to parse, and each feature contribution is presented in a simple list. A non-expert may still need some understanding of encoded categorical variables to interpret items like occupation_Machine-op-inspct.\",\n    \"completeness\": \"It covers several local drivers of the prediction and gives their directions, but it does not explain the baseline, interactions, or why the model ultimately predicted 0. The small and unstable set of contributions leaves important decision context missing.\",\n    \"concision\": \"The explanation is compact and contains only the most relevant local factors without obvious redundancy. It is fairly efficient per word, though the raw coefficient-like values are not fully contextualized.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: readable and concise, with some audit value, but weak on recourse and only partially trustworthy due to modest fidelity and very low stability. It is adequate for a quick glance, not for deep decision review.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult income domain, especially age, occupation, education, marital status, sex, and workclass. The directionality is also generally coherent with typical patterns in this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:23.227772+00:00"
+}

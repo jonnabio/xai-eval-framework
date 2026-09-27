@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7b78e47140c1369b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d83368279babe0ba",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7b78e47140c1369b_59f015c752009ad3.txt",
+  "prompt_version": "59f015c752009ad3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542448-S6Guj7ND4zARgh04kM43",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030015,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.0030015,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7b78e47140c1369b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It lists a single influential feature but does not translate this into feasible actions or counterfactual guidance.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it exposes one local driver, capital-gain, but all other listed factors are zero and uninformative. This makes it hard to inspect whether the model is using meaningful signals or spurious correlations.\",\n    \"clarity\": \"The output is easy to read in a narrow technical sense, but the meaning of the zero-valued features is not explained to a non-expert. The ranking also lacks context about whether these are feature attributions, counterfactual changes, or normalized importances.\",\n    \"completeness\": \"The explanation is incomplete for understanding this true positive prediction because it effectively gives only one nonzero factor. It does not describe directionality, baseline comparison, or the broader set of drivers that led to the positive class.\",\n    \"concision\": \"It is very compact, but much of the space is taken by redundant zeros that add little information. The explanation is therefore not maximally informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is minimally informative: it identifies capital-gain as important but fails to provide enough context to understand the model's local decision well. The near-empty attribution pattern also limits usefulness for both users and auditors.\",\n    \"semantic_plausibility\": \"It is plausible that capital-gain strongly influences an Adult income model, since it is a known predictive feature in this domain. However, the long list of zero contributions for many features makes the explanation feel mechanically generated rather than substantively informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:11.325155+00:00"
+}

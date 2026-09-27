@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_714919f2856e6abd",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_49b4fcf4bf2d7761_cde061135b96f135.txt",
+  "prompt_version": "cde061135b96f135",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540875-ihSV9R0F71FLwcMmxhaj",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003958,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00272,
+        "upstream_inference_cost": 0.003958,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1782
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. The binary nature of some features (e.g., credit history category) limits practical recourse.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchor the prediction and their relative importance weights, supporting model behaviour inspection. However, the low fidelity (0.048) and high faithfulness gap (0.06) suggest the anchors may not reliably represent the model's actual decision logic.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights presented in a list structure that is easy to parse. However, non-experts may struggle with feature names like 'checking_status_<0' without domain context or interpretation.\",\n    \"completeness\": \"Only three features are identified as anchors with non-zero weights, while seven features show zero weight; this sparse representation may omit important contextual drivers of the prediction, particularly given the low fidelity score.\",\n    \"concision\": \"The explanation is compact at 75 tokens and avoids redundancy, efficiently listing features and weights. However, the inclusion of zero-weighted features adds length without informational value.\",\n    \"overall_quality\": \"The explanation provides a basic anchor-based summary but is undermined by poor technical performance metrics (low fidelity, high faithfulness gap, moderate stability), suggesting the identified anchors may not faithfully represent the model's decision process.\",\n    \"semantic_plausibility\": \"Age, checking account status, and credit history are plausible credit risk factors in domain terms. However, the complete absence of credit amount and duration as anchors is counterintuitive for credit decisions, raising questions about explanation validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:28:01.296363+00:00"
+}

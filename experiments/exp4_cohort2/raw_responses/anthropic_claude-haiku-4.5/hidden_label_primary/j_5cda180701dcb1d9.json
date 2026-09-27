@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5cda180701dcb1d9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ec3d891e0d43658f_08b6bca3baba04e8.txt",
+  "prompt_version": "08b6bca3baba04e8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539790-LIyGsGuv5KG5pUxRIyTZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003973,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002735,
+        "upstream_inference_cost": 0.003973,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1785
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies specific feature conditions (residence_since: 1.0, no checking account, savings <100) but provides no guidance on how to modify these factors or what recourse actions are available to the applicant.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction with high precision, supporting model behavior inspection; however, the low fidelity (0.37) and high faithfulness gap (0.26) suggest the anchors may not reliably represent the model's actual decision logic.\",\n    \"clarity\": \"The format is a simple list of feature-value pairs with importance scores, easily understood by a non-expert; however, the meaning of 1.0 vs 0.0 scores and the term 'anchors' itself may require brief domain context.\",\n    \"completeness\": \"Only three features are identified as anchors (residence_since, checking_status, savings_status), while nine others receive 0.0 scores; this sparse representation may omit important decision drivers given the low fidelity metric.\",\n    \"concision\": \"The explanation is compact at 72 tokens and avoids redundancy, presenting each feature and its score efficiently without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is clear and concise, the poor technical metrics (fidelity 0.37, faithfulness gap 0.26, stability 0.57) and sparse feature coverage undermine its reliability and usefulness for understanding the actual prediction mechanism.\",\n    \"semantic_plausibility\": \"The identified anchors (no checking account, low savings, residence duration) are plausible risk factors in credit assessment; however, the absence of age, credit amount, and duration as drivers is somewhat counterintuitive in lending contexts.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:56.590453+00:00"
+}

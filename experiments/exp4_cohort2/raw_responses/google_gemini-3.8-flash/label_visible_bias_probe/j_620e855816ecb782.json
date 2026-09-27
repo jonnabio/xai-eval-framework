@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_620e855816ecb782",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d372ea8e16367348_09a3388cb5ff759f.txt",
+  "prompt_version": "09a3388cb5ff759f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544853-GYNzZna1zGnalr02FfP2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 589,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00461475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00370875,
+        "upstream_inference_cost": 0.00461475,
+        "upstream_inference_prompt_cost": 0.000906
+      },
+      "is_byok": false,
+      "prompt_tokens": 1208,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2197
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or next steps, as it presents non-modifiable diagnostic features without thresholds or directional guidance.\",\n    \"audit_usefulness\": \"While an auditor can see which three features were selected by the anchor, the complete absence of rule predicates and decision thresholds severely limits debugging utility.\",\n    \"clarity\": \"The list format is legible, but presenting rule-based anchor outputs as pseudo-weights (1.0000 vs 0.0000) is confusing for non-experts.\",\n    \"completeness\": \"The explanation indicates which features were included in the rule but completely omits the actual rule conditions, feature values, and coverage.\",\n    \"concision\": \"Listing seven unselected features with zero values introduces unnecessary clutter that dilutes the useful information.\",\n    \"overall_quality\": \"Overall quality is low because flattening an anchor into binary inclusion indicators strips out the essential rule predicates, yielding poor fidelity and minimal utility.\",\n    \"semantic_plausibility\": \"The highlighted features, such as worst concave points and worst smoothness, are clinically relevant markers in breast cancer diagnosis.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:34:21.781371+00:00"
+}

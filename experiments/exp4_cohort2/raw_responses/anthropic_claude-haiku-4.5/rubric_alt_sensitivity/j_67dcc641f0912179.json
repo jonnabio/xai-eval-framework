@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_25c0ece7cf9b15de",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_67dcc641f0912179",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_25c0ece7cf9b15de_a2493b568c4afce1.txt",
+  "prompt_version": "a2493b568c4afce1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545704-3eRKKkKCri04IeAtVI8T",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003938,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00263,
+        "upstream_inference_cost": 0.003938,
+        "upstream_inference_prompt_cost": 0.001308
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1834
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_25c0ece7cf9b15de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A non-technical user cannot determine what steps to take based on these SHAP values alone.\",\n    \"audit_usefulness\": \"SHAP values with feature names and magnitudes provide useful quantitative information for auditing model behavior and detecting potential biases. The high stability (0.993) and reasonable fidelity (0.764) support audit reliability.\",\n    \"clarity\": \"The format is technical and requires understanding of SHAP values and feature encoding (e.g., 'checking_status_0<=X<200'). Non-technical users would struggle to interpret the numerical contributions and categorical feature names.\",\n    \"completeness\": \"The explanation identifies the top 10 contributing factors with their SHAP values, capturing the main drivers of the decision. However, it lacks context about feature values, thresholds, or why these factors matter for credit decisions.\",\n    \"concision\": \"The explanation is compact and efficiently lists factors with their contributions. Each entry carries information without obvious padding, though some feature names are abbreviated in ways that reduce clarity.\",\n    \"overall_quality\": \"This is a serviceable explanation that provides quantitative insight into model behavior suitable for technical auditing, but lacks accessibility and actionability for non-experts. The high stability and reasonable fidelity are positive, but the format limits broader utility.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment logic: duration, credit history, checking status, and savings are all relevant to creditworthiness. The direction of contributions (positive for duration, negative for good credit history) makes domain sense for a rejection decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:48:30.086765+00:00"
+}

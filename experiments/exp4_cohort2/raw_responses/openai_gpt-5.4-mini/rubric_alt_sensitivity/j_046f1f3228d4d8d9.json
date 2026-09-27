@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_046f1f3228d4d8d9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_dc2b678dea61424b_22bb6f2ce5a73f7a.txt",
+  "prompt_version": "22bb6f2ce5a73f7a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543308-YW31hWeabet5V9YoHlLk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017415,
+        "upstream_inference_cost": 0.0025875,
+        "upstream_inference_prompt_cost": 0.000846
+      },
+      "is_byok": false,
+      "prompt_tokens": 1128,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1515
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not explain what could be changed to alter the prediction; the listed anchors are not actionable for a person reviewing the case.\",\n    \"audit_usefulness\": \"It gives a sparse local snapshot of feature associations, which offers only limited help for inspecting model behavior or bias.\",\n    \"clarity\": \"The feature list is easy to read, but the meaning of the anchor scores and why some are 1.0000 versus 0.0000 is not explained, so it needs technical context.\",\n    \"completeness\": \"It names only a couple of top local factors and omits how they combine to support the negative prediction, so the main decision logic is incomplete.\",\n    \"concision\": \"The explanation is short and mostly non-redundant, though the many zero-valued features add little useful information.\",\n    \"overall_quality\": \"It is understandable but thin: the explanation is somewhat faithful to the model behavior yet not very informative for a real decision review.\",\n    \"semantic_plausibility\": \"For an Adult-income model, education-related anchors are plausible predictors, but the specific pattern of '7th-8th' and 'Masters' together with zeros for many unrelated features is only moderately convincing without more context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:30.915356+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4838b07b3f340d51",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1e8da803937f2431",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4838b07b3f340d51_fb8b966aa9b340e7.txt",
+  "prompt_version": "fb8b966aa9b340e7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549733-s8nt2zCBFLC0ERskWkgn",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 983,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 561,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004683,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00368625,
+        "upstream_inference_cost": 0.004683,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2312
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4838b07b3f340d51\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points to existing states like owning a home and having no checking account, but it offers no actionable guidance or counterfactual thresholds for an applicant.\",\n    \"audit_usefulness\": \"It identifies the anchor conditions that likely triggered the positive classification, but with a fidelity of only 0.54 and several zero-weighted entries, its utility for auditing model errors is marginal.\",\n    \"clarity\": \"The feature names and binary weight indicators are somewhat readable, but the raw variable strings and zeroed-out entries can confuse a lay audience.\",\n    \"completeness\": \"Only two features carry weight while eight other features are listed as zero, leaving most of the model's decision logic unexplained in this false-positive case.\",\n    \"concision\": \"The text lists numerous features with 0.0000 weights, introducing unnecessary clutter rather than focusing strictly on the active anchor rules.\",\n    \"overall_quality\": \"The explanation is weak due to low fidelity, uninformative zero-weight padding, and limited depth explaining a false-positive outcome.\",\n    \"semantic_plausibility\": \"Owning a home is a standard indicator of financial stability, making the identified anchor conditions believable within the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:55:42.113694+00:00"
+}

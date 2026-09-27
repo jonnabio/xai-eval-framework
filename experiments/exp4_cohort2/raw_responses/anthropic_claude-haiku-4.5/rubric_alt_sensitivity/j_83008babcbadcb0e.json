@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_83008babcbadcb0e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba8a2c4ca53c1a08_22076daa1c5a64da.txt",
+  "prompt_version": "22076daa1c5a64da",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545732-FjecgdgwvsLXlZHfLlxm",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003726,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002425,
+        "upstream_inference_cost": 0.003726,
+        "upstream_inference_prompt_cost": 0.001301
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1786
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person would not know what to modify to alter the prediction.\",\n    \"audit_usefulness\": \"Shows which features influenced the prediction with directional weights, useful for examining model behavior. However, low fidelity (0.66) and stability (0.01) raise concerns about explanation reliability for auditing purposes.\",\n    \"clarity\": \"The format is technical with feature names and numerical coefficients. Non-technical users would struggle to interpret what 'education_Prof-school: 0.0254' means in practical terms without domain knowledge.\",\n    \"completeness\": \"Provides top 10 local factors with their contributions, covering the main decision drivers. However, lacks context about the instance itself or why these factors matter for the income prediction task.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line efficiently conveys a feature and its weight, though the format is dense.\",\n    \"overall_quality\": \"A serviceable but limited explanation. It identifies relevant features correctly (prediction matches true label), but technical metrics show poor fidelity and stability, and the explanation lacks actionability and accessibility.\",\n    \"semantic_plausibility\": \"The top factors (professional school education, wife relationship status, professional specialty occupation) are plausible predictors of higher income in the adult dataset. The negative weights for male sex and never-married status also align with domain expectations for this classification task.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:48:57.821618+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_da3a12bf8703856e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d372ea8e16367348_09a3388cb5ff759f.txt",
+  "prompt_version": "09a3388cb5ff759f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542247-RvNBaDcTtPvTXMRPBePj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.00297675,
+        "upstream_inference_prompt_cost": 0.00078075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1041,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give a user any concrete recourse steps or threshold-based guidance. It lists local factor values but does not explain what could be changed or reviewed to alter the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes the specific features involved in the local explanation, but the values look degenerate and not interpretable. The lack of directionality or feature importance makes it weak for diagnosing model behavior.\",\n    \"clarity\": \"The wording is short and easy to read, but the presentation is not understandable as an explanation because the feature values are odd and unlabeled in terms of effect. A non-expert would not know why these factors support class 1.\",\n    \"completeness\": \"It names several local factors, which gives partial decision context, but it does not explain their influence, relative importance, or how they combine to produce the prediction. Key local decision information is missing.\",\n    \"concision\": \"The explanation is brief and avoids unnecessary detail, so it is compact. However, the brevity comes at the cost of explanatory value, making it only moderately informative per word.\",\n    \"overall_quality\": \"Overall, this is a low-quality explanation: it is concise and somewhat inspectable, but it is not actionable, not fully interpretable, and only partially informative about the model's decision. The anomalous feature-value formatting further reduces trust and usefulness.\",\n    \"semantic_plausibility\": \"For a breast cancer instance, the cited features are plausible inputs, but the values shown as 1.0000 and 0.0000 for many continuous medical attributes are not semantically convincing. The explanation therefore appears structurally plausible but substantively odd.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:49.950433+00:00"
+}

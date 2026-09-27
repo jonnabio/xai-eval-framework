@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_36301482bf394063",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_e41fd8a7ac08bc7b.txt",
+  "prompt_version": "e41fd8a7ac08bc7b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546998-AfX2KQzD8Fw51GC2hjr2",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 540,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003995,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0027,
+        "upstream_inference_cost": 0.003995,
+        "upstream_inference_prompt_cost": 0.001295
+      },
+      "is_byok": false,
+      "prompt_tokens": 1295,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1835
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the key anchor but provides no guidance on what could change the prediction or what actions are feasible. For a false negative (predicted 0, true 1), it doesn't suggest what would flip the outcome.\",\n    \"audit_usefulness\": \"Low fidelity (0.60) and stability (0.32) undermine confidence in the explanation. The explanation shows only one feature with non-zero weight, which is suspicious and limits ability to audit model behavior or detect bias patterns.\",\n    \"clarity\": \"The format is technical (feature names with weights) but relatively straightforward. However, the meaning of the weights and why only marital status matters is not explained in accessible terms.\",\n    \"completeness\": \"Severely incomplete. The explanation identifies only one feature as relevant (marital-status_Married-civ-spouse) with all others at 0.0000. This sparse output fails to capture the full decision logic, especially given the false negative error.\",\n    \"concision\": \"The explanation is concise in length but wastes space listing many zero-weight features. A tighter presentation would omit features with zero contribution.\",\n    \"overall_quality\": \"Weak. The explanation fails on multiple fronts: poor technical metrics (low fidelity and stability), incomplete feature coverage, no actionability, and inability to explain why the model made an incorrect prediction. The false negative case deserves deeper analysis.\",\n    \"semantic_plausibility\": \"Plausible that marital status influences income prediction in the adult dataset, but the complete absence of other factors (age, education, hours-per-week) is implausible. These are known strong predictors of income, so their zero weights raise credibility concerns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:10:03.986740+00:00"
+}

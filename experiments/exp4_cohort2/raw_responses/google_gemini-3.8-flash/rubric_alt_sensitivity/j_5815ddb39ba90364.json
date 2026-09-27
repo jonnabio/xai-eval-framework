@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778d3be3c54f91e6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5815ddb39ba90364",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_778d3be3c54f91e6_6b63cee12a9b3973.txt",
+  "prompt_version": "6b63cee12a9b3973",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547229-kKnTxnVAlKbj2JfnwQZt",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 619,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048105,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00381,
+        "upstream_inference_cost": 0.0048105,
+        "upstream_inference_prompt_cost": 0.0010005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1334,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2350
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778d3be3c54f91e6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists positive and negative SHAP attribution values but provides no explicit recourse or counterfactual guidance on what concrete changes would alter the outcome.\",\n    \"audit_usefulness\": \"It provides useful technical insight into local feature attributions for an auditor investigating a false positive, though the absence of baseline and raw values limits deeper debugging.\",\n    \"clarity\": \"The output consists of technical one-hot encoded variable names and raw signed attribution numbers, which requires technical or data knowledge to interpret properly.\",\n    \"completeness\": \"The top 10 local factors with attribution directions are listed, capturing the primary drivers of the decision, though exact feature values for numeric variables are omitted.\",\n    \"concision\": \"The presentation is compact and direct, conveying attribution weights without filler text.\",\n    \"overall_quality\": \"A serviceable local SHAP explanation that accurately conveys key feature influences, but remains purely technical and lacks actionable guidance.\",\n    \"semantic_plausibility\": \"The listed features, such as checking status, credit history, savings, and employment duration, align well with established domain factors in credit underwriting.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:13:56.572746+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ff5158e978ed93a7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f4658b35cc204bfb_bdbdae2256a06136.txt",
+  "prompt_version": "bdbdae2256a06136",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539257-6RcZ0p4mGTfw0iDm0Zez",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.002895,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, especially for a false-positive case. It lists features with importance-like values but does not indicate what changes would likely reverse the prediction.\",\n    \"audit_usefulness\": \"It gives a limited view of which encoded features were associated with the prediction, but the values are mostly zeros and the output lacks directionality or comparison to the instance baseline. That makes it weak for investigating model behavior or errors.\",\n    \"clarity\": \"The feature list is easy to read at a surface level, but the meaning of the numeric scores is unclear and there is no plain-language narrative. A non-expert would struggle to interpret why these factors matter.\",\n    \"completeness\": \"Only two features appear nonzero, and the explanation does not describe their relationship to the prediction or provide enough context for the false-positive decision. It omits the main local reasoning needed to understand why the model predicted class 1.\",\n    \"concision\": \"The output is short, but much of it is uninformative because most listed factors are zero. It is compact without being efficient in communicating useful explanation content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but minimally informative, not actionable, and only partially useful for diagnosing the model decision. The high sparsity and lack of semantic interpretation significantly reduce its quality.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible in the Adult dataset context, and a country/occupation combination could reasonably influence income prediction. However, the zero-valued feature list and lack of explanatory narrative make the overall semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:01:00.876981+00:00"
+}

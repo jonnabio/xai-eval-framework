@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6ab5ba2d5b44e9ed",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_052659e044864140_c82a2fb99f180942.txt",
+  "prompt_version": "c82a2fb99f180942",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539667-ks4btNZ15dHrjwhfqEea",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003749,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00253,
+        "upstream_inference_cost": 0.003749,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1725
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions a clinician or patient could take based on this prediction or how to interpret the negative SHAP values in clinical terms.\",\n    \"audit_usefulness\": \"The ranked list of SHAP values with magnitudes is highly useful for auditors to inspect which features drove the model's benign prediction and to assess whether the feature importance ordering aligns with domain expectations.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names with numerical SHAP values, which is clear and easy to parse for readers familiar with SHAP or machine learning, though non-experts may struggle with interpretation.\",\n    \"completeness\": \"The top 10 features are provided with their SHAP contributions, covering the main local drivers; however, the explanation lacks context about the prediction class (benign/malignant) and the base rate or model threshold.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential ranked list of features and their SHAP values without extraneous text.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready, with strong technical metrics (fidelity 0.87, stability 0.99), but lacks clinical context and actionability that would elevate it for end-user decision support.\",\n    \"semantic_plausibility\": \"The negative SHAP values for morphological features (concave points, area, perimeter) are plausible drivers of a benign classification in breast cancer diagnosis, as these features typically correlate with malignancy when elevated.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 5,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:07:52.434776+00:00"
+}

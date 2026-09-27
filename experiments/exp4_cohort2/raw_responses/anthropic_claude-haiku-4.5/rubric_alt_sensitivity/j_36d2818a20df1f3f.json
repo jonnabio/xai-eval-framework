@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_36d2818a20df1f3f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_fbb0082b6f2ae806_5287964d2c4ede47.txt",
+  "prompt_version": "5287964d2c4ede47",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545139-2R4NTzXjeEO6woDSmte9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 574,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004164,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00287,
+        "upstream_inference_cost": 0.004164,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1868
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person receiving a negative prediction would not know what steps to take to potentially reverse it.\",\n    \"audit_usefulness\": \"While the feature weights are presented, the poor technical metrics (fidelity 0.50, faithfulness_gap 0.81, stability 0.06) severely limit audit value. The low fidelity suggests the explanation poorly represents actual model behavior, making it unreliable for bias or error investigation.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but requires understanding of LIME methodology and the adult dataset's encoded features. Non-technical readers would struggle with terms like 'relationship_Unmarried' and what positive/negative weights mean.\",\n    \"completeness\": \"Only 10 features are shown with small magnitude weights. The explanation lacks context about the instance itself, the decision boundary, or why these particular features matter relative to others. Critical information about the false negative error is absent.\",\n    \"concision\": \"The explanation is compact at 83 tokens, but the technical metrics suggest much of it may not be faithful to the model. Brevity without accuracy wastes space rather than optimizing information density.\",\n    \"overall_quality\": \"This explanation is weak due to a combination of poor technical performance (fidelity ~0.50 means it's barely better than random), a false negative error that goes unexplained, and limited practical utility. The explanation format is standard but the underlying quality is compromised.\",\n    \"semantic_plausibility\": \"The feature contributions seem plausible for income prediction (marital status, education, occupation, sex are known predictors), but the false negative prediction (predicting \u226450K when true label is >50K) combined with weak technical metrics raises doubt about whether these weights actually explain the model's reasoning in this case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:08.344103+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_693ed3739c3d3607",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3118a0f719dfdef8_95024f7291c497b3.txt",
+  "prompt_version": "95024f7291c497b3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547354-PxhYTULED3ACJzzEWVKf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1003,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 610,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00472425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376125,
+        "upstream_inference_cost": 0.00472425,
+        "upstream_inference_prompt_cost": 0.000963
+      },
+      "is_byok": false,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2287
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives raw attribution scores for clinical biopsy measurements without baseline values, thresholds, or feasible interventions.\",\n    \"audit_usefulness\": \"The signed SHAP contributions allow an auditor to see which morphological factors pushed the model toward this false positive decision, though absence of feature values limits deeper error analysis.\",\n    \"clarity\": \"The list of features and numeric attributions is clean, but non-technical readers would struggle to interpret signed SHAP values without explanation.\",\n    \"completeness\": \"It provides the top 10 local feature contributions with directional signs, giving a solid high-level overview of the model's decision drivers.\",\n    \"concision\": \"The text directly states the top contributing features and values without filler words or redundant formatting.\",\n    \"overall_quality\": \"A solid, standard local SHAP explanation that clearly identifies key model drivers, though limited by the lack of observed feature values and non-actionable nature.\",\n    \"semantic_plausibility\": \"Features like worst perimeter, mean smoothness, and concave points are well-established clinical indicators for breast cancer classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:16:02.670519+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_20ae024680390490",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ccbc751d89be60ef_bd1aafc7b9568738.txt",
+  "prompt_version": "bd1aafc7b9568738",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543759-z25SpQuHitJAgzxI5rih",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004107,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002885,
+        "upstream_inference_cost": 0.004107,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1799
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them or what actions a clinician or patient could take based on this prediction. No recourse or decision-support information is offered.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 and 0.0) and technical metrics enable an auditor to assess model consistency and feature selection, though the binary weighting scheme limits insight into nuanced model behavior. The high stability (0.87) and low fidelity gap support reproducibility assessment.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with normalized weights, which is straightforward but lacks context about what these weights mean or how they drive the malignancy prediction. A non-expert reader would struggle to interpret the significance of the 1.0 and 0.0 values.\",\n    \"completeness\": \"Only two features are identified as anchors (mean concave points and worst texture with weight 1.0), while eight features receive 0.0 weight; this sparse representation may omit important decision drivers and does not fully capture the local decision context.\",\n    \"concision\": \"The explanation is compact at 75 tokens and avoids redundancy, efficiently listing features and weights without padding. However, the concision comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"The explanation is technically sound and stable but lacks the interpretability, actionability, and contextual grounding needed for practical use in a clinical or audit setting. It serves as a raw model artifact rather than a user-friendly explanation.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points and texture are established morphological features associated with malignancy, making the anchor selection plausible. However, the binary weighting (1.0 vs. 0.0) oversimplifies the feature contributions and may not reflect true clinical relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:16:06.103163+00:00"
+}

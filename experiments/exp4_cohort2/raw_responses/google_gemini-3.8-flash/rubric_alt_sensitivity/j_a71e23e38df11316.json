@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a71e23e38df11316",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4440b587017f192b_f6c1af9f7622dae9.txt",
+  "prompt_version": "f6c1af9f7622dae9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548310-qCASG4EjpVUlTczyVSZd",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 934,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 540,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00450375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035025,
+        "upstream_inference_cost": 0.00450375,
+        "upstream_inference_prompt_cost": 0.00100125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1335,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2269
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local feature attributions without baseline values, concrete thresholds, or counterfactual guidance on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"The signed SHAP values provide clear insights into which features contributed positively and negatively to this false positive prediction, aiding model debugging.\",\n    \"clarity\": \"The raw numerical feature attributions and encoded feature names are technical and difficult for a layperson to interpret without background knowledge.\",\n    \"completeness\": \"The top ten local factors capture the primary driving components of the model's decision, though raw feature values and the model base value are missing.\",\n    \"concision\": \"The text directly provides the most influential features and their exact SHAP weights with zero unnecessary narrative padding.\",\n    \"overall_quality\": \"A standard and serviceable local feature attribution output that clearly details model influence but lacks non-technical readability and actionable guidance.\",\n    \"semantic_plausibility\": \"The highlighted features\u2014such as residence duration, credit amount, loan duration, and checking account status\u2014align well with established credit risk factors.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:31:57.218548+00:00"
+}

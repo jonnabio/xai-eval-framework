@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0eecfb91f0e778e3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_31247e881a13bce1_9cd20f297f2e87f0.txt",
+  "prompt_version": "9cd20f297f2e87f0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540905-YQXMwAfzcVa9x9Yxn5dA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1350,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 935,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0060045,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0050625,
+        "upstream_inference_cost": 0.0060045,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2606
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without actionable guidance, thresholds, or recourse paths for altering the prediction.\",\n    \"audit_usefulness\": \"While it indicates which one-hot features influenced the local surrogate, the absence of actual feature values and conflicting paired attributes (e.g., Husband negative vs. Married-civ-spouse positive) limits technical audit value.\",\n    \"clarity\": \"The output is a raw string of one-hot encoded feature names and numeric coefficients that requires statistical and technical literacy to interpret.\",\n    \"completeness\": \"The explanation lists ten local factors, but it fails to state the instance's actual feature values or the baseline probability required to interpret the net impact.\",\n    \"concision\": \"The text presents the top attributions compactly without conversational filler or redundancy.\",\n    \"overall_quality\": \"The explanation offers a compact summary of surrogate feature weights, but poor interpretability, lack of instance values, and zero actionability degrade its overall utility.\",\n    \"semantic_plausibility\": \"Attributing opposing signs to tightly correlated categories like 'relationship_Husband' and 'marital-status_Married-civ-spouse' without showing feature presence creates semantic confusion.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:28:36.612673+00:00"
+}

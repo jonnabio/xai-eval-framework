@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bc212334a05b10ab",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4440b587017f192b_71ae7a5c495313d3.txt",
+  "prompt_version": "71ae7a5c495313d3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542939-qJDK4C6CysVng4JSEbLi",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1281,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 837,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005751,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00480375,
+        "upstream_inference_cost": 0.005751,
+        "upstream_inference_prompt_cost": 0.00094725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1263,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2544
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution scores without actionable advice, thresholds, or guidance on how to alter the decision.\",\n    \"audit_usefulness\": \"It reveals the primary positive and negative drivers of the prediction, providing useful starting points for a practitioner diagnosing this false positive.\",\n    \"clarity\": \"The raw key-value format of feature names and decimal attribution values requires technical familiarity with SHAP and lacks non-expert readability.\",\n    \"completeness\": \"The top ten drivers are captured with signed weights, though the actual observed feature values are not shown.\",\n    \"concision\": \"The presentation is compact and efficiently lists the most impactful factors without unnecessary padding.\",\n    \"overall_quality\": \"It provides an acceptable technical summary for audit purposes, but suffers from low lay clarity and no actionability.\",\n    \"semantic_plausibility\": \"Features such as credit amount, duration, and checking status are coherent and standard determinants in credit scoring.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 3,\n      \"clarity\": 2,\n      \"completeness\": 3,\n      \"concision\": 4,\n      \"overall_quality\": 3,\n      \"semantic_plausibility\": 4\n    }\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:28.828430+00:00"
+}

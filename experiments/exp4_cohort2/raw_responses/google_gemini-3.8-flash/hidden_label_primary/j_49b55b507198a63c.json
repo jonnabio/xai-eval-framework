@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_49b55b507198a63c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_18fe52436b35526b_6f26ab40bdd8848f.txt",
+  "prompt_version": "6f26ab40bdd8848f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543327-44iMeIMTgeGCZALUTRZT",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 912,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00588525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0049575,
+        "upstream_inference_cost": 0.00588525,
+        "upstream_inference_prompt_cost": 0.00092775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1237,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2559
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance, as it lacks feature values, thresholds, and directional effects.\",\n    \"audit_usefulness\": \"While it lists features selected by the explainer, the absence of decision rules, predicates, or actual values severely limits its utility for auditing model behavior.\",\n    \"clarity\": \"The list of feature names paired with an uninformative uniform weight of 1.0000 is confusing and fails to convey what condition is being satisfied.\",\n    \"completeness\": \"The explanation completely omits the actual anchor rules, feature thresholds, and instance values necessary to understand why the model predicted class 1.\",\n    \"concision\": \"Listing multiple one-hot encoded categories with identical dummy weights of 1.0000 yields very low informative content per token.\",\n    \"overall_quality\": \"This is a severely degraded explanation that flattens rule-based anchors into uniform weights without values or predicates, yielding minimal practical or diagnostic value.\",\n    \"semantic_plausibility\": \"Simultaneously listing multiple mutually exclusive education and workclass levels with identical positive weights makes little sense in the context of predicting high income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:56.797355+00:00"
+}

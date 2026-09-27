@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d8b0c5dfe7a54102",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cd6abd1a9433542b_b7f15803d0ffa231.txt",
+  "prompt_version": "b7f15803d0ffa231",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546260-HtIwhaMPj9Gpsk1ThTQG",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 540,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00398,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0027,
+        "upstream_inference_cost": 0.00398,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1820
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. It does not indicate what counterfactual changes would flip the prediction or what thresholds matter.\",\n    \"audit_usefulness\": \"While the feature weights could help identify which features the model relies on, the poor fidelity (-0.046) and stability (0.017) metrics suggest the explanation may not reliably represent the model's actual decision logic, limiting audit value.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical weights\u2014but lacks context about what the weights mean, what the prediction represents (income threshold), or why these particular features matter. Non-technical readers would struggle.\",\n    \"completeness\": \"The explanation identifies native-country_Ireland as dominant (1.0) and occupation_Tech-support as secondary (0.4), but most features show 0.0 weight. It does not explain the decision boundary, interaction effects, or why other features were excluded.\",\n    \"concision\": \"The list is compact but includes many zero-weight features that add clutter without information. Removing features with zero contribution would improve signal-to-noise ratio.\",\n    \"overall_quality\": \"The explanation is sparse and technically weak. Poor fidelity and stability metrics undermine confidence in the result. While it identifies top features, it lacks depth, actionability, and reliability needed for practical use.\",\n    \"semantic_plausibility\": \"Native country and occupation are plausible income predictors in the adult dataset. However, the extreme sparsity (most features at 0.0) and the negative fidelity raise questions about whether this truly reflects the model's reasoning or is an artifact of the DICE method's search process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:57:45.510025+00:00"
+}

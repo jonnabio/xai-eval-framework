@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_70ee62c0fc35ac1f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_778dd7d6e1653158_04766602af93829c.txt",
+  "prompt_version": "04766602af93829c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545510-FcFA8rqvZhS3t3kfVdpI",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004046,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.004046,
+        "upstream_inference_prompt_cost": 0.001296
+      },
+      "is_byok": false,
+      "prompt_tokens": 1296,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1846
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person receiving a negative prediction would not know what specific changes to their circumstances would alter the decision.\",\n    \"audit_usefulness\": \"The SHAP values and their directions are useful for auditing model behavior. The high fidelity (0.973) and stability (0.945) suggest the explanation reliably represents the model's logic, enabling investigation of feature importance patterns and potential bias.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and coefficients) and requires understanding of machine learning concepts. Non-technical readers would struggle to interpret what negative/positive values mean for the prediction.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which captures the main drivers of this prediction. However, it lacks context about the prediction threshold, base rate, or relative importance of factors.\",\n    \"concision\": \"The explanation is compact and efficiently formatted as a ranked list. Each entry contains feature name and numerical contribution without redundancy, though some entries have minimal impact (e.g., education-num: -0.0035).\",\n    \"overall_quality\": \"This is a serviceable explanation that accurately represents model behavior (high fidelity and stability) but falls short in accessibility and actionability. It serves technical auditing purposes well but provides limited value to non-experts or those seeking to understand what could change the outcome.\",\n    \"semantic_plausibility\": \"The factors align with domain knowledge about income prediction: marital status and gender are known correlates with income in the adult dataset. The negative contributions for 'Never-married' and 'Female' reflect historical patterns in the data, though these reflect societal biases rather than causal relationships.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:45:16.011242+00:00"
+}

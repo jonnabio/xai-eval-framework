@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d8a899ad70b4c53f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8ce306045c135995",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d8a899ad70b4c53f_ecf10240436d5a9a.txt",
+  "prompt_version": "ecf10240436d5a9a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541940-ycA5imQLU64x9yMhr50T",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003708,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002475,
+        "upstream_inference_cost": 0.003708,
+        "upstream_inference_prompt_cost": 0.001233
+      },
+      "is_byok": false,
+      "prompt_tokens": 1233,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1728
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d8a899ad70b4c53f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key positive factors (capital-gain, professional school education, married status) but provides no guidance on how a user could act on this information or what recourse options exist.\",\n    \"audit_usefulness\": \"The anchors method with feature importance scores supports model inspection by showing which features drove the prediction, and the low fidelity (0.57) and high faithfulness gap (0.22) are concerning signals for auditors to investigate model reliability.\",\n    \"clarity\": \"The explanation uses technical feature names and numerical scores that require familiarity with the Adult dataset schema; a non-expert would struggle to interpret 'education_Prof-school' or understand why some features have 0.0000 scores.\",\n    \"completeness\": \"The explanation identifies the three most influential features but omits context about their actual values for this instance, feature interactions, or why these factors matter for the >50K income prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features with their importance weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation correctly identifies key drivers and the prediction is correct (TP), the low fidelity score, high faithfulness gap, and lack of instance-specific context significantly undermine its reliability and usefulness.\",\n    \"semantic_plausibility\": \"The identified factors (capital gains, professional education, married status) are plausible predictors of high income in the Adult dataset and align with domain expectations about income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:45:45.432958+00:00"
+}

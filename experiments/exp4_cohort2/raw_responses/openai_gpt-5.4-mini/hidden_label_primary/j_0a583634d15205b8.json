@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0a583634d15205b8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6496b69e203cf5db_4c21f11ad9b0d903.txt",
+  "prompt_version": "4c21f11ad9b0d903",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539611-l0HNH5xzhNLNKGiVA1Fz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00302175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00302175,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two local factors that matter, but it does not translate them into any concrete recourse or next step for the user. The near-zero contributions for most listed features also provide no guidance on what could feasibly be changed.\",\n    \"audit_usefulness\": \"It offers a limited view of which features are locally influential, but the values are sparse and lack directionality or comparison against the opposite class. With low fidelity and very low sparsity/stability, it is only weakly useful for auditing model behavior.\",\n    \"clarity\": \"The output is short and uses simple feature labels, so it is readable at a glance. However, the numeric values are not explained and the meaning of positive versus negative influence is absent, which limits interpretability for non-experts.\",\n    \"completeness\": \"It names only two non-zero factors and provides no account of how they combine to produce the prediction. Key local decision context such as feature direction, counterfactual changes, or the relative importance of other relevant variables is missing.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. That said, it is arguably too terse to convey meaningful decision information, so it is concise but not especially information-dense.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and short, but it does not provide enough contextual or causal detail to understand or act on the model's decision. The low technical quality signals further reduce confidence in its usefulness.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the Adult dataset, and a married status or low education level could reasonably affect income prediction. However, the zero-valued factors and lack of directional interpretation make the explanation only moderately grounded in the instance context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:06:55.827108+00:00"
+}

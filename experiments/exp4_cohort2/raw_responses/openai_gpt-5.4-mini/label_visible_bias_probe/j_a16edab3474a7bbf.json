@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0a8f165d668d9bc",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a16edab3474a7bbf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a0a8f165d668d9bc_6b160f920a2df78e.txt",
+  "prompt_version": "6b160f920a2df78e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542300-EneCJWBhg2NIbqiYW3q2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.00290475,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a0a8f165d668d9bc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists feature names and placeholder-like values. A user cannot tell what to change or review based on this output.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not state whether the listed features increased or decreased the prediction, nor by how much. The near-binary 0/1-style values are not interpretable as a meaningful local rationale.\",\n    \"clarity\": \"The wording is short, but the content is hard to understand because it looks like raw anchor output with no plain-language interpretation. Non-experts would not know what the listed features and values mean in relation to the model's decision.\",\n    \"completeness\": \"It names a few features, but it omits the direction of influence, thresholds, and the actual decision logic behind the negative prediction. That leaves the local explanation incomplete for understanding this specific case.\",\n    \"concision\": \"The explanation is fairly short, but much of the space is spent on redundant zero values that do not add useful information. It is compact, but not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is minimally informative, not user-friendly, and does not support meaningful inspection or action. It is only marginally useful as a raw artifact, not as an explanatory summary.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the breast cancer domain, but the values are odd and unexplained, making the output feel more like a dump of internal state than a coherent explanation. The lack of contextual interpretation reduces its semantic credibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:42.639275+00:00"
+}

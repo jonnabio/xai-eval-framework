@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9e661130e22ec76f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_49b4fcf4bf2d7761_21e48854822b7672.txt",
+  "prompt_version": "21e48854822b7672",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542257-0xGIR1psQxEVPTv1Vviv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002904,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.002904,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse or decision-review steps, only lists features with binary-like anchor values. A user cannot tell what to change or how the prediction could be challenged.\",\n    \"audit_usefulness\": \"It identifies a few local features associated with the prediction, which is useful for a basic audit, but it lacks directionality, thresholds, and comparative context. The near-zero fidelity also limits confidence that it faithfully reflects the model.\",\n    \"clarity\": \"The wording is simple, but the output is mostly a list of feature names and values without explaining what the values mean. A non-expert would struggle to interpret why these factors matter.\",\n    \"completeness\": \"It includes some local factors, but it omits how they combine to produce the prediction and gives no class-specific rationale. Important decision context such as feature direction, interactions, and predicted-class justification is missing.\",\n    \"concision\": \"The explanation is short and not heavily redundant, but several listed zero-valued factors add little useful information. It is reasonably compact, though not maximally informative per word.\",\n    \"overall_quality\": \"The explanation is weak overall because it is sparse, hard to interpret, and provides limited trustworthy insight into the false positive prediction. It is somewhat useful as a rough feature list, but not as a strong explanation.\",\n    \"semantic_plausibility\": \"The highlighted factors are broadly plausible for German credit data, especially checking status, credit history, and age. However, the presentation of exact 1.0000 and 0.0000 anchor values without explanation makes the semantics of the output somewhat unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:59.995172+00:00"
+}

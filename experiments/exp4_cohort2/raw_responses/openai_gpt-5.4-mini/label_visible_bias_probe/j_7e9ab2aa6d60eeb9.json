@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7e9ab2aa6d60eeb9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cbdb515ea6b51b47_6835d0c85f7a806f.txt",
+  "prompt_version": "6835d0c85f7a806f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541179-O2fklnRlrNEHbNn1nkUA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029085,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0029085,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or indicate what changes would likely alter the prediction. It only lists features and weights, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the main local contributors and their directions, which can be checked against the model and data. However, the low stability and moderate faithfulness limit how confidently an auditor can rely on it.\",\n    \"clarity\": \"The wording is concise and the feature contributions are easy to scan, even for a non-technical reader familiar with basic tabular attributes. The meaning of positive and negative values is still somewhat implicit, so it is clear but not excellent.\",\n    \"completeness\": \"It covers the top local factors behind the prediction, including capital gain, marital status, education, sex, and relationship. Still, it lacks a baseline, feature values for the specific person, and an explicit summary of why the model chose class 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting the top factors in a short list. It conveys useful information per word without unnecessary narration.\",\n    \"overall_quality\": \"This is a solid local explanation with a readable ranking of influential features, but it is limited by weak stability and the lack of actionable or contextual detail. Overall it is useful for inspection but only moderately strong as an explanation of this specific false negative.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for the Adult income domain, especially capital gain and marital status. The signs and feature names are consistent with a logistic regression model and do not appear contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:01.804866+00:00"
+}

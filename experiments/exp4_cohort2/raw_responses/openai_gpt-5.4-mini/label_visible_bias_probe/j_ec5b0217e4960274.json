@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ec5b0217e4960274",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4f96f4d65555df8d_70b23973ccdd3e93.txt",
+  "prompt_version": "70b23973ccdd3e93",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541366-qheL1K2UFgfp3vFvW8eT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.00301875,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names but gives no concrete recourse or next steps the applicant could take to change the outcome. It does not indicate which factors were harmful versus helpful, so it is not useful for decision review or action planning.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies the local features considered by the Anchor explanation method. However, the normalized output is too opaque to inspect directionality or understand why this false negative occurred.\",\n    \"clarity\": \"The wording is short and the feature labels are readable, but the numbers are not explained and all listed factors are shown in the same format. A non-expert would struggle to infer how these anchors relate to the prediction.\",\n    \"completeness\": \"It covers several local features, but it omits the actual rule logic, feature directions, and any comparison to the true label or counterfactual conditions. For understanding this specific false negative, the explanation is only partially informative.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary text, but much of the information content is in raw feature names and repeated 1.0000 values. It is concise without being especially informative.\",\n    \"overall_quality\": \"The explanation is brief and somewhat faithful to local features, but it is hard to interpret and does not provide enough context to explain the model's false negative in a meaningful way. Overall it is acceptable at best, but far from strong.\",\n    \"semantic_plausibility\": \"The listed features are plausible for German credit data, and the model family and Anchor-style output are consistent with a tabular explanation. However, the all-ones pattern and inclusion of zero-valued items without interpretation make the semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:09.613890+00:00"
+}

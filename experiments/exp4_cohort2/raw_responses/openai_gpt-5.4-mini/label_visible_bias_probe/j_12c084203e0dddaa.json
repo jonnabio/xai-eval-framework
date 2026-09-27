@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_12c084203e0dddaa",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e7770b140359bd75_76bdc2d1012e8ce9.txt",
+  "prompt_version": "76bdc2d1012e8ce9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541335-nDwg2OAdDkyB9KBz9VlN",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022185,
+        "upstream_inference_cost": 0.00300675,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps for changing the prediction. It only lists influential features and zero-weighted features, without indicating what could be altered or how to reverse the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a few local factors the anchor method found important, but it lacks directionality and does not explain why those factors support the class prediction. The low sparsity and modest fidelity further limit its usefulness for detailed model inspection.\",\n    \"clarity\": \"The feature list is easy to read, but the meaning of the 1.0000 and 0.0000 values is not explained in plain language. A non-expert may not understand that these are anchor indicators rather than feature importances.\",\n    \"completeness\": \"It mentions only three active factors and several irrelevant zero entries, without explaining how they combine to produce the false-positive prediction. Key decision context such as the actual feature values, threshold logic, or the model's confidence is missing.\",\n    \"concision\": \"The explanation is fairly short, but it wastes space on many features with zero contribution and does not translate the anchor output into a compact narrative. It is only moderately informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is limited: it is interpretable at a surface level but not sufficiently informative for understanding or reviewing this specific false-positive prediction. It is useful as a rough anchor summary, not as a strong local explanation.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset, especially education, occupation, and relationship status. However, the presentation as 1.0000 and 0.0000 values without context makes the semantics of the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:37.666141+00:00"
+}

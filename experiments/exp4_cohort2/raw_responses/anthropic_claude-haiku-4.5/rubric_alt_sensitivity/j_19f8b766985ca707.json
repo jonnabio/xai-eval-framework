@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d08e79080e9bdc99",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_19f8b766985ca707",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d08e79080e9bdc99_11979a540ec50fa2.txt",
+  "prompt_version": "11979a540ec50fa2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547735-EJ1daatSI9hRLOJcW9tb",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004023,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00275,
+        "upstream_inference_cost": 0.004023,
+        "upstream_inference_prompt_cost": 0.001273
+      },
+      "is_byok": false,
+      "prompt_tokens": 1273,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1823
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d08e79080e9bdc99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features matter (mean and worst perimeter) but provides no guidance on what values would change the outcome or what actions could be taken. It is purely descriptive of the current decision.\",\n    \"audit_usefulness\": \"While the feature importance weights are shown, the very low fidelity (0.35) and stability (0.34) scores indicate the explanation is unreliable. An auditor would struggle to trust this for bias or error investigation. The high faithfulness gap (0.07) further undermines confidence.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with weights\u2014and accessible to non-technical readers. However, the meaning of the weights and why only two features have non-zero importance is not explained.\",\n    \"completeness\": \"Only two features are highlighted as important (mean and worst perimeter), while all others show zero weight. For a medical classification task, this sparse explanation lacks depth about the decision boundary and may miss important context about why the model classified this as negative.\",\n    \"concision\": \"The explanation is brief and avoids redundancy. Each line conveys one piece of information (feature name and weight), making efficient use of space.\",\n    \"overall_quality\": \"The explanation is weak overall. While technically correct in format, the poor technical metrics (low fidelity and stability), minimal actionability, and sparse feature set limit its utility for understanding or auditing the model's decision.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, perimeter measurements are medically relevant features. However, the complete absence of other morphological features (texture, area, smoothness, compactness, concavity) as important factors is somewhat implausible for a comprehensive diagnostic model, raising questions about whether the explanation captures the true decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:22:22.110025+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_389634e35b1fc1d2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a857fae38ad2e004_4fbca3a998f86ca2.txt",
+  "prompt_version": "4fbca3a998f86ca2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543033-WEYEM9KVJNsCaUzjhdfu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001791,
+        "upstream_inference_cost": 0.0026475,
+        "upstream_inference_prompt_cost": 0.0008565
+      },
+      "is_byok": false,
+      "prompt_tokens": 1142,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It identifies a few features that pushed the prediction up or down, but it does not give concrete what-to-change guidance or indicate how the outcome would change.\",\n    \"audit_usefulness\": \"The top local weights are useful for checking which attributes influenced the logistic regression decision, but the explanation is too shallow and only moderately faithful, so it offers limited support for deeper bias or error analysis.\",\n    \"clarity\": \"The feature names and signed contributions are straightforward, and a non-expert can follow the basic idea that positive and negative values support or oppose the prediction.\",\n    \"completeness\": \"It lists the main local factors, but it does not explain the baseline, the predicted class probabilities, or the combined effect of these factors, so the decision is only partially explained.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with each listed factor contributing directly to the interpretation.\",\n    \"overall_quality\": \"This is a decent LIME summary for a tree-free tabular model, but the moderate faithfulness and lack of broader context keep it from being a strong explanation.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for Adult income classification, especially capital gain, marital status, education, age, and occupation, and the signs are generally sensible.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:55.138316+00:00"
+}

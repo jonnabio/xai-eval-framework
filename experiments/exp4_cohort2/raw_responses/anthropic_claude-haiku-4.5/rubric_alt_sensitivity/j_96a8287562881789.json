@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_96a8287562881789",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_636acbcad2a09395_9746fc771f205801.txt",
+  "prompt_version": "9746fc771f205801",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545265-B2voknpNYy7zisQLeua4",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003963,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00267,
+        "upstream_inference_cost": 0.003963,
+        "upstream_inference_prompt_cost": 0.001293
+      },
+      "is_byok": false,
+      "prompt_tokens": 1293,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1827
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what values would need to change to alter the decision. A user cannot determine what actions would flip the prediction from approval to denial.\",\n    \"audit_usefulness\": \"The feature weights and fidelity score (0.73) offer some insight into model behavior, but the high faithfulness gap (0.46) and moderate stability (0.73) raise concerns about reliability. Limited help for systematic bias investigation.\",\n    \"clarity\": \"The format is technical with normalized weights and feature names that require domain knowledge of credit scoring. Non-experts would struggle to interpret what 'duration: 1.0000' means in practical terms.\",\n    \"completeness\": \"Only three features are identified as anchors (duration, installment_commitment, property_magnitude), while seven others are listed with zero weight. The explanation lacks context about feature values, thresholds, or interactions that drove the decision.\",\n    \"concision\": \"The explanation is compact but includes many zero-weighted features that add little value. The list format is efficient but could be tighter by excluding irrelevant features.\",\n    \"overall_quality\": \"The explanation provides a sparse, technical account of feature importance but lacks actionability, domain context, and sufficient detail about the actual decision logic. The moderate technical metrics (fidelity 0.73, stability 0.73) and high faithfulness gap suggest the explanation may not reliably represent the model's reasoning.\",\n    \"semantic_plausibility\": \"In credit scoring, duration, installment commitment, and property ownership are plausible approval factors. However, without feature values or thresholds, it's impossible to verify whether the explanation aligns with domain expectations for this specific instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:41:10.525416+00:00"
+}

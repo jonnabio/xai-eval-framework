@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f39ea01e7a58a025",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_19b944710e090900_36873c65d5805a6b.txt",
+  "prompt_version": "36873c65d5805a6b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547943-7SahB3dB8nh9AY6j34QQ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 709,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005184,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00418875,
+        "upstream_inference_cost": 0.005184,
+        "upstream_inference_prompt_cost": 0.00099525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1327,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2444
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only presents numerical attribution weights for dummy-coded features without indicating baseline values or practical steps to change the classification outcome.\",\n    \"audit_usefulness\": \"The feature list provides some utility for auditing model behavior and demographic dependencies (such as sex and education levels), though the low fidelity metric and contradictory one-hot artifacts limit deeper reliance.\",\n    \"clarity\": \"Presenting one-hot encoded feature names paired with small decimal weights without direction labels makes it difficult for a layperson to interpret.\",\n    \"completeness\": \"It enumerates ten local features but lacks underlying input values, making it difficult to fully reconstruct why this false negative occurred.\",\n    \"concision\": \"The text is brief and focused directly on the top weighted features without extraneous filler.\",\n    \"overall_quality\": \"Overall quality is weak due to low fidelity, lack of instance feature values, and confusing one-hot representations such as both male and female indicators receiving negative weights.\",\n    \"semantic_plausibility\": \"Having mutually exclusive categories like both sex_Male and sex_Female or multiple education indicators assigned separate negative impacts is unintuitive and doubtful under domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:25:52.366103+00:00"
+}

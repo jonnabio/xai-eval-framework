@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e04e67f65256e5a0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_fbb0082b6f2ae806_5287964d2c4ede47.txt",
+  "prompt_version": "5287964d2c4ede47",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547590-8ZDo1eNwBvdnVvIFTDyX",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1178,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 728,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005409,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044175,
+        "upstream_inference_cost": 0.005409,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2500
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable advice, listing immutable demographic features (sex, relationship status) alongside dummy encodings without indicating the person's actual feature values.\",\n    \"audit_usefulness\": \"While it surfaces sensitive attributes like sex and marital status that could point to potential bias, the extremely low fidelity (0.50) and high faithfulness gap (0.81) make it unreliable for thorough model auditing.\",\n    \"clarity\": \"It presents raw feature names and small linear coefficients that are confusing for non-technical users, particularly because multiple mutually exclusive dummy variables are shown together.\",\n    \"completeness\": \"The explanation lists several features, but because it fails to specify whether the one-hot encoded categories were active (1) or inactive (0) for this individual, it provides an incomplete picture of the decision.\",\n    \"semantic_plausibility\": \"Several attributions are questionable or confusing; for example, education_Bachelors has a negative contribution, which runs counter to domain expectations unless it represents the absence of the degree.\",\n    \"concision\": \"The explanation is brief and structured as a direct list of weights, though displaying opposing one-hot indicators for the same underlying attributes adds unnecessary noise.\",\n    \"overall_quality\": \"The explanation is weak overall due to ambiguous one-hot feature representations, counterintuitive weights, and poor surrogate fidelity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:19:59.658115+00:00"
+}

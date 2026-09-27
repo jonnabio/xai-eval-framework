@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1fdbb8c60c82fb01",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_afad86e31d6d5cf6_b4ed6b3283d9cbe4.txt",
+  "prompt_version": "b4ed6b3283d9cbe4",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539627-Kjc6rI1VFsuofc74QXRL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020655,
+        "upstream_inference_cost": 0.00286875,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate which features a user could change to affect the prediction. It lists factors but offers no feasible next actions.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows the local feature weights and their directions, but the tiny magnitudes and low fidelity limit insight into the model's true behavior. It is only partially informative for investigating errors or bias.\",\n    \"clarity\": \"The output is short and uses a simple ranked list, which is easy to scan. However, the feature names are technical and the meaning of the small numeric values is not explained for a non-expert.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, but the evidence is thin and many features have very small contributions. Given the low fidelity and sparsity, it does not fully explain why the model predicted class 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It communicates the top factors with little extra wording, though some terms add limited practical value because the contributions are so small.\",\n    \"overall_quality\": \"This is an acceptable but weak local explanation: readable, brief, and directionally informative, but not very actionable or trustworthy. The low fidelity and low stability reduce its usefulness despite the clear ranking format.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult dataset, and the signs are not obviously contradictory. However, the presence of very small mixed-weight race and marital-status terms suggests a noisy explanation rather than a strong semantic account.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:07:11.581773+00:00"
+}

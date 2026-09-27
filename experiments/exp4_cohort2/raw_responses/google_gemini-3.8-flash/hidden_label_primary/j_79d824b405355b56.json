@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_79d824b405355b56",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b352dc7c29edc22c_f9329786c5b642c6.txt",
+  "prompt_version": "f9329786c5b642c6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538879-GucnHiJSaVhaKCudOfzf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1029,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 629,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004806,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00385875,
+        "upstream_inference_cost": 0.004806,
+        "upstream_inference_prompt_cost": 0.00094725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1263,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2292
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists static attributions for demographic and categorical factors without providing actionable guidance or recourse.\",\n    \"audit_usefulness\": \"It exposes the primary feature contributions, allowing an auditor to inspect logistic regression weights and identify reliance on protected attributes like sex and native country.\",\n    \"clarity\": \"The raw key-value format of one-hot encoded feature attributions requires technical knowledge about dummy encoding and SHAP values to interpret correctly.\",\n    \"completeness\": \"While it displays the top ten local drivers, it omits the instance's underlying feature values (indicating whether a dummy was 0 or 1) and the base rate.\",\n    \"concision\": \"The text is very compact, presenting the numerical contributions with minimal overhead or filler.\",\n    \"overall_quality\": \"It is an acceptable technical summary of SHAP attributions for model debugging, though hindered by low actionability and opaque one-hot feature representations.\",\n    \"semantic_plausibility\": \"The directions of influence generally align with known patterns in the Adult dataset, though seeing multiple mutually exclusive categories listed without values can confuse non-experts.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:48.815944+00:00"
+}

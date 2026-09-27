@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d6f5da48a518bd5b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_fbb0082b6f2ae806_27f457a844935c30.txt",
+  "prompt_version": "27f457a844935c30",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541863-71aglJegbIP4AIE4a2Vs",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003635,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0024,
+        "upstream_inference_cost": 0.003635,
+        "upstream_inference_prompt_cost": 0.001235
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1715
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, what actions are feasible, or how to interpret the direction of influence for decision-making.\",\n    \"audit_usefulness\": \"The raw LIME coefficients enable inspection of local feature importance and direction, supporting model behaviour investigation, though the low fidelity (0.499) and high faithfulness gap (0.809) severely limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The format is a simple list of feature-value pairs with numerical weights, which is straightforward to parse but requires domain knowledge to interpret the meaning of positive/negative coefficients and their relative magnitudes.\",\n    \"completeness\": \"The explanation covers ten features but lacks context on the instance's actual feature values, the prediction confidence, and the decision boundary, making it difficult to fully understand why this specific prediction was made.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a minimal format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity, high faithfulness gap, low stability) and lacks actionable or contextual information, limiting its utility despite clear formatting.\",\n    \"semantic_plausibility\": \"The feature importance patterns are plausible for income prediction (marital status, education, occupation, sex are known correlates), but the false negative prediction contradicts the true label, raising questions about model reliability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:44:28.131940+00:00"
+}

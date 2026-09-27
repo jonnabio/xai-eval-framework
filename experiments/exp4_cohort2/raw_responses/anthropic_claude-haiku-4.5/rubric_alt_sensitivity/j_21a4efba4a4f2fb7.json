@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8ce491005c0b4780",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_21a4efba4a4f2fb7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_8ce491005c0b4780_8c6b504b34115b79.txt",
+  "prompt_version": "8c6b504b34115b79",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547614-XMLkPueAImDYfCnnVkHI",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004203,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002925,
+        "upstream_inference_cost": 0.004203,
+        "upstream_inference_prompt_cost": 0.001278
+      },
+      "is_byok": false,
+      "prompt_tokens": 1278,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1863
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8ce491005c0b4780\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken. For a negative diagnosis (class 0), there is no clear direction on what would need to change to alter the outcome or what the patient/clinician should do next.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the decision (worst compactness and worst concave points with weight 1.0), which is useful for auditing. However, the low fidelity (0.584) and high faithfulness gap (0.16) suggest the explanation may not reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but lacks context about what these features represent clinically or why they matter. Someone without domain knowledge would struggle to understand the significance of 'worst compactness' or 'worst concave points' in breast cancer diagnosis.\",\n    \"completeness\": \"The explanation identifies the top anchoring features but does not explain the decision threshold, how these features interact, or why other features received zero weight. For a true negative case, it doesn't clarify what absence of risk factors was observed.\",\n    \"concision\": \"The explanation is compact at 76 tokens, but includes many zero-weighted features that add length without information value. A tighter version listing only non-zero features would be more efficient.\",\n    \"overall_quality\": \"The explanation is serviceable but limited. It identifies key features and the model was correct (TN), but poor fidelity metrics, lack of actionability, and minimal clinical context reduce its utility for real-world use or auditing.\",\n    \"semantic_plausibility\": \"Compactness and concave points are established morphological features in breast cancer diagnosis, so their relevance is plausible. However, the explanation does not clarify whether high or low values drove the negative prediction, making it difficult to assess full domain consistency.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:20:20.660555+00:00"
+}

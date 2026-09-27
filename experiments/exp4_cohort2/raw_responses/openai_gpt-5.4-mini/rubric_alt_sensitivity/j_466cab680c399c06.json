@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_466cab680c399c06",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afc105601fc7fdd6_1c58c1a6f720c20a.txt",
+  "prompt_version": "1c58c1a6f720c20a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543938-1aD4w0fh0xAW9gJf7H96",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 376,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002541,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001692,
+        "upstream_inference_cost": 0.002541,
+        "upstream_inference_prompt_cost": 0.000849
+      },
+      "is_byok": false,
+      "prompt_tokens": 1132,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1508
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists feature names and binary-looking values but gives no clear counterfactual or next step for changing the prediction.\",\n    \"audit_usefulness\": \"The feature set hints at which variables matter locally, but the explanation is too sparse and low-fidelity to support serious auditing or bias analysis.\",\n    \"clarity\": \"The terms are standard for the dataset, but the meaning of the 0/1-style values and the overall anchor output is not easy for a nontechnical reader to interpret.\",\n    \"completeness\": \"It mentions a few local factors, yet it does not explain how they combine to produce the prediction or why this instance became a false positive.\",\n    \"concision\": \"It is fairly short and contains mostly direct feature listings, though some of the repeated zero-valued entries add little useful information.\",\n    \"overall_quality\": \"The explanation is somewhat informative but incomplete and hard to act on, so it is only a weak-to-moderate account of the decision.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are relevant to the domain, but the presentation is odd and the many zero-valued entries make the explanation feel only partially credible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:19:00.906323+00:00"
+}

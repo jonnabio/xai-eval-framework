@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ecdea6668db90d65",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_19b944710e090900_63e11c2cfed0297c.txt",
+  "prompt_version": "63e11c2cfed0297c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538902-P8hLGJDe8oBE3PgT5I2c",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.00287925,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local feature contributions but does not translate them into concrete, feasible recourse steps. A user cannot tell what to change or verify to move the prediction in a desired direction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies which features pushed the model toward the negative class and by how much. However, the low fidelity and stability metrics limit confidence in using it to investigate model behavior deeply.\",\n    \"clarity\": \"The ranking is straightforward and uses simple feature names, so the structure is easy to read. Some terms like fnlwgt and one-hot encoded categories may still be unclear to non-expert readers.\",\n    \"completeness\": \"The explanation covers the top local factors, but it only gives a shallow additive list without a broader decision context. It does not explain the base value, interaction effects, or why the model ended up predicting class 0 in this specific case.\",\n    \"concision\": \"It is compact and contains mostly the needed local information with little wasted wording. The one-line format is efficient, though the raw feature list is somewhat dense for a non-technical reader.\",\n    \"overall_quality\": \"Overall, this is a usable but limited local explanation: readable, compact, and partially informative about the prediction. Its weak stability and modest fidelity reduce trust, and it lacks actionable guidance and deeper decision context.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for the Adult dataset and consistent with a model making a negative prediction. The directions are also reasonable in the sense that lower education-related indicators and occupational factors can plausibly reduce predicted income class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:05.956586+00:00"
+}

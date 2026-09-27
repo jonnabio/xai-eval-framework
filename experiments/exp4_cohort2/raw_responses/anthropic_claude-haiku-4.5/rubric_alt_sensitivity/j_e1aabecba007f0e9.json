@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e1aabecba007f0e9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a3f635ae972c4ad_c1d636799bf06501.txt",
+  "prompt_version": "c1d636799bf06501",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544586-xMGLYneZRrAK1obRVXB6",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 555,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004072,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002775,
+        "upstream_inference_cost": 0.004072,
+        "upstream_inference_prompt_cost": 0.001297
+      },
+      "is_byok": false,
+      "prompt_tokens": 1297,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1852
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person denied income >50k would not know what specific changes (e.g., increase capital gains, change marital status) would alter the decision.\",\n    \"audit_usefulness\": \"The feature weights and their directions are useful for auditing, but the low fidelity (0.70) and moderate faithfulness gap (0.15) raise concerns about whether this explanation truly represents the model's behavior. The false negative case is particularly concerning for bias auditing.\",\n    \"clarity\": \"The format is technical with feature names and numerical weights that require understanding of the dataset schema and LIME methodology. Non-technical stakeholders would struggle to interpret what these coefficients mean.\",\n    \"completeness\": \"The explanation shows top 10 factors but lacks context about the instance itself (e.g., actual feature values), the prediction confidence, or why the model made this specific error (false negative). Missing information about what the model predicted vs. the true label.\",\n    \"concision\": \"The list is compact and avoids redundancy, efficiently presenting the top factors with their weights in a structured format without padding.\",\n    \"overall_quality\": \"This is a weak explanation. While technically sound in format, it fails to provide actionable insights, has moderate fidelity issues, and lacks the context needed to understand why the model incorrectly predicted 0 when the true label is 1. The explanation is more of a feature importance listing than a true explanation of the decision.\",\n    \"semantic_plausibility\": \"The factors align with domain knowledge about income prediction (capital gains, education, marital status, sex, hours worked are known predictors). However, the false negative prediction itself suggests the model may have learned problematic patterns, which the explanation doesn't address.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:29:52.125640+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_7f334518032df664",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9a991f3bd7709007_d2f884dfc1061d12.txt",
+  "prompt_version": "d2f884dfc1061d12",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548212-FxHdY3ceV5SiUmLOkGc6",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1180,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 774,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005406,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004425,
+        "upstream_inference_cost": 0.005406,
+        "upstream_inference_prompt_cost": 0.000981
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2488
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any actionable recourse or indicate what feature modifications would change the diagnosis, and biological cell features are largely non-actionable.\",\n    \"audit_usefulness\": \"The signed SHAP contributions allow an auditor to see which morphological factors pushed the model toward this false-positive classification, though missing raw feature values slightly limits audit depth.\",\n    \"clarity\": \"The list of technical pathological terms accompanied by raw decimal attribution scores is difficult for someone without statistical or medical training to interpret.\",\n    \"completeness\": \"It provides the top 10 local SHAP feature attributions showing both positive and negative drivers, although baseline values and the actual measured patient values are omitted.\",\n    \"concision\": \"The text is compact and directly presents the key features and their attribution scores without extraneous filler.\",\n    \"overall_quality\": \"A serviceable local feature attribution summary that accurately reflects the model's inner weights, but remains purely technical and lacks raw context.\",\n    \"semantic_plausibility\": \"Features such as concave points, area, and perimeter variations are established cytological indicators in breast cancer evaluation, making the identified factors highly plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:30:23.186372+00:00"
+}

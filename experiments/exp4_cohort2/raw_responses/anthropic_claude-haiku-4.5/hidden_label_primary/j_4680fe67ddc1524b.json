@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084580efd1317ebc",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4680fe67ddc1524b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_084580efd1317ebc_9a65606ffee84c62.txt",
+  "prompt_version": "9a65606ffee84c62",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539393-UjizCTRsxumNo33ounzK",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003582,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00236,
+        "upstream_inference_cost": 0.003582,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1694
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_084580efd1317ebc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what threshold values matter, or what specific actions a user could take to alter the outcome.\",\n    \"audit_usefulness\": \"The normalized scores and identification of top factors (education-num and capital-gain) support model inspection, though the low fidelity (0.685) and high faithfulness gap (0.147) raise concerns about explanation reliability for auditing purposes.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is straightforward but lacks context about what the scores mean, their direction of influence, or interpretation guidance for non-experts.\",\n    \"completeness\": \"Only two features have non-zero contributions; the explanation identifies the primary drivers but omits information about feature values, thresholds, or why other features were excluded, limiting local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides basic feature importance information but suffers from low fidelity, missing actionable insights, and insufficient context about feature values and decision boundaries, resulting in limited practical utility.\",\n    \"semantic_plausibility\": \"For income prediction, education level and capital gains are plausible drivers; however, the complete absence of contribution from age and hours-per-week is somewhat counterintuitive in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:03:18.372599+00:00"
+}

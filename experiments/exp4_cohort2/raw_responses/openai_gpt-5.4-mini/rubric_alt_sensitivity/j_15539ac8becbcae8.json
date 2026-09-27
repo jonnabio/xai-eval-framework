@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_15539ac8becbcae8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e9045d4d8fa6e21_d35ef0416e0dc96f.txt",
+  "prompt_version": "d35ef0416e0dc96f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543420-vM4K2WSfN7mpJf12fsBK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027345,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018765,
+        "upstream_inference_cost": 0.0027345,
+        "upstream_inference_prompt_cost": 0.000858
+      },
+      "is_byok": false,
+      "prompt_tokens": 1144,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1561
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It gives almost no actionable counterfactual guidance; only marital-status_Married-civ-spouse is nonzero, but it does not say how changing it would affect the prediction or whether such a change is feasible.\",\n    \"audit_usefulness\": \"The explanation is too sparse and mostly zero-valued features, so it provides very limited insight into the model's decision logic or potential bias/error patterns.\",\n    \"clarity\": \"The output is short and readable, but the feature names and the meaning of the zero-valued local factors are not easy for a non-technical person to interpret.\",\n    \"completeness\": \"It lists only one meaningful factor and omits the rest of the local reasons behind the prediction, so it does not adequately explain this particular decision.\",\n    \"concision\": \"The explanation is compact, but much of the content is uninformative zeros, so the useful information density is low.\",\n    \"overall_quality\": \"This is a weak explanation: it is terse and somewhat readable, but it fails to provide a convincing, complete account of why the model predicted the positive class for this false positive instance.\",\n    \"semantic_plausibility\": \"The main factor, being married, is plausible as a contributor in the Adult dataset, but the explanation is questionable because it reports many zero contributions and does not clearly connect them to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:23.550599+00:00"
+}

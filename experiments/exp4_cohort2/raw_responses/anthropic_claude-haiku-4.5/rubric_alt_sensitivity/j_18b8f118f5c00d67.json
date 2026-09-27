@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_bb289ffc9c031dd6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_18b8f118f5c00d67",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_bb289ffc9c031dd6_b9147d47883bdbcf.txt",
+  "prompt_version": "b9147d47883bdbcf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545659-HNwE4TmOgmKhtpmPnI7q",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004113,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002815,
+        "upstream_inference_cost": 0.004113,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1861
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_bb289ffc9c031dd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to installment_commitment, checking status, or credit_amount would alter the decision.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes are useful for auditing model behavior and detecting bias patterns. However, the low fidelity (0.54) and moderate faithfulness_gap (0.16) suggest the explanation may not accurately represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The explanation uses technical SHAP terminology and feature names that require domain knowledge of credit scoring. Terms like 'checking_status_<0' and 'installment_commitment' are not self-explanatory to non-technical readers.\",\n    \"completeness\": \"The explanation shows top 10 factors but lacks context about their relative importance, the base prediction rate, or why these specific features matter for credit decisions. The high sparsity (0.93) suggests many features are excluded.\",\n    \"concision\": \"The format is compact and lists factors efficiently. Each entry contains feature name and SHAP value with minimal padding, making good use of space.\",\n    \"overall_quality\": \"This is a false positive case where the model predicted 1 (approve) but true label is 0 (deny). The explanation lists contributing factors but with low fidelity (0.54), the explanation may not reliably explain why this error occurred. The explanation is technically sound but limited in practical utility.\",\n    \"semantic_plausibility\": \"The factors listed (installment commitment, checking status, credit amount, age) are plausible for credit decisions. However, the positive contribution of 'checking_status_<0' (negative balance) toward approval seems counterintuitive in credit lending, raising domain consistency concerns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:47:44.915471+00:00"
+}

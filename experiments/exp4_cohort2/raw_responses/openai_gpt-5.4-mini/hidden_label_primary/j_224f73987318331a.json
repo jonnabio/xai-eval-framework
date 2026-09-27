@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_224f73987318331a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_75520768088e5528_50c291bf7c188b5d.txt",
+  "prompt_version": "50c291bf7c188b5d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538682-t3Agf0yK3d4splaaKOmu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.00296025,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into any feasible recourse or decision steps. A user cannot tell what to change or review next.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the strongest local SHAP contributors and their directions, which can help inspect whether the model relies on sensible variables. However, it lacks context about baselines, units, or the broader decision boundary, so the audit value is partial rather than complete.\",\n    \"clarity\": \"The output is short and structured, and the feature names with signed contributions are easy to scan. A non-expert may still struggle to interpret the numeric SHAP values and some encoded categories, but the explanation is generally understandable.\",\n    \"completeness\": \"It covers the top local drivers of the prediction and distinguishes positive from negative contributions, which gives a reasonable local picture. Still, it does not explain the base value, the margin to the decision threshold, or how these factors combine into the final class 0 prediction.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious redundancy. It delivers the key local contributors in a small number of tokens.\",\n    \"overall_quality\": \"This is a decent local explanation: it is concise, readable, and useful for basic inspection of model behavior. Its main weakness is limited interpretability for non-experts and limited support for action or full decision understanding.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, and the directions of influence are broadly consistent with common socioeconomic patterns. Some encoded categories may be hard to interpret in isolation, but the explanation is coherent overall.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:24.837343+00:00"
+}

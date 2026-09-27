@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1aca4fe34100781e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e564a6093e40672d_4aabbecebea11dc1.txt",
+  "prompt_version": "4aabbecebea11dc1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541300-pKs6DSRFp1OA6PDZ2eHG",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003753,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002525,
+        "upstream_inference_cost": 0.003753,
+        "upstream_inference_prompt_cost": 0.001228
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1733
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to interpret them, what thresholds matter, or what actions a user could take to change the prediction. No recourse suggestions are offered.\",\n    \"audit_usefulness\": \"While the feature list and weights support basic model inspection, the low fidelity (0.39) and high faithfulness gap (0.25) severely undermine confidence in the explanation's reliability for auditing model behaviour or detecting bias.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is easy to parse syntactically but lacks narrative context, interpretation, or explanation of what the weights mean or why these features matter.\",\n    \"completeness\": \"The explanation identifies multiple features but does not explain their actual values for this instance, their direction of influence, or how they interact to produce the prediction; critical local context is missing.\",\n    \"concision\": \"The explanation is compact in token count but contains redundant zero-weight features and lacks semantic density; it could be more informative by excluding uninformative features and adding interpretation.\",\n    \"overall_quality\": \"The explanation is a bare feature-weight listing with poor technical performance metrics (low fidelity, high faithfulness gap, low stability), minimal interpretability, and no actionable or audit value for stakeholders.\",\n    \"semantic_plausibility\": \"The features selected (age, capital loss, hours per week, education, occupation, relationship) are plausible predictors in an income classification task, but without instance values or direction of effect, semantic coherence cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:05.740163+00:00"
+}

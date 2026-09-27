@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_46f74196e230a44c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e594d44f0a99f099_4b2241fa8e3960cd.txt",
+  "prompt_version": "4b2241fa8e3960cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539369-SuCcugWpVXgKyxCBPb5l",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003123,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023355,
+        "upstream_inference_cost": 0.003123,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1569
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps; it only lists feature values without indicating what could be changed or reviewed. There is no guidance for a patient, clinician, or auditor on how to use this information.\",\n    \"audit_usefulness\": \"It provides some local feature information, but the output is too terse and oddly formatted to support meaningful inspection of model behavior. The near-binary 1.0000/0.0000 pattern and lack of directionality, thresholds, or comparison to a baseline limit audit value.\",\n    \"clarity\": \"The text is short and the feature names are recognizable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand why these are the top local factors or how they relate to the prediction.\",\n    \"completeness\": \"The explanation names several features, but it does not indicate whether they increased or decreased the probability of class 1, nor how strongly they mattered relative to one another. It lacks the local decision context needed to fully understand why the model predicted positive.\",\n    \"concision\": \"The explanation is compact, but much of the content is repetitive because it lists many features with no informative interpretation. It is concise in length, but not especially efficient in conveying useful information.\",\n    \"overall_quality\": \"This is a partially informative anchors-style output that exposes a few local factors, but it is too sparse and underspecified to be very useful. Overall, it is acceptable as a technical artifact but weak as a human-facing explanation.\",\n    \"semantic_plausibility\": \"For a breast cancer prediction, area error and worst perimeter are plausible factors for a random forest model, so the feature choices fit the domain. However, the 1.0000/0.0000 formatting without explanation makes the semantics of the values unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:53.113725+00:00"
+}

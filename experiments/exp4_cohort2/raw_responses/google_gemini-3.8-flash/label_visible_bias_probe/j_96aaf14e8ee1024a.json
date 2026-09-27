@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_96aaf14e8ee1024a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cd6abd1a9433542b_595e9eb21ccfa3fe.txt",
+  "prompt_version": "595e9eb21ccfa3fe",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543993-EsY5iANKWHqizLfDkq4F",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 519,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00441225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00347625,
+        "upstream_inference_cost": 0.00441225,
+        "upstream_inference_prompt_cost": 0.000936
+      },
+      "is_byok": false,
+      "prompt_tokens": 1248,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2175
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists abstract feature scores rather than concrete counterfactual values, and the top factor (native country) is an immutable demographic attribute.\",\n    \"audit_usefulness\": \"While it alerts an auditor that the model heavily relies on nationality and occupation for counterfactuals, it lacks the original feature values and directional changes needed for a full audit.\",\n    \"clarity\": \"The explanation consists of raw feature keys and decimal values without explaining what the metric represents or how the model reached the outcome.\",\n    \"completeness\": \"It reports importance scores for ten features, but eight of them are zero, providing very limited context about the decision boundary or feature interactions.\",\n    \"concision\": \"Most of the text is occupied by zero-valued attributes that provide no informative signal, making the presentation inefficient.\",\n    \"overall_quality\": \"The explanation offers minimal utility as it reduces counterfactual insights to raw weights dominated by an immutable feature and uninformative zeros.\",\n    \"semantic_plausibility\": \"Highlighting native country (Ireland) as the primary deciding factor for earning over 50k is semantically questionable and reflects potential model bias rather than a plausible causal driver.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:20:02.575230+00:00"
+}

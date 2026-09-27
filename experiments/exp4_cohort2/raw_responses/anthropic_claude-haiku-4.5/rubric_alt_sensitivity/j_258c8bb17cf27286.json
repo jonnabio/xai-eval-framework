@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_258c8bb17cf27286",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_dc2b678dea61424b_22bb6f2ce5a73f7a.txt",
+  "prompt_version": "22bb6f2ce5a73f7a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546052-CtNDQUbuLBoN6GWA61V1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002695,
+        "upstream_inference_cost": 0.003975,
+        "upstream_inference_prompt_cost": 0.00128
+      },
+      "is_byok": false,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1819
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. It does not indicate what values would need to change or in what direction to alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies which features matter (education levels with 1.0 importance), the low fidelity (0.618) and stability (0.013) metrics suggest the explanation may not reliably represent the model's actual decision logic, limiting its utility for bias detection or error investigation.\",\n    \"clarity\": \"The format is technical and raw\u2014a list of feature names with numerical scores. Someone without machine learning background would struggle to interpret what these scores mean or why certain education categories are highlighted.\",\n    \"completeness\": \"The explanation identifies two key features (7th-8th grade and Master's education) but lacks context about their relationship to the prediction, the instance's actual feature values, or why these particular education levels matter for a negative prediction.\",\n    \"concision\": \"The explanation is sparse in absolute terms but includes many zero-valued features that add little information. The core insight (two education categories matter) could be conveyed more efficiently without the padding of irrelevant features.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies some relevant features, the poor technical metrics (low fidelity and stability), lack of context about the instance, and absence of actionable guidance make it of limited practical value for understanding or auditing the model's decision.\",\n    \"semantic_plausibility\": \"Education level is plausibly relevant to income prediction in the adult dataset. However, the explanation doesn't clarify whether these education categories push toward or away from high income, making it difficult to assess whether the result aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:54:18.125570+00:00"
+}

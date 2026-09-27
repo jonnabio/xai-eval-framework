@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c0d17789a83581a2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a138a3019aad47d9_06fcadf2ad111144.txt",
+  "prompt_version": "06fcadf2ad111144",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542311-KgGCHXgABo2H3kbGFhQC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00302925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00302925,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1549
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing a single influential feature. It does not say what changes would alter the prediction or whether any feasible action exists.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it identifies hours-per-week as the only non-zero local factor, but gives no directionality, counterfactual comparison, or model reasoning beyond sparse feature weights. The near-all-zero attribution pattern also limits diagnostic value.\",\n    \"clarity\": \"The output is easy to read in a mechanical sense, but it is not clearly interpretable for a non-expert because the numbers lack explanation and most features are shown as zero without context. The meaning of the score scale is also not stated.\",\n    \"completeness\": \"It is incomplete for understanding this false negative: it omits the main reasons the model predicted class 0, gives no evidence for the positive class, and does not explain why the true label was missed. Only one feature appears to matter locally, with no surrounding context.\",\n    \"concision\": \"The explanation is short and compact, but some of that brevity comes from extreme sparsity rather than efficient communication. It conveys little useful information per token because most listed factors are just zeroed out.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is sparse, minimally informative, and not very helpful for understanding or challenging the model's false negative. It has limited interpretability value despite being concise.\",\n    \"semantic_plausibility\": \"A dominant role for hours-per-week is plausible in the Adult income domain, but the explanation is not fully convincing because the many exact zero attributions are hard to interpret. The lack of directionality and context makes the semantics feel only moderately plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:53.426122+00:00"
+}

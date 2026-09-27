@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0a8f165d668d9bc",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_87c88c8cdecb9944",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a0a8f165d668d9bc_6b160f920a2df78e.txt",
+  "prompt_version": "6b160f920a2df78e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543552-OsLWE5IEnt1GHNsDdw37",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003577,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00235,
+        "upstream_inference_cost": 0.003577,
+        "upstream_inference_prompt_cost": 0.001227
+      },
+      "is_byok": false,
+      "prompt_tokens": 1227,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1697
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a0a8f165d668d9bc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions a clinician or patient could take based on the prediction or which features could be modified to change the outcome.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 vs 0.0) clearly identify which features anchor the decision, supporting model behavior inspection and potential bias investigation in radius and texture measurements.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but lacks context about what these measurements represent or why they matter, requiring domain knowledge to interpret.\",\n    \"completeness\": \"Only two features are identified as influential (worst radius and worst texture both at 1.0), while eight others are shown as 0.0; this sparse representation may omit important decision context despite high sparsity.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a tabular format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides technically sound feature importance rankings but lacks interpretability, actionability, and domain grounding needed for clinical decision support or meaningful audit trails.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst texture are established prognostic features; however, the binary 1.0/0.0 weighting scheme is overly simplistic and may not reflect the nuanced relationship between these measurements and malignancy risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:37.783910+00:00"
+}

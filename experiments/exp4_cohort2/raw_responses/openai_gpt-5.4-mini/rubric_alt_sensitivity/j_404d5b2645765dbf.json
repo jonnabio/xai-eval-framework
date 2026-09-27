@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_404d5b2645765dbf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_07f7eab6526a79eb_9c33bcafcff2a0c3.txt",
+  "prompt_version": "9c33bcafcff2a0c3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543059-lKWepWU9jcKjTIAEJAhI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00259875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017415,
+        "upstream_inference_cost": 0.00259875,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors and their weights; it does not indicate what changes might alter the prediction or how a reviewer could intervene.\",\n    \"audit_usefulness\": \"The ranked feature contributions are useful for a basic sanity check, but the explanation is sparse and the low fidelity/stability metrics limit its value for deeper bias or error analysis.\",\n    \"clarity\": \"The output is readable as a simple list of features with positive or negative influence, though terms like one-hot encoded categories and local weights still require some technical background.\",\n    \"completeness\": \"It provides several top contributing features, but not enough context about the full decision boundary, feature interactions, or why the model produced a false positive for this person.\",\n    \"concision\": \"The explanation is compact and mostly non-redundant, with each token carrying a distinct piece of information.\",\n    \"overall_quality\": \"A reasonable but limited LIME explanation: it identifies some likely drivers of the prediction, yet the low faithfulness and stability suggest it is only moderately trustworthy and not very complete.\",\n    \"semantic_plausibility\": \"The listed factors make general sense for Adult-income style data, and the directions of influence are broadly believable for a false positive classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:21.582919+00:00"
+}

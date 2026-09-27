@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a386f55997e18d7b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_445412523328930a_7fd3100b410bf8d1.txt",
+  "prompt_version": "7fd3100b410bf8d1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540221-kq23xeDldEvoqaXYlVA1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.00298875,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1550
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists conditions, but it does not translate them into concrete recourse or next steps a user could take. It gives no indication of which factors to change or by how much to affect the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies several local feature conditions associated with the decision. However, it lacks directionality, threshold logic, and any indication of whether these factors support or oppose the prediction.\",\n    \"clarity\": \"The wording is readable, but the output is confusing because it repeats many checking_status and credit_history categories with values of 1.0000 without explaining what those numbers mean. A non-expert would struggle to interpret the list as an explanation.\",\n    \"completeness\": \"It does not provide a coherent local decision story, only a set of feature names that appear as anchors. Key context such as how these factors combine, their relative importance, or whether they explain the false negative prediction is missing.\",\n    \"concision\": \"The explanation is short, but it is inefficiently compressed because it repeats multiple mutually exclusive categories and offers little usable information. It is not redundant in a narrative sense, but it wastes space on uninformative output.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for understanding a single prediction: it is sparse, repetitive, and technically opaque. It offers limited insight into why the model predicted class 0, despite being somewhat concise.\",\n    \"semantic_plausibility\": \"The listed features are plausible for German credit data, and it is reasonable that they matter in a credit model. However, the presentation of many category indicators all at 1.0000 is semantically odd and not naturally interpretable as a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:05.148913+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3fe0b1ea4600b568",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_44c1e011120b2dd5_16ecb79463d202cd.txt",
+  "prompt_version": "16ecb79463d202cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538737-BBae2i8NZYZBLsrzKRGh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 513,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023085,
+        "upstream_inference_cost": 0.0030975,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into any concrete recourse or next step. A user cannot tell what changes would be feasible or meaningful from this output alone.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the main local drivers and their directions, which helps inspect whether the random forest relied on plausible breast-cancer indicators. However, the lack of class-probability context and the absence of feature values limit deeper error analysis.\",\n    \"clarity\": \"The format is straightforward and the SHAP values are easy to scan, even for a non-expert. Some readers may still need to know that negative and positive values indicate movement away from or toward the predicted class, but the overall presentation is clear.\",\n    \"completeness\": \"The explanation lists the top contributing features, but it does not include the instance's actual feature values, the base value, or a class-specific interpretation. Because the case is a false negative, the absence of why the model missed the positive class makes the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and focuses on the top local factors without unnecessary prose. It conveys a reasonable amount of information per word, although the raw numeric list is somewhat terse for interpretability.\",\n    \"overall_quality\": \"This is a solid local SHAP summary with good technical utility, but it stops short of fully explaining the prediction in human terms. It is informative enough for inspection, yet not rich enough to support strong understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed drivers such as worst radius, perimeter, area, concavity, and concave points are highly plausible for a breast cancer model and align with known diagnostic patterns. The mix of positive and negative contributions is also coherent with a complex local decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:19.951576+00:00"
+}

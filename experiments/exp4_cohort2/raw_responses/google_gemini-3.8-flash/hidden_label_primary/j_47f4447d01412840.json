@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_47f4447d01412840",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_31247e881a13bce1_9cd20f297f2e87f0.txt",
+  "prompt_version": "9cd20f297f2e87f0",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540916-r1gEMTqx2KqLyLf88h1k",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1017,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00622575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00528375,
+        "upstream_inference_cost": 0.00622575,
+        "upstream_inference_prompt_cost": 0.000942
+      },
+      "is_byok": false,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2665
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation merely lists raw attribution weights without providing feature values or actionable guidance on how to alter the prediction.\",\n    \"audit_usefulness\": \"While it reveals top model weights for local features, the lack of underlying feature values and context regarding whether binary dummy indicators were present or absent limits auditing depth.\",\n    \"clarity\": \"The list of raw one-hot encoded feature names paired with decimal coefficients requires technical familiarity to interpret correctly.\",\n    \"completeness\": \"The explanation lists several top drivers but omits baseline values, prediction probabilities, and the actual values of the instance's attributes.\",\n    \"concision\": \"The presentation is compact and delivers feature attribution weights without filler or unnecessary verbosity.\",\n    \"overall_quality\": \"Overall quality is below average due to the raw output format, lack of feature values, and minimal utility for end users, despite showing basic directional attribution.\",\n    \"semantic_plausibility\": \"The feature directions generally align with standard Adult dataset intuition, such as age and marriage positively associating with higher income, though simultaneous dummy categories can be confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:28:47.691078+00:00"
+}

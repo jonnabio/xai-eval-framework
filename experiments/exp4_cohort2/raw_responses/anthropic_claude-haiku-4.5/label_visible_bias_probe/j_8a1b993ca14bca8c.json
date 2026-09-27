@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8a1b993ca14bca8c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6bb167d1c81d8a5_83026c3e5b9ce4c5.txt",
+  "prompt_version": "83026c3e5b9ce4c5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542964-T7MpgjWeoHOOoUi3byIc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003671,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002455,
+        "upstream_inference_cost": 0.003671,
+        "upstream_inference_prompt_cost": 0.001216
+      },
+      "is_byok": false,
+      "prompt_tokens": 1216,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1707
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, challenge the prediction, or take corrective steps; a clinician or patient cannot act on raw SHAP values without additional context.\",\n    \"audit_usefulness\": \"The feature rankings and directional contributions (positive/negative) support model inspection and can help identify which features drove the false positive, enabling bias investigation and error analysis.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and SHAP values, which is clear in structure but requires domain knowledge to interpret the meaning of concavity, texture, and radius metrics in a medical context.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main local drivers; however, the explanation lacks the base prediction value, confidence score, and feature value context needed for full decision understanding.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and SHAP values) in a dense format without padding.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but falls short of being actionable or fully interpretable for non-experts; it serves model inspection well but provides limited clinical or user-facing value.\",\n    \"semantic_plausibility\": \"The identified features (concave points, radius, texture, area) are medically plausible predictors of breast cancer malignancy, and their relative contributions align with domain expectations for cancer classification models.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:50.000653+00:00"
+}

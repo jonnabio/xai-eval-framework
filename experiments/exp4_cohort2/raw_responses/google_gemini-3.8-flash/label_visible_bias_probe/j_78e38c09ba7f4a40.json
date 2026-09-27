@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_78e38c09ba7f4a40",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_214506591db1e703_5be13afeeb94471d.txt",
+  "prompt_version": "5be13afeeb94471d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545350-Pf5roVTLUcLwkIP26JMA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1001,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 601,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046965,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00375375,
+        "upstream_inference_cost": 0.0046965,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2258
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists numeric importance scores without counterfactual feature values or direction of change, offering no actionable recourse.\",\n    \"audit_usefulness\": \"It reveals that marital status features were active in counterfactual generation, but provides insufficient detail to audit why this false positive occurred.\",\n    \"clarity\": \"The list of raw feature scores is syntactically tidy, but the meaning of the decimal values is unexplained for a non-expert reader.\",\n    \"completeness\": \"Only two one-hot features show non-zero scores while core drivers like education, capital gain, and age are zeroed out, leaving the local decision context incomplete.\",\n    \"concision\": \"Most of the explanation consists of uninformative zero-valued features that pad the output without adding insight.\",\n    \"overall_quality\": \"Reducing counterfactuals to a sparse list dominated by zeros eliminates the primary benefits of DiCE, resulting in a very weak explanation.\",\n    \"semantic_plausibility\": \"While marital status is known to be influential in the Adult dataset, attributing the entire prediction shift to marital sub-categories alone lacks plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:42:37.687592+00:00"
+}

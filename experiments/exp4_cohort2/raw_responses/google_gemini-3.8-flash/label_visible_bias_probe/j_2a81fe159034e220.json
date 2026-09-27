@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2a81fe159034e220",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07f7eab6526a79eb_44c8f4ec8e915325.txt",
+  "prompt_version": "44c8f4ec8e915325",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542556-uQk8kfepcu6UjM222BIA",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 625,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00474225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0038025,
+        "upstream_inference_cost": 0.00474225,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2267
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local attribution coefficients without counterfactual guidance or actionable steps to change the outcome.\",\n    \"audit_usefulness\": \"It provides valuable visibility into the MLP's local reliance on demographic and work features, though it omits specific feature values for continuous variables like hours-per-week.\",\n    \"clarity\": \"The output is presented as raw one-hot encoded feature names and numeric coefficients, which can be difficult for a non-expert to interpret.\",\n    \"completeness\": \"The top 10 local factors cover the main positive and negative contributors, but missing baseline values and exact input feature states limit complete context.\",\n    \"concision\": \"The list is compact and directly conveys the most influential features without unnecessary filler text.\",\n    \"overall_quality\": \"This is an acceptable technical attribution summary that adequately highlights key drivers but lacks layman clarity and actionable recourse.\",\n    \"semantic_plausibility\": \"The direction of influence matches known Adult dataset dynamics, where marriage and higher work hours favor higher income while lower education and female sex pull downward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:56:02.816755+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_486e0fffb37c0c36",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28188c86ac4bdfad_69a35db188b951f9.txt",
+  "prompt_version": "69a35db188b951f9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541519-MsWcLAzSFEcH1miEacDd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.00287625,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies local factors but does not translate them into concrete recourse or next steps. It tells the user which features pushed the prediction down or up, but not what specific change would alter the outcome.\",\n    \"audit_usefulness\": \"The feature contributions are useful for inspecting the model\u2019s local behavior and checking whether the prediction aligns with known patterns. However, the short list and moderate fidelity limit its value for deeper bias or error analysis.\",\n    \"clarity\": \"The output is concise and easy to scan because it lists features with signed weights. A non-expert may still need some knowledge of one-hot encoded Adult dataset features, but the structure itself is understandable.\",\n    \"completeness\": \"It covers the main local drivers behind the prediction, including workclass, relationship, occupation, sex, and education. Still, it does not provide baseline context, confidence, or a fuller narrative of why the model predicted class 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with each term contributing useful information. It is efficient in word count, though the one-hot feature naming could be slightly streamlined for readability.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: it is short, readable, and gives directional feature effects for the prediction. Its main weaknesses are limited actionability, modest fidelity, and dependence on encoded feature names.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult income domain, and the sign pattern is broadly consistent with a low-income prediction. Nothing in the explanation contradicts the instance context or general expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:41.812591+00:00"
+}

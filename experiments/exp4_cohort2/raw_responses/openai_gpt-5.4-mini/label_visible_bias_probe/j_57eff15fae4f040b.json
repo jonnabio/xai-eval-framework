@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_57eff15fae4f040b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_3adf691ba6671f41.txt",
+  "prompt_version": "3adf691ba6671f41",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542105-vz86QdronnfSYEdI7TxI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0032175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0024165,
+        "upstream_inference_cost": 0.0032175,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1605
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse or decision-review steps; it only lists feature contributions with no guidance on what could be changed or checked next. For a user, this offers little practical action beyond noticing which attributes were associated with the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies several local feature influences and their directions, but the very small weights and low faithfulness/stability limit confidence in what the model actually used. It is enough to inspect a possible pattern, but not to robustly diagnose model behavior.\",\n    \"clarity\": \"The output is short and structured, so a technical reader can follow it easily, but a non-expert may not understand what the signed weights mean or why these features matter. The mixed binary one-hot features also make the explanation harder to interpret without domain familiarity.\",\n    \"completeness\": \"It covers some local drivers for this specific prediction, including education, occupation, race, sex, marital status, relationship, and hours worked. However, the weights are tiny, the explanation omits a baseline or prediction probability, and it does not provide a coherent overall decision narrative.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary text while still listing the top local factors. It is reasonably information-dense, though the low-magnitude coefficients reduce the amount of useful content conveyed per token.\",\n    \"overall_quality\": \"Overall, this is a usable but weak local explanation: it is concise and somewhat interpretable, yet it lacks actionable guidance, offers limited auditing confidence, and does not strongly support understanding the model's decision. The low fidelity and stability further reduce its practical value.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income model, and the direction of some effects is reasonable in context, especially for a negative prediction. Still, the very small and mixed-sign contributions make the explanation feel only moderately convincing rather than strongly consistent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:28.234190+00:00"
+}

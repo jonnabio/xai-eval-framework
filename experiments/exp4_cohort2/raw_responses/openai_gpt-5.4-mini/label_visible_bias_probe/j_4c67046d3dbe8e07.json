@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4c67046d3dbe8e07",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ae5f3b200cc3bef3_cccf4039e355408d.txt",
+  "prompt_version": "cccf4039e355408d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542425-692vSXWtkINtargONj45",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.002895,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps beyond listing features. It does not tell a user what could change to affect the prediction, nor how to verify or contest it.\",\n    \"audit_usefulness\": \"It gives a very limited view of local factors and does not explain directionality, thresholds, or the model's decision logic. The near-zero sparsity and zero stability also make it weak for systematic auditing.\",\n    \"clarity\": \"The output is short and readable, but the meaning of the anchor scores is not explained for a non-expert. A reader can identify some features, yet cannot easily interpret what the 1.0000 and 0.0000 values imply.\",\n    \"completeness\": \"Only two features appear to matter, and even those are not contextualized with the instance values or their effect on the negative prediction. This leaves out enough local decision detail that the specific prediction is only partially understood.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. However, much of the listed information is uninformative zeros, so the useful content per word is only moderate.\",\n    \"overall_quality\": \"As a local explanation, it is somewhat readable but too thin to support understanding, recourse, or auditing well. Its usefulness is limited by the lack of interpretation, context, and stable, informative feature attribution.\",\n    \"semantic_plausibility\": \"The named features are plausible for an Adult-income model, and age/native-country as anchors can make sense in this domain. Still, the presentation of many irrelevant zero-valued features without explanation reduces the overall semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:47.746523+00:00"
+}

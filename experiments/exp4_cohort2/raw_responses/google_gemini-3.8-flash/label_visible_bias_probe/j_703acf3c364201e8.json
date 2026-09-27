@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_703acf3c364201e8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_445412523328930a_774a6acc2fb3e57a.txt",
+  "prompt_version": "774a6acc2fb3e57a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545849-lt9SUDzRyQfnlKv68bvW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1197,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 797,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005445,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00448875,
+        "upstream_inference_cost": 0.005445,
+        "upstream_inference_prompt_cost": 0.00095625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2472
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse because it fails to state actual feature values, thresholds, or directions required to change the outcome.\",\n    \"audit_usefulness\": \"Listing all mutually exclusive one-hot categories alongside numeric features with uniform 1.0000 values provides negligible insight into the true decision boundaries of the random forest.\",\n    \"clarity\": \"The output is merely an unformatted list of raw feature names with identical 1.0000 values, which will confuse non-expert readers.\",\n    \"completeness\": \"The explanation lacks rule predicates, thresholds, and directional effects, rendering the local decision context entirely incomplete.\",\n    \"concision\": \"Including every one-hot encoded level of the same categorical variables with identical dummy weights creates heavy redundancy.\",\n    \"overall_quality\": \"This is a degenerate anchor explanation that outputs uniform 1.0000 weights across conflicting dummy variables without meaningful decision rules.\",\n    \"semantic_plausibility\": \"While credit history and checking status are relevant to credit scoring, attributing identical positive anchor status to mutually exclusive categories is semantically contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:59.243004+00:00"
+}

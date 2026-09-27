@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_946046314f8bbeac",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_70f1fb89c6075a2b_7a5e484ae2dddb89.txt",
+  "prompt_version": "7a5e484ae2dddb89",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542483-QqwbGdhwCBKuw1jFD7p7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002061,
+        "upstream_inference_cost": 0.00285675,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide specific recourse or next steps beyond listing a few feature values. It is not framed as actionable advice, so a user cannot easily tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"It gives a minimal view of which local factors were considered, but the near-zero values and lack of directional context make it hard to inspect model behavior meaningfully. For auditing, this offers limited insight into why the MLP predicted the positive class.\",\n    \"clarity\": \"The wording is short and readable, but the notation is terse and somewhat opaque for non-experts. Terms like feature names and numeric weights are presented without explanation of their meaning.\",\n    \"completeness\": \"Only two education-related features are non-zero, while the rest are zeroed out, so the explanation does not adequately describe the local decision context. It misses how these factors combine with the instance's broader characteristics to produce the prediction.\",\n    \"concision\": \"The output is compact and avoids unnecessary verbosity. However, this concision comes at the cost of useful explanatory detail, so it is only moderately effective.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and technically simple, but it provides little substantive understanding of the prediction. It is only marginally useful for a user or auditor.\",\n    \"semantic_plausibility\": \"The emphasis on education-related factors is plausible for the Adult dataset, but the explanation is semantically thin because most listed factors have zero contribution. That makes the local story feel incomplete rather than strongly contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:54:46.135376+00:00"
+}

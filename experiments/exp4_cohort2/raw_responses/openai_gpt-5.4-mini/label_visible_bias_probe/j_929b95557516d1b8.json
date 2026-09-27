@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3d27b1d2bd43df77",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_929b95557516d1b8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3d27b1d2bd43df77_cfe02c3baefdd6ef.txt",
+  "prompt_version": "cfe02c3baefdd6ef",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542290-Kcr8nmF4BmltpQuHGkz2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031245,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023355,
+        "upstream_inference_cost": 0.0031245,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1571
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3d27b1d2bd43df77\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features but gives no recourse, thresholds, or concrete next steps a user could take to change the outcome. It does not indicate which factors would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows which local features the anchor method considered important, but the 0/1-style values are not interpretable as effect directions or magnitudes. The very low stability and modest fidelity also limit trust for investigating model behavior.\",\n    \"clarity\": \"The output is syntactically simple and feature names are readable, but the meaning of the 1.0000 and 0.0000 scores is not explained to a non-expert. Without context, a reader would not know whether these are rules, probabilities, or importances.\",\n    \"completeness\": \"It names a few local factors, but it omits the actual supporting rule, the decision boundary, and how these features jointly led to the false positive prediction. It also provides no class-specific explanation beyond a feature list.\",\n    \"concision\": \"The explanation is short and avoids long prose, but much of the content is just a ranked feature dump with repeated zeros. It is compact, though not especially informative per word.\",\n    \"overall_quality\": \"As an explanation for a false positive on Adult, it provides only a thin local summary and lacks interpretability, actionability, and reliable audit value. It is usable as a rough anchor summary, but overall it is weak.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult income-style predictions, especially age, hours per week, workclass, occupation, and relationship. However, assigning all of these top factors a value of 1.0000 and several unrelated features 0.0000 without explanation is only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:33.300518+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_25459ab544fc650c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3c34585b1d65d81e_29d70d5a1119e51c.txt",
+  "prompt_version": "29d70d5a1119e51c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541238-Xdb5mHUgwWb3Fwd1qgkK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00308625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002286,
+        "upstream_inference_cost": 0.00308625,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1575
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse steps or decision guidance. A user can infer that changing some attributes is impossible or undesirable, so actionable value is limited.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the local drivers of the logistic regression prediction and their directions. However, it lacks feature values, baseline comparisons, and any subgroup or counterfactual context needed for deeper investigation.\",\n    \"clarity\": \"The format is compact and the direction of each contribution is understandable, but the meaning of one-hot encoded features like marital-status_Married-civ-spouse may not be clear to a non-expert. The list is readable, though still somewhat technical.\",\n    \"completeness\": \"The explanation covers the main local factors behind the prediction, especially capital gain and marital status, but it does not provide the underlying feature values or the model's full decision context. It also omits the overall magnitude of the prediction in a way that would help fully explain why the class is 1.\",\n    \"concision\": \"The explanation is fairly compact and lists only the top local contributors without unnecessary narrative. It is efficient, although some redundancy appears in repeated related marital-status and relationship indicators.\",\n    \"overall_quality\": \"Overall, this is a solid local explanation for a tabular model: it is readable, concise, and gives a reasonable picture of the main drivers. Its main weaknesses are limited interpretability for non-experts and weak support for recourse or deeper audit analysis.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult income dataset and align with common patterns such as capital gain and marital status influencing income predictions. The signs of the contributions are coherent with a positive prediction for the high-income class.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:01.403764+00:00"
+}

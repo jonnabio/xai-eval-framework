@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e59cbf4496353118",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f567ef56c34dada8_0cbc2259b48f8fb2.txt",
+  "prompt_version": "0cbc2259b48f8fb2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538654-q4hDPSXwsHGhv4FVVg5N",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.00293625,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, only a list of anchor conditions with binary weights. A user cannot tell what to change to obtain a different outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a few local conditions the anchor rule relies on, but the all-ones/zeros output and low fidelity limit diagnostic value. It does not clearly support deeper inspection of why the random forest predicted a false positive.\",\n    \"clarity\": \"The output is mechanically readable, but the format is terse and the meaning of the 1.0000/0.0000 weights is not explained in plain language. A non-expert would likely not understand how the listed factors relate to the prediction.\",\n    \"completeness\": \"It names several local factors, but it omits directionality, interactions, and any narrative linking them to the positive prediction. Given the low fidelity, it does not fully capture the specific decision context.\",\n    \"concision\": \"The explanation is compact and not overly verbose, with a short list of factors. However, it sacrifices interpretability by providing raw anchor values without explanatory context.\",\n    \"overall_quality\": \"This is a moderately useful anchor-style summary that is concise and partly informative, but it is weak as an explanation because it lacks actionable guidance and deeper decision detail. Its low faithfulness/fidelity also reduces confidence in the local explanation quality.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for German credit data and reasonably consistent with a credit-risk model explanation. Nothing is obviously contradictory, though the all-or-nothing weights make the presentation feel somewhat artificial.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:57.475632+00:00"
+}

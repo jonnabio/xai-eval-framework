@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_51ae2814c64a662a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_70f1fb89c6075a2b_a4f67f22c7fccecf.txt",
+  "prompt_version": "a4f67f22c7fccecf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540173-T0fHsgJwLr9ihxECPLRh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029745,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.0029745,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists features with numeric values. A user cannot tell what to change or verify to influence the model outcome.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it names a few local factors, but the values are mostly zeros and there is no indication of directionality or counterfactual change. The very low fidelity also limits trust in what the explanation says about the model.\",\n    \"clarity\": \"The output is short and easy to read, but the meaning of the numbers is not explained and the feature list is not translated into plain language. A non-expert would likely not understand why these are the top local factors.\",\n    \"completeness\": \"It gives only a sparse list of features and does not explain how they combine to produce the positive prediction. Key local context, such as whether these factors push the prediction up or down, is missing.\",\n    \"concision\": \"The explanation is compact and contains little redundant text. However, it is almost too terse to be useful because it sacrifices interpretive content for brevity.\",\n    \"overall_quality\": \"Overall, this is a low-quality explanation: it is brief and somewhat readable, but it lacks directionality, actionable guidance, and sufficient local reasoning. The poor fidelity and sparse feature presentation make it weak for both user understanding and audit purposes.\",\n    \"semantic_plausibility\": \"The named education categories are plausible contributors in the Adult dataset, and the record is internally coherent. However, the many zero-valued factors and lack of interpretive context make the explanation only moderately plausible as a meaningful account of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:18.214777+00:00"
+}

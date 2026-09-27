@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b6e3b4b1617f167d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e354d1466bc2ce9c_dd46e90abeb74105.txt",
+  "prompt_version": "dd46e90abeb74105",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549050-YbBN0I2TVEAiFL9YblNW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 804,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00545175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00445125,
+        "upstream_inference_cost": 0.00545175,
+        "upstream_inference_prompt_cost": 0.0010005
+      },
+      "is_byok": false,
+      "prompt_tokens": 1334,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2521
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static feature coefficients without indicating actionable paths, thresholds, or concrete steps to alter the classification.\",\n    \"audit_usefulness\": \"It provides useful visibility into the model's reliance on sensitive attributes like sex and marital status, which is valuable for fairness auditing and diagnosing this false positive.\",\n    \"clarity\": \"The raw one-hot encoded variable names and technical local surrogate coefficients are difficult for a non-technical audience to interpret.\",\n    \"completeness\": \"Ten local features and their directional contributions are provided, but the actual feature values for the instance are omitted.\",\n    \"concision\": \"The text is concise and focused directly on the top feature weights without unnecessary filler.\",\n    \"overall_quality\": \"A serviceable local surrogate attribution that identifies key drivers and potential bias points, but lacks instance feature values and lay accessibility.\",\n    \"semantic_plausibility\": \"Factors like executive managerial roles, higher education, and capital gains align with high income, though the high positive weight for separated marital status is somewhat counterintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:44:19.899122+00:00"
+}

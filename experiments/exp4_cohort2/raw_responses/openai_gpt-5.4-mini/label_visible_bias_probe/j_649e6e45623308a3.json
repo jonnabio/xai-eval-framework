@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_649e6e45623308a3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6075392942e36b2_337895e4acf1369b.txt",
+  "prompt_version": "337895e4acf1369b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541798-t6EHLtRohIv1Kj6OeoEJ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.0029175,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or decision-review steps, only a list of anchor conditions. A user cannot tell what specific changes would help move the prediction.\",\n    \"audit_usefulness\": \"It identifies several local factors associated with the prediction, which is useful for inspection, but it lacks directionality and effect size beyond binary anchor presence. The low fidelity and large faithfulness gap also limit trust for auditing.\",\n    \"clarity\": \"The output is formatted as a short list of feature names, but the repeated 1.0000 values and unexplained anchor notation are not easy for a non-expert to interpret. It is understandable only with prior knowledge of Anchors explanations.\",\n    \"completeness\": \"The explanation lists some contributing conditions, but it does not explain why these factors support the negative class or how strongly they matter. Key local context such as feature values, thresholds, and the model\u2019s confidence is missing.\",\n    \"concision\": \"It is fairly compact for the amount of information provided, though some redundancy remains in the repeated scoring values. Overall it is short and mostly free of unnecessary text.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it names several relevant conditions and is stable, yet it is hard to interpret, not actionable, and only moderately faithful. The explanation is therefore acceptable but not strong.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk and fit a negative prediction, especially checking status, savings, property, and credit amount-related variables. However, the all-ones scoring pattern and inclusion of unrelated-sounding items reduce confidence in the semantic interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:21.106104+00:00"
+}

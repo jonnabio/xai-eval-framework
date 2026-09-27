@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_890e819ec1a4ff35",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afad86e31d6d5cf6_d07054ab27eb63ce.txt",
+  "prompt_version": "d07054ab27eb63ce",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544419-WrYmdM6I6MJ1zdQS50FR",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1133,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 681,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00518775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00424875,
+        "upstream_inference_cost": 0.00518775,
+        "upstream_inference_prompt_cost": 0.000939
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2385
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers purely descriptive local weights without actionable guidance or counterfactual recommendations for the individual.\",\n    \"audit_usefulness\": \"It highlights key model weights and exposes the reliance on protected demographic attributes like race and sex, which is moderately useful for bias auditing.\",\n    \"clarity\": \"The list of raw one-hot encoded feature names paired with signed numeric weights is understandable to technical practitioners but unintuitive for a layperson.\",\n    \"completeness\": \"While ten top drivers and weights are listed, the explanation omits the actual feature values of the instance, leaving the context incomplete.\",\n    \"concision\": \"The summary is compact and directly presents the top contributors without extraneous wording.\",\n    \"overall_quality\": \"The explanation provides a standard, compact feature attribution list that aids basic technical inspection but lacks user recourse and instance feature values.\",\n    \"semantic_plausibility\": \"The negative associations with unmarried status, clerical occupation, and female gender generally match known demographic patterns in the Adult dataset.\",\n    \"scores\": {\n      \"actionability\": 1,\n      \"audit_usefulness\": 3,\n      \"clarity\": 3,\n      \"completeness\": 2,\n      \"concision\": 4,\n      \"overall_quality\": 2,\n      \"semantic_plausibility\": 3\n    }\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:27:09.024946+00:00"
+}

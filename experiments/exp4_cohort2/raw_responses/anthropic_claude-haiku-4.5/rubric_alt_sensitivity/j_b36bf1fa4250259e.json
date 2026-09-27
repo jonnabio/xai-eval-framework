@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b36bf1fa4250259e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_20242fe53fbadae4_92d0d3b40f2c20a4.txt",
+  "prompt_version": "92d0d3b40f2c20a4",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544683-ce0y8SUOcEepoLEQzNfG",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003919,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00263,
+        "upstream_inference_cost": 0.003919,
+        "upstream_inference_prompt_cost": 0.001289
+      },
+      "is_byok": false,
+      "prompt_tokens": 1289,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1815
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to duration, credit amount, or employment status would flip the prediction.\",\n    \"audit_usefulness\": \"The low fidelity (0.59) and high faithfulness gap (0.24) suggest the explanation may not reliably represent model behavior. The feature list is useful for inspection, but technical metrics indicate limited trustworthiness for auditing purposes.\",\n    \"clarity\": \"The format is technical and requires understanding of feature names, normalized weights, and anchor methodology. Non-technical stakeholders would struggle to interpret what these weights mean or why they matter.\",\n    \"completeness\": \"Nine features are listed with weights, but the explanation lacks context about their relative importance, direction of influence, or interaction effects. The model predicted 0 (deny credit) but the explanation doesn't explain why these features led to rejection.\",\n    \"concision\": \"The explanation is compact but dense with feature-weight pairs. While not padded, it could be more efficient by grouping related features or highlighting only the most critical anchors.\",\n    \"overall_quality\": \"This is a false negative case where the model incorrectly predicted 0 when the true label is 1. The explanation identifies relevant features but with low fidelity and high faithfulness gap, limiting its reliability. The technical metrics and lack of actionable insight reduce overall utility.\",\n    \"semantic_plausibility\": \"The features (duration, credit amount, employment, savings status) are plausible credit risk factors. However, the explanation doesn't clarify whether high or low values drove the denial decision, making it difficult to assess domain consistency.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:31:29.181228+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2341ffff05b0963d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e5e8a4d0292d4cca_28a37af127197bf6.txt",
+  "prompt_version": "28a37af127197bf6",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539799-ZiqxvQb2csLVCL93xoQV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002949,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.002949,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local factors but gives no concrete recourse or next steps for the applicant. A user cannot infer what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes which features the anchor explanation relies on, but it lacks directionality and does not explain how these factors support the negative prediction. That limits its value for diagnosing model behavior or fairness issues.\",\n    \"clarity\": \"The wording is simple and the feature names are readable, but the output is more like a raw feature dump than an explanation. A non-expert would not understand why these factors matter or what the 1.0000 and 0.0000 values mean.\",\n    \"completeness\": \"It names several local features, but it does not provide their contributions, thresholds, or how they combine to justify the prediction. For a false negative, the explanation is too thin to fully understand the specific decision.\",\n    \"concision\": \"It is short and avoids long prose, but it is also sparsely informative. The compactness comes at the expense of useful explanatory content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and brief, but it functions more as an anchor summary than a genuinely explanatory account of the prediction. It offers limited support for understanding, auditing, or acting on the model output.\",\n    \"semantic_plausibility\": \"The listed features are plausible for German credit data and fit the domain of loan decisions. However, the all-ones and all-zeros pattern is not semantically meaningful to a reader and feels more like internal metadata than an explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:10:03.141653+00:00"
+}

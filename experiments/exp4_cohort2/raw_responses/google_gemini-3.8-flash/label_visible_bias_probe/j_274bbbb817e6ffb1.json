@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_274bbbb817e6ffb1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_57fbcb6615a605ff_f7a38db991462aa7.txt",
+  "prompt_version": "f7a38db991462aa7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544758-u4UqGSXLb88w9b5gX8qz",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 977,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 591,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045765,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00366375,
+        "upstream_inference_cost": 0.0045765,
+        "upstream_inference_prompt_cost": 0.00091275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1217,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2194
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_57fbcb6615a605ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation contains static diagnostic measurements and raw SHAP values without any recourse, recommendations, or clinical guidance.\",\n    \"audit_usefulness\": \"It provides a clear list of signed local attribution scores for key features, though auditing is somewhat constrained by the absence of the raw feature values and baseline score.\",\n    \"clarity\": \"The list is clean and readable, but the raw SHAP contribution values require technical familiarity with additive feature attribution to interpret properly.\",\n    \"completeness\": \"The top positive and negative contributing factors are covered, providing a reasonable picture of local drivers, but the actual instance feature values are omitted.\",\n    \"concision\": \"The text is dense, well-structured, and presents the top feature attributions without redundant wording.\",\n    \"overall_quality\": \"This is a solid, standard technical attribution list that offers good auditability and domain coherence, despite lacking actionability and baseline context.\",\n    \"semantic_plausibility\": \"Features such as worst texture, concave points, and area are well-established clinical indicators of tumor malignancy.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:32:47.747135+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5f0cd46c52886df5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_07197d290136f3e3_b16d9fc03401e3e5.txt",
+  "prompt_version": "b16d9fc03401e3e5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547474-Uc6FBnaA8OTnzh0KIH1y",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004033,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002755,
+        "upstream_inference_cost": 0.004033,
+        "upstream_inference_prompt_cost": 0.001278
+      },
+      "is_byok": false,
+      "prompt_tokens": 1278,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1829
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what values would need to change to alter the prediction. It does not indicate whether increasing or decreasing education-num, capital-gain, or capital-loss would flip the outcome, making it impossible to act on.\",\n    \"audit_usefulness\": \"The explanation identifies three features as anchors but offers limited insight into model behavior. The very low fidelity (0.151) and stability (0.0) suggest the explanation is unreliable. An auditor cannot confidently use this to assess bias or error patterns.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but lacks context about what the weights mean, what the prediction represents (income threshold), or how to interpret zero weights. Non-technical readers would struggle.\",\n    \"completeness\": \"Only three features are highlighted as important, with many others marked as 0.0. For a false negative (predicted 0, true 1), the explanation does not explain why the model failed or what combination of factors led to the incorrect prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights. However, the brevity comes at the cost of interpretability and actionability.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical metrics (low fidelity and zero stability), lack of actionable guidance, and insufficient context for understanding the false negative. While concise, it fails to meet the needs of auditors or affected individuals.\",\n    \"semantic_plausibility\": \"Education level, capital gains, and capital losses are plausible predictors of income in the adult dataset. However, the explanation does not clarify the direction of effects or why these features alone would lead to an incorrect prediction, raising questions about its validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:17:59.794884+00:00"
+}

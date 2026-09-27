@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a892bc2256304288",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_36ff2c1056b28459_c800b9705300e372.txt",
+  "prompt_version": "c800b9705300e372",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541624-fiCa1qr7m9z2IigLJBOa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00372,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002495,
+        "upstream_inference_cost": 0.00372,
+        "upstream_inference_prompt_cost": 0.001225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1724
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature importance weights with no guidance on how to change the prediction or what actions to take; a user cannot determine feasible recourse steps from this output.\",\n    \"audit_usefulness\": \"The sparse output (only one non-zero weight) and extremely low stability (0.049) severely limit audit value; the explanation does not reliably characterize model behavior and offers minimal insight into decision logic.\",\n    \"clarity\": \"The format is straightforward as a list of feature weights, but lacks context about what DICE is computing, why most weights are zero, or what the 0.5000 value for native-country_Italy means in practical terms.\",\n    \"completeness\": \"The explanation is severely incomplete; it identifies only one potentially relevant feature while suppressing 9 others with zero weight, and provides no information about the actual feature values in the instance or their relationship to the prediction.\",\n    \"concision\": \"The explanation is concise in token count but wasteful in information density; listing many zero-valued features adds no value and obscures the single meaningful signal.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low stability, negative fidelity), minimal actionability, and insufficient context to support decision-making or auditing; it fails to meet standards for a reliable local explanation.\",\n    \"semantic_plausibility\": \"While native-country as a predictor in income classification is plausible, the explanation provides no instance context (actual country value, other demographics) to assess whether the prediction is coherent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:29.841090+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9d76ea3279eb6e07",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d47138a03cd221ff_aeb347bdaa01ce30.txt",
+  "prompt_version": "aeb347bdaa01ce30",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541834-vwMtef3JdZ5Cynpxu7Mh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.00303675,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local factors but does not translate them into concrete steps a person could take to change the outcome or review the decision. It offers no recourse guidance, thresholds, or actionable alternatives.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows the top LIME features influencing the prediction and their directions. However, the small coefficients, low fidelity, and low stability limit how well it supports robust model-behavior inspection.\",\n    \"clarity\": \"The feature list is readable and uses simple sign conventions, so a non-expert can follow the general idea. Still, the meaning of one-hot encoded variables and the tiny magnitude of the weights may be confusing without prior familiarity.\",\n    \"completeness\": \"The explanation covers several local drivers, including education, occupation, marital status, hours, age, capital gain, and sex. But it does not explain the baseline, the overall score, or why these factors were enough to yield a false positive prediction.\",\n    \"concision\": \"It is compact and presents the main local factors in a short list without much redundancy. The content density is good, though some entries may be more detailed than necessary for the small amount of information conveyed.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is easy to scan and gives a rough sense of the model's reasoning, but the low fidelity and weak stability make it less trustworthy. Its practical value is moderate rather than strong, especially for a false positive case.\",\n    \"semantic_plausibility\": \"The factors mentioned are plausible for the Adult dataset and align with common income-prediction signals such as education, occupation, marital status, and capital gain. The signs and feature types are coherent, although the very small contributions suggest only weak local influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:56.837918+00:00"
+}

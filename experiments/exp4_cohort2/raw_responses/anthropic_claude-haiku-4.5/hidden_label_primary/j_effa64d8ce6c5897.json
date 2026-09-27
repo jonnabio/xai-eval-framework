@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_effa64d8ce6c5897",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f567ef56c34dada8_0cbc2259b48f8fb2.txt",
+  "prompt_version": "0cbc2259b48f8fb2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538873-Hwj9efUhrN60W1ZYKzJf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003554,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002325,
+        "upstream_inference_cost": 0.003554,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1694
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors but provides no guidance on how to modify inputs, challenge the decision, or take corrective steps; it is purely descriptive without actionable recourse.\",\n    \"audit_usefulness\": \"The normalized scores (1.0 vs 0.0) and feature names enable an auditor to identify which features drove the prediction, supporting bias investigation and model behaviour inspection.\",\n    \"clarity\": \"The format is technical and dense, presenting raw anchor weights without interpretation; a non-expert would struggle to understand what the 1.0 and 0.0 values mean or why these features matter.\",\n    \"completeness\": \"The explanation identifies four key anchors (age, checking_status, credit_history, other_payment_plans) but omits their actual values for the instance, limiting full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their anchor weights in a structured format without padding.\",\n    \"overall_quality\": \"The explanation provides technical audit value but lacks clarity, actionability, and instance-specific context; it reads as a raw model output rather than a user-facing explanation.\",\n    \"semantic_plausibility\": \"The selected anchors (credit history, checking status, payment plans) are plausible credit risk factors in domain terms, though the absence of actual feature values prevents full plausibility assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:38.444757+00:00"
+}

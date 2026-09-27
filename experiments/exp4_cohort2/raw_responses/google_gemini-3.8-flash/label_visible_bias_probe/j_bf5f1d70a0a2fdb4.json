@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bf5f1d70a0a2fdb4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4440b587017f192b_71ae7a5c495313d3.txt",
+  "prompt_version": "71ae7a5c495313d3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542948-T5P6v6b4d1QabaRGmd2i",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 840,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00555225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004605,
+        "upstream_inference_cost": 0.00555225,
+        "upstream_inference_prompt_cost": 0.00094725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1263,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2491
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only raw attribution weights without stating current feature values or recourse pathways, offering no actionable steps.\",\n    \"audit_usefulness\": \"The signed attribution values allow an auditor to see which variables pushed the prediction toward a false positive, though missing instance feature values constrain detailed error analysis.\",\n    \"clarity\": \"The list format is readable, but presenting raw decimal SHAP weights without feature values or clear directional labels makes it difficult for a lay reader to understand.\",\n    \"completeness\": \"The explanation covers ten major local drivers with their relative contributions, but omits the baseline prediction and the applicant's actual feature values.\",\n    \"concision\": \"It presents the top local factors cleanly and compactly without extraneous text.\",\n    \"overall_quality\": \"This is an acceptable technical explanation that adequately reflects local model mechanics, though its utility is dampened by missing feature values and lack of user guidance.\",\n    \"semantic_plausibility\": \"Key credit risk indicators such as duration, credit amount, and checking status align logically with established credit scoring principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:39.745305+00:00"
+}

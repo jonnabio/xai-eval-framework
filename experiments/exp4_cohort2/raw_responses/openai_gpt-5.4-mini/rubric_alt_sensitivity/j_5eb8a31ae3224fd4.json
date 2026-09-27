@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5eb8a31ae3224fd4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e475cad54cb8d814_77012810af4f208d.txt",
+  "prompt_version": "77012810af4f208d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542984-5vKs8o7BLxW8pLnqCGvn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 388,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025935,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001746,
+        "upstream_inference_cost": 0.0025935,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists contributing features and does not suggest what changes would alter the prediction or what a reviewer should do next.\",\n    \"audit_usefulness\": \"The ranked SHAP values give some insight into which variables influenced the positive prediction, but they are limited to a single local instance and do not provide enough detail to directly probe bias or error.\",\n    \"clarity\": \"The feature names and signed contributions are understandable to a technical user, but a non-technical reader may not know what the features mean or how to interpret SHAP values.\",\n    \"completeness\": \"It identifies the top local factors, which covers the main drivers at a high level, but it does not explain interactions, baseline, or how strongly each factor pushed toward the class decision overall.\",\n    \"concision\": \"The explanation is compact and information-dense, with little obvious padding.\",\n    \"overall_quality\": \"As a local feature attribution summary, it is useful and reasonably faithful, but it is limited in explanatory depth and accessibility.\",\n    \"semantic_plausibility\": \"For the breast cancer domain, features like concave points, concavity, texture, perimeter, and radius are plausible predictors of malignancy, and the positive/negative contributions are believable for this case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:06.130800+00:00"
+}

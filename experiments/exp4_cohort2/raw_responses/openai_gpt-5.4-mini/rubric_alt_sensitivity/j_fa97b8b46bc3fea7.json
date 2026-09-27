@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fa97b8b46bc3fea7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d372ea8e16367348_bb612e892dd18d5c.txt",
+  "prompt_version": "bb612e892dd18d5c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543606-1FH3Dpy3jIdPDgsUxw0L",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00249525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001656,
+        "upstream_inference_cost": 0.00249525,
+        "upstream_inference_prompt_cost": 0.00083925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1119,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1487
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not indicate how changing any feature would affect the prediction, so there are no concrete next steps.\",\n    \"audit_usefulness\": \"It lists some locally important features, which can help inspect model logic a little, but the zero-valued items and unclear anchor structure limit deeper auditing.\",\n    \"clarity\": \"The feature names are understandable, but the meaning of the 1.0000 and 0.0000 values is not explained, so a non-technical reader would struggle.\",\n    \"completeness\": \"It identifies several top local factors, but it does not explain direction, thresholds, or how these factors combine to support the positive class decision.\",\n    \"concision\": \"It is fairly short and information-dense, though some of the listed features appear redundant or uninformative without context.\",\n    \"overall_quality\": \"A somewhat useful local summary, but the lack of interpretation of the anchor values and decision direction keeps it from being strong.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible drivers of the prediction, but the explanation format is too opaque to fully judge consistency with this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:28.430345+00:00"
+}

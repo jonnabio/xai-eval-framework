@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1c3de157598b7d4f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4919484756fd435e_0240aaec5392a545.txt",
+  "prompt_version": "0240aaec5392a545",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539710-uLtJx23Z1B8QHKOSkpUx",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.00295725,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or decision-changing steps; it only lists a single strong factor and many zero-valued features. A user cannot infer what to change beyond the obvious education-related difference.\",\n    \"audit_usefulness\": \"It is somewhat useful for audit because it reveals that education-num is the only salient local factor and the rest are effectively inactive. However, the near-all-zero presentation offers limited insight into the model's decision logic or potential bias.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, but the meaning of the numeric values is not explained. A non-expert may not understand whether these are contributions, counterfactual changes, or importance scores.\",\n    \"completeness\": \"The explanation is incomplete because it shows only one meaningful driver and suppresses the rest of the local decision context. It does not explain why the model predicted class 0 or how multiple features jointly supported that prediction.\",\n    \"concision\": \"It is compact and avoids long prose, but the brevity comes at the cost of very low informational density. Most listed features add little value because they are all shown as 0.0000.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and short, but offers little local insight, little actionability, and limited support for understanding the specific prediction. It is acceptable as a terse summary but not strong as an XAI explanation.\",\n    \"semantic_plausibility\": \"The focus on education-num is plausible for the Adult income task and consistent with logistic regression behavior. However, the many zero-valued top factors make the output feel mechanistic and only moderately informative rather than fully convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:35.075719+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_34c6566018eabc3b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_681f91e7c50b9380_96c2d1e5fedf4760.txt",
+  "prompt_version": "96c2d1e5fedf4760",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540193-nAm3R1rDuah1tPC5SlPC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.003075,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, and the listed factors are not translated into changes a user could make. It offers no meaningful guidance for improving or challenging the prediction.\",\n    \"audit_usefulness\": \"For auditing, it is minimally useful because it exposes one top local factor, but the near-all-zero feature scores and lack of directionality make it hard to inspect why the model predicted positive. It does not support a serious error or bias investigation.\",\n    \"clarity\": \"The output is mechanically readable, but the meaning of the numbers is unclear to a non-expert and the phrase 'top local factors' is not explained. A reader would struggle to interpret what 1.0000 versus 0.0000 implies here.\",\n    \"completeness\": \"It only names a single nonzero feature and then lists several zero-valued ones, so it misses the broader local reasoning needed to understand this specific false positive prediction. Key information about how the main evidence moved the model toward class 1 is absent.\",\n    \"concision\": \"The explanation is short, but much of the content is low-information padding from repeated zero-valued features. It is compact in length yet not maximally informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is weak: it is technically brief but not very interpretable, actionable, or diagnostically useful. It gives only a narrow and somewhat opaque snapshot of the local decision.\",\n    \"semantic_plausibility\": \"The explanation is plausible in the sense that it refers to real Adult dataset features, but the pattern of a single feature at 1.0 and many others at 0.0 is not very informative for a model explanation. It does not obviously contradict the domain, but it feels incomplete and somewhat unnatural as a decision rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:37.552350+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_569a4ec32b47328c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4c3d79ea2f396cd5_e0710d3e96ab4ca9.txt",
+  "prompt_version": "e0710d3e96ab4ca9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546200-tkSzPSxhoMKoTVsvfFUc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 962,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 576,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00452925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036075,
+        "upstream_inference_cost": 0.00452925,
+        "upstream_inference_prompt_cost": 0.00092175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2191
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or next steps because all feature weights are zeroed out.\",\n    \"audit_usefulness\": \"Because every listed factor has an attribution of zero, the explanation provides no insight into the logistic regression model's decision logic for an auditor.\",\n    \"clarity\": \"The feature-value list structure is easy to follow, but presenting every weight as 0.0000 or -0.0000 is confusing to readers seeking meaningful contributions.\",\n    \"completeness\": \"The explanation completely fails to capture the true drivers of the prediction, showing zero net impact across all listed features.\",\n    \"concision\": \"Listing ten distinct features with zero contribution wastes space and provides virtually no useful information content.\",\n    \"overall_quality\": \"This explanation is practically useless due to degenerate zero weights across all features, failing to justify the model's positive prediction.\",\n    \"semantic_plausibility\": \"It is logically implausible for a model to predict a positive class when all identified top factors have zero influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:56:48.438360+00:00"
+}

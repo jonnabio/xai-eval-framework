@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0ab8ed6bc65f8c5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_686d3a0505ac2e42",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a0ab8ed6bc65f8c5_ebd2d836bed7e771.txt",
+  "prompt_version": "ebd2d836bed7e771",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544257-J4TlPAyVF4yCDrvSi0fr",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003589,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00235,
+        "upstream_inference_cost": 0.003589,
+        "upstream_inference_prompt_cost": 0.001239
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1709
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a0ab8ed6bc65f8c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature contributions are effectively zero, providing no meaningful direction for recourse or decision modification; a user cannot identify which levers to adjust.\",\n    \"audit_usefulness\": \"The explanation offers minimal audit value since all coefficients collapse to \u00b10.0000, obscuring the actual model decision logic and preventing investigation of potential bias or systematic errors.\",\n    \"clarity\": \"The format is straightforward and readable, but the content\u2014a list of near-zero coefficients\u2014conveys no substantive insight and may confuse rather than clarify the prediction rationale.\",\n    \"completeness\": \"The explanation is severely incomplete; it fails to identify any meaningful drivers of the prediction, leaving the core question of why the model predicted class 1 unanswered.\",\n    \"concision\": \"While the token count is modest, the explanation is padded with uninformative near-zero values that add no explanatory value relative to their length.\",\n    \"overall_quality\": \"This explanation is fundamentally broken; it presents a technically valid LIME output but one that has collapsed to numerical noise, rendering it useless for understanding, auditing, or acting on the prediction.\",\n    \"semantic_plausibility\": \"The near-zero coefficients are implausible as a complete explanation for a positive prediction; they suggest either model instability, poor LIME calibration, or a degenerate local approximation rather than genuine feature importance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:24:22.421289+00:00"
+}

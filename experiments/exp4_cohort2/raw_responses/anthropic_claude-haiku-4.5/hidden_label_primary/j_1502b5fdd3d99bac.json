@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_79966d2bb70844bf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1502b5fdd3d99bac",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_79966d2bb70844bf_86e731deb7c58ee4.txt",
+  "prompt_version": "86e731deb7c58ee4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540091-MBkq708k7a0DhvhTKNmv",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004038,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002815,
+        "upstream_inference_cost": 0.004038,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1786
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_79966d2bb70844bf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what actions are feasible, or how to interpret the counterfactual direction. A user cannot determine what concrete steps to take based on this output.\",\n    \"audit_usefulness\": \"While the explanation identifies education-num and native-country_England as top factors, the low fidelity (0.71) and high faithfulness gap (0.32) suggest the explanation may not reliably represent model behaviour. The many zero-valued features obscure whether they are truly irrelevant or simply not explored by DICE.\",\n    \"clarity\": \"The output is presented as a raw list of feature names with numerical scores, which requires familiarity with DICE methodology and the adult dataset to interpret. Non-experts would struggle to understand what these scores mean or why they matter.\",\n    \"completeness\": \"The explanation identifies only two non-zero factors out of ten listed, leaving substantial uncertainty about the full decision context. The high proportion of zero-valued features raises questions about whether key drivers are missing or simply unexplored.\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-valued features that add little informational value and could be omitted. The format is efficient but not maximally informative per word.\",\n    \"overall_quality\": \"The explanation suffers from low technical fidelity, unclear presentation, and limited actionability. While it identifies some factors, the poor stability (0.06) and high faithfulness gap undermine confidence in the explanation's reliability and usefulness.\",\n    \"semantic_plausibility\": \"Education level and country of origin are plausible predictors in income classification tasks, and the direction of their influence is reasonable. However, the large number of zero-valued features and low stability metrics raise concerns about whether the explanation accurately reflects the true decision logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:57.634545+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_352c2f4e7ba168e6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b352dc7c29edc22c_e38133a68039c12d.txt",
+  "prompt_version": "e38133a68039c12d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541640-b4ZokbzOF9yYP5ZIyI2u",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 582,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004524,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035775,
+        "upstream_inference_cost": 0.004524,
+        "upstream_inference_prompt_cost": 0.0009465
+      },
+      "is_byok": false,
+      "prompt_tokens": 1262,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2216
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists purely descriptive attribution values without indicating feature values or feasible paths for recourse.\",\n    \"audit_usefulness\": \"It effectively reveals the model's reliance on demographic and occupational features, helping auditors analyze why a false positive occurred.\",\n    \"clarity\": \"The representation relies on raw one-hot encoded variable names and decimal weights, which requires technical familiarity to interpret.\",\n    \"completeness\": \"The top ten local factors provide reasonable coverage of key drivers, though the baseline value and underlying feature states are omitted.\",\n    \"concision\": \"The list is compact and directly presents the most influential local features without unnecessary filler.\",\n    \"overall_quality\": \"This is a standard, technically solid feature attribution explanation that is informative for auditing but lacks user-facing clarity and actionability.\",\n    \"semantic_plausibility\": \"The contributions generally align with standard adult dataset dynamics, though multiple one-hot categories of the same feature appearing together can be confusing without explicit feature values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:47.990243+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_75d065c77146d390",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1a9c16ecde743d5e_d20930aa12475419.txt",
+  "prompt_version": "d20930aa12475419",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547920-yGNwaR2VkjvRVpbWmVES",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 820,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 451,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0040785,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003075,
+        "upstream_inference_cost": 0.0040785,
+        "upstream_inference_prompt_cost": 0.0010035
+      },
+      "is_byok": false,
+      "prompt_tokens": 1338,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2158
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values without actual feature values or concrete steps on how the applicant could improve their outcome.\",\n    \"audit_usefulness\": \"Provides the top signed SHAP values, giving an auditor a clear view into which encoded features drove the model toward this incorrect prediction.\",\n    \"clarity\": \"The output consists of one-hot encoded variable names and signed decimal numbers, which requires technical familiarity with SHAP and the dataset to interpret.\",\n    \"completeness\": \"Lists the top ten local feature contributions, covering the primary drivers of the model's prediction.\",\n    \"concision\": \"Compact list of top feature weights without filler or unnecessary text.\",\n    \"overall_quality\": \"A standard, serviceable local SHAP attribution list that provides technical insight into a false-negative classification.\",\n    \"semantic_plausibility\": \"Features like checking account status, employment history, savings, and loan duration align well with standard credit-risk assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:25:28.567419+00:00"
+}

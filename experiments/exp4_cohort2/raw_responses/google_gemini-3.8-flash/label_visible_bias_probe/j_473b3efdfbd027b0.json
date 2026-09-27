@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_473b3efdfbd027b0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ba96b41ceb2e14cb_f8f9975874235db1.txt",
+  "prompt_version": "f8f9975874235db1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544474-sbpb5DkWcmbQcoWCNTD3",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1055,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 643,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00488475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00395625,
+        "upstream_inference_cost": 0.00488475,
+        "upstream_inference_prompt_cost": 0.0009285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2293
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw numerical weights rather than actionable counterfactual values, and the highlighted features (relationship and native country) are generally immutable or unfeasible to change.\",\n    \"audit_usefulness\": \"It highlights potential demographic sensitivity around native country and relationship status, but the lack of directional guidance or target feature values limits thorough audit utility.\",\n    \"clarity\": \"The list format is readable, but the semantic meaning of the score (0.4000) is unexplained and unintuitive for a non-expert.\",\n    \"completeness\": \"The output only provides two active factors while leaving all other standard socioeconomic predictors at zero, offering minimal context on how the prediction was reached.\",\n    \"concision\": \"Including eight distinct features with values of 0.0000 creates unnecessary padding that dilutes the informative content.\",\n    \"overall_quality\": \"Presenting DiCE counterfactuals as a sparse list of arbitrary weights with unfeasible levers yields an unhelpful explanation for both users and auditors.\",\n    \"semantic_plausibility\": \"While demographic features can drive model bias, seeing major income drivers like education and capital gain entirely zeroed out reduces plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:28:03.484445+00:00"
+}

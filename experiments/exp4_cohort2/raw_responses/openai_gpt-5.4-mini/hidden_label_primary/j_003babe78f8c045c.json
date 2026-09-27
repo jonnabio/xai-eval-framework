@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_003babe78f8c045c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d47138a03cd221ff_a2ccef388c5a1ebb.txt",
+  "prompt_version": "a2ccef388c5a1ebb",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539207-CDvbMquTPH7zkd2leWfM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030555,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022635,
+        "upstream_inference_cost": 0.0030555,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1559
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists a few contributing features, but it does not suggest any concrete recourse or next steps for changing the prediction. Because the output is a local attribution list without thresholds or actionable guidance, it offers little practical support for a user.\",\n    \"audit_usefulness\": \"It gives some visibility into which variables pushed the model output up or down, which is useful for a quick audit. However, the very low fidelity and stability metrics limit confidence that these attributions reflect the model's true behavior.\",\n    \"clarity\": \"The explanation is concise and uses a simple feature list, so a non-expert can at least identify the main variables involved. Still, the numeric values and one-hot encoded labels are somewhat technical and require some interpretation.\",\n    \"completeness\": \"The explanation covers several top local factors, including education, occupation, marital status, hours worked, and age. Even so, the weights are tiny and the low fidelity suggests it may not capture the full decision logic needed to understand this specific prediction.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, presenting only the top local factors with their weights. It is informative per word, though a brief interpretation of the signs and magnitudes would have improved value without adding much length.\",\n    \"overall_quality\": \"This is a readable but technically weak explanation: it is short and reasonably understandable, yet the attribution quality appears limited by poor fidelity and stability. As a result, it provides only modest insight into why the model made this prediction.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult income domain, with education, occupation, marital status, and hours per week all commonly relevant. The very small coefficients and mixed directions are not contradictory, but they make the explanation feel weak rather than strongly persuasive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:11.386032+00:00"
+}

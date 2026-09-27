@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a6f815918420e36d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a3f635ae972c4ad_c1d636799bf06501.txt",
+  "prompt_version": "c1d636799bf06501",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546722-wadjcYKPSBMjn7nFvWeL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1361,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 938,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0061005,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00510375,
+        "upstream_inference_cost": 0.0061005,
+        "upstream_inference_prompt_cost": 0.00099675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1329,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2690
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw weights without specifying the instance's actual values or what specific threshold adjustments (e.g., hours worked or education level) would reverse the negative prediction.\",\n    \"audit_usefulness\": \"It highlights potentially concerning bias factors such as sex_Female having a negative attribution, giving an auditor a clear starting point to evaluate fairness and model behavior on false negatives.\",\n    \"clarity\": \"It presents raw feature names and decimal coefficients without context or conversational phrasing, making it difficult for non-technical stakeholders to interpret.\",\n    \"completeness\": \"While it lists ten prominent features, the absence of an intercept, base value, and the instance's underlying feature values leaves it unclear why the net decision was negative.\",\n    \"concision\": \"The summary is compact and directly presents feature-attribution pairs with no unnecessary filler.\",\n    \"overall_quality\": \"The explanation is serviceable for technical review, but missing input values, weak stability, and opaque one-hot feature representations limit its overall utility.\",\n    \"semantic_plausibility\": \"Most feature directions align with typical adult census trends (e.g., higher capital gain and education increase odds of high income), though conflicting marital/relationship dummy weights appear slightly noisy.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:05:33.552904+00:00"
+}

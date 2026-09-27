@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_99864e55aa49a911",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3c34585b1d65d81e_5d028f3ba5c47f32.txt",
+  "prompt_version": "5d028f3ba5c47f32",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544548-j6PZzxz3lTMVZZ9eD9Ph",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004093,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002795,
+        "upstream_inference_cost": 0.004093,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1857
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. While one could infer that reducing capital-gain or changing marital status might alter the prediction, these are not explicitly stated as actionable steps.\",\n    \"audit_usefulness\": \"The feature weights and directions are useful for understanding model behavior and checking for bias patterns (e.g., sex_Female has negative contribution). However, the high faithfulness_gap (0.68) and negative stability (-0.004) raise concerns about explanation reliability that should be flagged to auditors.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, numerical weights, positive/negative signs) that requires familiarity with machine learning concepts. Non-technical readers would struggle to interpret what these numbers mean for the income prediction decision.\",\n    \"completeness\": \"The explanation covers the top 10 local factors contributing to the prediction, which captures the main drivers. However, it lacks context about the instance's actual feature values, making it difficult to fully understand why these factors matter for this specific case.\",\n    \"concision\": \"The format is compact and avoids redundancy, efficiently listing features and weights. Each entry carries information about contribution magnitude and direction without padding.\",\n    \"overall_quality\": \"This is a serviceable explanation that correctly identifies key contributing factors and matches the true label (TP case). However, technical metrics show concerning reliability issues (high faithfulness gap, poor stability), and the explanation lacks actionability and accessibility for non-technical stakeholders.\",\n    \"semantic_plausibility\": \"The factors align with domain knowledge about income prediction: capital gains are strong income indicators, marital status and occupation are relevant, and education level matters. The negative weight for female sex and never-married status is consistent with historical income disparities, though this may reflect problematic patterns in training data.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:29:14.315544+00:00"
+}

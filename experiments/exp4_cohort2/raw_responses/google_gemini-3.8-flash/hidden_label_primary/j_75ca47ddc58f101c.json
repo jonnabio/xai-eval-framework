@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89e4fe58e0303d60",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_75ca47ddc58f101c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_89e4fe58e0303d60_70f085a6f8911061.txt",
+  "prompt_version": "70f085a6f8911061",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540802-yOHK6zw8tKTFInEBzlJo",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1077,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 683,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00497625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00403875,
+        "upstream_inference_cost": 0.00497625,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2327
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_89e4fe58e0303d60\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies relevant risk areas like checking status and property ownership, but omits specific numerical thresholds or target values needed to achieve recourse.\",\n    \"audit_usefulness\": \"While it isolates the subset of features involved in the anchor, the missing predicate conditions (e.g., specific bounds on loan duration) limit its utility for rigorous audit.\",\n    \"clarity\": \"The feature tags are somewhat raw and one-hot encoded, but the listing is straightforward to read despite the lack of contextual operators.\",\n    \"completeness\": \"The output highlights four binary-flagged features but leaves out directional impacts and cutoffs for continuous variables like duration.\",\n    \"concision\": \"Several features with zero importance are retained in the string, adding unnecessary length without conveying information.\",\n    \"overall_quality\": \"The explanation offers plausible domain factors for a credit risk prediction, but is substantially weakened by truncated predicate logic and redundant zero-weight entries.\",\n    \"semantic_plausibility\": \"Negative checking status, lack of property, and loan duration are well-aligned with standard credit risk assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:26:52.721007+00:00"
+}

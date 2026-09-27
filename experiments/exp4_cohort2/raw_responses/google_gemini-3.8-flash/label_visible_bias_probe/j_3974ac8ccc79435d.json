@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3974ac8ccc79435d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_de91280a4d84e7ca_9d8e08e2d16bbd9f.txt",
+  "prompt_version": "9d8e08e2d16bbd9f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545165-MMZF3qYgAGmKGCGXPNVf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1270,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 860,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005703,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0047625,
+        "upstream_inference_cost": 0.005703,
+        "upstream_inference_prompt_cost": 0.0009405
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2524
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Marital status is generally immutable for decision recourse, and the explanation provides no practical steps or counterfactual guidance for altering the outcome.\",\n    \"audit_usefulness\": \"Listing only a single active feature alongside multiple zero-weight attributes fails to explain why the model made a false negative prediction, offering weak diagnostic insight.\",\n    \"clarity\": \"The explanation uses raw one-hot feature names and formats an anchor rule as a list of numerical weights, which may confuse non-technical users.\",\n    \"completeness\": \"The explanation attributes the prediction entirely to one feature, failing to show the negative drivers that caused the model to predict class 0.\",\n    \"concision\": \"Nine of the ten listed features carry a weight of 0.0000, creating unnecessary clutter and padding.\",\n    \"overall_quality\": \"This explanation is of poor quality due to uninformative zero-value padding, poor auditability for a false negative, and lack of actionable insight.\",\n    \"semantic_plausibility\": \"Highlighting married status as the sole factor explaining a low-income prediction is counterintuitive, as that feature strongly correlates with higher income in the Adult domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:39:35.808095+00:00"
+}

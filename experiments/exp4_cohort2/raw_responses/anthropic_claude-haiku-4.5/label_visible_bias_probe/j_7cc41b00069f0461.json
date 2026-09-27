@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7cc41b00069f0461",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a138a3019aad47d9_06fcadf2ad111144.txt",
+  "prompt_version": "06fcadf2ad111144",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543574-cWQ9IqKYYWXTbzXIYvdp",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 546,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00395,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00273,
+        "upstream_inference_cost": 0.00395,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1766
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies hours-per-week as the dominant factor but provides no guidance on what changes would alter the prediction or how to act on this insight. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"While the factor weights are presented, the extremely poor technical metrics (fidelity 0.15, stability 0.03, faithfulness_gap 0.33) severely undermine audit value; an auditor cannot trust this explanation to reflect true model behavior. The false negative case compounds this concern.\",\n    \"clarity\": \"The format is straightforward\u2014a list of factors with weights\u2014but lacks context about what these weights mean, why only one factor is non-zero, or how to interpret the explanation in relation to the prediction.\",\n    \"completeness\": \"The explanation is severely incomplete; it identifies only hours-per-week as relevant but provides no information about the instance's actual values, thresholds, or why other features were excluded. Critical context for understanding the false negative is missing.\",\n    \"concision\": \"The explanation is concise in token count but padded with nine zero-weight factors that add no information; a more efficient presentation would omit or summarize these null contributions.\",\n    \"overall_quality\": \"The explanation fails on multiple fronts: poor technical fidelity, missing instance context, no actionability, and inability to support audit or recourse. The false negative prediction combined with weak metrics suggests the explanation is unreliable.\",\n    \"semantic_plausibility\": \"Identifying hours-per-week as a key income predictor is plausible in the adult dataset domain, but the complete absence of other known drivers (education, age, occupation) and the false negative outcome raise doubts about whether this explanation reflects genuine model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:00.669092+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_cc21223ef11e742f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ae5f3b200cc3bef3_1db73f2123c3f50d.txt",
+  "prompt_version": "1db73f2123c3f50d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547207-XsJU7RzIpbB7xhJGNCLe",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003953,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00267,
+        "upstream_inference_cost": 0.003953,
+        "upstream_inference_prompt_cost": 0.001283
+      },
+      "is_byok": false,
+      "prompt_tokens": 1283,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1817
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies age and native-country as decision factors but provides no guidance on what actions could be taken or what changes would alter the outcome. It is purely descriptive without prescriptive value.\",\n    \"audit_usefulness\": \"While the explanation shows which features matter, the low fidelity (0.356) and high faithfulness gap (0.179) suggest the explanation may not accurately represent the model's actual decision logic. This undermines its utility for auditing bias or errors.\",\n    \"clarity\": \"The format is straightforward with feature names and weights, but the meaning of the weights (1.0 vs 0.0) and their relationship to the prediction is not explained. A non-technical person would struggle to understand what these numbers signify.\",\n    \"completeness\": \"Only two features are identified as important (age and native-country), but the explanation lacks context about their actual values for this instance, the direction of their influence, or why these particular features drove the prediction.\",\n    \"concision\": \"The explanation is compact but includes many zero-weighted features that add little value. The core insight could be conveyed more efficiently by omitting irrelevant features.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical metrics (low fidelity, high faithfulness gap, zero stability), lack of actionable insights, and insufficient detail about the instance-specific decision. It provides minimal value for understanding or auditing the model.\",\n    \"semantic_plausibility\": \"Age and native-country being predictive of income in the adult dataset is plausible, but without knowing the instance's actual values or the direction of influence, it is difficult to assess whether the explanation makes sense for this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:13:32.657427+00:00"
+}
