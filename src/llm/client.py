@@ -20,9 +20,49 @@ try:
 except ImportError:
     genai = None
 
+from pathlib import Path
+import subprocess
+
 from src.experiment.config import LLMConfig
 
 logger = logging.getLogger(__name__)
+
+SECRETS_FILE = Path("configs") / "secrets" / "api_keys.env"
+
+
+def _secrets_candidates() -> list:
+    """api_keys.env in this checkout, then in the main checkout of the repository.
+
+    Worktrees (e.g. ../xai-exp4) share the main checkout's secrets file, so the
+    keys are entered once.
+    """
+    here = Path(__file__).resolve().parents[2]
+    candidates = [here / SECRETS_FILE]
+    try:
+        common = subprocess.run(
+            ["git", "-C", str(here), "rev-parse", "--path-format=absolute", "--git-common-dir"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        candidates.append(Path(common).parent / SECRETS_FILE)
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    return candidates
+
+
+def load_local_secrets() -> None:
+    """Load API keys from configs/secrets/api_keys.env (gitignored) into the environment.
+
+    Variables already set in the environment win. Values are never logged.
+    """
+    try:
+        from dotenv import load_dotenv
+    except ImportError:
+        return
+    for path in _secrets_candidates():
+        if path.is_file():
+            load_dotenv(path, override=False)
+            logger.info("Loaded API keys from %s", path)
+            return
 
 class BaseLLMClient(ABC):
     """Abstract base class for LLM clients."""
@@ -242,6 +282,8 @@ class LLMClientFactory:
     
     @staticmethod
     def create(config: LLMConfig) -> BaseLLMClient:
+        if config.provider != "dummy":
+            load_local_secrets()
         if config.provider == "openai":
             return OpenAIClient(config)
         elif config.provider == "gemini":
