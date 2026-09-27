@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_08c3de48758dbabc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0da6a71373977fce_b2d1fe75edb34611.txt",
+  "prompt_version": "b2d1fe75edb34611",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551633-n7CZ7bhZXbgf4kLcSEZc",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1039,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 662,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048885,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00389625,
+        "upstream_inference_cost": 0.0048885,
+        "upstream_inference_prompt_cost": 0.00099225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1323,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2362
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The only highlighted factor is native country, which is an immutable personal characteristic that an individual cannot change.\",\n    \"audit_usefulness\": \"It provides useful evidence for bias auditing by showing that changing a demographic feature alone flips the prediction, though it lacks broader context on other model weights.\",\n    \"clarity\": \"The representation is somewhat technical and displays several zero-valued features, but the primary factor is clear enough to understand.\",\n    \"completeness\": \"The explanation attributes the entire counterfactual shift to a single feature, omitting key drivers like education, occupation, or age.\",\n    \"concision\": \"Most of the space is consumed by displaying features with zero importance, which wastes space without adding information.\",\n    \"overall_quality\": \"The explanation is weak because it reduces a complex decision to a single immutable attribute while listing mostly zero-weight features.\",\n    \"semantic_plausibility\": \"Attributing the prediction shift entirely to native country rather than primary income drivers like capital gains or education is questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:27:22.250070+00:00"
+}

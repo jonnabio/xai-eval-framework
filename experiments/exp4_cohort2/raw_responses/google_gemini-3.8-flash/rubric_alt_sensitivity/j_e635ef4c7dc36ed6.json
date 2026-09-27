@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9fe396b73843aa9e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e635ef4c7dc36ed6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_9fe396b73843aa9e_b490a135cd880a84.txt",
+  "prompt_version": "b490a135cd880a84",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552271-baPRg0iDp4yY9SE0uq4Y",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 942,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 570,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045105,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035325,
+        "upstream_inference_cost": 0.0045105,
+        "upstream_inference_prompt_cost": 0.000978
+      },
+      "is_byok": false,
+      "prompt_tokens": 1304,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2246
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9fe396b73843aa9e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because all feature weights are zero, the explanation offers no indication of what features influence the prediction or what actions could alter the outcome.\",\n    \"audit_usefulness\": \"The explanation completely fails to reflect the model's logic since every feature attribution evaluates to zero, providing no utility for auditing model behavior.\",\n    \"clarity\": \"Displaying zero and negative zero weights across raw feature names is uninterpretable and confusing for non-technical audiences.\",\n    \"completeness\": \"None of the factors driving the model's decision are represented, as all reported feature contributions are zero.\",\n    \"concision\": \"The explanation outputs a list of ten features with zero attribution, offering virtually zero useful information for its length.\",\n    \"overall_quality\": \"This is an unusable explanation resulting from an explainer failure where all local feature importances are zero.\",\n    \"semantic_plausibility\": \"Attributing zero weight to every single factor contradicts the reality of the logistic regression classification decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:37:57.851572+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_02f2caad2714075e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_cad1d6dbc8b4e027_15aec88904253e8d.txt",
+  "prompt_version": "15aec88904253e8d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552358-ZXHWdpeNIbFL56cfq6On",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 509,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00429,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003315,
+        "upstream_inference_cost": 0.00429,
+        "upstream_inference_prompt_cost": 0.000975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1300,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2184
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Every reported feature has a coefficient of 0.0000, offering zero actionable guidance on what factors influence or could change the prediction.\",\n    \"audit_usefulness\": \"Because all feature attributions round to zero, the explanation provides no insight into the MLP's internal logic or potential biases.\",\n    \"clarity\": \"While the formatting is simple key-value pairs, presenting a list of all-zero effects is baffling and unhelpful to a layperson.\",\n    \"completeness\": \"None of the actual drivers behind the positive prediction are conveyed due to the collapsed zero-weight attributions.\",\n    \"concision\": \"The text lists ten features with zero weight, carrying virtually no informative content for its length.\",\n    \"overall_quality\": \"The explanation is degenerate and unusable because LIME assigned a weight of zero to all listed features.\",\n    \"semantic_plausibility\": \"Claiming that no feature contributes to the classification contradicts basic domain expectations and model behavior on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:39:24.822680+00:00"
+}

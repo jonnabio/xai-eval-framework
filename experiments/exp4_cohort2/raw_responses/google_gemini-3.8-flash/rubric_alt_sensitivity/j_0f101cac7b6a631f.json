@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0bb8592dcc826334",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0f101cac7b6a631f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0bb8592dcc826334_cdf5b77894e68333.txt",
+  "prompt_version": "cdf5b77894e68333",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551407-YH4KgrIVxOlISyHPPcWh",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 625,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00476175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376875,
+        "upstream_inference_cost": 0.00476175,
+        "upstream_inference_prompt_cost": 0.000993
+      },
+      "is_byok": false,
+      "prompt_tokens": 1324,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2329
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0bb8592dcc826334\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it highlights capital-loss and education, it presents raw numeric perturbation weights rather than concrete counterfactual target values, providing only implied direction.\",\n    \"audit_usefulness\": \"It reveals which variables DiCE modified to flip the prediction, but the lack of baseline instance values and directional changes limits auditing capability.\",\n    \"clarity\": \"The list of raw coefficients and one-hot encoded variable names is difficult for non-technical individuals to interpret.\",\n    \"completeness\": \"Only two features show non-zero weights while eight are listed as zero, omitting the original feature values and the counterfactual goal.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the explanation without adding useful information.\",\n    \"overall_quality\": \"The explanation translates counterfactual search into sparse importance scores with poor fidelity, yielding a weak explanation overall.\",\n    \"semantic_plausibility\": \"Education and capital loss are plausibly relevant to income classification, though the raw weight on capital-loss is unusually high without context.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:23:35.243424+00:00"
+}

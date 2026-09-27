@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c49ba0b8d18e8b6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5b11c2c083e9a46f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1c49ba0b8d18e8b6_7b7a3b9c19c8962e.txt",
+  "prompt_version": "7b7a3b9c19c8962e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551907-N1H52Lkkd5jsPvpOYcaf",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 754,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00538275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00439125,
+        "upstream_inference_cost": 0.00538275,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2493
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c49ba0b8d18e8b6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It identifies hours-per-week as the sole lever to change the outcome, but it does not clarify whether 2.3633 represents an absolute hour increase, a normalized value, or a specific target threshold.\",\n    \"audit_usefulness\": \"It tells an auditor that the model's decision can theoretically be flipped by adjusting hours-per-week alone, but the lack of baseline feature values or clearer counterfactual context limits deep verification.\",\n    \"clarity\": \"The representation presents raw numerical values and zeroed-out one-hot encodings without explaining what the positive magnitude signifies.\",\n    \"completeness\": \"Only a single feature change is presented, while nine other features are zeroed out, providing very little context about the overall instance.\",\n    \"concision\": \"Listing multiple zero-valued features takes up space without adding meaningful information.\",\n    \"overall_quality\": \"The explanation is weak because it reduces a counterfactual to a sparse list populated mostly by zeros, leaving ambiguities about how to interpret the single non-zero value.\",\n    \"semantic_plausibility\": \"Associating working hours with earning potential aligns with domain knowledge and common sense for the Adult income dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:31:57.070471+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3e580d0865ef6fc4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_e41fd8a7ac08bc7b.txt",
+  "prompt_version": "e41fd8a7ac08bc7b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551205-gpoKDXva5H8Y88vm4P3g",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1229,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 791,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00560325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00460875,
+        "upstream_inference_cost": 0.00560325,
+        "upstream_inference_prompt_cost": 0.0009945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2555
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Marital status is largely non-actionable, and no directional guidance or alternative values are provided to suggest how the outcome could change.\",\n    \"audit_usefulness\": \"It provides marginal help; an auditor can see that the explainer selected a single marital-status indicator, but the lack of sign, weight context, or model coefficients limits deeper error analysis for this false negative.\",\n    \"clarity\": \"The list of feature weights is reasonably legible, but the meaning of a binary indicator score of 1.0000 alongside zeroed features requires technical familiarity with the explainer.\",\n    \"completeness\": \"Only a single feature is assigned relevance while nine other features are zeroed out, omitting the negative drivers that caused this false negative prediction.\",\n    \"concision\": \"Listing multiple features with values of 0.0000 is redundant and pads the output unnecessarily.\",\n    \"overall_quality\": \"The explanation is weak, presenting an uninformative single-feature rule with padded zeros that fails to clearly explain why the model predicted class 0.\",\n    \"semantic_plausibility\": \"In the Adult dataset, being married with a civilian spouse is typically positively associated with earning over 50K, making its isolated association with a <=50K prediction doubtful without further context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:20:14.280038+00:00"
+}
