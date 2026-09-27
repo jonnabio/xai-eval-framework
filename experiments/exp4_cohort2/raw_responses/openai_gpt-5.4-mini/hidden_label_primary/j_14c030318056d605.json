@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6591a8e5ad6efec9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_14c030318056d605",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6591a8e5ad6efec9_eb9158aabf466d14.txt",
+  "prompt_version": "eb9158aabf466d14",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540271-qgwIG97yh0AyXh4I5LF6",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00296925,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6591a8e5ad6efec9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps beyond listing feature names and binary values. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It provides only a very sparse set of local factors with no direction, magnitude, or comparison to baseline, so it is weak for investigating model behavior. The technical metrics suggest mediocre fidelity and low stability, which further limits audit value.\",\n    \"clarity\": \"The wording is short and simple, but the output is difficult to interpret because the listed values (e.g., 1.0000 and 0.0000) are not explained and the anchor conditions are not expressed as readable rules. A non-expert would struggle to understand what these factors mean.\",\n    \"completeness\": \"The explanation omits the actual rule structure, thresholds, and why these features support the negative prediction. It names a few features, but not enough local decision context to understand the specific case.\",\n    \"concision\": \"It is compact and not padded, but much of the space is spent on a long list of feature names without explanatory value. The result is concise in length yet inefficient in information content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, hard to interpret, and provides little practical or diagnostic insight into the model's prediction. The low stability and only moderate fidelity also make it less trustworthy.\",\n    \"semantic_plausibility\": \"The features listed are plausible for a breast cancer model, and the general idea of anchors is consistent with tabular explanations. However, the numeric 0/1 presentation without readable conditions makes the content feel incomplete and only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:55.414912+00:00"
+}

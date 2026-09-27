@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4ab0665b12689ff1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_50e3b33d6c3d012f_9167d6583bb40180.txt",
+  "prompt_version": "9167d6583bb40180",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538800-hQMHu9Wouv0AT0hIxvbj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028845,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002088,
+        "upstream_inference_cost": 0.0028845,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse or decision guidance, such as which clinical factors could be changed or what to verify next. It is informative for interpretation but not directly actionable.\",\n    \"audit_usefulness\": \"It identifies the strongest local SHAP contributors, which is useful for checking whether the model relies on clinically meaningful breast cancer indicators. However, it lacks directional context, baseline comparison, or interaction information, so deeper audit work is limited.\",\n    \"clarity\": \"The wording is straightforward and the ranked feature list is easy to scan, even for a non-expert. That said, the raw feature names and numeric values still require some familiarity with the dataset to interpret fully.\",\n    \"completeness\": \"The explanation covers the main positive local drivers for the prediction, but it does not state whether these features increased or decreased the class score. It also omits the intercept/base value and any countervailing evidence, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and contains mostly the most relevant local factors without obvious repetition. It delivers good information density for its length.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary: concise, readable, and useful for identifying key predictors behind the prediction. Its main weakness is the absence of directionality and broader decision context, which keeps it from being excellent.\",\n    \"semantic_plausibility\": \"The highlighted features are highly plausible for a breast cancer model, especially perimeter, area, radius, and concave points. The ranking aligns well with known diagnostic relevance in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:23.559805+00:00"
+}

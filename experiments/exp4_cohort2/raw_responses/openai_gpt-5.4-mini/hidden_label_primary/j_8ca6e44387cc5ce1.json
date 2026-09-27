@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8ca6e44387cc5ce1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d372ea8e16367348_9c4e0352a4ef03df.txt",
+  "prompt_version": "9c4e0352a4ef03df",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539811-i5Amxtsrvz1Gsk7xymv0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029685,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.0029685,
+        "upstream_inference_prompt_cost": 0.0007815
+      },
+      "is_byok": false,
+      "prompt_tokens": 1042,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete recourse or next steps for a user. It only lists features and values, so it offers no actionable guidance.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes which features were considered locally, but the binary 0/1-like values and lack of directionality make it hard to inspect model reasoning. The negative fidelity and low stability also limit trust in the explanation for investigation.\",\n    \"clarity\": \"The text is short and readable, but the feature list is not clearly explained and the numerical values are hard to interpret for a non-expert. The meaning of the repeated 1.0000 and 0.0000 values is especially opaque.\",\n    \"completeness\": \"It lists several local factors, which gives partial decision context, but it does not explain whether each factor pushed the prediction toward class 1 or away from it. It also omits any relative importance or rule structure that would fully justify the prediction.\",\n    \"concision\": \"The explanation is compact and contains little filler, but much of the content is a raw feature dump rather than informative summary. It is concise, though not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: readable and brief, but weak on interpretability, local decision insight, and practical usefulness. Low fidelity and stability further reduce its quality as an XAI output.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible for this dataset, and the anchor-style output format fits the task. However, the apparent all-or-nothing feature values and lack of explanatory direction make the semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:10:15.163609+00:00"
+}

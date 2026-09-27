@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ff8ec547d5d95aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e3108f541fa1da00",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9ff8ec547d5d95aa_97ab07c7e0cb78ec.txt",
+  "prompt_version": "97ab07c7e0cb78ec",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540051-unZWNJOMh9IpHGRC4flq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.00293475,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1533
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ff8ec547d5d95aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps. It lists a single positive change in hours-per-week but does not explain what direction would help or how much change would be meaningful.\",\n    \"audit_usefulness\": \"It is weak for audit because it mostly exposes near-zero factors without showing their relationship to the prediction or counterfactuals. The sparse and repetitive output gives little insight into why the MLP produced this false negative.\",\n    \"clarity\": \"The wording is short and technically readable, but the meaning is not clear to a non-expert because the zero-valued factors are not explained. The list format also fails to communicate how these factors combine to affect the decision.\",\n    \"completeness\": \"It covers only a narrow slice of local information and omits the main reasons the instance was classified as negative. For a false negative, the explanation should better identify the influential features and the counterfactual changes needed to flip the prediction.\",\n    \"concision\": \"The output is compact and avoids long prose, but much of the content is low-value repetition of zero contributions. It is brief, though not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and syntactically simple, but it lacks meaningful local insight, action guidance, and audit value. The result is only minimally useful for understanding this specific prediction.\",\n    \"semantic_plausibility\": \"The explanation is broadly plausible in the Adult dataset context because hours-per-week and education-related variables can matter. However, the dominance of zero-valued features makes the causal story feel incomplete and not very convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:15.509888+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_443fa95e6bb9a53a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e94dffbc2a939f58",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_443fa95e6bb9a53a_a3bb39e929d9c1fc.txt",
+  "prompt_version": "a3bb39e929d9c1fc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539912-VKrPtot2nLEY6YdlG1P0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.00294,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_443fa95e6bb9a53a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps; it only lists features with perfect scores. A user cannot tell what changes, if any, would alter the prediction.\",\n    \"audit_usefulness\": \"It gives some local feature names, but the output is not interpretable as a decision rationale and lacks directionality or effect size. That makes it weak for investigating model behavior or potential bias.\",\n    \"clarity\": \"The wording is simple, but the structure is confusing because it presents a long list of features all scored 1.0000 without explaining what the scores mean. A non-expert would struggle to understand how these factors relate to the positive prediction.\",\n    \"completeness\": \"The explanation identifies some local attributes, but it omits whether they support or oppose the prediction and does not describe the main reason for the model's positive class. This leaves the local decision context largely incomplete.\",\n    \"concision\": \"It is relatively short, but much of the content is redundant because several feature names are just enumerated with identical values. The token budget is not used efficiently to convey useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is technically compact but not interpretable, not actionable, and only marginally useful for understanding the model's prediction. The listed anchors do not form a coherent justification.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the Adult dataset, but assigning every listed factor a value of 1.0000 as an explanation is semantically odd and not a meaningful local rationale. It does not read like a coherent account of why the model predicted class 1.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:57.406179+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8b0a1b5048367761",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4919484756fd435e_0240aaec5392a545.txt",
+  "prompt_version": "0240aaec5392a545",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539719-G6iNZi99TtEgACSQKM73",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00302025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002232,
+        "upstream_inference_cost": 0.00302025,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It only lists one positive feature change and many zero-valued factors, without telling the user what to do or how much impact changes would have.\",\n    \"audit_usefulness\": \"It gives some local signal about one feature being important, but the many zero entries are not useful for auditing model behavior. The explanation is too sparse and uninformative to support deeper inspection of the model's decision logic or potential bias.\",\n    \"clarity\": \"The output is easy to parse mechanically, but the meaning is not clearly explained for a non-expert reader. The list of feature names and numeric values lacks interpretation, especially the many zeros and the unexplained scale of the 3.7540 value.\",\n    \"completeness\": \"It identifies only a single meaningful driver and omits most of the local factors behind the prediction. For a specific binary decision, this does not provide enough context to understand why the model predicted class 0.\",\n    \"concision\": \"The explanation is short, but much of the length is wasted on repeated zero-valued features. It is not especially informative per word because it conveys little beyond one dominant feature.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, only partly interpretable, and offers little insight into the specific decision. It is somewhat useful as a minimal local summary, but falls far short of a strong XAI explanation.\",\n    \"semantic_plausibility\": \"The main signal from education-num being important is plausible for the Adult income task, and the other listed features are reasonable tabular variables. However, the presentation of many exact zeros as top local factors is somewhat awkward and reduces confidence in the explanation's semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:08:43.381726+00:00"
+}

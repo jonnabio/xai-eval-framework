@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f2a1eb5dc9b2e878",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e7770b140359bd75_20af4a2bff4d082b.txt",
+  "prompt_version": "20af4a2bff4d082b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538595-GQv1hFjDWEkPEIB5u1r6",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003093,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002304,
+        "upstream_inference_cost": 0.003093,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or decision guidance beyond naming features, so a user cannot tell what to change or verify. Because the listed anchors are binary indicators and some are not directly actionable, it provides little practical next-step value.\",\n    \"audit_usefulness\": \"It identifies a few local features associated with the prediction, which gives some limited insight into model behavior. However, the output is too sparse and oddly formatted to support deeper auditing, such as checking whether the model relies on plausible or biased signals.\",\n    \"clarity\": \"The feature names are readable, but the anchor scores and the uninformative zeros make the explanation hard to interpret for a non-expert. It is not clear what the 1.0000 and 0.0000 values mean in terms of supporting the prediction.\",\n    \"completeness\": \"Only three features are highlighted as top local factors, and the explanation omits directionality, thresholds, and how strongly they contributed to the predicted class. For a false positive, that leaves out important context needed to understand why the model erred.\",\n    \"concision\": \"The explanation is fairly short and mostly avoids redundancy, but some of the listed zero-valued features add little useful information. Overall it is compact, though not especially information-dense.\",\n    \"overall_quality\": \"This is a limited explanation: it is somewhat readable and sparse, but it lacks interpretive depth, recourse value, and enough local detail to explain the false positive well. Its technical simplicity makes it only moderately useful overall.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for an Adult-income model, since education, occupation, and marital relationship are common predictive variables. Still, the presentation of anchors with several zero-valued features is not very natural and weakens the explanation's coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:58.638245+00:00"
+}

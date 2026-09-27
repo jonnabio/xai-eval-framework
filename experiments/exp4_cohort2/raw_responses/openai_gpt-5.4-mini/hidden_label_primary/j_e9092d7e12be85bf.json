@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e9092d7e12be85bf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9a991f3bd7709007_f1ecaf41fa27cd3e.txt",
+  "prompt_version": "f1ecaf41fa27cd3e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539004-gb0eKkavjODfsK222Nys",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002025,
+        "upstream_inference_cost": 0.00282,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the feature contributions into any concrete recourse or decision steps. It only lists factors pushing the prediction up or down, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the top local SHAP drivers and their signed effects, which helps inspect model behavior. However, it lacks feature values, baseline context, and a link to the false-positive outcome, so deeper error analysis is limited.\",\n    \"clarity\": \"The output is easy to read as a ranked list of feature attributions with positive and negative signs. A non-expert may still need some interpretation of what the signs mean, but the structure is straightforward.\",\n    \"completeness\": \"It covers several main local drivers of the prediction, but only as a sparse ranking of feature attributions. It does not provide the actual feature values, probability, or an explanation of how the listed factors combine to produce the final class.\",\n    \"concision\": \"The explanation is compact and information-dense, with little redundancy. It presents the top factors directly without unnecessary wording.\",\n    \"overall_quality\": \"This is a reasonably good local explanation in a terse SHAP format, especially for technical review. Its main weakness is that it lacks contextual detail and actionable guidance, which limits usefulness for end users.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible predictors and the mixture of positive and negative contributions is coherent. Nothing in the explanation contradicts the domain or the model setting.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:48.060321+00:00"
+}

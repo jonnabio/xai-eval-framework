@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fef1732bfc52ac7a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b60690c60417e4de_77f52d9059df94f8.txt",
+  "prompt_version": "77f52d9059df94f8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538474-Tit3GEHAocbdtBwBJWMT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002928,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.002928,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1534
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives feature contributions but no concrete recourse or decision guidance, so a user cannot tell what to change to affect the prediction. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the local factors driving the model output and their directions, which can support inspection of whether the model relies on sensible signals. However, the small and weakly weighted attribution set limits deeper diagnostic value.\",\n    \"clarity\": \"The list of labeled feature attributions is easy to scan, and the sign convention is implicitly understandable as positive versus negative influence. Still, the meaning of the numeric values and their connection to the final class is not fully explained for a non-expert.\",\n    \"completeness\": \"The explanation covers several top local factors, but it omits the instance's actual feature values, the baseline comparison, and how these weights combine into the final decision. That leaves an incomplete picture of why this specific prediction was made.\",\n    \"concision\": \"The explanation is short and compact, with a focused list of top contributors and little redundancy. It conveys useful information per word well.\",\n    \"overall_quality\": \"Overall this is a reasonably compact local explanation that is understandable and somewhat useful for inspection, but it lacks sufficient context and recourse information. Its technical quality is also limited by the low stability and only moderate faithfulness.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income model, since education, capital gain, marital status, occupation, sex, and age are commonly influential. The specific combination and small coefficients are coherent with a linear model explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:56.980497+00:00"
+}

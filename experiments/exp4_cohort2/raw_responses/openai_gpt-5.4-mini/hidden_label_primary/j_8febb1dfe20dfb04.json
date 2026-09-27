@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8febb1dfe20dfb04",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_2a63737c16fa6edb_bbafa21349cb7ac2.txt",
+  "prompt_version": "bbafa21349cb7ac2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538956-jEwcVZFL8JCxKpdOIxL8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00292875,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or decision guidance beyond listing feature contributions. A user could not infer what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It provides local feature attributions that are useful for inspecting which variables influenced the logistic regression decision, but the tiny values and low fidelity/stability limit deeper audit value. It is still somewhat informative for checking whether the model relies on reasonable factors.\",\n    \"clarity\": \"The output is easy to read because it is a short ranked list of features with signs and weights. However, a non-expert may not understand what the coefficients mean without additional explanation of LIME and the encoded feature names.\",\n    \"completeness\": \"It covers several top local drivers of the prediction, including education, occupation, hours worked, age, and capital gain. Still, the explanation lacks the model baseline, direction in plain language, and enough context to fully understand why the instance was classified as negative.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It conveys the main local factors in a small number of tokens without unnecessary narrative.\",\n    \"overall_quality\": \"Overall this is a usable but limited local explanation: concise and reasonably interpretable, yet weak in actionability and only moderately useful for auditing. The low faithfulness and stability metrics further reduce confidence in the explanation quality.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult income task, especially education, occupation, hours per week, age, and capital gain. The signs and magnitudes are not contradictory, although the very small contributions make the justification feel weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:00.071255+00:00"
+}

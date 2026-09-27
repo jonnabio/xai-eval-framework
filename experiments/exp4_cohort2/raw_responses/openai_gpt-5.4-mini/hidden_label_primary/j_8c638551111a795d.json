@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8c638551111a795d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6d6ef32df0477323_9176e22b9d728fa7.txt",
+  "prompt_version": "9176e22b9d728fa7",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539192-lZ1IXrhSxfMvr9v4lJPP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00314025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002349,
+        "upstream_inference_cost": 0.00314025,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1577
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few local factors, but it does not translate them into concrete recourse or decision steps the user could take. It also lacks direction on which feature changes would be needed to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes the main driver and shows that many listed factors have zero impact, but it provides too little contextual interpretation to fully inspect model behavior. The weak sparsity and modest fidelity also limit confidence in the explanation.\",\n    \"clarity\": \"The feature list is easy to parse mechanically, but the meaning of the values is not explained and the presentation is not very readable for a non-expert. Terms like 'DICE top local factors' and raw encoded feature names reduce accessibility.\",\n    \"completeness\": \"It only highlights one meaningful factor, education-num, plus a minor race-related term, and then lists many zero-valued features without explaining their relevance. For a specific prediction, this does not provide enough local decision context to understand why the model predicted class 1.\",\n    \"concision\": \"The explanation is short, but much of the space is spent on zero-valued features that add little value. It could be more informative by focusing on the few truly influential factors and giving a brief interpretation of their effect.\",\n    \"overall_quality\": \"Overall, this is a weak-to-moderate explanation: it is technically readable and stable, but sparse, under-interpreted, and only partially useful for understanding the prediction. Its limited completeness and low practical actionability keep the quality below average.\",\n    \"semantic_plausibility\": \"The identified factors are plausible for the Adult dataset and it is reasonable that education level would influence income prediction. However, the inclusion of several zero-effect features and the very narrow set of active drivers make the explanation feel only partially aligned with a coherent local story.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:59:56.483454+00:00"
+}

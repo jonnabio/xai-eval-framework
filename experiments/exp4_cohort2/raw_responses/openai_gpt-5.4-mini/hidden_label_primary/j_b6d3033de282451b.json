@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b6d3033de282451b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_03f9ac9f3ab42b8b_394bab715237b08f.txt",
+  "prompt_version": "394bab715237b08f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538523-YUbGum4KQlS3OHvfntjQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.0029595,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names influential features but does not translate them into any concrete recourse or decision guidance. A user cannot tell what specific change would alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local SHAP drivers and their directions, which can help inspect whether the logreg model is relying on sensible predictors. However, it lacks baseline context and does not explain the combined effect well enough for deep diagnosis.\",\n    \"clarity\": \"The feature list is compact and easy to read for someone familiar with tabular model explanations. For a non-expert, the meaning of encoded variables like sex_Female and relationship_Wife may still be somewhat opaque, but the overall structure is understandable.\",\n    \"completeness\": \"It covers several top local factors, including both positive and negative contributions, so the main drivers are present. Still, it omits the predicted class probability, intercept/baseline, and any synthesis of how these factors combine to yield the final negative prediction.\",\n    \"concision\": \"The explanation is brief and information-dense, with no obvious filler or redundancy. It communicates multiple local factors in a compact form.\",\n    \"overall_quality\": \"This is a solid SHAP-style local explanation that is useful for inspection and reasonably easy to parse. Its main weaknesses are the lack of actionable guidance and the limited contextual interpretation of the encoded features.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and consistent with a logistic regression model on encoded tabular variables. The mix of demographic and work-related attributes matches expected patterns, even though the directionality is not fully intuitive without knowing the positive class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:46.095782+00:00"
+}

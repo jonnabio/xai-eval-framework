@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_501013a45e709020",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_07197d290136f3e3_a11ce3fe23b809a3.txt",
+  "prompt_version": "a11ce3fe23b809a3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540248-lXQeIoWtdB7n2pHihXsH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029385,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.0029385,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete recourse or review steps. It only lists features with binary indicator values, so a user cannot infer what to change or verify.\",\n    \"audit_usefulness\": \"For auditing, it is only weakly useful because it identifies a few local features but gives no directionality or human-readable rule logic. The near-zero sparsity and low fidelity also limit its value for investigating model behavior.\",\n    \"clarity\": \"The output is easy to parse mechanically, but it is not clear to a non-expert why some features are marked 1.0000 and others 0.0000 or what these scores mean. It lacks an explanation sentence connecting the factors to the prediction.\",\n    \"completeness\": \"It mentions only a small set of local factors and omits the actual decision rule, feature directions, and how they combine to produce the negative prediction. This is insufficient to fully understand the specific outcome.\",\n    \"concision\": \"It is short and compact, but much of the space is spent on raw feature listings without interpretive value. The brevity does not compensate for the lack of explanatory content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: technically structured but minimally informative, low in fidelity, and not very helpful for understanding the false negative prediction. It provides some local feature hints, yet not enough semantic content for meaningful use.\",\n    \"semantic_plausibility\": \"The selected Adult dataset features are plausible and relevant, and the anchors-style format is consistent with the task. However, the pattern of 1.0 and 0.0 values without interpretation makes the explanation only superficially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:32.492492+00:00"
+}

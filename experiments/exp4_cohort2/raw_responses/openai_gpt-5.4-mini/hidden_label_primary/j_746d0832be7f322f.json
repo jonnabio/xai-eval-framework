@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_746d0832be7f322f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_aa1ea16859fa26f1_a194c7ee33c6cabc.txt",
+  "prompt_version": "a194c7ee33c6cabc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539177-NDfcIDs2FbzgiOM7xoeK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022635,
+        "upstream_inference_cost": 0.00305925,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction locally, but it does not translate them into any concrete recourse or next steps. A user cannot tell what could be changed to alter the outcome, especially since many listed variables are not actionable.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it shows the top local contributors and their directions, which can help inspect whether the model relies on sensible factors. However, the weights are weak and somewhat unstable, so it only partially supports deeper bias or error analysis.\",\n    \"clarity\": \"The output is short and readable, with features and numeric contributions presented in a straightforward list. Still, the meaning of positive versus negative values is not explained, so a non-expert may not fully understand how they relate to the prediction.\",\n    \"completeness\": \"The explanation covers several top local factors, but the contributions are small and it omits broader context such as the baseline, prediction probability, or how strongly each factor influenced the decision. It gives only a partial view of why this specific instance was classified as positive.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the most important local factors. It could be slightly more informative by adding minimal context, but it is efficient for its length.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is readable and concise, yet the weak feature contributions and lack of context reduce its diagnostic value. Overall it provides some insight into the model decision, but not enough for strong decision support or thorough auditing.\",\n    \"semantic_plausibility\": \"The listed factors are broadly consistent with the Adult dataset and a positive income prediction, especially education, occupation, marital status, and hours worked. Nothing appears contradictory or implausible in the feature effects.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:59:41.347210+00:00"
+}

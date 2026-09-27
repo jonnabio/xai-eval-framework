@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7a626ed76f3b5273",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a2878ddc3d3b22b3_95eb1d108b6dd240.txt",
+  "prompt_version": "95eb1d108b6dd240",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540314-pS1pwQCbx1U8cP33perT",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002832,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.002832,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1516
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete recourse or next steps. It only lists local factor values, so a user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"There is some limited audit value because it exposes which features the local method considered, but the near-zero scores and lack of directionality make model behavior hard to inspect. It is not sufficient for diagnosing why the false positive occurred.\",\n    \"clarity\": \"The output is short and mostly readable, but the feature names, numbers, and lack of explanatory language make it difficult for a non-expert to understand. It reads more like raw diagnostics than an explanation.\",\n    \"completeness\": \"It identifies a few local factors, but it omits the direction of influence, relative importance, and how they combine to produce the prediction. For a specific false positive, the decision context is far from complete.\",\n    \"concision\": \"The explanation is brief and compact, with little redundancy. However, the brevity comes from listing sparse values rather than conveying dense useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but not very informative, actionable, or interpretable. It offers only minimal local insight into the model's decision.\",\n    \"semantic_plausibility\": \"The listed adult-dataset features are plausible for a logistic-regression explanation, and the instance-level factors are not contradictory. However, the many zero-valued contributions and the odd-looking age value reduce confidence in the semantic usefulness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:39.063923+00:00"
+}

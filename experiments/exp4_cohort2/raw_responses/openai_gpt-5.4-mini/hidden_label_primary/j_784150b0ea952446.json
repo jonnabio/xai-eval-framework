@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_784150b0ea952446",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_10ccf6bdc14f2a99_95a78c5915b1a267.txt",
+  "prompt_version": "95a78c5915b1a267",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538638-bGjnafqon6YJrhY4BctJ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022725,
+        "upstream_inference_cost": 0.00306375,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction down, but it does not translate them into any concrete recourse or next steps for a user. A person could not easily act on \\\"worst area\\\" or \\\"mean concavity\\\" without additional guidance.\",\n    \"audit_usefulness\": \"This is useful for auditing because it lists the main local drivers of the negative prediction with signed SHAP contributions. However, it lacks baseline comparison, feature values, and threshold context, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The ranking of features with numeric SHAP values is easy to read and the direction of influence is clear. Still, non-experts may not understand what the feature names mean, especially the medical terminology and the negative sign convention.\",\n    \"completeness\": \"It covers the top local factors and gives a reasonable summary of why the model predicted class 0. But it omits the actual feature values, the prediction probability, and any comparison to counterfactual or baseline behavior, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and contains only the top contributing factors with their scores, without obvious filler. It is slightly repetitive in listing many similar breast-cancer morphology features, but overall it is efficiently worded.\",\n    \"overall_quality\": \"Overall, this is a solid SHAP local explanation: it is concise, stable, and reasonably informative about which features drove the prediction. Its main weakness is limited interpretability for non-experts and limited support for action or deep audit.\",\n    \"semantic_plausibility\": \"The listed features are plausible and domain-consistent for a breast cancer classifier, and the negative contributions fit a prediction toward class 0. The pattern of high-impact shape/size features also matches general expectations for this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:41.413881+00:00"
+}

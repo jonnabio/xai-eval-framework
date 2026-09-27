@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_103d89f1e4cb72f6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_42cb19169f80f810",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_103d89f1e4cb72f6_6f729f7cbaf69168.txt",
+  "prompt_version": "6f729f7cbaf69168",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539234-Wna4kPDnLYPJYfY5POU8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.00298575,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_103d89f1e4cb72f6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives almost no recourse guidance beyond listing factors, and it does not say what the user could change or check next. It is therefore not useful for taking specific action.\",\n    \"audit_usefulness\": \"For an auditor, the output is only weakly informative because it is mostly a sparse factor list with many zero-valued entries and no directionality or comparison to a baseline. It does not sufficiently support investigation of why this false negative occurred.\",\n    \"clarity\": \"The wording is simple, but the format is confusing because several features have zero values without explanation and the meaning of the numbers is not stated. A non-expert would struggle to interpret what the listed factors imply for the prediction.\",\n    \"completeness\": \"It mentions a couple of potentially relevant drivers such as capital-gain and education, but it omits the broader local context needed to understand the specific prediction. The explanation is especially incomplete for a false negative because it does not explain what pushed the model toward class 0.\",\n    \"concision\": \"The explanation is short and compact, but some of the listed zero-valued features add little useful information. Overall it is concise, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a low-quality explanation because it is sparse, hard to interpret, and weak for both decision understanding and audit purposes. It provides only a fragmentary view of the local behavior of the model.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for an Adult-income model, and capital-gain/education are reasonable drivers. However, the presence of several zero-valued top factors without context makes the explanation feel only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:38.313192+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_19d0581ee431e00e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_19b944710e090900_63e11c2cfed0297c.txt",
+  "prompt_version": "63e11c2cfed0297c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538895-FzrXnjL7j2aMnbJ4lmPq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00293325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.00293325,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not suggest any feasible recourse or next step for the person affected. A user cannot easily tell what changes might increase the predicted outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals the local features the LIME surrogate deemed influential, including negative and positive contributions. However, the very low stability and moderate fidelity limit confidence in using it to investigate model behavior deeply.\",\n    \"clarity\": \"The output is compact and easy to scan, with each feature and its sign shown directly. A non-expert may still struggle with technical feature names like fnlwgt and one-hot encoded categories, but the overall structure is understandable.\",\n    \"completeness\": \"It covers several top local factors that influenced the prediction, which helps explain the decision at a surface level. Still, it lacks the baseline, the predicted class meaning, and a fuller account of why the model chose the negative outcome in this false-negative case.\",\n    \"concision\": \"The explanation is brief and information-dense, with little redundancy. It provides a compact ranked list of local factors without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is concise and mostly clear, yet it gives only partial decision context and weak support for recourse or robust auditing. Its technical usefulness is tempered by the low stability and modest fidelity metrics.\",\n    \"semantic_plausibility\": \"The listed features and directions are plausible for the Adult dataset, and the pattern of education, occupation, marital status, age, and sex being relevant is consistent with common model behavior. Nothing in the explanation is obviously contradictory or nonsensical.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:58.872539+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d01d649f417a061f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3debbe632feba167_9bc9a8ed3b7e9d40.txt",
+  "prompt_version": "9bc9a8ed3b7e9d40",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539752-bAps55f5wAuPEgOF0wj0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028095,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.0028095,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1501
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It only lists local factors without translating them into actions a user could take.\",\n    \"audit_usefulness\": \"It gives a very limited view of model behavior because most listed features have zero contribution and the single nonzero feature is not interpreted in context. This makes it weak for auditing why the model predicted class 0.\",\n    \"clarity\": \"The output is mechanically readable, but the format is not explanatory for a non-expert because it presents feature names and numbers without meaning. A reader would not understand how these factors drove the prediction.\",\n    \"completeness\": \"It is missing the main local decision context, including which features actively pushed the prediction toward the negative class and by how much. The near-all-zero list does not adequately explain the specific prediction.\",\n    \"concision\": \"The explanation is short, but much of the content is uninformative padding because most features are shown as 0.0000. It is therefore not efficient in communicating useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: technically compact and readable, but largely uninformative and not useful for understanding or reviewing the prediction. It offers little local insight beyond a single feature value.\",\n    \"semantic_plausibility\": \"The single nonzero factor and the all-zero remainder are not inherently contradictory, and the content is at least consistent with a tabular instance explanation. However, the explanation feels implausibly sparse for a meaningful DICE counterfactual-style summary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:15.977941+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0c48a5bf161701d8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c04339897f75190f_e492ecaca783018b.txt",
+  "prompt_version": "e492ecaca783018b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539361-xNgCOzuBlVl9RfLkNCvG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002853,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020565,
+        "upstream_inference_cost": 0.002853,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names factors associated with the prediction, but it does not translate them into concrete recourse steps a user could take. A reader cannot tell which changes would most likely alter the decision or whether they are feasible.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the top local SHAP contributors and their directions, which helps inspect whether the model relies on reasonable features. However, it lacks the base value, class-specific context, and comparative detail needed for deeper error or bias analysis.\",\n    \"clarity\": \"The output is straightforward and uses a simple ranked list of features with signed values. A non-expert may still find the feature names somewhat cryptic, but the overall structure is easy to follow.\",\n    \"completeness\": \"The explanation covers the main local drivers of the prediction and gives their relative contributions. It does not provide the baseline score, probability for the predicted class, or a narrative tying these factors together, so the local decision context is only partial.\",\n    \"concision\": \"The explanation is compact and information-dense, with little redundancy. It provides a useful top-ten list without unnecessary wording.\",\n    \"overall_quality\": \"This is a reasonably strong local explanation: concise, structured, and informative about feature contributions. Its main weaknesses are the lack of actionable guidance and limited contextualization for interpreting the negative prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the directions of influence look broadly consistent with domain expectations. Nothing in the explanation appears contradictory or implausible for a credit risk model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:45.559869+00:00"
+}

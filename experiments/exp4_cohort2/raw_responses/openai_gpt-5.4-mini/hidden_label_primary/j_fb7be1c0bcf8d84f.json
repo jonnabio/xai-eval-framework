@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_36ff2c1056b28459",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fb7be1c0bcf8d84f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_36ff2c1056b28459_c800b9705300e372.txt",
+  "prompt_version": "c800b9705300e372",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540319-oSlrHrjON0y8UMQLbBPi",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.00297,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_36ff2c1056b28459\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give a feasible recourse or next step; it only lists features with near-zero changes and one nonzero factor without saying what to change to alter the prediction. A user cannot meaningfully act on it.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it exposes a sparse set of local feature changes, but the values are mostly zeros and do not meaningfully explain why the model predicted class 0. The low fidelity and stability further reduce its value for model inspection.\",\n    \"clarity\": \"The output is short and syntactically simple, but the numbers are opaque and the meaning of 'top local factors' is not explained. A non-expert would struggle to interpret why these factors matter.\",\n    \"completeness\": \"It omits the main local decision drivers and gives no coherent counterfactual or feature-importance ranking that explains the specific negative prediction. The explanation is too sparse to reconstruct the model's reasoning.\",\n    \"concision\": \"The explanation is compact, but much of the content is redundant zeros that add little information. It is brief without being information-dense.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat readable, but it lacks actionable guidance, meaningful decision context, and strong audit value. The technical metrics also suggest poor fidelity and instability.\",\n    \"semantic_plausibility\": \"The content is superficially plausible for a DICE-style local explanation on Adult data, but the pattern of one nonzero factor and many zero-valued features is not very informative semantically. It does not strongly align with how a useful local explanation would \u0639\u0627\u062f\u0629 describe the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:43.049557+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_607d852b654632af",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_959ed027a5ab7370_e0dc6f1f4af1e066.txt",
+  "prompt_version": "e0dc6f1f4af1e066",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538732-0guBzaXbRdaLYthnopEH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.0030225,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps for the applicant or reviewer. It only lists local factors and their weights, without indicating what could be changed or checked.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies which features were part of the anchor set, but it does not explain directionality or how those features interacted with the model output. With only binary 1/0 indicators, it offers limited support for deeper bias or error analysis.\",\n    \"clarity\": \"The explanation is short and mechanically readable, but the anchor-style feature list with many 1.0000 values and no prose is not naturally understandable to a non-expert. The meaning of these numbers is implicit rather than explained.\",\n    \"completeness\": \"It provides only a sparse set of top local factors and omits how they combine to produce the negative prediction. Important local context such as feature values, feature direction, and the competing evidence behind the false negative is missing.\",\n    \"concision\": \"The explanation is compact and avoids excess wording, but it is also compressed to the point that essential interpretive context is absent. As a result, it is brief but not highly informative per word.\",\n    \"overall_quality\": \"Overall, the explanation is moderately useful as a technical anchor summary but weak as a human-facing explanation. It is sparse, only partially informative, and does not adequately support understanding or review of the specific prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit and consistent with the kind of variables an anchor explanation might surface. However, the output is odd in that several unrelated features are all shown with 1.0000 support and no contextual interpretation, which limits confidence in its practical semantic value.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:14.678829+00:00"
+}

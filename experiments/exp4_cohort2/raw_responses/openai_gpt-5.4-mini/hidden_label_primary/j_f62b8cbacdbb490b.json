@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f62b8cbacdbb490b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c71f9ed1b1a0812a_9e2dc99a05511220.txt",
+  "prompt_version": "9e2dc99a05511220",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539225-byadjnlyLhUEjI1Y3Qk2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.00292125,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse steps or decision alternatives, only a list of factors with mostly zero values. A user cannot tell what to change or how much change would matter.\",\n    \"audit_usefulness\": \"It offers limited audit value because it identifies one positive factor, but the many zero-valued entries and lack of directionality make it hard to inspect model behavior in depth. There is not enough structure to support bias or error analysis well.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the listed numbers is not explained for a non-expert. Terms like 'top local factors' and the zero-valued features are ambiguous without context.\",\n    \"completeness\": \"It names only a small subset of factors and does not explain how they collectively led to the positive prediction. Key local decision context, such as baseline comparison or counterfactual changes, is missing.\",\n    \"concision\": \"The explanation is compact and not padded, but much of the space is spent on uninformative zero entries. It is concise overall, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak local explanation: it is brief and readable, but it lacks interpretability, useful detail, and actionable insight. The small amount of information it provides is not enough to fully understand the prediction.\",\n    \"semantic_plausibility\": \"The highlighted factor 'hours-per-week' is plausible as a driver for the Adult income task, and the use of education-related features is also reasonable. However, the many zero-valued factors and unclear numeric meanings make the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:00:30.861280+00:00"
+}

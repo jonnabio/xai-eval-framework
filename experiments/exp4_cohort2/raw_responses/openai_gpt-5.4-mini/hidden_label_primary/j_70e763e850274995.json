@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_70e763e850274995",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_be3a619c28fb15c4_26ddf86a8ce636b6.txt",
+  "prompt_version": "26ddf86a8ce636b6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539409-oN2ropIzi3sNsH39Cd4g",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002943,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.002943,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate what changes would likely reverse the prediction. It only lists small feature contributions, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes the main local features the model relied on, including missing-value indicators and demographic variables. However, the very low fidelity and stability suggest it is not reliable enough for strong model-behavior inspection.\",\n    \"clarity\": \"The format is readable and the feature names are mostly understandable, but the numeric contributions are tiny and not interpreted in plain language. A non-expert would struggle to infer why the model predicted the negative class.\",\n    \"completeness\": \"It includes several top local factors, but the contribution magnitudes are weak and do not explain the decision boundary well. Key context for the false negative, such as how these factors combine or which features most pushed against the positive class, is missing.\",\n    \"concision\": \"The explanation is brief and focused on top features without excessive repetition. It is compact, though some of the listed terms add little value because their effects are near zero.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and readable, but the feature attributions are tiny, low-fidelity, and not very informative for understanding the prediction. It offers limited practical or diagnostic value despite being syntactically clear.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, especially education, occupation, workclass, age, and marital status. The presence of missing-value indicators is also reasonable, so the explanation is coherent with the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:03:33.179975+00:00"
+}

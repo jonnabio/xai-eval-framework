@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_df8b987fa8a02f19",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_214506591db1e703_499c7d859f37a004.txt",
+  "prompt_version": "499c7d859f37a004",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540005-XfyUePipMD2F3EbEfE1g",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.00290625,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or actionable changes beyond naming features that influenced the prediction. It is especially weak for decision review because most listed factors have zero effect.\",\n    \"audit_usefulness\": \"It gives a limited view of local feature influence, but the near-all-zero attributions and low fidelity/stability make it hard to inspect model behavior reliably. An auditor would learn that marital status mattered most here, but not enough to diagnose why the FP occurred.\",\n    \"clarity\": \"The format is straightforward and the feature list is easy to read, even for a non-expert. However, the meaning of the numeric values is not explained, so interpretability remains limited.\",\n    \"completeness\": \"Only a small subset of local factors is effectively informative, and the explanation does not show how these features combine to produce the positive prediction. It omits the counterfactual or decision threshold context needed to fully understand this specific case.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with a short ranked list of local factors. Its brevity is efficient, though some listed zero-valued factors add little useful information.\",\n    \"overall_quality\": \"This is a minimally useful local explanation: readable and concise, but shallow, weakly informative, and not very actionable. Low fidelity and stability further reduce trust in the explanation for a false-positive case.\",\n    \"semantic_plausibility\": \"The highlighted marital-status effects are plausible in the Adult income domain, where marital status often correlates with income class. Still, the many zero-valued factors and lack of clear directionality make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:29.527868+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_068a4667b5582129",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f18f76706d7aa678_9ded449d91e961a3.txt",
+  "prompt_version": "9ded449d91e961a3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539428-c1Ue2eodzXC6XnuZLRSb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00296025,
+        "upstream_inference_prompt_cost": 0.00078675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1049,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It only lists anchored features, so a user cannot tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a small set of features associated with the prediction. However, the binary 1.0000/0.0000 style provides little nuance about direction, magnitude, or possible model failure modes.\",\n    \"clarity\": \"The output is readable and the feature names are straightforward, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand what the anchors indicate or how they justify the prediction.\",\n    \"completeness\": \"It names several local factors, but it omits how these features combine to support the positive prediction and gives no evidence of relative importance. The explanation is therefore only partially sufficient for understanding this specific decision.\",\n    \"concision\": \"The explanation is short and compact, with no obvious filler. It is concise, though the compactness comes at the cost of explanatory depth.\",\n    \"overall_quality\": \"This is a moderately useful but thin explanation: it is brief and somewhat interpretable, yet lacks directionality, recourse, and sufficient detail for strong local understanding. The technical metrics also suggest limited fidelity and stability, which further reduces quality.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for an Adult income prediction, especially education, marital status, relationship, and capital-related variables. However, the simultaneous inclusion of workclass_Local-gov and workclass_nan as top anchors is somewhat awkward and may indicate weak or unstable explanation behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:03:51.671653+00:00"
+}

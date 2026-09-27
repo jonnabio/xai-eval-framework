@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7ad08767edc24c42",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0c57055995cafaca_7391a28f592705fc.txt",
+  "prompt_version": "7391a28f592705fc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538552-svOHZksbVkGw6IOzLsR7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.00295425,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1534
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a concrete reason for the prediction or any feasible recourse steps. It lists local factors with binary-style values but does not indicate what changes could alter the outcome.\",\n    \"audit_usefulness\": \"It offers limited audit value because the listed features and weights are not interpretable as a local decision rule, and the zero/one pattern is hard to connect to model behavior. The low fidelity and stability further reduce its usefulness for investigating errors or bias.\",\n    \"clarity\": \"The output is superficially readable, but the meaning of the feature values is unclear to a non-expert and the format is not self-explanatory. A reader cannot tell whether 1.0000 means importance, presence, or rule satisfaction.\",\n    \"completeness\": \"It names a few features but does not explain how they combine to produce the negative prediction or why other relevant features were omitted. For a false negative, this is not enough local context to understand the decision.\",\n    \"concision\": \"The explanation is short and compact, but it achieves brevity by compressing the information into an opaque list. Its efficiency is low because the content is not very informative despite being brief.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise but not sufficiently interpretable, actionable, or informative about the local decision. The low technical quality metrics are consistent with a mediocre explanation.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset and a logistic regression model, so the explanation is not obviously contradictory. However, the specific representation of anchors values as 1.0000/0.0000 for features is not very semantically transparent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:14.955523+00:00"
+}

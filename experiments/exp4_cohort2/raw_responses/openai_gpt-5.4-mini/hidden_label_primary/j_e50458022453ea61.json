@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6591a8e5ad6efec9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e50458022453ea61",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6591a8e5ad6efec9_eb9158aabf466d14.txt",
+  "prompt_version": "eb9158aabf466d14",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540279-cbJLZ9y6hrV1CZm8vAjb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 504,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002268,
+        "upstream_inference_cost": 0.00306375,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6591a8e5ad6efec9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete next step, recourse option, or feature-level change a user could make. It only lists anchor indicators with binary-style values, so it offers no actionable guidance.\",\n    \"audit_usefulness\": \"It provides a minimal snapshot of which features appear in the local rule, but it does not explain directionality, thresholds, or how these factors relate to the prediction. That makes it only weakly useful for auditing model behavior or diagnosing errors.\",\n    \"clarity\": \"The wording is short and technically simple, but the output is not readily understandable because it gives feature names with 0/1 values without explaining what they mean in context. A non-expert would struggle to interpret the rule or its significance.\",\n    \"completeness\": \"The explanation names several local factors, yet it omits the actual rule logic, feature thresholds, and how the listed conditions combine to support the prediction. For a specific prediction, this is too incomplete to fully understand why the model predicted class 0.\",\n    \"concision\": \"It is compact and avoids long prose, but the brevity comes at the cost of interpretability. The output is reasonably concise, though not maximally informative per word because key explanatory context is missing.\",\n    \"overall_quality\": \"Overall, this is a low-quality explanation for a local binary prediction: it is terse and somewhat structured, but it lacks interpretability, actionable content, and enough decision context. The technical metrics also suggest limited fidelity and stability, which reinforces the weak explanatory value.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible for this dataset, and using anchors-style feature conditions is consistent with the method. However, the 0/1 representation without readable conditions makes the semantics of the explanation unclear in practice.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:03.192757+00:00"
+}

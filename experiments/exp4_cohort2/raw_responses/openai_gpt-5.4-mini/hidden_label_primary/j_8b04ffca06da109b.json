@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6591a8e5ad6efec9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8b04ffca06da109b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6591a8e5ad6efec9_eb9158aabf466d14.txt",
+  "prompt_version": "eb9158aabf466d14",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540275-gSxjbuZtedqpSZEJQbOZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022635,
+        "upstream_inference_cost": 0.00305925,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6591a8e5ad6efec9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete next step or recourse option for a user. It only lists feature indicators, so it offers no actionable guidance for changing or reviewing the decision.\",\n    \"audit_usefulness\": \"It provides only a sparse and somewhat opaque local feature summary, with binary-like values that are hard to interpret as actual rules or contributions. This limits its value for diagnosing model behavior, especially given the low fidelity and stability metrics.\",\n    \"clarity\": \"The wording is short, but the presentation is not very understandable to a non-expert because it exposes raw feature names and unexplained 0/1-style values. The reader is not told what these values mean in relation to the prediction.\",\n    \"completeness\": \"It identifies only a couple of top local factors and omits any clear directionality, thresholds, or interaction information needed to understand why the model predicted class 0. The local decision context is therefore incomplete.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but it is also repetitive and low in information density because many listed features are all shown with the same kind of value. It is brief, though not especially efficient in communicating insight.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but not very interpretable, not actionable, and only partially useful for inspection. The low fidelity and stability metrics further suggest that the explanation is not dependable enough to be high quality.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are appropriate for the dataset, so the content is contextually plausible. However, the presentation of '1.0000' and '0.0000' as top local factors is semantically odd and not clearly tied to a coherent human-readable rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:17:59.058317+00:00"
+}

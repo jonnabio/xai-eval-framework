@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_483be42957cedbce",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4e9045d4d8fa6e21_ffa178d68dbc2966.txt",
+  "prompt_version": "ffa178d68dbc2966",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539524-Bl95K3POKfYXdJ78mXNw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002232,
+        "upstream_inference_cost": 0.00303225,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse steps or decision-relevant advice. It lists a single feature with a positive change value but gives no actionable counterfactual guidance for changing the prediction.\",\n    \"audit_usefulness\": \"For auditing, it reveals only one non-zero local factor and many zero-valued features, which is too thin to inspect why the model predicted positive. The low sparsity and modest fidelity further limit its value for understanding model behavior.\",\n    \"clarity\": \"The format is readable, but the content is cryptic because it presents raw feature names and numeric values without explaining what they mean in context. A non-expert would struggle to interpret why 'marital-status_Married-civ-spouse: 0.6000' matters.\",\n    \"completeness\": \"It omits most of the local decision context, including the direction and magnitude of the main drivers, and provides no coherent comparison against the alternative class. As a result, it does not sufficiently explain this specific prediction.\",\n    \"concision\": \"The explanation is short, but much of the space is spent listing zero-valued features that add little information. This makes it only moderately efficient in communicating useful content.\",\n    \"overall_quality\": \"Overall, the explanation is weak: it is terse and somewhat readable, but it is too sparse, minimally informative, and not very helpful for either user understanding or model review. Its technical metrics also suggest limited fidelity and stability.\",\n    \"semantic_plausibility\": \"The only salient factor, being married, is plausible in the Adult income domain, but the explanation structure is not very meaningful because it reduces the local rationale to a single feature and many zeros. That makes it plausible but not especially convincing as a real explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:29.252827+00:00"
+}

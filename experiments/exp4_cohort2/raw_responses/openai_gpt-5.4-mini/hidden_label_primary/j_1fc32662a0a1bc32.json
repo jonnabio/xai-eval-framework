@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1fc32662a0a1bc32",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_0da6a71373977fce_3ba15b68decdafee.txt",
+  "prompt_version": "3ba15b68decdafee",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540124-KBfrvEcRdIC1yzCYircQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00299325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.00299325,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1546
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers almost no recourse guidance beyond identifying one feature as important, and it does not explain how changing inputs might alter the prediction. It is not specific enough to support a feasible next step for the person affected.\",\n    \"audit_usefulness\": \"From an auditing perspective, the output is weak because it lists mostly zero-valued factors and provides little insight into why the model predicted class 1. The near-zero faithfulness and low stability further suggest it is not dependable for investigating model behavior.\",\n    \"clarity\": \"The format is simple, but the meaning of values like 1.0000 and 0.0000 is not explained, so a non-expert would struggle to interpret it. The ranking is also oddly presented and not linguistically natural.\",\n    \"completeness\": \"It names only one nonzero local factor and omits the actual direction or magnitude of influence on the prediction. That leaves out the main decision context needed to understand why this specific instance was classified as positive.\",\n    \"concision\": \"The explanation is short, but much of the length is spent on a mostly useless list of zero-valued factors. It is therefore not very informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse but not genuinely informative, actionable, or trustworthy. The low technical metrics align with the limited local insight it provides.\",\n    \"semantic_plausibility\": \"The use of a single categorical feature like native-country_South as the only nonzero driver is plausible in the Adult dataset, but the dominance of a 1.0000 weight with all other features at zero is hard to interpret. The explanation is not obviously contradictory, but it is semantically thin.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:27.959955+00:00"
+}

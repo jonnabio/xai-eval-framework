@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3709befef441047c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_60730b2d1280bac2_a19424fe6c5d1c5a.txt",
+  "prompt_version": "a19424fe6c5d1c5a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538555-OdCAcHqQbYoylRXujACD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00302925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00302925,
+        "upstream_inference_prompt_cost": 0.00080175
+      },
+      "is_byok": false,
+      "prompt_tokens": 1069,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies factors associated with the positive prediction, but it does not translate them into concrete recourse steps the person could take. A user can infer broad directions, such as changing employment or income-related features, but no specific, feasible next action is given.\",\n    \"audit_usefulness\": \"It is useful for auditing because it surfaces the main local features driving the model output and their directions of influence. However, the low fidelity and stability metrics suggest the explanation may not be fully reliable for deep error or bias investigation.\",\n    \"clarity\": \"The list of feature names and signed contributions is straightforward and easy to scan. Some entries are technical or categorical encodings, but the overall structure is still understandable to a non-expert reader.\",\n    \"completeness\": \"The explanation includes several important local drivers such as workclass, occupation, capital gain, relationship, and education, which gives a decent view of the decision basis. Still, it does not provide the full local context, interaction effects, or a clear summary of why the prediction is positive overall.\",\n    \"concision\": \"The explanation is compact and contains only the most relevant local factors without excessive repetition. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"Overall, this is a useful but limited local explanation: it is readable and fairly concise, but it lacks strong recourse guidance and has only moderate technical reliability. Its main value is as a quick summary of feature influence rather than a fully trustworthy decision explanation.\",\n    \"semantic_plausibility\": \"The cited factors align well with the Adult dataset and with a plausible positive income prediction, especially higher education, managerial occupation, capital gain, and married status. The mix of positive and negative contributions also looks coherent for a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:17.599198+00:00"
+}

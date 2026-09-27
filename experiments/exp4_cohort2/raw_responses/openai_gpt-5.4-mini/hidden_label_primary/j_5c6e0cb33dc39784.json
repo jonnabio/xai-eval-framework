@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5c6e0cb33dc39784",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e564a6093e40672d_4aabbecebea11dc1.txt",
+  "prompt_version": "4aabbecebea11dc1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540100-9jmEf2QJOxheeDEHSRMv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.00292725,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or next steps for the individual. It lists factors but gives no guidance on what could be changed or how to interpret them for action.\",\n    \"audit_usefulness\": \"It is only mildly useful for auditing because it exposes a few local features, but the binary 1.0000/0.0000 values and lack of directional or threshold information make it hard to inspect model behaviour deeply. The low fidelity and stability metrics further limit trust for audit purposes.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the anchor-style factors is not explained in plain language. A non-expert would likely not understand why these features matter or what the 1.0000 values signify.\",\n    \"completeness\": \"It covers some apparent local factors, but it omits how they combine to support the positive prediction and provides no comparative context against the alternative class. The explanation is therefore incomplete for understanding this specific decision.\",\n    \"concision\": \"The explanation is compact and contains little redundancy, so it is efficient in length. However, the brevity comes at the cost of missing interpretive detail.\",\n    \"overall_quality\": \"Overall, this is a sparse and somewhat opaque explanation that gives a limited snapshot of local factors without enough interpretive support. Its low fidelity and stability make it only moderately useful despite being concise.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult income dataset, and their appearance in an anchors explanation is coherent with the task. However, the all-or-nothing style and repeated feature list make the explanation feel somewhat unnatural and under-specified.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:04.611286+00:00"
+}

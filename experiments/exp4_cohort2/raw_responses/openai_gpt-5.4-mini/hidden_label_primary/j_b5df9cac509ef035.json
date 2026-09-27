@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56b2fc0abd88017e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b5df9cac509ef035",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_56b2fc0abd88017e_da2b0239ced3def1.txt",
+  "prompt_version": "da2b0239ced3def1",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539011-QvVfNiEVLJDSA6xdwZRf",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.00292275,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56b2fc0abd88017e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or suggest what a user could change to influence the outcome. It only lists factors and their directions.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local drivers and their signed SHAP contributions, which helps inspect whether the model relies on sensible credit-risk signals. However, it does not provide enough context about baseline values or feature interactions for deeper diagnosis.\",\n    \"clarity\": \"The wording is short and structured, so a reader can identify the top contributing features quickly. That said, the SHAP values and feature encodings may be hard for a non-expert to interpret without some familiarity with the dataset.\",\n    \"completeness\": \"It covers several major local contributors to the prediction, which gives a decent sense of why the model predicted class 1. Still, it lacks the actual feature values, the baseline reference, and any interaction effects that would fully explain this specific decision.\",\n    \"concision\": \"The explanation is compact and contains a dense list of the most important local factors without much redundancy. It is efficient, though the abbreviated feature labels slightly reduce readability.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: it is compact, stable, and informative about the model's main drivers. Its main limitations are the lack of contextual detail and the absence of actionable recourse guidance.\",\n    \"semantic_plausibility\": \"The factors listed are plausible for German credit scoring, and the directions broadly make sense for risk-related attributes such as checking status, savings, and credit history. Nothing appears obviously contradictory or implausible.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:54.523698+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_380c036af6418632",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f9cc6b6fb4f65a14_2a689f924e7f4f23.txt",
+  "prompt_version": "2a689f924e7f4f23",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539865-HjaIPkd6fMD8mEevGCkP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029865,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.0029865,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, only a ranked list of factors. A user could infer that capital-gain and relationship status matter, but there is no guidance on what to change or verify.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes the top local features influencing the prediction, especially capital-gain and relationship_Own-child. However, the many zero-valued entries and lack of directionality or comparison to baseline limit deeper inspection.\",\n    \"clarity\": \"The wording is short and easy to read, but the meaning of the numeric values is not explained, so a non-expert may not understand whether larger numbers indicate stronger positive or negative influence. The unusual formatting of feature names also reduces interpretability.\",\n    \"completeness\": \"It covers only a narrow slice of the local decision context and does not explain whether these factors push the prediction toward class 0 or class 1. Key information such as direction, relative importance, and the overall decision logic is missing.\",\n    \"concision\": \"The explanation is very compact and mostly avoids redundancy. That said, some listed zero-valued factors add little useful information and could be omitted.\",\n    \"overall_quality\": \"Overall, this is a sparse explanation that identifies a couple of local factors but leaves the decision mechanism largely opaque. It is usable as a rough feature summary, but not strong enough for a thorough human understanding of the prediction.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset and fit a logistic regression explanation. The presence of capital-gain as a strong factor and relationship-based features as local context is consistent with general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:11:08.928729+00:00"
+}

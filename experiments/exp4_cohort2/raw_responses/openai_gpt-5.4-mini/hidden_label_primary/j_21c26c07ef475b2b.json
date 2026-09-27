@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_21c26c07ef475b2b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e5e8a4d0292d4cca_28a37af127197bf6.txt",
+  "prompt_version": "28a37af127197bf6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539795-RVQq2aY0zKIwaLq59U6x",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002994,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.002994,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features that mattered but does not tell the user what could be changed or what recourse might affect the prediction. It is therefore not useful for taking next steps.\",\n    \"audit_usefulness\": \"It provides a sparse set of local feature names with binary-like weights, which gives some signal about what the anchor selected, but not enough to inspect model behavior deeply. There is no directionality, threshold, or comparison to the case distribution.\",\n    \"clarity\": \"The text is short and the feature labels are readable, but the presentation of repeated 1.0000 and 0.0000 values is not self-explanatory to a non-expert. It is understandable only at a surface level.\",\n    \"completeness\": \"The explanation mentions a few local factors, yet it omits how they combine to support the negative prediction and gives no indication of whether they increase or decrease risk. For a false negative case, that leaves key decision context missing.\",\n    \"concision\": \"It is compact and avoids long prose, but the information density is limited because the output mostly restates feature names with placeholder-like scores. The brevity is efficient, though not especially informative.\",\n    \"overall_quality\": \"Overall, this is a minimal anchor-style summary that is partially informative but too thin to fully explain the prediction. It is acceptable as a rough indicator of local factors, but weak for understanding, recourse, or auditing.\",\n    \"semantic_plausibility\": \"The listed German credit features are plausible and consistent with the dataset, and the anchor-style format is coherent. However, the uniform 1.0000/0.0000 pattern is semantically opaque and does not read like a substantive explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:09:59.111484+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dc507c34ecb4ad95",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_fbb0082b6f2ae806_c53f0b35d32ffc60.txt",
+  "prompt_version": "c53f0b35d32ffc60",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538774-S2Bcb6YPNf0j7ShteMQC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002958,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.002958,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few contributing categories, but it does not translate them into concrete recourse steps the user could take. It offers no clear guidance on what to change or verify to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which sparse categorical features pushed the prediction up or down. However, the weights are small, the explanation is unstable, and the low fidelity reduces confidence that it faithfully reflects the model.\",\n    \"clarity\": \"The list format is easy to read and the feature names are recognizable to a non-expert, but the meaning of positive and negative contributions is not explained. The mixed and repetitive categories make it harder to quickly understand the decision.\",\n    \"completeness\": \"It covers several local factors, but only as isolated top-weighted categories rather than a coherent decision summary. It lacks a baseline, the prediction probability, and any interaction or contextual explanation for this false-negative case.\",\n    \"concision\": \"The explanation is brief and mostly free of redundancy, so it is efficient in word count. It is not especially information-dense because it only provides a flat ranking of small feature weights without interpretation.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: readable and compact, yet weak in fidelity, context, and practical guidance. It is sufficient for a quick glance but not strong enough for dependable decision review or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are broadly plausible for the Adult dataset, since relationship, marital status, education, sex, and occupation are all relevant demographic variables. The small and mixed contributions are also reasonable for a single local explanation from an MLP.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:57.295738+00:00"
+}

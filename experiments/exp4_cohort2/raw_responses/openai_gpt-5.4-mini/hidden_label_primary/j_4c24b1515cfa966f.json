@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4c24b1515cfa966f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f567ef56c34dada8_0cbc2259b48f8fb2.txt",
+  "prompt_version": "0cbc2259b48f8fb2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538657-aQhg3JtIVTuuK4tC1itM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00316575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002376,
+        "upstream_inference_cost": 0.00316575,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1581
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features were active in the anchor rule, but it does not tell the user what they could change to alter the prediction or how to use this information for recourse. Because several listed factors are immutable or opaque, it offers little practical next step.\",\n    \"audit_usefulness\": \"For auditing, it is somewhat useful because it reveals the local anchors the model relied on, but the lack of directional effects and the very low fidelity limit its value for investigating model behavior. It helps identify a few candidate drivers, yet not enough to fully assess why the random forest predicted class 1.\",\n    \"clarity\": \"The output is short and the feature names are readable, so a non-expert can follow the list. However, the meaning of the 1.0000 and 0.0000 values is not explained, which makes the explanation only moderately clear.\",\n    \"completeness\": \"It lists several local factors, but it does not explain their direction, strength, or interaction, and it omits the broader decision context. Given the low fidelity and sparse anchors, it does not provide enough information to fully understand this specific prediction.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary wording, but it is somewhat too terse for the limited information it provides. It includes a feature list without enough interpretive content to make the short length especially efficient.\",\n    \"overall_quality\": \"This is a plausible but weak explanation: it is readable and brief, yet the technical metrics indicate low fidelity and only moderate stability. Overall it offers partial local insight but not a strong basis for trust, recourse, or thorough review.\",\n    \"semantic_plausibility\": \"The listed anchors are plausible for German credit data, especially checking status, credit history, and age. The explanation is therefore coherent with the domain, even though the binary 1.0000/0.0000 presentation is not very interpretable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:00.193003+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_935ea1ae50f7c26f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d372ea8e16367348_9c4e0352a4ef03df.txt",
+  "prompt_version": "9c4e0352a4ef03df",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539807-LM0cJ1GfeSzfb745k6bi",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028965,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0028965,
+        "upstream_inference_prompt_cost": 0.0007815
+      },
+      "is_byok": false,
+      "prompt_tokens": 1042,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1512
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next steps a user could take. It lists feature thresholds without indicating what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It provides some local feature signals, which can help a data scientist inspect which variables were involved. However, the values are hard to interpret as a decision rule and there is no indication of directionality or comparative importance.\",\n    \"clarity\": \"The wording is short and structured, but the meaning of the listed feature values is not explained for a non-expert. A reader would likely not understand why zeros and ones appear or how they relate to the model's decision.\",\n    \"completeness\": \"The explanation names several relevant breast cancer features, but it does not explain their effect on the prediction or identify which factors most strongly pushed the model toward class 1. Key local decision context is therefore missing.\",\n    \"concision\": \"The explanation is brief and contains little redundancy, but much of its content is low-information because the feature values are presented without interpretation. It is compact, though not especially informative per word.\",\n    \"overall_quality\": \"This is a limited explanation: it is concise and somewhat inspectable, but it lacks interpretability, actionable guidance, and clear local decision support. Overall it is only marginally useful for understanding the specific prediction.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the breast cancer dataset, and the explanation is broadly consistent with a tabular model explanation. Still, the presence of many zero-valued features without context makes the presentation feel unnatural and only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:10:11.000445+00:00"
+}
