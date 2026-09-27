@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_81cd0c89bf277b52",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ae5f3b200cc3bef3_1db73f2123c3f50d.txt",
+  "prompt_version": "1db73f2123c3f50d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551523-OXhNEBm7Mr64sFLMYVbF",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 505,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00429075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003315,
+        "upstream_inference_cost": 0.00429075,
+        "upstream_inference_prompt_cost": 0.00097575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2185
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The identified features (age and native country) are immutable demographic attributes, and no thresholds or direction of change are provided.\",\n    \"audit_usefulness\": \"Flagging native country as a key factor offers some utility for auditing bias, but the absence of specific predicate values limits deeper diagnostic utility.\",\n    \"clarity\": \"Presenting raw variable names alongside binary weights without thresholds or explanations makes it confusing for non-technical users.\",\n    \"completeness\": \"Only two features are indicated as active while the rest are zeroed out, and the actual conditions/thresholds defining the anchor rule are completely omitted.\",\n    \"concision\": \"Listing multiple irrelevant features with zero weights adds unnecessary clutter to the explanation.\",\n    \"overall_quality\": \"The explanation is weak because it reduces an anchor rule to raw binary weights, omitting the actual decision predicates and padding with zeros.\",\n    \"semantic_plausibility\": \"Age and demographic indicators are plausibly linked to income level, though without rule conditions it is hard to assess full logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:25:31.795676+00:00"
+}

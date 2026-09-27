@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ad99414ad65383d0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_681f91e7c50b9380_8e07eeb2a6e00da6.txt",
+  "prompt_version": "8e07eeb2a6e00da6",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551802-36S9LNEl9nQW2sD26OpU",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 776,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005385,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00439125,
+        "upstream_inference_cost": 0.005385,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2496
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The only active feature identified is native-country, an immutable demographic characteristic that cannot be changed by the individual.\",\n    \"audit_usefulness\": \"It provides a weak hint that the model or explainer may be fixated on an ethnicity/nationality dummy variable, but offers insufficient context to thoroughly audit the false positive error.\",\n    \"clarity\": \"The raw one-hot encoded variable name and floating-point format make it relatively difficult for a non-technical reader to interpret.\",\n    \"completeness\": \"Only a single feature carries a non-zero value, omitting all major socioeconomic drivers such as education, capital gain, or occupation.\",\n    \"concision\": \"Nine of the ten listed features have a value of 0.0000, cluttering the explanation with useless entries.\",\n    \"overall_quality\": \"The explanation is very weak as it attributes the entire decision change to a single immutable country attribute while listing mostly zeros.\",\n    \"semantic_plausibility\": \"Attributing an adult income prediction entirely to being from Ireland is implausible and contradicts domain understanding.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:30:12.151303+00:00"
+}

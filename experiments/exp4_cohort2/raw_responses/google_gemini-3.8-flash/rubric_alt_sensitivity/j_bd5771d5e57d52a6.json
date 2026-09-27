@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bd5771d5e57d52a6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a2878ddc3d3b22b3_a44aef4ad17f0157.txt",
+  "prompt_version": "a44aef4ad17f0157",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552055-VEOSw0HAWs2Cmv8T8krr",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1069,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006501,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.005505,
+        "upstream_inference_cost": 0.006501,
+        "upstream_inference_prompt_cost": 0.000996
+      },
+      "is_byok": false,
+      "prompt_tokens": 1328,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2796
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide clear counterfactual target values or actionable steps, and one of the two active factors is age, which cannot be changed.\",\n    \"audit_usefulness\": \"It provides marginal help by revealing which features DiCE perturbed to change the model outcome, but offers minimal insight into the false positive decision error.\",\n    \"clarity\": \"A non-technical user would struggle to understand what 'DICE top local factors' or uncalibrated numeric weights like 1.0729 represent.\",\n    \"completeness\": \"Only two features carry non-zero weights while eight are listed as zero, leaving most of the model's decision logic unexplained.\",\n    \"concision\": \"Listing eight consecutive features with zero importance clutters the output, though the overall text remains relatively brief.\",\n    \"overall_quality\": \"The explanation is weak, presenting sparse attribution values derived from counterfactuals without directional guidance or clear decision rationale.\",\n    \"semantic_plausibility\": \"Age and work class are believable factors associated with high income, making the identified features plausible in the adult census domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:34:25.484602+00:00"
+}

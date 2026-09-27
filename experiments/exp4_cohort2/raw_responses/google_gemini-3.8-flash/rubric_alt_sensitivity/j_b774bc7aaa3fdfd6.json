@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b774bc7aaa3fdfd6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ae5f3b200cc3bef3_1db73f2123c3f50d.txt",
+  "prompt_version": "1db73f2123c3f50d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551532-Hy4pst2d4tLum3zBjRAT",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 582,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00459825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036225,
+        "upstream_inference_cost": 0.00459825,
+        "upstream_inference_prompt_cost": 0.00097575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2267
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The identified active features are immutable demographics (age and country of origin), and no actionable guidance or decision thresholds are provided.\",\n    \"audit_usefulness\": \"Flagging native country and age as key drivers provides some insight into potential demographic bias, though the lack of condition thresholds limits deeper debugging.\",\n    \"clarity\": \"Formatting anchor rules as raw feature names with binary 1.0/0.0 weights is technical and unintuitive for non-technical users.\",\n    \"completeness\": \"The explanation indicates which features were selected but fails to provide the actual rule conditions, intervals, or values that form the anchor.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the output without providing any additional explanatory value.\",\n    \"overall_quality\": \"The explanation strips away the predicate logic that makes Anchors informative, presenting an uninformative binary feature attribution list.\",\n    \"semantic_plausibility\": \"Age and demographic factors can influence demographic predictions, but the absence of signs, thresholds, or context makes the rationale vague.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:25:39.735183+00:00"
+}

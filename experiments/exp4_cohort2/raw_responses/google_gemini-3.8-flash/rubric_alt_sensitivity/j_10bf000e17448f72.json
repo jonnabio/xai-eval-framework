@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_10bf000e17448f72",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afc105601fc7fdd6_1c58c1a6f720c20a.txt",
+  "prompt_version": "1c58c1a6f720c20a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552004-A9J3UbNgrqHnCreRTcdb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1015,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 620,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00478725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00380625,
+        "upstream_inference_cost": 0.00478725,
+        "upstream_inference_prompt_cost": 0.000981
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2323
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The attributes are diagnostic anatomical measurements that cannot be changed, and no actionable guidance or decision boundaries are provided.\",\n    \"audit_usefulness\": \"It reveals that 'worst radius' and 'worst concave points' drove the prediction, but without the actual decision rule thresholds, an auditor cannot fully trace the false positive error.\",\n    \"clarity\": \"The list format is readable, though the binary 1.0000 and 0.0000 scores without relational operators may confuse non-technical users expecting rule-based anchors.\",\n    \"completeness\": \"The explanation indicates which two features constitute the anchor, but omits the feature values, cutoffs, and directional influence.\",\n    \"concision\": \"Listing eight irrelevant features with 0.0000 values creates unnecessary visual clutter.\",\n    \"overall_quality\": \"The explanation successfully highlights two clinically prominent features, but the absence of threshold conditions and inclusion of zeroed-out features make it weak.\",\n    \"semantic_plausibility\": \"Severe worst radius and concave points are medically recognized hallmark indicators for tumor classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:33:31.722063+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_56b5e7da63ad7312",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ac6e5925b1641835_5d9c3d712ad9fa5c.txt",
+  "prompt_version": "5d9c3d712ad9fa5c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551882-HV5ObxcdRa6t9TrIeO1b",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 616,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004704,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003705,
+        "upstream_inference_cost": 0.004704,
+        "upstream_inference_prompt_cost": 0.000999
+      },
+      "is_byok": false,
+      "prompt_tokens": 1332,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2320
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable levers, as most listed attributes are demographic or have near-zero influence.\",\n    \"audit_usefulness\": \"While it flags demographic features like race, the extremely poor fidelity (0.42) and vanishingly small coefficients make it unreliable for auditing model logic.\",\n    \"clarity\": \"The raw key-value output with microscopic decimal weights is confusing and inaccessible to non-technical users.\",\n    \"completeness\": \"The explanation lists several features, but their near-zero magnitudes fail to convincingly account for the model's positive prediction.\",\n    \"concision\": \"The presentation is compact and focused purely on top local factor weights without unnecessary fluff.\",\n    \"overall_quality\": \"The explanation is weak due to near-zero feature weights, high faithfulness gap, and low fidelity.\",\n    \"semantic_plausibility\": \"Identifying race as the primary positive driver for high income is doubtful and contrary to standard domain findings, especially with negligible coefficients.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:31:30.185976+00:00"
+}

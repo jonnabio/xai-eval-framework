@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_040dc620ed9d7a50",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4c3d79ea2f396cd5_a32faaa609103f5d.txt",
+  "prompt_version": "a32faaa609103f5d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552215-SK7HUxjHzZhSkf6Z0qJ9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1035,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 676,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004857,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00388125,
+        "upstream_inference_cost": 0.004857,
+        "upstream_inference_prompt_cost": 0.00097575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2336
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Every reported feature weight is zero, giving an affected user no indication of what could alter the outcome.\",\n    \"audit_usefulness\": \"Because all feature attributions round to zero, the explanation gives an auditor no insight into why the logistic regression model produced a false positive.\",\n    \"clarity\": \"The raw feature tokens paired with zero or negative zero values are confusing and uninformative to non-technical readers.\",\n    \"completeness\": \"The explanation fails to identify any meaningful drivers behind the model's positive prediction.\",\n    \"concision\": \"Listing ten features that all have zero impact provides virtually zero useful information for its token count.\",\n    \"overall_quality\": \"This explanation has completely degenerated, displaying only 0.0000 weights, making it unusable.\",\n    \"semantic_plausibility\": \"Attributing zero contribution across all listed factors fails to provide any plausible mechanism for the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:37:03.964564+00:00"
+}

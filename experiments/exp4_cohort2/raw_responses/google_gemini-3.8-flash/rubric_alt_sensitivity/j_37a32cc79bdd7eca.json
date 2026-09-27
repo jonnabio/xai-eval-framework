@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_37a32cc79bdd7eca",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_afc105601fc7fdd6_1c58c1a6f720c20a.txt",
+  "prompt_version": "1c58c1a6f720c20a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552021-3YpShliHE5GXpDD1Lye8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 636,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00489975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00391875,
+        "upstream_inference_cost": 0.00489975,
+        "upstream_inference_prompt_cost": 0.000981
+      },
+      "is_byok": false,
+      "prompt_tokens": 1308,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2353
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"This is a medical diagnostic prediction where physical tumor characteristics cannot be altered by choice, and no decision thresholds or counterfactuals are provided.\",\n    \"audit_usefulness\": \"While it shows an auditor that worst radius and worst concave points formed the anchor rule, the omission of actual rule thresholds or directionality limits its utility for debugging this false positive.\",\n    \"clarity\": \"The feature names and binary values are easy to read, but the meaning of the 1.0000 vs 0.0000 weights is unexplained for a non-technical reader.\",\n    \"completeness\": \"The explanation only indicates which two features were included in the anchor rule, omitting the rule conditions, thresholds, and baseline values.\",\n    \"concision\": \"Listing eight irrelevant features with zero weights adds unnecessary clutter to what is essentially a two-feature rule.\",\n    \"overall_quality\": \"The explanation provides minimal usable insight because it strips away the condition predicates of the anchor rule and lists irrelevant zero-weight features.\",\n    \"semantic_plausibility\": \"Severe worst radius and worst concave points are clinically recognized markers strongly associated with malignancy, making their selection plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:33:50.761689+00:00"
+}
