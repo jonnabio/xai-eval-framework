@@ -910,6 +910,12 @@ settles, before filing.
   fail on "missing bytecode" and will stay red until the author decides how to
   amend RCA-002 (its invariant "the .pyc files are never deleted" is now
   violated). Not yet decided.
+- **EXP4 cannot be recomputed from raw data** (author asked 2026-09-27). A full
+  forensic search - all Git history and refs, unreachable objects, GitHub
+  releases and artifacts, this laptop - found no raw judge responses, templates
+  or bytecode. The committed aggregate CSVs (`f6591d680`) are intact and still
+  back every published EXP4 number; nothing was recomputed or changed. Record:
+  `docs/review/exp4-forensic-search_2026-09-27.md`; RCA-002 has an addendum.
 - **pubs-sync was red on every run checked (40, back to at least 2026-09-07)**:
   the claims step failed on the untracked `data/adult.csv`, the EXP4 job on the
   untracked bytecode. "Green under all three verifiers" held only on the old
