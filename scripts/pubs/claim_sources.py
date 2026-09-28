@@ -20,6 +20,7 @@ EXP2_STATS = ROOT / "outputs" / "analysis" / "paper_a_exp2_stats"
 EXP3_RESULTS = ROOT / "experiments" / "exp3_cross_dataset" / "results"
 EXP3_LIME = ROOT / "outputs" / "analysis" / "exp3_lime_results.csv"
 EXP4_DIR = ROOT / "outputs" / "analysis" / "exp4_llm_evaluation"
+EXP4_COHORT2_DIR = ROOT / "outputs" / "analysis" / "exp4_cohort2"
 EXP6_PAIRED = ROOT / "outputs" / "analysis" / "exp6_masking_sensitivity" / "exp6_paired_shap_lime.csv"
 LIME_KW = ROOT / "outputs" / "analysis" / "lime_kernel_width_sensitivity.csv"
 ADULT = ROOT / "data" / "adult.csv"
@@ -519,5 +520,28 @@ def resolve(expr: str) -> float:
         filename = "icc_analysis.csv" if stat == "icc" else "krippendorff_alpha.csv"
         rows = _rows(EXP4_DIR / filename)
         return float(rows[0]["n_cases"])
+
+    if kind == "exp4c2":
+        # EXP4 cohort 2 (re-run 2026-09-27; ADR-0017). view is a prompt
+        # condition or "pooled_all_conditions" -- the standard pipeline's
+        # default, which averages each case x judge over every condition and
+        # replicate before the ICC is taken. stat: icc, ci_lower, ci_upper,
+        # alpha, n.
+        view, stat, dimension = args
+        column = {"icc": "icc_1_1", "ci_lower": "ci_lower", "ci_upper": "ci_upper",
+                  "alpha": "krippendorff_alpha", "n": "n_cases"}[stat]
+        for row in _rows(EXP4_COHORT2_DIR / "cohort2_reliability_by_view.csv"):
+            if row["view"] == view and row["dimension"] == dimension:
+                return float(row[column])
+        raise MissingArtifact(f"EXP4 cohort 2 row not found: {view}/{dimension}")
+
+    if kind == "exp4c2_shift_maxabs":
+        # Largest absolute mean score shift over judges and dimensions:
+        # "label" = label_visible minus hidden_label, "rubric" = rubric_alt
+        # minus label_visible, both paired on case and replicate.
+        (contrast,) = args
+        filename = {"label": "cohort2_label_bias.csv",
+                    "rubric": "cohort2_rubric_sensitivity.csv"}[contrast]
+        return max(abs(float(r["mean_shift"])) for r in _rows(EXP4_COHORT2_DIR / filename))
 
     raise MissingArtifact(f"unknown source expression: {expr}")
