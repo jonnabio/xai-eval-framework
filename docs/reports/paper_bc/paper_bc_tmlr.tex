@@ -148,7 +148,8 @@ assembled through a five-database search and explicit inclusion criteria,
 we identify three recurring gaps---proxy dominance, underspecified human constructs, and semantic
 evaluation outpacing its validation base---and provide, to our
 knowledge, the first multi-rater LLM-judge reliability measurement in
-XAI (ICC$<$0.75 across all seven semantic dimensions). We do not claim
+XAI (ICC$<$0.75 on all seven semantic dimensions in the primary condition,
+replicated with a second judge panel on the same cases). We do not claim
 human-subject or task-outcome validation in this paper.
 \item \textbf{Formalized deployment decision}: we pose LIME-vs-SHAP
 selection as a constrained multi-objective problem over quality, parsimony,
@@ -563,8 +564,12 @@ in practice.
 
 \paragraph{Negative result: LLM-judge inter-rater reliability (EXP4).}
 To empirically ground this concern, we conducted a multi-rater reliability
-study (EXP4) in which three LLM judges independently scored $n=147$ paired
-explanation outputs on seven semantic dimensions using structured rubrics.
+study (EXP4) in which three LLM judges independently scored explanation
+outputs on seven semantic dimensions using structured rubrics. The case
+inventory comprises $n=192$ single explanations, each of one instance, not
+paired outputs: 96 from the Adult benchmark (EXP2) and 96 from the
+cross-dataset cohorts (EXP3; German Credit and Breast Cancer). The cases span
+four model families and all four explainers.
 The rubric itself is reproduced in full in Supplementary Table~S1; the three
 Jinja templates that rendered it
 (\texttt{exp4\_semantic\_eval\_v1\{,\_label\_visible,\_alt\}.j2}) were not
@@ -573,48 +578,80 @@ record of the instrument. The seven dimensions and their 1--5 scale are
 independently corroborated by the recovered scoring schema and by the released
 per-dimension result tables.
 Table~\ref{tab:exp4_icc} reports intra-class correlation ICC(1,1) and
-Krippendorff's $\alpha$ for each dimension. The ICC is computed from a
-one-way random-effects decomposition, which requires a complete
+Krippendorff's $\alpha$ for each dimension. In the original cohort, the ICC is
+computed from a one-way random-effects decomposition, which requires a complete
 cases-by-judges matrix and is therefore evaluated on the $n=147$
 fully-triple-rated cases; Krippendorff's $\alpha$ tolerates missing ratings
-and is computed on the fuller $n=192$-case pool, which includes cases with
-at least one missing judge score. A one-way model treats systematic
+and is computed on all $n=192$ cases, including those with at least one
+missing judge score. A one-way model treats systematic
 between-judge offsets as error rather than as a separable rater effect, so
 these values are conservative with respect to the two-way ICC(2,1): where
-judges differ in mean severity, ICC(2,1) would be somewhat higher. The
-margin is well inside the gap to the reliability threshold --- the largest
-observed value is $0.601$ with an upper confidence bound of $0.695$ ---
-so the negative conclusion does not depend on the choice of model. All values fall below the
+judges differ in mean severity, ICC(2,1) would be somewhat higher. In that
+cohort the largest observed value is $0.601$ with an upper confidence bound
+of $0.695$, so the choice of model does not decide the result. All values fall below the
 conventionally accepted reliability threshold of $\geq 0.75$ for
-\emph{good} agreement \citep{koo2016guideline}, confirming that semantic
-evaluation at this scale lacks the inter-rater convergence needed for
-confirmatory inference. We treat this as a negative result: LLM judges,
-under the rubrics provided, do not yet meet the psychometric bar required
-to serve as reliable proxies for expert semantic annotation in XAI.
-Completeness and semantic plausibility show the highest consistency
-($\alpha > 0.55$), while clarity and audit usefulness are weakest
-($\alpha < 0.35$), indicating the most semantic ambiguity in those constructs.
+\emph{good} agreement \citep{koo2016guideline}.
+In the original cohort, completeness and semantic plausibility show the
+highest consistency ($\alpha > 0.55$), while clarity and audit usefulness are
+the weakest ($\alpha < 0.35$).
+
+\textbf{Replication with a second judge panel.} The original cohort's raw
+judge responses were not retained. We therefore re-ran EXP4 on the same 192
+cases, recovered by identifier from the released case list, with a second
+panel (GPT-5.4 mini, Claude Haiku 4.5 and Gemini 3.8 Flash, since the
+original models are no longer all available) and with templates rebuilt from
+Supplementary Table~S1. Its raw responses are released. This replication is a
+second measurement with a different panel, not a reproduction of the first.
+In its primary, label-hidden condition, all 192 cases were rated by all three
+judges, and no dimension reaches $0.75$: the maximum is completeness at
+$0.731$. The negative result therefore replicates. Its margin does not:
+\begin{itemize}
+\item the upper 95\% bounds for completeness ($0.791$) and audit usefulness
+  ($0.765$) exceed $0.75$;
+\item under the alternative rubric wording, completeness reaches $0.753$;
+\item when each case--judge pair is averaged over all conditions and
+  replicates before the ICC is taken, which is the analysis code's default
+  aggregation, completeness ($0.839$) and audit usefulness ($0.820$) exceed
+  $0.75$.
+\end{itemize}
+The ranking of dimensions also shifts with the panel. Completeness and semantic
+plausibility remain among the highest and clarity the lowest, but audit
+usefulness moves from the weakest to among the strongest. Actionability falls
+to near-zero agreement through a floor effect, because almost every score is
+1. We therefore read the agreement pattern as a property of judges and rubric
+wording together, not of the constructs alone.
+
+We treat EXP4 as a negative result in both cohorts. Under the primary
+condition, every dimension is below $0.75$ in both; crossing the threshold
+elsewhere depends on rubric wording and aggregation; and the dimension
+ranking changes across panels. LLM judges, under the rubrics provided, do not
+yet meet the psychometric bar required to serve as reliable proxies for
+expert semantic annotation in XAI.
 
 \begin{table}[t]
 \centering
-\caption{LLM-judge reliability on seven semantic dimensions (EXP4; ICC on
-$n=147$ fully-rated cases, Krippendorff's $\alpha$ on $n=192$ cases (see
-text); 3 LLM judges). ICC(1,1) = one-way random-effects
-single-rater model, computed on the $n=147$ complete cases. No dimension reaches the $\geq 0.75$
-good-reliability threshold \citep{koo2016guideline}.}
+\caption{LLM-judge reliability on seven semantic dimensions (EXP4). Original
+cohort: ICC on the $n=147$ fully-rated cases, Krippendorff's $\alpha$ on
+$n=192$ cases (see text). Replication: a second panel of three judges on the
+same 192 cases, all fully rated; primary (label-hidden) condition, ICC with
+its 95\% confidence interval. ICC(1,1) = one-way random-effects single-rater
+model. No dimension reaches the $\geq 0.75$ good-reliability threshold
+\citep{koo2016guideline} in the primary condition of either cohort.}
 \label{tab:exp4_icc}
 \small
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-Dimension              & ICC(1,1) & Krippendorff $\alpha$ \\
+                       & \multicolumn{2}{c}{Original cohort} & Replication \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-4}
+Dimension              & ICC(1,1) & Krippendorff $\alpha$ & ICC(1,1) [95\% CI] \\
 \midrule
-Clarity                & 0.321    & 0.278 \\
-Concision              & 0.453    & 0.409 \\
-Actionability          & 0.400    & 0.362 \\
-Audit Usefulness       & 0.376    & 0.340 \\
-Completeness           & 0.585    & 0.566 \\
-Semantic Plausibility  & 0.601    & 0.573 \\
-Overall Quality        & 0.431    & 0.394 \\
+Clarity                & 0.321    & 0.278 & $-0.019$ [$-0.160$, 0.123] \\
+Concision              & 0.453    & 0.409 & 0.373 [0.244, 0.489] \\
+Actionability          & 0.400    & 0.362 & $-0.025$ [$-0.166$, 0.117] \\
+Audit Usefulness       & 0.376    & 0.340 & 0.699 [0.619, 0.765] \\
+Completeness           & 0.585    & 0.566 & 0.731 [0.657, 0.791] \\
+Semantic Plausibility  & 0.601    & 0.573 & 0.604 [0.506, 0.687] \\
+Overall Quality        & 0.431    & 0.394 & 0.660 [0.571, 0.733] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -679,7 +716,7 @@ of explanation quality.
   {\textbf{LLM-based semantic evaluation}\\[2pt]
   more expressive than proxies, more scalable than human review,
   but not self-validating\\[2pt]
-  {\scriptsize EXP4 (this paper): ICC(1,1) $<$ 0.75 on all seven dimensions}};
+  {\scriptsize EXP4 (this paper): ICC(1,1) $<$ 0.75 on all seven dimensions, two judge panels}};
 \draw[dashed, ->] (proxy.south) to[out=-60, in=180] (llm.west);
 \draw[dashed, ->] (llm.east) to[out=0, in=-120] (user.south);
 \draw[->] ($(proxy.north west)+(0,0.3)$) -- ($(user.east |- proxy.north)+(0,0.3)$)
@@ -1405,8 +1442,10 @@ human-grounded usefulness, user comprehension, trust calibration, or
 decision-quality improvements. Validated user studies with task-outcome
 measures remain future work.
 \item \textbf{LLM-judge calibration:} EXP4 shows that ICC remains below
-0.75 for all seven semantic dimensions; developing rubrics that achieve
-calibration-grade inter-rater agreement is an open challenge.
+0.75 for all seven semantic dimensions in the primary condition of two judge
+panels. Agreement nonetheless depends on the panel, the rubric wording and the
+aggregation, and developing rubrics that achieve calibration-grade inter-rater
+agreement is an open challenge.
 \item \textbf{Taxonomy completeness:} The survey corpus is a working
 corpus rather than an exhaustive bibliometric sample; expanding it with
 systematic search protocols would strengthen the gap analysis.
@@ -1435,6 +1474,9 @@ submission}, released under the MIT License. Artifacts needed to reproduce the e
 \item EXP3 results: \path{experiments/exp3_cross_dataset/results/}
 (with LIME extension exports in \path{outputs/analysis/exp3_lime_results.csv})
 \item EXP4 ICC exports: \path{outputs/analysis/exp4_llm_evaluation/}
+(original cohort) and \path{outputs/analysis/exp4_cohort2/} (replication),
+with the replication's case inventory, prompts and raw judge responses in
+\path{experiments/exp4_cohort2/}
 \item EXP6 masking-sensitivity exports:
 \path{outputs/analysis/exp6_masking_sensitivity/}
 \item analysis scripts: \path{scripts/run_exp2_statistical_analysis.py},
