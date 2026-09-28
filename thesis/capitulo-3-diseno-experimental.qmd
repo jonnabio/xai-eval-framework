@@ -247,8 +247,14 @@ el efecto predictivo real bajo enmascaramiento individual de características:
 
 $$F = \text{corr}\!\left(|w_i|,\;\bigl|f(x) - f(x_{-i})\bigr|\right)$$
 
-donde $x_{-i}$ sustituye la característica $i$ por su media de entrenamiento.
-Dirección: $\uparrow$. Implementación: `src/metrics/fidelity.py`.
+donde $x_{-i}$ sustituye, de manera independiente, la característica
+transformada $i$ por su media en el conjunto de entrenamiento. Este operador es
+determinista y común a los cuatro métodos, pero no preserva la distribución
+conjunta de las características: puede producir combinaciones implausibles u
+OOD y, por tanto, introducir sesgo diferencial entre explicadores
+[@hooker2019benchmark; @rong2022consistent]. La métrica se interpreta como
+respuesta del modelo bajo este enmascaramiento concreto, no como verdad de la
+explicación. Dirección: $\uparrow$. Implementación: `src/metrics/fidelity.py`.
 
 ### Estabilidad
 
@@ -503,6 +509,19 @@ sobre los $B = 15$ bloques completos con $k = 4$ tratamientos. El estadístico
 se calcula sobre los rangos $r_{bj}$ de cada tratamiento $j$ dentro de
 cada bloque $b$:
 
+Cada observación de método dentro de un bloque es primero la media de sus
+semillas calificadas. Si $y_{g,k,s,n,m}$ es la métrica $m$ para el modelo $g$,
+el método $k$, la semilla $s$ y el tamaño $n$, entonces
+
+$$\bar y_{g,k,n,m} = \frac{1}{r_{g,k,n}}
+\sum_{s \in \mathcal{S}_{g,k,n}} y_{g,k,s,n,m},$$
+
+donde $\mathcal{S}_{g,k,n}$ contiene únicamente semillas calificadas y
+$r_{g,k,n}=|\mathcal{S}_{g,k,n}|$. SHAP y LIME aportan cinco semillas en cada
+bloque; Anchors y DiCE aportan entre una y cinco según la cobertura documentada.
+Las semillas reducen la incertidumbre de la puntuación del bloque, pero no se
+tratan como 75 bloques Friedman independientes.
+
 $$\chi^2_F = \frac{12B}{k(k+1)} \sum_{j=1}^{k}
 \left(\bar{r}_j - \frac{k+1}{2}\right)^2$$
 
@@ -526,6 +545,23 @@ $$\text{CD} = q_\alpha \sqrt{\frac{k(k+1)}{6B}} \approx 2.569 \times
 Dos métodos se consideran significativamente distintos si
 $|\bar{r}_i - \bar{r}_j| > \text{CD}$.
 
+### Seguimiento dirigido SHAP–LIME sobre bloques agregados
+
+Para responder a la observación del revisor en la misma unidad de análisis que
+Friedman, se añade un seguimiento dirigido, motivado por la revisión y no
+preespecificado, sobre 15 bloques agregados $(g,n)$. En cada bloque se parean
+las medias de semillas de SHAP y LIME y se aplica un Wilcoxon bilateral de
+rangos con signo a las cinco métricas primarias. Los cinco valores $p$ forman
+una familia propia con corrección de Holm-Bonferroni. Para fidelidad se reporta
+además una prueba exacta bilateral de signos como corroboración direccional.
+
+Este seguimiento no reemplaza a Friedman ni a Nemenyi: Friedman conserva la
+decisión global de H1, Nemenyi conserva la localización simultánea entre los
+cuatro métodos, y el nuevo contraste responde solamente a la diferencia
+dirigida SHAP–LIME con puntuaciones agregadas por bloque. Tampoco reemplaza el
+Wilcoxon de H3 sobre 75 celdas $(g,s,n)$, cuya unidad inferencial conserva cada
+semilla emparejada.
+
 ### Wilcoxon pareado: conjuntos de 45 y 75 celdas
 
 Para contrastar H3 se aplica el test de Wilcoxon con rangos con signo
@@ -546,12 +582,13 @@ con interpretación convencional: pequeño ($0.2 \leq d_z < 0.5$), mediano
 
 ### Control de multiplicidad
 
-Las pruebas se organizan en tres familias inferenciales independientes, con
+Las pruebas se organizan en cuatro familias inferenciales independientes, con
 corrección de Holm-Bonferroni dentro de cada familia:
 
 | Familia | Tests | $n$ | Corrección |
 |:--------|------:|:---:|:----------:|
 | Friedman (estudio omnibus) | 5 (uno por métrica) | 15 bloques | Holm-Bonferroni |
+| Wilcoxon-15 (seguimiento dirigido) | 5 | 15 bloques agregados | Holm-Bonferroni |
 | Wilcoxon-45 (estudio omnibus) | 5 | 45 celdas | Holm-Bonferroni |
 | Wilcoxon-75 (omnibus y pareado) | 5 | 75 celdas | Holm-Bonferroni |
 
@@ -563,7 +600,7 @@ de análisis distintas [@demsar2006]. {#tbl-stat-plan}
 
 | Hipótesis | Test | $n$ | Diseño |
 |:----------|:----:|:---:|:-------|
-| H1 (fidelidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
+| H1 (fidelidad) | Friedman + Nemenyi; seguimiento dirigido SHAP–LIME | 15 bloques | 4 métodos × 15 bloques; contraste dirigido sobre las mismas medias de bloque |
 | H2 (estabilidad) | Friedman + Nemenyi | 15 bloques | 4 métodos × 15 bloques |
 | H3 (relación SHAP-LIME) | Wilcoxon bilateral | 75 pares | $(g, s, n)$ idénticos |
 | P1 (reproducibilidad) | CV sobre EXP1 | 5 semillas | Por método |
@@ -579,7 +616,7 @@ puede sostenerse a partir del benchmark.
 | Familia | Amenaza principal | Control aplicado | Riesgo residual |
 |:--|:--|:--|:--|
 | Validez interna | Diferencias atribuibles al modelo o preprocesamiento, no al explicador | Modelos y preprocesador congelados; misma partición y mismas semillas por celda | Variación no observada por implementación interna de cada librería |
-| Validez de constructo | Métricas automáticas que no capturan utilidad humana, plausibilidad o causalidad | Definición previa de fidelidad, estabilidad, parsimonia, brecha y coste como proxies functionally-grounded | No se infiere utilidad humana directa ni verdad causal |
+| Validez de constructo | Métricas automáticas que no capturan utilidad humana, plausibilidad o causalidad; enmascaramiento independiente potencialmente OOD | Definición previa de las métricas como proxies functionally-grounded; mismo operador de media de entrenamiento para todos los métodos; alcance declarado | No se preserva la distribución conjunta y puede persistir sesgo diferencial entre explicadores; no se infiere utilidad humana directa ni verdad causal |
 | Validez externa | Generalización fuera de Adult Income y clasificación tabular binaria | Framing explícito como benchmark tabular Adult; comparación con literatura XAI tabular | No cubre imágenes, texto, series temporales ni dominios causales |
 | Conclusión estadística | Pseudorreplicación, multiplicidad y datos faltantes | Unidad inferencial por bloque/celda; Friedman, Nemenyi, Wilcoxon y Holm-Bonferroni; análisis de cobertura | Menor precisión en Anchors para bloques con baja cobertura |
 | Reproducibilidad | Dependencia de versiones, semillas, recursos y artefactos locales | Manifiestos YAML, artefactos versionados, scripts de análisis y DOI Zenodo | Reproducción completa requiere entorno compatible con Python 3.11 y dependencias fijadas |
@@ -612,6 +649,8 @@ Los anclajes de reproducibilidad principales son:
 - `outputs/batch_results.csv` — superposición de recuperación (30 filas).
 - `scripts/run_exp2_statistical_analysis.py` — generación determinista de
   tablas inferenciales.
+- `scripts/run_exp2_block_paired_analysis.py` — seguimiento dirigido
+  SHAP–LIME sobre los 15 bloques agregados y prueba exacta de signos.
 - `outputs/analysis/paper_a_exp2_stats/` — exportaciones inferenciales de
   referencia.
 
