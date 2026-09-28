@@ -1085,7 +1085,7 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
    inline values; add a CI job building Paper A, Paper B+C, the supplementary and the
    thesis, failing on undefined references and crossref warnings.
-0a. [ ] Author-verify the 28 reconstructed review-corpus coding rows before submission.
+0a. [x] Author-verify the 28 reconstructed review-corpus coding rows before submission. **Done by the author before 2026-09-28** (confirmed in session 2026-09-28). Also confirmed 2026-09-28: Paper B+C revision finished; no concurrent submission. Pre-submission review plan: `docs/planning/paper_bc_tmlr_review_plan_2026-09-28.md` (paper lane).
 0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
    script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
    disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
