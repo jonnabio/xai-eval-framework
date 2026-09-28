@@ -240,3 +240,28 @@ and into both other lanes in the same session, with CI green on each.
 
 Critical path for filing: Steps 1-3 and 8. Steps 4-7 are strongly recommended. F04 and F05 are
 the likeliest reviewer objections after F01 and F02.
+
+## Step 0 outcome (2026-09-28, `b2ee05ce7`)
+
+Reports: `docs/review/reference-audit_paper_bc_tmlr_2026-09-28.md` (R01-R10) and
+`docs/review/coverage-triage_paper_bc_tmlr_2026-09-28.md` (73 literals classified).
+Additions to the steps above:
+
+- **Step 1** also registers the 44 re-deriving literals in the triage table, declares its 22
+  structural literals, and adds `[[unbacked]]` entries for the four S5 values. A new resolver is
+  needed for the paired t-CIs (mean ± t(74)·SE over `paired_cells_shap_lime_all_models.csv`), and
+  a composing resolver for the EXP3 SHAP−LIME gaps.
+- **F16 [minor], EXP6 sample misstated** (Step 5): "the $n=50$ RF runs across five seeds" → "the
+  five RF runs at $N=50$, one per seed". State that 5/5 sign agreement is descriptive, since with
+  $n=5$ the exact Wilcoxon minimum is $p=0.0625$. Fix both main l.1396 and the S6 caption/intro.
+- **F17 [minor], cost ratio** (Step 5): l.1020-1022 → "the median per-cell SHAP/LIME ratio is 5.3×"
+  (the ratio of the medians is 10.4). Drop "corresponding to".
+- **Step 6 reference fixes**, per R01-R10:
+  - remove the 8 unused entries;
+  - R02 fix the label;
+  - R03 year 2024;
+  - R04 add volume, issue, pages and DOI;
+  - R05 cite ACL 2026;
+  - R06 NeurIPS DOI and pages;
+  - R07-R09 check and keep the entry unless a published version is found.
+- The rigor review's suspicion about `zhou2025medthink` is withdrawn: Crossref confirms 2025.
