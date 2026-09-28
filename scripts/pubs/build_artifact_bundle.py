@@ -23,6 +23,17 @@ STAGE.mkdir(parents=True)
 COPY = [
     ("outputs/analysis/paper_a_exp2_stats", "analysis/exp2_stats"),
     ("outputs/analysis/exp4_llm_evaluation", "analysis/exp4_llm_evaluation"),
+    # EXP4 replication cohort (ADR-0017): analysis exports, and the raw judge
+    # responses, rendered prompts and case inventory the original lacks.
+    ("outputs/analysis/exp4_cohort2", "analysis/exp4_cohort2"),
+    ("experiments/exp4_cohort2", "experiments/exp4_cohort2"),
+    ("src/prompts/templates/exp4_semantic_eval_v1.j2",
+     "experiments/exp4_cohort2/templates/exp4_semantic_eval_v1.j2"),
+    ("src/prompts/templates/exp4_semantic_eval_v1_label_visible.j2",
+     "experiments/exp4_cohort2/templates/exp4_semantic_eval_v1_label_visible.j2"),
+    ("src/prompts/templates/exp4_semantic_eval_v1_alt.j2",
+     "experiments/exp4_cohort2/templates/exp4_semantic_eval_v1_alt.j2"),
+    ("scripts/exp4_cohort2_compare.py", "scripts/exp4_cohort2_compare.py"),
     ("outputs/analysis/exp6_masking_sensitivity", "analysis/exp6_masking_sensitivity"),
     ("outputs/analysis/exp3_lime_results.csv", "analysis/exp3_lime_results.csv"),
     ("outputs/analysis/lime_kernel_width_sensitivity.csv",
@@ -94,7 +105,13 @@ versus SHAP". Anonymised for double-blind review.
                                       these files, not from the raw runs.
     analysis/exp4_llm_evaluation/     ICC and Krippendorff alpha exports
                                       behind the inter-judge reliability
-                                      result.
+                                      result (original cohort).
+    analysis/exp4_cohort2/            reliability by condition and pooled,
+                                      label-bias and rubric-sensitivity
+                                      contrasts for the EXP4 replication.
+    experiments/exp4_cohort2/         the replication's 192-case inventory,
+                                      rendered prompts, templates, raw judge
+                                      responses and parsed scores.
     analysis/exp6_masking_sensitivity/ masking-scheme sensitivity exports
                                       (supplementary Table S6).
     analysis/exp3_lime_results.csv    EXP3 LIME extension.
@@ -102,8 +119,8 @@ versus SHAP". Anonymised for double-blind review.
     experiments/exp3_cross_dataset/results/      raw EXP3 runs; the
                                       cross-dataset fidelity values are
                                       derived directly from these.
-    scripts/                          the three analysis scripts cited in
-                                      the paper.
+    scripts/                          the analysis scripts cited in the
+                                      paper.
     review_corpus/                    the 44-row coded corpus behind the
                                       taxonomy and gap analysis, with a
                                       per-paper retrieval log.

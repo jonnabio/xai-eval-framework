@@ -48,12 +48,16 @@ sensitivity probe results; and (S6) the EXP6 masking-scheme sensitivity
 breakdown.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S1 — EXP4 Evaluation Rubric and Judge Prompts}
+\subsection*{Table S1 --- EXP4 Evaluation Rubric and Judge Prompts}
 \label{sec:supp_exp4_rubric}
 %% ────────────────────────────────────────────────────────────────────────────
 
-EXP4 employed three LLM judges each evaluating $n = 147$ paired SHAP/LIME
-explanation outputs on seven semantic dimensions using a structured rubric.
+EXP4 employed three LLM judges each scoring the same 192 single-explanation
+cases on seven semantic dimensions using a structured rubric: 96 from the
+Adult benchmark (EXP2) and 96 from the cross-dataset cohorts (EXP3; German
+Credit and Breast Cancer), across four model families and all four explainers.
+In the original cohort, all three judges scored 147 of these cases, the
+subset on which its ICC is computed.
 The template was rendered per instance with the following fixed prompt
 structure:
 
@@ -91,7 +95,10 @@ Rate the explanation on the seven dimensions below (1 = very poor,
 definitions, and scoring anchors. Temperature = 0.0 for all judges.
 Three primary condition: \texttt{hidden\_label} (standard), \texttt{label\_visible}
 (bias probe), \texttt{rubric\_alt} (rubric sensitivity). Primary ICC
-results come from the \texttt{hidden\_label} condition.}
+results come from the \texttt{hidden\_label} condition. The released analysis
+code averages each case--judge pair over whichever conditions and replicates
+were run; whether the original run included the two probes cannot now be
+verified. The replication reports both views.}
 \label{tab:s1_rubric}
 \begin{tabularx}{\linewidth}{l p{4.2cm} p{5.6cm}}
 \toprule
@@ -129,6 +136,17 @@ Overall Quality
   \item Judge C: \texttt{gemini-1.5-flash} (Google), temperature 0.0, max\_tokens 512.
 \end{itemize}
 
+\noindent\textbf{Replication panel} (same 192 cases, all three conditions,
+three replicates each, via OpenRouter; the original models are no longer all
+available): \texttt{openai/gpt-5.4-mini}, \texttt{anthropic/claude-haiku-4.5}
+and \texttt{google/gemini-3.8-flash}, temperature 0.0, max\_tokens 4000 to
+accommodate reasoning tokens. Its templates were rebuilt from this table and
+read the dataset from each case record: the case inventory spans three
+datasets, although the system instruction above names Adult only. The
+alternative-rubric wording is new, because this table does not record the
+original. The rebuilt templates, rendered prompts and raw responses are
+released with the artifacts.
+
 \noindent All judges used identical prompts. The three Jinja templates that
 rendered this rubric under the three conditions
 (\texttt{exp4\_semantic\_eval\_v1.j2}, \texttt{\_label\_visible.j2},
@@ -142,7 +160,7 @@ recovered EXP4 scoring schema (\texttt{src/evaluation/exp4\_schema.py}) and by
 the per-dimension reliability tables.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S2 — LIME \texttt{kernel\_width} Sensitivity Probe}
+\subsection*{Table S2 --- LIME \texttt{kernel\_width} Sensitivity Probe}
 \label{sec:supp_kw}
 %% ────────────────────────────────────────────────────────────────────────────
 
@@ -181,7 +199,7 @@ improve stability; it degenerates the explanations. Widening the kernel
 improves stability but at the cost of locality.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S3 — Adult Income Feature Correlation Structure}
+\subsection*{Table S3 --- Adult Income Feature Correlation Structure}
 \label{sec:supp_corr}
 %% ────────────────────────────────────────────────────────────────────────────
 
@@ -240,7 +258,7 @@ identical masking protocols---but they limit the interpretation of absolute
 fidelity values as measures of causal feature importance.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S4 — Second-Reviewer Taxonomy Audit}
+\subsection*{Table S4 --- Second-Reviewer Taxonomy Audit}
 \label{sec:supp_taxonomy_audit}
 %% ────────────────────────────────────────────────────────────────────────────
 
@@ -310,7 +328,7 @@ second-reviewer audit remains future work before broader inter-rater
 reliability claims are made.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S5 — LIME \texttt{num\_samples} Sensitivity Probe}
+\subsection*{Table S5 --- LIME \texttt{num\_samples} Sensitivity Probe}
 \label{sec:supp_ns}
 %% ────────────────────────────────────────────────────────────────────────────
 
@@ -346,7 +364,7 @@ fitting process itself rather than an insufficient sample count that
 additional compute would resolve.
 
 %% ────────────────────────────────────────────────────────────────────────────
-\subsection*{Table S6 — EXP6 Masking-Scheme Sensitivity Breakdown}
+\subsection*{Table S6 --- EXP6 Masking-Scheme Sensitivity Breakdown}
 \label{sec:supp_exp6}
 %% ────────────────────────────────────────────────────────────────────────────
 
