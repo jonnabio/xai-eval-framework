@@ -39,9 +39,13 @@ entrada, la parsimonia de las explicaciones producidas y el coste computacional
 por instancia [@bhattacharya2024; @abdulkadir2023; @canha2025; @hedstrom2023]. Por
 otro lado, muchas de estas
 métricas sufren del problema de datos fuera de la distribución (*Out-of-
-Distribution*, OOD): la perturbación de características genera instancias que el
-modelo nunca encontró durante el entrenamiento, invalidando las puntuaciones de
-fidelidad resultantes [@alvarezmelis2018; @zheng2025]. La disponibilidad de herramientas de
+Distribution*, OOD): la perturbación de características puede generar
+instancias que el modelo nunca encontró durante el entrenamiento y sesgar las
+puntuaciones de fidelidad resultantes [@alvarezmelis2018; @hooker2019benchmark;
+@rong2022consistent; @zheng2025]. Por ello, un ordenamiento obtenido mediante
+enmascaramiento debe interpretarse como evidencia comparativa bajo el operador
+de perturbación declarado, no como validación irrestricta de la corrección de
+las explicaciones. La disponibilidad de herramientas de
 benchmarking como Quantus [@hedstrom2023] y OpenXAI [@agarwal2022] ha mejorado
 la estandarización de la medición, pero no resuelve la ausencia de un protocolo
 de operación que discipline la trazabilidad de artefactos y la corrección de

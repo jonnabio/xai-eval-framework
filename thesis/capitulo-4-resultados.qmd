@@ -53,7 +53,7 @@ análisis de cada claim.
 
 | Claim | Test | Unidad / $n$ | Estadístico | $p_{\mathrm{Holm}}$ | Efecto | Decisión |
 |:--|:--|:--|:--|:--|:--|:--|
-| H1: existen diferencias de fidelidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F=42.12$ | $1.51\times10^{-8}$ | $W=0.936$ | Rechazar $H_{0,1}$; SHAP supera a Anchors/DiCE y LIME supera a DiCE |
+| H1: existen diferencias de fidelidad entre métodos | Friedman + Nemenyi; seguimiento dirigido SHAP–LIME | 15 bloques $(g,n)$ | $\chi^2_F=42.12$; Wilcoxon $W=0$ | $1.51\times10^{-8}$ (Friedman); $3.05\times10^{-4}$ (seguimiento) | Kendall $W=0.936$; diferencia media SHAP–LIME $+0.2479$ | Rechazar $H_{0,1}$; Nemenyi localiza tres pares y el seguimiento distingue SHAP de LIME |
 | H2: existen diferencias de estabilidad entre métodos | Friedman + Nemenyi | 15 bloques $(g,n)$ | $\chi^2_F=40.68$ | $2.29\times10^{-8}$ | $W=0.904$ | Rechazar $H_{0,2}$; SHAP/DiCE forman el grupo más estable |
 | H3: SHAP y LIME difieren en calidad-coste | Wilcoxon pareado bilateral | 75 celdas $(g,s,n)$ | $W=0$ a $205$ | $\leq 2.64\times10^{-13}$ para calidad; $1.18\times10^{-10}$ para coste | $d_z=0.451$ a $4.820$ | Rechazar $H_{0,3}$; SHAP mejora calidad y aumenta coste medio |
 | P1: el protocolo es reproducible bajo semillas | CV sobre el estrato replicado | 5 semillas RF, $N=100$ | CV por métrica | No aplica | CV < 3% en señales principales | Confirmación parcial; LIME-estabilidad queda fuera por media cercana a cero |
@@ -105,14 +105,22 @@ importancias, sino la generación de ejemplos alternativos, de modo que la
 métrica de fidelidad captura una dimensión de calidad que no es el objetivo de
 diseño primario de este método.
 
+Estas magnitudes describen el comportamiento bajo el operador declarado:
+reemplazo independiente por la media de entrenamiento en el espacio
+transformado. Aplicar el mismo operador mejora la comparabilidad interna, pero
+no preserva la distribución conjunta ni elimina el riesgo de observaciones OOD
+[@hooker2019benchmark; @rong2022consistent]. Por ello, el ordenamiento se acota
+a esta operacionalización y no constituye por sí solo una prueba irrestricta de
+corrección de las atribuciones.
+
 **Localización post-hoc (Nemenyi):** La diferencia crítica para comparaciones
 pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$ es:
 
 $$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$
 
 Donde $q_\alpha = 2.569$ es el valor crítico de la distribución de Nemenyi para
-$k=4$ con $\alpha = 0.05$ [@demsar2006]. Las diferencias en rangos medios entre
-todos los pares de métodos superan ampliamente esta diferencia crítica:
+$k=4$ con $\alpha = 0.05$ [@demsar2006]. Tres de las seis diferencias en rangos
+medios superan la diferencia crítica: SHAP–Anchors, SHAP–DiCE y LIME–DiCE:
 
 | Par              | $|R_i - R_j|$ | CD    | Significativo |
 |------------------|---------------|-------|---------------|
@@ -129,8 +137,26 @@ La localización Nemenyi es conservadora cuando $n$ es pequeño. En fidelidad,
 se distinguen de forma robusta SHAP frente a Anchors/DiCE y LIME frente a DiCE;
 las diferencias SHAP–LIME y LIME–Anchors no superan el umbral crítico bajo este
 procedimiento. Este resultado no contradice la dominancia observada de SHAP
-en rangos, y motiva complementar el análisis global con el contraste
-pareado del Estudio Pareado LIME–SHAP.
+en rangos.
+
+**Seguimiento dirigido SHAP–LIME.** Para evaluar esa diferencia con la misma
+agregación que Friedman, se realizó un contraste bilateral de Wilcoxon sobre
+los 15 bloques agregados $(g,n)$, cada uno construido como media de las cinco
+semillas calificadas de cada método. SHAP superó a LIME en fidelidad en los 15
+bloques: diferencia media por bloque de $+0.2479$, estadístico de rangos
+$W = 0$, $p_{\mathrm{raw}} = 6.10 \times 10^{-5}$ y
+$p_{\mathrm{Holm}} = 3.05 \times 10^{-4}$ dentro de la familia de cinco
+métricas. Las diferencias tuvieron 15 positivas, 0 negativas y 0 empates; la
+prueba exacta bilateral de signos ($p = 6.10 \times 10^{-5}$) confirma que la
+dirección no depende de unos pocos bloques extremos.
+
+Este análisis es un seguimiento motivado por la revisión, no una prueba
+preespecificada de H1. Nemenyi pregunta qué pares se separan bajo una
+localización simultánea de cuatro métodos basada en rangos y, con solo 15
+bloques, no separa SHAP de LIME. El seguimiento pregunta directamente si la
+diferencia SHAP–LIME de magnitud es sistemática en esos mismos bloques y
+controla multiplicidad sobre las cinco métricas. El Wilcoxon de H3 que se
+presenta más adelante conserva otra unidad: 75 celdas $(g,s,n)$ emparejadas.
 
 ### H2: Diferencias entre métodos en estabilidad
 
@@ -478,6 +504,7 @@ del capítulo de resultados.
 | Claim | Evidencia en tesis | Artefacto fuente | Script / proceso | Alcance |
 |:--|:--|:--|:--|:--|
 | Existen diferencias globales entre métodos en fidelidad | Tablas -@tbl-friedman-fidelity y -@tbl-nemenyi-fidelity | `outputs/analysis/paper_a_exp2_stats/friedman_results.csv`, `nemenyi_fidelity.csv` | `scripts/run_exp2_statistical_analysis.py` | 15 bloques Adult Income, cuatro métodos, cinco modelos |
+| SHAP supera a LIME en fidelidad en la agregación del análisis global | Seguimiento dirigido tras la Tabla -@tbl-nemenyi-fidelity | `paired_blocks_shap_lime.csv`, `wilcoxon_shap_lime_blocks.csv`, `sign_test_shap_lime_blocks.csv` | `scripts/run_exp2_block_paired_analysis.py` | 15 bloques $(g,n)$; análisis motivado por revisión, distinto del H3 de 75 celdas |
 | Existen diferencias globales entre métodos en estabilidad | Tabla -@tbl-friedman-stability y localización Nemenyi en texto | `friedman_results.csv`, `nemenyi_stability.csv` | `scripts/run_exp2_statistical_analysis.py` | Mismo diseño de bloques; estabilidad como similitud coseno |
 | SHAP supera a LIME en fidelidad y estabilidad pero aumenta el coste medio | Tabla -@tbl-paired-shap-lime | `wilcoxon_shap_lime_all_models.csv`, `paired_cells_shap_lime_all_models.csv` | `scripts/run_exp2_statistical_analysis.py` | 75 celdas pareadas $(g,s,n)$; no generaliza fuera de Adult/tabular |
 | FOM-7 produce señales reproducibles para métricas principales | Tabla -@tbl-cv-p1 | `outputs/analysis/paper_a_exp2_stats/exp2_run_level_metrics.csv` (estrato RF/$N=100$, cinco semillas); perfil complementario en `experiments/exp1_adult/reproducibility/reproducibility_report.csv` | Agregación por celda desde el nivel de ejecución | Confirmación parcial; LIME-estabilidad queda limitada por media cercana a cero |
@@ -637,12 +664,16 @@ Las limitaciones principales del estudio son las siguientes. Primero, el
 universo experimental se acota al conjunto de datos UCI Adult Income y a
 problemas de clasificación tabular binaria; la extensión a otros dominios
 (imágenes, texto, series temporales) requiere rediseño de las métricas de
-fidelidad y estabilidad. Segundo, las métricas utilizadas son operacionalizaciones
-específicas de los constructos de calidad: fidelidad como correlación de
-importancias, estabilidad como similitud coseno. Otras operacionalizaciones
-posibles (p. ej., fidelidad como perturbación ROAR [@hedstrom2023] o
-estabilidad como distancia entre vecindades) pueden producir ordenamientos
-distintos. Tercero, el diseño no contempla la dimensión del usuario
+fidelidad y estabilidad. Segundo, las métricas utilizadas son
+operacionalizaciones específicas de los constructos de calidad. La fidelidad
+sustituye cada característica de forma independiente por su media de
+entrenamiento; este enmascaramiento puede romper dependencias, producir
+instancias OOD y sesgar diferencialmente la comparación entre explicadores
+[@hooker2019benchmark; @rong2022consistent]. El uso de un operador común
+asegura comparabilidad procedimental, no validez distribucional. Otras
+operacionalizaciones, como *remove-and-retrain* o perturbaciones condicionadas,
+pueden producir ordenamientos distintos; el alcance se desarrolla en
+§-@sec-limitaciones. Tercero, el diseño no contempla la dimensión del usuario
 (comprensibilidad percibida, utilidad para la toma de decisiones), que es
 una dimensión de calidad no capturable por métricas automáticas. Estos aspectos
 constituyen extensiones naturales para investigación futura que el protocolo
