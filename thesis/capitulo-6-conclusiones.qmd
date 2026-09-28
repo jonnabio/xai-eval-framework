@@ -40,7 +40,7 @@ siguiente:
 | H2: diferencias en estabilidad | **Confirmada** | $\chi^2_F = 40.68$; margen 421% |
 | H3: SHAP-LIME difieren en calidad y coste | **Confirmada** | $d_z = +4.82$ (fidelidad); $d_z = +3.00$ (estabilidad); 75/75 positivas |
 | P1: CV < 15% en métricas primarias | **Parcialmente confirmada** | SHAP-fidelidad: CV=0.8%; LIME-estabilidad: CV=86.2% (incoherencia estructural, no ruido del protocolo) |
-| P2 (exploratoria, declarada en el Capítulo 1): Jueces LLM alcanzan fiabilidad aceptable en evaluación semántica XAI | **No confirmada (resultado negativo)** | ICC(1,1) entre 0.321 y 0.601; ninguna dimensión alcanza umbral $\geq 0.75$ (EXP4, $n=147$, 3 jueces) |
+| P2 (exploratoria, declarada en el Capítulo 1): Jueces LLM alcanzan fiabilidad aceptable en evaluación semántica XAI | **No confirmada (resultado negativo, replicado)** | Cohorte original: ICC(1,1) entre 0.321 y 0.601 ($n=147$, 3 jueces). Replicación con otro panel sobre los mismos casos: entre $-0.025$ y 0.731 ($n=192$). En la condición primaria, ninguna dimensión alcanza el umbral $\geq 0.75$ en ninguna de las dos cohortes |
 
 : Síntesis de hipótesis y proposiciones de trabajo. {#tbl-hipotesis}
 
@@ -51,7 +51,7 @@ siguiente:
 | OE3 — Cuantificar la relación calidad-coste SHAP-LIME | Completado. Análisis pareado sobre 75 celdas coincidentes con corrección de multiplicidad Holm-Bonferroni. |
 | OE4 — Caracterizar reproducibilidad del protocolo | Completado. CV < 3% en fidelidad para el subgrupo replicado RF/$N=100$ y CV agrupado de 11.4% (SHAP) y 12.0% (LIME) sobre el conjunto completo de ejecuciones, todos por debajo del umbral del 15% de P1; variabilidad del coste inherente a la heterogeneidad del hardware. |
 | OE5 — Construir taxonomía estructurada y explicitar brechas de constructo | Completado. Taxonomía de cuatro ejes en el Capítulo 5; tres brechas enunciadas en §-@sec-taxonomia-brechas, de las que la Brecha 3 origina OE6. |
-| OE6 — Cuantificar fiabilidad de evaluadores semánticos LLM (objetivo exploratorio, derivado de la Brecha 3) | Completado (resultado negativo). EXP4: ICC(1,1) entre 0.321 y 0.601 en 7 dimensiones; ninguna alcanza umbral $\geq 0.75$. Véase §-@sec-exp4-fiabilidad. |
+| OE6 — Cuantificar fiabilidad de evaluadores semánticos LLM (objetivo exploratorio, derivado de la Brecha 3) | Completado (resultado negativo, replicado). EXP4: ICC(1,1) entre 0.321 y 0.601 en 7 dimensiones en la cohorte original. Una segunda cohorte con otro panel de jueces reproduce el resultado en la condición primaria: ninguna dimensión alcanza el umbral $\geq 0.75$. Véase §-@sec-exp4-fiabilidad. |
 
 : Cierre de objetivos específicos. {#tbl-objetivos}
 
@@ -324,16 +324,19 @@ especificación de stakeholder. La continuación directa de este resultado son d
 líneas: primera, rediseñar las rúbricas con los cuatro criterios de formalización
 identificados en §-@sec-exp4-fiabilidad (especificación de stakeholder, criterio
 de corrección verificable, separación de desiderata secundarios, calibración
-contra expertos humanos) y replicar EXP4 con las rúbricas revisadas. La
-calibración deberá estratificarse por dimensión para comprobar por separado si
-los criterios verificables elevan Completitud y Plausibilidad Semántica y si la
-información del stakeholder reduce la dispersión en Claridad y Utilidad para
-auditoría. Solo después de superar criterios de aceptación declarados podría
-evaluarse un uso acotado; el gradiente actual es generador de hipótesis y no
-autoriza uso confirmativo porque todos los ICC(1,1) son inferiores a 0.75. La
-replicación permitirá determinar si la brecha de fiabilidad se cierra con mayor
-formalización o
-refleja límites del paradigma LLM-as-a-judge. Segunda: incorporar estudios de
+contra expertos humanos) y replicar EXP4 con las rúbricas revisadas. La cohorte
+de replicación con un segundo panel de jueces ya aporta una prueba parcial.
+Sostiene el gradiente para Completitud, Plausibilidad Semántica y Claridad, pero
+no para Utilidad para auditoría, y muestra que la redacción de la rúbrica
+desplaza tanto las puntuaciones como la fiabilidad. La calibración deberá, por
+tanto, estratificarse por dimensión y por panel de jueces, y declarar la
+condición y la agregación de antemano. Solo después de superar criterios de
+aceptación declarados podría evaluarse un uso acotado. El gradiente actual es
+generador de hipótesis y no autoriza un uso confirmativo: en la condición
+primaria, todos los ICC(1,1) son inferiores a 0.75 en ambas cohortes. La
+replicación con rúbricas revisadas permitirá determinar si la brecha de
+fiabilidad se cierra con mayor formalización o refleja límites del paradigma
+LLM-as-a-judge. Segunda: incorporar estudios de
 usuario con expertos de dominio (médicos, analistas de crédito) que evalúen
 comprensión, confianza y utilidad de las explicaciones de SHAP y LIME bajo
 condiciones de tarea real, produciendo la calibración humana necesaria para
