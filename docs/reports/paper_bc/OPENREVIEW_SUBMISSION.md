@@ -11,7 +11,7 @@ LaTeX converted and inline math kept for OpenReview's MathJax. **If
 Submission venue: <https://openreview.net/group?id=TMLR>
 
 > **Re-verified 2026-09-27 against the revised manuscript** (record below).
-> Filing still needs the author's sign-off that the detailed revision is
+> Author confirmed 2026-09-28: the detailed revision is finished and the paper is not under review elsewhere. Filing now waits on the pre-submission review (docs/planning/paper_bc_tmlr_review_plan_2026-09-28.md) and the gate re-run after its fixes. Previously: filing needed the author's sign-off that the detailed revision is
 > finished, and the outstanding confirmation of no concurrent submission. Any
 > further edit to the manuscript, its supplementary or `pub/claims.toml`
 > invalidates this record: run "After any revision" again.
@@ -77,7 +77,7 @@ Supplementary S1 (ADR-0017: EXP4 replication cohort and corrected sample).
 | RIMI DOI `10.69850/rimi.vi3.307` | confirmed by author; resolves in Crossref to the RIMI article, issue 3, published 2026-09-01, ISSN 2992-7978 |
 | RIMI journal name | Crossref registers "Revista de investigación multidisciplinaria, Iberoamericana", correctly spelled; the bibliography's title-cased form is right and needs no change |
 | Zenodo snapshot `10.5281/zenodo.21538180` is this paper's | confirmed by author, 2026-09-14 (camera-ready only; not in the anonymous PDF) |
-| **Not under review at any other venue** | **author to confirm at the form's checkbox** |
+| Not under review at any other venue | confirmed by author, 2026-09-28 (tick the form checkbox when filing) |
 
 ## Form fields
 
