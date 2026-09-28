@@ -475,9 +475,10 @@ def resolve(expr: str) -> float:
         return statistics.mean(values)
 
     if kind == "exp4":
+        # stat: icc, icc_ci_upper (the ICC's upper 95% bound) or alpha.
         stat, dimension = args
-        filename = "icc_analysis.csv" if stat == "icc" else "krippendorff_alpha.csv"
-        column = "icc_2_1" if stat == "icc" else "krippendorff_alpha"
+        filename = "krippendorff_alpha.csv" if stat == "alpha" else "icc_analysis.csv"
+        column = {"icc": "icc_2_1", "icc_ci_upper": "ci_upper", "alpha": "krippendorff_alpha"}[stat]
         for row in _rows(EXP4_DIR / filename):
             if row["dimension"] == dimension:
                 return float(row[column])
