@@ -196,7 +196,8 @@ minimum viable setting. \texttt{kernel\_width=10.0} yields stable explanations
 ($0.441$). These results confirm that LIME instability under the reference
 configuration is not a calibration artifact: narrowing the kernel does not
 improve stability; it degenerates the explanations. Widening the kernel
-improves stability but at the cost of locality.
+improves stability but at the cost of locality, so LIME's near-zero
+stability at the reference width depends on the configuration.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S3 --- Adult Income Feature Correlation Structure}
@@ -359,9 +360,10 @@ perturbations ($\sigma=0.1$). Reference condition:
 \noindent Stability remains near-zero at every sample budget tested and
 fidelity is essentially flat throughout. Doubling or halving the sample
 budget neither stabilizes the explanations nor changes the fidelity
-ordering, indicating that LIME's instability reflects the local surrogate
-fitting process itself rather than an insufficient sample count that
-additional compute would resolve.
+ordering: under the reference kernel width, more samples do not raise
+LIME's stability. Table~S2 shows that the kernel width does, so the
+near-zero reading is a property of the reference configuration rather than
+of the method.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S6 --- EXP6 Masking-Scheme Sensitivity Breakdown}

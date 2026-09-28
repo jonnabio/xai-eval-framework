@@ -991,11 +991,12 @@ the coefficient of variation (CV\,=\,SD/mean) across the five seeds for
 each $(N, \mathrm{model})$ stratum and report the stratum-median CV in
 Table~\ref{tab:cv_reproducibility}. SHAP yields highly reproducible
 fidelity and stability readings ($\mathrm{CV}<1\%$). LIME fidelity is
-acceptable ($\mathrm{CV}=2.6\%$), whereas LIME stability is structurally
-irreproducible ($\mathrm{CV}=86.2\%$). This is not a measurement artifact:
-when the mean cosine similarity is near zero, any nonzero variation
-produces an extreme relative deviation. The CV probe confirms that LIME
-stability is geometrically unstable---not merely noisy.
+acceptable ($\mathrm{CV}=2.6\%$), whereas LIME stability has
+$\mathrm{CV}=86.2\%$. That figure mostly reflects the denominator: when the
+mean cosine similarity is near zero, any nonzero variation produces an
+extreme relative deviation, so the CV says little about how much the
+stability readings actually spread. The informative result is the level
+itself, which is near zero under the reference configuration.
 
 \begin{table}[t]
 \centering
@@ -1083,12 +1084,14 @@ narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.07$
 (XGB), compared to $+0.27$ (RF) and $+0.21$ (XGB) in the corresponding
 model strata on Adult. Second, and more critically, LIME
 \emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
-higher than on Adult, where it is near zero. This reveals that the near-zero stability
-observed in EXP2 is not a fixed structural property of LIME: it is strongly
-modulated by feature-space characteristics. The Adult dataset's 103-dimensional
-one-hot-encoded space appears to be the primary driver of instability; in
-lower-dimensional spaces with more continuous features, LIME produces
-substantially more consistent explanations.
+higher than on Adult, where it is near zero. The near-zero stability
+observed in EXP2 is therefore not a fixed property of LIME: it is modulated
+by the feature space, and on Adult itself also by the kernel width
+(Section~\ref{sec:validity}). The Adult dataset's 103-dimensional
+one-hot-encoded space is a candidate driver, but the two further datasets
+also differ from Adult in size, class balance and the mix of continuous and
+categorical features, so this design does not isolate the encoding as the
+cause.
 
 \begin{table}[t]
 \centering
@@ -1165,22 +1168,26 @@ Pattern}:
 \centering
 \caption{Hybrid Deployment Pattern: tier-conditioned explainer recommendation.}
 \label{tab:hybrid_deployment}
-\begin{tabularx}{\linewidth}{p{2.0cm} p{3.0cm} X}
+\begin{tabularx}{\linewidth}{p{2.0cm} >{\raggedright\arraybackslash}p{3.0cm} X}
 \toprule
 \textbf{Tier} & \textbf{Recommendation} & \textbf{Evidence and recommended condition} \\
 \midrule
 Tier 1: Real-Time / End-User &
 Model-architecture-conditioned: \textbf{SHAP} (\texttt{TreeExplainer}) for
-tree-based models (XGBoost, LightGBM, Random Forest); \textbf{LIME} for
-non-tree/black-box models (neural networks, opaque APIs). &
-For tree models, exact Shapley values in $O(TLD)$ time undercut LIME's
-sampling loop, so SHAP is simultaneously faster \emph{and} more faithful
-and the usual fidelity--latency trade-off does not apply. For non-tree
+XGBoost; \textbf{LIME} for non-tree/black-box models (neural networks,
+opaque APIs); for other tree ensembles, measure latency before choosing. &
+For XGBoost, \texttt{TreeExplainer} was faster than LIME in all 15 matched
+cells (median 18.1~ms vs.\ 61.8~ms), so SHAP is simultaneously faster
+\emph{and} more faithful and the usual fidelity--latency trade-off does
+not apply. This does not hold for tree models in general: for random
+forests, \texttt{TreeExplainer} was slower in all 15 cells (median
+1,262.4~ms vs.\ 335.6~ms), since its $O(TLD)$ cost grows with the number
+and depth of the trees. For non-tree
 models, LIME's lower median runtime (53.3~ms vs.\ 694.6~ms for
 KernelSHAP; Figure~\ref{fig:runtime_heterogeneity}) gives a latency
 advantage where sampling is the only option. Recommended when sub-second
 latency and compact explanations matter more than maximizing fidelity
-and no model-aware explainer is available. \\[6pt]
+and no fast model-aware explainer is available. \\[6pt]
 Tier 2: Auditing / Data Science &
 \textbf{SHAP.} &
 Use for bias analysis, model debugging, or regulatory inquiries: consistent
@@ -1197,10 +1204,11 @@ architecture identified in Section~\ref{sec:synthesis}: proxy and
 benchmark evidence (Tier~2) can be complemented by interaction-optimised
 lightweight explanations (Tier~1), each operating within its validated
 scope.  Critically, the Tier~1 criterion is not a blanket method preference
-but a function of model architecture: the existence of a model-aware
-explainer (e.g., \texttt{TreeExplainer}) collapses the fidelity--latency
-trade-off, making SHAP the dominant choice at both tiers for tree-based
-deployments.  This maps directly onto the Task Context axis of the taxonomy
+but a function of model architecture: where a model-aware explainer is
+also fast, as \texttt{TreeExplainer} was for XGBoost, the fidelity--latency
+trade-off collapses and SHAP is the dominant choice at both tiers; where it
+is not, as for random forests here, the trade-off remains and has to be
+measured for the deployed model.  This maps directly onto the Task Context axis of the taxonomy
 (Section~\ref{sec:taxonomy}): explainer selection is determined first by
 architectural affordance, then by deployment constraint.
 
@@ -1344,7 +1352,7 @@ hyperparameter settings.
 \midrule
 SHAP $>$ LIME stability & Adult Income matched cells only & Confirmed only for the Adult tabular protocol; EXP3 does not instrument SHAP stability \\
 SHAP $>$ LIME fidelity & Adult Income plus partial EXP3 tabular extension & Partially supported within tabular classification; not established for image, text, graph, or time-series data \\
-LIME lower runtime & Adult Income, model-dependent & Bounded by model architecture and SHAP implementation; tree-specific SHAP reverses the ranking \\
+LIME lower runtime & Adult Income, model-dependent & Bounded by model architecture and SHAP implementation; \texttt{TreeExplainer} reverses the ranking for XGBoost but not for random forests \\
 SHAP $>$ Anchors fidelity & EXP3 Breast Cancer and German Credit & Partial tabular replication of fidelity ordering, not a SHAP--LIME stability or runtime replication \\
 Human-subject utility & No participant study; EXP4 is an LLM reliability probe only & Not established; user/task outcomes remain outside confirmatory scope \\
 Non-tabular behavior & No image, text, graph, or time-series experiments & Out of scope for the present confirmatory benchmark \\
@@ -1370,12 +1378,13 @@ at the cost of fidelity ($0.518 \rightarrow 0.441$), so the near-zero
 reading is specific to the reference kernel rather than intrinsic to the
 method. Taken together with the cross-dataset extension above, where LIME
 reaches $0.85$--$0.93$ at that same reference width, the two probes
-support a bounded conclusion: under the reference configuration in
-Adult's 103-dimensional one-hot space, LIME's instability is a property
-of its local surrogate fitting under Gaussian perturbation and not an
-artifact of insufficient compute --- but it is modulated by both kernel
-width and feature-space geometry, and should not be read as a
-configuration-independent property of LIME.
+support a bounded conclusion: under the reference kernel width, LIME's
+stability on Adult is near zero and is not raised by more samples; it rises
+with the kernel width and is high on two lower-dimensional datasets, so it
+is modulated by configuration and feature space. Adult's one-hot encoding
+is a candidate cause that this design does not isolate, and the near-zero
+reading should not be taken as a configuration-independent property of
+LIME.
 
 \paragraph{Feature correlation and out-of-distribution masking.}
 The Adult Income dataset contains moderate-to-strong inter-feature

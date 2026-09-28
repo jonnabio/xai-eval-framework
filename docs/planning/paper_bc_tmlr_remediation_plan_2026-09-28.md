@@ -311,3 +311,42 @@ so each goes in the commit that removes it: F02 in Step 3, F07 in Step 5. The ne
 **Note on F05:** Table S5's reference row (0.461 / 0.014) equals two EXP2 aggregates (RF/N=100
 five-seed LIME fidelity, and block-level LIME stability). It does not equal the seed-42 cell of
 Table S2. Say so in the S5 disclosure.
+
+## Step 2 outcome (2026-09-28)
+
+**F01, F03 and F09 fixed**, at these sites:
+- the abstract (`pub/claims.toml`, fragment regenerated);
+- the Tier 1 row and the paragraph after `tab:hybrid_deployment`;
+- the "LIME lower runtime" row of `tab:generalizability_boundary`;
+- the reproducibility-probe paragraph (the "structurally" / "geometrically" wording is removed;
+  the CV/SD rework is still Step 5);
+- the EXP3 LIME paragraph ("primary driver" → a candidate driver the design does not isolate);
+- the closing of "LIME stability is not a convergence artifact";
+- the Table S5 and S2 closing sentences.
+
+Tier 1 now names XGBoost and the RF counter-case with registered medians: 18.1/61.8 ms and
+1,262.4/335.6 ms (sites added). No number is new or changed.
+
+Checks:
+- verifiers green (319 claims / 485 sites);
+- both PDFs rebuilt, 26 + 5 pp, 0 undefined references;
+- **page 1 read from the built PDF**: the new abstract renders with no garbled macros;
+- the Tier 1 recommendation column is now ragged-right;
+- the remaining 2 pt overfull box at the end of `tab:hybrid_deployment` was already present
+  before this step;
+- the fragments that `generate_fragments.py` rewrote with only line-ending changes were
+  restored, so only `paper_bc_abstract_en.tex` and `build_meta.env` changed.
+
+**Top-level statement sweep.** Contribution 2 and contribution 4 carry neither claim. The
+conclusion ("LIME remains the pragmatic option when latency and compactness are the primary
+constraints"; "lower runtime for most model contexts") and the Broader Impact Statement are
+consistent with the new wording, so no edit was needed.
+
+**Thesis-lane follow-up (open, not this lane):** the thesis carries both claims.
+- Ch.4 l.193 says LIME's instability "no es marginal, sino estructural".
+- Ch.6 `tbl` P1 row: "incoherencia estructural, no ruido del protocolo".
+- Ch.4 l.620: "Para modelos basados en árboles, el coste de TreeSHAP hace esta elección también
+  eficiente". Ch.6 l.134-136 already scopes this correctly to XGBoost.
+
+These are the same defect class as thesis F01 (2026-08-28). Fix them on
+`thesis/rca-001-phase-2` through the sync matrix.

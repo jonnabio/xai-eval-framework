@@ -14,18 +14,21 @@ Second, we fill the proxy-layer gap with a paired empirical benchmark
 comparing LIME and SHAP across 75 matched cells spanning five model
 families, five seeds, and three sampling sizes on the Adult tabular
 benchmark. Within this protocol, results are consistent and large in
-magnitude: SHAP dominates all measured quality endpoints (stability
-$d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness gap $d_z{=}2.63$),
-while LIME is faster for non-tree model families (median 53.3 ms vs.\ 694.6 ms
-for SHAP); for tree-based models, SHAP's \texttt{TreeExplainer}
-reverses this ordering. A cross-dataset extension on two further
-tabular datasets preserves the fidelity ordering---SHAP exceeds both
-Anchors and LIME in every dataset--model stratum---while suggesting that
-LIME's instability on Adult stems from its high-dimensional one-hot
-encoding rather than from the method itself.
+magnitude: SHAP leads on every fidelity- and stability-oriented endpoint
+(stability $d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness gap
+$d_z{=}2.63$), while LIME is sparser and faster for non-tree model families
+(median 53.3 ms vs.\ 694.6 ms for SHAP). Among tree ensembles the latency
+ordering depends on the model: SHAP's \texttt{TreeExplainer} was faster
+than LIME in every XGBoost cell but slower in every random-forest cell.
+A cross-dataset extension on two further tabular datasets preserves the
+fidelity ordering---SHAP exceeds both Anchors and LIME in every
+dataset--model stratum---and shows that LIME's near-zero stability on
+Adult is not intrinsic to the method: it rises with the kernel width and
+is high on both lower-dimensional datasets.
 Together, the taxonomy and the benchmark motivate a
 model-architecture-conditioned deployment pattern for tabular
 classification: SHAP is preferred at both fidelity and latency for
-tree-based models, while LIME retains a latency advantage for black-box
-architectures lacking a model-aware explainer. All experimental artifacts
+XGBoost, LIME retains a latency advantage for black-box architectures
+lacking a model-aware explainer, and for other tree ensembles latency
+should be measured before choosing. All experimental artifacts
 are publicly available.
