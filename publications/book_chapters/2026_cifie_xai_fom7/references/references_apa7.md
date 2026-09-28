@@ -36,6 +36,12 @@ Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi
 
 Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., & Höhne, M. M.-C. (2023). Quantus: An explainable AI toolkit for responsible evaluation of neural network explanations and beyond. *Journal of Machine Learning Research, 24*(34), 1-11. https://www.jmlr.org/papers/v24/22-0142.html
 
+Herrera-Vásquez, J. (2026). *Arquitectura agnóstica para la interpretabilidad de modelos de inteligencia artificial de caja negra: Integración de benchmarking técnico, protocolo reproducible (FOM-7) y taxonomía de métricas* [Tesis doctoral no publicada]. Universidad Americana de Europa.
+
+Herrera-Vásquez, J., & Herrero-Uceda, M. (2026). A framework for rigorous evaluation of model-agnostic explainability methods: Multi-metric statistical benchmarking, operational protocol, and reproducibility. *Revista de Investigación Multidisciplinaria Iberoamericana*, (3). https://doi.org/10.69850/rimi.vi3.307
+
+Kadir, M. A., Mosavi, A., & Sonntag, D. (2023). Evaluation metrics for XAI: A review, taxonomy, and practical applications. In *2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)* (pp. 111-124). IEEE. https://doi.org/10.1109/INES59282.2023.10297629
+
 Karimi, A.-H., Barthe, G., Schölkopf, B., & Valera, I. (2022). A survey of algorithmic recourse: Contrastive explanations and consequential recommendations. *ACM Computing Surveys, 55*(5), 1-29. https://doi.org/10.1145/3527848
 
 Kohavi, R., & Becker, B. (1996). *Adult data set*. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/2/adult
