@@ -1,7 +1,7 @@
 # Top-level statement sweep
 
 **Status:** Living checklist. Not a dated report — update it in place.
-**Last swept:** 2026-09-02
+**Last swept:** 2026-09-27
 **Owner role:** Scientific Editor
 
 ---
@@ -101,3 +101,4 @@ ICC(1,1) 0.321–0.601), each listed as a site on its claim.
 | Date | Trigger | Rows checked | Outcome |
 |---|---|---|---|
 | 2026-09-02 | Rigor review of the Resumen, then of the objetivo general | 1–14 | Rows 12/13 rewritten (4 major + 3 minor findings); row 1 revised for scope, coverage and an undefined term. Rows 2–11, 14 consistent. |
+| 2026-09-27 | Tutor-feedback implementation: H1 follow-up, masking/OOD boundary and EXP4 interpretation | 1–14 | Consistent. H1 remains a global Friedman hypothesis; the new 15-block SHAP–LIME test is labelled review-motivated and does not replace the 75-cell H3 analysis. The Resumen/Abstract already scope results to the benchmark and validity conditions. P2 and OE6 remain negative/exploratory, and the EXP4 gradient does not authorize confirmatory use. Study names remain compliant with ADR-0012. |
