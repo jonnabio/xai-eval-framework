@@ -22,7 +22,11 @@ reference items it hands to Phase 2.
    fixed on the thesis lane, not here.
 5. **No experiment is re-run.** All fixes are prose, figures or the registry.
 
-## Decisions needed from the author (defaults apply if not answered)
+## Author decisions (2026-09-28)
+
+Q1, Q2 and Q4: the defaults below are adopted. Q3: **overridden** - no disclosure and no
+mention of the EXP4 prompt question; F10 is closed as won't-fix by author decision and no
+manuscript text is added or changed for it.
 
 Each question below has a recommended default. If the author doesn't answer, execution goes ahead
 on the default, and the default is recorded in the commit message.
@@ -31,7 +35,7 @@ on the default, and the default is recorded in the commit message.
 |---|---|---|
 | Q1 | EXP3 figure stacks Anchors + gap to reach SHAP levels Paper A prints. Keep? | **Redraw as gaps only** (same generator, one panel). It removes the question from the TMLR reuse policy at no cost to the argument. |
 | Q2 | Does the original search/screening log exist? | **Assume no.** The caption says the counts come from the original record, which is not released, and the chain is registered `[[unbacked]]`. If the log is found later, release it and register the counts. |
-| Q3 | Did the original EXP4 prompt hard-code "UCI Adult Income"? | **Unknown.** Disclose it as a possible instrument difference that cannot be verified because the templates are lost. |
+| Q3 | Did the original EXP4 prompt hard-code "UCI Adult Income"? | ~~Disclose~~ **Author decision: no disclosure, nothing added (F10 won't-fix).** |
 | Q4 | Tier 1 wording for tree models | **XGBoost only, with "measure first" for other tree ensembles**. RF was slower in 15/15 cells, and LightGBM was not tested. |
 
 ## Step 0 - Finish the review (Phases 2 and 3 of the parent plan)
@@ -137,7 +141,7 @@ These three share the abstract, so they are done together, then checked against 
 - `paper-bc: remove restated Paper A means; plot paired differences (F02)`
 - `pubs: registry-independent shared-literal scan against Paper A (F02, RCA-001)`
 
-## Step 4 - Evidence and disclosure (F04, F05, F06, F10)
+## Step 4 - Evidence and disclosure (F04, F05, F06)
 
 - **F04**, `tab:prisma`:
   - restore 47 at the full-text exclusion row;
@@ -155,10 +159,7 @@ These three share the abstract, so they are done together, then checked against 
 - **F06**, l.1306-1320: rewrite as a plausible, untested mechanism. Delete "optimally" and "causal
   responsibility", and drop "consistently" (Breast Cancer gap +0.07). Make the axiom lists at l.236
   and l.1307 agree, and cite the property set from `lundberg2017unified`.
-- **F10**, §EXP4: one sentence saying that the transcribed original prompt names Adult for every
-  case, that this cannot be verified because the templates are lost, and that the replication read
-  the dataset per case. Fix "Explainer: (SHAP or LIME)" in S1 as a transcription note, not a silent
-  edit.
+- **F10**: won't-fix by author decision (2026-09-28). No edit.
 
 **Commits:** one per finding.
 
