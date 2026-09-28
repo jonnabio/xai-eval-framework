@@ -691,21 +691,29 @@ pareado SHAP-LIME completo de estabilidad fuera de UCI Adult Income.
 ### EXP4: Estudio de fiabilidad de jueces LLM para evaluación semántica {#sec-exp4-diseno}
 
 EXP4 es un estudio de calibración empírica cuyo propósito es cuantificar la
-convergencia inter-juez de evaluadores LLM sobre explicaciones del corpus
-experimental de EXP2. Su función en la tesis es proporcionar evidencia
+convergencia inter-juez de evaluadores LLM sobre explicaciones de los corpus
+experimentales de EXP2 y EXP3. Su función en la tesis es proporcionar evidencia
 cuantitativa de la brecha de evaluación semántica identificada en la taxonomía
 del Capítulo 5 (Brecha 3, §-@sec-taxonomia-brechas: la evaluación semántica crece más rápido que su base
 de validación empírica).
 
-**Muestra.** Se seleccionaron $n = 147$ pares de salidas de explicación del
-corpus EXP2, estratificados para representar los cinco modelos y los cuatro
-métodos explicadores. Cada par contiene la salida de texto de dos explicaciones
-sobre la misma instancia o configuración comparable.
+**Muestra.** El inventario de EXP4 comprende $n = 192$ casos. Cada caso es una
+explicación individual de una instancia, no un par de explicaciones: 96 casos
+proceden de EXP2 (Adult Income) y 96 de EXP3 (53 de German Credit y 43 de
+Breast Cancer). Cubren cuatro familias de modelos (regresión logística, MLP,
+Random Forest y XGBoost) y los cuatro métodos explicadores (76 casos de
+Anchors, 52 de SHAP, 32 de DiCE y 32 de LIME). El ICC exige que los tres jueces
+hayan puntuado el caso; en la cohorte original ese subconjunto completo fue de
+$n = 147$ casos (§-@sec-exp4-fiabilidad).
 
-**Jueces.** Tres jueces LLM independientes puntuaron cada par de forma
+**Jueces.** Tres jueces LLM independientes puntuaron cada caso de forma
 ciega (sin conocer la puntuación de los otros jueces) sobre siete dimensiones
 semánticas estructuradas mediante una rúbrica de escala 1–5 por dimensión
 (las siete dimensiones se enumeran en la Tabla -@tbl-exp4-icc del Capítulo 5).
+El diseño prevé tres condiciones de consigna, con tres réplicas por caso y
+juez: la condición primaria, con la etiqueta verdadera oculta; una sonda de
+sesgo, con la etiqueta visible; y una sonda de sensibilidad, con una redacción
+alternativa de la rúbrica.
 El uso de modelos de lenguaje como instrumento de medida exige cautela: estos
 sistemas producen salidas fluidas y plausibles con independencia de su
 corrección factual, un modo de fallo ampliamente documentado en generación de
@@ -730,6 +738,22 @@ rúbricas para evaluación semántica futura. EXP4 tiene carácter exploratorio 
 no genera hipótesis confirmativas propias; su resultado se clasifica como
 proposición de calibración P2, declarada con su estatuto epistémico diferenciado
 en el Capítulo 1 y reportada en los Capítulos 5 y 6.
+
+**Cohorte de replicación.** De la cohorte original se conservan los agregados
+de fiabilidad, pero no las respuestas brutas de los jueces ni las plantillas de
+consigna. Para disponer de datos brutos, EXP4 se ejecutó de nuevo en
+septiembre de 2026 (cohorte 2) sobre los mismos 192 casos, recuperados por su
+identificador a partir de la lista de casos de la cohorte original. El panel de
+jueces es nuevo (GPT-5.4 mini, Claude Haiku 4.5 y Gemini 3.8 Flash), porque los
+modelos originales ya no están todos disponibles. Las plantillas se
+reconstruyeron a partir de la rúbrica documentada, y la redacción de la rúbrica
+alternativa es nueva. La cohorte 2 cubre las tres condiciones con tres réplicas
+y conserva todas las respuestas brutas. Es una replicación con otro panel, no
+una reproducción: sus valores se reportan junto a los de la cohorte original,
+sin sustituirlos. La estimación primaria de fiabilidad es el ICC(1,1) de la
+condición primaria. La estimación que agrega todas las condiciones y réplicas,
+que es la opción por defecto del código de análisis, y las estimaciones por
+condición se reportan como análisis de sensibilidad.
 
 Este capítulo ha operacionalizado el protocolo FOM-7 y ha establecido las
 condiciones bajo las cuales los resultados del Capítulo 4 son estadísticamente

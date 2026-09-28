@@ -343,7 +343,7 @@ cuantifica directamente esa brecha: mide si los jueces LLM actuales alcanzan la
 convergencia inter-juez necesaria para operar como evidencia confirmativa.
 
 **Resultados.** La Tabla -@tbl-exp4-icc reporta ICC(1,1) y $\alpha$ de
-Krippendorff por dimensión para los tres jueces LLM. Los dos estadísticos se
+Krippendorff por dimensión para los tres jueces LLM de la cohorte original. Los dos estadísticos se
 calculan sobre conjuntos de casos distintos: el ICC se obtiene de una
 descomposición unidireccional de efectos aleatorios, que exige una matriz completa
 de casos $\times$ jueces y se restringe por tanto a los $n = 147$ casos
@@ -363,7 +363,7 @@ Ninguna dimensión alcanza el umbral de fiabilidad aceptable ($\geq 0.75$)
 | Plausibilidad semántica | 0.601 | 0.573 |
 | Calidad global | 0.431 | 0.394 |
 
-: Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4; ICC sobre
+: Fiabilidad inter-juez LLM en siete dimensiones semánticas (EXP4, cohorte original; ICC sobre
 $n = 147$ casos con puntuación completa, $\alpha$ de Krippendorff sobre
 $n = 192$ casos —véase el texto—; 3 jueces LLM). ICC(1,1): modelo unidireccional
 de efectos aleatorios, evaluador único. Un modelo unidireccional trata los
@@ -378,13 +378,66 @@ menor consistencia son Claridad ($\alpha = 0.278$) y Utilidad para auditoría
 como fiabilidad *poor* a *moderate* según @koo2016, situándose en todos los
 casos por debajo de la categoría *good*.
 
-**Interpretación.** El gradiente relativo es consistente con una mayor
-convergencia cuando la dimensión dispone de referentes semánticos verificables:
-Completitud y Plausibilidad Semántica preguntan si se cubren factores relevantes
-y si la explicación es coherente con el dominio. Claridad y Utilidad para
-auditoría dependen más del perfil del destinatario y del contexto de uso, que la
-rúbrica no especificó. El patrón es generador de hipótesis, no una demostración
-causal de que el tipo de criterio explique las diferencias de acuerdo.
+**Replicación con un segundo panel de jueces.** La cohorte 2 (§-@sec-exp4-diseno)
+puntuó los mismos 192 casos con un panel de jueces distinto. Todos los casos
+quedaron puntuados por los tres jueces, de modo que el ICC y el $\alpha$ se
+calculan sobre $n = 192$ casos. La Tabla -@tbl-exp4-icc-c2 reporta la condición
+primaria, con la etiqueta oculta, y la estimación agregada sobre todas las
+condiciones y réplicas.
+
+| Dimensión | ICC(1,1) [IC 95 %] | Krippendorff $\alpha$ | ICC(1,1) agregado |
+|:----------|:------------------:|:---------------------:|:-----------------:|
+| Claridad | $-0.019$ [$-0.160$, 0.123] | $-0.019$ | $-0.090$ |
+| Concisión | 0.373 [0.244, 0.489] | 0.372 | 0.524 |
+| Accionabilidad | $-0.025$ [$-0.166$, 0.117] | $-0.025$ | 0.039 |
+| Utilidad para auditoría | 0.699 [0.619, 0.765] | 0.699 | 0.820 |
+| Completitud | 0.731 [0.657, 0.791] | 0.730 | 0.839 |
+| Plausibilidad semántica | 0.604 [0.506, 0.687] | 0.603 | 0.664 |
+| Calidad global | 0.660 [0.571, 0.733] | 0.659 | 0.706 |
+
+: Fiabilidad inter-juez LLM en la cohorte de replicación (EXP4, cohorte 2;
+$n = 192$ casos, 3 jueces LLM distintos de los originales). Las tres primeras
+columnas corresponden a la condición primaria. La última promedia cada par caso
+$\times$ juez sobre las tres condiciones y las tres réplicas antes de calcular
+el ICC, que es la opción por defecto del código de análisis. Ninguna dimensión
+alcanza 0.75 en la condición primaria. {#tbl-exp4-icc-c2}
+
+La replicación confirma el resultado negativo en la condición primaria: ninguna
+dimensión alcanza 0.75, y el máximo corresponde a Completitud (0.731). No
+replica, en cambio, el margen respecto del umbral. Los límites superiores del
+intervalo de Completitud (0.791) y de Utilidad para auditoría (0.765) superan
+0.75. En dos vistas secundarias el umbral llega a cruzarse:
+
+- con la rúbrica alternativa, Completitud alcanza 0.753;
+- en la estimación agregada, Completitud (0.839) y Utilidad para auditoría
+  (0.820) superan 0.75.
+
+Promediar nueve respuestas por caso y juez atenúa el ruido de respuesta y eleva
+el ICC. Por eso la estimación primaria es la de la condición primaria, y la
+agregación debe declararse siempre que se reporte. Mostrar la etiqueta
+verdadera apenas altera las puntuaciones: el desplazamiento medio máximo es de
+0.14 puntos. La redacción de la rúbrica pesa más: desplaza las puntuaciones
+hasta 0.50 puntos y modifica la fiabilidad en ambos sentidos.
+
+**Interpretación.** En la cohorte original, el gradiente relativo es
+consistente con una mayor convergencia cuando la dimensión dispone de
+referentes semánticos verificables: Completitud y Plausibilidad Semántica
+preguntan si se cubren factores relevantes y si la explicación es coherente con
+el dominio, mientras que Claridad y Utilidad para auditoría dependen más del
+perfil del destinatario y del contexto de uso, que la rúbrica no especificó. La
+replicación sostiene ese gradiente solo en parte:
+
+- Completitud y Plausibilidad Semántica siguen entre las dimensiones de mayor
+  acuerdo, y Claridad sigue siendo la de menor acuerdo.
+- Utilidad para auditoría pasa a figurar entre las de mayor acuerdo, lo que no
+  apoya su clasificación como dimensión dependiente del destinatario.
+- Accionabilidad cae a un acuerdo prácticamente nulo por efecto suelo: casi
+  todas las puntuaciones son 1, de modo que apenas queda varianza que acordar.
+
+El patrón sigue siendo generador de hipótesis, no una demostración causal de
+que el tipo de criterio explique las diferencias de acuerdo. La replicación
+añade una observación propia: el orden de las dimensiones depende del panel de
+jueces y de la redacción de la rúbrica, no solo del constructo evaluado.
 
 **Consecuencias para el diseño de evaluación semántica.** EXP4 confirma
 cuantitativamente la Brecha 3: los jueces LLM actuales, bajo rúbricas sin
@@ -399,8 +452,11 @@ operacionalización doctoral de la Brecha 3 y constituyen la agenda de
 investigación directamente derivada de esta taxonomía. La prioridad es calibrar
 por dimensión: formalizar primero criterios verificables y añadir información
 del stakeholder en las dimensiones dependientes del contexto. El gradiente no
-autoriza un uso confirmativo —ni siquiera restringido a las dimensiones con
-mayor acuerdo— porque todos los ICC(1,1) permanecen por debajo de 0.75.
+autoriza un uso confirmativo, ni siquiera restringido a las dimensiones con
+mayor acuerdo. En la condición primaria, el ICC(1,1) queda por debajo de 0.75
+en todas las dimensiones y en ambas cohortes. Los cruces del umbral en las
+vistas secundarias dependen de la redacción de la rúbrica y de la agregación, y
+el orden de las dimensiones cambia de un panel a otro.
 
 Este capítulo ha establecido la tercera contribución doctoral: una taxonomía de
 cuatro ejes que organiza el espacio de métricas XAI, localiza las cinco métricas
