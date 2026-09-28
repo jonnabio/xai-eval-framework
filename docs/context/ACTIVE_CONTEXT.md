@@ -976,6 +976,18 @@ defects like A13, which was found only by rebuilding.
 Standing workstream (unchanged): maintain the CIFIE/FOM-7 book chapter and its ACE
 manuscript-editing support tooling.
 
+**Third lane, 2026-09-27: `chapter/cifie-sync-2026-09`** (ADR-0013 `chapter/cifie-*`).
+The chapter is synced to the verified results: retired values and pre-audit profiles replaced, and the
+tutor corrections applied. It is kept free of Paper B+C results by ADR-0018, enforced in CI
+(`[exclusivity]`), and put under `[coverage]`. The build is `scripts/build_cifie_chapter.py`.
+Open items:
+- Tables 1-4 are not yet in editorial form.
+- Altukhi (2025) is listed but never cited.
+- The thesis is cited as unpublished.
+- A full rigor review is pending.
+
+See `docs/review/cifie-chapter-sync_2026-09-27.md`.
+
 ## Current State
 
 ### Working

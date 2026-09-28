@@ -206,6 +206,68 @@ def _check_coverage(registry: dict, problems: list[str]) -> tuple[int, int]:
     return n_files, n_unregistered
 
 
+def _decimals(literal: str) -> int:
+    return len(literal.split(".", 1)[1]) if "." in literal else 0
+
+
+def _check_exclusivity(registry: dict, problems: list[str]) -> int:
+    """Keep an unpublished manuscript's results out of another publication.
+
+    [exclusivity] names protected files, which may not print a result that is
+    registered for an unpublished manuscript (`forbid`), unless the same
+    result is also registered for an already published one (`allow_if_also`),
+    or is listed as an [[exclusivity_exception]] with a reason.
+
+    Matching is by value at the printed precision, not by text: Paper B+C
+    prints "4.82" where another document prints "4.820". A literal matches a
+    claim when it rounds from the claim's value at the literal's own number of
+    decimals. Integers, and one-decimal literals below 10, are ignored as too
+    coarse to identify a result; one-decimal literals of 10 or more
+    (percentages, milliseconds such as "86.2") are compared.
+    """
+    cfg = registry.get("exclusivity") or {}
+    files = cfg.get("files") or []
+    if not files:
+        return 0
+    forbid = tuple(cfg.get("forbid") or [])
+    allow = tuple(cfg.get("allow_if_also") or [])
+    excepted = {e["text"] for e in registry.get("exclusivity_exception", [])}
+
+    protected: list[tuple[str, float, set[str]]] = []
+    for claim in registry.get("claim", []):
+        site_files = [s["file"] for s in claim.get("appears_in", [])]
+        if not any(f.startswith(forbid) for f in site_files):
+            continue
+        if any(f.startswith(allow) for f in site_files):
+            continue
+        texts = {lit for s in claim["appears_in"] for lit in _literals(s.get("text", ""))}
+        protected.append((claim["id"], _as_number(claim["value"]), texts))
+
+    checked = 0
+    for rel in files:
+        path = ROOT / rel
+        if not path.exists():
+            problems.append(f"[exclusivity] file not found: {rel}")
+            continue
+        checked += 1
+        for lineno, line in enumerate(_scannable(_read(path)).splitlines(), 1):
+            for literal in _literals(line):
+                places = _decimals(literal)
+                if literal in excepted or places == 0 or (places == 1 and float(literal) < 10):
+                    continue
+                shown = float(literal)
+                step = 10 ** -_decimals(literal)
+                for claim_id, value, texts in protected:
+                    if literal in texts or abs(abs(value) - shown) <= step / 2 + 1e-12:
+                        problems.append(
+                            f"[exclusivity] {rel}:{lineno} prints {literal!r}, a result of the "
+                            f"unpublished manuscript ({claim_id}); cite the thesis in prose instead, "
+                            f"or add an [[exclusivity_exception]] saying why it is not that result"
+                        )
+                        break
+    return checked
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description="Verify manuscript claims against artifacts.")
     parser.add_argument("--registry", default=str(REGISTRY_PATH), help="Path to claim_registry.toml")
@@ -227,6 +289,7 @@ def main(argv: list[str]) -> int:
     n_sites = _check_appearances(registry, problems)
     n_retired = _check_retired(registry, problems)
     n_artifacts = _check_cited_artifacts(registry, problems)
+    n_exclusive = _check_exclusivity(registry, problems)
 
     coverage_problems: list[str] = []
     n_cov_files, n_unregistered = _check_coverage(registry, coverage_problems)
@@ -247,7 +310,8 @@ def main(argv: list[str]) -> int:
     print(
         f"OK: {n_values} claims re-derived from artifacts, {n_sites} manuscript sites checked, "
         f"{n_retired} retired-value guards clear, {n_artifacts} cited artifacts present, "
-        f"{n_cov_files} file(s) fully registered"
+        f"{n_cov_files} file(s) fully registered, "
+        f"{n_exclusive} file(s) clear of unpublished results"
     )
     return 0
 
