@@ -978,9 +978,10 @@ for the four quality-oriented endpoints.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig_b1_quality_endpoints.pdf}
-\caption{Paired mean comparison across quality-oriented primary endpoints
-($n=75$ matched SHAP-LIME cells). Active ratio is reported directly;
-lower values imply sparser explanations.}
+\caption{Mean paired difference (SHAP $-$ LIME) with its 95\% confidence
+interval for the quality-oriented primary endpoints ($n=75$ matched cells),
+as in Table~\ref{tab:paired_main}. For the active ratio, a positive
+difference means SHAP is denser, that is, LIME is sparser.}
 \label{fig:quality_endpoints}
 \end{figure}
 
@@ -1020,8 +1021,9 @@ LIME -- Stability   & 86.2\%    & No  \\
 The cost signal is significant but strongly heterogeneous. SHAP is slower
 in 59 of 75 matched cells. Matched-cell median cost is 684.1 ms for SHAP
 versus 65.7 ms for LIME, and the median per-cell SHAP/LIME cost ratio is
-approximately $5.3\times$. Means are more separated (11,708.3 ms vs.\
-3,660.7 ms) because the SHAP distribution is heavy-tailed: the 90th and
+approximately $5.3\times$. The SHAP distribution is heavy-tailed, so its
+mean lies far above its median (the per-method means are reported by
+\citet{herrera2026framework}): the 90th and
 95th percentile latencies are approximately 51,456 ms and 67,066 ms,
 respectively, compared with 12,825 ms and 13,192 ms for LIME. This tail
 behavior is concentrated in kernel-SHAP contexts, especially SVM.
@@ -1146,10 +1148,10 @@ across a broader set of datasets and preprocessing schemes.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig_exp3_gap.pdf}
-\caption{EXP3 external validation: mean Anchors fidelity (3-seed average,
-solid) with the paired SHAP$-$Anchors gap stacked above it (shaded), so each
-bar reaches the SHAP level without restating it. SHAP exceeds Anchors in all
-12 paired (dataset $\times$ model $\times$ seed) combinations.
+\caption{EXP3 external validation: paired SHAP$-$Anchors fidelity gap
+(3-seed average) per dataset and model; the Anchors levels are in
+Table~\ref{tab:exp3_fidelity}. SHAP exceeds Anchors in all 12 paired
+(dataset $\times$ model $\times$ seed) combinations.
 BC\,=\,Breast Cancer; GC\,=\,German Credit.}
 \label{fig:exp3_fidelity}
 \end{figure}
@@ -1227,9 +1229,10 @@ The execution cohort analysed in Section~\ref{sec:empirical} was released
 with the study of \citet{herrera2026framework}, together with the
 preprocessing pipeline and the model controls it was produced under. This
 paper reuses that cohort as an input and reports no result that the earlier
-study reports: per-method fidelity and stability levels, the four-method
-omnibus and the cross-dataset SHAP levels are cited to it rather than
-restated, and the quantities reported here---the paired run-level contrast
+study reports: the per-method mean levels it reports (fidelity, stability,
+sparsity, faithfulness gap and cost), the four-method omnibus and the
+cross-dataset SHAP levels are cited to it rather than restated, in the text
+or in a figure, and the quantities reported here---the paired run-level contrast
 with its confidence intervals and effect sizes, the Anchors levels and the
 SHAP$-$Anchors gaps, the taxonomy, the scoping corpus and gap analysis, and
 the inter-judge reliability measurement---have no counterpart in it.

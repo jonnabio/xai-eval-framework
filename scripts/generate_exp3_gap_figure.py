@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Regenerate the EXP3 cross-dataset figure as an Anchors-and-gap plot.
+"""Regenerate the EXP3 cross-dataset figure as a gap-only plot.
+
+2026-09-28 (review F02, author decision Q1): the figure now shows only the
+paired SHAP - Anchors fidelity gap. The earlier version stacked the gap on the
+Anchors level, so each bar reached the SHAP level that the published RIMI
+article reports; gaps alone carry the argument without that. The Anchors
+levels stay in tab:exp3_fidelity.
+
+History of the figure before that change:
 
 The figure this replaces plotted SHAP and Anchors fidelity levels side by
 side. Two problems with that, both found on 2026-09-06:
@@ -66,25 +74,18 @@ def main() -> None:
     fig, ax = plt.subplots(figsize=(6.2, 2.9))
     x = range(len(labels))
 
-    # Anchors is the measured level; the gap is stacked on top of it, so the
-    # bar height is the SHAP level without the SHAP level being labelled.
-    ax.bar(x, anchors, width=0.55, label="Anchors fidelity", color="#4C72B0")
-    ax.bar(x, gaps, width=0.55, bottom=anchors,
-           label="Gap (SHAP $-$ Anchors)", color="#C7CBD1")
-
-    for i, (a, g) in enumerate(zip(anchors, gaps)):
-        ax.text(i, a / 2, f"{a:.3f}", ha="center", va="center",
-                color="white", fontsize=8)
-        ax.text(i, a + g / 2, f"+{g:.3f}", ha="center", va="center",
+    # Gap only: no bar reaches, or implies, a SHAP level.
+    ax.bar(x, gaps, width=0.55, color="#4C72B0")
+    for i, g in enumerate(gaps):
+        ax.text(i, g + 0.012, f"+{g:.3f}", ha="center", va="bottom",
                 color="#222222", fontsize=8)
 
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels)
-    ax.set_ylabel("Mean fidelity (3-seed average)")
+    ax.set_ylabel("Fidelity gap, SHAP $-$ Anchors\n(3-seed average)")
     ax.set_xlabel("Dataset / model family")
-    ax.set_ylim(0, 1.0)
-    ax.legend(frameon=False, ncol=2, loc="upper center",
-              bbox_to_anchor=(0.5, 1.18))
+    ax.set_ylim(0, 0.6)
+    ax.axhline(0.0, color="#555555", linewidth=0.8)
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
