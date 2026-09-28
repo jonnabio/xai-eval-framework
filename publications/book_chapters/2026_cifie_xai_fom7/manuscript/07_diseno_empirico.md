@@ -60,7 +60,9 @@ La decisión de registrar configuraciones efectivas es crucial porque el nombre 
 
 ## Métricas primarias
 
-El benchmark utiliza cinco métricas primarias, resumidas en la Tabla 1: fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional. La fidelidad mide la alineación entre importancias y efecto predictivo observado; la estabilidad mide similitud entre explicaciones bajo perturbaciones controladas; la parsimonia aproxima concisión mediante proporción de características activas; la brecha de fidelidad estima el cambio en la salida del modelo al enmascarar características principales; y el coste registra tiempo de ejecución por instancia explicada.
+El benchmark utiliza cinco métricas primarias, resumidas en la Tabla 3: fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional. La fidelidad mide la alineación entre importancias y efecto predictivo observado; la estabilidad mide similitud entre explicaciones bajo perturbaciones controladas; la parsimonia aproxima concisión mediante proporción de características activas; la brecha de fidelidad estima el cambio en la salida del modelo al enmascarar características principales; y el coste registra tiempo de ejecución por instancia explicada.
+
+<!-- TABLA: table_metrics.md -->
 
 Estas métricas se computan por instancia y se agregan a nivel de ejecución mediante media aritmética. La unidad inferencial no es la instancia aislada, sino la ejecución agregada y, para las pruebas globales, el bloque experimental. Esta jerarquía evita pseudorreplicación y mantiene coherencia entre el nivel donde se calcula una métrica y el nivel donde se sostiene una afirmación. Además, cada métrica conserva dirección e interpretación propias: fidelidad, estabilidad y brecha buscan valores mayores; parsimonia y coste se leen en sentido inverso. Una lectura multi-métrica evita confundir calidad explicativa con una única escala.
 
@@ -72,7 +74,7 @@ Para el contraste SHAP-LIME, la unidad primaria es la celda pareada $(g,s,n)$. E
 
 ## Control FOM-7
 
-El diseño se gobierna mediante FOM-7, resumido en la Tabla 3. Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones. Esta estructura es necesaria porque el benchmark no solo produce resultados; produce resultados que deben ser admisibles como evidencia. Una celda con artefacto vacío, esquema incompatible o valores inválidos no puede alimentar pruebas confirmativas. Una afirmación sin trazabilidad a tabla, script, configuración o límite de alcance no debe presentarse como inferencial.
+El diseño se gobierna mediante FOM-7, resumido en la Tabla 2. Las puertas controlan congelación del protocolo, ejecución declarativa, auditoría de artefactos, armonización de tablas, exportación inferencial, perfilado de reproducibilidad y trazabilidad de afirmaciones. Esta estructura es necesaria porque el benchmark no solo produce resultados; produce resultados que deben ser admisibles como evidencia. Una celda con artefacto vacío, esquema incompatible o valores inválidos no puede alimentar pruebas confirmativas. Una afirmación sin trazabilidad a tabla, script, configuración o límite de alcance no debe presentarse como inferencial.
 
 En la práctica, FOM-7 conecta el diseño con los resultados. La puerta 3 explica por qué las 25 celdas no calificadas se excluyen de ciertas pruebas; la puerta 4 permite transformar artefactos heterogéneos en tablas comparables; la puerta 5 genera tablas de Friedman, Nemenyi y Wilcoxon desde entradas calificadas; la puerta 6 sostiene la lectura de reproducibilidad; y la puerta 7 obliga a que cada afirmación pueda regresar a un artefacto fuente. Este control evita que el capítulo dependa de una confianza informal en el pipeline y convierte la auditabilidad en parte del método.
 

@@ -8,9 +8,11 @@ result with the Pandoc bundled with Quarto. Citations are already written in
 APA 7 author-date form in the sources, so no citation processing runs; the
 reference list gets a hanging indent, as the submission notes require.
 
-The working tables in tables/ are not yet in final editorial form (open item
-in compliance/submission_packet.md), so they are not assembled; the script
-says so on every run.
+Tables 1-4 live in tables/*.md in final APA 7 form (bold number, italic
+title, table, *Nota.*). Each is placed where the text first cites it, through
+a marker line `<!-- TABLA: <file>.md -->` in the manuscript. The build fails
+if a marker names a missing file, if a table file is placed twice, or if a
+table file is never placed.
 
 Usage: python scripts/build_cifie_chapter.py [--out PATH]
 """
@@ -56,6 +58,24 @@ def design_sheet() -> tuple[str, list[str], str]:
     authors = [a.lstrip("- ").strip() for a in section("Autoría").splitlines() if a.strip()]
     affiliation = section("Afiliación institucional")
     return title, authors, affiliation
+
+
+TABLE_MARKER = re.compile(r"^<!-- TABLA: ([\w.-]+\.md) -->$", flags=re.M)
+
+
+def place_tables(body: str) -> tuple[str, int]:
+    """Replace each table marker with the table file's content."""
+    tables_dir = CHAPTER / "tables"
+    placed = TABLE_MARKER.findall(body)
+    available = sorted(p.name for p in tables_dir.glob("table_*.md"))
+    if len(placed) != len(set(placed)):
+        raise SystemExit(f"table placed more than once: {placed}")
+    missing = [t for t in placed if not (tables_dir / t).exists()]
+    unused = [t for t in available if t not in placed]
+    if missing or unused:
+        raise SystemExit(f"table markers: missing files {missing}, unplaced tables {unused}")
+    body = TABLE_MARKER.sub(lambda m: (tables_dir / m.group(1)).read_text(encoding="utf-8").strip(), body)
+    return body, len(placed)
 
 
 def references() -> str:
@@ -105,6 +125,7 @@ def main() -> int:
     header = "---\n" f'title: "{title}"\n' "author:\n" + "".join(
         f'  - "{a}, {affiliation}"\n' for a in authors) + "lang: es-ES\n---\n\n"
     body = "\n\n".join(p.read_text(encoding="utf-8").strip() for p in sections)
+    body, n_tables = place_tables(body)
     source = header + body + "\n\n" + references()
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -119,8 +140,7 @@ def main() -> int:
     hanging_indent(args.out)
 
     words = len(re.findall(r"\w+", body))
-    print(f"OK: {len(sections)} sections, ~{words} words -> {args.out.relative_to(ROOT).as_posix()}")
-    print("NOTE: working tables in tables/ are not assembled (not yet in final editorial form).")
+    print(f"OK: {len(sections)} sections, {n_tables} tables, ~{words} words -> {args.out.relative_to(ROOT).as_posix()}")
     return 0
 
 

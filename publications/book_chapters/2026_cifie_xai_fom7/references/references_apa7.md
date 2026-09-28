@@ -10,8 +10,6 @@ Ali, S., Abuhmed, T., El-Sappagh, S., Muhammad, K., Alonso-Moral, J. M., Confalo
 
 Alvarez-Melis, D., & Jaakkola, T. S. (2018). *On the robustness of interpretability methods*. arXiv. https://arxiv.org/abs/1806.08049
 
-Altukhi, Z. M., Pradhan, S., & Aljohani, N. (2025). A systematic literature review of the latest advancements in XAI. *Technologies, 13*(3), 93. https://doi.org/10.3390/technologies13030093
-
 Arrieta, A. B., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., Garcia, S., Gil-Lopez, S., Molina, D., Benjamins, R., Chatila, R., & Herrera, F. (2019). Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information Fusion, 58*, 82-115. https://doi.org/10.1016/j.inffus.2019.12.012
 
 Belle, V., & Papantonis, I. (2021). Principles and practice of explainable machine learning. *Frontiers in Big Data, 4*. https://doi.org/10.3389/fdata.2021.688969
