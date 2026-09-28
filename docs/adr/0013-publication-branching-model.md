@@ -125,6 +125,25 @@ The same exclusion means `.aceconfig`'s `pre_commit` hooks are local-only and
 never run in CI: any check that must actually hold across lanes belongs in
 `pubs-sync.yml`.
 
+**Amendment (2026-09-27).** The exclusion lost this project's ACE
+customizations when the author moved to a new laptop: they existed nowhere
+else. The project-specific ACE files are therefore now **tracked**, force-added
+past the exclusion (git tracks a file once added, whatever the ignore rules
+say):
+
+- `.aceconfig`;
+- `.ace/roles/roles.md`;
+- `.ace/skills/{manuscript-editing,scientific-rigor-review,reference-audit}/SKILL.md`;
+- `.ace/packs/scientific/.aceconfig-ext`.
+
+They reach every worktree through Git. The rest of `.ace/` is the upstream
+framework and stays excluded, because it can be reinstalled. To restore it on
+a new machine, clone `https://github.com/jonnabio/ace-framework` and copy its
+`.ace/` contents into the repository, **skipping any file that Git already
+tracks** (`git ls-files .ace .aceconfig`). The exclusion lines in
+`.git/info/exclude` are per-clone and must be re-added
+(`/.ace/`, `/.aceconfig`).
+
 ## Consequences
 
 ### Positive

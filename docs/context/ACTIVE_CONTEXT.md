@@ -932,7 +932,17 @@ settles, before filing.
   untracked bytecode. "Green under all three verifiers" held only on the old
   laptop. The first cause is fixed here; the second is the bytecode above.
 - `.aceconfig` and `.ace/` (except `standards/`) were local-only and did not
-  survive the move. Not yet restored.
+  survive the move. **Restored 2026-09-27:** upstream framework v2.7.0 from
+  `github.com/jonnabio/ace-framework`, plus the recorded project
+  customizations:
+  - the Scientific Advisor role and `PEER_REVIEW` routing;
+  - the manuscript-editing, scientific-rigor-review and reference-audit
+    skills, rebuilt from their descriptions and the surviving reports;
+  - the trigger keywords;
+  - a verification gate and pre-commit hook running the three verifiers.
+
+  The project-specific files are now tracked (ADR-0013 amendment). The skill
+  texts are reconstructions, not the lost originals.
 
 ### Notes
 
@@ -1258,12 +1268,18 @@ manuscript-editing support tooling.
 - Adding any file to `[coverage]` in `pub/claim_registry.toml` is a trunk event: it turns CI
   red on every lane, so it is triaged to `--coverage-report` exit 0 on a `pubs/*` branch and
   merged before any lane consumes it.
-- `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`. Only the four tracked
-  `.ace/standards/*.md` files reach a new worktree; roles, skills, packs, prompts, scripts,
-  workflows, schemas, knowledge, feedback and `.aceconfig` do not. Seed a worktree with
-  `cp -r .ace/. <worktree>/.ace/` (contents, not the directory - `standards/` already exists
-  there) plus `cp .aceconfig <worktree>/`. For the same reason `.aceconfig` `pre_commit` hooks
-  are local-only: anything that must hold across lanes belongs in
+- `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`, but the project-specific ACE files
+  are tracked (force-added 2026-09-27, ADR-0013 amendment) and reach every worktree:
+  - `.aceconfig`;
+  - `.ace/standards/*.md`;
+  - `.ace/roles/roles.md`;
+  - the three project skills;
+  - `.ace/packs/scientific/.aceconfig-ext`.
+
+  The upstream framework (other skills, packs, prompts, scripts, workflows, schemas) does not
+  reach a worktree. Seed it with `cp -r .ace/. <worktree>/.ace/` (contents, not the directory),
+  or reinstall from `github.com/jonnabio/ace-framework` without overwriting tracked files.
+  `.aceconfig` `pre_commit` hooks remain local: anything that must hold across lanes belongs in
   `.github/workflows/pubs-sync.yml`.
 - `pub/fragments/` conflicts are never resolved by hand: take either side and re-run
   `scripts/pubs/generate_fragments.py`.
