@@ -101,6 +101,7 @@ value = "11708"
 tolerance = 1.0
 appears_in = [
   { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = "11,708.3" },
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "11708.26" },
   { file = "thesis/capitulo-4-resultados.qmd", text = "11,708 ms" },
 ]
 
@@ -121,6 +122,7 @@ value = "3661"
 tolerance = 1.0
 appears_in = [
   { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = "3,660.7" },
+  { file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "3660.68" },
   { file = "thesis/capitulo-4-resultados.qmd", text = "3,661 ms" },
 ]
 
@@ -2177,6 +2179,21 @@ structural = [
   # CIFIE chapter: the Adult Income target threshold (income > 50,000 USD),
   # a property of the dataset, not a result.
   "50000",
+  # Paper B+C coverage triage (2026-09-28, docs/review/coverage-triage_paper_bc_
+  # tmlr_2026-09-28.md). TikZ and table-column geometry (cm / linewidth);
+  # "00.3" is how the scanner reads the TikZ coordinate "(0,0.3)".
+  "1.5", "6.2", "00.3", "2.1", "0.98", "5.6", "4.2", "2.4", "2.8",
+  # Protocol settings: LIME kernel widths 3.0 and 10.0, judge temperature 0.0.
+  "3.0", "10.0", "0.0",
+  # Table S3 display thresholds (|r| > 0.10, V > 0.15).
+  "0.10", "0.15",
+  # EXP4 prose bounds over registered alpha values ("alpha > 0.55", "< 0.35").
+  "0.55", "0.35",
+  # arXiv identifiers in the Paper B+C bibliography.
+  "1702.08608", "2411.15594", "2505.22252", "2510.20721",
+  # Mantissa of the cost Holm p-value (1.2e-10); the exponent carries the
+  # claim, as for the mantissas above.
+  "1.2",
 ]
 
 # ---------------------------------------------------------------------------
@@ -2819,3 +2836,558 @@ files = [
 ]
 forbid = ["docs/reports/paper_bc/"]
 allow_if_also = ["docs/reports/paper_a/"]
+
+# ---------------------------------------------------------------------------
+# Paper B+C TMLR remediation, Step 1 (2026-09-28). Registered before any prose
+# edit, per docs/planning/paper_bc_tmlr_remediation_plan_2026-09-28.md. Claims
+# with no appears_in are values later steps will print; their sites are added
+# in the commit that prints them.
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.paired.cost.median.shap.xgb"
+source = 'exp2_paired:median:shap_cost:xgb'
+value = "18.1"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.paired.cost.median.lime.xgb"
+source = 'exp2_paired:median:lime_cost:xgb'
+value = "61.8"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.paired.cost.median.shap.rf"
+source = 'exp2_paired:median:shap_cost:rf'
+value = "1262.4"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.paired.cost.median.lime.rf"
+source = 'exp2_paired:median:lime_cost:rf'
+value = "335.6"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.paired.shap_faster.xgb"
+source = 'exp2_paired_faster:xgb'
+value = "15"
+tolerance = 0.0
+
+[[claim]]
+id = "exp2.paired.shap_faster.rf"
+source = 'exp2_paired_faster:rf'
+value = "0"
+tolerance = 0.0
+
+[[claim]]
+id = "exp2.paired.shap_faster.all"
+source = 'exp2_paired_faster:all'
+value = "16"
+tolerance = 0.0
+
+[[claim]]
+id = "exp2.paired.cost.median.shap.nontree"
+source = 'exp2_paired:median:shap_cost:nontree'
+value = "694.6"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '694.6' },
+  { file = "pub/fragments/paper_bc_abstract_en.tex", text = '694.6' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.median.lime.nontree"
+source = 'exp2_paired:median:lime_cost:nontree'
+value = "53.3"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '53.3~ms' },
+  { file = "pub/fragments/paper_bc_abstract_en.tex", text = '53.3 ms' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.stability.lower"
+source = 'exp2_paired_ci:stability:lower'
+value = "0.663"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.663' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.stability.upper"
+source = 'exp2_paired_ci:stability:upper'
+value = "0.773"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.773' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.sparsity.lower"
+source = 'exp2_paired_ci:sparsity:lower'
+value = "0.103"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.103' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.sparsity.upper"
+source = 'exp2_paired_ci:sparsity:upper'
+value = "0.181"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.181' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.fidelity.lower"
+source = 'exp2_paired_ci:fidelity:lower'
+value = "0.236"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.236' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.fidelity.upper"
+source = 'exp2_paired_ci:fidelity:upper'
+value = "0.260"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.260' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.faithfulness_gap.lower"
+source = 'exp2_paired_ci:faithfulness_gap:lower'
+value = "0.041"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.041' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.faithfulness_gap.upper"
+source = 'exp2_paired_ci:faithfulness_gap:upper'
+value = "0.049"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.049' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.cost.lower"
+source = 'exp2_paired_ci:cost:lower'
+value = "3939.2"
+tolerance = 0.2
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+3939.2' },
+]
+
+[[claim]]
+id = "exp2.paired.ci.cost.upper"
+source = 'exp2_paired_ci:cost:upper'
+value = "12155.9"
+tolerance = 0.2
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+12155.9' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.dz"
+source = 'wilcoxon:all_models:cost:cohens_dz'
+value = "0.45"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '& 0.45 ' },
+]
+
+[[claim]]
+id = "exp2.paired.stability.median_diff"
+source = 'wilcoxon:all_models:stability:median_diff'
+value = "0.866"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.866' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.ratio_median"
+source = 'exp2_paired_ratio_median:cost'
+value = "5.3"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '5.3\times' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.p90.shap"
+source = 'exp2_paired_quantile:shap_cost:90'
+value = "51456"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '51,456' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.p95.shap"
+source = 'exp2_paired_quantile:shap_cost:95'
+value = "67066"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '67,066' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.p90.lime"
+source = 'exp2_paired_quantile:lime_cost:90'
+value = "12825"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '12,825' },
+]
+
+[[claim]]
+id = "exp2.paired.cost.p95.lime"
+source = 'exp2_paired_quantile:lime_cost:95'
+value = "13192"
+tolerance = 1.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '13,192' },
+]
+
+[[claim]]
+id = "exp2.paired.lime.fidelity.rf"
+source = 'exp2_paired:mean:lime_fidelity:rf'
+value = "0.457"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.457' },
+]
+
+[[claim]]
+id = "exp2.paired.lime.fidelity.xgb"
+source = 'exp2_paired:mean:lime_fidelity:xgb'
+value = "0.553"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.553' },
+]
+
+[[claim]]
+id = "exp2.paired.fidelity_gap.rf"
+source = 'exp2_paired:mean:diff_fidelity:rf'
+value = "0.27"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.27' },
+]
+
+[[claim]]
+id = "exp2.paired.fidelity_gap.xgb"
+source = 'exp2_paired:mean:diff_fidelity:xgb'
+value = "0.21"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.21' },
+]
+
+[[claim]]
+id = "exp2.subset.lime.stability.sd.rf100"
+source = 'exp2_subset_sd:lime:stability:rf:100'
+value = "0.0151"
+tolerance = 0.0005
+
+[[claim]]
+id = "exp2.stratum_median.lime.stability.sd"
+source = 'exp2_stratum_median:sd:lime:stability'
+value = "0.0150"
+tolerance = 0.0005
+
+[[claim]]
+id = "exp2.stratum_median.shap.fidelity.cv"
+source = 'exp2_stratum_median:cv:shap:fidelity'
+value = "0.9"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.stratum_median.shap.stability.cv"
+source = 'exp2_stratum_median:cv:shap:stability'
+value = "1.4"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.stratum_median.lime.fidelity.cv"
+source = 'exp2_stratum_median:cv:lime:fidelity'
+value = "2.3"
+tolerance = 0.05
+
+[[claim]]
+id = "exp2.stratum_median.lime.stability.cv"
+source = 'exp2_stratum_median:cv:lime:stability'
+value = "88.2"
+tolerance = 0.05
+
+[[claim]]
+id = "exp3.gap.shap_lime.german_credit.rf"
+source = 'diff:exp3_shap:german_credit:rf:fidelity|exp3_lime:german_credit:rf:fidelity'
+value = "0.23"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.23' },
+]
+
+[[claim]]
+id = "exp3.gap.shap_lime.german_credit.xgb"
+source = 'diff:exp3_shap:german_credit:xgb:fidelity|exp3_lime:german_credit:xgb:fidelity'
+value = "0.24"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.24' },
+]
+
+[[claim]]
+id = "exp3.gap.shap_lime.breast_cancer.rf"
+source = 'diff:exp3_shap:breast_cancer:rf:fidelity|exp3_lime:breast_cancer:rf:fidelity'
+value = "0.07"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.07' },
+]
+
+[[claim]]
+id = "exp3.gap.shap_lime.breast_cancer.xgb"
+source = 'diff:exp3_shap:breast_cancer:xgb:fidelity|exp3_lime:breast_cancer:xgb:fidelity'
+value = "0.07"
+tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.07' },
+]
+
+[[claim]]
+id = "exp3.gap.shap_anchors.german_credit.rf"
+source = 'diff:exp3_shap:german_credit:rf:fidelity|exp3_anchors:german_credit:rf:fidelity'
+value = "0.363"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '+0.363' },
+]
+
+[[claim]]
+id = "exp3.lime.cost.breast_cancer.rf"
+source = 'exp3_lime:breast_cancer:rf:cost_ms'
+value = "12.3"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '12.3' },
+]
+
+[[claim]]
+id = "exp3.lime.cost.breast_cancer.xgb"
+source = 'exp3_lime:breast_cancer:xgb:cost_ms'
+value = "7.5"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '7.5 ' },
+]
+
+[[claim]]
+id = "exp3.lime.cost.german_credit.rf"
+source = 'exp3_lime:german_credit:rf:cost_ms'
+value = "21.1"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '21.1' },
+]
+
+[[claim]]
+id = "exp3.lime.cost.german_credit.xgb"
+source = 'exp3_lime:german_credit:xgb:cost_ms'
+value = "10.2"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '10.2' },
+]
+
+[[claim]]
+id = "exp3.lime.sparsity.german_credit"
+source = 'exp3_lime:german_credit:rf:sparsity'
+value = "0.163"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.163' },
+]
+
+[[claim]]
+id = "exp3.lime.stability.range.min"
+source = 'exp3_lime:german_credit:xgb:stability'
+value = "0.75"
+tolerance = 0.005
+
+[[claim]]
+id = "audit.target.exact_pct"
+source = 'review_audit:exact_pct:evaluation_target'
+value = "62.5"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '62.5' },
+]
+
+[[claim]]
+id = "audit.target.jaccard"
+source = 'review_audit:jaccard:evaluation_target'
+value = "0.802"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.802' },
+]
+
+[[claim]]
+id = "audit.evidence.exact_pct"
+source = 'review_audit:exact_pct:evidence_source'
+value = "56.2"
+tolerance = 0.06
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '56.2' },
+]
+
+[[claim]]
+id = "audit.evidence.jaccard"
+source = 'review_audit:jaccard:evidence_source'
+value = "0.771"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.771' },
+]
+
+[[claim]]
+id = "audit.quality.exact_pct"
+source = 'review_audit:exact_pct:quality_property'
+value = "25.0"
+tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '25.0' },
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '25.0' },
+]
+
+[[claim]]
+id = "audit.task.exact_pct"
+source = 'review_audit:exact_pct:task_context'
+value = "81.2"
+tolerance = 0.06
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '81.2' },
+]
+
+[[claim]]
+id = "audit.task.jaccard"
+source = 'review_audit:jaccard:task_context'
+value = "0.906"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.906' },
+]
+
+[[claim]]
+id = "audit.all.jaccard"
+source = 'review_audit:jaccard:all'
+value = "0.784"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.784' },
+]
+
+[[claim]]
+id = "audit.adjudicated"
+source = 'review_audit:adjudicated:all'
+value = "12"
+tolerance = 0.0
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '12/16' },
+]
+
+[[claim]]
+id = "supp.s2.kw3.stability"
+source = 'lime_kernel_width:3.0:stability_mean'
+value = "0.000"
+tolerance = 0.0005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.000' },
+]
+
+[[claim]]
+id = "supp.s2.kw3.sparsity"
+source = 'lime_kernel_width:3.0:sparsity_mean'
+value = "0.087"
+tolerance = 0.0005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '0.087' },
+]
+
+[[claim]]
+id = "supp.s6.marginal.topk_gap"
+source = 'exp6_paired:marginal:topk_gap'
+value = "0.081"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '+0.081' },
+]
+
+[[claim]]
+id = "supp.s6.grouped_mean.topk_gap"
+source = 'exp6_paired:grouped_mean:topk_gap'
+value = "0.053"
+tolerance = 0.0006
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", text = '+0.053' },
+]
+
+[[claim]]
+id = "exp4c2.actionability.floor_pct"
+source = 'exp4c2_score_pct:hidden_label_primary:actionability:1'
+value = "86"
+tolerance = 0.5
+
+[[unbacked]]
+id = "supp.s5.num_samples_500"
+text = "0.452"
+reason = 'Table S5 num_samples probe, row 500 (RF, seed 42, N=100). No output artifact is committed and the surviving script src/scripts/run_sensitivity_analysis.py sweeps a different design, so it cannot be re-run as a reproduction (RCA-002; thesis Apendice C discloses the same probe as historical). Review F05.'
+files = ["docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex"]
+
+[[unbacked]]
+id = "supp.s5.num_samples_500.stability"
+text = "0.011"
+reason = 'Table S5 row 500, stability. See supp.s5.num_samples_500.'
+files = ["docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex"]
+
+[[unbacked]]
+id = "supp.s5.num_samples_2000"
+text = "0.459"
+reason = 'Table S5 row 2000, fidelity. See supp.s5.num_samples_500.'
+files = ["docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex"]
+
+[[unbacked]]
+id = "supp.s5.num_samples_2000.stability"
+text = "0.016"
+reason = 'Table S5 row 2000, stability. See supp.s5.num_samples_500. The reference row (0.461 / 0.014) matches two EXP2 aggregates -- p1.lime.fidelity.mean (RF/N=100, five seeds) and the block-level LIME stability mean -- not the seed-42 cell of Table S2 (0.518 / 0.000), so the two tables do not describe the same cell (review F05).'
+files = ["docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex"]
+
+[[unbacked]]
+id = "paper_bc.prisma.chain"
+text = "312"
+reason = 'Screening chain 312 identified / 65 duplicates / 247 screened / 152 excluded / 95 full text / 47 excluded / 48 included, of which 4 coded papers were not recoverable, leaving the released 44 (REVIEW_CORPUS.md). The original search log is not committed, so the identification and screening counts cannot be re-derived (author decision Q2, 2026-09-28: treated as lost). Integers are outside the coverage scan; this entry records the decision. Review F04.'
+files = ["docs/reports/paper_bc/paper_bc_tmlr.tex"]
+[[claim]]
+id = "exp2.paired.lime.stability.max_model"
+source = 'exp2_paired:mean:lime_stability:svm'
+value = "0.02"
+tolerance = 0.005
+# Upper end of the tab:exp3_lime caption range "0.01--0.02": the largest
+# per-model LIME stability mean over the matched cells (svm 0.019; lowest mlp 0.007).
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.01$--$0.02' },
+]
+

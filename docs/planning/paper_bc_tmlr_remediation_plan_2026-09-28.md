@@ -270,3 +270,44 @@ Additions to the steps above:
   or changed: F17 is a wording fix, and F16 adds only the structural $\alpha = 0.05$. Verifiers
   green; both PDFs rebuilt with 0 undefined references. The 2026-09-27 gate record in
   `OPENREVIEW_SUBMISSION.md` is now invalid, as expected until Step 8.
+
+## Step 1 outcome (2026-09-28)
+
+Registry: 257 → 319 claims, 429 → 481 sites; 5 `[[unbacked]]` entries (4 for Table S5, 1 for
+the PRISMA chain); 23 structural literals; the Paper A sites were added to the SHAP and LIME cost
+means. The Paper B+C coverage gap fell from 73 literals to 2, and both are the F07 range
+(`0.85`, `0.93`), which Step 5 fixes. Negative-tested: editing one registered CI in the
+manuscript fails the verifier.
+
+New resolvers in `scripts/pubs/claim_sources.py`:
+- `exp2_paired` (mean or median of a paired-cell column over a model group);
+- `exp2_paired_faster`;
+- `exp2_paired_quantile`;
+- `exp2_paired_ratio_median`;
+- `exp2_paired_ci` (t, df = 74);
+- `exp2_stratum_median` (SD or CV over (model, N) strata);
+- `review_audit`;
+- `exp4c2_score_pct`.
+
+**Deviation from the plan:** the retired entries (`11,708.3`, `3,660.7`, `0.85--0.93`) are
+**not** added in Step 1. A retired text fails the verifier while it is still in the manuscript,
+so each goes in the commit that removes it: F02 in Step 3, F07 in Step 5. The negative test for
+`11,708.3` moves to Step 3.
+
+**New findings from registration**, both minor, both fixed in Step 5:
+- **F18, CV table aggregation mislabelled.** The caption and text of `tab:cv_reproducibility`
+  say "stratum-median CV across (N, model) strata". All four printed values (0.8 / 0.7 / 2.6 /
+  86.2%) are the single RF/N=100 stratum (`p1.*.cv`). The actual stratum medians are
+  0.9 / 1.4 / 2.3 / 88.2 (registered as `exp2.stratum_median.*.cv`). No conclusion changes.
+  Fix: either relabel the table as the RF/N=100 stratum, or print the medians; the default is
+  to relabel, which matches the thesis P1 cell. Combine with F08, whose SD is registered for
+  both readings (`exp2.subset.lime.stability.sd.rf100` 0.0151 and
+  `exp2.stratum_median.lime.stability.sd` 0.0150).
+- **F19, German Credit SHAP-LIME gap ranges wrong.** l.1080 prints "+0.23--+0.24 for RF,
+  +0.24--+0.25 for XGB". The per-seed gaps are 0.212-0.244 (RF) and 0.220-0.270 (XGB); the means
+  are 0.231 and 0.243. Fix: print the means, "+0.23 (RF) and +0.24 (XGB)", as the Breast Cancer
+  gaps are printed. Then drop "0.25".
+
+**Note on F05:** Table S5's reference row (0.461 / 0.014) equals two EXP2 aggregates (RF/N=100
+five-seed LIME fidelity, and block-level LIME stability). It does not equal the seed-42 cell of
+Table S2. Say so in the S5 disclosure.

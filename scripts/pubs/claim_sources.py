@@ -27,6 +27,22 @@ ADULT = ROOT / "data" / "adult.csv"
 EXP1_MODELS = ROOT / "experiments" / "exp1_adult" / "models"
 EXP1_REPRO = ROOT / "experiments" / "exp1_adult" / "reproducibility" / "reproducibility_report.csv"
 EXP2_INVENTORY = EXP2_STATS / "exp2_run_inventory.csv"
+EXP2_PAIRED = EXP2_STATS / "paired_cells_shap_lime_all_models.csv"
+EXP4_COHORT2_SCORES = ROOT / "experiments" / "exp4_cohort2" / "parsed_scores" / "exp4_llm_scores.csv"
+REVIEW_AUDIT = ROOT / "docs" / "reports" / "paper_bc" / "second_reviewer_audit_results.csv"
+
+# Model-family groups used by the paired-cell resolvers. "nontree" is the
+# KernelSHAP set the abstract and Tier 1 quote medians for.
+_MODEL_GROUPS = {
+    "all": ("logreg", "rf", "xgb", "svm", "mlp"),
+    "nontree": ("logreg", "svm", "mlp"),
+    "tree": ("rf", "xgb"),
+}
+
+# Two-sided 95% Student-t quantile at df = 74 (75 matched cells). stdlib has
+# no t distribution; the paired-CI resolver refuses any other n rather than
+# silently using the wrong quantile.
+_T975_DF74 = 1.9925435
 
 
 class MissingArtifact(Exception):
@@ -544,5 +560,106 @@ def resolve(expr: str) -> float:
         filename = {"label": "cohort2_label_bias.csv",
                     "rubric": "cohort2_rubric_sensitivity.csv"}[contrast]
         return max(abs(float(r["mean_shift"])) for r in _rows(EXP4_COHORT2_DIR / filename))
+
+    if kind in ("exp2_paired", "exp2_paired_faster", "exp2_paired_quantile",
+                "exp2_paired_ratio_median", "exp2_paired_ci"):
+        # Paper B+C's matched SHAP-LIME cells (75 (g, s, N) coordinates), one
+        # row per cell with both methods' run means and their difference.
+        rows = _rows(EXP2_PAIRED)
+
+        def group(name: str) -> list[dict]:
+            models = _MODEL_GROUPS.get(name, (name,))
+            picked = [r for r in rows if r["model"] in models]
+            if not picked:
+                raise MissingArtifact(f"no paired cells for group {name}")
+            return picked
+
+        if kind == "exp2_paired":
+            # stat over one column of the cells in a model group.
+            stat, column, name = args
+            values = [float(r[column]) for r in group(name)]
+            return statistics.mean(values) if stat == "mean" else statistics.median(values)
+        if kind == "exp2_paired_faster":
+            # Cells where SHAP is cheaper than LIME (the "SHAP-faster" count).
+            (name,) = args
+            return float(sum(float(r["shap_cost"]) < float(r["lime_cost"]) for r in group(name)))
+        if kind == "exp2_paired_quantile":
+            # Inclusive percentile of one column over all cells (P90/P95 cost).
+            column, pct = args
+            values = [float(r[column]) for r in rows]
+            return statistics.quantiles(values, n=100, method="inclusive")[int(pct) - 1]
+        if kind == "exp2_paired_ratio_median":
+            # Median of the per-cell SHAP/LIME ratio -- not the ratio of the
+            # medians, which is a different statistic (review F17).
+            (metric,) = args
+            return statistics.median(
+                float(r[f"shap_{metric}"]) / float(r[f"lime_{metric}"]) for r in rows
+            )
+        # exp2_paired_ci: t-interval on the mean paired difference.
+        metric, side = args
+        diffs = [float(r[f"diff_{metric}"]) for r in rows]
+        if len(diffs) != 75:
+            raise MissingArtifact(f"paired CI expects 75 cells, found {len(diffs)}")
+        half = _T975_DF74 * statistics.stdev(diffs) / math.sqrt(len(diffs))
+        mean = statistics.mean(diffs)
+        return mean - half if side == "lower" else mean + half
+
+    if kind == "exp2_stratum_median":
+        # Median over (model, N) strata of the across-seed SD or CV of one
+        # method's metric. Table tab:cv_reproducibility reports the CV; the SD
+        # is its replacement where the mean is near zero (review F08).
+        stat, method, metric = args
+        strata: dict[tuple[str, str], list[float]] = {}
+        for row in _exp2_run_level():
+            if row["method"] == method and row[metric] not in ("", "nan"):
+                strata.setdefault((row["model"], row["n"]), []).append(float(row[metric]))
+        values = []
+        for cell in strata.values():
+            if len(cell) < 2:
+                continue
+            sd = statistics.stdev(cell)
+            values.append(sd if stat == "sd" else 100.0 * sd / statistics.mean(cell))
+        if not values:
+            raise MissingArtifact(f"no EXP2 strata for {method}/{metric}")
+        return statistics.median(values)
+
+    if kind == "review_audit":
+        # Second-reviewer audit (Supplementary Table S4). exact_pct: share of
+        # the 16 records whose two codings match as label sets; jaccard: mean
+        # Jaccard on one axis, or over all four axes ("all"); adjudicated:
+        # records flagged for adjudication.
+        stat, axis = args
+        rows = _rows(REVIEW_AUDIT)
+        axes = ("evaluation_target", "evidence_source", "quality_property", "task_context")
+        if stat == "exact_pct":
+            same = sum(
+                set(r[f"r1_{axis}"].split(";")) == set(r[f"r2_{axis}"].split(";")) for r in rows
+            )
+            return 100.0 * same / len(rows)
+        if stat == "jaccard":
+            if axis == "all":
+                return statistics.mean(
+                    statistics.mean(float(r[f"{a}_jaccard"]) for a in axes) for r in rows
+                )
+            return statistics.mean(float(r[f"{axis}_jaccard"]) for r in rows)
+        if stat == "adjudicated":
+            return float(sum(r["adjudication_required"].strip().lower() in ("yes", "true", "1")
+                             for r in rows))
+        raise ValueError(f"unknown review_audit stat: {stat}")
+
+    if kind == "exp4c2_score_pct":
+        # Share (%) of parsed cohort 2 judgments in one prompt condition that
+        # give a dimension a particular score -- the actionability floor.
+        condition, dimension, score = args
+        values = [
+            float(r[f"{dimension}_score"])
+            for r in _rows(EXP4_COHORT2_SCORES)
+            if r["prompt_condition"] == condition
+            and r["parse_status"] == "parsed"
+            and r[f"{dimension}_score"] != ""
+        ]
+        if not values:
+            raise MissingArtifact(f"no cohort 2 scores for {condition}/{dimension}")
+        return 100.0 * sum(v == float(score) for v in values) / len(values)
 
     raise MissingArtifact(f"unknown source expression: {expr}")
