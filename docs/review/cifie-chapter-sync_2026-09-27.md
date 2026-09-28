@@ -63,8 +63,9 @@ in Table 4; SHAP wins in 75 of 75 cells. It also printed LIME's stability CV of
   - In-text citations corrected to "Kadir et al., 2023"; the entry added and
     the `.bib` corrected.
 - **All 35 DOIs** in the reference list resolve.
-- **Open, author decision:** Altukhi, Pradhan & Aljohani (2025) is listed but
-  never cited. APA 7 lists only cited works: cite it or remove it.
+- Altukhi, Pradhan & Aljohani (2025) was listed but never cited. Removed at
+  the author's request (APA 7 lists only cited works). The list now has 41
+  entries for 41 cited works.
 - **Not an error:** the two Herrera-Vásquez 2026 entries have different author
   lists, so APA needs no a/b suffix.
 
@@ -78,10 +79,19 @@ figures and no Paper B+C statistic.
 
 ## 6. Still open
 
-- **Tables 1–4** are referenced in the text but are still working documents,
-  so the build does not assemble them. Converting them to final editorial
-  form is an existing open item (`compliance/submission_packet.md`).
-- **The thesis is cited as "[Tesis doctoral no publicada]".** Update the entry
+- ~~Tables 1–4 in working form~~ **Done 2026-09-27.** The tables are in
+  final APA 7 form (bold number, italic title, table, *Nota.*):
+  - They are renumbered by first mention: 1 methods (§04), 2 FOM-7 gates
+    (§06), 3 metrics (§07), 4 results by hypothesis (§08).
+  - §04's forward reference to the results table is reworded, so it no
+    longer fixes the numbering.
+  - Working-only material (usage columns, repository paths, traceability
+    notes) is removed.
+  - The build places each table after the paragraph that first cites it,
+    through `<!-- TABLA: ... -->` markers. It fails on a missing,
+    duplicated or unplaced table.
+  - All four table files are under `[coverage]` and `[exclusivity]`.
+- **Noted by the author:** the thesis is cited as "[Tesis doctoral no publicada]".** Update the entry
   when the thesis is deposited.
 - **A full Scientific Advisor rigor review** of the whole chapter was not run
   in this pass. The empirical sections (§01, §04, §07, §08, §11) and Table 4

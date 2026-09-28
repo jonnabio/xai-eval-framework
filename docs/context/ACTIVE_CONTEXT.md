@@ -980,11 +980,9 @@ manuscript-editing support tooling.
 The chapter is synced to the verified results: retired values and pre-audit profiles replaced, and the
 tutor corrections applied. It is kept free of Paper B+C results by ADR-0018, enforced in CI
 (`[exclusivity]`), and put under `[coverage]`. The build is `scripts/build_cifie_chapter.py`.
-Open items:
-- Tables 1-4 are not yet in editorial form.
-- Altukhi (2025) is listed but never cited.
-- The thesis is cited as unpublished.
-- A full rigor review is pending.
+Tables 1-4 were converted to final APA form and the uncited Altukhi (2025) was
+dropped (2026-09-27). Next: a section-by-section review of the chapter with the
+author, one section at a time. The thesis is still cited as unpublished (noted).
 
 See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 
