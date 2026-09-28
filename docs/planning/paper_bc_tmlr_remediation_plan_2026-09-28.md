@@ -350,3 +350,26 @@ consistent with the new wording, so no edit was needed.
 
 These are the same defect class as thesis F01 (2026-08-28). Fix them on
 `thesis/rca-001-phase-2` through the sync matrix.
+
+## Step 3 outcome (2026-09-28)
+
+**F02 fixed** (`85c65557a` and the following commit):
+- The SHAP/LIME mean costs are removed from the text and cited to Paper A. Both texts are
+  retired, and the retirement was negative-tested.
+- Figure 1 now plots the mean paired difference with its 95% t interval.
+- The EXP3 figure shows the gaps only (Q1).
+- The generator writes to `paper_bc/figures/`.
+- The provenance paragraph now says "in the text or in a figure".
+
+`scripts/pubs/scan_shared_literals.py` compares the printed decimals of Paper B+C (main,
+supplementary, abstract) with Paper A at printed precision, without the registry. 48 matches were
+triaged as coincidences, each with its reason. It is negative-tested: a planted 0.808 and
+11,708.3 are both caught, and 0.808 is not registered anywhere. It runs report-only in
+`pubs-sync.yml`, is `--strict` in the submission checklist (step 6), and is listed under
+RCA-001's tests in `regression-guards.yaml`. RCA-001 "Not covered" records the defect class.
+
+The editor note (`EIC_ENQUIRY_prior_publication.md`) now says fifteen results were removed,
+not thirteen, and mentions the figure and the mean runtimes, so it stays true.
+
+The runtime figure (Figure 2) was regenerated to the corrected path. It plots distributions
+and per-model medians; the scan and a visual check find nothing that Paper A prints.

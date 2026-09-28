@@ -41,7 +41,13 @@ present (it is gitignored, so copy it in from the main worktree if missing).
    paper in the main PDF.
 6. **Re-run the shared-result query** from `EIC_ENQUIRY_prior_publication.md`.
    It must return nothing: a result shared with the published Paper A is a TMLR
-   policy conflict, not a style issue.
+   policy conflict, not a style issue. **Then run
+   `python scripts/pubs/scan_shared_literals.py --strict`**, which compares the
+   printed numbers of both papers without using the registry, and must exit 0.
+   The query alone missed the SHAP/LIME mean costs on 2026-09-27, because Paper
+   A's site was never registered (review F02). A new match is either removed or
+   triaged into `KNOWN_COINCIDENCES` with its reason. Also check the figures by
+   eye: a plotted level is a result even without a data label.
 7. **Rebuild the bundle** — `python scripts/pubs/build_artifact_bundle.py` —
    and confirm it contains `supplementary_tables.pdf`.
 8. **Regenerate this sheet's abstract** from
