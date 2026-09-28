@@ -265,3 +265,8 @@ Additions to the steps above:
   - R06 NeurIPS DOI and pages;
   - R07-R09 check and keep the entry unless a published version is found.
 - The rigor review's suspicion about `zhou2025medthink` is withdrawn: Crossref confirms 2025.
+
+- **F16 and F17 FIXED 2026-09-28** (ahead of Step 1, at the author's request). No number was added
+  or changed: F17 is a wording fix, and F16 adds only the structural $\alpha = 0.05$. Verifiers
+  green; both PDFs rebuilt with 0 undefined references. The 2026-09-27 gate record in
+  `OPENREVIEW_SUBMISSION.md` is now invalid, as expected until Step 8.

@@ -1018,8 +1018,8 @@ LIME -- Stability   & 86.2\%    & No  \\
 
 The cost signal is significant but strongly heterogeneous. SHAP is slower
 in 59 of 75 matched cells. Matched-cell median cost is 684.1 ms for SHAP
-versus 65.7 ms for LIME, corresponding to a median SHAP/LIME cost ratio
-of approximately $5.3\times$. Means are more separated (11,708.3 ms vs.\
+versus 65.7 ms for LIME, and the median per-cell SHAP/LIME cost ratio is
+approximately $5.3\times$. Means are more separated (11,708.3 ms vs.\
 3,660.7 ms) because the SHAP distribution is heavy-tailed: the 90th and
 95th percentile latencies are approximately 51,456 ms and 67,066 ms,
 respectively, compared with 12,825 ms and 13,192 ms for LIME. This tail
@@ -1393,8 +1393,8 @@ the true attribution quality.
 
 To assess whether this concern changes the method ordering, we added EXP6,
 a top-feature masking-sensitivity probe over the Adult RF stratum. EXP6
-reuses stored EXP2 top-10 explanations for the $n=50$ RF runs across five
-seeds and recomputes prediction-drop metrics under four masking schemes:
+reuses stored EXP2 top-10 explanations for the five RF runs at $N=50$,
+one per seed, and recomputes prediction-drop metrics under four masking schemes:
 independent zero masking, mean replacement, marginal empirical replacement,
 and grouped mean replacement, where the grouped scheme masks correlated
 processed feature sets together (e.g.,
@@ -1402,10 +1402,12 @@ processed feature sets together (e.g.,
 advantage remains positive in all five paired RF seed cells under every
 scheme, though its magnitude decreases under progressively more
 correlation-aware masking (full breakdown in Supplementary
-Table~S6). Because EXP6 uses stored top-10 explanations rather than full
+Table~S6). With five pairs, the exact Wilcoxon test cannot reach
+$\alpha = 0.05$ under any scheme, so this agreement is descriptive rather
+than a significance result. Because EXP6 uses stored top-10 explanations rather than full
 attribution vectors, it should be read as a construct-validity stress test
 rather than a replacement for the primary full-run fidelity analysis: the
-RF fidelity direction is robust in this probe, while the effect magnitude
+RF fidelity direction holds in every pair of this probe, while the effect magnitude
 is partly masking-protocol dependent.
 
 \subsection{Reproducibility and Operational Validity}

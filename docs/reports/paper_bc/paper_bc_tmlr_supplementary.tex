@@ -369,8 +369,11 @@ additional compute would resolve.
 %% ────────────────────────────────────────────────────────────────────────────
 
 Table~\ref{tab:s6_exp6} reports the per-scheme breakdown for EXP6, the
-top-feature masking-sensitivity probe over the Adult RF stratum ($n=50$
-runs, 5 seeds, top-10 stored explanations from EXP2). Four masking
+top-feature masking-sensitivity probe over the Adult RF stratum (the five
+RF runs at $N=50$, one per seed, with top-10 stored explanations from
+EXP2). With five pairs, the exact Wilcoxon test cannot reach
+$\alpha = 0.05$ under any scheme, so the sign agreement below is
+descriptive. Four masking
 schemes are compared: independent zero masking, mean replacement,
 marginal empirical replacement, and grouped mean replacement (which masks
 correlated processed feature sets together, e.g.
@@ -381,8 +384,8 @@ correlated processed feature sets together, e.g.
 \begin{table}[h]
 \centering
 \caption{SHAP--LIME top-$k$ prediction-drop advantage and drop-correlation
-advantage under four masking schemes (Adult RF stratum, $n=50$ runs, 5
-seeds). SHAP's direction is positive in all five paired seed cells under
+advantage under four masking schemes (Adult RF stratum, five runs at $N=50$,
+one per seed). SHAP's direction is positive in all five paired seed cells under
 every scheme.}
 \label{tab:s6_exp6}
 \begin{tabular}{lcc}
