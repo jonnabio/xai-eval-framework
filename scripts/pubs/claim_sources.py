@@ -442,6 +442,18 @@ def resolve(expr: str) -> float:
                 return float(row[field])
         raise MissingArtifact(f"wilcoxon row not found: {comparison_set}/{metric}")
 
+    if kind in ("exp2_block_wilcoxon", "exp2_block_sign"):
+        metric, field = args
+        filename = (
+            "wilcoxon_shap_lime_blocks.csv"
+            if kind == "exp2_block_wilcoxon"
+            else "sign_test_shap_lime_blocks.csv"
+        )
+        for row in _rows(EXP2_STATS / filename):
+            if row["metric"] == metric:
+                return float(row[field])
+        raise MissingArtifact(f"EXP2 block contrast row not found: {metric}")
+
     if kind in ("exp3_shap", "exp3_anchors"):
         dataset, model, metric = args
         buckets = _exp3_shap() if kind == "exp3_shap" else _exp3_anchors()

@@ -1,6 +1,7 @@
 # Thesis / Paper Synchronization Matrix
 
 **Date:** 2026-08-22  
+**Last updated:** 2026-09-27
 **Role:** Scientific Editor  
 **Scope:** Thesis, Paper A, and merged Paper B+C
 
@@ -29,6 +30,7 @@ best-supported and most developed current version is canonical:
 | EXP1/EXP2 benchmark design | Paper A | Present | Most detailed source | Present through SHAP-LIME subset | Keep Paper A canonical |
 | EXP2 artifact counts and archive status | Paper A | Present at synthesis level | Most detailed source | Scoped to 75 matched SHAP-LIME cells | Keep Paper A canonical |
 | SHAP-LIME fidelity and stability claims | Paper A / Thesis | Present for Adult Income EXP2 | Present with quantitative benchmark framing | Present as ranking claim within protocol | No edit needed |
+| Review-motivated 15-block SHAP-LIME fidelity contrast | Thesis | Added as an aggregation-aligned follow-up to Friedman/Nemenyi; explicitly non-pre-specified and distinct from H3 | Not added; the published body retains its original inferential plan | Not added; the submission retains the registered 75-cell comparison | Thesis-only reviewer-response analysis; do not propagate without a separate venue decision |
 | EXP3 cross-dataset status | **Resolved 2026-08-23** — artifacts merged, all three aligned | Updated: SHAP-Anchors fidelity replication plus LIME extension; full paired SHAP-LIME stability outside Adult remains incomplete | **Incorrect (A01):** states the Anchors cross-dataset check was never executed and is blocked by the `alibi`/`dice-ml` gap. The 12 Anchors runs were completed 2026-04-26 and are on the unmerged `results/exp3-windows-breast-cancer` and `results/exp3-linux-german-credit` branches. The "LIME-only" mischaracterisation was corrected 2026-08-22 (A02 partial); the §sec:exp3 and Conclusion wording still awaits the A01 decision | Most complete source: SHAP-Anchors fidelity (verified against the side-branch artifacts), LIME extension, and missing SHAP-stability boundary | **Open:** merge the two `results/exp3-*` branches, then rewrite Paper A §sec:exp3 and its Conclusion limitation bullet |
 | EXP3 SHAP fidelity, Breast Cancer / XGB | **Resolved 2026-08-23** — July snapshot canonical (0.6165) | Not reported at cell level | 0.6165 (committed July 2026 re-run) | 0.607 (April 2026 side-branch snapshot) | **Open:** choose one canonical EXP3 SHAP snapshot and re-derive both tables |
 | EXP4 ICC vs Krippendorff sample sizes | Paper B+C | **Not propagated:** Ch.5 caption still says $n=147$ for both statistics (A08) | Out of scope | Discloses $n=147$ (ICC) / $n=192$ ($\alpha$) after the 2026-07-29 F02 fix | **Open:** port the Paper B+C disclosure into thesis Ch.5 |
@@ -75,6 +77,7 @@ Use manuscript-specific versions of this boundary:
 - [x] Manuscript numbers are machine-verified against artifacts (RCA-001, `scripts/pubs/verify_claims.py`).
 - [x] Paper B+C corpus source PDFs collected and verified (44/44, 2026-08-26).
 - [x] Paper B+C's review corpus has a committed coded CSV, CI-verified against the manuscript (A14, closed 2026-08-26).
+- [x] The review-motivated 15-block SHAP-LIME contrast is identified as thesis-only and is not silently propagated to Paper A or Paper B+C (2026-09-27).
 - [x] The LIME instability claim is stated with its configuration and feature-space scope in every document (F01, closed 2026-08-28). Thesis Ch.5/Ch.6 and Paper B+C §"LIME stability is not a convergence artifact" now all carry the `kernel_width=10.0` → 0.664 bound and the EXP3 cross-dataset range; Paper A (§636) and Supplementary Table S2 were already correctly scoped and needed no change.
 - [x] Per-instance cost figures in prescriptive selection criteria are re-derived from `exp2_run_level_metrics.csv`, not hand-typed (F02, closed 2026-08-28). Thesis-only: Paper A carries only the registered aggregates.
 - [x] SHAP selection thresholds ($\bar{F} \geq 0.80$, $\bar{S} \geq 0.70$) are stated per model family, not on the global mean (F04, closed 2026-08-28). Thesis-only.

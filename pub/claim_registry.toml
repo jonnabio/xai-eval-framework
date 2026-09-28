@@ -319,6 +319,94 @@ tolerance = 0.005
 appears_in = [{ file = "docs/reports/paper_a/paper_a_prototype_jmlr.tex", text = "4.85" }]
 
 # ---------------------------------------------------------------------------
+# Review-motivated SHAP-LIME contrast over the 15 aggregated (model, N) blocks
+# ---------------------------------------------------------------------------
+
+[[claim]]
+id = "exp2.block_pair.fidelity.n_blocks"
+source = "exp2_block_wilcoxon:fidelity:n_blocks"
+value = "15"
+tolerance = 0.5
+appears_in = [
+  { file = "thesis/capitulo-3-diseno-experimental.qmd", text = "15 bloques agregados" },
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15 bloques agregados" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.wilcoxon_statistic"
+source = "exp2_block_wilcoxon:fidelity:wilcoxon_statistic"
+value = "0"
+tolerance = 0.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "$W = 0$, $p_{\\mathrm{raw}}" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.p_raw"
+source = "exp2_block_wilcoxon:fidelity:p_value_raw"
+value = "0.00006103515625"
+tolerance = 0.000000000000001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "$p_{\\mathrm{raw}} = 6.10 \\times 10^{-5}$" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.p_holm"
+source = "exp2_block_wilcoxon:fidelity:p_value_holm"
+value = "0.00030517578125"
+tolerance = 0.000000000000001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "$p_{\\mathrm{Holm}} = 3.05 \\times 10^{-4}$" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "$p_{\\mathrm{Holm}} = 3.05 \\times 10^{-4}$" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.mean_difference"
+source = "exp2_block_wilcoxon:fidelity:mean_difference"
+value = "0.2479"
+tolerance = 0.00005
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "diferencia media por bloque de $+0.2479$" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.positive"
+source = "exp2_block_sign:fidelity:n_positive"
+value = "15"
+tolerance = 0.5
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15 positivas, 0 negativas y 0 empates" },
+  { file = "thesis/capitulo-6-conclusiones.qmd", text = "15 de 15 bloques" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.negative"
+source = "exp2_block_sign:fidelity:n_negative"
+value = "0"
+tolerance = 0.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15 positivas, 0 negativas y 0 empates" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.ties"
+source = "exp2_block_sign:fidelity:n_ties"
+value = "0"
+tolerance = 0.0
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "15 positivas, 0 negativas y 0 empates" },
+]
+
+[[claim]]
+id = "exp2.block_pair.fidelity.sign_p"
+source = "exp2_block_sign:fidelity:p_value_two_sided"
+value = "0.00006103515625"
+tolerance = 0.000000000000001
+appears_in = [
+  { file = "thesis/capitulo-4-resultados.qmd", text = "prueba exacta bilateral de signos ($p = 6.10 \\times 10^{-5}$)" },
+]
+
+# ---------------------------------------------------------------------------
 # EXP3 cross-dataset cohort
 # ---------------------------------------------------------------------------
 
@@ -513,6 +601,21 @@ id = "exp2.stats"
 path = "outputs/analysis/paper_a_exp2_stats"
 glob = "*.csv"
 cited_by = "Paper A, Paper B+C"
+
+[[cited_artifact]]
+id = "exp2.block_pair.pairs"
+path = "outputs/analysis/paper_a_exp2_stats/paired_blocks_shap_lime.csv"
+cited_by = "thesis Ch.4 claim traceability"
+
+[[cited_artifact]]
+id = "exp2.block_pair.wilcoxon"
+path = "outputs/analysis/paper_a_exp2_stats/wilcoxon_shap_lime_blocks.csv"
+cited_by = "thesis Ch.4 claim traceability"
+
+[[cited_artifact]]
+id = "exp2.block_pair.sign_test"
+path = "outputs/analysis/paper_a_exp2_stats/sign_test_shap_lime_blocks.csv"
+cited_by = "thesis Ch.4 claim traceability"
 
 [[cited_artifact]]
 id = "exp3.shap"
