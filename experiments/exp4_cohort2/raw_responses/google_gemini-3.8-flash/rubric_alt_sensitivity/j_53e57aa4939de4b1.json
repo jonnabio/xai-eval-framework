@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_53e57aa4939de4b1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6af7798c2cb4bb08_f8223dd5f869273f.txt",
+  "prompt_version": "f8223dd5f869273f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547801-AiODGECtGsLavEqBS7B6",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 759,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005349,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00435,
+        "upstream_inference_cost": 0.005349,
+        "upstream_inference_prompt_cost": 0.000999
+      },
+      "is_byok": false,
+      "prompt_tokens": 1332,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2492
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation indicates which attributes negatively affected the score, but without feature values, explicit thresholds, or actionable guidance, potential recourse is only implied.\",\n    \"audit_usefulness\": \"It provides substantial value for auditing model behavior and bias, explicitly highlighting demographic attributes like age and gender/marital status contributing to a negative outcome.\",\n    \"clarity\": \"The list of raw feature names and signed SHAP values requires technical understanding of additive feature attribution and is difficult for a layperson to interpret.\",\n    \"completeness\": \"The top 10 local factors with attribution weights capture the primary drivers of the decision, though feature values and baseline probability are missing.\",\n    \"concision\": \"The presentation is concise, packing key attribution weights for top features into a compact string without unnecessary filler.\",\n    \"overall_quality\": \"A solid, serviceable technical explanation that clearly surfaces feature attributions and bias risks, though lacking raw feature values and plain-language interpretation.\",\n    \"semantic_plausibility\": \"Low checking status and limited savings pushing towards credit denial matches standard domain risk expectations, though lack of feature values limits verification of exact instance attributes.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:23:31.869568+00:00"
+}

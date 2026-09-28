@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f0fbaa98e745f1b8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a5e759675f7b81c4_ed875bcbd48cf0f2.txt",
+  "prompt_version": "ed875bcbd48cf0f2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539440-EcbcRXt29gSTvSfkM4zA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003009,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.003009,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a5e759675f7b81c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps; it only lists features with one nonzero counterfactual factor and no guidance on how to change the outcome. A user cannot meaningfully act on this output.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not explain the direction or magnitude of most features, and almost all listed factors are zero. An auditor cannot easily inspect why the model predicted the positive class or probe for bias from this summary alone.\",\n    \"clarity\": \"The output is short and mechanically readable, but the notation is opaque to a non-expert and the meaning of the zero-valued factors is unclear. The phrase 'top local factors' is not sufficiently explained for general readers.\",\n    \"completeness\": \"The explanation is incomplete for this specific prediction because it surfaces only one meaningful factor and omits the relative contribution of most variables. It does not provide enough local decision context to understand why the model predicted class 1.\",\n    \"concision\": \"The explanation is compact and avoids lengthy prose, but much of the content is low-information because nearly all listed factors are zero. It is concise, though not especially information-dense.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and readable, but it lacks interpretability, decision support, and substantive insight into the model's prediction. Its usefulness is limited by the sparse and underexplained feature listing.\",\n    \"semantic_plausibility\": \"The highlighted marital-status feature is plausible for the Adult income dataset and logistic regression model, but the presentation of multiple zero-valued 'top local factors' is not very informative. The content is not contradictory, just too thin to be strongly convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:04.528725+00:00"
+}

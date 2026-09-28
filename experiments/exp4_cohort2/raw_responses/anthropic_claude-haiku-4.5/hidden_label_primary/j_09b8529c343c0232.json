@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4204b78d9c679eb0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_09b8529c343c0232",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4204b78d9c679eb0_183ac0c41bef26ec.txt",
+  "prompt_version": "183ac0c41bef26ec",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541430-ggBKRZ6X3d66CX0ZQmKy",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004006,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00276,
+        "upstream_inference_cost": 0.004006,
+        "upstream_inference_prompt_cost": 0.001246
+      },
+      "is_byok": false,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1798
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4204b78d9c679eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names with uniform weights but provides no guidance on how to modify inputs or what actions would change the prediction. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchor the prediction, the uniform weights (all 1.0) and poor technical metrics (fidelity 0.43, stability 0.16) severely limit its utility for auditing model behaviour or investigating bias. The low fidelity suggests the explanation may not faithfully represent actual model logic.\",\n    \"clarity\": \"The format is straightforward as a feature list with weights, but the uniform 1.0 values across all features lack interpretive clarity\u2014it is unclear whether this represents equal importance or a technical artifact. Non-experts would struggle to understand what these weights mean.\",\n    \"completeness\": \"The explanation lists 10 features but lacks context about their actual values in this instance, the direction of their influence, or their relative contribution to the prediction. Critical information about the instance's feature values is missing.\",\n    \"concision\": \"The explanation is compact in token count but contains redundant information (all weights identical) and lacks density of useful insight. The uniform weights add little informational value per word.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity and stability), uninformative uniform weights, missing instance context, and limited actionability. It provides a bare feature list without sufficient depth or reliability to support confident decision-making or auditing.\",\n    \"semantic_plausibility\": \"The uniform weighting across diverse features (age, education, occupation, marital status) is implausible; in real income prediction models, these features typically have heterogeneous importance. The pattern suggests a technical failure rather than genuine model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:16.465834+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_92efc0d56dccca0f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8f8f06432013798f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_92efc0d56dccca0f_a3064ff5efbca611.txt",
+  "prompt_version": "a3064ff5efbca611",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541652-owtLupcwwj0AFSEVP5Sz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002967,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.002967,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_92efc0d56dccca0f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no recourse advice, threshold-based guidance, or concrete next steps for improving or reviewing the prediction. A user cannot directly act on the ranking alone.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows which features the SHAP method considered most influential and the signs of their contributions. However, it lacks baseline context, feature values, and a comparison to alternative explanations, limiting deeper error or bias analysis.\",\n    \"clarity\": \"The wording is straightforward and the ranking format is easy to scan, even for a non-expert. Still, the explanation is terse and uses technical feature names without interpretation of what positive or negative contributions mean for the class prediction.\",\n    \"completeness\": \"The explanation covers the top local drivers, which helps explain the prediction at a high level, but it omits the prediction probability, the class meaning of positive SHAP values, and the actual feature values for the instance. That leaves the local decision context incomplete.\",\n    \"concision\": \"The output is compact and contains mostly the most relevant local factors without excessive prose. It is efficient, though a small amount of additional context would improve interpretability.\",\n    \"overall_quality\": \"This is a decent SHAP summary for a single prediction: it is compact, locally relevant, and broadly interpretable. Its main weakness is that it provides ranking without enough contextual explanation to fully support understanding or action.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are highly plausible predictors in this domain, and the mixture of positive and negative contributions is consistent with a local explanation for a true positive case. Nothing in the ranking appears contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:40:54.490277+00:00"
+}

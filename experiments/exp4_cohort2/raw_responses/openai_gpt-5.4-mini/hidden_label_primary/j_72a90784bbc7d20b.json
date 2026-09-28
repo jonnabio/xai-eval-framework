@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f3f9095af5de8830",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_72a90784bbc7d20b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f3f9095af5de8830_8af527d2a31260d2.txt",
+  "prompt_version": "8af527d2a31260d2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538916-SEFgIYh47lfi9KMYNcnK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00290025,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f3f9095af5de8830\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists features with positive or negative SHAP values, so it does not suggest any concrete recourse or next steps. A user cannot tell what to change or how to review the decision from this output alone.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it identifies the main local drivers and their directions, which helps inspect model behavior. However, it lacks context on feature values, baseline comparison, and why these factors outweighed others, so investigation remains limited.\",\n    \"clarity\": \"The wording is concise and the structure is easy to scan, even for a non-expert. Still, the meaning of the signed SHAP values is only implicit, so a reader may need some explanation to fully interpret them.\",\n    \"completeness\": \"The explanation covers the top local factors and gives a reasonable sense of which features pushed the prediction up or down. But it does not provide the actual feature values, decision threshold, or broader local context needed to fully understand this specific false-positive prediction.\",\n    \"concision\": \"The output is compact and information-dense, with no obvious redundancy. It communicates the main local contributors in a short list.\",\n    \"overall_quality\": \"This is a decent SHAP explanation: short, structured, and moderately informative about the model's local reasoning. Its main weakness is that it explains contribution directions without enough context for action or full inspection.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible and the mix of positive and negative contributions is consistent with a real SHAP local explanation. Nothing in the content is contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:55:19.745246+00:00"
+}

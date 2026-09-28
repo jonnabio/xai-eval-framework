@@ -913,8 +913,14 @@ settles, before filing.
 - **Author decision (2026-09-27): re-run the three EXP4 LLM judges** to obtain raw
   data. This is a NEW cohort, not a reproduction: the templates are lost, so the
   prompts must be rebuilt from Supplementary Table S1, and the output goes to its
-  own directory beside, never over, the committed aggregates. Planning pending;
-  see the next session's notes.
+  own directory beside, never over, the committed aggregates. **COMPLETE
+  2026-09-27: 5,184/5,184 calls (US$20.24)**, same 192 cases, judges
+  gpt-5.4-mini / claude-haiku-4.5 / gemini-3.8-flash via OpenRouter; 11
+  provider errors retried (kept in `failed_attempts/`); 5,180 parse. Raw data
+  and analysis committed; findings in `experiments/exp4_cohort2/RESULTS.md`.
+  Headline: hidden_label ICC still < 0.75 on every dimension but CIs cross it
+  on two; rubric_alt puts completeness at 0.753; default pooling puts two
+  dimensions above 0.75. Manuscript impact is an author decision (OPEN).
 - **EXP4 cannot be recomputed from raw data** (author asked 2026-09-27). A full
   forensic search - all Git history and refs, unreachable objects, GitHub
   releases and artifacts, this laptop - found no raw judge responses, templates

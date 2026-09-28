@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_21af7ca292ac5222",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_44c1e011120b2dd5_90af080b6db5d111.txt",
+  "prompt_version": "90af080b6db5d111",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542148-unhGaAuHpeV5TchsUZDo",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 558,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0044595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00354375,
+        "upstream_inference_cost": 0.0044595,
+        "upstream_inference_prompt_cost": 0.00091575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2166
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation contains no actionable guidance or recommendations, and the biological features describing cell nuclei are inherently non-actionable.\",\n    \"audit_usefulness\": \"The signed attribution values clearly reveal why the model produced a false negative, showing that size metrics (radius, perimeter, area) heavily pulled the prediction toward 0.\",\n    \"clarity\": \"The raw list of feature names and numeric SHAP values requires technical knowledge of explainable AI to interpret correctly.\",\n    \"completeness\": \"The top ten drivers are quantified with sign and magnitude, though the underlying observed feature values are not provided.\",\n    \"concision\": \"The text is very concise and compact, presenting key local attribution scores without any unnecessary padding.\",\n    \"overall_quality\": \"It serves as a solid, standard technical attribution summary for auditing a false negative, though it lacks lay readability and feature context.\",\n    \"semantic_plausibility\": \"Features related to cell nucleus size and shape (worst radius, perimeter, concavity) are well-established clinical indicators in breast cancer diagnostics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:16.641316+00:00"
+}

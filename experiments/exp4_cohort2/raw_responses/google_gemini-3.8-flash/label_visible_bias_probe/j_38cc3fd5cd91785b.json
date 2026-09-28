@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_38cc3fd5cd91785b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1a9c16ecde743d5e_517ffe545d4d947a.txt",
+  "prompt_version": "517ffe545d4d947a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542571-OJ6kl7EaAlS1YHGAZIJ4",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 669,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049395,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00399,
+        "upstream_inference_cost": 0.0049395,
+        "upstream_inference_prompt_cost": 0.0009495
+      },
+      "is_byok": false,
+      "prompt_tokens": 1266,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2330
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP attribution values without providing practical guidance, thresholds, or recourse steps for the applicant.\",\n    \"audit_usefulness\": \"The attribution scores provide clear visibility into which features pushed the model toward the prediction, though auditing is somewhat hampered by missing feature values and baseline context.\",\n    \"clarity\": \"The raw format consisting of encoded feature names and numeric SHAP values is difficult for non-expert readers to interpret without training in machine learning.\",\n    \"completeness\": \"The explanation identifies the top ten contributing features and their relative impacts, covering the key drivers while omitting the base value and full feature vector.\",\n    \"concision\": \"The text compactly presents the most influential factors and their weights without filler or unnecessary verbosity.\",\n    \"overall_quality\": \"While the explanation serves well as a concise technical diagnostic for practitioners, its lack of clarity and actionable recourse limits its utility for non-technical users.\",\n    \"semantic_plausibility\": \"The identified features\u2014such as checking status, employment duration, and savings levels\u2014align logically with domain expectations in credit risk assessment.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:56:20.020663+00:00"
+}

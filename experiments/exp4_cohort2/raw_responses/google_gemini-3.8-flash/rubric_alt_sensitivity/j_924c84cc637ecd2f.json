@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_924c84cc637ecd2f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_be3a619c28fb15c4_7e2161bb490167c3.txt",
+  "prompt_version": "7e2161bb490167c3",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549254-yOZyqw5ecvZ7s8ZTUFg0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1046,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00646725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.005475,
+        "upstream_inference_cost": 0.00646725,
+        "upstream_inference_prompt_cost": 0.00099225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1323,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2783
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers signed feature weights that imply general directions of influence, but lacks specific threshold values or counterfactual guidance for changing the outcome.\",\n    \"audit_usefulness\": \"It provides enough insight into the model's local reasoning\u2014such as heavy negative weighting on low education and missing occupation data\u2014to help an auditor investigate why a false negative occurred.\",\n    \"clarity\": \"The raw feature string format with one-hot encoded names and small floating-point attribution weights requires technical literacy to interpret.\",\n    \"completeness\": \"While ten top factors are listed with weights, the actual feature values for the instance are omitted, limiting full comprehension of the decision.\",\n    \"concision\": \"The explanation is presented as a dense, straightforward list of top feature weights with no unnecessary filler.\",\n    \"overall_quality\": \"The explanation is weak to serviceable; it outlines key drivers of the false negative prediction but suffers from questionable marital status signs and missing instance feature values.\",\n    \"semantic_plausibility\": \"Low education pushing the prediction down is sensible, but the positive attribution for never-married and negative attribution for married-civ-spouse run counter to typical income dynamics in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:47:45.934967+00:00"
+}

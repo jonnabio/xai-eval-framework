@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2017519e76b71039",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_679cae8cfc0b290c_0d12b36368296bf2.txt",
+  "prompt_version": "0d12b36368296bf2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539964-YlqAA1sSSaYl8usl2EEK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00292425,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists a single strong factor and many zero-valued features, but it does not translate this into any concrete recourse or decision guidance. A user cannot tell what to change to affect the prediction in a feasible way.\",\n    \"audit_usefulness\": \"It gives a very limited view of the model's local behavior because most listed features have zero effect and no direction or comparison is provided. For auditing, it is not enough to inspect why the positive prediction occurred or whether the explanation is sensible.\",\n    \"clarity\": \"The wording is short and mechanically readable, but the numerical output is not explained in plain language. A non-expert would likely not understand what '5.6342' means or why many features are shown as 0.0000.\",\n    \"completeness\": \"It identifies one apparent driver, education-num, but omits the direction of influence, other meaningful contributing factors, and any comparison to a counterfactual outcome. That leaves the local decision context incomplete.\",\n    \"concision\": \"The output is compact, but much of the space is spent on low-information zero entries rather than informative explanation. It is brief, yet not maximally informative per word.\",\n    \"overall_quality\": \"The explanation is stable and plausible, but it is too sparse and too numeric to be genuinely useful for understanding or acting on the prediction. Overall it provides only limited local insight.\",\n    \"semantic_plausibility\": \"For the Adult dataset and a logistic regression model, education level being an important factor is plausible. However, the presentation of many unrelated features with zero contribution feels more like a raw artifact than a polished human-readable explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:48.328683+00:00"
+}

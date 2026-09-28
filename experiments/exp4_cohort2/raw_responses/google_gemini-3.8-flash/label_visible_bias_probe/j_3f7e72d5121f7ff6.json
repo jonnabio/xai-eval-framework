@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3f7e72d5121f7ff6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_aa1ea16859fa26f1_53edcea94d595458.txt",
+  "prompt_version": "53edcea94d595458",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543347-qcTmNTYwSBiRhZbh8O0q",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1154,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 771,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00526275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0043275,
+        "upstream_inference_cost": 0.00526275,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2401
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists directional feature contributions without providing baseline feature values, thresholds, or concrete recourse steps for the individual.\",\n    \"audit_usefulness\": \"It highlights key drivers including sensitive attributes like sex and marital status, though the lack of instance feature values and low fidelity limit deep auditing.\",\n    \"clarity\": \"The list format is readable, but understanding one-hot encoded feature names and numeric coefficients requires technical familiarity with ML outputs.\",\n    \"completeness\": \"The explanation provides the top 10 local factors with signs and magnitudes, but omits the actual feature values of the instance and base prediction context.\",\n    \"concision\": \"The text compactly presents the most influential factors and their weights without unnecessary filler.\",\n    \"overall_quality\": \"The explanation offers an acceptable, plausible local attribution summary, though it is limited by missing feature values and low technical fidelity.\",\n    \"semantic_plausibility\": \"The positive association of higher education, professional specialty, and marriage with high income aligns well with domain realities and the Adult dataset dynamics.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:16.708944+00:00"
+}

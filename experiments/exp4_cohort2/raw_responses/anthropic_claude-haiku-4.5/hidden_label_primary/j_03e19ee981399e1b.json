@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_03e19ee981399e1b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f9cc6b6fb4f65a14_2a689f924e7f4f23.txt",
+  "prompt_version": "2a689f924e7f4f23",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540949-j7wPaG5MQUObNwucnIPZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003841,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00261,
+        "upstream_inference_cost": 0.003841,
+        "upstream_inference_prompt_cost": 0.001231
+      },
+      "is_byok": false,
+      "prompt_tokens": 1231,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1753
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, what actions are feasible, or how the instance could be modified to achieve a different outcome. DICE should generate counterfactual examples, but none are presented here.\",\n    \"audit_usefulness\": \"The normalized weights show which features DICE considered most influential (capital-gain dominates), enabling basic model behavior inspection, but the low fidelity (0.19) and high cost suggest the explanation may not reliably represent actual model decision boundaries.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is straightforward to parse, though the meaning of the weights and why most are zero requires domain knowledge of DICE methodology.\",\n    \"completeness\": \"The explanation identifies capital-gain and relationship_Own-child as top factors but lacks context about the instance's actual values, the counterfactual target, or why these features matter for the prediction class.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without padding, though the high proportion of zero-weight features adds minimal information.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it fails to deliver the core value of DICE\u2014actionable counterfactuals\u2014and the poor fidelity (0.19) undermines confidence in the explanation's reliability for decision support or auditing.\",\n    \"semantic_plausibility\": \"Capital-gain and relationship status are plausible predictors in income classification tasks, and the weighting pattern is consistent with domain expectations, though the absence of counterfactual examples limits semantic validation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:29:14.772842+00:00"
+}

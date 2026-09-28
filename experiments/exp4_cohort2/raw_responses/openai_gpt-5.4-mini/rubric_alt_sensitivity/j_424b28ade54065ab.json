@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_424b28ade54065ab",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_81c9024ae418939e_22bd8819b961954a.txt",
+  "prompt_version": "22bd8819b961954a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543882-8XmIZI9KCTDIbj5ettPI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002337,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0014895,
+        "upstream_inference_cost": 0.002337,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1461
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_81c9024ae418939e\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It does not suggest any concrete change that would alter the prediction, so it offers no usable next step.\",\"audit_usefulness\":\"The output is mostly a flat list of local factors with binary-looking weights and does not explain the model logic well enough to investigate bias or error in depth.\",\"clarity\":\"A non-technical reader can understand that age and relationship matter here, but the meaning of the 0.0000/1.0000 values and their role in the prediction is not explained.\",\"completeness\":\"It names only a couple of factors with weight and omits the main local reasoning chain, threshold, and how these factors led to the false negative.\",\"concision\":\"The explanation is short and contains little beyond the factor list, but some entries are uninformative zeros, so the useful content per token is only moderate.\",\"overall_quality\":\"It provides a minimal hint about influential features, but it is too sparse and under-explained to be a strong explanation for this false negative.\",\"semantic_plausibility\":\"Age and relationship status are plausible drivers for Adult-income predictions, but the presentation as top local factors with many zero-valued entries is not very convincing as an explanation of this specific decision.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":2,\"clarity\":3,\"completeness\":2,\"concision\":3,\"overall_quality\":2,\"semantic_plausibility\":3}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:05.203062+00:00"
+}

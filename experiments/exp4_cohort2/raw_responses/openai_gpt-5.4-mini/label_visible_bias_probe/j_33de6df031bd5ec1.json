@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_33de6df031bd5ec1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_959ed027a5ab7370_3984e277a5c0f888.txt",
+  "prompt_version": "3984e277a5c0f888",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541468-OZ69kBEchq0G6cs5mqgg",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.00287775,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local factors but does not translate them into concrete recourse or next steps. It gives no indication of what changes would move the prediction or whether any factors are modifiable.\",\n    \"audit_usefulness\": \"For an auditor, the presence of several top features is somewhat useful, but the explanation lacks directionality, thresholds, and the reason the model predicted the negative class. It is therefore only mildly helpful for investigating model behavior or bias.\",\n    \"clarity\": \"The wording is simple and the feature names are readable, so a non-expert can follow the list. However, the meaning of the 1.0000 and 0.0000 values is not explained, which limits interpretability.\",\n    \"completeness\": \"It names some features associated with the local decision, but it omits their effects, relative importance, and how they combine to produce the prediction. Given that this is a false negative, the explanation is not sufficient to understand why the model missed the positive class.\",\n    \"concision\": \"The explanation is short and avoids unnecessary detail, but it is also somewhat boilerplate and repetitive in format. It is reasonably compact for the amount of information provided.\",\n    \"overall_quality\": \"The explanation is understandable and concise, but it provides only a shallow summary of local factors without actionable or decision-support detail. Its usefulness is limited by the lack of signed contributions and the opaque anchor-style values.\",\n    \"semantic_plausibility\": \"The listed credit features are plausible for the German Credit dataset and fit the domain context. Nothing in the explanation is obviously contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:52.573255+00:00"
+}

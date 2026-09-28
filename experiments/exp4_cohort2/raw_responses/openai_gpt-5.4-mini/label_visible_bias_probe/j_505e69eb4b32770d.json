@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f787cc3703d999cf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_505e69eb4b32770d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f787cc3703d999cf_65f091cd4627677f.txt",
+  "prompt_version": "65f091cd4627677f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542734-Xcs1Ywk2Jnwe3agh5YHH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.00282225,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f787cc3703d999cf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. Because all feature attributions are effectively zero, it gives no basis for changing the decision or reviewing specific inputs.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it reveals that the local explanation collapsed to near-zero contributions, which may indicate a failed or uninformative LIME fit. It does not meaningfully support investigation of model behavior or feature effects.\",\n    \"clarity\": \"The feature list is easy to read, but the near-zero coefficients make the message ambiguous and unhelpful. A non-expert would not understand why these factors matter or what the prediction depends on.\",\n    \"completeness\": \"The explanation omits the actual drivers of the false negative and effectively provides no local decision context. It does not identify which features pushed toward class 0 or class 1 in a substantive way.\",\n    \"concision\": \"It is short and not padded, but the brevity comes at the cost of nearly all useful information. The output is compact without being informative.\",\n    \"overall_quality\": \"Overall, this is a very poor explanation because it is technically formatted but functionally empty. The near-zero attributions, zero sparsity usefulness, and zero fidelity make it unsuitable for understanding this prediction.\",\n    \"semantic_plausibility\": \"The listed attributes are plausible adult-dataset features, but the all-negligible scores are suspicious for a meaningful local explanation. Given a false negative, it is implausible that these factors have essentially no local influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:57.408296+00:00"
+}

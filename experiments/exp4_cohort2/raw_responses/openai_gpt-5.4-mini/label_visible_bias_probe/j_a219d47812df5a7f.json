@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a219d47812df5a7f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_75520768088e5528_4e515e268b90b14b.txt",
+  "prompt_version": "4e515e268b90b14b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541423-MY05uzSQ9ZN2TJJJbhqH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028875,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or next steps. It only lists feature contributions, so a user cannot tell what to change to alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it reveals the main local SHAP drivers and their directions. However, it lacks baseline context, feature values, and enough structure to fully diagnose why the model made a false negative.\",\n    \"clarity\": \"The wording is simple and the ranked list is easy to scan. A non-expert can understand that positive and negative numbers indicate opposing influences, though the absence of a plain-language summary limits accessibility.\",\n    \"completeness\": \"It identifies several top contributing features, which covers the main local drivers. Still, it omits the actual feature values, decision threshold, and overall prediction context needed to fully understand this specific false negative.\",\n    \"concision\": \"The explanation is compact and focused on the most important factors. It avoids excessive detail, though the raw feature encoding makes it slightly less informative per word than a more human-readable summary would be.\",\n    \"overall_quality\": \"This is a reasonably good local explanation because it is concise, interpretable, and partly useful for inspection. Its main weakness is that it does not connect the feature attributions to actionable or decision-specific guidance, especially for a false negative.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions of influence are not obviously contradictory. The combination of age, education, relationship, marital status, occupation, sex, and hours worked is consistent with common income-model patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:06.812627+00:00"
+}

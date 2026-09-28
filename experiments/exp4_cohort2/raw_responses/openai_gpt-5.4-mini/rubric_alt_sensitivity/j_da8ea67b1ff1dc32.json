@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_da8ea67b1ff1dc32",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0f6578287491844e_01911a9148711713.txt",
+  "prompt_version": "01911a9148711713",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543365-iSwB5IVfXbGwX1GNEq4h",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 361,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002478,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016245,
+        "upstream_inference_cost": 0.002478,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1499
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists factors that pushed the prediction up or down; it does not suggest any concrete changes that would affect the outcome.\",\n    \"audit_usefulness\": \"The ranked SHAP values are useful for inspecting which features drove this specific decision and could help compare model behavior across cases, though the explanation is not very deep.\",\n    \"clarity\": \"The wording is simple and the sign of each contribution is easy to understand, but the SHAP notation and feature names still require some familiarity with the dataset or model explanation.\",\n    \"completeness\": \"It provides the main local factors behind the prediction, but not their interactions, base value, or how strongly they combined to reach the final class.\",\n    \"concision\": \"It is compact and information-dense, with little wasted text beyond the ranked feature list.\",\n    \"overall_quality\": \"A solid local feature-attribution summary, but not an especially complete or actionable explanation of the decision.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, and the directionality of the contributions is reasonable for a negative credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:09:27.427996+00:00"
+}

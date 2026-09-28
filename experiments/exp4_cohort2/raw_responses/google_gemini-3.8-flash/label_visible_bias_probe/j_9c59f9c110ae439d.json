@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9c59f9c110ae439d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_78dfd1648ed95148_bcefa8a01705de28.txt",
+  "prompt_version": "bcefa8a01705de28",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541216-8OQ62fO0I6jlzfcSUpB0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1099,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 705,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0050655,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00412125,
+        "upstream_inference_cost": 0.0050655,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2358
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without any counterfactual guidance, concrete thresholds, or actionable steps for recourse.\",\n    \"audit_usefulness\": \"It provides a clear ranking and signed attribution of the top 10 features driving the false negative prediction, which is helpful for model debugging.\",\n    \"clarity\": \"The raw feature attributions with one-hot encoded variable names and decimal weights are difficult for a non-expert to interpret without statistical context.\",\n    \"completeness\": \"The top 10 contributing features are detailed with directions, but the underlying actual feature values and baseline prediction value are missing.\",\n    \"concision\": \"The text is very dense and focused, presenting key attribution information in a compact list without redundant filler.\",\n    \"overall_quality\": \"While it serves as a solid technical summary for auditing purposes, the lack of feature values, baseline context, and plain-language interpretation limits its general utility.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as loan duration, employment stability, and checking status\u2014align well with credit underwriting logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:46.834568+00:00"
+}

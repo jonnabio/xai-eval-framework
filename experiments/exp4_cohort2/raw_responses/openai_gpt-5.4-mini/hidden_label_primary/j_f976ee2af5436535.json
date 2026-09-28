@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f976ee2af5436535",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c523b5e4b177b22e_dd0fafdac01365ca.txt",
+  "prompt_version": "dd0fafdac01365ca",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538671-JBViixeU2KF4XsvkzS8f",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020475,
+        "upstream_inference_cost": 0.00285,
+        "upstream_inference_prompt_cost": 0.0008025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1070,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into concrete recourse steps the user could take. It suggests what the model noticed, not what to change or verify next.\",\n    \"audit_usefulness\": \"For an auditor, the ranked SHAP contributions are useful because they show which variables pushed the prediction toward the negative class. However, it lacks enough context about the baseline and the exact class direction to fully support deeper error or bias analysis.\",\n    \"clarity\": \"The format is simple and readable, with a clear list of features and numeric contributions. A non-expert may still struggle to interpret the sign and magnitude of SHAP values without an explanation of the baseline and what negative versus positive means.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and provides their relative contributions. Still, it omits the reference value, class-level interpretation, and any summary of how these factors combine to yield the final prediction.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still conveying several important local factors. Its brevity is appropriate for a SHAP summary.\",\n    \"overall_quality\": \"This is a reasonably strong local explanation because it identifies the main feature contributions and is easy to scan. Its usefulness is limited by the lack of interpretive context and actionable guidance.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, especially duration, checking status, savings, employment, and credit amount. The direction of the contributions is also broadly consistent with a risk-based credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:13.967745+00:00"
+}

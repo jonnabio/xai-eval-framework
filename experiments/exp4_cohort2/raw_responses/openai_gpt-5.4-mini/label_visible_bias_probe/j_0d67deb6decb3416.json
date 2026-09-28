@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0d67deb6decb3416",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_902d690264149a09_521d2ecc46286163.txt",
+  "prompt_version": "521d2ecc46286163",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541768-QyYUYZB9zlqgbVRqpzlM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030945,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022995,
+        "upstream_inference_cost": 0.0030945,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1571
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or next steps. It only lists features and their SHAP contributions, so a user cannot easily tell what to change to alter the outcome.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it reveals which features pushed the model toward the decision and in what direction. However, it lacks a stronger narrative about magnitude, interaction effects, or why this specific false negative occurred.\",\n    \"clarity\": \"The output is readable and well structured, with each feature paired to a numeric contribution. Still, a non-expert may not understand SHAP signs, feature encodings like education_7th-8th, or what the numbers mean in relation to the final class.\",\n    \"completeness\": \"It covers several local drivers of the prediction, including education, hours worked, and marital status, but it does not explain the base value, class probabilities, or how these factors combine to yield the false negative. The missing prediction confidence also limits local understanding.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting a short ranked list of local factors. It is fairly efficient, though the raw feature names and repeated marital-status variants reduce informational density a bit.\",\n    \"overall_quality\": \"This is a reasonable SHAP summary but only moderately helpful because it is sparse, technical, and not strongly tied to the misclassification. It gives a useful snapshot of local feature influence, yet falls short of a high-quality explanation for a non-expert or an auditor seeking full context.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for an Adult-income-style model, and the directionality is not obviously contradictory. The presence of educational attainment and work-related variables among the main factors fits the domain, even if the explanation does not fully justify the false negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:51.161056+00:00"
+}

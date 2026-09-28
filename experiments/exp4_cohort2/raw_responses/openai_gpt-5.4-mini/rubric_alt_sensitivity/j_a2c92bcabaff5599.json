@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a2c92bcabaff5599",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_5169d5420efbc3da_e43f7a90ee8c78e5.txt",
+  "prompt_version": "e43f7a90ee8c78e5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543400-K5fa07RJGBjxCfTGKvcN",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027495,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019035,
+        "upstream_inference_cost": 0.0027495,
+        "upstream_inference_prompt_cost": 0.000846
+      },
+      "is_byok": false,
+      "prompt_tokens": 1128,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any specific changes that could alter the model's decision; it only lists feature weights, so it is not actionable for the person or reviewer.\",\n    \"audit_usefulness\": \"It identifies a couple of local factors, but the near-constant 0/1 pattern and lack of direction or comparison make it only mildly useful for auditing model behavior or bias.\",\n    \"clarity\": \"The listed feature names are understandable in a basic sense, but the meaning of the 1.0000 and 0.0000 values is not explained, so a non-technical reader would struggle to interpret it fully.\",\n    \"completeness\": \"It mentions only two active factors and omits a broader account of why this false negative occurred, so it does not provide the main local reasons in a useful way.\",\n    \"concision\": \"The explanation is short and mostly a compact list of factors, but much of the content is not informative because many entries are zero-weight placeholders.\",\n    \"overall_quality\": \"Overall it is a weak explanation: it is sparse, only partially informative, and not very helpful for understanding why the model predicted class 0 on a true positive case.\",\n    \"semantic_plausibility\": \"Education and occupation are plausible factors for Adult-income predictions, but the explanation is too generic and the zero-valued feature list makes the stated local factors feel unconvincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:03.079219+00:00"
+}

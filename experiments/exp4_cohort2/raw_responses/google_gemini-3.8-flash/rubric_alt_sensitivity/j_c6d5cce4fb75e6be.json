@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c6d5cce4fb75e6be",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_4bcf426ccc95842c.txt",
+  "prompt_version": "4bcf426ccc95842c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546482-CM4fOr3tfYuuupfFJHhh",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 507,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00445275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00347625,
+        "upstream_inference_cost": 0.00445275,
+        "upstream_inference_prompt_cost": 0.0009765
+      },
+      "is_byok": false,
+      "prompt_tokens": 1302,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2229
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists immutable biological characteristics of a tumor with raw attribution scores, offering no recourse or guidance on what changes would alter the prediction.\",\n    \"audit_usefulness\": \"It provides the top 10 contributing features and their directional SHAP values, which gives an auditor insight into why this false negative occurred, though the lack of actual feature values limits verification.\",\n    \"clarity\": \"The explanation is presented as a list of raw technical feature names and floating-point SHAP values, making it difficult for a layperson to interpret without background knowledge.\",\n    \"completeness\": \"The top 10 local SHAP values show the primary positive and negative forces driving the decision, but the base value and actual feature measurements are omitted.\",\n    \"concision\": \"The attribution list is very concise and contains no conversational padding, delivering purely feature attribution weights.\",\n    \"overall_quality\": \"A serviceable local SHAP explanation that accurately conveys directional feature impacts for a false negative, but is hindered by raw technical formatting and missing feature values.\",\n    \"semantic_plausibility\": \"Features related to cell size and shape (worst area, worst perimeter, worst concave points) are well-established diagnostic indicators in breast cancer cytology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:01:29.887009+00:00"
+}

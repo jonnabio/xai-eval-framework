@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4204b78d9c679eb0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c8e0a2f7df46c497",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4204b78d9c679eb0_12418eae2acdad13.txt",
+  "prompt_version": "12418eae2acdad13",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543975-0JRKs92W2pIAfygnXt0P",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004028,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002785,
+        "upstream_inference_cost": 0.004028,
+        "upstream_inference_prompt_cost": 0.001243
+      },
+      "is_byok": false,
+      "prompt_tokens": 1243,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1800
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4204b78d9c679eb0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names and uniform weights but provides no guidance on how to challenge the prediction, modify inputs, or take corrective action. No specific thresholds or target values are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchored the prediction, the uniform weights (all 1.0) and low fidelity (0.43) suggest the anchors may not reliably represent model behavior. The high faithfulness gap (0.14) further undermines audit confidence.\",\n    \"clarity\": \"The format is a simple list of feature names with weights, which is straightforward to parse, but lacks narrative context explaining why these features matter or how they drive the prediction toward class 1.\",\n    \"completeness\": \"The explanation lists 10 features but omits critical context: feature values for this instance, direction of influence, relative importance ranking, and why these particular features were selected over others. The uniform weights obscure true driver strength.\",\n    \"concision\": \"The explanation is compact in token count (90) but achieves this by omitting essential information; it is terse rather than efficiently informative. Redundant listing of occupation categories without aggregation wastes space.\",\n    \"overall_quality\": \"The explanation is a bare-bones feature list with poor technical performance (low fidelity, high faithfulness gap, low stability). It fails to provide actionable insight, audit transparency, or semantic depth, and the false positive prediction (true label 0) is not explained in context.\",\n    \"semantic_plausibility\": \"The selected features (age, education, marital status, occupation, hours-per-week) are plausible income predictors in the adult dataset, but the uniform weighting and inclusion of missing occupation values (occupation_nan) raise questions about anchor quality and model logic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:19:41.126026+00:00"
+}

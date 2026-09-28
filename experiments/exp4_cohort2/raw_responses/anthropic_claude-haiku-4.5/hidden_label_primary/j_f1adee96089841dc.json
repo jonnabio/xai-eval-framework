@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f1adee96089841dc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4e230a6771152fb2_39e4d5c5daf01b7f.txt",
+  "prompt_version": "39e4d5c5daf01b7f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539082-cqjmg0bT8n6qmpXwKqaW",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003483,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002245,
+        "upstream_inference_cost": 0.003483,
+        "upstream_inference_prompt_cost": 0.001238
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1687
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The feature weights and directions support model inspection and help auditors understand which features drove the negative prediction, enabling bias investigation across protected attributes like race and marital status.\",\n    \"clarity\": \"The explanation uses technical notation (feature names with coefficients) that requires familiarity with logistic regression and the Adult dataset schema; a non-expert would struggle to interpret the meaning.\",\n    \"completeness\": \"The top 10 features are presented with their contributions, covering the main local drivers, though the very small magnitude of most weights raises questions about whether all key decision factors are captured.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides technically sound local feature attribution but lacks accessibility, actionability, and contextual interpretation needed for practical use by non-technical stakeholders.\",\n    \"semantic_plausibility\": \"The feature set and their directions are plausible for income prediction (occupation, capital gains, marital status, race, education), though the extremely small coefficient magnitudes suggest weak individual feature signals.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:58:07.359920+00:00"
+}

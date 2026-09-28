@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2fb8d841944fa76b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a583fc41ae7cd057",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2fb8d841944fa76b_32467d2d7f60a6e2.txt",
+  "prompt_version": "32467d2d7f60a6e2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552031-Foyo5HWb2msBTFR3mLie",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1119,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0051855,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00419625,
+        "upstream_inference_cost": 0.0051855,
+        "upstream_inference_prompt_cost": 0.00098925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1319,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2438
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2fb8d841944fa76b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary feature indicators without counterfactual paths, directional thresholds, or suggestions on how to alter the outcome.\",\n    \"audit_usefulness\": \"It provides marginal diagnostic insight into the model's false positive prediction, hampered by very low fidelity (0.35) and raw dummy-variable representations.\",\n    \"clarity\": \"The raw technical one-hot encoded feature names paired with binary 1.0000 and 0.0000 values are confusing and inaccessible to non-technical users.\",\n    \"completeness\": \"The explanation presents only four active indicators alongside several zero-weighted features, omitting directional impact and context for why the model predicted class 1.\",\n    \"concision\": \"Including multiple features with values of 0.0000 pads the output with uninformative elements.\",\n    \"overall_quality\": \"The explanation is weak, suffering from poor fidelity, awkward one-hot encoding artifacts, and minimal practical interpretability.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive categories like savings_status_<100 and savings_status_no known savings as active factors is doubtful and degrades domain plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:33:59.100808+00:00"
+}

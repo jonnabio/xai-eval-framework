@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_21761f91b5609418",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0c57055995cafaca_12f42a05ac215a8d.txt",
+  "prompt_version": "12f42a05ac215a8d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541283-2AgpMNECdF2Cn7Ugapd4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030615,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022725,
+        "upstream_inference_cost": 0.0030615,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or review steps for the user. It only lists feature indicators with binary values, so it offers no guidance on what could change the outcome.\",\n    \"audit_usefulness\": \"It gives a sparse view of which features were present in the anchor set, which is somewhat useful for checking local logic. However, it lacks rule coverage, directionality, and why those factors mattered, so it is limited for serious audit or error analysis.\",\n    \"clarity\": \"The output is mechanically readable, but the meaning of the 1.0000/0.0000 values is not explained in plain language. A non-expert would not understand how these numbers relate to the model's decision.\",\n    \"completeness\": \"It mentions a few apparent top local factors, but it does not explain how they combine to yield a negative prediction on a false negative case. Important local decision context such as thresholds, rule conditions, and the direction of influence is missing.\",\n    \"concision\": \"The explanation is short and avoids unnecessary prose, which is good for brevity. Still, much of the content is low-value repetition of feature names with binary markers, so the information density is only moderate.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is concise and somewhat readable, but it fails to explain the model's local reasoning in a way that supports understanding, action, or audit. The sparse anchor-style output is especially insufficient for a false negative where diagnostic detail is important.\",\n    \"semantic_plausibility\": \"The listed features are plausible predictors for the Adult dataset and the format is consistent with an anchor explanation. However, the presentation is semantically thin because it does not connect those features to the predicted class or the true label in a meaningful way.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:45.580509+00:00"
+}

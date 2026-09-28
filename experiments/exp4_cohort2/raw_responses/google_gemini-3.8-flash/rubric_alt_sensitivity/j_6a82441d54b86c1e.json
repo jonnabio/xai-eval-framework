@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6a82441d54b86c1e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4f96f4d65555df8d_4cb91b9c9e81bcbf.txt",
+  "prompt_version": "4cb91b9c9e81bcbf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547120-OU7UqTmrNuRL5X1h4E8C",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 993,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 579,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00471525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00372375,
+        "upstream_inference_cost": 0.00471525,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2315
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because the output only lists feature names with binary inclusion flags rather than specific threshold conditions, directional guidance, or counterfactuals, there is nothing actionable for the user.\",\n    \"audit_usefulness\": \"It highlights which features were selected into the anchor, providing marginal insight into what the model focused on, but lacks the necessary predicates to audit model logic rigorously.\",\n    \"clarity\": \"The format is a simple list of feature names and binary weights, though raw one-hot encoded feature names like 'checking_status_no checking' require some technical interpretation.\",\n    \"completeness\": \"The explanation indicates which features form the anchor rule, but strips out the actual predicates, inequality thresholds, and directional effects.\",\n    \"concision\": \"The summary is fairly brief and directly presents the active versus inactive local factors without unnecessary filler.\",\n    \"overall_quality\": \"The explanation is weak because Anchors should provide explicit if-then rules, yet here it only delivers a flat list of features with binary presence weights.\",\n    \"semantic_plausibility\": \"The selected factors (duration, credit amount, age, checking status, savings) are standard and plausible determinants in credit risk evaluation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:12:08.798464+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_06e7340405176025",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_38911ac9e78c8551",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_06e7340405176025_0680cdd9978503d1.txt",
+  "prompt_version": "0680cdd9978503d1",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543641-qdyMvIS3ZilRqE5UO0g1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0014805,
+        "upstream_inference_cost": 0.002325,
+        "upstream_inference_prompt_cost": 0.0008445
+      },
+      "is_byok": false,
+      "prompt_tokens": 1126,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1455
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_06e7340405176025\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It only lists influential features and their directions; it does not say what values would change the prediction or what a person could do next.\",\"audit_usefulness\":\"The top SHAP factors provide some insight into which variables drive the XGBoost prediction, which is useful for spot-checking behavior, but the low fidelity and moderate faithfulness gap limit trust.\",\"clarity\":\"The feature names and plus/minus contributions are easy to read for someone with basic familiarity, though the meaning of SHAP values still requires some technical context.\",\"completeness\":\"It gives the main local drivers of the prediction, but not enough detail to fully reconstruct the decision or explain how these factors combine into the final class.\",\"concision\":\"The explanation is compact and information-dense, with a short ranked list of local contributors and little extra wording.\",\"overall_quality\":\"It is a solid local feature-attribution summary, but limited by lack of actionable guidance, moderate explanatory quality, and no narrative tying the factors together.\",\"semantic_plausibility\":\"For a breast cancer model, features like radius, area, concavity, and smoothness are plausible predictors, and the mix of positive and negative contributions is consistent with a local SHAP explanation.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":3,\"clarity\":4,\"completeness\":3,\"concision\":4,\"overall_quality\":3,\"semantic_plausibility\":4}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:04.376252+00:00"
+}

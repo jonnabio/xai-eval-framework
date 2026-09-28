@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cafe50d43e9b9266",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c05c7506bf4c74e6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cafe50d43e9b9266_2c16d8d15a7f5ac9.txt",
+  "prompt_version": "2c16d8d15a7f5ac9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542326-x4Hk5zUaxRFcdFtiCflk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029295,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.0029295,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cafe50d43e9b9266\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of anchor features with binary presence-like values. A user cannot tell what to change to alter the outcome.\",\n    \"audit_usefulness\": \"It identifies several local features associated with the prediction, which gives some limited insight into the model\u2019s behavior. However, it lacks directionality, thresholds, or a human-readable rule, so it is only weakly useful for auditing.\",\n    \"clarity\": \"The feature names are readable, but the formatting is cryptic and the repeated 1.0000/0.0000 values are not explained. A non-expert would struggle to interpret what the anchor scores mean.\",\n    \"completeness\": \"It names the main features used by the anchor explanation, but it does not explain how they combine to support the negative prediction or how strong each factor is in context. Important local decision context is therefore missing.\",\n    \"concision\": \"The explanation is short and avoids unnecessary detail, but part of the brevity comes from omitting interpretation rather than being maximally informative. It is reasonably compact, though not especially efficient in communicating meaning.\",\n    \"overall_quality\": \"This is a limited explanation: it is concise and somewhat informative about which features matter, but it is hard to interpret and offers little support for review or action. Overall it is acceptable as a raw technical summary, but weak as a user-facing explanation.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible drivers in the German Credit domain, especially duration, credit amount, checking status, and savings status. The content is coherent with the dataset and a negative credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:52:08.349723+00:00"
+}

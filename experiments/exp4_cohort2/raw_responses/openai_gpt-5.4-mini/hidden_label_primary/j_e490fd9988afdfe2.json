@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba96b41ceb2e14cb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e490fd9988afdfe2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ba96b41ceb2e14cb_7a9ba2f235ac8fa3.txt",
+  "prompt_version": "7a9ba2f235ac8fa3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539644-5mw0N0HVKQEUXsb8FdnZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.0029325,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ba96b41ceb2e14cb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It lists feature values, but does not say what could be changed or how those changes would affect the prediction.\",\n    \"audit_usefulness\": \"It has limited audit value because it exposes only two nonzero local factors and gives no directional effect, baseline, or comparison to nearby cases. The near-all-zero attribution pattern also makes it hard to inspect whether the model is relying on meaningful features.\",\n    \"clarity\": \"The wording is short and easy to parse, but the format is somewhat cryptic for a non-expert because it is just a list of feature names with numbers. Without an explanation of what the numbers mean, the message is not very understandable.\",\n    \"completeness\": \"It captures only two local factors and omits the actual contribution direction, magnitude interpretation, and the feature values of the instance. That leaves an incomplete picture of why the model predicted class 0 for this case.\",\n    \"concision\": \"The explanation is very brief and mostly free of redundancy, so it is efficient in length. However, it is overly terse relative to the information needed to be useful.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact but not very informative, actionable, or auditable. The sparse attributions and lack of interpretive context make it hard to understand the model decision.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and the explanation is not internally contradictory. Still, assigning nonzero importance mainly to relationship and native country without any context is only moderately plausible as a decision rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:07:28.000223+00:00"
+}

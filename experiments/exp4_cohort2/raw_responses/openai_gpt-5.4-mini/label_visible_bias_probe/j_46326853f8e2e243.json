@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_46326853f8e2e243",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cad1d6dbc8b4e027_db85c2484d2e6b06.txt",
+  "prompt_version": "db85c2484d2e6b06",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542724-e4kCgSwC7KSdQABdryv5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.0028275,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1510
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any feasible next step or recourse. It only lists features with near-zero contributions, so a user cannot act on it.\",\n    \"audit_usefulness\": \"It has limited audit value because almost every local factor is shown as zero, which reveals little about the model's actual decision logic. An auditor cannot meaningfully assess which variables drove the positive prediction.\",\n    \"clarity\": \"The output is easy to read syntactically, but the all-zero weights make its meaning unclear. A non-expert would struggle to understand why these factors appear if they contribute essentially nothing.\",\n    \"completeness\": \"It fails to provide the main local drivers of the prediction. For a true positive on Adult, one would expect a clearer account of which attributes pushed the model toward class 1, but this explanation is effectively empty.\",\n    \"concision\": \"It is short, but the brevity is achieved by omitting useful information rather than by efficiently summarizing it. The list of many zero-valued factors adds little value.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is technically formatted but substantively uninformative. It does not meaningfully explain the model's positive prediction or support review.\",\n    \"semantic_plausibility\": \"The content is internally coherent, but the pattern of nearly all zero contributions is implausibly non-informative for a local explanation of a positive Adult prediction. It suggests a degenerate or poorly calibrated explanation rather than a meaningful interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:47.127287+00:00"
+}

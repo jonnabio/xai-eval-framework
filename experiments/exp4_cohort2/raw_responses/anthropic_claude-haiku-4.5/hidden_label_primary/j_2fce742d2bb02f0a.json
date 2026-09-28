@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2fce742d2bb02f0a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28cfcd5501fa69b2_a819c1ae3878f2bb.txt",
+  "prompt_version": "a819c1ae3878f2bb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540453-zHF25E9xhPkH8Ou1rv7N",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003697,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002465,
+        "upstream_inference_cost": 0.003697,
+        "upstream_inference_prompt_cost": 0.001232
+      },
+      "is_byok": false,
+      "prompt_tokens": 1232,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1725
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies four key factors but provides no guidance on how to modify them or what recourse actions are available; a user cannot determine feasible next steps from this output.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchored the prediction and their relative importance weights, enabling an auditor to inspect model decision logic and identify potential bias patterns in credit decisions.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but requires familiarity with credit domain terminology and Anchors method to fully interpret; non-experts may struggle with feature encoding like 'checking_status_no checking'.\",\n    \"completeness\": \"Four features are identified as drivers (duration, checking_status, credit_history, employment), but the explanation lacks context about feature values, thresholds, or interaction effects that would fully explain the negative prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text; however, the normalized format sacrifices some interpretability for brevity.\",\n    \"overall_quality\": \"The explanation provides a sparse, technically sound local decision snapshot but lacks depth in actionability and semantic grounding; it serves auditors better than end-users and misses important contextual details.\",\n    \"semantic_plausibility\": \"The identified factors (short employment history, no checking account, delayed credit history, loan duration) are plausible credit risk indicators in domain context, though the zero weights on age and dependents may warrant scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:59.225747+00:00"
+}

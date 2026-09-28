@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_12fcb7bc24f3071c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4e9045d4d8fa6e21_788b699442cce733.txt",
+  "prompt_version": "788b699442cce733",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542061-meqQXYLSoVQnJZ2gBkJM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029145,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0029145,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives almost no concrete recourse guidance beyond identifying one feature as important. A user cannot tell what to change or what threshold would alter the prediction.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it exposes a single positive factor and many zero-valued entries without showing directionality, counterfactuals, or a meaningful ranking. The very low sparsity and stability also suggest limited reliability for investigation.\",\n    \"clarity\": \"The output is mechanically readable, but the presentation is cryptic for a non-expert because it is just a list of feature names and numbers. The meaning of the scores is not explained in plain language.\",\n    \"completeness\": \"It does not provide enough local decision context to understand why this specific prediction was made. Only one feature appears non-zero, and there is no comparison to baseline values, class contributions, or decision threshold information.\",\n    \"concision\": \"The explanation is short, but much of the content is low-information filler because most listed features have zero contribution. It is compact, yet not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is terse and technically structured, but not very interpretable or useful for understanding the false positive prediction. It lacks actionable, complete, and reliable decision support.\",\n    \"semantic_plausibility\": \"The single highlighted factor, married-civ-spouse, is plausible as a predictor in the Adult dataset, but the abundance of zero-valued top factors is not very intuitive. The explanation is only partially coherent as a human-facing rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:43.963268+00:00"
+}

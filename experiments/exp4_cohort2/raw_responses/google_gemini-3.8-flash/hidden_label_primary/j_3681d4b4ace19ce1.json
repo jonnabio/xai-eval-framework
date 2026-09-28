@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3681d4b4ace19ce1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28188c86ac4bdfad_be08606449c7a18d.txt",
+  "prompt_version": "be08606449c7a18d",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539512-bEriFOBDUbTWNGqe2KHu",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1275,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 873,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00571875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00478125,
+        "upstream_inference_cost": 0.00571875,
+        "upstream_inference_prompt_cost": 0.0009375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1250,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2525
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only outputs raw local feature weights without baseline context or counterfactual advice, offering no actionable recourse for the individual.\",\n    \"audit_usefulness\": \"The attribution list enables an auditor to detect that protected attributes such as sex contribute to the decision, though the presence of competing one-hot encodings complicates interpretation.\",\n    \"clarity\": \"The raw key-value format and unexplained signed floats require technical familiarity with LIME and one-hot encoded variables to understand.\",\n    \"completeness\": \"While ten top features are shown, the explanation omits the actual feature values of the instance and a base value, leaving the local decision context incomplete.\",\n    \"concision\": \"The text is very compact, presenting the top weights directly without unnecessary narrative padding.\",\n    \"overall_quality\": \"The explanation provides a concise technical summary of local feature effects, but suffers from low accessibility, mutual one-hot redundancy, and lack of actionable guidance.\",\n    \"semantic_plausibility\": \"The directions of influence generally match Adult dataset dynamics, though reporting simultaneous opposing weights for binary indicators like sex_Female and sex_Male reflects perturbation artifacts.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:22.433823+00:00"
+}

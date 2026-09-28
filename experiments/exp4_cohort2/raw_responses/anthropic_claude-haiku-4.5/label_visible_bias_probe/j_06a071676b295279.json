@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_06a071676b295279",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_cd6abd1a9433542b_595e9eb21ccfa3fe.txt",
+  "prompt_version": "595e9eb21ccfa3fe",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542932-pojPdZt0ZeSd1HWAM92o",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003766,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002545,
+        "upstream_inference_cost": 0.003766,
+        "upstream_inference_prompt_cost": 0.001221
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1730
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. It is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The explanation shows which features DICE identified as locally important, but the dominance of native-country_Ireland (1.0) with most other features at 0.0 raises questions about model behavior that warrant investigation. However, the format limits deeper audit insights.\",\n    \"clarity\": \"The explanation is presented as a ranked list of feature-importance pairs with numerical weights, which is reasonably clear but requires familiarity with DICE methodology and the Adult dataset feature names to fully interpret.\",\n    \"completeness\": \"The explanation covers the top factors identified by DICE but lacks context about the instance itself (e.g., actual feature values), the prediction confidence, or why these factors matter relative to the decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their importance scores without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a mechanistic view of local feature importance but lacks depth in actionability, context, and semantic grounding; it reads as a raw model output rather than a user-ready explanation.\",\n    \"semantic_plausibility\": \"The finding that native-country_Ireland is the dominant factor (1.0) for a negative prediction (income \u226450K) is plausible in the Adult dataset context, though the extreme sparsity of other features (all 0.0) suggests potential model artifacts or data issues.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:02:17.212900+00:00"
+}

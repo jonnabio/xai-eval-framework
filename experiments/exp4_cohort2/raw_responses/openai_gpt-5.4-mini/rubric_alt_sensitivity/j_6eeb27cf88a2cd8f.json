@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6eeb27cf88a2cd8f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_861c15c7ecab8f3b_3cbfb43761e237bb.txt",
+  "prompt_version": "3cbfb43761e237bb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543704-RdwaehWlUmvTj8VfvLTz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 418,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00273225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001881,
+        "upstream_inference_cost": 0.00273225,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not provide a clear counterfactual or any feasible changes the person could make to alter the prediction; the listed factors are mostly zero-valued and not actionable.\",\n    \"audit_usefulness\": \"It offers very limited insight for auditing because it is just a sparse ranking of features, mostly with zero importance, and does not explain how the model uses them or whether the explanation is stable.\",\n    \"clarity\": \"The output is easy to read at a surface level, but the meaning of the normalized scores and the zero-heavy feature list is not very accessible to a non-technical reader.\",\n    \"completeness\": \"It names only a couple of local factors and omits the main causal story for why the model predicted class 1, so it is only a partial explanation of this decision.\",\n    \"concision\": \"The explanation is brief and mostly consists of a compact feature list, with little filler, though some entries with zero weight add little value.\",\n    \"overall_quality\": \"The explanation is serviceable but weak: it is sparse, only partially informative, and not very helpful for understanding or acting on this specific prediction.\",\n    \"semantic_plausibility\": \"The mention of native-country features is plausible for the Adult dataset, but the explanation is odd because most listed factors have zero contribution, making the local rationale feel incomplete and somewhat unconvincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:15:07.670824+00:00"
+}

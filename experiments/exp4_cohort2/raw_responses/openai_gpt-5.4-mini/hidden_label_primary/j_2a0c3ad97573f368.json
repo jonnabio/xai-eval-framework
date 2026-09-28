@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2a0c3ad97573f368",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_052659e044864140_c82a2fb99f180942.txt",
+  "prompt_version": "c82a2fb99f180942",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538991-T8jhIRyPnZf8QbSd0kV5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029355,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.0029355,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but gives no concrete recourse or next steps a user could take. It does not translate the factors into actionable guidance such as what to change or review.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the top local SHAP drivers and their directions, which helps inspect why the model predicted class 0. However, it lacks baseline context or feature values, so deeper error or bias analysis is only partially supported.\",\n    \"clarity\": \"The wording is concise and the feature list is easy to parse, even for a non-expert. The meaning of positive versus negative SHAP values is not explicitly explained, but the structure remains understandable.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and provides ranked contributions, which is enough to understand the model\u2019s immediate reasoning at a high level. Still missing are the actual feature values, reference baseline, and class-level interpretation, so the local decision context is not complete.\",\n    \"concision\": \"The explanation is compact and focused, with only the top contributing features shown. It avoids redundant prose and conveys a substantial amount of information in few tokens.\",\n    \"overall_quality\": \"Overall this is a strong local explanation: it is compact, stable, and informative about which features pushed the prediction toward class 0. Its main weakness is limited interpretability for action-taking or detailed audit follow-up because it lacks instance values and fuller contextual framing.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and their importance pattern are highly plausible for an XGB model on this dataset. The predominance of malignant-leaning size and shape measures also fits general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:34.440734+00:00"
+}

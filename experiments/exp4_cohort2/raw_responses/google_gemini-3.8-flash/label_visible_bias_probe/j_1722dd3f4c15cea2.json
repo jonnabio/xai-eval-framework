@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1722dd3f4c15cea2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_f75792557c566daf_c7f3ee9c85cc8f63.txt",
+  "prompt_version": "c7f3ee9c85cc8f63",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541273-xftmtjCKbOi2NubsvPpz",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 876,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 496,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0041865,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003285,
+        "upstream_inference_cost": 0.0041865,
+        "upstream_inference_prompt_cost": 0.0009015
+      },
+      "is_byok": false,
+      "prompt_tokens": 1202,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2078
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers purely diagnostic feature attribution scores with no guidance, actionable recourse, or clinical next steps.\",\n    \"audit_usefulness\": \"It shows which features drove the false positive prediction, though the lack of actual feature values limits its debugging utility.\",\n    \"clarity\": \"The list of raw feature names paired with signed floating-point numbers requires prior knowledge of SHAP values and is difficult for a layperson to interpret.\",\n    \"completeness\": \"The top ten local factors with signed attributions provide a reasonable overview of local model logic, but baseline values and feature inputs are omitted.\",\n    \"concision\": \"The text is concise and dense with attribution information, completely avoiding filler or redundant text.\",\n    \"overall_quality\": \"While it functions adequately as a compact technical attribution readout for data scientists, it lacks baseline values, feature measurements, and accessible interpretations.\",\n    \"semantic_plausibility\": \"Features such as worst texture, mean concavity, and perimeter are clinically recognized hallmarks used in breast cancer diagnosis.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:34:40.226587+00:00"
+}

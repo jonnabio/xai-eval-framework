@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b2fb50fe3096e9d2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1067f4e4ed1ad2e2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b2fb50fe3096e9d2_46ca4ba4874d889a.txt",
+  "prompt_version": "46ca4ba4874d889a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542502-WtfOtOrFqNoC990XOlFE",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1098,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 703,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00505425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041175,
+        "upstream_inference_cost": 0.00505425,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2347
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b2fb50fe3096e9d2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any feature values, thresholds, or directional guidance, offering no actionable recourse for the applicant.\",\n    \"audit_usefulness\": \"While it identifies four binary-flagged features used by the anchor, the complete absence of rule predicates and thresholds severely limits its utility for auditing model logic.\",\n    \"clarity\": \"The list format is readable, but presenting an anchor rule purely as a list of binary weights without threshold conditions is confusing for non-experts.\",\n    \"completeness\": \"The explanation indicates which features were included in the rule but omits the actual conditions, values, and decision boundaries needed to understand the prediction.\",\n    \"concision\": \"Including multiple inactive features with zero importance creates unnecessary clutter and dilutes the useful information.\",\n    \"overall_quality\": \"The explanation suffers from a degraded rule format that drops decision thresholds and includes zero-weighted padding, resulting in low practical utility.\",\n    \"semantic_plausibility\": \"The selected active factors\u2014such as duration, installment commitment, checking status, and housing\u2014are standard, plausible drivers of credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:10.647309+00:00"
+}

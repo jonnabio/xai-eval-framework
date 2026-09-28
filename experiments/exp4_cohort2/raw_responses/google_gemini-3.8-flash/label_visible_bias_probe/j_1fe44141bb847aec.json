@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5d87ea599e9e4677",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1fe44141bb847aec",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5d87ea599e9e4677_7e76ea0807363bae.txt",
+  "prompt_version": "7e76ea0807363bae",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541765-NsZpgFYTVZOOhxWd4AEV",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1148,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 755,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0052455,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004305,
+        "upstream_inference_cost": 0.0052455,
+        "upstream_inference_prompt_cost": 0.0009405
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2402
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5d87ea599e9e4677\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local attribution weights without providing threshold guidance or feasible steps to change the prediction outcome.\",\n    \"audit_usefulness\": \"It provides valuable insight into which features drove the false negative prediction, though the presence of multiple mutually exclusive categorical dummies without baseline values complicates auditing.\",\n    \"clarity\": \"The list of raw feature-weight pairs and one-hot encoded variable names requires technical familiarity with machine learning to interpret properly.\",\n    \"completeness\": \"Ten local features and their directional influences are reported, but the actual feature values for the individual instance are omitted.\",\n    \"concision\": \"The summary is compact and conveys the top numerical attributions directly without unnecessary filler text.\",\n    \"overall_quality\": \"It serves as an adequate technical explanation of local feature contributions for an auditor, but suffers from lack of actionable guidance, missing instance feature values, and raw dummy encoding.\",\n    \"semantic_plausibility\": \"Features like high school education and craft-repair occupation negatively weighting high income are domain-plausible, though showing conflicting marital status dummies simultaneously causes slight confusion.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:55.460014+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5e42cb25919ad421",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_57d1693f50447ebd_afb6f4b93dcbea84.txt",
+  "prompt_version": "afb6f4b93dcbea84",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551696-HBUYxBOshMwaE83uindw",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 929,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00598125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00499125,
+        "upstream_inference_cost": 0.00598125,
+        "upstream_inference_prompt_cost": 0.00099
+      },
+      "is_byok": false,
+      "prompt_tokens": 1320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2651
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"While it highlights hours-per-week and education as key factors, it does not state current feature values or clear directions of change needed to alter the outcome.\",\n    \"audit_usefulness\": \"It provides marginal insight into model sensitivities by identifying hours-per-week as the dominant lever, but lacks directional details and context necessary for thorough auditing.\",\n    \"clarity\": \"The raw key-value format containing one-hot encoded variables and unscaled numbers requires technical and domain literacy to interpret.\",\n    \"completeness\": \"Only two features carry non-zero weights while eight listed features are zero, giving an incomplete view of the factors driving the model's decision.\",\n    \"concision\": \"Listing multiple features with 0.0000 importance pads the explanation without providing informative value.\",\n    \"overall_quality\": \"The explanation is weak because converting counterfactuals into raw factor magnitudes omits the actionable changes DiCE is meant to deliver, while including uninformative zero-value features.\",\n    \"semantic_plausibility\": \"Working hours and education levels are believable primary drivers of income classification in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:28:25.596463+00:00"
+}

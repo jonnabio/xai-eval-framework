@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_96a49789fd544dc6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_44c1e011120b2dd5_16ecb79463d202cd.txt",
+  "prompt_version": "16ecb79463d202cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539023-ATtW5PyetxT3pQfUxXVu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003833,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003833,
+        "upstream_inference_prompt_cost": 0.001218
+      },
+      "is_byok": false,
+      "prompt_tokens": 1218,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1741
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on these values. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"The SHAP values and their directions (positive/negative) enable an auditor to inspect which morphological features drove the prediction and their relative importance, supporting investigation of model logic and potential bias in radius/perimeter weighting.\",\n    \"clarity\": \"The format is a simple ranked list of feature names with numerical SHAP values, which is clear in structure but lacks contextual explanation of what negative/positive contributions mean or how they relate to the prediction class.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with their SHAP contributions, which captures the main decision factors; however, it omits the base prediction probability, feature values, and thresholds that would complete the local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and their SHAP values without extraneous text, making efficient use of the 82 tokens available.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks interpretability for non-experts and provides no actionable guidance; it serves model inspection well but falls short of supporting clinical or user-facing decision review.\",\n    \"semantic_plausibility\": \"The dominance of radius, perimeter, and area features in breast cancer diagnosis is consistent with domain knowledge, and the negative contributions of worst-case morphological features aligning with a benign prediction (class 0) is plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:09.647658+00:00"
+}

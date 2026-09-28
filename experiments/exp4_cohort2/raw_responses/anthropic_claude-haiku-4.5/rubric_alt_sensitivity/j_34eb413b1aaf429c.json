@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_34eb413b1aaf429c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c697ae24ec5760fd_05e2e64c6b6c24a6.txt",
+  "prompt_version": "05e2e64c6b6c24a6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544609-6vkHL7CYKP6PWnCj4vmW",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 555,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004073,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002775,
+        "upstream_inference_cost": 0.004073,
+        "upstream_inference_prompt_cost": 0.001298
+      },
+      "is_byok": false,
+      "prompt_tokens": 1298,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1853
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user would not know whether to improve checking account status, employment history, or other factors to reverse the denial decision.\",\n    \"audit_usefulness\": \"The SHAP values show which features pushed the model toward rejection, but the low fidelity (0.40) and high faithfulness gap (0.20) suggest the explanation may not accurately represent the model's actual decision logic. This undermines confidence in using it for bias detection.\",\n    \"clarity\": \"The format is technical (feature names with SHAP values) and assumes familiarity with credit scoring terminology and SHAP methodology. Non-technical stakeholders would struggle to interpret what 'checking_status_no checking: -0.1119' means in practical terms.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, but with sparsity of 0.84, many features are excluded. For a false negative (should approve but denied), understanding why positive factors were outweighed would strengthen completeness.\",\n    \"concision\": \"The explanation is compact at 80 tokens and avoids redundancy. Each feature-value pair is necessary information, though the format is dense.\",\n    \"overall_quality\": \"The explanation is a false negative case with moderate technical metrics (fidelity 0.40 is concerning). While SHAP provides interpretable contributions, the low fidelity and lack of actionable guidance limit practical utility for credit decision review.\",\n    \"semantic_plausibility\": \"The negative contributions from 'no checking account' and 'rent housing' align with credit risk intuition. However, the model's rejection despite some positive factors (checking_status_>=200) is not fully explained, raising questions about the decision's coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:30:15.629146+00:00"
+}

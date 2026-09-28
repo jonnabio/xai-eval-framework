@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2b79c2fe77a3c762",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e564a6093e40672d_fcb9bd011d47ce31.txt",
+  "prompt_version": "fcb9bd011d47ce31",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545558-iH5KEcwBbWEk3Fki0zvT",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 956,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 528,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00452475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003585,
+        "upstream_inference_cost": 0.00452475,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2209
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary feature indicators without values, thresholds, or directional guidance, offering no actionable recourse.\",\n    \"audit_usefulness\": \"While it highlights features deemed relevant by the explainer, the lack of rule conditions, directionality, and low fidelity (0.39) severely limits its utility for auditing.\",\n    \"clarity\": \"The output is presented as an uncontextualized list of feature names with uniform 1.0000 or 0.0000 scores, making it difficult for non-experts to interpret.\",\n    \"completeness\": \"The explanation lacks the actual rule predicates and feature values that define an anchor, omitting critical context about how the decision was reached.\",\n    \"concision\": \"The token length is short, but listing redundant one-hot categories with identical weights conveys minimal useful information per token.\",\n    \"overall_quality\": \"The explanation fails to convey meaningful decision boundaries or rules, reducing Anchors' intended predicate structure to a flat, ambiguous feature mask.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting conflicting one-hot categories like 'education_10th' and 'education_7th-8th' with uniform weight is confusing and semantically awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:46:05.992920+00:00"
+}

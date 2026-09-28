@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ff16b019cbd8f30f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6af7798c2cb4bb08_fcb45c90dd3f3f01.txt",
+  "prompt_version": "fcb45c90dd3f3f01",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538850-nrAN3Ycqb9o64OLtAi1G",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.00296325,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1551
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few influential features, but it does not translate them into concrete recourse or next steps. A user cannot tell what specific change would increase the predicted class probability.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it lists local feature contributions with signs, allowing inspection of which attributes pushed the prediction down or up. However, it does not provide enough narrative context or comparison to support deeper error or bias analysis.\",\n    \"clarity\": \"The format is readable and the feature list is straightforward, but the notation and one-hot encoded variables may be hard for a non-expert to interpret fully. It is understandable to a technically literate reader more than to a general audience.\",\n    \"completeness\": \"The explanation covers the main local drivers and their directional effects, but it omits the baseline value, the predicted probability, and how the top factors combine to produce the final decision. That leaves the local decision context only partially reconstructed.\",\n    \"concision\": \"It is compact and mostly free of redundancy, with a dense list of the most important SHAP factors. The brevity is appropriate for the amount of information provided.\",\n    \"overall_quality\": \"This is a solid technical explanation with good local feature attribution and strong sparsity/stability, but it is limited in interpretability for non-experts and offers little decision support. Overall it is useful for inspection, though not especially rich or actionable.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, and the directions are consistent with typical credit risk intuition, such as checking status and savings status being important. Nothing appears contradictory or implausible in the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:13.812422+00:00"
+}

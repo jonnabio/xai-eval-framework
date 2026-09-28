@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3b6da097a62f5e5b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d3748ef854fdb49f_57f473a42a85d7e8.txt",
+  "prompt_version": "57f473a42a85d7e8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790550926-iYQbMHl17Om1hps0mlVB",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 520,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00436275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00337125,
+        "upstream_inference_cost": 0.00436275,
+        "upstream_inference_prompt_cost": 0.0009915
+      },
+      "is_byok": false,
+      "prompt_tokens": 1322,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2221
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs raw local feature attribution weights without showing baseline values, actual feature values, or recommendations for altering the outcome.\",\n    \"audit_usefulness\": \"It provides clear feature attribution weights, allowing an auditor to see how sensitive attributes like sex and marital status contribute to the prediction alongside education and occupation.\",\n    \"clarity\": \"The list format using encoded feature names and raw attribution coefficients requires technical literacy to interpret properly.\",\n    \"completeness\": \"It reports the top ten local feature contributions, covering the primary drivers of the linear decision, though it omits feature values.\",\n    \"concision\": \"The text is very compact, presenting only the feature names and their associated contribution values without filler.\",\n    \"overall_quality\": \"A solid, standard local attribution summary that clearly details model drivers, tempered by the lack of feature values and lay-accessible phrasing.\",\n    \"semantic_plausibility\": \"High education levels, professional occupations, and age are well-established indicators of higher income in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:15:32.525504+00:00"
+}

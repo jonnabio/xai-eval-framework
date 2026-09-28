@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0bd98a9c9ae3c1b2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e9eba60d9edc4d8a_4bcf426ccc95842c.txt",
+  "prompt_version": "4bcf426ccc95842c",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542756-y0IsG4j9Gbq8hfG0rJTt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002487,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016335,
+        "upstream_inference_cost": 0.002487,
+        "upstream_inference_prompt_cost": 0.0008535
+      },
+      "is_byok": false,
+      "prompt_tokens": 1138,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1501
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists influential features but gives no concrete way to change the prediction or what threshold would matter.\",\n    \"audit_usefulness\": \"The ranked local feature attributions are useful for inspecting which variables drove this false negative, though they do not explain interactions or global bias.\",\n    \"clarity\": \"The feature names and positive/negative contributions are straightforward, but understanding their exact effect still requires some familiarity with SHAP and the medical domain.\",\n    \"completeness\": \"It provides the main local contributors, but not enough context to fully explain why the model missed the positive case or how the factors combine.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with a concise ranked list of the top local factors.\",\n    \"overall_quality\": \"A solid SHAP summary for a single prediction: it is readable and useful, but not complete enough to fully diagnose this false negative.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible drivers of a malignancy prediction, and the mix of positive and negative contributions is consistent with a local feature-attribution explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:18.564674+00:00"
+}

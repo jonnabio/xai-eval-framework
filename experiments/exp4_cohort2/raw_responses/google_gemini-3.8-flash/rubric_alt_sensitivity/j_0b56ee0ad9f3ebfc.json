@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae4b94d300defe9b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0b56ee0ad9f3ebfc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ae4b94d300defe9b_7cf898fcdd07f594.txt",
+  "prompt_version": "7cf898fcdd07f594",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549954-RHtdb0AtONVET0HHRYl1",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 984,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 615,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00467925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00369,
+        "upstream_inference_cost": 0.00467925,
+        "upstream_inference_prompt_cost": 0.00098925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1319,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2303
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ae4b94d300defe9b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only shows feature coefficients without the actual input values or actionable thresholds, leaving changes merely implied.\",\n    \"audit_usefulness\": \"It offers insight into which features pushed the model toward this false positive prediction, though the moderate fidelity limits complete auditing reliability.\",\n    \"clarity\": \"The raw feature strings, one-hot dummy variables, and signed floating-point weights are difficult for a layperson to interpret.\",\n    \"completeness\": \"The top 10 local factors provide the primary drivers of the prediction, but omitting the instance's specific feature values limits context.\",\n    \"concision\": \"The text is compact and directly presents the key factors without extraneous filler.\",\n    \"overall_quality\": \"A serviceable local feature attribution that outlines the main model drivers, but is held back by technical formatting and lack of input feature values.\",\n    \"semantic_plausibility\": \"The sign and magnitude of the weights align reasonably well with standard domain dynamics for income prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:59:22.351911+00:00"
+}

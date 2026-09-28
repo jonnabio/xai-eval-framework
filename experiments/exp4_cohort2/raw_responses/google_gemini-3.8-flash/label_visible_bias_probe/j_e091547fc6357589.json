@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_e091547fc6357589",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3e006f8c0e7512b1_26ff424cdfa1d4dd.txt",
+  "prompt_version": "26ff424cdfa1d4dd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541350-IsBtlDxud3sdCZ7ejjzD",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1084,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 686,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00500625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004065,
+        "upstream_inference_cost": 0.00500625,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2339
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists purely descriptive SHAP values without feature values or prescriptive guidance for changing the outcome.\",\n    \"audit_usefulness\": \"It reveals which features drove the false negative prediction, but the omission of actual feature values makes it difficult to verify whether one-hot indicators were active or inactive.\",\n    \"clarity\": \"The list of raw feature attribution values and one-hot encoded column names requires technical familiarity to interpret properly.\",\n    \"completeness\": \"The top ten local factors provide a broad overview of the model's push factors, though baseline values and total probability offsets are omitted.\",\n    \"concision\": \"The explanation is presented as a dense, direct list of feature attributions without unnecessary filler.\",\n    \"overall_quality\": \"This is an acceptable technical summary of SHAP attributions that is informative for debugging, despite lacking actionable guidance and feature values.\",\n    \"semantic_plausibility\": \"The directionality of some weights (such as positive contributions from never-married or negative pushes from professional specialty) appears counterintuitive without knowing whether the binary indicators were 0 or 1.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:00.075592+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5b51b7bea2839fdf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_902d690264149a09_521d2ecc46286163.txt",
+  "prompt_version": "521d2ecc46286163",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541766-QkTVIjkyNLXzmEOJxQS5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002973,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.002973,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse steps or decision-review guidance. It only lists influential features, so a user cannot tell what to change or verify next.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it exposes local feature contributions and the model appears to rely on sensible Adult dataset attributes. However, the low fidelity and weak sparsity limit confidence that it accurately reflects the model's true decision process.\",\n    \"clarity\": \"The output is readable and compact, with feature names and signed SHAP values presented in a straightforward list. A non-expert may still struggle with the meaning of SHAP magnitudes and one-hot encoded fields, but the structure is clear.\",\n    \"completeness\": \"It covers several top local factors, including education, work status, and marital status, which are relevant to the Adult dataset. Still, it does not explain how these combine to produce the false negative or show the prediction direction in plain language.\",\n    \"concision\": \"The explanation is brief and mostly free of redundancy, fitting many feature attributions into few tokens. It is somewhat dense, but that density is appropriate for the amount of information provided.\",\n    \"overall_quality\": \"This is a moderately useful local explanation: it is understandable and gives some audit signal, but it is not very actionable and only partially faithful to the model. As a result, it provides limited support for fully understanding the false negative prediction.\",\n    \"semantic_plausibility\": \"The cited features are plausible drivers for an Adult-income classifier, and their directionality is not obviously contradictory. The presence of multiple education and marital-status features is consistent with the domain, though the exact influence is not fully interpretable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:48.296969+00:00"
+}

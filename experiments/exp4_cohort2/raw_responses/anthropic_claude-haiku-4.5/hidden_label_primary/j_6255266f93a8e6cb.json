@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_679cae8cfc0b290c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6255266f93a8e6cb",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_679cae8cfc0b290c_0d12b36368296bf2.txt",
+  "prompt_version": "0d12b36368296bf2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541098-Jv0VoTHFjOhefb6i6qXJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004124,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0029,
+        "upstream_inference_cost": 0.004124,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1804
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_679cae8cfc0b290c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies education-num as the dominant factor but provides no guidance on what changes would alter the prediction or how to act on this insight. No recourse suggestions or next steps are offered.\",\n    \"audit_usefulness\": \"The normalized weights and near-zero values for most features support model inspection, but the extremely sparse explanation (only one meaningful feature) raises concerns about whether DICE captured the full decision logic. The high faithfulness_gap (0.087) suggests potential fidelity issues.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with weights\u2014but lacks context about what these weights mean, why education-num dominates, or how they drive the prediction toward class 1. A non-expert would struggle to interpret the significance.\",\n    \"completeness\": \"The explanation is severely incomplete; nine of ten features have zero weight, which is implausible for a logistic regression model and suggests DICE may have failed to identify important counterfactual drivers. Critical decision context is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights in minimal space. However, brevity here comes at the cost of informativeness rather than optimizing the signal-to-noise ratio.\",\n    \"overall_quality\": \"The explanation suffers from low fidelity (0.479), extreme sparsity (0.009), and implausible feature weights that suggest the DICE method did not converge to a meaningful counterfactual. While technically formatted correctly, it provides limited actionable or auditable insight.\",\n    \"semantic_plausibility\": \"In the adult income dataset, education is a known predictor of income, making education-num's dominance plausible; however, the near-zero weights for all other features\u2014including age, hours-per-week, and workclass\u2014contradicts domain knowledge and suggests the explanation is incomplete or artifacts of the DICE algorithm.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:31:44.787034+00:00"
+}

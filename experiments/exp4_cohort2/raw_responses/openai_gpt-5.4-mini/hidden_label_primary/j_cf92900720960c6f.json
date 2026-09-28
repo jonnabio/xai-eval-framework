@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8ce491005c0b4780",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cf92900720960c6f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_8ce491005c0b4780_8c05a388f05fc561.txt",
+  "prompt_version": "8c05a388f05fc561",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540334-loG3mbKGDX6yaWBF9CMD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.00298275,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8ce491005c0b4780\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a list of local factor names and binary-like values. A user cannot tell what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It gives some indication of which features were considered locally important, which is mildly useful for inspection. However, the near-binary presentation and lack of directionality or thresholds limit its value for diagnosing model behavior or bias.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would not understand whether these are feature attributions, rule conditions, or satisfaction indicators.\",\n    \"completeness\": \"It mentions several relevant breast cancer features, but it does not explain how they combine to support the negative prediction or which features actually drove the decision most strongly. The explanation is therefore only partially informative for this specific case.\",\n    \"concision\": \"The explanation is very compact and avoids unnecessary prose, but it is also sparse to the point of losing important interpretive detail. It is reasonably concise, though not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a modestly useful anchor-style summary that hints at local factors but does not make the decision logic transparent. Its main weaknesses are the lack of interpretability of the numeric values and the absence of actionable or directional information.\",\n    \"semantic_plausibility\": \"The listed features are plausible for a breast cancer classifier, and the explanation format is consistent with an anchors-based output. Still, the repeated 0.0000/1.0000 values without context make the local story feel only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:18:58.176796+00:00"
+}

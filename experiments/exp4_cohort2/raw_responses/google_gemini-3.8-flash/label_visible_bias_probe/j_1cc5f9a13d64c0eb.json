@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2fb8d841944fa76b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1cc5f9a13d64c0eb",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2fb8d841944fa76b_b0b027d8fecc0c12.txt",
+  "prompt_version": "b0b027d8fecc0c12",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546020-Dn0NqbUj3jRIkJgL9g7z",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 643,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00485775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039225,
+        "upstream_inference_cost": 0.00485775,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2293
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2fb8d841944fa76b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary indicators without actionable guidance, directions of change, or clear thresholds for recourse.\",\n    \"audit_usefulness\": \"While it shows which one-hot features were selected by the explainer, the presence of mutually exclusive categories and zero-weighted features complicates auditing.\",\n    \"clarity\": \"The raw feature string with indicator weights (1.0000 vs 0.0000) is confusing for non-experts, especially without rule operators.\",\n    \"completeness\": \"It omits the relational predicates and numerical cutoffs characteristic of Anchors rules, showing only an unranked list of selected features.\",\n    \"concision\": \"Listing multiple zero-valued features that contribute nothing wastes space and creates visual clutter.\",\n    \"overall_quality\": \"Overall quality is poor because the anchor explanation has been reduced to binary feature flags with zero weights and contradictory categorical states.\",\n    \"semantic_plausibility\": \"Simultaneously flagging both 'savings_status_<100' and 'savings_status_no known savings' as active (1.0000) is semantically contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:53:48.859242+00:00"
+}

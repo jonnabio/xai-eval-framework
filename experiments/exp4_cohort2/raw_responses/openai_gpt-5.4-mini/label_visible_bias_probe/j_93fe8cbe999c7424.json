@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_93fe8cbe999c7424",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6bb167d1c81d8a5_83026c3e5b9ce4c5.txt",
+  "prompt_version": "83026c3e5b9ce4c5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542024-AtNxQgNyDzC0PwbbQ5En",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030255,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022365,
+        "upstream_inference_cost": 0.0030255,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1549
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not suggest any concrete next step, recourse, or threshold for review. A user cannot tell what to change or check to alter the prediction.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it exposes the strongest local SHAP drivers and their signs, which can help inspect why the model predicted class 1. However, it lacks enough context about the baseline, feature values, or counterfactual comparison to fully diagnose model behavior.\",\n    \"clarity\": \"The ranking of top factors is easy to read, but the meaning of positive versus negative SHAP values is not explained in plain language. A non-expert would likely need some familiarity with SHAP and the breast cancer feature set to interpret it correctly.\",\n    \"completeness\": \"The explanation covers several top local contributors, but it does not provide the underlying feature values, prediction threshold, or a plain-language synthesis of why the model chose class 1. For a false positive case, that missing context limits understanding of the specific decision.\",\n    \"concision\": \"It is compact and contains mostly signal rather than filler, with a concise list of the main contributing features. The format is efficient, though somewhat terse for someone trying to understand the decision.\",\n    \"overall_quality\": \"This is a reasonably informative local explanation for an expert, but it is not very accessible or actionable. Its main strength is identifying feature contributions, while its main weakness is the lack of interpretive context and decision support.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and their small SHAP attributions are plausible for a random forest classifier on this dataset. The mix of positive and negative contributions is also coherent with a local explanation for a false positive prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:06.680652+00:00"
+}

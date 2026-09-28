@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f470d0f4974a956b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e4a3c652adf1d046_9f42f151467a8105.txt",
+  "prompt_version": "9f42f151467a8105",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549570-OByIU6fSB4CdsRZYrVbq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 802,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00547275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0044925,
+        "upstream_inference_cost": 0.00547275,
+        "upstream_inference_prompt_cost": 0.00098025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1307,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2505
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify feature values, thresholds, or directional guidance on what an individual could modify to change the prediction.\",\n    \"audit_usefulness\": \"It highlights the subset of features that triggered the false-positive prediction, but omitting the underlying values and decision thresholds limits deeper debugging.\",\n    \"clarity\": \"The list of features with binary indicators is relatively clean, though an untrained user will not clearly understand what the 1.0000 and 0.0000 values signify.\",\n    \"completeness\": \"Only feature presence in the anchor is indicated; the actual predicate rules, conditions, and instance values are missing.\",\n    \"concision\": \"Listing features with 0.0000 weights adds unnecessary clutter to an already sparse anchor rule.\",\n    \"overall_quality\": \"The explanation is weak because stripping the anchor conditions down to binary weights obscures the actual decision logic.\",\n    \"semantic_plausibility\": \"Highlighting age, education level, hours worked, managerial status, and marital status aligns well with standard drivers of high income in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:53:00.729454+00:00"
+}

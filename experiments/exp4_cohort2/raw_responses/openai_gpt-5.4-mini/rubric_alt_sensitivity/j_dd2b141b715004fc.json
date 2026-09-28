@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dd2b141b715004fc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a63737c16fa6edb_11d628d55dc485da.txt",
+  "prompt_version": "11d628d55dc485da",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543113-qVwVf1pG8RURKOxRxuG7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002514,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001656,
+        "upstream_inference_cost": 0.002514,
+        "upstream_inference_prompt_cost": 0.000858
+      },
+      "is_byok": false,
+      "prompt_tokens": 1144,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1512
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists weighted features and does not say what changes would move the prediction toward the other class.\",\n    \"audit_usefulness\": \"It gives a rough view of local feature influence, but the low fidelity and stability metrics limit how much an auditor can trust it for diagnosing model behavior.\",\n    \"clarity\": \"The feature names and signs are understandable to a technically literate reader, but the meaning of the small numeric weights is not intuitive for non-experts.\",\n    \"completeness\": \"It identifies several local factors, but it does not provide a full account of why the model predicted the negative class or how the factors combine.\",\n    \"concision\": \"The list is fairly compact and information-dense, though the many similarly small coefficients make it slightly harder to read.\",\n    \"overall_quality\": \"It is a usable but limited local explanation: concise and somewhat informative, but weak in reliability, completeness, and practical insight.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult-income prediction, and the signs are not obviously inconsistent with the instance, though the tiny magnitudes make the story weak.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:15.394829+00:00"
+}

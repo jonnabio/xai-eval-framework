@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d83ea0f8f1692d1a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_70f1fb89c6075a2b_a4f67f22c7fccecf.txt",
+  "prompt_version": "a4f67f22c7fccecf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541410-xOa9tqkHNcWnx2u41Tfw",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 555,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004003,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002775,
+        "upstream_inference_cost": 0.004003,
+        "upstream_inference_prompt_cost": 0.001228
+      },
+      "is_byok": false,
+      "prompt_tokens": 1228,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1783
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to change the prediction, what actions are feasible, or how the instance differs from counterfactuals. DICE should generate actionable counterfactual examples, which are absent here.\",\n    \"audit_usefulness\": \"The output shows only feature weights with many zero values, offering limited insight into model decision logic or potential biases. The high stability (0.118) and poor fidelity (-0.013) suggest the explanation may not reliably reflect actual model behavior.\",\n    \"clarity\": \"The format is a simple list of feature-weight pairs that is easy to parse syntactically, but lacks narrative context explaining what these weights mean or how they drive the prediction toward class 1.\",\n    \"completeness\": \"The explanation identifies two non-zero factors (education_1st-4th and education_12th) but omits the actual instance values, counterfactual targets, and the reasoning connecting these features to the prediction. Critical DICE outputs (counterfactual examples) are missing.\",\n    \"concision\": \"The explanation is compact in token count but contains many zero-valued features that add no information. A more concise presentation would exclude features with zero weight.\",\n    \"overall_quality\": \"This explanation fails to deliver the core value of DICE\u2014actionable counterfactual examples showing how to change the prediction. It reads as a partial feature importance ranking rather than a contrastive explanation, undermining its utility for decision support and auditing.\",\n    \"semantic_plausibility\": \"Education level influencing income prediction is plausible in the adult dataset context, but the absence of counterfactual examples and the poor technical metrics (negative fidelity, low stability) raise concerns about whether this explanation accurately represents the model's actual decision process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:58.443004+00:00"
+}

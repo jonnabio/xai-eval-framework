@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4fedb8dd18997085",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e4a3c652adf1d046_35c884742e46f3de.txt",
+  "prompt_version": "35c884742e46f3de",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542066-2yOnkkyS7jgq62hWM3Wh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.00294,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or decision-review steps. It only lists local factors with binary weights, so a user cannot tell what could change the prediction.\",\n    \"audit_usefulness\": \"It provides a brief set of feature indicators that can help identify which variables the explainer considered locally. However, it lacks directionality, actual contributions, and enough context to meaningfully audit why this false positive occurred.\",\n    \"clarity\": \"The text is short and mechanically readable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand whether these are weights, rule activations, or importance scores.\",\n    \"completeness\": \"The explanation names a few features, but it does not explain how they combine to produce the predicted positive class or why the model was wrong relative to the true label. Key local decision context is missing.\",\n    \"concision\": \"It is very compact and not padded, but the compactness comes at the expense of interpretability. The amount of useful information per word is limited because the numbers are unlabeled and repetitive.\",\n    \"overall_quality\": \"Overall, this is a shallow and only partially informative explanation: it is readable but does not adequately explain the model's decision or support review and recourse. Its usefulness is limited by missing semantics and weak local insight.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, especially age, education, occupation, and relationship status. However, the 1.0000/0.0000 pattern is semantically unclear and does not convincingly describe a natural local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:49.034315+00:00"
+}

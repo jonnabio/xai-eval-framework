@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7828930153eaf25f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e7e69c923616f0ea",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7828930153eaf25f_a3fa5753af7a6e06.txt",
+  "prompt_version": "a3fa5753af7a6e06",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542549-uwT8NzZ5EeEYuubGK9go",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.00306975,
+        "upstream_inference_prompt_cost": 0.00078825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1051,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1558
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7828930153eaf25f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step, only a list of features with perfect weights. A user cannot tell what to change or why the prediction was made.\",\n    \"audit_usefulness\": \"For auditing, the output is only weakly informative because it lacks directionality, threshold logic, and any indication of how the listed features influenced the positive prediction. The very high sparsity is helpful, but the zero stability and negative fidelity reduce trust for inspection.\",\n    \"clarity\": \"The feature list is easy to read, but the meaning of repeated 1.0000 values is not explained, so a non-expert would not understand what the anchors actually imply. The format is concise but not self-explanatory.\",\n    \"completeness\": \"It names some local factors, but it does not explain which of them were supportive versus suppressive, nor how they combine to produce the positive class. Key decision context is missing, so the prediction cannot be fully understood from this explanation alone.\",\n    \"concision\": \"The explanation is short and avoids long prose, but it is also somewhat redundant and low in information density because many features are listed without interpretation. It is brief, but not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable and compact, but it lacks interpretability, actionable content, and reliable local decision insight. Poor technical quality, especially the zero stability and negative fidelity, further lowers its usefulness.\",\n    \"semantic_plausibility\": \"The listed features are plausible for an Adult-income model, and age, education, hours per week, and workclass are reasonable local factors. However, the output is semantically odd because every feature has the same score of 1.0000, which is not very meaningful as an explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:51.734501+00:00"
+}

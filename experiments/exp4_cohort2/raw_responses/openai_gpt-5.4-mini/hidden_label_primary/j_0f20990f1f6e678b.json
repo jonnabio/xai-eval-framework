@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0f20990f1f6e678b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b352dc7c29edc22c_f9329786c5b642c6.txt",
+  "prompt_version": "f9329786c5b642c6",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538582-sbR5ldgLeuSBEQYBejEA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020655,
+        "upstream_inference_cost": 0.00287025,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or decision alternatives. It only lists influential features without indicating what could be changed or reviewed next.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it identifies the strongest local SHAP drivers and their directions. However, it lacks context about feature values and how these factors compare to the model baseline, limiting deeper investigation.\",\n    \"clarity\": \"The feature list is straightforward and the sign of each contribution is easy to read. A non-expert may still find the one-hot encoded feature names somewhat opaque, but the overall structure is understandable.\",\n    \"completeness\": \"It covers several top local contributors and shows both positive and negative influences on the prediction. Still, it does not include the actual instance values, base value, or a fuller account of why this specific case was classified as positive.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information. There is little redundancy, though the one-hot feature naming slightly reduces information density for a general reader.\",\n    \"overall_quality\": \"This is a solid local explanation with reasonably good fidelity and stability, but it is only moderately interpretable to non-experts and offers limited recourse or full decision context. It is good for quick inspection rather than a complete explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and a logistic regression model, especially marital status, occupation, sex, and country. The directions are not obviously contradictory, though the presence of both related one-hot categories makes the narrative somewhat less intuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:45.275954+00:00"
+}

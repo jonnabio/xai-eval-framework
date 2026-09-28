@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c7bbd925b7be8909",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_de91280a4d84e7ca_e41fd8a7ac08bc7b.txt",
+  "prompt_version": "e41fd8a7ac08bc7b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551197-6Kps3WzePtWECILYBSHW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 564,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00466575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00367125,
+        "upstream_inference_cost": 0.00466575,
+        "upstream_inference_prompt_cost": 0.0009945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2305
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no actionable counterfactuals, threshold rules, or guidance on what values would change the negative prediction.\",\n    \"audit_usefulness\": \"It highlights that only one feature was selected by the anchor, but provides negligible insight into why the model predicted <=50K despite this feature, offering minimal auditing utility.\",\n    \"clarity\": \"The representation relies on raw feature names, one-hot encoded suffixes, and arbitrary numeric weights that are difficult for non-technical users to interpret.\",\n    \"completeness\": \"Only a single feature receives a non-zero score while all others are zero, leaving the False Negative prediction mostly unexplained.\",\n    \"concision\": \"Listing multiple features with exactly 0.0000 weight is redundant and dilutes the useful information.\",\n    \"overall_quality\": \"Overall quality is weak due to low fidelity (0.60), low stability, uninformative zero-padded features, and lack of directional clarity.\",\n    \"semantic_plausibility\": \"Being married-civilian-spouse is typically positively correlated with earning >50K, making it puzzling as the sole anchor for a prediction of <=50K without directional context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:20:05.112821+00:00"
+}

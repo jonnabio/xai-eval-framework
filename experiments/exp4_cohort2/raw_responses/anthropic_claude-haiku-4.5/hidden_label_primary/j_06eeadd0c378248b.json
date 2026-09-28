@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_06eeadd0c378248b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4deccedcca9c7800_9e2822efcab0752f.txt",
+  "prompt_version": "9e2822efcab0752f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540566-bypd2pjD7UdwwrjmZWGC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00377,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002525,
+        "upstream_inference_cost": 0.00377,
+        "upstream_inference_prompt_cost": 0.001245
+      },
+      "is_byok": false,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1750
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could be taken to change the prediction or improve outcomes; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model inspection and can help auditors identify which features drive the negative prediction, though the very small magnitudes and low fidelity (0.36) limit confidence in the explanation's reliability.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of feature names with numerical weights\u2014but requires familiarity with LIME output conventions and the adult dataset feature names to interpret meaningfully.\",\n    \"completeness\": \"The explanation covers the top 10 features by weight, but the extremely small magnitudes (all < 0.012) and low fidelity score suggest the explanation may not capture the true local decision drivers adequately.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential feature-weight pairs in a dense format appropriate for technical review.\",\n    \"overall_quality\": \"While the explanation is technically sound and auditable, the poor technical metrics (fidelity 0.36, stability 0.03, faithfulness gap 0.56) and lack of actionability substantially undermine its practical utility and trustworthiness.\",\n    \"semantic_plausibility\": \"The identified features (education, occupation, race, sex, marital status) are plausible drivers of income prediction in the adult dataset, and the negative weights align with typical income disparities, though the tiny magnitudes raise questions about actual influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:22:52.869325+00:00"
+}

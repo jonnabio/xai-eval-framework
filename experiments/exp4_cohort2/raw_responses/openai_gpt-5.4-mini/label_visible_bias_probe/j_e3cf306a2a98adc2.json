@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae4b94d300defe9b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e3cf306a2a98adc2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ae4b94d300defe9b_18685e01dc039430.txt",
+  "prompt_version": "18685e01dc039430",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542173-a1HO4BIAc8nh9LVp5J0Y",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002214,
+        "upstream_inference_cost": 0.00301275,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae4b94d300defe9b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step beyond listing factors. A user cannot easily tell what to change to affect the prediction, especially since many features are not practically actionable.\",\n    \"audit_usefulness\": \"It gives some local feature weights, which is useful for a quick check of model behavior, but the signal is limited by low fidelity and stability. It is not strong enough on its own to support a deeper audit or bias investigation.\",\n    \"clarity\": \"The feature list is readable and the positive/negative signs are easy to interpret at a basic level. However, a non-expert may still struggle because the meaning of one-hot encoded categories and small weight magnitudes is not explained.\",\n    \"completeness\": \"The explanation covers several top local contributors, including education, hours worked, marital status, relationship, occupation, age, and capital gain. It still lacks the base prediction context, feature values for the instance, and a coherent summary of why the model predicted the positive class for a true negative case.\",\n    \"concision\": \"The explanation is fairly compact and contains mostly the most relevant factors. It avoids long prose, though the raw feature list format is somewhat dense and not especially synthesized.\",\n    \"overall_quality\": \"This is a moderately useful local explanation: it is understandable and compact, but it offers limited actionable guidance and only partial support for auditing or decision review. The modest fidelity and stability metrics also weaken confidence in the explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset, and their directions are not obviously contradictory to common domain expectations. The presence of both education one-hot variants and standard demographic/work features is consistent with a LIME explanation on tabular census data.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:35.918035+00:00"
+}

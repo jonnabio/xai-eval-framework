@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_dee249f1d79bf5f1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1c525ff1deb5c1a6_65858197c9aa6ed5.txt",
+  "prompt_version": "65858197c9aa6ed5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544298-uLQZm2K29VbSZCeD4hx1",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1656,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1278,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.007143,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00621,
+        "upstream_inference_cost": 0.007143,
+        "upstream_inference_prompt_cost": 0.000933
+      },
+      "is_byok": false,
+      "prompt_tokens": 1244,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2900
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"No concrete recourse or alternative values are suggested, and marital status is generally non-actionable.\",\n    \"audit_usefulness\": \"It highlights that marital status heavily influenced the false negative prediction, but the lack of directional context or alternative drivers limits deeper diagnostic utility.\",\n    \"clarity\": \"The list of raw one-hot feature strings and numerical scores is technical and unguided for a non-expert reader.\",\n    \"completeness\": \"The explanation isolates a single feature while listing all other evaluated attributes as zero, leaving the rest of the local decision boundary unexplained.\",\n    \"concision\": \"Listing nine features with identical zero values introduces redundant noise and dilutes the informative content.\",\n    \"overall_quality\": \"Reducing counterfactual output to a sparse list dominated by zeros results in poor interpretability, offering neither actionable recourse nor sufficient model insight.\",\n    \"semantic_plausibility\": \"Marital status is empirically a primary driver of income classification in the Adult dataset, making the identified feature plausible despite the narrow scope.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:25:14.127595+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ab0f0f2d32f22ecc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7ee17e1b81806239_123d2ce1ab9c3063.txt",
+  "prompt_version": "123d2ce1ab9c3063",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543622-f5pxYojI5AzNonGAFsH1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 372,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00253425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001674,
+        "upstream_inference_cost": 0.00253425,
+        "upstream_inference_prompt_cost": 0.00086025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1147,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1519
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It lists local features but gives no concrete way to change the prediction or what feature changes would matter, so it offers little actionable guidance.\",\n    \"audit_usefulness\": \"The top local factors provide some visibility into the model's behavior, but the very small weights and low fidelity limit how useful it is for auditing bias or error.\",\n    \"clarity\": \"The feature names are fairly readable and the format is simple, but the meaning of the tiny positive and negative coefficients still requires some technical understanding.\",\n    \"completeness\": \"It shows only a handful of weak local contributors and does not explain the overall decision, especially in this false-negative case where the main reasons for the miss are not clear.\",\n    \"concision\": \"The explanation is short and mostly compact, with each listed factor contributing information and little obvious padding.\",\n    \"overall_quality\": \"It is a concise local summary, but the weak attributions and low faithfulness make it only moderately useful overall.\",\n    \"semantic_plausibility\": \"The listed factors are broadly sensible for Adult-income prediction, but the tiny magnitudes and mixed signs make the explanation only somewhat convincing for this specific instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:13:45.387535+00:00"
+}

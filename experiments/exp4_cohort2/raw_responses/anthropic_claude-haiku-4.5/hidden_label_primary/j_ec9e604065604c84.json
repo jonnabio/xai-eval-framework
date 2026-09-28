@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ec9e604065604c84",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_dc2b678dea61424b_a87338dc9dcb4af9.txt",
+  "prompt_version": "a87338dc9dcb4af9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540171-uDxiIEKuZoIJsO1dRpYE",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003749,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002525,
+        "upstream_inference_cost": 0.003749,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1729
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two education categories as anchors but provides no guidance on what actions a user could take based on this information, such as how to interpret or respond to the prediction.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction (education_7th-8th and education_Masters both at 1.0) and which have zero weight, providing some transparency into model decision logic for auditing purposes.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical weights, which is straightforward but lacks narrative context or interpretation that would help a non-expert understand what the numbers mean or why these features matter.\",\n    \"completeness\": \"The explanation identifies only two anchoring features with non-zero weights; however, the low fidelity (0.618) and stability (0.013) suggest the explanation may not fully capture the local decision boundary or be reliable.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text.\",\n    \"overall_quality\": \"While the explanation is concise and provides some audit value, the very low stability (0.013), modest fidelity (0.618), and lack of narrative clarity or actionability significantly limit its overall utility and trustworthiness.\",\n    \"semantic_plausibility\": \"The identification of education level as a key predictor in income classification is plausible and consistent with domain knowledge, though the simultaneous high weight for both 7th-8th grade and Masters education is somewhat counterintuitive without further context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:16:17.445710+00:00"
+}

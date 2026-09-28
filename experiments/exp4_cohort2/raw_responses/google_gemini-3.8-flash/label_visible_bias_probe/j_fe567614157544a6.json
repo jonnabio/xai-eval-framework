@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fe567614157544a6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_be3a619c28fb15c4_8d670b54b05b9750.txt",
+  "prompt_version": "8d670b54b05b9750",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543893-ujnxyp7xs9rUOJfELUNx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 964,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 589,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00455325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003615,
+        "upstream_inference_cost": 0.00455325,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2215
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance, presenting only feature weights without baseline values or target thresholds.\",\n    \"audit_usefulness\": \"The feature weights provide decent insight for an auditor diagnosing why the model produced a false negative, highlighting the influence of low education and missing values.\",\n    \"clarity\": \"The output is a technical list of feature attributions with one-hot encoded names and decimal weights, which requires technical familiarity to interpret.\",\n    \"completeness\": \"It provides the top 10 local contributors and their relative directions, but omits the actual instance feature values and intercept.\",\n    \"concision\": \"The presentation is compact and directly presents the top local coefficients without extraneous filler.\",\n    \"overall_quality\": \"This is an acceptable technical explanation that reliably lists local LIME contributions for debugging, though it lacks lay clarity and actionability.\",\n    \"semantic_plausibility\": \"Negative associations between low formal education or missing employment data and high income align well with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:21.190134+00:00"
+}

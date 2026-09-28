@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b667472bf8f85e0d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6d6ef32df0477323_50d7cd020c5a783e.txt",
+  "prompt_version": "50d7cd020c5a783e",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542558-cVj4mpfbERk3M5UyIhsq",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00398,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00276,
+        "upstream_inference_cost": 0.00398,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1772
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction or what actions a user should take. The numeric weights alone do not translate into concrete, feasible recourse steps.\",\n    \"audit_usefulness\": \"The explanation shows which features DICE identified as important (education-num dominates), but the low fidelity (0.63) and high faithfulness gap (0.11) undermine confidence in the model's actual decision logic. Auditors cannot reliably use this to investigate bias or errors.\",\n    \"clarity\": \"The format is a simple list of feature names and numeric weights, which is straightforward to parse but lacks narrative context or interpretation. A non-expert reader would struggle to understand what these numbers mean or why they matter.\",\n    \"completeness\": \"The explanation identifies education-num as the primary driver and notes that most other features have zero weight, but it does not explain the instance's actual feature values, the decision boundary, or why this particular combination led to the false positive prediction.\",\n    \"concision\": \"The explanation is compact in token count (80 tokens) and avoids redundancy, efficiently listing features and weights. However, the many zero-weight features add little informational value and could be omitted.\",\n    \"overall_quality\": \"The explanation is a bare-bones feature importance ranking that lacks narrative, context, and actionability. Combined with poor fidelity and a false positive prediction, it provides minimal insight into the model's reasoning or how to address the error.\",\n    \"semantic_plausibility\": \"In the adult income domain, education level is a known predictor of income, so education-num being the top factor is plausible. However, the explanation does not clarify the instance's actual education value or reconcile why this led to an incorrect positive prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:56:04.296774+00:00"
+}

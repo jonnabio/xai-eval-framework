@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e99f0237b436cc3b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_3dcff00cf090df69.txt",
+  "prompt_version": "3dcff00cf090df69",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543242-27OjMvk5iiuAl6xk7s4L",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002613,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001764,
+        "upstream_inference_cost": 0.002613,
+        "upstream_inference_prompt_cost": 0.000849
+      },
+      "is_byok": false,
+      "prompt_tokens": 1132,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It gives only feature values from a counterfactual-style list, not specific changes that would likely alter the prediction, so it is not very actionable.\",\n    \"audit_usefulness\": \"The listed local factors are sparse and partly zero-valued, which offers only limited insight into the model\u2019s decision logic or potential bias patterns.\",\n    \"clarity\": \"The output is short and readable, but terms like 'top local factors' and the raw feature names require some technical or domain knowledge to interpret fully.\",\n    \"completeness\": \"It mentions only a couple of nonzero factors and several zero-valued ones, so it does not provide a complete account of why this false positive occurred.\",\n    \"concision\": \"The explanation is quite brief, but several of the listed zero-valued features add little useful information, so the content efficiency is only moderate.\",\n    \"overall_quality\": \"It is a usable but weak explanation: it is short and somewhat stable, yet it lacks depth, interpretability, and a convincing account of the false positive.\",\n    \"semantic_plausibility\": \"Education and race can plausibly affect Adult-income predictions, but the inclusion of many zero-valued factors and the very large education-num shift make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:25.498076+00:00"
+}

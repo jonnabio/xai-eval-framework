@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3d663bc47eb8d69",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d9c05edd45877ff8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d3d663bc47eb8d69_cc7d886133cd2ed5.txt",
+  "prompt_version": "cc7d886133cd2ed5",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542021-8KStIMUz1rHjcz83KDLW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00305625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022635,
+        "upstream_inference_cost": 0.00305625,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d3d663bc47eb8d69\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete next step or recourse for the user. It only lists influential features and their SHAP values, without indicating what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it reveals which variables pushed the model toward the negative class and by how much. However, it lacks comparison to the baseline, threshold context, and a clearer link to the false-negative outcome, limiting deeper investigation.\",\n    \"clarity\": \"The output is fairly easy to read for someone familiar with feature attribution, since it lists feature names with signed contributions. For a non-expert, the meaning of negative versus positive SHAP values is not explained, so clarity is only moderate.\",\n    \"completeness\": \"The explanation covers the top local factors and gives a compact view of their contributions, which helps understand the prediction direction. Still, it omits the baseline value, the decision threshold, class probabilities, and any narrative linking the factors to the false negative.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, making efficient use of a short token budget. It provides a useful ranked list without unnecessary wording.\",\n    \"overall_quality\": \"Overall, this is a decent local attribution summary with reasonable interpretability and compactness, but it is limited by the absence of context and actionable guidance. Because the model made a false negative, the explanation is only partially helpful for diagnosing why the positive case was missed.\",\n    \"semantic_plausibility\": \"The cited breast cancer features are medically plausible drivers of a benign-versus-malignant prediction, and the mix of positive and negative contributions is coherent. The signs are not intrinsically contradictory, though the explanation alone cannot verify whether they are directionally consistent with the specific class labeling.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:04.164850+00:00"
+}

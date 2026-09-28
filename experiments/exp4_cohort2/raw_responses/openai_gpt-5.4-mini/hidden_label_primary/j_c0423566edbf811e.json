@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c0423566edbf811e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3118a0f719dfdef8_aa319ab18a53c58a.txt",
+  "prompt_version": "aa319ab18a53c58a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538709-OzJvNtYET0Axax8zrlz8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003138,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002349,
+        "upstream_inference_cost": 0.003138,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1574
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into specific recourse steps or decision guidance. A user cannot tell what feasible changes, if any, would reduce the chance of this outcome.\",\n    \"audit_usefulness\": \"It is useful for local inspection because it shows the main SHAP contributors and their directions, which helps identify which variables the model relied on. However, it lacks baseline context, magnitudes relative to other cases, and any link to whether the positive prediction was appropriate for this false-positive instance.\",\n    \"clarity\": \"The wording is concise and mostly understandable, but the raw feature names and numeric SHAP values may still require some familiarity with the dataset. It is clearer than a dense technical dump, though not fully accessible to a non-expert reader.\",\n    \"completeness\": \"The explanation covers the top local drivers, but it does not explain the overall prediction mechanism, the reference value, or how these contributions combine to produce class 1. Because the case is a false positive, the absence of counterfactual or threshold context limits understanding of why the model erred.\",\n    \"concision\": \"It is compact and lists only the top factors, so there is little redundancy. At the same time, the brief format sacrifices interpretive context that would make the numbers easier to use.\",\n    \"overall_quality\": \"This is a reasonably good local SHAP summary with clear feature attribution, but it remains mostly descriptive rather than explanatory or actionable. Its usefulness is moderate for inspection, yet limited by missing context and weak support for recourse or error analysis.\",\n    \"semantic_plausibility\": \"The listed features are plausible breast-cancer predictors, and the mix of positive and negative contributions is consistent with a real SHAP explanation. The values and signs look coherent with a local contribution summary, even though no label is available to verify correctness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:51:52.607040+00:00"
+}

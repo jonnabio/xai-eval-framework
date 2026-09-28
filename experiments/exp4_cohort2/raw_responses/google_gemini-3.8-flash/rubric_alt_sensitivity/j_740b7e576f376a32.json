@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5d87ea599e9e4677",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_740b7e576f376a32",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_5d87ea599e9e4677_8f018be3d803dbb8.txt",
+  "prompt_version": "8f018be3d803dbb8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547067-Rl5g1rrSYtR9KkxxOn31",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 920,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006132,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0051375,
+        "upstream_inference_cost": 0.006132,
+        "upstream_inference_prompt_cost": 0.0009945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2696
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5d87ea599e9e4677\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse; it merely reports linear weights on primarily immutable or categorical attributes (such as age, sex, and marital status) without concrete steps to alter the outcome.\",\n    \"audit_usefulness\": \"The listing gives auditors insight into model sensitivities\u2014such as negative weights on specific demographic and occupational indicators\u2014though the presence of multiple mutually exclusive dummy variables complicates precise error analysis for this false negative.\",\n    \"clarity\": \"A non-technical user would struggle to interpret the raw signed numerical coefficients and might be confused by seeing contradictory one-hot categories like 'Never-married' alongside 'Married-civ-spouse'.\",\n    \"completeness\": \"The top 10 local factors provide a high-level picture of feature contributions, but the absence of the instance's actual feature values limits full understanding of the local decision.\",\n    \"concision\": \"The explanation is presented as a dense, compact list of feature-weight pairs with no conversational filler.\",\n    \"overall_quality\": \"The explanation provides a serviceable baseline view of LIME feature weights for this false negative instance, but lacks instance feature values and actionable insight.\",\n    \"semantic_plausibility\": \"The directions of influence generally align with domain knowledge regarding income predictors (e.g., education level and occupation lowering income likelihood), though dummy encoding artifacts slightly detract from plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:11:18.159169+00:00"
+}

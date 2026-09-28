@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5b0508f94996219e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_052659e044864140_c82a2fb99f180942.txt",
+  "prompt_version": "c82a2fb99f180942",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538994-kAr3cKd4qBkQ5mbEyc7Z",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028995,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.0028995,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It only lists influential features and their SHAP values, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it identifies the strongest local contributors and their directions. However, it does not explain the decision threshold, feature values, or why these factors mattered in the broader model behavior.\",\n    \"clarity\": \"The feature names and sign conventions are presented in a simple list that is easy to scan. A non-expert may still need prior knowledge of breast cancer features and SHAP signs to interpret the result fully.\",\n    \"completeness\": \"The explanation covers the top local drivers of the prediction and includes both positive and negative contributions. It lacks the underlying feature values, baseline comparison, and any summary of how these factors combined to yield the final class 0 prediction.\",\n    \"concision\": \"The output is compact and information-dense, with no obvious filler. It gives a short ranked list of factors, which is efficient for a local explanation.\",\n    \"overall_quality\": \"This is a solid but limited SHAP explanation: it is readable, compact, and fairly stable, but it stops at attribution and does not provide enough context for recourse or deep decision understanding. Overall it is useful for inspection but only moderately informative for a standalone end user.\",\n    \"semantic_plausibility\": \"The listed features are highly plausible for a breast cancer classifier, and the negative SHAP values are consistent with a prediction of the negative class. The ranking of shape-related tumor measures also matches general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:56:37.553532+00:00"
+}

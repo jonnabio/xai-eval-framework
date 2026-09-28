@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4f96f4d65555df8d",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e609aedd2ba00de5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4f96f4d65555df8d_d35fa207b7c0a474.txt",
+  "prompt_version": "d35fa207b7c0a474",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538636-umXPKhA7SdNepxk682X3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002934,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.002934,
+        "upstream_inference_prompt_cost": 0.0007965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4f96f4d65555df8d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names and weights but gives no concrete recourse or next steps the user could take. It does not tell the user which changes might move the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which local features were considered by the anchor method, but it lacks directionality and does not explain how those factors contributed to the negative prediction. The binary 1/0 weights are also hard to interpret without the anchor semantics.\",\n    \"clarity\": \"The wording is short and readable, but the output is mostly a raw feature list rather than an explanation. A non-expert would likely not understand what the 1.0000 and 0.0000 values mean.\",\n    \"completeness\": \"It names several local factors, but it does not explain their combined effect, relative importance, or why the model predicted class 0. Key decision context is missing, especially given the false-negative setting.\",\n    \"concision\": \"The explanation is brief and contains little redundancy, but much of the content is just a terse list of attributes. It is compact, though not very information-dense in explanatory terms.\",\n    \"overall_quality\": \"Overall, this is a shallow explanation that exposes some relevant features but does not meaningfully interpret the prediction. It is only moderately useful for understanding or reviewing the model decision.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the German Credit domain, and the feature names match sensible credit variables. However, the presentation of every listed item as 1.0000 or 0.0000 is not naturally interpretable as a human-facing explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:38.480997+00:00"
+}

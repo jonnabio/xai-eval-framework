@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_443fa95e6bb9a53a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_194267970e4606b6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_443fa95e6bb9a53a_a3bb39e929d9c1fc.txt",
+  "prompt_version": "a3bb39e929d9c1fc",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539921-ASt1HNwLiq77gAHJT985",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029445,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.0029445,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1541
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_443fa95e6bb9a53a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next step a user could take. It only lists features, without indicating how changing them would affect the prediction.\",\n    \"audit_usefulness\": \"It gives some signal about which variables were involved, but the output is too generic and repetitive to meaningfully inspect model behavior. The lack of directional importance or feature values limits bias or error analysis.\",\n    \"clarity\": \"The text is easy to read syntactically, but the content is not well organized as an explanation because it is just a list of feature names with identical scores. A non-expert would likely not understand why these factors matter or how to interpret the numbers.\",\n    \"completeness\": \"It includes several candidate local factors, but it omits the actual feature values and provides no indication of whether each factor supports or opposes the positive class. This is enough to hint at drivers, but not enough to understand the specific prediction.\",\n    \"concision\": \"The explanation is short, but much of the content is low-information repetition since every listed factor has the same value. It is compact, yet not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is readable and somewhat plausible, but it lacks directional insight, actionable guidance, and sufficient detail for a robust understanding. The technical quality also appears poor given the low fidelity and zero stability.\",\n    \"semantic_plausibility\": \"The listed variables are all plausible predictors for the Adult income task, and nothing is obviously contradictory. However, the repeated 1.0000 scores for many unrelated factors make the explanation feel mechanically produced rather than semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:12:05.319967+00:00"
+}

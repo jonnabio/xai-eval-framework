@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae4b94d300defe9b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d91ffe7a271fe5af",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ae4b94d300defe9b_7cf898fcdd07f594.txt",
+  "prompt_version": "7cf898fcdd07f594",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543535-3ZJpOTngLKkQqwFVUgr5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00222975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0013725,
+        "upstream_inference_cost": 0.00222975,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1448
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_ae4b94d300defe9b\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It only lists influential features and their weights; it does not say what changes might alter the prediction or how to act on it.\",\"audit_usefulness\":\"The feature attributions give some insight into the local model logic, but the low fidelity and stability limit how much an auditor can trust it for bias or error analysis.\",\"clarity\":\"The output is a simple ranked list of familiar tabular features with signs and magnitudes, so it is mostly easy to follow for a non-expert.\",\"completeness\":\"It identifies several contributing factors, but it does not explain how they combine into the final prediction or address the misclassification relative to the true label.\",\"concision\":\"The explanation is compact and information-dense, with little padding beyond the top local factors.\",\"overall_quality\":\"Useful as a brief local summary, but weakened by modest fidelity, low stability, and the fact that it is only a feature-weight list for a false positive.\",\"semantic_plausibility\":\"The listed factors are plausible for Adult-income predictions, and the directions of influence are generally sensible for this instance.\"},\"scores\":{\"actionability\":1,\"audit_usefulness\":3,\"clarity\":4,\"completeness\":3,\"concision\":5,\"overall_quality\":3,\"semantic_plausibility\":4}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:12:17.586199+00:00"
+}

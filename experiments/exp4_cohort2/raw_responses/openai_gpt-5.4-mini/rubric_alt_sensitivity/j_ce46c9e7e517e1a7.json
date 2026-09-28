@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ce46c9e7e517e1a7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_2a63737c16fa6edb_11d628d55dc485da.txt",
+  "prompt_version": "11d628d55dc485da",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543109-MFXrXwjjyCwjOp0TbCGy",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002559,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001701,
+        "upstream_inference_cost": 0.002559,
+        "upstream_inference_prompt_cost": 0.000858
+      },
+      "is_byok": false,
+      "prompt_tokens": 1144,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature contributions; it does not suggest what changes would alter the prediction or how to act on the result.\",\n    \"audit_usefulness\": \"The ranked coefficients provide some visibility into the model's local logic, but the low fidelity and stability make it weak for deeper auditing or bias analysis.\",\n    \"clarity\": \"The feature names and plus/minus signs are understandable to a technical reader, but the small numeric values and one-hot encodings make it less accessible to non-experts.\",\n    \"completeness\": \"It includes several local factors, but it does not explain the prediction in a coherent narrative or cover the main decision drivers comprehensively.\",\n    \"concision\": \"The explanation is fairly compact and information-dense, though the long list of small-weight features offers limited additional value.\",\n    \"overall_quality\": \"It is a usable LIME summary with some insight, but the weak faithfulness, low stability, and sparse, fragmented evidence keep it from being a strong explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult income prediction, and the negative/positive contributions are broadly consistent with domain expectations for a non-income case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:11.306395+00:00"
+}

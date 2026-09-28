@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_246b71d852bf33f1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_445567f442799a48_09da8412d7a0b79c.txt",
+  "prompt_version": "09da8412d7a0b79c",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541485-2LjFeIQToBrV9V4t0EHu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00300075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.00300075,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate which changes to the applicant\u2019s profile would most affect the outcome. It is informative diagnostically, but not directly actionable for a decision subject.\",\n    \"audit_usefulness\": \"It lists the main local SHAP drivers with signed contributions, which is useful for auditing the model\u2019s behavior on this instance. However, the values are only moderately faithful and do not fully support deeper error or bias investigation by themselves.\",\n    \"clarity\": \"The output is a straightforward ranked list of features with contribution signs and magnitudes, so the structure is easy to follow. A non-expert may still need some familiarity with SHAP and the German credit feature names to fully interpret it.\",\n    \"completeness\": \"It covers several top local factors that plausibly explain the negative prediction, including checking status, payment plans, credit history, savings, and employment. Still, it lacks the base value, probability, and a plain-language synthesis tying these factors to the final TN decision.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious repetition or padding. It uses a small number of features to convey the key local drivers efficiently.\",\n    \"overall_quality\": \"Overall, this is a reasonably good local explanation: compact, interpretable, and useful for inspecting the model\u2019s reasoning. Its main weaknesses are limited actionable guidance and only partial completeness for a full decision review.\",\n    \"semantic_plausibility\": \"The listed drivers are coherent with German credit risk intuition: good checking status, paid credit history, and savings generally support a non-default prediction, while weaker signals can pull the score the other way. The mixed positive and negative contributions also fit a realistic tabular credit model explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:08.464699+00:00"
+}

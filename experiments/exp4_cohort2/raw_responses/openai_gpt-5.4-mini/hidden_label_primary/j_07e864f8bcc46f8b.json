@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_07e864f8bcc46f8b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_10ccf6bdc14f2a99_95a78c5915b1a267.txt",
+  "prompt_version": "95a78c5915b1a267",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538643-MMrW7COBrCkvvrpNNzYe",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00314475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023535,
+        "upstream_inference_cost": 0.00314475,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1578
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction toward class 0, but it does not translate them into concrete next steps or recourse. A user or clinician could not directly act on this information without additional context about feature values and what changes are feasible.\",\n    \"audit_usefulness\": \"For auditing, the ranked SHAP contributions are useful because they show which variables most influenced the model locally. However, the explanation lacks baseline values, feature directions, and instance-specific feature values, so it only partially supports deeper error or bias analysis.\",\n    \"clarity\": \"The wording is simple and the list format is easy to scan, so a non-expert can follow the general idea that these features mattered most. Still, terms like 'worst concave points' and 'area error' are domain-specific and may be opaque without background knowledge of the breast cancer features.\",\n    \"completeness\": \"The explanation covers the top local drivers and gives their relative contribution magnitudes, which is helpful. It does not show the actual feature values, the opposing evidence for class 1, or how the contributions compare to a decision threshold, so the local decision context is incomplete.\",\n    \"concision\": \"It is compact and contains only the top factors, with little redundancy. At the same time, the brevity comes at the cost of missing contextual details needed for interpretation, but the wording itself is efficient.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for a single prediction: it is clear, stable, and informative about the main drivers. Its main weakness is that it provides explanation fragments rather than a fully interpretable decision narrative or actionable guidance.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and their negative SHAP contributions are plausible for a true negative prediction in this dataset. The explanation is coherent with a random-forest classifier and with common medical feature importance patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:46.783578+00:00"
+}

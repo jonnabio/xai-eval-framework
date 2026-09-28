@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_35ff01ab75902bfd",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a5e759675f7b81c4_ed875bcbd48cf0f2.txt",
+  "prompt_version": "ed875bcbd48cf0f2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539444-m7HcXZlQmw5CofiH5XiI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003054,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002259,
+        "upstream_inference_cost": 0.003054,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a5e759675f7b81c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse steps or guidance the user could act on. It only lists a single dominant factor and several zero-valued fields without indicating how changing them would affect the outcome.\",\n    \"audit_usefulness\": \"It has limited audit value because it shows almost no local factor variation and no directionality beyond one marital-status feature. An auditor cannot meaningfully assess why the model predicted positive or investigate potential bias from this output alone.\",\n    \"clarity\": \"The wording is simple enough to read, but the presentation is confusing because many features are shown with 0.0000 and the meaning of those values is not explained. A non-expert would struggle to understand why these are the top local factors.\",\n    \"completeness\": \"The explanation is very incomplete for a local decision: it reveals only one non-zero feature and omits most of the drivers that would justify the positive prediction. It also provides no baseline, comparison, or indication of whether the listed factor increased or decreased the score.\",\n    \"concision\": \"It is short, but not efficiently informative because most of the content is a list of irrelevant zero-valued features. The token budget is used on noise rather than decision-relevant detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation that is technically compact but not very informative, actionable, or auditable. It gives only a shallow glimpse of the model's reasoning and leaves the local prediction largely unexplained.\",\n    \"semantic_plausibility\": \"The lone strong factor, being married to a spouse, is plausible for Adult-income-style prediction and fits general domain expectations. However, the many zero-valued features being described as top local factors makes the output feel somewhat unhelpful and semantically awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:09.877649+00:00"
+}

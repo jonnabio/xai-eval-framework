@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afc105601fc7fdd6",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_31beb378c233c66d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_afc105601fc7fdd6_a6a97ed2397fefc0.txt",
+  "prompt_version": "a6a97ed2397fefc0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545997-xFZZthPdU6KMSVr46w4I",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1081,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 682,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00498075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00405375,
+        "upstream_inference_cost": 0.00498075,
+        "upstream_inference_prompt_cost": 0.000927
+      },
+      "is_byok": false,
+      "prompt_tokens": 1236,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2317
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afc105601fc7fdd6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no guidance or actionable recourse, as it merely flags biological measurements without thresholds or next steps.\",\n    \"audit_usefulness\": \"It highlights that 'worst radius' and 'worst concave points' triggered the anchor, providing a starting point to investigate the false positive, though the absence of predicate thresholds limits depth.\",\n    \"clarity\": \"The list format is readable, but the raw binary indicator weights (1.0000 vs 0.0000) are not self-explanatory for non-experts.\",\n    \"completeness\": \"The explanation lists active features but omits the actual rule conditions and feature values that form the anchor rule.\",\n    \"concision\": \"Including multiple zero-weighted features adds minor clutter, but the text remains reasonably compact overall.\",\n    \"overall_quality\": \"The explanation identifies the two primary drivers for the prediction, but stripping rule thresholds and retaining zero-weight features reduces its utility.\",\n    \"semantic_plausibility\": \"Selecting worst radius and worst concave points as key drivers for a positive malignancy prediction is highly consistent with clinical literature and dataset characteristics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:53:25.281680+00:00"
+}

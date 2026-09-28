@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_99188a61b3de9ed4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_63b7294e1132a1f9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_99188a61b3de9ed4_86d9225d215a5c8f.txt",
+  "prompt_version": "86d9225d215a5c8f",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546587-P2y2dbGTdaNGFFxn05rk",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 518,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00259,
+        "upstream_inference_cost": 0.003895,
+        "upstream_inference_prompt_cost": 0.001305
+      },
+      "is_byok": false,
+      "prompt_tokens": 1305,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1823
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_99188a61b3de9ed4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A person denied credit would not know what specific changes to their application or circumstances would lead to approval.\",\n    \"audit_usefulness\": \"SHAP contributions enable auditors to see which features drove the decision and their relative importance. However, the low stability (0.367) and moderate fidelity (0.709) raise concerns about explanation reliability for bias detection or error investigation.\",\n    \"clarity\": \"The format is technical, listing feature names with SHAP values. Non-technical users would struggle to interpret what 'checking_status_no checking: 0.1121' means or why these specific features matter for credit decisions.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, which captures the main drivers. However, it lacks context about feature values, thresholds, or how these contributions combine to reach the final decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line efficiently conveys a feature and its contribution value without padding.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies key factors correctly (checking account status, credit amount, age are reasonable for credit decisions) but lacks depth, actionability, and reliability signals. The moderate technical metrics and technical presentation limit its utility.\",\n    \"semantic_plausibility\": \"The top factors align well with credit domain knowledge: checking account status, credit amount, and age are standard credit assessment criteria. The direction of contributions (positive for no checking account, credit amount; negative for critical credit history) is plausible for this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:03:13.364638+00:00"
+}

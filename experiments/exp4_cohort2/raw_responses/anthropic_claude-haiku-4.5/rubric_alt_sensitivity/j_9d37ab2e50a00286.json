@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d8a899ad70b4c53f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9d37ab2e50a00286",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_d8a899ad70b4c53f_d5bcfb470d6076da.txt",
+  "prompt_version": "d5bcfb470d6076da",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545212-wTvdSr6LZtFs6O5SotCA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004012,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00272,
+        "upstream_inference_cost": 0.004012,
+        "upstream_inference_prompt_cost": 0.001292
+      },
+      "is_byok": false,
+      "prompt_tokens": 1292,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1836
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d8a899ad70b4c53f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key factors (capital-gain, professional school education, married status) but provides no guidance on what actions could change the outcome. It is purely descriptive without suggesting feasible interventions.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction with binary importance scores, useful for understanding model behavior. However, the low fidelity (0.57) and moderate faithfulness gap (0.22) suggest the explanation may not reliably represent the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The format uses technical feature names and numerical scores that require familiarity with the dataset schema and machine learning concepts. Non-technical readers would struggle to interpret 'education_Prof-school' or understand what the 1.0000/0.0000 scores mean.\",\n    \"completeness\": \"The explanation identifies the three most important features but lacks context about their values, thresholds, or how they interact. It does not explain why these specific factors matter or what decision boundary they cross.\",\n    \"concision\": \"The explanation is compact at 86 tokens, listing features and scores efficiently. However, it includes many zero-valued features that add little information, reducing information density slightly.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies top factors for a true positive case, but the low fidelity score, lack of actionability, and technical presentation limit its practical utility for auditing or decision-making.\",\n    \"semantic_plausibility\": \"The identified factors (capital gains, professional education, married status) are plausibly associated with higher income in the adult dataset and align with domain knowledge. The prediction of class 1 (high income) is consistent with these features.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:40:17.756213+00:00"
+}

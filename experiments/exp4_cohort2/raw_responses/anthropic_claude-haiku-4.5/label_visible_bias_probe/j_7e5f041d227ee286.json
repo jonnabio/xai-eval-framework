@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7e5f041d227ee286",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9ee15210bf45996e_983dcfc0067567d2.txt",
+  "prompt_version": "983dcfc0067567d2",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543094-R1eO6VnkSY6Uh1B5cDPf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003761,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00255,
+        "upstream_inference_cost": 0.003761,
+        "upstream_inference_prompt_cost": 0.001211
+      },
+      "is_byok": false,
+      "prompt_tokens": 1211,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1721
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions a clinician or patient could take based on these morphological measurements. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The ranked SHAP values enable inspection of which morphological features drove the malignancy prediction, supporting model behaviour auditing. However, the low fidelity (0.48) and high faithfulness gap (0.20) suggest the explanation may not reliably represent model logic.\",\n    \"clarity\": \"The explanation is well-organized as a ranked list with numerical scores, making it accessible to non-experts familiar with feature names. However, domain context (what these measurements represent clinically) is absent.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main local drivers. However, the explanation lacks instance-level feature values, baseline comparisons, or decision thresholds needed for full local context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked features and scores without padding. Information density is appropriate for the format.\",\n    \"overall_quality\": \"The explanation is technically sound and clearly formatted, but suffers from low fidelity metrics and lack of actionable or contextual depth. It serves basic audit purposes but falls short of comprehensive decision support.\",\n    \"semantic_plausibility\": \"The identified features (concave points, area, radius, perimeter, concavity, texture) are clinically plausible morphological indicators of malignancy in breast cancer diagnosis. The ranking aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:04:59.297032+00:00"
+}

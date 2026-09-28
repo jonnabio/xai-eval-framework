@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8ce491005c0b4780",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9a34595bd63d2470",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_8ce491005c0b4780_278943601f17611a.txt",
+  "prompt_version": "278943601f17611a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544199-vVvs73Bxn5pq705haiWV",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004139,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00292,
+        "upstream_inference_cost": 0.004139,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1803
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_8ce491005c0b4780\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this information. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction (worst compactness and worst concave points with weight 1.0) and which were irrelevant (weight 0.0), which is useful for model inspection. However, the low fidelity (0.584) and high faithfulness gap (0.16) undermine confidence in the anchor's reliability for auditing model behaviour.\",\n    \"clarity\": \"The format is a simple list of feature names and weights, which is straightforward to parse, but lacks context about what these weights mean, why they matter, or how they relate to the prediction of class 0 (benign). A non-expert reader would struggle to interpret the significance.\",\n    \"completeness\": \"The explanation identifies two key anchoring features but does not explain their actual values for this instance, the decision boundary, or how the model combined these signals to reach the prediction. Critical local decision context is missing.\",\n    \"concision\": \"The explanation is compact at 76 tokens and avoids obvious redundancy, though the inclusion of eight zero-weight features adds minimal information value and could be omitted for brevity.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides minimal interpretability despite correct format; low fidelity and high faithfulness gap suggest the anchors may not reliably represent the model's actual decision logic for this instance.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst compactness and worst concave points are known morphological features relevant to malignancy assessment, so their selection is plausible. However, the explanation does not clarify how their values support a benign (class 0) prediction, limiting semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:23:25.307617+00:00"
+}

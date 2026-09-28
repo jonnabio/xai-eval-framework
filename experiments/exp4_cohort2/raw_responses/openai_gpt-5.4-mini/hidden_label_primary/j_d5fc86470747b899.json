@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d5fc86470747b899",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4e9045d4d8fa6e21_ffa178d68dbc2966.txt",
+  "prompt_version": "ffa178d68dbc2966",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539521-iVLgfaljemgStP1sQOpZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.00291975,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1538
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps. It only lists feature values, mostly zeros, without indicating what could be changed or checked.\",\n    \"audit_usefulness\": \"It offers limited audit value because it names one nonzero feature and several zero-valued features, but does not show direction, magnitude, or how they contributed to the prediction. This makes it hard to inspect the model's reasoning or diagnose error patterns.\",\n    \"clarity\": \"The text is short and syntactically simple, but the meaning is unclear to a non-expert because it is just a list of feature names and numbers. The zero-heavy output is especially opaque without context about why those features matter.\",\n    \"completeness\": \"It fails to provide the main local decision drivers for this specific prediction. For a false positive, one would expect an explanation of why the model leaned toward the positive class, not mostly placeholder-like zeros.\",\n    \"concision\": \"It is very compact, but not efficiently informative because most of the content is low-value zeros. The brevity comes at the cost of useful explanation detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat structurally readable, but it does not meaningfully explain the prediction. The limited informative content makes it poor for both user understanding and model inspection.\",\n    \"semantic_plausibility\": \"The single highlighted factor, marital status as married-civ-spouse, is plausible as a driver in the Adult dataset. However, the dominance of zero-valued factors makes the explanation feel incomplete and only weakly coherent as a local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:24.778517+00:00"
+}

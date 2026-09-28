@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c948b5be78abf92f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_80ddd7fef35e31b7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c948b5be78abf92f_7a05f184f2f2541f.txt",
+  "prompt_version": "7a05f184f2f2541f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545485-OxSvkUk343z6w6IXQlfW",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 581,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00421,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002905,
+        "upstream_inference_cost": 0.00421,
+        "upstream_inference_prompt_cost": 0.001305
+      },
+      "is_byok": false,
+      "prompt_tokens": 1305,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1886
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c948b5be78abf92f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to checking status, purpose, or other factors would alter the credit decision.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes enable auditors to identify which features drove the approval decision and detect potential bias patterns. The high stability (0.98) and reasonable fidelity (0.75) support model behavior investigation, though the faithfulness gap suggests some explanation-model misalignment.\",\n    \"clarity\": \"The format is technical (SHAP values with feature names and numeric contributions) and requires understanding of SHAP methodology and feature encoding. Non-technical stakeholders would struggle to interpret what 'checking_status_no checking: 0.0542' means in practical terms.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with both positive and negative contributions, capturing the main drivers of the approval decision. However, it lacks context about feature values, thresholds, or interactions that would fully explain the decision logic.\",\n    \"concision\": \"The explanation is compact at 84 tokens with no apparent redundancy. Each feature-value pair conveys specific information about its contribution magnitude and direction, making efficient use of space.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies key features and their directional impact, and the model prediction matches the true label. However, it lacks actionability, domain context, and accessibility for non-technical users. The moderate fidelity (0.75) and faithfulness gap (0.03) indicate some explanation-model divergence.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment logic: no checking account and used car purchase are risk indicators; older age and property ownership are protective factors. The contributions are plausible for a credit approval model, though magnitudes are small relative to base prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:44:52.303224+00:00"
+}

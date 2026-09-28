@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_256f9fece4feb868",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_2a3f635ae972c4ad_7bfd008ebd369b1b.txt",
+  "prompt_version": "7bfd008ebd369b1b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538518-RfbTaeStgQHZgpivSYdX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002919,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.002919,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or decision steps, only lists feature contributions. A user cannot infer what to change or verify from this output.\",\n    \"audit_usefulness\": \"It is useful for basic model inspection because it shows which local features pushed the prediction toward class 0 or away from it. However, it lacks contextual comparison or stronger evidence needed for deeper bias or error analysis.\",\n    \"clarity\": \"The wording is short and generally understandable, with familiar feature names and signed weights. A non-expert may still struggle with the meaning of LIME coefficients and one-hot encoded marital-status/relationship variables.\",\n    \"completeness\": \"It covers several local drivers of the prediction, including capital gain, education, marital status, sex, and hours worked. Still, it does not explain the prediction in outcome-oriented terms or indicate the baseline relative to which these factors matter.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering a ranked set of local factors in a small number of tokens. It is slightly overloaded with categorical variants that could have been summarized more cleanly.\",\n    \"overall_quality\": \"This is a reasonably informative local explanation for an expert, but it is limited by the lack of actionable guidance and modest interpretability for non-experts. Its technical quality is acceptable, yet not strong enough to be considered excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income style model, and the directions of influence broadly make sense for a logistic regression explanation. The combination of capital gain, education, and marital status as major contributors is coherent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:40.650492+00:00"
+}

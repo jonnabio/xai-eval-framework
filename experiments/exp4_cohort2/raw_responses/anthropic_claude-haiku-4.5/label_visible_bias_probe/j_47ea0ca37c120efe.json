@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5169d5420efbc3da",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_47ea0ca37c120efe",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5169d5420efbc3da_5484c8ab4eacb31b.txt",
+  "prompt_version": "5484c8ab4eacb31b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542993-MW4KtVL4es6UFb3R17rt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002405,
+        "upstream_inference_cost": 0.003625,
+        "upstream_inference_prompt_cost": 0.00122
+      },
+      "is_byok": false,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1701
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5169d5420efbc3da\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the decision.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchor the prediction, the high faithfulness_gap (0.364) and zero stability indicate the explanation is unreliable for auditing model behavior or detecting systematic biases.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with importance scores, which is easy to parse but lacks context about what these scores mean or why these features matter.\",\n    \"completeness\": \"The explanation identifies only two anchor features (education-num and occupation_Farming-fishing) with non-zero weights, but provides no information about feature values, thresholds, or the decision boundary that led to the prediction.\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-weighted features that add noise without informational value; a more concise version would list only the two relevant anchors.\",\n    \"overall_quality\": \"The explanation suffers from poor fidelity to the true label (false negative), low stability, and high faithfulness gap, making it unreliable despite being technically formatted correctly.\",\n    \"semantic_plausibility\": \"The anchors (education level and farming-fishing occupation) are plausible predictors in the adult income dataset, but the false negative prediction contradicts the true label, undermining confidence in the explanation's validity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:18.630947+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_90b21010db648d55",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ec3d891e0d43658f_08b6bca3baba04e8.txt",
+  "prompt_version": "08b6bca3baba04e8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539070-qBQyrhUVyP1EeyIC5uNR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029415,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.0029415,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any recourse or next steps beyond listing feature values, so a user cannot tell what would need to change to alter the outcome. It is not actionable for decision review.\",\n    \"audit_usefulness\": \"It provides only a sparse set of local feature indicators with no directionality or interaction detail, which limits investigation of why the model predicted class 1. The low fidelity score further suggests weak utility for auditing model behavior.\",\n    \"clarity\": \"The output is syntactically readable, but the meaning of the anchor-style scores is not explained for a non-expert, and the all-zero versus 1.0000 values are not intuitive. A reader would need XAI familiarity to interpret it properly.\",\n    \"completeness\": \"It lists several features, but it does not explain how they support the prediction, which features actually drove the decision, or how the listed values relate to the model's output. The local decision context is therefore incomplete.\",\n    \"concision\": \"The explanation is short and mostly compact, but some of the listed features at zero weight add little informational value. Overall it is reasonably concise.\",\n    \"overall_quality\": \"The explanation is minimally readable but weak in explanatory value because it lacks causal interpretation, action guidance, and sufficient local decision detail. Its usefulness is further reduced by low fidelity and sparse content.\",\n    \"semantic_plausibility\": \"The listed German credit attributes are plausible for the dataset, and the presence of residence duration, checking status, savings status, and duration is consistent with credit-risk modeling. However, the unusual zeroed scores for most features make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:54.453349+00:00"
+}

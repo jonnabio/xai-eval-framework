@@ -1,0 +1,83 @@
+You are an expert AI evaluator specialising in Explainable AI (XAI) for tabular data. Your task is to evaluate the quality of one explanation produced for a prediction of a binary classification model. The case record below states the dataset, the model family, the explanation method, the model's prediction and confidence, the true label, and technical metrics computed for this explanation.
+
+Evaluate the explanation on the seven dimensions below using a 1-5 integer Likert scale (1 = very poor, 5 = excellent).
+
+## Rubric (RUBRIC_V1_REBUILT_2026_09)
+
+1. clarity: Understandable organisation and wording for a non-expert reader.
+   Anchors: 1 = incomprehensible; 3 = requires domain knowledge; 5 = clear to any reader.
+2. concision: Compact relative to useful information content; avoids unnecessary redundancy.
+   Anchors: 1 = verbose or padded; 3 = adequate; 5 = maximally informative per word.
+3. actionability: Supports recourse, decision review, or explicit next steps for a user.
+   Anchors: 1 = no actionable content; 3 = vague suggestions; 5 = specific, feasible actions.
+4. audit_usefulness: Supports inspection of model behaviour by an auditor or data scientist.
+   Anchors: 1 = no audit value; 3 = partially informative about model logic; 5 = fully supports bias/error investigation.
+5. completeness: Provides sufficient local decision information to understand the specific prediction.
+   Anchors: 1 = missing key drivers; 3 = covers main drivers; 5 = full local decision context.
+6. semantic_plausibility: Coherent with the instance context and general domain knowledge.
+   Anchors: 1 = implausible or contradictory; 3 = plausible; 5 = highly consistent with domain expectations.
+7. overall_quality: Holistic semantic quality integrating all dimensions above.
+   Anchors: 1 = very poor; 3 = acceptable; 5 = excellent.
+
+## Case record
+
+```json
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dataset": "adult",
+  "explainer": "anchors",
+  "explanation_length_tokens": 80,
+  "instance_id": "2573",
+  "model_family": "logreg",
+  "normalized_explanation": "ANCHORS top local factors: education-num: 1.0000; capital-gain: 1.0000; capital-loss: 1.0000; age: 0.0000; fnlwgt: 0.0000; hours-per-week: 0.0000; workclass_Federal-gov: 0.0000; workclass_Local-gov: 0.0000; workclass_Never-worked: 0.0000; workclass_Private: 0.0000",
+  "prediction": 0,
+  "prediction_confidence": null,
+  "quadrant": "FN",
+  "random_seed": 456,
+  "sample_size": 200,
+  "source_artifact_path": "experiments\\exp2_scaled\\results\\logreg_anchors\\seed_456\\n_200\\results.json",
+  "source_experiment": "exp2_scaled",
+  "technical_metrics": {
+    "cost": 295.02866600068955,
+    "faithfulness_gap": 0.07972894018656396,
+    "fidelity": 0.15148131751107896,
+    "runtime_ms": 295.02866600068955,
+    "sparsity": 0.027777777777777776,
+    "stability": 0.0
+  },
+  "true_label": 1
+}
+```
+
+## Output
+
+Return your response in strict JSON with exactly the structure below: an integer 1-5 for every score, a non-empty one- or two-sentence rationale for every dimension, and the three boolean flags. Copy the case_id unchanged. Do not add commentary outside the JSON object.
+
+```json
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "flags": {
+    "format_problem": false,
+    "insufficient_context": false,
+    "safety_or_policy_issue": false
+  },
+  "rationales": {
+    "actionability": "string",
+    "audit_usefulness": "string",
+    "clarity": "string",
+    "completeness": "string",
+    "concision": "string",
+    "overall_quality": "string",
+    "semantic_plausibility": "string"
+  },
+  "scores": {
+    "actionability": 1,
+    "audit_usefulness": 1,
+    "clarity": 1,
+    "completeness": 1,
+    "concision": 1,
+    "overall_quality": 1,
+    "semantic_plausibility": 1
+  }
+}
+```

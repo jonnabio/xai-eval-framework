@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eacd078ea03699f3",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_dc46675654a709a2_01a6ab7cae9e2176.txt",
+  "prompt_version": "01a6ab7cae9e2176",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545798-kFNPC9EJ5YMZqPaFHKDe",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004214,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002935,
+        "upstream_inference_cost": 0.004214,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1866
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features (education-num and marital-status_Never-married) but provides no guidance on what actions could change the outcome. For someone denied income classification, knowing which features matter offers no concrete path forward.\",\n    \"audit_usefulness\": \"The explanation shows which features the model relied on, which is useful for bias auditing. However, the zero stability score and negative fidelity raise concerns about reliability. The sparse feature set (only 2 of 10 features) may indicate the model's decision boundary is not well-captured.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with importance weights\u2014but requires understanding of the adult dataset features and what 'education-num' and 'marital-status_Never-married' represent. Accessible to someone with domain knowledge but not to a general audience.\",\n    \"completeness\": \"Only two features are identified as important, with eight others marked as zero. While these may be the primary anchors, the explanation lacks context about feature values, thresholds, or how they interact. The decision logic is incompletely explained.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each feature-weight pair is necessary information. The format is efficient, though it could be more concise by omitting zero-weighted features.\",\n    \"overall_quality\": \"The explanation is serviceable but limited. It correctly identifies the model's focus on education and marital status for this negative prediction, but technical metrics (zero stability, negative fidelity) suggest the explanation may not reliably represent the model's actual decision process. Useful as a starting point but not robust.\",\n    \"semantic_plausibility\": \"In the adult income domain, education level and marital status are known predictors of income. A never-married person with low education being classified as \u226450K income is plausible. However, the zero stability metric undermines confidence that this explanation is consistent across similar instances.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:50:05.148691+00:00"
+}

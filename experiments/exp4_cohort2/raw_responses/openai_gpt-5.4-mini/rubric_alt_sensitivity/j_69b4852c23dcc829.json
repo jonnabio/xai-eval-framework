@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_69b4852c23dcc829",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_50e3b33d6c3d012f_283be99c7564aae2.txt",
+  "prompt_version": "283be99c7564aae2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543012-GVxMjAhIGbUr9HYj8PbX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00246075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016065,
+        "upstream_inference_cost": 0.00246075,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1496
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists influential features; it does not say what changes would likely alter the prediction or how to act on the result.\",\n    \"audit_usefulness\": \"The ranked SHAP factors are useful for inspecting which medical measurements drove the model, but the explanation is too shallow to thoroughly probe bias or error.\",\n    \"clarity\": \"The feature list is easy to read, but terms like \\\"worst perimeter\\\" or \\\"area error\\\" still require some domain familiarity to interpret well.\",\n    \"completeness\": \"It identifies the top contributing factors, but it does not explain their directional effect on the class decision in a way that fully accounts for this local prediction.\",\n    \"concision\": \"The explanation is compact and information-dense, with little wasted wording.\",\n    \"overall_quality\": \"It is a solid local attribution summary: concise, reasonably informative, and consistent with the breast cancer domain, though not fully explanatory.\",\n    \"semantic_plausibility\": \"The highlighted tumor-shape and size features are sensible predictors for breast cancer classification and fit common domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:34.435859+00:00"
+}

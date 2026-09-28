@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2fb8d841944fa76b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d75e68cf3d975049",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_2fb8d841944fa76b_b0b027d8fecc0c12.txt",
+  "prompt_version": "b0b027d8fecc0c12",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546037-efOKp4zR0eVezacPLWQr",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1369,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 945,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006069,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00513375,
+        "upstream_inference_cost": 0.006069,
+        "upstream_inference_prompt_cost": 0.00093525
+      },
+      "is_byok": false,
+      "prompt_tokens": 1247,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2616
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2fb8d841944fa76b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary feature flags without actionable advice, thresholds, or guidance on what an applicant could adjust to alter the decision.\",\n    \"audit_usefulness\": \"While it reveals which binary features were selected by the explainer, the lack of rule conditions, coverage metrics, and the presence of mutually exclusive active categories limit its diagnostic utility for auditors.\",\n    \"clarity\": \"The raw key-value format requires technical and domain knowledge to decipher, as it fails to clearly state the decision rule or the meaning of the 1.0 and 0.0 values.\",\n    \"completeness\": \"The output merely flags several features with binary indicators and includes zero-weighted features without specifying decision boundaries or rule precision.\",\n    \"concision\": \"Listing multiple zero-valued features creates unnecessary clutter that dilutes the informative content of the explanation.\",\n    \"overall_quality\": \"Overall quality is low because the pseudo-anchor format produces contradictory categorical states, pads the output with useless zeros, and lacks actionable clarity.\",\n    \"semantic_plausibility\": \"Simultaneously marking both 'savings_status_<100' and 'savings_status_no known savings' as 1.0 is semantically contradictory for a single applicant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:54:10.066536+00:00"
+}

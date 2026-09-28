@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_48bb27bcb7471fc3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_50e3b33d6c3d012f_7301a8f89d70719f.txt",
+  "prompt_version": "7301a8f89d70719f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541535-UxEZIx6lJHK7yZKTOPZg",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.00287925,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1524
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names influential features but gives no concrete recourse or next steps a user could take. A reader cannot infer what changes would move the prediction in a desired direction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the strongest local SHAP factors and their relative ordering. However, it lacks directional information and instance-specific context, which limits deeper investigation of why the model behaved this way.\",\n    \"clarity\": \"The wording is short and readable, and the feature list is easy to scan. Still, a non-expert may not understand what the medical feature names mean or how to interpret the numeric values.\",\n    \"completeness\": \"The explanation identifies the main contributing features, which covers the core local drivers of the prediction. It does not explain whether each factor increased or decreased the positive class score, so the decision context is incomplete.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, delivering a dense list of top factors in few words. It is efficient, though the minimal format sacrifices some interpretability.\",\n    \"overall_quality\": \"Overall, this is a reasonably compact local explanation that gives a useful ranking of influential features, but it is only moderately interpretable because it omits direction, context, and recourse. Its usefulness is strongest for quick inspection rather than decision support.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features such as worst perimeter, worst radius, and worst concave points are highly plausible drivers of a malignancy prediction. The ranking is consistent with domain expectations for this dataset and model family.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:57.951136+00:00"
+}

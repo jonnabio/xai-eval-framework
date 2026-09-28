@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1c525ff1deb5c1a6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_93e6e23d7ce59822",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1c525ff1deb5c1a6_1cd3fbc63df7e3c2.txt",
+  "prompt_version": "1cd3fbc63df7e3c2",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543458-fqyir7LAC2orMWxxqDtP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00260925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001755,
+        "upstream_inference_cost": 0.00260925,
+        "upstream_inference_prompt_cost": 0.00085425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1139,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1c525ff1deb5c1a6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It gives almost no actionable counterfactuals beyond one feature, and the many zero-valued factors do not suggest meaningful next steps.\",\n    \"audit_usefulness\": \"It offers limited insight for auditing because the explanation is sparse, unstable-looking, and dominated by zero contributions that do not explain the false negative well.\",\n    \"clarity\": \"The output is syntactically simple, but the meaning of the zero entries and the relevance of the listed factors are not easy for a non-technical reader to interpret.\",\n    \"completeness\": \"It fails to explain the main reasons for the model's false-negative prediction; only one factor is nonzero and no coherent decision logic is provided.\",\n    \"concision\": \"The explanation is short, but much of its length is spent listing uninformative zero-valued factors, so the useful density is low.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is sparse, hard to interpret, and does not adequately account for why the model predicted the negative class.\",\n    \"semantic_plausibility\": \"Having Never-married as a relevant factor is plausible in the Adult dataset, but the largely zero-valued local factors make the explanation only partially convincing for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:11:01.127461+00:00"
+}

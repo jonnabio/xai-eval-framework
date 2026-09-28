@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ae3a0f4e2779afdc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_a6075392942e36b2_337895e4acf1369b.txt",
+  "prompt_version": "337895e4acf1369b",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543266-zIPGY8C7I9iGLV7KJ4mC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1278,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 870,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0057435,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0047925,
+        "upstream_inference_cost": 0.0057435,
+        "upstream_inference_prompt_cost": 0.000951
+      },
+      "is_byok": false,
+      "prompt_tokens": 1268,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2546
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary weights without feature thresholds, actual instance values, or directional guidance, offering no actionable path for recourse.\",\n    \"audit_usefulness\": \"Auditors cannot inspect the decision logic because the anchor predicates are stripped down to feature names with binary values, accompanied by poor fidelity metrics.\",\n    \"clarity\": \"While formatted cleanly as key-value pairs, presenting rules as flat indicator scores without clear predicate conditions makes it difficult for non-experts to interpret.\",\n    \"completeness\": \"The output omits the specific rule thresholds and directional impacts required to understand why this specific credit decision was reached.\",\n    \"concision\": \"The summary is fairly compact, though it unnecessarily lists features with zero weights alongside the active factors.\",\n    \"overall_quality\": \"Overall quality is low due to the loss of rule predicates, presence of seemingly contradictory one-hot categories, and minimal practical utility.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive categories such as 'checking_status_0<=X<200' and 'checking_status_no checking' is contradictory and semantically implausible for a single applicant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:56.893616+00:00"
+}

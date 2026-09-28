@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_19842fbbfb8cb9c3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_4e9045d4d8fa6e21_ffa178d68dbc2966.txt",
+  "prompt_version": "ffa178d68dbc2966",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541336-AdUWadL0pPSJaSyKIRQ5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 591,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0047085,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376875,
+        "upstream_inference_cost": 0.0047085,
+        "upstream_inference_prompt_cost": 0.00093975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1253,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2258
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists pseudo-importance scores rather than actionable counterfactual recommendations, offering no clear path or feasible steps for recourse.\",\n    \"audit_usefulness\": \"It highlights that marital status was the sole active driver among the evaluated features, but the absence of baseline values and directional context limits deeper model auditing.\",\n    \"clarity\": \"The explanation is presented as a plain list of encoded feature names and numeric values, which is easy to read but relies on technical one-hot encoding syntax.\",\n    \"completeness\": \"Only a single feature displays a non-zero value while the rest are zero, omitting feature values and directional impact necessary to fully understand the prediction.\",\n    \"concision\": \"Listing numerous features with values of 0.0000 creates unnecessary clutter that could easily be omitted.\",\n    \"overall_quality\": \"The explanation poorly represents DiCE's counterfactual strengths by reducing them to a sparse feature list filled with zero-weight attributes and minimal insight.\",\n    \"semantic_plausibility\": \"Marital status is historically a strong predictor of income in the Adult dataset, making the identified factor domain-plausible.\",\n    \"rationales_complete\": true\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:45.776915+00:00"
+}

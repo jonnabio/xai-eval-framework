@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a7a7cbfc3100ea48",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4c3d79ea2f396cd5_a32faaa609103f5d.txt",
+  "prompt_version": "a32faaa609103f5d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790552205-2UgGuY7SbSM8ARWEpOfs",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 643,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004842,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00386625,
+        "upstream_inference_cost": 0.004842,
+        "upstream_inference_prompt_cost": 0.00097575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2332
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because all feature weights are 0.0000, there is zero indication of what drives the outcome or what an individual could do to change it.\",\n    \"audit_usefulness\": \"The explanation completely collapsed, showing zero weights across all features and providing no insight into the logistic regression model's decision logic.\",\n    \"clarity\": \"Displaying zeroed-out one-hot encoded variables with plus and minus zero values is confusing and uninterpretable to non-technical users.\",\n    \"completeness\": \"None of the actual drivers for the positive prediction are captured, leaving the local decision entirely unexplained.\",\n    \"concision\": \"The text lists ten features with zero attribution, offering no useful information for its length.\",\n    \"overall_quality\": \"The explanation is unusable as all attributions rounded or collapsed to 0.0000, failing to explain the false positive prediction.\",\n    \"semantic_plausibility\": \"Attributing zero contribution to key adult dataset predictors such as education and marital status makes no sense for the decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 1,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:36:54.969493+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6075392942e36b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2cc684cd046793ae",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a6075392942e36b2_08b74188c94cc4cf.txt",
+  "prompt_version": "08b74188c94cc4cf",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543221-kA1PeC8yOap5Wg79cb0K",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 445,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002859,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020025,
+        "upstream_inference_cost": 0.002859,
+        "upstream_inference_prompt_cost": 0.0008565
+      },
+      "is_byok": false,
+      "prompt_tokens": 1142,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1587
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6075392942e36b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It names several local anchors, but they are not translated into actionable changes or counterfactual guidance. A reviewer could only infer that changing some listed attributes might matter.\",\n    \"audit_usefulness\": \"The anchor list gives some insight into which feature conditions characterize the prediction, but it is hard to use for a deep audit because it does not show feature direction, strength, or an actual decision rule. The low fidelity also limits trust.\",\n    \"clarity\": \"The output is short and mostly readable, but the meaning of anchor-style scores and repeated 1.0000 values is not explained. A non-technical reader would need some background to understand it.\",\n    \"completeness\": \"It provides a set of local conditions associated with the prediction, but not a full account of why the model chose class 0. Important aspects such as which conditions were necessary versus merely common are missing.\",\n    \"concision\": \"The explanation is compact and mostly non-redundant, though the long list of feature names with identical scores carries limited extra information.\",\n    \"overall_quality\": \"It is a usable but limited anchor explanation: locally stable and somewhat informative, yet weak on interpretability, completeness, and practical usefulness due to low fidelity and minimal narrative context.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit decisions, such as checking status, savings, residence duration, and credit amount. However, the explanation is hard to interpret because it does not clearly connect these factors to the negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:07:04.235197+00:00"
+}

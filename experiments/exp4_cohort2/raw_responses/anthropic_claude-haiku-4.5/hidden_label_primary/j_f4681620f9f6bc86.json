@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c71f9ed1b1a0812a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f4681620f9f6bc86",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c71f9ed1b1a0812a_9e2dc99a05511220.txt",
+  "prompt_version": "9e2dc99a05511220",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540025-YVjS8H61rzLY8wYDpWSg",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003746,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002515,
+        "upstream_inference_cost": 0.003746,
+        "upstream_inference_prompt_cost": 0.001231
+      },
+      "is_byok": false,
+      "prompt_tokens": 1231,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1734
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c71f9ed1b1a0812a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what threshold values matter, or what specific actions a user could take to modify the outcome.\",\n    \"audit_usefulness\": \"The raw DICE scores with many zero-valued features offer limited insight into model decision logic; the high faithfulness_gap (0.40) and low stability (0.017) suggest the explanation may not reliably represent model behaviour for auditing purposes.\",\n    \"clarity\": \"The format is a simple list of feature names and numerical scores, which is straightforward to parse but lacks narrative context, interpretation, or explanation of what the scores mean or why these features matter.\",\n    \"completeness\": \"Only the top feature (hours-per-week) shows substantial influence; the remaining features have near-zero or zero weights, leaving unclear whether the model's decision truly depends on these factors or whether important drivers are missing.\",\n    \"concision\": \"The explanation is compact in token count but includes many zero-valued features that add no information; removing these would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation is a bare technical output lacking narrative, context, or interpretation; while not incorrect, it fails to communicate actionable or auditable insights in a form accessible to stakeholders.\",\n    \"semantic_plausibility\": \"Hours-per-week as a dominant predictor for the adult income classification task is plausible, but the explanation provides no domain context or reasoning to validate whether the model's reliance on this feature aligns with real-world income drivers.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:50.294462+00:00"
+}

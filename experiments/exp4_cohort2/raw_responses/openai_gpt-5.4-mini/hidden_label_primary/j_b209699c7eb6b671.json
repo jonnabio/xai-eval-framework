@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b209699c7eb6b671",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b352dc7c29edc22c_f9329786c5b642c6.txt",
+  "prompt_version": "f9329786c5b642c6",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538585-u242doaFzcqG7NAy6Kvr",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00297825,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1556
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or decision steps beyond listing influential features. A user cannot easily determine what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it shows the local SHAP drivers and their directions, which can help inspect whether the model relies on plausible demographic signals. However, it lacks baseline context and feature grouping, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The explanation is concise and uses a simple ranked list of feature contributions, which is easy to read. Non-experts may still struggle with one-hot encoded feature names and the meaning of positive versus negative SHAP values.\",\n    \"completeness\": \"It covers the main local factors behind the prediction, but only as a short top-10 list without a base value, probability, or any interaction context. For a false positive, that is enough to see likely drivers but not enough to fully understand the decision.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information with little redundancy. It is about as brief as possible while still giving several local feature contributions.\",\n    \"overall_quality\": \"Overall, this is a solid SHAP summary for a single prediction: readable, reasonably informative, and useful for inspection. Its main weaknesses are the lack of probability/baseline context and the limited usefulness for taking action.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income model, especially marital status, occupation, relationship, sex, and education. The mix of positive and negative contributions is coherent, though the simultaneous presence of multiple country indicators suggests one-hot encoding rather than a natural human narrative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:47.918276+00:00"
+}

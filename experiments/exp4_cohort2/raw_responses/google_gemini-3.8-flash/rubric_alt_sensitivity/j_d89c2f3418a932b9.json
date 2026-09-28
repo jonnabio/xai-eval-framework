@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c948b5be78abf92f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d89c2f3418a932b9",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_c948b5be78abf92f_7a05f184f2f2541f.txt",
+  "prompt_version": "7a05f184f2f2541f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548133-EeVCrUHZbCtZ8ZgF14Pq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 488,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00431925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003315,
+        "upstream_inference_cost": 0.00431925,
+        "upstream_inference_prompt_cost": 0.00100425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1339,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2223
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c948b5be78abf92f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs raw attribution scores without showing current feature values or clear paths to change the credit classification.\",\n    \"audit_usefulness\": \"Auditors and data scientists can inspect the top drivers and observe the relative contributions of key financial and demographic attributes, though one-hot encoding artifacts complicate interpretation.\",\n    \"clarity\": \"The list of raw feature names, one-hot encodings, and signed floating-point weights requires technical familiarity with SHAP to understand.\",\n    \"completeness\": \"It provides the top 10 contributing factors with signed magnitudes, but omits the base value and actual underlying feature states for this applicant.\",\n    \"concision\": \"The text is very dense and compact, presenting only the primary factors and their numerical weights without unnecessary filler.\",\n    \"overall_quality\": \"A standard, serviceable local feature attribution output that provides useful directional information for analysts but lacks accessible guidance for end users.\",\n    \"semantic_plausibility\": \"The listed features\u2014checking status, loan purpose, property ownership, credit history, and savings\u2014are well-established risk drivers in credit scoring.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:29:00.187624+00:00"
+}

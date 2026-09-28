@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6d6ef32df0477323",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1a8eb49b0ec3e81d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_6d6ef32df0477323_3dcff00cf090df69.txt",
+  "prompt_version": "3dcff00cf090df69",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545857-pJo2RC52emzsQOWNUuxw",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 536,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003959,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00268,
+        "upstream_inference_cost": 0.003959,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1815
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6d6ef32df0477323\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what changes would alter the prediction. A user cannot determine what specific actions (e.g., increasing education-num to a particular value) would flip the outcome from positive to negative.\",\n    \"audit_usefulness\": \"The low fidelity (0.633) and moderate faithfulness gap (0.113) raise concerns about whether this explanation accurately represents the model's decision logic. The explanation provides feature weights but insufficient detail to diagnose bias or systematic errors.\",\n    \"clarity\": \"The format is technical with feature names and numerical scores that require understanding of the dataset schema (e.g., what 'education-num' represents). Non-technical users would struggle to interpret the meaning and implications.\",\n    \"completeness\": \"The explanation identifies education-num as the dominant factor but omits crucial context: the actual feature values for this instance, the direction of influence, and why most features have zero contribution. This leaves the decision logic partially opaque.\",\n    \"concision\": \"The explanation is compact but includes many zero-valued features that add little information. Removing features with zero contribution would improve information density without loss of insight.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies a key feature, the low fidelity score, lack of actionable guidance, missing instance context, and technical presentation limit its utility for understanding or auditing this false positive prediction.\",\n    \"semantic_plausibility\": \"Education level influencing income prediction is plausible in the adult dataset domain. However, the explanation is a false positive (predicted 1, true label 0), and without seeing actual feature values or direction of influence, it's difficult to assess whether the explanation makes sense for this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:51:03.187763+00:00"
+}

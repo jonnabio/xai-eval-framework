@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d3a139ee8855526b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f18f76706d7aa678_61a8aa0a71f47477.txt",
+  "prompt_version": "61a8aa0a71f47477",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549310-pgGjdVnuYqH87S3HHLI5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1116,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00516075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004185,
+        "upstream_inference_cost": 0.00516075,
+        "upstream_inference_prompt_cost": 0.00097575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1301,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2417
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists binary indicators without specifying thresholds, feature values, or what an individual could modify to change the prediction.\",\n    \"audit_usefulness\": \"While it shows which features were included in the anchor set, the lack of predicate conditions and presence of conflicting categories (e.g., Local-gov and nan) makes model auditing difficult.\",\n    \"clarity\": \"It outputs raw feature names with 1.0000 and 0.0000 weights instead of clear natural language rules or conditions, which is confusing for non-technical users.\",\n    \"completeness\": \"The representation strips the actual rule conditions and thresholds inherent to anchor explanations, leaving only binary inclusion indicators.\",\n    \"concision\": \"The explanation is relatively short, though listing unselected features with zero values adds minor unnecessary clutter.\",\n    \"overall_quality\": \"The explanation is weak because flattening the anchor rule into binary scores obscures the actual decision logic and results in poor technical fidelity.\",\n    \"semantic_plausibility\": \"Including mutually exclusive or suspicious one-hot indicators simultaneously (such as workclass_Local-gov and workclass_nan) makes the underlying logic questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:48:40.004158+00:00"
+}

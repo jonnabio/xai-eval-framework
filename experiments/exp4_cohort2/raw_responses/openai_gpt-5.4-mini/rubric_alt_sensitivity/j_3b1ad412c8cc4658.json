@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3b1ad412c8cc4658",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f9cc6b6fb4f65a14_66db5efcce60086f.txt",
+  "prompt_version": "66db5efcce60086f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543650-ltsFLNanIS4rK1q0JoQd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00261675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001764,
+        "upstream_inference_cost": 0.00261675,
+        "upstream_inference_prompt_cost": 0.00085275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1137,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local factors and does not explain what changes would alter the prediction, so it offers no concrete next steps.\",\n    \"audit_usefulness\": \"It gives a sparse feature ranking that hints at model drivers, but the near-zero importances and lack of directionality limit its value for bias or error analysis.\",\n    \"clarity\": \"The terms are mostly standard tabular features, but the meaning of the numeric values is not explained, so a non-technical reader would struggle to interpret them.\",\n    \"completeness\": \"It identifies a couple of local factors, mainly capital-gain and relationship_Own-child, but it does not provide a full local decision rationale or explain how they combine to yield the negative class.\",\n    \"concision\": \"The explanation is short and information-dense, though somewhat padded by many zero-valued features that add little.\",\n    \"overall_quality\": \"It is a modest local summary, but the explanation is incomplete, weakly interpretable, and not very useful for understanding the specific decision.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for Adult-income prediction, and the negative prediction for a child-like relationship is consistent, though the zero-valued entries make the explanation somewhat awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:12.900769+00:00"
+}

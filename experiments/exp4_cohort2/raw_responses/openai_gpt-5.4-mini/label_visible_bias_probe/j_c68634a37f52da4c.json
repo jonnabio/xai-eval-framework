@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d08e79080e9bdc99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c68634a37f52da4c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d08e79080e9bdc99_cd73ce6057ed9dfb.txt",
+  "prompt_version": "cd73ce6057ed9dfb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542713-f0qS7bBTEmm6oySVnLDr",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002859,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.002859,
+        "upstream_inference_prompt_cost": 0.0007845
+      },
+      "is_byok": false,
+      "prompt_tokens": 1046,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1507
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d08e79080e9bdc99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps, only lists features associated with the prediction. A user cannot easily act on this information.\",\n    \"audit_usefulness\": \"It identifies a small set of local features, but the zero/one formatting and lack of directionality or rule logic make it weak for auditing model behavior. The low fidelity and stability metrics further limit its value for investigation.\",\n    \"clarity\": \"The wording is brief and uses familiar feature names, but the numeric 1.0000/0.0000 values are not explained and the output format is cryptic. A non-expert would struggle to interpret what the listed values mean.\",\n    \"completeness\": \"It gives only a sparse set of top local factors and omits how they combine to support the negative prediction. With no thresholds, rule conditions, or class-specific rationale, the decision context is incomplete.\",\n    \"concision\": \"The explanation is short, but it is not especially information-dense because it repeats many feature names with uninformative binary values. It could be much more compact while still being clearer.\",\n    \"overall_quality\": \"This is a weak local explanation: it is somewhat interpretable but lacks usable decision logic, actionability, and strong audit value. The low fidelity and stability metrics are consistent with only modest explanatory quality.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are plausible predictors in this domain, but the Anchors-style output is poorly presented and not semantically transparent. The pattern of mostly zero-valued features without context is only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:35.298238+00:00"
+}

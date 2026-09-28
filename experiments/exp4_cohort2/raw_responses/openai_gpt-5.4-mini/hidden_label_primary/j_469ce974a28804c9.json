@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_98c1b4de308b5917",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_469ce974a28804c9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_98c1b4de308b5917_7a1664df743fa3e5.txt",
+  "prompt_version": "7a1664df743fa3e5",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538574-SmIiJzodJWu1RBrZro0O",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028815,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028815,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_98c1b4de308b5917\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse or next steps for changing the prediction. It only lists local factors with binary weights, which is not enough to guide a user toward a specific action.\",\n    \"audit_usefulness\": \"It identifies which features were considered locally important, which is somewhat useful for checking model behavior. However, the output lacks directionality and human-readable reasoning, so it is limited for deeper error or bias analysis.\",\n    \"clarity\": \"The output is concise and easy to read, but the numerical 1/0 factor listing is not very interpretable to a non-expert. It would be clearer if it explained how each factor influenced the positive prediction.\",\n    \"completeness\": \"It covers a few top factors, especially education-num, capital-gain, and relationship_Husband, but it does not explain their effect on the prediction. The explanation also omits the relative strength or threshold conditions needed to fully understand the local decision.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary prose. Still, the format is somewhat sparse for the amount of decision information conveyed.\",\n    \"overall_quality\": \"Overall, this is a moderately useful Anchors-style summary of local factors, but it is weak as an explanation because it lacks interpretability, recourse, and detailed decision context. It is better suited as a terse diagnostic artifact than as a user-facing explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers for an Adult-income positive prediction, especially education, capital gain, and marital relationship. The zero-valued extra features are less informative but not contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:49:37.286709+00:00"
+}

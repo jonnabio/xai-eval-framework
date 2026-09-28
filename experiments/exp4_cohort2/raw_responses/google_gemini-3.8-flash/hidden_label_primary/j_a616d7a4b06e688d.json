@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a616d7a4b06e688d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b352dc7c29edc22c_f9329786c5b642c6.txt",
+  "prompt_version": "f9329786c5b642c6",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538888-CKkVRVMkvC05Rk5NC1PC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1209,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 812,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005481,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00453375,
+        "upstream_inference_cost": 0.005481,
+        "upstream_inference_prompt_cost": 0.00094725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1263,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2472
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature attribution weights and includes immutable demographic characteristics, offering no practical guidance or recourse for changing the outcome.\",\n    \"audit_usefulness\": \"It provides useful insight into model logic by showing the top signed contributions, highlighting reliance on sensitive attributes like sex, marital status, and native country.\",\n    \"clarity\": \"The raw listing of one-hot encoded feature names and numerical values is difficult for a non-expert to interpret without understanding dummy variable reference levels.\",\n    \"completeness\": \"The top ten local factors provide a reasonable summary of the dominant drivers, though the actual feature values and baseline intercept are omitted.\",\n    \"concision\": \"The text is compact and directly presents the key attributions without unnecessary filler.\",\n    \"overall_quality\": \"While useful for an auditor inspecting model bias and feature weights, the explanation lacks actionability, actual feature values, and non-expert accessibility.\",\n    \"semantic_plausibility\": \"The indicated positive associations for Tech-support and marriage are consistent with Adult dataset patterns, though having multiple mutually exclusive categories simultaneously listed can appear semantically confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:57.406407+00:00"
+}

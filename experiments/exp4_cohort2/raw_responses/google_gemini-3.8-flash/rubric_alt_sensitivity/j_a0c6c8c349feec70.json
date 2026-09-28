@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a0c6c8c349feec70",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_03f9ac9f3ab42b8b_465d151860f9ec58.txt",
+  "prompt_version": "465d151860f9ec58",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546772-3nBRywEuD2dOImjakFOz",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1029,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 638,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048495,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00385875,
+        "upstream_inference_cost": 0.0048495,
+        "upstream_inference_prompt_cost": 0.00099075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1321,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2350
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists demographic and one-hot encoded features without providing thresholds or viable recourse for an individual to change the decision.\",\n    \"audit_usefulness\": \"It directly exposes the model's reliance on protected attributes like sex and marital status, providing strong utility for detecting bias in this false-negative outcome.\",\n    \"clarity\": \"The raw numerical attribution format and one-hot encoded variable names require technical familiarity with machine learning and feature attribution to interpret properly.\",\n    \"completeness\": \"The top 10 local factors provide the primary positive and negative contributors to the logreg prediction, though baseline context is missing.\",\n    \"concision\": \"The explanation is compact and communicates the top influential features efficiently, though displaying multiple mutually exclusive dummy variables adds slight redundancy.\",\n    \"overall_quality\": \"This is a serviceable, technically standard local attribution explanation that offers clear auditing utility despite poor accessibility for lay users.\",\n    \"semantic_plausibility\": \"The direction of demographic and educational weights aligns with known Adult dataset associations, though seeing opposing dummy values simultaneously can confuse domain interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:06:21.007772+00:00"
+}

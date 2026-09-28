@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_883747e4006952b5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e7770b140359bd75_21da5f3da58cd8ee.txt",
+  "prompt_version": "21da5f3da58cd8ee",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544758-p7y9TWh6Lz2gLIJrt2N5",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 518,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00259,
+        "upstream_inference_cost": 0.003875,
+        "upstream_inference_prompt_cost": 0.001285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1285,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1803
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three features driving the positive prediction (education-num, occupation, relationship status) but provides no guidance on what could be changed or what actions would alter the outcome. It is purely descriptive.\",\n    \"audit_usefulness\": \"Low fidelity (0.67) and high faithfulness gap (0.37) suggest the explanation may not reliably represent model behavior. The stability is also weak (0.30), limiting confidence in using this for bias or error investigation.\",\n    \"clarity\": \"The format is technical (feature names and weights) and assumes familiarity with the adult dataset and machine learning concepts. Non-technical users would struggle to interpret what 'education-num: 1.0000' means in practical terms.\",\n    \"completeness\": \"The explanation lists top factors but lacks context about their values, thresholds, or interactions. It does not explain why these specific features matter for this instance or what the model's decision boundary is.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their importance scores without padding.\",\n    \"overall_quality\": \"The explanation is a false positive (predicted 1, true label 0), and the technical metrics reveal poor fidelity and stability. While the format is clear, the low reliability and lack of actionable insight make it serviceable at best.\",\n    \"semantic_plausibility\": \"In the adult income domain, education, managerial occupation, and being married (husband) are plausible predictors of higher income. However, the explanation does not account for the false positive error, raising questions about whether these factors should have led to this prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:32:43.439085+00:00"
+}

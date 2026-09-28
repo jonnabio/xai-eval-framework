@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8b04e8deca32b073",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_b11abd9ec480a4aa_064ed741482797cc.txt",
+  "prompt_version": "064ed741482797cc",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538724-Ibrhg36xBa8Ot1CVCOwW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029265,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.0029265,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few contributing features, but it does not tell the user what specific changes could reverse or improve the prediction. It gives no concrete recourse beyond noting which variables were influential.\",\n    \"audit_usefulness\": \"The ranked local factors are useful for checking which inputs the model relied on, and the signs suggest some directional influence. However, the low fidelity and negative stability weaken its value for rigorous audit or bias investigation.\",\n    \"clarity\": \"The statement is short and the feature list is easy to read, especially for someone familiar with tabular ML explanations. Still, terms like one-hot encoded feature names may be less intuitive to non-experts.\",\n    \"completeness\": \"It covers several main local drivers, but it omits an explicit baseline, decision threshold, or a natural-language summary tying the factors together. Because the true label is hidden and confidence is unavailable, the explanation does not fully contextualize the prediction.\",\n    \"concision\": \"The output is compact and mostly free of redundancy while still listing the top local factors. It is informative per word, though some encoded feature names could be consolidated into a more readable narrative.\",\n    \"overall_quality\": \"This is a reasonably readable local explanation with some insight into model behavior, but it is limited by modest fidelity, weak stability, and the lack of explicit recourse or contextual summary. Overall it is useful but not strong.\",\n    \"semantic_plausibility\": \"The feature directions are broadly plausible for the Adult dataset, where work hours, marital status, occupation, sex, and relationship status are known to correlate with income prediction. Nothing in the explanation is obviously contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:52:06.687254+00:00"
+}

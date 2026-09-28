@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0997a6b55f4ecd12",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6261b33ddf1eb5d8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_0997a6b55f4ecd12_9cc9cb05afd1fa63.txt",
+  "prompt_version": "9cc9cb05afd1fa63",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546111-00JbCrx59ZnOn1Uf4F2o",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00396,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00265,
+        "upstream_inference_cost": 0.00396,
+        "upstream_inference_prompt_cost": 0.00131
+      },
+      "is_byok": false,
+      "prompt_tokens": 1310,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1840
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0997a6b55f4ecd12\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could change the outcome. A non-technical user cannot determine what modifications to their application would improve their chances.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes enable auditors to identify which features drove the rejection decision. The low fidelity (0.418) and moderate faithfulness gap (0.210) raise concerns about whether these contributions accurately reflect model behavior, limiting audit confidence.\",\n    \"clarity\": \"The format is technical (feature names with SHAP values) and requires understanding of SHAP methodology and feature encoding (e.g., 'checking_status_no checking'). Non-technical users would struggle to interpret the numerical contributions.\",\n    \"completeness\": \"Ten features are listed with their contributions, covering the main drivers. However, the explanation lacks context about thresholds, interactions, or why these particular features matter for credit decisions, leaving gaps in understanding the full decision logic.\",\n    \"concision\": \"The explanation is compact and avoids redundancy. Each line conveys a feature and its SHAP value efficiently, though the density of technical notation reduces accessibility.\",\n    \"overall_quality\": \"The explanation provides interpretable feature importance rankings suitable for model auditing, but the low fidelity score, lack of actionability, and technical presentation limit its practical utility. It is serviceable for technical review but weak for stakeholder communication.\",\n    \"semantic_plausibility\": \"The negative contributions from duration, checking status, and employment align with credit risk intuition (shorter loans and unstable employment are riskier). The positive contribution from savings is plausible. The feature selections are domain-reasonable for a credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:55:17.213814+00:00"
+}

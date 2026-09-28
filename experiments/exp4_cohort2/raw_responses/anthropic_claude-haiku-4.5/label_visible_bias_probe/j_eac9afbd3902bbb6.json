@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eac9afbd3902bbb6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e759e990528304a2_d3172f2839ecee53.txt",
+  "prompt_version": "d3172f2839ecee53",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541692-DZ3Ka2EFLG7Vppya2lEX",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003661,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002435,
+        "upstream_inference_cost": 0.003661,
+        "upstream_inference_prompt_cost": 0.001226
+      },
+      "is_byok": false,
+      "prompt_tokens": 1226,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1713
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction or what actions a user should take; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model inspection and can help identify potential biases (e.g., negative weight on Female), making it moderately useful for auditing model behavior.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical weights, which is clear in format but requires familiarity with LIME and the Adult dataset to interpret meaningfully.\",\n    \"completeness\": \"The top 10 features are provided with their contribution weights, covering the main drivers of the prediction; however, no context about feature values or thresholds is included.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text.\",\n    \"overall_quality\": \"While the explanation is clear and concise, the very low fidelity (0.43), high faithfulness gap (0.94), and poor stability (0.013) indicate the LIME model poorly approximates the MLP's local decision boundary, severely undermining the reliability and utility of the explanation.\",\n    \"semantic_plausibility\": \"The features and their directions are plausible for income prediction (e.g., professional specialty and capital gains increase likelihood of high income), though the weak technical performance raises doubts about whether these weights truly reflect the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:38.151850+00:00"
+}

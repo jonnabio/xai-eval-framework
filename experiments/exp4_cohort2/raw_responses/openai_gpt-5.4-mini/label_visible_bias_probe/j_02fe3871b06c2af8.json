@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56bce20eb20c4e00",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_02fe3871b06c2af8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_56bce20eb20c4e00_eaace61f0273cff9.txt",
+  "prompt_version": "eaace61f0273cff9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542654-pBFK1WI9Kky1Vi9anBiB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002979,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002979,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56bce20eb20c4e00\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model output into any concrete next step or recourse option for the user. It only lists feature names with binary-looking values, so it offers no actionable guidance.\",\n    \"audit_usefulness\": \"It reveals which features the anchor considered locally relevant, which is somewhat useful for inspection, but it lacks directionality and does not explain why the prediction is a false positive. This limits its value for diagnosing model behavior or bias.\",\n    \"clarity\": \"The output is readable, but the 1.0000/0.0000 formatting is not self-explanatory for a non-expert and the meaning of the anchors is unclear. A reader would likely need prior knowledge of Anchors and the feature encoding to interpret it.\",\n    \"completeness\": \"It identifies a small set of local factors, but it does not explain how they support the predicted class or how strong their influence is beyond the anchor membership values. Important local context for understanding this specific false-positive prediction is missing.\",\n    \"concision\": \"The explanation is short and avoids unnecessary detail, but it is also sparse in useful interpretive content. It is reasonably compact, though not maximally informative.\",\n    \"overall_quality\": \"The explanation has limited practical value: it is concise and somewhat interpretable, but it fails to explain the prediction in a meaningful way for a user or auditor. Overall it is only marginally useful for understanding this false-positive case.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible and consistent with the dataset, and the selected anchors are reasonable candidates for local rules. However, the 0/1-like values without explanation make the semantics of the output only partially clear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:57:36.921687+00:00"
+}

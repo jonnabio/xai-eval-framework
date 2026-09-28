@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_04539913cff27840",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cbdb515ea6b51b47_41c50b22ffd50593.txt",
+  "prompt_version": "41c50b22ffd50593",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538447-ByYWRxCshx6cVBajWglb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.00296775,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points to a few features but does not tell the user what to change or how to obtain a different outcome. It offers no explicit recourse beyond noticing which attributes were influential.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it identifies the main local contributors and their directions, which helps inspect whether the model is relying on sensible features. However, it lacks richer context such as feature values, baseline comparison, or stronger evidence for error analysis.\",\n    \"clarity\": \"The wording is short and easy to follow, and the sign convention is intuitive enough for a non-expert reader. The feature names are somewhat technical, but the list structure remains clear.\",\n    \"completeness\": \"It includes the top local factors, but only a small subset of the decision context is given and there is no indication of the instance\u2019s actual feature values. For a false negative, that is not enough to fully understand why the model predicted class 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still listing the most relevant local factors. It is efficient in length, though the many tiny effects add a bit of low-value detail.\",\n    \"overall_quality\": \"This is a decent LIME summary: readable, compact, and moderately useful for inspection, but not sufficiently detailed for strong decision understanding or recourse. Its main weakness is limited completeness and weak support for action.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset, especially marital status, education, sex, and capital gain. The directions of influence are generally consistent with what one might expect from a logistic regression model on this task.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:29.734259+00:00"
+}

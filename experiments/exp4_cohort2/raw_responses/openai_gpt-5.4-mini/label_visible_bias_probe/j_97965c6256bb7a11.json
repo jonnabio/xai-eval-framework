@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_97965c6256bb7a11",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e4a3c652adf1d046_35c884742e46f3de.txt",
+  "prompt_version": "35c884742e46f3de",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542064-fQjdRlqjWpLkBYBtQOLd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.002985,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step, only a list of features with binary weights. A user cannot tell what to change or how the prediction might be revisited.\",\n    \"audit_usefulness\": \"It gives a small set of local factors, which is somewhat useful for inspection, but the 1.0000/0.0000 values are not interpretable as meaningful contributions. It is too thin to support strong auditing or error analysis.\",\n    \"clarity\": \"The wording is simple and the feature list is easy to read, but the explanation format is ambiguous because it labels everything as 'top local factors' without explaining the scores. A non-expert would not understand what the weights mean.\",\n    \"completeness\": \"It mentions several likely important Adult dataset features, but it omits any direction of effect, relative importance, or interaction among features. For a false positive, it does not explain why the model crossed the decision boundary.\",\n    \"concision\": \"The explanation is brief and contains only a compact feature list, so it is not padded. However, the brevity comes at the cost of interpretability and useful detail.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is readable and short, but the importance values are not meaningful enough to explain the prediction well. It offers limited insight into why the model predicted class 1 for this false positive instance.\",\n    \"semantic_plausibility\": \"The listed features are plausible predictors for Adult income classification, especially age, education, occupation, relationship, and hours worked. However, the exact pattern of all-ones and zeros is not semantically informative and feels more like a template than a faithful explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:46.555142+00:00"
+}

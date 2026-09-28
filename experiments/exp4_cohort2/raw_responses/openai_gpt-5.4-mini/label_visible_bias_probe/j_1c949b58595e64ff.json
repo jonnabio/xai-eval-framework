@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1c949b58595e64ff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4deccedcca9c7800_3adf691ba6671f41.txt",
+  "prompt_version": "3adf691ba6671f41",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542103-TP65l2o5DE1CNkcKPyvg",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002835,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.002835,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1520
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate which changes to the instance would most likely alter the prediction. It only lists weak local feature weights, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It offers some local evidence about which features pushed the prediction down or up, which is mildly useful for inspection. However, the weights are tiny and the explanation has low fidelity and stability, limiting its value for serious audit work.\",\n    \"clarity\": \"The feature list is straightforward and mechanically readable, but the meaning is not explained in plain language. A non-expert would likely struggle to interpret the impact and scale of the coefficients.\",\n    \"completeness\": \"It includes several local factors, but they explain only a small part of the decision and do not provide a clear overall rationale for the negative prediction. The absence of stronger drivers, base value, or confidence information leaves the decision context incomplete.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary verbosity. It presents a short list of top factors in a reasonably efficient format.\",\n    \"overall_quality\": \"This is a terse and readable local explanation, but it is weak in explanatory depth and practical usefulness. Low fidelity, very low stability, and tiny effect sizes make it only moderately useful overall.\",\n    \"semantic_plausibility\": \"The direction of the listed factors is broadly plausible for the Adult dataset, with demographic and employment attributes appearing as local contributors. However, the tiny magnitudes and mixed signals reduce confidence in the substantive plausibility of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:25.622108+00:00"
+}

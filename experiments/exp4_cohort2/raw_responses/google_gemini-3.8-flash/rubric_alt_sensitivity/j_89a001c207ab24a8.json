@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_89a001c207ab24a8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_45af74f0fdcedd43_74e2f627724177e0.txt",
+  "prompt_version": "74e2f627724177e0",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547337-KcTG2x9tOHr3Hi4lq8l9",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1179,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 780,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00540375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00442125,
+        "upstream_inference_cost": 0.00540375,
+        "upstream_inference_prompt_cost": 0.0009825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1310,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2489
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists SHAP values without stating the actual feature values or providing clear counterfactual guidance on what specific actions would alter the outcome.\",\n    \"audit_usefulness\": \"It provides good visibility into the model's feature contributions, helping an auditor identify why this false positive occurred (e.g., checking status pushing the score up).\",\n    \"clarity\": \"The raw SHAP values and one-hot encoded variable names (e.g., checking_status_<0) are technical and challenging for an untrained audience to interpret.\",\n    \"completeness\": \"The top ten local factors with directional weights provide a reasonable summary of the dominant drivers of the decision.\",\n    \"concision\": \"The summary is compact and packed with information, avoiding unnecessary filler.\",\n    \"overall_quality\": \"A serviceable local SHAP attribution summary that clearly presents top drivers, though it lacks raw feature values and consumer-facing readability.\",\n    \"semantic_plausibility\": \"The identified risk factors such as duration, checking status, and credit history are plausible credit drivers, though one-hot encoded representation without original values leaves some ambiguity.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:15:46.749949+00:00"
+}

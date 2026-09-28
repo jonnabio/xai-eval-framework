@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5b2891817fc351e2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_45af74f0fdcedd43_05831527e6177bcf.txt",
+  "prompt_version": "05831527e6177bcf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542009-ECXQxWpoB6skJkh5MX6v",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 700,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004956,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040275,
+        "upstream_inference_cost": 0.004956,
+        "upstream_inference_prompt_cost": 0.0009285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2312
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists signed attribution weights with no recourse guidance or instructions on how to alter the outcome.\",\n    \"audit_usefulness\": \"It clearly details the top 10 contributing features with signed SHAP values, giving auditors strong visibility into why this false positive occurred.\",\n    \"clarity\": \"The raw format of one-hot encoded variable names paired with decimal attribution scores requires technical and domain literacy to interpret.\",\n    \"completeness\": \"The top 10 local factors provide a solid picture of the decision drivers, though the absence of original feature values and the base value limits full reconstruction.\",\n    \"concision\": \"The presentation is dense and free of fluff, conveying key attribution figures efficiently.\",\n    \"overall_quality\": \"This is a solid, standard technical attribution summary suitable for model validation, though lacking in lay clarity and recourse.\",\n    \"semantic_plausibility\": \"The identified risk drivers such as checking status, loan duration, and property ownership align well with standard credit underwriting intuition.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:58.582961+00:00"
+}

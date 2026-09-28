@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b5ae75faeaf1f987",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e594d44f0a99f099_4b2241fa8e3960cd.txt",
+  "prompt_version": "4b2241fa8e3960cd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539373-DiFaQUTWB3VIweyjaI7s",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0031905,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002403,
+        "upstream_inference_cost": 0.0031905,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1584
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names but gives no concrete recourse or next steps a user could take to change the prediction. It does not indicate whether any listed factors are high, low, favorable, or unfavorable in a way that supports action.\",\n    \"audit_usefulness\": \"It provides a rough set of local factors, which is somewhat useful for inspecting what the model may have relied on, but it lacks directional contribution and threshold information. The low sparsity and repeated zero-valued entries limit its value for debugging or bias/error analysis.\",\n    \"clarity\": \"The wording is short and easy to read, but the content is not clearly organized into a human explanation and the numeric entries are not self-explanatory. A non-expert would struggle to interpret what the 1.0000 and 0.0000 values mean in relation to the positive prediction.\",\n    \"completeness\": \"The explanation names a few local features, but it does not explain how they combine to produce the class 1 prediction or how strong each factor is. Important decision context such as directionality, magnitude, and the model's confidence is missing.\",\n    \"concision\": \"It is very compact, but some of the compactness comes from listing many zero-valued features that add little useful information. The explanation could be shorter and more informative if it focused only on the meaningful anchors and their implications.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat interpretable as a feature list, but it does not provide enough semantic meaning, decision support, or audit detail to be especially useful. Its technical metrics also suggest only moderate fidelity and stability.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are appropriate for the dataset, and highlighting area error and worst perimeter is plausible for a random forest model on this task. However, the all-zero entries and lack of interpretation make the explanation feel only loosely grounded in an understandable local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:02:56.986306+00:00"
+}

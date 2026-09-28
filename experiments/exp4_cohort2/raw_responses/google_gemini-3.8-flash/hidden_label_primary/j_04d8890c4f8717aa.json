@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_04d8890c4f8717aa",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_6496b69e203cf5db_4c21f11ad9b0d903.txt",
+  "prompt_version": "4c21f11ad9b0d903",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790550961-nLKuzojNQNhWqVeesWqh",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1063,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 696,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049245,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00398625,
+        "upstream_inference_cost": 0.0049245,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2314
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide counterfactual target values or actionable guidance, presenting only feature frequency weights without direction.\",\n    \"audit_usefulness\": \"It highlights which features were perturbed to alter the prediction, but the absence of feature values and directionality restricts its utility for deep auditing.\",\n    \"clarity\": \"The list of raw feature dummy variables with decimal weights is technical and unintuitive for a non-expert reader.\",\n    \"completeness\": \"While it captures the two active factors, it omits baseline feature values, counterfactual targets, and the remaining feature landscape.\",\n    \"concision\": \"The explanation includes numerous zero-weight features that add visual noise without conveying additional insight.\",\n    \"overall_quality\": \"Presenting aggregated counterfactual frequencies without actionable values or directional guidance results in a mediocre explanation.\",\n    \"semantic_plausibility\": \"Marital status and education level are well-established key drivers of income predictions in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:16:10.105995+00:00"
+}

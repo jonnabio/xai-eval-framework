@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_20242fe53fbadae4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f9fdc65c03b92100",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_20242fe53fbadae4_192ad991446f80c9.txt",
+  "prompt_version": "192ad991446f80c9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541299-Cik61PwZ6AXmbZqM0Vb2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002979,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.002979,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_20242fe53fbadae4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists local factors but does not translate them into any concrete recourse or next steps for the applicant or reviewer. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"It identifies the main features associated with the prediction, which is useful for a basic check of what the anchor rule relies on. However, it lacks direction on how these factors relate to the false negative or whether the rule is stable across similar cases.\",\n    \"clarity\": \"The wording is simple and the feature names are explicit, so a reader can identify the listed variables without much effort. Still, the all-1.0000 formatting and lack of narrative make the meaning of the explanation somewhat opaque to non-experts.\",\n    \"completeness\": \"The explanation names several top local factors, which gives a partial picture of the decision. It does not explain the direction of influence, thresholds, or how these features combine to produce the negative prediction, so the local decision context remains incomplete.\",\n    \"concision\": \"The output is short and focused on the top factors, with little redundant text. At the same time, it is mostly a raw list of features, so the information density is only moderate.\",\n    \"overall_quality\": \"This is a usable but limited anchor explanation: it is compact and identifies salient features, yet it does not explain the decision mechanism or support meaningful recourse. Given the false negative context, the lack of directionality and actionable guidance reduces its practical value.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in German credit scoring, such as checking status, credit history, savings, employment, and loan amount. The explanation is therefore coherent with the domain, even though it is mechanically presented.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:35:01.958972+00:00"
+}

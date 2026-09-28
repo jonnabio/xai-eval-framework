@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_10ccf6bdc14f2a99",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b9efba22794f6b8b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_10ccf6bdc14f2a99_cd978b13b5259102.txt",
+  "prompt_version": "cd978b13b5259102",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541375-E0uywCXziKiKZqWJjUVH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028695,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.0028695,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1516
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_10ccf6bdc14f2a99\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing contributing features. A user cannot tell what to change, check, or verify based on this output alone.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the main local drivers and their directions, which can help inspect whether the model relies on medically sensible breast-cancer features. However, it lacks baseline values and comparison context, so it only partially supports deeper error or bias analysis.\",\n    \"clarity\": \"The output is straightforward and easy to parse, with a simple list of SHAP feature attributions. A non-expert may still not fully understand the meaning of negative values, but the overall organization is clear.\",\n    \"completeness\": \"It covers the top local factors driving the prediction, but it does not explain the decision threshold, the predicted class meaning, or the instance's actual feature values. That leaves the local decision context only partially specified.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still preserving the most important local factors. It is a good length for the amount of information conveyed.\",\n    \"overall_quality\": \"This is a solid, compact local explanation with reasonable interpretability and stable feature rankings, but it is limited by missing context and lack of actionable guidance. Overall it is useful, though not comprehensive.\",\n    \"semantic_plausibility\": \"The listed features are highly plausible for a breast cancer classifier, and the negative contributions are consistent with a true negative prediction. The specific ranking of radiological size and shape measures also matches domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:17.838219+00:00"
+}

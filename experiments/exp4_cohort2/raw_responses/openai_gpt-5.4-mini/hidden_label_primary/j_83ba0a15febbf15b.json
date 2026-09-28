@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_83ba0a15febbf15b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c3a6d29157145c8e_5098e259ef1d5953.txt",
+  "prompt_version": "5098e259ef1d5953",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538785-en9qhKqCRUDyGxhGavJZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028095,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.0028095,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1501
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features associated with the prediction, but it does not translate them into concrete recourse or next steps. A user cannot tell what changes, if any, would reduce the predicted risk.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local contributors and their relative strengths. However, it lacks directionality and comparison to a baseline, so it only partially supports deeper error or bias investigation.\",\n    \"clarity\": \"The text is short and easy to parse, with a simple ranked list of feature names and values. For a non-expert, though, the medical feature terminology is still somewhat technical and not self-explanatory.\",\n    \"completeness\": \"The explanation identifies several top drivers, which covers the main local factors behind the prediction. It does not explain whether each factor increased or decreased the predicted class, nor how they combine into the final decision.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It provides a dense summary of the top features without unnecessary wording.\",\n    \"overall_quality\": \"This is a reasonably strong local feature-summary explanation, but it is limited by the absence of sign, context, and actionable interpretation. It is useful for quick inspection but not fully sufficient for a complete understanding of the prediction.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for a breast cancer classifier, since area, perimeter, radius, and concave points are common discriminative morphology features. The ranking also looks coherent for a tumor-related prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:08.562122+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_38423f2bf54fc7aa",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_4c3d79ea2f396cd5_e0710d3e96ab4ca9.txt",
+  "prompt_version": "e0710d3e96ab4ca9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544247-pKA29xceID0931WwlrLO",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003723,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00249,
+        "upstream_inference_cost": 0.003723,
+        "upstream_inference_prompt_cost": 0.001233
+      },
+      "is_byok": false,
+      "prompt_tokens": 1233,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1731
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature weights all near zero with no direction or magnitude to guide any corrective action or decision review. No specific, feasible steps can be derived from coefficients that are essentially null.\",\n    \"audit_usefulness\": \"With all feature contributions at or near zero and a false positive prediction, the explanation fails to reveal why the model made this error or what model logic drove the incorrect classification. This severely limits auditor ability to investigate bias or systematic failures.\",\n    \"clarity\": \"The explanation is formatted clearly as a list of feature-weight pairs, but the substantive content\u2014all near-zero coefficients\u2014conveys no meaningful signal and is confusing rather than illuminating for any reader.\",\n    \"completeness\": \"The explanation lists ten features but provides no actionable insight into the actual decision drivers for this specific prediction, leaving the core question of why the model predicted class 1 unanswered.\",\n    \"concision\": \"While the token count is modest, the explanation is informationally empty; all weights collapse to zero, making every word wasted on a non-explanation.\",\n    \"overall_quality\": \"This explanation is fundamentally broken: zero fidelity, near-zero stability, and all feature weights at machine precision limits indicate LIME failed to produce a meaningful local approximation. The false positive prediction is left entirely unexplained.\",\n    \"semantic_plausibility\": \"The near-zero weights across all features are implausible as a complete explanation for any binary classification decision; they suggest numerical collapse or model failure rather than genuine feature importance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 1,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:24:12.992574+00:00"
+}

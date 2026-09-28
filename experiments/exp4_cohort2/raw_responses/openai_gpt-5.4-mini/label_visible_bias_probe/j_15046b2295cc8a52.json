@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_15046b2295cc8a52",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28cfcd5501fa69b2_0b9082a65658ad31.txt",
+  "prompt_version": "0b9082a65658ad31",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542048-jBDZIHQ42GuMumaJ7hOZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003069,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002277,
+        "upstream_inference_cost": 0.003069,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next step. It only lists local factors with binary weights, so a user cannot tell what to change to alter the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies a few features the anchor rule depends on, but it gives no directionality or effect size beyond the binary rule support. The very low sparsity also limits how much of the decision logic is actually exposed.\",\n    \"clarity\": \"The output is short and technically formatted, but a non-expert is unlikely to understand what the 1.0000 and 0.0000 values mean. The feature names are understandable in isolation, yet the overall anchor-style presentation is not clearly explained.\",\n    \"completeness\": \"It includes only a small set of top local factors and omits how those factors interact to produce the negative prediction. Because this is a false negative, the explanation also fails to clarify why the model missed the positive class.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but much of the listed information is redundant because many features are shown with zero contribution. It is moderately concise, though not maximally informative per word.\",\n    \"overall_quality\": \"The explanation has limited practical value: it is somewhat stable and partially informative, but not easy to interpret or use for recourse. Its main weakness is that it exposes little about why the instance was classified as negative, especially in a false-negative case.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the German credit domain, such as checking status, credit history, employment, and loan duration. However, the explanation\u2019s binary weighting and inclusion of many zero-valued items make the semantics only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:31.374157+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_15a3177b100b3720",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_ba8a2c4ca53c1a08_22076daa1c5a64da.txt",
+  "prompt_version": "22076daa1c5a64da",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790548504-oSwJMuVt54F8vRFTNVxj",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1193,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 763,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00546825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00447375,
+        "upstream_inference_cost": 0.00546825,
+        "upstream_inference_prompt_cost": 0.0009945
+      },
+      "is_byok": false,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2519
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static demographic traits (sex, marital status, relationship) and historical education levels without actionable guidance or counterfactual paths to alter the prediction.\",\n    \"audit_usefulness\": \"It surfaces the model's reliance on protected attributes like sex and marital status alongside occupation and education, providing decent visibility for fairness audits despite one-hot encoding artifacts.\",\n    \"clarity\": \"The raw feature-weight pairs and one-hot dummy notation (e.g., separate positive and negative entries for sex and education) require familiarity with data encoding to interpret properly.\",\n    \"completeness\": \"Ten local features are listed with signed coefficients, capturing key drivers such as professional education and occupation, though the underlying instance feature values are omitted.\",\n    \"concision\": \"The list is compact and devoid of conversational filler, though one-hot encoding introduces minor redundancy across mutually exclusive categories.\",\n    \"overall_quality\": \"A serviceable LIME attribution summary that highlights the main decision factors, slightly degraded by the clutter of dummy-encoded category levels.\",\n    \"semantic_plausibility\": \"High-earning indicators like professional school and specialty occupations pushing positively align well with census domain knowledge, though the simultaneous appearance of multiple one-hot categories for sex and education can be counterintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:35:14.387505+00:00"
+}

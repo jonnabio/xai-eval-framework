@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f18f76706d7aa678",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5d6a06140f8337b3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f18f76706d7aa678_9ded449d91e961a3.txt",
+  "prompt_version": "9ded449d91e961a3",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541126-J9BYjcOkjLsKTgXg3czL",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 830,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0055425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00462,
+        "upstream_inference_cost": 0.0055425,
+        "upstream_inference_prompt_cost": 0.0009225
+      },
+      "is_byok": false,
+      "prompt_tokens": 1230,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2462
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f18f76706d7aa678\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify decision thresholds, feature directions, or counterfactual guidance, offering no actionable recourse for the user.\",\n    \"audit_usefulness\": \"While it highlights which features are included in the local anchor set, the lack of predicate boundaries and extremely poor stability (0.0) severely limit its utility for debugging model behavior.\",\n    \"clarity\": \"The explanation presents raw feature names and binary weights without clear semantics or readable rule conditions, making it confusing for non-technical users.\",\n    \"completeness\": \"The output strips away the predicate logic and directional conditions essential to Anchor rules, providing an incomplete view of the local decision boundary.\",\n    \"concision\": \"The token length is compact, though including multiple zero-weighted features provides little explanatory value.\",\n    \"overall_quality\": \"The explanation fails to convey meaningful decision logic due to stripped rule conditions, high faithfulness gap, and lack of actionable direction.\",\n    \"semantic_plausibility\": \"The selected factors (education, marital status, relationship) are common predictors of income, though listing both Local-gov and nan for workclass is somewhat ambiguous.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:32:16.559258+00:00"
+}

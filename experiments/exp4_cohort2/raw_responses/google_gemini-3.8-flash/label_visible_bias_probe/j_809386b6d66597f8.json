@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3830b6d4d8e8784b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_809386b6d66597f8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_3830b6d4d8e8784b_aedc1dd9056968e8.txt",
+  "prompt_version": "aedc1dd9056968e8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544465-jvBUqrW8gtVKBX8EI3Ih",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 670,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004938,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00400875,
+        "upstream_inference_cost": 0.004938,
+        "upstream_inference_prompt_cost": 0.00092925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1239,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2308
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3830b6d4d8e8784b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the actual feature values, thresholds, or directional guidance required for recourse.\",\n    \"audit_usefulness\": \"It identifies that education-num and occupation are the salient factors, but the absence of rule conditions and the presence of zero-weight features limit deeper technical auditing.\",\n    \"clarity\": \"The raw key-value format is syntactically readable, but non-experts cannot easily interpret what the 1.0000 and 0.0000 coefficients signify.\",\n    \"completeness\": \"The explanation lacks the specific decision thresholds characteristic of anchor rules, providing only an incomplete binary indicator of feature presence.\",\n    \"concision\": \"Listing eight features with values of 0.0000 adds unnecessary clutter and dilutes the informative content.\",\n    \"overall_quality\": \"The explanation provides minimal domain-plausible cues but suffers heavily from zero-padded clutter, missing rule bounds, and zero actionability.\",\n    \"semantic_plausibility\": \"Education level and service occupations are established domain drivers for predicting lower income levels in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:27:54.312506+00:00"
+}

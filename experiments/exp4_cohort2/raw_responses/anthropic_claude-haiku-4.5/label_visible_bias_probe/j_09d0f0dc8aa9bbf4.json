@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07197d290136f3e3",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_09d0f0dc8aa9bbf4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07197d290136f3e3_9100826f784fa46f.txt",
+  "prompt_version": "9100826f784fa46f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544069-ar62ls0kepJJJIGmB92h",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003579,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00236,
+        "upstream_inference_cost": 0.003579,
+        "upstream_inference_prompt_cost": 0.001219
+      },
+      "is_byok": false,
+      "prompt_tokens": 1219,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1691
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07197d290136f3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction or what actions a user should take. The zero-valued features offer no recourse pathway.\",\n    \"audit_usefulness\": \"The normalized scores and feature ranking support model inspection, but the extremely low fidelity (0.151) and zero stability indicate the explanation is unreliable for auditing model behaviour or detecting bias.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is straightforward to parse but lacks narrative context explaining what the scores mean or why these features matter.\",\n    \"completeness\": \"Only three features show non-zero importance (education-num, capital-gain, capital-loss), while many others are marked 0.0, leaving uncertainty about whether zero truly means irrelevant or reflects incomplete local exploration.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature rankings in a minimal format without extraneous text.\",\n    \"overall_quality\": \"The explanation suffers from critical technical failures (zero stability, low fidelity, false negative prediction) that undermine its reliability and usefulness across all practical dimensions.\",\n    \"semantic_plausibility\": \"For income prediction, education and capital gains/losses are plausible drivers, but the complete absence of hours-per-week and age as factors is counterintuitive and suggests the explanation may not reflect true model logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:21:14.270830+00:00"
+}

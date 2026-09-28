@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_98c1b4de308b5917",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_77d39cf9f417c8b1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_98c1b4de308b5917_7a1664df743fa3e5.txt",
+  "prompt_version": "7a1664df743fa3e5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538853-itGVkLXUYFEEABAw9XZx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 603,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00463425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00370875,
+        "upstream_inference_cost": 0.00463425,
+        "upstream_inference_prompt_cost": 0.0009255
+      },
+      "is_byok": false,
+      "prompt_tokens": 1234,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2223
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_98c1b4de308b5917\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the instance's feature values or decision thresholds, offering no clear path for recourse.\",\n    \"audit_usefulness\": \"While it isolates three active features from inactive ones, the omission of predicate conditions and thresholds limits its utility for rigorous model auditing.\",\n    \"clarity\": \"The list of factor weights is easy to read, but the binary 1.0/0.0 values without accompanying feature values require technical inference.\",\n    \"completeness\": \"It identifies the anchor features but fails to report the actual rule predicates or directional effects needed to fully comprehend the prediction.\",\n    \"concision\": \"Listing several irrelevant features with zero weights adds unnecessary clutter to the explanation.\",\n    \"overall_quality\": \"The explanation highlights domain-relevant features, but the lack of thresholds and presence of zero-weight padding make it minimally useful overall.\",\n    \"semantic_plausibility\": \"Highlighting education-num, capital-gain, and relationship status as key drivers for high income aligns closely with domain reality on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:20.875267+00:00"
+}

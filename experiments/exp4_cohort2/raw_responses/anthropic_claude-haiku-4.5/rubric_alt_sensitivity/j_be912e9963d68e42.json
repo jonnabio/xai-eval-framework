@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_af2a9f1c15262b41",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_be912e9963d68e42",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_af2a9f1c15262b41_9f5121e643d28d07.txt",
+  "prompt_version": "9f5121e643d28d07",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547190-XezAPjqe3cUimrWwseWt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00399,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002705,
+        "upstream_inference_cost": 0.00399,
+        "upstream_inference_prompt_cost": 0.001285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1285,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1826
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_af2a9f1c15262b41\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what values would change the prediction or what actions could be taken. A patient or clinician cannot determine what interventions might alter the outcome.\",\n    \"audit_usefulness\": \"The low fidelity (0.66) and stability (0.495) scores raise concerns about the explanation's reliability. While the feature rankings could help identify model behavior, the technical metrics suggest the explanation may not consistently represent the model's decision logic.\",\n    \"clarity\": \"The format is technical and requires understanding of feature names and numerical scoring. Non-technical users would struggle to interpret what 'area error: 1.0000' means or why these features matter for cancer classification.\",\n    \"completeness\": \"Only two features are identified as important (area error and worst texture with scores of 1.0), while eight others are listed as 0.0. This sparse explanation lacks depth about why these specific features drive the prediction or how they interact.\",\n    \"concision\": \"The explanation is reasonably concise at 75 tokens, though it includes many zero-valued features that add length without information. The list format is efficient but could be tighter by excluding irrelevant features.\",\n    \"overall_quality\": \"The explanation is weak due to low technical reliability (fidelity 0.66, stability 0.495), minimal actionability, and limited interpretability for non-technical audiences. While it identifies top features, it fails to provide sufficient context or guidance.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, texture and area measurements are medically relevant features. However, the explanation provides no clinical context about why these specific measurements matter or how they relate to malignancy, making it difficult to assess domain consistency.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:13:16.056924+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fe9e5095e0d3e344",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_03f9ac9f3ab42b8b_465d151860f9ec58.txt",
+  "prompt_version": "465d151860f9ec58",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542821-RrQhROhZQMOUGPHZgem3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00265275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017955,
+        "upstream_inference_cost": 0.00265275,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1542
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature contributions and does not say what changes could flip the prediction or how an affected person might act on it.\",\n    \"audit_usefulness\": \"The ranked SHAP attributions are useful for inspecting which inputs influenced the model, but they do not provide enough context to deeply assess bias or error on their own.\",\n    \"clarity\": \"The list is understandable in general, but the feature names are technical and one needs some familiarity with one-hot encoded tabular data to interpret them well.\",\n    \"completeness\": \"It includes the top local factors, which gives the main drivers, but it does not explain the overall decision path, baseline, or how strongly these factors combined to yield the final class.\",\n    \"concision\": \"The explanation is fairly tight: it is short and contains mostly the key attribution values with little filler.\",\n    \"overall_quality\": \"This is a solid local explanation for a tabular model, but it is limited to feature attributions and is not especially insightful about the false negative decision beyond showing important inputs.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions of influence are reasonable, though some entries like both sex indicators and both marital/relationship terms make the presentation slightly redundant.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:00:23.090158+00:00"
+}

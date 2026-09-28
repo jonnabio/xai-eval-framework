@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_372b4e1fb7e06f37",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_861c15c7ecab8f3b_3cbfb43761e237bb.txt",
+  "prompt_version": "3cbfb43761e237bb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547016-bclMZgF1e3pPFh9ZabW5",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00274,
+        "upstream_inference_cost": 0.004022,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1830
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A person cannot act on abstract importance weights without knowing what values to change or why.\",\n    \"audit_usefulness\": \"While the explanation identifies native-country as the dominant factor, the poor technical metrics (negative fidelity, low stability) and lack of counterfactual details limit its utility for auditing bias or model errors. An auditor cannot determine if this reflects genuine patterns or model artifacts.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is accessible to non-technical readers. However, the meaning of the scores and why native-country dominates is not explained, requiring some domain knowledge to interpret.\",\n    \"completeness\": \"The explanation identifies one key factor (native-country) but provides minimal context about why this matters or how it drives the prediction. It lacks information about the instance's actual values, counterfactuals, or the decision boundary.\",\n    \"concision\": \"The explanation is brief but somewhat padded with many zero-valued features that add little information. A tighter version would omit features with zero importance or explain why they appear.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies a dominant feature, the poor technical metrics (negative fidelity, low stability, high cost), lack of actionable insights, and minimal context make it of limited practical value for understanding or auditing the model's decision.\",\n    \"semantic_plausibility\": \"Native-country being predictive of income in the adult dataset is plausible, but the extreme dominance of Peru (1.0) and the zero importance of all other features is suspicious. The pattern lacks nuance and may reflect overfitting or data artifacts rather than genuine relationships.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:10:22.155520+00:00"
+}

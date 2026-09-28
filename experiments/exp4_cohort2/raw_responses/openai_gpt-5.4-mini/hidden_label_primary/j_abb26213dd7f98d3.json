@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_abb26213dd7f98d3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_3e006f8c0e7512b1_1ca24c7990013da3.txt",
+  "prompt_version": "1ca24c7990013da3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538489-ECV56hmKlX9RnfMI7FMM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028965,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0028965,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or review steps. It only lists features and SHAP values, so a user cannot tell what to change or verify next.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it identifies the strongest local drivers of the model output and their directions. However, the mixed and somewhat redundant feature list limits its value for deeper bias or error analysis.\",\n    \"clarity\": \"The format is straightforward for someone familiar with SHAP, but the meaning of the signed values is not explained in plain language. A non-expert could struggle to interpret the duplicate and overlapping categorical features.\",\n    \"completeness\": \"The explanation covers several top local factors, which helps understand the prediction, but it omits any baseline, probability, or narrative linking the factors to the final class. For a false negative, it does not clearly explain why the positive class was missed.\",\n    \"concision\": \"It is fairly compact and contains mostly useful information, with little extraneous text. Still, some redundancy appears from related features such as multiple marital-status, education, and relationship indicators.\",\n    \"overall_quality\": \"Overall, this is a usable technical explanation but not a strong end-user explanation. It provides partial local insight with limited interpretability, weak recourse support, and moderate audit value.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the signs are generally consistent with a local SHAP explanation for an MLP model. The presence of overlapping one-hot features is somewhat messy, but not semantically contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:48:12.233055+00:00"
+}

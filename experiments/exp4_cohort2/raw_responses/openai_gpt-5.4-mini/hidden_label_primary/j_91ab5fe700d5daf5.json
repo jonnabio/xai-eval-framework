@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_91ab5fe700d5daf5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e4a3c652adf1d046_1feba94fe710617e.txt",
+  "prompt_version": "1feba94fe710617e",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539532-wqdbRgSoUifgAUDE6j1C",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00225,
+        "upstream_inference_cost": 0.00303975,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1553
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next steps, such as which features to change or what thresholds matter. It only lists local factors with binary-style values, so a user cannot act on it directly.\",\n    \"audit_usefulness\": \"It provides a sparse list of features that appear locally relevant, which is somewhat useful for checking what the model may have relied on. However, it lacks directionality, feature effects, and support for diagnosing whether the false positive is driven by bias or error.\",\n    \"clarity\": \"The terms are simple and the list is easy to read, but the meaning of the 1.0000 and 0.0000 scores is not explained. A non-expert would not know whether these indicate presence, importance, or rule satisfaction.\",\n    \"completeness\": \"The explanation names several candidate drivers, but it does not show how they combine, whether they increased or decreased the prediction, or why the model reached class 1. For a specific prediction, this leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is short and largely free of filler, so it is efficient in length. That said, the compactness comes at the cost of interpretive detail, so it is only moderately good rather than excellent.\",\n    \"overall_quality\": \"Overall, this is a terse feature list that hints at relevant variables but does not explain their effects or support review of the false positive. It is readable and compact, yet too thin to be highly useful.\",\n    \"semantic_plausibility\": \"The listed features are plausible for Adult-income modeling, especially age, education, occupation, relationship, and hours worked. The presence of all-ones and all-zeros values is somewhat opaque but not contradictory to an anchor-style explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:36.431762+00:00"
+}

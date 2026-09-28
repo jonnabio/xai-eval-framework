@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4038c945a3422a4c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e4a3c652adf1d046_9f42f151467a8105.txt",
+  "prompt_version": "9f42f151467a8105",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790549553-x5llOGKefYZH6P274DC0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 609,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004764,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00378375,
+        "upstream_inference_cost": 0.004764,
+        "upstream_inference_prompt_cost": 0.00098025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1307,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2316
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide feature values, thresholds, or directional guidance, offering no actionable steps to alter the outcome.\",\n    \"audit_usefulness\": \"Identifying which five features formed the anchor helps an auditor see why this false positive occurred, but the lack of actual feature values and rule predicates limits deep debugging.\",\n    \"clarity\": \"Presenting feature names alongside 1.0000 and 0.0000 values without predicates or values is confusing for non-technical users.\",\n    \"completeness\": \"The representation strips away the actual anchor rule conditions (inequalities/thresholds), leaving only binary feature inclusion indicators.\",\n    \"concision\": \"Half of the listed features have zero weights and provide little value, making the presentation less concise than necessary.\",\n    \"overall_quality\": \"Degraded by the loss of Anchor rule conditions into binary inclusion weights, though the selected feature set remains sensible for the Adult dataset.\",\n    \"semantic_plausibility\": \"The highlighted features (age, education, hours worked, managerial occupation, husband status) strongly align with domain knowledge regarding high income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:52:41.376945+00:00"
+}

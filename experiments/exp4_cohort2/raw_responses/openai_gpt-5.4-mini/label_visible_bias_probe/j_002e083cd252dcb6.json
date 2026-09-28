@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_002e083cd252dcb6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_81c9024ae418939e_34eca44099ccaeac.txt",
+  "prompt_version": "34eca44099ccaeac",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542509-6r0RGsgr07pgg2ibhjcD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029805,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.0029805,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It lists factors and weights only, with no guidance on what could be adjusted or reviewed.\",\n    \"audit_usefulness\": \"It is somewhat useful for audit because it identifies which features were considered by the anchor-style explanation and shows their weights. However, it lacks a readable rule or decision logic, so it is only partially informative for investigating model behavior.\",\n    \"clarity\": \"The output is short and uses simple labels, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. It also omits a plain-language statement of why the model predicted class 0.\",\n    \"completeness\": \"The explanation covers only a few feature names and does not explain how they jointly led to the false negative prediction. It misses essential local decision context such as the actual feature values, the anchor rule, or the counterfactual factors that pushed the model toward class 0.\",\n    \"concision\": \"The explanation is compact and not overly verbose. However, it is sparse to the point that important decision information is missing, so the brevity does not translate into high information efficiency.\",\n    \"overall_quality\": \"Overall, this is a weak explanation for understanding a specific misclassification. It provides a minimal feature listing but little interpretable decision logic, limited usefulness for users or auditors, and no meaningful recourse information.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset and the general idea that age and relationship status matter is consistent with domain expectations. However, the near-binary weights without explanation are not very semantically helpful for interpreting the false negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:55:11.378252+00:00"
+}

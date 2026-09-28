@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_454fd5f0ed24268e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_60f604202ab9cb5c_74ad6638bbb08809.txt",
+  "prompt_version": "74ad6638bbb08809",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540404-obTSwoe0GDejNy1zjrAL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00311025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023175,
+        "upstream_inference_cost": 0.00311025,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1572
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete next steps, thresholds, or recourse actions a user could take. It only lists features with binary-looking values, so it offers no practical guidance for decision review.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it identifies a few top local factors, but the values are not interpretable in context and there is no rule coverage or effect direction. The low fidelity and stability metrics also limit confidence in using it to inspect model behavior.\",\n    \"clarity\": \"The wording is short and readable, but the feature-value listing is opaque for a non-expert and lacks explanation of what 1.0000 or 0.0000 mean here. The output does not state the anchor rule or how these factors led to the prediction.\",\n    \"completeness\": \"It mentions only a small set of features and omits the actual local rule logic, feature directions, and why the prediction is positive. Given the high faithfulness gap and low sparsity, it does not provide enough local decision context to understand this specific case.\",\n    \"concision\": \"The explanation is compact, but much of the content is redundant or uninformative because the feature list is not contextualized. It is brief without being efficient in communicating useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable but not very informative, actionable, or reliable. The poor technical metrics and missing rule semantics make it unsuitable for strong local understanding or auditing.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible for the dataset, but the presentation of many features with 0.0000 or 1.0000 values is not semantically meaningful on its own. Without a clear anchor condition, the explanation feels only loosely connected to the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:08.474574+00:00"
+}

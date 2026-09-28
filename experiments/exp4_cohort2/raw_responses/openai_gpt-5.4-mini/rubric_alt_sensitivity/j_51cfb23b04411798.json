@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_51cfb23b04411798",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1de08b8c2918a436_63142a14b39d456a.txt",
+  "prompt_version": "63142a14b39d456a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543304-cmkZYEJ9t5hlC4jyOxbm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00269175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0018405,
+        "upstream_inference_cost": 0.00269175,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It identifies a few high-level conditions associated with the prediction, but it does not say how changing any feature would affect the outcome or what feasible next steps would be.\",\n    \"audit_usefulness\": \"The listed anchors are useful for checking which feature combinations the model relies on, but the explanation is too sparse and partially opaque to support deep bias or error analysis on its own.\",\n    \"clarity\": \"The feature names are mostly understandable, but the raw anchor-style 1.0000/0.0000 outputs are not very intuitive for nontechnical readers and require some interpretation.\",\n    \"completeness\": \"It gives only a small set of local conditions and omits the broader reasoning behind the false positive, so it does not fully explain why the model predicted class 1.\",\n    \"concision\": \"The explanation is short and largely non-redundant, but some of the output is just a list of feature weights without much interpretive value.\",\n    \"overall_quality\": \"A reasonably compact local explanation, but it is limited by sparse, somewhat technical output and only partial insight into the decision, so it is useful but not strong.\",\n    \"semantic_plausibility\": \"The highlighted credit attributes are plausible risk factors in the German credit domain, and the selected conditions are consistent with a model making a credit-risk prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:26.565139+00:00"
+}

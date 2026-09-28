@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9bb45117c08d61a3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_45af74f0fdcedd43_05831527e6177bcf.txt",
+  "prompt_version": "05831527e6177bcf",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542018-rJoVJjgXbU33NjMMZDvq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 684,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0051285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042,
+        "upstream_inference_cost": 0.0051285,
+        "upstream_inference_prompt_cost": 0.0009285
+      },
+      "is_byok": false,
+      "prompt_tokens": 1238,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2358
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation presents raw SHAP attribution weights without actionable guidance, recourse suggestions, or indication of how an applicant could change these factors.\",\n    \"audit_usefulness\": \"It provides a clear ranking and signed attribution values for the top 10 features, which helps an auditor examine why the model produced a false positive, though actual feature values are omitted.\",\n    \"clarity\": \"The explanation is formatted as a dense list of one-hot encoded technical feature names and decimal values, which is difficult for a non-expert to interpret.\",\n    \"completeness\": \"The top 10 local contributors are reported with directional signs and magnitudes, capturing the main drivers of the prediction despite lacking baseline and feature value details.\",\n    \"concision\": \"The summary is compact and directly presents the key attribution figures without extraneous padding.\",\n    \"overall_quality\": \"While useful as a concise technical snapshot for auditing, the raw numeric format and lack of actionable recourse limit its overall communicative effectiveness.\",\n    \"semantic_plausibility\": \"The identified features, such as checking status, duration, and credit history, are conventional credit risk drivers, making the attribution profile plausible.\",\n    \"overall_quality\": \"While technically sound and concise for an auditor, the output lacks lay clarity, feature values, and any actionable recourse.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:08.016354+00:00"
+}

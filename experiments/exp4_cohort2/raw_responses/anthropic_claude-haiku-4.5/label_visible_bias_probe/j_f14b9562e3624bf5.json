@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f14b9562e3624bf5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1de08b8c2918a436_5b0b4d8c9f82934f.txt",
+  "prompt_version": "5b0b4d8c9f82934f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542726-y4GzEZnxDZFDaN6Sw2B9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004064,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002835,
+        "upstream_inference_cost": 0.004064,
+        "upstream_inference_prompt_cost": 0.001229
+      },
+      "is_byok": false,
+      "prompt_tokens": 1229,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1796
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1de08b8c2918a436\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three anchor features but provides no guidance on how to change them or what actions a user could take to alter the prediction outcome. The factors are presented as static observations rather than levers for intervention.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features the model relied on and their importance weights, supporting model behaviour inspection. However, the low fidelity (0.78) and high faithfulness gap (0.28) suggest the explanation may not fully capture the model's actual decision logic, limiting audit confidence.\",\n    \"clarity\": \"The explanation uses clear, structured formatting with feature names and numerical weights that are easy to parse. A non-expert reader can readily identify which factors mattered most, though domain knowledge of credit terminology helps interpretation.\",\n    \"completeness\": \"Only three features are highlighted as anchors while nine others are shown with zero importance, which may oversimplify the decision boundary. The low sparsity (0.049) and moderate stability (0.595) suggest the explanation may be missing important contextual drivers or be unstable across perturbations.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting feature-weight pairs efficiently. However, the inclusion of nine zero-weighted features adds minimal information and could be trimmed for better signal-to-noise ratio.\",\n    \"overall_quality\": \"The explanation is a false positive (predicted 1, true label 0), indicating the model made an error that the explanation does not help diagnose. Combined with moderate technical metrics and limited actionability, the overall utility is constrained despite clear presentation.\",\n    \"semantic_plausibility\": \"The three anchors (no checking account, low savings, real estate ownership) are plausible credit risk factors in domain terms. However, the prediction itself is incorrect, raising questions about whether these factors genuinely drive sound credit decisions or reflect model bias.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:58:52.429103+00:00"
+}

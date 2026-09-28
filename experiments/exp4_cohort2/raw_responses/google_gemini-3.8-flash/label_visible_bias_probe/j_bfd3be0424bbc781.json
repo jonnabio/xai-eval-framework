@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bfd3be0424bbc781",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0f6578287491844e_4726aaad9c3fcb4a.txt",
+  "prompt_version": "4726aaad9c3fcb4a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543920-B1uZs4ME9Nfh1hu8qH3a",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 934,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 558,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00444675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035025,
+        "upstream_inference_cost": 0.00444675,
+        "upstream_inference_prompt_cost": 0.00094425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1259,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2193
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers only raw SHAP feature attributions with no guidance or counterfactual advice on how an applicant could alter their outcome.\",\n    \"audit_usefulness\": \"The signed local attribution values provide good technical visibility into which features pushed the model toward or away from the classification.\",\n    \"clarity\": \"The list of raw feature names and signed floating-point scores requires technical knowledge of SHAP to properly interpret.\",\n    \"completeness\": \"It highlights the top ten contributing features, though it omits the baseline model value and the applicant's concrete feature values.\",\n    \"concision\": \"The text is very dense and compact, presenting the necessary attribution scores without filler.\",\n    \"overall_quality\": \"This is a solid technical explanation for an auditor, though it lacks user-facing interpretability and actionable recourse.\",\n    \"semantic_plausibility\": \"The identified risk factors, such as credit history, checking balance, and credit amount, align well with financial credit underwriting logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:18:48.524572+00:00"
+}

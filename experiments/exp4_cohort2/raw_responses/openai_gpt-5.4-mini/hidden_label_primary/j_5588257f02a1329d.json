@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3d663bc47eb8d69",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5588257f02a1329d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d3d663bc47eb8d69_cb98f5644168b6a5.txt",
+  "prompt_version": "cb98f5644168b6a5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539461-FDL8V2t28zNHuP3geGum",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028995,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.0028995,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1526
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d3d663bc47eb8d69\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into any concrete recourse or next step. It only lists feature contributions, so a user cannot tell what to change or verify.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it identifies the main positive and negative contributors to the prediction. However, it does not provide enough context about feature values, baseline, or class logic to thoroughly investigate errors or bias.\",\n    \"clarity\": \"The ranking of features with signed contributions is straightforward and easy to scan. A non-expert may still need to know SHAP conventions to interpret what the positive and negative numbers mean.\",\n    \"completeness\": \"It covers the top local drivers of the decision, which gives a partial explanation of the prediction. But it lacks actual feature values, a comparison point, and a clearer statement of how these factors combine to produce the final class.\",\n    \"concision\": \"The explanation is compact and densely packed with relevant information. It avoids unnecessary wording while still listing the most important factors.\",\n    \"overall_quality\": \"This is a solid but limited local explanation: concise and somewhat informative, yet not especially actionable or fully transparent. Its main strength is identifying feature importance, while its weaknesses are missing context and limited support for decision review.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for a breast cancer classifier, since perimeter, area, radius, concavity, and symmetry are all medically relevant shape descriptors. The mix of positive and negative SHAP values is also coherent, even though the negative class prediction cannot be directly validated without the true label.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:24.436293+00:00"
+}

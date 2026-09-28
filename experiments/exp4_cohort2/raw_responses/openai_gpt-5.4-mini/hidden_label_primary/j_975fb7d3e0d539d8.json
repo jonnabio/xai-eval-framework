@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ccbc751d89be60ef",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_975fb7d3e0d539d8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ccbc751d89be60ef_5150fbc10301c220.txt",
+  "prompt_version": "5150fbc10301c220",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540048-1AIcNT3zyiJi2k3DhyLO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002937,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.002937,
+        "upstream_inference_prompt_cost": 0.0007905
+      },
+      "is_byok": false,
+      "prompt_tokens": 1054,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ccbc751d89be60ef\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two features as important, but it does not translate them into any concrete recourse or next steps a user could take. There is no guidance on what change in these features would move the prediction.\",\n    \"audit_usefulness\": \"It provides some local feature signals, which can help an auditor see what the model considered, but it lacks directionality and effect size. The all-or-nothing style scores also make it difficult to inspect how the model behaves in a nuanced way.\",\n    \"clarity\": \"The wording is straightforward, but the numeric pattern is confusing because several features are listed with 0.0000 and two with 1.0000 without explanation. A non-expert would not understand what these values mean in terms of model reasoning.\",\n    \"completeness\": \"The explanation names a few top factors, but it does not explain why those factors support the positive prediction or how they compare to alternative contributing features. It is therefore only partially sufficient for understanding this specific decision.\",\n    \"concision\": \"It is fairly short, but much of the space is spent on repetitive zero-valued features that add little information. The useful content could be communicated more compactly.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat interpretable as a list of local factors, but it is not very informative, actionable, or easy to interpret. It provides limited decision support beyond identifying two salient features.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible predictors for a breast cancer classifier, especially mean concave points and worst texture. However, the binary-looking values are unusual for an explanation and reduce trust in the semantic interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:11.720288+00:00"
+}

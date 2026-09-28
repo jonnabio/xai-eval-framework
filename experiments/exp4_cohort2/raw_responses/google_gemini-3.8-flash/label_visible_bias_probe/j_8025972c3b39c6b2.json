@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_8025972c3b39c6b2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544219-wxuk7AOsu1CYoCreSkbr",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1254,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 869,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00564375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0047025,
+        "upstream_inference_cost": 0.00564375,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2509
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance on how a user might change these attributes to alter the outcome.\",\n    \"audit_usefulness\": \"While it shows which features were selected by the explainer, the presence of mutually exclusive checking status categories hampers effective model auditing.\",\n    \"clarity\": \"The raw feature tokens and binary 1.0/0.0 weights are difficult for a non-expert reader to interpret as a decision rule.\",\n    \"completeness\": \"The output lists candidate anchor conditions but omits directional impact, baseline values, and necessary local decision context.\",\n    \"concision\": \"Listing multiple irrelevant features with 0.0000 values introduces unnecessary clutter and dilutes key information.\",\n    \"overall_quality\": \"Overall quality is poor due to uninformative zero-padding, lack of actionable context, and contradictory categorical indicators.\",\n    \"semantic_plausibility\": \"Simultaneously highlighting mutually exclusive states (e.g., checking status < 0 and no checking) strains domain plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:23:50.261405+00:00"
+}

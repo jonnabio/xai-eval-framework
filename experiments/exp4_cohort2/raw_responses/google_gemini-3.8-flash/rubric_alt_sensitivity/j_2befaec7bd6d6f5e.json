@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e564a6093e40672d",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2befaec7bd6d6f5e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e564a6093e40672d_ecdf024f03a30781.txt",
+  "prompt_version": "ecdf024f03a30781",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551564-O1sjfi57OwSKFYi1duMC",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 912,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0060825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00508875,
+        "upstream_inference_cost": 0.0060825,
+        "upstream_inference_prompt_cost": 0.00099375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1325,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2682
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e564a6093e40672d\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because no feature values, inequality thresholds, or directional effects are provided, an individual has no actionable steps to alter the outcome.\",\n    \"audit_usefulness\": \"An auditor can identify which features were included in the anchor set, but the absence of specific predicate values and very poor fidelity (0.386) severely limit verification of model behavior.\",\n    \"clarity\": \"The list presents raw feature names paired with arbitrary binary values (1.0000 vs 0.0000), making it difficult for a layperson to understand what the model evaluated.\",\n    \"completeness\": \"The explanation lists the features participating in the anchor, but completely omits the conditions, thresholds, and directional evidence driving the positive prediction.\",\n    \"concision\": \"The summary is relatively compact, though showing uninformative zero-weight features and repeated 1.0000 weights is somewhat redundant.\",\n    \"overall_quality\": \"The explanation is weak because it reduces a rule-based anchor into a flat list of features with binary indicators, stripping out the essential decision rules and values.\",\n    \"semantic_plausibility\": \"The identified features (age, capital-loss, hours-per-week, relationship) are standard predictors of income in the domain, though without condition signs their true meaning is ambiguous.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:26:15.498607+00:00"
+}

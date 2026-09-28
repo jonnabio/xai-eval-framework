@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bde9226b899251fc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_c3a6d29157145c8e_5098e259ef1d5953.txt",
+  "prompt_version": "5098e259ef1d5953",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538791-akHentI1XUndr5oa27pC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002967,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.002967,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1536
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no recourse guidance or concrete next steps for changing the outcome. A user cannot infer what specific action would reduce risk or improve the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the strongest local drivers and their relative magnitudes, which helps inspect whether the model relies on medically sensible tumor-geometry features. However, it lacks directionality and comparison to a baseline, limiting deeper error analysis.\",\n    \"clarity\": \"The wording is simple and the ranked feature list is easy to scan, even for a non-expert. The main limitation is that the numeric SHAP values are shown without sign or interpretation, so the meaning is only partially clear.\",\n    \"completeness\": \"The explanation covers the main local factors behind the prediction by listing the top contributors. Still, it does not state whether each feature pushed the class toward malignancy or benignity, nor does it give a full decision context beyond importance ranking.\",\n    \"concision\": \"The output is compact and contains little redundancy, making efficient use of the 76 tokens. It may be somewhat sparse, but the information density is high for a local feature-importance summary.\",\n    \"overall_quality\": \"This is a solid SHAP summary with good feature coverage and strong stability, so it is useful as a quick local explanation. Its main weakness is the lack of signed effects and actionable guidance, which keeps it from being excellent.\",\n    \"semantic_plausibility\": \"The highlighted features are highly plausible for a breast cancer classifier, since worst area, perimeter, radius, and concave points are known to be associated with malignancy. The ranking fits expected domain patterns for tumor morphology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:14.448021+00:00"
+}

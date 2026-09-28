@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6b580103d8acefd8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_50e3b33d6c3d012f_7301a8f89d70719f.txt",
+  "prompt_version": "7301a8f89d70719f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541530-9wqp143FkiQgAnA25gPM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.00294225,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1538
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into concrete next steps, thresholds, or recourse actions. A clinician or user cannot directly act on this information beyond noting which measurements were important.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies the strongest local drivers of the positive prediction and gives a ranked feature list. However, it lacks directionality, baseline comparison, and any indication of how much each feature pushed the prediction, limiting deeper inspection.\",\n    \"clarity\": \"The wording is straightforward and the ranking is easy to read, even for a non-expert. The main limitation is that feature names are technical and the explanation assumes familiarity with breast cancer measurement terminology.\",\n    \"completeness\": \"The explanation covers the top local factors reasonably well, which helps explain the prediction at a high level. It does not provide whether each factor increased or decreased the class 1 score, nor does it give a fuller local decision context or counterfactual information.\",\n    \"concision\": \"The output is compact and focused on the most relevant SHAP features without unnecessary prose. It is efficient in terms of information per word, though the lack of interpretive text makes it somewhat bare.\",\n    \"overall_quality\": \"This is a solid but minimal local explanation: readable, ranked, and partially useful for analysis. Its main weaknesses are missing directional interpretation and weak support for action or deep audit review.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible predictors, and the prominence of perimeter, area, radius, and concave points is consistent with domain expectations. Nothing in the explanation contradicts the dataset or the positive classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:38:52.995362+00:00"
+}

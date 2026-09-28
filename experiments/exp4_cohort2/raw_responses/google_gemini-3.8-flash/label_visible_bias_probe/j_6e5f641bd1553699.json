@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_6e5f641bd1553699",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e759e990528304a2_d3172f2839ecee53.txt",
+  "prompt_version": "d3172f2839ecee53",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541982-ExDbAe7NTDUFURGjACQX",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1334,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 942,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00594525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0050025,
+        "upstream_inference_cost": 0.00594525,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2591
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only signed attribution weights without feature thresholds, baseline values, or prescriptive steps for recourse.\",\n    \"audit_usefulness\": \"It highlights directional contributions for protected and economic features such as sex and occupation, though audit utility is hindered by low fidelity and omitted feature values.\",\n    \"clarity\": \"The list of one-hot encoded feature names and numeric weights is readable for technical users but unassisted for non-experts.\",\n    \"completeness\": \"While ten top factors are presented, the omission of actual observed feature values (e.g., age, capital-gain) leaves the local decision context incomplete.\",\n    \"concision\": \"The text is very compact and presents the top contributors directly without unnecessary verbosity.\",\n    \"overall_quality\": \"This is a basic, raw feature attribution summary with poor technical faithfulness and no practical recourse, offering modest audit utility at best.\",\n    \"semantic_plausibility\": \"Positive associations for professional specialty and capital gains align with domain expectations, although the simultaneous presence of disjoint categorical dummy weights without context is somewhat confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:33.123426+00:00"
+}

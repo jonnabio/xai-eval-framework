@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_db7afaa26a0f31ff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_d68ee28a2b213ee2_3d5a866d3892e008.txt",
+  "prompt_version": "3d5a866d3892e008",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540445-Hqpvs71gUCLbFk6IZKEH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.00286875,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1515
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any recourse or concrete next steps for the user. It only lists feature indicators without indicating what could change the prediction.\",\n    \"audit_usefulness\": \"It gives a limited sense of which features were involved, but the binary 1.0000/0.0000 pattern is not interpretable as a real contribution profile. This makes it weak for diagnosing model behavior or checking for errors.\",\n    \"clarity\": \"The feature names are understandable, but the explanation format is opaque and lacks a readable sentence explaining why the model predicted class 0. A non-expert would struggle to infer the decision logic.\",\n    \"completeness\": \"It names some local factors, but it does not explain directionality, relative importance, or how these factors led to the final prediction. Key local decision context is missing.\",\n    \"concision\": \"The output is short and not overly verbose, but much of the content is repetitive and low-information. It is compact, though not efficient in communicating useful meaning.\",\n    \"overall_quality\": \"Overall, the explanation is only weakly informative: it identifies some features but does not meaningfully explain the prediction or support review. Its main limitation is that the anchor-style binary values are not translated into an intelligible local rationale.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are plausible for this dataset, but the pattern of zeros and ones is semantically unclear as an explanation of the instance. As written, it is not strongly coherent with how a user would expect a prediction rationale to be expressed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:20:49.372301+00:00"
+}

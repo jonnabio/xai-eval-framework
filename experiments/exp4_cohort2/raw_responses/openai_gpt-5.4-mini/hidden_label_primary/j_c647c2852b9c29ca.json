@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c647c2852b9c29ca",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_ec3d891e0d43658f_08b6bca3baba04e8.txt",
+  "prompt_version": "08b6bca3baba04e8",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539074-MKtRFqp4z1IMLLSukRhD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029505,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.0029505,
+        "upstream_inference_prompt_cost": 0.000795
+      },
+      "is_byok": false,
+      "prompt_tokens": 1060,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few conditions linked to the prediction, but it does not tell the user what could be changed or checked to affect the outcome. There are no concrete recourse steps or decision-review actions.\",\n    \"audit_usefulness\": \"It is useful for a quick audit because it identifies the local factors the anchor rule relies on, especially residence, checking status, and savings status. However, the very sparse zero-valued entries and lack of rule semantics limit deeper investigation of model behavior.\",\n    \"clarity\": \"The format is terse and readable, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. A reader can see which features matter, yet the explanation requires some familiarity with anchors.\",\n    \"completeness\": \"It covers only a few apparent drivers and omits the actual condition thresholds or full rule structure that produced the prediction. That makes it hard to understand the specific local decision in enough detail.\",\n    \"concision\": \"The explanation is compact and contains little extraneous text. However, the brevity comes at the cost of missing important interpretive detail, so it is only moderately informative per word.\",\n    \"overall_quality\": \"The explanation is usable as a rough pointer to influential features, but it is too shallow to support a strong understanding of the individual prediction. Its limited specificity and weak actionability keep the quality in the acceptable-but-not-good range.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for a German credit decision, since residence stability, checking status, and savings are standard credit-risk variables. The output is coherent with the domain even though the formatting is somewhat opaque.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:57:57.988787+00:00"
+}

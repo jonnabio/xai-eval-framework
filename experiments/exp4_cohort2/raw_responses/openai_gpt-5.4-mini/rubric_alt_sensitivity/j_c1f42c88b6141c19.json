@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c1f42c88b6141c19",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_28188c86ac4bdfad_a3cbcc30585c0015.txt",
+  "prompt_version": "a3cbcc30585c0015",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543001-pvzubTBVIfayTINWx1jF",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00265125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0017955,
+        "upstream_inference_cost": 0.00265125,
+        "upstream_inference_prompt_cost": 0.00085575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1141,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1540
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists influential features and their directions; it does not suggest what changes, if any, would alter the prediction.\",\n    \"audit_usefulness\": \"It provides a local feature ranking with signed contributions, which is useful for inspecting model behavior, but the low fidelity and stability limit how much an auditor should trust it.\",\n    \"clarity\": \"The feature names and plus/minus signs are easy to read, but a non-technical reader may not fully understand the meaning of encoded variables like workclass_Local-gov or relationship_Unmarried.\",\n    \"completeness\": \"It gives the main local factors behind the prediction, but it does not explain interactions, thresholds, or why these features outweighed others enough to produce the final decision.\",\n    \"concision\": \"The output is short and information-dense, with no obvious padding; each listed term contributes something to the explanation.\",\n    \"overall_quality\": \"This is a decent LIME explanation: it is readable, locally relevant, and moderately informative, but the modest fidelity and instability make it only serviceable rather than strong.\",\n    \"semantic_plausibility\": \"The factors are broadly plausible for the Adult dataset, and the directions are not obviously contradictory for a negative income prediction, though encoded categories make the interpretation somewhat indirect.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:22.984094+00:00"
+}

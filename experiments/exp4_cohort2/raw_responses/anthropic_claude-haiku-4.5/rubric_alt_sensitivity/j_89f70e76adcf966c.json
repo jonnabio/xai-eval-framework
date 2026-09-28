@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_89f70e76adcf966c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e230a6771152fb2_3e5fa099f2d5e396.txt",
+  "prompt_version": "3e5fa099f2d5e396",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790545122-gRh7hAnB8N8IfbuRnfzE",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003649,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002355,
+        "upstream_inference_cost": 0.003649,
+        "upstream_inference_prompt_cost": 0.001294
+      },
+      "is_byok": false,
+      "prompt_tokens": 1294,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1765
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could change the outcome. A person would not know what to modify to alter the prediction.\",\n    \"audit_usefulness\": \"The feature weights and directions are useful for auditing model behavior and checking for bias patterns (e.g., race and marital status effects). However, low fidelity (0.71) and stability (0.11) limit confidence in these findings.\",\n    \"clarity\": \"The format is technical with feature names and numerical weights that require understanding of the adult dataset schema and logistic regression. Non-technical readers would struggle with the notation.\",\n    \"completeness\": \"The explanation shows top factors but lacks context about their relative importance, the instance's actual feature values, or why these particular factors matter for the negative prediction.\",\n    \"concision\": \"The list is compact and avoids redundancy, efficiently presenting ten weighted factors in minimal space.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It correctly identifies factors influencing a true negative prediction, but poor stability (0.11), moderate fidelity (0.71), and lack of actionable insight constrain its utility.\",\n    \"semantic_plausibility\": \"The factors are plausible for income prediction (occupation, capital gains, race, marital status, education). The direction of effects (e.g., protective services reducing high-income likelihood) aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:38:46.909445+00:00"
+}

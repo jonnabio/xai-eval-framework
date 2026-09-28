@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6498cf9757c1be04",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_57d1693f50447ebd_1ecbacf4d24d52fa.txt",
+  "prompt_version": "1ecbacf4d24d52fa",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540147-rJ8S0yARYYkMPexCxujd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.00290475,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1528
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps beyond listing factors, so a user cannot tell what to change to alter the prediction. It is therefore not actionable in a meaningful way.\",\n    \"audit_usefulness\": \"It identifies the top local factors, which gives some limited insight into model behavior, but the near-zero contributions and very low sparsity make it hard to inspect what truly drove the decision. The low fidelity and stability further reduce its value for auditing.\",\n    \"clarity\": \"The output is short and readable, but the feature list is presented as raw numeric values without interpretation, so a non-expert would not easily understand why these factors matter. The wording is concise but not explanatory.\",\n    \"completeness\": \"It includes only a few listed local factors and does not explain how they combine to support the negative prediction. Important decision context, such as directionality and comparison to a baseline, is missing.\",\n    \"concision\": \"The explanation is compact and free of long prose, but some listed zero-valued factors add little information. Overall it is reasonably terse, though not maximally informative per token.\",\n    \"overall_quality\": \"This is a limited explanation: it is readable and brief, but mostly a raw factor dump with weak interpretability, poor recourse support, and modest audit value. Given the low fidelity and stability, the overall quality is below average.\",\n    \"semantic_plausibility\": \"The factors named, especially hours-per-week and education-related features on the Adult dataset, are plausible drivers for income classification. However, the many zero contributions and unclear numeric encoding make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:15:50.699884+00:00"
+}

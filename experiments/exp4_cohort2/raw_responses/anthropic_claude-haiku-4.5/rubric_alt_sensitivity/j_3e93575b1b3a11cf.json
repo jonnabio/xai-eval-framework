@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7c871a5926ed569e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3e93575b1b3a11cf",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_7c871a5926ed569e_c9e6b8d6fbfcb430.txt",
+  "prompt_version": "c9e6b8d6fbfcb430",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547724-XEJ3mqY5srqIWXomikFs",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003951,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002675,
+        "upstream_inference_cost": 0.003951,
+        "upstream_inference_prompt_cost": 0.001276
+      },
+      "is_byok": false,
+      "prompt_tokens": 1276,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1811
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7c871a5926ed569e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides feature importance scores but no guidance on what values would need to change to alter the prediction. It does not indicate thresholds, directions, or feasible interventions for stakeholders.\",\n    \"audit_usefulness\": \"While the explanation identifies which features matter (mean area and area error), the very low fidelity (0.20) and stability (0.21) metrics indicate the explanation is unreliable. The false negative case combined with poor technical metrics limits auditing value.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with normalized weights. However, without context on what these features represent clinically or what the weights mean, non-technical readers would struggle to interpret the relevance.\",\n    \"completeness\": \"Only two features are highlighted as important (mean area and area error both at 1.0), while nine others are at 0.0. This sparse explanation lacks depth about why these specific features drove the false negative prediction or what patterns the model detected.\",\n    \"concision\": \"The explanation is brief and avoids redundancy. Each feature-weight pair is stated once without padding, making efficient use of space.\",\n    \"overall_quality\": \"The explanation is weak overall. It is a false negative case with poor technical metrics (fidelity 0.20, stability 0.21), suggesting the explanation is unreliable. The sparse feature list provides minimal insight into the misclassification.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, mean area and area error are plausible morphological features. However, the explanation does not clarify whether high or low values drove the prediction, and the false negative outcome raises questions about whether the explanation accurately reflects the model's reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:22:09.545994+00:00"
+}

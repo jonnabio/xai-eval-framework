@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d5636e6472e7378c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_28188c86ac4bdfad_69a35db188b951f9.txt",
+  "prompt_version": "69a35db188b951f9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542295-e7Wficw4nn3lOFs9Q9K8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 997,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 585,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0046755,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00373875,
+        "upstream_inference_cost": 0.0046755,
+        "upstream_inference_prompt_cost": 0.00093675
+      },
+      "is_byok": false,
+      "prompt_tokens": 1249,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2246
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static demographic traits and raw LIME weights without indicating the instance's actual values or feasible pathways for recourse.\",\n    \"audit_usefulness\": \"While it displays directional feature attributions, the presence of complementary one-hot indicators (e.g., sex_Female and sex_Male) highlights common LIME tabular artifacts rather than actionable model auditing insights.\",\n    \"clarity\": \"The raw coefficient format is clean, but non-experts may struggle to interpret signed weights and mutually exclusive dummy indicators.\",\n    \"completeness\": \"It provides the top 10 local factors, but omits the actual feature values and baseline probability needed to understand the full prediction context.\",\n    \"concision\": \"The presentation is compact and directly reports the top local drivers without unnecessary filler text.\",\n    \"overall_quality\": \"The explanation offers a concise summary of local LIME weights, but is degraded by missing instance values, dummy-encoding artifacts, and a complete lack of actionability.\",\n    \"semantic_plausibility\": \"Negative weights for lower-paying occupations and unmarried status align with domain knowledge, though the inclusion of conflicting binary encodings somewhat detracts from plausibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:42.291398+00:00"
+}

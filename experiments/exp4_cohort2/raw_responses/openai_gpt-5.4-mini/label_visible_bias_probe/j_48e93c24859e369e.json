@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_48e93c24859e369e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ae5f3b200cc3bef3_cccf4039e355408d.txt",
+  "prompt_version": "cccf4039e355408d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542427-NR1XSsp3fes1E8q9NwDt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030795,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022905,
+        "upstream_inference_cost": 0.0030795,
+        "upstream_inference_prompt_cost": 0.000789
+      },
+      "is_byok": false,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1561
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps; it only lists local factors with no guidance on what could change the prediction. Even if a user wanted to act on it, the zero-valued features are not interpretable as practical actions.\",\n    \"audit_usefulness\": \"It gives a minimal view of which features were considered locally, but the output is too coarse to support serious auditing because it lacks directionality, thresholds, and meaningful importance ordering. The very low fidelity and stability also reduce trust for inspection.\",\n    \"clarity\": \"The output is short and readable, but the meaning of 'top local factors' with values of 1.0000 and 0.0000 is not explained clearly enough for a non-expert. It is easy to parse, yet not easy to understand semantically.\",\n    \"completeness\": \"It fails to explain why the model predicted class 0 beyond naming a couple of features, and it omits the actual values, thresholds, or contribution signs for this specific instance. The local decision context is therefore incomplete.\",\n    \"concision\": \"The explanation is compact and avoids long text, but much of the listed information is unused or uninformative because most factors are 0.0000. It is concise in length, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak explanation: it is brief and readable, but it provides little actionable or diagnostic insight and only shallow local context. Its low fidelity and instability further limit its overall usefulness.\",\n    \"semantic_plausibility\": \"The mention of age and native-country as local factors is plausible for an Adult dataset classifier, and a true negative prediction is consistent with the setting. However, the presentation of the factors is not very semantically informative because the weights and importance structure are unclear.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:53:50.447808+00:00"
+}

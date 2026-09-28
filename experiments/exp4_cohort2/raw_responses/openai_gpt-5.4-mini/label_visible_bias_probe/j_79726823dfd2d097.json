@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_52ed2fe68041b4f8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_79726823dfd2d097",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_52ed2fe68041b4f8_38bc21319c17bb1a.txt",
+  "prompt_version": "38bc21319c17bb1a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542208-MTnoIVhjK4EBWmtzKFjR",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003015,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.003015,
+        "upstream_inference_prompt_cost": 0.000792
+      },
+      "is_byok": false,
+      "prompt_tokens": 1056,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1550
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_52ed2fe68041b4f8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or user-facing next steps. It only lists local factors, so a decision-maker cannot tell what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It offers limited audit value because it exposes only a sparse set of feature indicators with no clear threshold logic or directionality. An auditor cannot easily assess why the model predicted the negative class or whether the reasoning is consistent with the instance.\",\n    \"clarity\": \"The output is readable, but the meaning of repeated 1.0000 and 0.0000 values is not explained, which makes it hard for a non-expert to interpret. The feature names are understandable, yet the organization is terse and somewhat cryptic.\",\n    \"completeness\": \"It names a few top local factors, but it omits the actual instance values, rule conditions, and how these factors combine to support the prediction. For a specific negative prediction, this is not enough context to understand the decision fully.\",\n    \"concision\": \"The explanation is compact and avoids long prose, but much of the token budget is spent on a feature list with little interpretive content. It is reasonably concise, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a low-to-moderate quality explanation: it is brief and somewhat interpretable, but it lacks sufficient contextual detail, actionable guidance, and strong audit value. The sparse numeric feature listing is not enough to explain the individual prediction well.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and a logistic regression model, and nothing is obviously contradictory. However, the zero/one style values are not semantically explained, so the local story remains only partially convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:11.125014+00:00"
+}

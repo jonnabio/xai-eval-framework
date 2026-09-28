@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c6d96339976f5220",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_606a5f8f862f86e8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_c6d96339976f5220_e00c9ec28b585f96.txt",
+  "prompt_version": "e00c9ec28b585f96",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542076-dKaHjsYMyg1wTk2WrDDE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.00287025,
+        "upstream_inference_prompt_cost": 0.00079125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1055,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1517
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c6d96339976f5220\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete steps the user could take, such as what feature changes might alter the outcome. It is only a list of conditions with no recourse guidance.\",\n    \"audit_usefulness\": \"It identifies a few local conditions associated with the prediction, which can help a reviewer inspect the model's triggers. However, the explanation is too sparse and low-fidelity to strongly support deeper error or bias analysis.\",\n    \"clarity\": \"The feature names are mostly understandable, but the presentation as a set of 1.0000/0.0000 indicators is not intuitively explained. A non-expert would likely struggle to interpret what the anchors mean for the decision.\",\n    \"completeness\": \"The explanation includes only a small subset of local factors and omits how they combine to produce the positive prediction. It lacks directionality, relative importance, and any comparison to the alternative class.\",\n    \"concision\": \"It is short and contains little redundant wording, but much of the content is just raw feature names and binary values. The result is compact but not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak local explanation: it is somewhat interpretable to a technical reviewer, but it lacks actionable guidance, rich context, and clear decision logic. The low fidelity also limits trust in the explanation.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, especially checking status, employment, and housing. Nothing is obviously contradictory, though the binary anchor-style output is not explained in a way that feels fully natural.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:47:59.772697+00:00"
+}

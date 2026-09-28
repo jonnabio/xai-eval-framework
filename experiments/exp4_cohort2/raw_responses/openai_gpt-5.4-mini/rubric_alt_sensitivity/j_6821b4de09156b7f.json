@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6821b4de09156b7f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4e230a6771152fb2_3e5fa099f2d5e396.txt",
+  "prompt_version": "3e5fa099f2d5e396",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542990-ypuc8smmNi18TRM7FRsq",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 375,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00254475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0016875,
+        "upstream_inference_cost": 0.00254475,
+        "upstream_inference_prompt_cost": 0.00085725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists local feature influences; it does not say what changes would alter the prediction or suggest any next step.\",\n    \"audit_usefulness\": \"The top weighted features give some sense of the model's local logic, but the small, weakly stable attributions limit how much one can inspect bias or error from this alone.\",\n    \"clarity\": \"The feature names and signs are straightforward to read, though a non-technical reader may still need domain knowledge to interpret what the weights mean.\",\n    \"completeness\": \"It identifies several top contributing factors, but it does not explain the overall decision mechanism, feature values for this person, or how the factors combine into the final prediction.\",\n    \"concision\": \"The explanation is compact and mostly consists of the most relevant local factors, with little wasted wording.\",\n    \"overall_quality\": \"It is a reasonable LIME summary for a correct negative prediction, but it is limited by low stability and only moderate fidelity, so it is useful but not strong.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income classifier, and the directions of influence are not obviously contradictory for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:03:11.982299+00:00"
+}

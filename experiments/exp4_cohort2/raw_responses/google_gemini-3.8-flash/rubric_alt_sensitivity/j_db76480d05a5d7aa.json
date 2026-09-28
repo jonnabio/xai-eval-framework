@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_70f1fb89c6075a2b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_db76480d05a5d7aa",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_70f1fb89c6075a2b_c1e81c70221cfc75.txt",
+  "prompt_version": "c1e81c70221cfc75",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551750-dpr39brUcVnHhRgMlIzZ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 744,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00534825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0043575,
+        "upstream_inference_cost": 0.00534825,
+        "upstream_inference_prompt_cost": 0.00099075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1321,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2483
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_70f1fb89c6075a2b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the current feature values or clear directional guidance, and pointing toward lower education levels (1st-4th, 12th) offers no feasible recourse for an individual.\",\n    \"audit_usefulness\": \"It reveals that the DiCE explainer identified specific education dummy variables as influential perturbations, but without full counterfactual profiles or feature baselines, auditing utility is minimal.\",\n    \"clarity\": \"Raw one-hot encoded column names paired with uncontextualized decimal numbers make it difficult for a layperson to interpret.\",\n    \"completeness\": \"Only two one-hot levels have non-zero weights while eight other features are listed as zero, leaving out the broader context of the prediction.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the output without providing useful information.\",\n    \"overall_quality\": \"The explanation reduces counterfactual reasoning to obscure sparse weights with little context, resulting in a weak explanation overall.\",\n    \"semantic_plausibility\": \"Highlighting low educational attainment levels like 1st-4th and 12th grade as positive local factors for high income is confusing without understanding that these represent counterfactual perturbations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:29:18.550136+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_38670141581bd272",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e7770b140359bd75_76bdc2d1012e8ce9.txt",
+  "prompt_version": "76bdc2d1012e8ce9",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541702-IS0GftCnfNuIiAvJuzO2",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 950,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 525,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045015,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0035625,
+        "upstream_inference_cost": 0.0045015,
+        "upstream_inference_prompt_cost": 0.000939
+      },
+      "is_byok": false,
+      "prompt_tokens": 1252,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2202
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not specify the actual feature values, thresholds, or direction of change needed to alter the outcome, offering no actionable recourse.\",\n    \"audit_usefulness\": \"While it pinpoints that education-num, managerial occupation, and marital status triggered the anchor, the lack of exact predicate bounds limits its utility for root-cause error analysis.\",\n    \"clarity\": \"The list of feature weights is simple to read, but a non-expert cannot easily tell what 1.0000 versus 0.0000 signifies or what condition on education-num was met.\",\n    \"completeness\": \"The explanation identifies the active features forming the anchor rule but omits the actual decision predicates, feature values, and confidence bounds.\",\n    \"concision\": \"Listing seven irrelevant features with 0.0000 values introduces unnecessary clutter that should have been omitted.\",\n    \"overall_quality\": \"The explanation captures the key driver features plausible for a high-income prediction, but suffers from redundant zero-valued entries and a lack of explicit rule thresholds.\",\n    \"semantic_plausibility\": \"Executive-managerial roles, higher education, and married status are well-established domain indicators associated with high income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:41:50.208517+00:00"
+}

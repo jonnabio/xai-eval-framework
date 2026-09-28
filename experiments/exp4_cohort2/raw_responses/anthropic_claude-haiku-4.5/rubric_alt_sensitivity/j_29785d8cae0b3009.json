@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e594d44f0a99f099",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_29785d8cae0b3009",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_e594d44f0a99f099_fb90aca05c4c1f22.txt",
+  "prompt_version": "fb90aca05c4c1f22",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546140-Dz45skph2AGuiAkoyDVD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 553,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00404,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002765,
+        "upstream_inference_cost": 0.00404,
+        "upstream_inference_prompt_cost": 0.001275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1828
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e594d44f0a99f099\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two features (area error and worst perimeter) as important but provides no guidance on what values would change the prediction or what actions could be taken. No concrete next steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies which features matter, the low fidelity (0.627) and stability (0.467) scores raise concerns about reliability. An auditor would struggle to trust these findings for bias detection without further investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with importance scores. However, the technical terminology (area error, worst perimeter) and the meaning of the 1.0000/0.0000 scores require domain knowledge to interpret.\",\n    \"completeness\": \"Only two features are identified as relevant (both with score 1.0), while eight others are listed as 0.0. This sparse representation may miss important decision factors, especially given the low fidelity metric suggesting the anchor may not faithfully represent the model's logic.\",\n    \"concision\": \"The explanation is compact but includes many zero-valued features that add little information. A tighter presentation would omit features with zero importance or explain why they are listed.\",\n    \"overall_quality\": \"The explanation is serviceable but limited by low technical metrics (fidelity 0.627, stability 0.467, faithfulness gap 0.13). It identifies some relevant features but lacks depth, actionability, and confidence in its reliability.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, morphological features like perimeter and area are medically relevant. However, the binary importance scores (1.0 vs 0.0) seem oversimplified, and the low fidelity suggests the explanation may not accurately reflect the model's actual decision boundary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:55:45.136773+00:00"
+}

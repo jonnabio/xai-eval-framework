@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_63009fe4d74c9a42",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ec3d891e0d43658f_202793be634adf81.txt",
+  "prompt_version": "202793be634adf81",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541742-l8EnVFnLq7tbbjxsXkI7",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.00294525,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1537
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points to factors associated with the prediction, but it does not translate them into concrete recourse or decision steps. A user cannot tell what specific changes would improve the outcome.\",\n    \"audit_usefulness\": \"It exposes a few local factors and their binary on/off status, which is somewhat useful for checking whether the model relied on expected features. However, it provides no directionality or interaction detail, so it is limited for deeper bias or error analysis.\",\n    \"clarity\": \"The list format is easy to parse, but the values are mostly unexplained binary indicators and the meaning of the anchor outputs is not obvious to a non-expert. The absence of plain-language interpretation makes it only moderately clear.\",\n    \"completeness\": \"Only three features are shown as influential, with the rest set to zero, but there is no explanation of why these were chosen or how they combine to support the positive prediction. Key local decision context such as feature direction, thresholds, and comparative importance is missing.\",\n    \"concision\": \"The explanation is short and avoids unnecessary wording, but much of the content is low-information numeric output. It is concise, though not especially informative per token.\",\n    \"overall_quality\": \"As a local explanation, it is partially useful but too sparse and technical to fully justify the prediction. It offers a basic signal about which features mattered, yet lacks enough context and interpretability for strong explanatory quality.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for German credit risk, since checking status, savings status, residence duration, and credit-related attributes are commonly relevant. Nothing in the explanation contradicts the domain, even though the representation is crude.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:25.396733+00:00"
+}

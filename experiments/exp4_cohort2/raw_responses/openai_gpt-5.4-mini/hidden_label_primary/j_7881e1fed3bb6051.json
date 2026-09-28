@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7881e1fed3bb6051",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_1a9c16ecde743d5e_9518fbffe3ead8e9.txt",
+  "prompt_version": "9518fbffe3ead8e9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538892-QD5z4PuU8IIVqaiOYgb4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00317025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023625,
+        "upstream_inference_cost": 0.00317025,
+        "upstream_inference_prompt_cost": 0.00080775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1077,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1602
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names the main factors affecting the prediction, but it does not translate them into concrete recourse steps or decision guidance. A user could infer which attributes matter, yet it does not say what could feasibly be changed or reviewed next.\",\n    \"audit_usefulness\": \"This is useful for auditing because it exposes several local SHAP attributions with direction and magnitude, allowing inspection of which features pushed the model toward class 0 or away from it. However, it lacks broader context such as the base value, feature values for the instance, or comparison to typical cases.\",\n    \"clarity\": \"The wording is concise and mostly understandable, but the feature names and shorthand intervals may still be somewhat technical for non-experts. The sign convention also requires some interpretation to understand whether a feature supports or opposes the prediction.\",\n    \"completeness\": \"It covers a reasonable set of top local drivers, but it does not provide the instance\u2019s actual feature values, a baseline, or an explicit summary of why the model predicted class 0. Because the true label is hidden, it is hard to judge whether the explanation fully captures the decision context, but the local picture is still partial.\",\n    \"concision\": \"The explanation is compact and information-dense, listing only the top contributing features with their SHAP values. It avoids unnecessary narrative while still conveying the core local attributions.\",\n    \"overall_quality\": \"Overall, this is a solid feature-attribution summary that is useful for inspecting the model\u2019s local reasoning, but it remains a bit technical and incomplete for end users. It is better suited to analysts than to a non-expert audience.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the directions of influence are reasonable for a tree model on tabular credit data. Nothing in the explanation appears contradictory or semantically odd.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:55.404157+00:00"
+}

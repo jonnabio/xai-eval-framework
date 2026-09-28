@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4dd1f41df3c7cfae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3debbe632feba167_0e60e89b33571b08.txt",
+  "prompt_version": "0e60e89b33571b08",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790550047-husU0FOVl93k9UpOuBcP",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 780,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00533475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00435,
+        "upstream_inference_cost": 0.00533475,
+        "upstream_inference_prompt_cost": 0.00098475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1313,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2473
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The only highlighted factor is an immutable demographic attribute (native country), and no actionable path or direction of change is provided.\",\n    \"audit_usefulness\": \"It alerts an auditor to a potential reliance on a sensitive attribute (native-country_Ireland), but provides minimal insight into the rest of the model's decision logic.\",\n    \"clarity\": \"The list format is readable, but the meaning of the score (0.6000) is unexplained to a non-technical reader.\",\n    \"completeness\": \"The explanation attributes non-zero importance to only a single feature, leaving all primary income drivers at zero.\",\n    \"concision\": \"Nine of the ten listed features have zero importance, unnecessarily padding the output.\",\n    \"overall_quality\": \"The explanation is weak, relying entirely on a single demographic feature while showing zero contribution from standard income drivers.\",\n    \"semantic_plausibility\": \"Attributing income prediction entirely to being from Ireland while discounting age, education, and capital gains is substantively doubtful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:00:57.392355+00:00"
+}

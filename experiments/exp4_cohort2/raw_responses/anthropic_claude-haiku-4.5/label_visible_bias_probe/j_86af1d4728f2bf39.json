@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_86af1d4728f2bf39",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_eec93395cc3f8408_38b0d35fb0b2cf13.txt",
+  "prompt_version": "38b0d35fb0b2cf13",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542310-YQMY3nk7fmTvD7aGZZmk",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003974,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00272,
+        "upstream_inference_cost": 0.003974,
+        "upstream_inference_prompt_cost": 0.001254
+      },
+      "is_byok": false,
+      "prompt_tokens": 1254,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1798
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome or improve the decision. No recourse pathways or next steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings support model behaviour inspection and could help identify systematic biases in credit decisions. However, the low fidelity (0.568) and moderate faithfulness gap (0.20) limit confidence in the explanation's reliability for audit purposes.\",\n    \"clarity\": \"The explanation uses technical notation (feature names, SHAP values) that requires familiarity with credit terminology and machine learning concepts; a non-expert would struggle to interpret the meaning of 'checking_status_<0' or understand why negative values indicate rejection.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers and includes both negative and positive contributions, providing reasonable coverage of the decision factors. However, it lacks context about the instance's actual feature values or thresholds that triggered the decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting 10 ranked factors with their SHAP values efficiently. The format is dense but appropriate for the information density required.\",\n    \"overall_quality\": \"The explanation is technically sound and stable (0.996 stability) but suffers from moderate fidelity issues and lacks actionability or domain-grounded interpretation. It serves auditors better than end-users or applicants seeking recourse.\",\n    \"semantic_plausibility\": \"The identified factors (checking account status, credit history, savings) are plausible drivers of credit decisions in domain terms. However, the explanation does not contextualize why these specific thresholds matter or validate that the model's logic aligns with lending principles.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:57.513745+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b9ecffe1734f5148",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_9be4c2983f0c443c_2621e11f6e121556.txt",
+  "prompt_version": "2621e11f6e121556",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544551-qTwQgi01KdsngMmShdAy",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 976,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 551,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0045855,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00366,
+        "upstream_inference_cost": 0.0045855,
+        "upstream_inference_prompt_cost": 0.0009255
+      },
+      "is_byok": false,
+      "prompt_tokens": 1234,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2210
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"This is a medical diagnostic prediction based on biological cell features that cannot be modified, and no actionable threshold guidance is provided.\",\n    \"audit_usefulness\": \"The explanation points to 'area error' and 'worst texture' as active factors, but the lack of rule conditions, ranges, or feature values severely limits technical debugging of this false positive.\",\n    \"clarity\": \"The list of features with binary 1.0000 or 0.0000 weights is reasonably easy to read, but the meaning of the values is not explained for non-expert readers.\",\n    \"completeness\": \"The output highlights the two features included in the anchor rule but omits the actual rule thresholds, directional effects, and local instance values necessary for a complete explanation.\",\n    \"concision\": \"Including numerous irrelevant features padded with 0.0000 values creates unnecessary clutter instead of presenting only the active anchor conditions.\",\n    \"overall_quality\": \"The explanation is mediocre due to the flattening of anchor predicates into pseudo-importance weights without explicit thresholds or contextual values.\",\n    \"semantic_plausibility\": \"Cell nucleus area variance and texture are recognized pathological indicators for breast cancer malignancy, making the selected factors clinically plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:29:18.594725+00:00"
+}

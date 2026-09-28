@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28cfcd5501fa69b2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8eac1d0939dae894",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_28cfcd5501fa69b2_a819c1ae3878f2bb.txt",
+  "prompt_version": "a819c1ae3878f2bb",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539510-1GFwIT7MUC6v9Lj8k0tQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020295,
+        "upstream_inference_cost": 0.00282225,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1508
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28cfcd5501fa69b2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few factors associated with the prediction, but it gives no concrete recourse steps or thresholds a user could change. The zero-valued fields are not translated into actionable guidance.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which features the anchor method considered locally important. However, the explanation is sparse and the many zero entries do not help inspect model behavior in detail.\",\n    \"clarity\": \"The formatting is readable and the feature names are understandable, but the meaning of the anchor scores and the many 0.0000 entries is not explained. A non-expert would likely struggle to interpret what is actually driving the prediction.\",\n    \"completeness\": \"It lists a few top local factors, which gives partial decision context, but it does not explain their direction, interaction, or why these factors support class 0. Key local evidence is therefore missing.\",\n    \"concision\": \"The explanation is short and avoids unnecessary elaboration, so it is reasonably compact. However, it spends most of its space on feature names with little interpretation, reducing information density.\",\n    \"overall_quality\": \"This is a moderately useful local explanation, but it is limited by sparse interpretation and weak support for understanding the specific prediction. Overall it is acceptable for a quick glance but not strong enough for robust review or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the German Credit domain, and the selected attributes fit common credit-risk reasoning. Nothing in the explanation is obviously contradictory or unrealistic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:05:13.780893+00:00"
+}

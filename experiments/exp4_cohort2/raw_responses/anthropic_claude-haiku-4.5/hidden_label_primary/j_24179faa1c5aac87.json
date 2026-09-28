@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_24179faa1c5aac87",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_cd6abd1a9433542b_de756704398a0758.txt",
+  "prompt_version": "de756704398a0758",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540369-3Cmi3IL4fxkGmC6cjrFM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004079,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002855,
+        "upstream_inference_cost": 0.004079,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1795
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. It is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The output shows which features DICE identified as locally important, but the extremely high cost (1006ms), poor fidelity (-0.046), and very low stability (0.017) suggest the counterfactual may be unreliable. An auditor would struggle to trust this explanation for model inspection.\",\n    \"clarity\": \"The format is a simple list of feature-value pairs with weights, which is straightforward to parse, though the meaning of the 1.0 weight for native-country_Ireland and 0.4 for occupation_Tech-support requires domain knowledge of DICE methodology.\",\n    \"completeness\": \"The explanation covers multiple features but the vast majority have zero weight (age, fnlwgt, education-num, capital-gain, capital-loss, hours-per-week, workclass variants), leaving unclear whether these are truly irrelevant or simply not explored by the counterfactual search.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing 10 features with their weights in minimal space. However, the many zero-weighted features add little informational value.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (negative fidelity, low stability, high cost) and provides limited actionable or audit value despite being clearly formatted. It appears to be a weak or failed counterfactual search.\",\n    \"semantic_plausibility\": \"The identification of native-country_Ireland as the dominant factor is plausible in the adult income dataset context, but the near-zero weights on work hours, education, and capital gains\u2014typically strong income predictors\u2014raises concerns about the validity of this explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:19:35.491909+00:00"
+}

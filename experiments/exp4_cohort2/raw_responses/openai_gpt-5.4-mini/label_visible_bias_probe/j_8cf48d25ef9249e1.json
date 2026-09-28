@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e5e8a4d0292d4cca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8cf48d25ef9249e1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_e5e8a4d0292d4cca_9ea7de1564911ad9.txt",
+  "prompt_version": "9ea7de1564911ad9",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542240-qQgJKTyyrDA4lMJ31mAH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00299775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.00299775,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1547
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e5e8a4d0292d4cca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or indicate which features should be changed to alter the prediction. It lists factors and weights, but they are too generic and not translated into feasible user actions.\",\n    \"audit_usefulness\": \"For an auditor, it reveals only a sparse set of local anchor conditions without showing directionality, threshold values, or how these factors jointly support the false negative. This gives limited insight into model behavior or possible bias patterns.\",\n    \"clarity\": \"The output is short and readable, but it is mostly a feature list with numeric indicators that are not explained to a non-expert. The meaning of the 1.0000 and 0.0000 values is ambiguous in this presentation.\",\n    \"completeness\": \"It identifies a few local factors, but does not explain why the model predicted class 0 or how the listed features relate to the true positive label. Important decision context such as the actual feature values, rule conditions, or counterfactuals is missing.\",\n    \"concision\": \"The explanation is compact and contains little unnecessary text. However, the brevity comes at the cost of interpretability, so it is concise but not highly informative.\",\n    \"overall_quality\": \"As an anchors-style summary, it provides a minimal local description, but the lack of interpretation, context, and decision logic makes it only moderately useful. It is understandable enough to be acceptable, yet far from strong for explaining this false negative.\",\n    \"semantic_plausibility\": \"The listed variables are plausible drivers in German credit, especially checking status, credit purpose, and housing. However, the explanation\u2019s numeric presentation and absence of clear rule semantics make the instance-level interpretation feel incomplete rather than fully convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:42.552714+00:00"
+}

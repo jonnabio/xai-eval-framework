@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4919484756fd435e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_20b361fa039161f7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_4919484756fd435e_ef6163c2c3d32544.txt",
+  "prompt_version": "ef6163c2c3d32544",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546662-qWNt8FtVhzueLmzt1yzu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003791,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002515,
+        "upstream_inference_cost": 0.003791,
+        "upstream_inference_prompt_cost": 0.001276
+      },
+      "is_byok": false,
+      "prompt_tokens": 1276,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1779
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4919484756fd435e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to education-num or other features would alter the prediction.\",\n    \"audit_usefulness\": \"While the feature weights are provided, the low stability (0.45) and moderate faithfulness gap (0.17) raise concerns about reliability. The explanation offers limited insight into potential model biases or systematic errors beyond raw feature importance.\",\n    \"clarity\": \"The format is technical and lists raw numerical scores without interpretation. Non-technical users would struggle to understand what these numbers mean or why education-num matters most for this income prediction.\",\n    \"completeness\": \"The explanation identifies education-num as the dominant factor but lacks context about the instance's actual values, the decision boundary, or why other features have zero contribution. Critical information about the decision logic is missing.\",\n    \"concision\": \"The explanation is repetitive, listing many features with 0.0000 values that add no information. A more concise version would omit zero-valued features entirely.\",\n    \"overall_quality\": \"The explanation is technically sound but provides minimal practical value. It identifies one important feature but lacks actionability, context, and interpretability for non-technical stakeholders. The low stability metric undermines confidence.\",\n    \"semantic_plausibility\": \"Education level is a known predictor of income in the adult dataset, so highlighting education-num is plausible. However, the complete absence of other known factors (occupation, marital status) and the zero weights on workclass features seem incomplete and potentially misleading.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:04:27.501175+00:00"
+}

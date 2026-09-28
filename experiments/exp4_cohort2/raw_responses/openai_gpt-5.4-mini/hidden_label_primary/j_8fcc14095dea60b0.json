@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_214506591db1e703",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8fcc14095dea60b0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_214506591db1e703_499c7d859f37a004.txt",
+  "prompt_version": "499c7d859f37a004",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540013-hUrjKR1XNissMkyLa9Rc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.00282975,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1513
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_214506591db1e703\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It only lists top local factors without translating them into actionable changes for the user.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it exposes which encoded features influenced the prediction. However, the many zero-valued factors and weak fidelity/stability metrics limit its value for serious model behavior inspection.\",\n    \"clarity\": \"The wording is short and technically legible, but the list of one-hot encoded feature names is not very intuitive for a non-expert. The explanation gives little interpretation beyond raw factor values.\",\n    \"completeness\": \"It names a few local drivers, especially marital status, but omits a meaningful narrative about how these factors led to the positive prediction. Given the low sparsity and only moderate fidelity, it does not fully explain the specific decision.\",\n    \"concision\": \"The explanation is compact and avoids long prose, though several zero-valued features add little information. It is reasonably concise but not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a limited explanation: it is readable enough and identifies a plausible main factor, but it lacks interpretation, actionability, and strong faithfulness. The technical metrics also suggest the explanation is unstable and only moderately aligned with the model.\",\n    \"semantic_plausibility\": \"The main factor, marital status, is plausible for the Adult dataset and a binary income prediction. The inclusion of many zero-valued encoded features is not contradictory, but it weakens the semantic usefulness of the explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:13:36.949715+00:00"
+}

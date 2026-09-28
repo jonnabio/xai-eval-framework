@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_443fa95e6bb9a53a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5d5a3900a991cb53",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_443fa95e6bb9a53a_cd7ca4c9b2763ea9.txt",
+  "prompt_version": "cd7ca4c9b2763ea9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542316-F1hs4fLAiXUeWVMspNN3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00299775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.00299775,
+        "upstream_inference_prompt_cost": 0.00079725
+      },
+      "is_byok": false,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_443fa95e6bb9a53a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, such as which attributes could be changed or reviewed. It only lists factors with weight 1.0000, which is not actionable for a user.\",\n    \"audit_usefulness\": \"For an auditor, the output gives almost no insight into why the model predicted class 1 because it lacks directional effects, thresholds, or rule structure. The listed features appear generic and uninformative, and the low fidelity further limits audit value.\",\n    \"clarity\": \"The text is syntactically simple, but the meaning is unclear because it just lists feature names with identical scores and no explanation of how they relate to the prediction. A non-expert would not understand what these factors imply.\",\n    \"completeness\": \"It names several local features, but it does not explain whether they increased or decreased the prediction, nor does it identify the decisive combination of conditions. This is insufficient to understand the specific decision fully.\",\n    \"concision\": \"The explanation is short, but much of its content is repetitive and low-information because every factor is assigned the same value. It is compact, yet not especially informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse on decision logic, not actionable, and only partially useful for inspection. The output is also hard to interpret in the context of the Adult dataset because the feature list reads more like a noisy feature dump than an explanation.\",\n    \"semantic_plausibility\": \"The included features are broadly plausible for the Adult dataset, but the combination of many mutually exclusive education and occupation indicators all appearing together is odd. That makes the explanation only weakly coherent as a local account of the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:58.675431+00:00"
+}

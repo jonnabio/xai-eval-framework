@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7e9b6f55ee9b538e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7b8d7f763e5eff19",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7e9b6f55ee9b538e_51f927a2f9d4c1b7.txt",
+  "prompt_version": "51f927a2f9d4c1b7",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541793-XlfGBottbyiHz9YMJCCc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 444,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028035,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001998,
+        "upstream_inference_cost": 0.0028035,
+        "upstream_inference_prompt_cost": 0.0008055
+      },
+      "is_byok": false,
+      "prompt_tokens": 1074,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1518
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7e9b6f55ee9b538e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It lists feature contributions, but does not tell a user what could be changed or reviewed to alter the outcome.\",\n    \"audit_usefulness\": \"This is useful for auditing because it exposes the main local drivers and their signed contributions. However, it lacks a baseline, probability scale, and contextual comparison, so it only partially supports deeper investigation.\",\n    \"clarity\": \"The wording is concise and the SHAP values are presented in a simple list, which is easy to scan. Still, a non-expert may not understand what the signed numbers mean without additional explanation.\",\n    \"completeness\": \"It identifies several important local factors behind the prediction, including duration and checking status. But it does not explain how these factors combine to produce the final class, nor does it include the prediction confidence or a counterfactual view.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious padding. It provides a good amount of local information in very few tokens.\",\n    \"overall_quality\": \"Overall, this is a solid local explanation that is readable and informative, especially for technical users. Its main weakness is limited interpretability for non-experts and the absence of actionable or decision-oriented guidance.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the signs generally make sense as risk-related signals. There is no obvious contradiction between the features, prediction, and task context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:43:16.332046+00:00"
+}

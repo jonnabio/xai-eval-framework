@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a5e759675f7b81c4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3fdd83d3efebb77f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_a5e759675f7b81c4_3965915dd39c1a0e.txt",
+  "prompt_version": "3965915dd39c1a0e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546237-4wu14orNhSZMhVwQQAMC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 558,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004079,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00279,
+        "upstream_inference_cost": 0.004079,
+        "upstream_inference_prompt_cost": 0.001289
+      },
+      "is_byok": false,
+      "prompt_tokens": 1289,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1847
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a5e759675f7b81c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the only meaningful factor (0.6 weight) but provides no guidance on what actions could change the outcome. It does not suggest what specific changes would alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation shows which feature matters most, the poor technical metrics (low fidelity of 0.62, high faithfulness gap of 0.21, very low stability of 0.048) severely limit its reliability for auditing. An auditor cannot trust this explanation to represent the model's actual decision logic.\",\n    \"clarity\": \"The format is straightforward and uses plain language (feature names and weights), making it accessible to non-technical readers. However, the meaning of the weights and why only one feature has non-zero importance is not explained.\",\n    \"completeness\": \"The explanation identifies only one substantive factor (marital-status) while all other features show zero importance. This sparse output raises questions about whether the explanation captures the full decision logic, particularly given the model's confidence in the prediction.\",\n    \"concision\": \"The explanation is concise, listing features and weights efficiently. However, the extensive list of zero-weighted features adds little informational value and could be condensed.\",\n    \"overall_quality\": \"The explanation is weak due to poor technical metrics (low fidelity and stability), sparse feature importance that seems incomplete, and lack of actionable insights. While the format is clear, the reliability and usefulness are questionable.\",\n    \"semantic_plausibility\": \"Marital status being the primary predictor of income >50k in the adult dataset is plausible and aligns with domain knowledge. However, the complete absence of other factors (age, education, hours-per-week) is suspicious and suggests the explanation may not be capturing the model's true decision process.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:57:23.236708+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9fe565dd1861a7a4",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_de91280a4d84e7ca_ed37b9c478b5535a.txt",
+  "prompt_version": "ed37b9c478b5535a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542302-XjYwu2NTfF9S829nFRv4",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 817,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00556875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0046275,
+        "upstream_inference_cost": 0.00556875,
+        "upstream_inference_prompt_cost": 0.00094125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1255,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2489
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no viable recourse, as marital status is not readily actionable and no guidance is provided on what changes would alter the outcome.\",\n    \"audit_usefulness\": \"While it indicates that marital status was the sole selected anchor predicate, padding with zero-weight features and omitting precision/coverage limits its utility for auditing.\",\n    \"clarity\": \"The text lists feature names alongside weights, but the meaning of a single 1.0 score amidst nine 0.0 values is confusing for a lay reader.\",\n    \"completeness\": \"The explanation isolates a single indicator while zeroing out all continuous and other categorical drivers, offering minimal context for why class 0 was predicted.\",\n    \"concision\": \"Listing multiple irrelevant features with 0.0000 values introduces unnecessary padding that dilutes the core information.\",\n    \"overall_quality\": \"The explanation suffers from zero-padding, poor semantic alignment with the negative class prediction, and zero actionable guidance.\",\n    \"semantic_plausibility\": \"In the Adult dataset, being married-civ-spouse typically correlates strongly with high income (class 1), making it counterintuitive as the sole cited driver for a class 0 prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:51:51.594233+00:00"
+}

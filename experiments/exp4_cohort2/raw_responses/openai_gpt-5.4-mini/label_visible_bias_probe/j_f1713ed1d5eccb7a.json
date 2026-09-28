@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f1713ed1d5eccb7a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_b60690c60417e4de_98b0298aee0fa745.txt",
+  "prompt_version": "98b0298aee0fa745",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541211-dH0pobrRYnuFKgfvy4X9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00292275,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1532
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into any concrete recourse or next-step guidance. A user cannot tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it shows the main contributing variables and their directions, which helps inspect whether the model relied on sensible signals. However, the low stability and only moderate fidelity limit deeper auditing confidence.\",\n    \"clarity\": \"The output is short and organized as a ranked list, so a reader can quickly see the main factors. Some terms are dataset-specific one-hot encodings, but overall the explanation is understandable without much technical effort.\",\n    \"completeness\": \"It includes the top local feature contributions and both positive and negative influences, which covers the immediate decision drivers reasonably well. Still, it lacks a base value, probability, and a fuller account of how the contributions combine to produce the final prediction.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary repetition while still listing the most relevant local factors. It conveys useful information in a small number of tokens.\",\n    \"overall_quality\": \"This is a decent local explanation: readable, compact, and moderately informative about the model's decision. Its main weaknesses are limited actionability, missing contextual detail, and only moderate technical robustness.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult income prediction, since capital gain, education, marital status, occupation, sex, and relationship are all commonly influential features in this domain. The directions are also broadly coherent, even if some one-hot entries overlap or are only weakly informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:33:34.026379+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7468633961295699",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2e5ac7bbc46246bc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_7468633961295699_b9ed1fb7b79f6e25.txt",
+  "prompt_version": "b9ed1fb7b79f6e25",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540828-weUTY1C4XaaTT5jnKHt2",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003601,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00238,
+        "upstream_inference_cost": 0.003601,
+        "upstream_inference_prompt_cost": 0.001221
+      },
+      "is_byok": false,
+      "prompt_tokens": 1221,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1697
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7468633961295699\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors but provides no guidance on what values would change the prediction or what actions a user could take to influence the outcome. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"While the anchor features are identified, the explanation lacks depth regarding feature interactions, threshold values, or model decision boundaries that would support systematic bias or error investigation by an auditor.\",\n    \"clarity\": \"The format is a simple list of feature names with uniform weights (1.0000), which is easy to parse but provides minimal interpretive guidance for non-experts unfamiliar with anchor methodology or credit scoring.\",\n    \"completeness\": \"The explanation identifies ten features but does not explain their relative importance, direction of influence, or how they jointly drive the prediction; critical context about why these specific anchors matter is absent.\",\n    \"concision\": \"The explanation is compact in token count but redundant in structure\u2014ten features all weighted identically convey little information density and could be more efficiently summarized or ranked.\",\n    \"overall_quality\": \"The explanation is a bare-bones feature list with uniform weights and no interpretive narrative, failing to provide meaningful insight into the model's reasoning or support downstream use cases.\",\n    \"semantic_plausibility\": \"The selected features (duration, credit amount, checking status, purpose) are plausible credit risk factors in domain context, but the uniform weighting and lack of directional information undermines coherence with real credit assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:27:13.739906+00:00"
+}

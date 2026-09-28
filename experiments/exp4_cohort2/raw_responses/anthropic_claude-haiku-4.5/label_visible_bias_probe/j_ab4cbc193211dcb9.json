@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ab4cbc193211dcb9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_861c15c7ecab8f3b_a8c7a490406b6b71.txt",
+  "prompt_version": "a8c7a490406b6b71",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543634-gvXEBA9cmt5uxJfrrCvC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004253,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00303,
+        "upstream_inference_cost": 0.004253,
+        "upstream_inference_prompt_cost": 0.001223
+      },
+      "is_byok": false,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1829
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to change the prediction, what actions are feasible, or how the instance could be modified to achieve a different outcome. DICE should generate counterfactual examples, but none are presented here.\",\n    \"audit_usefulness\": \"The normalized scores show which features DICE identified as important, but the explanation lacks depth for auditing model behavior\u2014it does not reveal decision boundaries, feature interactions, or why the model made this specific prediction. The poor fidelity (-0.06) and stability (0.037) metrics undermine confidence in the explanation's reliability.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and numerical scores, which is easy to parse syntactically but lacks narrative context, interpretation, or explanation of what the scores mean or why these features matter for the prediction.\",\n    \"completeness\": \"The explanation identifies top factors but omits critical information: the actual feature values for this instance, the counterfactual changes needed, the direction of influence, and why native-country features dominate while other attributes have zero weight. The poor fidelity metric suggests the explanation may not capture the true decision logic.\",\n    \"concision\": \"The explanation is compact in token count (82 tokens) and avoids redundancy, efficiently listing features and scores without padding. However, the brevity comes at the cost of interpretability and actionability.\",\n    \"overall_quality\": \"While the explanation is concise and technically formatted, it fails to deliver meaningful insight into the prediction. The poor technical metrics (fidelity -0.06, stability 0.037), absence of counterfactual examples despite using DICE, and lack of actionable or interpretable content result in low overall utility.\",\n    \"semantic_plausibility\": \"The identification of native-country as a dominant factor is plausible in the adult income dataset, but the complete absence of influence from age, education, and work hours is counterintuitive and suggests potential model bias or explanation failure rather than genuine domain insight.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:14:01.539222+00:00"
+}

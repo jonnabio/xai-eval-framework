@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7468633961295699",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_05e832cdec5fde4a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_7468633961295699_3f7629b9b63bc628.txt",
+  "prompt_version": "3f7629b9b63bc628",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542231-qTrZOKe2ZbXcxq9VtL4F",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 433,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00273225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019485,
+        "upstream_inference_cost": 0.00273225,
+        "upstream_inference_prompt_cost": 0.00078375
+      },
+      "is_byok": false,
+      "prompt_tokens": 1045,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1478
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7468633961295699\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It lists factors with no indication of how changing them would affect the prediction.\",\n    \"audit_usefulness\": \"It gives a rough sense of which features matter locally, but the all-1.0000 output is not informative enough to inspect model behaviour or error sources in detail. The very low fidelity also limits trust for auditing.\",\n    \"clarity\": \"The wording is simple and feature names are readable, but the output is cryptic because every listed factor has the same value. A non-expert would likely not understand what the anchors mean or why these factors were selected.\",\n    \"completeness\": \"It mentions several relevant credit features, but it does not explain their direction, thresholds, or how they combine to support the negative prediction. Key local decision context is therefore missing.\",\n    \"concision\": \"The explanation is short and contains only a compact list of features, so it is not overly verbose. However, the brevity comes at the cost of useful interpretive detail.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact and somewhat readable, but it lacks interpretive content, actionability, and sufficient local justification for the prediction.\",\n    \"semantic_plausibility\": \"The selected features are plausible for German credit risk and fit the domain, but the uniform 1.0000 scores for many unrelated factors are suspicious. This makes the explanation only moderately believable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:50:34.523028+00:00"
+}

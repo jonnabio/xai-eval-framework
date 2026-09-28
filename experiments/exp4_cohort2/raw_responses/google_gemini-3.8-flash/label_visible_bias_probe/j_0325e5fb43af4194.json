@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_282b2b337bb41d87",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_0325e5fb43af4194",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_282b2b337bb41d87_8a550e57c0bed494.txt",
+  "prompt_version": "8a550e57c0bed494",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544955-xzZwjZ4cU0GjS9DGFBXx",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 581,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00454875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0036225,
+        "upstream_inference_cost": 0.00454875,
+        "upstream_inference_prompt_cost": 0.00092625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2201
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_282b2b337bb41d87\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides non-modifiable pathological measurements and omits explicit threshold values or clinical next steps.\",\n    \"audit_usefulness\": \"While it highlights four features included in the anchor rule, the lack of rule conditions, inequalities, or directionality restricts effective debugging of this false negative.\",\n    \"clarity\": \"The output merely lists feature names with binary values (1.0000 or 0.0000), making it obscure to non-experts who cannot discern whether these denote rule presence or weights.\",\n    \"completeness\": \"The explanation omits the actual predicate thresholds and instance feature values that drove the negative prediction.\",\n    \"concision\": \"Listing multiple zero-valued features clutters the explanation without adding meaningful information.\",\n    \"overall_quality\": \"Presenting an anchor explanation as pseudo-importance values without rule bounds severely degrades its interpretability and diagnostic utility.\",\n    \"semantic_plausibility\": \"The identified features, including worst concave points and texture, are recognized diagnostic indicators in breast cancer evaluation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:36:04.041704+00:00"
+}

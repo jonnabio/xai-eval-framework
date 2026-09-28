@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_619e6995c78eb5a0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_fbb0082b6f2ae806_c53f0b35d32ffc60.txt",
+  "prompt_version": "c53f0b35d32ffc60",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790539474-zef1k0KeYwgXSKr0J0Aa",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1089,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 676,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005022,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00408375,
+        "upstream_inference_cost": 0.005022,
+        "upstream_inference_prompt_cost": 0.00093825
+      },
+      "is_byok": false,
+      "prompt_tokens": 1251,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2340
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or guidance, providing only small linear weights over primarily immutable or categorical status indicators.\",\n    \"audit_usefulness\": \"While it exposes the surrogate model's weights, the lack of underlying instance feature values and extremely low fidelity (0.50) severely limit its diagnostic value for auditors.\",\n    \"clarity\": \"The raw list of one-hot encoded feature names with signed numbers is hard for non-experts to interpret, especially without indicating whether the person actually holds these attributes.\",\n    \"completeness\": \"The explanation lists several categorical dummies but omits the actual feature values and key numerical variables like capital gain or hours worked.\",\n    \"concision\": \"The token length is reasonable, but reporting mutually exclusive dummy categories (such as both sex_Female and sex_Male) introduces unnecessary redundancy.\",\n    \"overall_quality\": \"Overall quality is poor due to uncontextualized one-hot weights, poor technical fidelity, and lack of practical interpretability for end users.\",\n    \"semantic_plausibility\": \"Most directional weights align loosely with demographic trends, although a negative weight for education_Bachelors is counterintuitive unless reflecting feature absence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:04:43.335954+00:00"
+}

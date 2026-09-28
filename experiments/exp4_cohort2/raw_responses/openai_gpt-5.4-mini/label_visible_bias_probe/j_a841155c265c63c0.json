@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6496b69e203cf5db",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a841155c265c63c0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_6496b69e203cf5db_023743d1ed8097fd.txt",
+  "prompt_version": "023743d1ed8097fd",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542121-kOn4rbnldA12NAAOh6rW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030165,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.0030165,
+        "upstream_inference_prompt_cost": 0.0007935
+      },
+      "is_byok": false,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1552
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6496b69e203cf5db\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"This explanation does not give a feasible recourse path because it mainly lists feature values and importance scores without stating which changes would alter the prediction. A user cannot tell what to change, in what direction, or whether the listed factors are actionable.\",\n    \"audit_usefulness\": \"It offers limited audit value because the output is sparse, partly degenerate, and does not explain why the logistic regression predicted the positive class for a false positive case. The low-fidelity and low-stability metrics also suggest it is not reliable for investigating model behavior.\",\n    \"clarity\": \"The format is readable, but the meaning of the numbers is not explained and the mixture of categorical dummy variables with zeros is confusing for a non-expert. A reader can identify a few top factors, but not understand their effect on the prediction.\",\n    \"completeness\": \"The explanation includes only a couple of nonzero factors and omits the direction and magnitude of influence on the predicted class. It is therefore insufficient for understanding the specific false-positive decision in local context.\",\n    \"concision\": \"It is short and not overly verbose, but much of the content is low-information because most listed factors are zero. The explanation is compact, though not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and somewhat readable, but it lacks causal direction, recourse guidance, and enough local decision detail to support understanding or review. The low technical quality implied by the metrics further reduces trust.\",\n    \"semantic_plausibility\": \"The mentioned adult-dataset features are plausible, and married-civ-spouse and education are reasonable drivers in this domain. However, presenting many zero-valued top factors without interpretation makes the explanation only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:48:44.038918+00:00"
+}

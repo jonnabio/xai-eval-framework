@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f9a6e2fdfdb36843",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_326c5e1bf0274243_e113217e22add838.txt",
+  "prompt_version": "e113217e22add838",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546173-GrtFvrTCggGD3Umifusi",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 594,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004252,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00297,
+        "upstream_inference_cost": 0.004252,
+        "upstream_inference_prompt_cost": 0.001282
+      },
+      "is_byok": false,
+      "prompt_tokens": 1282,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1876
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key features (education-num, occupation_Exec-managerial, relationship_Husband) but provides no guidance on what could be changed or what actions would alter the outcome. It is purely descriptive without prescriptive value.\",\n    \"audit_usefulness\": \"The explanation shows which features anchored the prediction, but the low fidelity (0.624) and high faithfulness gap (0.305) suggest the explanation may not reliably represent the model's actual decision logic. This undermines confidence in using it for bias or error detection.\",\n    \"clarity\": \"The format is technical (feature names with weights) and assumes familiarity with machine learning terminology and the adult dataset schema. Non-technical reviewers would struggle to interpret what 'education-num: 1.0000' or 'occupation_Exec-managerial' mean in practical terms.\",\n    \"completeness\": \"The explanation identifies three positive anchors but provides no context about their relative importance, interaction effects, or why other features received zero weight. It lacks depth about the decision boundary or counterfactual reasoning.\",\n    \"concision\": \"The explanation is compact but includes many zero-weighted features that add little value. The list format is efficient but could be tightened by omitting features with zero contribution.\",\n    \"overall_quality\": \"This is a weak explanation. While it identifies relevant features, the poor technical metrics (low fidelity, high faithfulness gap, zero stability), lack of actionability, and inaccessibility to non-technical users significantly limit its utility. The false positive prediction compounds concerns about reliability.\",\n    \"semantic_plausibility\": \"The identified features (education, executive-managerial occupation, married status) are plausibly associated with higher income in the adult dataset, so the direction is sensible. However, the model's false positive prediction (predicting >50K when true label is \u226450K) raises questions about whether these features should have such strong influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:56:19.343585+00:00"
+}

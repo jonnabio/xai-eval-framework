@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_99188a61b3de9ed4",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cfe27d650e76404b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_99188a61b3de9ed4_3b12f9b1251b445a.txt",
+  "prompt_version": "3b12f9b1251b445a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542151-dYmvk1GLRTUxTeCjtbVA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020655,
+        "upstream_inference_cost": 0.00286875,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1530
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_99188a61b3de9ed4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or decision steps. A user cannot tell what to change, by how much, or whether change is feasible.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it exposes the main local SHAP drivers and their directions. However, the information is not sufficient to deeply investigate model bias or verify whether the prediction is driven by reasonable thresholds across similar cases.\",\n    \"clarity\": \"The feature list is readable and the signs are easy to inspect, even for a non-expert. That said, terms like specific encoded categories and signed SHAP values may still require some familiarity with tabular ML explanations.\",\n    \"completeness\": \"The explanation covers the top local contributors and their approximate effects, which is enough to see why the model leaned positive. It still lacks a baseline prediction, probability, and a fuller account of interactions or how the features combine to yield the final class.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It conveys the main local factors in a short format with good information density.\",\n    \"overall_quality\": \"This is a solid local explanation with clear top factors and reasonable interpretability, but it remains limited by the absence of deeper context and actionable guidance. Overall it is useful but not exceptional.\",\n    \"semantic_plausibility\": \"The factors listed are plausible for German credit, especially checking status, credit amount, age, duration, and credit history. The mix of positive and negative contributions is coherent with a realistic tabular credit decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:49:13.630044+00:00"
+}

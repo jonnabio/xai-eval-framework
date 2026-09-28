@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5db7b61f707f00a5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_5a283f4d6f1cf5e1_ee950035ca8b5510.txt",
+  "prompt_version": "ee950035ca8b5510",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541450-N9NUueE6d6SHtrTRcYXI",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00298125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002178,
+        "upstream_inference_cost": 0.00298125,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few positive and negative factors, but it does not translate them into concrete recourse or decision-review steps. A user cannot infer what changes would reliably affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local contributors and their directions, which can help inspect whether the model relies on sensible features. However, the low stability and moderate fidelity mean it is only partially reliable for deeper investigation.\",\n    \"clarity\": \"The output is short, structured, and uses simple sign/weight notation, so a non-expert can follow the general message. Still, terms like one-hot encoded feature names and small coefficient-style values may require some familiarity with tabular ML outputs.\",\n    \"completeness\": \"The explanation covers several top local drivers and indicates both supporting and opposing factors for the positive class. It does not provide a baseline, feature values, or enough context to fully understand why this specific instance was predicted positive.\",\n    \"concision\": \"The explanation is compact and mostly avoids redundancy while still listing the key factors. It conveys useful information per word without unnecessary narrative.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: it is readable, compact, and gives the main contributing features for a true positive prediction. Its main weaknesses are limited actionability and only moderate technical reliability, which prevent it from being excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and align with common socioeconomic patterns in income prediction, such as education, marital status, occupation, and capital gain/loss. The signs are also coherent in that some features support the positive class while a few slightly oppose it.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:37:32.503849+00:00"
+}

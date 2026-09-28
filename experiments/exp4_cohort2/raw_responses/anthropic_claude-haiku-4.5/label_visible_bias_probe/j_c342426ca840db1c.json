@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57d1693f50447ebd",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c342426ca840db1c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_57d1693f50447ebd_0cdd160dcdb1d0e8.txt",
+  "prompt_version": "0cdd160dcdb1d0e8",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543935-UyYNbyO7qmdLxsyz6jp0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003879,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002655,
+        "upstream_inference_cost": 0.003879,
+        "upstream_inference_prompt_cost": 0.001224
+      },
+      "is_byok": false,
+      "prompt_tokens": 1224,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1755
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_57d1693f50447ebd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken or how to modify inputs to change the prediction. No recourse pathway or decision review steps are suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies hours-per-week as the dominant factor, the high faithfulness gap (0.276) and low fidelity (0.595) severely limit its reliability for auditing model behavior. The sparse feature coverage and low stability (0.029) undermine confidence in the explanation's representativeness.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and numerical scores, which is straightforward to parse but lacks contextual interpretation or narrative explanation of what these scores mean or why they matter.\",\n    \"completeness\": \"The explanation covers many features but with most showing zero contribution, and critically lacks the actual feature values for the instance, the direction of influence, or counterfactual details that would provide full local decision context.\",\n    \"concision\": \"The explanation is compact in token count but contains substantial redundancy through many zero-valued features that add no information. A more concise presentation would exclude or summarize null contributors.\",\n    \"overall_quality\": \"The explanation suffers from poor technical quality (low fidelity, high faithfulness gap, low stability) and lacks interpretive depth, actionability, and contextual grounding despite correct prediction alignment with the true label.\",\n    \"semantic_plausibility\": \"Hours-per-week being the dominant factor for income prediction is plausible in the adult dataset domain, but the absence of other typically important features (education level, occupation) and the zero contributions across many features raise questions about the explanation's semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:19:00.718771+00:00"
+}

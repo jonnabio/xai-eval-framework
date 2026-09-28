@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ff8ec547d5d95aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bf2c42d5bc1a3a92",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_9ff8ec547d5d95aa_97ab07c7e0cb78ec.txt",
+  "prompt_version": "97ab07c7e0cb78ec",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540059-bY6ZQBIsZugYjbUryMtz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00303375,
+        "upstream_inference_prompt_cost": 0.00079275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1057,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1555
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ff8ec547d5d95aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives no concrete recourse or next step for the person affected. It lists a single varying feature (hours-per-week) but does not indicate how changing it would influence the prediction or by how much.\",\n    \"audit_usefulness\": \"It offers limited audit value because it mostly shows a sparse set of local factors with many zeros and no clear directional interpretation. The near-zero fidelity and low stability further reduce its usefulness for investigating model behavior.\",\n    \"clarity\": \"The output is readable in a technical sense, but it is not easy for a non-expert to understand because it is presented as raw feature values rather than a plain-language explanation. The meaning of the numbers and why they matter is not explained.\",\n    \"completeness\": \"It misses the main local decision context needed to understand this false negative, such as which features pushed the model toward class 0 versus class 1. With only one non-zero factor and no counterfactual comparison, the explanation is incomplete.\",\n    \"concision\": \"The explanation is short, but much of the content is uninformative repetition of zero-valued features. It is compact in length, yet not efficient in conveying useful information.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is sparse, minimally informative, and does not meaningfully support understanding or recourse. The technical metrics also suggest poor faithfulness and instability, which aligns with the low practical quality.\",\n    \"semantic_plausibility\": \"The single non-zero factor, hours-per-week, is a plausible driver in the Adult income domain, but the rest of the output is mostly zero-valued entries without interpretation. That makes it superficially plausible but not strongly coherent as an explanation of the specific prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:14:23.415876+00:00"
+}

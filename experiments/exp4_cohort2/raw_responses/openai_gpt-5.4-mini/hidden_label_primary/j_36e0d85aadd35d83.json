@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_36e0d85aadd35d83",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_a857fae38ad2e004_2bab4f2d963cd5c4.txt",
+  "prompt_version": "2bab4f2d963cd5c4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538823-uhW8e53yooEKtWBnIU48",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002079,
+        "upstream_inference_cost": 0.00287775,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local feature contributions and does not translate them into any concrete recourse or next step for the person affected. It is therefore not directly useful for decision review or action.\",\n    \"audit_usefulness\": \"It is useful at a basic audit level because it shows which features pushed the prediction up or down, especially capital-gain and marital-status. However, it lacks counterfactual detail, feature values, and stronger context needed for deeper error or bias investigation.\",\n    \"clarity\": \"The wording is concise and easy to parse for a general reader, with a simple ranked list of factors and signs. The use of encoded feature names is still somewhat technical, but overall the structure is understandable.\",\n    \"completeness\": \"The explanation covers the main local drivers and gives their directional influence, but it does not report the instance's actual feature values or the model\u2019s base rate. That leaves the reader without full context for why this specific negative prediction was made.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still including the top local factors. It gives useful information per word without being overly verbose.\",\n    \"overall_quality\": \"This is a reasonably good local explanation for a tabular model: it is readable, compact, and identifies the main contributing features. Its main weaknesses are limited contextual detail and little practical guidance beyond attribution.\",\n    \"semantic_plausibility\": \"The factors are plausible for Adult-income style data, and the directions of influence look consistent with a logreg/LIME explanation. The mixture of positive and negative contributions is coherent and not obviously contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:53:46.759868+00:00"
+}

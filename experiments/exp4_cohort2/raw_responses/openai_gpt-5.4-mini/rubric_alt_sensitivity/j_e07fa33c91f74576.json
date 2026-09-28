@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1de08b8c2918a436",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e07fa33c91f74576",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_1de08b8c2918a436_63142a14b39d456a.txt",
+  "prompt_version": "63142a14b39d456a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543306-HsUvIiwGBOFAeZm2rWMA",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 346,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00240825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001557,
+        "upstream_inference_cost": 0.00240825,
+        "upstream_inference_prompt_cost": 0.00085125
+      },
+      "is_byok": false,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1481
+    }
+  },
+  "response_text": "{\"case_id\":\"exp4_1de08b8c2918a436\",\"flags\":{\"format_problem\":false,\"insufficient_context\":false,\"safety_or_policy_issue\":false},\"rationales\":{\"actionability\":\"It names a few local conditions but does not explain how changing them would alter the prediction, so it offers little practical next step.\",\"audit_usefulness\":\"The listed anchors reveal which features the explainer considered sufficient locally, which is somewhat useful for probing model behavior, but it is too shallow and sparse to investigate bias or error in detail.\",\"clarity\":\"The feature names are mostly readable to a non-technical audience, but the anchor-style weights and zero-valued entries are not self-explanatory without prior knowledge of the method.\",\"completeness\":\"It identifies a few salient features for this case, but it does not explain directionality, interactions, or why the model predicted the wrong class, so the local decision is only partially covered.\",\"concision\":\"The explanation is short and information-dense, with little obvious filler, though some listed zero-valued factors add limited value.\",\"overall_quality\":\"As an anchor explanation it is concise and somewhat informative, but it is weak on interpretation and does not adequately explain this false positive decision.\",\"semantic_plausibility\":\"The highlighted factors, such as no checking account, low savings, and real estate ownership, are plausible credit-risk signals in the German credit domain, though the explanation does not show how they jointly support the specific prediction.\"},\"scores\":{\"actionability\":2,\"audit_usefulness\":3,\"clarity\":3,\"completeness\":2,\"concision\":4,\"overall_quality\":2,\"semantic_plausibility\":4}}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:08:28.591188+00:00"
+}

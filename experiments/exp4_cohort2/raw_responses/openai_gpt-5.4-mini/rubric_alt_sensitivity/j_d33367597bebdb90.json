@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d33367597bebdb90",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_81c9024ae418939e_22bd8819b961954a.txt",
+  "prompt_version": "22bd8819b961954a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543877-HXKIdG1nXKxp1R0MtAxo",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027105,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001863,
+        "upstream_inference_cost": 0.0027105,
+        "upstream_inference_prompt_cost": 0.0008475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1544
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It gives almost no actionable guidance beyond listing a few local factors, and it does not indicate what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for inspection because it identifies a few features the anchor method considered locally relevant, but the near-zero sparsity and low stability limit its value for auditing model behavior.\",\n    \"clarity\": \"The output is easy to read, but the meaning of the 1.0000 and 0.0000 weights is not explained, so a non-technical reader would still find it only partly accessible.\",\n    \"completeness\": \"It does not provide a real explanation of why the model predicted class 0 on this false negative; the key reasons and their directions are missing.\",\n    \"concision\": \"It is brief and mostly compact, but several listed features with 0.0000 contribute little useful information, so the usefulness per token is only moderate.\",\n    \"overall_quality\": \"Overall this is a weak explanation: it is readable and somewhat auditable, but it is incomplete, not very stable, and does not meaningfully explain the mistaken prediction.\",\n    \"semantic_plausibility\": \"The highlighted Adult dataset factors such as age and relationship status are plausible predictors, but the explanation does not connect them coherently to this specific outcome, so it is only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:59.284336+00:00"
+}

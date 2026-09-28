@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1eccadd3240fe852",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_31247e881a13bce1_cef77845be713ab5.txt",
+  "prompt_version": "cef77845be713ab5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542764-4tWsptCZJBcbBCBdLlPC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 549,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003979,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002745,
+        "upstream_inference_cost": 0.003979,
+        "upstream_inference_prompt_cost": 0.001234
+      },
+      "is_byok": false,
+      "prompt_tokens": 1234,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1783
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model behavior inspection and could help identify potential biases in how occupation and demographic features influence predictions. However, the low fidelity (0.61) and high faithfulness gap (0.59) limit confidence in the explanation's reliability for audit purposes.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical weights, which is clear in format but requires understanding of LIME methodology and feature encoding to interpret meaningfully. A non-expert would struggle to understand what these numbers mean.\",\n    \"completeness\": \"The explanation covers ten top features but lacks context about their relative importance, the prediction confidence, or the decision boundary. The absence of prediction confidence and limited feature context leaves gaps in understanding the full decision picture.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without extraneous text. Each element contributes directly to the explanation content.\",\n    \"overall_quality\": \"While the explanation is technically sound and concise, its low fidelity (0.61) and stability (0.058) metrics, combined with lack of actionability and limited clarity for non-experts, result in moderate-to-poor overall utility. The explanation captures some model logic but with significant reliability concerns.\",\n    \"semantic_plausibility\": \"The identified features (occupation, age, education, marital status, sex) are plausible drivers for income prediction in the adult dataset, and their directional effects align with domain expectations. However, the very small weight magnitudes and mixed signs raise questions about practical significance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:59:30.948392+00:00"
+}

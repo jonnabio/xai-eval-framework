@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc2b678dea61424b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_10cbf125a80b71b5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_dc2b678dea61424b_9821a89452d2491a.txt",
+  "prompt_version": "9821a89452d2491a",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541920-bU3Hbgd33xzXh69sez0r",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002907,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021195,
+        "upstream_inference_cost": 0.002907,
+        "upstream_inference_prompt_cost": 0.0007875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1521
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_dc2b678dea61424b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the user. It only lists two education-related anchors without indicating what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It offers very limited insight into model behavior because it exposes only a tiny set of local anchors and no supporting evidence, thresholds, or counterfactual comparison. This is insufficient for serious error, bias, or feature-effect investigation.\",\n    \"clarity\": \"The output is easy to read in the sense that it is short and uses a simple list format, but the meaning of the anchor values is not explained for a non-expert. The numeric values and feature names are not enough to convey the prediction logic clearly.\",\n    \"completeness\": \"The explanation is highly incomplete for understanding this specific prediction because it mentions only two education features and leaves out the main local decision context. It also does not explain how these factors relate to the negative prediction.\",\n    \"concision\": \"The explanation is very compact and contains little redundancy. However, it is so terse that much of the useful information needed for interpretation is missing.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief and technically plausible, but it lacks interpretive detail, actionable guidance, and sufficient local context. It is only marginally useful for understanding why the model predicted the negative class.\",\n    \"semantic_plausibility\": \"The mention of education-related features is plausible for the Adult income dataset, where education often matters for income prediction. However, the specific anchor formatting with values of 1.0000 and 0.0000 is not very interpretable on its own.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:45:22.319798+00:00"
+}

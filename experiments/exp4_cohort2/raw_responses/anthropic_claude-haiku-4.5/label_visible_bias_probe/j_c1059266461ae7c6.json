@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c1059266461ae7c6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_d372ea8e16367348_09a3388cb5ff759f.txt",
+  "prompt_version": "09a3388cb5ff759f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543448-jtv9f6Bv026KWGgXshqG",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003822,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003822,
+        "upstream_inference_prompt_cost": 0.001207
+      },
+      "is_byok": false,
+      "prompt_tokens": 1207,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1730
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to interpret them, what actions to take, or how to modify inputs to change the prediction. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies which features anchored the prediction, the binary importance scores (1.0 vs 0.0) lack nuance and the poor technical metrics (fidelity -0.06, stability 0.18) suggest the explanation may not reliably reflect model behavior for auditing purposes.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical weights, which is straightforward to parse but lacks contextual interpretation or explanation of what the weights mean or why these features matter.\",\n    \"completeness\": \"Only three features are marked as important (weight 1.0) while seven are marked as unimportant (weight 0.0), but no information is provided about feature values, thresholds, or the decision boundary that led to the positive prediction.\",\n    \"concision\": \"The explanation is compact at 76 tokens and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sparse and provides minimal insight into the prediction despite correct classification; the poor fidelity and stability metrics indicate the anchors may not be reliable representations of the model's actual decision logic.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, fractal dimension and smoothness are plausible morphological features, but the binary importance encoding (1.0 vs 0.0) oversimplifies the relationship and lacks clinical context or threshold information.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:10:54.870392+00:00"
+}

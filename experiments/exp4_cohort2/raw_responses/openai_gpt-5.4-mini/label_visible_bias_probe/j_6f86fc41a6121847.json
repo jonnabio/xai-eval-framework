@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6f86fc41a6121847",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_07f7eab6526a79eb_44c8f4ec8e915325.txt",
+  "prompt_version": "44c8f4ec8e915325",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541593-P3EskgiU0bAgnQWE4VIZ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00303975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00303975,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only ranks features and does not translate them into a concrete recourse or review step. A user cannot tell what to change or verify to affect the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it identifies which tabular features pushed the prediction toward the positive class and which pushed against it. However, the low fidelity and near-zero stability limit how strongly an auditor can trust the local pattern.\",\n    \"clarity\": \"The list is easy to read for a technical or moderately informed reader, with clear feature names and signed contributions. A non-expert may still struggle to interpret one-hot encoded categories and what the numeric weights mean in practice.\",\n    \"completeness\": \"It covers the main local drivers on both sides of the decision, including marital status, relationship, education, sex, age, and hours worked. Still, it lacks a baseline, a plain-language summary, and an explanation of why these factors outweighed others for this specific false positive.\",\n    \"concision\": \"The explanation is fairly compact and mostly avoids redundancy by presenting only the top local factors. It is informative per word, though the raw feature list could be summarized a bit more effectively.\",\n    \"overall_quality\": \"This is a reasonably usable local explanation with understandable feature attributions, but it is weakened by limited stability and moderate fidelity. It is helpful for a quick inspection, yet not strong enough to fully support trustworthy decision review.\",\n    \"semantic_plausibility\": \"The attributed factors are consistent with the Adult dataset and with common patterns seen in income prediction, especially marital status, relationship, education, age, and hours per week. The directions are also plausible for a false positive, with some features supporting income and others counteracting it.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:39:56.542588+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8359d4c2d75d8527",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3118a0f719dfdef8_95024f7291c497b3.txt",
+  "prompt_version": "95024f7291c497b3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790544989-OC3IOKvTB9xCwgdf23zB",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003964,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00269,
+        "upstream_inference_cost": 0.003964,
+        "upstream_inference_prompt_cost": 0.001274
+      },
+      "is_byok": false,
+      "prompt_tokens": 1274,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1812
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the outcome. A clinician or patient would not know what to do with this information.\",\n    \"audit_usefulness\": \"SHAP contributions help auditors understand feature importance for this prediction, but the false positive error (predicting malignant when benign) and low stability (0.59) suggest the explanation may not reliably reflect model behavior across similar instances. Useful but limited by technical metrics.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical contributions\u2014but requires understanding of SHAP values and medical terminology. Non-technical readers would struggle to interpret what these numbers mean or why they matter.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features, which addresses the main factors in the decision. However, it lacks context about thresholds, feature ranges, or why these particular values led to a malignant prediction when the true label is benign.\",\n    \"concision\": \"The list is compact and avoids redundancy. Each entry contains a feature name and a single coefficient, making efficient use of space without padding.\",\n    \"overall_quality\": \"This is a serviceable but limited explanation. It identifies relevant features but fails to provide actionable insights, has concerning technical metrics (low stability, high faithfulness gap), and is inaccessible to non-technical stakeholders. The false positive error compounds concerns about reliability.\",\n    \"semantic_plausibility\": \"The features listed (perimeter, smoothness, concave points, texture, symmetry, radius, area) are medically plausible indicators for cancer classification. However, the false positive prediction raises questions about whether the model's logic is sound in this case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:36:35.700716+00:00"
+}

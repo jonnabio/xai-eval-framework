@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c72f45245abac385",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_75520768088e5528_4e515e268b90b14b.txt",
+  "prompt_version": "4e515e268b90b14b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541953-4woKXbtyFrtUJshWJq8l",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 647,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00485025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039075,
+        "upstream_inference_cost": 0.00485025,
+        "upstream_inference_prompt_cost": 0.00094275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1257,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2299
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution scores without offering actionable recourse, counterfactual thresholds, or guidance for the user.\",\n    \"audit_usefulness\": \"It provides directional feature contributions for the MLP model, helping an auditor see influential features, though the absence of original feature values limits deeper verification.\",\n    \"clarity\": \"The raw key-value format of feature names and decimal values is technical and difficult for non-expert readers to interpret without guidance.\",\n    \"completeness\": \"While ten influential features are reported, the lack of baseline value, actual instance feature values, and total prediction probability leaves the context incomplete.\",\n    \"concision\": \"The text is concise and densely packed with relevant attribution data without filler.\",\n    \"overall_quality\": \"The explanation offers a compact summary of local feature importances, but its raw format, lack of actionable advice, and missing feature values limit its practical utility.\",\n    \"semantic_plausibility\": \"The identified key drivers align reasonably with known socioeconomic trends in the Adult dataset, although mutually exclusive categories appearing simultaneously without feature values creates some ambiguity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:46:01.980006+00:00"
+}

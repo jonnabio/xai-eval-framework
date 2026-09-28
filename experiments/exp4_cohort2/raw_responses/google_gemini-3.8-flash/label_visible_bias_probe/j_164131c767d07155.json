@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1a9c16ecde743d5e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_164131c767d07155",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_1a9c16ecde743d5e_517ffe545d4d947a.txt",
+  "prompt_version": "517ffe545d4d947a",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790542580-jreH7BtBZ6ED0hUDWXpH",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1109,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 737,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00510825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00415875,
+        "upstream_inference_cost": 0.00510825,
+        "upstream_inference_prompt_cost": 0.0009495
+      },
+      "is_byok": false,
+      "prompt_tokens": 1266,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2375
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_1a9c16ecde743d5e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw attribution scores without guidance on how an applicant could change their profile to reverse the denial.\",\n    \"audit_usefulness\": \"It provides a clear ranking and sign of local SHAP contributions for the top ten features, helping auditors identify which risk variables drove the false-negative classification.\",\n    \"clarity\": \"The raw feature string syntax and signed numerical attributions require familiarity with machine learning and one-hot encoding.\",\n    \"completeness\": \"The top ten drivers and their attribution weights are presented, though the actual feature values and expected base value are omitted.\",\n    \"concision\": \"The text delivers the top SHAP values directly with no unnecessary filler or redundancy.\",\n    \"overall_quality\": \"While technically informative for model debugging, the explanation lacks user-facing actionability and baseline context.\",\n    \"semantic_plausibility\": \"The identified features, such as checking status, savings status, and employment duration, align well with standard credit risk assessment criteria.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:56:29.091748+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ec3d891e0d43658f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c73aeb1b0fd5953e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_ec3d891e0d43658f_202793be634adf81.txt",
+  "prompt_version": "202793be634adf81",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541748-cbnWpD4lI7TyKKF45EbB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.00291825,
+        "upstream_inference_prompt_cost": 0.00079425
+      },
+      "is_byok": false,
+      "prompt_tokens": 1059,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ec3d891e0d43658f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few relevant features, but it does not translate them into concrete recourse steps or decision guidance. A user cannot tell what should change to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for checking which features the anchor relied on, but the output is too sparse to diagnose why the model predicted class 1 or to investigate potential bias and errors. The zero-valued terms and lack of thresholds limit audit value.\",\n    \"clarity\": \"The wording is simple enough, but the explanation is mostly a list of feature names and numeric indicators without interpretation. A non-expert would likely not understand what the 1.0000 and 0.0000 values mean in practice.\",\n    \"completeness\": \"It covers only a small subset of local factors and omits the direction and strength of influence. Key decision context, such as how the listed anchors combine to support the positive prediction, is missing.\",\n    \"concision\": \"The explanation is very short, but not especially informative per word because it mainly enumerates features with many zeros. It is compact, yet the brevity comes at the expense of useful content.\",\n    \"overall_quality\": \"Overall, the explanation is mechanically concise and somewhat aligned with the instance, but it lacks interpretation, recourse, and sufficient local decision context. It is usable only as a rough feature summary.\",\n    \"semantic_plausibility\": \"The named factors are plausible for a German credit decision, especially checking status, savings, residence stability, and loan duration. However, the presentation of many features with 0.0000 support is not very interpretable semantically.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:42:30.889811+00:00"
+}

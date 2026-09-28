@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2c90cf439cdcab20",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_0c57055995cafaca_12f42a05ac215a8d.txt",
+  "prompt_version": "12f42a05ac215a8d",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790541412-et3ONqC9sfZZaaNmOigu",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003962,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00274,
+        "upstream_inference_cost": 0.003962,
+        "upstream_inference_prompt_cost": 0.001222
+      },
+      "is_byok": false,
+      "prompt_tokens": 1222,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1770
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature importance weights without any guidance on how to interpret them or what actions could be taken to change the prediction. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"While the explanation identifies top factors, the very low fidelity (0.417) and stability (0.188) severely undermine its audit value; an auditor cannot reliably use this to understand model behavior or detect bias. The high faithfulness gap (0.094) further suggests the explanation does not faithfully represent the model's decision logic.\",\n    \"clarity\": \"The explanation is presented as a raw list of feature names and numerical weights without context, interpretation, or narrative structure; a non-expert reader would struggle to understand what these numbers mean or why they matter.\",\n    \"completeness\": \"The explanation lists features but lacks critical context such as the actual feature values for this instance, the direction of influence, or why certain features (e.g., workclass categories) received zero weight. The false negative prediction is not explained relative to the true positive label.\",\n    \"concision\": \"The explanation is relatively compact in token count but is padded with many zero-weighted features that add little informational value; a more selective presentation of only high-impact features would be more efficient.\",\n    \"overall_quality\": \"The explanation suffers from poor technical performance (low fidelity and stability), lacks interpretability for end users, and provides minimal actionable or audit-relevant insight. The false negative case is particularly concerning and unexplained.\",\n    \"semantic_plausibility\": \"The explanation is plausible in identifying education, capital gains, and hours-per-week as relevant to income prediction in the adult dataset, but the zero weights on workclass features seem questionable given their typical importance in income models.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:36:58.561462+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f836919b3217b571",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_f9cc6b6fb4f65a14_66db5efcce60086f.txt",
+  "prompt_version": "66db5efcce60086f",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546893-ypFriqmq3F9AkQYSnVga",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003957,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00267,
+        "upstream_inference_cost": 0.003957,
+        "upstream_inference_prompt_cost": 0.001287
+      },
+      "is_byok": false,
+      "prompt_tokens": 1287,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1821
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could change the outcome. A user cannot determine what specific changes to capital-gain or relationship status would alter the prediction.\",\n    \"audit_usefulness\": \"The low fidelity (0.191) and moderate faithfulness_gap (0.0037) suggest the explanation may not reliably represent the model's actual decision logic. The sparse feature list (only 2 non-zero weights) limits ability to audit for bias comprehensively.\",\n    \"clarity\": \"The format is technical with feature names and numerical weights that require understanding of the adult dataset schema and DICE methodology. Non-technical users would struggle to interpret what 'capital-gain: 10.6757' means in practical terms.\",\n    \"completeness\": \"Only two features have non-zero weights; nine others are listed as 0.0000. This sparse representation may omit important decision factors, particularly given the low fidelity score suggests the explanation captures only partial model behavior.\",\n    \"concision\": \"The explanation is concise in length but includes many zero-valued features that add little information. Removing the zero entries would improve information density without loss of content.\",\n    \"overall_quality\": \"The explanation is technically valid but limited in utility. The poor fidelity metric (0.191) indicates the explanation poorly captures the model's actual decision process, undermining confidence in all downstream uses.\",\n    \"semantic_plausibility\": \"For income prediction, capital gains and family relationship are plausible factors. However, the extreme sparsity (only 2 active features) and very low fidelity raise doubts about whether this truly represents the model's reasoning for this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:08:18.725867+00:00"
+}

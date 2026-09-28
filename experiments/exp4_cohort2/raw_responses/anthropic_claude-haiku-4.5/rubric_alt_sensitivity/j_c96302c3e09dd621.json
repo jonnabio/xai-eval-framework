@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c96302c3e09dd621",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_3debbe632feba167_0e60e89b33571b08.txt",
+  "prompt_version": "0e60e89b33571b08",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790546720-ejWRLNc21hwjpULM6T5B",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00416,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002885,
+        "upstream_inference_cost": 0.00416,
+        "upstream_inference_prompt_cost": 0.001275
+      },
+      "is_byok": false,
+      "prompt_tokens": 1275,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1852
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists only feature importance scores with no guidance on what actions could change the outcome. A user cannot determine what specific changes to native-country or other features would alter the prediction.\",\n    \"audit_usefulness\": \"While the explanation identifies native-country_Ireland as the dominant factor (0.6), the poor technical metrics (low fidelity: -0.043, low stability: 0.060) and sparse output limit its utility for auditing model behavior or detecting bias. The explanation may not reliably reflect the model's actual decision logic.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical scores. However, without context about what these scores mean (importance? distance? probability?), the explanation is difficult to interpret for non-technical users.\",\n    \"completeness\": \"The explanation provides only one substantive factor (native-country_Ireland at 0.6) and zeros for all others. This is extremely sparse and fails to capture the full picture of why the model made this prediction, especially given the model's complexity (MLP).\",\n    \"concision\": \"The explanation is concise in length but wastes space listing many zero-valued features. A tighter presentation would omit or group the zero-importance features, making better use of the token budget.\",\n    \"overall_quality\": \"The explanation is weak overall. It identifies one potentially relevant factor but provides minimal actionable insight, relies on poor-quality technical metrics, and offers little help for understanding or auditing the model's decision. The sparse output and lack of context severely limit its utility.\",\n    \"semantic_plausibility\": \"Native-country being a strong predictor of income in the adult dataset is plausible, but the explanation's extreme sparsity (only one non-zero factor) is suspicious. Real MLP decisions typically involve multiple features, and the poor fidelity score suggests the explanation may not accurately reflect the model's actual reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:05:26.182694+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_72998a3cf0ab064e",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_81c9024ae418939e_22bd8819b961954a.txt",
+  "prompt_version": "22bd8819b961954a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790547403-5RXfLutpT9dGQMZvVxom",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004129,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00285,
+        "upstream_inference_cost": 0.004129,
+        "upstream_inference_prompt_cost": 0.001279
+      },
+      "is_byok": false,
+      "prompt_tokens": 1279,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1849
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies age and relationship status as key factors but provides no guidance on what actions could be taken. For a false negative (predicted 0, true 1), it doesn't suggest what changes might flip the prediction or how to address the misclassification.\",\n    \"audit_usefulness\": \"While the explanation shows which features matter, the very low stability (0.0023) and high faithfulness gap (0.436) suggest the explanation is unreliable. An auditor would struggle to trust these findings for bias investigation. The fidelity of 0.629 is also concerning.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with importance weights\u2014but lacks context about what the prediction means (income threshold in adult dataset) and why these specific features matter. A non-technical person would not understand the significance.\",\n    \"completeness\": \"Only two features are identified as important (age and relationship_Husband with 1.0 weight), while all others show 0.0. This sparse explanation misses potentially important interactions or contextual factors that led to the false negative prediction.\",\n    \"concision\": \"The explanation is compact and lists features efficiently, but includes many zero-weight features that add clutter without information. A tighter presentation would omit features with zero importance.\",\n    \"overall_quality\": \"The explanation suffers from poor technical metrics (low stability, high faithfulness gap, moderate fidelity) and provides minimal actionable insight into why the model made an incorrect prediction. It identifies some factors but fails to explain the decision adequately or reliably.\",\n    \"semantic_plausibility\": \"Age and marital status (husband) are plausible predictors of income in the adult dataset, so the identified factors are domain-reasonable. However, the false negative suggests the model's logic may be flawed, and the explanation doesn't clarify why it failed on this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T22:16:49.507122+00:00"
+}

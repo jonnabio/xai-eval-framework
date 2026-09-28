@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7b9463fe8c32c420",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_2a3f635ae972c4ad_7bfd008ebd369b1b.txt",
+  "prompt_version": "7bfd008ebd369b1b",
+  "provider": "openrouter",
+  "replicate": 2,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538601-SXX09S4lPcuqncz4zNB5",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003671,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00243,
+        "upstream_inference_cost": 0.003671,
+        "upstream_inference_prompt_cost": 0.001241
+      },
+      "is_byok": false,
+      "prompt_tokens": 1241,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1727
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction, modify inputs, or take corrective action; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"The ranked feature weights and their directions (positive/negative) enable an auditor to inspect which factors drove the prediction and detect potential bias patterns, supporting model behaviour investigation.\",\n    \"clarity\": \"The format is straightforward\u2014feature names with numerical weights\u2014but requires familiarity with LIME output conventions and the adult dataset schema to interpret; non-experts may struggle with encoded feature names like 'marital-status_Married-civ-spouse'.\",\n    \"completeness\": \"The top 10 features are presented with their local contributions, covering the main drivers of this prediction; however, the absence of feature values for the instance itself limits full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked factors with weights in a minimal format appropriate for a local explanation.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks user-friendliness, actionability, and instance-level context; it serves model inspection well but falls short of holistic decision support.\",\n    \"semantic_plausibility\": \"The identified factors (capital gain, education, marital status, sex, hours per week) are plausible predictors in income classification; the direction and magnitude of contributions align with domain expectations for the adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:50:06.544651+00:00"
+}

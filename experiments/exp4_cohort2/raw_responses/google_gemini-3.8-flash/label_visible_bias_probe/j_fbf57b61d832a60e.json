@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_fbf57b61d832a60e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "label_visible_bias_probe",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\label_visible_bias_probe\\exp4_326c5e1bf0274243_5d10672070f539d8.txt",
+  "prompt_version": "5d10672070f539d8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543848-n8MXYaspgH1TQMiVA7pJ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 627,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0047625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00383625,
+        "upstream_inference_cost": 0.0047625,
+        "upstream_inference_prompt_cost": 0.00092625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1235,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2258
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no thresholds or feature directions, leaving the user without actionable guidance for recourse.\",\n    \"audit_usefulness\": \"While it highlights the three key features driving the false positive prediction, the lack of predicate conditions and inclusion of uninformative zero-weight features limits audit utility.\",\n    \"clarity\": \"The list format is readable, but presenting anchor membership as binary scores (1.0000 vs 0.0000) without explicit rule predicates is confusing to lay readers.\",\n    \"completeness\": \"The explanation identifies the active subset of features but completely omits the specific rule thresholds and observed feature values necessary to understand the decision.\",\n    \"concision\": \"Listing seven redundant features with zero values dilutes the explanation and adds unnecessary clutter.\",\n    \"overall_quality\": \"The explanation captures plausible drivers for the high-income prediction but suffers from stripped rule predicates and uninformative zero-valued features.\",\n    \"semantic_plausibility\": \"Executive management, high education, and marital status are well-established domain indicators associated with higher income in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:17:37.264775+00:00"
+}

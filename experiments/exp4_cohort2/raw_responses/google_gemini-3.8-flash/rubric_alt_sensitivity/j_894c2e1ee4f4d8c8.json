@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_894c2e1ee4f4d8c8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_445412523328930a_4b3b42639bce7828.txt",
+  "prompt_version": "4b3b42639bce7828",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790551861-36kXEqzPTdw2zTS0HMf7",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1164,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 748,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00537525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004365,
+        "upstream_inference_cost": 0.00537525,
+        "upstream_inference_prompt_cost": 0.00101025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1347,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2511
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"There are no directional cues, feature thresholds, or actionable guidance on what changes would alter the credit decision.\",\n    \"audit_usefulness\": \"The explanation offers virtually no insight into model behavior, as it merely assigns an identical weight of 1.0000 to a list of features including mutually exclusive dummy categories.\",\n    \"clarity\": \"The output is a flat list of technical one-hot encoded feature names paired with an uninformative 1.0000 score, making it confusing for a layperson.\",\n    \"completeness\": \"It fails to provide the actual decision rules, thresholds, or feature values that led to the model's false negative prediction.\",\n    \"concision\": \"Listing all one-hot encoded levels of the same categorical attributes with identical placeholder weights creates unnecessary clutter and low information density.\",\n    \"overall_quality\": \"The explanation is unusable as an anchor explanation because it outputs identical unit weights across features without conditions, predicates, or direction.\",\n    \"semantic_plausibility\": \"While the named attributes are standard German Credit variables, asserting that every mutually exclusive category of checking status and credit history simultaneously has an identical top weight is logically problematic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T23:31:11.012969+00:00"
+}

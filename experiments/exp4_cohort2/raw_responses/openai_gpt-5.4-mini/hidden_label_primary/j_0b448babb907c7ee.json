@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0b448babb907c7ee",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_07f7eab6526a79eb_ff2593653cd2024a.txt",
+  "prompt_version": "ff2593653cd2024a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538873-FDrHL5t0hY45y2YCTxX5",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 562,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0033285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002529,
+        "upstream_inference_cost": 0.0033285,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1628
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse or next steps for the person or decision maker. A user can see relevant factors, yet there is no specific action suggested to change the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the main local drivers and their signs, which can help inspect whether the model is using sensible correlates such as marital status, hours worked, and relationship category. However, the low fidelity and near-zero stability reduce confidence that this explanation reliably reflects the model\u2019s true behaviour.\",\n    \"clarity\": \"The feature list is short and the signs are easy to follow, so a non-expert can roughly understand which variables increased or decreased the score. Still, the one-line format and encoded categorical names require some interpretation, especially for readers unfamiliar with the Adult dataset.\",\n    \"completeness\": \"It covers several top local factors and gives a reasonable snapshot of why the model predicted class 1, but it does not explain the base value, the magnitude of the final score, or how these features combine overall. Because this is a false positive case, the explanation is also incomplete as a justification for the mistaken decision.\",\n    \"concision\": \"The explanation is compact and presents only the top local factors without obvious redundancy. It delivers a good amount of information per word, although some feature labels are somewhat technical.\",\n    \"overall_quality\": \"Overall, this is a moderately useful LIME explanation: readable, reasonably compact, and informative about local drivers, but limited by weak faithfulness and stability. It is adequate for a quick inspection, yet not strong enough for high-confidence decision support or rigorous audit work.\",\n    \"semantic_plausibility\": \"The directions of the factors are broadly plausible for the Adult income setting, with features like marital status, hours per week, education, sex, and relationship all being reasonable correlates. The combination is also coherent for a false positive, since the model appears to be using common socioeconomic proxies rather than contradictory signals.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:54:38.132625+00:00"
+}

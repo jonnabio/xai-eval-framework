@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e34122f3b5937073",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_f9cc6b6fb4f65a14_2a689f924e7f4f23.txt",
+  "prompt_version": "2a689f924e7f4f23",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790540943-kfft7ClGDyVr6vjknSZ4",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 532,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003891,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00266,
+        "upstream_inference_cost": 0.003891,
+        "upstream_inference_prompt_cost": 0.001231
+      },
+      "is_byok": false,
+      "prompt_tokens": 1231,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1763
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on how to change the prediction, what actions are feasible, or how the instance could be modified to achieve a different outcome. DICE should generate counterfactual examples, but none are presented here.\",\n    \"audit_usefulness\": \"The normalized weights show which features DICE identified as influential, but the extremely low fidelity (0.19) and high cost (453.58) suggest the counterfactuals may not reliably reflect model behavior. An auditor cannot confidently assess model logic from unreliable explanations.\",\n    \"clarity\": \"The output is a raw list of feature names and numerical weights without interpretation, context, or explanation of what these values mean or why they matter for the prediction. Non-experts would struggle to understand the significance.\",\n    \"completeness\": \"The explanation omits the actual counterfactual examples that DICE should produce, showing only feature importance weights. Critical information about what changes would alter the prediction is entirely absent.\",\n    \"concision\": \"While the token count is low, the explanation is sparse to the point of being incomplete rather than efficiently informative. It sacrifices necessary content for brevity.\",\n    \"overall_quality\": \"The explanation fails to deliver the core value of DICE (actionable counterfactuals), exhibits poor technical performance metrics (low fidelity, high cost), and lacks interpretability for both users and auditors. It reads as a partial or malformed output.\",\n    \"semantic_plausibility\": \"Capital gain and relationship status are plausible predictors in income classification, but the explanation's incompleteness and lack of counterfactual context prevent meaningful assessment of semantic coherence with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T20:29:09.007466+00:00"
+}

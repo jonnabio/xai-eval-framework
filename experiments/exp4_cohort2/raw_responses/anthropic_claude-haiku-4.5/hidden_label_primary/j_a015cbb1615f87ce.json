@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a015cbb1615f87ce",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "hidden_label_primary",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\hidden_label_primary\\exp4_e9eba60d9edc4d8a_1490023bf58ecaec.txt",
+  "prompt_version": "1490023bf58ecaec",
+  "provider": "openrouter",
+  "replicate": 3,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790538445-ctznRqK76nJHgUwfwfO9",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003763,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00253,
+        "upstream_inference_cost": 0.003763,
+        "upstream_inference_prompt_cost": 0.001233
+      },
+      "is_byok": false,
+      "prompt_tokens": 1233,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1739
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what actions to take, or how to modify inputs to change the prediction. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"The SHAP values and their directions support model behaviour inspection and can help identify whether the model relies on plausible features. However, the lack of prediction confidence and missing true label context limits audit depth for bias investigation.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature names with numerical SHAP values and signs, which is clear in structure but requires familiarity with SHAP methodology and breast cancer features to interpret meaningfully.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which represents the main local drivers. However, the absence of prediction confidence, base value, and feature values themselves limits full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name and SHAP value) in a dense format appropriate for technical audiences.\",\n    \"overall_quality\": \"The explanation is technically sound and provides interpretable SHAP contributions, but lacks actionability, context (confidence, true label), and domain-grounded interpretation that would elevate it to high quality for practical use.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, morphological features like area, perimeter, radius, and concavity are well-established predictors; the explanation's reliance on these features is highly consistent with domain knowledge and clinical expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T19:47:30.904354+00:00"
+}

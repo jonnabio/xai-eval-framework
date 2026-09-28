@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_38309e36290ce784",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "rubric_alt_sensitivity",
+  "prompt_path": "experiments\\exp4_cohort2\\prompts\\rubric_alt_sensitivity\\exp4_eec93395cc3f8408_f2e0f66b3209f739.txt",
+  "prompt_version": "f2e0f66b3209f739",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1790543156-LsRKzI1pddaI80FIDVoe",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001863,
+        "upstream_inference_cost": 0.0027285,
+        "upstream_inference_prompt_cost": 0.0008655
+      },
+      "is_byok": false,
+      "prompt_tokens": 1154,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1568
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It only lists features that pushed the prediction toward class 0 or away from it; it does not say what specific changes could alter the decision.\",\n    \"audit_usefulness\": \"The ranked local SHAP attributions are useful for inspecting which attributes drive this random forest's decision and for checking whether sensitive or suspicious features matter, but it does not provide deeper causal or group-level evidence.\",\n    \"clarity\": \"The explanation is short and mostly readable, but the feature names are technical and assume some familiarity with the German Credit variables and SHAP sign conventions.\",\n    \"completeness\": \"It gives the main local contributors to the prediction, but not the baseline value, the magnitude of the final score, or any interaction effects, so it is only a partial account of the decision.\",\n    \"concision\": \"The output is compact and information-dense, with little filler and a clear list of the top contributing factors.\",\n    \"overall_quality\": \"This is a solid local explanation: it is concise, stable, and identifies the main drivers of a true negative prediction, though it remains somewhat technical and only partially explanatory.\",\n    \"semantic_plausibility\": \"The factors make sense for credit risk in the German Credit domain: poor checking status, weak credit history, and low savings plausibly support a negative outcome, while age and property-related factors are reasonable positive contributors.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-09-27T21:05:58.707554+00:00"
+}
