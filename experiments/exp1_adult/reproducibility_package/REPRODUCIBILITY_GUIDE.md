@@ -110,7 +110,7 @@ The current public repository is:
 Archive citation:
 ```bibtex
 @software{herrera_vasquez_2026_xai_eval_framework,
-  author = {Jonathan Herrera-Vasquez},
+  author = {Jonathan Herrera-V{\'a}squez},
   title = {XAI Evaluation Framework},
   version = {0.2.0},
   doi = {10.5281/zenodo.19297724},

@@ -83,7 +83,7 @@ read would break double-blind review.
 >
 > Thank you for your time.
 >
-> Jonathan Herrera-Vasquez
+> Jonathan Herrera-Vásquez
 > Universidad Americana de Europa (UNADE)
 
 ---
