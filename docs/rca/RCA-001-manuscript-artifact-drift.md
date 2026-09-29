@@ -120,6 +120,18 @@ verifier with a specific message.
 - **Render-time defects.** A13, a dangling cross-reference, was found only by
   rebuilding. Building all outputs in CI and failing on undefined references is
   Phase 2.
+- **Unregistered sites of a shared result (added 2026-09-28).** The
+  prior-publication invariant is checked through `appears_in`: a claim listing
+  both a published and a submitted manuscript is a conflict. A site that was
+  never registered is invisible to it. The SHAP and LIME mean costs were
+  registered for Paper B+C and the thesis only, while Paper A printed them too,
+  so the query returned nothing on 2026-09-27 and "no shared result" was
+  recorded as verified (Paper B+C review F02). Figure 1 plotted the per-method
+  levels as bars without data labels, which no text check can see. Closed by
+  `scripts/pubs/scan_shared_literals.py`, which compares the two papers'
+  printed numbers directly, without the registry: report-only in CI,
+  `--strict` in the submission gate, and negative-tested. Figures still need a
+  reader.
 
 ## Follow-up
 

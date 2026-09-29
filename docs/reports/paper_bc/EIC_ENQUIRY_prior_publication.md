@@ -42,7 +42,7 @@ read would break double-blind review.
 >
 > Reading your policy on reuse of text, figures and results, I audited the
 > submission against that article rather than assuming the overlap was
-> immaterial. It originally re-reported thirteen numeric results. All thirteen
+> immaterial. It originally re-reported fifteen numeric results. All fifteen
 > have been removed:
 >
 > - The four-method Friedman omnibus and the four-method block means with
@@ -51,7 +51,9 @@ read would break double-blind review.
 > - The paired comparison table no longer prints per-method mean levels. It
 >   reports the mean paired difference with a 95% confidence interval, the
 >   adjusted p-values and the effect sizes, which are the quantities the paired
->   analysis contributes.
+>   analysis contributes. The figure beside it now plots those differences, not
+>   the two methods' levels, and the SHAP and LIME mean runtimes, which a
+>   second audit found still printed in the text, are cited rather than stated.
 > - The cross-dataset table no longer prints SHAP fidelity levels. It reports
 >   the Anchors levels and the SHAP−Anchors gaps.
 > - The corresponding figure was regenerated, because it had been labelling the

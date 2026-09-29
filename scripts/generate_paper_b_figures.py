@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-Generate focused Paper B figures from paired SHAP-vs-LIME analysis artifacts.
+Generate the Paper B+C figures from paired SHAP-vs-LIME analysis artifacts.
 
-Outputs (default):
-  docs/reports/paper_b/figures/fig_b1_quality_endpoints.pdf
-  docs/reports/paper_b/figures/fig_b1_quality_endpoints.png
-  docs/reports/paper_b/figures/fig_b2_runtime_heterogeneity.pdf
-  docs/reports/paper_b/figures/fig_b2_runtime_heterogeneity.png
+Outputs (default), the files paper_bc_tmlr.tex includes:
+  docs/reports/paper_bc/figures/fig_b1_quality_endpoints.pdf
+  docs/reports/paper_bc/figures/fig_b1_quality_endpoints.png
+  docs/reports/paper_bc/figures/fig_b2_runtime_heterogeneity.pdf
+  docs/reports/paper_bc/figures/fig_b2_runtime_heterogeneity.png
+
+Figure 1 plots the mean paired difference (SHAP - LIME) with its 95% t
+interval, the quantities of tab:paired_main. It used to plot the two methods'
+mean levels side by side, which are results of the published RIMI article
+(Paper A) and may not be re-reported in the TMLR submission (review F02,
+2026-09-28).
 """
 
 from __future__ import annotations
@@ -23,7 +29,11 @@ import matplotlib.pyplot as plt
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ANALYSIS_DIR = PROJECT_ROOT / "outputs" / "analysis" / "paper_a_exp2_stats"
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "docs" / "reports" / "paper_b" / "figures"
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "docs" / "reports" / "paper_bc" / "figures"
+
+# Two-sided 95% Student-t quantile at df = 74 (75 matched cells); the same
+# constant as scripts/pubs/claim_sources.py, which registers these intervals.
+T975_DF74 = 1.9925435
 
 COLOR_LIME = "#0072B2"
 COLOR_SHAP = "#D55E00"
@@ -45,40 +55,36 @@ def setup_style() -> None:
     )
 
 
-def generate_quality_figure(wilcoxon_csv: Path, output_dir: Path) -> None:
-    df = pd.read_csv(wilcoxon_csv)
+def generate_quality_figure(paired_csv: Path, output_dir: Path) -> None:
+    df = pd.read_csv(paired_csv)
     metric_order = ["stability", "fidelity", "faithfulness_gap", "sparsity"]
-    labels = ["Stability", "Fidelity", "Faithfulness Gap", "Active Ratio (Sparsity)"]
+    labels = ["Stability", "Fidelity", "Faithfulness gap", "Active ratio\n(sparsity)"]
 
-    subset = df.set_index("metric").loc[metric_order].reset_index()
-    n_pairs = int(subset["n_pairs"].iloc[0])
-    lime_vals = subset["lime_mean"].values
-    shap_vals = subset["shap_mean"].values
+    n_pairs = len(df)
+    if n_pairs != 75:
+        raise SystemExit(f"expected 75 matched cells, found {n_pairs}")
+    means, halves = [], []
+    for metric in metric_order:
+        diff = df[f"diff_{metric}"].to_numpy(dtype=float)
+        means.append(diff.mean())
+        halves.append(T975_DF74 * diff.std(ddof=1) / np.sqrt(n_pairs))
 
-    x = np.arange(len(labels))
-    width = 0.36
+    y = np.arange(len(labels))[::-1]
+    fig, ax = plt.subplots(figsize=(7.0, 3.0))
+    ax.errorbar(means, y, xerr=halves, fmt="o", color=COLOR_SHAP,
+                ecolor="#333333", elinewidth=1.2, capsize=4, markersize=6)
+    ax.axvline(0.0, color="#555555", linewidth=0.9, linestyle="--")
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels)
+    ax.set_xlabel("Mean paired difference, SHAP $-$ LIME (95% CI)")
+    ax.set_title(f"Paired quality endpoints (n={n_pairs} matched cells)")
+    ax.grid(axis="x", alpha=0.25)
+    ax.set_xlim(-0.05, max(m + h for m, h in zip(means, halves)) + 0.05)
 
-    fig, ax = plt.subplots(figsize=(7.6, 3.8))
-    ax.bar(x - width / 2, lime_vals, width, label="LIME", color=COLOR_LIME)
-    ax.bar(x + width / 2, shap_vals, width, label="SHAP", color=COLOR_SHAP)
-
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels)
-    ax.set_ylabel("Mean value across matched cells")
-    ax.set_title(f"Primary Quality Endpoints (n={n_pairs} matched SHAP-LIME cells)")
-    ax.grid(axis="y", alpha=0.25)
-    ax.legend(loc="upper right")
-
-    # Note on sparsity direction to prevent misread.
-    ax.text(
-        0.01,
-        -0.28,
-        "Note: lower Active Ratio indicates sparser explanations.",
-        transform=ax.transAxes,
-        ha="left",
-        va="top",
-        fontsize=8,
-    )
+    # Sparsity is an active-feature ratio: a positive difference means SHAP
+    # is denser, i.e. LIME is sparser. Say so on the figure.
+    ax.text(0.99, 0.02, "Positive active-ratio difference: LIME is sparser.",
+            transform=ax.transAxes, ha="right", va="bottom", fontsize=8)
 
     fig.tight_layout()
     for ext in ("pdf", "png"):
@@ -171,10 +177,9 @@ def main() -> None:
     setup_style()
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    wilcoxon_csv = args.analysis_dir / "wilcoxon_shap_lime_all_models.csv"
     paired_csv = args.analysis_dir / "paired_cells_shap_lime_all_models.csv"
 
-    generate_quality_figure(wilcoxon_csv, args.output_dir)
+    generate_quality_figure(paired_csv, args.output_dir)
     generate_runtime_figure(paired_csv, args.output_dir)
 
     print(f"Wrote figures to: {args.output_dir}")
