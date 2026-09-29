@@ -426,3 +426,26 @@ structural or unbacked, so Step 7 can add both files to `[coverage]` directly. T
 shared-literal scan flagged four new low-precision matches (0.015, 0.9, 1.4, 2.3); each was
 triaged against its Paper A context as a coincidence. Checks: verifiers green (320 claims /
 490 sites / 35 retired guards); PDF 26 pp, 0 undefined references.
+
+## Step 6 outcome (2026-09-28)
+
+**F13, F14 and F15 fixed; bibliography R01-R06 fixed.**
+
+- **F13:** "the first" → "one of the first".
+- **F14:** "almost every score is 1" → "86% of its primary-condition scores are 1" (registered).
+- **F15:** S1 caption "Three primary condition" → "Three conditions"; S6 "decreases
+  monotonically" → "does not increase, and falls overall".
+- **Bibliography:** 60 → 52 entries, all cited, no orphans.
+  - R01: the 8 unused entries are removed.
+  - R02: the Nauta label is fixed.
+  - R03: Fok & Weld 2024, with DOI.
+  - R04: Wilming 2022 now has 111(5):1903-1923 and its DOI.
+  - R05: Wu et al. cites the ACL 2026 version (Crossref-verified authors).
+  - R06: Zheng 2023 cites the NeurIPS DOI and pages.
+  - R07-R09 (unverified entries) are kept unchanged; no published version was confirmed.
+- **Registry:** removing `agrawal2025xaieval` removed a DOI containing "0.117". The site of
+  `exp4c2.hidden.ci_upper.actionability` had pinned `count = 2` on that coincidence. It is
+  now anchored on the table cell ("0.117]", count 1).
+
+Checks: verifiers green (320 claims / 491 sites); shared-literal scan clean; both PDFs
+0 undefined references (26 + 5 pp); each change read in the PDFs.
