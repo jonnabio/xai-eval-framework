@@ -1,7 +1,14 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-27
+- **Last Updated:** 2026-09-28
+- **Mode (2026-09-28, second session):** PUBLICATION - Paper B+C remediation Steps 1-7
+  done on the paper lane: every review finding fixed except F10 (author: won't-fix), Paper B+C
+  under `[coverage]`, merged to main and all lanes, CI green. **Step 8 (submission gate) is
+  next and filing waits for it.** See "Session Handoff - 2026-09-28 (second session)".
+- **Mode (2026-09-28):** PEER_REVIEW / PLANNING - pre-submission review of Paper B+C for TMLR.
+  Rigor review, reference audit and coverage triage done; remediation plan written; F16/F17
+  fixed. **Not ready to file** (6 major findings). See the 2026-09-28 Session Handoff.
 - **Active Role:** Scientific Editor / Developer / Architect
 - **Mode (2026-09-27):** INCIDENT - new laptop. EXP4 bytecode found lost (never
   committed); pubs-sync CI found never green. Fixed the untracked-dataset and
@@ -954,6 +961,189 @@ settles, before filing.
   though only line endings differ. `git diff --ignore-cr-at-eol` shows the real
   change.
 
+## Session Handoff - 2026-09-28
+
+**Paper B+C pre-submission review for TMLR. Review done, plan written, filing blocked
+on remediation.** All work is on the paper lane (`paper/bc-venue-definition`,
+worktree `../xai-paper-bc`), head `3929936e3`, pushed.
+
+### Completed
+
+- **Author confirmations (2026-09-28):** the detailed revision is finished; the paper is
+  not under review at any other venue; the 28 reconstructed corpus rows were verified by
+  the author earlier (Next Steps 0a closed, `d1299e3e2`). Recorded in
+  `OPENREVIEW_SUBMISSION.md` (`6c92be577`).
+- **Review plan:** `docs/planning/paper_bc_tmlr_review_plan_2026-09-28.md` (`a3258e80e`).
+- **Phase 1 rigor review:** `docs/review/scientific-rigor-review_paper_bc_tmlr_2026-09-28.md`
+  (`df6a86b1b`). Grade: Major revision, mean 3.4. The 2026-07-28 findings F01/F02 were
+  confirmed fixed. The major findings:
+  - **F01:** "TreeExplainer reverses latency for tree models" (abstract, Tier 1) is false for
+    RF, which was SHAP-slower in 15/15 cells; only XGBoost is faster.
+  - **F02:** Paper A's published SHAP/LIME mean costs (11,708.3/3,660.7) are restated, and
+    Figure 1 plots the per-method levels. The shared-result query missed both because
+    `appears_in` lacked the Paper A site.
+  - **F03:** the abstract and the body contradict each other on LIME instability
+    ("one-hot encoding" vs "structural").
+  - **F04:** the screening table counts 4 lost papers as full-text exclusions, and the search
+    log is not released.
+  - **F05:** Table S5 is unbacked, disagrees with S2, and is undisclosed.
+  - **F06:** the "optimally aligned" axiomatic claim is unsupported.
+
+  There are also minors F07-F12 and suggestions F13-F15.
+- **Remediation plan:** `docs/planning/paper_bc_tmlr_remediation_plan_2026-09-28.md`
+  (`65089a2b4`, decisions `22f8f26c8`, Step 0 outcome `12d2b8660`). Steps 0-8, ~10-11 h.
+- **Author decisions:**
+  - Q1: redraw the EXP3 figure as gaps only.
+  - Q2: the search log is treated as lost; the caption says the counts are not released.
+  - Q4: Tier 1 is conditioned on XGBoost, with "measure first" for other ensembles.
+  - **Q3/F10: won't-fix. Do not disclose or mention the EXP4 prompt question anywhere.**
+- **Step 0 done (`b2ee05ce7`):**
+  - Reference audit, `docs/review/reference-audit_paper_bc_tmlr_2026-09-28.md`: 60 entries;
+    8 unused; 3 metadata errors (fok year, wilming volume, zheng2023 DOI); 2 preprints with
+    published versions; 3 unverified; 1 mojibake label.
+  - Coverage triage, `docs/review/coverage-triage_paper_bc_tmlr_2026-09-28.md`: 73
+    unregistered literals, of which 44 re-derive, 22 are structural, 4 are unbacked (S5)
+    and 2 are wrong (F07). It also produced two new minor findings, F16 and F17.
+- **F16 and F17 fixed (`3929936e3`):**
+  - The EXP6 sample is now "five RF runs at N=50, one per seed", with a note that five pairs
+    cannot reach α=0.05.
+  - The cost ratio is now "median per-cell ratio 5.3×".
+
+  No number changed. The verifiers are green, and both PDFs were rebuilt with 0 undefined
+  references.
+
+### Current State
+
+- The Paper B+C manuscript differs from the 2026-09-27 gate record, so the built package
+  (bundle, sheet abstract) is **invalid until Step 8**.
+- The verifiers are green (257 claims / 429 sites), but Paper B+C is still outside `[coverage]`.
+- All four worktrees were clean and pushed at close. The chapter worktree was 1 commit behind
+  origin.
+
+### Next Steps
+
+1. **Fresh Scientific Editor session, remediation Step 1:** register the remediation values,
+   the 44 re-deriving literals, the structural declarations and the S5 `[[unbacked]]`
+   entries. Add the Paper A site to `exp2.run.shap.cost.mean` and its LIME counterpart.
+   Two new resolvers are needed: the paired t-CI, and the composed EXP3 SHAP-LIME gap.
+2. **Steps 2-3 (critical path):** F01/F03/F09 through `pub/claims.toml`, then the page-1
+   PDF read. F02: delete the means sentence; redraw Figure 1 as paired differences; make
+   the EXP3 figure gaps-only; add `scripts/pubs/scan_shared_literals.py` to the gate.
+3. **Steps 4-7:** F04, F05, F06; the minors; the references (R01-R10); then Paper B+C
+   into `[coverage]` (a trunk event).
+4. **Step 8 (QA, fresh session):** the whole "After any revision" checklist, then a
+   written report to the author. Filing waits for it.
+
+### Blockers/Issues
+
+- **Filing is blocked** until at least F01, F02 and the Step 8 re-verification are done.
+- **F02 exposed a gap in RCA-001:** the prior-publication check depends on complete
+  `appears_in` registration. Record this in RCA-001 when the scan script lands.
+- Possible thesis-lane follow-up: if the thesis still says "structural" LIME instability, or
+  repeats the tree-latency generalisation, open a thesis item (sync matrix).
+
+### Notes
+
+- The paper `.tex` files use CRLF line endings: Python `str.replace` on `
+` fails, so use
+  the Edit tool.
+- Coverage triage without touching the registry: copy `pub/claim_registry.toml` to the
+  scratchpad, add the files to `[coverage]`, then run
+  `verify_claims.py --registry <copy> --coverage-report`.
+- Crossref lookup script pattern: see the reference audit's method section. Title queries
+  often return unrelated works; treat those as unverified, not as mismatches.
+- Build: `tools/tectonic-portable/tectonic.exe <file>.tex`, run from
+  `docs/reports/paper_bc/` in the paper worktree.
+
+## Session Handoff - 2026-09-28 (second session)
+
+**Paper B+C remediation Steps 1-7 complete. Only Step 8, the submission gate, stands
+between the paper and filing.** Plan and per-step record:
+`docs/planning/paper_bc_tmlr_remediation_plan_2026-09-28.md` (paper lane).
+
+### Completed
+
+- **Step 1** (`4267145ac`): registered every value the fixes print, before any prose edit.
+  - Registry 257 -> 320 claims, 429 -> 491 sites.
+  - 8 new resolvers in `scripts/pubs/claim_sources.py`: paired-cell stats, paired t-CI, stratum
+    dispersion, second-reviewer audit, cohort 2 score floor.
+  - Registration surfaced **F18** (the CV table was labelled a stratum median but prints the
+    RF/N=100 cell) and **F19** (the German Credit gap ranges were wrong).
+- **Step 2** (`91766b04d`):
+  - **F01:** the tree-latency claim is scoped to XGBoost; RF was SHAP-slower in 15/15 cells.
+  - **F03:** one scoped account of LIME instability everywhere.
+  - **F09:** "SHAP leads on every fidelity- and stability-oriented endpoint".
+  - The abstract went through `claims.toml`, and page 1 was read from the PDF.
+- **Step 3** (`85c65557a`, `b37fae1ff`), **F02:**
+  - The Paper A mean costs are removed and retired.
+  - Figure 1 is redrawn as paired differences with CIs, and the EXP3 figure shows gaps only.
+  - New `scripts/pubs/scan_shared_literals.py` finds overlap with Paper A without the registry.
+    It is report-only in CI and `--strict` in the gate, and is listed under RCA-001.
+  - The editor note now says fifteen results were removed.
+- **Step 4** (`c5457ab9c`):
+  - **F04:** the screening table shows 47/48/4/44, and the record is stated as not released.
+  - **F05:** the Table S5 provenance is disclosed.
+  - **F06:** the axiom paragraph is rewritten as an untested mechanism.
+- **Step 5** (`8caf2b29e`): F07, F08, F11, F12, F18 and F19 fixed.
+- **Step 6** (`f6c244dd1`): F13-F15; bibliography reduced from 60 to 52 entries, all cited, with
+  metadata fixes verified against Crossref.
+- **Step 7** (`0e1510a16`): Paper B+C and its supplementary added to `[coverage]`.
+  - Merged to main by fast-forward, then into the thesis lane (`3a5ec41ee`) and the chapter
+    lane (`ec70f7da2`).
+  - CI pubs-sync is green on main.
+- **PDFs rebuilt at close** (`8b118ddf7`): 26 + 5 pages, 0 undefined references, text identical
+  to the Step 6 build.
+- **Config:** `configs/secrets/api_keys.env.example` (key-free template) committed
+  (`69808653d`). The real `api_keys.env` stays gitignored.
+
+### Current State
+
+- Verifiers green: 320 claims / 491 sites / 35 retired guards / 21 files fully registered.
+  The shared-literal scan reports 0 unexplained matches.
+- The 2026-09-27 gate record in `OPENREVIEW_SUBMISSION.md` is **invalid**: the manuscript, the
+  abstract, the figures and the bibliography have all changed since.
+- All lanes were merged and pushed at close.
+
+### Next Steps
+
+1. **Step 8, in a fresh QA session:** run the whole "After any revision" checklist in
+   `OPENREVIEW_SUBMISSION.md`.
+   - Check both PDFs and page 1.
+   - Build the de-anonymised variant once, for the availability sentence.
+   - Run the three verifiers, then `scan_shared_literals.py --strict`.
+   - Run the identity scan on both PDFs and the bundle.
+   - Rebuild the bundle.
+   - Regenerate the sheet's abstract, counts and stamp.
+   - Mark each finding F01-F19 against its commit, and append a post-fix status to the review.
+   - Give the author a written report.
+2. **Author:** file on OpenReview, then email the editor note to tmlr-editors@jmlr.org.
+3. **Thesis lane (not blocking filing):** the same defect class as F01/F03.
+   - Ch.4 l.193: "no es marginal, sino estructural".
+   - Ch.6 P1 row: "incoherencia estructural".
+   - Ch.4 l.620: TreeSHAP efficient "para modelos basados en árboles"; scope it to XGBoost as
+     Ch.6 l.134-136 does.
+
+### Blockers/Issues
+
+- None blocking. F10 is closed as won't-fix by author decision: never disclose or mention
+  the EXP4 prompt question.
+- A pre-existing 2 pt overfull box at the end of `tab:hybrid_deployment` is cosmetic, and was
+  left unchanged.
+
+### Notes
+
+- **Retired texts** must be added in the commit that removes them, not earlier: a retired
+  string still present in the manuscript fails the verifier.
+- **Negative-test every new check by planting inside the body.** The shared-literal scan
+  ignores everything after `\begin{thebibliography}`, so a planted value appended at the end of
+  the file proves nothing.
+- `generate_fragments.py` rewrites every fragment. Commit only `paper_bc_abstract_en.tex`
+  and `build_meta.env`, and discard the rest after `git diff --ignore-cr-at-eol` shows they
+  are empty.
+- Plotting needs `pandas`/`matplotlib`, which are now installed in Python 3.13. The figure
+  generators are `scripts/generate_paper_b_figures.py` and
+  `scripts/generate_exp3_gap_figure.py`.
+
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
 
@@ -1065,7 +1255,7 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 - Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
 
 ## Next Steps
-00. [ ] **Paper B+C is NOT submitted and is PAUSED for author revision
+00. [ ] **(2026-09-28: author revision finished; remediation of the TMLR pre-submission review in progress - see the 2026-09-28 Session Handoff.)** **Paper B+C is NOT submitted and is PAUSED for author revision
    (2026-09-15).** OpenReview account active since 2026-09-14 and the package is
    built, but it was verified against the pre-revision manuscript. **Before filing,
    run the "After any revision" checklist in
@@ -1085,7 +1275,7 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 0. [ ] **Task 3 / RCA-001 Phase 2:** emit registry values as LaTeX macros + Quarto
    inline values; add a CI job building Paper A, Paper B+C, the supplementary and the
    thesis, failing on undefined references and crossref warnings.
-0a. [ ] Author-verify the 28 reconstructed review-corpus coding rows before submission.
+0a. [x] Author-verify the 28 reconstructed review-corpus coding rows before submission. **Done by the author before 2026-09-28** (confirmed in session 2026-09-28). Also confirmed 2026-09-28: Paper B+C revision finished; no concurrent submission. Pre-submission review plan: `docs/planning/paper_bc_tmlr_review_plan_2026-09-28.md` (paper lane).
 0b. [ ] RCA-002 leftovers: re-run and archive the Table S5 `num_samples` probe (its
    script `src/scripts/run_sensitivity_analysis.py` is committed); decide final
    disclosure wording for the lost raw judge data and the three EXP4 Jinja templates.
