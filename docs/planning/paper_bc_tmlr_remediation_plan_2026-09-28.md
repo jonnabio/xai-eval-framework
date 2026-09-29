@@ -400,3 +400,29 @@ and per-model medians; the scan and a visual check find nothing that Paper A pri
 No number changed. Checks: verifiers green; shared-literal scan clean; both PDFs 0 undefined
 references; page 1 and each edited passage read from the PDFs. The coverage gap is still only
 the F07 range.
+
+## Step 5 outcome (2026-09-28)
+
+**F07, F08, F11, F12, F18 and F19 fixed** (F16 and F17 were fixed earlier).
+
+- **F07:** "0.85--0.93" → "0.75--0.93" at both sites. The old text is retired, and both
+  bounds are registered.
+- **F08 + F18:** `tab:cv_reproducibility` is relabelled as the RF/N=100 stratum (the default
+  decision). The text gives the medians over all 15 strata (0.9 / 1.4 / 2.3 / 88.2%) and the
+  LIME stability seed SD (0.015), and states that the CV is not meaningful near a zero mean.
+  The table's "No" became "CV not meaningful". All of these values are registered with sites.
+- **F11:** "default hyperparameter settings" → "a single fixed reference configuration …
+  not the library defaults".
+- **F12:**
+  - the internal to-do ("Before journal submission … DOI") is deleted;
+  - the figure sentence names the generator of each figure;
+  - the `\ifdeanon` availability sentence is restructured so each branch is a whole clause.
+    The anonymous build is read and correct; the de-anonymised variant is checked in Step 8.
+- **F19:** the German Credit gaps are printed as the means +0.23 (RF) and +0.24 (XGB),
+  "positive for every seed". The old XGB range is retired.
+
+**Coverage gap: 0.** Every numeric literal in the main text and supplementary is registered,
+structural or unbacked, so Step 7 can add both files to `[coverage]` directly. The
+shared-literal scan flagged four new low-precision matches (0.015, 0.9, 1.4, 2.3); each was
+triaged against its Paper A context as a coincidence. Checks: verifiers green (320 claims /
+490 sites / 35 retired guards); PDF 26 pp, 0 undefined references.

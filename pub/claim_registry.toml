@@ -3110,6 +3110,9 @@ id = "exp2.subset.lime.stability.sd.rf100"
 source = 'exp2_subset_sd:lime:stability:rf:100'
 value = "0.0151"
 tolerance = 0.0005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = 'seed SD $0.015$' },
+]
 
 [[claim]]
 id = "exp2.stratum_median.lime.stability.sd"
@@ -3122,24 +3125,36 @@ id = "exp2.stratum_median.shap.fidelity.cv"
 source = 'exp2_stratum_median:cv:shap:fidelity'
 value = "0.9"
 tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '($0.9$,' },
+]
 
 [[claim]]
 id = "exp2.stratum_median.shap.stability.cv"
 source = 'exp2_stratum_median:cv:shap:stability'
 value = "1.4"
 tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '$1.4$,' },
+]
 
 [[claim]]
 id = "exp2.stratum_median.lime.fidelity.cv"
 source = 'exp2_stratum_median:cv:lime:fidelity'
 value = "2.3"
 tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '$2.3$ and' },
+]
 
 [[claim]]
 id = "exp2.stratum_median.lime.stability.cv"
 source = 'exp2_stratum_median:cv:lime:stability'
 value = "88.2"
 tolerance = 0.05
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '$88.2\%$' },
+]
 
 [[claim]]
 id = "exp3.gap.shap_lime.german_credit.rf"
@@ -3236,6 +3251,9 @@ id = "exp3.lime.stability.range.min"
 source = 'exp3_lime:german_credit:xgb:stability'
 value = "0.75"
 tolerance = 0.005
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.75$--$0.93', count = 2 },
+]
 
 [[claim]]
 id = "audit.target.exact_pct"
@@ -3412,3 +3430,25 @@ id = "F02.lime.cost.mean"
 text = "3,660.7"
 reason = "LIME mean cost is a result of the published RIMI article (Paper A prints 3660.68). Removed from Paper B+C 2026-09-28 (review F02)."
 files = ["docs/reports/paper_bc/paper_bc_tmlr.tex", "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex", "pub/fragments/paper_bc_abstract_en.tex"]
+
+[[claim]]
+id = "exp3.lime.stability.range.max"
+source = 'exp3_lime:breast_cancer:xgb:stability'
+value = "0.93"
+tolerance = 0.005
+# Upper end of the corrected EXP3 LIME stability range (review F07).
+appears_in = [
+  { file = "docs/reports/paper_bc/paper_bc_tmlr.tex", text = '0.75$--$0.93', count = 2 },
+]
+
+[[retired]]
+id = "F07.exp3.lime.stability.range"
+text = "0.85$--$0.93"
+reason = "EXP3 LIME stability range that excluded German Credit/XGB (0.748); corrected to 0.75--0.93 on 2026-09-28 (review F07)."
+files = ["docs/reports/paper_bc/paper_bc_tmlr.tex", "docs/reports/paper_bc/paper_bc_tmlr_supplementary.tex"]
+
+[[retired]]
+id = "F19.exp3.gc.gap.range"
+text = "$+0.24$--$+0.25$"
+reason = "German Credit XGB per-seed SHAP-LIME gap range that matched no seed set (actual 0.220-0.270); replaced by the mean +0.24 on 2026-09-28 (review F19)."
+files = ["docs/reports/paper_bc/paper_bc_tmlr.tex"]

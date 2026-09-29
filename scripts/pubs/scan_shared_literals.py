@@ -44,6 +44,10 @@ DECIMAL = re.compile(r"(?<![\w.])\d[\d,]*\.\d+")
 # Triaged 2026-09-28 against the contexts in both papers.
 KNOWN_COINCIDENCES = {
     "00.3": "TikZ coordinate (0,0.3) in the continuum figure",
+    "0.015": "seed SD of LIME stability, RF/N=100 (review F08); Paper A 0.0154 is a LIME stability mean in its primary-subset table",
+    "0.9": "stratum-median CV of SHAP fidelity (%); Paper A's 0.90-0.95 values are unrelated",
+    "1.4": "stratum-median CV of SHAP stability (%); Paper A 1.39 is unrelated",
+    "2.3": "stratum-median CV of LIME fidelity (%); Paper A 2.29 is a p-value mantissa",
     "0.05": "significance level alpha",
     "0.01": "LIME stability range bound (tab:exp3_lime caption); Paper A 0.0144 is its block mean, not printed here",
     "0.02": "same caption range bound; Paper A 0.0154 is an unrelated cell",
