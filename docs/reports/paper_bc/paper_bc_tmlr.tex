@@ -143,11 +143,11 @@ This paper makes five contributions:
 \item \textbf{Four-axis taxonomy}: we organize model-agnostic XAI
 evaluation along evaluation target, evidence source, quality property,
 and task context, making explicit why metric disagreements arise.
-\item \textbf{Gap analysis}: from a documented 44-paper scoping corpus
+\item \textbf{Gap analysis}: from a released 44-paper scoping corpus
 assembled through a five-database search and explicit inclusion criteria,
 we identify three recurring gaps---proxy dominance, underspecified human constructs, and semantic
 evaluation outpacing its validation base---and provide, to our
-knowledge, the first multi-rater LLM-judge reliability measurement in
+knowledge, one of the first multi-rater LLM-judge reliability measurements in
 XAI (ICC$<$0.75 on all seven semantic dimensions in the primary condition,
 replicated with a second judge panel on the same cases). We do not claim
 human-subject or task-outcome validation in this paper.
@@ -232,8 +232,9 @@ enumerated.
 \subsection{SHAP: Shapley Additive Explanations}
 
 SHAP attributes prediction output to features based on marginal
-contribution across all possible coalitions, satisfying efficiency,
-symmetry, and dummy axioms \citep{lundberg2017unified}. KernelSHAP
+contribution across all possible coalitions; SHAP values are the unique
+additive attributions satisfying local accuracy, missingness and consistency
+\citep{lundberg2017unified}. KernelSHAP
 estimates Shapley values with a weighted regression scheme over coalitions
 for model-agnostic use; tree-specific implementations exploit model
 structure for speed. Relative to local-surrogate methods, SHAP is
@@ -436,7 +437,7 @@ structured scoping synthesis rather than a full systematic review.
 
 \begin{table}[t]
 \centering
-\caption{Corpus construction screening record. Identification and screening counts are from the original search log. The final two rows reflect the coded corpus released with this paper (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), which was reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
+\caption{Corpus construction screening record. The identification, screening and inclusion counts are those of the original screening record, which is not released with this paper. The final two rows describe the coded corpus that is released (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
 \label{tab:prisma}
 \begin{tabular}{lr}
 \toprule
@@ -447,9 +448,11 @@ Removed after cross-database deduplication & 65 \\
 Screened on title and abstract & 247 \\
 Excluded at screen (out of scope, non-English, no eval component) & 152 \\
 Full text assessed for eligibility & 95 \\
-Excluded at full text (intrinsic only, no codeable metric) & 51 \\
+Excluded at full text (intrinsic only, no codeable metric) & 47 \\
+Included in the original coding pass & 48 \\
 \midrule
-\textbf{Included in coded corpus} & \textbf{44} \\
+Coded but not recoverable (never cited; see \S\ref{sec:validity}) & 4 \\
+\textbf{Released coded corpus} & \textbf{44} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -617,8 +620,8 @@ $0.731$. The negative result therefore replicates. Its margin does not:
 The ranking of dimensions also shifts with the panel. Completeness and semantic
 plausibility remain among the highest and clarity the lowest, but audit
 usefulness moves from the weakest to among the strongest. Actionability falls
-to near-zero agreement through a floor effect, because almost every score is
-1. We therefore read the agreement pattern as a property of judges and rubric
+to near-zero agreement through a floor effect: 86\% of its primary-condition
+scores are 1. We therefore read the agreement pattern as a property of judges and rubric
 wording together, not of the constructs alone.
 
 We treat EXP4 as a negative result in both cohorts. Under the primary
@@ -978,38 +981,45 @@ for the four quality-oriented endpoints.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig_b1_quality_endpoints.pdf}
-\caption{Paired mean comparison across quality-oriented primary endpoints
-($n=75$ matched SHAP-LIME cells). Active ratio is reported directly;
-lower values imply sparser explanations.}
+\caption{Mean paired difference (SHAP $-$ LIME) with its 95\% confidence
+interval for the quality-oriented primary endpoints ($n=75$ matched cells),
+as in Table~\ref{tab:paired_main}. For the active ratio, a positive
+difference means SHAP is denser, that is, LIME is sparser.}
 \label{fig:quality_endpoints}
 \end{figure}
 
 \subsubsection*{Reproducibility Probe}
 
 To characterize measurement stability under seed variation, we computed
-the coefficient of variation (CV\,=\,SD/mean) across the five seeds for
-each $(N, \mathrm{model})$ stratum and report the stratum-median CV in
-Table~\ref{tab:cv_reproducibility}. SHAP yields highly reproducible
+the coefficient of variation (CV\,=\,SD/mean) across the five seeds of the
+random-forest stratum at $N=100$ and report it in
+Table~\ref{tab:cv_reproducibility}; the medians over all fifteen
+$(N, \mathrm{model})$ strata are similar ($0.9$, $1.4$, $2.3$ and $88.2\%$ in
+the table's row order). SHAP yields highly reproducible
 fidelity and stability readings ($\mathrm{CV}<1\%$). LIME fidelity is
-acceptable ($\mathrm{CV}=2.6\%$), whereas LIME stability is structurally
-irreproducible ($\mathrm{CV}=86.2\%$). This is not a measurement artifact:
-when the mean cosine similarity is near zero, any nonzero variation
-produces an extreme relative deviation. The CV probe confirms that LIME
-stability is geometrically unstable---not merely noisy.
+acceptable ($\mathrm{CV}=2.6\%$), whereas LIME stability has
+$\mathrm{CV}=86.2\%$. That figure mostly reflects the denominator: when the
+mean cosine similarity is near zero, any nonzero variation produces an
+extreme relative deviation, so the CV says little about how much the
+stability readings actually spread. In absolute terms the spread is small
+(seed SD $0.015$): the informative result is the level itself, which is
+near zero under the reference configuration.
 
 \begin{table}[t]
 \centering
-\caption{Median coefficient of variation (CV\,=\,SD/mean) across seeds
-per $(N, \mathrm{model})$ stratum for the two primary quality endpoints.}
+\caption{Coefficient of variation (CV\,=\,SD/mean) across the five seeds of
+the random-forest, $N=100$ stratum for the two primary quality endpoints.
+The CV is uninformative for LIME stability, whose mean is near zero (see
+text).}
 \label{tab:cv_reproducibility}
 \begin{tabular}{lcc}
 \toprule
-Method -- Metric    & Median CV & Reproducible? \\
+Method -- Metric    & CV & Reproducible? \\
 \midrule
 SHAP -- Fidelity    & 0.8\%     & Yes \\
 SHAP -- Stability   & 0.7\%     & Yes \\
 LIME -- Fidelity    & 2.6\%     & Yes \\
-LIME -- Stability   & 86.2\%    & No  \\
+LIME -- Stability   & 86.2\%    & CV not meaningful \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1018,9 +1028,10 @@ LIME -- Stability   & 86.2\%    & No  \\
 
 The cost signal is significant but strongly heterogeneous. SHAP is slower
 in 59 of 75 matched cells. Matched-cell median cost is 684.1 ms for SHAP
-versus 65.7 ms for LIME, corresponding to a median SHAP/LIME cost ratio
-of approximately $5.3\times$. Means are more separated (11,708.3 ms vs.\
-3,660.7 ms) because the SHAP distribution is heavy-tailed: the 90th and
+versus 65.7 ms for LIME, and the median per-cell SHAP/LIME cost ratio is
+approximately $5.3\times$. The SHAP distribution is heavy-tailed, so its
+mean lies far above its median (the per-method means are reported by
+\citet{herrera2026framework}): the 90th and
 95th percentile latencies are approximately 51,456 ms and 67,066 ms,
 respectively, compared with 12,825 ms and 13,192 ms for LIME. This tail
 behavior is concentrated in kernel-SHAP contexts, especially SVM.
@@ -1077,18 +1088,20 @@ distributions.
 \textbf{LIME cross-dataset extension.}
 Table~\ref{tab:exp3_lime} reports LIME fidelity and stability on the same
 datasets. Two findings are noteworthy. First, SHAP $>$ LIME fidelity holds
-consistently on German Credit (gaps $+0.23$--$+0.24$ for RF, $+0.24$--$+0.25$
-for XGB), replicating the EXP2 direction. On Breast Cancer the fidelity gap
+consistently on German Credit (mean gaps $+0.23$ for RF and $+0.24$ for
+XGB, positive for every seed), replicating the EXP2 direction. On Breast Cancer the fidelity gap
 narrows substantially: SHAP leads LIME by only $+0.07$ (RF) and $+0.07$
 (XGB), compared to $+0.27$ (RF) and $+0.21$ (XGB) in the corresponding
 model strata on Adult. Second, and more critically, LIME
-\emph{stability} on these datasets ($0.85$--$0.93$) is an order of magnitude
-higher than on Adult, where it is near zero. This reveals that the near-zero stability
-observed in EXP2 is not a fixed structural property of LIME: it is strongly
-modulated by feature-space characteristics. The Adult dataset's 103-dimensional
-one-hot-encoded space appears to be the primary driver of instability; in
-lower-dimensional spaces with more continuous features, LIME produces
-substantially more consistent explanations.
+\emph{stability} on these datasets ($0.75$--$0.93$) is an order of magnitude
+higher than on Adult, where it is near zero. The near-zero stability
+observed in EXP2 is therefore not a fixed property of LIME: it is modulated
+by the feature space, and on Adult itself also by the kernel width
+(Section~\ref{sec:validity}). The Adult dataset's 103-dimensional
+one-hot-encoded space is a candidate driver, but the two further datasets
+also differ from Adult in size, class balance and the mix of continuous and
+categorical features, so this design does not isolate the encoding as the
+cause.
 
 \begin{table}[t]
 \centering
@@ -1143,10 +1156,10 @@ across a broader set of datasets and preprocessing schemes.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig_exp3_gap.pdf}
-\caption{EXP3 external validation: mean Anchors fidelity (3-seed average,
-solid) with the paired SHAP$-$Anchors gap stacked above it (shaded), so each
-bar reaches the SHAP level without restating it. SHAP exceeds Anchors in all
-12 paired (dataset $\times$ model $\times$ seed) combinations.
+\caption{EXP3 external validation: paired SHAP$-$Anchors fidelity gap
+(3-seed average) per dataset and model; the Anchors levels are in
+Table~\ref{tab:exp3_fidelity}. SHAP exceeds Anchors in all 12 paired
+(dataset $\times$ model $\times$ seed) combinations.
 BC\,=\,Breast Cancer; GC\,=\,German Credit.}
 \label{fig:exp3_fidelity}
 \end{figure}
@@ -1165,22 +1178,26 @@ Pattern}:
 \centering
 \caption{Hybrid Deployment Pattern: tier-conditioned explainer recommendation.}
 \label{tab:hybrid_deployment}
-\begin{tabularx}{\linewidth}{p{2.0cm} p{3.0cm} X}
+\begin{tabularx}{\linewidth}{p{2.0cm} >{\raggedright\arraybackslash}p{3.0cm} X}
 \toprule
 \textbf{Tier} & \textbf{Recommendation} & \textbf{Evidence and recommended condition} \\
 \midrule
 Tier 1: Real-Time / End-User &
 Model-architecture-conditioned: \textbf{SHAP} (\texttt{TreeExplainer}) for
-tree-based models (XGBoost, LightGBM, Random Forest); \textbf{LIME} for
-non-tree/black-box models (neural networks, opaque APIs). &
-For tree models, exact Shapley values in $O(TLD)$ time undercut LIME's
-sampling loop, so SHAP is simultaneously faster \emph{and} more faithful
-and the usual fidelity--latency trade-off does not apply. For non-tree
+XGBoost; \textbf{LIME} for non-tree/black-box models (neural networks,
+opaque APIs); for other tree ensembles, measure latency before choosing. &
+For XGBoost, \texttt{TreeExplainer} was faster than LIME in all 15 matched
+cells (median 18.1~ms vs.\ 61.8~ms), so SHAP is simultaneously faster
+\emph{and} more faithful and the usual fidelity--latency trade-off does
+not apply. This does not hold for tree models in general: for random
+forests, \texttt{TreeExplainer} was slower in all 15 cells (median
+1,262.4~ms vs.\ 335.6~ms), since its $O(TLD)$ cost grows with the number
+and depth of the trees. For non-tree
 models, LIME's lower median runtime (53.3~ms vs.\ 694.6~ms for
 KernelSHAP; Figure~\ref{fig:runtime_heterogeneity}) gives a latency
 advantage where sampling is the only option. Recommended when sub-second
 latency and compact explanations matter more than maximizing fidelity
-and no model-aware explainer is available. \\[6pt]
+and no fast model-aware explainer is available. \\[6pt]
 Tier 2: Auditing / Data Science &
 \textbf{SHAP.} &
 Use for bias analysis, model debugging, or regulatory inquiries: consistent
@@ -1197,10 +1214,11 @@ architecture identified in Section~\ref{sec:synthesis}: proxy and
 benchmark evidence (Tier~2) can be complemented by interaction-optimised
 lightweight explanations (Tier~1), each operating within its validated
 scope.  Critically, the Tier~1 criterion is not a blanket method preference
-but a function of model architecture: the existence of a model-aware
-explainer (e.g., \texttt{TreeExplainer}) collapses the fidelity--latency
-trade-off, making SHAP the dominant choice at both tiers for tree-based
-deployments.  This maps directly onto the Task Context axis of the taxonomy
+but a function of model architecture: where a model-aware explainer is
+also fast, as \texttt{TreeExplainer} was for XGBoost, the fidelity--latency
+trade-off collapses and SHAP is the dominant choice at both tiers; where it
+is not, as for random forests here, the trade-off remains and has to be
+measured for the deployed model.  This maps directly onto the Task Context axis of the taxonomy
 (Section~\ref{sec:taxonomy}): explainer selection is determined first by
 architectural affordance, then by deployment constraint.
 
@@ -1219,9 +1237,10 @@ The execution cohort analysed in Section~\ref{sec:empirical} was released
 with the study of \citet{herrera2026framework}, together with the
 preprocessing pipeline and the model controls it was produced under. This
 paper reuses that cohort as an input and reports no result that the earlier
-study reports: per-method fidelity and stability levels, the four-method
-omnibus and the cross-dataset SHAP levels are cited to it rather than
-restated, and the quantities reported here---the paired run-level contrast
+study reports: the per-method mean levels it reports (fidelity, stability,
+sparsity, faithfulness gap and cost), the four-method omnibus and the
+cross-dataset SHAP levels are cited to it rather than restated, in the text
+or in a figure, and the quantities reported here---the paired run-level contrast
 with its confidence intervals and effect sizes, the Anchors levels and the
 SHAP$-$Anchors gaps, the taxonomy, the scoping corpus and gap analysis, and
 the inter-judge reliability measurement---have no counterpart in it.
@@ -1279,8 +1298,9 @@ unchanged by this, but readers should treat the corpus counts as reconstructed
 figures with a documented provenance rather than as a preserved primary record.
 
 The survey employs a structured database search with documented inclusion
-and exclusion criteria and a transparent screening record
-(Table~\ref{tab:prisma}). It is not, however, a full systematic review:
+and exclusion criteria and reports its screening counts
+(Table~\ref{tab:prisma}); the underlying screening record is not released.
+It is not, however, a full systematic review:
 the search used five databases rather than an exhaustive database set,
 and the initial title/abstract screen and coding pass were performed by a
 single reviewer. The independent second-reviewer audit described in
@@ -1304,20 +1324,21 @@ sparsity, faithfulness, and cost. No semantic, human-utility, or
 LLM-judge claim enters the confirmatory scope.
 
 \paragraph{Axiomatic properties and metric alignment.}
-SHAP satisfies four axioms---dummy, linearity, symmetry, and efficiency---that
-guarantee attributions distribute the full prediction change $f(x) -
-\mathbb{E}[f]$ as uniquely fair marginal contributions.
-Perturbation-based fidelity metrics measure whether high-magnitude attributions
-correspond to large prediction drops under feature masking.
-These two perspectives are structurally compatible: both quantify how faithfully
-attribution magnitudes encode feature-level causal responsibility for the model
-output. SHAP's axiomatic guarantee implies that, conditional on its background
-distribution assumptions, its attribution rankings are optimally aligned with
-the feature-removal signal that fidelity metrics probe. This does not mean SHAP
-axioms certify correctness in all deployment contexts---the axioms hold for the
-model, not for any latent data-generative mechanism---but it does explain why
-SHAP consistently outperforms LIME on perturbation-based fidelity without
-requiring that LIME violates a formal criterion.
+SHAP values are the unique additive attributions satisfying local accuracy,
+missingness and consistency \citep{lundberg2017unified}; local accuracy means
+the attributions sum to the prediction change $f(x) - \mathbb{E}[f]$ relative
+to the background distribution. Perturbation-based fidelity metrics ask a
+related but different question: whether high-magnitude attributions coincide
+with large prediction drops when features are masked. Because SHAP ties
+attribution mass to the model's response to feature removal, it plausibly
+favours SHAP on removal-based fidelity, and this is one candidate reason for
+the SHAP advantage observed here. We do not test that mechanism, and it
+carries no guarantee: our masking replaces features with zero or reference
+values rather than with SHAP's background expectation, KernelSHAP is itself
+a sampled estimate, and the advantage is small on Breast Cancer. The
+properties also concern the model's output, not any data-generating
+mechanism, so they do not certify that an attribution is correct for the
+task (Section~\ref{sec:interpretation_scope}).
 
 \subsection{Internal and External Validity}
 
@@ -1344,7 +1365,7 @@ hyperparameter settings.
 \midrule
 SHAP $>$ LIME stability & Adult Income matched cells only & Confirmed only for the Adult tabular protocol; EXP3 does not instrument SHAP stability \\
 SHAP $>$ LIME fidelity & Adult Income plus partial EXP3 tabular extension & Partially supported within tabular classification; not established for image, text, graph, or time-series data \\
-LIME lower runtime & Adult Income, model-dependent & Bounded by model architecture and SHAP implementation; tree-specific SHAP reverses the ranking \\
+LIME lower runtime & Adult Income, model-dependent & Bounded by model architecture and SHAP implementation; \texttt{TreeExplainer} reverses the ranking for XGBoost but not for random forests \\
 SHAP $>$ Anchors fidelity & EXP3 Breast Cancer and German Credit & Partial tabular replication of fidelity ordering, not a SHAP--LIME stability or runtime replication \\
 Human-subject utility & No participant study; EXP4 is an LLM reliability probe only & Not established; user/task outcomes remain outside confirmatory scope \\
 Non-tabular behavior & No image, text, graph, or time-series experiments & Out of scope for the present confirmatory benchmark \\
@@ -1353,14 +1374,17 @@ Non-tabular behavior & No image, text, graph, or time-series experiments & Out o
 \end{table}
 
 \paragraph{LIME stability is not a convergence artifact.}
-Two robustness probes rule out under-sampling and kernel miscalibration as
-explanations for the near-zero LIME stability (cosine similarity near
+Two robustness probes find no evidence that under-sampling or kernel
+miscalibration explains the near-zero LIME stability (cosine similarity near
 zero, CV $= 86.2\%$). Varying \texttt{num\_samples} $\in
 \{500, 1000, 2000\}$ under otherwise identical conditions (RF model, seed
 42, $N=100$, \texttt{kernel\_width=3.0}) leaves stability near-zero and
 fidelity essentially flat at every level (Supplementary Table~S5):
 doubling or halving the sample budget neither stabilizes the explanations
-nor changes the fidelity ordering. A companion \texttt{kernel\_width}
+nor changes the fidelity ordering. That probe is a historical exploratory
+measurement that cannot be re-derived from the released artifacts, and its
+reference row does not match the one in Table~S2; it is reported for its
+direction only (see its provenance note). A companion \texttt{kernel\_width}
 probe (Supplementary Table~S2) shows that widths below $3.0$ instead
 produce degenerate zero-weight explanations, confirming that the
 reference setting is the minimum viable configuration rather than a
@@ -1369,13 +1393,14 @@ other side: widening the kernel to $10.0$ recovers stability to $0.664$
 at the cost of fidelity ($0.518 \rightarrow 0.441$), so the near-zero
 reading is specific to the reference kernel rather than intrinsic to the
 method. Taken together with the cross-dataset extension above, where LIME
-reaches $0.85$--$0.93$ at that same reference width, the two probes
-support a bounded conclusion: under the reference configuration in
-Adult's 103-dimensional one-hot space, LIME's instability is a property
-of its local surrogate fitting under Gaussian perturbation and not an
-artifact of insufficient compute --- but it is modulated by both kernel
-width and feature-space geometry, and should not be read as a
-configuration-independent property of LIME.
+reaches $0.75$--$0.93$ at that same reference width, the two probes
+support a bounded conclusion: under the reference kernel width, LIME's
+stability on Adult is near zero and is not raised by more samples; it rises
+with the kernel width and is high on two lower-dimensional datasets, so it
+is modulated by configuration and feature space. Adult's one-hot encoding
+is a candidate cause that this design does not isolate, and the near-zero
+reading should not be taken as a configuration-independent property of
+LIME.
 
 \paragraph{Feature correlation and out-of-distribution masking.}
 The Adult Income dataset contains moderate-to-strong inter-feature
@@ -1393,8 +1418,8 @@ the true attribution quality.
 
 To assess whether this concern changes the method ordering, we added EXP6,
 a top-feature masking-sensitivity probe over the Adult RF stratum. EXP6
-reuses stored EXP2 top-10 explanations for the $n=50$ RF runs across five
-seeds and recomputes prediction-drop metrics under four masking schemes:
+reuses stored EXP2 top-10 explanations for the five RF runs at $N=50$,
+one per seed, and recomputes prediction-drop metrics under four masking schemes:
 independent zero masking, mean replacement, marginal empirical replacement,
 and grouped mean replacement, where the grouped scheme masks correlated
 processed feature sets together (e.g.,
@@ -1402,10 +1427,12 @@ processed feature sets together (e.g.,
 advantage remains positive in all five paired RF seed cells under every
 scheme, though its magnitude decreases under progressively more
 correlation-aware masking (full breakdown in Supplementary
-Table~S6). Because EXP6 uses stored top-10 explanations rather than full
+Table~S6). With five pairs, the exact Wilcoxon test cannot reach
+$\alpha = 0.05$ under any scheme, so this agreement is descriptive rather
+than a significance result. Because EXP6 uses stored top-10 explanations rather than full
 attribution vectors, it should be read as a construct-validity stress test
 rather than a replacement for the primary full-run fidelity analysis: the
-RF fidelity direction is robust in this probe, while the effect magnitude
+RF fidelity direction holds in every pair of this probe, while the effect magnitude
 is partly masking-protocol dependent.
 
 \subsection{Reproducibility and Operational Validity}
@@ -1413,10 +1440,10 @@ is partly masking-protocol dependent.
 All reported claims are traceable to seeded YAML configurations, per-run
 \texttt{results.json} artifacts, explicit exclusion of malformed or empty
 runs, and inferential exports in the companion repository. Figures are
-regenerated directly from the paired-cell Wilcoxon exports; no synthetic
-imputation is used at any stage. Before journal submission, the exact
-review snapshot should be frozen as a versioned release and archived under
-a version-specific DOI.
+regenerated by committed scripts: Figures~\ref{fig:quality_endpoints}
+and~\ref{fig:runtime_heterogeneity} from the paired-cell exports, and
+Figure~\ref{fig:exp3_fidelity} from the EXP3 result files. No synthetic
+imputation is used at any stage.
 
 \subsection{Future Work}
 
@@ -1429,8 +1456,9 @@ fidelity observations to Breast Cancer and German Credit, but it does not
 replicate the full SHAP--LIME endpoint set and does not test image, text,
 graph, or time-series explanations. Those modalities require different
 masking schemes, perturbation semantics, and evaluation endpoints.
-\item \textbf{Configuration space:} Both methods were run with default
-hyperparameter settings. The completed LIME \texttt{kernel\_width} probe
+\item \textbf{Configuration space:} Both methods were run with a single
+fixed reference configuration (Section~\ref{sec:explainer_protocol}), not
+the library defaults. The completed LIME \texttt{kernel\_width} probe
 (Section~\ref{sec:validity}, Supplementary Table~S2) confirms the
 reference setting is a minimum-viable rather than conservative choice;
 SHAP background-set sensitivity and cross-model kernel-width effects
@@ -1460,10 +1488,10 @@ causal attribution methods and diverse counterfactual generation
 % -----------------------------------------------------------------------
 
 The manuscript, experimental code, and supporting materials are available
-in the public repository at
-\ifdeanon{the public repository \url{https://github.com/jonnabio/xai-eval-framework}}%
-{the anonymised artifact bundle supplied as supplementary material with this
-submission}, released under the MIT License. Artifacts needed to reproduce the empirical study include:
+\ifdeanon{in the public repository
+\url{https://github.com/jonnabio/xai-eval-framework}}%
+{in the anonymised artifact bundle supplied as supplementary material with
+this submission}, released under the MIT License. Artifacts needed to reproduce the empirical study include:
 \begin{sloppypar}
 \begin{itemize}[leftmargin=*]
 \item EXP2 results: \path{experiments/exp2_scaled/results/}
@@ -1609,13 +1637,6 @@ Agarwal, C., Queen, O., Lakkaraju, H., and Zitnik, M. (2023).
 Evaluating explainability for graph neural networks.
 \emph{Scientific Data}, 10:144.
 
-\bibitem[Agrawal et~al.(2025)Agrawal, El~Shawi, and Ahmed]{agrawal2025xaieval}
-Agrawal, K., El~Shawi, R., and Ahmed, N. (2025).
-XAI-Eval: A framework for comparative evaluation of explanation methods
-in healthcare.
-\emph{DIGITAL HEALTH}, 11:20552076251368045.
-\url{https://doi.org/10.1177/20552076251368045}.
-
 \bibitem[Ali et~al.(2023)Ali, Abuhmed, El-Sappagh, Muhammad, Alonso-Moral,
 Confalonieri, Guidotti, Del~Ser, D\'{i}az-Rodr\'{i}guez, and
 Herrera]{ali2023trustworthy}
@@ -1681,14 +1702,6 @@ XGBoost: A scalable tree boosting system.
 In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
 Knowledge Discovery and Data Mining}, 785--794.
 
-\bibitem[Covert et~al.(2020)Covert, Lundberg, and Lee]{covert2020sage}
-Covert, I., Lundberg, S., and Lee, S.-I. (2020).
-Understanding global feature contributions with additive importance
-measures.
-In \emph{Advances in Neural Information Processing Systems 33},
-17212--17223.
-\url{https://arxiv.org/abs/2004.00668}.
-
 \bibitem[Dems\v{a}r(2006)]{demsar2006statistical}
 Dems\v{a}r, J. (2006).
 Statistical comparisons of classifiers over multiple data sets.
@@ -1706,11 +1719,12 @@ Dua, D. and Graff, C. (2019).
 University of California, Irvine, School of Information and Computer Science.
 \url{http://archive.ics.uci.edu/ml}.
 
-\bibitem[Fok and Weld(2023)]{fok2023verifiability}
-Fok, R. and Weld, D.~S. (2023).
+\bibitem[Fok and Weld(2024)]{fok2023verifiability}
+Fok, R. and Weld, D.~S. (2024).
 In search of verifiability: Explanations rarely enable complementary
 performance in AI-advised decision making.
 \emph{AI Magazine}, 45(3):317--332.
+\url{https://doi.org/10.1002/aaai.12182}.
 
 \bibitem[Gu et~al.(2024)Gu, Jiang, Shi, Tan, Zhai, Xu, Li, Shen, Ma,
 Liu, Wang, Zhang, Wang, Gao, Ni, and Guo]{gu2024llmjudge}
@@ -1720,14 +1734,6 @@ Guo, J. (2024).
 A survey on LLM-as-a-Judge.
 \emph{arXiv preprint arXiv:2411.15594}.
 \url{https://doi.org/10.48550/arXiv.2411.15594}.
-
-\bibitem[Guidotti et~al.(2018)Guidotti, Monreale, Ruggieri, Turini,
-Giannotti, and Pedreschi]{guidotti2018survey}
-Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F.,
-and Pedreschi, D. (2018).
-A survey of methods for explaining black box models.
-\emph{ACM Computing Surveys}, 51(5):93:1--93:42.
-\url{https://doi.org/10.1145/3236009}.
 
 \bibitem[Hase and Bansal(2020)]{hase2020evaluating}
 Hase, P. and Bansal, M. (2020).
@@ -1826,12 +1832,6 @@ Calculating and reporting effect sizes to facilitate cumulative science:
 A practical primer for $t$-tests and ANOVAs.
 \emph{Frontiers in Psychology}, 4:863.
 
-\bibitem[Lipton(2018)]{lipton2018mythos}
-Lipton, Z.~C. (2018).
-The mythos of model interpretability.
-\emph{Queue}, 16(3):31--57.
-\url{https://doi.org/10.1145/3236386.3241340}.
-
 \bibitem[Longo et~al.(2024)Longo, Brcic, Cabitza, Choi, Confalonieri,
 Del~Ser, Guidotti, Hayashi, Herrera, Holzinger, Jiang, Khosravi, Lecue,
 Malgieri, P\'{a}ez, Samek, Schneider, Speith, and
@@ -1866,7 +1866,7 @@ In \emph{Proceedings of the 2020 Conference on Fairness, Accountability,
 and Transparency}, 607--617.
 
 \bibitem[Nauta et~al.(2023)Nauta, Trienes, Pathak, Nguyen, Peters,
-Schmitt, SchlÃ¶tterer, van Keulen, and Seifert]{nauta2023anecdotal}
+Schmitt, Schl\"{o}tterer, van Keulen, and Seifert]{nauta2023anecdotal}
 Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y.,
 Schl\"{o}tterer, J., van Keulen, M., and Seifert, C. (2023).
 From anecdotal evidence to quantitative evaluation methods: A systematic
@@ -1925,23 +1925,6 @@ Stop explaining black box machine learning models for high stakes
 decisions and use interpretable models instead.
 \emph{Nature Machine Intelligence}, 1(5):206--215.
 
-\bibitem[Samek et~al.(2017)Samek, Binder, Montavon, Lapuschkin, and
-M\"{u}ller]{samek2017evaluating}
-Samek, W., Binder, A., Montavon, G., Lapuschkin, S., and
-M\"{u}ller, K.-R. (2017).
-Evaluating the visualization of what a deep neural network has learned.
-\emph{IEEE Transactions on Neural Networks and Learning Systems},
-28(11):2660--2673.
-\url{https://doi.org/10.1109/TNNLS.2016.2599820}.
-
-\bibitem[Sithakoul et~al.(2024)Sithakoul, Meftah, and
-Feutry]{sithakoul2024beexai}
-Sithakoul, S., Meftah, S., and Feutry, C. (2024).
-BEExAI: Benchmark to evaluate explainable AI.
-In \emph{Explainable Artificial Intelligence}, 445--468.
-Springer Nature Switzerland.
-\url{https://doi.org/10.1007/978-3-031-63787-2_23}.
-
 \bibitem[Slack et~al.(2020)Slack, Hilgard, Jia, Singh, and
 Lakkaraju]{slack2020fooling}
 Slack, D., Hilgard, S., Jia, E., Singh, S., and Lakkaraju, H. (2020).
@@ -1958,14 +1941,6 @@ explainable approaches.
 In \emph{Proceedings of the ACM Conference on Fairness, Accountability,
 and Transparency}, 56--67.
 
-\bibitem[Wachter et~al.(2018)Wachter, Mittelstadt, and
-Russell]{wachter2017counterfactual}
-Wachter, S., Mittelstadt, B., and Russell, C. (2018).
-Counterfactual explanations without opening the black box: Automated
-decisions and the {GDPR}.
-\emph{Harvard Journal of Law \& Technology}, 31(2):841--887.
-\url{https://doi.org/10.2139/ssrn.3063289}.
-
 \bibitem[Wilcoxon(1945)]{wilcoxon1945individual}
 Wilcoxon, F. (1945).
 Individual comparisons by ranking methods.
@@ -1975,7 +1950,8 @@ Individual comparisons by ranking methods.
 Haufe]{wilming2022scrutinizing}
 Wilming, R., Budding, C., M\"{u}ller, K.-R., and Haufe, S. (2022).
 Scrutinizing {XAI} using linear ground-truth data with suppressor variables.
-\emph{Machine Learning}, 1--21.
+\emph{Machine Learning}, 111(5):1903--1923.
+\url{https://doi.org/10.1007/s10994-022-06167-y}.
 
 \bibitem[Wilming et~al.(2023)Wilming, Kieslich, Clark, and
 Haufe]{wilming2023theoretical}
@@ -1985,21 +1961,13 @@ variables.
 In \emph{Proceedings of the 40th International Conference on Machine
 Learning}, 202, 37091--37107.
 
-\bibitem[Wu et~al.(2025)Wu, Kaushik, Li, Bauer, and Onoue]{wu2025userperceptions}
-Wu, X., Kaushik, R., Li, W., Bauer, L., and Onoue, K. (2025).
+\bibitem[Wu et~al.(2026)Wu, Kaushik, Li, Bauer, and Onoue]{wu2025userperceptions}
+Wu, X., Kaushik, R., Li, W., Bauer, L., and Onoue, K. (2026).
 User perceptions vs.\ proxy LLM judges: Privacy and helpfulness in LLM
 responses to privacy-sensitive scenarios.
-\emph{arXiv preprint arXiv:2510.20721}.
-\url{https://doi.org/10.48550/arXiv.2510.20721}.
-
-\bibitem[Yeh et~al.(2019)Yeh, Hsieh, Suggala, Inouye, and
-Ravikumar]{yeh2019infidelity}
-Yeh, C.-K., Hsieh, C.-Y., Suggala, A.~S., Inouye, D.~I., and
-Ravikumar, P. (2019).
-On the (in)fidelity and sensitivity of explanations.
-In \emph{Advances in Neural Information Processing Systems 32},
-10967--10978.
-\url{https://arxiv.org/abs/1901.09392}.
+In \emph{Proceedings of the 64th Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers)}, 35562--35579.
+\url{https://doi.org/10.18653/v1/2026.acl-long.1645}.
 
 \bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang,
 Lin, Li, Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
@@ -2008,8 +1976,8 @@ Lin, Z., Li, Z., Li, D., Xing, E.~P., Zhang, H., Gonzalez, J.~E., and
 Stoica, I. (2023).
 Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.
 In \emph{Advances in Neural Information Processing Systems 36: Datasets
-and Benchmarks Track}.
-\url{https://doi.org/10.48550/arXiv.2306.05685}.
+and Benchmarks Track}, 46595--46623.
+\url{https://doi.org/10.52202/075280-2020}.
 
 \bibitem[Zheng et~al.(2025)Zheng, Shirani, Chen, Lin, Cheng, Guo, and
 Luo]{zheng2025ffidelity}

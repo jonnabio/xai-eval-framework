@@ -24,6 +24,11 @@ jobs:
       - name: Verify manuscript claims against artifacts
         run: python3 scripts/pubs/verify_claims.py
 
+      # Report-only: Paper B+C numbers that Paper A prints, found without the
+      # registry (RCA-001, review F02). The submission gate runs it --strict.
+      - name: Report numbers shared with the published Paper A
+        run: python3 scripts/pubs/scan_shared_literals.py
+
       - name: Verify review corpus matches the manuscript
         run: |
           python3 scripts/pubs/check_review_corpus.py --corpus docs/reports/paper_bc/paper_bc_review_corpus.csv --expect paper_bc
