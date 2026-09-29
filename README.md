@@ -107,6 +107,6 @@ For archival DOI minting instructions, see [`docs/DOI_MINTING_GUIDE.md`](docs/DO
 
 ## 📧 Contact
 
-**Author**: Jonathan Herrera-Vasquez  
+**Author**: Jonathan Herrera-Vásquez  
 **Email**: jonnabio@gmail.com  
 **Institution**: Universidad Americada de Europa

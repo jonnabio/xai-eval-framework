@@ -344,8 +344,8 @@ For consistency with the existing paper prototypes, start from a header like thi
 \usepackage{enumitem}
 \usepackage{lastpage}
 
-\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 4/2026}{Preprint}{PAPER-C-0001}{Jonathan Herrera-Vasquez}
-\ShortHeadings{From Fidelity to Semantics}{Herrera-Vasquez}
+\jmlrheading{0}{2026}{1-\pageref{LastPage}}{Submitted 4/2026}{Preprint}{PAPER-C-0001}{Jonathan Herrera-V\'asquez}
+\ShortHeadings{From Fidelity to Semantics}{Herrera-V\'asquez}
 \firstpageno{1}
 ```
 

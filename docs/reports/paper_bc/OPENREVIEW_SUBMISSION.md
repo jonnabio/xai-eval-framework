@@ -105,7 +105,7 @@ as math. If they show literal dollar signs, replace each `$d_z = X$` with
 
 **Keywords:** explainable AI, evaluation metrics, taxonomy, LIME, SHAP
 
-**Authors:** Jonathan Herrera-Vasquez, sole author, via the OpenReview profile.
+**Authors:** Jonathan Herrera-Vásquez, sole author, via the OpenReview profile.
 TMLR admits no change to the author list after submission.
 
 **PDF:** `docs/reports/paper_bc/paper_bc_tmlr.pdf`. 26 pages, anonymous.

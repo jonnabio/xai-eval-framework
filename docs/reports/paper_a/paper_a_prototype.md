@@ -2,7 +2,7 @@
 
 ## Authors
 
-- Jonathan Herrera-Vasquez, UNADE, jonnabio@gmail.com
+- Jonathan Herrera-Vásquez, UNADE, jonnabio@gmail.com
 - Miguel Herrero-Uceda, UNADE, miguel.herrero.tutor@gmail.com
 
 ## Abstract
