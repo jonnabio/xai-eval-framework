@@ -2,6 +2,11 @@
 
 ## Session Metadata
 - **Last Updated:** 2026-09-28
+- **Mode (2026-09-28, third session):** HANDOFF - the CIFIE science-first
+  assessment, evidence staging, and production scaffold are complete on
+  `chapter/cifie-sync-2026-09`. The active objective returns to Task 3 / RCA-001
+  Phase 2 on the thesis lane. The next CIFIE unit is queued, not active. See
+  "Session Handoff - 2026-09-28 (third session)".
 - **Mode (2026-09-28, second session):** PUBLICATION - Paper B+C remediation Steps 1-7
   done on the paper lane: every review finding fixed except F10 (author: won't-fix), Paper B+C
   under `[coverage]`, merged to main and all lanes, CI green. **Step 8 (submission gate) is
@@ -1144,6 +1149,54 @@ between the paper and filing.** Plan and per-step record:
   generators are `scripts/generate_paper_b_figures.py` and
   `scripts/generate_exp3_gap_figure.py`.
 
+## Session Handoff - 2026-09-28 (third session)
+
+**The CIFIE science-first assessment and chapter-architecture task is complete.
+The active objective is now Task 3 / RCA-001 Phase 2.**
+
+### Completed
+
+- Closed the former CIFIE requirements blockers by author direction: there is no
+  publisher template and no hard word-count limit; the chapter will use a highly
+  scientific but readable register, APA 7 citations and references, and a final Word
+  document visually aligned with the thesis standards.
+- Created the general assessment, science-first revision plan, and detailed chapter
+  scaffold under
+  `publications/book_chapters/2026_cifie_xai_fom7/planning/`.
+- Adopted the working title *De la explicación a la evidencia: fundamentos,
+  aplicaciones y evaluación auditable de la inteligencia artificial explicable*,
+  with FOM-7 retained as the bounded methodological contribution in the subtitle and
+  empirical case.
+- Rebuilt `manuscript/chapter_outline.md` and
+  `manuscript/00_hoja_diseno_editorial.md` around the general XAI overview, five
+  application domains, seven scientific-gap categories, FOM-7, and the protected
+  Adult/tabular case. The existing eleven-file build contract is preserved.
+- Staged 17 verified candidate sources, including systematic reviews, official
+  frameworks, primary human studies, and counterevidence. They remain outside the
+  production bibliography until cited in revised prose. Updated the evidence map,
+  source inventory, citation audit, and chapter README accordingly.
+- At the chapter checkpoint, protected verification passed: 257 claims re-derived,
+  429 manuscript sites checked, 26 retired-value guards clear, 15 files clear of
+  unpublished Paper B+C results, paper/thesis fragments synchronized, and all 18
+  EXP4 source hashes matched. The larger repository totals subsequently advanced
+  during Paper B+C remediation and remain governed by the same checks.
+- A Word render was deliberately not produced at this checkpoint because the new
+  title and architecture would still be paired with the legacy chapter body. Render
+  and page-level visual QA resume after the first integrated prose unit.
+
+### Transition
+
+- **Active next task:** Task 3 / RCA-001 Phase 2 on
+  `thesis/rca-001-phase-2`: generate registry-backed LaTeX macros and Quarto inline
+  values, then add CI builds that fail on undefined references and cross-reference
+  warnings.
+- **Queued CIFIE continuation:** rewrite sections 02 and 03 from the approved evidence
+  architecture, transfer only cited candidates into the APA 7 production
+  bibliographies, then create the application section 04.
+- All standing constraints remain in force, including ADR-0013 lane separation,
+  ADR-0018 CIFIE exclusivity, the protected-claim verifiers, and the Paper B+C
+  pre-submission rebuild and re-review gate.
+
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
 
@@ -1156,6 +1209,8 @@ before that re-verification, and do not submit before sending the editor note.
 
 **ACTIVE — `thesis/rca-001-phase-2` — Task 3, RCA-001 Phase 2: make each
 published number exist in exactly one place.**
+This is again the active objective after completion of the 2026-09-28 CIFIE
+assessment and scaffold task.
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
 values so the manuscripts consume them rather than restating them, and build all four
 outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
@@ -1171,8 +1226,10 @@ The chapter is synced to the verified results: retired values and pre-audit prof
 tutor corrections applied. It is kept free of Paper B+C results by ADR-0018, enforced in CI
 (`[exclusivity]`), and put under `[coverage]`. The build is `scripts/build_cifie_chapter.py`.
 Tables 1-4 were converted to final APA form and the uncited Altukhi (2025) was
-dropped (2026-09-27). Next: a section-by-section review of the chapter with the
-author, one section at a time. The thesis is still cited as unpublished (noted).
+dropped (2026-09-27). The science-first assessment, evidence staging, and production
+scaffold were completed 2026-09-28. The next chapter unit is queued after Task 3:
+rewrite sections 02 and 03, then create the application section 04. The thesis is
+still cited as unpublished (noted).
 
 See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 
@@ -1248,11 +1305,15 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
   macros and Quarto inline values; all four outputs built in CI.
-- CIFIE/FOM-7 book chapter publication editing
+- CIFIE/FOM-7 book chapter publication editing remains a standing workstream; its
+  science-first assessment and scaffold are complete, and the next prose unit is
+  queued after Task 3.
 - Thesis/Paper final scientific-editor consistency checks
 
 ### Blocked
-- Final CIFIE template, word limit, and citation rendering requirements still need confirmation.
+- **Resolved 2026-09-28:** the former CIFIE requirements blocker is closed. There is
+  no publisher template or hard word-count limit; use APA 7 and a thesis-aligned Word
+  render.
 
 ## Next Steps
 00. [ ] **(2026-09-28: author revision finished; remediation of the TMLR pre-submission review in progress - see the 2026-09-28 Session Handoff.)** **Paper B+C is NOT submitted and is PAUSED for author revision
