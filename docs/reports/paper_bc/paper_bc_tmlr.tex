@@ -143,7 +143,7 @@ This paper makes five contributions:
 \item \textbf{Four-axis taxonomy}: we organize model-agnostic XAI
 evaluation along evaluation target, evidence source, quality property,
 and task context, making explicit why metric disagreements arise.
-\item \textbf{Gap analysis}: from a documented 44-paper scoping corpus
+\item \textbf{Gap analysis}: from a released 44-paper scoping corpus
 assembled through a five-database search and explicit inclusion criteria,
 we identify three recurring gaps---proxy dominance, underspecified human constructs, and semantic
 evaluation outpacing its validation base---and provide, to our
@@ -232,8 +232,9 @@ enumerated.
 \subsection{SHAP: Shapley Additive Explanations}
 
 SHAP attributes prediction output to features based on marginal
-contribution across all possible coalitions, satisfying efficiency,
-symmetry, and dummy axioms \citep{lundberg2017unified}. KernelSHAP
+contribution across all possible coalitions; SHAP values are the unique
+additive attributions satisfying local accuracy, missingness and consistency
+\citep{lundberg2017unified}. KernelSHAP
 estimates Shapley values with a weighted regression scheme over coalitions
 for model-agnostic use; tree-specific implementations exploit model
 structure for speed. Relative to local-surrogate methods, SHAP is
@@ -436,7 +437,7 @@ structured scoping synthesis rather than a full systematic review.
 
 \begin{table}[t]
 \centering
-\caption{Corpus construction screening record. Identification and screening counts are from the original search log. The final two rows reflect the coded corpus released with this paper (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), which was reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
+\caption{Corpus construction screening record. The identification, screening and inclusion counts are those of the original screening record, which is not released with this paper. The final two rows describe the coded corpus that is released (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
 \label{tab:prisma}
 \begin{tabular}{lr}
 \toprule
@@ -447,9 +448,11 @@ Removed after cross-database deduplication & 65 \\
 Screened on title and abstract & 247 \\
 Excluded at screen (out of scope, non-English, no eval component) & 152 \\
 Full text assessed for eligibility & 95 \\
-Excluded at full text (intrinsic only, no codeable metric) & 51 \\
+Excluded at full text (intrinsic only, no codeable metric) & 47 \\
+Included in the original coding pass & 48 \\
 \midrule
-\textbf{Included in coded corpus} & \textbf{44} \\
+Coded but not recoverable (never cited; see \S\ref{sec:validity}) & 4 \\
+\textbf{Released coded corpus} & \textbf{44} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1290,8 +1293,9 @@ unchanged by this, but readers should treat the corpus counts as reconstructed
 figures with a documented provenance rather than as a preserved primary record.
 
 The survey employs a structured database search with documented inclusion
-and exclusion criteria and a transparent screening record
-(Table~\ref{tab:prisma}). It is not, however, a full systematic review:
+and exclusion criteria and reports its screening counts
+(Table~\ref{tab:prisma}); the underlying screening record is not released.
+It is not, however, a full systematic review:
 the search used five databases rather than an exhaustive database set,
 and the initial title/abstract screen and coding pass were performed by a
 single reviewer. The independent second-reviewer audit described in
@@ -1315,20 +1319,21 @@ sparsity, faithfulness, and cost. No semantic, human-utility, or
 LLM-judge claim enters the confirmatory scope.
 
 \paragraph{Axiomatic properties and metric alignment.}
-SHAP satisfies four axioms---dummy, linearity, symmetry, and efficiency---that
-guarantee attributions distribute the full prediction change $f(x) -
-\mathbb{E}[f]$ as uniquely fair marginal contributions.
-Perturbation-based fidelity metrics measure whether high-magnitude attributions
-correspond to large prediction drops under feature masking.
-These two perspectives are structurally compatible: both quantify how faithfully
-attribution magnitudes encode feature-level causal responsibility for the model
-output. SHAP's axiomatic guarantee implies that, conditional on its background
-distribution assumptions, its attribution rankings are optimally aligned with
-the feature-removal signal that fidelity metrics probe. This does not mean SHAP
-axioms certify correctness in all deployment contexts---the axioms hold for the
-model, not for any latent data-generative mechanism---but it does explain why
-SHAP consistently outperforms LIME on perturbation-based fidelity without
-requiring that LIME violates a formal criterion.
+SHAP values are the unique additive attributions satisfying local accuracy,
+missingness and consistency \citep{lundberg2017unified}; local accuracy means
+the attributions sum to the prediction change $f(x) - \mathbb{E}[f]$ relative
+to the background distribution. Perturbation-based fidelity metrics ask a
+related but different question: whether high-magnitude attributions coincide
+with large prediction drops when features are masked. Because SHAP ties
+attribution mass to the model's response to feature removal, it plausibly
+favours SHAP on removal-based fidelity, and this is one candidate reason for
+the SHAP advantage observed here. We do not test that mechanism, and it
+carries no guarantee: our masking replaces features with zero or reference
+values rather than with SHAP's background expectation, KernelSHAP is itself
+a sampled estimate, and the advantage is small on Breast Cancer. The
+properties also concern the model's output, not any data-generating
+mechanism, so they do not certify that an attribution is correct for the
+task (Section~\ref{sec:interpretation_scope}).
 
 \subsection{Internal and External Validity}
 
@@ -1364,14 +1369,17 @@ Non-tabular behavior & No image, text, graph, or time-series experiments & Out o
 \end{table}
 
 \paragraph{LIME stability is not a convergence artifact.}
-Two robustness probes rule out under-sampling and kernel miscalibration as
-explanations for the near-zero LIME stability (cosine similarity near
+Two robustness probes find no evidence that under-sampling or kernel
+miscalibration explains the near-zero LIME stability (cosine similarity near
 zero, CV $= 86.2\%$). Varying \texttt{num\_samples} $\in
 \{500, 1000, 2000\}$ under otherwise identical conditions (RF model, seed
 42, $N=100$, \texttt{kernel\_width=3.0}) leaves stability near-zero and
 fidelity essentially flat at every level (Supplementary Table~S5):
 doubling or halving the sample budget neither stabilizes the explanations
-nor changes the fidelity ordering. A companion \texttt{kernel\_width}
+nor changes the fidelity ordering. That probe is a historical exploratory
+measurement that cannot be re-derived from the released artifacts, and its
+reference row does not match the one in Table~S2; it is reported for its
+direction only (see its provenance note). A companion \texttt{kernel\_width}
 probe (Supplementary Table~S2) shows that widths below $3.0$ instead
 produce degenerate zero-weight explanations, confirming that the
 reference setting is the minimum viable configuration rather than a

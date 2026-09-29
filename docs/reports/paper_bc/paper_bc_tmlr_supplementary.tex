@@ -344,7 +344,9 @@ under-sampling artifact.
 \caption{LIME sensitivity to \texttt{num\_samples} (RF, seed 42, $N=100$).
 Stability = mean pairwise cosine similarity under $T=15$ Gaussian
 perturbations ($\sigma=0.1$). Reference condition:
-\texttt{num\_samples=1000}.}
+\texttt{num\_samples=1000}. A historical exploratory measurement whose values
+cannot be re-derived from the released artifacts; see the provenance note
+below.}
 \label{tab:s5_ns}
 \begin{tabular}{lcc}
 \toprule
@@ -364,6 +366,22 @@ ordering: under the reference kernel width, more samples do not raise
 LIME's stability. Table~S2 shows that the kernel width does, so the
 near-zero reading is a property of the reference configuration rather than
 of the method.
+
+\noindent\textit{Provenance and scope.} This probe is an earlier exploratory
+measurement whose output artifact is not preserved, unlike the
+\texttt{kernel\_width} probe (Table~S2), which re-derives from
+\texttt{outputs/analysis/lime\_kernel\_width\_sensitivity.csv}. Both tables
+state the same reference condition (RF, seed 42, $N=100$,
+\texttt{num\_samples=1000}, \texttt{kernel\_width=3.0}) but report different
+values for it---fidelity 0.461 against 0.518, stability 0.014 against
+0.000---so the two probes were run with different instrumentation and do not
+describe the same measurement. Both are reported for their direction, not as
+point estimates comparable with each other or with the EXP2 means. The
+conclusion they support jointly, and which survives the discrepancy, is
+directional: more samples do not recover stability, while a wider kernel
+does, at a cost in fidelity. Re-running the surviving sensitivity script
+would produce a new measurement rather than a reproduction of this table,
+because it sweeps a different grid over a different base configuration.
 
 %% ────────────────────────────────────────────────────────────────────────────
 \subsection*{Table S6 --- EXP6 Masking-Scheme Sensitivity Breakdown}

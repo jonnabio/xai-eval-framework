@@ -373,3 +373,30 @@ not thirteen, and mentions the figure and the mean runtimes, so it stays true.
 
 The runtime figure (Figure 2) was regenerated to the corrected path. It plots distributions
 and per-model medians; the scan and a visual check find nothing that Paper A prints.
+
+## Step 4 outcome (2026-09-28)
+
+**F04, F05 and F06 fixed**, in one commit because they share the same two files.
+
+- **F04:** `tab:prisma` now shows the original chain: 47 excluded at full text and 48
+  included in the original coding pass. Two further rows follow: 4 coded but not recoverable,
+  and 44 released. The caption says the screening record is not released (Q2). The abstract
+  now says "a five-database search with a reported screening record", where it said
+  "documented … transparent". Contribution 2 says "released 44-paper corpus", and §Validity
+  says the counts are reported but the record is not released. The corpus check is green.
+- **F05:** Table S5 has a caption note and a provenance paragraph, ported from thesis
+  Apéndice C. It is historical and cannot be re-derived; its reference row disagrees with S2
+  (0.461/0.014 against 0.518/0.000); the conclusion it supports is directional only; and the
+  surviving script sweeps a different grid. In the main text, "rule out" became "find no
+  evidence", with a sentence on the probe's status. The S5 values are already `[[unbacked]]`
+  (Step 1).
+- **F06:** the axiom paragraph is rewritten as an untested, plausible mechanism, with the
+  reasons it carries no guarantee: replacement masking rather than the background
+  expectation, KernelSHAP being an estimate, the small Breast Cancer gap, and the properties
+  holding for the model rather than the data. "Optimally aligned" and "causal responsibility"
+  are removed. The property set is now local accuracy, missingness and consistency
+  (`lundberg2017unified`), both here and at l.236, which listed efficiency, symmetry and dummy.
+
+No number changed. Checks: verifiers green; shared-literal scan clean; both PDFs 0 undefined
+references; page 1 and each edited passage read from the PDFs. The coverage gap is still only
+the F07 range.
