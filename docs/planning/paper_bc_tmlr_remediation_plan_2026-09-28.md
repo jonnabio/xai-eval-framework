@@ -449,3 +449,11 @@ triaged against its Paper A context as a coincidence. Checks: verifiers green (3
 
 Checks: verifiers green (320 claims / 491 sites); shared-literal scan clean; both PDFs
 0 undefined references (26 + 5 pp); each change read in the PDFs.
+
+## Step 7 outcome (2026-09-28)
+
+`paper_bc_tmlr.tex` and `paper_bc_tmlr_supplementary.tex` are added to `[coverage]`. The
+verifier is green: 21 files are fully registered, up from 19. Negative-tested: a planted
+unregistered literal (0.4321) fails with a `[coverage]` error. The change is merged to `main`
+by fast-forward, then from `main` into the thesis and chapter lanes, with the verifiers run on
+each lane after its merge.
