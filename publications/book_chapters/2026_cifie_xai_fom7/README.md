@@ -5,12 +5,19 @@ This folder contains the planning, source materials, manuscript drafts, figures,
 ## Scope
 
 - Chapter language: Spanish.
-- Writing style: impersonal academic style.
-- Technical level: high.
+- Writing style: highly scientific, readable, and primarily impersonal.
+- Technical level: high, with concepts introduced before formal detail.
+- Central argument: explanations become defensible evidence only when purpose,
+  audience, construct, evaluation, traceability, and inferential scope are aligned.
 - Central contribution: FOM-7 as a reproducible protocol for multi-metric benchmarking of post-hoc, model-agnostic explanation methods.
 - Methods discussed: LIME, SHAP, Anchors, and DiCE.
-- Empirical results: to be incorporated directly from the dissertation and related paper material.
+- Application areas: health, finance, cybersecurity, autonomous systems, and
+  foundation or language models.
+- Empirical results: synchronized from the dissertation and the registered evidence
+  substrate; unpublished Paper B+C results are excluded.
 - Relationship to thesis: derived from and connected to the doctoral dissertation, but managed as an independent publication artifact.
+- Reference style: APA 7.
+- Final format: Word, aligned with compatible thesis presentation standards.
 
 ## Authors
 

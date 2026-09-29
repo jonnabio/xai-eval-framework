@@ -1,12 +1,25 @@
 # Auditoría de citas
 
-## Estado de extracción inicial
+## Estado vigente de la bibliografía de producción
 
 - Fuente base: `thesis/references.bib`.
-- Alcance de esta pasada: referencias fundacionales para LIME, SHAP, Anchors, DiCE, evaluación XAI, benchmarking reproducible, robustez/fidelidad, taxonomías y pruebas estadísticas.
-- Estado: entradas copiadas a `references/references.bib`; falta validación editorial APA 7 completa antes de envío.
+- Alcance actual: referencias fundacionales para LIME, SHAP, Anchors, DiCE,
+  evaluación XAI, benchmarking reproducible, robustez/fidelidad, taxonomías y
+  pruebas estadísticas.
+- Estado al 2026-09-28: 41 obras en la bibliografía de producción y 41 obras citadas
+  en el manuscrito actual. La sincronización del 2026-09-27 comprobó la resolución de
+  los 35 DOI presentes. Sigue pendiente la revisión editorial APA 7 final antes del
+  envío.
+- Política para la revisión científica: las fuentes nuevas permanecen primero en
+  `candidate_literature_2026-09-28.md` y entran a la bibliografía de producción solo
+  cuando una sección revisada las cite.
 
-## Citas pendientes de verificar
+## Inventario histórico de entradas auditadas
+
+La lista siguiente conserva el registro de trabajo de las entradas de la base actual.
+El rótulo original “pendientes de verificar” quedó obsoleto después de las pasadas OA,
+la revisión de fundamentos y la sincronización del 2026-09-27; las excepciones aún
+abiertas se enumeran en las secciones de DOI y URL al final de este archivo.
 
 - `@ribeiro2016` — LIME / modelos sustitutos locales.
 - `@adadi2018` — revisión XAI y problema de caja negra.
@@ -49,6 +62,89 @@
 - `@pawlicki2024` — necesidad de múltiples métricas en evaluación XAI; verificada en pasada OA 2026-07-04 mediante Semantic Scholar, OpenAlex y Crossref.
 - `@bhattacharya2024` — evaluación multidimensional de explicaciones; verificada en pasada OA 2026-07-04 mediante OpenAlex y Crossref.
 - `@burger2023` — estabilidad de LIME.
+
+## Primera pasada de ampliación científica: 2026-09-28
+
+Objetivo: construir una base verificable para las nuevas secciones sobre importancia,
+aplicaciones, evaluación humana, gobernanza y brechas, sin introducir referencias no
+citadas en el Word actual.
+
+### Fuentes candidatas aceptadas
+
+- Principios y gobernanza: Phillips et al. (2021), Tabassi (2023), Reglamento (UE)
+  2024/1689 y World Health Organization (2021).
+- Salud y límites clínicos: Ghassemi et al. (2021).
+- Evaluación humana y counterevidence: Kim et al. (2024), Alufaisan et al. (2021) y
+  Poursabzi-Sangdeh et al. (2021).
+- Dominios: Weber et al. (2024) para finanzas; Rjoub et al. (2023) para
+  ciberseguridad; Kuznietsov et al. (2024) para conducción autónoma; Zhao et al.
+  (2024) para modelos de lenguaje.
+
+Se verificaron título, autoría, año, venue o institución, DOI o URL estable y alcance
+del soporte. La matriz de admisibilidad, los límites y los registros APA 7 de staging
+están en `candidate_literature_2026-09-28.md`.
+
+### Decisiones de admisión
+
+- Las revisiones sistemáticas y surveys sostendrán mapas de dominio o del campo, no
+  efectos empíricos concretos cuando exista un estudio primario relevante.
+- Alufaisan et al. y Poursabzi-Sangdeh et al. se incorporan como counterevidence
+  primario: sus resultados se limitarán a las tareas estudiadas.
+- Ghassemi et al. se identificará como perspectiva crítica y no como revisión
+  sistemática.
+- El AI Act sostendrá únicamente una afirmación acotada sobre transparencia e
+  interpretación de resultados de sistemas de alto riesgo; no se presentará como
+  garantía general de explicabilidad.
+- Ninguna de estas doce fuentes se añadió todavía a `references.bib` o
+  `references_apa7.md`, porque el manuscrito actual aún no las cita.
+
+### Brechas identificadas para la pasada primaria dirigida
+
+- Evidencia primaria sobre explicaciones bajo cambio de distribución y monitoreo en
+  producción.
+- Casos primarios de XAI operacional en ciberseguridad y validación de sistemas
+  autónomos.
+- Estudios primarios revisados por pares sobre fidelidad de explicaciones de LLM o
+  sistemas multimodales.
+- Fuente específica para educación o servicios públicos solo si ese ejemplo opcional
+  se convierte en una subsección completa.
+
+## Pasada primaria dirigida: 2026-09-28
+
+Objetivo: cerrar o acotar los vacíos que impedían modificar el outline de producción.
+
+### Fuentes aceptadas
+
+- `Lakkaraju et al. (2020)` — estudio ICML/PMLR sobre explicaciones globales robustas
+  y estables frente a conjuntos declarados de cambios de distribución. Admisible para
+  afirmar que una explicación ajustada a una distribución puede perder adecuación
+  cuando esa distribución cambia; no admisible como prueba de robustez universal en
+  producción.
+- `Roch et al. (2026)` — estudio de usuarios de USENIX Security sobre bloqueo de
+  dominios maliciosos. Admisible como counterevidence específica: en esa tarea, las
+  explicaciones no mejoraron desempeño ni confianza. No generalizar a todas las tareas
+  o interfaces de ciberseguridad.
+- `Kaufman et al. (2025)` — estudio CHI en conducción simulada. Admisible para mostrar
+  que errores en las explicaciones pueden degradar juicios de confianza y dependencia,
+  aun con conducción idéntica. No usar como medición de seguridad del vehículo.
+- `Turpin et al. (2023)` — experimento NeurIPS con intervenciones de sesgo en prompts.
+  Admisible para afirmar que ciertos racionales de cadena de pensamiento omiten
+  factores que influyen en la respuesta y pueden racionalizar respuestas sesgadas.
+- `Zaman y Srivastava (2026)` — counterevidence ACL sobre los límites de usar la
+  verbalización de pistas como única métrica. Obliga a presentar la fidelidad de cadena
+  de pensamiento como un problema de evaluación multidimensional y todavía debatido.
+
+### Resultado de la pasada
+
+- Cambio de distribución: cerrado para el claim conceptual; evidencia longitudinal de
+  despliegue permanece abierta.
+- Ciberseguridad: cerrado para un ejemplo humano acotado.
+- Sistemas autónomos: cerrado para el riesgo de una explicación errónea sobre juicios
+  humanos; no se afirmará efecto directo sobre seguridad operacional.
+- LLM: cerrado como controversia empírica con evidencia y counterevidence; la
+  multimodalidad amplia permanece como agenda, no como resultado demostrado.
+- Total de staging: 17 fuentes verificadas, ninguna añadida todavía a las bibliografías
+  de producción.
 
 ## Pasada de enriquecimiento OA: 2026-07-04
 
