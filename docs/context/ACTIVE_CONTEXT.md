@@ -2,6 +2,10 @@
 
 ## Session Metadata
 - **Last Updated:** 2026-09-28
+- **Mode (2026-09-28, second session):** PUBLICATION - Paper B+C remediation Steps 1-7
+  done on the paper lane: every review finding fixed except F10 (author: won't-fix), Paper B+C
+  under `[coverage]`, merged to main and all lanes, CI green. **Step 8 (submission gate) is
+  next and filing waits for it.** See "Session Handoff - 2026-09-28 (second session)".
 - **Mode (2026-09-28):** PEER_REVIEW / PLANNING - pre-submission review of Paper B+C for TMLR.
   Rigor review, reference audit and coverage triage done; remediation plan written; F16/F17
   fixed. **Not ready to file** (6 major findings). See the 2026-09-28 Session Handoff.
@@ -1050,6 +1054,95 @@ worktree `../xai-paper-bc`), head `3929936e3`, pushed.
   often return unrelated works; treat those as unverified, not as mismatches.
 - Build: `tools/tectonic-portable/tectonic.exe <file>.tex`, run from
   `docs/reports/paper_bc/` in the paper worktree.
+
+## Session Handoff - 2026-09-28 (second session)
+
+**Paper B+C remediation Steps 1-7 complete. Only Step 8, the submission gate, stands
+between the paper and filing.** Plan and per-step record:
+`docs/planning/paper_bc_tmlr_remediation_plan_2026-09-28.md` (paper lane).
+
+### Completed
+
+- **Step 1** (`4267145ac`): registered every value the fixes print, before any prose edit.
+  - Registry 257 -> 320 claims, 429 -> 491 sites.
+  - 8 new resolvers in `scripts/pubs/claim_sources.py`: paired-cell stats, paired t-CI, stratum
+    dispersion, second-reviewer audit, cohort 2 score floor.
+  - Registration surfaced **F18** (the CV table was labelled a stratum median but prints the
+    RF/N=100 cell) and **F19** (the German Credit gap ranges were wrong).
+- **Step 2** (`91766b04d`):
+  - **F01:** the tree-latency claim is scoped to XGBoost; RF was SHAP-slower in 15/15 cells.
+  - **F03:** one scoped account of LIME instability everywhere.
+  - **F09:** "SHAP leads on every fidelity- and stability-oriented endpoint".
+  - The abstract went through `claims.toml`, and page 1 was read from the PDF.
+- **Step 3** (`85c65557a`, `b37fae1ff`), **F02:**
+  - The Paper A mean costs are removed and retired.
+  - Figure 1 is redrawn as paired differences with CIs, and the EXP3 figure shows gaps only.
+  - New `scripts/pubs/scan_shared_literals.py` finds overlap with Paper A without the registry.
+    It is report-only in CI and `--strict` in the gate, and is listed under RCA-001.
+  - The editor note now says fifteen results were removed.
+- **Step 4** (`c5457ab9c`):
+  - **F04:** the screening table shows 47/48/4/44, and the record is stated as not released.
+  - **F05:** the Table S5 provenance is disclosed.
+  - **F06:** the axiom paragraph is rewritten as an untested mechanism.
+- **Step 5** (`8caf2b29e`): F07, F08, F11, F12, F18 and F19 fixed.
+- **Step 6** (`f6c244dd1`): F13-F15; bibliography reduced from 60 to 52 entries, all cited, with
+  metadata fixes verified against Crossref.
+- **Step 7** (`0e1510a16`): Paper B+C and its supplementary added to `[coverage]`.
+  - Merged to main by fast-forward, then into the thesis lane (`3a5ec41ee`) and the chapter
+    lane (`ec70f7da2`).
+  - CI pubs-sync is green on main.
+- **PDFs rebuilt at close** (`8b118ddf7`): 26 + 5 pages, 0 undefined references, text identical
+  to the Step 6 build.
+- **Config:** `configs/secrets/api_keys.env.example` (key-free template) committed
+  (`69808653d`). The real `api_keys.env` stays gitignored.
+
+### Current State
+
+- Verifiers green: 320 claims / 491 sites / 35 retired guards / 21 files fully registered.
+  The shared-literal scan reports 0 unexplained matches.
+- The 2026-09-27 gate record in `OPENREVIEW_SUBMISSION.md` is **invalid**: the manuscript, the
+  abstract, the figures and the bibliography have all changed since.
+- All lanes were merged and pushed at close.
+
+### Next Steps
+
+1. **Step 8, in a fresh QA session:** run the whole "After any revision" checklist in
+   `OPENREVIEW_SUBMISSION.md`.
+   - Check both PDFs and page 1.
+   - Build the de-anonymised variant once, for the availability sentence.
+   - Run the three verifiers, then `scan_shared_literals.py --strict`.
+   - Run the identity scan on both PDFs and the bundle.
+   - Rebuild the bundle.
+   - Regenerate the sheet's abstract, counts and stamp.
+   - Mark each finding F01-F19 against its commit, and append a post-fix status to the review.
+   - Give the author a written report.
+2. **Author:** file on OpenReview, then email the editor note to tmlr-editors@jmlr.org.
+3. **Thesis lane (not blocking filing):** the same defect class as F01/F03.
+   - Ch.4 l.193: "no es marginal, sino estructural".
+   - Ch.6 P1 row: "incoherencia estructural".
+   - Ch.4 l.620: TreeSHAP efficient "para modelos basados en árboles"; scope it to XGBoost as
+     Ch.6 l.134-136 does.
+
+### Blockers/Issues
+
+- None blocking. F10 is closed as won't-fix by author decision: never disclose or mention
+  the EXP4 prompt question.
+- A pre-existing 2 pt overfull box at the end of `tab:hybrid_deployment` is cosmetic, and was
+  left unchanged.
+
+### Notes
+
+- **Retired texts** must be added in the commit that removes them, not earlier: a retired
+  string still present in the manuscript fails the verifier.
+- **Negative-test every new check by planting inside the body.** The shared-literal scan
+  ignores everything after `\begin{thebibliography}`, so a planted value appended at the end of
+  the file proves nothing.
+- `generate_fragments.py` rewrites every fragment. Commit only `paper_bc_abstract_en.tex`
+  and `build_meta.env`, and discard the rest after `git diff --ignore-cr-at-eol` shows they
+  are empty.
+- Plotting needs `pandas`/`matplotlib`, which are now installed in Python 3.13. The figure
+  generators are `scripts/generate_paper_b_figures.py` and
+  `scripts/generate_exp3_gap_figure.py`.
 
 ## Current Objective
 **Two workstreams, one per lane (ADR-0013).**
