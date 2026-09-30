@@ -61,8 +61,8 @@ capturing semantics; human-grounded constructs remain underspecified; and
 semantic evaluation is growing faster than its empirical validation base.
 Second, we fill the proxy-layer gap with a paired empirical benchmark
 comparing LIME and SHAP across 75 matched cells spanning five model
-families, five seeds, and three sampling sizes on the Adult tabular
-benchmark. Within this protocol, results are consistent and large in
+families, five seeds, and three sampling sizes on the UCI Adult
+census-income dataset. Within this protocol, results are consistent and large in
 magnitude: SHAP leads on every fidelity- and stability-oriented endpoint
 (stability $d_z{=}3.00$, fidelity $d_z{=}4.82$, faithfulness gap
 $d_z{=}2.63$), while LIME is sparser and faster for non-tree model families
@@ -72,7 +72,7 @@ than LIME in every XGBoost cell but slower in every random-forest cell.
 A cross-dataset extension on two further tabular datasets preserves the
 fidelity ordering---SHAP exceeds both Anchors and LIME in every
 dataset--model stratum---and shows that LIME's near-zero stability on
-Adult is not intrinsic to the method: it rises with the kernel width and
+the Adult data is not intrinsic to the method: it rises with the kernel width and
 is high on both lower-dimensional datasets.
 Together, the taxonomy and the benchmark motivate a
 model-architecture-conditioned deployment pattern for tabular
