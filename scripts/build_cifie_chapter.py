@@ -120,13 +120,14 @@ def format_data_tables(docx: Path) -> None:
     except ImportError as exc:  # pragma: no cover - environment guard
         raise SystemExit("python-docx is required for CIFIE table formatting") from exc
 
-    # Widths sum to the 13.97 cm text block. The allocations protect short label
-    # columns from mid-word breaks while preserving space for substantive content.
+    # Widths sum to the 14.65 cm text block of the TintAzul/CIFIE template (A4,
+    # 3.175 cm side margins). The allocations protect short label columns from
+    # mid-word breaks; Table 2 gives "Propósito", its longest column, the most room.
     width_specs_cm = [
-        [2.10, 2.65, 2.40, 3.35, 3.47],
-        [2.80, 2.35, 4.25, 4.57],
-        [3.00, 1.45, 4.55, 2.80, 2.17],
-        [3.31, 2.20, 2.20, 3.31, 2.95],
+        [2.20, 2.78, 2.52, 3.51, 3.64],
+        [2.95, 4.20, 3.10, 4.40],
+        [3.00, 1.75, 4.70, 2.90, 2.30],
+        [3.47, 2.31, 2.31, 3.47, 3.09],
     ]
 
     document = Document(docx)
@@ -185,8 +186,35 @@ def format_data_tables(docx: Path) -> None:
                 for paragraph in cell.paragraphs:
                     paragraph.paragraph_format.space_after = Pt(0)
                     paragraph.paragraph_format.line_spacing = 1.0
+                    # Keep the header row with the body and the last row with
+                    # the note that follows the table.
+                    if row_index == 0 or row_index == len(table.rows) - 1:
+                        paragraph.paragraph_format.keep_with_next = True
                     for run in paragraph.runs:
                         run.font.size = Pt(10)
+
+        # Keep the note after the table on one page.
+        following = table._tbl.getnext()
+        if following is not None and following.tag == qn("w:p"):
+            f_pr = following.find(qn("w:pPr"))
+            if f_pr is None:
+                f_pr = OxmlElement("w:pPr")
+                following.insert(0, f_pr)
+            if f_pr.find(qn("w:keepLines")) is None:
+                f_pr.insert(0, OxmlElement("w:keepLines"))
+
+        # Keep the table number and the table title with the table.
+        previous = table._tbl.getprevious()
+        for _ in range(2):
+            if previous is None or previous.tag != qn("w:p"):
+                break
+            p_pr = previous.find(qn("w:pPr"))
+            if p_pr is None:
+                p_pr = OxmlElement("w:pPr")
+                previous.insert(0, p_pr)
+            if p_pr.find(qn("w:keepNext")) is None:
+                p_pr.insert(0, OxmlElement("w:keepNext"))
+            previous = previous.getprevious()
 
     document.save(docx)
 
@@ -236,6 +264,10 @@ def format_academic_text(docx: Path) -> None:
             section.first_page_footer,
             section.even_page_footer,
         ):
+            # Visiting a header or footer that does not exist makes python-docx
+            # create an empty part; only visit parts the document already has.
+            if story.is_linked_to_previous:
+                continue
             element_id = id(story._element)
             if element_id not in seen_story_elements:
                 seen_story_elements.add(element_id)
@@ -283,6 +315,75 @@ def format_academic_text(docx: Path) -> None:
                     qualified = qn(f"w:{attribute}")
                     if qualified in color.attrib:
                         del color.attrib[qualified]
+
+    document.save(docx)
+
+
+TEMPLATE_FONT = "Cambria"
+MONOSPACE_STYLES = {"Source Code", "Verbatim Char"}
+
+
+def apply_template_format(docx: Path) -> None:
+    """Apply the TintAzul/CIFIE template format (editorial/GUÍA-PLANTILLA.docx).
+
+    A4 page with 2.54 cm top and bottom and 3.175 cm side margins; Cambria
+    12 pt for all text; headings bold at 12 pt, level 1 in uppercase. Table
+    cells keep the 10 pt set by format_data_tables. The template's header logo
+    is not added until the editor confirms authors should include it.
+    """
+    try:
+        from docx import Document
+        from docx.enum.style import WD_STYLE_TYPE
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+        from docx.shared import Pt, Twips
+    except ImportError as exc:  # pragma: no cover - environment guard
+        raise SystemExit("python-docx is required for CIFIE template formatting") from exc
+
+    document = Document(docx)
+
+    for section in document.sections:
+        section.page_width, section.page_height = Twips(11906), Twips(16838)
+        section.top_margin = section.bottom_margin = Twips(1440)
+        section.left_margin = section.right_margin = Twips(1800)
+        section.header_distance = section.footer_distance = Twips(720)
+
+    def set_fonts(r_pr) -> None:
+        fonts = r_pr.find(qn("w:rFonts"))
+        if fonts is None:
+            fonts = OxmlElement("w:rFonts")
+            r_pr.insert(0, fonts)
+        for attribute in ("asciiTheme", "hAnsiTheme", "eastAsiaTheme", "cstheme"):
+            fonts.attrib.pop(qn(f"w:{attribute}"), None)
+        for attribute in ("ascii", "hAnsi", "eastAsia", "cs"):
+            fonts.set(qn(f"w:{attribute}"), TEMPLATE_FONT)
+
+    defaults = document.styles.element.find(qn("w:docDefaults"))
+    r_pr_default = defaults.find(qn("w:rPrDefault"))
+    r_pr = r_pr_default.find(qn("w:rPr"))
+    set_fonts(r_pr)
+
+    for style in document.styles:
+        if style.type not in (WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER):
+            continue
+        if style.name in MONOSPACE_STYLES:
+            continue
+        set_fonts(style.element.get_or_add_rPr())
+        if style.type == WD_STYLE_TYPE.PARAGRAPH:
+            style.font.size = Pt(12)
+        if style.name.startswith("Heading") or style.name == "Title":
+            style.font.bold = True
+            style.font.italic = False
+            style.font.size = Pt(12)
+            style.font.all_caps = style.name in ("Heading 1", "Title")
+        if style.name in ("Author", "Subtitle", "Date"):
+            style.font.all_caps = False
+            style.font.bold = False
+
+    # Pandoc writes run-level theme fonts on some runs; normalise them too.
+    for r_fonts in document.element.body.iter(qn("w:rFonts")):
+        if any(qn(f"w:{a}") in r_fonts.attrib for a in ("asciiTheme", "hAnsiTheme")):
+            set_fonts(r_fonts.getparent())
 
     document.save(docx)
 
@@ -376,6 +477,7 @@ def main() -> int:
         )
     format_data_tables(args.out)
     format_academic_text(args.out)
+    apply_template_format(args.out)
     hanging_indent(args.out)
     monochrome_embedded_images(args.out)
 

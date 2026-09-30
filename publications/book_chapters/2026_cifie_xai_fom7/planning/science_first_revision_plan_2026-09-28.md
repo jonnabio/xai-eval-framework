@@ -270,6 +270,7 @@ Size log (append one row per big edit):
 | 2026-09-30 | E-PRIOR-1 + E-AUTH-1 | 20,434 | -469 | 81 | 06 (+2), 07 (-166), 08 (-172), 11 (-22), Table 4 (-111) |
 | 2026-09-30 | P-CASE structure (files 05-08) | 20,424 | -10 | 82 | 05 3,296; 06 1,136 (starting material); 07 2,399 (FOM-7); 08 3,901 (design + results) |
 | 2026-09-30 | E-APA / R6 (references only) | 20,424 | 0 | 82 | in-text citation edits in 02, 03, 08; reference list 55 entries |
+| 2026-09-30 | E-FMT template format (build only) | 20,424 | 0 | 78 | A4, Cambria 12 pt; page count falls with the wider A4 text block |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
@@ -290,7 +291,7 @@ Size log (append one row per big edit):
 | 3 | E-STRUCT | Template structure: section 02 titled "Introducción" with the six template elements, including an explicit "El propósito de este capítulo es..." sentence and a labelled state-of-knowledge and gap step; conclusions that answer contribution, learning, implications, limitations and future research | P-CASE |
 | 4 | R4 | Reader devices, scaled to the length limit: four-method worked example, gate-trace figure, decision guide | P-CASE, E-Q1 |
 | 5 | E-FIG + R5 | Mention every figure in the text before it appears (Figures 2-6 currently are not); state each figure's inference; keep only non-decorative figures; APA captions; grayscale-legible regeneration; valid error bars | P-CASE, E-Q1 figure rules |
-| 6 | E-APA + R6 | Metadata corrections (Barredo Arrieta 2020, Becker and Kohavi dataset DOI, Lundberg and Lee NeurIPS, Schwalbe and Finzel 2024); remove or cite Adadi and Belle; Spanish reference conventions ("En", "Artículo", "Tesis doctoral", "[Conjunto de datos]") in the 14 affected entries; recheck "y"/"&" | none (can run any time) |
+| 6 | E-APA + R6 **(done 2026-09-30; Zheng et al. 2025 not externally verifiable, unchanged)** | Metadata corrections (Barredo Arrieta 2020, Becker and Kohavi dataset DOI, Lundberg and Lee NeurIPS, Schwalbe and Finzel 2024); remove or cite Adadi and Belle; Spanish reference conventions ("En", "Artículo", "Tesis doctoral", "[Conjunto de datos]") in the 14 affected entries; recheck "y"/"&" | none (can run any time) |
 | 7 | P-FINAL | Resumen rewritten last (150-250 words, answering the template's six questions); three to five keywords that do not repeat the title; conclusions finalized; top-level statement sweep | all content units |
 | 8 | E-FRONT | Portada with title, full names, academic degree, affiliation, ORCID and e-mail for each author; design sheet updated to the template fields | E-AUTH, E-TYPE, E-Q1 |
 
@@ -298,7 +299,7 @@ Size log (append one row per big edit):
 
 | Order | ID | Item | Depends on |
 | --- | --- | --- | --- |
-| 9 | E-FMT (replaces R7 format targets) | Build on the template's format: A4; margins 2.54 cm top and bottom, 3.17 cm left and right; Cambria 12 pt throughout; headings bold at 12 pt, level 1 in uppercase; 1.5 spacing; justified text; header per the editor's answer. Keep from R7: Table 2 widths, keep-with-next for table titles and notes, left-aligned code and table cells, deterministic header parts. Page numbers are optional (the template has none) | E-Q1 |
+| 9 | E-FMT (replaces R7 format targets) **(done 2026-09-30 except the header, which awaits E-Q1)** | Build on the template's format: A4; margins 2.54 cm top and bottom, 3.17 cm left and right; Cambria 12 pt throughout; headings bold at 12 pt, level 1 in uppercase; 1.5 spacing; justified text; header per the editor's answer. Keep from R7: Table 2 widths, keep-with-next for table titles and notes, left-aligned code and table cells, deterministic header parts. Page numbers are optional (the template has none) | E-Q1 |
 | 10 | E-FORMS | Complete the author checklist, authorship declaration (with E-AI, E-AUTH, E-PRIOR outcomes) and licence; author signatures | Track A |
 | 11 | FINAL-QA | Full Scientific Advisor rigor review, reference audit, rubric self-score, Word render of every page, clean-checkout rebuild; assemble `final/submission_package/` | all |
 
