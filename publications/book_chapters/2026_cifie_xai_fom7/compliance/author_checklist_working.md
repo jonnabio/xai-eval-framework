@@ -10,13 +10,13 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 
 ## I. Originalidad y ética académica
 
-- [?] El capítulo es un trabajo original e inédito: los resultados H1-H2 proceden del artículo publicado en RIMI (CC BY-NC-SA 4.0), citado en el texto; debe declararse expresamente [E-PRIOR].
+- [ ] El capítulo es un trabajo original e inédito: los resultados H1-H2 proceden del artículo publicado en RIMI (CC BY-NC-SA 4.0), citado en el texto; se declarará expresamente en el formulario (decidido 2026-09-30) [E-PRIOR].
 - [x] No se encuentra sometido simultáneamente a otra obra editorial.
-- [?] Relación con Paper B+C en evaluación en TMLR: decidir si se mantiene la dirección de H3 y el análisis exploratorio de 15 bloques [E-PRIOR].
+- [ ] Sin resultados de Paper B+C: eliminar H3, el análisis exploratorio de 15 bloques y la estabilidad de LIME entre conjuntos de datos (decidido 2026-09-30) [E-PRIOR-1].
 - [x] Las ideas de otros autores están citadas.
 - [x] Todas las citas tienen su referencia.
 - [ ] No existen referencias sin uso en el texto: Adadi y Berrada (2018) y Belle y Papantonis (2021) [E-APA/R6].
-- [?] Uso de inteligencia artificial revisado, verificado y declarado con veracidad [E-AI].
+- [ ] Uso de IA declarado como auxiliar; el autor revisa y reescribe los pasajes redactados con asistencia antes de firmar (decidido 2026-09-30) [E-AI-2].
 - [x] No existen referencias, autores o datos generados sin comprobación (DOI verificados contra Crossref; cifras verificadas contra el registro RCA-001).
 
 ## II. Pertinencia académica
@@ -33,7 +33,7 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 - [x] Título.
 - [x] Nombre de los autores.
 - [x] Afiliación institucional.
-- [ ] ORCID de cada autor (falta el de M. Herrero-Uceda y no se imprime en el documento) [E-FRONT, E-AUTH].
+- [ ] ORCID del autor impreso en la portada (capítulo de autor único desde 2026-09-30; M. Herrero-Uceda declinó la autoría) [E-FRONT, E-AUTH-1].
 - [ ] Correo electrónico de cada autor [E-FRONT].
 - [ ] Grado académico de cada autor (exigido en la portada de la plantilla) [E-FRONT].
 - [ ] Resumen que corresponda al capítulo revisado [P-FINAL].
@@ -90,7 +90,7 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 - [ ] Márgenes (A4; 2.54 cm superior e inferior; 3.17 cm laterales) y estilos [E-FMT].
 - [ ] Jerarquía de títulos de la plantilla [E-FMT].
 - [x] Numeración de tablas y figuras.
-- [?] Extensión conforme a los lineamientos (límite no publicado; unas 20.900 palabras) [E-Q1, P-CASE].
+- [?] Extensión conforme a los lineamientos: límite aún sin respuesta del editor; tamaño en observación tras cada edición mayor (20.903 palabras de cuerpo, 83 páginas, 2026-09-30) [E-Q1, E-SIZE].
 
 ## IX. Revisión final
 

@@ -1,6 +1,13 @@
 # Declaración sobre uso de inteligencia artificial
 
-> **Pendiente de decisión del autor (2026-09-30, E-AI).** El formulario oficial
+> **Decisión del autor (2026-09-30, E-AI):** se usará la opción de uso auxiliar del
+> formulario oficial (revisión gramatical, mejora del estilo, organización de ideas) y el
+> autor firmará que el análisis, la interpretación y las conclusiones son suyos. En
+> consecuencia, desde esa fecha el apoyo de IA se limita a tareas auxiliares, y el autor
+> revisa y reescribe con sus propias palabras los pasajes redactados con asistencia antes
+> de firmar (tareas E-AI-1 y E-AI-2 del plan).
+>
+> Antecedente: el formulario oficial
 > (`editorial/DECLARACIÓN DE AUTORÍA.docx`, sección IV) admite solo un uso auxiliar de la
 > IA y exige declarar que el análisis, la interpretación y las conclusiones son de los
 > autores. El historial de commits registra coautoría de IA en la redacción y revisión

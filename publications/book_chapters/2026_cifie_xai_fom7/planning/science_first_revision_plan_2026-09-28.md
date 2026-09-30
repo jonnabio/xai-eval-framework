@@ -218,14 +218,58 @@ above for everything still open. IDs starting with E come from
 `editorial/editorial_compliance_assessment_2026-09-30.md`, where each is tied to the
 editorial document that requires it.
 
+**Author decisions recorded 2026-09-30**
+
+| ID | Decision | Consequences (new tasks) |
+| --- | --- | --- |
+| E-AI | Use the official form's auxiliary-use option (grammar, style, organization of ideas) and sign that analysis, interpretation and conclusions are the author's. | **E-AI-1:** from 2026-09-30, AI support on the chapter is limited to auxiliary tasks: organizing ideas, outlines and evidence maps, source verification, grammar and style editing of author text, registry and build work, formatting, reference checks. New scientific prose is written by the author. **E-AI-2:** before signing, the author reviews and rewrites in his own words the passages drafted with AI assistance (commit history: every section 02-11, including section 04 of 2026-09-29), so the signed declaration describes the text as submitted. |
+| E-PRIOR | No items from Paper B+C in the chapter. Ideas and discussion without direct citation are acceptable. The RIMI prior publication of H1-H2 is declared on the form. | **E-PRIOR-1** (see list below): remove the paired SHAP-LIME contrast and everything derived from it; keep the conceptual quality-cost discussion without Paper B+C results or citation. |
+| E-AUTH | Dr. Herrero-Uceda declined authorship; he is removed from the byline. The chapter has a single author. Citations of the RIMI article keep him as co-author of that article. | **E-AUTH-1:** remove him from `00_hoja_diseno_editorial.md`, the chapter README and the build byline; single-author declaration and licence; no conflict of interest arising from authorship. |
+| E-Q1 (length) | Still unanswered by the editor. No hard limit is applied; size is kept under observation. | **E-SIZE:** after every big edit, report the chapter size (routine below). |
+
+**E-PRIOR-1: Paper B+C material to remove** (located 2026-09-30):
+
+- `tables/table_results_summary.md`: the H3 row, the exploratory 15/15 row, and the
+  note's references to them.
+- `08_aplicacion_empirica_perfiles_fom7.md`: in "SHAP y LIME: frontera calidad-coste",
+  the paired-contrast sentences and the 15/15 analysis ($p_{\mathrm{Holm}} = 3.05
+  \times 10^{-4}$); in "Reproducibilidad", the LIME cross-dataset stability sentence
+  (EXP3 LIME extension).
+- `07_diseno_empirico.md`: the paired-cell unit paragraph (75 coincident cells) and
+  the SHAP-LIME Wilcoxon paragraph of the inferential plan.
+- `11_conclusiones.md`: the sentence on the paired SHAP-LIME contrast.
+- `06_protocolo_fom7.md`: the "(H1 a H3 en la Tabla 4)" pointer becomes "(H1 y H2)".
+- Registry: drop the chapter sites of the 15/15 exploratory claim (`3.05`) and add the
+  removed statements to the review of `[exclusivity]`, which checks numbers only; the
+  prose check is manual (grep for "pareado", "H3", "15 de 15", "menos dimensiones").
+- Kept: the gate descriptions that name Wilcoxon as a generic paired test (section 06,
+  Table 2), and the qualitative SHAP-LIME quality-cost discussion based on the
+  published block-level results (RIMI) and on the chapter's own section 08 profiles.
+
+**E-SIZE: size routine after every big edit**
+
+After every structural unit, section rewrite or bulk edit, the report to the author
+includes: body words (sections 01-11 plus tables, excluding the design sheet, source
+notes and references), words per changed section, Word page count of the built DOCX,
+and the change against the previous report. Baseline (2026-09-30, `06267988c`):
+
+| Measure | Value |
+| --- | --- |
+| Sections 01-11 | 19,874 words |
+| Tables 1-4 | 1,029 words |
+| Body (sections + tables) | 20,903 words |
+| Reference list (59 entries) | 2,205 words |
+| Word render | 83 pages |
+| Largest sections | 05 (4,430), 06 (2,400), 07 (2,253), 04 (2,094), 08 (1,995) |
+
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
 | ID | Item | Owner | Blocks |
 | --- | --- | --- | --- |
-| E-Q1 | Ask the editor: length limit; whether to submit on the template file with its header logo and label; whether the *Hoja de diseño* is submitted; figure requirements for print; submission format and deadline; acceptability and authorization of results already published elsewhere | Author | P-CASE target length, E-FMT header, E-FRONT, R5 |
-| E-AI | Decide how AI use is declared so the official form can be signed truthfully (the form admits auxiliary use only; the drafting history records AI co-authorship) | Author | E-FORMS; possibly author rewriting of drafted passages |
-| E-AUTH | Confirm Dr. Herrero-Uceda's contribution and consent; obtain his ORCID, degree, e-mail and signatures, or remove him from the byline | Author | E-FRONT, E-FORMS |
-| E-PRIOR | Declare the RIMI prior publication of the H1-H2 results (CC BY-NC-SA 4.0); decide whether the H3 direction and the 15/15 block analysis stay while Paper B+C is under TMLR review | Author | E-FORMS; Table 4 and section 08 wording |
+| E-Q1 | **Open (length unanswered 2026-09-30; monitored through E-SIZE).** Ask the editor: length limit; whether to submit on the template file with its header logo and label; whether the *Hoja de diseño* is submitted; figure requirements for print; submission format and deadline; acceptability and authorization of results already published elsewhere | Author | P-CASE target length, E-FMT header, E-FRONT, R5 |
+| E-AI | **Decided 2026-09-30:** auxiliary-use declaration; see E-AI-1 and E-AI-2 | Author | E-FORMS; possibly author rewriting of drafted passages |
+| E-AUTH | **Decided 2026-09-30:** Dr. Herrero-Uceda removed (declined authorship); single author; see E-AUTH-1 | Author | E-FRONT, E-FORMS |
+| E-PRIOR | **Decided 2026-09-30:** declare RIMI prior publication; remove all Paper B+C material; see E-PRIOR-1 | Author | E-FORMS; Table 4 and section 08 wording |
 | E-TYPE | Choose the *Tipo de capítulo* for the design sheet | Author | E-FRONT |
 
 **Track B: content, in this order**
