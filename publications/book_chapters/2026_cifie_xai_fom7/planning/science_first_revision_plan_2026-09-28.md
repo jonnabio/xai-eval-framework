@@ -1,13 +1,15 @@
 # Science-First Revision Plan for the CIFIE XAI Book Chapter
 
 **Status:** Active - review remediation R0-R2 complete and Section 04 written
-(2026-09-29); Section 06, the field-gap taxonomy, is the next drafting unit (see
-"Review remediation workstream")
+(2026-09-29); the TintAzul/CIFIE editorial requirements are merged into the
+"Consolidated pending list" (2026-09-30), which now governs the order of work
 
 **Created:** 2026-09-28
 
 **Updated:** 2026-09-29 - folded in the Scientific Advisor review of
-`drafts/v3_editorial_review/cifie_xai_fom7_2026-09-29_formatted.docx`
+`drafts/v3_editorial_review/cifie_xai_fom7_2026-09-29_formatted.docx`;
+2026-09-30 - merged the editorial compliance assessment
+(`editorial/editorial_compliance_assessment_2026-09-30.md`)
 
 **Lane:** `chapter/cifie-sync-2026-09`
 
@@ -204,10 +206,53 @@ valid only on a Word render (see the Render gate).
 | R3 (gaps) | Open | | Section 06, the field-gap taxonomy: the next drafting unit. It moves FOM-7 to file 07 and the design to file 08, so it is a structural unit like section 04. |
 | R4-R7 | Open | | |
 
-Open from R0: the registry substrate commit has not yet reached `main` (the
-fast-forward was not permitted in the session; the author runs
-`git merge --ff-only chapter/cifie-sync-2026-09` on `main`), and the empty-header
-non-determinism in `format_academic_text` is deferred to R7.
+Open from R0: the empty-header non-determinism in `format_academic_text` is
+deferred to E-FMT. (Closed 2026-09-30: `main` fast-forwarded to `a1edb8bf4` and
+pushed at the author's instruction; chapter work is not merged into the thesis lane.)
+
+### Consolidated pending list (2026-09-30)
+
+This list merges the open review units (R3 gaps, R4-R7), the next steps agreed on
+2026-09-29, and the TintAzul/CIFIE editorial requirements. It supersedes the unit order
+above for everything still open. IDs starting with E come from
+`editorial/editorial_compliance_assessment_2026-09-30.md`, where each is tied to the
+editorial document that requires it.
+
+**Track A: decisions and questions (start now, in parallel with drafting)**
+
+| ID | Item | Owner | Blocks |
+| --- | --- | --- | --- |
+| E-Q1 | Ask the editor: length limit; whether to submit on the template file with its header logo and label; whether the *Hoja de diseño* is submitted; figure requirements for print; submission format and deadline; acceptability and authorization of results already published elsewhere | Author | P-CASE target length, E-FMT header, E-FRONT, R5 |
+| E-AI | Decide how AI use is declared so the official form can be signed truthfully (the form admits auxiliary use only; the drafting history records AI co-authorship) | Author | E-FORMS; possibly author rewriting of drafted passages |
+| E-AUTH | Confirm Dr. Herrero-Uceda's contribution and consent; obtain his ORCID, degree, e-mail and signatures, or remove him from the byline | Author | E-FRONT, E-FORMS |
+| E-PRIOR | Declare the RIMI prior publication of the H1-H2 results (CC BY-NC-SA 4.0); decide whether the H3 direction and the 15/15 block analysis stay while Paper B+C is under TMLR review | Author | E-FORMS; Table 4 and section 08 wording |
+| E-TYPE | Choose the *Tipo de capítulo* for the design sheet | Author | E-FRONT |
+
+**Track B: content, in this order**
+
+| Order | ID | Item | Depends on |
+| --- | --- | --- | --- |
+| 1 | A-04 | Author review of section 04 (in progress 2026-09-30) | none |
+| 2 | P-CASE | Section 06 field-gap taxonomy; FOM-7 to file 07; design merged into file 08 with the results; compression of sections 05-08 toward the length limit, including removing statistics duplicated between Table 4 and section 08 prose and splitting overlong paragraphs | A-04; E-Q1 for the target length |
+| 3 | E-STRUCT | Template structure: section 02 titled "Introducción" with the six template elements, including an explicit "El propósito de este capítulo es..." sentence and a labelled state-of-knowledge and gap step; conclusions that answer contribution, learning, implications, limitations and future research | P-CASE |
+| 4 | R4 | Reader devices, scaled to the length limit: four-method worked example, gate-trace figure, decision guide | P-CASE, E-Q1 |
+| 5 | E-FIG + R5 | Mention every figure in the text before it appears (Figures 2-6 currently are not); state each figure's inference; keep only non-decorative figures; APA captions; grayscale-legible regeneration; valid error bars | P-CASE, E-Q1 figure rules |
+| 6 | E-APA + R6 | Metadata corrections (Barredo Arrieta 2020, Becker and Kohavi dataset DOI, Lundberg and Lee NeurIPS, Schwalbe and Finzel 2024); remove or cite Adadi and Belle; Spanish reference conventions ("En", "Artículo", "Tesis doctoral", "[Conjunto de datos]") in the 14 affected entries; recheck "y"/"&" | none (can run any time) |
+| 7 | P-FINAL | Resumen rewritten last (150-250 words, answering the template's six questions); three to five keywords that do not repeat the title; conclusions finalized; top-level statement sweep | all content units |
+| 8 | E-FRONT | Portada with title, full names, academic degree, affiliation, ORCID and e-mail for each author; design sheet updated to the template fields | E-AUTH, E-TYPE, E-Q1 |
+
+**Track C: format and submission**
+
+| Order | ID | Item | Depends on |
+| --- | --- | --- | --- |
+| 9 | E-FMT (replaces R7 format targets) | Build on the template's format: A4; margins 2.54 cm top and bottom, 3.17 cm left and right; Cambria 12 pt throughout; headings bold at 12 pt, level 1 in uppercase; 1.5 spacing; justified text; header per the editor's answer. Keep from R7: Table 2 widths, keep-with-next for table titles and notes, left-aligned code and table cells, deterministic header parts. Page numbers are optional (the template has none) | E-Q1 |
+| 10 | E-FORMS | Complete the author checklist, authorship declaration (with E-AI, E-AUTH, E-PRIOR outcomes) and licence; author signatures | Track A |
+| 11 | FINAL-QA | Full Scientific Advisor rigor review, reference audit, rubric self-score, Word render of every page, clean-checkout rebuild; assemble `final/submission_package/` | all |
+
+The earlier "Next steps" list of 2026-09-29 maps as follows: author reading of
+section 04 is A-04; section 06 is P-CASE; reader devices are R4; figures, APA and Word
+layout are E-FIG/R5, E-APA/R6 and E-FMT; the Resumen, conclusions and final review are
+P-FINAL and FINAL-QA.
 
 ### R0. Reproducibility (Critical, C1)
 
@@ -346,9 +391,12 @@ Verified against Crossref or DataCite on 2026-09-29 unless marked otherwise:
 
 ### R7. Word layout (Medium, M6; Low, L1, L2, L5)
 
-- Set page size and margins explicitly in the section properties (decide A4 or
-  Letter; the reviewed file defines neither).
-- Add decimal page numbers in the footer.
+Superseded in part on 2026-09-30 by E-FMT: the page geometry, typeface and heading
+format now follow the TintAzul/CIFIE template (A4, Cambria 12 pt), and page numbers
+are optional. The table, code-block and header-part items below remain.
+
+- ~~Set page size and margins explicitly~~ A4 with the template margins (E-FMT).
+- ~~Add decimal page numbers in the footer~~ optional; the template has none.
 - Table 2: widen "Propósito" (currently 2.35 cm) at the expense of "Artefacto de
   salida"; no column may break a word.
 - Code blocks: left-aligned, never justified; replace the FOM-7 flow block with the

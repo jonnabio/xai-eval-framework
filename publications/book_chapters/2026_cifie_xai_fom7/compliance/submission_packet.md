@@ -1,31 +1,40 @@
 # Paquete de envío
 
-## Estado actual
+## Estado actual (2026-09-30)
 
-La versión técnica v2 está preparada para revisión interna, no para envío final.
+El capítulo está en revisión científica y editorial; no está listo para envío. La
+lista de trabajo es la "Consolidated pending list" de
+`planning/science_first_revision_plan_2026-09-28.md`, y el diagnóstico editorial está
+en `editorial/editorial_compliance_assessment_2026-09-30.md`.
 
-Archivo principal:
+## Entregables exigidos por TintAzul / CIFIE
 
-- `drafts/v2_technical_draft/cifie_xai_fom7_v2_technical_draft.md`
+| Entregable | Base | Estado |
+| --- | --- | --- |
+| Capítulo en la plantilla oficial (Word) | `editorial/GUÍA-PLANTILLA.docx`; build `scripts/build_cifie_chapter.py` | Pendiente [E-FMT, contenido pendiente] |
+| Lista de verificación del autor, firmada | `editorial/CHECKLIST DEL AUTOR.docx`; estado en `compliance/author_checklist_working.md` | Pendiente [E-FORMS] |
+| Declaración de autoría, originalidad y uso de IA, firmada por todos los autores | `editorial/DECLARACIÓN DE AUTORÍA.docx` | Pendiente de decisiones E-AI, E-AUTH y E-PRIOR [E-FORMS] |
+| Licencia de publicación y cesión limitada de derechos, firmada | `editorial/LICENCIA DE PUBLICACIÓN Y CESIÓN LIMITADA DE DEREC.docx` | Pendiente [E-FORMS] |
+| Hoja de diseño editorial | `manuscript/00_hoja_diseno_editorial.md` (no se publica) | Actualizar a los campos de la plantilla; confirmar si se entrega [E-FRONT, E-Q1] |
 
-Archivo de revisión editorial:
+## Figuras actuales del capítulo
 
-- `drafts/v2_technical_draft/editorial_pass_v2.md`
+- `figures/exported/fig_cobertura_exp2_es.png` (Figura 1)
+- `figures/exported/fig_cd_diagram_es.png` (Figura 2)
+- `figures/exported/fig_boxplots_metricas_es.png` (Figura 3)
+- `figures/exported/fig_estabilidad_coste_es.png` (Figura 4)
+- `figures/exported/fig_correlacion_metricas_es.png` (Figura 5)
+- `figures/exported/fig_radar_metodos_es.png` (Figura 6)
 
-Figuras integradas:
+La figura de diferencias pareadas SHAP-LIME fue retirada el 2026-09-27 (resultados de
+Paper B+C). La selección definitiva depende de E-FIG y de los requisitos de impresión
+que confirme el editor.
 
-- `figures/exported/fig_cobertura_exp2_es.png`
-- `figures/exported/fig_cd_diagram_es.png`
-- `figures/exported/fig_boxplots_metricas_es.png`
-- `figures/exported/fig_diferencias_pareadas_es.png`
-- `figures/exported/fig_estabilidad_coste_es.png`
-- `figures/exported/fig_correlacion_metricas_es.png`
-- `figures/exported/fig_radar_metodos_es.png`
+## Pasos para el paquete final
 
-## Pendientes para paquete final
-
-- Confirmar plantilla CIFIE, límite de palabras y formato de tablas.
-- Convertir referencias APA 7 a formato final con sangría francesa.
-- Resolver si las citas se entregan como claves Pandoc o como citas APA renderizadas.
-- Preparar versión editorial en `drafts/v3_editorial_review/`.
-- Generar paquete final en `final/submission_package/`.
+1. Resolver la pista A (decisiones y consultas al editor).
+2. Completar las pistas B y C de la lista consolidada.
+3. Construir el Word desde un estado confirmado de la rama y registrar el hash.
+4. Revisar cada página en un render de Microsoft Word.
+5. Completar y firmar los tres formularios.
+6. Reunir los archivos en `final/submission_package/`.
