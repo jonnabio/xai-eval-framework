@@ -1,7 +1,8 @@
 # Science-First Revision Plan for the CIFIE XAI Book Chapter
 
-**Status:** Active - Phase 3 foundations complete; review remediation R0-R2 precede
-Section 04 (see "Review remediation workstream", added 2026-09-29)
+**Status:** Active - Phase 3 foundations complete; review remediation R0-R2 complete
+(2026-09-29); Section 04 is the next drafting unit (see "Review remediation
+workstream")
 
 **Created:** 2026-09-28
 
@@ -191,6 +192,20 @@ valid only on a Word render (see the Render gate).
 | R5 | Figures for print | H4, M8, L4, H3 (labels) | Regenerate once the Phase 5 figure selection is final. |
 | R6 | APA 7 closure | M7, L3 | At Phase 8, but the listed metadata corrections can be applied at any time. |
 | R7 | Word layout | M6, L1, L2, L5 | Phase 7, against a Word render. |
+
+### Progress
+
+| Unit | Status | Commits | Result |
+| --- | --- | --- | --- |
+| R0 | Done 2026-09-29 | `3e5b21a68` | Clean-checkout build of `225419856` reproduced the reviewed DOCX (document, styles, media identical); both figure generators reproduce their figures' content; dependencies declared in the build script and README; generators recorded in `figure_registry.md`; `--out` crash fixed. |
+| R1 | Done 2026-09-29 | `3f8789bad` (registry), `2df96d15a` (manuscript) | H1, H2, M1-M5 corrected. New guard `A05.lime.cost.chapter` negative-tested; new claim `exp2.run.lime.model_mean.rf.cost` (436 ms). 321 claims / 496 sites / 46 retired-value guards. |
+| R2 | Done 2026-09-29 | `a32c36d0e` | Drafting voice, repository vocabulary, code blocks and undefined labels removed; device kept once (section 06). Word render checked. |
+| R3-R7 | Open | | Section 04 next. |
+
+Open from R0: the registry substrate commit has not yet reached `main` (the
+fast-forward was not permitted in the session; the author runs
+`git merge --ff-only chapter/cifie-sync-2026-09` on `main`), and the empty-header
+non-determinism in `format_academic_text` is deferred to R7.
 
 ### R0. Reproducibility (Critical, C1)
 
