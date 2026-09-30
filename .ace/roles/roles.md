@@ -215,6 +215,7 @@ Provide deep technical analysis."
 - Reviewing LaTeX documents and citations.
 - Maintaining consistency with publication guidelines.
 - Ensuring proper attribution and reference formatting.
+- For the CIFIE/FOM-7 chapter, use free format with no required template or word-count limit; apply APA 7 and render to Word (.docx) for now.
 
 **Output**: Draft Papers, Thesis Chapters, Presentation Materials.
 

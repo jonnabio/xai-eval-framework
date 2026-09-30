@@ -1,59 +1,219 @@
-# Fundamentos técnicos de la explicabilidad agnóstica al modelo
+# Qué es y qué no es la inteligencia artificial explicable
 
-Fuente inicial: `thesis/capitulo-2-fundamentos.qmd`, `references/references.bib` y `tables/table_metrics.md`.
+## Una familia de métodos y prácticas sociotécnicas
 
-## De modelos opacos a artefactos explicativos
+La inteligencia artificial explicable no designa un algoritmo único. Reúne métodos,
+modelos, interfaces y prácticas de evaluación destinados a hacer que el
+comportamiento o las salidas de un sistema de IA puedan ser examinados por personas
+con una finalidad concreta. Las taxonomías del campo incluyen modelos interpretables
+por diseño, explicadores post-hoc, descripciones locales y globales, atribuciones,
+reglas, ejemplos, contrafactuales, conceptos y visualizaciones, entre otros objetos
+(Guidotti et al., 2018; Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2023). Hablar de
+XAI, por tanto, exige precisar qué se explica, para quién, con qué propósito y mediante
+qué evidencia se evaluará la explicación.
 
-La explicabilidad en inteligencia artificial surge de una tensión metodológica persistente: los modelos con alta capacidad predictiva pueden capturar relaciones no lineales, interacciones complejas y patrones distribuidos, pero esa misma capacidad dificulta reconstruir, comunicar y auditar la lógica que conduce a una predicción concreta. En este capítulo, un modelo de caja negra no se define por la ausencia de estructura interna, sino por la falta de una representación directamente interpretable para investigadores, responsables institucionales o auditores que necesitan justificar una decisión. La literatura de XAI coincide en que este problema no es solo técnico; también es epistémico, operativo y social, porque una explicación debe permitir inspección, contraste y uso responsable dentro de un contexto de decisión determinado (Adadi & Berrada, 2018; Arrieta et al., 2019; Ali et al., 2023).
+El objeto de explicación puede ser una predicción individual, el comportamiento
+global de un modelo, un patrón aprendido, una representación interna, un error o una
+decisión sociotécnica más amplia. Estos objetos no son intercambiables. Explicar por
+qué un clasificador asignó una etiqueta a una instancia no equivale a explicar cómo
+fue construido, si sus datos son adecuados o por qué una organización decidió usarlo.
+La primera pregunta puede abordarse con un artefacto post-hoc; las demás requieren
+documentación del sistema, evidencia del dominio y análisis institucional.
 
-Los métodos post-hoc responden a esa dificultad mediante artefactos explicativos producidos después del entrenamiento del modelo. Estos artefactos no son el modelo ni una copia transparente de su mecanismo interno; son aproximaciones, consultas, perturbaciones o representaciones que describen una parte del comportamiento predictivo bajo supuestos específicos. LIME aproxima una predicción mediante un sustituto interpretable local; SHAP asigna contribuciones aditivas inspiradas en valores de Shapley; Anchors formula reglas locales de alta precisión; y DiCE genera contrafactuales diversos que exploran cambios de resultado (Ribeiro et al., 2016; Lundberg & Lee, 2017; Ribeiro et al., 2018; Mothilal et al., 2020). Esta heterogeneidad impide hablar de "la explicación" como si fuera un objeto único: una atribución, una regla y un contrafactual responden preguntas distintas y sostienen conclusiones distintas.
-
-Por ello, el primer fundamento técnico de FOM-7 es la identificación del objeto explicativo. Antes de calcular métricas, comparar métodos o formular inferencias, debe declararse qué tipo de evidencia produce cada explicador, qué pregunta contesta y qué unidad de análisis permite observar. Las revisiones metodológicas recientes recomiendan distinguir con precisión entre conceptos, familias de métodos, escalas de explicación y criterios de evaluación para evitar comparaciones nominales que ocultan objetos incompatibles (Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2023). En este capítulo, esa distinción no funciona como glosario introductorio, sino como condición de admisibilidad: FOM-7 solo permite interpretar una métrica cuando el artefacto, el constructo y la afirmación final pertenecen al mismo marco.
+Esta amplitud convierte la XAI en una práctica sociotécnica. El resultado depende del
+modelo y del explicador, pero también de la interfaz, el lenguaje, la competencia de
+la audiencia, el contexto de decisión y las posibilidades de actuar. Una explicación
+no es significativa en abstracto: se vuelve significativa cuando una persona puede
+relacionarla con su pregunta sin que esa adaptación distorsione el proceso explicado
+(Miller, 2019; Phillips et al., 2021).
 
 ## Interpretabilidad, explicabilidad y transparencia
 
-La interpretabilidad se refiere a la posibilidad de comprender la estructura, la lógica o el funcionamiento de un modelo de manera significativa para una audiencia y una tarea. En modelos transparentes, como reglas simples, árboles de baja profundidad o modelos lineales de baja complejidad, parte de esa comprensión puede derivarse directamente del objeto predictivo. La explicabilidad, en cambio, alude a la producción de razones, representaciones o artefactos que hacen inteligible una predicción, una región del espacio de entrada o una tendencia del modelo para un propósito determinado. La distinción importa porque un modelo formalmente inspeccionable puede ser inútil para una persona si contiene demasiadas variables o interacciones, mientras que una explicación clara puede ser persuasiva sin reproducir fielmente el comportamiento del modelo (Lipton, 2018; Murdoch et al., 2019).
+No existe una frontera terminológica aceptada de manera universal, pero conviene
+separar tres ideas. En este capítulo, la **interpretabilidad** es la relación por la
+que una audiencia puede comprender aspectos relevantes del funcionamiento o de la
+salida de un sistema para una tarea. No es solo una propiedad interna: un modelo puede
+ser sencillo para una persona experta y opaco para otra audiencia. La
+**explicabilidad** comprende los procedimientos y artefactos que intentan producir esa
+comprensión o aportar razones examinables. La **transparencia** se refiere a la
+visibilidad de elementos del sistema y de su proceso, como estructura, datos,
+supuestos, documentación, versiones y responsabilidades (Lipton, 2018; Murdoch et
+al., 2019).
 
-La transparencia pertenece principalmente al modelo; la explicación pertenece al ecosistema sociotécnico de interpretación que rodea su uso. Ese ecosistema incluye el método explicador, la interfaz de comunicación, la audiencia, la tarea, el dominio y el criterio de calidad. Miller (2019) muestra que las explicaciones también tienen una dimensión contrastiva y social: suelen responder por qué ocurrió una salida en lugar de otra, y su utilidad depende de las expectativas del destinatario. Sin embargo, esa orientación humana no debe confundirse con validez técnica. Una explicación puede ser comunicativamente eficaz y, al mismo tiempo, inestable, incompleta o débilmente alineada con el comportamiento del predictor.
+Las tres nociones se apoyan, pero no se sustituyen. Conocer la fórmula de un modelo no
+garantiza que una persona pueda emplearla en una decisión. Recibir una explicación
+post-hoc tampoco vuelve transparente el modelo: el artefacto puede aproximar una
+región de su comportamiento sin revelar el mecanismo completo. Asimismo, publicar
+documentación técnica mejora la transparencia del proceso, pero no demuestra que una
+explicación individual refleje con exactitud la salida. Por ello, la claridad debe
+evaluarse junto con la precisión explicativa y con los límites de conocimiento del
+sistema (Phillips et al., 2021).
 
-Esta separación sostiene una cautela central del capítulo. En contextos de alto impacto, varios autores recomiendan preferir modelos intrínsecamente interpretables cuando ofrecen desempeño competitivo y cuando la auditoría requiere comprensión directa del sistema (Belle & Papantonis, 2021; Rudin et al., 2022). El presente capítulo aborda una situación complementaria: cuando se evalúan modelos opacos mediante explicadores post-hoc por razones operativas, comparativas o experimentales, la explicación debe tratarse como evidencia aproximada, no como transparencia recuperada. FOM-7 adopta esa prudencia: evalúa artefactos bajo condiciones controladas y evita convertir claridad narrativa en garantía de fidelidad.
+Esta distinción evita usar “interpretable” como sinónimo de “confiable”. La
+interpretabilidad puede facilitar inspección y crítica, pero la confiabilidad depende
+además de validez, seguridad, robustez, privacidad, equidad y gobernanza. La
+explicabilidad contribuye a examinar esas propiedades; no las certifica por sí sola
+(Tabassi, 2023).
 
-## Métodos agnósticos y variantes específicas del modelo
+## Modelos interpretables por diseño y explicaciones post-hoc
 
-Los métodos agnósticos al modelo tratan al predictor como una caja negra operacional: consultan entradas y salidas sin requerir acceso a parámetros internos, gradientes, pesos, arquitectura o reglas de entrenamiento. Esta propiedad favorece la portabilidad, porque un mismo procedimiento puede aplicarse a clasificadores de familias distintas. También facilita comparaciones experimentales en las que el modelo base cambia y se desea conservar un marco común de generación de explicaciones. Sin embargo, la agnosticidad introduce un límite inevitable: el explicador observa el comportamiento externo mediante consultas, perturbaciones o muestras de referencia, no necesariamente el mecanismo causal o computacional que produjo la decisión.
+Un modelo interpretable por diseño permite examinar su lógica predictiva de forma
+relativamente directa. Reglas breves, árboles poco profundos o modelos aditivos con
+componentes controlados pueden ofrecer una relación más inmediata entre estructura y
+salida. La interpretabilidad, sin embargo, no depende únicamente del nombre de la
+familia: un árbol extenso o una regla con numerosas excepciones puede dejar de ser
+comprensible en la práctica. En problemas de alto impacto, cuando un modelo
+interpretable alcanza un desempeño adecuado y satisface las necesidades del dominio,
+su uso debe considerarse antes de adoptar una caja negra acompañada de una
+explicación aproximada (Rudin et al., 2022).
 
-Los métodos específicos del modelo, por contraste, aprovechan información interna de determinadas familias predictivas. Algunas variantes de SHAP explotan la estructura de modelos basados en árboles para mejorar eficiencia; otros enfoques dependen de gradientes, activaciones o descomposiciones disponibles solo para arquitecturas particulares. La diferencia muestra que el nombre del explicador no basta como descriptor experimental. Dos salidas etiquetadas como SHAP, LIME, Anchors o DiCE pueden cambiar sustantivamente si varían el conjunto de referencia, el vecindario, el número de perturbaciones, la discretización, los hiperparámetros o el presupuesto de cómputo.
+Los métodos post-hoc actúan después del entrenamiento. Consultan el predictor,
+analizan sus componentes o generan perturbaciones para construir un artefacto que
+describa parte de su comportamiento. Ese artefacto no es el modelo ni una copia
+completa de su razonamiento. Su validez depende del procedimiento, la muestra de
+referencia, el vecindario, la parametrización y la pregunta. En consecuencia, una
+explicación post-hoc debe presentarse como aproximación sometida a prueba, no como
+transparencia recuperada.
 
-FOM-7 conserva esta distinción porque la portabilidad no equivale a fidelidad. Un método agnóstico puede aplicarse a más modelos, pero sus resultados dependen de cómo interroga la caja negra; un método específico puede ser más eficiente dentro de una familia, pero menos transferible. En consecuencia, la evaluación del capítulo trata la agnosticidad como una condición de diseño y no como una propiedad de calidad. La afirmación defendible no es que un método sea mejor por ser agnóstico, sino que bajo un protocolo definido produjo artefactos con determinados perfiles de fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste.
+Dentro de este grupo, un método **agnóstico al modelo** utiliza principalmente
+entradas y salidas, por lo que puede aplicarse a distintas familias predictivas. Esa
+portabilidad facilita comparaciones, pero no garantiza fidelidad: el explicador solo
+observa el comportamiento accesible mediante sus consultas. Un método **específico
+del modelo** aprovecha gradientes, activaciones, estructura de árboles u otra
+información interna; puede ser más eficiente o preciso dentro de una familia, aunque
+menos transferible. Agnosticidad y especificidad son decisiones de diseño, no
+calificaciones automáticas de calidad (Marcinkevičs & Vogt, 2023).
 
-## Escala local, escala global y agregación
+## Alcance local y alcance global
 
-Una explicación local describe el comportamiento del modelo alrededor de una instancia, una predicción o un vecindario específico. Esta escala es relevante cuando se desea justificar una decisión individual, identificar variables influyentes para un caso concreto o explorar alternativas contrafactuales. Una explicación global intenta resumir patrones del modelo en una región amplia o en el conjunto de datos completo. LIME, SHAP y Anchors suelen utilizarse localmente, aunque sus salidas pueden agregarse para construir resúmenes globales, rankings promedio o perfiles de comportamiento por subgrupos (Ribeiro et al., 2016; Lundberg & Lee, 2017; Ribeiro et al., 2018).
+Una explicación **local** caracteriza una predicción o el comportamiento del modelo
+alrededor de una instancia. Es pertinente cuando se investiga una decisión concreta,
+un error o un caso límite. Una explicación **global** intenta resumir patrones del
+modelo en una población o región amplia: variables relevantes, reglas recurrentes,
+interacciones o formas funcionales. Entre ambas existen escalas intermedias, como
+subgrupos, cohortes o regiones del espacio de entrada.
 
-La agregación de explicaciones locales no convierte automáticamente un conjunto de artefactos en una teoría global del modelo. Un patrón estable en una región puede no sostenerse en otra, y una tendencia promedio puede ocultar heterogeneidades locales relevantes. Además, toda agregación introduce decisiones analíticas adicionales: qué instancias se incluyen, cómo se normalizan las salidas, qué métrica resume la variación y qué umbral se considera material. Por ello, la escala de la afirmación debe declararse con precisión: instancia, celda experimental, método, modelo, conjunto de datos o benchmark completo.
+El alcance debe declararse porque una explicación local no autoriza una conclusión
+global. Agregar explicaciones individuales tampoco produce necesariamente una
+representación global válida: la muestra puede no cubrir regiones relevantes, las
+reglas locales pueden ser incompatibles y una media puede ocultar heterogeneidad. A
+la inversa, un resumen global puede ser correcto en promedio y poco informativo para
+una persona concreta. La unidad de explicación y la unidad de inferencia deben
+coincidir con la afirmación final.
 
-Esta regla es especialmente importante para FOM-7. El protocolo no transforma resultados locales en conclusiones universales, sino que disciplina el paso desde artefactos individuales hacia perfiles comparables. Si una celda experimental contiene explicaciones válidas, métricas calculadas y evidencia trazable, puede contribuir a una afirmación agregada; si pierde cobertura, falla una auditoría de artefactos o mezcla objetos no comparables, debe limitar la inferencia. La escala no es un detalle estilístico: define la frontera entre evidencia admisible y extrapolación.
+Esta precaución es central para FOM-7. Una comparación solo es defendible si conserva
+la escala a la que se generó el artefacto, la unidad sobre la que se calculó la
+métrica y el nivel al que se formula la conclusión. Cambiar de instancia a modelo, o
+de ejecución a promedio, es una operación analítica que debe justificarse y quedar
+trazada.
 
-## Plausibilidad, fidelidad y validez de constructo
+## Objetos explicativos y preguntas diferentes
 
-Una explicación plausible resulta intuitiva, narrativamente coherente o alineada con expectativas humanas. Esa propiedad puede ser valiosa para comunicación, deliberación y aprendizaje, pero no garantiza que el artefacto represente fielmente el comportamiento del modelo. Una explicación puede sonar razonable y, aun así, depender de una configuración arbitraria, variar ante perturbaciones leves o capturar solo una correlación superficial. La literatura de evaluación insiste en separar comprensibilidad, utilidad, fidelidad y validez empírica como dimensiones relacionadas pero no equivalentes (Doshi-Velez & Kim, 2017; Nauta et al., 2023).
+Las principales familias de objetos explicativos pueden organizarse por la pregunta
+que responden. Las **atribuciones** distribuyen relevancia entre características para
+una salida y ayudan a preguntar qué variables influyeron según el explicador. Las
+**reglas** describen condiciones bajo las cuales una predicción se conserva. Los
+**ejemplos**, prototipos y casos similares sitúan la instancia respecto de
+observaciones conocidas. Los **contrafactuales** buscan cambios que modificarían la
+salida. Las explicaciones basadas en **conceptos** relacionan representaciones del
+modelo con categorías de mayor nivel. Los resúmenes globales describen patrones,
+interacciones o regiones de decisión.
 
-En este capítulo, la fidelidad se usa como constructo operacional: mide la alineación entre las importancias producidas por el explicador y los cambios observados en la salida del modelo cuando se enmascaran características relevantes. Esta definición no agota la noción más fuerte de *faithfulness*, entendida como correspondencia profunda con el proceso decisional, ni autoriza afirmaciones causales sobre el mundo representado por los datos. FOM-7 trata la fidelidad como evidencia medible y trazable, no como prueba automática de verdad causal. Esa prudencia coincide con trabajos recientes que buscan robustecer la evaluación de fidelidad y distinguir la calidad del proxy computacional de conclusiones más amplias sobre comprensión, justicia o responsabilidad del sistema (Zheng et al., 2025).
+Cada objeto ofrece información y riesgos distintos. Una atribución ordena variables,
+pero no establece que intervenir sobre ellas cambie el resultado en el mundo. Una
+regla puede alcanzar alta precisión en una región y cubrir pocos casos. Un ejemplo
+similar puede ser comprensible sin representar el mecanismo del predictor. Un
+contrafactual puede modificar formalmente la salida y ser imposible, costoso o
+injusto para la persona. Una explicación por conceptos depende de que esos conceptos
+estén bien definidos y alineados con la representación aprendida. Por ello, métodos
+que producen objetos distintos no deben reducirse a una escala universal de calidad
+(Karimi et al., 2022; Nauta et al., 2023).
 
-También debe distinguirse estabilidad de robustez. La estabilidad evalúa si pequeñas perturbaciones de entrada producen explicaciones similares; la robustez remite a resistencia frente a cambios más exigentes, condiciones fuera de distribución, ataques, variaciones de despliegue o modificaciones deliberadas del entorno experimental. Un método puede ser estable bajo ruido leve y frágil ante otros escenarios, o puede mostrar buena fidelidad promedio con alta variabilidad entre instancias. Por eso, FOM-7 no permite decidir calidad explicativa desde un único indicador: exige interpretar cada métrica como proxy de un constructo específico y registrar el alcance de la evidencia que produce (Alvarez-Melis & Jaakkola, 2018; Hedström et al., 2023; Pawlicki et al., 2024).
+En las secciones posteriores, LIME y SHAP se tratarán como productores de
+atribuciones o aproximaciones locales, Anchors como productor de reglas y DiCE como
+generador de contrafactuales. Esta descripción no los hace equivalentes. Sirve para
+vincular cada método con la pregunta que puede responder, el fallo que debe vigilarse
+y la evidencia apropiada para evaluarlo.
 
-## Métricas como proxies operacionales
+## Plausibilidad, fidelidad, estabilidad, robustez y utilidad
 
-Las métricas del benchmark no miden utilidad humana directa, comprensión subjetiva ni verdad causal. Funcionan como proxies reproducibles para comparar artefactos explicativos bajo un diseño controlado. En la tesis, las métricas primarias son fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional. Cada una cubre una dimensión distinta: la fidelidad aproxima alineación con la respuesta del modelo, la estabilidad observa sensibilidad de la explicación, la parsimonia controla complejidad comunicativa, la brecha de fidelidad permite comparar diferencias entre métodos y el coste registra la viabilidad práctica de ejecutar explicadores en condiciones repetibles.
+Una explicación **plausible** parece razonable para una audiencia. La plausibilidad
+facilita comunicación, pero puede provenir de expectativas humanas y no de la lógica
+del predictor. La **fidelidad** o *faithfulness* evalúa en qué medida el artefacto
+corresponde al comportamiento que pretende describir. Ambas propiedades pueden
+divergir: una narrativa convincente puede ser infiel, y una representación fiel puede
+resultar difícil de interpretar.
 
-La lectura multi-métrica es necesaria porque los métodos post-hoc producen objetos heterogéneos. Una atribución SHAP puede evaluarse por fidelidad y estabilidad; una regla Anchors exige considerar precisión y cobertura; un contrafactual DiCE debe leerse también desde validez, proximidad, diversidad y factibilidad; un sustituto local LIME requiere controlar muestreo, vecindario y estabilidad. Las revisiones recientes advierten que los indicadores de evaluación no son intercambiables y que una conclusión sólida depende de alinear método, constructo, métrica y contexto de uso (Kadir et al., 2023; Canha et al., 2025; Bhattacharya & Verbert, 2024).
+La **estabilidad** examina si casos o ejecuciones próximos producen explicaciones
+semejantes bajo condiciones definidas. La **robustez** plantea un desafío más amplio:
+si la explicación conserva propiedades relevantes ante perturbaciones, cambios de
+distribución, variaciones de configuración o acciones adversariales. Ninguna de las
+dos debe presumirse. Un explicador puede ser estable frente a ruido leve y frágil ante
+un cambio operativo, o mostrar buen desempeño promedio con variabilidad importante
+entre instancias (Alvarez-Melis & Jaakkola, 2018; Nauta et al., 2023).
 
-Esta perspectiva evita dos errores simétricos. El primero consiste en reducir la calidad explicativa a una métrica dominante. El segundo consiste en acumular métricas sin una teoría de admisibilidad. FOM-7 se ubica entre ambos extremos: acepta que los proxies son necesarios para comparar, pero exige que cada resultado se conecte con un artefacto válido, una unidad de análisis homogénea, una prueba compatible y una afirmación proporcional. La métrica no habla sola; se vuelve evidencia cuando supera controles de generación, auditoría, armonización y trazabilidad.
+La **utilidad humana** se refiere a la contribución de la explicación a una tarea y a
+una audiencia. Puede observarse mediante comprensión, detección de errores,
+desempeño, carga cognitiva, confianza calibrada o capacidad de actuar. Estas medidas
+no son sustitutos automáticos entre sí. La revisión de Kim et al. (2024) muestra que
+la evaluación centrada en personas abarca la calidad experimentada de la explicación,
+la interacción humano-IA y el desempeño conjunto. En consecuencia, una métrica
+computacional de fidelidad no demuestra utilidad humana, y una valoración subjetiva
+positiva no demuestra fidelidad.
 
-## Función de estos fundamentos dentro de FOM-7
+La calidad explicativa es, por tanto, multidimensional y dependiente del propósito.
+Acumular métricas sin definir sus constructos genera tanta ambigüedad como depender de
+un único indicador. La evaluación debe explicar qué propiedad aproxima cada medida,
+qué evidencia produce y qué conclusión no permite (Doshi-Velez & Kim, 2017; Pawlicki
+et al., 2024; Bhattacharya & Verbert, 2024).
 
-El capítulo se ubica principalmente en evaluación funcionalmente fundamentada (*functionally-grounded*): utiliza proxies computacionales y artefactos verificables en lugar de estudios directos con usuarios. Esta elección permite reproducibilidad, comparación sistemática y control estadístico, pero no autoriza conclusiones sobre utilidad humana, satisfacción, confianza calibrada o desempeño en tareas reales. En la terminología de Doshi-Velez y Kim (2017), esas afirmaciones requerirían diseños centrados en humanos (*human-grounded*) o centrados en aplicación (*application-grounded*), con tareas, participantes, criterios de éxito y condiciones de uso explícitamente definidos.
+## Lo que una explicación no demuestra
 
-Por tanto, los fundamentos técnicos de esta sección cumplen una función normativa dentro de FOM-7. Definen qué puede compararse, qué no debe homogeneizarse artificialmente y qué tipo de afirmación permite cada fuente de evidencia. No debe afirmarse que un método "explica mejor" en términos universales ni que una métrica aislada captura la calidad total de una explicación. Debe afirmarse, cuando proceda, que un método presenta mayor fidelidad, estabilidad, parsimonia o eficiencia bajo un conjunto de datos, modelo, métrica, configuración y unidad de análisis determinados.
+Una explicación predictiva no establece **causalidad**. Las atribuciones describen la
+relación entre características y salida bajo un procedimiento; no prueban que una
+intervención sobre una característica produzca el efecto observado. Incluso los
+contrafactuales algorítmicos pueden proponer combinaciones fuera de la distribución o
+acciones que ignoran restricciones causales y sociales (Laugel et al., 2019; Karimi
+et al., 2022).
 
-Esta disciplina conceptual prepara las secciones siguientes. LIME, SHAP, Anchors y DiCE serán descritos como métodos con objetos explicativos distintos; la crisis de evaluación XAI se formulará como una crisis de comparabilidad, trazabilidad y validez de constructo; y FOM-7 se presentará como un protocolo para transformar salidas heterogéneas en evidencia auditable. La tesis metodológica que se desprende de estos fundamentos es simple pero exigente: una explicación post-hoc solo puede sostener una conclusión si se conoce qué artefacto produjo, qué propiedad se midió, qué controles superó y hasta dónde alcanza la evidencia.
+Tampoco establece **justicia**. Una explicación puede ayudar a detectar una variable
+proxy o una dependencia problemática, pero no certifica igualdad de desempeño,
+ausencia de discriminación ni distribución justa de consecuencias. Esas afirmaciones
+requieren definiciones normativas, análisis por grupos y evidencia independiente.
+
+No demuestra **seguridad** ni **robustez operativa**. Un artefacto estable en el
+benchmark puede fallar ante entradas adversariales, cambio de distribución o una
+versión distinta del modelo. Se ha mostrado, además, que explicadores post-hoc pueden
+ser manipulados para ocultar comportamientos problemáticos bajo condiciones de ataque
+(Slack et al., 2020). La explicación puede formar parte de una investigación de
+seguridad; no constituye por sí misma un caso de seguridad.
+
+Por último, no prueba la **corrección de la decisión**. Una explicación fiel de un
+modelo equivocado describe fielmente su error. Para evaluar corrección se necesitan
+datos válidos, desempeño pertinente, conocimiento del dominio y criterios de decisión
+externos al explicador. Esta separación impide que la XAI se utilice como sello
+general de confianza.
+
+## Niveles de evaluación y alcance de FOM-7
+
+Doshi-Velez y Kim (2017) distinguen evaluación centrada en la aplicación, evaluación
+centrada en humanos y evaluación funcionalmente fundamentada. La primera utiliza
+personas expertas y tareas reales; la segunda estudia personas en tareas
+simplificadas; la tercera emplea proxies computacionales sin participantes. Ningún
+nivel domina en todos los casos. Cada uno responde preguntas diferentes y exige un
+diseño compatible con la afirmación buscada.
+
+FOM-7 se sitúa principalmente en el nivel funcionalmente fundamentado. Controla el
+protocolo, la ejecución, los artefactos, la armonización, la inferencia, la
+reproducibilidad y la trazabilidad de comparaciones computacionales. Ese alcance
+permite sostener afirmaciones acotadas sobre fidelidad, estabilidad, parsimonia,
+cobertura o coste bajo las condiciones estudiadas. No autoriza por sí mismo
+conclusiones sobre comprensión, confianza calibrada, impacto profesional, causalidad
+o consecuencias de despliegue.
+
+Esta taxonomía fija el vocabulario del resto del capítulo. Las aplicaciones se
+examinarán según decisión, actor, riesgo y evidencia necesaria; las familias de
+métodos se presentarán por el objeto que producen; las brechas se organizarán por el
+tipo de validez que falta; y el caso empírico mostrará cómo un protocolo puede
+convertir comparaciones heterogéneas en afirmaciones auditables sin convertirlas en
+verdades universales.

@@ -1,39 +1,169 @@
-# Introducción
+# Por qué importa la inteligencia artificial explicable
 
-## De la opacidad predictiva a la evidencia auditable
+## De predecir a responder por decisiones
 
-El uso de modelos de aprendizaje automático en contextos de decisión ha intensificado una tensión metodológica conocida: los sistemas con mayor capacidad predictiva pueden ser también aquellos cuyo funcionamiento interno resulta menos transparente para investigadores, auditores, usuarios y responsables institucionales. La literatura sobre inteligencia artificial explicable (XAI) ha descrito esta tensión como un desplazamiento desde la exactitud predictiva aislada hacia condiciones más amplias de comprensión, trazabilidad, confianza calibrada y responsabilidad algorítmica (Adadi & Berrada, 2018; Arrieta et al., 2019; Ali et al., 2023). En dominios como crédito, salud, educación, empleo, seguridad o servicios públicos, una explicación no puede reducirse a un recurso comunicativo posterior al modelo: debe funcionar como parte de la evidencia que permite examinar, auditar y delimitar una decisión automatizada sin confundir persuasión narrativa con validez técnica.
+La expansión de la inteligencia artificial en actividades científicas,
+profesionales y administrativas ha trasladado parte del problema desde la capacidad
+de predecir hacia la capacidad de responder por una predicción. En una tarea de bajo
+impacto puede bastar con que el sistema funcione de manera adecuada. Cuando su salida
+orienta un diagnóstico, una asignación de crédito, una alerta de seguridad, una
+decisión laboral o una intervención automatizada, también importa conocer qué
+información utilizó, bajo qué condiciones puede fallar, quién debe supervisarlo y qué
+evidencia permite cuestionar su resultado. La inteligencia artificial explicable
+(*explainable artificial intelligence*, XAI) adquiere relevancia en ese tránsito: no
+como ornamento comunicativo añadido a un modelo, sino como conjunto de recursos para
+investigar, justificar y delimitar su comportamiento en un contexto de uso (Arrieta
+et al., 2019; Ali et al., 2023).
 
-Esta exigencia no significa que toda explicación sea automáticamente útil. Una explicación puede resultar plausible para una audiencia y, al mismo tiempo, ser inestable, poco fiel al comportamiento del modelo o insuficiente para sostener una afirmación técnica. Lipton (2018) advierte que la interpretabilidad suele invocarse con significados distintos, desde transparencia estructural hasta comprensibilidad para usuarios específicos. Rudin et al. (2022) añaden que, en escenarios de alto impacto, los modelos intrínsecamente interpretables deberían preferirse cuando ofrecen desempeño competitivo. Este capítulo parte de una situación complementaria: cuando ya se trabaja con modelos opacos o con explicadores post-hoc por razones operativas, comparativas o regulatorias, la pregunta crítica deja de ser si la explicación parece razonable y pasa a ser si existe evidencia suficiente para tratarla como fiel, estable, comparable, reproducible y defendible.
+Esta función no se reduce a “abrir” una caja negra. Un sistema puede documentar su
+arquitectura y seguir siendo difícil de comprender para quien toma una decisión; a la
+inversa, una explicación sencilla puede ser intuitiva y, sin embargo, describir de
+forma inexacta el proceso que produjo la salida. Los principios propuestos por
+Phillips et al. (2021) separan precisamente la existencia de una explicación, su
+significado para una persona concreta, su correspondencia con el proceso del sistema
+y el reconocimiento de los límites de conocimiento. La separación es crucial: que
+una explicación exista o resulte legible no establece todavía que sea correcta,
+útil o suficiente.
 
-Los métodos post-hoc agnósticos al modelo ocupan un lugar central en esa discusión porque permiten explicar predicciones sin modificar la arquitectura interna del modelo. LIME aproxima localmente una predicción mediante un sustituto interpretable (Ribeiro et al., 2016); SHAP asigna contribuciones aditivas inspiradas en valores de Shapley (Lundberg & Lee, 2017); Anchors formula reglas locales de alta precisión que delimitan condiciones suficientes para conservar una predicción (Ribeiro et al., 2018); y DiCE genera contrafactuales diversos para explorar cambios de resultado (Mothilal et al., 2020; Wachter et al., 2017). Sin embargo, esta diversidad también crea un problema de evaluación: una atribución, una regla y un contrafactual no son variantes superficiales de un mismo objeto explicativo. Responden preguntas distintas, tienen supuestos distintos y requieren criterios de calidad distintos.
+Por ello, el problema científico de la XAI no consiste únicamente en generar
+representaciones comprensibles. Consiste en determinar cuándo un artefacto
+explicativo aporta evidencia para una finalidad definida. Una explicación dirigida a
+depurar un modelo responde una pregunta distinta de otra destinada a apoyar una
+decisión profesional, documentar una auditoría o permitir que una persona afectada
+comprenda y cuestione un resultado. Su calidad depende de la relación entre modelo,
+objeto explicativo, audiencia, tarea, riesgo y criterio de evaluación.
 
-## El problema: evaluar explicaciones no es solo calcular métricas
+## Funciones de la explicación durante el ciclo de vida
 
-La XAI ha avanzado en métodos, herramientas y taxonomías, pero su evaluación sigue enfrentando una fragmentación persistente. Revisiones recientes muestran una expansión de métricas asociadas con fidelidad, estabilidad, robustez, parsimonia, sensibilidad, plausibilidad y utilidad humana, aunque no siempre con definiciones comparables, unidades de análisis homogéneas o protocolos de inclusión explícitos (Kadir et al., 2023; Nauta et al., 2023; Schwalbe & Finzel, 2023). Dos estudios pueden afirmar que evalúan el mismo método y, aun así, emplear perturbaciones, conjuntos de referencia, semillas, agregaciones o criterios de exclusión incompatibles. Bajo esas condiciones, el nombre del explicador deja de ser una unidad experimental suficiente.
+La necesidad de explicación aparece antes, durante y después del despliegue. En el
+diseño, los artefactos explicativos pueden ayudar a descubrir dependencias espurias,
+variables proxy, fugas de información o comportamientos incompatibles con el
+conocimiento del dominio. En la validación, permiten formular pruebas dirigidas sobre
+casos límite y comparar si distintos modelos apoyan sus salidas en patrones
+semejantes. Durante la operación, pueden contribuir al monitoreo de cambios, al
+análisis de incidentes y a la identificación de condiciones en las que una salida no
+debería aceptarse sin revisión. Después de una decisión, pueden apoyar la
+documentación, la auditoría y la contestabilidad. Estas funciones pertenecen a un
+ciclo de gestión del riesgo y no a un único momento de visualización (Tabassi, 2023).
 
-La dificultad central no es la ausencia de métricas, sino la ausencia de reglas compartidas para decidir cuándo una métrica puede sostener una afirmación inferencial. Doshi-Velez y Kim (2017) distinguen evaluaciones centradas en aplicación, centradas en humanos y funcionalmente fundamentadas, distinción que ayuda a precisar qué tipo de evidencia produce cada estudio. Las evaluaciones funcionales permiten control computacional y comparación sistemática, pero no sustituyen estudios con usuarios ni validaciones de aplicación. En la misma línea, trabajos recientes insisten en que una sola métrica no captura la calidad explicativa completa: una explicación puede ser fiel pero inestable, estable pero costosa, parsimoniosa pero semánticamente pobre, o útil para exploración y débil para auditoría (Pawlicki et al., 2024; Bhattacharya & Verbert, 2024).
+Cada función exige evidencia diferente. Para depurar, puede ser útil localizar qué
+características influyen en predicciones anómalas; para validar, importa comprobar si
+esa señal se conserva ante perturbaciones relevantes; para supervisar, deben
+comunicarse incertidumbre, límites y condiciones de uso; para auditar, se necesita
+trazabilidad entre datos, versión del modelo, configuración del explicador y
+conclusión. Una misma gráfica no satisface automáticamente todas esas necesidades.
+Tampoco todo fallo requiere otro algoritmo explicativo: en ocasiones la respuesta
+adecuada es mejorar los datos, restringir el ámbito de uso, elegir un modelo
+interpretable por diseño o impedir que el sistema decida sin intervención humana.
 
-Herramientas como Quantus y OpenXAI han contribuido a ordenar parte de este espacio. Quantus ofrece una infraestructura para evaluar explicaciones mediante familias de métricas y análisis sistemáticos (Hedström et al., 2023), mientras OpenXAI promueve una evaluación transparente de explicaciones post-hoc con énfasis en comparabilidad, fidelidad y sesgos de evaluación (Agarwal et al., 2022). Canha et al. (2025) refuerzan este giro al proponer marcos funcionalmente fundamentados que expliciten los criterios de evaluación desde la literatura. Estas contribuciones son necesarias, pero no resuelven por sí solas el problema operativo que enfrenta un capítulo empírico: antes de interpretar un resultado debe saberse qué protocolo se congeló, qué artefactos fueron válidos, qué ejecuciones se excluyeron, qué comparaciones son homogéneas y qué límites conserva cada conclusión.
+Entender la explicación como parte del ciclo de vida evita dos reducciones frecuentes.
+La primera consiste en identificar XAI con una imagen o lista de importancias
+producida después del entrenamiento. La segunda consiste en evaluar esa salida fuera
+del proceso que pretende apoyar. Una explicación útil para diagnosticar un error de
+desarrollo puede ser inadecuada para comunicar una decisión individual. Del mismo
+modo, una representación eficaz en una demostración controlada puede perder valor si
+el modelo, los datos o las condiciones operativas cambian.
 
-Por ello, la evaluación XAI debe formularse como un problema de gobernanza de evidencia. No basta con producir explicaciones ni con calcular indicadores. Es necesario demostrar que los artefactos son íntegros, que las métricas fueron operacionalizadas de forma consistente, que la unidad de análisis no induce pseudorreplicación, que las pruebas estadísticas son compatibles con el diseño y que las afirmaciones finales pueden regresar a una fuente verificable. Esta es la brecha que motiva FOM-7: transformar salidas heterogéneas de benchmarking en evidencia reproducible, comparable y auditable.
+## Audiencias, preguntas y responsabilidades distintas
 
-## FOM-7 como respuesta metodológica
+No existe una explicación universal porque tampoco existe un destinatario universal.
+Quien desarrolla un sistema necesita información que permita reproducir y corregir
+su comportamiento. Un equipo de validación necesita pruebas independientes y
+criterios de aceptación. Un profesional del dominio necesita conocer la pertinencia
+de la evidencia, los límites y la posibilidad de apartarse de la recomendación. La
+dirección de una organización requiere comprender exposición al riesgo y controles.
+Una autoridad supervisora necesita documentación verificable. La persona afectada
+por una decisión necesita una comunicación comprensible, específica y vinculada con
+las posibilidades reales de revisión o actuación.
 
-FOM-7 se propone en este capítulo como una secuencia operativa de siete puertas para gobernar el paso desde ejecución experimental hasta afirmación publicable. Su propósito no es crear un nuevo explicador ni reemplazar las métricas existentes, sino controlar las condiciones bajo las cuales una métrica puede convertirse en evidencia. Las puertas cubren congelación del protocolo, ejecución controlada, auditoría de artefactos, armonización analítica, exportación inferencial, perfilado de reproducibilidad y reporte trazable. La regla que articula el protocolo es deliberadamente estricta: ninguna afirmación inferencial debe formularse si los controles previos no están satisfechos o si la afirmación no puede vincularse con evidencia fuente verificable.
+Phillips et al. (2021) sostienen que el significado de una explicación depende del
+usuario y de la situación, mientras Miller (2019) muestra que las explicaciones
+humanas suelen ser selectivas, sociales y contrastivas: con frecuencia responden por
+qué ocurrió un resultado en lugar de otro. Estas observaciones ayudan a diseñar la
+comunicación, pero no eliminan la obligación técnica de comprobar que lo comunicado
+corresponde al comportamiento del sistema. La explicación destinada a una persona
+afectada puede priorizar claridad y contraste; la dirigida a un auditor puede exigir
+artefactos, parámetros y pruebas que serían impropios para esa comunicación. Adaptar
+el formato no autoriza a cambiar el hecho explicado ni a ocultar incertidumbre.
 
-Esta formulación desplaza el énfasis del ranking hacia la admisibilidad. En lugar de preguntar únicamente qué método "gana", FOM-7 obliga a preguntar bajo qué métrica, con qué objeto explicativo, sobre qué unidad de análisis, con qué cobertura de artefactos, con qué prueba estadística y dentro de qué alcance empírico se sostiene una afirmación. Este desplazamiento es especialmente relevante cuando se comparan métodos heterogéneos. SHAP y LIME producen atribuciones; Anchors produce reglas; DiCE produce contrafactuales. Evaluarlos en una misma tabla puede ser útil, pero solo si el protocolo conserva las diferencias de objeto, las condiciones de comparabilidad y los límites de interpretación (Nauta et al., 2023; Bhattacharya & Verbert, 2024).
+La consecuencia metodológica es directa: antes de seleccionar un método XAI deben
+declararse la pregunta, la audiencia y la acción que la explicación pretende apoyar.
+Sin esa especificación, términos como “comprensible”, “útil” o “accionable” carecen
+de un criterio verificable. Una evaluación rigurosa debe distinguir, además, entre
+percepción subjetiva, comprensión demostrada, desempeño en una tarea y posibilidad
+de actuar. Son resultados relacionados, pero no equivalentes.
 
-La contribución metodológica de FOM-7 es, por tanto, convertir la auditabilidad en parte del diseño y no en un apéndice de reporte. Una celda experimental vacía, una salida malformada, una métrica aplicada fuera de su constructo o una comparación con unidades no homogéneas no son detalles menores: son condiciones que afectan la validez de la evidencia. En este sentido, FOM-7 opera como disciplina de formulación. No promete que toda explicación sea verdadera, causal o útil para cualquier usuario; exige que cada conclusión declare de dónde proviene, qué mide, qué excluye y hasta dónde puede generalizarse.
+## Explicabilidad, confianza y confiabilidad
 
-## Objetivo, alcance y contribución del capítulo
+La explicabilidad es una dimensión de la IA confiable, no un sustituto de las demás.
+El marco de gestión de riesgos de NIST sitúa explicabilidad e interpretabilidad junto
+con validez y fiabilidad, seguridad, resiliencia, privacidad, equidad, transparencia
+y rendición de cuentas; también advierte que estas características dependen del
+contexto y pueden entrar en tensión (Tabassi, 2023). Una explicación técnicamente
+fiel no corrige un conjunto de datos sesgado, no garantiza seguridad y no convierte
+una predicción en causal. Del mismo modo, una interfaz clara no compensa un modelo
+inválido para la población o el uso previstos.
 
-El objetivo del capítulo es presentar FOM-7 como protocolo de evaluación multi-métrica para métodos post-hoc agnósticos al modelo y mostrar su utilidad mediante un benchmark empírico sobre LIME, SHAP, Anchors y DiCE. El diseño se acota al conjunto UCI Adult Income, un problema tabular de clasificación binaria ampliamente utilizado en aprendizaje automático (Kohavi & Becker, 1996). La comparación se organiza sobre cinco familias de modelos, cinco semillas y tres tamaños de muestra, con métricas primarias de fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional.
+También debe distinguirse confianza de confianza calibrada. El objetivo no es elevar
+la aceptación del sistema, sino favorecer una dependencia proporcional a su
+competencia y a la evidencia disponible. Una explicación persuasiva puede aumentar
+la confianza aun cuando sea incompleta; una explicación compleja pero exacta puede
+no ayudar a una persona a decidir. La revisión sistemática de Kim et al. (2024)
+organiza la evaluación humana en dimensiones diferentes: calidad de la explicación
+en contexto, contribución a la interacción humano-IA y contribución al desempeño.
+Que una persona declare comprender o confiar en el sistema no demuestra por sí mismo
+que decida mejor.
 
-La contribución del capítulo es doble. En el plano conceptual, articula la discusión sobre opacidad, explicabilidad post-hoc, evaluación funcional y trazabilidad para sostener que la explicabilidad útil exige criterios de admisibilidad metodológica. En el plano empírico, muestra cómo FOM-7 permite interpretar un benchmark no como competencia cerrada entre explicadores, sino como construcción de perfiles explicativos. Bajo el alcance evaluado, SHAP aparece como método fuerte en fidelidad y estabilidad; LIME conserva ventajas de coste y concisión, pero con una limitación crítica de estabilidad; Anchors aporta reglas locales cuya utilidad exige atender precisión, cobertura y coste; y DiCE responde a una lógica contrafactual que no debe juzgarse únicamente como atribución de características.
+La evidencia experimental refuerza esta cautela. En las tareas estudiadas por
+Alufaisan et al. (2021), proporcionar una predicción de IA tendió a mejorar la
+exactitud humana, pero añadir información explicativa no produjo evidencia concluyente
+de una mejora adicional. En una serie de experimentos prerregistrados sobre modelos
+de precios de vivienda, Poursabzi-Sangdeh et al. (2021) observaron que un modelo claro
+y con pocas variables facilitaba simular sus predicciones, sin mejorar necesariamente
+el seguimiento apropiado de la recomendación; en condiciones concretas, la
+transparencia incluso dificultó detectar y corregir errores grandes. Estos resultados
+no prueban que las explicaciones nunca ayuden. Muestran que comprensión del modelo,
+confianza, corrección de errores y desempeño decisional deben medirse por separado y
+dentro de la tarea experimental que los produce.
 
-La tesis del capítulo es precisa: la evaluación de XAI debe pasar de explicaciones plausibles a evidencia auditable. Esta transición requiere métodos, métricas y herramientas, pero también requiere un protocolo que preserve la relación entre artefacto explicativo, constructo medido, prueba aplicada, resultado observado y afirmación publicable. FOM-7 ofrece esa estructura para el caso estudiado y, al mismo tiempo, declara sus propios límites: los resultados corresponden a Adult/tabular, a las configuraciones evaluadas y a métricas funcionales específicas. El valor de la propuesta no reside en afirmar un método universalmente dominante, sino en mostrar cómo formular conclusiones XAI que sean reproducibles, comparables y defendibles.
+## Supervisión, gobernanza y contestabilidad
 
-## Estructura del capítulo
+La importancia práctica de la XAI también se refleja en marcos de gobernanza que
+vinculan transparencia con uso apropiado y supervisión humana. Para los sistemas de
+alto riesgo dentro de su ámbito, el artículo 13 del Reglamento de Inteligencia
+Artificial de la Unión Europea exige un grado de transparencia que permita a los
+responsables del despliegue interpretar la salida y utilizarla adecuadamente; el
+artículo 14 relaciona la supervisión con comprender capacidades y límites, reconocer
+el sesgo de automatización y poder ignorar, revertir o interrumpir una salida cuando
+corresponda (European Parliament & Council of the European Union, 2024). Esta
+exigencia no prescribe un explicador universal ni demuestra la eficacia de una
+técnica concreta. Sí muestra que la interpretación debe integrarse con información
+sobre desempeño, limitaciones, documentación y capacidad real de intervención.
 
-La exposición se organiza en cinco movimientos. Primero, se establecen los fundamentos técnicos de la explicabilidad agnóstica al modelo y se distingue entre plausibilidad, fidelidad, estabilidad, utilidad humana y verdad causal. Segundo, se presentan LIME, SHAP, Anchors y DiCE como métodos que producen objetos explicativos heterogéneos. Tercero, se desarrolla la crisis de evaluación en XAI y se introduce FOM-7 como respuesta orientada a la gobernanza de evidencia. Cuarto, se describe el diseño empírico y se interpretan los resultados del benchmark como perfiles de método bajo condiciones controladas. Finalmente, se discuten implicaciones, limitaciones y líneas futuras. La lectura completa debe conservar una cautela central: el capítulo no pregunta solo qué explicación parece mejor, sino bajo qué condiciones una explicación puede tratarse como evidencia.
+La contestabilidad amplía esa lógica. Una explicación solo contribuye a impugnar una
+decisión si identifica un resultado concreto, se conecta con el proceso que puede
+revisarlo y no ofrece cambios imposibles como si fueran opciones reales. Por tanto,
+la gobernanza de explicaciones abarca más que su forma: incluye procedencia,
+responsabilidad, registro de versiones, conservación de evidencia y vías para actuar
+ante un error. En ausencia de esas condiciones, la explicación corre el riesgo de
+convertirse en una justificación unilateral del sistema.
+
+## Objetivo, tesis y recorrido del capítulo
+
+Este capítulo ofrece una síntesis científica y legible de los fundamentos, las
+aplicaciones emergentes y las principales brechas de la XAI, y presenta FOM-7 como
+una respuesta metodológica acotada al problema de evaluar comparativamente
+explicaciones post-hoc. Su pregunta rectora es: ¿bajo qué condiciones una explicación
+de un sistema de IA puede considerarse evidencia útil, reproducible y defendible para
+una audiencia y un propósito concretos?
+
+La tesis central es que una explicación no se convierte en evidencia por ser clara o
+convincente. Debe existir correspondencia entre la pregunta formulada, el objeto
+explicativo, el constructo evaluado, la audiencia, el diseño de prueba y el alcance de
+la afirmación. Desde esa tesis, el capítulo define primero qué es y qué no es XAI;
+examina después áreas de aplicación mediante ejemplos y límites; organiza las
+brechas técnicas, humanas, causales, operativas y de gobernanza; y finalmente presenta
+FOM-7 y el caso Adult/tabular como demostración de una evaluación funcionalmente
+fundamentada. El caso no establece un ranking universal de explicadores. Su función
+es mostrar cómo la trazabilidad y el control del diseño permiten distinguir una
+salida plausible de una afirmación empírica defendible.
