@@ -320,6 +320,21 @@ ya presentes en la bibliografía.
   artículo publicado en RIMI, del que M. Herrero-Uceda es coautor, aunque declinó la
   autoría del capítulo.
 
+## Corrección APA 7 (E-APA / R6): 2026-09-30
+
+Metadatos contrastados con Crossref, DataCite y las actas oficiales de NeurIPS.
+
+- `@arrieta2019` pasa a `@barredoarrieta2020`: Barredo Arrieta et al. (2020), *Information Fusion*, 58 (junio de 2020). Cita en texto actualizada (sección 02).
+- `@kohavi1996` pasa a `@becker1996`: Becker y Kohavi (1996), *Adult* [Conjunto de datos], DOI 10.24432/C5XW20 (DataCite). Cita en texto actualizada (sección 08).
+- `@schwalbe2023`: año del número, 2024 (vol. 38, núm. 5, pp. 3043-3101). Cita en texto actualizada (sección 03).
+- `@lundberg2017`: actas de NeurIPS (*Advances in Neural Information Processing Systems*, vol. 30), coautor "Lee, S.-I."; páginas omitidas por no figurar en la página oficial consultada.
+- `@agarwal2022`: versión publicada en NeurIPS 2022 (vol. 35, pp. 15784-15799, DOI 10.52202/068431-1148); lista de ocho autores de la versión publicada (la versión arXiv incluía un autor adicional).
+- Páginas o artículo añadidos: Canha et al. (pp. 1-40), Ribeiro et al. 2016 (pp. 1135-1144), Mothilal et al. (pp. 607-617), Bhattacharya y Verbert (actas *Adjunct*, pp. 513-515), Marcinkevičs y Vogt (artículo e1493).
+- Convenciones en español: "En" en lugar de "In", "Artículo" en lugar de "Article", "[Tesis doctoral, ...]" y "[Conjunto de datos]"; guion corto (–) en rangos de páginas.
+- Retiradas por falta de cita: Adadi y Berrada (2018), Belle y Papantonis (2021). La lista queda en 55 entradas; el cotejo sobre el DOCX construido no muestra referencias sin cita ni citas sin referencia.
+- Sin verificar externamente: Zheng et al. (2025), cuyo registro en ICLR/OpenReview no fue accesible por bloqueo de acceso automatizado; se conserva la entrada existente.
+- Sin cambio: Wachter et al. (2017) se mantiene en su versión SSRN para no alterar las citas de las secciones en redacción.
+
 ## Referencias sin cita en texto
 
 Tras las pasadas de redacción controlada, las referencias fundacionales y de evaluación más relevantes ya se citan en el manuscrito. Antes del envío debe ejecutarse una revisión final para detectar entradas remanentes en `references/references.bib` que no aparezcan en `manuscript/*.md`.

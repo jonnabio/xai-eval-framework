@@ -2,107 +2,103 @@
 
 Estado: lista de trabajo para la versión técnica v2. Requiere revisión editorial final de capitalización, cursivas, sangrías francesas y DOI/URL antes de envío.
 
-Adadi, A., & Berrada, M. (2018). Peeking inside the black-box: A survey on explainable artificial intelligence (XAI). *IEEE Access, 6*, 52138-52160. https://doi.org/10.1109/access.2018.2870052
-
-Agarwal, C., Ley, D., Krishna, S., Saxena, E., Pawelczyk, M., Johnson, N., Puri, I., Zitnik, M., & Lakkaraju, H. (2022). OpenXAI: Towards a transparent evaluation of model explanations. In *Advances in Neural Information Processing Systems (NeurIPS)*. NeurIPS. https://arxiv.org/abs/2206.11104
+Agarwal, C., Krishna, S., Saxena, E., Pawelczyk, M., Johnson, N., Puri, I., Zitnik, M., & Lakkaraju, H. (2022). OpenXAI: Towards a transparent evaluation of model explanations. En *Advances in Neural Information Processing Systems* (Vol. 35, pp. 15784–15799). https://doi.org/10.52202/068431-1148
 
 Ali, S., Abuhmed, T., El-Sappagh, S., Muhammad, K., Alonso-Moral, J. M., Confalonieri, R., Guidotti, R., Del Ser, J., Díaz-Rodríguez, N., & Herrera, F. (2023). Explainable artificial intelligence (XAI): What we know and what is left to attain trustworthy artificial intelligence. *Information Fusion, 99*, 101805. https://doi.org/10.1016/j.inffus.2023.101805
 
-Alufaisan, Y., Marusich, L. R., Bakdash, J. Z., Zhou, Y., & Kantarcioglu, M. (2021). Does explainable artificial intelligence improve human decision-making? *Proceedings of the AAAI Conference on Artificial Intelligence, 35*(8), 6618-6626. https://doi.org/10.1609/aaai.v35i8.16819
+Alufaisan, Y., Marusich, L. R., Bakdash, J. Z., Zhou, Y., & Kantarcioglu, M. (2021). Does explainable artificial intelligence improve human decision-making? *Proceedings of the AAAI Conference on Artificial Intelligence, 35*(8), 6618–6626. https://doi.org/10.1609/aaai.v35i8.16819
 
 Alvarez-Melis, D., & Jaakkola, T. S. (2018). *On the robustness of interpretability methods*. arXiv. https://arxiv.org/abs/1806.08049
 
-Arrieta, A. B., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., Garcia, S., Gil-Lopez, S., Molina, D., Benjamins, R., Chatila, R., & Herrera, F. (2019). Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information Fusion, 58*, 82-115. https://doi.org/10.1016/j.inffus.2019.12.012
+Barredo Arrieta, A., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., Garcia, S., Gil-Lopez, S., Molina, D., Benjamins, R., Chatila, R., & Herrera, F. (2020). Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information Fusion, 58*, 82–115. https://doi.org/10.1016/j.inffus.2019.12.012
 
-Belle, V., & Papantonis, I. (2021). Principles and practice of explainable machine learning. *Frontiers in Big Data, 4*. https://doi.org/10.3389/fdata.2021.688969
+Becker, B., & Kohavi, R. (1996). *Adult* [Conjunto de datos]. UCI Machine Learning Repository. https://doi.org/10.24432/C5XW20
 
-Bhattacharya, A., & Verbert, K. (2024). How good is your explanation? Towards a standardised evaluation approach for diverse XAI methods on multiple dimensions of explainability. In *Proceedings of the 32nd ACM Conference on User Modeling, Adaptation and Personalization (UMAP Adjunct '24)*. https://doi.org/10.1145/3631700.3664911
+Bhattacharya, A., & Verbert, K. (2024). How good is your explanation? Towards a standardised evaluation approach for diverse XAI methods on multiple dimensions of explainability. En *Adjunct Proceedings of the 32nd ACM Conference on User Modeling, Adaptation and Personalization* (pp. 513–515). Association for Computing Machinery. https://doi.org/10.1145/3631700.3664911
 
-Breiman, L. (2001). Random forests. *Machine Learning, 45*(1), 5-32. https://doi.org/10.1023/a:1010933404324
+Breiman, L. (2001). Random forests. *Machine Learning, 45*(1), 5–32. https://doi.org/10.1023/a:1010933404324
 
-Burger, C., Chen, L., & Le, T. (2023). Are your explanations reliable? Investigating the stability of LIME in explaining text classifiers by marrying XAI and adversarial attack. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing* (pp. 12931-12944). https://doi.org/10.18653/v1/2023.emnlp-main.792
+Burger, C., Chen, L., & Le, T. (2023). Are your explanations reliable? Investigating the stability of LIME in explaining text classifiers by marrying XAI and adversarial attack. En *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing* (pp. 12931–12944). https://doi.org/10.18653/v1/2023.emnlp-main.792
 
-Canha, D., Kubler, S., Främling, K., & Fagherazzi, G. (2025). A functionally-grounded benchmark framework for XAI methods: Insights and foundations from a systematic literature review. *ACM Computing Surveys, 57*(12). https://doi.org/10.1145/3737445
+Canha, D., Kubler, S., Främling, K., & Fagherazzi, G. (2025). A functionally-grounded benchmark framework for XAI methods: Insights and foundations from a systematic literature review. *ACM Computing Surveys, 57*(12), 1–40. https://doi.org/10.1145/3737445
 
 Carvalho, D. V., Pereira, E. M., & Cardoso, J. S. (2019). Machine learning interpretability: A survey on methods and metrics. *Electronics, 8*(8), 832. https://doi.org/10.3390/electronics8080832
 
-Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research, 7*, 1-30. https://www.jmlr.org/papers/v7/demsar06a.html
+Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research, 7*, 1–30. https://www.jmlr.org/papers/v7/demsar06a.html
 
 Doshi-Velez, F., & Kim, B. (2017). *Towards a rigorous science of interpretable machine learning*. arXiv. https://doi.org/10.48550/arXiv.1702.08608
 
 European Parliament & Council of the European Union. (2024). Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence. *Official Journal of the European Union, L*, 2024/1689. https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 
-Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. *Journal of the American Statistical Association, 32*(200), 675-701. https://doi.org/10.1080/01621459.1937.10503522
+Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. *Journal of the American Statistical Association, 32*(200), 675–701. https://doi.org/10.1080/01621459.1937.10503522
 
 Ghassemi, M., Oakden-Rayner, L., & Beam, A. L. (2021). The false hope of current approaches to explainable artificial intelligence in health care. *The Lancet Digital Health, 3*(11), e745–e750. https://doi.org/10.1016/S2589-7500(21)00208-9
 
-Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi, D. (2018). A survey of methods for explaining black box models. *ACM Computing Surveys, 51*(5), 1-42. https://doi.org/10.1145/3236009
+Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi, D. (2018). A survey of methods for explaining black box models. *ACM Computing Surveys, 51*(5), 1–42. https://doi.org/10.1145/3236009
 
-Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., & Höhne, M. M.-C. (2023). Quantus: An explainable AI toolkit for responsible evaluation of neural network explanations and beyond. *Journal of Machine Learning Research, 24*(34), 1-11. https://www.jmlr.org/papers/v24/22-0142.html
+Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., & Höhne, M. M.-C. (2023). Quantus: An explainable AI toolkit for responsible evaluation of neural network explanations and beyond. *Journal of Machine Learning Research, 24*(34), 1–11. https://www.jmlr.org/papers/v24/22-0142.html
 
 Herrera-Vásquez, J. (2026). *Arquitectura agnóstica para la interpretabilidad de modelos de inteligencia artificial de caja negra: Integración de benchmarking técnico, protocolo reproducible (FOM-7) y taxonomía de métricas* [Tesis doctoral no publicada]. Universidad Americana de Europa.
 
 Herrera-Vásquez, J., & Herrero-Uceda, M. (2026). A framework for rigorous evaluation of model-agnostic explainability methods: Multi-metric statistical benchmarking, operational protocol, and reproducibility. *Revista de Investigación Multidisciplinaria Iberoamericana*, (3). https://doi.org/10.69850/rimi.vi3.307
 
-Kadir, M. A., Mosavi, A., & Sonntag, D. (2023). Evaluation metrics for XAI: A review, taxonomy, and practical applications. In *2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)* (pp. 111-124). IEEE. https://doi.org/10.1109/INES59282.2023.10297629
+Kadir, M. A., Mosavi, A., & Sonntag, D. (2023). Evaluation metrics for XAI: A review, taxonomy, and practical applications. En *2023 IEEE 27th International Conference on Intelligent Engineering Systems (INES)* (pp. 111–124). IEEE. https://doi.org/10.1109/INES59282.2023.10297629
 
-Karimi, A.-H., Barthe, G., Schölkopf, B., & Valera, I. (2022). A survey of algorithmic recourse: Contrastive explanations and consequential recommendations. *ACM Computing Surveys, 55*(5), 1-29. https://doi.org/10.1145/3527848
+Karimi, A.-H., Barthe, G., Schölkopf, B., & Valera, I. (2022). A survey of algorithmic recourse: Contrastive explanations and consequential recommendations. *ACM Computing Surveys, 55*(5), 1–29. https://doi.org/10.1145/3527848
 
-Kaufman, R. A., Broukhim, A., Kirsh, D., & Weibel, N. (2025). What did my car say? Impact of autonomous vehicle explanation errors and driving context on comfort, reliance, satisfaction, and driving confidence. In *Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems* (Article 89, pp. 1–17). Association for Computing Machinery. https://doi.org/10.1145/3706598.3713088
+Kaufman, R. A., Broukhim, A., Kirsh, D., & Weibel, N. (2025). What did my car say? Impact of autonomous vehicle explanation errors and driving context on comfort, reliance, satisfaction, and driving confidence. En *Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems* (Artículo 89, pp. 1–17). Association for Computing Machinery. https://doi.org/10.1145/3706598.3713088
 
-Kim, J., Maathuis, H., & Sent, D. (2024). Human-centered evaluation of explainable AI applications: A systematic review. *Frontiers in Artificial Intelligence, 7*, Article 1456486. https://doi.org/10.3389/frai.2024.1456486
-
-Kohavi, R., & Becker, B. (1996). *Adult data set*. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/2/adult
+Kim, J., Maathuis, H., & Sent, D. (2024). Human-centered evaluation of explainable AI applications: A systematic review. *Frontiers in Artificial Intelligence, 7*, Artículo 1456486. https://doi.org/10.3389/frai.2024.1456486
 
 Kuznietsov, A., Gyevnar, B., Wang, C., Peters, S., & Albrecht, S. V. (2024). Explainable AI for safe and trustworthy autonomous driving: A systematic review. *IEEE Transactions on Intelligent Transportation Systems, 25*(12), 19342–19364. https://doi.org/10.1109/TITS.2024.3474469
 
-Lakkaraju, H., Arsov, N., & Bastani, O. (2020). Robust and stable black box explanations. In *Proceedings of the 37th International Conference on Machine Learning* (Vol. 119, pp. 5628–5638). PMLR. https://proceedings.mlr.press/v119/lakkaraju20a.html
+Lakkaraju, H., Arsov, N., & Bastani, O. (2020). Robust and stable black box explanations. En *Proceedings of the 37th International Conference on Machine Learning* (Vol. 119, pp. 5628–5638). PMLR. https://proceedings.mlr.press/v119/lakkaraju20a.html
 
-Laugel, T., Lesot, M.-J., Marsala, C., Renard, X., & Detyniecki, M. (2019). The dangers of post-hoc interpretability: Unjustified counterfactual explanations. In *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence* (pp. 2801-2807). https://doi.org/10.24963/ijcai.2019/388
+Laugel, T., Lesot, M.-J., Marsala, C., Renard, X., & Detyniecki, M. (2019). The dangers of post-hoc interpretability: Unjustified counterfactual explanations. En *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence* (pp. 2801–2807). https://doi.org/10.24963/ijcai.2019/388
 
-Lipton, Z. C. (2018). The mythos of model interpretability. *Queue, 16*(3), 31-57. https://doi.org/10.1145/3236386.3241340
+Lipton, Z. C. (2018). The mythos of model interpretability. *Queue, 16*(3), 31–57. https://doi.org/10.1145/3236386.3241340
 
-Lundberg, S. M., & Lee, S. (2017). A unified approach to interpreting model predictions. *arXiv*. https://doi.org/10.48550/arXiv.1705.07874
+Lundberg, S. M., & Lee, S.-I. (2017). A unified approach to interpreting model predictions. En *Advances in Neural Information Processing Systems* (Vol. 30). https://proceedings.neurips.cc/paper_files/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html
 
-Marcinkevičs, R., & Vogt, J. E. (2023). Interpretable and explainable machine learning: A methods-centric overview with concrete examples. *WIREs Data Mining and Knowledge Discovery, 13*(3). https://doi.org/10.1002/widm.1493
+Marcinkevičs, R., & Vogt, J. E. (2023). Interpretable and explainable machine learning: A methods-centric overview with concrete examples. *WIREs Data Mining and Knowledge Discovery, 13*(3), Artículo e1493. https://doi.org/10.1002/widm.1493
 
-Miller, T. (2019). Explanation in artificial intelligence: Insights from the social sciences. *Artificial Intelligence, 267*, 1-38. https://doi.org/10.1016/j.artint.2018.07.007
+Miller, T. (2019). Explanation in artificial intelligence: Insights from the social sciences. *Artificial Intelligence, 267*, 1–38. https://doi.org/10.1016/j.artint.2018.07.007
 
-Mothilal, R. K., Sharma, A., & Tan, C. (2020). Explaining machine learning classifiers through diverse counterfactual explanations. In *FAT* '20: Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency*. https://doi.org/10.1145/3351095.3372850
+Mothilal, R. K., Sharma, A., & Tan, C. (2020). Explaining machine learning classifiers through diverse counterfactual explanations. En *Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency* (pp. 607–617). Association for Computing Machinery. https://doi.org/10.1145/3351095.3372850
 
-Murdoch, W. J., Singh, C., Kumbier, K., Abbasi-Asl, R., & Yu, B. (2019). Definitions, methods, and applications in interpretable machine learning. *Proceedings of the National Academy of Sciences, 116*(44), 22071-22080. https://doi.org/10.1073/pnas.1900654116
+Murdoch, W. J., Singh, C., Kumbier, K., Abbasi-Asl, R., & Yu, B. (2019). Definitions, methods, and applications in interpretable machine learning. *Proceedings of the National Academy of Sciences, 116*(44), 22071–22080. https://doi.org/10.1073/pnas.1900654116
 
-Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y., Schlötterer, J., van Keulen, M., & Seifert, C. (2023). From anecdotal evidence to quantitative evaluation methods: A systematic review on evaluating explainable AI. *ACM Computing Surveys, 55*(13s), 1-42. https://doi.org/10.1145/3583558
+Nauta, M., Trienes, J., Pathak, S., Nguyen, E., Peters, M., Schmitt, Y., Schlötterer, J., van Keulen, M., & Seifert, C. (2023). From anecdotal evidence to quantitative evaluation methods: A systematic review on evaluating explainable AI. *ACM Computing Surveys, 55*(13s), 1–42. https://doi.org/10.1145/3583558
 
-Nemenyi, P. B. (1963). *Distribution-free multiple comparisons* [Doctoral dissertation, Princeton University]. https://catalog.princeton.edu/catalog/2081365
+Nemenyi, P. B. (1963). *Distribution-free multiple comparisons* [Tesis doctoral, Princeton University]. https://catalog.princeton.edu/catalog/2081365
 
 Pawlicki, M., Pawlicka, A., Uccello, F., Szelest, S., D'Antonio, S., Kozik, R., & Choraś, M. (2024). Evaluating the necessity of the multiple metrics for assessing explainable AI: A critical examination. *Neurocomputing, 602*, 128282. https://doi.org/10.1016/j.neucom.2024.128282
 
 Phillips, P. J., Hahn, C. A., Fontana, P. C., Yates, A. N., Greene, K. K., Broniatowski, D. A., & Przybocki, M. A. (2021). *Four principles of explainable artificial intelligence* (NISTIR 8312). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.IR.8312
 
-Poursabzi-Sangdeh, F., Goldstein, D. G., Hofman, J. M., Vaughan, J. W., & Wallach, H. (2021). Manipulating and measuring model interpretability. In *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems* (Article 237, pp. 1-52). Association for Computing Machinery. https://doi.org/10.1145/3411764.3445315
+Poursabzi-Sangdeh, F., Goldstein, D. G., Hofman, J. M., Vaughan, J. W., & Wallach, H. (2021). Manipulating and measuring model interpretability. En *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems* (Artículo 237, pp. 1–52). Association for Computing Machinery. https://doi.org/10.1145/3411764.3445315
 
-Poyiadzi, R., Sokol, K., Santos-Rodriguez, R., De Bie, T., & Flach, P. (2020). FACE: Feasible and actionable counterfactual explanations. In *Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society* (pp. 344-350). https://doi.org/10.1145/3375627.3375850
+Poyiadzi, R., Sokol, K., Santos-Rodriguez, R., De Bie, T., & Flach, P. (2020). FACE: Feasible and actionable counterfactual explanations. En *Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society* (pp. 344–350). https://doi.org/10.1145/3375627.3375850
 
-Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?": Explaining the predictions of any classifier. *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*. https://doi.org/10.1145/2939672.2939778
+Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?": Explaining the predictions of any classifier. En *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining* (pp. 1135–1144). Association for Computing Machinery. https://doi.org/10.1145/2939672.2939778
 
 Ribeiro, M. T., Singh, S., & Guestrin, C. (2018). Anchors: High-precision model-agnostic explanations. *Proceedings of the AAAI Conference on Artificial Intelligence, 32*(1). https://doi.org/10.1609/aaai.v32i1.11491
 
 Rjoub, G., Bentahar, J., Abdel Wahab, O., Mizouni, R., Song, A., Cohen, R., Otrok, H., & Mourad, A. (2023). A survey on explainable artificial intelligence for cybersecurity. *IEEE Transactions on Network and Service Management, 20*(4), 5115–5140. https://doi.org/10.1109/TNSM.2023.3282740
 
-Roch, N., Sievers, H., Zufferey, N., & Zimmermann, V. (2026). You know why, but still rely: The impact of explainable AI on trust, task load, and performance in cybersecurity decision-making. In *35th USENIX Security Symposium (USENIX Security 26)* (pp. 1607–1625). USENIX Association. https://www.usenix.org/conference/usenixsecurity26/presentation/roch
+Roch, N., Sievers, H., Zufferey, N., & Zimmermann, V. (2026). You know why, but still rely: The impact of explainable AI on trust, task load, and performance in cybersecurity decision-making. En *35th USENIX Security Symposium (USENIX Security 26)* (pp. 1607–1625). USENIX Association. https://www.usenix.org/conference/usenixsecurity26/presentation/roch
 
-Rudin, C., Chen, C., Chen, Z., Huang, H., Semenova, L., & Zhong, C. (2022). Interpretable machine learning: Fundamental principles and 10 grand challenges. *Statistics Surveys, 16*, 1-85. https://doi.org/10.1214/21-ss133
+Rudin, C., Chen, C., Chen, Z., Huang, H., Semenova, L., & Zhong, C. (2022). Interpretable machine learning: Fundamental principles and 10 grand challenges. *Statistics Surveys, 16*, 1–85. https://doi.org/10.1214/21-ss133
 
-Schwalbe, G., & Finzel, B. (2023). A comprehensive taxonomy for explainable artificial intelligence: A systematic survey of surveys on methods and concepts. *Data Mining and Knowledge Discovery, 38*(5), 3043-3101. https://doi.org/10.1007/s10618-022-00867-8
+Schwalbe, G., & Finzel, B. (2024). A comprehensive taxonomy for explainable artificial intelligence: A systematic survey of surveys on methods and concepts. *Data Mining and Knowledge Discovery, 38*(5), 3043–3101. https://doi.org/10.1007/s10618-022-00867-8
 
-Slack, D., Hilgard, S., Jia, E., Singh, S., & Lakkaraju, H. (2020). Fooling LIME and SHAP: Adversarial attacks on post hoc explanation methods. In *Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society* (pp. 180-186). https://doi.org/10.1145/3375627.3375830
+Slack, D., Hilgard, S., Jia, E., Singh, S., & Lakkaraju, H. (2020). Fooling LIME and SHAP: Adversarial attacks on post hoc explanation methods. En *Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society* (pp. 180–186). https://doi.org/10.1145/3375627.3375830
 
 Tabassi, E. (2023). *Artificial intelligence risk management framework (AI RMF 1.0)* (NIST AI 100-1). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.AI.100-1
 
 Turpin, M., Michael, J., Perez, E., & Bowman, S. R. (2023). Language models don't always say what they think: Unfaithful explanations in chain-of-thought prompting. *Advances in Neural Information Processing Systems, 36*, 74952–74965. https://doi.org/10.52202/075280-3275
 
-Van den Broeck, G., Lykov, A., Schleich, M., & Suciu, D. (2022). On the tractability of SHAP explanations. *Journal of Artificial Intelligence Research, 74*, 851-886. https://doi.org/10.1613/jair.1.13283
+Van den Broeck, G., Lykov, A., Schleich, M., & Suciu, D. (2022). On the tractability of SHAP explanations. *Journal of Artificial Intelligence Research, 74*, 851–886. https://doi.org/10.1613/jair.1.13283
 
 Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. *SSRN Electronic Journal*. https://doi.org/10.2139/ssrn.3063289
 
@@ -110,8 +106,8 @@ Weber, P., Carl, K. V., & Hinz, O. (2024). Applications of explainable artificia
 
 World Health Organization. (2021). *Ethics and governance of artificial intelligence for health: WHO guidance*. https://www.who.int/publications/i/item/9789240029200
 
-Zaman, K., & Srivastava, S. (2026). Is chain-of-thought really not explainability? Chain-of-thought can be faithful without hint verbalization. In *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)* (pp. 48008–48030). Association for Computational Linguistics. https://doi.org/10.18653/v1/2026.acl-long.2217
+Zaman, K., & Srivastava, S. (2026). Is chain-of-thought really not explainability? Chain-of-thought can be faithful without hint verbalization. En *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)* (pp. 48008–48030). Association for Computational Linguistics. https://doi.org/10.18653/v1/2026.acl-long.2217
 
-Zhao, H., Chen, H., Yang, F., Liu, N., Deng, H., Cai, H., Wang, S., Yin, D., & Du, M. (2024). Explainability for large language models: A survey. *ACM Transactions on Intelligent Systems and Technology, 15*(2), Article 20, 1–38. https://doi.org/10.1145/3639372
+Zhao, H., Chen, H., Yang, F., Liu, N., Deng, H., Cai, H., Wang, S., Yin, D., & Du, M. (2024). Explainability for large language models: A survey. *ACM Transactions on Intelligent Systems and Technology, 15*(2), Artículo 20, 1–38. https://doi.org/10.1145/3639372
 
 Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., & Luo, D. (2025). F-FIDELITY: A robust framework for faithfulness evaluation of explainable AI. *ICLR 2025 Proceedings*. https://trustai4s-lab.github.io/ffidelity

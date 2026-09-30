@@ -269,6 +269,7 @@ Size log (append one row per big edit):
 | 2026-09-30 | Baseline (`06267988c`) | 20,903 | | 83 | |
 | 2026-09-30 | E-PRIOR-1 + E-AUTH-1 | 20,434 | -469 | 81 | 06 (+2), 07 (-166), 08 (-172), 11 (-22), Table 4 (-111) |
 | 2026-09-30 | P-CASE structure (files 05-08) | 20,424 | -10 | 82 | 05 3,296; 06 1,136 (starting material); 07 2,399 (FOM-7); 08 3,901 (design + results) |
+| 2026-09-30 | E-APA / R6 (references only) | 20,424 | 0 | 82 | in-text citation edits in 02, 03, 08; reference list 55 entries |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 

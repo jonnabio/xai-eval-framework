@@ -12,8 +12,8 @@ información utilizó, bajo qué condiciones puede fallar, quién debe supervisa
 evidencia permite cuestionar su resultado. La inteligencia artificial explicable
 (*explainable artificial intelligence*, XAI) adquiere relevancia en ese tránsito: no
 como ornamento comunicativo añadido a un modelo, sino como conjunto de recursos para
-investigar, justificar y delimitar su comportamiento en un contexto de uso (Arrieta
-et al., 2019; Ali et al., 2023).
+investigar, justificar y delimitar su comportamiento en un contexto de uso (Barredo Arrieta
+et al., 2020; Ali et al., 2023).
 
 Esta función no se reduce a “abrir” una caja negra. Un sistema puede documentar su
 arquitectura y seguir siendo difícil de comprender para quien toma una decisión; a la

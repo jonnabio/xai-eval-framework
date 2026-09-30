@@ -8,7 +8,7 @@ comportamiento o las salidas de un sistema de IA puedan ser examinados por perso
 con una finalidad concreta. Las taxonomías del campo incluyen modelos interpretables
 por diseño, explicadores post-hoc, descripciones locales y globales, atribuciones,
 reglas, ejemplos, contrafactuales, conceptos y visualizaciones, entre otros objetos
-(Guidotti et al., 2018; Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2023). Hablar de
+(Guidotti et al., 2018; Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2024). Hablar de
 XAI, por tanto, exige precisar qué se explica, para quién, con qué propósito y mediante
 qué evidencia se evaluará la explicación.
 
