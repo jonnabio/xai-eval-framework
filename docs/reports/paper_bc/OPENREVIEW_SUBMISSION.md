@@ -65,7 +65,12 @@ present (it is gitignored, so copy it in from the main worktree if missing).
 Since 2026-09-27: review fixes F01–F19 (except F10), the author name form,
 "UCI Adult census-income dataset" in the abstract, and the equation revision
 (numbered equations, every term defined, Bhatt et al. 2020 and Samek et al.
-2017 added).
+2017 added). Re-run the same day after §8 was corrected: the anonymous build
+now lists bundle paths (every listed path checked present in the bundle)
+instead of repository paths, and no longer says the corpus full texts are
+released alongside while saying they are not shipped. The de-anonymised build
+keeps the repository paths and the archived-release DOI; built once, read,
+discarded.
 
 | Step | Result |
 | ---- | ------ |
