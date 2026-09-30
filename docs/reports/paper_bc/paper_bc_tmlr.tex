@@ -1530,6 +1530,7 @@ The manuscript, experimental code, and supporting materials are available
 \url{https://github.com/jonnabio/xai-eval-framework}}%
 {in the anonymised artifact bundle supplied as supplementary material with
 this submission}, released under the MIT License. Artifacts needed to reproduce the empirical study include:
+\ifdeanonymised
 \begin{sloppypar}
 \begin{itemize}[leftmargin=*]
 \item EXP2 results: \path{experiments/exp2_scaled/results/}
@@ -1555,14 +1556,44 @@ The review corpus underlying the taxonomy and gap analysis is released as
 \path{docs/reports/paper_bc/paper_bc_review_corpus.csv}, with the retrieved
 full texts under \path{docs/reports/paper_bc/corpus_pdfs/} and per-paper
 provenance in \path{docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md}.
+The repository and its archived release,
+\url{https://doi.org/10.5281/zenodo.21538180}, also hold the raw EXP2 run
+tree.
+\else
+\begin{sloppypar}
+\begin{itemize}[leftmargin=*]
+\item Supplementary Tables S1--S6: \path{supplementary_tables.pdf}
+\item EXP2 inferential exports: \path{analysis/exp2_stats/}
+(includes \path{analysis_summary.json},
+\path{wilcoxon_shap_lime_all_models.csv},
+\path{paired_cells_shap_lime_all_models.csv})
+\item EXP3 results: \path{experiments/exp3_cross_dataset/results/}
+(with LIME extension exports in \path{analysis/exp3_lime_results.csv})
+\item EXP4 ICC exports: \path{analysis/exp4_llm_evaluation/}
+(original cohort) and \path{analysis/exp4_cohort2/} (replication),
+with the replication's case inventory, prompts and raw judge responses in
+\path{experiments/exp4_cohort2/}
+\item EXP6 masking-sensitivity exports:
+\path{analysis/exp6_masking_sensitivity/}
+\item analysis scripts: \path{scripts/run_exp2_statistical_analysis.py},
+\path{scripts/generate_paper_b_figures.py},
+\path{scripts/run_exp6_masking_sensitivity.py}
+\item review corpus: \path{review_corpus/review_corpus.csv}, with a
+per-paper source and verification record in
+\path{review_corpus/RETRIEVAL_LOG.md}
+\end{itemize}
+\end{sloppypar}
+Paths are relative to the root of the bundle, whose \path{README.md}
+describes each folder.
 
-The supplementary bundle contains every artifact from which a number in this
-paper is computed, and each reported value re-derives from it. Two items are
+The bundle contains every artifact from which a number in this paper is
+computed, and each reported value re-derives from it. Two items are
 described but not shipped: the raw EXP2 run tree, which exceeds the
 supplementary size limit and whose analysis exports are included in its place,
-and the review corpus full texts, which are third-party publications. Both are
-in the archived release, \ifdeanon{\url{https://doi.org/10.5281/zenodo.21538180}}%
-{whose DOI is given in the camera-ready version}.
+and the full texts of the review corpus, which are third-party publications.
+Both are in the archived release, whose DOI is given in the camera-ready
+version.
+\fi
 
 % -----------------------------------------------------------------------
 % -----------------------------------------------------------------------
