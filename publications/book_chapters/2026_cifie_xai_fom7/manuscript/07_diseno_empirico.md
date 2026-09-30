@@ -50,7 +50,7 @@ Las instancias se seleccionan mediante muestreo estratificado por cuadrante de e
 
 El tamaño nominal de una ejecución depende del número de instancias por cuadrante, aunque la disponibilidad real puede variar por modelo y estrato. En la tesis, el rango observado va de 27 a 800 instancias por ejecución, con mediana de 400. Esta variación no invalida el diseño porque la inferencia se realiza sobre agregados controlados, no sobre instancias tratadas como réplicas independientes. Además, la estratificación por cuadrante de error permite que cada explicador sea examinado en condiciones de decisión más ricas que una muestra aleatoria simple del conjunto de prueba.
 
-![Figura 1. Cobertura analítica EXP2 por modelo y método. Fuente: figura derivada de `thesis/assets/figures/fig_cobertura_exp2_es.png`.](../figures/exported/fig_cobertura_exp2_es.png)
+![Figura 1. Cobertura analítica EXP2 por modelo y método. Fuente: elaboración propia a partir del inventario de celdas calificadas de EXP2.](../figures/exported/fig_cobertura_exp2_es.png)
 
 ## Configuración de explicadores
 
