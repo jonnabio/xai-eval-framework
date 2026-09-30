@@ -203,7 +203,7 @@ valid only on a Word render (see the Render gate).
 | R1 | Done 2026-09-29 | `3f8789bad` (registry), `2df96d15a` (manuscript) | H1, H2, M1-M5 corrected. New guard `A05.lime.cost.chapter` negative-tested; new claim `exp2.run.lime.model_mean.rf.cost` (436 ms). 321 claims / 496 sites / 46 retired-value guards. |
 | R2 | Done 2026-09-29 | `a32c36d0e` | Drafting voice, repository vocabulary, code blocks and undefined labels removed; device kept once (section 06). Word render checked. |
 | R3 (applications) | Done 2026-09-29 | `465ec28dc` (registry), `e4005b2a9` (chapter) | Section 04 written in file 04 (five domains, each with a near-term horizon, plus a synthesis); the method families moved to file 05 without benchmark numbers, followed by the evaluation problem. Eleven verified sources promoted (59 references). Cited-versus-listed check on the built DOCX clean except the two known R6 orphans. Build: about 20,900 source words, 83 pages in Word. |
-| R3 (gaps) | Open | | Section 06, the field-gap taxonomy: the next drafting unit. It moves FOM-7 to file 07 and the design to file 08, so it is a structural unit like section 04. |
+| R3 (gaps) | Structure done 2026-09-30; prose with the author | see git log | Files restructured (05 method families + evaluation problem; 06 gap-section starting material; 07 FOM-7; 08 design + results). Writing brief: `planning/section06_gaps_brief_2026-09-30.md` (seven gaps with claims, evidence and boundaries, reuse map, FOM-7 scope, section 08 compression list). The author writes section 06 (E-AI-1). |
 | R4-R7 | Open | | |
 
 Open from R0: the empty-header non-determinism in `format_academic_text` is
@@ -268,6 +268,7 @@ Size log (append one row per big edit):
 | --- | --- | ---: | ---: | ---: | --- |
 | 2026-09-30 | Baseline (`06267988c`) | 20,903 | | 83 | |
 | 2026-09-30 | E-PRIOR-1 + E-AUTH-1 | 20,434 | -469 | 81 | 06 (+2), 07 (-166), 08 (-172), 11 (-22), Table 4 (-111) |
+| 2026-09-30 | P-CASE structure (files 05-08) | 20,424 | -10 | 82 | 05 3,296; 06 1,136 (starting material); 07 2,399 (FOM-7); 08 3,901 (design + results) |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
