@@ -14,6 +14,12 @@ a marker line `<!-- TABLA: <file>.md -->` in the manuscript. The build fails
 if a marker names a missing file, if a table file is placed twice, or if a
 table file is never placed.
 
+Requirements: pandoc (bundled with Quarto), python-docx and Pillow. The
+figures are not drawn here: fig_cd_diagram_es.png comes from
+scripts/generate_cifie_chapter_figures.py and the other five from
+scripts/generate_spanish_thesis_figures.py (both need matplotlib and pandas);
+see figures/figure_registry.md.
+
 Usage: python scripts/build_cifie_chapter.py [--out PATH]
 """
 from __future__ import annotations
@@ -374,7 +380,8 @@ def main() -> int:
     monochrome_embedded_images(args.out)
 
     words = len(re.findall(r"\w+", body))
-    print(f"OK: {len(sections)} sections, {n_tables} tables, ~{words} words -> {args.out.relative_to(ROOT).as_posix()}")
+    shown = args.out.relative_to(ROOT) if args.out.is_relative_to(ROOT) else args.out
+    print(f"OK: {len(sections)} sections, {n_tables} tables, ~{words} words -> {shown.as_posix()}")
     return 0
 
 
