@@ -1,7 +1,12 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-28
+- **Last Updated:** 2026-09-29
+- **Mode (2026-09-29):** HANDOFF - the CIFIE science-first drafting pass,
+  literature enrichment, empirical-figure provenance, and formatted Word build
+  were committed on `chapter/cifie-sync-2026-09` and merged to `main`. The
+  active objective remains Task 3 / RCA-001 Phase 2 on the thesis lane. See
+  "Session Handoff - 2026-09-29 (CIFIE drafting and Word delivery)".
 - **Mode (2026-09-28, third session):** HANDOFF - the CIFIE science-first
   assessment, evidence staging, and production scaffold are complete on
   `chapter/cifie-sync-2026-09`. The active objective returns to Task 3 / RCA-001
@@ -1611,3 +1616,30 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
   written at the top of `index.qmd` lands after that heading. Insert such breaks post-render.
 - 2026-08-30: `scripts/enforce_docx_thesis_format.py` is CRLF. Multi-line edits written with a
   bare newline match nothing, fail silently, and still leave a file that parses and runs.
+
+## Session Handoff - 2026-09-29 (CIFIE drafting and Word delivery)
+
+The current CIFIE drafting unit is complete and merged. The active objective
+returns to **Task 3 / RCA-001 Phase 2** on `thesis/rca-001-phase-2`; no existing
+constraint or overarching goal is superseded.
+
+- Enriched `02_introduccion.md` and `03_fundamentos_xai.md` into a more readable,
+  science-first account of XAI, its importance, conceptual distinctions, evidence
+  requirements, application horizons, and field gaps.
+- Expanded the supporting literature, APA 7 bibliography, citation audit,
+  evidence map, source inventory, and science-first planning/scaffold documents.
+- Added `scripts/generate_cifie_chapter_figures.py` and regenerated the chapter's
+  critical-difference diagram from qualified EXP2 artifacts; updated figure
+  provenance and empirical captions accordingly.
+- Extended `scripts/build_cifie_chapter.py` to remove reader-facing
+  `Fuente inicial` notes, apply black text, 1.5 line spacing and justified prose,
+  format multi-page tables, preserve APA hanging indents, and embed grayscale
+  figures for black-ink output.
+- Delivered and visually verified the 68-page Word artifact at
+  `publications/book_chapters/2026_cifie_xai_fom7/drafts/v3_editorial_review/cifie_xai_fom7_2026-09-29_formatted.docx`.
+- Verification at handoff: 320 claims / 491 manuscript sites / 35 retired-value
+  guards / 13 cited artifacts; sync green; 18 EXP4 source pins green; shared
+  literals 0 unexplained / 53 known; both chapter scripts compile and the figure
+  generator runs successfully.
+- Next CIFIE action: independent Scientific Advisor review for rigor, references,
+  readability, flow, and DOCX presentation before the next drafting unit.
