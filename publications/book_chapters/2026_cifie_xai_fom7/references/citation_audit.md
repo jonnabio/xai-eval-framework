@@ -309,6 +309,17 @@ ya presentes en la bibliografía.
   el texto (hallazgo M7 de la revisión del 2026-09-29, unidad R6).
 - La sección 04 no incluye el ámbito opcional de educación y servicios públicos.
 
+## Retiro de material de Paper B+C: 2026-09-30
+
+- Por decisión del autor (E-PRIOR), el capítulo no contiene resultados de Paper B+C:
+  se retiraron el contraste pareado SHAP-LIME, el análisis exploratorio de 15 bloques
+  y la estabilidad de LIME entre conjuntos de datos.
+- `@wilcoxon1945` y `@lakens2013` quedaron sin cita y se retiraron de ambas
+  bibliografías (57 entradas).
+- Las citas de Herrera-Vásquez y Herrero-Uceda (2026) se mantienen: corresponden al
+  artículo publicado en RIMI, del que M. Herrero-Uceda es coautor, aunque declinó la
+  autoría del capítulo.
+
 ## Referencias sin cita en texto
 
 Tras las pasadas de redacción controlada, las referencias fundacionales y de evaluación más relevantes ya se citan en el manuscrito. Antes del envío debe ejecutarse una revisión final para detectar entradas remanentes en `references/references.bib` que no aparezcan en `manuscript/*.md`.

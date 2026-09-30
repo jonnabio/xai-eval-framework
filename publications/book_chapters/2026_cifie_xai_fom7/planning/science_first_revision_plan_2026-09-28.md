@@ -227,7 +227,7 @@ editorial document that requires it.
 | E-AUTH | Dr. Herrero-Uceda declined authorship; he is removed from the byline. The chapter has a single author. Citations of the RIMI article keep him as co-author of that article. | **E-AUTH-1:** remove him from `00_hoja_diseno_editorial.md`, the chapter README and the build byline; single-author declaration and licence; no conflict of interest arising from authorship. |
 | E-Q1 (length) | Still unanswered by the editor. No hard limit is applied; size is kept under observation. | **E-SIZE:** after every big edit, report the chapter size (routine below). |
 
-**E-PRIOR-1: Paper B+C material to remove** (located 2026-09-30):
+**E-PRIOR-1: Paper B+C material to remove** (located 2026-09-30; **done 2026-09-30**, together with E-AUTH-1; Wilcoxon (1945) and Lakens (2013) left the bibliography once uncited; 57 references):
 
 - `tables/table_results_summary.md`: the H3 row, the exploratory 15/15 row, and the
   note's references to them.
@@ -261,6 +261,13 @@ and the change against the previous report. Baseline (2026-09-30, `06267988c`):
 | Reference list (59 entries) | 2,205 words |
 | Word render | 83 pages |
 | Largest sections | 05 (4,430), 06 (2,400), 07 (2,253), 04 (2,094), 08 (1,995) |
+
+Size log (append one row per big edit):
+
+| Date | Unit | Body words | Change | Word pages | Sections changed |
+| --- | --- | ---: | ---: | ---: | --- |
+| 2026-09-30 | Baseline (`06267988c`) | 20,903 | | 83 | |
+| 2026-09-30 | E-PRIOR-1 + E-AUTH-1 | 20,434 | -469 | 81 | 06 (+2), 07 (-166), 08 (-172), 11 (-22), Table 4 (-111) |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 

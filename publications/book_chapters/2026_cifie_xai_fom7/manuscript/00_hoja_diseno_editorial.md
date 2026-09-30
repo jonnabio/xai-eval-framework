@@ -11,7 +11,6 @@ El protocolo FOM-7 como marco operativo para comparaciones reproducibles
 ## Autoría
 
 - Jonathan Herrera-Vásquez
-- Miguel Herrero-Uceda
 
 ## Afiliación institucional
 
@@ -20,7 +19,6 @@ Universidad Americana de Europa (UNADE)
 ## ORCID
 
 - Jonathan Herrera-Vásquez: https://orcid.org/0000-0002-7149-6635
-- Miguel Herrero-Uceda: Pendiente / no disponible
 
 ## Tema central
 

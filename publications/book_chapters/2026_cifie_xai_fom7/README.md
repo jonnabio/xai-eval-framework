@@ -39,7 +39,6 @@ differ), and both figure generators reproduced the figures' content.
 ## Authors
 
 - Jonathan Herrera-Vásquez, Universidad Americana de Europa, ORCID: 0000-0002-7149-6635.
-- Miguel Herrero-Uceda, Universidad Americana de Europa.
 
 ## Structure
 

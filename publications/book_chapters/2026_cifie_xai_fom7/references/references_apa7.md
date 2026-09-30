@@ -56,8 +56,6 @@ Kohavi, R., & Becker, B. (1996). *Adult data set*. UCI Machine Learning Reposito
 
 Kuznietsov, A., Gyevnar, B., Wang, C., Peters, S., & Albrecht, S. V. (2024). Explainable AI for safe and trustworthy autonomous driving: A systematic review. *IEEE Transactions on Intelligent Transportation Systems, 25*(12), 19342–19364. https://doi.org/10.1109/TITS.2024.3474469
 
-Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. *Frontiers in Psychology, 4*, 863. https://doi.org/10.3389/fpsyg.2013.00863
-
 Lakkaraju, H., Arsov, N., & Bastani, O. (2020). Robust and stable black box explanations. In *Proceedings of the 37th International Conference on Machine Learning* (Vol. 119, pp. 5628–5638). PMLR. https://proceedings.mlr.press/v119/lakkaraju20a.html
 
 Laugel, T., Lesot, M.-J., Marsala, C., Renard, X., & Detyniecki, M. (2019). The dangers of post-hoc interpretability: Unjustified counterfactual explanations. In *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence* (pp. 2801-2807). https://doi.org/10.24963/ijcai.2019/388
@@ -109,8 +107,6 @@ Van den Broeck, G., Lykov, A., Schleich, M., & Suciu, D. (2022). On the tractabi
 Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. *SSRN Electronic Journal*. https://doi.org/10.2139/ssrn.3063289
 
 Weber, P., Carl, K. V., & Hinz, O. (2024). Applications of explainable artificial intelligence in finance—A systematic review of finance, information systems, and computer science literature. *Management Review Quarterly, 74*(2), 867–907. https://doi.org/10.1007/s11301-023-00320-0
-
-Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin, 1*(6), 80-83. https://doi.org/10.2307/3001968
 
 World Health Organization. (2021). *Ethics and governance of artificial intelligence for health: WHO guidance*. https://www.who.int/publications/i/item/9789240029200
 
