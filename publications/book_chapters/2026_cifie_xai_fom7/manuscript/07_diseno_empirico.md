@@ -24,25 +24,13 @@ El benchmark utiliza el conjunto UCI Adult Income, un problema tabular de clasif
 
 El pipeline de preprocesamiento se aplica de forma determinista: partición estratificada, normalización de valores faltantes, codificación de variables categóricas, escalado de variables numéricas y persistencia del preprocesador ajustado. Las transformaciones se ajustan exclusivamente sobre el conjunto de entrenamiento para evitar fuga de datos. Este control es esencial porque los explicadores operan sobre el espacio transformado que consumen los modelos; si el preprocesamiento variara entre métodos, una diferencia atribuida al explicador podría provenir de diferencias de representación. Por ello, el preprocesador se trata como artefacto compartido y congelado.
 
-Se consideran cinco familias de modelos: regresión logística (`logreg`), bosque aleatorio (`rf`), XGBoost (`xgb`), máquina de vectores soporte (`svm`) y perceptrón multicapa (`mlp`). Esta selección permite observar explicadores sobre fronteras de decisión lineales, basadas en árboles, con kernel y neuronales. La inclusión de bosque aleatorio sigue la tradición de modelos de ensamblado introducida por Breiman (2001), mientras que XGBoost y los modelos no lineales amplían la diversidad de mecanismos predictivos. El objetivo no es evaluar qué modelo predictivo es superior, sino someter los explicadores a familias de decisión con estructuras distintas y verificar si los perfiles XAI se mantienen bajo esa heterogeneidad.
+Se consideran cinco familias de modelos: regresión logística, bosque aleatorio, XGBoost, máquina de vectores soporte (SVM) y perceptrón multicapa (MLP). Esta selección permite observar explicadores sobre fronteras de decisión lineales, basadas en árboles, con kernel y neuronales. La inclusión de bosque aleatorio sigue la tradición de modelos de ensamblado introducida por Breiman (2001), mientras que XGBoost y los modelos no lineales amplían la diversidad de mecanismos predictivos. El objetivo no es evaluar qué modelo predictivo es superior, sino someter los explicadores a familias de decisión con estructuras distintas y verificar si los perfiles XAI se mantienen bajo esa heterogeneidad.
 
 ## Diseño factorial EXP2
 
-El benchmark primario adopta un diseño cruzado:
+El benchmark primario adopta un diseño cruzado de cuatro factores: modelo, método XAI, semilla y tamaño de muestra. Los factores son los cinco modelos descritos, los cuatro métodos (SHAP, LIME, Anchors y DiCE), cinco semillas (42, 123, 456, 789, 999) y tres tamaños de muestra por estrato (50, 100 y 200). Cada celda produce un artefacto independiente de resultados. La variación de semilla permite analizar reproducibilidad, mientras que la variación de tamaño de muestra permite examinar la estabilidad de patrones bajo distintos volúmenes de evidencia local. Esta estructura cruzada evita que una comparación entre explicadores dependa de un único modelo, una única semilla o una única escala de muestra.
 
-```text
-modelo x método XAI x semilla x tamaño de muestra
-```
-
-Formalmente, el diseño planificado corresponde a:
-
-```text
-5 modelos x 4 métodos x 5 semillas x 3 tamaños de muestra = 300 celdas
-```
-
-Los factores son: modelos (`logreg`, `rf`, `xgb`, `svm`, `mlp`), métodos (`shap`, `lime`, `anchors`, `dice`), semillas (42, 123, 456, 789, 999) y tamaños de muestra por estrato (50, 100 y 200). Cada celda produce un artefacto independiente de resultados. La variación de semilla permite analizar reproducibilidad, mientras que la variación de tamaño de muestra permite examinar la estabilidad de patrones bajo distintos volúmenes de evidencia local. Esta estructura cruzada evita que una comparación entre explicadores dependa de un único modelo, una única semilla o una única escala de muestra.
-
-El diseño planificado produce 300 celdas, pero el análisis confirmativo utiliza 275 celdas calificadas tras la auditoría FOM-7. Esta distinción entre diseño planificado y cobertura analítica es deliberada. Los artefactos faltantes o no armonizables no se reemplazan de forma sintética ni se ocultan en promedios globales; se registran como parte de la evidencia. SHAP y LIME alcanzan cobertura completa, DiCE conserva 68 de 75 celdas y Anchors 57 de 75, con impacto interpretativo específico para reglas y contrafactuales. La Figura 1 presenta esta cobertura analítica por modelo y método.
+El producto de los cuatro factores, cinco modelos por cuatro métodos por cinco semillas por tres tamaños de muestra, da un diseño planificado de 300 celdas, pero el análisis confirmativo utiliza 275 celdas calificadas tras la auditoría FOM-7. Esta distinción entre diseño planificado y cobertura analítica es deliberada. Los artefactos faltantes o no armonizables no se reemplazan de forma sintética ni se ocultan en promedios globales; se registran como parte de la evidencia. SHAP y LIME alcanzan cobertura completa, DiCE conserva 68 de 75 celdas y Anchors 57 de 75, con impacto interpretativo específico para reglas y contrafactuales. La Figura 1 presenta esta cobertura analítica por modelo y método.
 
 ## Muestreo de instancias
 
@@ -54,7 +42,7 @@ El tamaño nominal de una ejecución depende del número de instancias por cuadr
 
 ## Configuración de explicadores
 
-SHAP se ejecuta con variantes acordes al modelo base: `TreeExplainer` para modelos de árboles y `KernelExplainer` para modelos donde se requiere aproximación más general. LIME utiliza `LimeTabularExplainer` con parámetros congelados de muestreo, número de características y ancho de kernel. Anchors emplea reglas locales con umbral de precisión efectivo de 0.95. DiCE genera contrafactuales orientados a la clase opuesta, usando diferencias entre instancia original y contrafactual como base de importancia. Estas configuraciones deben interpretarse como parte del protocolo experimental. No se evalúan nombres abstractos de métodos, sino implementaciones concretas con parámetros específicos, artefactos registrados y límites conocidos.
+SHAP se ejecuta con la variante adecuada a cada modelo: TreeSHAP para bosque aleatorio y XGBoost, y KernelSHAP, una aproximación más general, para los demás. LIME utiliza su explicador para datos tabulares con parámetros congelados de muestreo, número de características y ancho de kernel. Anchors emplea reglas locales con umbral de precisión efectivo de 0.95. DiCE genera contrafactuales orientados a la clase opuesta, usando diferencias entre instancia original y contrafactual como base de importancia. Estas configuraciones deben interpretarse como parte del protocolo experimental. No se evalúan nombres abstractos de métodos, sino implementaciones concretas con parámetros específicos, artefactos registrados y límites conocidos.
 
 La decisión de registrar configuraciones efectivas es crucial porque el nombre de un explicador no determina por sí solo la evidencia que produce. KernelSHAP y TreeSHAP difieren en coste y supuestos; LIME depende de perturbaciones y vecindario; Anchors depende de condiciones de búsqueda y umbral; DiCE depende de restricciones contrafactuales y del modo de generación. Por ello, el diseño empírico no compara etiquetas, sino ejecuciones protocolizadas. Cualquier conclusión posterior debe conservar esta configuración como parte de su alcance.
 
