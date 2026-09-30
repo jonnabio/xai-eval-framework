@@ -6,8 +6,17 @@
 Claude's part after the draft: language editing, citation and bibliography checks,
 registry coverage, build, Word render and size report.
 
-**Production file:** `manuscript/06_protocolo_fom7.md` (file names are fixed by the
-build; the file now holds section 06).
+**Production file (updated 2026-09-30):** `manuscript/05_crisis_evaluacion_xai.md`.
+Under the author's narrative arc the gap taxonomy is the core of section 05, "La crisis
+de evaluación en XAI", the final framing of the problem before FOM-7 (section 06). The
+section numbers below still say "section 06"; read them as the crisis section. The
+existing material is now in file 05, in this order: "Un campo con métodos maduros...",
+"La insuficiencia de la fidelidad aislada", "Brecha entre métrica, constructo y
+afirmación", "Reproducibilidad y trazabilidad insuficientes", "Herramientas sin
+protocolo de gobernanza suficiente", "De la crisis a la admisibilidad de la evidencia".
+The method families (LIME, SHAP, Anchors, DiCE) now come after FOM-7, in section 07,
+so refer to explanation objects as introduced in section 03, not to the methods'
+details.
 
 **Scaffold reference:** `planning/chapter_scaffold_2026-09-28.md`, section "06.
 Brechas científicas de la XAI" (gap taxonomy and required conclusion).

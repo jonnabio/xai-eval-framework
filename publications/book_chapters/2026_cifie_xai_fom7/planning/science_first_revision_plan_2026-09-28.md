@@ -210,6 +210,61 @@ Open from R0: the empty-header non-determinism in `format_academic_text` is
 deferred to E-FMT. (Closed 2026-09-30: `main` fast-forwarded to `a1edb8bf4` and
 pushed at the author's instruction; chapter work is not merged into the thesis lane.)
 
+### Narrative arc adopted by the author (2026-09-30)
+
+The author asked for a slower progression that does not reach FOM-7 or technical
+detail too early: the need for explanation; the concept isolated from neighbouring
+concepts (interpretability, transparency, model types), taught with diagrams; why it
+matters, with practical fields; the evaluation crisis as the final framing of the
+problem; the solution (FOM-7 and the science behind it); then application,
+implications, limitations and conclusions. This supersedes the section order of the
+scaffold. The existing text was moved accordingly (mechanical move, no new prose):
+
+| File | Section | Content and origin |
+| --- | --- | --- |
+| 02 | Introducción | need for explanation; objective and roadmap (from former 02) |
+| 03 | Qué es y qué no es la XAI | unchanged |
+| 04 | Por qué importa la XAI | lifecycle functions, audiences, trust, governance (from former 02), then the application domains (former 04) |
+| 05 | La crisis de evaluación en XAI | crisis and gap material (from former 05 and 06); the author's gap taxonomy goes here (brief) |
+| 06 | Protocolo FOM-7 | former 07 |
+| 07 | Métodos evaluados y diseño del benchmark | LIME, SHAP, Anchors, DiCE (former 05) and the benchmark design (former 08) |
+| 08 | Aplicación empírica | the results (former 08) |
+| 09-11 | Implicaciones, limitaciones, conclusiones | unchanged |
+
+Tables renumbered to the new order (1 FOM-7 gates, 2 methods, 3 metrics, 4 results);
+figure order unchanged. The build's table widths follow the new order.
+
+**Author follow-ups created by the new arc (N-ARC):**
+
+1. Section 02 is now short (about 520 words): expand it into the template's
+   introduction (context, problem, brief state of knowledge, gap, "El propósito de este
+   capítulo es...", organization) without introducing FOM-7 in technical terms.
+2. Update the three roadmap passages to the new order: section 02 "Objetivo, tesis y
+   recorrido", the closing paragraph of section 03, and the closing transition of
+   section 04 ("Lo que los ámbitos tienen en común").
+3. Section 03, "Niveles de evaluación y alcance de FOM-7": its FOM-7 paragraph introduces
+   the protocol early; consider moving it to section 06 and keeping only the evaluation
+   levels in section 03.
+4. Practical fields: the author named the legal field; the current domains are health,
+   finance, cybersecurity, autonomous systems and foundation models. A justice or public
+   administration domain needs sources (literature pass L3).
+5. Didactic figures (proposal, for the author's approval; they add figures before the
+   empirical ones, so the empirical figures would be renumbered):
+   - D1 concept map: explainability, interpretability, transparency (section 03);
+   - D2 model spectrum: interpretable by design, black box with post-hoc explanation;
+     model-agnostic versus model-specific (section 03);
+   - D3 local versus global scope (section 03);
+   - D4 one case, four explanatory objects: attribution, rule, counterfactual, example
+     (section 03; links to the R4 worked example);
+   - D5 who needs which explanation along the lifecycle (section 04);
+   - D6 evaluation levels: application-, human- and functionally grounded (section 03 or
+     05);
+   - D7 the evidence chain artifact, construct, metric, test, result, claim (section 05);
+   - D8 FOM-7 gate flow with one traced claim (section 06; R4.2).
+6. Section 07 (4,589 words) is now the largest: the P-CASE compression applies mainly
+   here (the design duplications listed in the section 06 brief, now in section 07).
+7. The Resumen is rewritten last, following the slow arc.
+
 ### Consolidated pending list (2026-09-30)
 
 This list merges the open review units (R3 gaps, R4-R7), the next steps agreed on
@@ -271,6 +326,7 @@ Size log (append one row per big edit):
 | 2026-09-30 | P-CASE structure (files 05-08) | 20,424 | -10 | 82 | 05 3,296; 06 1,136 (starting material); 07 2,399 (FOM-7); 08 3,901 (design + results) |
 | 2026-09-30 | E-APA / R6 (references only) | 20,424 | 0 | 82 | in-text citation edits in 02, 03, 08; reference list 55 entries |
 | 2026-09-30 | E-FMT template format (build only) | 20,424 | 0 | 78 | A4, Cambria 12 pt; page count falls with the wider A4 text block |
+| 2026-09-30 | N-ARC narrative move | 20,350 | -74 | 77 | 02 520; 04 3,223; 05 1,848; 06 2,399; 07 4,589; 08 1,820 (obsolete transition paragraph of former 05 removed) |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
