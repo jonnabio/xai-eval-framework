@@ -9,8 +9,11 @@
   in the anonymous build; Step 8 gate passed (record in
   `OPENREVIEW_SUBMISSION.md`). Editor note (`EIC_ENQUIRY_prior_publication.md`)
   shortened and filled in for 12779; the author sends it by email to
-  tmlr-editors@jmlr.org, never as a forum comment. **Open:** forum URL not yet
-  recorded; confirm the note was sent. Closes Next Steps item 00 once both are in.
+  tmlr-editors@jmlr.org, never as a forum comment. Forum:
+  https://openreview.net/forum?id=VkmWJZclmH (forum ID `VkmWJZclmH`). Editor
+  note sent by email (author confirmed 2026-09-30). **Next Steps item 00
+  (file Paper B+C) is CLOSED.** The paper lane stays open, frozen, for the
+  review-response revision; filed version is tag `tmlr-submission-12779`.
 - **Mode (2026-09-29):** HANDOFF - the CIFIE science-first drafting pass,
   literature enrichment, empirical-figure provenance, and formatted Word build
   were committed on `chapter/cifie-sync-2026-09` and merged to `main`. The
