@@ -10,16 +10,16 @@ Este mapa controla la transición desde el manuscrito técnico actual hacia un c
 general, científico y legible. Separa cuatro clases de soporte: literatura publicada,
 marcos o normas oficiales, evidencia empírica protegida del proyecto y síntesis
 editorial explícitamente identificada. Las fuentes candidatas verificadas se registran
-en `references/candidate_literature_2026-09-28.md`; todavía no forman parte de la
-bibliografía final porque aún no han sido citadas en la prosa revisada.
+en `references/candidate_literature_2026-09-28.md`; seis pasaron a la bibliografía de
+producción el 2026-09-29 al ser citadas en las secciones 02-03.
 
 ## Matriz de sección, afirmación y evidencia
 
 | Sección objetivo | Función argumental | Afirmaciones principales | Evidencia admisible | Límites obligatorios | Estado |
 | --- | --- | --- | --- | --- | --- |
 | 01. Resumen y palabras clave | Sintetizar problema, alcance general, FOM-7 y demostración empírica. | Producir una explicación no demuestra su validez; FOM-7 organiza evidencia funcionalmente fundamentada; el benchmark ilustra el protocolo. | Solo fuentes y resultados ya desarrollados en el cuerpo. | No introducir evidencia nueva ni rankings universales. | Diferir hasta cerrar las secciones 02-10 |
-| 02. Por qué importa la XAI | Explicar funciones, audiencias y riesgos de la explicación. | Las necesidades cambian por audiencia y propósito; la XAI puede apoyar depuración, supervisión, auditoría y contestabilidad; no garantiza confiabilidad. | Literatura conceptual existente; Phillips et al.; Tabassi; AI Act; WHO; estudios humanos de Alufaisan et al. y Poursabzi-Sangdeh et al. | Distinguir utilidad potencial, obligación de transparencia, confianza subjetiva y mejora real de decisiones. | Base suficiente para redactar; candidatos aún no transferidos |
-| 03. Qué es y qué no es la XAI | Definir el campo y sus distinciones centrales. | XAI es una familia de métodos y prácticas sociotécnicas; transparencia, interpretabilidad y explicación post-hoc no son sinónimos; local/global y modelo/datos/decisión son ejes diferentes. | Lipton; Miller; Murdoch et al.; Marcinkevičs y Vogt; Schwalbe y Finzel; Rudin et al.; NISTIR 8312. | Plausibilidad no equivale a fidelidad; atribución no equivale a causalidad. | Soporte conceptual fuerte; requiere consolidación de prosa |
+| 02. Por qué importa la XAI | Explicar funciones, audiencias y riesgos de la explicación. | Las necesidades cambian por audiencia y propósito; la XAI puede apoyar depuración, supervisión, auditoría y contestabilidad; no garantiza confiabilidad. | Phillips et al.; Tabassi; AI Act; Kim et al.; estudios humanos de Alufaisan et al. y Poursabzi-Sangdeh et al.; literatura conceptual existente. | Distinguir utilidad potencial, obligación de transparencia, confianza subjetiva y mejora real de decisiones. | Redactada y referenciada el 2026-09-29; resultados humanos limitados a sus tareas |
+| 03. Qué es y qué no es la XAI | Definir el campo y sus distinciones centrales. | XAI es una familia de métodos y prácticas sociotécnicas; transparencia, interpretabilidad y explicación post-hoc no son sinónimos; local/global y modelo/datos/decisión son ejes diferentes. | Lipton; Miller; Murdoch et al.; Marcinkevičs y Vogt; Schwalbe y Finzel; Rudin et al.; Phillips et al.; Tabassi; Kim et al. | Plausibilidad no equivale a fidelidad; atribución no equivale a causalidad. | Taxonomía consolidada en prosa el 2026-09-29 |
 | 04. Ámbitos de aplicación y horizontes próximos | Presentar ejemplos concretos y necesidades específicas por dominio. | Salud, finanzas, ciberseguridad, sistemas autónomos y modelos fundacionales requieren explicaciones para actores, decisiones y riesgos diferentes. | WHO y Ghassemi et al.; Weber et al.; Rjoub et al.; Kuznietsov et al.; Zhao et al.; evidencia primaria adicional donde se afirme un efecto concreto. | Cada ejemplo debe incluir decisión, actor, riesgo, evidencia útil y brecha; no presentar adopción futura como hecho. | Cinco dominios con fuente panorámica verificada; evidencia primaria selectiva aún abierta |
 | 05. Familias explicativas y problema de evaluación | Relacionar preguntas con objetos explicativos y métricas. | Atribuciones, reglas, contrafactuales y modelos sustitutos responden preguntas distintas; no deben reducirse a una métrica universal. | Ribeiro et al.; Lundberg y Lee; Mothilal et al.; Wachter et al.; Karimi et al.; Nauta et al.; Quantus; OpenXAI; tabla de métodos. | Comparar constructos homogéneos y declarar qué objeto evalúa cada métrica. | Fuentes actuales suficientes; requiere compresión del catálogo técnico |
 | 06. Brechas científicas de la XAI | Organizar brechas técnicas, de constructo, humanas, causales, operativas, de gobernanza y de modelos emergentes. | La evaluación es multidimensional; la validez humana está poco estandarizada; explicaciones persuasivas pueden no mejorar decisiones; distribución, seguridad y LLM amplían los problemas de fidelidad. | Doshi-Velez y Kim; Nauta et al.; Pawlicki et al.; Bhattacharya y Verbert; Kim et al.; Alufaisan et al.; Poursabzi-Sangdeh et al.; Lakkaraju et al.; Slack et al.; Zhao et al.; Turpin et al.; Zaman y Srivastava. | No generalizar un resultado humano a todos los usuarios o tareas; separar ausencia de evidencia de evidencia de ausencia; presentar la fidelidad de cadena de pensamiento como problema dependiente de métrica. | Taxonomía y evidencia primaria suficientes para el scaffold; despliegue longitudinal y multimodalidad amplia permanecen abiertos |
@@ -49,10 +49,10 @@ ejecutar los verificadores.
 
 | ID del scaffold | Afirmación prevista | Fuente candidata principal | Fuente de contraste o límite | Estado de primera pasada |
 | --- | --- | --- | --- | --- |
-| G02 | XAI puede apoyar depuración, supervisión, auditoría y contestabilidad. | Phillips et al. (2021); Tabassi (2023) | AI Act para un requisito jurídico estrecho | Suficiente para redacción conceptual; ejemplos concretos deben ser de dominio |
-| G03 | La explicabilidad no basta para una IA confiable. | Tabassi (2023); WHO (2021) | Ghassemi et al. (2021) | Verificada y lista para transferencia al citar |
-| G04 | La evaluación humana carece de estandarización consistente. | Kim et al. (2024) | Doshi-Velez y Kim (2017) | Verificada y lista para transferencia al citar |
-| G05 | Una explicación puede no mejorar la decisión o la corrección del error. | Alufaisan et al. (2021); Poursabzi-Sangdeh et al. (2021) | Kim et al. (2024) | Dos estudios primarios y una revisión disponibles; mantener límites de tarea |
+| G02 | XAI puede apoyar depuración, supervisión, auditoría y contestabilidad. | Phillips et al. (2021); Tabassi (2023) | AI Act para un requisito jurídico estrecho | Incorporada en sección 02; ejemplos concretos quedan para los dominios |
+| G03 | La explicabilidad no basta para una IA confiable. | Tabassi (2023); WHO (2021) | Ghassemi et al. (2021) | Incorporada en secciones 02-03; WHO y Ghassemi se reservan para salud |
+| G04 | La evaluación humana carece de estandarización consistente. | Kim et al. (2024) | Doshi-Velez y Kim (2017) | Incorporada sin extrapolar recuentos del corpus revisado |
+| G05 | Una explicación puede no mejorar la decisión o la corrección del error. | Alufaisan et al. (2021); Poursabzi-Sangdeh et al. (2021) | Kim et al. (2024) | Incorporada en sección 02 con límites explícitos de tarea y diseño |
 | G06 | Una explicación ajustada a una distribución puede perder fidelidad o estabilidad bajo cambios relevantes. | Lakkaraju et al. (2020) | NIST AI RMF para monitoreo de ciclo de vida | Verificada para perturbaciones y familias explicativas declaradas; impacto longitudinal abierto |
 | A01 | En salud, XAI puede apoyar interrogación del modelo sin validar una decisión clínica. | WHO (2021) | Ghassemi et al. (2021) | Verificada; añadir estudio primario solo si se reporta un efecto clínico concreto |
 | A02 | Finanzas incluye crédito, riesgo, mercados, cartera y AML con cobertura desigual. | Weber et al. (2024) | AI Act solo para transparencia de alto riesgo cuando aplique | Verificada |
@@ -69,9 +69,9 @@ ejecutar los verificadores.
 | `tables/table_metrics.md` | Definir métricas del caso empírico. | Existente; conservar en la sección 08, no como taxonomía universal |
 | `tables/table_results_summary.md` | Reportar resultados protegidos y sus límites. | Sincronizada el 2026-09-27 y cubierta por guards |
 | `figures/exported/` y `figures/figure_registry.md` | Ilustrar cobertura y perfiles empíricos sin redundancia. | Seis figuras registradas; una figura pareada fue retirada por exclusividad |
-| `references/references.bib` | Registros de obras citadas. | 41 referencias citadas en el manuscrito actual; no añadir candidatos huérfanos |
-| `references/references_apa7.md` | Lista APA 7 incorporada por el build. | 41 obras citadas; revisión editorial final pendiente |
-| `references/candidate_literature_2026-09-28.md` | Staging verificable para fuentes nuevas. | 17 candidatos verificados; transferencia solo al citar |
+| `references/references.bib` | Registros de obras citadas. | 48 referencias de producción; seis fuentes promovidas con la unidad 02-03 |
+| `references/references_apa7.md` | Lista APA 7 incorporada por el build. | 48 obras de producción; revisión editorial final pendiente |
+| `references/candidate_literature_2026-09-28.md` | Staging verificable para fuentes nuevas. | 17 candidatos verificados; seis promovidos y once todavía en staging |
 
 ## Secuencia de uso
 

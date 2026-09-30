@@ -1,6 +1,7 @@
 # Candidate Literature for the Science-First Revision
 
-**Status:** Verified candidates; not yet part of the chapter bibliography
+**Status:** Verified staging register; six sources promoted to the production
+bibliography on 2026-09-29 after citation in sections 02-03
 
 **Verification date:** 2026-09-28
 
@@ -8,8 +9,9 @@
 
 ## Admission rule
 
-This is a staging inventory, not the chapter reference list. A source moves to
-`references.bib` and `references_apa7.md` only when the revised manuscript cites it.
+This is a staging and transfer inventory, not the chapter reference list. A source
+moves to `references.bib` and `references_apa7.md` only when the revised manuscript
+cites it. Promoted records remain here to preserve their admission rationale.
 This preserves the requirement that the final reference list contain cited works
 only. Metadata was checked against an official institution, publisher record, DOI
 landing page, or author-hosted publication copy. Each candidate is tied to a bounded
@@ -19,14 +21,14 @@ claim and a stated limit.
 
 | ID | Candidate | Evidence class | Admissible use | Required boundary | Primary locator | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| C01 | Phillips et al. (2021) | Official technical report | Define four evaluation principles: explanation, meaningfulness, explanation accuracy, and knowledge limits; support audience-specificity. | A principle is not proof that a deployed system satisfies it. | [NISTIR 8312](https://doi.org/10.6028/NIST.IR.8312) | Metadata and full report verified |
-| C02 | Tabassi (2023) | Official risk framework | Place explainability within a wider trustworthy-AI risk framework. | Explainability does not substitute for validity, safety, security, privacy, fairness, transparency, or accountability. | [NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1) | Metadata and official record verified |
-| C03 | European Parliament and Council of the European Union (2024) | Official regulation | Support the narrow claim that high-risk systems must provide sufficient transparency for deployers to interpret outputs and use them appropriately. | Do not turn the chapter into legal advice or infer a universal right to a technical explanation. | [Regulation (EU) 2024/1689](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) | Official text and Article 13 verified; legal-reference styling to recheck at final APA pass |
+| C01 | Phillips et al. (2021) | Official technical report | Define four evaluation principles: explanation, meaningfulness, explanation accuracy, and knowledge limits; support audience-specificity. | A principle is not proof that a deployed system satisfies it. | [NISTIR 8312](https://doi.org/10.6028/NIST.IR.8312) | Promoted; cited in sections 02-03 |
+| C02 | Tabassi (2023) | Official risk framework | Place explainability within a wider trustworthy-AI risk framework. | Explainability does not substitute for validity, safety, security, privacy, fairness, transparency, or accountability. | [NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1) | Promoted; cited in sections 02-03 |
+| C03 | European Parliament and Council of the European Union (2024) | Official regulation | Support the narrow claim that high-risk systems must provide sufficient transparency for deployers to interpret outputs and use them appropriately. | Do not turn the chapter into legal advice or infer a universal right to a technical explanation. | [Regulation (EU) 2024/1689](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) | Promoted; cited narrowly in section 02; legal-reference style retained for final audit |
 | C04 | World Health Organization (2021) | Official sector guidance | Frame health-AI use around autonomy, safety, transparency, intelligibility, responsibility, and lifecycle governance. | Guidance identifies governance needs; it does not validate any specific XAI method or clinical prediction. | [WHO guidance](https://www.who.int/publications/i/item/9789240029200) | Metadata, ISBN, and official full text verified |
 | C05 | Ghassemi et al. (2021) | Peer-reviewed critical viewpoint | Support the caution that current post-hoc explanations can aid model interrogation without validating patient-level clinical decisions. | Present as a critical viewpoint, not a systematic review or universal empirical result. | [The Lancet Digital Health](https://doi.org/10.1016/S2589-7500(21)00208-9) | Publisher metadata and article verified |
-| C06 | Kim et al. (2024) | Peer-reviewed systematic review | Support the human-centered evaluation gap and the lack of consistent framework reuse. | Report review scope and do not treat counts as prevalence beyond the included corpus. | [Frontiers in Artificial Intelligence](https://doi.org/10.3389/frai.2024.1456486) | Full text, article number, and review corpus verified |
-| C07 | Alufaisan et al. (2021) | Peer-reviewed human-subject study | Provide primary counterevidence that explanations did not conclusively improve decision accuracy in the studied tasks. | Bound the statement to the experimental tasks; do not claim that explanations never help. | [AAAI proceedings](https://doi.org/10.1609/aaai.v35i8.16819) | Publisher metadata, pages, and findings verified |
-| C08 | Poursabzi-Sangdeh et al. (2021) | Peer-reviewed preregistered experiments | Show that simpler, transparent models improved simulation but did not necessarily improve reliance or error correction in the studied tasks. | Bound conclusions to the experimental manipulations and outcomes; transparency is not equivalent to an explanation intervention. | [CHI 2021](https://doi.org/10.1145/3411764.3445315) | Authors, Article 237, 52-page record, and study scope verified |
+| C06 | Kim et al. (2024) | Peer-reviewed systematic review | Support the human-centered evaluation gap and the lack of consistent framework reuse. | Report review scope and do not treat counts as prevalence beyond the included corpus. | [Frontiers in Artificial Intelligence](https://doi.org/10.3389/frai.2024.1456486) | Promoted; cited in sections 02-03 |
+| C07 | Alufaisan et al. (2021) | Peer-reviewed human-subject study | Provide primary counterevidence that explanations did not conclusively improve decision accuracy in the studied tasks. | Bound the statement to the experimental tasks; do not claim that explanations never help. | [AAAI proceedings](https://doi.org/10.1609/aaai.v35i8.16819) | Promoted; bounded result cited in section 02 |
+| C08 | Poursabzi-Sangdeh et al. (2021) | Peer-reviewed preregistered experiments | Show that simpler, transparent models improved simulation but did not necessarily improve reliance or error correction in the studied tasks. | Bound conclusions to the experimental manipulations and outcomes; transparency is not equivalent to an explanation intervention. | [CHI 2021](https://doi.org/10.1145/3411764.3445315) | Promoted; bounded result cited in section 02 |
 | C09 | Weber et al. (2024) | Peer-reviewed systematic review | Map finance uses across risk management, portfolios, markets, and anti-money laundering; identify uneven evidence coverage. | Do not infer regulatory compliance or operational effectiveness from the existence of applications. | [Management Review Quarterly](https://doi.org/10.1007/s11301-023-00320-0) | Publisher full text, volume, pages, and review corpus verified |
 | C10 | Rjoub et al. (2023) | Peer-reviewed survey | Organize cybersecurity uses, threat categories, and operational/adversarial challenges. | A survey supports the domain map; primary studies are still needed for concrete performance claims. | [IEEE TNSM](https://doi.org/10.1109/TNSM.2023.3282740) | DOI, venue, volume, issue, and pages verified |
 | C11 | Kuznietsov et al. (2024) | Peer-reviewed systematic review | Frame XAI in autonomous driving as interpretable design, surrogate explanation, monitoring, validation, and auxiliary communication. | Explanations can contribute to assurance but are not by themselves a safety case. | [IEEE T-ITS](https://doi.org/10.1109/TITS.2024.3474469) | DOI, venue, volume, issue, and pages verified |
@@ -39,8 +41,9 @@ claim and a stated limit.
 
 ## APA 7 staging records
 
-These records are formatted for later transfer, but remain outside the final reference
-list until they are cited in revised prose.
+These records are formatted for controlled transfer. C01-C03 and C06-C08 entered the
+production bibliography on 2026-09-29; the remaining records stay outside it until
+they are cited in revised prose.
 
 Alufaisan, Y., Marusich, L. R., Bakdash, J. Z., Zhou, Y., & Kantarcioglu, M. (2021). Does explainable artificial intelligence improve human decision-making? *Proceedings of the AAAI Conference on Artificial Intelligence, 35*(8), 6618–6626. https://doi.org/10.1609/aaai.v35i8.16819
 

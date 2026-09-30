@@ -66,16 +66,17 @@ Este inventario identifica materiales fuente que pueden alimentar el capítulo s
 
 ## Literatura externa para la ampliación científica
 
-La primera pasada y su ampliación dirigida verificaron diecisiete candidatos sin
-incorporarlos todavía a la lista final.
+La primera pasada y su ampliación dirigida verificaron diecisiete candidatos. Seis
+se incorporaron a las bibliografías de producción el 2026-09-29 al ser citados en las
+secciones 02-03; once permanecen en staging.
 El detalle de metadata, claim admisible, límite y registro APA 7 se conserva en
 `references/candidate_literature_2026-09-28.md`.
 
 | Paquete | Candidatos verificados | Uso previsto | Estado |
 | --- | --- | --- | --- |
-| Principios y gobernanza | Phillips et al. (2021); Tabassi (2023); Reglamento (UE) 2024/1689 | Audiencias, funciones de explicación, límites de conocimiento y transparencia para despliegue | Verificados; transferir solo al citar |
+| Principios y gobernanza | Phillips et al. (2021); Tabassi (2023); Reglamento (UE) 2024/1689 | Audiencias, funciones de explicación, límites de conocimiento y transparencia para despliegue | Promovidos y citados en secciones 02-03 |
 | Salud | WHO (2021); Ghassemi et al. (2021) | Gobernanza de IA en salud y límite de las explicaciones post-hoc | Verificados; fuente primaria adicional solo para efectos clínicos concretos |
-| Evaluación humana | Kim et al. (2024); Alufaisan et al. (2021); Poursabzi-Sangdeh et al. (2021) | Estandarización, desempeño de decisiones, confianza y corrección de errores | Verificados con límites de tarea |
+| Evaluación humana | Kim et al. (2024); Alufaisan et al. (2021); Poursabzi-Sangdeh et al. (2021) | Estandarización, desempeño de decisiones, confianza y corrección de errores | Promovidos y citados con límites explícitos de tarea |
 | Finanzas | Weber et al. (2024) | Mapa sistemático de áreas de uso y brechas | Verificada |
 | Robustez y cambio de distribución | Lakkaraju et al. (2020) | Fidelidad y estabilidad de explicaciones bajo conjuntos declarados de cambio | Estudio primario verificado; no extrapolar a todo cambio en producción |
 | Ciberseguridad | Rjoub et al. (2023); Roch et al. (2026) | Taxonomía de uso y estudio humano sobre confianza y desempeño | Verificadas; resultado humano limitado a la tarea estudiada |

@@ -146,6 +146,50 @@ Objetivo: cerrar o acotar los vacíos que impedían modificar el outline de prod
 - Total de staging: 17 fuentes verificadas, ninguna añadida todavía a las bibliografías
   de producción.
 
+## Unidad de redacción de fundamentos: 2026-09-29
+
+Objetivo: reescribir las secciones 02 y 03 desde la arquitectura science-first y
+transferir solo las fuentes nuevas efectivamente citadas.
+
+### Fuentes promovidas a producción
+
+- `@phillips2021` — citado para separar existencia, significado, exactitud de la
+  explicación y límites de conocimiento, y para sostener que audiencias distintas
+  requieren explicaciones distintas.
+- `@tabassi2023` — citado para ubicar explicabilidad e interpretabilidad dentro de un
+  conjunto más amplio de características de IA confiable y del ciclo de gestión del
+  riesgo.
+- `@europeanparliament2024` — citado únicamente para los requisitos estrechos de los
+  artículos 13 y 14 sobre interpretación por responsables del despliegue y
+  supervisión humana de sistemas de alto riesgo dentro del ámbito del Reglamento. No
+  se infiere un derecho universal a una explicación técnica ni eficacia de un método.
+- `@kim2024` — citado para distinguir calidad de la explicación en contexto,
+  interacción humano-IA y desempeño conjunto; no se extrapolan los recuentos de su
+  corpus como prevalencia del campo.
+- `@alufaisan2021` — citado como resultado humano acotado: en las tareas estudiadas,
+  añadir información explicativa no produjo evidencia concluyente de una mejora
+  adicional en la exactitud decisional.
+- `@poursabzi2021` — citado como counterevidence acotada: la transparencia facilitó
+  simular un modelo sencillo, pero no garantizó dependencia apropiada ni corrección de
+  errores en las condiciones experimentales estudiadas.
+
+Los seis registros se añadieron a `references.bib` y `references_apa7.md`. Los once
+candidatos restantes no pasaron a producción porque todavía no aparecen en la prosa.
+
+### Control de alcance
+
+- La sección 02 ya no adelanta el catálogo de métodos ni los resultados del benchmark;
+  establece funciones, audiencias, ciclo de vida, gobernanza y límites de evidencia
+  humana.
+- La sección 03 concentra el vocabulario conceptual: interpretabilidad,
+  explicabilidad, transparencia, diseño interpretable, post-hoc, escala, objeto,
+  fidelidad, estabilidad, robustez y utilidad.
+- Las afirmaciones de Alufaisan et al. y Poursabzi-Sangdeh et al. se mantienen ligadas
+  a sus tareas y manipulaciones; no se formula que las explicaciones nunca mejoren la
+  decisión humana.
+- El alcance de FOM-7 permanece funcionalmente fundamentado y no se amplía a utilidad
+  humana, causalidad, justicia, seguridad o impacto de despliegue.
+
 ## Pasada de enriquecimiento OA: 2026-07-04
 
 Objetivo: reforzar afirmaciones sobre evaluación multidimensional, límites de transferencia de métricas, distinción entre evaluación funcional y estudios con usuarios, y necesidad de benchmarks trazables.
