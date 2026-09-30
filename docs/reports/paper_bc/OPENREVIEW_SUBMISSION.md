@@ -1,8 +1,9 @@
 # OpenReview submission sheet — Paper B+C to TMLR
 
 Prepared 2026-09-14 from the paper lane at `407ae32e6`; regenerated
-2026-09-27 from the paper lane at `7df496a00` after the revision described in
-the re-verification record below. Everything below is
+2026-09-27 from the paper lane at `7df496a00`, and again 2026-09-30 from the
+paper lane at `e57f49e04` after the pre-submission review fixes, as
+described in the re-verification records below. Everything below is
 copied from the manuscript's sources, not retyped: the abstract is the
 generated fragment `pub/fragments/paper_bc_abstract_en.tex` with text-mode
 LaTeX converted and inline math kept for OpenReview's MathJax. **If
@@ -10,11 +11,13 @@ LaTeX converted and inline math kept for OpenReview's MathJax. **If
 
 Submission venue: <https://openreview.net/group?id=TMLR>
 
-> **Re-verified 2026-09-27 against the revised manuscript** (record below).
-> Author confirmed 2026-09-28: the detailed revision is finished and the paper is not under review elsewhere. Filing now waits on the pre-submission review (docs/planning/paper_bc_tmlr_review_plan_2026-09-28.md) and the gate re-run after its fixes. Previously: filing needed the author's sign-off that the detailed revision is
-> finished, and the outstanding confirmation of no concurrent submission. Any
-> further edit to the manuscript, its supplementary or `pub/claims.toml`
-> invalidates this record: run "After any revision" again.
+> **Re-verified 2026-09-30 against the final manuscript** (record below),
+> after the pre-submission review (F01–F19, except F10, closed by author
+> decision), the abstract wording fix for the Adult dataset and the equation
+> revision. Author confirmed 2026-09-28: the detailed revision is finished
+> and the paper is not under review elsewhere. Any further edit to the
+> manuscript, its supplementary or `pub/claims.toml` invalidates this
+> record: run "After any revision" again.
 
 ## After any revision — regenerate before submitting
 
@@ -57,6 +60,24 @@ present (it is gitignored, so copy it in from the main worktree if missing).
    If the revision changed the title, abstract or keywords, the form fields
    below change with it.
 
+### Re-verification record — 2026-09-30 (paper lane `e57f49e04`)
+
+Since 2026-09-27: review fixes F01–F19 (except F10), the author name form,
+"UCI Adult census-income dataset" in the abstract, and the equation revision
+(numbered equations, every term defined, Bhatt et al. 2020 and Samek et al.
+2017 added).
+
+| Step | Result |
+| ---- | ------ |
+| 1. Register first | Registry 321 claims / 485 sites / 46 retired-value guards; 21 files fully registered |
+| 2. Rebuild both PDFs | Tectonic 0.17.0: 27 + 5 pages, 0 undefined references or citations |
+| 3. Page 1 of the built PDF | Read from the PDF: abstract and Eq. (1) render, no garbled macros |
+| 4. Verifiers | `verify_claims`, `verify_sync`, `verify_exp4_reconstruction` (18 hash pins) green |
+| 5. Identity scan | Main PDF: only the third-person RIMI citation (plus F. Herrera, an unrelated co-author of two cited surveys). Supplementary: none. Metadata clean. Bundle: 0 of 9,384 files |
+| 6. Shared results | Registry query returns nothing; `scan_shared_literals.py --strict` exits 0 (0 unexplained, 53 known coincidences) |
+| 7. Bundle | Rebuilt; contains `supplementary_tables.pdf`; 16.1 MB |
+| 8. This sheet | Abstract regenerated from the fragment (306 words, 2,173 characters); page counts, stamp and this record updated |
+
 ### Re-verification record — 2026-09-27 (paper lane `7df496a00`)
 
 The revision since 2026-09-14 changed the EXP3 sentence of the abstract
@@ -93,10 +114,10 @@ Supplementary S1 (ADR-0017: EXP4 replication cohort and corrected sample).
 From Fidelity to Semantics: A Taxonomy of XAI Evaluation Metrics and Paired Empirical Comparison of LIME versus SHAP
 ```
 
-**Abstract** (264 words, 1,955 characters):
+**Abstract** (306 words, 2,173 characters):
 
 ```
-Evaluation of post-hoc explanations in machine learning remains fragmented across incompatible metric families, yielding method comparisons that are sensitive to which endpoints are chosen. We address this through two complementary contributions. First, drawing on a 44-paper structured scoping corpus assembled through a documented five-database search and transparent screening record, we build a four-axis taxonomy—by evaluation target, evidence source, quality property, and task context—that maps the measurement landscape and exposes three recurring gaps: proxy metrics dominate despite not capturing semantics; human-grounded constructs remain underspecified; and semantic evaluation is growing faster than its empirical validation base. Second, we fill the proxy-layer gap with a paired empirical benchmark comparing LIME and SHAP across 75 matched cells spanning five model families, five seeds, and three sampling sizes on the Adult tabular benchmark. Within this protocol, results are consistent and large in magnitude: SHAP dominates all measured quality endpoints (stability $d_z = 3.00$, fidelity $d_z = 4.82$, faithfulness gap $d_z = 2.63$), while LIME is faster for non-tree model families (median 53.3 ms vs. 694.6 ms for SHAP); for tree-based models, SHAP's TreeExplainer reverses this ordering. A cross-dataset extension on two further tabular datasets preserves the fidelity ordering—SHAP exceeds both Anchors and LIME in every dataset–model stratum—while suggesting that LIME's instability on Adult stems from its high-dimensional one-hot encoding rather than from the method itself. Together, the taxonomy and the benchmark motivate a model-architecture-conditioned deployment pattern for tabular classification: SHAP is preferred at both fidelity and latency for tree-based models, while LIME retains a latency advantage for black-box architectures lacking a model-aware explainer. All experimental artifacts are publicly available.
+Evaluation of post-hoc explanations in machine learning remains fragmented across incompatible metric families, yielding method comparisons that are sensitive to which endpoints are chosen. We address this through two complementary contributions. First, drawing on a 44-paper structured scoping corpus assembled through a five-database search with a reported screening record, we build a four-axis taxonomy—by evaluation target, evidence source, quality property, and task context—that maps the measurement landscape and exposes three recurring gaps: proxy metrics dominate despite not capturing semantics; human-grounded constructs remain underspecified; and semantic evaluation is growing faster than its empirical validation base. Second, we fill the proxy-layer gap with a paired empirical benchmark comparing LIME and SHAP across 75 matched cells spanning five model families, five seeds, and three sampling sizes on the UCI Adult census-income dataset. Within this protocol, results are consistent and large in magnitude: SHAP leads on every fidelity- and stability-oriented endpoint (stability $d_z = 3.00$, fidelity $d_z = 4.82$, faithfulness gap $d_z = 2.63$), while LIME is sparser and faster for non-tree model families (median 53.3 ms vs. 694.6 ms for SHAP). Among tree ensembles the latency ordering depends on the model: SHAP's TreeExplainer was faster than LIME in every XGBoost cell but slower in every random-forest cell. A cross-dataset extension on two further tabular datasets preserves the fidelity ordering—SHAP exceeds both Anchors and LIME in every dataset–model stratum—and shows that LIME's near-zero stability on the Adult data is not intrinsic to the method: it rises with the kernel width and is high on both lower-dimensional datasets. Together, the taxonomy and the benchmark motivate a model-architecture-conditioned deployment pattern for tabular classification: SHAP is preferred at both fidelity and latency for XGBoost, LIME retains a latency advantage for black-box architectures lacking a model-aware explainer, and for other tree ensembles latency should be measured before choosing. All experimental artifacts are publicly available.
 ```
 
 After pasting, check the form preview: the three $d_z$ values should render
@@ -108,7 +129,7 @@ as math. If they show literal dollar signs, replace each `$d_z = X$` with
 **Authors:** Jonathan Herrera-Vásquez, sole author, via the OpenReview profile.
 TMLR admits no change to the author list after submission.
 
-**PDF:** `docs/reports/paper_bc/paper_bc_tmlr.pdf`. 26 pages, anonymous.
+**PDF:** `docs/reports/paper_bc/paper_bc_tmlr.pdf`. 27 pages, anonymous.
 
 **Supplementary material:** `docs/reports/paper_bc/paper_bc_artifacts.zip`.
 16.1 MB, 9,384 files, including `supplementary_tables.pdf` (Tables S1–S6) and
@@ -117,8 +138,8 @@ supplementary material, as PDF or ZIP.
 Gitignored, so rebuild it right before uploading:
 `python scripts/pubs/build_artifact_bundle.py`.
 
-**Submission length, if asked:** long. The main text runs to page 22 and the
-references start on page 23.
+**Submission length, if asked:** long. The main text runs to page 23 and the
+references start on page 24.
 
 **Human subjects / IRB:** no human-subjects research. The study uses the
 public, de-identified UCI Adult, Breast Cancer Wisconsin and German Credit
