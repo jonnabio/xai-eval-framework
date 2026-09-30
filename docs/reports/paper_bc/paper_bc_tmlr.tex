@@ -77,13 +77,20 @@ constrained decision problem: given a fixed predictor $f$ and instance
 $x$, choose $E \in \{\mathrm{LIME}, \mathrm{SHAP}\}$ to maximize
 explanation quality while satisfying operational constraints. Concretely,
 we consider
-\[
+\begin{equation}
 E^\star = \arg\max_{E \in \{\mathrm{LIME},\mathrm{SHAP}\}}
 U(S_E, F_E, \Delta_{k,E}, P_E)
 \quad\text{s.t.}\quad C_E \le \tau,
-\]
-where $S$ is stability, $F$ fidelity, $\Delta_k$ faithfulness gap, $P$
-sparsity, $C$ cost, and $\tau$ a latency budget. Yet this decision
+\label{eq:decision}
+\end{equation}
+where the subscript $E$ marks a quantity measured for explainer $E$:
+$S_E$ is its stability, $F_E$ its fidelity, $\Delta_{k,E}$ its
+faithfulness gap, $P_E$ its active-feature ratio (lower is sparser), and
+$C_E$ its per-instance cost; all five are defined in
+Section~\ref{sec:metrics}. $U$ is a deployment-specific utility that
+weighs the four quality endpoints, and $\tau$ is a latency budget.
+We do not fix $U$: the benchmark reports each endpoint separately, so
+that a practitioner can apply their own weighting. Yet this decision
 problem cannot be resolved in the abstract: it requires an organizing
 framework that identifies which quality properties matter, what evidence
 supports their measurement, and where structural proxy metrics end and
@@ -116,14 +123,13 @@ under matched conditions remain scarce. \citet{retzlaff2024posthoc} survey post-
 guidelines and review method properties, but do not provide matched
 empirical benchmarks across model families, metrics, and sampling regimes;
 this paper fills that gap. LIME explains locally by
-fitting a sparse surrogate around $x$:
-\[
-\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g),
-\]
+fitting a sparse surrogate model around $x$ (Eq.~\ref{eq:lime}),
 favoring local fidelity and explicit sparsity controls
 \citep{ribeiro2016why}. SHAP explains predictions through additive
-feature attributions $f(x) = \phi_0 + \sum_i \phi_i$, where $\phi_i$
-are Shapley-based contributions with game-theoretic guarantees
+feature attributions $f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i$, where
+$\phi_0$ is the model's expected output over a background sample, $M$
+is the number of features, and $\phi_i$ is the Shapley-value contribution
+of feature $i$, which carries game-theoretic guarantees
 \citep{lundberg2017unified}. Their theoretical differences are well
 known, but do not by themselves resolve deployment choices across model
 families, sampling regimes, and runtime constraints
@@ -153,7 +159,7 @@ replicated with a second judge panel on the same cases). We do not claim
 human-subject or task-outcome validation in this paper.
 \item \textbf{Formalized deployment decision}: we pose LIME-vs-SHAP
 selection as a constrained multi-objective problem over quality, parsimony,
-and cost.
+and cost (Eq.~\ref{eq:decision}).
 \item \textbf{Paired inferential evidence}: we quantify method differences
 on 75 matched Adult Income cells with Holm-corrected significance testing
 and effect sizes for five endpoints, and partially probe tabular fidelity
@@ -219,10 +225,15 @@ gaps in evaluation coverage. \\
 LIME approximates a black-box model $f$ locally around an instance $x$
 by training an interpretable surrogate $g$ on perturbed samples weighted
 by kernel $\pi_x$:
-\[
+\begin{equation}
 \xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g),
-\]
-where $\Omega(g)$ penalizes complexity \citep{ribeiro2016why}. LIME
+\label{eq:lime}
+\end{equation}
+where $\xi(x)$ is the explanation returned for $x$, $G$ is the class of
+interpretable surrogates (sparse linear models here), $\mathcal{L}$
+measures how poorly $g$ reproduces $f$ on perturbed samples, each sample
+weighted by its proximity $\pi_x$ to $x$, and $\Omega(g)$ penalizes
+surrogate complexity \citep{ribeiro2016why}. LIME
 behavior is strongly shaped by neighborhood construction hyperparameters
 (kernel width, perturbation sample count, feature budget). These controls
 yield compact explanations and low latency, but they introduce stochastic
@@ -844,22 +855,49 @@ non-tree models, with background subsampling ($n=50$).
 \subsection{Metric Operationalization}
 \label{sec:metrics}
 
-Primary metrics are computed per instance and aggregated per run:
+Primary metrics are computed per instance and aggregated per run, following
+the protocol of \citet{herrera2026framework}. Throughout, $f(x)$ is the
+model's predicted probability of the positive class, $e(x) \in
+\mathbb{R}^{M}$ is the attribution vector an explainer returns for
+instance $x$ with $M$ features, and ``masking'' feature $j$ replaces its
+value with the training-set mean $\bar{x}_j$.
 \begin{enumerate}[leftmargin=*]
-\item \textbf{Stability} $S$: mean pairwise cosine similarity of
-attribution vectors under Gaussian perturbations ($T=15$, $\sigma=0.1$):
-\[
-S = \frac{2}{T(T-1)}\sum_{a<b}\cos\!\left(e^{(a)},e^{(b)}\right).
-\]
-\item \textbf{Sparsity} $P$: active-feature ratio above threshold
-$\tau = 10^{-4}$ (lower active ratio indicates sparser explanations).
-\item \textbf{Fidelity} $F$: faithfulness correlation between attribution
-magnitude and prediction drop under feature masking.
-\item \textbf{Faithfulness Gap} $\Delta_k$: absolute prediction change
-after masking the top-$k$ features ($k=5$):
-\[
-\Delta_k = \left|f(x) - f(x_{\mathrm{mask\text{-}top\text{-}k}})\right|.
-\]
+\item \textbf{Stability} $S$: robustness of the explanation to small input
+noise \citep{alvarezmelis2018robustness}. The explainer is run on $T=15$
+perturbed copies $x^{(a)} = x + \varepsilon^{(a)}$, with
+$\varepsilon^{(a)} \sim \mathcal{N}(0, \sigma^2 I)$ and $\sigma=0.1$,
+and $S$ is the mean cosine similarity over all $T(T-1)/2$ pairs of
+the resulting attribution vectors $e^{(a)} = e(x^{(a)})$:
+\begin{equation}
+S = \frac{2}{T(T-1)}\sum_{1 \le a<b \le T}\cos\!\left(e^{(a)},e^{(b)}\right).
+\label{eq:stability}
+\end{equation}
+$S$ is $1$ when every perturbation yields an attribution vector with the
+same direction, and near $0$ when directions are unrelated.
+\item \textbf{Sparsity} $P$: active-feature ratio, the share of the $M$
+features whose absolute attribution exceeds the threshold $10^{-4}$
+(lower active ratio indicates sparser explanations).
+\item \textbf{Fidelity} $F$: a single-feature variant of the
+faithfulness correlation of \citet{bhatt2020evaluating}. Each feature
+$j$ is masked on its own, giving the masked instance $\tilde{x}^{(j)}$, and
+\begin{equation}
+F = \rho\!\left(\bigl\{|e_j(x)|\bigr\}_{j=1}^{M},\;
+\bigl\{|f(x) - f(\tilde{x}^{(j)})|\bigr\}_{j=1}^{M}\right),
+\label{eq:fidelity}
+\end{equation}
+where $\rho$ is the Pearson correlation across the $M$ features. $F$ is
+high when the features an explanation ranks as important are those whose
+removal moves the prediction most.
+\item \textbf{Faithfulness Gap} $\Delta_k$: a deletion test in the
+spirit of \citet{samek2017evaluating} and \citet{hooker2019benchmark}.
+The $k=5$ features with the largest $|e_j(x)|$ are masked together,
+giving $\tilde{x}^{(\mathrm{top}\text{-}k)}$, and
+\begin{equation}
+\Delta_k = \left|f(x) - f\!\left(\tilde{x}^{(\mathrm{top}\text{-}k)}\right)\right|.
+\label{eq:gap}
+\end{equation}
+A larger $\Delta_k$ means the features the explanation names first carry
+more of the prediction.
 \item \textbf{Cost} $C$: per-instance wall-clock explanation time (ms).
 \end{enumerate}
 
@@ -1669,6 +1707,12 @@ complementary team performance.
 In \emph{Proceedings of the CHI Conference on Human Factors in Computing
 Systems}, 1--16.
 
+\bibitem[Bhatt et~al.(2020)Bhatt, Weller, and Moura]{bhatt2020evaluating}
+Bhatt, U., Weller, A., and Moura, J.~M.~F. (2020).
+Evaluating and aggregating feature-based model explanations.
+In \emph{Proceedings of the Twenty-Ninth International Joint Conference on
+Artificial Intelligence (IJCAI)}, 3016--3022.
+
 \bibitem[Breiman(2001)]{breiman2001random}
 Breiman, L. (2001).
 Random forests.
@@ -1924,6 +1968,14 @@ Rudin, C. (2019).
 Stop explaining black box machine learning models for high stakes
 decisions and use interpretable models instead.
 \emph{Nature Machine Intelligence}, 1(5):206--215.
+
+\bibitem[Samek et~al.(2017)Samek, Binder, Montavon, Lapuschkin, and
+M\"{u}ller]{samek2017evaluating}
+Samek, W., Binder, A., Montavon, G., Lapuschkin, S., and M\"{u}ller, K.-R.
+(2017).
+Evaluating the visualization of what a deep neural network has learned.
+\emph{IEEE Transactions on Neural Networks and Learning Systems},
+28(11):2660--2673.
 
 \bibitem[Slack et~al.(2020)Slack, Hilgard, Jia, Singh, and
 Lakkaraju]{slack2020fooling}
