@@ -265,6 +265,50 @@ Objetivo: fortalecer `03_fundamentos_xai.md` con distinciones verificadas sobre 
 - No se aceptaron candidatos nuevos a partir de búsqueda temática porque Semantic Scholar devolvió HTTP 429.
 - No se añadieron fuentes adicionales sobre explicabilidad human-centered más allá de `@miller2019`, ya que el capítulo no evalúa usuarios ni comprensión subjetiva.
 
+## Pasada sección 04, ámbitos de aplicación: 2026-09-29
+
+Objetivo: redactar la sección 04 con ejemplos por ámbito y horizontes próximos,
+usando solo candidatos verificados en `candidate_literature_2026-09-28.md` y fuentes
+ya presentes en la bibliografía.
+
+### Verificación
+
+- DOI y metadatos contrastados con Crossref el 2026-09-29 para Ghassemi et al.
+  (2021), Weber et al. (2024), Rjoub et al. (2023), Kuznietsov et al. (2024), Zhao
+  et al. (2024), Kaufman et al. (2025), Turpin et al. (2023) y Zaman y Srivastava
+  (2026): título, revista o actas, volumen, número y páginas coinciden.
+- Páginas oficiales accesibles (HTTP 200) para World Health Organization (2021) y
+  Roch et al. (2026).
+- Lakkaraju et al. (2020): registro PMLR verificado en la pasada del 2026-09-28.
+
+### Fuentes incorporadas y uso acotado
+
+- `@who2021`: principios éticos y gobernanza del ciclo de vida en salud; no valida
+  ningún método XAI ni predicción clínica.
+- `@ghassemi2021`: posición crítica sobre explicaciones post-hoc en salud; citada
+  como punto de vista, no como revisión sistemática.
+- `@weber2024`: mapa de usos de XAI en finanzas con cobertura desigual; no se infiere
+  eficacia ni cumplimiento regulatorio.
+- `@rjoub2023`: organización de usos y desafíos en ciberseguridad.
+- `@roch2026`: resultado humano acotado a la población, tarea y diseño estudiados.
+- `@slack2020` (ya presente): manipulación de explicadores post-hoc.
+- `@kuznietsov2024`: funciones de la XAI en conducción autónoma; la explicación no es
+  un caso de seguridad.
+- `@kaufman2025`: juicios humanos en escenarios simulados, no seguridad del vehículo.
+- `@lakkaraju2020`: pérdida de aproximación bajo cambio de distribución, dentro de las
+  perturbaciones y familias explicativas estudiadas.
+- `@zhao2024`, `@turpin2023`, `@zaman2026`: explicabilidad de LLM presentada como
+  debate abierto sobre la medición de la fidelidad.
+- `@europeanparliament2024` (ya presente): uso ampliado, de forma estrecha, a la
+  clasificación como alto riesgo de los sistemas de evaluación de solvencia de personas
+  físicas (Anexo III) y a la transparencia para quienes los despliegan (artículo 13).
+
+### Pendientes
+
+- Adadi y Berrada (2018) y Belle y Papantonis (2021) siguen en la lista sin cita en
+  el texto (hallazgo M7 de la revisión del 2026-09-29, unidad R6).
+- La sección 04 no incluye el ámbito opcional de educación y servicios públicos.
+
 ## Referencias sin cita en texto
 
 Tras las pasadas de redacción controlada, las referencias fundacionales y de evaluación más relevantes ya se citan en el manuscrito. Antes del envío debe ejecutarse una revisión final para detectar entradas remanentes en `references/references.bib` que no aparezcan en `manuscript/*.md`.

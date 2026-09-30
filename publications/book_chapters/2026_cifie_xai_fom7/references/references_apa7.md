@@ -34,6 +34,8 @@ European Parliament & Council of the European Union. (2024). Regulation (EU) 202
 
 Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. *Journal of the American Statistical Association, 32*(200), 675-701. https://doi.org/10.1080/01621459.1937.10503522
 
+Ghassemi, M., Oakden-Rayner, L., & Beam, A. L. (2021). The false hope of current approaches to explainable artificial intelligence in health care. *The Lancet Digital Health, 3*(11), e745–e750. https://doi.org/10.1016/S2589-7500(21)00208-9
+
 Guidotti, R., Monreale, A., Ruggieri, S., Turini, F., Giannotti, F., & Pedreschi, D. (2018). A survey of methods for explaining black box models. *ACM Computing Surveys, 51*(5), 1-42. https://doi.org/10.1145/3236009
 
 Hedström, A., Weber, L., Bareeva, D., Krakowczyk, D., Motzkus, F., Samek, W., Lapuschkin, S., & Höhne, M. M.-C. (2023). Quantus: An explainable AI toolkit for responsible evaluation of neural network explanations and beyond. *Journal of Machine Learning Research, 24*(34), 1-11. https://www.jmlr.org/papers/v24/22-0142.html
@@ -46,11 +48,17 @@ Kadir, M. A., Mosavi, A., & Sonntag, D. (2023). Evaluation metrics for XAI: A re
 
 Karimi, A.-H., Barthe, G., Schölkopf, B., & Valera, I. (2022). A survey of algorithmic recourse: Contrastive explanations and consequential recommendations. *ACM Computing Surveys, 55*(5), 1-29. https://doi.org/10.1145/3527848
 
+Kaufman, R. A., Broukhim, A., Kirsh, D., & Weibel, N. (2025). What did my car say? Impact of autonomous vehicle explanation errors and driving context on comfort, reliance, satisfaction, and driving confidence. In *Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems* (Article 89, pp. 1–17). Association for Computing Machinery. https://doi.org/10.1145/3706598.3713088
+
 Kim, J., Maathuis, H., & Sent, D. (2024). Human-centered evaluation of explainable AI applications: A systematic review. *Frontiers in Artificial Intelligence, 7*, Article 1456486. https://doi.org/10.3389/frai.2024.1456486
 
 Kohavi, R., & Becker, B. (1996). *Adult data set*. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/2/adult
 
+Kuznietsov, A., Gyevnar, B., Wang, C., Peters, S., & Albrecht, S. V. (2024). Explainable AI for safe and trustworthy autonomous driving: A systematic review. *IEEE Transactions on Intelligent Transportation Systems, 25*(12), 19342–19364. https://doi.org/10.1109/TITS.2024.3474469
+
 Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. *Frontiers in Psychology, 4*, 863. https://doi.org/10.3389/fpsyg.2013.00863
+
+Lakkaraju, H., Arsov, N., & Bastani, O. (2020). Robust and stable black box explanations. In *Proceedings of the 37th International Conference on Machine Learning* (Vol. 119, pp. 5628–5638). PMLR. https://proceedings.mlr.press/v119/lakkaraju20a.html
 
 Laugel, T., Lesot, M.-J., Marsala, C., Renard, X., & Detyniecki, M. (2019). The dangers of post-hoc interpretability: Unjustified counterfactual explanations. In *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence* (pp. 2801-2807). https://doi.org/10.24963/ijcai.2019/388
 
@@ -82,6 +90,10 @@ Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?": Exp
 
 Ribeiro, M. T., Singh, S., & Guestrin, C. (2018). Anchors: High-precision model-agnostic explanations. *Proceedings of the AAAI Conference on Artificial Intelligence, 32*(1). https://doi.org/10.1609/aaai.v32i1.11491
 
+Rjoub, G., Bentahar, J., Abdel Wahab, O., Mizouni, R., Song, A., Cohen, R., Otrok, H., & Mourad, A. (2023). A survey on explainable artificial intelligence for cybersecurity. *IEEE Transactions on Network and Service Management, 20*(4), 5115–5140. https://doi.org/10.1109/TNSM.2023.3282740
+
+Roch, N., Sievers, H., Zufferey, N., & Zimmermann, V. (2026). You know why, but still rely: The impact of explainable AI on trust, task load, and performance in cybersecurity decision-making. In *35th USENIX Security Symposium (USENIX Security 26)* (pp. 1607–1625). USENIX Association. https://www.usenix.org/conference/usenixsecurity26/presentation/roch
+
 Rudin, C., Chen, C., Chen, Z., Huang, H., Semenova, L., & Zhong, C. (2022). Interpretable machine learning: Fundamental principles and 10 grand challenges. *Statistics Surveys, 16*, 1-85. https://doi.org/10.1214/21-ss133
 
 Schwalbe, G., & Finzel, B. (2023). A comprehensive taxonomy for explainable artificial intelligence: A systematic survey of surveys on methods and concepts. *Data Mining and Knowledge Discovery, 38*(5), 3043-3101. https://doi.org/10.1007/s10618-022-00867-8
@@ -90,10 +102,20 @@ Slack, D., Hilgard, S., Jia, E., Singh, S., & Lakkaraju, H. (2020). Fooling LIME
 
 Tabassi, E. (2023). *Artificial intelligence risk management framework (AI RMF 1.0)* (NIST AI 100-1). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.AI.100-1
 
+Turpin, M., Michael, J., Perez, E., & Bowman, S. R. (2023). Language models don't always say what they think: Unfaithful explanations in chain-of-thought prompting. *Advances in Neural Information Processing Systems, 36*, 74952–74965. https://doi.org/10.52202/075280-3275
+
 Van den Broeck, G., Lykov, A., Schleich, M., & Suciu, D. (2022). On the tractability of SHAP explanations. *Journal of Artificial Intelligence Research, 74*, 851-886. https://doi.org/10.1613/jair.1.13283
 
 Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. *SSRN Electronic Journal*. https://doi.org/10.2139/ssrn.3063289
 
+Weber, P., Carl, K. V., & Hinz, O. (2024). Applications of explainable artificial intelligence in finance—A systematic review of finance, information systems, and computer science literature. *Management Review Quarterly, 74*(2), 867–907. https://doi.org/10.1007/s11301-023-00320-0
+
 Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin, 1*(6), 80-83. https://doi.org/10.2307/3001968
+
+World Health Organization. (2021). *Ethics and governance of artificial intelligence for health: WHO guidance*. https://www.who.int/publications/i/item/9789240029200
+
+Zaman, K., & Srivastava, S. (2026). Is chain-of-thought really not explainability? Chain-of-thought can be faithful without hint verbalization. In *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)* (pp. 48008–48030). Association for Computational Linguistics. https://doi.org/10.18653/v1/2026.acl-long.2217
+
+Zhao, H., Chen, H., Yang, F., Liu, N., Deng, H., Cai, H., Wang, S., Yin, D., & Du, M. (2024). Explainability for large language models: A survey. *ACM Transactions on Intelligent Systems and Technology, 15*(2), Article 20, 1–38. https://doi.org/10.1145/3639372
 
 Zheng, X., Shirani, F., Chen, Z., Lin, C., Cheng, W., Guo, W., & Luo, D. (2025). F-FIDELITY: A robust framework for faithfulness evaluation of explainable AI. *ICLR 2025 Proceedings*. https://trustai4s-lab.github.io/ffidelity
