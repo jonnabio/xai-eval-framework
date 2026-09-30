@@ -18,9 +18,9 @@ Para estabilidad, la prueba de Friedman produjo $\chi^2_F = 40.68$, con $p_{\mat
 
 La implicación para un capítulo de libro es conceptual. El resultado estadístico no debe convertirse en la frase "SHAP gana". Debe convertirse en una lección sobre evaluación: cuando los métodos producen artefactos heterogéneos, las diferencias globales son útiles solo si se interpretan como perfiles condicionados por métrica, objeto explicativo y alcance experimental.
 
-![Figura 2. Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad. Fuente: figura derivada de `thesis/assets/figures/fig_cd_diagram_es.png`.](../figures/exported/fig_cd_diagram_es.png)
+![Figura 2. Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad. Fuente: elaboración propia a partir de las tablas de rangos y comparaciones de Nemenyi de EXP2.](../figures/exported/fig_cd_diagram_es.png)
 
-![Figura 3. Distribución de fidelidad y estabilidad por método. Fuente: figura derivada de `thesis/assets/figures/fig_boxplots_metricas_es.png`.](../figures/exported/fig_boxplots_metricas_es.png)
+![Figura 3. Distribución de fidelidad y estabilidad por método. Fuente: elaboración propia a partir de los resultados del benchmark EXP2.](../figures/exported/fig_boxplots_metricas_es.png)
 
 ## SHAP y LIME: frontera calidad-coste
 
@@ -28,7 +28,7 @@ SHAP y LIME son los dos únicos métodos con cobertura completa, lo que permite 
 
 La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en general más costoso, aunque el efecto depende de la familia de modelo: TreeSHAP es rápido sobre modelos de árboles y KernelSHAP es costoso sobre SVM y MLP. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias. La consecuencia no es descartar LIME, sino delimitar su uso. LIME puede ser adecuado para exploración rápida o interfaces de baja latencia, pero su estabilidad casi nula bajo las condiciones evaluadas impide tratar sus salidas como evidencia robusta de auditoría.
 
-![Figura 4. Relación entre estabilidad y coste por método. Fuente: figura derivada de `thesis/assets/figures/fig_estabilidad_coste_es.png`.](../figures/exported/fig_estabilidad_coste_es.png)
+![Figura 4. Relación entre estabilidad y coste por método. Fuente: elaboración propia a partir de los resultados del benchmark EXP2.](../figures/exported/fig_estabilidad_coste_es.png)
 
 ## Cuatro perfiles explicativos
 
@@ -40,9 +40,9 @@ Anchors produce reglas locales de alta precisión, cualitativamente distintas a 
 
 DiCE genera contrafactuales, no atribuciones de importancia. Por ello, su baja fidelidad bajo métricas de atribución no debe interpretarse como fallo absoluto. En la tesis, DiCE presenta medias por bloque de 0.170 en fidelidad y 0.361 en estabilidad, que es una estabilidad intermedia. Su parsimonia es muy baja (0.017) y su coste alto, con una media por ejecución de 28,209 ms. Este perfil sugiere que DiCE es más pertinente cuando el objetivo explicativo es explorar alternativas de acción o corrección, no cuando se busca auditar importancias locales. Su presencia en el benchmark ayuda a mostrar por qué FOM-7 evalúa perfiles y no rankings universales.
 
-![Figura 5. Correlación entre métricas del benchmark. Fuente: figura derivada de `thesis/assets/figures/fig_correlacion_metricas_es.png`.](../figures/exported/fig_correlacion_metricas_es.png)
+![Figura 5. Correlación entre métricas del benchmark. Fuente: elaboración propia a partir de los resultados del benchmark EXP2.](../figures/exported/fig_correlacion_metricas_es.png)
 
-![Figura 6. Perfil multidimensional normalizado por método. Fuente: figura derivada de `thesis/assets/figures/fig_radar_metodos_es.png`.](../figures/exported/fig_radar_metodos_es.png)
+![Figura 6. Perfil multidimensional normalizado por método. Fuente: elaboración propia a partir de los resultados del benchmark EXP2.](../figures/exported/fig_radar_metodos_es.png)
 
 ## Reproducibilidad como hallazgo, no solo control
 
