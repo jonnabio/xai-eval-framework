@@ -233,6 +233,31 @@ candidates for verification and selective addition; inclusion is not automatic.
 | Autonomous systems | Kuznietsov et al. (2024), `10.1109/TITS.2024.3474469` | Ground safety assurance, monitoring, validation, and user-facing explanations in autonomous driving. |
 | Foundation models | Zhao et al. (2024), `10.1145/3639372` | Introduce LLM-specific explainability challenges and explain why generated rationales are not automatically mechanistic evidence. |
 
+## Addendum 2026-09-29: review of the formatted build
+
+A Scientific Advisor review of
+`drafts/v3_editorial_review/cifie_xai_fom7_2026-09-29_formatted.docx` (Word render,
+75 pages) found the new sections 02-03 already at the intended register, and
+returned **Not ready** for the build as a whole:
+
+- **Resolved since this assessment:** gap 2 (why XAI matters) is addressed by the
+  new section 02; the "Fuente inicial" notes, black ink, justification and 1.5
+  spacing of gap 8 are met in the build.
+- **Still open:** gap 3 (applications) and gap 4 (field gaps). The title and the
+  section 02 roadmap now promise both sections, which makes their absence a
+  reader-facing defect rather than a planning gap.
+- **Gap 5 is more specific than recorded here:** sentences addressed to the author,
+  repository paths in prose, undefined thesis labels (P1, H1-H3), and arguments
+  repeated between old section 05 and new sections 02-03.
+- **New findings:** the build cannot be reproduced from committed state; a retired
+  LIME cost (226 ms) survives in the method section; the reproducibility CVs are
+  attributed to EXP1 instead of the EXP2 RF/N=100 subset; two figures are
+  illegible in grayscale; several APA metadata errors.
+
+All findings, their order and their exit checks are in the revision plan
+("Review remediation workstream") and in the section-level additions of
+`chapter_scaffold_2026-09-28.md`.
+
 ## Overall conclusion
 
 The chapter should not abandon its technical depth. Its strongest future form is a

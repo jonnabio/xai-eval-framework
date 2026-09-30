@@ -1,12 +1,17 @@
 # Science-First Revision Plan for the CIFIE XAI Book Chapter
 
-**Status:** Active - Phase 1 complete; Phase 2 architecture gate complete
+**Status:** Active - Phase 3 foundations complete; review remediation R0-R2 precede
+Section 04 (see "Review remediation workstream", added 2026-09-29)
 
 **Created:** 2026-09-28
 
+**Updated:** 2026-09-29 - folded in the Scientific Advisor review of
+`drafts/v3_editorial_review/cifie_xai_fom7_2026-09-29_formatted.docx`
+
 **Lane:** `chapter/cifie-sync-2026-09`
 
-**Input assessment:** `planning/general_assessment_2026-09-28.md`
+**Input assessment:** `planning/general_assessment_2026-09-28.md` (with its
+2026-09-29 addendum)
 
 ## Objective
 
@@ -155,6 +160,200 @@ scientific evidence base.
 - Remove unused entries rather than carrying a general reading list into the final
   references.
 
+## Review remediation workstream (added 2026-09-29)
+
+A Scientific Advisor review of the 2026-09-29 formatted build (rendered through
+Microsoft Word, 75 pages, all pages inspected) returned **Not ready**. The empirical
+core re-derives from artifacts and the new sections 02-03 are the target register;
+the blockers are reproducibility, missing promised scope, and a small number of
+numeric and presentation defects. Every finding is assigned below to a remediation
+unit, a production file, and the phase that closes it. Finding IDs (C, H, M, L)
+follow the review.
+
+### Correction to the 2026-09-29 checkpoint
+
+The checkpoint under "Immediate next action" records 48 rendered pages with readable
+table widths. The same file rendered by Word gives 75 pages, mid-word breaks in
+Table 2 ("configuraciones / , métodos", "reproducibilida / d"), a broken code block
+("Perfi / lado"), and an illegible Figure 1. The difference comes from the
+renderer and from the undefined page geometry (L1). From now on, visual QA is
+valid only on a Word render (see the Render gate).
+
+### Unit order
+
+| Unit | Scope | Findings | Why this position |
+| --- | --- | --- | --- |
+| R0 | Make the build reproducible | C1, H3 (generator), M10 | Uncommitted sources and scripts are the largest risk of loss; later units cannot be verified without it. |
+| R1 | Correct wrong or overstated evidence | H1, H2, M1-M5 | Small, protected edits; they must not wait for the Phase 5 compression. |
+| R2 | Remove the drafting voice and repository vocabulary | M9 and the meta-commentary list below | Cheapest large gain in register; it also shrinks the text before new sections are added. |
+| R3 | Write the promised scope | C2 | Phases 3-4 (sections 04 and 06), already planned; the title and the section 02 roadmap promise them. |
+| R4 | Reader-experience devices | Editorial assessment items | Worked examples, gate trace, decision guide; they depend on the new architecture. |
+| R5 | Figures for print | H4, M8, L4, H3 (labels) | Regenerate once the Phase 5 figure selection is final. |
+| R6 | APA 7 closure | M7, L3 | At Phase 8, but the listed metadata corrections can be applied at any time. |
+| R7 | Word layout | M6, L1, L2, L5 | Phase 7, against a Word render. |
+
+### R0. Reproducibility (Critical, C1)
+
+1. Commit on `chapter/cifie-sync-2026-09`, in separate commits by kind (ADR-0013):
+   the revised sections 02, 03, 07 and 08; `references.bib` and
+   `references_apa7.md`; `fig_cd_diagram_es.png` and `figure_registry.md`; the
+   evidence map, source inventory, citation audit and candidate literature;
+   `scripts/build_cifie_chapter.py`; and `scripts/generate_cifie_chapter_figures.py`
+   (currently untracked).
+2. Declare the build dependencies (`python-docx`, `Pillow`, `matplotlib`, `pandas`,
+   and Quarto's pandoc) in the build script docstring and in the chapter README.
+3. Make the figure generator the only producer of `figures/exported/*_es.png` used
+   by the chapter, and record the generator in `figure_registry.md` for each figure.
+   This closes the RCA-001 invariant that a figure with data labels needs a
+   committed generator.
+4. Rebuild from a clean checkout of the lane and compare paragraph count, headings,
+   tables, media hashes and page count with the reviewed build. Record the result.
+5. Do not keep chapter commits on `thesis/*`. The five chapter commits currently on
+   `thesis/rca-001-phase-2` (`664496a25`..`835bde4e0`) are also on the chapter lane;
+   the thesis lane should stop carrying chapter work (ADR-0013).
+6. Ensure `scripts/pubs/scan_shared_literals.py` reaches every lane that builds the
+   chapter; it is absent from `thesis/rca-001-phase-2`.
+7. Treat reviewed builds as outputs: keep the formatted DOCX out of version control
+   or commit it only together with the commit hash it was built from.
+
+### R1. Evidence corrections (High and Medium)
+
+| ID | Location | Correction | Verification |
+| --- | --- | --- | --- |
+| H1 | `04_metodos_lime_shap_anchors_dice.md`, LIME paragraph ("coste medio de 226 ms") | Remove the retired value. In the new architecture this sentence moves to section 08 anyway; cite the registered per-model LIME costs. | Widen the `A05.lime.cost` retired guard to text `226 ms` and add the chapter files; negative-test that `226 ms` fails `verify_claims.py`. |
+| H2 | `08_aplicacion_empirica_perfiles_fom7.md`, "Reproducibilidad como hallazgo"; `tables/table_results_summary.md`, P1 row | Replace "configuraciones replicadas de EXP1" with the EXP2 RF/N=100 subset over five seeds; add the pooled fidelity CVs (11.4% SHAP, 12.0% LIME) against the 15% criterion. Keep section 07's EXP1 CV < 9% statement, which is correct for EXP1. | Add the chapter sites to `exp2.pooled_cv.shap.fidelity` and `exp2.pooled_cv.lime.fidelity` (currently thesis sites only). |
+| M1 | Table 4, H3 row; section 08 SHAP-LIME paragraph; section 11 | Label thesis-only results as unpublished and not yet peer reviewed at first use, e.g. "según resultados de la tesis doctoral, aún no publicados". Replace "sitúa el origen de la inestabilidad en el espacio codificado" with "es compatible con una interacción entre el ancho de kernel y la dimensionalidad del espacio codificado, que la tesis deja abierta". | Top-level statement sweep of 01 and 11. |
+| M2 | Section 01 Resumen; section 08 "Síntesis"; section 09 | Qualify "LIME conserva ventajas de coste y parsimonia" as a comparison with SHAP, with the stated exceptions: DiCE is the most parsimonious (0.017), TreeSHAP on XGBoost (21 ms) is cheaper than LIME on XGBoost (122 ms), and LIME on SVM costs 17,620 ms. Report the LIME RF cost or explain its omission; the registered run-level LIME mean (`exp2.run.lime.cost.mean`, 3,661 ms) can state the overall level. | All values already registered except the LIME RF run mean, which needs a new `exp2.run.lime.model_mean.rf.cost` claim. Do not use `exp2.paired.cost.median.lime.rf`: paired-contrast values belong to Paper B+C and fail `[exclusivity]`. |
+| M3 | Section 08 design (first use of SHAP) | Disclose that "SHAP" pools TreeExplainer (rf, xgb; model-specific) and KernelExplainer (other models), so method and explainer variant are confounded for SHAP. Adjust any wording that calls every evaluated method model-agnostic. | Prose only. |
+| M4 | Section 08, coverage and global evidence | State that Anchors missingness (7/15 on logreg and on MLP) is not random, that block means for Anchors rest on fewer seeds, and the bias bound the thesis reports (tau = 0.90 probe) or a pointer to it. | Any number used must be registered or cited as unbacked. |
+| M5 | Section 08 SHAP-LIME paragraph; Table 4 follow-up row | Replace "motivado por la revisión" with an explicit label: exploratory, post hoc, not part of the frozen protocol, reported for direction only. | Prose only. |
+
+### R2. Reader-facing register (Medium, M9)
+
+Remove sentences addressed to the author or describing the book format. Current
+instances in the reviewed build:
+
+- `04`: "El capítulo debe cuidar especialmente el lenguaje al interpretar DiCE".
+- `05`: the subsection "Implicación para el capítulo" ("El capítulo debe presentar...").
+- `06`: "Dentro de este capítulo, FOM-7 debe presentarse como protocolo...".
+- `08`: "En un artículo empírico, esta sección podría presentarse..." and
+  "La implicación para un capítulo de libro es conceptual".
+- `09`: "la pregunta editorialmente más valiosa para un capítulo de libro".
+
+Also:
+
+- Keep the device "no se dice X, sino Y" at most once (it appears in 04, 06 and 09).
+- Remove repository paths and code identifiers from prose (`manifest.yaml`,
+  `results.json`, `outputs/batch_results.csv`, `logreg_anchors`, `mlp_shap`/
+  `svm_shap`, `logreg`, `rf`...), replacing them with plain-language names. Code
+  identifiers may appear only in a technical box or the reproducibility note.
+- Define or remove thesis labels (P1, H1-H3) before first use; in the chapter they
+  appear in section 06 before Table 4 defines them.
+- Remove duplicated arguments between old section 05 and new 02-03 ("el nombre del
+  método deja de ser una unidad experimental suficiente" and "dos excesos
+  simétricos" each occur twice).
+
+### R3. Promised scope (Critical, C2)
+
+Closed by Phases 3 and 4 (sections 04 and 06) as already planned. Additional
+requirements from the review:
+
+- The roadmap in section 02 ("examina después áreas de aplicación... organiza las
+  brechas...") and the section 03 closing paragraph must match the final headings
+  exactly. Re-check both after sections 04 and 06 exist.
+- The user requirement "expected future uses of XAI" must be answered at field level
+  in section 04 (horizons per domain) and section 10 Part B, not only as future work
+  for the benchmark.
+- Rewrite the Resumen so that it mentions applications and gaps, which the title now
+  promises.
+
+### R4. Reader-experience devices
+
+1. **Worked example across methods (section 05):** one Adult instance explained by
+   LIME, SHAP, Anchors and DiCE side by side (weights, attribution, rule,
+   counterfactual). Generate it from the committed models and a committed script
+   with a fixed seed, or label it explicitly as illustrative. Any printed value is a
+   result-shaped literal and must be registered or declared illustrative before
+   coverage runs.
+2. **One claim traced through the seven gates (section 07):** follow "SHAP supera a
+   LIME en fidelidad" from cell artifacts to Table 4, one sentence per gate, as a
+   figure that replaces the ASCII flow block.
+3. **Plain-language consequence after each key result (section 08):** e.g. a block
+   stability near 0.014 means that two explanations of nearly the same case share
+   almost no feature ranking.
+4. **Decision guide (section 09):** a table from question type to relevant evidence,
+   explanation family, and what the benchmark can and cannot say.
+5. **Technical boxes (sections 07-08):** statistical plan, gate artifacts, and the
+   SHAP-variant detail move to boxes so the main text carries the argument.
+6. **One running applicant:** introduced in section 02 or 04 (credit decision),
+   explained in section 05, and revisited in section 08.
+
+### R5. Figures for print (High, H4; Medium, M8)
+
+- Design every chapter figure for grayscale in the generator; stop greyscaling colour
+  images inside the build (`monochrome_embedded_images`), except as a safety check.
+- Figure 1: text colour chosen by cell luminance (white on dark cells).
+- Figure 4: distinct marker shapes and line styles, no colour-only legend; replace
+  symmetric SD bars on the log axis with interquartile or min-max bars, or plot on a
+  linear axis.
+- Figure 3: label the printed values as medians or remove them; register any value
+  that stays.
+- Remove titles and CSV filenames from inside the images; APA figure number, title
+  and note belong to the caption.
+- Apply the Phase 5 figure selection first (coverage, one global comparison, one
+  multi-metric profile) so that only retained figures are regenerated.
+
+### R6. APA 7 corrections (Medium, M7; Low, L3)
+
+Verified against Crossref or DataCite on 2026-09-29 unless marked otherwise:
+
+- Arrieta et al. (2019) -> Barredo Arrieta, A., et al. (2020), *Information Fusion*,
+  58, 82-115 (in-text: Barredo Arrieta et al., 2020).
+- Kohavi & Becker (1996) -> Becker, B., & Kohavi, R. (1996). *Adult* [Data set]. UCI
+  Machine Learning Repository. https://doi.org/10.24432/C5XW20 (in-text: Becker &
+  Kohavi, 1996).
+- Schwalbe & Finzel (2023) -> (2024), vol. 38, no. 5, pp. 3043-3101 (issue year).
+- Lundberg & Lee (2017): cite *Advances in Neural Information Processing Systems 30*
+  (NeurIPS 2017), not arXiv; author "Lee, S.-I." (confirm pages against the
+  proceedings; not Crossref-indexed).
+- Mothilal et al. (2020): fix the rendered "Transparency\*" (Markdown asterisk in
+  "FAT\*").
+- Remove or cite Adadi & Berrada (2018) and Belle & Papantonis (2021): both are
+  listed and uncited in the reviewed build.
+- Figure captions to APA: bold number and italic title above the figure, *Nota.*
+  below; not "Fuente:" inside an italic caption below the image.
+- Low: en dashes in page ranges; article numbers (Belle 688969, Marcinkevičs e1493,
+  Canha); Ribeiro et al. (2016) pages 1135-1144 with "In"; Agarwal et al. (2022)
+  volume and pages; Zheng et al. (2025) ICLR/OpenReview record instead of the project
+  page; Wachter et al. as *Harvard Journal of Law & Technology*, 31(2).
+
+### R7. Word layout (Medium, M6; Low, L1, L2, L5)
+
+- Set page size and margins explicitly in the section properties (decide A4 or
+  Letter; the reviewed file defines neither).
+- Add decimal page numbers in the footer.
+- Table 2: widen "Propósito" (currently 2.35 cm) at the expense of "Artefacto de
+  salida"; no column may break a word.
+- Code blocks: left-aligned, never justified; replace the FOM-7 flow block with the
+  R4 figure.
+- Keep-with-next on table number and title, and on the header row, so no table title
+  is stranded (Table 3 on p. 45); keep table notes with the last row (Table 2 note
+  split across pp. 32-33).
+- Tables stay left-aligned inside cells (deliberate exception to the justified
+  standard, recorded here); references stay justified unless the author accepts
+  left alignment to avoid the wide gaps around DOIs.
+- Stop python-docx from creating empty header/footer parts, or fill them with the
+  page number; refresh `docProps/app.xml`.
+
+### Tracking-document reconciliation (M10)
+
+- `sources/evidence_map.md`: update statuses marked "Pendiente de verificar" and
+  remove the retracted phrase "inestabilidad estructural".
+- `references/citation_audit.md`: drop `altukhi2025`; add the sources promoted on
+  2026-09-28.
+- `manuscript/chapter_outline.md` on other lanes still states 7,000-8,500 words;
+  the recorded decision is no word limit with a 14,000-16,000 working range.
+
 ## Execution phases
 
 ### Phase 0: Baseline and protection checks
@@ -239,8 +438,13 @@ answers all author requirements directly.
 - Render and inspect every page, including table breaks, figure sizing, captions,
   headings, references, and widow/orphan behavior.
 
+- Apply R7 (page geometry, page numbers, Table 2 widths, keep-with-next, code-block
+  alignment) and R5 (figures regenerated for grayscale).
+- Render through Microsoft Word (for example, export to PDF via Word automation on a
+  scratch copy); a LibreOffice or python-docx inspection is not sufficient.
+
 **Exit criterion:** the Word document is visually coherent with the thesis and has no
-layout defect hidden by a successful build exit code.
+layout defect hidden by a successful build exit code, on a Word render.
 
 ### Phase 8: Scientific and submission verification
 
@@ -250,6 +454,9 @@ layout defect hidden by a successful build exit code.
 - Perform a full Scientific Advisor rigor review.
 - Perform a final reference audit.
 - Confirm the chapter contains no protected Paper B+C result.
+- Rebuild from a clean checkout of the lane and confirm the output matches the
+  reviewed build (R0).
+- Re-check every open finding of the 2026-09-29 review by ID and record its outcome.
 
 **Exit criterion:** verifiers green, scientific-review findings resolved or explicitly
 accepted, APA 7 audit clean, and final Word output visually approved.
@@ -271,6 +478,13 @@ accepted, APA 7 audit clean, and final Word output visually approved.
 - Concrete examples rely on domain or primary evidence.
 - Counterevidence is represented where the literature is contested.
 - No future claim is presented as an established outcome.
+- Results available only in the unpublished thesis are labelled as such at first use
+  and never carry a confirmatory decision without their statistics.
+- Post hoc or exploratory analyses are labelled as such where they are reported.
+- Every number states its aggregation level and cohort (EXP1 vs EXP2 subset vs
+  EXP2 pooled).
+- Causal language ("origen", "causa", "explica por qué") is used only where the
+  design supports it.
 
 ### Readability gate
 
@@ -279,6 +493,34 @@ accepted, APA 7 audit clean, and final Word output visually approved.
 - Technical terms are defined before use.
 - Examples follow a consistent decision-stakeholder-risk-evidence pattern.
 - Tables synthesize repeated comparisons instead of duplicating prose.
+- No sentence addresses the author or describes the book format ("el capítulo
+  debe...", "para un capítulo de libro...").
+- No repository path, file name or code identifier appears in prose, captions or
+  figure images outside a technical box.
+- Thesis labels (P1, H1-H3, EXP1, EXP2) are defined before first use or replaced.
+- Each key result is followed by its practical meaning for a reader.
+- The roadmap in section 02 matches the final headings.
+
+### Figure gate
+
+- Every figure is legible in grayscale print without relying on colour.
+- Every data label in a figure is registered or removed, and every figure has a
+  committed generator.
+- Error bars are valid on the plotted scale and their statistic is stated.
+- Figure number, title and note follow APA 7 and are not duplicated inside the image.
+
+### Reproducibility gate
+
+- The final DOCX builds from a clean checkout of the chapter lane with declared
+  dependencies and no step outside committed scripts.
+- The build commit hash is recorded with the reviewed file.
+
+### Render gate
+
+- Visual QA is performed on a Microsoft Word render of every page.
+- Page size, margins and page numbers are explicit in the document.
+- No table or code block breaks a word; no table title or note is separated from its
+  table.
 
 ### Publication gate
 
@@ -305,30 +547,48 @@ accepted, APA 7 audit clean, and final Word output visually approved.
 | Empirical compression loses protected context | High | Preserve registered values, aggregation labels, and claim counts; run verifiers after moves. |
 | Word formatting diverges from the thesis | Medium | Reuse tested formatting rules and perform page-by-page visual QA. |
 | Source inventory remains inconsistent | Medium | Reconcile planning artifacts before the new literature pass. |
+| Uncommitted revision work is lost or diverges between worktrees | High | R0 first; commit per section unit; build only from committed state. |
+| A retired value survives because a guard matches too narrowly | High | Guards match the bare value plus unit and list chapter files; negative-test each widened guard. |
+| Renderer differences hide layout defects | Medium | Render gate: Word render only, explicit page geometry. |
+| Worked example introduces unregistered numbers | Medium | Generate from committed models and script, register or label as illustrative before coverage runs. |
+| Unpublished thesis results read as validated evidence | Medium | Label at first use; keep statistics in the thesis citation, not decisions without data. |
 
 ## Immediate next action
 
-Phase 0 and Phase 1 are complete. The source inventory and evidence map are reconciled,
-and seventeen sources are staged without creating uncited bibliography entries. The
-targeted primary pass closed or narrowed the operational claims in cybersecurity,
-autonomous systems, distribution shift, and LLM faithfulness. The production outline,
-editorial design sheet, scope statement, and migration map now implement the approved
-science-first architecture while preserving the eleven-file build contract.
+The evidence-backed rewrite of sections 02 and 03 is complete. The integrated unit now
+defines XAI and its boundaries, explains why explanation is purpose-, audience-, and
+risk-dependent, distinguishes trust from trustworthiness, and connects explanation to
+the AI lifecycle. Six sources used in the prose were promoted into both production
+bibliographies, and the candidate literature, evidence map, source inventory, and
+citation audit were reconciled. The reader-facing Word build has also been regenerated
+and visually inspected across all 48 pages; table widths, figure captions, bibliography
+formatting, and the critical-difference diagram are readable and free of internal paths.
 
-The next section-level unit is the evidence-backed rewrite of sections 02 and 03,
-including transfer of only the sources actually cited into the production APA 7
-bibliographies. Section 04 follows as the new application section. A release Word
-render is intentionally deferred until that first integrated prose unit is complete;
-before then, the new title and architecture would be paired with the legacy body and
-would not constitute a coherent review artifact.
+**Revised order after the 2026-09-29 review:** R0 (commit and reproducible build),
+then R1 (evidence corrections H1, H2, M1-M5) and R2 (drafting voice and repository
+vocabulary). Only then does Section 04 start. R3-R7 follow the phases as mapped in
+"Review remediation workstream".
+
+The next section-level unit after R0-R2 is Section 04, **Application horizons and
+concrete examples**. It will use the repeated decision-stakeholder-risk-evidence-gap structure
+for health and biomedicine, finance and consequential allocation, cybersecurity and
+critical infrastructure, autonomous and industrial systems, and foundation/language/
+multimodal models. Sources will be promoted into the APA 7 bibliography only when they
+are cited in production prose, and each claimed benefit will be paired with its
+scientific limitation or failure mode.
 
 ### Checkpoint verification
 
-- `verify_claims.py`: 257 claims re-derived, 429 manuscript sites checked, all
-  exclusivity guards clear.
+- `verify_claims.py`: 320 claims re-derived, 491 manuscript sites checked, 35
+  retired-value guards clear, 13 cited artifacts present, 21 files fully registered,
+  and 15 files clear of unpublished results.
 - `verify_sync.py`: paper and thesis fragments remain synchronized.
 - `verify_exp4_reconstruction.py`: all 18 available source hashes match the protected
   reconstruction record.
+- `scan_shared_literals.py --strict`: 0 unexplained matches and 53 known
+  coincidences.
+- Production bibliography: 48 BibTeX records and 48 APA 7 entries.
+- Word QA: 11 sections, 4 tables, approximately 18,548 words, and 48 rendered pages.
 - Top-level scope sweep: title, central thesis, objectives, outline, and README retain
   the same bounded claim; no explanation is equated with trust, correctness, causal
   validity, safety, or universal method superiority.

@@ -1,6 +1,8 @@
 # Scientific Scaffold for the CIFIE XAI Book Chapter
 
-**Status:** Approved working scaffold; Phase 2 structural rewrite active
+**Status:** Approved working scaffold; Phase 2 structural rewrite active; enriched
+2026-09-29 with the section-level requirements of the Scientific Advisor review
+(finding IDs refer to the "Review remediation workstream" of the revision plan)
 
 **Created:** 2026-09-28
 
@@ -350,6 +352,20 @@ affected people. Do not add it merely to lengthen the domain list.
 **New material required:** almost the whole section. No empirical performance claims
 should be invented from examples.
 
+**Additions from the 2026-09-29 review:**
+
+- This section closes review finding C2 together with section 06: the title,
+  the section 02 roadmap and section 03's closing paragraph already promise it.
+- Each domain ends with a short "horizonte próximo" paragraph: the expected use of
+  XAI in that domain over the coming years, phrased as an evidence-supported
+  trajectory or research need, never as a forecast. This answers the requirement on
+  expected future uses of XAI at field level, not only as future work for the
+  benchmark.
+- Introduce here the running credit applicant (revision plan R4.6) if the finance
+  example is used; sections 05 and 08 return to it.
+- A stakeholder-purpose-evidence table (scaffold section 11, "Consider adding") can
+  close the section instead of a prose recap.
+
 **Acceptance question:** does every domain example identify a decision, stakeholder,
 benefit, failure mode, and evidentiary requirement?
 
@@ -397,6 +413,30 @@ outputs cannot be ranked on one universal scale.
 **Evidence base:** current foundational method papers and existing reviews. No broad
 performance claim should rely only on this chapter's benchmark.
 
+**Additions from the 2026-09-29 review:**
+
+- **Worked example (R4.1):** one Adult instance explained by the four methods side by
+  side: LIME weights, SHAP attribution, the Anchors rule with its precision and
+  coverage, and one DiCE counterfactual with a note on feasibility. Produce it with a
+  committed script from the frozen models, or label it as illustrative. This is the
+  section's main teaching device; it shows "different questions, different objects"
+  instead of asserting it.
+- **Terminology fixed here and reused everywhere:**
+  - *parsimonia* is measured as the proportion of active features, so lower means
+    more concise. Either rename the measure (for example "densidad de la
+    explicación") or state the inversion once, prominently, at this point.
+  - *brecha de fidelidad* (the Δk metric) collides with *brechas* (the field gaps of
+    section 06). Rename the metric (for example "caída por enmascaramiento") or
+    qualify it every time.
+  - one definition of fidelity; sections 07-08 and Table 3 refer back to it.
+- **SHAP variants:** state here that TreeSHAP is model-specific and KernelSHAP is
+  model-agnostic, so section 08 can disclose the variant confound (review M3)
+  without a new definition.
+- **Remove:** the self-directed sentence "El capítulo debe cuidar especialmente el
+  lenguaje al interpretar DiCE"; the "no se dice X, sino Y" closing (keep the device
+  at most once in the chapter, preferably in section 07); code identifiers such as
+  `logreg_anchors`.
+
 **Acceptance question:** can the reader choose an explanation family based on the
 question being asked without mistaking that choice for evidence that the method is
 valid?
@@ -425,6 +465,18 @@ user, task, and decision.
 **Current material to reuse:** most of `05_crisis_evaluacion_xai.md`, reorganized by
 gap rather than by repeated descriptions of metric fragmentation; selected parts of
 `10_limitaciones_trabajo_futuro.md`.
+
+**Additions from the 2026-09-29 review:**
+
+- Each gap receives one concrete illustration drawn from section 04 or from a cited
+  primary study; old section 05 contained six pages without an example.
+- Remove arguments already made in sections 02-03 ("el nombre del método deja de ser
+  una unidad experimental suficiente", "dos excesos simétricos") and the subsection
+  "Implicación para el capítulo", which addresses the author.
+- The regulatory gap must go beyond the Articles 13-14 summary in section 02: what
+  the rules require versus what current methods can demonstrate.
+- Close with a gap-to-evaluation table (already proposed in section 11 of this
+  scaffold) that section 07 then maps onto the gates.
 
 **Acceptance question:** does the section explain both the gaps FOM-7 addresses and
 the gaps it does not address?
@@ -467,6 +519,27 @@ functionally grounded portion of the gap landscape.
 **Evidence:** FOM-7's definition is project-authored. External literature supports
 the problem and design principles, not an unsupported claim that FOM-7 is the first or
 only such protocol. Any novelty statement requires a scoped literature check.
+
+**Additions from the 2026-09-29 review:**
+
+- **Gate trace figure (R4.2):** follow one claim, "SHAP supera a LIME en fidelidad",
+  from cell artifacts to Table 4, one step per gate. It replaces the ASCII flow block
+  ("Congelación -> ... -> Reporte"), which breaks mid-word in Word.
+- **Uniform gate template is too mechanical:** give each gate its failure example in
+  one or two sentences and move artifact detail (manifest, result files, recovery
+  overlay) into a technical box.
+- **Remove from prose:** `configs/experiments/exp2_scaled/manifest.yaml`,
+  `results.json`, `outputs/batch_results.csv`, `mlp_shap`/`svm_shap`; the
+  sentence "Dentro de este capítulo, FOM-7 debe presentarse como protocolo...".
+- **Thesis labels:** P1 and H1-H3 must not appear before they are defined; define
+  them here in one sentence each or refer only to "la proposición de
+  reproducibilidad" and "las hipótesis del caso".
+- **Expansion of the acronym:** confirm "Framework Operation Method" is the intended
+  expansion and use it consistently with the thesis.
+- **Table 2:** widen "Propósito"; see scaffold section 12.
+- **Support for Gate 1:** Agarwal et al., Canha et al. and Zheng et al. support
+  benchmarking discipline in general, not protocol freezing; cite a
+  preregistration or researcher-degrees-of-freedom source, or narrow the sentence.
 
 **Acceptance question:** can the reader state precisely what FOM-7 guarantees, what it
 checks, and what it leaves unresolved?
@@ -513,6 +586,32 @@ preserving every evidence boundary.
 - RIMI-published results may remain with the appropriate citation;
 - no value may be moved without checking its pinned occurrence count.
 
+**Corrections required from the 2026-09-29 review (see revision plan R1):**
+
+- H1: remove the retired LIME cost "226 ms" (currently in the method section, moving
+  here); use registered per-model costs.
+- H2: the reproducibility CVs (< 3%) come from the EXP2 RF/N=100 subset, not EXP1;
+  add the pooled 11.4% (SHAP) and 12.0% (LIME). Keep section 07's EXP1 CV < 9%.
+- M1: label thesis-only results (paired SHAP-LIME contrast, LIME cross-dataset
+  stability) as unpublished; no causal wording about the origin of LIME instability.
+- M2: qualify LIME's cost and parsimony advantage (DiCE more parsimonious; TreeSHAP
+  on XGBoost cheaper; LIME on SVM 17,620 ms).
+- M3: disclose that "SHAP" pools TreeExplainer and KernelExplainer.
+- M4: disclose non-random Anchors missingness and its bias bound.
+- M5: label the 15/15 block follow-up as exploratory and post hoc.
+
+**Reader-experience additions:**
+
+- Follow each key result with one sentence of practical meaning (R4.3).
+- Revisit the section 05 worked example to show how the benchmark profiles appear in a
+  single case.
+- Put the statistical plan (Friedman, Nemenyi, Kendall's W, Holm, Wilcoxon) in a
+  technical box, with a one-sentence plain gloss of each in the main text.
+- Present the factorial design as a sentence or small table, not a code block.
+- Remove "En un artículo empírico, esta sección podría presentarse..." and "La
+  implicación para un capítulo de libro es conceptual".
+- State each figure's inference in the text before the figure appears.
+
 **Acceptance question:** does the case demonstrate why evidence governance changes
 interpretation, rather than merely repeat a methods leaderboard?
 
@@ -540,6 +639,17 @@ method-specific repetition reduced and application-domain lessons added.
   preferred visualization or explainer.
 - Evaluation should cover pre-deployment validation and post-deployment monitoring.
 - Auditability requires preserving the chain from artifact to claim.
+
+**Additions from the 2026-09-29 review:**
+
+- **Decision guide (R4.4):** a table with columns question type (debugging, audit,
+  contestation, recourse, monitoring), relevant evidence, explanation family, what
+  the Adult case can say, and what it cannot. It replaces the current "Implicaciones
+  prácticas" prose, which restates section 08.
+- The current section is about 700 words and mostly repeats section 08; its new
+  content must come from sections 04 and 06 (domains, lifecycle, gaps).
+- Remove "la pregunta editorialmente más valiosa para un capítulo de libro" and the
+  third "no dice X; dice Y" passage.
 
 **Acceptance question:** are the recommendations actionable without claiming that
 FOM-7 alone establishes trustworthy AI?
@@ -595,6 +705,18 @@ rather than from generic speculation?
 **Current material to reuse:** the best formulations in `11_conclusiones.md`, but the
 opening and closing must reflect the broader chapter rather than primarily the method
 comparison.
+
+**Additions from the 2026-09-29 review:**
+
+- Answer explicitly the guiding question posed in section 02: "¿bajo qué condiciones
+  una explicación de un sistema de IA puede considerarse evidencia útil, reproducible
+  y defendible para una audiencia y un propósito concretos?"
+- Do not list benchmark numbers again; the current draft states the results for the
+  third time.
+- Close on the field-level agenda (future uses and open gaps), not only on the
+  benchmark.
+- Carry over the M1 label: the paired SHAP-LIME result is a thesis result, not yet
+  published.
 
 **Acceptance question:** can the conclusion be read as the answer to the title and
 central thesis?
@@ -678,6 +800,22 @@ The chapter should use a small number of recurring devices:
 Avoid fictional case outcomes, anthropomorphic language, unexplained acronyms, and
 long lists of citations detached from individual claims.
 
+Added after the 2026-09-29 review:
+
+- **Worked examples:** the four-method case (section 05) and the gate trace (section
+  07) are the two anchoring examples; section 08 returns to the first.
+- **Technical boxes:** implementation and statistical detail that a methods reader
+  needs but the argument does not (sections 07-08).
+- **Practical-meaning sentence** after each key number.
+- **Banned in reader-facing prose:** sentences addressed to the author ("el capítulo
+  debe...", "para un capítulo de libro..."); repository paths, file names and code
+  identifiers; undefined thesis labels (P1, H1-H3); more than one use of "no se dice
+  X, sino Y".
+- **Paragraph length:** split paragraphs longer than about eight lines in the Word
+  render, and reduce chains of nominalizations in sections 05-07.
+- **Roadmap check:** the section 02 roadmap and the section 03 closing paragraph must
+  name the sections that actually follow.
+
 ## 11. Tables and figures
 
 ### Retain
@@ -705,6 +843,21 @@ ranking. Candidate minimum:
 Any removed figure remains available in the repository; removal from the chapter does
 not delete the asset.
 
+### Figure requirements from the 2026-09-29 review
+
+| Figure (reviewed build) | Defect | Required change |
+| --- | --- | --- |
+| 1. Coverage heatmap | Black cell labels on near-black cells after grayscale conversion. | Label colour by cell luminance; design in grayscale. |
+| 2. Critical-difference diagram | Small, low-contrast method labels. | Larger black labels; keep the non-significance bars. |
+| 3. Box plots | Printed values are medians, unregistered, and read as the means in the text. | Remove the labels or mark them as medians and register them. |
+| 4. Stability-cost | Legend greys indistinguishable; symmetric SD bars on a log axis run below zero and are clipped. | Marker shapes plus direct labels; IQR or min-max bars. |
+| 5-6. Correlation, radar | Candidates for removal under the minimum-figure rule. | Keep only if they support a distinct inference stated in the text. |
+| All | Titles and CSV filenames inside the images; captions below, fully italic, with "Fuente:". | APA caption above (bold number, italic title) and *Nota.* below; no text duplicated inside the image. |
+
+Planned additions: the four-method worked example (section 05) and the gate-trace
+diagram (section 07). All figures come from `scripts/generate_cifie_chapter_figures.py`,
+committed, and each data label is registered or removed.
+
 ## 12. Word rendering scaffold
 
 The chapter-specific Word pipeline should eventually apply these compatible thesis
@@ -723,6 +876,21 @@ standards:
 Do not automatically copy thesis-only cover, dedication, acknowledgements, chapter
 numbering conventions, or front-matter pagination.
 
+Status against the 2026-09-29 reviewed build (Word render, 75 pages):
+
+| Standard | Status | Remaining work |
+| --- | --- | --- |
+| Black ink | Met for text (all runs explicit black, no theme colours) | Figures must be legible in grayscale (section 11 above). |
+| Justified body | Met for body, captions, notes and references | Code blocks must be left-aligned; table cells stay left-aligned by decision. |
+| 1.5 line spacing | Met for all 462 paragraphs, including table cells | None. |
+| "Fuente inicial" removed | Met in the package | The notes remain in the sources and are stripped only by the build; keep that step committed. |
+| Decimal page numbers | Missing | Add a footer page field. |
+| Page geometry | Undefined (renders Letter here) | Set page size and margins explicitly. |
+| Stable breaks | Not met | Keep-with-next on table number, title and header; keep notes with the table (Tables 2 and 3). |
+| Readable tables | Not met for Table 2 | Widen "Propósito" (2.35 cm) so no word breaks. |
+| Centered figures and APA captions | Figures centered; captions not APA | See section 11 above. |
+| Hanging references | Met | Decide whether justified references (wide gaps near DOIs) are acceptable. |
+
 ## 13. Verification plan for later prose changes
 
 After each completed section revision:
@@ -737,6 +905,21 @@ After each completed section revision:
 
 At chapter completion, run all three project verifiers, a full Scientific Advisor
 rigor review, and a final reference audit.
+
+Added after the 2026-09-29 review:
+
+8. build only from committed state, and record the commit hash with each reviewed
+   DOCX;
+9. render through Microsoft Word for visual inspection (the 2026-09-29 checkpoint
+   recorded 48 pages and readable tables; Word shows 75 pages and three layout
+   defects);
+10. after widening a retired-value guard, negative-test it by reintroducing the value;
+11. run `scripts/pubs/scan_shared_literals.py --strict` for any value moved between
+    sections;
+12. cross-check cited versus listed references on the rendered DOCX text, not only
+    on the sources;
+13. re-run the top-level statement sweep (title, Resumen, section 02 roadmap,
+    conclusions) whenever a claim is rescoped.
 
 ## 14. Baseline recorded for this scaffold
 
