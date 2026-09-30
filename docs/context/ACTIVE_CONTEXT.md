@@ -1,7 +1,16 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-29
+- **Last Updated:** 2026-09-30
+- **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
+  12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
+  the "UCI Adult census-income dataset"; equations numbered with every term
+  defined and sources cited (Bhatt 2020, Samek 2017 added); §8 lists bundle paths
+  in the anonymous build; Step 8 gate passed (record in
+  `OPENREVIEW_SUBMISSION.md`). Editor note (`EIC_ENQUIRY_prior_publication.md`)
+  shortened and filled in for 12779; the author sends it by email to
+  tmlr-editors@jmlr.org, never as a forum comment. **Open:** forum URL not yet
+  recorded; confirm the note was sent. Closes Next Steps item 00 once both are in.
 - **Mode (2026-09-29):** HANDOFF - the CIFIE science-first drafting pass,
   literature enrichment, empirical-figure provenance, and formatted Word build
   were committed on `chapter/cifie-sync-2026-09` and merged to `main`. The
