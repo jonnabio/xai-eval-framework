@@ -1,14 +1,131 @@
-# Ámbitos de aplicación y horizontes próximos
+# Por qué importa la inteligencia artificial explicable
 
 Fuente inicial: `references/candidate_literature_2026-09-28.md`, `sources/evidence_map.md` y `planning/chapter_scaffold_2026-09-28.md`.
 
-## Por qué examinar la XAI por ámbitos
+## Funciones de la explicación durante el ciclo de vida
+
+La necesidad de explicación aparece antes, durante y después del despliegue. En el
+diseño, los artefactos explicativos pueden ayudar a descubrir dependencias espurias,
+variables proxy, fugas de información o comportamientos incompatibles con el
+conocimiento del dominio. En la validación, permiten formular pruebas dirigidas sobre
+casos límite y comparar si distintos modelos apoyan sus salidas en patrones
+semejantes. Durante la operación, pueden contribuir al monitoreo de cambios, al
+análisis de incidentes y a la identificación de condiciones en las que una salida no
+debería aceptarse sin revisión. Después de una decisión, pueden apoyar la
+documentación, la auditoría y la contestabilidad. Estas funciones pertenecen a un
+ciclo de gestión del riesgo y no a un único momento de visualización (Tabassi, 2023).
+
+Cada función exige evidencia diferente. Para depurar, puede ser útil localizar qué
+características influyen en predicciones anómalas; para validar, importa comprobar si
+esa señal se conserva ante perturbaciones relevantes; para supervisar, deben
+comunicarse incertidumbre, límites y condiciones de uso; para auditar, se necesita
+trazabilidad entre datos, versión del modelo, configuración del explicador y
+conclusión. Una misma gráfica no satisface automáticamente todas esas necesidades.
+Tampoco todo fallo requiere otro algoritmo explicativo: en ocasiones la respuesta
+adecuada es mejorar los datos, restringir el ámbito de uso, elegir un modelo
+interpretable por diseño o impedir que el sistema decida sin intervención humana.
+
+Entender la explicación como parte del ciclo de vida evita dos reducciones frecuentes.
+La primera consiste en identificar XAI con una imagen o lista de importancias
+producida después del entrenamiento. La segunda consiste en evaluar esa salida fuera
+del proceso que pretende apoyar. Una explicación útil para diagnosticar un error de
+desarrollo puede ser inadecuada para comunicar una decisión individual. Del mismo
+modo, una representación eficaz en una demostración controlada puede perder valor si
+el modelo, los datos o las condiciones operativas cambian.
+
+## Audiencias, preguntas y responsabilidades distintas
+
+No existe una explicación universal porque tampoco existe un destinatario universal.
+Quien desarrolla un sistema necesita información que permita reproducir y corregir
+su comportamiento. Un equipo de validación necesita pruebas independientes y
+criterios de aceptación. Un profesional del dominio necesita conocer la pertinencia
+de la evidencia, los límites y la posibilidad de apartarse de la recomendación. La
+dirección de una organización requiere comprender exposición al riesgo y controles.
+Una autoridad supervisora necesita documentación verificable. La persona afectada
+por una decisión necesita una comunicación comprensible, específica y vinculada con
+las posibilidades reales de revisión o actuación.
+
+Phillips et al. (2021) sostienen que el significado de una explicación depende del
+usuario y de la situación, mientras Miller (2019) muestra que las explicaciones
+humanas suelen ser selectivas, sociales y contrastivas: con frecuencia responden por
+qué ocurrió un resultado en lugar de otro. Estas observaciones ayudan a diseñar la
+comunicación, pero no eliminan la obligación técnica de comprobar que lo comunicado
+corresponde al comportamiento del sistema. La explicación destinada a una persona
+afectada puede priorizar claridad y contraste; la dirigida a un auditor puede exigir
+artefactos, parámetros y pruebas que serían impropios para esa comunicación. Adaptar
+el formato no autoriza a cambiar el hecho explicado ni a ocultar incertidumbre.
+
+La consecuencia metodológica es directa: antes de seleccionar un método XAI deben
+declararse la pregunta, la audiencia y la acción que la explicación pretende apoyar.
+Sin esa especificación, términos como “comprensible”, “útil” o “accionable” carecen
+de un criterio verificable. Una evaluación rigurosa debe distinguir, además, entre
+percepción subjetiva, comprensión demostrada, desempeño en una tarea y posibilidad
+de actuar. Son resultados relacionados, pero no equivalentes.
+
+## Explicabilidad, confianza y confiabilidad
+
+La explicabilidad es una dimensión de la IA confiable, no un sustituto de las demás.
+El marco de gestión de riesgos de NIST sitúa explicabilidad e interpretabilidad junto
+con validez y fiabilidad, seguridad, resiliencia, privacidad, equidad, transparencia
+y rendición de cuentas; también advierte que estas características dependen del
+contexto y pueden entrar en tensión (Tabassi, 2023). Una explicación técnicamente
+fiel no corrige un conjunto de datos sesgado, no garantiza seguridad y no convierte
+una predicción en causal. Del mismo modo, una interfaz clara no compensa un modelo
+inválido para la población o el uso previstos.
+
+También debe distinguirse confianza de confianza calibrada. El objetivo no es elevar
+la aceptación del sistema, sino favorecer una dependencia proporcional a su
+competencia y a la evidencia disponible. Una explicación persuasiva puede aumentar
+la confianza aun cuando sea incompleta; una explicación compleja pero exacta puede
+no ayudar a una persona a decidir. La revisión sistemática de Kim et al. (2024)
+organiza la evaluación humana en dimensiones diferentes: calidad de la explicación
+en contexto, contribución a la interacción humano-IA y contribución al desempeño.
+Que una persona declare comprender o confiar en el sistema no demuestra por sí mismo
+que decida mejor.
+
+La evidencia experimental refuerza esta cautela. En las tareas estudiadas por
+Alufaisan et al. (2021), proporcionar una predicción de IA tendió a mejorar la
+exactitud humana, pero añadir información explicativa no produjo evidencia concluyente
+de una mejora adicional. En una serie de experimentos prerregistrados sobre modelos
+de precios de vivienda, Poursabzi-Sangdeh et al. (2021) observaron que un modelo claro
+y con pocas variables facilitaba simular sus predicciones, sin mejorar necesariamente
+el seguimiento apropiado de la recomendación; en condiciones concretas, la
+transparencia incluso dificultó detectar y corregir errores grandes. Estos resultados
+no prueban que las explicaciones nunca ayuden. Muestran que comprensión del modelo,
+confianza, corrección de errores y desempeño decisional deben medirse por separado y
+dentro de la tarea experimental que los produce.
+
+## Supervisión, gobernanza y contestabilidad
+
+La importancia práctica de la XAI también se refleja en marcos de gobernanza que
+vinculan transparencia con uso apropiado y supervisión humana. Para los sistemas de
+alto riesgo dentro de su ámbito, el artículo 13 del Reglamento de Inteligencia
+Artificial de la Unión Europea exige un grado de transparencia que permita a los
+responsables del despliegue interpretar la salida y utilizarla adecuadamente; el
+artículo 14 relaciona la supervisión con comprender capacidades y límites, reconocer
+el sesgo de automatización y poder ignorar, revertir o interrumpir una salida cuando
+corresponda (European Parliament & Council of the European Union, 2024). Esta
+exigencia no prescribe un explicador universal ni demuestra la eficacia de una
+técnica concreta. Sí muestra que la interpretación debe integrarse con información
+sobre desempeño, limitaciones, documentación y capacidad real de intervención.
+
+La contestabilidad amplía esa lógica. Una explicación solo contribuye a impugnar una
+decisión si identifica un resultado concreto, se conecta con el proceso que puede
+revisarlo y no ofrece cambios imposibles como si fueran opciones reales. Por tanto,
+la gobernanza de explicaciones abarca más que su forma: incluye procedencia,
+responsabilidad, registro de versiones, conservación de evidencia y vías para actuar
+ante un error. En ausencia de esas condiciones, la explicación corre el riesgo de
+convertirse en una justificación unilateral del sistema.
+
+## Ámbitos de aplicación y horizontes próximos
+
+### Por qué examinar la XAI por ámbitos
 
 Las secciones anteriores mostraron que una explicación solo adquiere valor cuando se conoce la pregunta que responde, la audiencia a la que sirve y la evidencia que la respalda. Los ámbitos de aplicación hacen visible esa dependencia. En cada uno cambia la decisión apoyada por el sistema, cambia quién necesita la explicación, cambia el daño que puede causar una explicación engañosa y cambia la evidencia que debería exigirse antes de confiar en ella. Por eso, esta sección no presenta un catálogo de usos, sino cinco ámbitos que plantean exigencias explicativas distintas.
 
 Cada ámbito se examina con la misma pauta: la decisión o tarea, el actor que necesita la explicación, un ejemplo acotado, el beneficio plausible, el modo de fallo y la evidencia necesaria. Los ejemplos son escenarios ilustrativos construidos para aclarar el razonamiento; no describen resultados de un sistema concreto. Las afirmaciones empíricas se apoyan en las fuentes citadas y se limitan a lo que esas fuentes estudiaron. Cada ámbito se cierra con un horizonte próximo, formulado como una trayectoria de investigación o de gobernanza respaldada por la literatura, no como una predicción.
 
-## Salud y biomedicina
+### Salud y biomedicina
 
 En salud, los modelos de aprendizaje automático apoyan tareas como la estratificación del riesgo, la priorización de casos o la lectura de imágenes. La explicación la necesitan actores distintos: el equipo que desarrolla y valida el modelo, el profesional que decide sobre un paciente, el comité que autoriza su uso y la persona afectada por la decisión. La Organización Mundial de la Salud sitúa la transparencia, la explicabilidad y la inteligibilidad entre sus principios éticos para la IA en salud, junto con la protección de la autonomía, la seguridad, la responsabilidad, la equidad y la sostenibilidad, y vincula esos principios con una gobernanza que acompaña todo el ciclo de vida del sistema (World Health Organization, 2021).
 
@@ -18,7 +135,7 @@ El modo de fallo aparece cuando la misma herramienta se traslada a la decisión 
 
 **Horizonte próximo.** La trayectoria más respaldada es la integración de la explicabilidad en la gobernanza del ciclo de vida: documentación, validación antes del despliegue y seguimiento posterior (World Health Organization, 2021). La pregunta abierta es empírica: si las explicaciones mejoran decisiones clínicas reales, algo que requiere estudios centrados en humanos y en la aplicación, cuya práctica aún carece de marcos de evaluación homogéneos (Kim et al., 2024).
 
-## Finanzas y decisiones de asignación
+### Finanzas y decisiones de asignación
 
 En finanzas, la explicabilidad acompaña decisiones que asignan oportunidades o gestionan riesgos. La revisión sistemática de Weber et al. (2024) documenta aplicaciones de XAI en la gestión del riesgo, incluida la evaluación crediticia, en la gestión de carteras, en el análisis de mercados y en la prevención del blanqueo de capitales, con una cobertura de evidencia desigual entre esas áreas. La existencia de aplicaciones no demuestra, por sí sola, su eficacia operativa ni su adecuación regulatoria.
 
@@ -28,7 +145,7 @@ Los modos de fallo son conocidos. Las variables correlacionadas pueden repartir 
 
 **Horizonte próximo.** La combinación de obligaciones de transparencia y de decisiones con consecuencias individuales hace previsible una demanda creciente de explicaciones auditables y de recursos contrafactuales factibles. La brecha científica es la evaluación del *recourse*: demostrar que una alternativa propuesta es viable, estable y justa para la persona, y no solo válida para el modelo.
 
-## Ciberseguridad e infraestructura crítica
+### Ciberseguridad e infraestructura crítica
 
 En ciberseguridad, los modelos apoyan la detección de intrusiones, software malicioso y otras amenazas, y las explicaciones se dirigen sobre todo a analistas que deben decidir con rapidez qué alertas investigar. La revisión de Rjoub et al. (2023) organiza estos usos y subraya desafíos propios del ámbito, entre ellos las restricciones operativas y la presencia de adversarios.
 
@@ -38,7 +155,7 @@ El ámbito añade un modo de fallo que en otros es secundario: el adversario. Se
 
 **Horizonte próximo.** La trayectoria más probable es la incorporación de explicaciones en los flujos de triaje de alertas. Las necesidades de investigación son la evaluación operativa, con tiempos, carga de trabajo y errores reales, y la evidencia sobre ataques dirigidos específicamente a las explicaciones en sistemas desplegados, todavía escasa.
 
-## Sistemas autónomos e industriales
+### Sistemas autónomos e industriales
 
 En los sistemas autónomos, las decisiones se encadenan en tiempo real y los errores pueden tener consecuencias físicas. La revisión sistemática de Kuznietsov et al. (2024) sobre conducción autónoma distingue varias funciones de la XAI: el diseño de componentes interpretables, las explicaciones mediante modelos sustitutos, el monitoreo del sistema, la validación y la comunicación con los ocupantes y otros usuarios. Un ingeniero que revisa por qué un vehículo frenó ante un obstáculo inexistente, o por qué un modelo de mantenimiento predictivo anticipó una avería en una línea industrial, usa la explicación como herramienta de diagnóstico y de validación.
 
@@ -48,7 +165,7 @@ El modo de fallo principal es confundir una justificación legible con una garan
 
 **Horizonte próximo.** La literatura apunta a integrar las explicaciones en el monitoreo y la validación continuos, más que a ofrecerlas solo como comunicación. Una dificultad transversal refuerza esta dirección: una explicación ajustada a una distribución de datos puede dejar de aproximar adecuadamente el modelo cuando la distribución cambia, lo que obliga a evaluar las explicaciones también frente a esos cambios (Lakkaraju et al., 2020).
 
-## Modelos fundacionales, de lenguaje y multimodales
+### Modelos fundacionales, de lenguaje y multimodales
 
 Los modelos de lenguaje de gran escala amplían y transforman el problema. Zhao et al. (2024) muestran que su explicabilidad exige métodos adaptados al tamaño de los modelos y a su forma de uso, y que la evaluación de esas explicaciones, incluida su fidelidad al proceso interno, enfrenta problemas distintos de los de la XAI tabular. Además, estos modelos pueden generar por sí mismos razonamientos en lenguaje natural, lo que crea una tentación nueva: tratar la justificación que el modelo escribe como si describiera cómo llegó a su respuesta.
 
@@ -58,7 +175,7 @@ Un equipo que verifica si un asistente responde a partir de los documentos que s
 
 **Horizonte próximo.** La explicabilidad de estos modelos es uno de los frentes más activos del campo, y su evaluación sigue abierta. Las extensiones a sistemas multimodales plantean las mismas preguntas con mayor complejidad, y la evidencia sobre la fidelidad de sus explicaciones es todavía limitada.
 
-## Lo que los ámbitos tienen en común
+### Lo que los ámbitos tienen en común
 
 Los cinco ámbitos confirman tres ideas que recorren el capítulo. Primero, ningún tipo de explicación sirve a todas las audiencias: el equipo técnico, el profesional que decide, la persona afectada y el regulador formulan preguntas distintas sobre el mismo sistema. Segundo, el beneficio de una explicación depende de la evidencia que la respalda, no de su claridad; en varios de los estudios citados, las explicaciones no mejoraron el desempeño en la tarea, y las explicaciones erróneas deterioraron la respuesta de las personas. Tercero, cada ámbito añade condiciones propias, como la validación clínica, la factibilidad del *recourse*, la presencia de adversarios, la seguridad física o la fidelidad de razonamientos generados.
 

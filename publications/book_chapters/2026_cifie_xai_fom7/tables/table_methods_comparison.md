@@ -1,4 +1,4 @@
-**Tabla 1**
+**Tabla 2**
 
 *Comparación conceptual de los métodos de explicabilidad evaluados*
 

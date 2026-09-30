@@ -1,5 +1,12 @@
 # Esquema científico del capítulo
 
+> **Orden vigente (2026-09-30, decisión del autor):** 02 Introducción; 03 Qué es y qué no
+> es la XAI; 04 Por qué importa la XAI (funciones, audiencias y ámbitos); 05 La crisis de
+> evaluación en XAI (brechas); 06 Protocolo FOM-7; 07 Métodos evaluados y diseño del
+> benchmark; 08 Aplicación empírica; 09 Implicaciones; 10 Limitaciones; 11 Conclusiones.
+> Los nombres de archivo no cambian. Este orden prevalece sobre la numeración de las
+> secciones siguientes; véase `planning/science_first_revision_plan_2026-09-28.md`.
+
 **Estado:** estructura de producción aprobada para la revisión science-first
 
 **Título de trabajo:** *De la explicación a la evidencia: fundamentos,

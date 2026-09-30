@@ -1,4 +1,4 @@
-**Tabla 2**
+**Tabla 1**
 
 *Puertas del protocolo FOM-7*
 
