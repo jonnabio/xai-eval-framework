@@ -6,7 +6,7 @@ carry no new result. Illustrative values are labelled as such inside the figure.
 The only design numbers used (300 planned cells, 275 qualified cells, 15 blocks) are
 the ones the chapter already reports in section 07.
 
-Style: Cambria, black ink plus four grays, hatching instead of colour for identity,
+Style: Times New Roman (the editor's typeface), black ink plus four grays, hatching instead of colour for identity,
 0.8 pt lines, no figure title inside the image (the APA caption carries it), width
 matched to the 14.65 cm text block of the TintAzul/CIFIE template.
 
@@ -15,8 +15,8 @@ Outputs:
   publications/book_chapters/2026_cifie_xai_fom7/figures/editable/fig_dN_*_es.{pdf,svg}
 
 Usage: python scripts/generate_cifie_didactic_figures.py [--only d1,d4,...]
-Requires matplotlib and numpy; uses the Cambria fonts installed with Windows or
-Microsoft Office, falling back to a serif font when they are absent.
+Requires matplotlib and numpy; uses the Times New Roman fonts installed with
+Windows, falling back to a serif font when they are absent.
 """
 from __future__ import annotations
 
@@ -50,15 +50,15 @@ FS = 7.6             # body text size (pt)
 FS_HEAD = 8.2        # box header size (pt)
 FS_SMALL = 6.8       # notes
 
-for fname in ("cambria.ttc", "cambriab.ttf", "cambriai.ttf", "cambriaz.ttf"):
+for fname in ("times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf"):
     path = Path("C:/Windows/Fonts") / fname
     if path.exists():
         font_manager.fontManager.addfont(str(path))
 plt.rcParams.update({
     "font.family": "serif",
-    "font.serif": ["Cambria", "DejaVu Serif"],
+    "font.serif": ["Times New Roman", "DejaVu Serif"],
     "mathtext.fontset": "custom",
-    "mathtext.rm": "Cambria",
+    "mathtext.rm": "Times New Roman",
     "svg.fonttype": "none",
     "pdf.fonttype": 42,
     "text.color": INK,
@@ -79,7 +79,7 @@ def canvas(height_cm: float):
 
 
 def wrap(text: str, width_cm: float, size: float = FS) -> str:
-    # Cambria averages about 0.47 em per character.
+    # Times New Roman averages about 0.45 em per character; 0.47 keeps a margin.
     chars = max(8, int(width_cm * 28.35 / (0.47 * size)))
     return "\n".join(textwrap.fill(p, chars, break_long_words=False, break_on_hyphens=False)
                      for p in text.split("\n"))

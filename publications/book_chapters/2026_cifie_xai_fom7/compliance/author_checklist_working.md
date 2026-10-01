@@ -85,12 +85,12 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 ## VIII. Formato editorial
 
 - [ ] Plantilla oficial del Congreso CIFIE [E-FMT].
-- [ ] Tipografía: Cambria 12 pt [E-FMT].
+- [x] Tipografía: Times New Roman 12 pt (indicación del editor, 2026-10-01) [E-FMT].
 - [x] Interlineado 1.5.
 - [ ] Márgenes (A4; 2.54 cm superior e inferior; 3.17 cm laterales) y estilos [E-FMT].
 - [ ] Jerarquía de títulos de la plantilla [E-FMT].
 - [x] Numeración de tablas y figuras.
-- [?] Extensión conforme a los lineamientos: límite aún sin respuesta del editor; tamaño en observación tras cada edición mayor (20.903 palabras de cuerpo, 83 páginas, 2026-09-30) [E-Q1, E-SIZE].
+- [ ] Extensión: límite de 9.000 palabras (editor, 2026-10-01); el cuerpo tiene 20.350 palabras. Plan de reducción en `planning/length_plan_9000_2026-10-01.md`; confirmar si las referencias cuentan [E-Q1b, E-SIZE].
 
 ## IX. Revisión final
 

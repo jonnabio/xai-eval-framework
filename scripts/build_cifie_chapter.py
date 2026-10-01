@@ -321,15 +321,16 @@ def format_academic_text(docx: Path) -> None:
     document.save(docx)
 
 
-TEMPLATE_FONT = "Cambria"
+TEMPLATE_FONT = "Times New Roman"
 MONOSPACE_STYLES = {"Source Code", "Verbatim Char"}
 
 
 def apply_template_format(docx: Path) -> None:
     """Apply the TintAzul/CIFIE template format (editorial/GUÍA-PLANTILLA.docx).
 
-    A4 page with 2.54 cm top and bottom and 3.175 cm side margins; Cambria
-    12 pt for all text; headings bold at 12 pt, level 1 in uppercase. Table
+    A4 page with 2.54 cm top and bottom and 3.175 cm side margins; Times New
+    Roman 12 pt for all text (the editor's instruction of 2026-10-01, which
+    overrides the Cambria of the template file); 1.5 line spacing; headings bold at 12 pt, level 1 in uppercase. Table
     cells keep the 10 pt set by format_data_tables. The template's header logo
     is not added until the editor confirms authors should include it.
     """
