@@ -38,7 +38,7 @@ ser sencillo para una persona experta y opaco para otra audiencia. La
 comprensión o aportar razones examinables. La **transparencia** se refiere a la
 visibilidad de elementos del sistema y de su proceso, como estructura, datos,
 supuestos, documentación, versiones y responsabilidades (Lipton, 2018; Murdoch et
-al., 2019).
+al., 2019). Véase la Figura 1.
 
 Las tres nociones se apoyan, pero no se sustituyen. Conocer la fórmula de un modelo no
 garantiza que una persona pueda emplearla en una decisión. Recibir una explicación
@@ -55,6 +55,8 @@ además de validez, seguridad, robustez, privacidad, equidad y gobernanza. La
 explicabilidad contribuye a examinar esas propiedades; no las certifica por sí sola
 (Tabassi, 2023).
 
+![Figura 1. Transparencia, interpretabilidad y explicabilidad: tres nociones distintas. Fuente: elaboración propia a partir de Lipton (2018), Murdoch et al. (2019), Phillips et al. (2021) y Tabassi (2023).](../figures/exported/fig_d1_conceptos_es.png)
+
 ## Modelos interpretables por diseño y explicaciones post-hoc
 
 Un modelo interpretable por diseño permite examinar su lógica predictiva de forma
@@ -65,7 +67,7 @@ familia: un árbol extenso o una regla con numerosas excepciones puede dejar de 
 comprensible en la práctica. En problemas de alto impacto, cuando un modelo
 interpretable alcanza un desempeño adecuado y satisface las necesidades del dominio,
 su uso debe considerarse antes de adoptar una caja negra acompañada de una
-explicación aproximada (Rudin et al., 2022).
+explicación aproximada (Rudin et al., 2022). Véase la Figura 2.
 
 Los métodos post-hoc actúan después del entrenamiento. Consultan el predictor,
 analizan sus componentes o generan perturbaciones para construir un artefacto que
@@ -83,6 +85,8 @@ del modelo** aprovecha gradientes, activaciones, estructura de árboles u otra
 información interna; puede ser más eficiente o preciso dentro de una familia, aunque
 menos transferible. Agnosticidad y especificidad son decisiones de diseño, no
 calificaciones automáticas de calidad (Marcinkevičs & Vogt, 2023).
+
+![Figura 2. Del modelo interpretable por diseño a la explicación post-hoc. Fuente: elaboración propia a partir de Rudin et al. (2022) y Marcinkevičs y Vogt (2023).](../figures/exported/fig_d2_modelos_es.png)
 
 ## Alcance local y alcance global
 
@@ -117,7 +121,7 @@ una salida y ayudan a preguntar qué variables influyeron según el explicador. 
 observaciones conocidas. Los **contrafactuales** buscan cambios que modificarían la
 salida. Las explicaciones basadas en **conceptos** relacionan representaciones del
 modelo con categorías de mayor nivel. Los resúmenes globales describen patrones,
-interacciones o regiones de decisión.
+interacciones o regiones de decisión. Véase la Figura 3.
 
 Cada objeto ofrece información y riesgos distintos. Una atribución ordena variables,
 pero no establece que intervenir sobre ellas cambie el resultado en el mundo. Una
@@ -134,6 +138,8 @@ atribuciones o aproximaciones locales, Anchors como productor de reglas y DiCE c
 generador de contrafactuales. Esta descripción no los hace equivalentes. Sirve para
 vincular cada método con la pregunta que puede responder, el fallo que debe vigilarse
 y la evidencia apropiada para evaluarlo.
+
+![Figura 3. Un mismo caso explicado mediante cuatro objetos explicativos. Fuente: elaboración propia a partir de Ribeiro et al. (2016), Lundberg y Lee (2017), Ribeiro et al. (2018) y Mothilal et al. (2020); caso y valores ilustrativos.](../figures/exported/fig_d4_objetos_explicativos_es.png)
 
 ## Plausibilidad, fidelidad, estabilidad, robustez y utilidad
 
@@ -201,7 +207,7 @@ centrada en humanos y evaluación funcionalmente fundamentada. La primera utiliz
 personas expertas y tareas reales; la segunda estudia personas en tareas
 simplificadas; la tercera emplea proxies computacionales sin participantes. Ningún
 nivel domina en todos los casos. Cada uno responde preguntas diferentes y exige un
-diseño compatible con la afirmación buscada.
+diseño compatible con la afirmación buscada. Véase la Figura 4.
 
 FOM-7 se sitúa principalmente en el nivel funcionalmente fundamentado. Controla el
 protocolo, la ejecución, los artefactos, la armonización, la inferencia, la
@@ -217,3 +223,5 @@ métodos se presentarán por el objeto que producen; las brechas se organizarán
 tipo de validez que falta; y el caso empírico mostrará cómo un protocolo puede
 convertir comparaciones heterogéneas en afirmaciones auditables sin convertirlas en
 verdades universales.
+
+![Figura 4. Niveles de evaluación de la explicabilidad y posición de FOM-7. Fuente: adaptada de Doshi-Velez y Kim (2017).](../figures/exported/fig_d6_niveles_evaluacion_es.png)

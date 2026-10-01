@@ -122,12 +122,10 @@ def format_data_tables(docx: Path) -> None:
 
     # Widths sum to the 14.65 cm text block of the TintAzul/CIFIE template (A4,
     # 3.175 cm side margins). The allocations protect short label columns from
-    # mid-word breaks; the FOM-7 gates table gives "Propósito", its longest column, the most room.
-    # Document order since 2026-09-30: FOM-7 gates (section 06), methods and
-    # metrics (section 07), results (section 08).
+    # mid-word breaks. Since 2026-10-01 (length plan) the chapter has two
+    # tables: metrics (section 07) and results (section 08); the FOM-7 gates
+    # and methods tables were replaced by figures and moved to tables/retired/.
     width_specs_cm = [
-        [2.95, 4.20, 3.10, 4.40],
-        [2.20, 2.78, 2.52, 3.51, 3.64],
         [3.00, 1.75, 4.70, 2.90, 2.30],
         [3.47, 2.31, 2.31, 3.47, 3.09],
     ]

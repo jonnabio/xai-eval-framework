@@ -327,6 +327,7 @@ Size log (append one row per big edit):
 | 2026-09-30 | E-APA / R6 (references only) | 20,424 | 0 | 82 | in-text citation edits in 02, 03, 08; reference list 55 entries |
 | 2026-09-30 | E-FMT template format (build only) | 20,424 | 0 | 78 | A4, Cambria 12 pt; page count falls with the wider A4 text block |
 | 2026-09-30 | N-ARC narrative move | 20,350 | -74 | 77 | 02 520; 04 3,223; 05 1,848; 06 2,399; 07 4,589; 08 1,820 (obsolete transition paragraph of former 05 removed) |
+| 2026-10-01 | Length plan step 3 (deletions, tables, figures) | 19,072 | -1,278 | 70 | 03 2,100; 04 3,262; 05 1,875; 06 2,257; 07 3,789; 08 1,760 (includes ten figure captions); tables 431. Limit 9,000 excluding references; 10,292 to cut |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
