@@ -374,3 +374,21 @@ same Table S5.
    that an artifact of transcribing Table S1 after the templates were lost?
 4. **F01**: do you want Tier 1 conditioned on XGBoost only, or to add "measure first" guidance for
    other tree ensembles?
+
+## Post-fix status (Step 8, 2026-09-30)
+
+Checked against the rebuilt PDF (27 pages) on the paper lane at `e57f49e04`.
+
+| Finding | Status | Commit |
+| ------- | ------ | ------ |
+| F01, F03, F09 | Fixed: Tier 1 scoped to XGBoost; one scoped account of LIME instability | `91766b04d` |
+| F02 | Fixed: restated Paper A means removed; paired-difference and gap-only figures; registry-independent scan added | `85c65557a`, `b37fae1ff` |
+| F04, F05, F06 | Fixed: screening record, Table S5 provenance, scoped axiom paragraph | `c5457ab9c` |
+| F07, F08, F11, F12, F18, F19 | Fixed | `8caf2b29e` |
+| F10 | Closed by author decision (won't fix) | `22f8f26c8` |
+| F13, F14, F15 | Fixed | `f6c244dd1` |
+| F16, F17 | Fixed | `3929936e3` |
+
+Later, beyond the review: the abstract names the dataset as the "UCI Adult census-income dataset"
+(`57811d139`), and the equations are numbered with every term defined and their sources cited
+(`05016a963`). The "After any revision" checklist passes; its record is in `OPENREVIEW_SUBMISSION.md`.

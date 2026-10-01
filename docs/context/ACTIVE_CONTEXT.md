@@ -1,7 +1,19 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-29
+- **Last Updated:** 2026-09-30
+- **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
+  12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
+  the "UCI Adult census-income dataset"; equations numbered with every term
+  defined and sources cited (Bhatt 2020, Samek 2017 added); §8 lists bundle paths
+  in the anonymous build; Step 8 gate passed (record in
+  `OPENREVIEW_SUBMISSION.md`). Editor note (`EIC_ENQUIRY_prior_publication.md`)
+  shortened and filled in for 12779; the author sends it by email to
+  tmlr-editors@jmlr.org, never as a forum comment. Forum:
+  https://openreview.net/forum?id=VkmWJZclmH (forum ID `VkmWJZclmH`). Editor
+  note sent by email (author confirmed 2026-09-30). **Next Steps item 00
+  (file Paper B+C) is CLOSED.** The paper lane stays open, frozen, for the
+  review-response revision; filed version is tag `tmlr-submission-12779`.
 - **Mode (2026-09-29):** HANDOFF - the CIFIE science-first drafting pass,
   literature enrichment, empirical-figure provenance, and formatted Word build
   were committed on `chapter/cifie-sync-2026-09` and merged to `main`. The
@@ -1321,7 +1333,7 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
   render.
 
 ## Next Steps
-00. [ ] **(2026-09-28: author revision finished; remediation of the TMLR pre-submission review in progress - see the 2026-09-28 Session Handoff.)** **Paper B+C is NOT submitted and is PAUSED for author revision
+00. [x] **CLOSED 2026-09-30: Paper B+C filed with TMLR as submission 12779 (forum `VkmWJZclmH`); editor note emailed. See "Session Handoff - 2026-09-30". The text below is historical.** **Paper B+C is NOT submitted and is PAUSED for author revision
    (2026-09-15).** OpenReview account active since 2026-09-14 and the package is
    built, but it was verified against the pre-revision manuscript. **Before filing,
    run the "After any revision" checklist in
@@ -1643,3 +1655,74 @@ constraint or overarching goal is superseded.
   generator runs successfully.
 - Next CIFIE action: independent Scientific Advisor review for rigor, references,
   readability, flow, and DOCX presentation before the next drafting unit.
+
+## Session Handoff - 2026-09-30 (Paper B+C filed with TMLR)
+
+**Paper B+C is submitted: TMLR submission 12779,
+https://openreview.net/forum?id=VkmWJZclmH.** The filed version is tag
+`tmlr-submission-12779` (paper lane `75b93a7f4`). The active objective returns
+to **Task 3 / RCA-001 Phase 2** on `thesis/rca-001-phase-2`.
+
+- **Completed**
+  - Author name: Herrera-Vásquez (hyphen and accent) in every paper, reference,
+    submission document and repository metadata file; the thesis keeps
+    "Herrera Vásquez" (`9ed98f299`). Papers A, B, B+C and C PDFs rebuilt.
+  - Abstract (`pub/claims.toml`): "the Adult tabular benchmark" became "the UCI
+    Adult census-income dataset", and "on Adult" became "on the Adult data"
+    (`57811d139`).
+  - Equations (`05016a963`): five display equations numbered and
+    cross-referenced; the duplicate LIME objective removed from the
+    introduction; every term defined (U, G, L, pi_x, phi_0, M, perturbation noise,
+    masked instances); definitions checked against `src/metrics/faithfulness.py`,
+    `stability.py` and `src/experiment/runner.py` (masking = training-set mean;
+    f = positive-class probability; fidelity = Pearson correlation over
+    single-feature masks). Citations added: Bhatt et al. 2020 (fidelity),
+    Samek et al. 2017 and Hooker et al. 2019 (gap), Alvarez-Melis and Jaakkola
+    2018 (stability); both new entries verified in Crossref. 27 pages.
+  - Step 8 submission gate (`1ca107200`): both PDFs rebuilt (27 + 5 pages), all
+    verifiers and the strict shared-literal scan green, identity scan clean,
+    bundle rebuilt, de-anonymised variant built once and discarded, sheet
+    regenerated (306-word abstract), post-fix status of F01-F19 appended to the
+    rigor review.
+  - §8 availability section (`75b93a7f4`): the anonymous build now lists the
+    bundle's own paths (each checked present) instead of repository paths, and
+    no longer contradicts itself on the corpus full texts; the de-anonymised
+    build keeps repository paths and the Zenodo DOI. Bundle rebuilt and
+    re-scanned.
+  - Filed by the author on OpenReview; editor note shortened, filled in for
+    12779 and sent by email to tmlr-editors@jmlr.org (`b83b35731`). Forum ID
+    recorded; Next Steps item 00 closed (`90ed6e5b9`).
+- **Current State**
+  - All four lanes clean, pushed, and containing `main` (`90ed6e5b9` or later).
+  - Paper lane `paper/bc-venue-definition` is kept open and **frozen** for the
+    review-response revision. Do not edit Paper B+C on any lane before reviews.
+  - Verification at handoff: 321 claims / 485 sites / 46 retired-value guards;
+    sync green; 18 EXP4 source pins green; shared literals 0 unexplained / 53
+    known.
+- **Next Steps**
+  1. Resume Task 3 / RCA-001 Phase 2 on the thesis lane.
+  2. Watch OpenReview for the Action Editor assignment, any desk-reject or
+     formatting notice, then reviews. If the editors reply to the note, draft
+     the response with the author.
+  3. Optional, thesis lane: scope three passages as the paper now does - Ch.4
+     l.193 "no es marginal, sino estructural"; Ch.6 P1 row "incoherencia
+     estructural"; Ch.4 l.620 TreeSHAP efficiency scoped to XGBoost.
+  4. CIFIE: the Scientific Advisor review queued in the 2026-09-29 handoff.
+- **Blockers/Issues**
+  - None blocking. The camera-ready build with `[accepted]` compiles; the
+    acknowledgment's "prepared from repository artifacts dated May 2026" is out
+    of date and must be revised if accepted, along with `\openreview`, `\month`
+    and `\year`.
+  - Review F10 is closed as won't-fix by author decision; never raise it.
+- **Notes**
+  - Any change to Paper B+C is now a revision in response to review: branch from
+    tag `tmlr-submission-12779` on the paper lane, then run the whole "After any
+    revision" checklist in `OPENREVIEW_SUBMISSION.md`.
+  - Keep double-blind: nothing public linking the author to forum `VkmWJZclmH`
+    while under review.
+  - The artifact bundle is gitignored; rebuild with
+    `python scripts/pubs/build_artifact_bundle.py` (needs `data/adult.csv`).
+  - GNU sed treats `\u` in a replacement as "uppercase next char": edit LaTeX
+    with the Edit tool or Python, not sed.
+  - Build the de-anonymised variant by copying the `.tex` with
+    `\usepackage[accepted]{tmlr}` to a temporary file; never commit it.
