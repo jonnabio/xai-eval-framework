@@ -1764,7 +1764,9 @@ frozen" or "keep double-blind" is historical.
     point at the PeerJ files. `[papers.paper_bc]` in `pub/claims.toml` holds the
     structured abstract.
   - `verify_claims.py` skips dotted version triples (e.g. 1.7.1).
-  - `.zenodo.json` / `CITATION.cff` set to v0.3.0; affiliation spelling fixed.
+  - `.zenodo.json` / `CITATION.cff` set to v0.4.0 (record 21538180 already uses
+    0.3.0); `CITATION.cff` cites the concept DOI `10.5281/zenodo.19297723`;
+    affiliation spelling fixed.
 - **Current State**
   - This lane is merged with `main`. Verification: 321 claims / 485 sites / 46
     retired-value guards; sync green; 18 EXP4 pins green; shared literals 0
@@ -1782,8 +1784,8 @@ frozen" or "keep double-blind" is historical.
   - Future Paper B+C edits: a short-lived `paper/bc-<topic>` branch in the main
     folder, merged through `main` (ADR-0019). Close Word first.
 - **Next Steps**
-  1. Author: publish the Zenodo v0.3.0 release (`ZENODO_RELEASE.md`) and send
-     the version DOI and concept DOI; then set `\zenodoversiondoi` and
+  1. Author: publish the Zenodo v0.4.0 release (`ZENODO_RELEASE.md`) and send
+     the version DOI; then set `\zenodoversiondoi` and
      `CITATION.cff`. The PDF prints "[ZENODO VERSION DOI PENDING]" until then.
   2. Author: decide payment (D3). PeerJ charges after acceptance: APC about
      US$2,155, or one Lifetime Membership from about US$755. Not waivable for
