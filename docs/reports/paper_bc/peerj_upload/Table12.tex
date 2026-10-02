@@ -1,0 +1,48 @@
+% Table 12 of paper_bc_peerjcs.tex, exported for PeerJ upload by
+% scripts/pubs/export_peerj_upload.py. Do not edit: edit the manuscript and re-export.
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[authoryear,round]{natbib}
+\begin{document}
+\begin{table}[h]
+\centering
+\caption{Hybrid Deployment Pattern: tier-conditioned explainer recommendation.}
+
+\begin{tabularx}{\linewidth}{p{2.0cm} >{\raggedright\arraybackslash}p{3.0cm} X}
+\toprule
+\textbf{Tier} & \textbf{Recommendation} & \textbf{Evidence and recommended condition} \\
+\midrule
+Tier 1: Real-Time / End-User &
+Model-architecture-conditioned: \textbf{SHAP} (\texttt{TreeExplainer}) for
+XGBoost; \textbf{LIME} for non-tree/black-box models (neural networks,
+opaque APIs); for other tree ensembles, measure latency before choosing. &
+For XGBoost, \texttt{TreeExplainer} was faster than LIME in all 15 matched
+cells (median 18.1~ms vs.\ 61.8~ms), so SHAP is simultaneously faster
+\emph{and} more faithful and the usual fidelity--latency trade-off does
+not apply. This does not hold for tree models in general: for random
+forests, \texttt{TreeExplainer} was slower in all 15 cells (median
+1,262.4~ms vs.\ 335.6~ms), since its $O(TLD)$ cost grows with the number
+and depth of the trees. For non-tree
+models, LIME's lower median runtime (53.3~ms vs.\ 694.6~ms for
+KernelSHAP; Figure~2) gives a latency
+advantage where sampling is the only option. Recommended when sub-second
+latency and compact explanations matter more than maximizing fidelity
+and no fast model-aware explainer is available. \\[6pt]
+Tier 2: Auditing / Data Science &
+\textbf{SHAP.} &
+Use for bias analysis, model debugging, or regulatory inquiries: consistent
+paired advantages in stability, fidelity, and faithfulness gap ($d_z =
+3.00$, $4.82$, $2.63$). Recommended for analyst-mediated or offline
+workflows tolerating second-to-minute latency; plan sample budgets
+according to whether SHAP runs in tree-specific or kernel mode. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\end{document}

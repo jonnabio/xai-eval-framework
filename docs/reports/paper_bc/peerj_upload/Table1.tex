@@ -1,0 +1,48 @@
+% Table 1 of paper_bc_peerjcs.tex, exported for PeerJ upload by
+% scripts/pubs/export_peerj_upload.py. Do not edit: edit the manuscript and re-export.
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[authoryear,round]{natbib}
+\begin{document}
+\begin{table}[t]
+\centering
+\caption{Terminological distinctions underlying the taxonomy and benchmark scope.}
+
+\begin{tabularx}{\linewidth}{p{2.6cm} X X}
+\toprule
+\textbf{Distinction} & \textbf{Definition} & \textbf{Consequence if conflated} \\
+\midrule
+Intrinsic vs.\ post-hoc &
+Intrinsic models are interpretable by construction; post-hoc methods
+explain black-box behavior after training (Rudin, 2019; Retzlaff et~al., 2024). &
+Intrinsic-model metric validity conditions differ substantially from
+post-hoc ones and do not transfer. \\[4pt]
+Explanation quality vs.\ model quality &
+A model may be accurate while producing unstable or semantically weak
+explanations, or vice versa. &
+Evaluation must specify whether the object under study is the
+explanation artifact, explainer method, predictive model, or user-facing
+process; conflating levels produces inconsistent benchmark conclusions. \\[4pt]
+Local vs.\ global &
+Local attributions/counterfactuals are judged via faithfulness, sparsity,
+or actionability; global summaries via coverage, consistency, or
+conceptual coherence. &
+Many reported metric disagreements arise from mixing local and global
+levels without explicit task framing. \\[4pt]
+Semantic vs.\ structural &
+Structural proxies (e.g., perturbation faithfulness) track model
+sensitivity under an intervention; semantic judgments assess whether an
+explanation ``makes sense'' under domain, causal, or linguistic criteria. &
+The two are not interchangeable; substituting one for the other conceals
+gaps in evaluation coverage. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\end{document}

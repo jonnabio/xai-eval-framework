@@ -149,10 +149,10 @@ disclosure matches what an editor would find.
 > experiment; their models, versions, settings and complete prompts are given in Section 3.3
 > and Supplemental Article S1, Table S1."
 
-**[AUTHOR] confirm one fact:** "No AI tool generated the reference list" means every
-reference was found by you or taken from the sources you read. AI assistance in *checking*
-references against Crossref/DOI records is covered by "checking". If any reference entry was
-first proposed by the AI, say so instead. PeerJ prohibits AI-generated reference lists.
+**Reference list: confirmed by the author, 2026-10-02.** No reference was first suggested
+by AI. Every entry was found by the author or taken from the sources the author read. AI
+assistance was limited to checking entries against Crossref/DOI records. The statement "No AI
+tool generated ... the reference list" therefore stands as written.
 
 ## 6. Notes to Staff (confidential; not seen by reviewers)
 
@@ -208,9 +208,14 @@ PeerJ will not consider material already published in a peer-reviewed journal.
   2026-10-02; author lists follow UCI's recommended citations.
 - **Supplement: ported** as "Supplemental Article S1" (PDF), with tables keeping S1–S6 labels.
   Cited as "Table S1". Artifact bundle = "Supplemental Data S1".
-- **Figures: open.** The figures are still embedded. PeerJ also asks for separate upload files
-  (`Figure1.pdf`…) without in-image titles. Export them from the committed generators at the
-  gate.
+- **Figures and tables: done 2026-10-02.** `python scripts/pubs/export_peerj_upload.py`
+  writes `peerj_upload/Figure1-4.pdf` and `Table1-13.tex`, numbered in order of appearance,
+  derived from the manuscript so they cannot drift from it. Figures 1 and 2 no longer carry
+  titles inside the image. Figure 2's panels are labelled A and B, and its caption says so.
+  Their generator, `scripts/generate_paper_b_figures.py`, was changed and re-run; the
+  plotted values are unchanged. Figure 4 (the evaluation continuum) is compiled from its TikZ
+  source. Each table file compiles on its own: citations are written out as author-year text
+  and cross-references as the manuscript's numbers.
 
 ## 9. Open blockers
 
@@ -230,8 +235,8 @@ deciding):
 ### 9.2 AI-disclosure scope (D5): resolved 2026-10-02
 
 Resolved by the human-directed assistant wording in §5b. It covers language editing,
-programming support and number checking, which matches the repository history. One fact to
-confirm remains (the reference list, §5b).
+programming support and number checking, which matches the repository history. The author
+confirmed the reference-list statement on 2026-10-02 (§5b).
 
 ## 10. arXiv preprint (D6)
 
@@ -244,9 +249,21 @@ confirm remains (the reference list, §5b).
    account status first.
 6. Paste the arXiv ID into the Notes to Staff (§6).
 
-## 11. Upload set (filled in at the gate)
+## 11. Upload set (ready 2026-10-02)
 
-Review PDF (line numbers, cover page first) · `.tex` · references · `wlpeerj.cls` ·
-`Figure1..N.pdf` · `Table1..N.tex` · Supplemental Article S1 (PDF) · Supplemental Data S1
-(bundle zip, 16.2 MB and 9,384 files as rebuilt on 2026-10-02; it includes the raw EXP3
-result tree). Each file under 30 MB, total under 50 MB: the bundle fits.
+All in `docs/reports/paper_bc/` unless noted. PeerJ form type in brackets.
+
+| File | Upload as |
+|---|---|
+| `paper_bc_peerjcs.pdf` (26 pp, line numbers, cover page first) | Manuscript (PDF) |
+| `paper_bc_peerjcs.tex` + `wlpeerj.cls` | LaTeX source (references are inside the `.tex`) |
+| `peerj_upload/Figure1.pdf` … `Figure4.pdf` | Figures |
+| `peerj_upload/Table1.tex` … `Table13.tex` | Tables |
+| `paper_bc_peerjcs_supplemental_S1.pdf` (6 pp) | Supplemental Article S1 |
+| `paper_bc_artifacts.zip` (16.2 MB; rebuild with `python scripts/pubs/build_artifact_bundle.py`) | Supplemental Data S1 |
+
+Every file is under the 30 MB per-file limit. The total is about 16.7 MB, under the 50 MB
+limit. The figures and tables add 0.1 MB.
+
+**Also cited, not uploaded:** the full code and data archive, Zenodo
+`10.5281/zenodo.23111684`.

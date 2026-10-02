@@ -65,6 +65,18 @@ All four must pass. A number is registered in `pub/claim_registry.toml` before i
 (RCA-001), and the last script confirms that no result of the published RIMI paper is
 re-reported here.
 
+## Separate figure and table files (PeerJ upload)
+
+```bash
+python scripts/pubs/export_peerj_upload.py
+```
+
+This writes `peerj_upload/Figure1-4.pdf` and `Table1-13.tex`, derived from the manuscript.
+Re-run it after any change to a figure or table. The figures come from
+`scripts/generate_paper_b_figures.py` (Figures 1-2) and `scripts/generate_exp3_gap_figure.py`
+(Figure 3). Figure 4 is TikZ. PeerJ wants no titles inside figure images; titles belong in
+the captions.
+
 ## Artifact bundle (Supplemental Data S1)
 
 ```bash

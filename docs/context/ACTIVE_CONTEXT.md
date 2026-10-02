@@ -1792,10 +1792,12 @@ frozen" or "keep double-blind" is historical.
   2. Author: decide payment (D3). PeerJ charges after acceptance: APC about
      US$2,155, or one Lifetime Membership from about US$755. Not waivable for
      Mexico. This blocks filing, not preparation.
-  3. Author: confirm no reference entry was first proposed by AI (PeerJ
-     prohibits AI-generated reference lists).
-  4. Export separate figure files (`Figure1.pdf`...) and table files for upload;
-     run the submission gate in `PEERJ_SUBMISSION.md`; the author files.
+  3. [x] **Confirmed by the author 2026-10-02:** no reference was first
+     suggested by AI.
+  4. [x] **Done 2026-10-02:** `scripts/pubs/export_peerj_upload.py` writes the
+     separate figure and table files to `docs/reports/paper_bc/peerj_upload/`;
+     in-image titles removed from Figures 1-2. Upload set: `PEERJ_SUBMISSION.md`
+     §11. Remaining: the payment decision (item 2), then the author files.
   5. Optional: arXiv preprint (approved by the author).
   6. Then resume Task 3 / RCA-001 Phase 2 on this lane.
 - **Notes**

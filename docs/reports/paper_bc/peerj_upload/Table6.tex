@@ -1,0 +1,34 @@
+% Table 6 of paper_bc_peerjcs.tex, exported for PeerJ upload by
+% scripts/pubs/export_peerj_upload.py. Do not edit: edit the manuscript and re-export.
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[authoryear,round]{natbib}
+\begin{document}
+\begin{table}[t]
+\centering
+\caption{Core metric families in model-agnostic XAI evaluation: what
+each captures well and what it leaves unresolved.}
+\footnotesize
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Metric family} & \textbf{Captures well} & \textbf{Leaves unresolved} \\
+\midrule
+Fidelity / faithfulness & Whether explanations track model behavior under interventions or masking. & Whether the explanation is meaningful, plausible, or useful outside the proxy setup. \\
+Stability / robustness & Whether explanations remain consistent across perturbations or repeated runs. & Whether stable explanations are actually correct or semantically adequate. \\
+Sparsity / parsimony & Whether explanations are concise and low in feature load. & Whether concision hides necessary nuance or context. \\
+Benchmark-grounded correctness & Whether explanations recover synthetic or domain-defined ground truth. & Whether the ground truth is realistic, complete, or transferable. \\
+Human expert review & Whether explanations align with domain expectations and expert reasoning. & Whether those judgments are scalable, standardized, and reproducible. \\
+User-centered evaluation & Whether explanations improve understanding, decisions, or trust calibration in practice. & Whether findings generalize across tasks, populations, and study designs. \\
+LLM-based semantic evaluation & Whether rubric-based semantic judgments can be produced quickly and at scale. & Whether those judgments agree with humans and avoid proxy-judge bias. \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+\end{document}
