@@ -1,5 +1,11 @@
 # Zenodo release for the PeerJ CS submission
 
+> **DONE 2026-10-02.** Version 0.4.0 is published as **`10.5281/zenodo.23111684`**
+> (https://doi.org/10.5281/zenodo.23111684), through Route A. Tag
+> `paper-bc-peerj-submission-2026-10-02` = `main` at `ba6e835f2`; archive 907 MB; open
+> access, MIT licence; name and affiliation correct. The manuscript cites it. The rest of
+> this file is the procedure, kept for the next release.
+
 PeerJ requires a DOI archive holding an **exact copy** of the code and data the study used. A
 GitHub link is not enough. The current Zenodo version predates EXP4 cohort 2 and EXP6, so a
 new **version** of the same record is needed.
@@ -13,7 +19,7 @@ Only the author can publish it: it goes out under your Zenodo account and cannot
 | Concept (all versions) | `10.5281/zenodo.19297723` | – | – | – |
 | Version 1 | `10.5281/zenodo.19297724` | 0.2.0 | 2026-03-28 | GitHub release `paper-a-submission-2026-03-28` (61 MB) |
 | Version 2 (current) | `10.5281/zenodo.21538180` | 0.3.0 | 2026-07-24 | Manual upload of one zip (888 MB), commit `553f65d71` |
-| **Version 3 (to make)** | assigned by Zenodo | **0.4.0** | today | this document |
+| **Version 3 (current)** | `10.5281/zenodo.23111684` | **0.4.0** | 2026-10-02 | GitHub release `paper-bc-peerj-submission-2026-10-02` (907 MB) |
 
 - The new version is **0.4.0**. Version 0.3.0 is already taken by the current record.
 - `CITATION.cff` cites the concept DOI. The paper cites the **version** DOI of version 3.

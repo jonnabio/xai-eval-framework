@@ -78,8 +78,9 @@ to write a bundle with a missing input. Build the supplement PDF first.
 
 - No BibTeX step: references are an embedded `thebibliography` in author–year form (natbib).
   PeerJ restyles references at production.
-- `\zenodoversiondoi` prints "[ZENODO VERSION DOI PENDING]" until the Zenodo release is made
-  (`ZENODO_RELEASE.md`). Do not file while it is pending.
+- `\zenodoversiondoi` holds the version DOI of the archived snapshot,
+  `10.5281/zenodo.23111684` (`ZENODO_RELEASE.md`). If the code or data change before filing,
+  a new Zenodo version is needed and this macro must be updated.
 - `tools/tectonic-portable/` is gitignored, so a fresh worktree does not have it; copy
   `tectonic.exe` in explicitly before building there.
 - The TMLR source files are at tag `tmlr-submission-12779`.

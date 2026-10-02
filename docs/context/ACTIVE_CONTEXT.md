@@ -6,10 +6,11 @@
   without review; the paper is retargeted to PeerJ Computer Science.** The TMLR
   artifacts are removed (kept at tag `tmlr-submission-12779`); the PeerJ edition
   (`paper_bc_peerjcs.tex` + Supplemental Article S1) is the only Paper B+C and
-  is merged to `main` and this lane. The separate paper working tree
+  is merged to `main` and this lane. **Zenodo v0.4.0 published:
+  `10.5281/zenodo.23111684`**, cited in the paper. The separate paper working tree
   `xai-paper-bc` and both `paper/bc-*` branches are retired (ADR-0019): all
   Paper B+C material is in `docs/reports/paper_bc/` of the main folder. Not
-  filed: the Zenodo release and the payment decision are pending. See
+  filed: the payment decision is pending. See
   "Session Handoff - 2026-10-02".
 - **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
   12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
@@ -1784,8 +1785,9 @@ frozen" or "keep double-blind" is historical.
   - Future Paper B+C edits: a short-lived `paper/bc-<topic>` branch in the main
     folder, merged through `main` (ADR-0019). Close Word first.
 - **Next Steps**
-  1. Author: publish the Zenodo v0.4.0 release (`ZENODO_RELEASE.md`) and send
-     the version DOI; then set `\zenodoversiondoi` and
+  1. [x] **Done 2026-10-02.** Zenodo v0.4.0 published as `10.5281/zenodo.23111684`
+     (GitHub release `paper-bc-peerj-submission-2026-10-02`, `main` at
+     `ba6e835f2`) and cited in the manuscript. Originally: publish the release; then set `\zenodoversiondoi` and
      `CITATION.cff`. The PDF prints "[ZENODO VERSION DOI PENDING]" until then.
   2. Author: decide payment (D3). PeerJ charges after acceptance: APC about
      US$2,155, or one Lifetime Membership from about US$755. Not waivable for
