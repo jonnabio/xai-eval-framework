@@ -1,5 +1,12 @@
 # OpenReview submission sheet — Paper B+C to TMLR
 
+> **CLOSED 2026-10-02: desk-rejected.** TMLR rejected submission 12779 without review
+> ("unlikely to meet one or both TMLR criteria"; no further reasons). The paper is being
+> retargeted to PeerJ Computer Science: see `PEERJ_SUBMISSION.md` and
+> `docs/planning/paper_bc_peerj_retarget_plan_2026-10-02.md`. This sheet is the historical
+> record of the TMLR filing.
+
+
 Prepared 2026-09-14 from the paper lane at `407ae32e6`; regenerated
 2026-09-27 from the paper lane at `7df496a00`, and again 2026-09-30 from the
 paper lane at `e57f49e04` after the pre-submission review fixes, as
