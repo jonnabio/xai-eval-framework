@@ -33,9 +33,9 @@ from verify_claims import _scannable  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 PAPER_A = ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex"
 PAPER_BC = [
-    ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_tmlr.tex",
-    ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_tmlr_supplementary.tex",
     ROOT / "pub" / "fragments" / "paper_bc_abstract_en.tex",
+    ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_peerjcs.tex",
+    ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_peerjcs_supplemental_S1.tex",
 ]
 
 DECIMAL = re.compile(r"(?<![\w.])\d[\d,]*\.\d+")

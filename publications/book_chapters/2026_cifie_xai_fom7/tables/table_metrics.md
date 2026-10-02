@@ -1,4 +1,4 @@
-**Tabla 3**
+**Tabla 1**
 
 *Métricas primarias del benchmark*
 

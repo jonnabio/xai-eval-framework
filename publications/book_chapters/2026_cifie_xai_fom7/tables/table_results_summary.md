@@ -1,4 +1,4 @@
-**Tabla 4**
+**Tabla 2**
 
 *Resumen de los resultados empíricos por hipótesis*
 

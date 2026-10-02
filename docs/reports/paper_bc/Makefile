@@ -1,7 +1,7 @@
 TECTONIC ?= ../../../tools/tectonic-portable/tectonic
 
-MAIN = paper_bc_tmlr
-SUPPLEMENT = paper_bc_tmlr_supplementary
+MAIN = paper_bc_peerjcs
+SUPPLEMENT = paper_bc_peerjcs_supplemental_S1
 
 .PHONY: all main supplement clean check-tectonic
 

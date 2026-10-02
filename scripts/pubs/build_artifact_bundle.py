@@ -1,4 +1,4 @@
-"""Build the anonymised artifact bundle for the TMLR supplementary upload.
+"""Build the artifact bundle uploaded to PeerJ as Supplemental Data S1.
 
 Run from anywhere:  python scripts/pubs/build_artifact_bundle.py
 
@@ -45,9 +45,9 @@ COPY = [
     ("docs/reports/paper_bc/paper_bc_review_corpus.csv", "review_corpus/review_corpus.csv"),
     ("docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md", "review_corpus/RETRIEVAL_LOG.md"),
     ("data/adult.csv", "data/adult.csv"),
-    # OpenReview accepts one supplementary file, so the supplementary tables
-    # travel inside the bundle; without this reviewers never see S1-S6.
-    ("docs/reports/paper_bc/paper_bc_tmlr_supplementary.pdf",
+    # The supplementary tables travel inside the bundle as well as being
+    # uploaded as Supplemental Article S1 (RCA-003: never omit them).
+    ("docs/reports/paper_bc/paper_bc_peerjcs_supplemental_S1.pdf",
      "supplementary_tables.pdf"),
 ]
 
@@ -92,9 +92,9 @@ for k, v in scrubbed.items():
 
 README = """# Artifact bundle
 
-Supplementary artifacts for the submission "From Fidelity to Semantics: A
-Taxonomy of XAI Evaluation Metrics and Paired Empirical Comparison of LIME
-versus SHAP". Anonymised for double-blind review.
+Supplemental Data S1 for "From Fidelity to Semantics: A Taxonomy of
+Explainable AI Evaluation Metrics and a Paired Empirical Comparison of LIME
+and SHAP" (PeerJ Computer Science submission). Local user paths are scrubbed.
 
 ## Contents
 

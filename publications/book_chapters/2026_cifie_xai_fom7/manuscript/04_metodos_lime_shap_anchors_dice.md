@@ -13,7 +13,7 @@ semejantes. Durante la operación, pueden contribuir al monitoreo de cambios, al
 análisis de incidentes y a la identificación de condiciones en las que una salida no
 debería aceptarse sin revisión. Después de una decisión, pueden apoyar la
 documentación, la auditoría y la contestabilidad. Estas funciones pertenecen a un
-ciclo de gestión del riesgo y no a un único momento de visualización (Tabassi, 2023).
+ciclo de gestión del riesgo y no a un único momento de visualización (Tabassi, 2023). Véase la Figura 5.
 
 Cada función exige evidencia diferente. Para depurar, puede ser útil localizar qué
 características influyen en predicciones anómalas; para validar, importa comprobar si
@@ -61,6 +61,8 @@ Sin esa especificación, términos como “comprensible”, “útil” o “acc
 de un criterio verificable. Una evaluación rigurosa debe distinguir, además, entre
 percepción subjetiva, comprensión demostrada, desempeño en una tarea y posibilidad
 de actuar. Son resultados relacionados, pero no equivalentes.
+
+![Figura 5. Funciones de la explicación a lo largo del ciclo de vida y necesidades de cada audiencia. Fuente: elaboración propia a partir de Tabassi (2023) y Phillips et al. (2021).](../figures/exported/fig_d5_ciclo_audiencias_es.png)
 
 ## Explicabilidad, confianza y confiabilidad
 

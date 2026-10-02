@@ -122,12 +122,10 @@ def format_data_tables(docx: Path) -> None:
 
     # Widths sum to the 14.65 cm text block of the TintAzul/CIFIE template (A4,
     # 3.175 cm side margins). The allocations protect short label columns from
-    # mid-word breaks; the FOM-7 gates table gives "Propósito", its longest column, the most room.
-    # Document order since 2026-09-30: FOM-7 gates (section 06), methods and
-    # metrics (section 07), results (section 08).
+    # mid-word breaks. Since 2026-10-01 (length plan) the chapter has two
+    # tables: metrics (section 07) and results (section 08); the FOM-7 gates
+    # and methods tables were replaced by figures and moved to tables/retired/.
     width_specs_cm = [
-        [2.95, 4.20, 3.10, 4.40],
-        [2.20, 2.78, 2.52, 3.51, 3.64],
         [3.00, 1.75, 4.70, 2.90, 2.30],
         [3.47, 2.31, 2.31, 3.47, 3.09],
     ]
@@ -321,15 +319,16 @@ def format_academic_text(docx: Path) -> None:
     document.save(docx)
 
 
-TEMPLATE_FONT = "Cambria"
+TEMPLATE_FONT = "Times New Roman"
 MONOSPACE_STYLES = {"Source Code", "Verbatim Char"}
 
 
 def apply_template_format(docx: Path) -> None:
     """Apply the TintAzul/CIFIE template format (editorial/GUÍA-PLANTILLA.docx).
 
-    A4 page with 2.54 cm top and bottom and 3.175 cm side margins; Cambria
-    12 pt for all text; headings bold at 12 pt, level 1 in uppercase. Table
+    A4 page with 2.54 cm top and bottom and 3.175 cm side margins; Times New
+    Roman 12 pt for all text (the editor's instruction of 2026-10-01, which
+    overrides the Cambria of the template file); 1.5 line spacing; headings bold at 12 pt, level 1 in uppercase. Table
     cells keep the 10 pt set by format_data_tables. The template's header logo
     is not added until the editor confirms authors should include it.
     """
