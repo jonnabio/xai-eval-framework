@@ -15,8 +15,8 @@ is registered against the PeerJ files in `pub/claim_registry.toml`.
 · D4 Provenance kept, plus a Notes-to-Staff sentence · D5 human-directed AI-assistant
 disclosure (§5b) · D6 arXiv preprint approved · D7 gap analysis goes to Discussion ·
 Department of Computer Science.
-**Pending before filing:** Zenodo release (author, today: `ZENODO_RELEASE.md`). The PDF prints
-"[ZENODO VERSION DOI PENDING]" until `\zenodoversiondoi` is set. **D3 payment** (§9.1).
+**Zenodo: done 2026-10-02.** Version 0.4.0, `10.5281/zenodo.23111684`, cited in the Data and Code
+Availability section. **Pending before filing: D3 payment** (§9.1).
 
 Each block below is text to paste into the PeerJ form or port into the manuscript. Items marked
 **[AUTHOR]** need information only you have.
@@ -95,7 +95,7 @@ Keywords: explainable AI, evaluation metrics, taxonomy, LIME, SHAP (unchanged).
   final draft."
 - **Data availability:** "The code, experiment configurations, raw run outputs, statistical
   exports, review-corpus coding sheet and EXP4 judge outputs are available at Zenodo:
-  [AUTHOR: version DOI from ZENODO_RELEASE.md] and GitHub:
+  https://doi.org/10.5281/zenodo.23111684 and GitHub:
   https://github.com/jonnabio/xai-eval-framework. An artifact bundle is provided as Supplemental
   Data S1. The UCI Adult, German Credit and Breast Cancer Wisconsin datasets are third-party
   and available from the UCI Machine Learning Repository."
