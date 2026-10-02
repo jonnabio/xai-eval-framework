@@ -1,15 +1,15 @@
 # Paper B+C — PeerJ Computer Science submission sheet
 
-**Status (2026-10-02):** manuscript ported. TMLR desk-rejected submission 12779 without review.
-Plan: `docs/planning/paper_bc_peerj_retarget_plan_2026-10-02.md`. Lane: `paper/bc-peerj-cs`,
-cut from tag `tmlr-submission-12779`.
+**Status (2026-10-02):** manuscript ported. TMLR desk-rejected submission 12779 without review
+(`TMLR_REJECTION_RECORD.md`); the TMLR files were removed and are kept at tag
+`tmlr-submission-12779`. Plan: `docs/planning/paper_bc_peerj_retarget_plan_2026-10-02.md`.
 
 **PeerJ files:** `paper_bc_peerjcs.tex` / `.pdf` (26 pp, line numbers on) and
 `paper_bc_peerjcs_supplemental_S1.tex` / `.pdf` (6 pp), on `wlpeerj.cls` v1.2 (the rticles
-copy of the Overleaf class). Build: `make peerj`, or Tectonic on each file. Under XeTeX the
+copy of the Overleaf class). Build: see `BUILD.md`. Under XeTeX the
 build maps Times/Helvetica to TeX Gyre; under pdflatex (PeerJ, Overleaf) the class's own fonts
-load. Results, tables and figures are moved verbatim from the TMLR source, and every number site
-is registered twice (TMLR and PeerJ) in `pub/claim_registry.toml`.
+load. Results, tables and figures were moved verbatim from the TMLR source, and every number site
+is registered against the PeerJ files in `pub/claim_registry.toml`.
 
 **Author decisions (2026-10-02):** D1 Research Article · D2 title spells out "Explainable AI"
 · D4 Provenance kept, plus a Notes-to-Staff sentence · D5 human-directed AI-assistant
@@ -50,7 +50,7 @@ Paper A's co-author (M. Herrero-Uceda) is **not** an author of Paper B+C, as in 
 ## 3. Structured abstract (≤ 500 words / 3,000 characters; bold run-in headings)
 
 Same sentences and numbers as the filed abstract, split under PeerJ's headings. No result is
-added, removed or changed. Source of truth stays `pub/claims.toml` (new key, RCA-003 rules).
+added, removed or changed. Source of truth: `pub/claims.toml`, `[papers.paper_bc]` (RCA-003 rules).
 
 > **Background.** Evaluation of post-hoc explanations in machine learning remains fragmented
 > across incompatible metric families, yielding method comparisons that are sensitive to which
@@ -118,8 +118,8 @@ its version and the complete prompts. Port this into §Materials & Methods, EXP4
 > not retained; the prompts in Table S1 were transcribed from the recovered instrument and are
 > the authoritative record of it.
 
-The model IDs and settings above are copied from `paper_bc_tmlr_supplementary.tex` l.134–142 and
-are not new values.
+The model IDs and settings above are copied from the supplement (Table S1) and are not new
+values.
 
 Ported into §3.3 of `paper_bc_peerjcs.tex`.
 
@@ -171,9 +171,8 @@ PeerJ will not consider material already published in a peer-reviewed journal.
 
 - The PeerJ main text, Supplemental Article S1 and the PeerJ abstract fragment are now in the
   scanner's `PAPER_BC` list. `scan_shared_literals.py --strict` on the PeerJ edition: **0
-  unexplained matches** (108 known coincidences = the 53 triaged TMLR ones, found again in the
-  PeerJ copies).
-- `verify_claims.py`: 321 claims, 581 sites (96 new PeerJ twins), all green. The PeerJ files
+  unexplained matches** (55 known coincidences, each triaged with its reason in the script).
+- `verify_claims.py`: 321 claims, 485 sites, all green. The PeerJ files
   are under `[coverage]`, so any unregistered result-shaped number fails the build.
 - §Provenance (`sec:prior_publication`, now Discussion 5.5.1) states that the per-method mean
   levels, the four-method omnibus and the cross-dataset SHAP levels are cited to RIMI and
@@ -236,8 +235,7 @@ confirm remains (the reference list, §5b).
 
 ## 10. arXiv preprint (D6)
 
-1. Build the de-anonymised PDF (PeerJ build, line numbers **off**, or the TMLR `[preprint]`
-   build). Use **one** version consistently.
+1. Build the PeerJ manuscript with line numbers **off** (remove `lineno`).
 2. arXiv category: primary **cs.LG**, cross-list **cs.AI**. Licence: **CC BY 4.0**, which is
    compatible with PeerJ's CC BY publication.
 3. Upload the LaTeX source (arXiv compiles it). Include `wlpeerj.cls` if using the PeerJ build.

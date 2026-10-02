@@ -2,7 +2,7 @@
 """
 Generate the Paper B+C figures from paired SHAP-vs-LIME analysis artifacts.
 
-Outputs (default), the files paper_bc_tmlr.tex includes:
+Outputs (default), the files paper_bc_peerjcs.tex includes:
   docs/reports/paper_bc/figures/fig_b1_quality_endpoints.pdf
   docs/reports/paper_bc/figures/fig_b1_quality_endpoints.png
   docs/reports/paper_bc/figures/fig_b2_runtime_heterogeneity.pdf
@@ -11,7 +11,7 @@ Outputs (default), the files paper_bc_tmlr.tex includes:
 Figure 1 plots the mean paired difference (SHAP - LIME) with its 95% t
 interval, the quantities of tab:paired_main. It used to plot the two methods'
 mean levels side by side, which are results of the published RIMI article
-(Paper A) and may not be re-reported in the TMLR submission (review F02,
+(Paper A) and may not be re-reported in Paper B+C (review F02,
 2026-09-28).
 """
 
