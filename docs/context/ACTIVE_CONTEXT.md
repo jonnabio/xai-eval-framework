@@ -1,7 +1,13 @@
 # Active Context: XAI Evaluation Framework
 
 ## Session Metadata
-- **Last Updated:** 2026-09-30
+- **Last Updated:** 2026-10-02
+- **Mode (2026-10-02):** PUBLICATION - **TMLR desk-rejected Paper B+C (12779)
+  without review; the paper is retargeted to PeerJ Computer Science.** The TMLR
+  artifacts are removed (kept at tag `tmlr-submission-12779`); the PeerJ edition
+  (`paper_bc_peerjcs.tex` + Supplemental Article S1) is the only Paper B+C and
+  is merged to `main` and this lane. Not filed: the Zenodo release and the
+  payment decision are pending. See "Session Handoff - 2026-10-02".
 - **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
   12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
   the "UCI Adult census-income dataset"; equations numbered with every term
@@ -1726,3 +1732,56 @@ to **Task 3 / RCA-001 Phase 2** on `thesis/rca-001-phase-2`.
     with the Edit tool or Python, not sed.
   - Build the de-anonymised variant by copying the `.tex` with
     `\usepackage[accepted]{tmlr}` to a temporary file; never commit it.
+
+## Session Handoff - 2026-10-02 (TMLR rejection; PeerJ CS edition)
+
+**TMLR rejected submission 12779 without review.** The notice gave no reasons
+beyond "unlikely to meet one or both of TMLR criterion" and reviewer bandwidth.
+Record: `docs/reports/paper_bc/TMLR_REJECTION_RECORD.md`. TMLR is deprecated as
+a venue. Everything in this file that says "filed with TMLR", "paper lane
+frozen" or "keep double-blind" is historical.
+
+- **Completed**
+  - Venue chosen by the author: PeerJ Computer Science (soundness-only review).
+    Plan: `docs/planning/paper_bc_peerj_retarget_plan_2026-10-02.md`.
+  - PeerJ edition built from the filed source: `paper_bc_peerjcs.tex` (26 pp,
+    `wlpeerj.cls` v1.2, line numbers on) and
+    `paper_bc_peerjcs_supplemental_S1.tex` (6 pp). Results, tables and figures
+    moved verbatim; sections re-ordered to PeerJ's standard (gap analysis in
+    Discussion); structured abstract (304 words / 2,170 characters).
+  - New text required by PeerJ, none carrying a result: computing
+    infrastructure, EXP4 judge model IDs in Methods, UCI dataset DOIs,
+    human-directed AI-assistant disclosure in the Acknowledgments, Department of
+    Computer Science affiliation.
+  - New disclosed limitation: wall-clock cost was measured on several hosts
+    (macOS, Windows, Linux) whose CPU and RAM were never recorded, and paired
+    cells may have run on different hosts. Quality endpoints are unaffected.
+  - TMLR artifacts removed from `docs/reports/paper_bc/`; registry, coverage,
+    guards, `verify_sync`, `scan_shared_literals`, bundle script and Makefile
+    point at the PeerJ files. `[papers.paper_bc]` in `pub/claims.toml` holds the
+    structured abstract.
+  - `verify_claims.py` skips dotted version triples (e.g. 1.7.1).
+  - `.zenodo.json` / `CITATION.cff` set to v0.3.0; affiliation spelling fixed.
+- **Current State**
+  - `main` at `67072706c`; this lane merged with it. Verification: 321 claims /
+    485 sites / 46 retired-value guards; sync green; 18 EXP4 pins green; shared
+    literals 0 unexplained / 55 known.
+  - Paper lane branch is now `paper/bc-peerj-cs` (worktree `xai-paper-bc`).
+    `paper/bc-venue-definition` is superseded.
+- **Next Steps**
+  1. Author: publish the Zenodo v0.3.0 release (`ZENODO_RELEASE.md`) and send
+     the version DOI and concept DOI; then set `\zenodoversiondoi` and
+     `CITATION.cff`. The PDF prints "[ZENODO VERSION DOI PENDING]" until then.
+  2. Author: decide payment (D3). PeerJ charges after acceptance: APC about
+     US$2,155, or one Lifetime Membership from about US$755. Not waivable for
+     Mexico. This blocks filing, not preparation.
+  3. Author: confirm no reference entry was first proposed by AI (PeerJ
+     prohibits AI-generated reference lists).
+  4. Export separate figure files (`Figure1.pdf`...) and table files for upload;
+     run the submission gate in `PEERJ_SUBMISSION.md`; the author files.
+  5. Optional: arXiv preprint (approved by the author).
+  6. Then resume Task 3 / RCA-001 Phase 2 on this lane.
+- **Notes**
+  - Never invent hardware specifications: none were recorded for any run.
+  - Git Bash heredocs on this machine collapse doubled backslashes; edit LaTeX
+    and TOML with the Edit tool or a script file, never an inline heredoc.
