@@ -1,7 +1,8 @@
 # Paper B+C — TMLR rejection record
 
 **Status: closed. TMLR is no longer a target for this paper.** The paper is now prepared for
-PeerJ Computer Science (`PEERJ_SUBMISSION.md`).
+*Inteligencia Artificial* (IBERAMIA), `IBERAMIA_SUBMISSION.md`. A PeerJ Computer Science
+edition came in between and was dropped before filing because of its fee (ADR-0020).
 
 ## What happened
 
@@ -50,9 +51,10 @@ result, table or claim.
 - No reviews exist, so there is nothing to carry to another journal as prior peer review.
 - TMLR did not publish the paper.
 - The editor note on prior publication (RIMI) had been emailed to tmlr-editors@jmlr.org after
-  filing. The same disclosure now goes to PeerJ in the Notes to Staff (`PEERJ_SUBMISSION.md` §6).
-- The double-blind constraint that applied while under TMLR review has ended. PeerJ review is
-  single-blind.
+  filing. The same disclosure now goes to the editor of *Inteligencia Artificial* in the "Comments for
+  the Editor" box (`IBERAMIA_SUBMISSION.md` §4).
+- *Inteligencia Artificial* also reviews double-blind, so the anonymised build is back
+  (`\camerareadyfalse`).
 
 ## What was removed from this folder on 2026-10-02
 
@@ -73,9 +75,10 @@ The pre-submission review and remediation records are kept, because their findin
 the paper whatever the venue: `docs/review/` (rigor review, reference audit, TMLR readiness
 checklist) and `docs/planning/paper_bc_tmlr_*_2026-09-28.md`.
 
-## What carried over to the PeerJ edition
+## What carried over to the current edition
 
 Results, tables, figures and references moved verbatim from the filed source into
-`paper_bc_peerjcs.tex` and `paper_bc_peerjcs_supplemental_S1.tex`. The claim registry
-(`pub/claim_registry.toml`) now points at those files: 321 claims at 485 sites, the same counts
-as the filed TMLR version.
+`paper_bc_iberamia.tex` and its Appendix A, `paper_bc_iberamia_appendix.tex` (through the
+never-submitted PeerJ edition). The claim registry
+(`pub/claim_registry.toml`) now points at those files: 321 claims at 487 sites, the 485 of the
+filed TMLR version plus two for the Spanish abstract the journal requires.

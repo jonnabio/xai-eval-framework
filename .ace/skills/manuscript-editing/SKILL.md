@@ -20,7 +20,7 @@ editing, academic manuscript, citation editing, literature enrichment.
 |---|---|---|
 | CIFIE/FOM-7 book chapter | `publications/book_chapters/2026_cifie_xai_fom7/` | Spanish, APA 7 |
 | Thesis | `thesis/*.qmd` (Quarto -> DOCX via `thesis/render.ps1`) | Spanish prose; English interaction and commits |
-| Paper B+C (PeerJ CS) | `docs/reports/paper_bc/` | English, `wlpeerj.cls`, single-blind, PeerJ standard sections |
+| Paper B+C (Inteligencia Artificial, IBERAMIA) | `docs/reports/paper_bc/` | English with a Spanish Resumen, `iberamia.sty`, double-blind, numbered citations |
 | Paper A | `docs/reports/paper_a/` | English |
 
 Branching follows ADR-0013: manuscript bodies are branch-private; `pub/`,
@@ -64,7 +64,7 @@ with a manuscript body.
 5. Render (thesis: `thesis/render.ps1`; papers: Tectonic per `BUILD.md`) and
    read the changed pages in the rendered output, not only the source.
 6. Submission readiness (papers): run the "After any revision" checklist in
-   `docs/reports/paper_bc/PEERJ_SUBMISSION.md` and report the result.
+   `docs/reports/paper_bc/IBERAMIA_SUBMISSION.md` and report the result.
 
 ## Output
 

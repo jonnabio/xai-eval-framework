@@ -1,64 +1,91 @@
-%% PeerJ Computer Science submission (Research Article).
-%% Ported 2026-10-02 from the TMLR source (tag tmlr-submission-12779) after
-%% TMLR desk-rejected submission 12779; see TMLR_REJECTION_RECORD.md. Results, tables and figures are
-%% unchanged; see docs/planning/paper_bc_peerj_retarget_plan_2026-10-02.md.
-%% Review build keeps `lineno`; remove it for camera-ready.
-\documentclass[fleqn,10pt,lineno]{wlpeerj}
+%% Inteligencia Artificial (Revista Iberoamericana de Inteligencia Artificial,
+%% IBERAMIA): research article. Built on the journal's LaTeX template
+%% (iberamia.sty, unmodified, from journal.iberamia.org).
+%%
+%% Refactored 2026-10-02 from the PeerJ CS edition, which was ported from the
+%% TMLR source (tag tmlr-submission-12779). Results, tables and figures are
+%% unchanged. See docs/reports/paper_bc/IBERAMIA_SUBMISSION.md.
+%%
+%% The journal reviews double-blind. \camerareadytrue restores the author
+%% block, the repository URL and the archive DOI; leave it false for review.
+\documentclass[10pt,a4paper,twoside]{article}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{lastpage}
+\usepackage{ifthen}
+% The template loads [pdftex]{color,graphicx}; the local build is XeTeX
+% (Tectonic), so the driver is left to auto-detection. Output is identical.
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 
-\usepackage{natbib}
-\setcitestyle{authoryear,round}
+\usepackage{iberamia}   % journal style file, unmodified
+
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{tabularx}
 \usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
 \usepackage{url}
-\usepackage[hidelinks]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc,arrows.meta}
-
-% wlpeerj loads Type 1 Times/Helvetica for pdflatex. The local build uses
-% Tectonic (XeTeX), which cannot use them, so map to the TeX Gyre clones there.
-% Under pdflatex (PeerJ, Overleaf) this block does nothing.
-\usepackage{iftex}
-\ifXeTeX
-  \usepackage{fontspec}
-  \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular,
-    BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
-  \setsansfont{texgyreheros}[Extension=.otf, UprightFont=*-regular,
-    BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
-  \setmonofont{texgyrecursor}[Extension=.otf, UprightFont=*-regular,
-    BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
-\fi
-
-% The PeerJ text block is narrower than TMLR's; let long \texttt tokens break.
 \setlength{\emergencystretch}{3em}
 
-% Version DOI of the Zenodo release that archives exactly this study: version
-% 0.4.0, tag paper-bc-peerj-submission-2026-10-02, published 2026-10-02
-% (docs/reports/paper_bc/ZENODO_RELEASE.md).
+% Review (double-blind) or camera-ready build.
+\newif\ifcameraready
+\camerareadyfalse
+
+% Publication data: set by the journal at acceptance.
+\newcommand{\thispaperdoi}{}
+\setcounter{year}{2026}
+\setcounter{volume}{0}
+\setcounter{issue}{0}
+\setcounter{page}{1}
+
+% Version DOI of the Zenodo release that archives exactly this study
+% (docs/reports/paper_bc/ZENODO_RELEASE.md). Printed only in the camera-ready
+% build: the record names the author.
 \newcommand{\zenodoversiondoi}{\url{https://doi.org/10.5281/zenodo.23111684}}
 
 \title{From Fidelity to Semantics: A Taxonomy of Explainable AI Evaluation
 Metrics and a Paired Empirical Comparison of LIME and SHAP}
 
-\author[1]{Jonathan Herrera-V\'asquez}
-\affil[1]{Department of Computer Science, Universidad Americana de Europa
-(UNADE), Canc\'un, Quintana Roo, Mexico}
-\corrauthor[1]{Jonathan Herrera-V\'asquez}{jonnabio@gmail.com}
-
-% Keywords are entered in the PeerJ submission form (wlpeerj prints none);
-% the include stays so scripts/pubs/verify_sync.py sees the SSOT wiring.
-\newcommand{\pjkeywords}[1]{}
-\pjkeywords{\input{../../../pub/fragments/paper_bc_keywords_en.tex}}
-
-\begin{abstract}
-\input{../../../pub/fragments/paper_bc_abstract_en.tex}
-\end{abstract}
+\ifcameraready
+\author{Jonathan Herrera-V\'asquez
+\smallskip \\
+\small{Department of Computer Science, Universidad Americana de Europa (UNADE),
+Canc\'un, Quintana Roo, Mexico\\
+jonnabio@gmail.com}}
+\else
+\author{\small{Authors omitted for double-blind review}}
+\fi
+\date{}
 
 \begin{document}
 
-\flushbottom
+\medskip
 \maketitle
-\thispagestyle{empty}
 
+\pagestyle{Rest}
+\thispagestyle{FirstPage}
+\smallskip
+
+\noindent{\small{\textbf{Abstract}
+\input{../../../pub/fragments/paper_bc_abstract_en.tex}}}
+
+\noindent{\small{\textbf{Resumen}
+\input{../../../pub/fragments/paper_bc_resumen_es.tex}}}
+
+\medskip
+
+\noindent{\small{\textbf{Keywords}:
+\input{../../../pub/fragments/paper_bc_keywords_en.tex}\unskip.}}
+
+\noindent{\small{\textbf{Palabras clave}:
+\input{../../../pub/fragments/paper_bc_palabras_clave_es.tex}\unskip.}}
 
 % -----------------------------------------------------------------------
 \section{Introduction}
@@ -309,7 +336,7 @@ structured scoping synthesis rather than a full systematic review.
 \centering
 \caption{Corpus construction screening record. The identification, screening and inclusion counts are those of the original screening record, which is not released with this paper. The final two rows describe the coded corpus that is released (\texttt{docs/reports/paper\_bc/paper\_bc\_review\_corpus.csv}), reconstructed from the citation record and the second-reviewer audit; see \S\ref{sec:validity}.}
 \label{tab:prisma}
-\begin{tabular}{lr}
+\begin{tabular}{p{12cm}r}
 \toprule
 Stage & Records \\
 \midrule
@@ -606,7 +633,7 @@ panel (Section~\ref{sec:exp4}) was \texttt{openai/gpt-5.4-mini},
 \texttt{anthropic/claude-haiku-4.5} and \texttt{google/gemini-3.8-flash},
 accessed through OpenRouter with temperature~0.0 and a 4000-token output
 limit. The complete system instruction, per-instance user prompt and rubric
-are given in Table~S1 of Supplemental Article~S1; the replication's rendered
+are given in Table~S1 (Appendix~\ref{app:supplementary}); the replication's rendered
 prompts and raw responses are archived with the code (Section~\ref{sec:artifacts}).
 
 % -----------------------------------------------------------------------
@@ -1661,8 +1688,8 @@ human task performance without a separate user study.
 
 \section*{Acknowledgments}
 
-% NEW (PeerJ: funders go in the Funding Statement of the submission form, not
-% here; AI-use disclosure required by PeerJ Author Policies).
+% No funding to acknowledge (the journal also asks that funding be omitted
+% under review). AI-use disclosure kept: it identifies no one.
 The author designed and directed this research. Generative AI tools
 (Anthropic Claude, used through Claude Code) served as assistants under the
 author's direction for language editing (grammar, spelling and wording),
@@ -1681,8 +1708,10 @@ objects of study in EXP4, as described in Section~\ref{sec:exp4_methods}.
 % -----------------------------------------------------------------------
 
 The manuscript, experimental code, and supporting materials are available
-in the public repository
-\url{https://github.com/jonnabio/xai-eval-framework}, released under the MIT License. Artifacts needed to reproduce the empirical study include:
+\ifcameraready in the public repository
+\url{https://github.com/jonnabio/xai-eval-framework}\else in a public
+repository whose address is withheld for double-blind review\fi, released
+under the MIT License. Artifacts needed to reproduce the empirical study include:
 \begin{sloppypar}
 \begin{itemize}[leftmargin=*]
 \item EXP2 results: \path{experiments/exp2_scaled/results/}
@@ -1708,11 +1737,10 @@ The review corpus underlying the taxonomy and gap analysis is released as
 \path{docs/reports/paper_bc/paper_bc_review_corpus.csv}, with the retrieved
 full texts under \path{docs/reports/paper_bc/corpus_pdfs/} and per-paper
 provenance in \path{docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md}.
-The repository and its archived release,
-\zenodoversiondoi{}, also hold the raw EXP2 run
-tree.
-The artifact bundle from which every reported value re-derives is
-provided as Supplemental Data~S1.
+The repository and its archived release\ifcameraready,
+\zenodoversiondoi{},\else{} (a versioned archive with a DOI, given in the
+final version)\fi{} also hold the raw EXP2 run tree and an artifact
+bundle from which every reported value re-derives.
 
 \begin{thebibliography}{99}
 
@@ -2141,5 +2169,10 @@ models.
 \url{https://doi.org/10.1038/s41746-025-02208-7}.
 
 \end{thebibliography}
+
+% -----------------------------------------------------------------------
+% Appendix: the six supplementary tables (the journal accepts one PDF).
+\appendix
+\input{paper_bc_iberamia_appendix}
 
 \end{document}

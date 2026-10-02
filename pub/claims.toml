@@ -46,16 +46,18 @@ Evaluating explainability methods requires more than a single faithfulness proxy
 """
 keywords_en_tex = "Explainable AI, benchmark methodology, reproducibility, statistical evaluation, model-agnostic explanations"
 
-# Paper B+C, PeerJ Computer Science edition (2026-10-02). Structured under
-# PeerJ's bold run-in headings; limit 500 words / 3,000 characters. The
-# unstructured TMLR abstract it replaces is at tag tmlr-submission-12779.
+# Paper B+C, Inteligencia Artificial (IBERAMIA) edition (2026-10-02). The
+# journal requires an English abstract and a Spanish "Resumen", English
+# keywords and optional Spanish ones; it sets no length limit. The text is the
+# PeerJ structured abstract with its headings removed: same sentences, same
+# numbers. Earlier versions: tag tmlr-submission-12779 (TMLR) and git history
+# (PeerJ). Every LaTeX backslash is doubled (RCA-003).
 [papers.paper_bc]
 abstract_en_tex = """
-\\textbf{Background.} Evaluation of post-hoc explanations in machine learning
+Evaluation of post-hoc explanations in machine learning
 remains fragmented across incompatible metric families, yielding method
 comparisons that are sensitive to which endpoints are chosen.
-
-\\textbf{Methods.} Drawing on a 44-paper structured scoping corpus assembled
+Drawing on a 44-paper structured scoping corpus assembled
 through a five-database search with a reported screening record, we build a
 four-axis taxonomy---by evaluation target, evidence source, quality property,
 and task context---that maps the measurement landscape. We then run a paired
@@ -63,8 +65,7 @@ empirical benchmark comparing LIME and SHAP across 75 matched cells spanning
 five model families, five seeds, and three sampling sizes on the UCI Adult
 census-income dataset, with a cross-dataset extension on two further tabular
 datasets.
-
-\\textbf{Results.} The taxonomy exposes three recurring gaps: proxy metrics
+The taxonomy exposes three recurring gaps: proxy metrics
 dominate despite not capturing semantics; human-grounded constructs remain
 underspecified; and semantic evaluation is growing faster than its empirical
 validation base. Within the benchmark protocol, results are consistent and
@@ -78,8 +79,7 @@ cross-dataset extension preserves the fidelity ordering---SHAP exceeds both
 Anchors and LIME in every dataset--model stratum---and shows that LIME's
 near-zero stability on the Adult data is not intrinsic to the method: it rises
 with the kernel width and is high on both lower-dimensional datasets.
-
-\\textbf{Conclusions.} Together, the taxonomy and the benchmark motivate a
+Together, the taxonomy and the benchmark motivate a
 model-architecture-conditioned deployment pattern for tabular
 classification: SHAP is preferred at both fidelity and latency for
 XGBoost, LIME retains a latency advantage for black-box architectures
@@ -88,6 +88,47 @@ should be measured before choosing. All experimental artifacts
 are publicly available.
 """
 keywords_en_tex = "explainable AI, evaluation metrics, taxonomy, LIME, SHAP"
+# Spanish translation of abstract_en_tex: same claims, same numbers (decimal
+# point, as in the thesis Resumen). Terms follow the thesis: parsimonia,
+# brecha de fidelidad (faithfulness gap).
+abstract_es_tex = """
+La evaluación de las explicaciones post hoc en aprendizaje automático sigue
+fragmentada entre familias de métricas incompatibles, lo que produce
+comparaciones entre métodos sensibles a la elección de los criterios de
+evaluación. A partir de un corpus de revisión exploratoria estructurada de 44
+artículos, reunido mediante una búsqueda en cinco bases de datos con un
+registro de cribado documentado, construimos una taxonomía de cuatro
+ejes---objetivo de evaluación, fuente de evidencia, propiedad de calidad y
+contexto de la tarea---que organiza el panorama de la medición. A
+continuación, realizamos una comparación empírica pareada de LIME y SHAP en 75
+celdas emparejadas que abarcan cinco familias de modelos, cinco semillas y tres
+tamaños de muestra sobre el conjunto de datos censal UCI Adult, con una
+extensión a otros dos conjuntos de datos tabulares. La taxonomía revela tres
+brechas recurrentes: las métricas proxy predominan aunque no capturan la
+semántica; los constructos basados en el juicio humano siguen insuficientemente
+especificados; y la evaluación semántica crece más rápido que su base de
+validación empírica. Dentro del protocolo de comparación, los resultados son
+consistentes y de gran magnitud: SHAP aventaja a LIME en todos los criterios
+orientados a la fidelidad y la estabilidad (estabilidad $d_z{=}3.00$,
+fidelidad $d_z{=}4.82$, brecha de fidelidad $d_z{=}2.63$), mientras que LIME
+es más parsimonioso y más rápido en las familias de modelos no basadas en
+árboles (mediana de 53.3 ms frente a 694.6 ms de SHAP). En los ensambles de
+árboles, el orden de latencia depende del modelo: el \\texttt{TreeExplainer} de
+SHAP fue más rápido que LIME en todas las celdas de XGBoost, pero más lento en
+todas las de bosque aleatorio. La extensión a otros conjuntos de datos conserva
+el orden de fidelidad---SHAP supera tanto a Anchors como a LIME en todos los
+estratos de conjunto de datos y modelo---y muestra que la estabilidad casi nula
+de LIME en los datos de Adult no es intrínseca al método: aumenta con el ancho
+del kernel y es alta en ambos conjuntos de menor dimensión. En conjunto, la
+taxonomía y la comparación empírica motivan un patrón de despliegue
+condicionado por la arquitectura del modelo para la clasificación tabular: SHAP
+es preferible tanto en fidelidad como en latencia para XGBoost, LIME conserva
+una ventaja de latencia en arquitecturas de caja negra sin un explicador
+específico del modelo, y en otros ensambles de árboles la latencia debe medirse
+antes de elegir. Todos los artefactos experimentales están disponibles
+públicamente.
+"""
+keywords_es_tex = "IA explicable, métricas de evaluación, taxonomía, LIME, SHAP"
 
 [papers.paper_b]
 abstract_en_tex = """

@@ -1,10 +1,15 @@
-# Zenodo release for the PeerJ CS submission
+# Zenodo release: the code and data archive of Paper B+C
 
 > **DONE 2026-10-02.** Version 0.4.0 is published as **`10.5281/zenodo.23111684`**
 > (https://doi.org/10.5281/zenodo.23111684), through Route A. Tag
 > `paper-bc-peerj-submission-2026-10-02` = `main` at `ba6e835f2`; archive 907 MB; open
 > access, MIT licence; name and affiliation correct. The manuscript cites it. The rest of
 > this file is the procedure, kept for the next release.
+>
+> **Venue changed (ADR-0020):** the paper now goes to *Inteligencia Artificial*, which reviews
+> double-blind. The review PDF withholds this DOI; the camera-ready build prints it. Before the
+> camera-ready version, publish a new version (Route A below, with a new tag name) so the
+> archive matches the published paper, and update `\zenodoversiondoi`.
 
 PeerJ requires a DOI archive holding an **exact copy** of the code and data the study used. A
 GitHub link is not enough. The current Zenodo version predates EXP4 cohort 2 and EXP6, so a
@@ -76,8 +81,8 @@ it on *before* the release is published, or use Route B.
 - the **version DOI** of version 3 (for example `10.5281/zenodo.2xxxxxxx`).
 
 Claude then:
-- sets `\zenodoversiondoi` in `paper_bc_peerjcs.tex` and rebuilds the PDF;
-- puts the DOI in the Data availability statement of `PEERJ_SUBMISSION.md`;
+- sets `\zenodoversiondoi` in `paper_bc_iberamia.tex` and rebuilds the PDF;
+- records the DOI in `IBERAMIA_SUBMISSION.md` §8;
 - runs the four verifiers and commits.
 
 ## Optional, any time: fix the old records' metadata

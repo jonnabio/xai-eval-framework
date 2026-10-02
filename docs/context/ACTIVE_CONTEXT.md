@@ -2,6 +2,10 @@
 
 ## Session Metadata
 - **Last Updated:** 2026-10-02
+- **Mode (2026-10-02, later):** PUBLICATION - **Venue is now *Inteligencia
+  Artificial* (IBERAMIA)**: the author cannot pay PeerJ's fee (ADR-0020). Paper
+  refactored in place to `paper_bc_iberamia.tex` (double-blind, Spanish
+  Resumen, Appendix A). Ready to submit. See the last Session Handoff.
 - **Mode (2026-10-02):** PUBLICATION - **TMLR desk-rejected Paper B+C (12779)
   without review; the paper is retargeted to PeerJ Computer Science.** The TMLR
   artifacts are removed (kept at tag `tmlr-submission-12779`); the PeerJ edition
@@ -1804,3 +1808,39 @@ frozen" or "keep double-blind" is historical.
   - Never invent hardware specifications: none were recorded for any run.
   - Git Bash heredocs on this machine collapse doubled backslashes; edit LaTeX
     and TOML with the Edit tool or a script file, never an inline heredoc.
+
+## Session Handoff - 2026-10-02 (venue: Inteligencia Artificial, IBERAMIA)
+
+**The author cannot pay publication fees, so PeerJ was dropped before filing
+(ADR-0020). Paper B+C now targets *Inteligencia Artificial* (IBERAMIA): no
+fees, Scopus/ESCI/DOAJ, double-blind, no page limit for research articles
+(4 MB PDF limit).** Supersedes the PeerJ items in the handoff above.
+
+- **Completed (refactor, same folder `docs/reports/paper_bc/`)**
+  - `paper_bc_peerjcs.tex` -> `paper_bc_iberamia.tex` on the journal's
+    `iberamia.sty` (unmodified; `logo.png` added); PeerJ supplement ->
+    `paper_bc_iberamia_appendix.tex`, Appendix A (Tables S1-S6) of the one PDF;
+    `PEERJ_SUBMISSION.md` -> `IBERAMIA_SUBMISSION.md` (rewritten). Removed
+    `wlpeerj.cls`, `peerj_upload/`, `scripts/pubs/export_peerj_upload.py`.
+  - Double-blind build via `\camerareadyfalse`: author block, GitHub URL and
+    Zenodo DOI withheld; identity scan of the PDF clean apart from the
+    third-person RIMI citation.
+  - Spanish Resumen and Palabras clave added (`abstract_es_tex`,
+    `keywords_es_tex` in `pub/claims.toml`; new fragments); abstract
+    unstructured again; numbered citations.
+  - Registry, coverage, guards, verify_sync (now checks the Spanish includes),
+    scan_shared_literals, bundle script and Makefile point at the new files.
+  - ADR-0020 written; ADR-0019 marked partly superseded; BUILD.md, the TMLR
+    record, ZENODO_RELEASE.md and the manuscript-editing skill updated.
+- **Current State**
+  - `paper_bc_iberamia.pdf`: 32 pp A4, 0.36 MB, 0 undefined references.
+    Verification: 321 claims / 487 sites; sync; 18 EXP4 pins; shared literals
+    0 unexplained / 55 known.
+- **Next Steps**
+  1. Author: fill in the suggested reviewers' emails and check conflicts
+     (`IBERAMIA_SUBMISSION.md` §4), review the Spanish Resumen, then submit
+     the PDF at journal.iberamia.org.
+  2. Do not post the arXiv preprint until after review (double-blind).
+  3. At acceptance: `\camerareadytrue`, journal counters, a new Zenodo
+     version, update `\zenodoversiondoi`.
+  4. Then resume Task 3 / RCA-001 Phase 2.

@@ -1,4 +1,4 @@
-"""Build the artifact bundle uploaded to PeerJ as Supplemental Data S1.
+"""Build the artifact bundle archived with Paper B+C (code and data release).
 
 Run from anywhere:  python scripts/pubs/build_artifact_bundle.py
 
@@ -45,10 +45,10 @@ COPY = [
     ("docs/reports/paper_bc/paper_bc_review_corpus.csv", "review_corpus/review_corpus.csv"),
     ("docs/reports/paper_bc/corpus_pdfs/RETRIEVAL_LOG.md", "review_corpus/RETRIEVAL_LOG.md"),
     ("data/adult.csv", "data/adult.csv"),
-    # The supplementary tables travel inside the bundle as well as being
-    # uploaded as Supplemental Article S1 (RCA-003: never omit them).
-    ("docs/reports/paper_bc/paper_bc_peerjcs_supplemental_S1.pdf",
-     "supplementary_tables.pdf"),
+    # The paper, whose Appendix A holds supplementary Tables S1-S6, travels
+    # inside the bundle (RCA-003: never omit the supplementary tables).
+    ("docs/reports/paper_bc/paper_bc_iberamia.pdf",
+     "paper_with_appendix.pdf"),
 ]
 
 missing = []
@@ -92,14 +92,14 @@ for k, v in scrubbed.items():
 
 README = """# Artifact bundle
 
-Supplemental Data S1 for "From Fidelity to Semantics: A Taxonomy of
-Explainable AI Evaluation Metrics and a Paired Empirical Comparison of LIME
-and SHAP" (PeerJ Computer Science submission). Local user paths are scrubbed.
+Artifact bundle for "From Fidelity to Semantics: A Taxonomy of Explainable
+AI Evaluation Metrics and a Paired Empirical Comparison of LIME and SHAP".
+Local user paths are scrubbed.
 
 ## Contents
 
-    supplementary_tables.pdf          supplementary Tables S1-S6 cited in
-                                      the paper.
+    paper_with_appendix.pdf           the paper; Appendix A holds the
+                                      supplementary Tables S1-S6.
     analysis/exp2_stats/              EXP2 inferential exports. Every EXP2
                                       number in the paper is computed from
                                       these files, not from the raw runs.
