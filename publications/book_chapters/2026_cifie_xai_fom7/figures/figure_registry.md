@@ -10,7 +10,17 @@
 | Figura 6 | fig-radar-metodos | Perfil multidimensional normalizado por método | `thesis/assets/figures/fig_radar_metodos_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_radar_metodos_es.png` | `09_implicaciones_evaluacion_auditable_xai.md` | Fuente interna de tesis; útil para argumentar ausencia de método universalmente dominante. | Copiada |
 
 
-## Figuras didácticas (creadas el 2026-09-30; pendientes de ubicación)
+## Numeración vigente (2026-10-01, plan de extensión aprobado)
+
+Figura 1 = D1 (sección 03); 2 = D2 (03); 3 = D4 (03); 4 = D6 (03); 5 = D5 (04); 6 = D7 (05);
+7 = D8 (06); 8 = cobertura EXP2 (07); 9 = diagrama de diferencia crítica (08); 10 = estabilidad
+y coste (08). D3 no se usa. Retiradas del capítulo (siguen en `figures/exported/`): las cajas
+de distribución, la matriz de correlación y el perfil radial (antes Figuras 3, 5 y 6). Cada
+figura se menciona en el texto antes de aparecer. Tablas vigentes: 1 = métricas, 2 = resumen
+de resultados; las tablas de puertas FOM-7 y de comparación de métodos pasan a
+`tables/retired/`, sustituidas por las Figuras 7, 2 y 3.
+
+## Figuras didácticas (creadas el 2026-09-30)
 
 Generador: `scripts/generate_cifie_didactic_figures.py` (Cambria, escala de grises,
 600 ppp; editables en PDF y SVG en `figures/editable/`). Reformulan conceptos ya
