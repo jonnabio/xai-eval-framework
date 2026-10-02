@@ -6,8 +6,11 @@
   without review; the paper is retargeted to PeerJ Computer Science.** The TMLR
   artifacts are removed (kept at tag `tmlr-submission-12779`); the PeerJ edition
   (`paper_bc_peerjcs.tex` + Supplemental Article S1) is the only Paper B+C and
-  is merged to `main` and this lane. Not filed: the Zenodo release and the
-  payment decision are pending. See "Session Handoff - 2026-10-02".
+  is merged to `main` and this lane. The separate paper working tree
+  `xai-paper-bc` and both `paper/bc-*` branches are retired (ADR-0019): all
+  Paper B+C material is in `docs/reports/paper_bc/` of the main folder. Not
+  filed: the Zenodo release and the payment decision are pending. See
+  "Session Handoff - 2026-10-02".
 - **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
   12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
   the "UCI Adult census-income dataset"; equations numbered with every term
@@ -1763,11 +1766,21 @@ frozen" or "keep double-blind" is historical.
   - `verify_claims.py` skips dotted version triples (e.g. 1.7.1).
   - `.zenodo.json` / `CITATION.cff` set to v0.3.0; affiliation spelling fixed.
 - **Current State**
-  - `main` at `67072706c`; this lane merged with it. Verification: 321 claims /
-    485 sites / 46 retired-value guards; sync green; 18 EXP4 pins green; shared
-    literals 0 unexplained / 55 known.
-  - Paper lane branch is now `paper/bc-peerj-cs` (worktree `xai-paper-bc`).
-    `paper/bc-venue-definition` is superseded.
+  - This lane is merged with `main`. Verification: 321 claims / 485 sites / 46
+    retired-value guards; sync green; 18 EXP4 pins green; shared literals 0
+    unexplained / 55 known. Both PDFs build in the main folder (26 + 6 pages,
+    no undefined reference).
+  - **Cleanup (ADR-0019).** The `xai-paper-bc` working tree is removed and the
+    branches `paper/bc-venue-definition` and `paper/bc-peerj-cs` are merged into
+    `main` and deleted, locally and on origin. Fully merged `pubs/*` branches
+    and `results/adult-dataset` are deleted too. Twelve tracked latexmk build
+    files at the repository root are removed and ignored from now on. Remaining
+    working trees: `xai-eval-framework` (thesis lane), `xai-chapter`, `xai-exp4`.
+  - The Tectonic compiler is at `tools/tectonic-portable/tectonic.exe` in the
+    main folder (gitignored). The artifact bundle was rebuilt there: 16.2 MB,
+    9,384 files. The "3.8 MB" quoted in older entries of this file is wrong.
+  - Future Paper B+C edits: a short-lived `paper/bc-<topic>` branch in the main
+    folder, merged through `main` (ADR-0019). Close Word first.
 - **Next Steps**
   1. Author: publish the Zenodo v0.3.0 release (`ZENODO_RELEASE.md`) and send
      the version DOI and concept DOI; then set `\zenodoversiondoi` and

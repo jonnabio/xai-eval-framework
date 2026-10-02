@@ -248,4 +248,5 @@ confirm remains (the reference list, §5b).
 
 Review PDF (line numbers, cover page first) · `.tex` · references · `wlpeerj.cls` ·
 `Figure1..N.pdf` · `Table1..N.tex` · Supplemental Article S1 (PDF) · Supplemental Data S1
-(bundle zip, 3.8 MB). Each file under 30 MB, total under 50 MB.
+(bundle zip, 16.2 MB and 9,384 files as rebuilt on 2026-10-02; it includes the raw EXP3
+result tree). Each file under 30 MB, total under 50 MB: the bundle fits.
