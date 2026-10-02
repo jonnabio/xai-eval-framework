@@ -55,6 +55,11 @@ _FENCED = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE = re.compile(r"`[^`\n]*`")
 _URL = re.compile(r"https?://\S+|10\.\d{4,}/\S+|zenodo\.\d+", re.IGNORECASE)
 _CITEKEY = re.compile(r"@[A-Za-z][A-Za-z0-9_-]*\d{4}[a-z]?")
+# Software version strings with three or more components (scikit-learn 1.7.1,
+# LIME 0.2.0.1). Added 2026-10-02 for the PeerJ computing-infrastructure
+# paragraph: no result is ever printed as a dotted triple, whereas declaring
+# "1.7" or "2.2" structural would mask real unregistered results everywhere.
+_VERSION = re.compile(r"(?<![\w.])\d+(?:\.\d+){2,}(?![\w.])")
 _LATEX_CITE = re.compile(
     r"\\(?:cite[a-z]*|ref|label|includegraphics)\s*\{[^}]*\}"
 )
@@ -66,7 +71,7 @@ def _literals(text: str) -> set[str]:
 
 def _scannable(text: str) -> str:
     for pattern in (_MD_COMMENT, _FENCED, _TEX_COMMENT, _INLINE_CODE,
-                    _LATEX_CITE, _URL, _CITEKEY):
+                    _LATEX_CITE, _URL, _CITEKEY, _VERSION):
         text = pattern.sub(" ", text)
     return text
 
