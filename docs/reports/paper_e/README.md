@@ -61,7 +61,14 @@ feature *sets* for Anchors and DiCE.
    `python scripts/paper_e_data_audit.py`; it is structural/identity QC, not a Paper E result.
 3. Extend `scripts/run_exp3_lime.py` to save per-instance attributions for the exact IDs in the
    existing EXP3 SHAP runs. This is a new cohort, kept in its own output directory.
-4. Run the prespecified analyses and retain reproducible tables, diagnostics and figure sources.
+   EXP3 model binaries are not tracked; regenerate them to an isolated artifact root first:
+   `python scripts/train_exp3_models.py --model-root <model-root> --data-cache-dir <cache-dir>`.
+   The LIME runner validates the regenerated metadata, training metrics, feature order and
+   stored target predictions before running:
+   `python scripts/run_exp3_lime.py --paper-e --model-root <model-root> --data-cache-dir <cache-dir> --paper-e-output-dir <lime-output-dir>`.
+4. Run the prespecified analyses with
+   `python scripts/analyze_paper_e.py --lime-root <lime-output-dir> --output-dir <analysis-output-dir>`
+   and retain reproducible tables, diagnostics and figures.
 5. Literature check: verify each reference against its DOI; the author approves each.
 6. Choose a different venue (no publication fee; English), then draft only after the analysis
    artifacts pass verification.

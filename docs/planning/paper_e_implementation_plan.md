@@ -1,6 +1,6 @@
 # Paper E — implementation plan
 
-**Status:** Planning
+**Status:** In progress
 **Created:** 2026-10-03
 **Research plan:** `docs/reports/paper_e/ANALYSIS_PLAN.md`
 **Branch:** `paper/e-feature-agreement`, based on `main`; do not merge Paper D's lane.
@@ -28,8 +28,9 @@ re-reporting the source papers' method-level results.
      established.
 
 3. **Create the new EXP3 LIME cohort**
-   - Modify `scripts/run_exp3_lime.py` only after confirming the input IDs can
-     be reconstructed exactly from the existing SHAP outputs.
+   - Regenerate absent EXP3 models in an isolated artifact root using the
+     checked-in trainer; verify metadata, training summaries, feature order and
+     exact source-cohort labels/predictions before explanation.
    - Persist per-instance attribution maps, original instance IDs, run
      metadata, configuration and explicit failure status in a new directory.
    - Preserve `outputs/analysis/exp3_lime_results.csv` and every existing
@@ -40,8 +41,9 @@ re-reporting the source papers' method-level results.
 4. **Implement and run the planned analysis**
    - Add a deterministic analysis script that reads the raw run artifacts and
      the new LIME cohort, checks the plan's QC conditions, and emits
-     diagnostics, analysis tables and figure-source data.
-   - Keep generated outputs in `outputs/analysis/paper_e/`.
+     diagnostics, analysis tables and figures.
+   - Keep generated outputs in `outputs/analysis/paper_e/` on a `results/*`
+     branch.
    - Report counts and exclusions; preserve empty-versus-missing semantics.
    - Use no unplanned inferential tests or post-hoc feature regrouping.
 
