@@ -1,9 +1,10 @@
 # Paper E — implementation plan
 
-**Status:** In progress
+**Status:** Analysis artifacts generated; author review and publication decisions remain
 **Created:** 2026-10-03
 **Research plan:** `docs/reports/paper_e/ANALYSIS_PLAN.md`
-**Branch:** `paper/e-feature-agreement`, based on `main`; do not merge Paper D's lane.
+**Branch:** Paper E-only commits were transplanted to `paper/e-feature-agreement-clean` from
+`origin/main` and integrated through `main`; do not merge Paper D's lane.
 
 ## Objective
 
@@ -13,12 +14,12 @@ re-reporting the source papers' method-level results.
 
 ## Tasks
 
-1. **Lock the scientific plan**
+1. **Lock the scientific plan — complete**
    - Keep `ANALYSIS_PLAN.md` free of results and commit it before analysis or
      running a new experiment.
    - Update README status and workflow to reflect the approved timing change.
 
-2. **Audit existing evidence**
+2. **Audit existing evidence — complete**
    - Inventory EXP2/EXP3 JSON files and report source paths, run status,
      unique-ID counts, duplicate IDs, per-method matching and `raw_top`
      validity.
@@ -27,7 +28,7 @@ re-reporting the source papers' method-level results.
    - Stop paired analyses wherever identity or attribution semantics cannot be
      established.
 
-3. **Create the new EXP3 LIME cohort**
+3. **Create the new EXP3 LIME cohort — complete**
    - Regenerate absent EXP3 models in an isolated artifact root using the
      checked-in trainer; verify metadata, training summaries, feature order and
      exact source-cohort labels/predictions before explanation.
@@ -38,7 +39,7 @@ re-reporting the source papers' method-level results.
    - Add focused tests for ID matching, feature-value serialization, missing
      IDs and new-output-path isolation.
 
-4. **Implement and run the planned analysis**
+4. **Implement and run the planned analysis — complete**
    - Add a deterministic analysis script that reads the raw run artifacts and
      the new LIME cohort, checks the plan's QC conditions, and emits
      diagnostics, analysis tables and figures.
@@ -47,13 +48,14 @@ re-reporting the source papers' method-level results.
    - Report counts and exclusions; preserve empty-versus-missing semantics.
    - Use no unplanned inferential tests or post-hoc feature regrouping.
 
-5. **Verify and hand off**
+5. **Verify and hand off — analysis verification complete**
    - Unit-test metric functions on fixed fixtures, including identical,
      disjoint, tied-rank, signed, empty and missing explanations.
    - Run the analysis twice and confirm deterministic tabular outputs, apart
      from explicitly documented timestamps.
-   - Verify existing cohorts are unchanged, then update `ACTIVE_CONTEXT.md`
-     with the actual files, commands, results and remaining author actions.
+   - Existing cohorts were verified unchanged. Update `ACTIVE_CONTEXT.md` on
+     a separate substrate branch with the actual files, commands, results and
+     remaining author actions.
 
 ## Branch and artifact boundaries
 
