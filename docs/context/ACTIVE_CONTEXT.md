@@ -1845,23 +1845,25 @@ fees, Scopus/ESCI/DOAJ, double-blind, no page limit for research articles
      version, update `\zenodoversiondoi`.
   4. Then resume Task 3 / RCA-001 Phase 2.
 
-## Session Handoff - 2026-10-03 (Paper D started)
+## Session Handoff - 2026-10-03 (Paper D refocused; Paper E documented)
 
-**Paper D: a new, separate paper for *Tecnologia en Marcha*'s AI special issue (deadline
-2026-10-15; Word, 5-15 pp, IEEE, English with Spanish abstract, double-blind, no fees).**
-Topic: the claim registry as a research-reproducibility method, with a case study of this
-program. It prints no Paper A or Paper B+C result (`[exclusivity]`). Paper C was checked
-and is NOT usable: its taxonomy is inside Paper B+C, now under review.
+**Paper D is now "Are explanations less reliable when the model is wrong?"** for
+*Tecnologia en Marcha*'s AI special issue (deadline 2026-10-15; Word, 5-15 pp, IEEE,
+English with Spanish abstract, double-blind, no fees; author target 12 Word pages).
+The first Paper D (claim-registry case study) was dropped by the author as off the XAI
+line; it is preserved at tag `paper-d-registry-draft-2026-10-03`, and its registry claims,
+data, figures and scripts were removed. Paper C was checked and is NOT usable (its taxonomy
+is inside Paper B+C, under review).
 
-- **Completed:** `docs/reports/paper_d/` (manuscript, references, figures, README);
-  case-study data in `outputs/analysis/paper_d/` (registry snapshot at pinned commit
-  `124a7db4c`, growth over 39 commits, 65-row incident catalogue -> 58 defects, CI export);
-  `scripts/pubs/paper_d_metrics.py`, `scripts/generate_paper_d_figures.py`,
-  `scripts/pubs/build_paper_d.py` (PDF + Word with native equations, Times 12, 1.5,
-  letter; TIFF figure uploads); `paper_d:` resolver; 32 claims + 2 unbacked registered.
-  Word length 12 pages (blind and full), measured with Word.
-- **Key results:** 321 claims / 487 sites; numeric defects 30 (16 caught, 13 partly, 1
-  not); non-numeric 28 (3 caught); CI failed its first 37 runs, then 43/43 passed.
-- **Next:** author fills ORCID and profession, reads Spanish text, approves references
-  (AI-proposed, DOI-verified) and checks every incident-catalogue row; Scientific
-  Advisor rigor review; submit by email before 2026-10-15.
+- **Paper D (`docs/reports/paper_d/`):** `ANALYSIS_PLAN.md` written and committed BEFORE
+  any result (RQ1 correct vs misclassified per explainer; RQ2 model family; RQ3 FP vs FN;
+  RQ4 decision-margin control; German Credit external check; run as unit; Wilcoxon + Holm;
+  overlap guard). `paper_d.tex` is a skeleton on the journal page. The Word build pipeline
+  (`scripts/pubs/build_paper_d.py`) is kept. Data: 299 EXP2 runs, about 123k instance
+  explanations, quadrant-balanced; stored models allow the margin control.
+- **Paper E (`docs/reports/paper_e/README.md`):** "Do explainers agree on which features
+  matter?", documented as an idea only; development after Paper D, at a different journal,
+  with a new EXP3 LIME run saving per-instance attributions.
+- **Next:** `scripts/pubs/paper_d_analysis.py` per the plan; register numbers; write; figures;
+  rigor review; author items (ORCID, profession, Spanish, reference approval); submit about
+  2026-10-13.

@@ -663,8 +663,8 @@ def resolve(expr: str) -> float:
         return 100.0 * sum(v == float(score) for v in values) / len(values)
 
     if kind == "paper_d":
-        # Paper D (claim-registry case study): metric,value snapshots written by
-        # scripts/pubs/paper_d_metrics.py, e.g. paper_d:registry_snapshot:claims.
+        # Paper D (explanation reliability on misclassified instances): metric,value
+        # tables written by scripts/pubs/paper_d_analysis.py, e.g. paper_d:rq1:<metric>.
         # A percentage is expressed as paper_d:<file>:<numerator>/<denominator>.
         table, metric = args
         path = ROOT / "outputs" / "analysis" / "paper_d" / f"{table}.csv"

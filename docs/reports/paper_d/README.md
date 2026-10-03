@@ -1,87 +1,84 @@
-# Paper D — claim-registry case study
+# Paper D — are explanations less reliable when the model is wrong?
 
-**Working title:** *Verifiable result traceability in AI research: a claim registry that links
-published numbers to their artifacts* (Spanish title in the manuscript).
+**Working title:** *Are explanations less reliable when the model is wrong? Post-hoc
+explanation quality on misclassified instances*
 
 **Target:** *Tecnología en Marcha* (Editorial Tecnológica de Costa Rica), special issue on
-Artificial Intelligence. ESCI, SciELO, DOAJ; diamond open access, no fees.
-**Deadline: 15 October 2026**, by email to revistatm@tec.ac.cr (special-issue call); the issue
-is published in February 2027. **Status (2026-10-03):** first complete draft; not submitted.
+Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**, by email
+to revistatm@tec.ac.cr. Author target: **12 pages in Word**, including references; English.
 
-## Why this paper is separate from Papers A and B+C
+**Status (2026-10-03):** analysis plan written and committed before any result was computed
+(`ANALYSIS_PLAN.md`). Manuscript skeleton in place. No results yet.
 
-Paper D reports the *method* the project used to keep its manuscripts correct (the claim
-registry and its checks) and a case study of the defects it found. It prints no scientific
-result of Paper A (published, RIMI) or Paper B+C (under review at *Inteligencia
-Artificial*). This is enforced: `paper_d.tex` is in the registry's `[exclusivity]` list, so the
-build fails if a Paper B+C result appears in it, and in `[coverage]`.
+**History:** this folder first held a different Paper D, a case study of the claim registry.
+The author dropped it on 2026-10-03 because it drifted from the XAI research line; it is
+preserved at git tag `paper-d-registry-draft-2026-10-03`. The companion question "Do
+explainers agree on which features matter?" is Paper E (`docs/reports/paper_e/`), to be
+developed after this submission.
+
+## Contribution
+
+A re-analysis of the existing benchmark at instance level. It compares explanation quality
+(fidelity, stability, faithfulness gap, sparsity) between correctly and incorrectly
+classified instances for SHAP, LIME, Anchors and DiCE across five model families, with a
+control for the prediction margin and an external check on German Credit. No new experiment
+is run.
+
+## Relation to Papers A and B+C
+
+The runs are the same cohort as Paper A (published, RIMI) and Paper B+C (under review,
+*Inteligencia Artificial*). Paper D reports none of their results: only within-run contrasts
+between correct and misclassified instances, which neither paper computes. The provenance is
+stated in the paper. This is enforced by the claim registry: `paper_d.tex` is under
+`[exclusivity]` and `[coverage]` in `pub/claim_registry.toml`.
 
 ## Journal requirements (author guide, checked 2026-10-03)
 
-Source: "Instrucciones para publicar"
-(https://revistas.tec.ac.cr/index.php/tec_marcha/libraryFiles/downloadPublic/6) and the
-submission page.
-
-| Requirement | Journal rule | Paper D |
-|---|---|---|
-| Originality | Original, unpublished, not in another process at the same time | Yes; no overlap with A or B+C (exclusivity check) |
-| Structure | Title, abstract, keywords (English and Spanish); introduction; materials and methods; results; conclusions and/or recommendations; references; acknowledgments | Yes, plus a Discussion section and a Data availability statement |
-| Length | 5–15 pages, 8.5 × 11 in | **12 pages in Word**, including references (author target) |
-| File | Microsoft Word, one column, 1.5 line spacing, Times 12 pt | `submission/paper_d_blind.docx` (Times New Roman 12 pt, 1.5, letter, 2.5 cm margins) |
-| Titles | Simple, clear, short; Spanish and English | Both |
-| Authors | Full name with both surnames, profession, email, workplace (institution, department), country, **ORCID** | In `paper_d_full.docx`; **ORCID is a placeholder: [AUTHOR]** |
-| Abstract | Spanish and English, at most 250 words | English 214, Spanish 238 words (measured in the Word file) |
-| Keywords | Spanish and English | Both |
-| Images | Inside the document **and** as separate files; .jpg, .tiff, .eps, .psd or .ai; 300 ppi if raster | `submission/Figure1-3.tiff`, 300 ppi |
-| Equations | Microsoft Office equation editor or MathType | Native Word equations (pandoc writes Office Math) |
-| Units | SI where relevant | n/a |
-| References | IEEE, at the end | IEEE (`IEEEtran` in LaTeX; `ieee.csl` in Word) |
-| Review | Double-blind, two external reviewers | `paper_d_blind.docx` omits identity; the full file goes to the editor |
-| Language | Spanish mainly; English accepted | English (author decision) |
-| AI policy | Prohibits AI-plagiarised ideas or autonomously AI-written papers | Ideas and direction are the author's; AI assistance disclosed in the Acknowledgments |
+| Requirement | Journal rule |
+|---|---|
+| Originality | Original, unpublished, not in another process at the same time |
+| Structure | Title, abstract, keywords in English **and** Spanish; introduction; materials and methods; results; conclusions and/or recommendations; references; acknowledgments |
+| Length | 5–15 pages, 8.5 × 11 in |
+| File | Microsoft Word; one column; 1.5 line spacing; Times 12 pt |
+| Authors | Full name with both surnames, profession, email, workplace, country, ORCID |
+| Abstract | Spanish and English, at most 250 words each |
+| Images | In the document and as separate .jpg/.tiff/.eps/.psd/.ai files; 300 ppi |
+| Equations | Word equation editor or MathType |
+| References | IEEE |
+| Review | Double-blind |
+| AI policy | No AI-plagiarised ideas or autonomously AI-written papers; assistance disclosed |
 
 ## Files
 
 | Path | What it is |
 |---|---|
-| `paper_d.tex` | The manuscript source (LaTeX, set to the journal's page) |
-| `references.bib` | References; DOI entries fetched from doi.org and verified against Crossref |
-| `ieee.csl`, `reference_default.docx` | IEEE citation style and pandoc's base Word template, used to build the .docx |
-| `figures/` | `fig1_architecture.tex` (TikZ) and the generated figures as .pdf, .png and .tiff |
-| `submission/` | Generated: `paper_d_blind.{docx,pdf}`, `paper_d_full.{docx,pdf}`, `Figure1-3.tiff` |
-| `outputs/analysis/paper_d/` | The case-study data: registry snapshot and growth, incident catalogue and summary, CI export and summary |
+| `ANALYSIS_PLAN.md` | Pre-specified questions, data, statistics, exclusions, overlap guard |
+| `paper_d.tex` | Manuscript skeleton (journal page setup; sections to be written) |
+| `ieee.csl`, `reference_default.docx` | Used by `scripts/pubs/build_paper_d.py` to make the Word file |
 
-## Build
+To be created when the analysis runs: `references.bib`, `figures/`, `submission/`,
+`scripts/pubs/paper_d_analysis.py`, `scripts/generate_paper_d_figures.py` and
+`outputs/analysis/paper_d/`.
+
+## Build (once the draft exists)
 
 ```bash
-python scripts/pubs/paper_d_metrics.py          # case-study data (pinned commit 124a7db4c)
-python scripts/generate_paper_d_figures.py      # Figures 1-3 (.pdf, .png, .tiff)
-python scripts/pubs/build_paper_d.py            # PDFs, Word files, figure uploads
-python scripts/pubs/verify_claims.py            # every number in paper_d.tex re-derives
+python scripts/pubs/paper_d_analysis.py        # results -> outputs/analysis/paper_d/
+python scripts/generate_paper_d_figures.py     # figures (.pdf, .png, .tiff)
+python scripts/pubs/build_paper_d.py           # blind/full PDF and Word, figure uploads
+python scripts/pubs/verify_claims.py           # every printed number re-derives
 ```
 
-`build_paper_d.py` fails on any undefined reference or citation. The Word length is
-measured with Word itself: open `submission/paper_d_blind.docx` and check the page count.
-On 2026-10-03 it was 12 pages (blind and full).
+Measure the length in Word itself: the PDF is only a proxy.
 
-## Every number is registered
+## Plan to the deadline
 
-Paper D's numbers come from `outputs/analysis/paper_d/` through the `paper_d:` resolver in
-`scripts/pubs/claim_sources.py`, and each one is a claim in `pub/claim_registry.toml` (ids
-`paper_d.*`). The registry figures describe the registry as it stood at commit `124a7db4c`,
-read from git, so they do not change as the registry grows.
-
-## Open items before submission
-
-1. **[AUTHOR] ORCID**: replace `[ORCID]` in `paper_d.tex` (full version only).
-2. **[AUTHOR] Profession** line: "Computer scientist" is a placeholder; confirm.
-3. **[AUTHOR] References**: the AI assistant proposed them. All 19 were verified against
-   their DOI records or the publisher page, but the author must read and approve each one. The
-   Acknowledgments say so.
-4. **[AUTHOR] Incident catalogue**: the coding (`incident_catalogue.csv`) was a first pass
-   by the AI assistant from the review records; the author must check every row, especially
-   the `caught_now` column, before submission.
-5. **[AUTHOR] Spanish title and Resumen**: native read.
-6. Scientific-rigor review of the draft (Scientific Advisor), then fixes.
-7. Submission email: blind .docx, full .docx (title page data for the editor),
-   Figure1-3.tiff, and a short cover note naming the special issue.
+| Date | Step |
+|---|---|
+| 3 Oct | Analysis plan and skeleton (done) |
+| 4–5 Oct | Analysis script and results; register numbers |
+| 6–9 Oct | Writing; references (verified, approved by the author) |
+| 10 Oct | Figures; Word build; length check |
+| 11 Oct | Scientific-rigor review; fixes |
+| 12 Oct | Author items: ORCID, profession, Spanish read, reference approval |
+| 13 Oct | Submit (two days of margin) |

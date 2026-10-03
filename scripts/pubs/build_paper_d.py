@@ -14,7 +14,8 @@ truth is docs/reports/paper_d/paper_d.tex; this script derives everything else:
 
     python scripts/pubs/build_paper_d.py
 
-Run scripts/generate_paper_d_figures.py first if a figure changed.
+Run scripts/generate_paper_d_figures.py first if a figure changed. The manuscript is a
+skeleton until the analysis in docs/reports/paper_d/ANALYSIS_PLAN.md has run.
 """
 from __future__ import annotations
 
@@ -29,7 +30,9 @@ ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs" / "reports" / "paper_d"
 OUT = D / "submission"
 TECTONIC = ROOT / "tools" / "tectonic-portable" / ("tectonic.exe" if sys.platform == "win32" else "tectonic")
-FIGURES = ["fig1_architecture", "fig2_registry_growth", "fig3_incident_classes"]
+# Figure stems in order of appearance; filled in when the figures exist
+# (ANALYSIS_PLAN.md section 8).
+FIGURES: list[str] = []
 
 
 def _run(cmd: list[str], cwd: Path) -> None:
