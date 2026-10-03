@@ -236,13 +236,7 @@ def _check_exclusivity(registry: dict, problems: list[str]) -> int:
         return 0
     forbid = tuple(cfg.get("forbid") or [])
     allow = tuple(cfg.get("allow_if_also") or [])
-    # An exception without `file` applies to every protected file; with `file`, only to
-    # that one (used for chance numeric coincidences in a generated manuscript).
-    excepted_all = {e["text"] for e in registry.get("exclusivity_exception", []) if "file" not in e}
-    excepted_in: dict[str, set[str]] = {}
-    for e in registry.get("exclusivity_exception", []):
-        if "file" in e:
-            excepted_in.setdefault(e["file"], set()).add(e["text"])
+    excepted = {e["text"] for e in registry.get("exclusivity_exception", [])}
 
     protected: list[tuple[str, float, set[str]]] = []
     for claim in registry.get("claim", []):
@@ -261,7 +255,6 @@ def _check_exclusivity(registry: dict, problems: list[str]) -> int:
             problems.append(f"[exclusivity] file not found: {rel}")
             continue
         checked += 1
-        excepted = excepted_all | excepted_in.get(rel, set())
         for lineno, line in enumerate(_scannable(_read(path)).splitlines(), 1):
             for literal in _literals(line):
                 places = _decimals(literal)

@@ -45,16 +45,9 @@ def _trainer_config(model: str, seed: int) -> dict:
     raise ValueError(f"Unsupported EXP3 model: {model}")
 
 
-def train_one(
-    dataset: str,
-    model: str,
-    seed: int,
-    force: bool = False,
-    model_root: Path = MODEL_ROOT,
-    cache_dir: Path = Path("data"),
-) -> Path:
+def train_one(dataset: str, model: str, seed: int, force: bool = False) -> Path:
     """Train and persist one EXP3 model artifact."""
-    model_dir = model_root / dataset / model / f"seed_{seed}"
+    model_dir = MODEL_ROOT / dataset / model / f"seed_{seed}"
     model_path = model_dir / f"{model}.joblib"
     preprocessor_path = model_dir / "preprocessor.joblib"
 
@@ -65,7 +58,6 @@ def train_one(
     model_dir.mkdir(parents=True, exist_ok=True)
     X_train, X_test, y_train, y_test, feature_names, _ = load_tabular_dataset(
         dataset,
-        cache_dir=str(cache_dir),
         random_state=seed,
         preprocessor_path=str(preprocessor_path),
         verbose=True,
@@ -99,24 +91,13 @@ def train_many(
     models: Iterable[str],
     seeds: Iterable[int],
     force: bool = False,
-    model_root: Path = MODEL_ROOT,
-    cache_dir: Path = Path("data"),
 ) -> list[Path]:
     """Train the selected EXP3 model grid."""
     outputs: list[Path] = []
     for dataset in datasets:
         for model in models:
             for seed in seeds:
-                outputs.append(
-                    train_one(
-                        dataset,
-                        model,
-                        int(seed),
-                        force=force,
-                        model_root=model_root,
-                        cache_dir=cache_dir,
-                    )
-                )
+                outputs.append(train_one(dataset, model, int(seed), force=force))
     return outputs
 
 
@@ -128,18 +109,9 @@ def main() -> None:
     parser.add_argument("--models", nargs="+", default=DEFAULT_MODELS)
     parser.add_argument("--seeds", nargs="+", type=int, default=DEFAULT_SEEDS)
     parser.add_argument("--force", action="store_true")
-    parser.add_argument("--model-root", type=Path, default=MODEL_ROOT)
-    parser.add_argument("--data-cache-dir", type=Path, default=Path("data"))
     args = parser.parse_args()
 
-    outputs = train_many(
-        args.datasets,
-        args.models,
-        args.seeds,
-        force=args.force,
-        model_root=args.model_root,
-        cache_dir=args.data_cache_dir,
-    )
+    outputs = train_many(args.datasets, args.models, args.seeds, force=args.force)
     print(f"Prepared {len(outputs)} EXP3 model artifacts")
 
 
