@@ -78,6 +78,21 @@ def main(argv: list[str]) -> int:
             + paper["keywords_en_tex"].strip()
             + "\n",
         )
+        # Spanish abstract and keywords, for venues that require them
+        # (Inteligencia Artificial asks for a "Resumen" and "Palabras clave").
+        if "abstract_es_tex" in paper:
+            _write(
+                out_dir / f"{paper_id}_resumen_es.tex",
+                "% AUTO-GENERATED FILE. Source: pub/claims.toml\n"
+                + paper["abstract_es_tex"].strip()
+                + "\n",
+            )
+            _write(
+                out_dir / f"{paper_id}_palabras_clave_es.tex",
+                "% AUTO-GENERATED FILE. Source: pub/claims.toml\n"
+                + paper["keywords_es_tex"].strip()
+                + "\n",
+            )
 
     # Minimal build metadata
     _write(

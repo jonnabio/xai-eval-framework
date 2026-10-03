@@ -1,0 +1,36 @@
+% AUTO-GENERATED FILE. Source: pub/claims.toml
+La evaluación de las explicaciones post hoc en aprendizaje automático sigue
+fragmentada entre familias de métricas incompatibles, lo que produce
+comparaciones entre métodos sensibles a la elección de los criterios de
+evaluación. A partir de un corpus de revisión exploratoria estructurada de 44
+artículos, reunido mediante una búsqueda en cinco bases de datos con un
+registro de cribado documentado, construimos una taxonomía de cuatro
+ejes---objetivo de evaluación, fuente de evidencia, propiedad de calidad y
+contexto de la tarea---que organiza el panorama de la medición. A
+continuación, realizamos una comparación empírica pareada de LIME y SHAP en 75
+celdas emparejadas que abarcan cinco familias de modelos, cinco semillas y tres
+tamaños de muestra sobre el conjunto de datos censal UCI Adult, con una
+extensión a otros dos conjuntos de datos tabulares. La taxonomía revela tres
+brechas recurrentes: las métricas proxy predominan aunque no capturan la
+semántica; los constructos basados en el juicio humano siguen insuficientemente
+especificados; y la evaluación semántica crece más rápido que su base de
+validación empírica. Dentro del protocolo de comparación, los resultados son
+consistentes y de gran magnitud: SHAP aventaja a LIME en todos los criterios
+orientados a la fidelidad y la estabilidad (estabilidad $d_z{=}3.00$,
+fidelidad $d_z{=}4.82$, brecha de fidelidad $d_z{=}2.63$), mientras que LIME
+es más parsimonioso y más rápido en las familias de modelos no basadas en
+árboles (mediana de 53.3 ms frente a 694.6 ms de SHAP). En los ensambles de
+árboles, el orden de latencia depende del modelo: el \texttt{TreeExplainer} de
+SHAP fue más rápido que LIME en todas las celdas de XGBoost, pero más lento en
+todas las de bosque aleatorio. La extensión a otros conjuntos de datos conserva
+el orden de fidelidad---SHAP supera tanto a Anchors como a LIME en todos los
+estratos de conjunto de datos y modelo---y muestra que la estabilidad casi nula
+de LIME en los datos de Adult no es intrínseca al método: aumenta con el ancho
+del kernel y es alta en ambos conjuntos de menor dimensión. En conjunto, la
+taxonomía y la comparación empírica motivan un patrón de despliegue
+condicionado por la arquitectura del modelo para la clasificación tabular: SHAP
+es preferible tanto en fidelidad como en latencia para XGBoost, LIME conserva
+una ventaja de latencia en arquitecturas de caja negra sin un explicador
+específico del modelo, y en otros ensambles de árboles la latencia debe medirse
+antes de elegir. Todos los artefactos experimentales están disponibles
+públicamente.

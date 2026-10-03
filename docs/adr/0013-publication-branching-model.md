@@ -29,7 +29,7 @@ alone and 130 the thesis alone. A per-lane registry fork would register those
 prevent. The registry therefore **cannot** be branch-private.
 
 **3. `verify_claims.py` is already a sufficient cross-document gate — against
-the registry present on the branch.** Changing `0.808` in `paper_bc_tmlr.tex`
+the registry present on the branch.** Changing `0.808` in `paper_bc_iberamia.tex` (then `paper_bc_tmlr.tex`)
 without the registry fails check (b), the per-site occurrence count; changing
 the registry to match fails check (a) against the artifact. Drift cannot
 survive a green verifier. It can only survive a *stale* one.
@@ -40,7 +40,7 @@ trunk 29 commits behind would have begun on a 142-claim registry without the
 `[coverage]` — verifying green while checking the wrong things.
 
 Two further couplings constrain the model. RCA-002 guards
-`paper_bc_tmlr_supplementary.tex` and `thesis/capitulo-5-taxonomia.qmd`
+`paper_bc_iberamia_appendix.tex` (then `paper_bc_tmlr_supplementary.tex`) and `thesis/capitulo-5-taxonomia.qmd`
 together, so its invariants (ICC reported as ICC(1,1); Cramér's V over
 pairwise-complete cases) bind both lanes at once. And `[coverage]` enforcement
 is repository-wide: the moment a file joins that list, every unregistered
@@ -111,6 +111,11 @@ in Word (a recurring file lock) and a full render is slow.
 ```
 git worktree add ../xai-paper-bc paper/bc-<topic>
 ```
+
+> **Amended 2026-10-02 by [ADR-0019](0019-paper-bc-venue-peerj-and-single-working-folder.md):**
+> the `../xai-paper-bc` working tree is retired. Paper B+C is edited on a
+> short-lived `paper/bc-<topic>` branch in the main folder and merged through
+> `main`. The chapter and results working trees are unchanged.
 
 `.git/info/exclude` excludes `/.ace/` and `/.aceconfig`. The exclusion does not
 reach already-tracked files, so exactly four files travel to a new worktree --

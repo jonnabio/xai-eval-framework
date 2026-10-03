@@ -1,0 +1,130 @@
+%% Paper D: are explanations less reliable when the model is wrong?
+%% Target: Tecnologia en Marcha, special issue on Artificial Intelligence (deadline
+%% 2026-10-15). See docs/reports/paper_d/README.md and ANALYSIS_PLAN.md.
+%%
+%% SKELETON (2026-10-03): structure and page setup only. No result is printed until the
+%% analysis in ANALYSIS_PLAN.md has run and every number is registered in
+%% pub/claim_registry.toml (RCA-001).
+%%
+%% The journal takes Microsoft Word: letter, one column, Times 12 pt, 1.5 line spacing,
+%% 5-15 pages, IEEE references, English and Spanish titles, abstracts and keywords.
+%% This source is set to the same page so the PDF predicts the Word length;
+%% scripts/pubs/build_paper_d.py renders the PDF and the .docx.
+%%
+%% Review is double-blind. The default build omits author identity; the full build
+%% (author block, repository URL) is made by defining \fullversion before this file.
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cite}
+\setlength{\emergencystretch}{3em}
+
+\newif\iffull
+\ifdefined\fullversion \fulltrue \else \fullfalse \fi
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries Are explanations less reliable when the model is wrong? Post-hoc
+explanation quality on misclassified instances\par}
+\medskip
+{\large\bfseries {\textquestiondown}Son menos fiables las explicaciones cuando el modelo se
+equivoca? Calidad de las explicaciones post hoc en instancias mal clasificadas\par}
+\medskip
+\iffull
+Jonathan Herrera-V\'asquez\\
+[AUTHOR: profession]. Department of Computer Science, Universidad Americana de Europa
+(UNADE), Canc\'un, Quintana Roo, Mexico.\\
+jonnabio@gmail.com \quad ORCID: [AUTHOR: ORCID]
+\else
+\textit{Author information omitted for double-blind review.}
+\fi
+\end{center}
+
+\section*{Abstract}
+% TODO (after the analysis): at most 250 words. Problem; data (benchmark, four explainers,
+% five model families, instance level); the correct-versus-misclassified contrast and the
+% margin control; main result per explainer; consequence for auditing.
+
+\noindent\textbf{Keywords:} explainable artificial intelligence; post-hoc explanations;
+misclassification; explanation reliability; SHAP; LIME.
+
+\section*{Resumen}
+% TODO: Spanish translation of the final abstract, at most 250 words.
+
+\noindent\textbf{Palabras clave:} inteligencia artificial explicable; explicaciones post
+hoc; errores de clasificaci\'on; fiabilidad de las explicaciones; SHAP; LIME.
+
+\section{Introduction}
+% TODO: explanations are consulted most when a prediction is doubtful; benchmarks report
+% quality averaged over all instances, which hides any difference on errors; related work
+% on explanation quality and on explaining errors; the research questions (RQ1-RQ4,
+% ANALYSIS_PLAN.md section 2); contributions.
+
+\section{Materials and methods}
+
+\subsection{Benchmark and data}
+% TODO: the existing benchmark (cite the instrument; provenance of the cohort as in
+% Paper B+C); explainers, model families, seeds, sampling intensities; quadrant-balanced
+% sampling; the German Credit external check.
+
+\subsection{Explanation quality metrics}
+% TODO: fidelity, stability, faithfulness gap, sparsity (cost descriptive); definitions
+% cited to the instrument, with the equations the journal requires in Word format.
+
+\subsection{Statistical analysis}
+% TODO: run as the unit; the within-run contrast; Wilcoxon signed-rank with Holm
+% correction; effect sizes and CIs; robustness aggregation; family, FP/FN and margin
+% analyses; practical-relevance threshold (ANALYSIS_PLAN.md section 5).
+
+\section{Results}
+
+\subsection{Correct versus misclassified instances}
+% TODO: RQ1 table and figure.
+
+\subsection{Differences across model families}
+% TODO: RQ2.
+
+\subsection{False positives versus false negatives}
+% TODO: RQ3.
+
+\subsection{The role of the decision boundary}
+% TODO: RQ4.
+
+\subsection{External check on a second dataset}
+% TODO: German Credit, descriptive.
+
+\section{Discussion}
+% TODO: what the pattern means for auditing explanations of individual decisions; why
+% averages hide it; limitations (one main dataset, tabular, existing runs, missing
+% Anchors and DiCE runs).
+
+\section{Conclusions}
+% TODO.
+
+\section*{Data availability}
+\iffull
+Code and data: \url{https://github.com/jonnabio/xai-eval-framework}; archived release to be
+cited.
+\else
+Code and data are in a public repository and a versioned archive whose addresses are
+withheld for double-blind review.
+\fi
+
+\section*{Acknowledgments}
+% TODO: AI-assistance disclosure (assistant under the author's direction), as in the
+% other papers of the project.
+
+% \bibliographystyle{IEEEtran}
+% \bibliography{references}   % references.bib is created with the first draft
+
+\end{document}

@@ -1,45 +1,13 @@
-\documentclass[10pt]{article}
+%% Appendix A of paper_bc_iberamia.tex (\input after the references):
+%% the six supplementary tables. Body carried over verbatim from the TMLR
+%% supplement (tag tmlr-submission-12779) through the PeerJ edition.
+\section{Supplementary Tables S1--S6}
+\label{app:supplementary}
+% Tables here are numbered S1-S6, as the main text cites them.
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
 
-% TMLR supplementary. Anonymous while under review; the tmlr package
-% suppresses author identity unless loaded with [accepted] or [preprint].
-% Keep this option in step with the main manuscript.
-\usepackage{tmlr}
-
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{url}
-\usepackage{path}
-
-% Used by tmlr.sty only in the accepted build.
-\def\month{MM}
-\def\year{2026}
-\def\openreview{\url{https://openreview.net/forum?id=XXXX}}
-
-\title{Supplementary Material\\
-From Fidelity to Semantics: A Taxonomy of XAI Evaluation Metrics\\
-and Paired Empirical Comparison of LIME versus SHAP}
-
-% Not printed while under review.
-\author{
-\name Jonathan Herrera-V\'asquez \email jonnabio@gmail.com \\
-\addr Universidad Americana de Europa (UNADE)\\
-Canc\'un, Quintana Roo, M\'exico
-}
-
-\begin{document}
-\maketitle
-
-\appendix
-
-\section*{Supplementary Material}
-\label{sec:supplementary}
-
-This supplementary document contains six tables referenced from the main
+This appendix contains six tables referenced from the main
 text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
 LIME \texttt{kernel\_width} sensitivity probe results; (S3) pairwise
 feature correlations for the Adult Income dataset; (S4) the
@@ -370,7 +338,7 @@ of the method.
 \noindent\textit{Provenance and scope.} This probe is an earlier exploratory
 measurement whose output artifact is not preserved, unlike the
 \texttt{kernel\_width} probe (Table~S2), which re-derives from
-\texttt{outputs/analysis/lime\_kernel\_width\_sensitivity.csv}. Both tables
+\path{outputs/analysis/lime_kernel_width_sensitivity.csv}. Both tables
 state the same reference condition (RF, seed 42, $N=100$,
 \texttt{num\_samples=1000}, \texttt{kernel\_width=3.0}) but report different
 values for it---fidelity 0.461 against 0.518, stability 0.014 against
@@ -432,5 +400,3 @@ ordering --- it is highest under marginal empirical replacement
 ($+0.625$) and lowest under grouped mean replacement ($+0.494$) --- so the
 attenuation claim is supported by the prediction-drop gap alone and is not
 a general property of every masking-sensitivity endpoint.
-
-\end{document}
