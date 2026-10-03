@@ -1,5 +1,33 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (one working tree per paper, ADR-0021)
+
+At the author's direction, each paper in progress now has its own folder and branch
+(`docs/adr/0021-one-working-tree-per-paper.md`). This supersedes two lines in the
+handoff below: `../xai-paper-f` is the Paper F lane, not a leftover, and Next Steps
+item 1 (remove it) no longer applies.
+
+| Paper | Folder | Branch |
+|---|---|---|
+| Thesis | `xai-eval-framework` | `thesis/rca-001-phase-2` |
+| CIFIE chapter | `../xai-chapter` | `chapter/cifie-sync-2026-09` |
+| EXP4 cohort 2 | `../xai-exp4` | `results/exp4-cohort2` |
+| Paper D | `../xai-paper-d` | `paper-d/tecnologia-en-marcha` |
+| Paper E | `../xai-paper-e` | `paper/e-feature-agreement` |
+| Paper F | `../xai-paper-f` | `paper/f-external-validity` |
+
+- All six branches and `main` were at the same commit when the folders were created.
+  The three paper folders are seeded with `.ace/`; `../xai-paper-d` also has the
+  Tectonic compiler.
+- Rules (ADR-0021): a lane edits only its own paths; a shared change is its own
+  commit and goes through `main` in the same session; finished paper work is merged
+  into `main` and the main folder updated the same session; lanes never merge into
+  each other; one agent session per folder.
+- Paper B+C stays in the main folder on short-lived `paper/bc-<topic>` branches
+  (ADR-0019).
+- Still to delete, by the author: the ten `backup/2026-10-03/*` branches on origin
+  and the bundle file `..\xai-eval-framework-backup-2026-10-03.bundle`.
+
 ## Session Handoff - 2026-10-03 (repository consolidation and cleanup)
 
 This is the latest handoff. The "Session update - 2026-10-03 (repository
