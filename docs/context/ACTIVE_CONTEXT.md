@@ -2139,3 +2139,31 @@ All existing Active Constraints and overarching goals stand unchanged.
   artifacts are now integrated. The author should review the exploratory findings, approve
   the literature/DOI audit, choose a distinct venue, and only then draft a manuscript. Do not
   add claim-registry coverage until that manuscript and its claims exist.
+## Session Handoff - 2026-10-03 (CIFIE 9,000-word review draft)
+
+On author instruction, compressed the CIFIE/FOM-7 chapter as an AI-assisted review
+draft; this is not a signed or submission-ready version. The author must review and
+rewrite retained AI-assisted passages in their own words and ensure the official AI-use
+declaration accurately describes the final text before signing.
+
+- **Length and style:** 8,321 body words (sections 01-11, two tables and figure
+  captions; references excluded), down 10,372 from the 18,693-word starting state
+  and 679 below the 9,000-word ceiling. Sections 03-10 now use fewer major headings;
+  domains, methods, gaps, and protocol gates are introduced in the prose. Per-section
+  counts and the reduction map are in
+  `publications/book_chapters/2026_cifie_xai_fom7/planning/length_plan_9000_2026-10-01.md`.
+- **Figures:** all ten active figures remain in use with preceding callouts and source
+  captions. The other four exports are historical/unutilized. Claim registry check
+  passed: 321 claims / 487 sites / 48 retired-value guards / 13 cited artifacts.
+- **Outputs:** `publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_submission/`
+  contains `cifie_xai_fom7_review_draft_2026-10-03.docx` (3,215,253 bytes) and
+  `cifie_xai_fom7_review_draft_2026-10-03.pdf` (3,626,756 bytes; 30 A4 pages).
+  DOCX builder count: 8,321 words. PDF was rendered from the DOCX via Pandoc/XeLaTeX
+  with Times New Roman, Cambria Math, 1.5 line spacing and A4 geometry; fonts embedded.
+  Word COM PDF export hung and was stopped. Word pagination was not measured.
+- **Verification:** `verify_claims.py`, `verify_sync.py`,
+  `verify_exp4_reconstruction.py`, and `git diff --check` passed. DOCX and PDF each
+  contain ten images and captions 1-10; PDF text extraction found all ten captions.
+- **Still pending:** author's content review/rewrite, final AI-use declaration, final
+  page-by-page Word visual review and print legibility, forms/front matter, and final
+  submission package. Do not describe the chapter as ready to submit.

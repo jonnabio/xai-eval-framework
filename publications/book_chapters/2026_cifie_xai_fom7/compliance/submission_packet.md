@@ -1,11 +1,22 @@
 # Paquete de envío
 
-## Estado actual (2026-10-03)
+## Estado actual (2026-10-03; borrador v4 para revisión humana)
 
-El capítulo está en revisión científica y editorial; no está listo para envío. La
-lista de trabajo es la "Consolidated pending list" de
+El borrador comprimido asistido por IA tiene 8.321 palabras en el cuerpo (límite:
+9.000, referencias excluidas). No está listo para envío: el autor debe revisar y
+reescribir los pasajes conservados antes de firmar la declaración de IA, revisar el
+render página por página y completar los formularios. La lista de trabajo es la
+"Consolidated pending list" de
 `planning/science_first_revision_plan_2026-09-28.md`, y el diagnóstico editorial está
 en `editorial/editorial_compliance_assessment_2026-09-30.md`.
+
+**Build de revisión:**
+`drafts/v4_submission/cifie_xai_fom7_review_draft_2026-10-03.docx` y
+`drafts/v4_submission/cifie_xai_fom7_review_draft_2026-10-03.pdf`. El DOCX se generó
+con `scripts/build_cifie_chapter.py`; el PDF se convirtió desde el DOCX con
+Pandoc/XeLaTeX (TNR, Cambria Math, interlineado 1,5, A4). El PDF tiene 30 páginas.
+La exportación de Word por COM no respondió; la paginación PDF no sustituye la
+revisión visual del DOCX en Microsoft Word.
 
 ## Entregables exigidos por TintAzul / CIFIE
 

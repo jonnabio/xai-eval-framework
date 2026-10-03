@@ -275,12 +275,17 @@ editorial document that requires it.
 
 **Author decisions recorded 2026-09-30**
 
+**Author instruction (2026-10-03):** prepare an AI-assisted compressed review draft.
+This supersedes the auxiliary-only restriction for this working draft, not the final
+attestation: the author must review and rewrite retained passages and ensure the
+signed AI-use declaration accurately describes the submitted text.
+
 | ID | Decision | Consequences (new tasks) |
 | --- | --- | --- |
 | E-AI | Use the official form's auxiliary-use option (grammar, style, organization of ideas) and sign that analysis, interpretation and conclusions are the author's. | **E-AI-1:** from 2026-09-30, AI support on the chapter is limited to auxiliary tasks: organizing ideas, outlines and evidence maps, source verification, grammar and style editing of author text, registry and build work, formatting, reference checks. New scientific prose is written by the author. **E-AI-2:** before signing, the author reviews and rewrites in his own words the passages drafted with AI assistance (commit history: every section 02-11, including section 04 of 2026-09-29), so the signed declaration describes the text as submitted. |
 | E-PRIOR | No items from Paper B+C in the chapter. Ideas and discussion without direct citation are acceptable. The RIMI prior publication of H1-H2 is declared on the form. | **E-PRIOR-1** (see list below): remove the paired SHAP-LIME contrast and everything derived from it; keep the conceptual quality-cost discussion without Paper B+C results or citation. |
 | E-AUTH | Dr. Herrero-Uceda declined authorship; he is removed from the byline. The chapter has a single author. Citations of the RIMI article keep him as co-author of that article. | **E-AUTH-1:** remove him from `00_hoja_diseno_editorial.md`, the chapter README and the build byline; single-author declaration and licence; no conflict of interest arising from authorship. |
-| E-Q1 (mandatory length and format) | **Confirmed:** maximum 9,000 body words, excluding references; Times New Roman and 1.5 line spacing (editor, 2026-10-01; reference exclusion confirmed by author 2026-10-03). Current body: 18,693 words after a 402-word mechanical cut; working target 8,800. See `planning/length_plan_9000_2026-10-01.md` for the current per-section reduction budget and final compliance gate. | **E-SIZE:** after every major edit, report body words, changed-section counts, Word page count when rebuilt, and delta. |
+| E-Q1 (mandatory length and format) | **Confirmed:** maximum 9,000 body words, excluding references; Times New Roman and 1.5 line spacing (editor, 2026-10-01; reference exclusion confirmed by author 2026-10-03). AI-assisted review draft: 8,321 body words; working target 8,800. DOCX builder confirms the count; PDF render is 30 A4 pages. See `planning/length_plan_9000_2026-10-01.md`. | **E-SIZE:** after every major edit, report body words, changed-section counts, Word page count when rebuilt, and delta. |
 
 **E-PRIOR-1: Paper B+C material to remove** (located 2026-09-30; **done 2026-09-30**, together with E-AUTH-1; Wilcoxon (1945) and Lakens (2013) left the bibliography once uncited; 57 references):
 
@@ -310,12 +315,12 @@ and the change against the previous report. Baseline (2026-09-30, `06267988c`):
 
 | Measure | Value |
 | --- | --- |
-| Sections 01-11 (table text excluded) | 18,262 words |
+| Sections 01-11 (table text excluded) | 7,890 words |
 | Tables 1-2 | 431 words |
-| Body (sections + tables; references excluded) | 18,693 words |
+| Body (sections + tables; references excluded) | 8,321 words |
 | Reference list | Excluded from the editor's word limit |
-| Word render | Not rebuilt for this source-count snapshot |
-| Largest sections | 07 (3,387), 04 (3,262), 06 (2,257), 03 (2,100), 05 (1,898) |
+| Word render | v4 DOCX built; Word pagination not measured. PDF: 30 A4 pages; visual page review pending |
+| Largest sections | 10 (1,667), 07 (1,021), 04 (930), 03 (801), 05 (723) |
 
 Size log (append one row per big edit):
 
@@ -330,13 +335,16 @@ Size log (append one row per big edit):
 | 2026-10-01 | Length plan step 3 (deletions, tables, figures) | 19,072 | -1,278 | 70 | 03 2,100; 04 3,262; 05 1,875; 06 2,257; 07 3,789; 08 1,760 (includes ten figure captions); tables 431. Limit 9,000 excluding references; 10,292 to cut |
 | 2026-10-03 | Current source baseline (builder assembly; no DOCX rebuild) | 19,095 | +23 | Not rebuilt | 01 224; 02 520; 03 2,100; 04 3,262; 05 1,898; 06 2,257; 07 3,789; 08 1,760; 09 695; 10 1,683; 11 476; tables 431; references excluded |
 | 2026-10-03 | Mechanical removal of four repeated method-family closing paragraphs | 18,693 | -402 | Not rebuilt | Section 07: 3,789 -> 3,387; method-family block: 1,855 -> 1,453; claim verifier passed |
+| 2026-10-03 | AI-assisted compression draft for author review | 8,718 | -9,975 | Pending v4 render | 03 830; 04 981; 05 876; 06 569; 07 1,048; 08 823; 09 257; 10 1,683; 11 476; tables 431; claim verifier passed |
+| 2026-10-03 | v4 review build | 8,718 | 0 | PDF 34 pages; DOCX page count not measured | DOCX built; PDF exported from DOCX via Pandoc/XeLaTeX; 10 figures verified; author visual review pending |
+| 2026-10-03 | Consolidated heading structure and rebuilt v4 review draft | 8,321 | -397 | PDF 30 pages; DOCX page count not measured | 03 801; 04 930; 05 723; 06 483; 07 1,021; 08 798; 09 247; 10 1,667; all 10 active figures retained |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
 | ID | Item | Owner | Blocks |
 | --- | --- | --- | --- |
 | E-Q1 | **Open (length unanswered 2026-09-30; monitored through E-SIZE).** Ask the editor: length limit; whether to submit on the template file with its header logo and label; whether the *Hoja de diseño* is submitted; figure requirements for print; submission format and deadline; acceptability and authorization of results already published elsewhere | Author | P-CASE target length, E-FMT header, E-FRONT, R5 |
-| E-AI | **Decided 2026-09-30:** auxiliary-use declaration; see E-AI-1 and E-AI-2 | Author | E-FORMS; possibly author rewriting of drafted passages |
+| E-AI | **Review draft authorized 2026-10-03:** AI-assisted compression prepared for author review; author rewrite and accurate final declaration remain before signature/submission | Author | E-FORMS, E-AI-2 |
 | E-AUTH | **Decided 2026-09-30:** Dr. Herrero-Uceda removed (declined authorship); single author; see E-AUTH-1 | Author | E-FRONT, E-FORMS |
 | E-PRIOR | **Decided 2026-09-30:** declare RIMI prior publication; remove all Paper B+C material; see E-PRIOR-1 | Author | E-FORMS; Table 4 and section 08 wording |
 | E-TYPE | Choose the *Tipo de capítulo* for the design sheet | Author | E-FRONT |

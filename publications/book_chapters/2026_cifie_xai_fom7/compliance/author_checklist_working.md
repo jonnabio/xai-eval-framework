@@ -16,7 +16,7 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 - [x] Las ideas de otros autores están citadas.
 - [x] Todas las citas tienen su referencia.
 - [ ] No existen referencias sin uso en el texto: Adadi y Berrada (2018) y Belle y Papantonis (2021) [E-APA/R6].
-- [ ] Uso de IA declarado como auxiliar; el autor revisa y reescribe los pasajes redactados con asistencia antes de firmar (decidido 2026-09-30) [E-AI-2].
+- [ ] El autor revisa y reescribe en sus propias palabras los pasajes conservados del borrador comprimido con IA (autorizado para revisión el 2026-10-03); actualizar la declaración oficial para que describa el uso real antes de firmar [E-AI-2].
 - [x] No existen referencias, autores o datos generados sin comprobación (DOI verificados contra Crossref; cifras verificadas contra el registro RCA-001).
 
 ## II. Pertinencia académica
@@ -70,9 +70,9 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 - [x] Numeradas consecutivamente.
 - [x] Título claro.
 - [x] Indican su fuente.
-- [ ] Mencionadas previamente en el texto: las Figuras 2 a 6 no se mencionan [E-FIG].
-- [ ] Todas aportan información relevante (revisar Figuras 5 y 6) [E-FIG].
-- [ ] Legibles en impresión (Figura 1 y leyenda de la Figura 4) [R5].
+- [x] Las diez figuras activas se mencionan antes de aparecer; captions declaran fuente externa o datos de elaboración propia [E-FIG].
+- [ ] El autor confirma la relevancia y no redundancia del conjunto activo de diez figuras [E-FIG].
+- [ ] Legibilidad en impresión y revisión visual página por página [R5, FINAL-QA].
 
 ## VII. Referencias bibliográficas
 
@@ -85,7 +85,7 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 ## VIII. Formato editorial
 
 - [ ] Plantilla oficial del Congreso CIFIE [E-FMT].
-- [ ] **Obligatorio:** todo el capítulo cumple el máximo de 9.000 palabras, sin contar las referencias; el borrador tiene 18.693 palabras tras el primer recorte mecánico. Comprobar el conteo en la versión final construida [E-Q1, E-SIZE].
+- [x] **Obligatorio:** el DOCX construido contiene 8.321 palabras del cuerpo, excluidas las referencias (límite 9.000; comprobado con el constructor el 2026-10-03) [E-Q1, E-SIZE].
 - [x] **Obligatorio:** tipografía Times New Roman en el capítulo [indicación del editor, 2026-10-01] [E-FMT].
 - [x] **Obligatorio:** interlineado 1,5 en el capítulo [indicación del editor, 2026-10-01] [E-FMT].
 - [ ] Márgenes (A4; 2.54 cm superior e inferior; 3.17 cm laterales) y estilos [E-FMT].

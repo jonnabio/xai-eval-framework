@@ -1,5 +1,11 @@
 # Declaración sobre uso de inteligencia artificial
 
+> **Estado de esta revisión (2026-10-03):** a petición del autor, se generó un
+> borrador comprimido con asistencia de IA para revisión humana. El texto no está
+> listo para firmarse ni enviarse: el autor debe revisar y reescribir en sus propias
+> palabras los pasajes conservados y confirmar una declaración oficial que describa
+> el uso real. La declaración auxiliar de abajo no debe firmarse sin esa revisión.
+
 > **Decisión del autor (2026-09-30, E-AI):** se usará la opción de uso auxiliar del
 > formulario oficial (revisión gramatical, mejora del estilo, organización de ideas) y el
 > autor firmará que el análisis, la interpretación y las conclusiones son suyos. En
