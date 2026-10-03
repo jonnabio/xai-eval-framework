@@ -1,45 +1,38 @@
 # Registro de figuras
 
-| Figura | Figure ID | Título final | Source material | Editable file | Exported file | Used in section | Citation/source note | Status |
-| ------ | --------- | ------------ | --------------- | ------------- | ------------- | --------------- | -------------------- | ------ |
-| Figura 1 | fig-cobertura-exp2 | Cobertura analítica EXP2 por modelo y método | `thesis/assets/figures/fig_cobertura_exp2_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_cobertura_exp2_es.png` | `07_diseno_empirico.md`, `08_aplicacion_empirica_perfiles_fom7.md` | Fuente interna de tesis; útil para documentar puerta 3 de FOM-7. | Copiada |
-| Figura 2 | fig-cd-diagram | Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad | `outputs/analysis/paper_a_exp2_stats/exp2_block_method_summary.csv`; `outputs/analysis/paper_a_exp2_stats/nemenyi_fidelity.csv`; `outputs/analysis/paper_a_exp2_stats/nemenyi_stability.csv` | `scripts/generate_cifie_chapter_figures.py` | `figures/exported/fig_cd_diagram_es.png` | `08_aplicacion_empirica_perfiles_fom7.md` | Elaboración propia; conserva 15 bloques, rangos y DC = 1.211 registrados. | Regenerada para legibilidad en Word |
-| Figura 3 | fig-boxplots-metricas | Distribución de fidelidad y estabilidad por método | `thesis/assets/figures/fig_boxplots_metricas_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_boxplots_metricas_es.png` | `08_aplicacion_empirica_perfiles_fom7.md` | Fuente interna de tesis; muestra patrones distribucionales por bloque $(g,n)$. | Copiada |
-| Figura 4 | fig-estabilidad-coste | Relación entre estabilidad y coste por método | `thesis/assets/figures/fig_estabilidad_coste_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_estabilidad_coste_es.png` | `08_aplicacion_empirica_perfiles_fom7.md` | Fuente interna de tesis; apoya la frontera calidad-coste. | Copiada |
-| Figura 5 | fig-correlacion-metricas | Correlación entre métricas del benchmark | `thesis/assets/figures/fig_correlacion_metricas_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_correlacion_metricas_es.png` | `08_aplicacion_empirica_perfiles_fom7.md` | Fuente interna de tesis; apoya lectura multi-métrica, no sustituye pruebas estadísticas. | Copiada |
-| Figura 6 | fig-radar-metodos | Perfil multidimensional normalizado por método | `thesis/assets/figures/fig_radar_metodos_es.png`; caption in `thesis/capitulo-4-resultados.qmd` | `scripts/generate_spanish_thesis_figures.py` (tesis) | `figures/exported/fig_radar_metodos_es.png` | `09_implicaciones_evaluacion_auditable_xai.md` | Fuente interna de tesis; útil para argumentar ausencia de método universalmente dominante. | Copiada |
+## Conjunto activo (2026-10-03)
 
+Auditoría de los archivos de sección: las diez figuras están citadas en el texto
+antes de aparecer, sus PNG existen y cada caption identifica una fuente externa o
+elaboración propia con sus datos fuente. Las referencias externas de las captions
+se encuentran en `references/references_apa7.md`.
 
-## Numeración vigente (2026-10-01, plan de extensión aprobado)
+| No. | ID / archivo exportado | Sección | Uso y fuente declarada en caption | Archivo editable / regeneración |
+| --- | --- | --- | --- | --- |
+| 1 | D1 / `fig_d1_conceptos_es.png` | 03 | Distinciones conceptuales; Lipton (2018), Murdoch et al. (2019), Phillips et al. (2021) y Tabassi (2023). | `figures/editable/fig_d1_conceptos_es.svg` |
+| 2 | D2 / `fig_d2_modelos_es.png` | 03 | Modelos interpretables y explicaciones post-hoc; Rudin et al. (2022), Marcinkevičs y Vogt (2023). | `figures/editable/fig_d2_modelos_es.svg` |
+| 3 | D4 / `fig_d4_objetos_explicativos_es.png` | 03 | Cuatro objetos explicativos; Ribeiro et al. (2016, 2018), Lundberg y Lee (2017), Mothilal et al. (2020); valores ilustrativos. | `figures/editable/fig_d4_objetos_explicativos_es.svg` |
+| 4 | D6 / `fig_d6_niveles_evaluacion_es.png` | 03 | Niveles de evaluación y FOM-7; adaptada de Doshi-Velez y Kim (2017). | `figures/editable/fig_d6_niveles_evaluacion_es.svg` |
+| 5 | D5 / `fig_d5_ciclo_audiencias_es.png` | 04 | Funciones y audiencias; Tabassi (2023), Phillips et al. (2021). | `figures/editable/fig_d5_ciclo_audiencias_es.svg` |
+| 6 | D7 / `fig_d7_cadena_evidencia_es.png` | 05 | Cadena de evidencia y fallos; elaboración propia. | `figures/editable/fig_d7_cadena_evidencia_es.svg` |
+| 7 | D8 / `fig_d8_fom7_traza_es.png` | 06 | Siete puertas y traza H1; elaboración propia; resultado publicado en Herrera-Vásquez y Herrero-Uceda (2026). | `figures/editable/fig_d8_fom7_traza_es.svg` |
+| 8 | EXP2 coverage / `fig_cobertura_exp2_es.png` | 07 | Cobertura analítica por modelo y método; inventario de celdas calificadas de EXP2. | `scripts/generate_spanish_thesis_figures.py`; source figure in `thesis/assets/figures/` |
+| 9 | Nemenyi / `fig_cd_diagram_es.png` | 08 | Diferencias críticas en fidelidad y estabilidad; tablas de rangos y comparaciones de Nemenyi de EXP2. | `scripts/generate_cifie_chapter_figures.py`; EXP2 CSVs under `outputs/analysis/paper_a_exp2_stats/` |
+| 10 | Stability-cost / `fig_estabilidad_coste_es.png` | 08 | Estabilidad y coste por método; resultados del benchmark EXP2. | `scripts/generate_spanish_thesis_figures.py`; source figure in `thesis/assets/figures/` |
 
-Figura 1 = D1 (sección 03); 2 = D2 (03); 3 = D4 (03); 4 = D6 (03); 5 = D5 (04); 6 = D7 (05);
-7 = D8 (06); 8 = cobertura EXP2 (07); 9 = diagrama de diferencia crítica (08); 10 = estabilidad
-y coste (08). D3 no se usa. Retiradas del capítulo (siguen en `figures/exported/`): las cajas
-de distribución, la matriz de correlación y el perfil radial (antes Figuras 3, 5 y 6). Cada
-figura se menciona en el texto antes de aparecer. Tablas vigentes: 1 = métricas, 2 = resumen
-de resultados; las tablas de puertas FOM-7 y de comparación de métodos pasan a
-`tables/retired/`, sustituidas por las Figuras 7, 2 y 3.
+Las figuras 1-7 son diagramas conceptuales; 8-10 visualizan evidencia empírica.
+Todas aparecen en el orden de numeración vigente y tienen un callout anterior al
+caption. Los diagramas conceptuales atribuyen las fuentes adaptadas; las figuras
+empíricas declaran elaboración propia e identifican el conjunto de datos o resultados
+del que se derivan.
 
-## Figuras didácticas (creadas el 2026-09-30)
+## Exports no utilizados
 
-Generador: `scripts/generate_cifie_didactic_figures.py` (Cambria, escala de grises,
-600 ppp; editables en PDF y SVG en `figures/editable/`). Reformulan conceptos ya
-escritos en el capítulo y no aportan resultados nuevos. Los valores de D3 y D4 son
-ilustrativos y así se indica dentro de la figura; las únicas cifras de diseño (300, 275 y
-15) coinciden con las de la sección 07. Al insertarlas, las figuras empíricas se
-renumeran después de las didácticas y cada figura debe mencionarse en el texto antes de
-aparecer (plantilla CIFIE).
-
-| ID | Archivo exportado | Contenido | Sección propuesta | Fuente para la nota APA | Estado |
-| --- | --- | --- | --- | --- | --- |
-| D1 | `figures/exported/fig_d1_conceptos_es.png` | Transparencia, interpretabilidad y explicabilidad: pregunta, definición y límite de cada una | 03, "Interpretabilidad, explicabilidad y transparencia" | Elaboración propia a partir de Lipton (2018), Murdoch et al. (2019), Phillips et al. (2021) y Tabassi (2023) | Creada |
-| D2 | `figures/exported/fig_d2_modelos_es.png` | Espectro de modelos y explicación post-hoc agnóstica o específica | 03, "Modelos interpretables por diseño y explicaciones post-hoc" | Elaboración propia a partir de Rudin et al. (2022) y Marcinkevičs y Vogt (2023) | Creada |
-| D3 | `figures/exported/fig_d3_local_global_es.png` | Alcance local frente a global (datos simulados) | 03, "Alcance local y alcance global" | Elaboración propia; ilustración con datos simulados | Creada |
-| D4 | `figures/exported/fig_d4_objetos_explicativos_es.png` | Un caso, cuatro objetos explicativos: atribución, regla, contrafactual y ejemplos | 03, "Objetos explicativos y preguntas diferentes" | Elaboración propia a partir de Ribeiro et al. (2016, 2018), Lundberg y Lee (2017) y Mothilal et al. (2020); valores ilustrativos | Creada |
-| D5 | `figures/exported/fig_d5_ciclo_audiencias_es.png` | Funciones de la explicación en el ciclo de vida y necesidades de cada audiencia | 04, "Funciones de la explicación durante el ciclo de vida" | Elaboración propia a partir de Tabassi (2023) y Phillips et al. (2021) | Creada |
-| D6 | `figures/exported/fig_d6_niveles_evaluacion_es.png` | Niveles de evaluación y posición de FOM-7 | 03, "Niveles de evaluación y alcance de FOM-7" (o 05) | Adaptada de Doshi-Velez y Kim (2017) | Creada |
-| D7 | `figures/exported/fig_d7_cadena_evidencia_es.png` | Cadena de evidencia de artefacto a afirmación y fallo típico de cada eslabón | 05, "Brecha entre métrica, constructo y afirmación" | Elaboración propia | Creada |
-| D8 | `figures/exported/fig_d8_fom7_traza_es.png` | Las siete puertas de FOM-7 con la traza de una afirmación publicada (H1) | 06, "Flujo operativo" | Elaboración propia; resultado de H1 publicado en Herrera-Vásquez y Herrero-Uceda (2026) | Creada |
+Estos archivos se conservan como material histórico, pero no forman parte del capítulo
+actual: `fig_d3_local_global_es.png`, `fig_boxplots_metricas_es.png`,
+`fig_correlacion_metricas_es.png` y `fig_radar_metodos_es.png`. No deben copiarse al
+paquete de envío salvo que el autor apruebe su reincorporación y se actualicen el texto,
+la numeración y este registro.
 
 ## Figuras retiradas
 

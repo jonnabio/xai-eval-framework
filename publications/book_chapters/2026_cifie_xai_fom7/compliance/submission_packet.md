@@ -1,6 +1,6 @@
 # Paquete de envío
 
-## Estado actual (2026-09-30)
+## Estado actual (2026-10-03)
 
 El capítulo está en revisión científica y editorial; no está listo para envío. La
 lista de trabajo es la "Consolidated pending list" de
@@ -19,16 +19,28 @@ en `editorial/editorial_compliance_assessment_2026-09-30.md`.
 
 ## Figuras actuales del capítulo
 
-- `figures/exported/fig_cobertura_exp2_es.png` (Figura 1)
-- `figures/exported/fig_cd_diagram_es.png` (Figura 2)
-- `figures/exported/fig_boxplots_metricas_es.png` (Figura 3)
-- `figures/exported/fig_estabilidad_coste_es.png` (Figura 4)
-- `figures/exported/fig_correlacion_metricas_es.png` (Figura 5)
-- `figures/exported/fig_radar_metodos_es.png` (Figura 6)
+El borrador contiene diez figuras activas, todas mencionadas en el texto antes de
+aparecer y con caption que declara una fuente bibliográfica o los datos internos de
+elaboración propia. El mapeo y las fuentes están auditados en
+`figures/figure_registry.md`.
+
+1. `figures/exported/fig_d1_conceptos_es.png` (conceptos: interpretabilidad, explicabilidad y transparencia)
+2. `figures/exported/fig_d2_modelos_es.png` (modelos interpretables y explicaciones post-hoc)
+3. `figures/exported/fig_d4_objetos_explicativos_es.png` (objetos explicativos)
+4. `figures/exported/fig_d6_niveles_evaluacion_es.png` (niveles de evaluación y FOM-7)
+5. `figures/exported/fig_d5_ciclo_audiencias_es.png` (ciclo de vida y audiencias)
+6. `figures/exported/fig_d7_cadena_evidencia_es.png` (cadena de evidencia)
+7. `figures/exported/fig_d8_fom7_traza_es.png` (puertas FOM-7 y traza H1)
+8. `figures/exported/fig_cobertura_exp2_es.png` (cobertura analítica EXP2)
+9. `figures/exported/fig_cd_diagram_es.png` (diferencias críticas de Nemenyi)
+10. `figures/exported/fig_estabilidad_coste_es.png` (estabilidad y coste)
+
+La aptitud final para impresión y la retención en el paquete de envío siguen sujetas
+a E-FIG y a los requisitos de producción del editor. Los exports históricos no
+utilizados no forman parte de esta lista.
 
 La figura de diferencias pareadas SHAP-LIME fue retirada el 2026-09-27 (resultados de
-Paper B+C). La selección definitiva depende de E-FIG y de los requisitos de impresión
-que confirme el editor.
+Paper B+C).
 
 ## Pasos para el paquete final
 
