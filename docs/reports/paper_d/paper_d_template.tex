@@ -129,9 +129,8 @@ explanation variance, and not all methods propagate it reliably
 \cite{chiaburu2026uncertainty}; counterfactual explanations are highly sensitive to model
 uncertainty, even when accuracy is high \cite{christodoulou2026impact}; and SHAP can be
 used to explain the uncertainty itself rather than the prediction
-\cite{cheng2026uncertainty}. These studies vary uncertainty; whether the quality of an
-explanation differs between the correct and the wrong predictions of a given model is a
-related but separate question.
+\cite{cheng2026uncertainty}. These studies vary uncertainty; whether explanation quality differs between a
+model's correct and wrong predictions is a separate question.
 
 We test this with a pre-specified re-analysis of an existing benchmark that explained
 balanced samples of true positives, true negatives, false positives and false negatives
@@ -407,10 +406,7 @@ are rarer than in this balanced sample. The margin control separates two causes.
 the deficit is mainly geometric: errors lie near the boundary, where explanations are less
 stable whether or not the prediction is right, consistent with the sensitivity of
 counterfactuals to model uncertainty \cite{christodoulou2026impact}. For SHAP it remains at
-equal margin, and there its top features also carry less of an erroneous prediction. A
-small margin is a simple proxy for predictive uncertainty; uncertainty-aware explanations
-\cite{lofstrom2026concerning,chiaburu2026uncertainty} would be a natural way to flag the
-explanations this study finds least reliable.
+equal margin, and there its top features also carry less of an erroneous prediction.
 
 Three consequences follow for practice: explanation quality should be reported
 separately for correct and misclassified instances; the stability of an explanation used
@@ -444,13 +440,18 @@ Code, run artifacts and the analysis script are in a public repository and a ver
 archive whose addresses are withheld for double-blind review.
 \fi
 
-\section*{Acknowledgments}
-The research questions, analysis plan, experimental design and interpretation are the
-author's. An AI assistant (Claude, Anthropic) was used under the author's direction to
-help write analysis code and to edit the text; the author checked every result and
-statement and is responsible for the content.
-
 \bibliographystyle{IEEEtran}
 \bibliography{references}
+
+% Journal AI policy (revistas.tec.ac.cr/index.php/tec_marcha/politicas_ia): state the tools,
+% the purpose and how the results were verified; placed after the references, as in the
+% journal's published articles.
+\section*{Declaration on the Use of Artificial Intelligence (AI)}
+The author declares the use of the AI tool Claude (Anthropic), under the author's
+direction, to help write the analysis and figure code, edit the English text, translate the
+abstract into Spanish and format the references. The research questions, analysis plan,
+design and interpretation are the author's. All contents were thoroughly reviewed by the
+author to ensure accuracy and coherence; every number was re-derived automatically from the
+analysis outputs, and every reference was checked against its published record.
 
 \end{document}

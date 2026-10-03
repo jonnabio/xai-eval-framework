@@ -184,10 +184,39 @@ def build_docx(full: bool, ref: Path) -> Path:
     _run(["quarto", "pandoc", tmp.name, "-o", str(out), "--citeproc",
           "--bibliography", "references.bib", "--csl", "ieee.csl",
           f"--reference-doc={ref}", "--default-image-extension=png",
-          "--resource-path=.", "-f", "latex", "-t", "docx"], D)
+          "--resource-path=.", "-f", "latex", "-t", "docx",
+          "-M", "reference-section-title=References"], D)
     tmp.unlink()
+    _declaration_after_references(out)
     enforce_format(out)
     return out
+
+
+AI_HEADING = "Declaration on the Use of Artificial Intelligence (AI)"
+
+
+def _declaration_after_references(docx: Path) -> None:
+    """Pandoc places the reference list at the end of the document; the journal places the
+    AI-use declaration after the references. Move the declaration (its heading and the
+    paragraphs up to the References heading) to the end of the body."""
+    tmp = docx.with_suffix(".tmp")
+    with zipfile.ZipFile(docx) as zin, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename == "word/document.xml":
+                x = data.decode("utf-8")
+                paras = list(re.finditer(r"<w:p\b[\s\S]*?</w:p>", x))
+                text = [re.sub(r"<[^>]+>", "", m.group(0)) for m in paras]
+                start = next(i for i, t in enumerate(text) if t.strip() == AI_HEADING)
+                end = next(i for i, t in enumerate(text) if i > start and t.strip() == "References")
+                block = x[paras[start].start():paras[end].start()]
+                x = x[:paras[start].start()] + x[paras[end].start():]
+                cut = x.rfind("<w:sectPr")
+                cut = cut if cut != -1 and cut > x.rfind("</w:p>") else x.rfind("</w:body>")
+                x = x[:cut] + block + x[cut:]
+                data = x.encode("utf-8")
+            zout.writestr(item, data)
+    tmp.replace(docx)
 
 
 def main() -> int:
