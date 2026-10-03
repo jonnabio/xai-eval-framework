@@ -1910,7 +1910,7 @@ is inside Paper B+C, under review).
   and its revert before the clean integration; inspect that history before any push. The
   unrelated uncommitted `docs/reports/paper_d/paper_d.tex` in the original worktree was
   preserved and not included.
-- **Next:** The results branch must be brought through `main` per ADR-0013. The author should
-  review the exploratory findings, approve the literature/DOI audit, choose a distinct venue,
-  and only then draft a manuscript. Do not add claim-registry coverage until that manuscript
-  and its claims exist.
+- **Next:** The results branch was brought through `main` per ADR-0013; the cohort and analysis
+  artifacts are now integrated. The author should review the exploratory findings, approve
+  the literature/DOI audit, choose a distinct venue, and only then draft a manuscript. Do not
+  add claim-registry coverage until that manuscript and its claims exist.
