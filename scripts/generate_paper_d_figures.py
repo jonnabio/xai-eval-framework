@@ -80,7 +80,7 @@ def fig2() -> None:
             for j in range(len(FAMILIES)):
                 v = grid[i, j]
                 if np.isfinite(v):
-                    ax.text(j, i, f"{v:+.2f}", ha="center", va="center", fontsize=7,
+                    ax.text(j, i, f"{v:+.2f}" if abs(v) >= 0.005 else f"{v:+.3f}", ha="center", va="center", fontsize=7,
                             color="white" if abs(v) > 0.6 * lim else "black")
         ax.set_xticks(range(len(FAMILIES)))
         ax.set_xticklabels([FLABEL[f] for f in FAMILIES])
@@ -103,11 +103,12 @@ def fig3() -> None:
             ax.plot(centres, ys, ms=3, lw=0.9, mfc="white", **style,
                     label="Correct" if lab == "cor" else "Misclassified")
         ax.set_xlabel("Margin |p̂ − 0.5|")
-        ax.text(0.03, 0.95, LABEL[m], transform=ax.transAxes, va="top", fontweight="bold")
+        ax.set_title(LABEL[m], fontsize=9, fontweight="bold")
         ax.grid(color="0.9", lw=0.5)
     axes[0].set_ylabel("Mean stability")
-    axes[0].legend(frameon=False, fontsize=7, loc="lower right")
-    fig.tight_layout()
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=False, fontsize=8)
     save(fig, "fig3")
 
 

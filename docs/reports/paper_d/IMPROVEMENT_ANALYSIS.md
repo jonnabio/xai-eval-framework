@@ -1,5 +1,29 @@
 # Paper D — improvement analysis of the first render (2026-10-03)
 
+## Iteration 1 status (2026-10-03, second render)
+
+**Result:** 12 Word pages (Word's own count); abstract 230 words, resumen 238; all verifiers green.
+
+| Item | Status | What changed |
+|---|---|---|
+| S1 training overlap | ✅ done | Post-hoc (plan §9, deviation 3). 58% of instances were training data; fewer among errors. **Stability deficits hold** on held-out instances (all four explainers) and on seed 42 alone (SHAP, LIME, DiCE). **The raw faithfulness-gap deficits of SHAP and DiCE do not hold.** The margin-adjusted SHAP faithfulness deficit holds; those of LIME and Anchors do not. Abstract and conclusions narrowed to SHAP; new §3.4; held-out column in Table 3 |
+| S2 random-forest model | ⏳ disclosed | Recovery attempt still open (P3). RCA entry for Papers A/B+C still to write |
+| S3 SHAP fidelity | ✅ | Explained in §3.1 and the Fig. 1 caption |
+| S4 Anchors stability | ✅ | Number of runs with a negative difference reported (49/57) |
+| S5 RQ3 mechanism | ✅ done | Post-hoc (deviation 4): the gap follows the predicted class (TP−TN SHAP +0.597, all runs); errors fall between. Now stated as a finding, with the masking explanation kept as plausible |
+| S6 RQ4 interaction | ✅ (text) | Described as visible in every margin bin; no interaction model added |
+| S7 threshold scale | ✅ | Limitation sentence |
+| S8 German Credit | ✅ | Reason checked; tree-only cannot explain it; stated that none is known |
+| S9 related work | ❌ **author** | Needs 2–4 references on explanation quality vs model error/uncertainty, chosen and verified by the author |
+| Length 14 → 12 | ✅ | Table 1 → text; sparsity rows and RQ4 fidelity rows removed; prose condensed |
+| Fig. 2 small values / Fig. 3 legend and labels | ✅ | |
+| Dataset DOIs | ✅ | In `note` fields |
+| `scan_shared_literals` for Paper D | ✅ | `--paper-d` mode: 0 unexplained, 34 explained by registered provenance, 9 constants |
+| Author items (ORCID, profession, Spanish read, "brecha de borrado", NEW refs) | ❌ **author** | |
+| Open the .docx in Word once and re-save | ❌ **author** | |
+
+The original analysis follows.
+
 **Subject:** `submission/paper_d_blind.{pdf,docx}`, rendered from `paper_d_template.tex`. The
 analysis follows `ANALYSIS_PLAN.md`, with deviations 1–2 in §9 of the plan.
 

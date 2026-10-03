@@ -9,7 +9,7 @@ to revistatm@tec.ac.cr. Author target: **12 pages in Word**, including reference
 
 **Status (2026-10-03): first render done.** The analysis ran as planned (two deviations,
 logged in `ANALYSIS_PLAN.md` §9). The manuscript, figures, Word file and separate TIFFs are in
-`submission/`: 14 Word pages against a 12-page target. Every printed number re-derives through
+`submission/`: 12 Word pages after iteration 1. Every printed number re-derives through
 the claim registry. What remains before submission is in `IMPROVEMENT_ANALYSIS.md`. Lane: branch
 `paper-d/tecnologia-en-marcha`.
 
@@ -77,6 +77,7 @@ python scripts/generate_paper_d_figures.py     # figures (.pdf, .png, .tiff)
 python scripts/pubs/render_paper_d.py          # template -> paper_d.tex + registry block
 python scripts/pubs/build_paper_d.py           # blind/full PDF and Word, figure uploads
 python scripts/pubs/verify_claims.py           # every printed number re-derives
+python scripts/pubs/scan_shared_literals.py --paper-d --strict   # no Paper A/B+C number
 ```
 
 The first two need SciPy, scikit-learn 1.7.1 and XGBoost. On this machine, Windows

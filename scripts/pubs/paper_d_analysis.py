@@ -278,6 +278,23 @@ def main() -> None:
     rq3["n_significant"] = sum(1 for r in res3.values() if r["p_holm"] < ALPHA)
     emit("rq3", rq3)
 
+    # Training-set membership (used by deviation 3 below and the held-out RQ4 variant).
+    # The models were trained on the seed-42 partition; other seeds sample their own
+    # test partition, which partly overlaps it. Reconstructed by re-running the same
+    # stratified split on row indices.
+    from sklearn.model_selection import train_test_split
+    from src.data_loading.adult import TARGET_COLUMN, _clean_data, _fetch_adult_data
+    clean = _clean_data(_fetch_adult_data(cache_dir=str(ROOT / "data")))
+    yall = clean[TARGET_COLUMN].to_numpy()
+    idx = np.arange(len(clean))
+    tr42, _ = train_test_split(idx, test_size=0.2, random_state=42, stratify=yall)
+    tr42 = set(tr42.tolist())
+    test_rows = {s: train_test_split(idx, test_size=0.2, random_state=s, stratify=yall)[1]
+                 for s in sorted({r["seed"] for r in runs})}
+
+    def in_train(r: dict, i: dict) -> bool:
+        return int(test_rows[r["seed"]][int(i["instance_id"])]) in tr42
+
     # ---- RQ4: margin control ----------------------------------------------------------
     marg = margins_for(runs)
     rq4: dict[str, float] = {}
@@ -323,7 +340,7 @@ def main() -> None:
     edges_by_method = {}
     for m in METHODS:
         for k in PRIMARY:
-            ys, mis, mg, grp = [], [], [], []
+            ys, mis, mg, grp, held = [], [], [], [], []
             for gi, r in enumerate(runs):
                 if r["method"] != m or gi not in reproducible:
                     continue
@@ -334,9 +351,16 @@ def main() -> None:
                         continue
                     p = marg[(r["model"], r["seed"])][int(i["instance_id"])]
                     ys.append(v); mis.append(float(q in ERR)); mg.append(abs(p - 0.5)); grp.append(gi)
+                    held.append(not in_train(r, i))
             if not ys:
                 continue
-            ys, mis, mg, grp = map(np.asarray, (ys, mis, mg, grp))
+            ys, mis, mg, grp, held = map(np.asarray, (ys, mis, mg, grp, held))
+            # held-out variant (deviation 3): instances outside the training partition
+            h = held
+            if h.sum() and len(np.unique(grp[h])) > 2:
+                yh, mh, gh, rh = ys[h], mis[h], mg[h], grp[h]
+                bh, _, loh, hih = cluster_ols(demean(yh, rh), np.column_stack([demean(mh, rh), demean(gh, rh)]), rh)
+                rq4[f"{m}.{k}.b_adj_heldout"], rq4[f"{m}.{k}.lo_adj_heldout"], rq4[f"{m}.{k}.hi_adj_heldout"] = bh[0], loh[0], hih[0]
             yd, md, gd = demean(ys, grp), demean(mis, grp), demean(mg, grp)
             b0, s0, lo0, hi0 = cluster_ols(yd, md[:, None], grp)
             b1, s1, lo1, hi1 = cluster_ols(yd, np.column_stack([md, gd]), grp)
@@ -394,6 +418,70 @@ def main() -> None:
                     ext[f"{m}.{k}.same_sign_as_adult"] = int((np.sign(ds) == np.sign(a)).sum())
     emit("ext", ext)
     emit("data", data)
+
+    # ---- Post-hoc analyses (ANALYSIS_PLAN s9, deviations 3 and 4) --------------------
+    # Deviation 3: RQ1 on seed-42 runs only, and on held-out instances only.
+    sens: dict[str, float] = {}
+    n_in = n_all = 0
+    cells_42, cells_out = defaultdict(list), defaultdict(list)
+    for r in runs:
+        lab = [i for i in r["instances"] if i.get("quadrant") in ERR | COR]
+        flags = [in_train(r, i) for i in lab]
+        n_in += sum(flags)
+        n_all += len(lab)
+        held = [i for i, t in zip(lab, flags) if not t]
+        for k in PRIMARY:
+            if r["seed"] == 42:
+                d = run_delta(r["instances"], k, ERR, COR)
+                if d is not None:
+                    cells_42[(r["method"], k)].append(d)
+            d = run_delta(held, k, ERR, COR)
+            if d is not None:
+                cells_out[(r["method"], k)].append(d)
+    sens["instances_in_train"], sens["instances_labelled"] = n_in, n_all
+    for m in METHODS:   # training share among errors vs correct (errors on train data are rarer)
+        for grp, qs in (("mis", ERR), ("cor", COR)):
+            a = b = 0
+            for r in runs:
+                if r["method"] != m or r["seed"] == 42:
+                    continue
+                for i in r["instances"]:
+                    if i.get("quadrant") in qs:
+                        b += 1
+                        a += in_train(r, i)
+            sens[f"{m}.train_share_{grp}"] = a / b if b else float("nan")
+    s42: dict[str, float] = {}
+    test_family(cells_42, [(m, k) for m in METHODS for k in PRIMARY], {}, s42)
+    sout: dict[str, float] = {}
+    test_family(cells_out, [(m, k) for m in METHODS for k in PRIMARY], {}, sout)
+    for pre, tab in (("seed42", s42), ("heldout", sout)):
+        for kk, v in tab.items():
+            sens[f"{pre}.{kk}"] = v
+    for pre, tab in (("seed42", s42), ("heldout", sout)):
+        same = 0
+        for m in METHODS:
+            for k in PRIMARY:
+                if f"{m}.{k}.median" in tab:
+                    same += int(np.sign(tab[f"{m}.{k}.median"]) == np.sign(rq1[f"{m}.{k}.median"])
+                                and (tab[f"{m}.{k}.p_holm"] < ALPHA) == (rq1[f"{m}.{k}.p_holm"] < ALPHA))
+        sens[f"{pre}.n_agree"] = same
+    emit("sens", sens)
+
+    # S5: is the FP-FN faithfulness-gap asymmetry about the predicted class? Compare
+    # instances with the same predicted class: FP - TP (both predicted positive) and
+    # FN - TN (both predicted negative), against TP - TN (same correctness, different class).
+    mech: dict[str, float] = {}
+    for m in METHODS:
+        for name, a, b in (("fp_tp", {"FP"}, {"TP"}), ("fn_tn", {"FN"}, {"TN"}),
+                           ("tp_tn", {"TP"}, {"TN"})):
+            ds = np.array([d for r in runs if r["method"] == m
+                           for d in [run_delta(r["instances"], "faithfulness_gap", a, b)]
+                           if d is not None])
+            if len(ds):
+                mech[f"{m}.{name}.median"] = float(np.median(ds))
+                mech[f"{m}.{name}.pos"] = int((ds > 0).sum())
+                mech[f"{m}.{name}.n"] = len(ds)
+    emit("mech", mech)
 
     # long CSV of per-run deltas for figures
     with open(OUT / "fig_deltas.csv", "w", newline="", encoding="utf-8") as fh:

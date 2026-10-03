@@ -68,11 +68,11 @@ external check on German Credit. Explanations were less stable on misclassified 
 for all four explainers, and the deficit was large for SHAP (median difference
 −0.076, $d_z =$ −1.36) and DiCE
 (−0.210, $d_z =$ −2.15). The prediction
-margin explained most of the DiCE deficit but not the SHAP deficit. Holding the margin
-fixed, the features that SHAP, LIME and Anchors ranked first carried less of the
-prediction on errors. Fidelity changed little and in opposite directions across
-explainers. The pattern depended on the model family, and on German Credit it held for
-Anchors but not for SHAP stability. Quality reported as an average can therefore
+margin explained most of the DiCE deficit but not the SHAP deficit, and at equal margin
+the features SHAP ranked first carried less of an erroneous prediction. Both SHAP results
+held on instances outside the models' training data. Fidelity changed little and in
+opposite directions across explainers. The pattern depended on the model family, and on
+German Credit it held for Anchors but not for SHAP stability. Quality reported as an average can therefore
 overstate how far an explanation of a wrong prediction should be trusted; audits should
 report explanation quality separately for correct and incorrect predictions.
 
@@ -94,9 +94,9 @@ instancias mal clasificadas para los cuatro explicadores, y el d\'eficit fue gra
 SHAP (diferencia mediana −0.076,
 $d_z =$ −1.36) y DiCE (−0.210,
 $d_z =$ −2.15). El margen de predicci\'on explic\'o la mayor parte
-del d\'eficit de DiCE, pero no el de SHAP. Con el margen fijo, las variables que SHAP, LIME
-y Anchors situaron en primer lugar sostuvieron una parte menor de la predicci\'on en los
-errores. El patr\'on dependi\'o de la familia de modelos y, en German Credit, se mantuvo
+del d\'eficit de DiCE, pero no el de SHAP; con el margen fijo, las variables que SHAP
+situ\'o primero sostuvieron una parte menor de la predicci\'on err\'onea. Ambos resultados
+de SHAP se mantuvieron fuera de los datos de entrenamiento. El patr\'on dependi\'o de la familia de modelos y, en German Credit, se mantuvo
 para Anchors pero no para la estabilidad de SHAP. La calidad promedio puede exagerar la
 confianza que merece la explicaci\'on de una predicci\'on err\'onea; las auditor\'ias
 deber\'ian informarla por separado para predicciones correctas e incorrectas.
@@ -108,220 +108,144 @@ hoc; errores de clasificaci\'on; fiabilidad de las explicaciones; SHAP; LIME.
 
 Post-hoc explainers such as SHAP \cite{lundberg2017unified}, LIME \cite{ribeiro2016why},
 Anchors \cite{ribeiro2018anchors} and DiCE \cite{mothilal2020dice} are the usual way to
-make the predictions of an opaque classifier inspectable \cite{adadi2018xai}. Their
-quality is assessed with proxy metrics: whether the features an explanation ranks as
-important are those that move the prediction (fidelity and deletion tests
-\cite{bhatt2020evaluating,samek2017evaluating,hooker2019benchmark}), and whether similar
-inputs receive similar explanations (stability \cite{alvarezmelis2018robustness}). These
-metrics are reported as averages over a sample of instances, and benchmarks compare
-explainers by those averages \cite{herrera2026framework}.
+inspect the predictions of an opaque classifier \cite{adadi2018xai}. Their quality is
+measured with proxies: whether the features an explanation ranks first are those that move
+the prediction \cite{bhatt2020evaluating,samek2017evaluating,hooker2019benchmark}, and
+whether similar inputs receive similar explanations \cite{alvarezmelis2018robustness}.
+Benchmarks report these metrics as averages over instances \cite{herrera2026framework}.
 
-An average hides how quality is distributed across instances, and one split matters more
-than most: whether the model's prediction was right. An explanation is rarely consulted to
-confirm an obviously correct decision. It is consulted when a decision is contested, when
-an auditor examines a failure, or when a user must decide whether to accept a
-recommendation. In those situations the prediction is disproportionately likely to be
-wrong. User studies show that explanations can raise acceptance of a model's
-recommendation whether or not the recommendation is correct \cite{bansal2021whole}, and
-explanations can be unreliable in ways that their appearance does not reveal
-\cite{adebayo2018sanity,slack2020fooling}. If explanations are also less faithful or less
-stable on misclassified instances, an explanation can look convincing exactly where it
-deserves the least trust \cite{rudin2019stop,jacovi2020faithfulness}.
+An average hides one split that matters: whether the prediction was right. Explanations
+are consulted when a decision is contested, when an auditor examines a failure, or when a
+user decides whether to accept a recommendation, situations in which the prediction is
+disproportionately likely to be wrong. Explanations can raise acceptance of a
+recommendation whether or not it is correct \cite{bansal2021whole}, and they can be
+unreliable in ways their appearance does not reveal \cite{adebayo2018sanity,slack2020fooling}.
+If they are also less faithful or less stable on errors, an explanation can look most
+convincing where it deserves the least trust \cite{rudin2019stop,jacovi2020faithfulness}.
 
-Whether explanation quality differs between correct and incorrect predictions is an
-empirical question, and the usual reporting cannot answer it. We answer it with a
-pre-specified re-analysis of an existing benchmark that explained, under one protocol,
+We test this with a pre-specified re-analysis of an existing benchmark that explained
 balanced samples of true positives, true negatives, false positives and false negatives
-for four explainers and five model families. We ask four questions:
-\begin{itemize}
-\item \textbf{RQ1.} Does explanation quality differ between correctly and incorrectly
-classified instances, for each explainer?
-\item \textbf{RQ2.} Does the difference depend on the model family?
-\item \textbf{RQ3.} Among errors, do false positives and false negatives differ?
-\item \textbf{RQ4.} Is the difference explained by proximity to the decision boundary?
-Errors tend to lie near it, and some metrics may depend on the margin rather than on
-correctness itself.
-\end{itemize}
-The contribution is an instance-level answer, with the run as the unit of inference, a
-margin control, an external check on a second dataset, and a practical recommendation
-for how explanation audits should report quality.
+for four explainers and five model families, and ask: does explanation quality differ
+between correct and misclassified instances (RQ1), does the difference depend on the
+model family (RQ2), do false positives and false negatives differ (RQ3), and is the
+difference explained by proximity to the decision boundary, where errors tend to lie
+(RQ4)?
 
 \section{Materials and methods}
 
 \subsection{Benchmark and data}
 
-The data are the runs of an existing benchmark of post-hoc explainers on the UCI Adult
-income data \cite{kohavi1996scaling,becker1996adult}, released with its protocol and
-reproducibility contract in \cite{herrera2026framework}. That study, and a later
-analysis of the same runs, compare explainers by their average quality over all
-instances. The present analysis is different and reports none of their results: it
-compares each explainer with itself, between correct and misclassified instances of the
-same run. Re-using the cohort rather than re-executing it keeps the explainers, models and
-instances fixed, so the only contrast is the correctness of the prediction.
+The data are the runs of an existing benchmark on the UCI Adult income data
+\cite{kohavi1996scaling,becker1996adult}, released with its protocol in
+\cite{herrera2026framework}. That study, and a later analysis of the same runs, compare
+explainers by their average quality; the present analysis reports none of their results
+and compares each explainer with itself, between correct and misclassified instances of
+the same run.
 
-Five classifiers, each trained once, were explained: logistic regression,
-random forest \cite{breiman2001random}, gradient-boosted trees (XGBoost)
-\cite{chen2016xgboost}, a support vector machine and a multilayer perceptron. Each run
-crossed one model family with one explainer, one random seed (42, 123, 456, 789 or 999)
-and one sampling intensity of $n = 50$, $100$ or $200$ instances per error quadrant. The
-seed fixed the partition from which instances were drawn; the models were trained on the
-partition of seed 42. Within a run, test instances
-were sampled separately from the four quadrants (TP, TN, FP, FN), so correct and
-misclassified instances are represented in nearly equal numbers by design.
+Five classifiers were explained: logistic regression, random forest
+\cite{breiman2001random}, XGBoost \cite{chen2016xgboost}, a support vector machine and a
+multilayer perceptron, all trained once on the seed-42 partition of the data. Each run
+crossed one model, one explainer, one seed (42, 123, 456, 789 or 999), which fixed the
+partition sampled, and $n = 50$, $100$ or $200$ instances per error quadrant (TP, TN, FP,
+FN), so correct and misclassified instances are about equally represented. Of the
+299 runs, 265 were analysed: Anchors and DiCE
+returned no explanations in 18 and
+7 runs, and
+9 SHAP runs had fewer than ten instances
+in a group. They contain 122,529 explained instances, of which
+70,788 belong to the training data (Section~\ref{sec:sens});
+278 instances without a quadrant were excluded. The external check
+uses the benchmark's German Credit runs \cite{hofmann1994statlog}: random forest and
+XGBoost, explained by SHAP and Anchors, three seeds each (12 runs, 13 to
+37 errors per quadrant). Breast Cancer was excluded in advance, with one to four errors
+per quadrant.
 
-Of the 299 run files, 265 entered the analysis.
-Anchors and DiCE produced no explanations in
-18 and
-7 runs respectively (failed or
-non-converged), and 9 SHAP runs had fewer
-than ten instances in one of the two groups. The analysis covers
-122,529 explained instances; 278 instances
-without a recorded quadrant were excluded. Table~\ref{tab:data} gives the counts per
-explainer.
+\subsection{Quality metrics}
 
-\begin{table}[ht]
-\centering
-\caption{Runs and instances analysed per explainer (UCI Adult).}
-\label{tab:data}
-\begin{tabular}{lrrrr}
-\toprule
-Explainer & Runs present & Runs analysed & Correct & Misclassified \\
-\midrule
-SHAP & 74 & 65 & 15,369 & 14,302 \\
-LIME & 75 & 75 & 17,500 & 17,103 \\
-Anchors & 75 & 57 & 12,992 & 12,775 \\
-DiCE & 75 & 68 & 16,300 & 16,188 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-For the external check we used the German Credit data \cite{hofmann1994statlog} from the
-same benchmark: random forest and XGBoost, explained by SHAP and Anchors, three seeds
-each (12 runs). These runs have 13 to 37 errors per quadrant. A
-third dataset in the benchmark, Breast Cancer, was excluded in advance because it has only
-one to four errors per quadrant per run.
-
-\subsection{Explainers and quality metrics}
-
-SHAP used TreeExplainer for the tree models and KernelExplainer otherwise; LIME used a
-tabular surrogate with ten features. Both return an attribution vector
-$e(x) \in \mathbb{R}^{M}$ over the $M$ model features. Anchors returns a rule; it is
-represented as a binary vector marking the features in the rule. DiCE returns a
-counterfactual $x'$ of the opposite class, represented as $|x - x'|$. Let $f(x)$ be the
-model's predicted probability of the positive class, and let masking feature $j$ replace
-its value with the training mean. The metrics, computed per instance by the benchmark
-\cite{herrera2026framework}, are:
-
-\textbf{Stability} $S$ \cite{alvarezmelis2018robustness}: the explainer is run on $T$
-copies of $x$ perturbed with Gaussian noise, and $S$ is the mean cosine similarity of the
-resulting vectors over all pairs:
+SHAP (TreeExplainer for tree models, KernelExplainer otherwise) and LIME (ten features)
+return an attribution vector $e(x) \in \mathbb{R}^{M}$; Anchors is represented as a binary
+vector of the features in its rule, and DiCE as $|x - x'|$ for its counterfactual $x'$.
+With $f(x)$ the predicted probability of the positive class and masking a feature meaning
+replacing it with its training mean, the benchmark \cite{herrera2026framework} computes
+per instance the stability \cite{alvarezmelis2018robustness}, the mean cosine similarity of
+explanations of $T$ noisy copies of $x$,
 \begin{equation}
-S = \frac{2}{T(T-1)} \sum_{a<b} \cos\left(e^{(a)}, e^{(b)}\right).
+S = \frac{2}{T(T-1)} \sum_{a<b} \cos\left(e^{(a)}, e^{(b)}\right),
 \end{equation}
-
-\textbf{Fidelity} $F$, a single-feature form of faithfulness correlation
-\cite{bhatt2020evaluating}: the Pearson correlation, across features, between the
-magnitude of each attribution and the change in prediction when that feature alone is
-masked:
+the fidelity \cite{bhatt2020evaluating}, the correlation across features between
+attribution size and the effect of masking that feature,
 \begin{equation}
-F = \rho\left( \left\{ |e_j(x)| \right\}_{j=1}^{M},\ \left\{ |f(x) - f(\tilde{x}^{(j)})| \right\}_{j=1}^{M} \right).
+F = \rho\left( \left\{ |e_j(x)| \right\}_{j=1}^{M},\ \left\{ |f(x) - f(\tilde{x}^{(j)})| \right\}_{j=1}^{M} \right),
 \end{equation}
-
-\textbf{Faithfulness gap} $G$, a deletion test \cite{samek2017evaluating,hooker2019benchmark}:
-the change in prediction when the $k = 5$ features with the largest attributions are
-masked together:
+and the faithfulness gap \cite{samek2017evaluating,hooker2019benchmark}, the effect of
+masking the $k = 5$ top-ranked features together,
 \begin{equation}
 G = \left| f(x) - f\left(\tilde{x}^{(\text{top-}k)}\right) \right|.
 \end{equation}
-
-\textbf{Sparsity}, the share of features with a non-negligible attribution, was analysed
-as a secondary metric. Explanation time was summarised descriptively. For all three primary
-metrics, higher values indicate a better explanation.
+Higher is better for all three. Sparsity was a secondary metric and explanation time was
+described.
 
 \subsection{Statistical analysis}
 
-The analysis plan, with the questions, metrics, tests and corrections, was written and
-committed to the project repository before any result was computed; its two deviations
-are reported below. Instances are nested in runs, so instance-level tests would treat
-thousands of dependent explanations as independent. The run is therefore the unit of
-inference. For run $r$ and metric $Q$,
+The analysis plan was committed to the project repository before any result was
+computed. Instances are nested in runs, so the run is the unit of inference. For run $r$
+and metric $Q$,
 \begin{equation}
 \Delta_r = \bar{Q}_{r,\mathrm{mis}} - \bar{Q}_{r,\mathrm{cor}},
 \end{equation}
-the mean over misclassified instances (FP and FN) minus the mean over correct instances
-(TP and TN). A negative $\Delta$ means lower quality on errors.
-
-\textbf{RQ1:} for each explainer and primary metric (12 tests), a two-sided Wilcoxon
-signed-rank test of $\Delta = 0$ across runs \cite{wilcoxon1945individual}, with Holm
-correction across the 12 tests \cite{holm1979simple} at $\alpha = 0.05$. We report the
-median $\Delta$, the mean with a 95\% confidence interval, and the standardised effect
-$d_z$ (mean over standard deviation of $\Delta$) \cite{lakens2013calculating}. An effect
-is called practically relevant when it is significant after correction, $|d_z| \geq 0.5$
-and $|\text{median}\ \Delta| \geq 0.05$. As a robustness check, the analysis was repeated
-after averaging $\Delta$ over the three sampling intensities within each model and seed.
-\textbf{RQ2:} $\Delta$ by model family, with a Kruskal--Wallis test
-\cite{kruskal1952use} per explainer and metric (Holm across 12). \textbf{RQ3:} as RQ1 with
-$\Delta_r = \bar{Q}_{r,\mathrm{FP}} - \bar{Q}_{r,\mathrm{FN}}$.
-
-\textbf{RQ4:} misclassified instances lie closer to the decision boundary, and metrics
-that perturb or mask the input may behave differently there. The margin of an instance,
-$m = |\hat{p} - 0.5|$, was recomputed from the stored models. For each explainer and
-metric we fitted, at instance level,
+so a negative $\Delta$ means lower quality on errors. RQ1 uses a two-sided Wilcoxon
+signed-rank test per explainer and metric \cite{wilcoxon1945individual}, Holm-corrected
+across the 12 tests \cite{holm1979simple} at $\alpha = 0.05$, with $d_z$
+\cite{lakens2013calculating}; an effect is practically relevant if also
+$|d_z| \geq 0.5$ and $|\text{median}\ \Delta| \geq 0.05$. It was repeated with $\Delta$
+averaged over $n$ within model and seed. RQ2 uses Kruskal--Wallis tests across families
+\cite{kruskal1952use} and RQ3 the RQ1 test on $\bar{Q}_{\mathrm{FP}} - \bar{Q}_{\mathrm{FN}}$,
+both Holm-corrected. For RQ4 the margin $m = |\hat{p} - 0.5|$ was recomputed from the
+stored models and, per explainer and metric, we fitted
 \begin{equation}
 Q_{ir} = \alpha_r + \beta\, \mathrm{mis}_{ir} + \gamma\, m_{ir} + \varepsilon_{ir},
 \end{equation}
-with run fixed effects $\alpha_r$ and standard errors clustered by run
-\cite{cameron2015practitioner}, and compared $\beta$ with its value when the margin is
-omitted. A difference is called explained by the margin when $\beta$ shrinks by more than
-half and its confidence interval includes zero. The external check repeats RQ1 on German
-Credit descriptively: with six runs per explainer, no test can reach significance after
-correction.
+with run fixed effects and standard errors clustered by run
+\cite{cameron2015practitioner}; a difference is explained by the margin if $\beta$ more
+than halves and its interval includes zero. German Credit, with six runs per explainer, is
+reported descriptively.
 
-\textbf{Deviations from the plan.} (1) For the random-forest runs executed first, the stored
-model reproduced only part of the recorded predictions, so their margin cannot be
-recomputed; RQ4 therefore uses the 223 of
-274 runs whose recorded predictions the stored model reproduces
-(at least 99\%), which leaves 9 of
-60 random-forest runs. RQ1--RQ3 are unaffected, because their
-correct and misclassified labels were assigned by the model that actually ran. (2) For the
-SVM, $\hat{p}$ is the Platt-scaled probability \cite{platt1999probabilistic}, which
-disagrees with the predicted class for 404 of
-22,426 instances; they were kept.
+Deviations from the plan: (1) for random-forest runs made first, the stored model
+reproduces only part of the recorded predictions, so RQ4 uses the
+223 of 274 runs it reproduces (99\% or more),
+including 9 of 60 random-forest runs;
+RQ1--RQ3 are unaffected, as their labels come from the model that ran. (2) For the SVM,
+$\hat{p}$ is Platt-scaled \cite{platt1999probabilistic} and disagrees with the predicted
+class for 404 of 22,426 instances,
+which were kept. Two post-hoc analyses were added: (3) RQ1 and RQ4 without training
+instances, and RQ1 on seed 42 alone; (4) a check of the mechanism proposed for RQ3.
 
 \section{Results}
 
 \subsection{Correct versus misclassified instances (RQ1)}
 
-Table~\ref{tab:rq1} and Figure~\ref{fig:rq1} give the per-run differences. Stability was
-lower on misclassified instances for all four explainers after correction. The deficit
-was large for SHAP, lower in all 65 runs (median
-−0.076, $d_z =$ −1.36), and for DiCE,
-lower in 67 of 68 runs (median
-−0.210, $d_z =$ −2.15). For LIME the
-deficit was consistent, lower in 73 of
-75 runs, but small in absolute terms
-(median −0.0034), because LIME's stability on these data is
-close to zero on average. For Anchors the median was close to zero.
-
-Fidelity moved in opposite directions. It was lower on errors for DiCE (median
-−0.053) and Anchors (−0.022),
-higher for LIME (+0.032), and not significantly different for
-SHAP after correction ($p_{\mathrm{Holm}} =$ 0.057). The
-faithfulness gap was lower on errors for SHAP (median
-−0.023, lower in 55
-of 65 runs) and DiCE, and did not differ for LIME and
-Anchors. Of the 12 primary tests, 9 were significant after
-correction and 3 met the practical-relevance criterion: SHAP stability,
-DiCE stability and DiCE fidelity. The robustness analysis over model--seed units agreed in
-direction and significance for 10 of the 12 tests; the exceptions were the
-LIME faithfulness gap, not significant in either analysis, and the DiCE faithfulness gap,
-which lost significance.
+Stability was lower on misclassified instances for all four explainers
+(Table~\ref{tab:rq1}, Figure~\ref{fig:rq1}). The deficit was large for SHAP, in all
+65 runs, and DiCE, in 67 of
+68. For LIME it was consistent (73 of
+75 runs) but small, as LIME's stability on these data is near zero.
+For Anchors most runs had stability near zero in both groups, so the median is close to
+zero, yet the difference was negative in 49 of
+57 runs. Fidelity was lower on errors for DiCE and Anchors,
+higher for LIME, and not significant for SHAP, whose positive mean comes from a minority of
+random-forest and SVM runs while its median is near zero. The faithfulness gap was lower on
+errors for SHAP and DiCE only. Of the 12 tests, 9 were significant and
+3 practically relevant (SHAP stability, DiCE stability and fidelity); the
+model--seed analysis agreed for 10, the DiCE faithfulness gap losing
+significance. Sparsity differences were significant but within
+0.005 of zero, and only Anchors was slower on errors (median
+3,338 ms more per instance).
 
 \begin{table}[ht]
 \centering
 \caption{Per-run difference in quality, misclassified minus correct instances (UCI Adult).
 $n$: runs; CI: 95\% confidence interval of the mean; $p_{\mathrm{Holm}}$: Wilcoxon
-signed-rank, Holm-corrected within the 12 primary and, separately, the 4 sparsity tests.}
+signed-rank, Holm-corrected across the 12 tests.}
 \label{tab:rq1}
 \small
 \begin{tabular}{llrrrrr}
@@ -342,63 +266,47 @@ Faithfulness & SHAP & 65 & −0.023 & −0.024 [−0.029, −0.018] & −1.07 & 
 gap & LIME & 75 & 0.000 & +0.001 [−0.007, +0.008] & +0.02 & 0.992 \\
  & Anchors & 57 & 0.000 & −0.003 [−0.012, +0.007] & −0.08 & 0.954 \\
  & DiCE & 68 & −0.022 & −0.018 [−0.029, −0.007] & −0.41 & 0.013 \\
-\midrule
-Sparsity & SHAP & 65 & 0.000 & +0.009 [+0.006, +0.012] & +0.85 & <0.001 \\
- & LIME & 75 & +0.001 & +0.002 [+0.001, +0.003] & +0.44 & 0.003 \\
- & Anchors & 57 & +0.005 & +0.014 [+0.007, +0.020] & +0.58 & <0.001 \\
- & DiCE & 68 & −0.003 & −0.003 [−0.003, −0.002] & −1.18 & <0.001 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\linewidth]{figures/fig1}
+\includegraphics[width=0.9\linewidth]{figures/fig1}
 \caption{Mean per-run difference in quality between misclassified and correct instances,
 with 95\% confidence intervals (UCI Adult). Filled markers: significant after Holm
-correction; open markers: not significant. Negative values mean lower quality on errors.}
+correction; open markers: not significant (the Wilcoxon test concerns the median; for SHAP fidelity the median is
+near zero while the mean is not). Negative values mean lower quality on errors.}
 \label{fig:rq1}
 \end{figure}
 
-Sparsity differed little in absolute terms (all medians within
-$\pm0.0025$ of zero apart from Anchors). Explanation time did
-not differ systematically, except for Anchors, which took a median
-3,338 ms longer per instance on errors, plausibly because its rule
-search runs longer near the boundary.
+\subsection{Model families and error types (RQ2, RQ3)}
 
-\subsection{Differences across model families (RQ2)}
-
-The size, and for fidelity and the faithfulness gap also the sign, of the difference
-depended on the model family (Figure~\ref{fig:rq2}). The Kruskal--Wallis test was
-significant after correction for 10 of the
-12 explainer--metric combinations; the two exceptions were the
-stability of LIME and Anchors, whose differences were small for every family. The SHAP
-stability deficit was largest for the multilayer perceptron (median
-−0.216) and XGBoost (−0.168)
-and smallest for the random forest (−0.025) and the SVM
-(−0.030). The DiCE
-stability deficit was present for every family and largest for logistic regression
-(−0.321).
+The size, and for fidelity and faithfulness gap the sign, of the difference depended on the
+family (Figure~\ref{fig:rq2}); the Kruskal--Wallis test was significant for
+10 of 12 combinations, all but LIME and Anchors
+stability. The SHAP stability deficit was largest for the multilayer perceptron
+(−0.216) and XGBoost (−0.168);
+the DiCE deficit appeared in every family.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\linewidth]{figures/fig2}
+\includegraphics[width=0.9\linewidth]{figures/fig2}
 \caption{Median per-run difference (misclassified minus correct) by explainer and model
 family. LR: logistic regression; RF: random forest; XGB: XGBoost; SVM: support vector
-machine; MLP: multilayer perceptron. Red: lower quality on errors; blue: higher.}
+machine; MLP: multilayer perceptron. Red: lower quality on errors; blue: higher. LIME
+and Anchors stability differences are small on this scale.}
 \label{fig:rq2}
 \end{figure}
 
-\subsection{False positives versus false negatives (RQ3)}
-
 Among errors, the faithfulness gap was much larger for false positives than for false
-negatives for every explainer (Table~\ref{tab:rq3}); for SHAP and LIME this held in every
-run. DiCE stability was lower on false positives. The other differences were small.
-A likely reason for the faithfulness-gap asymmetry is how the metric masks features:
-masking to the training mean moves an instance towards the majority, negative class, so
-removing the top features changes a positive prediction (a false positive) far more than a
-negative one (a false negative). The gap is therefore not comparable across predicted classes, which
-matters for any audit that compares explanations of different decisions.
+negatives for every explainer (Table~\ref{tab:rq3}). This follows the predicted class, not
+the error: between correct predictions the gap was far larger for true positives than for
+true negatives (SHAP +0.597, positive in every run), and errors fell
+between them (false positives below true positives, SHAP −0.142;
+false negatives above true negatives, +0.078). Masking to the
+training mean plausibly pushes instances towards the majority, negative class, so the gap
+is not comparable across predicted classes.
 
 \begin{table}[ht]
 \centering
@@ -419,127 +327,104 @@ DiCE & −0.019 (0.276) & −0.269 (<0.001) & +0.046 (<0.001) \\
 
 \subsection{The role of the decision boundary (RQ4)}
 
-Errors were indeed closer to the boundary (median margin
-0.18 against 0.43
-for correct instances in the SHAP runs), and stability rose with the margin for every
-explainer (Figure~\ref{fig:rq4}). Controlling for the margin changed the picture in three
-ways (Table~\ref{tab:rq4}). First, the DiCE stability deficit was almost entirely a
-margin effect: its coefficient fell from −0.191 to
-−0.014, with a confidence interval including zero. A
-counterfactual for an instance near the boundary needs only a small change, and small
-changes vary more under noise. Second, the SHAP stability deficit was reduced but
-remained: −0.146 without and −0.042
-[−0.057, −0.027] with the margin.
-Figure~\ref{fig:rq4} shows the same: at equal margin, SHAP explanations of errors are less
-stable than those of correct predictions. Third, the faithfulness gap, which in RQ1
-was lower on errors only for SHAP and DiCE and by small amounts, became lower on errors once
-the margin was held fixed for SHAP
-(−0.064), LIME (−0.031)
-and Anchors (−0.017). Near the boundary any deletion
-moves the prediction a lot, which inflates the gap of errors; at equal margin, the
-features named first carry less of an erroneous prediction. The fidelity differences
-were largely margin effects: the LIME advantage on errors fell from
-+0.039 to +0.014, the Anchors deficit
-vanished, and the DiCE deficit reversed sign.
+Errors lay closer to the boundary (median margin
+0.18 against
+0.43 in the SHAP runs), and stability rose with
+the margin (Figure~\ref{fig:rq4}). With the margin controlled (Table~\ref{tab:rq4}), the
+DiCE stability deficit almost vanished: near the boundary a counterfactual needs only a
+small change, which varies more under noise. The SHAP stability deficit shrank but
+remained, and is visible in every margin bin of Figure~\ref{fig:rq4}. The faithfulness gap,
+which near the boundary is inflated because any deletion moves the prediction, became
+lower on errors for SHAP, LIME and Anchors. The fidelity differences were largely margin
+effects (LIME's advantage fell from +0.039 to
++0.014; DiCE's deficit reversed).
 
 \begin{table}[ht]
 \centering
-\caption{Coefficient of misclassification $\beta$ (95\% CI) in run fixed-effects
-regressions, without and with the prediction margin; standard errors clustered by run.
-Runs whose recorded predictions the stored model reproduces.}
+\caption{Coefficient of misclassification $\beta$ for stability and faithfulness gap in run
+fixed-effects regressions:
+without the margin, with the margin (95\% CI), and with the margin on instances outside
+the training data (95\% CI). Standard errors clustered by run; runs whose recorded
+predictions the stored model reproduces.}
 \label{tab:rq4}
 \small
-\begin{tabular}{llcc}
+\begin{tabular}{llccc}
 \toprule
-Metric & Explainer & $\beta$ without margin & $\beta$ with margin \\
+Metric & Explainer & Without margin & With margin & With margin, held out \\
 \midrule
-Stability & SHAP & −0.146 [−0.170, −0.123] & −0.042 [−0.057, −0.027] \\
- & LIME & −0.008 [−0.009, −0.006] & −0.003 [−0.004, −0.002] \\
- & Anchors & −0.030 [−0.062, +0.001] & −0.025 [−0.058, +0.008] \\
- & DiCE & −0.191 [−0.219, −0.163] & −0.014 [−0.031, +0.004] \\
+Stability & SHAP & −0.146 & −0.042 [−0.057, −0.027] & −0.040 [−0.059, −0.021] \\
+ & LIME & −0.008 & −0.003 [−0.004, −0.002] & −0.001 [−0.002, 0.000] \\
+ & Anchors & −0.030 & −0.025 [−0.058, +0.008] & −0.017 [−0.042, +0.007] \\
+ & DiCE & −0.191 & −0.014 [−0.031, +0.004] & −0.027 [−0.052, −0.002] \\
 \midrule
-Fidelity & SHAP & −0.002 [−0.011, +0.007] & −0.004 [−0.011, +0.003] \\
- & LIME & +0.039 [+0.032, +0.046] & +0.014 [+0.006, +0.021] \\
- & Anchors & −0.013 [−0.032, +0.005] & +0.012 [−0.003, +0.027] \\
- & DiCE & −0.045 [−0.062, −0.028] & +0.022 [+0.009, +0.034] \\
-\midrule
-Faithfulness & SHAP & −0.024 [−0.031, −0.017] & −0.064 [−0.075, −0.054] \\
-gap & LIME & +0.008 [0.000, +0.016] & −0.031 [−0.045, −0.018] \\
- & Anchors & +0.003 [−0.006, +0.013] & −0.017 [−0.025, −0.008] \\
- & DiCE & −0.013 [−0.025, 0.000] & −0.007 [−0.014, 0.000] \\
+Faithfulness & SHAP & −0.024 & −0.064 [−0.075, −0.054] & −0.031 [−0.054, −0.008] \\
+gap & LIME & +0.008 & −0.031 [−0.045, −0.018] & −0.011 [−0.037, +0.015] \\
+ & Anchors & +0.003 & −0.017 [−0.025, −0.008] & −0.008 [−0.021, +0.006] \\
+ & DiCE & −0.013 & −0.007 [−0.014, 0.000] & −0.005 [−0.016, +0.006] \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\linewidth]{figures/fig3}
+\includegraphics[width=0.9\linewidth]{figures/fig3}
 \caption{Mean stability by prediction margin $|\hat{p} - 0.5|$ for correct and
 misclassified instances (UCI Adult; bins of width 0.05 with at least 30 instances).}
 \label{fig:rq4}
 \end{figure}
 
-\subsection{External check on German Credit}
+\subsection{Robustness and external check}
+\label{sec:sens}
 
-On German Credit, Anchors reproduced the Adult pattern: fidelity and faithfulness gap were
-lower on errors in all six runs (medians −0.084 and
-−0.017) and stability in five
-(−0.043). SHAP did not: its stability was higher on errors
-in 4 of six runs (median +0.025),
-while its fidelity was lower in all six (−0.045). With six runs
-these are descriptive. They show that the size, and for SHAP the direction, of the
-difference depends on the data as well as on the model.
+Errors were less often training instances than correct predictions (for SHAP,
+0.59 against 0.81 outside seed 42).
+On held-out instances the stability deficit remained significant for all four explainers
+(SHAP −0.068, DiCE
+−0.212), and on seed 42 alone, which has no training
+instances, for SHAP, LIME and DiCE. The raw faithfulness-gap deficits of SHAP and DiCE
+fell to medians close to zero, but the margin-adjusted SHAP deficit remained, unlike those
+of LIME and Anchors, and DiCE stability kept a small margin-adjusted residual
+(Table~\ref{tab:rq4}).
+
+On German Credit, Anchors reproduced the Adult pattern, with fidelity and faithfulness
+gap lower on errors in all six runs (medians −0.084 and
+−0.017). SHAP did not: its stability was higher on
+errors in 4 of six runs (+0.025).
+These runs use only tree models, but on Adult the SHAP deficit was also large for XGBoost,
+so we know of no reason for the reversal.
 
 \section{Discussion}
 
-The answer to the title question is a qualified yes. On the Adult benchmark, explanations
-of wrong predictions were less stable for every explainer, and for SHAP and DiCE the
-difference was large: a SHAP explanation of a misclassified instance is markedly more
-sensitive to small input noise than one of a correct prediction. Averages over all
-instances hide this, because correct and incorrect predictions are pooled. Because the
-benchmark sampled the four quadrants in balance, the pooled average even overweights
-errors relative to their real frequency; in deployment, where errors are rarer, the
-average would hide the deficit further.
+The answer to the title question is a qualified yes. Explanations of wrong predictions
+were less stable for every explainer, also outside the training data, and markedly so for
+SHAP and DiCE. Averages hide this, and would hide it further in deployment, where errors
+are rarer than in this balanced sample. The margin control separates two causes. For DiCE
+the deficit is mainly geometric: errors lie near the boundary, where explanations are less
+stable whether or not the prediction is right. For SHAP it remains at equal margin, and
+there its top features also carry less of an erroneous prediction.
 
-The margin control separates two explanations of the deficit. For DiCE the cause is
-geometric: errors are near the boundary, and explanations near the boundary are less
-stable whether or not the prediction is right. For SHAP a deficit remains at equal
-margin, so correctness itself, or something correlated with it beyond the margin, matters.
-The faithfulness gap shows the opposite masking effect: the raw contrast understates the
-deficit because near-boundary instances are easy to move. In both directions, comparing
-explanation quality across instances without accounting for the margin can mislead.
+Three consequences follow for practice: explanation quality should be reported
+separately for correct and misclassified instances; the stability of an explanation used
+to contest or justify a decision should be checked for that instance; and deletion
+metrics with a mean baseline should be reported per predicted class.
 
-Three practical consequences follow. First, explanation benchmarks and audits should
-report quality separately for correct and misclassified instances, or at least by error
-quadrant, rather than only as an average. Second, when an explanation of an individual
-decision is used to contest or justify it, its stability should be checked for that
-instance, since it is lower precisely for the decisions that are most likely to be
-contested. Third, deletion-based metrics with a mean baseline are not comparable across
-predicted classes (RQ3) and should be reported per class.
-
-The study has limits. The main dataset is a single tabular benchmark; the external check
-covers two explainers on one more dataset, with only six runs each, and it did not
-reproduce the SHAP stability deficit. The data are existing runs, so the analysis could
-not change the explainer settings; LIME's stability is near zero on these data, which
-limits what can be said about it. Anchors and DiCE have missing runs that are not missing
-at random, although the within-run design means missing runs remove units without biasing
-the contrast within the runs that exist. RQ4 could use only part of the random-forest
-runs. The models were trained on the partition of one seed, so for the other seeds the
-sampled instances partly overlap the training data; this changes which instances are
-errors, not how the contrast within a run is computed, but errors on training instances
-may be atypical. The metrics are proxies: lower stability or faithfulness on errors does not by
-itself show that users would be misled, which requires a user study.
+The study has limits. It rests on one tabular benchmark, and the external check, with six
+runs per explainer, did not reproduce the SHAP stability deficit. The runs are existing
+ones, so explainer settings were fixed; LIME's stability is near zero here, a scale on
+which the absolute relevance threshold cannot be met. Anchors and DiCE runs are missing
+not at random, which removes units but does not bias within-run contrasts. RQ4 used part of
+the random-forest runs, and the training overlap was handled post hoc. Finally, the
+metrics are proxies; whether users are misled requires a user study.
 
 \section{Conclusions}
 
-Post-hoc explanations were less reliable when the model was wrong. In a pre-specified
-analysis of 265 benchmark runs, stability was lower on misclassified
-instances for SHAP, LIME, Anchors and DiCE, with large deficits for SHAP and DiCE. The
-DiCE deficit is explained by the proximity of errors to the decision boundary; the SHAP
-deficit is not. At equal margin, the features that explanations rank first carry less of
-an erroneous prediction. The pattern depends on the model family and the dataset.
-Explanation quality should therefore be reported separately for correct and incorrect
-predictions, because an average describes the explanations that are needed least.
+Post-hoc explanations were less reliable when the model was wrong. In
+265 benchmark runs, stability was lower on misclassified instances for
+SHAP, LIME, Anchors and DiCE, also outside the training data. The DiCE deficit is mostly
+explained by the proximity of errors to the boundary; the SHAP deficit is not, and at equal
+margin SHAP's top features carry less of an erroneous prediction. Explanation quality
+should be reported separately for correct and incorrect predictions, because an average
+describes the explanations that are needed least.
 
 \section*{Data availability}
 \iffull

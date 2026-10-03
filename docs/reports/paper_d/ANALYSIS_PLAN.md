@@ -155,3 +155,13 @@ Record each one here with its date and reason, before reporting it.
    by run; margin quintile edges are computed per explainer over all its instances. For the
    SVM, p̂ is the Platt-scaled probability, which can disagree with `predict()` near the
    boundary; the count is reported.
+3. **2026-10-03, post-hoc sensitivity to training-set overlap (after the first render).**
+   - **Problem:** the models were trained on the seed-42 partition. Runs with other seeds sample from their own test partition, which partly overlaps that training set. Membership is reconstructed by re-running the stratified split on row indices.
+   - **Added analyses**, reported as post hoc and not replacing RQ1 or RQ4:
+     - RQ1 repeated on seed-42 runs only;
+     - RQ1 repeated on held-out instances only;
+     - the RQ4 margin-adjusted coefficient repeated on held-out instances.
+   - **Motivation:** the limitation was noticed while writing; the analyses were added before their results were known.
+4. **2026-10-03, post-hoc check of the RQ3 mechanism.**
+   - **Problem:** the paper explained the false-positive vs false-negative faithfulness-gap asymmetry by the predicted class.
+   - **Check:** contrasts within the same predicted class (FP − TP, FN − TN) and between classes at equal correctness (TP − TN), for the faithfulness gap. Exploratory and descriptive.
