@@ -55,9 +55,9 @@ jonnabio@gmail.com \quad ORCID: \url{https://orcid.org/0000-0002-7149-6635}
 
 \section*{Abstract}
 Explanations of machine-learning predictions are consulted most when a prediction is in
-doubt, yet explainers are evaluated on averages over all instances. We ask whether
+doubt, yet explainers are evaluated on averages over all instances. This study asks whether
 post-hoc explanations are less reliable when the model is wrong. On the UCI Adult Income
-dataset, we compare fidelity, stability and faithfulness gap
+dataset, the analysis compares fidelity, stability and faithfulness gap
 between correctly and incorrectly classified instances for SHAP, LIME, Anchors and DiCE
 across five model families, with the run as the unit of analysis
 (<<data:runs_analysed:d>> runs, <<data:analysed_total:int>> explained instances), Wilcoxon
@@ -80,9 +80,9 @@ misclassification; explanation reliability; SHAP; LIME.
 \section*{Resumen}
 Las explicaciones de las predicciones de aprendizaje autom\'atico se consultan sobre todo
 cuando una predicci\'on es dudosa, pero los explicadores se eval\'uan con promedios sobre
-todas las instancias. Nos preguntamos si las explicaciones post hoc son menos fiables
+todas las instancias. Este estudio examina si las explicaciones post hoc son menos fiables
 cuando el modelo se equivoca. Sobre el conjunto de datos UCI Adult Income,
-comparamos fidelidad, estabilidad y brecha de borrado entre instancias bien y mal
+se comparan fidelidad, estabilidad y brecha de borrado entre instancias bien y mal
 clasificadas para SHAP, LIME, Anchors y DiCE en cinco familias de modelos, con la
 ejecuci\'on como unidad de an\'alisis (<<data:runs_analysed:d>> ejecuciones,
 <<data:analysed_total:int>> instancias), pruebas de Wilcoxon con correcci\'on de Holm,
@@ -132,9 +132,9 @@ used to explain the uncertainty itself rather than the prediction
 \cite{cheng2026uncertainty}. These studies vary uncertainty; whether explanation quality differs between a
 model's correct and wrong predictions is a separate question.
 
-We test this with a pre-specified re-analysis of an existing benchmark that explained
+This study tests this with a pre-specified re-analysis of an existing benchmark that explained
 balanced samples of true positives, true negatives, false positives and false negatives
-for four explainers and five model families, and ask: does explanation quality differ
+for four explainers and five model families, and asks: does explanation quality differ
 between correct and misclassified instances (RQ1), does the difference depend on the
 model family (RQ2), do false positives and false negatives differ (RQ3), and is the
 difference explained by proximity to the decision boundary, where errors tend to lie
@@ -207,7 +207,7 @@ $|d_z| \geq 0.5$ and $|\text{median}\ \Delta| \geq 0.05$. It was repeated with $
 averaged over $n$ within model and seed. RQ2 uses Kruskal--Wallis tests across families
 \cite{kruskal1952use} and RQ3 the RQ1 test on $\bar{Q}_{\mathrm{FP}} - \bar{Q}_{\mathrm{FN}}$,
 both Holm-corrected. For RQ4 the margin $m = |\hat{p} - 0.5|$ was recomputed from the
-stored models and, per explainer and metric, we fitted
+stored models and, per explainer and metric, the analysis fitted
 \begin{equation}
 Q_{ir} = \alpha_r + \beta\, \mathrm{mis}_{ir} + \gamma\, m_{ir} + \varepsilon_{ir},
 \end{equation}
@@ -395,7 +395,7 @@ gap lower on errors in all six runs (medians <<ext:anchors.fidelity.median:s3>> 
 <<ext:anchors.faithfulness_gap.median:s3>>). SHAP did not: its stability was higher on
 errors in <<ext:shap.stability.pos:d>> of six runs (<<ext:shap.stability.median:s3>>).
 These runs use only tree models, but on Adult the SHAP deficit was also large for XGBoost,
-so we know of no reason for the reversal.
+so the reason for the reversal remains unknown.
 
 \section{Discussion}
 
