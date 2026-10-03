@@ -1,7 +1,9 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): idea, documented for later.** Development starts after Paper D is
-submitted (deadline 15 October 2026). Nothing in this folder is a result.
+**Status (2026-10-03): analysis initiated at the author's direction.** This advances the
+earlier plan to wait until Paper D is submitted. Paper E has an analysis plan, but it must be
+committed before any Paper E statistic is calculated or the new EXP3 LIME cohort is run.
+Nothing in this folder is a result.
 
 ## The question
 
@@ -11,7 +13,7 @@ the "disagreement problem". Practitioners often treat SHAP, LIME and other metho
 interchangeable, but if they disagree on the top features, the choice of explainer changes
 the explanation a user sees.
 
-## Sub-questions (to be fixed in an analysis plan before any result is computed)
+## Sub-questions (formalized in `ANALYSIS_PLAN.md` before results are computed)
 
 1. How much do the explainers agree on the top-k features for the same instance?
    Measures: top-k overlap, rank correlation, and sign agreement.
@@ -52,11 +54,21 @@ attributions. How their "top features" are defined in `raw_top` must be checked 
 are compared with SHAP and LIME. The comparison may be limited to SHAP versus LIME, plus
 feature *sets* for Anchors and DiCE.
 
-## Next steps (after 15 October)
+## Analysis workflow
 
-1. Literature check: the disagreement problem in XAI (verify every reference against its DOI;
-   the author approves each).
-2. Write `ANALYSIS_PLAN.md` before computing anything.
-3. Extend `scripts/run_exp3_lime.py` to save per-instance attributions; run it. This is a new
-   cohort, kept in its own output directory.
-4. Choose the venue (no publication fee; English).
+1. Commit `ANALYSIS_PLAN.md` before computing any Paper E result.
+2. Review the initial source audit in `DATA_AUDIT.md` and reproduce it with
+   `python scripts/paper_e_data_audit.py`; it is structural/identity QC, not a Paper E result.
+3. Extend `scripts/run_exp3_lime.py` to save per-instance attributions for the exact IDs in the
+   existing EXP3 SHAP runs. This is a new cohort, kept in its own output directory.
+   EXP3 model binaries are not tracked; regenerate them to an isolated artifact root first:
+   `python scripts/train_exp3_models.py --model-root <model-root> --data-cache-dir <cache-dir>`.
+   The LIME runner validates the regenerated metadata, training metrics, feature order and
+   stored target predictions before running:
+   `python scripts/run_exp3_lime.py --paper-e --model-root <model-root> --data-cache-dir <cache-dir> --paper-e-output-dir <lime-output-dir>`.
+4. Run the prespecified analyses with
+   `python scripts/analyze_paper_e.py --lime-root <lime-output-dir> --output-dir <analysis-output-dir>`
+   and retain reproducible tables, diagnostics and figures.
+5. Literature check: verify each reference against its DOI; the author approves each.
+6. Choose a different venue (no publication fee; English), then draft only after the analysis
+   artifacts pass verification.
