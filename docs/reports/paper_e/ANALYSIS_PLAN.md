@@ -86,6 +86,8 @@ different sample.
   class 1, not as a substantive benefit or harm.
 - **Anchors:** a feature is active only when its rule indicator is `1`.
   Zero-padded entries are not rule features; rule length is not a feature rank.
+  The serialized `raw_top` has a top-10 cap, so a row with ten active entries
+  may be truncated and cannot be treated as the full rule set.
 - **DiCE:** a feature is changed only when the encoded original-to-counterfactual
   absolute difference is positive. The change magnitude is not an additive
   attribution or a direction of effect.
@@ -116,10 +118,11 @@ post-hoc grouping of one-hot features is allowed in the primary analysis.
 ### Secondary feature-set comparisons
 
 For EXP2 only, report Jaccard overlap between (a) the nonzero active Anchors
-rule set, (b) the positive-change DiCE feature set and (c) each additive
-method's top-5 set. These are descriptive, cross-construct feature-set
-comparisons. Do not calculate sign or rank agreement for Anchors or DiCE and
-do not make inferential claims that they agree in attribution.
+serialized rule set, (b) the positive-change DiCE feature set and (c) each
+additive method's top-5 set. Exclude Anchors rows whose top-10 cap may truncate
+the rule. These are descriptive, cross-construct feature-set comparisons. Do
+not calculate sign or rank agreement for Anchors or DiCE and do not make
+inferential claims that they agree in attribution.
 
 ### Quality associations
 
@@ -191,6 +194,10 @@ Before computing agreement statistics, the analysis must verify:
 Malformed/non-finite records are excluded only from measures they invalidate,
 with counts and reasons. No imputation is used. The primary SHAP–LIME analysis
 requires both methods to have a usable explanation for the same instance.
+For a correctness contrast, include a run only when at least ten matched
+instances remain in each correctness group, following the per-run minimum
+used in the Paper D analysis plan. Report all excluded runs and subgroup
+counts.
 
 ## 7. Reuse, provenance and publication boundary
 
@@ -224,4 +231,8 @@ analysis is verified and the paper is drafted.
 
 ## 9. Deviations
 
-None. Add a dated entry here before reporting any post-plan analytical change.
+**2026-10-03 (pre-analysis refinement; no Paper E statistic computed).** Schema
+inspection showed `raw_top` is capped at ten features, so an Anchors rule with
+ten active entries may be truncated; those rows are excluded from full
+feature-set comparisons. The correctness-contrast minimum is set at ten
+matched instances per group, consistent with the Paper D analysis plan.
