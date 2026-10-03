@@ -32,7 +32,7 @@ OUT = D / "submission"
 TECTONIC = ROOT / "tools" / "tectonic-portable" / ("tectonic.exe" if sys.platform == "win32" else "tectonic")
 # Figure stems in order of appearance; filled in when the figures exist
 # (ANALYSIS_PLAN.md section 8).
-FIGURES: list[str] = []
+FIGURES: list[str] = ["fig1", "fig2", "fig3"]
 
 
 def _run(cmd: list[str], cwd: Path) -> None:
@@ -112,6 +112,28 @@ SECT = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1418" w:righ
         'w:bottom="1418" w:left="1418" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>')
 
 
+SMALL = '<w:sz w:val="20"/><w:szCs w:val="20"/>'
+
+
+def _small_table(tbl: str) -> str:
+    """10 pt, single-spaced table cells. Element order follows the OOXML schema: in w:rPr,
+    sz/szCs precede vertAlign; in w:pPr, spacing follows pStyle."""
+    def rpr(m: re.Match) -> str:
+        body = m.group(1)
+        if "<w:sz " in body:
+            return m.group(0)
+        if "<w:vertAlign" in body:
+            body = body.replace("<w:vertAlign", SMALL + "<w:vertAlign", 1)
+        else:
+            body += SMALL
+        return f"<w:rPr>{body}</w:rPr>"
+    tbl = re.sub(r"<w:rPr>([\s\S]*?)</w:rPr>", rpr, tbl)
+    tbl = re.sub(r"<w:r>(?!<w:rPr>)", f"<w:r><w:rPr>{SMALL}</w:rPr>", tbl)
+    tbl = re.sub(r'(<w:pStyle w:val="Compact"\s*/>)',
+                 r'\1<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>', tbl)
+    return tbl
+
+
 def enforce_format(docx: Path) -> None:
     """Set the journal's format in the finished file: Times New Roman 12 pt, 1.5 line
     spacing (line=360, auto) in every paragraph style, letter paper, 2.5 cm margins."""
@@ -136,14 +158,17 @@ def enforce_format(docx: Path) -> None:
                 x = re.sub(r'(<w:style [^>]*w:styleId="(?:BodyText|FirstParagraph|Compact)"[\s\S]*?)'
                            r'<w:spacing\b[^>]*/>',
                            r'\1<w:spacing w:before="0" w:after="100" w:line="360" w:lineRule="auto"/>', x)
-                # Table cells (Compact): no gap after each cell paragraph.
+                # Table cells (Compact): 10 pt, single spacing, no gap after each cell
+                # paragraph. Body text keeps Times 12 at 1.5; tables are set smaller, as in
+                # the journal's published issues, so that wide result tables fit the page.
                 x = re.sub(r'(<w:style [^>]*w:styleId="Compact"[\s\S]*?)<w:spacing\b[^>]*/>',
-                           r'\1<w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/>', x)
+                           r'\1<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>', x)
                 x = re.sub(r'(<w:pPrDefault>\s*<w:pPr>\s*)<w:spacing\b[^>]*/>',
                            r'\1<w:spacing w:before="0" w:after="100" w:line="360" w:lineRule="auto"/>', x)
                 data = x.encode("utf-8")
             if item.filename == "word/document.xml":
                 x = data.decode("utf-8")
+                x = re.sub(r"<w:tbl>[\s\S]*?</w:tbl>", lambda m: _small_table(m.group(0)), x)
                 x = re.sub(r"<w:sectPr\b[\s\S]*?</w:sectPr>", "", x)
                 x = x.replace("</w:body>", SECT + "</w:body>")
                 data = x.encode("utf-8")

@@ -136,4 +136,22 @@ inference.
 
 ## 9. Deviations from this plan
 
-None yet. Record each one here with its date and reason, before reporting it.
+Record each one here with its date and reason, before reporting it.
+
+1. **2026-10-03, RQ4 restricted to reproducible runs.** Recomputing p̂ from the stored
+   models reproduced the recorded predictions exactly for logistic regression, XGBoost, SVM
+   and MLP, but only 75–82% for the random-forest runs made in January–February 2026; the
+   random-forest runs made in April 2026 reproduce (≥ 99.5%). The model file has the same
+   hash throughout the repository history, and neither the earlier preprocessor nor a
+   freshly fitted one restores the agreement, so the model those runs used cannot be
+   reconstructed. A run therefore enters RQ4 only if the stored model reproduces at least 99%
+   of its recorded predictions. RQ1–RQ3 are unaffected: their correct/misclassified labels
+   were assigned by the model that actually ran. Found by the reproduction check on the first
+   RQ4 run, whose output had been printed; the 99% rule is a data-validity criterion fixed
+   without regard to its effect on the coefficients, and both versions are archived in the
+   analysis log of the commit that introduced this deviation.
+2. **2026-10-03, implementation detail of RQ4 (not a change of plan).** The fixed-effects
+   regression is computed by within-run demeaning, with CR1 cluster-robust standard errors
+   by run; margin quintile edges are computed per explainer over all its instances. For the
+   SVM, p̂ is the Platt-scaled probability, which can disagree with `predict()` near the
+   boundary; the count is reported.

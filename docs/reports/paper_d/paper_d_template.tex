@@ -1,5 +1,3 @@
-%% GENERATED from paper_d_template.tex by scripts/pubs/render_paper_d.py.
-%% Do not edit: change the template and re-render.
 %% Paper D: are explanations less reliable when the model is wrong?
 %% Target: Tecnologia en Marcha, special issue on Artificial Intelligence (deadline
 %% 2026-10-15). See docs/reports/paper_d/README.md and ANALYSIS_PLAN.md.
@@ -62,12 +60,12 @@ post-hoc explanations are less reliable when the model is wrong. Using an existi
 benchmark on the UCI Adult data, we compare fidelity, stability and faithfulness gap
 between correctly and incorrectly classified instances for SHAP, LIME, Anchors and DiCE
 across five model families, with the run as the unit of analysis
-(265 runs, 122,529 explained instances), Wilcoxon
+(<<data:runs_analysed:d>> runs, <<data:analysed_total:int>> explained instances), Wilcoxon
 signed-rank tests with Holm correction, a control for the prediction margin, and an
 external check on German Credit. Explanations were less stable on misclassified instances
 for all four explainers, and the deficit was large for SHAP (median difference
-−0.076, $d_z =$ −1.36) and DiCE
-(−0.210, $d_z =$ −2.15). The prediction
+<<rq1:shap.stability.median:s3>>, $d_z =$ <<rq1:shap.stability.dz:s2>>) and DiCE
+(<<rq1:dice.stability.median:s3>>, $d_z =$ <<rq1:dice.stability.dz:s2>>). The prediction
 margin explained most of the DiCE deficit but not the SHAP deficit. Holding the margin
 fixed, the features that SHAP, LIME and Anchors ranked first carried less of the
 prediction on errors. Fidelity changed little and in opposite directions across
@@ -86,14 +84,14 @@ todas las instancias. Nos preguntamos si las explicaciones post hoc son menos fi
 cuando el modelo se equivoca. Con un banco de pruebas existente sobre UCI Adult,
 comparamos fidelidad, estabilidad y brecha de borrado entre instancias bien y mal
 clasificadas para SHAP, LIME, Anchors y DiCE en cinco familias de modelos, con la
-ejecuci\'on como unidad de an\'alisis (265 ejecuciones,
-122,529 instancias), pruebas de Wilcoxon con correcci\'on de Holm,
+ejecuci\'on como unidad de an\'alisis (<<data:runs_analysed:d>> ejecuciones,
+<<data:analysed_total:int>> instancias), pruebas de Wilcoxon con correcci\'on de Holm,
 un control del margen de predicci\'on y una verificaci\'on externa con German Credit.
 Las explicaciones fueron menos estables en las
 instancias mal clasificadas para los cuatro explicadores, y el d\'eficit fue grande para
-SHAP (diferencia mediana −0.076,
-$d_z =$ −1.36) y DiCE (−0.210,
-$d_z =$ −2.15). El margen de predicci\'on explic\'o la mayor parte
+SHAP (diferencia mediana <<rq1:shap.stability.median:s3>>,
+$d_z =$ <<rq1:shap.stability.dz:s2>>) y DiCE (<<rq1:dice.stability.median:s3>>,
+$d_z =$ <<rq1:dice.stability.dz:s2>>). El margen de predicci\'on explic\'o la mayor parte
 del d\'eficit de DiCE, pero no el de SHAP. Con el margen fijo, las variables que SHAP, LIME
 y Anchors situaron en primer lugar sostuvieron una parte menor de la predicci\'on en los
 errores. El patr\'on dependi\'o de la familia de modelos y, en German Credit, se mantuvo
@@ -169,13 +167,13 @@ partition of seed 42. Within a run, test instances
 were sampled separately from the four quadrants (TP, TN, FP, FN), so correct and
 misclassified instances are represented in nearly equal numbers by design.
 
-Of the 299 run files, 265 entered the analysis.
+Of the <<data:runs_total:d>> run files, <<data:runs_analysed:d>> entered the analysis.
 Anchors and DiCE produced no explanations in
-18 and
-7 runs respectively (failed or
-non-converged), and 9 SHAP runs had fewer
+<<data:anchors.runs_present-anchors.runs_nonempty:d>> and
+<<data:dice.runs_present-dice.runs_nonempty:d>> runs respectively (failed or
+non-converged), and <<data:shap.runs_nonempty-shap.runs_analysed:d>> SHAP runs had fewer
 than ten instances in one of the two groups. The analysis covers
-122,529 explained instances; 278 instances
+<<data:analysed_total:int>> explained instances; <<data:unlabelled_total:d>> instances
 without a recorded quadrant were excluded. Table~\ref{tab:data} gives the counts per
 explainer.
 
@@ -187,17 +185,17 @@ explainer.
 \toprule
 Explainer & Runs present & Runs analysed & Correct & Misclassified \\
 \midrule
-SHAP & 74 & 65 & 15,369 & 14,302 \\
-LIME & 75 & 75 & 17,500 & 17,103 \\
-Anchors & 75 & 57 & 12,992 & 12,775 \\
-DiCE & 75 & 68 & 16,300 & 16,188 \\
+SHAP & <<data:shap.runs_present:d>> & <<data:shap.runs_analysed:d>> & <<data:shap.correct:int>> & <<data:shap.misclassified:int>> \\
+LIME & <<data:lime.runs_present:d>> & <<data:lime.runs_analysed:d>> & <<data:lime.correct:int>> & <<data:lime.misclassified:int>> \\
+Anchors & <<data:anchors.runs_present:d>> & <<data:anchors.runs_analysed:d>> & <<data:anchors.correct:int>> & <<data:anchors.misclassified:int>> \\
+DiCE & <<data:dice.runs_present:d>> & <<data:dice.runs_analysed:d>> & <<data:dice.correct:int>> & <<data:dice.misclassified:int>> \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 For the external check we used the German Credit data \cite{hofmann1994statlog} from the
 same benchmark: random forest and XGBoost, explained by SHAP and Anchors, three seeds
-each (12 runs). These runs have 13 to 37 errors per quadrant. A
+each (<<ext:runs_total:d>> runs). These runs have 13 to 37 errors per quadrant. A
 third dataset in the benchmark, Breast Cancer, was excluded in advance because it has only
 one to four errors per quadrant per run.
 
@@ -279,14 +277,14 @@ correction.
 
 \textbf{Deviations from the plan.} (1) For the random-forest runs executed first, the stored
 model reproduced only part of the recorded predictions, so their margin cannot be
-recomputed; RQ4 therefore uses the 223 of
-274 runs whose recorded predictions the stored model reproduces
-(at least 99\%), which leaves 9 of
-60 random-forest runs. RQ1--RQ3 are unaffected, because their
+recomputed; RQ4 therefore uses the <<rq4:runs_reproducible:d>> of
+<<rq4:runs_nonempty:d>> runs whose recorded predictions the stored model reproduces
+(at least 99\%), which leaves <<rq4:rf.runs_reproducible:d>> of
+<<rq4:rf.runs_nonempty:d>> random-forest runs. RQ1--RQ3 are unaffected, because their
 correct and misclassified labels were assigned by the model that actually ran. (2) For the
 SVM, $\hat{p}$ is the Platt-scaled probability \cite{platt1999probabilistic}, which
-disagrees with the predicted class for 404 of
-22,426 instances; they were kept.
+disagrees with the predicted class for <<rq4:svm.proba_pred_disagree:d>> of
+<<rq4:svm.proba_total:int>> instances; they were kept.
 
 \section{Results}
 
@@ -294,26 +292,26 @@ disagrees with the predicted class for 404 of
 
 Table~\ref{tab:rq1} and Figure~\ref{fig:rq1} give the per-run differences. Stability was
 lower on misclassified instances for all four explainers after correction. The deficit
-was large for SHAP, lower in all 65 runs (median
-−0.076, $d_z =$ −1.36), and for DiCE,
-lower in 67 of 68 runs (median
-−0.210, $d_z =$ −2.15). For LIME the
-deficit was consistent, lower in 73 of
-75 runs, but small in absolute terms
-(median −0.0034), because LIME's stability on these data is
+was large for SHAP, lower in all <<rq1:shap.stability.neg:d>> runs (median
+<<rq1:shap.stability.median:s3>>, $d_z =$ <<rq1:shap.stability.dz:s2>>), and for DiCE,
+lower in <<rq1:dice.stability.neg:d>> of <<rq1:dice.stability.n:d>> runs (median
+<<rq1:dice.stability.median:s3>>, $d_z =$ <<rq1:dice.stability.dz:s2>>). For LIME the
+deficit was consistent, lower in <<rq1:lime.stability.neg:d>> of
+<<rq1:lime.stability.n:d>> runs, but small in absolute terms
+(median <<rq1:lime.stability.median:s4>>), because LIME's stability on these data is
 close to zero on average. For Anchors the median was close to zero.
 
 Fidelity moved in opposite directions. It was lower on errors for DiCE (median
-−0.053) and Anchors (−0.022),
-higher for LIME (+0.032), and not significantly different for
-SHAP after correction ($p_{\mathrm{Holm}} =$ 0.057). The
+<<rq1:dice.fidelity.median:s3>>) and Anchors (<<rq1:anchors.fidelity.median:s3>>),
+higher for LIME (<<rq1:lime.fidelity.median:s3>>), and not significantly different for
+SHAP after correction ($p_{\mathrm{Holm}} =$ <<rq1:shap.fidelity.p_holm:p>>). The
 faithfulness gap was lower on errors for SHAP (median
-−0.023, lower in 55
-of 65 runs) and DiCE, and did not differ for LIME and
-Anchors. Of the 12 primary tests, 9 were significant after
-correction and 3 met the practical-relevance criterion: SHAP stability,
+<<rq1:shap.faithfulness_gap.median:s3>>, lower in <<rq1:shap.faithfulness_gap.neg:d>>
+of <<rq1:shap.faithfulness_gap.n:d>> runs) and DiCE, and did not differ for LIME and
+Anchors. Of the 12 primary tests, <<rq1:n_significant:d>> were significant after
+correction and <<rq1:n_relevant:d>> met the practical-relevance criterion: SHAP stability,
 DiCE stability and DiCE fidelity. The robustness analysis over model--seed units agreed in
-direction and significance for 10 of the 12 tests; the exceptions were the
+direction and significance for <<rq1r:n_agree:d>> of the 12 tests; the exceptions were the
 LIME faithfulness gap, not significant in either analysis, and the DiCE faithfulness gap,
 which lost significance.
 
@@ -328,25 +326,25 @@ signed-rank, Holm-corrected within the 12 primary and, separately, the 4 sparsit
 \toprule
 Metric & Explainer & $n$ & Median $\Delta$ & Mean $\Delta$ [95\% CI] & $d_z$ & $p_{\mathrm{Holm}}$ \\
 \midrule
-Stability & SHAP & 65 & −0.076 & −0.117 [−0.138, −0.095] & −1.36 & <0.001 \\
- & LIME & 75 & −0.003 & −0.007 [−0.009, −0.006] & −1.06 & <0.001 \\
- & Anchors & 57 & 0.000 & −0.016 [−0.032, −0.001] & −0.28 & <0.001 \\
- & DiCE & 68 & −0.210 & −0.198 [−0.221, −0.176] & −2.15 & <0.001 \\
+Stability & SHAP & <<rq1:shap.stability.n:d>> & <<rq1:shap.stability.median:s3>> & <<rq1:shap.stability.mean:s3>> [<<rq1:shap.stability.ci_lo:s3>>, <<rq1:shap.stability.ci_hi:s3>>] & <<rq1:shap.stability.dz:s2>> & <<rq1:shap.stability.p_holm:p>> \\
+ & LIME & <<rq1:lime.stability.n:d>> & <<rq1:lime.stability.median:s3>> & <<rq1:lime.stability.mean:s3>> [<<rq1:lime.stability.ci_lo:s3>>, <<rq1:lime.stability.ci_hi:s3>>] & <<rq1:lime.stability.dz:s2>> & <<rq1:lime.stability.p_holm:p>> \\
+ & Anchors & <<rq1:anchors.stability.n:d>> & <<rq1:anchors.stability.median:s3>> & <<rq1:anchors.stability.mean:s3>> [<<rq1:anchors.stability.ci_lo:s3>>, <<rq1:anchors.stability.ci_hi:s3>>] & <<rq1:anchors.stability.dz:s2>> & <<rq1:anchors.stability.p_holm:p>> \\
+ & DiCE & <<rq1:dice.stability.n:d>> & <<rq1:dice.stability.median:s3>> & <<rq1:dice.stability.mean:s3>> [<<rq1:dice.stability.ci_lo:s3>>, <<rq1:dice.stability.ci_hi:s3>>] & <<rq1:dice.stability.dz:s2>> & <<rq1:dice.stability.p_holm:p>> \\
 \midrule
-Fidelity & SHAP & 65 & +0.007 & +0.021 [+0.009, +0.033] & +0.42 & 0.057 \\
- & LIME & 75 & +0.032 & +0.028 [+0.020, +0.035] & +0.82 & <0.001 \\
- & Anchors & 57 & −0.022 & −0.025 [−0.040, −0.010] & −0.45 & 0.013 \\
- & DiCE & 68 & −0.053 & −0.047 [−0.061, −0.033] & −0.82 & <0.001 \\
+Fidelity & SHAP & <<rq1:shap.fidelity.n:d>> & <<rq1:shap.fidelity.median:s3>> & <<rq1:shap.fidelity.mean:s3>> [<<rq1:shap.fidelity.ci_lo:s3>>, <<rq1:shap.fidelity.ci_hi:s3>>] & <<rq1:shap.fidelity.dz:s2>> & <<rq1:shap.fidelity.p_holm:p>> \\
+ & LIME & <<rq1:lime.fidelity.n:d>> & <<rq1:lime.fidelity.median:s3>> & <<rq1:lime.fidelity.mean:s3>> [<<rq1:lime.fidelity.ci_lo:s3>>, <<rq1:lime.fidelity.ci_hi:s3>>] & <<rq1:lime.fidelity.dz:s2>> & <<rq1:lime.fidelity.p_holm:p>> \\
+ & Anchors & <<rq1:anchors.fidelity.n:d>> & <<rq1:anchors.fidelity.median:s3>> & <<rq1:anchors.fidelity.mean:s3>> [<<rq1:anchors.fidelity.ci_lo:s3>>, <<rq1:anchors.fidelity.ci_hi:s3>>] & <<rq1:anchors.fidelity.dz:s2>> & <<rq1:anchors.fidelity.p_holm:p>> \\
+ & DiCE & <<rq1:dice.fidelity.n:d>> & <<rq1:dice.fidelity.median:s3>> & <<rq1:dice.fidelity.mean:s3>> [<<rq1:dice.fidelity.ci_lo:s3>>, <<rq1:dice.fidelity.ci_hi:s3>>] & <<rq1:dice.fidelity.dz:s2>> & <<rq1:dice.fidelity.p_holm:p>> \\
 \midrule
-Faithfulness & SHAP & 65 & −0.023 & −0.024 [−0.029, −0.018] & −1.07 & <0.001 \\
-gap & LIME & 75 & 0.000 & +0.001 [−0.007, +0.008] & +0.02 & 0.992 \\
- & Anchors & 57 & 0.000 & −0.003 [−0.012, +0.007] & −0.08 & 0.954 \\
- & DiCE & 68 & −0.022 & −0.018 [−0.029, −0.007] & −0.41 & 0.013 \\
+Faithfulness & SHAP & <<rq1:shap.faithfulness_gap.n:d>> & <<rq1:shap.faithfulness_gap.median:s3>> & <<rq1:shap.faithfulness_gap.mean:s3>> [<<rq1:shap.faithfulness_gap.ci_lo:s3>>, <<rq1:shap.faithfulness_gap.ci_hi:s3>>] & <<rq1:shap.faithfulness_gap.dz:s2>> & <<rq1:shap.faithfulness_gap.p_holm:p>> \\
+gap & LIME & <<rq1:lime.faithfulness_gap.n:d>> & <<rq1:lime.faithfulness_gap.median:s3>> & <<rq1:lime.faithfulness_gap.mean:s3>> [<<rq1:lime.faithfulness_gap.ci_lo:s3>>, <<rq1:lime.faithfulness_gap.ci_hi:s3>>] & <<rq1:lime.faithfulness_gap.dz:s2>> & <<rq1:lime.faithfulness_gap.p_holm:p>> \\
+ & Anchors & <<rq1:anchors.faithfulness_gap.n:d>> & <<rq1:anchors.faithfulness_gap.median:s3>> & <<rq1:anchors.faithfulness_gap.mean:s3>> [<<rq1:anchors.faithfulness_gap.ci_lo:s3>>, <<rq1:anchors.faithfulness_gap.ci_hi:s3>>] & <<rq1:anchors.faithfulness_gap.dz:s2>> & <<rq1:anchors.faithfulness_gap.p_holm:p>> \\
+ & DiCE & <<rq1:dice.faithfulness_gap.n:d>> & <<rq1:dice.faithfulness_gap.median:s3>> & <<rq1:dice.faithfulness_gap.mean:s3>> [<<rq1:dice.faithfulness_gap.ci_lo:s3>>, <<rq1:dice.faithfulness_gap.ci_hi:s3>>] & <<rq1:dice.faithfulness_gap.dz:s2>> & <<rq1:dice.faithfulness_gap.p_holm:p>> \\
 \midrule
-Sparsity & SHAP & 65 & 0.000 & +0.009 [+0.006, +0.012] & +0.85 & <0.001 \\
- & LIME & 75 & +0.001 & +0.002 [+0.001, +0.003] & +0.44 & 0.003 \\
- & Anchors & 57 & +0.005 & +0.014 [+0.007, +0.020] & +0.58 & <0.001 \\
- & DiCE & 68 & −0.003 & −0.003 [−0.003, −0.002] & −1.18 & <0.001 \\
+Sparsity & SHAP & <<rq1:shap.sparsity.n:d>> & <<rq1:shap.sparsity.median:s3>> & <<rq1:shap.sparsity.mean:s3>> [<<rq1:shap.sparsity.ci_lo:s3>>, <<rq1:shap.sparsity.ci_hi:s3>>] & <<rq1:shap.sparsity.dz:s2>> & <<rq1:shap.sparsity.p_holm:p>> \\
+ & LIME & <<rq1:lime.sparsity.n:d>> & <<rq1:lime.sparsity.median:s3>> & <<rq1:lime.sparsity.mean:s3>> [<<rq1:lime.sparsity.ci_lo:s3>>, <<rq1:lime.sparsity.ci_hi:s3>>] & <<rq1:lime.sparsity.dz:s2>> & <<rq1:lime.sparsity.p_holm:p>> \\
+ & Anchors & <<rq1:anchors.sparsity.n:d>> & <<rq1:anchors.sparsity.median:s3>> & <<rq1:anchors.sparsity.mean:s3>> [<<rq1:anchors.sparsity.ci_lo:s3>>, <<rq1:anchors.sparsity.ci_hi:s3>>] & <<rq1:anchors.sparsity.dz:s2>> & <<rq1:anchors.sparsity.p_holm:p>> \\
+ & DiCE & <<rq1:dice.sparsity.n:d>> & <<rq1:dice.sparsity.median:s3>> & <<rq1:dice.sparsity.mean:s3>> [<<rq1:dice.sparsity.ci_lo:s3>>, <<rq1:dice.sparsity.ci_hi:s3>>] & <<rq1:dice.sparsity.dz:s2>> & <<rq1:dice.sparsity.p_holm:p>> \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -361,24 +359,24 @@ correction; open markers: not significant. Negative values mean lower quality on
 \end{figure}
 
 Sparsity differed little in absolute terms (all medians within
-$\pm0.0025$ of zero apart from Anchors). Explanation time did
+$\pm<<rq1:dice.sparsity.median:u4>>$ of zero apart from Anchors). Explanation time did
 not differ systematically, except for Anchors, which took a median
-3,338 ms longer per instance on errors, plausibly because its rule
+<<rq1:anchors.cost.median:int>> ms longer per instance on errors, plausibly because its rule
 search runs longer near the boundary.
 
 \subsection{Differences across model families (RQ2)}
 
 The size, and for fidelity and the faithfulness gap also the sign, of the difference
 depended on the model family (Figure~\ref{fig:rq2}). The Kruskal--Wallis test was
-significant after correction for 10 of the
-12 explainer--metric combinations; the two exceptions were the
+significant after correction for <<rq2:n_kw_significant:d>> of the
+<<rq2:n_kw_tests:d>> explainer--metric combinations; the two exceptions were the
 stability of LIME and Anchors, whose differences were small for every family. The SHAP
 stability deficit was largest for the multilayer perceptron (median
-−0.216) and XGBoost (−0.168)
-and smallest for the random forest (−0.025) and the SVM
-(−0.030). The DiCE
+<<rq2:shap.stability.mlp.median:s3>>) and XGBoost (<<rq2:shap.stability.xgb.median:s3>>)
+and smallest for the random forest (<<rq2:shap.stability.rf.median:s3>>) and the SVM
+(<<rq2:shap.stability.svm.median:s3>>). The DiCE
 stability deficit was present for every family and largest for logistic regression
-(−0.321).
+(<<rq2:dice.stability.logreg.median:s3>>).
 
 \begin{figure}[ht]
 \centering
@@ -409,10 +407,10 @@ matters for any audit that compares explanations of different decisions.
 \toprule
 Explainer & Fidelity & Stability & Faithfulness gap \\
 \midrule
-SHAP & +0.022 (<0.001) & +0.015 (0.705) & +0.353 (<0.001) \\
-LIME & +0.003 (0.315) & +0.004 (<0.001) & +0.239 (<0.001) \\
-Anchors & +0.027 (0.002) & 0.000 (0.705) & +0.172 (<0.001) \\
-DiCE & −0.019 (0.276) & −0.269 (<0.001) & +0.046 (<0.001) \\
+SHAP & <<rq3:shap.fidelity.median:s3>> (<<rq3:shap.fidelity.p_holm:p>>) & <<rq3:shap.stability.median:s3>> (<<rq3:shap.stability.p_holm:p>>) & <<rq3:shap.faithfulness_gap.median:s3>> (<<rq3:shap.faithfulness_gap.p_holm:p>>) \\
+LIME & <<rq3:lime.fidelity.median:s3>> (<<rq3:lime.fidelity.p_holm:p>>) & <<rq3:lime.stability.median:s3>> (<<rq3:lime.stability.p_holm:p>>) & <<rq3:lime.faithfulness_gap.median:s3>> (<<rq3:lime.faithfulness_gap.p_holm:p>>) \\
+Anchors & <<rq3:anchors.fidelity.median:s3>> (<<rq3:anchors.fidelity.p_holm:p>>) & <<rq3:anchors.stability.median:s3>> (<<rq3:anchors.stability.p_holm:p>>) & <<rq3:anchors.faithfulness_gap.median:s3>> (<<rq3:anchors.faithfulness_gap.p_holm:p>>) \\
+DiCE & <<rq3:dice.fidelity.median:s3>> (<<rq3:dice.fidelity.p_holm:p>>) & <<rq3:dice.stability.median:s3>> (<<rq3:dice.stability.p_holm:p>>) & <<rq3:dice.faithfulness_gap.median:s3>> (<<rq3:dice.faithfulness_gap.p_holm:p>>) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -420,26 +418,26 @@ DiCE & −0.019 (0.276) & −0.269 (<0.001) & +0.046 (<0.001) \\
 \subsection{The role of the decision boundary (RQ4)}
 
 Errors were indeed closer to the boundary (median margin
-0.18 against 0.43
+<<rq4:shap.stability.margin_median_mis:u2>> against <<rq4:shap.stability.margin_median_cor:u2>>
 for correct instances in the SHAP runs), and stability rose with the margin for every
 explainer (Figure~\ref{fig:rq4}). Controlling for the margin changed the picture in three
 ways (Table~\ref{tab:rq4}). First, the DiCE stability deficit was almost entirely a
-margin effect: its coefficient fell from −0.191 to
-−0.014, with a confidence interval including zero. A
+margin effect: its coefficient fell from <<rq4:dice.stability.b_raw:s3>> to
+<<rq4:dice.stability.b_adj:s3>>, with a confidence interval including zero. A
 counterfactual for an instance near the boundary needs only a small change, and small
 changes vary more under noise. Second, the SHAP stability deficit was reduced but
-remained: −0.146 without and −0.042
-[−0.057, −0.027] with the margin.
+remained: <<rq4:shap.stability.b_raw:s3>> without and <<rq4:shap.stability.b_adj:s3>>
+[<<rq4:shap.stability.lo_adj:s3>>, <<rq4:shap.stability.hi_adj:s3>>] with the margin.
 Figure~\ref{fig:rq4} shows the same: at equal margin, SHAP explanations of errors are less
 stable than those of correct predictions. Third, the faithfulness gap, which in RQ1
 was lower on errors only for SHAP and DiCE and by small amounts, became lower on errors once
 the margin was held fixed for SHAP
-(−0.064), LIME (−0.031)
-and Anchors (−0.017). Near the boundary any deletion
+(<<rq4:shap.faithfulness_gap.b_adj:s3>>), LIME (<<rq4:lime.faithfulness_gap.b_adj:s3>>)
+and Anchors (<<rq4:anchors.faithfulness_gap.b_adj:s3>>). Near the boundary any deletion
 moves the prediction a lot, which inflates the gap of errors; at equal margin, the
 features named first carry less of an erroneous prediction. The fidelity differences
 were largely margin effects: the LIME advantage on errors fell from
-+0.039 to +0.014, the Anchors deficit
+<<rq4:lime.fidelity.b_raw:s3>> to <<rq4:lime.fidelity.b_adj:s3>>, the Anchors deficit
 vanished, and the DiCE deficit reversed sign.
 
 \begin{table}[ht]
@@ -453,20 +451,20 @@ Runs whose recorded predictions the stored model reproduces.}
 \toprule
 Metric & Explainer & $\beta$ without margin & $\beta$ with margin \\
 \midrule
-Stability & SHAP & −0.146 [−0.170, −0.123] & −0.042 [−0.057, −0.027] \\
- & LIME & −0.008 [−0.009, −0.006] & −0.003 [−0.004, −0.002] \\
- & Anchors & −0.030 [−0.062, +0.001] & −0.025 [−0.058, +0.008] \\
- & DiCE & −0.191 [−0.219, −0.163] & −0.014 [−0.031, +0.004] \\
+Stability & SHAP & <<rq4:shap.stability.b_raw:s3>> [<<rq4:shap.stability.lo_raw:s3>>, <<rq4:shap.stability.hi_raw:s3>>] & <<rq4:shap.stability.b_adj:s3>> [<<rq4:shap.stability.lo_adj:s3>>, <<rq4:shap.stability.hi_adj:s3>>] \\
+ & LIME & <<rq4:lime.stability.b_raw:s3>> [<<rq4:lime.stability.lo_raw:s3>>, <<rq4:lime.stability.hi_raw:s3>>] & <<rq4:lime.stability.b_adj:s3>> [<<rq4:lime.stability.lo_adj:s3>>, <<rq4:lime.stability.hi_adj:s3>>] \\
+ & Anchors & <<rq4:anchors.stability.b_raw:s3>> [<<rq4:anchors.stability.lo_raw:s3>>, <<rq4:anchors.stability.hi_raw:s3>>] & <<rq4:anchors.stability.b_adj:s3>> [<<rq4:anchors.stability.lo_adj:s3>>, <<rq4:anchors.stability.hi_adj:s3>>] \\
+ & DiCE & <<rq4:dice.stability.b_raw:s3>> [<<rq4:dice.stability.lo_raw:s3>>, <<rq4:dice.stability.hi_raw:s3>>] & <<rq4:dice.stability.b_adj:s3>> [<<rq4:dice.stability.lo_adj:s3>>, <<rq4:dice.stability.hi_adj:s3>>] \\
 \midrule
-Fidelity & SHAP & −0.002 [−0.011, +0.007] & −0.004 [−0.011, +0.003] \\
- & LIME & +0.039 [+0.032, +0.046] & +0.014 [+0.006, +0.021] \\
- & Anchors & −0.013 [−0.032, +0.005] & +0.012 [−0.003, +0.027] \\
- & DiCE & −0.045 [−0.062, −0.028] & +0.022 [+0.009, +0.034] \\
+Fidelity & SHAP & <<rq4:shap.fidelity.b_raw:s3>> [<<rq4:shap.fidelity.lo_raw:s3>>, <<rq4:shap.fidelity.hi_raw:s3>>] & <<rq4:shap.fidelity.b_adj:s3>> [<<rq4:shap.fidelity.lo_adj:s3>>, <<rq4:shap.fidelity.hi_adj:s3>>] \\
+ & LIME & <<rq4:lime.fidelity.b_raw:s3>> [<<rq4:lime.fidelity.lo_raw:s3>>, <<rq4:lime.fidelity.hi_raw:s3>>] & <<rq4:lime.fidelity.b_adj:s3>> [<<rq4:lime.fidelity.lo_adj:s3>>, <<rq4:lime.fidelity.hi_adj:s3>>] \\
+ & Anchors & <<rq4:anchors.fidelity.b_raw:s3>> [<<rq4:anchors.fidelity.lo_raw:s3>>, <<rq4:anchors.fidelity.hi_raw:s3>>] & <<rq4:anchors.fidelity.b_adj:s3>> [<<rq4:anchors.fidelity.lo_adj:s3>>, <<rq4:anchors.fidelity.hi_adj:s3>>] \\
+ & DiCE & <<rq4:dice.fidelity.b_raw:s3>> [<<rq4:dice.fidelity.lo_raw:s3>>, <<rq4:dice.fidelity.hi_raw:s3>>] & <<rq4:dice.fidelity.b_adj:s3>> [<<rq4:dice.fidelity.lo_adj:s3>>, <<rq4:dice.fidelity.hi_adj:s3>>] \\
 \midrule
-Faithfulness & SHAP & −0.024 [−0.031, −0.017] & −0.064 [−0.075, −0.054] \\
-gap & LIME & +0.008 [0.000, +0.016] & −0.031 [−0.045, −0.018] \\
- & Anchors & +0.003 [−0.006, +0.013] & −0.017 [−0.025, −0.008] \\
- & DiCE & −0.013 [−0.025, 0.000] & −0.007 [−0.014, 0.000] \\
+Faithfulness & SHAP & <<rq4:shap.faithfulness_gap.b_raw:s3>> [<<rq4:shap.faithfulness_gap.lo_raw:s3>>, <<rq4:shap.faithfulness_gap.hi_raw:s3>>] & <<rq4:shap.faithfulness_gap.b_adj:s3>> [<<rq4:shap.faithfulness_gap.lo_adj:s3>>, <<rq4:shap.faithfulness_gap.hi_adj:s3>>] \\
+gap & LIME & <<rq4:lime.faithfulness_gap.b_raw:s3>> [<<rq4:lime.faithfulness_gap.lo_raw:s3>>, <<rq4:lime.faithfulness_gap.hi_raw:s3>>] & <<rq4:lime.faithfulness_gap.b_adj:s3>> [<<rq4:lime.faithfulness_gap.lo_adj:s3>>, <<rq4:lime.faithfulness_gap.hi_adj:s3>>] \\
+ & Anchors & <<rq4:anchors.faithfulness_gap.b_raw:s3>> [<<rq4:anchors.faithfulness_gap.lo_raw:s3>>, <<rq4:anchors.faithfulness_gap.hi_raw:s3>>] & <<rq4:anchors.faithfulness_gap.b_adj:s3>> [<<rq4:anchors.faithfulness_gap.lo_adj:s3>>, <<rq4:anchors.faithfulness_gap.hi_adj:s3>>] \\
+ & DiCE & <<rq4:dice.faithfulness_gap.b_raw:s3>> [<<rq4:dice.faithfulness_gap.lo_raw:s3>>, <<rq4:dice.faithfulness_gap.hi_raw:s3>>] & <<rq4:dice.faithfulness_gap.b_adj:s3>> [<<rq4:dice.faithfulness_gap.lo_adj:s3>>, <<rq4:dice.faithfulness_gap.hi_adj:s3>>] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -482,11 +480,11 @@ misclassified instances (UCI Adult; bins of width 0.05 with at least 30 instance
 \subsection{External check on German Credit}
 
 On German Credit, Anchors reproduced the Adult pattern: fidelity and faithfulness gap were
-lower on errors in all six runs (medians −0.084 and
-−0.017) and stability in five
-(−0.043). SHAP did not: its stability was higher on errors
-in 4 of six runs (median +0.025),
-while its fidelity was lower in all six (−0.045). With six runs
+lower on errors in all six runs (medians <<ext:anchors.fidelity.median:s3>> and
+<<ext:anchors.faithfulness_gap.median:s3>>) and stability in five
+(<<ext:anchors.stability.median:s3>>). SHAP did not: its stability was higher on errors
+in <<ext:shap.stability.pos:d>> of six runs (median <<ext:shap.stability.median:s3>>),
+while its fidelity was lower in all six (<<ext:shap.fidelity.median:s3>>). With six runs
 these are descriptive. They show that the size, and for SHAP the direction, of the
 difference depends on the data as well as on the model.
 
@@ -533,7 +531,7 @@ itself show that users would be misled, which requires a user study.
 \section{Conclusions}
 
 Post-hoc explanations were less reliable when the model was wrong. In a pre-specified
-analysis of 265 benchmark runs, stability was lower on misclassified
+analysis of <<data:runs_analysed:d>> benchmark runs, stability was lower on misclassified
 instances for SHAP, LIME, Anchors and DiCE, with large deficits for SHAP and DiCE. The
 DiCE deficit is explained by the proximity of errors to the decision boundary; the SHAP
 deficit is not. At equal margin, the features that explanations rank first carry less of
