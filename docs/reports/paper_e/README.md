@@ -57,7 +57,8 @@ feature *sets* for Anchors and DiCE.
 ## Analysis workflow
 
 1. Commit `ANALYSIS_PLAN.md` before computing any Paper E result.
-2. Audit source-run schemas, instance-ID alignment, feature identities and explainer semantics.
+2. Review the initial source audit in `DATA_AUDIT.md` and reproduce it with
+   `python scripts/paper_e_data_audit.py`; it is structural/identity QC, not a Paper E result.
 3. Extend `scripts/run_exp3_lime.py` to save per-instance attributions for the exact IDs in the
    existing EXP3 SHAP runs. This is a new cohort, kept in its own output directory.
 4. Run the prespecified analyses and retain reproducible tables, diagnostics and figure sources.
