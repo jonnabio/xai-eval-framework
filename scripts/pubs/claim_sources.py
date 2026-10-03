@@ -662,4 +662,20 @@ def resolve(expr: str) -> float:
             raise MissingArtifact(f"no cohort 2 scores for {condition}/{dimension}")
         return 100.0 * sum(v == float(score) for v in values) / len(values)
 
+    if kind == "paper_d":
+        # Paper D (claim-registry case study): metric,value snapshots written by
+        # scripts/pubs/paper_d_metrics.py, e.g. paper_d:registry_snapshot:claims.
+        # A percentage is expressed as paper_d:<file>:<numerator>/<denominator>.
+        table, metric = args
+        path = ROOT / "outputs" / "analysis" / "paper_d" / f"{table}.csv"
+        if not path.exists():
+            raise MissingArtifact(f"missing {path}")
+        values = {r["metric"]: float(r["value"]) for r in _rows(path)}
+        if "/" in metric:
+            num, den = metric.split("/")
+            return 100.0 * values[num] / values[den]
+        if metric not in values:
+            raise MissingArtifact(f"paper_d metric not found: {table}/{metric}")
+        return values[metric]
+
     raise MissingArtifact(f"unknown source expression: {expr}")
