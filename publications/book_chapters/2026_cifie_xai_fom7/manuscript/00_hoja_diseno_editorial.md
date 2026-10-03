@@ -71,7 +71,7 @@ demostración empírica acotada, derivado de investigación doctoral.
 
 Investigadores, estudiantes de posgrado y profesionales de inteligencia artificial,
 ciencia de datos, interacción humano-IA, auditoría de modelos, gobernanza tecnológica
-y metodología aplicada. El texto debe seguir siendo comprensible para lectores
+y metodología aplicada. El texto intenta seguir siendo comprensible para lectores
 técnicos que no sean especialistas en evaluación XAI.
 
 ## Principal aportación
