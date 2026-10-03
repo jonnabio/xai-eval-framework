@@ -1,5 +1,15 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper D location correction)
+
+The author requires Paper D in the main project checkout, alongside the other
+papers: `docs/reports/paper_d/`. The Paper D branch and its publication dependencies
+were integrated into the current checkout, preserving the in-progress Paper E
+changes. All Paper D analysis artifacts and build scripts are present. Blind/full
+PDF and Word builds, claim verification, synchronization, EXP4 pins and strict
+Paper D overlap verification pass here. The extra `../xai-paper-d` worktree is
+removed; its location in the earlier style-revision entry is historical.
+
 ## Session update - 2026-10-03 (Paper D impersonal style)
 
 At the author's request, the Scientific Editor reviewed all Paper D prose and
