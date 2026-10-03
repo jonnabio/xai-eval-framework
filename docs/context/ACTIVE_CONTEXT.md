@@ -1,5 +1,53 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper E tooling recorded; branch state)
+
+This entry records work that was committed without a context entry. It supersedes
+"Paper E stays documented-only until after Paper D is submitted" in the Paper D
+handoff below: the author moved the Paper E analysis forward (see
+`docs/reports/paper_e/README.md`).
+
+- **Checkout:** the main folder is on `paper/e-feature-agreement`, not the thesis
+  lane. The branch also carries the Paper D integration (`a02c1e57d`, `501473244`),
+  although `docs/planning/paper_e_implementation_plan.md` says not to merge Paper D's
+  lane into it.
+- **Done on the branch (tooling only):**
+  - `ANALYSIS_PLAN.md` locked before any statistic (`80b9a44b9`); two dated
+    pre-analysis refinements are in its §9.
+  - Source audit (`ab416388f`): `scripts/paper_e_data_audit.py`,
+    `docs/reports/paper_e/DATA_AUDIT.md` / `.json`. It is structural and identity
+    QC, not a result.
+  - Aligned EXP3 LIME cohort mode (`39e2fbc22`): `scripts/run_exp3_lime.py --paper-e`
+    targets the exact instance IDs of the stored SHAP runs.
+  - Analysis pipeline (`b2f4286eb`): `scripts/analyze_paper_e.py`, and
+    `scripts/train_exp3_models.py --model-root` to regenerate the untracked EXP3
+    models in an isolated directory.
+- **Not done:** no new EXP3 LIME cohort and no `outputs/analysis/paper_e/` exist in
+  this checkout. No Paper E agreement statistic is committed, there is no manuscript,
+  and nothing is registered in `pub/claim_registry.toml`.
+- **Verified in this session:** `verify_claims.py` (479 claims / 645 sites / 48
+  retired-value guards / 13 cited artifacts / 20 files fully registered / 14 files
+  clear of unpublished results), `verify_sync.py`, `verify_exp4_reconstruction.py`
+  (18 pins) and `scan_shared_literals.py --strict` (0 unexplained / 55 known) pass.
+  The 15 Paper E tests under `tests/analysis/` pass in the project `.venv`.
+- **Open, for the author to decide:**
+  - **Local `main` is 19 commits ahead of `origin/main` and must not be pushed as it
+    is.** It holds a merge of this branch (`6753bb035`) followed by its revert
+    (`bb8ebef2d`). Its files equal `origin/main`, but its history would contain the
+    Paper D and Paper E commits, so a later merge of either lane into `main` would
+    not bring their files back. Resetting local `main` to `origin/main` removes the
+    problem.
+  - The working tree `../xai-eval-framework-main-paper-e` (on `main`) holds an
+    unfinished merge with a conflict in `docs/reports/paper_e/README.md`.
+    `../xai-eval-framework-paper-e-clean` (`paper/e-feature-agreement-clean`) is
+    level with `origin/main` and has no work.
+  - `docs/reports/paper_d/paper_d.tex` shows as modified in this checkout; the
+    difference is line endings only.
+- **Next for Paper E:** regenerate the EXP3 models, run the LIME cohort to its own
+  directory, run `analyze_paper_e.py`, and put the outputs on a `results/paper-e-*`
+  branch through `main` (plan Tasks 3-5). Paper D's submission (due 2026-10-15) and
+  Task 3 / RCA-001 Phase 2 are unchanged.
+
 ## Session update - 2026-10-03 (Paper D location correction)
 
 The author requires Paper D in the main project checkout, alongside the other
@@ -1945,5 +1993,7 @@ All existing Active Constraints and overarching goals stand unchanged.
 
 ### Next
 - Resume Task 3 / RCA-001 Phase 2 on the thesis lane.
-- Paper E stays documented-only until after Paper D is submitted.
+- Paper E stays documented-only until after Paper D is submitted. **Superseded
+  2026-10-03:** see "Session update - 2026-10-03 (Paper E tooling recorded; branch
+  state)" at the top of this file.
 - IBERAMIA submission ID for Paper B+C to be recorded when the author sends it.
