@@ -1,9 +1,10 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): analysis initiated at the author's direction.** This advances the
-earlier plan to wait until Paper D is submitted. Paper E has an analysis plan, but it must be
-committed before any Paper E statistic is calculated or the new EXP3 LIME cohort is run.
-Nothing in this folder is a result.
+**Status (2026-10-03): analysis artifacts generated.** At the author's direction, this
+advances the earlier plan to wait until Paper D is submitted. The protocol, source audit,
+new EXP3 LIME cohort and descriptive analysis are complete. Interpretation, literature
+verification and venue selection remain author work; no confirmatory tests or p-values are
+reported.
 
 ## The question
 
@@ -45,9 +46,27 @@ the explanation a user sees.
 
 | Source | Explainers with per-instance attributions | Notes |
 |---|---|---|
-| EXP2, UCI Adult | SHAP, LIME, Anchors, DiCE | 299 runs; same instances across methods within a (model, seed, n); top-10 features and weights per explanation |
-| EXP3, German Credit | SHAP, Anchors | 12 runs; LIME to be re-run with attributions saved |
-| EXP3, Breast Cancer | SHAP, Anchors | 12 runs; LIME to be re-run with attributions saved |
+| EXP2, UCI Adult | SHAP, LIME, Anchors, DiCE | 299 source run files; valid instance-ID coverage varies by method and block, so each comparison uses its recorded matched intersection |
+| EXP3, German Credit | SHAP, Anchors, Paper E LIME | Six new LIME runs explain the exact stored SHAP instance IDs |
+| EXP3, Breast Cancer | SHAP, Anchors, Paper E LIME | Six new LIME runs explain the exact stored SHAP instance IDs |
+
+## Generated artifacts
+
+The new per-instance LIME cohort, run manifest, analysis tables, diagnostics and figures
+are committed on `results/paper-e-agreement`:
+
+- [`EXP3 LIME cohort`](../../../outputs/analysis/paper_e/exp3_lime/)
+- [`Analysis report and artifacts`](../../../outputs/analysis/paper_e/analysis/)
+- [`RESULTS.md`](../../../outputs/analysis/paper_e/analysis/RESULTS.md)
+
+The primary SHAP-LIME analysis contains 31,411 paired instance records across 87 audited
+blocks. Only matched, classification-consistent IDs are included. The machine-readable
+diagnostics record 76 blocks with exact valid-ID sets, 4,936 unpaired valid method-IDs and
+zero classification mismatches in primary pairs. Secondary Anchors/DiCE comparisons are
+feature-set overlaps only; mismatched classifications and potentially truncated Anchor
+rules are excluded and documented in the diagnostics.
+
+The aggregate EXP3 LIME file at `outputs/analysis/exp3_lime_results.csv` remains unchanged.
 
 **Caveat:** Anchors returns rules and DiCE returns counterfactuals, not additive
 attributions. How their "top features" are defined in `raw_top` must be checked before they
@@ -56,19 +75,17 @@ feature *sets* for Anchors and DiCE.
 
 ## Analysis workflow
 
-1. Commit `ANALYSIS_PLAN.md` before computing any Paper E result.
-2. Review the initial source audit in `DATA_AUDIT.md` and reproduce it with
+1. `ANALYSIS_PLAN.md` was committed before computing any Paper E result.
+2. The initial source audit in `DATA_AUDIT.md` was reproduced with
    `python scripts/paper_e_data_audit.py`; it is structural/identity QC, not a Paper E result.
-3. Extend `scripts/run_exp3_lime.py` to save per-instance attributions for the exact IDs in the
-   existing EXP3 SHAP runs. This is a new cohort, kept in its own output directory.
-   EXP3 model binaries are not tracked; regenerate them to an isolated artifact root first:
+3. The EXP3 LIME cohort is stored separately and uses the exact IDs in the existing SHAP
+   runs. EXP3 model binaries are not tracked; regenerate them to an isolated artifact root:
    `python scripts/train_exp3_models.py --model-root <model-root> --data-cache-dir <cache-dir>`.
    The LIME runner validates the regenerated metadata, training metrics, feature order and
    stored target predictions before running:
    `python scripts/run_exp3_lime.py --paper-e --model-root <model-root> --data-cache-dir <cache-dir> --paper-e-output-dir <lime-output-dir>`.
-4. Run the prespecified analyses with
+4. The prespecified analyses are reproducible with
    `python scripts/analyze_paper_e.py --lime-root <lime-output-dir> --output-dir <analysis-output-dir>`
-   and retain reproducible tables, diagnostics and figures.
-5. Literature check: verify each reference against its DOI; the author approves each.
-6. Choose a different venue (no publication fee; English), then draft only after the analysis
-   artifacts pass verification.
+   and produced committed tables, diagnostics and figures on the results branch.
+5. Remaining: verify each literature reference against its DOI with author approval, choose a
+   different venue (no publication fee; English), and draft only after scientific review.
