@@ -1,5 +1,15 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper D impersonal style)
+
+At the author's request, the Scientific Editor reviewed all Paper D prose and
+replaced authorial first person in English and Spanish with study/analysis subjects
+and impersonal constructions. Source: `paper_d_template.tex`; generated manuscript
+and blind/full PDF and Word files rebuilt. Claims, numbers and citations unchanged.
+Claim, sync, EXP4-pin and strict Paper D overlap checks pass. Word text confirms
+the revised English and Spanish wording. Worktree: `../xai-paper-d`, branch
+`paper-d/tecnologia-en-marcha`. Standing Task 3 objective remains unchanged.
+
 ## Session Metadata
 - **Last Updated:** 2026-10-03
 - **Mode (2026-10-03):** HANDOFF - **Paper D task COMPLETE** (manuscript ready for the
