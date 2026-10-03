@@ -108,7 +108,7 @@ hoc; errores de clasificaci\'on; fiabilidad de las explicaciones; SHAP; LIME.
 
 Post-hoc explainers such as SHAP \cite{lundberg2017unified}, LIME \cite{ribeiro2016why},
 Anchors \cite{ribeiro2018anchors} and DiCE \cite{mothilal2020dice} are the usual way to
-inspect the predictions of an opaque classifier \cite{adadi2018xai}. Their quality is
+inspect the predictions of an opaque classifier. Their quality is
 measured with proxies: whether the features an explanation ranks first are those that move
 the prediction \cite{bhatt2020evaluating,samek2017evaluating,hooker2019benchmark}, and
 whether similar inputs receive similar explanations \cite{alvarezmelis2018robustness}.
@@ -121,7 +121,18 @@ disproportionately likely to be wrong. Explanations can raise acceptance of a
 recommendation whether or not it is correct \cite{bansal2021whole}, and they can be
 unreliable in ways their appearance does not reveal \cite{adebayo2018sanity,slack2020fooling}.
 If they are also less faithful or less stable on errors, an explanation can look most
-convincing where it deserves the least trust \cite{rudin2019stop,jacovi2020faithfulness}.
+convincing where it deserves the least trust \cite{rudin2019stop}.
+
+The closest line of work relates explanations to model uncertainty. A recent survey of
+uncertainty-aware XAI finds that the stability of explanations is reported inconsistently
+\cite{lofstrom2026concerning}; uncertainty in inputs and model parameters propagates into
+explanation variance, and not all methods propagate it reliably
+\cite{chiaburu2025uncertainty}; counterfactual explanations are highly sensitive to model
+uncertainty, even when accuracy is high \cite{christodoulou2026impact}; and SHAP can be
+used to explain the uncertainty itself rather than the prediction
+\cite{cheng2026uncertainty}. These studies vary uncertainty; whether the quality of an
+explanation differs between the correct and the wrong predictions of a given model is a
+related but separate question.
 
 We test this with a pre-specified re-analysis of an existing benchmark that explained
 balanced samples of true positives, true negatives, false positives and false negatives
@@ -136,7 +147,7 @@ difference explained by proximity to the decision boundary, where errors tend to
 \subsection{Benchmark and data}
 
 The data are the runs of an existing benchmark on the UCI Adult income data
-\cite{kohavi1996scaling,becker1996adult}, released with its protocol in
+\cite{becker1996adult}, released with its protocol in
 \cite{herrera2026framework}. That study, and a later analysis of the same runs, compare
 explainers by their average quality; the present analysis reports none of their results
 and compares each explainer with itself, between correct and misclassified instances of
@@ -148,11 +159,9 @@ multilayer perceptron, all trained once on the seed-42 partition of the data. Ea
 crossed one model, one explainer, one seed (42, 123, 456, 789 or 999), which fixed the
 partition sampled, and $n = 50$, $100$ or $200$ instances per error quadrant (TP, TN, FP,
 FN), so correct and misclassified instances are about equally represented. Of the
-299 runs, 265 were analysed: Anchors and DiCE
-returned no explanations in 18 and
-7 runs, and
-9 SHAP runs had fewer than ten instances
-in a group. They contain 122,529 explained instances, of which
+299 runs, 265 were analysed (Anchors and DiCE runs
+without explanations, and SHAP runs with fewer than ten instances in a group, were
+excluded). They contain 122,529 explained instances, of which
 70,788 belong to the training data (Section~\ref{sec:sens});
 278 instances without a quadrant were excluded. The external check
 uses the benchmark's German Credit runs \cite{hofmann1994statlog}: random forest and
@@ -236,10 +245,8 @@ higher for LIME, and not significant for SHAP, whose positive mean comes from a 
 random-forest and SVM runs while its median is near zero. The faithfulness gap was lower on
 errors for SHAP and DiCE only. Of the 12 tests, 9 were significant and
 3 practically relevant (SHAP stability, DiCE stability and fidelity); the
-model--seed analysis agreed for 10, the DiCE faithfulness gap losing
-significance. Sparsity differences were significant but within
-0.005 of zero, and only Anchors was slower on errors (median
-3,338 ms more per instance).
+model--seed analysis agreed for 10. Sparsity differences were within
+0.005 of zero; only Anchors was slower on errors.
 
 \begin{table}[ht]
 \centering
@@ -400,21 +407,24 @@ were less stable for every explainer, also outside the training data, and marked
 SHAP and DiCE. Averages hide this, and would hide it further in deployment, where errors
 are rarer than in this balanced sample. The margin control separates two causes. For DiCE
 the deficit is mainly geometric: errors lie near the boundary, where explanations are less
-stable whether or not the prediction is right. For SHAP it remains at equal margin, and
-there its top features also carry less of an erroneous prediction.
+stable whether or not the prediction is right, consistent with the sensitivity of
+counterfactuals to model uncertainty \cite{christodoulou2026impact}. For SHAP it remains at
+equal margin, and there its top features also carry less of an erroneous prediction. A
+small margin is a simple proxy for predictive uncertainty; uncertainty-aware explanations
+\cite{lofstrom2026concerning,chiaburu2025uncertainty} would be a natural way to flag the
+explanations this study finds least reliable.
 
 Three consequences follow for practice: explanation quality should be reported
 separately for correct and misclassified instances; the stability of an explanation used
 to contest or justify a decision should be checked for that instance; and deletion
 metrics with a mean baseline should be reported per predicted class.
 
-The study has limits. It rests on one tabular benchmark, and the external check, with six
-runs per explainer, did not reproduce the SHAP stability deficit. The runs are existing
-ones, so explainer settings were fixed; LIME's stability is near zero here, a scale on
-which the absolute relevance threshold cannot be met. Anchors and DiCE runs are missing
-not at random, which removes units but does not bias within-run contrasts. RQ4 used part of
-the random-forest runs, and the training overlap was handled post hoc. Finally, the
-metrics are proxies; whether users are misled requires a user study.
+Limits: one tabular benchmark, with an external check of six runs per explainer that
+did not reproduce the SHAP stability deficit; fixed explainer settings, under which LIME's
+stability is near zero and the absolute relevance threshold cannot be met; Anchors and DiCE
+runs missing not at random (removing units, not biasing within-run contrasts); part of the
+random-forest runs in RQ4; a post-hoc treatment of the training overlap; and proxy metrics,
+so whether users are misled needs a user study.
 
 \section{Conclusions}
 

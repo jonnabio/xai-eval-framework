@@ -14,7 +14,7 @@
 | S6 RQ4 interaction | ✅ (text) | Described as visible in every margin bin; no interaction model added |
 | S7 threshold scale | ✅ | Limitation sentence |
 | S8 German Credit | ✅ | Reason checked; tree-only cannot explain it; stated that none is known |
-| S9 related work | ❌ **author** | Needs 2–4 references on explanation quality vs model error/uncertainty, chosen and verified by the author |
+| S9 related work | ✅ | Of the author's six suggested references, four were used: Christodoulou & Sun 2026, Chiaburu et al. 2025, Cheng et al. 2026, Löfström et al. 2026. Their records were checked against the publisher or arXiv. Two NLP/LLM papers were left out as off-scope. Cited in a new Introduction paragraph and in the Discussion. Adadi & Berrada, Jacovi & Goldberg and Kohavi were dropped to stay at 12 pages. **Open:** confirm the DOI of the Chiaburu et al. chapter (Springer CCIS, pp. 390–411) |
 | Length 14 → 12 | ✅ | Table 1 → text; sparsity rows and RQ4 fidelity rows removed; prose condensed |
 | Fig. 2 small values / Fig. 3 legend and labels | ✅ | |
 | Dataset DOIs | ✅ | In `note` fields |
