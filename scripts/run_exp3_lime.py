@@ -15,12 +15,19 @@ Results saved to: outputs/analysis/exp3_lime_results.csv
 
 from __future__ import annotations
 
+import argparse
+import hashlib
+import importlib.metadata
+import json
+import platform
 import sys
 import time
 import warnings
 import logging
+from datetime import datetime, timezone
 from itertools import product
 from pathlib import Path
+from typing import Any
 
 import joblib
 import numpy as np
@@ -40,6 +47,9 @@ from src.xai.lime_tabular import LIMETabularWrapper
 # ── Constants ────────────────────────────────────────────────────────────────
 MODEL_ROOT  = PROJECT_ROOT / "experiments/exp3_cross_dataset/models"
 OUTPUT_PATH = PROJECT_ROOT / "outputs/analysis/exp3_lime_results.csv"
+PAPER_E_OUTPUT_ROOT = (
+    PROJECT_ROOT / "outputs/analysis/paper_e/exp3_lime"
+)
 
 DATASETS  = ["breast_cancer", "german_credit"]
 MODELS    = ["rf", "xgb"]
@@ -78,10 +88,11 @@ def fidelity(model, w, inst, baseline):
     return float(pearsonr(mags, drops)[0])
 
 
-def stability(wrapper, model, inst, T, sigma):
+def stability(wrapper, model, inst, T, sigma, rng=None):
     vecs = []
+    noise_rng = rng if rng is not None else np.random
     for _ in range(T):
-        noise = np.random.normal(0, sigma, size=inst.shape)
+        noise = noise_rng.normal(0, sigma, size=inst.shape)
         w = wrapper.explain_instance(model, inst + noise, return_full=False)
         vecs.append(w)
     vecs = np.array(vecs)
@@ -160,7 +171,7 @@ def run_one(dataset, model_name, seed):
     }
 
 
-def main():
+def main_legacy():
     np.random.seed(42)
     records = []
     total = len(DATASETS) * len(MODELS) * len(SEEDS)
@@ -185,6 +196,293 @@ def main():
     ].mean().round(3)
     print(summary.to_string())
     print(f"\nSaved to: {OUTPUT_PATH}")
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _sha256_array(values: np.ndarray) -> str:
+    contiguous = np.ascontiguousarray(values)
+    return hashlib.sha256(contiguous.view(np.uint8)).hexdigest()
+
+
+def target_instance_ids(source_rows: list[dict[str, Any]], test_size: int) -> list[int]:
+    ids = []
+    for row in source_rows:
+        instance_id = row.get("instance_id")
+        if isinstance(instance_id, bool) or not isinstance(instance_id, int):
+            raise ValueError("Every source explanation must have an integer instance_id")
+        if instance_id < 0 or instance_id >= test_size:
+            raise ValueError(
+                f"Source instance_id {instance_id} is outside X_test range [0, {test_size})"
+            )
+        ids.append(instance_id)
+    if len(ids) != len(set(ids)):
+        raise ValueError("Source SHAP explanations contain duplicate instance IDs")
+    return sorted(ids)
+
+
+def validate_source_predictions(
+    source_rows: list[dict[str, Any]],
+    y_test: np.ndarray,
+    predictions: np.ndarray,
+) -> None:
+    rows_by_id = {row["instance_id"]: row for row in source_rows}
+    ids = target_instance_ids(source_rows, len(y_test))
+    for instance_id in ids:
+        row = rows_by_id[instance_id]
+        label = int(y_test[instance_id])
+        prediction = int(predictions[instance_id])
+        if label != row.get("true_label"):
+            raise ValueError(
+                f"True-label mismatch for source instance {instance_id}: "
+                f"stored={row.get('true_label')} current={label}"
+            )
+        if prediction != row.get("prediction"):
+            raise ValueError(
+                f"Prediction mismatch for source instance {instance_id}: "
+                f"stored={row.get('prediction')} current={prediction}"
+            )
+        if bool(label == prediction) != row.get("prediction_correct"):
+            raise ValueError(
+                f"Correctness mismatch for source instance {instance_id}"
+            )
+
+
+def serialize_attributions(
+    weights: list[float] | np.ndarray,
+    feature_names: list[str],
+    top_k: int = NUM_FEATURES,
+) -> dict[str, Any]:
+    values = np.asarray(weights, dtype=float)
+    if values.ndim != 1 or len(values) != len(feature_names):
+        raise ValueError("Attribution vector length must match feature_names")
+    if not np.isfinite(values).all():
+        raise ValueError("Attribution vector contains non-finite values")
+
+    ranked = sorted(
+        zip(feature_names, values.tolist()),
+        key=lambda item: -abs(item[1]),
+    )
+    return {
+        "raw_top": {name: value for name, value in ranked[:top_k]},
+        "raw_attributions": {
+            name: float(value) for name, value in zip(feature_names, values)
+        },
+    }
+
+
+def run_one_paper_e(
+    dataset: str,
+    model_name: str,
+    seed: int,
+    output_root: Path,
+) -> dict[str, Any]:
+    model_dir = MODEL_ROOT / dataset / model_name / f"seed_{seed}"
+    model_path = model_dir / f"{model_name}.joblib"
+    prep_path = model_dir / "preprocessor.joblib"
+    source_path = (
+        PROJECT_ROOT
+        / "experiments/exp3_cross_dataset/results"
+        / dataset
+        / f"{model_name}_shap"
+        / f"seed_{seed}"
+        / "n_100/results.json"
+    )
+    output_path = (
+        output_root / dataset / model_name / f"seed_{seed}" / "results.json"
+    )
+    if output_path.exists():
+        raise FileExistsError(
+            f"Paper E LIME output already exists; refusing to overwrite: {output_path}"
+        )
+    if not source_path.is_file():
+        raise FileNotFoundError(f"Stored SHAP source run is missing: {source_path}")
+
+    source_payload = json.loads(source_path.read_text(encoding="utf-8"))
+    source_rows = source_payload.get("instance_evaluations")
+    if not isinstance(source_rows, list) or not source_rows:
+        raise ValueError(f"Stored SHAP run has no instance rows: {source_path}")
+
+    preprocessor = joblib.load(prep_path)
+    X_tr, X_te, y_tr, y_te, feature_names, _ = load_tabular_dataset(
+        dataset,
+        cache_dir=str(PROJECT_ROOT / "data"),
+        random_state=seed,
+        preprocessor=preprocessor,
+    )
+    X_tr_np = np.asarray(X_tr, dtype=float)
+    X_te_np = np.asarray(X_te, dtype=float)
+    y_te_np = np.asarray(y_te)
+    model = joblib.load(model_path)
+    predictions = np.asarray(model.predict(X_te_np))
+    validate_source_predictions(source_rows, y_te_np, predictions)
+    ids = target_instance_ids(source_rows, len(X_te_np))
+
+    wrapper = LIMETabularWrapper(
+        training_data=X_tr_np,
+        feature_names=feature_names,
+        num_features=NUM_FEATURES,
+        num_samples=NUM_SAMPLES,
+        kernel_width=KERNEL_WIDTH,
+        random_state=seed,
+    )
+    rng = np.random.default_rng(seed)
+    baseline = X_tr_np.mean(axis=0)
+    rows_by_id = {row["instance_id"]: row for row in source_rows}
+    instance_records = []
+    for position, instance_id in enumerate(ids, start=1):
+        instance = X_te_np[instance_id]
+        started = time.perf_counter()
+        weights, _ = wrapper.explain_instance(model, instance, return_full=True)
+        cost_ms = (time.perf_counter() - started) * 1000
+        serialized = serialize_attributions(weights, feature_names)
+        has_attribution = bool(np.any(np.abs(weights) > 1e-4))
+        if has_attribution:
+            fidelity_value = fidelity(model, weights, instance, baseline)
+            stability_value = stability(
+                wrapper, model, instance, T_STABILITY, SIGMA, rng=rng
+            )
+        else:
+            fidelity_value = None
+            stability_value = None
+
+        source = rows_by_id[instance_id]
+        instance_records.append(
+            {
+                "instance_id": instance_id,
+                "true_label": int(y_te_np[instance_id]),
+                "prediction": int(predictions[instance_id]),
+                "prediction_correct": bool(
+                    y_te_np[instance_id] == predictions[instance_id]
+                ),
+                "quadrant": source.get("quadrant"),
+                "explanation_valid": has_attribution,
+                "metrics": {
+                    "fidelity": fidelity_value,
+                    "stability": stability_value,
+                    "sparsity": sparsity(weights),
+                    "cost_ms": cost_ms,
+                },
+                "explanation": serialized,
+            }
+        )
+        if position % 25 == 0 or position == len(ids):
+            print(
+                f"    {dataset}/{model_name}/seed_{seed}: "
+                f"{position}/{len(ids)} instances"
+            )
+
+    output = {
+        "experiment_metadata": {
+            "experiment": "paper_e_exp3_lime",
+            "status": "complete",
+            "dataset": dataset,
+            "model": model_name,
+            "seed": seed,
+            "source_method": "shap",
+            "source_run_path": source_path.relative_to(PROJECT_ROOT).as_posix(),
+            "target_instance_count": len(ids),
+            "target_instance_ids": ids,
+            "lime": {
+                "num_features": NUM_FEATURES,
+                "num_samples": NUM_SAMPLES,
+                "kernel_width": KERNEL_WIDTH,
+                "stability_perturbations": T_STABILITY,
+                "stability_sigma": SIGMA,
+                "random_state": seed,
+            },
+            "model_sha256": _sha256(model_path),
+            "preprocessor_sha256": _sha256(prep_path),
+            "test_features_sha256": _sha256_array(X_te_np),
+            "test_labels_sha256": _sha256_array(y_te_np),
+            "feature_names": list(feature_names),
+            "python": platform.python_version(),
+            "numpy": importlib.metadata.version("numpy"),
+            "pandas": importlib.metadata.version("pandas"),
+            "scipy": importlib.metadata.version("scipy"),
+            "joblib": importlib.metadata.version("joblib"),
+            "scikit_learn": importlib.metadata.version("scikit-learn"),
+            "lime_version": importlib.metadata.version("lime"),
+            "xgboost": importlib.metadata.version("xgboost"),
+            "created_utc": datetime.now(timezone.utc).isoformat(),
+        },
+        "instance_evaluations": instance_records,
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = output_path.with_suffix(".tmp")
+    temporary_path.write_text(
+        json.dumps(output, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
+    temporary_path.replace(output_path)
+    return {
+        "dataset": dataset,
+        "model": model_name,
+        "seed": seed,
+        "status": "complete",
+        "instance_count": len(ids),
+        "valid_explanations": sum(
+            row["explanation_valid"] for row in instance_records
+        ),
+        "output_path": output_path.relative_to(output_root).as_posix(),
+    }
+
+
+def run_paper_e(output_root: Path) -> None:
+    output_root = output_root.resolve()
+    if output_root.exists() and any(output_root.iterdir()):
+        raise FileExistsError(
+            f"Paper E output directory must be empty; refusing to overwrite: {output_root}"
+        )
+    output_root.mkdir(parents=True, exist_ok=True)
+    run_records = []
+    for dataset, model_name, seed in product(DATASETS, MODELS, SEEDS):
+        print(f"[Paper E] {dataset} {model_name} seed={seed}")
+        run_records.append(
+            run_one_paper_e(dataset, model_name, seed, output_root)
+        )
+
+    manifest = {
+        "experiment": "paper_e_exp3_lime",
+        "status": "complete",
+        "source": "stored EXP3 SHAP instance IDs",
+        "runs": run_records,
+    }
+    manifest_path = output_root / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(
+        f"Completed {len(run_records)} instance-aligned LIME runs. "
+        f"Manifest: {manifest_path}"
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--paper-e",
+        action="store_true",
+        help="Run a new, instance-aligned Paper E cohort without replacing legacy output.",
+    )
+    parser.add_argument(
+        "--paper-e-output-dir",
+        type=Path,
+        default=PAPER_E_OUTPUT_ROOT,
+        help="Empty directory for the new Paper E cohort.",
+    )
+    args = parser.parse_args()
+    if args.paper_e:
+        run_paper_e(args.paper_e_output_dir)
+    else:
+        main_legacy()
 
 
 if __name__ == "__main__":
