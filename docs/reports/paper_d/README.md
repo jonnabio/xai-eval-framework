@@ -7,8 +7,11 @@ explanation quality on misclassified instances*
 Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**, by email
 to revistatm@tec.ac.cr. Author target: **12 pages in Word**, including references; English.
 
-**Status (2026-10-03):** analysis plan written and committed before any result was computed
-(`ANALYSIS_PLAN.md`). Manuscript skeleton in place. No results yet.
+**Status (2026-10-03): first render done.** The analysis ran as planned (two deviations,
+logged in `ANALYSIS_PLAN.md` §9). The manuscript, figures, Word file and separate TIFFs are in
+`submission/`: 12 Word pages after iteration 1. Every printed number re-derives through
+the claim registry. What remains before submission is in `IMPROVEMENT_ANALYSIS.md`. Lane: branch
+`paper-d/tecnologia-en-marcha`.
 
 **History:** this folder first held a different Paper D, a case study of the claim registry.
 The author dropped it on 2026-10-03 because it drifted from the XAI research line; it is
@@ -52,31 +55,43 @@ stated in the paper. This is enforced by the claim registry: `paper_d.tex` is un
 
 | Path | What it is |
 |---|---|
-| `ANALYSIS_PLAN.md` | Pre-specified questions, data, statistics, exclusions, overlap guard |
-| `paper_d.tex` | Manuscript skeleton (journal page setup; sections to be written) |
-| `ieee.csl`, `reference_default.docx` | Used by `scripts/pubs/build_paper_d.py` to make the Word file |
+| `ANALYSIS_PLAN.md` | Pre-specified questions, data, statistics, exclusions, overlap guard; §9 deviations |
+| `paper_d_template.tex` | **The manuscript source.** Numbers are placeholders filled from the analysis |
+| `paper_d.tex` | Generated from the template by `render_paper_d.py`. Do not edit |
+| `references.bib` | IEEE references; `NEW` entries await the author's check |
+| `figures/` | fig1–3 as .pdf (LaTeX), .png (Word) and .tiff (upload, 300 ppi) |
+| `submission/` | `paper_d_blind.{pdf,docx}` to send; `paper_d_full.*` with author data; `Figure1-3.tiff` |
+| `IMPROVEMENT_ANALYSIS.md` | Review of the first render and the plan to submission |
+| `ieee.csl`, `reference_default.docx` | Used to make the Word file |
 
-To be created when the analysis runs: `references.bib`, `figures/`, `submission/`,
-`scripts/pubs/paper_d_analysis.py`, `scripts/generate_paper_d_figures.py` and
-`outputs/analysis/paper_d/`.
+Code: `scripts/pubs/paper_d_analysis.py`, `scripts/generate_paper_d_figures.py`,
+`scripts/pubs/render_paper_d.py`, `scripts/pubs/build_paper_d.py`. Results:
+`outputs/analysis/paper_d/` (`superseded_rq4_all_runs.csv` is the RQ4 output before
+deviation 1, kept for the record).
 
-## Build (once the draft exists)
+## Build
 
 ```bash
 python scripts/pubs/paper_d_analysis.py        # results -> outputs/analysis/paper_d/
 python scripts/generate_paper_d_figures.py     # figures (.pdf, .png, .tiff)
+python scripts/pubs/render_paper_d.py          # template -> paper_d.tex + registry block
 python scripts/pubs/build_paper_d.py           # blind/full PDF and Word, figure uploads
 python scripts/pubs/verify_claims.py           # every printed number re-derives
+python scripts/pubs/scan_shared_literals.py --paper-d --strict   # no Paper A/B+C number
 ```
 
-Measure the length in Word itself: the PDF is only a proxy.
+The first two need SciPy, scikit-learn 1.7.1 and XGBoost. On this machine, Windows
+Application Control blocks SciPy's DLL inside the project `.venv`, so the analysis ran in
+a separate virtual environment (Python 3.13). Measure the length in Word itself: the PDF
+is only a proxy.
 
 ## Plan to the deadline
 
 | Date | Step |
 |---|---|
 | 3 Oct | Analysis plan and skeleton (done) |
-| 4–5 Oct | Analysis script and results; register numbers |
+| 3 Oct | Analysis, figures, first render, improvement analysis (done) |
+| 4–5 Oct | Sensitivity checks S1, S5; text fixes; cut to 12 pages |
 | 6–9 Oct | Writing; references (verified, approved by the author) |
 | 10 Oct | Figures; Word build; length check |
 | 11 Oct | Scientific-rigor review; fixes |
