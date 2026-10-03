@@ -85,12 +85,12 @@ Leyenda: [x] cumplido; [ ] pendiente; [?] requiere decisión del autor o del edi
 ## VIII. Formato editorial
 
 - [ ] Plantilla oficial del Congreso CIFIE [E-FMT].
-- [x] Tipografía: Times New Roman 12 pt (indicación del editor, 2026-10-01) [E-FMT].
-- [x] Interlineado 1.5.
+- [ ] **Obligatorio:** todo el capítulo cumple el máximo de 9.000 palabras, sin contar las referencias; el borrador tiene 18.693 palabras tras el primer recorte mecánico. Comprobar el conteo en la versión final construida [E-Q1, E-SIZE].
+- [x] **Obligatorio:** tipografía Times New Roman en el capítulo [indicación del editor, 2026-10-01] [E-FMT].
+- [x] **Obligatorio:** interlineado 1,5 en el capítulo [indicación del editor, 2026-10-01] [E-FMT].
 - [ ] Márgenes (A4; 2.54 cm superior e inferior; 3.17 cm laterales) y estilos [E-FMT].
 - [ ] Jerarquía de títulos de la plantilla [E-FMT].
 - [x] Numeración de tablas y figuras.
-- [ ] Extensión: límite de 9.000 palabras (editor, 2026-10-01); el cuerpo tiene 20.350 palabras. Plan de reducción en `planning/length_plan_9000_2026-10-01.md`; confirmar si las referencias cuentan [E-Q1b, E-SIZE].
 
 ## IX. Revisión final
 

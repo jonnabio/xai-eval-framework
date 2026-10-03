@@ -280,7 +280,7 @@ editorial document that requires it.
 | E-AI | Use the official form's auxiliary-use option (grammar, style, organization of ideas) and sign that analysis, interpretation and conclusions are the author's. | **E-AI-1:** from 2026-09-30, AI support on the chapter is limited to auxiliary tasks: organizing ideas, outlines and evidence maps, source verification, grammar and style editing of author text, registry and build work, formatting, reference checks. New scientific prose is written by the author. **E-AI-2:** before signing, the author reviews and rewrites in his own words the passages drafted with AI assistance (commit history: every section 02-11, including section 04 of 2026-09-29), so the signed declaration describes the text as submitted. |
 | E-PRIOR | No items from Paper B+C in the chapter. Ideas and discussion without direct citation are acceptable. The RIMI prior publication of H1-H2 is declared on the form. | **E-PRIOR-1** (see list below): remove the paired SHAP-LIME contrast and everything derived from it; keep the conceptual quality-cost discussion without Paper B+C results or citation. |
 | E-AUTH | Dr. Herrero-Uceda declined authorship; he is removed from the byline. The chapter has a single author. Citations of the RIMI article keep him as co-author of that article. | **E-AUTH-1:** remove him from `00_hoja_diseno_editorial.md`, the chapter README and the build byline; single-author declaration and licence; no conflict of interest arising from authorship. |
-| E-Q1 (length) | **Answered 2026-10-01:** "9000 palabras, Times New Roman, interlineado 1,5." Body at 20,350 words must fall to about 8,800; see `planning/length_plan_9000_2026-10-01.md` (budget per section, decision per subsection). Open: whether the 9,000 include references (E-Q1b). Times New Roman replaces the template's Cambria in the build and in the didactic figures. | **E-SIZE:** after every big edit, report the chapter size (routine below). |
+| E-Q1 (mandatory length and format) | **Confirmed:** maximum 9,000 body words, excluding references; Times New Roman and 1.5 line spacing (editor, 2026-10-01; reference exclusion confirmed by author 2026-10-03). Current body: 18,693 words after a 402-word mechanical cut; working target 8,800. See `planning/length_plan_9000_2026-10-01.md` for the current per-section reduction budget and final compliance gate. | **E-SIZE:** after every major edit, report body words, changed-section counts, Word page count when rebuilt, and delta. |
 
 **E-PRIOR-1: Paper B+C material to remove** (located 2026-09-30; **done 2026-09-30**, together with E-AUTH-1; Wilcoxon (1945) and Lakens (2013) left the bibliography once uncited; 57 references):
 
@@ -301,7 +301,7 @@ editorial document that requires it.
   Table 2), and the qualitative SHAP-LIME quality-cost discussion based on the
   published block-level results (RIMI) and on the chapter's own section 08 profiles.
 
-**E-SIZE: size routine after every big edit**
+**E-SIZE: mandatory size routine after every big edit**
 
 After every structural unit, section rewrite or bulk edit, the report to the author
 includes: body words (sections 01-11 plus tables, excluding the design sheet, source
@@ -310,12 +310,12 @@ and the change against the previous report. Baseline (2026-09-30, `06267988c`):
 
 | Measure | Value |
 | --- | --- |
-| Sections 01-11 | 19,874 words |
-| Tables 1-4 | 1,029 words |
-| Body (sections + tables) | 20,903 words |
-| Reference list (59 entries) | 2,205 words |
-| Word render | 83 pages |
-| Largest sections | 05 (4,430), 06 (2,400), 07 (2,253), 04 (2,094), 08 (1,995) |
+| Sections 01-11 (table text excluded) | 18,262 words |
+| Tables 1-2 | 431 words |
+| Body (sections + tables; references excluded) | 18,693 words |
+| Reference list | Excluded from the editor's word limit |
+| Word render | Not rebuilt for this source-count snapshot |
+| Largest sections | 07 (3,387), 04 (3,262), 06 (2,257), 03 (2,100), 05 (1,898) |
 
 Size log (append one row per big edit):
 
@@ -328,6 +328,8 @@ Size log (append one row per big edit):
 | 2026-09-30 | E-FMT template format (build only) | 20,424 | 0 | 78 | A4, Cambria 12 pt; page count falls with the wider A4 text block |
 | 2026-09-30 | N-ARC narrative move | 20,350 | -74 | 77 | 02 520; 04 3,223; 05 1,848; 06 2,399; 07 4,589; 08 1,820 (obsolete transition paragraph of former 05 removed) |
 | 2026-10-01 | Length plan step 3 (deletions, tables, figures) | 19,072 | -1,278 | 70 | 03 2,100; 04 3,262; 05 1,875; 06 2,257; 07 3,789; 08 1,760 (includes ten figure captions); tables 431. Limit 9,000 excluding references; 10,292 to cut |
+| 2026-10-03 | Current source baseline (builder assembly; no DOCX rebuild) | 19,095 | +23 | Not rebuilt | 01 224; 02 520; 03 2,100; 04 3,262; 05 1,898; 06 2,257; 07 3,789; 08 1,760; 09 695; 10 1,683; 11 476; tables 431; references excluded |
+| 2026-10-03 | Mechanical removal of four repeated method-family closing paragraphs | 18,693 | -402 | Not rebuilt | Section 07: 3,789 -> 3,387; method-family block: 1,855 -> 1,453; claim verifier passed |
 
 **Track A: decisions and questions (start now, in parallel with drafting)**
 
@@ -356,7 +358,7 @@ Size log (append one row per big edit):
 
 | Order | ID | Item | Depends on |
 | --- | --- | --- | --- |
-| 9 | E-FMT (replaces R7 format targets) **(done 2026-09-30 except the header, which awaits E-Q1)** | Build on the template's format: A4; margins 2.54 cm top and bottom, 3.17 cm left and right; Cambria 12 pt throughout; headings bold at 12 pt, level 1 in uppercase; 1.5 spacing; justified text; header per the editor's answer. Keep from R7: Table 2 widths, keep-with-next for table titles and notes, left-aligned code and table cells, deterministic header parts. Page numbers are optional (the template has none) | E-Q1 |
+| 9 | E-FMT (mandatory editor format; supersedes template typeface) | Build on the template's format: A4; margins 2.54 cm top and bottom, 3.17 cm left and right; Times New Roman throughout (12 pt body, 10 pt data tables under the table layout); headings bold at 12 pt, level 1 in uppercase; 1.5 spacing; justified prose; header pending editor confirmation. Keep: table widths, keep-with-next for table titles and notes, left-aligned table cells, deterministic header parts. Page numbers are optional (the template has none). Verify typeface and spacing in the final Word document. | E-Q1 answered for length and format; header remains open |
 | 10 | E-FORMS | Complete the author checklist, authorship declaration (with E-AI, E-AUTH, E-PRIOR outcomes) and licence; author signatures | Track A |
 | 11 | FINAL-QA | Full Scientific Advisor rigor review, reference audit, rubric self-score, Word render of every page, clean-checkout rebuild; assemble `final/submission_package/` | all |
 
@@ -502,9 +504,10 @@ Verified against Crossref or DataCite on 2026-09-29 unless marked otherwise:
 
 ### R7. Word layout (Medium, M6; Low, L1, L2, L5)
 
-Superseded in part on 2026-09-30 by E-FMT: the page geometry, typeface and heading
-format now follow the TintAzul/CIFIE template (A4, Cambria 12 pt), and page numbers
-are optional. The table, code-block and header-part items below remain.
+Superseded in part on 2026-09-30 by E-FMT and the editor's 2026-10-01 instruction:
+page geometry follows the TintAzul/CIFIE template, but Times New Roman replaces its
+Cambria typeface; 1.5 spacing is mandatory and page numbers are optional. The table,
+code-block and header-part items below remain.
 
 - ~~Set page size and margins explicitly~~ A4 with the template margins (E-FMT).
 - ~~Add decimal page numbers in the footer~~ optional; the template has none.
