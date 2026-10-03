@@ -35,7 +35,7 @@ def main() -> int:
     papers = {
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
         "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_prototype_jmlr.tex",
-        "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_peerjcs.tex",
+        "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
         "paper_c": ROOT / "docs" / "reports" / "paper_c" / "paper_c_prototype_jmlr.tex",
     }
     for paper_id, path in papers.items():
@@ -46,6 +46,11 @@ def main() -> int:
             problems.append(f"Missing abstract include in {path}: {abs_inc}")
         if key_inc not in text:
             problems.append(f"Missing keywords include in {path}: {key_inc}")
+        if paper_id == "paper_bc":
+            for frag in ("resumen_es", "palabras_clave_es"):
+                inc = f"\\input{{../../../pub/fragments/{paper_id}_{frag}.tex}}"
+                if inc not in text:
+                    problems.append(f"Missing Spanish include in {path}: {inc}")
 
     fragments = [
         ROOT / "pub" / "fragments" / "thesis_resumen_es.qmd",
@@ -53,6 +58,7 @@ def main() -> int:
         ROOT / "pub" / "fragments" / "paper_a_abstract_en.tex",
         ROOT / "pub" / "fragments" / "paper_b_abstract_en.tex",
         ROOT / "pub" / "fragments" / "paper_bc_abstract_en.tex",
+        ROOT / "pub" / "fragments" / "paper_bc_resumen_es.tex",
         ROOT / "pub" / "fragments" / "paper_c_abstract_en.tex",
     ]
     for frag in fragments:

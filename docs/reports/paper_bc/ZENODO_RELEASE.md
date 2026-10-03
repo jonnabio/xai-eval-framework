@@ -1,59 +1,98 @@
-# Zenodo release for the PeerJ CS submission
+# Zenodo release: the code and data archive of Paper B+C
+
+> **DONE 2026-10-02.** Version 0.4.0 is published as **`10.5281/zenodo.23111684`**
+> (https://doi.org/10.5281/zenodo.23111684), through Route A. Tag
+> `paper-bc-peerj-submission-2026-10-02` = `main` at `ba6e835f2`; archive 907 MB; open
+> access, MIT licence; name and affiliation correct. The manuscript cites it. The rest of
+> this file is the procedure, kept for the next release.
+>
+> **Venue changed (ADR-0020):** the paper now goes to *Inteligencia Artificial*, which reviews
+> double-blind. The review PDF withholds this DOI; the camera-ready build prints it. Before the
+> camera-ready version, publish a new version (Route A below, with a new tag name) so the
+> archive matches the published paper, and update `\zenodoversiondoi`.
 
 PeerJ requires a DOI archive holding an **exact copy** of the code and data the study used. A
-GitHub link is not enough. The current snapshot `10.5281/zenodo.21538180` (commit `553f65d71`)
-predates EXP4 cohort 2 and EXP6, so it does not qualify. Make a new **version** of the same
-Zenodo record, so the concept DOI keeps every version together.
+GitHub link is not enough. The current Zenodo version predates EXP4 cohort 2 and EXP6, so a
+new **version** of the same record is needed.
 
-Only the author can do this: it publishes under your Zenodo account and cannot be undone.
+Only the author can publish it: it goes out under your Zenodo account and cannot be undone.
 
-## Before you start
+## The record today (checked against the Zenodo API, 2026-10-02)
 
-1. The retarget branch `paper/bc-peerj-cs` is merged and green: `verify_claims.py`,
-   `verify_sync.py`, `verify_exp4_reconstruction.py`, `scan_shared_literals.py --strict`.
-2. Run `python scripts/pubs/verify_claims.py` **from a fresh clone** (RCA-001: cited artifacts
-   must be tracked, not just present on disk).
-3. `.zenodo.json` and `CITATION.cff` are updated (version `0.3.0`, affiliation spelling). Done
-   on this branch.
+| | DOI | Version | Date | How it was made |
+|---|---|---|---|---|
+| Concept (all versions) | `10.5281/zenodo.19297723` | – | – | – |
+| Version 1 | `10.5281/zenodo.19297724` | 0.2.0 | 2026-03-28 | GitHub release `paper-a-submission-2026-03-28` (61 MB) |
+| Version 2 (current) | `10.5281/zenodo.21538180` | 0.3.0 | 2026-07-24 | Manual upload of one zip (888 MB), commit `553f65d71` |
+| **Version 3 (current)** | `10.5281/zenodo.23111684` | **0.4.0** | 2026-10-02 | GitHub release `paper-bc-peerj-submission-2026-10-02` (907 MB) |
 
-## Option A — GitHub release (recommended if the Zenodo–GitHub integration is on)
+- The new version is **0.4.0**. Version 0.3.0 is already taken by the current record.
+- `CITATION.cff` cites the concept DOI. The paper cites the **version** DOI of version 3.
+- A zip of today's `main` is about 905 MB. Zenodo's limit is 50 GB.
 
-1. Check the integration: zenodo.org → your name → **GitHub** → the switch for
-   `jonnabio/xai-eval-framework` is **On**. If it is off, use Option B (switching it on now
-   only archives future releases, which is fine, but check the version link in step 4).
-2. Tag the exact commit that the submitted PDF is built from:
+## What gets archived
+
+Tag `paper-bc-peerj-submission-2026-10-02` on `main`. It holds every tracked file: code,
+configurations, raw run outputs, statistical exports, the review corpus sheet, the EXP4 cohorts
+and the PeerJ manuscript source.
+
+The manuscript inside the archive prints "[ZENODO VERSION DOI PENDING]", because the DOI exists
+only after publishing. That is expected. The DOI is added to the manuscript in the next commit,
+and the archived code and data, which are what PeerJ requires, are exact.
+
+## Route A — GitHub release (try this first)
+
+Claude can do steps 1–2 when you say so. Step 3 happens on Zenodo by itself if the integration
+is on.
+
+1. Tag and push:
    ```
-   git tag -a v0.3.0 -m "Paper B+C PeerJ CS submission snapshot" <commit>
-   git push origin v0.3.0
+   git tag -a paper-bc-peerj-submission-2026-10-02 -m "Paper B+C PeerJ CS submission snapshot (v0.4.0)" origin/main
+   git push origin paper-bc-peerj-submission-2026-10-02
    ```
-3. GitHub → Releases → **Draft a new release** → tag `v0.3.0` → title
-   "Paper B+C PeerJ CS submission snapshot (v0.3.0)" → **Publish**. Zenodo archives the source
-   zip within a few minutes, using `.zenodo.json` for the metadata.
-4. On Zenodo, open the new record. Check that it appears as a **new version** of record 21538180
-   (sidebar "Versions"). If it was created as a separate record, it still works, but tell me and
-   I will cite it directly.
+2. Publish a GitHub release on that tag, titled
+   "Paper B+C PeerJ CS submission snapshot (v0.4.0)".
+3. Zenodo archives it within about 10 minutes, with the metadata in `.zenodo.json`. Check at
+   zenodo.org → your uploads. It should appear as a new version of record 21538180.
 
-## Option B — manual new version (how 21538180 appears to have been made)
+**Check first that the integration is on:** zenodo.org → your name (top right) → **GitHub** →
+the switch beside `jonnabio/xai-eval-framework` is **On**. Version 1 came through this
+integration; version 2 did not, so it may have been switched off since. If it is off, switch
+it on *before* the release is published, or use Route B.
 
-1. zenodo.org → record `21538180` → **New version**.
-2. Delete the old file. Upload `git archive --format=zip -o xai-eval-framework-v0.3.0.zip v0.3.0`
-   (this contains tracked files only, which is exactly what the paper cites).
-3. Also upload `docs/reports/paper_bc/paper_bc_artifacts.zip`, built with
-   `python scripts/pubs/build_artifact_bundle.py` (needs `data/adult.csv`).
-4. Version `0.3.0`. Publication date: today. Leave the metadata as `.zenodo.json`. **Publish.**
+## Route B — manual new version (how version 2 was made)
 
-## After publishing — send me
+1. Claude builds the zip from the tag:
+   ```
+   git archive --format=zip --prefix=xai-eval-framework-0.4.0/ -o xai-eval-framework-0.4.0.zip paper-bc-peerj-submission-2026-10-02
+   ```
+2. zenodo.org → record `21538180` → **New version**.
+3. Remove the old 888 MB file and upload the new zip.
+4. Set **Version** `0.4.0` and **Publication date** today. While editing, correct two fields
+   copied from the old version: the creator name to `Herrera-Vásquez, Jonathan` and the
+   affiliation to `Universidad Americana de Europa` (the old records say "Herrera-Vasquez" and
+   "Americada").
+5. Related identifiers: "is supplement to"
+   `https://github.com/jonnabio/xai-eval-framework/tree/paper-bc-peerj-submission-2026-10-02`.
+6. **Publish.**
 
-- the **version DOI** (e.g. `10.5281/zenodo.2xxxxxxx`) and the **concept DOI** (the "Cite all
-  versions" DOI).
+## After publishing — send Claude
 
-I will then:
-- cite the version DOI in the Data Availability section and the PeerJ form;
-- set `CITATION.cff` `identifiers` to the concept DOI;
-- tag the commit `peerjcs-submission-<id>` once filed.
+- the **version DOI** of version 3 (for example `10.5281/zenodo.2xxxxxxx`).
+
+Claude then:
+- sets `\zenodoversiondoi` in `paper_bc_iberamia.tex` and rebuilds the PDF;
+- records the DOI in `IBERAMIA_SUBMISSION.md` §8;
+- runs the four verifiers and commits.
+
+## Optional, any time: fix the old records' metadata
+
+Versions 1 and 2 show "Herrera-Vasquez" and "Universidad Americada de Europa". Zenodo lets you
+edit a published record's metadata without changing its DOI: open the record → **Edit** → fix
+the creator name and affiliation → **Publish**.
 
 ## Do not
 
-- Do not delete or edit record 21538180. The thesis and RIMI materials cite it.
-- Do not upload `data/adult.csv` separately. It is third-party UCI data; the paper cites its
-  source DOI instead.
+- Do not delete record 21538180 or its file. The thesis and the RIMI materials cite it.
+- Do not upload `data/adult.csv` as a separate item. It is third-party UCI data, already inside
+  the archive as a tracked file, and the paper cites its source DOI.

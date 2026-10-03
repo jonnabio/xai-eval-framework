@@ -1,6 +1,9 @@
 # ADR-0019: Paper B+C Moves to PeerJ Computer Science; Paper Work Returns to the Main Folder
 
-> **Status:** Accepted<br>
+> **Status:** Accepted; decisions 1, 3 and 5 (PeerJ as the venue, its file names, single-blind
+> review) superseded by [ADR-0020](0020-paper-bc-venue-inteligencia-artificial.md) the same
+> day, because PeerJ charges a fee after acceptance. Decisions 7 and 8 (one working folder)
+> stand.<br>
 > **Date:** 2026-10-02<br>
 > **Amends:** [ADR-0013](0013-publication-branching-model.md) (the paper lane's
 > separate working tree)<br>

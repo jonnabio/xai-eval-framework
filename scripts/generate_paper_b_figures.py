@@ -2,7 +2,7 @@
 """
 Generate the Paper B+C figures from paired SHAP-vs-LIME analysis artifacts.
 
-Outputs (default), the files paper_bc_peerjcs.tex includes:
+Outputs (default), the files paper_bc_iberamia.tex includes:
   docs/reports/paper_bc/figures/fig_b1_quality_endpoints.pdf
   docs/reports/paper_bc/figures/fig_b1_quality_endpoints.png
   docs/reports/paper_bc/figures/fig_b2_runtime_heterogeneity.pdf
@@ -77,7 +77,7 @@ def generate_quality_figure(paired_csv: Path, output_dir: Path) -> None:
     ax.set_yticks(y)
     ax.set_yticklabels(labels)
     ax.set_xlabel("Mean paired difference, SHAP $-$ LIME (95% CI)")
-    ax.set_title(f"Paired quality endpoints (n={n_pairs} matched cells)")
+    # No in-image title: journal convention puts titles in the caption (n is stated there).
     ax.grid(axis="x", alpha=0.25)
     ax.set_xlim(-0.05, max(m + h for m, h in zip(means, halves)) + 0.05)
 
@@ -136,7 +136,8 @@ def generate_runtime_figure(paired_csv: Path, output_dir: Path) -> None:
     axes[0].set_xticklabels(["LIME", "SHAP"])
     axes[0].set_yscale("log")
     axes[0].set_ylabel("Cost per explanation (ms, log scale)")
-    axes[0].set_title("Overall Runtime Distribution")
+    # Panel letter instead of a title (titles belong in the caption).
+    axes[0].set_title("A", loc="left", fontweight="bold")
     axes[0].grid(axis="y", alpha=0.25, which="both")
 
     # Panel B: model-level medians
@@ -148,7 +149,7 @@ def generate_runtime_figure(paired_csv: Path, output_dir: Path) -> None:
     axes[1].set_xticklabels(med["model"].str.upper())
     axes[1].set_yscale("log")
     axes[1].set_ylabel("Median cost (ms, log scale)")
-    axes[1].set_title("Runtime Heterogeneity by Model")
+    axes[1].set_title("B", loc="left", fontweight="bold")
     axes[1].grid(axis="y", alpha=0.25, which="both")
     axes[1].legend(loc="upper left")
 

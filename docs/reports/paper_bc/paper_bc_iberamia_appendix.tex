@@ -1,36 +1,13 @@
-%% PeerJ Computer Science: Supplemental Article S1 for paper_bc_peerjcs.tex.
-%% Body carried over verbatim from the TMLR supplement (tag
-%% tmlr-submission-12779); only the preamble and title block differ.
-\documentclass[11pt]{article}
-\usepackage[letterpaper,margin=25mm]{geometry}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{url}
-\usepackage{path}
-\setlength{\emergencystretch}{3em}
+%% Appendix A of paper_bc_iberamia.tex (\input after the references):
+%% the six supplementary tables. Body carried over verbatim from the TMLR
+%% supplement (tag tmlr-submission-12779) through the PeerJ edition.
+\section{Supplementary Tables S1--S6}
+\label{app:supplementary}
+% Tables here are numbered S1-S6, as the main text cites them.
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
 
-\title{Supplemental Article S1\\[4pt]
-\large From Fidelity to Semantics: A Taxonomy of Explainable AI Evaluation
-Metrics and a Paired Empirical Comparison of LIME and SHAP}
-\author{Jonathan Herrera-V\'asquez\\
-\small Department of Computer Science, Universidad Americana de Europa (UNADE),\\
-Canc\'un, Quintana Roo, Mexico}
-\date{}
-
-\begin{document}
-\maketitle
-
-\appendix
-
-\section*{Supplemental Article S1}
-\label{sec:supplementary}
-
-This supplementary document contains six tables referenced from the main
+This appendix contains six tables referenced from the main
 text: (S1) the exact evaluation rubric and prompts used in EXP4; (S2) the
 LIME \texttt{kernel\_width} sensitivity probe results; (S3) pairwise
 feature correlations for the Adult Income dataset; (S4) the
@@ -361,7 +338,7 @@ of the method.
 \noindent\textit{Provenance and scope.} This probe is an earlier exploratory
 measurement whose output artifact is not preserved, unlike the
 \texttt{kernel\_width} probe (Table~S2), which re-derives from
-\texttt{outputs/analysis/lime\_kernel\_width\_sensitivity.csv}. Both tables
+\path{outputs/analysis/lime_kernel_width_sensitivity.csv}. Both tables
 state the same reference condition (RF, seed 42, $N=100$,
 \texttt{num\_samples=1000}, \texttt{kernel\_width=3.0}) but report different
 values for it---fidelity 0.461 against 0.518, stability 0.014 against
@@ -423,5 +400,3 @@ ordering --- it is highest under marginal empirical replacement
 ($+0.625$) and lowest under grouped mean replacement ($+0.494$) --- so the
 attenuation claim is supported by the prediction-drop gap alone and is not
 a general property of every masking-sensitivity endpoint.
-
-\end{document}

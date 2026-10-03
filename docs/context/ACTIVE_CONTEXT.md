@@ -1,15 +1,35 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper D impersonal style)
+
+At the author's request, the Scientific Editor reviewed all Paper D prose and
+replaced authorial first person in English and Spanish with study/analysis subjects
+and impersonal constructions. Source: `paper_d_template.tex`; generated manuscript
+and blind/full PDF and Word files rebuilt. Claims, numbers and citations unchanged.
+Claim, sync, EXP4-pin and strict Paper D overlap checks pass. Word text confirms
+the revised English and Spanish wording. Worktree: `../xai-paper-d`, branch
+`paper-d/tecnologia-en-marcha`. Standing Task 3 objective remains unchanged.
+
 ## Session Metadata
-- **Last Updated:** 2026-10-02
+- **Last Updated:** 2026-10-03
+- **Mode (2026-10-03):** HANDOFF - **Paper D task COMPLETE** (manuscript ready for the
+  author's final read; Tecnología en Marcha, due 2026-10-15). Lane
+  `paper-d/tecnologia-en-marcha`, not merged to `main`. **Active objective returns to
+  Task 3 / RCA-001 Phase 2 on the thesis lane.** See "Session Handoff - 2026-10-03
+  (Paper D first render and iteration 1)".
+- **Mode (2026-10-02, later):** PUBLICATION - **Venue is now *Inteligencia
+  Artificial* (IBERAMIA)**: the author cannot pay PeerJ's fee (ADR-0020). Paper
+  refactored in place to `paper_bc_iberamia.tex` (double-blind, Spanish
+  Resumen, Appendix A). Ready to submit. See the last Session Handoff.
 - **Mode (2026-10-02):** PUBLICATION - **TMLR desk-rejected Paper B+C (12779)
   without review; the paper is retargeted to PeerJ Computer Science.** The TMLR
   artifacts are removed (kept at tag `tmlr-submission-12779`); the PeerJ edition
   (`paper_bc_peerjcs.tex` + Supplemental Article S1) is the only Paper B+C and
-  is merged to `main` and this lane. The separate paper working tree
+  is merged to `main` and this lane. **Zenodo v0.4.0 published:
+  `10.5281/zenodo.23111684`**, cited in the paper. The separate paper working tree
   `xai-paper-bc` and both `paper/bc-*` branches are retired (ADR-0019): all
   Paper B+C material is in `docs/reports/paper_bc/` of the main folder. Not
-  filed: the Zenodo release and the payment decision are pending. See
+  filed: the payment decision is pending. See
   "Session Handoff - 2026-10-02".
 - **Mode (2026-09-30):** PUBLICATION - **Paper B+C filed with TMLR as submission
   12779** (filed version: paper lane `75b93a7f4`). Before filing: abstract names
@@ -1764,7 +1784,9 @@ frozen" or "keep double-blind" is historical.
     point at the PeerJ files. `[papers.paper_bc]` in `pub/claims.toml` holds the
     structured abstract.
   - `verify_claims.py` skips dotted version triples (e.g. 1.7.1).
-  - `.zenodo.json` / `CITATION.cff` set to v0.3.0; affiliation spelling fixed.
+  - `.zenodo.json` / `CITATION.cff` set to v0.4.0 (record 21538180 already uses
+    0.3.0); `CITATION.cff` cites the concept DOI `10.5281/zenodo.19297723`;
+    affiliation spelling fixed.
 - **Current State**
   - This lane is merged with `main`. Verification: 321 claims / 485 sites / 46
     retired-value guards; sync green; 18 EXP4 pins green; shared literals 0
@@ -1782,19 +1804,136 @@ frozen" or "keep double-blind" is historical.
   - Future Paper B+C edits: a short-lived `paper/bc-<topic>` branch in the main
     folder, merged through `main` (ADR-0019). Close Word first.
 - **Next Steps**
-  1. Author: publish the Zenodo v0.3.0 release (`ZENODO_RELEASE.md`) and send
-     the version DOI and concept DOI; then set `\zenodoversiondoi` and
+  1. [x] **Done 2026-10-02.** Zenodo v0.4.0 published as `10.5281/zenodo.23111684`
+     (GitHub release `paper-bc-peerj-submission-2026-10-02`, `main` at
+     `ba6e835f2`) and cited in the manuscript. Originally: publish the release; then set `\zenodoversiondoi` and
      `CITATION.cff`. The PDF prints "[ZENODO VERSION DOI PENDING]" until then.
   2. Author: decide payment (D3). PeerJ charges after acceptance: APC about
      US$2,155, or one Lifetime Membership from about US$755. Not waivable for
      Mexico. This blocks filing, not preparation.
-  3. Author: confirm no reference entry was first proposed by AI (PeerJ
-     prohibits AI-generated reference lists).
-  4. Export separate figure files (`Figure1.pdf`...) and table files for upload;
-     run the submission gate in `PEERJ_SUBMISSION.md`; the author files.
+  3. [x] **Confirmed by the author 2026-10-02:** no reference was first
+     suggested by AI.
+  4. [x] **Done 2026-10-02:** `scripts/pubs/export_peerj_upload.py` writes the
+     separate figure and table files to `docs/reports/paper_bc/peerj_upload/`;
+     in-image titles removed from Figures 1-2. Upload set: `PEERJ_SUBMISSION.md`
+     §11. Remaining: the payment decision (item 2), then the author files.
   5. Optional: arXiv preprint (approved by the author).
   6. Then resume Task 3 / RCA-001 Phase 2 on this lane.
 - **Notes**
   - Never invent hardware specifications: none were recorded for any run.
   - Git Bash heredocs on this machine collapse doubled backslashes; edit LaTeX
     and TOML with the Edit tool or a script file, never an inline heredoc.
+
+## Session Handoff - 2026-10-02 (venue: Inteligencia Artificial, IBERAMIA)
+
+**The author cannot pay publication fees, so PeerJ was dropped before filing
+(ADR-0020). Paper B+C now targets *Inteligencia Artificial* (IBERAMIA): no
+fees, Scopus/ESCI/DOAJ, double-blind, no page limit for research articles
+(4 MB PDF limit).** Supersedes the PeerJ items in the handoff above.
+
+- **Completed (refactor, same folder `docs/reports/paper_bc/`)**
+  - `paper_bc_peerjcs.tex` -> `paper_bc_iberamia.tex` on the journal's
+    `iberamia.sty` (unmodified; `logo.png` added); PeerJ supplement ->
+    `paper_bc_iberamia_appendix.tex`, Appendix A (Tables S1-S6) of the one PDF;
+    `PEERJ_SUBMISSION.md` -> `IBERAMIA_SUBMISSION.md` (rewritten). Removed
+    `wlpeerj.cls`, `peerj_upload/`, `scripts/pubs/export_peerj_upload.py`.
+  - Double-blind build via `\camerareadyfalse`: author block, GitHub URL and
+    Zenodo DOI withheld; identity scan of the PDF clean apart from the
+    third-person RIMI citation.
+  - Spanish Resumen and Palabras clave added (`abstract_es_tex`,
+    `keywords_es_tex` in `pub/claims.toml`; new fragments); abstract
+    unstructured again; numbered citations.
+  - Registry, coverage, guards, verify_sync (now checks the Spanish includes),
+    scan_shared_literals, bundle script and Makefile point at the new files.
+  - ADR-0020 written; ADR-0019 marked partly superseded; BUILD.md, the TMLR
+    record, ZENODO_RELEASE.md and the manuscript-editing skill updated.
+- **Current State**
+  - `paper_bc_iberamia.pdf`: 32 pp A4, 0.36 MB, 0 undefined references.
+    Verification: 321 claims / 487 sites; sync; 18 EXP4 pins; shared literals
+    0 unexplained / 55 known.
+- **Next Steps**
+  1. Author: fill in the suggested reviewers' emails and check conflicts
+     (`IBERAMIA_SUBMISSION.md` §4), review the Spanish Resumen, then submit
+     the PDF at journal.iberamia.org.
+  2. Do not post the arXiv preprint until after review (double-blind).
+  3. At acceptance: `\camerareadytrue`, journal counters, a new Zenodo
+     version, update `\zenodoversiondoi`.
+  4. Then resume Task 3 / RCA-001 Phase 2.
+
+## Session Handoff - 2026-10-03 (Paper D refocused; Paper E documented)
+
+**Paper D is now "Are explanations less reliable when the model is wrong?"** for
+*Tecnologia en Marcha*'s AI special issue (deadline 2026-10-15; Word, 5-15 pp, IEEE,
+English with Spanish abstract, double-blind, no fees; author target 12 Word pages).
+The first Paper D (claim-registry case study) was dropped by the author as off the XAI
+line; it is preserved at tag `paper-d-registry-draft-2026-10-03`, and its registry claims,
+data, figures and scripts were removed. Paper C was checked and is NOT usable (its taxonomy
+is inside Paper B+C, under review).
+
+- **Paper D (`docs/reports/paper_d/`):** `ANALYSIS_PLAN.md` written and committed BEFORE
+  any result (RQ1 correct vs misclassified per explainer; RQ2 model family; RQ3 FP vs FN;
+  RQ4 decision-margin control; German Credit external check; run as unit; Wilcoxon + Holm;
+  overlap guard). `paper_d.tex` is a skeleton on the journal page. The Word build pipeline
+  (`scripts/pubs/build_paper_d.py`) is kept. Data: 299 EXP2 runs, about 123k instance
+  explanations, quadrant-balanced; stored models allow the margin control.
+- **Paper E (`docs/reports/paper_e/README.md`):** "Do explainers agree on which features
+  matter?", documented as an idea only; development after Paper D, at a different journal,
+  with a new EXP3 LIME run saving per-instance attributions.
+- **Next:** `scripts/pubs/paper_d_analysis.py` per the plan; register numbers; write; figures;
+  rigor review; author items (ORCID, profession, Spanish, reference approval); submit about
+  2026-10-13.
+
+## Session Handoff - 2026-10-03 (Paper D first render and iteration 1)
+
+**Paper D task complete. Active objective: Task 3 / RCA-001 Phase 2 (thesis lane).**
+All existing Active Constraints and overarching goals stand unchanged.
+
+### Completed
+- **Analysis** (`scripts/pubs/paper_d_analysis.py` -> `outputs/analysis/paper_d/`) per
+  `docs/reports/paper_d/ANALYSIS_PLAN.md`; four deviations logged in its §9:
+  1. RQ4 restricted to runs whose predictions the stored model reproduces;
+  2. RQ4 implementation details;
+  3. post-hoc training-overlap sensitivity;
+  4. post-hoc RQ3 mechanism check.
+- **Findings:**
+  - Stability is lower on misclassified instances for all four explainers, and the result
+    holds on held-out instances.
+  - Deficits are large for SHAP (−0.076, d_z −1.36) and DiCE (−0.210).
+  - The DiCE deficit is mostly a decision-margin effect; the SHAP deficit is not.
+  - The margin-adjusted SHAP faithfulness-gap deficit holds out of training data.
+  - The faithfulness gap follows the predicted class.
+- **Manuscript:**
+  - Edit `paper_d_template.tex`; `paper_d.tex` is generated by
+    `scripts/pubs/render_paper_d.py`, which also writes the registry block (158 Paper D claims).
+  - Build: `build_paper_d.py` produces blind/full PDF, Word and TIFF figures in `submission/`.
+  - **12 Word pages**; abstract 228 words, resumen 239.
+  - Formal dataset framing: UCI Adult Income (primary), Statlog German Credit (external
+    validation).
+  - Four author-supplied references on uncertainty-aware XAI added; Chiaburu et al.
+    confirmed: CCIS 2580, 2026.
+  - ORCID added (full version).
+  - AI-use declaration after the references, per the journal policy; Acknowledgments removed.
+- **Tooling:**
+  - `verify_claims.py`: exceptions can be scoped to one file.
+  - `scan_shared_literals.py --paper-d`: 0 unexplained matches.
+  - All verifiers green.
+
+### Pending (author, before 2026-10-13 submission)
+- Profession placeholder.
+- Spanish read and "brecha de borrado".
+- Check of the `NEW` references (Kruskal–Wallis, Cameron–Miller, Platt).
+- Open and re-save the .docx in Word.
+- Send to revistatm@tec.ac.cr.
+
+### Blockers/Issues
+- **RF provenance (affects Papers A and B+C):**
+  - The stored `rf.joblib` reproduces only 75–82% of the predictions recorded by the
+    Jan–Feb 2026 random-forest runs. The model those runs used is not in the repository.
+  - Needs an RCA entry; not yet written.
+- **Environment:** the project `.venv` cannot load SciPy (Windows Application Control), so
+  the Paper D analysis ran in a separate venv.
+
+### Next
+- Resume Task 3 / RCA-001 Phase 2 on the thesis lane.
+- Paper E stays documented-only until after Paper D is submitted.
+- IBERAMIA submission ID for Paper B+C to be recorded when the author sends it.
