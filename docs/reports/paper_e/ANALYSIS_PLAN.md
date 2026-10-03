@@ -142,6 +142,13 @@ Use seed-clustered resampling for intervals and keep Adult and EXP3 summaries
 separate. There are only five EXP2 seeds and three EXP3 seeds; intervals and
 moderator analyses must be interpreted accordingly.
 
+For reproducibility, confidence intervals use 2,000 percentile bootstrap
+resamples with RNG seed `20261003`. Resample seed IDs with replacement within
+each reporting group, carrying all eligible run-level summaries for each
+sampled seed into that replicate. Point estimates are means of eligible
+run-level means; report medians as descriptive summaries. If fewer than two
+seed units contribute, report the interval as not estimable.
+
 - **RQ1:** report the distribution and seed-clustered 95% confidence interval
   for top-5 Jaccard, Kendall `tau-b` and sign agreement, with counts/coverage.
   These are agreement estimates, not tests against an arbitrary universal
@@ -218,7 +225,10 @@ exclusivity before building the manuscript.
   existing EXP3 aggregate output.
 - A deterministic analysis script reading the raw EXP2/EXP3 run JSON and the
   new LIME cohort; it writes tables, diagnostic counts and figure-source CSVs
-  under `outputs/analysis/paper_e/`.
+  under `outputs/analysis/paper_e/analysis/`.
+- Outputs include run/group agreement summaries, per-run correctness
+  contrasts, seed-level quality associations, explicit row/pairing exclusions,
+  and three figures.
 - Run inventory and matched-ID audit for every method comparison.
 - Tables: agreement by dataset/model/intensity; correct-versus-misclassified
   contrasts; exploratory agreement-quality associations.
@@ -236,3 +246,15 @@ inspection showed `raw_top` is capped at ten features, so an Anchors rule with
 ten active entries may be truncated; those rows are excluded from full
 feature-set comparisons. The correctness-contrast minimum is set at ten
 matched instances per group, consistent with the Paper D analysis plan.
+
+**2026-10-03 (execution clarification; before agreement analysis).** EXP3
+`.joblib` model and preprocessor binaries are not tracked in the checkout.
+Regenerate them in an isolated artifact directory using the checked-in
+`train_exp3_models.py` recipe and frozen dependencies. Before generating LIME,
+require the regenerated model metadata/configuration, feature order, training
+dimensions and metrics to match the committed EXP3 records, and require exact
+stored labels and predictions for every target SHAP instance ID. Abort on any
+mismatch. Record the regenerated model/preprocessor hashes and source training
+summary hash in each run. This validates the reproducible training pipeline
+against the stored evidence; it does not claim byte identity with the absent
+original binary artifacts.

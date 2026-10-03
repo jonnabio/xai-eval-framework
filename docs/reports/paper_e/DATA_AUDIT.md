@@ -79,9 +79,36 @@ These checks support the plan's primary SHAP–LIME comparison and its restricte
 descriptive feature-set comparison for Anchors/DiCE. They do not establish any
 agreement result.
 
+The analysis preflight additionally checked absolute-magnitude ordering in all
+161 existing EXP2/EXP3 SHAP and LIME source runs; no ordering violations were
+found. This is schema QC, not an agreement statistic.
+
+## EXP3 model-reproduction preflight
+
+The EXP3 `.joblib` model and preprocessor files are absent from the checkout
+because binary model artifacts are ignored. Before running the new LIME cohort,
+all 12 dataset/model/seed configurations were regenerated in isolated
+temporary storage with the checked-in training recipe. Each reproduction
+matched the committed model configuration and feature order, training/test
+dimensions, and every stored training metric (absolute tolerance `1e-12` for
+numeric metrics). The regenerated models also matched the stored true labels
+and predictions for every source SHAP instance ID: 114 IDs in each Breast
+Cancer block, 173–182 IDs per German Credit block.
+
+This is a validated reconstruction from the tracked recipe, not a byte-hash
+comparison with the unavailable original binaries. The Paper E runner repeats
+the metadata, training-summary, feature-order and target-prediction checks
+before explaining an instance, and records the regenerated model and
+preprocessor hashes plus the committed training-summary hash in every run.
+The source SHAP metadata does not record training-library versions, so the
+reconstruction must be described as recipe-validated rather than original
+binary identity.
+
 ## Audit limits
 
 This audit does not recompute model predictions, verify the training-data or
 model hashes, calculate explanation agreement, or establish a literature-based
 threshold for practically meaningful agreement. Those checks remain part of
-the experiment and analysis implementation.
+the reproducible experiment and analysis implementation; the model-reproduction
+preflight above is a separate execution check, not part of this structural
+audit.

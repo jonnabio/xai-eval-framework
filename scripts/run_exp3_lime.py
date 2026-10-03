@@ -20,7 +20,9 @@ import hashlib
 import importlib.metadata
 import json
 import platform
+import shutil
 import sys
+import tempfile
 import time
 import warnings
 import logging
@@ -46,6 +48,7 @@ from src.xai.lime_tabular import LIMETabularWrapper
 
 # ── Constants ────────────────────────────────────────────────────────────────
 MODEL_ROOT  = PROJECT_ROOT / "experiments/exp3_cross_dataset/models"
+SOURCE_MODEL_ROOT = MODEL_ROOT
 OUTPUT_PATH = PROJECT_ROOT / "outputs/analysis/exp3_lime_results.csv"
 PAPER_E_OUTPUT_ROOT = (
     PROJECT_ROOT / "outputs/analysis/paper_e/exp3_lime"
@@ -254,6 +257,47 @@ def validate_source_predictions(
             )
 
 
+def validate_training_reproduction(
+    actual_summary: dict[str, Any],
+    source_summary: dict[str, Any],
+) -> None:
+    for key in ("dataset", "model", "seed", "n_train", "n_test", "n_features"):
+        if actual_summary.get(key) != source_summary.get(key):
+            raise ValueError(
+                f"Reproduced training summary mismatch for {key}: "
+                f"stored={source_summary.get(key)!r} "
+                f"reproduced={actual_summary.get(key)!r}"
+            )
+
+    actual_metrics = actual_summary.get("metrics")
+    source_metrics = source_summary.get("metrics")
+    if not isinstance(actual_metrics, dict) or not isinstance(source_metrics, dict):
+        raise ValueError("Training summaries must contain metric objects")
+    if actual_metrics.keys() != source_metrics.keys():
+        raise ValueError("Reproduced training summary metric names differ")
+
+    for metric, expected in source_metrics.items():
+        observed = actual_metrics[metric]
+        if isinstance(expected, list):
+            if observed != expected:
+                raise ValueError(
+                    f"Reproduced training metric mismatch for {metric}"
+                )
+        elif (
+            isinstance(expected, (int, float))
+            and isinstance(observed, (int, float))
+        ):
+            if not np.isclose(observed, expected, rtol=0, atol=1e-12):
+                raise ValueError(
+                    f"Reproduced training metric mismatch for {metric}: "
+                    f"stored={expected!r} reproduced={observed!r}"
+                )
+        elif observed != expected:
+            raise ValueError(
+                f"Reproduced training metric mismatch for {metric}"
+            )
+
+
 def serialize_attributions(
     weights: list[float] | np.ndarray,
     feature_names: list[str],
@@ -282,8 +326,10 @@ def run_one_paper_e(
     model_name: str,
     seed: int,
     output_root: Path,
+    model_root: Path = MODEL_ROOT,
+    cache_dir: Path = PROJECT_ROOT / "data",
 ) -> dict[str, Any]:
-    model_dir = MODEL_ROOT / dataset / model_name / f"seed_{seed}"
+    model_dir = model_root / dataset / model_name / f"seed_{seed}"
     model_path = model_dir / f"{model_name}.joblib"
     prep_path = model_dir / "preprocessor.joblib"
     source_path = (
@@ -293,6 +339,9 @@ def run_one_paper_e(
         / f"{model_name}_shap"
         / f"seed_{seed}"
         / "n_100/results.json"
+    )
+    source_model_dir = (
+        SOURCE_MODEL_ROOT / dataset / model_name / f"seed_{seed}"
     )
     output_path = (
         output_root / dataset / model_name / f"seed_{seed}" / "results.json"
@@ -309,15 +358,51 @@ def run_one_paper_e(
     if not isinstance(source_rows, list) or not source_rows:
         raise ValueError(f"Stored SHAP run has no instance rows: {source_path}")
 
+    metadata_path = source_model_dir / "metadata.json"
+    reproduced_metadata_path = model_dir / "metadata.json"
+    source_summary_path = source_model_dir / "exp3_training_summary.json"
+    reproduced_summary_path = model_dir / "exp3_training_summary.json"
+    for required_path in (
+        metadata_path,
+        reproduced_metadata_path,
+        source_summary_path,
+        reproduced_summary_path,
+    ):
+        if not required_path.is_file():
+            raise FileNotFoundError(
+                f"Required EXP3 model provenance file is missing: {required_path}"
+            )
+    expected_metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    reproduced_metadata = json.loads(
+        reproduced_metadata_path.read_text(encoding="utf-8")
+    )
+    for key in ("model_class", "config", "feature_names"):
+        if reproduced_metadata.get(key) != expected_metadata.get(key):
+            raise ValueError(
+                f"Reproduced model metadata mismatch for {key}: "
+                f"{dataset}/{model_name}/seed_{seed}"
+            )
+    source_summary = json.loads(source_summary_path.read_text(encoding="utf-8"))
+    reproduced_summary = json.loads(
+        reproduced_summary_path.read_text(encoding="utf-8")
+    )
+    validate_training_reproduction(reproduced_summary, source_summary)
+
     preprocessor = joblib.load(prep_path)
     X_tr, X_te, y_tr, y_te, feature_names, _ = load_tabular_dataset(
         dataset,
-        cache_dir=str(PROJECT_ROOT / "data"),
+        cache_dir=str(cache_dir),
         random_state=seed,
         preprocessor=preprocessor,
     )
+    if feature_names != expected_metadata.get("feature_names"):
+        raise ValueError(
+            f"Reproduced feature order differs from stored EXP3 metadata: "
+            f"{dataset}/{model_name}/seed_{seed}"
+        )
     X_tr_np = np.asarray(X_tr, dtype=float)
     X_te_np = np.asarray(X_te, dtype=float)
+    y_tr_np = np.asarray(y_tr)
     y_te_np = np.asarray(y_te)
     model = joblib.load(model_path)
     predictions = np.asarray(model.predict(X_te_np))
@@ -378,6 +463,17 @@ def run_one_paper_e(
                 f"{position}/{len(ids)} instances"
             )
 
+    cached_dataset_path = (
+        cache_dir / "openml/dataset_31_credit-g.arff"
+        if dataset == "german_credit"
+        else None
+    )
+    if cached_dataset_path is not None and not cached_dataset_path.is_file():
+        raise FileNotFoundError(
+            f"German Credit dataset cache is missing after loading: "
+            f"{cached_dataset_path}"
+        )
+
     output = {
         "experiment_metadata": {
             "experiment": "paper_e_exp3_lime",
@@ -399,6 +495,31 @@ def run_one_paper_e(
             },
             "model_sha256": _sha256(model_path),
             "preprocessor_sha256": _sha256(prep_path),
+            "training_model_class": expected_metadata.get("model_class"),
+            "training_script_sha256": _sha256(
+                PROJECT_ROOT / "scripts/train_exp3_models.py"
+            ),
+            "lime_script_sha256": _sha256(Path(__file__).resolve()),
+            "data_loader_sha256": _sha256(
+                PROJECT_ROOT / "src/data_loading/cross_dataset.py"
+            ),
+            "source_training_summary_path": (
+                source_summary_path.relative_to(PROJECT_ROOT).as_posix()
+            ),
+            "source_training_summary_sha256": _sha256(source_summary_path),
+            "training_config": expected_metadata.get("config"),
+            "dataset_source": (
+                "sklearn.datasets.load_breast_cancer"
+                if dataset == "breast_cancer"
+                else "https://www.openml.org/data/download/31/dataset_31_credit-g.arff"
+            ),
+            "dataset_cache_sha256": (
+                _sha256(cached_dataset_path)
+                if cached_dataset_path is not None
+                else None
+            ),
+            "train_features_sha256": _sha256_array(X_tr_np),
+            "train_labels_sha256": _sha256_array(y_tr_np),
             "test_features_sha256": _sha256_array(X_te_np),
             "test_labels_sha256": _sha256_array(y_te_np),
             "feature_names": list(feature_names),
@@ -434,35 +555,56 @@ def run_one_paper_e(
     }
 
 
-def run_paper_e(output_root: Path) -> None:
+def run_paper_e(
+    output_root: Path,
+    model_root: Path = MODEL_ROOT,
+    cache_dir: Path = PROJECT_ROOT / "data",
+) -> None:
     output_root = output_root.resolve()
-    if output_root.exists() and any(output_root.iterdir()):
+    if output_root.exists():
         raise FileExistsError(
-            f"Paper E output directory must be empty; refusing to overwrite: {output_root}"
+            f"Paper E output directory already exists; refusing to overwrite: {output_root}"
         )
-    output_root.mkdir(parents=True, exist_ok=True)
-    run_records = []
-    for dataset, model_name, seed in product(DATASETS, MODELS, SEEDS):
-        print(f"[Paper E] {dataset} {model_name} seed={seed}")
-        run_records.append(
-            run_one_paper_e(dataset, model_name, seed, output_root)
+    output_root.parent.mkdir(parents=True, exist_ok=True)
+    staging_root = Path(
+        tempfile.mkdtemp(
+            prefix=f".{output_root.name}.",
+            dir=output_root.parent,
         )
+    )
+    try:
+        run_records = []
+        for dataset, model_name, seed in product(DATASETS, MODELS, SEEDS):
+            print(f"[Paper E] {dataset} {model_name} seed={seed}")
+            run_records.append(
+                run_one_paper_e(
+                    dataset,
+                    model_name,
+                    seed,
+                    staging_root,
+                    model_root=model_root,
+                    cache_dir=cache_dir,
+                )
+            )
 
-    manifest = {
-        "experiment": "paper_e_exp3_lime",
-        "status": "complete",
-        "source": "stored EXP3 SHAP instance IDs",
-        "runs": run_records,
-    }
-    manifest_path = output_root / "manifest.json"
-    manifest_path.write_text(
-        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    print(
-        f"Completed {len(run_records)} instance-aligned LIME runs. "
-        f"Manifest: {manifest_path}"
-    )
+        manifest = {
+            "experiment": "paper_e_exp3_lime",
+            "status": "complete",
+            "source": "stored EXP3 SHAP instance IDs",
+            "runs": run_records,
+        }
+        (staging_root / "manifest.json").write_text(
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        staging_root.replace(output_root)
+        print(
+            f"Completed {len(run_records)} instance-aligned LIME runs. "
+            f"Manifest: {output_root / 'manifest.json'}"
+        )
+    finally:
+        if staging_root.exists():
+            shutil.rmtree(staging_root)
 
 
 def main() -> None:
@@ -478,9 +620,25 @@ def main() -> None:
         default=PAPER_E_OUTPUT_ROOT,
         help="Empty directory for the new Paper E cohort.",
     )
+    parser.add_argument(
+        "--model-root",
+        type=Path,
+        default=MODEL_ROOT,
+        help="Directory containing the EXP3 model and preprocessor artifacts.",
+    )
+    parser.add_argument(
+        "--data-cache-dir",
+        type=Path,
+        default=PROJECT_ROOT / "data",
+        help="Directory used for local dataset caches.",
+    )
     args = parser.parse_args()
     if args.paper_e:
-        run_paper_e(args.paper_e_output_dir)
+        run_paper_e(
+            args.paper_e_output_dir,
+            model_root=args.model_root,
+            cache_dir=args.data_cache_dir,
+        )
     else:
         main_legacy()
 
