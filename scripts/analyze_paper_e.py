@@ -1141,6 +1141,11 @@ def _write_report(
             f"{row['n_runs']} | {row['n_seeds']} |"
         )
     mismatch_count = sum(row["classification_mismatches"] for row in diagnostics)
+    exact_id_blocks = sum(bool(row["same_id_sets"]) for row in diagnostics)
+    unpaired_valid_ids = sum(
+        (row.get("left_only_ids") or 0) + (row.get("right_only_ids") or 0)
+        for row in diagnostics
+    )
     lines.extend(
         [
             "",
@@ -1149,7 +1154,12 @@ def _write_report(
             f"- Usable paired instance records: {len(instances)} (repeated across",
             "  runs, models, and EXP2 intensities; not an independent sample size).",
             f"- Pairing blocks audited: {len(diagnostics)}.",
-            f"- Classification mismatches across paired IDs: {mismatch_count}.",
+            f"- Primary SHAP-LIME blocks with exact valid-ID sets: "
+            f"{exact_id_blocks}/{len(diagnostics)}; unpaired valid method-IDs: "
+            f"{unpaired_valid_ids}. Only matched IDs enter the primary analysis.",
+            f"- Classification mismatches in primary SHAP-LIME pairs: {mismatch_count}.",
+            "- Secondary method-pair classification mismatches are excluded and",
+            "  enumerated in `secondary_pairing_diagnostics.csv`.",
             f"- Seed-cluster bootstrap: {BOOTSTRAP_REPS} resamples; seed {BOOTSTRAP_SEED};",
             "  percentile intervals over run-level means.",
             "- Adult results reuse the EXP2 benchmark cohort used in Papers A and B+C.",

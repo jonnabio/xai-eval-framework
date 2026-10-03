@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -7,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from scripts.analyze_paper_e import (
     _bootstrap_interval,
     _quality_summaries,
+    _write_report,
     jaccard,
     kendall_top10,
     primary_agreement,
@@ -106,6 +108,39 @@ class PaperEAgreementMetricTests(unittest.TestCase):
         self.assertEqual(seed_42["mean_run_spearman_rho"], 0.2)
         self.assertEqual(summary[0]["mean_seed_spearman_rho"], 0.35)
         self.assertEqual(summary[0]["n_seed_units"], 2)
+
+    def test_report_scopes_pairing_and_mismatch_qc(self) -> None:
+        diagnostics = [
+            {
+                "same_id_sets": True,
+                "left_only_ids": 0,
+                "right_only_ids": 0,
+                "classification_mismatches": 0,
+            },
+            {
+                "same_id_sets": False,
+                "left_only_ids": 3,
+                "right_only_ids": 4,
+                "classification_mismatches": 0,
+            },
+        ]
+        with TemporaryDirectory() as temp_dir:
+            _write_report(Path(temp_dir), [], diagnostics, [])
+            report = (Path(temp_dir) / "RESULTS.md").read_text(encoding="utf-8")
+
+        self.assertIn(
+            "Primary SHAP-LIME blocks with exact valid-ID sets: "
+            "1/2; unpaired valid method-IDs: 7.",
+            report,
+        )
+        self.assertIn(
+            "Classification mismatches in primary SHAP-LIME pairs: 0.",
+            report,
+        )
+        self.assertIn(
+            "Secondary method-pair classification mismatches are excluded and",
+            report,
+        )
 
 
 if __name__ == "__main__":
