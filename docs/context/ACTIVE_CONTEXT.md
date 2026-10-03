@@ -1,5 +1,44 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (repository consolidation)
+
+`main` was rebuilt from `origin/main` so that it holds every lane's work and no
+merge-and-revert pair. This entry supersedes the "Branch state" paragraph of the
+Paper E handoff below, the line "Paper E stays documented-only until after Paper D
+is submitted", and "Lane `paper-d/tecnologia-en-marcha`, not merged to `main`" in
+Session Metadata.
+
+- **Why:** local `main` held a merge of the first Paper E branch (which also carried
+  Paper D) followed by its revert. With that history, a later merge of Paper D into
+  `main` would have brought no files.
+- **What `main` now contains, in order:** the clean Paper E tooling
+  (`paper/e-feature-agreement-clean`), the Paper E results and handoff, Paper D
+  (`paper-d/tecnologia-en-marcha` plus the main-checkout record), three chapter
+  commits from `chapter/cifie-sync-2026-09`, and the Paper F documents
+  (`paper/f-external-validity`). Before the Paper D merge its files were identical to
+  the previous local `main`.
+- **Nothing was discarded.** Every branch tip from before the rebuild is on origin
+  under `backup/2026-10-03/*`. The first Paper E branch is kept as tag
+  `archive/paper-e-feature-agreement-2026-10-03`; a file comparison showed it holds
+  no file that `main` lacks.
+- **Paper F ("External validity of XAI benchmark conclusions"), initiated at the
+  author's direction.** It treats the benchmark as the instrument and cross-dataset
+  generalizability as the object of study: 48 conditions (4 datasets × 3 model
+  families × 4 explainers). `docs/reports/paper_f/` holds `README.md` (charter and
+  pipeline), `ANALYSIS_PLAN.md` (H1 dataset main effect, H2 explainer × dataset
+  interaction, H3 rank generalizability, H4 quality-cost Pareto stability) and
+  `METHODOLOGICAL_ANALYSIS.md`. Documents only: no dataset is fixed and no experiment
+  has been run.
+- **Paper status:** D is complete and awaits the author's items before 2026-10-13;
+  E has results in `outputs/analysis/paper_e/` and no manuscript; F is a plan.
+  None of E or F is in `pub/claim_registry.toml`.
+- **Verified on this `main`:** `verify_claims.py` (479 claims / 645 sites / 48
+  retired-value guards), `verify_sync.py`, `verify_exp4_reconstruction.py` (18 pins),
+  `scan_shared_literals.py --strict` (0 unexplained) and its `--paper-d` mode
+  (0 unexplained) pass; the 16 Paper E tests pass.
+- **Working rule that failed here:** two agent sessions changed the same branches at
+  the same time. Run one session at a time on this repository.
+
 ## Session update - 2026-10-03 (Paper D location correction)
 
 The author requires Paper D in the main project checkout, alongside the other
