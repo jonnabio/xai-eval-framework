@@ -56,21 +56,21 @@ jonnabio@gmail.com \quad ORCID: [AUTHOR: ORCID]
 \section*{Abstract}
 Explanations of machine-learning predictions are consulted most when a prediction is in
 doubt, yet explainers are evaluated on averages over all instances. We ask whether
-post-hoc explanations are less reliable when the model is wrong. Using an existing
-benchmark on the UCI Adult data, we compare fidelity, stability and faithfulness gap
+post-hoc explanations are less reliable when the model is wrong. On the UCI Adult Income
+dataset, we compare fidelity, stability and faithfulness gap
 between correctly and incorrectly classified instances for SHAP, LIME, Anchors and DiCE
 across five model families, with the run as the unit of analysis
 (<<data:runs_analysed:d>> runs, <<data:analysed_total:int>> explained instances), Wilcoxon
-signed-rank tests with Holm correction, a control for the prediction margin, and an
-external check on German Credit. Explanations were less stable on misclassified instances
-for all four explainers, and the deficit was large for SHAP (median difference
+signed-rank tests with Holm correction and a control for the prediction margin; the
+Statlog German Credit dataset serves for external validation. Explanations were less
+stable on misclassified instances for all four explainers, and the deficit was large for SHAP (median difference
 <<rq1:shap.stability.median:s3>>, $d_z =$ <<rq1:shap.stability.dz:s2>>) and DiCE
 (<<rq1:dice.stability.median:s3>>, $d_z =$ <<rq1:dice.stability.dz:s2>>). The prediction
 margin explained most of the DiCE deficit but not the SHAP deficit, and at equal margin
 the features SHAP ranked first carried less of an erroneous prediction. Both SHAP results
 held on instances outside the models' training data. Fidelity changed little and in
-opposite directions across explainers. The pattern depended on the model family, and on
-German Credit it held for Anchors but not for SHAP stability. Quality reported as an average can therefore
+opposite directions across explainers. The pattern depended on the model family; external
+validation reproduced it for Anchors but not for SHAP stability. Quality reported as an average can therefore
 overstate how far an explanation of a wrong prediction should be trusted; audits should
 report explanation quality separately for correct and incorrect predictions.
 
@@ -81,12 +81,13 @@ misclassification; explanation reliability; SHAP; LIME.
 Las explicaciones de las predicciones de aprendizaje autom\'atico se consultan sobre todo
 cuando una predicci\'on es dudosa, pero los explicadores se eval\'uan con promedios sobre
 todas las instancias. Nos preguntamos si las explicaciones post hoc son menos fiables
-cuando el modelo se equivoca. Con un banco de pruebas existente sobre UCI Adult,
+cuando el modelo se equivoca. Sobre el conjunto de datos UCI Adult Income,
 comparamos fidelidad, estabilidad y brecha de borrado entre instancias bien y mal
 clasificadas para SHAP, LIME, Anchors y DiCE en cinco familias de modelos, con la
 ejecuci\'on como unidad de an\'alisis (<<data:runs_analysed:d>> ejecuciones,
 <<data:analysed_total:int>> instancias), pruebas de Wilcoxon con correcci\'on de Holm,
-un control del margen de predicci\'on y una verificaci\'on externa con German Credit.
+y un control del margen de predicci\'on; el conjunto Statlog German Credit sirve de
+validaci\'on externa.
 Las explicaciones fueron menos estables en las
 instancias mal clasificadas para los cuatro explicadores, y el d\'eficit fue grande para
 SHAP (diferencia mediana <<rq1:shap.stability.median:s3>>,
@@ -94,8 +95,8 @@ $d_z =$ <<rq1:shap.stability.dz:s2>>) y DiCE (<<rq1:dice.stability.median:s3>>,
 $d_z =$ <<rq1:dice.stability.dz:s2>>). El margen de predicci\'on explic\'o la mayor parte
 del d\'eficit de DiCE, pero no el de SHAP; con el margen fijo, las variables que SHAP
 situ\'o primero sostuvieron una parte menor de la predicci\'on err\'onea. Ambos resultados
-de SHAP se mantuvieron fuera de los datos de entrenamiento. El patr\'on dependi\'o de la familia de modelos y, en German Credit, se mantuvo
-para Anchors pero no para la estabilidad de SHAP. La calidad promedio puede exagerar la
+de SHAP se mantuvieron fuera de los datos de entrenamiento. El patr\'on dependi\'o de la familia de modelos; la validaci\'on externa lo
+reprodujo para Anchors, pero no para la estabilidad de SHAP. La calidad promedio puede exagerar la
 confianza que merece la explicaci\'on de una predicci\'on err\'onea; las auditor\'ias
 deber\'ian informarla por separado para predicciones correctas e incorrectas.
 
@@ -142,14 +143,14 @@ difference explained by proximity to the decision boundary, where errors tend to
 
 \section{Materials and methods}
 
-\subsection{Benchmark and data}
+\subsection{Datasets and experimental runs}
 
-The data are the runs of an existing benchmark on the UCI Adult income data
-\cite{becker1996adult}, released with its protocol in
-\cite{herrera2026framework}. That study, and a later analysis of the same runs, compare
-explainers by their average quality; the present analysis reports none of their results
-and compares each explainer with itself, between correct and misclassified instances of
-the same run.
+Two tabular datasets are used: UCI Adult Income \cite{becker1996adult} (primary) and Statlog
+German Credit \cite{hofmann1994statlog} (external validation). The explanation runs come from
+a benchmark whose protocol is described in \cite{herrera2026framework}. That study, and a
+later analysis of the same runs, compare explainers by their average quality; the present
+analysis reports none of their results and compares each explainer with itself, between
+correct and misclassified instances of the same run.
 
 Five classifiers were explained: logistic regression, random forest
 \cite{breiman2001random}, XGBoost \cite{chen2016xgboost}, a support vector machine and a
@@ -161,9 +162,8 @@ FN), so correct and misclassified instances are about equally represented. Of th
 without explanations, and SHAP runs with fewer than ten instances in a group, were
 excluded). They contain <<data:analysed_total:int>> explained instances, of which
 <<sens:instances_in_train:int>> belong to the training data (Section~\ref{sec:sens});
-<<data:unlabelled_total:d>> instances without a quadrant were excluded. The external check
-uses the benchmark's German Credit runs \cite{hofmann1994statlog}: random forest and
-XGBoost, explained by SHAP and Anchors, three seeds each (<<ext:runs_total:d>> runs, 13 to
+<<data:unlabelled_total:d>> instances without a quadrant were excluded. On German Credit, random
+forest and XGBoost were explained by SHAP and Anchors with three seeds each (<<ext:runs_total:d>> runs, 13 to
 37 errors per quadrant). Breast Cancer was excluded in advance, with one to four errors
 per quadrant.
 
