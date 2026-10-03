@@ -1867,3 +1867,50 @@ is inside Paper B+C, under review).
 - **Next:** `scripts/pubs/paper_d_analysis.py` per the plan; register numbers; write; figures;
   rigor review; author items (ORCID, profession, Spanish, reference approval); submit about
   2026-10-13.
+
+## Session Handoff - 2026-10-03 (Paper E analysis artifacts)
+
+- **Paper E status:** The protocol, structural audit, exact-ID EXP3 LIME cohort, deterministic
+  analysis pipeline and generated report are complete. Paper E remains distinct from Paper D;
+  no manuscript or claim-registry entry was created. Scientific interpretation, DOI/reference
+  verification, author approval and venue selection remain.
+- **Committed artifacts:** The results branch `results/paper-e-agreement` has commit
+  `24d27176e` with 12 EXP3 LIME run files plus manifest, 18 analysis tables/diagnostics,
+  three figures and `RESULTS.md` under `outputs/analysis/paper_e/`. The Paper E README and
+  implementation plan document the workflow and limits.
+- **Cohort and QC:** 335 source runs were inventoried across 87 primary pairing blocks. The
+  primary SHAP-LIME analysis contains 31,411 matched instance records; the descriptive
+  Anchors/DiCE feature-set analysis contains 107,335 records. Seventy-six of 87 primary
+  blocks have exact valid-ID sets; ten SVM blocks have partial SHAP subsets and one EXP2
+  block lacks usable SHAP IDs, leaving 4,936 unpaired valid method-IDs. Only intersections
+  enter the primary analysis, with zero classification mismatches among matched SHAP-LIME
+  IDs. Secondary classification mismatches and truncated Anchors rules are excluded and
+  enumerated in their pairing diagnostics. QC recorded 278 malformed/error rows and two
+  duplicate-ID groups; no attribution-order, empty-additive, or unknown-feature failures.
+- **Descriptive result:** Mean run-level top-5 Jaccard was 0.393 for EXP2 Adult
+  (seed-clustered 95% CI [0.377, 0.410]), 0.714 for Breast Cancer
+  ([0.671, 0.792]) and 0.387 for German Credit ([0.343, 0.426]). The report also contains
+  rank/sign agreement and exploratory correctness and quality associations. No p-values or
+  confirmatory claims are reported; the small number of seed clusters limits inference.
+  Breast Cancer correctness contrasts were not estimable under the prespecified minimum of
+  ten cases in each correctness group.
+- **Reproduction and verification:** All 12 EXP3 model configurations were regenerated in
+  isolated temporary storage and validated against tracked configs, training summaries,
+  feature order and stored SHAP labels/predictions. Regenerated hashes are in the LIME
+  metadata; absent original binaries prevent byte-identity claims. The analysis was rerun
+  twice: all 19 generated analysis files matched by SHA-256. The frozen pip versions were
+  used (NumPy 2.2.6, pandas 2.3.3, SciPy 1.16.3, scikit-learn 1.7.1, joblib 1.5.3,
+  LIME 0.2.0.1, XGBoost 3.1.2, matplotlib 3.10.8); only Python 3.13.15 was available,
+  although `environment.yml` specifies Python 3.11. Sixteen focused unit tests,
+  `py_compile`, `git diff --check` and `.ace/scripts/verify.sh` passed. Matplotlib emitted
+  only a non-blocking boxplot-parameter deprecation warning.
+- **Branch state:** Paper E was transplanted as five Paper E-only commits from
+  `origin/main` onto `paper/e-feature-agreement-clean`, then integrated through local `main`.
+  No pushes were made. The local `main` history includes an earlier local integration merge
+  and its revert before the clean integration; inspect that history before any push. The
+  unrelated uncommitted `docs/reports/paper_d/paper_d.tex` in the original worktree was
+  preserved and not included.
+- **Next:** The results branch must be brought through `main` per ADR-0013. The author should
+  review the exploratory findings, approve the literature/DOI audit, choose a distinct venue,
+  and only then draft a manuscript. Do not add claim-registry coverage until that manuscript
+  and its claims exist.
