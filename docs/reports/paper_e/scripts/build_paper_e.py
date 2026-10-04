@@ -81,6 +81,7 @@ class Data:
         self.sign_contribution = pd.read_csv(P / "sign_contribution_summary.csv", dtype={"predicted_class": str})
         self.sec = pd.read_csv(P / "secondary_group_summary.csv")
         self.chance = pd.read_csv(P / "chance_overlap.csv")
+        self.perm = pd.read_csv(P / "review2_permutation_summary.csv")
 
     @staticmethod
     def _one(frame: pd.DataFrame, what: str) -> pd.Series:
@@ -207,7 +208,8 @@ def placeholder(numbers: Numbers, spec: str) -> str:
     if kind == "train":      # seeds (seed_42 or other_seeds)|model|column -- Adult training membership
         return numbers.show(src("posthoc/review_training_membership_summary", a[2], seeds=a[0], model=a[1]))
     if kind == "held":       # model|column -- Adult correctness contrast on held-out rows
-        return numbers.show(src("posthoc/review_heldout_contrast_summary", a[1], dataset="exp2_adult", model=a[0]))
+        return numbers.show(src("posthoc/review_heldout_contrast_summary", a[1], dataset="exp2_adult", model=a[0]),
+                            "int" if a[1].startswith("n_") else "f3")
     if kind == "signc":      # dataset|model|class (0, 1, all)|field -- after conversion to contributions
         return numbers.show(src("posthoc/sign_contribution_summary", "contribution_" + FIELD[a[3]],
                                 dataset=a[0], model=a[1], predicted_class=a[2]))
@@ -223,6 +225,19 @@ def placeholder(numbers: Numbers, spec: str) -> str:
                                 dataset=a[0], quality_metric=a[1]), "f2")
     if kind == "sec":        # pair|model|field
         return numbers.show(src("posthoc/secondary_group_summary", FIELD[a[2]], method_pair=a[0], model=a[1]))
+    if kind == "perm":       # dataset|model|paired, other or specific|field -- permutation reference
+        column = {"paired": "paired_top5_jaccard", "other": "other_instance_top5_jaccard",
+                  "specific": "instance_specific_top5_jaccard"}[a[2]]
+        return numbers.show(src("posthoc/review2_permutation_summary", f"{column}.{FIELD[a[3]]}",
+                                dataset=a[0], model=a[1]))
+    if kind == "stab":       # dataset|min or max -- model medians of the stored LIME stability
+        return numbers.show(src("posthoc/review2_lime_stability_range", f"{a[1]}_model_median_lime_stability",
+                                dataset=a[0]))
+    if kind == "kw":         # dataset|f1 or f2 -- median kernel weight of LIME's perturbed samples
+        return numbers.show(src("posthoc/review2_lime_kernel_weight", "median_weight_of_perturbed_samples",
+                                dataset=a[0]), a[1])
+    if kind == "skip":       # model -- Adult candidates skipped in the self-agreement experiment
+        return numbers.show(src("posthoc/ceiling_skipped", "sum(skipped)", dataset="exp2_adult", model=a[0]), "int")
     if kind == "chance":     # dataset|5 or 10
         return numbers.show(src("posthoc/chance_overlap", f"expected_top{a[1]}_jaccard", dataset=a[0]))
     raise SystemExit(f"unknown placeholder <<{spec}>>")
@@ -238,6 +253,9 @@ def table_agreement(n: Numbers) -> str:
             cells = [n.show(agreement_source(dataset, model, metric, EST)) + " "
                      + n.ci(agreement_source(dataset, model, metric, LO), agreement_source(dataset, model, metric, HI))
                      for metric in ("top5_jaccard", "top10_jaccard", "kendall_tau_b")]
+            # permutation reference: SHAP of an instance against LIME of another instance
+            cells.insert(1, n.show(src("posthoc/review2_permutation_summary",
+                                       "other_instance_top5_jaccard." + EST, dataset=dataset, model=model)))
             runs = n.show(agreement_source(dataset, model, "top5_jaccard", "n_runs"), "int")
             pairs = n.show(agreement_source(dataset, model, "top5_jaccard", "n_instances"), "int")
             lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & {runs} & {pairs} & "
@@ -307,8 +325,9 @@ def table_ceiling(n: Numbers) -> str:
         for k, model in enumerate(models):
             s = lambda pair, column: src("posthoc/ceiling_summary", column, dataset=dataset, model=model,  # noqa: E731
                                          pair=pair, metric="top5_jaccard")
-            cells = [n.show(s(pair, EST)) + " " + n.ci(s(pair, LO), s(pair, HI))
-                     for pair in ("lime_lime", "shap_shap", "shap_lime_stored")]
+            # each pair on the same instance (with interval) and on another instance of the run
+            cells = [n.show(s(pair, EST)) + " " + n.ci(s(pair, LO), s(pair, HI)) + " & " + n.show(s(pair + "_other", EST))
+                     for pair in ("lime_lime", "shap_shap", "shap_lime_rerun")]
             count = n.show(s("lime_lime", "n_instances"), "int")
             lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & {count} & " + " & ".join(cells) + r" \\")
         lines.append(r"\hline")
@@ -353,7 +372,7 @@ def positions() -> list[float]:
 
 def fig_overlap(data: Data) -> None:
     pos = positions()
-    fig, ax = plt.subplots(figsize=(6.9, 2.5))
+    fig, ax = plt.subplots(figsize=(6.9, 2.35))
     for x, (dataset, model) in zip(pos, GROUPS):
         runs = data.runs[(data.runs.dataset == dataset) & (data.runs.model == model)].top5_jaccard_mean
         jitter = [x + 0.26 * ((i % 7) / 6 - 0.5) for i in range(len(runs))]
@@ -364,8 +383,12 @@ def fig_overlap(data: Data) -> None:
                     markersize=3.5, capsize=2.5, linewidth=0.9, zorder=3)
         chance = float(data.chance[data.chance.dataset == dataset].expected_top5_jaccard.iloc[0])
         ax.hlines(chance, x - 0.42, x + 0.42, color=ORANGE, linewidth=1.0, linestyles="dashed", zorder=1)
+        other = Data._one(data.perm[(data.perm.dataset == dataset) & (data.perm.model == model)], "perm")
+        ax.hlines(other["other_instance_top5_jaccard.estimate_mean_of_run_means"], x - 0.42, x + 0.42,
+                  color=GREY, linewidth=1.0, zorder=1)
     ax.scatter([], [], s=9, color=BLUE, alpha=0.5, label="Run mean")
     ax.errorbar([], [], yerr=[], fmt="D", color="black", markersize=3.5, label="Mean of run means, 95% interval")
+    ax.plot([], [], color=GREY, linewidth=1.0, label="SHAP against LIME of another instance")
     ax.plot([], [], color=ORANGE, linestyle="dashed", linewidth=1.0, label="Expected overlap of two random top-5 sets")
     ax.set_ylim(0, 1)
     ax.set_ylabel("SHAP\u2013LIME top-5 Jaccard overlap")
@@ -377,7 +400,7 @@ def fig_overlap(data: Data) -> None:
 
 def fig_sign(data: Data) -> None:
     pos = positions()
-    fig, ax = plt.subplots(figsize=(6.9, 2.5))
+    fig, ax = plt.subplots(figsize=(6.9, 2.35))
     s = data.sign
     for cls, colour, shift, marker in ((0, BLUE, -0.16, "o"), (1, ORANGE, 0.16, "s")):
         for x, (dataset, model) in zip(pos, GROUPS):
@@ -432,7 +455,7 @@ def fig_correctness(data: Data) -> None:
 
 def fig_quality(data: Data) -> None:
     pos = positions()
-    fig, axes = plt.subplots(2, 2, figsize=(6.9, 3.9), sharex=True, sharey=True)
+    fig, axes = plt.subplots(2, 2, figsize=(6.9, 3.5), sharex=True, sharey=True)
     q, qs = data.qual, data.qual_seed
     for ax, (metric, label) in zip(axes.ravel(), QUALITY):
         for x, (dataset, model) in zip(pos, GROUPS):
@@ -551,7 +574,7 @@ def compile_pdf() -> None:
             if junk.suffix != ".pdf":
                 junk.unlink()
         problems = sorted(set(re.findall(r"(?:Reference|Citation) `[^']+' on page \d+ undefined|"
-                                         r"Overfull \\hbox \((?:[2-9]\d|\d{3,})[^)]*\)", log)))
+                                         r"Overfull \\hbox \((?:[2-9]\d|\d{3,})[^)]*\)[^\n]*", log)))
         for line in problems:
             print(f"  {name}: {line}")
         if any("undefined" in line for line in problems):

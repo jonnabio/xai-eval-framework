@@ -16,7 +16,19 @@ the two repetitions is computed with the prespecified function
 (scripts/analyze_paper_e.py::primary_agreement), and so is SHAP-LIME agreement of the
 stored explanations on the same subsample.
 
-An instance enters only if the loaded model reproduces its stored prediction.
+An instance enters only if the loaded model reproduces its stored prediction; the number of
+candidates skipped for this reason is written per run.
+
+Additions of the second review (ANALYSIS_PLAN.md section 9, second entry of 2026-10-04):
+  - the top-10 lists of every repetition are saved, so that every measure below can be
+    recomputed without running an explainer;
+  - SHAP-LIME agreement between the new runs (mean of the four pairs of one SHAP and one
+    LIME repetition), which puts self-agreement and agreement between the methods on the
+    same runs and the same model binary;
+  - LIME with the default kernel width of the package (0.75 * sqrt(number of features)),
+    twice, all other settings unchanged;
+  - a permutation reference: each pair is also computed between an instance and every other
+    instance of the same run (pair name with the suffix _other).
 
 Adult uses the model binaries in experiments/exp1_adult/models/. The EXP3 binaries are not
 tracked: regenerate them first, as for the Paper E LIME cohort,
@@ -24,6 +36,8 @@ tracked: regenerate them first, as for the Paper E LIME cohort,
 and pass --exp3-model-root <dir>.
 
 Writes  outputs/analysis/paper_e/posthoc/
+          ceiling_lists.json      the top-10 lists of every repetition, per instance
+          ceiling_skipped.csv     candidates skipped per run (stored prediction not reproduced)
           ceiling_instances.csv   one row per instance
           ceiling_runs.csv        run means
           ceiling_summary.csv     group estimates (mean of run means, seed-clustered interval)
@@ -64,7 +78,20 @@ PER_RUN = {"logreg": 20, "mlp": 20, "rf": 20, "xgb": 20}
 PER_RUN_EXP3 = 30
 TREE = {"rf", "xgb"}
 METRICS = ("top5_jaccard", "top10_jaccard", "kendall_tau_b")
-PAIRS = ("lime_lime", "shap_shap", "shap_lime_stored", "lime_rerun_vs_stored", "shap_rerun_vs_stored")
+# name: the lists compared; several pairs of lists are averaged
+PAIRS = {
+    "lime_lime": [("lime_a", "lime_b")],
+    "shap_shap": [("shap_a", "shap_b")],
+    "shap_lime_stored": [("stored_shap", "stored_lime")],
+    "lime_rerun_vs_stored": [("lime_a", "stored_lime")],
+    "shap_rerun_vs_stored": [("shap_a", "stored_shap")],
+    "shap_lime_rerun": [(a, b) for a in ("shap_a", "shap_b") for b in ("lime_a", "lime_b")],
+    "limed_limed": [("limed_a", "limed_b")],
+    "shap_limed_rerun": [(a, b) for a in ("shap_a", "shap_b") for b in ("limed_a", "limed_b")],
+    "lime_limed": [(a, b) for a in ("lime_a", "lime_b") for b in ("limed_a", "limed_b")],
+}
+# pairs that also get the permutation reference (an instance against another of its run)
+PERMUTED = ("lime_lime", "shap_shap", "shap_lime_stored", "shap_lime_rerun", "limed_limed", "shap_limed_rerun")
 
 
 def load_model(dataset: str, model: str, seed: str, exp3_root: Path | None):
@@ -86,7 +113,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--exp3-model-root", type=Path)
     ap.add_argument("--only", nargs="*", help="restrict to dataset:model pairs, e.g. exp2_adult:svm")
-    ap.add_argument("--append", action="store_true", help="keep rows already in ceiling_instances.csv")
+    ap.add_argument("--append", action="store_true", help="keep the instances already in ceiling_lists.json")
+    ap.add_argument("--summarise-only", action="store_true", help="recompute the CSV files from ceiling_lists.json")
     args = ap.parse_args()
 
     from src.xai.lime_tabular import LIMETabularWrapper
@@ -100,12 +128,17 @@ def main() -> None:
             continue
         blocks[(row["dataset"], row["model"], row["seed"], row["intensity"])].append(row)
 
-    out_path = OUT / "ceiling_instances.csv"
-    rows: list[dict] = []
-    if args.append and out_path.exists():
-        with out_path.open(encoding="utf-8") as fh:
-            rows = list(csv.DictReader(fh))
-    done = {(r["dataset"], r["model"], r["seed"]) for r in rows}
+    lists_path, skipped_path = OUT / "ceiling_lists.json", OUT / "ceiling_skipped.csv"
+    entries: list[dict] = []
+    skipped_rows: list[dict] = []
+    if (args.append or args.summarise_only) and lists_path.exists():
+        entries = json.loads(lists_path.read_text(encoding="utf-8"))
+        with skipped_path.open(encoding="utf-8") as fh:
+            skipped_rows = list(csv.DictReader(fh))
+    if args.summarise_only:
+        summarise(entries)
+        return
+    done = {(r["dataset"], r["model"], r["seed"]) for r in entries}
 
     for block in sorted(blocks):
         dataset, model, seed, intensity = block
@@ -134,6 +167,10 @@ def main() -> None:
         shaps = [SHAPTabularWrapper(model=clf, training_data=x_train, feature_names=names,
                                     model_type="tree" if model in TREE else "kernel",
                                     n_background_samples=50, random_state=state) for state in RANDOM_STATES]
+        # LIME with the default kernel width of the package (kernel_width=None)
+        limes_default = [LIMETabularWrapper(training_data=x_train, feature_names=names, num_features=10,
+                                            num_samples=1000, kernel_width=None, random_state=state)
+                         for state in RANDOM_STATES]
         kept = skipped = 0
         for row in chosen:
             if kept == k:
@@ -149,41 +186,70 @@ def main() -> None:
             for state, wrapper in zip(RANDOM_STATES, shaps):
                 np.random.seed(state + int(row["instance_id"]))   # KernelSHAP samples coalitions from the global RNG
                 shap_runs.append(top10(wrapper.generate_explanations(clf, x.reshape(1, -1))["feature_importance"][0], names))
-            stored_shap = stored["shap"][row["instance_id"]]["explanation"]["raw_top"]
-            stored_lime = stored["lime"][row["instance_id"]]["explanation"]["raw_top"]
-            compared = {
-                "lime_lime": primary_agreement(lime_runs[0], lime_runs[1]),
-                "shap_shap": primary_agreement(shap_runs[0], shap_runs[1]),
-                "shap_lime_stored": primary_agreement(stored_shap, stored_lime),
-                "lime_rerun_vs_stored": primary_agreement(lime_runs[0], stored_lime),
-                "shap_rerun_vs_stored": primary_agreement(shap_runs[0], stored_shap),
-            }
-            out = {"dataset": dataset, "model": model, "seed": seed, "intensity": intensity,
-                   "instance_id": row["instance_id"], "prediction": row["prediction"]}
-            for pair, values in compared.items():
-                for metric in METRICS:
-                    out[f"{pair}.{metric}"] = "" if values[metric] is None else values[metric]
-            rows.append(out)
+            default_runs = [top10(wrapper.explain_instance(clf, x, return_full=False), names)
+                            for wrapper in limes_default]
+            entries.append({
+                "dataset": dataset, "model": model, "seed": seed, "intensity": intensity,
+                "instance_id": row["instance_id"], "prediction": row["prediction"],
+                "lime_a": lime_runs[0], "lime_b": lime_runs[1], "shap_a": shap_runs[0], "shap_b": shap_runs[1],
+                "limed_a": default_runs[0], "limed_b": default_runs[1],
+                "stored_shap": stored["shap"][row["instance_id"]]["explanation"]["raw_top"],
+                "stored_lime": stored["lime"][row["instance_id"]]["explanation"]["raw_top"],
+            })
             kept += 1
-        write_csv(out_path, rows, list(rows[0]))
+        skipped_rows.append({"dataset": dataset, "model": model, "seed": seed, "kept": kept, "skipped": skipped})
+        lists_path.write_text(json.dumps(entries, indent=0), encoding="utf-8", newline="\n")
+        write_csv(skipped_path, skipped_rows, list(skipped_rows[0]))
         print(f"{dataset} {model} seed {seed}: {kept} instances, {skipped} skipped (prediction not reproduced), "
               f"{time.time() - started:.0f} s", flush=True)
 
-    summarise(rows)
+    summarise(entries)
 
 
-def summarise(rows: list[dict]) -> None:
+def compare(first: dict, second: dict, pair: str) -> dict[str, float | str]:
+    """Measures of a pair between the lists of two entries (the same entry for a paired value)."""
+    values: dict[str, list[float]] = {metric: [] for metric in METRICS}
+    for left, right in PAIRS[pair]:
+        result = primary_agreement(first[left], second[right])
+        for metric in METRICS:
+            if result[metric] is not None:
+                values[metric].append(result[metric])
+    return {metric: float(np.mean(v)) if v else "" for metric, v in values.items()}
+
+
+def summarise(entries: list[dict]) -> None:
     rng = np.random.default_rng(BOOTSTRAP_SEED)
-    by_run: dict[tuple, list[dict]] = defaultdict(list)
-    for r in rows:
-        by_run[(r["dataset"], r["model"], r["seed"])].append(r)
+    rows = []
+    for e in entries:
+        out = {k: e[k] for k in ("dataset", "model", "seed", "intensity", "instance_id", "prediction")}
+        for pair in PAIRS:
+            for metric, value in compare(e, e, pair).items():
+                out[f"{pair}.{metric}"] = value
+        rows.append(out)
+    write_csv(OUT / "ceiling_instances.csv", rows, list(rows[0]))
+
+    by_run: dict[tuple, list[int]] = defaultdict(list)
+    for k, e in enumerate(entries):
+        by_run[(e["dataset"], e["model"], e["seed"])].append(k)
+    names = list(PAIRS) + [f"{pair}_other" for pair in PERMUTED]
     run_rows = []
-    for (dataset, model, seed), items in sorted(by_run.items()):
-        out = {"dataset": dataset, "model": model, "seed": seed, "n_instances": len(items)}
+    for (dataset, model, seed), index in sorted(by_run.items()):
+        out = {"dataset": dataset, "model": model, "seed": seed, "n_instances": len(index)}
         for pair in PAIRS:
             for metric in METRICS:
-                values = [float(i[f"{pair}.{metric}"]) for i in items if i[f"{pair}.{metric}"] != ""]
+                values = [float(rows[k][f"{pair}.{metric}"]) for k in index if rows[k][f"{pair}.{metric}"] != ""]
                 out[f"{pair}.{metric}"] = float(np.mean(values)) if values else ""
+        # permutation reference: an instance against every other instance of the run
+        for pair in PERMUTED:
+            other: dict[str, list[float]] = {metric: [] for metric in METRICS}
+            for i in index:
+                for j in index:
+                    if i != j:
+                        for metric, value in compare(entries[i], entries[j], pair).items():
+                            if value != "":
+                                other[metric].append(value)
+            for metric in METRICS:
+                out[f"{pair}_other.{metric}"] = float(np.mean(other[metric])) if other[metric] else ""
         run_rows.append(out)
     write_csv(OUT / "ceiling_runs.csv", run_rows, list(run_rows[0]))
 
@@ -193,7 +259,7 @@ def summarise(rows: list[dict]) -> None:
         for r in run_rows:
             groups[(r["dataset"], r["model"] if scope == "model" else "all")].append(r)
         for (dataset, model), items in sorted(groups.items()):
-            for pair in PAIRS:
+            for pair in names:
                 for metric in METRICS:
                     seed_values: dict[str, list[float]] = defaultdict(list)
                     for r in items:
