@@ -1,5 +1,23 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-04 (Paper B: review fixes applied, new title, double-blind build)
+
+This entry is the latest. It closes the two open author decisions of the entry below.
+
+- **Title is now** "When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results
+  from a Paired Tabular Benchmark" (review F02). The Zenodo 0.9.0 archive carries the earlier
+  title; a text change needs no new version.
+- **F07:** Figure 3 removed; Table 5 has the paired SHAP-LIME fidelity gap column (registered
+  values). **F08:** Section 4.6 states that the stability noise also perturbs the one-hot
+  columns and that the encoding and the perturbation scheme are not separated.
+- **Double-blind build** added at the author's request:
+  `docs/reports/paper_b/paper_b_cleiej_blind.tex` and `.pdf` (12 pages; same source, switched
+  by `\blindreview`). Identity scan clean. CLEIej reviews single-blind, so the file to
+  submit there is `paper_b_cleiej.pdf` (13 pages, 2 figures, 7 data tables plus 2 text tables).
+- Verified after the last build: `verify_claims.py` 986 claims / 1298 sites; `verify_sync.py`;
+  `scan_shared_literals.py --strict` 0 unexplained.
+- **Next:** the author reads the PDF and submits; an independent review is still advisable.
+
 ## Session update - 2026-10-04 (Paper B reviewed, on main, Zenodo 0.9.0)
 
 This entry is the latest. It closes Next Steps 2 and 4 of the handoff directly below, and
