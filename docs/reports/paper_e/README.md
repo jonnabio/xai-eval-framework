@@ -35,7 +35,7 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 | `paper_e_template.tex` | **The source.** Edit this. Every number is a placeholder. |
 | `paper_e.tex`, `tables/`, `figures/` | Generated. Do not edit. |
 | `paper_e_layout.tex` | Layout constants and the release/archive macros. |
-| `references.bib` | 25 entries, checked against Crossref, arXiv or the publisher page, except the bootstrap textbook. 24 approved by the author on 2026-10-03; `bhatt2020evaluating` (source of the fidelity measure) was added on 2026-10-04 and awaits approval. |
+| `references.bib` | 25 entries, checked against Crossref, arXiv or the publisher page, except the bootstrap textbook. All approved by the author (24 on 2026-10-03; `bhatt2020evaluating`, the source of the fidelity measure, on 2026-10-04). |
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
 | `scripts/paper_e_sign_contribution.py` | Post hoc direct sign test (plan section 9, 2026-10-04). |
 | `scripts/paper_e_review_analyses.py` | Post hoc re-cuts for the rigor review (baseline, held-out contrast, rank sensitivity, coverage). |
@@ -116,7 +116,7 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 | F07 untested cause of low rank concordance | Re-ranking by contribution computed and reported; sentence replaced. |
 | F08 overclaims | Reworded ("did not vary visibly", "no consistent association", fidelity claim limited to Adult and German Credit). |
 | F09 SVM coverage | 29.5% stated in Section 3.4 and in the limitations. |
-| F10 "registered"; unreported plan items | "Written and committed before"; sign intervals and the number of shared features reported; every post hoc analysis labelled; second companion manuscript named. Not done: medians of run means are not printed. |
+| F10 "registered"; unreported plan items | "Written and committed before"; sign intervals and the number of shared features reported; every post hoc analysis labelled; second companion manuscript named. Medians of the run means for the primary measure are given in one sentence of Section 4.1 (the remaining medians are in `group_agreement_summary.csv`). |
 | F11 citation fit | Roy, Garreau, Alvarez-Melis and Bhatt sentences reworded. |
 | F12 seed-42 sentence | Names the measure; held-out contrast added. |
 | F13 public PDFs | PDFs untracked and ignored from 2026-10-04. They remain in the earlier git history, on `main` and in the Zenodo archive v0.6.0, which cannot be withdrawn; declare this in the cover letter. |
@@ -145,9 +145,9 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
 | | |
 |---|---|
-| Release | `paper-e-cys-2026-10-03` (commit `fe3604406`, on `main`), published 2026-10-03 |
-| Version | 0.6.0 |
-| Version DOI (cited in the full PDF) | `10.5281/zenodo.23130949` |
+| Release | `paper-e-cys-2026-10-04`, on `main`, published 2026-10-04 |
+| Version | 0.7.0 (0.6.0, `10.5281/zenodo.23130949`, release `paper-e-cys-2026-10-03`, predates the review revision) |
+| Version DOI (cited in the full PDF) | pending |
 | Concept DOI (all versions) | `10.5281/zenodo.19297723` |
 | Archive | one zip, 918 MB, open access, MIT licence |
 

@@ -172,7 +172,7 @@ SCALARS = {
 }
 CORRECTNESS_COLUMN = {"diff": "mean_misclassified_minus_correct", "lo": LO, "hi": HI,
                       "correct": "mean_correct_jaccard", "mis": "mean_misclassified_jaccard"}
-FIELD = {"est": EST, "lo": LO, "hi": HI}
+FIELD = {"est": EST, "lo": LO, "hi": HI, "med": "estimate_median_of_run_means"}
 
 
 def placeholder(numbers: Numbers, spec: str) -> str:

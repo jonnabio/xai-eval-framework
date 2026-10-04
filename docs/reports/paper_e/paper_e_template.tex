@@ -172,8 +172,8 @@ Section~\ref{sec:results:sign}.
 \textbf{Reliability of explanations.} Explanations can change under small perturbations
 of the input \cite{alvarezmelis2018robustness} and can be manipulated
 \cite{slack2020fooling}. Stability and fidelity are therefore common quality criteria.
-This study relates them to disagreement at the level of the instance, which, to our
-knowledge, earlier work on tabular data has not reported with a clustered design.
+This study relates them to disagreement at the level of the instance, which, to the author's knowledge, earlier work on tabular data has not reported with a
+clustered design.
 
 \section{Materials and Methods}
 \label{sec:methods}
@@ -335,6 +335,7 @@ classified instances was computed within each run that had at least ten instance
 each group, averaged over intensities for each model and seed, and summarised by model.
 On Adult the contrast was repeated (post hoc) on the instances that are not rows of the
 training data of the model.
+
 For RQ4, the Spearman correlation between disagreement ($1 - J_5$) and each of four
 quality values of the instance (fidelity and stability of the SHAP and of the LIME
 explanation) was computed within each run and averaged by seed. Fidelity, a single-feature variant of the faithfulness measure of
@@ -382,8 +383,10 @@ to <<agree|german_credit|all|top5_jaccard|hi>>). The mean number of shared featu
 lists was <<base|exp2_adult|all|shared|est>> and <<base|german_credit|all|shared|est>> out
 of five. On Breast Cancer the overlap was
 <<agree|breast_cancer|all|top5_jaccard|est>> (<<agree|breast_cancer|all|top5_jaccard|lo>>
-to <<agree|breast_cancer|all|top5_jaccard|hi>>), with <<base|breast_cancer|all|shared|est>> shared features on average. In all
-three datasets the overlap was several times the expected overlap of random sets.
+to <<agree|breast_cancer|all|top5_jaccard|hi>>), with <<base|breast_cancer|all|shared|est>> shared features on average. The medians of the run means were
+<<agree|exp2_adult|all|top5_jaccard|med>>, <<agree|german_credit|all|top5_jaccard|med>> and
+<<agree|breast_cancer|all|top5_jaccard|med>>. In all three datasets the
+overlap was several times the expected overlap of random sets.
 
 The rank measure, which combines overlap and order, was low on two datasets. Kendall's
 $\tau_b$ was
