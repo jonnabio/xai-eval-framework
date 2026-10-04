@@ -1,5 +1,41 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-04 (Paper B reviewed, on main, Zenodo 0.9.0)
+
+This entry is the latest. It closes Next Steps 2 and 4 of the handoff directly below, and
+corrects its paths: Paper B is in `docs/reports/paper_b/`.
+
+- **Review** by the Scientific Editor role:
+  `docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`. It was done by the drafting
+  session and is not independent.
+  - **Major finding, fixed:** the published RIMI article already reports a paired SHAP-LIME
+    Wilcoxon test on 45 matched cells (logistic regression, random forest, XGBoost) and
+    announces a 75-cell set without reporting it. The draft, like the 32-page edition, said
+    the earlier article left the contrast unresolved. The introduction, Sections 3.1, 4.1,
+    5.1, the provenance paragraph and the abstract now say that Paper B extends that test.
+  - Novelty risk: high against Paper A (now disclosed in the text), low against Paper D, low
+    to moderate against Paper E. What is new in Paper B is the cost reversal between XGBoost
+    and random forest, the dependence of LIME stability on kernel width and dataset, the
+    cross-dataset LIME results, the masking probe, and intervals and effect sizes on 75 cells.
+  - Also fixed: direction of H2, scope of the kernel-width probe, the TreeExplainer cost
+    mechanism stated as a candidate explanation. Open, author decisions: the title (F02) and
+    Figure 3 / a SHAP-LIME gap column (F07).
+- **Before submission checklist** of the journal checked; 13 references gained a verified DOI
+  or URL (33 of 38 have one). Acknowledgments now thank Miguel Herrero Uceda only (author's
+  text); the AI-use statement was removed by the author.
+- **`main`:** pull request #15 merged (`a2ea80080`), CI green.
+- **Zenodo version 0.9.0: `10.5281/zenodo.23147228`**, from GitHub release
+  `paper-b-cleiej-2026-10-04`. The paper cites it.
+- **Verified after the last build:** 13 pages, abstract 199 words; `verify_claims.py` 986
+  claims / 1298 sites; `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained.
+- **Next:** the author reads `docs/reports/paper_b/paper_b_cleiej.pdf` (introduction and
+  Section 4.1 first), decides the title and the note to the editor
+  (`docs/reports/paper_b/CLEIEJ_SUBMISSION.md`, section 3), and submits. A review by someone
+  who did not write the draft is still advisable. Then Paper C.
+- **For Paper C and the thesis:** the 32-page edition carries the same sentences about the
+  earlier article leaving the contrast unresolved; check the thesis chapters for the same
+  wording before they are deposited.
+
 ## Session Handoff - 2026-10-04 (Paper B+C rejected by IBERAMIA; split; Paper B 13-page draft for CLEIej)
 
 This is the latest handoff. The Paper E handoff of the same day follows it and is unchanged.
