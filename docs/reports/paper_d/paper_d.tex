@@ -30,6 +30,10 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage[hidelinks]{hyperref}
+%% Code and data archive (full version only). Set after the release is published:
+%% docs/reports/paper_d/README.md, "Release and archive".
+\newcommand{\paperdrelease}{paper-d-submission-2026-10-03}
+\newcommand{\paperdarchive}{[ZENODO VERSION DOI PENDING]}
 \usepackage{cite}
 \setlength{\emergencystretch}{3em}
 
@@ -434,12 +438,18 @@ describes the explanations that are needed least.
 
 \section*{Data availability}
 \iffull
-Code, run artifacts and the analysis script (\texttt{scripts/pubs/paper\_d\_analysis.py})
-are available at \url{https://github.com/jonnabio/xai-eval-framework}; an archived release
-will be cited.
+Both datasets are public \cite{becker1996adult,hofmann1994statlog}. The code, the trained
+models, the per-instance run outputs and the analysis results are available at
+\url{https://github.com/jonnabio/xai-eval-framework} (release \texttt{\paperdrelease}),
+archived at \paperdarchive. Every reported value can be regenerated from the stored runs
+by following \texttt{docs/reports/paper\_d/README.md}, with the package versions fixed in
+\texttt{docs/reports/paper\_d/requirements.txt}; the explanation runs themselves were not
+repeated.
 \else
-Code, run artifacts and the analysis script are in a public repository and a versioned
-archive whose addresses are withheld for double-blind review.
+Both datasets are public \cite{becker1996adult,hofmann1994statlog}. The code, trained
+models, per-instance run outputs and analysis results are in a public repository and a
+versioned archive, with instructions to regenerate every reported value from the stored
+runs; their addresses are withheld for double-blind review.
 \fi
 
 \bibliographystyle{IEEEtran}
