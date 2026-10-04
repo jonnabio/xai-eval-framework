@@ -1,5 +1,24 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper E registered, archived, on main)
+
+This entry is the latest and supersedes the open items of the Paper E handoff below.
+
+- **Author decisions:** single author (the director declined); the 24 references
+  approved; no AI-use declaration; **at most 15 pages** (the draft has 11; the build
+  stops above 15).
+- **Claim registry:** Paper E is under `[coverage]` and `[exclusivity]`. New `paper_e`
+  resolver in `scripts/pubs/claim_sources.py`; the Paper E build writes a generated block
+  of 280 claims. `verify_claims.py`: 759 claims / 971 sites / 26 files fully registered /
+  20 files clear of unpublished results.
+- **`main`:** pull requests #5 (Paper D record) and #6 (Paper E) are merged; CI passed.
+- **Zenodo version 0.6.0: `10.5281/zenodo.23130949`**, from GitHub release
+  `paper-e-cys-2026-10-03` (commit `fe3604406`). The full PDF cites it.
+- **Next:** the author reads the draft, registers at the journal site and submits
+  `docs/reports/paper_e/submission/paper_e_blind.pdf`; record the submission in the
+  Paper E README. Still open: `git worktree remove ../xai-paper-e`; return the main
+  folder to `thesis/rca-001-phase-2` when Paper E work ends; the other lanes take `main`.
+
 ## Session Handoff - 2026-10-03 (Paper E first draft for Computación y Sistemas)
 
 This is the latest handoff. The Paper D submission handoff of the same day follows it.
