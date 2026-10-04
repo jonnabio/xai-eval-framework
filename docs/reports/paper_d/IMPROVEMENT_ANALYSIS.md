@@ -19,8 +19,8 @@
 | Fig. 2 small values / Fig. 3 legend and labels | ✅ | |
 | Dataset DOIs | ✅ | In `note` fields |
 | `scan_shared_literals` for Paper D | ✅ | `--paper-d` mode: 0 unexplained, 34 explained by registered provenance, 9 constants |
-| Author items (ORCID, profession, Spanish read, "brecha de borrado", NEW refs) | ❌ **author** | |
-| Open the .docx in Word once and re-save | ❌ **author** | |
+| Author items (ORCID, profession, Spanish read, "brecha de borrado", NEW refs) | ✅ 2026-10-03 | Profession "PhD candidate"; the author approved the Spanish text and the three added references |
+| Open the .docx in Word once and re-save | ⏳ **author** | The author opened both files on 2026-10-03 and found them correct. They were rebuilt afterwards (profession, archive DOI), so the final files need one more look; strip the document properties of the blind file after saving |
 
 The original analysis follows.
 

@@ -4,8 +4,12 @@
 explanation quality on misclassified instances*
 
 **Target:** *Tecnología en Marcha* (Editorial Tecnológica de Costa Rica), special issue on
-Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**, by email
-to revistatm@tec.ac.cr. Author target: **12 pages in Word**, including references; English.
+Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**. The
+author instructions (checked 2026-10-03) say articles are sent only through the journal
+website, with a user account requested from revistatm@itcr.ac.cr; the earlier note here said
+"by email to revistatm@tec.ac.cr", so the author confirms the route against the special-issue
+call. The instructions also ask for the author's telephone numbers, which are given in the
+submission form and are not kept in this public repository. Author target: **12 pages in Word**, including references; English.
 
 **Status (2026-10-03): first render done.** The analysis ran as planned (two deviations,
 logged in `ANALYSIS_PLAN.md` §9). The manuscript, figures, Word file and separate TIFFs are in
