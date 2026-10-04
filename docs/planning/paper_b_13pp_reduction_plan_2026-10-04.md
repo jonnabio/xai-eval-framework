@@ -128,3 +128,8 @@ Each step ends with the checks named in section 6 and its own commit.
 - Checks after the last build: `verify_claims.py`, `verify_sync.py`,
   `scan_shared_literals.py --strict`, `verify_exp4_reconstruction.py` pass.
 - Open: step 7 (independent review, new session), the author's read, a new Zenodo version.
+- **Moved the same day at the author's request:** Paper B lives in `docs/reports/paper_b/`
+  (lane `paper-b`, branches `paper/b-*`), separate from `docs/reports/paper_bc/`. The old
+  April prototype in that folder was removed first. The fragment id is `paper_b`. The three
+  figures are regenerated into `docs/reports/paper_b/figures/` with `--output-dir`. The
+  Paper A overlap scan and the retired-value guards now also read the Paper B files.

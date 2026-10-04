@@ -44,6 +44,8 @@ PAPER_BC = [
     ROOT / "pub" / "fragments" / "paper_bc_resumen_es.tex",
     ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
     ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia_appendix.tex",
+    ROOT / "pub" / "fragments" / "paper_b_abstract_en.tex",
+    ROOT / "docs" / "reports" / "paper_b" / "paper_b_cleiej.tex",
 ]
 
 PAPER_D = ROOT / "docs" / "reports" / "paper_d" / "paper_d.tex"

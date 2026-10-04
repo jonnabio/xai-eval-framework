@@ -32,8 +32,12 @@ can become a second paper in one form only: the LLM-judge study with the taxonom
 3. **Paper B targets the *CLEI Electronic Journal*** (author, 2026-10-04): no author charges,
    single-blind review, English, CC-BY, at least 12 pages, abstract of at most 200 words,
    IEEE-style numbered references, the journal's `cleiej` LaTeX class.
-4. **Paper B is `docs/reports/paper_bc/paper_b_cleiej.tex`**, on the `paper/bc-*` lane. Both papers
-   stay in this folder unless the author decides otherwise.
+4. **Paper B has its own folder and lane** (author, 2026-10-04): `docs/reports/paper_b/`, lane
+   `paper-b` on `paper/b-*` branches, worked in the main folder. The manuscript is
+   `docs/reports/paper_b/paper_b_cleiej.tex`, with its own copies of the figures. Nothing of
+   Paper B is kept in `docs/reports/paper_bc/`, which holds the 32-page edition and the Paper C
+   material. The April 2026 prototype that was in `docs/reports/paper_b/` was removed; it
+   remains in the history (last present at commit `cd4af0e94`).
 5. **No text or result appears in both papers.** Paper B keeps no taxonomy, scoping corpus or
    LLM-judge material. Each paper cites the other once it exists, and the RIMI article.
 6. **The 32-page edition is kept unedited** (`paper_bc_iberamia.*`, tag
@@ -46,7 +50,8 @@ can become a second paper in one form only: the LLM-judge study with the taxonom
 
 - No experiment is run and no registered value changes for Paper B. `paper_b_cleiej.tex` goes under
   `[coverage]`; each kept claim gains a site in it. It needs no entry under `[exclusivity]`:
-  files in `docs/reports/paper_bc/` are the protected side of that check.
+  files in `docs/reports/paper_bc/` and `docs/reports/paper_b/` are the protected side of that
+  check (`forbid`).
 - ADR-0018 applies to both papers: the CIFIE chapter prints no result of Paper B or Paper C
   while they are unpublished.
 - Single-blind review: the author block, the repository address and the archive DOI are

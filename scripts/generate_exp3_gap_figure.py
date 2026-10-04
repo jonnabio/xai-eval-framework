@@ -31,6 +31,7 @@ generator.
 """
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -54,6 +55,12 @@ CELLS = [
 
 
 def main() -> None:
+    # Paper B (docs/reports/paper_b/figures) keeps its own copy of the figure:
+    # pass --output-dir to write it there instead of the default.
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--output-dir", type=Path, default=OUT_DIR)
+    out_dir = parser.parse_args().output_dir.resolve()
+
     labels, anchors, gaps = [], [], []
     for dataset, model, label in CELLS:
         a = resolve(f"exp3_anchors:{dataset}:{model}:fidelity")
@@ -88,9 +95,9 @@ def main() -> None:
     ax.axhline(0.0, color="#555555", linewidth=0.8)
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
-        out = OUT_DIR / f"fig_exp3_gap.{ext}"
+        out = out_dir / f"fig_exp3_gap.{ext}"
         fig.savefig(out, bbox_inches="tight")
         print("  wrote", out.relative_to(ROOT).as_posix())
     plt.close(fig)
