@@ -1,6 +1,6 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-04): NOT ready to submit.** The rigor review of 2026-10-04 (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`, grade: major revision) has four major findings open (F01-F04). Target journal: *Computación y
+**Status (2026-10-04): revised after the rigor review; with the author for the final read.** The review of 2026-10-04 (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`, grade: major revision) had four major and nine minor findings; the section "Response to the rigor review" below says what was done for each. The revised manuscript has not been reviewed again. Target journal: *Computación y
 Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
 
 ## Where this paper is worked
@@ -38,8 +38,10 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 | `references.bib` | 25 entries, checked against Crossref, arXiv or the publisher page, except the bootstrap textbook. 24 approved by the author on 2026-10-03; `bhatt2020evaluating` (source of the fidelity measure) was added on 2026-10-04 and awaits approval. |
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
 | `scripts/paper_e_sign_contribution.py` | Post hoc direct sign test (plan section 9, 2026-10-04). |
+| `scripts/paper_e_review_analyses.py` | Post hoc re-cuts for the rigor review (baseline, held-out contrast, rank sensitivity, coverage). |
+| `scripts/paper_e_ceiling.py` | Post hoc self-agreement experiment (needs the model binaries; see its docstring). |
 | `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
-| `submission/paper_e_blind.pdf` | The file for review. |
+| `submission/paper_e_blind.pdf` | The file for review. **Local only since 2026-10-04:** the PDFs are not tracked by git (blind review; the journal asks that the work is not available online). Run the build to regenerate them. |
 | `submission/paper_e_full.pdf` | With author, repository address and self-citation. |
 
 ## Build
@@ -100,6 +102,25 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 - **Length: at most 15 pages** in the journal layout (the draft has 11). The journal
   states no limit; this is the author's limit. `build_paper_e.py` stops if a PDF has more
   than `MAX_PAGES = 15`.
+
+## Response to the rigor review (2026-10-04)
+
+| Finding | What was done |
+|---|---|
+| F01 no within-method ceiling | New experiment `scripts/paper_e_ceiling.py`: each method run twice on 760 instances. New Section 4.2 and Table 2; abstract, discussion and conclusions rewritten around it. SVM left out (cost). |
+| F02 converted sign agreement matched by a fixed direction | Majority-sign baseline computed and reported beside the converted value; "the direct test confirms" removed; claim limited to a global direction per feature. |
+| F03 correctness contrast confounded with training rows | Share of training rows reported; contrast repeated on held-out rows (the MLP and RF signs remain). |
+| F04 intervals are ranges of seed means | Stated in Methods and limitations; "do not overlap" and "includes zero" removed; "five fitted models". |
+| F05 LIME selection and sampling | Described in Section 3.2. |
+| F06 Kendall measure read on the wrong scale | Measure described; comparison with overlap removed; shared-only tau added as sensitivity. |
+| F07 untested cause of low rank concordance | Re-ranking by contribution computed and reported; sentence replaced. |
+| F08 overclaims | Reworded ("did not vary visibly", "no consistent association", fidelity claim limited to Adult and German Credit). |
+| F09 SVM coverage | 29.5% stated in Section 3.4 and in the limitations. |
+| F10 "registered"; unreported plan items | "Written and committed before"; sign intervals and the number of shared features reported; every post hoc analysis labelled; second companion manuscript named. Not done: medians of run means are not printed. |
+| F11 citation fit | Roy, Garreau, Alvarez-Melis and Bhatt sentences reworded. |
+| F12 seed-42 sentence | Names the measure; held-out contrast added. |
+| F13 public PDFs | PDFs untracked and ignored from 2026-10-04. They remain in the earlier git history, on `main` and in the Zenodo archive v0.6.0, which cannot be withdrawn; declare this in the cover letter. |
+| Reference audit | URL added to Lundberg and Lee; DOI added to Efron and Tibshirani; Krishna et al. kept on arXiv by the author's decision. |
 
 ## Claim registry
 

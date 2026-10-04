@@ -190,6 +190,24 @@ def placeholder(numbers: Numbers, spec: str) -> str:
     if kind == "sign":       # dataset|model|class|field
         return numbers.show(src("posthoc/sign_by_predicted_class_summary", FIELD[a[3]],
                                 dataset=a[0], model=a[1], predicted_class=a[2]))
+    if kind == "ceil":       # dataset|model|pair|metric|field -- self-agreement experiment
+        return numbers.show(src("posthoc/ceiling_summary", FIELD[a[4]], dataset=a[0], model=a[1], pair=a[2],
+                                metric=a[3]))
+    if kind == "base":       # dataset|model|majority, converted or shared|field
+        column = {"majority": "majority_sign_agreement", "converted": "converted_sign_agreement",
+                  "shared": "shared_nonzero_top5"}[a[2]]
+        return numbers.show(src("posthoc/review_sign_baseline_summary", f"{column}.{FIELD[a[3]]}",
+                                dataset=a[0], model=a[1]), "f2" if a[2] == "shared" else "f3")
+    if kind == "rank":       # dataset|column|field -- rank sensitivity analyses, all models
+        return numbers.show(src("posthoc/review_rank_sensitivity_summary", f"{a[1]}.{FIELD[a[2]]}",
+                                dataset=a[0], model="all"))
+    if kind == "cov":        # dataset|model|column -- pairing coverage
+        return numbers.show(src("posthoc/review_coverage", a[2], dataset=a[0], model=a[1]),
+                            "f1" if a[2] == "share_paired_percent" else "int")
+    if kind == "train":      # seeds (seed_42 or other_seeds)|model|column -- Adult training membership
+        return numbers.show(src("posthoc/review_training_membership_summary", a[2], seeds=a[0], model=a[1]))
+    if kind == "held":       # model|column -- Adult correctness contrast on held-out rows
+        return numbers.show(src("posthoc/review_heldout_contrast_summary", a[1], dataset="exp2_adult", model=a[0]))
     if kind == "signc":      # dataset|model|class (0, 1, all)|field -- after conversion to contributions
         return numbers.show(src("posthoc/sign_contribution_summary", "contribution_" + FIELD[a[3]],
                                 dataset=a[0], model=a[1], predicted_class=a[2]))
@@ -281,7 +299,23 @@ def table_secondary(n: Numbers) -> str:
     return "\n".join(lines) + "\n"
 
 
-TABLES = {"agreement": table_agreement, "sign": table_sign, "correctness": table_correctness,
+def table_ceiling(n: Numbers) -> str:
+    lines = []
+    for dataset, label in DATASETS:
+        # the SVM is not part of the self-agreement experiment (see paper_e_ceiling.py)
+        models = ([m for m in ADULT_MODELS if m != "svm"] if dataset == "exp2_adult" else EXP3_MODELS) + ["all"]
+        for k, model in enumerate(models):
+            s = lambda pair, column: src("posthoc/ceiling_summary", column, dataset=dataset, model=model,  # noqa: E731
+                                         pair=pair, metric="top5_jaccard")
+            cells = [n.show(s(pair, EST)) + " " + n.ci(s(pair, LO), s(pair, HI))
+                     for pair in ("lime_lime", "shap_shap", "shap_lime_stored")]
+            count = n.show(s("lime_lime", "n_instances"), "int")
+            lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & {count} & " + " & ".join(cells) + r" \\")
+        lines.append(r"\hline")
+    return "\n".join(lines) + "\n"
+
+
+TABLES = {"ceiling": table_ceiling, "agreement": table_agreement, "sign": table_sign, "correctness": table_correctness,
           "quality": table_quality, "secondary": table_secondary}
 PRINTED_FILES = [MANUSCRIPT] + [TABLE_FILE.format(name) for name in TABLES]
 

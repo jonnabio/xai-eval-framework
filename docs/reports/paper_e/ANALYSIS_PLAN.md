@@ -325,3 +325,67 @@ interventional perturbation, so SHAP and LIME explain the same scale. (3) The Ad
 models were trained once on the seed-42 partition; for the other four seeds part of the
 explained instances are training data. The manuscript now states all three.
 
+**2026-10-04 (post hoc; in response to the rigor review
+`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`).** The review found four
+interpretations stronger than the evidence. The analyses below were added to test them.
+None changes a prespecified estimate.
+
+*Self-agreement of each method (review F01).* Script
+`docs/reports/paper_e/scripts/paper_e_ceiling.py`, outputs
+`outputs/analysis/paper_e/posthoc/ceiling_*.csv`.
+
+- Question: what does each explainer reproduce of itself when run again on the same
+  instance and model? This, not identity, is the upper reference for SHAP-LIME agreement.
+- Sample: a random subsample of the paired instances of each run, drawn with a generator
+  seeded by `[20261003, run seed, dataset+model]`. Adult: intensity `n_100` only, 20 instances per run for LR, MLP, RF and XGB; EXP3: 30
+  per run. The SVM is left out: KernelSHAP on it took about two minutes per explanation
+  (one run of six instances took 23 minutes), and its stored SHAP runs cover 29% of the
+  instances. 760 instances in 26 runs.
+- Procedure: each instance is explained twice by LIME and twice by SHAP with the
+  repository wrappers and the settings of the stored runs. The repetitions differ only in
+  the random state (1001 and 2002): LIME's perturbed samples; SHAP's background sample
+  and, for KernelSHAP, the coalition sampling (global NumPy generator seeded per
+  instance).
+- Models: Adult binaries from `experiments/exp1_adult/models/`; EXP3 binaries regenerated
+  with `scripts/train_exp3_models.py`, as for the LIME cohort. An instance enters only if
+  the loaded model reproduces its stored prediction (none was skipped).
+- Measures: the prespecified `primary_agreement` function, between the two repetitions of
+  each method, and between the stored SHAP and LIME explanations on the same subsample.
+  The script also compares a repetition with the stored explanation of the same method.
+- Aggregation: section 5 unchanged.
+- Limits: small subsample, one pair of random states, not planned. For the Adult random
+  forest the repetition agrees less with the stored SHAP explanation than with the other
+  repetition, consistent with the known mismatch between the stored binary and the
+  binary that produced the runs.
+
+*Re-cuts of the stored explanations (review F02, F03, F06, F07, F09, F10).* Script
+`docs/reports/paper_e/scripts/paper_e_review_analyses.py`, outputs
+`outputs/analysis/paper_e/posthoc/review_*.csv`.
+
+1. **Majority-sign baseline (F02).** The sign of every LIME slope is replaced by the
+   majority sign of that feature's slope in the same run, then converted and compared
+   with SHAP as in the 2026-10-04 direct test. It uses no instance-level information from
+   LIME. It reaches the converted agreement (0.951, 0.978, 0.990 against 0.945, 0.960,
+   0.990). Consequence: the converted sign agreement shows that the two methods imply the
+   same global direction per feature; it is not evidence of agreement on
+   instance-specific directions, and the manuscript no longer says "the direct test
+   confirms".
+2. **Sign-agreement denominator (F10).** Mean number of shared non-zero top-5 features.
+3. **Re-ranking by contribution (F07).** LIME's ten stored features re-ordered by
+   `|w_j z_j|`; top-5 overlap and Kendall recomputed with `primary_agreement`.
+4. **Kendall on shared features only (F06).** `tau_b` on the features present in both
+   top-10 lists, with no rank 11 for absent features; instances with fewer than two
+   shared features are left out.
+5. **Held-out correctness contrast (F03).** An Adult instance is a training row if its
+   encoded feature vector equals a row of the seed-42 training matrix (seed 42 itself
+   gives 0.1% matches, so false matches are negligible). The RQ3 contrast is recomputed on
+   held-out rows, with the same minimum of ten per group, averaged over intensities per
+   model and seed.
+6. **Coverage (F09).** Paired instances as a share of valid LIME instances, by model.
+
+*Wording changes that follow the review, with no new analysis:* the seed-clustered
+intervals are described as the spread of seed means (with three seeds their limits are the
+extreme seed means) and are not used as tests; "registered" is replaced by "written and
+committed before"; every post hoc analysis is labelled where it appears; the second
+companion manuscript (Paper B+C) is named.
+
