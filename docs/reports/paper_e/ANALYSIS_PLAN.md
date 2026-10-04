@@ -285,3 +285,43 @@ Consequence for the paper: the prespecified sign agreement is reported, but it i
 interpreted as disagreement about direction. No prespecified estimate was changed or
 removed. The analyses in 1-3 are labelled post hoc wherever they appear.
 
+**2026-10-04 (post hoc; direct test of the 2026-10-03 explanation).** The explanation
+above rested on indirect evidence (the split by predicted class and the sign constancy).
+The direct test was added in
+`docs/reports/paper_e/scripts/paper_e_sign_contribution.py`, written to
+`outputs/analysis/paper_e/posthoc/sign_contribution_*.csv`.
+
+- **Conversion.** LIME without discretisation fits its local linear model on
+  `z_j = (x_j - m_j) / s_j`, with `m` and `s` the mean and standard deviation of the
+  training data given to the explainer. The contribution of feature `j` relative to the
+  training mean is `c_j = w_j * z_j`; its sign is `sign(w_j) * sign(x_j - m_j)`. Sign
+  agreement is recomputed on the same shared, nonzero top-5 features with the sign of
+  `c_j` in place of the sign of `w_j`. A feature whose value equals the training mean has
+  no defined contribution sign and is left out (none occurred).
+- **Data.** The runs do not store feature values. They are reloaded with the loaders the
+  runs used (`load_adult` with the stored Adult preprocessor; `load_tabular_dataset` for
+  EXP3), by dataset and seed, and the instance is `X_test[instance_id]`.
+- **Alignment checks, made before any statistic.** (a) The stored true label of every
+  paired instance equals `y_test[instance_id]`. (b) For EXP3, the SHA-256 of the reloaded
+  train and test arrays equals the hash recorded in the Paper E LIME run. A block failing
+  a check is excluded and listed in `sign_contribution_checks.csv`. All 86 blocks passed.
+- **Internal check.** The script recomputes the slope-based sign agreement on the same
+  instances; it reproduces the prespecified values (0.717, 0.511, 0.374).
+- **Aggregation.** Section 5 unchanged: mean of run means, seed-clustered percentile
+  bootstrap, 2,000 resamples, seed 20261003.
+- **Result.** Contribution-based sign agreement: 0.945 Adult, 0.960 German Credit, 0.990
+  Breast Cancer, with no dependence on the predicted class and above 0.9 for every model
+  family. The explanation of 2026-10-03 is confirmed.
+- **Limit.** The reference of `c_j` is the training mean; the SHAP reference is the
+  expected output on a 50-instance background sample. They are close, not identical.
+
+**2026-10-04 (corrections to the method description, found by checking the manuscript
+against the code; no statistic changed).** (1) The stored "fidelity" is
+`FaithfulnessMetric`: the Pearson correlation, across features, between the absolute
+attribution and the absolute change in predicted probability when that feature alone is
+replaced by its training mean. It is not a surrogate R². RQ4 is therefore an association
+with this masking-based fidelity. (2) TreeSHAP ran with `model_output="probability"` and
+interventional perturbation, so SHAP and LIME explain the same scale. (3) The Adult
+models were trained once on the seed-42 partition; for the other four seeds part of the
+explained instances are training data. The manuscript now states all three.
+

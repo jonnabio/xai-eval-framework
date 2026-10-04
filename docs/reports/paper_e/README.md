@@ -35,8 +35,9 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 | `paper_e_template.tex` | **The source.** Edit this. Every number is a placeholder. |
 | `paper_e.tex`, `tables/`, `figures/` | Generated. Do not edit. |
 | `paper_e_layout.tex` | Layout constants and the release/archive macros. |
-| `references.bib` | 24 entries; 22 checked against Crossref or arXiv on 2026-10-03 (not the bootstrap textbook or the Paper A entry). Approved by the author. |
+| `references.bib` | 25 entries, checked against Crossref, arXiv or the publisher page, except the bootstrap textbook. 24 approved by the author on 2026-10-03; `bhatt2020evaluating` (source of the fidelity measure) was added on 2026-10-04 and awaits approval. |
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
+| `scripts/paper_e_sign_contribution.py` | Post hoc direct sign test (plan section 9, 2026-10-04). |
 | `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
 | `submission/paper_e_blind.pdf` | The file for review. |
 | `submission/paper_e_full.pdf` | With author, repository address and self-citation. |
@@ -62,6 +63,27 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 - **Post hoc:** sign agreement follows the predicted class (Breast Cancer: 0.977 for
   class 0, 0.036 for class 1) because LIME without discretisation stores slopes and SHAP
   stores contributions. The paper reports it as a methodological finding.
+- **Post hoc, direct test (2026-10-04):** after the LIME slopes are converted into
+  contributions, sign agreement is 0.945 on Adult, 0.960 on German Credit and 0.990 on
+  Breast Cancer, independent of the predicted class. The two explainers differ in which
+  features they rank first, not in the direction they assign. Script:
+  `scripts/paper_e_sign_contribution.py` (needs scikit-learn and the datasets under
+  `data/`; run it before the build when the runs change).
+
+## Method statements checked against the code (2026-10-04)
+
+| Statement | Checked in | Result |
+|---|---|---|
+| Fidelity definition | `src/experiment/metrics_engine.py`, `src/metrics/faithfulness.py`, `scripts/run_exp3_lime.py` | **Corrected.** It is the correlation between attribution size and single-feature masking effect, not a surrogate R². |
+| Stability definition | `src/metrics/stability.py`, run configs | Confirmed: mean pairwise cosine similarity over 15 noisy copies. |
+| TreeSHAP output scale | `src/xai/shap_tabular.py` | **Corrected.** Probability, interventional; the draft said log-odds for XGB. |
+| KernelSHAP for LR, SVM, MLP; 50 background instances | `configs/experiments/exp2_scaled/*_shap_*.yaml` | Confirmed. |
+| LIME: 1000 samples, kernel width 3, ten features, no discretisation | `src/xai/lime_tabular.py`, `src/experiment/runner.py`, configs | Confirmed. |
+| LIME value is a slope on a standardised scale | `lime` package behaviour with `discretize_continuous=False` | Confirmed, and by the direct test above. |
+| Stored top-10 by absolute value | `runner.py::_format_explanation` | Confirmed. |
+| 108 / 61 / 30 encoded features | reloaded data; run metadata | Confirmed. |
+| Sampling per confusion-matrix quadrant | `src/evaluation/sampler.py` | Confirmed. |
+| Adult models trained once; seed fixes the partition | `runner.py::setup`, model metadata | **Added** to the manuscript with the training-overlap limitation. |
 
 ## Decisions by the author (2026-10-03)
 

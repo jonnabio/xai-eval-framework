@@ -78,6 +78,7 @@ class Data:
         self.sign = pd.read_csv(P / "sign_by_predicted_class_summary.csv")
         self.sign_runs = pd.read_csv(P / "sign_by_predicted_class_runs.csv")
         self.const = pd.read_csv(P / "sign_constancy_summary.csv")
+        self.sign_contribution = pd.read_csv(P / "sign_contribution_summary.csv", dtype={"predicted_class": str})
         self.sec = pd.read_csv(P / "secondary_group_summary.csv")
         self.chance = pd.read_csv(P / "chance_overlap.csv")
 
@@ -189,6 +190,9 @@ def placeholder(numbers: Numbers, spec: str) -> str:
     if kind == "sign":       # dataset|model|class|field
         return numbers.show(src("posthoc/sign_by_predicted_class_summary", FIELD[a[3]],
                                 dataset=a[0], model=a[1], predicted_class=a[2]))
+    if kind == "signc":      # dataset|model|class (0, 1, all)|field -- after conversion to contributions
+        return numbers.show(src("posthoc/sign_contribution_summary", "contribution_" + FIELD[a[3]],
+                                dataset=a[0], model=a[1], predicted_class=a[2]))
     if kind == "const":      # dataset|model|method|field
         return numbers.show(src("posthoc/sign_constancy_summary", FIELD[a[3]], dataset=a[0], model=a[1], method=a[2]))
     if kind == "corr":       # dataset|model|column
@@ -232,8 +236,8 @@ def table_sign(n: Numbers) -> str:
             cells = [n.show(agreement_source(dataset, model, "sign_agreement", EST))]
             cells += [n.show(src("posthoc/sign_by_predicted_class_summary", EST, dataset=dataset, model=model,
                                  predicted_class=cls)) for cls in (0, 1)]
-            cells += [n.show(src("posthoc/sign_constancy_summary", EST, dataset=dataset, model=model, method=m))
-                      for m in ("shap", "lime")]
+            cells += [n.show(src("posthoc/sign_contribution_summary", "contribution_" + EST, dataset=dataset,
+                                 model=model, predicted_class=cls)) for cls in ("all", 0, 1)]
             lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & " + " & ".join(cells) + r" \\")
         lines.append(r"\hline")
     return "\n".join(lines) + "\n"
@@ -347,16 +351,22 @@ def fig_sign(data: Data) -> None:
             est = row.estimate_mean_of_run_means
             ax.errorbar(x + shift, est, yerr=[[est - row.ci95_low], [row.ci95_high - est]], fmt=marker,
                         color=colour, markersize=4, capsize=2.5, linewidth=0.9,
-                        label=f"Predicted class {cls}" if x == 0 else None)
+                        label=f"Slope, predicted class {cls}" if x == 0 else None)
     for x, (dataset, model) in zip(pos, GROUPS):
         overall = data.agree(dataset, model, "sign_agreement").estimate_mean_of_run_means
         ax.hlines(overall, x - 0.4, x + 0.4, color="black", linewidth=1.0,
-                  label="All instances (prespecified estimate)" if x == 0 else None)
+                  label="Slope, all instances (prespecified)" if x == 0 else None)
+        c = data.sign_contribution
+        row = Data._one(c[(c.dataset == dataset) & (c.model == model) & (c.predicted_class == "all")], "signc")
+        est = row.contribution_estimate_mean_of_run_means
+        ax.errorbar(x, est, yerr=[[est - row.contribution_ci95_low], [row.contribution_ci95_high - est]],
+                    fmt="D", color="#2a7f3f", markersize=4, capsize=2.5, linewidth=0.9,
+                    label="Contribution, all instances" if x == 0 else None)
     ax.axhline(0.5, color="#999999", linewidth=0.5, linestyle="dotted")
     ax.set_ylim(-0.03, 1.03)
     ax.set_ylabel("Sign agreement on shared\ntop-5 features")
     group_axis(ax, pos)
-    ax.legend(frameon=False, loc="lower left", ncol=3, bbox_to_anchor=(0.0, 1.0))
+    ax.legend(frameon=False, loc="lower left", ncol=4, bbox_to_anchor=(-0.02, 1.0), columnspacing=1.0, handletextpad=0.4)
     fig.savefig(D / "figures" / "fig2_sign_by_class.pdf", metadata={"CreationDate": None})
     plt.close(fig)
 
