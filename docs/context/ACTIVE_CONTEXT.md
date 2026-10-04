@@ -92,7 +92,7 @@ It supersedes the two Paper E entries of 2026-10-03 below.
     E files, then `ACTIVE_CONTEXT.md`, each in its own commit; `main` only through a pull
     request (`gh pr create`, `gh pr merge --merge` worked in this session).
   - Zenodo archives a GitHub release within a few minutes; the DOI goes in
-    `paper_e_layout.tex` (`paperearchive`) and the Paper E README.
+    `paper_e_layout.tex` (the `\paperearchive` macro) and the Paper E README.
   - A `%` comment inside a BibTeX entry silently drops the entry; keep comments outside.
   - `cys.bst` prints a DOI as `\url{10...}`; the template redefines `\url` inside the
     reference list and full addresses in the `.bib` file use `\fullurl`.
