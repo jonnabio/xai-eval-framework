@@ -157,3 +157,15 @@ no policy on it. The author's decision.
 3. The note to the editor must mention the 45-cell test of the earlier article
    (`docs/reports/paper_b/CLEIEJ_SUBMISSION.md`, section 3, updated).
 4. A review by someone who did not write the draft.
+
+## 6. Follow-up (2026-10-04, same day): open findings applied at the author's request
+
+| Finding | Action |
+|---|---|
+| F02 title | New title: "When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark" |
+| F07 cross-dataset presentation | Figure 3 (SHAP against Anchors, a repeat of Table 4) removed. Table 5 has a new column with the paired SHAP-LIME fidelity gap (+0.07, +0.07, +0.23, +0.24), values already registered |
+| F08 stability protocol | Section 4.6 now says that the Gaussian noise is added to every transformed feature, including the one-hot columns (checked in `src/metrics/stability.py`), that Breast Cancer has no categorical feature, and that no experiment separates the encoding from the perturbation scheme |
+| Step 4, independent review | Still open; it cannot be done by this session |
+
+A double-blind build was added at the author's request (`paper_b_cleiej_blind.tex`, 12 pages).
+The full build has 13 pages and 2 figures.
