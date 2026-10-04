@@ -1,5 +1,31 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper D reproducibility and archive)
+
+- **Data availability statement rewritten** in `paper_d_template.tex` (full and blind
+  versions). It names the public datasets, what the repository holds, the release and
+  its archive, and points to the regeneration instructions.
+- **Zenodo version 0.5.0 published: `10.5281/zenodo.23130014`**, from GitHub release
+  `paper-d-submission-2026-10-03` (commit `021d85ead`, on the Paper D branch, not yet on
+  `main`). 917 MB, open access, MIT. The paper cites it. Record kept in
+  `docs/reports/paper_d/README.md`, "Release and archive".
+- **Clean-clone test passed.** In a fresh clone and a fresh Python 3.13 environment,
+  `paper_d_analysis.py` regenerated all 13 result files: 159 of 11,976 cells differ, by
+  at most 8e-11 relative; `paper_d.tex` and the registry block came out unchanged and
+  `verify_claims.py` passed. Two gaps found and fixed in the instructions: `certifi` was
+  missing from the documented packages (now `docs/reports/paper_d/requirements.txt`),
+  and a Windows clone needs `core.longpaths true`.
+- **Length:** the full PDF went from 11 to 12 pages; the blind PDF, which is the file
+  sent for review, stays at 11. The author checks the Word page count when re-saving.
+- Verified after the final build: `verify_claims.py` (479 claims / 645 sites),
+  `verify_sync.py`, the strict Paper D shared-literal scan (0 unexplained).
+- **Still open, author:** push this branch to `main`
+  (`git push origin paper/d-tecnologia-en-marcha:main`), delete the old branch
+  `paper-d/tecnologia-en-marcha`, and the Paper D items before 2026-10-13 (profession
+  placeholder, Spanish read, three `NEW` references, re-save the .docx in Word, send).
+- The main folder is still on `paper/d-tecnologia-en-marcha`, claimed by
+  `claude-paper-d` in the lane guard.
+
 ## Session update - 2026-10-03 (Paper D in the main folder; lane guard)
 
 This entry supersedes the Paper D row of the table in the ADR-0021 entry below.
