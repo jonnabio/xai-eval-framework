@@ -23,6 +23,10 @@
 \usepackage{amsmath}
 \usepackage{url}
 \usepackage{cite}
+% Clickable citations, cross-references and URLs, in blue (author decision 2026-10-04).
+% cys.cls does not load hyperref; published CyS articles that have links add it themselves.
+% Loaded last. The PDF metadata carries no author, so the blind file stays blind.
+\usepackage[colorlinks=true,allcolors=blue,pdfauthor={},pdfcreator={},pdfproducer={}]{hyperref}
 
 \addto\captionsenglish{%
   \renewcommand{\figurename}{Fig.}%
@@ -635,7 +639,12 @@ in a public repository, with scripts that generate every number, table and figur
 this article; its address is withheld for blind review.
 \fi
 
+% cys.bst prints a DOI as \url{10.xxxx/...}, which is not an address. Inside the reference
+% list a DOI therefore links to https://doi.org/<doi>, and complete addresses in the .bib
+% file use \fullurl.
+\let\fullurl\url
 {
+\renewcommand{\url}[1]{\href{https://doi.org/#1}{\nolinkurl{#1}}}
 \bibliographystyle{cys}
 \bibliography{references}
 }
