@@ -4,14 +4,16 @@
 explanation quality on misclassified instances*
 
 **Target:** *Tecnología en Marcha* (Editorial Tecnológica de Costa Rica), special issue on
-Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**. The
-author instructions (checked 2026-10-03) say articles are sent only through the journal
-website, with a user account requested from revistatm@itcr.ac.cr; the earlier note here said
-"by email to revistatm@tec.ac.cr", so the author confirms the route against the special-issue
-call. The instructions also ask for the author's telephone numbers, which are given in the
-submission form and are not kept in this public repository. Author target: **12 pages in Word**, including references; English.
+Artificial Intelligence. ESCI, SciELO, DOAJ; no fees. **Deadline: 15 October 2026**, by email
+to revistatm@tec.ac.cr (route confirmed by the author on 2026-10-03 from the special-issue
+instructions; the journal's general instructions page names the website instead). The
+instructions also ask for the author's telephone numbers, which go in the email and are not
+kept in this public repository. Author target: **12 pages in Word**, including references; English.
 
-**Status (2026-10-03): first render done.** The analysis ran as planned (two deviations,
+**Status (2026-10-03): SUBMITTED.** The author sent the paper by email to
+revistatm@tec.ac.cr on 2026-10-03 (blind and full Word files, three TIFF figures). The files
+in `submission/` at commit `f8e88a6d7` are the ones sent; do not rebuild them unless the
+journal asks for a revision. Earlier status: first render done. The analysis ran as planned (two deviations,
 logged in `ANALYSIS_PLAN.md` §9). The manuscript, figures, Word file and separate TIFFs are in
 `submission/`: 12 Word pages after iteration 1. Every printed number re-derives through
 the claim registry. What remains before submission is in `IMPROVEMENT_ANALYSIS.md`. Paper D is
