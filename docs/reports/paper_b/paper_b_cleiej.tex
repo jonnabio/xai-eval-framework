@@ -21,15 +21,26 @@
 % Version DOI of the Zenodo release that archives exactly this study.
 \newcommand{\zenodoversiondoi}{\url{https://doi.org/10.5281/zenodo.23147228}}
 
-\title{LIME versus SHAP under Matched Conditions: A Paired Comparison on
-Tabular Models}
+% Double-blind build: paper_b_cleiej_blind.tex defines \blindreview and then
+% inputs this file. It hides the author block, the acknowledgments, the
+% repository address and the archive DOI. The journal itself reviews
+% single-blind; the default build is the one to submit there.
+\newif\ifblind
+\ifdefined\blindreview\blindtrue\fi
 
+\title{When Does SHAP Outperform LIME? Model- and Configuration-Dependent
+Results from a Paired Tabular Benchmark}
+
+\ifblind
+\author{\it Authors omitted for double-blind review}
+\else
 \author{
 \bf Jonathan Herrera-V\'asquez\\
 Universidad Americana de Europa (UNADE), Department of Computer Science,\\
 Canc\'un, Quintana Roo, Mexico,\\
 \it jonnabio@gmail.com
 }
+\fi
 
 \begin{document}
 \maketitle
@@ -521,9 +532,9 @@ models across three random seeds each, yielding 12 paired
 dataset--model--seed comparisons per method pair.
 
 \textbf{Fidelity ordering (SHAP vs.\ Anchors).} SHAP exceeds Anchors in
-fidelity in all 12 paired combinations (Table~\ref{tab:exp3_fidelity},
-Figure~\ref{fig:exp3_fidelity}), with mean gaps ranging from $+0.26$
-(German Credit, XGB) to $+0.51$ (Breast Cancer, RF).
+fidelity in all 12 paired combinations (Table~\ref{tab:exp3_fidelity}),
+with mean gaps ranging from $+0.26$ (German Credit, XGB) to $+0.51$ (Breast
+Cancer, RF).
 
 \begin{table}[htb]
 \centering
@@ -545,17 +556,9 @@ German Credit  & XGB   & 0.451   & $+0.260$ \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.70\linewidth]{figures/fig_exp3_gap.pdf}
-\caption{Cross-dataset extension: paired SHAP$-$Anchors fidelity gap
-(3-seed average) per dataset and model; the Anchors levels are in
-Table~\ref{tab:exp3_fidelity}. BC\,=\,Breast Cancer; GC\,=\,German Credit}
-\label{fig:exp3_fidelity}
-\end{figure}
-
 \textbf{LIME on the further datasets.} Table~\ref{tab:exp3_lime} reports
-LIME fidelity and stability on the same datasets. Two findings follow.
+LIME fidelity and stability on the same datasets, with the paired
+SHAP$-$LIME fidelity gap. Two findings follow.
 First, SHAP $>$ LIME fidelity holds on German Credit (mean gaps $+0.23$ for
 RF and $+0.24$ for XGB, positive for every seed), in the direction found on
 Adult. On Breast Cancer the fidelity gap narrows substantially: SHAP leads
@@ -569,20 +572,20 @@ therefore not a fixed property of LIME.
 \begin{table}[!htb]
 \centering
 \caption{Cross-dataset extension: mean fidelity and stability (3-seed
-average) for LIME. Stability is the mean pairwise cosine similarity under
-$T=15$ Gaussian perturbations ($\sigma=0.1$), the protocol of the main
-cohort. For comparison, LIME on Adult in the matched model strata: fidelity
-$0.457$ (RF) and $0.553$ (XGB); stability $\approx 0.01$--$0.02$ across all
-model families}
+average) for LIME, and the paired SHAP$-$LIME fidelity gap. Stability is
+the mean pairwise cosine similarity under $T=15$ Gaussian perturbations
+($\sigma=0.1$), the protocol of the main cohort. For comparison, LIME on
+Adult in the matched model strata: fidelity $0.457$ (RF) and $0.553$ (XGB);
+stability $\approx 0.01$--$0.02$ across all model families}
 \label{tab:exp3_lime}
-\begin{tabular}{llcccc}
+\begin{tabular}{llccccc}
 \toprule
-Dataset        & Model & Fidelity & Stability & Sparsity & Cost (ms) \\
+Dataset        & Model & Fidelity & Gap (SHAP $-$ LIME) & Stability & Sparsity & Cost (ms) \\
 \midrule
-Breast Cancer  & RF    & 0.713    & 0.922     & 0.331    & 12.3 \\
-Breast Cancer  & XGB   & 0.543    & 0.927     & 0.331    & 7.5  \\
-German Credit  & RF    & 0.483    & 0.854     & 0.163    & 21.1 \\
-German Credit  & XGB   & 0.468    & 0.748     & 0.163    & 10.2 \\
+Breast Cancer  & RF    & 0.713    & $+0.07$ & 0.922     & 0.331    & 12.3 \\
+Breast Cancer  & XGB   & 0.543    & $+0.07$ & 0.927     & 0.331    & 7.5  \\
+German Credit  & RF    & 0.483    & $+0.23$ & 0.854     & 0.163    & 21.1 \\
+German Credit  & XGB   & 0.468    & $+0.24$ & 0.748     & 0.163    & 10.2 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -628,10 +631,14 @@ LIME reaches $0.75$--$0.93$ at the reference width, the probe supports a
 bounded conclusion: under the reference kernel width, LIME's stability on
 Adult is near zero; it rises with the kernel width and is high on two
 lower-dimensional datasets, so it is modulated by the configuration and by
-the feature space. Adult's one-hot encoding is a candidate cause, but the
-two further datasets also differ from Adult in size, class balance and the
-mix of continuous and categorical features, so this design does not isolate
-the encoding. The near-zero reading should not be taken as a
+the feature space. Adult's one-hot encoding is a candidate cause, and the
+stability protocol itself may contribute: the Gaussian noise is added to
+every transformed feature, including the one-hot indicator columns, which
+then take values that no real instance has. Breast Cancer has no
+categorical feature. No experiment here separates the encoding from the
+perturbation scheme, and the two further datasets also differ from Adult in
+size, class balance and the mix of continuous and categorical features, so
+this design does not isolate either cause. The near-zero reading should not be taken as a
 configuration-independent property of LIME.
 
 \subsection{Sensitivity of the Fidelity Ordering to the Masking Scheme}
@@ -766,8 +773,9 @@ to it and not restated, in the text or in a figure. That study also reports
 a paired SHAP--LIME test on a 45-cell subset of the cells analysed here; the
 present results agree with it in direction and significance and, because the
 subset is contained in the 75 cells, they extend it and do not replicate it.
-Agreement between the two analyses is arithmetic, not corroborative. Two further manuscripts by the author, under review at
-other journals, analyse the same executions for different questions: the
+Agreement between the two analyses is arithmetic, not corroborative. Two
+further manuscripts\ifblind\else{} by the author\fi, under review at other
+journals, analyse the same executions for different questions: the
 behavior of explanations on misclassified instances, and the instance-level
 agreement between the feature rankings of SHAP and LIME. Neither reports a
 result reported here.
@@ -851,18 +859,22 @@ SHAP background sample and the LIME kernel width across models, and extend
 the comparison beyond tabular classification. Whether either method helps
 people decide is a separate question that needs a study with participants.
 
+\ifblind\else
 \section*{Acknowledgments}
 
 The author thanks Miguel Herrero Uceda, PhD, for his revision of this
 manuscript and for his constructive comments during its development.
+\fi
 
 \section*{Data and Code Availability}
 \label{sec:artifacts}
 
 The experimental code, the run artifacts and the analysis exports are
-available in the public repository
+available in \ifblind a public repository and in a versioned archive with a
+DOI, both released under the MIT License; their addresses are withheld for
+double-blind review\else the public repository
 \url{https://github.com/jonnabio/xai-eval-framework}, released under the
-MIT License, and in its archived release, \zenodoversiondoi{}. The
+MIT License, and in its archived release, \zenodoversiondoi{}\fi. The
 artifacts needed to reproduce this study are the main-cohort results
 (\path{experiments/exp2_scaled/results/}), the inferential exports
 (\path{outputs/analysis/paper_a_exp2_stats/}), the cross-dataset results

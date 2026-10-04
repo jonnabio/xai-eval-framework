@@ -39,9 +39,10 @@ Published examples (Vol. 29 No. 4, 2026) run from 14 to 31 pages.
 | File | Role |
 |---|---|
 | `paper_b_cleiej.tex` | Manuscript source |
-| `paper_b_cleiej.pdf` | The file to upload |
+| `paper_b_cleiej.pdf` | **The file to upload** (the journal reviews single-blind), 13 pages |
+| `paper_b_cleiej_blind.tex` / `.pdf` | Double-blind build of the same source, 12 pages: no author block, no acknowledgments, repository address and DOI withheld. Not needed by this journal; kept for a venue or a reader that asks for it |
 | `cleiej.cls` | Journal class, unmodified |
-| `figures/` | Three figures, each rebuilt by a committed script |
+| `figures/` | Two figures, rebuilt by a committed script |
 | `pub/claims.toml` (`[papers.paper_b]`) | Abstract and keywords; generated into `pub/fragments/` |
 
 Build, from the repository root:
@@ -87,8 +88,23 @@ Paper B keeps its own copies in `docs/reports/paper_b/figures/`. Rebuild them wi
 
 ```bash
 python scripts/generate_paper_b_figures.py --output-dir docs/reports/paper_b/figures
-python scripts/generate_exp3_gap_figure.py --output-dir docs/reports/paper_b/figures
 ```
 
 The 32-page edition and the Paper C material stay in `docs/reports/paper_bc/`; nothing of
 Paper B is kept there.
+
+## 6. Title and the double-blind build (2026-10-04)
+
+- **Title:** "When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a
+  Paired Tabular Benchmark" (review finding F02). The earlier title was "LIME versus SHAP under
+  Matched Conditions: A Paired Comparison on Tabular Models"; the Zenodo 0.9.0 archive and the
+  GitHub release carry the earlier title.
+- **Double-blind build:** `tectonic docs/reports/paper_b/paper_b_cleiej_blind.tex`. After every
+  edit, check it with:
+
+  ```bash
+  pdftotext docs/reports/paper_b/paper_b_cleiej_blind.pdf - | grep -i -E "jonnabio|github|zenodo|UNADE|Universidad Americana|Canc.n|Jonathan|Acknowledg|by the author"
+  ```
+
+  Expected output: nothing. Reference [10] names its authors as any citation does, and the
+  text refers to it in the third person.
