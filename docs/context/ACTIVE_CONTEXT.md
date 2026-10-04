@@ -43,8 +43,9 @@ This is the latest handoff. It supersedes the two Paper E entries of 2026-10-03 
     --strict` and the 17 lane and Paper E tests pass.
   - The revised text has not been reviewed a second time; the author does the scientific
     read next.
-  - Zenodo: version 0.7.0 from release `paper-e-cys-2026-10-04` (see the Paper E README for
-    the DOI). Version 0.6.0 (`10.5281/zenodo.23130949`) predates the revision and contains
+  - Zenodo: **version 0.7.0, `10.5281/zenodo.23139911`**, from release
+    `paper-e-cys-2026-10-04` (commit `3923d1b68`); the full PDF cites it. Pull request #8
+    merged; `main` holds the revision and no manuscript PDF. Version 0.6.0 (`10.5281/zenodo.23130949`) predates the revision and contains
     the earlier PDFs; it cannot be withdrawn.
 - **Next Steps**
   1. Author: scientific read of `docs/reports/paper_e/submission/paper_e_blind.pdf`.
