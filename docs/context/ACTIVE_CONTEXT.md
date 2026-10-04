@@ -1,5 +1,38 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-03 (Paper D in the main folder; lane guard)
+
+This entry supersedes the Paper D row of the table in the ADR-0021 entry below.
+
+- **Paper D is worked in the main folder**, at `docs/reports/paper_d/`, on branch
+  `paper/d-tecnologia-en-marcha` (author decision; ADR-0021 amended). The folder
+  `../xai-paper-d` was removed after a file comparison showed no difference from the
+  main folder. The old branch `paper-d/tecnologia-en-marcha` is fully contained in
+  `main`; the author still has to delete it locally and on origin.
+- **The main folder hosts three lanes, one at a time:** thesis, Paper B+C and Paper D.
+  It is on `paper/d-tecnologia-en-marcha` now. Return it to `thesis/rca-001-phase-2`
+  when the Paper D session ends.
+- **Lane guard added** (`scripts/pubs/check_lane.py`, `scripts/pubs/lanes.toml`,
+  `.githooks/pre-commit`, CI job `lanes`). Before this, the ADR-0021 rules had no
+  mechanism behind them. Now:
+  - every session starts with `python scripts/pubs/check_lane.py claim --owner <name>`
+    and ends with `release --owner <name>`; a claim fails if another session holds
+    the folder, the branch is not a lane, the folder is wrong, or `main` was not taken;
+  - the pre-commit hook refuses a commit with no live lock, a commit touching another
+    lane's paths, and a commit mixing lane paths with shared paths;
+  - CI repeats the path rules for commits reaching `main`.
+  The hook needs `git config core.hooksPath .githooks`, which is set for this
+  repository and all its folders; a folder gets the hook file when it takes `main`.
+- **Limits:** a session that never runs `claim` is not stopped from editing files, only
+  from committing when no lock is live. `--no-verify` bypasses the hook and must not be
+  used. Add the claim step to the session start prompt.
+- **Not done: `main` is not synced.** The assistant's push to `main` was refused by the
+  permission system. `main` is three shared commits behind this branch; the author runs
+  `git push origin paper/d-tecnologia-en-marcha:main`, then every lane takes `main`.
+- Verified: the 9 guard tests pass; five refusals were reproduced by hand (no lock,
+  second claim, another lane's path, mixed commit, wrong owner); `verify_claims.py`
+  (479 claims / 645 sites) and `verify_sync.py` pass.
+
 ## Session update - 2026-10-03 (one working tree per paper, ADR-0021)
 
 At the author's direction, each paper in progress now has its own folder and branch
