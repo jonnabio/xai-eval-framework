@@ -1,5 +1,29 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-04 (Paper E: title, Zenodo 0.8.0, merged to main)
+
+This entry is the latest. It closes Next Steps 1 and 2 and the merge in step 3 of the
+handoff directly below.
+
+- **Author decisions:** the blind PDF was read; the title is now "Do Explainers Agree on
+  Which Features Matter? Instance-Level Agreement between SHAP and LIME" ("on Three
+  Tabular Datasets" removed). The author approved the Zenodo release and the merge.
+- **`main`:** pull request #12 merged (`8bed86320`); it holds the second review, the
+  revision and the new title.
+- **Zenodo version 0.8.0: `10.5281/zenodo.23142429`**, from GitHub release
+  `paper-e-cys-2026-10-04-r2` (tag on `8bed86320`). The full PDF cites it
+  (`paper_e_layout.tex`).
+- **Verified after the last build:** both PDFs 15 pages; `verify_claims.py` 986 claims /
+  1220 sites; `verify_sync.py`; CI (fragments, lanes, exp4-reconstruction) passed on the
+  pull request.
+- **Next, author:** register at the journal site and submit
+  `docs/reports/paper_e/submission/paper_e_blind.pdf`; in the cover letter say that
+  earlier drafts were in a public repository and in Zenodo 0.6.0, and name the two
+  companion manuscripts. Record the submission in the Paper E README.
+- **Still open, unchanged:** return the main folder to `thesis/rca-001-phase-2` when
+  Paper E work ends; the other lanes take `main`; Paper D acknowledgement; Paper B+C
+  submission; Task 3 / RCA-001 Phase 2.
+
 ## Session Handoff - 2026-10-04 (Paper E revised after the second rigor review)
 
 This is the latest handoff. It closes the "second rigor review" entry directly below.
