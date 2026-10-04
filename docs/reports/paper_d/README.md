@@ -10,7 +10,10 @@ instructions; the journal's general instructions page names the website instead)
 instructions also ask for the author's telephone numbers, which go in the email and are not
 kept in this public repository. Author target: **12 pages in Word**, including references; English.
 
-**Status (2026-10-03): first render done.** The analysis ran as planned (two deviations,
+**Status (2026-10-03): SUBMITTED.** The author sent the paper by email to
+revistatm@tec.ac.cr on 2026-10-03 (blind and full Word files, three TIFF figures). The files
+in `submission/` at commit `f8e88a6d7` are the ones sent; do not rebuild them unless the
+journal asks for a revision. Earlier status: first render done. The analysis ran as planned (two deviations,
 logged in `ANALYSIS_PLAN.md` §9). The manuscript, figures, Word file and separate TIFFs are in
 `submission/`: 12 Word pages after iteration 1. Every printed number re-derives through
 the claim registry. What remains before submission is in `IMPROVEMENT_ANALYSIS.md`. Paper D is
