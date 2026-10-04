@@ -64,6 +64,19 @@ merged. Any return to separate folders has to prevent that.
    in a commit that contains nothing else. It is the file most likely to conflict.
 8. **A paper's working tree is removed when the paper is published** or abandoned, after
    its branch is merged into `main`.
+9. **Decisions 2, 3 and 6 are enforced by `scripts/pubs/check_lane.py`** (added
+   2026-10-03). The lanes, folders and owned paths are in `scripts/pubs/lanes.toml`,
+   which is the binding copy of the table above.
+   - A session starts with `python scripts/pubs/check_lane.py claim --owner <name>` and
+     ends with `release`. The claim fails when the branch is not a lane, when the lane
+     is checked out in the wrong folder, when the lane has not taken `main`, or when
+     another session holds the folder's lock. A lock expires 12 hours after its last
+     commit.
+   - The pre-commit hook (`.githooks/pre-commit`, enabled with
+     `git config core.hooksPath .githooks`) refuses a commit that has no live lock,
+     touches another lane's paths, or mixes lane paths with shared paths.
+   - CI (`pubs-sync.yml`, job `lanes`) refuses a commit reaching `main` that changes the
+     paths of two lanes or mixes lane paths with shared ones.
 
 ## Consequences
 
@@ -73,9 +86,13 @@ merged. Any return to separate folders has to prevent that.
   `cp -rn .ace/. <folder>/.ace/` and, for LaTeX builds, `tools/tectonic-portable/`. The
   Python environment is the main folder's `.venv`, called by path.
 - Disk use grows by one checkout per paper.
-- The rule in decision 4 depends on discipline. A check that a lane's commit touches
-  only its own paths is not built yet; plan task 8
-  (`scripts/pubs/check_substrate_current.py`) is the place for it.
+- Decision 4 (merge finished paper work into `main` the same session) still depends on
+  discipline; nothing checks it.
+- The session lock is taken by the session itself. A session that skips `claim` is
+  stopped at its first commit only when the folder has no live lock; it is not stopped
+  from editing files. Git itself refuses to check out one branch in two folders.
+- The hook is local and can be bypassed with `--no-verify`, which agents must not use.
+  The CI job is the copy that cannot be bypassed, and it sees only what reaches `main`.
 - Paper B+C and Paper D stay in the main folder until the author asks for a separate
   folder for either. Thesis work and those two papers cannot be edited at the same
   time, because they share one checkout.

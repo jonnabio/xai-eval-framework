@@ -1,0 +1,82 @@
+# Lane registry (ADR-0021, ADR-0013). Read by scripts/pubs/check_lane.py.
+#
+# A lane is a branch pattern, the folder it is worked in, and the paths it owns.
+# Every path no lane owns is shared and reaches the lanes through `main`.
+# Adding a paper means adding a lane here, in a commit that goes through `main`.
+
+main_folder = "xai-eval-framework"
+
+# A session lock older than this is treated as abandoned.
+lock_stale_hours = 12
+
+[[lane]]
+name = "thesis"
+branches = ["thesis/*"]
+folder = "xai-eval-framework"
+owns = ["thesis/**"]
+
+[[lane]]
+name = "paper-a"
+branches = ["paper/a-*"]
+folder = "xai-eval-framework"
+owns = ["docs/reports/paper_a/**"]
+
+[[lane]]
+name = "paper-bc"
+branches = ["paper/bc-*"]
+folder = "xai-eval-framework"
+owns = ["docs/reports/paper_bc/**"]
+
+[[lane]]
+name = "paper-d"
+branches = ["paper/d-*"]
+folder = "xai-eval-framework"
+owns = [
+  "docs/reports/paper_d/**",
+  "outputs/analysis/paper_d/**",
+  "docs/planning/paper_d_*",
+  "scripts/generate_paper_d_figures.py",
+  "scripts/pubs/build_paper_d.py",
+  "scripts/pubs/paper_d_analysis.py",
+  "scripts/pubs/render_paper_d.py",
+]
+
+[[lane]]
+name = "paper-e"
+branches = ["paper/e-*"]
+folder = "xai-paper-e"
+owns = [
+  "docs/reports/paper_e/**",
+  "outputs/analysis/paper_e/**",
+  "docs/planning/paper_e_*",
+  "scripts/analyze_paper_e.py",
+  "scripts/paper_e_data_audit.py",
+  "tests/analysis/test_analyze_paper_e.py",
+  "tests/analysis/test_paper_e_data_audit.py",
+  "tests/analysis/test_run_exp3_lime_paper_e.py",
+]
+
+[[lane]]
+name = "paper-f"
+branches = ["paper/f-*"]
+folder = "xai-paper-f"
+owns = ["docs/reports/paper_f/**", "outputs/analysis/paper_f/**"]
+
+[[lane]]
+name = "chapter"
+branches = ["chapter/cifie-*"]
+folder = "xai-chapter"
+owns = ["publications/book_chapters/2026_cifie_xai_fom7/**"]
+
+[[lane]]
+name = "exp4-cohort2"
+branches = ["results/exp4-*"]
+folder = "xai-exp4"
+owns = ["experiments/exp4_cohort2/**", "outputs/analysis/exp4_cohort2/**"]
+
+# Shared-substrate lanes (ADR-0013): they own nothing and commit shared paths only.
+[[lane]]
+name = "substrate"
+branches = ["pubs/*", "rca/*"]
+folder = "xai-eval-framework"
+owns = []

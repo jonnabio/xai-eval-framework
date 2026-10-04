@@ -34,6 +34,7 @@ core_rules:
   - "Atomic commits with clear, descriptive messages"
   - "No code generation without reading existing code first"
   - "Check regression guards before modifying any guarded file"
+  - "Claim the lane before any edit: python scripts/pubs/check_lane.py claim --owner <session>; if it fails, stop and tell the author (ADR-0021)"
   - "Every issue requires RCA with regression prevention"
   - "The CIFIE/FOM-7 chapter uses free format; no publisher template is required"
   - "There is no word-count limit for the CIFIE/FOM-7 chapter"
@@ -116,6 +117,7 @@ hooks:
     - check_active_context
     - load_relevant_adrs
     - check_regression_guards
+    - "python scripts/pubs/check_lane.py status"
   post_generation:
     - validate_against_standards
     - verify_regression_invariants

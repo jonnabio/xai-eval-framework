@@ -40,6 +40,25 @@ jobs:
           # so it differs on every machine; nothing reads it back.
           git diff --exit-code -- pub/fragments ':!pub/fragments/build_meta.env'
 
+  lanes:
+    # ADR-0021: no commit changes the paths of two lanes, or mixes a lane's
+    # paths with shared ones. The branch and folder rules run in the local
+    # pre-commit hook (.githooks/pre-commit); this is the copy that binds.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check that each new commit keeps to one lane
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python3 scripts/pubs/check_lane.py --range "$BASE..HEAD"
+
   exp4-reconstruction:
     # Checks the reconstructed EXP4 sources against the hash pins recorded from
     # the 2026-08-28 bytecode verification (the bytecode was lost 2026-09-27).
