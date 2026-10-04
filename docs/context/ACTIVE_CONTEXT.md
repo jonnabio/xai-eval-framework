@@ -1,5 +1,26 @@
 # Active Context: XAI Evaluation Framework
 
+## Session update - 2026-10-04 (Paper E SUBMITTED to Computación y Sistemas, ID 6783)
+
+This entry is the latest.
+
+- **Paper E was submitted by the author on 2026-10-04** through the journal's online
+  system; the journal acknowledged it by email as **submission 6783**
+  (https://cys.cic.ipn.mx/index.php/CyS/author/submission/6783).
+- File sent: `docs/reports/paper_e/submission/paper_e_blind.pdf` (15 pages, source at
+  `main` `193f1660e`), with a note to the editor and no supplementary file. Record in
+  `docs/reports/paper_e/README.md`, "Submission record".
+- Venue requirements re-read on the journal site the same day: Artificial Intelligence is
+  in scope, publication has no cost for authors, three referees, blind review, authors
+  transfer copyright on publication.
+- The author decided to take no action on the public repository and archive; the note to
+  the editor states that earlier drafts are reachable there.
+- **Do not rebuild `submission/` or change the Paper E analysis unless a revision is
+  requested.** A revision that changes code or results needs a new Zenodo version.
+- **Next:** wait for the journal's decision. Then return the main folder to
+  `thesis/rca-001-phase-2`; the other lanes take `main`. Unchanged: Paper D
+  acknowledgement, Paper B+C submission, Task 3 / RCA-001 Phase 2.
+
 ## Session update - 2026-10-04 (Paper E: title, Zenodo 0.8.0, merged to main)
 
 This entry is the latest. It closes Next Steps 1 and 2 and the merge in step 3 of the
