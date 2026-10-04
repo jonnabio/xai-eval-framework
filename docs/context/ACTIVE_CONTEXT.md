@@ -19,17 +19,22 @@ This is the latest handoff. The Paper E handoff of the same day follows it and i
     human raters are available for Paper C.
   - Plan approved and steps 1 to 6 executed:
     `docs/planning/paper_b_13pp_reduction_plan_2026-10-04.md`.
-  - **Paper B first draft:** `docs/reports/paper_bc/paper_b_cleiej.tex` and `.pdf`, 13 pages
+  - **Paper B first draft:** `docs/reports/paper_b/paper_b_cleiej.tex` and `.pdf`, 13 pages
     in the journal class (`cleiej.cls`), abstract 191 words (limit 200), 38 references in
     citation order, 9 tables, 3 figures, no appendix. Submission sheet:
-    `docs/reports/paper_bc/CLEIEJ_SUBMISSION.md`.
+    `docs/reports/paper_b/CLEIEJ_SUBMISSION.md`.
   - Registry: 78 sites added for the new file, which is under `[coverage]`; no value changed.
-    New fragment id `paper_b_cleiej` in `pub/claims.toml`, `generate_fragments.py` and
-    `verify_sync.py`.
+    The fragment id `paper_b` in `pub/claims.toml` now holds the CLEIej abstract.
+  - **Paper B has its own folder and lane** (author, same day): `docs/reports/paper_b/`, lane
+    `paper-b`, branches `paper/b-*`, with its own figures. The April prototype that was in
+    that folder was removed (still in the history, last at `cd4af0e94`). Nothing of Paper B
+    remains in `docs/reports/paper_bc/`. The Paper A overlap scan and the retired-value
+    guards now read the Paper B files; `[exclusivity]` forbids both folders.
   - Paper C preparation: `docs/reports/paper_bc/second_reviewer_adjudication_sheet.csv`
     (28 disagreements in 12 records, decision columns empty).
 - **Current State**
-  - Main folder on `paper/bc-refocus-13pp`, pushed, not merged to `main`.
+  - Main folder on `paper/b-cleiej` (it contains `paper/bc-refocus-13pp`), pushed, not
+    merged to `main`. Lane `paper-b` is claimed by `claude-paper-b`.
   - Verified after the last build: `verify_claims.py` 986 claims / 1298 sites / 28 files fully
     registered; `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained;
     `verify_exp4_reconstruction.py` 18 pins; 9 lane tests.
@@ -41,7 +46,7 @@ This is the latest handoff. The Paper E handoff of the same day follows it and i
   1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
   2. New session, Scientific Advisor: review `paper_b_cleiej.pdf` for focus, novelty against
      Papers A, D and E, and claim support. Findings to `docs/review/`.
-  3. Author: read `docs/reports/paper_bc/paper_b_cleiej.pdf`; decide the note to the editor
+  3. Author: read `docs/reports/paper_b/paper_b_cleiej.pdf`; decide the note to the editor
      (`CLEIEJ_SUBMISSION.md`, section 3).
   4. After the review: fixes, a new Zenodo version, update `\zenodoversiondoi`, pull request
      to `main`, then the author submits.
