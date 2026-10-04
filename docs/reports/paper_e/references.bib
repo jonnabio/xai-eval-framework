@@ -1,18 +1,19 @@
 % Paper E bibliography. Entries were checked on 2026-10-03 against their Crossref or
-% arXiv record, except efron1993introduction and herrera2026framework. Approved by the author 2026-10-03.
+% arXiv record, except efron1993introduction (a book). herrera2026framework, three published-version
+% links and their DOIs were supplied by the author and checked on 2026-10-04. All 25 entries approved by the author.
 
 % --- the disagreement problem ---------------------------------------------------------
 @article{krishna2024disagreement,
   author = {Krishna, Satyapriya and Han, Tessa and Gu, Alex and Wu, Steven and Jabbari, Shahin and Lakkaraju, Himabindu},
   title = {The disagreement problem in explainable machine learning: A practitioner's perspective},
   journal = {Transactions on Machine Learning Research}, year = {2024},
-  note = {\url{https://arxiv.org/abs/2202.01602}}}
+  note = {\fullurl{https://arxiv.org/abs/2202.01602}}}
 
 @misc{neely2021order,
   author = {Neely, Michael and Schouten, Stefan F. and Bleeker, Maurits J. R. and Lucic, Ana},
   title = {Order in the court: Explainable {AI} methods prone to disagreement},
   howpublished = {ICML Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI},
-  year = {2021}, note = {\url{https://arxiv.org/abs/2105.03287}}}
+  year = {2021}, note = {\fullurl{https://arxiv.org/abs/2105.03287}}}
 
 @inproceedings{roy2022why,
   author = {Roy, Saumendu and Laberge, Gabriel and Roy, Banani and Khomh, Foutse and Nikanjam, Amin and Mondal, Saikat},
@@ -24,14 +25,14 @@
   author = {Han, Tessa and Srinivas, Suraj and Lakkaraju, Himabindu},
   title = {Which explanation should {I} choose? {A} function approximation perspective to characterizing post hoc explanations},
   booktitle = {Advances in Neural Information Processing Systems},
-  volume = {35}, year = {2022}, note = {\url{https://arxiv.org/abs/2206.01254}}}
+  volume = {35}, pages = {5256--5268}, year = {2022}, doi = {10.52202/068431-0380}}
 
 @inproceedings{garreau2020explaining,
   author = {Garreau, Damien and von Luxburg, Ulrike},
   title = {Explaining the explainer: A first theoretical analysis of {LIME}},
   booktitle = {Proceedings of the 23rd International Conference on Artificial Intelligence and Statistics (AISTATS)},
   series = {Proceedings of Machine Learning Research}, volume = {108}, pages = {1287--1296},
-  year = {2020}, note = {\url{https://arxiv.org/abs/2001.03447}}}
+  year = {2020}, note = {\fullurl{https://proceedings.mlr.press/v108/garreau20a.html}}}
 
 % --- explainers ------------------------------------------------------------------------
 @inproceedings{ribeiro2016why,
@@ -44,7 +45,8 @@
   author = {Lundberg, Scott M. and Lee, Su-In},
   title = {A unified approach to interpreting model predictions},
   booktitle = {Advances in Neural Information Processing Systems},
-  volume = {30}, pages = {4765--4774}, year = {2017}}
+  volume = {30}, pages = {4765--4774}, year = {2017},
+  note = {\fullurl{https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html}}}
 
 @article{lundberg2020local,
   author = {Lundberg, Scott M. and Erion, Gabriel and Chen, Hugh and DeGrave, Alex and Prutkin, Jordan M. and Nair, Bala and Katz, Ronit and Himmelfarb, Jonathan and Bansal, Nisha and Lee, Su-In},
@@ -69,7 +71,15 @@
   author = {Alvarez-Melis, David and Jaakkola, Tommi S.},
   title = {On the robustness of interpretability methods},
   booktitle = {ICML Workshop on Human Interpretability in Machine Learning (WHI 2018)},
-  year = {2018}, note = {\url{https://arxiv.org/abs/1806.08049}}}
+  year = {2018}, note = {\fullurl{https://arxiv.org/abs/1806.08049}}}
+
+% Source of the fidelity measure stored in the runs. Added 2026-10-04 when the metric
+% definition was checked against the code; Crossref record checked the same day.
+@inproceedings{bhatt2020evaluating,
+  author = {Bhatt, Umang and Weller, Adrian and Moura, Jos{\'e} M. F.},
+  title = {Evaluating and aggregating feature-based model explanations},
+  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence (IJCAI)},
+  pages = {3016--3022}, year = {2020}, doi = {10.24963/ijcai.2020/417}}
 
 @inproceedings{slack2020fooling,
   author = {Slack, Dylan and Hilgard, Sophie and Jia, Emily and Singh, Sameer and Lakkaraju, Himabindu},
@@ -87,7 +97,7 @@
   author = {Doshi-Velez, Finale and Kim, Been},
   title = {Towards a rigorous science of interpretable machine learning},
   howpublished = {arXiv preprint arXiv:1702.08608}, year = {2017},
-  note = {\url{https://arxiv.org/abs/1702.08608}}}
+  note = {\fullurl{https://arxiv.org/abs/1702.08608}}}
 
 % --- measures and inference ------------------------------------------------------------
 @article{jaccard1912distribution,
@@ -105,7 +115,8 @@
 @book{efron1993introduction,
   author = {Efron, Bradley and Tibshirani, Robert J.},
   title = {An Introduction to the Bootstrap},
-  publisher = {Chapman \& Hall}, address = {New York}, year = {1993}}
+  publisher = {Chapman \& Hall}, address = {New York}, year = {1993},
+  doi = {10.1201/9780429246593}}
 
 @article{cameron2015practitioner,
   author = {Cameron, A. Colin and Miller, Douglas L.},
@@ -141,8 +152,11 @@
   pages = {785--794}, year = {2016}, doi = {10.1145/2939672.2939785}}
 
 % --- the benchmark cohort (full version only) -------------------------------------------
+% The journal has issue numbers and no volumes. cys.bst prints an empty volume slot when
+% only `number` is given, so the issue is written in the journal field. Keep this comment
+% outside the entry: BibTeX does not treat a percent sign inside an entry as a comment.
 @article{herrera2026framework,
   author = {Herrera-V{\'a}squez, Jonathan and Herrero-Uceda, Miguel},
   title = {A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility},
-  journal = {Revista de Investigaci{\'o}n Multidisciplinaria Iberoamericana (RIMI)},
-  number = {3}, year = {2026}}
+  journal = {Revista de Investigaci{\'o}n Multidisciplinaria Iberoamericana (RIMI), No.~3},
+  year = {2026}, doi = {10.69850/rimi.vi3.307}}

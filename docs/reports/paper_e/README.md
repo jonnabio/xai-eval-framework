@@ -1,6 +1,6 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): draft complete, registered and archived; awaiting the author's read.** Target journal: *Computación y
+**Status (2026-10-04): revised after the rigor review; with the author for the final read.** The review of 2026-10-04 (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`, grade: major revision) had four major and nine minor findings; the section "Response to the rigor review" below says what was done for each. The revised manuscript has not been reviewed again. Target journal: *Computación y
 Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
 
 ## Where this paper is worked
@@ -35,10 +35,13 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 | `paper_e_template.tex` | **The source.** Edit this. Every number is a placeholder. |
 | `paper_e.tex`, `tables/`, `figures/` | Generated. Do not edit. |
 | `paper_e_layout.tex` | Layout constants and the release/archive macros. |
-| `references.bib` | 24 entries; 22 checked against Crossref or arXiv on 2026-10-03 (not the bootstrap textbook or the Paper A entry). Approved by the author. |
+| `references.bib` | 25 entries, checked against Crossref, arXiv or the publisher page, except the bootstrap textbook. All approved by the author (24 on 2026-10-03; `bhatt2020evaluating`, the source of the fidelity measure, on 2026-10-04). |
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
+| `scripts/paper_e_sign_contribution.py` | Post hoc direct sign test (plan section 9, 2026-10-04). |
+| `scripts/paper_e_review_analyses.py` | Post hoc re-cuts for the rigor review (baseline, held-out contrast, rank sensitivity, coverage). |
+| `scripts/paper_e_ceiling.py` | Post hoc self-agreement experiment (needs the model binaries; see its docstring). |
 | `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
-| `submission/paper_e_blind.pdf` | The file for review. |
+| `submission/paper_e_blind.pdf` | The file for review. **Local only since 2026-10-04:** the PDFs are not tracked by git (blind review; the journal asks that the work is not available online). Run the build to regenerate them. |
 | `submission/paper_e_full.pdf` | With author, repository address and self-citation. |
 
 ## Build
@@ -62,6 +65,27 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 - **Post hoc:** sign agreement follows the predicted class (Breast Cancer: 0.977 for
   class 0, 0.036 for class 1) because LIME without discretisation stores slopes and SHAP
   stores contributions. The paper reports it as a methodological finding.
+- **Post hoc, direct test (2026-10-04):** after the LIME slopes are converted into
+  contributions, sign agreement is 0.945 on Adult, 0.960 on German Credit and 0.990 on
+  Breast Cancer, independent of the predicted class. The two explainers differ in which
+  features they rank first, not in the direction they assign. Script:
+  `scripts/paper_e_sign_contribution.py` (needs scikit-learn and the datasets under
+  `data/`; run it before the build when the runs change).
+
+## Method statements checked against the code (2026-10-04)
+
+| Statement | Checked in | Result |
+|---|---|---|
+| Fidelity definition | `src/experiment/metrics_engine.py`, `src/metrics/faithfulness.py`, `scripts/run_exp3_lime.py` | **Corrected.** It is the correlation between attribution size and single-feature masking effect, not a surrogate R². |
+| Stability definition | `src/metrics/stability.py`, run configs | Confirmed: mean pairwise cosine similarity over 15 noisy copies. |
+| TreeSHAP output scale | `src/xai/shap_tabular.py` | **Corrected.** Probability, interventional; the draft said log-odds for XGB. |
+| KernelSHAP for LR, SVM, MLP; 50 background instances | `configs/experiments/exp2_scaled/*_shap_*.yaml` | Confirmed. |
+| LIME: 1000 samples, kernel width 3, ten features, no discretisation | `src/xai/lime_tabular.py`, `src/experiment/runner.py`, configs | Confirmed. |
+| LIME value is a slope on a standardised scale | `lime` package behaviour with `discretize_continuous=False` | Confirmed, and by the direct test above. |
+| Stored top-10 by absolute value | `runner.py::_format_explanation` | Confirmed. |
+| 108 / 61 / 30 encoded features | reloaded data; run metadata | Confirmed. |
+| Sampling per confusion-matrix quadrant | `src/evaluation/sampler.py` | Confirmed. |
+| Adult models trained once; seed fixes the partition | `runner.py::setup`, model metadata | **Added** to the manuscript with the training-overlap limitation. |
 
 ## Decisions by the author (2026-10-03)
 
@@ -69,9 +93,34 @@ cannot resolve, so a number cannot be typed by hand or left stale.
   author's.
 - **References approved:** the 24 entries of `references.bib`.
 - **No AI-use declaration** in the manuscript; the journal does not ask for one.
+- **Clickable blue links** (2026-10-04) for citations, cross-references, URLs and DOIs,
+  through `hyperref` (`colorlinks`, all blue). The journal class does not load it. Of the
+  24 articles in the journal's current issue on 2026-10-04, 9 have links, added by their
+  authors, in mixed styles; there is no journal rule. A DOI in the reference list links
+  to `https://doi.org/<doi>`; a complete address in `references.bib` is written with
+  `\fullurl{...}`, not `\url{...}`. The PDF metadata carries no author.
 - **Length: at most 15 pages** in the journal layout (the draft has 11). The journal
   states no limit; this is the author's limit. `build_paper_e.py` stops if a PDF has more
   than `MAX_PAGES = 15`.
+
+## Response to the rigor review (2026-10-04)
+
+| Finding | What was done |
+|---|---|
+| F01 no within-method ceiling | New experiment `scripts/paper_e_ceiling.py`: each method run twice on 760 instances. New Section 4.2 and Table 2; abstract, discussion and conclusions rewritten around it. SVM left out (cost). |
+| F02 converted sign agreement matched by a fixed direction | Majority-sign baseline computed and reported beside the converted value; "the direct test confirms" removed; claim limited to a global direction per feature. |
+| F03 correctness contrast confounded with training rows | Share of training rows reported; contrast repeated on held-out rows (the MLP and RF signs remain). |
+| F04 intervals are ranges of seed means | Stated in Methods and limitations; "do not overlap" and "includes zero" removed; "five fitted models". |
+| F05 LIME selection and sampling | Described in Section 3.2. |
+| F06 Kendall measure read on the wrong scale | Measure described; comparison with overlap removed; shared-only tau added as sensitivity. |
+| F07 untested cause of low rank concordance | Re-ranking by contribution computed and reported; sentence replaced. |
+| F08 overclaims | Reworded ("did not vary visibly", "no consistent association", fidelity claim limited to Adult and German Credit). |
+| F09 SVM coverage | 29.5% stated in Section 3.4 and in the limitations. |
+| F10 "registered"; unreported plan items | "Written and committed before"; sign intervals and the number of shared features reported; every post hoc analysis labelled; second companion manuscript named. Medians of the run means for the primary measure are given in one sentence of Section 4.1 (the remaining medians are in `group_agreement_summary.csv`). |
+| F11 citation fit | Roy, Garreau, Alvarez-Melis and Bhatt sentences reworded. |
+| F12 seed-42 sentence | Names the measure; held-out contrast added. |
+| F13 public PDFs | PDFs untracked and ignored from 2026-10-04. They remain in the earlier git history, on `main` and in the Zenodo archive v0.6.0, which cannot be withdrawn; declare this in the cover letter. |
+| Reference audit | URL added to Lundberg and Lee; DOI added to Efron and Tibshirani; Krishna et al. kept on arXiv by the author's decision. |
 
 ## Claim registry
 
@@ -96,9 +145,9 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
 | | |
 |---|---|
-| Release | `paper-e-cys-2026-10-03` (commit `fe3604406`, on `main`), published 2026-10-03 |
-| Version | 0.6.0 |
-| Version DOI (cited in the full PDF) | `10.5281/zenodo.23130949` |
+| Release | `paper-e-cys-2026-10-04`, on `main`, published 2026-10-04 |
+| Version | 0.7.0 (0.6.0, `10.5281/zenodo.23130949`, release `paper-e-cys-2026-10-03`, predates the review revision) |
+| Version DOI (cited in the full PDF) | pending |
 | Concept DOI (all versions) | `10.5281/zenodo.19297723` |
 | Archive | one zip, 918 MB, open access, MIT licence |
 

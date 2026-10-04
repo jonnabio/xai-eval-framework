@@ -78,6 +78,7 @@ class Data:
         self.sign = pd.read_csv(P / "sign_by_predicted_class_summary.csv")
         self.sign_runs = pd.read_csv(P / "sign_by_predicted_class_runs.csv")
         self.const = pd.read_csv(P / "sign_constancy_summary.csv")
+        self.sign_contribution = pd.read_csv(P / "sign_contribution_summary.csv", dtype={"predicted_class": str})
         self.sec = pd.read_csv(P / "secondary_group_summary.csv")
         self.chance = pd.read_csv(P / "chance_overlap.csv")
 
@@ -171,7 +172,7 @@ SCALARS = {
 }
 CORRECTNESS_COLUMN = {"diff": "mean_misclassified_minus_correct", "lo": LO, "hi": HI,
                       "correct": "mean_correct_jaccard", "mis": "mean_misclassified_jaccard"}
-FIELD = {"est": EST, "lo": LO, "hi": HI}
+FIELD = {"est": EST, "lo": LO, "hi": HI, "med": "estimate_median_of_run_means"}
 
 
 def placeholder(numbers: Numbers, spec: str) -> str:
@@ -188,6 +189,27 @@ def placeholder(numbers: Numbers, spec: str) -> str:
         return numbers.show(src("posthoc/adult_margin_summary", FIELD[a[2]], model="all", intensity=a[0], metric=a[1]))
     if kind == "sign":       # dataset|model|class|field
         return numbers.show(src("posthoc/sign_by_predicted_class_summary", FIELD[a[3]],
+                                dataset=a[0], model=a[1], predicted_class=a[2]))
+    if kind == "ceil":       # dataset|model|pair|metric|field -- self-agreement experiment
+        return numbers.show(src("posthoc/ceiling_summary", FIELD[a[4]], dataset=a[0], model=a[1], pair=a[2],
+                                metric=a[3]))
+    if kind == "base":       # dataset|model|majority, converted or shared|field
+        column = {"majority": "majority_sign_agreement", "converted": "converted_sign_agreement",
+                  "shared": "shared_nonzero_top5"}[a[2]]
+        return numbers.show(src("posthoc/review_sign_baseline_summary", f"{column}.{FIELD[a[3]]}",
+                                dataset=a[0], model=a[1]), "f2" if a[2] == "shared" else "f3")
+    if kind == "rank":       # dataset|column|field -- rank sensitivity analyses, all models
+        return numbers.show(src("posthoc/review_rank_sensitivity_summary", f"{a[1]}.{FIELD[a[2]]}",
+                                dataset=a[0], model="all"))
+    if kind == "cov":        # dataset|model|column -- pairing coverage
+        return numbers.show(src("posthoc/review_coverage", a[2], dataset=a[0], model=a[1]),
+                            "f1" if a[2] == "share_paired_percent" else "int")
+    if kind == "train":      # seeds (seed_42 or other_seeds)|model|column -- Adult training membership
+        return numbers.show(src("posthoc/review_training_membership_summary", a[2], seeds=a[0], model=a[1]))
+    if kind == "held":       # model|column -- Adult correctness contrast on held-out rows
+        return numbers.show(src("posthoc/review_heldout_contrast_summary", a[1], dataset="exp2_adult", model=a[0]))
+    if kind == "signc":      # dataset|model|class (0, 1, all)|field -- after conversion to contributions
+        return numbers.show(src("posthoc/sign_contribution_summary", "contribution_" + FIELD[a[3]],
                                 dataset=a[0], model=a[1], predicted_class=a[2]))
     if kind == "const":      # dataset|model|method|field
         return numbers.show(src("posthoc/sign_constancy_summary", FIELD[a[3]], dataset=a[0], model=a[1], method=a[2]))
@@ -232,8 +254,8 @@ def table_sign(n: Numbers) -> str:
             cells = [n.show(agreement_source(dataset, model, "sign_agreement", EST))]
             cells += [n.show(src("posthoc/sign_by_predicted_class_summary", EST, dataset=dataset, model=model,
                                  predicted_class=cls)) for cls in (0, 1)]
-            cells += [n.show(src("posthoc/sign_constancy_summary", EST, dataset=dataset, model=model, method=m))
-                      for m in ("shap", "lime")]
+            cells += [n.show(src("posthoc/sign_contribution_summary", "contribution_" + EST, dataset=dataset,
+                                 model=model, predicted_class=cls)) for cls in ("all", 0, 1)]
             lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & " + " & ".join(cells) + r" \\")
         lines.append(r"\hline")
     return "\n".join(lines) + "\n"
@@ -277,7 +299,23 @@ def table_secondary(n: Numbers) -> str:
     return "\n".join(lines) + "\n"
 
 
-TABLES = {"agreement": table_agreement, "sign": table_sign, "correctness": table_correctness,
+def table_ceiling(n: Numbers) -> str:
+    lines = []
+    for dataset, label in DATASETS:
+        # the SVM is not part of the self-agreement experiment (see paper_e_ceiling.py)
+        models = ([m for m in ADULT_MODELS if m != "svm"] if dataset == "exp2_adult" else EXP3_MODELS) + ["all"]
+        for k, model in enumerate(models):
+            s = lambda pair, column: src("posthoc/ceiling_summary", column, dataset=dataset, model=model,  # noqa: E731
+                                         pair=pair, metric="top5_jaccard")
+            cells = [n.show(s(pair, EST)) + " " + n.ci(s(pair, LO), s(pair, HI))
+                     for pair in ("lime_lime", "shap_shap", "shap_lime_stored")]
+            count = n.show(s("lime_lime", "n_instances"), "int")
+            lines.append(f"{label if k == 0 else ''} & {MODEL_LABEL[model]} & {count} & " + " & ".join(cells) + r" \\")
+        lines.append(r"\hline")
+    return "\n".join(lines) + "\n"
+
+
+TABLES = {"ceiling": table_ceiling, "agreement": table_agreement, "sign": table_sign, "correctness": table_correctness,
           "quality": table_quality, "secondary": table_secondary}
 PRINTED_FILES = [MANUSCRIPT] + [TABLE_FILE.format(name) for name in TABLES]
 
@@ -347,16 +385,22 @@ def fig_sign(data: Data) -> None:
             est = row.estimate_mean_of_run_means
             ax.errorbar(x + shift, est, yerr=[[est - row.ci95_low], [row.ci95_high - est]], fmt=marker,
                         color=colour, markersize=4, capsize=2.5, linewidth=0.9,
-                        label=f"Predicted class {cls}" if x == 0 else None)
+                        label=f"Slope, predicted class {cls}" if x == 0 else None)
     for x, (dataset, model) in zip(pos, GROUPS):
         overall = data.agree(dataset, model, "sign_agreement").estimate_mean_of_run_means
         ax.hlines(overall, x - 0.4, x + 0.4, color="black", linewidth=1.0,
-                  label="All instances (prespecified estimate)" if x == 0 else None)
+                  label="Slope, all instances (prespecified)" if x == 0 else None)
+        c = data.sign_contribution
+        row = Data._one(c[(c.dataset == dataset) & (c.model == model) & (c.predicted_class == "all")], "signc")
+        est = row.contribution_estimate_mean_of_run_means
+        ax.errorbar(x, est, yerr=[[est - row.contribution_ci95_low], [row.contribution_ci95_high - est]],
+                    fmt="D", color="#2a7f3f", markersize=4, capsize=2.5, linewidth=0.9,
+                    label="Contribution, all instances" if x == 0 else None)
     ax.axhline(0.5, color="#999999", linewidth=0.5, linestyle="dotted")
     ax.set_ylim(-0.03, 1.03)
     ax.set_ylabel("Sign agreement on shared\ntop-5 features")
     group_axis(ax, pos)
-    ax.legend(frameon=False, loc="lower left", ncol=3, bbox_to_anchor=(0.0, 1.0))
+    ax.legend(frameon=False, loc="lower left", ncol=4, bbox_to_anchor=(-0.02, 1.0), columnspacing=1.0, handletextpad=0.4)
     fig.savefig(D / "figures" / "fig2_sign_by_class.pdf", metadata={"CreationDate": None})
     plt.close(fig)
 
@@ -510,6 +554,8 @@ def compile_pdf() -> None:
                                          r"Overfull \\hbox \((?:[2-9]\d|\d{3,})[^)]*\)", log)))
         for line in problems:
             print(f"  {name}: {line}")
+        if any("undefined" in line for line in problems):
+            raise SystemExit(f"{name}: undefined citation or reference; check references.bib and the labels")
         pages = int(re.search(r"Output written on .*?\((\d+) pages?", log).group(1))
         print(f"built submission/{name}.pdf ({pages} pages)")
         if pages > MAX_PAGES:
