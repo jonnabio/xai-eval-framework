@@ -167,6 +167,11 @@ the revised English and Spanish wording. Worktree: `../xai-paper-d`, branch
 
 ## Session Metadata
 - **Last Updated:** 2026-10-03
+- **Mode (2026-10-03, latest):** HANDOFF - **repository consolidation task COMPLETE**
+  (rebuilt `main`, one working tree per paper under ADR-0021, all seven branches level
+  and pushed). **Active objective: Task 3 / RCA-001 Phase 2 on the thesis lane.** See
+  "Session Handoff - 2026-10-03 (repository consolidation and cleanup)" and the
+  ADR-0021 session update at the top of this file.
 - **Mode (2026-10-03):** HANDOFF - **Paper D task COMPLETE** (manuscript ready for the
   author's final read; Tecnología en Marcha, due 2026-10-15). Lane
   `paper-d/tecnologia-en-marcha`, not merged to `main`. **Active objective returns to
@@ -1411,7 +1416,11 @@ before that re-verification, and do not submit before sending the editor note.
 **ACTIVE — `thesis/rca-001-phase-2` — Task 3, RCA-001 Phase 2: make each
 published number exist in exactly one place.**
 This is again the active objective after completion of the 2026-09-28 CIFIE
-assessment and scaffold task.
+assessment and scaffold task, and again after completion of the 2026-10-03
+repository consolidation task. It is worked in the main folder on
+`thesis/rca-001-phase-2`. First unit: continue the coverage sweep with
+`thesis/apendices.qmd` (then `capitulo-1`, `capitulo-2`, `introduccion` and
+Paper A), before the macro generation and the CI build job.
 Generate the `pub/claim_registry.toml` values into LaTeX macros and Quarto inline
 values so the manuscripts consume them rather than restating them, and build all four
 outputs in CI, failing on undefined references and crossref warnings. Phase 1 verifies
@@ -1502,6 +1511,20 @@ See `docs/review/cifie-chapter-sync_2026-09-27.md`.
   enforced (Ch.4, Ch.6, Ch.5); 166 claims / 270 sites; `diff` and `exp2_missing_pct`
   resolvers added. Two defects found in Ch.6, none in Ch.5. See the 2026-09-04
   Session Handoff.
+- **Repository consolidation (closed 2026-10-03):** `main` rebuilt from `origin/main`
+  without the merge-and-revert pair and now holding Papers D, E and F, the chapter
+  commits and all handoffs. `main`, `thesis/rca-001-phase-2`,
+  `chapter/cifie-sync-2026-09`, `results/exp4-cohort2`,
+  `paper-d/tecnologia-en-marcha`, `paper/e-feature-agreement` and
+  `paper/f-external-validity` were level and pushed at close, each folder with no
+  uncommitted files. Verifiers green on that commit: 479 claims / 645 sites / 48
+  retired-value guards; sync; 18 EXP4 pins.
+- **One working tree per paper (ADR-0021, 2026-10-03):** `../xai-paper-d`,
+  `../xai-paper-e` and `../xai-paper-f` join the main folder (thesis),
+  `../xai-chapter` and `../xai-exp4`. Paper B+C stays in the main folder (ADR-0019).
+- **Papers D, E, F (2026-10-03):** D complete, files in
+  `docs/reports/paper_d/submission/`, awaiting the author's items; E has results in
+  `outputs/analysis/paper_e/` and no manuscript; F has a plan only.
 
 ### In Progress
 - **Task 3 — RCA-001 Phase 2** (see Current Objective): registry values into LaTeX
