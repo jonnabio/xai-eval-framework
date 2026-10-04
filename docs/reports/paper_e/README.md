@@ -1,10 +1,80 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): analysis artifacts generated.** At the author's direction, this
-advances the earlier plan to wait until Paper D is submitted. The protocol, source audit,
-new EXP3 LIME cohort and descriptive analysis are complete. Interpretation, literature
-verification and venue selection remain author work; no confirmatory tests or p-values are
-reported.
+**Status (2026-10-03): first full draft built.** Target journal: *Computación y
+Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
+
+## Where this paper is worked
+
+**Here: `xai-eval-framework/docs/reports/paper_e/`, on branch
+`paper/e-feature-agreement` checked out in the main folder.** Not in `../xai-paper-e`
+and not in any other folder. This is the author's instruction of 2026-10-03, recorded in
+ADR-0021 and in `scripts/pubs/lanes.toml`. A session that finds the main folder on
+another branch switches it (clean tree first); it does not go to another folder.
+
+## Venue: Computación y Sistemas
+
+Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGuidelines>
+(read 2026-10-03).
+
+- Original, unpublished work, not under review elsewhere.
+- File: PDF made with LaTeX, or Word. Templates: `template/LATEX.ZIP` and
+  `template/CyS-template.docx`, downloaded from the journal on 2026-10-03; `cys.cls` and
+  `cys.bst` beside the manuscript are the unmodified files from that archive.
+- Single spacing, 10-point Arial-like font, figures and tables inside the text, italics
+  instead of underlining, URLs or DOIs in the references, BibTeX obligatory.
+- Blind review: `submission/paper_e_blind.pdf` has no author block, no repository
+  address and no self-citation.
+- Submission is online, after registering at
+  <https://www.cys.cic.ipn.mx/index.php/CyS/user/register>. The page states no fee and no
+  page limit; the author confirms both on the site before submitting.
+
+## Files
+
+| File | What it is |
+|---|---|
+| `paper_e_template.tex` | **The source.** Edit this. Every number is a placeholder. |
+| `paper_e.tex`, `tables/`, `figures/` | Generated. Do not edit. |
+| `references.bib` | 24 entries, each checked against Crossref or arXiv on 2026-10-03. |
+| `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
+| `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
+| `submission/paper_e_blind.pdf` | The file for review. |
+| `submission/paper_e_full.pdf` | With author, repository address and self-citation. |
+
+## Build
+
+```
+python docs/reports/paper_e/scripts/paper_e_posthoc.py    # writes outputs/analysis/paper_e/posthoc/
+python docs/reports/paper_e/scripts/build_paper_e.py      # figures, tables, tex, two PDFs
+```
+
+Needs Python with numpy, pandas and matplotlib (the project `.venv` works) and the
+Tectonic compiler at `tools/tectonic-portable/`. The build fails on a placeholder it
+cannot resolve, so a number cannot be typed by hand or left stale.
+
+## Main results (all generated; see the PDF)
+
+- Top-5 Jaccard overlap between SHAP and LIME: 0.393 on Adult, 0.387 on German Credit,
+  0.714 on Breast Cancer; rank concordance is weak on the first two.
+- Agreement depends on model family and dataset, not on sampling intensity.
+- No consistent difference between correct and misclassified instances.
+- Disagreement is higher where LIME's local fidelity is lower.
+- **Post hoc:** sign agreement follows the predicted class (Breast Cancer: 0.977 for
+  class 0, 0.036 for class 1) because LIME without discretisation stores slopes and SHAP
+  stores contributions. The paper reports it as a methodological finding.
+
+## Open items for the author
+
+1. Read the draft and the interpretation; the science is the author's decision.
+2. Authorship: the draft lists one author. Add the thesis director if he is a co-author.
+3. Approve the 24 references. Reference to Paper A (RIMI) has no volume in the record.
+4. Decide whether the AI-use declaration stays; CyS does not ask for one.
+5. Not done: Paper E is not yet in `[coverage]` and `[exclusivity]` of
+   `pub/claim_registry.toml`. That is a shared-path change through `main`. Until then the
+   numbers are protected by the build (generated from the CSV files), not by
+   `verify_claims.py`.
+6. Not done: a tagged release and Zenodo version for the data availability statement.
+7. Possible addition: convert LIME slopes to contributions and recompute sign agreement
+   (needs the feature values of each instance, so the runs must be reloaded).
 
 ## The question
 

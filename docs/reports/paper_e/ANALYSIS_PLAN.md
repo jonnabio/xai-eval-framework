@@ -258,3 +258,30 @@ mismatch. Record the regenerated model/preprocessor hashes and source training
 summary hash in each run. This validates the reproducible training pipeline
 against the stored evidence; it does not claim byte identity with the absent
 original binary artifacts.
+
+**2026-10-03 (post hoc; after the prespecified results were inspected).** The
+prespecified sign agreement was below one half on Breast Cancer (0.374), the dataset
+with the highest top-5 overlap. Inspection showed why: LIME was run with
+`discretize_continuous=False`, so its stored value is the coefficient of the local
+linear model (a slope), while the SHAP value is a signed contribution relative to the
+expected output. Three analyses were added in
+`docs/reports/paper_e/scripts/paper_e_posthoc.py`, written to
+`outputs/analysis/paper_e/posthoc/`:
+
+1. sign agreement by predicted class, with the section 5 aggregation and bootstrap;
+2. sign constancy: for each run and method, and each feature with a nonzero top-10
+   value in at least ten paired instances, the share of those instances carrying the
+   feature's majority sign (instance-weighted mean over features);
+3. a chance reference: the exact expected top-k Jaccard of two independent random
+   k-subsets of the p encoded features (p = 108 Adult, 61 German Credit, 30 Breast
+   Cancer). It is a reference, not a threshold.
+
+The same script also writes two aggregations of prespecified outputs that the analysis
+script left at run level: the Adult agreement margins (per model pooled over intensity,
+per intensity pooled over model) and the group summary of the secondary feature-set
+overlaps. They use the section 5 procedure unchanged and are not new measures.
+
+Consequence for the paper: the prespecified sign agreement is reported, but it is not
+interpreted as disagreement about direction. No prespecified estimate was changed or
+removed. The analyses in 1-3 are labelled post hoc wherever they appear.
+
