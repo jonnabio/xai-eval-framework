@@ -1,6 +1,6 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): first full draft built.** Target journal: *Computación y
+**Status (2026-10-03): draft complete, registered and archived; awaiting the author's read.** Target journal: *Computación y
 Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
 
 ## Where this paper is worked
@@ -96,10 +96,11 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
 | | |
 |---|---|
-| Release | `paper-e-cys-2026-10-03` |
+| Release | `paper-e-cys-2026-10-03` (commit `fe3604406`, on `main`), published 2026-10-03 |
 | Version | 0.6.0 |
-| Version DOI (cited in the full PDF) | pending |
+| Version DOI (cited in the full PDF) | `10.5281/zenodo.23130949` |
 | Concept DOI (all versions) | `10.5281/zenodo.19297723` |
+| Archive | one zip, 918 MB, open access, MIT licence |
 
 If the analysis code or its results change before submission, publish a new version and
 update the two macros. A change to the text alone does not need one.
