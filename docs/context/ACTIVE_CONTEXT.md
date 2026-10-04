@@ -1,5 +1,48 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper E, second rigor review)
+
+This is the latest handoff. It follows the Paper E entry of the same day below.
+
+- **Completed**
+  - Second rigor review of the revised Paper E manuscript by the Scientific Advisor role,
+    read-only: `docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md`. Grade: major
+    revision, mean 3.6; 2 major, 6 minor findings, 2 suggestions. Of the 13 findings of the
+    first review, 10 are fixed and 3 partly fixed.
+  - Every manuscript number that was recomputed matches. `verify_claims.py`: 917 claims /
+    1136 sites, pass.
+- **Current State**
+  - No manuscript, registry or result file was changed. Paper E is not ready to submit.
+  - **F01 (major):** pairing the SHAP list of one instance with the LIME list of another
+    instance of the same run gives a top-5 overlap of 0.202 / 0.286 / 0.652 (Adult / German
+    Credit / Breast Cancer) against 0.393 / 0.387 / 0.714 for the same instance. Most of
+    the Breast Cancer agreement is a global ranking; the chance reference is too low and
+    the dataset conclusion does not hold as written.
+  - **F02 (major):** LIME ran with kernel width 3 (package default 0.75·√p: 7.8 / 5.9 /
+    4.1). On Adult the 999 perturbed samples have a total kernel weight of about 0.26
+    against 1 for the instance; the stored LIME stability on Adult has median 0.001 to
+    0.009. The manuscript reports neither.
+  - Minor: the random-forest row of Table 2 mixes the present binary with stored
+    explanations of another forest (the binary reproduces 0.75 to 0.81 of the stored
+    predictions); one sentence of the stability paragraph reports the fidelity column;
+    README and plan still carry statements the manuscript withdrew.
+- **Next Steps**
+  1. Author: read the review and answer its four questions (kernel width; title and
+     framing; run log of the self-agreement experiment; default-width sensitivity run).
+  2. Scientific Editor: add the permutation reference as a dated deviation in
+     `ANALYSIS_PLAN.md`, then the text changes of F01 to F08. New result files need a new
+     Zenodo version before submission.
+  3. Unchanged from the entry below: journal registration and submission, cover letter.
+- **Blockers/Issues**
+  - The self-agreement script stores measures, not the top-10 lists, so the permutation
+    reference cannot be computed for Table 2 without a rerun.
+- **Notes**
+  - The project `.venv` loads SciPy, scikit-learn, shap and lime again; the system Python
+    does not have them.
+  - The first claim of this session failed: the lane was locked by `claude-paper-e`. The
+    claim succeeded after the author said to try again. Release the lock at the end of
+    every session.
+
 ## Session Handoff - 2026-10-04 (session end: Paper E revised, archived, on main; with the author)
 
 This is the latest handoff and the full state at the end of the session of 2026-10-03/04.
