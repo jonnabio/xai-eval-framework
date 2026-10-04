@@ -510,6 +510,8 @@ def compile_pdf() -> None:
                                          r"Overfull \\hbox \((?:[2-9]\d|\d{3,})[^)]*\)", log)))
         for line in problems:
             print(f"  {name}: {line}")
+        if any("undefined" in line for line in problems):
+            raise SystemExit(f"{name}: undefined citation or reference; check references.bib and the labels")
         pages = int(re.search(r"Output written on .*?\((\d+) pages?", log).group(1))
         print(f"built submission/{name}.pdf ({pages} pages)")
         if pages > MAX_PAGES:
