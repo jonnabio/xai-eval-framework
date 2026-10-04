@@ -1,5 +1,66 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper B+C rejected by IBERAMIA; split; Paper B 13-page draft for CLEIej)
+
+This is the latest handoff. The Paper E handoff of the same day follows it and is unchanged.
+
+- **Completed**
+  - *Inteligencia Artificial* (IBERAMIA) rejected Paper B+C at the initial editorial
+    assessment (reported 2026-10-04; submitted 2026-10-01 according to the author; no ID, no
+    reviews, no named defect). Record: `docs/reports/paper_bc/IBERAMIA_REJECTION_RECORD.md`.
+    The 32-page edition is tagged `iberamia-submission-2026-10`.
+  - Scientific Advisor assessment:
+    `docs/review/paper-c-resurrection-assessment_2026-10-04.md`. Paper C is viable only as
+    the LLM-judge reliability study with the taxonomy as framing; not as a survey alone.
+  - **Author decisions (ADR-0022):** reduce to about 13 pages (the author's own target);
+    split the paper; **Paper B first, then Paper C**; Paper B goes to the **CLEI Electronic
+    Journal**; title "LIME versus SHAP under Matched Conditions: A Paired Comparison on
+    Tabular Models" for now; the second-reviewer disagreements must be adjudicated; two
+    human raters are available for Paper C.
+  - Plan approved and steps 1 to 6 executed:
+    `docs/planning/paper_b_13pp_reduction_plan_2026-10-04.md`.
+  - **Paper B first draft:** `docs/reports/paper_bc/paper_b_cleiej.tex` and `.pdf`, 13 pages
+    in the journal class (`cleiej.cls`), abstract 191 words (limit 200), 38 references in
+    citation order, 9 tables, 3 figures, no appendix. Submission sheet:
+    `docs/reports/paper_bc/CLEIEJ_SUBMISSION.md`.
+  - Registry: 78 sites added for the new file, which is under `[coverage]`; no value changed.
+    New fragment id `paper_b_cleiej` in `pub/claims.toml`, `generate_fragments.py` and
+    `verify_sync.py`.
+  - Paper C preparation: `docs/reports/paper_bc/second_reviewer_adjudication_sheet.csv`
+    (28 disagreements in 12 records, decision columns empty).
+- **Current State**
+  - Main folder on `paper/bc-refocus-13pp`, pushed, not merged to `main`.
+  - Verified after the last build: `verify_claims.py` 986 claims / 1298 sites / 28 files fully
+    registered; `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained;
+    `verify_exp4_reconstruction.py` 18 pins; 9 lane tests.
+  - **Paper B is not ready to submit.** It has had no independent review and the author has
+    not read it.
+  - The 32-page files (`paper_bc_iberamia.*`) are unedited and still under `[coverage]`; they
+    are the source for Paper C.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  2. New session, Scientific Advisor: review `paper_b_cleiej.pdf` for focus, novelty against
+     Papers A, D and E, and claim support. Findings to `docs/review/`.
+  3. Author: read `docs/reports/paper_bc/paper_b_cleiej.pdf`; decide the note to the editor
+     (`CLEIEJ_SUBMISSION.md`, section 3).
+  4. After the review: fixes, a new Zenodo version, update `\zenodoversiondoi`, pull request
+     to `main`, then the author submits.
+  5. Paper C, afterwards: adjudication with the second reviewer, sample of 50 to 60 cases for
+     two human raters, its own plan, and a Paper C lane in `lanes.toml`.
+  6. Unchanged: Paper E and Paper D wait for their journals; Task 3 / RCA-001 Phase 2.
+- **Blockers/Issues**
+  - Novelty risk (assessment F02): Paper B shares its runs with Papers A, D and E.
+  - The Zenodo DOI printed in the draft (version 0.4.0) archives the 32-page edition.
+  - Paper E's submitted text names the 32-page paper as a companion manuscript.
+  - Float order: Table 5 lands after Section 4.6 in the PDF; cosmetic.
+- **Notes**
+  - `[exclusivity]` protects other documents from printing results of files under
+    `docs/reports/paper_bc/`; a file in that folder is never added to its list.
+  - CLEIej: at least 12 pages, abstract of at most 200 words, captions without a final
+    period, IEEE numbered references in citation order, single-blind, no fees.
+  - In this shell, `sed` and heredocs drop backslashes; use the editor tool or a script file
+    for LaTeX edits.
+
 ## Session Handoff - 2026-10-04 (Paper E: second review, revision, Zenodo 0.8.0, SUBMITTED)
 
 This is the latest handoff. It summarises the whole session and supersedes the four
