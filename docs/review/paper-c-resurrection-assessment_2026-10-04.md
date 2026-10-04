@@ -233,6 +233,7 @@ carries the larger risk of a third rejection (F02).
    the codebook, so it must also be applied to the 28 papers outside the audit, and the
    corpus counts recomputed and re-registered.
 3. **Human raters**: available. Two raters on a stratified subset of 50 to 60 cases.
-4. **Order**: "taxonomy goes first". Reviewer's reading, not yet confirmed by the author: the
-   first paper to write is Paper C (taxonomy as framing, LLM-judge study as evidence); the
-   13-page benchmark paper follows without the taxonomy.
+4. **Order**: Paper B first, then Paper C (author, 2026-10-04; this replaces the earlier
+   answer "taxonomy goes first"). Paper B is the 13-page benchmark paper without the
+   taxonomy; plan in `docs/planning/paper_b_13pp_reduction_plan_2026-10-04.md`. Paper C
+   carries the taxonomy as framing and the LLM-judge study as evidence.
