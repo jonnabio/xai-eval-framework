@@ -81,6 +81,7 @@ To ensure scientific rigor, this framework mandates:
 - **Python Version**: 3.11
 - **Random Seed**: Global seed `42` used for all splits and initializations.
 - **Config-Driven**: All hyperparameters are defined in YAML files (e.g., [`rf_adult_config.yaml`](experiments/exp1_adult/configs/models/rf_adult_config.yaml)).
+- **Per-paper instructions**: to regenerate the results of the paper on misclassified instances from the stored runs, see [Reproduce the results](docs/reports/paper_d/README.md#reproduce-the-results).
 
 ## 🚀 Deployment
 
