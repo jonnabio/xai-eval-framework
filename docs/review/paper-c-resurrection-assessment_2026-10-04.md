@@ -218,3 +218,16 @@ carries the larger risk of a third rejection (F02).
    which claim C-judge can make (F05, item 1).
 4. Which paper goes first? The answer decides where the taxonomy text lives, since it can
    appear in only one.
+
+## 8. Author's answers (2026-10-04)
+
+1. **13 pages**: the author's own target, on the hypothesis that long articles are harder to
+   review and publish. It is not a journal rule. Treated as a target that includes
+   references.
+2. **Adjudication**: none was done; the primary coder's labels stand. Consequence: the paper
+   that carries the corpus must say that the audit disagreements were not adjudicated and
+   that the reported counts use the primary coder's labels.
+3. **Human raters**: available. Two raters on a stratified subset of 50 to 60 cases.
+4. **Order**: "taxonomy goes first". Reviewer's reading, not yet confirmed by the author: the
+   first paper to write is Paper C (taxonomy as framing, LLM-judge study as evidence); the
+   13-page benchmark paper follows without the taxonomy.
