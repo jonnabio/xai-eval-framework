@@ -1,8 +1,59 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-03 (Paper E first draft for Computación y Sistemas)
+
+This is the latest handoff. The Paper D submission handoff of the same day follows it.
+
+- **Completed**
+  - **Paper E is worked in the main folder**, `docs/reports/paper_e/`, on branch
+    `paper/e-feature-agreement` (author decision; ADR-0021 amended, `lanes.toml` and its
+    test updated). The session had first followed the registry and worked in
+    `../xai-paper-e`; the author corrected this and the files were moved here the same
+    session. `../xai-paper-e` holds nothing (detached at `f2f04cc44`).
+  - Venue chosen by the author: *Computación y Sistemas* (CIC-IPN), in English. The
+    journal's LaTeX template (`cys.cls`, `cys.bst`) and Word template are in the Paper E
+    folder.
+  - First full draft: `paper_e_template.tex` (source), generated `paper_e.tex`, five
+    generated tables, four figures (PDF), 24 references checked against Crossref/arXiv,
+    and `submission/paper_e_blind.pdf` and `paper_e_full.pdf` (11 pages each).
+  - Post hoc finding, recorded in `ANALYSIS_PLAN.md` section 9: the prespecified sign
+    agreement follows the predicted class (Breast Cancer 0.977 for class 0, 0.036 for
+    class 1), because LIME was run without discretisation and stores slopes while SHAP
+    stores contributions. Script `docs/reports/paper_e/scripts/paper_e_posthoc.py`,
+    outputs in `outputs/analysis/paper_e/posthoc/`.
+- **Current State**
+  - Main folder on `paper/e-feature-agreement`, pushed. Verified after the build:
+    `verify_claims.py` (479 claims / 645 sites), `verify_sync.py`,
+    `scan_shared_literals.py --strict` (0 unexplained), 17 lane and Paper E tests.
+  - Every number in the Paper E manuscript is generated from the CSV files by
+    `scripts/build_paper_e.py`; the build fails on an unresolved placeholder. Paper E is
+    **not** yet in `pub/claim_registry.toml`.
+  - Pull request #5 (Paper D submission record and its handoff) is still open; `main`
+    and this branch do not have those three commits.
+- **Next Steps**
+  1. Author: read the Paper E draft; decide authorship, the references and the AI-use
+     declaration (open items in `docs/reports/paper_e/README.md`).
+  2. Author: merge pull request #5; then this branch takes `main`.
+  3. Register Paper E in `[coverage]` and `[exclusivity]` of the claim registry (shared
+     commit through `main`), then tag a release and archive it on Zenodo before
+     submission.
+  4. Author: `git worktree remove ../xai-paper-e`.
+  5. Unchanged: Paper D acknowledgement, Paper B+C submission, Task 3 / RCA-001 Phase 2,
+     the chapter lane sync, the backup branches.
+- **Blockers/Issues**
+  - The Paper A reference (RIMI) has no volume in the bibliography record; the journal
+    style prints an empty field.
+  - CyS states no page limit and no fee on its guidelines page; confirm on the site.
+- **Notes**
+  - **A paper the author asks to work on is worked in the main folder** unless the author
+    names another folder. If `lanes.toml` disagrees, change it first.
+  - In a LaTeX tabular, a rule placed after an input command fails; each generated table
+    file carries its own closing rule.
+  - Tectonic is XeTeX: `cys.cls` loads `helvet`, which has no effect there, so the
+    template sets TeX Gyre Heros through `fontspec`.
 ## Session Handoff - 2026-10-03 (Paper D submitted; lane guard; Zenodo 0.5.0)
 
-This is the latest handoff. It closes the three "Session update - 2026-10-03" entries
+It closes the three "Session update - 2026-10-03" entries
 directly below it (Paper D reproducibility; Paper D in the main folder; ADR-0021), which
 give the detail.
 

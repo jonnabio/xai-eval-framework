@@ -678,4 +678,30 @@ def resolve(expr: str) -> float:
             raise MissingArtifact(f"paper_d metric not found: {table}/{metric}")
         return values[metric]
 
+    if kind == "paper_e":
+        # Paper E (agreement between explainers): a cell or an aggregate of a result
+        # table under outputs/analysis/paper_e/.
+        #   paper_e:<csv path, no extension>:<col=value,...>:<column>
+        #   paper_e:<csv path, no extension>:<col=value,...>:<op>(<column>[+<column>])
+        # The filter may be empty. A plain column needs exactly one matching row.
+        # Operations: sum, min, max, count (matching rows), empty (rows with no value).
+        table, row_filter, target = args
+        path = ROOT / "outputs" / "analysis" / "paper_e" / f"{table}.csv"
+        wanted = dict(pair.split("=", 1) for pair in row_filter.split(",") if pair)
+        rows = [r for r in _rows(path) if all(r.get(k) == v for k, v in wanted.items())]
+        if "(" not in target:
+            if len(rows) != 1:
+                raise MissingArtifact(f"paper_e {table}[{row_filter}] matched {len(rows)} rows, expected 1")
+            return float(rows[0][target])
+        op, column = target.rstrip(")").split("(", 1)
+        if op == "count":
+            return float(len(rows))
+        if op == "empty":
+            return float(sum(r[column] == "" for r in rows))
+        values = [sum(float(r[c]) for c in column.split("+")) for r in rows
+                  if all(r[c] != "" for c in column.split("+"))]
+        if not values or op not in ("sum", "min", "max"):
+            raise MissingArtifact(f"paper_e cannot evaluate {target} on {table}[{row_filter}]")
+        return {"sum": sum, "min": min, "max": max}[op](values)
+
     raise MissingArtifact(f"unknown source expression: {expr}")

@@ -32,7 +32,7 @@ merged. Any return to separate folders has to prevent that.
    | Thesis | main folder (`xai-eval-framework`) | `thesis/rca-001-phase-2` | `thesis/**` |
    | CIFIE chapter | `../xai-chapter` | `chapter/cifie-sync-2026-09` | `publications/book_chapters/2026_cifie_xai_fom7/**` |
    | EXP4 cohort 2 | `../xai-exp4` | `results/exp4-cohort2` | `experiments/exp4_cohort2/**`, `outputs/analysis/exp4_cohort2/**` |
-   | Paper E | `../xai-paper-e` | `paper/e-feature-agreement` | `docs/reports/paper_e/**`, `outputs/analysis/paper_e/**`, the Paper E scripts and tests |
+   | Paper E | main folder | `paper/e-feature-agreement` | `docs/reports/paper_e/**`, `outputs/analysis/paper_e/**`, the Paper E scripts and tests |
    | Paper F | `../xai-paper-f` | `paper/f-external-validity` | `docs/reports/paper_f/**`, `outputs/analysis/paper_f/**` |
    | Paper B+C | main folder | short-lived `paper/bc-<topic>` (created when needed) | `docs/reports/paper_bc/**` |
    | Paper D | main folder | `paper/d-tecnologia-en-marcha` | `docs/reports/paper_d/**`, `outputs/analysis/paper_d/**`, the Paper D scripts |
@@ -44,6 +44,17 @@ merged. Any return to separate folders has to prevent that.
    The main folder therefore hosts three lanes (thesis, Paper B+C, Paper D) and has one
    of them checked out at a time: switch branch only with a clean tree, and return the
    folder to `thesis/rca-001-phase-2` when the paper session ends.
+
+   **Amendment, 2026-10-03 (author decision): Paper E is worked in the main folder,**
+   at `docs/reports/paper_e/`, on branch `paper/e-feature-agreement`. A session had
+   followed the registry and written the Paper E manuscript in `../xai-paper-e`, where
+   the author could not see it; the files were moved to the main folder the same
+   session and `scripts/pubs/lanes.toml` now names the main folder for the lane. The
+   folder `../xai-paper-e` holds nothing and is to be removed by the author
+   (`git worktree remove ../xai-paper-e`). **Rule: a paper the author asks to work on
+   is worked in the main folder, under `docs/reports/paper_<x>/`, unless the author
+   names another folder in that session.** If the registry says otherwise, change the
+   registry first; do not work in the other folder.
 2. **A lane edits only the paths it owns.** Everything else is shared and changes only
    through `main`: `pub/**`, `scripts/pubs/**` (except a paper's own scripts),
    `docs/rca/**`, `docs/adr/**`, `docs/context/ACTIVE_CONTEXT.md`, `src/**`, and
