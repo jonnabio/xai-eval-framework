@@ -1,7 +1,7 @@
 # ADR-0021: One Working Tree per Paper
 
 > **Status:** Accepted<br>
-> **Date:** 2026-10-03<br>
+> **Date:** 2026-10-03 (amended the same day: Paper D moved to the main folder)<br>
 > **Amends:** [ADR-0013](0013-publication-branching-model.md) (adds lanes for Papers D, E
 > and F); [ADR-0019](0019-paper-bc-venue-peerj-and-single-working-folder.md) decisions 7
 > and 8 (one working folder) now apply to Paper B+C only<br>
@@ -29,15 +29,21 @@ merged. Any return to separate folders has to prevent that.
 
    | Paper | Folder | Branch | Paths the lane owns |
    |---|---|---|---|
-   | Thesis | `xai-eval-framework` (main folder) | `thesis/rca-001-phase-2` | `thesis/**` |
+   | Thesis | main folder (`xai-eval-framework`) | `thesis/rca-001-phase-2` | `thesis/**` |
    | CIFIE chapter | `../xai-chapter` | `chapter/cifie-sync-2026-09` | `publications/book_chapters/2026_cifie_xai_fom7/**` |
    | EXP4 cohort 2 | `../xai-exp4` | `results/exp4-cohort2` | `experiments/exp4_cohort2/**`, `outputs/analysis/exp4_cohort2/**` |
-   | Paper D | `../xai-paper-d` | `paper-d/tecnologia-en-marcha` | `docs/reports/paper_d/**`, `outputs/analysis/paper_d/**`, the Paper D scripts |
    | Paper E | `../xai-paper-e` | `paper/e-feature-agreement` | `docs/reports/paper_e/**`, `outputs/analysis/paper_e/**`, the Paper E scripts and tests |
    | Paper F | `../xai-paper-f` | `paper/f-external-validity` | `docs/reports/paper_f/**`, `outputs/analysis/paper_f/**` |
-   | Paper B+C | main folder, short-lived `paper/bc-<topic>` branch | (created when needed) | `docs/reports/paper_bc/**` |
+   | Paper B+C | main folder | short-lived `paper/bc-<topic>` (created when needed) | `docs/reports/paper_bc/**` |
+   | Paper D | main folder | `paper/d-tecnologia-en-marcha` | `docs/reports/paper_d/**`, `outputs/analysis/paper_d/**`, the Paper D scripts |
 
-   Paper D keeps its existing branch name, which predates this ADR.
+   **Amendment, 2026-10-03 (author decision):** Paper D is worked in the main folder,
+   at `docs/reports/paper_d/`, like Paper B+C. Its separate folder `../xai-paper-d` was
+   removed after a file comparison showed the main folder held the same files, and its
+   branch `paper-d/tecnologia-en-marcha` is replaced by `paper/d-tecnologia-en-marcha`.
+   The main folder therefore hosts three lanes (thesis, Paper B+C, Paper D) and has one
+   of them checked out at a time: switch branch only with a clean tree, and return the
+   folder to `thesis/rca-001-phase-2` when the paper session ends.
 2. **A lane edits only the paths it owns.** Everything else is shared and changes only
    through `main`: `pub/**`, `scripts/pubs/**` (except a paper's own scripts),
    `docs/rca/**`, `docs/adr/**`, `docs/context/ACTIVE_CONTEXT.md`, `src/**`, and
@@ -70,5 +76,6 @@ merged. Any return to separate folders has to prevent that.
 - The rule in decision 4 depends on discipline. A check that a lane's commit touches
   only its own paths is not built yet; plan task 8
   (`scripts/pubs/check_substrate_current.py`) is the place for it.
-- Paper B+C stays in the main folder under ADR-0019 until the author asks for a
-  separate folder for it.
+- Paper B+C and Paper D stay in the main folder until the author asks for a separate
+  folder for either. Thesis work and those two papers cannot be edited at the same
+  time, because they share one checkout.
