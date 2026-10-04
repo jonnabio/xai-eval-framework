@@ -1,5 +1,89 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-03 (Paper D submitted; lane guard; Zenodo 0.5.0)
+
+This is the latest handoff. It closes the three "Session update - 2026-10-03" entries
+directly below it (Paper D reproducibility; Paper D in the main folder; ADR-0021), which
+give the detail.
+
+- **Completed**
+  - **Paper D was submitted** by the author on 2026-10-03, by email to
+    revistatm@tec.ac.cr (*Tecnología en Marcha*, special issue on Artificial
+    Intelligence): the blind and full Word files and three TIFF figures.
+  - Paper D moved to the main folder, `docs/reports/paper_d/`, on branch
+    `paper/d-tecnologia-en-marcha` (author decision; ADR-0021 amended). The folder
+    `../xai-paper-d` and the branch `paper-d/tecnologia-en-marcha` are gone.
+  - Lane guard built: `scripts/pubs/check_lane.py`, `scripts/pubs/lanes.toml`,
+    `.githooks/pre-commit`, CI job `lanes` in `pubs-sync.yml`, 9 tests in
+    `tests/pubs/test_check_lane.py`, and a rule in `.aceconfig`.
+  - Paper D reproducibility: clean-clone test passed; `requirements.txt` and a
+    "Reproduce the results" section added to the Paper D README; the data availability
+    statement rewritten in both versions.
+  - Zenodo version 0.5.0 published as `10.5281/zenodo.23130014` from GitHub release
+    `paper-d-submission-2026-10-03`; the paper cites it.
+  - Author items closed: profession ("PhD candidate"), the three added references
+    approved, the Spanish text (reviewed in an earlier session), the Word files checked.
+  - `main` synced twice: a fast-forward approved by the author, then pull request #4
+    (merge commit `f2f04cc44`). CI passed on both.
+- **Current State**
+  - The main folder is on `paper/d-tecnologia-en-marcha`, clean. The branch is three
+    commits ahead of `main`: `f8e88a6d7` (Spanish and Word check closed), `f093779c7`
+    (README submission record) and this handoff. They are pushed to the branch and
+    waiting in an open pull request to `main`.
+  - `main`, thesis, EXP4 cohort 2, Paper E and Paper F are level at `f2f04cc44`, locally
+    and on origin. The chapter lane is not: origin has `4575e22b1`, which the local
+    `../xai-chapter` folder has not pulled, and it has not taken `main`.
+  - The files sent to the journal are `docs/reports/paper_d/submission/` at commit
+    `f8e88a6d7`.
+  - Verified after the last build: `verify_claims.py` (479 claims / 645 sites / 48
+    retired-value guards), `verify_sync.py`, the strict Paper D shared-literal scan
+    (0 unexplained). `verify_exp4_reconstruction.py` (18 pins) passed earlier in the
+    session and in CI.
+  - The lane lock held by `claude-paper-d` was released at the end of the session.
+- **Next Steps**
+  1. Author: merge the open pull request from `paper/d-tecnologia-en-marcha` to `main`.
+     Then, in the main folder: `git switch thesis/rca-001-phase-2`, `git merge main`.
+  2. Start every session with
+     `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+     Add this line to the session start prompt.
+  3. Chapter lane, in `../xai-chapter`: `git pull`, then `git merge main`, before any
+     edit. The lane guard refuses the claim until this is done.
+  4. Paper D: wait for the journal's acknowledgement and record it in the Paper D
+     README. Do not rebuild `submission/` unless a revision is requested.
+  5. Paper B+C: the author submits to *Inteligencia Artificial*; record the ID here.
+  6. Resume Task 3 / RCA-001 Phase 2 on the thesis lane: coverage sweep starting with
+     `thesis/apendices.qmd`, then macro generation and the CI build job.
+  7. Paper E: the author reviews the exploratory results and chooses a venue.
+  8. Author, when satisfied: delete the ten `backup/2026-10-03/*` branches on origin and
+     the bundle file `xai-eval-framework-backup-2026-10-03.bundle` beside the main folder.
+- **Blockers/Issues**
+  - RF provenance, unchanged: `rf.joblib` reproduces only 75-82% of the predictions
+    recorded by the Jan-Feb 2026 random-forest runs. Paper D discloses it and restricts
+    RQ4 to reproducible runs; Papers A and B+C still need the RCA entry.
+  - The project `.venv` cannot load SciPy. The Paper D analysis runs in a separate
+    environment built from `docs/reports/paper_d/requirements.txt`.
+  - The assistant cannot push to `main` or delete branches without the author's
+    approval in the session; a pull request that the author approves works.
+  - The journal's general instructions page names its website as the submission route
+    and asks for telephone numbers. The author followed the special-issue instructions
+    (email). If the journal asks for a resubmission through the website, an account is
+    requested from revistatm@itcr.ac.cr.
+  - Lane guard limits: a session that never runs `claim` can still edit files; the hook
+    is local and `--no-verify` bypasses it; CI sees only what reaches `main`.
+- **Notes**
+  - A change to Paper D's analysis code or results needs a new Zenodo version and new
+    values for the `paperdrelease` and `paperdarchive` macros in `paper_d_template.tex`.
+    A text change alone does not.
+  - Zenodo archives a GitHub release by itself within a few minutes (integration is on).
+    Check with
+    `https://zenodo.org/api/records?q=conceptrecid:19297723&all_versions=true&sort=mostrecent`.
+  - A fresh clone on Windows needs `git config core.longpaths true` or the checkout is
+    incomplete.
+  - Commit a lane's own paths and shared paths separately; the hook refuses a mixed
+    commit. `ACTIVE_CONTEXT.md` goes in a commit of its own.
+  - The main folder hosts the thesis, Paper B+C and Paper D lanes, one at a time. Switch
+    branch only with a clean tree.
+
 ## Session update - 2026-10-03 (Paper D reproducibility and archive)
 
 - **Data availability statement rewritten** in `paper_d_template.tex` (full and blind
@@ -226,6 +310,10 @@ the revised English and Spanish wording. Worktree: `../xai-paper-d`, branch
 
 ## Session Metadata
 - **Last Updated:** 2026-10-03
+- **Mode (2026-10-03, final):** HANDOFF - **Paper D SUBMITTED** to *Tecnología en
+  Marcha*; Zenodo 0.5.0 `10.5281/zenodo.23130014`; lane guard in place. **Active
+  objective: Task 3 / RCA-001 Phase 2 on the thesis lane.** See "Session Handoff -
+  2026-10-03 (Paper D submitted; lane guard; Zenodo 0.5.0)" at the top of this file.
 - **Mode (2026-10-03, latest):** HANDOFF - **repository consolidation task COMPLETE**
   (rebuilt `main`, one working tree per paper under ADR-0021, all seven branches level
   and pushed). **Active objective: Task 3 / RCA-001 Phase 2 on the thesis lane.** See
