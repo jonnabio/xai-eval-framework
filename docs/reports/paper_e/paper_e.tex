@@ -67,13 +67,18 @@ Post-hoc explainers are often used as if they were interchangeable, yet two expl
 name different features for the same prediction. This study measures how much SHAP and LIME
 agree at the level of the single instance. Both methods explained the same instances of
 the same models on three tabular datasets (Adult, German Credit and Breast Cancer
-Wisconsin), giving 31,411 paired explanations in 86 runs. The
+Wisconsin), giving 31,411 paired explanations in 86 runs; LIME was
+used with a fixed kernel width and without discretisation. The
 analysis plan was written and committed before any agreement statistic was computed; runs,
 not instances, are the unit of summary. The mean overlap of the five most important
 features (Jaccard index) was 0.393 on Adult,
 0.387 on German Credit and
-0.714 on Breast Cancer. A post hoc experiment shows
-that neither method fully reproduces its own list when it is run again: on Adult the
+0.714 on Breast Cancer. Part of this overlap does
+not depend on the instance: the SHAP list of one instance and the LIME list of another
+instance of the same run overlapped by 0.203,
+0.287 and 0.648 (post hoc), so
+the part specific to the instance was largest on Adult and smallest on Breast Cancer. A
+post hoc experiment shows that neither method fully reproduces its own list when it is run again: on Adult the
 overlap between two runs was 0.690 for LIME
 and 0.782 for SHAP. Agreement between the methods was below this self-agreement for every model tested, so part of the disagreement is
 variability of each method and part is a difference between them. Agreement varied between
@@ -137,12 +142,14 @@ overlap with those of SHAP and LIME.
 
 The contributions are: (i) estimates of SHAP--LIME agreement on 31,411 paired
 explanations across five model families and three datasets, with the run as the unit of
-summary; (ii) a reference that earlier comparisons lack, the agreement of each method
-with itself when it is run again, which separates the variability of a method from the
-difference between methods (post hoc); (iii) evidence that agreement varies between
+summary; (ii) two references that earlier comparisons lack (post hoc): the overlap between
+explanations of different instances, which isolates the agreement that depends on the
+instance, and the
+agreement of each method with itself when it is run again, which separates the variability
+of a method from the difference between methods; (iii) evidence that agreement varies between
 models and datasets, not visibly with the number of explained instances, and is not
 consistently related to prediction correctness, also when training instances are
-excluded; (iv) an association between disagreement and the fidelity of the LIME
+excluded (post hoc); (iv) an association between disagreement and the fidelity of the LIME
 explanation on two datasets; and (v) a methodological finding (post hoc): the sign
 agreement between SHAP and LIME without discretisation is determined mostly by the
 predicted class, because the two methods return different quantities.
@@ -235,7 +242,9 @@ data.
 
 \textbf{LIME.} The tabular explainer \cite{ribeiro2016why} was used with 1000 perturbed
 samples, kernel width 3, ten selected features and \emph{without discretisation of
-continuous features}. With this setting, LIME draws its perturbed samples from a normal distribution
+continuous features}. The kernel width was the same for the three datasets; it is smaller
+than the default of the package, three quarters of the square root of the number of
+features (between about four and eight here). With these settings, LIME draws its perturbed samples from a normal distribution
 with the mean and the standard deviation of the training data, weights them by their
 distance to the instance, and standardises each feature; all encoded columns, including
 the one-hot columns, are treated as continuous. It first fits a linear model on all
@@ -286,15 +295,25 @@ used by LIME. This is the term of feature $j$ in the local linear model of LIME,
 $c_j$ and the SHAP value are both contributions relative to a reference. The sign
 agreement was then recomputed with the sign of $c_j$.
 
-Two references for the overlap were added post hoc. The lower reference is the expected
+Three references for the overlap were added post hoc. The first is the expected
 value of $J_k$ for two independent random sets of $k$ features out of $p$, computed exactly
 from the hypergeometric distribution. For $k = 5$ it is 0.026 on Adult,
 0.047 on German Credit and 0.099 on Breast
-Cancer. The upper reference is the \emph{self-agreement} of each method: a subsample of
+Cancer. The second is a \emph{permutation reference}: within each run, the SHAP list of
+every instance was compared with the LIME list of another instance of the same run, drawn
+at random (20 draws per instance). It measures the overlap that comes from a ranking of
+the features common to the instances of a run; the paired overlap minus this value is the
+\emph{instance-specific part}. The third is the \emph{self-agreement} of each method: a subsample of
 the paired instances (20 per run on Adult at $n = 100$ and 30 per run on the other datasets) was explained twice by LIME and twice by SHAP with the settings of
 the stored runs, the two repetitions differing only in the random state (the perturbed
 samples of LIME; the background sample of SHAP and the coalition sampling of KernelSHAP).
-The same measures were computed between the two repetitions. An instance entered only if the loaded model reproduced its stored prediction. The SVM was left out, because KernelSHAP on it is too slow for repeated runs and its stored runs are incomplete.
+The same measures were computed between the two repetitions, between the new SHAP and
+LIME runs and, as the permutation reference of this experiment, between every instance and
+the other instances of its run. Each instance was also explained twice by LIME with the
+default kernel width, all other settings unchanged. An instance entered only if the loaded
+model reproduced its stored prediction; this excluded 32 candidates of the Adult
+random forest, whose stored binary does not reproduce all the recorded predictions, and
+none of the other models. The SVM was left out, because KernelSHAP on it is too slow for repeated runs and its stored runs are incomplete.
 
 \subsection{Pairing and Quality Control}
 
@@ -318,6 +337,7 @@ undefined for 0 pairs and sign agreement for 516 pairs
 without a shared non-zero feature.
 
 \subsection{Statistical Summary}
+\label{sec:methods:stats}
 
 The same test instances recur across models, seeds and intensities, so instances are not
 independent replicates. Each measure was first averaged within a run (dataset, model,
@@ -356,15 +376,16 @@ are exploratory.
 The analysis plan, with the measures, the unit of analysis, the exclusion rules and the
 bootstrap settings, was written and committed to the project repository before any
 agreement statistic was computed and before the new LIME cohort was run. It is a
-time-stamped commit in the author's repository, not an entry in an independent registry.
+time-stamped commit in the author's repository\iffull{} (\texttt{7726bb0a9})\fi, not an entry in an independent registry.
 Two refinements made before the analysis are recorded in the plan. The plan assumed that
 SHAP and LIME both return signed contributions; for LIME as configured this was wrong,
 which the analysis of signs revealed.
 
 The following analyses are \emph{post hoc}, were added after the planned results were
 inspected or in response to an independent review of the manuscript, and are recorded in
-the plan as dated deviations: the two references for the overlap (chance and
-self-agreement); the breakdown of sign agreement by predicted class, the constancy of the
+the plan as dated deviations: the three references for the overlap (chance, permutation
+and self-agreement), with the repetition of LIME at the default kernel width and the
+description of the kernel weights and of the stored LIME stability; the breakdown of sign agreement by predicted class, the constancy of the
 sign of each feature, and the conversion of the LIME slopes into contributions with its
 baseline (Section~\ref{sec:results:sign}); the two sensitivity analyses of the rank
 measure; and the correctness contrast on held-out instances. The feature values needed for
@@ -389,6 +410,17 @@ to 0.792), with 4.05 shared features on average. The medians of the run means we
 0.393, 0.416 and
 0.712. In all three datasets the
 overlap was several times the expected overlap of random sets.
+
+A large part of the overlap, however, does not depend on the instance (post hoc;
+Table~\ref{tab:agreement}, column Other). The SHAP list of an instance and the LIME list
+of another instance of the same run overlapped by 0.203 on
+Adult, 0.287 on German Credit and
+0.648 on Breast Cancer. The instance-specific part was thus
+0.191 on Adult (0.184 to
+0.195), 0.100 on German
+Credit and 0.066 on Breast Cancer, and it was positive in
+every run. Most of the high overlap on Breast Cancer is thus agreement on a ranking common
+to the instances; the instance-specific part was largest on Adult.
 
 The rank measure, which combines overlap and order, was low on two datasets. Kendall's
 $\tau_b$ was
@@ -417,34 +449,64 @@ by ordering slopes against contributions.
 \label{sec:results:ceiling}
 
 Table~\ref{tab:ceiling} gives the overlap between two runs of the same method on the same
-instances, and the SHAP--LIME overlap of the stored explanations on the same subsample.
-Neither method reproduced its own top-5 list. On Adult the overlap between two LIME runs
+instances and the SHAP--LIME overlap between the new runs, each with its permutation
+reference. Neither method reproduced its own top-5 list. On Adult the overlap between two LIME runs
 was 0.690 and between two SHAP runs
 0.782; on German Credit
 0.642 and
 0.708; on Breast Cancer
 0.836 and
 0.939. The SHAP--LIME overlap was below
-the self-agreement of both methods for every model in the table.
+the self-agreement of both methods for every model in the table. This holds between the
+new runs (Adult: 0.383; its random forest: 0.353)
+as between the stored explanations of the same instances (0.393 and
+0.356).
+
+The permutation reference shows that the same holds for the instance-specific part. On
+Adult, explanations of different instances overlapped by 0.195 for two
+LIME runs, 0.376 for two SHAP runs and 0.209
+for SHAP and LIME, so each method is far more specific to the instance with itself than
+with the other method. On Breast Cancer the overlap between different instances is high
+for all three
+(0.709, 0.675 and 0.659),
+so a large part of the self-agreement, like most of the agreement between the methods,
+belongs there to a ranking common to the instances.
 
 Two consequences follow. First, identity is not the right upper reference for agreement
 between the methods: a second run of LIME, with 1000 perturbed samples for up to 108
 features, already changes part of the list, and so does a second run of SHAP with another
-background sample of 50 instances. Second, the differences between models in SHAP--LIME
-agreement follow in part the differences in self-agreement (Table~\ref{tab:ceiling}), so
-they cannot be attributed to the models alone. The subsample is small and the experiment
-was not planned; it bounds the question and does not give a precise decomposition.
+background sample of 50 instances. Second, self-agreement differs between models: the
+multilayer perceptron had the lowest self-agreement of LIME and the lowest SHAP--LIME
+overlap, but the other three Adult models show no such relation. The
+subsample is small and the experiment was not planned; it bounds the question and does not
+give a precise decomposition.
+
+\textbf{Kernel width.} The experiment was repeated for LIME with the default kernel
+width. Its lists changed: on Adult the top-5 overlap between LIME at width 3 and LIME at
+the default width was 0.370, as low as between SHAP and LIME; it was
+0.590 on German Credit and 0.889 on Breast Cancer. The
+overlap of SHAP with default-width LIME was higher on Adult (0.456
+against 0.383), with models moving in both directions (from
+0.353 to 0.533 for the random forest,
+from 0.346 to 0.286 for the
+multilayer perceptron), and about the same on the other two datasets. Default-width LIME
+was also less specific to the instance: on Adult two of its explanations of different
+instances overlapped by 0.589, against 0.195 at
+width 3. The kernel width thus changes the LIME explanation as much as the change of
+explainer does, and the narrow kernel gives the explanations that depend more on the
+instance.
 
 
 \begin{table*}[t]
 \renewcommand{\arraystretch}{\tablestretch}
 \centering
-\caption{Agreement between SHAP and LIME: mean of run means and seed-clustered 95\% interval. Adult rows pool the three sampling intensities}
+\caption{Agreement between SHAP and LIME: mean of run means and seed-clustered 95\% interval (the spread of the seed means, Section~\ref{sec:methods:stats}). Other: top-5 overlap of the SHAP list of an instance with the LIME list of another instance of the same run (post hoc). Adult rows pool the three sampling intensities; the SVM row rests on 29.5\% of its instances}
 \label{tab:agreement}
 \small
-\begin{tabular}{llrrlll}
+\setlength{\tabcolsep}{\mediumcolsep}
+\begin{tabular}{llrrlrll}
 \hline
-Dataset & Model & Runs & Pairs & Top-5 Jaccard & Top-10 Jaccard & Kendall $\tau_b$ \\
+Dataset & Model & Runs & Pairs & Top-5 Jaccard & Other & Top-10 Jaccard & Kendall $\tau_b$ \\
 \hline
 \input{tables/agreement.tex}
 \end{tabular}
@@ -453,19 +515,21 @@ Dataset & Model & Runs & Pairs & Top-5 Jaccard & Top-10 Jaccard & Kendall $\tau_
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig1_top5_overlap.pdf}
-\caption{Top-5 overlap between SHAP and LIME by dataset and model family. Each point is the mean of one run}
+\caption{Top-5 overlap between SHAP and LIME by dataset and model family. Each point is the mean of one run; intervals are the spread of the seed means}
 \label{fig:overlap}
 \end{figure*}
 
 \begin{table*}[t]
 \renewcommand{\arraystretch}{\tablestretch}
 \centering
-\caption{Top-5 Jaccard overlap between two runs of the same method with different random states, and between the stored SHAP and LIME explanations, on the same subsample of instances: mean of run means and seed-clustered interval. Post hoc}
+\caption{Top-5 Jaccard overlap between two runs of the same method with different random states, and between the new SHAP and LIME runs, on the same subsample of instances: mean of run means and seed-clustered interval (spread of the seed means). Other: the same pair between an instance and the other instances of its run. Post hoc}
 \label{tab:ceiling}
 \small
-\begin{tabular}{llrlll}
+\setlength{\tabcolsep}{\mediumcolsep}
+\begin{tabular}{llrlrlrlr}
 \hline
-Dataset & Model & Instances & LIME vs. LIME & SHAP vs. SHAP & SHAP vs. LIME \\
+ & & & \multicolumn{2}{c}{LIME vs. LIME} & \multicolumn{2}{c}{SHAP vs. SHAP} & \multicolumn{2}{c}{SHAP vs. LIME} \\
+Dataset & Model & Inst. & Same instance & Other & Same instance & Other & Same instance & Other \\
 \hline
 \input{tables/ceiling.tex}
 \end{tabular}
@@ -490,10 +554,15 @@ The sampling intensity had no visible effect: pooled over models, the top-5 over
 Adult was 0.395, 0.394 and
 0.390 for 50, 100 and 200 instances per quadrant. 
 
-The dataset mattered most. Adult and German Credit, with many one-hot encoded features,
-gave similar and low agreement; Breast Cancer, with 30 numeric features, gave much
-higher agreement for the same two model families. Three datasets do not allow this
-difference to be attributed to a specific property of the data.
+The dataset changed the estimates most, but not in one direction. Adult and German
+Credit, with many one-hot encoded features, gave similar and low overlap; Breast Cancer,
+with 30 numeric features, gave much higher overlap for the same two model families. The
+permutation reference reverses this order for the instance-specific part, which was
+largest on Adult and smallest on Breast Cancer (Table~\ref{tab:agreement}). Two things
+differ together between the datasets: the kind of features, and the weight that the fixed
+kernel of LIME gives to its perturbed samples, which falls as the number of features grows
+(Section~\ref{sec:discussion}). Three datasets do not allow the difference to be
+attributed to either.
 
 \subsection{Agreement of Signs (Post Hoc)}
 \label{sec:results:sign}
@@ -581,7 +650,7 @@ Dataset & Model & All & Cl.~0 & Cl.~1 & All & Cl.~0 & Cl.~1 \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig2_sign_by_class.pdf}
-\caption{Sign agreement between SHAP and LIME. Circles and squares: LIME value as stored (slope), by predicted class, with seed-clustered 95\% intervals. Diamonds: all instances after the slopes were converted into contributions. The dotted line marks one half}
+\caption{Sign agreement between SHAP and LIME. Circles and squares: LIME value as stored (slope), by predicted class, with seed-clustered 95\% intervals (spread of the seed means). Diamonds: all instances after the slopes were converted into contributions. The dotted line marks one half}
 \label{fig:sign}
 \end{figure*}
 
@@ -613,14 +682,17 @@ $-$0.024, negative in all five seeds), for the random forest
 0.049 (0.032 to
 0.066, positive in all five seeds), and for logistic regression and
 gradient boosting 0.000 and
-$-$0.004, with seeds of both signs. The differences
-of the two models are thus not produced by the training instances, and their opposite
+$-$0.004, with seeds of both signs. For the support
+vector machine only 5 of 14 runs had ten
+held-out instances in each group; the difference was
+0.028, with seeds of both signs. The differences
+of the multilayer perceptron and the random forest are thus not produced by the training instances, and their opposite
 signs remain.
 
 \begin{table}[t]
 \renewcommand{\arraystretch}{\tablestretch}
 \centering
-\caption{Top-5 overlap for correctly classified (C) and misclassified (M) instances. Diff.\ is M minus C; Neg.\ is the number of seeds with a negative difference; GC is German Credit}
+\caption{Top-5 overlap for correctly classified (C) and misclassified (M) instances. Diff.\ is M minus C, with the spread of the seed means; Neg.\ is the number of seeds with a negative difference; GC is German Credit. The SVM row rests on incomplete runs}
 \label{tab:correctness}
 \footnotesize
 \setlength{\tabcolsep}{\tightcolsep}
@@ -635,7 +707,7 @@ Data & Model & C & M & Diff. & 95\% interval & Neg. \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3_correctness.pdf}
-\caption{Difference in top-5 overlap, misclassified minus correct. Points are seeds; diamonds are means with seed-clustered 95\% intervals}
+\caption{Difference in top-5 overlap, misclassified minus correct. Points are seeds; diamonds are means with seed-clustered 95\% intervals (spread of the seed means)}
 \label{fig:correctness}
 \end{figure}
 
@@ -647,17 +719,24 @@ concerns the fidelity of LIME: on Adult the correlation was negative for all fiv
 families (from $-$0.45 to
 $-$0.19), and it was negative on German Credit
 ($-$0.26 and
-$-$0.24). The two methods disagreed more on the
+$-$0.24); on Breast Cancer it was negative for the
+random forest ($-$0.28) and near zero for gradient
+boosting. The two methods disagreed more on the
 instances where the sizes of the LIME attributions followed less closely the effect of
 masking each feature. The
 correlations with the fidelity of SHAP were closer to zero and of mixed sign.
 
 For stability there was no common pattern. On Adult the correlations were small and
-mostly positive, except for the multilayer perceptron. On Breast Cancer with the random
-forest, disagreement was higher for instances with less stable explanations of either
-method ($-$0.56 and
-$-$0.54), with three runs. On Breast Cancer the correlation was negative for the random forest and near zero for
-gradient boosting. These are associations within runs; they do not show that low fidelity
+mostly positive, except for the multilayer perceptron. For LIME on Adult they cannot be
+interpreted: the stored stability of LIME has almost no range there (its median by model
+lies between 0.001 and 0.009, against
+0.793 to 0.865 on German Credit and
+0.943 to 0.955 on Breast Cancer; post hoc). On
+Breast Cancer, disagreement was higher for instances with less stable explanations of
+either method, for the random forest ($-$0.56 and
+$-$0.54) and less so for gradient boosting
+($-$0.34 and $-$0.27),
+with three runs each. These are associations within runs; they do not show that low fidelity
 causes disagreement. The fidelity measure rewards attributions whose size follows the
 effect of replacing a feature by its mean, which is a contribution; a vector of slopes is
 at a disadvantage by construction, so part of this association may reflect how far the
@@ -666,7 +745,7 @@ slopes of an instance are from its contributions.
 \begin{table}[t]
 \renewcommand{\arraystretch}{\tablestretch}
 \centering
-\caption{Mean within-run Spearman correlation between disagreement ($1 - J_5$) and explanation quality. Fid.: fidelity; Stab.: stability}
+\caption{Mean within-run Spearman correlation between disagreement ($1 - J_5$) and explanation quality. Fid.: fidelity; Stab.: stability. On Adult the stored LIME stability has almost no range, so the last column cannot be interpreted for that dataset}
 \label{tab:quality}
 \small
 \setlength{\tabcolsep}{\mediumcolsep}
@@ -700,7 +779,7 @@ method.
 \begin{table}[t]
 \renewcommand{\arraystretch}{\tablestretch}
 \centering
-\caption{Jaccard overlap between feature sets on Adult (SHAP, LIME: top-5 features; Anchors: rule features; DiCE: changed features): mean of run means and seed-clustered 95\% interval}
+\caption{Jaccard overlap between feature sets on Adult (SHAP, LIME: top-5 features; Anchors: rule features; DiCE: changed features): mean of run means and seed-clustered 95\% interval (spread of the seed means)}
 \label{tab:secondary}
 \footnotesize
 \setlength{\tabcolsep}{\tightcolsep}
@@ -728,12 +807,16 @@ raise the repeatability; the 1000 used here are fewer than the default of the pa
 \textbf{Agreement varies with the model and the data.} The differences between models and
 between datasets were larger than every other effect measured here. One reading is that
 the methods approximate the model in different neighbourhoods \cite{han2022which} and
-coincide more where the model is close to linear; another, supported by
-Table~\ref{tab:ceiling}, is that the repeatability of the explainers itself changes with
-the model. These data do not separate the two, and on Adult each family is a single
-fitted model. The high agreement on Breast Cancer indicates that low agreement is not
-inevitable. A report of explainer agreement should state the model, the dataset and the
-repeatability of each method, and should not be generalised from one of them.
+coincide more where the model is close to linear; another is that the repeatability of
+the explainers itself changes with the model, as for the multilayer perceptron
+(Table~\ref{tab:ceiling}). These data do not separate the two, and on Adult each family is a single
+fitted model. The high overlap on Breast Cancer is mostly agreement on a ranking of the
+features that is nearly the same for every instance; the overlap that depends on the
+instance was small on the three datasets and smallest there. A high overlap is therefore
+not evidence that two explainers agree about the individual prediction. A report of
+explainer agreement should state the model, the dataset, the configuration and the
+repeatability of each method and the overlap between explanations of different instances,
+and should not be generalised from one of them.
 
 \textbf{Signs need the same quantity.} The sign analysis shows a risk for any study that
 compares the direction of attributions between methods. A LIME coefficient without
@@ -765,8 +848,15 @@ the contribution of LIME differ most. It is an association within runs, on a pro
 measure.
 
 \textbf{Limitations.} The study covers three tabular binary datasets and one
-configuration of each explainer; other kernel widths, sample sizes or discretisation
-settings of LIME may change the estimates. There are five seeds on Adult and three on
+configuration of each explainer. LIME was used with a kernel width of 3, chosen
+without a technical reason and smaller than the default of the package.
+With this width the 999 perturbed samples of an explanation, drawn around the training
+mean, together receive a median weight of 0.26 on Adult,
+2.3 on German Credit and 83.6 on Breast Cancer,
+against a weight of one for the instance itself (post hoc), and the stored stability of
+LIME on Adult is close to zero. Section~\ref{sec:results:ceiling} shows how much the
+width changes the LIME lists; other sample sizes or discretisation settings may change the
+estimates as well. There are five seeds on Adult and three on
 the other datasets; the intervals describe the spread of seed means and the analyses of
 RQ2 to RQ4 are exploratory. On Adult each model family is one fitted model, so nothing
 here separates a family from that fit. The self-agreement experiment used a small
@@ -777,15 +867,17 @@ Adult, each model was trained once, and for four of the five seeds about seven i
 the explained instances belong to its training data; the mean top-5 overlap for seed 42,
 whose evaluation partition is disjoint from the training data, lies within the range of
 the other four seeds, and the correctness contrast was repeated on held-out instances.
-LIME, as configured, samples around the training mean and treats one-hot columns as
-continuous, so its slopes are only loosely local. The conversion of slopes into contributions uses the training mean as reference,
+LIME, as configured, also treats one-hot columns as continuous, so its slopes are only
+loosely local. The conversion of slopes into contributions uses the training mean as reference,
 while SHAP uses the expected output on a background sample, so the two references are
 close but not identical. The SHAP runs of the SVM are incomplete, so that family has fewer pairs, unevenly
 distributed between the predicted classes. The models of the two smaller datasets were regenerated from the training recipe
 and validated against stored metrics and predictions, not compared byte by byte with the
 original binaries. For the Adult random forest, the stored binary does not reproduce all
-the predictions recorded in the runs; the analysis uses only the recorded outputs, and
-the paired SHAP and LIME records agree on every label and prediction. The sign analysis,
+the predictions recorded in the runs; the agreement analyses use only the recorded
+outputs, and the paired SHAP and LIME records agree on every label and prediction. The
+self-agreement experiment, which needs the binary, kept only the instances whose recorded
+prediction it reproduces. The sign analysis,
 including the conversion into contributions, is post hoc.
 
 \section{Conclusions and Future Work}
@@ -794,7 +886,11 @@ including the conversion into contributions, is post hoc.
 For the same instance and model, SHAP and LIME agreed only partly on the most important
 features: the mean top-5 overlap was 0.393 on Adult,
 0.387 on German Credit and
-0.714 on Breast Cancer. Each method also agreed only
+0.714 on Breast Cancer. Much of this overlap, and
+most of it on Breast Cancer, was also found between explanations of different instances,
+so it reflects a ranking of the features common to the instances; the part specific to
+the instance was 0.191 on Adult and smaller on the other two
+datasets (post hoc). Each method also agreed only
 partly with itself when run again, and the agreement between the methods was below that
 self-agreement for every model tested (post hoc). Agreement varied with the model and the
 dataset, not visibly with the number of explained instances, and it was not consistently
@@ -808,11 +904,13 @@ both explanations are first expressed as the same quantity.
 
 Three practical consequences follow. An explanation shown to a user should name the
 explainer, since another explainer would often show other features. A comparison of
-explainers should report how well each one reproduces itself, since that sets the level
-against which their disagreement can be judged. And it should check, before any measure
+explainers should report how well each one reproduces itself and how much two explanations
+of different instances overlap, since these set the levels against which their agreement
+can be judged. And it should check, before any measure
 is computed, what each stored value means.
 
-Future work will measure self-agreement on the full cohort and with more LIME samples,
+Future work will measure self-agreement on the full cohort, with more LIME samples and
+with other kernel widths,
 compare the methods on a common quantity, repeat the analysis by original variable, and
 add models and datasets to separate the effect of the model family from that of a single
 fit.

@@ -389,3 +389,74 @@ extreme seed means) and are not used as tests; "registered" is replaced by "writ
 committed before"; every post hoc analysis is labelled where it appears; the second
 companion manuscript (Paper B+C) is named.
 
+
+**2026-10-04 (post hoc; in response to the second rigor review
+`docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md`).** This entry was written
+before the analyses below were run for the paper. The reviewer had already computed the
+first one once, as a probe (one random draw), and its result is what prompted the entry.
+None of the analyses changes a prespecified estimate.
+
+*Qualification of the entry "2026-10-04 (post hoc; direct test …)" above.* Its last result
+line reads "The explanation of 2026-10-03 is confirmed." The majority-sign baseline of the
+first review entry limits that statement: the converted sign agreement shows a shared
+global direction per feature, not agreement on instance-specific directions.
+
+*Corrections to the first review entry.* The self-agreement experiment has 760 instances
+in 32 runs (20 on Adult, six on each of the other datasets), not 26. "(none was skipped)"
+was not checked against a log and cannot hold for the Adult random forest, whose stored
+binary reproduces 75% to 81% of the predictions recorded in the paired runs (second
+review, F03). The script now counts and writes the skipped candidates.
+
+*Permutation reference for the overlap (second review F01).* Script
+`docs/reports/paper_e/scripts/paper_e_review2_analyses.py`, outputs
+`outputs/analysis/paper_e/posthoc/review2_*.csv`.
+
+- Question: how much of the SHAP-LIME top-5 overlap depends on the instance? Two uniformly
+  random feature sets are too low a reference, because both methods draw their top
+  features from a small group of globally important features.
+- Procedure: within each run, the SHAP list of every paired instance is compared, with the
+  prespecified `primary_agreement`, with the LIME list of another paired instance of the
+  same run, drawn at random (20 draws per instance, generator seeded with 20261004). The
+  run value is the mean over instances and draws. The *instance-specific part* of a run is
+  its paired overlap minus this value.
+- Aggregation: section 5 unchanged.
+
+*Range of the stored LIME stability (second review F02).* Same script. Section 4 forbids
+publishing pooled fidelity or stability means of the reused cohort. This is a deviation
+limited to one statement: the median of the stored LIME stability by dataset and model
+(smallest and largest model median per dataset), needed to tell the reader that the
+measure has almost no range on Adult. No mean and no comparison between explainers is
+reported.
+
+*Extension of the self-agreement experiment (second review F02, F03, F09; the author
+accepted the default-width run on 2026-10-04).* Script `paper_e_ceiling.py`, same
+subsample, random states and settings as before, rerun in full. Additions:
+
+1. The top-10 lists of every repetition are saved (`ceiling_lists.json`), and the number
+   of candidates skipped because the loaded model did not reproduce the stored prediction
+   is written per run (`ceiling_skipped.csv`).
+2. SHAP-LIME agreement between the new runs (mean of the four pairs of one SHAP and one
+   LIME repetition), so that self-agreement and agreement between the methods are measured
+   on the same runs and the same model binary.
+3. Each instance is also explained twice by LIME with the default kernel width of the
+   package (0.75 times the square root of the number of features) and all other settings
+   unchanged. Reported: self-agreement at the default width, agreement of new SHAP with
+   default-width LIME, and agreement between LIME at width 3 and LIME at the default width.
+4. The permutation reference for the new runs: each pair above is also computed between
+   an instance and every other instance of the same run (exact mean, no random draw).
+
+Aggregation: section 5 unchanged. Limits as before: small subsample, one pair of random
+states, the SVM left out.
+
+*Weight of LIME's perturbed samples (second review F02; added the same day, after the
+reviewer's probe on 200 instances per dataset).* Script `paper_e_review2_analyses.py`. For
+every explained instance, LIME's sampling is reproduced from the package source (999
+samples from a standard normal on the standardised scale, kernel
+`sqrt(exp(-d^2 / width^2))`, width 3) and the weights of the 999 samples are summed; the
+instance itself has weight 1. Reported: the median of this sum per dataset. It describes
+the configuration and is not an agreement statistic.
+
+*Wording changes with no new analysis:* the kernel width (3, against a package default of
+0.75 times the square root of the number of features) is stated in the method description;
+the held-out contrast of the SVM is reported with its coverage; captions say that the
+intervals are the spread of seed means.

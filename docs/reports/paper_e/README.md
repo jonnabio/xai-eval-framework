@@ -1,7 +1,14 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-04): revised after the rigor review; with the author for the final read.** The review of 2026-10-04 (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`, grade: major revision) had four major and nine minor findings; the section "Response to the rigor review" below says what was done for each. The revised manuscript has not been reviewed again. Target journal: *Computación y
-Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
+**Status (2026-10-04): revised after two rigor reviews; with the author for the final
+read.** The first review (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`,
+major revision, 4 major and 9 minor findings) and the second
+(`docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md`, major revision, 2 major
+and 6 minor findings, 2 suggestions) are both answered; the two "Response" sections below
+say what was done for each finding. The text after the second revision has not been
+reviewed again. Target journal: *Computación y Sistemas* (CyS, CIC-IPN, Mexico), in
+English. Not submitted. **The result files changed after Zenodo version 0.7.0: a new
+version is needed before submission.**
 
 ## Where this paper is worked
 
@@ -39,7 +46,8 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
 | `scripts/paper_e_sign_contribution.py` | Post hoc direct sign test (plan section 9, 2026-10-04). |
 | `scripts/paper_e_review_analyses.py` | Post hoc re-cuts for the rigor review (baseline, held-out contrast, rank sensitivity, coverage). |
-| `scripts/paper_e_ceiling.py` | Post hoc self-agreement experiment (needs the model binaries; see its docstring). |
+| `scripts/paper_e_ceiling.py` | Post hoc self-agreement experiment, with the default-width LIME runs and the saved top-10 lists (needs the model binaries; see its docstring). `--summarise-only` recomputes its CSV files from `ceiling_lists.json`. |
+| `scripts/paper_e_review2_analyses.py` | Post hoc analyses for the second review: permutation reference, range of the stored LIME stability, kernel weights (needs scikit-learn and the datasets). |
 | `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
 | `submission/paper_e_blind.pdf` | The file for review. **Local only since 2026-10-04:** the PDFs are not tracked by git (blind review; the journal asks that the work is not available online). Run the build to regenerate them. |
 | `submission/paper_e_full.pdf` | With author, repository address and self-citation. |
@@ -59,18 +67,30 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 
 - Top-5 Jaccard overlap between SHAP and LIME: 0.393 on Adult, 0.387 on German Credit,
   0.714 on Breast Cancer; rank concordance is weak on the first two.
-- Agreement depends on model family and dataset, not on sampling intensity.
-- No consistent difference between correct and misclassified instances.
-- Disagreement is higher where LIME's local fidelity is lower.
-- **Post hoc:** sign agreement follows the predicted class (Breast Cancer: 0.977 for
+- **Post hoc, permutation reference:** the SHAP list of an instance and the LIME list of
+  another instance of the same run already overlap by 0.203 / 0.287 / 0.648. The
+  instance-specific part is 0.191 / 0.100 / 0.066: largest on Adult, smallest on Breast
+  Cancer, where most of the overlap is a ranking common to the instances.
+- **Post hoc, self-agreement:** neither method reproduces its own top-5 list (Adult: LIME
+  0.690, SHAP 0.782); SHAP-LIME agreement is below both for every model, between the new
+  runs as between the stored explanations.
+- Agreement varies between the fitted models and the datasets, not visibly with the
+  sampling intensity. On Adult each family is one fitted model.
+- No consistent difference between correct and misclassified instances, also on held-out
+  rows.
+- Disagreement is higher where the fidelity of the LIME explanation is lower, on Adult and,
+  more weakly, on German Credit. The measure favours contributions over slopes.
+- **Post hoc, signs:** sign agreement follows the predicted class (Breast Cancer: 0.977 for
   class 0, 0.036 for class 1) because LIME without discretisation stores slopes and SHAP
-  stores contributions. The paper reports it as a methodological finding.
-- **Post hoc, direct test (2026-10-04):** after the LIME slopes are converted into
-  contributions, sign agreement is 0.945 on Adult, 0.960 on German Credit and 0.990 on
-  Breast Cancer, independent of the predicted class. The two explainers differ in which
-  features they rank first, not in the direction they assign. Script:
-  `scripts/paper_e_sign_contribution.py` (needs scikit-learn and the datasets under
-  `data/`; run it before the build when the runs change).
+  stores contributions. After conversion it is 0.945 / 0.960 / 0.990, a level that one
+  fixed direction per feature also reaches (0.951 / 0.978 / 0.990). The paper claims a
+  shared global direction per feature, not agreement on instance-specific directions.
+- **Post hoc, LIME configuration:** the kernel width is 3 (package default: 0.75 times the
+  square root of the number of features), chosen without a technical reason. The 999
+  perturbed samples together receive a median weight of 0.26 on Adult, 2.3 on German
+  Credit and 83.6 on Breast Cancer, against 1 for the instance. LIME at the default width
+  shares 0.370 of its top-5 with LIME at width 3 on Adult, and is less specific to the
+  instance (two explanations of different instances overlap by 0.589, against 0.195).
 
 ## Method statements checked against the code (2026-10-04)
 
@@ -122,10 +142,32 @@ cannot resolve, so a number cannot be typed by hand or left stale.
 | F13 public PDFs | PDFs untracked and ignored from 2026-10-04. They remain in the earlier git history, on `main` and in the Zenodo archive v0.6.0, which cannot be withdrawn; declare this in the cover letter. |
 | Reference audit | URL added to Lundberg and Lee; DOI added to Efron and Tibshirani; Krishna et al. kept on arXiv by the author's decision. |
 
+## Response to the second rigor review (2026-10-04)
+
+Author's answers to the review's questions: no technical reason for the kernel width of 3;
+the run log of the self-agreement experiment is not available; the default-width rerun is
+accepted. The title is kept, and the permutation reference is reported in the abstract.
+
+| Finding | What was done |
+|---|---|
+| F01 overlap compared only with random sets | Permutation reference computed (`paper_e_review2_analyses.py`, 20 draws per instance) and reported in the abstract, Section 3.3, Section 4.1, a new column of Table 1, Fig. 1, Section 4.3, the discussion and the conclusions. The dataset paragraph and "low agreement is not inevitable" are rewritten. The self-agreement experiment has its own permutation reference (Table 2). |
+| F02 LIME configuration | Kernel width and package default stated in Section 3.2 and in the abstract; kernel weights computed and reported in the limitations; range of the stored LIME stability reported (dated deviation from plan section 4) and Table 5 annotated; LIME rerun with the default width on the 760 instances (new paragraph in Section 4.2). Result: the width changes the LIME list as much as the change of explainer; the narrow kernel gives the more instance-specific explanations. |
+| F03 random-forest row of Table 2 | The experiment was rerun; it counts the skipped candidates (32 for the Adult random forest, none elsewhere) and Table 2 now gives SHAP-LIME agreement between the new runs. The limitation sentence and the two plan statements are corrected. |
+| F04 sentence on the wrong column | Moved to the fidelity paragraph; the stability values of gradient boosting are given. |
+| F05 models and self-agreement | Sentence limited to the multilayer perceptron, in Section 4.2 and in the discussion. |
+| F06 held-out contrast | SVM value and its coverage in the text; contribution (iii) labelled post hoc. A column in Table 4 did not fit the single-column table; the five values are in the text. |
+| F07 captions | "Spread of the seed means" added to the captions; SVM coverage noted in Tables 1 and 4; plan commit hash in the full version. |
+| F08 README and plan | This README rewritten; the plan entry of the first conversion is qualified by a later entry. |
+| F09 same runs in Table 2 | Done (see F03). |
+| F10 title | Kept, with the permutation reference in the abstract (author asked for a recommendation; this is it). |
+
+The rerun of the self-agreement experiment reproduced every earlier estimate exactly; the
+interval limits moved by at most 0.003 because the bootstrap draws more groups.
+
 ## Claim registry
 
 Paper E is under `[coverage]` and `[exclusivity]` in `pub/claim_registry.toml`
-(`paper_e.tex` and the five files in `tables/`). Every printed number is a `paper_e`
+(`paper_e.tex` and the six files in `tables/`). Every printed number is a `paper_e`
 source expression (`scripts/pubs/claim_sources.py`); the build writes them to the
 generated Paper E block of the registry, and `python scripts/pubs/verify_claims.py`
 re-derives each from the CSV files. Consequences:
@@ -154,6 +196,11 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 If the analysis code or its results change before submission, publish a new version and
 update the two macros. A change to the text alone does not need one.
 
+**Pending (2026-10-04):** the second revision added analysis code and result files
+(`paper_e_review2_analyses.py`, the extended `paper_e_ceiling.py`, `posthoc/review2_*.csv`,
+`posthoc/ceiling_*`). Version 0.7.0 does not contain them. Publish a new version and set
+the two macros before submission.
+
 ## Open items
 
 1. Author: read the draft and the interpretation.
@@ -161,8 +208,9 @@ update the two macros. A change to the text alone does not need one.
    an empty field. Add the volume if the journal has one.
 3. Author: register at the journal site and submit `submission/paper_e_blind.pdf`; confirm
    there that no fee applies.
-4. Possible addition: convert LIME slopes to contributions and recompute sign agreement
-   (needs the feature values of each instance, so the runs must be reloaded).
+4. Publish a new Zenodo version (see "Release and archive") and rebuild.
+5. Cover letter: say that earlier drafts were in a public repository and in Zenodo 0.6.0,
+   and name the two companion manuscripts.
 
 ## The question
 
