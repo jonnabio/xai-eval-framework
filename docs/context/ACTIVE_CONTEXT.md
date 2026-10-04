@@ -1,5 +1,103 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper E: second review, revision, Zenodo 0.8.0, SUBMITTED)
+
+This is the latest handoff. It summarises the whole session and supersedes the four
+Paper E entries of the same day directly below it, which keep the detail.
+
+- **Completed**
+  - **Second rigor review** of the revised Paper E (Scientific Advisor, read-only):
+    `docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md`, major revision, 2
+    major and 6 minor findings, 2 suggestions.
+  - **Revision answering it** (response table in `docs/reports/paper_e/README.md`):
+    - permutation reference for the overlap (`paper_e_review2_analyses.py`): SHAP of an
+      instance against LIME of another instance of the same run gives 0.203 / 0.287 /
+      0.648; instance-specific part 0.191 / 0.100 / 0.066 (Adult / German Credit / Breast
+      Cancer);
+    - self-agreement experiment rerun in full (`paper_e_ceiling.py`): saved top-10 lists,
+      skipped candidates counted (32, Adult random forest only), SHAP-LIME between the new
+      runs, LIME at the default kernel width, a permutation reference for each pair;
+    - LIME configuration disclosed: kernel width 3 against the package default, kernel
+      weights (median 0.26 / 2.3 / 83.6), range of the stored LIME stability;
+    - text fixes, captions, README and plan updated; Table 1 and Table 2 extended.
+  - **Author decisions:** no technical reason for the kernel width of 3 (stated in the
+    manuscript); default-width rerun accepted; title shortened to "Do Explainers Agree on
+    Which Features Matter? Instance-Level Agreement between SHAP and LIME"; Zenodo release
+    and merges approved; no action on the public repository and archive.
+  - **Zenodo version 0.8.0: `10.5281/zenodo.23142429`**, from GitHub release
+    `paper-e-cys-2026-10-04-r2` (tag on `main` `8bed86320`); cited in the full PDF.
+  - **Paper E SUBMITTED by the author on 2026-10-04** to *Computación y Sistemas*,
+    **submission 6783** (https://cys.cic.ipn.mx/index.php/CyS/author/submission/6783):
+    the blind PDF, a note to the editor, no supplementary file.
+  - Pull requests #12 (review and revision), #13 (Zenodo 0.8.0) and #14 (submission
+    record and this handoff) merged to `main`.
+- **Current State**
+  - Paper E is under review. `docs/reports/paper_e/submission/paper_e_blind.pdf` (local
+    only, 15 pages) is the file sent; its source is `main` at `193f1660e`.
+  - Last verification (after the final build): `verify_claims.py` 986 claims / 1220 sites;
+    `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained;
+    `verify_exp4_reconstruction.py` 18 pins; 24 lane and Paper E tests; CI passed on the
+    pull requests.
+  - The main folder is on `paper/e-feature-agreement`, level with `main`, clean. No lane
+    lock is held.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if
+     it fails.
+  2. Paper E: wait for the journal. When the decision arrives, record it in the Paper E
+     README and plan the response to the referees.
+  3. Return the main folder to `thesis/rca-001-phase-2` (`git switch`, then
+     `git merge main`); the other lanes take `main`.
+  4. Unchanged: Paper D acknowledgement; Paper B+C submission to *Inteligencia
+     Artificial*; Task 3 / RCA-001 Phase 2 on the thesis lane; `git worktree remove
+     ../xai-paper-e` if the folder still exists.
+- **Blockers/Issues**
+  - Earlier Paper E drafts remain publicly reachable (repository history, GitHub
+    releases, Zenodo 0.6.0 to 0.8.0). The journal's guidelines ask that a submission is not
+    available online; the note to the editor states it. The editor may raise it.
+  - The paper is at the 15-page limit set by the author: any addition in a revision needs
+    an equal cut.
+  - The text after the second revision was read by the author and not reviewed a third
+    time.
+  - Known and disclosed: the Adult random-forest binary reproduces 75% to 81% of the
+    predictions recorded in the runs.
+- **Notes**
+  - Do not rebuild `submission/` or change the Paper E analysis unless a revision is
+    requested. A revision that changes code or results needs a new Zenodo version and new
+    values for the two macros in `paper_e_layout.tex`.
+  - `paper_e_ceiling.py` needs the EXP3 binaries: `python scripts/train_exp3_models.py
+    --model-root <dir> --data-cache-dir data` (about one minute), then
+    `--exp3-model-root <dir>`; `--summarise-only` recomputes its CSV files from
+    `ceiling_lists.json`. Run the Paper E scripts with the project `.venv`, which has
+    SciPy, scikit-learn, shap and lime; the system Python does not.
+  - A shell heredoc loses backslashes and can fail on quotes: write patch scripts to a
+    file, or use the editor tool for LaTeX.
+  - The build prints the line range of an overfull box in `paper_e.tex`.
+  - Release route that worked: tag `origin/main`, push the tag, `gh release create
+    <tag> --verify-tag`; Zenodo archived it in about one minute.
+  - A session that ends without `check_lane.py release` leaves the lane locked for the
+    next one.
+
+## Session update - 2026-10-04 (Paper E SUBMITTED to Computación y Sistemas, ID 6783)
+
+This entry is the latest.
+
+- **Paper E was submitted by the author on 2026-10-04** through the journal's online
+  system; the journal acknowledged it by email as **submission 6783**
+  (https://cys.cic.ipn.mx/index.php/CyS/author/submission/6783).
+- File sent: `docs/reports/paper_e/submission/paper_e_blind.pdf` (15 pages, source at
+  `main` `193f1660e`), with a note to the editor and no supplementary file. Record in
+  `docs/reports/paper_e/README.md`, "Submission record".
+- Venue requirements re-read on the journal site the same day: Artificial Intelligence is
+  in scope, publication has no cost for authors, three referees, blind review, authors
+  transfer copyright on publication.
+- The author decided to take no action on the public repository and archive; the note to
+  the editor states that earlier drafts are reachable there.
+- **Do not rebuild `submission/` or change the Paper E analysis unless a revision is
+  requested.** A revision that changes code or results needs a new Zenodo version.
+- **Next:** wait for the journal's decision. Then return the main folder to
+  `thesis/rca-001-phase-2`; the other lanes take `main`. Unchanged: Paper D
+  acknowledgement, Paper B+C submission, Task 3 / RCA-001 Phase 2.
+
 ## Session update - 2026-10-04 (Paper E: title, Zenodo 0.8.0, merged to main)
 
 This entry is the latest. It closes Next Steps 1 and 2 and the merge in step 3 of the
