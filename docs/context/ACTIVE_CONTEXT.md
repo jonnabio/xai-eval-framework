@@ -1,5 +1,59 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper E revised after the second rigor review)
+
+This is the latest handoff. It closes the "second rigor review" entry directly below.
+
+- **Completed**
+  - Author's answers to the second review: no technical reason for the LIME kernel width
+    of 3; the run log of the self-agreement experiment is not available; the default-width
+    LIME rerun is accepted; the author asked for a recommendation on the title (kept, with
+    the permutation reference in the abstract).
+  - All findings of `docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md` are
+    addressed; the response to each is in `docs/reports/paper_e/README.md`, "Response to
+    the second rigor review".
+  - New post hoc analyses, dated in `ANALYSIS_PLAN.md` section 9 before they were run:
+    - permutation reference (`paper_e_review2_analyses.py`): SHAP of an instance against
+      LIME of another instance of the same run overlaps by 0.203 / 0.287 / 0.648; the
+      instance-specific part is 0.191 / 0.100 / 0.066 (Adult / German Credit / Breast
+      Cancer), positive in all 86 runs;
+    - kernel weights: the 999 perturbed samples of a LIME explanation receive a median
+      total weight of 0.26 / 2.3 / 83.6, against 1 for the instance;
+    - range of the stored LIME stability: model medians 0.001 to 0.009 on Adult (a dated
+      deviation from plan section 4);
+    - self-agreement experiment rerun in full (`paper_e_ceiling.py`): top-10 lists saved,
+      skipped candidates counted (32 for the Adult random forest, none elsewhere),
+      SHAP-LIME between the new runs (Adult 0.383, stored 0.393), LIME at the default
+      kernel width (shares 0.370 of its top-5 with LIME at width 3 on Adult; less specific
+      to the instance: 0.589 between different instances, against 0.195). Every earlier
+      estimate was reproduced exactly.
+  - Manuscript: Table 1 has the permutation column, Table 2 the new-run SHAP-LIME values
+    and the permutation reference of each pair; abstract, methods, results, discussion,
+    limitations and conclusions revised; captions say "spread of the seed means".
+- **Current State**
+  - Both PDFs have 15 pages, the limit; there is no room left. `verify_claims.py`: 986
+    claims / 1220 sites, pass. `verify_sync.py`, `scan_shared_literals.py --strict`,
+    `verify_exp4_reconstruction.py` and the 24 lane and Paper E tests pass.
+  - The revised text has not been reviewed a third time.
+  - **Zenodo 0.7.0 does not contain the new analysis code and result files.** The full PDF
+    still cites 0.7.0.
+- **Next Steps**
+  1. Author: read `docs/reports/paper_e/submission/paper_e_blind.pdf` (local only).
+  2. Author approves a new GitHub release; then set `\papererelease` and `\paperearchive`
+     in `paper_e_layout.tex` and rebuild. The assistant did not publish a release.
+  3. Author: merge this branch to `main` (pull request), register at the journal and
+     submit; cover letter as noted in the Paper E README.
+- **Blockers/Issues**
+  - Page limit: any further addition needs an equal cut.
+  - `paper_e_ceiling.py` needs the EXP3 model binaries, regenerated with
+    `scripts/train_exp3_models.py --model-root <dir> --data-cache-dir data` (about one
+    minute); the whole experiment runs in about three minutes without the SVM.
+- **Notes**
+  - A bash heredoc that contains Python source with quotes can fail to parse in this
+    shell; write patch scripts to a file.
+  - The build now prints where an overfull box is (line range in `paper_e.tex`).
+  - A held-out column did not fit Table 4 (single column); the values are in the text.
+
 ## Session Handoff - 2026-10-04 (Paper E, second rigor review)
 
 This is the latest handoff. It follows the Paper E entry of the same day below.
