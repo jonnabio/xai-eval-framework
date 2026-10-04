@@ -38,7 +38,8 @@ def test_no_path_has_two_owners():
 def test_branches_resolve_to_their_lane_and_folder():
     assert lane("paper/d-tecnologia-en-marcha")["folder"] == REG["main_folder"]
     assert lane("thesis/rca-001-phase-2")["name"] == "thesis"
-    assert lane("paper/e-feature-agreement")["folder"] == "xai-paper-e"
+    assert lane("paper/e-feature-agreement")["folder"] == REG["main_folder"]
+    assert lane("paper/f-external-validity")["folder"] == "xai-paper-f"
     assert lane("main") is None
     assert lane("feature/anything") is None
 
