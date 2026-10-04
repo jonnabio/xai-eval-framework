@@ -71,10 +71,13 @@ asks only about prior publication and concurrent review.
 
 ## 4. Open before submission
 
-1. Independent review of the draft (focus, novelty against Papers A, D and E, claim support).
+1. A review by someone who did not write the draft. The Scientific Editor review of
+   2026-10-04 (`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`) was done by the
+   drafting session.
 2. Author's read of the PDF.
-3. A new Zenodo version: the DOI printed now (`10.5281/zenodo.23111684`, version 0.4.0) is the
-   archive of the 32-page edition. Update `\zenodoversiondoi` after the release.
+3. Done 2026-10-04: Zenodo version 0.9.0, `10.5281/zenodo.23147228`, from GitHub release
+   `paper-b-cleiej-2026-10-04` (tag on `main` `a2ea80080`). The paper cites it. A later change
+   to code or results needs a new version; a text change does not.
 4. The earlier drafts are public (repository history, Zenodo). Single-blind review does not
    forbid this.
 
