@@ -152,6 +152,17 @@ The paper cites a tagged release and its Zenodo version DOI. The procedure is th
 and `\paperdarchive` in `paper_d_template.tex` and rebuild. The manuscript inside the
 archive prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
+| | |
+|---|---|
+| Release | `paper-d-submission-2026-10-03` (commit `021d85ead`), published 2026-10-03 |
+| Version | 0.5.0 |
+| Version DOI (cited in the paper) | `10.5281/zenodo.23130014` |
+| Concept DOI (all versions) | `10.5281/zenodo.19297723` |
+| Archive | one zip, 917 MB, open access, MIT licence |
+
+If the analysis code or its results change before acceptance, publish a new version and
+update the two macros. A change to the manuscript text alone does not need one.
+
 ## Plan to the deadline
 
 | Date | Step |
