@@ -26,7 +26,7 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
   address and no self-citation.
 - Submission is online, after registering at
   <https://www.cys.cic.ipn.mx/index.php/CyS/user/register>. The page states no fee and no
-  page limit; the author confirms both on the site before submitting.
+  page limit. The author's limit for this paper is 15 pages.
 
 ## Files
 
@@ -34,7 +34,8 @@ Guidelines: <https://www.cys.cic.ipn.mx/index.php/CyS/about/submissions#authorGu
 |---|---|
 | `paper_e_template.tex` | **The source.** Edit this. Every number is a placeholder. |
 | `paper_e.tex`, `tables/`, `figures/` | Generated. Do not edit. |
-| `references.bib` | 24 entries, each checked against Crossref or arXiv on 2026-10-03. |
+| `paper_e_layout.tex` | Layout constants and the release/archive macros. |
+| `references.bib` | 24 entries; 22 checked against Crossref or arXiv on 2026-10-03 (not the bootstrap textbook or the Paper A entry). Approved by the author. |
 | `scripts/paper_e_posthoc.py` | Post hoc diagnostics (plan section 9, 2026-10-03). |
 | `scripts/build_paper_e.py` | Figures, tables, `paper_e.tex` and both PDFs. |
 | `submission/paper_e_blind.pdf` | The file for review. |
@@ -62,18 +63,55 @@ cannot resolve, so a number cannot be typed by hand or left stale.
   class 0, 0.036 for class 1) because LIME without discretisation stores slopes and SHAP
   stores contributions. The paper reports it as a methodological finding.
 
-## Open items for the author
+## Decisions by the author (2026-10-03)
 
-1. Read the draft and the interpretation; the science is the author's decision.
-2. Authorship: the draft lists one author. Add the thesis director if he is a co-author.
-3. Approve the 24 references. Reference to Paper A (RIMI) has no volume in the record.
-4. Decide whether the AI-use declaration stays; CyS does not ask for one.
-5. Not done: Paper E is not yet in `[coverage]` and `[exclusivity]` of
-   `pub/claim_registry.toml`. That is a shared-path change through `main`. Until then the
-   numbers are protected by the build (generated from the CSV files), not by
-   `verify_claims.py`.
-6. Not done: a tagged release and Zenodo version for the data availability statement.
-7. Possible addition: convert LIME slopes to contributions and recompute sign agreement
+- **Single author.** The thesis director declined co-authorship: the work is the
+  author's.
+- **References approved:** the 24 entries of `references.bib`.
+- **No AI-use declaration** in the manuscript; the journal does not ask for one.
+- **Length: at most 15 pages** in the journal layout (the draft has 11). The journal
+  states no limit; this is the author's limit. `build_paper_e.py` stops if a PDF has more
+  than `MAX_PAGES = 15`.
+
+## Claim registry
+
+Paper E is under `[coverage]` and `[exclusivity]` in `pub/claim_registry.toml`
+(`paper_e.tex` and the five files in `tables/`). Every printed number is a `paper_e`
+source expression (`scripts/pubs/claim_sources.py`); the build writes them to the
+generated Paper E block of the registry, and `python scripts/pubs/verify_claims.py`
+re-derives each from the CSV files. Consequences:
+
+- a decimal typed by hand in `paper_e_template.tex` fails the coverage check;
+- layout constants live in `paper_e_layout.tex`, which is not under coverage;
+- a literal that equals a Paper B+C result by chance is listed by the build as an
+  `[[exclusivity_exception]]` naming its Paper E source;
+- the registry block is a shared path: commit it separately from the Paper E files.
+
+## Release and archive
+
+Procedure: `docs/reports/paper_bc/ZENODO_RELEASE.md`, Route A (bump `.zenodo.json` and
+`CITATION.cff`, publish a GitHub release, wait for Zenodo, set `\papererelease` and
+`\paperearchive` in `paper_e_layout.tex`, rebuild). The manuscript inside the archive
+prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
+
+| | |
+|---|---|
+| Release | `paper-e-cys-2026-10-03` |
+| Version | 0.6.0 |
+| Version DOI (cited in the full PDF) | pending |
+| Concept DOI (all versions) | `10.5281/zenodo.19297723` |
+
+If the analysis code or its results change before submission, publish a new version and
+update the two macros. A change to the text alone does not need one.
+
+## Open items
+
+1. Author: read the draft and the interpretation.
+2. The reference to Paper A (RIMI) has no volume in the record; the journal style prints
+   an empty field. Add the volume if the journal has one.
+3. Author: register at the journal site and submit `submission/paper_e_blind.pdf`; confirm
+   there that no fee applies.
+4. Possible addition: convert LIME slopes to contributions and recompute sign agreement
    (needs the feature values of each instance, so the runs must be reloaded).
 
 ## The question

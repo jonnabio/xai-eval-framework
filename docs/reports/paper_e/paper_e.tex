@@ -31,6 +31,7 @@
   \renewcommand{\abstractname}{Abstract.}%
 }
 \setlength{\emergencystretch}{3em}
+\input{paper_e_layout.tex}
 
 \newif\iffull
 \ifdefined\fullversion \fulltrue \else \fullfalse \fi
@@ -62,7 +63,7 @@ Post-hoc explainers are often used as if they were interchangeable, yet two expl
 name different features for the same prediction. This study measures how much SHAP and LIME
 agree at the level of the single instance. Both methods explained the same instances of
 the same models on three tabular datasets (Adult, German Credit and Breast Cancer
-Wisconsin), giving 31{,}411 paired explanations in 86 runs. The
+Wisconsin), giving 31,411 paired explanations in 86 runs. The
 analysis plan was registered before any agreement statistic was computed; runs, not
 instances, are the unit of summary, and intervals resample random seeds. The mean overlap
 of the five most important features (Jaccard index) was 0.393
@@ -127,7 +128,7 @@ A secondary, descriptive question is how the features used by two explainers of 
 different kind, Anchors \cite{ribeiro2018anchors} and DiCE \cite{mothilal2020dice},
 overlap with those of SHAP and LIME.
 
-The contributions are: (i) estimates of SHAP--LIME agreement on 31{,}411 paired
+The contributions are: (i) estimates of SHAP--LIME agreement on 31,411 paired
 explanations across five model families and three datasets, with the run as the unit of
 summary and intervals clustered by random seed; (ii) evidence that agreement depends on
 the model family and the dataset, not on the number of explained instances, and is not
@@ -214,8 +215,8 @@ prediction of every target instance.
 value of a feature is its signed contribution to the output for class~1, relative to
 the expected output on the background data.
 
-\textbf{LIME.} The tabular explainer \cite{ribeiro2016why} was used with 1,000 perturbed
-samples, kernel width 3.0, ten selected features and \emph{without discretisation of
+\textbf{LIME.} The tabular explainer \cite{ribeiro2016why} was used with 1000 perturbed
+samples, kernel width 3, ten selected features and \emph{without discretisation of
 continuous features}. With this setting, the stored value of a feature is the
 coefficient of the local weighted linear model for class~1, that is, a local slope.
 
@@ -237,8 +238,7 @@ LIME values for one instance. The primary measure is the top-5 Jaccard overlap
 J_5 = \frac{|S_5 \cap L_5|}{|S_5 \cup L_5|}.
 \label{eq:jaccard}
 \end{equation}
-Three shared features out of five give $J_5 = 3/7 \approx 0.43$, and four give
-$J_5 = 4/6 \approx 0.67$. The top-10 overlap $J_{10}$ is a sensitivity measure.
+Three shared features out of five give $J_5 = 3/7$, and four give $J_5 = 4/6$. The top-10 overlap $J_{10}$ is a sensitivity measure.
 
 Rank concordance is Kendall's $\tau_b$ \cite{kendall1945treatment} computed on the union
 of the two top-10 lists; a feature absent from a list receives rank 11, and ties use
@@ -261,10 +261,10 @@ prediction entered the analysis. The source runs contained 278 records
 with an error and no explanation, mostly KernelSHAP on the SVM; these were excluded,
 and one SVM block had no usable SHAP run. Of the 87 blocks, 76
 had identical sets of valid instances for the two methods; in the others the
-intersection was used, which left 4{,}936 valid records unpaired. No paired
-record had a different label or prediction in the two runs. The result is 31{,}411
-paired explanations in 86 runs: 29{,}667 on Adult
-(74 runs), 1{,}060 on German Credit and
+intersection was used, which left 4,936 valid records unpaired. No paired
+record had a different label or prediction in the two runs. The result is 31,411
+paired explanations in 86 runs: 29,667 on Adult
+(74 runs), 1,060 on German Credit and
 684 on Breast Cancer (six runs each). Kendall's $\tau_b$ was
 undefined for 0 pairs and sign agreement for 516 pairs
 without a shared non-zero feature.
@@ -274,7 +274,7 @@ without a shared non-zero feature.
 The same test instances recur across models, seeds and intensities, so instances are not
 independent replicates. Each measure was first averaged within a run (dataset, model,
 seed, intensity). The point estimate of a group is the mean of its run means. The 95\%
-interval is a percentile bootstrap with 2,000 resamples in which random seeds, not
+interval is a percentile bootstrap with 2000 resamples in which random seeds, not
 instances, are resampled with replacement, and all runs of a sampled seed are kept
 together \cite{efron1993introduction,cameron2015practitioner}. There are five seeds on
 Adult and three on the other datasets, so the intervals describe variation between seeds
@@ -331,7 +331,7 @@ ten features raised the overlap on Adult and German Credit
 (0.669).
 
 \begin{table*}[t]
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{\tablestretch}
 \centering
 \caption{Agreement between SHAP and LIME: mean of run means and seed-clustered 95\% interval. Adult rows pool the three sampling intensities}
 \label{tab:agreement}
@@ -410,12 +410,12 @@ disagreement about the direction of an effect. It measures mostly on which side 
 reference the instance lies.
 
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{\tablestretch}
 \centering
 \caption{Sign agreement on shared top-5 features, overall and by predicted class, and constancy of the sign of a feature across instances (share of instances with the majority sign). Post hoc}
 \label{tab:sign}
 \footnotesize
-\setlength{\tabcolsep}{2.4pt}
+\setlength{\tabcolsep}{\tightcolsep}
 \begin{tabular}{llrrrrr}
 \hline
  & & \multicolumn{3}{c}{Sign agreement} & \multicolumn{2}{c}{Constancy} \\
@@ -444,16 +444,16 @@ seeds). For the random forest it was higher (0.045,
 higher for gradient boosting (0.014). For logistic regression and
 the support vector machine the difference was near zero. On German Credit the
 differences were small and negative, with three seeds. On Breast Cancer no run had ten
-misclassified instances, so the contrast could not be estimated. The largest absolute
-difference was 0.059, small compared with the differences between model families.
+misclassified instances, so the contrast could not be estimated. The largest difference in absolute value was that of the
+multilayer perceptron, small compared with the differences between model families.
 
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{\tablestretch}
 \centering
 \caption{Top-5 overlap for correctly classified (C) and misclassified (M) instances. Diff.\ is M minus C; Neg.\ is the number of seeds with a negative difference; GC is German Credit}
 \label{tab:correctness}
 \footnotesize
-\setlength{\tabcolsep}{2.2pt}
+\setlength{\tabcolsep}{\tightcolsep}
 \begin{tabular}{llrrrlr}
 \hline
 Data & Model & C & M & Diff. & 95\% interval & Neg. \\
@@ -489,12 +489,12 @@ $-$0.54), with three runs. These are associations within
 runs; they do not show that low fidelity causes disagreement.
 
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{\tablestretch}
 \centering
 \caption{Mean within-run Spearman correlation between disagreement ($1 - J_5$) and explanation quality. Fid.: fidelity; Stab.: stability}
 \label{tab:quality}
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{\mediumcolsep}
 \begin{tabular}{llrrrr}
 \hline
  & & \multicolumn{2}{c}{SHAP} & \multicolumn{2}{c}{LIME} \\
@@ -523,12 +523,12 @@ method; it shows that their features cannot be substituted for those of an attri
 method.
 
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{\tablestretch}
 \centering
 \caption{Jaccard overlap between feature sets on Adult (SHAP, LIME: top-5 features; Anchors: rule features; DiCE: changed features): mean of run means and seed-clustered 95\% interval}
 \label{tab:secondary}
 \footnotesize
-\setlength{\tabcolsep}{2.2pt}
+\setlength{\tabcolsep}{\tightcolsep}
 \begin{tabular}{lrrrl}
 \hline
 Feature sets & Runs & Pairs & Mean & 95\% int. \\
@@ -625,7 +625,8 @@ features from that of the model family.
 The three datasets are public
 \cite{becker1996adult,hofmann1994statlog,wolberg1993breast}. The code, the per-instance
 run outputs, the new LIME cohort, the registered analysis plan and every result file are
-available at \url{https://github.com/jonnabio/xai-eval-framework}. Every number, table
+available at \url{https://github.com/jonnabio/xai-eval-framework} (release
+\texttt{\papererelease}), archived at \paperearchive. Every number, table
 and figure in this article is generated from those files by the scripts described in
 \texttt{docs/reports/paper\_e/README.md}.
 \else
@@ -635,12 +636,6 @@ run outputs, the new LIME cohort, the registered analysis plan and every result 
 in a public repository, with scripts that generate every number, table and figure in
 this article; its address is withheld for blind review.
 \fi
-
-\section*{Declaration on the Use of Artificial Intelligence}
-The author used the AI tool Claude (Anthropic), under the author's direction, to help
-write analysis and figure code, to draft and edit the English text and to format the
-references. The research questions, the analysis plan and the interpretation are the
-author's, and the author reviewed all content for accuracy.
 
 {
 \bibliographystyle{cys}
