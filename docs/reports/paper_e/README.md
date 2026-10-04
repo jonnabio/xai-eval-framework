@@ -1,15 +1,27 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-04): revised after two rigor reviews; with the author for the final
-read.** The first review (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`,
-major revision, 4 major and 9 minor findings) and the second
-(`docs/review/scientific-rigor-review_paper_e_2026-10-04_r2.md`, major revision, 2 major
-and 6 minor findings, 2 suggestions) are both answered; the two "Response" sections below
-say what was done for each finding. The text after the second revision has not been
-reviewed again. Target journal: *Computación y Sistemas* (CyS, CIC-IPN, Mexico), in
-English. Not submitted. The archive is Zenodo version 0.8.0 and the full PDF cites it.
-The author read the blind PDF on 2026-10-04 and shortened the title to "Do Explainers Agree
-on Which Features Matter? Instance-Level Agreement between SHAP and LIME".
+**Status: SUBMITTED on 2026-10-04 to *Computación y Sistemas* (CIC-IPN, Mexico), in
+English, as submission 6783.** See "Submission record" below. Do not rebuild
+`submission/` or change the analysis unless the journal asks for a revision.
+
+## Submission record
+
+| | |
+|---|---|
+| Journal | *Computación y Sistemas*, online system |
+| Submission ID | 6783 |
+| Date | 2026-10-04 (acknowledgement received by email the same day) |
+| Tracking | <https://cys.cic.ipn.mx/index.php/CyS/author/submission/6783> |
+| File sent | `submission/paper_e_blind.pdf`, 15 pages, built from `main` at `193f1660e`; no supplementary file |
+| Title | Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME |
+| Author | Jonathan Herrera-Vásquez (single author) |
+| Archive cited in the full version | Zenodo 0.8.0, `10.5281/zenodo.23142429` |
+| Note to the editor | Sent with the submission: originality; the public repository and archive, where earlier drafts are reachable; the three related works on the same cohort; the analysis plan committed before the analysis |
+
+Before submission the manuscript was revised after two rigor reviews
+(`docs/review/scientific-rigor-review_paper_e_2026-10-04.md` and `..._r2.md`); the two
+"Response" sections below say what was done for each finding. The text after the second
+revision was read by the author and not reviewed a third time.
 
 ## Where this paper is worked
 
