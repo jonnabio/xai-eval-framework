@@ -70,10 +70,20 @@ It supersedes the two Paper E entries of 2026-10-03 below.
      submission in the Paper E README.
   3. Optional: run the SVM in the self-agreement experiment (about two hours); a second
      rigor review of the revised text.
-  4. Unchanged: `git worktree remove ../xai-paper-e`; return the main folder to
+  4. Unchanged: confirm the removed side folders and run `git worktree prune` (see
+     Blockers); return the main folder to
      `thesis/rca-001-phase-2` when Paper E work ends; the other lanes take `main`; Paper D
      acknowledgement; Paper B+C submission; Task 3 / RCA-001 Phase 2.
 - **Blockers/Issues**
+  - **Found at session end, not done by this session:** the folders `../xai-paper-e`,
+    `../xai-paper-f` and `../xai-chapter`, and the bundle file
+    `../xai-eval-framework-backup-2026-10-03.bundle`, are no longer on disk. Git still
+    lists the three as working trees ("prunable"). Their branches exist locally and on
+    origin (`paper/f-external-validity` at `f2f04cc44`; `chapter/cifie-sync-2026-09`
+    locally at `0740d93ed`, one commit behind origin `4575e22b1`), so committed work is
+    intact; any uncommitted file in those folders is lost. The author confirms whether the
+    removal was intended, then runs `git worktree prune`. Only `../xai-exp4` remains
+    beside the main folder.
   - The Adult random-forest binary does not reproduce the stored runs exactly (known); in
     the self-agreement experiment a new SHAP run agrees less with the stored one (0.640)
     than with another new run (0.887). Disclosed in the plan.
