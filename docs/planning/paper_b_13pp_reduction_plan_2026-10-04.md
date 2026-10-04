@@ -1,6 +1,6 @@
 # Plan: Paper B, the 13-page paired SHAP-LIME paper
 
-**Date**: 2026-10-04 | **Role**: Architect | **Status**: proposed, waiting for the author's approval
+**Date**: 2026-10-04 | **Role**: Architect | **Status**: approved by the author on 2026-10-04; steps 1 to 6 done, step 7 (independent review) open
 
 **Basis**: `docs/review/paper-c-resurrection-assessment_2026-10-04.md`. Author decisions of
 2026-10-04: reduce Paper B+C to 13 pages; Paper B goes first, Paper C second; the
@@ -24,9 +24,9 @@ references, no appendix. The target is the author's, not a journal rule.
 
 | # | Decision | Proposal | Who decides |
 |---|---|---|---|
-| D1 | Folder and lane | Stay in `docs/reports/paper_bc/` on the `paper/bc-*` lane; new source `paper_b.tex` | Proposed; follows the author's rule that this material stays in one folder |
-| D2 | Venue | Open. Only no-fee journals. *Computación y Sistemas* holds Paper E | **Author** |
-| D3 | Template | A neutral 10 pt A4 article layout until D2 is settled; the journal template is applied afterwards | Proposed |
+| D1 | Folder and lane | Stay in `docs/reports/paper_bc/` on the `paper/bc-*` lane; new source `paper_b_cleiej.tex` | Proposed; follows the author's rule that this material stays in one folder |
+| D2 | Venue | *CLEI Electronic Journal* (author, 2026-10-04): no fees, single-blind, at least 12 pages, abstract of at most 200 words | Decided |
+| D3 | Template | The journal class `cleiej.cls` | Decided |
 | D4 | Title | "LIME versus SHAP under Matched Conditions: A Paired Comparison on Tabular Models" | **Author** |
 | D5 | Lead finding | The conditional result: the latency ordering depends on the model family, and LIME's stability on Adult depends on kernel width and feature space | Proposed (assessment F02) |
 | D6 | Tables S2, S5, S6 | Out of the PDF; cited from the archive | Proposed |
@@ -111,3 +111,20 @@ Each step ends with the checks named in section 6 and its own commit.
 3. D4: the title.
 4. For the rejection record: the date of submission to *Inteligencia Artificial* and the
    submission ID, if one was given.
+
+## 10. Execution record (2026-10-04)
+
+- Steps 1 to 6 done in one session. Result: `docs/reports/paper_bc/paper_b_cleiej.tex`, 13
+  pages in the journal class, 38 references, 9 tables, 3 figures.
+- The journal page holds more text than the IBERAMIA page, so the cuts were smaller than
+  section 4 planned. Kept beyond the plan: the kernel-width table (former Table S2) and the
+  masking-sensitivity table (former Table S6) are in the main text, because the lead finding
+  rests on the first. Added: a table of median cost by model group, built from registered
+  values. Dropped: the `num_samples` probe (former Table S5, not re-derivable) and the
+  feature-association table (former Table S3).
+- Registry: 78 sites added for the new file; no value, resolver or existing site changed.
+  The file is under `[coverage]`. It is not listed under `[exclusivity]`, which protects other
+  documents from printing this folder's results.
+- Checks after the last build: `verify_claims.py`, `verify_sync.py`,
+  `scan_shared_literals.py --strict`, `verify_exp4_reconstruction.py` pass.
+- Open: step 7 (independent review, new session), the author's read, a new Zenodo version.

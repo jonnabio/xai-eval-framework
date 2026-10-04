@@ -36,6 +36,7 @@ def main() -> int:
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
         "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_prototype_jmlr.tex",
         "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
+        "paper_b_cleiej": ROOT / "docs" / "reports" / "paper_bc" / "paper_b_cleiej.tex",
         "paper_c": ROOT / "docs" / "reports" / "paper_c" / "paper_c_prototype_jmlr.tex",
     }
     for paper_id, path in papers.items():
@@ -57,6 +58,7 @@ def main() -> int:
         ROOT / "pub" / "fragments" / "thesis_abstract_en.qmd",
         ROOT / "pub" / "fragments" / "paper_a_abstract_en.tex",
         ROOT / "pub" / "fragments" / "paper_b_abstract_en.tex",
+        ROOT / "pub" / "fragments" / "paper_b_cleiej_abstract_en.tex",
         ROOT / "pub" / "fragments" / "paper_bc_abstract_en.tex",
         ROOT / "pub" / "fragments" / "paper_bc_resumen_es.tex",
         ROOT / "pub" / "fragments" / "paper_c_abstract_en.tex",
