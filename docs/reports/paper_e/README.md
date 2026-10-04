@@ -69,6 +69,12 @@ cannot resolve, so a number cannot be typed by hand or left stale.
   author's.
 - **References approved:** the 24 entries of `references.bib`.
 - **No AI-use declaration** in the manuscript; the journal does not ask for one.
+- **Clickable blue links** (2026-10-04) for citations, cross-references, URLs and DOIs,
+  through `hyperref` (`colorlinks`, all blue). The journal class does not load it. Of the
+  24 articles in the journal's current issue on 2026-10-04, 9 have links, added by their
+  authors, in mixed styles; there is no journal rule. A DOI in the reference list links
+  to `https://doi.org/<doi>`; a complete address in `references.bib` is written with
+  `\fullurl{...}`, not `\url{...}`. The PDF metadata carries no author.
 - **Length: at most 15 pages** in the journal layout (the draft has 11). The journal
   states no limit; this is the author's limit. `build_paper_e.py` stops if a PDF has more
   than `MAX_PAGES = 15`.
