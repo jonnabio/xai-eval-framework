@@ -1,5 +1,103 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (session end: Paper B+C split; Paper B drafted, reviewed, archived, on main)
+
+This is the latest handoff and the full state at the end of the session. It supersedes the
+three Paper B entries of the same day directly below it, which keep the detail.
+
+- **Completed**
+  - **Rejection recorded.** *Inteligencia Artificial* (IBERAMIA) rejected the 32-page Paper
+    B+C at the initial editorial assessment (reported 2026-10-04; submitted 2026-10-01
+    according to the author; no ID, no review, no named defect):
+    `docs/reports/paper_bc/IBERAMIA_REJECTION_RECORD.md`. Tag `iberamia-submission-2026-10`.
+  - **Assessment** (Scientific Advisor):
+    `docs/review/paper-c-resurrection-assessment_2026-10-04.md`. Paper C is viable only as the
+    LLM-judge reliability study with the taxonomy as framing.
+  - **Author decisions (ADR-0022):** split the paper; Paper B first, then Paper C; about 13
+    pages (the author's own target); Paper B goes to the **CLEI Electronic Journal**; Paper B
+    has its own folder and lane; the second-reviewer disagreements must be adjudicated; two
+    human raters are available for Paper C.
+  - **Paper B written:** `docs/reports/paper_b/paper_b_cleiej.tex`, in the journal class
+    `cleiej.cls`. Plan: `docs/planning/paper_b_13pp_reduction_plan_2026-10-04.md`. Sheet:
+    `docs/reports/paper_b/CLEIEJ_SUBMISSION.md`. No registered value changed; 78 registry
+    sites added; the file is under `[coverage]`, the Paper A overlap scan and the
+    retired-value guards; `[exclusivity]` forbids both `paper_bc/` and `paper_b/`.
+  - **Folder and lane:** the April prototype in `docs/reports/paper_b/` was removed (in the
+    history, last at `cd4af0e94`); lane `paper-b`, branches `paper/b-*`, in `lanes.toml`. The
+    fragment id `paper_b` holds the CLEIej abstract.
+  - **Review** (Scientific Editor, same session, not independent):
+    `docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`. Major finding, fixed: the
+    published RIMI article already reports a paired SHAP-LIME Wilcoxon test on 45 cells and
+    announces the 75-cell set without reporting it; Paper B now says it extends that test.
+    Also fixed: H2 direction, scope of the kernel-width probe, the TreeExplainer cost
+    mechanism as a candidate explanation, the abstract opening, the title, Table 5 (SHAP-LIME
+    gap column; Figure 3 removed), the stability-protocol caveat.
+  - **Journal checklist** checked; 13 references gained a verified DOI or URL (33 of 38).
+    Acknowledgments thank Miguel Herrero Uceda only (author's text; the AI-use statement was
+    removed by the author).
+  - **Double-blind build** added at the author's request: `paper_b_cleiej_blind.tex`.
+  - **Zenodo version 0.9.0: `10.5281/zenodo.23147228`**, from GitHub release
+    `paper-b-cleiej-2026-10-04` (tag on `main` `a2ea80080`); the paper cites it.
+  - Pull requests #15, #16, #17 and the one carrying this handoff merged to `main`; CI green.
+  - Paper C preparation: `docs/reports/paper_bc/second_reviewer_adjudication_sheet.csv` (28
+    disagreements in 12 records, decision columns empty).
+- **Current State**
+  - **Paper B is ready for the author's read, not yet submitted.** Title: "When Does SHAP
+    Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular
+    Benchmark". Full PDF `paper_b_cleiej.pdf`: 13 pages, 2 figures, 9 tables, 38 references,
+    abstract 199 words (limit 200). Blind PDF `paper_b_cleiej_blind.pdf`: 12 pages, the
+    journal's minimum.
+  - Last verification: `verify_claims.py` 986 claims / 1298 sites / 60 retired-value guards;
+    `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained;
+    `verify_exp4_reconstruction.py` 18 pins; 9 lane tests.
+  - `docs/reports/paper_bc/` holds the unedited 32-page edition (still under `[coverage]`),
+    the rejection records, the corpus and the adjudication sheet: the Paper C material.
+  - The main folder is on `paper/b-cleiej`, level with `main`, clean. No lane lock is held.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it
+     fails.
+  2. Author: read `docs/reports/paper_b/paper_b_cleiej.pdf` (introduction and Section 4.1
+     first), confirm the new title, decide the note to the editor (`CLEIEJ_SUBMISSION.md`,
+     section 3), and submit the full PDF at https://www.clei.org/cleiej. Record the
+     submission in the sheet and here.
+  3. Advisable before submitting: a review by a session or person that did not write the
+     draft.
+  4. Paper C, after Paper B is submitted: its own plan and lane; adjudication with the second
+     reviewer; a stratified sample of 50 to 60 EXP4 cases for two human raters; a dated plan
+     before any post hoc analysis of judge scores against technical metrics.
+  5. Check the thesis chapters and the 32-page edition for the sentence that the earlier
+     article left the SHAP-LIME contrast unresolved; it is wrong.
+  6. Unchanged: Paper E and Paper D wait for their journals; return the main folder to
+     `thesis/rca-001-phase-2` (`git switch`, then `git merge main`) for Task 3 / RCA-001
+     Phase 2; `git worktree prune` for the removed side folders.
+- **Blockers/Issues**
+  - Novelty: four manuscripts (A, B, D, E) use the same executions. Paper B discloses its
+    relation to each; an editor may still see it as incremental.
+  - The Paper B review was not independent.
+  - The Zenodo 0.9.0 archive and the GitHub release carry the earlier title and Figure 3. A
+    text change needs no new version; a change to code or results does.
+  - The blind PDF is at the 12-page minimum: any cut takes it below.
+  - The journal says keywords should come from its list of topics; the list was not found.
+  - Paper E's submitted text names the 32-page paper as a companion; correct it only if E is
+    revised.
+  - The repository's records of the random-forest size disagree (50 trees of depth 15 in one
+    metadata file, 100 trees in another); the paper states no size.
+- **Notes**
+  - CLEIej: no fees, single-blind, at least 12 pages, abstract of at most 200 words, table
+    captions above and without a final period, IEEE numbered references in citation order.
+  - Build: `tools/tectonic-portable/tectonic docs/reports/paper_b/paper_b_cleiej.tex` and the
+    same for `paper_b_cleiej_blind.tex`. Figures:
+    `python scripts/generate_paper_b_figures.py --output-dir docs/reports/paper_b/figures`.
+  - Blind check after every edit: the `pdftotext ... | grep` line in `CLEIEJ_SUBMISSION.md`,
+    section 6; expected output nothing.
+  - A file under `docs/reports/paper_bc/` or `docs/reports/paper_b/` is never added to the
+    `[exclusivity]` file list; those folders are its protected side.
+  - In this shell `sed` and heredocs drop backslashes, and a heredoc with apostrophes can
+    fail to parse: use the editor tool or a script file for LaTeX, TOML and long text.
+  - Release route that worked again: pull request, `gh pr merge --merge`, tag `origin/main`,
+    push the tag, `gh release create <tag> --verify-tag`; Zenodo archived it in about two
+    minutes.
+
 ## Session update - 2026-10-04 (Paper B: review fixes applied, new title, double-blind build)
 
 This entry is the latest. It closes the two open author decisions of the entry below.
