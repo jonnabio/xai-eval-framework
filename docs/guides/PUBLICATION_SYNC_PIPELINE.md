@@ -51,7 +51,7 @@ Each paper’s JMLR LaTeX source consumes fragments via `\input{...}`:
 - Paper A: `docs/reports/paper_a/paper_a_prototype_jmlr.tex`
   - `pub/fragments/paper_a_abstract_en.tex`
   - `pub/fragments/paper_a_keywords_en.tex`
-- Paper B: `docs/reports/paper_b/paper_b_prototype_jmlr.tex`
+- Paper B: `docs/reports/paper_b/paper_b_cleiej.tex`
   - `pub/fragments/paper_b_abstract_en.tex`
   - `pub/fragments/paper_b_keywords_en.tex`
 - Paper C: `docs/reports/paper_c/paper_c_prototype_jmlr.tex`

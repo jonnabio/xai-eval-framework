@@ -130,11 +130,29 @@ públicamente.
 """
 keywords_es_tex = "IA explicable, métricas de evaluación, taxonomía, LIME, SHAP"
 
+# Paper B, CLEI Electronic Journal edition (ADR-0022): the 13-page paired
+# SHAP-LIME paper. The journal limits the abstract to 200 words.
 [papers.paper_b]
 abstract_en_tex = """
-LIME and SHAP are widely used explainability methods, yet guidance on when each is preferable remains limited and often anecdotal. This paper presents a focused paired empirical comparison of the two methods on tabular data using five primary technical metrics under a controlled benchmarking protocol. Across 75 matched SHAP-LIME cells, SHAP dominates on stability, fidelity, and faithfulness gap, while LIME yields systematically sparser explanations and lower runtime in most contexts. The cost trade-off is statistically significant but heterogeneous across model families: matched-cell medians are 684.1 ms for SHAP versus 65.7 ms for LIME, whereas means are 11,708.3 ms versus 3,660.7 ms because kernel-SHAP tails are heavy. These findings support objective-driven deployment guidance: SHAP for high-assurance auditing and LIME for latency-sensitive user-facing explanation workflows.
+LIME and SHAP are the most widely used model-agnostic explainers for tabular
+models, yet controlled paired comparisons of the two remain scarce. This
+paper extends an earlier paired test to the full grid of a public benchmark:
+75 cells that share model, seed and sample size, over five model families on
+the UCI Adult census-income dataset, with Holm-corrected paired tests and
+effect sizes for five endpoints. SHAP leads on stability ($d_z{=}3.00$),
+fidelity ($d_z{=}4.82$) and faithfulness gap ($d_z{=}2.63$), and LIME gives
+sparser explanations. Two results depend on conditions that are usually left
+implicit. First, the latency ordering depends on the model family: SHAP's
+\\texttt{TreeExplainer} was faster than LIME in every XGBoost cell and slower
+in every random-forest cell, and LIME was faster for non-tree models (median
+53.3 ms vs.\\ 694.6 ms). Second, LIME's near-zero stability on Adult is not a
+fixed property of the method: it is high on two further tabular datasets
+and, in a single-model probe, rises with the kernel width. The results support choosing the explainer
+according to the model architecture and the latency budget, and they show
+that a ranking obtained on one dataset and one configuration does not
+transfer by default. All artifacts are public.
 """
-keywords_en_tex = "explainable ai, lime, shap, interpretability, robustness benchmarking"
+keywords_en_tex = "explainable artificial intelligence, LIME, SHAP, explanation evaluation, benchmarking"
 
 [papers.paper_c]
 abstract_en_tex = """
