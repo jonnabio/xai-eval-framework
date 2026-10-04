@@ -7,8 +7,9 @@ major revision, 4 major and 9 minor findings) and the second
 and 6 minor findings, 2 suggestions) are both answered; the two "Response" sections below
 say what was done for each finding. The text after the second revision has not been
 reviewed again. Target journal: *Computación y Sistemas* (CyS, CIC-IPN, Mexico), in
-English. Not submitted. **The result files changed after Zenodo version 0.7.0: a new
-version is needed before submission.**
+English. Not submitted. The archive is Zenodo version 0.8.0 and the full PDF cites it.
+The author read the blind PDF on 2026-10-04 and shortened the title to "Do Explainers Agree
+on Which Features Matter? Instance-Level Agreement between SHAP and LIME".
 
 ## Where this paper is worked
 
@@ -187,19 +188,18 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
 | | |
 |---|---|
-| Release | `paper-e-cys-2026-10-04` (commit `3923d1b68`, on `main`), published 2026-10-04 |
-| Version | 0.7.0 (0.6.0, `10.5281/zenodo.23130949`, release `paper-e-cys-2026-10-03`, predates the review revision) |
-| Version DOI (cited in the full PDF) | `10.5281/zenodo.23139911` |
+| Release | `paper-e-cys-2026-10-04-r2` (commit `8bed86320`, on `main`), published 2026-10-04 |
+| Version | 0.8.0. Earlier: 0.7.0 (`10.5281/zenodo.23139911`, release `paper-e-cys-2026-10-04`, before the second review) and 0.6.0 (`10.5281/zenodo.23130949`, release `paper-e-cys-2026-10-03`, before the first review) |
+| Version DOI (cited in the full PDF) | `10.5281/zenodo.23142429` |
 | Concept DOI (all versions) | `10.5281/zenodo.19297723` |
 | Archive | one zip, 918 MB, open access, MIT licence |
 
 If the analysis code or its results change before submission, publish a new version and
 update the two macros. A change to the text alone does not need one.
 
-**Pending (2026-10-04):** the second revision added analysis code and result files
-(`paper_e_review2_analyses.py`, the extended `paper_e_ceiling.py`, `posthoc/review2_*.csv`,
-`posthoc/ceiling_*`). Version 0.7.0 does not contain them. Publish a new version and set
-the two macros before submission.
+Version 0.8.0 contains the analysis code and result files of the second revision. Its
+manuscript source has the shortened title and still cites 0.7.0; the code and data are
+exact.
 
 ## Open items
 
@@ -208,8 +208,7 @@ the two macros before submission.
    an empty field. Add the volume if the journal has one.
 3. Author: register at the journal site and submit `submission/paper_e_blind.pdf`; confirm
    there that no fee applies.
-4. Publish a new Zenodo version (see "Release and archive") and rebuild.
-5. Cover letter: say that earlier drafts were in a public repository and in Zenodo 0.6.0,
+4. Cover letter: say that earlier drafts were in a public repository and in Zenodo 0.6.0,
    and name the two companion manuscripts.
 
 ## The question
