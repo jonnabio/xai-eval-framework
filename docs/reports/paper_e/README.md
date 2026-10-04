@@ -1,6 +1,6 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status (2026-10-03): draft complete, registered and archived; awaiting the author's read.** Target journal: *Computación y
+**Status (2026-10-04): NOT ready to submit.** The rigor review of 2026-10-04 (`docs/review/scientific-rigor-review_paper_e_2026-10-04.md`, grade: major revision) has four major findings open (F01-F04). Target journal: *Computación y
 Sistemas* (CyS, CIC-IPN, Mexico), in English. Not submitted.
 
 ## Where this paper is worked
