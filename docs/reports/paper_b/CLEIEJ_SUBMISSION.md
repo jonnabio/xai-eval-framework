@@ -4,10 +4,10 @@
 Informática. ISSN 0717-5000. Submit at https://www.clei.org/cleiej (register, then the
 five-step submission).
 
-**Status (2026-10-04):** first draft built, 13 pages. **Not ready to submit**: it has not had
-the independent review that the plan requires
-(`docs/planning/paper_b_13pp_reduction_plan_2026-10-04.md`, step 7), and the author has not
-read it. Decision record: ADR-0022.
+**Status (2026-10-04):** first draft built, 13 pages. Reviewed by the Scientific Editor role the same day
+(`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`); one major defect corrected.
+That review was not independent of the drafting session. The author has not yet read the
+corrected text. Decision record: ADR-0022.
 
 ## 1. Journal requirements, checked 2026-10-04
 
@@ -21,7 +21,7 @@ Sources: the journal's "Submissions", "About" and "Editorial Process" pages, and
 | Language | English | English |
 | Length | **At least 12 pages**; no maximum stated | 13 pages, references included, no appendix |
 | Page | A4, 10 pt, single column, page numbers, no other header or footer | `cleiej.cls`, unmodified |
-| Abstract | **At most 200 words**, on the first page with the keywords | 191 words, from `pub/claims.toml` |
+| Abstract | **At most 200 words**, on the first page with the keywords | 199 words, from `pub/claims.toml` |
 | Keywords | Short list; should fall within the journal's topics | Five |
 | Sections | Numbered; abstract, acknowledgments and references unnumbered | As required |
 | Tables | Caption before the table, no vertical lines, no period at the end of a caption | As required |
@@ -52,11 +52,17 @@ Then run `verify_claims.py`, `verify_sync.py`, `scan_shared_literals.py --strict
 ## 3. Comments for the editor (draft)
 
 > This manuscript reports a paired comparison of LIME and SHAP on tabular models. Its runs
-> were released with an earlier article (Revista de Investigación Multidisciplinaria
-> Iberoamericana, https://doi.org/10.69850/rimi.vi3.307); the manuscript reports no result of
-> that article and says so in Section 5.3. Two further manuscripts by the author, on other
-> questions and with no shared result, are under review at other journals. An earlier and
-> longer version of this work, which also contained a literature taxonomy and a study of
+> were released with an earlier article by the author (Revista de Investigación
+> Multidisciplinaria Iberoamericana, https://doi.org/10.69850/rimi.vi3.307). That article
+> includes a paired SHAP-LIME test on a 45-cell subset of three model families. The present
+> manuscript extends it to the full 75 cells of five model families, adds confidence intervals
+> and effect sizes, and contributes the results that are not in the article: the dependence of
+> the latency ordering on the model family, the dependence of LIME's stability on the kernel
+> width and the dataset, and the cross-dataset extension. No numerical result of the article
+> is restated; Sections 1, 4.1 and 5.3 state the relation. Two further manuscripts by the
+> author, on other questions and with no shared result, are under review at other journals.
+> Earlier drafts of this work are available in the public repository and its archive. An
+> earlier and longer version, which also contained a literature taxonomy and a study of
 > language-model judges, was declined by two journals without review; that material is not
 > part of this manuscript.
 

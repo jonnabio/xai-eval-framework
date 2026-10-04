@@ -71,20 +71,24 @@ run on.
 
 This paper reports such a paired comparison. It reuses the execution cohort
 released with an earlier study~\cite{herrera2026framework}, which introduced
-the measurement protocol and reported an omnibus comparison of four
-explainer families. That study established that the four families differ,
-and left the contrast between SHAP and LIME unresolved: at the omnibus level
-their fidelity separation fell below the critical difference. The present
-analysis concentrates on that single contrast, paired at the run level, and
-asks a second question that an average over conditions hides: \emph{when
-does the answer depend on the model and on the configuration?}
+the measurement protocol and compared four explainer families. That study
+already contains a first paired test of SHAP against LIME, on the 45 matched
+cells of three model families (logistic regression, random forest and
+XGBoost): SHAP was higher on fidelity, stability and faithfulness gap, and
+LIME was cheaper and sparser. It announced the analysis on the full grid of
+75 cells without reporting it, and it reported averages over conditions
+only. The present paper completes that contrast on the 75 cells of the five
+model families, with confidence intervals and effect sizes, and then asks
+the question that an average over conditions hides: \emph{when does the
+answer depend on the model and on the configuration?}
 
 The paper makes three contributions:
 \begin{enumerate}
-\item \textbf{Paired inferential evidence.} The SHAP--LIME difference is
-quantified on 75 matched cells of the UCI Adult census-income dataset, over
-five model families, with Holm-corrected paired tests, confidence intervals
-and effect sizes for five endpoints (Section~\ref{sec:results}).
+\item \textbf{Paired inferential evidence on the full grid.} The SHAP--LIME
+difference, tested before on a 45-cell subset, is quantified on the 75
+matched cells of the UCI Adult census-income dataset, over five model
+families, with Holm-corrected paired tests, confidence intervals and effect
+sizes for five endpoints (Section~\ref{sec:results}).
 \item \textbf{Two conditional results.} The latency ordering of the two
 methods depends on the model family, and reverses between two tree
 ensembles (Section~\ref{sec:runtime}). LIME's near-zero stability on Adult
@@ -177,10 +181,12 @@ The runs analysed here come from the execution cohort released by
 Herrera-V\'asquez and Herrero-Uceda~\cite{herrera2026framework}, under the
 protocol and reproducibility contract defined there. The analysis is not
 the same: that study reports an omnibus comparison across four explainer
-families at the block level, whereas the present analysis is a paired,
-cell-matched contrast of two explainers at the run level, with directional
-hypotheses, Holm-corrected paired tests and per-endpoint effect sizes that
-an omnibus test cannot supply. Reusing the cohort is deliberate: a fresh
+families at the block level and a paired SHAP--LIME test restricted to 45
+cells of three model families. The present analysis covers the 75 matched
+cells of the five families at the run level, with directional hypotheses,
+Holm-corrected paired tests, confidence intervals and per-endpoint effect
+sizes, and it examines how the differences vary with the model family, the
+dataset and the LIME configuration. Reusing the cohort is deliberate: a fresh
 execution would add environment variation to a comparison whose purpose is
 to isolate the explainer.
 
@@ -190,7 +196,8 @@ $S$ is stability, $P$ sparsity, $C$ cost and $F$ fidelity:
 \item \textbf{RQ1 (robustness).} Is SHAP more stable than LIME under input
 perturbation? $H_1: S_{\mathrm{SHAP}} > S_{\mathrm{LIME}}$.
 \item \textbf{RQ2 (parsimony).} Is LIME sparser than SHAP?
-$H_2: P_{\mathrm{LIME}} > P_{\mathrm{SHAP}}$.
+$H_2: P_{\mathrm{LIME}} < P_{\mathrm{SHAP}}$, where $P$ is the
+active-feature ratio (lower is sparser).
 \item \textbf{RQ3 (efficiency).} Is LIME computationally cheaper than SHAP?
 $H_3: C_{\mathrm{LIME}} < C_{\mathrm{SHAP}}$.
 \item \textbf{RQ4 (faithfulness).} Does SHAP give stronger fidelity and
@@ -337,7 +344,7 @@ the five model families ($\mathrm{xgb}=15$, $\mathrm{logreg}=15$,
 $\mathrm{rf}=15$, $\mathrm{mlp}=15$, $\mathrm{svm}=15$) and the three
 sampling intensities.
 
-\subsection{Context: the Four-Method Omnibus Comparison}
+\subsection{Context: Earlier Results on This Cohort}
 
 The omnibus comparison over this cohort---SHAP, LIME,
 Anchors~\cite{ribeiro2018anchors} and DiCE~\cite{mothilal2020dice}, tested
@@ -348,11 +355,13 @@ stability, that SHAP leads both endpoints, and that the SHAP--LIME fidelity
 separation falls marginally below the Nemenyi critical difference. Block
 aggregation was necessary there because Anchors and DiCE are not complete
 across the grid (57/75 and 68/75 artifact-qualified runs, respectively,
-against 75/75 for SHAP and LIME). An omnibus test distributes its power
-across four methods; on the SHAP--LIME contrast it returns a separation too
-small to call. The analysis below concentrates the design on that contrast.
-The four-method material is context, not evidence, for any claim made in
-this paper.
+against 75/75 for SHAP and LIME). The same study reports a paired Wilcoxon
+test of SHAP against LIME on 45 matched cells (logistic regression, random
+forest and XGBoost), significant on the five metrics in the directions found
+below. The analysis that follows extends that test to the 75 cells of the
+five model families. The 45 cells are a subset of the 75, so the two
+analyses are not independent. The earlier material is context, not evidence,
+for any claim made in this paper.
 
 \subsection{Primary Paired Inference}
 
@@ -463,9 +472,9 @@ logistic regression, random forest and MLP cells are uniformly SHAP-slower
 (Figure~\ref{fig:runtime_heterogeneity}, Table~\ref{tab:cost_by_model}).
 The two tree ensembles behave in opposite ways. For XGBoost, \texttt{TreeExplainer} was faster than LIME in
 all 15 matched cells (median 18.1~ms vs.\ 61.8~ms). For random forests it
-was slower in all 15 cells (median 1,262.4~ms vs.\ 335.6~ms):
-the cost of \texttt{TreeExplainer} grows with the number and depth of the
-trees. For
+was slower in all 15 cells (median 1,262.4~ms vs.\ 335.6~ms). A candidate
+explanation, not tested here, is that the cost of \texttt{TreeExplainer}
+grows with the number and depth of the trees. For
 the non-tree models, where SHAP runs in kernel mode, LIME has the lower
 median runtime (53.3~ms vs.\ 694.6~ms). ``LIME is faster'' is therefore a
 majority statement in this cohort, not a property of the two methods, and
@@ -589,7 +598,8 @@ A probe on Adult varied the LIME kernel width with everything else fixed
 (random forest, seed 42, $N=100$, \texttt{num\_samples=1000},
 \texttt{num\_features=10}). Table~\ref{tab:kw} reports the result. Fidelity
 and stability are computed over the instances that have at least one
-non-zero weight.
+non-zero weight. The probe covers one model and one seed, so it shows that
+the dependence exists; it does not measure its size across models.
 
 \begin{table}[htb]
 \centering
@@ -679,9 +689,11 @@ and the magnitude depends in part on the masking protocol.
 
 The four hypotheses are supported on Adult: SHAP is more stable (RQ1) and
 scores higher on fidelity and faithfulness gap (RQ4); LIME is sparser as
-configured (RQ2) and cheaper in most cells (RQ3). The paired design turns
-the omnibus result, which could not separate the two methods on fidelity,
-into a difference with a narrow interval and the same sign in every cell.
+configured (RQ2) and cheaper in most cells (RQ3). The analysis on the full
+grid confirms the direction that the earlier 45-cell test found, extends it
+to the SVM and the MLP, and attaches an interval and an effect size to each
+endpoint; the fidelity and stability differences have the same sign in
+every cell.
 SHAP delivers higher stability and fidelity at a substantially higher
 expected runtime; LIME delivers lower latency and more compact explanations
 at the cost of robustness.
@@ -750,9 +762,11 @@ on whether SHAP runs in tree-specific or kernel mode. \\
 released with the earlier study~\cite{herrera2026framework}. This paper
 reports no result that the earlier study reports: the per-method mean
 levels, the four-method omnibus and the cross-dataset SHAP levels are cited
-to it and not restated, in the text or in a figure. Because the two
-analyses rest on the same executions, agreement between them is arithmetic,
-not corroborative. Two further manuscripts by the author, under review at
+to it and not restated, in the text or in a figure. That study also reports
+a paired SHAP--LIME test on a 45-cell subset of the cells analysed here; the
+present results agree with it in direction and significance and, because the
+subset is contained in the 75 cells, they extend it and do not replicate it.
+Agreement between the two analyses is arithmetic, not corroborative. Two further manuscripts by the author, under review at
 other journals, analyse the same executions for different questions: the
 behavior of explanations on misclassified instances, and the instance-level
 agreement between the feature rankings of SHAP and LIME. Neither reports a
