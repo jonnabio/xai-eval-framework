@@ -145,9 +145,9 @@ prints "[ZENODO VERSION DOI PENDING]"; the code and data in it are exact.
 
 | | |
 |---|---|
-| Release | `paper-e-cys-2026-10-04`, on `main`, published 2026-10-04 |
+| Release | `paper-e-cys-2026-10-04` (commit `3923d1b68`, on `main`), published 2026-10-04 |
 | Version | 0.7.0 (0.6.0, `10.5281/zenodo.23130949`, release `paper-e-cys-2026-10-03`, predates the review revision) |
-| Version DOI (cited in the full PDF) | pending |
+| Version DOI (cited in the full PDF) | `10.5281/zenodo.23139911` |
 | Concept DOI (all versions) | `10.5281/zenodo.19297723` |
 | Archive | one zip, 918 MB, open access, MIT licence |
 
