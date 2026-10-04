@@ -224,9 +224,14 @@ carries the larger risk of a third rejection (F02).
 1. **13 pages**: the author's own target, on the hypothesis that long articles are harder to
    review and publish. It is not a journal rule. Treated as a target that includes
    references.
-2. **Adjudication**: none was done; the primary coder's labels stand. Consequence: the paper
-   that carries the corpus must say that the audit disagreements were not adjudicated and
-   that the reported counts use the primary coder's labels.
+2. **Adjudication**: none was done so far. The author decided that the disagreements must
+   be considered: each one is adjudicated and the decision recorded, in
+   `docs/reports/paper_bc/second_reviewer_adjudication_sheet.csv` (28 disagreements in 12
+   records: 12 on quality property, 7 on evidence source, 6 on evaluation target, 3 on task
+   context). In 19 of the 28 the primary coder assigned a label that the second reviewer
+   did not assign and the second reviewer added none. A rule adopted in adjudication changes
+   the codebook, so it must also be applied to the 28 papers outside the audit, and the
+   corpus counts recomputed and re-registered.
 3. **Human raters**: available. Two raters on a stratified subset of 50 to 60 cases.
 4. **Order**: "taxonomy goes first". Reviewer's reading, not yet confirmed by the author: the
    first paper to write is Paper C (taxonomy as framing, LLM-judge study as evidence); the
