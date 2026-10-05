@@ -284,6 +284,22 @@ material. Seven fields without content for a reader (identifiers, file path, see
 size, token count) are left out of the sheet; they are listed in
 `scripts/draw_human_sample.py`.
 
+### 14.5 Adjustments made while drafting (2026-10-04)
+
+- **Holm family.** Section 7 said "over the five metrics"; the correction was applied to the
+  20 tests of the primary outcome (5 metrics in each of 4 explainers), which is stricter.
+- **One figure, four tables,** not two figures and three tables: the test-retest values are a
+  table, and the post hoc correlations have their own table.
+- **First draft.** It is the fallback version: no human-rated subset (section 6) and no count
+  on the audited corpus axes (section 5). Title: "Can LLM judges score explanations
+  reliably? Agreement among three judges in two panels on 192 post-hoc explanations".
+  Measured in Word: 12 pages.
+- **Result of section 7.** Within each explainer the overall-quality score rises with the
+  fidelity value shown in the prompt (Spearman 0.35 to 0.59, all four significant after
+  Holm). Of the other 16 tests, two remain: stability for Anchors and sparsity for LIME.
+- **Registry (section 9) not done.** The draft's numbers are generated from result files by
+  the build; they are not yet registered in `pub/claim_registry.toml`.
+
 ### 14.4 Option for the author: a clean condition
 
 A fourth prompt condition that shows the explanation without the quadrant, the true label and
