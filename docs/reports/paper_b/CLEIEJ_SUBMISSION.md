@@ -4,10 +4,25 @@
 Informática. ISSN 0717-5000. Submit at https://www.clei.org/cleiej (register, then the
 five-step submission).
 
-**Status (2026-10-04):** first draft built, 13 pages. Reviewed by the Scientific Editor role the same day
-(`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`); one major defect corrected.
-That review was not independent of the drafting session. The author has not yet read the
-corrected text. Decision record: ADR-0022.
+**Status: SUBMITTED on 2026-10-04, submission 1196** (see "Submission record" below). Do not
+rebuild the PDFs or change the manuscript unless the journal requests a revision.
+
+Before submission: reviewed by the Scientific Editor role on 2026-10-04
+(`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`), one major defect corrected;
+that review was not independent of the drafting session. The author then revised the text and
+confirmed the title. Decision record: ADR-0022.
+
+## Submission record
+
+| Item | Value |
+|---|---|
+| Date | 2026-10-04 |
+| Journal | *CLEI Electronic Journal* |
+| Submission | 1196, https://www.clei.org/cleiej/index.php/cleiej/authorDashboard/submission/1196 |
+| Acknowledged by | Esteban Clua, by email from the journal system |
+| File sent | `paper_b_cleiej.pdf`, 12 pages, source at commit `c72a17e88` |
+| Comments for the editor | The text of section 3 |
+| Decision | Pending |
 
 ## 1. Journal requirements, checked 2026-10-04
 
@@ -90,12 +105,13 @@ which also contained a literature taxonomy and a study of language-model judges,
 by two journals without review; that material is not part of this manuscript." It is
 accurate; the journal's checklist asks only about prior publication and concurrent review.
 
-## 4. Open before submission
+## 4. Items before submission (closed 2026-10-04)
 
-1. A review by someone who did not write the draft. The Scientific Editor review of
-   2026-10-04 (`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`) was done by the
-   drafting session.
-2. Author's read of the PDF.
+1. Done: the author's own revision of the PDF. It removed the horizontal grid lines of
+   Figure 2 and the "Provenance of the cohort" paragraph of Section 5.3 (the full PDF went
+   from 13 to 12 pages). The two manuscripts under review elsewhere are now disclosed only in
+   the comments for the editor.
+2. Done: title confirmed by the author. The keywords were left as they are (author decision).
 3. Done 2026-10-04: Zenodo version 0.9.0, `10.5281/zenodo.23147228`, from GitHub release
    `paper-b-cleiej-2026-10-04` (tag on `main` `a2ea80080`). The paper cites it. A later change
    to code or results needs a new version; a text change does not.
