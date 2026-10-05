@@ -19,9 +19,22 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session update - 2026-10-04 (Paper C: author's read, release 0.10.0)
+
+This entry is the latest; the Paper C handoff below keeps the detail.
+
+- **Author decisions:** the draft was read; the two added references are fine; the human
+  raters see the clean record (sheets rebuilt, none had been sent); built PDF and Word files
+  stay local; the AI declaration has the author's own text and is not changed without
+  approval; merge and release approved.
+- **Archive version 0.10.0** for the Paper C snapshot (`.zenodo.json`, `CITATION.cff`).
+- **Still open:** claim registry for `paper_c.tex`; a review by a session that did not write
+  the draft; the search on LLM-judge reliability (review F11); the note to the editor;
+  whether the human subset is in this submission (recommendation: no).
+
 ## Session Handoff - 2026-10-04 (Paper C revised after the rigor review; clean condition run)
 
-This is the latest Paper C handoff. The two Paper C entries below keep the earlier detail.
+This is the Paper C handoff of the revision. The two Paper C entries below keep the earlier detail.
 
 - **Completed**
   - **Author decisions on the review:** SHAP and LIME are the main analysis; the clean
