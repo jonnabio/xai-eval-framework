@@ -308,3 +308,61 @@ the technical metrics would repair 14.1 and 14.2: 192 cases by 3 judges by 1 rep
 calls, about a ninth of the cost of cohort 2 (US$20.24). It is a new cohort under RCA-002, it
 is run on the `exp4-cohort2` lane, and it needs the API key. It is not run unless the author
 decides so.
+
+## 15. Revision after the rigor review (2026-10-04)
+
+Review: `docs/review/scientific-rigor-review_paper_c_2026-10-04.md` (major revision). The
+values in the review are probes. This section fixes the analyses before they are run in the
+lane; they are post hoc and are reported as such.
+
+### 15.1 Author decisions (2026-10-04)
+
+1. SHAP and LIME (84 cases, feature attributions shown as produced) are the main analysis.
+   Anchors and DiCE (108 cases) were shown to the judges as lists of feature weights, not as a
+   rule and a counterfactual; they are reported separately, with that limitation.
+2. The clean condition is approved.
+3. The within-explainer analysis is accepted as a dated addition to this plan.
+4. The venue and its deadline do not change.
+
+### 15.2 Analyses of the existing responses (second panel)
+
+Script `scripts/paper_c_reliability.py`, output in `results/`. Unless stated, the data are
+the primary condition.
+
+- **Decomposition.** Share of the variance of the case-level mean score that lies between
+  explainers, per dimension. ICC(1,1) inside each explainer and for SHAP and LIME together.
+- **Unit of the estimate.** ICC(1,1) of one call (replicate 1) beside the estimate with three
+  replicates averaged; ICC(1,k), the reliability of the mean of the three judges.
+- **Model sensitivity.** ICC(2,1), absolute agreement, and ICC(3,1), consistency.
+- **Interval.** The exact F-based 95% interval of ICC(1,1) replaces the Fisher approximation
+  in this paper, for both panels (for the first it is computed from its ICC, 147 cases and 3
+  judges). Registered values of earlier documents do not change.
+- **Raw agreement.** Share of judge pairs with the same score, and within one point (one
+  call).
+- **Use of the printed metrics.** Share of responses whose rationales name a metric
+  (fidelity, stability, sparsity, faithfulness), per judge.
+- **Use of the label.** Mean overall-quality score of cases with a correct and with a wrong
+  prediction, Mann-Whitney test on case means.
+- **Decision rule.** A dimension has good reliability when its point estimate is 0.75 or
+  more; intervals are reported beside it.
+
+### 15.3 Clean condition
+
+- **Design.** The same 192 cases, the same three judges and settings, the rubric of the
+  primary condition word for word, one call per case and judge (576 calls). The case record
+  is the one of the primary condition without three fields: `technical_metrics`, `quadrant`
+  and `true_label`. The sentence of the prompt that announces the metrics is changed to match.
+  The rendering of the explanation is not changed, so that one thing differs from the primary
+  condition.
+- **Where.** It is a new cohort under RCA-002 and has its own directory,
+  `docs/reports/paper_c/clean_condition/` (prompts, raw responses, parsed scores), written by
+  `scripts/run_clean_condition.py`. This replaces "run on the `exp4-cohort2` lane" of 14.4:
+  the author's rule is that Paper C work stays in this folder. Nothing under
+  `experiments/` or `outputs/` is written.
+- **Analysis, fixed before the run.** Compared with one call of the primary condition:
+  ICC(1,1) and ICC(1,k) per dimension, pooled, for SHAP and LIME, and inside each explainer;
+  mean paired difference in score per judge and dimension; Spearman correlation of the
+  overall-quality score with fidelity inside each explainer, Holm over the four tests; share
+  of responses whose rationales name a metric.
+- **Not done.** Anchors and DiCE are not re-rendered (decision 1). The human sheets are not
+  changed; whether the raters see the clean record is decided before they are sent.
