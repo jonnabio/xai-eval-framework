@@ -52,8 +52,10 @@ again and the author has not read it.
    protected side of `[exclusivity]`, wire `verify_sync.py`, replace the placeholder abstract
    in `pub/claims.toml` (shared files, through `main`). Not done: the numbers of the draft
    are generated from result files but are not yet in `pub/claim_registry.toml`.
-6. Independent rigor review; Zenodo version; set `\papercrelease` and `\papercarchive` in
-   the template.
+6. Independent rigor review. Done 2026-10-04: Zenodo version 0.10.0,
+   `10.5281/zenodo.23149419`, from GitHub release `paper-c-tm-2026-10-04` (`main` at
+   `d97dbe188`); the full version cites it. A later change to code or results needs a new
+   version; a text change does not.
 7. Done 2026-10-04: the author read the draft and checked the two added references.
 
 **Lane:** `paper-c`, branches `paper/c-*`, worked in the main folder. Everything of Paper C
