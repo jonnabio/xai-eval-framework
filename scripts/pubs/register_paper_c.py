@@ -56,6 +56,16 @@ SITE_LINE = re.compile(
 _EXP4C2_STAT = {"icc_1_1": "icc", "ci_lower": "ci_lower", "ci_upper": "ci_upper",
                 "krippendorff_alpha": "alpha", "n_cases": "n"}
 _EXP4_STAT = {"icc_2_1": "icc", "icc_1_1": "icc", "ci_upper": "icc_ci_upper"}
+_DIMENSIONS = ("completeness", "semantic_plausibility", "overall_quality", "audit_usefulness",
+               "concision", "clarity", "actionability")
+# Summary values (results/summary.csv) that restate a quantity registered elsewhere: the
+# highest coefficient of a panel is the coefficient of one dimension.
+_SUMMARY = {
+    "orig.icc_max": [f"exp4:icc:{d}" for d in _DIMENSIONS],
+    "primary.icc_max": [f"exp4c2:hidden_label_primary:icc:{d}" for d in _DIMENSIONS],
+    "label.shift_maxabs": ["exp4c2_shift_maxabs:label"],
+    "rubric.shift_maxabs": ["exp4c2_shift_maxabs:rubric"],
+}
 
 
 def _build_module():
@@ -86,22 +96,24 @@ def _literal(v: float, f: str) -> tuple[str | None, int, float]:
 
 def _shared_source(alias: str, parts: tuple[str, ...], column: str, v: float) -> str | None:
     """Resolver expression of a quantity that is registered outside Paper C, or None."""
-    candidate = None
+    candidates: list[str] = []
     if alias == "view" and column in _EXP4C2_STAT:
-        candidate = f"exp4c2:{parts[1]}:{_EXP4C2_STAT[column]}:{parts[0]}"
+        candidates = [f"exp4c2:{parts[1]}:{_EXP4C2_STAT[column]}:{parts[0]}"]
     elif alias == "rel" and parts[:2] == ("primary3", "all") and column in _EXP4C2_STAT:
-        candidate = f"exp4c2:hidden_label_primary:{_EXP4C2_STAT[column]}:{parts[2]}"
+        candidates = [f"exp4c2:hidden_label_primary:{_EXP4C2_STAT[column]}:{parts[2]}"]
     elif alias in ("orig", "first") and column in _EXP4_STAT:
-        candidate = f"exp4:{_EXP4_STAT[column]}:{parts[0]}"
+        candidates = [f"exp4:{_EXP4_STAT[column]}:{parts[0]}"]
     elif alias == "alpha" and column == "krippendorff_alpha":
-        candidate = f"exp4:alpha:{parts[0]}"
-    if candidate is None:
-        return None
-    try:
-        same = abs(resolve(candidate) - v) <= 1e-5
-    except (MissingArtifact, KeyError, ValueError):
-        return None
-    return candidate if same else None
+        candidates = [f"exp4:alpha:{parts[0]}"]
+    elif alias == "sum" and column == "value":
+        candidates = _SUMMARY.get(parts[0], [])
+    for candidate in candidates:
+        try:
+            if abs(resolve(candidate) - v) <= 1e-5:
+                return candidate
+        except (MissingArtifact, KeyError, ValueError):
+            continue
+    return None
 
 
 def collect(bpc) -> tuple[str, dict, dict]:
