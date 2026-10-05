@@ -471,3 +471,103 @@ One call is the first of the three calls, as in section 15.2.
    has no human scores and names the comparison with human raters as future work.
 4. The claim registry for `paper_c.tex` is done (pull request #27); see the README, item 5.
 5. Next: the author's last revision, then the submission email with the note to the editor.
+
+## 18. Revision after the editor's review of the third draft (2026-10-05)
+
+Review: given to the author in the session of 2026-10-05 (Scientific Editor role), not
+written to `docs/review/`. Its values are probes. The author asked for its five
+recommendations and for the optional experiment. This section fixes the analyses and the
+experiment before they are run; all are post hoc and are reported as such.
+
+### 18.1 Findings answered
+
+1. The methods name the 84 SHAP and LIME cases as the main analysis, and the abstract,
+   Table 1 and the share of variance between explainers use all 192 cases.
+2. Inside a method the scores of the cases hardly differ, so a low coefficient does not
+   show that the judges disagree. The draft says so in one sentence of the limitations.
+3. The five zero-weight LIME records were removed from the agreement analysis (section 16)
+   and not from the correlations with the technical metrics.
+4. The methods do not state the gateway through which the judges were called, the dates of
+   the runs, or that one judge answered with reasoning tokens.
+5. The value 0.33 is printed without its interval, and the answer to the first question is
+   stated as negative although four dimensions are in the range called moderate.
+
+### 18.2 Analyses of the existing responses, fixed before they are run
+
+Script `scripts/paper_c_reliability.py`, output in `results/`.
+
+- **Main-analysis scope (finding 1).** Scope `shap_lime_nonzero`: the SHAP and LIME cases
+  without the five zero-weight LIME records. All coefficients of section 15.2 for it and for
+  the existing scope `shap_lime`, in the three conditions. Share of the variance of the
+  case-level mean score between the two explainers among the SHAP and LIME cases, with and
+  without the five records.
+- **Spread among the judges (finding 2).** Per condition, scope and dimension: the square
+  root of the within-case mean square of the one-way model (column `sd_within`), which is
+  the standard deviation of the scores of the judges for one case. It is read beside the
+  standard deviation of the case-level mean, already reported.
+- **Metrics among the non-zero LIME cases (finding 3).** Spearman correlation of the
+  overall-quality score (mean of the judges) with fidelity, stability, sparsity and
+  faithfulness gap among the 27 LIME cases, in the primary condition (three calls averaged)
+  and in the clean condition, with unadjusted p-values; file `results/lime_nonzero_metrics.csv`.
+  They are descriptions beside Table 4 and are not added to its Holm family.
+- **Dataset and model family (review, strength).** Share of the variance of the case-level
+  mean score explained by dataset and model family together, and by explainer, dataset and
+  model family together (ordinary least squares on indicator variables).
+- **Run facts (finding 4).** Read from the stored responses and written to
+  `results/run_facts.csv`: provider, first and last date of the calls of the second panel
+  and of the clean condition, and per judge the share of responses with reasoning tokens.
+- **Finding 5** needs no new value: the interval of the scope `lime_nonzero` is already in
+  `reliability_long.csv`.
+
+### 18.3 Positive control: a new cohort
+
+**Question.** Inside a method the cases of this study may not differ in quality. Do the
+judges lower their scores, and agree in doing so, when an explanation is made worse in a
+known way?
+
+- **Cases.** The 79 SHAP and LIME cases with a non-zero weight (52 SHAP, 27 LIME).
+- **Versions.** Each case is shown in three versions of its explanation text:
+  - `original`: the stored text;
+  - `truncated`: the three items with the largest absolute weight, in their order, the rest
+    removed. Known effect: fewer of the drivers are shown;
+  - `shuffled`: the same ten feature names and the same ten weights, with the names
+    reassigned to the weights by a random permutation that leaves no name in its place
+    (seed 20261005 and the position of the case). The weights keep their order. Known
+    effect: the text has the same form and no longer describes the prediction. A judge can
+    detect it only from the meaning of the features; it sees no model.
+  `explanation_length_tokens` is recomputed for the truncated text with the benchmark's
+  counter. Nothing else in the record changes.
+- **Prompt.** The prompt of the clean condition (section 15.3), word for word: no metrics,
+  no outcome, no label. The judges are not told that a text was changed.
+- **Judges and calls.** The three judges and settings of the second panel, one call per
+  case, version and judge: 79 x 3 x 3 = 711 calls. The original version is called again,
+  not taken from the clean condition, so that the three versions come from one run.
+- **Where.** A new cohort under RCA-002, in `docs/reports/paper_c/positive_control/`
+  (prompts, raw responses, parsed scores), written by `scripts/run_positive_control.py`.
+  Nothing under `experiments/` or `outputs/` is written.
+- **Expected direction, stated before the run.** Truncated: completeness lower than the
+  original. Shuffled: semantic plausibility lower than the original. The control is passed
+  for a version when the mean paired difference of its named dimension is below zero with a
+  95% interval that excludes zero, for the mean of the three judges. Other dimensions are
+  reported without a prediction.
+- **Analysis, fixed before the run.** Script `scripts/paper_c_positive_control.py`, output
+  `results/positive_control.csv` and `results/positive_control_icc.csv`.
+  - Mean paired difference (version minus original) per judge and for the mean of the
+    judges, per dimension, with a percentile interval from 4,000 bootstrap resamples of the
+    cases (seed 20261005), and the share of cases scored lower.
+  - ICC(1,1) among the three judges over the set of original and changed texts together
+    (158 texts per changed version), for all 79 cases and inside SHAP and LIME, beside the
+    ICC(1,1) of the original texts alone. If the judges see the change alike, the coefficient
+    of the set is higher than that of the originals.
+  - ICC(1,1) among the judges of the difference itself (changed minus original), per
+    dimension: whether the judges agree on which cases lost more.
+  - Agreement of the original version with the clean condition (same prompt, another day):
+    share of case-and-judge pairs with the same score, per judge.
+- **Reported whatever the result.** A control that fails is printed as failed.
+
+### 18.4 Manuscript
+
+The abstract, methods, sections 3.1, 3.2 and 3.4, the discussion, the limitations and the
+conclusions are revised for the five findings and the control. The paper is at the page
+limit, so each addition is paid with a cut; the first-panel text and Table 3 are the first
+candidates. The title and the AI declaration are not changed.
