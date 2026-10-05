@@ -396,3 +396,43 @@ the primary condition.
   human-judge comparison of section 6 uses the clean-condition scores of the judges.
 - **Built PDF and Word files stay local** for now.
 - **AI declaration.** The author gave its text; it is not changed without approval.
+
+## 16. Revision after the second rigor review (2026-10-04)
+
+Review: `docs/review/scientific-rigor-review_paper_c_2026-10-04_r2.md`, by a session that did
+not write the draft (major revision, small: findings N01 to N07). Its values are probes. This
+section fixes the analyses before they are run in the lane; they are post hoc and are
+reported as such. No judge call is made.
+
+### 16.1 Author decisions (2026-10-04)
+
+1. The analysis of the LIME cases with and without the records whose printed weights are all
+   zero is accepted as a dated addition to this plan.
+2. The five such records stay among the 192 cases; the finding is stated.
+3. The zeros are a rounding: the benchmark prints weights with four decimals. Checked in the
+   stored runs on the same day: the ten weights of each of the five records are below 0.00005
+   in absolute value (from about 1e-16 to 3e-5).
+
+### 16.2 Analyses, fixed before they are run
+
+Script `scripts/paper_c_reliability.py`, output in `results/`.
+
+- **Zero-weight records (N01).** Number of records per explainer in which every printed
+  weight is zero. ICC(1,1) among the LIME cases without them (scope `lime_nonzero`), in the
+  primary condition with three calls averaged, with one call, and in the clean condition,
+  beside the values for all 32 LIME cases.
+- **Spread and raw agreement inside an explainer (N02).** Standard deviation of the
+  case-level mean score per scope and dimension; share of judge pairs with the same score
+  inside SHAP and LIME (one call; already in `reliability_long.csv`).
+- **Two-way model inside an explainer (N03).** ICC(3,1) among the SHAP cases (already in
+  `reliability_long.csv`); its highest value is printed.
+- **Largest SHAP coefficient over the conditions (N04).** The highest ICC(1,1) among the SHAP
+  cases over the three estimates (three calls, one call, clean), for the sentence of the
+  abstract that covers them.
+- **Interval of the change in the clean condition (N05).** Difference between the ICC(1,1)
+  of the clean condition and of one call of the primary condition, all cases, per dimension,
+  with a percentile interval from 4,000 bootstrap resamples of the cases (seed 20261004).
+- **Dataset held fixed (N07).** Share of the variance of the case-level mean score between
+  explainers among the Adult cases only.
+
+One call is the first of the three calls, as in section 15.2.
