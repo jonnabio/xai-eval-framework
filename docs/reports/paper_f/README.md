@@ -96,6 +96,7 @@ Paper F occupies a dedicated, unconfounded niche within the overarching research
 
 - [`README.md`](README.md) — This charter document.
 - [`ANALYSIS_PLAN.md`](ANALYSIS_PLAN.md) — Pre-analysis protocol locking hypotheses, metric formalizations, statistical procedures, and acceptance criteria.
+- [`DESIGN_PROPOSAL.md`](DESIGN_PROPOSAL.md) — Scientific Advisor's proposal of 2026-10-05 (number and choice of datasets, metrics, analysis, cost of the run). A proposal: it does not change the plan until the author approves it.
 - [`METHODOLOGICAL_ANALYSIS.md`](METHODOLOGICAL_ANALYSIS.md) — Rigorous scientific appraisal of research challenges, algorithmic sensitivities, dataset selection archetypes, and threats to validity.
 
 ---
