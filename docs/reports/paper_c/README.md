@@ -10,8 +10,8 @@ Deadline 2026-10-15, by email to revistatm@tec.ac.cr.
 (`docs/review/scientific-rigor-review_paper_c_2026-10-04.md`). **15 pages in Word, the
 journal's limit**; abstract 246 words and resumen 249 (limit 250), 5 tables, 1 figure, 25
 references. The clean condition was run (576 calls, all valid). The draft has no human-rated
-subset. The revision was made by the session that wrote the review; it has not been reviewed
-again and the author has not read it.
+subset. The author has read it. The revision was made by the session that wrote the review
+and has not been reviewed again. On `main`, archived as Zenodo 0.10.0; **not submitted**.
 
 **Main results of the revision**
 
@@ -43,10 +43,13 @@ again and the author has not read it.
 
 **Open before submission**
 
-1. Author: read the draft (`submission/paper_c_blind.pdf`, local).
-2. The rating sheets in `human_subset/` show the clean record (author decision). At 15
-   pages, a human-subset section needs an equal cut.
-3. Raters: send the two rating sheets (`human_subset/README.md`); cut-off 2026-10-10.
+1. Note to the editor: Paper D is in the same issue; earlier reliability tables are public
+   in the 32-page edition and the thesis. Not drafted.
+2. Author decision: whether the human subset is in this submission (recommendation: no).
+   The rating sheets in `human_subset/` show the clean record. At 15 pages, a human-subset
+   section needs an equal cut.
+3. Raters, only if item 2 is yes: send the two rating sheets (`human_subset/README.md`);
+   cut-off 2026-10-10.
 4. Second reviewer: adjudication sheet in `corpus_audit/`; cut-off 2026-10-08.
 5. Registry: put `paper_c.tex` under `[coverage]`, add `docs/reports/paper_c/` to the
    protected side of `[exclusivity]`, wire `verify_sync.py`, replace the placeholder abstract
