@@ -50,25 +50,45 @@ Build, from the repository root:
 Then run `verify_claims.py`, `verify_sync.py`, `scan_shared_literals.py --strict` and
 `verify_exp4_reconstruction.py` from `scripts/pubs/`.
 
-## 3. Comments for the editor (draft)
+## 3. Comments for the editor (text for the submission form, 2026-10-04)
 
-> This manuscript reports a paired comparison of LIME and SHAP on tabular models. Its runs
-> were released with an earlier article by the author (Revista de Investigación
-> Multidisciplinaria Iberoamericana, https://doi.org/10.69850/rimi.vi3.307). That article
-> includes a paired SHAP-LIME test on a 45-cell subset of three model families. The present
-> manuscript extends it to the full 75 cells of five model families, adds confidence intervals
-> and effect sizes, and contributes the results that are not in the article: the dependence of
-> the latency ordering on the model family, the dependence of LIME's stability on the kernel
-> width and the dataset, and the cross-dataset extension. No numerical result of the article
-> is restated; Sections 1, 4.1 and 5.1 state the relation. Two further manuscripts by the
-> author, on other questions and with no shared result, are under review at other journals.
-> Earlier drafts of this work are available in the public repository and its archive. An
-> earlier and longer version, which also contained a literature taxonomy and a study of
-> language-model judges, was declined by two journals without review; that material is not
-> part of this manuscript.
+> Dear Editor,
+>
+> I submit the manuscript "When Does SHAP Outperform LIME? Model- and Configuration-Dependent
+> Results from a Paired Tabular Benchmark" for consideration as a regular article in the CLEI
+> Electronic Journal. It has not been published and is not under review at another journal.
+>
+> The manuscript reports a paired comparison of LIME and SHAP on tabular classification
+> models, over 75 matched cells of five model families. Its main results are that the latency
+> ordering of the two methods depends on the model family and reverses between two tree
+> ensembles, and that the near-zero stability of LIME on the Adult dataset depends on the
+> kernel width and the feature space and is high on two further datasets. It closes with a
+> deployment recommendation conditioned on the model architecture.
+>
+> Relation to earlier work. The runs analysed here were released with an earlier article by
+> the author and a co-author (Revista de Investigación Multidisciplinaria Iberoamericana,
+> https://doi.org/10.69850/rimi.vi3.307). That article includes a paired SHAP-LIME test on a
+> 45-cell subset of three model families. The present manuscript extends that test to the
+> full 75 cells, adds confidence intervals and effect sizes, and contributes the results
+> listed above, which are not in the article. No numerical result of the article is restated;
+> Sections 1, 4.1 and 5.1 state the relation.
+>
+> Two further manuscripts by the author analyse the same runs for different questions (the
+> behavior of explanations on misclassified instances, and the instance-level agreement
+> between the feature rankings of SHAP and LIME) and are under review at other journals.
+> Neither reports a result reported here.
+>
+> The code, the run artifacts and earlier drafts of this work are in a public repository,
+> archived at https://doi.org/10.5281/zenodo.23147228. The archived draft carries an earlier
+> title of the same manuscript.
+>
+> Sincerely,
+> Jonathan Herrera-Vásquez
 
-**[AUTHOR]** Decide whether the last sentence is sent. It is accurate; the journal's checklist
-asks only about prior publication and concurrent review.
+Optional sentence, not included above (author decision): "An earlier and longer version,
+which also contained a literature taxonomy and a study of language-model judges, was declined
+by two journals without review; that material is not part of this manuscript." It is
+accurate; the journal's checklist asks only about prior publication and concurrent review.
 
 ## 4. Open before submission
 
