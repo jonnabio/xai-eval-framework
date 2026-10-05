@@ -46,9 +46,22 @@ detail of the lane setup.
     Study"; it is not changed without the author's approval. 12 pages measured in Word, abstract 244 and resumen 248 words, 4 tables,
     1 figure, 25 references. Identity scan of the blind files clean except the citation of
     the RIMI article, as in Paper D.
+  - **Rigor review of the draft** (Scientific Advisor, same session, not independent):
+    `docs/review/scientific-rigor-review_paper_c_2026-10-04.md`. Grade: major revision, mean
+    3.1; 5 major and 7 minor findings. The study can stand alone, but not as drafted:
+    - F01: the pooled ICC mostly measures agreement on the explainer. Inside SHAP the ICC of
+      overall quality is -0.19 and of completeness 0.06; only LIME keeps 0.63 to 0.75;
+    - F02: Anchors and DiCE were shown to the judges as lists of feature weights, not as a
+      rule and a counterfactual (108 of 192 cases);
+    - F03: the primary estimate averages three replicates (one call: 0.675 for completeness)
+      and the panel mean, ICC(1,k), exceeds 0.75 on four dimensions;
+    - F04: the rationales cite the printed metrics in 80% (Claude), 40% (GPT) and 15%
+      (Gemini) of the responses.
+    The values of the review are probes, not results; they must be planned, dated and run in
+    the lane before they are printed.
 - **Current State**
   - The draft is the fallback version: no human-rated subset, no counts on the audited corpus
-    axes. It is not reviewed and the author has not read it.
+    axes. **It is not ready to submit** (review above) and the author has not read it.
   - **The draft's numbers are not in `pub/claim_registry.toml`.** They are generated from
     result files by the build. `paper_c.tex` is not under `[coverage]` or `[exclusivity]`, and
     `verify_sync.py` does not check it. `pub/claims.toml` still holds the placeholder abstract.
