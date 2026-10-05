@@ -12,7 +12,7 @@ This does not change Paper D's recorded emailed-submission status. Details:
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
-| **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `paper/c-llm-judges` (2026-10-05), not read by the author, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.11.0, [10.5281/zenodo.23150204](https://doi.org/10.5281/zenodo.23150204), holds the third draft only; the fourth needs a new version |
+| **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `main`, approved by the author, registered, 15 Word pages; **ready, not submitted**: the author sends it when the journal's author account exists (deadline 2026-10-15) | Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
@@ -25,9 +25,45 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session update - 2026-10-05 (Paper C: fourth draft approved, registered, Zenodo 0.12.0)
+
+This entry is the latest. It closes Next Steps 1 to 3 and the first three Blockers of the
+handoff directly below, which keeps the detail of the revision.
+
+- **Author decisions:** the fourth draft was read and approved; the pull requests were to
+  be merged; a new Zenodo version was approved as the official one; the author sends the
+  submission email once the journal's author account exists, so that step is off the
+  assistant's list.
+- **Pull requests #26 and #27 merged** (this time the merge was not refused), then
+  **#29**: the registry for the fourth draft and the version metadata. `main` at
+  `336b164b1` when tagged.
+  - `register_paper_c.py`: 200 claims of Paper C's own, 21 sites on shared quantities. It
+    found no literal of Paper D, Paper E or the chapter that their own claims do not
+    explain, which closes the open check of the editor note.
+  - `claim_sources.py`: the `paper_c` resolver reads the four new result files. The
+    hand-kept claim for "about 0.3" was removed with its sentence.
+- **Zenodo version 0.12.0: `10.5281/zenodo.23165763`**, from GitHub release
+  `paper-c-tm-2026-10-05`. `\papercrelease` and `\papercarchive` are set; `submission/`
+  rebuilt: 15 pages in Word in both versions; the blind PDF has no archive or repository
+  string.
+- Verified after the build: `register_paper_c.py --check`; `verify_claims.py` 1189 claims
+  / 1518 sites / 29 files fully registered; `verify_sync.py`; `scan_shared_literals.py
+  --strict` 0 unexplained; `verify_exp4_reconstruction.py` 18 pins; 22 tests in
+  `tests/pubs`.
+- **Current state:** Paper C is ready to send. The files are in
+  `docs/reports/paper_c/submission/` (local): `paper_c_blind.docx`, `paper_c_full.docx`,
+  `Figure1.tiff`. Do not rebuild or change the text unless the author asks. The lane lock
+  is released.
+- **Still open:** in `EDITOR_NOTE.md`, the author confirms that the thesis is not
+  deposited and adds the telephone number before sending. No review followed the fourth
+  draft. The second-reviewer adjudication of the corpus is open (unchanged). Pull request
+  #28 (Paper D, journal account request) is open and belongs to another session.
+- **Note:** `sed` dropped the backslashes of `\newcommand` again; the release name was set
+  with the editor tool.
+
 ## Session Handoff - 2026-10-05 (Paper C: editor's review, positive control, fourth draft)
 
-This is the latest Paper C handoff. The handoff below keeps the detail of the registry.
+This was the Paper C handoff of the revision. The handoff below it keeps the detail of the registry.
 
 - **Completed**:
   - **Review of the third draft** (Scientific Editor role, given to the author in the
