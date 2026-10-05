@@ -262,3 +262,4 @@ All empirical findings are synthesized into three distinct tiers of external val
 | Date | Section | Nature of Amendment | Justification / Authority |
 |---|---|---|---|
 | 2026-10-03 | All | Plan created and locked | Initial study framework established |
+| 2026-10-05 | 11.3, 11.4 | No change to the design. The generator scripts of 11.3 are named `scripts/paper_f_*` so that the lane owns them. The deviation log that 11.4 calls "Section 13" is this section, 12. | Lane setup (ADR-0021, amendment of 2026-10-05); made before any dataset was chosen or any code was run |

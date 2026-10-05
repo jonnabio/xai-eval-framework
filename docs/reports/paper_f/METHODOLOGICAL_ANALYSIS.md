@@ -153,6 +153,6 @@ When evaluating rank agreement across 4 explainers ($n=4$ items to rank):
 The proposed structure for Paper F is scientifically rigorous, theoretically grounded, and fills a glaring gap in the contemporary XAI literature. It elevates the evaluation framework from a descriptive benchmarking harness to a meta-scientific instrument testing external validity.
 
 ### Immediate Next Steps (Awaiting User Direction):
-1. **Confirm the Pre-Analysis Artifacts:** Review [`README.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/README.md), [`ANALYSIS_PLAN.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/ANALYSIS_PLAN.md), and [`METHODOLOGICAL_ANALYSIS.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/METHODOLOGICAL_ANALYSIS.md).
+1. **Confirm the Pre-Analysis Artifacts:** Review [`README.md`](README.md), [`ANALYSIS_PLAN.md`](ANALYSIS_PLAN.md), and [`METHODOLOGICAL_ANALYSIS.md`](METHODOLOGICAL_ANALYSIS.md).
 2. **Deliberate on Candidate Datasets B, C, and D:** Decide whether to leverage the already implemented Breast Cancer and German Credit loaders from `cross_dataset.py` for Datasets B and C, and select the target for Dataset D.
 3. **Establish Execution Milestones:** Sequence the baseline dataset characterization and predictive modeling before launching the full 48-condition XAI computation.
