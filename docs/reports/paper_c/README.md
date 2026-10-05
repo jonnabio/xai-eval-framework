@@ -50,13 +50,23 @@ the draft. Two major findings, both answered with files already committed and no
 - N02: among SHAP cases the judges gave almost the same score to every case (same score in
   83% of pairs for completeness); the low coefficient is not shown to be disagreement.
 
-Five minor findings (N03 to N07) are clauses. **Not applied: they change the abstract and
-need a dated addition to `PLAN.md`, which are the author's decisions.** A change to the
-analysis code or result files needs a new Zenodo version.
+Five minor findings (N03 to N07) are clauses.
+
+**Third draft (2026-10-04), revised after the second review.** The author accepted the
+analysis and decided that the five records stay (`PLAN.md`, section 16). N01 to N07 are
+answered in the abstract, resumen, methods, sections 3.2 and 3.5, discussion, limitations
+and conclusions; one sentence and two references on LLM judges were added to the
+introduction. **15 pages in Word**, abstract 248 words, resumen 250, 27 references. The
+revision was made by the session that wrote the second review and has not been reviewed
+again; the author has not read it.
 
 **Open before submission**
 
-0. Author: decide on the second review (its three questions), then revise.
+0. Author: read the third draft (`submission/paper_c_blind.pdf`), and check the two
+   references marked "NEW 2" in `references.bib`.
+0b. New Zenodo version: the archive 0.10.0 does not hold the analysis code and result files
+   of `PLAN.md` section 16. Needs the author's approval of a release; then set
+   `\papercrelease` and `\papercarchive` and rebuild.
 1. Note to the editor: drafted in `EDITOR_NOTE.md` (Spanish to send, English for the
    record). Not sent; four points to check are listed at its top.
 2. Author decision: whether the human subset is in this submission (recommendation: no).
@@ -72,8 +82,8 @@ analysis code or result files needs a new Zenodo version.
    the revision after the second review: its findings change values in the text.
 6. Literature on LLM-judge reliability (F11): candidates in
    `LITERATURE_LLM_JUDGE_RELIABILITY.md`. XAI-Arena (arXiv:2609.09428, September 2026) uses
-   an LLM judge on SHAP, LIME and DiCE explanations and must be cited. Nothing added to the
-   manuscript yet.
+   an LLM judge on SHAP, LIME and DiCE explanations; it and Haldar and Hockenmaier (2025)
+   are now cited in the introduction. The other candidates are not used.
    Done 2026-10-04: Zenodo version 0.10.0,
    `10.5281/zenodo.23149419`, from GitHub release `paper-c-tm-2026-10-04` (`main` at
    `d97dbe188`); the full version cites it. A later change to code or results needs a new

@@ -436,3 +436,27 @@ Script `scripts/paper_c_reliability.py`, output in `results/`.
   explainers among the Adult cases only.
 
 One call is the first of the three calls, as in section 15.2.
+
+### 16.3 What was run and what it showed (2026-10-04)
+
+- The analyses of 16.2 were run as fixed, after this section's plan was committed
+  (`212b47fb3`). Their values equal the probes of the review.
+- Zero-weight records: 5 LIME, 0 SHAP (Anchors and DiCE print zeros by construction of the
+  rendering and are covered by the caveat of section 15.1). Every judge gave the five LIME
+  records the score 1 for overall quality in every call of the primary condition.
+- ICC(1,1) among the 27 other LIME cases, on the five dimensions that had agreement: -0.13
+  to 0.33 (three calls), -0.14 to 0.29 (one call), -0.21 to 0.13 (clean).
+- SHAP: standard deviation of the case-level mean 0.15 (completeness) and 0.21 (overall
+  quality); same completeness score in 83% of judge pairs; highest ICC(3,1) 0.45; highest
+  ICC(1,1) over the three estimates 0.22.
+- Change of the ICC in the clean condition: audit usefulness -0.23 (-0.32 to -0.15),
+  completeness -0.10 (-0.17 to -0.03), overall quality -0.06 (-0.14 to 0.02).
+- Between explainers among the 96 Adult cases: 40% for completeness (67% over all cases).
+- **Manuscript.** Abstract, resumen, methods, sections 3.2 and 3.5, discussion, limitations
+  and conclusions were rewritten for N01 to N07. The sentence on SHAP and LIME taken together
+  was removed for space. Abstract 248 words, resumen 250; 15 pages in Word.
+- **Literature (F11).** One sentence and two references added to the introduction:
+  XAI-Arena (arXiv:2609.09428) and Haldar and Hockenmaier (Findings of EMNLP 2025). They are
+  marked in `references.bib` as not yet checked by the author. 27 references.
+- **Not done.** The second review was not followed by a third. The Zenodo archive 0.10.0
+  does not hold the code and result files of this section.

@@ -29,10 +29,16 @@ the Quality of XAI Explanations?", arXiv:2609.09428, 8 September 2026.**
   whether several judges agree, and finds that they agree on the method and not on the
   explanations of one method. That is consistent with a judge that separates methods and it
   limits what such a framework can be used for.
-- Not checked: its Appendix H ("cross-LLM robustness, broadly similar patterns") and whether
-  it reports any agreement coefficient among judges or between repeated calls. **The author
-  should read Appendix H before the sentence is written**, because it decides whether Paper
-  C can say that agreement among judges of explanations had not been measured.
+- Appendix H and section 5.3, read later the same day: all 9,988 text-only prompts were
+  replayed with Claude Opus 4.7 and Mistral Small 4, and Spearman correlations between
+  pairs of judges are given per dimension over all methods together (from about -0.05 to
+  0.80). No coefficient inside a method. The limitations name the single judge, prompt
+  variants and repeated calls as open. Paper C therefore cannot say that agreement among
+  judges of explanations was never measured; it can say that it was measured over methods
+  together, which is the measure Paper C shows to be dominated by the method.
+- **Applied 2026-10-04:** one sentence in the introduction cites this paper and Haldar and
+  Hockenmaier (section 2). Both entries are marked in `references.bib` as not yet checked
+  by the author.
 - Consequences for the manuscript:
   - the introduction says LLM judges are "the newest source and the least validated"; with
     this paper, a human-validated framework exists and the sentence needs to say what

@@ -12,15 +12,20 @@ docs/reports/paper_c/results/:
     clean_shift.csv            judge, dimension -> mean paired difference, clean - primary
     clean_fidelity.csv         explainer -> Spearman of overall quality with fidelity
     review_summary.csv         metric,value (single values used in the text)
+    clean_icc_change.csv       dimension -> ICC(clean) - ICC(one call), bootstrap interval
 
 Conditions: primary3 (primary, three replicates averaged per judge), primary1 (primary,
-replicate 1), clean (one call). Scopes: all, shap_lime, and each explainer.
+replicate 1), clean (one call). Scopes: all, shap_lime, each explainer, and lime_nonzero
+(the LIME cases without the records whose printed weights are all zero).
+
+The analyses of the second review (PLAN.md, section 16) are marked "16.2" below.
 
     .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_reliability.py
 """
 from __future__ import annotations
 
 import json
+import re
 from itertools import combinations
 from pathlib import Path
 
@@ -39,7 +44,9 @@ DIMS = ["completeness", "semantic_plausibility", "overall_quality", "audit_usefu
         "concision", "clarity", "actionability"]
 METRIC_WORDS = r"fidelity|stability|sparsity|faithfulness"
 SCOPES = {"all": None, "shap_lime": ["shap", "lime"], "shap": ["shap"], "lime": ["lime"],
-          "anchors": ["anchors"], "dice": ["dice"]}
+          "anchors": ["anchors"], "dice": ["dice"], "lime_nonzero": ["lime"]}
+BOOTSTRAP_RESAMPLES = 4000
+BOOTSTRAP_SEED = 20261004
 
 
 def matrix(scores: pd.DataFrame, dim: str) -> np.ndarray:
@@ -64,7 +71,7 @@ def coefficients(x: np.ndarray) -> dict[str, float]:
     msw = ((x - x.mean(1, keepdims=True)) ** 2).sum() / (n * (k - 1))
     mse = ((x - x.mean(1, keepdims=True) - x.mean(0, keepdims=True) + grand) ** 2).sum() \
         / ((n - 1) * (k - 1))
-    out = {"n_cases": n, "icc_1_1": np.nan, "ci_lower": np.nan, "ci_upper": np.nan,
+    out = {"n_cases": n, "sd_case_mean": x.mean(1).std(ddof=1), "icc_1_1": np.nan, "ci_lower": np.nan, "ci_upper": np.nan,
            "icc_1_k": np.nan, "icc_2_1": np.nan, "icc_3_1": np.nan}
     if msr + (k - 1) * msw > 0:
         icc = (msr - msw) / (msr + (k - 1) * msw)
@@ -91,6 +98,8 @@ def reliability(frames: dict[str, pd.DataFrame]) -> pd.DataFrame:
     for condition, frame in frames.items():
         for scope, explainers in SCOPES.items():
             part = frame if explainers is None else frame[frame["explainer"].isin(explainers)]
+            if scope == "lime_nonzero":  # 16.2
+                part = part[~part["all_zero"]]
             for dim in DIMS:
                 x = matrix(part, dim)
                 row = {"condition": condition, "scope": scope, "dimension": dim,
@@ -109,6 +118,32 @@ def variance_between(primary: pd.DataFrame) -> pd.DataFrame:
         total = means[f"{dim}_score"].var(ddof=0)
         within = means.groupby("explainer")[f"{dim}_score"].transform(lambda v: v - v.mean())
         rows.append({"dimension": dim, "between_explainer_share": 1 - (within ** 2).mean() / total})
+    return pd.DataFrame(rows)
+
+
+def all_weights_zero(text: str) -> bool:
+    """True when every weight of the rendered explanation prints as zero (four decimals)."""
+    weights = [float(v) for v in re.findall(r":\s*(-?\d+\.\d+)", text)]
+    return bool(weights) and not any(weights)
+
+
+def icc_change(base: pd.DataFrame, other: pd.DataFrame) -> pd.DataFrame:
+    """16.2: ICC(1,1) of `other` minus `base` per dimension, cases resampled together."""
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    rows = []
+    for dim in DIMS:
+        a, b = (f.pivot_table(index="case_id", columns="judge_model", values=f"{dim}_score",
+                              aggfunc="mean").dropna() for f in (base, other))
+        ids = a.index.intersection(b.index)
+        a, b = a.loc[ids].to_numpy(float), b.loc[ids].to_numpy(float)
+        draws = []
+        for _ in range(BOOTSTRAP_RESAMPLES):
+            i = rng.integers(0, len(ids), len(ids))
+            draws.append(coefficients(b[i])["icc_1_1"] - coefficients(a[i])["icc_1_1"])
+        lower, upper = np.nanpercentile(draws, [2.5, 97.5])
+        rows.append({"dimension": dim, "n_cases": len(ids),
+                     "icc_change": coefficients(b)["icc_1_1"] - coefficients(a)["icc_1_1"],
+                     "ci_lower": lower, "ci_upper": upper})
     return pd.DataFrame(rows)
 
 
@@ -132,6 +167,7 @@ def main() -> None:
     cases = pd.DataFrame([json.loads(line) for line in
                           (C2 / "cases" / "exp4_cases.jsonl").open(encoding="utf-8")])
     info = cases[["case_id", "explainer", "dataset", "quadrant"]].copy()
+    info["all_zero"] = cases["normalized_explanation"].map(all_weights_zero)
     info["fidelity"] = [m["fidelity"] for m in cases["technical_metrics"]]
 
     scores = pd.read_csv(C2 / "parsed_scores" / "exp4_llm_scores.csv")
@@ -144,6 +180,8 @@ def main() -> None:
     long = reliability(frames)
     long.to_csv(OUT / "reliability_long.csv", index=False, float_format="%.6f", lineterminator="\n")
     between = variance_between(primary)
+    between["between_explainer_share_adult"] = variance_between(  # 16.2
+        primary[primary["dataset"] == "adult"])["between_explainer_share"]
     between.to_csv(OUT / "variance_between.csv", index=False, float_format="%.6f",
                    lineterminator="\n")
 
@@ -191,6 +229,21 @@ def main() -> None:
     summary["calls.total"] = coverage["responses"].sum() + clean_calls
     summary["calls.parsed"] = coverage["parsed"].sum() + (len(frames["clean"]) if has_clean else 0)
     summary["calls.clean"] = clean_calls
+
+    # 16.2
+    for explainer, count in info.groupby("explainer")["all_zero"].sum().items():
+        summary[f"zero.{explainer}"] = int(count)
+    summary["cases.lime_nonzero"] = int((info["explainer"].eq("lime") & ~info["all_zero"]).sum())
+    summary["lime_zero.overall_max"] = primary[primary["all_zero"] & primary["explainer"].eq("lime")][
+        "overall_quality_score"].max()
+    summary["cases.adult"] =int(info["dataset"].eq("adult").sum())
+    summary["shap.icc3_max"] = shap["icc_3_1"].max()
+    summary["shap.icc_max_any"] = long[long["scope"] == "shap"]["icc_1_1"].max()
+    five = DIMS[:5]
+    nonzero = long[(long["scope"] == "lime_nonzero") & long["dimension"].isin(five)]
+    for condition, part in nonzero.groupby("condition"):
+        summary[f"lime_nonzero.{condition}.icc_max5"] = part["icc_1_1"].max()
+        summary[f"lime_nonzero.{condition}.icc_min5"] = part["icc_1_1"].min()
     summary["clean.available"] = float(has_clean)
 
     if has_clean:
@@ -211,6 +264,8 @@ def main() -> None:
         shift = pd.DataFrame(shift)
         shift.to_csv(OUT / "clean_shift.csv", index=False, float_format="%.6f",
                      lineterminator="\n")
+        icc_change(base, clean).to_csv(OUT / "clean_icc_change.csv", index=False,  # 16.2
+                                       float_format="%.6f", lineterminator="\n")
         summary["clean.shift_maxabs"] = shift["mean_shift"].abs().max()
         summary["clean.shift_overall_mean"] = \
             shift[shift["dimension"] == "overall_quality"]["mean_shift"].mean()
