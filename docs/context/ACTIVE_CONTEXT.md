@@ -12,7 +12,7 @@ This does not change Paper D's recorded emailed-submission status. Details:
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
-| **C** | *Tecnología en Marcha*, AI special issue | Revised draft on `main`, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.10.0, [10.5281/zenodo.23149419](https://doi.org/10.5281/zenodo.23149419); release `paper-c-tm-2026-10-04` |
+| **C** | *Tecnología en Marcha*, AI special issue | Third draft on `main`, read by the author, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.11.0, [10.5281/zenodo.23150204](https://doi.org/10.5281/zenodo.23150204); release `paper-c-tm-2026-10-04-r2` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
@@ -25,9 +25,32 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session update - 2026-10-04 (Paper C: author's read of the third draft, release 0.11.0)
+
+This entry is the latest. It closes Next Steps 2 and 3 and the first pending decision of the
+handoff directly below; its other items are unchanged.
+
+- **Author decisions:** the third draft was read and is fine; the two references marked
+  "NEW 2" were checked; a new Zenodo release was approved.
+- **Pull requests #24** (third draft, second review, editor note) **and #25** (archive
+  version 0.11.0 in `.zenodo.json` and `CITATION.cff`) merged; `main` at `ae4fcd890`.
+- **Zenodo version 0.11.0: `10.5281/zenodo.23150204`**, from GitHub release
+  `paper-c-tm-2026-10-04-r2`. It holds the code and result files of `PLAN.md` section 16.
+  `\papercrelease` and `\papercarchive` are set; the files in `submission/` were rebuilt.
+  Both Word files are still 15 pages; the blind PDF has no archive or repository string.
+- Verified after the build: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`;
+  `verify_exp4_reconstruction.py` 18 pins. None of them checks a Paper C number.
+- **Still open:** the claim registry for `paper_c.tex` (fresh session, `pubs/*` branch); the
+  four checks and item 3 of `EDITOR_NOTE.md`, then the author's email to the journal; whether
+  the human subset is in this submission (recommendation: no); no review followed the third
+  draft.
+- **Note:** the archive version is read from `.zenodo.json` at the tagged commit, so the
+  version bump must be on `main` before the tag. `gh release create --notes` with quotation
+  marks in the text fails in PowerShell; use `--notes-file`.
+
 ## Session Handoff - 2026-10-04 (Paper C: second review, third draft, editor note, literature)
 
-This is the latest Paper C handoff. The handoff below keeps the detail of the first two drafts.
+This is the Paper C handoff of the third draft. The handoff below keeps the detail of the first two drafts.
 
 - **Completed**:
   - **Second rigor review**, by a session that did not write the draft:
