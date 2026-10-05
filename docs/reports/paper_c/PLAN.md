@@ -12,8 +12,10 @@ approval that change claims 3 and section 7.
 **Question.** Can LLM judges score post-hoc explanations reliably, and what do their scores
 follow?
 
-**Working title.** "Can LLM Judges Score Explanations Reliably? Agreement among Judges, across
-Panels and with Human Raters". The last clause stays only if section 6 is completed.
+**Title (author, 2026-10-04).** "Do LLM Judges Agree on the Quality of Explanations? A
+Two-Panel Reliability Study". Spanish: "¿Coinciden los jueces LLM sobre la calidad de las
+explicaciones? Un estudio de fiabilidad con dos paneles". The title is not changed without
+the author's approval.
 
 **Claims the existing evidence supports**
 
@@ -291,9 +293,8 @@ size, token count) are left out of the sheet; they are listed in
 - **One figure, four tables,** not two figures and three tables: the test-retest values are a
   table, and the post hoc correlations have their own table.
 - **First draft.** It is the fallback version: no human-rated subset (section 6) and no count
-  on the audited corpus axes (section 5). Title: "Can LLM judges score explanations
-  reliably? Agreement among three judges in two panels on 192 post-hoc explanations".
-  Measured in Word: 12 pages.
+  on the audited corpus axes (section 5). Its first title was replaced by the author the
+  same day (section 1). Measured in Word: 12 pages.
 - **Result of section 7.** Within each explainer the overall-quality score rises with the
   fidelity value shown in the prompt (Spearman 0.35 to 0.59, all four significant after
   Holm). Of the other 16 tests, two remain: stability for Anchors and sparsity for LIME.
