@@ -1,7 +1,8 @@
 # ADR-0021: One Working Tree per Paper
 
 > **Status:** Accepted<br>
-> **Date:** 2026-10-03 (amended the same day: Paper D moved to the main folder)<br>
+> **Date:** 2026-10-03 (amended the same day: Paper D moved to the main folder; amended
+> 2026-10-05: Paper F moved to the main folder)<br>
 > **Amends:** [ADR-0013](0013-publication-branching-model.md) (adds lanes for Papers D, E
 > and F); [ADR-0019](0019-paper-bc-venue-peerj-and-single-working-folder.md) decisions 7
 > and 8 (one working folder) now apply to Paper B+C only<br>
@@ -55,6 +56,16 @@ merged. Any return to separate folders has to prevent that.
    is worked in the main folder, under `docs/reports/paper_<x>/`, unless the author
    names another folder in that session.** If the registry says otherwise, change the
    registry first; do not work in the other folder.
+
+   **Amendment, 2026-10-05: Paper F is worked in the main folder,** at
+   `docs/reports/paper_f/`, on branch `paper/f-external-validity`, by the rule above.
+   The folder `../xai-paper-f` was found missing on 2026-10-04 and held no commit that
+   `main` lacks; `scripts/pubs/lanes.toml` now names the main folder for the lane, and
+   the Paper F row of the table above is superseded. The lane also owns
+   `docs/planning/paper_f_*`, `scripts/paper_f_*` and `tests/analysis/test_paper_f_*`,
+   so that the generator scripts its analysis plan places in `scripts/` are lane files
+   and not shared ones. A Paper F script or test outside those patterns is shared and
+   goes through `main`.
 2. **A lane edits only the paths it owns.** Everything else is shared and changes only
    through `main`: `pub/**`, `scripts/pubs/**` (except a paper's own scripts),
    `docs/rca/**`, `docs/adr/**`, `docs/context/ACTIVE_CONTEXT.md`, `src/**`, and
