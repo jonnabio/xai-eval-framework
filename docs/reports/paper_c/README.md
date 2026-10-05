@@ -66,19 +66,29 @@ files of `PLAN.md` section 16; the full version cites it. Version 0.10.0 does no
 
 **Open before submission**
 
-1. Note to the editor: drafted in `EDITOR_NOTE.md` (Spanish to send, English for the
-   record). Not sent; four points to check are listed at its top.
-2. Author decision: whether the human subset is in this submission (recommendation: no).
-   The rating sheets in `human_subset/` show the clean record. At 15 pages, a human-subset
-   section needs an equal cut.
-3. Raters, only if item 2 is yes: send the two rating sheets (`human_subset/README.md`);
-   cut-off 2026-10-10.
+0. Author: the last revision of the manuscript. After any change to the template, build,
+   then register (section Build); the registration changes shared files and goes through
+   a `pubs/*` branch.
+1. Note to the editor: `EDITOR_NOTE.md` (Spanish to send, English for the record). Not
+   sent. Its items 1 to 3 were checked against the registry and corrected on 2026-10-04.
+   Left for the author: whether the thesis is still not deposited, and the telephone number.
+2. **Decided 2026-10-04 (author): the human subset is not part of this submission.** The
+   manuscript already says it has no human scores and names the comparison as future work.
+   The sample and the rating sheets stay in `human_subset/`, not sent, for a later study.
+3. Not needed: no rating sheet is sent (item 2).
 4. Second reviewer: adjudication sheet in `corpus_audit/`; cut-off 2026-10-08.
-5. Registry: put `paper_c.tex` under `[coverage]`, add `docs/reports/paper_c/` to the
-   protected side of `[exclusivity]`, wire `verify_sync.py`, replace the placeholder abstract
-   in `pub/claims.toml` (shared files, through `main`). Not done: the numbers of the draft
-   are generated from result files but are not yet in `pub/claim_registry.toml`. Held until
-   the revision after the second review: its findings change values in the text.
+5. Registry: **done 2026-10-04** (pull request #27, `pubs/paper-c-registry`).
+   `scripts/pubs/register_paper_c.py` writes the Paper C block of
+   `pub/claim_registry.toml`: 162 claims of this paper's own and 37 sites on quantities
+   that the thesis or the 32-page edition already carries. `paper_c.tex` is under
+   `[coverage]`, this folder is on the protected side of `[exclusivity]`, the abstract,
+   keywords, resumen and palabras clave are in `pub/claims.toml`, and `verify_sync.py`
+   compares them with the manuscript. CI runs `register_paper_c.py --check`, which also
+   fails when `paper_c.tex` is not the template rendered from the result files.
+   Found while triaging: the two quotations of an Anchors and a DiCE record in the
+   methods omit an item of the stored text without marking it (after `capital-gain:
+   1.0000` the records have a third weight of 1.0000; after `age: 1.6182` the record has
+   `education_9th: 0.4000`). For the author's last revision.
 6. Literature on LLM-judge reliability (F11): candidates in
    `LITERATURE_LLM_JUDGE_RELIABILITY.md`. XAI-Arena (arXiv:2609.09428, September 2026) uses
    an LLM judge on SHAP, LIME and DiCE explanations; it and Haldar and Hockenmaier (2025)
@@ -129,7 +139,13 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_reliability.py   # before the summary: the figure reads its output
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_summary.py   # summary values and the figure
 python docs/reports/paper_c/scripts/build_paper_c.py                       # paper_c.tex, PDFs, Word files
+python scripts/pubs/register_paper_c.py                                    # registry block and abstract; shared files, on a pubs/* branch
+python scripts/pubs/generate_fragments.py                                  # then restore pub/fragments/build_meta.env
 ```
+
+`python scripts/pubs/register_paper_c.py --check` writes nothing and says whether the
+registration is current. It is needed after a change to a printed number or to the
+abstract, keywords, resumen or palabras clave; a change to other text needs only the build.
 
 The build needs Tectonic (`tools/tectonic-portable`) and Quarto's pandoc. It stops on a
 placeholder it cannot resolve. Measure the length in Word itself.

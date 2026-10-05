@@ -460,3 +460,14 @@ One call is the first of the three calls, as in section 15.2.
   marked in `references.bib` as not yet checked by the author. 27 references.
 - **Not done.** The second review was not followed by a third. The Zenodo archive 0.10.0
   does not hold the code and result files of this section.
+
+## 17. Author decisions after the third draft (2026-10-04)
+
+1. The third draft was read and accepted; the two references added in 16.3 were checked.
+2. A new archive was approved: Zenodo version 0.11.0, `10.5281/zenodo.23150204`, from
+   release `paper-c-tm-2026-10-04-r2`. It holds the code and result files of section 16.
+3. **The human-rated subset (section 6) is not part of this submission.** The sample and
+   the rating sheets stay in `human_subset/` and are not sent. The manuscript states that it
+   has no human scores and names the comparison with human raters as future work.
+4. The claim registry for `paper_c.tex` is done (pull request #27); see the README, item 5.
+5. Next: the author's last revision, then the submission email with the note to the editor.
