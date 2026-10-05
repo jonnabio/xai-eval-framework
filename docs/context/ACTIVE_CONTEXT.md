@@ -27,7 +27,11 @@ This entry is the latest; the Paper C handoff below keeps the detail.
   raters see the clean record (sheets rebuilt, none had been sent); built PDF and Word files
   stay local; the AI declaration has the author's own text and is not changed without
   approval; merge and release approved.
-- **Archive version 0.10.0** for the Paper C snapshot (`.zenodo.json`, `CITATION.cff`).
+- **Pull request #21 merged** (`main` at `d97dbe188`): the Paper C folder, the rigor review
+  and the handoffs.
+- **Zenodo version 0.10.0: `10.5281/zenodo.23149419`**, from GitHub release
+  `paper-c-tm-2026-10-04`. The full version of the paper cites it; both placeholders are
+  gone. The draft is still 15 pages in Word.
 - **Still open:** claim registry for `paper_c.tex`; a review by a session that did not write
   the draft; the search on LLM-judge reliability (review F11); the note to the editor;
   whether the human subset is in this submission (recommendation: no).
