@@ -21,9 +21,14 @@
        cshift   results/clean_shift.csv                                  judge|dimension
        cfid     results/clean_fidelity.csv                               condition|explainer
        chg      results/clean_icc_change.csv                             dimension
+       lnz      results/lime_nonzero_metrics.csv                         condition|metric
+       pc       results/positive_control.csv                             version|judge|dimension
+       pci      results/positive_control_icc.csv                         set|scope|dimension
+       pcs      results/positive_control_summary.csv                     metric
 
    Views and conditions: primary, stated, alt, pooled; in rel, beh and cfid: primary3 (three
-   replicates averaged), primary1 (one call), clean. Judges: claude, gemini, gpt.
+   replicates averaged), primary1 (one call), clean. Judges: claude, gemini, gpt; in pc also
+   mean, the mean of the three. Sets in pci: original, original+truncated, original+shuffled.
    Formats: d integer; w integer from 0 to 10 as a word; int integer with thousands
    separator; u2, u3 decimals; s2, s3
    decimals with a typeset minus sign; pct, pct1 percentage with 0 or 1 decimals; p p-value
@@ -79,6 +84,10 @@ SOURCES = {
     "cshift": (C / "results" / "clean_shift.csv", ["judge_model", "dimension"]),
     "cfid": (C / "results" / "clean_fidelity.csv", ["condition", "explainer"]),
     "chg": (C / "results" / "clean_icc_change.csv", ["dimension"]),
+    "lnz": (C / "results" / "lime_nonzero_metrics.csv", ["condition", "metric"]),
+    "pc": (C / "results" / "positive_control.csv", ["version", "judge_model", "dimension"]),
+    "pci": (C / "results" / "positive_control_icc.csv", ["set", "scope", "dimension"]),
+    "pcs": (C / "results" / "positive_control_summary.csv", ["metric"]),
 }
 WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 TOKEN = re.compile(r"<<([a-z]+):([^:<>]+):([a-z_0-9]+):([a-z0-9]+)>>")
