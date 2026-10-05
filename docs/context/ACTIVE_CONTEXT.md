@@ -19,6 +19,55 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-04 (Paper C revised after the rigor review; clean condition run)
+
+This is the latest Paper C handoff. The two Paper C entries below keep the earlier detail.
+
+- **Completed**
+  - **Author decisions on the review:** SHAP and LIME are the main analysis; the clean
+    condition is approved; the within-explainer analysis is accepted as a dated addition; the
+    venue does not change (`docs/reports/paper_c/PLAN.md`, section 15).
+  - **Clean condition run:** 192 cases, 3 judges, one call, no metrics, outcome or label in
+    the prompt; 576 calls, all valid. A new cohort in its own directory,
+    `docs/reports/paper_c/clean_condition/` (prompts, raw responses, parsed scores), written
+    by `scripts/run_clean_condition.py`. Nothing under `experiments/` or `outputs/` changed.
+  - **New analyses** (`scripts/paper_c_reliability.py`, fixed in the plan before they ran):
+    agreement inside each explainer, one call, panel mean, two-way models, F-based intervals,
+    raw agreement, rationales naming a metric, correctness contrast, clean against primary.
+  - **Manuscript rewritten** around the review: title unchanged ("Do LLM Judges Agree on the
+    Quality of Explanations? A Two-Panel Reliability Study"); 5 tables, 1 figure, 25
+    references; abstract 246 and resumen 249 words. Response to each finding in
+    `docs/reports/paper_c/README.md`.
+- **Current State**
+  - **The draft is at 15 pages in Word, the journal's limit.** Any addition needs an equal cut.
+  - Results: over all cases no dimension reaches 0.75 (0.601 and 0.731); up to 67% of the
+    variance is between explainers; inside SHAP no dimension exceeds 0.19 (0.20 without
+    metrics), inside LIME five dimensions are between 0.63 and 0.75; without metrics the
+    fidelity relation vanishes for SHAP and DiCE, Claude Haiku 4.5 scores higher, and
+    agreement on audit usefulness falls from 0.66 to 0.42.
+  - Not reviewed again; the author has not read it. **Not in the claim registry** (unchanged).
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`;
+    `verify_exp4_reconstruction.py` 18 pins. Lane lock released.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  2. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf`; decide whether the
+     raters see the clean record; send the rating sheets; adjudication; check the two
+     references marked NEW; a targeted search on LLM-judge reliability (review F11).
+  3. Registry work through `main`; a review by a session that did not write the draft;
+     Zenodo version; `\papercrelease` and `\papercarchive`.
+- **Blockers/Issues**
+  - Deadline 2026-10-15. The human subset, if it arrives, does not fit without cuts.
+  - Anchors and DiCE were judged as lists of feature weights; the paper says so and does not
+    repair it.
+  - The clean condition has one call per judge; the primary has three.
+- **Notes**
+  - The judge client reads `configs/secrets/api_keys.env`; the run used the project's key.
+  - Gemini 3.8 Flash was the slow judge (about 20 seconds per call); run the shards in
+    parallel: `--judge <id> --shard i/4`, then `--parse-only`.
+  - A look at partial clean data overstated the effect; only the full data are reported
+    (PLAN.md 15.4).
+  - `paper_c_reliability.py` must run before `paper_c_summary.py`: the figure reads its output.
+
 ## Session Handoff - 2026-10-04 (Paper C: plan approved, prompt findings, first draft built)
 
 This is the latest Paper C handoff; it supersedes the one directly below, which keeps the
