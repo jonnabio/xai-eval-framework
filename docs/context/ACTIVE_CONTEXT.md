@@ -1,8 +1,27 @@
 # Active Context: XAI Evaluation Framework
 
+## Publication status - 2026-10-04
+
+| Paper | Venue | Status | Submission / publication record |
+|---|---|---|---|
+| **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
+| **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
+| **C** | *Tecnología en Marcha*, AI special issue (planned target) | Plan proposed; manuscript not yet drafted or submitted | Author target, not a journal submission |
+| **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
+| **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
+| **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
+
+**Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
+2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
+*Inteligencia Artificial* (IBERAMIA) on 2026-10-01 (date reported by the author) and
+desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the author
+decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
+CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
+taxonomy. The combined manuscript is not counted as a current paper submission.
+
 ## Session Handoff - 2026-10-04 (Paper C: own lane and folder, prototype removed, plan proposed)
 
-This is the latest handoff. The Paper B submission handoff of the same day follows it.
+This handoff records the Paper C setup; the publication status summary above is current.
 
 - **Completed**
   - **Author decisions:** Paper C is the LLM-judge reliability study with the taxonomy as
@@ -48,7 +67,6 @@ This is the latest handoff. The Paper B submission handoff of the same day follo
     as an initial source; that fragment is now a placeholder.
   - `python -m pytest` needs the project `.venv`; `pub/fragments/build_meta.env` changes on
     every fragment build and is restored before committing.
-
 ## Session Handoff - 2026-10-04 (Paper B SUBMITTED to CLEI Electronic Journal, ID 1196)
 
 This is the latest handoff. It closes Next Steps 2 and 3 of the Paper B handoff directly
