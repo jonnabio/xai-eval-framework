@@ -60,3 +60,26 @@ can become a second paper in one form only: the LLM-judge study with the taxonom
   only if Paper E is revised.
 - Paper C needs its own plan: adjudication, a human-rated subset (two raters, 50 to 60 cases),
   and a dated plan for any post hoc analysis.
+
+## Amendment (2026-10-04, same day): Paper C has its own folder and lane
+
+Author decisions, taken after Paper B was submitted. They replace the last clause of decision
+4 ("`docs/reports/paper_bc/` ... holds ... the Paper C material").
+
+1. **Paper C is worked in `docs/reports/paper_c/` only**, lane `paper-c` on `paper/c-*`
+   branches, in the main folder. Its manuscript, plan, scripts, result files and copies of its
+   inputs live in that directory.
+2. **The April 2026 survey prototype in that folder is removed.** It was the survey-only form
+   that the assessment judged not viable. It remains in the history (last present at the
+   commit before the removal on `paper/c-llm-judges`).
+3. **`docs/reports/paper_bc/` is frozen** as the record of the rejected 32-page edition. The
+   inputs Paper C needs (the 44-paper corpus, the second-reviewer audit and the adjudication
+   sheet) are copied into `docs/reports/paper_c/`; the copies are the working files from then
+   on. Decision 6 stands: the 32-page edition stays under `[coverage]` until Paper C replaces
+   it.
+4. **Paper C targets *Tecnología en Marcha*,** special issue on Artificial Intelligence, 2027
+   edition (call closes 2026-10-15). Paper D was sent to the same issue on 2026-10-03.
+5. **Tooling.** The publication-sync checks no longer read the prototype: `verify_sync.py`
+   does not check a Paper C manuscript until the new one exists, the 24-study corpus claim and
+   its `[review_corpus.paper_c]` block are removed from the registry, and the Paper C abstract
+   in `pub/claims.toml` is a placeholder until the new abstract is written.

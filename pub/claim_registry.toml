@@ -588,13 +588,6 @@ appears_in = [
   { file = "pub/claims.toml", text = "44-paper structured" },
 ]
 
-[[claim]]
-id = "review.corpus.rows"
-source = "review_corpus_rows:paper_c"
-value = "24"
-tolerance = 0.5
-appears_in = [{ file = "pub/fragments/paper_c_abstract_en.tex", text = "24-study" }]
-
 # ---------------------------------------------------------------------------
 # Review corpus distributions as stated by each manuscript.
 # Checked with: python scripts/pubs/check_review_corpus.py --corpus <csv> --expect <key>
@@ -608,10 +601,6 @@ size = 44
 clusters = { faithfulness_robustness = 15, taxonomy_survey = 10, human_grounded = 7, benchmark_toolkit = 6, llm_judge = 4, counterfactual_recourse = 2 }
 evidence_sources = { proxy = 21, human_expert = 15, benchmark = 13, end_user = 12, llm_judge = 4 }
 confidence = { high = 44 }
-
-[review_corpus.paper_c]
-# Satisfied by docs/reports/paper_c/paper_c_review_corpus.csv.
-size = 24
 
 # ---------------------------------------------------------------------------
 # Artifacts a manuscript points readers at. These must exist in the working

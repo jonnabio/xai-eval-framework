@@ -36,7 +36,8 @@ def main() -> int:
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
         "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_cleiej.tex",
         "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
-        "paper_c": ROOT / "docs" / "reports" / "paper_c" / "paper_c_prototype_jmlr.tex",
+        # Paper C is being rebuilt in docs/reports/paper_c/ (ADR-0022, amendment);
+        # add its manuscript here when it exists.
     }
     for paper_id, path in papers.items():
         text = _read(path)
