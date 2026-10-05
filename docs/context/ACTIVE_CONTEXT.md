@@ -1,5 +1,54 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper C: own lane and folder, prototype removed, plan proposed)
+
+This is the latest handoff. The Paper B submission handoff of the same day follows it.
+
+- **Completed**
+  - **Author decisions:** Paper C is the LLM-judge reliability study with the taxonomy as
+    framing; it is worked in `docs/reports/paper_c/` only, under a new lane; the April survey
+    prototype is removed; the Paper C inputs are copied out of `docs/reports/paper_bc/`, which
+    is frozen; venue *Tecnología en Marcha*, special issue on AI (deadline **2026-10-15**, the
+    issue Paper D was sent to). Recorded as an amendment to ADR-0022.
+  - **Pull request #20** (`pubs/paper-c-lane`), CI green, **not merged**: lane `paper-c`
+    (`paper/c-*`, owns `docs/reports/paper_c/**`) in `lanes.toml` with two test lines; the
+    ADR amendment; `verify_sync.py` no longer checks a Paper C manuscript; the 24-study claim
+    and `[review_corpus.paper_c]` removed from the registry; the CI check of the old corpus
+    removed; a placeholder Paper C abstract in `pub/claims.toml`.
+  - **Branch `paper/c-llm-judges`** (cut from `pubs/paper-c-lane`): prototype removed (11
+    files); `paper_c_review_corpus.csv` (44 papers) and `corpus_audit/` copied in;
+    `README.md` and `PLAN.md` written.
+- **Current State**
+  - The plan is **proposed, not approved**. No manuscript and no new analysis exist.
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`;
+    `scan_shared_literals.py --strict` 0 unexplained; `verify_exp4_reconstruction.py` 18
+    pins; 9 lane tests.
+  - The main folder is on `paper/c-llm-judges`, pushed. The lane lock was released.
+- **Next Steps**
+  1. Author: merge pull request #20 (the assistant's merge was refused by the permission
+     check). Then `git fetch origin main:main` and `git merge main` on `paper/c-llm-judges`.
+  2. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  3. Author: answer the seven decisions in `docs/reports/paper_c/PLAN.md`, section 13.
+  4. After approval: draw the 56-case sample and build the rating sheet (plan section 6);
+     start adjudication (section 5); build script and manuscript (section 8).
+  5. Unchanged: Papers B, D and E wait for their journals; the thesis sentence about the
+     earlier article; Task 3 / RCA-001 Phase 2; `git worktree prune`.
+- **Blockers/Issues**
+  - Eleven days to the deadline, with adjudication and human ratings depending on other
+    people; the plan sets cut-offs of 2026-10-08 and 2026-10-10 with fallbacks.
+  - The existing annotation viewer and guidelines were made for EXP1 (three dimensions, 20
+    Adult cases); the seven-dimension EXP4 rubric needs a new rating sheet.
+  - The journal limit is 15 Word pages at 12 pt and 1.5 spacing, about 5,000 words.
+  - Paper D is in the same special issue; the 32-page edition with the reliability tables is
+    public.
+- **Notes**
+  - `scripts/pubs/claim_sources.py` still maps `review_corpus_rows:paper_c` to
+    `docs/reports/paper_c/paper_c_review_corpus.csv`, which now holds the 44-paper corpus.
+  - The chapter manuscript (`07_diseno_empirico.md`) names `pub/fragments/paper_c_abstract_en.tex`
+    as an initial source; that fragment is now a placeholder.
+  - `python -m pytest` needs the project `.venv`; `pub/fragments/build_meta.env` changes on
+    every fragment build and is restored before committing.
+
 ## Session Handoff - 2026-10-04 (Paper B SUBMITTED to CLEI Electronic Journal, ID 1196)
 
 This is the latest handoff. It closes Next Steps 2 and 3 of the Paper B handoff directly
