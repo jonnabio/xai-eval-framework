@@ -138,7 +138,6 @@ def generate_runtime_figure(paired_csv: Path, output_dir: Path) -> None:
     axes[0].set_ylabel("Cost per explanation (ms, log scale)")
     # Panel letter instead of a title (titles belong in the caption).
     axes[0].set_title("A", loc="left", fontweight="bold")
-    axes[0].grid(axis="y", alpha=0.25, which="both")
 
     # Panel B: model-level medians
     x = np.arange(len(med))
@@ -150,7 +149,6 @@ def generate_runtime_figure(paired_csv: Path, output_dir: Path) -> None:
     axes[1].set_yscale("log")
     axes[1].set_ylabel("Median cost (ms, log scale)")
     axes[1].set_title("B", loc="left", fontweight="bold")
-    axes[1].grid(axis="y", alpha=0.25, which="both")
     axes[1].legend(loc="upper left")
 
     fig.tight_layout()
