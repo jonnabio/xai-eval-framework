@@ -2,6 +2,12 @@
 
 ## Publication status - 2026-10-04
 
+**Journal account request (2026-10-04):** the author confirmed sending the
+Spanish account-creation request to `revistatm@tec.ac.cr`, following Tecnología
+en Marcha's registration page. Reply and account access instructions are pending.
+This does not change Paper D's recorded emailed-submission status. Details:
+`docs/reports/paper_d/README.md`.
+
 | Paper | Venue | Status | Submission / publication record |
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
@@ -18,6 +24,90 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-04 (Paper C: second review, third draft, editor note, literature)
+
+This is the latest Paper C handoff. The handoff below keeps the detail of the first two drafts.
+
+- **Completed**:
+  - **Second rigor review**, by a session that did not write the draft:
+    `docs/review/scientific-rigor-review_paper_c_2026-10-04_r2.md`. Every recomputed value
+    equalled the draft. Two major findings: N01, the agreement among LIME cases came from 5 of
+    32 records whose weights all print as zero; N02, among SHAP cases the judges gave almost
+    the same score to every case, so the low coefficient is not shown to be disagreement.
+    Minor: N03 to N07.
+  - **Author decisions** (`docs/reports/paper_c/PLAN.md`, section 16.1): the LIME analysis is
+    accepted as a dated addition; the five records stay among the 192 cases; the zeros are
+    rounding. Confirmed in the stored runs: all ten weights of each record are below 0.00005.
+  - **Analyses of section 16**, fixed in the plan (`212b47fb3`) before they were run:
+    `scripts/paper_c_reliability.py` extended (scope `lime_nonzero`, spread of the case means,
+    bootstrap interval of the change in the clean condition, share between explainers among
+    Adult cases); new result file `results/clean_icc_change.csv`; `build_paper_c.py` reads it
+    (alias `chg`). No judge call was made.
+  - **Third draft**: abstract, resumen, methods, sections 3.2 and 3.5, discussion, limitations
+    and conclusions rewritten for N01 to N07. 15 pages in Word, abstract 248 words, resumen
+    250, 5 tables, 1 figure.
+  - **Literature (F11)**: `docs/reports/paper_c/LITERATURE_LLM_JUDGE_RELIABILITY.md`. One
+    sentence and two references added to the introduction: XAI-Arena (arXiv:2609.09428; its
+    sections 1 to 3, limitations and Appendix H were read) and Haldar and Hockenmaier
+    (Findings of EMNLP 2025; abstract only). 27 references.
+  - **Note to the editor** drafted: `docs/reports/paper_c/EDITOR_NOTE.md` (Spanish to send,
+    English for the record). Not sent.
+- **Current State**:
+  - Paper C is a third draft, merged to `main` by the pull request that carries this handoff.
+    **It is not submitted.** The author has not read the third draft, and it has not been
+    reviewed after the revision.
+  - Built files are in `docs/reports/paper_c/submission/` (local, git-ignored), built from the
+    third draft. The full version still cites Zenodo 0.10.0, which does **not** hold the code
+    and result files of section 16.
+  - **The claim registry is still not done**: no Paper C number is in
+    `pub/claim_registry.toml`, `pub/claims.toml` has a placeholder abstract, `verify_sync.py`
+    does not check `paper_c.tex`.
+  - Verified after the last build: `verify_claims.py` 985 claims / 1297 sites;
+    `verify_sync.py`; `verify_exp4_reconstruction.py` 18 pins. None of them checks a Paper C
+    number.
+  - The lane lock `paper-c` is released.
+- **Next Steps**:
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <name>` on
+     `paper/c-llm-judges`.
+  2. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf` (abstract, section 3.2
+     and the first paragraph of the discussion carry the change); check the two references
+     marked "NEW 2" in `references.bib`.
+  3. Author approves a new Zenodo release; then tag `origin/main`, `gh release create`, set
+     `\papercrelease` and `\papercarchive` in `paper_c_template.tex`, rebuild, count pages in
+     Word.
+  4. Claim registry on a `pubs/*` branch, in a fresh session: `[coverage]`,
+     `docs/reports/paper_c/` on the protected side of `[exclusivity]`, a `paper_c` resolver in
+     `scripts/pubs/claim_sources.py`, the real abstract in `pub/claims.toml`, `verify_sync.py`.
+     Values shared with the thesis and the 32-page edition gain sites on existing claims.
+  5. `EDITOR_NOTE.md`: do the four checks listed at its top; rewrite its item 3 to name the
+     within-method findings as revised. Then the author sends the email with the blind and
+     full Word files, the figure and a telephone number. Deadline 2026-10-15.
+- **Blockers/Issues**:
+  - **Pending decision (author):** the new Zenodo release.
+  - **Pending decision (author), unchanged:** whether the human subset is part of this
+    submission (recommendation: no).
+  - The paper is at the page limit: nothing can be added without removing as much.
+  - The revision was made by the session that wrote the second review; no review followed it.
+  - XAI-Arena reports correlations between three judges over all methods together. Paper C
+    must not say that agreement among judges of explanations was never measured.
+  - Unverified statements in the editor note: that no value is shared with Paper D, and the
+    list of results already in the 32-page edition.
+  - The second-reviewer adjudication of the corpus is open (unchanged).
+  - `docs/reports/paper_d/README.md` carries an uncommitted edit from another session (journal
+    account request). It belongs to lane `paper-d` and was left as found. The note of that
+    session at the top of this file was committed with this handoff.
+- **Notes**:
+  - Build order: `paper_c_reliability.py` (about one minute with the bootstrap), then
+    `paper_c_summary.py`, then `build_paper_c.py`. The summary script rewrites
+    `figures/fig1.pdf` with a new timestamp; restore it with `git checkout --` before a commit.
+  - Word page count: Word COM from PowerShell, `ComputeStatistics(2)` after `Repaginate()`.
+  - `pdftotext` (Git Bash, `/mingw64/bin`) reads a PDF that the web fetch tool cannot.
+  - The five zero-weight LIME cases are the records of `exp4_cases.jsonl` whose
+    `normalized_explanation` has ten weights printed as 0.0000; one has fidelity 0.84.
+  - Edit `paper_c_template.tex`, never `paper_c.tex`; patch it with a script file or the
+    editor tool, not a shell heredoc.
+  - Do not change the title or the AI declaration without the author's approval.
 
 ## Session Handoff - 2026-10-04 (session end: Paper C drafted, reviewed, revised, archived, on main)
 

@@ -396,3 +396,67 @@ the primary condition.
   human-judge comparison of section 6 uses the clean-condition scores of the judges.
 - **Built PDF and Word files stay local** for now.
 - **AI declaration.** The author gave its text; it is not changed without approval.
+
+## 16. Revision after the second rigor review (2026-10-04)
+
+Review: `docs/review/scientific-rigor-review_paper_c_2026-10-04_r2.md`, by a session that did
+not write the draft (major revision, small: findings N01 to N07). Its values are probes. This
+section fixes the analyses before they are run in the lane; they are post hoc and are
+reported as such. No judge call is made.
+
+### 16.1 Author decisions (2026-10-04)
+
+1. The analysis of the LIME cases with and without the records whose printed weights are all
+   zero is accepted as a dated addition to this plan.
+2. The five such records stay among the 192 cases; the finding is stated.
+3. The zeros are a rounding: the benchmark prints weights with four decimals. Checked in the
+   stored runs on the same day: the ten weights of each of the five records are below 0.00005
+   in absolute value (from about 1e-16 to 3e-5).
+
+### 16.2 Analyses, fixed before they are run
+
+Script `scripts/paper_c_reliability.py`, output in `results/`.
+
+- **Zero-weight records (N01).** Number of records per explainer in which every printed
+  weight is zero. ICC(1,1) among the LIME cases without them (scope `lime_nonzero`), in the
+  primary condition with three calls averaged, with one call, and in the clean condition,
+  beside the values for all 32 LIME cases.
+- **Spread and raw agreement inside an explainer (N02).** Standard deviation of the
+  case-level mean score per scope and dimension; share of judge pairs with the same score
+  inside SHAP and LIME (one call; already in `reliability_long.csv`).
+- **Two-way model inside an explainer (N03).** ICC(3,1) among the SHAP cases (already in
+  `reliability_long.csv`); its highest value is printed.
+- **Largest SHAP coefficient over the conditions (N04).** The highest ICC(1,1) among the SHAP
+  cases over the three estimates (three calls, one call, clean), for the sentence of the
+  abstract that covers them.
+- **Interval of the change in the clean condition (N05).** Difference between the ICC(1,1)
+  of the clean condition and of one call of the primary condition, all cases, per dimension,
+  with a percentile interval from 4,000 bootstrap resamples of the cases (seed 20261004).
+- **Dataset held fixed (N07).** Share of the variance of the case-level mean score between
+  explainers among the Adult cases only.
+
+One call is the first of the three calls, as in section 15.2.
+
+### 16.3 What was run and what it showed (2026-10-04)
+
+- The analyses of 16.2 were run as fixed, after this section's plan was committed
+  (`212b47fb3`). Their values equal the probes of the review.
+- Zero-weight records: 5 LIME, 0 SHAP (Anchors and DiCE print zeros by construction of the
+  rendering and are covered by the caveat of section 15.1). Every judge gave the five LIME
+  records the score 1 for overall quality in every call of the primary condition.
+- ICC(1,1) among the 27 other LIME cases, on the five dimensions that had agreement: -0.13
+  to 0.33 (three calls), -0.14 to 0.29 (one call), -0.21 to 0.13 (clean).
+- SHAP: standard deviation of the case-level mean 0.15 (completeness) and 0.21 (overall
+  quality); same completeness score in 83% of judge pairs; highest ICC(3,1) 0.45; highest
+  ICC(1,1) over the three estimates 0.22.
+- Change of the ICC in the clean condition: audit usefulness -0.23 (-0.32 to -0.15),
+  completeness -0.10 (-0.17 to -0.03), overall quality -0.06 (-0.14 to 0.02).
+- Between explainers among the 96 Adult cases: 40% for completeness (67% over all cases).
+- **Manuscript.** Abstract, resumen, methods, sections 3.2 and 3.5, discussion, limitations
+  and conclusions were rewritten for N01 to N07. The sentence on SHAP and LIME taken together
+  was removed for space. Abstract 248 words, resumen 250; 15 pages in Word.
+- **Literature (F11).** One sentence and two references added to the introduction:
+  XAI-Arena (arXiv:2609.09428) and Haldar and Hockenmaier (Findings of EMNLP 2025). They are
+  marked in `references.bib` as not yet checked by the author. 27 references.
+- **Not done.** The second review was not followed by a third. The Zenodo archive 0.10.0
+  does not hold the code and result files of this section.

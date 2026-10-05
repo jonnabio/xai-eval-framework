@@ -20,6 +20,7 @@
        rsum     results/review_summary.csv                               metric
        cshift   results/clean_shift.csv                                  judge|dimension
        cfid     results/clean_fidelity.csv                               condition|explainer
+       chg      results/clean_icc_change.csv                             dimension
 
    Views and conditions: primary, stated, alt, pooled; in rel, beh and cfid: primary3 (three
    replicates averaged), primary1 (one call), clean. Judges: claude, gemini, gpt.
@@ -77,6 +78,7 @@ SOURCES = {
     "rsum": (C / "results" / "review_summary.csv", ["metric"]),
     "cshift": (C / "results" / "clean_shift.csv", ["judge_model", "dimension"]),
     "cfid": (C / "results" / "clean_fidelity.csv", ["condition", "explainer"]),
+    "chg": (C / "results" / "clean_icc_change.csv", ["dimension"]),
 }
 WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 TOKEN = re.compile(r"<<([a-z]+):([^:<>]+):([a-z_0-9]+):([a-z0-9]+)>>")
