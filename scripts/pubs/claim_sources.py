@@ -31,6 +31,28 @@ EXP2_PAIRED = EXP2_STATS / "paired_cells_shap_lime_all_models.csv"
 EXP4_COHORT2_SCORES = ROOT / "experiments" / "exp4_cohort2" / "parsed_scores" / "exp4_llm_scores.csv"
 REVIEW_AUDIT = ROOT / "docs" / "reports" / "paper_bc" / "second_reviewer_audit_results.csv"
 
+# Paper C result tables and their key columns, as in the SOURCES map of
+# docs/reports/paper_c/scripts/build_paper_c.py (the build that prints the values).
+_PAPER_C_RESULTS = ROOT / "docs" / "reports" / "paper_c" / "results"
+_PAPER_C_TABLES = {
+    "sum": (_PAPER_C_RESULTS / "summary.csv", ["metric"]),
+    "orig": (EXP4_DIR / "icc_analysis.csv", ["dimension"]),
+    "alpha": (EXP4_DIR / "krippendorff_alpha.csv", ["dimension"]),
+    "view": (EXP4_COHORT2_DIR / "cohort2_reliability_by_view.csv", ["dimension", "view"]),
+    "retest": (EXP4_COHORT2_DIR / "cohort2_test_retest.csv", ["prompt_condition", "judge_model"]),
+    "post": (_PAPER_C_RESULTS / "posthoc_scores_vs_metrics.csv",
+             ["explainer", "dimension", "metric"]),
+    "reg": (_PAPER_C_RESULTS / "posthoc_rank_regression.csv", ["dimension", "metric"]),
+    "rel": (_PAPER_C_RESULTS / "reliability_long.csv", ["condition", "scope", "dimension"]),
+    "btw": (_PAPER_C_RESULTS / "variance_between.csv", ["dimension"]),
+    "first": (_PAPER_C_RESULTS / "first_panel_interval.csv", ["dimension"]),
+    "beh": (_PAPER_C_RESULTS / "judge_behaviour.csv", ["judge_model", "condition"]),
+    "rsum": (_PAPER_C_RESULTS / "review_summary.csv", ["metric"]),
+    "cshift": (_PAPER_C_RESULTS / "clean_shift.csv", ["judge_model", "dimension"]),
+    "cfid": (_PAPER_C_RESULTS / "clean_fidelity.csv", ["condition", "explainer"]),
+    "chg": (_PAPER_C_RESULTS / "clean_icc_change.csv", ["dimension"]),
+}
+
 # Model-family groups used by the paired-cell resolvers. "nontree" is the
 # KernelSHAP set the abstract and Tier 1 quote medians for.
 _MODEL_GROUPS = {
@@ -703,5 +725,21 @@ def resolve(expr: str) -> float:
         if not values or op not in ("sum", "min", "max"):
             raise MissingArtifact(f"paper_e cannot evaluate {target} on {table}[{row_filter}]")
         return {"sum": sum, "min": min, "max": max}[op](values)
+
+    if kind == "paper_c":
+        # Paper C (agreement among LLM judges): one cell of a result table, addressed as
+        # the placeholders of paper_c_template.tex address it.
+        #   paper_c:<table>:<key>[|<key>...]:<column>[:x100]
+        # The keys are the values of the table's key columns, in order. x100 turns a
+        # proportion into the percentage that is printed.
+        table, key, column, *scale = args
+        if table not in _PAPER_C_TABLES:
+            raise MissingArtifact(f"paper_c table not known: {table}")
+        path, key_columns = _PAPER_C_TABLES[table]
+        wanted = key.split("|")
+        rows = [r for r in _rows(path) if [r[c] for c in key_columns] == wanted]
+        if len(rows) != 1 or rows[0].get(column, "") == "":
+            raise MissingArtifact(f"paper_c {table}[{key}].{column}: {len(rows)} row(s) with a value")
+        return float(rows[0][column]) * (100.0 if scale == ["x100"] else 1.0)
 
     raise MissingArtifact(f"unknown source expression: {expr}")

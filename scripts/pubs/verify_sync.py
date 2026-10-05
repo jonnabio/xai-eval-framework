@@ -36,8 +36,8 @@ def main() -> int:
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
         "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_cleiej.tex",
         "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
-        # Paper C is being rebuilt in docs/reports/paper_c/ (ADR-0022, amendment);
-        # add its manuscript here when it exists.
+        # Paper C is rendered from a template with placeholders, so it cannot \input
+        # its abstract; its fragments are compared with the manuscript text below.
     }
     for paper_id, path in papers.items():
         text = _read(path)
@@ -52,6 +52,19 @@ def main() -> int:
                 inc = f"\\input{{../../../pub/fragments/{paper_id}_{frag}.tex}}"
                 if inc not in text:
                     problems.append(f"Missing Spanish include in {path}: {inc}")
+
+    # Paper C: the fragments are written from paper_c.tex by register_paper_c.py, so
+    # each must still be the text the manuscript prints.
+    paper_c = " ".join(_read(ROOT / "docs" / "reports" / "paper_c" / "paper_c.tex").split())
+    for frag in ("abstract_en", "keywords_en", "resumen_es", "palabras_clave_es"):
+        path = ROOT / "pub" / "fragments" / f"paper_c_{frag}.tex"
+        if not path.exists():
+            problems.append(f"Missing generated fragment: {path}")
+        elif " ".join(_read(path).split("\n", 1)[1].split()) not in paper_c:
+            problems.append(
+                f"{path} is not the text of paper_c.tex; run scripts/pubs/register_paper_c.py "
+                "and scripts/pubs/generate_fragments.py"
+            )
 
     fragments = [
         ROOT / "pub" / "fragments" / "thesis_resumen_es.qmd",
