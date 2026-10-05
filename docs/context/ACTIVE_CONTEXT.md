@@ -32,6 +32,30 @@ taxonomy. The combined manuscript is not counted as a current paper submission.
 This is the latest handoff. It concerns Paper F only; the Paper C handoff below is
 unchanged and still current for Papers B, C, D and E.
 
+**Update, same day (later session step); it supersedes the items on pull requests and
+cleanup below:**
+
+- The author asked for the merges: **#32 and #34 are merged** (`main` at `004b20fcb`).
+  `git worktree prune` was run (`../xai-chapter` and `../xai-paper-e` entries removed) and
+  the branches `pubs/paper-f-lane` and `pubs/paper-f-lane-clean` were deleted, locally and
+  on origin.
+- **Pull request #35** is open for `paper/f-external-validity`: the lane files, and a
+  design proposal with its simulation. Not merged; the author has not asked for it.
+- **Author decisions (2026-10-05):** more datasets are accepted if the statistics need
+  them; the Adult baseline of Paper F is a new run; the venue will be given later.
+- **`docs/reports/paper_f/DESIGN_PROPOSAL.md`** (Scientific Advisor, a proposal; the plan
+  is not changed): 16 datasets chosen by a fixed rule (floor 12), 200 instances by
+  predicted class, four models, ranking only on the metrics defined for the four
+  explainers, mean rank correlation between datasets as the primary quantity, and an
+  estimate of about 585 processor hours (about three days on the laptop). Its section 7
+  lists seven decisions for the author.
+- `scripts/paper_f_power_simulation.py` and `outputs/analysis/paper_f/power_simulation.csv`:
+  a simulation with no data. With four explainers, four datasets detect a true rank
+  correlation of 0.5 half of the time; twelve detect it almost always.
+- **Next:** the author answers section 7 of the proposal; then the approved points are
+  written into `ANALYSIS_PLAN.md` (section 12 and the sections it names) before any
+  dataset is loaded. The loader and the two metric changes are shared code (`pubs/*`).
+
 - **Completed**:
   - **The Paper F lane could not be claimed.** `scripts/pubs/lanes.toml` named
     `../xai-paper-f`, a folder missing from disk since 2026-10-04. The lane now names the

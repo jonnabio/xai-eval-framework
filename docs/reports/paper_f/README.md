@@ -1,7 +1,8 @@
 # Paper F — External Validity of XAI Benchmark Conclusions
 
 **Working Title:** *To What Extent Do Comparative Conclusions About Model-Agnostic Explanation Methods Generalize Across Tabular Datasets?*  
-**Status (2026-10-03):** Analytical framework initiated. Pre-analysis framework and methodological appraisal established prior to dataset commitment or experimental execution. No empirical results have been generated.
+**Status (2026-10-03):** Analytical framework initiated. Pre-analysis framework and methodological appraisal established prior to dataset commitment or experimental execution. No empirical results have been generated.  
+**Status (2026-10-05):** Unchanged. Lane set up in the main folder (section 7). No venue is selected and the datasets B, C and D are not chosen. Section 4 below describes the other papers as of 2026-10-03; since then Paper B+C was split into Paper B (*CLEI Electronic Journal*) and Paper C (*Tecnología en Marcha*). The current status of every paper is in `docs/context/ACTIVE_CONTEXT.md`.
 
 ---
 
@@ -93,6 +94,47 @@ Paper F occupies a dedicated, unconfounded niche within the overarching research
 
 ## 6. Directory Map & Associated Artifacts
 
-- [`README.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/README.md) — This charter document.
-- [`ANALYSIS_PLAN.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/ANALYSIS_PLAN.md) — Pre-analysis protocol locking hypotheses, metric formalizations, statistical procedures, and acceptance criteria.
-- [`METHODOLOGICAL_ANALYSIS.md`](file:///c:/Users/jonna/Github/xai-eval-framework/docs/reports/paper_f/METHODOLOGICAL_ANALYSIS.md) — Rigorous scientific appraisal of research challenges, algorithmic sensitivities, dataset selection archetypes, and threats to validity.
+- [`README.md`](README.md) — This charter document.
+- [`ANALYSIS_PLAN.md`](ANALYSIS_PLAN.md) — Pre-analysis protocol locking hypotheses, metric formalizations, statistical procedures, and acceptance criteria.
+- [`DESIGN_PROPOSAL.md`](DESIGN_PROPOSAL.md) — Scientific Advisor's proposal of 2026-10-05 (number and choice of datasets, metrics, analysis, cost of the run). A proposal: it does not change the plan until the author approves it.
+- [`METHODOLOGICAL_ANALYSIS.md`](METHODOLOGICAL_ANALYSIS.md) — Rigorous scientific appraisal of research challenges, algorithmic sensitivities, dataset selection archetypes, and threats to validity.
+
+---
+
+## 7. Lane and Working Rules (added 2026-10-05)
+
+Paper F is lane `paper-f` of `scripts/pubs/lanes.toml` (ADR-0021, amendment of 2026-10-05).
+
+| Item | Value |
+|---|---|
+| Folder | the main folder, `xai-eval-framework` (there is no `../xai-paper-f`) |
+| Branch | `paper/f-external-validity` (any `paper/f-*`) |
+| Session start | `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails |
+| Session end | `python scripts/pubs/check_lane.py release --owner <same name>` |
+
+**Paths the lane owns** (everything else is shared and reaches `main` in its own commit, by pull request):
+
+| Path | Use |
+|---|---|
+| `docs/reports/paper_f/**` | plan, manuscript source, figures, result tables, build scripts; `submission/` is git-ignored |
+| `outputs/analysis/paper_f/**` | analysis artifacts written by the Paper F scripts |
+| `scripts/paper_f_*` | generators and analysis scripts (analysis plan, section 11.3) |
+| `tests/analysis/test_paper_f_*` | their tests |
+| `docs/planning/paper_f_*` | planning notes |
+
+**Rules that apply before any result exists:**
+
+1. **Plan first.** The datasets B, C and D, and every choice the plan leaves open, are fixed in
+   `ANALYSIS_PLAN.md` (section 12, dated) and committed before the code that depends on them runs.
+2. **New runs are new cohorts** (RCA-002). Paper F runs write to `outputs/analysis/paper_f/` or
+   to their own experiment directory. They never overwrite the stored EXP2, EXP3 or EXP4 results.
+3. **No result of another paper is printed.** Paper A is published; Papers B, C, D and E are
+   submitted or ready. A number that one of them reports cannot be reported again here
+   (RCA-001). The Adult baseline of Paper F is either a new run or a cited result.
+4. **Shared code goes through `main`.** A change to `src/**`, to a runner another paper uses
+   (for example `scripts/run_exp3_lime.py`) or to `src/data_loading/cross_dataset.py` is a
+   shared commit on a `pubs/*` branch, not a lane commit.
+5. **Numbers come from files.** When a manuscript exists, its numbers are filled from result
+   files by a build script and registered in `pub/claim_registry.toml` (`[coverage]`,
+   `[exclusivity]`, a `paper_f` resolver) before submission, as for Papers C, D and E.
+6. **Every figure has a committed generator.**
