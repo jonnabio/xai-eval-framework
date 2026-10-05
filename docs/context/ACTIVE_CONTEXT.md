@@ -41,9 +41,9 @@ detail of the lane setup.
     score rises with the fidelity value shown in the prompt (Spearman 0.35 to 0.59, all four
     significant after Holm over 20 tests); results in `docs/reports/paper_c/results/`.
   - **First draft built:** `paper_c_template.tex` (source), generated `paper_c.tex`,
-    `scripts/build_paper_c.py` (render, PDF, Word, blind and full). Title "Can LLM judges
-    score explanations reliably? Agreement among three judges in two panels on 192 post-hoc
-    explanations". 12 pages measured in Word, abstract 244 and resumen 248 words, 4 tables,
+    `scripts/build_paper_c.py` (render, PDF, Word, blind and full). Title, set by the
+    author: "Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability
+    Study"; it is not changed without the author's approval. 12 pages measured in Word, abstract 244 and resumen 248 words, 4 tables,
     1 figure, 25 references. Identity scan of the blind files clean except the citation of
     the RIMI article, as in Paper D.
 - **Current State**
