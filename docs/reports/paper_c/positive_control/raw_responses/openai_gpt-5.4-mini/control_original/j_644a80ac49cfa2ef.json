@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_644a80ac49cfa2ef",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_e9eba60d9edc4d8a_78be1c3f9a6dbce4.txt",
+  "prompt_version": "78be1c3f9a6dbce4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206175-Kyj0leQPmsulMiARfXlo",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029085,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.0029085,
+        "upstream_inference_prompt_cost": 0.000708
+      },
+      "is_byok": false,
+      "prompt_tokens": 944,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1433
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but does not translate them into concrete, feasible actions a user could take to change or review the prediction. It offers no recourse guidance or decision threshold context.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals the top local SHAP drivers and their directions, which helps inspect whether the model relies on clinically relevant measurements. However, it lacks feature values, baseline reference, and broader comparison context, so audit value is only partial.\",\n    \"clarity\": \"The output is easy to parse for a technically literate reader, with a simple ranked list of features and signed contributions. For a non-expert, the SHAP sign convention and magnitude meaning are not explained, so clarity is only moderate.\",\n    \"completeness\": \"It provides the main local drivers of the prediction, but not the actual feature values, the predicted class meaning, or how much each factor shifts the probability from baseline. That makes the specific decision only partially understandable.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, conveying a useful ranking in a small number of tokens. It is efficient, though slightly dense because the numbers are presented without interpretation.\",\n    \"overall_quality\": \"This is a reasonably good local explanation for model inspection because it identifies the strongest contributing features and their directions. Its main weaknesses are the lack of interpretive context and the absence of actionable or instance-specific detail.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for a breast cancer model, since area, perimeter, radius, concavity, and texture are common and medically relevant predictors. The mix of positive and negative contributions is also consistent with a SHAP explanation for an XGBoost classifier.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:18.050246+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0248bdc05c62cfa2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_aa1ea16859fa26f1_f62e3730477da836.txt",
+  "prompt_version": "f62e3730477da836",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206331-63cqWX4OHkMOeNPfZIOV",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003003,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002295,
+        "upstream_inference_cost": 0.003003,
+        "upstream_inference_prompt_cost": 0.000708
+      },
+      "is_byok": false,
+      "prompt_tokens": 944,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1454
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists contributing features and does not suggest any concrete recourse or next steps the user could take. It is therefore not useful for decision revision or actionable guidance.\",\n    \"audit_usefulness\": \"It provides local feature contributions that are helpful for a quick sanity check of the model, but the small coefficients and lack of direction context make deeper audit analysis limited. There is no comparison baseline, feature values, or confidence information to support stronger investigation.\",\n    \"clarity\": \"The output is easy to read because it is a short ranked list of features with signed contributions. However, a non-expert may not understand the meaning of the numeric weights or why some features appear with both positive and negative signs.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, including marital status, occupation, education, sex, and a few numeric variables. Still, it omits actual feature values, the base prediction score, and a fuller explanation of how these factors combine to produce class 1.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information with little redundancy. It is slightly cluttered by listing both mutually related marital-status indicators, but overall the length is appropriate.\",\n    \"overall_quality\": \"This is a reasonably good LIME summary for a tabular prediction, but it remains shallow and somewhat opaque for a non-technical user. It is useful as a local feature snapshot, yet insufficient for strong understanding, recourse, or thorough auditing.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income-style logreg model, and the presence of education, marital status, occupation, age, and hours worked is domain-consistent. The mixed positive and negative small coefficients also fit a linear local explanation, although the close presence of redundant marital-status terms slightly reduces neatness.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:54.384225+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6b40a49cb3d95196",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_4e230a6771152fb2_26623fd9694d4444.txt",
+  "prompt_version": "26623fd9694d4444",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206258-BN5Vi6ybDB0oY2jbum4c",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00275925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020475,
+        "upstream_inference_cost": 0.00275925,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1404
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps for the person affected. It lists feature contributions only, without indicating what could be changed to influence the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows which local features pushed the prediction up or down. However, the tiny coefficient magnitudes and lack of baseline or probability context limit how much model behavior can be inspected from it.\",\n    \"clarity\": \"The output is easy to read for a non-expert because it uses a short ranked list of feature names and signed contributions. Some feature names are technical, but the overall structure is straightforward.\",\n    \"completeness\": \"The explanation covers several local drivers, but it does not provide the predicted class confidence, a baseline value, or the actual direction in an intuitive way. It also omits any broader context for why these factors matter for this specific prediction.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. It presents the top local factors in a terse format that is efficient given the limited information provided.\",\n    \"overall_quality\": \"This is a reasonable LIME explanation for a tabular prediction, but it is limited by the lack of context and interpretability of very small weights. It is useful as a quick local summary, yet not strong enough for deep understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and consistent with a logistic regression explanation. The signs and feature types look coherent, even though the contribution magnitudes are very small.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:40.347425+00:00"
+}

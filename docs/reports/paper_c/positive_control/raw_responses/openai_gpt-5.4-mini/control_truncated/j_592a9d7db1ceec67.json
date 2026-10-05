@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_592a9d7db1ceec67",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_2a3f635ae972c4ad_23e9f1e1ade2d057.txt",
+  "prompt_version": "23e9f1e1ade2d057",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206199-fW0jSqSoIM2YU6JLvWS3",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00269325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020385,
+        "upstream_inference_cost": 0.00269325,
+        "upstream_inference_prompt_cost": 0.00065475
+      },
+      "is_byok": false,
+      "prompt_tokens": 873,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1326
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few contributing features, but it does not tell the user what could be changed or what next step to take. It supports awareness rather than recourse.\",\n    \"audit_usefulness\": \"It is useful at a basic level because it exposes the top local drivers and their signs, which helps inspect why the model predicted class 0. However, it lacks enough detail about feature values, baseline, or broader context for deeper debugging.\",\n    \"clarity\": \"The wording is short and easy to read, and the feature names are familiar enough for a tabular-data audience. A non-expert may still need to know what the positive coefficients mean, but the overall structure is clear.\",\n    \"completeness\": \"It provides only the top three local factors and omits the actual feature values, the remaining influential variables, and any contrastive explanation for why class 0 was chosen. This gives a partial but not full local decision picture.\",\n    \"concision\": \"The explanation is very compact and avoids unnecessary detail while still listing the main contributors. It is efficient, though somewhat sparse.\",\n    \"overall_quality\": \"This is a good short LIME summary for a logistic regression model: readable, compact, and locally relevant. Its main weakness is limited depth, so it is helpful but not fully sufficient for understanding or action.\",\n    \"semantic_plausibility\": \"For the Adult dataset, capital gain, education number, and marital status are plausible drivers of income-related predictions. Their appearance as top local factors is consistent with common domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:41.816736+00:00"
+}

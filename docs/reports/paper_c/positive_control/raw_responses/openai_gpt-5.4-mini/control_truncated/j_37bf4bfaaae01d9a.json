@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a6bb167d1c81d8a5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_37bf4bfaaae01d9a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_a6bb167d1c81d8a5_81458e839a30256c.txt",
+  "prompt_version": "81458e839a30256c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206361-UPj31Fw2GOrWLCt6CXP1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00271875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002061,
+        "upstream_inference_cost": 0.00271875,
+        "upstream_inference_prompt_cost": 0.00065775
+      },
+      "is_byok": false,
+      "prompt_tokens": 877,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1335
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a6bb167d1c81d8a5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing contributing features. A clinician or user cannot tell what to change or check from this output alone.\",\n    \"audit_usefulness\": \"It identifies three local SHAP factors with signed contributions, which is useful for a quick model inspection. However, it lacks magnitude context, baseline comparison, and broader feature coverage needed for strong auditing.\",\n    \"clarity\": \"The wording is short and easy to read, and the feature names are standard for this dataset. Still, a non-expert may not know what the signs mean without a brief explanation of SHAP values.\",\n    \"completeness\": \"It covers only the top three local factors and omits the rest of the decision context, such as the base value, prediction probability, and how these contributions combine to yield class 1. That is enough to hint at the decision, but not enough to fully understand it.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy. It communicates the essential local factors in few words, though at the cost of limited detail.\",\n    \"overall_quality\": \"This is a concise and plausible local explanation, but it is only moderately informative because it provides minimal context and no actionable guidance. It is useful as a quick summary rather than a fully interpretable decision explanation.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and mixed positive/negative SHAP effects are consistent with a random forest explanation on this dataset. The sign pattern is plausible, even though the explanation does not specify the class semantics.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:24.099025+00:00"
+}

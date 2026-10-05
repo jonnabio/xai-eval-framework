@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_904024ec62bb030d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_b352dc7c29edc22c_ab58081502e294fb.txt",
+  "prompt_version": "ab58081502e294fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206208-Q7POXRHKfBa2lfcAHrVa",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029415,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002223,
+        "upstream_inference_cost": 0.0029415,
+        "upstream_inference_prompt_cost": 0.0007185
+      },
+      "is_byok": false,
+      "prompt_tokens": 958,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1452
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the feature attributions into any concrete recourse or decision-review steps. A user cannot tell what changes, if any, could move the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it shows the strongest local SHAP contributors and their directions, which can help inspect whether the model is relying on sensible cues. However, it lacks the base value, probability scale, and enough context to fully diagnose errors or bias.\",\n    \"clarity\": \"The wording is compact and the sign of each SHAP value is easy to read, but the meaning of the encoded one-hot features may be opaque to non-experts. Understanding why both positive and negative country or marital-status indicators appear requires some familiarity with tabular encodings.\",\n    \"completeness\": \"It covers several top local drivers, but it does not explain the overall prediction magnitude, baseline, or how the listed contributions combine into class 1. Important instance context such as the original feature values is also missing.\",\n    \"concision\": \"The explanation is concise and information-dense, listing only the top local factors without extra prose. It communicates the essentials efficiently, though at the cost of interpretive context.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for a local explanation in a tabular model, but it is not fully self-explanatory or actionable. It supports partial understanding of the prediction and some auditing, yet lacks enough contextual framing for a strong explanation.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset and a logistic regression model, with marital status, occupation, sex, and country all being realistic predictors. The mixture of positive and negative contributions is also consistent with a local linear explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:50.607848+00:00"
+}

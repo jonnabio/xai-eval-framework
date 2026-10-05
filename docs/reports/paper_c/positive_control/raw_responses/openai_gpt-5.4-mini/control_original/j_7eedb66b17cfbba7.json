@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7eedb66b17cfbba7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_4440b587017f192b_45fa0279d318239b.txt",
+  "prompt_version": "45fa0279d318239b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206304-G9ur6AWhSPWghzQa3MYS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.00295725,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1448
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential features, but it does not translate them into specific recourse steps or indicate what could be changed to alter the prediction. A user cannot easily act on it beyond knowing which variables mattered.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the local SHAP ranking and signed contributions, allowing inspection of which variables pushed the prediction up or down. However, it lacks baseline values, magnitude context, and comparison to similar cases, so investigation is only partial.\",\n    \"clarity\": \"The output is short and structured, and a non-expert can recognize that the listed features influenced the decision. Still, the sign convention and whether positive values support class 1 or class 0 are not explained, which limits clarity.\",\n    \"completeness\": \"It covers several major local drivers, including credit amount, duration, checking status, and residence length. Nevertheless, it omits the model output probability, the reference class meaning of SHAP signs, and any threshold context needed to fully understand the specific prediction.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with each feature and contribution presented in a terse list. It gives a useful amount of information for the length.\",\n    \"overall_quality\": \"This is a reasonably good local explanation: it is compact, plausible, and informative about feature influence. Its main weaknesses are the lack of interpretive context for the SHAP values and the absence of actionable guidance.\",\n    \"semantic_plausibility\": \"The listed factors fit the German credit domain well, since credit amount, duration, checking status, savings, age, and prior credit history are all plausible drivers of lending decisions. The directionality is also generally believable for a credit-risk model, though not fully interpretable without class mapping.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:26.940311+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d99b5128143f959a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_f75792557c566daf_a57af73caf4bae84.txt",
+  "prompt_version": "a57af73caf4bae84",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206197-2KN7vitGZhyJsddU5481",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003668,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00265,
+        "upstream_inference_cost": 0.003668,
+        "upstream_inference_prompt_cost": 0.001018
+      },
+      "is_byok": false,
+      "prompt_tokens": 1018,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1548
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to interpret them or what actions a clinician or patient could take based on these texture and concavity measurements. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The explanation lists SHAP values for three features with their magnitudes, which supports model transparency and allows auditors to verify feature importance rankings. However, it lacks information about feature directions, baseline values, or model behavior patterns needed for comprehensive bias investigation.\",\n    \"clarity\": \"The explanation is concise and uses standard terminology (SHAP, feature names, numerical values) that is clear to readers familiar with machine learning but may be opaque to non-technical stakeholders unfamiliar with SHAP methodology or medical imaging features.\",\n    \"completeness\": \"Only three features are presented without context on their actual values for this instance, the model's base prediction rate, or whether other features were considered but ranked lower. The explanation covers main drivers but omits critical local decision context.\",\n    \"concision\": \"The explanation is maximally compact, presenting only essential information (method, three top features, and their SHAP values) with no redundancy or padding.\",\n    \"overall_quality\": \"The explanation provides valid SHAP-based feature importance but lacks depth in actionability, instance-specific context, and accessibility for non-expert users. It serves narrow technical audit purposes but falls short of supporting broader decision-making or clinical interpretation.\",\n    \"semantic_plausibility\": \"Texture and concavity are established diagnostic features in breast cancer classification, and their identification as top drivers is consistent with domain knowledge. The SHAP values are plausible magnitudes for a random forest model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:42.019028+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b168d0ab73784973",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bdf1c5f0785fc432",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_b168d0ab73784973_1d80aabdb09619f7.txt",
+  "prompt_version": "1d80aabdb09619f7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206175-dTwdkk4qxKwwjtz43IlY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 444,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00270825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001998,
+        "upstream_inference_cost": 0.00270825,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1391
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b168d0ab73784973\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or advice the user could act on. It only lists feature contributions, so it is not directly actionable.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals which features pushed the prediction up or down and by how much. However, it lacks enough context about baseline, feature values, and class meaning to fully support deeper error or bias analysis.\",\n    \"clarity\": \"The list of SHAP factors is straightforward for a technical reader, but the meaning of positive versus negative values is not explained. A non-expert may understand the ranking but not the implications for the prediction.\",\n    \"completeness\": \"It covers the top local drivers of the prediction, but it omits the actual feature values and the predicted class semantics. Without those, the user cannot fully reconstruct why this specific case was classified as 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, presenting only the highest-impact local factors. It delivers useful information in relatively few words.\",\n    \"overall_quality\": \"This is a reasonably good local explanation for a tabular model because it is concise and exposes the main contributing features. Its usefulness is limited by the lack of contextual interpretation and actionable guidance.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for the German Credit domain, where checking status, savings, purpose, credit history, age, duration, and credit amount commonly influence risk. The directionality also looks consistent with a credit-risk model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:18.152508+00:00"
+}

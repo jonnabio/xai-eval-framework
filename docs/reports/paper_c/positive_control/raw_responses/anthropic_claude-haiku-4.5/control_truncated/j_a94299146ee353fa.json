@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a94299146ee353fa",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_be3a619c28fb15c4_27133fe2a4cd3dda.txt",
+  "prompt_version": "27133fe2a4cd3dda",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206431-AWO6e7nN9MPA5Q0eF6lB",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 435,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003195,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002175,
+        "upstream_inference_cost": 0.003195,
+        "upstream_inference_prompt_cost": 0.00102
+      },
+      "is_byok": false,
+      "prompt_tokens": 1020,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1455
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative contributions to the prediction but provides no guidance on what actions could be taken or how feature values might be modified to change the outcome.\",\n    \"audit_usefulness\": \"The explanation shows specific feature contributions with numerical weights, enabling an auditor to inspect which features drove the prediction and their relative importance for this instance.\",\n    \"clarity\": \"The format is straightforward and uses standard notation (feature: weight) that is readily interpretable, though domain knowledge of the adult dataset features helps contextualize the meaning.\",\n    \"completeness\": \"Only three features are presented; without knowing the full feature set or baseline prediction, it is unclear whether these represent the complete decision context or merely the top contributors.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format appropriate for a local explanation.\",\n    \"overall_quality\": \"The explanation provides useful local feature attribution data suitable for model inspection, but lacks actionability and does not fully contextualize the prediction within the broader decision landscape.\",\n    \"semantic_plausibility\": \"The negative weights on education level and missing values are plausible for a binary classification task, though without domain context (e.g., predicting income) the semantic coherence cannot be fully verified.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:35.403598+00:00"
+}

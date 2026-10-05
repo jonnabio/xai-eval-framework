@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_10c5bf7c9d358dab",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_75520768088e5528_498b3d530e023f81.txt",
+  "prompt_version": "498b3d530e023f81",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206261-ZfPqDGnW1TOB2MTdPmXr",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00366,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002555,
+        "upstream_inference_cost": 0.00366,
+        "upstream_inference_prompt_cost": 0.001105
+      },
+      "is_byok": false,
+      "prompt_tokens": 1105,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1616
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve outcomes. Without knowing the instance values or direction of desired change, a user cannot formulate concrete next steps.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings effectively support model behavior inspection and help identify which features drive this specific prediction. An auditor can use this to investigate potential biases or unexpected patterns in the model's decision logic.\",\n    \"clarity\": \"The format is straightforward and uses standard SHAP notation with feature names and numerical contributions that are easy to parse. However, non-experts may not immediately understand what positive/negative values mean or how they combine to produce the prediction.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which likely represents the main drivers for this prediction. However, it lacks the base value and actual instance feature values, limiting full understanding of the local decision context.\",\n    \"concision\": \"The explanation is compact and efficiently presents ranked features with their contributions without redundancy. Each entry conveys both the feature identity and its quantitative impact in minimal space.\",\n    \"overall_quality\": \"The explanation is a competent SHAP output that serves audit and model inspection purposes well, but falls short on actionability and user accessibility due to missing context and lack of interpretive guidance for non-experts.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for an income prediction task (occupation, relationship status, hours worked, education are all relevant), and the magnitude and direction of effects align with domain expectations for the adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:46.117654+00:00"
+}

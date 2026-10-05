@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_326182ca45859ad8",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_e475cad54cb8d814_06faceffe3a3dcc2.txt",
+  "prompt_version": "06faceffe3a3dcc2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206250-ZvyEFbt44ZTUnaIkv3Og",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002907,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.002907,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1426
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model output into any concrete recourse or next steps for a user. It only lists feature attributions, so a non-technical stakeholder cannot use it to decide what to change or review.\",\n    \"audit_usefulness\": \"The SHAP values are useful for inspecting which features pushed the prediction up or down, especially the relative importance of local drivers. However, it lacks the baseline, units, and feature values, so it only partially supports deeper audit or bias analysis.\",\n    \"clarity\": \"The output is concise and the sign of each contribution is easy to read, but the meaning of the numbers is not explained. A non-expert may not know whether positive values support class 1 or how to interpret their magnitude.\",\n    \"completeness\": \"It captures several top local factors, which helps explain the prediction at a high level. Still, it omits the actual feature values, the reference value, and any class-level framing, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and uses the token budget efficiently by listing only the top local factors. It avoids redundant prose, though the raw feature list could have been slightly better organized for readability.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for a tabular model, giving a compact view of the main local drivers. Its usefulness is limited by the lack of contextual details and interpretive guidance, so it is informative but not fully satisfying.\",\n    \"semantic_plausibility\": \"For a breast cancer classifier, features like concave points, concavity, texture, perimeter, and radius are highly plausible drivers. The mix of positive and negative local contributions is also consistent with a sensible SHAP explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:33.302512+00:00"
+}

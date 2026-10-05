@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f8f8d5bdb42c69d0",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_44c1e011120b2dd5_3337aff7985c1791.txt",
+  "prompt_version": "3337aff7985c1791",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206244-hRx4GQm9AQE6U5K4kTHn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00276075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00276075,
+        "upstream_inference_prompt_cost": 0.00065475
+      },
+      "is_byok": false,
+      "prompt_tokens": 873,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1341
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features contributed most to the prediction, but it does not translate them into specific recourse or next steps. A user cannot tell what changes would move the prediction in the other direction.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it shows the top contributing features and their directions. However, it lacks enough detail about baseline values, interaction effects, or the full feature set to thoroughly inspect model behavior.\",\n    \"clarity\": \"The wording is short and easy to read, and the feature names are familiar enough for a tabular medical dataset. A non-expert can understand that larger values of these measurements influenced the model, though the negative SHAP signs still require some interpretation.\",\n    \"completeness\": \"The explanation gives the top three local drivers, which covers the main factors behind the decision at a high level. It does not provide the prediction class meaning, feature values for the instance, or how strongly these factors outweighed others.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy while still conveying the key local contributors. It delivers useful information in few words.\",\n    \"overall_quality\": \"This is a concise and plausible SHAP summary that gives a reasonable local view of the prediction. It is useful as a quick explanation, but it is too sparse to fully support recourse or deep model inspection.\",\n    \"semantic_plausibility\": \"For the breast cancer dataset, radius, perimeter, and area are highly plausible predictors and commonly important features. The fact that they are listed as top local factors is consistent with domain expectations and with a random forest model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:27.159964+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_4ab626877f25bfc0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_902d690264149a09_8a0abfbb316aa960.txt",
+  "prompt_version": "8a0abfbb316aa960",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206546-ZyqZeOJtZQtAbyFRTDDw",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 772,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0053685,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00456375,
+        "upstream_inference_cost": 0.0053685,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2290
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution weights without any actionable guidance, thresholds, or feasible recourse steps for the individual.\",\n    \"audit_usefulness\": \"It provides the top 10 local SHAP attributions, which lets an auditor see which features (including protected attributes like sex and marital status) influenced the model, though the absence of original feature values and baseline values limits deeper inspection.\",\n    \"clarity\": \"The explanation is presented as a dense, semi-colon-delimited list of one-hot encoded technical feature names and floating-point values, which is difficult for non-expert readers to interpret.\",\n    \"completeness\": \"While it displays ten leading attributions, it omits the base value, prediction probability, and the actual feature values of the instance being evaluated.\",\n    \"concision\": \"The text is concise and free of unnecessary conversational filler, presenting the attribution data in a compact format.\",\n    \"overall_quality\": \"The explanation offers a basic mathematical attribution summary for technical users, but suffers from low readability, lack of feature value context, and zero actionable guidance.\",\n    \"semantic_plausibility\": \"The highlighted features such as marital status, education, and hours worked are plausible drivers of income, though seeing multiple one-hot categories of the same feature without instance values can appear counterintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:22:35.973495+00:00"
+}

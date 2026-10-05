@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f5fe77ce80b3018f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_b352dc7c29edc22c_76c099298e4882a7.txt",
+  "prompt_version": "76c099298e4882a7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206215-zrgBGtFGWDMzR6f6o7Ye",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002802,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.002802,
+        "upstream_inference_prompt_cost": 0.0007185
+      },
+      "is_byok": false,
+      "prompt_tokens": 958,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1421
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies several influential features, but it does not translate them into concrete recourse or decision steps. A user cannot tell what changes would likely alter the prediction.\",\n    \"audit_usefulness\": \"The ranked SHAP values provide useful local insight into which features pushed the logreg model toward class 1 or away from it. However, the sign pattern is only moderately informative without the prediction baseline, feature values, or comparison across similar cases.\",\n    \"clarity\": \"The list format is easy to scan and the feature names are understandable for a general reader familiar with tabular outputs. Some terms are still technical, but the explanation is mostly clear.\",\n    \"completeness\": \"It covers the top local contributors, including both positive and negative factors, which helps explain the prediction direction. Still, it lacks the base value, the instance's actual feature values, and a clearer separation of strongest supporting versus opposing evidence.\",\n    \"concision\": \"The explanation is compact and largely free of redundancy, giving ten key feature contributions in a small space. It is informative per word, though a slightly more selective top-k list could improve density further.\",\n    \"overall_quality\": \"This is a decent local explanation with a clear ranked summary of influential features, but it is limited by missing context and weak support for recourse or deeper audit. Overall it is useful but not comprehensive.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset and align with expected associations such as marital status, occupation, and relationship. The direction of several contributions also looks reasonable for a logistic regression SHAP explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:57.900056+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_44c1e011120b2dd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6fab7b0e7ab807e2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_44c1e011120b2dd5_3337aff7985c1791.txt",
+  "prompt_version": "3337aff7985c1791",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206281-QzHj8C46EOzBprsF1aad",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003311,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00229,
+        "upstream_inference_cost": 0.003311,
+        "upstream_inference_prompt_cost": 0.001021
+      },
+      "is_byok": false,
+      "prompt_tokens": 1021,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1479
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_44c1e011120b2dd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative SHAP values for morphological features but provides no guidance on what actions could be taken or how to interpret these values in clinical or operational terms.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features drove the prediction and their relative importance through SHAP values, enabling an auditor to inspect model behavior and verify consistency with domain expectations.\",\n    \"clarity\": \"The explanation is well-organized and uses standard terminology (SHAP, feature names, numerical values) that is accessible to readers with basic machine learning knowledge, though non-experts may need brief context on SHAP values.\",\n    \"completeness\": \"The explanation covers the top three contributing features with their SHAP values, which likely represent the main local decision drivers for this binary classification prediction.\",\n    \"concision\": \"The explanation is highly compact, presenting three features with their SHAP contributions in minimal space without redundancy or padding.\",\n    \"overall_quality\": \"The explanation is technically sound and informative for model inspection, but lacks actionability and domain-specific interpretation that would make it fully useful for clinical or operational decision-making.\",\n    \"semantic_plausibility\": \"The negative SHAP contributions for tumor size measurements (radius, perimeter, area) predicting class 0 is plausible in a breast cancer context where smaller measurements typically indicate lower malignancy risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 4,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:05.435821+00:00"
+}

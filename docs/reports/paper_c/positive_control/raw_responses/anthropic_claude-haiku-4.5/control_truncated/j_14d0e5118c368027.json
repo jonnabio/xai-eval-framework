@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_14d0e5118c368027",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_60730b2d1280bac2_e320d3f1f094fa8d.txt",
+  "prompt_version": "e320d3f1f094fa8d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206226-ntdBKLIUsp2TOlnl5Rb1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003563,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00254,
+        "upstream_inference_cost": 0.003563,
+        "upstream_inference_prompt_cost": 0.001023
+      },
+      "is_byok": false,
+      "prompt_tokens": 1023,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1531
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to interpret them or what actions could be taken to change the prediction. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The explanation lists the top three features with their LIME weights, which supports basic model inspection and comparison across instances. However, it lacks information about feature values, direction of influence, or model decision boundaries needed for thorough bias investigation.\",\n    \"clarity\": \"The format is straightforward and uses standard notation (feature_value: weight) that is accessible to readers with basic ML familiarity. However, the meaning of the weights and their interpretation could be clearer for non-experts.\",\n    \"completeness\": \"Only three features are presented without their actual values, baseline comparisons, or information about whether these are the only meaningful drivers. The explanation lacks context about the instance's feature values and the model's decision threshold.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format. However, the brevity comes at the cost of completeness and interpretability.\",\n    \"overall_quality\": \"The explanation provides a minimal but valid LIME output showing top feature contributions, yet it lacks sufficient context, actionability, and detail to be truly useful for most stakeholders. It represents a basic but incomplete explanation.\",\n    \"semantic_plausibility\": \"For the adult income dataset, self-employment income, executive-managerial occupation, and capital gains are plausible predictors of high income (prediction=1). The features align well with domain expectations for income prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:13.555587+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d87121b80c200172",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_b11abd9ec480a4aa_59836aafb8240915.txt",
+  "prompt_version": "59836aafb8240915",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206371-hqEC5uK08lwDgEvw1aJO",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1286,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 885,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00562275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0048225,
+        "upstream_inference_cost": 0.00562275,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2353
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature weights without any counterfactual guidance or practical recourse options for the individual.\",\n    \"audit_usefulness\": \"While the directional weights provide some insight into the model's reliance on demographic and occupational features, the omission of the instance's actual feature values restricts thorough auditing.\",\n    \"clarity\": \"The explanation is presented as a raw list of one-hot encoded feature names and numeric weights, which requires technical familiarity with ML pipelines to interpret.\",\n    \"completeness\": \"It provides the top 10 local feature contributions, but misses the prediction baseline, model confidence, and the actual observed values of the individual.\",\n    \"concision\": \"The text is very compact and avoids unnecessary prose, presenting the key attributions directly.\",\n    \"overall_quality\": \"This is a basic raw feature attribution dump that is plausible and concise, but limited by poor accessibility, zero actionability, and missing instance-level feature values.\",\n    \"semantic_plausibility\": \"The observed directions of effect\u2014such as positive influence from being married and negative contributions from service jobs\u2014align well with established Adult dataset trends.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:42.879613+00:00"
+}

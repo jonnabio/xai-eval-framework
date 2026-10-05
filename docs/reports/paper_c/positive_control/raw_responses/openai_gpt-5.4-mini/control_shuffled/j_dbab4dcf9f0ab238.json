@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_dbab4dcf9f0ab238",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_57fbcb6615a605ff_beec40352285b207.txt",
+  "prompt_version": "beec40352285b207",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206372-H9NTzLwtg6PIFRLe934t",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002838,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.002838,
+        "upstream_inference_prompt_cost": 0.000705
+      },
+      "is_byok": false,
+      "prompt_tokens": 940,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1414
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_57fbcb6615a605ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature attributions and does not suggest any feasible next steps, recourse options, or decision-review guidance for the user. It is informative for interpretation but not actionable.\",\n    \"audit_usefulness\": \"The ranked SHAP values help identify which features most influenced the prediction, which is useful for local auditing. However, it lacks directionality, feature values, and comparison to baseline behavior, limiting deeper error or bias analysis.\",\n    \"clarity\": \"The output is short and the feature ranking is easy to parse, but it uses raw feature names and numeric SHAP values without explaining what positive or negative contributions mean in this specific case. A non-expert can follow the list, but may not fully understand the implication.\",\n    \"completeness\": \"It covers several top local drivers, but not the instance's actual feature values, the model's baseline, or whether the listed factors pushed toward class 1 or away from it. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, delivering a dense summary of local feature importance in few tokens. It is efficient, though some compactness comes at the cost of interpretability.\",\n    \"overall_quality\": \"This is a reasonable SHAP summary with decent local interpretability, but it is limited by missing directional and contextual information. Overall it is useful as a quick explanation, not a fully satisfactory one.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible and consistent with an XGBoost model on this dataset, and the magnitude pattern looks like a typical SHAP output. Nothing appears contradictory or out of domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:35.277358+00:00"
+}

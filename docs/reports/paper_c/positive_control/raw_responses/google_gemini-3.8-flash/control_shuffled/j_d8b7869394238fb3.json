@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c948b5be78abf92f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d8b7869394238fb3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_c948b5be78abf92f_10f099ec6526bd9a.txt",
+  "prompt_version": "10f099ec6526bd9a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206480-HfHJsF0pvWcbG3HnuBVb",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1624,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1225,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00690075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00609,
+        "upstream_inference_cost": 0.00690075,
+        "upstream_inference_prompt_cost": 0.00081075
+      },
+      "is_byok": false,
+      "prompt_tokens": 1081,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2705
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c948b5be78abf92f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists SHAP importance weights but provides no guidance, target thresholds, or recourse for how the applicant could improve their outcome.\",\n    \"audit_usefulness\": \"It provides signed local attributions that show the model's key drivers, though the lack of explicit feature values for continuous variables limits thorough auditability.\",\n    \"clarity\": \"The raw feature strings, one-hot encoded variable names, and decimal SHAP values are unintuitive for non-expert readers.\",\n    \"completeness\": \"The explanation covers the top ten local contributors, but it omits the base value and the actual measured values for numeric features such as age and credit amount.\",\n    \"concision\": \"The list is compact and avoids conversational filler, delivering a high density of attribution data per token.\",\n    \"overall_quality\": \"It offers an acceptable baseline feature-attribution summary for technical users, but suffers from poor accessibility and zero actionability for lay applicants.\",\n    \"semantic_plausibility\": \"The highlighted features, including checking status, housing ownership, and credit history, are coherent and expected determinants of credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:33.387484+00:00"
+}

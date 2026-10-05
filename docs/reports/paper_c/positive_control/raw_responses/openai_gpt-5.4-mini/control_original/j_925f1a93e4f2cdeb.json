@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_925f1a93e4f2cdeb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_9ee15210bf45996e_da87b32d42ad1e5f.txt",
+  "prompt_version": "da87b32d42ad1e5f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206358-qI846QaljzXaw1yjCUKX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002697,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019935,
+        "upstream_inference_cost": 0.002697,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1381
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists influential features and does not tell the user what could be changed or reviewed. It offers no concrete recourse or next steps.\",\n    \"audit_usefulness\": \"It is useful for auditors because it identifies the top local drivers and their relative contributions. However, it lacks directionality and comparison to a baseline, which limits deeper model-behavior inspection.\",\n    \"clarity\": \"The feature list is readable and easy to parse for a non-expert, with a simple ranked structure. The numerical SHAP values are understandable as importance scores even though their precise meaning is not explained.\",\n    \"completeness\": \"It covers the main local contributors to the prediction, but only as a ranked list of positive attributions. It omits whether these features pushed the prediction toward class 1 relative to class 0, so the decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information with little redundancy. It is brief enough to scan quickly while still listing the key factors.\",\n    \"overall_quality\": \"This is a solid local feature-importance explanation that is easy to read and reasonably informative. Its main weakness is that it does not explain directionality or provide actionable guidance, so it is useful but not fully interpretable.\",\n    \"semantic_plausibility\": \"The listed factors are highly plausible for a breast cancer model, especially concave points, radius, area, perimeter, and concavity. The pattern matches common medical feature importance expectations for this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:20.606766+00:00"
+}

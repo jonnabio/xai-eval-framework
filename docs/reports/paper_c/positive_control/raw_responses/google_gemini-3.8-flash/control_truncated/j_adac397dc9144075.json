@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_adac397dc9144075",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_4e230a6771152fb2_cff2a5ddf28a26f1.txt",
+  "prompt_version": "cff2a5ddf28a26f1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206393-j00fa2wnchBYXFlA6bmd",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 835,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 467,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0038595,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00313125,
+        "upstream_inference_cost": 0.0038595,
+        "upstream_inference_prompt_cost": 0.00072825
+      },
+      "is_byok": false,
+      "prompt_tokens": 971,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1806
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw statistical weights without actionable paths or counterfactual recommendations for the individual.\",\n    \"audit_usefulness\": \"It highlights key model weights, notably revealing the negative influence of the protected attribute race_Black, though it omits underlying feature values.\",\n    \"clarity\": \"The raw feature string notation and signed numerical coefficients require technical knowledge of feature attributions to interpret correctly.\",\n    \"completeness\": \"Listing only three local weights without baseline probabilities, overall model intercept, or actual input feature values provides incomplete decision context.\",\n    \"concision\": \"The text is brief and dense, delivering the top attribution weights without extraneous filler.\",\n    \"overall_quality\": \"While it functions as a compact technical summary useful for identifying potential bias, it lacks context, user-facing clarity, and recourse.\",\n    \"semantic_plausibility\": \"The identified directionality of factors like capital gain and specific demographic or occupational categories aligns with typical Census income models.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:59.900508+00:00"
+}

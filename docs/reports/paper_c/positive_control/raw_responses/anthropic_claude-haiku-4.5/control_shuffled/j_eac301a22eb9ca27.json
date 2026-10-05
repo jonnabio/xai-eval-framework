@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eac301a22eb9ca27",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_7ee17e1b81806239_df580ebf1b7e752a.txt",
+  "prompt_version": "df580ebf1b7e752a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206504-PScaGbbba8DUNivMrHiS",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003362,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00225,
+        "upstream_inference_cost": 0.003362,
+        "upstream_inference_prompt_cost": 0.001112
+      },
+      "is_byok": false,
+      "prompt_tokens": 1112,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take; the coefficients are too small and abstract to suggest concrete recourse steps.\",\n    \"audit_usefulness\": \"The feature-coefficient pairs enable inspection of which features influenced the prediction and their direction, supporting model behavior auditing and bias investigation for a data scientist.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but non-experts may struggle to interpret coefficient magnitudes and their practical meaning without additional context.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which likely represent the main drivers for this prediction, though the extremely small coefficient magnitudes raise questions about whether key decision boundaries are captured.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-coefficient pairs without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is technically sound and audit-ready, the near-zero coefficients, lack of actionability, and limited interpretability for non-experts constrain its overall utility.\",\n    \"semantic_plausibility\": \"The feature set and their directions (e.g., female sex and doctorate education reducing prediction score) are plausible for an income prediction task, though the tiny magnitudes suggest weak individual feature influence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:48.557467+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_25c0ece7cf9b15de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d9b208191b708525",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_25c0ece7cf9b15de_c56bb2ef867d1325.txt",
+  "prompt_version": "c56bb2ef867d1325",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206322-sgxcHthLvchf9BfkXNx9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002259,
+        "upstream_inference_cost": 0.00297675,
+        "upstream_inference_prompt_cost": 0.00071775
+      },
+      "is_byok": false,
+      "prompt_tokens": 957,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1459
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_25c0ece7cf9b15de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features moved the prediction up or down, but it does not translate them into any concrete recourse or decision steps. A user cannot tell what to change, by how much, or whether such changes are feasible.\",\n    \"audit_usefulness\": \"This is useful for auditing because it exposes the main local drivers and their directional contributions for a single prediction. However, it lacks baseline values, class-level framing, and enough context to fully diagnose model bias or compare the strength of competing factors.\",\n    \"clarity\": \"The SHAP-style list is compact and readable, with features and signed contributions presented in a straightforward format. A non-expert may still need some familiarity with the encoded German Credit variables to interpret terms like savings_status_<100 or checking_status_0<=X<200.\",\n    \"completeness\": \"It covers the top local factors, but only as a short ranking of contributions without showing the predicted probability, reference class, or the overall balance leading to class 0. That leaves the local decision context only partially explained.\",\n    \"concision\": \"The explanation is quite compact and mostly avoids redundancy while still listing the main contributors. It is a good length for a local summary, though the encoded feature names slightly reduce efficiency for a general reader.\",\n    \"overall_quality\": \"This is a solid local feature attribution summary that is useful for inspection, but it is not fully understandable to lay users and does not support recourse. Overall it is moderately strong as an XAI explanation, especially for technical review.\",\n    \"semantic_plausibility\": \"The factors mentioned are plausible for German Credit, and the mix of savings, checking status, credit history, duration, and installment commitment fits domain expectations. The direction of effects is also coherent as a local SHAP attribution summary.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:44.471226+00:00"
+}

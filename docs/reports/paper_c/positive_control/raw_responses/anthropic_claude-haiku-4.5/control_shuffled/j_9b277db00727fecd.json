@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_57fbcb6615a605ff",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9b277db00727fecd",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_57fbcb6615a605ff_beec40352285b207.txt",
+  "prompt_version": "beec40352285b207",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206480-NQKoGoZH6TReyj9jWNJw",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003889,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002795,
+        "upstream_inference_cost": 0.003889,
+        "upstream_inference_prompt_cost": 0.001094
+      },
+      "is_byok": false,
+      "prompt_tokens": 1094,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1653
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_57fbcb6615a605ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on these values. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The ranked SHAP values with magnitudes enable an auditor to inspect which features drive the prediction and their relative importance, supporting investigation of model logic and potential bias. However, the lack of base value and prediction confidence limits deeper audit capability.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names with numerical contributions, which is straightforward for a technical audience but lacks context about what positive/negative values mean or why these specific features matter in breast cancer diagnosis.\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main local drivers; however, the explanation omits the base value, prediction confidence, and any indication of feature direction or clinical significance, leaving gaps in full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and values in a dense format. Each element contributes information without padding, though brevity comes at the cost of interpretability.\",\n    \"overall_quality\": \"The explanation provides a technically sound SHAP ranking suitable for model inspection but lacks the context, actionability, and clinical grounding needed for broader utility in a healthcare setting. It is adequate for an auditor but limited for end-users.\",\n    \"semantic_plausibility\": \"The features (radius, concave points, compactness, concavity, perimeter, area, texture) are all established morphological descriptors in breast cancer diagnosis, and their contribution to a malignancy prediction (class 1) is medically plausible. The relative importance ordering aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:25.615390+00:00"
+}

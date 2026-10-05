@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_03ec63d3b5694b39",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_7ee17e1b81806239_19fef100a307afd0.txt",
+  "prompt_version": "19fef100a307afd0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206377-vEswnIBf9tjzwJAtdgZL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00268725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001971,
+        "upstream_inference_cost": 0.00268725,
+        "upstream_inference_prompt_cost": 0.00071625
+      },
+      "is_byok": false,
+      "prompt_tokens": 955,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1393
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It only lists feature contributions, with no guidance on what could be changed to affect the prediction.\",\n    \"audit_usefulness\": \"It gives a local ranking of contributing features and their signed effects, which is useful for a basic model inspection. However, the tiny magnitudes and lack of class context limit its usefulness for deeper bias or error analysis.\",\n    \"clarity\": \"The output is easy to scan because it is a short list of features with numeric contributions. A non-expert may still struggle to interpret the meaning of positive and negative values without knowing LIME conventions.\",\n    \"completeness\": \"It includes the top local factors, but not the baseline prediction, class probabilities, or a broader set of influential features. That leaves the decision context incomplete for understanding why the model predicted class 0.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It communicates the main local factors in a small number of tokens.\",\n    \"overall_quality\": \"This is a reasonable LIME summary, but it is very sparse and not very informative in magnitude or context. It is adequate for a quick glance, yet weak for understanding or acting on the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for an Adult-income style model, especially education, marital status, occupation, and capital gain. The near-zero weights are also consistent with a weak local explanation from a linear model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:39.354887+00:00"
+}

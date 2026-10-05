@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56b2fc0abd88017e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ebe849e00fd21abf",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_56b2fc0abd88017e_716813ccf21cd94d.txt",
+  "prompt_version": "716813ccf21cd94d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206304-k7Wdle74HztIWME2pYWm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021915,
+        "upstream_inference_cost": 0.0029025,
+        "upstream_inference_prompt_cost": 0.000711
+      },
+      "is_byok": false,
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1435
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56b2fc0abd88017e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not suggest any specific recourse or next steps for the applicant. A user can see what factors mattered, but cannot directly act on them from the text alone.\",\n    \"audit_usefulness\": \"The SHAP values provide a useful local feature ranking with signed contributions, which helps inspect the model's behavior. However, there is no baseline value, probability, or broader comparison across cases, so audit value is only partial.\",\n    \"clarity\": \"The output is structured and uses a simple feature-by-feature format that is easy to read. Some feature names are technical, but the overall ranking and signs are understandable to a non-expert with minimal effort.\",\n    \"completeness\": \"It covers several top local drivers of the prediction, including checking status, purpose, savings, credit amount, age, and duration. Still, it lacks the model output magnitude, the exact direction of the final class decision, and a fuller explanation of how the features combine.\",\n    \"concision\": \"The explanation is compact and focused on the most influential factors without unnecessary prose. It is slightly terse because it gives only raw SHAP terms and no brief synthesis, but the information density is good.\",\n    \"overall_quality\": \"Overall, this is a reasonably good local explanation for a tabular model because it identifies the main drivers clearly and succinctly. Its main weaknesses are the lack of interpretive context and absence of actionable guidance, which limit usefulness for decision review.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, and the directions of influence are consistent with a local SHAP explanation for a binary classifier. Nothing in the feature set or signs appears contradictory to the domain context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:27.162854+00:00"
+}

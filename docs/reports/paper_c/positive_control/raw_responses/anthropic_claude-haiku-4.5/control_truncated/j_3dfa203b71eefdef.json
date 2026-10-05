@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3dfa203b71eefdef",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_31247e881a13bce1_fc4bec41274dab3c.txt",
+  "prompt_version": "fc4bec41274dab3c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206415-zcFAePvucGW5GiBB0nHy",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003361,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002345,
+        "upstream_inference_cost": 0.003361,
+        "upstream_inference_prompt_cost": 0.001016
+      },
+      "is_byok": false,
+      "prompt_tokens": 1016,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1485
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without context on feature values or thresholds, actionability is severely limited.\",\n    \"audit_usefulness\": \"The explanation shows feature weights and directions, which supports basic model inspection and bias investigation. However, the lack of feature values and confidence scores limits deeper audit capability.\",\n    \"clarity\": \"The format is straightforward with feature names and numerical weights clearly presented. A non-expert may struggle with interpreting negative vs. positive weights without additional context, but the structure itself is transparent.\",\n    \"completeness\": \"Only three features are shown with no information about their actual values, the prediction confidence, or the baseline/reference point for comparison. Critical context about the instance is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential feature names and weights. The brevity is appropriate for a top-factors summary.\",\n    \"overall_quality\": \"The explanation provides minimal but interpretable local feature importance, yet lacks sufficient context (feature values, confidence, baseline) to fully support decision-making or auditing. It represents a basic but incomplete explanation.\",\n    \"semantic_plausibility\": \"The identified features (occupation, age) are plausible predictors for income classification in the adult dataset, and the weight directions are reasonable. However, without instance values, semantic coherence cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:19.874498+00:00"
+}

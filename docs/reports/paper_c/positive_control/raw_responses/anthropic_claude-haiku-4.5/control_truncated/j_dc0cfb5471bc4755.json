@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_dc0cfb5471bc4755",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_7ee17e1b81806239_c7d0c4db9901d81a.txt",
+  "prompt_version": "c7d0c4db9901d81a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206498-drXEfzXq2IPpdzkeoddM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003591,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00257,
+        "upstream_inference_cost": 0.003591,
+        "upstream_inference_prompt_cost": 0.001021
+      },
+      "is_byok": false,
+      "prompt_tokens": 1021,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1535
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take to achieve a different outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation shows three feature contributions with their weights, which partially supports model behavior inspection, but lacks context about feature ranges, baseline values, or whether these are the only meaningful drivers. Useful for basic auditing but incomplete for thorough investigation.\",\n    \"clarity\": \"The format is straightforward and uses standard notation (feature names and coefficients), making it accessible to readers with basic statistical literacy. However, the meaning of negative vs. positive weights and their magnitude could be clearer for non-experts.\",\n    \"completeness\": \"Only three features are presented with very small coefficient magnitudes; the explanation does not indicate whether these are truly the dominant drivers or if other features also contributed meaningfully. The prediction confidence is null, further limiting context about decision strength.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format. Each element (feature name and weight) is necessary and no padding is evident.\",\n    \"overall_quality\": \"The explanation is technically correct but minimal in utility; it identifies local factors but lacks depth in context, actionability, and completeness needed for robust decision support or auditing.\",\n    \"semantic_plausibility\": \"The features (education, capital gain, employment type) are plausible drivers for an income prediction task in the adult dataset, and the direction of effects (doctorate education and self-employment reducing prediction score) is reasonable for a negative class prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:43.596155+00:00"
+}

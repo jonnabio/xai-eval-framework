@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d47138a03cd221ff",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6e1ad5ae1e40a91f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_d47138a03cd221ff_3f28a7d105aec5ac.txt",
+  "prompt_version": "3f28a7d105aec5ac",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206331-Tf4WUNunbLHuYmXIigdD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00283425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.00283425,
+        "upstream_inference_prompt_cost": 0.00070575
+      },
+      "is_byok": false,
+      "prompt_tokens": 941,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1414
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d47138a03cd221ff\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model output into any concrete recourse or decision-review steps. It only lists feature contributions, so a user cannot tell what to change or verify next.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which variables locally push the logreg prediction up or down. However, the tiny coefficients and lack of a baseline or prediction probability limit its value for deeper error or bias analysis.\",\n    \"clarity\": \"The structure is straightforward and the feature list is easy to scan. Still, the raw LIME weights without orientation or context may be confusing to a non-expert reader.\",\n    \"completeness\": \"It covers several local factors, including education, marital status, sex, hours worked, capital gain, occupation, age, and workclass. But it lacks the predicted probability, intercept/baseline, and a clearer statement of which factors most strongly support the positive class.\",\n    \"concision\": \"The explanation is compact and mostly avoids redundancy. It gives the main local factors in a short format that is efficient for the amount of information provided.\",\n    \"overall_quality\": \"This is a decent local explanation for a tabular classifier, but it is limited by sparse context and weak interpretability of the numeric weights. It is useful as a quick summary, yet not strong enough for robust user understanding or thorough audit work.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult income dataset and fit common patterns such as education, marital status, occupation, and hours per week. The signs and magnitudes are also reasonable for a local linear explanation, though the effect sizes are very small.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:54.696086+00:00"
+}

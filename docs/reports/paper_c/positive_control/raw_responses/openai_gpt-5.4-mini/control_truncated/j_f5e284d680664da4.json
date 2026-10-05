@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_92efc0d56dccca0f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f5e284d680664da4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_92efc0d56dccca0f_be85c3845b987256.txt",
+  "prompt_version": "be85c3845b987256",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206285-YVECvaAwvRYEvfPf9ens",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00264675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001989,
+        "upstream_inference_cost": 0.00264675,
+        "upstream_inference_prompt_cost": 0.00065775
+      },
+      "is_byok": false,
+      "prompt_tokens": 877,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1319
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_92efc0d56dccca0f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names influential features but does not translate them into any concrete recourse or decision-review steps. A user cannot tell what to change, verify, or discuss next.\",\n    \"audit_usefulness\": \"It is useful at a very basic level because it reveals the top local SHAP drivers and their relative importance. However, it lacks directionality, comparisons to a baseline, or enough context to inspect model behavior deeply.\",\n    \"clarity\": \"The wording is simple and the three features are presented in a straightforward list. A non-expert can understand that these are the main local factors, though the numeric SHAP values may still need interpretation.\",\n    \"completeness\": \"It identifies the top three local factors, which gives a partial view of the prediction. Still, it omits whether each factor pushed the prediction toward class 1 or 0, and does not include the full set of important contributors.\",\n    \"concision\": \"The explanation is very short and contains only the essential top factors. It is compact without obvious redundancy.\",\n    \"overall_quality\": \"This is a decent minimal SHAP explanation: concise, readable, and somewhat informative about the local decision. Its main weakness is the lack of signed contributions and actionable or audit-ready detail.\",\n    \"semantic_plausibility\": \"For a breast cancer random forest model, concave points and radius are highly plausible predictors, so the listed features fit the domain well. The values also look like reasonable SHAP magnitudes for local importance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:07.940690+00:00"
+}

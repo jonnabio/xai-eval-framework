@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2cddf4ef6cbf4864",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_902d690264149a09_ada15e15031ca89d.txt",
+  "prompt_version": "ada15e15031ca89d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206314-YAEDUhepctHNUKFicocP",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028785,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002169,
+        "upstream_inference_cost": 0.0028785,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1428
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names features but does not translate them into concrete steps the person could take to change the prediction. It offers no recourse guidance or decision-specific next action.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it shows the top local SHAP contributors and their directions, which can help inspect what the model relied on. However, it lacks baseline context, magnitude interpretation, and comparison to similar cases, so the audit value is limited.\",\n    \"clarity\": \"The ranking of features with signed values is easy to read, but the meaning of positive versus negative SHAP values is not explained. A non-expert may not understand how these numbers relate to the class 0 prediction.\",\n    \"completeness\": \"The explanation provides several local feature attributions, but it does not explain the overall decision, the predicted class meaning, or the dominant factors in plain language. Important context such as how strong the evidence was relative to the model baseline is missing.\",\n    \"concision\": \"The output is compact and mostly free of redundancy, with a focused list of top SHAP factors. It conveys a fair amount of information in few tokens.\",\n    \"overall_quality\": \"This is a reasonably informative local explanation, but it is terse and somewhat technical for a non-expert. It is useful for basic inspection, though not sufficient for fully understanding or acting on the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and SHAP attributions on an MLP, and the presence of education, work hours, marital status, and sex is contextually consistent. The signs and magnitudes appear reasonable even if their interpretive meaning is not fully spelled out.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:37.395718+00:00"
+}

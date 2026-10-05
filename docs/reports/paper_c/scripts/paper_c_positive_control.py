@@ -66,7 +66,7 @@ def main() -> None:
             ids = a.index.intersection(b.index)
             diff = b.loc[ids] - a.loc[ids]
             columns = {**{j: diff[j].to_numpy(float) for j in diff.columns},
-                       "mean": diff.mean(1).to_numpy(float)}
+                       "mean": diff.mean(axis=1).to_numpy(float)}
             agreement = coefficients(diff.to_numpy(float))
             for judge, d in columns.items():
                 lower, upper = interval(d, rng)

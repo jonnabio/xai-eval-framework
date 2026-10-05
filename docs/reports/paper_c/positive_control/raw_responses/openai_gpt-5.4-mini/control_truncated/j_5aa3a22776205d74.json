@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5aa3a22776205d74",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_eec93395cc3f8408_50480608dca0b2f3.txt",
+  "prompt_version": "50480608dca0b2f3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206321-mc06Ql5VPWbyxi1Dl4qc",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00267675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020205,
+        "upstream_inference_cost": 0.00267675,
+        "upstream_inference_prompt_cost": 0.00065625
+      },
+      "is_byok": false,
+      "prompt_tokens": 875,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1324
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide recourse or next steps for the user. It only lists influential features and their SHAP values, so it is not actionable in a practical sense.\",\n    \"audit_usefulness\": \"It is useful for auditing because it reveals which features pushed the prediction and in what direction. However, it lacks magnitude context beyond the top three factors and does not explain whether the signs align with the predicted class.\",\n    \"clarity\": \"The wording is short and easy to parse, even for a non-expert, and the feature names are explicit. The main limitation is that SHAP values may still be hard to interpret without a brief explanation of what negative contributions mean.\",\n    \"completeness\": \"It covers only three top local factors and gives no baseline, probability, or explanation of why the prediction is class 0. Important drivers may be missing, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is very compact and contains little extraneous wording. It communicates the top factors efficiently within a small number of tokens.\",\n    \"overall_quality\": \"This is a concise and generally understandable local explanation, but it is thin on context and does not support user recourse. It is moderately useful for inspection of the model decision, yet not strong enough to be considered high quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, since checking status and credit history are known to influence risk predictions. The direction and feature names are coherent with the domain and the model family.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:43.450163+00:00"
+}

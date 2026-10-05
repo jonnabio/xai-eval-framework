@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_9aca34e1fc5f269e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_78dfd1648ed95148_653ce991204249b6.txt",
+  "prompt_version": "653ce991204249b6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206191-Jx9cuadsrRpKJawczskG",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 943,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 533,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00434325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00353625,
+        "upstream_inference_cost": 0.00434325,
+        "upstream_inference_prompt_cost": 0.000807
+      },
+      "is_byok": false,
+      "prompt_tokens": 1076,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2019
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers raw numerical feature attributions without baseline context or counterfactual advice, providing no direct guidance on how an applicant could achieve a different outcome.\",\n    \"audit_usefulness\": \"It provides precise local SHAP values and directional signs for the top 10 features, enabling an auditor to inspect model attributions even though baseline values and actual input values are omitted.\",\n    \"clarity\": \"The list of technical feature names and signed floating-point numbers requires familiarity with SHAP and the underlying dataset schema to interpret correctly.\",\n    \"completeness\": \"The top 10 local drivers are reported with their respective weights, but the absence of feature values and base value limits full reconstruction of the prediction.\",\n    \"concision\": \"The summary is extremely compact, presenting only the key factors and their attribution weights without filler text.\",\n    \"overall_quality\": \"While it serves technical auditing needs efficiently, the lack of feature values, baseline context, and plain-language interpretation makes it moderately acceptable overall.\",\n    \"semantic_plausibility\": \"The negative contributions associated with low savings, negative checking status, and lack of property logically align with financial credit risk assessment.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:38.615000+00:00"
+}

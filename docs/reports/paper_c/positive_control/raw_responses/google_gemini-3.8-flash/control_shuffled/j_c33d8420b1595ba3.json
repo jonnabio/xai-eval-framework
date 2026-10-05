@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_c33d8420b1595ba3",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_4deccedcca9c7800_5fd29c9f67c93c18.txt",
+  "prompt_version": "5fd29c9f67c93c18",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206652-tmRuPtZtrV6GmdNlO9YP",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 994,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 597,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00452775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0037275,
+        "upstream_inference_cost": 0.00452775,
+        "upstream_inference_prompt_cost": 0.00080025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2061
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output is purely descriptive of local feature weights and offers no actionable guidance, counterfactual thresholds, or recourse steps.\",\n    \"audit_usefulness\": \"It provides transparency into the top local surrogate weights and highlights the model's reliance on protected attributes like sex and race, though lack of actual feature values limits deeper debugging.\",\n    \"clarity\": \"The explanation is presented as raw feature-weight pairs, which is straightforward for technical users but lacks interpretive context or baseline explanations for non-experts.\",\n    \"completeness\": \"While ten local weights are reported, the omission of actual feature values, reference levels, and the model's baseline leaves the local decision context incomplete.\",\n    \"concision\": \"The text is compact and directly reports key weights without unnecessary padding or filler.\",\n    \"overall_quality\": \"It is an acceptable raw surrogate explanation that accurately displays directional influence, but it is weakened by the absence of feature values and actionable insight.\",\n    \"semantic_plausibility\": \"The negative contributions for lower educational attainment, unmarried status, and certain occupations are consistent with known domain dynamics in the Adult census dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:24:20.035811+00:00"
+}

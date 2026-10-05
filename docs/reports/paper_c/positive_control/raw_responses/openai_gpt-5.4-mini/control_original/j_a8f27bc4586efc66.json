@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a8f27bc4586efc66",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_3e006f8c0e7512b1_288e7e71608a0ace.txt",
+  "prompt_version": "288e7e71608a0ace",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206185-YrJcw7mys0QEiQ8uqR8s",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.00296325,
+        "upstream_inference_prompt_cost": 0.00071775
+      },
+      "is_byok": false,
+      "prompt_tokens": 957,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1456
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next-step guidance beyond listing influential features. A user cannot tell what specific changes would plausibly affect the prediction or whether any are feasible.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it shows several local SHAP contributions with signs and magnitudes, letting an auditor inspect which features pushed the model toward class 0 or class 1. However, it lacks the base value, probability context, and feature grouping needed for deeper error or bias analysis.\",\n    \"clarity\": \"The output is easy to read because it is a simple ranked list of feature names and contribution values. Still, a non-expert may not understand the meaning of positive versus negative SHAP values or the encoded feature names without prior knowledge.\",\n    \"completeness\": \"It covers some main local drivers, but not enough to fully explain the specific prediction. Important context such as the model output scale, baseline prediction, and the instance\u2019s actual feature values in plain language is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with only the top local factors listed. It is efficient, though the raw encoded feature names reduce readability a bit.\",\n    \"overall_quality\": \"This is a reasonably informative SHAP summary for a tabular prediction, but it is only moderately complete and not very actionable. Its main strengths are local attribution and compactness, while its main weaknesses are missing context and limited interpretability for non-experts.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset and align with common socioeconomic predictors such as education, marital status, occupation, and relationship. The mix of positive and negative contributions is also reasonable for a local explanation from an MLP model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:28.183917+00:00"
+}

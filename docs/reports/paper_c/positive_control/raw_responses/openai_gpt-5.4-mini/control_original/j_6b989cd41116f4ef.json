@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6b989cd41116f4ef",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_50e3b33d6c3d012f_47754ca7988541f0.txt",
+  "prompt_version": "47754ca7988541f0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206261-l7UE8dpD3ieH5KSZKjC0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289275,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021825,
+        "upstream_inference_cost": 0.00289275,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1432
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no recourse, thresholds, or next steps a user could act on. A patient or clinician cannot tell what specific changes, if any, would alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for a light local audit because it reveals the top SHAP-attributed features and their relative magnitudes. However, it lacks directionality, baseline comparison, and feature values, so it is limited for deeper error or bias investigation.\",\n    \"clarity\": \"The wording is straightforward and the ranking of features is easy to scan. Still, a non-expert may not understand what the medical features mean or how to interpret the numeric SHAP values without additional context.\",\n    \"completeness\": \"The explanation covers several top contributing features, which helps identify local drivers. It does not indicate whether each feature pushed the prediction toward class 1 or 0, nor does it provide the instance\u2019s feature values or the model output magnitude.\",\n    \"concision\": \"The output is compact and contains a dense ranked list of local factors with little redundancy. It is informative per word, though somewhat minimalistic in what it explains.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for local feature ranking, but it is incomplete for decision understanding because it omits directionality and case-specific context. Overall it is useful as a compact diagnostic snippet rather than a fully interpretable explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible breast cancer predictors, and terms like worst perimeter, worst concave points, and worst radius are consistent with the dataset. The ranking and magnitudes also look realistic for a SHAP explanation on this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:44.781201+00:00"
+}

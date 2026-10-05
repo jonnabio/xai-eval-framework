@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_fdc7a378159b6dd4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_c523b5e4b177b22e_82236e97043c708c.txt",
+  "prompt_version": "82236e97043c708c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206259-G6PNRY5EUArFHCfD9mkz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003793,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00276,
+        "upstream_inference_cost": 0.003793,
+        "upstream_inference_prompt_cost": 0.001033
+      },
+      "is_byok": false,
+      "prompt_tokens": 1033,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative SHAP values but provides no guidance on what actions could be taken to change the prediction or improve outcomes. Without context on what these features mean or how they could be modified, the explanation offers no recourse.\",\n    \"audit_usefulness\": \"The explanation lists three top features with their SHAP contributions, which supports basic model inspection and helps auditors understand which factors drove this specific prediction. However, it lacks information about feature ranges, baseline values, or comparative context needed for thorough bias investigation.\",\n    \"clarity\": \"The explanation uses technical SHAP terminology and feature names (e.g., 'checking_status_<0') that require domain knowledge of the German Credit dataset to interpret. A non-expert reader would struggle to understand what these features represent or why they matter.\",\n    \"completeness\": \"Only three features are shown with no indication of their actual values for this instance, the base model prediction, or how much these factors collectively explain the prediction. Critical context about the instance's feature values and their relationship to the decision is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting three features and their SHAP values in minimal space. No unnecessary padding or repetition is present.\",\n    \"overall_quality\": \"While the explanation is concise and provides some audit value through SHAP feature importance, it lacks clarity for non-experts, provides no actionable insights, and omits crucial contextual information needed for a complete understanding of the prediction.\",\n    \"semantic_plausibility\": \"In credit risk assessment, shorter loan duration and lack of checking account history are plausible negative factors for creditworthiness, making the explanation semantically coherent with domain expectations. The negative SHAP values align logically with a rejection prediction (class 0).\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:44.772161+00:00"
+}

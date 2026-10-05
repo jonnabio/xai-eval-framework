@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_bf2d2b9812525b42",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_d3748ef854fdb49f_9a90e9c4f2f0fe01.txt",
+  "prompt_version": "9a90e9c4f2f0fe01",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206201-IGPSwsg4CQ2ddbFowZmU",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003804,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002695,
+        "upstream_inference_cost": 0.003804,
+        "upstream_inference_prompt_cost": 0.001109
+      },
+      "is_byok": false,
+      "prompt_tokens": 1109,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1648
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what actions might change the prediction, or how a user could respond to this decision. No recourse pathways are suggested.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes enable auditors to inspect which features drove the prediction and their relative importance, supporting investigation of model behavior and potential bias patterns. However, direction of effect (positive/negative contribution) is not explicitly stated.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of feature names with numerical values\u2014but lacks context on what the numbers represent, whether higher values indicate stronger positive or negative influence, and what the prediction outcome means. Non-experts may struggle to interpret.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers by SHAP magnitude, which captures the main decision factors for this instance. However, it omits the base prediction probability, feature values, and directional information (whether each factor pushed toward class 0 or 1).\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only ranked features and their SHAP values without padding. Information density is high relative to token count.\",\n    \"overall_quality\": \"The explanation provides useful technical information for model inspection but lacks interpretability aids, actionability, and context needed for end-user or auditor comprehension. It is a competent but incomplete SHAP summary.\",\n    \"semantic_plausibility\": \"In the adult income dataset, sex and marital/relationship status are known predictive features; their prominence is plausible. However, without knowing the prediction class (income >50k or \u226450k) and feature directions, semantic coherence cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:46.761127+00:00"
+}

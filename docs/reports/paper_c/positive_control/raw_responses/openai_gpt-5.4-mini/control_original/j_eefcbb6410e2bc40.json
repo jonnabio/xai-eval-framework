@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_eefcbb6410e2bc40",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_2a3f635ae972c4ad_6fb870557af787ff.txt",
+  "prompt_version": "6fb870557af787ff",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206195-TcFBcMuX3M6aA1VDz3Bu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.00295425,
+        "upstream_inference_prompt_cost": 0.00071325
+      },
+      "is_byok": false,
+      "prompt_tokens": 951,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1449
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into concrete recourse steps a user could take. It gives no guidance on what changing an input would do or whether any change is feasible.\",\n    \"audit_usefulness\": \"For auditing, the ranked local contributions are useful because they show which variables influenced the logistic regression prediction. However, the values are only relative LIME weights and lack baseline, confidence, or stability information, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The list is short and easy to scan, with each feature paired with a signed contribution. A non-expert can understand the broad direction of influence, though the meaning of the numeric weights and one-hot feature names may still require some explanation.\",\n    \"completeness\": \"It covers several top local drivers, including capital-gain, education-num, marital status, sex, relationship, hours-per-week, and education. Still, it does not explain the model's intercept, the full feature set, or how these factors combine to yield the final class 0 prediction.\",\n    \"concision\": \"The output is compact and contains little redundancy while still listing the main local factors. It is close to an efficient summary for this type of explanation.\",\n    \"overall_quality\": \"This is a reasonably good LIME summary for a tabular prediction: concise, interpretable, and locally informative. Its main weaknesses are limited actionability and incomplete decision context, which keep it from being excellent.\",\n    \"semantic_plausibility\": \"The feature directions are plausible for the Adult dataset and the highlighted variables are sensible predictors of income class. The mix of positive and negative contributions also fits a local linear explanation for a logistic regression model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:38.283218+00:00"
+}

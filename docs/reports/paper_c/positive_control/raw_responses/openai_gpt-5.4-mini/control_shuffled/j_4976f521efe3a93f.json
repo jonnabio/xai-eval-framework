@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4976f521efe3a93f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_eec93395cc3f8408_eb2c3c2da16b15ed.txt",
+  "prompt_version": "eb2c3c2da16b15ed",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206324-zsevfnUFNOKh4dNJ2Vzm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002904,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021825,
+        "upstream_inference_cost": 0.002904,
+        "upstream_inference_prompt_cost": 0.0007215
+      },
+      "is_byok": false,
+      "prompt_tokens": 962,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1447
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies factors that pushed the prediction up or down, but it does not translate them into concrete recourse steps a user could take. There is no guidance on which attributes might be changed or how the decision might be improved.\",\n    \"audit_usefulness\": \"The SHAP attributions are useful for auditing because they show the main local drivers and their direction of influence. However, they lack baseline values, interaction context, and comparison to broader population patterns, so audit depth is only moderate.\",\n    \"clarity\": \"The ranking of features with signed contributions is easy to follow, and the wording is concise. Some feature names are categorical encodings that may still require familiarity with the dataset, but the overall message is understandable.\",\n    \"completeness\": \"It covers several key local factors influencing the prediction, including credit history, savings, checking status, and age. Still, it does not provide the actual feature values for the instance, the model's score/probability, or enough context to fully reconstruct the decision.\",\n    \"concision\": \"The explanation is compact and information-dense, listing only the top local SHAP factors without unnecessary filler. It conveys the essential ranking efficiently.\",\n    \"overall_quality\": \"This is a solid local explanation with clear feature attributions and reasonable interpretability for a tabular credit model. It is useful for understanding the prediction at a high level, but it is not fully actionable or exhaustive.\",\n    \"semantic_plausibility\": \"The factors are plausible for German credit scoring: savings, checking status, credit history, property, and age are all sensible drivers of default risk. The directionality is also broadly coherent, though the exact effects cannot be fully verified without the instance values.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:46.962784+00:00"
+}

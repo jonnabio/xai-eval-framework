@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_5a995ac27c77eef6",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_03f9ac9f3ab42b8b_c723bda20609fb35.txt",
+  "prompt_version": "c723bda20609fb35",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206232-OaO9y0NmdZRNfqaeX8rH",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 624,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00456675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376875,
+        "upstream_inference_cost": 0.00456675,
+        "upstream_inference_prompt_cost": 0.000798
+      },
+      "is_byok": false,
+      "prompt_tokens": 1064,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2069
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw attribution scores without recommendations or guidance on how a user might change the outcome.\",\n    \"audit_usefulness\": \"The listed SHAP values clearly show feature directions and magnitudes, enabling an auditor to detect model reliance on protected demographic features like sex and marital status.\",\n    \"clarity\": \"The list of raw feature names, one-hot encodings, and signed decimals requires technical knowledge of SHAP to interpret correctly.\",\n    \"completeness\": \"The top ten local factors are provided with directional signs, but the underlying instance feature values and baseline value are omitted.\",\n    \"concision\": \"The summary is compact and strictly presents the relevant feature attribution pairs without unnecessary filler text.\",\n    \"overall_quality\": \"It serves as an adequate technical explanation for an auditor, though it lacks user-facing interpretability and actionable guidance.\",\n    \"semantic_plausibility\": \"The directional impacts align generally with domain patterns in the Adult dataset, though seeing multiple mutually exclusive one-hot categories simultaneously can be slightly confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:20.185132+00:00"
+}

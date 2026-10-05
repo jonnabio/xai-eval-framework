@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9f77a354107d1c8f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_902d690264149a09_df7bbdb2c86fc71a.txt",
+  "prompt_version": "df7bbdb2c86fc71a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206395-aIbtcbPvSkFHi8qwrx8a",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003631,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002615,
+        "upstream_inference_cost": 0.003631,
+        "upstream_inference_prompt_cost": 0.001016
+      },
+      "is_byok": false,
+      "prompt_tokens": 1016,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to change the prediction or what actions a user could take to achieve a different outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation shows SHAP values for three features with their directional impacts, which supports basic model behavior inspection and bias investigation. However, it lacks context about feature ranges, baseline values, or model decision boundaries needed for thorough auditing.\",\n    \"clarity\": \"The format is straightforward with feature names, SHAP values, and directions clearly presented, making it accessible to readers with basic ML knowledge. However, the meaning of negative vs. positive SHAP values and their relationship to the prediction class requires some domain familiarity.\",\n    \"completeness\": \"Only three features are shown without information about their actual values for this instance, the prediction confidence, or the base rate. Critical context about why these features matter relative to others and the instance's full feature profile is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature names and numerical contributions in minimal space. Each element conveys necessary information without padding.\",\n    \"overall_quality\": \"The explanation provides a minimal but valid SHAP-based summary of local feature importance with directional effects. However, it lacks sufficient context, actionability, and completeness to be truly useful for most stakeholders, limiting its overall quality.\",\n    \"semantic_plausibility\": \"The identified features (education level, hours per week, final weight) are plausible drivers of income classification in the adult dataset, and the directional effects are reasonable. Lower education and moderate hours align with lower income predictions.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:00.531662+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4c66af2520ff86a3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_445567f442799a48_23fcc556d63bd766.txt",
+  "prompt_version": "23fcc556d63bd766",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206250-f9dGSA8ssw7EbZhPlppg",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.0026895,
+        "upstream_inference_prompt_cost": 0.0006555
+      },
+      "is_byok": false,
+      "prompt_tokens": 874,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1326
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists factors and their SHAP values; it does not tell the user what specific changes could alter the prediction or what to review next. It offers no recourse guidance beyond implying which features mattered.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it reveals the top local drivers and their directions for this instance. However, the information is too sparse to fully inspect model behavior, feature interactions, or whether the prediction is robust.\",\n    \"clarity\": \"The wording is short and easy to parse, and the feature names are explicit enough for a non-technical reader to follow at a surface level. The sign convention is understandable, though the meaning of the negative values is only implicit.\",\n    \"completeness\": \"It identifies the main local contributors, but only three features are shown and there is no baseline, probability, or indication of how strongly these factors shifted the class decision. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is highly compact and contains little redundant wording. It communicates the essential top factors in very few tokens.\",\n    \"overall_quality\": \"This is a concise and reasonably clear local explanation, but it is limited by missing context, weak actionability, and only partial support for deeper inspection. Overall it is useful but not especially rich.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the German Credit setting, and the negative contributions are consistent with features that would reduce the likelihood of the predicted class. Nothing in the statement appears contradictory or out of domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:33.463455+00:00"
+}

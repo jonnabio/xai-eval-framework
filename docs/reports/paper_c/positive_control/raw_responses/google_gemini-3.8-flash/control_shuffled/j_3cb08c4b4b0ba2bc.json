@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3cb08c4b4b0ba2bc",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_31247e881a13bce1_dfcfaeffb378818d.txt",
+  "prompt_version": "dfcfaeffb378818d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206589-HPAXNjJ7j8lPGqyqVk2c",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1169,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 774,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005187,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00438375,
+        "upstream_inference_cost": 0.005187,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2240
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers purely descriptive weights without providing actionable guidance, recourse recommendations, or indication of which features are mutable.\",\n    \"audit_usefulness\": \"It provides directional attribution weights across top features including sensitive attributes like sex and marital status, though the lack of actual feature values weakens audit depth.\",\n    \"clarity\": \"The raw output of one-hot encoded feature names and numeric coefficients requires technical familiarity with ML attributions to interpret properly.\",\n    \"completeness\": \"Ten local factors are detailed with their signed weights, but omitting the instance's actual feature values and baseline probability limits full contextual understanding.\",\n    \"concision\": \"The summary is dense, compact, and avoids conversational filler while presenting the primary local drivers.\",\n    \"overall_quality\": \"The explanation is a standard raw LIME attribution list that provides modest technical utility for model debugging, but suffers in clarity and actionability for end users.\",\n    \"semantic_plausibility\": \"The presence of conflicting signals across related one-hot categories (such as marital status and relationship) without clear binary indicators makes semantic interpretation somewhat ambiguous.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:23:17.962983+00:00"
+}

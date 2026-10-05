@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ba8a2c4ca53c1a08",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_bbe47ff32463bfb1",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_ba8a2c4ca53c1a08_0a138cd5b9f8205c.txt",
+  "prompt_version": "0a138cd5b9f8205c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206416-AtD7rYP1aoVprzgsIu87",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003561,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00254,
+        "upstream_inference_cost": 0.003561,
+        "upstream_inference_prompt_cost": 0.001021
+      },
+      "is_byok": false,
+      "prompt_tokens": 1021,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1529
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ba8a2c4ca53c1a08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without knowing the instance values or direction of influence, no recourse is possible.\",\n    \"audit_usefulness\": \"The explanation lists top contributing features with weights, which supports basic model inspection and comparison across instances. However, it lacks information about feature values, prediction direction, or model decision boundaries needed for thorough bias investigation.\",\n    \"clarity\": \"The format is straightforward and uses standard notation (feature:weight pairs), making it accessible to readers familiar with machine learning. Non-experts may struggle with interpreting what the weights mean or how they drive the prediction.\",\n    \"completeness\": \"Only three features are shown with their contribution weights, but the instance context (actual feature values) is entirely absent. Without knowing whether education_Prof-school=1 or 0, or the baseline prediction, the local decision context remains incomplete.\",\n    \"concision\": \"The explanation is maximally compact, presenting only essential information (feature names and weights) with no redundancy. However, this brevity comes at the cost of completeness and actionability.\",\n    \"overall_quality\": \"The explanation provides a minimal but valid LIME output showing top local factors. It succeeds in identifying influential features but fails to provide sufficient context, actionability, or interpretability for most practical use cases.\",\n    \"semantic_plausibility\": \"The three features (education, relationship, occupation) are plausible drivers for the adult dataset's income prediction task. The feature values and their relative importance align with domain expectations for this classification problem.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:21.552240+00:00"
+}

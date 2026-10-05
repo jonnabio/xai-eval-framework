@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_69d04d93cca7f3e3",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_eec93395cc3f8408_eb2c3c2da16b15ed.txt",
+  "prompt_version": "eb2c3c2da16b15ed",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206397-wHHGXuKHyJ6w7P4ZRElg",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003762,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002635,
+        "upstream_inference_cost": 0.003762,
+        "upstream_inference_prompt_cost": 0.001127
+      },
+      "is_byok": false,
+      "prompt_tokens": 1127,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1654
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve creditworthiness. No specific, feasible recourse steps are suggested.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which factors drove the prediction and their relative magnitudes, supporting investigation of model logic and potential bias. However, the lack of base prediction value limits full audit context.\",\n    \"clarity\": \"The explanation is well-organized as a ranked list with numerical SHAP values, but requires familiarity with SHAP methodology and credit domain terminology (e.g., 'checking_status_0<=X<200') to fully interpret. Non-experts may struggle with the encoded feature names.\",\n    \"completeness\": \"The top 10 local factors are provided with their SHAP contributions, covering the main drivers of the prediction. However, the base prediction value and confidence are absent, limiting full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting each factor once with its contribution value. The format is efficient for the information conveyed.\",\n    \"semantic_plausibility\": \"The factors align with credit risk assessment logic (savings status, credit history, checking account status, age, payment plans), and the direction of contributions (negative for risk factors, positive for protective factors) is generally plausible for a credit denial prediction.\",\n    \"overall_quality\": \"The explanation provides a clear, concise ranking of influential features with interpretable SHAP values suitable for model auditing, but lacks actionability and user-friendly context for non-experts. It is technically sound but limited in practical utility.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:11.390010+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_58ca01f3bdea8b56",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_445567f442799a48_db05fff2476e0b4b.txt",
+  "prompt_version": "db05fff2476e0b4b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206370-LUDDqW65N9l2w7zlUhBW",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 688,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0048015,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00399,
+        "upstream_inference_cost": 0.0048015,
+        "upstream_inference_prompt_cost": 0.0008115
+      },
+      "is_byok": false,
+      "prompt_tokens": 1082,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2146
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution scores without stating the underlying feature values or suggesting actionable recourse.\",\n    \"audit_usefulness\": \"Auditors can inspect which features drove the prediction and their directional contributions, though the lack of base values and raw input values limits full reconstruction.\",\n    \"clarity\": \"The raw feature names and signed floating-point SHAP values require technical and domain familiarity to interpret properly.\",\n    \"completeness\": \"The top ten local drivers and their directional weights are presented, giving an adequate summary of key model factors despite missing feature values.\",\n    \"concision\": \"The text is compact and directly presents the relevant attributions without filler.\",\n    \"overall_quality\": \"This is an acceptable technical summary of SHAP local values, but it lacks natural language synthesis, actual feature values, and user guidance.\",\n    \"semantic_plausibility\": \"The identified features, such as checking status, credit history, and employment duration, align well with credit scoring domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:39.178740+00:00"
+}

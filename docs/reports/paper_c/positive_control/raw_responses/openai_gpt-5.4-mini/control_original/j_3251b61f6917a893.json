@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3251b61f6917a893",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_4e230a6771152fb2_a6676b4d18f62c40.txt",
+  "prompt_version": "a6676b4d18f62c40",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206251-Pv4MkBKbV59Wvi8S04Hw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00284475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00284475,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1423
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It only lists feature contributions, so a user cannot tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"The ranked local weights are useful for inspecting which inputs pushed the logreg model toward class 0, and they include several sensitive attributes. However, the small magnitudes and lack of base value or probability make deeper auditing limited.\",\n    \"clarity\": \"The output is easy to read because it is a short ranked list with signed contributions. A non-expert can see which factors helped or hurt the prediction, although the meaning of the numeric values is still somewhat opaque.\",\n    \"completeness\": \"It provides the top local factors, but not enough context to fully understand the decision because there is no intercept, baseline, probability, or indication of the feature values for the instance. The contributions are also very small, so the strength of the decision is hard to gauge.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It conveys the main local factors in few tokens without unnecessary wording.\",\n    \"overall_quality\": \"This is a decent LIME explanation for a tabular prediction: readable, compact, and useful for a basic local inspection. Its main weakness is that it lacks sufficient quantitative context to fully explain why class 0 was predicted or how strong the evidence was.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset and the directions are not obviously contradictory. Small effects from occupation, capital-gain, marital status, education, race, and sex are consistent with a linear model on this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:33.862481+00:00"
+}

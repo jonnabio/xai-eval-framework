@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c4850c0a457ee7ed",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_d3748ef854fdb49f_da29fd8cdff33c77.txt",
+  "prompt_version": "da29fd8cdff33c77",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206196-FT7L4xsjTuy9xenr1Kk8",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003402,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002375,
+        "upstream_inference_cost": 0.003402,
+        "upstream_inference_prompt_cost": 0.001027
+      },
+      "is_byok": false,
+      "prompt_tokens": 1027,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1502
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies key factors but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features drove the prediction and their relative SHAP contributions, enabling an auditor to inspect model behavior and identify potential bias patterns in feature weighting. This supports systematic model review.\",\n    \"clarity\": \"The explanation is well-organized and uses plain language with feature names and numerical contributions that are easy to parse for a non-expert reader. The format is straightforward and unambiguous.\",\n    \"completeness\": \"The explanation covers the top three contributing factors but does not indicate whether these represent the full decision context or if other features also played a role; the relative magnitude of their contributions to the final prediction is unclear.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and SHAP values) without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is clear and audit-useful but lacks actionability and provides incomplete context about the prediction's full decision boundary. It serves well for model inspection but poorly for end-user decision support.\",\n    \"semantic_plausibility\": \"The identified factors (education, marital status, occupation) are highly plausible drivers of income prediction in the adult dataset and align well with domain expectations for this classification task.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 5,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:40.286373+00:00"
+}

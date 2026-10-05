@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ddc4516b1b940072",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_07f7eab6526a79eb_da6bcc90595af19d.txt",
+  "prompt_version": "da6bcc90595af19d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206434-QQ0BKRFyPZzyh4y4t1BF",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1086,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 686,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00487125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040725,
+        "upstream_inference_cost": 0.00487125,
+        "upstream_inference_prompt_cost": 0.00079875
+      },
+      "is_byok": false,
+      "prompt_tokens": 1065,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2151
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical attribution weights without baseline feature values or counterfactual guidance, offering no actionable path for recourse.\",\n    \"audit_usefulness\": \"It exposes the directional influence of top features\u2014including sensitive attributes like sex and marital status\u2014which aids in auditing fairness and model behavior despite missing raw input values.\",\n    \"clarity\": \"The explanation is presented as a raw list of one-hot encoded feature names and numeric coefficients, requiring technical knowledge to interpret properly.\",\n    \"completeness\": \"The top positive and negative local drivers are identified, though the absence of the individual's actual feature values and prediction probability limits full context.\",\n    \"concision\": \"The summary is compact and directly reports the most influential factors without unnecessary filler.\",\n    \"overall_quality\": \"While technically sound and typical for raw LIME outputs, it functions primarily as a developer diagnostic rather than an accessible or actionable explanation.\",\n    \"semantic_plausibility\": \"The directions of the feature weights (e.g., positive for marriage and hours worked, negative for high school education and unmarried status) are consistent with known Adult dataset patterns.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:41.149993+00:00"
+}

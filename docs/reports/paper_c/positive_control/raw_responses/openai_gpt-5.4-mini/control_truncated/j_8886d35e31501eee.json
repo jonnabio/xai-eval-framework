@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_78dfd1648ed95148",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_8886d35e31501eee",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_78dfd1648ed95148_f8e5f2fef7c2aacd.txt",
+  "prompt_version": "f8e5f2fef7c2aacd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206179-QaQPL6ZmeHm0hBT9eE3k",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00286125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.00286125,
+        "upstream_inference_prompt_cost": 0.00065625
+      },
+      "is_byok": false,
+      "prompt_tokens": 875,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1365
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_78dfd1648ed95148\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few factors but does not suggest what the user could change or check to alter the outcome. There are no concrete recourse steps such as improving employment status, credit history, or application details.\",\n    \"audit_usefulness\": \"It reveals the top local SHAP contributors and their directions, which is useful for a basic audit of model behavior. However, it is too sparse to support deeper investigation of feature interactions, counterfactuals, or potential bias.\",\n    \"clarity\": \"The explanation is short and mostly readable, with familiar feature names and simple signs indicating positive or negative influence. A non-expert may still struggle with interpreting the SHAP values and the coded category 'no checking' without additional context.\",\n    \"completeness\": \"It includes only three top local drivers and omits the overall baseline, predicted class meaning, and other influential features. This provides a partial view of why the model predicted 0, but not enough full local context to fully understand the decision.\",\n    \"concision\": \"The explanation is very compact and communicates the main contributors in few tokens. It is efficient, though some brevity comes at the cost of interpretability and context.\",\n    \"overall_quality\": \"This is a reasonably informative local explanation for a tabular SHAP output, but it is minimalist and only partially interpretable. It is useful as a summary of top drivers, yet insufficient for strong user guidance or thorough audit analysis.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for a German credit model, since loan duration, employment stability, and checking status are all commonly relevant credit-risk signals. The sign pattern is also reasonable in a credit setting, although the exact direction cannot be fully verified without instance details.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:21.533804+00:00"
+}

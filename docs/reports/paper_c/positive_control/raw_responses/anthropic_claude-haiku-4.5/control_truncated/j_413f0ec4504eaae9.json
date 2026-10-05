@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_003259ff27515980",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_413f0ec4504eaae9",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_003259ff27515980_c86a535dd2fd5aba.txt",
+  "prompt_version": "c86a535dd2fd5aba",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206242-QpBGF2SSbqmGoutUQSXE",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003715,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002695,
+        "upstream_inference_cost": 0.003715,
+        "upstream_inference_prompt_cost": 0.00102
+      },
+      "is_byok": false,
+      "prompt_tokens": 1020,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1559
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_003259ff27515980\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to interpret them or what actions a clinician or patient could take based on these findings. No recourse or decision-support pathway is suggested.\",\n    \"audit_usefulness\": \"SHAP values with feature names and magnitudes support model transparency and enable auditors to verify that the model relies on plausible morphological features. However, the explanation lacks direction of effect (positive/negative contribution) and baseline context needed for full bias investigation.\",\n    \"clarity\": \"The explanation is concise and uses standard feature names from the breast cancer dataset, making it accessible to readers familiar with the domain. Non-experts may struggle without knowing what these features represent or how SHAP values should be interpreted.\",\n    \"completeness\": \"The explanation covers the top three local drivers but omits critical context such as the direction of each feature's contribution, the model's base prediction rate, and whether these features push the prediction toward class 0 or 1. The prediction confidence is also null.\",\n    \"concision\": \"The explanation is maximally compact, listing only feature names and SHAP values without redundancy. However, brevity comes at the cost of missing interpretive context that would aid understanding.\",\n    \"overall_quality\": \"The explanation provides a minimal but valid SHAP-based summary of local feature importance for a breast cancer prediction. It succeeds in identifying key drivers but falls short of actionability, completeness, and interpretability for non-expert stakeholders.\",\n    \"semantic_plausibility\": \"The three features (worst concave points, area error, worst concavity) are all established morphological descriptors in breast cancer diagnosis and are plausible drivers of a malignancy prediction. Their selection aligns with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:27.573488+00:00"
+}

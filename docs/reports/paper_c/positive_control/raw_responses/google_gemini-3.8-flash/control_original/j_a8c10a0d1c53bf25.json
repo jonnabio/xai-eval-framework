@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a8c10a0d1c53bf25",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_c697ae24ec5760fd_414589ea2057298f.txt",
+  "prompt_version": "414589ea2057298f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206255-PeadyHtjMOzfELgM34F4",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 822,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 450,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0038865,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0030825,
+        "upstream_inference_cost": 0.0038865,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1894
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP contribution scores without indicating what feature value changes would alter the outcome.\",\n    \"audit_usefulness\": \"It provides precise local SHAP values and feature attributions that allow a technical auditor to verify the top drivers of the prediction.\",\n    \"clarity\": \"The raw feature names with encoded strings and signed float attributions require technical familiarity with machine learning to interpret.\",\n    \"completeness\": \"The top ten contributing features and their directional attributions are captured, though exact instance feature values and the base value are missing.\",\n    \"concision\": \"The presentation is dense and efficient, communicating the top contributing factors without filler text.\",\n    \"overall_quality\": \"This is a solid technical explanation for data scientists and auditors, but it lacks natural language synthesis and recourse guidance for lay users.\",\n    \"semantic_plausibility\": \"The identified risk factors\u2014such as checking account status, employment duration, and housing\u2014are standard and logical determinants in credit scoring.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:42.303196+00:00"
+}

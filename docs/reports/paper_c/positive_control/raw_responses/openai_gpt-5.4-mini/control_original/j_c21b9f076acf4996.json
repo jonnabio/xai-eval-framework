@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_196e6ce035ebf3e3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c21b9f076acf4996",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_196e6ce035ebf3e3_12e85d56673d4e1d.txt",
+  "prompt_version": "12e85d56673d4e1d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206282-UY1G2XCfQ7QQBDnh0T77",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002349,
+        "upstream_inference_cost": 0.00306675,
+        "upstream_inference_prompt_cost": 0.00071775
+      },
+      "is_byok": false,
+      "prompt_tokens": 957,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1479
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_196e6ce035ebf3e3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies factors associated with the prediction, but it does not translate them into concrete recourse steps or tell the user what could be changed to alter the decision. For a credit case, it would be more actionable if it linked features like savings, credit amount, or duration to feasible applicant actions.\",\n    \"audit_usefulness\": \"The SHAP values provide a useful ranking of local drivers and allow an auditor to inspect which features pushed the model toward the predicted class. However, the values are sparse and lack baseline/context information, so they are only moderately helpful for deeper error or bias analysis.\",\n    \"clarity\": \"The list format is easy to scan, and the feature names and signs are straightforward for a technical reader. A non-expert may still struggle to interpret the meaning of the positive and negative SHAP values without additional explanation of the prediction scale.\",\n    \"completeness\": \"It covers several main local factors, but it does not explain the overall balance of evidence, the model output probability, or how these contributions combine into the final prediction. Important context such as the feature values for this instance is also missing.\",\n    \"concision\": \"The explanation is compact and includes the most influential factors without unnecessary prose. It is efficient, though a little more context would improve interpretability without adding much length.\",\n    \"overall_quality\": \"This is a decent local SHAP summary with useful feature attribution, but it is limited by the lack of context, action guidance, and intuitive interpretation. It is adequate for a technical review, but not excellent as a standalone explanation for end users.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit scoring, and the directions of influence are broadly consistent with common credit-risk patterns. A few sign patterns are hard to interpret without knowing the exact class mapping, but nothing appears contradictory or implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:06.530126+00:00"
+}

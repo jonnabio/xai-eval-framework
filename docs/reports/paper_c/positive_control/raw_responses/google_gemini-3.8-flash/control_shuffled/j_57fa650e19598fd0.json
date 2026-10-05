@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b168d0ab73784973",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_57fa650e19598fd0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_b168d0ab73784973_789328f5addb3f23.txt",
+  "prompt_version": "789328f5addb3f23",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206192-ypgGaAO0etvfori8drnN",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1180,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 791,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00523425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.004425,
+        "upstream_inference_cost": 0.00523425,
+        "upstream_inference_prompt_cost": 0.00080925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1079,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2259
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b168d0ab73784973\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only provides feature attribution values without actionable guidance, threshold targets, or counterfactual recourse.\",\n    \"audit_usefulness\": \"It provides precise numerical SHAP contributions for the top 10 features, allowing an auditor to inspect local logic, though the actual underlying feature values are omitted.\",\n    \"clarity\": \"The raw feature strings and negative/positive floating-point weights are difficult for a non-expert to interpret without explanation of the target class encoding.\",\n    \"completeness\": \"The top 10 drivers and their directional contributions are provided, though the model's base value and the instance's specific continuous feature values are absent.\",\n    \"concision\": \"The text is very compact, presenting the necessary attribution scores without redundant phrasing.\",\n    \"overall_quality\": \"This is an acceptable technical attribution summary that is useful for model auditing but lacks consumer-friendly readability and recourse.\",\n    \"semantic_plausibility\": \"The negative influences of low checking balances, low savings, and credit history are fully consistent with credit risk domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:41.502632+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7928550bca197035",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_e759e990528304a2_e4ddafc27a4cfa0b.txt",
+  "prompt_version": "e4ddafc27a4cfa0b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206264-1fVCA7zlWJLILO09XzFC",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003813,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002715,
+        "upstream_inference_cost": 0.003813,
+        "upstream_inference_prompt_cost": 0.001098
+      },
+      "is_byok": false,
+      "prompt_tokens": 1098,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1641
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without knowing the instance values or decision thresholds, it is impossible to derive concrete recourse steps.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features pushed the prediction toward class 1 (positive contributors) and which pushed against it (negative contributors), enabling an auditor to inspect model behavior and detect potential biases. The coefficient magnitudes support comparative analysis of feature importance.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names from the Adult dataset with clear positive/negative coefficient notation. A non-expert reader can understand that higher coefficients indicate stronger influence, though domain context about the Adult dataset would enhance interpretation.\",\n    \"completeness\": \"The explanation covers the top 10 local factors with both positive and negative contributions, providing a reasonably comprehensive view of the decision drivers for this instance. However, the actual feature values for this instance are not provided, limiting full local context.\",\n    \"concision\": \"The explanation is compact and efficiently presents feature names and coefficients without redundancy. Each entry conveys both the feature identity and its directional influence in minimal space.\",\n    \"overall_quality\": \"The explanation is a competent LIME output that serves audit and model inspection purposes well, but lacks actionability and instance-level context that would elevate it to excellent quality. It is suitable for model debugging but limited for end-user decision support.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for the Adult income prediction task (marital status, education, occupation, and sex are known predictors of income). The direction of effects (e.g., divorced status and professional specialty pushing toward higher income) aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:51.727378+00:00"
+}

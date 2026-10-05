@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b60690c60417e4de",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bd91f80195cc1796",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_b60690c60417e4de_3807d6d46e257c03.txt",
+  "prompt_version": "3807d6d46e257c03",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206188-p3m5Ui7taZqNDtApfdpk",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 529,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0030285,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0023805,
+        "upstream_inference_cost": 0.0030285,
+        "upstream_inference_prompt_cost": 0.000648
+      },
+      "is_byok": false,
+      "prompt_tokens": 864,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1393
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b60690c60417e4de\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few contributing features, but it does not translate them into concrete recourse or next steps. A user cannot tell what to change, whether change is possible, or how much it would affect the prediction.\",\n    \"audit_usefulness\": \"It is useful at a basic audit level because it reveals the top local factors and their signs/magnitudes, which helps inspect whether the model is relying on sensible variables. However, it lacks enough context about the instance values, baseline, and comparative feature importance to fully support deeper investigation.\",\n    \"clarity\": \"The wording is short and easy to parse, and the feature-impact format is straightforward for a general reader. Still, the shorthand 'LIME top local factors' and feature names like 'occupation_Tech-support' may be less intuitive without some familiarity with tabular ML explanations.\",\n    \"completeness\": \"The explanation covers only three local drivers and gives no actual feature values, no direction relative to the prediction beyond small positive weights, and no information about the rest of the factors. This is enough to identify some influences but not enough to fully understand why the model predicted class 1 for this case.\",\n    \"concision\": \"It is very compact and avoids redundancy, delivering the main local factors in just a few tokens. The brevity is efficient, though it comes at the cost of missing context and interpretability details.\",\n    \"overall_quality\": \"Overall, this is a concise but fairly thin local explanation: it is readable and somewhat informative, yet not sufficient for strong user-facing understanding or thorough model debugging. Its main strengths are simplicity and locality, while its weaknesses are limited detail and lack of actionable interpretation.\",\n    \"semantic_plausibility\": \"The features listed are plausible predictors for the Adult income task, and small positive local contributions from capital gain, tech-support occupation, and education level are consistent with expectations. Nothing in the explanation contradicts the dataset or model family.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:31.668969+00:00"
+}

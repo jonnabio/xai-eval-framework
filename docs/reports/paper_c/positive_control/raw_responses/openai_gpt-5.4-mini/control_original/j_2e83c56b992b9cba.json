@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2e83c56b992b9cba",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_75520768088e5528_820b35f7fec45fdf.txt",
+  "prompt_version": "820b35f7fec45fdf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206226-XpUDltfyQuWiFX8rl6Bb",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029505,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.0029505,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1444
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the feature attributions into concrete recourse or decision-review steps. It shows which factors mattered, but not what a person could feasibly change or verify.\",\n    \"audit_usefulness\": \"It is useful for auditing because it lists the top local SHAP contributors and their directions, which helps inspect whether the model relies on sensible signals. However, it lacks baseline context, feature values, and any comparison to typical cases, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The explanation is short and structured as a ranked list, which is easy to read. A non-expert may still struggle with the meaning of SHAP values and one-hot encoded feature names, but the overall presentation is understandable.\",\n    \"completeness\": \"It includes the main positive and negative local factors, but not the actual feature values, base value, or enough context to fully understand why prediction 0 was made. The mixed signs without an explicit mapping to the final class also leave the decision story incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy while preserving the key local contributors. It could be slightly more informative by compressing technical detail into a clearer summary, but it is already efficient.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for a tabular prediction: concise, readable, and useful for local inspection. Its main weakness is limited interpretability for non-experts and insufficient detail to fully support recourse or thorough auditing.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for Adult dataset predictions, especially age, education, relationship, marital status, hours worked, sex, and occupation. The directions are also broadly consistent with typical income-related patterns, even though the class mapping is not explicit.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:09.542148+00:00"
+}

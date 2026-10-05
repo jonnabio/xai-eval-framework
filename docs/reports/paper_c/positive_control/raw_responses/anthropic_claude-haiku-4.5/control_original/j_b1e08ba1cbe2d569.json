@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3d663bc47eb8d69",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b1e08ba1cbe2d569",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_d3d663bc47eb8d69_f45a82c58db1ba55.txt",
+  "prompt_version": "f45a82c58db1ba55",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206438-9rVtyls9KOIpjCK90Yhl",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003665,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00257,
+        "upstream_inference_cost": 0.003665,
+        "upstream_inference_prompt_cost": 0.001095
+      },
+      "is_byok": false,
+      "prompt_tokens": 1095,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1609
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3d663bc47eb8d69\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what actions to take, or how to modify inputs to change the prediction. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"The SHAP values with directional signs enable inspection of which features pushed the model toward class 0 and which away from it, supporting model behavior investigation. However, absolute feature values and thresholds are absent, limiting deeper auditing.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical SHAP values and signs, which is straightforward but requires familiarity with SHAP methodology and breast cancer feature semantics to interpret meaningfully.\",\n    \"completeness\": \"The explanation covers the top 10 local drivers with both positive and negative contributions, providing reasonable coverage of the decision factors. However, it lacks the actual feature values for the instance, limiting full local context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name and SHAP value) in a dense format appropriate for the scope.\",\n    \"semantic_plausibility\": \"The identified features (perimeter, area, concavity, texture, symmetry) are all established morphological characteristics relevant to breast cancer diagnosis, and their directional contributions are plausible for a malignancy classifier.\",\n    \"overall_quality\": \"The explanation is a competent SHAP output that supports model auditing and is semantically sound, but lacks actionability, instance-level context, and accessibility for non-technical stakeholders. It is adequate for data scientists but limited for broader use.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:42.805683+00:00"
+}

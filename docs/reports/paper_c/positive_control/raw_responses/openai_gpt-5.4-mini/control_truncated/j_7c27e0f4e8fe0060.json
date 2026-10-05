@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7c27e0f4e8fe0060",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_3e006f8c0e7512b1_e344b9005454f276.txt",
+  "prompt_version": "e344b9005454f276",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206189-Osa7yEOl8z88fBsvacbB",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00260175,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019395,
+        "upstream_inference_cost": 0.00260175,
+        "upstream_inference_prompt_cost": 0.00066225
+      },
+      "is_byok": false,
+      "prompt_tokens": 883,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1314
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not tell the user what concrete changes could affect the prediction. It offers no recourse, thresholds, or next steps.\",\n    \"audit_usefulness\": \"It provides a few local SHAP contributions, which is useful for a basic sanity check of feature influence. However, it is too sparse to support deeper audit work such as bias or error analysis.\",\n    \"clarity\": \"The wording is short and easy to parse, and the sign of each factor is explicit. A non-expert may still need prior knowledge of SHAP and encoded feature names to fully interpret it.\",\n    \"completeness\": \"The explanation shows only three top factors and omits the model output scale, baseline, and any broader context for why class 0 was predicted. That leaves an incomplete picture of the local decision.\",\n    \"concision\": \"It is compact and avoids redundancy, presenting only the top factors in a brief format. The brevity is efficient, though somewhat at the expense of interpretive depth.\",\n    \"overall_quality\": \"This is a reasonable local explanation but a fairly minimal one. It is understandable and compact, yet it lacks enough context and detail to be highly useful for decision review.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features and the mixed positive and negative SHAP values are plausible for a tabular classification model. The explanation does not contain any obvious contradictions or unrealistic claims.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:31.058687+00:00"
+}

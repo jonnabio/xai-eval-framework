@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9e26b015e502c178",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_28188c86ac4bdfad_39e9782afe1aee4f.txt",
+  "prompt_version": "39e9782afe1aee4f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206261-0C7vtUt0RsGMb3I4GWnY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002745,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.002745,
+        "upstream_inference_prompt_cost": 0.0006525
+      },
+      "is_byok": false,
+      "prompt_tokens": 870,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1335
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the individual. It only lists negatively weighted features without indicating what changes, if any, could affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it identifies three local contributing features and their signs. However, it is too sparse to support deeper investigation of model behavior, feature interactions, or potential bias.\",\n    \"clarity\": \"The wording is short and easy to read, and the feature contributions are presented in a straightforward list. A non-expert may still need some familiarity with encoded tabular features to understand terms like 'workclass_Local-gov' and 'relationship_Unmarried'.\",\n    \"completeness\": \"The explanation gives only the top three negative factors and no positive factors, baseline, or relative strength of the decision. That is enough to get a rough sense of why the model predicted 0, but not enough to fully understand the local decision.\",\n    \"concision\": \"The explanation is very compact and contains little redundancy. It communicates the main local factors efficiently, although the brevity comes at the cost of missing important context.\",\n    \"overall_quality\": \"This is a decent minimal LIME explanation that is readable and locally informative, but it is too thin to be genuinely useful beyond a quick glance. Its lack of context, recourse, and completeness limits the overall quality.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the negative contributions are consistent with a model predicting class 0. Nothing in the explanation is internally contradictory or obviously implausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:44.272664+00:00"
+}

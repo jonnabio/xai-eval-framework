@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cbdb515ea6b51b47",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b9992a9e9e739fdb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_cbdb515ea6b51b47_6bbc3f4246347a08.txt",
+  "prompt_version": "6bbc3f4246347a08",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206182-Qh3Eg0r0TvozGP5E49sL",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00287325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.00287325,
+        "upstream_inference_prompt_cost": 0.00070875
+      },
+      "is_byok": false,
+      "prompt_tokens": 945,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1426
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cbdb515ea6b51b47\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not translate them into concrete recourse or next steps. A user cannot tell what to change to alter the prediction or how feasible any change would be.\",\n    \"audit_usefulness\": \"It is useful for inspecting local feature influence because it shows the top weighted factors and their directions. However, it lacks the baseline, magnitude context, and whether the signs align with the final class probability, limiting deeper audit value.\",\n    \"clarity\": \"The output is concise and mostly readable, with each feature and its local contribution shown clearly. Still, the meaning of positive versus negative contributions is not explained, and repeated one-hot gender and marital-status indicators may confuse non-experts.\",\n    \"completeness\": \"It captures several local drivers of the prediction, but not enough to fully explain the decision. Important context such as the intercept, feature values for the instance, and the overall strength of the prediction is missing.\",\n    \"concision\": \"The explanation is compact and avoids long prose, delivering a short ranked list of local factors. Some redundancy appears through multiple correlated one-hot features, but overall the information density is good.\",\n    \"overall_quality\": \"This is a decent LIME explanation for a tabular model: it is readable, compact, and locally informative. Its main weaknesses are limited recourse value and incomplete decision context, but it remains useful overall.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset and a logistic regression model, especially education, capital gain, sex, and marital or relationship status. The directions are also broadly consistent with common income-prediction patterns, though the exact signs cannot be fully verified from the record alone.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:25.033928+00:00"
+}

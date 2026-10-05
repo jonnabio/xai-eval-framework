@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_093b70110f1969a0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_ac6e5925b1641835_99f8f4ca2fc271ef.txt",
+  "prompt_version": "99f8f4ca2fc271ef",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206694-Xpp7yO3W8bnH1vk9uxMa",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1770,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1370,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.007443,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0066375,
+        "upstream_inference_cost": 0.007443,
+        "upstream_inference_prompt_cost": 0.0008055
+      },
+      "is_byok": false,
+      "prompt_tokens": 1074,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2844
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no actionable recourse or next steps, consisting solely of negligible weights and immutable demographic features.\",\n    \"audit_usefulness\": \"Although it reveals that protected attributes like race enter the local surrogate, the vanishingly small coefficients make it difficult for an auditor to discern meaningful model mechanics.\",\n    \"clarity\": \"The list of raw one-hot encoded feature names paired with tiny decimal values is difficult for a non-expert to interpret intuitively.\",\n    \"completeness\": \"It omits the instance's actual feature values and baseline prediction context, making it unclear how these near-zero weights justify a positive class prediction.\",\n    \"concision\": \"The token length is compact, but including multiple features with 0.0000 weights adds unnecessary clutter.\",\n    \"semantic_plausibility\": \"Historically dominant predictors such as marital status and education have zero weight while race appears as the top driver, which appears artifactual rather than plausible.\",\n    \"overall_quality\": \"The explanation is of low overall quality due to uninformative near-zero weights, missing instance values, and questionable feature importance rankings.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:25:05.913990+00:00"
+}

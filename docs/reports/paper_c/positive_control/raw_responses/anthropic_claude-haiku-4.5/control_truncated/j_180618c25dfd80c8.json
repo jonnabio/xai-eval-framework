@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_180618c25dfd80c8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_4e230a6771152fb2_cff2a5ddf28a26f1.txt",
+  "prompt_version": "cff2a5ddf28a26f1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206292-M2uuRKH8guitWZlUDkYo",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 439,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003212,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002195,
+        "upstream_inference_cost": 0.003212,
+        "upstream_inference_prompt_cost": 0.001017
+      },
+      "is_byok": false,
+      "prompt_tokens": 1017,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1456
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features influenced the prediction and their direction/magnitude, enabling an auditor to inspect model behavior and detect potential bias (e.g., race as a factor).\",\n    \"clarity\": \"The format is straightforward and uses plain feature names with numerical coefficients; a non-expert can understand that these factors contributed to the prediction, though domain context helps.\",\n    \"completeness\": \"Only three top factors are shown without indication of how many total features exist or their relative importance; the explanation lacks context about the instance's actual feature values.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format without padding.\",\n    \"overall_quality\": \"The explanation is a standard LIME output that is clear and audit-useful but lacks actionability and full local context; it serves its primary purpose adequately but with notable limitations.\",\n    \"semantic_plausibility\": \"The factors (occupation, capital gain, race) are plausible predictors in income classification tasks, and their directions align with typical domain expectations for a negative prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:16.564402+00:00"
+}

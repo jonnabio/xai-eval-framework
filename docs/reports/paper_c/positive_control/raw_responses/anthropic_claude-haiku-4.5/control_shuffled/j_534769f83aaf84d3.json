@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_534769f83aaf84d3",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_c3a6d29157145c8e_dab6055ceb8372e6.txt",
+  "prompt_version": "dab6055ceb8372e6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206309-t8vp9AoIEXf3AuZW6oMk",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003666,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002575,
+        "upstream_inference_cost": 0.003666,
+        "upstream_inference_prompt_cost": 0.001091
+      },
+      "is_byok": false,
+      "prompt_tokens": 1091,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1606
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken, what thresholds matter, or how feature values relate to the prediction outcome. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"The ranked SHAP values enable inspection of which features the model weighted most heavily, supporting bias investigation and model behavior review. However, the lack of actual feature values and direction of influence limits deeper audit capability.\",\n    \"clarity\": \"The explanation is well-organized as a ranked list with clear numerical scores, making it accessible to non-experts without requiring domain knowledge of SHAP mechanics. The feature names are intuitive for medical professionals.\",\n    \"completeness\": \"The explanation identifies the top 10 contributing features with their relative importance, covering the main drivers of the prediction. However, it omits the actual feature values for the instance and the direction (positive/negative) of each feature's contribution.\",\n    \"concision\": \"The explanation is compact and efficiently formatted as a ranked list without redundancy, delivering feature importance information in minimal space. Each entry conveys both feature name and quantitative contribution.\",\n    \"overall_quality\": \"The explanation provides a solid foundation for understanding model focus but falls short of actionability and completeness due to missing feature values and contribution directions. It serves audit purposes adequately but lacks practical utility for decision-making.\",\n    \"semantic_plausibility\": \"The identified features (perimeter, texture, concave points, area) are well-established breast cancer diagnostic indicators, making the model's focus highly plausible and consistent with domain knowledge. The ranking aligns with clinical relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:33.906426+00:00"
+}

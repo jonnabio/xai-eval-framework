@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_07f7eab6526a79eb",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_90b16b8710d4567b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_07f7eab6526a79eb_310cce819be3e6ff.txt",
+  "prompt_version": "310cce819be3e6ff",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206442-QKMvG490Qpl0HkzK75Hg",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 508,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004128,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0033975,
+        "upstream_inference_cost": 0.004128,
+        "upstream_inference_prompt_cost": 0.0007305
+      },
+      "is_byok": false,
+      "prompt_tokens": 974,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1880
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_07f7eab6526a79eb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw local attribution coefficients without indicating baseline values, thresholds, or concrete actions to change or preserve the outcome.\",\n    \"audit_usefulness\": \"It provides a clear view of the top three local weights from LIME, allowing an auditor to see directional influence, though the lack of actual feature values limits deeper debugging.\",\n    \"clarity\": \"The raw feature names and small decimal weights require basic technical familiarity, and the absence of specific feature values makes interpretation slightly abstract for laypersons.\",\n    \"completeness\": \"Only three local factors are shown and their actual instance values are omitted, leaving out a substantial portion of the decision context.\",\n    \"concision\": \"The summary is very compact and communicates the top features and their directional weights without unnecessary fluff.\",\n    \"overall_quality\": \"While concise and semantically plausible for the Adult dataset, the explanation lacks instance feature values and actionable guidance, providing only basic local attribution.\",\n    \"semantic_plausibility\": \"The identified features and directions align well with established income dynamics in the Adult dataset, where being married and working hours correlate with higher earnings.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:48.992761+00:00"
+}

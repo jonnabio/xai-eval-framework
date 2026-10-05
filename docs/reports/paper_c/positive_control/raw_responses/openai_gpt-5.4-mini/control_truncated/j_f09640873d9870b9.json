@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f09640873d9870b9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_b11abd9ec480a4aa_6ff512e1f49ce6dd.txt",
+  "prompt_version": "6ff512e1f49ce6dd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206243-jwQr6hJ5GFLzCCFSgJ8B",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00279525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021465,
+        "upstream_inference_cost": 0.00279525,
+        "upstream_inference_prompt_cost": 0.00064875
+      },
+      "is_byok": false,
+      "prompt_tokens": 865,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1342
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation points to a few contributing features, but it does not tell the user what to change or how those factors affect the outcome in practical terms. There is no clear recourse or next step beyond observing the listed attributes.\",\n    \"audit_usefulness\": \"It offers a brief local feature ranking, which is useful for a quick sanity check, but it is too sparse to diagnose model bias or failure modes. An auditor would need more context, such as feature values, baseline comparison, and additional contributing factors.\",\n    \"clarity\": \"The wording is simple and the feature contributions are easy to read, even for a non-expert. However, the meaning of the signed values is only implicitly conveyed, so the explanation is understandable but not fully self-explanatory.\",\n    \"completeness\": \"Only three local factors are shown, so the explanation omits much of the decision context behind the model's positive prediction. It does not indicate whether these are the strongest drivers overall or how much they outweigh negative evidence.\",\n    \"concision\": \"The explanation is very short and free of obvious redundancy, giving a compact summary of the top local factors. It is efficient, though the brevity comes at the cost of missing useful context.\",\n    \"overall_quality\": \"This is a decent minimal LIME explanation: readable, compact, and plausibly related to the Adult dataset. Still, it is too thin to fully explain the prediction or support meaningful recourse or auditing.\",\n    \"semantic_plausibility\": \"The listed features are coherent for the Adult income dataset, and the signs are plausible for a positive classification depending on the instance values. Nothing in the explanation conflicts with general domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:26.450812+00:00"
+}

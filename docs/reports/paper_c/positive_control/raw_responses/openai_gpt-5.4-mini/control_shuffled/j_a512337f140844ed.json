@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a512337f140844ed",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_e475cad54cb8d814_94febf07f86610e1.txt",
+  "prompt_version": "94febf07f86610e1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206257-JFOqzRHd2czh5AI4GAPt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027765,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.0027765,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1397
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete next step or recourse for the user. It does not indicate what could be changed or what review action should be taken.\",\n    \"audit_usefulness\": \"The SHAP ranking is useful for checking which variables pushed the prediction up or down, which helps basic model inspection. However, it lacks feature values, a baseline, and class-specific interpretation, so it is only moderately helpful for deeper auditing.\",\n    \"clarity\": \"The format is straightforward and the feature attributions are easy to read for a technical or semi-technical audience. A non-expert may still struggle because the feature names are medical and the meaning of positive versus negative SHAP values is not explained.\",\n    \"completeness\": \"It provides the top local factors affecting the prediction, but not the actual feature values, the predicted probability, or how these contributions combine to produce class 1. That leaves important local decision context missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy while still listing several key contributors. It is reasonably information-dense for its length.\",\n    \"overall_quality\": \"This is a decent local explanation for a tabular SHAP output: concise, readable, and informative about feature influence. Still, it falls short of being fully actionable or fully explanatory because it lacks context, magnitude interpretation, and recourse guidance.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are medically plausible and consistent with a random forest SHAP explanation. The mix of positive and negative contributions also looks reasonable for a local attribution summary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:40.178505+00:00"
+}

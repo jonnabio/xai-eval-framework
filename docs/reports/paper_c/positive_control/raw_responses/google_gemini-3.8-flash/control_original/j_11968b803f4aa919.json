@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_11968b803f4aa919",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_3c34585b1d65d81e_6d9cda19e3564b2c.txt",
+  "prompt_version": "6d9cda19e3564b2c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206230-0UmV1wLTdrS9DLZkgwk0",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 504,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004239,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.003435,
+        "upstream_inference_cost": 0.004239,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1988
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without contextual guidance, feature thresholds, or actionable paths for recourse.\",\n    \"audit_usefulness\": \"It provides signed local attributions that allow an auditor to detect model reliance on sensitive attributes like sex and marital status, though the absence of original feature values limits deeper verification.\",\n    \"clarity\": \"The semi-colon delimited list of encoded feature names and numeric coefficients is readable for technical users but difficult for a non-expert.\",\n    \"completeness\": \"Ten local features with signed magnitudes are supplied, covering the primary drivers of the prediction, though base rates and observed feature values are missing.\",\n    \"concision\": \"The text presents the essential attribution scores compactly without fluff or redundant phrasing.\",\n    \"overall_quality\": \"This is a solid, typical technical attribution list that functions adequately for auditing but lacks user-facing clarity and recourse.\",\n    \"semantic_plausibility\": \"The direction and magnitude of the weights align well with standard economic indicators on the Adult dataset, such as capital gains and marriage positively influencing high income.\",\n    \"actionability\": \"The explanation presents static attribution weights without any actionable guidance or realistic recourse recommendations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:17.614334+00:00"
+}

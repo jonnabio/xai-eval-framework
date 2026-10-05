@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e475cad54cb8d814",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c1bf7fb117246206",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_e475cad54cb8d814_470bd57b44d5ad75.txt",
+  "prompt_version": "470bd57b44d5ad75",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206254-blI0cYeRbUa5b1mNdxRS",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027585,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.0027585,
+        "upstream_inference_prompt_cost": 0.0006525
+      },
+      "is_byok": false,
+      "prompt_tokens": 870,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1338
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e475cad54cb8d814\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies which features pushed the prediction up or down, but it does not translate them into any concrete recourse or next steps. A user cannot tell what could be changed or checked to alter the outcome.\",\n    \"audit_usefulness\": \"It is useful for a quick sanity check because it shows the top positive and negative SHAP contributors. However, it is too sparse to support deeper auditing of model behavior, such as checking feature interactions, stability, or systematic bias.\",\n    \"clarity\": \"The format is straightforward and the feature names are understandable to a technical or semi-technical reader. Still, a non-expert may not know what the numeric SHAP values mean in magnitude or how they combine to the final prediction.\",\n    \"completeness\": \"Only three local factors are listed, and there is no baseline value, probability, or explanation of how strongly these factors contributed to class 1. This leaves out enough context that the specific decision cannot be fully reconstructed.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy. It delivers a small amount of useful information per word, though at the cost of detail.\",\n    \"overall_quality\": \"This is a plausible, concise SHAP summary that gives a rough sense of the local drivers of the prediction. Its main weakness is limited interpretability and insufficient context for a full decision explanation or meaningful recourse.\",\n    \"semantic_plausibility\": \"The listed features are well-known breast cancer predictors, especially concave points and concavity, so the explanation fits the domain well. The mix of positive and negative contributions is also plausible for a tree-based model on this dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:36.746363+00:00"
+}

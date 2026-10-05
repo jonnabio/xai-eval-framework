@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9a991f3bd7709007",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4a6322317183b7ef",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_9a991f3bd7709007_6d264dedde4f9224.txt",
+  "prompt_version": "6d264dedde4f9224",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206376-OnXqVOZHntqnwOIqGoLN",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003461,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002435,
+        "upstream_inference_cost": 0.003461,
+        "upstream_inference_prompt_cost": 0.001026
+      },
+      "is_byok": false,
+      "prompt_tokens": 1026,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1513
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9a991f3bd7709007\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to interpret them or what actions a clinician or patient could take based on this prediction. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features drove the prediction and their SHAP values, enabling an auditor to inspect model behavior and identify potential biases or errors in feature weighting. This supports systematic model review.\",\n    \"clarity\": \"The explanation uses technical terminology (SHAP, concave points, area error) without definition, requiring domain knowledge in oncology and machine learning to interpret. A non-expert would struggle to understand the meaning.\",\n    \"completeness\": \"Only three features are listed with their contributions; the explanation does not indicate whether these are the only relevant drivers, their relative importance, or the baseline prediction value needed for full context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting three key factors with their SHAP values in minimal space without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sound for model auditing but lacks accessibility, actionability, and sufficient context for clinical decision-making. It serves a narrow technical audience well but fails broader stakeholder needs.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, concave points and area measurements are established morphological features used in pathology; their inclusion is domain-appropriate, though the negative contribution of area error and positive contributions of concave points align with expected feature relationships.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:40.937156+00:00"
+}

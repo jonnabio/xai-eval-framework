@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4dd5a90b3fda2d91",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_afad86e31d6d5cf6_449969f220734415.txt",
+  "prompt_version": "449969f220734415",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206374-sG2V1p70iW2ZIuiiM0sh",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00266925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001953,
+        "upstream_inference_cost": 0.00266925,
+        "upstream_inference_prompt_cost": 0.00071625
+      },
+      "is_byok": false,
+      "prompt_tokens": 955,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1389
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps a person could take to change the prediction. It only lists feature contributions without translating them into actionable guidance.\",\n    \"audit_usefulness\": \"It is useful for a limited local inspection because it shows which features nudged the MLP prediction up or down. However, the tiny magnitudes and lack of baseline/probability context make it weak for serious error or bias analysis.\",\n    \"clarity\": \"The list is easy to read and the sign of each contribution is apparent. A non-expert may still struggle to interpret the meaning of the small numeric values and encoded categorical features.\",\n    \"completeness\": \"It names several top local factors, but it does not explain the overall decision strength, class probabilities, or how these factors combine into the final prediction. Important context for understanding this specific prediction is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It conveys the main local factors in a short format.\",\n    \"overall_quality\": \"This is a reasonable LIME summary for a tabular prediction, but it is only moderately informative because the values are tiny and the decision context is thin. It works as a quick local snapshot rather than a strong explanation.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset, and the directions of influence are coherent with a local linear explanation. Nothing in the output appears contradictory or domain-inconsistent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:36.390273+00:00"
+}

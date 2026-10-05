@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_eea1026f9d1c80ce",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_902d690264149a09_ada15e15031ca89d.txt",
+  "prompt_version": "ada15e15031ca89d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206528-TzZlzLH0iU2NUan79d1E",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 745,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00500475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0042,
+        "upstream_inference_cost": 0.00500475,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2193
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP values without practical guidance, thresholds, or recourse steps for changing the outcome.\",\n    \"audit_usefulness\": \"It highlights key model drivers and their relative weights for the MLP, though the absence of original feature values limits deeper debugging.\",\n    \"clarity\": \"The list of raw feature attribution scores and one-hot encoded variable names requires technical familiarity with SHAP to interpret.\",\n    \"completeness\": \"The top 10 feature attributions provide reasonable coverage of local impact, but the missing base value and underlying feature values leave the decision context incomplete.\",\n    \"concision\": \"The presentation is compact and delivers feature attribution weights without superfluous text.\",\n    \"overall_quality\": \"While technically sound as a quick attribution summary, the lack of input feature values and actionable context limits its overall utility.\",\n    \"semantic_plausibility\": \"The identified features, including education, working hours, and marital status, align well with established socioeconomic predictors of income.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:22:18.057901+00:00"
+}
