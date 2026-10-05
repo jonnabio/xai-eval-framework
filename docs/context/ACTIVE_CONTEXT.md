@@ -25,9 +25,102 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-05 (session end: Paper C reviewed, revised, approved, archived; ready to send)
+
+This is the latest handoff and the full state at the end of the session. The two Paper C
+entries of the same day directly below it keep the detail.
+
+- **Completed**:
+  - **Scientific review of the third draft** (Scientific Editor role, given to the author
+    in the session; not written to `docs/review/`). Five recommendations and one optional
+    experiment; the author asked for all six.
+  - **Plan before the work:** `docs/reports/paper_c/PLAN.md`, section 18, committed before
+    any analysis or judge call; results in 18.5, author decisions in section 19.
+  - **Analyses of the stored responses** (`scripts/paper_c_reliability.py` extended; the
+    147 earlier coefficients did not change): SHAP and LIME taken together with and
+    without the five zero-weight records, the spread among the judges for one case, the
+    metric correlations among the non-zero LIME cases, shares of variance by dataset and
+    model family, run facts (gateway, dates, reasoning tokens).
+  - **Positive control, a new cohort** (RCA-002) in
+    `docs/reports/paper_c/positive_control/`: 79 SHAP and LIME cases in three versions
+    (stored, truncated, shuffled), 3 judges, one call, the clean prompt; 711 calls, 710
+    valid. Every judge lowered completeness for the truncated text (mean -0.82; ICC 0.18
+    to 0.60). For the shuffled text one judge of three lowered semantic plausibility and
+    the ICC did not rise.
+  - **Fourth draft of Paper C:** a fifth question and section 3.6 (the control); sections
+    3.2, 3.4 and 3.5 corrected; gateway, dates and reasoning mode in the methods; the
+    table of the sensitivity views became text (four tables, one figure); the two
+    quotations that left out an item of the stored text were removed. 15 pages in Word in
+    both versions, abstract 249 words, resumen 250. Title and AI declaration unchanged.
+  - **Author decisions (2026-10-05):** the fourth draft is approved; the pull requests are
+    merged; Zenodo 0.12.0 is the official version; the author sends the submission email
+    once the journal's author account exists.
+  - **Merged to `main`:** #26 (draft and cohort), #27 (registry), #29 (registry for the
+    fourth draft, `paper_c` resolver for the new result files, version 0.12.0 metadata),
+    #30 (new citation, plan section 19), #28 (Paper D README: the journal account request
+    of 2026-10-04; it was clean and passing, and only waited to be merged), and the pull
+    request that carries this handoff.
+  - **Zenodo version 0.12.0: `10.5281/zenodo.23165763`**, from GitHub release
+    `paper-c-tm-2026-10-05`; the full version of the paper cites it.
+  - `EDITOR_NOTE.md` rewritten for the new table numbers and the control.
+- **Current State**:
+  - **Paper C is ready to send and is not submitted.** Files to attach, local and
+    git-ignored, in `docs/reports/paper_c/submission/`: `paper_c_blind.docx`,
+    `paper_c_full.docx`, `Figure1.tiff`. The blind files have no archive or repository
+    string.
+  - Registry: 200 claims of Paper C's own, 21 sites on shared quantities. Last
+    verification: `register_paper_c.py --check`; `verify_claims.py` 1189 claims / 1518
+    sites / 29 files fully registered; `verify_sync.py`; `scan_shared_literals.py
+    --strict` 0 unexplained; `verify_exp4_reconstruction.py` 18 pins; 22 tests in
+    `tests/pubs`.
+  - Papers B, D and E are submitted and were not touched, except the Paper D README note
+    of pull request #28.
+  - The main folder is on `paper/c-llm-judges`, level with `main`, clean. No pull request
+    is open. No lane lock is held.
+- **Next Steps**:
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if
+     it fails.
+  2. Author: when the journal's author account exists, confirm in
+     `docs/reports/paper_c/EDITOR_NOTE.md` that the thesis is still not deposited, add the
+     telephone number, and send Paper C. Deadline 2026-10-15. Then record the submission
+     in the README of Paper C and in the status table above.
+  3. Papers B, D and E: wait for the journals; record each decision when it arrives.
+  4. Unchanged: the second-reviewer adjudication of the corpus; the thesis sentence about
+     the earlier article leaving the SHAP-LIME contrast unresolved; return the main folder
+     to `thesis/rca-001-phase-2` for Task 3 / RCA-001 Phase 2; `git worktree prune`.
+- **Blockers/Issues**:
+  - The journal's reply to the account request of 2026-10-04 is pending; Paper C cannot
+    be sent through the account until it arrives.
+  - No review followed the fourth draft; the revision was made by the session that wrote
+    the review. The author read and approved it.
+  - Paper C is at the page limit and both abstracts are at the word limit.
+  - Figure 1 still shows all 32 LIME cases; the text explains the five zero-weight records.
+  - One response of GPT-5.4 mini in the control has no scores and was not called again
+    (710 of 711 valid; the paper says so).
+  - The thesis chapter 5 and the 32-page edition call the primary condition label-hidden,
+    although the prompt allows the label to be derived (unchanged, thesis lane).
+- **Notes**:
+  - Do not rebuild Paper C or change its text unless the author asks. A change to code or
+    results needs a new Zenodo version and a new run of `register_paper_c.py` on a
+    `pubs/*` branch; a text change that prints no new number needs only the build.
+  - The assistant's `gh pr merge --merge` was accepted in this session after the author
+    asked for the merges.
+  - Release route that worked: version bump on `main` by pull request, `git tag <name>
+    origin/main`, push the tag, `gh release create <tag> --verify-tag --notes-file`;
+    Zenodo archived it in about a minute. The DOI is read from
+    `https://zenodo.org/api/records?q=conceptrecid:19297723&all_versions=true`.
+  - The positive control took about 25 minutes in twelve processes
+    (`run_positive_control.py --judge <id> --shard i/4`, then `--parse-only`).
+  - Word page count: Word COM from PowerShell, `ComputeStatistics(2)` after
+    `Repaginate()`; measure both versions, the full one is about four lines longer.
+  - `sed` and heredocs drop LaTeX backslashes, and a heredoc with apostrophes fails to
+    parse: use the editor tool or a script file written with it.
+  - Switching between `paper/c-*` and `pubs/*` needs `check_lane.py release` and a new
+    `claim`, each with `--owner`.
+
 ## Session update - 2026-10-05 (Paper C: fourth draft approved, registered, Zenodo 0.12.0)
 
-This entry is the latest. It closes Next Steps 1 to 3 and the first three Blockers of the
+This entry closes Next Steps 1 to 3 and the first three Blockers of the
 handoff directly below, which keeps the detail of the revision.
 
 - **Author decisions:** the fourth draft was read and approved; the pull requests were to
