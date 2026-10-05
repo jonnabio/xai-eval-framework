@@ -17,6 +17,8 @@ def lane(branch):
 def test_paths_resolve_to_their_lane():
     assert check_lane.owner_of("docs/reports/paper_d/paper_d_template.tex", REG) == "paper-d"
     assert check_lane.owner_of("scripts/pubs/render_paper_d.py", REG) == "paper-d"
+    assert check_lane.owner_of("docs/reports/paper_c/PLAN.md", REG) == "paper-c"
+    assert check_lane.owner_of("docs/reports/paper_bc/paper_bc_iberamia.tex", REG) == "paper-bc"
     assert check_lane.owner_of("thesis/capitulo-4-resultados.qmd", REG) == "thesis"
     assert check_lane.owner_of("tests/analysis/test_analyze_paper_e.py", REG) == "paper-e"
 
@@ -40,6 +42,8 @@ def test_branches_resolve_to_their_lane_and_folder():
     assert lane("thesis/rca-001-phase-2")["name"] == "thesis"
     assert lane("paper/e-feature-agreement")["folder"] == REG["main_folder"]
     assert lane("paper/f-external-validity")["folder"] == "xai-paper-f"
+    assert lane("paper/c-llm-judges")["name"] == "paper-c"
+    assert lane("paper/c-llm-judges")["folder"] == REG["main_folder"]
     assert lane("main") is None
     assert lane("feature/anything") is None
 
