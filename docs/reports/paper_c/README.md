@@ -41,10 +41,24 @@ and has not been reviewed again. On `main`, archived as Zenodo 0.10.0; **not sub
 | F12 registry | **Open** (item 5 below) |
 | F13, F14 | Distinct instances stated; decision rule stated in the methods |
 
+**Second review (2026-10-04, a session that did not write the draft):**
+`docs/review/scientific-rigor-review_paper_c_2026-10-04_r2.md`. All recomputed values equal
+the draft. Two major findings, both answered with files already committed and no judge call:
+
+- N01: the agreement among LIME cases comes from 5 of the 32 records whose ten weights are
+  all zero; without them the coefficients are between -0.13 and 0.33.
+- N02: among SHAP cases the judges gave almost the same score to every case (same score in
+  83% of pairs for completeness); the low coefficient is not shown to be disagreement.
+
+Five minor findings (N03 to N07) are clauses. **Not applied: they change the abstract and
+need a dated addition to `PLAN.md`, which are the author's decisions.** A change to the
+analysis code or result files needs a new Zenodo version.
+
 **Open before submission**
 
-1. Note to the editor: Paper D is in the same issue; earlier reliability tables are public
-   in the 32-page edition and the thesis. Not drafted.
+0. Author: decide on the second review (its three questions), then revise.
+1. Note to the editor: drafted in `EDITOR_NOTE.md` (Spanish to send, English for the
+   record). Not sent; four points to check are listed at its top.
 2. Author decision: whether the human subset is in this submission (recommendation: no).
    The rating sheets in `human_subset/` show the clean record. At 15 pages, a human-subset
    section needs an equal cut.
@@ -54,8 +68,13 @@ and has not been reviewed again. On `main`, archived as Zenodo 0.10.0; **not sub
 5. Registry: put `paper_c.tex` under `[coverage]`, add `docs/reports/paper_c/` to the
    protected side of `[exclusivity]`, wire `verify_sync.py`, replace the placeholder abstract
    in `pub/claims.toml` (shared files, through `main`). Not done: the numbers of the draft
-   are generated from result files but are not yet in `pub/claim_registry.toml`.
-6. Independent rigor review. Done 2026-10-04: Zenodo version 0.10.0,
+   are generated from result files but are not yet in `pub/claim_registry.toml`. Held until
+   the revision after the second review: its findings change values in the text.
+6. Literature on LLM-judge reliability (F11): candidates in
+   `LITERATURE_LLM_JUDGE_RELIABILITY.md`. XAI-Arena (arXiv:2609.09428, September 2026) uses
+   an LLM judge on SHAP, LIME and DiCE explanations and must be cited. Nothing added to the
+   manuscript yet.
+   Done 2026-10-04: Zenodo version 0.10.0,
    `10.5281/zenodo.23149419`, from GitHub release `paper-c-tm-2026-10-04` (`main` at
    `d97dbe188`); the full version cites it. A later change to code or results needs a new
    version; a text change does not.
