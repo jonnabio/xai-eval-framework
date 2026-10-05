@@ -25,6 +25,82 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-05 (Paper F: lane set up in the main folder; no result, no code run)
+
+This is the latest handoff. It concerns Paper F only; the Paper C handoff below is
+unchanged and still current for Papers B, C, D and E.
+
+- **Completed**:
+  - **The Paper F lane could not be claimed.** `scripts/pubs/lanes.toml` named
+    `../xai-paper-f`, a folder missing from disk since 2026-10-04. The lane now names the
+    main folder, by the rule of ADR-0021 (amendment of 2026-10-05). It also owns
+    `docs/planning/paper_f_*`, `scripts/paper_f_*` and `tests/analysis/test_paper_f_*`,
+    because the analysis plan places its generator scripts in `scripts/`. Lane tests
+    updated (22 tests in `tests/pubs` pass).
+  - **Pull request #34** (`pubs/paper-f-lane-clean`, cut from `main`): the lane change in
+    one commit, and this handoff in a second. It carries nothing of Paper C or Paper D.
+    Pull request #33, the first version, was closed: it had been cut from
+    `paper/c-llm-judges` and so carried the commit of pull request #32.
+  - **Stale working tree removed:** `git worktree remove ../xai-paper-f` (the folder was
+    already gone; its branch held no commit that `main` lacks).
+  - **Branch `paper/f-external-validity`** was 161 commits behind `main`; it was
+    fast-forwarded and pushed, with one lane commit (`e199d8643`):
+    - `docs/reports/paper_f/README.md`, section 7: the lane, the paths it owns, and six
+      rules that apply before any result exists;
+    - links to a local disk path made relative (README and `METHODOLOGICAL_ANALYSIS.md`);
+    - `ANALYSIS_PLAN.md`, section 12: a dated row for the script names and for the section
+      number that 11.4 cites; the design is unchanged;
+    - `docs/reports/paper_f/.gitignore` (`submission/`) and
+      `outputs/analysis/paper_f/README.md`.
+- **Current State**:
+  - Paper F: pre-analysis plan and methodological appraisal only. No venue, datasets B, C
+    and D not chosen, no code run, no result, no manuscript.
+  - Open pull requests: **#32** (Paper D is not submitted; `ACTIVE_CONTEXT.md` only) and
+    **#34** (this one). They change different parts of this file and can be merged in
+    either order. The assistant's merge was refused by the permission check in this
+    session; the author merges them.
+  - `paper/f-external-validity` holds the commit of #32 and the first version of the lane
+    commit in its history, because it was fast-forwarded from the first lane branch. Its
+    files equal `main` plus #32, #34 and the lane commit. No pull request is open for it.
+  - Verified on `paper/f-external-validity`: `verify_claims.py` 1189 claims / 1518 sites /
+    29 files fully registered; `verify_sync.py`; `scan_shared_literals.py --strict` 0
+    unexplained.
+  - The main folder is on `paper/f-external-validity`, clean. The lane lock is released.
+- **Next Steps**:
+  1. Author: merge #32 and #34.
+  2. Then, in the main folder on `paper/f-external-validity`: `git fetch origin`,
+     `git merge origin/main`, and
+     `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+     Open the pull request for the Paper F branch only after #32 and #34 are on `main`, so
+     that it shows the Paper F lane commit alone.
+  3. Author decisions before any code runs, each recorded in `ANALYSIS_PLAN.md` section 12
+     with its date: the datasets B, C and D; the venue; the items under Blockers.
+  4. Unchanged from the handoff below: Papers C and D wait for the journal account
+     (deadline 2026-10-15); Papers B and E wait for their journals.
+- **Blockers/Issues** (open in `ANALYSIS_PLAN.md`, which calls itself locked; not changed
+  by this session):
+  - The plan asks for 100 instances per quadrant. Breast Cancer has about 569 rows (the
+    figure of the appraisal) and few misclassified cases, so the sample does not fit.
+  - Choices left as alternatives: "Random Forest / XGBoost", "LMM or ART-ANOVA", and the
+    definition of fidelity for Anchors and DiCE.
+  - With four explainers, one rank swap moves Kendall's tau from 1.0 to 0.67. The
+    appraisal recommends exact permutation tests; the plan does not include them.
+  - Adult, German Credit and Breast Cancer are used by the other papers. Paper F cannot
+    print a number that one of them reports (RCA-001); its Adult baseline is a new run or
+    a citation.
+  - `../xai-chapter` and `../xai-paper-e` are still listed by git as prunable working
+    trees; left for the author (`git worktree prune`).
+  - `origin/pubs/paper-f-lane` (the branch of the closed #33) can be deleted by the author.
+- **Notes**:
+  - Name every new Paper F script `scripts/paper_f_*` and every test
+    `tests/analysis/test_paper_f_*`; another name makes the file shared, and it then needs
+    its own commit through `main`.
+  - A change to `src/**`, to `src/data_loading/cross_dataset.py` or to a runner another
+    paper uses is a shared commit on a `pubs/*` branch.
+  - Refused for the assistant in this session: `gh pr merge` and a forced push. A new
+    branch name and a new pull request were used in place of the forced push.
+  - `git worktree remove` of a folder that is already gone was accepted.
+
 ## Session Handoff - 2026-10-05 (session end: Paper C reviewed, revised, approved, archived; ready to send)
 
 This is the latest handoff and the full state at the end of the session. The two Paper C
