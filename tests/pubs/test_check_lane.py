@@ -21,6 +21,8 @@ def test_paths_resolve_to_their_lane():
     assert check_lane.owner_of("docs/reports/paper_bc/paper_bc_iberamia.tex", REG) == "paper-bc"
     assert check_lane.owner_of("thesis/capitulo-4-resultados.qmd", REG) == "thesis"
     assert check_lane.owner_of("tests/analysis/test_analyze_paper_e.py", REG) == "paper-e"
+    assert check_lane.owner_of("docs/reports/paper_f/ANALYSIS_PLAN.md", REG) == "paper-f"
+    assert check_lane.owner_of("scripts/paper_f_characterize_datasets.py", REG) == "paper-f"
 
 
 def test_unowned_paths_are_shared():
@@ -41,7 +43,7 @@ def test_branches_resolve_to_their_lane_and_folder():
     assert lane("paper/d-tecnologia-en-marcha")["folder"] == REG["main_folder"]
     assert lane("thesis/rca-001-phase-2")["name"] == "thesis"
     assert lane("paper/e-feature-agreement")["folder"] == REG["main_folder"]
-    assert lane("paper/f-external-validity")["folder"] == "xai-paper-f"
+    assert lane("paper/f-external-validity")["folder"] == REG["main_folder"]
     assert lane("paper/c-llm-judges")["name"] == "paper-c"
     assert lane("paper/c-llm-judges")["folder"] == REG["main_folder"]
     assert lane("main") is None
