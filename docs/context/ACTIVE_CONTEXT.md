@@ -6,7 +6,7 @@
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
-| **C** | *Tecnología en Marcha*, AI special issue (planned target) | Plan proposed; manuscript not yet drafted or submitted | Author target, not a journal submission |
+| **C** | *Tecnología en Marcha*, AI special issue | Revised draft on `main`, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.10.0, [10.5281/zenodo.23149419](https://doi.org/10.5281/zenodo.23149419); release `paper-c-tm-2026-10-04` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
@@ -19,9 +19,94 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-04 (session end: Paper C drafted, reviewed, revised, archived, on main)
+
+This is the latest Paper C entry. The Paper C entries below keep the detail of each step.
+
+- **Completed**:
+  - **Lane and folder:** lane `paper-c` (branches `paper/c-*`, owns `docs/reports/paper_c/**`)
+    added to `scripts/pubs/lanes.toml` with tests (pull request #20). The April 2026 survey
+    prototype was removed; the Paper C inputs were copied out of `docs/reports/paper_bc/`,
+    which is frozen. ADR-0022 amended.
+  - **Plan:** `docs/reports/paper_c/PLAN.md`, sections 1 to 15, approved by the author. Venue
+    fixed: *Tecnología en Marcha*, AI special issue, deadline 2026-10-15, English, single
+    author.
+  - **Manuscript:** "Do LLM Judges Agree on the Quality of Explanations? A Two-Panel
+    Reliability Study" (title chosen by the author). Source `paper_c_template.tex`; numbers
+    are filled from result files by `scripts/build_paper_c.py`. Blind and full versions, PDF
+    and Word, both **15 pages in Word (the limit)**; abstract 246 words, resumen 249; 5
+    tables, 1 figure, 25 references.
+  - **Rigor review** (Scientific Advisor): `docs/review/scientific-rigor-review_paper_c_2026-10-04.md`,
+    major revision, findings F01 to F14. All were answered in the revision except F11
+    (literature) and F12 (registry); the table is in `docs/reports/paper_c/README.md`.
+  - **New analyses:** `scripts/paper_c_reliability.py` (agreement inside each explainer, one
+    call, panel mean, ICC(2,1) and ICC(3,1), F-based intervals, raw agreement, use of the
+    printed metrics) and `scripts/paper_c_posthoc.py`.
+  - **Clean condition** (new cohort, RCA-002): 192 cases, 3 judges, one call, no metrics,
+    outcome or label in the prompt; 576 calls, all valid; in
+    `docs/reports/paper_c/clean_condition/`.
+  - **Human subset prepared, not run:** 56 cases (seed 20261004), two rating sheets that show
+    the clean record. No sheet has been sent.
+  - **Author decisions:** draft read; the two added references are fine; AI declaration has
+    the author's own text; built PDF and Word files stay local; Anchors and DiCE are not
+    re-rendered.
+  - **On `main`:** pull requests #20, #21 and #22 merged, plus this handoff. GitHub release
+    `paper-c-tm-2026-10-04`; **Zenodo 0.10.0, `10.5281/zenodo.23149419`**; the full version
+    cites both.
+- **Current State**:
+  - Paper C is a complete revised draft on `main`. **It is not submitted.**
+  - `docs/reports/paper_c/submission/` (local, git-ignored) holds `paper_c_blind.{pdf,docx}`,
+    `paper_c_full.{pdf,docx}` and `Figure1.tiff`, built after the DOI was set.
+  - The numbers of the draft come from result files but are **not in
+    `pub/claim_registry.toml`**; `pub/claims.toml` still has a placeholder Paper C abstract
+    and `verify_sync.py` does not check `paper_c.tex`.
+  - `docs/reports/paper_bc/` is frozen. Papers B, D and E are submitted and were not touched.
+  - The lane lock `paper-c` is released.
+- **Next Steps**:
+  1. Draft the note to the editor: Paper D is in the same issue, and earlier reliability
+     tables are public in the 32-page edition and the thesis.
+  2. Claim registry for `paper_c.tex`, on a `pubs/*` branch and by pull request: `[coverage]`,
+     `docs/reports/paper_c/` on the protected side of `[exclusivity]`, a `paper_c` resolver
+     in `scripts/pubs/claim_sources.py`, the real abstract in `pub/claims.toml`,
+     `verify_sync.py`. Several values are already registered for the thesis and the 32-page
+     edition, so they gain sites on existing claims; expect chance collisions with Papers D
+     and E that need exceptions.
+  3. A rigor review by a session or person that did not write the draft.
+  4. Targeted literature search on LLM-judge reliability (review F11); the paper cites four
+     works on it. Any added text needs an equal cut.
+  5. Author: send the email to `revistatm@tec.ac.cr` with the blind and full Word files, the
+     figure and a telephone number.
+- **Blockers/Issues**:
+  - **Pending decision (author):** whether the human subset is part of this submission. The
+    recommendation is no; the draft says it has none. If yes, the sheets must go out at once
+    and the section needs an equal cut.
+  - The paper is at the page limit: nothing can be added without removing as much.
+  - The revision was made by the session that wrote the review, so it has had no independent
+    review.
+  - The second-reviewer adjudication of the corpus (28 disagreements, `corpus_audit/`) is
+    open; the paper uses the corpus in one sentence only.
+  - Two uncommitted edits from another session were left as found: the journal account
+    request note at the top of this file and `docs/reports/paper_d/README.md` (lane
+    `paper-d`).
+- **Notes**:
+  - Start with `python scripts/pubs/check_lane.py claim --owner <name>` on branch
+    `paper/c-llm-judges`. Lane files and shared files go in separate commits; shared files
+    reach `main` by pull request.
+  - Build order and commands: `docs/reports/paper_c/README.md`, section Build. Run
+    `paper_c_reliability.py` before `paper_c_summary.py`. Use `.venv\Scripts\python.exe`
+    for the analyses and for `pytest`.
+  - Edit `paper_c_template.tex`, never `paper_c.tex`. Count pages in Word itself.
+  - Do not change the title or the AI declaration without the author's approval.
+  - A change to code or results needs a new Zenodo version; a text change does not.
+  - A new judge run is a new cohort in its own directory (RCA-002).
+  - `pub/fragments/build_meta.env` changes on every fragment build; restore it before a
+    commit.
+  - Local `main` is checked out in `../xai-eval-framework-main-status`; compare against
+    `origin/main`.
+
 ## Session update - 2026-10-04 (Paper C: author's read, release 0.10.0)
 
-This entry is the latest; the Paper C handoff below keeps the detail.
+The session-end handoff above is the latest; the Paper C handoff below keeps the detail.
 
 - **Author decisions:** the draft was read; the two added references are fine; the human
   raters see the clean record (sheets rebuilt, none had been sent); built PDF and Word files
