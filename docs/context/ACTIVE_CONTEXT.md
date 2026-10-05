@@ -25,9 +25,84 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-04 (Paper C: claim registry, editor note checked, no human subset)
+
+This is the latest Paper C handoff. The session update below keeps the detail of release 0.11.0.
+
+- **Completed**:
+  - **Claim registry for Paper C** (pull request #27, branch `pubs/paper-c-registry`, shared
+    files only):
+    - `scripts/pubs/register_paper_c.py` reads the placeholders of `paper_c_template.tex`
+      through the functions of the Paper C build and writes the generated Paper C block of
+      `pub/claim_registry.toml`; a `paper_c` resolver in `claim_sources.py` re-derives each
+      value from the result files.
+    - 162 claims of Paper C's own; 37 sites on quantities that the thesis or the 32-page
+      edition already carries (24 on existing `exp4` and `exp4c2` claims, 13 on claims that
+      had no site outside Paper C); one hand-kept claim for "about 0.3" in the discussion.
+    - `paper_c.tex` is under `[coverage]`; `docs/reports/paper_c/` is on the protected side
+      of `[exclusivity]`. 57 chance coincidences in Paper D, Paper E and the chapter are
+      excepted, each naming the claim of that file that owns the literal; none was
+      unexplained. Eight literals typed in the template are declared structural.
+    - `pub/claims.toml` holds the real abstract, keywords, resumen and palabras clave,
+      written from `paper_c.tex`; four fragments; `verify_sync.py` compares them with the
+      manuscript text.
+    - CI runs `register_paper_c.py --check`: it fails unless `paper_c.tex` is the template
+      rendered from the result files and the registry and `claims.toml` are current.
+  - **Note to the editor** (`docs/reports/paper_c/EDITOR_NOTE.md`), items 1 to 3 checked
+    with the registry and rewritten in both languages:
+    - Paper D prints no Paper C result; eight short decimals coincide, each a different
+      quantity. "Value" is now "result".
+    - The 32-page edition carries the fourteen all-case coefficients of Table 1 and three of
+      the 21 coefficients of Table 3, not the three views in full, and not the test-retest
+      shares. The thesis chapter also carries the other five pooled coefficients and the two
+      largest score shifts.
+    - Item 3 names the findings inside each method as the third draft states them.
+  - **Author decision: the human subset is not part of this submission** (`PLAN.md`,
+    section 17). The sheets stay in `human_subset/`, not sent.
+- **Current State**:
+  - Paper C: third draft, read by the author, archived as Zenodo 0.11.0, registered. **Not
+    submitted.** The author does a last revision next.
+  - Pull request #26 (macros of release 0.11.0, this handoff, the editor note) and pull
+    request #27 (registry) are open; the assistant's merge is refused by the permission
+    check, so the author merges them. No file is changed by both.
+  - Verified on `pubs/paper-c-registry`: `verify_claims.py` 1161 claims / 1497 sites / 29
+    files fully registered; `verify_sync.py`; `scan_shared_literals.py --strict` 0
+    unexplained; `verify_exp4_reconstruction.py` 18 pins; 22 tests in `tests/pubs`.
+  - The lane locks are released.
+- **Next Steps**:
+  1. Author: merge pull requests #26 and #27.
+  2. Author: last revision of `paper_c_template.tex`. Then build
+     (`docs/reports/paper_c/scripts/build_paper_c.py`), count pages in Word, and run
+     `python scripts/pubs/register_paper_c.py --check`. If it fails, run it without
+     `--check` and `generate_fragments.py` on a `pubs/*` branch, and merge that first or
+     together with the lane change.
+  3. Author: in `EDITOR_NOTE.md`, confirm that the thesis is still not deposited and add the
+     telephone number; send the email with the blind and full Word files and the figure.
+     Deadline 2026-10-15.
+  4. A change to code or results after this point needs a new Zenodo version; a text change
+     does not.
+- **Blockers/Issues**:
+  - For the last revision: the two quotations of an Anchors and a DiCE record in the methods
+    omit an item of the stored text without marking it (a third weight of 1.0000;
+    `education_9th: 0.4000`).
+  - The registry does not read integers without a thousands separator (counts, whole
+    percentages); for Paper C the `--check` step covers them.
+  - The paper is at the page limit. No review followed the third draft.
+  - The second-reviewer adjudication of the corpus is open (unchanged).
+  - `docs/reports/paper_d/README.md` still carries the uncommitted edit of another session.
+- **Notes**:
+  - A new decimal typed by hand in the template fails `[coverage]` until it is a claim or is
+    declared structural in `pub/claim_registry.toml`.
+  - `register_paper_c.py` stops if another protected file prints a Paper C value that none of
+    its own claims accounts for; that is a real overlap to look at, not a setting to relax.
+  - The hand-kept claim `exp4c2.rubric_minus_stated.icc.concision` keeps its site on one
+    line; the generator rewrites the lines that hold a Paper C site alone.
+  - Switching between `pubs/*` and `paper/c-*` needs `check_lane.py release` and a new
+    `claim`, each with `--owner`.
+
 ## Session update - 2026-10-04 (Paper C: author's read of the third draft, release 0.11.0)
 
-This entry is the latest. It closes Next Steps 2 and 3 and the first pending decision of the
+This entry closes Next Steps 2 and 3 and the first pending decision of the
 handoff directly below; its other items are unchanged.
 
 - **Author decisions:** the third draft was read and is fine; the two references marked
