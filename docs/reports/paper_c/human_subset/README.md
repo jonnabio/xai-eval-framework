@@ -1,6 +1,11 @@
 # Human-rated subset
 
-Plan: `../PLAN.md`, section 6 and section 14.3.
+Plan: `../PLAN.md`, sections 6, 14.3 and 15.5.
+
+The sheets show the record of the **clean condition**: dataset, model family, explainer,
+prediction and the explanation. They show no technical metrics, no outcome of the
+prediction and no true label. They were rebuilt on 2026-10-04, before any sheet was sent;
+the sample of 56 cases did not change.
 
 | File | What it is |
 |---|---|

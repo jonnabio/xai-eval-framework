@@ -387,3 +387,12 @@ the primary condition.
 - **Deviation.** 15.3 named ICC(1,k) and the pooled SHAP-and-LIME scope for the clean
   condition; they are in `results/reliability_long.csv` and are not printed, for space.
 - The draft is at the 15-page limit in Word.
+
+### 15.5 Author decisions after the revision (2026-10-04)
+
+- **Raters see the clean record.** The rating sheets were rebuilt from the prompts of the
+  clean condition (no metrics, no outcome, no label). No sheet had been sent and no rating
+  existed, so nothing is repeated. The sample is the same 56 cases. This replaces 14.3. The
+  human-judge comparison of section 6 uses the clean-condition scores of the judges.
+- **Built PDF and Word files stay local** for now.
+- **AI declaration.** The author gave its text; it is not changed without approval.

@@ -44,9 +44,8 @@ again and the author has not read it.
 **Open before submission**
 
 1. Author: read the draft (`submission/paper_c_blind.pdf`, local).
-2. Author: decide whether the raters see the clean record (no metrics, no outcome) or the
-   primary record; the sheets in `human_subset/` show the primary record. At 15 pages, a
-   human-subset section needs an equal cut.
+2. The rating sheets in `human_subset/` show the clean record (author decision). At 15
+   pages, a human-subset section needs an equal cut.
 3. Raters: send the two rating sheets (`human_subset/README.md`); cut-off 2026-10-10.
 4. Second reviewer: adjudication sheet in `corpus_audit/`; cut-off 2026-10-08.
 5. Registry: put `paper_c.tex` under `[coverage]`, add `docs/reports/paper_c/` to the

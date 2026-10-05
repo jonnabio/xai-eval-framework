@@ -5,11 +5,12 @@ Plan: docs/reports/paper_c/PLAN.md, section 6. Seven cases from each of the eigh
 dataset-by-explainer cells of the 192-case inventory, without replacement, fixed seed.
 Each rater gets a self-contained HTML sheet with the cases in an order of their own.
 
-The case record shown to a rater is read from the rendered prompt of the
-hidden_label_primary condition of cohort 2, so it is what the judges received.
+The case record shown to a rater is read from the rendered prompt of the clean condition
+(docs/reports/paper_c/clean_condition/prompts), so it is what the judges received there:
+the explanation without technical metrics, outcome of the prediction or true label.
 
-Standard library only. Reads experiments/exp4_cohort2/ and writes only under
-docs/reports/paper_c/human_subset/.
+Standard library only. Reads experiments/exp4_cohort2/cases and the clean prompts, and
+writes only under docs/reports/paper_c/human_subset/.
 
     python docs/reports/paper_c/scripts/draw_human_sample.py
 """
@@ -24,8 +25,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 CASES = ROOT / "experiments" / "exp4_cohort2" / "cases" / "exp4_cases.jsonl"
-PROMPTS = ROOT / "experiments" / "exp4_cohort2" / "prompts" / "hidden_label_primary"
 OUT = Path(__file__).resolve().parents[1] / "human_subset"
+# The record of the clean condition (PLAN.md 15.3): no technical metrics, no outcome of
+# the prediction and no true label. Until 2026-10-04 the sheets showed the record of the
+# primary condition; no sheet had been sent when this was changed.
+PROMPTS = OUT.parent / "clean_condition" / "prompts"
 
 SAMPLE_SEED = 20261004
 PER_CELL = 7
@@ -61,7 +65,7 @@ OMITTED = ("case_id", "instance_id", "source_artifact_path", "source_experiment"
 
 
 def prompt_record(case_id: str) -> dict:
-    """The JSON case record inside the rendered hidden-label prompt of a case."""
+    """The JSON case record inside the rendered clean-condition prompt of a case."""
     (path,) = sorted(PROMPTS.glob(f"{case_id}_*.txt"))
     text = path.read_text(encoding="utf-8")
     block = re.search(r"## Case record\s+```json\s+(\{.*?\})\s+```", text, re.S)
@@ -144,10 +148,12 @@ CASES.forEach((c, i) => {
     h += "<tr><th>" + esc(k) + "</th><td>" + esc(rec[k] === null ? "not given" : rec[k]) + "</td></tr>";
   }
   h += "</table><p><b>Explanation</b></p><div class='expl'>" + esc(rec.normalized_explanation) + "</div>";
-  h += "<p><b>Technical metrics of this explanation</b></p><table>";
-  for (const k of Object.keys(rec.technical_metrics))
-    h += "<tr><th>" + esc(k) + "</th><td>" + esc(Number(rec.technical_metrics[k]).toFixed(4)) + "</td></tr>";
-  h += "</table>";
+  if (rec.technical_metrics) {
+    h += "<p><b>Technical metrics of this explanation</b></p><table>";
+    for (const k of Object.keys(rec.technical_metrics))
+      h += "<tr><th>" + esc(k) + "</th><td>" + esc(Number(rec.technical_metrics[k]).toFixed(4)) + "</td></tr>";
+    h += "</table>";
+  }
   RUBRIC.forEach(d => {
     h += "<div class='dim'><b>" + esc(d[0]) + "</b>" + esc(d[1]) + "<div class='anch'>" + esc(d[2]) + "</div>";
     for (let s = 1; s <= 5; s++)
