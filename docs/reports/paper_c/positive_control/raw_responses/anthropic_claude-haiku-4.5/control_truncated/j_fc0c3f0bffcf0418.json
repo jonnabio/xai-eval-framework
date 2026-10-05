@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_5a283f4d6f1cf5e1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_fc0c3f0bffcf0418",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_5a283f4d6f1cf5e1_e9157de72e9146ea.txt",
+  "prompt_version": "e9157de72e9146ea",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206271-jGLemqUe5Tlzv9psngVo",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 513,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003591,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002565,
+        "upstream_inference_cost": 0.003591,
+        "upstream_inference_prompt_cost": 0.001026
+      },
+      "is_byok": false,
+      "prompt_tokens": 1026,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1539
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_5a283f4d6f1cf5e1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without direction on recourse or decision review steps, it offers minimal actionability.\",\n    \"audit_usefulness\": \"The explanation shows top contributing features with their weights, which supports basic model inspection and comparison across instances. However, it lacks information about feature values, direction of influence, or model coefficients needed for thorough bias investigation.\",\n    \"clarity\": \"The explanation is clearly formatted with feature names, values, and weights presented in a straightforward list. A non-expert reader can easily identify which factors influenced the prediction, though domain knowledge of the Adult dataset helps interpretation.\",\n    \"completeness\": \"Only three features are presented without their actual values for this instance, baseline comparisons, or the prediction confidence. The explanation covers main drivers but omits critical local context such as feature values and their relationship to the decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently conveying feature names and contribution weights in minimal tokens. Each element serves a clear purpose without padding.\",\n    \"overall_quality\": \"The explanation provides a basic, clear summary of top contributing features but lacks depth in local context, actionability, and audit support. It represents a minimally acceptable explanation suitable for quick model inspection but insufficient for thorough decision review or investigation.\",\n    \"semantic_plausibility\": \"The identified features (workclass, capital-loss, education) are plausible predictors for income classification in the Adult dataset and align with domain expectations. The contribution weights are reasonable and coherent with typical logistic regression behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:56.521316+00:00"
+}

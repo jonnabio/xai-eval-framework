@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_902d690264149a09",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e4afe65337512a5b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_902d690264149a09_df7bbdb2c86fc71a.txt",
+  "prompt_version": "df7bbdb2c86fc71a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206318-mY7tNbj7m1BhIOUJ3ZLt",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 430,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0025845,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001935,
+        "upstream_inference_cost": 0.0025845,
+        "upstream_inference_prompt_cost": 0.0006495
+      },
+      "is_byok": false,
+      "prompt_tokens": 866,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1296
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_902d690264149a09\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer any concrete recourse or next step for the user. It only lists features and SHAP values, which is informative but not actionable.\",\n    \"audit_usefulness\": \"It gives a small amount of local feature attribution, so an auditor can see which variables pushed the prediction up or down. However, it is too sparse to fully inspect model behavior or diagnose potential bias.\",\n    \"clarity\": \"The format is simple and easy to read, with three labeled factors and numeric contributions. A non-expert may still need some familiarity with SHAP and the adult dataset features to interpret it fully.\",\n    \"completeness\": \"Only three local factors are shown, and the explanation does not indicate the baseline, prediction score, or how these factors combine to yield class 0. That leaves the decision context incomplete.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy, conveying the main factors in only a few words. It is concise without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a useful but limited local explanation: it is readable and compact, but it lacks context, actionability, and enough detail for a full understanding of the prediction. Overall it is acceptable rather than strong.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers in the Adult income dataset, and the sign pattern is consistent with a local attribution explanation. Nothing in the output appears contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:41.808855+00:00"
+}

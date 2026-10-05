@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_51172cc350f3a14a",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_778dd7d6e1653158_243fe4e40f36778d.txt",
+  "prompt_version": "243fe4e40f36778d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206485-GMt7vKKqybgsFRVr9uDa",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 971,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 570,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00444075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00364125,
+        "upstream_inference_cost": 0.00444075,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2037
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output consists solely of raw attribution values without feature values or counterfactual guidance, offering no actionable recourse for the user.\",\n    \"audit_usefulness\": \"It clearly lists signed SHAP contributions for the top features, which helps an auditor inspect model logic, though the absence of original feature values limits deeper debugging.\",\n    \"clarity\": \"The raw key-value format and technical one-hot encoded variable names require technical familiarity with SHAP and tabular modeling.\",\n    \"completeness\": \"The explanation lists the top ten local feature contributions, covering the primary drivers of the negative prediction, but omits the baseline value and instance feature values.\",\n    \"concision\": \"The text is dense and efficient, communicating the top contributing factors with minimal overhead.\",\n    \"overall_quality\": \"While useful as a concise technical snapshot for auditing, the lack of feature values and natural language interpretation limits its broader utility.\",\n    \"semantic_plausibility\": \"The listed factors and their directional effects largely align with domain intuition on the Adult census task, though one-hot encoded negative values across multiple mutually exclusive categories can be slightly confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:33.917439+00:00"
+}

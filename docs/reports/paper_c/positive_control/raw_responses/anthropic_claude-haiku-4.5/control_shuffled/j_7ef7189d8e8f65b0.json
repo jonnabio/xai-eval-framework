@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_be3a619c28fb15c4",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7ef7189d8e8f65b0",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_be3a619c28fb15c4_cba2fc855c129840.txt",
+  "prompt_version": "cba2fc855c129840",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206436-Wgj3Gd2DFt5Fre2qhsTz",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003513,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00241,
+        "upstream_inference_cost": 0.003513,
+        "upstream_inference_prompt_cost": 0.001103
+      },
+      "is_byok": false,
+      "prompt_tokens": 1103,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_be3a619c28fb15c4\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only coefficient weights without context on feature values, thresholds, or direction of change needed to alter the prediction. A user cannot determine what specific actions would change the outcome.\",\n    \"audit_usefulness\": \"The raw coefficients and feature list enable an auditor to inspect which features the model weights most heavily, supporting bias investigation and model behavior review. However, lack of feature values limits deeper analysis.\",\n    \"clarity\": \"The format is a simple list of feature names and numerical weights, which is straightforward but requires familiarity with logistic regression coefficients to interpret meaningfully. Non-experts may struggle to understand what negative vs. positive weights mean.\",\n    \"completeness\": \"The explanation lists ten top factors but omits the actual feature values for the instance, the prediction confidence, and the baseline or intercept term, limiting full understanding of the local decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without padding or verbose explanation.\",\n    \"overall_quality\": \"The explanation is a minimal, technically correct LIME output but lacks sufficient context and interpretation to be truly useful for most stakeholders. It serves as a starting point rather than a complete explanation.\",\n    \"semantic_plausibility\": \"The factors (age, sex, marital status, education) are plausible predictors for the adult income classification task, and the relative magnitudes are reasonable. The direction and magnitude of effects align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:40.723253+00:00"
+}

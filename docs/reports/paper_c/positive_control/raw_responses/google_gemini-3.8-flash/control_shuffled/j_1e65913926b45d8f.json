@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1e65913926b45d8f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_ac6e5925b1641835_662a353f71d0fe2d.txt",
+  "prompt_version": "662a353f71d0fe2d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206715-HPqgBfPao94s8VBOzf3p",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 601,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00459675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00379125,
+        "upstream_inference_cost": 0.00459675,
+        "upstream_inference_prompt_cost": 0.0008055
+      },
+      "is_byok": false,
+      "prompt_tokens": 1074,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2085
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no prescriptive recourse or recommendations, presenting only raw attribution weights for immutable and one-hot encoded features.\",\n    \"audit_usefulness\": \"While it reveals that sensitive attributes like race contribute to the model's output, the near-zero coefficients and missing underlying feature values severely limit its diagnostic value.\",\n    \"clarity\": \"The list of one-hot encoded feature names and tiny numerical weights requires technical knowledge to interpret and lacks intuitive context for non-expert readers.\",\n    \"completeness\": \"The actual feature values are missing, and the negligible magnitudes of the weights fail to adequately explain why the model predicted the positive class.\",\n    \"concision\": \"The text is concise and focused, though it includes multiple features with zero or negligible weights that add little informational value.\",\n    \"overall_quality\": \"The explanation is of low quality because near-zero weights, absent feature values, and counterintuitive opposing signs for related features provide minimal insight.\",\n    \"semantic_plausibility\": \"Having opposing signs for closely aligned features like being a husband versus being married, alongside vanishingly small contributions across all variables, appears semantically unconvincing and noisy.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:25:22.776096+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e230a6771152fb2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_31e1e6cb5cc10ebe",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_4e230a6771152fb2_26623fd9694d4444.txt",
+  "prompt_version": "26623fd9694d4444",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206400-JHMBRe9xOQvhp5XvswRF",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 664,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004785,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0039825,
+        "upstream_inference_cost": 0.004785,
+        "upstream_inference_prompt_cost": 0.0008025
+      },
+      "is_byok": false,
+      "prompt_tokens": 1070,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2132
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e230a6771152fb2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers no prescriptive guidance or recourse, focusing predominantly on immutable demographic attributes such as race and sex.\",\n    \"audit_usefulness\": \"It exposes the local linear weights of sensitive attributes, allowing an auditor to detect potential bias, though the lack of instance feature values limits deeper verification.\",\n    \"clarity\": \"The explanation is presented as a raw string of feature weights without clear definitions or an indication of which class the sign points toward.\",\n    \"completeness\": \"While ten local factors are provided, omitting the actual feature values and baseline makes it impossible to fully reconstruct the local prediction context.\",\n    \"concision\": \"The summary is compact and avoids conversational filler, presenting the weights directly.\",\n    \"overall_quality\": \"The explanation provides a concise snapshot of local weights but suffers from poor interpretability for non-experts, no actionability, and omitted instance values.\",\n    \"semantic_plausibility\": \"Multiple mutually exclusive categories (e.g., both race_Black and race_White) are listed with identical positive coefficients, which is confusing without knowing whether they represent absences or presences.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:09.914839+00:00"
+}

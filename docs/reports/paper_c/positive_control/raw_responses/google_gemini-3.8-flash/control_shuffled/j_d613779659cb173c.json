@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60730b2d1280bac2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d613779659cb173c",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_60730b2d1280bac2_622dfb6dbe0953eb.txt",
+  "prompt_version": "622dfb6dbe0953eb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206278-bCMp5aRLuReD2L7zQJ4h",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1427,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1038,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006156,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00535125,
+        "upstream_inference_cost": 0.006156,
+        "upstream_inference_prompt_cost": 0.00080475
+      },
+      "is_byok": false,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2500
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60730b2d1280bac2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating current feature values or prescribing feasible pathways for recourse.\",\n    \"audit_usefulness\": \"It exposes model sensitivities and highlights potential surrogate artifacts like conflicting one-hot categories, though the absence of true feature values hampers deeper debugging.\",\n    \"clarity\": \"The list format is readable, but raw numerical weights and one-hot encoded column names are difficult for non-technical users to interpret without context.\",\n    \"completeness\": \"While ten local weights are reported, the explanation omits the actual feature values of the instance and the baseline intercept.\",\n    \"concision\": \"The output is compact and directly presents the key factors without extraneous filler text.\",\n    \"overall_quality\": \"The explanation offers minimal interpretability due to missing instance values, no actionable guidance, and several domain-inconsistent attribution directions.\",\n    \"semantic_plausibility\": \"Several factor directions run counter to domain knowledge, such as HS-grad pushing positive while Bachelors pushes negative, and Never-married pushing positive while Married-civ-spouse is negative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:11.221628+00:00"
+}

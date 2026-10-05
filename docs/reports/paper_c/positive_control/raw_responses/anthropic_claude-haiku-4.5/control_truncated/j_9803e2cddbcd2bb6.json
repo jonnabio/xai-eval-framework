@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9803e2cddbcd2bb6",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_75520768088e5528_385c65ec894c0bfd.txt",
+  "prompt_version": "385c65ec894c0bfd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206255-fmtK43yz2Y0fwdRQwTFV",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003467,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002455,
+        "upstream_inference_cost": 0.003467,
+        "upstream_inference_prompt_cost": 0.001012
+      },
+      "is_byok": false,
+      "prompt_tokens": 1012,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1503
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without context on feature ranges or thresholds, it is impossible to determine feasible recourse.\",\n    \"audit_usefulness\": \"The SHAP values and feature names enable an auditor to inspect which features drove the prediction and their relative importance. However, the lack of baseline values, feature ranges, or model confidence limits audit depth.\",\n    \"clarity\": \"The explanation is well-formatted and uses standard SHAP notation that is accessible to readers with basic ML knowledge. Feature names and numerical values are presented clearly, though interpretation of SHAP values requires some technical familiarity.\",\n    \"completeness\": \"Only three top features are shown; the explanation does not indicate whether these are the only relevant drivers or if other features also contributed meaningfully. The prediction confidence is null, leaving uncertainty about prediction strength.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential information (feature names and SHAP values) in a minimal format. No unnecessary elaboration is present.\",\n    \"overall_quality\": \"The explanation provides a technically sound but minimal local decision summary suitable for model inspection. It lacks actionability and contextual depth, limiting its utility for end-users or comprehensive auditing.\",\n    \"semantic_plausibility\": \"The identified features (age, education, relationship status) are plausible drivers of income prediction in the adult dataset and align with domain expectations. The direction and magnitude of contributions are reasonable.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:40.382095+00:00"
+}

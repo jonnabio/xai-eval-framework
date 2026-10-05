@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445567f442799a48",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_83a621c4eacde56b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_445567f442799a48_23fcc556d63bd766.txt",
+  "prompt_version": "23fcc556d63bd766",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206296-NSpqO4lKulRnE5sEGYCT",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003511,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00248,
+        "upstream_inference_cost": 0.003511,
+        "upstream_inference_prompt_cost": 0.001031
+      },
+      "is_byok": false,
+      "prompt_tokens": 1031,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1527
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445567f442799a48\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative SHAP values but provides no guidance on what actions could be taken to change the prediction or improve creditworthiness. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features drove the prediction toward class 0 with quantified SHAP contributions, enabling an auditor to inspect model behavior and detect potential biases in feature weighting. This supports systematic model review.\",\n    \"clarity\": \"The format is straightforward with feature names, values, and SHAP scores presented in a standard list; however, the meaning of negative SHAP values and their relationship to the prediction class requires some statistical knowledge to interpret fully.\",\n    \"completeness\": \"Only three top features are shown with no baseline information, prediction confidence, or context about feature distributions; this limits understanding of whether other features also contributed or whether these are truly dominant drivers.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name, SHAP value) in a minimal format without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into model behavior through quantified feature contributions, but lacks actionability, completeness context, and sufficient clarity for non-technical stakeholders.\",\n    \"semantic_plausibility\": \"In credit risk assessment, checking account status and payment history are known predictors of creditworthiness; negative SHAP values for favorable statuses (no checking, all paid) logically support a lower-risk prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:20.639034+00:00"
+}

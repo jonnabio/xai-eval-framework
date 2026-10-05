@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_05cbef61c778f3fb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2d6c32f498f5a60a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_05cbef61c778f3fb_453c72f478b57abe.txt",
+  "prompt_version": "453c72f478b57abe",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206313-o2WxNxYbt5OXiH2MiwB0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003329,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002305,
+        "upstream_inference_cost": 0.003329,
+        "upstream_inference_prompt_cost": 0.001024
+      },
+      "is_byok": false,
+      "prompt_tokens": 1024,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1485
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_05cbef61c778f3fb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative SHAP values but provides no guidance on what actions could be taken, what thresholds matter, or how feature values might be modified to change the prediction.\",\n    \"audit_usefulness\": \"The explanation shows the top three contributing features with their SHAP values, which supports basic model inspection and comparison across instances, though it lacks context about feature ranges or model calibration.\",\n    \"clarity\": \"The format is straightforward and uses standard terminology (SHAP, feature names, values) that is accessible to readers with basic ML knowledge, though non-experts may struggle with SHAP value interpretation.\",\n    \"completeness\": \"Only three features are presented with no information about baseline prediction, confidence, feature values, or whether these are the only meaningful drivers; the local decision context is partially covered.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a minimal but technically sound summary of local feature importance, suitable for model inspection but lacking depth for actionable insights or full decision context.\",\n    \"semantic_plausibility\": \"Negative SHAP values for morphological features (concave points, texture, area) in a breast cancer classification are plausible, as lower values of these features would support a benign prediction (class 0).\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:38.195315+00:00"
+}

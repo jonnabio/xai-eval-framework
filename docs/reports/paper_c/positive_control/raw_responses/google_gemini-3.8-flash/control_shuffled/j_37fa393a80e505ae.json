@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_37fa393a80e505ae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_052659e044864140_f17786dd695920ee.txt",
+  "prompt_version": "f17786dd695920ee",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206494-F5ZlEQprDLasSfvt3P26",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1114,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 702,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00496725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0041775,
+        "upstream_inference_cost": 0.00496725,
+        "upstream_inference_prompt_cost": 0.00078975
+      },
+      "is_byok": false,
+      "prompt_tokens": 1053,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2167
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides purely observational SHAP attributions for clinical measurements with no guidance, thresholds, or clinical recourse paths.\",\n    \"audit_usefulness\": \"It provides a clear list of the top ten SHAP values and their signs, enabling an auditor to assess which morphological features drove the prediction, though omitting baseline and raw feature values.\",\n    \"clarity\": \"The format is a clean, structured list of feature attributions, but interpreting the negative signed SHAP values requires technical understanding of XAI and class encodings.\",\n    \"completeness\": \"The top ten drivers and their attribution magnitudes are covered, but omitting the baseline value and actual observed feature values leaves local context incomplete.\",\n    \"concision\": \"The text is highly compact and free of redundancy, presenting maximal attribution information with minimal token overhead.\",\n    \"overall_quality\": \"This is an acceptable technical attribution output that clearly indicates the model's primary drivers, though it lacks lay interpretability and actual feature values.\",\n    \"semantic_plausibility\": \"The identified features, such as extreme radius, perimeter, area, and concavity, are clinically coherent and well-established predictors in breast cancer pathology.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:42.510494+00:00"
+}

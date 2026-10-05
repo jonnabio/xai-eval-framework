@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9dbc5e2fa0b63e02",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_27ff1641b5ef1b1a_6bfe997c47dc2b51.txt",
+  "prompt_version": "6bfe997c47dc2b51",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206231-L99Jn5vDPTyBhYi7GID6",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003427,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00233,
+        "upstream_inference_cost": 0.003427,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1563
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken, what thresholds matter, or how feature values might be modified to change the prediction.\",\n    \"audit_usefulness\": \"SHAP values with direction and magnitude are valuable for auditing model behavior and detecting potential biases in feature reliance. The ranked list of contributions supports systematic inspection of decision logic.\",\n    \"clarity\": \"The format is straightforward\u2014feature names paired with numerical SHAP values\u2014but lacks context on what negative/positive values mean or why these features matter for the prediction class.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which captures the main local drivers; however, it omits the base prediction value and does not explain how these contributions sum to the final prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name and SHAP value) without padding.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks interpretability for non-experts and provides no actionable guidance or decision context for the specific prediction.\",\n    \"semantic_plausibility\": \"The features (smoothness, area, concavity, texture, radius) are all established morphological characteristics in breast cancer diagnosis, and their negative contributions to a class-0 prediction are plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:14.893618+00:00"
+}

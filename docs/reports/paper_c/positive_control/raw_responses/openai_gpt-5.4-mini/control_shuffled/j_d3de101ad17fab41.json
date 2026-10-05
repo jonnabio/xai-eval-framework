@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d3de101ad17fab41",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_31247e881a13bce1_dfcfaeffb378818d.txt",
+  "prompt_version": "dfcfaeffb378818d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206341-aheVGD4te4coEAunI9YG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00280575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00280575,
+        "upstream_inference_prompt_cost": 0.00071325
+      },
+      "is_byok": false,
+      "prompt_tokens": 951,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1416
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps beyond listing features that influenced the prediction. A user cannot tell what could be changed or reviewed to alter the outcome.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it identifies the main local drivers and their signed contributions. However, it lacks feature values, baseline context, and whether the contributions are stable or plausible across similar cases.\",\n    \"clarity\": \"The output is easy to read as a ranked list of feature impacts, but it assumes some familiarity with one-hot encoded tabular features and LIME notation. A non-expert may not fully understand what the signs and magnitudes mean.\",\n    \"completeness\": \"It covers several important local factors for the prediction, but it does not include the instance\u2019s actual attribute values or the predicted class meaning. The small coefficients also make it hard to infer the full decision context.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, while still listing the top local factors. It communicates a fair amount of information in a small number of tokens.\",\n    \"overall_quality\": \"This is a usable but limited local explanation: it is concise and moderately informative, yet not very actionable or fully interpretable without additional context. Its quality is acceptable for a technical audience but not strong overall.\",\n    \"semantic_plausibility\": \"The featured drivers are plausible for the Adult dataset, especially marital status, relationship, age, occupation, education, workclass, and sex. The direction of effects is also broadly consistent with expected patterns, though the exact signs depend on the model and encoding.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:03.979922+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3118a0f719dfdef8",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d6b56424b82d485e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_3118a0f719dfdef8_7e9bbabe58a1119e.txt",
+  "prompt_version": "7e9bbabe58a1119e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206239-qhgHIvnfrWVWaGF8EvFW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002583,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001926,
+        "upstream_inference_cost": 0.002583,
+        "upstream_inference_prompt_cost": 0.000657
+      },
+      "is_byok": false,
+      "prompt_tokens": 876,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1304
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3118a0f719dfdef8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential features but gives no concrete recourse or next steps. A user cannot tell what to change or verify to affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for a quick local audit because it reveals the top SHAP drivers and their relative magnitudes. However, it lacks directionality and base-value context, so it does not fully support deeper error or bias analysis.\",\n    \"clarity\": \"The wording is simple and the structure is easy to follow for a non-expert. The meaning of the numeric SHAP values is only partially explained, but the overall message is understandable.\",\n    \"completeness\": \"It lists the three strongest local factors, which covers the main drivers at a high level. Still missing are whether each factor pushed the prediction toward class 1 or away from it, plus the baseline and other relevant features.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy. It delivers a small amount of useful information with minimal wording.\",\n    \"overall_quality\": \"This is a decent terse local explanation: readable, compact, and partially informative about feature importance. Its main weakness is that it omits directionality and broader context, limiting interpretability and utility.\",\n    \"semantic_plausibility\": \"The cited features are plausible predictors in a breast cancer model, and the ranking is consistent with typical domain expectations. The explanation is therefore coherent with the dataset and model setting.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:21.808843+00:00"
+}

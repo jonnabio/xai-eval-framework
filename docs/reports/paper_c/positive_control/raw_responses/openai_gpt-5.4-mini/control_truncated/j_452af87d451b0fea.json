@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9ee15210bf45996e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_452af87d451b0fea",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_9ee15210bf45996e_b00dccdf3b9b62bd.txt",
+  "prompt_version": "b00dccdf3b9b62bd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206361-nHaPjlV2JxFUZKMEdP43",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00275475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021015,
+        "upstream_inference_cost": 0.00275475,
+        "upstream_inference_prompt_cost": 0.00065325
+      },
+      "is_byok": false,
+      "prompt_tokens": 871,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1338
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9ee15210bf45996e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names the features contributing to the prediction, but it does not suggest any concrete recourse or next step a user could take. There is no indication of what could be changed or reviewed to affect the outcome.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it identifies the top local SHAP factors and their relative contributions. However, it gives no directionality or comparison to baseline values, so it only partially supports deeper inspection of model behavior.\",\n    \"clarity\": \"The wording is simple and easy to read, and the ranked feature list is straightforward for a non-expert. The only limitation is that the numeric SHAP values are shown without explanation, but the overall message is still clear.\",\n    \"completeness\": \"It provides only the top three local drivers and omits whether they push the prediction toward class 1 or away from it. Without signs, context, or additional features, it does not fully explain why this specific prediction was made.\",\n    \"concision\": \"The explanation is very compact and contains only the most relevant local factors. It avoids redundancy while still giving useful information.\",\n    \"overall_quality\": \"This is a concise and readable local explanation that gives a reasonable sense of which features matter most. Its main weakness is limited interpretability because it lacks directionality and deeper context, so it is useful but not excellent.\",\n    \"semantic_plausibility\": \"For the breast cancer dataset, features like worst radius, worst area, and worst concave points are highly plausible predictors and commonly important. The explanation is consistent with general domain expectations and the behavior of a random forest model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:23.935049+00:00"
+}

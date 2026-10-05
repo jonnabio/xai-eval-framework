@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_2da09d8d9a61d6d2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_052659e044864140_f17786dd695920ee.txt",
+  "prompt_version": "f17786dd695920ee",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206300-ya2nyDE3GdJx7Y3bWfjK",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027855,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020835,
+        "upstream_inference_cost": 0.0027855,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1399
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not suggest any concrete recourse or next step a user could take. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it reveals which features pushed the XGB prediction up or down. However, it lacks the magnitude context needed to judge stability, bias, or compare this case against similar instances in depth.\",\n    \"clarity\": \"The wording is straightforward and the ranking of SHAP factors is easy to follow even for a non-expert. The signed contributions are compactly presented, though the meaning of positive versus negative values is not explicitly explained.\",\n    \"completeness\": \"It covers the top local drivers of the prediction, which is the core information from a SHAP summary. Still, it does not provide the baseline value, predicted probability, or enough context to fully understand why class 0 was chosen.\",\n    \"concision\": \"The explanation is quite compact and avoids redundant wording while still listing the main contributing features. It is efficient for the amount of local information provided.\",\n    \"overall_quality\": \"Overall, this is a solid but limited local explanation: clear, concise, and semantically plausible, but not very actionable and only moderately complete. It is good for a quick inspection of feature influence, not for a full decision review.\",\n    \"semantic_plausibility\": \"The features with the largest effects, such as worst radius, worst perimeter, and worst area, are highly plausible drivers in a breast cancer model. The mix of mostly negative contributions with one small positive contribution is also coherent for a binary classifier.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:23.160609+00:00"
+}

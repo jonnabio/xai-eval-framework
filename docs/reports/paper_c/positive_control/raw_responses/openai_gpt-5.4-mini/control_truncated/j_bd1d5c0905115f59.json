@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56b2fc0abd88017e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bd1d5c0905115f59",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_56b2fc0abd88017e_6e908ba3e2e8166d.txt",
+  "prompt_version": "6e908ba3e2e8166d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206308-WR9woXlTK5DfnH8Muz4V",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002628,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001971,
+        "upstream_inference_cost": 0.002628,
+        "upstream_inference_prompt_cost": 0.000657
+      },
+      "is_byok": false,
+      "prompt_tokens": 876,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1314
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56b2fc0abd88017e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not suggest any concrete recourse or next steps. A user cannot tell what to change to influence the prediction.\",\n    \"audit_usefulness\": \"It gives the top local SHAP factors with signed effects, which is useful for a quick model inspection. However, it is too sparse to fully investigate why the model predicted class 1 or to assess stability and fairness.\",\n    \"clarity\": \"The phrasing is concise and the sign convention is easy to read, so a non-expert can broadly understand which features pushed the prediction up or down. Still, terms like feature names and SHAP values may need some interpretation.\",\n    \"completeness\": \"Only three local factors are shown, with no baseline prediction, probability, or additional context about the remaining features. That is enough to identify some drivers, but not enough to fully explain the specific decision.\",\n    \"concision\": \"The explanation is very compact and avoids redundancy, delivering the main information in a few tokens. It is efficient, though perhaps overly terse for full interpretability.\",\n    \"overall_quality\": \"This is a reasonably good short local explanation because it identifies the main positive and negative contributors. Its main weakness is limited depth: it informs but does not fully explain or support action.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit data, and the directions of influence look reasonable in context. Nothing in the explanation appears contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:30.120303+00:00"
+}

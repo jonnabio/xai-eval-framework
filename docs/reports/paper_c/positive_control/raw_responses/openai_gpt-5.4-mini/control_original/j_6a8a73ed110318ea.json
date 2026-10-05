@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6a8a73ed110318ea",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_a857fae38ad2e004_cbb830f49d86b568.txt",
+  "prompt_version": "cbb830f49d86b568",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206268-RmfdQWG7zX9pTTUSW41V",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002205,
+        "upstream_inference_cost": 0.00291675,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1439
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into concrete recourse or next steps. It only lists feature contributions, so a user cannot tell what to change to affect the outcome.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local drivers and their directions, which helps inspect whether the model relies on sensible features. However, it lacks magnitudes in a common scale and gives no comparison to the instance's actual feature values, limiting deeper diagnosis.\",\n    \"clarity\": \"The output is concise and easy to read, with feature names and signed contributions presented in a simple list. A non-expert may still need some familiarity with one-hot encoded tabular features to interpret items like marital-status_Married-civ-spouse.\",\n    \"completeness\": \"It identifies the main positive and negative local factors, but does not explain the baseline, the predicted probability, or how the listed terms combine into the final class decision. Important contextual details about the instance itself are missing.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary repetition, while still listing the top factors that matter locally. It is near-optimal in length for the amount of information provided.\",\n    \"overall_quality\": \"This is a reasonably good LIME explanation for a tabular logistic-regression model: readable, compact, and informative about local drivers. Its main weakness is limited decision context, so it supports inspection better than user understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and align with expected socioeconomic predictors such as marital status, education, age, occupation, and capital gain. The sign pattern is also coherent with a negative prediction being influenced by a mix of supportive and opposing features.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:51.285937+00:00"
+}

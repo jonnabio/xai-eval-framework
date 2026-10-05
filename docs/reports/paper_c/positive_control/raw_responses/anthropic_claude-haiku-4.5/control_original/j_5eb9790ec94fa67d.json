@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5eb9790ec94fa67d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_052659e044864140_2fcdc50de49cc40f.txt",
+  "prompt_version": "2fcdc50de49cc40f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206357-EK7k177Zs1YsWEc12Lzi",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 437,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003273,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002185,
+        "upstream_inference_cost": 0.003273,
+        "upstream_inference_prompt_cost": 0.001088
+      },
+      "is_byok": false,
+      "prompt_tokens": 1088,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1525
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken, what thresholds matter, or how feature values might be modified to change the prediction.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable inspection of which features drove the prediction and their relative importance, supporting model behavior auditing and bias investigation.\",\n    \"clarity\": \"The format is straightforward\u2014feature names paired with numerical contributions\u2014but requires familiarity with SHAP methodology and breast cancer dataset features to fully interpret.\",\n    \"completeness\": \"The top 10 features with their SHAP contributions provide substantial local decision context, though actual feature values for this instance are absent, limiting full understanding of the decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting ranked features with their contributions efficiently without padding.\",\n    \"overall_quality\": \"The explanation is technically sound and informative for model auditing but lacks actionability and instance-level context (actual feature values), limiting its utility for end-users or clinicians.\",\n    \"semantic_plausibility\": \"The identified features (concave points, area, perimeter, texture) are medically relevant to breast cancer diagnosis, and their negative contributions to a class-0 prediction are plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:21.213322+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_aa1ea16859fa26f1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b46dc0d30c9a908a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_aa1ea16859fa26f1_387c3d751ba416a5.txt",
+  "prompt_version": "387c3d751ba416a5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206325-IZSkzS9baLMBzbMG0WT1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 446,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002715,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002007,
+        "upstream_inference_cost": 0.002715,
+        "upstream_inference_prompt_cost": 0.000708
+      },
+      "is_byok": false,
+      "prompt_tokens": 944,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1390
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_aa1ea16859fa26f1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not translate them into concrete recourse or next steps. A user cannot tell what could be changed or how to affect the decision.\",\n    \"audit_usefulness\": \"It is useful for a basic local inspection because it shows which variables pushed the prediction up or down. However, the attribution magnitudes are small and there is no baseline, probability, or comparison context, so auditing value is limited.\",\n    \"clarity\": \"The feature list is readable and the sign convention is straightforward enough for a non-expert to follow. Still, the one-line format and encoded feature names require some interpretation of the dataset schema.\",\n    \"completeness\": \"It covers several top local factors and includes both positive and negative contributions, which helps explain the prediction. But it omits the intercept, overall score/probability, and a fuller account of feature interactions, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It communicates the top factors in a short form without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a decent lightweight local explanation, but it is only moderately informative because it lacks probability, baseline, and actionable interpretation. Its main strength is simplicity, not depth.\",\n    \"semantic_plausibility\": \"The listed drivers are broadly plausible for Adult-income prediction, especially education, occupation, age, marital status, and sex. The small positive and negative weights are consistent with a linear local explanation around a logreg model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:47.715244+00:00"
+}

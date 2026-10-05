@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_cfdb00b0a8c74cec",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_3e006f8c0e7512b1_faa6b9171382f9cd.txt",
+  "prompt_version": "faa6b9171382f9cd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206202-sff4Jy2MzEzKLnzNccou",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003649,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002535,
+        "upstream_inference_cost": 0.003649,
+        "upstream_inference_prompt_cost": 0.001114
+      },
+      "is_byok": false,
+      "prompt_tokens": 1114,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1621
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction, what actions are feasible, or how to interpret the direction of influence for decision-making. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"SHAP values with directional contributions enable auditors to inspect model behavior and identify potential bias patterns (e.g., sex_Male negative contribution). The ranked list supports systematic investigation of feature importance and fairness concerns.\",\n    \"clarity\": \"The format is straightforward\u2014feature names paired with numerical SHAP values\u2014but lacks context on what positive/negative values mean, what the prediction represents, or how to interpret magnitudes. A non-expert would struggle without domain knowledge.\",\n    \"completeness\": \"The top 10 features are provided with their local contributions, covering the main drivers of the prediction. However, the base value and prediction confidence are absent, limiting full understanding of the decision boundary.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name and SHAP value) without padding. Each entry is maximally informative per word.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks accessibility and actionability for end users. It serves data scientists well but falls short for broader stakeholder communication or decision support.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for an income prediction task (sex, capital gains, education, marital status are known predictors), and the direction of effects aligns with domain expectations. No contradictions are evident.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:46.852325+00:00"
+}

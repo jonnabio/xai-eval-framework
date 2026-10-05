@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b11abd9ec480a4aa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b56cdbf3298343c3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_b11abd9ec480a4aa_59836aafb8240915.txt",
+  "prompt_version": "59836aafb8240915",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206247-eaZUrXwq3rW0p49Wc2mG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00291075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.00291075,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1436
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b11abd9ec480a4aa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only feature attributions. A user cannot tell what to change to influence the prediction, especially because several features are non-actionable or ambiguous.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it reveals the local ranking and direction of several influential features. However, it lacks enough context about baseline values, confidence, and model behavior to fully support deeper error or bias investigation.\",\n    \"clarity\": \"The list is easy to read and the signs of the weights are straightforward for a non-expert to follow. Still, the meaning of the encoded features is somewhat technical and requires some familiarity with the Adult dataset or one-hot encoding.\",\n    \"completeness\": \"The explanation covers the top local factors, but it does not explain the decision threshold, the instance's actual feature values, or how much each factor changed the score. That leaves an incomplete picture of why the model predicted class 1 for this specific case.\",\n    \"concision\": \"The explanation is compact and avoids unnecessary prose while still listing the main contributing features. It is reasonably information-dense for a local explanation.\",\n    \"overall_quality\": \"This is a solid but limited LIME explanation: readable, compact, and locally informative, but not sufficient for full understanding or recourse. Its value is mainly in giving a quick sense of which encoded features pushed the prediction up or down.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset, and the directions are not obviously contradictory. Married-civ-spouse pushing toward the positive class and never-married or being female/other-service reducing it are consistent with known patterns in this domain, even if potentially biased.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:30.342201+00:00"
+}

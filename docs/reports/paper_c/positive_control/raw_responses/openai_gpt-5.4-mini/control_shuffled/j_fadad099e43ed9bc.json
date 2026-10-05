@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f75792557c566daf",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_fadad099e43ed9bc",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_f75792557c566daf_5c2ca3c947fa6af4.txt",
+  "prompt_version": "5c2ca3c947fa6af4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206191-CjAL5hgJ4hoQKM5KqwRE",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002631,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0019305,
+        "upstream_inference_cost": 0.002631,
+        "upstream_inference_prompt_cost": 0.0007005
+      },
+      "is_byok": false,
+      "prompt_tokens": 934,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1363
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_f75792557c566daf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse or decision guidance. A user cannot tell what change, if any, would move the prediction.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it exposes the top SHAP contributors and their directions. However, it lacks a baseline, feature values, and class-specific framing, so deeper inspection is limited.\",\n    \"clarity\": \"The wording is straightforward and the ranking format is easy to read for a non-expert. The meaning of the signed SHAP values is only partially explained, but the list is still understandable.\",\n    \"completeness\": \"It covers several top local drivers of the prediction, but not the feature values, decision threshold, or how strongly the features combine to yield class 1. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy while still listing the main contributors. It conveys a moderate amount of information in few tokens.\",\n    \"overall_quality\": \"This is a decent SHAP summary for a single prediction, but it remains a terse feature ranking rather than a full explanation. It is helpful for quick inspection, yet not strong enough for recourse or thorough debugging.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are plausible and the magnitude pattern looks consistent with a tree model explanation. Nothing appears contradictory or domain-incoherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:33.634402+00:00"
+}

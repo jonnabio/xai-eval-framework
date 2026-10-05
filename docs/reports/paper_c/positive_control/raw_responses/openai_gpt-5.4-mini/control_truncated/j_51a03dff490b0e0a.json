@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_51a03dff490b0e0a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_45af74f0fdcedd43_81e64dd89af1a16d.txt",
+  "prompt_version": "81e64dd89af1a16d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206233-uj6fMAqYX7w8Xry8mKDs",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027825,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021285,
+        "upstream_inference_cost": 0.0027825,
+        "upstream_inference_prompt_cost": 0.000654
+      },
+      "is_byok": false,
+      "prompt_tokens": 872,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1345
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few factors that influenced the prediction, but it does not translate them into concrete recourse steps or indicate how a user could change the outcome. It is therefore only weakly actionable for decision support.\",\n    \"audit_usefulness\": \"For an auditor, the SHAP values give a small amount of local feature attribution, but the explanation is too sparse to assess stability, feature interactions, or whether the model relies on sensible patterns. It helps inspect directionality, but not deeply investigate model behavior.\",\n    \"clarity\": \"The wording is compact and easy to parse, especially for a reader familiar with SHAP-style outputs. However, the meaning of the signed values and why one feature appears twice is not explained in plain language.\",\n    \"completeness\": \"The explanation covers only three local factors and does not indicate the baseline, the strength of the prediction, or the remaining important contributors. That is enough to glimpse the main drivers, but not enough to fully understand the specific decision.\",\n    \"concision\": \"The output is very short and contains only the top attributions without extra narrative. It is highly compact and mostly free of redundancy.\",\n    \"overall_quality\": \"This is a clean and concise local attribution summary, but it is too minimal to support strong understanding, recourse, or audit. It is useful as a quick snapshot rather than a full explanation.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for German credit, since checking status and loan duration are reasonable drivers of credit approval decisions. The sign pattern is also broadly believable for a risk model, even though the duplicate checking-status terms make the presentation somewhat awkward.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:16.182834+00:00"
+}

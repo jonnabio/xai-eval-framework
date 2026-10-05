@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_716ff3a7920a51ba",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_28188c86ac4bdfad_9a5c257091db33a6.txt",
+  "prompt_version": "9a5c257091db33a6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206380-5QjsVZ6lvWd2jxTs2BlY",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 598,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004617,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00382125,
+        "upstream_inference_cost": 0.004617,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2080
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers only static numerical attributions with no guidance on actionable recourse or counterfactual steps.\",\n    \"audit_usefulness\": \"It provides a clear view of local linear feature attributions, allowing an auditor to see which variables\u2014including protected attributes like sex\u2014drive the model.\",\n    \"clarity\": \"The raw list of one-hot encoded feature names and signed decimal weights is difficult for non-expert readers to interpret without context.\",\n    \"completeness\": \"While ten top factors and their directions are provided, the actual feature values of the instance and prediction probabilities are omitted.\",\n    \"concision\": \"The presentation is compact and free of verbose filler, though one-hot encoding introduces some redundant categorical features.\",\n    \"overall_quality\": \"The explanation provides a standard, low-level technical attribution list that is somewhat useful for debugging but lacks user-friendly context and actionability.\",\n    \"semantic_plausibility\": \"The direction of the top factors aligns broadly with known socioeconomic drivers in the Adult dataset, despite minor clutter from one-hot encoding artifacts.\",\n    \"overall_quality\": \"This is an acceptable technical summary for model inspection, but the absence of instance values and actionable guidance limits its holistic quality.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:49.281560+00:00"
+}

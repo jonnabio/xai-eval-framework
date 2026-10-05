@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_3d91b2c0d67300c0",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_e354d1466bc2ce9c_1b4ab4273ff0706d.txt",
+  "prompt_version": "1b4ab4273ff0706d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206603-1e2UMY7opsDcG92p2H6o",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1115,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 701,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004989,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00418125,
+        "upstream_inference_cost": 0.004989,
+        "upstream_inference_prompt_cost": 0.00080775
+      },
+      "is_byok": false,
+      "prompt_tokens": 1077,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2192
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists local numerical weights with no guidance, thresholds, or recourse steps for a user seeking to understand or alter the outcome.\",\n    \"audit_usefulness\": \"It provides a clear ranking and signed weights of local feature contributions, allowing an auditor to inspect model behavior, though missing instance values hinder deeper verification.\",\n    \"clarity\": \"The raw key-value format using one-hot encoded variable names and small floating-point weights requires technical ML literacy to interpret.\",\n    \"completeness\": \"While ten top local factors are displayed, the omission of actual feature values, baseline prediction probability, and intercept limits complete local understanding.\",\n    \"concision\": \"The text is highly concise and free of filler, communicating the feature attributions in a compact token budget.\",\n    \"overall_quality\": \"Overall quality is below average due to the lack of instance values, absence of actionable guidance, and seemingly contradictory attributions across mutually exclusive categories.\",\n    \"semantic_plausibility\": \"Multiple mutually exclusive categories (e.g., Married-civ-spouse and Never-married) both show positive effects, and education-num is negative while Bachelors is positive, creating confusion without instance context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:23:32.231567+00:00"
+}

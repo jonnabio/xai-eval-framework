@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_3041768bdb854895",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_afad86e31d6d5cf6_449969f220734415.txt",
+  "prompt_version": "449969f220734415",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206488-uSq91fwZRLul4r1iH1kU",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003666,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00255,
+        "upstream_inference_cost": 0.003666,
+        "upstream_inference_prompt_cost": 0.001116
+      },
+      "is_byok": false,
+      "prompt_tokens": 1116,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1626
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take to achieve a different outcome. The magnitudes are too small to suggest meaningful intervention points.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features influenced the prediction and their direction of effect, enabling an auditor to inspect model behavior and identify potential biases in feature weighting. However, the extremely small coefficient magnitudes raise questions about model stability.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with numerical contributions\u2014and requires minimal domain knowledge to parse. However, the practical meaning of coefficients near zero is unclear without additional context.\",\n    \"completeness\": \"The explanation covers the top 10 local factors but omits information about the instance's actual feature values, the prediction confidence, and the decision boundary context. This limits understanding of why these specific features matter for this case.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a dense format. Each line conveys both feature identity and contribution magnitude efficiently.\",\n    \"overall_quality\": \"The explanation is technically sound but provides limited practical insight due to near-zero coefficients, missing instance context, and lack of actionability. It serves basic audit purposes but falls short of supporting meaningful decision-making or recourse.\",\n    \"semantic_plausibility\": \"The features and their directions are plausible for an income prediction task (e.g., administrative clerical work and high school education negatively associated with high income). However, the extremely small magnitudes suggest weak or unstable model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:32.637372+00:00"
+}

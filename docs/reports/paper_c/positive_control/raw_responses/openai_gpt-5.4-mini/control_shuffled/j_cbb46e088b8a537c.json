@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cbb46e088b8a537c",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_fbb0082b6f2ae806_d34677535d72429d.txt",
+  "prompt_version": "d34677535d72429d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206257-XIK0joWbaJk52CVs0nuX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028485,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.0028485,
+        "upstream_inference_prompt_cost": 0.000711
+      },
+      "is_byok": false,
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1423
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide a clear recourse path or any concrete steps a user could take to change the prediction. It only lists features and small weights, which is informative but not directly actionable.\",\n    \"audit_usefulness\": \"It gives some local feature weights that help inspect which variables influenced the model, so an auditor can see the direction of several contributors. However, the weights are very small and unnormalized, and the explanation lacks context about baseline output or feature values, limiting deeper investigation.\",\n    \"clarity\": \"The wording is straightforward and the format is easy to scan, even for a non-expert. The meaning of the positive and negative signs is still somewhat implicit, but overall it is understandable.\",\n    \"completeness\": \"It covers several local factors behind the prediction, but it omits the actual feature values, the model score/probability, and any indication of the strongest drivers beyond the top listed terms. That makes the local decision context only partially understandable.\",\n    \"concision\": \"The explanation is compact and lists only a short set of local factors without obvious redundancy. It is reasonably efficient in communicating the main information available from LIME.\",\n    \"overall_quality\": \"This is a decent but limited local explanation: it is readable and compact, and it offers some insight into the model\u2019s behavior. Its usefulness is constrained by the lack of feature values, effect magnitude context, and actionable guidance.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult dataset, since marital status, education, occupation, relationship, and sex are all common predictive attributes. The mixed positive and negative contributions are also consistent with a local surrogate explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:40.133398+00:00"
+}

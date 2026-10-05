@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ea764fae63b129dc",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_8785095d24506d66",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_ea764fae63b129dc_6d8ede9a1e559110.txt",
+  "prompt_version": "6d8ede9a1e559110",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206209-telo5h2crcYWvk7hRj6U",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003684,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002655,
+        "upstream_inference_cost": 0.003684,
+        "upstream_inference_prompt_cost": 0.001029
+      },
+      "is_byok": false,
+      "prompt_tokens": 1029,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1560
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_ea764fae63b129dc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on how to change the prediction or what actions a user should take. Without knowing the direction of desired change or feasible interventions, the explanation cannot support recourse.\",\n    \"audit_usefulness\": \"The SHAP values and feature names enable an auditor to inspect which features drove the prediction and their relative importance. This supports investigation of model logic, though the small sample size (n=100) and lack of baseline context limit deeper bias investigation.\",\n    \"clarity\": \"The explanation uses standard SHAP terminology and clearly lists feature names with numerical contributions in a structured format. A non-expert may need to understand SHAP values and the German credit domain, but the presentation itself is unambiguous.\",\n    \"completeness\": \"Only three features are shown with no indication of base value, prediction confidence, or feature values for the instance. Critical context about why these features matter (e.g., their actual values) and whether other features were negligible is absent.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the top three drivers with their SHAP values. Each element contributes directly to understanding relative feature importance.\",\n    \"overall_quality\": \"The explanation provides a minimal but valid SHAP summary suitable for model inspection, yet lacks sufficient context, actionability, and completeness for robust decision support or recourse. It represents a basic, functional explanation with notable gaps.\",\n    \"semantic_plausibility\": \"In credit risk assessment, residence duration, checking account status, and account balance are plausible predictors of creditworthiness. The feature selection and direction of effects (longer residence and having a checking account as positive signals) align with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:54.711710+00:00"
+}

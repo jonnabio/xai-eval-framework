@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_19b944710e090900",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_1ff1e7e5be19b8aa",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_19b944710e090900_79f1eabaa7c979ec.txt",
+  "prompt_version": "79f1eabaa7c979ec",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206438-pS0VnnFDdB3lXGUi00O5",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1344,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 955,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005841,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00504,
+        "upstream_inference_cost": 0.005841,
+        "upstream_inference_prompt_cost": 0.000801
+      },
+      "is_byok": false,
+      "prompt_tokens": 1068,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2412
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_19b944710e090900\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating feature values, thresholds, or concrete steps for recourse.\",\n    \"audit_usefulness\": \"It provides the local directional weights for top features, allowing an auditor to see protected attributes like sex, but is hindered by missing actual feature values.\",\n    \"clarity\": \"The raw key-value format using one-hot encoded feature names and negative decimal coefficients requires statistical knowledge to interpret.\",\n    \"completeness\": \"While ten local weights are displayed, the omission of actual feature values, base values, and prediction probability limits full understanding of the decision.\",\n    \"concision\": \"The text presents the essential top local attributions without filler words or unnecessary prose.\",\n    \"overall_quality\": \"The explanation offers a compact overview of local LIME weights, but suffers from low actionability, lack of instance values, and technical presentation.\",\n    \"semantic_plausibility\": \"The identified features such as lower education and occupation align well with adult income dynamics, though having negative weights for both sex categories is somewhat counterintuitive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:48.262223+00:00"
+}

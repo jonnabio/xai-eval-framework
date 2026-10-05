@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_326356fd46be88f8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_a857fae38ad2e004_cbb830f49d86b568.txt",
+  "prompt_version": "cbb830f49d86b568",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206411-G4lZVAx8XvJW4uneowro",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1176,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 778,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005214,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00441,
+        "upstream_inference_cost": 0.005214,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2248
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists numerical attribution weights without actionable advice, target thresholds, or feasible recourse steps.\",\n    \"audit_usefulness\": \"It provides the top ten local feature contributions and their signs, which helps an auditor inspect feature relevance and demographic factors like sex, though missing instance feature values limit full verification.\",\n    \"clarity\": \"The explanation is presented as a raw string of feature weights and dummy variable names, requiring prior statistical and domain knowledge to decipher.\",\n    \"completeness\": \"While it captures ten key local drivers, it omits the instance's actual feature values and the reference baseline necessary to fully reconstruct the decision.\",\n    \"concision\": \"The presentation is compact and contains no conversational padding, delivering high information density per token.\",\n    \"overall_quality\": \"It serves as an acceptable raw technical attribution dump for an auditor, but suffers from poor accessibility, lack of instance context, and zero actionability.\",\n    \"semantic_plausibility\": \"The identified features (such as capital gain, marital status, and education) and their relative impacts align well with known demographic trends in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:21.833954+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_6a2f3a4e43a7f8f8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_28188c86ac4bdfad_39e9782afe1aee4f.txt",
+  "prompt_version": "39e9782afe1aee4f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206312-lksBQCQEwdUfv5TiWRZy",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003473,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002455,
+        "upstream_inference_cost": 0.003473,
+        "upstream_inference_prompt_cost": 0.001018
+      },
+      "is_byok": false,
+      "prompt_tokens": 1018,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1509
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies negative factors but provides no guidance on how to change them or what actions would alter the prediction. Without knowing the instance's actual values or feasible modifications, users cannot act on this information.\",\n    \"audit_usefulness\": \"The explanation lists three feature-value pairs with their LIME weights, which supports basic model inspection and bias investigation by showing which features drove the prediction. However, the small sample size (n=100) and lack of confidence metrics limit audit depth.\",\n    \"clarity\": \"The format is straightforward and uses standard notation (feature_value: weight), making it accessible to readers familiar with machine learning. Non-experts may struggle with interpreting negative weights and their significance.\",\n    \"completeness\": \"Only three factors are shown with no indication of whether these are the only drivers or merely the top contributors; the instance's actual feature values are absent, preventing full understanding of the local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format. Each element contributes directly to the explanation without padding.\",\n    \"overall_quality\": \"The explanation provides a minimal but technically sound LIME output that serves basic transparency needs but lacks depth in actionability, context, and completeness for robust decision support or auditing.\",\n    \"semantic_plausibility\": \"The negative weights on workclass, relationship, and occupation are plausible for an income prediction task (adult dataset), as these features typically correlate with income classification. The direction and magnitude are consistent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:36.992183+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_eec93395cc3f8408",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_bd6e960b77755dd1",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_eec93395cc3f8408_eb2c3c2da16b15ed.txt",
+  "prompt_version": "eb2c3c2da16b15ed",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206544-ZRJkRDlLZ6VqG49wnnwv",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1222,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 823,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0054015,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0045825,
+        "upstream_inference_cost": 0.0054015,
+        "upstream_inference_prompt_cost": 0.000819
+      },
+      "is_byok": false,
+      "prompt_tokens": 1092,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2314
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_eec93395cc3f8408\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without stating the target class direction, thresholds, or feasible steps for recourse.\",\n    \"audit_usefulness\": \"It provides signed local attributions for the top 10 features, which helps technical auditors identify key model influences, though it lacks the base value and raw feature inputs.\",\n    \"clarity\": \"The raw one-hot encoded feature names and uncontextualized numerical values require technical understanding of SHAP attributions to interpret correctly.\",\n    \"completeness\": \"The top 10 contributors cover the primary local drivers, but omitting feature values and the expected base rate limits full comprehension of the decision.\",\n    \"concision\": \"The format is highly compact and token-efficient, presenting the top drivers without filler text.\",\n    \"overall_quality\": \"It serves as an acceptable technical summary of local feature importances, but its lack of plain-language interpretation and actionable guidance limits its overall utility.\",\n    \"semantic_plausibility\": \"The highlighted features\u2014such as savings status, credit history, and checking balance\u2014are standard, plausible indicators for credit risk evaluation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:22:34.852336+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3c34585b1d65d81e",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_539c4306fe22168f",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_3c34585b1d65d81e_aa97ae32992db11b.txt",
+  "prompt_version": "aa97ae32992db11b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206245-AVnqT8x7QD3YfFJBf5IZ",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1155,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 753,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00513525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00433125,
+        "upstream_inference_cost": 0.00513525,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2227
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3c34585b1d65d81e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation presents raw numerical weights without providing the instance's actual feature values or actionable guidance for recourse.\",\n    \"audit_usefulness\": \"It provides a clear ranking of LIME local weights useful for initial model inspection, though missing baseline values and input states limits full debugging.\",\n    \"clarity\": \"The explanation is presented as a raw list of technical feature names and floating-point coefficients, which is difficult for a non-expert to interpret.\",\n    \"concision\": \"The presentation is compact and free of conversational filler, presenting solely the top local feature contributions.\",\n    \"completeness\": \"While ten top factors are reported, the lack of instance feature values and intercept makes it impossible to fully verify the local decision boundary.\",\n    \"semantic_plausibility\": \"Several factor signs appear counter-intuitive for the Adult dataset (e.g., negative weights for capital-gain and education-num alongside positive weights for HS-grad when predicting high income).\",\n    \"overall_quality\": \"The explanation provides standard technical feature attributions but suffers from lack of context, questionable directionality, and poor lay readability.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:34.236736+00:00"
+}

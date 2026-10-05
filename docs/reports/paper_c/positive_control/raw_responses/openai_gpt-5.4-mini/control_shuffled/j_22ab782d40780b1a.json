@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_22ab782d40780b1a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_e759e990528304a2_e4ddafc27a4cfa0b.txt",
+  "prompt_version": "e4ddafc27a4cfa0b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206235-0QEEfnywuDWPEajWh8o8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00278025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020745,
+        "upstream_inference_cost": 0.00278025,
+        "upstream_inference_prompt_cost": 0.00070575
+      },
+      "is_byok": false,
+      "prompt_tokens": 941,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1402
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential features but does not translate them into specific recourse steps or decision guidance. A user cannot tell what to change or verify to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it shows which encoded features pushed the prediction up or down. However, it lacks effect size context, feature values, and comparison to a baseline, limiting deeper inspection.\",\n    \"clarity\": \"The ranking format is readable and concise, and the signs of contributions are easy to follow. Still, one-hot encoded terms like 'marital-status_Divorced' and 'relationship_Own-child' may be less intuitive for non-experts.\",\n    \"completeness\": \"It covers several top local drivers, including both positive and negative contributions, but not enough of the instance context to fully explain the prediction. Missing the actual feature values and the model output probability makes the decision only partially understandable.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy, with a short ranked list of local factors. It communicates useful information per word without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a solid LIME summary for a single prediction: concise, readable, and moderately informative. It is limited by encoded-feature wording and the absence of instance values or recourse information, so it is good but not excellent.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and are consistent with a local explanation for an MLP classifier. The mixture of demographic and employment-related features fits the domain and does not appear contradictory.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:18.488383+00:00"
+}

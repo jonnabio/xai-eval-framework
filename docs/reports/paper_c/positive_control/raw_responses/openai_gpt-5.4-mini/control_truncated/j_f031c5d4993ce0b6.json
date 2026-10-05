@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f031c5d4993ce0b6",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_a857fae38ad2e004_56e6046e9260ca47.txt",
+  "prompt_version": "56e6046e9260ca47",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206272-6QJ9HiMRGgEiQEHDTOql",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00267975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002025,
+        "upstream_inference_cost": 0.00267975,
+        "upstream_inference_prompt_cost": 0.00065475
+      },
+      "is_byok": false,
+      "prompt_tokens": 873,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1323
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies a few features associated with the prediction, but it does not suggest any concrete recourse or next steps. A user cannot easily infer what would need to change to alter the outcome.\",\n    \"audit_usefulness\": \"It provides local feature attributions that are useful for inspecting which variables influenced the model, especially capital-gain and marital status. However, the information is too sparse to fully assess model behavior, stability, or potential bias.\",\n    \"clarity\": \"The wording is short and straightforward, and the feature contributions are easy to read. A non-expert can understand the basic idea that positive and negative feature effects contributed to the prediction.\",\n    \"completeness\": \"Only three local factors are shown, so the explanation omits many potentially relevant drivers of the decision. It gives a partial picture of why the model predicted class 0 rather than a full local decision context.\",\n    \"concision\": \"The explanation is very compact and avoids unnecessary detail. It communicates the most salient local factors in few words, though the brevity comes at the cost of completeness.\",\n    \"overall_quality\": \"This is a clear and concise local explanation with some audit value, but it is limited by its narrow scope and lack of actionable guidance. Overall it is useful as a quick summary, not as a full explanation.\",\n    \"semantic_plausibility\": \"The factors are plausible for the Adult income dataset, where capital-gain and marital status are known to be informative. The sign pattern is also coherent as a local attribution summary from LIME.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:02.979612+00:00"
+}

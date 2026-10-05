@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ac4ae530fed35a84",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_28188c86ac4bdfad_9a5c257091db33a6.txt",
+  "prompt_version": "9a5c257091db33a6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206258-5MT9vR4I1cJYRdmTWQdm",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00296925,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002259,
+        "upstream_inference_cost": 0.00296925,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1449
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for the individual. It only lists local feature contributions without translating them into feasible changes or decision guidance.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it shows which features pushed the prediction toward class 0 or class 1 and their relative magnitudes. However, it lacks confidence information, comparison to the base value, and broader context needed for deeper error or bias analysis.\",\n    \"clarity\": \"The output is easy to read as a ranked list of feature weights, and the sign convention is straightforward. A non-expert may still need to know LIME semantics and the meaning of the one-hot encoded variables to fully interpret it.\",\n    \"completeness\": \"It covers several local drivers of the prediction, including workclass, relationship, occupation, sex, education, marital status, and age. Still, it does not explain the full local decision context, the intercept/base score, or how these factors combine to support the final class 0 prediction.\",\n    \"concision\": \"The explanation is compact and contains mostly non-redundant information. It communicates the main local factors in a short list without unnecessary elaboration.\",\n    \"overall_quality\": \"This is a decent LIME explanation for a tabular prediction: it is concise, readable, and gives some local feature attribution. Its main weaknesses are limited completeness and weak actionability, but overall it is still useful.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the Adult dataset and the directions of influence are broadly reasonable, especially for relationship, occupation, education, and marital status. The simultaneous presence of one-hot categories like sex_Male and sex_Female is slightly awkward but still consistent with how encoded features can appear in local explanations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:41.016814+00:00"
+}

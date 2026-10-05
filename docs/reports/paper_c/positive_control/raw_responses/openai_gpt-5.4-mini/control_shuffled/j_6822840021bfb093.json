@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0f6578287491844e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6822840021bfb093",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_0f6578287491844e_0921784aacebe85c.txt",
+  "prompt_version": "0921784aacebe85c",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206354-giG83nG9XJ2oKWUyFF2o",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00295875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00225,
+        "upstream_inference_cost": 0.00295875,
+        "upstream_inference_prompt_cost": 0.00070875
+      },
+      "is_byok": false,
+      "prompt_tokens": 945,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1445
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0f6578287491844e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation gives feature contributions but does not translate them into concrete recourse or next steps a user could take. A reader cannot infer which changes would improve the predicted outcome or whether any variables are actionable.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it shows the top local SHAP factors and their directions, which helps inspect what drove the prediction. However, it lacks baseline values, magnitude context, and any comparison to similar cases, so it is not fully sufficient for deeper error or bias analysis.\",\n    \"clarity\": \"The format is compact and the signs are easy to interpret as positive or negative contributions. Still, the technical feature names and raw SHAP values require some familiarity with the dataset and model interpretation, so it is not fully accessible to a non-expert.\",\n    \"completeness\": \"It covers several of the main local drivers, which helps explain the prediction at a high level. But it omits the base value, the full set of contributing features, and the final score/probability, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is efficiently presented and avoids redundant wording. It communicates the top factors in a compact list with little unnecessary text.\",\n    \"overall_quality\": \"This is a reasonably good local SHAP explanation that is concise and partially informative, but it stops short of being fully interpretable or actionable. Its main weakness is the lack of contextual information needed to understand how strongly the listed factors supported the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for the German credit domain, since savings, age, credit history, checking status, housing, purpose, and loan amount are all relevant credit-risk variables. The mix of positive and negative contributions also looks consistent with a real model explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:17.059415+00:00"
+}

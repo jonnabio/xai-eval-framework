@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_70a9a3266e726d85",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_fbb0082b6f2ae806_d34677535d72429d.txt",
+  "prompt_version": "d34677535d72429d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206302-i2WSJDzWD1gdgCnpUydA",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003357,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00225,
+        "upstream_inference_cost": 0.003357,
+        "upstream_inference_prompt_cost": 0.001107
+      },
+      "is_byok": false,
+      "prompt_tokens": 1107,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1557
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature weights but provides no guidance on what actions could be taken to change the prediction or improve outcomes; it is purely descriptive without recourse suggestions.\",\n    \"audit_usefulness\": \"The feature weights and their directions support model behavior inspection and could help identify potential bias patterns, though the small magnitude of coefficients and lack of baseline context limit deeper investigation.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature-weight pairs with clear formatting, making it accessible to non-experts despite requiring basic understanding of feature names and weight interpretation.\",\n    \"completeness\": \"The explanation covers the top 10 local factors influencing the prediction, which provides reasonable coverage of the decision drivers, though the cumulative contribution and decision threshold context are absent.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is a standard LIME output that clearly identifies local feature contributions but lacks actionability, confidence context, and deeper interpretive guidance needed for robust decision support.\",\n    \"semantic_plausibility\": \"The feature set and their relative weights are plausible for an adult income prediction task, with married status and education being expected drivers; however, the small magnitude of all weights raises questions about model confidence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:27.091249+00:00"
+}

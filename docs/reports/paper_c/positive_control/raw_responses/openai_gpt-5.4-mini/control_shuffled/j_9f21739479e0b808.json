@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9f21739479e0b808",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_778dd7d6e1653158_1d2dec9097c63f6e.txt",
+  "prompt_version": "1d2dec9097c63f6e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206301-7J4L4OjAnlWhwr8jUSLw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020655,
+        "upstream_inference_cost": 0.002775,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1405
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not offer concrete recourse or next steps; it only lists feature contributions. A user cannot tell what change would most likely alter the prediction.\",\n    \"audit_usefulness\": \"It is moderately useful for auditing because it shows the local ranked SHAP effects and their signs, which can help inspect model behavior. However, it lacks the base value, prediction probability, and context needed for deeper error or bias analysis.\",\n    \"clarity\": \"The output is short and the feature list is easy to scan, but the meaning of positive versus negative SHAP values is not explained. A non-expert would likely need some background on SHAP and the encoded features.\",\n    \"completeness\": \"It covers the main local contributors, but not enough to fully understand why the model predicted class 0. Important context such as the baseline, exact feature values, and the magnitude of the final margin or probability is missing.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It delivers a small amount of high-value information in very few tokens.\",\n    \"overall_quality\": \"This is a reasonably good local SHAP summary, but it is limited by sparse context and weak usefulness for action or full decision understanding. It is best viewed as a concise feature attribution list rather than a complete explanation.\",\n    \"semantic_plausibility\": \"The feature attributions are plausible for the Adult dataset and the signs are not obviously contradictory. The identified features, such as education, marital status, relationship, occupation, age, and hours worked, are all reasonable predictors in this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:23.141159+00:00"
+}

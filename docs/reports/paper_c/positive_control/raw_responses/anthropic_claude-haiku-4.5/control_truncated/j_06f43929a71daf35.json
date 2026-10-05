@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a3f635ae972c4ad",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_06f43929a71daf35",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_2a3f635ae972c4ad_23e9f1e1ade2d057.txt",
+  "prompt_version": "23e9f1e1ade2d057",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206212-mrFXEW3Gb8dE3wxXm3FR",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 430,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003174,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00215,
+        "upstream_inference_cost": 0.003174,
+        "upstream_inference_prompt_cost": 0.001024
+      },
+      "is_byok": false,
+      "prompt_tokens": 1024,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1454
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a3f635ae972c4ad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken, what thresholds matter, or how feature values could be modified to change the prediction.\",\n    \"audit_usefulness\": \"The explanation identifies top contributing features and their relative weights, which supports basic model behavior inspection and could help detect systematic biases in feature reliance.\",\n    \"clarity\": \"The format is straightforward and uses plain feature names with numerical weights that are easy to parse, though domain context (e.g., what capital-gain represents) is assumed.\",\n    \"completeness\": \"Only three features are shown with no indication of their actual values for this instance, direction of influence, or baseline comparison, limiting understanding of the full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information in a minimal format without padding.\",\n    \"overall_quality\": \"The explanation provides basic feature importance information suitable for model inspection but lacks depth in actionability, instance-specific context, and decision direction needed for comprehensive understanding.\",\n    \"semantic_plausibility\": \"The identified features (capital gain, education, marital status) are plausible predictors in income classification tasks and align with domain expectations for the adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:56.231457+00:00"
+}

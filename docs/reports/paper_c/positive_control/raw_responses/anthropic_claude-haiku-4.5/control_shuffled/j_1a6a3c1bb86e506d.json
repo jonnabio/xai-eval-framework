@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4deccedcca9c7800",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1a6a3c1bb86e506d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_4deccedcca9c7800_5fd29c9f67c93c18.txt",
+  "prompt_version": "5fd29c9f67c93c18",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206464-p7AoMGeu4TsSuiZO6kpO",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003583,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00247,
+        "upstream_inference_cost": 0.003583,
+        "upstream_inference_prompt_cost": 0.001113
+      },
+      "is_byok": false,
+      "prompt_tokens": 1113,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1607
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4deccedcca9c7800\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a user could take; the negative coefficients suggest factors pushing toward class 0, but no recourse pathway is offered.\",\n    \"audit_usefulness\": \"The ranked feature contributions with numerical weights enable an auditor to inspect which features most influenced the prediction and their direction, supporting investigation of model behavior and potential bias.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of feature-coefficient pairs\u2014but requires familiarity with LIME output conventions and the adult dataset feature names to fully interpret; non-experts may struggle with categorical encoding notation.\",\n    \"completeness\": \"The explanation covers the top 10 local factors, which likely represent the main drivers of the prediction, though the relative magnitudes are small and it is unclear whether these capture the full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and weights) without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is technically sound and audit-ready but lacks clarity for general audiences and offers no actionable guidance; it serves model inspection well but falls short of broader usability.\",\n    \"semantic_plausibility\": \"The factors (education, marital status, hours worked, occupation, sex) are plausible predictors of income in the adult dataset, and the direction of effects (e.g., HS-grad and Never-married reducing likelihood of >50K) aligns with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:21:09.105403+00:00"
+}

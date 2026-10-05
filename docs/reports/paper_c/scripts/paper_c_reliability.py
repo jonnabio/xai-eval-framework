@@ -13,12 +13,15 @@ docs/reports/paper_c/results/:
     clean_fidelity.csv         explainer -> Spearman of overall quality with fidelity
     review_summary.csv         metric,value (single values used in the text)
     clean_icc_change.csv       dimension -> ICC(clean) - ICC(one call), bootstrap interval
+    lime_nonzero_metrics.csv   condition, metric -> Spearman among the non-zero LIME cases
+    run_facts.csv              run, judge -> provider, dates, share with reasoning tokens
 
 Conditions: primary3 (primary, three replicates averaged per judge), primary1 (primary,
 replicate 1), clean (one call). Scopes: all, shap_lime, each explainer, and lime_nonzero
-(the LIME cases without the records whose printed weights are all zero).
+and shap_lime_nonzero (without the LIME records whose printed weights are all zero).
 
-The analyses of the second review (PLAN.md, section 16) are marked "16.2" below.
+The analyses of the second review (PLAN.md, section 16) are marked "16.2" below, and
+those of the review of the third draft (section 18) "18.2".
 
     .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_reliability.py
 """
@@ -44,7 +47,9 @@ DIMS = ["completeness", "semantic_plausibility", "overall_quality", "audit_usefu
         "concision", "clarity", "actionability"]
 METRIC_WORDS = r"fidelity|stability|sparsity|faithfulness"
 SCOPES = {"all": None, "shap_lime": ["shap", "lime"], "shap": ["shap"], "lime": ["lime"],
-          "anchors": ["anchors"], "dice": ["dice"], "lime_nonzero": ["lime"]}
+          "anchors": ["anchors"], "dice": ["dice"], "lime_nonzero": ["lime"],
+          "shap_lime_nonzero": ["shap", "lime"]}
+METRICS = ["fidelity", "stability", "sparsity", "faithfulness_gap"]
 BOOTSTRAP_RESAMPLES = 4000
 BOOTSTRAP_SEED = 20261004
 
@@ -72,7 +77,8 @@ def coefficients(x: np.ndarray) -> dict[str, float]:
     mse = ((x - x.mean(1, keepdims=True) - x.mean(0, keepdims=True) + grand) ** 2).sum() \
         / ((n - 1) * (k - 1))
     out = {"n_cases": n, "sd_case_mean": x.mean(1).std(ddof=1), "icc_1_1": np.nan, "ci_lower": np.nan, "ci_upper": np.nan,
-           "icc_1_k": np.nan, "icc_2_1": np.nan, "icc_3_1": np.nan}
+           "icc_1_k": np.nan, "icc_2_1": np.nan, "icc_3_1": np.nan,
+           "sd_within": np.sqrt(msw)}  # 18.2: spread of the judges for one case
     if msr + (k - 1) * msw > 0:
         icc = (msr - msw) / (msr + (k - 1) * msw)
         out["icc_1_1"] = icc
@@ -98,7 +104,7 @@ def reliability(frames: dict[str, pd.DataFrame]) -> pd.DataFrame:
     for condition, frame in frames.items():
         for scope, explainers in SCOPES.items():
             part = frame if explainers is None else frame[frame["explainer"].isin(explainers)]
-            if scope == "lime_nonzero":  # 16.2
+            if scope.endswith("_nonzero"):  # 16.2, 18.2
                 part = part[~part["all_zero"]]
             for dim in DIMS:
                 x = matrix(part, dim)
@@ -118,6 +124,35 @@ def variance_between(primary: pd.DataFrame) -> pd.DataFrame:
         total = means[f"{dim}_score"].var(ddof=0)
         within = means.groupby("explainer")[f"{dim}_score"].transform(lambda v: v - v.mean())
         rows.append({"dimension": dim, "between_explainer_share": 1 - (within ** 2).mean() / total})
+    return pd.DataFrame(rows)
+
+
+def explained_share(means: pd.DataFrame, value: str, factors: list[str]) -> float:
+    """18.2: share of the variance of `value` explained by indicator variables of `factors`."""
+    y = means[value].to_numpy(float)
+    x = np.c_[np.ones(len(y)), pd.get_dummies(means[factors], drop_first=True).to_numpy(float)]
+    residual = y - x @ np.linalg.lstsq(x, y, rcond=None)[0]
+    return 1 - (residual ** 2).sum() / ((y - y.mean()) ** 2).sum()
+
+
+def run_facts(runs: dict[str, tuple[pd.DataFrame, Path]]) -> pd.DataFrame:
+    """18.2: provider, dates and use of reasoning tokens, read from the stored responses."""
+    rows = []
+    for run, (frame, raw_dir) in runs.items():
+        reasoning: dict[str, list[bool]] = {}
+        for path in raw_dir.rglob("*.json"):
+            envelope = json.loads(path.read_text(encoding="utf-8"))
+            usage = (envelope.get("response_meta") or {}).get("usage") or {}
+            tokens = (usage.get("completion_tokens_details") or {}).get("reasoning_tokens") or 0
+            reasoning.setdefault(envelope["judge_model"], []).append(tokens > 0)
+        for judge, part in frame.groupby("judge_model"):
+            rows.append({"run": run, "judge_model": judge,
+                         "provider": ";".join(sorted(part["provider"].unique())),
+                         "first_date": part["timestamp_utc"].min()[:10],
+                         "last_date": part["timestamp_utc"].max()[:10],
+                         "responses": len(reasoning.get(judge, [])),
+                         "reasoning_share": float(np.mean(reasoning[judge]))
+                         if reasoning.get(judge) else np.nan})
     return pd.DataFrame(rows)
 
 
@@ -168,7 +203,9 @@ def main() -> None:
                           (C2 / "cases" / "exp4_cases.jsonl").open(encoding="utf-8")])
     info = cases[["case_id", "explainer", "dataset", "quadrant"]].copy()
     info["all_zero"] = cases["normalized_explanation"].map(all_weights_zero)
-    info["fidelity"] = [m["fidelity"] for m in cases["technical_metrics"]]
+    info["model_family"] = cases["model_family"]
+    for metric in METRICS:
+        info[metric] = [m[metric] for m in cases["technical_metrics"]]
 
     scores = pd.read_csv(C2 / "parsed_scores" / "exp4_llm_scores.csv")
     primary = scores[scores["prompt_condition"] == "hidden_label_primary"].merge(info, on="case_id")
@@ -182,6 +219,18 @@ def main() -> None:
     between = variance_between(primary)
     between["between_explainer_share_adult"] = variance_between(  # 16.2
         primary[primary["dataset"] == "adult"])["between_explainer_share"]
+    # 18.2
+    two = primary[primary["explainer"].isin(["shap", "lime"])]
+    between["between_explainer_share_shap_lime"] = variance_between(two)["between_explainer_share"]
+    between["between_explainer_share_shap_lime_nonzero"] = variance_between(
+        two[~two["all_zero"]])["between_explainer_share"]
+    case_means = primary.groupby(["case_id", "explainer", "dataset", "model_family"])[
+        [f"{d}_score" for d in DIMS]].mean().reset_index()
+    between["dataset_model_share"] = [
+        explained_share(case_means, f"{d}_score", ["dataset", "model_family"]) for d in DIMS]
+    between["explainer_dataset_model_share"] = [
+        explained_share(case_means, f"{d}_score", ["explainer", "dataset", "model_family"])
+        for d in DIMS]
     between.to_csv(OUT / "variance_between.csv", index=False, float_format="%.6f",
                    lineterminator="\n")
 
@@ -244,7 +293,37 @@ def main() -> None:
     for condition, part in nonzero.groupby("condition"):
         summary[f"lime_nonzero.{condition}.icc_max5"] = part["icc_1_1"].max()
         summary[f"lime_nonzero.{condition}.icc_min5"] = part["icc_1_1"].min()
+    summary["cases.shap_lime_nonzero"] = int(  # 18.2
+        (info["explainer"].isin(["shap", "lime"]) & ~info["all_zero"]).sum())
+    main_scope = long[(long["condition"] == "primary3") & (long["scope"] == "shap_lime_nonzero")]
+    summary["shap_lime_nonzero.primary3.icc_max"] = main_scope["icc_1_1"].max()
+    summary["shap_lime_nonzero.primary3.ci_upper_max"] = main_scope["ci_upper"].max()
+    summary["shap.primary3.ci_upper_max"] = shap["ci_upper"].max()
+    summary["lime_nonzero.actionability_share_1"] = (
+        primary[primary["explainer"].eq("lime") & ~primary["all_zero"]]["actionability_score"]
+        == 1).mean()
     summary["clean.available"] = float(has_clean)
+
+    # 18.2: metrics among the LIME cases with a non-zero weight; descriptions, not adjusted
+    rows = []
+    for condition in ("primary3", "clean"):
+        if condition not in frames:
+            continue
+        part = frames[condition]
+        part = part[part["explainer"].eq("lime") & ~part["all_zero"]]
+        case_mean = part.groupby(["case_id"] + METRICS)["overall_quality_score"].mean().reset_index()
+        for metric in METRICS:
+            rho, p = stats.spearmanr(case_mean[metric], case_mean["overall_quality_score"])
+            rows.append({"condition": condition, "metric": metric, "n_cases": len(case_mean),
+                         "spearman_rho": rho, "p_value": p})
+    pd.DataFrame(rows).to_csv(OUT / "lime_nonzero_metrics.csv", index=False,
+                              float_format="%.6f", lineterminator="\n")
+
+    runs = {"second_panel": (scores, C2 / "raw_responses")}
+    if has_clean:
+        runs["clean"] = (frames["clean"], C / "clean_condition" / "raw_responses")
+    run_facts(runs).to_csv(OUT / "run_facts.csv", index=False, float_format="%.6f",
+                           lineterminator="\n")
 
     if has_clean:
         clean = frames["clean"]

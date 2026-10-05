@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_052659e044864140",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_bc9c961c4c84b233",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_052659e044864140_2fcdc50de49cc40f.txt",
+  "prompt_version": "2fcdc50de49cc40f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206292-FPx5bPc52K89g4fLGQrG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 436,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002664,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.001962,
+        "upstream_inference_cost": 0.002664,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1372
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_052659e044864140\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step for a user. It only lists feature contributions, so a non-expert cannot turn it into an action plan.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it shows the top local SHAP contributors and their directions. However, it lacks the actual class probability, baseline, and comparison context needed for deeper inspection.\",\n    \"clarity\": \"The format is simple and the feature list is easy to read, even for a non-expert. The negative and positive values are not explained, so some interpretation still requires prior SHAP knowledge.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, but only as ranked feature effects. It does not explain the model output scale, the decision threshold, or how these contributions combine into the final class.\",\n    \"concision\": \"The explanation is compact and mostly free of redundancy. It conveys a reasonable amount of information in few tokens.\",\n    \"overall_quality\": \"This is a decent local SHAP summary that is concise and reasonably interpretable, but it is limited as an explanation of the specific prediction. It is informative for ranking influential features, yet not sufficient for full decision understanding or user recourse.\",\n    \"semantic_plausibility\": \"The listed breast cancer features are medically plausible and consistent with an xgboost model on this dataset. The pattern of morphology-related variables dominating the prediction also fits general expectations for breast cancer classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:14.771935+00:00"
+}

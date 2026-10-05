@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a95abd9ff6175566",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_50e3b33d6c3d012f_6ac43d230e2d893f.txt",
+  "prompt_version": "6ac43d230e2d893f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206307-h6qDZjnVILtLUVYBanGg",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003326,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002295,
+        "upstream_inference_cost": 0.003326,
+        "upstream_inference_prompt_cost": 0.001031
+      },
+      "is_byok": false,
+      "prompt_tokens": 1031,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1490
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this prediction.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes are useful for model auditing and understanding feature importance, enabling investigation of model behavior and potential biases in the breast cancer classification task.\",\n    \"clarity\": \"The explanation is clearly formatted with feature names and numerical values that are straightforward to parse, though domain knowledge of breast cancer features and SHAP methodology would enhance full understanding.\",\n    \"completeness\": \"Only the top three features are shown with no indication of their direction of effect (positive/negative contribution to prediction class 1), baseline values, or context about feature ranges, limiting full local decision understanding.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting three key features with their SHAP contribution magnitudes in minimal tokens.\",\n    \"overall_quality\": \"The explanation provides technically sound feature importance information suitable for model inspection but lacks clinical context, directionality, and actionable guidance needed for practical decision support.\",\n    \"semantic_plausibility\": \"The three features (worst perimeter, area error, worst concave points) are all established morphological predictors in breast cancer diagnosis, making their selection highly plausible and consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:31.355358+00:00"
+}

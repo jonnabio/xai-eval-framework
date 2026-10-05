@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_981ffae3147fb1ff",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_e354d1466bc2ce9c_28b60136e523b5e8.txt",
+  "prompt_version": "28b60136e523b5e8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206341-pvzm9LN58lNWHQe09DYY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00274875,
+        "upstream_inference_prompt_cost": 0.00065625
+      },
+      "is_byok": false,
+      "prompt_tokens": 875,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1340
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into any concrete recourse or next steps. A user cannot tell what to change to affect the prediction, especially since the feature directions are not interpretable here.\",\n    \"audit_usefulness\": \"It gives a small amount of local feature attribution, which is useful for a basic sanity check of the model. However, the contributions are too sparse and uncontextualized to support deeper error analysis, bias inspection, or comparison across similar cases.\",\n    \"clarity\": \"The text is short and easy to read, with a simple list of top factors and values. A non-expert may still struggle to interpret what the positive numbers mean or how the encoded feature names map to real-world concepts.\",\n    \"completeness\": \"Only three local factors are shown, and there is no indication of their direction, relative importance, or the overall evidence behind the positive prediction. That leaves out key information needed to understand why the model predicted class 1 for this instance.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. It communicates the main local factors in a very small number of words.\",\n    \"overall_quality\": \"This is a minimal but usable LIME summary: it is readable and concise, but it lacks directionality, context, and actionable meaning. As a result, it is only moderately helpful for understanding the specific prediction.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset and consistent with a logistic-regression model using LIME on encoded tabular inputs. Nothing in the explanation appears contradictory or out of domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:03.971519+00:00"
+}

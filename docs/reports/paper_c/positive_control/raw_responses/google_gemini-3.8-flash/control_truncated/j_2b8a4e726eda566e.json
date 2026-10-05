@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2b8a4e726eda566e",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_3e006f8c0e7512b1_e344b9005454f276.txt",
+  "prompt_version": "e344b9005454f276",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206214-cRW7GAADn64ruJpG15Vq",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 528,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00417525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0034425,
+        "upstream_inference_cost": 0.00417525,
+        "upstream_inference_prompt_cost": 0.00073275
+      },
+      "is_byok": false,
+      "prompt_tokens": 977,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1895
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists technical SHAP contribution values without offering actionable recourse, guidance, or counterfactual pathways.\",\n    \"audit_usefulness\": \"It provides precise numerical attribution weights for key features, which gives technical auditors some insight into local model behavior despite lacking the base value and actual feature states.\",\n    \"clarity\": \"The explanation uses raw one-hot encoded feature names and signed decimal weights without explaining what the signs signify relative to the prediction.\",\n    \"completeness\": \"Only three top factors are presented with attributions, omitting the underlying instance feature values, baseline, and the remaining feature contributions.\",\n    \"concision\": \"The summary is extremely terse and directly presents the top contributors without any unnecessary filler.\",\n    \"overall_quality\": \"While compact and numerically precise for top features, the explanation is difficult for non-experts to interpret and lacks essential context and actionability.\",\n    \"semantic_plausibility\": \"The identified features are relevant drivers in the Adult income domain, though attributing a negative contribution to professional specialty without showing the feature value creates slight ambiguity.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:01.419723+00:00"
+}

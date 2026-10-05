@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f7aa4bc39d795bae",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_c04339897f75190f_9bc65c339bee9e54.txt",
+  "prompt_version": "9bc65c339bee9e54",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206592-2oC4kJ1SL7he9FoqhOK4",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1137,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 757,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0049995,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00426375,
+        "upstream_inference_cost": 0.0049995,
+        "upstream_inference_prompt_cost": 0.00073575
+      },
+      "is_byok": false,
+      "prompt_tokens": 981,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2118
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw attribution values without counterfactual recommendations or guidance on how a user could improve their outcome.\",\n    \"audit_usefulness\": \"It provides directional SHAP attributions for the top three model features, though the omission of raw feature values and baseline context limits in-depth auditing.\",\n    \"clarity\": \"The explanation outputs raw numerical attribution values and one-hot encoded feature names that are difficult for a non-expert to interpret.\",\n    \"completeness\": \"Only three features are reported without their observed instance values or base value, providing an incomplete local picture.\",\n    \"concision\": \"The string is highly concise and free of filler, communicating the primary local attributions efficiently.\",\n    \"overall_quality\": \"While useful as a quick technical diagnostic, the lack of input values, non-expert clarity, and actionable insight keeps overall quality low.\",\n    \"semantic_plausibility\": \"Credit duration, checking account status, and existing payment plans are standard, highly plausible determinants of credit risk.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:23:20.121777+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_47256e08294d7004",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_b352dc7c29edc22c_76c099298e4882a7.txt",
+  "prompt_version": "76c099298e4882a7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206274-O9x2sPJ4LhI1eJj14G0X",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1382,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 964,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005991,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0051825,
+        "upstream_inference_cost": 0.005991,
+        "upstream_inference_prompt_cost": 0.0008085
+      },
+      "is_byok": false,
+      "prompt_tokens": 1078,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2460
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation offers purely local numerical attributions with no guidance, recourse paths, or feasible recommendations for a user.\",\n    \"audit_usefulness\": \"It provides precise local SHAP values for top features, but auditing is hampered because the underlying binary feature states (0 or 1) are omitted for these one-hot encoded categories.\",\n    \"clarity\": \"The list of feature names and coefficients is straightforward in syntax, but a non-expert cannot tell whether the individual possesses these attributes or if their absence is driving the attribution.\",\n    \"completeness\": \"It reports the top 10 SHAP attributions, yet lacks the baseline value, final score/probability, and actual input feature values needed for full reconstruction.\",\n    \"concision\": \"The summary is compact and conveys high-density numerical information without unnecessary padding.\",\n    \"overall_quality\": \"The explanation serves as an acceptable baseline technical attribution list, but suffers from missing feature values, zero actionability, and unexplained one-hot dummy dynamics.\",\n    \"semantic_plausibility\": \"The direction of impact for high-earning indicators like executive roles and marriage aligns with domain trends, though mutually exclusive categories appear simultaneously due to dummy encoding.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:06.476643+00:00"
+}

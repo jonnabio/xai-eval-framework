@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_2a63737c16fa6edb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_da41e2b5009da85d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_2a63737c16fa6edb_50392786d5454298.txt",
+  "prompt_version": "50392786d5454298",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206365-F6AljXXQCmCDPYdIK9Ek",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003668,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00256,
+        "upstream_inference_cost": 0.003668,
+        "upstream_inference_prompt_cost": 0.001108
+      },
+      "is_byok": false,
+      "prompt_tokens": 1108,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1620
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_2a63737c16fa6edb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve outcomes. The coefficients are too abstract for a non-expert to translate into concrete steps.\",\n    \"audit_usefulness\": \"The ranked feature contributions with their weights are valuable for auditors to inspect model behavior and identify which features drive the negative prediction. This supports investigation of potential bias or systematic errors in the model.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with numerical weights\u2014but requires understanding of logistic regression coefficients and feature encoding to interpret meaningfully. A non-expert would struggle to understand what these numbers mean.\",\n    \"completeness\": \"The explanation covers the top 10 local factors influencing the prediction, which provides reasonable coverage of the decision drivers. However, it lacks context about feature values for this specific instance, limiting full understanding of why these factors matter here.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and weights) without padding. Each element contributes directly to understanding the model's decision.\",\n    \"overall_quality\": \"The explanation is technically sound and useful for model auditing but falls short for general interpretability and actionability. It serves a narrow audience (data scientists) well but lacks broader accessibility and practical utility.\",\n    \"semantic_plausibility\": \"The feature contributions are plausible for an income prediction task (education, marital status, occupation, and hours-per-week are known predictors), and the direction of effects aligns with domain expectations. The magnitudes are reasonable for a logistic regression model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:30.510258+00:00"
+}

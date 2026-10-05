@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a857fae38ad2e004",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d6e6a9e9dc9e8b6b",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_a857fae38ad2e004_7c870b26d87b7f04.txt",
+  "prompt_version": "7c870b26d87b7f04",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206429-FN5NI8Bk1ipShjxRLlxM",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 606,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00447525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00367125,
+        "upstream_inference_cost": 0.00447525,
+        "upstream_inference_prompt_cost": 0.000804
+      },
+      "is_byok": false,
+      "prompt_tokens": 1072,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2051
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a857fae38ad2e004\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw attribution weights without guidance, thresholds, or actionable pathways for recourse.\",\n    \"audit_usefulness\": \"It exposes top local feature weights from LIME, though auditing is hindered by ambiguous sign alignment and the absence of baseline feature values.\",\n    \"clarity\": \"The explanation is presented as a dense list of raw feature-weight pairs, which is difficult for a non-expert reader to interpret.\",\n    \"completeness\": \"Key local drivers are listed, but actual input feature values and explicit mapping to the predicted class label are missing.\",\n    \"concision\": \"The text is compact and directly presents the top local factors without unnecessary filler.\",\n    \"overall_quality\": \"While it concisely provides local LIME weights, the lack of input values, actionable guidance, and intuitive presentation limits its practical utility.\",\n    \"semantic_plausibility\": \"The identified features are standard predictors for the Adult dataset, though appearing alongside opposing demographic categories without value context creates slight confusion.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:37.418523+00:00"
+}

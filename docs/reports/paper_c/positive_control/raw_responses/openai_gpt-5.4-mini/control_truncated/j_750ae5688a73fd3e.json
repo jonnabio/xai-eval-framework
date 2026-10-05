@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ac6e5925b1641835",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_750ae5688a73fd3e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_ac6e5925b1641835_64a5e89d69b41f18.txt",
+  "prompt_version": "64a5e89d69b41f18",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206381-RazlDocR51WZre6wrxQj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.00274725,
+        "upstream_inference_prompt_cost": 0.00065475
+      },
+      "is_byok": false,
+      "prompt_tokens": 873,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1338
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ac6e5925b1641835\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps a user could take. It only lists feature contributions with no guidance on how to change the outcome.\",\n    \"audit_usefulness\": \"It is somewhat useful for inspecting which sparse features influenced the prediction, but the near-zero values provide little insight into model behavior. It does not help assess directionality, magnitude in context, or potential bias beyond noting the listed attributes.\",\n    \"clarity\": \"The wording is short and easy to parse, with a simple list of top local factors. However, a non-expert may not understand what the tiny coefficients mean or how they relate to the positive prediction.\",\n    \"completeness\": \"The explanation names only three features and omits the main drivers of the prediction as well as their positive or negative contribution in an interpretable way. It lacks enough local context to fully understand why the model predicted class 1.\",\n    \"concision\": \"The output is very brief and contains only the top factors, so it is highly compact. At the same time, it may be overly sparse relative to the information needed to be useful.\",\n    \"overall_quality\": \"This is a minimal LIME summary that is readable but thin and only partially informative. It offers some local evidence, yet it is not strong enough to support understanding, auditing, or recourse well.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features are plausible predictors for income classification, and the model family and explanation type fit the setting. Still, the near-zero values make the stated factors look weak and not especially convincing as explanations for the positive class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:44.156511+00:00"
+}

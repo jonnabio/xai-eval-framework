@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_1759e90b50c033fd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a76d455ce6236c22",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_1759e90b50c033fd_286301b14ea6b7b0.txt",
+  "prompt_version": "286301b14ea6b7b0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206357-B0SeXpCU5TrrJGQwPrsU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002793,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.002793,
+        "upstream_inference_prompt_cost": 0.0006555
+      },
+      "is_byok": false,
+      "prompt_tokens": 874,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1349
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_1759e90b50c033fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation names a few influential features, but it does not translate them into concrete recourse or decision-review steps. A user cannot tell what to change, verify, or ask about next.\",\n    \"audit_usefulness\": \"It is useful at a basic level for seeing which local features pushed the model, especially checking status and duration. However, it lacks feature values, directional context for all listed factors, and any comparison to the broader population, so it only partially supports deeper auditing.\",\n    \"clarity\": \"The statement is short and easy to read, with straightforward SHAP-style feature labels. A non-expert can understand that these are the top local factors, although the meaning of the signed values still needs some explanation.\",\n    \"completeness\": \"Only three local factors are shown, and there is no baseline, no magnitude normalization, and no indication of how these contributions combine to produce the positive prediction. This leaves out enough context that the specific decision cannot be fully understood.\",\n    \"concision\": \"The explanation is very compact and contains little redundancy. It conveys a small amount of useful information in few words, though at the cost of depth.\",\n    \"overall_quality\": \"The explanation is acceptable as a brief local attribution summary, but it is too sparse to fully explain the prediction or support meaningful review. It is best viewed as a quick pointer to important variables rather than a complete explanation.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for German credit data and are coherent with a credit-risk model. 'No checking account' and loan purpose/duration are sensible drivers, even though the sign and relative influence are only partially interpretable here.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:19:20.435395+00:00"
+}

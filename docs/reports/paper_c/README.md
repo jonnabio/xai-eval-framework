@@ -11,7 +11,7 @@ Deadline 2026-10-15, by email to revistatm@tec.ac.cr.
 journal's limit**; abstract 246 words and resumen 249 (limit 250), 5 tables, 1 figure, 25
 references. The clean condition was run (576 calls, all valid). The draft has no human-rated
 subset. The author has read it. The revision was made by the session that wrote the review
-and has not been reviewed again. On `main`, archived as Zenodo 0.10.0; **not submitted**.
+and has not been reviewed again. That draft was archived as Zenodo 0.10.0; **not submitted**.
 
 **Main results of the revision**
 
@@ -58,35 +58,56 @@ answered in the abstract, resumen, methods, sections 3.2 and 3.5, discussion, li
 and conclusions; one sentence and two references on LLM judges were added to the
 introduction. **15 pages in Word**, abstract 248 words, resumen 250, 27 references. The
 revision was made by the session that wrote the second review and has not been reviewed
-again; the author has not read it.
+again. The author read it and checked the two references marked "NEW 2" (2026-10-04).
+
+**Fourth draft (2026-10-05), after the editor's review of the third draft** (`PLAN.md`,
+section 18). New: the SHAP-and-LIME scope (highest ICC 0.41 without the zero-weight
+records), the spread among the judges for one case, the LIME correlations without the
+zero-weight records, the gateway, dates and reasoning mode of the judges, and a positive
+control (711 calls, 710 valid): every judge lowered completeness when seven of ten items
+were removed (ICC 0.18 to 0.60), and one judge of three lowered semantic plausibility when
+the weights were assigned to the wrong features. The table of the sensitivity views became
+text: four tables, one figure. **15 pages in Word**, abstract 249 words, resumen 250. Not
+read by the author, not reviewed again, **not registered and not archived**: the registry
+must be run again on a `pubs/*` branch, and Zenodo 0.11.0 does not hold this draft's code,
+results and cohort.
+
+**Archive:** Zenodo version 0.11.0, `10.5281/zenodo.23150204`, from GitHub release
+`paper-c-tm-2026-10-04-r2` (`main` at `ae4fcd890`). It holds the analysis code and result
+files of `PLAN.md` section 16; the full version cites it. Version 0.10.0 does not hold them.
 
 **Open before submission**
 
-0. Author: read the third draft (`submission/paper_c_blind.pdf`), and check the two
-   references marked "NEW 2" in `references.bib`.
-0b. New Zenodo version: the archive 0.10.0 does not hold the analysis code and result files
-   of `PLAN.md` section 16. Needs the author's approval of a release; then set
-   `\papercrelease` and `\papercarchive` and rebuild.
-1. Note to the editor: drafted in `EDITOR_NOTE.md` (Spanish to send, English for the
-   record). Not sent; four points to check are listed at its top.
-2. Author decision: whether the human subset is in this submission (recommendation: no).
-   The rating sheets in `human_subset/` show the clean record. At 15 pages, a human-subset
-   section needs an equal cut.
-3. Raters, only if item 2 is yes: send the two rating sheets (`human_subset/README.md`);
-   cut-off 2026-10-10.
+0. Author: the last revision of the manuscript. After any change to the template, build,
+   then register (section Build); the registration changes shared files and goes through
+   a `pubs/*` branch.
+1. Note to the editor: `EDITOR_NOTE.md` (Spanish to send, English for the record). Not
+   sent. Its items 1 to 3 were checked against the registry and corrected on 2026-10-04.
+   Left for the author: whether the thesis is still not deposited, and the telephone number.
+2. **Decided 2026-10-04 (author): the human subset is not part of this submission.** The
+   manuscript already says it has no human scores and names the comparison as future work.
+   The sample and the rating sheets stay in `human_subset/`, not sent, for a later study.
+3. Not needed: no rating sheet is sent (item 2).
 4. Second reviewer: adjudication sheet in `corpus_audit/`; cut-off 2026-10-08.
-5. Registry: put `paper_c.tex` under `[coverage]`, add `docs/reports/paper_c/` to the
-   protected side of `[exclusivity]`, wire `verify_sync.py`, replace the placeholder abstract
-   in `pub/claims.toml` (shared files, through `main`). Not done: the numbers of the draft
-   are generated from result files but are not yet in `pub/claim_registry.toml`. Held until
-   the revision after the second review: its findings change values in the text.
+5. Registry: **done 2026-10-04** (pull request #27, `pubs/paper-c-registry`).
+   `scripts/pubs/register_paper_c.py` writes the Paper C block of
+   `pub/claim_registry.toml`: 162 claims of this paper's own and 37 sites on quantities
+   that the thesis or the 32-page edition already carries. `paper_c.tex` is under
+   `[coverage]`, this folder is on the protected side of `[exclusivity]`, the abstract,
+   keywords, resumen and palabras clave are in `pub/claims.toml`, and `verify_sync.py`
+   compares them with the manuscript. CI runs `register_paper_c.py --check`, which also
+   fails when `paper_c.tex` is not the template rendered from the result files.
+   Found while triaging: the two quotations of an Anchors and a DiCE record in the
+   methods omit an item of the stored text without marking it (after `capital-gain:
+   1.0000` the records have a third weight of 1.0000; after `age: 1.6182` the record has
+   `education_9th: 0.4000`). For the author's last revision.
 6. Literature on LLM-judge reliability (F11): candidates in
    `LITERATURE_LLM_JUDGE_RELIABILITY.md`. XAI-Arena (arXiv:2609.09428, September 2026) uses
    an LLM judge on SHAP, LIME and DiCE explanations; it and Haldar and Hockenmaier (2025)
    are now cited in the introduction. The other candidates are not used.
    Done 2026-10-04: Zenodo version 0.10.0,
    `10.5281/zenodo.23149419`, from GitHub release `paper-c-tm-2026-10-04` (`main` at
-   `d97dbe188`); the full version cites it. A later change to code or results needs a new
+   `d97dbe188`); superseded by version 0.11.0 (above). A later change to code or results needs a new
    version; a text change does not.
 7. Done 2026-10-04: the author read the draft and checked the two added references.
 
@@ -112,6 +133,9 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 | `scripts/paper_c_reliability.py` | Analyses added after the rigor review: agreement inside each explainer, one call, panel mean, two-way models, F-based intervals, raw agreement, use of the printed metrics, clean condition (plan section 15) |
 | `scripts/run_clean_condition.py` | Runs the clean condition: 192 cases, 3 judges, one call, no metrics, outcome or label in the prompt |
 | `clean_condition/` | The clean condition, a new cohort (RCA-002): rendered prompts, raw responses, parsed scores |
+| `scripts/run_positive_control.py` | Runs the positive control: 79 SHAP and LIME cases in three versions (stored, truncated, shuffled), 3 judges, one call, the clean prompt |
+| `positive_control/` | The positive control, a new cohort (RCA-002): rendered prompts, raw responses, parsed scores |
+| `scripts/paper_c_positive_control.py` | Analysis of the positive control (plan section 18.3) |
 | `scripts/paper_c_summary.py` | Summary values and Figure 1 |
 | `scripts/build_paper_c.py` | Render, PDF and Word in a blind and a full version, figure upload |
 | `scripts/draw_human_sample.py` | The 56-case sample and the two rating sheets |
@@ -128,9 +152,16 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 ```
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_posthoc.py   # about 10 minutes; only if the analysis changes
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_reliability.py   # before the summary: the figure reads its output
+.venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_positive_control.py   # the positive control
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_summary.py   # summary values and the figure
 python docs/reports/paper_c/scripts/build_paper_c.py                       # paper_c.tex, PDFs, Word files
+python scripts/pubs/register_paper_c.py                                    # registry block and abstract; shared files, on a pubs/* branch
+python scripts/pubs/generate_fragments.py                                  # then restore pub/fragments/build_meta.env
 ```
+
+`python scripts/pubs/register_paper_c.py --check` writes nothing and says whether the
+registration is current. It is needed after a change to a printed number or to the
+abstract, keywords, resumen or palabras clave; a change to other text needs only the build.
 
 The build needs Tectonic (`tools/tectonic-portable`) and Quarto's pandoc. It stops on a
 placeholder it cannot resolve. Measure the length in Word itself.

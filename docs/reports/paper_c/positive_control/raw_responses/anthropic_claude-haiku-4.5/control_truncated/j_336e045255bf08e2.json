@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_64b60f2ab98bce43",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_336e045255bf08e2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_64b60f2ab98bce43_e4bfba65cd61fdde.txt",
+  "prompt_version": "e4bfba65cd61fdde",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206450-HiWdDn8lVRdsQRWQe7j1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003417,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00239,
+        "upstream_inference_cost": 0.003417,
+        "upstream_inference_prompt_cost": 0.001027
+      },
+      "is_byok": false,
+      "prompt_tokens": 1027,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1505
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_64b60f2ab98bce43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies feature contributions but provides no guidance on what actions could be taken, how to interpret the values, or what thresholds matter for decision-making. No recourse pathway is suggested.\",\n    \"audit_usefulness\": \"SHAP values with magnitudes support model behavior inspection and can help auditors understand feature importance ranking, though absolute contribution values lack context about model decision boundaries or class-specific patterns.\",\n    \"clarity\": \"The explanation is well-organized and uses standard terminology (SHAP, feature names, numerical values) that is accessible to readers with basic ML familiarity, though non-experts may not understand SHAP value interpretation.\",\n    \"completeness\": \"Only the top three features are listed with no information about feature values in the instance, baseline prediction, or cumulative contribution to the final prediction, limiting understanding of the full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and SHAP values) without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a minimal but technically sound summary of local feature importance; however, it lacks actionable context, instance-specific details, and interpretation guidance needed for practical use.\",\n    \"semantic_plausibility\": \"The three features (perimeter, concave points, area) are well-established morphological indicators in breast cancer diagnosis and their selection as top drivers is highly plausible and consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:54.470756+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_92efc0d56dccca0f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_34172bfa7ca08f2a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_92efc0d56dccca0f_b7d47e2939404920.txt",
+  "prompt_version": "b7d47e2939404920",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206288-wMw6pe5mQephG0tGB0TX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028215,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.0028215,
+        "upstream_inference_prompt_cost": 0.0007065
+      },
+      "is_byok": false,
+      "prompt_tokens": 942,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1412
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_92efc0d56dccca0f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no recourse guidance, thresholds, or specific steps a user could take to change or review the outcome. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"The SHAP ranking is useful for seeing which variables drove the positive prediction and whether the model relied on reasonable breast-cancer features. However, it lacks directionality context beyond signs and provides no comparison to other cases or model-level patterns.\",\n    \"clarity\": \"The output is short and easy to scan, with a clear ranking of local factors and their contributions. A non-expert may still need some interpretation of SHAP signs and feature names, but the structure is straightforward.\",\n    \"completeness\": \"It covers several top local drivers of the prediction, including the most influential positive and negative contributors. Still, it does not explain the baseline value, the magnitude of the final score, or how these factors combine to produce class 1.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information with little redundancy. It is near the right length for a local feature summary.\",\n    \"overall_quality\": \"This is a solid local SHAP explanation that is concise, readable, and moderately informative about the model's decision. Its main limitations are the lack of recourse, limited interpretive context, and incomplete decision support.\",\n    \"semantic_plausibility\": \"The listed drivers are plausible for a breast cancer classifier, since concavity, perimeter, area, radius, and texture are medically relevant tumor-shape descriptors. The mixture of positive and negative SHAP values is also consistent with a real local explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:11.682334+00:00"
+}

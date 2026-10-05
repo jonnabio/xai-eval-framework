@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_27ff1641b5ef1b1a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d5882b17615d4cc1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_27ff1641b5ef1b1a_5d1c4c501e2af4d9.txt",
+  "prompt_version": "5d1c4c501e2af4d9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206209-0wp6ZJeiWsCEJLDNa0nv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00269025,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020295,
+        "upstream_inference_cost": 0.00269025,
+        "upstream_inference_prompt_cost": 0.00066075
+      },
+      "is_byok": false,
+      "prompt_tokens": 881,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1332
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_27ff1641b5ef1b1a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps, only listing features that influenced the prediction. A user cannot tell what to change or review from this output alone.\",\n    \"audit_usefulness\": \"It provides the top three local SHAP drivers with signed contributions, which is useful for inspecting which variables pushed the model toward class 0. However, it lacks comparison to baseline values, feature directions, and broader context needed for deeper audit work.\",\n    \"clarity\": \"The wording is short and the structure is easy to follow for a reader familiar with basic explanations. For a non-expert, the SHAP terminology and negative values may still require some interpretation.\",\n    \"completeness\": \"The explanation identifies the main local factors, but only three features are shown and no prediction probability, baseline, or feature values are given. That is enough for a partial view, not a full understanding of the decision.\",\n    \"concision\": \"It is very compact and avoids redundancy while still conveying the main local factors. The brevity is appropriate for the limited information provided.\",\n    \"overall_quality\": \"This is a concise and plausible local explanation that gives a basic sense of why the model predicted class 0. Its main weakness is limited contextual detail, which restricts both interpretability and audit depth.\",\n    \"semantic_plausibility\": \"The listed features are well-known breast cancer predictors, and their local importance pattern is plausible for an XGBoost SHAP explanation. The negative contributions are also coherent as evidence against the predicted class.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:52.521650+00:00"
+}

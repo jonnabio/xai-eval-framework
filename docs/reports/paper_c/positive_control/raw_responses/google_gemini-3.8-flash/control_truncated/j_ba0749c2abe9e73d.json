@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_ba0749c2abe9e73d",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_e759e990528304a2_80de94d8205ea457.txt",
+  "prompt_version": "80de94d8205ea457",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206329-fuxpHoYsagukAotp7Tcn",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 692,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00475875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0040275,
+        "upstream_inference_cost": 0.00475875,
+        "upstream_inference_prompt_cost": 0.00073125
+      },
+      "is_byok": false,
+      "prompt_tokens": 975,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2049
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation outputs raw feature attributions with no guidance, thresholds, or recourse recommendations for changing the outcome.\",\n    \"audit_usefulness\": \"It informs an auditor of the top positive local coefficients identified by LIME, though the absence of original feature values limits deeper verification.\",\n    \"clarity\": \"The format presents one-hot encoded variable names and numeric weights, which requires basic technical familiarity to understand.\",\n    \"completeness\": \"Only three features are reported without their underlying feature values or baseline context, offering an incomplete picture of the local decision surface.\",\n    \"concision\": \"The text is brief and dense, presenting the top factors directly without redundant phrasing.\",\n    \"overall_quality\": \"While it provides a quick, concise view of the top model drivers, the lack of input feature values and actionable framing results in an acceptable but basic explanation.\",\n    \"semantic_plausibility\": \"Professional specialty occupation and capital gains are well-known positive indicators for high income, making the primary drivers domain-plausible.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:18:58.773401+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e354d1466bc2ce9c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_357b7a1a689caa98",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_shuffled",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_shuffled\\exp4_e354d1466bc2ce9c_1b4ab4273ff0706d.txt",
+  "prompt_version": "1b4ab4273ff0706d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206439-LsL2FP8tC1fB3JnXT8Hs",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003536,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002415,
+        "upstream_inference_cost": 0.003536,
+        "upstream_inference_prompt_cost": 0.001121
+      },
+      "is_byok": false,
+      "prompt_tokens": 1121,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1604
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e354d1466bc2ce9c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them or what actions could be taken to change the prediction. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The feature weights and their directions (positive/negative) enable an auditor to inspect which factors drove the prediction and assess model consistency with domain expectations. However, the small magnitude of most contributions raises questions about model stability.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names with numerical weights, which is straightforward for a technical reader but lacks contextual interpretation or narrative framing for non-experts.\",\n    \"completeness\": \"The top 10 features are listed with their contributions, covering the main local drivers; however, the very small magnitude of most weights and lack of instance-level feature values limits full understanding of the decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential feature-weight pairs without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a technically sound but minimalist local interpretation suitable for model inspection; it lacks the narrative clarity, actionability, and contextual grounding needed for broader stakeholder use.\",\n    \"semantic_plausibility\": \"The top factors (executive-managerial occupation, female sex, capital gains, hours worked, marital status, education) are plausible predictors of income in the adult dataset and align with domain knowledge about income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:20:44.277677+00:00"
+}

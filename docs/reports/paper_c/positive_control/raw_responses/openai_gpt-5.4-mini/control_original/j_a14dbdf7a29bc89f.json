@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_fbb0082b6f2ae806",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a14dbdf7a29bc89f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_fbb0082b6f2ae806_34ed64e502fb83f7.txt",
+  "prompt_version": "34ed64e502fb83f7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206251-UtUMgCqgMLtSEnqpuRtj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002745,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002034,
+        "upstream_inference_cost": 0.002745,
+        "upstream_inference_prompt_cost": 0.000711
+      },
+      "is_byok": false,
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1400
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_fbb0082b6f2ae806\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies contributing features but does not translate them into any concrete recourse or next steps. A user cannot tell what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the main local drivers and their directions for this MLP prediction. However, the feature effects are small and there is no baseline or magnitude context, which limits deeper error analysis.\",\n    \"clarity\": \"The output is concise and uses a simple list of features with signed contributions, which is easy to read. Still, the meaning of the signs and the relative importance are not fully explained for a non-expert.\",\n    \"completeness\": \"It covers several top local factors, but it omits the intercept, class probability, and any summary of how these features combine into the final prediction. The explanation is therefore only partially sufficient for understanding this specific decision.\",\n    \"concision\": \"The explanation is compact and contains mostly useful information with little redundancy. It is well sized for the amount of detail provided.\",\n    \"overall_quality\": \"This is a reasonable LIME explanation that gives a quick view of local feature influence, but it is limited by lack of context, weak actionability, and small effect sizes. Overall it is useful but not especially informative beyond the basic ranking of features.\",\n    \"semantic_plausibility\": \"The listed demographic and employment-related factors are plausible predictors in the Adult dataset, and the mixed positive and negative contributions are coherent. Nothing in the explanation contradicts the instance context or domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:33.715217+00:00"
+}

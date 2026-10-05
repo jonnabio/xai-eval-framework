@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4eeab5234ab94f1a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_c697ae24ec5760fd_414589ea2057298f.txt",
+  "prompt_version": "414589ea2057298f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206205-mlSUbOJKJq4TeizkXEyU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00273675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002025,
+        "upstream_inference_cost": 0.00273675,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1399
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into concrete recourse steps, such as which attributes a user could improve or how to change the outcome. It is descriptive rather than actionable.\",\n    \"audit_usefulness\": \"The ranked SHAP values are useful for auditing because they reveal which features pushed the prediction up or down. However, the explanation lacks baseline context, feature values, and model output magnitude, limiting deeper error or bias analysis.\",\n    \"clarity\": \"The list format is easy to scan and the feature names are mostly interpretable for a non-expert. Still, the technical SHAP notation and encoded feature labels make it somewhat opaque without prior familiarity.\",\n    \"completeness\": \"It covers the main local drivers of the prediction and shows both positive and negative contributions. But it does not provide the actual feature values, the reference value, or the predicted probability, so the local decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and contains only the most relevant local factors without obvious redundancy. It communicates a fair amount of information in few words.\",\n    \"overall_quality\": \"This is a solid local explanation that is concise and directionally informative, especially for model inspection. Its main weaknesses are the lack of context, limited usability for recourse, and moderate accessibility for non-experts.\",\n    \"semantic_plausibility\": \"The feature effects are plausible for German credit, where checking status, employment, housing, and credit amount are reasonable predictors. The mixture of positive and negative SHAP values is coherent with a binary classifier explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:47.352281+00:00"
+}

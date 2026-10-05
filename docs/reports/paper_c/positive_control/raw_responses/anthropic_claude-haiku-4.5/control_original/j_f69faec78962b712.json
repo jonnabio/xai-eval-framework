@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f69faec78962b712",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_45af74f0fdcedd43_c2c6712109f04f09.txt",
+  "prompt_version": "c2c6712109f04f09",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206261-SI99wQx7tRTeAiEvHrnK",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003558,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00245,
+        "upstream_inference_cost": 0.003558,
+        "upstream_inference_prompt_cost": 0.001108
+      },
+      "is_byok": false,
+      "prompt_tokens": 1108,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1598
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to change the prediction or what actions a loan applicant could take. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"SHAP values with directional impacts (positive/negative) enable auditors to inspect model logic and identify which features drive the positive prediction. This supports bias investigation and model behavior inspection effectively.\",\n    \"clarity\": \"The format is straightforward: feature names paired with SHAP values and directions are presented in a list. However, non-experts may struggle with interpreting SHAP values and the significance of magnitude differences without additional context.\",\n    \"completeness\": \"The top 10 features are listed with their contributions, covering the main local drivers of the prediction. However, the base prediction value and cumulative impact explanation are absent, limiting full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature name and SHAP value) in a dense format appropriate for the token budget.\",\n    \"overall_quality\": \"The explanation provides technically sound SHAP-based insights suitable for model auditing but lacks actionability and user-friendly interpretation. It serves a narrow technical audience well but falls short for broader stakeholder communication.\",\n    \"semantic_plausibility\": \"The identified features (checking account status, loan duration, credit history, age, credit amount) are domain-plausible drivers of credit risk assessment. The directional impacts align with typical credit lending logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:45.318394+00:00"
+}

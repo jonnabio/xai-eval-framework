@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e759e990528304a2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_50b46779c73ace4b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_e759e990528304a2_80de94d8205ea457.txt",
+  "prompt_version": "80de94d8205ea457",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206232-7D3BggZiiAvopxFVZWS9",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00276525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00276525,
+        "upstream_inference_prompt_cost": 0.00065025
+      },
+      "is_byok": false,
+      "prompt_tokens": 867,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1337
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e759e990528304a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps, such as which specific attribute changes would affect the prediction. It only lists features and their local weights, so it is not directly usable for action.\",\n    \"audit_usefulness\": \"It gives a small amount of local signal about which variables influenced the MLP output, which is useful for a basic inspection. However, it is too sparse to support deeper error analysis, stability checks, or bias investigation.\",\n    \"clarity\": \"The wording is short and easy to parse, and the feature names with numeric contributions are straightforward for a non-expert. The meaning of the positive weights relative to the predicted class is still somewhat implicit, but the structure is clear.\",\n    \"completeness\": \"Only three local factors are shown, so the explanation omits much of the decision context and does not indicate whether these are the strongest or only relevant drivers. It also lacks baseline information, confidence, or a fuller breakdown of why class 1 was predicted.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. It conveys the main local factors in very few tokens, though at the cost of limited depth.\",\n    \"overall_quality\": \"This is a reasonably clear LIME summary, but it is thin and only partially explains the specific prediction. It is useful as a quick glance at local feature influence, not as a complete or actionable explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible predictors in the Adult dataset, especially occupation, capital gain, and marital status. The direction and magnitudes are consistent with a local explanation format, even though the sign interpretation is minimal.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:17:14.976351+00:00"
+}

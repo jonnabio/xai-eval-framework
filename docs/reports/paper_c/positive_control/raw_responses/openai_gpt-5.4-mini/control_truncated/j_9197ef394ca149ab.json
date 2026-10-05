@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9197ef394ca149ab",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_truncated",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_truncated\\exp4_03f9ac9f3ab42b8b_033e0c5a71cf1f2e.txt",
+  "prompt_version": "033e0c5a71cf1f2e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206198-8XNEwajCmDocxvYCtUhN",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002706,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020475,
+        "upstream_inference_cost": 0.002706,
+        "upstream_inference_prompt_cost": 0.0006585
+      },
+      "is_byok": false,
+      "prompt_tokens": 878,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1333
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps beyond listing influential features. A user cannot tell what could be changed or reviewed to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals three local feature contributions and their directions. However, it is too sparse to assess robustness, feature interactions, or whether the model relies on sensible patterns.\",\n    \"clarity\": \"The wording is concise and easy to parse for a general reader, with clear feature names and signed SHAP values. Still, the meaning of the numeric contributions may not be obvious without some familiarity with SHAP.\",\n    \"completeness\": \"The explanation covers only the top three local factors and omits the remaining contributors and the baseline context needed to interpret the magnitude of the prediction. That leaves an incomplete picture of why the model predicted class 0.\",\n    \"concision\": \"It is highly compact and contains little beyond the essential ranked factors and their signs. The brevity is efficient, though it sacrifices contextual information.\",\n    \"overall_quality\": \"This is a reasonable local explanation in miniature: it is readable, plausible, and directly tied to the prediction, but it is too limited to fully explain the decision. Its main weakness is the lack of context and actionability.\",\n    \"semantic_plausibility\": \"The factors are sensible for the Adult dataset, and the signs are plausible: being female and married to a spouse can reasonably influence a logreg income prediction in this domain. Nothing in the explanation appears contradictory to the instance context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:42.530749+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_03f9ac9f3ab42b8b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cb2102493bb3702d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "control_original",
+  "prompt_path": "docs\\reports\\paper_c\\positive_control\\prompts\\control_original\\exp4_03f9ac9f3ab42b8b_c723bda20609fb35.txt",
+  "prompt_version": "c723bda20609fb35",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791206195-iuRrIH1omiE2a2Kvpbcy",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029505,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022365,
+        "upstream_inference_cost": 0.0029505,
+        "upstream_inference_prompt_cost": 0.000714
+      },
+      "is_byok": false,
+      "prompt_tokens": 952,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1449
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_03f9ac9f3ab42b8b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the feature attributions into concrete recourse steps, such as which input changes could move the prediction. It only lists contributors, so a user cannot easily act on it.\",\n    \"audit_usefulness\": \"It is useful for a basic audit because it reveals the main local contributors and their signs for this single prediction. However, it lacks baseline values, magnitude context, and comparison to other cases, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The ranking of SHAP factors is easy to read, and the feature names are mostly understandable to a general audience familiar with the Adult dataset. Still, categorical one-hot terms like relationship_Wife and marital-status_Married-civ-spouse may be confusing without explanation.\",\n    \"completeness\": \"The explanation covers several top local drivers, but it does not state the class label semantics, intercept, or how these contributions combine to reach prediction 0. It also omits the actual feature values for the instance, which are important for full local understanding.\",\n    \"concision\": \"The output is compact and focused on the top factors without obvious redundancy. It provides a reasonable amount of information for the token budget.\",\n    \"overall_quality\": \"This is a solid but limited local explanation: it is readable and informative about feature influence, yet it lacks the context needed for strong decision review or recourse. Overall it is useful for quick inspection but not comprehensive.\",\n    \"semantic_plausibility\": \"The factors are plausible for an Adult-income logistic regression model, and the sign pattern is consistent with a local SHAP explanation. The presence of both male and female, husband and wife, and married and never-married indicators is somewhat awkward but understandable for one-hot encoded features.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T13:16:37.883026+00:00"
+}
