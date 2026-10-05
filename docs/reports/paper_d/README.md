@@ -25,6 +25,15 @@ preserved at git tag `paper-d-registry-draft-2026-10-03`. The companion question
 explainers agree on which features matter?" is Paper E (`docs/reports/paper_e/`), to be
 developed after this submission.
 
+## Journal account request — 4 October 2026
+
+The author confirmed sending the Spanish account-creation request to
+`revistatm@tec.ac.cr`, as directed by the journal's
+[registration page](https://revistas.tec.ac.cr/index.php/tec_marcha/registro).
+The request supplied the author's name, UNADE affiliation, email and ORCID.
+**Pending:** the journal's response and account access instructions. This request
+is separate from Paper D's manuscript submission by email on 3 October 2026.
+
 ## Contribution
 
 A re-analysis of the existing benchmark at instance level. It compares explanation quality
