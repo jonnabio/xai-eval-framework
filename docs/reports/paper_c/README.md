@@ -54,7 +54,7 @@ again and the author has not read it.
    are generated from result files but are not yet in `pub/claim_registry.toml`.
 6. Independent rigor review; Zenodo version; set `\papercrelease` and `\papercarchive` in
    the template.
-7. Author: check the two references marked NEW in `references.bib`.
+7. Done 2026-10-04: the author read the draft and checked the two added references.
 
 **Lane:** `paper-c`, branches `paper/c-*`, worked in the main folder. Everything of Paper C
 lives in this directory: manuscript, plan, scripts, result files and copies of its inputs.
@@ -73,7 +73,7 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 | `PLAN.md` | Scope, venue rules, page budget, work packages, pre-specified analyses, schedule, findings after approval |
 | `paper_c_template.tex` | **The manuscript source.** Numbers are placeholders filled from result files |
 | `paper_c.tex` | Generated from the template by `scripts/build_paper_c.py`. Do not edit |
-| `references.bib` | IEEE references; two entries marked NEW await the author's check |
+| `references.bib` | IEEE references; the two entries added for this paper were checked by the author |
 | `scripts/paper_c_posthoc.py` | Judge scores against the metrics shown in the prompt (plan section 7) |
 | `scripts/paper_c_reliability.py` | Analyses added after the rigor review: agreement inside each explainer, one call, panel mean, two-way models, F-based intervals, raw agreement, use of the printed metrics, clean condition (plan section 15) |
 | `scripts/run_clean_condition.py` | Runs the clean condition: 192 cases, 3 judges, one call, no metrics, outcome or label in the prompt |
