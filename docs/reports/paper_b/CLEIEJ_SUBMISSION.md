@@ -19,7 +19,7 @@ Sources: the journal's "Submissions", "About" and "Editorial Process" pages, and
 | Fees | "does not apply any author charges whatsoever for submitting and publishing" | None |
 | Review | Single-blind, two or more external referees; the editor may reject without review | Author, repository and DOI are printed |
 | Language | English | English |
-| Length | **At least 12 pages**; no maximum stated | 13 pages, references included, no appendix |
+| Length | **At least 12 pages**; no maximum stated | 12 pages, references included, no appendix |
 | Page | A4, 10 pt, single column, page numbers, no other header or footer | `cleiej.cls`, unmodified |
 | Abstract | **At most 200 words**, on the first page with the keywords | 199 words, from `pub/claims.toml` |
 | Keywords | Short list; should fall within the journal's topics | Five |
@@ -39,7 +39,7 @@ Published examples (Vol. 29 No. 4, 2026) run from 14 to 31 pages.
 | File | Role |
 |---|---|
 | `paper_b_cleiej.tex` | Manuscript source |
-| `paper_b_cleiej.pdf` | **The file to upload** (the journal reviews single-blind), 13 pages |
+| `paper_b_cleiej.pdf` | **The file to upload** (the journal reviews single-blind), 12 pages |
 | `paper_b_cleiej_blind.tex` / `.pdf` | Double-blind build of the same source, 12 pages: no author block, no acknowledgments, repository address and DOI withheld. Not needed by this journal; kept for a venue or a reader that asks for it |
 | `cleiej.cls` | Journal class, unmodified |
 | `figures/` | Two figures, rebuilt by a committed script |
@@ -60,7 +60,7 @@ Then run `verify_claims.py`, `verify_sync.py`, `scan_shared_literals.py --strict
 > and effect sizes, and contributes the results that are not in the article: the dependence of
 > the latency ordering on the model family, the dependence of LIME's stability on the kernel
 > width and the dataset, and the cross-dataset extension. No numerical result of the article
-> is restated; Sections 1, 4.1 and 5.3 state the relation. Two further manuscripts by the
+> is restated; Sections 1, 4.1 and 5.1 state the relation. Two further manuscripts by the
 > author, on other questions and with no shared result, are under review at other journals.
 > Earlier drafts of this work are available in the public repository and its archive. An
 > earlier and longer version, which also contained a literature taxonomy and a study of
