@@ -617,3 +617,16 @@ candidates. The title and the AI declaration are not changed.
   full version, Zenodo 0.11.0, does not hold the code, results and cohort of this section;
   a new version needs the author's approval. No review followed this revision, and the
   author has not read it.
+
+## 19. Author decisions after the fourth draft (2026-10-05)
+
+1. The fourth draft was read and approved.
+2. Pull requests #26 (the draft, the control cohort) and #27 (registry) were merged at the
+   author's instruction; the registry was then run for the fourth draft and merged with
+   the version metadata (pull request #29): 200 claims of Paper C's own, 21 sites on shared
+   quantities, no unexplained literal in Paper D, Paper E or the chapter.
+3. A new archive was approved as the official version: **Zenodo 0.12.0,
+   `10.5281/zenodo.23165763`**, from release `paper-c-tm-2026-10-05` (`main` at
+   `336b164b1`). `\papercrelease` and `\papercarchive` are set; the files in `submission/`
+   were rebuilt: 15 pages in Word, both versions.
+4. The author sends the submission email when the journal's author account exists.

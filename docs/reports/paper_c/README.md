@@ -67,20 +67,24 @@ zero-weight records, the gateway, dates and reasoning mode of the judges, and a 
 control (711 calls, 710 valid): every judge lowered completeness when seven of ten items
 were removed (ICC 0.18 to 0.60), and one judge of three lowered semantic plausibility when
 the weights were assigned to the wrong features. The table of the sensitivity views became
-text: four tables, one figure. **15 pages in Word**, abstract 249 words, resumen 250. Not
-read by the author, not reviewed again, **not registered and not archived**: the registry
-must be run again on a `pubs/*` branch, and Zenodo 0.11.0 does not hold this draft's code,
-results and cohort.
+text: four tables, one figure. **15 pages in Word**, abstract 249 words, resumen 250.
+**Read and approved by the author on 2026-10-05.** Registered (pull request #29) and
+archived (below). Not reviewed again after the revision.
 
-**Archive:** Zenodo version 0.11.0, `10.5281/zenodo.23150204`, from GitHub release
-`paper-c-tm-2026-10-04-r2` (`main` at `ae4fcd890`). It holds the analysis code and result
-files of `PLAN.md` section 16; the full version cites it. Version 0.10.0 does not hold them.
+**Archive:** Zenodo version 0.12.0, `10.5281/zenodo.23165763`, from GitHub release
+`paper-c-tm-2026-10-05` (`main` at `336b164b1`). It holds the fourth draft, the positive
+control cohort and the code and result files of `PLAN.md` section 18; the full version
+cites it. Versions 0.11.0 (`10.5281/zenodo.23150204`, third draft) and 0.10.0 do not hold
+them.
+
+**Ready to send.** The author sends the email of `EDITOR_NOTE.md` once the journal's
+author account exists. Do not rebuild or change the text unless the author asks.
 
 **Open before submission**
 
-0. Author: the last revision of the manuscript. After any change to the template, build,
-   then register (section Build); the registration changes shared files and goes through
-   a `pubs/*` branch.
+0. Done 2026-10-05: the last revision (fourth draft), approved by the author. After any
+   later change to the template, build, then register (section Build); the registration
+   changes shared files and goes through a `pubs/*` branch.
 1. Note to the editor: `EDITOR_NOTE.md` (Spanish to send, English for the record). Not
    sent. Its items 1 to 3 were checked against the registry and corrected on 2026-10-04.
    Left for the author: whether the thesis is still not deposited, and the telephone number.
