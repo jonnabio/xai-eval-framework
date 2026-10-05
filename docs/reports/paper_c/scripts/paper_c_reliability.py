@@ -197,6 +197,8 @@ def main() -> None:
         clean = frames["clean"]
         summary["clean.parsed"] = len(clean)
         summary["clean.cases_complete"] = len(matrix(clean, "overall_quality"))
+        summary["clean.shap.icc_max"] = long[(long["condition"] == "clean")
+                                             & (long["scope"] == "shap")]["icc_1_1"].max()
         base = frames["primary1"]
         cols = [f"{d}_score" for d in DIMS]
         pair = clean.merge(base, on=["case_id", "judge_model"], suffixes=("_clean", "_primary"))

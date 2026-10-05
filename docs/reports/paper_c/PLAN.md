@@ -366,3 +366,24 @@ the primary condition.
   of responses whose rationales name a metric.
 - **Not done.** Anchors and DiCE are not re-rendered (decision 1). The human sheets are not
   changed; whether the raters see the clean record is decided before they are sent.
+
+### 15.4 What was run and what it showed (2026-10-04)
+
+- The analyses of 15.2 were run as fixed; their values equal the probes of the review.
+- The clean condition was run after 15.3 was committed: 576 calls, all valid (7 after the
+  trailing-comma repair), in twelve parallel processes after a sequential start proved slow.
+  Six responses of a two-case trial are part of the 576.
+- A look at the first 34 complete cases, taken while the run was going, suggested a larger
+  effect than the full data show (fidelity correlation near zero in every explainer, pooled
+  ICC of overall quality 0.29). The full data are what the paper reports:
+  - the fidelity correlation goes from 0.48 to -0.05 for SHAP and from 0.56 to 0.08 for
+    DiCE; it stays at 0.41 for LIME and 0.26 for Anchors;
+  - Claude Haiku 4.5 scores higher without metrics on every dimension (overall +0.30, audit
+    usefulness +0.52); the other two judges change by 0.01 on overall quality;
+  - pooled ICC, one call: audit usefulness 0.66 to 0.42, completeness 0.68 to 0.58, overall
+    quality 0.63 to 0.57; semantic plausibility and concision unchanged;
+  - inside SHAP no dimension exceeds 0.20; inside LIME completeness, semantic plausibility
+    and overall quality stay between 0.63 and 0.69.
+- **Deviation.** 15.3 named ICC(1,k) and the pooled SHAP-and-LIME scope for the clean
+  condition; they are in `results/reliability_long.csv` and are not printed, for space.
+- The draft is at the 15-page limit in Word.

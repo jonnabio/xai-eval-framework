@@ -41,6 +41,12 @@ def summary() -> dict[str, float]:
         for key, n in pd.Series([c[field] for c in cases]).value_counts().items():
             out[f"cases.{field}.{key}"] = n
     out["cases.model_families"] = len({c["model_family"] for c in cases})
+    out["cases.distinct_instances"] = len({(c["dataset"], c["instance_id"]) for c in cases})
+    # Items with weight zero in the ten-item rendering of an explanation (review F02).
+    for explainer in ("anchors", "dice", "shap", "lime"):
+        zeros = [c["normalized_explanation"].count(": 0.0000") for c in cases
+                 if c["explainer"] == explainer]
+        out[f"render.zero_items_median.{explainer}"] = float(pd.Series(zeros).median())
 
     cov = pd.read_csv(C2A / "cohort2_coverage.csv")
     out["calls"] = cov["responses"].sum()
@@ -79,6 +85,11 @@ def summary() -> dict[str, float]:
     out["orig.icc_max"] = orig["icc_2_1"].max()
     out["orig.ci_upper_max"] = orig["ci_upper"].max()
     out["orig.icc_n"] = orig["n_cases"].iloc[0]
+    # Largest difference between Krippendorff's alpha and the ICC, per panel.
+    alpha = pd.read_csv(ORIG / "krippendorff_alpha.csv").set_index("dimension")
+    out["orig.alpha_diff_max"] = (
+        orig.set_index("dimension")["icc_2_1"] - alpha["krippendorff_alpha"]).abs().max()
+    out["primary.alpha_diff_max"] = (prim["icc_1_1"] - prim["krippendorff_alpha"]).abs().max()
 
     corpus = pd.read_csv(C / "paper_c_review_corpus.csv")
     out["corpus.size"] = len(corpus)
@@ -95,15 +106,18 @@ def summary() -> dict[str, float]:
 
 
 def figure() -> None:
-    orig = pd.read_csv(ORIG / "icc_analysis.csv").set_index("dimension")
-    views = pd.read_csv(C2A / "cohort2_reliability_by_view.csv")
-    new = views[views["view"] == PRIMARY].set_index("dimension")
-    fig, ax = plt.subplots(figsize=(6.5, 3.6))
-    for offset, frame, col, marker, colour, label in (
-            (0.16, orig, "icc_2_1", "o", "#1f4e79", "First panel (147 complete cases)"),
-            (-0.16, new, "icc_1_1", "s", "#c0504d", "Second panel (192 cases)")):
+    # Second panel, primary condition: all cases against the cases of one explainer
+    # (results/reliability_long.csv, written by paper_c_reliability.py; F-based intervals).
+    rel = pd.read_csv(C / "results" / "reliability_long.csv")
+    rel = rel[rel["condition"] == "primary3"]
+    fig, ax = plt.subplots(figsize=(6.5, 3.8))
+    for offset, scope, marker, colour, label in (
+            (0.22, "all", "o", "#1f4e79", "All cases (192)"),
+            (0.0, "lime", "s", "#c0504d", "LIME cases (32)"),
+            (-0.22, "shap", "^", "#4f7a28", "SHAP cases (52)")):
+        frame = rel[rel["scope"] == scope].set_index("dimension")
         ys = [len(DIMENSIONS) - 1 - i + offset for i in range(len(DIMENSIONS))]
-        x = frame.loc[DIMENSIONS, col]
+        x = frame.loc[DIMENSIONS, "icc_1_1"]
         err = [x - frame.loc[DIMENSIONS, "ci_lower"], frame.loc[DIMENSIONS, "ci_upper"] - x]
         ax.errorbar(x, ys, xerr=err, fmt=marker, color=colour, capsize=3, markersize=5,
                     linewidth=1.2, label=label)
@@ -112,8 +126,8 @@ def figure() -> None:
     ax.set_yticks(range(len(DIMENSIONS)))
     ax.set_yticklabels([LABELS[d] for d in reversed(DIMENSIONS)])
     ax.set_xlabel("ICC(1,1) with 95% confidence interval")
-    ax.set_xlim(-0.3, 1.0)
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, fontsize=8,
+    ax.set_xlim(-0.6, 1.0)
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=3, fontsize=8,
               frameon=False)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)

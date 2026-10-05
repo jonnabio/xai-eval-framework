@@ -13,9 +13,18 @@
        retest   outputs/analysis/exp4_cohort2/cohort2_test_retest.csv    condition|judge
        post     results/posthoc_scores_vs_metrics.csv                    explainer|dimension|metric
        reg      results/posthoc_rank_regression.csv                      dimension|metric
+       rel      results/reliability_long.csv                             condition|scope|dimension
+       btw      results/variance_between.csv                             dimension
+       first    results/first_panel_interval.csv                         dimension
+       beh      results/judge_behaviour.csv                              judge|condition
+       rsum     results/review_summary.csv                               metric
+       cshift   results/clean_shift.csv                                  judge|dimension
+       cfid     results/clean_fidelity.csv                               condition|explainer
 
-   Views and conditions: primary, stated, alt, pooled. Judges: claude, gemini, gpt.
-   Formats: d integer; int integer with thousands separator; u2, u3 decimals; s2, s3
+   Views and conditions: primary, stated, alt, pooled; in rel, beh and cfid: primary3 (three
+   replicates averaged), primary1 (one call), clean. Judges: claude, gemini, gpt.
+   Formats: d integer; w integer from 0 to 10 as a word; int integer with thousands
+   separator; u2, u3 decimals; s2, s3
    decimals with a typeset minus sign; pct, pct1 percentage with 0 or 1 decimals; p p-value
    ("<0.001" or three decimals); rs two signed decimals plus an asterisk when the row's
    p_holm is below 0.05.
@@ -61,7 +70,15 @@ SOURCES = {
     "post": (C / "results" / "posthoc_scores_vs_metrics.csv",
              ["explainer", "dimension", "metric"]),
     "reg": (C / "results" / "posthoc_rank_regression.csv", ["dimension", "metric"]),
+    "rel": (C / "results" / "reliability_long.csv", ["condition", "scope", "dimension"]),
+    "btw": (C / "results" / "variance_between.csv", ["dimension"]),
+    "first": (C / "results" / "first_panel_interval.csv", ["dimension"]),
+    "beh": (C / "results" / "judge_behaviour.csv", ["judge_model", "condition"]),
+    "rsum": (C / "results" / "review_summary.csv", ["metric"]),
+    "cshift": (C / "results" / "clean_shift.csv", ["judge_model", "dimension"]),
+    "cfid": (C / "results" / "clean_fidelity.csv", ["condition", "explainer"]),
 }
+WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 TOKEN = re.compile(r"<<([a-z]+):([^:<>]+):([a-z_0-9]+):([a-z0-9]+)>>")
 
 _tables: dict[str, dict[tuple[str, ...], dict[str, str]]] = {}
@@ -88,6 +105,8 @@ def fmt(v: float, f: str, r: dict[str, str]) -> str:
         return str(int(round(v)))
     if f == "int":
         return f"{int(round(v)):,}"
+    if f == "w":
+        return WORDS[int(round(v))]
     if f in ("u2", "u3"):
         return f"{abs(v):.{f[1]}f}"
     if f in ("s2", "s3"):
