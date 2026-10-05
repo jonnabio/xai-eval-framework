@@ -1,5 +1,58 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-04 (Paper B SUBMITTED to CLEI Electronic Journal, ID 1196)
+
+This is the latest handoff. It closes Next Steps 2 and 3 of the Paper B handoff directly
+below, which keeps the detail of the draft.
+
+- **Completed**
+  - **Paper B was submitted by the author on 2026-10-04** through the journal's online
+    system; the journal acknowledged it by email (Esteban Clua) as **submission 1196**
+    (https://www.clei.org/cleiej/index.php/cleiej/authorDashboard/submission/1196). Record in
+    `docs/reports/paper_b/CLEIEJ_SUBMISSION.md`, "Submission record".
+  - File sent: `docs/reports/paper_b/paper_b_cleiej.pdf`, **12 pages**, source at commit
+    `c72a17e88`, with the comments for the editor of section 3 of the sheet.
+  - Changes from the author's revision before submitting:
+    - Figure 2 re-rendered without the horizontal grid lines
+      (`scripts/generate_paper_b_figures.py`);
+    - the "Provenance of the cohort" paragraph of Section 5.3 removed (author: the relation to
+      the earlier executions is already stated). The full PDF went from 13 to 12 pages.
+  - Author decisions: title confirmed; the keywords item is dropped; the sentence about the
+    two earlier rejections is not in the comments for the editor (kept as an optional
+    sentence in the sheet).
+- **Current State**
+  - Paper B is under review at CLEIej. Both PDFs have 12 pages, the journal's minimum.
+  - Last verification (after the final build): `verify_claims.py` 986 claims / 1298 sites /
+    60 retired-value guards; `verify_sync.py`; `scan_shared_literals.py --strict` 0
+    unexplained; blind check clean.
+  - The main folder is on `paper/b-cleiej`, ahead of `main` by this session's commits,
+    pushed.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it
+     fails.
+  2. Paper B: wait for the journal. When the decision arrives, record it in the sheet and
+     plan the response.
+  3. Paper C: its own plan and lane; adjudication with the second reviewer; a stratified
+     sample of 50 to 60 EXP4 cases for two human raters; a dated plan before any post hoc
+     analysis of judge scores against technical metrics.
+  4. Check the thesis chapters and the 32-page edition for the sentence that the earlier
+     article left the SHAP-LIME contrast unresolved; it is wrong.
+  5. Unchanged: Paper E and Paper D wait for their journals; return the main folder to
+     `thesis/rca-001-phase-2` for Task 3 / RCA-001 Phase 2; `git worktree prune`.
+- **Blockers/Issues**
+  - The two manuscripts under review elsewhere (Papers D and E) are disclosed to the editor
+    in the submission comments only; the manuscript no longer mentions them. A referee does
+    not see the comments.
+  - Both PDFs are at the 12-page minimum: a cut in a revision needs an equal addition.
+  - The Zenodo 0.9.0 archive carries the earlier title, Figure 3, the old Figure 2 and the
+    removed paragraph. The comments for the editor say the archive has an earlier title.
+  - Unchanged: the novelty risk (four manuscripts on the same executions); the repository's
+    records of the random-forest size disagree.
+- **Notes**
+  - Do not rebuild the Paper B PDFs or change its text unless a revision is requested. A
+    revision that changes code or results needs a new Zenodo version.
+  - Figure 1 still has faint vertical grid lines; the author asked only about Figure 2.
+
 ## Session Handoff - 2026-10-04 (session end: Paper B+C split; Paper B drafted, reviewed, archived, on main)
 
 This is the latest handoff and the full state at the end of the session. It supersedes the
