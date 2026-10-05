@@ -12,7 +12,7 @@ This does not change Paper D's recorded emailed-submission status. Details:
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
-| **C** | *Tecnología en Marcha*, AI special issue | Third draft on `main`, read by the author, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.11.0, [10.5281/zenodo.23150204](https://doi.org/10.5281/zenodo.23150204); release `paper-c-tm-2026-10-04-r2` |
+| **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `paper/c-llm-judges` (2026-10-05), not read by the author, 15 Word pages; **not submitted** (deadline 2026-10-15) | Zenodo 0.11.0, [10.5281/zenodo.23150204](https://doi.org/10.5281/zenodo.23150204), holds the third draft only; the fourth needs a new version |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
@@ -25,9 +25,72 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-05 (Paper C: editor's review, positive control, fourth draft)
+
+This is the latest Paper C handoff. The handoff below keeps the detail of the registry.
+
+- **Completed**:
+  - **Review of the third draft** (Scientific Editor role, given to the author in the
+    session, not written to `docs/review/`). Five findings: the headline numbers were not
+    from the declared main analysis; inside a method the scores hardly differ, so a low
+    coefficient does not show disagreement; the zero-weight LIME records were still in the
+    metric correlations; gateway, dates and reasoning mode of the judges were not stated;
+    0.33 had no interval and "negative" was too strong for moderate coefficients.
+  - **Plan first:** `docs/reports/paper_c/PLAN.md`, section 18, committed (`1088379d9`)
+    before any analysis or call; results in 18.5.
+  - **Analyses of the stored responses** (`paper_c_reliability.py` extended; the 147
+    earlier coefficients are unchanged): scope `shap_lime_nonzero` (79 cases, highest ICC
+    0.41), column `sd_within`, `lime_nonzero_metrics.csv`, `run_facts.csv`, shares of
+    variance by dataset and model family.
+  - **Positive control, a new cohort** (RCA-002) in `docs/reports/paper_c/positive_control/`:
+    79 SHAP and LIME cases in three versions (stored, truncated, shuffled), 3 judges, one
+    call, the clean prompt; 711 calls, 710 valid. Scripts `run_positive_control.py` and
+    `paper_c_positive_control.py`, committed before any score was read.
+    - Truncated: every judge lowered completeness (mean -0.82); ICC 0.18 to 0.60.
+    - Shuffled: semantic plausibility -0.11 for the mean, from one judge (Gemini 3.8
+      Flash -0.33); the ICC did not rise.
+  - **Fourth draft:** fifth question and section 3.6; sections 3.2, 3.4 and 3.5 corrected;
+    methods state OpenRouter, the dates and that Gemini returned reasoning tokens. The
+    table of the sensitivity views became text (four tables, one figure). The two
+    quotations that left out an item of the stored text were removed. **15 pages in Word
+    (both versions), abstract 249 words, resumen 250.** Title and AI declaration unchanged.
+  - `EDITOR_NOTE.md` items 2 and 3 rewritten for the new table numbers and the control.
+- **Current State**:
+  - Branch `paper/c-llm-judges`, pushed; pull request #26 now carries this work. Lane
+    lock released.
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`. Neither
+    checks a Paper C number on this branch (the registry is in pull request #27).
+  - **The registry is stale:** the printed numbers changed, so
+    `register_paper_c.py --check` will fail once #26 and #27 are both on `main`.
+  - **The archive is stale:** the full version cites Zenodo 0.11.0, which does not hold
+    the code, results and cohort of section 18.
+- **Next Steps**:
+  1. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf` (abstract, sections
+     3.2 and 3.6, discussion).
+  2. Author: merge pull requests #26 and #27. Then on a `pubs/*` branch run
+     `python scripts/pubs/register_paper_c.py`, `generate_fragments.py` (restore
+     `build_meta.env`), and the verifiers; pull request to `main`.
+  3. Author approves a new Zenodo version; then bump `.zenodo.json` and `CITATION.cff` on
+     `main`, tag, `gh release create`, set `\papercrelease` and `\papercarchive` in the
+     template, rebuild, count pages in Word.
+  4. Editor note: confirm the thesis is not deposited, add the telephone number, send.
+     Deadline 2026-10-15.
+- **Blockers/Issues**:
+  - No review followed this revision; it was made by the session that wrote the review.
+  - The registry step has not checked that Paper D prints none of the new results.
+  - The paper is at the page limit and both abstracts are at the word limit.
+  - Figure 1 still shows all 32 LIME cases; the text explains the five records.
+  - One response of GPT-5.4 mini in the control has no scores and was not called again.
+- **Notes**:
+  - The control took about 25 minutes in twelve processes (`--judge <id> --shard i/4`,
+    then `--parse-only`); Gemini 3.8 Flash is the slow judge.
+  - Word pages: the full version runs about four lines longer than the blind one; check
+    both. Reducing the figure to 0.7 of the line width saved most of a page.
+  - A heredoc with apostrophes failed again; write patch scripts with the editor tool.
+
 ## Session Handoff - 2026-10-04 (Paper C: claim registry, editor note checked, no human subset)
 
-This is the latest Paper C handoff. The session update below keeps the detail of release 0.11.0.
+This was the Paper C handoff of the registry. The session update below keeps the detail of release 0.11.0.
 
 - **Completed**:
   - **Claim registry for Paper C** (pull request #27, branch `pubs/paper-c-registry`, shared
