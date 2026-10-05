@@ -11,7 +11,7 @@ Deadline 2026-10-15, by email to revistatm@tec.ac.cr.
 journal's limit**; abstract 246 words and resumen 249 (limit 250), 5 tables, 1 figure, 25
 references. The clean condition was run (576 calls, all valid). The draft has no human-rated
 subset. The author has read it. The revision was made by the session that wrote the review
-and has not been reviewed again. On `main`, archived as Zenodo 0.10.0; **not submitted**.
+and has not been reviewed again. That draft was archived as Zenodo 0.10.0; **not submitted**.
 
 **Main results of the revision**
 
@@ -58,15 +58,14 @@ answered in the abstract, resumen, methods, sections 3.2 and 3.5, discussion, li
 and conclusions; one sentence and two references on LLM judges were added to the
 introduction. **15 pages in Word**, abstract 248 words, resumen 250, 27 references. The
 revision was made by the session that wrote the second review and has not been reviewed
-again; the author has not read it.
+again. The author read it and checked the two references marked "NEW 2" (2026-10-04).
+
+**Archive:** Zenodo version 0.11.0, `10.5281/zenodo.23150204`, from GitHub release
+`paper-c-tm-2026-10-04-r2` (`main` at `ae4fcd890`). It holds the analysis code and result
+files of `PLAN.md` section 16; the full version cites it. Version 0.10.0 does not hold them.
 
 **Open before submission**
 
-0. Author: read the third draft (`submission/paper_c_blind.pdf`), and check the two
-   references marked "NEW 2" in `references.bib`.
-0b. New Zenodo version: the archive 0.10.0 does not hold the analysis code and result files
-   of `PLAN.md` section 16. Needs the author's approval of a release; then set
-   `\papercrelease` and `\papercarchive` and rebuild.
 1. Note to the editor: drafted in `EDITOR_NOTE.md` (Spanish to send, English for the
    record). Not sent; four points to check are listed at its top.
 2. Author decision: whether the human subset is in this submission (recommendation: no).
@@ -86,7 +85,7 @@ again; the author has not read it.
    are now cited in the introduction. The other candidates are not used.
    Done 2026-10-04: Zenodo version 0.10.0,
    `10.5281/zenodo.23149419`, from GitHub release `paper-c-tm-2026-10-04` (`main` at
-   `d97dbe188`); the full version cites it. A later change to code or results needs a new
+   `d97dbe188`); superseded by version 0.11.0 (above). A later change to code or results needs a new
    version; a text change does not.
 7. Done 2026-10-04: the author read the draft and checked the two added references.
 
