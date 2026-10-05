@@ -19,6 +19,66 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-04 (Paper C: plan approved, prompt findings, first draft built)
+
+This is the latest Paper C handoff; it supersedes the one directly below, which keeps the
+detail of the lane setup.
+
+- **Completed**
+  - Pull request #20 merged (`paper-c` lane, ADR-0022 amendment, sync checks unwired from the
+    April prototype). Branch `paper/c-llm-judges` has taken `origin/main`.
+  - **Author decisions:** plan approved, adjusted as the work goes; English; 56-case human
+    sample; raters are not the corpus reviewer; single author; AI-use statement as Paper D;
+    no question to the editor for now (`docs/reports/paper_c/PLAN.md`, section 13).
+  - **Two findings about the EXP4 prompts** (PLAN.md, section 14):
+    - all 192 prompts of `hidden_label_primary` print the field `quadrant` (TP, FN, TN, FP),
+      which with the prediction gives the true label: no condition of cohort 2 withholds it;
+    - all 576 prompts print the technical metrics of the explanation.
+  - **Human subset prepared:** `human_subset/sample_cases.csv` (7 cases per dataset-by-explainer
+    cell, seed 20261004) and one self-contained rating sheet per rater, with instructions.
+    Not sent; sending is the author's step.
+  - **Post hoc analysis run as fixed in the plan:** within each explainer the overall-quality
+    score rises with the fidelity value shown in the prompt (Spearman 0.35 to 0.59, all four
+    significant after Holm over 20 tests); results in `docs/reports/paper_c/results/`.
+  - **First draft built:** `paper_c_template.tex` (source), generated `paper_c.tex`,
+    `scripts/build_paper_c.py` (render, PDF, Word, blind and full). Title "Can LLM judges
+    score explanations reliably? Agreement among three judges in two panels on 192 post-hoc
+    explanations". 12 pages measured in Word, abstract 244 and resumen 248 words, 4 tables,
+    1 figure, 25 references. Identity scan of the blind files clean except the citation of
+    the RIMI article, as in Paper D.
+- **Current State**
+  - The draft is the fallback version: no human-rated subset, no counts on the audited corpus
+    axes. It is not reviewed and the author has not read it.
+  - **The draft's numbers are not in `pub/claim_registry.toml`.** They are generated from
+    result files by the build. `paper_c.tex` is not under `[coverage]` or `[exclusivity]`, and
+    `verify_sync.py` does not check it. `pub/claims.toml` still holds the placeholder abstract.
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`. Built files are in
+    `docs/reports/paper_c/submission/`, local only (`.gitignore` in the folder).
+  - The lane lock was released at the end of the session.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  2. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf`; decide on the clean
+     prompt condition (PLAN.md 14.4); send the rating sheets; start adjudication with the
+     second reviewer; check the two references marked NEW.
+  3. Registry work (shared files, pull request to `main`): coverage, exclusivity, a `paper_c`
+     resolver in `claim_sources.py`, `verify_sync.py`, the real abstract in `pub/claims.toml`.
+  4. Human-subset analysis script, written before the ratings arrive (PLAN.md section 6).
+  5. Independent rigor review; Zenodo version; `\papercrelease` and `\papercarchive`.
+- **Blockers/Issues**
+  - Deadline 2026-10-15. Cut-offs: adjudication 2026-10-08, ratings 2026-10-10.
+  - The quadrant finding also concerns the thesis chapter 5 and the 32-page edition, which
+    call the condition label-hidden; the thesis lane must check its text.
+  - Local `main` is checked out in a second folder (`../xai-eval-framework-main-status`) with
+    a commit that `origin/main` does not have (`df9daf3bb`); it is not level with origin.
+  - `docs/reports/paper_d/README.md` and the status block at the top of this file carry
+    uncommitted edits made outside this session (journal account request). This session did
+    not commit them.
+- **Notes**
+  - `paper_c_posthoc.py` takes about ten minutes (bootstrap); run it in the background.
+  - A shell heredoc dropped LaTeX backslashes again; write patch scripts with the editor tool.
+  - `build_paper_c.py` follows `scripts/pubs/build_paper_d.py`; Word page count was measured
+    through Word's COM interface from PowerShell.
+
 ## Session Handoff - 2026-10-04 (Paper C: own lane and folder, prototype removed, plan proposed)
 
 This handoff records the Paper C setup; the publication status summary above is current.
