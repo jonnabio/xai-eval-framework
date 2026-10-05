@@ -50,6 +50,10 @@ _PAPER_C_TABLES = {
     "rsum": (_PAPER_C_RESULTS / "review_summary.csv", ["metric"]),
     "cshift": (_PAPER_C_RESULTS / "clean_shift.csv", ["judge_model", "dimension"]),
     "cfid": (_PAPER_C_RESULTS / "clean_fidelity.csv", ["condition", "explainer"]),
+    "lnz": (_PAPER_C_RESULTS / "lime_nonzero_metrics.csv", ["condition", "metric"]),
+    "pc": (_PAPER_C_RESULTS / "positive_control.csv", ["version", "judge_model", "dimension"]),
+    "pci": (_PAPER_C_RESULTS / "positive_control_icc.csv", ["set", "scope", "dimension"]),
+    "pcs": (_PAPER_C_RESULTS / "positive_control_summary.csv", ["metric"]),
     "chg": (_PAPER_C_RESULTS / "clean_icc_change.csv", ["dimension"]),
 }
 
