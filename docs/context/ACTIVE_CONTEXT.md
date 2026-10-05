@@ -25,8 +25,12 @@ below, which keeps the detail of the draft.
   - Last verification (after the final build): `verify_claims.py` 986 claims / 1298 sites /
     60 retired-value guards; `verify_sync.py`; `scan_shared_literals.py --strict` 0
     unexplained; blind check clean.
-  - The main folder is on `paper/b-cleiej`, ahead of `main` by this session's commits,
-    pushed.
+  - Pull request #19 (this session's commits and this handoff) merged to `main`. The main
+    folder is on `paper/b-cleiej`, level with `main`, clean. The `paper-b` lane lock was
+    released at the end of the session.
+  - The assumptions in the submission record (the comments sent were the text of section 3
+    without the optional sentence; the file uploaded was the 12-page build) were stated to
+    the author and not contradicted.
 - **Next Steps**
   1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it
      fails.
@@ -52,6 +56,13 @@ below, which keeps the detail of the draft.
   - Do not rebuild the Paper B PDFs or change its text unless a revision is requested. A
     revision that changes code or results needs a new Zenodo version.
   - Figure 1 still has faint vertical grid lines; the author asked only about Figure 2.
+  - `generate_paper_b_figures.py` needs the project `.venv`
+    (`.\.venv\Scripts\python.exe`). It rewrites both figures; an unchanged figure differs
+    only in its PDF timestamp, so restore it with `git checkout --` before committing.
+  - A shell heredoc dropped the backslashes of a LaTeX string again in this session; use the
+    editor tool for `.tex` edits.
+  - Commit order that the hook accepted: `scripts/` (shared), then `docs/reports/paper_b/`,
+    then `ACTIVE_CONTEXT.md`, each in its own commit.
 
 ## Session Handoff - 2026-10-04 (session end: Paper B+C split; Paper B drafted, reviewed, archived, on main)
 
