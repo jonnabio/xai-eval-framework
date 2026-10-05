@@ -155,12 +155,62 @@ transfer by default. All artifacts are public.
 keywords_en_tex = "explainable artificial intelligence, LIME, SHAP, explanation evaluation, benchmarking"
 
 # Paper C (ADR-0022, amendment of 2026-10-04): the LLM-judge reliability study with
-# the taxonomy as framing, rebuilt in docs/reports/paper_c/. The abstract of the
-# April 2026 survey prototype was removed; the text below is a placeholder until
-# the new abstract is written.
+# the taxonomy as framing, in docs/reports/paper_c/. This table is written by
+# scripts/pubs/register_paper_c.py from the generated paper_c.tex (the manuscript
+# fills its abstract from result files, so it cannot \\input a fragment); do not
+# edit it by hand. Tecnologia en Marcha limits each abstract to 250 words.
 [papers.paper_c]
 abstract_en_tex = """
-Abstract pending: Paper C is being rebuilt as the LLM-judge reliability study.
+Large language models (LLMs) are used as judges of the quality of explanations. That
+use assumes that different judges give the same
+explanation the same score. This study measures that agreement. Three LLM judges scored
+192 post-hoc explanations (SHAP, LIME, Anchors, DiCE; three tabular
+datasets) on seven dimensions with a 1--5 rubric, in two panels of different models. The
+second panel also varied the prompt, repeated every call three times and scored the cases
+again without metrics or outcome
+(5,760 calls). Agreement was measured with the intraclass
+correlation ICC(1,1). Over all cases no dimension reached 0.75 in either panel (highest
+values 0.601 and 0.731). But up to
+67\\% of the score variance lay between explanation
+methods. Among SHAP cases no dimension exceeded
+0.22 and the scores hardly varied. Among LIME cases five
+dimensions exceeded 0.6, but only through five records whose weights
+all printed as zero; without them the highest of the five was
+0.33. The mean of the three judges was reliable for separating
+methods, not explanations. With the metrics in the prompt the overall score followed
+fidelity within every method, and one judge named a metric in
+80\\% of its answers. Without them that judge
+scored higher, the correlation vanished for SHAP and DiCE, and agreement on audit
+usefulness fell from 0.66 to
+0.42. A single LLM judge of this class should
+not be used as a confirmatory measure. Studies using them should report
+agreement within method, the number of calls and what the prompt contained.
 """
-keywords_en_tex = "explainable artificial intelligence, LLM-as-a-judge, inter-rater reliability, explanation evaluation"
-
+keywords_en_tex = "explainable artificial intelligence; LLM-as-a-judge; inter-rater reliability; explanation evaluation; intraclass correlation"
+abstract_es_tex = """
+Los modelos de lenguaje de gran tama\\~no (LLM) se usan como jueces de la calidad de las
+explicaciones. Ese uso supone que jueces
+distintos punt\\'uan igual la misma explicaci\\'on. Este estudio lo comprueba. Tres
+jueces LLM puntuaron 192 explicaciones post hoc (SHAP, LIME, Anchors,
+DiCE; tres conjuntos de datos tabulares) en siete dimensiones con una r\\'ubrica de 1 a 5,
+en dos paneles. El segundo vari\\'o el \\emph{prompt}, repiti\\'o
+cada llamada tres veces y puntu\\'o los casos de nuevo sin m\\'etricas ni resultado
+(5,760 llamadas). Con todos los casos, ninguna dimensi\\'on
+alcanz\\'o una correlaci\\'on intraclase ICC(1,1) de 0.75 en ning\\'un
+panel (m\\'aximos: 0.601 y 0.731). Pero hasta el
+67\\% de la varianza estaba entre m\\'etodos.
+En SHAP ninguna dimensi\\'on super\\'o 0.22 y las
+puntuaciones casi no variaron. En LIME cinco dimensiones superaron 0.6, pero solo por
+cinco registros con todos los pesos impresos como cero; sin ellos el m\\'aximo fue
+0.33. La media de los tres
+jueces fue fiable para separar m\\'etodos, no explicaciones. Con las m\\'etricas en el
+\\emph{prompt}, la puntuaci\\'on global sigui\\'o la fidelidad en cada m\\'etodo, y un juez
+nombr\\'o una m\\'etrica en el 80\\% de sus
+respuestas. Sin ellas ese juez puntu\\'o m\\'as alto, la correlaci\\'on desapareci\\'o para
+SHAP y DiCE, y la concordancia en utilidad para auditor\\'ia baj\\'o de
+0.66 a
+0.42. Un solo juez LLM de esta clase no deber\\'ia
+usarse como medida confirmatoria. Los estudios que los usen deber\\'ian informar la
+concordancia por m\\'etodo, el n\\'umero de llamadas y el contenido del \\emph{prompt}.
+"""
+keywords_es_tex = "inteligencia artificial explicable; LLM como juez; fiabilidad entre evaluadores; evaluaci\\'on de explicaciones; correlaci\\'on intraclase"

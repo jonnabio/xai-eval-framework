@@ -24,6 +24,12 @@ jobs:
       - name: Verify manuscript claims against artifacts
         run: python3 scripts/pubs/verify_claims.py
 
+      # Paper C: paper_c.tex is the template rendered from the result files, and the
+      # registry block and the abstract in claims.toml are current (integers included,
+      # which the claim check above does not read).
+      - name: Verify Paper C against its result files and its registration
+        run: python3 scripts/pubs/register_paper_c.py --check
+
       # Report-only: Paper B+C numbers that Paper A prints, found without the
       # registry (RCA-001, review F02). The submission gate runs it --strict.
       - name: Report numbers shared with the published Paper A

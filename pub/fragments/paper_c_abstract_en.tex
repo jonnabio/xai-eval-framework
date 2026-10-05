@@ -1,2 +1,25 @@
 % AUTO-GENERATED FILE. Source: pub/claims.toml
-Abstract pending: Paper C is being rebuilt as the LLM-judge reliability study.
+Large language models (LLMs) are used as judges of the quality of explanations. That
+use assumes that different judges give the same
+explanation the same score. This study measures that agreement. Three LLM judges scored
+192 post-hoc explanations (SHAP, LIME, Anchors, DiCE; three tabular
+datasets) on seven dimensions with a 1--5 rubric, in two panels of different models. The
+second panel also varied the prompt, repeated every call three times and scored the cases
+again without metrics or outcome
+(5,760 calls). Agreement was measured with the intraclass
+correlation ICC(1,1). Over all cases no dimension reached 0.75 in either panel (highest
+values 0.601 and 0.731). But up to
+67\% of the score variance lay between explanation
+methods. Among SHAP cases no dimension exceeded
+0.22 and the scores hardly varied. Among LIME cases five
+dimensions exceeded 0.6, but only through five records whose weights
+all printed as zero; without them the highest of the five was
+0.33. The mean of the three judges was reliable for separating
+methods, not explanations. With the metrics in the prompt the overall score followed
+fidelity within every method, and one judge named a metric in
+80\% of its answers. Without them that judge
+scored higher, the correlation vanished for SHAP and DiCE, and agreement on audit
+usefulness fell from 0.66 to
+0.42. A single LLM judge of this class should
+not be used as a confirmatory measure. Studies using them should report
+agreement within method, the number of calls and what the prompt contained.
