@@ -60,6 +60,18 @@ introduction. **15 pages in Word**, abstract 248 words, resumen 250, 27 referenc
 revision was made by the session that wrote the second review and has not been reviewed
 again. The author read it and checked the two references marked "NEW 2" (2026-10-04).
 
+**Fourth draft (2026-10-05), after the editor's review of the third draft** (`PLAN.md`,
+section 18). New: the SHAP-and-LIME scope (highest ICC 0.41 without the zero-weight
+records), the spread among the judges for one case, the LIME correlations without the
+zero-weight records, the gateway, dates and reasoning mode of the judges, and a positive
+control (711 calls, 710 valid): every judge lowered completeness when seven of ten items
+were removed (ICC 0.18 to 0.60), and one judge of three lowered semantic plausibility when
+the weights were assigned to the wrong features. The table of the sensitivity views became
+text: four tables, one figure. **15 pages in Word**, abstract 249 words, resumen 250. Not
+read by the author, not reviewed again, **not registered and not archived**: the registry
+must be run again on a `pubs/*` branch, and Zenodo 0.11.0 does not hold this draft's code,
+results and cohort.
+
 **Archive:** Zenodo version 0.11.0, `10.5281/zenodo.23150204`, from GitHub release
 `paper-c-tm-2026-10-04-r2` (`main` at `ae4fcd890`). It holds the analysis code and result
 files of `PLAN.md` section 16; the full version cites it. Version 0.10.0 does not hold them.
@@ -121,6 +133,9 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 | `scripts/paper_c_reliability.py` | Analyses added after the rigor review: agreement inside each explainer, one call, panel mean, two-way models, F-based intervals, raw agreement, use of the printed metrics, clean condition (plan section 15) |
 | `scripts/run_clean_condition.py` | Runs the clean condition: 192 cases, 3 judges, one call, no metrics, outcome or label in the prompt |
 | `clean_condition/` | The clean condition, a new cohort (RCA-002): rendered prompts, raw responses, parsed scores |
+| `scripts/run_positive_control.py` | Runs the positive control: 79 SHAP and LIME cases in three versions (stored, truncated, shuffled), 3 judges, one call, the clean prompt |
+| `positive_control/` | The positive control, a new cohort (RCA-002): rendered prompts, raw responses, parsed scores |
+| `scripts/paper_c_positive_control.py` | Analysis of the positive control (plan section 18.3) |
 | `scripts/paper_c_summary.py` | Summary values and Figure 1 |
 | `scripts/build_paper_c.py` | Render, PDF and Word in a blind and a full version, figure upload |
 | `scripts/draw_human_sample.py` | The 56-case sample and the two rating sheets |
@@ -137,6 +152,7 @@ commit that contains it is the parent of "paper c: remove the April 2026 survey 
 ```
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_posthoc.py   # about 10 minutes; only if the analysis changes
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_reliability.py   # before the summary: the figure reads its output
+.venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_positive_control.py   # the positive control
 .venv/Scripts/python.exe docs/reports/paper_c/scripts/paper_c_summary.py   # summary values and the figure
 python docs/reports/paper_c/scripts/build_paper_c.py                       # paper_c.tex, PDFs, Word files
 python scripts/pubs/register_paper_c.py                                    # registry block and abstract; shared files, on a pubs/* branch

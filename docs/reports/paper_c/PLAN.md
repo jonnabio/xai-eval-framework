@@ -571,3 +571,49 @@ The abstract, methods, sections 3.1, 3.2 and 3.4, the discussion, the limitation
 conclusions are revised for the five findings and the control. The paper is at the page
 limit, so each addition is paid with a cut; the first-panel text and Table 3 are the first
 candidates. The title and the AI declaration are not changed.
+
+### 18.5 What was run and what it showed (2026-10-05)
+
+- Order of the commits: this section's plan (`1088379d9`), the analyses of 18.2
+  (`00af90bba`), the run and analysis scripts of the control (`dad25887f`, while the calls
+  were running and before any score was read), then the results.
+- **18.2.** The 147 coefficients of the earlier `reliability_long.csv` did not change.
+  - SHAP and LIME together (84 cases): ICC(1,1) 0.73 for completeness, 0.50 for overall
+    quality. Without the five zero-weight records (79 cases): highest 0.41 (completeness,
+    0.27 to 0.54), overall quality 0.12.
+  - Standard deviation of the three judges' completeness scores for one case: 0.24 among
+    SHAP cases, 0.34 over all cases; the standard deviation of the case means is 0.15 and
+    0.59.
+  - LIME without the five records: sparsity 0.47 (unadjusted p = 0.014; 0.73 with them),
+    fidelity 0.57 in the primary condition and 0.26 in the clean condition (0.41 with them).
+  - Dataset and model family together explain 15% of the variance of the completeness case
+    means; the explainer 67%.
+  - All calls went through OpenRouter, on 2026-09-27 (second panel) and 2026-10-05 UTC
+    (clean condition). Gemini 3.8 Flash returned reasoning tokens in every response; the
+    other two judges in none.
+- **18.3, positive control.** 711 calls on 2026-10-05, 710 valid (one response of GPT-5.4
+  mini for an original text has no scores; it was not called again).
+  - **Truncated: passed.** Completeness fell for every judge (0.88, 0.81, 0.77; mean -0.82,
+    interval -0.89 to -0.75). ICC(1,1) of completeness over stored and truncated texts 0.60
+    (0.51 to 0.67) against 0.18 for the stored texts. The judges agree on the direction, not
+    the amount: ICC of the fall 0.06; overall quality -0.29, ICC over both sets 0.06.
+  - **Shuffled: passed by the stated rule, through one judge.** Semantic plausibility, mean
+    of the judges -0.11 (-0.19 to -0.04): Gemini 3.8 Flash -0.33, Claude Haiku 4.5 +0.03,
+    GPT-5.4 mini -0.03. The ICC over stored and shuffled texts did not rise (0.11 against
+    0.17); overall quality -0.04 (-0.11 to 0.02).
+  - The stored text against the clean condition (same prompt, another call): same score in
+    83% of case, judge and dimension triples. Not printed, for space.
+- **Manuscript (fourth draft).** A fifth question and section 3.6 for the control; the
+  SHAP-and-LIME scope, the spread among the judges and the intervals in section 3.2; the
+  LIME correlations corrected in sections 3.4 and 3.5; gateway, dates and reasoning mode in
+  the methods; "moderate at best" in place of a negative answer. Cut for space: the table
+  of the sensitivity views (now text), the two quotations of an Anchors and a DiCE record
+  (which left out an item of the stored text), the counts by outcome, the first-panel
+  comparison of single dimensions, the label-stated shift, and sentences of the discussion.
+  Four tables, one figure. **15 pages in Word (both versions), abstract 249 words, resumen
+  250.** The title and the AI declaration were not changed.
+- **Not done.** The claim registry was not updated (shared files, `pubs/*` branch):
+  `register_paper_c.py --check` will fail until it is run again. The archive cited by the
+  full version, Zenodo 0.11.0, does not hold the code, results and cohort of this section;
+  a new version needs the author's approval. No review followed this revision, and the
+  author has not read it.

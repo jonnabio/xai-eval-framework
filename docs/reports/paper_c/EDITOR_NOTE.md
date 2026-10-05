@@ -23,6 +23,16 @@ text is the one to send; the English text is the same note for the record.
 
 Also for the author: add the telephone number the journal asks for.
 
+**Revision of 2026-10-05 (fourth draft; `PLAN.md`, section 18).** The table of the
+sensitivity views was removed, so the tables are now 1 (all cases), 2 (inside each
+explainer), 3 (technical metrics) and 4 (clean condition). Of the values that the 32-page
+edition carries, the text still prints three outside Table 1: completeness under the
+alternative rubric and completeness and audit usefulness in the pooled view. The two score
+shifts that only the thesis carries (0.14 and 0.50) are no longer printed. Items 2 and 3
+below were rewritten for this in both languages. **Not rechecked with the registry:** that
+Paper D prints none of the new results (positive control, SHAP and LIME taken together);
+`register_paper_c.py` does that check when it is run on the `pubs/*` branch.
+
 `PLAN.md`, section 13, decision 7 said the editor is not asked about a second submission
 "for now". This note does not ask; it states the fact.
 
@@ -50,13 +60,12 @@ Quiero informarles de tres hechos antes de la revisión:
    de este trabajo (32 páginas, que unía este estudio con otro) está en un repositorio
    público y en un archivo de Zenodo. Fue enviada a dos revistas, que la rechazaron en la
    evaluación editorial inicial, sin revisión por pares; hoy no está en evaluación en
-   ninguna. Esa versión contiene parte de dos cuadros de este manuscrito: los coeficientes
-   de concordancia sobre todos los casos de ambos paneles (primera columna y columna de
-   tres llamadas del cuadro 1) y tres de los 21 coeficientes del cuadro 3 (completitud con
-   la rúbrica alternativa; completitud y utilidad para auditoría en la vista agregada). Un
-   capítulo de mi tesis doctoral, que aún no está depositada, contiene esos valores, los
-   otros cinco coeficientes de la vista agregada y el mayor cambio de puntuación al
-   declarar la etiqueta y al cambiar la rúbrica. Ninguna de esas versiones se publicó en
+   ninguna. Esa versión contiene parte de un cuadro de este manuscrito y tres valores del texto:
+   los coeficientes de concordancia sobre todos los casos de ambos paneles (primera
+   columna y columna de tres llamadas del cuadro 1) y tres coeficientes de la sección 3.3
+   (completitud con la rúbrica alternativa; completitud y utilidad para auditoría en la
+   vista agregada). Un capítulo de mi tesis doctoral, que aún no está depositada, contiene
+   esos mismos valores. Ninguna de esas versiones se publicó en
    una revista o en actas.
 
 3. **Lo que es nuevo en este manuscrito.** El análisis dentro de cada método de
@@ -65,7 +74,9 @@ Quiero informarles de tres hechos antes de la revisión:
    en los de LIME la concordancia depende de cinco registros cuyos pesos se imprimen como
    cero. También son nuevos los coeficientes con una sola llamada y para la media del
    panel, la concordancia bruta, la relación de las puntuaciones con las métricas técnicas
-   (cuadro 4) y la condición sin métricas, con 576 llamadas nuevas (cuadro 5). Las
+   (cuadro 3), la condición sin métricas, con 576 llamadas nuevas (cuadro 4), y un control
+   positivo con 711 llamadas nuevas, en el que 79 explicaciones se empeoran de dos maneras
+   conocidas (sección 3.6). Las
    conclusiones del manuscrito se apoyan en estos análisis.
 
 El código, los datos y las respuestas de los jueces están en un archivo público con DOI. El
@@ -104,12 +115,11 @@ I want to tell you three facts before the review:
    work (32 pages, which joined this study with another) is in a public repository and in a
    Zenodo archive. It was sent to two journals, which rejected it at the initial editorial
    assessment, without peer review; it is not under review anywhere today. That version
-   contains part of two tables of this manuscript: the agreement coefficients over all
-   cases for both panels (first column and three-call column of Table 1) and three of the
-   21 coefficients of Table 3 (completeness under the alternative rubric; completeness and
-   audit usefulness in the pooled view). A chapter of my doctoral thesis, which is not yet
-   deposited, contains those values, the other five coefficients of the pooled view and
-   the largest change of score when the label is stated and when the rubric is changed.
+   contains part of one table of this manuscript and three values of the text: the
+   agreement coefficients over all cases for both panels (first column and three-call
+   column of Table 1) and three coefficients of section 3.3 (completeness under the
+   alternative rubric; completeness and audit usefulness in the pooled view). A chapter of
+   my doctoral thesis, which is not yet deposited, contains the same values.
    None of those versions was published in a journal or in proceedings.
 
 3. **What is new in this manuscript.** The analysis inside each explanation method (Table 2
@@ -117,7 +127,9 @@ I want to tell you three facts before the review:
    among SHAP cases the scores hardly vary, and among LIME cases agreement depends on five
    records whose weights print as zero. Also new are the coefficients for one call and for
    the panel mean, raw agreement, the relation of the scores with the technical metrics
-   (Table 4) and the condition without metrics, with 576 new calls (Table 5). The
+   (Table 3), the condition without metrics, with 576 new calls (Table 4), and a positive
+   control with 711 new calls, in which 79 explanations are made worse in two known ways
+   (section 3.6). The
    conclusions of the manuscript rest on these analyses.
 
 The code, the data and the judges' responses are in a public archive with a DOI. The

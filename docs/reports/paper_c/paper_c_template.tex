@@ -60,59 +60,62 @@ jonnabio@gmail.com \quad ORCID: \url{https://orcid.org/0000-0002-7149-6635}
 \end{center}
 
 \section*{Abstract}
-Large language models (LLMs) are used as judges of the quality of explanations. That
-use assumes that different judges give the same
-explanation the same score. This study measures that agreement. Three LLM judges scored
-<<sum:cases:value:d>> post-hoc explanations (SHAP, LIME, Anchors, DiCE; three tabular
-datasets) on seven dimensions with a 1--5 rubric, in two panels of different models. The
-second panel also varied the prompt, repeated every call three times and scored the cases
-again without metrics or outcome
-(<<rsum:calls.total:value:int>> calls). Agreement was measured with the intraclass
-correlation ICC(1,1). Over all cases no dimension reached 0.75 in either panel (highest
-values <<sum:orig.icc_max:value:u3>> and <<sum:primary.icc_max:value:u3>>). But up to
-<<rsum:between.max:value:pct>>\% of the score variance lay between explanation
-methods. Among SHAP cases no dimension exceeded
-<<rsum:shap.icc_max_any:value:u2>> and the scores hardly varied. Among LIME cases five
-dimensions exceeded 0.6, but only through <<rsum:zero.lime:value:w>> records whose weights
-all printed as zero; without them the highest of the five was
-<<rsum:lime_nonzero.primary3.icc_max5:value:u2>>. The mean of the three judges was reliable for separating
-methods, not explanations. With the metrics in the prompt the overall score followed
-fidelity within every method, and one judge named a metric in
-<<beh:claude|primary1:names_metric_share:pct>>\% of its answers. Without them that judge
-scored higher, the correlation vanished for SHAP and DiCE, and agreement on audit
-usefulness fell from <<rel:primary1|all|audit_usefulness:icc_1_1:u2>> to
-<<rel:clean|all|audit_usefulness:icc_1_1:u2>>. A single LLM judge of this class should
-not be used as a confirmatory measure. Studies using them should report
-agreement within method, the number of calls and what the prompt contained.
+Large language models (LLMs) are used as judges of the quality of explanations, which
+assumes that different judges give the same explanation the same score. Three LLM
+judges scored <<sum:cases:value:d>> post-hoc
+explanations (SHAP, LIME, Anchors, DiCE; three tabular datasets) on seven dimensions with
+a 1--5 rubric, in two panels. The second panel also varied the
+prompt, repeated every call three times, scored the cases again without metrics or
+outcome, and scored <<rsum:cases.shap_lime_nonzero:value:d>> SHAP and LIME explanations
+made worse in two known ways. Over all cases the intraclass correlation ICC(1,1) was
+moderate at best (highest values
+<<sum:orig.icc_max:value:u3>> and <<sum:primary.icc_max:value:u3>>), and up to
+<<rsum:between.max:value:pct>>\% of the score variance lay between explanation methods.
+Among SHAP and LIME explanations with a non-zero weight the highest value was
+<<rel:primary3|shap_lime_nonzero|completeness:icc_1_1:u2>>; among SHAP cases none exceeded
+<<rsum:shap.icc_max_any:value:u2>>, because the cases received nearly the same score. When
+seven of ten items were removed, every judge lowered completeness and its ICC rose from
+<<pci:original|shap_lime_nonzero|completeness:icc_1_1:u2>> to
+<<pci:original+truncated|shap_lime_nonzero|completeness:icc_1_1:u2>>. When the weights
+were assigned to the wrong features, one judge of three lowered semantic plausibility and
+agreement did not rise. With the metrics in the prompt, one judge named a metric in
+<<beh:claude|primary1:names_metric_share:pct>>\% of its answers; without them it
+scored higher and agreement on audit usefulness fell from
+<<rel:primary1|all|audit_usefulness:icc_1_1:u2>> to
+<<rel:clean|all|audit_usefulness:icc_1_1:u2>>. Judges of this class agreed on the method
+and on the visible form of an explanation, not on whether it was right. A single judge
+should not be used as a confirmatory measure, and studies should report agreement
+within method.
 
 \noindent\textbf{Keywords:} explainable artificial intelligence; LLM-as-a-judge;
 inter-rater reliability; explanation evaluation; intraclass correlation.
 
 \section*{Resumen}
-Los modelos de lenguaje de gran tama\~no (LLM) se usan como jueces de la calidad de las
-explicaciones. Ese uso supone que jueces
-distintos punt\'uan igual la misma explicaci\'on. Este estudio lo comprueba. Tres
-jueces LLM puntuaron <<sum:cases:value:d>> explicaciones post hoc (SHAP, LIME, Anchors,
-DiCE; tres conjuntos de datos tabulares) en siete dimensiones con una r\'ubrica de 1 a 5,
-en dos paneles. El segundo vari\'o el \emph{prompt}, repiti\'o
-cada llamada tres veces y puntu\'o los casos de nuevo sin m\'etricas ni resultado
-(<<rsum:calls.total:value:int>> llamadas). Con todos los casos, ninguna dimensi\'on
-alcanz\'o una correlaci\'on intraclase ICC(1,1) de 0.75 en ning\'un
-panel (m\'aximos: <<sum:orig.icc_max:value:u3>> y <<sum:primary.icc_max:value:u3>>). Pero hasta el
-<<rsum:between.max:value:pct>>\% de la varianza estaba entre m\'etodos.
-En SHAP ninguna dimensi\'on super\'o <<rsum:shap.icc_max_any:value:u2>> y las
-puntuaciones casi no variaron. En LIME cinco dimensiones superaron 0.6, pero solo por
-cinco registros con todos los pesos impresos como cero; sin ellos el m\'aximo fue
-<<rsum:lime_nonzero.primary3.icc_max5:value:u2>>. La media de los tres
-jueces fue fiable para separar m\'etodos, no explicaciones. Con las m\'etricas en el
-\emph{prompt}, la puntuaci\'on global sigui\'o la fidelidad en cada m\'etodo, y un juez
-nombr\'o una m\'etrica en el <<beh:claude|primary1:names_metric_share:pct>>\% de sus
-respuestas. Sin ellas ese juez puntu\'o m\'as alto, la correlaci\'on desapareci\'o para
-SHAP y DiCE, y la concordancia en utilidad para auditor\'ia baj\'o de
+Los modelos de lenguaje (LLM) se usan como jueces de la calidad de las
+explicaciones, lo que supone que jueces distintos las punt\'uan igual.
+Tres jueces LLM puntuaron <<sum:cases:value:d>> explicaciones (SHAP, LIME, Anchors, DiCE; tres conjuntos de datos tabulares) en siete
+dimensiones con una r\'ubrica de 1 a 5, en dos paneles. El segundo vari\'o el
+\emph{prompt}, repiti\'o cada llamada tres veces, puntu\'o los casos de nuevo sin
+m\'etricas ni resultado, y puntu\'o <<rsum:cases.shap_lime_nonzero:value:d>> explicaciones
+SHAP y LIME empeoradas de dos maneras conocidas. Con todos los casos, la correlaci\'on
+intraclase ICC(1,1) fue como m\'aximo moderada (m\'aximos:
+<<sum:orig.icc_max:value:u3>> y <<sum:primary.icc_max:value:u3>>), y hasta el
+<<rsum:between.max:value:pct>>\% de la varianza estaba entre m\'etodos. En las
+explicaciones SHAP y LIME con alg\'un peso no nulo el m\'aximo fue
+<<rel:primary3|shap_lime_nonzero|completeness:icc_1_1:u2>>; en SHAP ninguna dimensi\'on
+super\'o <<rsum:shap.icc_max_any:value:u2>>, porque los casos recibieron casi la misma
+puntuaci\'on. Al quitar siete de diez elementos, todos los jueces bajaron la completitud
+y su ICC subi\'o de <<pci:original|shap_lime_nonzero|completeness:icc_1_1:u2>> a
+<<pci:original+truncated|shap_lime_nonzero|completeness:icc_1_1:u2>>. Al asignar los pesos
+a variables equivocadas, uno de tres jueces baj\'o la plausibilidad sem\'antica y la
+concordancia no subi\'o. Con las m\'etricas en el \emph{prompt}, un juez nombr\'o una
+m\'etrica en el <<beh:claude|primary1:names_metric_share:pct>>\% de sus respuestas; sin
+ellas puntu\'o m\'as alto y la concordancia en utilidad para auditor\'ia baj\'o de
 <<rel:primary1|all|audit_usefulness:icc_1_1:u2>> a
-<<rel:clean|all|audit_usefulness:icc_1_1:u2>>. Un solo juez LLM de esta clase no deber\'ia
-usarse como medida confirmatoria. Los estudios que los usen deber\'ian informar la
-concordancia por m\'etodo, el n\'umero de llamadas y el contenido del \emph{prompt}.
+<<rel:clean|all|audit_usefulness:icc_1_1:u2>>. Los jueces de esta clase coincidieron en
+el m\'etodo y en la forma visible de la explicaci\'on, no en si era correcta. Un solo juez
+no deber\'ia usarse como medida confirmatoria, y conviene informar la concordancia por
+m\'etodo.
 
 \noindent\textbf{Palabras clave:} inteligencia artificial explicable; LLM como juez;
 fiabilidad entre evaluadores; evaluaci\'on de explicaciones; correlaci\'on intraclase.
@@ -147,9 +150,8 @@ on the evaluation of post-hoc explanations assembled for this work, only
 A judge can stand in for a human rater only if it is first reliable, that is, if another
 judge of the same kind gives the same explanation the same score. Reliability is the
 weaker requirement and comes before validity: a score that changes with the judge cannot
-be valid for a property of the explanation. This paper measures it. Three LLM judges
-scored <<sum:cases:value:d>> explanations on seven dimensions, in two panels of different
-models. Four questions are answered:
+be valid for a property of the explanation. This paper measures it and answers five
+questions:
 
 \begin{enumerate}
 \item Do three LLM judges agree on the score of an explanation, on each dimension?
@@ -158,6 +160,7 @@ models. Four questions are answered:
 are aggregated?
 \item Do the scores follow the technical metrics of the explanation, and what remains
 when the judges are not shown them?
+\item Do the judges agree inside a method when explanations are made worse in a known way?
 \end{enumerate}
 
 \section{Materials and methods}
@@ -175,10 +178,7 @@ and <<sum:cases.dataset.breast_cancer:value:d>> from Breast Cancer Wisconsin
 explainers: <<sum:cases.explainer.anchors:value:d>> Anchors,
 <<sum:cases.explainer.shap:value:d>> SHAP, <<sum:cases.explainer.lime:value:d>> LIME and
 <<sum:cases.explainer.dice:value:d>> DiCE explanations. LIME and DiCE cases come from
-Adult only. Sampling was stratified by the outcome of the prediction
-(<<sum:cases.quadrant.TP:value:d>> true positives, <<sum:cases.quadrant.TN:value:d>> true
-negatives, <<sum:cases.quadrant.FP:value:d>> false positives and
-<<sum:cases.quadrant.FN:value:d>> false negatives).
+Adult only. Sampling was stratified by the outcome of the prediction.
 
 Each case is a record with the dataset, the model family, the explainer, the prediction,
 the outcome of the prediction (TP, TN, FP or FN), the explanation as text and the
@@ -189,12 +189,8 @@ attributions the method produced, for example ``worst area: $-$0.1336; worst per
 $-$0.0935; \ldots''. In <<rsum:zero.lime:value:w>> LIME records all ten weights are
 below 0.00005 and print as zero. For Anchors and DiCE it does not hold the explanation in its own
 form: an anchor rule appears as weights of one for the features of the rule and zero for
-the others, without thresholds (``education-num: 1.0000; capital-gain: 1.0000; age:
-0.0000; \ldots''), and a counterfactual appears as the size of the change of each
-feature, without direction, new value or new outcome (``age: 1.6182; fnlwgt: 0.0000;
-\ldots''). The median number of zero-weight items is
-<<sum:render.zero_items_median.anchors:value:d>> of ten for Anchors and
-<<sum:render.zero_items_median.dice:value:d>> for DiCE. The
+the others, without thresholds, and a counterfactual appears as the size of the change
+of each feature, without direction, new value or new outcome. The
 <<rsum:cases.shap_lime:value:d>> SHAP and LIME cases are therefore the main analysis; the
 <<rsum:cases.anchors_dice:value:d>> Anchors and DiCE cases are reported beside them as
 scores of that rendering.
@@ -211,11 +207,14 @@ Flash (Google), with temperature 0. Its prompt templates and raw responses were 
 kept; its aggregate tables were, and they are the source of its values here. The study
 was therefore run again on the same cases with a second panel, GPT-5.4 mini, Claude Haiku
 4.5 and Gemini 3.8 Flash, also with temperature 0, with templates rebuilt from the
-recorded rubric. The second run is a second measurement, not a reproduction: besides the
-models, the two runs differ in the templates, in the output limit and in the cases with
-scores from the three judges (<<sum:orig.icc_n:value:d>> against all
-<<sum:cases:value:d>>), and the prompt condition and aggregation behind the tables of the
-first are not recorded.
+recorded rubric. Its calls were made through the OpenRouter gateway, on 27 September 2026
+for the first three conditions below and on 5 October 2026 (UTC) for the fourth and
+for the control; Gemini 3.8
+Flash returned reasoning tokens in every response and the other two judges in none. The
+second run is a second measurement, not a reproduction: the runs also differ in the
+templates, the output limit and the cases with three scores
+(<<sum:orig.icc_n:value:d>> against <<sum:cases:value:d>>), and the condition and
+aggregation behind the first panel's tables are not recorded.
 
 The second panel scored every case under four prompt conditions:
 
@@ -230,12 +229,21 @@ label is given. Three calls.
 technical metrics, no outcome of the prediction and no true label. One call.
 \end{itemize}
 
-The first three conditions have a defect that was found after they were run: the record
-contains the outcome of the prediction, which together with the prediction gives the true
-label, and it contains the technical metrics. In those conditions the judges therefore
-scored an explanation with its label and its metrics in view. The clean condition was
-added to remove both. Of the <<rsum:calls.total:value:int>> calls,
+The first three conditions have a defect found after they were run: the record
+contains the technical metrics and the outcome of the prediction, which with the
+prediction gives the true label. The clean condition was added to remove both. Of the <<rsum:calls.total:value:int>> calls,
 <<rsum:calls.parsed:value:int>> returned valid scores.
+
+A positive control was run last. The
+<<rsum:cases.shap_lime_nonzero:value:d>> SHAP and LIME cases with a non-zero weight were
+scored once by each judge, in the prompt of the clean condition, in three versions: the
+stored text; a \emph{truncated} text with only the three items of largest absolute
+weight; and a \emph{shuffled} text in which the ten weights keep their order and the ten
+feature names are reassigned so that none keeps its weight. Shuffling leaves the form
+intact and makes the content wrong; a judge, which sees no model, can notice it only
+from the meaning of the features. The expected effects, lower completeness and lower semantic plausibility, and
+the analysis were written down before the run. Of its 711 calls,
+<<pcs:calls.parsed:value:d>> returned valid scores.
 
 \subsection{Statistical analysis}
 
@@ -243,27 +251,29 @@ Agreement among the three judges was measured per dimension with the intraclass
 correlation ICC(1,1), the one-way random-effects coefficient for a single rater
 \cite{shrout1979intraclass}, with its exact 95\% confidence interval from the $F$
 distribution. A dimension is said to have good reliability when the coefficient is 0.75
-or more \cite{koo2016guideline}. Krippendorff's ordinal alpha
+or more, and moderate reliability from 0.5 to 0.75 \cite{koo2016guideline}. Krippendorff's ordinal alpha
 \cite{krippendorff2004reliability}, computed as a check, differed from the ICC by at
 most <<sum:orig.alpha_diff_max:value:u2>> in the first panel and
-<<sum:primary.alpha_diff_max:value:u3>> in the second. For the first
-panel the ICC uses the <<sum:orig.icc_n:value:d>> cases with three scores.
+<<sum:primary.alpha_diff_max:value:u3>> in the second.
 
 For the second panel the coefficient of the primary condition is given in three forms:
-with the three calls of a judge averaged per case, as in the first analysis of these data;
+with the three calls of a judge averaged per case;
 for one call, the first; and as ICC(1,$k$), the reliability of the mean of the three
 judges. Two-way
 coefficients, ICC(2,1) for absolute agreement and ICC(3,1) for consistency, are reported
 as a check of the model, and the share of pairs of judges with the same score as a
 description. To separate agreement on the explanation from agreement on the method, the
 share of the variance of the case-level mean score that lies between explainers was
-computed, and the ICC was computed inside each explainer.
+computed, and the ICC was computed inside each explainer and for the SHAP and LIME cases
+together, with and without the zero-weight records. Because a coefficient is low both
+when judges disagree and when cases do not differ, the standard deviation of the three
+scores of the judges for one case is given beside that of the case-level means.
 
-Three sensitivity views are reported for the second panel: the label-stated condition,
-the alternative rubric, and a pooled view in which the nine scores of a judge for a case
-are averaged. Test-retest agreement is the share of case-and-judge pairs with the same
+A pooled view averages the nine scores of a judge for a case. Test-retest agreement is the share of case-and-judge pairs with the same
 score in the three calls. The effect of a prompt change is the mean difference in score,
-paired by case.
+paired by case. For the control that difference has a percentile interval from 4,000
+bootstrap resamples of the cases, and the ICC is computed over the stored and the changed
+texts together.
 
 The relation between scores and technical metrics was analysed within each explainer with
 Spearman correlations between the overall-quality score, averaged over judges, and
@@ -280,13 +290,12 @@ was computed, and the clean condition was specified before it was run.
 Table~\ref{tab:icc} gives the agreement per dimension over all cases. In the first panel
 the highest ICC was <<sum:orig.icc_max:value:u3>> (semantic plausibility); in the second
 it was <<sum:primary.icc_max:value:u3>> (completeness). No dimension reached 0.75 in
-either. In the second panel the upper confidence bounds of
-<<rsum:primary3.n_ci_upper_above_075:value:w>> dimensions, completeness and audit
-usefulness, were above 0.75. The order of the dimensions differed between the two runs:
-audit usefulness rose from <<first:audit_usefulness:icc_1_1:s3>> to
-<<rel:primary3|all|audit_usefulness:icc_1_1:s3>>, and clarity and actionability fell to
-about zero. Given the differences between the runs listed above, this cannot be
-attributed to the judges alone.
+either. In the second panel four dimensions were moderate, from
+<<rel:primary3|all|semantic_plausibility:icc_1_1:s3>> to
+<<rel:primary3|all|completeness:icc_1_1:s3>>, and the upper confidence bounds of
+<<rsum:primary3.n_ci_upper_above_075:value:w>>, completeness and audit
+usefulness, were above 0.75. The order of the dimensions differed between the two runs,
+which, given their differences, cannot be attributed to the judges alone.
 
 \begin{table}[t]
 \centering
@@ -313,26 +322,20 @@ Actionability & <<first:actionability:icc_1_1:s3>> & <<rel:primary3|all|actionab
 \end{tabular}
 \end{table}
 
-The form of the estimate matters. With one call per judge, which is how a judge is
+With one call per judge, which is how a judge is
 normally used, the coefficients of the five dimensions with some agreement were lower
 (completeness <<rel:primary1|all|completeness:icc_1_1:s3>>). The mean of the three judges was more
 reliable: its ICC(1,$k$) was 0.75 or more on
 <<rsum:primary3.n_icc1k_above_075:value:w>> dimensions. The two-way coefficients did not
-change the reading for absolute agreement (completeness
-<<rel:primary3|all|completeness:icc_2_1:s3>>); for consistency, which ignores a constant
-difference between judges, completeness was
-<<rel:primary3|all|completeness:icc_3_1:s3>> and concision
-<<rel:primary3|all|concision:icc_3_1:s3>>.
+change the reading (completeness <<rel:primary3|all|completeness:icc_2_1:s3>> for absolute
+agreement and <<rel:primary3|all|completeness:icc_3_1:s3>> for consistency).
 
 The scores used a narrow part of the scale. For overall quality,
 <<rsum:overall.modal_share:value:pct>>\% of the scores were
-<<rsum:overall.modal_score:value:d>>, and two judges gave the same score in
-<<rel:primary1|all|overall_quality:pair_exact:pct>>\% of the cases and scores within one
-point in <<rel:primary1|all|overall_quality:pair_within_1:pct>>\%. For actionability
+<<rsum:overall.modal_score:value:d>>. For actionability
 <<sum:primary.actionability_share_1:value:pct>>\% of the scores were 1, so the judges
 almost always agreed and the coefficient, which needs differences between cases, is near
-zero. For clarity one judge hardly varied its score (standard deviation
-<<sum:primary.clarity_sd_min:value:u2>>) and scored on average
+zero. For clarity one judge scored on average
 <<sum:primary.clarity_offset_min_sd_judge:value:u2>> points below the other two.
 
 \subsection{Agreement on the explanation or on the method}
@@ -340,26 +343,40 @@ zero. For clarity one judge hardly varied its score (standard deviation
 Most of the variation that the judges agreed on was variation between explainers
 (Table~\ref{tab:within}). The share of the variance of the case-level mean score that
 lay between explainers was <<btw:completeness:between_explainer_share:pct>>\% for
-completeness (<<btw:completeness:between_explainer_share_adult:pct>>\% among the
-<<rsum:cases.adult:value:d>> Adult cases alone), <<btw:overall_quality:between_explainer_share:pct>>\% for overall quality
-and <<btw:audit_usefulness:between_explainer_share:pct>>\% for audit usefulness. Inside
-an explainer the picture changes (Figure~\ref{fig:icc}). Among the
+completeness, <<btw:overall_quality:between_explainer_share:pct>>\% for overall quality
+and <<btw:audit_usefulness:between_explainer_share:pct>>\% for audit usefulness; dataset
+and model family together explained <<btw:completeness:dataset_model_share:pct>>\% of the
+variance of completeness. Among the <<rsum:cases.shap_lime:value:d>> SHAP and LIME cases,
+the main analysis, the ICC was <<rel:primary3|shap_lime|completeness:icc_1_1:s2>> for
+completeness and <<rel:primary3|shap_lime|overall_quality:icc_1_1:s2>> for overall
+quality. Without the <<rsum:zero.lime:value:w>> zero-weight LIME records
+(<<rsum:cases.shap_lime_nonzero:value:d>> cases) the highest was
+<<rel:primary3|shap_lime_nonzero|completeness:icc_1_1:s2>> (completeness; 95\% interval
+<<rel:primary3|shap_lime_nonzero|completeness:ci_lower:s2>> to
+<<rel:primary3|shap_lime_nonzero|completeness:ci_upper:s2>>) and overall quality was
+<<rel:primary3|shap_lime_nonzero|overall_quality:icc_1_1:s2>>.
+
+Inside an explainer agreement was lower still (Figure~\ref{fig:icc}). Among the
 <<sum:cases.explainer.shap:value:d>> SHAP cases no dimension exceeded
-<<rsum:shap.icc_max:value:u2>> (<<rsum:shap.icc3_max:value:u2>> under ICC(3,1)), and
+<<rsum:shap.icc_max:value:u2>> (<<rsum:shap.icc3_max:value:u2>> under ICC(3,1); highest
+upper bound <<rsum:shap.primary3.ci_upper_max:value:u2>>), and
 the scores hardly varied: the standard deviation of the case-level mean was
 <<rel:primary3|shap|completeness:sd_case_mean:u2>> for completeness and
-<<rel:primary3|shap|overall_quality:sd_case_mean:u2>> for overall quality, and two judges
-gave the same completeness score in
-<<rel:primary1|shap|completeness:pair_exact:pct>>\% of the cases. The judges did not
-separate one SHAP explanation from another, which the coefficient cannot tell from
-disagreement. Among the <<sum:cases.explainer.lime:value:d>> LIME cases agreement was
+<<rel:primary3|shap|overall_quality:sd_case_mean:u2>> for overall quality. The judges were not
+further apart on a SHAP case than on any other: the standard deviation of their three
+completeness scores for one case was <<rel:primary3|shap|completeness:sd_within:u2>> among
+the SHAP cases and <<rel:primary3|all|completeness:sd_within:u2>> over all cases. The
+coefficient is low because the SHAP cases received nearly the same score, and it cannot
+say whether they differ in quality. Among the <<sum:cases.explainer.lime:value:d>> LIME cases agreement was
 between <<rel:primary3|lime|overall_quality:icc_1_1:s2>> and
 <<rel:primary3|lime|audit_usefulness:icc_1_1:s2>> on five dimensions, but it came from the
 <<rsum:zero.lime:value:w>> records whose weights print as zero, which every judge scored
 <<rsum:lime_zero.overall_max:value:d>> for overall quality in every call. Among the other
 <<rsum:cases.lime_nonzero:value:d>> the same five coefficients were between
 <<rsum:lime_nonzero.primary3.icc_min5:value:s2>> and
-<<rsum:lime_nonzero.primary3.icc_max5:value:s2>>. For Anchors and DiCE, as rendered, the
+<<rsum:lime_nonzero.primary3.icc_max5:value:s2>> (interval of the highest,
+<<rel:primary3|lime_nonzero|audit_usefulness:ci_lower:s2>> to
+<<rel:primary3|lime_nonzero|audit_usefulness:ci_upper:s2>>). For Anchors and DiCE, as rendered, the
 highest coefficient was <<rsum:anchors_dice.icc_max:value:u2>>.
 
 \begin{table}[t]
@@ -388,7 +405,7 @@ Actionability & <<btw:actionability:between_explainer_share:pct>>\% & <<rel:prim
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/fig1}
+\includegraphics[width=0.7\linewidth]{figures/fig1}
 \caption{ICC(1,1) among three LLM judges per dimension in the primary condition of the
 second panel, for all cases and for the cases of one explainer, with 95\% confidence
 intervals. The dashed line is the 0.75 threshold of good reliability.}
@@ -397,40 +414,16 @@ intervals. The dashed line is the 0.75 threshold of good reliability.}
 
 \subsection{Rubric wording, aggregation and repetition}
 
-Table~\ref{tab:views} gives the ICC of the second panel, over all cases, under the three
-sensitivity views. The alternative rubric moved agreement in both directions: concision
+Over all cases and against the label-stated condition, the alternative rubric moved the
+ICC of the second panel in both directions: concision
 rose from <<view:concision|stated:icc_1_1:s3>> to <<view:concision|alt:icc_1_1:s3>>,
 clarity fell from <<view:clarity|stated:icc_1_1:s3>> to
 <<view:clarity|alt:icc_1_1:s3>>, and completeness reached
-<<view:completeness|alt:icc_1_1:s3>>. It moved the scores by up to
-<<sum:rubric.shift_maxabs:value:u2>> points (median over judges and dimensions
-<<sum:rubric.shift_medianabs:value:u2>>). In the pooled view
+<<view:completeness|alt:icc_1_1:s3>>. In the pooled view
 <<sum:n_above_075.pooled_all_conditions:value:w>> dimensions exceeded 0.75, completeness
 (<<view:completeness|pooled:icc_1_1:s3>>) and audit usefulness
 (<<view:audit_usefulness|pooled:icc_1_1:s3>>): averaging nine scores removes the
 variation between repeated calls and raises the coefficient.
-
-\begin{table}[t]
-\centering
-\caption{ICC(1,1) of the second panel under three sensitivity views
-(<<sum:cases:value:d>> cases). Pooled: the nine scores of a judge for a case (three
-conditions, three calls) are averaged before the coefficient is computed.}
-\label{tab:views}
-\small
-\begin{tabular}{lccc}
-\toprule
-Dimension & Label stated & Alternative rubric & Pooled \\
-\midrule
-Completeness & <<view:completeness|stated:icc_1_1:s3>> & <<view:completeness|alt:icc_1_1:s3>> & <<view:completeness|pooled:icc_1_1:s3>> \\
-Semantic plausibility & <<view:semantic_plausibility|stated:icc_1_1:s3>> & <<view:semantic_plausibility|alt:icc_1_1:s3>> & <<view:semantic_plausibility|pooled:icc_1_1:s3>> \\
-Overall quality & <<view:overall_quality|stated:icc_1_1:s3>> & <<view:overall_quality|alt:icc_1_1:s3>> & <<view:overall_quality|pooled:icc_1_1:s3>> \\
-Audit usefulness & <<view:audit_usefulness|stated:icc_1_1:s3>> & <<view:audit_usefulness|alt:icc_1_1:s3>> & <<view:audit_usefulness|pooled:icc_1_1:s3>> \\
-Concision & <<view:concision|stated:icc_1_1:s3>> & <<view:concision|alt:icc_1_1:s3>> & <<view:concision|pooled:icc_1_1:s3>> \\
-Clarity & <<view:clarity|stated:icc_1_1:s3>> & <<view:clarity|alt:icc_1_1:s3>> & <<view:clarity|pooled:icc_1_1:s3>> \\
-Actionability & <<view:actionability|stated:icc_1_1:s3>> & <<view:actionability|alt:icc_1_1:s3>> & <<view:actionability|pooled:icc_1_1:s3>> \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Repeated calls with temperature 0 did not always return the same score. Over the seven
 dimensions, Claude Haiku 4.5 gave the same score in its three calls in
@@ -439,13 +432,11 @@ cases, Gemini 3.8 Flash in <<sum:retest.gemini.min:value:pct>>\% to
 <<sum:retest.gemini.max:value:pct>>\% and GPT-5.4 mini in
 <<sum:retest.gpt.min:value:pct>>\% to <<sum:retest.gpt.max:value:pct>>\%.
 
-Stating the label changed the scores by <<sum:label.shift_maxabs:value:u2>> points at
-most. Since the primary condition already allowed the label to be derived, that
-comparison is not a test. A direct one is available: in the primary condition the mean
-overall-quality score was <<rsum:label.mean_correct:value:u2>> for cases with a correct
-prediction and <<rsum:label.mean_wrong:value:u2>> for cases with a wrong one (Mann-Whitney
-$p =$ <<rsum:label.mwu_p:value:p>>). The judges could know whether the model was right,
-and it did not move the score.
+The judges could derive whether the model was right, and it did not move the score: in
+the primary condition the mean overall-quality score was
+<<rsum:label.mean_correct:value:u2>> for cases with a correct prediction and
+<<rsum:label.mean_wrong:value:u2>> for cases with a wrong one (Mann-Whitney
+$p =$ <<rsum:label.mwu_p:value:p>>).
 
 \subsection{Scores and the technical metrics}
 
@@ -454,7 +445,11 @@ With the metrics printed in the prompt, the overall-quality score followed them
 correlation from <<post:anchors|overall_quality|fidelity:spearman_rho:u2>> to
 <<post:lime|overall_quality|fidelity:spearman_rho:u2>>), in all four after Holm's
 correction. Of the other 16 correlations two remained after the correction: stability for
-Anchors and sparsity for LIME, the latter on few distinct values.
+Anchors and sparsity for LIME. The latter was raised by the <<rsum:zero.lime:value:w>>
+zero-weight records, the only LIME cases with a sparsity of zero: among the other
+<<rsum:cases.lime_nonzero:value:d>> it was <<lnz:primary3|sparsity:spearman_rho:s2>>
+(unadjusted $p =$ <<lnz:primary3|sparsity:p_value:p>>), while the correlation with
+fidelity stayed at <<lnz:primary3|fidelity:spearman_rho:s2>>.
 
 \begin{table}[t]
 \centering
@@ -477,20 +472,19 @@ DiCE (<<sum:cases.explainer.dice:value:d>>) & <<post:dice|overall_quality|fideli
 \end{tabular}
 \end{table}
 
-The rationales show the same thing directly, and show that the judges differed. A metric
-(fidelity, stability, sparsity or faithfulness) was named in the rationales of
+The rationales show the same thing, and that the judges differed. A metric
+was named in the rationales of
 <<beh:claude|primary1:names_metric_share:pct>>\% of the responses of Claude Haiku 4.5,
 <<beh:gpt|primary1:names_metric_share:pct>>\% of GPT-5.4 mini and
 <<beh:gemini|primary1:names_metric_share:pct>>\% of Gemini 3.8 Flash.
 
 \subsection{The clean condition}
 
-In the clean condition the judges saw the explanation without its metrics, the outcome of
-the prediction or the label; all <<rsum:calls.clean:value:d>> calls returned valid scores.
-Table~\ref{tab:clean} compares it with one call of the primary condition.
+Table~\ref{tab:clean} compares the clean condition with one call of the primary
+condition; all <<rsum:calls.clean:value:d>> calls returned valid scores.
 
-First, the judge that had named the metrics most often scored differently without them.
-The mean score of Claude Haiku 4.5 rose on every dimension, by
+First, the mean score of Claude Haiku 4.5, the judge that had named the metrics most
+often, rose on every dimension, by
 <<cshift:claude|overall_quality:mean_shift:u2>> points for overall quality and
 <<cshift:claude|audit_usefulness:mean_shift:u2>> for audit usefulness; the mean
 overall-quality scores of the other two judges moved by
@@ -505,14 +499,15 @@ for DiCE, <<cfid:primary1|lime:spearman_rho:s2>> for LIME and
 <<cfid:clean|shap:spearman_rho:s2>> for SHAP and <<cfid:clean|dice:spearman_rho:s2>> for
 DiCE, and <<cfid:clean|lime:spearman_rho:s2>> for LIME and
 <<cfid:clean|anchors:spearman_rho:s2>> for Anchors, neither of which remained after
-Holm's correction over the four tests. For SHAP and DiCE the score had followed the
-printed number; for LIME and Anchors something visible in the rendered explanation goes
-with fidelity.
+Holm's correction over the four tests; among the <<rsum:cases.lime_nonzero:value:d>>
+LIME cases with a non-zero weight it was <<lnz:clean|fidelity:spearman_rho:s2>>. For SHAP
+and DiCE the score had followed the printed number, and for LIME part of what remained
+came from the zero-weight records.
 
 Third, agreement over all cases fell where the metrics had fed it most: audit usefulness
 from <<rel:primary1|all|audit_usefulness:icc_1_1:s2>> to
-<<rel:clean|all|audit_usefulness:icc_1_1:s2>> (95\% interval of the change, from 4,000
-bootstrap resamples of the cases, <<chg:audit_usefulness:ci_lower:s2>> to
+<<rel:clean|all|audit_usefulness:icc_1_1:s2>> (95\% bootstrap interval of the change,
+<<chg:audit_usefulness:ci_lower:s2>> to
 <<chg:audit_usefulness:ci_upper:s2>>) and completeness from
 <<rel:primary1|all|completeness:icc_1_1:s2>> to <<rel:clean|all|completeness:icc_1_1:s2>>
 (<<chg:completeness:ci_lower:s2>> to <<chg:completeness:ci_upper:s2>>). The intervals of
@@ -527,8 +522,7 @@ therefore not produced by the metrics in the prompt.
 \begin{table}[t]
 \centering
 \caption{ICC(1,1) of the second panel with one call per judge, in the primary condition
-(metrics, outcome and derivable label in the prompt) and in the clean condition (none of
-them), for all cases and inside SHAP and LIME (all <<sum:cases.explainer.lime:value:d>>
+and in the clean condition, for all cases and inside SHAP and LIME (all <<sum:cases.explainer.lime:value:d>>
 cases).}
 \label{tab:clean}
 \small
@@ -548,67 +542,99 @@ Actionability & <<rel:primary1|all|actionability:icc_1_1:s2>> & <<rel:primary1|s
 \end{tabular}
 \end{table}
 
+\subsection{The positive control}
+
+Truncation was seen by every judge. Completeness fell by
+<<pc:truncated|claude|completeness:mean_shift:u2>>,
+<<pc:truncated|gemini|completeness:mean_shift:u2>> and
+<<pc:truncated|gpt|completeness:mean_shift:u2>> points for the three judges (mean
+<<pc:truncated|mean|completeness:mean_shift:s2>>; 95\% interval
+<<pc:truncated|mean|completeness:ci_lower:s2>> to
+<<pc:truncated|mean|completeness:ci_upper:s2>>). Over the stored and
+truncated texts together the ICC of completeness was
+<<pci:original+truncated|shap_lime_nonzero|completeness:icc_1_1:s2>>
+(<<pci:original+truncated|shap_lime_nonzero|completeness:ci_lower:s2>> to
+<<pci:original+truncated|shap_lime_nonzero|completeness:ci_upper:s2>>), against
+<<pci:original|shap_lime_nonzero|completeness:icc_1_1:s2>> for the stored texts alone. The
+judges agreed on the
+direction, not on the amount: the ICC of the fall itself was
+<<pc:truncated|mean|completeness:icc_of_shift:s2>>, and overall quality fell by
+<<pc:truncated|mean|overall_quality:mean_shift:u2>> points with an ICC over both sets of
+<<pci:original+truncated|shap_lime_nonzero|overall_quality:icc_1_1:s2>>.
+
+Shuffling was not seen alike. The mean semantic-plausibility score of the three judges
+fell by <<pc:shuffled|mean|semantic_plausibility:mean_shift:u2>> points
+(<<pc:shuffled|mean|semantic_plausibility:ci_lower:s2>> to
+<<pc:shuffled|mean|semantic_plausibility:ci_upper:s2>>), which meets the rule fixed before
+the run, through one judge: Gemini 3.8 Flash lowered it by
+<<pc:shuffled|gemini|semantic_plausibility:mean_shift:u2>>, and the other two moved by
+<<pc:shuffled|claude|semantic_plausibility:mean_shift:s2>> and
+<<pc:shuffled|gpt|semantic_plausibility:mean_shift:s2>>. The ICC over the stored and
+shuffled texts did not rise
+(<<pci:original+shuffled|shap_lime_nonzero|semantic_plausibility:icc_1_1:s2>> against
+<<pci:original|shap_lime_nonzero|semantic_plausibility:icc_1_1:s2>>), and overall quality
+did not move (<<pc:shuffled|mean|overall_quality:mean_shift:s2>>;
+<<pc:shuffled|mean|overall_quality:ci_lower:s2>> to
+<<pc:shuffled|mean|overall_quality:ci_upper:s2>>). An explanation whose weights belonged
+to other features received the scores of the correct one.
+
 \section{Discussion}
 
-The first question has a negative answer in both panels: over all cases no dimension
-reached good agreement. The second question changes what that answer means. A coefficient
-of about 0.7 over all cases suggests judges that are close to usable. Most of it was
-agreement that SHAP records deserve higher scores than Anchors or DiCE records. Inside
-a method, where a user would want a judge to tell a better explanation from a worse one,
-the judges gave SHAP explanations nearly the same score and agreed on LIME explanations
-only in giving the lowest score to those with no visible weight, with or without the
-metrics in the prompt. A study that reports one agreement coefficient over
-explanations of several methods is reporting, in large part, that its judges can tell the
-methods apart.
+On the first question, agreement over all cases was moderate at best in both panels,
+and no dimension reached good agreement. The second question changes what that means.
+Most of the agreement was that SHAP records deserve higher scores than Anchors or DiCE records.
+Inside a method, where a user would want a judge to tell a better explanation from a
+worse one, the judges gave the stored explanations nearly the same score, with or without
+the metrics in the prompt. A study that reports one agreement coefficient over
+explanations of several methods is reporting, in large part, that its judges can tell
+the methods apart. The mean of the three judges was reliable over all cases, so a panel
+can rank methods consistently; whether that ranking is right is a question of validity
+that these data cannot answer.
 
-The same decomposition limits what the mean of a panel offers. The mean of the three
-judges was reliable over all cases, so a panel can rank methods consistently. It was not
-shown to rank explanations of one method, and whether its ranking of methods is right is
-a question of validity that these data cannot answer.
+The fifth question says how to read the low coefficients inside a method. They are not a
+general failure to agree: when most of an explanation was removed, the three judges
+lowered completeness alike and the coefficient reached 0.6. They agreed on what shows in
+the form of the text, a list that is shorter or has no weight; the stored explanations of
+one method share one form. Two of the three did not notice an explanation whose content
+was wrong. For these judges and this rendering, a score describes how an explanation
+looks more than whether it is faithful.
 
-The third question has a practical answer. Rewording the rubric moved the ICC of
-concision by about 0.3 and that of clarity in the opposite direction. Averaging repeated
-calls and prompt variants before computing the coefficient raised two dimensions above
-the threshold, because the average hides the variation of a judge with itself, and that
-variation is not small: with temperature 0 one judge repeated its score almost always and
-another in fewer than half of the cases on some dimensions.
+On the third question, the coefficient moved with the rubric wording, and averaging
+repeated calls raised it because the average hides the variation of a judge with itself,
+which with temperature 0 was small for one judge and large for another.
 
-The fourth question shows that what is put in the prompt becomes part of what is
-measured. One judge used the printed metrics heavily, said so in its rationales and
-scored higher without them; the other two hardly changed. For SHAP and DiCE the relation
-between score and fidelity existed only while fidelity was printed. A judge that is given
-technical metrics may return them in another form, and then its score adds no independent
-evidence about meaning.
+On the fourth question, what is put in the prompt becomes part of what is measured: a
+judge that is given technical metrics may return them in another form, and then its
+score adds no independent evidence about meaning.
 
 The study has limits. It measures agreement among LLM judges and has no human scores, so
 it says nothing about whether the judges are right. Both panels are small, low-cost
 models, and the conclusions are limited to that class. The templates and responses of
-the first panel were lost, so its condition and aggregation are unknown, the second run
-is not a reproduction, and the decomposition by explainer cannot be made for it. Anchors
+the first panel were lost, so the decomposition by explainer cannot be made for it. Anchors
 and DiCE were scored in a rendering that is not their own; their scores, the floor of
 actionability and part of the variance between explainers may come from it. The cases
-are unbalanced across explainers and datasets, so variance between explainers is partly
-variance between datasets, and the groups inside an explainer are small. A low
-coefficient inside a method does not separate judges that disagree from cases that do not
-differ. The clean condition removes metrics, outcome and label together and has one call
-per judge. Except for the ICC of the primary
-condition, the analyses were planned after the first responses existed.
+are unbalanced across explainers, datasets and model families, and the groups inside an
+explainer are small. A finding about one judge is about one model. The clean condition removes
+metrics, outcome and label together, and it and the control have one call per judge. The
+control has two changes, and whether the stored explanations of a method differ in
+quality remains unknown without a reference.
 
 \section{Conclusions}
 
-Three small LLM judges did not reach good agreement on any of seven dimensions of
-explanation quality, in two panels (highest ICC(1,1) <<sum:orig.icc_max:value:u3>> and
-<<sum:primary.icc_max:value:u3>>). What agreement there was concerned mainly the method:
+Three small LLM judges reached at best moderate agreement on seven dimensions of
+explanation quality, in two panels. What agreement there was concerned mainly the method:
 up to <<rsum:between.max:value:pct>>\% of the variance of the scores lay between
-explainers, and inside a method the judges separated little beyond the explanations with
-no visible weight, with or without technical metrics in the prompt. The mean of three judges was reliable for
-comparing methods and unverified for comparing explanations. Scores changed with the
-rubric wording, with repetition and with the content of the prompt, where one judge
-largely restated the metrics it was shown. A single LLM judge of this class should not be
-used as a confirmatory measure of the quality of an explanation. Studies that use LLM
-judges should report agreement within each method, the number of calls per item, the
-aggregation rule and what the prompt contained. The comparison with human raters and the
-scoring of rules and counterfactuals in their own form are the next steps.
+explainers. Inside a method the judges gave the stored explanations nearly the same
+score, with or without technical metrics in the prompt; they agreed when most of an
+explanation was removed, and two of three did not notice weights assigned to the wrong
+features. Scores changed with the rubric wording, with repetition and with the content
+of the prompt, where one judge largely restated the metrics it was shown. A
+single LLM judge of this class should not be used as a confirmatory measure of the
+quality of an explanation. Studies that use LLM judges should report agreement within
+each method, the number of calls per item, the aggregation rule and what the prompt
+contained, and should include explanations of known lower quality. The comparison with
+human raters and the scoring of rules and counterfactuals in their own form are the next
+steps.
 
 \section*{Data availability}
 \iffull
