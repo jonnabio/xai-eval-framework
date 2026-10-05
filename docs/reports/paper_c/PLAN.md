@@ -1,7 +1,8 @@
 # Paper C plan: LLM judges as evaluators of explanations
 
-**Dated:** 2026-10-04. **Status:** proposed; waits for the author's approval. No analysis in
-sections 6 and 7 has been run for this paper.
+**Dated:** 2026-10-04. **Status:** approved by the author on 2026-10-04, to be adjusted as
+the work goes; every adjustment is dated here. Section 14 records two findings made after the
+approval that change claims 3 and section 7.
 
 **Basis:** ADR-0022 and its amendment of 2026-10-04; ADR-0017 (how cohort 2 is reported);
 `docs/review/paper-c-resurrection-assessment_2026-10-04.md`; RCA-001 and RCA-002.
@@ -19,7 +20,8 @@ Panels and with Human Raters". The last clause stays only if section 6 is comple
 1. On 192 explanations, three LLM judges do not reach an ICC(1,1) of 0.75 on any of seven
    rubric dimensions in the label-hidden condition. This holds in two judge panels.
 2. The margin and the ranking of dimensions change between panels.
-3. Showing the true label barely moves the scores; rubric wording moves them more.
+3. Rubric wording moves the scores. The comparison with and without the true label is
+   **not** a test of label bias: see section 14.1.
 4. Test-retest agreement at temperature 0 differs between judges.
 5. Crossing 0.75 depends on the prompt condition and on pooling over replicates.
 
@@ -151,6 +153,12 @@ condition the mean judge score for overall quality had a Spearman correlation of
 with fidelity, 0.5 with stability and 0.7 with sparsity over the 192 cases. Those values mix
 explainers and datasets and are not reported.
 
+**Added 2026-10-04, before the analysis was run.** The judges were shown the technical
+metrics of each explanation (section 14.2). An association between scores and metrics can
+therefore come from the judges reading the numbers. The analysis is run as fixed below and is
+reported as "how closely the scores follow the metrics shown in the prompt", not as evidence
+that the judges recover technical quality from the explanation.
+
 **Analysis, fixed here before it is run**
 
 - Data: cohort 2, label-hidden, mean of the three judges and three replicates per case.
@@ -229,12 +237,57 @@ explainers and datasets and are not reported.
 - **Floor effect.** 86% of actionability scores are 1 in the primary condition; its ICC is
   not informative.
 
-## 13. Decisions for the author
+## 13. Author decisions (2026-10-04)
 
-1. Approve or change this plan, in particular the cut-off dates and the two fallbacks.
-2. Language of the paper: English (planned) or Spanish.
-3. Sample of 56 by equal allocation (section 6), or another size within 50 to 60.
-4. Who the two raters are, and whether the second reviewer of the corpus is one of them.
-5. Author list.
-6. The AI-use statement the journal's policy asks for.
-7. Whether to ask the editor about a second submission to the same issue before sending it.
+1. The plan is approved and is adjusted as the work goes.
+2. The paper is written in English.
+3. The human sample has 56 cases, 7 per dataset-by-explainer cell.
+4. The two raters are not the second reviewer of the corpus; they are different people.
+5. Single author: Jonathan Herrera-Vásquez.
+6. The AI-use statement is the one used in Paper D.
+7. The editor is not asked about a second submission to the same issue, for now.
+
+## 14. Findings after approval
+
+### 14.1 The label-hidden prompts reveal the label (2026-10-04)
+
+- **Evidence.** All 192 rendered prompts of `hidden_label_primary` in
+  `experiments/exp4_cohort2/prompts/` set `true_label` to null and also print the field
+  `quadrant` (TP, FN, TN or FP) next to `prediction`. The two together give the true label.
+  The other two conditions print the true label and the quadrant.
+- **Consequence.** In cohort 2 no condition withholds the true label. The contrast between
+  `label_visible_bias_probe` and `hidden_label_primary` compares a label stated outright with
+  a label that can be derived. That its effect is small (largest mean shift 0.14 points) does
+  not show that the judges ignore the label.
+- **Original cohort.** Its prompts are lost; whether they printed the quadrant is not known.
+- **In the paper.** The primary condition is named by what it does (true-label field
+  withheld, error quadrant shown). Claim 3 of section 1 is limited to rubric wording. The
+  finding is stated in the methods and in the limitations.
+- **Outside this lane.** The 32-page edition and the thesis chapter 5 describe the condition
+  as label-hidden. They are not changed from this lane; the thesis lane must check its text.
+
+### 14.2 The judges were shown the technical metrics (2026-10-04)
+
+- **Evidence.** All 576 rendered prompts print `technical_metrics` (fidelity, stability,
+  sparsity, faithfulness gap, runtime, cost) inside the case record, and the prompt text says
+  so.
+- **Consequence.** The judges scored an explanation together with its metrics. Section 7
+  cannot separate what the judges infer from the explanation from what they read in the
+  numbers. The title phrase "what do their scores follow" is answered only in that limited
+  sense.
+
+### 14.3 Human raters see the same record (2026-10-04)
+
+The rating sheets show the case record of the primary condition as the judges received it,
+including the quadrant and the technical metrics, so that people and judges rate the same
+material. Seven fields without content for a reader (identifiers, file path, seed, sample
+size, token count) are left out of the sheet; they are listed in
+`scripts/draw_human_sample.py`.
+
+### 14.4 Option for the author: a clean condition
+
+A fourth prompt condition that shows the explanation without the quadrant, the true label and
+the technical metrics would repair 14.1 and 14.2: 192 cases by 3 judges by 1 replicate is 576
+calls, about a ninth of the cost of cohort 2 (US$20.24). It is a new cohort under RCA-002, it
+is run on the `exp4-cohort2` lane, and it needs the API key. It is not run unless the author
+decides so.
