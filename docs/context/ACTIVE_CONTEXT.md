@@ -1,19 +1,21 @@
 # Active Context: XAI Evaluation Framework
 
-## Publication status - 2026-10-04
+## Publication status - 2026-10-05
 
-**Journal account request (2026-10-04):** the author confirmed sending the
-Spanish account-creation request to `revistatm@tec.ac.cr`, following Tecnología
-en Marcha's registration page. Reply and account access instructions are pending.
-This does not change Paper D's recorded emailed-submission status. Details:
-`docs/reports/paper_d/README.md`.
+**Correction (author, 2026-10-05): Paper D is not submitted.** *Tecnología en Marcha*
+takes submissions through an author account; the email of 2026-10-03 with the manuscript
+is not a valid submission. The author asked for the account on 2026-10-04 by email to
+`revistatm@tec.ac.cr`; the reply is pending. Papers C and D are both ready and both wait
+for that account. Deadline of the special issue: 2026-10-15. Earlier entries of this file
+and `docs/reports/paper_d/README.md` that call Paper D submitted are superseded by this
+note; the README belongs to lane `paper-d` and is not yet corrected.
 
 | Paper | Venue | Status | Submission / publication record |
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
 | **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `main`, approved by the author, registered, 15 Word pages; **ready, not submitted**: the author sends it when the journal's author account exists (deadline 2026-10-15) | Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
-| **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
+| **D** | *Tecnología en Marcha*, AI special issue | **Ready, not submitted**: waits for the journal's author account (deadline 2026-10-15) | Author account requested 2026-10-04; the email of 2026-10-03 is not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
 
