@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f4658b35cc204bfb",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b146f9bfe7f5814a",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_f4658b35cc204bfb_8f4336c67ac47b4f.txt",
+  "prompt_version": "8f4336c67ac47b4f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165420-zovybels7QZ9T8SdrU73",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003527,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002435,
+        "upstream_inference_cost": 0.003527,
+        "upstream_inference_prompt_cost": 0.001092
+      },
+      "is_byok": false,
+      "prompt_tokens": 1092,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1579
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f4658b35cc204bfb\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what changes would alter the prediction or how to act on this information. No recourse paths or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The normalized scores and feature rankings enable inspection of which features the model weighted most heavily, supporting basic model behavior auditing. However, the lack of actual feature values and counterfactual context limits deeper bias investigation.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with numerical scores\u2014and requires minimal domain knowledge to parse. However, the meaning of the scores and their interpretation could be clearer to non-experts.\",\n    \"completeness\": \"The explanation covers the top drivers (native-country and occupation) but omits the actual feature values for the instance, making it difficult to understand the full local decision context. The many zero-valued features suggest incomplete information about what actually influenced the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores in a ranked format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides basic feature importance information but lacks actionability, instance-specific context, and interpretability guidance. It reads as a raw model output rather than a polished explanation suitable for decision support or auditing.\",\n    \"semantic_plausibility\": \"The identified factors (Honduras origin and Sales occupation) are plausible predictors in income classification tasks, and the ranking is coherent with typical model behavior on the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:05.029493+00:00"
+}

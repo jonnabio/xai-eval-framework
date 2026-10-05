@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_87cd000a736af034",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_60f604202ab9cb5c_34f932616bd4811a.txt",
+  "prompt_version": "34f932616bd4811a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165444-IgaQ5sVOpxKccod8eqHC",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020925,
+        "upstream_inference_cost": 0.0027975,
+        "upstream_inference_prompt_cost": 0.000705
+      },
+      "is_byok": false,
+      "prompt_tokens": 940,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1405
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the outcome. It only lists features and values without indicating what a user could do differently.\",\n    \"audit_usefulness\": \"It gives some local feature signals, but the values are oddly encoded as mostly 0.0000 or 1.0000, which limits interpretability. An auditor would not be able to reliably inspect the model logic or assess feature influence from this output alone.\",\n    \"clarity\": \"The wording is simple, but the content is not clearly explained for a non-expert because the output is just a raw feature list. It lacks narrative structure, relationships, or an explanation of how the listed factors support the prediction.\",\n    \"completeness\": \"The explanation names several local factors, but it does not state whether they favor class 1 or oppose it, nor their relative importance. This leaves out key decision context needed to understand the specific prediction.\",\n    \"concision\": \"It is fairly short and contains only the most basic information, but much of that information is not useful without interpretation. So it is concise, but not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is readable in a superficial sense but provides little meaningful understanding of the model's decision. The raw feature listing limits both interpretability and practical usefulness.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the breast cancer dataset, and anchors-style local factors are consistent with the method. However, the 0/1-valued presentation is semantically odd for a feature explanation and reduces credibility.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:27.236708+00:00"
+}

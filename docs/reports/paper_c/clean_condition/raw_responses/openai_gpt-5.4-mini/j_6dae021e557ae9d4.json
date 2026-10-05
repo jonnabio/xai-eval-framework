@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_df5a815f94424dc9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6dae021e557ae9d4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_df5a815f94424dc9_982d24c90d4fc6d6.txt",
+  "prompt_version": "982d24c90d4fc6d6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165405-fEIFcpTNXoxRcZBGOhHQ",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002904,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022005,
+        "upstream_inference_cost": 0.002904,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1427
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_df5a815f94424dc9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It only lists feature contributions with no guidance on what could change the prediction.\",\n    \"audit_usefulness\": \"It is only weakly useful for auditing because it shows a sparse set of local feature weights, but the all-or-nothing values and lack of directionality make it hard to inspect model behavior thoroughly. An auditor cannot tell whether the listed factors increased or decreased the prediction.\",\n    \"clarity\": \"The wording is short and easy to parse, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely not understand what kind of explanation this is or how to interpret the numbers.\",\n    \"completeness\": \"The explanation omits the actual direction and magnitude of influence of the features on the predicted class. It also fails to connect these anchors to the specific instance in a way that would let someone understand why prediction 0 was made.\",\n    \"concision\": \"The output is compact and contains little redundancy. However, it is so terse and generic that the brevity comes at the expense of useful explanatory content.\",\n    \"overall_quality\": \"Overall, this is a low-quality explanation for a local prediction because it is terse, under-specified, and not very interpretable. It gives some feature names but not enough information to understand or validate the specific decision.\",\n    \"semantic_plausibility\": \"The listed adult dataset features are plausible for a logistic regression explanation, and the format resembles an anchors-style output. However, the presence of several features at 1.0000 and others at 0.0000 without any narrative context makes the explanation only moderately plausible as a human-readable justification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:47.461180+00:00"
+}

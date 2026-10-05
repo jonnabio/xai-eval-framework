@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e9eba60d9edc4d8a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c01c1c1dad358098",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_e9eba60d9edc4d8a_78be1c3f9a6dbce4.txt",
+  "prompt_version": "78be1c3f9a6dbce4",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165184-yH8OQt9Kxq0ozPvd7NNU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002949,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002241,
+        "upstream_inference_cost": 0.002949,
+        "upstream_inference_prompt_cost": 0.000708
+      },
+      "is_byok": false,
+      "prompt_tokens": 944,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1442
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e9eba60d9edc4d8a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features and their directions, but it does not translate them into concrete recourse steps or indicate what a user could change. It is therefore useful for understanding the score, but not for taking action.\",\n    \"audit_usefulness\": \"The SHAP values provide a localized ranking of feature contributions, which is helpful for inspecting which attributes influenced the XGBoost prediction. However, it lacks baseline values, feature values, and any comparison to similar cases, so deeper auditing remains limited.\",\n    \"clarity\": \"The wording is short and mostly easy to follow for a general reader, with a clear top-factors format. Still, the meaning of positive versus negative SHAP values is not explained, so a non-expert may not fully interpret the directions.\",\n    \"completeness\": \"It identifies the main local drivers behind the prediction, but only as a ranked list of attributions. The explanation omits the actual feature values, the model output probability, and how strongly these factors combine to yield class 0.\",\n    \"concision\": \"The explanation is compact and presents the top factors without obvious redundancy. It conveys a fair amount of local information in few tokens, though the lack of context limits its utility per word.\",\n    \"overall_quality\": \"This is a reasonably good SHAP summary for a tabular prediction because it is concise and locally informative. Its main weakness is that it does not explain the sign convention or connect the attributions to practical understanding or recourse.\",\n    \"semantic_plausibility\": \"The listed breast cancer features, such as worst radius, perimeter, area, and concave points, are highly plausible drivers for a tumor classification model. The mix of positive and negative contributions is also consistent with a real local explanation for this domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:53:06.702860+00:00"
+}

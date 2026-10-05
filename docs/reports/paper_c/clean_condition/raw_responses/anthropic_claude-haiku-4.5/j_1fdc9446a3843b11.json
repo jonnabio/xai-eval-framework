@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9be4c2983f0c443c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1fdc9446a3843b11",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_9be4c2983f0c443c_079a1ce526a65624.txt",
+  "prompt_version": "079a1ce526a65624",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165466-MB4by3sMkdN7uf0xWNNJ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003422,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002325,
+        "upstream_inference_cost": 0.003422,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9be4c2983f0c443c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this information.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 and 0.0) are useful for identifying which features anchor the decision, but lack threshold values, direction of effect, or instance-specific feature values needed for thorough model auditing.\",\n    \"clarity\": \"The format is straightforward and uses familiar feature names from the breast cancer dataset, but the meaning of normalized anchor weights and their relationship to the prediction is not explained for non-experts.\",\n    \"completeness\": \"Only two features are identified as anchors; the explanation lacks the actual feature values for the instance, decision thresholds, confidence intervals, or precision metrics that would fully contextualize the local decision.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing anchor weights across all features without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides minimal actionable insight despite correct identification of top anchors; it lacks sufficient context, interpretation, and decision support for clinical or audit use.\",\n    \"semantic_plausibility\": \"Identifying area error and worst texture as key drivers for breast cancer classification is plausible given their known clinical relevance, though the explanation does not articulate why these features matter.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:51.106078+00:00"
+}

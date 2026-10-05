@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e631caf4bcd73b87",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_3debbe632feba167_03d5e3bf1687d7a7.txt",
+  "prompt_version": "03d5e3bf1687d7a7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165406-E6sOapg1QZnqaLlclZVs",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00283575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00283575,
+        "upstream_inference_prompt_cost": 0.00070275
+      },
+      "is_byok": false,
+      "prompt_tokens": 937,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1411
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"It does not provide any concrete recourse or next steps for the individual, such as which feature changes would alter the prediction. The output is descriptive only and offers no feasible actions.\",\n    \"audit_usefulness\": \"The explanation gives a sparse list of local factors, but most values are zero and it lacks directionality or comparison against alternatives, so it is weak for diagnosing model behavior. An auditor cannot tell why these features matter or how they influenced the class 0 prediction.\",\n    \"clarity\": \"The text is brief and easy to parse, but the meaning of \\\"top local factors\\\" is not explained and the many zero-valued entries are confusing. A non-expert would likely struggle to interpret what the numbers imply about the prediction.\",\n    \"completeness\": \"It includes only a handful of feature names and almost no informative contribution values, so the main drivers of the prediction are not actually revealed. There is no threshold, counterfactual, or class-specific reasoning to support the local decision.\",\n    \"concision\": \"The explanation is short and mostly avoids redundancy, but this comes at the cost of useful information. It is compact without being especially informative.\",\n    \"overall_quality\": \"As a local explanation, it is under-specified and not very informative, though it is at least syntactically clear and plausible. Overall it provides limited insight into the model's decision and little value for review or recourse.\",\n    \"semantic_plausibility\": \"The listed features are standard Adult dataset attributes and the output format is broadly plausible for a DICE summary. However, the dominance of zero-valued factors makes the explanation feel weak and not very semantically informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:49.459158+00:00"
+}

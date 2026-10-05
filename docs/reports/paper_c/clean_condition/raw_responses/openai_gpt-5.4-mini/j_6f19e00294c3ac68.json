@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a2878ddc3d3b22b3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6f19e00294c3ac68",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_a2878ddc3d3b22b3_fee690bec8bdb5c7.txt",
+  "prompt_version": "fee690bec8bdb5c7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165438-D1RL2nqn7RUAVM7iJO4T",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021825,
+        "upstream_inference_cost": 0.00289425,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1434
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a2878ddc3d3b22b3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps for the individual, beyond listing factors with coefficients. It does not say what changes would affect the prediction or which features are actionable.\",\n    \"audit_usefulness\": \"It provides some local feature values, so an auditor can see which inputs were present, but the numbers are not clearly tied to direction of impact or model reasoning. Because most listed factors are zero, it is only weakly informative for inspecting the prediction.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the numbers is unclear to a non-expert. Terms like 'top local factors' and raw values without direction or comparison make the explanation hard to interpret.\",\n    \"completeness\": \"It lists only a few features and mostly shows zero values, without indicating whether they increased or decreased the predicted class. Key local decision information such as the counterfactual effect, feature importance signs, or a comparison to the alternative class is missing.\",\n    \"concision\": \"The explanation is compact and contains little filler. However, it is so terse that it sacrifices interpretability, so the brevity is helpful only to a limited extent.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is brief but not very interpretable, actionable, or diagnostic. It offers some local feature listing, but not enough structure or context to explain the prediction well.\",\n    \"semantic_plausibility\": \"The content is plausible for an Adult dataset instance and a DICE-based local explanation, since age and workclass are relevant features. However, the appearance of many zero-valued 'top local factors' is odd and makes the explanation look only partially coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:21.745852+00:00"
+}

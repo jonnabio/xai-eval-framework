@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d023daa14008ec9f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_636acbcad2a09395_ddc7f390fe7951ec.txt",
+  "prompt_version": "ddc7f390fe7951ec",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165347-SUJEcAH6kq4zzsfqsffa",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00280425,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002097,
+        "upstream_inference_cost": 0.00280425,
+        "upstream_inference_prompt_cost": 0.00070725
+      },
+      "is_byok": false,
+      "prompt_tokens": 943,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1409
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps; it only lists feature presence/importance values. A user cannot tell what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It offers limited audit value because it identifies a few local features but provides no directionality, thresholding logic, or comparison to the negative class. An auditor cannot infer why the model predicted class 1 beyond the presence of these anchors.\",\n    \"clarity\": \"The wording is simple enough, but the output is mostly a raw feature list with unexplained 1.0000 and 0.0000 values. A non-expert would struggle to understand what these numbers mean in the context of the prediction.\",\n    \"completeness\": \"It names some local factors, but not enough to reconstruct the decision or understand their relative influence. Key information such as whether these anchors support the positive class and what other relevant factors were absent is missing.\",\n    \"concision\": \"The explanation is short and avoids padding, but much of the content is not informative because it repeats zero-valued features. It is compact, though not maximally informative per word.\",\n    \"overall_quality\": \"The explanation is structurally neat but shallow: it highlights a few anchors without explaining how they justify the prediction. Overall it is only moderately useful for understanding the local decision.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the German credit domain, and the anchor-style format is consistent with the stated method. However, the all-ones and all-zeros presentation is not very interpretable semantically without additional context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:49.616887+00:00"
+}

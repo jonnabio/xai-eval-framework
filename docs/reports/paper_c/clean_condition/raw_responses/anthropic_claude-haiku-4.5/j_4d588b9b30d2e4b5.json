@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d793ddda2393ae14",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4d588b9b30d2e4b5",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_d793ddda2393ae14_4d59ee4c1b979c22.txt",
+  "prompt_version": "4d59ee4c1b979c22",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165415-vV9f6H9ylBSI86AukNPa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003508,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00242,
+        "upstream_inference_cost": 0.003508,
+        "upstream_inference_prompt_cost": 0.001088
+      },
+      "is_byok": false,
+      "prompt_tokens": 1088,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1572
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d793ddda2393ae14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two key features but provides no guidance on how to interpret them or what actions could be taken to change the prediction or understand the decision.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchor the prediction, the binary importance scores (1.0 vs 0.0) lack nuance and the explanation does not reveal feature values, thresholds, or decision boundaries needed for thorough model auditing.\",\n    \"clarity\": \"The format is straightforward and uses standard feature names, but the meaning of the normalized scores and why only two features have non-zero importance is not explained for a non-expert reader.\",\n    \"completeness\": \"The explanation identifies only two anchoring features with high importance, but omits actual feature values, decision thresholds, and context about why these features dominate, leaving gaps in local decision understanding.\",\n    \"concision\": \"The explanation is compact but includes many zero-valued features that add little information; a more concise version listing only non-zero anchors would be more efficient.\",\n    \"overall_quality\": \"The explanation provides minimal actionable insight despite correct identification of top features; the binary importance encoding and lack of feature values or thresholds significantly limit its utility for decision review or auditing.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst perimeter are known morphological predictors and their dominance is plausible, though the complete absence of other mean features is somewhat surprising and warrants scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:59.460445+00:00"
+}

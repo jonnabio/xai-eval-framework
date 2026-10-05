@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3830b6d4d8e8784b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b1d170e789b0b52f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_3830b6d4d8e8784b_ca85829b70d46ec1.txt",
+  "prompt_version": "ca85829b70d46ec1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165400-QTmitobnKtsEyqX4Ngdu",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00281625,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002106,
+        "upstream_inference_cost": 0.00281625,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1415
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3830b6d4d8e8784b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps for the user. It only lists feature values and offers no guidance on what could be changed to alter the prediction.\",\n    \"audit_usefulness\": \"It provides only a sparse list of local factors and no directional effect, rule semantics, or comparison to baseline behavior. An auditor could not reliably inspect why the model predicted class 0 from this alone.\",\n    \"clarity\": \"The text is short and readable, but the meaning of the numeric values is unclear to a non-expert, especially for anchors-style output. It lacks a plain-language summary of what the listed factors mean for the prediction.\",\n    \"completeness\": \"The explanation omits the actual anchor rule, its precision/coverage, and whether the listed features support or oppose the class 0 prediction. Without those local decision details, it is incomplete.\",\n    \"concision\": \"It is very compact and contains little redundancy, but it is also sparse to the point of losing useful information. The word economy comes at the expense of explanatory content.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is terse, not actionable, and not sufficiently informative about the model's decision process. It is somewhat readable, but it does not support understanding or review of the specific prediction well.\",\n    \"semantic_plausibility\": \"The feature names are plausible for the Adult dataset, and the output format resembles an explanation artifact. However, listing several features with 0.0000 alongside only two at 1.0000 without interpretation is not semantically informative for the prediction context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:42.251072+00:00"
+}

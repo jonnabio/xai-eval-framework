@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a138a3019aad47d9",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_b0c125cb3b8db599",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_a138a3019aad47d9_44b5a44bf38ee3c5.txt",
+  "prompt_version": "44b5a44bf38ee3c5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165415-Mtu8IF0Qt1EIjqQpWCfM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002985,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022815,
+        "upstream_inference_cost": 0.002985,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1445
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_a138a3019aad47d9\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse steps or explain what change would alter the prediction in a meaningful way. It only lists features with numeric values, most of which are zero, so a user cannot derive any practical next action.\",\n    \"audit_usefulness\": \"For auditing, it offers very limited insight because it does not state whether the listed values increase or decrease the predicted class, nor does it quantify directional contributions beyond one apparent dominant factor. This makes it hard to inspect model behavior or identify potential spurious reliance on features.\",\n    \"clarity\": \"The wording is simple, but the content is cryptic because the numbers are not explained and many zero-valued features are listed without context. A non-expert would likely not understand what the scores mean or how they relate to the prediction.\",\n    \"completeness\": \"It includes only a sparse subset of local factors and omits a clear comparison to the alternative class or a full explanation of why prediction 0 was made. The dominant local driver is hinted at, but the decision context is far from complete.\",\n    \"concision\": \"The output is brief and avoids long-winded text, but much of the token budget is spent on uninformative zero entries. It is therefore compact in length but not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak local explanation: it is short and somewhat readable, but it lacks interpretation, decision logic, and useful recourse information. Its main value is as a raw feature listing rather than an explanation.\",\n    \"semantic_plausibility\": \"The content is plausible for a DICE-style tabular explanation on the Adult dataset, since hours-per-week and education-related variables are relevant. However, the heavy emphasis on zero-valued features without interpretation limits how well it matches a coherent explanation of the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:57.749849+00:00"
+}

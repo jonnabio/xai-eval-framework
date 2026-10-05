@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_99a1668d97e96675",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_e7770b140359bd75_12e1123f1176305e.txt",
+  "prompt_version": "12e1123f1176305e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165335-sOZEldpAmWPLsqkIHgUT",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003487,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00239,
+        "upstream_inference_cost": 0.003487,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1575
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key positive factors (education-num, occupation_Exec-managerial, relationship_Husband) but provides no guidance on how to interpret these or what actions a user might take based on this prediction.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchor the prediction and their relative importance through binary weights, enabling an auditor to inspect model behavior and identify potential bias patterns in the decision logic.\",\n    \"clarity\": \"The format is straightforward with feature names and weights clearly presented, though non-experts may struggle with feature encoding (e.g., education-num, occupation_Exec-managerial) without additional context.\",\n    \"completeness\": \"The explanation covers the main positive drivers (three features with weight 1.0) and shows that many other features have zero weight, providing reasonable local decision context for this prediction.\",\n    \"concision\": \"The explanation is compact and efficiently presents feature importance weights without redundancy, though the list of zero-weighted features adds some length without proportional information gain.\",\n    \"overall_quality\": \"The explanation provides a functional anchor-based summary of key decision factors with clear feature importance signals, but lacks interpretability aids and actionability for end users.\",\n    \"semantic_plausibility\": \"For an income prediction task, the combination of higher education, executive-managerial occupation, and married status (Husband) as positive predictors of higher income is highly plausible and consistent with domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 4,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:39.616169+00:00"
+}

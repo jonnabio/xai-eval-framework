@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e23de818fd8f8613",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_1b32b0cbedbc3601",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_e23de818fd8f8613_186134177398f4ff.txt",
+  "prompt_version": "186134177398f4ff",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165363-qyxuPn3WXw9SUy6AuSOM",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0029475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022455,
+        "upstream_inference_cost": 0.0029475,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1435
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e23de818fd8f8613\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only a list of local factors with binary presence values. A user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It reveals which features the anchor explanation considers locally sufficient, which is somewhat useful for inspection. However, the output is sparse and does not show directionality, thresholds, or how these conditions interact, limiting deeper audit value.\",\n    \"clarity\": \"The wording is concise and readable, but the meaning of the 1.0000 and 0.0000 values is not explained to a non-expert. A reader can identify feature names, yet may not understand why some are listed as top local factors while others are zeroed out.\",\n    \"completeness\": \"It includes only a few anchor conditions and then a long tail of zero-valued features, without explaining the model\u2019s full reasoning for predicting class 1. Key local context such as feature contributions, certainty, or the target class interpretation is missing.\",\n    \"concision\": \"The output is short and not padded, but much of it is low-information repetition of zero values. It could be more compact by emphasizing the true anchor rules and omitting irrelevant zeros.\",\n    \"overall_quality\": \"This is a partial explanation: it is understandable and somewhat useful for checking the anchor conditions, but it lacks actionable guidance and a fuller account of why the model predicted the positive class. Overall it is adequate but far from excellent.\",\n    \"semantic_plausibility\": \"The listed anchors are plausible for German credit data, especially checking status, purpose, and savings status as relevant credit-risk factors. The presence of many zero-valued features is also consistent with an anchors-style explanation, even if the formatting is not very informative.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:06.141158+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e7770b140359bd75",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_ba55a32a2e317535",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_e7770b140359bd75_12e1123f1176305e.txt",
+  "prompt_version": "12e1123f1176305e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165328-aA3qp5w6YQbPyMB6igVw",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00284325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.00284325,
+        "upstream_inference_prompt_cost": 0.00070125
+      },
+      "is_byok": false,
+      "prompt_tokens": 935,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1411
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_e7770b140359bd75\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for the person affected by the prediction. It only lists features and weights, so it does not tell the user what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It provides some local feature signals, but the output is too sparse and partly uninformative because several features are zeroed out without explanation. An auditor can see which features were considered important, but not how they combine or whether the logic is stable.\",\n    \"clarity\": \"The format is readable and the feature names are recognizable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely struggle to interpret why these are the top local factors.\",\n    \"completeness\": \"Only three features receive nonzero importance, and no directionality or threshold logic is given. That leaves out key local decision context needed to understand why the model predicted class 1.\",\n    \"concision\": \"The explanation is compact and avoids extra wording. However, it is terse to the point that it omits important interpretation details, so the brevity comes at the cost of usefulness.\",\n    \"overall_quality\": \"Overall, this is a minimal anchor-style explanation that is partially informative but not very actionable or complete. It is acceptable for a quick glance at influential features, but not strong enough for robust understanding or review.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset and logreg prediction, especially education, occupation, and marital relationship. The all-or-nothing scores are consistent with an anchors-style output, though they are not very informative semantically.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:31.045107+00:00"
+}

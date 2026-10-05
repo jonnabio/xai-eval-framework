@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_18fe52436b35526b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_bccec5bce0a1b57f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_18fe52436b35526b_c87d163b9334c744.txt",
+  "prompt_version": "c87d163b9334c744",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165546-p88JgJijy3Ebdp0BxO7n",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003881,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002785,
+        "upstream_inference_cost": 0.003881,
+        "upstream_inference_prompt_cost": 0.001096
+      },
+      "is_byok": false,
+      "prompt_tokens": 1096,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1653
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_18fe52436b35526b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors but provides no guidance on how to interpret them, what thresholds matter, or what actions a user could take to change the prediction. No recourse or decision review pathway is suggested.\",\n    \"audit_usefulness\": \"While the explanation identifies multiple features with uniform weights (1.0), it offers no insight into relative importance, decision boundaries, or model logic that would help an auditor investigate bias or errors. The uniform weighting is suspicious and uninformative.\",\n    \"clarity\": \"The explanation is presented as a simple list of features with normalized weights, but lacks context about what these weights mean, why these features were selected, or how they interact. A non-expert would struggle to interpret the uniform 1.0 scores.\",\n    \"completeness\": \"The explanation lists ten features but omits critical information such as their actual values in this instance, the direction of influence, decision thresholds, or how these anchors collectively drive the prediction to class 1. Key local decision context is missing.\",\n    \"concision\": \"The explanation is compact in token count but redundant in content\u2014ten features all with identical 1.0 weights convey little information per word and suggest either a model artifact or poor anchor extraction rather than genuine feature importance differentiation.\",\n    \"overall_quality\": \"The explanation fails to provide meaningful insight into the prediction; uniform anchor weights across diverse features (age, education, workclass) lack semantic coherence and suggest either a technical failure or an uninformative extraction. It does not support understanding, auditing, or action.\",\n    \"semantic_plausibility\": \"The uniform 1.0 weighting across heterogeneous features (continuous age, categorical workclass, ordinal education-num) is implausible and contradicts domain expectations that different features should have different predictive importance in income classification.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:11.594938+00:00"
+}

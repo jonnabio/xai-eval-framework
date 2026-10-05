@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c523b5e4b177b22e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f18fa33327e2262e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_c523b5e4b177b22e_a091808404e2313a.txt",
+  "prompt_version": "a091808404e2313a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165336-ZoFEs0JFjAigoAXT3ksv",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00284775,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002133,
+        "upstream_inference_cost": 0.00284775,
+        "upstream_inference_prompt_cost": 0.00071475
+      },
+      "is_byok": false,
+      "prompt_tokens": 953,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1427
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c523b5e4b177b22e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but does not translate them into concrete recourse steps or suggest what a user should change. It helps identify what mattered, but not how to act on it.\",\n    \"audit_usefulness\": \"This is useful for a local audit because it reveals the top positive and negative SHAP contributors and their relative magnitudes. However, it lacks baseline values, directionality context, and any comparison to broader patterns, so audit value is only moderate.\",\n    \"clarity\": \"The feature list is easy to read and the sign convention is simple enough for a non-expert to follow. Still, terms like 'checking_status_<0' and raw SHAP values may require some interpretation.\",\n    \"completeness\": \"It includes the main local drivers of the prediction, but it does not explain the model output scale, the base value, or the combined effect on the final class 0 prediction. Without those, the decision context is incomplete.\",\n    \"concision\": \"The explanation is compact and mostly information-dense, with little redundancy. It could be slightly more efficient if grouped by positive and negative influence or summarized more directly.\",\n    \"overall_quality\": \"Overall this is a solid local feature-importance explanation: clear, compact, and useful for seeing which variables drove the prediction. Its main weakness is that it stops at attribution and does not provide decision context or actionable recourse.\",\n    \"semantic_plausibility\": \"The factors are highly plausible for German credit scoring, especially duration, checking status, credit amount, savings, employment, and housing. The mix of positive and negative contributions is consistent with a real tabular credit model explanation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:38.926384+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0ab8ed6bc65f8c5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_b639b955f42fcb60",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_a0ab8ed6bc65f8c5_4a54fa89e8e6cda1.txt",
+  "prompt_version": "4a54fa89e8e6cda1",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165544-SCpdwRLS1HZzHfp6KAQt",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00337,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002255,
+        "upstream_inference_cost": 0.00337,
+        "upstream_inference_prompt_cost": 0.001115
+      },
+      "is_byok": false,
+      "prompt_tokens": 1115,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1566
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a0ab8ed6bc65f8c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature contributions are effectively zero, providing no meaningful direction for recourse or decision modification; a user cannot identify which levers to adjust.\",\n    \"audit_usefulness\": \"The near-zero coefficients across all features offer minimal insight into model behavior and cannot support meaningful bias or error investigation; this suggests either a degenerate model state or a sampling/scaling issue worth auditing.\",\n    \"clarity\": \"The explanation is well-formatted and uses standard terminology, making it comprehensible to readers familiar with LIME and logistic regression coefficients.\",\n    \"completeness\": \"The explanation lists ten features but all show negligible contribution (\u00b10.0000), failing to convey which factors actually drove the prediction of class 1.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, though the information density is extremely low given that all values are effectively zero.\",\n    \"overall_quality\": \"The explanation is technically valid but substantively uninformative; it fails to explain why the model predicted class 1, suggesting a potential failure in the explanation generation or model fitting process.\",\n    \"semantic_plausibility\": \"Zero or near-zero contributions across diverse, contextually relevant features (education, occupation, marital status) is implausible for a meaningful prediction and contradicts expected model behavior on the adult income dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:08.723653+00:00"
+}

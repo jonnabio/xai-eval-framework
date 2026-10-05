@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d68ee28a2b213ee2",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e1c29937c794d0c5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_d68ee28a2b213ee2_cb0bffe8ea215025.txt",
+  "prompt_version": "cb0bffe8ea215025",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165447-x4a21NR6rPeQn684PEaO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002958,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022545,
+        "upstream_inference_cost": 0.002958,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1439
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d68ee28a2b213ee2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next step a user could take. It only lists features with binary-style weights, so it offers no guidance for changing the outcome or reviewing the decision.\",\n    \"audit_usefulness\": \"It gives some local signal about which attributes were involved, but the values are extremely coarse and unexplained, making it hard to assess whether the model behavior is sensible. An auditor cannot tell how strongly these features contributed or whether the rule is stable across similar cases.\",\n    \"clarity\": \"The wording is short and easy to parse, but the meaning of values like 1.0000 and 0.0000 is not explained. A non-expert would likely not understand whether these are feature importances, rule satisfactions, or something else.\",\n    \"completeness\": \"The explanation names a few top local factors, but it omits the actual decision rule, thresholds, feature values, and any indication of why the prediction is class 0. As a result, it only partially explains the specific local prediction.\",\n    \"concision\": \"It is very compact and contains little redundant text, so it is efficient per word. However, the brevity comes at the cost of interpretability and useful detail.\",\n    \"overall_quality\": \"This is a minimal anchor-style explanation that provides some local feature signals but not enough context for meaningful understanding or review. It is acceptable as a terse summary, but overall it is weak for both user understanding and model inspection.\",\n    \"semantic_plausibility\": \"For the breast cancer domain, perimeter and radius are plausible predictors, and it makes sense that these features appear near the top. Still, the all-or-nothing values without explanation are somewhat opaque and reduce confidence in the semantic interpretation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:29.874022+00:00"
+}

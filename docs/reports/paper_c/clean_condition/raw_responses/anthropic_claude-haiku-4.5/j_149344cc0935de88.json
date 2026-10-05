@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_149344cc0935de88",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_6ce495f3482aecc1_108311cfb5d39f1a.txt",
+  "prompt_version": "108311cfb5d39f1a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165508-MxrdSYED2asUA4ugqvCm",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003382,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002285,
+        "upstream_inference_cost": 0.003382,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1554
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two key features but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this prediction.\",\n    \"audit_usefulness\": \"The normalized weights (1.0 vs 0.0) clearly show which features anchor the prediction, enabling an auditor to verify model consistency and identify potential feature importance patterns.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but lacks context about what these texture and concavity measurements represent clinically or how they relate to the binary outcome.\",\n    \"completeness\": \"Only two features are highlighted as anchors while eight others are listed with zero weight; the explanation does not clarify whether zero weight means irrelevant or simply not selected by the anchor algorithm.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a tabular format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides interpretable feature importance but lacks clinical context, actionability, and clarity about the decision boundary, limiting its utility for non-technical stakeholders.\",\n    \"semantic_plausibility\": \"Texture and concave points are established morphological features in breast cancer diagnosis, making their selection plausible; however, the complete absence of other mean-based features raises questions about model behavior.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:33.225367+00:00"
+}

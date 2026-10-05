@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c04339897f75190f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_aaa7d30ecdf3467f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_c04339897f75190f_c2c34c3022351225.txt",
+  "prompt_version": "c2c34c3022351225",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165384-lvzpufGrLW2eArNcshaN",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00279675,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002088,
+        "upstream_inference_cost": 0.00279675,
+        "upstream_inference_prompt_cost": 0.00070875
+      },
+      "is_byok": false,
+      "prompt_tokens": 945,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1409
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_c04339897f75190f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next steps. It lists factors with directions and magnitudes, but a user cannot tell what changes would likely improve the outcome.\",\n    \"audit_usefulness\": \"For auditing, the ranked SHAP values are useful because they show which features pushed the model toward class 0 or away from it. However, it lacks baseline context, probability, and comparison to similar cases, so inspection of model behavior is only partial.\",\n    \"clarity\": \"The output is easy to parse as a list of feature contributions, but the meaning of positive versus negative values is not explained. A non-expert would likely understand the ranking only with some prior knowledge of SHAP.\",\n    \"completeness\": \"It covers several local drivers of the prediction, including duration, checking status, payment plans, and credit-related attributes. Still, it does not explain the class label meaning, the model's confidence, or how these factors combine into the final decision.\",\n    \"concision\": \"The explanation is compact and information-dense, with no obvious redundancy. It communicates the top local contributors in a small number of tokens.\",\n    \"overall_quality\": \"This is a reasonably good technical explanation for an expert audience, but it is limited for end users because it lacks interpretation and recourse guidance. Overall it is informative yet incomplete for fully understanding the specific prediction.\",\n    \"semantic_plausibility\": \"The feature effects are plausible for German credit risk: longer duration and weaker financial status indicators reasonably affect a lending decision. The directions of influence are coherent, though the class mapping is not explicit.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:26.918813+00:00"
+}

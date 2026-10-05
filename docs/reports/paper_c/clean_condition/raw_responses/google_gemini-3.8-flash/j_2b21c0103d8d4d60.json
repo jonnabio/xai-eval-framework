@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_2b21c0103d8d4d60",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_084efba639afd972_753bef1ebb1e7c55.txt",
+  "prompt_version": "753bef1ebb1e7c55",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165469-FzhT9fDMM4CWPpSi7XZ8",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1405,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 987,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.006078,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00526875,
+        "upstream_inference_cost": 0.006078,
+        "upstream_inference_prompt_cost": 0.00080925
+      },
+      "is_byok": false,
+      "prompt_tokens": 1079,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2484
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": true,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"Because no actual feature values, directional signs, or thresholds are specified, the user cannot determine what needs to change to alter the credit decision.\",\n    \"audit_usefulness\": \"The explanation lists features captured by the method, but stripping the predicate rules and coverage/precision metrics leaves an auditor unable to verify the model's exact decision boundary.\",\n    \"clarity\": \"The explanation presents raw feature names paired with an uninformative uniform value of 1.0000, making it confusing and difficult for a layperson to interpret.\",\n    \"completeness\": \"The output fails to convey whether these features are present, absent, or bounded by specific thresholds, missing critical local decision context.\",\n    \"concision\": \"While relatively brief, listing multiple one-hot encoded categories with identical dummy weights creates clutter without delivering real informational value.\",\n    \"overall_quality\": \"The explanation represents a degraded rule output where conditions and values have been flattened into unhelpful uniform weights, severely limiting its utility.\",\n    \"semantic_plausibility\": \"While the named attributes are standard German Credit risk factors, listing mutually exclusive states simultaneously (e.g., checking status <0 alongside no checking) without values creates domain incoherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:00.669009+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d8a899ad70b4c53f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d08202072f57322a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_d8a899ad70b4c53f_555b50bc76a3fe54.txt",
+  "prompt_version": "555b50bc76a3fe54",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165347-pOaUH1MQUZ0HvpZ945xD",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002982,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022725,
+        "upstream_inference_cost": 0.002982,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1451
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_d8a899ad70b4c53f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model output into any concrete recourse or user-facing next step. It only lists features with binary-like scores, so a person cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It gives some local feature signals, but the values are not interpretable as effect sizes or directions, and there is no threshold logic or comparative context. That limits its usefulness for diagnosing why the logreg model predicted class 1.\",\n    \"clarity\": \"The feature names are readable, but the format is cryptic because all top factors are shown with 1.0000 or 0.0000 without explanation of what those numbers mean. A non-expert would likely struggle to understand the significance of the listed factors.\",\n    \"completeness\": \"It names only a few features and omits the reasoning behind why they support the positive class, such as whether they increase or decrease the probability. The absence of rule conditions, confidence, or counterfactual context leaves the local decision only partially explained.\",\n    \"concision\": \"The explanation is short and contains little redundant text, but most of the tokens are spent on a sparse feature list that does not add much interpretive value. It is compact, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a weak explanation because it is terse and somewhat readable, but it lacks interpretability, decision context, and actionable guidance. It is only marginally useful for understanding or auditing the prediction.\",\n    \"semantic_plausibility\": \"The highlighted Adult dataset features are plausible drivers for a positive income prediction, especially capital gain, education, and marital status. However, the all-or-nothing weights are not very plausible as an explanation of a logistic regression prediction, which makes the semantics somewhat questionable.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:50.072339+00:00"
+}

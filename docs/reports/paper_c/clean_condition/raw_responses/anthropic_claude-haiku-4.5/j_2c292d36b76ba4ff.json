@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_de91280a4d84e7ca",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2c292d36b76ba4ff",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_de91280a4d84e7ca_417f2cf7754dec4e.txt",
+  "prompt_version": "417f2cf7754dec4e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165501-Zs1GZj5mMwPdZPxTZif8",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003432,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002325,
+        "upstream_inference_cost": 0.003432,
+        "upstream_inference_prompt_cost": 0.001107
+      },
+      "is_byok": false,
+      "prompt_tokens": 1107,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1572
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_de91280a4d84e7ca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the sole anchor but provides no guidance on how this insight could inform decisions, recourse actions, or next steps for stakeholders.\",\n    \"audit_usefulness\": \"The anchor weight of 1.0 for marital-status and 0.0 for all other features clearly shows model focus, but the absence of confidence intervals, precision metrics, or coverage statistics limits auditor ability to assess anchor reliability.\",\n    \"clarity\": \"The format is straightforward with feature names and weights, but non-experts may struggle to interpret what anchor weights mean or why only one feature has non-zero weight in a binary classification context.\",\n    \"completeness\": \"The explanation identifies the primary anchor but lacks context on prediction confidence, the instance's feature values, or how the model combines this anchor with learned parameters to reach the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation correctly identifies a key anchor, it lacks depth in confidence reporting, actionability, and contextual grounding needed for robust local decision understanding.\",\n    \"semantic_plausibility\": \"Marital status being a strong predictor in the adult income dataset is plausible, though the complete absence of other feature influence (all weights = 0.0) is somewhat suspicious and warrants scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:25.556112+00:00"
+}

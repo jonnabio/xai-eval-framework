@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_eb43c9a3cfa3d8f3",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_b352dc7c29edc22c_ab58081502e294fb.txt",
+  "prompt_version": "ab58081502e294fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165330-tmwrM252IYKz9AI4sshX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002874,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.002874,
+        "upstream_inference_prompt_cost": 0.0007185
+      },
+      "is_byok": false,
+      "prompt_tokens": 958,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1437
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next step for the individual, only a ranked list of contributing features. It indicates which attributes were influential, but not what could be changed or reviewed to alter the outcome.\",\n    \"audit_usefulness\": \"The SHAP values give useful local insight into which one-hot encoded features pushed the prediction up or down, which is helpful for model inspection. However, the mixed and redundant categorical indicators make it harder to diagnose the decision rigorously without additional context or baseline information.\",\n    \"clarity\": \"The list is short and readable, and the sign of each SHAP value is easy to interpret at a high level. Still, the encoded feature names and duplicated categories require some technical knowledge to fully understand.\",\n    \"completeness\": \"It covers several main contributors to the prediction, including marital status, native country, occupation, and sex. However, it does not explain the predicted class score, the relative importance normalization, or how these factors combine into the final decision.\",\n    \"concision\": \"The explanation is compact and contains a dense summary of the most important local factors. It avoids unnecessary narrative and focuses on the key SHAP attributions.\",\n    \"overall_quality\": \"This is a solid local explanation for a tabular model, with useful feature attributions and reasonable brevity. Its main weaknesses are limited actionable guidance and partial interpretability due to one-hot encoded categorical features.\",\n    \"semantic_plausibility\": \"The featured variables are plausible predictors in the Adult income domain, and the directions of influence are not obviously contradictory. The presence of both positive and negative contributions from related category levels is consistent with SHAP on one-hot encoded data.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:32.618714+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_326c5e1bf0274243",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_f277a4b461713876",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_326c5e1bf0274243_f6e53bd0ad9419b8.txt",
+  "prompt_version": "f6e53bd0ad9419b8",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165382-fLdqSoFc35lkbuEHlEBU",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00281475,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021105,
+        "upstream_inference_cost": 0.00281475,
+        "upstream_inference_prompt_cost": 0.00070425
+      },
+      "is_byok": false,
+      "prompt_tokens": 939,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1408
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_326c5e1bf0274243\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any specific recourse or next step for the person affected by the prediction. It only lists features with binary weights, so a user cannot tell what changes would alter the outcome.\",\n    \"audit_usefulness\": \"It identifies a small set of local factors that appear important, which is somewhat useful for inspecting the model. However, the 0/1-style output gives little sense of direction, magnitude, or how these factors combine, limiting deeper audit value.\",\n    \"clarity\": \"The feature names are readable and the list is short, so the output is easy to scan. Still, the meaning of the 1.0000 and 0.0000 values is not explained, so a non-expert may not understand what the explanation is claiming.\",\n    \"completeness\": \"The explanation names the main active factors, but it omits how they influenced the prediction and provides no comparison against alternative factors or baseline values. That leaves the local decision context incomplete.\",\n    \"concision\": \"The explanation is compact and contains little redundancy. It communicates a small set of features efficiently, though part of the brevity comes from omitting important interpretive detail.\",\n    \"overall_quality\": \"This is a terse local explanation that is easy to read but weak in interpretability and usefulness. It provides some hint about the model's drivers, yet lacks directionality, magnitude, and actionable context.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for the Adult dataset and consistent with a likely income prediction, especially education, occupation, and relationship status. Nothing in the explanation is obviously contradictory to the domain.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:25.898105+00:00"
+}

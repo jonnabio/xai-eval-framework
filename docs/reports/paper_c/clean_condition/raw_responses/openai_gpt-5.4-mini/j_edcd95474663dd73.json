@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_ae5f3b200cc3bef3",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_edcd95474663dd73",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_ae5f3b200cc3bef3_1584058e6f2008cf.txt",
+  "prompt_version": "1584058e6f2008cf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165425-S2nrnlaymAGKI2xAa1wY",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00290325,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002196,
+        "upstream_inference_cost": 0.00290325,
+        "upstream_inference_prompt_cost": 0.00070725
+      },
+      "is_byok": false,
+      "prompt_tokens": 943,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1431
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_ae5f3b200cc3bef3\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete next step or recourse. It lists features with anchor strengths, but does not indicate what would need to change to alter the prediction.\",\n    \"audit_usefulness\": \"It offers only a sparse set of local factors and most are zero-weighted, so it provides little insight into the model\u2019s decision logic. There is not enough structure to investigate potential bias or error sources in a meaningful way.\",\n    \"clarity\": \"The output is readable and the feature names are recognizable, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert would likely find it confusing because it looks like a raw diagnostic dump rather than a natural-language explanation.\",\n    \"completeness\": \"It identifies only two active local factors and omits how they combine to support the negative prediction. Important context such as whether these anchors are sufficient conditions, thresholds, or coverage statistics is missing.\",\n    \"concision\": \"The explanation is short, but much of the content is uninformative repeated zeros that do not add explanatory value. It is compact overall, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a limited anchor summary rather than a full explanation of why the instance was predicted as class 0. It is somewhat informative for a technical user, but it lacks interpretability, actionability, and decision context.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, and age and native-country can reasonably influence income prediction. However, the zero-valued feature listing and the presentation as 'top local factors' are not very semantically meaningful as an explanation of the specific decision.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:08.043753+00:00"
+}

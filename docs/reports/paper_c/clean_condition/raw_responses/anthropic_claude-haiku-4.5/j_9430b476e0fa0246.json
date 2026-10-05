@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d3748ef854fdb49f",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_9430b476e0fa0246",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_d3748ef854fdb49f_529091d029f51733.txt",
+  "prompt_version": "529091d029f51733",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165320-SI6fmcP3Xpmp4TDHKso0",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003824,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002715,
+        "upstream_inference_cost": 0.003824,
+        "upstream_inference_prompt_cost": 0.001109
+      },
+      "is_byok": false,
+      "prompt_tokens": 1109,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1652
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d3748ef854fdb49f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on how to interpret them, what actions might change the prediction, or how a user could act on this information. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The SHAP values and feature rankings enable an auditor to inspect which features drove the prediction and their relative importance, supporting investigation of model logic and potential bias sources. However, the lack of baseline values or direction of influence limits deeper analysis.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names and numerical values, which is straightforward for a technical audience but may confuse non-experts unfamiliar with SHAP values or feature encoding (e.g., 'marital-status_Married-civ-spouse').\",\n    \"completeness\": \"The top 10 features are listed with their SHAP contributions, covering the main drivers of the prediction. However, the explanation lacks context on the instance's actual feature values, the model's base rate, or the direction of influence for each feature.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only the essential ranked list of features and their SHAP values without padding or unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides a technically sound ranking of local feature importance but lacks interpretability aids, actionability, and contextual grounding that would elevate it for general use. It serves auditors and data scientists better than end-users.\",\n    \"semantic_plausibility\": \"The identified features (education, marital status, occupation, sex, age) are plausible predictors of income in the adult dataset and align with domain expectations. The relative importance ordering is reasonable for a logistic regression model.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:25.276749+00:00"
+}

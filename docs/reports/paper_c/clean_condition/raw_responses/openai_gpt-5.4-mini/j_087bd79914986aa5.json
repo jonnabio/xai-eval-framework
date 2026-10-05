@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_959ed027a5ab7370",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_087bd79914986aa5",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_959ed027a5ab7370_5ffb89f2e41283bf.txt",
+  "prompt_version": "5ffb89f2e41283bf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165339-SJ3E8GkP1Y2qZuEuaj0U",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028635,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021555,
+        "upstream_inference_cost": 0.0028635,
+        "upstream_inference_prompt_cost": 0.000708
+      },
+      "is_byok": false,
+      "prompt_tokens": 944,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1423
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_959ed027a5ab7370\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for the person affected. It only lists contributing features, many without indicating whether they increased or decreased the predicted class.\",\n    \"audit_usefulness\": \"It gives some local feature information, but the all-1.0000 / 0.0000 pattern is not informative about the model's decision logic or relative importance. An auditor cannot tell which factors actually drove the prediction or how they interacted.\",\n    \"clarity\": \"The list of features is easy to read, but the meaning of the binary values is not explained. A non-expert would likely not understand whether 1.0000 means inclusion in the anchor, a rule coverage indicator, or feature contribution.\",\n    \"completeness\": \"The explanation names a few associated attributes, but it omits the direction and strength of their effect on the prediction. It therefore does not provide enough local decision context to fully understand why the model predicted class 0.\",\n    \"concision\": \"It is short, but much of the content is redundant because several features are simply listed with the same value. The compactness does not translate into high information content.\",\n    \"overall_quality\": \"This is a weak explanation because it is terse and somewhat interpretable, but it fails to communicate how the listed factors support the prediction. Overall it offers limited insight for either the affected user or an auditor.\",\n    \"semantic_plausibility\": \"The listed variables are plausible risk factors in German credit data, such as duration, credit amount, employment, and checking status. However, the explanation's numeric pattern is semantically opaque and does not clearly map to a believable causal story for the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:42.059049+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_75520768088e5528",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_3d7e3f7286f27452",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_75520768088e5528_820b35f7fec45fdf.txt",
+  "prompt_version": "820b35f7fec45fdf",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165338-h1NxzXgUWMJcNWQ53b9P",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0026895,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00198,
+        "upstream_inference_cost": 0.0026895,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1386
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_75520768088e5528\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the model factors into concrete recourse steps, so a user cannot tell what to change to alter the prediction. It is informative only in a descriptive sense.\",\n    \"audit_usefulness\": \"The SHAP values do help an auditor see which features pushed the prediction up or down locally, which is useful for inspecting model behavior. However, it lacks baseline context, feature values, and aggregation, so deeper error or bias analysis is limited.\",\n    \"clarity\": \"The list of top factors is straightforward and easy to read, even for a non-expert. The sign conventions are understandable, although the meaning of the numeric magnitudes is not explained.\",\n    \"completeness\": \"It covers the main local drivers of the prediction, but not the instance's actual feature values, the class meaning of prediction 0, or the overall balance of evidence. That makes the decision only partially explained.\",\n    \"concision\": \"The explanation is compact and high-density, with little redundant wording. It gives a useful summary without unnecessary narrative.\",\n    \"overall_quality\": \"This is a solid local feature-importance explanation that is easy to parse and moderately useful for inspection. It falls short of excellent because it does not provide full decision context or actionable guidance.\",\n    \"semantic_plausibility\": \"The cited factors are plausible for the Adult dataset, and the directions of influence are consistent with a tabular SHAP explanation from an MLP model. Nothing in the explanation is contradictory or obviously unrealistic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:40.648156+00:00"
+}

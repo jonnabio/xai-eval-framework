@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_50e3b33d6c3d012f",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_544fc261ae4cf99a",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_50e3b33d6c3d012f_47754ca7988541f0.txt",
+  "prompt_version": "47754ca7988541f0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165345-Fc0U5rds5j0wo0LRUNwd",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00274875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020385,
+        "upstream_inference_cost": 0.00274875,
+        "upstream_inference_prompt_cost": 0.00071025
+      },
+      "is_byok": false,
+      "prompt_tokens": 947,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1400
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_50e3b33d6c3d012f\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists influential features but gives no concrete recourse or next steps. A user cannot tell what to change or verify to affect the prediction.\",\n    \"audit_usefulness\": \"It is useful for seeing which variables the SHAP method considered most important locally, but it lacks directionality and baseline context. An auditor can inspect feature prominence, though not fully diagnose why the model predicted class 1.\",\n    \"clarity\": \"The wording is straightforward and the ranking is easy to read, even for a non-expert. However, the numeric values are presented without explaining whether they increase or decrease the prediction.\",\n    \"completeness\": \"It covers the top local drivers of the prediction, but only as a list of features and scores. It omits whether these factors push toward or away from the positive class and does not provide a fuller decision context.\",\n    \"concision\": \"The output is compact and information-dense, with little redundant text. It conveys a ranked set of local factors in a very small number of tokens.\",\n    \"overall_quality\": \"This is a reasonably useful SHAP summary, but it is incomplete as an explanation of the specific prediction because it lacks sign, baseline, and interpretation. Overall it is informative but not fully decision-ready.\",\n    \"semantic_plausibility\": \"The listed breast-cancer features are domain-appropriate and the prominence of perimeter, area, radius, and concave points is plausible for this dataset. The explanation is consistent with what one would expect from an XGBoost model on this task.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:47.243792+00:00"
+}

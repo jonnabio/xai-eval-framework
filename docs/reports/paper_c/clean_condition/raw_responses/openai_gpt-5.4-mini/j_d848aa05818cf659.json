@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d848aa05818cf659",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_9294bc72ae3aeda0_3013dd973c626f47.txt",
+  "prompt_version": "3013dd973c626f47",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165366-tJeBQZrXnHbe7LS9X3wW",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0027345,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0020295,
+        "upstream_inference_cost": 0.0027345,
+        "upstream_inference_prompt_cost": 0.000705
+      },
+      "is_byok": false,
+      "prompt_tokens": 940,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1391
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies influential features, but it does not translate them into any concrete recourse or next steps the user could take. It says what mattered, not what to change.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which local anchors were active in the prediction. However, it does not explain their directional effect, thresholds, or how they interact with the MLP decision.\",\n    \"clarity\": \"The output is easy to scan and uses simple feature names, but the meaning of the 1.0000 and 0.0000 values is not explained. A non-expert may not understand that these are anchor activations rather than feature importances.\",\n    \"completeness\": \"It lists several local factors, but omits the actual rule conditions and does not indicate whether these factors support the positive class or how strongly. The prediction context is therefore only partially explained.\",\n    \"concision\": \"The explanation is short and mostly free of redundancy. It is compact, though the list format could be more informative if the anchor conditions were stated explicitly.\",\n    \"overall_quality\": \"This is a moderately useful anchor summary, but it falls short of a full local explanation because it lacks interpretable rule content and actionable guidance. It is acceptable for quick inspection, not excellent for understanding the specific prediction.\",\n    \"semantic_plausibility\": \"The highlighted factors are plausible for an Adult income prediction, especially education, hours worked, age, marital status, and occupation. Nothing in the explanation conflicts with basic domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:08.066865+00:00"
+}

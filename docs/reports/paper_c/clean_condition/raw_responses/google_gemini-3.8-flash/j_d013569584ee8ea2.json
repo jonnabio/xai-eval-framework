@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_28188c86ac4bdfad",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_d013569584ee8ea2",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_28188c86ac4bdfad_9a5c257091db33a6.txt",
+  "prompt_version": "9a5c257091db33a6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165400-ju5TK0OyA04AZkSSMVuY",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1243,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 851,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.005457,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00466125,
+        "upstream_inference_cost": 0.005457,
+        "upstream_inference_prompt_cost": 0.00079575
+      },
+      "is_byok": false,
+      "prompt_tokens": 1061,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2304
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_28188c86ac4bdfad\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides raw attribution scores without identifying the actual feature values or offering feasible recourse steps.\",\n    \"audit_usefulness\": \"While it shows which one-hot features influenced the local surrogate, the omission of actual feature values makes it difficult to definitively audit the decision.\",\n    \"clarity\": \"Presenting one-hot encoded variables with decimal weights is technical and confusing for non-experts, especially when opposing categories like sex_Male and sex_Female both appear.\",\n    \"completeness\": \"The explanation covers the top ten local perturbations but omits the baseline intercept, instance values, and prediction probability.\",\n    \"concision\": \"The token count is low, but retaining multiple mutually exclusive dummy variables creates unnecessary clutter.\",\n    \"overall_quality\": \"The explanation provides a basic overview of local feature importance but suffers from one-hot encoding artifacts and minimal interpretability for lay users.\",\n    \"semantic_plausibility\": \"The negative weights for unmarried status and other-service occupations align with standard socioeconomic patterns for lower income, though simultaneous weights for male and female features seem mechanically odd.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:51.119069+00:00"
+}

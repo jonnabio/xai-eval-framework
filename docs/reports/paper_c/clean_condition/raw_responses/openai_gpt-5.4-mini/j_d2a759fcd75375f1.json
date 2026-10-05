@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_89444d28efe2ceee",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_d2a759fcd75375f1",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_89444d28efe2ceee_d3060fd8952fb619.txt",
+  "prompt_version": "d3060fd8952fb619",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165430-4g2MrI9tEFEP3nD0fZye",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028455,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002142,
+        "upstream_inference_cost": 0.0028455,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1414
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_89444d28efe2ceee\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for a user. It only lists feature names with binary-looking values, so there is nothing actionable to change or review.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not state whether these features increase or decrease the prediction, nor does it quantify their contribution. An auditor cannot meaningfully inspect model logic from this output alone.\",\n    \"clarity\": \"The text is readable, but the meaning is unclear because it lists many features with 0.0000 or 1.0000 without explaining what those numbers represent. A non-expert would not understand how these factors relate to the prediction.\",\n    \"completeness\": \"The explanation is incomplete for understanding the specific prediction since it lacks directional contributions, rule conditions, or a threshold-based anchor statement. It mentions candidate local factors but not the actual local decision context.\",\n    \"concision\": \"It is short, but much of the content is low-information repetition of feature names with trivial numeric values. The explanation could be more compact while still being more informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it is only a feature list and does not explain why the model predicted class 1. It is somewhat structured, but not useful enough for understanding, auditing, or acting on the prediction.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the breast cancer dataset, and the general topic fits the domain. However, the use of 0.0000 and 1.0000 beside feature names is semantically opaque and does not clearly align with an anchor-style explanation of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:12.582169+00:00"
+}

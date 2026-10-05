@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_81c9024ae418939e",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_9bbe965073a960ca",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_81c9024ae418939e_9b51b70e75322b38.txt",
+  "prompt_version": "9b51b70e75322b38",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165432-wHLKkAGLEy8nPITKBBb8",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002877,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021735,
+        "upstream_inference_cost": 0.002877,
+        "upstream_inference_prompt_cost": 0.0007035
+      },
+      "is_byok": false,
+      "prompt_tokens": 938,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1421
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_81c9024ae418939e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the individual. It only lists local factors with weights, so a user cannot tell what to change to alter the prediction.\",\n    \"audit_usefulness\": \"It gives some audit value by identifying two top anchors, but it omits the actual rule conditions, thresholds, and whether the factors increase or decrease the positive class. That limits its usefulness for investigating model behavior or errors.\",\n    \"clarity\": \"The output is easy to read as a short list of features with scores, but the meaning of the scores is not explained in plain language. A non-expert would likely not understand what '1.0000' versus '0.0000' implies here.\",\n    \"completeness\": \"The explanation is incomplete because it does not state the decision rule, the direction of influence, or how these factors combine to support prediction 0. It also leaves out most of the local evidence needed to understand the specific prediction.\",\n    \"concision\": \"It is compact and contains little redundancy, but it is almost too terse to be useful. The brevity comes at the expense of explanatory value.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and somewhat readable, but it provides too little semantic information to understand or inspect the prediction well. Its main limitation is that it reports anchors without translating them into an actionable or interpretable local rule.\",\n    \"semantic_plausibility\": \"The highlighted features are plausible for the Adult dataset, especially age and relationship_Husband. However, the zero-valued entries are not meaningful evidence on their own, so the explanation is only moderately plausible as a human interpretation of the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:15.160220+00:00"
+}

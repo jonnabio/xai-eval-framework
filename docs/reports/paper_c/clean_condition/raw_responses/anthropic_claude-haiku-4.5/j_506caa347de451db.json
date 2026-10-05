@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7c871a5926ed569e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_506caa347de451db",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_7c871a5926ed569e_98f63f77cb41888d.txt",
+  "prompt_version": "98f63f77cb41888d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165552-hq1rblogRPCIRvjcc0Ns",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00343,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00234,
+        "upstream_inference_cost": 0.00343,
+        "upstream_inference_prompt_cost": 0.00109
+      },
+      "is_byok": false,
+      "prompt_tokens": 1090,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1558
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7c871a5926ed569e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides normalized anchor weights but no guidance on what values would change the prediction or what actions a user should take. The raw numerical scores offer no clear recourse pathway.\",\n    \"audit_usefulness\": \"While the anchor weights reveal which features the model relied on, the normalization to [0,1] obscures the actual feature values and decision thresholds, limiting an auditor's ability to inspect model behavior or detect bias.\",\n    \"clarity\": \"The format is a simple list of feature names with normalized scores, which is easy to parse structurally, but the meaning of the normalized weights and why only two features have non-zero importance is not explained.\",\n    \"completeness\": \"The explanation identifies two key anchors (mean area and area error) but provides no information about their actual values, thresholds, or how they interact to produce the prediction of class 0.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation is minimally informative; it identifies which features mattered but lacks context, actionability, and interpretability needed for meaningful decision support or model auditing.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, mean area and area error are plausible predictive features, but the explanation does not clarify whether the prediction aligns with domain expectations or provide clinical context.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:16.697866+00:00"
+}

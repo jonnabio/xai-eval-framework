@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4c3d79ea2f396cd5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f5f23922d94cd303",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_4c3d79ea2f396cd5_ceebb471a0a352c3.txt",
+  "prompt_version": "ceebb471a0a352c3",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165547-6GQBIvr7KHP6YHwXIPbZ",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003613,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0025,
+        "upstream_inference_cost": 0.003613,
+        "upstream_inference_prompt_cost": 0.001113
+      },
+      "is_byok": false,
+      "prompt_tokens": 1113,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1613
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4c3d79ea2f396cd5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"All feature weights are essentially zero or negligibly close to zero, providing no clear direction for recourse or decision modification. The explanation offers no specific, feasible actions a user could take.\",\n    \"audit_usefulness\": \"The near-zero weights across all features suggest either a degenerate model state or a failure of the explanation method to extract meaningful local decision logic. This severely limits an auditor's ability to inspect model behavior or identify bias.\",\n    \"clarity\": \"The format is straightforward and readable, listing features with their weights in a standard tabular manner. However, the substantive content\u2014all near-zero values\u2014is confusing and lacks interpretive guidance.\",\n    \"completeness\": \"The explanation lists ten features but provides no meaningful information about which factors actually drove the prediction, since all weights are effectively zero. Critical decision drivers are missing or obscured.\",\n    \"concision\": \"The explanation is compact in length but fails to convey useful information; listing ten near-identical zero weights is redundant and uninformative relative to the space consumed.\",\n    \"overall_quality\": \"This explanation fails to provide actionable, auditable, or complete insight into the model's prediction. The near-zero weights across all features indicate either a fundamental problem with the model, the explanation method, or the instance itself, rendering the explanation practically useless.\",\n    \"semantic_plausibility\": \"While the feature names are valid for the adult dataset, the pattern of all near-zero weights is implausible for a meaningful binary classification prediction and suggests a technical failure rather than genuine model reasoning.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:11.889091+00:00"
+}

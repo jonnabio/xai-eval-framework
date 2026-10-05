@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_56bce20eb20c4e00",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c38e999fb6bbc95d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_56bce20eb20c4e00_c9015a8c3881ea0f.txt",
+  "prompt_version": "c9015a8c3881ea0f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165441-hDb1UL4SWsB1639BuE13",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002979,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022725,
+        "upstream_inference_cost": 0.002979,
+        "upstream_inference_prompt_cost": 0.0007065
+      },
+      "is_byok": false,
+      "prompt_tokens": 942,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1447
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_56bce20eb20c4e00\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not suggest any concrete recourse or next steps for the user. It only lists local factors with binary-like values, so it offers no actionable guidance.\",\n    \"audit_usefulness\": \"It gives some limited signal about which features are present in the local rule, but the 0/1-style output and missing directionality make it weak for auditing model behavior. An auditor cannot tell how these features support the prediction or whether the model is relying on sensible evidence.\",\n    \"clarity\": \"The text is brief and the label format is easy to read, but the meaning of the listed values is not explained. A non-expert would likely not understand what '1.0000' and '0.0000' mean in the context of Anchors.\",\n    \"completeness\": \"It does not explain the prediction outcome, the thresholded rule, or whether the listed features are sufficient/necessary for class 1. Key local decision context is missing, so the user cannot really understand why the model predicted positive.\",\n    \"concision\": \"The explanation is short and contains little extraneous text. However, its compactness comes at the cost of useful interpretability, so it is only moderately efficient in information per word.\",\n    \"overall_quality\": \"Overall, this is a terse but under-informative Anchors output. It has some local-feature content, yet it lacks a readable rule, clear semantics, and enough context to meaningfully explain the prediction.\",\n    \"semantic_plausibility\": \"For breast cancer, features like mean concave points, concave points error, mean radius, and mean perimeter are plausible predictors. However, the presentation of many features as exactly 0.0000 or 1.0000 without explanation is not very natural or clearly tied to the instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:24.052662+00:00"
+}

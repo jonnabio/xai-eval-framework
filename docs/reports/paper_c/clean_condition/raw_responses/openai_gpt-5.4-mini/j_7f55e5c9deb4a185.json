@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_afad86e31d6d5cf6",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_7f55e5c9deb4a185",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_afad86e31d6d5cf6_4d3c16f9349482dd.txt",
+  "prompt_version": "4d3c16f9349482dd",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165396-pvv5BXMUObXOBLx9nFfy",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292575,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.00292575,
+        "upstream_inference_prompt_cost": 0.00071625
+      },
+      "is_byok": false,
+      "prompt_tokens": 955,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1446
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_afad86e31d6d5cf6\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps, only a ranked list of features with small contributions. A user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which variables moved the prediction locally and in what direction. However, the effects are tiny and there is no comparison to the baseline or broader model behavior, so it is only partially informative.\",\n    \"clarity\": \"The list format is easy to scan, but the meaning of the feature names and the small signed numbers may be unclear to non-experts. It would be clearer if it explained whether positive values push toward class 1 and negative values toward class 0.\",\n    \"completeness\": \"It gives the top local factors, but the contributions are very sparse and lack context such as the base prediction, probability, or how these features combine. That makes it only partly sufficient to understand this specific prediction.\",\n    \"concision\": \"The explanation is compact and contains little redundancy, with only the most salient local factors listed. It is efficient in length, though it may be overly terse for interpretability.\",\n    \"overall_quality\": \"Overall, this is a decent LIME summary but not a strong explanation: it is readable and concise, yet the attributions are very small and lack contextual framing. It helps identify local features but does not strongly support decision understanding or review.\",\n    \"semantic_plausibility\": \"The listed Adult-dataset features such as age, education, marital status, occupation, sex, and race are all plausible predictors for an MLP classifier. The directionality of some factors is also broadly consistent with common patterns, though the tiny magnitudes limit interpretive confidence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:38.953088+00:00"
+}

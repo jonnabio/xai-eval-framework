@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_084efba639afd972",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c582296f7a47572b",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_084efba639afd972_753bef1ebb1e7c55.txt",
+  "prompt_version": "753bef1ebb1e7c55",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165366-cpCxWSwzR76kKue2YYEG",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00289875,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002187,
+        "upstream_inference_cost": 0.00289875,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1435
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_084efba639afd972\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any specific recourse or next step for the applicant or decision reviewer. It only lists feature names that appear important, without saying what could be changed or checked.\",\n    \"audit_usefulness\": \"It is somewhat useful for auditing because it reveals which variables were part of the local rule, but it does not indicate directionality, thresholds, or whether the listed factors supported class 0 or class 1. That makes it only partially helpful for investigating model behavior.\",\n    \"clarity\": \"The list format is easy to read, but the explanation is not self-explanatory for a non-expert because it uses raw feature names and repeated 1.0000 values without interpretation. A reader can see the factors, but not understand their meaning in the decision.\",\n    \"completeness\": \"It names several local factors, but gives no indication of how they combine to produce the prediction or which ones were decisive versus merely present in the anchor set. Important local decision context such as supporting versus opposing evidence is missing.\",\n    \"concision\": \"The explanation is short and mostly free of redundancy, but several feature names are repeated and the uniform 1.0000 scores add little information. It is compact, though not maximally informative per word.\",\n    \"overall_quality\": \"This is a minimal anchor-style explanation that identifies relevant features but leaves the decision logic largely opaque. It is reasonably structured, but limited in interpretability and decision support.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk modeling, since age, checking status, savings, employment, and credit history are standard predictors. However, the all-ones scoring and lack of contextual interpretation make the explanation only moderately convincing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:08.988256+00:00"
+}

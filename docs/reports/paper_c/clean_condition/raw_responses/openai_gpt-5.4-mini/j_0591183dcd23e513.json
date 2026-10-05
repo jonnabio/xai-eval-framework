@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3e006f8c0e7512b1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0591183dcd23e513",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_3e006f8c0e7512b1_288e7e71608a0ace.txt",
+  "prompt_version": "288e7e71608a0ace",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165320-VvyyfQ8IJX7o5ZpfYxHO",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 456,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00276975,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002052,
+        "upstream_inference_cost": 0.00276975,
+        "upstream_inference_prompt_cost": 0.00071775
+      },
+      "is_byok": false,
+      "prompt_tokens": 957,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1413
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_3e006f8c0e7512b1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the factors into concrete recourse or decision steps. It names influential features but does not suggest what could be changed or reviewed.\",\n    \"audit_usefulness\": \"It is useful for a basic local audit because it shows the top SHAP contributors and their directions. However, it lacks magnitudes in context, feature baselines, and comparison to other cases, limiting deeper investigation.\",\n    \"clarity\": \"The output is short and structured, and a non-expert can see which features pushed the prediction up or down. The use of encoded feature names and SHAP signs still requires some familiarity with the dataset.\",\n    \"completeness\": \"It covers several major local drivers of the prediction, but it does not explain the overall score, baseline, or how these contributions combine into class 0. The list also omits broader context such as the most important positive and negative factors relative to the model output.\",\n    \"concision\": \"The explanation is compact and focused on the top local factors without obvious padding. It conveys a reasonable amount of information in very few tokens.\",\n    \"overall_quality\": \"This is a moderately good local explanation: concise, plausible, and somewhat informative about the model's reasoning. It falls short of being excellent because it is not very actionable and gives only partial decision context.\",\n    \"semantic_plausibility\": \"The factors are broadly consistent with the Adult dataset and with plausible demographic and labor-market predictors. Some listed signs may be surprising without knowing the model and feature encoding, but the explanation is still coherent overall.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:22.436294+00:00"
+}

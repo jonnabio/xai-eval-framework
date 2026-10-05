@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_07d74c1a49ce2c89",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_49b4fcf4bf2d7761_5e230797d4bef95d.txt",
+  "prompt_version": "5e230797d4bef95d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165482-3SOaHbCjJafcGPwnXydD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003473,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002365,
+        "upstream_inference_cost": 0.003473,
+        "upstream_inference_prompt_cost": 0.001108
+      },
+      "is_byok": false,
+      "prompt_tokens": 1108,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1581
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies anchor features but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse pathways are suggested.\",\n    \"audit_usefulness\": \"The normalized scores (1.0 vs 0.0) clearly indicate which features anchor the prediction, supporting model behaviour inspection and bias investigation for credit decisions. This is valuable for auditing fairness and consistency.\",\n    \"clarity\": \"The format is technical but reasonably clear: feature names with anchor weights are presented in a structured list, though non-experts may struggle with the credit domain terminology and the meaning of anchor scores.\",\n    \"completeness\": \"Three features are identified as anchors (age, checking_status, credit_history) with high importance, but the explanation lacks context about feature values, thresholds, or why these specific anchors matter relative to the prediction class.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently conveying anchor importance through normalized scores without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides useful model transparency through anchor identification but lacks actionability, contextual depth, and clear interpretation of what the anchors mean for this specific credit decision.\",\n    \"semantic_plausibility\": \"The identified anchors (age, checking account status, credit history) are plausible drivers of credit risk in the German credit domain, aligning with standard lending practices and domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:06.746554+00:00"
+}

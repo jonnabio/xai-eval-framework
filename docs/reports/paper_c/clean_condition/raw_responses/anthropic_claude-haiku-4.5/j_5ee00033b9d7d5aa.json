@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_636acbcad2a09395",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_5ee00033b9d7d5aa",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_636acbcad2a09395_ddc7f390fe7951ec.txt",
+  "prompt_version": "ddc7f390fe7951ec",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165369-fsI2m9J59WSqXr0VdSAH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00361,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002505,
+        "upstream_inference_cost": 0.00361,
+        "upstream_inference_prompt_cost": 0.001105
+      },
+      "is_byok": false,
+      "prompt_tokens": 1105,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1606
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_636acbcad2a09395\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key factors but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The normalized scores (1.0 vs 0.0) clearly indicate which features anchor the prediction, supporting model behaviour inspection and potential bias investigation. However, the lack of confidence metrics and threshold information limits deeper audit capability.\",\n    \"clarity\": \"The explanation uses clear feature names and a simple numerical scoring format that is easy to parse, though non-experts may not understand what anchor scores represent or why some features have exactly 0.0 importance.\",\n    \"completeness\": \"Three features are identified as anchors, but the explanation lacks context about their actual values for this instance, the decision boundary, or why other features were excluded. Critical local decision context is missing.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature importance scores in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation clearly identifies top factors and is concise, it lacks actionability, instance-specific context, and sufficient depth for meaningful decision support or audit purposes. It reads as a raw feature importance dump rather than a coherent explanation.\",\n    \"semantic_plausibility\": \"For a credit risk model, duration, installment commitment, and property magnitude are plausible predictors of creditworthiness, though the complete absence of checking account status (typically important in credit decisions) is somewhat surprising and warrants scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:14.566242+00:00"
+}

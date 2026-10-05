@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_52ed2fe68041b4f8",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_bcc7c6d8c29cf91d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_52ed2fe68041b4f8_96f07d152a0b3ce6.txt",
+  "prompt_version": "96f07d152a0b3ce6",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165482-X3SAPi6eVZuQmPDLf4t6",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003574,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002475,
+        "upstream_inference_cost": 0.003574,
+        "upstream_inference_prompt_cost": 0.001099
+      },
+      "is_byok": false,
+      "prompt_tokens": 1099,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1594
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_52ed2fe68041b4f8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken, what thresholds matter, or how to modify inputs to change the prediction.\",\n    \"audit_usefulness\": \"The raw importance scores with binary indicators (1.0 vs 0.0) offer limited insight into model behavior; an auditor cannot assess whether the model is using features appropriately or identify potential biases without understanding feature values and decision boundaries.\",\n    \"clarity\": \"The format is a simple list of feature names and numerical scores, which is straightforward to parse but lacks narrative context explaining what the scores mean or why these features matter for the prediction.\",\n    \"completeness\": \"Only two features are marked as important (education-num and occupation_Other-service), while many others are marked 0.0; the explanation does not indicate the actual feature values for this instance or the direction of influence.\",\n    \"concision\": \"The explanation is compact in length but includes many zero-valued features that add little informational value; a more concise version would omit or summarize the uninformative features.\",\n    \"overall_quality\": \"The explanation is a minimal feature importance listing that lacks narrative depth, context, and actionable insight; while technically correct as an anchor output, it provides limited practical value for understanding or acting on the prediction.\",\n    \"semantic_plausibility\": \"The identified features (education level and service occupation) are plausible predictors in income classification tasks, but without feature values or direction of effect, semantic coherence cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:07.134045+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_60f604202ab9cb5c",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_1c4dbaa3d95bc5c8",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_60f604202ab9cb5c_34f932616bd4811a.txt",
+  "prompt_version": "34f932616bd4811a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165551-jniwnZYe5j5gv8jkGpX3",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003499,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002405,
+        "upstream_inference_cost": 0.003499,
+        "upstream_inference_prompt_cost": 0.001094
+      },
+      "is_byok": false,
+      "prompt_tokens": 1094,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1575
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_60f604202ab9cb5c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on how to interpret them, what thresholds matter, or what actions a clinician or patient could take based on this information.\",\n    \"audit_usefulness\": \"While the explanation shows which features anchor the prediction, the presence of nine zero-weighted features alongside two perfect-weight features raises questions about model stability and feature selection that are not addressed.\",\n    \"clarity\": \"The format is straightforward and uses standard terminology, but the meaning of anchor weights (1.0 vs 0.0) and their relationship to the prediction is not explained for a non-expert reader.\",\n    \"completeness\": \"The explanation lists many features but only two have non-zero weights; it is unclear whether the zero-weighted features were tested, excluded, or simply uninformative, leaving the local decision context partially opaque.\",\n    \"concision\": \"The explanation is compact in token count but includes nine zero-weighted features that add little information; a more concise version listing only the two active anchors would be more efficient.\",\n    \"overall_quality\": \"The explanation provides minimal insight into the prediction mechanism; it identifies two relevant features but lacks context, interpretation, and actionable guidance needed for clinical or audit purposes.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst perimeter are plausible morphological predictors, but the complete absence of other mean-based features as anchors is somewhat surprising and warrants domain validation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:16.556082+00:00"
+}

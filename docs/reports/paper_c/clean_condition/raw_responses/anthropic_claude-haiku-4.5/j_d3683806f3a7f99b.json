@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f9cc6b6fb4f65a14",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_d3683806f3a7f99b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_f9cc6b6fb4f65a14_f8866001287d79fc.txt",
+  "prompt_version": "f8866001287d79fc",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165487-GPgOtykeRZD1lobVZt4p",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003416,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002315,
+        "upstream_inference_cost": 0.003416,
+        "upstream_inference_prompt_cost": 0.001101
+      },
+      "is_byok": false,
+      "prompt_tokens": 1101,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1564
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f9cc6b6fb4f65a14\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The normalized weights reveal which features the model considered, supporting basic model behaviour inspection. However, the predominance of zero weights and lack of counterfactual context limits deeper investigation of potential bias or error patterns.\",\n    \"clarity\": \"The format is straightforward\u2014a list of feature names with numerical weights\u2014but requires familiarity with DICE methodology and the adult dataset to interpret meaningfully. Non-experts may struggle to understand what these weights represent.\",\n    \"completeness\": \"Only two features have non-zero weights (capital-gain and relationship_Own-child), while many others show zero contribution, leaving uncertainty about whether these truly have no influence or whether the explanation is incomplete.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature weights in a structured format without unnecessary elaboration.\",\n    \"overall_quality\": \"The explanation provides minimal interpretability for a lay user and limited actionable insight, though it does technically identify the most influential features for this specific prediction.\",\n    \"semantic_plausibility\": \"The identified factors (capital gains and family relationship status) are plausible predictors in income classification tasks, aligning with domain expectations for the adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:11.708078+00:00"
+}
